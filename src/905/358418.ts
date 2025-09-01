@@ -1,0 +1,49 @@
+import { jsx, jsxs } from "react/jsx-runtime";
+import { useId } from "react";
+import { v } from "../905/442517";
+import { JU } from "../figma_app/637027";
+import { tx } from "../905/303541";
+import { Ib } from "../905/129884";
+import { zm, ad } from "../905/443375";
+export function $$c0() {
+  return jsx("div", {
+    children: tx("community.seller.pricing")
+  });
+}
+export function $$u1({
+  on: e,
+  disabled: t,
+  onChange: i,
+  tooltipText: c,
+  tooltipMaxWidth: u = 224,
+  toggleClassName: p
+}) {
+  let m = useId();
+  return jsx("div", {
+    className: zm,
+    children: jsxs(JU, {
+      className: ad,
+      htmlFor: m,
+      children: [tx("community.seller.sell_on_community"), jsx(v, {
+        "data-testid": "manually-labeled-switch-checkbox",
+        id: m,
+        checked: e,
+        disabled: t,
+        onChange: (e, {
+          event: t
+        }) => {
+          t.stopPropagation();
+          i();
+        },
+        htmlAttributes: {
+          "data-tooltip": c,
+          "data-tooltip-type": Ib.TEXT,
+          "data-tooltip-max-width": u
+        },
+        className: p
+      })]
+    })
+  });
+}
+export const Wq = $$c0;
+export const nu = $$u1;

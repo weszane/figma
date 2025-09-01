@@ -1,0 +1,14 @@
+let $$n0 = "editor_type_badge--editorBadge--NNcQV";
+let $$r5 = "editor_type_badge--editorBadgePlaygroundFile--dfAl6";
+let $$a4 = "editor_type_badge--editorBadge16--jRVOy";
+let $$s3 = "editor_type_badge--overlay_badgeContainer--kqAqD";
+let $$o2 = "editor_type_badge--overlay_badgeContainer_figmWidgetInserts---eNX- editor_type_badge--overlay_badgeContainer--kqAqD";
+let $$l6 = "editor_type_badge--overlay_badgeContainer_figmPluginInserts--GD2B9 editor_type_badge--overlay_badgeContainer--kqAqD";
+let $$d1 = "editor_type_badge--overlay_iconAndBadgeContainer--neOav";
+export const $E = $$n0;
+export const G = $$d1;
+export const QF = $$o2;
+export const Wv = $$s3;
+export const cL = $$a4;
+export const is = $$r5;
+export const p2 = $$l6;

@@ -1,0 +1,93 @@
+import { jsx, jsxs } from "react/jsx-runtime";
+import { memo, useMemo } from "react";
+import { isNotNullish } from "../figma_app/95419";
+import { xk } from "@stylexjs/stylex";
+import { E } from "../905/277716";
+import { If, XS, fJ, b_, yG } from "../figma_app/319440";
+import { S } from "../figma_app/924300";
+import { ZU } from "../figma_app/986347";
+import { U } from "../figma_app/427950";
+import { xb } from "../figma_app/465776";
+import { Pt } from "../figma_app/806412";
+import { uc } from "../figma_app/930338";
+import { QE } from "../figma_app/914216";
+import { F } from "../figma_app/127204";
+import { R } from "../figma_app/360122";
+function f({
+  action: e
+}) {
+  switch (e.type) {
+    case ZU.FLYOUT:
+      return jsx(E, {
+        name: "selection_actions_button",
+        alsoTrack: () => ({
+          layerButtonAction: `open_flyout_${uc(e.dropdownKey)}`
+        }),
+        children: jsx(F, {
+          flyoutConfig: e,
+          recordingKey: Pt(If, e.flyoutRecordingKey)
+        })
+      }, e.dropdownKey);
+    case ZU.ACTION:
+      return jsx(E, {
+        name: "selection_actions_button",
+        alsoTrack: () => ({
+          layerButtonAction: `${uc(e.action)}`
+        }),
+        children: jsx(QE, {
+          item: e,
+          numUnreadComments: 0,
+          recordingKey: If
+        })
+      }, e?.reactKey ?? e?.recordingKey);
+    case ZU.CUSTOM_ACTION:
+      return jsx(XS, {
+        item: e
+      }, e.recordingKey);
+    case ZU.ACTION_SUBMENU:
+      return jsx(E, {
+        name: "selection_actions_button",
+        alsoTrack: () => ({
+          layerButtonAction: `open_submenu_${uc(e.getTitle())}`
+        }),
+        children: jsx(QE, {
+          item: e,
+          numUnreadComments: 0,
+          recordingKey: Pt(If, e.recordingKey)
+        })
+      }, e.recordingKey);
+    default:
+      xb(e);
+  }
+}
+export let $$_0 = memo(e => {
+  let t = useMemo(() => e.actions.map(e => e.filter(e => isNotNullish(e))), [e.actions]);
+  let l = U(t);
+  let x = function (e) {
+    let t = fJ();
+    return useMemo(() => {
+      let l = !1;
+      let n = e.flat().filter(e => ("preventHoisting" in e && e.preventHoisting && (l = !0), !("preventHoisting" in e) || !e.preventHoisting));
+      return b_(t, n, l);
+    }, [e, t]);
+  }(l);
+  let p = yG(l, x);
+  let h = p.reduce((e, t) => e + t.length, 0) > 0;
+  return jsxs("div", {
+    ...xk(R.selectionActionsButtons),
+    children: [x.map(e => {
+      let t = e.type === ZU.FLYOUT ? e.flyoutRecordingKey : "reactKey" in e ? e.reactKey : e.recordingKey;
+      return jsx(f, {
+        action: e
+      }, t);
+    }), h && jsx(E, {
+      name: "selection_actions_overflow_menu",
+      children: jsx(S, {
+        enabledToolbarItems: p,
+        recordingKey: "selectionActionsButtons"
+      })
+    })]
+  });
+});
+$$_0.displayName = "SelectionActionsButtons";
+export const P = $$_0;

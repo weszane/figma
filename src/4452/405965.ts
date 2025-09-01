@@ -1,0 +1,39 @@
+import { useMemo, useCallback, useState, useEffect } from "react";
+import { IT } from "../figma_app/566371";
+import { GyZ, H1b } from "../figma_app/43951";
+import { M4 } from "../905/713695";
+import { w5 } from "../figma_app/345997";
+import { X, SN } from "../905/915142";
+import { e6 } from "../905/557142";
+export function $$c0(e) {
+  let [t] = IT(GyZ({
+    teamId: e
+  }));
+  return useMemo(() => t.transform(e => X(e)), [t]);
+}
+export function $$u1(e) {
+  let [t] = IT(H1b({
+    teamId: e
+  }));
+  return useMemo(() => t.transform(e => SN(e) ?? []), [t]);
+}
+export function $$m2({
+  teamId: e,
+  teamPermissions: t,
+  initialValue: a
+}) {
+  let n = M4.Team.useValue(e).data;
+  let r = useCallback(e => a || (!w5(n) && e ? e6.EDITOR : e6.VIEWER), [a, n]);
+  let [o, c] = useState(() => r(!!t?.canEdit));
+  useEffect(() => {
+    c(r(!!t?.canEdit));
+  }, [t?.canEdit, r]);
+  return {
+    default: r(!!t?.canEdit),
+    inviteLevel: o,
+    setInviteLevel: c
+  };
+}
+export const dr = $$c0;
+export const eb = $$u1;
+export const oU = $$m2;

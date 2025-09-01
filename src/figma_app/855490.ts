@@ -1,0 +1,26 @@
+import { nF } from "../905/350402";
+import { NC } from "../905/17179";
+import { R7 } from "../905/508367";
+import { eD } from "../figma_app/876459";
+nF(e => {
+  let t = e.getState().appWindow.inFullScreenMode;
+  if (eD) {
+    eD.setFullScreen(!t);
+    return;
+  }
+  R7.fullscreen && (t ? R7.getFullscreenElement() ? R7.exitFullscreenFunc() : e.dispatch($$o0()) : R7.requestFullscreenFunc.call(document.documentElement));
+});
+let $$s1 = NC("WINDOW_DID_ENTER_FULL_SCREEN");
+let $$o0 = NC("WINDOW_DID_EXIT_FULL_SCREEN");
+export function $$l2(e) {
+  R7.fullscreen && !eD && (document.addEventListener(R7.fullscreenChangeEventName, function () {
+    let t = e.getState();
+    R7.getFullscreenElement() && !t.appWindow.inFullScreenMode ? e.dispatch($$s1()) : t.appWindow.inFullScreenMode && e.dispatch($$o0());
+  }), document.addEventListener(R7.fullscreenErrorEventName, function (t) {
+    console.warn("failed to enter fullscreen:", t);
+    e.getState().appWindow.inFullScreenMode && e.dispatch($$o0());
+  }));
+}
+export const ZH = $$o0;
+export const r$ = $$s1;
+export const r5 = $$l2;

@@ -1,0 +1,9 @@
+export let $$n0 = {
+  FILES: "FILES",
+  PINNED_FILES: "PINNED_FILES",
+  PROTOTYPES: "PROTOTYPES",
+  REPOS: "REPOS",
+  PROJECTS: "PROJECTS",
+  OFFLINE_FILES: "OFFLINE_FILES"
+};
+export const F = $$n0;

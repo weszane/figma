@@ -1,0 +1,15 @@
+import { NC } from "../905/17179";
+let $$r3 = NC("FORCE_UPDATE_SELECTION_PAINTS_FOR_UNDO");
+let $$a5 = NC("UPDATE_CURRENT_SELECTION_PAINT_IN_PICKER");
+let $$s1 = NC("CLEAR_SELECTION_PAINTS_DUE_TO_LIMIT_EXCEEDED");
+let $$o6 = NC("UPDATE_STYLES_DIRECTLY_ON_SINGLE_NODE_FROM_FULLSCREEN");
+let $$l4 = NC("UPDATE_PAINTS_DIRECTLY_ON_SINGLE_NODE_FROM_FULLSCREEN");
+let $$d0 = NC("UPDATE_SELECTION_STYLES_FROM_FULLSCREEN");
+let $$c2 = NC("UPDATE_SELECTION_PAINTS_FROM_FULLSCREEN");
+export const Lh = $$d0;
+export const Mc = $$s1;
+export const QA = $$c2;
+export const Xp = $$r3;
+export const n0 = $$l4;
+export const oI = $$a5;
+export const uQ = $$o6;

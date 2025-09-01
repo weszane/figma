@@ -1,0 +1,49 @@
+import { useMemo, useContext, useCallback } from "react";
+import { n3, IA } from "../905/859698";
+import { oU } from "../figma_app/273493";
+import { glU, ibQ } from "../figma_app/763686";
+import { l7 } from "../905/189185";
+import { AD } from "../905/871411";
+import { Uv } from "../figma_app/191804";
+import { F } from "../905/989956";
+import { yM } from "../905/640017";
+import { lk } from "../905/182453";
+import { GV } from "../figma_app/159296";
+import { sd } from "../figma_app/509285";
+export function $$m0() {
+  let e = yM().colorText;
+  return useMemo(() => {
+    if (e) {
+      let t = F.parse(e);
+      if (t.a > 0) return oU(t);
+    }
+    return oU(Uv);
+  }, [e]);
+}
+export function $$g1(e) {
+  let t = useContext(lk);
+  return useCallback(() => {
+    if (e?.current) {
+      l7.user("slides-create-style", () => {
+        glU?.applyStyleToSelection("inheritTextStyleKey", AD, !0);
+        glU?.selectStyle(n3.INVALID, IA.INVALID);
+      });
+      let r = e.current.getBoundingClientRect();
+      t({
+        styleType: "TEXT",
+        inheritStyleKeyField: "inheritTextStyleKey",
+        rowLeft: r.left,
+        rowTop: r.top
+      });
+    } else console.warn("expected containerRef to be non-null");
+  }, [e, t]);
+}
+export function $$f2() {
+  let e = sd();
+  let t = GV();
+  let r = t[ibQ.TYPE_ITEM] || t[ibQ.SLIDE_NUMBER];
+  return !!(e && r);
+}
+export const it = $$m0;
+export const oD = $$g1;
+export const vK = $$f2;

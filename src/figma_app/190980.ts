@@ -1,0 +1,111 @@
+import { xb } from "../figma_app/465776";
+import { x4 } from "../905/657224";
+import { my } from "../figma_app/976749";
+import { FPublisherType } from "../figma_app/191312";
+import { bD } from "../figma_app/45218";
+import { nT, yY } from "../figma_app/53721";
+import { $A, dB, vt } from "../905/862883";
+import { uF } from "../figma_app/300692";
+export function $$u5() {
+  let e = my();
+  return e === nT.Whiteboard ? $A.FigJam : yY(e) ? $A.Design : e === nT.DevHandoff ? $A.Handoff : e === nT.Slides ? $A.Slides : e === nT.Cooper ? $A.Cooper : null;
+}
+let $$p12 = "recent-widgets-figjam";
+let $$_2 = "recent-plugins-figjam";
+let $$h7 = "recent-widgets-figma-design";
+let $$m11 = "recent-plugins-figma-design";
+let $$g8 = "recent-plugins-slides";
+let $$f3 = "recent-face-stamps-figjam";
+let $$E0 = "recent-whiteboard-tools-figjam";
+export function $$y1(e, t) {
+  if (e === $A.FigJam) switch (t) {
+    case bD.PLUGIN:
+      return $$_2;
+    case bD.WIDGET:
+      return $$p12;
+    case bD.HUB_FILE:
+      return "recent-templates-figjam";
+    case dB.FACE_STAMP:
+      return $$f3;
+    case dB.WHITEBOARD_TOOL:
+      return $$E0;
+    default:
+      return null;
+  }
+  if (e === $A.Design) switch (t) {
+    case bD.PLUGIN:
+      return $$m11;
+    case bD.WIDGET:
+      return $$h7;
+    default:
+      return null;
+  }
+  if (e === $A.Handoff) return t === bD.PLUGIN ? "recent-plugins-handoff" : null;
+  if (e === $A.Slides) switch (t) {
+    case bD.HUB_FILE:
+      return "recent-templates-piper";
+    case bD.PLUGIN:
+      return $$g8;
+    default:
+      return null;
+  }
+  return e === $A.Cooper && t === bD.PLUGIN ? "recent-plugins-cooper" : null;
+}
+export function $$b9(e, t) {
+  if (!x4) return [];
+  let r = [];
+  let n = $$y1(e, t);
+  let a = n && x4.getItem(n);
+  try {
+    r = a && JSON.parse(a) || [];
+  } catch (e) {}
+  return r.map(e => ({
+    ...e,
+    type: e.type || vt.CommunityResource
+  }));
+}
+export function $$T10(e) {
+  let t = uF(e);
+  let r = e.community_publishers.accepted.map(e => ({
+    isPending: !1,
+    profile: {
+      id: e.id,
+      profileHandle: e.profile_handle,
+      user: null,
+      team: null,
+      org: null,
+      [e.entity_type]: {
+        name: e.name
+      }
+    },
+    role: FPublisherType.CREATOR
+  }));
+  t.community_publishers = r;
+  return t;
+}
+export function $$I6(e) {
+  switch (e.type) {
+    case vt.CommunityResource:
+      return e.id;
+    case vt.TeamTemplate:
+      return e.key;
+    default:
+      xb(e);
+  }
+}
+export function $$S4(e) {
+  return $$b9(e, bD.HUB_FILE).length;
+}
+export const JG = $$E0;
+export const Jl = $$y1;
+export const S7 = $$_2;
+export const SO = $$f3;
+export const TI = $$S4;
+export const U_ = $$u5;
+export const X2 = $$I6;
+export const YN = $$h7;
+export const a7 = $$g8;
+export const gJ = $$b9;
+export const ul = $$T10;
+export const vY = $$m11;
+export const xk = $$p12;

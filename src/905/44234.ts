@@ -1,0 +1,2 @@
+export var $$n0 = (e => (e[e.SaveLocalFile = 0] = "SaveLocalFile", e[e.Export = 1] = "Export", e[e.CopyAsPNG = 2] = "CopyAsPNG", e[e.CopyAsSVG = 3] = "CopyAsSVG", e[e.RasterizeSelection = 4] = "RasterizeSelection", e))($$n0 || {});
+export const h = $$n0;

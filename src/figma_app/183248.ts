@@ -1,0 +1,13 @@
+import { eVK } from "../figma_app/763686";
+let $$i0 = 1;
+let $$a1 = eVK.MIDDLE_CENTER;
+let $$s5 = .01;
+let $$o4 = 100;
+var $$l3 = (e => (e.TextInput = "text-input", e.Selector = "selector", e))($$l3 || {});
+var $$d2 = (e => (e.Select = "select", e.Input = "input", e.Scrub = "scrub", e.Width = "width", e.Height = "height", e))($$d2 || {});
+export const $Y = $$i0;
+export const Ps = $$a1;
+export const Yq = $$d2;
+export const be = $$l3;
+export const sH = $$o4;
+export const sI = $$s5;

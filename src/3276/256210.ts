@@ -1,0 +1,12 @@
+let $$o5 = .2;
+let $$a3 = .2;
+let $$i2 = .05;
+let $$s4 = .2 - .05;
+let $$r1 = .1;
+let $$l0 = 3e3;
+export const BI = $$l0;
+export const Bn = $$r1;
+export const Gy = $$i2;
+export const Uj = $$a3;
+export const kS = $$s4;
+export const lo = $$o5;

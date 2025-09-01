@@ -1,0 +1,33 @@
+import { jsx } from "react/jsx-runtime";
+import $$r from "classnames";
+import { s as _$$s } from "../cssbuilder/589278";
+import { sx } from "../905/941192";
+var a = $$r;
+export function $$l0(e) {
+  return jsx("div", {
+    className: _$$s.flex.overflowAuto.gap4.itemsCenter.pr1.$,
+    style: sx.$$if(e.height, {
+      height: "auto" === e.height ? "auto" : `${e.height}px`
+    }, sx.h32).$,
+    children: e.tabs
+  });
+}
+export function $$d1(e) {
+  return jsx("button", {
+    className: a()("tab_group--tabSelectorOverrides--misNs", _$$s.h24.lh16.bRadius5.pl8.pr8.$$if(e.isSelected, _$$s.colorBgPressed, _$$s.colorTextSecondary).$),
+    onPointerDown: e.onPointerDown,
+    onClick: t => {
+      e.onClick(e.tab);
+    },
+    "data-onboarding-key": e.dataOnboardingKey,
+    "aria-label": e.ariaLabel,
+    "data-testid": e["data-testid"],
+    "aria-pressed": e.isSelected,
+    children: jsx("div", {
+      className: e.isSelected ? "tab_group--tabNameSelected--zST4c" : "",
+      children: e.tabName
+    })
+  });
+}
+export const f = $$l0;
+export const r = $$d1;

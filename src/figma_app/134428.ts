@@ -1,0 +1,44 @@
+import { useCallback, useMemo } from "react";
+import { lQ } from "../905/934246";
+import { E3, fp } from "../figma_app/27355";
+import { tl } from "../905/657224";
+import { cJ } from "../905/561485";
+var $$l0 = (e => (e.LIST = "list", e.GRID = "grid", e))($$l0 || {});
+let d = "assets-panel-view-mode-v2";
+let c = E3(d, "grid");
+export function $$u1() {
+  let [e, t] = fp(c);
+  let r = useCallback(e => e.key === d && null != e.newValue, []);
+  let l = useCallback(r => {
+    if (r) try {
+      let n = JSON.parse(r);
+      ("grid" === n || "list" === n) && e !== n && t(n);
+    } catch (e) {}
+  }, [e, t]);
+  tl({
+    onSync: l,
+    shouldSyncValue: r
+  });
+  let u = cJ();
+  return useMemo(() => u ? ["grid", lQ] : [e, t], [e, u, t]);
+}
+let p = "asset-panel-show-folders";
+let _ = E3(p, !1);
+export function $$h2() {
+  let [e, t] = fp(_);
+  let r = useCallback(e => e.key === p && null != e.newValue, []);
+  let i = useCallback(r => {
+    if (r) try {
+      let n = JSON.parse(r);
+      "boolean" == typeof n && e !== n && t(n);
+    } catch (e) {}
+  }, [e, t]);
+  tl({
+    onSync: i,
+    shouldSyncValue: r
+  });
+  return [e, t];
+}
+export const $H = $$l0;
+export const MA = $$u1;
+export const ye = $$h2;

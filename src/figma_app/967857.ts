@@ -1,0 +1,470 @@
+import { jsx, jsxs, Fragment } from "react/jsx-runtime";
+import { useState, useCallback } from "react";
+import { wA } from "../vendor/514228";
+import { lQ } from "../905/934246";
+import { b as _$$b, bL, mc, YJ, hE, q7, Q$, N_ } from "../figma_app/860955";
+import { E as _$$E } from "../905/53857";
+import { o as _$$o } from "../905/821217";
+import { N as _$$N } from "../905/438674";
+import { O as _$$O } from "../figma_app/114128";
+import { $ as _$$$ } from "../figma_app/183557";
+import { r } from "../figma_app/6042";
+import { C as _$$C } from "../905/47358";
+import { J } from "../905/614223";
+import { l7 } from "../905/189185";
+import { getFeatureFlags } from "../905/601108";
+import { md } from "../figma_app/27355";
+import y from "classnames";
+import { Ay as _$$Ay } from "../905/612521";
+import { g as _$$g } from "../905/880308";
+import { Lf } from "../figma_app/564528";
+import { a as _$$a } from "../905/29104";
+import { Ex, zE, vj } from "../figma_app/919079";
+import { wv } from "../figma_app/236327";
+import { B as _$$B } from "../905/714743";
+import { t as _$$t, tx } from "../905/303541";
+import { b as _$$b2 } from "../905/985254";
+import { fu, tf } from "../figma_app/831799";
+import { r1 } from "../figma_app/545877";
+import { Ib } from "../905/129884";
+import { c$ } from "../905/794875";
+import { w as _$$w } from "../figma_app/654279";
+import { v as _$$v } from "../figma_app/759243";
+import { tG } from "../figma_app/757723";
+import { f as _$$f } from "../figma_app/481968";
+import { QP } from "../figma_app/761984";
+import { S as _$$S } from "../figma_app/773693";
+import { ss } from "../figma_app/402783";
+import { _ as _$$_ } from "../figma_app/255873";
+import { V as _$$V } from "../figma_app/144634";
+import { f as _$$f2 } from "../905/299537";
+import { $n } from "../figma_app/439493";
+import { Fn } from "../figma_app/769101";
+import { T1, DH } from "../figma_app/90441";
+import { A as _$$A } from "../svg/114059";
+import { A as _$$A2 } from "../svg/966821";
+import { A as _$$A3 } from "../svg/636569";
+import { A as _$$A4 } from "../svg/339098";
+var b = y;
+export let $$J1 = "https://help.figma.com/hc/articles/16822138920343-Use-AI-tools-in-Figma";
+export var $$Z2 = (e => (e.SUMMARIZE = "summarize", e.CLUSTER = "cluster", e.GENERATE_IDEAS = "generate_ideas", e))($$Z2 || {});
+function Q(e) {
+  switch (e) {
+    case "summarize":
+      return {
+        displayText: _$$t("whiteboard.inline_menu.ai_quick_actions_summarize_button"),
+        svgSrc: _$$A4,
+        disabledTooltipText: _$$t("whiteboard.inline_menu.ai_quick_actions_summarize_disabled_tooltip", {
+          minSelectedStickies: 2
+        }),
+        icon: jsx(_$$O, {})
+      };
+    case "cluster":
+      return {
+        displayText: _$$t("whiteboard.inline_menu.ai_quick_actions_sort_stickies_button"),
+        svgSrc: _$$A3,
+        disabledTooltipText: _$$t("whiteboard.inline_menu.ai_quick_actions_sort_stickies_disabled_tooltip", {
+          minSelectedStickies: 2
+        }),
+        icon: jsx(_$$$, {})
+      };
+    case "generate_ideas":
+      return {
+        displayText: _$$t("whiteboard.inline_menu.ai_quick_actions_generate_ideas_button"),
+        svgSrc: _$$A2,
+        disabledTooltipText: _$$t("whiteboard.inline_menu.ai_quick_actions_generate_ideas_disabled_tooltip"),
+        icon: jsx(r, {})
+      };
+  }
+}
+let $$ee3 = r1("used_figjam_ai_quick_actions");
+let et = "used_figjam_ai_mindmaps_inline_menu";
+let er = "figjam ai";
+let en = r1(et);
+export function $$ei4() {
+  let e = md(_$$f2).positionRelativeToSelection;
+  let {
+    summarizeCanvasSelection
+  } = ss(e, void 0, "INLINE_TOOLBAR");
+  let {
+    clusterCanvasSelection
+  } = _$$f();
+  let {
+    expandSelectedMindmapNode
+  } = _$$S();
+  return e => {
+    let i = lQ;
+    let a = "";
+    if (e) {
+      switch (e.type) {
+        case "summarize":
+          i = summarizeCanvasSelection;
+          a = "ai-quick-action-summarize";
+          break;
+        case "cluster":
+          i = clusterCanvasSelection;
+          a = "ai-quick-action-cluster";
+          break;
+        case "generate_ideas":
+          i = expandSelectedMindmapNode;
+          a = "ai-quick-action-generate-ideas";
+      }
+      l7.user(a, i);
+    }
+  };
+}
+export function $$ea0() {
+  var e;
+  let t = _$$g();
+  let r = $$ei4();
+  let a = getFeatureFlags().figjam_synthesize_handbrake;
+  let [s, c] = useState(!1);
+  let u = [...function () {
+    let e = QP();
+    let t = [];
+    e && t.push({
+      type: "generate_ideas",
+      enabled: e
+    });
+    return t;
+  }()];
+  let {
+    shouldShowBadge,
+    setUserFlagsCallback
+  } = es(u);
+  let {
+    getTriggerProps,
+    manager
+  } = _$$b();
+  return getFeatureFlags().figjam_a11y_inline_toolbar ? jsxs(fu, {
+    name: "ai_quick_actions_dropdown",
+    children: [jsx(_$$V, {
+      variant: "menu",
+      getTriggerProps: () => getTriggerProps({
+        onClick: () => {
+          a || setUserFlagsCallback();
+        }
+      }),
+      tooltip: a ? _$$w : _$$t("whiteboard.inline_menu.ai_quick_actions_header_text"),
+      ariaLabel: _$$t("whiteboard.inline_menu.ai_quick_actions_header_text"),
+      dataTestId: "toolbarAIQuickActionsDropdownButton",
+      recordingKey: "toolbarAIQuickActionsDropdownButton",
+      disabled: a,
+      trackingProperties: {
+        text: er
+      },
+      children: jsxs("div", {
+        className: "x78zum5 x6s0dn4 x1nfngrj",
+        children: [jsx(_$$C, {}), shouldShowBadge && jsx(fu, {
+          name: "ai_quick_actions_onboarding_badge",
+          children: jsx(_$$E, {
+            variant: "brandFilled",
+            children: _$$t("whiteboard.inline_menu.ai_quick_actions_onboarding_badge_2")
+          })
+        })]
+      })
+    }), jsx(bL, {
+      manager,
+      children: jsxs(mc, {
+        children: [jsx(YJ, {
+          title: jsx(hE, {
+            children: _$$t("whiteboard.inline_menu.ai_quick_actions_header_text")
+          }),
+          children: u.map(e => {
+            if (!e) return null;
+            let {
+              type,
+              enabled
+            } = e;
+            let {
+              displayText,
+              disabledTooltipText,
+              icon
+            } = Q(type);
+            return jsxs(q7, {
+              disabled: !enabled,
+              onClick: () => r(e),
+              "data-testid": `ai-quick-action-${type}`,
+              "aria-label": displayText,
+              htmlAttributes: enabled ? void 0 : {
+                "data-tooltip": disabledTooltipText,
+                "data-tooltip-type": Ib.TEXT
+              },
+              children: [icon && jsx(Q$, {
+                children: jsx("div", {
+                  className: "x78zum5 x6s0dn4 xl56j7k x1t68hxm",
+                  children: icon
+                })
+              }), displayText]
+            }, type);
+          })
+        }), jsx(N_, {
+          href: $$J1,
+          newTab: !0,
+          trusted: !0,
+          children: jsx(_$$_, {})
+        })]
+      })
+    })]
+  }) : jsx(Fn, {
+    OptionWrapper: (e = _$$t("whiteboard.inline_menu.ai_quick_actions_dropdown_options_aria_label"), function ({
+      children: r
+    }) {
+      return jsx("div", {
+        className: "ai_quick_actions_control--flexColumn--kgAdX",
+        "aria-label": e,
+        id: t,
+        role: "listbox",
+        tabIndex: -1,
+        "data-fullscreen-intercept": !0,
+        children: r
+      });
+    }),
+    additionalContentsTop: function ({
+      closeMenu: e
+    }) {
+      let t = _$$a() ? _$$t("whiteboard.inline_menu.ai_quick_actions_beta_badge_text") : "";
+      return jsxs("div", {
+        className: "ai_quick_actions_control--dropdownHeaderContainer--ifOPr",
+        onClick: e,
+        role: "button",
+        tabIndex: 0,
+        children: [jsx("div", {
+          className: "ai_quick_actions_control--dropdownHeaderTitle--Cqg8n",
+          children: tx("whiteboard.inline_menu.ai_quick_actions_header_text")
+        }), jsx("div", {
+          className: "ai_quick_actions_control--badgeContainer--kBpYM",
+          children: jsx(_$$o, {
+            eventListeners: ["onClick", "onPointerUp", "onMouseUp"],
+            children: jsx(_$$v, {
+              location: "INLINE_TOOLBAR",
+              overrideText: t
+            })
+          })
+        })]
+      });
+    }({
+      closeMenu: () => c(!1)
+    }),
+    additionalOptionOnChange: () => {
+      Lf($$J1) || _$$Ay.unsafeRedirect($$J1, "_blank");
+    },
+    additionalOptions: el,
+    onChange: r,
+    options: u,
+    overrideMenuOpenState: {
+      isOpenOverride: s,
+      setIsOpenOverride: c
+    },
+    popoverClassName: "ai_quick_actions_control--popover--BNsqs",
+    positionX: e => e.x,
+    renderButton: ({
+      onClick: e,
+      onKeyDown: r,
+      ref: i
+    }) => jsx(eo, {
+      onClick: e,
+      onKeyDown: r,
+      buttonRef: i,
+      ariaWrapperId: t,
+      disabled: !!a,
+      trackingProperties: {
+        text: er
+      },
+      dropdownMenuOptions: u
+    }),
+    renderOption: ed,
+    responsivePositionY: {
+      aboveTargetPositionY: (e, t, r) => T1(e, t, r + -48),
+      belowTargetPositionY: (e, t, r) => DH(e, t, r + -48)
+    },
+    value: void 0
+  });
+}
+function es(e) {
+  var t;
+  let r = wA();
+  t = ["generate_ideas"];
+  let n = !!e.find(e => e && t.includes(e.type));
+  return {
+    shouldShowBadge: function (e) {
+      let t = tG();
+      let r = md(en).data;
+      return !!(t && !r && e);
+    }(n),
+    setUserFlagsCallback: useCallback(() => {
+      n && r(_$$b2({
+        [et]: !0
+      }));
+    }, [n, r])
+  };
+}
+let eo = tf(function ({
+  onClick: e,
+  onKeyDown: t,
+  buttonRef: r,
+  ariaWrapperId: a,
+  disabled: o,
+  dropdownMenuOptions: l
+}) {
+  let [d, c] = useState(0);
+  let {
+    shouldShowBadge,
+    setUserFlagsCallback
+  } = es(l);
+  return jsx($n, {
+    ref: r,
+    ariaControls: a,
+    ariaLabel: _$$t("whiteboard.inline_menu.ai_quick_actions_button_aria_label"),
+    buttonChildrenStyle: {
+      justifyContent: "initial",
+      width: "initial"
+    },
+    buttonStyle: {
+      width: shouldShowBadge ? 48 + d + 8 : 48
+    },
+    caret: "down",
+    disabled: o,
+    onClick: o ? lQ : () => {
+      e();
+      setUserFlagsCallback();
+    },
+    onKeyDown: t,
+    recordingKey: "toolbarAIQuickActionsDropdownButton",
+    role: "combobox",
+    testId: "toolbarAIQuickActionsDropdownButton",
+    tooltip: _$$w,
+    tooltipType: Ib.SPECIAL,
+    children: jsxs("div", {
+      className: b()({
+        "ai_quick_actions_control--withBadge--z88DK": shouldShowBadge
+      }),
+      children: [jsx("div", {
+        className: "ai_quick_actions_control--buttonIconContainer--pBGdR",
+        children: jsx(_$$B, {
+          svg: _$$A,
+          className: b()("ai_quick_actions_control--svgIcon--XDs5m", {
+            "ai_quick_actions_control--svgIconDisabled--u4WwB": o
+          })
+        })
+      }), shouldShowBadge && jsx(fu, {
+        name: "ai_quick_actions_onboarding_badge",
+        children: jsx("div", {
+          ref: e => {
+            c(e?.offsetWidth || d);
+          },
+          children: jsx(Ex, {
+            text: _$$t("whiteboard.inline_menu.ai_quick_actions_onboarding_badge_2"),
+            color: zE.FIGJAM,
+            size: vj.SMALL,
+            className: "ai_quick_actions_control--onboardingBadge---sKJz"
+          })
+        })
+      })]
+    })
+  });
+});
+function el() {
+  return jsxs(Fragment, {
+    children: [jsx(wv, {}, "menu-separator-token"), jsx("div", {
+      className: "ai_quick_actions_control--dropdownFooterContainer--1d8mD",
+      children: jsxs("span", {
+        children: [jsx("span", {
+          className: "ai_quick_actions_control--dropdownFooterDisclaimer--UVXvJ",
+          children: _$$t("whiteboard.inline_menu.ai_quick_actions_dropdown_disclaimer")
+        }), "\xa0", jsx(J, {
+          brand: "whiteboard",
+          mode: "dark",
+          children: jsx(_$$N, {
+            href: $$J1,
+            newTab: !0,
+            trusted: !0,
+            children: tx("whiteboard.inline_menu.ai_quick_actions_dropdown_disclaimer_cta")
+          })
+        })]
+      })
+    })]
+  });
+}
+let ed = e => {
+  let {
+    value,
+    onClick,
+    id,
+    isFocused
+  } = e;
+  if (!value) return null;
+  let {
+    type,
+    enabled
+  } = value;
+  let {
+    displayText,
+    svgSrc,
+    disabledTooltipText
+  } = Q(type);
+  let u = "generate_ideas" === type ? "generate ideas" : "other ai action";
+  return jsx(ec, {
+    disabled: !enabled,
+    disabledTooltipText,
+    displayText,
+    id,
+    isFocused,
+    onClick,
+    svgSrc,
+    trackingProperties: {
+      text: u
+    },
+    type
+  }, `${type}-menu-option`);
+};
+let ec = tf(function ({
+  id: e,
+  type: t,
+  displayText: r,
+  svgSrc: i,
+  disabledTooltipText: a,
+  disabled: o,
+  onClick: l,
+  isFocused: d
+}) {
+  return jsx("div", {
+    "aria-label": r,
+    "aria-selected": "false",
+    className: b()("ai_quick_actions_control--optionContainer--pbhnv", {
+      "ai_quick_actions_control--optionContainerDisabled--Sxua-": o,
+      "ai_quick_actions_control--optionContainerIsFocused--AD1hq": d
+    }),
+    "data-tooltip": o ? a : "",
+    "data-tooltip-offset-x": 6,
+    "data-tooltip-show-right": !0,
+    "data-tooltip-tip-align-left": !0,
+    "data-tooltip-type": Ib.TEXT,
+    id: e,
+    role: "option",
+    tabIndex: -1,
+    children: jsx(c$, {
+      additionalStylesClassName: void 0,
+      "data-testid": `aiQuickActionsOption-${t}`,
+      dataTestId: `aiQuickActionsOption-${t}`,
+      disabled: o,
+      formattedValue: r,
+      fullWidth: !0,
+      height: 32,
+      ignoreCheck: !0,
+      onMouseUp: o ? lQ : l,
+      recordingKey: `aiQuickActionsOption-${t}`,
+      selected: !1,
+      style: {
+        marginLeft: 8
+      },
+      svg: i,
+      value: t
+    }, `option-${t}`)
+  });
+});
+export const s_ = $$ea0;
+export const nG = $$J1;
+export const Ay = $$Z2;
+export const Bl = $$ee3;
+export const dA = $$ei4;

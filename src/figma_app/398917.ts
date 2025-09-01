@@ -1,0 +1,556 @@
+import { jsxs, Fragment, jsx } from "react/jsx-runtime";
+import { useRef, useState, createRef } from "react";
+import { flushSync } from "../vendor/944059";
+import { d4, wA } from "../vendor/514228";
+import { d as _$$d } from "../905/976845";
+import { bL } from "../905/911410";
+import { vo, Y9, hE, nB } from "../figma_app/272243";
+import { $n } from "../905/521428";
+import { K as _$$K } from "../905/443068";
+import { e as _$$e } from "../905/149844";
+import { T as _$$T } from "../figma_app/300269";
+import { d as _$$d2 } from "../figma_app/844319";
+import { J as _$$J } from "../figma_app/63663";
+import { q as _$$q } from "../905/820062";
+import { l as _$$l } from "../figma_app/603241";
+import { Z } from "../905/279476";
+import { A as _$$A } from "../905/891805";
+import { O as _$$O } from "../905/487602";
+import { glU } from "../figma_app/763686";
+import { l7 } from "../905/189185";
+import { dI } from "../905/871411";
+import { of, v_, aH } from "../figma_app/806412";
+import { E as _$$E } from "../905/277716";
+import { c$, wv } from "../figma_app/236327";
+import { s as _$$s } from "../cssbuilder/589278";
+import { t as _$$t, tx } from "../905/303541";
+import { sT } from "../figma_app/740163";
+import { BK } from "../905/848862";
+import { kG } from "../figma_app/482495";
+import { Ib } from "../905/129884";
+import { cn } from "../905/959568";
+import { $j } from "../figma_app/178475";
+import { Cf, it } from "../905/504727";
+import { Zk, ks } from "../figma_app/626177";
+import { Z as _$$Z } from "../905/278240";
+import { I as _$$I } from "../905/439783";
+import { a as _$$a } from "../905/575557";
+import { e as _$$e2 } from "../905/2401";
+import { B as _$$B } from "../905/957400";
+import { dx } from "../figma_app/334459";
+import { Wv } from "../figma_app/711157";
+import { fn, pG } from "../figma_app/811257";
+import { b as _$$b, zQ, IL, yF } from "../figma_app/427309";
+let K = "responsive_text_style_variants--icon---QQbO raw_components--iconInsideBorderFocusWithin--2g7fO";
+let Y = "responsive_text_style_variants--breakpointTextWidthDropdown--buWMV";
+let $ = "responsive_text_style_variants--breakpointDropdownNameAndIcon--GoFa6";
+let X = "responsive_text_style_variants--modalBody--NAqJo";
+let q = "responsive_text_style_variants--breakpointDropdownContainer--0-xZj";
+let J = "responsive_text_style_variants--textInput--zcSFY styles_properties_form--textInput--rWj8- raw_components--textInput--t9D8g raw_components--base--T7G0z raw_components--input--JB4Ix raw_components--singleRowHeight--dKM4t raw_components--border--SKh2u";
+export function $$Z0() {
+  let e = BK("sites-responsive-text-style-dropdown");
+  let t = useRef(null);
+  let r = t.current?.getBoundingClientRect();
+  let a = useRef(null);
+  let l = a.current?.getBoundingClientRect().width;
+  let d = glU?.getSortedBreakpointFramesNameAndRange();
+  let c = new Set();
+  let u = kG("responsive-text-style-create-custom-breakpoint");
+  let _ = d4(e => e.mirror.selectedStyleProperties);
+  if (!_.responsiveTextStyleVariants) return null;
+  let h = function (e) {
+    let t = new Set();
+    e.forEach(e => {
+      void 0 !== e.minWidth && t.add(e.minWidth);
+    });
+    let r = Array.from(t).sort((e, t) => e - t);
+    let n = new Map();
+    if (0 === r.length) return n;
+    if (1 === r.length) {
+      n.set(r[0], r[0] + "+");
+      return n;
+    }
+    let i = r[0];
+    for (let e = 1; e < r.length; e++) {
+      let t = r[e] - 1;
+      n.set(i, i + " - " + t);
+      i = r[e];
+    }
+    n.set(i, i + "+");
+    return n;
+  }(_.responsiveTextStyleVariants);
+  let m = (t, r) => {
+    l7.user("create-responsive-text-style-variant", () => {
+      if (_.responsiveTextStyleVariants && _.responsiveTextStyleVariants.some(e => e.minWidth === t && e.name === r)) return;
+      let e = {
+        value: _.lineHeight.value,
+        units: _.lineHeight.units
+      };
+      let n = {
+        value: _.letterSpacing.value,
+        units: _.letterSpacing.units
+      };
+      glU.createVariantForSelectedTextStyleNode(dI(_.guid), t || 0, r || _$$t("sites.panel.responsive_text_style.custom"), _.fontSize, e, n, _.paragraphSpacing);
+    });
+    e.hide();
+  };
+  return jsxs(Fragment, {
+    children: [jsxs(Zk, {
+      className: "responsive_text_style_variants--panelBorder--KcVg7",
+      ref: a,
+      children: [jsx(Wv, {
+        isEmpty: 0 === _.responsiveTextStyleVariants.length,
+        faded: 0 === _.responsiveTextStyleVariants.length,
+        titleTx: tx("sites.panel.responsive_text_style.title"),
+        children: jsx(_$$d, {
+          ref: t,
+          onClick: () => e.toggle(),
+          "aria-expanded": e.showing,
+          "aria-label": _$$t("sites.panel.responsive_text_style.add_new_style_breakpoint"),
+          children: jsx(_$$e, {})
+        })
+      }), _.responsiveTextStyleVariants.map((e, t) => {
+        let r = c.has(e.minWidth);
+        r || c.add(e.minWidth);
+        return jsx(et, {
+          variant: e,
+          variants: _.responsiveTextStyleVariants ?? [],
+          variantIndex: t,
+          textStyleGuid: _.guid,
+          width: l,
+          rangeStringMap: h,
+          showErrorIcon: r
+        }, t);
+      })]
+    }), e.showing && r && d && jsx(Q, {
+      variants: _.responsiveTextStyleVariants ?? [],
+      breakpointsInFile: d,
+      dropdownTargetRect: r,
+      onAddNewVariant: m,
+      onAddCustomVariant: () => {
+        u.toggle(() => cn(t.current, l + 240 - 20));
+        e.hide();
+      }
+    }), u.showing && jsx(ee, {
+      variants: _.responsiveTextStyleVariants ?? [],
+      onClose: u.hide,
+      position: u.initialPosition,
+      onCreateCustomBreakpoint: (e = 0, t) => {
+        m(e, t);
+        u.hide();
+      }
+    })]
+  });
+}
+function Q({
+  variants: e,
+  breakpointsInFile: t,
+  dropdownTargetRect: r,
+  onAddNewVariant: i,
+  onAddCustomVariant: a
+}) {
+  let s = e.some(e => e.minWidth < _$$b && e.name === _$$t("sites.breakpoint_bar.add_mobile_breakpoint"));
+  let o = e.some(e => e.minWidth >= zQ && e.name === _$$t("sites.breakpoint_bar.add_desktop_breakpoint"));
+  let l = e.some(e => e.minWidth > _$$b && e.minWidth < zQ && e.name === _$$t("sites.breakpoint_bar.add_tablet_breakpoint"));
+  let d = [];
+  s || d.unshift(jsx(c$, {
+    onClick: () => i(1, _$$t("sites.breakpoint_bar.add_mobile_breakpoint")),
+    children: jsxs("div", {
+      className: q,
+      children: [jsxs("div", {
+        className: $,
+        children: [jsx(_$$T, {}), tx("sites.breakpoint_bar.add_mobile_breakpoint")]
+      }), jsxs("span", {
+        className: Y,
+        children: ["1 - ", IL - 1]
+      })]
+    })
+  }, "add-mobile-breakpoint"));
+  l || d.unshift(jsx(c$, {
+    onClick: () => i(IL, _$$t("sites.breakpoint_bar.add_tablet_breakpoint")),
+    children: jsxs("div", {
+      className: q,
+      children: [jsxs("div", {
+        className: $,
+        children: [jsx(_$$d2, {}), tx("sites.breakpoint_bar.add_tablet_breakpoint")]
+      }), jsxs("span", {
+        className: Y,
+        children: [IL, " - ", yF - 1]
+      })]
+    })
+  }, "add-tablet-breakpoint"));
+  o || d.unshift(jsx(c$, {
+    onClick: () => i(yF, _$$t("sites.breakpoint_bar.add_desktop_breakpoint")),
+    children: jsxs("div", {
+      className: q,
+      children: [jsxs("div", {
+        className: $,
+        children: [jsx(_$$J, {}), tx("sites.breakpoint_bar.add_desktop_breakpoint")]
+      }), jsxs("span", {
+        className: Y,
+        children: [yF, "+"]
+      })]
+    })
+  }, "add-desktop-breakpoint"));
+  let c = e => {
+    let t = e.name === _$$t("sites.breakpoint_bar.add_desktop_breakpoint") && (e.minWidth === yF || e.currentSize === yF);
+    let r = e.name === _$$t("sites.breakpoint_bar.add_tablet_breakpoint") && (e.minWidth === IL || e.currentSize === IL);
+    let n = e.name === _$$t("sites.breakpoint_bar.add_mobile_breakpoint") && (1 === e.minWidth || 1 === e.currentSize);
+    return t || r || n;
+  };
+  let u = t.filter(t => !(c(t) || e && e.some(e => e.minWidth === t.minWidth)));
+  let p = [];
+  u.map(e => {
+    let t = e.minWidth;
+    e.currentSize && (t = e.currentSize);
+    p.push(jsx(c$, {
+      onClick: () => i(t, e.name),
+      children: jsxs("div", {
+        className: q,
+        children: [jsxs("div", {
+          className: $,
+          children: [jsx(_$$q, {}), " ", e.name]
+        }), jsx("span", {
+          className: Y,
+          children: e.rangeString
+        })]
+      })
+    }, `add-breakpoint-${e.rangeString}`));
+  });
+  return jsxs(Cf, {
+    targetRect: r,
+    type: it.DEFAULT,
+    lean: "left",
+    children: [d, d.length > 0 && jsx(wv, {}), p, u.length > 0 && jsx(wv, {}), jsx(c$, {
+      onClick: a,
+      children: jsx("div", {
+        className: q,
+        children: jsxs("div", {
+          className: $,
+          children: [jsx(_$$q, {}), tx("sites.breakpoint_bar.add_custom_breakpoint")]
+        })
+      })
+    }, "add-custom-breakpoint")]
+  });
+}
+function ee({
+  variants: e,
+  onClose: t,
+  position: r,
+  onCreateCustomBreakpoint: a
+}) {
+  let o = wA();
+  let u = sT();
+  let [p, _] = useState("");
+  let [h, m] = useState(1);
+  let [g, y] = useState(!1);
+  let b = useRef(null);
+  return jsx(bL, {
+    onClose: t,
+    defaultPosition: r,
+    width: 240,
+    children: jsxs(vo, {
+      children: [jsx(Y9, {
+        children: jsx(hE, {
+          children: tx("sites.panel.responsive_text_style.custom_breakpoint")
+        })
+      }), jsx(nB, {
+        padding: 0,
+        children: jsxs("div", {
+          className: X,
+          children: [jsx(fn, {
+            leftInput: _$$t("sites.panel.responsive_text_style.name"),
+            rightInput: jsx(ks, {
+              ref: b,
+              className: J,
+              value: p,
+              placeholder: "Custom",
+              onChange: e => {
+                _(e.target.value);
+              },
+              recordingKey: "responsiveTextStyleVariantCustomName",
+              delay: 50,
+              autoFocus: !0,
+              autoComplete: "off"
+            }),
+            leftLabel: void 0,
+            rightLabel: void 0,
+            icon: void 0
+          }), jsx(fn, {
+            leftInput: _$$t("sites.panel.responsive_text_style.min_width"),
+            rightInput: jsx($j, {
+              value: h,
+              id: "responsive_text_style_variant_custom_min_width",
+              onValueChange: t => {
+                m(t);
+                y(e.some(e => e.minWidth === t));
+              },
+              dispatch: o,
+              "data-tooltip": _$$t("sites.panel.responsive_text_style.min_width"),
+              "data-tooltip-type": Ib.TEXT,
+              min: 1,
+              smallNudgeAmount: u.smallNudgeAmount,
+              bigNudgeAmount: u.bigNudgeAmount,
+              children: jsx("div", {
+                className: K,
+                children: jsx(_$$l, {})
+              })
+            }),
+            leftLabel: void 0,
+            rightLabel: void 0,
+            icon: g && jsx(Z, {
+              "data-tooltip-type": Ib.TEXT,
+              "data-tooltip": _$$t("sites.panel.responsive_text_style.min_width_conflicts")
+            })
+          }), jsx("div", {
+            className: "responsive_text_style_variants--row--pcVq- ui3_rows--_row--DnZFk ui3_rows--_grid--cP2Wu",
+            children: jsx($n, {
+              onClick: () => {
+                a(h, p);
+              },
+              children: tx("sites.panel.responsive_text_style.create_custom_breakpoint")
+            })
+          })]
+        })
+      })]
+    })
+  });
+}
+function et({
+  variant: e,
+  variants: t,
+  variantIndex: r,
+  textStyleGuid: a,
+  width: s,
+  rangeStringMap: l,
+  showErrorIcon: d
+}) {
+  let c = useRef(null);
+  let p = kG("responsive-text-style-edit-variant-picker-" + r);
+  let _ = l.get(e.minWidth) ?? e.minWidth.toString();
+  return jsxs(Fragment, {
+    children: [jsx(pG, {
+      input: jsxs("div", {
+        className: (_$$s.alignLeft.$, "responsive_text_style_variants--breakpointIconAndText--yCSLI"),
+        children: [d && jsx(Z, {
+          "data-tooltip-type": Ib.TEXT,
+          "data-tooltip": _$$t("sites.panel.responsive_text_style.min_width_conflicts")
+        }), e.name, jsxs("span", {
+          className: "responsive_text_style_variants--breakpointText--Pleoi",
+          children: ["\xb7 ", _]
+        })]
+      }),
+      leftIcon: jsx(_$$d, {
+        ref: c,
+        "aria-expanded": p.showing,
+        "aria-label": _$$t("sites.panel.responsive_text_style.settings"),
+        onClick: () => p.toggle(() => cn(c.current, s + 240 - 50)),
+        children: jsx(_$$A, {})
+      }),
+      rightIcon: jsx(_$$K, {
+        "aria-label": _$$t("sites.panel.responsive_text_style.settings"),
+        onClick: () => {
+          l7.user("delete-responsive-text-style-variant", () => {
+            glU.deleteVariantForTextStyleNode(dI(a), r);
+          });
+        },
+        children: jsx(_$$O, {})
+      }),
+      label: null
+    }), jsx(en, {
+      variant: e,
+      index: r,
+      textStyleGuid: a
+    }), p.showing && jsx(er, {
+      variant: e,
+      variants: t,
+      index: r,
+      textStyleGuid: a,
+      onClose: p.hide,
+      position: p.initialPosition
+    })]
+  });
+}
+function er({
+  variant: e,
+  variants: t,
+  index: r,
+  textStyleGuid: o,
+  onClose: c,
+  position: u
+}) {
+  let p = wA();
+  let _ = sT();
+  let [h, m] = useState(e.name ?? "");
+  let [g, y] = useState(e.minWidth ?? 1);
+  let [b, A] = useState(!1);
+  let x = useRef(null);
+  let N = e => {
+    l7.user("update-responsive-text-style-variant-min-width", () => {
+      glU.editVariantMinWidthForTextStyleNode(dI(o), r, e);
+    });
+  };
+  let O = of("responsiveTextStyleVariantName", "submit", () => {
+    "" !== h && l7.user("update-responsive-text-style-variant-name", () => {
+      glU.editVariantNameForTextStyleNode(dI(o), r, h);
+    });
+  });
+  let R = v_("responsiveTextStyleVariantName", "keydown", t => {
+    if ("Tab" === t.key || "Enter" === t.key) O();else {
+      if ("Escape" !== t.key) return aH;
+      flushSync(() => {
+        m(e.name);
+      });
+      x.current?.blur();
+    }
+  });
+  return jsx(bL, {
+    onClose: () => {
+      N(g);
+      c();
+    },
+    defaultPosition: u,
+    width: 240,
+    children: jsxs(vo, {
+      children: [jsx(Y9, {
+        children: jsx(hE, {
+          children: tx("sites.panel.responsive_text_style.settings")
+        })
+      }), jsx(nB, {
+        padding: 0,
+        children: jsxs("div", {
+          className: X,
+          children: [jsx(fn, {
+            leftInput: _$$t("sites.panel.responsive_text_style.name"),
+            rightInput: jsx(ks, {
+              autoComplete: "off",
+              autoFocus: !0,
+              className: J,
+              delay: 50,
+              innerRef: x,
+              onBlur: O,
+              onChange: e => {
+                m(e.target.value);
+              },
+              onFocus: () => (m(h), aH),
+              onKeyDown: R,
+              placeholder: _$$t("sites.panel.responsive_text_style.custom"),
+              recordingKey: "responsiveTextStyleVariantCustomName",
+              value: h
+            }),
+            icon: null,
+            leftLabel: void 0,
+            rightLabel: void 0
+          }), jsx(fn, {
+            leftInput: _$$t("sites.panel.responsive_text_style.min_width"),
+            rightInput: jsx($j, {
+              value: g,
+              id: "responsive_text_style_variant_min_width" + r,
+              onValueChange: r => {
+                y(r);
+                let n = 0;
+                t.forEach(e => {
+                  e.minWidth === r && n++;
+                });
+                A(n > 1 && r === e.minWidth || n >= 1 && r !== e.minWidth);
+              },
+              dispatch: p,
+              "data-tooltip": _$$t("sites.panel.responsive_text_style.min_width"),
+              "data-tooltip-type": Ib.TEXT,
+              min: 1,
+              smallNudgeAmount: _.smallNudgeAmount,
+              bigNudgeAmount: _.bigNudgeAmount,
+              children: jsx("div", {
+                className: K,
+                children: jsx(_$$l, {})
+              })
+            }),
+            icon: b && jsx(Z, {
+              "data-tooltip-type": Ib.TEXT,
+              "data-tooltip": _$$t("sites.panel.responsive_text_style.min_width_conflicts")
+            }),
+            leftLabel: void 0,
+            rightLabel: void 0
+          })]
+        })
+      })]
+    })
+  });
+}
+function en({
+  variant: e,
+  index: t,
+  textStyleGuid: r
+}) {
+  let a = wA();
+  let o = _$$B();
+  let l = createRef();
+  let d = createRef();
+  let {
+    bigNudgeAmount,
+    smallNudgeAmount
+  } = sT();
+  let p = jsx(_$$E, {
+    name: "responsive_text_style_variant_font_size",
+    children: jsx(_$$Z, {
+      id: "responsive_text_style_variant_font_size" + t,
+      fontSize: e.fontSize,
+      disabled: !1,
+      editingStyleGuid: r,
+      responsiveTextStyleVariantIndex: t,
+      recordingKey: "responsiveTextStylesFontSize"
+    })
+  });
+  let _ = jsx(_$$E, {
+    name: "responsive_text_style_variant_line_height",
+    children: jsx(_$$a, {
+      lineHeight: e.lineHeight,
+      disabled: !1,
+      editingStyleGuid: r,
+      responsiveTextStyleVariantIndex: t,
+      recordingKey: "responsiveTextStylesLineHeight",
+      lineHeightInContext: o,
+      rowElementRef: l
+    })
+  });
+  let h = jsx(_$$E, {
+    name: "responsive_text_style_variant_letter_spacing",
+    children: jsx(_$$I, {
+      letterSpacing: e.letterSpacing,
+      disabled: !1,
+      responsiveTextStyleVariantIndex: t,
+      editingStyleGuid: r,
+      recordingKey: "responsiveTextStylesLetterSpacing",
+      rowElementRef: d,
+      dispatch: a
+    })
+  });
+  let m = jsx(_$$E, {
+    name: "responsive_text_style_variant_paragraph_spacing",
+    children: jsx(_$$e2, {
+      paragraphSpacing: e.paragraphSpacing,
+      isDisabled: !1,
+      smallNudgeAmount,
+      bigNudgeAmount,
+      rowElementRef: d,
+      editingStyleGuid: r,
+      responsiveTextStyleVariantIndex: t,
+      recordingKey: "responsiveTextStylesParagraphSpacing",
+      onChange: (e, n) => {
+        l7.user("editVariantParagraphSpacingForTextStyleNode", () => glU.editVariantParagraphSpacingForTextStyleNode(dI(r), t, e));
+      }
+    })
+  });
+  return jsxs(Fragment, {
+    children: [jsx(dx, {
+      ref: l,
+      left: p,
+      right: _
+    }), jsx(dx, {
+      ref: d,
+      left: h,
+      right: m
+    })]
+  });
+}
+export const v = $$Z0;

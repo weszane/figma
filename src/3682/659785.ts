@@ -1,0 +1,27 @@
+import { jsxs, jsx } from "react/jsx-runtime";
+import { e as _$$e } from "../905/383776";
+import { l7, ZO } from "../figma_app/88239";
+import { q5 } from "../figma_app/516028";
+import { cQ, EG } from "../figma_app/144692";
+import { SZ, x$, Fp, l9, t7 } from "../9410/692397";
+export function $$c0({
+  shouldUseBottomBorder: e
+}) {
+  let t = q5();
+  let a = l7();
+  let c = _$$e();
+  let d = ZO();
+  return t && t.key && t.name ? jsxs(SZ, {
+    shouldUseBottomBorder: !!e,
+    children: [jsx(x$, {
+      shouldShowFileMenu: !a && !c && !d,
+      recordingKey: Fp
+    }), jsx(l9, {}), jsx(t7, {
+      openFile: t
+    })]
+  }) : jsxs(SZ, {
+    shouldUseBottomBorder: !!e,
+    children: [jsx(cQ, {}), jsx(EG, {})]
+  });
+}
+export const d = $$c0;

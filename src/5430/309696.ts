@@ -1,0 +1,141 @@
+import { jsxs, jsx } from "react/jsx-runtime";
+import { PureComponent } from "react";
+import { wA, Ng } from "../vendor/514228";
+import { parsePxInt } from "../figma_app/783094";
+import { nR, $$, N_, Ph } from "../figma_app/637027";
+import { tx, t as _$$t } from "../905/303541";
+import { jt } from "../figma_app/395505";
+import { to } from "../905/156213";
+import { R$ } from "../figma_app/86989";
+import { iZ } from "../905/372672";
+import { Yj } from "../figma_app/951233";
+import { U, xQ } from "../figma_app/45218";
+import { Uv } from "../905/54385";
+import { bX } from "../figma_app/792917";
+import { cU, ox, ab } from "../figma_app/870683";
+import { dOH } from "../figma_app/27776";
+import { Xk, LL, iZ as _$$iZ, _1 } from "../5430/868766";
+export function $$v4(e) {
+  return jsxs("div", {
+    className: Xk,
+    children: [jsx("p", {
+      children: e.label
+    }), jsx(nR, {
+      onClick: e.onClickDecline,
+      className: LL,
+      children: tx("community.detail_view.decline")
+    }), jsx($$, {
+      onClick: e.onClickAccept,
+      className: LL,
+      children: tx("community.detail_view.accept")
+    })]
+  });
+}
+parsePxInt(dOH);
+class b extends PureComponent {
+  constructor() {
+    super(...arguments);
+    this.getSubjectBodyForResource = () => U(this.props.resource) ? {
+      resourceSubject: _$$t("community.reporting.reporting_an_inappropriate_file"),
+      resourceBody: _$$t("community.reporting.i_want_to_report_this_file_for_violating_the_community_guidelines_resource_url", {
+        resourceUrl: cU(this.props.resource.id)
+      })
+    } : xQ(this.props.resource) ? {
+      resourceSubject: _$$t("community.reporting.reporting_an_inappropriate_widget"),
+      resourceBody: _$$t("community.reporting.i_want_to_report_this_widget_for_violating_the_community_guidelines_resource_url", {
+        resourceUrl: ox(this.props.resource.id)
+      })
+    } : {
+      resourceSubject: _$$t("community.reporting.reporting_an_inappropriate_plugin"),
+      resourceBody: _$$t("community.reporting.i_want_to_report_this_plugin_for_violating_the_plugin_guidelines_resource_url", {
+        resourceUrl: ab(this.props.resource.id)
+      })
+    };
+  }
+  render() {
+    let {
+      resourceSubject,
+      resourceBody
+    } = this.getSubjectBodyForResource();
+    let r = t;
+    r = `${r}${this.props.user ? `
+${_$$t("community.reporting.my_figma_user_id_is_user_id", {
+      userId: this.props.user.id
+    })}` : ""}
+${_$$t("community.reporting.add_your_description_here")}`;
+    return jsx(N_, {
+      href: `mailto:content-reviews@figma.com?subject=${encodeURIComponent(resourceSubject)}&body=${encodeURIComponent(r)}`,
+      className: _$$iZ,
+      trusted: !0,
+      children: tx("community.detail_view.report_resource")
+    });
+  }
+}
+export function $$j3() {
+  let e = iZ();
+  return e ? jsx(Ph, {
+    className: _1,
+    trackingEventName: "Detail View - Report Resource",
+    onClick: () => {
+      jt(e);
+    },
+    trusted: !0,
+    children: tx("community.detail_view.report_resource")
+  }) : null;
+}
+export function $$w0(e) {
+  let {
+    user,
+    name,
+    monetizedResource
+  } = e;
+  let o = wA();
+  return jsx(Ph, {
+    className: _1,
+    trackingEventName: "Detail View - Request Refund",
+    onClick: () => {
+      o(to({
+        type: bX,
+        data: {
+          user,
+          name,
+          monetizedResource
+        }
+      }));
+    },
+    trusted: !0,
+    children: tx("community.buyer.request_refund")
+  });
+}
+export function $$C1(e) {
+  let t = R$(e.resource);
+  let r = "Detail View - View Order Details";
+  let i = _$$t("community.buyer.view_order_details");
+  Uv(e.resource.monetized_resource_metadata) && (r = "Detail View - Manage Subscription", i = _$$t("community.buyer.manage_subscription"));
+  return jsx(Ph, {
+    className: _1,
+    onClick: () => t(),
+    trackingEventName: r,
+    trusted: !0,
+    children: i
+  });
+}
+Ng((e) => ({
+  hasOrgs: Yj(e),
+  teams: Object.keys(e.teams).map((t) => e.teams[t]),
+  user: e.user
+}))(b);
+var L = ((e) => (e[e.PROMO = 0] = "PROMO", e[e.PAID = 1] = "PAID", e))(L || {});
+export function $$T2(e) {
+  return jsx(N_, {
+    className: e.className,
+    onClick: e.onClick,
+    trusted: !0,
+    children: tx("community.detail_view.remove_myself_as_creator")
+  });
+}
+export const EV = $$w0;
+export const NY = $$C1;
+export const d = $$T2;
+export const dx = $$j3;
+export const vR = $$v4;

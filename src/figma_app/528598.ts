@@ -1,0 +1,1239 @@
+import { jsx, jsxs, Fragment } from "react/jsx-runtime";
+import { useMemo, useState, useRef, useEffect, useCallback, useContext } from "react";
+import { Z_n, CWU, Ez5, ibQ, glU, J0O, rrT, rXF, ZiZ, VQu } from "../figma_app/763686";
+import { q as _$$q } from "../figma_app/905311";
+import { wA, d4 } from "../vendor/514228";
+import { Bq } from "../figma_app/656233";
+import { B1 } from "../figma_app/465776";
+import { lQ } from "../905/934246";
+import { isNotNullish } from "../figma_app/95419";
+import { ServiceCategories as _$$e } from "../905/165054";
+import { K as _$$K } from "../905/443068";
+import { d as _$$d } from "../905/49800";
+import { h as _$$h } from "../905/270045";
+import { A as _$$A } from "../905/920165";
+import { c$, bL, l9, mc } from "../905/493196";
+import { E as _$$E } from "../905/632989";
+import { bL as _$$bL } from "../905/911410";
+import { vo, Y9, hE, nB } from "../figma_app/272243";
+import { K as _$$K2 } from "../figma_app/291291";
+import { yG } from "../905/859698";
+import { RR, Jr } from "../figma_app/338442";
+import { l7 } from "../905/189185";
+import { UN } from "../905/700578";
+import { WI } from "../905/929949";
+import { getFeatureFlags } from "../905/601108";
+import C from "classnames";
+import { ZC } from "../figma_app/39751";
+import { X as _$$X } from "../905/606795";
+import { Uz } from "../905/63728";
+import { Pt } from "../figma_app/806412";
+import { $D } from "../905/11";
+import { Y as _$$Y } from "../905/506207";
+import { TQ, Zl } from "../905/211621";
+import { s as _$$s } from "../cssbuilder/589278";
+import { t as _$$t } from "../905/303541";
+import { n0 } from "../figma_app/389091";
+import { vq } from "../905/8732";
+import { Oe, uP } from "../figma_app/933328";
+import { KD } from "../figma_app/975811";
+import { cJ } from "../figma_app/976749";
+import { A as _$$A2 } from "../905/639174";
+import { dH } from "../figma_app/741237";
+import { hS, gl } from "../905/216495";
+import { u as _$$u, BQ } from "../figma_app/852050";
+import { J as _$$J } from "../905/95677";
+import { sS } from "../figma_app/516028";
+import { ut } from "../figma_app/84367";
+import { PW } from "../figma_app/633080";
+import { zk } from "../figma_app/198712";
+import { Ib } from "../905/129884";
+import { qo } from "../905/959568";
+import { e as _$$e2 } from "../905/579635";
+import { j5 } from "../figma_app/178475";
+import { v as _$$v } from "../905/318279";
+import { MB } from "../figma_app/525558";
+import { e as _$$e3 } from "../figma_app/522702";
+import { J as _$$J2 } from "../905/225412";
+import { Y as _$$Y2 } from "../905/513028";
+import { K as _$$K3 } from "../figma_app/622160";
+import { Bc } from "../figma_app/200284";
+import { v as _$$v2 } from "../905/501497";
+import { h_ } from "../figma_app/151083";
+import { x as _$$x } from "../905/1253";
+import { P as _$$P } from "../905/201667";
+import { g as _$$g } from "../figma_app/594353";
+import { Hm } from "../figma_app/47085";
+import { hu, V5 } from "../figma_app/260445";
+import { p as _$$p } from "../905/427409";
+import { Px, y$ } from "../figma_app/152690";
+import { eF as _$$eF } from "../figma_app/394327";
+import { P as _$$P2 } from "../figma_app/120873";
+import { oz } from "../figma_app/406976";
+import { U as _$$U } from "../905/708285";
+import { R as _$$R } from "../905/103090";
+import { kl } from "../905/275640";
+import { aA } from "../figma_app/632975";
+import { f as _$$f } from "../figma_app/884735";
+import { UR } from "../figma_app/505098";
+import { K as _$$K4 } from "../905/636142";
+import { c6, zJ, qU, AN, BY, Mj, FG, ID, c1, u8, bq, CS, PQ, ty, aF, n4, K8, Ro, mD, x1, hF, Zj, nt, R4, ru, Of, l1, ZS, R3, mQ, km, dW } from "../figma_app/631970";
+import { Xp, O2, FF, Rq, T1, lg, ui } from "../figma_app/164212";
+import { s as _$$s2 } from "../905/583953";
+import { c2 } from "../905/382883";
+import { Y5 } from "../figma_app/455680";
+import { xP } from "../figma_app/65182";
+import { u as _$$u2 } from "../figma_app/940920";
+var w = C;
+function eO({
+  value: e,
+  hasBinding: t,
+  variableType: r,
+  requestedTypes: s,
+  variableScope: o,
+  onVariableSelected: l,
+  onComponentPropSelected: c,
+  onClearBinding: u,
+  recordingKey: p
+}) {
+  let h = kl("isInstanceSublayerSelected");
+  let m = _$$R(UR);
+  let g = e.type === Z_n.ALIAS ? e.value : void 0;
+  let f = e.type === Z_n.NODE_FIELD_ALIAS ? aA(e.value.stablePathToNode, e.value.indexOrKey) : void 0;
+  let E = _$$u(g);
+  let y = Px();
+  let b = useMemo(() => CWU.getVariableSetKeyForPublish(E?.variableSetId ?? "") ?? "", [E?.variableSetId]);
+  let T = b in y ? y[yG(b)] : void 0;
+  let S = useMemo(() => T ? {
+    [yG(b)]: T
+  } : void 0, [T, b]);
+  let v = BQ(g ?? void 0, S) ?? f?.varValue;
+  return t ? jsx("span", {
+    className: c6,
+    children: f && h && !E ? jsx(_$$f, {
+      containingInstanceGUID: m,
+      propDefId: f?.explicitDefId
+    }) : jsx(_$$K, {
+      onClick: () => u(v),
+      recordingKey: Pt(p, "detachButton"),
+      "aria-label": _$$t("design_systems.component_properties.detach_property"),
+      children: jsx(_$$U, {})
+    })
+  }) : (B1(r), jsxs(hu, {
+    boundVariableId: void 0,
+    resolvedType: r,
+    requestedTypes: s,
+    onComponentPropSelected: c,
+    onVariableSelected: l,
+    children: [jsx(V5, {
+      onPickerClose: () => {
+        dH({
+          nodeIDs: [],
+          defID: ""
+        });
+      },
+      variableScope: o
+    }), jsx(_$$K4, {
+      recordingKey: Pt(p, "assignAssignmentProp"),
+      tooltip: _$$t("proto.apply_assignment_property")
+    })]
+  }));
+}
+function eD(e) {
+  let t = ek(e, "image");
+  let r = ek(e, "animatedImage");
+  return {
+    type: "IMAGE",
+    visible: !0,
+    opacity: 1,
+    blendMode: "NORMAL",
+    imageScaleMode: "FIT",
+    image: {
+      hash: t,
+      name: ""
+    },
+    animatedImage: r.every(e => 0 === e) ? void 0 : {
+      hash: r,
+      name: ""
+    },
+    animationFrame: hS(e) ? e.animationFrame : void 0,
+    transform: _$$s2.identity().toFigMatrix(),
+    scale: 1,
+    rotation: 0,
+    paintFilter: {}
+  };
+}
+function ek(e, t) {
+  if (gl(e)) return new Uint8Array();
+  let r = e[t];
+  if (!r) return new Uint8Array();
+  let n = function(e) {
+    let t = new Uint8Array(20);
+    for (let r = 0; r < 20; r++) t[r] = parseInt(e.slice(2 * r, 2 * r + 2), 16);
+    return t;
+  }(r);
+  return n.every(e => 0 === e) ? new Uint8Array() : n;
+}
+window.setTimeout.bind(window);
+window.clearTimeout.bind(window);
+window.setInterval.bind(window);
+window.clearInterval.bind(window);
+window.requestAnimationFrame.bind(window);
+window.cancelAnimationFrame.bind(window);
+window.performance;
+window.scheduler;
+new class {
+  constructor() {
+    this.calls = [];
+  }
+  async resetAsync(e) {
+    e?.skipFlush !== !0 && (await this.flushBufferAsync());
+    this.calls = [];
+  }
+  async flushBufferAsync() { }
+  addCall(e) {
+    this.calls.push(e);
+  }
+  calledWith(e, t) {
+    return void 0 !== this.findCall(e, t);
+  }
+  findCall(e, t) {
+    return t ? this.calls.find(r => r.event === e && Object.entries(t).every(([e, t]) => c2(r.data.properties[e], t))) : this.calls.find(t => t.event === e);
+  }
+  findCalls(e, t) {
+    return t ? this.calls.filter(r => r.event === e && Object.entries(t).every(([e, t]) => c2(r.data.properties[e], t))) : this.calls.filter(t => t.event === e);
+  }
+}();
+window.fetch;
+function eU(e) {
+  let {
+    index,
+    guids,
+    typedPropDef,
+    value,
+    containerWidth,
+    forBubbledProps,
+    hideIcon,
+    hideBindingButton,
+    parameterConfig,
+    submitBehaviorAssignment,
+    onChange,
+    clearBehaviorVariableBinding,
+    minHack,
+    behaviorAssignmentInfo
+  } = e;
+  let C = ut(Ez5?.propertiesPanelState().shownPropertiesPanels, void 0);
+  let O = C?.[ibQ.INSTANCE_ITEM] ?? !1;
+  let R = wA();
+  let L = d4(e => e.selectedComponentPropDefId);
+  let [D, M] = useState(!1);
+  let F = useRef(null);
+  let B = useRef(null);
+  useEffect(() => {
+    L === typedPropDef.explicitDefID && O && (R(n0({
+      propDefId: null
+    })), M(!0), F.current && clearTimeout(F.current), F.current = setTimeout(() => {
+      M(!1);
+    }, 1e3));
+  }, [R, L, typedPropDef, O]);
+  let {
+    variableType,
+    requestedTypes,
+    variableScope
+  } = Xp[typedPropDef.type] || {
+    variableType: void 0,
+    requestedTypes: void 0,
+    variableScope: void 0
+  };
+  let Y = useMemo(() => Bq(guids.map(e => glU?.getInstanceSublayersControlledByDirectPropAssignment(e, typedPropDef.explicitDefID, RR.OVERRIDDEN_SYMBOL_ID).map(e => UN().guidFromDeveloperFriendlyId(e))).filter(e => void 0 !== e)), [guids, typedPropDef.explicitDefID]);
+  let $ = !!getFeatureFlags().sts_code && !!parameterConfig;
+  let X = !hideBindingButton && !!(typedPropDef.type !== J0O.INSTANCE_SWAP && void 0 !== variableType && void 0 !== requestedTypes);
+  let J = value && "object" == typeof value && "type" in value && value.type === Z_n.ALIAS;
+  let [Z, ee, er] = _$$e3(!1);
+  let {
+    isDragHover,
+    onDragEnter,
+    onDragLeave,
+    onDropImage
+  } = function({
+    typedPropDef: e,
+    instanceGuids: t,
+    codeComponentId: r
+  }) {
+    let [n, s, o] = _$$e3(!1);
+    return useMemo(() => getFeatureFlags().ds_image_props_sites && e.type === J0O.IMAGE ? {
+      isDragHover: n,
+      onDropImage: n => {
+        let i = Y5.fileArrayToString;
+        if (i) {
+          let s = i(Array.from(n.files));
+          glU?.dropImageOnPropThumbnail(s, e.explicitDefID, t, rrT.COMPONENT_PROP_ASSIGNMENT, r);
+        }
+        o();
+      },
+      onDragEnter: s,
+      onDragLeave: o
+    } : {
+      isDragHover: !1
+    }, [e, t, n, s, o, r]);
+  }({
+    typedPropDef,
+    instanceGuids: behaviorAssignmentInfo?.guids ?? guids,
+    codeComponentId: behaviorAssignmentInfo?.codeComponentId ?? null
+  });
+  if (void 0 === value) return jsx(Fragment, {});
+  let el = B.current;
+  let ed = !!el && el.offsetWidth < el.scrollWidth;
+  let ec = parameterConfig?.label?.value ?? typedPropDef.name;
+  let ep = jsx("div", {
+    className: w()(zJ, {
+      [qU]: containerWidth === O2.RESIZABLE_SIDEBAR,
+      [AN]: typedPropDef.type === J0O.TEXT
+    }),
+    children: jsx("div", {
+      ref: B,
+      className: BY,
+      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip": ed ? ec : null,
+      "data-testid": `component-prop-row-label-${typedPropDef.name}`,
+      children: ec
+    })
+  });
+  let e_ = jsx(_$$e2, {
+    condition: X,
+    wrapper: e => (B1(variableType), jsxs(hu, {
+      boundVariableId: void 0,
+      resolvedType: variableType,
+      requestedTypes,
+      onComponentPropSelected: e => {
+        let t = FF(e);
+        l7.user("component-prop-assignment", () => glU?.setComponentPropAssignmentVariableData(guids, typedPropDef.explicitDefID, t, forBubbledProps));
+      },
+      onVariableSelected: async e => {
+        if (void 0 === e) return;
+        let t = await R(Oe(e));
+        if (!t) return;
+        let n = y$(variableType, t);
+        submitBehaviorAssignment ? submitBehaviorAssignment(typedPropDef.explicitDefID, n) : l7.user("component-prop-assignment", () => glU?.setComponentPropAssignmentVariableData(guids, typedPropDef.explicitDefID, n, forBubbledProps));
+        onChange?.(guids, typedPropDef.explicitDefID, n, forBubbledProps);
+        oz("COMPONENT_PROP_DEF", {
+          type: Z_n.ALIAS,
+          resolvedType: e.resolvedType,
+          value: t
+        });
+        dH({
+          nodeIDs: [],
+          defID: ""
+        });
+      },
+      children: [jsx(V5, {
+        variableScope
+      }), e]
+    })),
+    children: (() => {
+      if (J && X) return jsx(eH, {
+        ...e
+      });
+      let t = e.value;
+      if (typedPropDef.type === J0O.BOOL) return jsx(eV, {
+        ...e,
+        value: t
+      });
+      if (typedPropDef.type === J0O.TEXT) return $ && parameterConfig.control === Jr.SELECT && parameterConfig ? jsx(eX, {
+        ...e,
+        value: t,
+        selectConfig: parameterConfig.selectConfig
+      }) : jsx(eK, {
+        ...e,
+        value: t
+      });
+      if (typedPropDef.type === J0O.NUMBER) {
+        if ($) {
+          if (parameterConfig.control === Jr.SLIDER && parameterConfig.sliderConfig && null != parameterConfig.sliderConfig.min && null != parameterConfig.sliderConfig.max && null != parameterConfig.sliderConfig.step) return jsx(eW, {
+            ...e,
+            value: t,
+            min: parameterConfig.sliderConfig.min,
+            max: parameterConfig.sliderConfig.max,
+            step: parameterConfig.sliderConfig.step
+          });
+          if (parameterConfig.control === Jr.INPUT) return jsx(e$, {
+            ...e,
+            value: t,
+            unit: parameterConfig.inputConfig.unit?.value,
+            min: parameterConfig.inputConfig.min ? parameterConfig.inputConfig.min.value : minHack,
+            max: parameterConfig.inputConfig.max?.value
+          });
+          if (parameterConfig.control === Jr.SELECT && parameterConfig.selectConfig.options.length > 0) return jsx(eX, {
+            ...e,
+            value: t,
+            selectConfig: parameterConfig.selectConfig
+          });
+        }
+        return jsx(ez, {
+          ...e,
+          value: t
+        });
+      }
+      return typedPropDef.type === J0O.INSTANCE_SWAP ? jsx(eq, {
+        ...e,
+        value: t
+      }) : typedPropDef.type === J0O.IMAGE ? jsx(eJ, {
+        ...e,
+        value: t,
+        isDragHover,
+        isPickerOpen: Z,
+        onPickerOpen: ee,
+        onPickerClose: er,
+        onDropImage: onDropImage ?? lQ
+      }) : jsx(Fragment, {});
+    })()
+  });
+  if (typedPropDef.type === J0O.NUMBER && !getFeatureFlags().ds_variable_props_number_asgmnt) return jsx(Fragment, {});
+  let ef = () => {
+    l7.user("component-prop-assignment", () => {
+      glU?.removePropImage(typedPropDef.explicitDefID, behaviorAssignmentInfo?.guids ?? guids, behaviorAssignmentInfo?.codeComponentId ?? null);
+    });
+  };
+  let ey = typedPropDef.type === J0O.IMAGE && getFeatureFlags().ds_image_props_sites;
+  let eb = ey && (gl(e.value) || (e.value?.image ?? "") !== "");
+  function eI() {
+    return hideIcon ? jsx(_$$g, {
+      appendedClassName: Mj,
+      onMouseMove: () => dH({
+        nodeIDs: guids,
+        defID: typedPropDef.explicitDefID
+      }),
+      onMouseLeave: () => dH({
+        nodeIDs: [],
+        defID: ""
+      }),
+      leftLabel: null,
+      leftInput: ep,
+      rightLabel: null,
+      rightInput: e_
+    }) : jsx(Hm, {
+      recordingKey: `componentPropertyRow.${index}`,
+      appendedClassName: w()(Mj, {
+        [FG]: X,
+        [ID]: Z && getFeatureFlags().ds_image_props_sites
+      }),
+      onMouseMove: () => dH({
+        nodeIDs: guids,
+        defID: typedPropDef.explicitDefID
+      }),
+      onMouseLeave: () => dH({
+        nodeIDs: [],
+        defID: ""
+      }),
+      leftLabel: null,
+      leftInput: ep,
+      rightLabel: null,
+      rightInput: e_,
+      icon: (ey && eb ? jsx(_$$K, {
+        onClick: e => {
+          e.stopPropagation();
+          ef();
+        },
+        variant: "ghost",
+        "aria-label": _$$t("fullscreen.properties_panel.image_settings.remove_image"),
+        recordingKey: Pt("componentPropAssignmentRemoveImage", guids.join("-"), typedPropDef.explicitDefID),
+        children: jsx(_$$K2, {})
+      }) : null) ?? (typedPropDef.type !== J0O.INSTANCE_SWAP ? null : jsx(h_, {
+        instanceAndSublayerGUIDs: Y,
+        showAllInstanceOptions: !1
+      })) ?? (hideBindingButton || void 0 === variableType || void 0 === requestedTypes ? null : jsx(eO, {
+        value,
+        hasBinding: J,
+        variableType,
+        requestedTypes,
+        variableScope,
+        onComponentPropSelected: e => {
+          let t = FF(e);
+          l7.user("component-prop-assignment", () => glU?.setComponentPropAssignmentVariableData(guids, typedPropDef.explicitDefID, t, forBubbledProps));
+        },
+        onVariableSelected: async e => {
+          if (B1(variableType), void 0 === e) return;
+          let t = await R(Oe(e));
+          if (!t) return;
+          let n = y$(variableType, t);
+          submitBehaviorAssignment ? submitBehaviorAssignment(typedPropDef.explicitDefID, n) : l7.user("component-prop-assignment", () => glU?.setComponentPropAssignmentVariableData(guids, typedPropDef.explicitDefID, y$(variableType, t), forBubbledProps));
+          onChange?.(guids, typedPropDef.explicitDefID, n, forBubbledProps);
+          oz("COMPONENT_PROP_ASSIGNMENT", {
+            type: Z_n.ALIAS,
+            resolvedType: e.resolvedType,
+            value: t
+          });
+          dH({
+            nodeIDs: [],
+            defID: ""
+          });
+        },
+        onClearBinding: e => {
+          clearBehaviorVariableBinding ? clearBehaviorVariableBinding(typedPropDef.explicitDefID, e) : l7.user("component-prop-assignment", () => {
+            glU?.unbindComponentPropAssignment(guids, typedPropDef.explicitDefID, e, forBubbledProps);
+          });
+        },
+        recordingKey: "typedComponentPropAssignmentRow"
+      }))
+    });
+  }
+  return getFeatureFlags().ds_image_props_sites ? jsx(_$$Y, {
+    className: w()({
+      [c1]: isDragHover
+    }),
+    isDragTarget: onDropImage ? eZ : eQ,
+    onTargetDragEnter: onDragEnter ?? lQ,
+    onTargetDragLeave: onDragLeave ?? lQ,
+    onTargetDrop: onDropImage ?? lQ,
+    recordingKey: Pt(`componentPropertyRow.${index}`, "dropTarget"),
+    children: eI()
+  }) : eI();
+}
+function eB(e) {
+  switch (e) {
+    case O2.REGULAR:
+    case void 0:
+      return u8;
+    case O2.WIDE:
+      return bq;
+    case O2.UNBOUNDED:
+      return CS;
+    case O2.RESIZABLE_SIDEBAR:
+      return PQ;
+  }
+}
+function eG(e) {
+  switch (e) {
+    case O2.REGULAR:
+    case void 0:
+      return ty;
+    case O2.WIDE:
+      return aF;
+    case O2.UNBOUNDED:
+      return n4;
+  }
+}
+function eV({
+  value: e,
+  viewOnly: t,
+  guids: r,
+  typedPropDef: s,
+  containerWidth: l,
+  forBubbledProps: d,
+  submitBehaviorAssignment: c,
+  onChange: u
+}) {
+  let p = wA();
+  let _ = d4(e => e.instanceSwapPickerShown);
+  let g = useCallback(e => {
+    let t = WI(rXF.BOOLEAN, e);
+    c ? c(s.explicitDefID, t) : l7.user("toggle-bool-prop-assignment", () => {
+      glU?.setComponentPropAssignmentVariableData(r, s.explicitDefID, t, d);
+    });
+    u?.(r, s.explicitDefID, t, d);
+    _?.isShown && p(vq());
+  }, [c, _?.isShown, s.explicitDefID, r, d, p, u]);
+  return jsx("div", {
+    className: eB(l),
+    children: jsx("div", {
+      className: eG(l),
+      children: jsx(_$$d, {
+        checked: e,
+        label: jsx(_$$h, {
+          children: s.name
+        }),
+        onChange: g,
+        recordingKey: Pt("componentPropAssignmentToggle", r.join("-"), s.explicitDefID),
+        disabled: t
+      })
+    })
+  });
+}
+function eH({
+  value: e
+}) {
+  let t = gl(e);
+  let r = e.value;
+  let s = _$$u(r);
+  let o = Px();
+  let l = useContext(_$$p);
+  let d = useMemo(() => CWU?.getVariableSetKeyForPublish(s?.variableSetId ?? "") ?? "", [s?.variableSetId]);
+  let c = d in o ? o[yG(d)] : void 0;
+  let u = useMemo(() => c ? {
+    [yG(d)]: c
+  } : void 0, [c, d]);
+  let p = BQ(r ?? void 0, u);
+  let _ = useRef(null);
+  return s ? jsx("div", {
+    role: "button",
+    tabIndex: 0,
+    ref: _,
+    onClick: () => {
+      _.current && l?.showBindingUI(_.current);
+    },
+    className: K8,
+    children: jsx(_$$P2, {
+      value: t ? _$$t("design_systems.component_properties.mixed") : s?.name,
+      variableId: r && !t ? r : void 0,
+      isStandalone: !0,
+      thumbnailValue: "MIXED" !== p ? p : void 0,
+      isDeleted: _$$eF(s),
+      classNameOverride: _$$s.wFull.$,
+      variablePillContainerClassName: Ro,
+      fullWidth: !0
+    })
+  }) : jsx(Fragment, {});
+}
+function ez({
+  value: e,
+  typedPropDef: t,
+  guids: r,
+  forBubbledProps: s,
+  containerWidth: o,
+  viewOnly: l,
+  index: d,
+  submitBehaviorAssignment: c,
+  onChange: p
+}) {
+  let {
+    inputRef,
+    inputProps: {
+      onChange,
+      onFocus,
+      onMouseLeave,
+      onMouseUp,
+      onKeyUp
+    }
+  } = _$$X({
+    onFocus: () => {
+      gl(e) ? b("") : b(S);
+    },
+    onChange: e => b(e.currentTarget.value)
+  });
+  let [y, b] = useState(null);
+  let T = gl(e) ? 0 : Number(e);
+  let I = useMemo(() => {
+    let t = !y || !Rq(y);
+    return gl(e) || t ? T : T1(y);
+  }, [y, e, T]);
+  let S = gl(e) ? _$$t("design_systems.component_properties.mixed") : lg(T);
+  let A = () => {
+    if (isNotNullish(y)) {
+      let e = WI(rXF.FLOAT, I);
+      c ? c(t.explicitDefID, e) : l7.user("set-number-prop-assignment", () => {
+        glU?.setComponentPropAssignmentVariableData(r, t.explicitDefID, e, s);
+      });
+      p?.(r, t.explicitDefID, e, s);
+    }
+    inputRef.current && (inputRef.current.scrollTop = 0, inputRef.current.blur());
+    b(null);
+  };
+  return jsx("div", {
+    className: eB(o),
+    children: jsx("div", {
+      className: eG(o),
+      children: jsx(_$$v, {
+        ref: e => {
+          e?.textarea && (inputRef.current = e.textarea);
+        },
+        className: w()({
+          [mD]: l,
+          [x1]: "" === S && !l,
+          [hF]: !l && "" !== S
+        }),
+        disableInput: l,
+        onBlur: A,
+        onChange,
+        onFocus,
+        onKeyDown: e => {
+          e.keyCode !== Uz.ENTER || e.shiftKey || (e.preventDefault(), A());
+        },
+        onKeyUp,
+        onMouseLeave,
+        onMouseUp,
+        placeholder: gl(e) ? S : void 0,
+        recordingKey: Pt("componentPropAssignmentNumberInput", r.join("-"), d),
+        value: y
+      })
+    })
+  });
+}
+function eW({
+  value: e,
+  typedPropDef: t,
+  guids: r,
+  forBubbledProps: s,
+  containerWidth: o,
+  viewOnly: l,
+  index: d,
+  min: c,
+  max: u,
+  step: p,
+  submitBehaviorAssignment: _,
+  onChange: h
+}) {
+  let m = gl(e) ? 0 : Number(e);
+  let [f, E] = useState(null);
+  let y = {
+    min: c.value,
+    max: u.value,
+    step: p.value
+  };
+  let b = e => {
+    let n = WI(rXF.FLOAT, e);
+    _ ? _(t.explicitDefID, n) : l7.user("set-number-prop-assignment", () => glU?.setComponentPropAssignmentVariableData(r, t.explicitDefID, n, s));
+    h?.(r, t.explicitDefID, n, s);
+    E(null);
+  };
+  return jsx("div", {
+    className: eB(o),
+    children: jsx("div", {
+      className: w()(eG(o), {
+        [mD]: l
+      }),
+      children: jsx(_$$A, {
+        "aria-label": t.parameterConfig?.label?.value ?? t.name,
+        bigStep: y.step,
+        disabled: l,
+        max: y.max,
+        min: y.min,
+        onChange: (e, t) => {
+          t.commit ? b(e) : E(e);
+        },
+        rangeAnchor: 0,
+        recordingKey: Pt("componentPropAssignmentNumberSlider", r.join("-"), d),
+        step: y.step,
+        value: f ?? m
+      })
+    })
+  });
+}
+function eK({
+  value: e,
+  typedPropDef: t,
+  guids: r,
+  forBubbledProps: s,
+  containerWidth: o,
+  viewOnly: l,
+  index: d,
+  submitBehaviorAssignment: c,
+  onChange: p
+}) {
+  let {
+    inputRef,
+    inputProps: {
+      onChange,
+      onFocus,
+      onMouseLeave,
+      onMouseUp,
+      onKeyUp
+    }
+  } = _$$X({
+    onFocus: () => {
+      gl(e) ? b("") : b(T);
+    },
+    onChange: e => b(e.currentTarget.value)
+  });
+  let [y, b] = useState(null);
+  let T = t.type === J0O.TEXT ? gl(e) ? _$$t("design_systems.component_properties.mixed") : e : null;
+  return jsx("div", {
+    className: eB(o),
+    children: jsx("div", {
+      className: eG(o),
+      children: jsx(_$$v, {
+        ref: e => {
+          e?.textarea && (inputRef.current = e.textarea);
+        },
+        className: w()({
+          [mD]: l,
+          [x1]: "" === T && !l,
+          [hF]: !l && "" !== T
+        }),
+        disableInput: l,
+        onBlur: () => {
+          if (isNotNullish(y)) {
+            let e = WI(rXF.TEXT_DATA, {
+              characters: y
+            });
+            c ? c(t.explicitDefID, e) : l7.user("set-text-prop-assignment", () => {
+              glU?.setComponentPropAssignmentVariableData(r, t.explicitDefID, e, s);
+            });
+            p?.(r, t.explicitDefID, e, s);
+          }
+          inputRef.current && (inputRef.current.scrollTop = 0, inputRef.current.blur());
+          b(null);
+        },
+        onChange,
+        onFocus,
+        onKeyDown: e => {
+          e.keyCode === Uz.ENTER && !e.shiftKey && (e.preventDefault(), inputRef.current && (inputRef.current.scrollTop = 0, inputRef.current.blur()));
+        },
+        onKeyUp,
+        onMouseLeave,
+        onMouseUp,
+        placeholder: gl(e) ? T : null,
+        recordingKey: Pt("componentPropAssignmentTextInput", r.join("-"), d),
+        value: y
+      })
+    })
+  });
+}
+class eY extends KD {
+  constructor(e) {
+    super({
+      smallNudgeAmount: 4,
+      bigNudgeAmount: 8
+    });
+    this.allowedUnits = "";
+    e && (this.allowedUnits = `${e}`);
+  }
+  format(e) {
+    return null == e ? "" : `${parseFloat(e.toFixed(2))}${this.allowedUnits}`;
+  }
+}
+function e$({
+  value: e,
+  typedPropDef: t,
+  guids: r,
+  forBubbledProps: s,
+  containerWidth: l,
+  viewOnly: d,
+  index: c,
+  submitBehaviorAssignment: u,
+  unit: p,
+  min: _,
+  max: h,
+  onChange: m
+}) {
+  let g = gl(e) ? 0 : Number(e);
+  let f = wA();
+  let [E, y] = useState(null);
+  let b = useMemo(() => new eY(p), [p]);
+  let T = e => {
+    let n = WI(rXF.FLOAT, e);
+    u ? u(t.explicitDefID, n) : l7.user("set-number-prop-assignment", () => glU?.setComponentPropAssignmentVariableData(r, t.explicitDefID, n, s));
+    m?.(r, t.explicitDefID, n, s);
+    y(null);
+  };
+  let I = t.parameterConfig?.label?.value ?? t.name;
+  return jsx("div", {
+    className: eB(l),
+    children: jsx("div", {
+      className: w()(eG(l), {
+        [mD]: d
+      }),
+      children: jsx(j5, {
+        value: E ?? g,
+        onValueChange: (e, t) => {
+          void 0 !== _ && e < _ ? e = _ : void 0 !== h && e > h && (e = h);
+          t === zk.YES || t === zk.YES_FORCE_TRACKING_AS_EDIT ? T(e) : y(e);
+        },
+        disabled: d,
+        recordingKey: Pt("componentPropAssignmentNumberScrub", r.join("-"), c),
+        formatter: b,
+        dispatch: f,
+        "aria-label": I,
+        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip": I
+      })
+    })
+  });
+}
+function eX({
+  value: e,
+  typedPropDef: t,
+  guids: r,
+  forBubbledProps: i,
+  containerWidth: s,
+  viewOnly: o,
+  selectConfig: l,
+  submitBehaviorAssignment: d,
+  index: c,
+  onChange: u
+}) {
+  let p = l.options.map(e => {
+    let t = e.value.value.toString();
+    return jsx(c$, {
+      value: t,
+      children: e.label
+    }, e.label);
+  });
+  let _ = gl(e) ? void 0 : e?.toString();
+  let h = t.parameterConfig?.label?.value ?? t.name;
+  return jsx("div", {
+    className: eB(s),
+    children: jsx("div", {
+      className: eG(s),
+      "data-disabled": o,
+      children: jsxs(bL, {
+        value: _,
+        onChange: e => {
+          let n = t.type === J0O.TEXT ? WI(rXF.TEXT_DATA, {
+            characters: e
+          }) : WI(rXF.FLOAT, parseFloat(e));
+          d ? d(t.explicitDefID, n) : l7.user("set-select-prop-assignment", () => {
+            glU && glU.setComponentPropAssignmentVariableData(r, t.explicitDefID, n, i);
+          });
+          u?.(r, t.explicitDefID, n, i);
+        },
+        recordingKey: Pt("componentPropAssignmentSelect", r.join("-"), c),
+        children: [jsx(l9, {
+          placeholder: gl(e) ? _$$t("design_systems.component_properties.mixed") : void 0,
+          label: jsx(_$$h, {
+            children: h
+          }),
+          width: "fill",
+          size: "md"
+        }), jsx(mc, {
+          children: p
+        })]
+      })
+    })
+  });
+}
+function eq({
+  value: e,
+  viewOnly: t,
+  guids: r,
+  typedPropDef: s,
+  containerWidth: d,
+  forBubbledProps: c,
+  inPlayground: u,
+  sceneGraph: p,
+  instanceSwapPickerInitialHeight: _,
+  instanceSwapPickerInitialPosition: h,
+  entrypointForInstanceSwapPicker: m,
+  getInstanceSwapPickerPosition: g,
+  instanceSwapPickerIdPrefix: f = "instance-swap-prop-assignment-picker-",
+  submitBehaviorAssignment: E
+}) {
+  let y = wA();
+  let b = d4(sS);
+  let {
+    preferredValues,
+    preferredValuesFetchError,
+    retryPreferredValuesFetch
+  } = xP(s);
+  let N = useMemo(() => preferredValuesFetchError ? jsx(_$$u2, {
+    onRetry: retryPreferredValuesFetch,
+    recordingKey: "componentPropAssignment"
+  }) : void 0, [preferredValuesFetchError, retryPreferredValuesFetch]);
+  let C = useCallback(e => {
+    y(uP({
+      item: e,
+      alwaysFetch: u,
+      targetUpsertScene: u ? ZiZ.PLAYGROUND_SCENE : ZiZ.ACTIVE_SCENE,
+      callback: t => {
+        E ? E(s.explicitDefID, {
+          type: Z_n.SYMBOL_ID,
+          resolvedType: rXF.SYMBOL_ID,
+          value: "SymbolId:" + t
+        }) : l7.user("set-instance-prop-assignment", () => glU?.setInstanceComponentPropAssignment(r, s.explicitDefID, t, e.type === PW.STATE_GROUP ? ui(e, t, b) : "", c, 0 === preferredValues.length ? VQu.NOT_APPLICABLE : preferredValues.includes(e) ? VQu.YES : VQu.NO));
+      }
+    }));
+    dH({
+      nodeIDs: [],
+      defID: ""
+    });
+  }, [y, c, r, b, u, preferredValues, s, E]);
+  Bq(r.map(e => glU?.getInstanceSublayersControlledByDirectPropAssignment(e, s.explicitDefID, RR.OVERRIDDEN_SYMBOL_ID).map(e => UN().guidFromDeveloperFriendlyId(e))).filter(e => void 0 !== e));
+  let {
+    modalWidth
+  } = TQ(Zl.INSTANCE_SWAP_PICKER);
+  return jsx("div", {
+    className: eB(d),
+    children: jsx("div", {
+      className: eG(d),
+      children: jsx(_$$x, {
+        disableToggle: t,
+        entrypointForLogging: m,
+        fill: d === O2.UNBOUNDED,
+        getInstanceSwapPickerPosition: g,
+        initialPosition: h,
+        instanceSwapNode: e,
+        instanceSwapPickerInitialHeight: _,
+        onSwapCallback: C,
+        pickerID: `${f}${r.join("-")}.${s.explicitDefID}`,
+        pickerWidth: modalWidth,
+        preferredItems: preferredValues,
+        preferredValuesErrorComponent: N,
+        sceneGraph: p,
+        shouldPerformSwapOnClick: !1,
+        title: _$$t("design_systems.component_properties.choose_instance")
+      })
+    })
+  });
+}
+function eJ({
+  containerWidth: e,
+  typedPropDef: t,
+  guids: r,
+  value: s,
+  isPickerOpen: o,
+  forBubbledProps: l,
+  onPickerOpen: d,
+  onPickerClose: c,
+  onDropImage: u,
+  behaviorAssignmentInfo: p,
+  pickerWidth: _
+}) {
+  let h = t.explicitDefID;
+  let m = useMemo(() => function(e) {
+    if (gl(e)) return eD(e);
+    let t = ek(e, "image");
+    if (t.every(e => 0 === e)) return eD(e);
+    let r = ek(e, "imageThumbnail");
+    let n = r.every(e => 0 === e) ? t : r;
+    return {
+      ...eD(e),
+      originalImageHeight: e.originalImageHeight,
+      originalImageWidth: e.originalImageWidth,
+      imageThumbnail: {
+        hash: n,
+        name: ""
+      }
+    };
+  }(s), [s]);
+  let g = useRef({
+    x: 0,
+    y: 0
+  });
+  let f = _$$P();
+  let y = useRef(null);
+  let b = useCallback(() => {
+    glU?.disableImagePropEdit(rrT.COMPONENT_PROP_ASSIGNMENT, h);
+    c?.();
+  }, [h, c]);
+  let T = useCallback(() => {
+    glU?.enableImagePropEdit(rrT.COMPONENT_PROP_ASSIGNMENT, h, p?.guids ?? r, p?.codeComponentId ?? null);
+    d?.();
+  }, [h, r, d, p]);
+  let I = (void 0 !== p ? (_ ?? 240) + 12 : f - 12) / 2;
+  let S = useCallback(({
+    clientX: e,
+    clientY: t
+  }) => {
+    let r = y.current?.getBoundingClientRect();
+    g.current = {
+      x: (r?.left ?? e) - qo - I,
+      y: (r?.top ?? t) - 8
+    };
+    o ? b() : T();
+  }, [o, b, T, I]);
+  let v = useCallback(() => {
+    glU?.uploadPropImage(h, p?.guids ?? r, p?.codeComponentId ?? null);
+  }, [h, r, p]);
+  let [A, x, N] = _$$e3(!1);
+  let C = MB({
+    onBoth: S,
+    onKeyDown: x,
+    onClick: N
+  });
+  let O = cJ();
+  let R = l || r.length > 1 || O;
+  return jsxs("div", {
+    className: w()(eB(e)),
+    children: [jsx("div", {
+      className: eG(e),
+      children: jsx(_$$E, {
+        onClick: C,
+        className: w()(Zj, {
+          [nt]: o
+        }),
+        ref: y,
+        children: hS(s) ? jsxs(Fragment, {
+          children: [jsxs("div", {
+            className: R4,
+            children: [jsx("div", {
+              className: ru
+            }), jsx(_$$J2, {
+              paint: m,
+              forceNonInteractive: !0,
+              tabIndex: -1
+            })]
+          }), jsx("span", {
+            children: _$$t("design_systems.component_properties.image")
+          })]
+        }) : jsx("span", {
+          className: Of,
+          children: _$$t("design_systems.component_properties.mixed")
+        })
+      })
+    }), o && jsx(e0, {
+      image: s,
+      defaultPosition: g.current,
+      shouldAutofocusUploadButton: A,
+      onClose: b,
+      onDropImage: u,
+      onUploadImage: v,
+      disableAi: R
+    })]
+  });
+}
+let eZ = () => !0;
+let eQ = () => !1;
+function e0({
+  image: e,
+  defaultPosition: t,
+  shouldAutofocusUploadButton: r,
+  onClose: a,
+  onDropImage: s,
+  onUploadImage: o,
+  disableAi: l
+}) {
+  let d = useMemo(() => eD(e), [e]);
+  let u = ZC(d);
+  let _ = useRef(null);
+  let [h] = useState(!d.image);
+  useEffect(function() {
+    (r || h) && _.current?.focus();
+  }, [r, h]);
+  let [m, g, f] = _$$e3(!1);
+  let E = useCallback(e => {
+    s(e);
+    f();
+  }, [s, f]);
+  let T = useRef(!1);
+  let [I, S] = useState(null);
+  let v = !!d.animatedImage;
+  let A = ZC(!!d.animatedImage);
+  let x = ZC(e);
+  let N = useCallback(() => {
+    S(null);
+    T.current = !0;
+    Bc(d).then(e => {
+      T.current && S(_$$J(e));
+    }).catch(e => $D(_$$e.DESIGN_SYSTEMS_FOUNDATIONS, e));
+  }, [d]);
+  useEffect(function() {
+    (v && !A || v && e !== x) && N();
+  }, [v, A, e, x, N]);
+  useEffect(function() {
+    return () => {
+      T.current = !1;
+    };
+  }, []);
+  let C = d.animatedImage?.hash.toString();
+  let R = C !== u?.animatedImage?.hash.toString() ? null : I;
+  return jsx(_$$bL, {
+    width: "sm",
+    onClose: a,
+    defaultPosition: t,
+    children: jsxs(vo, {
+      children: [jsx(Y9, {
+        children: jsx(hE, {
+          children: _$$t("design_systems.component_properties.image")
+        })
+      }), jsx(nB, {
+        children: jsx("div", {
+          className: l1,
+          children: jsx(_$$Y, {
+            className: w()(ZS, {
+              [R3]: m
+            }),
+            style: {
+              backgroundImage: `url('${_$$A2()}')`
+            },
+            isDragTarget: eZ,
+            onTargetDragEnter: g,
+            onTargetDragLeave: f,
+            onTargetDrop: E,
+            recordingKey: Pt("ImagePropAssignmentPicker", "dropTarget"),
+            children: jsxs("div", {
+              className: mQ,
+              children: [jsx("div", {
+                className: ru
+              }), hS(e) ? d.animatedImage ? jsx(_$$Y2, {
+                imagePaint: d,
+                width: 208,
+                height: 208,
+                className: km,
+                animatedImage: R,
+                animationFrame: d.animationFrame ?? 0,
+                onUpdateFrameData: lQ,
+                playing: !!R
+              }, C) : jsx(_$$K3, {
+                imagePaint: d,
+                width: 208,
+                height: 208,
+                className: km,
+                forceUpdate: !1
+              }) : jsx("div", {
+                style: {
+                  width: 208,
+                  height: 208
+                }
+              }), jsx("div", {
+                className: dW,
+                children: jsx(_$$v2, {
+                  uploadImagePaint: o,
+                  isInset: !0,
+                  imageButtonRef: _,
+                  disableAi: l
+                })
+              })]
+            })
+          })
+        })
+      })]
+    })
+  });
+}
+export function $$e10({
+  typedPropDefs: e,
+  guids: t,
+  assignmentValues: r,
+  forBubbledProps: o,
+  sceneGraph: l,
+  inPlayground: d,
+  containerWidth: c,
+  viewOnly: u,
+  hideIcon: p,
+  instanceSwapPickerInitialHeight: _,
+  instanceSwapPickerInitialPosition: h,
+  recordingKey: m,
+  entrypointForInstanceSwapPicker: g,
+  instanceSwapPickerIdPrefix: f,
+  submitBehaviorAssignment: E,
+  clearBehaviorVariableBinding: y,
+  getInstanceSwapPickerPosition: b,
+  hideBindingButton: T,
+  minHack: I,
+  onChange: S,
+  behaviorAssignmentInfo: v,
+  pickerWidth: A
+}) {
+  let x = useMemo(() => e.filter(e => e.type !== J0O.SLOT), [e]);
+  return jsx(_$$q, {
+    listItems: x,
+    updateSelection: void 0,
+    isDragDisabled: !0,
+    renderListItem: (e, i) => jsx(eU, {
+      behaviorAssignmentInfo: v,
+      clearBehaviorVariableBinding: y,
+      containerWidth: c,
+      entrypointForInstanceSwapPicker: g,
+      forBubbledProps: o,
+      getInstanceSwapPickerPosition: b,
+      guids: t,
+      hideBindingButton: T,
+      hideIcon: p,
+      inPlayground: d,
+      index: i,
+      instanceSwapPickerIdPrefix: f,
+      instanceSwapPickerInitialHeight: _,
+      instanceSwapPickerInitialPosition: h,
+      minHack: I,
+      onChange: S,
+      parameterConfig: e.parameterConfig,
+      pickerWidth: A,
+      sceneGraph: l,
+      submitBehaviorAssignment: E,
+      typedPropDef: e,
+      value: r[e.explicitDefID],
+      viewOnly: u
+    }, i),
+    recordingKey: m
+  });
+}
+export const c = $$e10; 

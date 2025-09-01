@@ -1,0 +1,2 @@
+export var $$n0 = (e => (e.EMBED_WIDGET = "EMBED_WIDGET", e.LINK_PREVIEW_WIDGET = "LINK_PREVIEW_WIDGET", e.AI_SUMMARY_WIDGET = "AI_SUMMARY_WIDGET", e.HTML_WIDGET = "HTML_WIDGET", e))($$n0 || {});
+export const k = $$n0;

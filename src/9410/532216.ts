@@ -1,0 +1,929 @@
+import { jsx, Fragment, jsxs } from "react/jsx-runtime";
+import { useState, useEffect, memo, useMemo, useCallback, Fragment as _$$Fragment } from "react";
+import { wA, d4 } from "../vendor/514228";
+import { YJ, hE, Ov, rm, g8, MJ, r1, mc, b as _$$b, bL } from "../figma_app/860955";
+import { K as _$$K } from "../905/443068";
+import { O as _$$O } from "../905/969533";
+import { getFeatureFlags } from "../905/601108";
+import c from "classnames";
+import { sx } from "../905/449184";
+import { Pt } from "../figma_app/806412";
+import { WN } from "../figma_app/638601";
+import { tx, t as _$$t } from "../905/303541";
+import { k as _$$k2 } from "../figma_app/564183";
+import { MP } from "../figma_app/469876";
+import { Um } from "../905/848862";
+import { c as _$$c } from "../figma_app/740884";
+import { eg as _$$eg, O0 } from "../figma_app/452252";
+import { i as _$$i } from "../figma_app/825649";
+import { fp, md } from "../figma_app/27355";
+import { Ui, FR } from "../figma_app/564528";
+import { s as _$$s } from "../cssbuilder/589278";
+import { OA } from "../figma_app/419216";
+import { lQ } from "../905/934246";
+import { o as _$$o } from "../905/821217";
+import { RYP, ywP, glU, Ez5 } from "../figma_app/763686";
+import { oA } from "../905/663269";
+import { Rs } from "../figma_app/288654";
+import { R as _$$R } from "../905/304671";
+import { to as _$$to } from "../figma_app/828186";
+import { Dl } from "../figma_app/601682";
+import { xo } from "../figma_app/473493";
+import { ju } from "../figma_app/88239";
+import { n6 } from "../905/234821";
+import { fu } from "../figma_app/831799";
+import { JT } from "../figma_app/173838";
+import { Em, m0 } from "../figma_app/976749";
+import { h as _$$h } from "../905/864281";
+import { kD, J3, JU, kN } from "../figma_app/622574";
+import { Cu } from "../figma_app/314264";
+import { up, SA, Kz } from "../905/760074";
+import { m as _$$m, t as _$$t2 } from "../905/364535";
+import { $n } from "../905/930279";
+import { ck } from "../905/87821";
+import { SR } from "../figma_app/852050";
+import { BI, m0 as _$$m2 } from "../figma_app/546509";
+import { q5, vu } from "../figma_app/516028";
+import { iZ } from "../905/372672";
+import { dTR, iY3 } from "../figma_app/43951";
+import { getPermissionsStateMemoized, isOrgUserExternallyRestrictedFromState } from "../figma_app/642025";
+import { p9, fA, F9 } from "../figma_app/803787";
+import { jB, Cp, Px, zS } from "../figma_app/722141";
+import { b as _$$b2 } from "../905/165519";
+import { nT } from "../figma_app/53721";
+import { o1 } from "../figma_app/10554";
+import { Yh, c1 } from "../figma_app/357047";
+import { e0 as _$$e } from "../905/696396";
+import { AM, pT } from "../905/467351";
+import { Z5, R5 } from "../figma_app/861982";
+import { Ah } from "../figma_app/221114";
+import { k$, gN, id, _o, Dz, TV } from "../figma_app/847915";
+import { A as _$$A } from "../905/482208";
+import { UN } from "../905/525678";
+import { Pu, Qq, MJ as _$$MJ, Oo } from "../figma_app/4616";
+import { jT } from "../figma_app/277330";
+import { tz } from "../figma_app/531331";
+import { DF, RG } from "../figma_app/146384";
+import { F as _$$F } from "../figma_app/928238";
+import { Oc } from "../figma_app/552876";
+import { cJ } from "../905/561485";
+import { e as _$$e2 } from "../figma_app/831857";
+import { sO } from "../figma_app/21029";
+import { fx, PF } from "../figma_app/657972";
+import { z6 } from "../905/963340";
+import { R6 } from "../figma_app/504823";
+import { jK, hP } from "../figma_app/829197";
+import { cq } from "../vendor/516565";
+import { RR } from "../figma_app/307841";
+import { l as _$$l } from "../905/714607";
+import { I as _$$I } from "../905/531560";
+import { qP, Fb } from "../figma_app/909778";
+import { $m } from "../figma_app/78808";
+import { Rh } from "../905/844322";
+import { kj, U1 } from "../905/191601";
+import { vg } from "../figma_app/91703";
+import { to as _$$to2 } from "../905/156213";
+import { VK } from "../905/880488";
+import { _R } from "../figma_app/765689";
+import { F as _$$F2 } from "../905/300562";
+import { T0, gV, t$ } from "../figma_app/863319";
+import { cU } from "../figma_app/528509";
+import { FC } from "../figma_app/212807";
+import { fileEntityDataMapper } from "../905/943101";
+import { FFileType, FPlanNameType } from "../figma_app/191312";
+import { Eg, _b } from "../figma_app/841351";
+import { Ay } from "../figma_app/86921";
+import { Q as _$$Q } from "../figma_app/113686";
+import { e as _$$e3 } from "../905/225961";
+import { e as _$$e4 } from "../905/157975";
+import { dD } from "../905/519113";
+import { RR as _$$RR } from "../905/514666";
+import { $3 } from "../905/946937";
+import { h as _$$h2 } from "../905/270045";
+import { pH, GI } from "../figma_app/147337";
+var u = c;
+function S(e) {
+  let {
+    targetKey
+  } = e;
+  let [i, a] = useState(!1);
+  let [s, o] = fp(Ui);
+  let l = MP() && null !== s && !i;
+  useEffect(() => (window.addEventListener("message", FR), () => {
+    window.removeEventListener("message", FR);
+  }), []);
+  let d = s ? tx("fullscreen.filename_view.zoom-integration-popup-header-with-name", {
+    hostName: s
+  }) : _$$t("fullscreen.filename_view.zoom-integration-popup-header");
+  return jsx(Fragment, {
+    children: l && jsx(OA, {
+      targetKey,
+      isUI3: e.isUI3,
+      dismissModal: () => {
+        a(!0);
+        o(null);
+      },
+      width: 268,
+      background: "dark",
+      title: jsx("div", {
+        className: _$$s.alignLeft.$,
+        children: d
+      }),
+      children: jsx("p", {
+        className: _$$s.textBodyMedium.alignLeft.$,
+        children: _$$t("fullscreen.filename_view.zoom-integration-popup-body")
+      })
+    })
+  });
+}
+function em(e, t) {
+  e = e.filter(e => e && UN(e, {
+    isDesktopMenu: !1,
+    isReadOnly: t.appModel.isReadOnly,
+    isSearching: !!t.isSearching,
+    selectedView: t.selectedView,
+    isLimitedDevMode: t.isLimitedDevMode
+  }));
+  let i = [];
+  let n = {
+    header: "",
+    items: []
+  };
+  for (let t of (i.push(n), e)) k$(t) ? (n = {
+    header: "",
+    items: []
+  }, i.push(n)) : gN(t) ? n.header = t.name : n.items.push(t);
+  return 1 === i.length || i.every(e => !e.header) ? e.map(e => ef(e, t)) : i.map(e => jsx(YJ, {
+    title: jsx(hE, {
+      children: e.header
+    }),
+    children: e.items.map(e => ef(e, t))
+  }, e.header));
+}
+function ef(e, t) {
+  if (!e || k$(e) || gN(e) || id(e)) return null;
+  let i = _o(e) && e.disabled || !e.name && !(_o(e) && Yh(t.appModel, e.action));
+  if (!(_o(e) && e.disabledAndForceVisible) && i && t.removeDisabledItems) return null;
+  let n = Dz(e);
+  return _o(e) ? jsxs(Pu, {
+    onClick: () => e.callback?.(e.action, {}, t.dispatch),
+    recordingKey: e.recordingKey || e.action || e.name,
+    children: [(TV(e) || _o(e)) && e.displayText || _$$A(n, e.args), e.rightIcon && jsx(Ov, {
+      children: e.rightIcon
+    }), e.rightText && jsx(Ov, {
+      children: e.rightText
+    }), e.shortcutText && jsx(rm, {
+      children: e.shortcutText
+    })]
+  }, e.name) : TV(e) && e.children ? jsxs(g8, {
+    children: [jsx(Qq, {
+      recordingKey: e.childDropdown && e.childDropdown.recordingKey || e.name,
+      children: e.displayText
+    }), jsx(MJ, {
+      children: em(e.children, t)
+    })]
+  }, e.name) : null;
+}
+let eI = memo(function () {
+  let e = R6();
+  let {
+    colorProfilePreference
+  } = jK();
+  let i = hP(colorProfilePreference) === RYP.DISPLAY_P3 ? "p3" : "srgb";
+  let n = [{
+    value: ywP.SRGB,
+    label: _$$t("fullscreen.filename_view.color_management.color_profile_srgb")
+  }, {
+    value: ywP.DISPLAY_P3,
+    label: _$$t("fullscreen.filename_view.color_management.color_profile_display_p3")
+  }].sort((t, i) => t.value === e && i.value !== e ? -1 : t.value !== e && i.value === e ? 1 : 0);
+  return jsx(YJ, {
+    children: jsxs(g8, {
+      children: [jsx(Qq, {
+        children: _$$t("fullscreen.filename_view.color_management.file_color_profile")
+      }), jsx(MJ, {
+        children: jsxs(z6, {
+          title: jsx(r1, {
+            children: _$$t("fullscreen.filename_view.color_management.file_color_profile")
+          }),
+          value: ywP[e],
+          onChange: e => {
+            e === ywP[ywP.SRGB] ? glU && glU.triggerAction("change-document-color-profile-to-srgb", {}) : e === ywP[ywP.DISPLAY_P3] && glU && glU.triggerAction("change-document-color-profile-to-display-p3", {});
+          },
+          children: [e === ywP.LEGACY && jsx(_$$MJ, {
+            value: ywP[ywP.LEGACY],
+            children: _$$t("fullscreen.filename_view.color_management.menu_item_title.legacy_file", {
+              colorProfile: _$$t(`fullscreen.properties_panel.export_settings_color_profile.${i}`)
+            })
+          }), n.map(e => jsx(_$$MJ, {
+            value: ywP[e.value],
+            children: _$$t("fullscreen.filename_view.color_management.menu_item_title.legacy.assign", {
+              color_profile: e.label
+            })
+          }, e.value))]
+        })
+      })]
+    })
+  });
+});
+var e1 = (e => (e.DISABLED = "disabled", e.PUBLISH = "publish", e.SHOW_UPSELL_MODAL = "show_upsell_modal", e))(e1 || {});
+function e2() {
+  let e = wA();
+  return () => {
+    e(_$$to2({
+      type: dD,
+      data: {
+        entrypoint: _$$RR.FILENAME_VIEW_DROPDOWN
+      }
+    }));
+  };
+}
+function e3() {
+  let e = q5();
+  let t = Rs(dTR({
+    fileKey: e?.key || ""
+  }), {
+    enabled: !!e?.key
+  });
+  return useMemo(() => {
+    if (!e) return {};
+    let i = !1;
+    let r = !1;
+    let n = !1;
+    let a = null;
+    "loaded" === t.status && (i = !!t.data?.file?.canTrash && !!oA(t.data?.file?.canTrash), n = !!oA(t.data?.file?.canMove), r = !!(t.data.file && _R(t.data.file.editorType ?? FFileType.DESIGN, t.data.file.currentPlanUser)), a = oA(t.data?.file?.canMoveWithReasons) || null);
+    return {
+      userCanTrashFile: i,
+      userIsVRForSeat: r,
+      userCanMove: n,
+      userCanMoveWithReasons: a
+    };
+  }, [t, e]);
+}
+let e6 = memo(function () {
+  let e = d4(e => e.currentUserOrgId);
+  let t = d4(e => e.currentTeamId);
+  let i = _$$Q({
+    currentOrgId: e,
+    currentTeamId: t
+  });
+  let o = !!iZ();
+  let l = function () {
+    let e = d4(vu);
+    let t = d4(e => e.currentUserOrgId);
+    let i = d4(e => e.currentTeamId);
+    let r = _$$Q({
+      currentOrgId: t,
+      currentTeamId: i
+    });
+    return useMemo(() => {
+      if (e && "loaded" === r.status) return T0(r.data, e.key);
+    }, [e, r]);
+  }();
+  let d = !!l;
+  let c = iZ();
+  let u = q5();
+  let p = te();
+  let h = "loaded" === i.status && gV(i.data, e);
+  let m = i.data?.currentUser?.userSidebarSections != null ? oA(i.data.currentUser.userSidebarSections) : null;
+  let f = i.data?.currentUser?.baseOrgUser?.fileBrowserPreferences?.orderedSidebarSections ?? [];
+  let g = t$(m ?? [], f);
+  let _ = g.find(e => e.id === l?.resource.sidebarSectionId);
+  let x = u?.folderId === c?.personal_drafts_folder_id;
+  let y = pH(u?.key ?? null, {
+    enabled: !!u
+  });
+  if (e9 || !o) return null;
+  let b = !x && !!p && !(h && !d);
+  let C = "loaded" === y.status && y.data && u;
+  return b || C ? jsxs(YJ, {
+    children: [b && jsx(e7, {
+      isFavorited: d,
+      favoriteSection: _,
+      sections: g
+    }), C && jsx(e8, {})]
+  }) : null;
+});
+let e7 = memo(function ({
+  isFavorited: e,
+  favoriteSection: t,
+  sections: i
+}) {
+  let o = function () {
+    let e = wA();
+    let t = d4(vu);
+    let i = d4(e => e.currentUserOrgId);
+    let r = d4(e => e.currentTeamId);
+    let s = _$$Q({
+      currentOrgId: i,
+      currentTeamId: r
+    });
+    let o = useMemo(() => {
+      if (t && "loaded" === s.status) return T0(s.data, t.key);
+    }, [t, s]);
+    return (i, r) => {
+      if (!t) return;
+      let n = {
+        entrypoint: "editor",
+        favoriteId: o?.resource.id,
+        sectionId: r,
+        file: fileEntityDataMapper.toLiveGraph(t),
+        fileBrowserEntryPoint: !1
+      };
+      i ? e(qP(n)) : e(Fb(n));
+    };
+  }();
+  let l = _$$t("favorited_resources.add_to_sidebar");
+  e && (l = `${_$$t("favorited_resources.indicate_section_prefix")}: ${t?.name || _$$t("sidebar.starred")}`);
+  return jsxs(Fragment, {
+    children: [jsxs(g8, {
+      children: [jsx(Qq, {
+        children: l
+      }), jsx(MJ, {
+        children: jsxs(z6, {
+          title: jsx(_$$h2, {
+            children: l
+          }),
+          value: t?.id || (e ? _$$t("sidebar.starred") : void 0),
+          recordingKey: "favorite-custom",
+          onChange: e => {
+            e === _$$t("sidebar.starred") ? o(!1) : o(!!t && t.id === e, e);
+          },
+          children: [0 === i.length && jsx(_$$MJ, {
+            value: _$$t("sidebar.starred"),
+            children: _$$t("sidebar.starred")
+          }, _$$t("sidebar.starred")), i.map(e => jsx(_$$MJ, {
+            value: e.id,
+            children: e.name || _$$t("sidebar.starred")
+          }, e.id))]
+        })
+      })]
+    }), e && jsx(Pu, {
+      recordingKey: "favorite-custom-remove",
+      onClick: () => o(!0, t?.id),
+      children: _$$t("favorited_resources.remove_from_sidebar")
+    })]
+  });
+});
+let e8 = memo(function () {
+  let e = q5();
+  let t = function () {
+    let e = wA();
+    return t => {
+      e(_$$to2({
+        type: _$$l(),
+        data: {
+          pinnedFileId: t
+        }
+      }));
+    };
+  }();
+  let i = function () {
+    let e = wA();
+    return t => {
+      e(_$$to2({
+        type: _$$I(),
+        data: {
+          pinnedFileId: t
+        }
+      }));
+    };
+  }();
+  let n = pH(e?.key ?? null, {
+    enabled: !!e
+  });
+  let s = GI("filename-context-menu");
+  if ("loaded" !== n.status || !n.data || !e) return null;
+  let {
+    canPinFileToWorkspace,
+    canEditPin,
+    existingFilePinId,
+    workspaceHasMaxPins
+  } = n.data;
+  return canPinFileToWorkspace ? jsx(Pu, {
+    recordingKey: "pin-to-workspace",
+    onClick: () => s(e.key, workspaceHasMaxPins),
+    children: _$$t("tile.dropdown.pin_to_workspace")
+  }) : canEditPin ? jsxs(Fragment, {
+    children: [jsx(Pu, {
+      onClick: () => t(existingFilePinId),
+      children: _$$t("tile.dropdown.edit_workspace_pin")
+    }), jsx(Pu, {
+      onClick: () => i(existingFilePinId),
+      children: _$$t("tile.dropdown.remove_workspace_pin")
+    })]
+  }) : null;
+});
+let e9 = ck();
+let te = () => {
+  let e = q5();
+  let t = d4(e => e.plans);
+  return useMemo(() => !!t.find(t => e?.plan?.tier === FPlanNameType.ORG || e?.plan?.tier === FPlanNameType.ENTERPRISE ? `organization::${t.plan_id}` === e?.plan?.id : `team::${t.plan_id}` === e?.plan?.id), [t, e?.plan?.tier, e?.plan?.id]);
+};
+let tt = ck();
+let ti = memo(function ({
+  recordingKey: e = ""
+}) {
+  let t = d4(e => e.mirror.appModel);
+  let i = d4(e => e.selectedView);
+  let o = d4(e => getPermissionsStateMemoized(e));
+  let l = d4(e => e.userStateLoaded);
+  let c = q5();
+  let u = d4(e => e.fileVersion);
+  let m = d4(e => e.repos);
+  let g = !!iZ();
+  let _ = wA();
+  SR();
+  let {
+    archiveBranch,
+    deleteBranch,
+    deleteFile,
+    restoreBranch,
+    openFileAnalytics,
+    projectUrl,
+    publish,
+    toggleVersionHistory,
+    resetFileThumbnail,
+    rename,
+    closeSelectMenu
+  } = {
+    deleteBranch: function () {
+      let e = q5();
+      let t = wA();
+      return () => {
+        e && t(_$$to2({
+          type: _$$e3,
+          data: {
+            fileName: e.name,
+            onConfirm: () => t(kj({
+              fileKeys: {
+                [e.key]: !0
+              },
+              userInitiated: !0
+            }))
+          }
+        }));
+      };
+    }(),
+    rename: function () {
+      let e = wA();
+      return useCallback(() => {
+        e(vg());
+      }, [e]);
+    }(),
+    deleteFile: function () {
+      let e = q5();
+      let t = e?.canDelete;
+      let i = d4(vu);
+      let r = JT();
+      let n = r && r.profile.entityType === o1.TEAM;
+      let s = wA();
+      let o = d4(e => e.repos);
+      return () => {
+        if (!e || !i) return;
+        let r = up(e, o);
+        let a = !!Ay && t && !n;
+        r && SA(e, r) ? e.repo?.canEdit && !r.trashed_at && s(U1({
+          filesByKey: {},
+          reposById: {
+            [r.id]: {
+              repo: r,
+              main_file: i
+            }
+          }
+        })) : a && s(U1({
+          filesByKey: {
+            [e.key]: i
+          }
+        }));
+      };
+    }(),
+    archiveBranch: function () {
+      let e = d4(vu);
+      let t = wA();
+      return () => {
+        e && (t(VK({
+          fileKeys: {
+            [e.key]: e
+          },
+          userInitiated: !0
+        })), sx("Branch Archived", {
+          fileKey: e.key,
+          fileRepoId: e.file_repo_id
+        }));
+      };
+    }(),
+    restoreBranch: function () {
+      let e = d4(vu);
+      let t = wA();
+      return () => {
+        e && t(Rh({
+          fileKeys: {
+            [e.key]: e
+          },
+          userInitiated: !0
+        }));
+      };
+    }(),
+    openFileAnalytics: function () {
+      let e = q5();
+      let t = wA();
+      return useCallback(() => {
+        e && t(_$$to2({
+          type: _$$e4,
+          data: {
+            fileKey: e.key,
+            entrypoint: _$$F2.FileView
+          }
+        }));
+      }, [e, t]);
+    }(),
+    projectUrl: function () {
+      let e = q5();
+      let t = FC();
+      let i = d4(e => e.isOpenFileLoadedFromLiveGraph);
+      return useMemo(() => {
+        if (!e) return;
+        let r = e.project;
+        return r && r.path && "" !== r.path ? cU(r.id, r.orgId ?? null, r.teamId, t, !!r?.team?.canView, "filename_view_dropdown_helpers.useProjectUrl", i) : null;
+      }, [e, t, i]);
+    }(),
+    publish: function () {
+      let e = md(p9);
+      let t = d4(fA);
+      let i = q5();
+      let r = e2();
+      let s = function () {
+        let e = q5();
+        let t = d4(e => e.teams);
+        let i = wA();
+        return () => {
+          if (!e) return;
+          let r = e.teamId && t[e.teamId];
+          i(_$$to2({
+            type: $3,
+            data: {
+              afterFileMove: e2,
+              team: r || null
+            }
+          }));
+        };
+      }();
+      let o = useMemo(() => i && e ? t ? "publish" : "show_upsell_modal" : "disabled", [t, e, i]);
+      return "disabled" === o ? null : () => {
+        i && "show_upsell_modal" === o ? s() : "publish" === o && r();
+      };
+    }(),
+    toggleVersionHistory: function () {
+      let e = wA();
+      let t = d4(e => e.mirror.appModel.activeCanvasEditModeType);
+      return () => {
+        Ah(t) ? e(Eg()) : e(_b({
+          source: _$$e.EDITOR_TOOLBAR
+        }));
+      };
+    }(),
+    resetFileThumbnail: function () {
+      let e = wA();
+      let t = q5();
+      return () => {
+        t && e($m({
+          file_key: t.key,
+          thumbnail_guid: null
+        }));
+      };
+    }(),
+    closeSelectMenu: function () {
+      let e = cq();
+      return () => {
+        e && e.events.emit("click");
+      };
+    }()
+  };
+  let ep = sO();
+  let ef = cJ();
+  let ew = Oc();
+  let eS = !!(getFeatureFlags().ds_pubplat_sts || getFeatureFlags().ds_pubplat_sts_code);
+  let ej = _$$to();
+  let eA = Em();
+  let eO = m0();
+  let eL = BI();
+  let eU = _$$m2();
+  let eK = o.user;
+  let eV = Dl(c);
+  let eW = ju("filename_menu");
+  let eq = d4(F9);
+  let eQ = jT(c, eq).unwrapOr(!1);
+  let e$ = Rs(iY3, {
+    branchFileKey: c?.key || ""
+  }, {
+    enabled: !!c
+  });
+  let e1 = DF(c, eK);
+  let e5 = _$$e2();
+  let {
+    userCanTrashFile,
+    userCanMove
+  } = e3();
+  let e8 = JT();
+  let e9 = e8 && e8.profile.entityType === o1.TEAM;
+  let te = !!eK && userCanTrashFile && !e9;
+  let ti = jB({
+    files: [{
+      editor_type: c?.editorType ?? null,
+      folder_id: c?.project?.id ?? null
+    }],
+    repos: [],
+    destinationFolderId: c?.project?.id ?? null,
+    isDestinationDrafts: !1
+  });
+  let tr = Cp(ti.destinationPlan ? {
+    type: ti.destinationPlan.key.type,
+    parentId: ti.destinationPlan.key.parentId
+  } : null, ti.licenseType);
+  let tn = function (e, t) {
+    let {
+      userIsVRForSeat,
+      userCanMove: _userCanMove,
+      userCanMoveWithReasons
+    } = e3();
+    let s = q5();
+    let o = RR();
+    let l = Rs(dTR({
+      fileKey: s?.key || ""
+    }), {
+      enabled: !!s?.key
+    });
+    return useMemo(() => ({
+      canMove: !!_userCanMove,
+      isUserViewerRestricted: !!userIsVRForSeat,
+      planUser: l.data?.file?.currentPlanUser ?? null,
+      inDrafts: !!l.data?.file?.isDraftFile,
+      isBillingRemodelEnabled: o,
+      draftsMoveData: e,
+      hasConnectedPlanUserInOrg: t,
+      canMoveWithReasons: userCanMoveWithReasons || void 0
+    }), [_userCanMove, userIsVRForSeat, l.data?.file?.currentPlanUser, l.data?.file?.isDraftFile, o, e, t, userCanMoveWithReasons]);
+  }(ti, !!tr);
+  let ta = xo();
+  let ts = _$$R();
+  let to = !1;
+  c && i.editorType && (to = i.editorType === nT.Slides && oA(c.org?.isSlidesDisabled) || i.editorType === nT.Sites && !!c.org?.isSitesDisabled || i.editorType === nT.Cooper && !!c.org?.isCooperDisabled);
+  let tl = ew && ti.requiresUpgrade && !e5;
+  let td = !!ts && Px(ti, to);
+  let tc = ta || td || tl;
+  let tu = $n();
+  let tp = d4(e => e.mirror.appModel.topLevelMode);
+  let th = _$$F();
+  let tm = n6();
+  let tf = kD();
+  let tg = J3();
+  let t_ = JU(tg);
+  let tx = tg === kN.FILE_IN_DRAFTS;
+  let ty = _$$h.useTrackingContext({
+    trigger: _$$b2.FILE_DUPLICATE
+  });
+  useEffect(() => {
+    eU && (eU._move_to_project = () => {
+      userCanMove && !tc && RG(_, c, m, tn)();
+    });
+    eL?.updateFilePermissionV2?.(e1, !!userCanMove && !tc, !!te);
+  }, [e1, userCanMove, te, tc, _, eL, eU, c, m, tn]);
+  let tb = tz();
+  let tC = g && !tt && (eA || eO || ef && eS);
+  let tv = eq && eV;
+  let tE = jsx(Pu, {
+    disabled: !publish,
+    recordingKey: Pt(e, "publishVersion"),
+    onClick: publish ? () => {
+      closeSelectMenu();
+      publish();
+    } : lQ,
+    children: _$$t("fullscreen.filename_view.publish-styles-and-components")
+  });
+  let tT = eV && jsx(Pu, {
+    recordingKey: Pt(e, "codeConnect"),
+    onClick: eW,
+    children: _$$t("dev_handoff.component_browser.menu_item")
+  });
+  let tw = !!eQ && jsx(Pu, {
+    recordingKey: Pt(e, "viewFileAnalytics"),
+    onClick: openFileAnalytics,
+    children: _$$t("fullscreen.filename_view.file_analytics")
+  });
+  if (!c) return null;
+  let tS = Ez5 && Ez5.uiState().isRecovery.getCopy();
+  let tj = i.editorType;
+  let tI = !c.canExport;
+  let tk = tj === nT.Whiteboard && !!c.org?.figjamDisabledAt || tj === nT.Slides && oA(c.org?.isSlidesDisabled) || tj === nT.Sites && !!c.org?.isSitesDisabled || tj === nT.Cooper && !!c.org?.isCooperDisabled || isOrgUserExternallyRestrictedFromState(o) || tI;
+  let tN = tj !== nT.Whiteboard;
+  let tA = !!(tN && Kz(c));
+  let tO = "loaded" === e$.status && (null === e$.data.file || e$.data.file && AM(e$.data.file) === pT.MERGED);
+  let tL = tA && ("loaded" !== e$.status || tO);
+  let tR = eK && c.canManage;
+  let tD = !!(tA && c.trashedAt);
+  let tM = tD && !tL;
+  let tP = c.folderId === eK?.personal_drafts_folder_id;
+  let tF = c.canEdit && !!c.thumbnailGuid;
+  let tB = !tt && i.editorType === nT.Design && c.canEdit;
+  let tU = em(_$$m(tu, _$$e.EDITOR_TOOLBAR, tp, tm), {
+    appModel: t,
+    selectedView: i,
+    dispatch: _
+  });
+  let tG = em(_$$t2(tu, _$$e.EDITOR_TOOLBAR, tp), {
+    appModel: t,
+    selectedView: i,
+    dispatch: _
+  });
+  return jsx(fu, {
+    name: _$$e.EDITOR_FILENAME_DROPDOWN,
+    properties: {
+      ...ty,
+      slideConversionDropdownEntrypoint: th
+    },
+    children: jsx(mc, {
+      children: jsxs(_$$o, {
+        eventListeners: ["onPointerEnter", "onPointerLeave", "onMouseEnter", "onMouseLeave"],
+        children: [tU.map((e, t) => jsx(_$$Fragment, {
+          children: e
+        }, `merging-${t}`)), tA && tG.map((e, t) => jsx(_$$Fragment, {
+          children: e
+        }, `branching-${t}`)), g && !tt && !tS && !ew && jsx(Pu, {
+          disabled: !Yh(t, "enter-history-mode"),
+          recordingKey: Pt(e, "toggleVersionHistory"),
+          onClick: toggleVersionHistory,
+          children: Ah(t.activeCanvasEditModeType) ? _$$t("fullscreen.filename_view.version-history-hide") : _$$t("fullscreen.filename_view.version-history-show")
+        }), jsxs(YJ, {
+          children: [!!tf && Z5({
+            dispatch: _,
+            fileKey: tf?.fileKey || "",
+            templateName: tf?.name || ""
+          }), t_ && !ew && R5({
+            dispatch: _,
+            file: {
+              key: c.key,
+              name: c.name,
+              folder_id: c.folderId,
+              team_id: c.teamId,
+              editor_type: c.editorType,
+              parent_org_id: c.parentOrgId
+            },
+            isPublished: !!tf,
+            fileNeedsMovingBeforePublish: tx,
+            source: "filename-context-menu"
+          }), tC && jsx(Fragment, {
+            children: tv ? jsxs(g8, {
+              children: [jsx(Qq, {
+                children: _$$t("fullscreen.filename_view.library_actions")
+              }), jsxs(MJ, {
+                children: [tE, tT, tw]
+              })]
+            }) : jsxs(Fragment, {
+              children: [tE, tw]
+            })
+          }), tN && !ep && !ej && !ef && !tS && !ew && jsxs(Pu, {
+            disabled: !eK,
+            recordingKey: Pt(e, "exportSelectedExportables"),
+            onClick: () => {
+              glU && glU.triggerAction("export-selected-exportables", {
+                source: "toolbar"
+              });
+            },
+            children: [_$$t("fullscreen.filename_view.export"), jsx(Ov, {
+              children: jsx(rm, {
+                children: c1(t.keyboardShortcuts, "export-selected-exportables")
+              })
+            })]
+          }), th && c.canEdit && jsx(Pu, {
+            onClick: () => {
+              Cu({
+                name: "slides_file_dropdown_entrypoint"
+              });
+              fx(c, u).then(e => {
+                PF(_, e);
+              });
+            },
+            recordingKey: Pt(e, "copyToFigmaSlides"),
+            disabled: !eK,
+            children: _$$t("slides.general.copy_current_page_to_figma_slides")
+          })]
+        }), jsx(e6, {}), !tA && tG.length > 0 && jsx(YJ, {
+          children: tG.map((e, t) => jsx(_$$Fragment, {
+            children: e
+          }, `branching-group-${t}`))
+        }), tB && jsx(eI, {}), jsxs(YJ, {
+          children: [g && !tt && !tP && (!getFeatureFlags().filter_pro_plus_sites_make_web || tb.canDuplicate) && jsx(Pu, {
+            disabled: !l || tk,
+            recordingKey: Pt(e, "duplicate"),
+            onClick: tb.duplicateFile,
+            children: tb.duplicateDisplayText
+          }), g && !tD && jsx(Pu, {
+            disabled: !e1,
+            recordingKey: Pt(e, "rename"),
+            onClick: () => {
+              closeSelectMenu();
+              rename();
+            },
+            children: tA ? _$$t("fullscreen.filename_view.rename-branch") : _$$t("fullscreen.filename_view.rename")
+          }), g && !tt && tM && jsx(Pu, {
+            disabled: !tR,
+            recordingKey: Pt(e, "restore"),
+            onClick: restoreBranch,
+            children: _$$t("fullscreen.filename_view.restore")
+          }), g && !tt && projectUrl && "" !== projectUrl && jsx(Oo, {
+            recordingKey: "goToProject",
+            href: projectUrl,
+            newTab: !0,
+            children: _$$t("fullscreen.filename_view.go_to_project")
+          }), g && !tt && !tA && jsxs(Pu, {
+            disabled: tc,
+            "data-onboarding-key": "FILENAME_VIEW_MOVE_TO_PROJECT",
+            recordingKey: Pt(e, "moveToProject"),
+            onClick: RG(_, c, m, tn),
+            children: [_$$t("fullscreen.filename_view.move_file"), ts && jsx(Ov, {
+              children: zS(ti, tc, tr)
+            })]
+          }), g && !tt && !tD && !tP && userCanTrashFile && jsx(Pu, {
+            disabled: !te,
+            recordingKey: Pt(e, "delete"),
+            onClick: tA ? archiveBranch : deleteFile,
+            children: tA ? _$$t("fullscreen.filename_view.archive-branch") : _$$t("fullscreen.filename_view.move_to_trash")
+          }), g && !tt && tD && jsx(Pu, {
+            disabled: !tR,
+            onClick: deleteBranch,
+            children: tA ? _$$t("fullscreen.filename_view.archive-branch") : _$$t("fullscreen.filename_view.move_to_trash")
+          })]
+        }), !!tF && jsx(YJ, {
+          children: jsx(Pu, {
+            recordingKey: Pt(e, "resetFileThumbnail"),
+            onClick: resetFileThumbnail,
+            children: getFeatureFlags().dse_library_pg_thumbnails ? _$$t("fullscreen.filename_view.restore_default_file_thumbnail") : _$$t("fullscreen.filename_view.restore_default_thumbnail")
+          })
+        })]
+      })
+    })
+  });
+});
+export function $$tr0(e) {
+  let t = wA();
+  let i = Um();
+  let c = i?.type === _$$eg;
+  let v = d4(e => e.isRenaming);
+  let E = _$$k2();
+  let T = WN();
+  let w = useCallback(() => !E || (T("LEFT_PANEL_FILE_NAME_CHEVRON"), !1), [E, T]);
+  let {
+    getTriggerProps,
+    manager
+  } = _$$b();
+  let k = getTriggerProps();
+  let N = getFeatureFlags().eu_filename_dropdown;
+  return useMemo(() => v ? null : jsx("div", {
+    children: jsxs("div", {
+      className: u()("file_menu--chevronContainer--rxTVi", {
+        "file_menu--selected--URB0u": c || e.isDropdownVisibleWithDelay,
+        "file_menu--enableSecondaryHover--h5duI": !(c || e.isDropdownVisibleWithDelay)
+      }),
+      onMouseEnter: () => {
+        e.setFileMenuIsHovered?.(!0);
+      },
+      onMouseLeave: () => {
+        e.setFileMenuIsHovered?.(!1);
+      },
+      children: [MP() && jsx(S, {
+        isUI3: !0,
+        targetKey: O0
+      }), N ? jsxs(bL, {
+        manager,
+        children: [jsx(_$$K, {
+          ...k,
+          recordingKey: Pt(e.recordingKey, "chevron"),
+          "aria-label": _$$t("fullscreen.filename_view.edit_file_menu"),
+          children: jsx(_$$O, {})
+        }), jsx(ti, {
+          recordingKey: e.recordingKey
+        })]
+      }) : jsxs(Fragment, {
+        children: [jsx(_$$c, {
+          ariaLabel: _$$t("fullscreen.filename_view.edit_file_menu"),
+          canOpenDropdown: w,
+          className: "file_menu--chevron--55jNJ",
+          dataOnboardingKey: O0,
+          dataTestId: "filename-menu-chevron",
+          dropdownKey: _$$eg,
+          recordingKey: e.recordingKey,
+          toggleOnClick: !0
+        }), jsx(_$$i, {
+          dropdownTargetRect: i?.data?.targetRect,
+          dispatch: t,
+          dropdownVisible: c,
+          recordingKey: e.recordingKey,
+          activatePathOnMount: i?.data?.activatePathOnMount,
+          trackEvent: sx
+        })]
+      })]
+    })
+  }), [w, t, i?.data?.activatePathOnMount, i?.data?.targetRect, c, v, manager, e, k, N]);
+}
+export const m = $$tr0;

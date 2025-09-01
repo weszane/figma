@@ -1,0 +1,95 @@
+import { Dk } from "../figma_app/623293";
+import { t as _$$t } from "../905/303541";
+import { F } from "../905/302958";
+import { to } from "../905/156213";
+import { Np } from "../figma_app/193867";
+import { o as _$$o } from "../905/721794";
+import { nF } from "../905/350402";
+let $$c3 = nF((e, t) => {
+  let r = t.stringToCopy;
+  let s = {
+    withLineBreaks: !(t.ignoreLineBreaks ?? !0),
+    successText: t.successText
+  };
+  Dk(r, s).then(() => {
+    e.dispatch(F.enqueue({
+      type: "copied_to_clipboard",
+      message: s.successText ?? _$$t("fullscreen_actions.copied_to_clipboard")
+    }));
+  });
+});
+let $$u0 = nF((e, t) => {
+  let r = t.emailList;
+  let s = r.length;
+  let o = r.join("; ");
+  Dk(o).then(() => {
+    e.dispatch(F.enqueue({
+      message: _$$t("copy_to_clipboard.emails_copied_to_clipboard", {
+        numEmails: s,
+        emailText: o
+      }),
+      type: "emails-copied"
+    }));
+  });
+});
+export function $$p2(e) {
+  return nF((e, t) => {
+    let r = t.selector.selectedViewToPath(t.selectedView, t.data);
+    if (!r) return;
+    let n = new URL(r, document.baseURI).href;
+    e.dispatch($$h1({
+      url: n
+    }));
+  })(e);
+}
+let $$_4 = nF((e, t) => {
+  let r = new URL(Np(e.getState(), t), document.baseURI).href;
+  let n = (() => {
+    if ("folder" === t.view) return "project";
+  })();
+  e.dispatch($$h1({
+    url: r,
+    linkType: n
+  }));
+});
+let $$h1 = nF(async (e, t) => {
+  let r;
+  let o = t.url;
+  switch (t.linkType ?? "selection") {
+    case "template":
+      r = _$$t("copy_to_clipboard.template_share_link_copied");
+      break;
+    case "project":
+    case "team":
+    case "link":
+      r = _$$t("copy_to_clipboard.link_copied_to_clipboard");
+      break;
+    case "plugin":
+      r = _$$t("copy_to_clipboard.link_to_plugin_copied_to_clipboard");
+      break;
+    case "widget":
+      r = _$$t("copy_to_clipboard.link_to_widget_copied_to_clipboard");
+      break;
+    default:
+      r = _$$t("copy_to_clipboard.link_to_selection_copied_to_clipboard");
+  }
+  try {
+    await Dk(o);
+    e.dispatch(F.enqueue({
+      type: "link_copied_to_clipboard",
+      message: r
+    }));
+  } catch {
+    e.dispatch(to({
+      type: _$$o,
+      data: {
+        link: o
+      }
+    }));
+  }
+});
+export const II = $$u0;
+export const S = $$h1;
+export const TH = $$p2;
+export const lW = $$c3;
+export const le = $$_4;

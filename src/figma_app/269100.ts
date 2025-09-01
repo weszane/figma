@@ -1,0 +1,14 @@
+let $$n6 = "figjam_plugin_detail_in_editor--metadataContainer--qQ5Hi";
+let $$i3 = "figjam_plugin_detail_in_editor--coverImageNotDraggable---pwfP";
+let $$a1 = "figjam_plugin_detail_in_editor--coverImageAspectRatio--1BG--";
+let $$s5 = "figjam_plugin_detail_in_editor--resourceUsageDetails--SGXXh";
+let $$o4 = "figjam_plugin_detail_in_editor--description--a03k0 text--fontPos13--xW8hS text--_fontBase--QdLsd";
+let $$l2 = "figjam_plugin_detail_in_editor--communityLinkBase--9ekc6";
+let $$d0 = "figjam_plugin_detail_in_editor--communityLinkIcon---FG3j text--fontPos11--2LvXf text--_fontBase--QdLsd";
+export const JX = $$d0;
+export const Mp = $$a1;
+export const P0 = $$l2;
+export const VM = $$i3;
+export const h_ = $$o4;
+export const oQ = $$s5;
+export const tJ = $$n6;

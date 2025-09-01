@@ -1,0 +1,72 @@
+import { jsx } from "react/jsx-runtime";
+import { useEffect } from "react";
+import { wA, d4 } from "../vendor/514228";
+import { ServiceCategories as _$$e } from "../905/165054";
+import { Wi } from "../figma_app/162641";
+import { s as _$$s } from "../cssbuilder/589278";
+import { RR } from "../figma_app/307841";
+import { g as _$$g } from "../figma_app/638694";
+import { pO } from "../figma_app/422062";
+import { r as _$$r } from "../905/398386";
+import { sf } from "../905/929976";
+import { _6 } from "../figma_app/386952";
+import { FMemberRoleType, FOrganizationLevelType } from "../figma_app/191312";
+import { getPermissionsStateMemoized } from "../figma_app/642025";
+import { S2, px, j_ } from "../figma_app/465071";
+import { vS } from "../figma_app/846003";
+import { J7 } from "../figma_app/650409";
+import { Iv } from "../905/548208";
+import { o0 } from "../905/844131";
+import { l as _$$l } from "../4452/447644";
+import { nF, lF } from "../4452/710166";
+if (443 == require.j) {}
+export function $$T0() {
+  let e = wA();
+  let t = S2();
+  let r = px();
+  let T = RR();
+  let E = _6();
+  let I = d4(e => getPermissionsStateMemoized(e));
+  let N = d4(e => e.teams);
+  let C = j_(r);
+  let S = "loaded" === C.status && pO({
+    isAdminOrg: C.data,
+    permissions: I,
+    teams: N,
+    view: E
+  });
+  let k = vS(E);
+  let R = "loaded" === t.status && "loaded" === r.status && r.data.permission !== FMemberRoleType.ADMIN;
+  return (useEffect(() => {
+    S ? e(sf({
+      view: "resourceUnavailable",
+      resourceType: k
+    })) : R && e(sf(o0));
+  }, [e, k, R, S]), "loaded" !== t.status || "loaded" !== r.status || R || S) ? jsx("div", {
+    className: _$$s.wFull.pl32.py24.bb1.colorBorder.bSolid.$,
+    children: jsx(Wi, {
+      className: _$$s.w200.h32.$,
+      dataTestId: "srpv-loading"
+    })
+  }) : (T || (t.data.key.type === FOrganizationLevelType.ORG ? e(sf({
+    view: "orgAdminSettings",
+    orgAdminSettingsViewTab: J7.DASHBOARD
+  })) : e(sf({
+    view: "teamAdminConsole",
+    teamId: t.data.key.parentId ?? "",
+    teamAdminConsoleViewTab: Iv.DASHBOARD
+  }))), jsx(_$$r, {
+    containerClass: nF,
+    scrollableContainerClass: lF,
+    content: jsx(_$$l, {
+      plan: t.data,
+      isOrgAdmin: t.data.type === FOrganizationLevelType.ORG
+    }),
+    toolbar: jsx(_$$g, {}),
+    errorBoundaryConfig: {
+      figmaTeam: _$$e.MONETIZATION_EXPANSION,
+      boundaryKeySuffix: "SeatRequestsPageView"
+    }
+  }));
+}
+export const m = $$T0;

@@ -1,0 +1,47 @@
+import { md, eU, fp } from "../figma_app/27355";
+import { debugState } from "../905/407919";
+import { Rs } from "../figma_app/288654";
+import { oA } from "../905/723791";
+import { qB } from "../905/862321";
+import { ze } from "../figma_app/516028";
+import { iZ } from "../905/372672";
+import { jmg } from "../figma_app/43951";
+import { D as _$$D } from "../905/347702";
+import { B } from "../figma_app/659940";
+let $$_0 = _$$D(() => {
+  let e = md(ze);
+  return Rs(jmg, {
+    fileKey: e || ""
+  }, {
+    enabled: !!e
+  });
+});
+let h = eU(!1);
+export function $$m1() {
+  let e = debugState.getState().selectedView;
+  let t = e?.view === "fullscreen" ? e.claim : null;
+  let r = B();
+  let a = iZ();
+  let l = $$_0();
+  let [c, u] = fp(h);
+  if ("loaded" !== l.status) return () => {};
+  if (oA(l.data?.deviceTryFile) && e && t && !a && !c) {
+    if ("signup" === t) return () => {
+      u(!0);
+      r({
+        origin: "google_hardware_claim_file",
+        formState: qB.SIGN_UP
+      });
+    };
+    if ("login" === t) return () => {
+      u(!0);
+      r({
+        origin: "google_hardware_claim_file",
+        formState: qB.SIGN_IN
+      });
+    };
+  }
+  return () => {};
+}
+export const s = $$_0;
+export const v = $$m1;

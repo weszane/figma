@@ -1,0 +1,12 @@
+let $$i1 = "([+-]?\\d*\\.?\\d+(?:[eE][+-]?\\d+)?)";
+let $$s3 = `${$$i1}%`;
+let $$o0 = `(?:${$$i1}%|${$$i1})`;
+let a = `(?:${$$i1}%|${$$i1}|none)`;
+let $$h4 = `(?:${$$i1}(deg|grad|rad|turn)|${$$i1})`;
+let $$d2 = "\\s*,\\s*";
+RegExp("^" + a + "$");
+export const ZL = $$o0;
+export const bu = $$i1;
+export const c = $$d2;
+export const gH = $$s3;
+export const lG = $$h4;

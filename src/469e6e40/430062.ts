@@ -1,0 +1,16 @@
+export var $$n4 = (e => (e.NAME_SELF = "Name Step", e.HOW_DO_YOU_PLAN_TO_USE_FIGMA = "How do you plan to use Figma Step", e.WHAT_DO_YOU_DO = "What Do You Do Step", e.WHAT_DO_YOU_DO_V2 = "What Do You Do Role Step", e.WHERE_OR_HOW_DO_YOU_WORK = "Where Or How Do You Work Step", e.WHAT_TYPE_OR_LEVEL_OF_SCHOOL = "What Type Or Level Of School Step", e.HOW_MANY_PEOPLE_WORK_IN_ORGANIZATION = "How Many People Work At Your Organization Step", e.INVITE_COLLABORATORS = "Invite Collaborators Step", e.WHAT_WILL_YOU_USE_FIGJAM_FOR = "What Will You Use FigJam For Step", e.HAVE_USED_WHITEBOARDS_BEFORE = "Have You Used Digital Whiteboarding Tools Before Step", e.HAVE_USED_FIGMA_PRODUCTS_BEFORE = "Have You Used Figma Products Before Step", e.CHOOSE_PLAN = "Choose Plan Step", e.CHOOSE_PRODUCT = "Choose Product Step", e.WHICH_SEAT_WOULD_YOU_LIKE = "Which Seat Would You Like Step", e))($$n4 || {});
+let $$s3 = ["Name Step", "How do you plan to use Figma Step", "What Do You Do Role Step", "Invite Collaborators Step", "Have You Used Figma Products Before Step", "Choose Plan Step", "Choose Product Step"];
+let $$i0 = ["Name Step", "How do you plan to use Figma Step", "What Do You Do Role Step", "Invite Collaborators Step", "Have You Used Digital Whiteboarding Tools Before Step", "Choose Plan Step"];
+let $$r6 = ["Name Step", "How do you plan to use Figma Step", "What Do You Do Role Step"];
+let $$l5 = $$s3.filter(e => "Choose Product Step" !== e);
+let $$o7 = $$s3.filter(e => "Choose Plan Step" !== e);
+let $$d1 = ["Name Step", "What Do You Do Role Step", "Have You Used Figma Products Before Step"];
+let $$c2 = ["What Do You Do Step"];
+export const Ig = $$i0;
+export const Pp = $$d1;
+export const XL = $$c2;
+export const nH = $$s3;
+export const pu = $$n4;
+export const td = $$l5;
+export const ug = $$r6;
+export const zH = $$o7;

@@ -1,0 +1,187 @@
+import { jsxs, jsx, Fragment } from "react/jsx-runtime";
+import { useMemo, useCallback } from "react";
+import { isNotNullish } from "../figma_app/95419";
+import { bL, l9, mc, wv, c$ } from "../905/493196";
+import { h as _$$h } from "../905/270045";
+import { K } from "../905/443068";
+import { t as _$$t } from "../905/947268";
+import { Z as _$$Z } from "../905/498136";
+import { rXF } from "../figma_app/763686";
+import { U } from "../figma_app/901889";
+import { j } from "../905/918929";
+import { Pt } from "../figma_app/806412";
+import { tx, t as _$$t2 } from "../905/303541";
+import { wJ } from "../figma_app/630951";
+import { FX } from "../figma_app/12491";
+import { sF } from "../figma_app/777207";
+import { t as _$$t3 } from "../905/511388";
+import { P as _$$P } from "../figma_app/582341";
+import { sZ } from "../905/845253";
+import { Oe } from "../figma_app/336853";
+import { Ib } from "../905/129884";
+import { fI } from "../figma_app/626177";
+import { zz, b8, aX } from "../905/794523";
+var w = (e => (e.ALL_LIBRARIES = "ALL_LIBRARIES", e.LOCAL_VARIABLES = "LOCAL_VARIABLES", e.SUBSCRIBED_VARIABLES = "SUBSCRIBED_VARIABLES", e))(w || {});
+let C = e => {
+  let t = {};
+  for (let i of e) t[`${i.libraryKey}`] = i;
+  return t;
+};
+function T({
+  recordingKey: e,
+  currentView: t,
+  subscribedLibraries: i,
+  onSetSelect: a
+}) {
+  let l = U();
+  let d = Oe(sZ());
+  let {
+    pass,
+    fail
+  } = useMemo(() => j(i, e => wJ(e.fileKey)), [i]);
+  let h = useMemo(() => C(i), [i]);
+  let b = "SUBSCRIBED_VARIABLES" === t.type ? t.libraryKey : void 0;
+  let E = useCallback(e => {
+    if ("ALL_LIBRARIES" === e || "LOCAL_VARIABLES" === e) {
+      a({
+        type: e,
+        layout: t.layout
+      });
+      return;
+    }
+    let i = h[e];
+    i && (a({
+      type: "SUBSCRIBED_VARIABLES",
+      layout: t.layout,
+      ...i
+    }), b !== i.libraryKey && l("variable_picker_library_changed", {
+      pickerViewType: "SUBSCRIBED_VARIABLES",
+      libraryFilterKey: i.fileKey
+    }));
+  }, [a, t.layout, h, l, b]);
+  return jsxs(bL, {
+    recordingKey: e,
+    onChange: E,
+    value: "SUBSCRIBED_VARIABLES" === t.type ? t.libraryKey : t.type,
+    children: [jsx(l9, {
+      label: jsx(_$$h, {
+        children: tx("variables.binding_ui.variable_set")
+      }),
+      "data-testid": "variable-set-selector-trigger",
+      children: jsx(k, {
+        currentView: t,
+        selectedLibraryKey: b
+      })
+    }), jsxs(mc, {
+      children: [jsx(R, {
+        value: "ALL_LIBRARIES",
+        formattedValue: _$$t2("variables.binding_ui.set_labels.all_libraries")
+      }), i.length > 0 && jsxs(Fragment, {
+        children: [jsx(wv, {}), jsx(R, {
+          value: "LOCAL_VARIABLES",
+          formattedValue: _$$t2("variables.binding_ui.set_labels.assets_created_in_file")
+        }), jsx(wv, {})]
+      }), fail.map(e => {
+        let t = d && sF(e.libraryKey);
+        return jsx(R, {
+          value: e.libraryKey,
+          formattedValue: e.fileName,
+          rightIcon: t && jsx(FX, {})
+        }, e.fileKey);
+      }), pass.map(e => jsx(R, {
+        value: e.libraryKey,
+        formattedValue: e.fileName,
+        rightIcon: jsx(_$$t3, {})
+      }, e.fileKey))]
+    })]
+  });
+}
+function k({
+  currentView: e,
+  selectedLibraryKey: t
+}) {
+  return "ALL_LIBRARIES" === e.type ? tx("variables.binding_ui.set_labels.all_libraries") : "LOCAL_VARIABLES" === e.type ? tx("variables.binding_ui.set_labels.assets_created_in_file") : jsxs("span", {
+    className: "x3nfvp2 x6s0dn4",
+    children: [e.fileName, t && jsx(_$$P, {
+      libraryKey: t
+    })]
+  });
+}
+function R({
+  value: e,
+  formattedValue: t,
+  rightIcon: i
+}) {
+  return jsx(c$, {
+    value: e,
+    children: jsxs("span", {
+      className: "x3nfvp2",
+      children: [t, i]
+    })
+  });
+}
+export var $$N1 = (e => (e[e.MIXED_MODES = 0] = "MIXED_MODES", e))($$N1 || {});
+function P({
+  recordingKey: e,
+  currentView: t,
+  resolvedType: i,
+  onToggleLayoutIconClick: r,
+  disabledReason: s
+}) {
+  if (i !== rXF.COLOR) return null;
+  {
+    let i = function (e) {
+      switch (e) {
+        case "list":
+          return 0 === s ? _$$t2("variables.binding_ui.grid_view_unavailable_multiple_modes") : _$$t2("variables.binding_ui.show_as_grid_tooltip");
+        case "grid":
+          return _$$t2("variables.binding_ui.show_as_list_tooltip");
+      }
+    }(t.layout);
+    return jsx(K, {
+      "aria-label": i,
+      recordingKey: e,
+      onClick: r,
+      disabled: isNotNullish(s),
+      htmlAttributes: {
+        "data-tooltip-type": Ib.TEXT,
+        "data-tooltip": i
+      },
+      children: "list" === t.layout ? jsx(_$$t, {}) : jsx(_$$Z, {})
+    });
+  }
+}
+export function $$O0({
+  recordingKey: e,
+  currentView: t,
+  subscribedLibraries: i,
+  setControlRightButtons: r,
+  resolvedType: a,
+  onSetSelect: s,
+  onToggleLayoutIconClick: o,
+  disableGridLayout: l
+}) {
+  return jsxs(fI, {
+    className: zz,
+    children: [s ? jsx(T, {
+      currentView: t,
+      subscribedLibraries: i,
+      recordingKey: Pt(e, "setSelector"),
+      onSetSelect: s
+    }) : jsx("div", {
+      className: b8,
+      children: _$$t2("proto.action_set_variable_dropdown_option")
+    }), (o || r) && jsxs("div", {
+      className: aX,
+      children: [o && jsx(P, {
+        currentView: t,
+        resolvedType: a,
+        onToggleLayoutIconClick: o,
+        recordingKey: Pt(e, "toggleLayout"),
+        disabledReason: l
+      }), r]
+    })]
+  });
+}
+export const Z = $$O0;
+export const t = $$N1;

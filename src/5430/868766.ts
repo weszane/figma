@@ -1,0 +1,12 @@
+let $$s5 = "detail_view--installButton--IloIX";
+let $$i0 = "detail_view--installButtonSubtext--iqsQz text--fontPos11--2LvXf text--_fontBase--QdLsd";
+let $$n2 = "detail_view--pendingInviteBanner--Jfy7s text--fontPos13--xW8hS text--_fontBase--QdLsd";
+let $$o1 = "detail_view--pendingInviteButton--XYgKx";
+let $$a3 = "detail_view--paidResourceSection--crSbo detail_view--metadataSectionText--jEK-6 metadata_section--metadataSectionText--7ruPx text--fontPos13--xW8hS text--_fontBase--QdLsd";
+let $$l4 = "detail_view--reportSection--qDu-P detail_view--metadataSectionText--jEK-6 metadata_section--metadataSectionText--7ruPx text--fontPos13--xW8hS text--_fontBase--QdLsd";
+export const BE = $$i0;
+export const LL = $$o1;
+export const Xk = $$n2;
+export const _1 = $$a3;
+export const iZ = $$l4;
+export const uu = $$s5;

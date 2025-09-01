@@ -1,0 +1,10 @@
+let $$n2 = "collapsible_panel--panelBodyHidden--zkEuY";
+let $$r0 = "collapsible_panel--icon--EmAd-";
+let $$a3 = "collapsible_panel--hiddenIcon--XZ1Wd";
+let $$s4 = "collapsible_panel--collapseExpandToggleArea--Rzqml";
+let $$o1 = "collapsible_panel--collapseExpandToggleAreaCollapsed--3liEM";
+export const Kk = $$r0;
+export const MJ = $$o1;
+export const RO = $$n2;
+export const Sq = $$a3;
+export const jA = $$s4;

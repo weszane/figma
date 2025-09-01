@@ -1,0 +1,82 @@
+import { jsx, jsxs } from "react/jsx-runtime";
+import { createRef } from "react";
+import { o6 } from "../figma_app/806412";
+import { ms } from "../figma_app/236327";
+import { P } from "../905/347284";
+import { Dm } from "../figma_app/8833";
+import { vL } from "../905/826900";
+import { DU } from "../figma_app/575164";
+export class $$u0 extends o6 {
+  constructor(e) {
+    super(e);
+    this.onKeyDownFromFullscreen = e => {
+      e.accept();
+      this.props.onKeyDown(e.event);
+    };
+    this.onContainerClick = e => {
+      e.stopPropagation();
+    };
+  }
+  componentDidMount() {
+    super.componentDidMount();
+    document.addEventListener("keydown", this.props.onKeyDown);
+  }
+  componentWillUnmount() {
+    super.componentWillUnmount();
+    document.removeEventListener("keydown", this.props.onKeyDown);
+  }
+  render() {
+    let e = {
+      left: window.innerWidth / 2 - 200,
+      top: window.innerHeight / 8,
+      width: 400
+    };
+    return jsx(vL, {
+      name: this.props.recordingKey || "",
+      handleKeyDown: this.onKeyDownFromFullscreen,
+      focusOnMount: !0,
+      children: jsx(ms, {
+        className: `${DU} ${Dm}`,
+        style: e,
+        "data-testid": this.props["data-testid"],
+        onClick: this.onContainerClick,
+        children: jsx("div", {
+          children: this.props.children
+        })
+      })
+    });
+  }
+}
+export class $$p1 extends o6 {
+  constructor(e) {
+    super(e);
+    this.scrollContainerRef = createRef();
+  }
+  scrollElementAtIndexIntoView(e) {
+    if (this.props.resultCount >= 10) {
+      let t = this.scrollContainerRef.current.getScrollTop();
+      let i = 32 * e;
+      let r = 32 * e + 32;
+      i < t ? this.scrollContainerRef.current.scrollTo(i) : r > t + 304 && this.scrollContainerRef.current.scrollTo(r - 304);
+    }
+  }
+  render() {
+    let e = this.props.resultCount;
+    let t = Math.min(Math.max(e, 1), 10);
+    return jsxs(P, {
+      ref: this.scrollContainerRef,
+      width: 400,
+      height: 32 * t + (e >= 10 ? -16 : 8),
+      hideScrollbar: !0,
+      role: this.props.role,
+      contentId: this.props.id,
+      children: [this.props.children, jsx("div", {
+        style: {
+          height: 8
+        }
+      })]
+    });
+  }
+}
+export const H = $$u0;
+export const h = $$p1;

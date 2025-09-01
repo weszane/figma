@@ -1,0 +1,130 @@
+import { Ju } from "../905/102752";
+import { jsx, jsxs } from "react/jsx-runtime";
+import { useMemo, useState, useCallback } from "react";
+import { wA } from "../vendor/514228";
+import { hS } from "../905/437088";
+import { bL } from "../905/38914";
+import { vo, Y9, hE, nB } from "../figma_app/272243";
+import { Cs } from "../figma_app/59509";
+import { Q } from "../905/363675";
+import { L } from "../905/857916";
+import { Y } from "../905/506207";
+import { s as _$$s } from "../cssbuilder/589278";
+import { c as _$$c } from "../figma_app/617427";
+import { t as _$$t, tx } from "../905/303541";
+import { sx } from "../905/941192";
+import { fu } from "../figma_app/831799";
+import { B2, al, b6 } from "../figma_app/681697";
+import { u as _$$u } from "../905/997541";
+import { Rs } from "../figma_app/288654";
+import { oA } from "../905/723791";
+import { h3E } from "../figma_app/43951";
+function E({
+  open: e,
+  onClose: t,
+  importLocalFile: i,
+  isDraggingFileOverModal: a,
+  projectId: p
+}) {
+  let _ = hS({
+    open: e,
+    onClose: t
+  });
+  let A = function (e) {
+    let t = Rs(h3E, {
+      projectId: e
+    }, {
+      enabled: "" !== e
+    });
+    return useMemo(() => "loaded" !== t.status ? null : oA(t.data?.project?.activeProjectResourceConnections)?.[0], [t]);
+  }(p);
+  return jsx(bL, {
+    manager: _,
+    width: 560,
+    children: jsxs(vo, {
+      children: [jsx(Y9, {
+        children: jsx(hE, {
+          children: _$$t("file_browser.file_import_view.import")
+        })
+      }), jsx(nB, {
+        children: jsxs("div", {
+          className: _$$s.flex.flexColumn.p16.gap8.$,
+          children: [A && jsx("div", {
+            className: "file_import_options--inlineBannerContainer--WepYV",
+            children: jsx(Cs, {
+              variant: "default",
+              icon: jsx(L, {}),
+              children: jsx(Q, {
+                children: _$$t("resource_connection.when_you_import_files_anyone_in_the_connected_project_can_access_them")
+              })
+            })
+          }), jsxs("div", {
+            className: _$$s.flex.flex1.flexColumn.justifyCenter.gap24.borderBox.b1.colorBorder.bRadius4.$$if(a, _$$s.b2.colorBgSelected.colorBorderSelectedStrong).$,
+            style: sx.add({
+              minHeight: "316px",
+              borderStyle: "dashed"
+            }).$$if(a, {
+              borderStyle: "solid"
+            }).$,
+            children: [jsxs("div", {
+              className: _$$s.flex.flexColumn.itemsCenter.alignCenter.gap4.lh24.$,
+              children: [jsx("span", {
+                className: _$$s.textBodyLargeStrong.$,
+                children: tx("file_browser.file_import_view.import_header_with_pptx")
+              }), jsx("span", {
+                className: _$$s.textBodyLarge.colorTextSecondary.$,
+                style: sx.add({
+                  width: "calc(100% * 2/3)"
+                }).$,
+                children: tx("file_browser.file_import_view.import_description_with_pptx")
+              })]
+            }), jsx("div", {
+              className: _$$s.flex.flexRow.justifyCenter.gap8.$,
+              children: jsx(_$$c, {
+                variant: "primary",
+                onClick: i,
+                children: tx("file_browser.file_import_view.import_from_computer")
+              })
+            })]
+          })]
+        })
+      })]
+    })
+  });
+}
+export let $$x0 = Ju(function ({
+  open: e,
+  onClose: t,
+  projectId: i
+}) {
+  let s = wA();
+  let [o, l] = useState(!1);
+  let d = B2().unwrapOr(!1);
+  let c = useCallback(() => l(!0), []);
+  let u = useCallback(() => l(!1), []);
+  let m = useCallback(() => {
+    t();
+    s(_$$u({
+      multiple: !0
+    }));
+  }, [t, s]);
+  return jsx(fu, {
+    name: "import_source_selection_modal",
+    children: jsx(Y, {
+      isDragTarget: al,
+      onTargetDragEnter: c,
+      onTargetDragLeave: u,
+      onTargetDrop: e => {
+        d && s(b6(e));
+      },
+      children: jsx(E, {
+        open: e,
+        onClose: t,
+        importLocalFile: m,
+        isDraggingFileOverModal: o,
+        projectId: i
+      })
+    })
+  });
+}, "FileImportOptionsModal");
+export const O = $$x0;

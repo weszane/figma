@@ -1,0 +1,192 @@
+import { jsxs, jsx } from "react/jsx-runtime";
+import { useCallback, useMemo } from "react";
+import { wA } from "../vendor/514228";
+import { B1 } from "../figma_app/465776";
+import { rXF, glU, Z_n, JTp, j0r } from "../figma_app/763686";
+import { sH } from "../905/805904";
+import { Yi, Oe } from "../figma_app/933328";
+import { Y5 } from "../figma_app/455680";
+import { gl } from "../905/216495";
+import { zk } from "../figma_app/198712";
+import { _X, V5, hu } from "../figma_app/260445";
+import { u3, y$ } from "../figma_app/152690";
+import { Io, MH } from "../figma_app/394327";
+import { RR } from "../figma_app/338442";
+import { l7 } from "../905/189185";
+import { R } from "../905/103090";
+import { Sh } from "../figma_app/889655";
+import { Yc } from "../figma_app/930914";
+import { On } from "../figma_app/323320";
+export function $$I3({
+  children: e
+}) {
+  let {
+    updateConsumption,
+    onExpressionSubmitted,
+    onComponentPropSelected
+  } = function () {
+    let e = wA();
+    let {
+      consumedVariable,
+      updateVariableConsumption,
+      clearVariableConsumption
+    } = u3(["TEXT_DATA"]);
+    let s = useCallback(t => {
+      if (!t) {
+        clearVariableConsumption();
+        return;
+      }
+      e(Yi({
+        item: t,
+        callback: e => {
+          t.resolvedType === rXF.STRING ? (l7.user("delete-prop-ref", () => glU.deleteComponentPropRef(RR.TEXT)), updateVariableConsumption(y$(rXF.STRING, e))) : t.resolvedType === rXF.FLOAT && (l7.user("delete-prop-ref", () => glU.deleteComponentPropRef(RR.TEXT)), updateVariableConsumption({
+            resolvedType: rXF.STRING,
+            type: Z_n.EXPRESSION,
+            value: {
+              expressionFunction: JTp.STRINGIFY,
+              expressionArguments: [y$(rXF.FLOAT, e)]
+            }
+          }));
+        }
+      }));
+    }, [updateVariableConsumption, clearVariableConsumption, e]);
+    let l = R(e => Sh(e));
+    let c = useMemo(On, []);
+    let {
+      textPropReferencedBySelection
+    } = R(e => ({
+      textPropReferencedBySelection: !!c(e, RR.TEXT)
+    }));
+    let p = Yc(RR.TEXT, l);
+    let m = useCallback(e => {
+      l7.user("add-prop-ref", () => {
+        clearVariableConsumption();
+        glU.addComponentPropRef(RR.TEXT, e.value.explicitDefId);
+      });
+    }, [clearVariableConsumption]);
+    return {
+      isVariableBound: !!consumedVariable,
+      updateConsumption: s,
+      clearVariableConsumption,
+      onExpressionSubmitted: void 0,
+      onComponentPropSelected: !p || textPropReferencedBySelection ? m : void 0
+    };
+  }();
+  let l = useMemo(() => ["TEXT_DATA"], []);
+  return jsxs(_X, {
+    fields: l,
+    resolvedType: rXF.STRING,
+    requestedTypes: Io.TEXT_DATA,
+    onVariableSelected: updateConsumption,
+    onExpressionSubmitted,
+    onComponentPropSelected,
+    children: [jsx(V5, {
+      variableScope: j0r.TEXT_CONTENT
+    }), e]
+  });
+}
+export function $$E0({
+  editingStyleGuid: e,
+  onChange: t,
+  children: i
+}) {
+  let u = wA();
+  let g = useMemo(() => ["FONT_FAMILY"], []);
+  let {
+    updateVariableConsumption,
+    clearVariableConsumption
+  } = u3(g, e);
+  async function A(e) {
+    if (e) {
+      let i = await u(Oe(e));
+      B1(sH(i));
+      updateVariableConsumption(y$(rXF.STRING, i));
+      t?.();
+    } else clearVariableConsumption(zk.YES);
+    Y5.triggerAction("leave-edit-mode");
+  }
+  return jsxs(_X, {
+    fields: g,
+    resolvedType: rXF.STRING,
+    onVariableSelected: A,
+    children: [jsx(V5, {
+      variableScope: j0r.FONT_FAMILY
+    }), i]
+  });
+}
+function x() {
+  let e = wA();
+  let t = useMemo(() => ["FONT_STYLE"], []);
+  let {
+    consumedVariable,
+    updateVariableConsumption,
+    clearVariableConsumption
+  } = u3(t);
+  return {
+    consumedVariable,
+    updateVariableConsumption: useCallback(async t => {
+      if (!t) {
+        clearVariableConsumption(zk.YES);
+        return;
+      }
+      let i = await e(Oe(t));
+      B1(sH(i));
+      t.resolvedType === rXF.STRING ? updateVariableConsumption({
+        type: Z_n.FONT_STYLE,
+        resolvedType: rXF.FONT_STYLE,
+        value: {
+          asString: y$(rXF.STRING, i),
+          asFloat: null
+        }
+      }) : t.resolvedType === rXF.FLOAT && updateVariableConsumption({
+        type: Z_n.FONT_STYLE,
+        resolvedType: rXF.FONT_STYLE,
+        value: {
+          asString: null,
+          asFloat: y$(rXF.FLOAT, i)
+        }
+      });
+    }, [updateVariableConsumption, clearVariableConsumption, e]),
+    clearVariableConsumption
+  };
+}
+export function $$S1({
+  children: e
+}) {
+  let {
+    consumedVariable,
+    updateVariableConsumption
+  } = x();
+  let r = MH(consumedVariable);
+  return jsxs(hu, {
+    boundVariableId: r ?? void 0,
+    resolvedType: rXF.STRING,
+    requestedTypes: Io.FONT_STYLE,
+    onVariableSelected: updateVariableConsumption,
+    children: [jsx(V5, {
+      variableScope: j0r.FONT_STYLE
+    }), e]
+  });
+}
+export function $$w2({
+  children: e
+}) {
+  let {
+    consumedVariable,
+    updateVariableConsumption
+  } = x();
+  let r = !consumedVariable || gl(consumedVariable) || consumedVariable.type !== Z_n.FONT_STYLE ? null : consumedVariable.value.asFloat ? MH(consumedVariable) : null;
+  let a = async e => {
+    await updateVariableConsumption(e);
+  };
+  return jsx(hu, {
+    boundVariableId: r ?? void 0,
+    resolvedType: rXF.FLOAT,
+    onVariableSelected: a,
+    children: e
+  });
+}
+export const We = $$E0;
+export const XA = $$S1;
+export const wJ = $$w2;
+export const Ig = $$I3;

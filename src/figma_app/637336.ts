@@ -1,0 +1,39 @@
+import { useCallback, useState, useEffect } from "react";
+import { wA, d4 } from "../vendor/514228";
+import { h3O } from "../figma_app/763686";
+import { b } from "../905/985254";
+import { h } from "../figma_app/275739";
+export let $$l0 = {
+  MAIN_GUIDE: "https://help.figma.com/hc/articles/1500004414622",
+  TROUBLESHOOT: "https://help.figma.com/hc/articles/4402390108951",
+  ACCESSIBILITY: "https://help.figma.com/hc/articles/4402390110743",
+  FEEDBACK_FORM: "https://form.asana.com?k=FPQgFCXUINQN6CmMtWiabQ&d=10497086658021"
+};
+export function $$d1() {
+  let e = wA();
+  let t = d4(e => e.multiplayer.observingSessionID);
+  let r = d4(e => e.multiplayer.sessionID);
+  return useCallback(function (n) {
+    if (n && n.sessionID) {
+      try {
+        h3O?.observeUser(n.sessionID);
+      } catch {
+        return;
+      }
+      t !== n.sessionID && r !== n.sessionID && e(b({
+        aware_of_observation_mode: !0
+      }));
+    }
+  }, [t, r, e]);
+}
+export function $$c2() {
+  let [e, t] = useState(null);
+  let r = d4(e => e.voice.showWidget);
+  useEffect(() => {
+    r && !e && t(h.getInstance());
+  }, [r, e]);
+  return e;
+}
+export const AM = $$l0;
+export const eo = $$d1;
+export const qr = $$c2;

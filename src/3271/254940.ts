@@ -1,0 +1,61 @@
+import { jsx } from "react/jsx-runtime";
+import { wA } from "../vendor/514228";
+import { nR } from "../figma_app/637027";
+import { s as _$$s } from "../cssbuilder/589278";
+import { tx } from "../905/303541";
+import { to } from "../905/156213";
+import { a as _$$a } from "../figma_app/453187";
+import { RW } from "../figma_app/684168";
+import { q5 } from "../figma_app/516028";
+import { sZ } from "../905/845253";
+import { wN } from "../figma_app/53721";
+import { S } from "../905/404161";
+var $$p1 = (e => (e.FigJamPluginTile = "figjam_plugin_tile", e))($$p1 || {});
+export function $$g0(e) {
+  let t = wA();
+  let {
+    version,
+    isPlugin,
+    variant
+  } = e;
+  let h = q5();
+  let v = sZ();
+  let f = RW();
+  let C = _$$a(v?.id, version.plugin_id, f.loaded ? f.data?.workspaceId : void 0);
+  if (!h || !h.parentOrgId) return null;
+  if (C) {
+    let e = "figjam_plugin_tile" === variant ? tx("universal_insert.request") : tx("universal_insert.approval_pending");
+    return jsx(nR, {
+      disabled: !0,
+      className: _$$s.wFull.$,
+      dataTestId: "request-button-approval-pending",
+      children: e
+    });
+  }
+  let j = {
+    extension: {
+      pluginId: version.plugin_id,
+      iconUrl: version.redirect_icon_url,
+      name: version.name
+    },
+    isWidget: !isPlugin,
+    orgId: h.parentOrgId,
+    workspaceDetails: f.loaded ? f.data : void 0,
+    openedFrom: "editor",
+    fullscreenEditorType: wN(h.editorType)
+  };
+  let y = "figjam_plugin_tile" === variant ? tx("universal_insert.request") : tx("universal_insert.request_approval");
+  return jsx(nR, {
+    onClick: () => {
+      t(to({
+        type: S,
+        data: j
+      }));
+    },
+    className: _$$s.wFull.$,
+    dataTestId: "request-button",
+    children: y
+  });
+}
+export const s = $$g0;
+export const w = $$p1;

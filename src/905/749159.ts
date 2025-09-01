@@ -1,0 +1,98 @@
+import { qK } from "../905/102752";
+import { jsx, jsxs } from "react/jsx-runtime";
+import { hS } from "../905/437088";
+import { bL } from "../905/38914";
+import { vo, nB } from "../figma_app/272243";
+import { i as _$$i } from "../905/718764";
+import { rcl, NLJ } from "../figma_app/763686";
+import { EJ } from "../figma_app/930338";
+import { qB } from "../905/862321";
+import { a as _$$a } from "../905/105502";
+import { Ob } from "../905/191560";
+import { t as _$$t } from "../905/303541";
+import { Lo } from "../905/156213";
+import { k } from "../figma_app/564183";
+export let $$f0 = qK(_$$a, e => {
+  let t = e.modalShown;
+  let i = e.openFile;
+  let r = t.data && t.data.headerText;
+  let a = t.data && t.data.subtitle;
+  let s = t.data && t.data.disableHiding;
+  let o = t.data && t.data.id;
+  let l = t?.data?.actionOrTool;
+  return jsx(_, {
+    fileName: i?.name || null,
+    headerText: r,
+    subtitle: a,
+    disableHiding: s,
+    auth: e.auth,
+    dispatch: e.dispatch,
+    id: o,
+    actionOrTool: l
+  });
+});
+function _({
+  subtitle: e,
+  fileName: t,
+  headerText: i,
+  auth: u,
+  dispatch: f,
+  disableHiding: _,
+  id: A,
+  actionOrTool: y
+}) {
+  let b = k();
+  let v = hS({
+    open: !0,
+    onClose: () => f(Lo()),
+    preventUserClose: _
+  });
+  return jsx(bL, {
+    manager: v,
+    width: 420,
+    height: "dynamic",
+    children: jsx(vo, {
+      children: jsxs(nB, {
+        children: [jsx("div", {
+          className: "auth_modal--modal--bVDTe"
+        }), jsx(_$$i, {
+          children: jsx(Ob, {
+            id: A ?? "auth-view-modal",
+            auth: u,
+            modal: !0,
+            header: (() => {
+              if (y && b) switch (y) {
+                case rcl.SET_TOOL_DEFAULT:
+                case NLJ.FRAME:
+                case NLJ.SHAPE_RECTANGLE:
+                case NLJ.VECTOR_PEN:
+                case NLJ.TYPE:
+                  return _$$t("auth.sign_up_to_edit");
+                case "SELECT_COMMENT_SIDEBAR":
+                case "COMMENT_PIN_CLICK":
+                case rcl.SET_TOOL_COMMENTS:
+                case NLJ.COMMENTS:
+                  return _$$t("auth.sign_up_to_comment");
+                case rcl.FOLLOW_PRESENTER:
+                  return _$$t("auth.sign_up_to_use_multiplayer_tools");
+                case rcl.ENTER_INSPECT_MODE:
+                case rcl.SET_TOOL_DEFAULT_DEV_HANDOFF:
+                  return _$$t("auth.sign_up_to_use_inspection_tools");
+                default:
+                  return _$$t("auth.sign_up_for_figma");
+              }
+              return i || (u.formState === qB.SIGN_IN || u.formState === qB.VERIFY_HUMAN && u.prevForm === qB.SIGN_IN || u.formState === qB.TWO_FACTOR ? t ? _$$t("auth.log_in_to_collaborate_on_display_name", {
+                displayName: `"${EJ(t, 30)}"`
+              }) : _$$t("auth.log_in_to_collaborate_on_this_file") : t ? _$$t("auth.create_an_account_to_collaborate_on_display_name", {
+                displayName: `"${EJ(t, 30)}"`
+              }) : _$$t("auth.create_an_account_to_collaborate_on_this_file"));
+            })(),
+            subtitle: e,
+            fromLoggedOutDesignFile: b
+          })
+        })]
+      })
+    })
+  });
+}
+export const x = $$f0;

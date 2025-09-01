@@ -1,0 +1,405 @@
+import { useMemo, useCallback, createElement } from "react";
+import { d4, wA } from "../vendor/514228";
+import { xb } from "../figma_app/465776";
+import { b as _$$b } from "../figma_app/124186";
+import { n as _$$n } from "../5132/715664";
+import { D as _$$D } from "../5132/780644";
+import { J } from "../5132/948584";
+import { l as _$$l } from "../905/241412";
+import { W as _$$W } from "../5132/887999";
+import { t as _$$t } from "../5132/435788";
+import { getFeatureFlags } from "../905/601108";
+import { md } from "../figma_app/27355";
+import { NP } from "../905/449184";
+import { ce } from "../figma_app/347146";
+import { eD } from "../figma_app/876459";
+import { nt } from "../figma_app/687776";
+import { h as _$$h } from "../figma_app/334471";
+import { t as _$$t2 } from "../905/303541";
+import { zE } from "../905/738636";
+import { n6 } from "../905/234821";
+import { p as _$$p } from "../905/36308";
+import { _p } from "../figma_app/297957";
+import { $n, gW } from "../905/930279";
+import { Y5 } from "../figma_app/455680";
+import { f as _$$f } from "../figma_app/990299";
+import { ck } from "../905/87821";
+import { MP } from "../figma_app/469876";
+import { m as _$$m } from "../905/575846";
+import { TY } from "../figma_app/701001";
+import { Zr } from "../figma_app/678782";
+import { r as _$$r } from "../905/210851";
+import { Z } from "../905/515860";
+import { eE } from "../figma_app/952446";
+import { q5, tS, tB } from "../figma_app/516028";
+import { FC } from "../figma_app/212807";
+import { B as _$$B } from "../905/524020";
+import { d as _$$d } from "../905/647058";
+import { FFileType } from "../figma_app/191312";
+import { getPermissionsState } from "../figma_app/642025";
+import { p9 } from "../figma_app/803787";
+import { cD } from "../figma_app/598018";
+import { f6, ai } from "../figma_app/915202";
+import { Yh } from "../figma_app/357047";
+import { C as _$$C } from "../figma_app/444297";
+import { E3, lg } from "../figma_app/976749";
+import { $ as _$$$ } from "../905/47975";
+import { c4, fS, TJ } from "../figma_app/805925";
+export function $$J1({
+  debugMenuItems: e
+}) {
+  let t = $n();
+  let r = Q({
+    newFileFrom: f6.EDITOR_MENU,
+    branchingActionsStatus: t,
+    shouldShowSlideConversionEntrypoint: !1
+  });
+  let a = d4(e => e.userStateLoaded);
+  let s = useMemo(() => ({
+    shouldShowBackToFiles: (!ck() || MP() && !!getFeatureFlags().integ_zoom_allow_file_switching) && !eD && !ce(),
+    isDisabled: !a
+  }), [a]);
+  let o = c4();
+  let l = d4(e => e.theme.themePreference);
+  let d = ee();
+  let c = et();
+  let u = er();
+  let p = fS();
+  let h = TJ();
+  return useMemo(() => _$$p({
+    fileMenuArgs: r,
+    pluginAndWidgetMenuArgs: o,
+    additionalDebugItems: e,
+    theme: l,
+    backToFileArgs: s,
+    zoomArgs: d,
+    publishingModalArgs: c,
+    spotlightArgs: u,
+    drawArgs: p,
+    mcpArgs: h
+  }), [r, o, e, l, s, d, c, u, p, h]);
+}
+export function $$Z2() {
+  let e = function () {
+    let e = md(eE);
+    let t = TY();
+    let r = _$$d();
+    let a = q5();
+    let s = FC();
+    let o = E3();
+    let l = d4(e => e.mirror.appModel.topLevelMode);
+    let d = d4(e => e.mirror.appModel.multiplayerSessionState);
+    let c = cD() || null;
+    let u = useMemo(() => gW(a, s, o, e, l, d, t, c, r, null), [a, s, o, e, l, d, t, c, r]);
+    let p = $n();
+    return getFeatureFlags().branching_update_status_lg ? p : u;
+  }();
+  let t = _$$C();
+  let r = Q({
+    newFileFrom: f6.EDITOR_QUICK_ACTIONS,
+    branchingActionsStatus: e,
+    shouldShowSlideConversionEntrypoint: t
+  });
+  let a = useMemo(() => ({
+    shouldShowBackToFiles: !1
+  }), []);
+  let s = c4();
+  let o = d4(e => e.theme.themePreference);
+  let l = ee();
+  let d = et();
+  let c = er();
+  let u = fS();
+  let p = TJ();
+  return useMemo(() => _$$p({
+    fileMenuArgs: r,
+    pluginAndWidgetMenuArgs: s,
+    theme: o,
+    backToFileArgs: a,
+    zoomArgs: l,
+    publishingModalArgs: d,
+    spotlightArgs: c,
+    drawArgs: u,
+    mcpArgs: p
+  }), [r, s, o, a, l, d, c, u, p]);
+}
+function Q({
+  newFileFrom: e,
+  branchingActionsStatus: t,
+  shouldShowSlideConversionEntrypoint: r
+}) {
+  let h = function ({
+    from: e
+  }) {
+    let t = lg();
+    let r = wA();
+    let h = q5();
+    let g = h?.currentPlanUser?.draftsFolderId ?? void 0;
+    let f = h?.team;
+    let I = _$$B();
+    let {
+      data
+    } = nt(g);
+    let A = _$$h(data);
+    let w = Zr("send-to-make-from-design");
+    let R = _p();
+    let D = void 0 !== A.find(e => e.editorType === FFileType.FIGMAKE);
+    let k = e === f6.EDITOR_QUICK_ACTIONS && D && w && R();
+    let F = useMemo(() => {
+      let e = [...A];
+      k && (e = e.filter(e => e.editorType !== FFileType.FIGMAKE));
+      return e.sort((e, r) => e.editorType === t ? -1 : r.editorType === t ? 1 : 0);
+    }, [t, A, k]);
+    let U = useCallback(t => {
+      NP(t, _$$r({
+        source: e === f6.EDITOR_MENU ? "menu" : "quick-actions"
+      }));
+    }, [e]);
+    let G = useCallback(({
+      editorType: t,
+      trackingEventName: n
+    }) => () => {
+      let i = _$$m ? ai.SAME_TAB : ai.NEW_TAB;
+      let a = zE({
+        isDraftsFolder: !0,
+        state: I,
+        editorType: t,
+        openNewFileIn: i,
+        from: e,
+        folderId: g,
+        team: f ? {
+          id: f.id,
+          name: f.name,
+          subscription: f.subscription,
+          student_team: !!f.studentTeamAt,
+          restrictions_list: f.restrictionsList,
+          grace_period_end: f.gracePeriodEnd?.toISOString() ?? null
+        } : void 0
+      });
+      U(n);
+      return i === ai.SAME_TAB ? Y5.dispatchIfSaved(a) : r(a);
+    }, [r, I, g, f, e, U]);
+    let V = useMemo(() => {
+      if (t !== FFileType.DESIGN) return null;
+      let e = F.find(({
+        editorType: e
+      }) => e === FFileType.DESIGN);
+      return e ? {
+        name: "new-from-sketch",
+        displayText: _$$t2("fullscreen_actions.new-from-sketch"),
+        callback: () => {
+          U("action_new_from_sketch");
+          Y5.dispatchIfSaved(_$$f());
+        },
+        iconType: createElement(_$$b),
+        featureFlags: [],
+        disabled: !e.canCreate
+      } : null;
+    }, [t, F, U]);
+    let H = getFeatureFlags().ui3_design_file_creation_menu_nested;
+    return useMemo(() => {
+      if (ck()) return [];
+      let e = F.map(({
+        editorType: e,
+        canCreate: r
+      }) => {
+        let i = !r;
+        switch (e) {
+          case FFileType.DESIGN:
+            return {
+              name: "new-design",
+              displayText: H && t !== FFileType.DESIGN ? _$$t2("fullscreen_actions.creation_submenu.new-design") : _$$t2("fullscreen_actions.new-design"),
+              callback: G({
+                editorType: FFileType.DESIGN,
+                trackingEventName: "action_new_design"
+              }),
+              iconType: createElement(_$$n),
+              featureFlags: [],
+              disabled: i
+            };
+          case FFileType.WHITEBOARD:
+            return {
+              name: "new-whiteboard",
+              displayText: H && t !== FFileType.WHITEBOARD ? _$$t2("fullscreen_actions.creation_submenu.new-whiteboard") : _$$t2("fullscreen_actions.new-whiteboard"),
+              searchSynonyms: ["figjam"],
+              callback: G({
+                editorType: FFileType.WHITEBOARD,
+                trackingEventName: "action_new_whiteboard"
+              }),
+              iconType: createElement(_$$D),
+              featureFlags: [],
+              disabled: i
+            };
+          case FFileType.SITES:
+            return {
+              name: "new-site",
+              displayText: H && t !== FFileType.SITES ? _$$t2("fullscreen_actions.creation_submenu.new-site") : _$$t2("fullscreen_actions.new-site"),
+              searchSynonyms: ["sites", "website"],
+              callback: G({
+                editorType: FFileType.SITES,
+                trackingEventName: "action_new_site"
+              }),
+              iconType: createElement(J),
+              featureFlags: ["sites"],
+              disabled: i
+            };
+          case FFileType.SLIDES:
+            return {
+              name: "new-slides",
+              displayText: H && t !== FFileType.SLIDES ? _$$t2("fullscreen_actions.creation_submenu.new-slides") : _$$t2("fullscreen_actions.new-slides"),
+              searchSynonyms: ["slides"],
+              callback: G({
+                editorType: FFileType.SLIDES,
+                trackingEventName: "action_new_slides"
+              }),
+              iconType: createElement(_$$l),
+              featureFlags: [],
+              disabled: i
+            };
+          case FFileType.COOPER:
+            return {
+              name: "new-buzz",
+              displayText: H && t !== FFileType.COOPER ? _$$t2("fullscreen_actions.creation_submenu.new-buzz") : _$$t2("fullscreen_actions.new-buzz"),
+              callback: G({
+                editorType: FFileType.COOPER,
+                trackingEventName: "action_new_buzz"
+              }),
+              iconType: createElement(_$$W),
+              featureFlags: ["cooper"],
+              disabled: i
+            };
+          case FFileType.FIGMAKE:
+            return {
+              name: "new-rev",
+              displayText: H && t !== FFileType.FIGMAKE ? _$$t2("fullscreen_actions.creation_submenu.new-rev") : _$$t2("fullscreen_actions.new-rev"),
+              callback: G({
+                editorType: FFileType.FIGMAKE,
+                trackingEventName: "action_new_rev"
+              }),
+              iconType: createElement(_$$t),
+              featureFlags: ["bake"],
+              disabled: i
+            };
+          default:
+            xb(e);
+        }
+      });
+      let [r, ...i] = e;
+      return r && H ? (V && i.push({
+        separator: !0
+      }, V), [r, {
+        name: "file-new-menu",
+        featureFlags: ["ui3_design_file_creation_menu_nested"],
+        children: i
+      }]) : (V && e.push(V), e);
+    }, [t, H, F, G, V]);
+  }({
+    from: e
+  });
+  let g = d4(e => e.saveAsState);
+  let f = d4(e => e.mirror.appModel.topLevelMode);
+  let S = n6();
+  let A = q5();
+  let w = function () {
+    let e = tS();
+    let {
+      hasCollection,
+      status
+    } = _$$$({
+      fileKey: e ?? ""
+    });
+    return "loaded" === status && hasCollection;
+  }();
+  return useMemo(() => ({
+    fileCreationMenuItems: h,
+    branchingActionsStatus: t,
+    saveAsState: g,
+    topLevelMode: f,
+    unreadCommentCount: S,
+    shouldShowSlideConversionEntrypoint: r,
+    openFile: A,
+    hasCollections: w
+  }), [h, t, g, f, S, r, A, w]);
+}
+function ee() {
+  let e = Zr("zoom-in");
+  let t = Zr("zoom-out");
+  return useMemo(() => ({
+    canZoomOut: t,
+    canZoomIn: e
+  }), [e, t]);
+}
+function et() {
+  let e = md(p9);
+  return useMemo(() => ({
+    isPublishingModalDisabled: !e
+  }), [e]);
+}
+function er() {
+  let e = Zr("spotlight-me");
+  return useMemo(() => ({
+    spotlightDisabledForSelf: !e
+  }), [e]);
+}
+export function $$en0(e, {
+  fullscreenMemoryWarningLevel: t,
+  unreadCommentCount: r,
+  pluginAndWidgetMenuArgs: n,
+  isRecovery: i,
+  isUserInLimitedSpace: a,
+  isPublishingModalDisabled: s
+}) {
+  let o = Z(e) || null;
+  let l = getFeatureFlags().branching_update_status_lg ? {
+    createBranch: {
+      status: "hidden"
+    },
+    openBranchSource: {
+      status: "hidden"
+    },
+    viewBranches: {
+      status: "hidden"
+    },
+    viewBranchDiff: {
+      status: "hidden"
+    },
+    mergeBranch: {
+      status: "hidden"
+    },
+    viewSourceDiff: {
+      status: "hidden"
+    },
+    updateBranch: {
+      status: "hidden"
+    }
+  } : gW(tB(e), getPermissionsState(e), e.selectedView.editorType, t, e.mirror.appModel.topLevelMode, e.mirror.appModel.multiplayerSessionState, i, o, a, null);
+  return _$$p({
+    fileMenuArgs: {
+      fileCreationMenuItems: [],
+      branchingActionsStatus: l,
+      saveAsState: e.saveAsState,
+      topLevelMode: e.mirror.appModel.topLevelMode,
+      unreadCommentCount: r,
+      shouldShowSlideConversionEntrypoint: !1,
+      openFile: tB(e),
+      hasCollections: !1
+    },
+    pluginAndWidgetMenuArgs: n,
+    theme: e.theme.themePreference,
+    backToFileArgs: {
+      shouldShowBackToFiles: !1
+    },
+    zoomArgs: {
+      canZoomIn: Yh(e.mirror.appModel, "zoom-in"),
+      canZoomOut: Yh(e.mirror.appModel, "zoom-out")
+    },
+    publishingModalArgs: {
+      isPublishingModalDisabled: s
+    },
+    spotlightArgs: {
+      spotlightDisabledForSelf: !Yh(e.mirror.appModel, "spotlight-me")
+    }
+  });
+}
+export const of = $$en0;
+export const d$ = $$J1;
+export const FX = $$Z2;

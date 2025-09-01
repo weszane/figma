@@ -1,0 +1,244 @@
+import { Kt } from "../figma_app/562352";
+import { ServiceCategories as _$$e } from "../905/165054";
+import { uCV, msz } from "../figma_app/763686";
+import { jS, eS, N4 } from "../figma_app/762706";
+import { getFeatureFlags } from "../905/601108";
+import { sx } from "../905/449184";
+import { eD, S8 } from "../figma_app/876459";
+import { k0, RM } from "../figma_app/623293";
+import { Ay, af, Cs } from "../905/612521";
+import { KR, m0 } from "../figma_app/778880";
+import { $D } from "../905/11";
+import { xi } from "../905/714362";
+import { nl } from "../figma_app/257275";
+import { Sh } from "../905/470286";
+import { QL } from "../905/609392";
+import { xK } from "../905/125218";
+import { bM } from "../figma_app/527873";
+import { vw } from "../905/189279";
+function T(e) {
+  return "prototype-lib" === e ? Fig.prototypeLibURLs["compiled_wasm.wasm"] : Fig.fullscreenURLs["compiled_wasm.wasm"];
+}
+function I(e) {
+  return "prototype-lib" === e ? Fig.prototypeLibURLs["compiled_wasm.js"] : Fig.fullscreenURLs["compiled_wasm.js"];
+}
+async function S(e, t) {
+  await k0(I(t));
+  let r = {
+    wasmBinaryFile: T(t),
+    preRun() {
+      (r.emscripten_realloc_buffer ?? r.growMemory)(0x60000000);
+    }
+  };
+  window.Module = r;
+  jS({
+    callMain: eS(),
+    tsApisForCpp: e,
+    registerRefreshCallback: e => {
+      vw(t, e);
+    },
+    leakBindings: !0
+  });
+}
+async function v(e) {
+  try {
+    await xK.timeAsync("loadingCode", () => (RM(), window.FULLSCREEN_PRELOADS?.js || k0(I(e))));
+  } catch (e) {
+    throw Error("Failed to load fullscreen JS code");
+  }
+  return N4({
+    isProduction: !0,
+    executeEmscriptenJS: eS()
+  });
+}
+async function A(e, t) {
+  let r = xK.time("instantiateStreaming", async () => {
+    try {
+      return await WebAssembly.instantiateStreaming(e, t);
+    } catch (e) {
+      if ("string" == typeof e) throw Error(e);
+      throw e;
+    }
+  });
+  return await xK.timeAsync("awaitInstantiateStreaming", () => r);
+}
+async function x(e, t) {
+  if (!e.ok) throw Error(`Downloading wasm failed with ${e.status}`);
+  let r = await e.arrayBuffer();
+  let n = xK.time("instantiate", async () => {
+    try {
+      return await WebAssembly.instantiate(r, t);
+    } catch (e) {
+      if ("string" == typeof e) throw Error(e);
+      throw e;
+    }
+  });
+  return await xK.timeAsync("awaitInstantiate", () => n);
+}
+let N = !1;
+let C = null;
+async function w(e) {
+  nl() && console.log("loadWasmBinary called for", e);
+  !C || C === e || nl() || $$D6() || ("fullscreen-app" === C ? $D(_$$e.CLIENT_PLATFORM, Error("Previously downloaded fullscreen wasm, but is now downloading prototype-lib")) : "prototype-lib" === C && $D(_$$e.CLIENT_PLATFORM, Error("Previously downloaded prototype-lib wasm, but is now downloading fullscreen")));
+  nl() && console.log("About to get binaryURL for", e);
+  let t = T(e);
+  xK.start("loadingBinaryStart");
+  nl() && console.log("About to call loadJS and fetch wasm for url", t, I(e));
+  let [r, n] = await Promise.all([window.FULLSCREEN_PRELOADS?.wasm || fetch(t), v(e)]);
+  nl() && console.log("Finished calling loadJS and fetch wasm");
+  delete window.FULLSCREEN_PRELOADS;
+  let {
+    imports,
+    receiveInstance,
+    getReservedHeapSize
+  } = n;
+  if (bM(e, getReservedHeapSize), "true" === r.headers.get("x-figma-local-build") && (N = !0), WebAssembly.instantiateStreaming) try {
+    nl() && console.log("About to call instantiateWasmStreaming");
+    let t = await A(r, imports);
+    nl() && console.log("Finished calling instantiateWasmStreaming");
+    C = e;
+    return {
+      receiveInstance,
+      wasmResult: t
+    };
+  } catch (e) {
+    if (nl() && console.log("Error calling instantiateWasmStreaming", e), e && (!e.message || e.message.includes("Incorrect response MIME type") || e.message.includes("Unexpected response MIME type"))) {
+      console.warn('Detected a proxy interfering with the "application/wasm" MIME type. Falling back to a slower WebAssembly instantiation method instead.');
+      $D(_$$e.UNOWNED, Error(`Working around error instantiating streaming fullscreen WASM: ${e}`));
+      r = await fetch(t);
+    } else {
+      xi("loader", "Error loading wasm", {
+        url: t,
+        message: e?.message
+      });
+      return e;
+    }
+  }
+  let l = await x(r, imports);
+  C = e;
+  return {
+    receiveInstance,
+    wasmResult: l
+  };
+}
+let O = Kt(async () => await w("fullscreen-app"));
+let R = Kt(async () => await w("prototype-lib"));
+let L = async e => {
+  switch (nl() && console.log("Called loadAllForWasmBinaryType for", e), e) {
+    case "fullscreen-app":
+      return await O();
+    case "prototype-lib":
+      return await R();
+  }
+};
+export function $$P3(e) {
+  let t = e || V || C;
+  if (t) {
+    let e = T(t).split("/");
+    if (e.length < 2) return;
+    let r = e[e.length - 2];
+    if ("fullscreen-wasm" === r) return {
+      fullscreen_variant: "wasm"
+    };
+    if ("prototype-lib" === r) return {
+      prototype_variant: "lib"
+    };
+    if (r.startsWith("fullscreen-wasm-")) return {
+      fullscreen_variant: r.replace("fullscreen-wasm-", "")
+    };
+    if (r.startsWith("prototype-lib-")) return {
+      prototype_variant: r.replace("prototype-lib-", "")
+    };
+  }
+  return {};
+}
+export function $$D6() {
+  let e = Ay.location.pathname;
+  for (let t of ["/c", "/community", "/@", "/user", "/org", "/team"]) if (e.startsWith(t)) return !0;
+  return !1;
+}
+export function $$k0() {
+  return !/Mobi/.test(navigator.userAgent) || /iPad/.test(navigator.userAgent) || /Macintosh/.test(navigator.userAgent) || af() && !!getFeatureFlags().load_fullscreen_make_mobile_web;
+}
+export function $$M1(e = "fullscreen-app") {
+  return L(e).then(() => { });
+}
+let F = document.location.pathname;
+function j(e) {
+  return "/preload-editor" === e || "/preload-android-proto" === e || e.startsWith("/mobile-preload");
+}
+export function $$U5() {
+  return j(F) && KR() && m0 || Sh(F) || eD && eD.isFileBrowserTab() || S8 || $$D6() || j(Ay.location.pathname) && !eD ? "never" : !getFeatureFlags().preload_fullscreen_on_load || "complete" === document.readyState || Cs() ? "immediately" : "eventually";
+}
+export function $$B2() {
+  function e() {
+    L("fullscreen-app").catch(e => { });
+  }
+  let t = $$U5();
+  "immediately" === t ? e() : "eventually" === t && window.addEventListener("load", () => {
+    e();
+  });
+}
+let G = null;
+let V = null;
+export async function $$H4(e, t = "fullscreen-app") {
+  if (V && V !== t && !nl() && ("fullscreen-app" === V ? $D(_$$e.UNOWNED, Error("Previously initialized fullscreen wasm, but is now initializing prototype-lib")) : "prototype-lib" === V && $D(_$$e.UNOWNED, Error("Previously initialized prototype-lib wasm, but is now initializing fullscreen"))), !T(t) || !window.WebAssembly) {
+    location.href = "/unsupported_browser";
+    return new Promise(() => null);
+  }
+  if (QL("asan")) {
+    V = t;
+    return S(e, t);
+  }
+  try {
+    G && G !== e && (await Ay.reloadAndWaitForever("tsApisForCpp changed", {
+      from: uCV[G.CommonApp().appType()],
+      to: uCV[e.CommonApp().appType()]
+    }));
+    G = e;
+    nl() && console.log("About to call loadAllForWasmBinaryType");
+    let {
+      receiveInstance,
+      wasmResult
+    } = await L(t);
+    nl() && console.log("Finished calling loadAllForWasmBinaryType");
+    nl() && console.log("About to call initializeWasm");
+    jS({
+      callMain: () => {
+        xK.time("callMain", () => receiveInstance(wasmResult.instance, wasmResult.module));
+      },
+      tsApisForCpp: G,
+      registerRefreshCallback: e => {
+        vw(t, e);
+      }
+    });
+    nl() && console.log("Finished calling initializeWasm");
+    V = t;
+    nl() && msz.setIsRunningInteractionTests();
+    let i = $$P3(t);
+    sx("Fullscreen Loaded", {
+      ...i
+    });
+  } catch (e) {
+    sx("Fullscreen Load Failure", {
+      error: e + ""
+    });
+    nl() && console.log("Failed to initialize fullscreen", e);
+    !e || "Failed to fetch" === e.message || "Could not download wasm module" === e.message || "TypeError: Load failed" === e.message || e.message.includes("NetworkError") || e.message.toLowerCase().includes("network error") || (e instanceof Error || (e = Error(`Fullscreen load failure: ${e}`)), $D(_$$e.UNOWNED, e));
+    e.reportedToSentry = !0;
+    return e;
+  }
+}
+export function $$z7() {
+  if (N) return !0;
+  let e = Fig.fullscreenURLs["compiled_wasm.js"];
+  return !!(e && e.startsWith("/"));
+}
+export const Bz = $$k0;
+export const F$ = $$M1;
+export const LH = $$B2;
+export const bY = $$P3;
+export const e3 = $$H4;
+export const g4 = $$U5;
+export const wl = $$D6;
+export const y4 = $$z7; 

@@ -1,0 +1,2 @@
+export var $$n0 = (e => (e.HOME = "", e.YOUR_TEAMS = "your-teams", e.CONNECTED_PROJECTS = "connected-projects", e.LIBRARIES = "libraries", e.FONTS = "fonts", e.PLUGINS = "plugins", e.WIDGETS = "widgets", e))($$n0 || {});
+export const X = $$n0;

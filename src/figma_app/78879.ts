@@ -1,0 +1,80 @@
+import { O5 } from "../figma_app/387100";
+import { UN } from "../905/700578";
+import { zl } from "../figma_app/27355";
+import { debugState } from "../905/407919";
+import { WB } from "../905/761735";
+import { oA } from "../905/723791";
+import { DuV } from "../figma_app/43951";
+import { up } from "../figma_app/903209";
+import { b } from "../905/875374";
+export async function $$p0(e) {
+  let t;
+  let r = debugState.getState().user?.id;
+  if (!r) throw Error("No current user found");
+  let p = function () {
+    try {
+      let e = UN();
+      let t = e.getCurrentPage();
+      if (!t) return [];
+      return O5(e, t.guid).map((e) => e.guid);
+    } catch (e) {
+      console.warn("Could not get responsive sets for site publishing:", e);
+      return [];
+    }
+  }();
+  zl.set(up, {
+    inProgress: !0,
+    bundleId: null,
+    error: !1
+  });
+  try {
+    t = await b(debugState.dispatch, {
+      fileKey: e,
+      publishedByUserId: r,
+      responsiveSetGuids: p
+    });
+  } catch (e) {
+    zl.set(up, {
+      inProgress: !1,
+      bundleId: null,
+      error: !0
+    });
+    return e;
+  }
+  zl.set(up, {
+    inProgress: !0,
+    bundleId: t,
+    error: !1
+  });
+  await function (e, t) {
+    let r = WB();
+    if (!r) throw Error("LiveGraph client not available");
+    return new Promise((n, i) => {
+      let a = setTimeout(() => {
+        s?.();
+        i(Error("Site publishing timeout - bundle did not complete in time"));
+      }, 6e4);
+      let s = r.subscribe(DuV, {
+        fileKey: e
+      }, (e) => {
+        try {
+          if ("loaded" === e.status) {
+            let r = oA(e.data?.siteBundles);
+            let o = r?.find((e) => e.id === t);
+            o?.status === "succeeded" ? (clearTimeout(a), s?.(), n()) : o?.status === "failed" && (clearTimeout(a), s?.(), i(Error(`Site publishing failed: ${o.error || "Unknown error"}`)));
+          }
+        } catch (e) {
+          clearTimeout(a);
+          s?.();
+          i(e);
+        }
+      });
+    });
+  }(e, t);
+  zl.set(up, {
+    inProgress: !1,
+    bundleId: t,
+    error: !1
+  });
+}
+export const r = $$p0;

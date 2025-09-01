@@ -1,0 +1,10 @@
+let $$i2 = "prototype_animation_panel--transitionLeftCol--33VAT";
+let $$r0 = "prototype_animation_panel--previewPane--q9Wvl";
+let $$a4 = "prototype_animation_panel--animationPanel--9dIh2";
+let $$o3 = "prototype_animation_panel--input--p60KV";
+let $$s1 = "prototype_animation_panel--chevron--cje-0";
+export const RG = $$r0;
+export const ai = $$s1;
+export const dR = $$i2;
+export const hF = $$o3;
+export const xy = $$a4;

@@ -1,0 +1,5596 @@
+import { Ay, xk } from '@stylexjs/stylex';
+import Y from 'classnames';
+import { createElement, Suspense, useCallback, useEffect, useId, useMemo, useRef, useState } from 'react';
+import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
+import { r as _$$r2 } from '../469e6e40/51498';
+import { g as _$$g } from '../469e6e40/136803';
+import { l as _$$l } from '../469e6e40/229084';
+import { a as _$$a, h as _$$h } from '../469e6e40/313497';
+import { Ke, Kz, T_, x8 } from '../469e6e40/336248';
+import { gn, jp } from '../469e6e40/370592';
+import { qr as _$$qr, tp as _$$tp, Ds, Fm, jE, jT, Rm, Tg, wz, Yy } from '../469e6e40/442006';
+import { eZ as _$$eZ, t2 as _$$t4, Cf, fJ, kJ, Ym, ZA, Zm, zz } from '../469e6e40/485925';
+import { E as _$$E2 } from '../469e6e40/510393';
+import { u as _$$u } from '../469e6e40/510414';
+import { pG } from '../469e6e40/556776';
+import { M as _$$M2 } from '../469e6e40/601528';
+import { nf as _$$nf, Be, bv, CB, i0, jP, PC, xd, Xu, yV } from '../469e6e40/615314';
+import { p as _$$p } from '../469e6e40/619494';
+import { S as _$$S2, V as _$$V } from '../469e6e40/678381';
+import { S as _$$S } from '../469e6e40/679996';
+import { h as _$$h2 } from '../469e6e40/689859';
+import { l as _$$l2 } from '../469e6e40/774192';
+import { CW } from '../469e6e40/800566';
+import { P as _$$P2 } from '../469e6e40/816817';
+import r from '../469e6e40/850004';
+import { q as _$$q2 } from '../469e6e40/977739';
+import { s as _$$s6 } from '../469e6e40/993242';
+import { F as _$$F3 } from '../905/224';
+import { K as _$$K2 } from '../905/3140';
+import { Jn } from '../905/17223';
+import { bL } from '../905/38914';
+import { Fq, ic, vK } from '../905/84777';
+import { Ju } from '../905/102752';
+import { t as _$$t3 } from '../905/117577';
+import { Ib } from '../905/129884';
+import { M as _$$M } from '../905/130634';
+import { P as _$$P } from '../905/143421';
+import { Ey, To } from '../905/148137';
+import { to as _$$to, Ce, Lo } from '../905/156213';
+import { p as _$$p2 } from '../905/185998';
+import { J as _$$J } from '../905/231762';
+import { J as _$$J2 } from '../905/270045';
+import { S as _$$S3 } from '../905/274480';
+import { z as _$$z2 } from '../905/284530';
+import { Z as _$$Z2 } from '../905/296690';
+import { F as _$$F } from '../905/302958';
+import { t as _$$t, tx as _$$tx } from '../905/303541';
+import { R as _$$R } from '../905/304671';
+import { z as _$$z, Z as _$$Z } from '../905/306088';
+import { b as _$$b, c as _$$c2 } from '../905/308099';
+import { v as _$$v2 } from '../905/318279';
+import { N_ as _$$N_2, Oq } from '../905/332483';
+import { nF as _$$nF } from '../905/350402';
+import { $ as _$$$ } from '../905/355181';
+import { Q as _$$Q } from '../905/363675';
+import { c as _$$c } from '../905/370443';
+import { Pc } from '../905/372672';
+import { hS } from '../905/437088';
+import { N as _$$N } from '../905/438674';
+import { v as _$$v } from '../905/442517';
+import { k as _$$k2 } from '../905/443820';
+import { az as _$$az, sx } from '../905/449184';
+import { V as _$$V2 } from '../905/480825';
+import { FJ } from '../905/508367';
+import { ud } from '../905/513035';
+import { $n as _$$$n } from '../905/515076';
+import { Dd, OJ } from '../905/519092';
+import { $n } from '../905/521428';
+import { Ek } from '../905/553831';
+import { mL, UC } from '../905/563637';
+import { r as _$$r3 } from '../905/571562';
+import { s as _$$s2 } from '../905/573154';
+import { zX } from '../905/576487';
+import { getFeatureFlags } from '../905/601108';
+import { K as _$$K } from '../905/628118';
+import { E as _$$E3 } from '../905/632989';
+import { F as _$$F2 } from '../905/634016';
+import { Bi } from '../905/652992';
+import { tT as _$$tT } from '../905/663269';
+import { In } from '../905/672640';
+import { g as _$$g2 } from '../905/687265';
+import { X as _$$X } from '../905/698965';
+import { S3 } from '../905/708054';
+import { Ju as _$$Ju, IX } from '../905/712921';
+import { B as _$$B2 } from '../905/714743';
+import { oA } from '../905/723791';
+import { DV } from '../905/739964';
+import { q as _$$q } from '../905/749058';
+import { tH as _$$tH } from '../905/751457';
+import { s as _$$s4 } from '../905/761565';
+import { u as _$$u2 } from '../905/774364';
+import { N as _$$N2 } from '../905/809096';
+import { Y as _$$Y } from '../905/830372';
+import { sZ } from '../905/845253';
+import { Um } from '../905/848862';
+import { n as _$$n } from '../905/861286';
+import { $A } from '../905/862883';
+import { XHR } from '../905/910117';
+import { A as _$$A } from '../905/920142';
+import { sf } from '../905/929976';
+import { q as _$$q3 } from '../905/932270';
+import { sx as _$$sx } from '../905/941192';
+import { B as _$$B } from '../905/950875';
+import { a as _$$a2 } from '../905/964520';
+import { E as _$$E } from '../905/984674';
+import { h1 } from '../905/986103';
+import { A as _$$A7 } from '../1617/40021';
+import { A as _$$A4 } from '../1617/230645';
+import { d as _$$d, S as _$$S4 } from '../4452/304860';
+import { p as _$$p3 } from '../4452/321313';
+import { b as _$$b2, v0 as _$$v3, _f, dv, gr, jy, ut } from '../4452/559083';
+import { A as _$$A6 } from '../5724/663128';
+import { A as _$$A5 } from '../6828/865061';
+import { d as _$$d2 } from '../7021/966231';
+import { fm } from '../c5e2cae0/453906';
+import { WQ } from '../c5e2cae0/705272';
+import { s as _$$s } from '../cssbuilder/589278';
+import { eU as _$$eU, fp, md, Xr } from '../figma_app/27355';
+import { ZC } from '../figma_app/39751';
+import { _pO, G7P, Is$, k_1, OMV, QwB, RcX, tgK } from '../figma_app/43951';
+import { $y } from '../figma_app/59509';
+import { $$ as _$$$$, nR as _$$nR2 } from '../figma_app/60079';
+import { aY as _$$aY, JA } from '../figma_app/78725';
+import { Ke as _$$Ke, Em } from '../figma_app/120227';
+import { G as _$$G } from '../figma_app/124713';
+import { gU, HQ } from '../figma_app/147952';
+import { I2, Xf } from '../figma_app/153916';
+import { isGovCluster } from '../figma_app/169182';
+import { J as _$$J3 } from '../figma_app/179602';
+import { FPlanNameType, FOrganizationLevelType, FCostCenterType } from '../figma_app/191312';
+import { Zx } from '../figma_app/217457';
+import { Bg } from '../figma_app/246699';
+import { T as _$$T } from '../figma_app/257703';
+import { nB as _$$nB, hE, jk, vo, wi, Y9 } from '../figma_app/272243';
+import { yl } from '../figma_app/275462';
+import { Rs } from '../figma_app/288654';
+import { t4 as _$$t2 } from '../figma_app/297957';
+import { _V, M5, pk } from '../figma_app/300692';
+import { V as _$$V3 } from '../figma_app/312987';
+import { ag as _$$ag, nn as _$$nn, s as _$$s3, _g, cg, du, kA, mU, oB, OW, W3, ZY } from '../figma_app/336853';
+import { UE } from '../figma_app/345997';
+import { H3, S2 } from '../figma_app/465071';
+import { xb } from '../figma_app/465776';
+import { Jt } from '../figma_app/481749';
+import { $q, Sm, w_ } from '../figma_app/482728';
+import { _ as _$$_2, S as _$$S5 } from '../figma_app/490799';
+import { y1 } from '../figma_app/492908';
+import { $w, hi, Hq, KA, Kc, NL, OT, q4, Sl, Tf, vs, xP, Xw, Y4, ye, yo } from '../figma_app/494261';
+import { aE as _$$aE } from '../figma_app/514043';
+import { c4 } from '../figma_app/518077';
+import { IE } from '../figma_app/545541';
+import { aI as _$$aI } from '../figma_app/552876';
+import { mI } from '../figma_app/566371';
+import { p3 } from '../figma_app/588582';
+import { I7 } from '../figma_app/594947';
+import { ol } from '../figma_app/598018';
+import { $z } from '../figma_app/617427';
+import { Eh } from '../figma_app/617654';
+import { $$, N_ as _$$N_, nR as _$$nR, cw, CY, ks, qZ, vd } from '../figma_app/637027';
+import { pL, v0 } from '../figma_app/639088';
+import { J7 } from '../figma_app/650409';
+import { QN, v4 } from '../figma_app/655139';
+import { sortByPropertyWithOptions } from '../figma_app/656233';
+import { Ct, CT, Gv, OE } from '../figma_app/736948';
+import { dG } from '../figma_app/753501';
+import { ls, V0 } from '../figma_app/755395';
+import { Rs as _$$Rs } from '../figma_app/761870';
+import { tKW } from '../figma_app/763686';
+import { z6 } from '../figma_app/805373';
+import { O as _$$O } from '../figma_app/809387';
+// var r = require('../figma_app/822011');
+import { r as _$$r, hM, N_, qr, Rc, vS } from '../figma_app/827447';
+import { EB } from '../figma_app/831101';
+import { fu } from '../figma_app/831799';
+import { mf } from '../figma_app/844435';
+import { kt, qc } from '../figma_app/858013';
+import { Nz, Yp } from '../figma_app/870683';
+import { eD as _$$eD } from '../figma_app/876459';
+import { iT } from '../figma_app/901889';
+import { ey as _$$ey, yX } from '../figma_app/918700';
+import { Ex, zE } from '../figma_app/919079';
+import { V3 as _$$V4 } from '../figma_app/926061';
+import { s as _$$s5 } from '../figma_app/961559';
+import { V3 } from '../figma_app/976345';
+import { A as _$$A8 } from '../svg/619883';
+import { A as _$$A3 } from '../svg/678521';
+import { A as _$$A2 } from '../svg/783138';
+import t4 from '../vendor/128080';
+import { d4, wA } from '../vendor/514228';
+import nJ from '../vendor/523035';
+import { _ as _$$_ } from '../vendor/853977';
+function B(e) {
+  let t = e.dispatch;
+  let a = _$$t2();
+  let i = useCallback(() => {
+    t(_$$V({
+      orgSamlConfigId: e.orgSamlConfig.id
+    }));
+  }, [t, e.orgSamlConfig.id]);
+  let r = useCallback(() => {
+    t(_$$to({
+      type: _$$l(),
+      data: {
+        dispatch: t,
+        onConfirm: () => {
+          t(Ce());
+          i();
+        },
+        onCancel: () => {
+          t(Ce());
+        }
+      }
+    }));
+  }, [i, t]);
+  let l = !!e.orgSamlConfig.idp_name;
+  let d = e.orgSamlConfig.sp_scim_bearer_token_at;
+  let c = e.orgSamlConfig.has_scim_token;
+  return jsxs(Fragment, {
+    children: [jsx('p', {
+      className: wz,
+      children: _$$tx(a() ? 'org_settings.scim.scim_group_description' : 'org_settings.scim.scim_description', {
+        helpArticle: jsx(_$$N, {
+          href: 'https://help.figma.com/hc/articles/360040532333-Getting-Started-with-SAML-SSO#h_d0220c93-18fa-4c1f-b965-69a5c8113f05',
+          newTab: !0,
+          children: _$$tx('org_settings.sso.help_article')
+        })
+      })
+    }), jsx('table', {
+      className: _$$tp,
+      children: jsxs('tbody', {
+        children: [e.org.k12_google_org && jsxs('tr', {
+          children: [jsx('th', {
+            children: _$$tx('org_settings.sso.tenant_id')
+          }), jsx('td', {
+            children: e.orgSamlConfig.id
+          })]
+        }), jsxs('tr', {
+          children: [jsx('th', {
+            children: _$$tx('org_settings.scim.api_token')
+          }), d && jsx('td', {
+            children: _$$tx('org_settings.scim.api_token_generated_at', {
+              timestamp: jsx(h1, {
+                date: d
+              })
+            })
+          }), jsxs('td', {
+            children: [!l && !e.org.k12_google_org && _$$t('org_settings.scim.saml_sso_must_be_configured'), (l || e.org.k12_google_org) && c && jsx(_$$N, {
+              onClick: r,
+              href: '#',
+              trusted: !0,
+              children: _$$tx('org_settings.scim.revoke_token_access')
+            }), (l || e.org.k12_google_org) && !c && jsx(_$$N, {
+              onClick: () => {
+                t(_$$S2({
+                  orgSamlConfigId: e.orgSamlConfig.id
+                }));
+              },
+              href: '#',
+              trusted: !0,
+              children: _$$tx('org_settings.scim.generate_api_token')
+            })]
+          })]
+        })]
+      })
+    })]
+  });
+}
+let G = Ju(() => {
+  let e = wA();
+  let t = d4(e => e.orgById[e.currentUserOrgId]);
+  let a = d4(e => e.orgSamlConfig);
+  let s = !a.config;
+  let r = () => e(Lo());
+  return jsx(OJ, {
+    title: _$$t('org_settings.scim.scim_provisioning'),
+    onClose: r,
+    maxWidth: 492,
+    minWidth: 492,
+    children: jsxs('div', {
+      className: jE,
+      children: [s && jsx(_$$k2, {}), !s && jsxs(Fragment, {
+        children: [jsx(B, {
+          dispatch: e,
+          org: t,
+          orgSamlConfig: a.config
+        }), jsx('div', {
+          className: Yy,
+          children: jsx($n, {
+            onClick: r,
+            variant: 'secondary',
+            children: _$$tx('org_settings.sign_in_method.done')
+          })
+        })]
+      })]
+    })
+  });
+}, 'EDIT_SCIM_MODAL');
+let J = Y;
+function ed(e) {
+  let t = !!e.orgSamlConfig.idp_name;
+  let a = e.isMfaForMembersEnabled;
+  return jsxs(Fragment, {
+    children: [_$$eD && jsx('div', {
+      className: wz,
+      children: _$$tx('org_settings.sso.you_must_use_a_web_browser')
+    }), jsxs(_$$z, {
+      value: e.signInMethod,
+      onChange: t => {
+        e.setSignInMethod(t);
+      },
+      className: _$$s.pl10.pt16.$,
+      children: [jsx(_$$Z, {
+        value: Ct.ANY,
+        disabled: !!_$$eD,
+        children: _$$tx('org_settings.sign_in_method.any', {
+          default: jsx('span', {
+            className: Rm,
+            children: _$$tx('org_settings.sign_in_method.default')
+          })
+        })
+      }), jsx(_$$Z, {
+        value: Ct.GOOGLE,
+        disabled: !!_$$eD || a,
+        tooltipText: a ? _$$t('org_settings.sign_in_method.unavailable_when_2fa_for_members_is_enabled') : void 0,
+        children: _$$tx('org_settings.sign_in_method.members_must_log_in_with_a_google_account')
+      }), jsx(_$$Z, {
+        tooltipText: a ? _$$t('org_settings.sign_in_method.unavailable_when_2fa_for_members_is_enabled') : t ? void 0 : _$$t('org_settings.sign_in_method.you_need_to_configure_saml_sso_first'),
+        value: Ct.SAML,
+        disabled: !!_$$eD || !t || a,
+        children: _$$tx('org_settings.sign_in_method.members_must_log_in_with_saml_sso')
+      })]
+    })]
+  });
+}
+function ec() {
+  return jsx(_$$N, {
+    newTab: !0,
+    href: 'https://help.figma.com/hc/articles/360052497994-Set-login-and-authentication-method',
+    trusted: !0,
+    children: _$$tx('org_settings.mfa_for_members.learn_more_link')
+  });
+}
+function e_(e) {
+  let t = wA();
+  let [a, r] = useState(!1);
+  let l = ZC(e.mfaRequiredSetting);
+  let o = l === CT.GUESTS || l === CT.ALL_USERS;
+  let d = l === CT.MEMBERS || l === CT.ALL_USERS;
+  let c = e.mfaRequiredSetting === CT.MEMBERS || e.mfaRequiredSetting === CT.ALL_USERS;
+  return jsxs(Fragment, {
+    children: [jsx('div', {
+      className: _$$s.flex.alignLeft.mt16.pt10.$,
+      style: _$$sx.add({
+        borderTop: '1px solid var(--color-border)'
+      }).$,
+      children: jsx(_$$S3, {
+        label: jsx(_$$J2, {
+          children: _$$tx('org_settings.mfa_for_members.checkbox_title')
+        }),
+        checked: c,
+        onChange: t => {
+          t ? e.setMfaRequiredSetting(o ? CT.ALL_USERS : CT.MEMBERS) : e.setMfaRequiredSetting(o ? CT.GUESTS : null);
+        },
+        disabled: !!_$$eD,
+        children: _$$tx('org_settings.mfa_for_members.checkbox_description', {
+          learnMoreLink: jsx(ec, {})
+        })
+      })
+    }), !d && c && jsx('div', {
+      className: _$$s.mt16.$,
+      children: e.isLoading ? jsx(qc, {}) : jsx($y, {
+        variant: 'warn',
+        children: jsxs(_$$Q, {
+          title: _$$tx('org_settings.mfa_for_members.warning_title', {
+            numMembers: e.nonMfaMemberCount
+          }),
+          children: [_$$tx('org_settings.mfa_for_members.warning_description', {
+            numMembers: e.mfaMemberCount
+          }), jsx('button', {
+            className: Ds,
+            onClick: () => {
+              a || (r(!0), t(_$$F.enqueue({
+                message: _$$t('members_table.csv_export.preparing_request'),
+                type: 'orgRoster.exportCSV',
+                icon: zX.SPINNER
+              })), _$$G.getMemberCSVExport({
+                orgId: e.org.id
+              }).then(() => {
+                t(_$$F.enqueue({
+                  message: _$$t('members_table.csv_export.generating'),
+                  type: 'orgRoster.exportCSV',
+                  icon: zX.CHECK
+                }));
+              }, () => {
+                t(_$$F.enqueue({
+                  message: _$$t('members_table.csv_export.error'),
+                  type: 'orgRoster.exportCSV',
+                  icon: zX.EXCLAMATION,
+                  error: !0
+                }));
+              }), r(!1));
+            },
+            children: _$$tx('org_settings.mfa_for_members.download_csv')
+          }, 'download-csv')]
+        })
+      })
+    })]
+  });
+}
+let eu = Ju(() => {
+  let e = wA();
+  let t = d4(e => e.orgById[e.currentUserOrgId]);
+  let a = d4(e => e.orgSamlConfig);
+  let r = _g(t);
+  let [l, o] = useState(r);
+  let d = function(e) {
+    let t = I7('ff_mfa_for_members');
+    return !!(e && kA(e) && e.security_add_on_enabled_at && t.getConfig().getValue('enabled', !1));
+  }(t);
+  let c = Rs(QwB, {
+    orgId: t.id
+  });
+  let _ = c.status === 'loading' || c.data?.orgMfaMemberInfo?.status !== _$$tT.Loaded;
+  let u = t.mfa_required ? t.mfa_required : null;
+  let [m, p] = useState(u);
+  let g = c.status === 'loaded' && c.data?.orgMfaMemberInfo?.status === _$$tT.Loaded && c.data?.orgMfaMemberInfo?.data || {
+    totalMemberCount: 0,
+    mfaMemberCount: 0,
+    nonMfaMemberCount: 0
+  };
+  let h = Number(g.totalMemberCount);
+  let b = Number(g.nonMfaMemberCount);
+  let v = d && l === Ct.ANY;
+  let f = () => e(Lo());
+  return jsxs(OJ, {
+    containerClassName: jT,
+    title: _$$t('org_settings.sign_in_method.authentication'),
+    onClose: f,
+    maxWidth: 560,
+    minWidth: 560,
+    children: [jsxs('div', {
+      className: jE,
+      children: [!a.config && jsx(_$$k2, {}), a.config && jsxs(Fragment, {
+        children: [jsx('p', {
+          className: Fm,
+          children: _$$tx('org_settings.sign_in_method.authentication_instruction')
+        }), jsx(ed, {
+          dispatch: e,
+          org: t,
+          orgSamlConfig: a.config,
+          signInMethod: l,
+          setSignInMethod: o,
+          isMfaForMembersEnabled: m === CT.MEMBERS || m === CT.ALL_USERS
+        }), v && jsx(e_, {
+          mfaRequiredSetting: m,
+          setMfaRequiredSetting: p,
+          isLoading: _,
+          mfaMemberCount: h - b,
+          nonMfaMemberCount: b,
+          org: t
+        })]
+      })]
+    }), jsxs('div', {
+      className: J()(_$$qr, v ? void 0 : _$$s.mt2.$),
+      children: [jsx($n, {
+        variant: 'secondary',
+        onClick: f,
+        children: _$$tx('general.cancel')
+      }), jsx('div', {
+        className: Tg,
+        children: jsx($n, {
+          variant: 'primary',
+          onClick: () => {
+            l === Ct.GOOGLE ? e(Xw({
+              orgId: t.id,
+              googleSsoOnly: !0,
+              mfaRequired: m
+            })) : l === Ct.SAML ? e(hi({
+              orgId: t.id,
+              samlSsoOnly: !0,
+              mfaRequired: m
+            })) : r === Ct.GOOGLE ? e(Xw({
+              orgId: t.id,
+              googleSsoOnly: !1,
+              mfaRequired: m
+            })) : e(hi({
+              orgId: t.id,
+              samlSsoOnly: !1,
+              mfaRequired: m
+            }));
+            f();
+          },
+          children: _$$tx('org_settings.guest_control.save_button')
+        })
+      })]
+    })]
+  });
+}, 'SIGN_IN_METHOD_MODAL');
+let ev = 'billing_emails_modal--secondary--4yHBt';
+let ef = 'billing_emails_modal--full_width--lstMy';
+let ej = 'billing_emails_modal--icon--KUryt';
+let ey = 'billing_emails_modal--description_section--3-x5B';
+let ew = 'billing_emails_modal--subtitle--AtE9I';
+let eC = Ju(e => {
+  let t = wA();
+  let s = () => t(Lo());
+  _$$A.extend(r);
+  _$$A(e.subscriptionStart).format('Do');
+  return jsx(OJ, {
+    onClose: s,
+    title: _$$t('billing_emails_modal.billing_emails_info.what_billing_emails'),
+    minWidth: 341,
+    maxWidth: 341,
+    children: jsxs('div', {
+      className: 'billing_emails_modal--container--GTxxo',
+      children: [jsx('div', {
+        className: ev,
+        children: _$$tx('billing_emails_modal.billing_emails_info.about_billing_emails')
+      }), jsxs('div', {
+        className: ef,
+        children: [jsx('div', {
+          className: ej,
+          children: jsx(_$$B2, {
+            svg: _$$A2
+          })
+        }), jsxs('div', {
+          className: ey,
+          children: [jsx('div', {
+            className: ew,
+            children: _$$tx('billing_emails_modal.billing_emails_info.annual_subscriptions_and_renewals')
+          }), jsx('div', {
+            className: ev,
+            children: _$$tx('billing_emails_modal.billing_emails_info.annual_subscription_renews_on_description', {
+              date: jsx('strong', {
+                children: _$$tx('billing_emails_modal.billing_emails_info.subscription_date', {
+                  subscriptionStart: e.subscriptionStart
+                })
+              })
+            })
+          })]
+        })]
+      }), jsxs('div', {
+        className: ef,
+        children: [jsx('div', {
+          className: ej,
+          children: jsx(_$$B2, {
+            svg: _$$A3
+          })
+        }), jsxs('div', {
+          className: ey,
+          children: [jsx('div', {
+            className: ew,
+            children: _$$tx('billing_emails_modal.billing_emails_info.quarterly_true_ups')
+          }), jsxs('div', {
+            className: ev,
+            children: [jsx('div', {
+              className: 'billing_emails_modal--padding_below--44QyG',
+              children: _$$tx('billing_emails_modal.billing_emails_info.quarterly_true_ups_description_1.seat_rename')
+            }), _$$tx('billing_emails_modal.billing_emails_info.quarterly_true_ups_description_2', {
+              more: jsx('a', {
+                className: 'billing_emails_modal--link--sJ8RF blue_link--blueLink--9rlnd',
+                href: 'https://help.figma.com/hc/articles/360040328293-Manage-billing-on-the-Organization-and-Enterprise-plans',
+                children: _$$tx('billing_emails_modal.billing_emails_info.more')
+              })
+            })]
+          })]
+        })]
+      }), jsx('div', {
+        className: 'billing_emails_modal--buttons--ibKgB',
+        children: jsx(vd, {
+          onClick: s,
+          children: _$$tx('billing_emails_modal.billing_emails_info.close')
+        })
+      })]
+    })
+  });
+}, 'BillingEmailsInfo');
+let eT = _$$eU(e => {
+  let t = e(_$$Z2);
+  if (t) {
+    return e(OMV.Query({
+      orgId: t.id
+    }));
+  }
+});
+function eA() {
+  return md(eT);
+}
+let te = Ju(e => {
+  let t = wA();
+  let a = d4(e => e.orgById[e.currentUserOrgId]);
+  let s = hS(e);
+  return jsx(bL, {
+    manager: s,
+    width: 364,
+    children: jsxs(vo, {
+      children: [jsx(Y9, {
+        children: jsx(hE, {
+          children: _$$t('settings_tab.delete_org_modal.are_you_sure_you_d_like_to_delete_figma')
+        })
+      }), jsx(_$$nB, {
+        children: _$$tx('settings_tab.delete_org_modal.please_confirm_that_you_wish_to_permanently_delete_the_org', {
+          orgName: a.name
+        })
+      }), jsx(wi, {
+        children: jsxs(jk, {
+          children: [jsx($n, {
+            onClick: () => {
+              t(Lo());
+            },
+            variant: 'secondary',
+            children: _$$tx('modal.cancel')
+          }), jsx($n, {
+            onClick: () => {
+              t(Lo());
+              t(q4({
+                orgId: a.id
+              }));
+            },
+            variant: 'destructive',
+            children: _$$tx('settings_tab.delete_org_modal.request_to_delete_organization')
+          })]
+        })
+      })]
+    })
+  });
+}, 'DELETE_ORG_MODAL');
+let tt = Ju(e => {
+  let t = wA();
+  let a = sZ();
+  let r = hS(e);
+  let [l, o] = useState(_$$Rs());
+  let d = useCallback(e => {
+    sx('Delete user search performed', {
+      orgId: a?.id,
+      queryLength: e.inputValue.length
+    });
+    o(e);
+  }, [a?.id]);
+  let c = l.tokens.length === 0;
+  return jsx(bL, {
+    manager: r,
+    width: 364,
+    children: jsxs(vo, {
+      children: [jsx(Y9, {
+        children: jsx(hE, {
+          children: _$$t('settings_tab.delete_org_modal.delete_users_from_this_organization')
+        })
+      }), jsxs(_$$nB, {
+        children: [_$$tx('settings_tab.delete_org_modal.enter_names_or_emails_of_users_that_you_d_like_to_delete'), jsx('div', {
+          className: 'delete_org_modal_autocomplete--autocompleteDiv--XcvHs',
+          children: jsx(_$$g, {
+            placeholder: _$$t('settings_tab.delete_org_modal.email_or_names_of_org_members'),
+            autocomplete: l,
+            onAutocompleteChange: d
+          })
+        })]
+      }), jsx(wi, {
+        children: jsxs(jk, {
+          children: [jsx($n, {
+            onClick: () => {
+              t(Lo());
+            },
+            variant: 'secondary',
+            children: _$$tx('modal.cancel')
+          }), jsx($n, {
+            disabled: c,
+            onClick: () => {
+              t(Lo());
+              t(_$$to({
+                type: ta,
+                data: {
+                  orgUsers: l.tokens.map(e => e.content)
+                }
+              }));
+            },
+            variant: 'destructive',
+            children: _$$tx('settings_tab.delete_org_modal.delete')
+          })]
+        })
+      })]
+    })
+  });
+}, 'DELETE_ORG_USER_MODAL');
+let ta = Ju(e => {
+  let t = wA();
+  let a = d4(e => e.orgById[e.currentUserOrgId]);
+  let s = hS(e);
+  return jsx(bL, {
+    manager: s,
+    width: 364,
+    children: jsxs(vo, {
+      children: [jsx(Y9, {
+        children: jsx(hE, {
+          children: _$$t('settings_tab.delete_org_modal.delete_users_and_their_data')
+        })
+      }), jsxs(_$$nB, {
+        children: [jsx('p', {
+          children: _$$tx('settings_tab.delete_org_modal.you_re_deleting_figma_data_and_access_for_the_following_user')
+        }), jsx('ul', {
+          className: 'delete_org_modal_autocomplete--orgUserList--PhNTi',
+          children: e.orgUsers.map(e => jsxs('li', {
+            children: [e.user.handle, ' (', e.user.email, ')']
+          }, e.user.email))
+        }), jsx('br', {}), jsx('p', {
+          children: _$$tx('settings_tab.delete_org_modal.this_action_can_t_be_undone')
+        })]
+      }), jsx(wi, {
+        children: jsxs(jk, {
+          children: [jsx($n, {
+            onClick: () => {
+              t(Lo());
+            },
+            variant: 'secondary',
+            children: _$$tx('modal.cancel')
+          }), jsx($n, {
+            onClick: () => {
+              t(Lo());
+              t(ye({
+                orgId: a.id,
+                orgUserIds: e.orgUsers.map(e => e.id)
+              }));
+            },
+            variant: 'destructive',
+            children: _$$tx('modal.confirm')
+          })]
+        })
+      })]
+    })
+  });
+}, 'CONFIRM_DELETE_ORG_USER_MODAL');
+let tg = {
+  removeCustomSettingsButton: {
+    'color': 'x1n0bwc9',
+    'padding': 'xf7z5ut',
+    'paddingInline': null,
+    'paddingStart': null,
+    'paddingLeft': null,
+    'paddingEnd': null,
+    'paddingRight': null,
+    'paddingBlock': null,
+    'paddingTop': null,
+    'paddingBottom': null,
+    ':hover_color': 'x1c5oinq',
+    ':hover_textDecoration': 'xt0b8zv',
+    ':hover_textDecorationColor': null,
+    ':hover_textDecorationLine': null,
+    ':hover_textDecorationStyle': null,
+    ':hover_textDecorationThickness': null,
+    '$$css': !0
+  },
+  goBackButton: {
+    'height': 'xxk0z11',
+    'paddingRight': 'xctkrei',
+    'paddingInlineStart': null,
+    'paddingInlineEnd': null,
+    'margin': 'x1e1th6i',
+    'marginInline': null,
+    'marginInlineStart': null,
+    'marginLeft': null,
+    'marginInlineEnd': null,
+    'marginRight': null,
+    'marginBlock': null,
+    'marginTop': null,
+    'marginBottom': null,
+    'display': 'x78zum5',
+    'flexDirection': 'x1q0g3np',
+    'justifyContent': 'xl56j7k',
+    'alignItems': 'x6s0dn4',
+    'cursor': 'x1ypdohk',
+    'maxWidth': 'x12csvog',
+    'overflowWrap': 'x1mzt3pk',
+    'whiteSpace': 'xeaf4i8',
+    'wordBreak': 'x13faqbe',
+    'wordWrap': 'x1vvkbs',
+    'backgroundColor': 'xjbqb8w xv2f06h',
+    'borderRadius': 'x1axg66t xjc16lc',
+    'borderStartStartRadius': null,
+    'borderStartEndRadius': null,
+    'borderEndStartRadius': null,
+    'borderEndEndRadius': null,
+    'borderTopLeftRadius': null,
+    'borderTopRightRadius': null,
+    'borderBottomLeftRadius': null,
+    'borderBottomRightRadius': null,
+    'border': 'xfj9a5l',
+    'borderWidth': null,
+    'borderInlineWidth': null,
+    'borderInlineStartWidth': null,
+    'borderLeftWidth': null,
+    'borderInlineEndWidth': null,
+    'borderRightWidth': null,
+    'borderBlockWidth': null,
+    'borderTopWidth': null,
+    'borderBottomWidth': null,
+    'borderStyle': null,
+    'borderInlineStyle': null,
+    'borderInlineStartStyle': null,
+    'borderLeftStyle': null,
+    'borderInlineEndStyle': null,
+    'borderRightStyle': null,
+    'borderBlockStyle': null,
+    'borderTopStyle': null,
+    'borderBottomStyle': null,
+    'borderColor': null,
+    'borderInlineColor': null,
+    'borderInlineStartColor': null,
+    'borderLeftColor': null,
+    'borderInlineEndColor': null,
+    'borderRightColor': null,
+    'borderBlockColor': null,
+    'borderTopColor': null,
+    'borderBottomColor': null,
+    ':focus-visible_border': 'x1drnl1r',
+    ':focus-visible_borderWidth': null,
+    ':focus-visible_borderInlineWidth': null,
+    ':focus-visible_borderInlineStartWidth': null,
+    ':focus-visible_borderLeftWidth': null,
+    ':focus-visible_borderInlineEndWidth': null,
+    ':focus-visible_borderRightWidth': null,
+    ':focus-visible_borderBlockWidth': null,
+    ':focus-visible_borderTopWidth': null,
+    ':focus-visible_borderBottomWidth': null,
+    ':focus-visible_borderStyle': null,
+    ':focus-visible_borderInlineStyle': null,
+    ':focus-visible_borderInlineStartStyle': null,
+    ':focus-visible_borderLeftStyle': null,
+    ':focus-visible_borderInlineEndStyle': null,
+    ':focus-visible_borderRightStyle': null,
+    ':focus-visible_borderBlockStyle': null,
+    ':focus-visible_borderTopStyle': null,
+    ':focus-visible_borderBottomStyle': null,
+    ':focus-visible_borderColor': 'x1g3hczy',
+    ':focus-visible_borderInlineColor': null,
+    ':focus-visible_borderInlineStartColor': null,
+    ':focus-visible_borderLeftColor': null,
+    ':focus-visible_borderInlineEndColor': null,
+    ':focus-visible_borderRightColor': null,
+    ':focus-visible_borderBlockColor': null,
+    ':focus-visible_borderTopColor': null,
+    ':focus-visible_borderBottomColor': null,
+    '$$css': !0
+  }
+};
+function ty({
+  org: e,
+  loadingStatus: t,
+  allWorkspaces: a,
+  displaySettings: s,
+  subHeader: i,
+  workspaceSubText: r,
+  hasCustomSettings: l
+}) {
+  let o = a.filter(l);
+  return jsxs('div', {
+    className: 'x1w4f5ud xdyg6lv',
+    children: [jsxs('div', {
+      className: 'x7hzu26 x12sbs06',
+      children: [jsx('p', {
+        className: 'x1s688f x1j6dyjg x1d3mw78 x1akne3o',
+        children: _$$tx('org_settings.workspace_controls.header_text')
+      }), jsx('p', {
+        className: 'x1j6dyjg x1d3mw78 x1n0bwc9',
+        children: i
+      })]
+    }), jsxs(_$$Y, {
+      direction: 'vertical',
+      spacing: 8,
+      children: [jsx(tk, {
+        org: e,
+        workspaces: a,
+        displaySettings: s,
+        hasCustomSettings: l
+      }), jsx('div', {
+        ...xk(tE.customWorkspaceContainer, t === 'loaded' && tE.loaded),
+        children: o.map(e => jsx('div', {
+          children: jsx(_$$Y, {
+            direction: 'horizontal',
+            spacing: 8,
+            children: jsx(tw, {
+              onClick: () => s(e),
+              avatar: jsx(z6, {
+                size: 24,
+                entity: e
+              }),
+              mainText: e.name,
+              subText: r(e)
+            }, e.name)
+          })
+        }, e.name))
+      })]
+    })]
+  });
+}
+function tw(e) {
+  let t = useId();
+  return jsxs(_$$E3, {
+    'onClick': e.onClick,
+    'className': 'x1gskr33 x1ihwiht x78zum5 x1q0g3np xh8yej3 x6s0dn4 x1nfngrj x1qhtx96 x13iak60 x1ypdohk xv2f06h',
+    'aria-label': _$$t('org_settings.view_workspace_settings', {
+      workspaceName: e.mainText
+    }),
+    'aria-describedby': t,
+    'children': [jsx('div', {
+      'aria-hidden': 'true',
+      'className': 'xrybvsa x2lah0s',
+      'children': e.avatar
+    }), jsx('div', {
+      className: 'x1mzt3pk xeaf4i8 x13faqbe x98rzlu xeuugli',
+      children: jsxs(_$$Y, {
+        direction: 'vertical',
+        verticalAlignItems: 'center',
+        spacing: 0,
+        children: [jsx(_$$E, {
+          children: e.mainText
+        }), jsx('span', {
+          id: t,
+          className: 'x1j6dyjg x1d3mw78 x1n0bwc9',
+          children: e.subText
+        })]
+      })
+    }), jsx('div', {
+      'aria-hidden': 'true',
+      'className': 'x8x9d4c x2lah0s',
+      'children': jsx(_$$a2, {})
+    })]
+  });
+}
+function tk(e) {
+  let [t, a] = useState('');
+  let [i, r] = useState(void 0);
+  let l = useRef(null);
+  let o = useId();
+  let d = _$$F2.useCombobox({
+    onActiveValueChange: r,
+    onSelect: t => {
+      let n = e.workspaces.find(e => e.id === t);
+      n && !e.hasCustomSettings(n) && (a(''), r(void 0), e.displaySettings(n));
+    }
+  });
+  let c = e.workspaces.filter(e => e.name.toLowerCase().includes(t.toLowerCase()));
+  return jsxs('div', {
+    ref: l,
+    className: 'xh8yej3',
+    children: [jsxs(_$$p2.Root, {
+      children: [jsx(_$$p2, {
+        placeholder: _$$t('settings_tab.add_workspace_label'),
+        id: o,
+        ...d.getInputProps({
+          onChange: a,
+          value: t
+        })
+      }), jsx(_$$F2.Trigger, {
+        ...d.getTriggerProps(),
+        children: jsx(_$$r3, {})
+      })]
+    }), c.length > 0 && jsx(_$$F2.PopupList, {
+      style: {
+        width: l.current?.getBoundingClientRect().width
+      },
+      className: 'xh8yej3 x1yjdb4r xmkeg23 x1y0btm7 x7z60cl x19y5rnk x16fy0r8 x7wgvq7',
+      anchorEl: l,
+      ...d.getListProps(),
+      children: jsx(_$$P, {
+        children: jsx('div', {
+          style: {
+            maxHeight: 400
+          },
+          children: c.map(t => {
+            let a = e.hasCustomSettings(t);
+            return createElement(_$$F2.Option, {
+              ...xk(i === t.id && !a && tE.activeComboboxOption),
+              disabled: a,
+              key: t.id,
+              value: t.id
+            }, jsxs('div', {
+              className: 'x78zum5 x1q0g3np x6s0dn4 x1nfngrj xf7z5ut xjwf9q1',
+              children: [jsx(z6, {
+                size: 24,
+                entity: t
+              }), jsx('span', {
+                ...xk(tE.workspaceNameContainer, a && tE.disabled),
+                children: t.name
+              }), a && jsx('span', {
+                className: 'xge78cn x8x9d4c x2lah0s',
+                children: _$$t('org_settings.workspace_controls.has_custom_settings')
+              })]
+            }));
+          })
+        })
+      })
+    })]
+  });
+}
+let tE = {
+  workspaceNameContainer: {
+    overflowWrap: 'x1mzt3pk',
+    whiteSpace: 'xeaf4i8',
+    wordBreak: 'x13faqbe',
+    flex: 'x98rzlu',
+    flexGrow: null,
+    flexShrink: null,
+    flexBasis: null,
+    minWidth: 'xeuugli',
+    $$css: !0
+  },
+  customWorkspaceContainer: {
+    display: 'x78zum5',
+    flexDirection: 'xdt5ytf',
+    gap: 'x1nfngrj',
+    rowGap: null,
+    columnGap: null,
+    width: 'xh8yej3',
+    marginLeft: 'xgsvwom',
+    marginInlineStart: null,
+    marginInlineEnd: null,
+    maxHeight: 'xnjgh8c',
+    $$css: !0
+  },
+  loaded: {
+    maxHeight: 'x1hkcv85',
+    transitionProperty: 'xrok2fi',
+    transitionDuration: 'x6b05lp',
+    transitionTimingFunction: 'xz4gly6',
+    $$css: !0
+  },
+  disabled: {
+    color: 'xge78cn',
+    $$css: !0
+  },
+  activeComboboxOption: {
+    backgroundColor: 'x30nh5c',
+    $$css: !0
+  }
+};
+let tC = {
+  labelText: {
+    ..._$$g2.textBodyMediumStrong,
+    $$css: !0
+  },
+  noteText: {
+    ..._$$g2.textBodyMedium,
+    color: 'x1n0bwc9',
+    $$css: !0
+  },
+  successText: {
+    ..._$$g2.textBodyMedium,
+    color: 'xq6u9c4',
+    $$css: !0
+  },
+  secondaryText: {
+    ..._$$g2.textBodyMedium,
+    color: 'x1n0bwc9',
+    $$css: !0
+  }
+};
+let tS = Ju(e => {
+  let {
+    org,
+    onClose
+  } = e;
+  let r = hS(e);
+  let l = wA();
+  let [o, d] = useState(!org.ai_features_disabled);
+  let c = eA();
+  let _ = [...(c?.data?.org?.workspaces ?? [])];
+  let u = o ? _$$t('admin_settings.ai.enable_success') : _$$t('admin_settings.ai.disable_success');
+  let m = useCallback(e => {
+    l(_$$to({
+      type: tN,
+      data: {
+        workspace: e
+      }
+    }));
+  }, [l]);
+  let p = useCallback(e => {
+    let t = e.workspaceSharedSetting?.aiSetting;
+    if (!t) return null;
+    let a = t.status === 'loaded' && t.data === 'enabled';
+    return jsx('div', {
+      children: jsx('p', {
+        ...Ay.props(a ? tC.successText : tC.secondaryText),
+        children: a ? _$$tx('org_settings.general.on') : _$$tx('org_settings.general.off')
+      })
+    });
+  }, []);
+  return jsx(bL, {
+    manager: r,
+    height: 'dynamic',
+    width: 'lg',
+    children: jsxs(vo, {
+      children: [jsx(Y9, {
+        children: jsx(hE, {
+          children: _$$tx('org_settings.ai_controls.ai_features')
+        })
+      }), jsxs(_$$nB, {
+        children: [jsx(tA, {
+          resource: 'org',
+          aiControlsSetting: o,
+          setAiControlsSetting: d
+        }), org.tier === FPlanNameType.ENTERPRISE && jsx(ty, {
+          org,
+          loadingStatus: c?.status ?? 'loading',
+          allWorkspaces: _,
+          displaySettings: m,
+          subHeader: _$$tx('org_settings.ai_controls.update_ai_features_settings_for'),
+          workspaceSubText: p,
+          hasCustomSettings: tR
+        })]
+      }), jsx(wi, {
+        children: jsxs(jk, {
+          children: [jsx($n, {
+            variant: 'secondary',
+            onClick: onClose,
+            children: _$$tx('org_settings.general.cancel')
+          }), jsx($n, {
+            onClick: () => {
+              l(yo({
+                payload: {
+                  ai_features_disabled: !o
+                },
+                successMessage: u
+              }));
+              onClose();
+            },
+            children: _$$tx('org_settings.general.save')
+          })]
+        })
+      })]
+    })
+  });
+}, 'AiControlsModal');
+let tN = Ju(({
+  open: e,
+  onClose: t,
+  workspace: a
+}) => {
+  let r = wA();
+  let l = _$$t('org_settings.ai_controls.workspace_success');
+  let [o, d] = useState(tR(a));
+  let c = useCallback(() => {
+    r(_$$to({
+      type: tI,
+      data: {
+        workspace: a,
+        goBack: t
+      }
+    }));
+  }, [r, a, t]);
+  let _ = hS({
+    open: e,
+    onClose: t
+  });
+  return jsx(bL, {
+    manager: _,
+    height: 'dynamic',
+    width: 'lg',
+    children: jsxs(vo, {
+      children: [jsx(Y9, {
+        children: jsx(hE, {
+          children: jsxs(_$$E3, {
+            onClick: t,
+            ...Ay.props(tg.goBackButton),
+            children: [jsx(_$$t3, {}), a.name]
+          })
+        })
+      }), jsx(_$$nB, {
+        children: jsx(tA, {
+          resource: 'workspace',
+          aiControlsSetting: o,
+          setAiControlsSetting: d
+        })
+      }), jsxs(wi, {
+        children: [tR(a) && jsx(_$$E3, {
+          onClick: c,
+          ...Ay.props(tg.removeCustomSettingsButton),
+          children: _$$tx('org_settings.workspace_controls.remove_custom_settings')
+        }), jsxs(jk, {
+          children: [jsx($n, {
+            variant: 'secondary',
+            onClick: t,
+            children: _$$tx('org_settings.general.cancel')
+          }), jsx($n, {
+            variant: 'primary',
+            onClick: () => {
+              _$$u2.updateAiControls({
+                workspaceId: a.id,
+                aiControlsSetting: o
+              }).then(() => {
+                r(_$$s2.flash(l));
+                t();
+              }).catch(e => {
+                r(_$$s2.error(e.message));
+              });
+            },
+            children: _$$tx('org_settings.general.save')
+          })]
+        })]
+      })]
+    })
+  });
+}, 'WorkspaceAiControlsModal');
+let tI = Ju(({
+  goBack: e,
+  workspace: t
+}) => {
+  let a = wA();
+  let s = _$$t('org_settings.ai_controls.workspace_success');
+  let r = hS({
+    open: !0,
+    onClose: e
+  });
+  return jsx(bL, {
+    manager: r,
+    height: 'dynamic',
+    width: 'lg',
+    children: jsxs(vo, {
+      children: [jsx(Y9, {
+        children: jsx(hE, {
+          children: _$$tx('org_settings.export_controls.remove_workspace_export_controls_title')
+        })
+      }), jsx(_$$nB, {
+        children: _$$tx('org_settings.ai_controls.remove_workspace_ai_controls_body', {
+          workspaceName: t.name
+        })
+      }), jsx(wi, {
+        children: jsxs(jk, {
+          children: [jsx($n, {
+            variant: 'secondary',
+            onClick: e,
+            children: _$$tx('org_settings.general.cancel')
+          }), jsx($n, {
+            variant: 'destructive',
+            onClick: () => {
+              _$$u2.updateAiControls({
+                workspaceId: t.id,
+                aiControlsSetting: null
+              }).then(() => {
+                e();
+                e();
+                a(_$$s2.flash(s));
+              }).catch(e => {
+                a(_$$s2.error(e.message));
+              });
+            },
+            children: _$$tx('org_settings.general.remove')
+          })]
+        })
+      })]
+    })
+  });
+}, 'ResetAIControlSettingsConfirmationModal');
+function tT() {
+  return jsx(_$$N, {
+    'aria-label': _$$t('settings_tab.learn_more_about_ai_features'),
+    'href': _$$d2.aiFeatures,
+    'trusted': !0,
+    'newTab': !0,
+    'children': _$$t('general.learn_more')
+  });
+}
+function tA({
+  aiControlsSetting: e,
+  setAiControlsSetting: t,
+  resource: a
+}) {
+  let i = useId();
+  let r = a === 'org' ? _$$tx('org_settings.ai_controls.let_people_in_your_organization', {
+    learnMore: jsx(tT, {})
+  }) : _$$tx('org_settings.ai_controls.let_people_in_your_workspace', {
+    learnMore: jsx(tT, {})
+  });
+  return jsxs('div', {
+    className: 'x78zum5 x1q0g3np x1qughib x6s0dn4 x1vamu9a',
+    children: [jsxs('div', {
+      className: 'x78zum5 xdt5ytf',
+      children: [jsx(_$$J2, {
+        'htmlFor': i,
+        'aria-describedby': 'ai-features-note',
+        'children': jsx('span', {
+          ...Ay.props(tC.labelText),
+          children: _$$tx('org_settings.ai_controls.allow_ai_features')
+        })
+      }), jsx('span', {
+        ...Ay.props(tC.noteText),
+        id: 'ai-features-note',
+        children: r
+      })]
+    }), jsx(_$$v, {
+      id: i,
+      checked: e,
+      onChange: t
+    })]
+  });
+}
+function tR(e) {
+  let t = e.workspaceSharedSetting?.aiSetting;
+  return t?.status === 'loaded' && !!t.data && typeof t.data == 'string';
+}
+let tD = 'autogen_password_controls_modal--radioLabel--tmcmf';
+let tP = e => e ? 'autogen' : 'custom';
+let tU = Ju(() => {
+  let e = wA();
+  let t = _$$t('org_settings.autogen_password_controls.success');
+  let a = d4(e => e.orgById[e.currentUserOrgId]);
+  let r = Rs(RcX, {
+    orgId: a.id
+  });
+  let l = () => e(Lo());
+  let [o, d] = useState(r.status === 'loaded' ? tP(r.data?.org?.orgSharedSetting?.autogenPasswordControls) : null);
+  useEffect(() => {
+    r.status === 'loaded' && d(tP(r.data?.org?.orgSharedSetting?.autogenPasswordControls));
+  }, [r]);
+  return jsx(OJ, {
+    title: _$$t('org_settings.autogen_password_controls.title'),
+    onClose: l,
+    maxWidth: 380,
+    minWidth: 380,
+    fixedTop: !0,
+    children: jsxs('div', {
+      className: 'autogen_password_controls_modal--modalContent--qogS8',
+      children: [_$$tx('org_settings.autogen_password_controls.description'), jsxs(_$$z, {
+        value: o,
+        onChange: e => {
+          d(e);
+        },
+        className: 'autogen_password_controls_modal--radioGroup---6hFh',
+        children: [jsxs(_$$Z, {
+          value: 'custom',
+          labelClassName: tD,
+          disabled: r.status === 'loading',
+          children: [jsx(_$$E, {
+            children: _$$tx('org_settings.autogen_password_controls.custom_passwords_button')
+          }), jsx('span', {
+            children: jsx(_$$E, {
+              color: 'secondary',
+              children: _$$tx('org_settings.autogen_password_controls.default')
+            })
+          }), jsx('br', {}), jsx(_$$E, {
+            color: 'secondary',
+            children: _$$tx('org_settings.autogen_password_controls.custom_passwords_description')
+          })]
+        }), jsxs(_$$Z, {
+          value: 'autogen',
+          labelClassName: tD,
+          disabled: r.status === 'loading',
+          children: [jsx(_$$E, {
+            children: _$$tx('org_settings.autogen_password_controls.autogen_passwords_button')
+          }), jsx('br', {}), jsx(_$$E, {
+            color: 'secondary',
+            children: _$$tx('org_settings.autogen_password_controls.autogen_passwords_description')
+          })]
+        })]
+      }), jsx(_$$z2, {
+        orientation: 'vertical',
+        variant: 'brand',
+        iconSrc: _$$A4,
+        dataTestId: 'password-info-banner',
+        children: jsx(_$$E, {
+          children: _$$tx('org_settings.autogen_password_controls.banner')
+        })
+      }), jsxs('div', {
+        className: 'autogen_password_controls_modal--modalButtons--3GOXX',
+        children: [jsx(_$$nR2, {
+          onClick: l,
+          children: jsx(_$$E, {
+            children: _$$tx('org_settings.autogen_password_controls.cancel')
+          })
+        }), jsx(_$$$$, {
+          onClick: () => {
+            o && (e(Tf({
+              orgId: a.id,
+              autogenPasswordControl: o === 'autogen',
+              settingsId: r.data?.org?.orgSharedSetting?.id,
+              successMessage: t
+            })), l());
+          },
+          children: jsx(_$$E, {
+            children: _$$tx('org_settings.autogen_password_controls.save')
+          })
+        })]
+      })]
+    })
+  });
+}, 'AutogenPasswordControlsModal');
+let tF = Ju(() => {
+  let e = wA();
+  let t = d4(e => e.orgById[e.currentUserOrgId]);
+  let a = () => e(Lo());
+  return jsx(OJ, {
+    title: _$$t('settings_tab.scim_metadata_modal.member_metadata'),
+    onClose: a,
+    maxWidth: 340,
+    minWidth: 340,
+    children: jsxs('div', {
+      className: jE,
+      children: [jsx('p', {
+        className: wz,
+        children: _$$tx('settings_tab.scim_metadata_modal.change_which_scim_metadata_shows_on_the_members_tab')
+      }), jsx(_$$z, {
+        value: t.featured_scim_metadata,
+        onChange: a => e(Kc({
+          orgId: t.id,
+          attribute: a
+        })),
+        children: Object.values(FCostCenterType).map(e => jsx(_$$Z, {
+          value: e,
+          children: du(e)
+        }, e))
+      }), jsx(cw, {
+        onClick: a,
+        className: Yy,
+        children: _$$tx('settings_tab.scim_metadata_modal.done')
+      })]
+    })
+  });
+}, 'ChooseScimMetadata');
+let t$ = {
+  'current_user:read': {
+    id: 'current_user:read',
+    category: 'Users',
+    isEnterpriseOnly: !1,
+    isPlanPrivateOnly: !1,
+    getImpersonalDescription: () => _$$t('tokens.settings.dev_token_modal.scope.current_user_description'),
+    getPersonalDescription: () => [_$$t('tokens.oauth.read_your_name_email_and_profile_image')]
+  },
+  'file_comments:read': {
+    id: 'file_comments:read',
+    category: 'Files',
+    isEnterpriseOnly: !1,
+    isPlanPrivateOnly: !1,
+    getImpersonalDescription: () => _$$t('tokens.scope.file_comments_read.impersonal_description'),
+    getPersonalDescription: () => [_$$t('tokens.oauth.read_comments_for_files_you_have_access_to')]
+  },
+  'file_comments:write': {
+    id: 'file_comments:write',
+    category: 'Files',
+    isEnterpriseOnly: !1,
+    isPlanPrivateOnly: !1,
+    getImpersonalDescription: () => _$$t('tokens.scope.file_comments_write.impersonal_description'),
+    getPersonalDescription: () => [_$$t('tokens.oauth.modify_comments_for_files_you_have_access_to')]
+  },
+  'file_content:read': {
+    id: 'file_content:read',
+    category: 'Files',
+    isEnterpriseOnly: !1,
+    isPlanPrivateOnly: !1,
+    getImpersonalDescription: () => _$$t('tokens.settings.dev_token_modal.scope.file_content_description_v2'),
+    getPersonalDescription: () => [_$$t('tokens.oauth.scope.file_content_read_description')]
+  },
+  'file_dev_resources:read': {
+    id: 'file_dev_resources:read',
+    category: 'Files',
+    isEnterpriseOnly: !1,
+    isPlanPrivateOnly: !1,
+    getImpersonalDescription: () => _$$t('tokens.scope.file_dev_resources_read.impersonal_description'),
+    getPersonalDescription: () => [_$$t('tokens.oauth.read_dev_resources')]
+  },
+  'file_dev_resources:write': {
+    id: 'file_dev_resources:write',
+    category: 'Files',
+    isEnterpriseOnly: !1,
+    isPlanPrivateOnly: !1,
+    getImpersonalDescription: () => _$$t('tokens.scope.file_dev_resources_write.impersonal_description'),
+    getPersonalDescription: () => [_$$t('tokens.oauth.create_and_modify_dev_resources')]
+  },
+  'file_metadata:read': {
+    id: 'file_metadata:read',
+    category: 'Files',
+    isEnterpriseOnly: !1,
+    isPlanPrivateOnly: !1,
+    getImpersonalDescription: () => _$$t('tokens.settings.dev_token_modal.scope.file_metadata_description'),
+    getPersonalDescription: () => [_$$t('tokens.oauth.scope.file_metadata_read_description')]
+  },
+  'file_variables:read': {
+    id: 'file_variables:read',
+    category: 'Files',
+    isEnterpriseOnly: !0,
+    isPlanPrivateOnly: !1,
+    getImpersonalDescription: () => _$$t('tokens.scope.file_variables_read.impersonal_description'),
+    getPersonalDescription: () => [_$$t('tokens.oauth.read_variables_from_files_you_have_access_to')]
+  },
+  'file_variables:write': {
+    id: 'file_variables:write',
+    category: 'Files',
+    isEnterpriseOnly: !0,
+    isPlanPrivateOnly: !1,
+    getImpersonalDescription: () => _$$t('tokens.scope.file_variables_write.impersonal_description'),
+    getPersonalDescription: () => [_$$t('tokens.oauth.create_and_modify_variables_for_files_you_have_access_to')]
+  },
+  'file_versions:read': {
+    id: 'file_versions:read',
+    category: 'Files',
+    isEnterpriseOnly: !1,
+    isPlanPrivateOnly: !1,
+    getImpersonalDescription: () => _$$t('tokens.settings.dev_token_modal.scope.file_versions_description'),
+    getPersonalDescription: () => [_$$t('tokens.oauth.scope.file_versions_read_description')]
+  },
+  'files:read': {
+    id: 'files:read',
+    category: 'Files',
+    isEnterpriseOnly: !1,
+    isDeprecated: !0,
+    isPlanPrivateOnly: !1,
+    getImpersonalDescription: () => _$$t('tokens.scope.deprecated_scope.description'),
+    getPersonalDescription: () => [_$$t('tokens.oauth.scope.file_content_read_description'), _$$t('tokens.oauth.read_comments_for_files_you_have_access_to'), _$$t('tokens.oauth.scope.projects_read_description'), _$$t('tokens.oauth.read_components_and_styles_you_have_access_to'), _$$t('tokens.oauth.read_your_name_email_and_profile_image')]
+  },
+  'library_analytics:read': {
+    id: 'library_analytics:read',
+    category: 'Libraries',
+    isEnterpriseOnly: !0,
+    isPlanPrivateOnly: !1,
+    getImpersonalDescription: () => _$$t('tokens.settings.dev_token_modal.scope.library_analytics_description'),
+    getPersonalDescription: () => [_$$t('tokens.oauth.read_library_analytics_data')]
+  },
+  'library_assets:read': {
+    id: 'library_assets:read',
+    category: 'Libraries',
+    isEnterpriseOnly: !1,
+    isPlanPrivateOnly: !1,
+    getImpersonalDescription: () => _$$t('tokens.settings.dev_token_modal.scope.library_assets_description'),
+    getPersonalDescription: () => [_$$t('tokens.oauth.scope.library_asset_read_description')]
+  },
+  'library_content:read': {
+    id: 'library_content:read',
+    category: 'Libraries',
+    isEnterpriseOnly: !1,
+    isPlanPrivateOnly: !1,
+    getImpersonalDescription: () => _$$t('tokens.settings.dev_token_modal.scope.library_content_description'),
+    getPersonalDescription: () => [_$$t('tokens.oauth.scope.library_content_read_description')]
+  },
+  'org:activity_log_read': {
+    id: 'org:activity_log_read',
+    category: 'Orgs',
+    isEnterpriseOnly: !0,
+    isPlanPrivateOnly: !0,
+    getImpersonalDescription: () => _$$t('tokens.scope.org_activity_log_read.impersonal_description'),
+    getPersonalDescription: () => [_$$t('tokens.oauth.view_user_activity_in_figma_like_opening_files_creating_projects_and_sharing_resources')]
+  },
+  'projects:read': {
+    id: 'projects:read',
+    category: 'Projects',
+    isEnterpriseOnly: !1,
+    isPlanPrivateOnly: !0,
+    getImpersonalDescription: () => _$$t('tokens.settings.dev_token_modal.scope.projects_description'),
+    getPersonalDescription: () => [_$$t('tokens.oauth.scope.projects_read_description')]
+  },
+  'team_library_content:read': {
+    id: 'team_library_content:read',
+    category: 'Libraries',
+    isEnterpriseOnly: !1,
+    isPlanPrivateOnly: !1,
+    getImpersonalDescription: () => _$$t('tokens.settings.dev_token_modal.scope.team_library_content_description'),
+    getPersonalDescription: () => [_$$t('tokens.oauth.scope.team_library_content_read_description')]
+  },
+  'webhooks:read': {
+    id: 'webhooks:read',
+    category: 'Webhooks',
+    isEnterpriseOnly: !1,
+    isPlanPrivateOnly: !1,
+    getImpersonalDescription: () => _$$t('tokens.scope.webhooks_read.impersonal_description'),
+    getPersonalDescription: () => [_$$t('tokens.oauth.scope.webhooks_read_description')]
+  },
+  'webhooks:write': {
+    id: 'webhooks:write',
+    category: 'Webhooks',
+    isEnterpriseOnly: !1,
+    isPlanPrivateOnly: !1,
+    getImpersonalDescription: () => _$$t('tokens.scope.webhooks_write.impersonal_description'),
+    getPersonalDescription: () => [_$$t('tokens.oauth.create_and_modify_webhooks')]
+  },
+  'org:discovery_read': {
+    id: 'org:discovery_read',
+    category: 'Orgs',
+    isEnterpriseOnly: !0,
+    isPlanPrivateOnly: !0,
+    getImpersonalDescription: () => _$$t('tokens.scope.org_discovery_read.description'),
+    getPersonalDescription: () => [_$$t('tokens.oauth.discovery_scope_description')]
+  },
+  'selections:read': {
+    id: 'selections:read',
+    category: 'Files',
+    isEnterpriseOnly: !1,
+    isPlanPrivateOnly: !1,
+    ldFlag: 'pixie_get_selections_allowlist',
+    getImpersonalDescription: () => _$$t('tokens.scope.selections_read.impersonal_description'),
+    getPersonalDescription: () => [_$$t('tokens.oauth.scope.selections_read_description')]
+  },
+  'file_code_connect:write': {
+    id: 'file_code_connect:write',
+    category: 'Libraries',
+    isEnterpriseOnly: !1,
+    isPlanPrivateOnly: !0,
+    getImpersonalDescription: () => _$$t('tokens.settings.dev_token_modal.scope.code_connect_description'),
+    getPersonalDescription: () => [_$$t('tokens.oauth.scope.code_connect_description')]
+  },
+  'file_create': {
+    id: 'file_create',
+    category: 'Files',
+    isEnterpriseOnly: !1,
+    isPlanPrivateOnly: !1,
+    isDeprecated: !0,
+    getImpersonalDescription: () => _$$t('tokens.scope.deprecated_scope.description'),
+    getPersonalDescription: () => [_$$t('tokens.oauth.create_files')]
+  },
+  'file_enumerate': {
+    id: 'file_enumerate',
+    category: 'Files',
+    isEnterpriseOnly: !1,
+    isPlanPrivateOnly: !1,
+    isDeprecated: !0,
+    getImpersonalDescription: () => _$$t('tokens.scope.deprecated_scope.description'),
+    getPersonalDescription: () => [_$$t('tokens.oauth.enumerate_files')]
+  },
+  'file_read': {
+    id: 'file_read',
+    category: 'Files',
+    isEnterpriseOnly: !1,
+    isPlanPrivateOnly: !1,
+    isDeprecated: !0,
+    getImpersonalDescription: () => _$$t('tokens.scope.deprecated_scope.description'),
+    getPersonalDescription: () => [_$$t('tokens.oauth.read_files_you_have_access_to'), _$$t('tokens.oauth.read_and_modify_comments_for_files_you_have_access_to'), _$$t('tokens.oauth.read_projects_you_have_access_to'), _$$t('tokens.oauth.read_components_and_styles_you_have_access_to')]
+  },
+  'mcp:connect': {
+    id: 'mcp:connect',
+    category: 'MCP',
+    isEnterpriseOnly: !1,
+    isPlanPrivateOnly: !1,
+    getImpersonalDescription: () => _$$t('tokens.scope.mcp_connect.description'),
+    getPersonalDescription: () => [_$$t('tokens.oauth.scope.mcp_connect_description')]
+  }
+};
+var tB = (e => (e.ORG_ACTIVITY_LOG_READ = 'org:activity_log_read', e.ORG_DISCOVERY_READ = 'org:discovery_read', e.USER_FILE_READ_DEPRECATED = 'file_read', e.USER_FILE_CREATE = 'file_create', e.USER_FILE_ENUMERATE = 'file_enumerate', e.USER_FILES_READ_DEPRECATING = 'files:read', e.USER_CURRENT_USER_READ = 'current_user:read', e.USER_FILE_CONTENT_READ = 'file_content:read', e.USER_FILE_COMMENTS_READ = 'file_comments:read', e.USER_FILE_COMMENTS_WRITE = 'file_comments:write', e.USER_FILE_DEV_RESOURCES_READ = 'file_dev_resources:read', e.USER_FILE_DEV_RESOURCES_WRITE = 'file_dev_resources:write', e.USER_FILE_METADATA_READ = 'file_metadata:read', e.USER_FILE_VARIABLES_READ = 'file_variables:read', e.USER_FILE_VARIABLES_WRITE = 'file_variables:write', e.USER_FILE_VERSIONS_READ = 'file_versions:read', e.USER_LIBRARY_ANALYTICS_READ = 'library_analytics:read', e.USER_LIBRARY_ASSETS_READ = 'library_assets:read', e.USER_LIBRARY_CONTENT_READ = 'library_content:read', e.USER_PROJECTS_READ = 'projects:read', e.USER_TEAM_LIBRARY_CONTENT_READ = 'team_library_content:read', e.USER_WEBHOOKS_READ = 'webhooks:read', e.USER_WEBHOOKS_WRITE = 'webhooks:write', e.MCP_CONNECT = 'mcp:connect', e.PRIVATE_SELECTIONS_READ = 'selections:read', e))(tB || {});
+let tG = {
+  'org:activity_log_read': () => [_$$t('tokens.oauth.view_user_activity_in_figma_like_opening_files_creating_projects_and_sharing_resources')],
+  'org:discovery_read': () => [_$$t('tokens.oauth.discovery_scope_description')],
+  'selections:read': () => [_$$t('tokens.oauth.scope.selections_read_description')],
+  'file_read': () => [_$$t('tokens.oauth.read_files_you_have_access_to'), _$$t('tokens.oauth.read_and_modify_comments_for_files_you_have_access_to'), _$$t('tokens.oauth.read_projects_you_have_access_to'), _$$t('tokens.oauth.read_components_and_styles_you_have_access_to')],
+  'file_create': () => [_$$t('tokens.oauth.create_files')],
+  'file_enumerate': () => [_$$t('tokens.oauth.enumerate_files')],
+  'files:read': () => [_$$t('tokens.oauth.scope.file_content_read_description'), _$$t('tokens.oauth.read_comments_for_files_you_have_access_to'), _$$t('tokens.oauth.scope.projects_read_description'), _$$t('tokens.oauth.read_components_and_styles_you_have_access_to'), _$$t('tokens.oauth.read_your_name_email_and_profile_image')],
+  'file_content:read': () => [_$$t('tokens.oauth.scope.file_content_read_description')],
+  'file_comments:read': () => [_$$t('tokens.oauth.read_comments_for_files_you_have_access_to')],
+  'file_comments:write': () => [_$$t('tokens.oauth.modify_comments_for_files_you_have_access_to')],
+  'file_dev_resources:read': () => [_$$t('tokens.oauth.read_dev_resources')],
+  'file_dev_resources:write': () => [_$$t('tokens.oauth.create_and_modify_dev_resources')],
+  'file_metadata:read': () => [_$$t('tokens.oauth.scope.file_metadata_read_description')],
+  'file_variables:read': () => [_$$t('tokens.oauth.read_variables_from_files_you_have_access_to')],
+  'file_variables:write': () => [_$$t('tokens.oauth.create_and_modify_variables_for_files_you_have_access_to')],
+  'file_versions:read': () => [_$$t('tokens.oauth.scope.file_versions_read_description')],
+  'library_analytics:read': () => [_$$t('tokens.oauth.read_library_analytics_data')],
+  'library_assets:read': () => [_$$t('tokens.oauth.scope.library_asset_read_description')],
+  'library_content:read': () => [_$$t('tokens.oauth.scope.library_content_read_description')],
+  'current_user:read': () => [_$$t('tokens.oauth.read_your_name_email_and_profile_image')],
+  'projects:read': () => [_$$t('tokens.oauth.scope.projects_read_description')],
+  'team_library_content:read': () => [_$$t('tokens.oauth.scope.team_library_content_read_description')],
+  'webhooks:read': () => [_$$t('tokens.oauth.scope.webhooks_read_description')],
+  'webhooks:write': () => [_$$t('tokens.oauth.create_and_modify_webhooks')],
+  'mcp:connect': () => [_$$t('tokens.oauth.scope.mcp_connect_description')]
+};
+let tz = 'connected_apps--modalContent--WhP9e';
+let tV = 'connected_apps--tokenMeta--i-YbR';
+let tW = 'connected_apps--buttonBox--kFfUo';
+let tH = 'connected_apps--button--xL-AQ';
+let tY = 'connected_apps--columnScope--4ZV2h table--column--974RA';
+let tJ = 'connected_apps--columnDescription--Dz0ts table--column--974RA';
+function tX(e) {
+  return jsxs('div', {
+    role: 'button',
+    tabIndex: 0,
+    className: 'connected_apps--tokenRow--5aooy',
+    onClick: e.onClick,
+    children: [jsx('div', {
+      children: jsx('img', {
+        src: e.token.logo,
+        alt: '',
+        className: 'connected_apps--logoImage--lmidS'
+      })
+    }), jsxs('div', {
+      className: 'connected_apps--tokenInfo--pGVC6',
+      children: [jsx('div', {
+        className: 'connected_apps--tokenName--NTQJi',
+        children: e.token.name
+      }), jsx('div', {
+        className: tV,
+        children: _$$tx('settings_tab.connected_apps.connected_since', {
+          date: _$$A(e.token.granted_at).format('LL')
+        })
+      }), jsx('div', {
+        className: tV,
+        children: _$$tx('settings_tab.connected_apps.scopes_granted', {
+          numScopes: e.token.scopes?.length ?? 1
+        })
+      })]
+    }), e.onClick && jsx(_$$B2, {
+      svg: _$$A5,
+      className: 'connected_apps--caret--94bA6'
+    })]
+  }, e.token.name);
+}
+let tQ = Ju(e => {
+  let t = wA();
+  let a = () => t(Lo());
+  return jsx(OJ, {
+    title: _$$t('settings_tab.connected_apps.revoke_app', {
+      appName: e.token.name
+    }),
+    onClose: a,
+    maxWidth: 462,
+    minWidth: 462,
+    children: jsxs('div', {
+      className: tz,
+      children: [jsx('p', {
+        className: 'connected_apps--confirmText--thJul',
+        children: _$$tx('settings_tab.connected_apps.are_you_sure', {
+          appName: jsx('span', {
+            style: {
+              fontWeight: 600
+            },
+            children: e.token.name
+          }),
+          orgName: e.org.name
+        })
+      }), jsxs('div', {
+        className: tW,
+        children: [jsx(_$$nR, {
+          className: tH,
+          onClick: a,
+          children: _$$tx('general.back')
+        }), jsx(qZ, {
+          className: tH,
+          onClick: () => {
+            t(Lo());
+            XHR.del(`/api/oauth/token/${e.org.id}/${e.token.client_id}`).then(a => {
+              t(_$$s2.flash(_$$t('settings_tab.connected_apps.oauth_token_deleted')));
+              t(Lo());
+              e.onRevoke();
+            }).catch(e => {
+              t(_$$s2.error(e.data?.message || _$$t('settings_tab.connected_apps.an_error_occurred_while_deleting_the_token'), 5e3));
+              console.error(e);
+            });
+          },
+          children: _$$tx('settings_tab.connected_apps.revoke')
+        })]
+      })]
+    })
+  });
+}, 'REVOKE_APP_MODAL');
+let tZ = Ju(e => {
+  let t = wA();
+  let [a, r] = useState([]);
+  let [l, o] = useState(!0);
+  useEffect(() => {
+    Eh.getOauthConnections({
+      orgId: e.org.id
+    }).then(({
+      data: e
+    }) => {
+      r(e.meta);
+      o(!1);
+    }).catch(e => {
+      t(_$$s2.error(_$$t('settings_tab.connected_apps.error_loading_tokens')));
+      o(!1);
+    });
+  }, [t, e.org.id]);
+  let d = null;
+  d = l ? jsx('div', {
+    className: 'connected_apps--loading--335P4',
+    children: jsx(kt, {})
+  }) : a.length === 0 ? jsx('p', {
+    className: 'connected_apps--noToken--giQ0J',
+    children: _$$tx('settings_tab.connected_apps.this_org_does_not_have_any_connected_apps', {
+      orgName: e.org.name
+    })
+  }) : jsx('div', {
+    children: a.map(s => jsx(tX, {
+      token: s,
+      onClick: () => {
+        t(_$$to({
+          type: t0,
+          data: {
+            org: e.org,
+            token: s,
+            onRevoke: () => {
+              r(a.filter(e => e.client_id !== s.client_id));
+            }
+          }
+        }));
+      }
+    }, s.client_id))
+  });
+  return jsx(OJ, {
+    title: _$$t('settings_tab.connected_apps'),
+    onClose: () => t(Lo()),
+    maxWidth: 462,
+    minWidth: 462,
+    children: jsxs('div', {
+      className: tz,
+      children: [jsx('p', {
+        className: 'connected_apps--sectionInstruction--ROaAC',
+        children: _$$tx('settings_tab.connected_apps.instruction')
+      }), d]
+    })
+  });
+}, 'ConnectedAppsModal');
+let t0 = Ju(e => {
+  let t = wA();
+  return jsx(OJ, {
+    title: e.token.name,
+    onClose: () => t(Lo()),
+    maxWidth: 462,
+    minWidth: 462,
+    children: jsxs('div', {
+      className: tz,
+      children: [jsx(tX, {
+        token: e.token
+      }), jsx('p', {
+        children: _$$tx('settings_tab.connected_apps.scope_description')
+      }), jsxs('div', {
+        className: 'connected_apps--scopeTable--QHd25',
+        children: [jsxs('div', {
+          className: 'connected_apps--headerRow--4oKHB',
+          children: [jsx('div', {
+            className: tY,
+            children: _$$tx('settings_tab.connected_apps.o_auth_scope')
+          }), jsx('div', {
+            className: tJ,
+            children: _$$tx('settings_tab.connected_apps.description')
+          })]
+        }), e.token.scopes?.map(e => {
+          let t = getFeatureFlags().ext_use_scope_registry_for_oauth_descs ? t$[e]?.getPersonalDescription() ?? [] : tG[e]() ?? [];
+          return jsxs('div', {
+            className: 'connected_apps--tableRow--NkX0O',
+            children: [jsx('div', {
+              className: tY,
+              children: jsx('span', {
+                children: e
+              })
+            }), jsx('div', {
+              className: tJ,
+              children: t.map(e => jsx('div', {
+                children: e
+              }, e))
+            })]
+          }, e);
+        })]
+      }), jsxs('div', {
+        className: tW,
+        children: [jsx(_$$nR, {
+          className: tH,
+          onClick: () => {
+            t(Lo());
+          },
+          children: _$$tx('general.back')
+        }), jsx(qZ, {
+          className: tH,
+          onClick: () => {
+            t(_$$to({
+              type: tQ,
+              data: {
+                org: e.org,
+                token: e.token,
+                onRevoke: e.onRevoke
+              }
+            }));
+          },
+          children: _$$tx('settings_tab.connected_apps.revoke')
+        })]
+      })]
+    })
+  });
+}, 'ConnectedAppModal');
+let t5 = t4;
+function aj({
+  onClick: e,
+  onChange: t,
+  value: a,
+  error: s,
+  buttonText: r
+}) {
+  let l = S2().unwrapOr(null);
+  let o = H3(l);
+  let d = l?.name;
+  let c = wA();
+  let _ = jsx(CY, {
+    onClick: () => {
+      if (_$$eD) {
+        c(sf({
+          view: 'org',
+          orgId: o ?? '',
+          orgViewTab: _$$X.PLUGINS
+        }));
+        c(Ce());
+      } else {
+        let e = `/files/${o}/plugins`;
+        c(V3({
+          url: e
+        }));
+      }
+    },
+    trusted: !0,
+    children: d
+  });
+  let u = jsx(CY, {
+    onClick: () => {
+      c(V3({
+        url: '/community/plugins/devmode'
+      }));
+    },
+    trusted: !0,
+    children: _$$t('community.community')
+  });
+  return jsxs(Fragment, {
+    children: [jsxs('div', {
+      className: _$$s.flex.flexColumn.gap8.py8.$,
+      children: [jsx(_$$E, {
+        children: _$$tx('settings_tab.paste_plugin_link', {
+          orgLink: _,
+          communityLink: u
+        })
+      }), jsxs('div', {
+        className: _$$s.flex.$,
+        children: [jsx(ks, {
+          className: _$$s.flexGrow1.mr8.$,
+          onChange: t,
+          value: a,
+          placeholder: Nz(),
+          recordingKey: 'devRelatedLinkUrlInput'
+        }), jsx(_$$$, {
+          onClick: e,
+          children: r
+        })]
+      })]
+    }), s && jsx('div', {
+      className: _$$s.colorTextDanger.$,
+      children: s
+    })]
+  });
+}
+function ay() {
+  return jsx('div', {
+    className: _$$s.colorBorder.bSolid.bt1.$
+  });
+}
+let aE = _$$eU(!1);
+let aC = _$$eU(!1);
+let aS = _$$eU(!1);
+let aN = _$$eU('');
+let aI = _$$eU(null);
+let aT = _$$eU(null);
+let aA = _$$eU('');
+let aR = _$$eU(null);
+var aO = (e => (e.AUTO_RUN = 'auto-run', e.PINNED_PLUGINS = 'pinned-plugins', e.CODEGEN = 'codegen', e))(aO || {});
+async function aL(e, t, a) {
+  let n;
+  let s = Yp(e);
+  let i = {
+    errorMessage: _$$t('settings_tab.pinned_plugins_invalid_url')
+  };
+  if (s == null) return i;
+  try {
+    n = await Ek(k_1, {
+      pluginId: s,
+      orgId: t.id
+    });
+  } catch (e) {
+    return i;
+  }
+  if (!n.plugin) return i;
+  let r = mf(n.plugin, t.id, null, null);
+  return r ? t.plugins_whitelist_enforced && !a[r.plugin_id] && r.org_id !== t.id ? {
+    errorMessage: _$$t('settings_tab.invalid_url_allowlist')
+  } : r && !M5(r) ? i : {
+    pluginId: s,
+    plugin: r
+  } : i;
+}
+function aD({
+  text: e
+}) {
+  return jsx('div', {
+    className: _$$s.mx8.$,
+    children: jsx(_$$E, {
+      color: 'default',
+      children: e
+    })
+  });
+}
+function aM({
+  preferences: e
+}) {
+  return jsx(_$$_.Group, {
+    axis: 'y',
+    onReorder: t => {
+      e.updatePrefs(t);
+    },
+    values: e.pinnedPlugins,
+    role: 'button',
+    tabIndex: 0,
+    translate: 'no',
+    children: e.pinnedPlugins.map(t => jsx(_$$_.Item, {
+      value: t,
+      id: t.plugin_id,
+      translate: 'no',
+      children: jsxs('div', {
+        className: _$$s.justifyBetween.flex.h32.alignCenter.$,
+        children: [jsxs('div', {
+          className: _$$s.flex.itemsCenter.$,
+          children: [jsx(_$$V2, {
+            className: _$$s.w16.h16.br2.$,
+            plugin: t
+          }), jsx('div', {
+            className: _$$s.h32.flex.itemsCenter.mx4.alignLeft.$,
+            children: t.name
+          })]
+        }), jsx('div', {
+          className: _$$s.justifyEnd.$,
+          children: jsx(_$$$, {
+            'icon': 'minus-32',
+            'onClick': () => {
+              e.unpinPlugin(t.plugin_id);
+            },
+            'onMouseDown': dG,
+            'recordingKey': 'overflow_pins',
+            'data-tooltip-type': Ib.TEXT,
+            'data-tooltip': _$$t('settings_tab.pinned_plugins_remove'),
+            'variant': 'text',
+            'dataTestId': 'remove-pinned-plugin-button'
+          })
+        })]
+      })
+    }, t.plugin_id))
+  });
+}
+function aP(e) {
+  let t = sZ() || null;
+  return jsxs('div', {
+    className: _$$s.flex.justifyBetween.py8.$,
+    children: [jsxs('div', {
+      children: [jsx('div', {
+        className: _$$s.mb4.$,
+        children: jsx(_$$E, {
+          fontWeight: 'bold',
+          children: e.label
+        })
+      }), jsx(_$$E, {
+        children: e.description
+      })]
+    }), jsx(_$$l2, {
+      on: e.isActive,
+      onChange: a => {
+        e.onToggle(a);
+        sx('Dev Mode Setting Toggled', {
+          orgId: t?.id ?? '',
+          setting: e.sectionName,
+          value: a ? 'on' : 'off'
+        });
+      },
+      disabled: !kA(t) && !e.isActive,
+      dataTestId: `dev-mode-setting-toggle-${e.label.split(' ').map(e => e.toLowerCase()).join('-')}`
+    })]
+  });
+}
+function aU({
+  preferences: e
+}) {
+  let t = sZ() || null;
+  let a = d4(e => e.whitelistedPlugins);
+  let [r, l] = useState(!1);
+  let [o, d] = fp(aE);
+  let [_, u] = fp(aA);
+  let [m, p] = fp(aR);
+  let g = getFeatureFlags().dev_mode_org_pinned_plugins_ent && kA(t) || !getFeatureFlags().dev_mode_org_pinned_plugins_ent;
+  let h = () => {
+    l(!r);
+  };
+  let x = e => {
+    u(e.target.value);
+  };
+  let b = async () => {
+    if (!t) return;
+    let n = await aL(_, t, a);
+    'plugin' in n ? n.plugin ? _V(n.plugin) ? p(_$$t('settings_tab.pinned_plugins_invalid_url_codegen')) : 'pluginId' in n && (e.pinPlugin(n.pluginId), p(null), u(''), h()) : p(_$$t('settings_tab.pinned_plugins_invalid_url')) : 'errorMessage' in n && p(n.errorMessage);
+  };
+  return jsxs('div', {
+    'className': _$$s.m16.$,
+    'data-testid': 'dev-mode-settings-modal-pinned-plugins',
+    'children': [getFeatureFlags().dev_mode_org_pinned_plugins_ent ? jsxs('div', {
+      className: _$$s.mb8.$,
+      children: [jsx('div', {
+        className: _$$s.$$if(!kA(t) && !o, _$$s.opacity0_5).$,
+        children: jsx(aP, {
+          label: _$$t('settings_tab.pinned_plugins_label'),
+          description: _$$t('settings_tab.pinned_plugins_description'),
+          isActive: o,
+          sectionName: 'pinned-plugins',
+          onToggle: () => {
+            d(!o);
+          }
+        })
+      }), !kA(t) && e && e.pinnedPlugins.length > 0 && jsx(aF, {})]
+    }) : jsxs(Fragment, {
+      children: [jsx('div', {
+        className: _$$s.mb4.$,
+        children: jsx(_$$E, {
+          fontWeight: 'bold',
+          children: _$$tx('settings_tab.pinned_plugins_label')
+        })
+      }), jsx('div', {
+        children: jsx(_$$E, {
+          children: _$$tx('settings_tab.pinned_plugins_description')
+        })
+      })]
+    }), o && !e.loaded ? jsx(kt, {
+      className: _$$s.pt8.flex.alignCenter.justifyCenter.$
+    }) : getFeatureFlags().dev_mode_org_pinned_plugins_ent ? o && jsxs(Fragment, {
+      children: [jsx(aM, {
+        preferences: e
+      }), jsx('div', {
+        className: _$$s.flex.bSolid.b1.bRadius3.colorBorder.h40.my16.$,
+        children: jsxs('div', {
+          className: _$$s.flex.itemsCenter.justifyBetween.wFull.px8.$,
+          children: [jsxs('div', {
+            className: _$$s.flex.$,
+            children: [jsx('div', {
+              className: _$$s.flex.mx8.$,
+              children: jsx(_$$E, {
+                color: 'secondary',
+                fontWeight: 'medium',
+                children: _$$tx('settings_tab.pinned_plugins_inspect')
+              })
+            }), jsx('div', {
+              className: _$$s.flex.mx8.$,
+              children: jsx(_$$E, {
+                color: 'secondary',
+                fontWeight: 'medium',
+                children: _$$tx('settings_tab.pinned_plugins_plugins')
+              })
+            })]
+          }), jsxs('div', {
+            className: _$$s.flex.itemsCenter.$,
+            children: [g && jsx('div', {
+              className: _$$s.mr1.$,
+              children: jsx(_$$$, {
+                icon: 'plus-32',
+                variant: r ? 'primary' : 'text',
+                onClick: h,
+                ariaLabel: _$$t('settings_tab.pinned_plugins_add_label')
+              })
+            }), e.pinnedPlugins.length > 0 && jsx(pG, {
+              ...e
+            })]
+          })]
+        })
+      }), r && jsx(aj, {
+        value: _,
+        onClick: b,
+        onChange: x,
+        error: m,
+        buttonText: _$$t('settings_tab.pinned_plugins_add')
+      })]
+    }) : jsxs(Fragment, {
+      children: [g && jsxs('div', {
+        className: _$$s.flex.py12.$,
+        children: [jsx(ks, {
+          className: _$$s.flexGrow1.mr8.$,
+          onChange: x,
+          value: _,
+          placeholder: Nz(),
+          recordingKey: 'devRelatedLinkUrlInput'
+        }), jsx(_$$$, {
+          onClick: b,
+          children: _$$tx('settings_tab.pinned_plugins_add')
+        })]
+      }), m && jsx('div', {
+        className: _$$s.colorTextDanger.$,
+        children: m
+      }), jsx(aM, {
+        preferences: e
+      }), jsx('div', {
+        className: _$$s.flex.bSolid.b1.bRadius3.colorBorder.h32.my12.$,
+        children: jsxs('div', {
+          className: _$$s.flex.itemsCenter.justifyBetween.wFull.px8.$,
+          children: [jsx('div', {
+            className: _$$s.flex.mx8.$,
+            children: jsx(_$$E, {
+              fontWeight: 'bold',
+              children: _$$tx('settings_tab.pinned_plugins_inspect')
+            })
+          }), jsx('div', {
+            className: _$$s.flex.mx8.$,
+            children: jsx(_$$E, {
+              fontWeight: 'regular',
+              children: _$$tx('settings_tab.pinned_plugins_plugins')
+            })
+          }), jsx('div', {
+            className: _$$s.flexGrow1.$,
+            children: e.pinnedPlugins.length > 0 && jsx(pG, {
+              ...e
+            })
+          })]
+        })
+      })]
+    })]
+  });
+}
+function aF() {
+  return jsx(_$$z2, {
+    variant: 'warning',
+    orientation: 'vertical',
+    iconSrc: _$$A7,
+    children: _$$tx('settings_tab.pinned_plugins_downgrade_warning', {
+      noteLabel: jsx(_$$E, {
+        fontWeight: 'semi-bold',
+        children: _$$tx('settings_tab.pinned_plugins_dowgrade_warning.note')
+      })
+    })
+  });
+}
+function aq({
+  onCodeLanguageChange: e,
+  addCodegenPluginCallback: t,
+  currentSavedCodeLanguage: a
+}) {
+  let s = v4();
+  let i = V0({
+    codeLanguage: s,
+    onChange: e,
+    showAddInsteadOfBrowse: !0,
+    addCodegenPluginCallback: t,
+    currentSavedCodeLanguage: a
+  });
+  return jsxs('div', {
+    'className': _$$s.flex.justifyBetween.itemsCenter.wFull.$,
+    'data-testid': 'org-admin-codegen-language-row',
+    'children': [jsx(_$$E, {
+      fontWeight: 'medium',
+      children: _$$tx('settings_tab.codegen_language_dropdown_label')
+    }), jsx('div', {
+      className: _$$s.flex.justifyEnd.$,
+      children: jsx(ls, {
+        dropdownId: 'ORG_ADMIN_SETTINGS_CODE_LANGUAGE_DROPDOWN',
+        codeLanguageApi: i
+      })
+    })]
+  });
+}
+function a$({
+  currentUnit: e,
+  onCodeLanguageUnitChange: t
+}) {
+  return Em() ? jsxs('div', {
+    'className': _$$s.flex.justifyBetween.itemsCenter.wFull.$,
+    'data-testid': 'org-admin-codegen-unit-row',
+    'children': [jsx(_$$E, {
+      fontWeight: 'medium',
+      children: _$$tx('settings_tab.codegen_language_unit_dropdown_label')
+    }), jsx('div', {
+      className: _$$s.flex.justifyEnd.mr4.$,
+      children: jsx(gn, {
+        currentUnit: e || tKW.PIXEL,
+        onChangeUnit: t
+      })
+    })]
+  }) : null;
+}
+function aB({
+  codeExtensionPreferences: e,
+  onCustomSettingsChange: t
+}) {
+  let a = v4();
+  let s = QN();
+  let i = _$$Ke({
+    codeLanguage: a,
+    plugin: s,
+    codeExtensionPreferences: e,
+    onChangePreferences: t
+  });
+  return i.length === 0 ? null : jsx(Fragment, {
+    children: i.map(e => jsx(aG, {
+      item: e
+    }, e.name))
+  });
+}
+function aG({
+  item: e
+}) {
+  return jsxs('div', {
+    'className': _$$s.flex.justifyBetween.itemsCenter.wFull.$,
+    'data-testid': 'org-admin-codegen-plugin-settings-row',
+    'children': [jsx(_$$E, {
+      fontWeight: 'medium',
+      children: e.displayText
+    }), jsx('div', {
+      className: _$$s.flex.justifyEnd.$,
+      children: jsx(jp, {
+        item: e
+      })
+    })]
+  });
+}
+function az({
+  preferences: e
+}) {
+  let t = sZ() || null;
+  let a = wA();
+  let [r, l] = fp(aS);
+  let [o, d] = useState(null);
+  let [c, _] = useState(!1);
+  let [u, m] = useState(!1);
+  let [p, g] = useState('');
+  let [h, x] = useState(void 0);
+  useEffect(() => {
+    e?.loaded && e?.localCodegenSettings && !c && _(() => (e.localCodegenSettings?.language.type === 'published-plugin' && (x(e.localCodegenSettings.language), a(gU({
+      storeInRecentsKey: $A.Handoff,
+      id: e.localCodegenSettings.language.id,
+      version: void 0,
+      currentUserId: void 0,
+      skipPluginRun: !0
+    }))), !0));
+  }, [e?.loaded, e?.localCodegenSettings, c, a]);
+  useEffect(() => {
+    a(HQ({
+      storeInRecentsKey: $A.Handoff
+    }));
+  }, [a]);
+  let b = d4(e => e.whitelistedPlugins);
+  return jsxs('div', {
+    'className': _$$s.m16.$$if(!kA(t), _$$s.opacity0_5).$,
+    'id': 'org-admin-codegen-settings',
+    'data-testid': 'org-admin-codegen-settings',
+    'children': [jsx(aP, {
+      label: _$$t('settings_tab.codegen_language_label'),
+      description: _$$t('settings_tab.codegen_language_description'),
+      isActive: r,
+      sectionName: 'codegen',
+      onToggle: () => {
+        l(!r);
+      }
+    }), r && kA(t) && (e?.loaded ? jsxs('div', {
+      className: _$$s.flexColumn.py8.$,
+      children: [jsx(aq, {
+        onCodeLanguageChange: t => {
+          e?.setCodegenSettingsLanguage(t);
+          m(!1);
+        },
+        addCodegenPluginCallback: () => {
+          m(!0);
+        },
+        currentSavedCodeLanguage: h
+      }), u && jsx(aj, {
+        value: p,
+        onClick: () => {
+          if (!t || !kA(t)) {
+            d(_$$t('settings_tab.plugin_not_enterprise_err'));
+            return;
+          }
+          aL(p, t, b).then(t => {
+            if ('pluginId' in t && t.plugin) {
+              let n = t.plugin;
+              if (pk(n)) {
+                d(null);
+                let t = _$$$n(n);
+                e?.setCodegenSettingsLanguage(t);
+                a(gU({
+                  storeInRecentsKey: $A.Handoff,
+                  id: n.plugin_id,
+                  version: n.version,
+                  currentUserId: void 0,
+                  skipPluginRun: !0
+                }));
+                m(!1);
+                g('');
+                return;
+              }
+              d(_$$t('settings_tab.plugin_not_codegen_err'));
+            }
+            if ('errorMessage' in t) {
+              d(t.errorMessage);
+              return;
+            }
+            d(_$$t('settings_tab.plugin_invalid_err'));
+          }).catch(e => {
+            console.error('Error:', e);
+          });
+        },
+        onChange: e => {
+          g(e.target.value);
+        },
+        error: o,
+        buttonText: _$$t('settings_tab.dev_mode_setting_set')
+      }), !u && jsxs('div', {
+        children: [jsx(a$, {
+          currentUnit: e?.localCodegenSettings?.preferences.unit,
+          onCodeLanguageUnitChange: t => {
+            e?.setCodegenSettingsUnit(t);
+          }
+        }), jsx(aB, {
+          codeExtensionPreferences: e?.localCodegenSettings?.preferences ?? {},
+          onCustomSettingsChange: (t, a, n) => {
+            e?.setCodegenSettingsCustomSettings(t, n);
+          }
+        })]
+      })]
+    }) : jsx(kt, {
+      className: _$$s.m16.pt8.flex.alignCenter.justifyCenter.$
+    }))]
+  });
+}
+function aV({
+  plugin: e
+}) {
+  return e ? jsxs('div', {
+    className: _$$s.flex.py8.itemsCenter.$,
+    children: [jsx(_$$V2, {
+      className: _$$s.w24.h24.br2.$,
+      plugin: e
+    }), jsx('div', {
+      className: _$$s.mx8.$,
+      children: jsx(_$$E, {
+        fontWeight: 'semi-bold',
+        children: e.name
+      })
+    })]
+  }) : null;
+}
+function aW() {
+  let e = sZ() || null;
+  let t = JA();
+  let a = d4(e => e.whitelistedPlugins);
+  let [r, l] = fp(aC);
+  let [o, d] = fp(aN);
+  let [c, u] = fp(aI);
+  let [m, p] = fp(aT);
+  let [g, h] = useState(!1);
+  useEffect(() => {
+    t.loaded && !g && (u(t.plugin), h(!0));
+  }, [t.loaded, t.plugin, u, g, h]);
+  return jsxs('div', {
+    'className': _$$s.m16.$$if(!kA(e), _$$s.opacity0_5).$,
+    'data-testid': 'dev-mode-settings-modal-auto-run',
+    'children': [jsx(aP, {
+      label: _$$t('settings_tab.auto_run_label'),
+      description: _$$t('settings_tab.auto_run_description'),
+      isActive: r,
+      sectionName: 'auto-run',
+      onToggle: () => {
+        l(!r);
+      }
+    }), r && kA(e) && jsx('div', {
+      children: g ? jsx(Fragment, {
+        children: c ? jsxs(Fragment, {
+          children: [jsx(aV, {
+            plugin: c
+          }), jsx('div', {
+            className: _$$s.py8.$,
+            children: jsx(CY, {
+              trusted: !0,
+              onClick: () => u(null),
+              children: _$$tx('settings_tab.auto_run_remove_plugin')
+            })
+          })]
+        }) : jsx(aj, {
+          value: o,
+          onClick: () => {
+            if (!e || !kA(e)) {
+              p(_$$t('settings_tab.plugin_not_enterprise_err'));
+              return;
+            }
+            aL(o, e, a).then(t => {
+              if ('pluginId' in t && t.plugin) {
+                if (_$$aY(t.plugin)) {
+                  p(null);
+                  u(t.plugin);
+                  d('');
+                  sx('Dev Mode Auto Run Plugin Set', {
+                    orgId: e.id,
+                    pluginId: t.plugin.plugin_id
+                  });
+                  return;
+                }
+                p(_$$t('settings_tab.plugin_not_autorun_err'));
+                return;
+              }
+              if ('errorMessage' in t) {
+                p(t.errorMessage);
+                return;
+              }
+              p(_$$t('settings_tab.plugin_invalid_err'));
+            }).catch(e => {
+              console.error('Error:', e);
+            });
+          },
+          onChange: e => {
+            d(e.target.value);
+          },
+          error: m,
+          buttonText: _$$t('settings_tab.dev_mode_setting_set')
+        })
+      }) : jsx(kt, {
+        className: _$$s.pt8.flex.alignCenter.justifyCenter.$
+      })
+    })]
+  });
+}
+let aH = Ju(() => {
+  let e = sZ() || null;
+  let t = wA();
+  let a = IE();
+  let [r, l] = fp(aC);
+  let [o, d] = fp(aE);
+  let [_, u] = fp(aS);
+  let m = Xr(aT);
+  let p = Xr(aR);
+  let g = Xr(aN);
+  let h = Xr(aI);
+  let b = Xr(aA);
+  useEffect(() => () => {
+    m(null);
+    p(null);
+    g('');
+    h(null);
+    b('');
+  }, [g, m, h, b, p]);
+  let v = md(aI);
+  let f = Rs(tgK, {
+    targetOrgId: e?.id ?? '',
+    targetUserId: null
+  });
+  useEffect(() => {
+    f.status === 'loaded' && (d(f.data?.pluginPreferences?.pinnedPluginsEnabled || !1), l(f.data?.pluginPreferences?.autoRunEnabled || !1), u(f.data?.pluginPreferences?.codegenEnabled || !1));
+  }, [f.status, f.data, d, l, u]);
+  let y = IE().serialize();
+  let k = JA();
+  let C = useMemo(() => ({
+    preferences: y,
+    autoRunPlugin: k.plugin,
+    autoRunEnabled: f.data?.pluginPreferences?.autoRunEnabled,
+    codegenEnabled: f.data?.pluginPreferences?.codegenEnabled,
+    pinnedPluginsEnabled: f.data?.pluginPreferences?.pinnedPluginsEnabled
+  }), [f.data, k, y]);
+  let N = ol();
+  let I = iT();
+  let A = () => {
+    a?.setCodegenSettings(null);
+    t(Lo());
+  };
+  let R = async () => {
+    if (e) {
+      I('Dev Handoff Org Commit Plugin Changes', {});
+      let n = a?.serialize();
+      !kA(e) && n && (n.codegenSettings = null, n.removedInheritedPins = []);
+      try {
+        await _$$s5.updateOrgPreferences(e, {
+          preferences: n,
+          auto_run_plugin_id: v ? v.plugin_id : null,
+          auto_run_enabled: !!v && r,
+          codegen_enabled: _,
+          pinned_plugins_enabled: a.pinnedPlugins.length > 0 && o
+        });
+      } catch (e) {
+        t(_$$F.enqueue({
+          message: 'Failed to save dev mode preferences',
+          error: !0
+        }));
+      }
+    }
+    t(Lo());
+  };
+  return jsxs(OJ, {
+    title: jsx(aD, {
+      text: _$$t('settings_tab.dev_mode_label')
+    }),
+    onClose: A,
+    fixedTop: !0,
+    children: [jsx(aU, {
+      preferences: a
+    }), jsx(ay, {}), jsx(az, {
+      preferences: a
+    }), jsx(ay, {}), jsx(aW, {}), !kA(e) && getFeatureFlags().dev_mode_org_pinned_plugins_ent && jsx('div', {
+      className: _$$s.m16.$,
+      children: jsxs(_$$z2, {
+        orientation: 'vertical',
+        iconSrc: _$$A6,
+        variant: 'gray',
+        children: [jsx(_$$E, {
+          fontWeight: 'bold',
+          children: _$$tx('settings_tab.customize_dev_mode')
+        }), jsx(_$$E, {
+          children: _$$tx('settings_tab.upgrade_to_enterprise_plan_text')
+        }), jsx(CY, {
+          onClick: () => {
+            t(_$$to({
+              type: DV,
+              data: {
+                team: N,
+                resource: Bi.DEV_MODE_ADMIN_SETTINGS,
+                currentPlan: _$$F3.Plan.ORG,
+                upsellPlan: _$$F3.Plan.ENTERPRISE,
+                editorType: null
+              }
+            }));
+          },
+          trusted: !0,
+          children: jsx(_$$E, {
+            children: _$$tx('settings_tab.upgrade_to_enterprise_learn_more_link')
+          })
+        })]
+      })
+    }), jsxs('div', {
+      className: _$$s.flex.flexRow.gap8.justifyEnd.m16.$,
+      children: [jsx(_$$$, {
+        onClick: A,
+        children: _$$tx('general.cancel')
+      }), jsx(_$$$, {
+        variant: 'primary',
+        onClick: R,
+        disabled: !(!(t5()(C.preferences, a.serialize()) && t5()(C.autoRunPlugin, v)) || C.autoRunEnabled !== r || C.codegenEnabled !== _ || C.pinnedPluginsEnabled !== o),
+        children: _$$tx('general.save')
+      })]
+    })]
+  });
+}, 'DevModeModal');
+let aK = Ju(e => {
+  let [t, a, s] = e.platform === 'win' ? [_$$t('org_admin_settings.enterprise_installer_label'), 'https://help.figma.com/hc/articles/14172933259287', `https://desktop.figma.com/win/Figma-${e.version}.msi`] : [_$$t('org_admin_settings.enterprise_installer_label_mac'), 'https://help.figma.com/hc/articles/17686512113175', `https://desktop.figma.com/mac-universal/Figma-${e.version}.pkg`];
+  return jsxs(yX, {
+    confirmationTitle: t,
+    confirmText: _$$t('org_admin_settings.enterprise_installer_confirmation'),
+    onConfirm: () => window.location.href = s,
+    tintedModalBackground: !0,
+    children: [_$$tx(e.platform === 'win' ? 'org_admin_settings.enterprise_installer_modal_copy' : 'org_admin_settings.enterprise_installer_modal_copy_mac'), jsx(_$$N_, {
+      href: a,
+      target: '_blank',
+      trusted: !0,
+      children: _$$tx('org_admin_settings.enterprise_installer_modal_link')
+    }), _$$tx('org_admin_settings.enterprise_installer_modal_release_version', {
+      version: e.version
+    }), jsx('br', {}), _$$tx('org_admin_settings.enterprise_installer_modal_release_date', {
+      releaseDate: new Date(e.releaseDate || Date.now()).toLocaleDateString()
+    })]
+  });
+}, 'EnterpriseInstallerModal');
+function a1(e) {
+  return !!e.workspaceSharedSetting?.fileExportSetting;
+}
+function a2(e) {
+  return a1(e) && jsx(_$$P2, {
+    exportControlsSetting: e.workspaceSharedSetting.fileExportSetting
+  });
+}
+function a4({
+  org: e
+}) {
+  let t = wA();
+  let a = eA();
+  let r = [...(a?.data?.org?.workspaces ?? [])];
+  sortByPropertyWithOptions(r, 'name');
+  let l = useCallback(e => {
+    t(_$$to({
+      type: a8,
+      data: {
+        workspace: e
+      }
+    }));
+  }, [t]);
+  return jsx(ty, {
+    org: e,
+    loadingStatus: a?.status ?? 'loading',
+    allWorkspaces: r,
+    displaySettings: l,
+    subHeader: _$$tx('org_settings.workspace_controls.sub_header_text_file_export_controls'),
+    workspaceSubText: a2,
+    hasCustomSettings: a1
+  });
+}
+function a5({
+  exportControlSetting: e,
+  setExportControlSetting: t
+}) {
+  return jsx(Fragment, {
+    children: jsxs(_$$b, {
+      value: e,
+      onChange: t,
+      legend: jsx(_$$q3, {
+        children: _$$tx('org_settings.export_controls.title')
+      }),
+      children: [jsx('div', {
+        className: 'xfawy5m'
+      }), jsx(_$$c2, {
+        value: 'allowed',
+        label: jsx(_$$J2, {
+          children: jsx(_$$E, {
+            children: _$$tx('org_settings.export_controls.by_all_viewers')
+          })
+        }),
+        children: jsx(_$$E, {
+          color: 'secondary',
+          children: _$$tx('org_settings.export_controls.all_viewers_description')
+        })
+      }), jsx('div', {
+        className: 'xfawy5m'
+      }), jsx(_$$c2, {
+        value: 'members_only',
+        label: jsx(_$$J2, {
+          children: jsx(_$$E, {
+            children: _$$tx('org_settings.export_controls.prevent_by_guest_viewers')
+          })
+        }),
+        children: jsx(_$$E, {
+          color: 'secondary',
+          children: _$$tx('org_settings.export_controls.prevent_guest_viewers_description')
+        })
+      }), jsx('div', {
+        className: 'xfawy5m'
+      }), jsx(_$$c2, {
+        value: 'banned',
+        label: jsx(_$$J2, {
+          children: jsx(_$$E, {
+            children: _$$tx('org_settings.export_controls.prevent_by_all_viewers')
+          })
+        }),
+        children: jsx(_$$E, {
+          color: 'secondary',
+          children: _$$tx('org_settings.export_controls.prevent_all_viewers_description')
+        })
+      }), jsx('div', {
+        className: 'xfawy5m'
+      })]
+    })
+  });
+}
+let a3 = Ju(e => {
+  let t = wA();
+  let a = _$$t('org_settings.export_controls.success');
+  let r = d4(e => e.orgById[e.currentUserOrgId]);
+  let [l, o] = useState(r.shared_container_setting?.file_export_setting ?? 'allowed');
+  let d = hS(e);
+  let c = r.tier === FPlanNameType.ENTERPRISE;
+  return jsx(bL, {
+    manager: d,
+    height: 'dynamic',
+    width: 'lg',
+    children: jsxs(vo, {
+      children: [jsx(Y9, {
+        children: jsx(hE, {
+          children: _$$tx('org_settings.export_controls.title')
+        })
+      }), jsxs(_$$nB, {
+        children: [jsx('div', {
+          style: {
+            padding: '4px'
+          }
+        }), jsx(_$$E, {
+          children: _$$tx('org_settings.export_controls.org_description', {
+            learnMoreLink: jsx(CY, {
+              'href': 'https://help.figma.com/hc/articles/31825370509591#restrict-file-exports',
+              'target': '_blank',
+              'trusted': !0,
+              'aria-label': _$$t('org_settings.export_controls.learn_more'),
+              'children': _$$t('general.learn_more')
+            })
+          })
+        }), jsx(a5, {
+          exportControlSetting: l,
+          setExportControlSetting: o
+        }), c && jsxs(Fragment, {
+          children: [jsx('div', {
+            className: 'xfawy5m'
+          }), jsx(a4, {
+            org: r
+          })]
+        })]
+      }), jsx(wi, {
+        children: jsxs(jk, {
+          children: [jsx($n, {
+            variant: 'secondary',
+            onClick: e.onClose,
+            children: jsx(_$$E, {
+              children: _$$tx('org_settings.export_controls.cancel')
+            })
+          }), jsx($n, {
+            variant: 'primary',
+            onClick: () => {
+              t($w({
+                orgId: r.id,
+                exportControlSetting: l,
+                successMessage: a
+              }));
+              e.onClose();
+            },
+            children: jsx(_$$E, {
+              children: _$$tx('org_settings.export_controls.save')
+            })
+          })]
+        })
+      })]
+    })
+  });
+}, 'ExportControlsModal');
+let a8 = Ju(({
+  open: e,
+  onClose: t,
+  workspace: a
+}) => {
+  let r = wA();
+  let l = _$$t('org_settings.export_controls.workspace_success');
+  let o = d4(e => e.orgById[e.currentUserOrgId]);
+  let [d, c] = useState(a.workspaceSharedSetting?.fileExportSetting ?? o.shared_container_setting?.file_export_setting ?? 'allowed');
+  let _ = useCallback(() => {
+    r(_$$to({
+      type: a6,
+      data: {
+        workspace: a
+      }
+    }));
+  }, [r, a]);
+  let u = hS({
+    open: e,
+    onClose: t
+  });
+  return jsx(bL, {
+    manager: u,
+    height: 'dynamic',
+    width: 'lg',
+    children: jsxs(vo, {
+      children: [jsx(Y9, {
+        children: jsx(hE, {
+          children: jsxs(_$$E3, {
+            onClick: t,
+            ...Ay.props(tg.goBackButton),
+            children: [jsx(_$$t3, {}), jsx(_$$E, {
+              truncate: !0,
+              color: 'default',
+              children: a.name
+            })]
+          })
+        })
+      }), jsxs(_$$nB, {
+        children: [jsx('div', {
+          style: {
+            padding: '4px'
+          }
+        }), jsx(_$$E, {
+          children: _$$tx('org_settings.export_controls.workspace_modal_description')
+        }), jsx(a5, {
+          exportControlSetting: d,
+          setExportControlSetting: c
+        })]
+      }), jsx(wi, {
+        children: jsxs('div', {
+          className: 'x78zum5 x6s0dn4 x1qughib xh8yej3',
+          children: [jsx('div', {
+            children: a.workspaceSharedSetting?.fileExportSetting && jsx(_$$E3, {
+              onClick: _,
+              ...Ay.props(tg.removeCustomSettingsButton),
+              children: _$$tx('org_settings.export_controls_modal.remove_custom_settings')
+            })
+          }), jsxs('div', {
+            className: 'x78zum5 x167g77z',
+            children: [jsx($n, {
+              variant: 'secondary',
+              onClick: t,
+              children: jsx(_$$E, {
+                children: _$$tx('org_settings.export_controls.cancel')
+              })
+            }), jsx($n, {
+              variant: 'primary',
+              onClick: () => {
+                r(KA({
+                  orgId: o.id,
+                  workspaceId: a.id,
+                  exportControlSetting: d,
+                  successMessage: l,
+                  onClose: t
+                }));
+              },
+              children: jsx(_$$E, {
+                children: _$$tx('org_settings.export_controls.save')
+              })
+            })]
+          })]
+        })
+      })]
+    })
+  });
+}, 'WorkspaceExportControlsModal');
+let a6 = Ju(({
+  open: e,
+  onClose: t,
+  workspace: a
+}) => {
+  let s = wA();
+  let r = _$$t('org_settings.export_controls.workspace_success');
+  let l = d4(e => e.orgById[e.currentUserOrgId]);
+  let o = hS({
+    open: e,
+    onClose: t
+  });
+  return jsx(bL, {
+    manager: o,
+    height: 'dynamic',
+    width: 'lg',
+    children: jsxs(vo, {
+      children: [jsx(Y9, {
+        children: jsx(hE, {
+          children: _$$tx('org_settings.export_controls.remove_workspace_export_controls_title')
+        })
+      }), jsxs(_$$nB, {
+        children: [jsx('div', {
+          style: {
+            padding: '4px'
+          }
+        }), jsx(_$$E, {
+          children: _$$tx('org_settings.export_controls.remove_workspace_export_controls_body', {
+            workspaceName: a.name
+          })
+        }), jsx('div', {
+          style: {
+            padding: '4px'
+          }
+        })]
+      }), jsx(wi, {
+        children: jsxs(jk, {
+          children: [jsx($n, {
+            variant: 'secondary',
+            onClick: t,
+            children: jsx(_$$E, {
+              children: _$$tx('org_settings.export_controls.cancel')
+            })
+          }), jsx($n, {
+            variant: 'destructive',
+            onClick: () => {
+              s(vs({
+                orgId: l.id,
+                workspaceId: a.id,
+                exportControlSetting: l.shared_container_setting?.file_export_setting ?? 'allowed',
+                successMessage: r,
+                onClose: () => {
+                  t();
+                  s(Lo());
+                }
+              }));
+            },
+            children: jsx(_$$E, {
+              children: _$$tx('org_settings.export_controls.remove')
+            })
+          })]
+        })
+      })]
+    })
+  });
+}, 'ResetExportControlSettingsConfirmationModal');
+let ne = 'external_collaboration_controls_modal--sectionInstruction--X-iN-';
+let nt = 'external_collaboration_controls_modal--radioLabel--dMvnM';
+let na = 'external_collaboration_controls_modal--listItem--g50IJ';
+let nn = 'external_collaboration_controls_modal--confirmButton---8ryZ';
+let ns = 'external_collaboration_controls_modal--bold--WoY4e';
+let nr = Ju(() => {
+  let e = wA();
+  let t = d4(e => e.orgById[e.currentUserOrgId]);
+  let a = () => e(Lo());
+  let [r, l] = useState(t.shared_container_setting?.external_collaboration_controls);
+  let o = !!t.shared_container_setting?.external_collaboration_controls;
+  return jsx(fu, {
+    name: 'External Content Controls Setting Modal',
+    properties: {
+      orgId: t.id
+    },
+    children: jsx(OJ, {
+      title: _$$t('org_settings.external_collaboration_controls.header'),
+      onClose: a,
+      maxWidth: 376,
+      minWidth: 376,
+      fixedTop: !0,
+      children: jsxs('div', {
+        className: 'external_collaboration_controls_modal--modalContent--A4isS',
+        children: [jsxs('div', {
+          className: 'external_collaboration_controls_modal--warningBanner--LnUtG',
+          children: [jsx(_$$B2, {
+            className: 'external_collaboration_controls_modal--icon--8UTH3',
+            svg: _$$A8
+          }), jsx('p', {
+            children: _$$tx('org_settings.external_collaboration_controls.banner', {
+              let_org_know: jsx(CY, {
+                href: 'https://help.figma.com/hc/articles/12080587805719',
+                className: _$$s.font11.$,
+                trusted: !0,
+                children: _$$tx('org_settings.external_collaboration_controls.let_org_know')
+              })
+            })
+          })]
+        }), jsxs('div', {
+          className: ne,
+          children: [r ? _$$tx('org_settings.external_collaboration_controls.list_header_setting_on', {
+            orgName: t.name,
+            cannot: jsx('span', {
+              className: ns,
+              children: _$$tx('org_settings.external_collaboration_controls.cannot')
+            })
+          }) : _$$tx('org_settings.external_collaboration_controls.list_header_setting_off', {
+            orgName: t.name
+          }), jsxs('ul', {
+            children: [jsx('li', {
+              className: na,
+              children: _$$tx('org_settings.external_collaboration_controls.accept_invites')
+            }), jsx('li', {
+              className: na,
+              children: r ? _$$tx('org_settings.external_collaboration_controls.view_only', {
+                note: jsx('span', {
+                  className: ns,
+                  children: _$$tx('org_settings.external_collaboration_controls.note')
+                })
+              }) : _$$tx('org_settings.external_collaboration_controls.view_or_edit_files')
+            }), jsx('li', {
+              className: na,
+              children: _$$tx('org_settings.external_collaboration_controls.create')
+            }), jsx('li', {
+              className: na,
+              children: _$$tx('org_settings.external_collaboration_controls.open_sessions')
+            })]
+          })]
+        }), jsx('p', {
+          className: `${ne} ${ns}`,
+          children: _$$tx('org_settings.external_collaboration_controls.setting_header', {
+            orgName: t.name
+          })
+        }), jsxs(_$$z, {
+          value: r ? 'true' : 'false',
+          onChange: e => e === 'true' ? l(!0) : l(!1),
+          children: [jsx(_$$Z, {
+            value: 'false',
+            labelClassName: nt,
+            children: _$$tx('org_settings.external_collaboration_controls.enable')
+          }), jsx(_$$Z, {
+            value: 'true',
+            labelClassName: nt,
+            children: _$$tx('org_settings.external_collaboration_controls.disable')
+          })]
+        }), jsxs('div', {
+          className: v0,
+          children: [jsx(_$$nR, {
+            onClick: a,
+            className: `${pL} ${nn}`,
+            children: _$$tx('org_settings.external_collaboration_controls.cancel')
+          }), jsx(qZ, {
+            onClick: () => {
+              if (r === o || void 0 === r) {
+                a();
+                return;
+              }
+              let t = _$$t('org_settings.external_collaboration_controls.success');
+              e(yo({
+                payload: {
+                  external_collaboration_controls: r
+                },
+                successMessage: t
+              }));
+              a();
+            },
+            disabled: r === o || void 0 === r,
+            className: `${pL} ${nn}`,
+            children: _$$tx('org_settings.external_collaboration_controls.save')
+          })]
+        })]
+      })
+    })
+  });
+}, 'ExternalCollaborationControlsModal');
+let nd = 'guest_invite_settings_modal--sectionInstruction---T3SG';
+let nc = 'guest_invite_settings_modal--radioLabel--Yuqzr';
+function n_(e) {
+  let t = wA();
+  let [a, r] = useState(!1);
+  let l = ZC(e.mfaRequiredSetting);
+  let o = l === CT.MEMBERS || l === CT.ALL_USERS;
+  let d = l === CT.GUESTS || l === CT.ALL_USERS;
+  let c = e.mfaRequiredSetting === CT.GUESTS || e.mfaRequiredSetting === CT.ALL_USERS;
+  return jsxs(Fragment, {
+    children: [jsx('div', {
+      className: _$$s.flex.alignLeft.mt16.pt10.pb16.$,
+      style: _$$sx.add({
+        borderTop: '1px solid var(--color-border)'
+      }).$,
+      children: jsx(_$$S3, {
+        label: jsx(_$$J2, {
+          children: _$$tx('org_settings.guest_control_revamp.require_two_factor_auth_for_guests')
+        }),
+        checked: c,
+        onChange: t => {
+          t ? e.setMfaRequiredSetting(o ? CT.ALL_USERS : CT.GUESTS) : e.setMfaRequiredSetting(o ? CT.MEMBERS : null);
+        },
+        children: _$$tx('org_settings.guest_control_revamp.mfa_for_guests_description', {
+          orgName: e.org.name
+        })
+      })
+    }), !d && c && jsx('div', {
+      className: _$$s.mb10.$,
+      children: e.isLoading ? jsx(qc, {}) : jsx($y, {
+        variant: 'warn',
+        children: jsxs(_$$Q, {
+          title: _$$tx('org_settings.guest_control_revamp.mfa_for_guests_warning.title', {
+            numGuests: e.nonMfaGuestCount
+          }),
+          children: [_$$tx('org_settings.guest_control_revamp.mfa_for_guests_warning.description', {
+            numGuests: e.mfaGuestCount,
+            orgName: e.org.name
+          }), jsx('button', {
+            className: 'guest_invite_settings_modal--brownLink--6LKm9',
+            onClick: () => {
+              a || (r(!0), t(_$$F.enqueue({
+                message: _$$t('members_table.csv_export.preparing_request'),
+                type: 'orgRoster.exportCSV',
+                icon: zX.SPINNER
+              })), _$$G.getMemberCSVExport({
+                orgId: e.org.id
+              }).then(() => {
+                t(_$$F.enqueue({
+                  message: _$$t('members_table.csv_export.generating'),
+                  type: 'orgRoster.exportCSV',
+                  icon: zX.CHECK
+                }));
+              }, () => {
+                t(_$$F.enqueue({
+                  message: _$$t('members_table.csv_export.error'),
+                  type: 'orgRoster.exportCSV',
+                  icon: zX.EXCLAMATION,
+                  error: !0
+                }));
+              }), r(!1));
+            },
+            children: _$$tx('org_settings.guest_control_revamp.mfa_for_guests_warning.download_csv')
+          }, 'download-csv')]
+        })
+      })
+    })]
+  });
+}
+let nu = Ju(e => {
+  let t = wA();
+  return jsx(yX, {
+    confirmationTitle: _$$t('org_settings.guest_control.confirm_title'),
+    confirmText: _$$t('org_settings.guest_control.confirm_button'),
+    onConfirm: () => {
+      t(yo({
+        payload: {
+          invite_whitelist_guest_invite_setting: e.guestInviteSetting,
+          mfa_required: e.mfaRequiredSetting
+        },
+        successMessage: e.settingString
+      }));
+    },
+    tintedModalBackground: !0,
+    children: _$$tx('org_settings.guest_control.no_guest_confirmation')
+  });
+}, 'CONFIRM_BAN_GUEST_INVITE_MODAL');
+let nm = Ju(() => {
+  let e = wA();
+  let t = d4(e => e.orgById[e.currentUserOrgId]);
+  let a = _$$M2(t);
+  let r = Rs(Is$, {
+    orgId: t.id
+  });
+  let l = r.status === 'loading' || r.data?.orgMfaGuestInfo?.status !== _$$tT.Loaded;
+  let [o, d] = useState(t.mfa_required ? t.mfa_required : null);
+  let c = r.status === 'loaded' && r.data?.orgMfaGuestInfo?.status === _$$tT.Loaded && r.data?.orgMfaGuestInfo?.data || {
+    totalGuestCount: 0,
+    nonMfaGuestCount: 0
+  };
+  let _ = Number(c.totalGuestCount);
+  let u = Number(c.nonMfaGuestCount);
+  let m = d4(e => e.orgDomains.domains);
+  let p = () => e(Lo());
+  let [g, h] = useState(t.invite_whitelist_guest_invite_setting);
+  return jsxs(OJ, {
+    containerClassName: 'guest_invite_settings_modal--modalContainer--yxLS6',
+    title: _$$t('org_settings.guest_control.guest_membership'),
+    onClose: p,
+    maxWidth: 440,
+    minWidth: 440,
+    fixedTop: !0,
+    children: [jsxs('div', {
+      className: 'guest_invite_settings_modal--modalContent--LiE8H',
+      children: [jsx('p', {
+        className: nd,
+        children: _$$tx('org_settings.guest_control.guest_definition', {
+          domains: jsx(_$$T, {
+            formatType: 'disjunction',
+            children: m.map(e => jsxs('span', {
+              children: ['@', e.domain]
+            }, e.domain))
+          })
+        })
+      }), jsx('p', {
+        className: nd,
+        style: {
+          fontWeight: 500
+        },
+        children: _$$tx('org_settings.guest_control.guest_question')
+      }), jsxs(_$$z, {
+        className: _$$s.pl10.$,
+        value: g ?? 'none',
+        onChange: e => {
+          let t = e === 'none' ? null : e;
+          g !== t && h(t);
+        },
+        children: [jsxs(_$$Z, {
+          value: 'none',
+          labelClassName: nc,
+          children: [W3(null), jsx('span', {
+            className: 'guest_invite_settings_modal--secondary--qBSkc',
+            children: _$$tx('org_settings.guest_control.default')
+          })]
+        }), jsx(_$$Z, {
+          value: Gv.REQUIRE_APPROVAL,
+          labelClassName: nc,
+          children: W3(Gv.REQUIRE_APPROVAL)
+        }), jsx(_$$Z, {
+          value: Gv.BANNED,
+          labelClassName: nc,
+          children: W3(Gv.BANNED)
+        })]
+      }), !Bg(t.shared_container_setting) && g != null && jsx('div', {
+        className: J()('guest_invite_settings_modal--publicLinksBanner--5qmdP', a ? _$$s.mt16.$ : _$$s.my16.$),
+        children: _$$tx('org_settings.guest_control.link_sharing_on', {
+          enabled: jsx('span', {
+            style: {
+              fontWeight: 600
+            },
+            children: _$$tx('org_settings.guest_control.enabled')
+          }),
+          publicLinkSharingSettings: jsx('button', {
+            onClick: p,
+            className: 'guest_invite_settings_modal--blueLink--2HEzc blue_link--blueLink--9rlnd',
+            children: _$$tx('org_settings.guest_control.public_link_sharing_settings')
+          })
+        })
+      }), a && jsx(n_, {
+        mfaRequiredSetting: o,
+        setMfaRequiredSetting: d,
+        isLoading: l,
+        mfaGuestCount: _ - u,
+        nonMfaGuestCount: u,
+        org: t
+      })]
+    }), jsxs('div', {
+      className: 'guest_invite_settings_modal--footer--44yVi',
+      children: [jsx(_$$nR, {
+        onClick: p,
+        children: _$$tx('general.cancel')
+      }), jsx($$, {
+        onClick: () => {
+          let a = g !== t.invite_whitelist_guest_invite_setting;
+          let n = o !== t.mfa_required;
+          if (!a && !n) {
+            p();
+            return;
+          }
+          let s = a ? W3(g) : n ? _$$nn(o) : '';
+          if (Bg(t.shared_container_setting) || g !== Gv.BANNED) {
+            let t = {};
+            n && (t.mfa_required = o);
+            a && (t.invite_whitelist_guest_invite_setting = g);
+            e(yo({
+              payload: t,
+              successMessage: s
+            }));
+            p();
+          } else {
+            let t = {
+              guestInviteSetting: g,
+              settingString: s
+            };
+            n && (t.mfaRequiredSetting = o);
+            e(_$$to({
+              type: nu,
+              data: t
+            }));
+          }
+        },
+        className: 'guest_invite_settings_modal--modalSave--PVmaJ modal--confirmButton--SNUDv',
+        children: _$$tx('org_settings.guest_control.save_button')
+      })]
+    })]
+  });
+}, 'GuestInviteSettingsModal');
+var ng = (e => (e.CONFIGURED = 'configured', e.DEFAULT = 'default', e))(ng || {});
+function nh(e) {
+  let t = nv(e);
+  return {
+    ...(t ? {
+      [vS.MINUTES]: y1(15, 60, 5).map(e => ({
+        type: 'option',
+        text: e.toString(),
+        key: e
+      }))
+    } : null),
+    [vS.HOURS]: y1(t ? 1 : 12, 24, 1).map(e => ({
+      type: 'option',
+      text: e.toString(),
+      key: e
+    })),
+    [vS.DAYS]: y1(1, 15, 1).map(e => ({
+      type: 'option',
+      text: e.toString(),
+      key: e
+    }))
+  };
+}
+function nx() {
+  return {
+    timeAmount: {
+      key: 14,
+      text: '14'
+    },
+    timeUnit: {
+      key: vS.DAYS,
+      text: _$$t('settings_tab.idle_session_timeout_settings_modal.days', {
+        timeAmount: 14
+      })
+    }
+  };
+}
+function nb(e) {
+  let {
+    timeUnit: {
+      key
+    },
+    timeAmount: {
+      key: _key
+    }
+  } = e;
+  switch (key) {
+    case vS.MINUTES:
+      return _key * Rc;
+    case vS.HOURS:
+      return _key * _$$r;
+    case vS.DAYS:
+      return _key * N_;
+  }
+}
+function nv(e) {
+  return isGovCluster() || e;
+}
+function nw(e) {
+  let t = wA();
+  let a = Um();
+  let s = a?.type === e.id;
+  return jsxs(_$$V3, {
+    chevronClassName: _$$s.mlAuto.$,
+    className: _$$s.bRadius3.b1.bSolid.colorBorder.wFull.$,
+    dispatch: t,
+    type: e.id,
+    showingDropdown: s,
+    children: [e.currentText, s && jsx(_$$V4, {
+      dispatch: t,
+      dropdownShown: a,
+      options: e.options,
+      value: e.currentKey,
+      onChange: e.onChange
+    })]
+  });
+}
+function nk(e) {
+  return jsx('div', {
+    style: _$$sx.add({
+      marginTop: '-8px'
+    }).$,
+    className: _$$s.colorTextSecondary.ml20.mb8.$,
+    children: e.children
+  });
+}
+function nE(e) {
+  let {
+    key,
+    time: {
+      unit,
+      duration
+    }
+  } = e.configuredTimeHelperTextOptions;
+  let i = _$$t(`settings_tab.idle_session_timeout.time.${unit}`, {
+    duration
+  });
+  return jsx('div', {
+    className: _$$s.mt8.font11.fontNormal.colorTextSecondary.$,
+    children: _$$tx(`settings_tab.idle_session_timeout.configured_time_description.${key}`, {
+      duration: i
+    })
+  });
+}
+let nC = Ju(e => {
+  let t = wA();
+  let a = sZ();
+  let r = !!a?.security_add_on_enabled_at;
+  let l = nh(r);
+  let [o, d] = useState(e.idleTimeoutDurationInSecs ? ng.CONFIGURED : ng.DEFAULT);
+  let [c, _] = useState(function(e, t) {
+    if (!e) return nx();
+    let [a, n] = qr(e);
+    return n in nh(t) ? {
+      timeAmount: {
+        key: a,
+        text: a.toString()
+      },
+      timeUnit: {
+        key: n,
+        text: _$$t(`settings_tab.idle_session_timeout_settings_modal.${n}`, {
+          timeAmount: a
+        })
+      }
+    } : nx();
+  }(e.idleTimeoutDurationInSecs, r));
+  let [u, m] = useState(!1);
+  let [p, h] = useState(null);
+  let x = o === ng.CONFIGURED && e.idleTimeoutDurationInSecs !== nb(c) || e.idleTimeoutDurationInSecs !== null && o === ng.DEFAULT;
+  let b = useCallback(e => {
+    h(null);
+    _(t => ({
+      timeUnit: {
+        key: t.timeUnit.key,
+        text: _$$t(`settings_tab.idle_session_timeout_settings_modal.${t.timeUnit.key}`, {
+          timeAmount: e
+        })
+      },
+      timeAmount: {
+        key: e,
+        text: e.toString()
+      }
+    }));
+  }, []);
+  let v = useCallback(e => {
+    _(t => {
+      let a = l[e];
+      let n = t.timeAmount.key;
+      let s = nx().timeAmount;
+      if (a) {
+        let t = a.find(({
+          key: e
+        }) => e === n);
+        if (t) {
+          s = t;
+          h(null);
+        } else {
+          let t = n < a[0].key;
+          let i = t ? a[0] : a[a.length - 1];
+          s = i;
+          h({
+            key: t ? 'minimum' : 'maximum',
+            time: {
+              duration: i.key,
+              unit: e
+            }
+          });
+        }
+      }
+      return {
+        timeAmount: {
+          key: s.key,
+          text: s.text
+        },
+        timeUnit: {
+          key: e,
+          text: _$$t(`settings_tab.idle_session_timeout_settings_modal.${e}`, {
+            timeAmount: s.key
+          })
+        }
+      };
+    });
+  }, [l]);
+  let f = useCallback(() => t(Lo()), [t]);
+  let y = useCallback(() => {
+    m(!0);
+    let a = o === ng.DEFAULT ? null : nb(c);
+    t(Y4({
+      orgId: e.orgId,
+      onFailure: () => m(!1),
+      onSuccess: f,
+      timeoutDurationInSecs: a
+    }));
+  }, [o, c, e.orgId, t, f]);
+  let k = useCallback(e => {
+    e !== o && (d(e), _(nx()));
+  }, [o]);
+  return jsx(OJ, {
+    title: _$$t('settings_tab.idle_session_timeout_settings_modal.header'),
+    onClose: f,
+    maxWidth: 288,
+    minWidth: 288,
+    fixedTop: !0,
+    children: jsxs(_$$Y, {
+      direction: 'vertical',
+      horizontalAlignItems: 'center',
+      padding: 16,
+      spacing: 16,
+      children: [_$$tx('settings_tab.idle_session_timeout_settings_modal.description'), jsxs(_$$z, {
+        className: _$$s.wFull.mt16.$,
+        value: o,
+        onChange: k,
+        children: [jsx(_$$Z, {
+          value: ng.DEFAULT,
+          children: _$$tx('settings_tab.idle_session_timeout_settings_modal.default_choice_description')
+        }), jsx(nk, {
+          children: jsxs(Fragment, {
+            children: [_$$tx('settings_tab.idle_session_timeout_settings_modal.default_choice_timeframe'), jsx('div', {
+              className: _$$s.inline.$,
+              children: jsx(_$$N_, {
+                trusted: !0,
+                target: '_blank',
+                href: 'https://help.figma.com/hc/articles/14376092335127',
+                className: _$$s.inline.ml4.$,
+                children: _$$tx('workspace.create_confirmation_modal.description.outro.learn_more')
+              })
+            })]
+          })
+        }), jsx(_$$Z, {
+          value: ng.CONFIGURED,
+          children: _$$tx('settings_tab.idle_session_timeout_settings_modal.configured_choice_description')
+        }), jsx(nk, {
+          children: _$$tx('settings_tab.idle_session_timeout_settings_modal.configured_choice_subtitle')
+        }), o === ng.CONFIGURED && jsxs('div', {
+          'data-testid': 'dropdown-group',
+          'className': _$$s.mlAuto.$,
+          'children': [jsxs(_$$Y, {
+            direction: 'horizontal',
+            horizontalAlignItems: 'end',
+            spacing: 8,
+            width: 236,
+            children: [jsx(nw, {
+              id: 'TIME_VALUE_DROPDOWN',
+              options: l[c.timeUnit.key] ?? l[nx().timeUnit.key],
+              currentText: c.timeAmount.text,
+              currentKey: c.timeAmount.key,
+              onChange: b
+            }), jsx(nw, {
+              id: 'TIME_UNIT_DROPDOWN',
+              options: function(e, t) {
+                let a = [{
+                  type: 'option',
+                  key: vS.HOURS,
+                  text: _$$t('settings_tab.idle_session_timeout_settings_modal.hours', {
+                    timeAmount: e
+                  })
+                }, {
+                  type: 'option',
+                  key: vS.DAYS,
+                  text: _$$t('settings_tab.idle_session_timeout_settings_modal.days', {
+                    timeAmount: e
+                  })
+                }];
+                nv(t) && a.unshift({
+                  type: 'option',
+                  key: vS.MINUTES,
+                  text: _$$t('settings_tab.idle_session_timeout_settings_modal.minutes', {
+                    timeAmount: e
+                  })
+                });
+                return a;
+              }(c.timeAmount.key, r),
+              currentText: c.timeUnit.text,
+              currentKey: c.timeUnit.key,
+              onChange: v
+            })]
+          }), p && jsx(nE, {
+            configuredTimeHelperTextOptions: p
+          })]
+        })]
+      }), o === ng.CONFIGURED && x && jsx('div', {
+        className: _$$s.bRadius4.px12.py8.colorBgInfo.$,
+        children: _$$tx('settings_tab.idle_session_timeout_settings_modal.warning_description')
+      }), jsxs(_$$Y, {
+        direction: 'horizontal',
+        horizontalAlignItems: 'end',
+        spacing: 8,
+        children: [jsx(cw, {
+          onClick: f,
+          children: _$$tx('settings_tab.idle_session_timeout_settings_modal.cancel')
+        }), jsx($$, {
+          disabled: u || !x,
+          onClick: y,
+          children: _$$tx('settings_tab.idle_session_timeout_settings_modal.save')
+        })]
+      })]
+    })
+  });
+}, 'IdleSessionTimeoutSettingsModal');
+function nI(e) {
+  return e.split(',').map(e => e.trim()).filter(e => e.length > 0);
+}
+let nT = Ju(e => {
+  let t = wA();
+  let a = useCallback(() => t(Lo()), [t]);
+  let [r, l] = useState(e.ipAllowlistEnabled);
+  let o = e.ipAllowlistRanges.map(e => e.ipRange);
+  let d = o.join(',\n');
+  let [c, _] = useState(d);
+  let u = useCallback(e => _(e.currentTarget.value), []);
+  let m = nI(c);
+  let p = e.ipAllowlistEnabled !== r;
+  let g = r && function(e, t) {
+    let a = new Set(t);
+    let n = new Set(e);
+    return !t5()(a, n);
+  }(o, m);
+  let h = p || g;
+  let x = m.length === 0 && r;
+  let b = useCallback(() => {
+    if (x || !h) {
+      a();
+      return;
+    }
+    t(OT({
+      orgId: e.orgId,
+      onSuccess: a,
+      ipAllowlistEnabled: r,
+      ipAllowlistRanges: nI(c)
+    }));
+  }, [x, r, c, e.orgId, t, a, h]);
+  return jsxs(Dd, {
+    maxWidth: 500,
+    title: _$$t('settings_tab.ip_allowlist_label'),
+    onClose: a,
+    onSubmit: b,
+    confirmText: _$$t('settings_tab.ip_allowlist_modal.save'),
+    disabled: x,
+    children: [jsxs('div', {
+      className: _$$s.flex.itemsCenter.justifyBetween.mb16.$,
+      children: [jsxs('div', {
+        className: _$$s.flex.flexColumn.$,
+        children: [jsx(_$$E, {
+          fontWeight: 'bold',
+          children: _$$tx('settings_tab.ip_allowlist_modal.enable')
+        }), jsx(_$$E, {
+          children: _$$tx('settings_tab.ip_allowlist_modal.enable_description')
+        })]
+      }), jsx(_$$l2, {
+        on: r,
+        onChange: l,
+        dataTestId: 'ipAllowlistToggle'
+      })]
+    }), r && jsxs('div', {
+      children: [jsx('p', {
+        children: jsx(_$$E, {
+          fontWeight: 'bold',
+          children: _$$tx('settings_tab.ip_allowlist_modal.allowed_ranges')
+        })
+      }), jsx('p', {
+        className: _$$s.mb8.$,
+        children: jsx(_$$E, {
+          color: 'secondary',
+          children: _$$tx('settings_tab.ip_allowlist_modal.input_instructions')
+        })
+      }), jsx('div', {
+        className: _$$s.mb12.$,
+        children: jsx(_$$v2, {
+          value: c,
+          placeholder: '0.0.0.0',
+          onChange: u,
+          minHeight: 128,
+          maxHeight: 354,
+          focusOnMount: !0
+        })
+      })]
+    }), jsx('div', {
+      className: Xu,
+      children: jsx(_$$z2, {
+        orientation: 'vertical',
+        variant: 'brand',
+        iconSrc: _$$A4,
+        children: jsx(_$$E, {
+          children: _$$tx('settings_tab.ip_allowlist_modal.not_applied_to_guests')
+        })
+      })
+    })]
+  });
+}, 'IpAllowlistModal');
+function nO(e) {
+  return jsxs(_$$E3, {
+    onClick: e.goBack,
+    ...xk(tg.goBackButton),
+    children: [jsx(_$$t3, {}), jsx(_$$E, {
+      truncate: !0,
+      color: 'default',
+      children: e.workspace.name
+    })]
+  });
+}
+let nL = Ju(({
+  goBack: e,
+  org: t,
+  workspace: a
+}) => {
+  let l = wA();
+  let {
+    formState,
+    formActions
+  } = Cf(t, a.workspaceSharedSetting?.publicLinkControlsSetting || null, a.workspaceSharedSetting?.publicLinkControlsMaxExpiration ? a.workspaceSharedSetting.publicLinkControlsMaxExpiration : null);
+  let c = (e, t) => e === formState.initialPublicLinkControlsSetting && a.workspaceSharedSetting?.publicLinkControlsMaxExpiration && t === a.workspaceSharedSetting.publicLinkControlsMaxExpiration;
+  let _ = useCallback(() => {
+    l(_$$to({
+      type: nD,
+      data: {
+        workspace: a,
+        goBack: e
+      }
+    }));
+  }, [l, a, e]);
+  let u = hS({
+    open: !0,
+    onClose: e
+  });
+  return jsx(bL, {
+    manager: u,
+    height: 'dynamic',
+    width: 'lg',
+    children: jsxs(vo, {
+      children: [jsx(Y9, {
+        children: jsx(hE, {
+          children: jsx(nO, {
+            workspace: a,
+            goBack: e
+          })
+        })
+      }), jsx(_$$nB, {
+        children: jsxs('div', {
+          className: 'xipvkqc',
+          children: [jsx(kJ, {
+            isPublicLinksBanned: formState.isPublicLinksBanned,
+            togglePublicLinksBanned: formActions.togglePublicLinksBanned,
+            labelText: _$$t('settings_tab.public_sharing.workspace_public_sharing_label'),
+            subText: _$$t('settings_tab.public_sharing.workspace_public_sharing_subtext')
+          }), !formState.isPublicLinksBanned && jsx(_$$t4, {
+            displayExpiration: t.tier === r.Agb.ENTERPRISE,
+            doPublicLinksRequireExpiration: formState.doPublicLinksRequireExpiration,
+            doPublicLinksRequirePassword: formState.doPublicLinksRequirePassword,
+            togglePublicLinksRequirePassword: formActions.togglePublicLinksRequirePassword,
+            togglePublicLinksRequireExpiration: formActions.togglePublicLinksRequireExpiration
+          }), !formState.isPublicLinksBanned && formState.doPublicLinksRequireExpiration && jsx(Zm, {
+            inputValue: formState.maxDuration,
+            onChange: formActions.changeMaxDuration,
+            errorMessage: formState.durationErrorMessage,
+            dropdownKey: 'workspace-public-sharing-modal-expiration-dropdown',
+            dropdownText: ZA(formState.isTimeMeasuredInDays),
+            options: formActions.dropdownOptions,
+            onChangeTimeScale: formActions.onChangeTimeScale,
+            currentTimeScale: formState.isTimeMeasuredInDays ? 'days' : 'hours'
+          })]
+        })
+      }), jsxs(wi, {
+        children: [a.workspaceSharedSetting !== null && a.workspaceSharedSetting?.publicLinkControlsSetting !== null && jsx(_$$E3, {
+          onClick: _,
+          ...xk(tg.removeCustomSettingsButton),
+          children: _$$tx('org_settings.workspace_controls.remove_custom_settings')
+        }), jsx(jk, {
+          children: jsx(Ym, {
+            cancel: e,
+            canSave: formState.canSave,
+            save: () => {
+              let t = _$$eZ(formState);
+              let n = zz(formState, l);
+              if (fJ(formState.maxDuration, formState.isTimeMeasuredInDays)) {
+                if (c(t, n) && a.workspaceSharedSetting !== null && a.workspaceSharedSetting?.publicLinkControlsSetting !== null) return e();
+                _$$u2.updatePublicLinkControlsSetting({
+                  workspaceId: a.id,
+                  publicLinkControlsSetting: t,
+                  publicLinkControlsMaxExpiration: n
+                }).then(() => {
+                  l(_$$s2.flash(_$$t('setting_tab.successfully_updated_workspace_public_link_controls')));
+                  e();
+                }).catch(() => {
+                  l(_$$s2.error(_$$t('org_actions.an_error_occurred')));
+                });
+              }
+            }
+          })
+        })]
+      })]
+    })
+  });
+}, 'WorkspacePublicSharingModal');
+let nD = Ju(({
+  workspace: e,
+  goBack: t
+}) => {
+  let a = wA();
+  let s = hS({
+    open: !0,
+    onClose: t
+  });
+  return jsx(bL, {
+    manager: s,
+    height: 'dynamic',
+    width: 'lg',
+    children: jsxs(vo, {
+      children: [jsx(Y9, {
+        children: jsx(hE, {
+          children: _$$t('settings_tab.public_sharing.remove_custom_workspace_settings')
+        })
+      }), jsx(_$$nB, {
+        children: jsx('div', {
+          className: 'x1mzt3pk xeaf4i8 x13faqbe',
+          children: _$$tx('setting_tab.remove_custom_workspace_setting_warning', {
+            workspaceName: e.name
+          })
+        })
+      }), jsx(wi, {
+        children: jsxs(jk, {
+          children: [jsx($n, {
+            onClick: t,
+            variant: 'secondary',
+            children: _$$tx('setting_tab.public_sharing.modal.cancel')
+          }), jsx($n, {
+            variant: 'destructive',
+            onClick: () => {
+              _$$u2.updatePublicLinkControlsSetting({
+                workspaceId: e.id,
+                publicLinkControlsSetting: null,
+                publicLinkControlsMaxExpiration: null
+              }).then(() => {
+                a(_$$s2.flash(_$$t('setting_tab.successfully_updated_workspace_public_link_controls')));
+                t();
+                t();
+              }).catch(() => {
+                a(_$$s2.error(_$$t('org_actions.an_error_occurred')));
+              });
+            },
+            children: _$$tx('setting_tab.public_sharing.modal.remove')
+          })]
+        })
+      })]
+    })
+  });
+}, 'ResetWorkspaceCustomSettingsWarningModal');
+function nM({
+  org: e
+}) {
+  let t = eA();
+  let a = wA();
+  let r = [...(t?.data?.org?.workspaces ?? [])];
+  sortByPropertyWithOptions(r, 'name');
+  let l = useCallback(t => {
+    a(_$$to({
+      type: nL,
+      data: {
+        org: e,
+        workspace: t,
+        goBack: () => a(Lo())
+      }
+    }));
+  }, [a, e]);
+  return jsx(ty, {
+    org: e,
+    loadingStatus: t?.status ?? 'loading',
+    allWorkspaces: r,
+    displaySettings: l,
+    subHeader: _$$tx('org_settings.workspace_controls.sub_header_text'),
+    workspaceSubText: e => nP(e) && jsx(_$$s6, {
+      publicLinkControlsSetting: e.workspaceSharedSetting.publicLinkControlsSetting
+    }),
+    hasCustomSettings: nP
+  });
+}
+function nP(e) {
+  return !!e.workspaceSharedSetting?.publicLinkControlsSetting;
+}
+let nU = Ju(() => {
+  let e = wA();
+  let t = d4(e => e.orgById[e.currentUserOrgId]);
+  let {
+    formState,
+    formActions
+  } = Cf(t, t.shared_container_setting?.public_link_controls_setting, t.shared_container_setting?.public_link_controls_max_expiration);
+  let o = () => e(Lo());
+  let [d, c] = useState(!!t.workshop_enabled);
+  let _ = (e, n) => e === formState.initialPublicLinkControlsSetting && !!t.workshop_enabled === d && n === t.shared_container_setting?.public_link_controls_max_expiration;
+  let u = t.tier === r.Agb.ENTERPRISE;
+  let m = hS({
+    onClose: o,
+    open: !0
+  });
+  return jsx(bL, {
+    manager: m,
+    width: 'lg',
+    height: 'dynamic',
+    children: jsxs(vo, {
+      children: [jsx(Y9, {
+        children: jsx(hE, {
+          children: _$$t('settings_tab.public_sharing_title')
+        })
+      }), jsx(_$$nB, {
+        children: jsxs('div', {
+          className: 'x78zum5 xdt5ytf',
+          children: [jsx('div', {
+            className: 'xipvkqc',
+            children: _$$tx('setting_tab.public_sharing.modal.description')
+          }), jsxs('div', {
+            className: 'xipvkqc',
+            children: [jsx(kJ, {
+              isPublicLinksBanned: formState.isPublicLinksBanned,
+              togglePublicLinksBanned: formActions.togglePublicLinksBanned,
+              labelText: _$$t('setting_tab.public_sharing.modal.public_link_sharing_header'),
+              subText: _$$t('setting_tab.public_sharing.modal.public_link_sharing_toggle')
+            }), !formState.isPublicLinksBanned && u && jsx(_$$t4, {
+              displayExpiration: u,
+              doPublicLinksRequireExpiration: formState.doPublicLinksRequireExpiration,
+              doPublicLinksRequirePassword: formState.doPublicLinksRequirePassword,
+              togglePublicLinksRequirePassword: formActions.togglePublicLinksRequirePassword,
+              togglePublicLinksRequireExpiration: formActions.togglePublicLinksRequireExpiration
+            }), !formState.isPublicLinksBanned && formState.doPublicLinksRequireExpiration && u && jsx(Zm, {
+              inputValue: formState.maxDuration,
+              onChange: formActions.changeMaxDuration,
+              errorMessage: formState.durationErrorMessage,
+              dropdownKey: 'org-public-sharing-modal-expiration-dropdown',
+              dropdownText: ZA(formState.isTimeMeasuredInDays),
+              options: formActions.dropdownOptions,
+              onChangeTimeScale: formActions.onChangeTimeScale,
+              currentTimeScale: formState.isTimeMeasuredInDays ? 'days' : 'hours'
+            })]
+          }), jsx('div', {
+            className: 'xipvkqc',
+            children: jsxs('div', {
+              className: 'x78zum5 x1q0g3np x1qughib x6s0dn4',
+              children: [jsxs('div', {
+                className: 'x78zum5 xdt5ytf',
+                children: [jsx(_$$J2, {
+                  'aria-describedby': 'open-sessions-note',
+                  'htmlFor': 'open-sessions',
+                  'className': 'x1s688f',
+                  'children': _$$tx('setting_tab.public_sharing.modal.open_sessions_header')
+                }), jsx('span', {
+                  id: 'open-sessions-note',
+                  className: 'x1n0bwc9',
+                  children: _$$tx('setting_tab.public_sharing.modal.open_sessions_toggle')
+                })]
+              }), jsx(_$$v, {
+                id: 'open-sessions',
+                checked: d,
+                onChange: e => c(e)
+              })]
+            })
+          }), d && (formState.doPublicLinksRequirePassword || formState.doPublicLinksRequireExpiration) && jsx('div', {
+            'data-testid': 'open-sessions-note',
+            'className': 'x12oqio5 x1ghs5zp x1nn34kk x12sbs06',
+            'children': _$$tx('settings_tab.public_sharing.modal.open_sessions_note')
+          }), u && jsx(nM, {
+            org: t
+          })]
+        })
+      }), jsx(wi, {
+        children: jsx(jk, {
+          children: jsx(Ym, {
+            cancel: o,
+            canSave: formState.canSave,
+            save: () => {
+              let t = _$$eZ(formState);
+              let n = zz(formState, e);
+              if (!fJ(formState.maxDuration, formState.isTimeMeasuredInDays)) return;
+              if (_(t, n)) {
+                o();
+                return;
+              }
+              let s = _$$t('org_settings.public_link_sharing.success');
+              let i = () => {
+                e(yo({
+                  payload: {
+                    public_link_controls_setting: t,
+                    workshop_enabled: d,
+                    public_link_controls_max_expiration: n
+                  },
+                  successMessage: s
+                }));
+              };
+              t === w_.BANNED ? e(_$$to({
+                type: nF,
+                data: {
+                  onConfirm: i,
+                  isOpenSessionsEnabled: d
+                }
+              })) : (o(), i());
+            }
+          })
+        })
+      })]
+    })
+  });
+}, 'PublicSharingModal');
+let nF = Ju(e => {
+  let t;
+  let a;
+  let s;
+  let r = wA();
+  let l = () => r(Lo());
+  e.isOpenSessionsEnabled ? (t = _$$t('settings_tab.public_sharing.confirmation_modal.disable_public_links_title'), a = _$$t('settings_tab.public_sharing.confirmation_modal.disable_public_links_submit'), s = _$$tx('settings_tab.public_sharing.confirmation_modal.disable_public_links_description')) : (t = _$$t('settings_tab.public_sharing.confirmation_modal.disable_public_sharing_title'), a = _$$t('settings_tab.public_sharing.confirmation_modal.disable_public_sharing_submit'), s = jsxs(Fragment, {
+    children: [_$$tx('settings_tab.public_sharing.confirmation_modal.disable_public_sharing_description.main'), jsxs('ul', {
+      className: 'xtaz4m5 xv2w18j',
+      children: [jsx('li', {
+        className: 'x7hzu26',
+        children: _$$tx('settings_tab.public_sharing.confirmation_modal.disable_public_sharing_description.figma_design')
+      }), jsx('li', {
+        className: 'x7hzu26',
+        children: _$$tx('settings_tab.public_sharing.confirmation_modal.disable_public_sharing_description.figjam')
+      })]
+    })]
+  }));
+  let o = hS({
+    open: !0,
+    onClose: l
+  });
+  return jsx(bL, {
+    manager: o,
+    width: 'lg',
+    height: 'dynamic',
+    children: jsxs(vo, {
+      children: [jsx(Y9, {
+        children: jsx(hE, {
+          children: t
+        })
+      }), jsx(_$$nB, {
+        children: s
+      }), jsx(wi, {
+        children: jsxs(jk, {
+          children: [jsx($n, {
+            variant: 'secondary',
+            onClick: l,
+            children: _$$t('modal.cancel')
+          }), jsx($n, {
+            variant: 'destructive',
+            onClick: () => {
+              e.onConfirm();
+              l();
+            },
+            children: a
+          })]
+        })
+      })]
+    })
+  });
+}, 'ConfirmPublicSharingOffModal');
+let nY = {
+  pro: _$$Ju.PRO,
+  org: _$$Ju.ORG,
+  enterprise: _$$Ju.ENTERPRISE
+};
+let nK = nJ;
+function n5(e) {
+  return _$$tx(e ? 'change_payment.update_payment_details' : 'change_payment.enter_credit_or_debit_card');
+}
+function n3(e) {
+  let t;
+  let a;
+  let r = vK({
+    planParentId: e.orgId,
+    planType: FOrganizationLevelType.ORG
+  });
+  let [l] = mI(r);
+  a = l.data !== null ? l.data : 'usd';
+  let o = function({
+    billableSeats: e,
+    currency: t,
+    orgId: a,
+    tier: n
+  }) {
+    let s = Oq.dict(e => ({
+      currency: t,
+      billableProductKey: e,
+      billableProductVariantKey: null,
+      tier: n,
+      renewalTerm: IX.YEAR,
+      unit: IX.MONTH
+    }));
+    let i = ic(s, {
+      planType: FOrganizationLevelType.ORG,
+      planParentId: a
+    }, Fq.ADMIN_SETTINGS);
+    let [r] = mI(i);
+    if (r.data === null) throw new Error('Price data is null');
+    let l = r.data;
+    let o = nK()(Object.values(e));
+    let d = Math.max(WQ - o, 0);
+    let c = Object.entries(e).reduce((e, t) => {
+      let [a, n] = t;
+      return e + n * l[Zx(a)].amount;
+    }, 0);
+    d && (c += d * l[ud.DESIGN].amount);
+    return 12 * c;
+  }({
+    billableSeats: e.billableSeats,
+    currency: a,
+    orgId: e.orgId,
+    tier: nY[t = e.planTier] ?? t
+  });
+  let d = wA();
+  let [c, _] = useState(EB(e.defaultCountry));
+  let [u, m] = useState(null);
+  let [p, g] = useState(!1);
+  let [h, x] = useState(null);
+  let [b, v] = useState('');
+  let f = () => {
+    d(Ce());
+    e.onHide && e.onHide();
+  };
+  let y = (t, a) => {
+    e.onSubmit(t, a, e => x(e)).then(e => {
+      e && f();
+      g(!1);
+    });
+  };
+  return jsx(fu, {
+    name: 'ChangePaymentModal',
+    children: jsxs(_$$ey, {
+      hide: f,
+      size: 464,
+      className: ut,
+      children: [jsxs('div', {
+        className: dv,
+        children: [jsx('div', {
+          className: gr,
+          children: n5(e.canSeeBillingAddressExp)
+        }), jsx(Jn, {
+          className: _$$b2,
+          onClick: f,
+          innerText: 'close'
+        })]
+      }), e.canSeeBillingAddressExp && jsx('div', {
+        className: _$$s.mb16.$,
+        children: jsx('label', {
+          htmlFor: 'updatePaymentDetails',
+          className: _$$s.colorTextSecondary.$,
+          children: _$$tx('change_payment.update_payment_details_description')
+        })
+      }), h != null ? jsx('div', {
+        className: jy,
+        children: jsx(_$$_2, {
+          color: _$$S5.ERROR,
+          text: h
+        })
+      }) : null, jsxs('form', {
+        onSubmit: t => {
+          if (x(null), t && t.preventDefault(), !u) return;
+          g(!0);
+          let n = 'An error occurred while reading your card.';
+          if (e.canSeeBillingAddressExp && !b) {
+            x(_$$t('change_payment.name_required_on_card_error'));
+            g(!1);
+            return;
+          }
+          let s = e.canSeeBillingAddressExp ? {
+            name: b,
+            address_line1: c.line1,
+            address_line2: c.line2,
+            address_country: c.country,
+            address_city: c.city,
+            address_state: c.region,
+            address_zip: c.postal_code
+          } : void 0;
+          Ey(u, s).then(e => {
+            if (e.error) {
+              d(_$$s2.error(e.error.message || n));
+              g(!1);
+            } else {
+              if (e && e.token) {
+                return To(e.token.id, o, a).then(e => {
+                  y({
+                    setup_intent: e
+                  }, c);
+                });
+              }
+              d(_$$s2.error('Sorry, we\'re unable to change your payment source. Refresh and try again.'));
+            }
+          }).catch(e => {
+            d(_$$s2.error(e.data?.message || e.message || n));
+            g(!1);
+          });
+        },
+        children: [jsx(_$$n, {
+          billingAddress: c,
+          canSeeBillingAddressExp: e.canSeeBillingAddressExp,
+          cardId: 'change-payment-modal-card',
+          id: 'change-payment-modal-form',
+          isCheckoutFlow: !1,
+          isCommunityCheckout: !1,
+          nameOnPaymentMethod: b,
+          onBillingAddressChange: _,
+          onCardReady: m,
+          setNameOnPaymentMethod: e => v(e.trim())
+        }), jsxs('div', {
+          className: _$$v3,
+          children: [jsx('div', {
+            className: _f
+          }), jsx(vd, {
+            tabIndex: 0,
+            type: 'submit',
+            disabled: p,
+            children: _$$tx('change_payment.use_this_card')
+          })]
+        })]
+      })]
+    })
+  });
+}
+let n8 = Ju(e => {
+  return jsx(_$$tH, {
+    boundaryKey: 'OrgChangePaymentModal',
+    fallback: jsx(_$$K2, {}),
+    children: jsx(Suspense, {
+      fallback: jsx(_$$N2, {
+        hiddenTitle: n5(e.canSeeBillingAddressExp),
+        estimatedWidth: 464,
+        estimatedHeight: 464
+      }),
+      children: jsx(n3, {
+        ...e
+      })
+    })
+  });
+}, 'OrgChangePaymentModal');
+function n6({
+  org: e,
+  billableSeats: t,
+  canSeeBillingAddressExp: a
+}) {
+  let s = wA();
+  let r = async (t, n) => {
+    let i = {
+      source_token: t.token?.id,
+      payment_method: t.setup_intent?.payment_method,
+      address: n,
+      billing_address: a ? n : void 0
+    };
+    try {
+      await Eh.updateOrgPaymentMethod({
+        orgId: e.id,
+        paymentMethod: i
+      });
+    } catch (e) {
+      UE(e, s);
+      return !1;
+    }
+    s(_$$F.enqueue({
+      message: _$$t('org_admin_settings.billing_details.successfully_updated_your_payment_source')
+    }));
+    return !0;
+  };
+  return jsx(x8, {
+    label: a ? _$$t('org_admin_settings.settings_tab.billing.payment_details.label') : _$$t('org_admin_settings.settings_tab.billing.change_payment_method.label'),
+    description: a ? _$$t('org_admin_settings.settings_tab.billing.payment_details.description') : _$$t('org_admin_settings.settings_tab.billing.change_payment_method.description'),
+    onClick: () => {
+      s(_$$to({
+        type: n8,
+        data: {
+          billableSeats: t,
+          defaultCountry: _$$aE(),
+          onSubmit: r,
+          canSeeBillingAddressExp: a,
+          orgId: e.id,
+          planTier: e.billing_tier
+        }
+      }));
+    }
+  }, 'change-payment-method');
+}
+let n9 = Ju(e => {
+  let t = wA();
+  let a = sZ();
+  let r = Rs(G7P, {
+    orgId: a.id
+  });
+  let l = oA(r.data?.org) ?? null;
+  let o = () => t(Lo());
+  let d = !!l?.sitesPublishingDisabled;
+  let [c, _] = useState(d);
+  useEffect(() => {
+    _(d);
+  }, [d]);
+  let u = hS(e);
+  return jsx(fu, {
+    name: 'Sites Publishing Toggle Modal',
+    properties: {
+      orgId: a.id,
+      prevValue: d,
+      value: c
+    },
+    children: jsx(bL, {
+      width: 'lg',
+      manager: u,
+      children: jsxs(vo, {
+        children: [jsx(Y9, {
+          children: jsx(hE, {
+            children: _$$tx('settings_tab.sites_publishing_toggle_label')
+          })
+        }), jsxs(_$$nB, {
+          children: [c && c !== d && jsx($y, {
+            variant: 'danger',
+            children: jsx(_$$Q, {
+              children: _$$tx('org_settings.sites_publishing_toggle.banner')
+            })
+          }), jsxs(_$$b, {
+            legend: jsx(_$$q3, {
+              children: _$$tx('settings_tab.sites_publishing_toggle_label')
+            }),
+            value: c ? 'true' : 'false',
+            onChange: e => _(e === 'true'),
+            readonly: r.status === 'loading',
+            children: [jsx(_$$c2, {
+              value: 'false',
+              label: jsx(_$$J2, {
+                children: _$$tx('org_settings.sites_publishing_toggle.enable')
+              })
+            }), jsx(_$$c2, {
+              value: 'true',
+              label: jsx(_$$J2, {
+                children: _$$tx('org_settings.sites_publishing_toggle.disable')
+              })
+            })]
+          })]
+        }), jsx(wi, {
+          children: jsxs(jk, {
+            children: [jsx($z, {
+              variant: 'secondary',
+              onClick: o,
+              children: _$$tx('org_settings.sites_publishing_toggle.cancel')
+            }), jsx($z, {
+              variant: 'destructive',
+              onClick: () => {
+                if (c === d) {
+                  o();
+                  return;
+                }
+                let e = _$$t('org_settings.sites_publishing_toggle.success');
+                t(Sl({
+                  orgId: a.id,
+                  sitesPublishingDisabled: c,
+                  successMessage: e
+                }));
+                o();
+              },
+              disabled: c === d || r.status === 'loading',
+              children: _$$tx('org_settings.sites_publishing_toggle.save')
+            })]
+          })
+        })]
+      })
+    })
+  });
+}, 'SitesPublishingToggleModal');
+let se = Ju(e => {
+  let t = wA();
+  let a = sZ();
+  let r = Rs(G7P, {
+    orgId: a.id
+  });
+  let l = oA(r.data?.org) ?? null;
+  let o = () => t(Lo());
+  let d = !!l?.supabaseDisabled;
+  let [c, _] = useState(d);
+  useEffect(() => {
+    _(d);
+  }, [d]);
+  let u = hS(e);
+  return jsx(fu, {
+    name: 'Supabase Toggle Modal',
+    properties: {
+      orgId: a.id,
+      prevValue: d,
+      value: c
+    },
+    children: jsx(bL, {
+      width: 'lg',
+      manager: u,
+      children: jsxs(vo, {
+        children: [jsx(Y9, {
+          children: jsx(hE, {
+            children: _$$tx('settings_tab.supabase_toggle_label')
+          })
+        }), jsxs(_$$nB, {
+          children: [c && c !== d && jsx($y, {
+            variant: 'danger',
+            children: jsx(_$$Q, {
+              children: _$$tx('org_settings.supabase_toggle.banner_link', {
+                learnMoreLink: jsx(CY, {
+                  target: '_blank',
+                  href: 'https://help.figma.com/hc/articles/32640822050199',
+                  trusted: !0,
+                  children: _$$t('general.learn_more')
+                })
+              })
+            })
+          }), jsxs(_$$b, {
+            legend: jsx(_$$q3, {
+              children: _$$tx('settings_tab.supabase_toggle_label')
+            }),
+            value: c ? 'true' : 'false',
+            onChange: e => _(e === 'true'),
+            readonly: r.status === 'loading',
+            children: [jsx(_$$c2, {
+              value: 'false',
+              label: jsx(_$$J2, {
+                children: _$$tx('org_settings.supabase_toggle.enable')
+              })
+            }), jsx(_$$c2, {
+              value: 'true',
+              label: jsx(_$$J2, {
+                children: _$$tx('org_settings.supabase_toggle.disable')
+              })
+            })]
+          })]
+        }), jsx(wi, {
+          children: jsxs(jk, {
+            children: [jsx($z, {
+              variant: 'secondary',
+              onClick: o,
+              children: _$$tx('org_settings.supabase_toggle.cancel')
+            }), jsx($z, {
+              variant: 'destructive',
+              onClick: () => {
+                if (c === d) {
+                  o();
+                  return;
+                }
+                let e = _$$t('org_settings.supabase_toggle.success');
+                t(NL({
+                  orgId: a.id,
+                  supabaseDisabled: c,
+                  successMessage: e
+                }));
+                o();
+              },
+              disabled: c === d || r.status === 'loading',
+              children: _$$tx('org_settings.supabase_toggle.save')
+            })]
+          })
+        })]
+      })
+    })
+  });
+}, 'SupabaseToggleModal');
+let st = 'team_creation_controls_modal--settingLabel--KGHr-';
+let sa = 'team_creation_controls_modal--description--tsaEB';
+let sn = 'team_creation_controls_modal--radioLabel--7XJIQ';
+let ss = Ju(() => {
+  let e = wA();
+  let t = d4(e => e.orgById[e.currentUserOrgId]);
+  let a = c4(t.id).data;
+  let r = () => e(Ce());
+  let [l, o] = useState(t.shared_container_setting?.team_creation_controls ? t.shared_container_setting.team_creation_controls : null);
+  return jsx(fu, {
+    name: 'Team Creation Control Setting Modal',
+    properties: {
+      orgId: t.id
+    },
+    children: jsx(Dd, {
+      title: _$$t('org_settings.team_creation.modal', {
+        organization: t.name
+      }),
+      maxWidth: 440,
+      minWidth: 440,
+      fixedTop: !1,
+      onConfirm: () => {
+        if (t.shared_container_setting && l === t.shared_container_setting.team_creation_controls || l === t.shared_container_setting) {
+          r();
+          return;
+        }
+        e(yo({
+          payload: {
+            team_creation_controls: l
+          },
+          successMessage: _$$t('org_settings.team_creation.success')
+        }));
+        r();
+      },
+      confirmText: _$$t('org_settings.team_creation.save_button'),
+      children: jsx('div', {
+        children: jsxs(_$$z, {
+          value: l ?? $q.TEAM_CREATION_CONTROLS_ANYONE,
+          onChange: e => {
+            let t = null;
+            e !== 'none' && (t = e);
+            o(t);
+          },
+          children: [jsx(_$$Z, {
+            value: $q.TEAM_CREATION_CONTROLS_ANYONE,
+            labelClassName: sn,
+            className: 'team_creation_controls_modal--option--gaACu',
+            children: jsxs('div', {
+              className: st,
+              children: [jsx('div', {
+                children: _$$t('org_settings.team_creation.any.title')
+              }), jsx('div', {
+                className: sa,
+                children: _$$t('org_settings.team_creation.any.description')
+              })]
+            })
+          }, $q.TEAM_CREATION_CONTROLS_ANYONE), jsx(_$$Z, {
+            value: $q.TEAM_CREATION_CONTROLS_ADMIN_ONLY,
+            labelClassName: sn,
+            children: jsxs('div', {
+              className: st,
+              children: [jsx('div', {
+                children: _$$t('org_settings.team_creation.admin_only.title')
+              }), jsx('div', {
+                className: sa,
+                children: a ? _$$t('org_settings.team_creation.admin_only.description.workspaces') : _$$t('org_settings.team_creation.admin_only.description.no_workspaces')
+              })]
+            })
+          }, $q.TEAM_CREATION_CONTROLS_ADMIN_ONLY)]
+        })
+      })
+    })
+  });
+}, 'TeamCreationControlsModal');
+function si(e) {
+  if (e == null) return _$$t('settings_tab.idle_session_timeout_default_duration');
+  let [t, a] = qr(e);
+  return _$$t(`settings_tab.idle_session_timeout.time.${a}`, {
+    duration: t
+  });
+}
+export function $$sr0(e) {
+  let t;
+  let a;
+  let k;
+  let C;
+  let {
+    org,
+    currency,
+    orgSamlConfig,
+    orgDomains,
+    shippingAddress,
+    canSeeBillingAddressExp
+  } = e;
+  eA();
+  let F = _$$s4();
+  let q = _$$r2();
+  let $ = wA();
+  let B = Pc();
+  t = S2();
+  let z = _$$N_2.reduce((e, a) => {
+    switch (a) {
+      case ud.EXPERT:
+        return e || t.unwrapOr(null)?.upgradeApprovalSettingsExpert === r.zRx.INSTANT_APPROVAL;
+      case ud.DEVELOPER:
+        return e || t.unwrapOr(null)?.upgradeApprovalSettingsDeveloper === r.zRx.INSTANT_APPROVAL;
+      case ud.CONTENT:
+        return e || oA(t.unwrapOr(null)?.upgradeApprovalSettingsContent) === r.zRx.INSTANT_APPROVAL;
+      case ud.COLLABORATOR:
+        return e || t.unwrapOr(null)?.upgradeApprovalSettingsCollaborator === r.zRx.INSTANT_APPROVAL;
+      default:
+        xb(a);
+    }
+  }, !1);
+  let V = _$$t2();
+  let W = _$$q(Jt, !0);
+  let [H, Y] = useState(!1);
+  let [J, K] = useState(!1);
+  let X = c4(org.id ?? null).data;
+  let Q = _$$R();
+  let Z = yl();
+  let ee = Xf(org.id);
+  let et = ee.data?.scheduled_cancellation;
+  let ea = useMemo(() => et ? _$$h({
+    isEligibleForCancellation: et.is_eligible_for_cancellation,
+    scheduledCancellationDate: et.scheduled_cancellation_date,
+    cancelAtPeriodEnd: et.cancel_at_period_end
+  }) : null, [et]);
+  let en = !!ee.data;
+  let eo = org.tier === r.Agb.ENTERPRISE;
+  _$$S(UC, () => {
+    $(_$$to({
+      type: _$$q2,
+      data: {
+        planType: fm.ORGANIZATION,
+        planId: org.id
+      }
+    }));
+  });
+  let ed = Rs(_pO({
+    orgId: org.id
+  }));
+  let ec = ed.status === 'loaded' && ed.data?.org?.ipAllowlistRanges.status === 'loaded' && ed.data.org.ipAllowlistRanges.data || [];
+  let e_ = Rs(G7P({
+    orgId: org.id
+  }), {
+    enabled: !0
+  });
+  let eb = oA(e_.data?.org) ?? null;
+  let ev = getFeatureFlags().ai_ga;
+  useEffect(() => {
+    Eh.getShowVatGst({
+      orgId: org.id
+    }).then(({
+      data: e
+    }) => {
+      K(e.meta.show_vat_gst_id);
+    });
+  }, [org.id]);
+  useEffect(() => {
+    J && _$$S(mL, () => {
+      Hq({
+        org,
+        dispatch: $
+      });
+    });
+  }, [J, $, org]);
+  let ef = useCallback(() => {
+    $(sf({
+      view: 'orgDomainManagement'
+    }));
+  }, [$]);
+  let ej = !!getFeatureFlags().plan_level_file_export_controls && !!org.security_add_on_enabled_at;
+  let ey = [jsx(x8, {
+    label: _$$t('settings_tab.modify_community_handle_label'),
+    description: _$$t('settings_tab.modify_community_handle_description'),
+    currentValue: org.community_profile_handle ? `@${org.community_profile_handle}` : '',
+    onClick: () => {
+      $(_$$to({
+        type: S3,
+        data: {
+          orgId: org.id,
+          profileId: org.community_profile_id,
+          profileHandle: org.community_profile_handle
+        }
+      }));
+    }
+  }, 'org-handle')];
+  org.community_profile_id && (ey.push(jsx(x8, {
+    label: _$$t('settings_tab.delete_community_label'),
+    description: _$$t('settings_tab.delete_community_description'),
+    onClick: () => {
+      org.community_profile_id && org.community_profile_handle && $(_$$to({
+        type: _$$M,
+        data: {
+          dispatch: $,
+          profileId: org.community_profile_id,
+          handle: org.community_profile_handle
+        }
+      }));
+    }
+  }, 'delete-profile')), ey.push(jsx(x8, {
+    label: _$$t('settings_tab.community_commenters_label'),
+    description: _$$t('settings_tab.community_commenters_description'),
+    onClick: () => {
+      org.community_profile_id && $(_$$to({
+        type: _$$J3,
+        data: {
+          profileId: org.community_profile_id,
+          profileHandle: org.community_profile_handle,
+          emptyStateText: _$$t('settings_tab.community_commenters_restricted_dont_exist', {
+            orgHandle: `@${org.community_profile_handle}`
+          })
+        }
+      }));
+    }
+  }, 'restrict-comments')));
+  let ew = {
+    title: _$$t('settings_tab.section_header.profile'),
+    settings: ey
+  };
+  let ek = {
+    title: _$$t('settings_tab.section_header.team_management'),
+    settings: [jsx(x8, {
+      label: _$$t('settings_tab.team_creation_label'),
+      description: _$$t('settings_tab.team_creation_description'),
+      onClick: () => {
+        $(_$$to({
+          type: ss
+        }));
+      }
+    }, 'team-creation-controls')]
+  };
+  let eE = {
+    title: '',
+    settings: []
+  };
+  let eN = org.target_locality === OE.EU ? _$$t('settings_tab.data_storage_eu') : _$$t('settings_tab.data_storage_us');
+  eE.title = _$$t('settings_tab.section_header.data');
+  OW(org) && eE.settings.push(jsx(Ke, {
+    user: B,
+    tag: 'a_something_else',
+    label: _$$t('settings_tab.discovery.label'),
+    contactSupportCopy: org.discovery_enabled ? _$$t('settings_tab.contact_support_to_disable') : _$$t('settings_tab.contact_support_to_enable'),
+    description: jsxs(_$$Y, {
+      direction: 'vertical',
+      spacing: 8,
+      children: [jsx(_$$E, {
+        children: _$$tx('settings_tab.discovery.description', {
+          learnMoreLink: jsx('a', {
+            'target': '_blank',
+            'rel': 'noopener',
+            'className': Be,
+            'href': 'https://www.figma.com/developers/api#discovery',
+            'aria-label': _$$t('settings_tab.learn_more_about_discovery_api'),
+            'children': _$$tx('file_browser.team_settings.learn_more')
+          })
+        })
+      }), jsx(_$$E, {
+        children: _$$tx('resources_tab.libraries.current', {
+          setting: org.discovery_enabled ? _$$t('settings_tab.enabled') : _$$t('settings_tab.disabled')
+        })
+      })]
+    })
+  }, 'discovery'));
+  isGovCluster() || eE.settings.push(jsx(Ke, {
+    user: B,
+    label: _$$t('settings_tab.data_storage'),
+    description: jsxs(_$$Y, {
+      direction: 'vertical',
+      spacing: 8,
+      children: [jsx(_$$E, {
+        children: _$$tx('settings_tab.data_storage.description')
+      }), jsx(_$$E, {
+        children: _$$tx('settings_tab.data_storage.current_location', {
+          currentLocation: eN
+        })
+      })]
+    })
+  }, 'data-locality-control'));
+  let eI = [];
+  eo && eI.push(jsx(x8, {
+    label: _$$t('settings_tab.guest_membership_label'),
+    description: _$$t('settings_tab.guest_membership_description'),
+    onClick: () => {
+      $(_$$to({
+        type: nm
+      }));
+    }
+  }, 'guest-controls'));
+  mU(org) ? eI.push(jsx(x8, {
+    label: _$$t('settings_tab.external_collaboration_controls_label'),
+    description: _$$t('settings_tab.external_collaboration_controls_description', {
+      orgName: org.name
+    }),
+    currentValue: org.shared_container_setting?.external_collaboration_controls ? _$$t('settings_tab.disabled') : _$$t('settings_tab.enabled'),
+    onClick: () => {
+      $(_$$to({
+        type: nr
+      }));
+    }
+  }, 'external-collab-controls')) : ZY(org) && eI.push(jsx(Ke, {
+    user: B,
+    tag: 'a_permissions',
+    label: _$$t('settings_tab.external_collaboration_controls_label'),
+    description: _$$t('settings_tab.external_collaboration_controls_description', {
+      orgName: org.name
+    }),
+    contactSupportCopy: _$$t('settings_tab.contact_support_to_disable'),
+    contactSupportTooltipCopy: _$$t('settings_tab.domain_capture_contact_support_tooltip_copy')
+  }, 'external-collab-controls'));
+  (F && (getFeatureFlags().sts_k12_google_org_enabled || !org.k12_google_org) || _$$aI()) && eI.push(jsx(x8, {
+    label: _$$t('settings_tab.sites_publishing_toggle_label'),
+    description: _$$t('settings_tab.sites_publishing_toggle_description'),
+    currentValue: eb?.sitesPublishingDisabled ? _$$t('settings_tab.disabled') : _$$t('settings_tab.enabled'),
+    onClick: () => {
+      $(_$$to({
+        type: n9
+      }));
+    }
+  }, 'sites-publishing-toggle'));
+  p3() && eI.push(jsx(x8, {
+    label: _$$t('settings_tab.supabase_toggle_label'),
+    description: _$$t('settings_tab.supabase_toggle_description'),
+    currentValue: eb?.supabaseDisabled ? _$$t('settings_tab.disabled') : _$$t('settings_tab.enabled'),
+    onClick: () => {
+      $(_$$to({
+        type: se
+      }));
+    }
+  }, 'supabase-toggle'));
+  eI.push(jsx(x8, {
+    label: _$$t('settings_tab.public_sharing_title'),
+    description: _$$t('settings_tab.public_sharing_description'),
+    onClick: () => {
+      $(_$$to({
+        type: nU
+      }));
+    }
+  }, 'public-sharing'));
+  ej && eI.push(jsx(x8, {
+    label: _$$t('settings_tab.section_header.export_controls'),
+    description: _$$tx('settings_tab.export_controls_description'),
+    onClick: () => {
+      $(_$$to({
+        type: a3
+      }));
+    }
+  }, 'export-controls'));
+  eo && eI.push(jsx(x8, {
+    label: _$$t('settings_tab.password_controls_settings_label'),
+    description: _$$t('settings_tab.password_controls_settings_description'),
+    onClick: () => {
+      $(_$$to({
+        type: tU
+      }));
+    }
+  }, 'autogen-password-controls'));
+  _$$ag(org) && eI.push(jsx(Ke, {
+    user: B,
+    tag: 'a_something_else',
+    label: _$$t('settings_tab.network_access_restriction_label'),
+    description: jsxs(Fragment, {
+      children: [jsx('span', {
+        children: _$$tx('settings_tab.ip_restriction_description', {
+          orgName: org.name
+        })
+      }), jsx('span', {
+        className: _$$s.mt8.$,
+        children: org.ip_ranges.length !== 0 ? _$$tx('settings_tab.ip_restriction_range', {
+          ipRanges: jsx(_$$T, {
+            formatType: 'unit',
+            children: org.ip_ranges.map(e => jsx('span', {
+              children: e
+            }, e))
+          })
+        }) : jsx(Fragment, {})
+      })]
+    })
+  }, 'ip_restriction'));
+  let eT = {
+    title: _$$t('settings_tab.section_header.external_access'),
+    settings: eI
+  };
+  let eM = orgSamlConfig?.config?.idp_name ? _$$t('settings_tab.enabled') : _$$t('settings_tab.disabled');
+  let e5 = [];
+  let e3 = [];
+  let e8 = [];
+  e5.push(jsx(x8, {
+    label: _$$t('settings_tab.domain_management_label'),
+    description: _$$t('settings_tab.domain_management_description'),
+    onClick: ef
+  }, 'domain-management'));
+  isGovCluster() || e5.push(jsx(x8, {
+    label: _$$t('settings_tab.authentication_label'),
+    description: _$$t('settings_tab.authentication_description'),
+    currentValue: function(e) {
+      let t = _g(e);
+      switch (t) {
+        case Ct.SAML:
+          return _$$t('settings_tab.sso_method.saml_only');
+        case Ct.GOOGLE:
+          return _$$t('settings_tab.sso_method.google_only');
+        case Ct.ANY:
+          return _$$t('settings_tab.sso_method.any_method');
+        default:
+          xb(t);
+      }
+    }(org),
+    onClick: () => {
+      $(_$$to({
+        type: eu
+      }));
+    }
+  }, 'authentication'));
+  k = org.can_use_multi_idp ? jsx(x8, {
+    label: _$$t('settings_tab.idp_label'),
+    description: _$$t('settings_tab.idp_description'),
+    onClick: () => {
+      $(sf({
+        view: 'orgIdpManagement'
+      }));
+    }
+  }, 'idp') : jsx(x8, {
+    label: _$$t('settings_tab.saml_label'),
+    description: _$$t('settings_tab.saml_description'),
+    currentValue: eM,
+    onClick: () => {
+      $(_$$to({
+        type: _$$p,
+        data: {
+          org,
+          orgSamlConfig: orgSamlConfig.config,
+          orgDomains
+        }
+      }));
+    }
+  }, 'saml');
+  let e6 = [];
+  if (q || e6.push(jsx(x8, {
+    label: _$$t('settings_tab.scim_label'),
+    description: V() ? _$$t('settings_tab.scim_group_description') : _$$t('settings_tab.scim_description'),
+    currentValue: cg(orgSamlConfig) ? _$$t('settings_tab.enabled') : _$$t('settings_tab.disabled'),
+    onClick: () => {
+      $(_$$to({
+        type: G
+      }));
+    }
+  }, 'scim')), e5.push(k, ...e6), e3.push(...e6), e8.push(k, ...e6), _$$s3(org)) {
+    let e = oB(org);
+    let t = org.shared_container_setting?.ip_allowlist ?? !1;
+    e5.push(jsx(x8, {
+      label: _$$t('settings_tab.ip_allowlist_label'),
+      disabled: !e && !t,
+      description: jsxs(Fragment, {
+        children: [jsx('span', {
+          children: jsx(_$$E, {
+            children: _$$tx('settings_tab.ip_allowlist_description')
+          })
+        }), ec.length !== 0 && t && jsx('span', {
+          className: i0,
+          children: jsx(_$$E, {
+            truncate: 'end',
+            children: _$$tx('settings_tab.ip_allowlist_ranges_list', {
+              ranges: jsx(_$$T, {
+                formatType: 'unit',
+                children: ec.map(e => jsx('span', {
+                  children: e.ipRange
+                }, e.id))
+              })
+            })
+          })
+        })]
+      }),
+      currentValue: jsx(sd, {
+        setting: t,
+        canEnable: e
+      }),
+      onClick: () => {
+        $(_$$to({
+          type: nT,
+          data: {
+            ipAllowlistEnabled: t,
+            orgId: org.id,
+            ipAllowlistRanges: ec
+          }
+        }));
+      }
+    }, 'ip_allowlist'));
+  }
+  if (eo && (hM(org.shared_container_setting?.idle_timeout_duration_in_secs) && !nv(!!org.security_add_on_enabled_at) ? e5.push(jsx(Ke, {
+    user: B,
+    label: _$$t('settings_tab.idle_session_timeout_label'),
+    description: _$$t('settings_tab.idle_session_timeout_description'),
+    contactSupportTooltipCopy: _$$t('settings_tab.contact_support_to_change'),
+    contactSupportCopy: jsx(_$$E, {
+      color: 'tertiary',
+      children: si(org.shared_container_setting?.idle_timeout_duration_in_secs)
+    })
+  }, 'disabled-idle-session-timeout')) : e5.push(jsx(x8, {
+    label: _$$t('settings_tab.idle_session_timeout_label'),
+    description: _$$t('settings_tab.idle_session_timeout_description'),
+    currentValue: si(org.shared_container_setting?.idle_timeout_duration_in_secs),
+    onClick: () => {
+      $(_$$to({
+        data: {
+          idleTimeoutDurationInSecs: org.shared_container_setting?.idle_timeout_duration_in_secs,
+          orgId: org.id
+        },
+        type: nC
+      }));
+    }
+  }, 'idle-sesstion-timeout-setting'))), eo && X) {
+    let e = !!org.workspaces_nux_active_at;
+    let t = !e;
+    e5.push(jsx(T_, {
+      label: _$$t('settings_tab.workspace_selector_label'),
+      description: jsxs(Fragment, {
+        children: [_$$tx('settings_tab.workspace_selector_description_with_link'), jsxs(_$$N, {
+          'trusted': !0,
+          'newTab': !0,
+          'href': 'https://help.figma.com/hc/articles/7249713835799',
+          'aria-label': _$$t('settings_tab.learn_more_about_workspace_selector'),
+          'children': [jsx('br', {}), jsx(_$$E, {
+            children: _$$tx('general.learn_more')
+          })]
+        })]
+      }),
+      isActive: e,
+      onToggle: () => {
+        $(yo({
+          payload: {
+            workspaces_nux_enabled: t
+          },
+          successMessage: t ? _$$t('license_group.workspace_selector_is_visible') : _$$t('license_group.workspace_selector_is_hidden')
+        }));
+      }
+    }, 'workspace-selector'));
+  }
+  let e7 = {
+    title: _$$t('settings_tab.section_header.login_and_provisioning'),
+    settings: e5
+  };
+  let e9 = {
+    title: _$$t('settings_tab.section_header.login_and_provisioning'),
+    settings: e3
+  };
+  let ta = {
+    title: _$$t('settings_tab.section_header.login_and_provisioning'),
+    settings: e8
+  };
+  let ts = {
+    title: _$$t('plan_settings.billing_section_header'),
+    description: jsx(Fragment, {}),
+    settings: []
+  };
+  if (ee.status === 'loaded') {
+    let t = e.renewalDate && ((a = e.renewalDate) ? _$$A(a).format('MMMM D, YYYY') : '');
+    let s = !!ee.data?.scheduled_cancellation?.cancel_at_period_end;
+    let i = ee.data?.scheduled_cancellation?.scheduled_cancellation_date;
+    let r = e => jsx('span', {
+      className: bv,
+      children: _$$tx('settings_table.billing_date', {
+        billing_date: e
+      })
+    });
+    let l = e => jsx('button', {
+      className: _$$nf,
+      onClick: () => {
+        $(_$$to({
+          type: eC,
+          data: {
+            subscriptionStart: e
+          }
+        }));
+      },
+      children: _$$tx('settings_table.learn_more')
+    });
+    let o = e => {
+      ts.description = jsx('div', {
+        className: yV,
+        children: jsx('span', {
+          children: e
+        })
+      });
+    };
+    getFeatureFlags().scheduled_cancellation_enabled ? s && i ? o(_$$t('org_admin_settings.settings_tab.billing.subscription_cancelled', {
+      scheduledCancellationDate: _$$A(i).toDate()
+    })) : !s && t && o(_$$tx('org_admin_settings.settings_tab.billing.subscription_renewing', {
+      billing_date: r(t),
+      more: l(t)
+    })) : t && o(_$$tx('settings_table.subscription_renewal', {
+      frequency: 'annual',
+      billing_date: r(t),
+      more: l(t)
+    }));
+  }
+  en && ts.settings.push(jsx(n6, {
+    org,
+    billableSeats: e.billableSeats,
+    canSeeBillingAddressExp
+  }));
+  canSeeBillingAddressExp && ts.settings.push(jsx(x8, {
+    label: _$$t('org_admin_settings.settings_tab.billing.update_invoice_details.label'),
+    description: _$$t('org_admin_settings.settings_tab.billing.update_invoice_details.description'),
+    onClick: () => $(_$$to({
+      type: _$$u,
+      data: {
+        orgId: org.id,
+        shippingAddress,
+        canSeeBillingAddressExp
+      }
+    }))
+  }));
+  J && canSeeBillingAddressExp && ts.settings.push(jsx(x8, {
+    label: _$$t('settings_tab.vat_gst'),
+    description: _$$t('settings_tab.change_vat_gst_id'),
+    onClick: () => Hq({
+      org,
+      dispatch: $
+    })
+  }));
+  let td = null;
+  if (Q) {
+    let e = org.shared_container_setting?.configured_upgrade_request_setting;
+    if (e === Sm.ALL_USERS) {
+      td = jsx(x8, {
+        label: _$$t('plan_settings.auto_approval_settings'),
+        description: _$$t('plan_settings.auto_approval_settings_curf_all_users_description'),
+        onClick: _$$d({
+          dispatch: $
+        })
+      }, 'auto-approval-settings');
+    } else {
+      let t = e === Sm.MEMBERS;
+      td = jsx(x8, {
+        label: _$$t('plan_settings.auto_approval_settings'),
+        description: _$$t('plan_settings.auto_approval_settings_description'),
+        onClick: _$$S4({
+          dispatch: $,
+          isCurfEnabledForMembers: t,
+          currency,
+          renewalTerm: IX.YEAR
+        })
+      }, 'auto-approval-settings');
+    }
+  } else {
+    td = jsx(x8, {
+      label: _$$t('plan_settings.default_role'),
+      description: _$$tx('plan_settings.default_role_description', {
+        plan_type: _$$t('settings_table.organization')
+      }),
+      onClick: () => {
+        $(_$$to({
+          type: _$$h2,
+          data: {
+            planType: fm.ORGANIZATION,
+            planId: org.id
+          }
+        }));
+      }
+    }, 'default-role');
+  }
+  ts.settings.push(td);
+  org.shared_container_setting?.configured_upgrade_request_setting && ts.settings.push(jsx(Ke, {
+    user: B,
+    label: _$$t('settings_tab.configured_upgrade_request_flow.label'),
+    description: org.shared_container_setting?.configured_upgrade_request_setting === Sm.MEMBERS ? _$$t('settings_tab.configured_upgrade_request_flow.description_members') : _$$t('settings_tab.configured_upgrade_request_flow.description_all_users')
+  }));
+  ts.settings.push(jsx(x8, {
+    label: _$$t('plan_settings.seat_upgrade_digests'),
+    disabled: !z,
+    currentValue: z ? null : jsx($$so1, {}),
+    description: _$$t('plan_settings.seat_upgrade_digests_description'),
+    onClick: () => {
+      $(_$$to({
+        type: _$$q2,
+        data: {
+          planType: fm.ORGANIZATION,
+          planId: org.id
+        }
+      }));
+    }
+  }, 'upgrade-notifications'));
+  ts.settings.push(jsx(x8, {
+    label: _$$t('settings_table.billing_contacts'),
+    description: _$$t('settings_table.billing_contacts_description'),
+    onClick: () => {
+      $(sl({
+        orgId: org.id,
+        currentContact: e.adminEmail || ''
+      }));
+    }
+  }, 'billing-contacts'));
+  ea?.id === _$$a.SCHEDULE ? ts.settings.push(jsx(x8, {
+    label: _$$t('settings_table.cancel_plan'),
+    description: _$$t('settings_table.cancel_plan_description_org'),
+    trackingProperties: {
+      trackingDescriptor: _$$c.CANCEL_PLAN
+    },
+    onClick: () => {
+      ea.perform({
+        dispatch: $,
+        orgName: org.name,
+        orgId: org.id
+      });
+    }
+  }, 'schedule-cancellation')) : ea?.id === _$$a.UNSCHEDULE && ts.settings.push(jsx(x8, {
+    label: _$$t('settings_table.reactivate_plan'),
+    description: _$$t('settings_table.reactivate_plan_description_org'),
+    trackingProperties: {
+      trackingDescriptor: _$$c.REACTIVATE_PLAN
+    },
+    onClick: () => {
+      ea.perform({
+        dispatch: $,
+        orgName: org.name,
+        orgId: org.id
+      });
+    }
+  }, 'unschedule-cancellation'));
+  let tc = {
+    title: _$$t('settings_tab.section_header.resources'),
+    settings: []
+  };
+  tc.settings.push(jsx(x8, {
+    label: _$$t('settings_tab.plugin_approval_label'),
+    description: _$$t('settings_tab.plugin_approval_description'),
+    testId: 'plugin-approval-setting-action',
+    onClick: () => {
+      $(_$$to({
+        type: CW,
+        data: {
+          orgId: org.id,
+          extensionType: 'plugin'
+        }
+      }));
+    }
+  }, 'plugin-admin-approval'), jsx(x8, {
+    label: _$$t('settings_tab.widget_admin_approval_label'),
+    description: _$$t('settings_tab.widget_admin_approval_description'),
+    testId: 'widget-approval-setting-action',
+    onClick: () => {
+      $(_$$to({
+        type: CW,
+        data: {
+          orgId: org.id,
+          extensionType: 'widget'
+        }
+      }));
+    }
+  }, 'widget-admin-approval'));
+  tc.settings.push(jsx(x8, {
+    label: _$$t('settings_tab.dev_mode_label'),
+    description: _$$t('settings_tab.dev_mode_description'),
+    onClick: () => {
+      $(_$$to({
+        type: aH
+      }));
+    }
+  }, 'dev-mode-plugins'));
+  tc.settings.push(jsx(T_, {
+    label: _$$t('settings_tab.ui_kits_toggle_label'),
+    description: _$$t('settings_tab.ui_kits_toggle_description'),
+    isActive: !org.figma_provided_libraries_disabled,
+    testId: 'figma-provided-libraries-setting-toggle',
+    sprigOverride: W,
+    onToggle: e => {
+      let t = e ? _$$t('settings_tab.ui_kits_enabled') : _$$t('settings_tab.ui_kits_disabled');
+      $(yo({
+        payload: {
+          figma_provided_libraries_disabled: !e
+        },
+        successMessage: t
+      }));
+      _$$az.trackDefinedEvent('preset_libraries.org_status_changed', {
+        userId: B?.id,
+        orgId: org.id,
+        isEnabled: e
+      });
+    }
+  }, 'figma_libraries'));
+  Z && tc.settings.push(jsx(T_, {
+    label: _$$t('settings_tab.resource_hub_community_tab_label'),
+    description: _$$t('settings_tab.resource_hub_community_tab_description'),
+    isActive: !eb?.isResourceHubCmtyTabDisabled,
+    testId: 'resource-hub-community-tab-setting-toggle',
+    onToggle: e => {
+      let t = e ? _$$t('settings_tab.resource_hub_community_tab_enabled') : _$$t('settings_tab.resource_hub_community_tab_disabled');
+      $(yo({
+        payload: {
+          resource_hub_cmty_tab_disabled: !e
+        },
+        successMessage: t
+      }));
+    }
+  }, 'resource_hub_community_tab'));
+  let t_ = {
+    title: _$$t('admin_settings.ai.section_title'),
+    badge: ev ? void 0 : jsxs(Fragment, {
+      children: [jsx(Ex, {
+        color: zE.BRAND,
+        text: _$$t('general.beta')
+      }), jsx(_$$B, {
+        'data-tooltip-type': Ib.TEXT,
+        'data-tooltip': _$$t('admin_settings.ai.section_title.free_in_beta'),
+        'data-tooltip-timeout-delay': 50
+      })]
+    }),
+    settings: []
+  };
+  let tu = async e => {
+    try {
+      await Eh.updateAiDataSharing({
+        orgId: org.id,
+        enabled: e
+      });
+      sx('ai_data_sharing_toggled', {
+        org_id: org.id,
+        enabled: e
+      });
+      $(_$$F.enqueue({
+        message: _$$t('admin_settings.ai.data_sharing.update_success'),
+        type: 'ai-data-sharing-settings-update-success'
+      }));
+    } catch (e) {
+      $(_$$F.enqueue({
+        message: _$$t('admin_settings.ai.data_sharing.update_error'),
+        type: 'ai-data-sharing-settings-update-error',
+        error: !0
+      }));
+    }
+  };
+  isGovCluster() || (!ev || eo ? getFeatureFlags().ff_wsai_toggle ? t_.settings.push(jsx(x8, {
+    label: _$$t('org_settings.ai_controls.ai_features'),
+    description: _$$t('org_settings.ai_controls.setting_description'),
+    onClick: () => {
+      $(_$$to({
+        type: tS,
+        data: {
+          org
+        }
+      }));
+    }
+  }, 'ai_controls')) : t_.settings.push(jsx(T_, {
+    label: _$$t('admin_settings.ai.features_toggle.label'),
+    description: jsx('p', {
+      children: _$$tx('admin_settings.ai.features_toggle.description.org', {
+        learnMoreLink: jsx(CY, {
+          'aria-label': _$$t('settings_tab.learn_more_about_ai_features'),
+          'href': _$$d2.aiFeatures,
+          'target': '_blank',
+          'trusted': !0,
+          'children': _$$tx('general.learn_more')
+        })
+      })
+    }),
+    isActive: !org.ai_features_disabled,
+    onToggle: e => {
+      let t = e ? _$$t('admin_settings.ai.enable_success') : _$$t('admin_settings.ai.disable_success');
+      $(yo({
+        payload: {
+          ai_features_disabled: !e
+        },
+        successMessage: t
+      }));
+    }
+  }, 'ai_opt_out')) : org.ai_features_disabled && t_.settings.push(jsx(_$$Y, {
+    padding: {
+      top: 8
+    },
+    children: jsx(_$$p3, {
+      onEnable: () => {
+        $(yo({
+          payload: {
+            ai_features_disabled: !1
+          },
+          successMessage: _$$t('admin_settings.ai.enable_success')
+        }));
+      },
+      planId: org.id,
+      planType: FOrganizationLevelType.ORG
+    })
+  })), t_.settings.push(jsx(T_, {
+    label: _$$t('admin_settings.ai.data_sharing.label'),
+    description: jsx('p', {
+      children: _$$tx('admin_settings.ai.data_sharing.description.org', {
+        learnMoreLink: jsx(CY, {
+          'aria-label': _$$t('settings_tab.learn_more_about_content_training'),
+          'href': _$$d2.aiDataSharing,
+          'target': '_blank',
+          'trusted': !0,
+          'children': _$$tx('general.learn_more')
+        })
+      })
+    }),
+    isActive: !!eb?.isAiDataSharingEnabled,
+    disabled: !eb?.isAiDataSharingEnabled,
+    tooltipText: eb?.isAiDataSharingEnabled ? void 0 : _$$t('admin_settings.ai.data_sharing.disabled_for_orgs'),
+    testId: 'ai-data-sharing-toggle',
+    onToggle: tu
+  }, _$$t('admin_settings.ai.data_sharing.label'))));
+  let tm = {
+    title: _$$t('settings_tab.section_header.slides'),
+    badge: jsx(Ex, {
+      color: zE.BRAND,
+      text: _$$t('general.beta')
+    }),
+    settings: []
+  };
+  tm.settings.push(jsx(T_, {
+    label: _$$t('settings_tab.slides.access_to_slides'),
+    description: _$$tx('settings_tab.slides.let_users_create_slides', {
+      learnMoreLink: jsx('a', {
+        'target': '_blank',
+        'rel': 'noopener',
+        'className': Be,
+        'href': 'https://help.figma.com/hc/articles/23844348977303',
+        'aria-label': _$$t('settings_tab.learn_more_about_slides'),
+        'children': _$$tx('file_browser.team_settings.learn_more')
+      })
+    }),
+    descriptionClassName: CB,
+    isActive: !org.is_slides_disabled,
+    onToggle: e => {
+      let t = e ? _$$t('settings_tab.slides.enable_success') : _$$t('settings_tab.slides.disable_success');
+      $(xP({
+        orgId: org.id,
+        slidesDisabled: !e,
+        successMessage: t
+      }));
+    }
+  }, 'slides_opt_out'));
+  let tp = {
+    title: _$$t('settings_tab.section_header.other'),
+    settings: []
+  };
+  if (isGovCluster() || tp.settings.push(jsx(T_, {
+    label: _$$t('settings_tab.audio_label'),
+    description: _$$t('settings_tab.audio_description'),
+    isActive: !!org.voice_enabled,
+    onToggle: e => {
+      let t = e ? _$$t('settings_tab.audio_enabled') : _$$t('settings_tab.audio_disabled');
+      $(yo({
+        payload: {
+          voice_enabled: e
+        },
+        successMessage: t
+      }));
+    }
+  }, 'audio')), C = getFeatureFlags().cooper ? _$$t('settings_tab.custom_templates_description.include_cooper') : _$$t('settings_tab.custom_templates_description.v2'), tp.settings.push(jsx(T_, {
+    label: _$$t('settings_tab.custom_templates_label'),
+    description: C,
+    isActive: !!org.are_custom_templates_allowed,
+    onToggle: e => {
+      let t = e ? _$$t('settings_tab.custom_templates_enabled') : _$$t('settings_tab.custom_templates_disabled');
+      $(yo({
+        payload: {
+          custom_templates_allowed: e
+        },
+        successMessage: t
+      }));
+    }
+  }, 'custom-templates')), eo && tp.settings.push(jsx(T_, {
+    label: _$$t('settings_tab.cursor_chat_label'),
+    description: _$$t('settings_tab.cursor_chat_description'),
+    isActive: !org.cursor_chat_disabled,
+    onToggle: e => {
+      $(yo({
+        payload: {
+          cursor_chat_disabled: !e
+        },
+        successMessage: e ? _$$t('settings_tab.enable_cursor_chat_success') : _$$t('settings_tab.disable_cursor_chat_success')
+      }));
+    }
+  }, 'cursor-chat')), !isGovCluster() && org.community_profile_handle && tp.settings.push(jsx(T_, {
+    label: _$$t('settings_tab.community_file_publishing_label'),
+    description: _$$t('settings_tab.community_file_publishing_description'),
+    isActive: !!org.cmty_publish_as_user_enabled,
+    onToggle: e => {
+      $(yo({
+        payload: {
+          cmty_publish_as_user_enabled: e
+        },
+        successMessage: e ? _$$t('settings_tab.enable_community_file_publishing_success') : _$$t('settings_tab.disable_community_file_publishing_success')
+      }));
+    }
+  }, 'community-file-publishing')), cg(orgSamlConfig) && tp.settings.push(jsx(x8, {
+    label: _$$t('settings_tab.member_metadata_label'),
+    description: _$$t('settings_tab.member_metadata_description'),
+    currentValue: org.featured_scim_metadata ? du(org.featured_scim_metadata) : '',
+    onClick: () => $(_$$to({
+      type: tF
+    }))
+  }, 'member-metadata')), tp.settings.push(jsx(x8, {
+    label: _$$t('settings_tab.connected_apps'),
+    description: _$$t('settings_tab.connected_apps_description'),
+    onClick: () => {
+      $(_$$to({
+        type: tZ,
+        data: {
+          org
+        }
+      }));
+    }
+  }, 'authentication')), tp.settings.push(jsx(x8, {
+    label: _$$t('org_admin_settings.compliance_center_label'),
+    description: _$$t('org_admin_settings.compliance_center_description'),
+    onClick: () => {
+      let e = '/conveyor/sso';
+      isGovCluster() && (e = 'https://compliance.figma.com');
+      FJ(e, '_blank');
+    }
+  }, 'compliance-hub')), eo && !isGovCluster()) {
+    let e = async e => {
+      let t = await fetch(e === 'win' ? 'https://desktop.figma.com/win/releases.xml' : 'https://desktop.figma.com/mac-universal/releases.xml');
+      let a = await t.text();
+      let [n, s] = [a.match(/<title>Figma (\d+\.\d+\.\d+)<\/title>/)?.[1], a.match(/<pubDate>(.*?)<\/pubDate>/)?.[1]];
+      n && s && $(_$$to({
+        type: aK,
+        data: {
+          version: n,
+          releaseDate: s,
+          platform: e
+        }
+      }));
+    };
+    tp.settings.push(jsx(x8, {
+      label: _$$t('org_admin_settings.enterprise_installer_label'),
+      description: _$$t('org_admin_settings.enterprise_installer_description'),
+      onClick: () => e('win')
+    }, 'enterprise-installer'));
+    tp.settings.push(jsx(x8, {
+      label: _$$t('org_admin_settings.enterprise_installer_label_mac'),
+      description: _$$t('org_admin_settings.enterprise_installer_description_mac'),
+      onClick: () => e('mac')
+    }, 'enterprise-installer'));
+  }
+  J && !canSeeBillingAddressExp && tp.settings.push(jsx(x8, {
+    label: _$$t('settings_tab.vat_gst'),
+    description: _$$t('settings_tab.change_vat_gst_id'),
+    onClick: () => Hq({
+      org,
+      dispatch: $
+    })
+  }));
+  let tg = [jsx(x8, {
+    label: _$$t('settings_tab.delete_org_label'),
+    description: _$$t('settings_tab.delete_org_description'),
+    onClick: () => $(_$$to({
+      type: te
+    }))
+  }, 'delete-org')];
+  org.domain_capture && tg.push(jsx(x8, {
+    label: _$$t('settings_tab.delete_user_label'),
+    description: _$$t('settings_tab.delete_user_description'),
+    onClick: () => $(_$$to({
+      type: tt
+    }))
+  }, 'delete-user'));
+  let th = [isGovCluster() ? null : ew];
+  eo && th.push(ek);
+  org.k12_google_org ? th.push(eT, org.google_sso_only ? e9 : ta, tc, tp) : th.push(eT, e7, isGovCluster() ? {
+    title: _$$t('plan_settings.billing_section_header'),
+    description: jsx(Fragment, {}),
+    settings: [td]
+  } : ts, tc, t_, isGovCluster() || Q ? null : tm, eE.settings.length ? eE : null, tp);
+  return jsxs('div', {
+    children: [jsx(_$$K, {
+      title: _$$O(J7.SETTINGS)
+    }), jsxs('div', {
+      className: xd,
+      children: [th.filter(e => !!e).filter(e => !!e?.settings.length).map(e => jsx(Kz, {
+        ...e
+      }, e.title)), !H && jsx('button', {
+        className: jP,
+        onClick: () => Y(!0),
+        children: _$$tx('settings_tab.show_more')
+      }), H && jsx(Kz, {
+        title: _$$t('settings_tab.section_header.user_data'),
+        settings: tg
+      })]
+    }), jsx('div', {
+      className: PC
+    })]
+  });
+}
+let sl = _$$nF((e, t, {
+  liveStore: a
+}) => {
+  let n = e.dispatch;
+  let {
+    orgId,
+    currentContact
+  } = t;
+  let r = a.getMutation(I2);
+  let l = e => {
+    n(_$$s2.error(_$$J(e, _$$t('payments.change_billing_contact_error')), 5e3));
+  };
+  let o = async t => {
+    await r({
+      orgId,
+      billingContacts: t,
+      onRejected: l
+    });
+    e.dispatch(_$$s2.flash(_$$t('org_admin_settings.billing_details.billing_contact_updated')));
+  };
+  n(_$$to({
+    type: _$$E2,
+    data: {
+      currentContacts: currentContact,
+      onSubmit: o,
+      isOrg: !0
+    }
+  }));
+});
+export function $$so1() {
+  return jsxs('div', {
+    className: _$$s.flex.flexRow.itemsCenter.$,
+    children: [jsx('span', {
+      'aria-label': _$$t('plan_settings.seat_upgrade_digests_tooltip'),
+      'data-tooltip': _$$t('plan_settings.seat_upgrade_digests_tooltip'),
+      'data-tooltip-type': 'text',
+      'className': _$$s.mr4.$,
+      'children': jsx(In, {
+        icon: 'info-16',
+        fill: 'secondary'
+      })
+    }), jsx(_$$E, {
+      color: 'secondary',
+      children: _$$tx('settings_tab.disabled')
+    })]
+  });
+}
+function sd(e) {
+  let t = !e.canEnable && !e.setting;
+  let a = t ? 'secondary' : void 0;
+  let s = null;
+  t && (s = _$$t('settings_tab.ip_allowlist_domain_verification_tooltip'));
+  return jsxs('div', {
+    className: _$$s.flex.flexRow.itemsCenter.$,
+    children: [t && jsx('span', {
+      'aria-label': s,
+      'data-tooltip': s,
+      'data-tooltip-type': 'text',
+      'className': _$$s.mr4.$,
+      'children': jsx(In, {
+        icon: 'info-16',
+        fill: 'secondary'
+      })
+    }), e.setting ? jsx(_$$E, {
+      color: a,
+      children: _$$tx('settings_tab.enabled')
+    }) : jsx(_$$E, {
+      color: a,
+      children: _$$tx('settings_tab.disabled')
+    })]
+  });
+}
+export const Q = $$sr0;
+export const I = $$so1;
+//

@@ -1,0 +1,174 @@
+import { wA } from "../vendor/514228";
+import { ServiceCategories as _$$e } from "../905/165054";
+import { eU, Xr, md, zl } from "../figma_app/27355";
+import { z } from "../905/239603";
+import o from "../vendor/260986";
+import { A as _$$A } from "../vendor/90566";
+import { debugState } from "../905/407919";
+import { oA } from "../905/723791";
+import { IT } from "../figma_app/566371";
+import { $D } from "../905/11";
+import { Vg } from "../figma_app/147952";
+import { nl, cW, ZT } from "../figma_app/844435";
+import { tS } from "../figma_app/516028";
+import { _TC } from "../figma_app/43951";
+import { DM } from "../figma_app/300692";
+import { bD } from "../figma_app/45218";
+import { CN } from "../figma_app/915202";
+import { ZQ, SV } from "../figma_app/155287";
+var l = o;
+export let $$I2 = eU([]);
+export function $$S1() {
+  let [e] = IT(_TC({}));
+  let t = nl();
+  let r = cW();
+  let o = ZT();
+  let l = tS();
+  let S = Xr($$I2);
+  let v = wA();
+  let A = [];
+  let x = [];
+  let N = _$$A(() => {
+    A.length > 0 && v(Vg({
+      resourceType: bD.PLUGIN,
+      resourceIds: A
+    }));
+    x.length > 0 && v(Vg({
+      resourceType: bD.WIDGET,
+      resourceIds: x
+    }));
+  }, 500);
+  if (!e.data) return [];
+  let C = oA(e.data.actionsHistory);
+  if (!C || !C.recentlyUsedActions) return [];
+  let w = z.array(CN).safeParse(C.recentlyUsedActions);
+  if (!w.success) {
+    $D(_$$e.AI_FOR_PRODUCTION, Error("Fetched invalid schema for QuickActionsRecentCommandSelectedArgs from actions history"), {});
+    return [];
+  }
+  w.data.forEach((e) => {
+    if (!e.extensionInfo || e.extensionInfo.localFileId) return;
+    let {
+      extensionType,
+      extensionId
+    } = e.extensionInfo;
+    "plugin" === extensionType ? A.push(extensionId) : "widget" === extensionType && x.push(extensionId);
+  });
+  N();
+  S(function ({
+    recentlyUsed: e,
+    localExtensions: t,
+    publishedExtensions: r,
+    openFileKey: n,
+    extensionIdsCalledToFetch: a
+  }) {
+    return e.map((e) => function (e, t, r, n, a) {
+      let {
+        displayName,
+        selectedRunPluginArgs,
+        extensionInfo
+      } = e;
+      if (!selectedRunPluginArgs) return {
+        displayName,
+        extensionInfo
+      };
+      let d = function ({
+        selectedRunPluginArgs: e,
+        localExtensions: t,
+        publishedExtensions: r,
+        openFileKey: n,
+        extensionInfo: a,
+        extensionIdsCalledToFetch: s
+      }) {
+        if (!a) {
+          $D(_$$e.AI_FOR_PRODUCTION, Error("Extension info missing for selectedRunPluginArgs"), {});
+          return null;
+        }
+        let {
+          extensionId,
+          currentExtensionVersionId,
+          localFileId
+        } = a;
+        let {
+          parameterValues
+        } = e;
+        let p = localFileId?.toString() || extensionId;
+        let h = DM({
+          idToSearch: p,
+          localExtensionsByFileId: t,
+          publishedExtensions: r
+        });
+        if (!h && !localFileId) {
+          extensionId in debugState.getState().recentlyUsed.plugins.fetchedResources || s.has(extensionId) || $D(_$$e.AI_FOR_PRODUCTION, Error(`Published plugin with ID ${extensionId} not fetched`), {});
+          return null;
+        }
+        if (!h || !ZQ(h) && currentExtensionVersionId !== h.current_plugin_version_id) return null;
+        if (!parameterValues) {
+          ZQ(h) ? $D(_$$e.AI_FOR_PRODUCTION, Error(`Parameter values missing for selectedRunPluginArgs for local plugin with ID ${extensionId}`), {}) : $D(_$$e.AI_FOR_PRODUCTION, Error(`Parameter values missing for selectedRunPluginArgs for published plugin with ID ${extensionId}`), {});
+          return null;
+        }
+        let m = function (e) {
+          let t = {};
+          for (let r in e) {
+            let n;
+            try {
+              n = JSON.parse(e[r]);
+            } catch (t) {
+              $D(_$$e.AI_FOR_PRODUCTION, Error(`Invalid JSON value for key '${r}': ${e[r]}`), {});
+              return null;
+            }
+            let a = SV.safeParse(n);
+            if (!a.success) {
+              $D(_$$e.AI_FOR_PRODUCTION, Error(`Invalid ParameterValue for key '${r}': ${e[r]}`), {});
+              return null;
+            }
+            t[r] = a.data;
+          }
+          return t;
+        }(parameterValues);
+        return m ? {
+          plugin: h,
+          command: "",
+          queryMode: !1,
+          runMode: "default",
+          triggeredFrom: "parameter-entry",
+          openFileKey: n || "",
+          deferRunEvent: !1,
+          parameterValues: m,
+          isWidget: !1
+        } : null;
+      }({
+        selectedRunPluginArgs,
+        localExtensions: t,
+        publishedExtensions: r,
+        openFileKey: n,
+        extensionInfo,
+        extensionIdsCalledToFetch: a
+      });
+      return d ? {
+        displayName,
+        runPluginArgs: d,
+        extensionInfo: e.extensionInfo
+      } : null;
+    }(e, t, r, n, a)).filter((e) => null !== e);
+  }({
+    recentlyUsed: w.data,
+    localExtensions: t,
+    publishedExtensions: {
+      ...r,
+      ...o
+    },
+    openFileKey: l,
+    extensionIdsCalledToFetch: new Set(A.concat(x))
+  }));
+}
+export function $$v3() {
+  return l()(md($$I2), "displayName");
+}
+export function $$A0() {
+  return l()(zl.get($$I2), "displayName");
+}
+export const $O = $$A0;
+export const WR = $$S1;
+export const Z8 = $$I2;
+export const wo = $$v3;

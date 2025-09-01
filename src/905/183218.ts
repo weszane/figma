@@ -1,0 +1,10 @@
+var $$n3 = "tabs__tabStrip__6GiU-";
+var $$r2 = "tabs__tabButton__UEhB4";
+var $$a4 = "tabs__tabButtonStrong__Kgz2o";
+var $$s1 = "tabs__tabPanel__-3APM";
+var $$o0 = "tabs__tabPanelFillHeight__qwcK1";
+export const I5 = $$o0;
+export const SZ = $$s1;
+export const eg = $$r2;
+export const gy = $$n3;
+export const zw = $$a4;

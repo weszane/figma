@@ -1,0 +1,275 @@
+import { useMemo, useEffect } from "react";
+import { lQ } from "../905/934246";
+import { plo, Vzr, rrT, glU } from "../figma_app/763686";
+import { AD, dI, Hr, sH } from "../905/871411";
+import { UN } from "../905/700578";
+import { getFeatureFlags } from "../905/601108";
+import { eU, Iz, md, zl, fp, Xr } from "../figma_app/27355";
+import c from "../vendor/805353";
+import p from "../vendor/128080";
+import { az } from "../905/449184";
+import { debugState } from "../905/407919";
+import { m as _$$m } from "../905/717445";
+import { buildUploadUrl } from "../figma_app/169182";
+import { GI, Vi } from "../905/125333";
+import { Dc } from "../figma_app/314264";
+import { Y5 } from "../figma_app/455680";
+import { C8, HE } from "../905/216495";
+import { Gt } from "../905/275640";
+import { Wh } from "../figma_app/615482";
+import { wA, Fk } from "../figma_app/167249";
+import { iM } from "../figma_app/405546";
+var u = c;
+var _ = p;
+let x = "Current";
+let $$N11 = eU([]);
+let C = eU({});
+let w = Iz(e => eU(t => t(C)[e] ?? void 0, (t, r, n) => {
+  r(C, t => ({
+    ...t,
+    [e]: n
+  }));
+}));
+let $$O5 = eU({});
+let R = Iz(e => eU(t => t($$O5)[e] ?? void 0, (t, r, n) => {
+  r($$O5, t => ({
+    ...t,
+    [e]: n
+  }));
+}));
+export function $$L8(e) {
+  let t = w(e);
+  return md(t);
+}
+export let $$P4 = {
+  guid: AD,
+  name: "Solid",
+  type: plo.STRETCH,
+  sizeX: 0,
+  sizeY: 0,
+  isSoftDeleted: !1
+};
+export function $$D0({
+  guid: e,
+  sizeX: t,
+  sizeY: r,
+  upSample: n
+}) {
+  if (!Vzr) return;
+  let [i, s] = Vzr.generateThumbnailForNode(e, t * n, r * n, n, {
+    useAbsoluteBounds: !0
+  });
+  return URL.createObjectURL(new Blob([s], {
+    type: "image/png"
+  }));
+}
+let k = e => {
+  let t = $$D0({
+    ...e,
+    upSample: 2
+  });
+  t && zl.set(w(e.previewName), t);
+};
+let M = e => {
+  if (!Vzr) return;
+  let {
+    guid,
+    previewName,
+    config,
+    optionIndexForMenu
+  } = e;
+  let s = $$D0({
+    ...e,
+    upSample: 2
+  });
+  s && zl.set(R(previewName), {
+    name: previewName,
+    imageUrl: s,
+    config,
+    optionIndexForMenu,
+    guid
+  });
+};
+export function $$F1() {
+  return wA(e => {
+    let t = e.getInternalCanvas();
+    return t && _$$m().ce_il_strokes ? t.childrenNodes.filter(e => "BRUSH" === e.type && (e.brushType !== plo.SCATTER || _$$m().ce_il_scatter)).map(e => {
+      let t = {
+        guid: e.guid,
+        name: e.name,
+        sizeX: e.size.x,
+        sizeY: e.size.y,
+        isSoftDeleted: e.isSoftDeleted
+      };
+      return e.brushType === plo.SCATTER ? {
+        ...t,
+        type: plo.SCATTER,
+        settings: e.scatterStrokeSettings
+      } : {
+        ...t,
+        type: plo.STRETCH
+      };
+    }) : [];
+  });
+}
+export function $$j3() {
+  let e = $$F1();
+  let t = C8(Gt("strokeBrushGuid")).map(e => dI(e));
+  let r = e.filter(e => t.includes(e.guid));
+  return 0 === r.length ? null : r.every(e => e.type === plo.SCATTER) ? plo.SCATTER : r.every(e => e.type === plo.STRETCH) ? plo.STRETCH : null;
+}
+export function $$U10(e) {
+  let t = $$F1();
+  let r = md(e);
+  let n = t.find(e => e.guid && e.guid === dI(r.strokeBrushGuid));
+  return n ? n.type : null;
+}
+let B = getFeatureFlags().ce_il_pencil_stroke_presets ? function() {
+  let [e, t] = fp($$O5);
+  let r = e[x]?.config;
+  let i = md(GI)?.dynamicStrokeSettings;
+  let a = useMemo(() => u()(t, 500, {
+    trailing: !0
+  }), [t]);
+  useEffect(() => {
+    !i || _()(i, r) || a(e => {
+      let t = e[x];
+      if (!t) return e;
+      let {
+        guid
+      } = t;
+      let n = UN().get(guid);
+      if (!n) return e;
+      let i = 16 / n.size.y;
+      let a = $$D0({
+        guid: n.guid,
+        sizeX: n.size.x,
+        sizeY: n.size.y,
+        upSample: 2 * i
+      });
+      return a ? {
+        ...e,
+        [x]: {
+          ...t,
+          imageUrl: a,
+          config: n.dynamicStrokeSettings
+        }
+      } : e;
+    });
+  }, [i, r, a]);
+} : lQ;
+let $$G6 = Wh(() => eU(null));
+export function $$V9() {
+  let [e, t] = fp(Vi);
+  let r = md($$G6);
+  useEffect(() => {
+    r && (void 0 === e.strokeBrushGuid || e.strokeBrushGuid === Hr) && t(e => ({
+      ...e,
+      strokeBrushGuid: r
+    }));
+    Y5.updateAppModel({
+      currentSelectedProperty: {
+        type: rrT.STROKE_PRESET,
+        indices: [0]
+      }
+    });
+  }, [e.strokeBrushGuid, r, t]);
+}
+export function $$H2() {
+  let e = Fk(e => !!e.getInternalCanvas());
+  let [t, r] = fp($$N11);
+  let [i, c] = fp($$G6);
+  let u = $$F1();
+  let p = useMemo(() => u.filter(e => !e.isSoftDeleted && t.includes(e.guid) && e.guid !== AD), [t, u]);
+  let _ = Xr(Vi);
+  useEffect(() => {
+    if (p.length && !i) {
+      let e = p.filter(e => e.type === plo.STRETCH);
+      let t = sH(e[0]?.guid);
+      t && c(t);
+    }
+  }, [i, p, c]);
+  useEffect(() => {
+    if (!_$$m().ce_il_strokes || !e || p.length) return;
+    let t = [{
+      type: plo.STRETCH,
+      resourceString: "a3480b63cd4ac2a8976c8a48aaa5b88a88810ce3"
+    }];
+    getFeatureFlags().ce_il_scatter && t.push({
+      type: plo.SCATTER,
+      resourceString: "3ffada8f593e3755bf1920e37ad656804aa53250"
+    });
+    Promise.all(t.map(({
+      resourceString: e,
+      type: t
+    }) => fetch(buildUploadUrl(e)).then(e => e.arrayBuffer()).then(e => {
+      if (glU) return glU.insertBrushesFromBuffer(new Uint8Array(e), t);
+    }).catch(() => []))).then(([e = [], t = []]) => {
+      let n = sH(e[0]);
+      n && (c(n), _(e => ({
+        ...e,
+        strokeBrushGuid: n
+      })));
+      r([...e, ...t]);
+    });
+  }, [_, r, p, e, c]);
+  (function() {
+    let e = $$F1();
+    let t = UN();
+    B();
+    let r = useMemo(() => e.filter(e => !e.isSoftDeleted), [e]);
+    let [i] = iM(Vi, "strokeBrushGuid");
+    let l = HE(i);
+    useEffect(() => {
+      if (!_$$m().ce_il_strokes || !glU) return;
+      let e = glU.generatePreviewNodesForDrawStrokes();
+      t.getInternalCanvas() && ["pencils", "brushes"].forEach(r => {
+        let n = e[r];
+        let i = "pencils" === r;
+        let a = i ? R : w;
+        n.forEach((e, r) => {
+          let n = t.get(e);
+          if (!n) return;
+          let o = function(e) {
+            let t = /(brush|pencil)_preview_(.+)/.exec(e.name);
+            return t ? t[2] : null;
+          }(n);
+          if (!o) return;
+          let c = a(o);
+          if (zl.get(c)) return;
+          let u = {
+            guid: n.guid,
+            previewName: o,
+            sizeX: n.size.x,
+            sizeY: n.size.y
+          };
+          !i && l && n.strokeBrushGuid === dI(l) ? k(u) : i ? setTimeout(() => M({
+            ...u,
+            config: n.dynamicStrokeSettings,
+            optionIndexForMenu: r
+          }), 0) : setTimeout(() => k(u), 0);
+        });
+      });
+    }, [r, t, l]);
+  })();
+}
+export function $$z7(e, t) {
+  az.trackDefinedEvent("illustration.set_brush", {
+    brushGuid: e?.guid || "-1:-1",
+    brushName: e?.name || "",
+    numNodes: t.length,
+    productType: Dc(debugState.getState().selectedView.editorType)
+  });
+}
+export const $A = $$D0;
+export const Bu = $$F1;
+export const Gx = $$H2;
+export const Kt = $$j3;
+export const Lk = $$P4;
+export const NU = $$O5;
+export const T6 = $$G6;
+export const UH = $$z7;
+export const W = $$L8;
+export const d3 = $$V9;
+export const eh = $$U10;
+export const vE = $$N11; 

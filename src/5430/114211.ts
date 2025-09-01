@@ -1,0 +1,129 @@
+import { jsxs, jsx } from "react/jsx-runtime";
+import { useState, useCallback } from "react";
+import { wA } from "../vendor/514228";
+import { Pw } from "../905/521428";
+import { s_ } from "../905/17223";
+import { Lf } from "../figma_app/637027";
+import { kt } from "../figma_app/858013";
+import { s as _$$s } from "../905/573154";
+import { t as _$$t, tx } from "../905/303541";
+import { j as _$$j } from "../5430/272190";
+import { G } from "../905/971006";
+import { _6 } from "../figma_app/386952";
+import { iZ } from "../905/372672";
+import { qE } from "../figma_app/152745";
+import { H } from "../905/216861";
+import { EB } from "../figma_app/831101";
+import { Ju } from "../905/102752";
+import { d_ } from "../figma_app/918700";
+import { X } from "../905/33014";
+import { A as _$$A } from "../905/289352";
+export let $$w0 = Ju(function (e) {
+  let t = wA();
+  let r = iZ();
+  let g = _6();
+  let w = H();
+  let [C, L] = useState("");
+  let [T, I] = useState("");
+  let [N, E] = useState(EB());
+  let [S, R] = useState("");
+  let [k, A] = useState(!0);
+  let [P, M] = useState(!1);
+  G();
+  let O = useCallback(() => {
+    if (!r || P) return;
+    if (!C) {
+      t(_$$s.error(_$$t("community.seller.collect_tax_info_modal.enter_a_first_name")));
+      return;
+    }
+    if (!T) {
+      t(_$$s.error(_$$t("community.seller.collect_tax_info_modal.enter_a_last_name")));
+      return;
+    }
+    let {
+      line1,
+      city,
+      country,
+      region,
+      postal_code
+    } = N;
+    if (!line1 || !city || !country || !postal_code || "US" === country && !region) {
+      t(_$$s.error(_$$t("community.seller.collect_tax_info_modal.enter_a_valid_address")));
+      return;
+    }
+    if (S && !k) {
+      t(_$$s.error(_$$t("community.seller.collect_tax_info_modal.enter_a_valid_vat_id")));
+      return;
+    }
+    M(!0);
+    t(_$$j({
+      user: r,
+      callback: t => {
+        e.setupStripeCallback(t);
+        M(!1);
+        t && w();
+      },
+      selectedView: g,
+      firstName: C,
+      lastName: T,
+      address: N,
+      vatId: S
+    }));
+  }, [N, w, r, t, C, P, k, T, e, g, S]);
+  return jsxs(d_, {
+    className: "collect_tax_info_modal--container--F6VXQ",
+    children: [jsx(s_, {
+      dispatch: t
+    }), jsx("div", {
+      className: "collect_tax_info_modal--title--wFmJh text--fontPos20--Bcz97 text--_fontBase--QdLsd",
+      children: tx("community.seller.collect_tax_info_modal.title")
+    }), jsx("div", {
+      className: "collect_tax_info_modal--body--M1wrr text--fontPos13--xW8hS text--_fontBase--QdLsd",
+      children: tx("community.seller.collect_tax_info_modal.body")
+    }), jsxs("div", {
+      className: "xh8yej3",
+      children: [jsx(Lf, {
+        value: C,
+        htmlName: "firstName",
+        label: _$$t("community.seller.collect_tax_info_modal.first_name"),
+        onChange: e => {
+          L(e.target.value);
+        },
+        trackingFieldName: "First name",
+        dataTestId: "first-name"
+      }), jsx(Lf, {
+        value: T,
+        htmlName: "lastName",
+        label: _$$t("community.seller.collect_tax_info_modal.last_name"),
+        onChange: e => {
+          I(e.target.value);
+        },
+        trackingFieldName: "Last name",
+        dataTestId: "last-name"
+      }), jsx(X, {
+        updateAddress: E,
+        address: N,
+        countryCodesOverride: qE,
+        dontSeeYourCountryLink: "https://help.figma.com/hc/articles/12067637274519-About-selling-Community-resources#What_countries_are_supported?"
+      }), jsx(_$$A, {
+        onChange: R,
+        country: N.country,
+        setIsVatIdValid: A,
+        vatId: S,
+        isCommunityCheckout: !0
+      })]
+    }), jsx("div", {
+      className: "collect_tax_info_modal--buttonWrapper--fl7ot",
+      children: jsxs(Pw, {
+        onClick: O,
+        children: [P && jsx("span", {
+          className: "collect_tax_info_modal--loadingIcon--iCbii",
+          children: jsx(kt, {
+            shouldMatchTextColor: !0
+          })
+        }), tx("community.seller.collect_tax_info_modal.continue_to_stripe")]
+      })
+    })]
+  });
+}, "CommunityCollectTaxInfoModal");
+export const s = $$w0;

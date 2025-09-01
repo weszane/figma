@@ -1,0 +1,83 @@
+import { useEffect } from "react";
+import { df } from "../figma_app/728005";
+import { UN } from "../905/700578";
+import { eU, Xr, zl } from "../figma_app/27355";
+import { eD } from "../figma_app/876459";
+import { Tv } from "../figma_app/311375";
+import { Jr } from "../figma_app/624361";
+import { wA } from "../figma_app/167249";
+import { Kx, iy } from "../figma_app/342355";
+import { $w } from "../figma_app/935144";
+import { t2 } from "../figma_app/911720";
+let $$h1 = eU(null);
+let $$m0 = eU(null);
+let $$g2 = eU(null);
+export function $$f3() {
+  (function () {
+    let e = Tv()[0] ?? null;
+    let {
+      tlfGuid,
+      pageGuid
+    } = wA((e, t) => {
+      if (t) {
+        let r = e.get(t);
+        if (r) return {
+          tlfGuid: r.findContainingTopLevelFrameOrSelf(),
+          pageGuid: r.containingCanvas ?? null
+        };
+      }
+      return {
+        tlfGuid: null,
+        pageGuid: null
+      };
+    }, e);
+    let i = Xr($$h1);
+    let a = Xr($$m0);
+    let o = Xr($$g2);
+    useEffect(() => {
+      E(e, i, "autocomplete://selection");
+    }, [e, i]);
+    useEffect(() => {
+      E(tlfGuid, a, "autocomplete://tlf");
+    }, [tlfGuid, a]);
+    useEffect(() => {
+      E(pageGuid, o, "autocomplete://page");
+    }, [pageGuid, o]);
+  })();
+  return null;
+}
+function E(e, t, r) {
+  let n = UN().get(e ?? null);
+  if (n) {
+    if ("xml" === zl.get(Kx)) {
+      t(df({
+        node: n,
+        includeComponents: !0,
+        codeConnectMapping: null,
+        codebaseSuggestions: null,
+        loadImageByHash: e => Jr().loadImageByHash(e),
+        configSettings: iy()
+      }).content.map(e => e.text).join("\n\n"));
+      eD?.sendMCPUpdate("resource", {
+        uri: r
+      });
+    } else {
+      let e = $w(n);
+      t2(n, e, "web", () => Promise.resolve([{}, {}])).then(([e]) => {
+        t(e.content.map(e => e.text).join("\n\n"));
+        eD?.sendMCPUpdate("resource", {
+          uri: r
+        });
+      });
+    }
+  } else {
+    t(null);
+    eD?.sendMCPUpdate("resource", {
+      uri: r
+    });
+  }
+}
+export const Lv = $$m0;
+export const jb = $$h1;
+export const oG = $$g2;
+export const y6 = $$f3;

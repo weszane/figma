@@ -1,0 +1,90 @@
+import { jsxs, jsx } from "react/jsx-runtime";
+import { wA } from "../vendor/514228";
+import { eU, md, Xr } from "../figma_app/27355";
+import { h as _$$h } from "../905/207101";
+import { b as _$$b } from "../905/985254";
+import { e as _$$e } from "../905/621515";
+import { A as _$$A } from "../905/956262";
+import { N as _$$N } from "../905/482239";
+import { zo, pQ } from "../figma_app/101956";
+import { d2, t as _$$t } from "../figma_app/579169";
+import { r1, qG } from "../figma_app/545877";
+import { jj } from "../figma_app/797994";
+import { jd } from "../figma_app/528509";
+import { yV, XO } from "../figma_app/516028";
+import { FFileType } from "../figma_app/191312";
+import { jO } from "../figma_app/242339";
+import { N as _$$N2 } from "../figma_app/268271";
+import { qo } from "../905/696396";
+import { U } from "../905/455766";
+import { h as _$$h2 } from "../905/284399";
+import { yP, Iy } from "../figma_app/551322";
+import { q3 } from "../figma_app/450829";
+import { nWd } from "../figma_app/6204";
+let $$x0 = eU(!1);
+let N = () => new Date(Date.now() - 1e4);
+let C = "Move Drafts Nudge -";
+let w = r1("dismissed_move_drafts_nudge");
+export function $$O1() {
+  let e = md(yV);
+  let t = md(d2);
+  let r = md(qG);
+  let O = XO();
+  let R = md(zo);
+  let L = jO();
+  let P = md(pQ);
+  let D = md(_$$t);
+  let k = md(_$$N);
+  let M = md(w);
+  let F = Xr($$x0);
+  let j = _$$e({
+    overlay: nWd,
+    priority: _$$N2.SECONDARY_MODAL
+  }, [k, t, r, P, D, R, M]);
+  let {
+    currentStep,
+    next
+  } = _$$A({
+    numSteps: 2,
+    onComplete: j.complete
+  });
+  let G = wA();
+  _$$h(() => {
+    null != e && e.canEdit && e.createdAt > N() && j.show({
+      canShow: (t, r, n, i, a, s, l) => {
+        let d = !!e && jd(e.project);
+        let c = O === FFileType.WHITEBOARD && s || O === FFileType.DESIGN && L;
+        return r === qo.PERSONAL && c && (i || d) && !jj(n, "ran_move_drafts_nudge_machine") && (G(_$$b({
+          ran_move_drafts_nudge_machine: !0
+        })), !0) && !l && !!a && !!t;
+      },
+      onShow: () => {
+        F(!0);
+      }
+    });
+  });
+  return jsxs(U, {
+    currentStep,
+    isShowing: j.isShowing,
+    children: [jsx(_$$h2, {
+      isShowing: j.isShowing,
+      modalType: q3.SELF_CONTAINED,
+      trackingContextName: `${C} Main nudge`,
+      element: yP,
+      onClickPrimaryCta: next,
+      onManualDismiss: j.complete,
+      testId: "move_drafts_main_nudge",
+      onClose: j.complete
+    }), jsx(_$$h2, {
+      isShowing: j.isShowing,
+      modalType: q3.SELF_CONTAINED,
+      trackingContextName: `${C} Dropdown highlight`,
+      element: Iy,
+      onClickPrimaryCta: next,
+      onManualDismiss: j.complete,
+      onClose: j.complete
+    })]
+  });
+}
+export const $ = $$x0;
+export const A = $$O1;

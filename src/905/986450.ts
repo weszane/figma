@@ -1,0 +1,26 @@
+import { H } from "react-dom";
+import { Z } from "../vendor/39153";
+export function $$a0(e = "react-page") {
+  let t = document.getElementById(e);
+  if (!t) {
+    Z({
+      category: "react-root",
+      message: "Failed to find root node",
+      data: {
+        documentState: {
+          bodyChildElements: function () {
+            let e = document.body;
+            return e ? Array.from(e.children).map(e => `${e.localName}${e.id ? "#" + e.id : ""}${e.className ? "." + e.className.split(" ").join(".") : ""}`) : [];
+          }(),
+          readyState: document.readyState
+        },
+        nodeId: e,
+        url: window.location.href
+      },
+      level: "error"
+    });
+    return Error(`Could not find root node with id ${e}`);
+  }
+  return H(t);
+}
+export const Q = $$a0;

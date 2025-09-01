@@ -1,0 +1,10 @@
+let $$n3 = "organize-favorite-menu";
+let $$i1 = "team-link-context-menu";
+let $$a0 = "TEAM_PROJECT_LINK_ONBOARDING_KEY";
+let $$s4 = "DRAFT_FOLDER_LINK_ONBOARDING_KEY";
+export var $$o2 = (e => (e.PENDING_ASSET_TRANSFER = "pending_asset_transfer", e.PENDING_RESOURCE_CONNECTION = "pending_resource_connection", e.ACTIVE_RESOURCE_CONNECTION = "active_resource_connection", e))($$o2 || {});
+export const Jo = $$a0;
+export const RQ = $$i1;
+export const cm = $$o2;
+export const jU = $$n3;
+export const uZ = $$s4;

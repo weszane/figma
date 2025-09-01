@@ -1,0 +1,1 @@
+require.p = new URL(document.currentScript.src).origin + require.p;

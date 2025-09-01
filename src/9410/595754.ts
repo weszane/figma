@@ -1,0 +1,11 @@
+import { NLJ } from "../figma_app/763686";
+let $$n1 = "whiteboardToolbelt";
+let $$a0 = NLJ.SELECT;
+let $$s4 = "whiteboardDrawingToolbelt";
+let $$o2 = "whiteboardStickyToolbelt";
+let $$l3 = "whiteboardDiagrammingToolbelt";
+export const $o = $$a0;
+export const I1 = $$n1;
+export const Mg = $$o2;
+export const d6 = $$l3;
+export const t1 = $$s4;

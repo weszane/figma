@@ -1,0 +1,263 @@
+import { c as _$$c, r as _$$r } from "../905/676456";
+import { NC } from "../905/17179";
+import { sx } from "../905/449184";
+import { WB } from "../905/761735";
+import { g as _$$g } from "../905/880308";
+import { XHR } from "../905/910117";
+import { t as _$$t } from "../905/303541";
+import { J } from "../905/231762";
+import { F } from "../905/302958";
+import { nF, MM } from "../905/350402";
+import { b6, Qi } from "../figma_app/559491";
+import { M5, ZO } from "../figma_app/350203";
+import { N3 } from "../figma_app/844435";
+import { n as _$$n } from "../figma_app/740025";
+import { vt, xQ, bD } from "../figma_app/45218";
+import { pluginAPIService } from "../905/3209";
+import { U } from "../905/424668";
+import { n as _$$n2 } from "../905/347702";
+let $$T1 = NC("SET_SAVED_PLUGIN_VERSIONS");
+let $$I5 = nF((e, t) => {
+  let r = {};
+  Object.keys(t).forEach(e => {
+    r[e] = [t[e].id];
+  });
+  e.dispatch(b6({
+    widgetIDToVersions: r
+  }));
+});
+export var $$S4 = (e => (e.COMMUNITY_HUB = "community_hub", e.INSERTS_MODAL = "inserts_modal", e))($$S4 || {});
+let $$v0 = _$$n2(MM("SAVE_EXTENSION", (e, {
+  id: t,
+  resourceType: r,
+  versionId: i,
+  orgId: p,
+  onSuccess: E,
+  hideSuccessVisualBell: y,
+  onFail: b,
+  source: T,
+  optimisticData: I
+}, {
+  optimistId: S
+}) => {
+  let v = e.getState();
+  let A = {
+    plugin_version_id: i,
+    org_id: p,
+    current_org_id: v.currentUserOrgId
+  };
+  A.can_handle_first_time_install = !0;
+  A.use_upgraded_version = !0;
+  A.profile_id = e.getState().authedActiveCommunityProfile?.id;
+  r === vt.WIDGET && (A.current_org_id = void 0);
+  let x = `/api/${_$$n(r)}/${t}/install`;
+  let N = XHR.post(x, A);
+  if (v.user && I?.resource) {
+    let e = `optimistic-plugin-install-${_$$g()}`;
+    let t = N3(I.resource, {
+      userId: p ? null : v.user.id,
+      orgId: p ?? null
+    });
+    t && WB().optimisticallyCreate({
+      PluginInstall: {
+        [e]: t
+      }
+    }, N);
+  }
+  N.then(({
+    data: t
+  }) => {
+    e.dispatch(_$$c(S));
+    let i = t.meta;
+    let s = r === vt.WIDGET ? {
+      publishedPlugins: [i],
+      src: "installResource",
+      isWidget: !0
+    } : {
+      publishedPlugins: [i],
+      src: "installResource"
+    };
+    if (e.dispatch(Qi({
+      ...s,
+      overrideInstallStatus: !0
+    })), E?.(), !y) {
+      let t = (() => {
+        if ("inserts_modal" === T) return r === vt.PLUGIN ? _$$t("community.saves.plugin_saved") : _$$t("community.saves.widget_saved");
+        if (p) {
+          let t = Object.values(e.getState().authedProfilesById).find(e => e.org_id === p);
+          return _$$t(r === vt.PLUGIN ? "community.saves.plugin_saved_for_everyone_at" : "community.saves.widget_saved_for_everyone_at", {
+            orgName: t?.name || "your org"
+          });
+        }
+        return e.getState().user?.community_profile_id ? _$$t(r === vt.PLUGIN ? "community.saves.plugin_saved_for_your_account_and_profile" : "community.saves.widget_saved_for_your_account_and_profile") : r === vt.PLUGIN ? _$$t("community.saves.plugin_saved_for_your_account") : _$$t("community.saves.widget_saved_for_your_account");
+      })();
+      e.dispatch(F.enqueue({
+        message: t,
+        type: "plugin-installed"
+      }));
+    }
+    sx(xQ(i) ? M5.WIDGET_INSTALLED : M5.PLUGIN_INSTALLED, {
+      communityHubEntity: xQ(i) ? ZO.WIDGETS : ZO.PLUGINS,
+      communityHubEntityId: i.id,
+      source: T
+    });
+  }).catch(t => {
+    b?.();
+    e.dispatch(_$$r(S));
+    403 === t.data.status ? e.dispatch(F.enqueue({
+      message: r === vt.PLUGIN ? _$$t("community.actions.unable_to_save_plugin_error", {
+        error: J(t, t.data?.message)
+      }) : _$$t("community.actions.unable_to_save_widget_error", {
+        error: J(t, t.data?.message)
+      }),
+      type: "PLUGIN_INSTALL_FAILED",
+      error: !0
+    })) : e.dispatch(F.enqueue({
+      message: r === vt.PLUGIN ? _$$t("community.actions.unable_to_save_plugin_please_try_again") : _$$t("community.actions.unable_to_save_widget_please_try_again"),
+      type: "PLUGIN_INSTALL_FAILED",
+      error: !0
+    }));
+  });
+}));
+let $$A3 = MM("UNSAVE_EXTENSION", (e, {
+  id: t,
+  resourceType: r,
+  orgId: i,
+  hideSuccessVisualBell: o,
+  source: c,
+  optimisticData: p
+}, {
+  optimistId: m
+}) => {
+  let E = {
+    org_id: i,
+    current_org_id: e.getState().currentUserOrgId
+  };
+  E.use_upgraded_version = !0;
+  E.profile_id = e.getState().authedActiveCommunityProfile?.id;
+  r === vt.WIDGET && (E.current_org_id = void 0);
+  let y = `/api/${_$$n(r)}/${t}/install`;
+  let b = XHR.del(y, E);
+  p?.pluginInstallId && WB().optimisticallyDelete({
+    PluginInstall: {
+      [p.pluginInstallId]: null
+    }
+  }, b);
+  b.then(({
+    data: s
+  }) => {
+    let l = s.meta;
+    let p = r === vt.WIDGET ? {
+      publishedPlugins: [l],
+      src: "uninstallResource",
+      isWidget: !0
+    } : {
+      publishedPlugins: [l],
+      src: "uninstallResource"
+    };
+    if (e.dispatch(Qi({
+      ...p,
+      overrideInstallStatus: !0
+    })), e.dispatch(_$$c(m)), !o) {
+      let n = {
+        message: (() => {
+          if ("inserts_modal" === c) return r === vt.PLUGIN ? _$$t("community.saves.plugin_removed_from_your_account") : _$$t("community.saves.widget_removed_from_your_account");
+          if (i) {
+            let t = Object.values(e.getState().authedProfilesById).find(e => e.org_id === i);
+            return _$$t(r === vt.PLUGIN ? "community.saves.plugin_removed_for_everyone_at" : "community.saves.widget_removed_for_everyone_at", {
+              orgName: t?.name || "your org"
+            });
+          }
+          return e.getState().user?.community_profile_id ? _$$t(r === vt.PLUGIN ? "community.saves.plugin_removed_from_your_account_and_profile" : "community.saves.widget_removed_from_your_account_and_profile") : r === vt.PLUGIN ? _$$t("community.saves.plugin_removed_from_your_account") : _$$t("community.saves.widget_removed_from_your_account");
+        })(),
+        type: "PLUGIN_UNINSTALL_SUCCESS",
+        button: {
+          text: _$$t("community.undo"),
+          action: () => {
+            e.dispatch(F.dequeue({
+              matchType: "PLUGIN_UNINSTALL_SUCCESS"
+            }));
+            e.dispatch($$v0({
+              id: t,
+              resourceType: r,
+              orgId: i,
+              hideSuccessVisualBell: !0,
+              source: c
+            }));
+          }
+        }
+      };
+      e.dispatch(F.enqueue(n));
+    }
+    sx(xQ(l) ? M5.WIDGET_UNINSTALLED : M5.PLUGIN_UNINSTALLED, {
+      communityHubEntity: xQ(l) ? ZO.WIDGETS : ZO.PLUGINS,
+      communityHubEntityId: l.id,
+      source: c
+    });
+  }).catch(t => {
+    e.dispatch(_$$r(m));
+    console.error(t);
+  });
+});
+let x = {
+  [bD.PLUGIN]: function(e) {
+    return pluginAPIService.getInstallStatus({
+      orgId: e
+    });
+  },
+  [bD.WIDGET]: function(e) {
+    return U.getInstallStatus({
+      orgId: e
+    });
+  }
+};
+let N = nF((e, t) => {
+  let r = {
+    plugin_id: t.id
+  };
+  t.orgId && (r.org_id = t.orgId);
+  let n = x[t.resourceType];
+  n && n(t.orgId).then(({
+    data: e
+  }) => {
+    t.callback(!e.meta.previously_installed_plugin);
+  }).catch(r => {
+    e.dispatch(F.enqueue({
+      type: "plugin-save-error",
+      message: t.resourceType === vt.PLUGIN ? _$$t("community.actions.unable_to_save_plugin_error", {
+        error: J(r, r.data.message || "unknown error")
+      }) : _$$t("community.actions.unable_to_save_widget_error", {
+        error: J(r, r.data.message || "unknown error")
+      }),
+      error: !0
+    }));
+  });
+});
+let $$C2 = nF((e, t) => {
+  let {
+    orgId,
+    id,
+    resourceType,
+    communityProfile
+  } = t;
+  e.dispatch(N({
+    orgId,
+    id,
+    resourceType,
+    callback: () => {
+      e.dispatch($$v0({
+        id,
+        resourceType,
+        orgId,
+        communityProfile,
+        source: "community_hub"
+      }));
+    }
+  }));
+});
+export const d6 = $$v0;
+export const g3 = $$T1;
+export const oj = $$C2;
+export const s1 = $$A3;
+export const uR = $$S4;
+export const zI = $$I5; 

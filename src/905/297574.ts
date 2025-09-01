@@ -1,0 +1,82 @@
+import { useMemo, useContext } from "react";
+import { wA, d4 } from "../vendor/514228";
+import { zl } from "../figma_app/27355";
+import { qp } from "../905/977779";
+import { aV } from "../905/405710";
+import { M4 } from "../905/713695";
+import { vx } from "../905/91038";
+import { e_ } from "../figma_app/803787";
+import { dK } from "../figma_app/889655";
+import { C9, jf } from "../figma_app/141508";
+import { PW } from "../figma_app/633080";
+import { Z } from "../905/939602";
+import { r as _$$r } from "../905/336143";
+import { TE } from "../905/131786";
+export function $$_1(e, t) {
+  return [...t, ...e.filter(e => e.containing_frame?.containingStateGroup == null)];
+}
+export function $$A2({
+  productComponentStats: e,
+  libraryKey: t
+}) {
+  let i = zl.get(qp);
+  let o = t ? i[t] : void 0;
+  let l = useMemo(() => $$_1(e?.components ?? [], e?.stateGroups ?? []), [e]);
+  let h = function ({
+    libraryKey: e
+  }) {
+    let t = wA();
+    let i = d4(dK);
+    let a = d4(e_);
+    let s = d4(vx);
+    let o = d4(C9);
+    let l = d4(jf);
+    return useMemo(() => e ? (TE(i, o, l, a.publishedByLibraryKey, s, t)[e] ?? []).map(e => e.type === PW.COMPONENT ? {
+      ...e,
+      num_existing_instances: 0,
+      num_insertions: 0,
+      num_detachments: 0
+    } : {
+      ...e,
+      num_existing_instances: 0,
+      num_insertions: 0,
+      num_detachments: 0,
+      num_states: 0
+    }) : [], [t, e, s, a, i, o, l]);
+  }({
+    libraryKey: t
+  });
+  return o ? l : h;
+}
+export function $$y0(e) {
+  let t = d4(dK);
+  let i = d4(C9);
+  let a = d4(jf);
+  return useMemo(() => i.filter(i => {
+    let n = t.get(i);
+    return n?.isLooseComponent && n.sourceLibraryKey === e;
+  }).length, [t, e, i]) + useMemo(() => a.filter(i => {
+    let n = t.get(i);
+    return n?.sourceLibraryKey === e;
+  }).length, [t, a, e]);
+}
+export function $$b3(e) {
+  let t = useContext(_$$r);
+  return t?.allUsedStylesByLibraryKey[e]?.length ?? 0;
+}
+let $$v4 = M4.Query({
+  fetch: async e => null == e ? [] : ((await Z.getLibraryStyles({
+    libraryFileKey: e
+  })).data.meta.styles ?? []).map(aV)
+});
+let $$I5 = M4.Query({
+  fetch: async e => null == e ? [] : ((await Z.getLibraryStylesByLibraryKey({
+    libraryKey: e
+  })).data.meta.styles ?? []).map(aV)
+});
+export const Go = $$y0;
+export const Tf = $$_1;
+export const Ze = $$A2;
+export const jN = $$b3;
+export const lH = $$v4;
+export const sU = $$I5;

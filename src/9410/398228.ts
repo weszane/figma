@@ -1,0 +1,12 @@
+import { parsePxNumber } from "../figma_app/783094";
+import { xM9, M$q, MGP } from "../figma_app/27776";
+let $$a3 = 40;
+let $$s2 = parsePxNumber(xM9);
+let $$o4 = parsePxNumber(M$q);
+let $$l0 = parsePxNumber(MGP);
+let $$d1 = 8;
+export const Cg = $$l0;
+export const UA = $$d1;
+export const fr = $$s2;
+export const uF = $$a3;
+export const ym = $$o4;

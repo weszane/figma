@@ -1,0 +1,2 @@
+export var $$n0 = (e => (e.LibraryName = "LIBRARY_NAME", e.HierarchyPathName = "HIERARCHY_PATH_NAME", e.SlideThemeName = "SLIDE_THEME_NAME", e.StylesRow = "STYLES_ROW", e.Separator = "SEPARATOR", e))($$n0 || {});
+export const b = $$n0;

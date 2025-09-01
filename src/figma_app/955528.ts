@@ -1,0 +1,560 @@
+import { useCallback, useRef, useState, useMemo, useEffect, useContext } from "react";
+import { d4, wA } from "../vendor/514228";
+import { G1 } from "../figma_app/691470";
+import { CortexErrorV2, ClientContentLengthLimitExceededError, ProviderContentLengthLimitExceededError, MeterExceededError, ProviderRateLimitExceededError, ProviderOverloadedError, CortexRateLimitExceededError, ClientNoTextSelectedError, ProviderServiceIssueError, ProviderServiceBusyError, OfflineError, UnsafeOrHarmfulPromptError, ProviderUnsafeOrHarmfulContentError, UnauthorizedError, NotImplementedError } from "../figma_app/316567";
+import { ch, DE } from "../figma_app/571325";
+import { ServiceCategories as _$$e } from "../905/165054";
+import { cus, QOV } from "../figma_app/763686";
+import { l7 } from "../905/189185";
+import { UN } from "../905/700578";
+import { getFeatureFlags } from "../905/601108";
+import { zl } from "../figma_app/27355";
+import h from "../vendor/128080";
+import { $ } from "../905/455748";
+import { ZC } from "../figma_app/39751";
+import { $D } from "../905/11";
+import { useSprigWithSampling } from "../905/99656";
+import { Lg } from "../figma_app/257275";
+import { BE } from "../figma_app/991591";
+import { t as _$$t } from "../905/303541";
+import { F as _$$F } from "../905/302958";
+import { zX } from "../905/576487";
+import { Tv } from "../figma_app/311375";
+import { u1, XE } from "../figma_app/91703";
+import { vu } from "../figma_app/8833";
+import { Gc, nl, fN } from "../figma_app/456871";
+import { Em, ow } from "../figma_app/976749";
+import { Ay } from "../figma_app/432652";
+import { TJ } from "../figma_app/482495";
+import { Fk, wA as _$$wA } from "../figma_app/167249";
+import { Yh } from "../figma_app/357047";
+import { cn, qo } from "../905/959568";
+import { h as _$$h } from "../figma_app/203891";
+import { A as _$$A2 } from "../figma_app/78608";
+import { JT } from "../figma_app/632248";
+import { pP, cT, qy } from "../figma_app/862289";
+import { zF } from "../figma_app/297822";
+import { Hd, n4, y_ } from "../figma_app/878113";
+import { sO } from "../figma_app/21029";
+import { o2 } from "../figma_app/667212";
+import { u as _$$u } from "../figma_app/913494";
+import { G as _$$G } from "../figma_app/682672";
+var m = h;
+let $$W0 = 1 / 3;
+let K = "tone-dial-visual-bell";
+let $$Y4 = TJ(vu);
+export function $$$12() {
+  let e = BE();
+  let t = d4(e => Yh(e.mirror.appModel, JT.SLIDES_REWRITE_TEXT));
+  let r = sO();
+  let n = Em();
+  let a = ow();
+  let s = r || !!getFeatureFlags().aip_tone_dial_fd && n || a;
+  return Fk((e, t, r, n) => {
+    if (!t || !r || !n) return !1;
+    let i = e.getDirectlySelectedNodes();
+    return Gc(i, {
+      allowEmpty: !1,
+      excludeLockedNodes: !0
+    }).filter(e => !e.isSlideNumber).length > 0;
+  }, e, s, t);
+}
+export function $$X6(e, t) {
+  let {
+    source,
+    toggle
+  } = t;
+  let i = zl.get(_$$h);
+  let a = zl.get(_$$A2);
+  let s = a?.current || i?.current;
+  if (!s) return;
+  if (zl.set(zF, source), zl.get($$Y4)) {
+    toggle && $$q1(e);
+    return;
+  }
+  let o = Lg() ? {
+    x: 0,
+    y: 0
+  } : cn(s, qo);
+  e(u1({
+    id: vu,
+    initialX: o.x,
+    initialY: o.y
+  }));
+  _$$G({
+    eventName: "modal_opened",
+    source
+  });
+}
+export function $$q1(e) {
+  e(XE());
+  _$$G({
+    eventName: "modal_closed"
+  });
+}
+export function $$J13(e, t, r, i) {
+  let a = Em();
+  let s = !!getFeatureFlags().aip_tone_dial_fd && a;
+  let l = ow();
+  let d = useCallback(({
+    texts: t,
+    parameters: r,
+    targetMap: n,
+    authInfo: i
+  }) => {
+    let a = e(n.values());
+    let d = t.map(({
+      id: e,
+      text: t
+    }) => {
+      let r = n.get(e);
+      let i = r && a.get(r.node.guid);
+      return {
+        id: e,
+        text: i?.effectiveText ?? t
+      };
+    });
+    return Ay.slides.rewriteText({
+      texts: d,
+      tones: r.tones,
+      productType: s ? ch.DESIGN : l ? ch.FIGJAM : ch.SLIDES
+    }, i);
+  }, [s, l, e]);
+  let {
+    onRun,
+    lastParameters,
+    longRunningAction,
+    cancel
+  } = Hd({
+    makeCortexRequest: d,
+    featureType: JT.SLIDES_REWRITE_TEXT,
+    excludeDigitsAndSpecialChar: !0,
+    allowEditsToLockedNodes: !0,
+    onNodeStreamEvent: t,
+    onError: r,
+    onSuccess: i,
+    editScopeLabel: o2
+  });
+  let {
+    enqueueRun
+  } = function (e) {
+    let t = useRef();
+    let r = useRef();
+    let i = useCallback(() => {
+      t.current = void 0;
+      r.current && (t.current = r.current().then(i), r.current = void 0);
+    }, []);
+    return {
+      enqueueRun: useCallback(n => {
+        if (t.current) {
+          r.current = () => e(n);
+          return;
+        }
+        t.current = e(n).then(i);
+      }, [i, e])
+    };
+  }(onRun);
+  return {
+    enqueueRun,
+    lastParameters,
+    longRunningAction,
+    cancel
+  };
+}
+export function $$Z14(e) {
+  let {
+    originalNodeInfos,
+    setOriginalNodeInfos
+  } = function (e) {
+    let [t, r] = useState(() => new Map());
+    let i = _$$wA(e => e.getCurrentPage()?.originalNodeInfos ?? []);
+    let a = useMemo(() => new Map(i.map(e => [e.nodeId, e])), [i]);
+    let s = useCallback(e => {
+      let t = UN().getCurrentPage();
+      t && (t.originalNodeInfos = [...e.values()]);
+    }, []);
+    return getFeatureFlags().slides_tone_dial_undo && e === o2 ? {
+      originalNodeInfos: a,
+      setOriginalNodeInfos: s
+    } : {
+      originalNodeInfos: t,
+      setOriginalNodeInfos: r
+    };
+  }(e);
+  let i = useCallback(e => {
+    if (originalNodeInfos.size) return originalNodeInfos;
+    let n = new Map();
+    for (let t of e) {
+      let e = t.node;
+      let r = t.selectionRange?.start ?? 0;
+      let i = e.getRangeFontSize(r, r + 1);
+      let a = e.getRangeLineHeight(r, r + 1);
+      let s = e.inheritedTextStyle;
+      ("mixed" === i || "mixed" === a) && $D(_$$e.AI_PRODUCTIVITY, Error("Unexpected mixed font size or line height while saving initial font size and line height"));
+      n.set(e.guid, {
+        nodeId: e.guid,
+        nodeText: t.nodeText,
+        effectiveText: t.effectiveText,
+        selectionRange: t.selectionRange ?? null,
+        fontSize: "mixed" !== i ? i : null,
+        lineHeight: "mixed" !== a ? function (e) {
+          switch (e.units) {
+            case "RAW":
+              return {
+                value: e.value,
+                units: cus.RAW
+              };
+            case "PERCENT":
+              return {
+                value: e.value,
+                units: cus.PERCENT
+              };
+            case "PIXELS":
+              return {
+                value: e.value,
+                units: cus.PIXELS
+              };
+          }
+        }(a) : null,
+        textStyle: s
+      });
+    }
+    setOriginalNodeInfos(n);
+    return n;
+  }, [originalNodeInfos, setOriginalNodeInfos]);
+  let a = useCallback(() => {
+    setOriginalNodeInfos(new Map());
+  }, [setOriginalNodeInfos]);
+  let s = useCallback(r => {
+    let n = originalNodeInfos.get(r.guid);
+    if (!n) return;
+    let i = n.fontSize;
+    let a = n.lineHeight;
+    let s = n.textStyle;
+    let o = r.characters.length;
+    l7.ai(e, () => {
+      i && r.fontSize !== i && r.setRangeFontSize(0, o, i);
+      a && !m()(r.lineHeightOrMixed, a) && r.setRangeLineHeight(0, o, function (e) {
+        switch (e.units) {
+          case cus.RAW:
+            return {
+              value: e.value,
+              units: "RAW"
+            };
+          case cus.PERCENT:
+            return {
+              value: e.value,
+              units: "PERCENT"
+            };
+          case cus.PIXELS:
+            return {
+              value: e.value,
+              units: "PIXELS"
+            };
+        }
+      }(a));
+      s && (r.inheritedTextStyle = s);
+    });
+  }, [originalNodeInfos, e]);
+  let o = useCallback(() => {
+    for (let e of originalNodeInfos.values()) {
+      let t = UN().get(e.nodeId);
+      t && s(t);
+    }
+  }, [originalNodeInfos, s]);
+  return {
+    originalNodeInfos,
+    saveOriginalNodeInfos: i,
+    resetOriginalNodeInfos: a,
+    revertNodeToOriginalNodeInfo: s,
+    resetAllNodesToOriginalTextStyles: o
+  };
+}
+export function $$Q9(e) {
+  let t = pP(JT.SLIDES_REWRITE_TEXT);
+  let r = t.state;
+  let o = ZC(r) !== r;
+  let l = wA();
+  useEffect(() => () => {
+    l(_$$F.dequeue({
+      matchType: K
+    }));
+    cT(JT.SLIDES_REWRITE_TEXT);
+  }, [l]);
+  useEffect(() => {
+    if (o) {
+      if (r === qy.RUNNING) l(_$$F.enqueue({
+        message: _$$t("slides.properties_panel.rewrite_text.action_rewriting"),
+        icon: zX.SPINNER,
+        type: K,
+        timeoutOverride: 1 / 0,
+        button: {
+          text: _$$t("slides.properties_panel.rewrite_text.action_stop"),
+          action: () => cT(JT.SLIDES_REWRITE_TEXT)
+        }
+      }));else if (r === qy.CANCELLED) l(_$$F.dequeue({
+        matchType: K
+      }));else if (r === qy.DONE) l(_$$F.enqueue({
+        icon: zX.CHECK,
+        message: _$$t("slides.properties_panel.rewrite_text.action_done"),
+        type: K,
+        timeoutOverride: 8e3,
+        button: {
+          text: _$$t("slides.properties_panel.rewrite_text.action_rewrite_again"),
+          action: () => e()
+        },
+        onDismiss: () => {}
+      }));else if (r === qy.ERROR) {
+        let r = t.error;
+        let n = function (e) {
+          if (e instanceof n4) return _$$t("slides.properties_panel.rewrite_text.error.no_text_characters_found");
+          if (!(e instanceof G1 || e instanceof CortexErrorV2)) return _$$t("slides.properties_panel.rewrite_text.error.default");
+          let t = {
+            offline: _$$t("slides.properties_panel.rewrite_text.error.connection"),
+            meter_exceeded: _$$t("slides.properties_panel.rewrite_text.error.rate_limit"),
+            rate_limit_exceeded: _$$t("slides.properties_panel.rewrite_text.error.rate_limit"),
+            content_length_limit_exceeded: _$$t("slides.properties_panel.rewrite_text.error.token_limit"),
+            text_tool_no_text: _$$t("slides.properties_panel.rewrite_text.error.empty_text"),
+            unsafe_or_harmful_content: _$$t("slides.properties_panel.rewrite_text.error.inappropriate_input"),
+            service_issue: _$$t("slides.properties_panel.rewrite_text.error.openai_down"),
+            ai_opt_out_error: _$$t("slides.properties_panel.rewrite_text.error.opt_out"),
+            unauthorized: _$$t("slides.properties_panel.rewrite_text.error.default"),
+            generic: _$$t("slides.properties_panel.rewrite_text.error.default"),
+            not_implemented: _$$t("ai.error.not_implemented")
+          };
+          let r = "generic";
+          if (e instanceof CortexErrorV2) ClientContentLengthLimitExceededError.isInstance(e) || ProviderContentLengthLimitExceededError.isInstance(e) ? r = "content_length_limit_exceeded" : MeterExceededError.isInstance(e) ? r = "meter_exceeded" : ProviderRateLimitExceededError.isInstance(e) || ProviderOverloadedError.isInstance(e) || CortexRateLimitExceededError.isInstance(e) ? r = "rate_limit_exceeded" : ClientNoTextSelectedError.isInstance(e) ? r = "text_tool_no_text" : ProviderServiceIssueError.isInstance(e) || ProviderServiceBusyError.isInstance(e) ? r = "service_issue" : OfflineError.isInstance(e) ? r = "offline" : UnsafeOrHarmfulPromptError.isInstance(e) || ProviderUnsafeOrHarmfulContentError.isInstance(e) ? r = "unsafe_or_harmful_content" : UnauthorizedError.isInstance(e) ? r = "unauthorized" : NotImplementedError.isInstance(e) ? r = "not_implemented" : e?.statusCode === 404 ? r = "service_issue" : e?.statusCode === 429 || e?.statusCode === 529 ? r = "rate_limit_exceeded" : e?.statusCode === 403 && (r = "ai_opt_out_error");else if (e instanceof G1) switch (e.type) {
+            case "content_length_limit_exceeded":
+            case "meter_exceeded":
+            case "rate_limit_exceeded":
+            case "text_tool_no_text":
+            case "service_issue":
+            case "offline":
+            case "unsafe_or_harmful_content":
+            case "ai_opt_out_error":
+            case "unauthorized":
+              r = e.type;
+              break;
+            case "generic":
+              switch (e.data?.status) {
+                case 404:
+                  r = "service_issue";
+                  break;
+                case 429:
+                  r = "rate_limit_exceeded";
+                  break;
+                case 403:
+                  r = "ai_opt_out_error";
+              }
+          }
+          return t[r] || _$$t("slides.properties_panel.rewrite_text.error.default");
+        }(r);
+        let i = function (e) {
+          switch (e.type) {
+            case "text_tool_no_text":
+            case "unsafe_or_harmful_content":
+            case "content_length_limit_exceeded":
+            case "no_text_characters_found":
+              return !1;
+            default:
+              return !0;
+          }
+        }(r);
+        l(_$$F.enqueue({
+          icon: zX.CLOSE_FILLED,
+          message: n,
+          type: K,
+          button: i ? {
+            text: _$$t("slides.properties_panel.rewrite_text.action_rewrite_again"),
+            action: () => e()
+          } : void 0,
+          onDismiss: () => {}
+        }));
+      }
+    }
+  }, [l, r, o, e, t]);
+}
+export function $$ee11(e, t) {
+  let r = $(Tv().join(","));
+  let a = $(d4(e => e.mirror.appModel.activeUserAction === QOV.SELECTING_TEXT));
+  let s = r || a;
+  let o = $(d4(() => nl()?.characters));
+  let l = e === qy.RUNNING;
+  let c = ZC(l) && !l;
+  let u = l || c;
+  useEffect(() => {
+    if (!getFeatureFlags().slides_tone_dial_undo) {
+      if (s) {
+        t();
+        return;
+      }
+      o && !u && t();
+    }
+  }, [t, s, o, u]);
+}
+export function $$et10(e, t) {
+  let r = ZC(e);
+  let i = r && !m()(r, e);
+  let a = m()(e, [0, 0]);
+  let s = i && a;
+  useEffect(() => {
+    getFeatureFlags().slides_tone_dial_undo && s && t();
+  }, [t, s]);
+}
+export function $$er15(e) {
+  let {
+    Sprig
+  } = useSprigWithSampling();
+  let r = ZC(e);
+  useEffect(() => {
+    e === qy.DONE && r === qy.RUNNING && Sprig("track", "slides_rewrite_text");
+  }, [Sprig, e, r]);
+}
+export function $$en7(e, t) {
+  if (1 !== e.size) {
+    for (let {
+      nodeId,
+      nodeText
+    } of e.values()) {
+      let e = UN().get(nodeId);
+      e?.isAlive && l7.ai(o2, () => {
+        e.characters = nodeText;
+        t(e);
+      });
+    }
+    return;
+  }
+  let [r] = e.values();
+  let n = fN();
+  if (!n || !r || !n.node.isAlive) return;
+  let i = n.node;
+  let a = n.selectionRange?.start ?? 0;
+  let s = n.selectionRange?.end ?? i.characters.length;
+  let o = r.effectiveText;
+  l7.ai(o2, () => {
+    i.spliceCharacters(a, s, o, "BEFORE");
+    t(i);
+  });
+  let l = UN().getCurrentPage();
+  r.selectionRange ? l?.setSelectedTextRange(i.guid, a, a + o.length) : y_(i.guid);
+}
+export function $$ei16(e) {
+  let [t, r] = useState(!1);
+  let {
+    tonePosition,
+    setTonePosition,
+    setPositionAndRun
+  } = useContext(_$$u);
+  let o = useCallback(e => {
+    r(!0);
+    e.stopPropagation();
+  }, []);
+  let l = useCallback(() => {
+    t && (r(!1), setPositionAndRun(tonePosition, {
+      source: "dial_drag"
+    }));
+  }, [t, setPositionAndRun, tonePosition]);
+  let d = useCallback(r => {
+    if (!t || !e.current) return;
+    let {
+      clientX,
+      clientY
+    } = r;
+    setTonePosition($$ea5(clientX, clientY, e.current.getBoundingClientRect()));
+  }, [e, t, setTonePosition]);
+  useEffect(() => (document.addEventListener("mouseup", l), document.addEventListener("mousemove", d), () => {
+    document.removeEventListener("mouseup", l);
+    document.removeEventListener("mousemove", d);
+  }), [d, l]);
+  return {
+    onMouseDown: o,
+    isDragging: t
+  };
+}
+export function $$ea5(e, t, r) {
+  return [(e - r.left) / r.width, (r.bottom - t) / r.height].map(e => Math.max(.045, Math.min(.955, e))).map(e => (e - .5) * 2).map(es);
+}
+function es(e) {
+  return Math.round(100 * e) / 100;
+}
+export function $$eo8([e, t]) {
+  return [es(e), es(t)];
+}
+export function $$el3([e, t]) {
+  let r = [];
+  let n = e => Math.abs(e);
+  e < -$$W0 ? r.push({
+    tone: DE.CONCISE,
+    weight: n(e)
+  }) : e > $$W0 && r.push({
+    tone: DE.EXPANDED,
+    weight: n(e)
+  });
+  t < -$$W0 ? r.push({
+    tone: DE.CASUAL,
+    weight: n(t)
+  }) : t > $$W0 && r.push({
+    tone: DE.PROFESSIONAL,
+    weight: n(t)
+  });
+  return r;
+}
+export function $$ed2(e) {
+  return [(() => {
+    let t = e.find(({
+      tone: e
+    }) => e === DE.EXPANDED)?.weight;
+    if (t) return t;
+    let r = e.find(({
+      tone: e
+    }) => e === DE.CONCISE)?.weight;
+    if (r) return -r;
+  })() ?? 0, (() => {
+    let t = e.find(({
+      tone: e
+    }) => e === DE.PROFESSIONAL)?.weight;
+    if (t) return t;
+    let r = e.find(({
+      tone: e
+    }) => e === DE.CASUAL)?.weight;
+    if (r) return -r;
+  })() ?? 0];
+}
+export function $$ec17() {
+  let [e, t] = useState(() => [0, 0]);
+  let r = _$$wA(e => {
+    let t = e.getCurrentPage()?.tonePosition;
+    return t ? [es(t.x), es(t.y)] : [0, 0];
+  });
+  let i = useCallback(e => {
+    UN().getCurrentPage()?.setTonePosition({
+      x: e[0],
+      y: e[1]
+    });
+  }, []);
+  return getFeatureFlags().slides_tone_dial_undo ? {
+    tonePosition: r,
+    setTonePosition: i
+  } : {
+    tonePosition: e,
+    setTonePosition: t
+  };
+}
+export const fm = $$W0;
+export const o$ = $$q1;
+export const JU = $$ed2;
+export const p$ = $$el3;
+export const Tm = $$Y4;
+export const fp = $$ea5;
+export const mD = $$X6;
+export const Cw = $$en7;
+export const cx = $$eo8;
+export const Os = $$Q9;
+export const xf = $$et10;
+export const PF = $$ee11;
+export const Ne = $$$12;
+export const h$ = $$J13;
+export const cR = $$Z14;
+export const Jp = $$er15;
+export const uG = $$ei16;
+export const Ib = $$ec17;

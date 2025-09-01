@@ -1,0 +1,12 @@
+import { eU, E2 } from "../figma_app/27355";
+import { z } from "../905/239603";
+let $$a2 = eU(!1);
+let $$s0 = eU(!1);
+let $$o4 = eU(!1);
+let $$l1 = E2("auto-follow-delay", 4e3, z.number());
+let $$d3 = E2("auto-follow-switch-delay", 2e3, z.number());
+export const Dv = $$s0;
+export const Fj = $$l1;
+export const ah = $$a2;
+export const jI = $$d3;
+export const uc = $$o4;

@@ -1,0 +1,15 @@
+import { eU } from "../figma_app/27355";
+var $$i4 = (e => (e.INTRO = "Intro Step", e.STATUSES = "Statuses Step", e.COMPARE_CHANGES = "Compare Changes Step", e.ANNOTATIONS = "Annotations Step", e.CODE_CONNECT = "Code Connect Step", e.OUTRO = "Outro Step", e))($$i4 || {});
+let $$a2 = 4;
+let $$s3 = eU("Intro Step");
+let $$o0 = eU(!1);
+let $$l6 = eU(!1);
+let $$d1 = eU(!1);
+let $$c5 = eU(!1);
+export const Bl = $$o0;
+export const HO = $$d1;
+export const PY = $$a2;
+export const Px = $$s3;
+export const aN = $$i4;
+export const go = $$c5;
+export const kO = $$l6;

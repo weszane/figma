@@ -1,0 +1,14 @@
+let $$n4 = -32;
+let $$i1 = "visual_asset_packs_tooltip";
+let $$a0 = "visual_assets_tooltip_onboarding_key";
+let $$s6 = "visual_assets_panel_tooltip_onboarding_key";
+let $$o3 = "visual_assets_panel_tooltip";
+let $$l5 = "visual_assets_tooltip_reset";
+let $$d2 = "visual_assets_intro_tooltip";
+export const Bs = $$a0;
+export const a5 = $$i1;
+export const bo = $$d2;
+export const fc = $$o3;
+export const fg = $$n4;
+export const io = $$l5;
+export const ko = $$s6;

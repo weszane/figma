@@ -1,0 +1,88 @@
+import { useMemo } from "react";
+import { getFeatureFlags } from "../905/601108";
+import { Iz, eU, md } from "../figma_app/27355";
+import { Qw } from "../905/989992";
+import { Xf } from "../figma_app/153916";
+import { A } from "../905/920142";
+import { oA, Xm, gB } from "../905/723791";
+import { dl } from "../figma_app/307841";
+import { CT } from "../figma_app/297957";
+import { n as _$$n } from "../1577/959155";
+import { FBillingModelType } from "../figma_app/191312";
+import { WF4 } from "../figma_app/43951";
+let m = Iz(({
+  orgId: e
+}) => eU(l => e ? l(WF4.Query({
+  orgId: e
+})).transform(({
+  org: e
+}) => {
+  let l = !!oA(e?.isSalesAssistedPlanProperty)?.value;
+  let i = !!oA(e?.subscriptionShouldNotAutoRenewPlanProperty);
+  return {
+    isSalesAssisted: l,
+    noTosAcceptanceKey: oA(e?.plan?.termsOfServiceAcceptanceByTermsKey)?.termsKey !== FBillingModelType.SEATS_MODEL_BILLING_2025,
+    shouldNotAutoRenew: i
+  };
+}) : Qw.disabled()));
+export function $$f0(e) {
+  let l = e?.id ?? null;
+  let i = !CT();
+  let {
+    warningStatus,
+    renewalDate,
+    warningType
+  } = function (e) {
+    let l = Xf(e);
+    let i = l.data?.analyze_data_contract_v2_start;
+    let t = i ? A(i) : null;
+    let a = A();
+    function r(e, l, i) {
+      return {
+        warningType: e,
+        renewalDate: l,
+        warningStatus: i
+      };
+    }
+    return t && a.isBefore(t) ? r(30 >= t.diff(a, "day") ? "error" : 90 >= t.diff(a, "day") ? "warning" : null, t, "loaded") : r(null, t, l.status);
+  }(l);
+  let f = !!getFeatureFlags().order_form_billing_terms_banner;
+  let g = _$$n();
+  let v = md(useMemo(() => m({
+    orgId: l
+  }), [l]));
+  let b = oA(v.data);
+  let x = function ({
+    orgCreatedAt: e,
+    isSalesAssisted: l,
+    noTosAcceptanceKey: i,
+    shouldNotAutoRenew: t,
+    onExclusionList: a,
+    isAdminView: r,
+    isTermsOfServiceUpdateOn: s
+  }) {
+    return !!(e && dl({
+      date: new Date(e)
+    }) && l && i && (t || a) && (r || s));
+  }({
+    orgCreatedAt: e?.created_at,
+    isSalesAssisted: !!b?.isSalesAssisted,
+    noTosAcceptanceKey: !!b?.noTosAcceptanceKey,
+    shouldNotAutoRenew: !!b?.shouldNotAutoRenew,
+    onExclusionList: i,
+    isAdminView: g,
+    isTermsOfServiceUpdateOn: function (e) {
+      let l = !!getFeatureFlags().terms_of_service_may_2025_update;
+      let i = A();
+      let t = !!e && i.isBefore(e) && 30 >= e.diff(i, "day");
+      return l && t;
+    }(renewalDate)
+  });
+  let y = useMemo(() => "loaded" === v.status && !!x, [v.status, x]);
+  return "loading" === v.status || "loading" === warningStatus ? Xm() : gB({
+    isEligible: f && y,
+    renewalDate,
+    warningType
+  });
+}
+export const Az = $$f0;

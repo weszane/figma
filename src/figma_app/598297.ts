@@ -1,0 +1,25 @@
+import { useRef, useEffect } from "react";
+import { wA, d4 } from "../vendor/514228";
+import { zK } from "../figma_app/913823";
+import { q5 } from "../figma_app/516028";
+import { Sc, mC } from "../905/18797";
+import { yD } from "../905/92359";
+export function $$d1({
+  disabled: e = !1
+} = {}) {
+  let t = wA();
+  let r = q5();
+  let c = d4(e => e.fileVersion);
+  let u = d4(e => e.loadingState);
+  let p = useRef(0);
+  let _ = null != r && null != c ? yD(r.key) : void 0;
+  useEffect(() => {
+    !e && null != _ && Sc(u, _) && p.current < 3 && (p.current += 1, t(zK()));
+  }, [t, _, u, e]);
+  return {
+    isLoaded: mC(_ ?? "") && !!_
+  };
+}
+export let $$c0 = $$d1;
+export const b = $$c0;
+export const y = $$d1;

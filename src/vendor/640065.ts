@@ -1,0 +1,33 @@
+import i from "../vendor/338036";
+import s from "../vendor/856330";
+import o from "../vendor/422750";
+var a = "[object Arguments]";
+var h = "[object Array]";
+var d = "[object Boolean]";
+var p = "[object Date]";
+var g = "[object Error]";
+var m = "[object Function]";
+var v = "[object Map]";
+var y = "[object Number]";
+var b = "[object Object]";
+var O = "[object RegExp]";
+var x = "[object Set]";
+var w = "[object String]";
+var k = "[object WeakMap]";
+var _ = "[object ArrayBuffer]";
+var S = "[object DataView]";
+var E = "[object Float64Array]";
+var A = "[object Int8Array]";
+var C = "[object Int16Array]";
+var T = "[object Int32Array]";
+var I = "[object Uint8Array]";
+var P = "[object Uint8ClampedArray]";
+var R = "[object Uint16Array]";
+var M = "[object Uint32Array]";
+var D = {};
+function N(e) {
+  return o(e) && s(e.length) && !!D[i(e)];
+}
+D["[object Float32Array]"] = D[E] = D[A] = D[C] = D[T] = D[I] = D[P] = D[R] = D[M] = !0;
+D[a] = D[h] = D[_] = D[d] = D[S] = D[p] = D[g] = D[m] = D[v] = D[y] = D[b] = D[O] = D[x] = D[w] = D[k] = !1;
+module.exports = N;

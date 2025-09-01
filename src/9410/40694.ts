@@ -1,0 +1,196 @@
+import { jsx, jsxs, Fragment } from "react/jsx-runtime";
+import { useCallback } from "react";
+import { createPortal } from "../vendor/944059";
+import { wA } from "../vendor/514228";
+import { E as _$$E } from "../905/632989";
+import { zkO } from "../figma_app/763686";
+import d from "classnames";
+import { Point } from "../905/736624";
+import { oW } from "../905/675859";
+import { n as _$$n } from "../905/734251";
+import { t } from "../905/303541";
+import { F9 } from "../figma_app/147952";
+import { Y5 } from "../figma_app/455680";
+import { Z } from "../3276/966473";
+import { TA } from "../905/372672";
+import { $A, vt } from "../905/862883";
+import { Ib } from "../905/129884";
+import { $L, us } from "../figma_app/136698";
+import { LL, xG } from "../figma_app/565197";
+import { b as _$$b } from "../905/635568";
+import { $J, Yg } from "../figma_app/357202";
+import { HG, ET, RX, M4, eP, iE, t$, OP, RT, Jy, dG } from "../3276/740623";
+var c = d;
+function S({
+  children: e,
+  mini: t,
+  user: i
+}) {
+  return t ? jsx("div", {
+    className: c()(HG, ET),
+    children: e
+  }) : jsx("div", {
+    "data-tooltip-type": Ib.TEXT,
+    "data-tooltip": i.name || i.handle || "",
+    "data-tooltip-timeout-delay": "500",
+    "data-tooltip-show-below": !0,
+    "data-tooltip-offset-y": "-20",
+    className: HG,
+    children: e
+  });
+}
+export function $$j0({
+  user: e,
+  hideName: t,
+  mini: i,
+  searchQuery: a,
+  triggeredFrom: o
+}) {
+  let d = e.hi_res_img_url || e.img_url;
+  let c = `${d}?c=1`;
+  let p = $L(e.id, us);
+  let m = LL(c, e.name || e.handle || "", p);
+  let b = TA();
+  let T = _$$b();
+  let j = wA();
+  let O = useCallback(() => {
+    j(F9({
+      currentUserId: b ?? void 0,
+      storeInRecentsKey: $A.FigJam,
+      item: {
+        id: e.id,
+        user: e,
+        type: vt.FaceStamp
+      }
+    }));
+  }, [b, j, e]);
+  let {
+    dragState,
+    onInsertableResourcePointerDown
+  } = Z({
+    iconSrc: m,
+    insertAction: t => {
+      let {
+        dropPosition
+      } = t;
+      let r = t.pointerPercentageOffset ? t.pointerPercentageOffset.x : 0;
+      let n = t.pointerPercentageOffset ? t.pointerPercentageOffset.y : 0;
+      let a = new Point(50, 50);
+      let s = dropPosition.subtract(new Point(r * a.x, n * a.y)).subtract(new Point(5, 5));
+      xG(m, s.x, s.y, e.id, "drag", zkO.USER);
+      O();
+      T();
+    },
+    clickToInsert_DEPRECATED: !1,
+    afterSuccessfulInsert: T,
+    resource: {
+      id: e.id,
+      name: e.name || "",
+      img: m
+    },
+    triggeredFrom: o,
+    searchQuery: a,
+    mini: i
+  });
+  return i && !m ? null : jsx(S, {
+    mini: i,
+    user: e,
+    children: m ? jsxs(_$$n.recordableDiv, {
+      className: RX,
+      onPointerDown: onInsertableResourcePointerDown,
+      children: [jsx(N, {
+        stampImageUrl: m,
+        username: e.handle || "",
+        onClick: () => {
+          let t = Y5.getViewportInfo();
+          xG(m, t.offsetX, t.offsetY, e.id, "click", zkO.USER);
+          O();
+          T();
+        },
+        dragging: null !== dragState,
+        mini: i
+      }), jsx(A, {
+        dragState,
+        imageUrl: m
+      }), !t && jsx(k, {
+        username: e.name || e.handle || ""
+      })]
+    }) : jsxs(Fragment, {
+      children: [jsx($$$$I1, {
+        mini: i
+      }), !t && jsx(k, {
+        username: ""
+      })]
+    })
+  });
+}
+export function $$$$I1({
+  mini: e
+} = {}) {
+  return jsxs("div", {
+    className: c()(HG, {
+      [ET]: e,
+      [M4]: !e
+    }),
+    children: [jsx("div", {
+      className: c()(eP, iE)
+    }), !e && jsx("div", {
+      className: c()(t$, OP)
+    })]
+  });
+}
+function k({
+  username: e
+}) {
+  return jsx("div", {
+    title: e,
+    className: OP,
+    children: e
+  });
+}
+function N(e) {
+  return jsx(_$$E, {
+    className: RT,
+    recordingKey: "facestamp",
+    onClick: e.onClick,
+    htmlAttributes: {
+      "data-testid": `facestamp-${e.username}${e.mini ? "-mini" : ""}`
+    },
+    children: jsx(oW, {
+      draggable: !1,
+      src: e.stampImageUrl,
+      className: c()(iE, {
+        [Jy]: e.dragging,
+        [dG]: e.mini
+      }),
+      alt: t("whiteboard.face_stamps.aria_label", {
+        userName: e.username
+      })
+    })
+  });
+}
+function A(e) {
+  if (!e.dragState?.dragPosition || !e.dragState.grabbedPointerPercentageOffset) return null;
+  let t = function () {
+    let {
+      zoomScale
+    } = Y5.getViewportInfo();
+    return new Point(50, 50).scale(zoomScale);
+  }();
+  let i = e.dragState.dragPosition.subtract(new Point(e.dragState.grabbedPointerPercentageOffset.x * t.x, e.dragState.grabbedPointerPercentageOffset.y * t.y));
+  return createPortal(jsx(oW, {
+    alt: "",
+    className: c()($J, {
+      [Yg]: e.dragState.isDraggingOverCanvas
+    }),
+    style: {
+      left: i.x,
+      top: i.y,
+      width: t.x,
+      height: t.y
+    },
+    src: e.imageUrl
+  }), document.getElementById("fullscreen-root"));
+}
+export const I = $$j0;
+export const Q = $$$$I1;

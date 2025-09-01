@@ -1,0 +1,22 @@
+import { Iz } from "../figma_app/27355";
+import { Tej } from "../figma_app/43951";
+import { V5 } from "../figma_app/625596";
+import { Z1 } from "../905/401885";
+let $$o4 = Z1(Tej.Query({}), e => {
+  let t = e.currentUser.userFlags;
+  let r = {};
+  t.forEach(e => r[e.name] = e);
+  return r;
+});
+let $$l1 = Iz(e => Z1($$o4, t => t[e]));
+let d = e => e.length > 0 ? new Date(Math.max(...e.map(Number))) : void 0;
+let $$c3 = Z1($$o4, e => d(Array.from(V5).map(t => e[t]?.updatedAt).filter(e => null != e)));
+let $$u5 = Iz(e => Z1($$o4, t => null != t[e]));
+let $$p2 = $$u5("file_browser_onboarded");
+let $$_0 = $$l1("not_gen_0");
+export const $B = $$_0;
+export const Fu = $$l1;
+export const GW = $$p2;
+export const Hy = $$c3;
+export const qG = $$o4;
+export const r1 = $$u5;

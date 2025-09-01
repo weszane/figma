@@ -1,0 +1,2 @@
+export var $$n0 = (e => (e.NAME = "Name", e.ACTIVE_AT = "Last active", e.DESIGN_PAID_STATUS = "Design role", e.FIGJAM_PAID_STATUS = "FigJam role", e.BILLING_INTERVAL = "Billing interval", e))($$n0 || {});
+export const d = $$n0;

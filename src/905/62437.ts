@@ -1,0 +1,241 @@
+import { jsx, Fragment, jsxs } from "react/jsx-runtime";
+import { useState, useMemo } from "react";
+import { wA, d4 } from "../vendor/514228";
+import { q7 } from "../figma_app/860955";
+import { getFeatureFlags } from "../905/601108";
+import { sx } from "../905/449184";
+import { oA } from "../905/723791";
+import { s as _$$s } from "../905/573154";
+import { fk } from "../figma_app/618433";
+import { SQ, PF, YW } from "../figma_app/78808";
+import { Ce, to } from "../905/156213";
+import { D as _$$D } from "../905/852057";
+import { A as _$$A } from "../905/482208";
+import { F as _$$F } from "../905/224";
+import { xp } from "../905/87821";
+import { q5 } from "../figma_app/516028";
+import { FC } from "../figma_app/212807";
+import { _6 } from "../figma_app/386952";
+import { b as _$$b } from "../905/165519";
+import { vL } from "../905/652992";
+import { nT } from "../figma_app/53721";
+import { ZN } from "../figma_app/630077";
+import { pW } from "../905/218608";
+import { $A } from "../905/782918";
+import { hS } from "../905/437088";
+import { bL } from "../905/38914";
+import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
+import { $n } from "../905/521428";
+import { tx, t as _$$t } from "../905/303541";
+import { J8 } from "../905/760074";
+import { Ju } from "../905/102752";
+import { DV } from "../905/739964";
+import { y as _$$y } from "../figma_app/504415";
+import { S as _$$S } from "../905/262176";
+function $$D(e) {
+  let t = wA();
+  let i = hS(e);
+  let [s, d] = useState(!1);
+  let u = q5();
+  let h = u?.canEdit;
+  let {
+    version
+  } = e;
+  if (!getFeatureFlags().branching_undo_merge) return jsx(Fragment, {});
+  let f = async () => {
+    if (s) return;
+    if (!u || !h || "branch_child_merge" !== version.view) {
+      t(_$$s.error("Unable to undo merge"));
+      return;
+    }
+    let e = u.key;
+    let i = version.branch_file_key;
+    if (!i) {
+      t(_$$s.error("Could not find branch key"));
+      return;
+    }
+    d(!0);
+    let n = await J8([i]);
+    if ("error" === n.status) {
+      t(_$$s.error(n.message));
+      d(!1);
+      return;
+    }
+    t(SQ({
+      fileKey: e,
+      version
+    }));
+    sx("Undo Merge", {
+      fileKey: e,
+      versionId: version.id,
+      savedAt: version.touched_at
+    });
+  };
+  return jsx(bL, {
+    manager: i,
+    width: "sm",
+    children: jsxs(vo, {
+      children: [jsx(Y9, {
+        children: jsx(hE, {
+          children: tx("collaboration.branching.undo_merge_title")
+        })
+      }), jsx(nB, {
+        children: tx("collaboration.branching.undo_merge_description")
+      }), jsx(wi, {
+        children: jsxs(jk, {
+          children: [jsx($n, {
+            variant: "secondary",
+            onClick: () => t(Ce()),
+            children: tx("collaboration.branching.undo_merge_cancel")
+          }), jsx($n, {
+            variant: "primary",
+            onClick: f,
+            disabled: s,
+            children: tx("collaboration.branching.undo_merge_confirm")
+          })]
+        })
+      })]
+    })
+  });
+}
+$$D.displayName = "UndoMergeModal";
+let L = Ju($$D, "UndoMergeModal");
+let F = Ju(function (e) {
+  let t = hS(e);
+  let {
+    onClose,
+    onConfirm
+  } = e;
+  return jsx(bL, {
+    manager: t,
+    width: "md",
+    children: jsxs(vo, {
+      children: [jsx(Y9, {
+        children: jsx(hE, {
+          children: _$$t("cms_file_operations.cms_data_wont_roll_back")
+        })
+      }), jsx(nB, {
+        children: jsx("p", {
+          children: _$$t("cms_file_operations.when_you_roll_back_to")
+        })
+      }), jsx(wi, {
+        children: jsxs(jk, {
+          children: [jsx($n, {
+            onClick: onClose,
+            variant: "secondary",
+            children: _$$t("cms_file_operations.cancel")
+          }), jsx($n, {
+            onClick: onConfirm,
+            variant: "primary",
+            children: _$$t("cms_file_operations.continue_anyway")
+          })]
+        })
+      })]
+    })
+  });
+}, "ConfirmRestoreModal");
+export function $$B0(e) {
+  let t = q5();
+  let i = t?.canEdit || !1;
+  let C = d4(t => t.versionHistory.versions.find(t => t.id === e));
+  let T = _6();
+  let k = wA();
+  let R = fk(t?.key);
+  let N = FC();
+  return useMemo(() => {
+    if (!C || !t || "fullscreen" !== T.view) return null;
+    let e = [];
+    let r = (e, t, i) => $A(T) && ("savepoint-restore" === e || "savepoint-clear" === e) ? null : jsx(q7, {
+      onClick: t,
+      disabled: i,
+      "data-test-id": `savepoint-menu-item-${e}`,
+      children: _$$A(e)
+    }, e);
+    let a = T.editorType === nT.Slides && oA(t.org?.isSlidesDisabled) || T.editorType === nT.Whiteboard && !!t.org?.figjamDisabledAt || T.editorType === nT.Sites && !!t.org?.isSitesDisabled || T.editorType === nT.Cooper && !!t.org?.isCooperDisabled;
+    let u = r("savepoint-compare", () => {
+      k(_$$D({
+        fileKey: t.key,
+        savepointID: C.id,
+        label: "",
+        description: ""
+      }));
+    });
+    let A = r(C.label ? "savepoint-edit" : "savepoint-label", () => {
+      i && k(to({
+        type: _$$y,
+        data: {
+          description: C.description || "",
+          label: C.label || "",
+          savepointID: C.id
+        }
+      }));
+    });
+    let y = r("savepoint-restore", () => {
+      if (!i) return;
+      let e = () => {
+        k(PF({
+          fileKey: t.key,
+          versionId: C.id
+        }));
+        sx("History Version Checkpoint Restored", {
+          versionId: C.id,
+          savedAt: C.touched_at
+        });
+      };
+      R ? k(to({
+        type: F,
+        data: {
+          onConfirm: e
+        }
+      })) : e();
+    });
+    let b = r("savepoint-duplicate", () => {
+      let e = xp(t, t.project, N);
+      e ? k(to({
+        type: DV,
+        data: {
+          team: e,
+          resource: vL.FILE,
+          action: ZN.DUPLICATE_FILES,
+          editorType: t.editorType,
+          currentPlan: _$$F.Plan.STARTER,
+          upsellPlan: _$$F.Plan.PRO,
+          upsellSource: _$$b.CREATE_NEW_FILE
+        }
+      })) : (k(YW({
+        file: t,
+        versionId: C.id
+      })), sx("History Version Checkpoint Duplicated", {
+        versionId: C.id,
+        savedAt: C.touched_at
+      }));
+    }, a);
+    let P = r("savepoint-clear", () => {
+      k(_$$D({
+        fileKey: t.key,
+        savepointID: C.id,
+        label: "",
+        description: ""
+      }));
+    }, !C.label || 0 === C.label.length);
+    let O = r("savepoint-link", () => {
+      try {
+        _$$S(k, T, C.id);
+      } catch (e) {
+        k(_$$s.error("Failed to copy link"));
+      }
+    });
+    let D = r("savepoint-undo-merge", () => {
+      k(to({
+        type: L,
+        data: {
+          version: C
+        }
+      }));
+    });
+    i ? pW(C) ? "branch_child_merge" === C.view ? (e.push(A, y, b, O), getFeatureFlags().branching_undo_merge && e.push(D)) : e.push(y, b, O) : e.push(A, y, b, P, O) : e.push(b, O);
+    getFeatureFlags().version_diffing && T.editorType !== nT.Whiteboard && !$A(T) && e.push(u);
+    return e;
+  }, [T, C, i, t, R, N, k]);
+}
+export const D = $$B0;

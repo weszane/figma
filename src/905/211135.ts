@@ -1,0 +1,94 @@
+import { jsx, jsxs } from "react/jsx-runtime";
+import { wA } from "../vendor/514228";
+import { hS } from "../905/437088";
+import { vo, Y9, hE, nB, wi } from "../figma_app/272243";
+import { $n } from "../905/521428";
+import { bL } from "../905/38914";
+import { h as _$$h } from "../905/207101";
+import { tx } from "../905/303541";
+import { Lo } from "../905/156213";
+import { Yu, sp } from "../905/355291";
+import { Ve, MV } from "../905/264101";
+import { Z } from "../905/854480";
+import { iZ, pS } from "../905/372672";
+import { Ju } from "../905/102752";
+import { _ as _$$_ } from "../905/799322";
+import { aY, F4, Hx, G6 } from "../figma_app/639088";
+export let $$y0 = Ju(function (e) {
+  let {
+    open,
+    onClose
+  } = e;
+  let f = iZ();
+  let y = Z();
+  let b = wA();
+  let v = hS({
+    open,
+    onClose
+  });
+  return (_$$h(() => {
+    f && pS(f) && b(Ve({
+      token: f.password_token
+    }));
+  }), f) ? jsx(bL, {
+    manager: v,
+    width: "lg",
+    children: pS(f) ? jsxs(vo, {
+      children: [jsx(Y9, {
+        children: jsx(hE, {
+          children: tx("auth.two-factor-setup.two_factor_recovery_codes")
+        })
+      }), jsx(nB, {
+        children: (() => {
+          if (!f.backup_codes) return jsx("div", {
+            children: tx("auth.two-factor-setup.please_wait")
+          });
+          {
+            let e = f.backup_codes.map(e => jsx("div", {
+              className: aY,
+              children: e
+            }, e));
+            return jsxs("div", {
+              children: [tx("auth.two-factor-setup.recovery-code-explanation"), jsx("div", {
+                className: F4,
+                children: e
+              })]
+            });
+          }
+        })()
+      }), jsx(wi, {
+        children: jsxs("div", {
+          className: Hx,
+          children: [jsx($n, {
+            variant: "link",
+            onClick: () => {
+              b(MV());
+            },
+            children: tx("auth.two-factor-setup.regenerate_codes")
+          }), jsxs("div", {
+            className: G6,
+            children: [jsx($n, {
+              variant: "secondary",
+              onClick: e => {
+                e.preventDefault();
+                b(Lo());
+              },
+              children: tx("auth.two-factor-setup.close")
+            }), jsx($n, {
+              onClick: () => {
+                b(Lo());
+                b(Yu());
+              },
+              children: tx("auth.two-factor-setup.sms_settings")
+            })]
+          })]
+        })
+      })]
+    }) : jsx(_$$_, {
+      twoFactorAuth: y,
+      fplModal: !0,
+      title: tx("auth.two-factor-setup.two_factor_recovery_codes")
+    })
+  }) : null;
+}, sp);
+export const J = $$y0;

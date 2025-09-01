@@ -1,0 +1,100 @@
+import { jsx, jsxs } from "react/jsx-runtime";
+import { useState } from "react";
+import { wA, d4 } from "../vendor/514228";
+import { X } from "../905/128376";
+import { az } from "../905/449184";
+import { HB, VA, ZS } from "../3973/538504";
+import { ks } from "../figma_app/637027";
+import { R as _$$R } from "../905/441305";
+import { s as _$$s } from "../cssbuilder/589278";
+import { t as _$$t } from "../905/303541";
+import { yJ } from "../figma_app/24841";
+import { Cu } from "../figma_app/314264";
+import { Um } from "../905/848862";
+import { e0 } from "../905/696396";
+import { Ju, ZU } from "../905/102752";
+import { l6, c$ } from "../905/794875";
+import { Lt } from "../figma_app/639088";
+export let $$b0 = Ju(function (e) {
+  return jsx(I, {
+    ...e
+  });
+}, "CHANGE_JOB_TITLE_MODAL", ZU.YES);
+function v(e) {
+  return "other" === e || "something_else" === e;
+}
+function I(e) {
+  let t = wA();
+  let i = d4(e => e.user);
+  let _ = Um();
+  let b = i.profile?.job_title ?? "";
+  let I = "student" === b || "educator" === b ? b : HB(b);
+  let E = "unknown" === I ? "other" : I;
+  let [x, S] = useState(E);
+  let w = v(b) ? "" : b;
+  let [C, T] = useState(w);
+  let k = VA;
+  let R = () => {
+    let e = x;
+    let n = "change_job_modal_selection";
+    v(x) && C && (e = C, n = "change_job_modal_custom");
+    t(yJ({
+      user: {
+        id: i.id,
+        job_title: e,
+        job_title_source: n
+      },
+      userInitiated: !0
+    }));
+    az.trackDefinedEvent("activation.job_title_changed", {
+      newJobTitle: e,
+      prevJobTitle: b,
+      source: n,
+      jobTitleSeenList: k.toString()
+    });
+    Cu({
+      trackingContext: e0.FILE_BROWSER,
+      context: "job_title",
+      text: "Change Role",
+      jobTitle: e,
+      prevJobTitle: E
+    });
+  };
+  let N = X();
+  return jsxs(_$$R, {
+    ...e,
+    title: _$$t("settings.account_settings.change_job_title_modal_title"),
+    onConfirm: () => R(),
+    confirmText: _$$t("general.save"),
+    children: [jsx(l6, {
+      ariaLabel: _$$t("settings.account_settings.change_job_title_link"),
+      dispatch: t,
+      dropdownShown: _,
+      fill: !0,
+      formatter: {
+        format: ZS
+      },
+      id: "change-job-title-dropdown",
+      inputClassName: Lt,
+      inputRef: N,
+      onChange: e => {
+        S(e);
+        T("");
+      },
+      property: x,
+      children: k.map(e => jsx(c$, {
+        value: e,
+        children: ZS(e)
+      }, e))
+    }), v(x) && jsx(ks, {
+      id: "other-job-title-input",
+      className: _$$s.wFull.mt10.$,
+      value: C,
+      placeholder: _$$t("job-title.other.input-placeholder"),
+      onChange: e => {
+        T(e.currentTarget.value);
+      }
+    })]
+  });
+}
+export const u = $$b0;

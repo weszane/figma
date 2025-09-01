@@ -1,0 +1,10 @@
+var $$n1 = "form__label__BD7QK";
+var $$r3 = "form__primary__oNz7D";
+var $$a4 = "form__secondary__EB-qH";
+var $$s0 = "form__description__34H0g";
+var $$o2 = "form__legend__EIZxi";
+export const description = $$s0;
+export const label = $$n1;
+export const legend = $$o2;
+export const primary = $$r3;
+export const secondary = $$a4;

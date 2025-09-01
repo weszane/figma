@@ -1,0 +1,51 @@
+import { useMemo } from "react";
+import { d4 } from "../vendor/514228";
+import { getFeatureFlags } from "../905/601108";
+import { Qw } from "../905/989992";
+import { nt, d6 } from "../figma_app/687776";
+import { nF } from "../905/350402";
+import { le } from "../905/904854";
+import { F } from "../905/642505";
+import { GR } from "../905/81459";
+import { FC } from "../figma_app/212807";
+import { ZZ } from "../figma_app/345997";
+import { Mk } from "../905/163189";
+import { z } from "../905/875422";
+import { MS } from "../905/615657";
+import { Gc, TA } from "../905/769";
+export let $$E2 = nF((e, t) => {
+  F && (MS(), F.extractFilesFromDropEvent(t, (t, r) => {
+    getFeatureFlags().internal_only_debug_tools && t.endsWith(".repo") ? $$T3(e, t, r) : e.dispatch(z({
+      name: t,
+      blob: r
+    }));
+  }));
+});
+export function $$y1(e) {
+  return new le(e).isFile();
+}
+export function $$b0() {
+  let e = d4(e => "folder" !== e.selectedView.view ? null : e.folders[e.selectedView.folderId] ?? null);
+  let t = e?.id;
+  let r = nt(t);
+  let a = d4(e => e.selectedView.view);
+  let l = FC();
+  return useMemo(() => "recentsAndSharing" === a ? Qw.loaded(!0) : "folder" === a ? !e || ZZ(e, l) ? Qw.loaded(!1) : r.transform(e => !!e && $$I4(e)) : Qw.loaded(!1), [r, l, e, a]);
+}
+export function $$T3(e, t, r) {
+  e.dispatch(GR());
+  Gc(r).then(n => {
+    n ? TA(e, n) : t = e.dispatch(z({
+      name: t,
+      blob: r
+    }));
+  });
+}
+export function $$I4(e) {
+  return Mk.some(t => d6(e, t));
+}
+export const B2 = $$b0;
+export const al = $$y1;
+export const b6 = $$E2;
+export const mK = $$T3;
+export const ud = $$I4;

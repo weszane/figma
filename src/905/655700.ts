@@ -1,0 +1,26 @@
+import { d4 } from "../vendor/514228";
+import { Z } from "../905/515860";
+import { tB } from "../figma_app/516028";
+import { td } from "../905/845253";
+import { xw } from "../figma_app/951233";
+import { kA } from "../figma_app/336853";
+import { w5 } from "../figma_app/345997";
+import { UQ } from "../figma_app/598018";
+export function $$u0() {
+  return d4(p);
+}
+function p(e) {
+  let t = tB(e);
+  let i = xw(e);
+  let n = UQ(e);
+  let u = e.teams[Z(e)] || null;
+  let p = w5(u) && !u?.org_id;
+  let m = td(e.currentUserOrgId, e.orgById);
+  if (!t || null === t) return "unknown";
+  if (t.parentOrgId) {
+    let e = kA(m) ? "ent" : "org";
+    return i && i.org_id === t.parentOrgId ? e : "non_member_" + e;
+  }
+  return p ? n && n.team_id === t.teamId ? "pro" : "non_member_pro" : "starter";
+}
+export const O = $$u0;

@@ -1,0 +1,14 @@
+let $$n5 = "google_sso_button--button--RrQGk";
+let $$r3 = "google_sso_button--buttonText--Pb0Oz";
+let $$a1 = "google_sso_button--buttonContent---dsh2";
+let $$s2 = "google_sso_button--icon--D2DPF";
+let $$o0 = "google_sso_button--regular--3-tnQ";
+let $$l4 = "google_sso_button--large--srn9T";
+let $$d6 = "google_sso_button--primary--PC8n2 google_sso_button--solidStyle--4SXh1";
+export const Hg = $$o0;
+export const IO = $$a1;
+export const Kk = $$s2;
+export const _d = $$r3;
+export const as = $$l4;
+export const x6 = $$n5;
+export const zB = $$d6;

@@ -1,0 +1,44 @@
+import { useState, useEffect } from "react";
+import { Xr } from "../figma_app/27355";
+import { A } from "../vendor/90566";
+import { MZ } from "../figma_app/925970";
+import { wf } from "../905/124270";
+import { IT, M4 } from "../905/713695";
+import { WY } from "../figma_app/162807";
+import { $W } from "../905/144933";
+import { A as _$$A } from "../905/421315";
+export function $$p0(e, t) {
+  let [i, d] = useState(e);
+  let c = Xr(wf);
+  let {
+    restrictOrgId,
+    restrictTeamId
+  } = _$$A();
+  let g = m({
+    query: i,
+    facetType: t,
+    restrictOrgId,
+    restrictTeamId
+  });
+  let [f] = IT(g);
+  let _ = A(t => {
+    d(t);
+    e && e.length > 0 && c(MZ());
+  }, 500, {
+    leading: !0
+  });
+  useEffect(() => {
+    _(e);
+  }, [_, e, c]);
+  return f;
+}
+let m = M4.Query({
+  fetch: async e => (await $W.getFacetSearchResults({
+    query: e.query,
+    facetType: e.facetType,
+    restrictOrgId: e.restrictOrgId,
+    restrictTeamId: e.restrictTeamId
+  })).data.meta,
+  enabled: e => !!e.facetType && e.facetType !== WY.RESOURCE && null != e.query
+});
+export const F = $$p0;

@@ -1,0 +1,2427 @@
+import _require2 from "../0c62c2fd/586544";
+import _require from "../0c62c2fd/322783";
+import { jsx, jsxs, Fragment } from "react/jsx-runtime";
+import { useMemo, useCallback, useRef, useState, useEffect } from "react";
+import { wA, d4 } from "../vendor/514228";
+import { xb } from "../figma_app/465776";
+import { ServiceCategories as _$$e } from "../905/165054";
+import { N as _$$N } from "../905/438674";
+import { b as _$$b } from "../905/946806";
+import { getFeatureFlags } from "../905/601108";
+import { Rs } from "../figma_app/288654";
+import { Xm, gB, oA } from "../905/723791";
+import { kt } from "../figma_app/858013";
+import { t as _$$t, tx as _$$tx } from "../905/303541";
+import { Y as _$$Y } from "../905/830372";
+import { d as _$$d } from "../469e6e40/744116";
+import { y3 } from "../figma_app/307841";
+import { R as _$$R } from "../905/304671";
+import { i as _$$i } from "../469e6e40/549061";
+import { M as _$$M } from "../469e6e40/490222";
+import { g as _$$g } from "../figma_app/638694";
+import { Agb, zRx } from "../figma_app/822011";
+import E from "classnames";
+import { s as _$$s } from "../cssbuilder/589278";
+import { sx } from "../905/941192";
+import { E as _$$E } from "../905/984674";
+import { k as _$$k2 } from "../469e6e40/952112";
+import { sf, oB } from "../905/929976";
+import { jm, fu, kp } from "../figma_app/831799";
+import { sMZ, yQw, ZY7 } from "../figma_app/43951";
+import { S2, No, YQ, px, W8 } from "../figma_app/465071";
+import { ck } from "../905/952832";
+import { Iv, F9, pu } from "../905/548208";
+import { ER } from "../figma_app/102449";
+import { ps } from "../figma_app/845611";
+import { F as _$$F } from "../469e6e40/308608";
+import { Te } from "../figma_app/765689";
+import { Qw } from "../905/989992";
+import z from "../vendor/529640";
+import { A as _$$A } from "../905/920142";
+import { F as _$$F2 } from "../905/302958";
+import { b_, sH, Ji } from "../figma_app/149367";
+import { tb as _$$tb } from "../905/848667";
+import { If, wv } from "../figma_app/121751";
+import { A as _$$A2 } from "../905/654645";
+import { MF } from "../figma_app/391338";
+import { FBillingPeriodType, FOrganizationLevelType, FPlanNameType } from "../figma_app/191312";
+import { k_, BP, TG } from "../1881/866163";
+import { Ok, Vc, UW, d2 } from "../469e6e40/142718";
+import { _6 } from "../figma_app/386952";
+import { $n } from "../905/521428";
+import { wv as _$$wv } from "../figma_app/860955";
+import { parsePxInt } from "../figma_app/783094";
+import { bv, IU } from "../figma_app/421401";
+import { h1 } from "../905/986103";
+import { y2 } from "../figma_app/563413";
+import { p as _$$p } from "../469e6e40/348454";
+import { Js, yG } from "../469e6e40/488538";
+import { A as _$$A3 } from "../905/658244";
+import { Ju, Ij } from "../905/102752";
+import { J as _$$J } from "../469e6e40/564885";
+import { v as _$$v } from "../4452/562448";
+import { b as _$$b2 } from "../4452/320061";
+import { B as _$$B } from "../4452/541264";
+import { E as _$$E2 } from "../469e6e40/190466";
+import { s as _$$s2 } from "../905/411990";
+import { nF } from "../905/350402";
+import { II } from "../figma_app/11182";
+import { to as _$$to } from "../905/156213";
+import { _E, yJ, tk as _$$tk, m$ } from "../figma_app/240735";
+import { z as _$$z } from "../905/595507";
+import { C3, vt } from "../figma_app/297957";
+import { z as _$$z2 } from "../figma_app/369596";
+import { n0, WQ, mt } from "../figma_app/345997";
+import { $S } from "../905/351260";
+import { yN } from "../905/727738";
+import { ol, Rq, pe } from "../figma_app/598018";
+import { IX } from "../905/712921";
+import { O as _$$O } from "../905/833838";
+import { e6 as _$$e2 } from "../905/557142";
+import { d as _$$d2 } from "../figma_app/135698";
+import { i9 } from "../figma_app/805373";
+import { r as _$$r } from "../469e6e40/505264";
+import { b as _$$b3 } from "../905/173822";
+import { Cj } from "../905/270084";
+import { zx, VU } from "../4452/650793";
+import { Dd } from "../905/519092";
+import { h as _$$h } from "../905/207101";
+import { fB, Of, l4 } from "../figma_app/982327";
+import { c as _$$c } from "../905/370443";
+import { e as _$$e3 } from "../905/621515";
+import { N as _$$N2 } from "../figma_app/268271";
+import { rq } from "../905/425180";
+import { F_, EL } from "../905/858282";
+import { L69, iq7 } from "../figma_app/6204";
+import { v as _$$v2 } from "../figma_app/899624";
+import { cE, oi } from "../figma_app/527041";
+import { fAD } from "../figma_app/27776";
+import { Mc, nM, Gb, r2, dG, U0, nf, Hy, kL } from "../469e6e40/504232";
+import { B as _$$B2 } from "../905/950875";
+import { oA as _$$oA } from "../905/663269";
+import { sx as _$$sx, az } from "../905/449184";
+import { S as _$$S } from "../469e6e40/679996";
+import { x1 } from "../905/714362";
+import { Ex, zE } from "../figma_app/919079";
+import { CY } from "../figma_app/637027";
+import { s as _$$s3 } from "../905/573154";
+import { V as _$$V } from "../905/223767";
+import { p as _$$p2 } from "../4452/321313";
+import { I as _$$I } from "../469e6e40/815692";
+import { S as _$$S2 } from "../4452/304860";
+import { l as _$$l, m as _$$m } from "../469e6e40/61410";
+import { T_, Kz, x8, bX } from "../469e6e40/336248";
+import { Bq, WX } from "../figma_app/482142";
+import { Hq, C8, BO, Be } from "../figma_app/920435";
+import { UC, mL } from "../905/563637";
+import { ud } from "../905/513035";
+import { N_ } from "../905/332483";
+import { L as _$$L } from "../c5e2cae0/262856";
+import { u as _$$u } from "../469e6e40/510414";
+import { Ti, bQ } from "../figma_app/658324";
+import { d as _$$d3 } from "../7021/966231";
+import { b as _$$b4 } from "../905/165519";
+import { EB } from "../figma_app/831101";
+import { OI } from "../figma_app/630077";
+import { Ib } from "../905/129884";
+import { fm } from "../c5e2cae0/453906";
+import { $ as _$$$ } from "../905/834575";
+import { h as _$$h2 } from "../469e6e40/689859";
+import { v as _$$v3 } from "../905/621749";
+import { E as _$$E3 } from "../469e6e40/510393";
+import { q as _$$q } from "../469e6e40/977739";
+import { Dg } from "../469e6e40/615314";
+import { gb } from "../figma_app/422062";
+import { wr, Sn } from "../469e6e40/875985";
+import { _ as _$$_, Y as _$$Y2 } from "../469e6e40/781142";
+import { S as _$$S3 } from "../4452/606725";
+import { r as _$$r2 } from "../905/398386";
+import { bE } from "../figma_app/375098";
+import { iZ } from "../905/372672";
+import { M4, IT } from "../905/713695";
+import { VP, D2 } from "../905/18797";
+import { OL as _$$OL } from "../figma_app/12796";
+import { vS } from "../figma_app/846003";
+import { Ft } from "../figma_app/707808";
+import { R as _$$R2 } from "../figma_app/522082";
+import { p as _$$p3 } from "../figma_app/353099";
+import { X as _$$X } from "../905/482718";
+import { Q as _$$Q } from "../905/11928";
+import { isNotNullish } from "../figma_app/95419";
+import { t as _$$t2 } from "../905/150656";
+import ar from "../vendor/635";
+import ao from "../469e6e40/341785";
+import { R as _$$R3 } from "../7021/67076";
+import { s as _$$s4 } from "../905/645504";
+import { p as _$$p4 } from "../469e6e40/470485";
+import { V as _$$V2 } from "../905/965990";
+import { yE } from "../469e6e40/471025";
+import { K as _$$K } from "../905/628118";
+import { qH } from "../figma_app/934005";
+import { e0 as _$$e4 } from "../905/696396";
+import { k as _$$k3 } from "../905/443820";
+import { Q as _$$Q2 } from "../469e6e40/825225";
+import { S as _$$S4 } from "../469e6e40/885592";
+import { vn } from "../figma_app/109538";
+import { k as _$$k4 } from "../figma_app/618031";
+import { E as _$$E4 } from "../469e6e40/82885";
+import { hY, ww } from "../figma_app/80683";
+import { i as _$$i2 } from "../469e6e40/375056";
+import { G6, j2 } from "../figma_app/84966";
+import { k as _$$k5 } from "../469e6e40/115523";
+import { b as _$$b5 } from "../905/388233";
+import { k as _$$k6, Q as _$$Q3 } from "../figma_app/527200";
+import { w as _$$w } from "../4452/417339";
+import { nc, J as _$$J2 } from "../figma_app/915977";
+let n;
+let s;
+var C = E;
+function $({
+  team: e
+}) {
+  return jsx(_$$F, {
+    supportedLicenses: [Te.DESIGN, Te.WHITEBOARD],
+    planType: ps.TEAM,
+    planId: e.id,
+    isOrgAdmin: !1
+  });
+}
+function B({
+  team: e
+}) {
+  let t = wA();
+  let a = d4(e => e.avatarEditorState);
+  let n = S2().unwrapOr(null);
+  let s = Rs(sMZ, {
+    name: "seen_connected_project_in_admin_dashboard_banner"
+  });
+  let o = !useMemo(() => "loaded" !== s.status || !!s.data?.currentUser?.userFlagByName, [s]) && n?.tier === Agb.PRO && getFeatureFlags().fc_initial_onboarding_enabled;
+  return jsxs("div", {
+    style: sx.add({
+      width: "780px",
+      marginLeft: "auto",
+      marginRight: "auto"
+    }).$,
+    "data-testid": "admin-dashboard-tab",
+    children: [jsxs("div", {
+      className: _$$s.flex.flexRow.gap24.py24.px16.justifyStart.$,
+      children: [jsx(ER, {
+        dispatch: t,
+        entityType: ck.TEAM,
+        entity: e,
+        size: 80,
+        avatarEditorState: a
+      }), jsxs("div", {
+        className: _$$s.flex.flexColumn.justifyCenter.itemsStart.$,
+        children: [jsx(_$$E, {
+          fontWeight: "regular",
+          fontSize: 24,
+          children: e.name
+        }), e.community_profile_handle && jsxs(jm, {
+          className: C()(_$$s.lh24.font13.cursorPointer.$, "admin_dashboard_tab--communityHandle--uBlsg"),
+          onClick: () => {
+            t(sf({
+              view: "communityHub",
+              subView: "handle",
+              handle: e.community_profile_handle
+            }));
+          },
+          children: ["@", e.community_profile_handle]
+        })]
+      })]
+    }), o && jsx(_$$k2, {
+      openConnectedProjects: () => {
+        t(sf({
+          view: "teamAdminConsole",
+          teamId: n?.key.parentId ?? "",
+          teamAdminConsoleViewTab: Iv.CONTENT,
+          teamAdminConsoleViewSecondaryTab: F9.CONNECTED_PROJECTS
+        }));
+      }
+    }), jsx("div", {
+      className: _$$s.mb16.$
+    }), e.pro_team && jsx(_$$Y, {
+      spacing: 16,
+      direction: "vertical",
+      children: jsx("div", {
+        className: _$$s.mb16.$,
+        children: jsx($, {
+          team: e
+        })
+      })
+    })]
+  });
+}
+var V = z;
+let eq = Ju(function (e) {
+  let {
+    team
+  } = e;
+  let {
+    id,
+    name
+  } = t;
+  let s = e.members.length;
+  let r = e.members.filter(e => e.id).map(e => e.id).join();
+  return jsx(fu, {
+    name: "Team Remove Members Modal",
+    properties: {
+      memberCount: s,
+      memberIds: r,
+      teamId: id
+    },
+    children: jsx(Dd, {
+      destructive: !0,
+      title: _$$t("team_view.remove_members_modal.title", {
+        member_count: s,
+        member_identity: e.members[0]?.name || e.members[0]?.email
+      }),
+      confirmText: _$$t("team_view.remove_members_modal.confirmation"),
+      onConfirm: e.onConfirm,
+      children: jsx("p", {
+        children: e.includesPendingTeamRole ? _$$t("team_view.remove_members_modal.pending_role_removal_copy", {
+          member_count: s,
+          user_name_or_email: e.members[0]?.name || e.members[0]?.email,
+          team_name: name
+        }) : getFeatureFlags().ext_figma_apps ? _$$t("team_view.remove_members_modal.confirmed_role_removal_copy_v2", {
+          member_count: s,
+          user_name_or_email: e.members[0]?.name || e.members[0]?.email,
+          team_name: name
+        }) : _$$t("team_view.remove_members_modal.confirmed_role_removal_copy", {
+          member_count: s,
+          user_name_or_email: e.members[0]?.name || e.members[0]?.email,
+          team_name: name
+        })
+      })
+    })
+  });
+}, "ConfirmMembersRemoveModal");
+function eJ() {
+  let e = ol();
+  let t = e?.pro_team === void 0 ? Xm() : gB(e.pro_team);
+  let {
+    show,
+    isShowing,
+    complete
+  } = _$$e3({
+    overlay: L69,
+    priority: _$$N2.DEFAULT_MODAL
+  }, [t]);
+  _$$h(() => {
+    show({
+      canShow: e => !0
+    });
+  });
+  return jsx(rq, {
+    arrowPosition: F_.BOTTOM,
+    description: e?.pro_team ? _$$tx("admin_settings.people.onboarding.click_on_a_person") : _$$tx("admin_settings.people.onboarding.click_on_a_person.no_paid_status"),
+    emphasized: !0,
+    isShowing,
+    onClose: complete,
+    primaryCta: {
+      label: _$$tx("general.got_it"),
+      ctaTrackingDescriptor: _$$c.GOT_IT,
+      type: "button",
+      onClick: complete
+    },
+    shouldCenterArrow: EL.BEST_EFFORT,
+    targetKey: fB,
+    title: _$$tx("admin_settings.people.onboarding.easily_manage_people"),
+    trackingContextName: `${Of} flyout tooltip`
+  }, "flyout");
+}
+let e0 = nF((e, {
+  member: t,
+  team: s
+}) => {
+  let {
+    id
+  } = s;
+  e.dispatch(_$$to({
+    type: n ??= Ju(_$$A3.createLazyComponent(() => Promise.all([]).then(_require).then(e => e.ConfirmDowngradeEditorsModal), Ij("ConfirmDowngradeEditorsModal")), "ConfirmDowngradeEditorsModal"),
+    data: {
+      editors: [t],
+      team: s,
+      onConfirm: () => {
+        let a = t.last_active ? new Date(1e3 * t.last_active).toDateString() : "never";
+        t.id && e.dispatch(_$$z({
+          editor: {
+            id: t.id,
+            img_url: t.img_url,
+            name: t.name ?? "",
+            email: t.email,
+            last_active: a,
+            team_id: id
+          }
+        }));
+        e.dispatch(_$$F2.enqueue({
+          type: "team-editors-downgraded",
+          message: _$$t("downgrade_member_visual_bell.text", {
+            numMembers: t.id ? 1 : 0,
+            userName: t.name ?? t.email
+          })
+        }));
+      }
+    }
+  }));
+});
+function e1(e) {
+  return e.id ? {
+    id: e.id,
+    img_url: e.img_url,
+    name: e.name,
+    email: e.email
+  } : {
+    email: e.email,
+    name: void 0
+  };
+}
+function e2(e) {
+  return jsx("span", {
+    className: e.className || "",
+    children: e.cellContent || "\u2013"
+  });
+}
+let e4 = "TeamMemberFlyout";
+let e5 = kp(function (e) {
+  let {
+    billing,
+    dispatch,
+    team
+  } = e;
+  let d = billing.summary.monthly_subscription ? IX.MONTH : IX.YEAR;
+  let c = useCallback(e => {
+    dispatch(II({
+      emailList: e
+    }));
+  }, [dispatch]);
+  let _ = useCallback(e => {
+    let t = [];
+    let a = [];
+    e.forEach(e => {
+      !(!e.id || e.team_role?.pending) && e.email && (t.push(e.email), a.push(e.id));
+    });
+    dispatch(_E({
+      teamId: team.id,
+      userIds: a,
+      emails: t
+    }));
+  }, [dispatch, team]);
+  let u = useCallback(e => {
+    let {
+      member,
+      newLevel
+    } = e;
+    let s = member.team_role;
+    let i = () => {
+      let e = s?.pending;
+      if (member.id && newLevel === _$$e2.NONE && !e) {
+        _([member]);
+        return;
+      }
+      s && dispatch(yN({
+        role: s,
+        level: newLevel
+      }));
+    };
+    s && newLevel === _$$e2.OWNER ? dispatch(_$$to({
+      type: _$$b3,
+      data: {
+        resourceType: s.resource_type,
+        resourceName: team.name,
+        newOwnerName: s.user.handle,
+        onConfirmTransfer: () => {
+          i();
+        }
+      }
+    })) : s && newLevel === _$$e2.VIEWER && !s.pending ? dispatch(e0({
+      team,
+      member
+    })) : i();
+  }, [_, dispatch, team]);
+  let m = _$$s2();
+  let p = useCallback(e => m({
+    teamId: team.id,
+    prepopulatedEmail: e.email,
+    canAdmin: !0
+  }), [team.id, m]);
+  let g = useCallback(e => {
+    u({
+      member: e,
+      newLevel: _$$e2.NONE
+    });
+  }, [u]);
+  let b = useCallback(e => {
+    let t = e.find(e => e?.team_role?.pending);
+    dispatch(_$$to({
+      type: eq,
+      data: {
+        members: e,
+        team,
+        onConfirm: () => {
+          _(e);
+          e.forEach(e => {
+            e.team_role?.pending && u({
+              member: e,
+              newLevel: _$$e2.NONE
+            });
+          });
+          let t = 1 === e.length ? e[0].name || e[0].email : _$$t("team_view.upgrade.members_length_users", {
+            memberLength: e.length
+          });
+          dispatch(_$$F2.enqueue({
+            type: "team-users-removed",
+            message: _$$t("team_view.upgrade.members_removed_text_removed_from_this_props_team_name", {
+              membersRemovedText: t,
+              teamName: team.name
+            })
+          }));
+        },
+        includesPendingTeamRole: !!t
+      }
+    }));
+  }, [_, u, dispatch, team]);
+  let v = useCallback(e => {
+    e.team_role && dispatch($S({
+      role: e.team_role
+    }));
+  }, [dispatch]);
+  let f = e => e.member.email;
+  let j = C3()(_$$v2(billing?.summary));
+  let y = () => {
+    let t = e.team;
+    return [{
+      name: Rq(_$$d2.NAME),
+      className: Mc,
+      getSortValue: e => e.member.name || e.member.email,
+      cellComponent: M
+    }, ...(t.canAdmin && n0(t) ? Js({
+      columnClassName: nM,
+      selectorOuterClassName: Gb,
+      selectorInnerClassName: r2,
+      currency: e.billing.summary.currency,
+      forceHidePendingSeats: e.forceHidePendingSeats
+    }) : []), ...(j ? [{
+      name: Rq(_$$d2.BILLING_INTERVAL),
+      className: Mc,
+      getSortValue: e => "current_seat_billing_interval" in e.member ? e.member.current_seat_billing_interval?.toString() ?? "-" : "-",
+      sortReversed: !0,
+      cellComponent: D
+    }] : []), {
+      name: Rq(_$$d2.ACTIVE_AT),
+      className: dG,
+      getSortValue: e => e.member.last_active || 0,
+      sortNumerically: !0,
+      sortReversed: !0,
+      cellComponent: P
+    }];
+  };
+  let w = useMemo(() => e.filteredMembers.map(t => {
+    let a = e.currentMemberId === t.id;
+    return {
+      teamId: e.team.id,
+      member: t,
+      dispatch: e.dispatch,
+      isCurrentMember: a,
+      dropdownShown: e.dropdownShown,
+      onRemoveMemberOrChangeMemberPermission: u
+    };
+  }), [e.dispatch, u, e.currentMemberId, e.dropdownShown, e.filteredMembers, e.team.id]);
+  let k = _$$B();
+  let E = useRef(null);
+  let C = useRef(null);
+  let {
+    highlightedItem,
+    setHighlightedItemId,
+    clearHighlightedItemId
+  } = _$$v(useCallback(e => w.find(t => t.member.email === e), [w]), {
+    interactionConfig: [{
+      ref: k,
+      shouldClearHighlight: !0
+    }, {
+      ref: E,
+      shouldClearHighlight: !1
+    }, {
+      ref: C,
+      shouldClearHighlight: !1
+    }],
+    onHighlight: () => {
+      E.current?.focus();
+    },
+    onClear: _$$b2(e4)
+  });
+  let R = useCallback(e => !(e.member.team_role?.pending && !e.member.team_user), []);
+  let O = useCallback(e => {
+    dispatch(_$$to({
+      type: s ??= Ju(_$$A3.createLazyComponent(() => Promise.all([]).then(_require2).then(e => e.MemberEditAccessModal), Ij("MemberEditAccessModal")), "MemberEditAccessModal"),
+      data: {
+        memberEmail: e.email,
+        teamId: team.id,
+        userId: e.id
+      }
+    }));
+  }, [dispatch, team.id]);
+  let L = useCallback(t => {
+    let a = !t.member.team_role;
+    let n = t.member.team_role?.pending || !1;
+    let s = t.member.team_role?.level === _$$e2.OWNER;
+    let i = k_(t.member, t.isCurrentMember, e.team);
+    let {
+      canAdmin,
+      canEdit
+    } = e.team;
+    let o = t.member.canEditRole;
+    let d = t.member.canRemoveUser;
+    let _ = (e, t) => e ? [t] : [];
+    let m = [..._(R(t), {
+      text: _$$t("team_view.settings.manage"),
+      innerText: "Manage (menu cell)",
+      callback: () => {
+        setHighlightedItemId(t.member.email);
+      }
+    }), ..._(canAdmin && R(t), {
+      text: _$$t("team_view.settings.see_edit_access"),
+      callback: () => {
+        O(t.member);
+      }
+    }), {
+      text: _$$t("team_view.settings.copy_email"),
+      callback: () => {
+        c([t.member.email]);
+      }
+    }, ..._(a && canEdit && !n, {
+      text: _$$t("team_view.settings.invite_to_team"),
+      callback: () => {
+        p(t.member);
+      }
+    }), ..._("revoke" === i, {
+      text: _$$t("team_view.settings.revoke_admin_access"),
+      callback: () => u({
+        member: t.member,
+        newLevel: _$$e2.EDITOR
+      })
+    }), ..._("grant" === i, {
+      text: _$$t("team_view.settings.grant_admin_access"),
+      callback: () => u({
+        member: t.member,
+        newLevel: _$$e2.ADMIN
+      })
+    })];
+    let x = [..._(n && o, {
+      text: _$$t("team_view.settings.resend_invite"),
+      callback: () => {
+        v(t.member);
+      }
+    }), ..._(!t.isCurrentMember && d, {
+      text: _$$t("team_view.settings.remove"),
+      callback: () => {
+        b([t.member]);
+      }
+    }), ..._(t.isCurrentMember && !s, {
+      text: _$$t("team_view.settings.leave_team"),
+      callback: () => {
+        g(t.member);
+      }
+    })];
+    x.length > 0 && (m.push({
+      isDivider: !0
+    }), m = m.concat(x));
+    return m;
+  }, [R, c, p, g, u, b, v, e.team, setHighlightedItemId, O]);
+  let D = e => {
+    let t = "current_seat_billing_interval" in e.member && e.member.current_seat_billing_interval ? e.member.current_seat_billing_interval === FBillingPeriodType.YEAR ? _$$t("team_view.team_members_table.billing_interval_annual") : _$$t("team_view.team_members_table.billing_interval_monthly") : _$$t("team_view.team_members_table.billing_interval_empty");
+    return jsx(e2, {
+      cellContent: t
+    });
+  };
+  let M = (e, t, a, n) => {
+    let {
+      member,
+      isCurrentMember
+    } = e;
+    let l = e1(member);
+    let o = BP(member);
+    let d = 0 === n ? fB : void 0;
+    return member.team_role?.pending ? jsx(i9, {
+      badge: o,
+      "data-onboarding-key": d,
+      defaultText: "-",
+      entity: l,
+      overrideHandle: l.email,
+      showIsMe: !1
+    }) : jsx(_$$r, {
+      className: U0,
+      "data-onboarding-key": d,
+      dispatch: e.dispatch,
+      entity: l,
+      showIsMe: isCurrentMember,
+      showTooltip: !0,
+      size: 24,
+      badge: o
+    });
+  };
+  let P = t => {
+    let {
+      member
+    } = t;
+    return member.last_active ? jsx($n, {
+      variant: "link",
+      onClick: t => {
+        t.stopPropagation();
+        e.dispatch(_$$to({
+          type: _$$J,
+          data: {
+            planType: _$$O.TEAM,
+            planId: e.team.id,
+            planUserId: member.id,
+            planUserDisplayName: member.name || member.email,
+            activityType: "all"
+          }
+        }));
+      },
+      children: jsx(h1, {
+        capitalize: !0,
+        date: new Date(1e3 * member.last_active)
+      })
+    }) : jsx(e2, {});
+  };
+  let U = () => {
+    let t = () => {
+      e.onFilter(Ok);
+    };
+    let a = _$$tx("team_view.team_members_table.default_empty_state");
+    let n = jsx("span", {
+      children: _$$tx("team_view.team_members_table.member_filter_empty_state", {
+        reset_link: jsx("a", {
+          className: nf,
+          onClick: () => t(),
+          children: _$$t("team_view.team_members_table.member_filter_empty_reset_link")
+        })
+      })
+    });
+    let s = _$$tx("team_view.team_members_table.search_empty_state");
+    let r = Object.values(e.filters).some(e => !!e);
+    return r && e.searchQuery ? e.lastFilterAction === Vc.SEARCH ? s : n : r ? n : e.searchQuery ? s : a;
+  };
+  let F = () => jsx("div", {
+    className: Hy,
+    children: jsxs("div", {
+      className: cE,
+      children: [jsx("div", {
+        className: _$$s.pr8.$,
+        children: jsx(y2, {
+          onChange: e.onSearch,
+          query: e.searchQuery,
+          clearSearch: () => {
+            e.onSearch("");
+          },
+          placeholder: _$$t("team_view.search_bar.search_members_with_ellipsis")
+        })
+      }), jsx(bv, {
+        label: Rq(_$$d2.ACTIVE_AT),
+        dispatch: e.dispatch,
+        dropdownShown: e.dropdownShown,
+        dropdownType: "FILTER_LAST_ACTIVE_DROPDOWN",
+        selectedValue: e.filters.lastActiveFilter,
+        values: [UW.MORE_SEVEN_DAYS, UW.MORE_THIRTY_DAYS, UW.MORE_THREE_MONTHS],
+        getCount: t => e.filterCounts.lastActive[t],
+        getDisplayText: e => function (e) {
+          switch (e) {
+            case UW.MORE_SEVEN_DAYS:
+              return _$$t("team_view.team_members_table.filters.last_active..more_than_7_days_ago");
+            case UW.MORE_THIRTY_DAYS:
+              return _$$t("team_view.team_members_table.filters.last_active..more_than_30_days_ago");
+            case UW.MORE_THREE_MONTHS:
+              return _$$t("team_view.team_members_table.filters.last_active..more_than_3_months_ago");
+            default:
+              xb(e);
+          }
+        }(e),
+        updateFilter: t => e.onFilter({
+          lastActiveFilter: t
+        })
+      }), e.team.canAdmin && e.team.pro_team && jsx(yG, {
+        dispatch: e.dispatch,
+        dropdownShown: e.dropdownShown,
+        filters: e.filters,
+        filterCounts: e.filterCounts,
+        onFilter: e.onFilter
+      }), j && jsx(bv, {
+        label: Rq(_$$d2.BILLING_INTERVAL),
+        dispatch: e.dispatch,
+        dropdownShown: e.dropdownShown,
+        dropdownType: "FILTER_BILLING_INTERVAL_DROPDOWN",
+        selectedValue: e.filters.billingIntervalFilter ?? null,
+        values: [FBillingPeriodType.MONTH, FBillingPeriodType.YEAR],
+        getCount: t => e.filterCounts.billingInterval?.[t] ?? 0,
+        getDisplayText: e => e === FBillingPeriodType.MONTH ? _$$t("team_view.team_members_table.billing_interval_monthly") : _$$t("team_view.team_members_table.billing_interval_annual"),
+        updateFilter: t => e.onFilter({
+          billingIntervalFilter: t ?? void 0
+        })
+      })]
+    })
+  });
+  let q = t => {
+    let a = t.map(e => e.member);
+    if (0 === a.length) return jsx(Fragment, {});
+    let n = a.map(e => e.email);
+    let s = a.every(e => e.canRemoveUser);
+    let r = a.some(e => e.team_role?.pending) && a.some(e => !e.team_user);
+    let l = a.length > 20;
+    let o = !!t.find(e => e.isCurrentMember);
+    let {
+      canAdmin
+    } = e.team;
+    let _ = a.filter(e => e.id).map(e => e.id);
+    let u = {
+      userCount: _.length
+    };
+    let m = _.join();
+    return jsxs(Fragment, {
+      children: [canAdmin && !r && 1 === a.length && jsx(IU, {
+        label: _$$t("team_view.settings.see_edit_access"),
+        onClick: () => {
+          O(a[0]);
+        }
+      }), jsx(IU, {
+        trackingProperties: {
+          ...u,
+          copiedUserIds: m
+        },
+        label: _$$t("team_view.settings.copy_get_plural_or_singular_selected_members_length_email", {
+          numEmails: a.length
+        }),
+        onClick: () => {
+          c(n);
+        }
+      }), s && !o && jsx(IU, {
+        label: _$$t("team_view.settings.remove"),
+        trackingProperties: {
+          ...u,
+          removedUserIds: m
+        },
+        onClick: () => {
+          b(a.map(e => e));
+        },
+        disabled: l,
+        ...(l ? {
+          tooltip: _$$t("team_view.settings.you_can_only_remove_limit_users_at_a_time", {
+            batchLimit: 20
+          })
+        } : {})
+      })]
+    });
+  };
+  let $ = useCallback(e => {
+    let t = L(e);
+    return jsx(zx, {
+      children: t.map((e, t) => e.isDivider ? jsx(_$$wv, {}, `divider${t}`) : jsx(_$$p, {
+        onClick: e.callback,
+        children: e.text
+      }, e.text))
+    });
+  }, [L]);
+  let B = jsx("div", {
+    className: kL,
+    "data-testid": "team-members-table",
+    children: jsx(e3, {
+      initialSortState: {
+        columnName: Rq(_$$d2.NAME),
+        isReversed: !1
+      },
+      items: w,
+      columns: y(),
+      render: (t, a, n) => jsx(Cj, {
+        actionBar: q,
+        columns: y(),
+        emptyContent: jsx(_$$Y, {
+          height: 200,
+          verticalAlignItems: "center",
+          horizontalAlignItems: "center",
+          children: U()
+        }),
+        getItemKey: f,
+        highlightState: {
+          itemKey: highlightedItem?.member.email ?? null,
+          setItemKey: setHighlightedItemId
+        },
+        isRowClickable: R,
+        itemTypeContext: {
+          itemType: "user",
+          getSelectedCountString: e => _$$t("multi_select_list.selected_count_user", {
+            numSelected: e
+          })
+        },
+        items: n,
+        minContentWidth: parsePxInt(fAD),
+        onRowClick: e => {
+          R(e) && (highlightedItem?.member.email === e.member.email ? clearHighlightedItemId() : setHighlightedItemId(e.member.email));
+        },
+        onScroll: () => e.dispatch(oB()),
+        onSetSortState: a,
+        rightActionColumns: [{
+          name: "menu-cell",
+          className: oi,
+          cellComponent: $
+        }, VU],
+        scrollContentRef: C,
+        sortState: t,
+        stickyContent: F()
+      })
+    })
+  });
+  return jsxs(Fragment, {
+    children: [B, w.length > 0 && jsx(eJ, {}), jsx(_$$E2.Root, {
+      open: !!highlightedItem,
+      onClose: clearHighlightedItemId,
+      trackingName: e4,
+      trackingProperties: {
+        teamId: e.team.id,
+        userId: highlightedItem?.member.team_user?.user_id
+      },
+      ref: E,
+      children: highlightedItem && jsx(_$$E2.Contents, {
+        avatarEntity: e1(highlightedItem.member),
+        badge: BP(highlightedItem.member),
+        currency: billing.summary.currency,
+        isMe: highlightedItem.member.team_role?.user_id === e.currentMemberId,
+        member: highlightedItem.member,
+        onRemoveMemberOrChangeMemberPermission: e => {
+          highlightedItem.onRemoveMemberOrChangeMemberPermission({
+            member: highlightedItem.member,
+            newLevel: e
+          });
+        },
+        onRemoveUserFromTeam: () => {
+          b([highlightedItem.member]);
+        },
+        planType: FOrganizationLevelType.TEAM,
+        renewalTerm: d,
+        team: e.team
+      })
+    })]
+  });
+}, "Pro Team Members Table");
+function e3({
+  initialSortState: e,
+  items: t,
+  columns: a,
+  render: n
+}) {
+  let [s, i, r] = _$$z2(e, t, a);
+  return n(s, i, r);
+}
+function e8(e) {
+  let [t, a] = function () {
+    let e = _6();
+    let [t, a] = useState({
+      ...Ok,
+      ...("teamAdminConsole" === e.view ? e.membersTabInitialFilters : void 0)
+    });
+    return [t, a];
+  }();
+  let [n, s] = useState("");
+  let [l, o] = useState(Vc.FILTER);
+  let d = TG(e.team.id);
+  let c = If("migrate_team_data_to_livegraph", wv.GROUP_1);
+  let _ = MF({
+    oldValue: Qw.useMemoizedLoaded(e.membersList),
+    newValue: d,
+    label: _$$A2.TeamMembersTable.teamMembersByTeamId,
+    enableFullRead: c,
+    comparator: ts,
+    contextArgs: {
+      teamId: e.team.id
+    },
+    maxReports: 5
+  });
+  var u = {};
+  if ("loading" === _.status) return jsx(kt, {});
+  "errors" === _.status ? e.dispatch(_$$F2.enqueue({
+    message: _$$t("file_browser.file_browser_actions.team_member_fetch_error"),
+    error: !0
+  })) : u = _.data || {};
+  let m = _$$A().subtract(3, "days");
+  let p = _$$A().subtract(30, "days");
+  let x = _$$A().subtract(3, "months");
+  let b = Object.values(u);
+  n && (d2.set(Object.values(u)), b = d2.search(n));
+  b = b.filter(e => {
+    if (t.lastActiveFilter) {
+      let a = e.last_active ? _$$A(1e3 * e.last_active) : 0;
+      if (t.lastActiveFilter === UW.MORE_SEVEN_DAYS && a > m || t.lastActiveFilter === UW.MORE_THIRTY_DAYS && a > p || t.lastActiveFilter === UW.MORE_THREE_MONTHS && a > x) return !1;
+    }
+    return !!b_(e, t.seatTypeFilter) && (!t.billingIntervalFilter || !("current_seat_billing_interval" in e) || e.current_seat_billing_interval === t.billingIntervalFilter);
+  });
+  let v = {
+    lastActive: {
+      [UW.MORE_SEVEN_DAYS]: 0,
+      [UW.MORE_THIRTY_DAYS]: 0,
+      [UW.MORE_THREE_MONTHS]: 0
+    },
+    ...sH(),
+    billingInterval: {
+      [FBillingPeriodType.MONTH]: 0,
+      [FBillingPeriodType.YEAR]: 0
+    }
+  };
+  Object.values(b).forEach(e => {
+    let t = e.last_active ? _$$A(1e3 * e.last_active) : 0;
+    if (t < x && (v.lastActive[UW.MORE_THREE_MONTHS] += 1), t < p && (v.lastActive[UW.MORE_THIRTY_DAYS] += 1), t < m && (v.lastActive[UW.MORE_SEVEN_DAYS] += 1), Ji(e, v), "current_seat_billing_interval" in e && e.current_seat_billing_interval && v.billingInterval) {
+      let t = e.current_seat_billing_interval;
+      v.billingInterval[t] ??= 0;
+      v.billingInterval[t] += 1;
+    }
+  });
+  return jsx("div", {
+    className: _$$s.flex.flexColumn.$,
+    children: jsx(e5, {
+      billing: e.billing,
+      currentMemberId: e.currentMemberId,
+      dispatch: e.dispatch,
+      dropdownShown: e.dropdownShown,
+      filterCounts: v,
+      filteredMembers: b,
+      filters: t,
+      forceHidePendingSeats: !c,
+      lastFilterAction: l,
+      onFilter: e => {
+        a({
+          ...t,
+          ...e
+        });
+        o(Vc.FILTER);
+      },
+      onSearch: e => {
+        s(e);
+        o(Vc.SEARCH);
+      },
+      searchQuery: n,
+      team: e.team
+    })
+  });
+}
+let e6 = ["user", "user_id", "team_id"];
+let e7 = ["id", "name", "img_url", "ecc_upgrading_locked"];
+let e9 = ["team_id", "pending_email", "invite"];
+let te = ["last_design_active", "last_whiteboard_active", "edit_roles", "view_roles", "seat_type", "edu_edit_access_allowed"];
+let tt = ["whiteboard_paid_status", "design_paid_status", "drafts_folder_id", "show_figjam_user_onboarding", "created_at", "updated_at", "_internal_only_written_by_backfill", "has_shown_figjam_admin_onboarding"];
+let ta = ["upgrade_method", "billable_product_key", "prev_billable_product_key", "seat_id", "_internal_only_written_by_backfill", "team_user_id", "downgrade_actor_id", "downgrade_reason", "downgraded_at", "account_type_request_id", "entry_point", "batch_timestamp", "updated_at", "resource_name"];
+function tn(e, t, a, n, s) {
+  if ("created_at" === n || "assigned_at" === n || "updated_at" === n) {
+    let i = _$$tb(V()(t, n))?.getTime();
+    let r = _$$tb(V()(a, n))?.getTime();
+    if (i === r) return;
+    i && r || e.push({
+      newValue: r,
+      oldValue: i,
+      severity: "high",
+      path: s
+    });
+    Math.floor(r / 1e3) !== Math.floor(i / 1e3) && e.push({
+      newValue: r,
+      oldValue: i,
+      severity: "high",
+      path: s
+    });
+    return;
+  }
+  let i = V()(t, n);
+  let r = V()(a, n);
+  (null !== i || null !== r) && (void 0 !== i || void 0 !== r) && (null !== i || void 0 !== r) && (void 0 !== i || null !== r) && i !== r && e.push({
+    newValue: r,
+    oldValue: i,
+    severity: "high",
+    path: s
+  });
+}
+function ts(e, t) {
+  let a = [];
+  Object.entries(e).forEach(([e, n]) => {
+    let s = t[e];
+    if (!s) {
+      a.push({
+        newValue: n,
+        oldValue: s,
+        severity: "high",
+        path: [e]
+      });
+      return;
+    }
+    let i = n.team_role?.pending && !n.team_user;
+    Object.entries(n).forEach(([t, r]) => {
+      if (!(i && e7.includes(t)) && !te.includes(t)) {
+        if ("team_user" === t && n.team_user) {
+          let i = n.team_user;
+          let r = s.team_user;
+          Object.entries(i).forEach(([n, s]) => {
+            if (!tt.includes(n)) {
+              if ("active_seat_type" === n) {
+                let s = i?.active_seat_type;
+                let l = r?.active_seat_type;
+                if (s !== l && !s != !l) {
+                  if (!s || !l) {
+                    a.push({
+                      newValue: l,
+                      oldValue: s,
+                      severity: "high",
+                      path: [e, t, n]
+                    });
+                    return;
+                  }
+                  Object.entries(s).forEach(([t, n]) => {
+                    tn(a, s, l, "key", [e, "team_user", "active_seat_type", t]);
+                  });
+                }
+              } else tn(a, i, r, n, [e, "team_user", n]);
+            }
+          });
+        } else if ("team_role" === t && n.team_role) {
+          let t = n.team_role;
+          let i = s.team_role;
+          Object.entries(t).forEach(([s, r]) => {
+            if (!(n.team_role.pending && e6.includes(s) || e9.includes(s))) {
+              if ("user" === s) {
+                let n = t.user;
+                let s = i?.user;
+                Object.entries(n).forEach(([t, i]) => {
+                  tn(a, n, s, t, [e, "team_role", "user"]);
+                });
+              } else tn(a, t, i, s, [e, "team_role", s]);
+            }
+          });
+        } else if ("design_editor_upgrade" === t || "whiteboard_editor_upgrade" === t) {
+          let i = V()(n, t);
+          let r = V()(s, t);
+          if (i === r) return;
+          if (!i || !r) {
+            if (null === i && null === r || void 0 === i && void 0 === r || null === i && void 0 === r || void 0 === i && null === r) return;
+            a.push({
+              newValue: r,
+              oldValue: i,
+              severity: "high",
+              path: [e, t]
+            });
+            return;
+          }
+          Object.entries(i).forEach(([n, s]) => {
+            ta.includes(n) || tn(a, i, r, n, [e, t, n]);
+          });
+        } else tn(a, n, s, t, [e, t]);
+      }
+    });
+  });
+  Object.entries(t).forEach(([t, n]) => {
+    let s = e[t];
+    s || a.push({
+      newValue: s,
+      oldValue: n,
+      severity: "high",
+      path: [t]
+    });
+  });
+  return a;
+}
+let tF = "settings_table--link--mol4m";
+let tq = "settings_table--boldText--wLdS9 settings_table--modalText--7TuKM";
+let t$ = {
+  aiFeaturesToggle: "ai-features-setting-toggle",
+  aiDataSharingToggle: "ai-data-sharing-toggle",
+  aiFeaturesEnableButton: "ai-features-enable-button"
+};
+function tB(e) {
+  return e ? _$$A(e).format("MMMM D, YYYY") : "";
+}
+function tG(e) {
+  var t;
+  let {
+    team,
+    settingsData
+  } = e;
+  let s = _$$R();
+  let r = wA();
+  let d = e.billing.summary.annual_subscription;
+  let c = e.billing.summary.monthly_subscription;
+  let _ = e.billing.summary.shipping_address;
+  let m = !!e.billing.summary.has_billing_address;
+  let p = !!settingsData?.studentTeamAt && !settingsData?.isAiDataSharingEnabled;
+  t = S2();
+  let g = N_.reduce((e, a) => {
+    switch (a) {
+      case ud.EXPERT:
+        return e || t.unwrapOr(null)?.upgradeApprovalSettingsExpert === zRx.INSTANT_APPROVAL;
+      case ud.DEVELOPER:
+        return e || t.unwrapOr(null)?.upgradeApprovalSettingsDeveloper === zRx.INSTANT_APPROVAL;
+      case ud.CONTENT:
+        return e || _$$oA(t.unwrapOr(null)?.upgradeApprovalSettingsContent) === zRx.INSTANT_APPROVAL;
+      case ud.COLLABORATOR:
+        return e || t.unwrapOr(null)?.upgradeApprovalSettingsCollaborator === zRx.INSTANT_APPROVAL;
+      default:
+        xb(a);
+    }
+  }, !1);
+  _$$S(UC, () => {
+    r(_$$to({
+      type: _$$q,
+      data: {
+        planType: fm.TEAM,
+        planId: e.team.id
+      }
+    }));
+  });
+  _$$h(() => {
+    e.billing.summary.show_vat_gst && _$$S(mL, () => {
+      Hq({
+        team: e.team,
+        dispatch: r
+      });
+    });
+  });
+  let b = async e => {
+    try {
+      await _$$$.updateAiFeaturesDisabled({
+        teamId: team.id,
+        aiFeaturesDisabled: e
+      });
+      r(yJ({
+        team: {
+          id: team.id,
+          ai_features_disabled: e
+        },
+        userInitiated: !0
+      }));
+      let t = e ? _$$t("admin_settings.ai.disable_success") : _$$t("admin_settings.ai.enable_success");
+      r(_$$s3.flash(t));
+    } catch {
+      r(_$$s3.error(_$$t("file_browser.file_browser_actions.team_update_error")));
+    }
+  };
+  let v = async e => {
+    try {
+      await _$$$.updateAiDataSharing({
+        teamId: team.id,
+        enabled: e
+      });
+      _$$sx("ai_data_sharing_toggled", {
+        team_id: team.id,
+        enabled: e
+      });
+      r(_$$s3.flash(_$$t("admin_settings.ai.data_sharing.update_success")));
+    } catch (e) {
+      r(_$$s3.error(_$$t("admin_settings.ai.data_sharing.update_error")));
+    }
+  };
+  let j = getFeatureFlags().ai_ga;
+  let y = [];
+  j ? settingsData.aiFeaturesDisabledAt && y.push(jsx(_$$Y, {
+    padding: {
+      top: 8
+    },
+    children: jsx(_$$p2, {
+      onEnable: () => {
+        b(!1);
+      },
+      planId: team.id,
+      planType: FOrganizationLevelType.TEAM,
+      testId: t$.aiFeaturesEnableButton
+    })
+  })) : y.push(jsx(T_, {
+    label: _$$t("admin_settings.ai.features_toggle.label"),
+    description: jsx("p", {
+      children: _$$tx("admin_settings.ai.features_toggle.description.team", {
+        learnMoreLink: jsx(CY, {
+          href: _$$d3.aiFeatures,
+          target: "_blank",
+          trusted: !0,
+          children: _$$tx("general.learn_more")
+        })
+      })
+    }),
+    isActive: !settingsData.aiFeaturesDisabledAt,
+    testId: t$.aiFeaturesToggle,
+    onToggle: e => {
+      b(!e);
+    }
+  }, _$$t("admin_settings.ai.features_toggle.label")));
+  y.push(jsx(T_, {
+    label: _$$t("admin_settings.ai.data_sharing.label"),
+    description: jsx("p", {
+      children: _$$tx("admin_settings.ai.data_sharing.description.team", {
+        learnMoreLink: jsx(CY, {
+          href: _$$d3.aiDataSharing,
+          target: "_blank",
+          trusted: !0,
+          children: _$$tx("general.learn_more")
+        })
+      })
+    }),
+    isActive: settingsData.isAiDataSharingEnabled,
+    testId: t$.aiDataSharingToggle,
+    onToggle: v,
+    disabled: p,
+    tooltipText: p ? _$$t("admin_settings.ai.data_sharing.disabled_for_student_teams") : void 0
+  }, _$$t("admin_settings.ai.data_sharing.label")));
+  return jsx(Fragment, {
+    children: jsx(fu, {
+      name: "Team Admin Console Settings Table",
+      properties: {
+        teamId: e.team.id
+      },
+      children: jsxs("div", {
+        className: Dg,
+        "data-testid": "admin-console-settings-table",
+        children: [e.team.pro_team && jsx(Kz, {
+          title: _$$t("settings_table.team_profile"),
+          settings: tV({
+            team: e.team,
+            teamName: e.team.name,
+            legalName: e.team.legal_name ?? "",
+            canSeeBillingAddressExp: m,
+            dispatch: r
+          })
+        }), jsx(Kz, {
+          title: _$$t("settings_table.plan"),
+          settings: tz({
+            teamBillingSummary: e.billing.summary,
+            dispatch: r,
+            team: e.team,
+            canSeeBillingAddressExp: m
+          })
+        }), e.team.pro_team && jsx(Kz, {
+          title: _$$t("plan_settings.billing_section_header"),
+          description: tW(c, d),
+          settings: tH({
+            annualSub: d,
+            dispatch: r,
+            monthlySub: c,
+            team: e.team,
+            showSeatUpgradeDigests: g,
+            billingContact: e.billing.summary.billing_contact,
+            currency: e.billing.summary.currency,
+            showVatGst: e.billing.summary.show_vat_gst,
+            shippingAddress: _,
+            canSeeBillingAddressExp: m,
+            isBillingRemodelEnabled: s
+          })
+        }), OI(e.team) && jsx(Kz, {
+          title: _$$t("settings_table.resources"),
+          settings: [jsx(T_, {
+            label: _$$t("settings_tab.ui_kits_toggle_label"),
+            description: _$$t("settings_tab.ui_kits_toggle_description"),
+            isActive: !e.team.figma_provided_libraries_disabled,
+            testId: "figma-provided-libraries-setting-toggle",
+            onToggle: t => {
+              r(_$$tk({
+                figma_provided_libraries_disabled: !t,
+                teamId: e.team.id
+              }));
+              az.trackDefinedEvent("preset_libraries.team_status_changed", {
+                userId: e.userId,
+                teamId: e.team.id,
+                isEnabled: t
+              });
+            }
+          }, "figma_libraries")]
+        }), jsx(Kz, {
+          title: _$$t("admin_settings.ai.section_title"),
+          badge: j ? void 0 : jsxs(Fragment, {
+            children: [jsx(Ex, {
+              color: zE.BRAND,
+              text: _$$t("general.beta")
+            }), jsx(_$$B2, {
+              "data-tooltip-type": Ib.TEXT,
+              "data-tooltip": _$$t("admin_settings.ai.section_title.free_in_beta"),
+              "data-tooltip-timeout-delay": 50
+            })]
+          }),
+          settings: y
+        })]
+      })
+    })
+  });
+}
+let tz = ({
+  teamBillingSummary: e,
+  dispatch: t,
+  team: a,
+  canSeeBillingAddressExp: n
+}) => {
+  let {
+    monthly_subscription,
+    annual_subscription,
+    currency,
+    show_vat_gst,
+    plan_canceled
+  } = e;
+  let c = a.id;
+  let _ = [];
+  let u = WQ(a);
+  let m = Ti({
+    planId: c,
+    planType: FOrganizationLevelType.TEAM
+  });
+  if (!monthly_subscription && !annual_subscription) {
+    let e = jsx("span", {
+      children: _$$tx("settings_table.upgrade_to_the_professional_plan_or_to_an_organization_and_get_access_to_shared_team_libraries_advanced_security_features_and_more", {
+        more: jsx("a", {
+          className: tF,
+          href: "/pricing",
+          onClick: e => {
+            e.stopPropagation();
+          },
+          target: "_blank",
+          children: _$$tx("settings_table.more")
+        })
+      })
+    });
+    if (u) {
+      let t = new Date(a.grace_period_end);
+      e = jsx("span", {
+        children: _$$tx("settings_table.to_keep_using_paid_features_like_unlimited_team_figma_files_projects_and_team_libraries_after_your_free_professional_plan_expires_on_date_purchase_the_professional_plan_for_your_team", {
+          date: t
+        })
+      });
+    }
+    _.push(jsx(x8, {
+      label: u ? _$$t("settings_table.purchase_professional_plan") : _$$t("settings_table.upgrade_your_plan"),
+      onClick: () => {
+        u ? tJ(t, c) : tK(t, c, _$$b4.BILLING_SETTINGS);
+      },
+      description: e
+    }));
+    return _;
+  }
+  if (_.push(jsx(x8, {
+    label: _$$t("settings_table.upgrade_your_plan"),
+    description: jsx("span", {
+      children: _$$tx("settings_table.consolidate_your_teams_access_shared_libraries_enable_advanced_security_features_and_more", {
+        more: jsx("a", {
+          className: tF,
+          href: "/organization",
+          target: "_blank",
+          onClick: e => e.stopPropagation(),
+          children: _$$tx("settings_table.more")
+        })
+      })
+    }),
+    onClick: () => {
+      t(Bq({
+        openInNewTab: !0,
+        upsellSource: _$$b4.TEAM_SETTINGS_VIEW
+      }));
+    }
+  })), plan_canceled || !monthly_subscription) {
+    _.push(jsx(x8, {
+      label: _$$t("settings_table.reactivate_plan"),
+      description: _$$t("settings_table.reactivate_your_subscription_of_professional"),
+      onClick: () => {
+        C8({
+          team: a,
+          dispatch: t,
+          cancelling: !0,
+          monthlySub: monthly_subscription,
+          annualSub: annual_subscription,
+          currency,
+          canSeeBillingAddressExp: n
+        });
+      }
+    }));
+    return _;
+  }
+  let p = _$$l({
+    teamBillingSummary: e,
+    hasOpenInvoice: !!m.data?.length,
+    currentDate: _$$A().toDate()
+  });
+  switch (p?.id) {
+    case _$$m.ADD_ANNUAL_PLAN:
+      _.push(jsx(x8, {
+        label: _$$t("settings_table.add_an_annual_plan"),
+        description: _$$t("settings_table.convert_all_monthly_seats"),
+        onClick: () => {
+          p.perform({
+            dispatch: t
+          });
+        }
+      }));
+      break;
+    case _$$m.TRIAL_READ_ONLY:
+      _.push(jsx(bX, {
+        label: _$$t("settings_table.add_an_annual_plan"),
+        description: _$$t("settings_table.your_annual_plan_starts", {
+          date: new Date(p.trialEnd)
+        })
+      }));
+      break;
+    case _$$m.ADJUST_COTERM_SEATS:
+    case _$$m.ADJUST_RENEWAL_SEATS:
+      _.push(jsx(x8, {
+        testId: "settings-table-add-seats-setting",
+        label: _$$t("settings_table.add_additional_seats"),
+        description: _$$t("settings_table.add_seats_to_your_annual_plan"),
+        onClick: () => {
+          p.perform({
+            dispatch: t
+          });
+        }
+      }));
+  }
+  _.push(jsx(x8, {
+    label: _$$t("settings_table.cancel_plan"),
+    description: _$$t("settings_table.cancel_your_subscription_of_professional"),
+    onClick: () => {
+      t(_$$to({
+        type: _$$v3,
+        data: {
+          teamId: c
+        }
+      }));
+    }
+  }));
+  n || _.push(jsx(x8, {
+    label: _$$t("settings_table.change_payment_method"),
+    description: _$$t("settings_table.change_and_update_the_payment_method_on_file"),
+    onClick: () => C8({
+      team: a,
+      dispatch: t,
+      cancelling: !1,
+      monthlySub: monthly_subscription,
+      annualSub: annual_subscription,
+      currency,
+      canSeeBillingAddressExp: n
+    })
+  }));
+  show_vat_gst && !n && _.push(jsx(x8, {
+    label: _$$t("settings_table.vat_gst"),
+    description: _$$t("settings_table.change_vat_gst_id"),
+    onClick: () => Hq({
+      team: a,
+      dispatch: t
+    })
+  }));
+  return _;
+};
+let tV = ({
+  team: e,
+  teamName: t,
+  legalName: a,
+  canSeeBillingAddressExp: n,
+  dispatch: s
+}) => {
+  let r = [];
+  r.push(jsx(x8, {
+    label: n ? _$$t("settings_table.display_name.label") : _$$t("settings_table.names"),
+    description: n ? _$$t("settings_table.change_display_name") : _$$t("settings_table.change_names"),
+    onClick: () => {
+      s(_$$to({
+        type: _$$L,
+        data: {
+          modalTitle: n ? _$$t("settings_table.update_team_profile") : _$$t("settings_table.edit_names"),
+          displayName: t,
+          legalName: a,
+          updateNameImmediately: !0,
+          team: e,
+          canSeeBillingAddressExp: n
+        }
+      }));
+    }
+  }));
+  return r;
+};
+let tW = (e, t) => {
+  let a = null != e && null != e.current_period_end && null == e.canceled_at;
+  let n = null != t && null != t.current_period_end && null == t.canceled_at;
+  let s = null != e && e.canceled_at;
+  let r = null != t && t.canceled_at;
+  let l = null;
+  if (n && a) {
+    let a = tB(e?.current_period_end);
+    let n = tB(t?.current_period_end);
+    l = _$$tx("team_view.settings_table.multiple_subscription_renewal", {
+      monthly_billing_date: jsx("span", {
+        className: tq,
+        children: _$$tx("team_view.settings_table.billing_date", {
+          billing_date: a
+        })
+      }),
+      annual_billing_date: jsx("span", {
+        className: tq,
+        children: _$$tx("team_view.settings_table.billing_date", {
+          billing_date: n
+        })
+      })
+    });
+  } else if (n) {
+    let e = tB(t.current_period_end);
+    l = _$$tx("team_view.settings_table.single_subscription_renewal_annual", {
+      billing_date: jsx("span", {
+        className: tq,
+        children: _$$tx("team_view.settings_table.billing_date", {
+          billing_date: e
+        })
+      })
+    });
+  } else if (a) {
+    let t = tB(e.current_period_end);
+    l = _$$tx("team_view.settings_table.single_subscription_renewal_monthly", {
+      billing_date: jsx("span", {
+        className: tq,
+        children: _$$tx("team_view.settings_table.billing_date", {
+          billing_date: t
+        })
+      })
+    });
+  } else if (r && s) l = _$$tx("team_view.settings_table.renewal_information_canceled_team_annual_and_monthly");else if (r) l = _$$tx("team_view.settings_table.renewal_information_canceled_team_annual");else if (s) l = _$$tx("team_view.settings_table.renewal_information_canceled_team_monthly");else if (null != e || null != t) {
+    x1("billing", "Ambiguous pro team renewal status", {
+      monthly_period_end: e?.current_period_end,
+      monthly_canceled_at: e?.canceled_at,
+      annual_period_end: t?.current_period_end,
+      annual_canceled_at: t?.canceled_at
+    });
+    return jsx(Fragment, {});
+  }
+  return jsx("div", {
+    className: "settings_table--sectionDescription--jmGd-",
+    children: jsx("span", {
+      children: l
+    })
+  });
+};
+let tH = ({
+  monthlySub: e,
+  annualSub: t,
+  dispatch: a,
+  team: n,
+  billingContact: s,
+  currency: r,
+  showVatGst: l,
+  shippingAddress: o,
+  canSeeBillingAddressExp: d,
+  isBillingRemodelEnabled: c,
+  showSeatUpgradeDigests: _
+}) => {
+  let u = [];
+  if (d && u.push(jsx(x8, {
+    label: _$$t("team_view.settings_table.update_payment_details.payment_details"),
+    description: _$$t("team_view.settings_table.update_payment_details.update_payment_method"),
+    onClick: () => C8({
+      team: n,
+      dispatch: a,
+      cancelling: !1,
+      monthlySub: e,
+      annualSub: t,
+      currency: r,
+      canSeeBillingAddressExp: d
+    })
+  })), d && u.push(jsx(x8, {
+    label: _$$t("team_view.settings_table.update_invoice_details.invoice_details"),
+    description: _$$t("team_view.settings_table.update_invoice_details.update_invoice_details"),
+    onClick: () => a(_$$to({
+      type: _$$u,
+      data: {
+        teamId: n.id,
+        shippingAddress: o || EB(),
+        legalCompanyName: n.legal_name || "",
+        canSeeBillingAddressExp: d
+      }
+    }))
+  })), l && d && u.push(jsx(x8, {
+    label: _$$t("settings_table.vat_gst"),
+    description: _$$t("settings_table.change_vat_gst_id"),
+    onClick: () => Hq({
+      team: n,
+      dispatch: a
+    })
+  })), c) {
+    let n = e && !t || e && t ? IX.MONTH : IX.YEAR;
+    u.push(jsx(x8, {
+      label: _$$t("plan_settings.auto_approval_settings"),
+      description: _$$t("plan_settings.auto_approval_settings_description"),
+      onClick: _$$S2({
+        dispatch: a,
+        currency: r,
+        renewalTerm: n
+      })
+    }, "auto-approval-settings"));
+  } else u.push(jsx(x8, {
+    label: _$$t("plan_settings.default_role"),
+    description: _$$tx("plan_settings.default_role_description", {
+      plan_type: _$$t("settings_table.team")
+    }),
+    onClick: () => {
+      a(_$$to({
+        type: _$$h2,
+        data: {
+          planType: fm.TEAM,
+          planId: n.id
+        }
+      }));
+    }
+  }, "default-role"));
+  u.push(jsx(x8, {
+    label: _$$t("plan_settings.seat_upgrade_digests"),
+    description: _$$t("plan_settings.seat_upgrade_digests_description"),
+    disabled: !_,
+    currentValue: _ ? null : jsx(_$$I, {}),
+    onClick: () => {
+      a(_$$to({
+        type: _$$q,
+        data: {
+          planType: fm.TEAM,
+          planId: n.id
+        }
+      }));
+    }
+  }));
+  u.push(jsx(x8, {
+    label: _$$t("settings_table.billing_contacts"),
+    description: _$$t("settings_table.billing_contacts_description"),
+    onClick: () => {
+      tY(a, n, s || "");
+    }
+  }));
+  return u;
+};
+let tY = (e, t, a) => {
+  let n = async a => await BO({
+    email: a,
+    dispatch: e,
+    teamId: t.id
+  });
+  e(_$$to({
+    type: _$$E3,
+    data: {
+      currentContacts: a,
+      onSubmit: n,
+      isOrg: !1
+    }
+  }));
+};
+let tJ = (e, t) => {
+  e(WX({
+    teamId: t,
+    openInNewTab: !1,
+    selectedView: {
+      view: "team",
+      teamId: t
+    }
+  }));
+};
+let tK = (e, t, a) => {
+  e(_$$to({
+    type: _$$V,
+    data: {
+      teamId: t,
+      upsellSource: a,
+      openCheckoutInNewTab: !0
+    }
+  }));
+};
+function an() {
+  let {
+    show,
+    isShowing,
+    complete
+  } = _$$e3({
+    overlay: iq7,
+    priority: _$$N2.SECONDARY_MODAL
+  });
+  _$$h(() => {
+    show();
+  });
+  return jsx(_$$X, {
+    isShowing,
+    position: _$$Q.CENTER,
+    trackingContextName: "TeamAdminAuthorityOverlay",
+    title: _$$tx("team_admin_authority_overlay.title"),
+    description: _$$tx("team_admin_authority_overlay.description"),
+    primaryCta: {
+      label: _$$tx("general.got_it"),
+      ctaTrackingDescriptor: _$$c.GOT_IT,
+      type: "button",
+      onClick: complete
+    },
+    onClose: complete
+  });
+}
+var al = ar;
+var ad = ao;
+function ah({
+  selectedTab: e,
+  teamId: t,
+  secondaryTabs: a,
+  rightContent: n,
+  billing: s
+}) {
+  let l = _$$R();
+  let o = No();
+  let d = YQ(o).unwrapOr(!1);
+  let c = _$$v2(s?.summary);
+  let _ = _$$s2();
+  let u = useCallback(() => _({
+    teamId: t,
+    initialView: 0,
+    canAdmin: !0
+  }), [t, _]);
+  return jsxs("div", {
+    "data-testid": "team-admin-console-header",
+    children: [jsx(_$$K, {
+      title: e === Iv.MEMBERS ? _$$tx("team_admin.members_tab.header") : pe(e),
+      rightActions: jsxs(Fragment, {
+        children: [e === Iv.MEMBERS && jsxs(_$$Y, {
+          width: "hug-contents",
+          direction: "horizontal",
+          spacing: 8,
+          children: [l && !d && jsxs(Fragment, {
+            children: [jsx(yE, {
+              planParentId: t,
+              planType: FOrganizationLevelType.TEAM,
+              isActiveAnnualPlan: c
+            }), jsx("div", {
+              className: _$$s.mr8.$
+            })]
+          }), jsx(_$$V2, {
+            icon: "plus-32",
+            variant: "primary",
+            onClick: u,
+            trackingProperties: {
+              action: "Add members to team"
+            },
+            children: jsx(_$$E, {
+              children: _$$tx("team_admin.members_tab.invite_users")
+            })
+          })]
+        }), n]
+      })
+    }), a && jsx("div", {
+      className: "team_admin_console_header--secondaryTabs--FRPCy",
+      children: a
+    })]
+  });
+}
+function ay(e) {
+  let t = _$$R3();
+  return jsx(_$$Q2, {
+    minContentWidth: 1024,
+    children: jsx("div", {
+      className: _$$s.pb36.$,
+      children: jsx(_$$S4, {
+        invoices: e.planInvoices,
+        adjustAnnualSeatsAction: e.adjustAnnualSeatsAction,
+        currentDate: t,
+        stickyContent: jsx(Fragment, {})
+      })
+    })
+  });
+}
+function aw(e) {
+  let t = bQ({
+    planType: FOrganizationLevelType.TEAM,
+    planId: e.teamId
+  });
+  return "loaded" !== t.status || e.isLoading ? jsx("div", {
+    className: _$$s.flex.alignCenter.justifyCenter.p24.$,
+    "data-testid": "invoices-tab-loading",
+    children: jsx(_$$k3, {})
+  }) : jsx(ay, {
+    planInvoices: t.data,
+    billingSummary: e.billingSummary,
+    adjustAnnualSeatsAction: e.adjustAnnualSeatsAction
+  });
+}
+function ak(e) {
+  return jsx(fu, {
+    name: _$$e4.BILLING_INVOICES_TAB,
+    properties: {
+      teamId: e.teamId
+    },
+    children: jsx(aw, {
+      ...e
+    })
+  });
+}
+function aA(e) {
+  let t = wA();
+  let a = bQ({
+    planType: FOrganizationLevelType.TEAM,
+    planId: e.team.id
+  });
+  let n = _$$k4();
+  let s = C3();
+  let o = vt();
+  let d = e.billingSummary.annual_subscription;
+  let c = e.billingSummary.annual_subscription?.trial_end ? mt(e.billingSummary.annual_subscription.trial_end) : null;
+  let _ = _$$v2(e.billingSummary);
+  let u = n && _ && o();
+  let m = hY(e.team.id, FOrganizationLevelType.TEAM);
+  let p = ww(u ? {
+    teamId: e.team.id
+  } : null);
+  let g = useMemo(() => u && "disabled" !== p.status ? p.transform(e => ({
+    split: "billing_interval",
+    data: e
+  })) : m.transform(e => ({
+    split: "none",
+    data: e
+  })), [u, m, p]);
+  let h = useMemo(() => u && "disabled" !== p.status ? p.transform(e => {
+    let t = {
+      available: 0,
+      total: 0,
+      assigned: 0
+    };
+    N_.forEach(a => {
+      t.available += e.year[a]?.available ?? 0;
+      t.assigned += e.year[a]?.assigned ?? 0;
+      t.total += e.year[a]?.total ?? 0;
+    });
+    return t;
+  }) : Qw.loaded(null), [u, p]);
+  let x = useCallback(() => {
+    e.setActiveTab(pu.INVOICES);
+  }, [e.setActiveTab]);
+  let b = useCallback(t => {
+    e.setActiveTab(pu.INVOICES, {
+      planInvoiceId: t
+    });
+  }, [e.setActiveTab]);
+  let v = useMemo(() => _ && n && s(_) ? () => {
+    t(sf({
+      view: "teamAdminConsole",
+      teamId: e.team.id,
+      teamAdminConsoleViewTab: Iv.MEMBERS,
+      membersTabInitialFilters: {
+        billingIntervalFilter: FBillingPeriodType.YEAR
+      }
+    }));
+  } : null, [_, t, s, e.team.id, n]);
+  let f = useCallback(() => {
+    if (!n && _) return null;
+    t(sf({
+      view: "teamAdminConsole",
+      teamId: e.team.id,
+      teamAdminConsoleViewTab: Iv.MEMBERS,
+      membersTabInitialFilters: s(_) ? {
+        billingIntervalFilter: FBillingPeriodType.MONTH
+      } : void 0
+    }));
+  }, [t, e.team.id, n, _, s]);
+  let j = useCallback(() => {
+    t(sf({
+      view: "teamAdminConsole",
+      teamId: e.team.id,
+      teamAdminConsoleViewTab: Iv.MEMBERS
+    }));
+  }, [t, e.team.id]);
+  let y = useCallback(() => {
+    C8({
+      team: e.team,
+      dispatch: t,
+      cancelling: !0,
+      monthlySub: e.billingSummary.monthly_subscription,
+      annualSub: e.billingSummary.annual_subscription,
+      canSeeBillingAddressExp: e.billingSummary.has_billing_address
+    });
+  }, [e.team, t, e.billingSummary]);
+  let w = G6(e.team.id);
+  let k = !!w.data?.show && w.data.inTrial;
+  let E = !!w.data?.show && w.data.nextRenewalDate;
+  let C = !!w.data?.show && w.data.renewalConfirmed;
+  let N = useMemo(() => w.data?.show && E && j2({
+    shouldAutoRenew: !0,
+    onTrial: k,
+    hasNonAdjustableRenewalSeats: !1
+  }) ? () => {
+    t(_$$to({
+      type: vn,
+      data: {
+        renewalDate: E
+      }
+    }));
+  } : null, [w.data?.show, E, k, t]);
+  return "loaded" !== a.status || "loaded" !== g.status || "loaded" !== h.status || "loading" === w.status || e.isLoading ? jsx("div", {
+    className: _$$s.flex.alignCenter.justifyCenter.p24.$,
+    "data-testid": "billing-overview-tab-loading",
+    children: jsx(_$$k3, {})
+  }) : jsx(_$$i2, {
+    adjustAnnualSeatsAction: e.adjustAnnualSeatsAction,
+    adjustRenewalSeats: N,
+    annualSeats: h.data,
+    contractStartBanner: !e.expiresAt && jsx(_$$E4, {
+      team: e.team,
+      billingSummary: e.billingSummary
+    }),
+    invoices: a.data,
+    isAnnualProPlan: !!_,
+    isELA: !1,
+    manageAnnualSeats: v,
+    manageMonthlySeats: f,
+    manageSeatCounts: j,
+    planCanceledProps: e.expiresAt ? {
+      expiresAt: e.expiresAt,
+      onReactivateClick: y
+    } : null,
+    planCurrency: e.billingSummary.currency,
+    planId: e.team.id,
+    planStarting: !!(d && c),
+    planType: FOrganizationLevelType.TEAM,
+    renewalConfirmed: C,
+    seatCountsWithSplit: g.data,
+    shouldAutoRenew: !0,
+    showPlanSubscriptionCard: !!d,
+    viewAllInvoices: x,
+    viewInvoice: b
+  });
+}
+function aR(e) {
+  return jsx(fu, {
+    name: _$$e4.BILLING_OVERVIEW_TAB,
+    properties: {
+      teamId: e.team.id
+    },
+    children: jsx(aA, {
+      ...e
+    })
+  });
+}
+function aO(e) {
+  let t = wA();
+  let a = _$$R3();
+  let n = useCallback((a, n) => {
+    t(sf({
+      view: "teamAdminConsole",
+      teamId: e.team.id,
+      teamAdminConsoleViewTab: Iv.BILLING,
+      teamAdminConsoleViewSecondaryTab: a,
+      ...(n?.planInvoiceId && {
+        initialHighlightedInvoiceId: n.planInvoiceId
+      })
+    }));
+  }, [t, e.team.id]);
+  let [s, o, d] = _$$t2.useManagedTabs({
+    overview: !0,
+    invoices: !0
+  }, e.activeTab, n);
+  let c = bQ({
+    planType: FOrganizationLevelType.TEAM,
+    planId: e.team.id
+  }, {
+    revalidateOnMount: !0
+  });
+  let _ = useMemo(() => function (e, t) {
+    if (!e.plan_canceled) return null;
+    let a = [e.annual_subscription, e.monthly_subscription].map(e => e?.canceled_at ? e?.current_period_end : null).filter(isNotNullish);
+    let n = a.filter(e => _$$A(e).isAfter(t));
+    let s = ad()(n, e => _$$A(e).valueOf());
+    if (s) return _$$A(s).toDate();
+    let i = a.filter(e => _$$A(e).isBefore(t));
+    let r = al()(i, e => _$$A(e).valueOf());
+    return r ? _$$A(r).toDate() : null;
+  }(e.billingSummary, a), [e.billingSummary, a]);
+  let u = useMemo(() => e.isBillingSummaryLoading || "loaded" !== c.status ? null : _$$l({
+    teamBillingSummary: e.billingSummary,
+    hasOpenInvoice: !!c.data.find(e => e.state === qH.OPEN),
+    currentDate: a
+  }), [a, c.data, c.status, e.billingSummary, e.isBillingSummaryLoading]);
+  return jsxs(Fragment, {
+    children: [jsx(_$$p3, {
+      children: jsx(_$$s4, {
+        planType: FOrganizationLevelType.TEAM
+      })
+    }), jsx(fu, {
+      name: _$$e4.BILLING_VIEW,
+      properties: {
+        teamId: e.team.id
+      },
+      children: jsxs("div", {
+        className: _$$s.hFull.flex.flexColumn.$,
+        children: [jsx(ah, {
+          selectedTab: Iv.BILLING,
+          teamId: e.team.id,
+          secondaryTabs: jsxs(_$$t2.TabStrip, {
+            manager: d,
+            children: [jsx(_$$t2.Tab, {
+              ...s.overview,
+              "data-onboarding-key": l4,
+              children: _$$t("team_view.toolbar.billing.overview")
+            }), jsx(_$$t2.Tab, {
+              ...s.invoices,
+              children: _$$t("team_view.toolbar.billing.invoices")
+            })]
+          }),
+          rightContent: jsx(_$$p4, {
+            isLoading: e.isBillingSummaryLoading
+          })
+        }), jsxs("div", {
+          className: "billing_view--tabPanelContainer--Y7VJk",
+          children: [jsx(_$$t2.TabPanel, {
+            ...o.overview,
+            children: jsx(aR, {
+              team: e.team,
+              setActiveTab: n,
+              billingSummary: e.billingSummary,
+              expiresAt: _,
+              isLoading: e.isBillingSummaryLoading,
+              adjustAnnualSeatsAction: u
+            })
+          }), jsx(_$$t2.TabPanel, {
+            ...o.invoices,
+            children: jsx(ak, {
+              teamId: e.team.id,
+              billingSummary: e.billingSummary,
+              isLoading: e.isBillingSummaryLoading,
+              adjustAnnualSeatsAction: u
+            })
+          })]
+        })]
+      })
+    })]
+  });
+}
+function aP(e) {
+  let t = wA();
+  let a = No();
+  let n = a?.data?.tier === FPlanNameType.STUDENT;
+  let [s, o, d] = _$$t2.useManagedTabs({
+    "abandoned-drafts": !0,
+    "connected-projects": !n
+  }, e.activeTab, useCallback(a => {
+    t(sf({
+      view: "teamAdminConsole",
+      teamId: e.team.id,
+      teamAdminConsoleViewTab: Iv.CONTENT,
+      teamAdminConsoleViewSecondaryTab: a
+    }));
+  }, [t, e.team.id]));
+  let c = _$$b5(a?.data?.tier);
+  return jsx(fu, {
+    name: _$$e4.CONTENT_VIEW,
+    properties: {
+      teamId: e.team.id
+    },
+    children: jsxs("div", {
+      className: _$$s.hFull.flex.flexColumn.$,
+      children: [jsx(ah, {
+        selectedTab: Iv.CONTENT,
+        teamId: e.team.id,
+        secondaryTabs: jsxs(_$$t2.TabStrip, {
+          manager: d,
+          children: [jsx(_$$t2.Tab, {
+            ...s["abandoned-drafts"],
+            children: _$$t("team_view.toolbar.drafts")
+          }), jsxs(_$$t2.Tab, {
+            ...s["connected-projects"],
+            ...(c && {
+              "data-onboarding-key": _$$k6
+            }),
+            children: [_$$t("team_view.toolbar.connected_projects"), c && jsx(_$$Q3, {})]
+          })]
+        })
+      }), jsxs("div", {
+        className: "content_view--tabPanelContainer--2h2yj",
+        children: [jsx(_$$t2.TabPanel, {
+          ...o["abandoned-drafts"],
+          children: jsx(_$$M, {
+            planType: _$$O.TEAM,
+            team: e.team
+          })
+        }), jsx(_$$t2.TabPanel, {
+          ...o["connected-projects"],
+          height: "fill",
+          children: jsx(_$$k5, {
+            showResourceConnectionInviteModal: e.showResourceConnectionInviteModal,
+            showResourceConnectionFlyout: e.showResourceConnectionFlyout
+          })
+        })]
+      })]
+    })
+  });
+}
+let aq = "dismissed_dangling_team_user_backfill_banner";
+let a$ = M4.Query({
+  fetch: async ({
+    teamId: e
+  }) => (await _$$$.showDanglingTeamUserBackfillBanner({
+    teamId: e
+  })).data
+});
+export function $$aB1(e, t) {
+  let a = d4(t => t.teams[e]);
+  let n = iZ();
+  let s = d4(t => t.teamMembersByTeamId[e]);
+  return useMemo(() => t.transform(e => {
+    if (!n || !a || !s) return {};
+    let t = e.team?.isOwner;
+    let i = e.team?.canAdmin;
+    let r = e.team?.canEdit;
+    return Object.entries(s).reduce((e, [a, n]) => {
+      let s = n.team_role?.level || -1;
+      e[a] = {
+        ...n,
+        canEditRole: !!n.team_role && _$$OL(n.team_role, !!i, !!r),
+        canMakeOwner: !!(n.team_role && t),
+        canMakeAdmin: !!(n.team_role && i),
+        canRemoveUser: s < _$$e2.OWNER
+      };
+      return e;
+    }, {});
+  }), [n, a, s, t]);
+}
+export function $$aG0(e) {
+  let t;
+  let a = wA();
+  let n = d4(e => e.teams);
+  let s = n[e.teamId];
+  let k = px();
+  let E = W8(k);
+  let C = "loaded" === E.status && gb({
+    isAdminTeam: E.data,
+    teamId: e.teamId,
+    teamAdminConsoleViewTab: e.selectedTab,
+    teams: n
+  });
+  let S = _6();
+  let N = vS(S);
+  useEffect(() => {
+    C && a(sf({
+      view: "resourceUnavailable",
+      resourceType: N
+    }));
+  }, [C, a, N]);
+  _$$w(s?.id);
+  let I = iZ();
+  let T = Rs(yQw, {
+    teamId: e.teamId
+  });
+  let R = useMemo(() => T.transform(e => ({
+    canAdmin: !!e.team?.canAdmin,
+    canEdit: !!e.team?.canEdit,
+    canRead: !!e.team?.canRead
+  })), [T]);
+  let D = d4(e => e.loadingState);
+  let P = d4(e => e.teamBilling);
+  let U = d4(e => e.dropdownShown);
+  let F = $$aB1(e.teamId, T);
+  let q = function (e, t) {
+    let a = wA();
+    let n = d4(t => e && t.userTeamFlags?.[e]?.[aq]);
+    let [s] = IT(a$({
+      teamId: e
+    }), {
+      enabled: !!e && getFeatureFlags().dangling_team_users_backfill_banner && t === Iv.MEMBERS
+    });
+    let {
+      show_banner
+    } = "loaded" === s.status ? s.data.meta : {
+      show_banner: !1
+    };
+    return e && show_banner && !n ? jsx(wr, {
+      color: Sn.LIGHT_BLUE,
+      onClose: () => {
+        a(bE({
+          all_team_flags: [{
+            team_id: e,
+            flags: {
+              [aq]: !0
+            }
+          }]
+        }));
+      },
+      trackingContext: "Team Admin Console View Banner",
+      trackingProperties: {
+        teamId: e,
+        source: "team_admin_dangling_team_user_backfill_banner"
+      },
+      children: jsx(_$$Y, {
+        horizontalAlignItems: "end",
+        width: "fill-parent",
+        children: jsxs(_$$Y, {
+          horizontalAlignItems: "start",
+          children: [jsx(_$$b, {}), jsx("span", {
+            children: _$$tx("team_admin.members_tab.fixed_issue_members_list")
+          }), jsx(_$$N, {
+            href: "https://help.figma.com/hc/articles/26628690415255",
+            children: _$$tx("team_admin.members_tab.fixed_issue_members_list_read_more")
+          })]
+        })
+      })
+    }) : null;
+  }(e.teamId, e.selectedTab);
+  let $ = _$$R();
+  let G = _$$R2(e.teamId);
+  let z = y3(s?.created_at, s?.last_upgraded_at);
+  let V = s && (G || e.selectedTab === Iv.SETTINGS && s.pro_team);
+  let W = Ti(V ? {
+    planId: s.id,
+    planType: FOrganizationLevelType.TEAM
+  } : null);
+  useEffect(() => {
+    if (s) {
+      if ($) {
+        let e = Be.loadingKeyForPayload({
+          teamId: s.id
+        });
+        VP(D, e) || D2(D, e) || a(Be({
+          teamId: s.id
+        }));
+      }
+      if (e.selectedTab === Iv.BILLING) {
+        let e = Be.loadingKeyForPayload({
+          teamId: s.id
+        });
+        VP(D, e) || D2(D, e) || a(Be({
+          teamId: s.id
+        }));
+      } else if (e.selectedTab === Iv.MEMBERS) {
+        let e = Be.loadingKeyForPayload({
+          teamId: s.id
+        });
+        let t = m$.loadingKeyForPayload({
+          teamId: s.id
+        });
+        VP(D, t) || D2(D, t) || a(m$({
+          teamId: s.id
+        }));
+        VP(D, e) || D2(D, e) || a(Be({
+          teamId: s.id
+        }));
+      } else if (e.selectedTab === Iv.SETTINGS) {
+        let e = Be.loadingKeyForPayload({
+          teamId: s.id
+        });
+        VP(D, e) || D2(D, e) || a(Be({
+          teamId: s.id
+        }));
+      }
+    }
+  }, [a, e.selectedTab, D, s, G, $, V]);
+  let H = Rs(ZY7, {
+    teamId: e.teamId
+  }, {
+    enabled: e.selectedTab === Iv.SETTINGS
+  });
+  let Y = oA(H.data?.team);
+  let J = useMemo(() => F.unwrapOr({}), [F]);
+  if (!I || "loaded" === R.status && !R.data.canAdmin || !s) return jsx(_$$S3, {
+    resourceType: Ft.TEAM
+  });
+  let K = !1;
+  let X = !0;
+  let Q = e.selectedTab;
+  switch (e.selectedTab === Iv.DASHBOARD && (!(s.pro_team && "loaded" === R.status && R.data?.canAdmin) || s.student_team) && (Q = Iv.MEMBERS), Q) {
+    case Iv.DASHBOARD:
+      if ($) {
+        t = jsx(_$$i, {
+          teamBilling: P
+        });
+        X = !1;
+        break;
+      }
+      t = jsx(B, {
+        team: s
+      });
+      X = !1;
+      K = VP(D, Be.loadingKeyForPayload({
+        teamId: s.id
+      }));
+      break;
+    case Iv.MEMBERS:
+      K = "loading" === F.status || "loading" === R.status || VP(D, m$.loadingKeyForPayload({
+        teamId: s.id
+      })) || VP(D, Be.loadingKeyForPayload({
+        teamId: s.id
+      }));
+      let ee = {
+        ...s,
+        canAdmin: !!R.data?.canAdmin,
+        canRead: !!R.data?.canRead,
+        canEdit: !!R.data?.canEdit
+      };
+      t = jsx(e8, {
+        team: ee,
+        dispatch: a,
+        membersList: J,
+        currentMemberId: I?.id,
+        dropdownShown: U,
+        billing: P
+      }, `admin-team-members-${s.id}`);
+      break;
+    case Iv.BILLING:
+      let et = Be.loadingKeyForPayload({
+        teamId: s.id
+      });
+      X = !1;
+      t = jsx(aO, {
+        team: s,
+        activeTab: nc(e.selectedSecondaryTab),
+        billingSummary: P.summary,
+        isBillingSummaryLoading: VP(D, et) || !D2(D, et),
+        nextPostBillingRemodelGaRenewal: P.summary.analyze_data_contract_v2_start
+      });
+      break;
+    case Iv.SETTINGS:
+      K = VP(D, Be.loadingKeyForPayload({
+        teamId: s.id
+      })) || !Y;
+      t = jsx(tG, {
+        team: s,
+        settingsData: Y,
+        userId: I?.id,
+        billing: P
+      });
+      break;
+    case Iv.CONTENT:
+      X = !1;
+      t = jsx(aP, {
+        team: s,
+        activeTab: _$$J2(e.selectedSecondaryTab),
+        showResourceConnectionInviteModal: e.showResourceConnectionInviteModal,
+        showResourceConnectionFlyout: e.showResourceConnectionFlyout
+      });
+      break;
+    case Iv.DRAFTS:
+      t = jsx(_$$M, {
+        planType: _$$O.TEAM,
+        team: s
+      });
+      break;
+    default:
+      return xb(Q);
+  }
+  V && (K ||= "loading" === W.status);
+  let en = K || "loading" === R.status || C;
+  return jsx(_$$r2, {
+    containerClass: "team_admin_console_view--fileBrowserContentContainer---V4EB",
+    scrollableContainerClass: "team_admin_console_view--fileBrowserScrollableContainer--njnP5",
+    toolbar: jsx(_$$g, {}),
+    banner: $ && !G ? jsx(_$$_, {
+      entryPoint: _$$Y2.FILE_BROWSER
+    }) : null,
+    belowToolbarBanner: q,
+    content: jsxs(Fragment, {
+      children: [en ? jsx("div", {
+        className: "admin_settings_page--container--LZSr8",
+        children: jsx(kt, {
+          className: "admin_settings_page--innerLoadingSpinner--cXsGF"
+        })
+      }) : jsxs(Fragment, {
+        children: [X && jsx(ah, {
+          selectedTab: Q,
+          teamId: e.teamId,
+          billing: P
+        }), t]
+      }), z && jsx(_$$d, {
+        isTeam: !0,
+        team: s
+      }), jsx(_$$p3, {
+        children: jsx(an, {})
+      })]
+    }),
+    errorBoundaryConfig: {
+      figmaTeam: _$$e.SCALE,
+      boundaryKeySuffix: "TeamAdminConsoleView"
+    }
+  });
+}
+export const TeamAdminConsoleView = $$aG0;
+export const useTeamMembers = $$aB1;

@@ -1,0 +1,104 @@
+import { getFeatureFlags } from "../905/601108";
+import { zl } from "../figma_app/27355";
+import { az } from "../905/449184";
+import { debugState } from "../905/407919";
+import { getInitialOptions } from "../figma_app/169182";
+import { Rs } from "../figma_app/288654";
+import { tT } from "../905/723791";
+import { Fj } from "../figma_app/594947";
+import { tS } from "../figma_app/516028";
+import { kS$ } from "../figma_app/43951";
+import { n as _$$n } from "../905/347702";
+import { Ac, ag, u6 } from "../905/509613";
+import { JT } from "../figma_app/632248";
+var $$g1 = (e => (e.DAILY = "daily", e.MONTHLY = "monthly", e))($$g1 || {});
+function f() {
+  let e = tS() ?? "";
+  let t = Rs(kS$, {
+    fileKey: e
+  }, {
+    enabled: !!e
+  });
+  if ("errors" === t.status || "loading" === t.status || "disabled" === t.status || !t.data || !t.data.aiMeterUsage) return null;
+  let {
+    aiMeterUsage
+  } = t.data;
+  return aiMeterUsage.status === tT.Error ? null : aiMeterUsage.data;
+}
+_$$n((e, t) => {
+  let {
+    getDynamicConfig
+  } = Fj("ai_metering_credits_per_feature");
+  if (!e) return 0;
+  if (!getFeatureFlags().ai_credits_metering) return 1;
+  let i = new Map(Object.entries(getDynamicConfig().get(e.toString(), {})));
+  let a = i.get("default") ?? 0;
+  return t ? i.get(t.toString()) ?? a : a;
+});
+export let $$E0 = _$$n(e => {
+  let t = f();
+  if (!e || !getFeatureFlags().qa_ai_metering || e === JT.ASSISTANT_CHAT || e === JT.FIND_INSPIRATION) return {
+    withinMeter: !0
+  };
+  let r = zl.get(Ac);
+  let l = zl.get(ag);
+  let d = zl.get(u6);
+  let c = l || d;
+  if ("unchecked" === r || "null_grantlist" === r && c) {
+    let t = debugState && debugState.getState().selectedView;
+    let r = t?.view === "fullscreen" && t.fileKey;
+    az.trackDefinedEvent("search_experience.ai_eligibility.meter_checked", {
+      newGrantlistPlanValue: null !== l ? l.toString() : "null",
+      newGrantlistUserValue: null !== d ? d.toString() : "null",
+      userId: getInitialOptions().user_data?.id,
+      fileKey: r || "missing",
+      action: e
+    });
+    zl.set(Ac, c ? "with_grantlist" : "null_grantlist");
+  }
+  if (!t) return {
+    withinMeter: !0,
+    noDataLoaded: !0
+  };
+  let u = t.filter(t => t.userActions.includes(e));
+  if (0 === u.length) return {
+    withinMeter: !0
+  };
+  let p = u.find(e => "daily" === e.meteringWindow);
+  let _ = u.find(e => "monthly" === e.meteringWindow);
+  if (!p || !_) return {
+    withinMeter: !0
+  };
+  let g = parseInt(p.remaining) > 0;
+  let E = parseInt(_.remaining) > 0;
+  return !g && E ? {
+    withinMeter: g,
+    meterResetDate: p.resetsAt,
+    meteringWindow: "daily"
+  } : {
+    withinMeter: E,
+    meterResetDate: _.resetsAt,
+    meteringWindow: "monthly"
+  };
+});
+export function $$y2(e) {
+  let t = f();
+  if (!t) return {
+    meterUsed: 0
+  };
+  let r = t.filter(t => t.userActions.includes(e));
+  if (0 === r.length) return {
+    meterUsed: 0
+  };
+  let n = r.find(e => "monthly" === e.meteringWindow);
+  if (!n) return {
+    meterUsed: 0
+  };
+  let i = parseInt(n.remaining);
+  return {
+    meterUsed: parseInt(n.total) - i || 0
+  };
+}
+export const Ig = $$E0;
+export const co = $$g1;
+export const xD = $$y2;

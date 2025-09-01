@@ -1,0 +1,63 @@
+import { NC } from "../905/17179";
+import { t as _$$t } from "../905/303541";
+import { F } from "../905/302958";
+import { Q } from "../905/618914";
+import { EO } from "../figma_app/684446";
+import { FMemberRoleType } from "../figma_app/191312";
+import { Sc, VP } from "../905/18797";
+import { gq } from "../905/276025";
+import { A8 } from "../figma_app/465071";
+import { Eh } from "../figma_app/617654";
+import { nF } from "../905/350402";
+import { Cx, x2, of } from "../figma_app/714946";
+let $$m2 = NC("LICENSE_GROUP_DELETE");
+let $$g3 = NC("LICENSE_GROUP_UPDATE");
+let $$f1 = NC("LICENSE_GROUP_SET");
+nF(async (e, t) => {
+  let r = t.orgId;
+  r && (await y(e, t, r));
+});
+let $$E0 = nF(async (e, t) => {
+  let {
+    currentUserOrgId
+  } = e.getState();
+  currentUserOrgId && (await y(e, t, currentUserOrgId));
+});
+let y = async (e, t, r) => {
+  let {
+    orgById,
+    loadingState
+  } = e.getState();
+  let m = await Q(gq(!0));
+  let g = A8(m, FMemberRoleType.MEMBER);
+  if (!r) return;
+  let E = orgById[r];
+  let y = EO(E.id);
+  if (E && E.bigma_enabled && g && (t.forceRefetch || Sc(loadingState, y)) && !VP(loadingState, y)) {
+    e.dispatch(Cx({
+      key: EO(r)
+    }));
+    try {
+      let t = (await Eh.getLicenseGroups({
+        currentOrgId: r
+      })).data.meta;
+      e.dispatch($$f1(t));
+      e.dispatch(x2({
+        key: EO(r)
+      }));
+    } catch (t) {
+      e.dispatch(F.enqueue({
+        type: "get-license-groups",
+        message: t.data?.message || _$$t("license_group.an_error_occurred_while_fetching_workspaces"),
+        error: !0
+      }));
+      e.dispatch(of({
+        key: EO(r)
+      }));
+    }
+  }
+};
+export const Jt = $$E0;
+export const hZ = $$f1;
+export const w4 = $$m2;
+export const yo = $$g3;

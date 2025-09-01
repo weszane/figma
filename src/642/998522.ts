@@ -1,0 +1,64 @@
+import { jsx } from "react/jsx-runtime";
+import { useEffect } from "react";
+import { d4 } from "../vendor/514228";
+import { md } from "../figma_app/27355";
+import { buildUploadUrl } from "../figma_app/169182";
+import { tx } from "../905/303541";
+import { c as _$$c } from "../905/370443";
+import { e as _$$e } from "../905/621515";
+import { Fy } from "../figma_app/579169";
+import { r1 } from "../figma_app/545877";
+import { zC } from "../figma_app/186343";
+import { aV } from "../figma_app/722362";
+import { Fk } from "../figma_app/167249";
+import { N } from "../figma_app/268271";
+import { w } from "../905/129046";
+import { rq } from "../905/425180";
+import { F_ } from "../905/858282";
+import { vlG } from "../figma_app/6204";
+let $$C1 = "ui3-layers-horizontal-scroll-onboarding-key";
+let $$j2 = "ui2-layers-horizontal-scroll-onboarding-key";
+let v = r1("seen_ui3_layers_horizontal_scroll_overlay");
+export function $$S0() {
+  let e = aV();
+  let t = md(Fy);
+  let s = d4(e => e.mirror.appModel.currentPage);
+  let p = Fk((e, t) => !zC(e, t), s);
+  let j = md(v);
+  let {
+    show,
+    isShowing,
+    complete
+  } = _$$e({
+    overlay: vlG,
+    priority: N.SECONDARY_MODAL
+  }, [t, j]);
+  useEffect(() => {
+    show({
+      canShow: (t, s) => t && !e && p && !s
+    });
+  }, [show, e, p, t]);
+  return jsx(rq, {
+    arrowPosition: F_.RIGHT_TITLE,
+    description: tx("ui3_layers_horizontal_scroll_overlay.ui3_description"),
+    disableHighlight: !0,
+    isShowing,
+    media: jsx(w, {
+      src: buildUploadUrl("86193716c443398bbd6b55d19b65db2eaf0fe3c1"),
+      aspectRatio: 16 / 9
+    }),
+    onClose: complete,
+    primaryCta: {
+      label: tx("general.got_it"),
+      ctaTrackingDescriptor: _$$c.GOT_IT,
+      type: "button",
+      onClick: complete
+    },
+    targetKey: $$C1,
+    title: tx("ui3_layers_horizontal_scroll_overlay.ui3_title"),
+    trackingContextName: "UI3 Layers Horizontal Scroll Overlay"
+  });
+}
+export const Ay = $$S0;
+export const BZ = $$C1;
+export const m4 = $$j2;

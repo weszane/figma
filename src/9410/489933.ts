@@ -1,0 +1,96 @@
+import { wA, d4 } from "../vendor/514228";
+import { R } from "../905/103090";
+import { to } from "../905/156213";
+import { b as _$$b } from "../905/985254";
+import { cW, Be, $1 } from "../figma_app/844435";
+import { uF, LW, T as _$$T } from "../figma_app/300692";
+import { bD } from "../figma_app/45218";
+import { r as _$$r } from "../905/319631";
+import { jv } from "../905/525678";
+import { z } from "../905/905430";
+import { q } from "../905/276489";
+export function $$m1(e, t, i) {
+  let {
+    appModel,
+    selectedView
+  } = R(e => ({
+    appModel: e.mirror.appModel,
+    selectedView: e.selectedView
+  }));
+  let g = wA();
+  let _ = cW()[e];
+  let x = uF(_);
+  let y = Be();
+  let b = y.plugins[e] || y.orgPlugins[e] || x;
+  let C = Object.values($1()).find(t => t.plugin_id === e);
+  let v = C?.manifest.menu && C.manifest.menu.length > 0 && !LW(C) ? z(C.manifest.menu, C) : [];
+  let E = b.manifest.menu && b.manifest.menu.length > 0 && !LW(b) ? z(b.manifest.menu, b) : [];
+  let T = jv(E.map(e => q(e, e => () => t(e))), {
+    appModel,
+    selectedView
+  });
+  let w = jv(v.map(e => q(e, e => () => i(e))), {
+    appModel,
+    selectedView
+  });
+  if (!C) return T;
+  if (!_ || _ && !_.current_plugin_version_id) return w;
+  let S = [];
+  C.error ? S.push({
+    displayText: "\u26A0 In-development version",
+    callback: () => {
+      g(to({
+        type: _$$r,
+        data: {
+          dispatch: g,
+          error: C.error,
+          resourceType: bD.PLUGIN
+        },
+        showModalsBeneath: !0
+      }));
+    }
+  }) : S.push({
+    displayText: "In-development version",
+    ...(w.length > 0 ? {
+      children: w
+    } : {
+      callback: () => {
+        "figma" === _$$T() && (g(_$$b({
+          seen_published_plugin_onboarding_modal: !0
+        })), g(_$$b({
+          seen_development_plugin_onboarding_modal: !0
+        })));
+        i();
+      }
+    })
+  });
+  S.push({
+    displayText: "Published version",
+    ...(T.length > 0 ? {
+      children: T
+    } : {
+      callback: () => {
+        "figma" === _$$T() && (g(_$$b({
+          seen_published_plugin_onboarding_modal: !0
+        })), g(_$$b({
+          seen_development_plugin_onboarding_modal: !0
+        })));
+        t();
+      }
+    })
+  });
+  return S;
+}
+export function $$f0(e, t) {
+  let i = d4(e => e.mirror.appModel);
+  let n = d4(e => e.selectedView);
+  let a = cW()[e];
+  let s = uF(a);
+  let d = s.manifest.menu && s.manifest.menu.length > 0 ? z(s.manifest.menu, s) : [];
+  return jv(d.map(e => q(e, e => () => t(e))), {
+    appModel: i,
+    selectedView: n
+  });
+}
+export const p = $$f0;
+export const t = $$m1;

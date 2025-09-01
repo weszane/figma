@@ -1,0 +1,260 @@
+import { jsxs, jsx } from "react/jsx-runtime";
+import { sx } from "../905/941192";
+import { Ph, Us } from "../figma_app/637027";
+import { s as _$$s } from "../cssbuilder/589278";
+import { t as _$$t, tx } from "../905/303541";
+import { c as _$$c } from "../905/370443";
+import { Ju } from "../905/712921";
+import { $V, NW } from "../figma_app/831101";
+import { x as _$$x } from "../c5e2cae0/907085";
+import { useState } from "react";
+import { wc } from "../figma_app/465776";
+import { S as _$$S } from "../905/274480";
+import { J } from "../905/270045";
+import { k as _$$k } from "../905/443820";
+import { G } from "../905/800369";
+import { lR } from "../figma_app/617427";
+import { LJ } from "../c5e2cae0/793139";
+import { W } from "../c5e2cae0/173602";
+import { Um } from "../figma_app/681712";
+import { IP } from "../figma_app/307841";
+import { _ as _$$_ } from "../c5e2cae0/57596";
+import { O } from "../c5e2cae0/648208";
+import { f as _$$f } from "../c5e2cae0/279252";
+function _(e) {
+  let t = e.shippingAddress && !$V(e.shippingAddress);
+  return jsxs(_$$x, {
+    title: _$$t("checkout.cart_plan_details.subtitle"),
+    dataTestId: "cart-plan-details",
+    children: [jsx(u, {
+      header: e.tier === Ju.ORG ? _$$t("checkout.cart_plan_details.organization_name") : _$$t("checkout.cart_plan_details.team_name"),
+      value: e.displayName,
+      dataTestId: "cart-plan-details-plan-name"
+    }), e.legalName && jsx(u, {
+      header: _$$t("checkout.cart_plan_details.legal_name"),
+      value: e.legalName,
+      dataTestId: "cart-plan-details-legal-name"
+    }), jsx(u, {
+      header: _$$t("checkout.cart_plan_details.invoice_email"),
+      value: e.userEmail,
+      dataTestId: "cart-plan-details-invoice-email"
+    }), e.billingAddress && jsx(u, {
+      header: _$$t("checkout.cart_plan_details.billing_address"),
+      value: p(e.billingAddress),
+      dataTestId: "cart-plan-details-billing-address"
+    }), t && jsx(u, {
+      header: _$$t("checkout.cart_plan_details.shipping_address"),
+      value: p(e.shippingAddress),
+      dataTestId: "cart-plan-details-shipping-address"
+    }), jsx(Ph, {
+      onClick: e.navigateToEditDetails,
+      className: _$$s.font13.py12.$,
+      trackingProperties: {
+        trackingDescriptor: _$$c.EDIT_PLAN_DETAILS
+      },
+      "data-testid": "cart-plan-details-edit-details",
+      trusted: !0,
+      children: tx("checkout.cart_plan_details.edit_details")
+    })]
+  });
+}
+function u({
+  header: e,
+  value: t,
+  dataTestId: a
+}) {
+  return jsxs("div", {
+    className: _$$s.flex.flexColumn.py16.bb1.bSolid.colorBorder.itemsStart.$,
+    "data-testid": a,
+    children: [jsx("p", {
+      className: _$$s.font13.lh24.spacingWide.colorTextSecondary.pb4.$,
+      children: e
+    }), jsx("p", {
+      className: _$$s.font13.lh24.colorText.breakWord.$,
+      children: t
+    })]
+  });
+}
+function p(e) {
+  return [e?.line1, e?.line2, e?.city, e?.region, e?.country, e?.postal_code].filter(function (e) {
+    return e;
+  }).join(", ");
+}
+let E = jsx(Us, {
+  target: "_blank",
+  trusted: !0,
+  href: "/pricing",
+  children: tx("checkout.monthly_price")
+});
+function A({
+  title: e,
+  countByBillableProductKey: t,
+  billingInterval: a,
+  currency: i,
+  taxPercent: _,
+  isRequestPending: u,
+  tier: p,
+  onSubmit: g,
+  onSubmitTrackingProperties: y
+}) {
+  let [S, b] = useState(!1);
+  let E = u || !S;
+  let A = jsx(_$$S, {
+    label: jsx(J, {
+      children: jsx("span", {
+        className: _$$s.font13.$,
+        children: p === Ju.ORG ? jsx(W, {}) : jsx(Um, {})
+      })
+    }),
+    checked: S,
+    onChange: b
+  });
+  let k = jsx("div", {
+    className: _$$s.flex.justifyCenter.itemsCenter.$,
+    "data-testid": "cart-review-submit-loading",
+    children: jsx(_$$k, {})
+  });
+  return jsxs(_$$x, {
+    title: e,
+    dataTestId: "cart-review",
+    children: [jsx("div", {
+      className: _$$s.mt16.$,
+      children: jsx(O, {
+        countByBillableProductKey: t,
+        billingInterval: a,
+        currency: i,
+        taxPercent: _ ?? 0,
+        isCartReviewSummary: !0,
+        tier: p
+      })
+    }), jsx(I, {
+      tier: p,
+      isAnnual: a === NW.YEAR
+    }), jsx(_$$_, {}), jsx("div", {
+      className: _$$s.my24.$,
+      style: sx.add({
+        marginLeft: "-10px"
+      }).$,
+      "data-testid": "cart-review-terms-checkbox",
+      children: A
+    }), jsx(lR, {
+      onClick: g,
+      disabled: E,
+      htmlAttributes: {
+        "data-testid": "cart-review-submit-button"
+      },
+      trackingProperties: {
+        trackingDescriptor: _$$c.COMPLETE_PURCHASE,
+        ...y
+      },
+      children: u ? k : tx("checkout.complete_purchase")
+    })]
+  });
+}
+function I({
+  tier: e,
+  isAnnual: t
+}) {
+  return IP() ? jsx(k, {
+    tier: e,
+    isAnnual: t
+  }) : e === Ju.ORG ? jsx(P, {}) : null;
+}
+function k({
+  tier: e,
+  isAnnual: t
+}) {
+  let a = e === Ju.ORG ? "https://help.figma.com/hc/articles/360040328293-Manage-billing-on-the-Organization-and-Enterprise-plans" : "https://help.figma.com/hc/articles/360041061034-Manage-billing-on-the-Professional-plan";
+  return jsx("div", {
+    className: _$$s.mt24.$,
+    "data-testid": "cart-review-upgrade-information-banner",
+    children: jsxs("div", {
+      className: _$$s.py8.px16.colorBgSecondary.bRadius5.flex.flexColumn.gap4.$,
+      children: [jsx("p", {
+        className: _$$s.textBodyMediumStrong.$,
+        children: tx("checkout.how_do_new_seat_additions_and_upgrades_work")
+      }), jsx("p", {
+        children: function (e, t) {
+          switch (e) {
+            case Ju.ORG:
+              return tx("checkout.cart_review_upgrade_info_org");
+            case Ju.PRO:
+              return t ? tx("checkout.cart_review_upgrade_info_pro_annual", {
+                monthlyPriceLink: E
+              }) : tx("checkout.cart_review_upgrade_info_pro_monthly");
+            default:
+              wc(e);
+          }
+        }(e, t)
+      }), jsx(Ph, {
+        className: _$$s.textBodyMediumStrong.$,
+        style: sx.add({
+          height: "16px"
+        }).$,
+        target: "_blank",
+        href: a,
+        trusted: !0,
+        children: tx("checkout.learn_more")
+      })]
+    })
+  });
+}
+function P() {
+  let [e, t] = useState(!1);
+  let a = new Date().getMonth();
+  let d = new Date().setMonth(a + 3);
+  return jsxs("div", {
+    className: _$$s.mt24.$,
+    "data-testid": "cart-review-org-true-up-banner",
+    children: [e && jsx(LJ, {
+      onClose: () => t(!1)
+    }), jsxs("div", {
+      className: _$$s.flexColumn.pt4.pb8.px8.colorBgSecondary.bRadius5.$,
+      children: [jsx(G, {}), jsxs("div", {
+        className: _$$s.px8.$,
+        children: [jsx("p", {
+          className: _$$s.pt4.fontMedium.$,
+          children: tx("org_self_serve.review_step.next_quarterly_true_up_on_date", {
+            trueUpDate: new Date(d)
+          })
+        }), jsx("p", {
+          className: _$$s.pt4.$,
+          children: tx("org_self_serve.review_step.what_is_a_true_up")
+        }), jsxs("ul", {
+          style: sx.ml16.mt4.add({
+            listStyle: "disc"
+          }).$,
+          children: [jsx("li", {
+            children: tx("org_self_serve.review_step.true_up_description.seat_rename")
+          }), jsx("li", {
+            children: tx("checkout.org_self_serve.true_up_description2_seat_rename")
+          }), jsx("li", {
+            children: tx("checkout.org_self_serve.true_up_description3_seat_rename")
+          }), jsx("li", {
+            children: tx("checkout.org_self_serve.true_up_description4_seat_rename")
+          })]
+        }), jsx(Ph, {
+          className: _$$s.pt8.fontMedium.inline.$,
+          onClick: () => t(!0),
+          trusted: !0,
+          children: tx("org_self_serve.review_step.learn_more_about_true_ups")
+        })]
+      })]
+    })]
+  });
+}
+export function $$R0(e) {
+  return jsxs("div", {
+    style: sx.grid.add({
+      gridTemplateColumns: "400px 1fr",
+      gap: "48px"
+    }).$,
+    "data-testid": "cart-review-step",
+    children: [jsx(_, {
+      ...e
+    }), e.hasUpgradeSucceeded ? jsx(_$$f, {}) : jsx(A, {
+      ...e
+    })]
+  });
+}
+export const j = $$R0;

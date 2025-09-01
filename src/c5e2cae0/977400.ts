@@ -1,0 +1,217 @@
+import { jsxs, jsx, Fragment } from "react/jsx-runtime";
+import { useState } from "react";
+import { wA, d4 } from "../vendor/514228";
+import { eD } from "../figma_app/876459";
+import { h as _$$h } from "../905/207101";
+import { Jn } from "../905/17223";
+import { Kz, vd } from "../figma_app/637027";
+import { tx, t as _$$t } from "../905/303541";
+import { kR } from "../c5e2cae0/894125";
+import { Dw } from "../figma_app/976345";
+import { sf } from "../905/929976";
+import { Ce, Lo } from "../905/156213";
+import { WX } from "../figma_app/482142";
+import { fu } from "../figma_app/831799";
+import { FC } from "../figma_app/212807";
+import { _6 } from "../figma_app/386952";
+import { LN } from "../figma_app/514043";
+import { PS } from "../figma_app/345997";
+import { tn } from "../figma_app/831101";
+import { SC, Sc } from "../figma_app/707808";
+import { ey } from "../figma_app/918700";
+import { debounce } from "../905/915765";
+import { XHR } from "../905/910117";
+import { I as _$$I } from "../c5e2cae0/393403";
+import { L as _$$L } from "../905/408237";
+import { kt } from "../figma_app/858013";
+import { nF } from "../905/350402";
+import { bE } from "../905/98702";
+import { bE as _$$bE } from "../figma_app/240735";
+import { e5 } from "../figma_app/297957";
+import { _J } from "../figma_app/314264";
+import { TA } from "../905/372672";
+import { P as _$$P } from "../905/338617";
+import { G } from "../figma_app/66216";
+import { KV, $g, Eh, DI, u1, GK, b as _$$b } from "../c5e2cae0/62130";
+import { I as _$$I2 } from "../905/641938";
+import { I as _$$I3 } from "../c5e2cae0/718426";
+let L = nF((e, {
+  teamName: t,
+  selectedView: a,
+  currency: s,
+  onSuccess: r,
+  onError: i,
+  onBillingCompleteRedirectInfo: l
+}) => {
+  let n;
+  XHR.post("/api/teams/create", {
+    team_name: t
+  }).then(({
+    data: t
+  }) => (n = "team" in t.meta ? t.meta.team : t.meta, e.dispatch(_$$bE({
+    team: n
+  })), _J("Team Created", n.id, e.getState()), G.getTeam({
+    teamId: n.id
+  }))).then(({
+    data: t
+  }) => {
+    for (let a of t.meta) e.dispatch(bE({
+      role: a
+    }));
+    r();
+    e.dispatch(WX({
+      teamId: n.id,
+      selectedView: a,
+      newTeam: !0,
+      currency: s,
+      ...(l ? {
+        onBillingCompleteRedirectInfo: l
+      } : {})
+    }));
+  }).catch(() => {
+    i();
+  });
+});
+function V(e) {
+  let t = wA();
+  let a = TA();
+  let l = d4(_$$P);
+  let n = d4(e => e.roles.byTeamId);
+  let [d, m] = useState(!1);
+  let [_, u] = useState(!1);
+  let [h, g] = useState("");
+  let x = LN();
+  let f = () => {
+    t(Ce());
+  };
+  let y = debounce(() => {
+    m(!0);
+    h ? t(L({
+      teamName: h,
+      selectedView: e.selectedView,
+      currency: x,
+      onSuccess: f,
+      onError: () => {
+        m(!1);
+        u(!0);
+      },
+      onBillingCompleteRedirectInfo: e.onBillingCompleteRedirectInfo
+    })) : (m(!1), u(!0));
+  });
+  return a && !e5({
+    userId: a,
+    teams: Object.values(l),
+    rolesByTeamId: n
+  }) ? jsxs("div", {
+    "data-testid": "createTeamToUpgradeView",
+    children: [jsx("p", {
+      className: KV,
+      children: tx("universal_upgrade_sequence.subtitle")
+    }), _ && jsxs(Fragment, {
+      children: [jsx(_$$I, {
+        message: _$$t("universal_upgrade_sequence.error"),
+        marginTop: 16
+      }), jsx(Kz, {
+        multiple: 1
+      })]
+    }), jsx(Kz, {
+      multiple: 2
+    }), jsxs("div", {
+      className: $g,
+      children: [jsx("div", {
+        className: Eh,
+        children: jsx(_$$L, {
+          dataTestId: "createTeamInput",
+          placeholder: _$$t("universal_upgrade_sequence.team_name.placeholder"),
+          value: h || "",
+          onChange: e => {
+            g(e.target.value);
+          },
+          required: !0,
+          maxLength: 255
+        })
+      }), jsx(vd, {
+        dataTestId: "nextButton",
+        className: DI,
+        disabled: !h || d,
+        onClick: y,
+        children: d ? jsx(kt, {
+          className: u1
+        }) : tx("universal_upgrade_sequence.next")
+      })]
+    })]
+  }) : null;
+}
+export function $$z0(e) {
+  let [t, a] = useState("selectTeam");
+  let N = wA();
+  let b = _6();
+  let C = FC();
+  let w = d4(e => e.payment.promo);
+  let E = d4(e => e.payment.billingPeriod);
+  let A = () => {
+    N(Lo());
+  };
+  let I = () => {
+    N(Ce());
+    e.onDone?.();
+  };
+  let k = t => {
+    "teamUpgrade" === b.view ? N(sf({
+      ...b,
+      teamFlowType: SC.UPGRADE_EXISTING_TEAM,
+      teamId: t.id,
+      paymentStep: kR(b.paymentStep, SC.UPGRADE_EXISTING_TEAM, b.billingPeriod || null, w, b.planType || Sc.UNDETERMINED, w ? tn.CONFIRM_PAY : tn.CHOOSE_PLAN),
+      billingPeriod: e.billingPeriod || E,
+      entryPoint: e.entryPoint
+    })) : N(WX({
+      teamId: t.id,
+      selectedView: b,
+      newTeam: !1,
+      currency: LN(),
+      billingPeriod: e.billingPeriod,
+      onBillingCompleteRedirectInfo: e.onBillingCompleteRedirectInfo,
+      entryPoint: e.entryPoint,
+      openInNewTab: e.openInNewTab
+    }));
+    I();
+  };
+  let P = () => {
+    0 === PS(C).length ? (N(Dw({
+      openInNewTab: !eD
+    })), a("createTeam")) : a("selectTeam");
+  };
+  return (_$$h(() => {
+    e.plan === _$$I2.PRO && P();
+  }), "selectTeam" === t) ? (() => {
+    let t = PS(C);
+    return jsx(fu, {
+      name: "Upgrade Select Team Modal",
+      children: jsxs(ey, {
+        hide: A,
+        size: 436,
+        children: [jsx("h1", {
+          "data-testid": "modalTitle",
+          className: GK,
+          children: tx("universal_upgrade_sequence.title")
+        }), jsx(Jn, {
+          dataTestId: "closeButton",
+          className: _$$b,
+          onClick: A,
+          innerText: _$$t("universal_upgrade_sequence.close_modal")
+        }), jsx(Kz, {
+          multiple: 2
+        }), jsx(_$$I3, {
+          eligibleTeams: t,
+          selectTeam: k
+        }), jsx(Kz, {
+          multiple: 2
+        }), jsx(V, {
+          selectedView: b,
+          onBillingCompleteRedirectInfo: e.onBillingCompleteRedirectInfo
+        })]
+      })
+    });
+  })() : jsx(Fragment, {});
+}
+export const UniversalUpgradeSequence = $$z0; 

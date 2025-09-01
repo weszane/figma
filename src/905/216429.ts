@@ -1,0 +1,540 @@
+export function $$n0(e) {
+  let t = {};
+  if (!e) return t;
+  if ("whiteboard" === document.body.getAttribute("data-editor-theme")) for (let e of a) {
+    let i = s[e].light;
+    i && (t[e.replace("--", "--figma-")] = i);
+  } else {
+    let e = getComputedStyle(document.body);
+    for (let i of a) {
+      let n = e.getPropertyValue(i).trim();
+      n && (t[i.replace("--", "--figma-")] = n);
+    }
+  }
+  return t;
+}
+export function $$r1(e) {
+  let t = Object.entries($$n0(e));
+  return 0 === t.length ? "" : `<style id='figma-style'>:root { ${t.map(e => e.join(": ")).join("; ") + ";"} }</style>`;
+}
+let a = ["--color-bg", "--color-bg-brand", "--color-bg-brand-hover", "--color-bg-brand-pressed", "--color-bg-brand-secondary", "--color-bg-brand-tertiary", "--color-bg-component", "--color-bg-component-hover", "--color-bg-component-pressed", "--color-bg-component-secondary", "--color-bg-component-tertiary", "--color-bg-danger", "--color-bg-danger-hover", "--color-bg-danger-pressed", "--color-bg-danger-secondary", "--color-bg-danger-tertiary", "--color-bg-disabled", "--color-bg-disabled-secondary", "--color-bg-hover", "--color-bg-inverse", "--color-bg-onselected", "--color-bg-onselected-hover", "--color-bg-onselected-pressed", "--color-bg-pressed", "--color-bg-secondary", "--color-bg-selected", "--color-bg-selected-hover", "--color-bg-selected-pressed", "--color-bg-selected-secondary", "--color-bg-selected-strong", "--color-bg-selected-tertiary", "--color-bg-success", "--color-bg-success-hover", "--color-bg-success-pressed", "--color-bg-success-secondary", "--color-bg-success-tertiary", "--color-bg-tertiary", "--color-bg-warning", "--color-bg-warning-hover", "--color-bg-warning-pressed", "--color-bg-warning-secondary", "--color-bg-warning-tertiary", "--color-border", "--color-border-brand", "--color-border-brand-strong", "--color-border-component", "--color-border-component-hover", "--color-border-component-strong", "--color-border-danger", "--color-border-danger-strong", "--color-border-disabled", "--color-border-disabled-strong", "--color-border-onbrand", "--color-border-onbrand-strong", "--color-border-oncomponent", "--color-border-oncomponent-strong", "--color-border-ondanger", "--color-border-ondanger-strong", "--color-border-onselected", "--color-border-onselected-strong", "--color-border-onsuccess", "--color-border-onsuccess-strong", "--color-border-onwarning", "--color-border-onwarning-strong", "--color-border-selected", "--color-border-selected-strong", "--color-border-strong", "--color-border-success", "--color-border-success-strong", "--color-border-warning", "--color-border-warning-strong", "--color-icon", "--color-icon-brand", "--color-icon-brand-pressed", "--color-icon-brand-secondary", "--color-icon-brand-tertiary", "--color-icon-component", "--color-icon-component-pressed", "--color-icon-component-secondary", "--color-icon-component-tertiary", "--color-icon-danger", "--color-icon-danger-hover", "--color-icon-danger-pressed", "--color-icon-danger-secondary", "--color-icon-danger-secondary-hover", "--color-icon-danger-tertiary", "--color-icon-disabled", "--color-icon-hover", "--color-icon-onbrand", "--color-icon-onbrand-secondary", "--color-icon-onbrand-tertiary", "--color-icon-oncomponent", "--color-icon-oncomponent-secondary", "--color-icon-oncomponent-tertiary", "--color-icon-ondanger", "--color-icon-ondanger-secondary", "--color-icon-ondanger-tertiary", "--color-icon-ondisabled", "--color-icon-oninverse", "--color-icon-onselected", "--color-icon-onselected-secondary", "--color-icon-onselected-strong", "--color-icon-onselected-tertiary", "--color-icon-onsuccess", "--color-icon-onsuccess-secondary", "--color-icon-onsuccess-tertiary", "--color-icon-onwarning", "--color-icon-onwarning-secondary", "--color-icon-onwarning-tertiary", "--color-icon-pressed", "--color-icon-secondary", "--color-icon-secondary-hover", "--color-icon-selected", "--color-icon-selected-secondary", "--color-icon-selected-tertiary", "--color-icon-success", "--color-icon-success-pressed", "--color-icon-success-secondary", "--color-icon-success-tertiary", "--color-icon-tertiary", "--color-icon-tertiary-hover", "--color-icon-warning", "--color-icon-warning-pressed", "--color-icon-warning-secondary", "--color-icon-warning-tertiary", "--color-text", "--color-text-brand", "--color-text-brand-secondary", "--color-text-brand-tertiary", "--color-text-component", "--color-text-component-pressed", "--color-text-component-secondary", "--color-text-component-tertiary", "--color-text-danger", "--color-text-danger-secondary", "--color-text-danger-tertiary", "--color-text-disabled", "--color-text-hover", "--color-text-onbrand", "--color-text-onbrand-secondary", "--color-text-onbrand-tertiary", "--color-text-oncomponent", "--color-text-oncomponent-secondary", "--color-text-oncomponent-tertiary", "--color-text-ondanger", "--color-text-ondanger-secondary", "--color-text-ondanger-tertiary", "--color-text-ondisabled", "--color-text-oninverse", "--color-text-onselected", "--color-text-onselected-secondary", "--color-text-onselected-strong", "--color-text-onselected-tertiary", "--color-text-onsuccess", "--color-text-onsuccess-secondary", "--color-text-onsuccess-tertiary", "--color-text-onwarning", "--color-text-onwarning-secondary", "--color-text-onwarning-tertiary", "--color-text-secondary", "--color-text-secondary-hover", "--color-text-selected", "--color-text-selected-secondary", "--color-text-selected-tertiary", "--color-text-success", "--color-text-success-secondary", "--color-text-success-tertiary", "--color-text-tertiary", "--color-text-tertiary-hover", "--color-text-warning", "--color-text-warning-secondary", "--color-text-warning-tertiary"];
+let s = {
+  "--color-bg": {
+    light: "rgba(255, 255, 255, 1)"
+  },
+  "--color-bg-brand": {
+    light: "#9747ff"
+  },
+  "--color-bg-brand-hover": {
+    light: "#8638e5"
+  },
+  "--color-bg-brand-pressed": {
+    light: "#8638e5"
+  },
+  "--color-bg-brand-secondary": {
+    light: "#7c2bda"
+  },
+  "--color-bg-brand-tertiary": {
+    light: "#f1e5ff"
+  },
+  "--color-bg-component": {
+    light: "#9747ff"
+  },
+  "--color-bg-component-hover": {
+    light: "#8638e5"
+  },
+  "--color-bg-component-pressed": {
+    light: "#8638e5"
+  },
+  "--color-bg-component-secondary": {
+    light: "#7c2bda"
+  },
+  "--color-bg-component-tertiary": {
+    light: "#f1e5ff"
+  },
+  "--color-bg-danger": {
+    light: "#f24822"
+  },
+  "--color-bg-danger-hover": {
+    light: "#dc3412"
+  },
+  "--color-bg-danger-pressed": {
+    light: "#dc3412"
+  },
+  "--color-bg-danger-secondary": {
+    light: "#bd2915"
+  },
+  "--color-bg-danger-tertiary": {
+    light: "#ffe2e0"
+  },
+  "--color-bg-disabled": {
+    light: "#d9d9d9"
+  },
+  "--color-bg-disabled-secondary": {
+    light: "#b3b3b3"
+  },
+  "--color-bg-hover": {
+    light: "#f5f5f5"
+  },
+  "--color-bg-inverse": {
+    light: "#2c2c2c"
+  },
+  "--color-bg-onselected": {
+    light: "#e4ccff"
+  },
+  "--color-bg-onselected-hover": {
+    light: "#e4ccff"
+  },
+  "--color-bg-onselected-pressed": {
+    light: "#e4ccff"
+  },
+  "--color-bg-pressed": {
+    light: "#f5f5f5"
+  },
+  "--color-bg-secondary": {
+    light: "#f5f5f5"
+  },
+  "--color-bg-selected": {
+    light: "#f1e5ff"
+  },
+  "--color-bg-selected-hover": {
+    light: "#e4ccff"
+  },
+  "--color-bg-selected-pressed": {
+    light: "#e4ccff"
+  },
+  "--color-bg-selected-secondary": {
+    light: "#f9f5ff"
+  },
+  "--color-bg-selected-strong": {
+    light: "#9747ff"
+  },
+  "--color-bg-selected-tertiary": {
+    light: "#f9f5ff"
+  },
+  "--color-bg-success": {
+    light: "#14ae5c"
+  },
+  "--color-bg-success-hover": {
+    light: "#009951"
+  },
+  "--color-bg-success-pressed": {
+    light: "#009951"
+  },
+  "--color-bg-success-secondary": {
+    light: "#008043"
+  },
+  "--color-bg-success-tertiary": {
+    light: "#cff7d3"
+  },
+  "--color-bg-tertiary": {
+    light: "#e6e6e6"
+  },
+  "--color-bg-warning": {
+    light: "#ffcd29"
+  },
+  "--color-bg-warning-hover": {
+    light: "#ffc21a"
+  },
+  "--color-bg-warning-pressed": {
+    light: "#ffc21a"
+  },
+  "--color-bg-warning-secondary": {
+    light: "#fab815"
+  },
+  "--color-bg-warning-tertiary": {
+    light: "#fff1c2"
+  },
+  "--color-border": {
+    light: "#e6e6e6"
+  },
+  "--color-border-brand": {
+    light: "#e4ccff"
+  },
+  "--color-border-brand-strong": {
+    light: "#8638e5"
+  },
+  "--color-border-component": {
+    light: "#e4ccff"
+  },
+  "--color-border-component-hover": {
+    light: "#9747ff"
+  },
+  "--color-border-component-strong": {
+    light: "#8638e5"
+  },
+  "--color-border-danger": {
+    light: "#ffc7c2"
+  },
+  "--color-border-danger-strong": {
+    light: "#dc3412"
+  },
+  "--color-border-disabled": {
+    light: "#e6e6e6"
+  },
+  "--color-border-disabled-strong": {
+    light: "rgba(0, 0, 0, 0.3)"
+  },
+  "--color-border-onbrand": {
+    light: "#8638e5"
+  },
+  "--color-border-onbrand-strong": {
+    light: "rgba(255, 255, 255, 1)"
+  },
+  "--color-border-oncomponent": {
+    light: "#8638e5"
+  },
+  "--color-border-oncomponent-strong": {
+    light: "rgba(255, 255, 255, 1)"
+  },
+  "--color-border-ondanger": {
+    light: "#dc3412"
+  },
+  "--color-border-ondanger-strong": {
+    light: "rgba(255, 255, 255, 1)"
+  },
+  "--color-border-onselected": {
+    light: "#e4ccff"
+  },
+  "--color-border-onselected-strong": {
+    light: "rgba(0, 0, 0, 0.9)"
+  },
+  "--color-border-onsuccess": {
+    light: "#009951"
+  },
+  "--color-border-onsuccess-strong": {
+    light: "rgba(255, 255, 255, 1)"
+  },
+  "--color-border-onwarning": {
+    light: "#fab815"
+  },
+  "--color-border-onwarning-strong": {
+    light: "rgba(0, 0, 0, 0.9)"
+  },
+  "--color-border-selected": {
+    light: "#9747ff"
+  },
+  "--color-border-selected-strong": {
+    light: "#8638e5"
+  },
+  "--color-border-strong": {
+    light: "#2c2c2c"
+  },
+  "--color-border-success": {
+    light: "#aff4c6"
+  },
+  "--color-border-success-strong": {
+    light: "#009951"
+  },
+  "--color-border-warning": {
+    light: "#ffe8a3"
+  },
+  "--color-border-warning-strong": {
+    light: "#b86200"
+  },
+  "--color-icon": {
+    light: "rgba(0, 0, 0, 0.9)"
+  },
+  "--color-icon-brand": {
+    light: "#8638e5"
+  },
+  "--color-icon-brand-pressed": {
+    light: "#7c2bda"
+  },
+  "--color-icon-brand-secondary": {
+    light: "#d9b8ff"
+  },
+  "--color-icon-brand-tertiary": {
+    light: "#e4ccff"
+  },
+  "--color-icon-component": {
+    light: "#8638e5"
+  },
+  "--color-icon-component-pressed": {
+    light: "#7c2bda"
+  },
+  "--color-icon-component-secondary": {
+    light: "#c5b2dc"
+  },
+  "--color-icon-component-tertiary": {
+    light: "#c5b2dc"
+  },
+  "--color-icon-danger": {
+    light: "#f24822"
+  },
+  "--color-icon-danger-hover": {
+    light: "#bd2915"
+  },
+  "--color-icon-danger-pressed": {
+    light: "#bd2915"
+  },
+  "--color-icon-danger-secondary": {
+    light: "#f24822"
+  },
+  "--color-icon-danger-secondary-hover": {
+    light: "#f24822"
+  },
+  "--color-icon-danger-tertiary": {
+    light: "#f24822"
+  },
+  "--color-icon-disabled": {
+    light: "rgba(0, 0, 0, 0.3)"
+  },
+  "--color-icon-hover": {
+    light: "rgba(0, 0, 0, 0.9)"
+  },
+  "--color-icon-onbrand": {
+    light: "rgba(255, 255, 255, 1)"
+  },
+  "--color-icon-onbrand-secondary": {
+    light: "rgba(255, 255, 255, 0.8)"
+  },
+  "--color-icon-onbrand-tertiary": {
+    light: "rgba(255, 255, 255, 0.4)"
+  },
+  "--color-icon-oncomponent": {
+    light: "rgba(255, 255, 255, 1)"
+  },
+  "--color-icon-oncomponent-secondary": {
+    light: "rgba(255, 255, 255, 0.8)"
+  },
+  "--color-icon-oncomponent-tertiary": {
+    light: "rgba(255, 255, 255, 0.4)"
+  },
+  "--color-icon-ondanger": {
+    light: "rgba(255, 255, 255, 1)"
+  },
+  "--color-icon-ondanger-secondary": {
+    light: "rgba(255, 255, 255, 0.8)"
+  },
+  "--color-icon-ondanger-tertiary": {
+    light: "rgba(255, 255, 255, 0.4)"
+  },
+  "--color-icon-ondisabled": {
+    light: "rgba(255, 255, 255, 1)"
+  },
+  "--color-icon-oninverse": {
+    light: "rgba(255, 255, 255, 0.9)"
+  },
+  "--color-icon-onselected": {
+    light: "rgba(0, 0, 0, 0.9)"
+  },
+  "--color-icon-onselected-secondary": {
+    light: "rgba(0, 0, 0, 0.5)"
+  },
+  "--color-icon-onselected-strong": {
+    light: "rgba(255, 255, 255, 1)"
+  },
+  "--color-icon-onselected-tertiary": {
+    light: "rgba(0, 0, 0, 0.3)"
+  },
+  "--color-icon-onsuccess": {
+    light: "rgba(255, 255, 255, 1)"
+  },
+  "--color-icon-onsuccess-secondary": {
+    light: "rgba(255, 255, 255, 0.8)"
+  },
+  "--color-icon-onsuccess-tertiary": {
+    light: "rgba(255, 255, 255, 0.4)"
+  },
+  "--color-icon-onwarning": {
+    light: "rgba(0, 0, 0, 0.9)"
+  },
+  "--color-icon-onwarning-secondary": {
+    light: "rgba(0, 0, 0, 0.5)"
+  },
+  "--color-icon-onwarning-tertiary": {
+    light: "rgba(0, 0, 0, 0.3)"
+  },
+  "--color-icon-pressed": {
+    light: "#8638e5"
+  },
+  "--color-icon-secondary": {
+    light: "rgba(0, 0, 0, 0.5)"
+  },
+  "--color-icon-secondary-hover": {
+    light: "rgba(0, 0, 0, 0.9)"
+  },
+  "--color-icon-selected": {
+    light: "#8638e5"
+  },
+  "--color-icon-selected-secondary": {
+    light: "#8638e5"
+  },
+  "--color-icon-selected-tertiary": {
+    light: "#8638e5"
+  },
+  "--color-icon-success": {
+    light: "#14ae5c"
+  },
+  "--color-icon-success-pressed": {
+    light: "#008043"
+  },
+  "--color-icon-success-secondary": {
+    light: "#14ae5c"
+  },
+  "--color-icon-success-tertiary": {
+    light: "#14ae5c"
+  },
+  "--color-icon-tertiary": {
+    light: "rgba(0, 0, 0, 0.3)"
+  },
+  "--color-icon-tertiary-hover": {
+    light: "rgba(0, 0, 0, 0.9)"
+  },
+  "--color-icon-warning": {
+    light: "#ffcd29"
+  },
+  "--color-icon-warning-pressed": {
+    light: "#b86200"
+  },
+  "--color-icon-warning-secondary": {
+    light: "#ffcd29"
+  },
+  "--color-icon-warning-tertiary": {
+    light: "#ffcd29"
+  },
+  "--color-text": {
+    light: "rgba(0, 0, 0, 0.9)"
+  },
+  "--color-text-brand": {
+    light: "#8638e5"
+  },
+  "--color-text-brand-secondary": {
+    light: "#8638e5"
+  },
+  "--color-text-brand-tertiary": {
+    light: "#8638e5"
+  },
+  "--color-text-component": {
+    light: "#8638e5"
+  },
+  "--color-text-component-pressed": {
+    light: "#7c2bda"
+  },
+  "--color-text-component-secondary": {
+    light: "#c5b2dc"
+  },
+  "--color-text-component-tertiary": {
+    light: "#c5b2dc"
+  },
+  "--color-text-danger": {
+    light: "#dc3412"
+  },
+  "--color-text-danger-secondary": {
+    light: "#dc3412"
+  },
+  "--color-text-danger-tertiary": {
+    light: "#dc3412"
+  },
+  "--color-text-disabled": {
+    light: "rgba(0, 0, 0, 0.3)"
+  },
+  "--color-text-hover": {
+    light: "rgba(0, 0, 0, 0.9)"
+  },
+  "--color-text-onbrand": {
+    light: "rgba(255, 255, 255, 1)"
+  },
+  "--color-text-onbrand-secondary": {
+    light: "rgba(255, 255, 255, 0.8)"
+  },
+  "--color-text-onbrand-tertiary": {
+    light: "rgba(255, 255, 255, 0.4)"
+  },
+  "--color-text-oncomponent": {
+    light: "rgba(255, 255, 255, 1)"
+  },
+  "--color-text-oncomponent-secondary": {
+    light: "rgba(255, 255, 255, 0.8)"
+  },
+  "--color-text-oncomponent-tertiary": {
+    light: "rgba(255, 255, 255, 0.4)"
+  },
+  "--color-text-ondanger": {
+    light: "rgba(255, 255, 255, 1)"
+  },
+  "--color-text-ondanger-secondary": {
+    light: "rgba(255, 255, 255, 0.8)"
+  },
+  "--color-text-ondanger-tertiary": {
+    light: "rgba(255, 255, 255, 0.4)"
+  },
+  "--color-text-ondisabled": {
+    light: "rgba(255, 255, 255, 1)"
+  },
+  "--color-text-oninverse": {
+    light: "rgba(255, 255, 255, 0.9)"
+  },
+  "--color-text-onselected": {
+    light: "rgba(0, 0, 0, 0.9)"
+  },
+  "--color-text-onselected-secondary": {
+    light: "rgba(0, 0, 0, 0.5)"
+  },
+  "--color-text-onselected-strong": {
+    light: "rgba(255, 255, 255, 1)"
+  },
+  "--color-text-onselected-tertiary": {
+    light: "rgba(0, 0, 0, 0.3)"
+  },
+  "--color-text-onsuccess": {
+    light: "rgba(255, 255, 255, 1)"
+  },
+  "--color-text-onsuccess-secondary": {
+    light: "rgba(255, 255, 255, 0.8)"
+  },
+  "--color-text-onsuccess-tertiary": {
+    light: "rgba(255, 255, 255, 0.4)"
+  },
+  "--color-text-onwarning": {
+    light: "rgba(0, 0, 0, 0.9)"
+  },
+  "--color-text-onwarning-secondary": {
+    light: "rgba(0, 0, 0, 0.5)"
+  },
+  "--color-text-onwarning-tertiary": {
+    light: "rgba(0, 0, 0, 0.3)"
+  },
+  "--color-text-secondary": {
+    light: "rgba(0, 0, 0, 0.5)"
+  },
+  "--color-text-secondary-hover": {
+    light: "rgba(0, 0, 0, 0.9)"
+  },
+  "--color-text-selected": {
+    light: "#8638e5"
+  },
+  "--color-text-selected-secondary": {
+    light: "#8638e5"
+  },
+  "--color-text-selected-tertiary": {
+    light: "#8638e5"
+  },
+  "--color-text-success": {
+    light: "#009951"
+  },
+  "--color-text-success-secondary": {
+    light: "#009951"
+  },
+  "--color-text-success-tertiary": {
+    light: "#009951"
+  },
+  "--color-text-tertiary": {
+    light: "rgba(0, 0, 0, 0.3)"
+  },
+  "--color-text-tertiary-hover": {
+    light: "rgba(0, 0, 0, 0.9)"
+  },
+  "--color-text-warning": {
+    light: "#b86200"
+  },
+  "--color-text-warning-secondary": {
+    light: "#b86200"
+  },
+  "--color-text-warning-tertiary": {
+    light: "#b86200"
+  }
+};
+export const H = $$n0;
+export const p = $$r1;

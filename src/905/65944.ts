@@ -1,0 +1,2347 @@
+import { jsx, jsxs, Fragment } from "react/jsx-runtime";
+import { useCallback, createContext, useState, useMemo, useContext, useEffect, useRef, memo, createRef, forwardRef, useId } from "react";
+import { wA } from "../vendor/514228";
+import { ServiceCategories as _$$e } from "../905/165054";
+import { Y9, r1, qj, jk, vo, nB } from "../figma_app/272243";
+import { t as _$$t } from "../905/150656";
+import { K as _$$K } from "../905/443068";
+import { bL } from "../905/911410";
+import { e as _$$e2 } from "../905/149844";
+import { rXF, Pdb, VD3, e0R, vRS, t2E, Vzr, NLJ, rrT, Z_n, j0r, OmW } from "../figma_app/763686";
+import { sH, dI } from "../905/805904";
+import { getFeatureFlags } from "../905/601108";
+import { md } from "../figma_app/27355";
+import f from "classnames";
+import { hC } from "../figma_app/901889";
+import { C as _$$C } from "../905/108595";
+import { ZC } from "../figma_app/39751";
+import { M as _$$M } from "../figma_app/648761";
+import { m as _$$m } from "../905/717445";
+import { Pt, rf, qP } from "../figma_app/806412";
+import { k as _$$k2 } from "../905/582200";
+import { tH as _$$tH } from "../905/751457";
+import { tx as _$$tx, t as _$$t2 } from "../905/303541";
+import { ZI } from "../figma_app/328825";
+import { h as _$$h } from "../905/78925";
+import { XE } from "../figma_app/91703";
+import { Yl } from "../905/232641";
+import { cJ } from "../figma_app/976749";
+import { Ep } from "../figma_app/504823";
+import { Ku } from "../figma_app/740163";
+import { sb, bn, c4, x$, aT, JX, OO, Ou, iC, y7, XE as _$$XE, Z3 } from "../figma_app/385874";
+import { Um } from "../905/848862";
+import { dH, eY as _$$eY, s6 } from "../figma_app/722362";
+import { dq } from "../905/845253";
+import { ol } from "../figma_app/598018";
+import { Ib } from "../905/129884";
+import { cn } from "../905/959568";
+import { vL } from "../905/826900";
+import { Rk } from "../figma_app/844696";
+import { nZ, tX as _$$tX, O1, AG } from "../905/28111";
+import { s2 } from "../905/107436";
+import { mu, Rh, S7 } from "../figma_app/259578";
+import { SY } from "../figma_app/200284";
+import { b as _$$b } from "../905/22449";
+import { c$ } from "../905/575478";
+import { E as _$$E } from "../905/632989";
+import { H as _$$H } from "../905/762413";
+import { z as _$$z } from "../905/626016";
+import { L as _$$L } from "../905/858162";
+import { Z as _$$Z } from "../905/801075";
+import { k as _$$k3 } from "../905/376839";
+import { YQ } from "../905/502364";
+import { p as _$$p } from "../figma_app/353099";
+import { FJ } from "../905/508367";
+import { h as _$$h2 } from "../905/207101";
+import { buildUploadUrl } from "../figma_app/169182";
+import { c as _$$c } from "../905/370443";
+import { E as _$$E2 } from "../905/453826";
+import { e as _$$e3 } from "../905/621515";
+import { r1 as _$$r } from "../figma_app/545877";
+import { N as _$$N } from "../figma_app/268271";
+import { w as _$$w } from "../905/129046";
+import { rq } from "../905/425180";
+import { F_ } from "../905/858282";
+import { Nlr } from "../figma_app/6204";
+import { Te } from "../vendor/813803";
+import { Wz } from "../905/657224";
+import { P as _$$P } from "../905/347284";
+import { Oo } from "../905/709171";
+import { Eo } from "../figma_app/80990";
+import { tS as _$$tS } from "../figma_app/516028";
+import { rt } from "../figma_app/646357";
+import { EU, KV, _U } from "../905/255097";
+import { s as _$$s } from "../cssbuilder/589278";
+import { QH, lx } from "../figma_app/333571";
+import { x7 } from "../figma_app/492929";
+import { X7 } from "../905/713167";
+import { isNullish } from "../figma_app/95419";
+import { D as _$$D, J as _$$J } from "../905/225412";
+import { lQ } from "../905/934246";
+import { A as _$$A } from "../905/442873";
+import { bR, UV, Do, PC } from "../905/438367";
+import { Id, fI, Zk } from "../figma_app/626177";
+import { A as _$$A2 } from "../905/749030";
+import { c$ as _$$c$, bL as _$$bL, l9, mc, wv } from "../905/493196";
+import { h as _$$h3 } from "../905/270045";
+import { c$ as _$$c$2, l6, sK } from "../905/794875";
+import { L as _$$L2 } from "../figma_app/297778";
+import { l as _$$l } from "../905/331642";
+import { i as _$$i, U as _$$U } from "../905/649519";
+import { Rp } from "../figma_app/149989";
+import { sO } from "../figma_app/21029";
+import { TN } from "../figma_app/177697";
+import { rW, T7 } from "../905/899866";
+import { R as _$$R } from "../905/649743";
+import { L as _$$L3 } from "../905/210923";
+import { Oe } from "../figma_app/933328";
+import { Y5 } from "../figma_app/455680";
+import { u as _$$u } from "../figma_app/852050";
+import { zk } from "../figma_app/198712";
+import { f as _$$f } from "../905/135117";
+import { p as _$$p2 } from "../905/725707";
+import { ZB } from "../figma_app/451499";
+import { dG } from "../figma_app/753501";
+import { MH } from "../figma_app/394327";
+import { oz } from "../figma_app/406976";
+import { n as _$$n } from "../905/264891";
+import { i as _$$i2 } from "../905/777871";
+import { oV, Ug, Zb, _R } from "../905/706046";
+import { O as _$$O } from "../905/487602";
+import { w2, gq } from "../figma_app/178475";
+import { rM } from "../905/95091";
+import { Qh } from "../figma_app/228217";
+import { bL as _$$bL2, c$ as _$$c$3 } from "../905/867927";
+import { q as _$$q } from "../905/932270";
+import { Point } from "../905/736624";
+import { F as _$$F } from "../905/989956";
+import { rC } from "../905/713722";
+import { DP, yM } from "../905/640017";
+import { pw } from "../905/187165";
+import { AN } from "../905/203369";
+import { cS, Zo } from "../figma_app/334459";
+import { $n } from "../905/521428";
+import { o as _$$o } from "../905/298519";
+import { A as _$$A3 } from "../905/24328";
+import { o as _$$o2 } from "../905/89370";
+import { W as _$$W } from "../905/592530";
+import { l as _$$l2 } from "../905/556594";
+import { b as _$$b2 } from "../905/946806";
+import { dI as _$$dI, fn } from "../905/871411";
+import { UN } from "../905/700578";
+import { useSprigWithSampling } from "../905/99656";
+import { EV } from "../figma_app/975811";
+import { wr, Dh } from "../figma_app/741237";
+import { Bf } from "../figma_app/249941";
+import { V as _$$V } from "../905/823363";
+import { WC } from "../figma_app/973219";
+var _ = f;
+let eg = "video-fill-button";
+let ef = "video-fill-button-clicked";
+let e_ = "seen_video_fill_callout";
+let eA = _$$r(e_);
+function ey({
+  selectVideoFill: e
+}) {
+  let t = cJ();
+  let i = getFeatureFlags().sts_video;
+  let r = md(eA);
+  let {
+    show,
+    isShowing,
+    complete,
+    uniqueId
+  } = _$$e3({
+    overlay: Nlr,
+    priority: _$$N.DEFAULT_MODAL
+  }, [r]);
+  _$$h2(() => {
+    show({
+      canShow: e => t && !!i && !e
+    });
+  });
+  _$$E2(uniqueId, ef, () => {
+    isShowing && complete();
+  });
+  return jsx(rq, {
+    arrowPosition: F_.BOTTOM,
+    description: _$$tx("fullscreen.properties_panel.video_fill_callout.description"),
+    isShowing,
+    media: jsx(_$$w, {
+      src: buildUploadUrl("3c264d9568a9593189da6d47438d382f94a70d95"),
+      aspectRatio: 16 / 9
+    }),
+    onClose: complete,
+    primaryCta: {
+      label: _$$tx("fullscreen.properties_panel.video_fill_callout.primary_cta"),
+      type: "button",
+      onClick: () => {
+        e();
+        complete();
+      },
+      ctaTrackingDescriptor: _$$c.TRY_IT_OUT,
+      dataTestId: "video-fill-callout-primary-cta"
+    },
+    secondaryCta: {
+      label: _$$tx("general.learn_more"),
+      type: "button",
+      onClick: () => {
+        FJ("https://help.figma.com/hc/articles/33666207487767", "_blank");
+        complete();
+      },
+      ctaTrackingDescriptor: _$$c.LEARN_MORE,
+      dataTestId: "video-fill-callout-secondary-cta"
+    },
+    targetKey: eg,
+    testId: "video-feature-callout",
+    title: _$$tx("fullscreen.properties_panel.video_fill_callout.title"),
+    trackingContextName: "video_fill_callout",
+    userFlagOnShow: e_
+  });
+}
+let eb = "paint_type_group_tabs--container--TtklB";
+let ev = "paint_type_group_tabs--fillTypeButton--WEJXB";
+let eI = "paint_type_group_tabs--selected--me4mY";
+var eE = (e => (e.SOLID = "SOLID", e.GRADIENT_LINEAR = "GRADIENT_LINEAR", e.PATTERN = "PATTERN", e.IMAGE = "IMAGE", e.VIDEO = "VIDEO", e))(eE || {});
+let ex = {
+  format: e => {
+    switch (e) {
+      case "SOLID":
+        return _$$t2("fullscreen.properties_panel.solid");
+      case "GRADIENT_LINEAR":
+        return _$$t2("fullscreen.properties_panel.gradient");
+      case "PATTERN":
+        return _$$t2("fullscreen.properties_panel.pattern");
+      case "IMAGE":
+        return _$$t2("fullscreen.properties_panel.image");
+      case "VIDEO":
+        return _$$t2("fullscreen.properties_panel.video");
+    }
+  }
+};
+let eS = e => {
+  switch (e) {
+    case "SOLID":
+      return jsx(_$$H, {
+        "aria-hidden": "true"
+      });
+    case "GRADIENT_LINEAR":
+      return jsx(_$$z, {
+        "aria-hidden": "true"
+      });
+    case "PATTERN":
+      return jsx(_$$L, {
+        "aria-hidden": "true"
+      });
+    case "IMAGE":
+      return jsx(_$$Z, {
+        "aria-hidden": "true"
+      });
+    case "VIDEO":
+      return jsx(_$$k3, {
+        "aria-hidden": "true"
+      });
+  }
+};
+let ew = e => {
+  if ("VIDEO" === e) return eg;
+};
+function eC({
+  figPaintType: e,
+  disableImagePaints: t,
+  disablePatternPaints: i,
+  hidePatternPaints: r,
+  recordingKey: a,
+  onChange: s
+}) {
+  if (!getFeatureFlags().eu_fpl_colors_tab) return jsx(eT, {
+    paintType: e,
+    disableImagePaints: t,
+    disablePatternPaints: i,
+    hidePatternPaints: r,
+    recordingKey: a,
+    onChange: s
+  });
+  let o = e => "PATTERN" === e && i;
+  return jsxs(Fragment, {
+    children: [jsx(_$$p, {
+      children: jsx(ey, {
+        selectVideoFill: () => s("VIDEO")
+      })
+    }), jsx(_$$b, {
+      value: e,
+      onChange: s,
+      className: eb,
+      recordingKey: Pt(a, "paintTypeGroupTabs"),
+      children: Object.values(eE).filter(e => {
+        switch (e) {
+          case "SOLID":
+          case "GRADIENT_LINEAR":
+            return !0;
+          case "PATTERN":
+            return !!(!r && _$$m().ce_il_pattern);
+          case "IMAGE":
+          case "VIDEO":
+            return !t;
+        }
+      }).map(t => jsx(c$, {
+        value: t,
+        "aria-label": ex.format(t),
+        className: _()(ev, {
+          [eI]: e === t
+        }),
+        readonly: e !== t && o(t) || void 0,
+        htmlAttributes: {
+          "data-tooltip-type": Ib.TEXT,
+          "data-tooltip": ex.format(t),
+          "data-onboarding-key": ew(t)
+        },
+        "data-testid": `paintTypeGroupTabs-${t}`,
+        children: eS(t)
+      }, t))
+    })]
+  });
+}
+function eT({
+  paintType: e,
+  onChange: t,
+  disableImagePaints: i,
+  disablePatternPaints: r,
+  hidePatternPaints: a,
+  recordingKey: s
+}) {
+  let o = !!(!a && _$$m().ce_il_pattern);
+  return jsxs("div", {
+    className: eb,
+    children: [jsx(_$$p, {
+      children: jsx(ey, {
+        selectVideoFill: () => t("VIDEO")
+      })
+    }), jsx(ek, {
+      isSelected: sb(e),
+      onChange: t,
+      paintType: "SOLID",
+      recordingKey: Pt(s, "solid"),
+      icon: jsx(_$$H, {}),
+      tooltip: _$$t2("fullscreen.properties_panel.solid")
+    }), jsx(ek, {
+      isSelected: bn(e),
+      onChange: t,
+      paintType: "GRADIENT_LINEAR",
+      recordingKey: Pt(s, "gradientLinear"),
+      icon: jsx(_$$z, {}),
+      tooltip: _$$t2("fullscreen.properties_panel.gradient")
+    }), o && jsx(ek, {
+      isSelected: "PATTERN" === e,
+      onChange: t,
+      paintType: "PATTERN",
+      recordingKey: Pt(s, "pattern"),
+      icon: jsx(_$$L, {}),
+      tooltip: _$$t2("fullscreen.properties_panel.pattern"),
+      disabled: r && "PATTERN" !== e
+    }), !i && jsx(ek, {
+      isSelected: "IMAGE" === e,
+      onChange: t,
+      paintType: "IMAGE",
+      recordingKey: Pt(s, "image"),
+      icon: jsx(_$$Z, {}),
+      tooltip: _$$t2("fullscreen.properties_panel.image")
+    }), !i && jsx(ek, {
+      isSelected: "VIDEO" === e,
+      onChange: t,
+      paintType: "VIDEO",
+      recordingKey: Pt(s, "video"),
+      icon: jsx(_$$k3, {}),
+      tooltip: _$$t2("fullscreen.properties_panel.video"),
+      onboardingKey: eg
+    })]
+  });
+}
+function ek({
+  isSelected: e,
+  onChange: t,
+  paintType: i,
+  recordingKey: a,
+  icon: s,
+  tooltip: o,
+  disabled: l,
+  onboardingKey: d
+}) {
+  let c = useCallback(() => {
+    t(i);
+    "VIDEO" === i && YQ({
+      id: ef
+    });
+  }, [t, i]);
+  return jsx(_$$E, {
+    "aria-label": o,
+    onClick: c,
+    recordingKey: a,
+    className: _()(ev, {
+      [eI]: e,
+      "paint_type_group_tabs--disabled--QFCRq": l
+    }),
+    htmlAttributes: {
+      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip": o,
+      ...(d && {
+        "data-onboarding-key": d
+      })
+    },
+    disabled: l,
+    children: s
+  });
+}
+function eV() {
+  return jsx("div", {
+    className: _()(x7, _$$s.m4.$),
+    children: jsx("div", {
+      className: _()(QH, lx)
+    })
+  });
+}
+let eK = createContext({
+  isLoading: !1,
+  registerItem: lQ,
+  unregisterItem: lQ,
+  setLoading: lQ
+});
+function eY({
+  children: e
+}) {
+  let [t, i] = useState({});
+  let a = useCallback(e => {
+    i(t => ({
+      ...t,
+      [e]: !0
+    }));
+  }, []);
+  let s = useCallback(e => {
+    i(t => {
+      let i = {
+        ...t
+      };
+      delete i[e];
+      return i;
+    });
+  }, []);
+  let o = useCallback((e, t) => {
+    i(i => i.hasOwnProperty(e) ? {
+      ...i,
+      [e]: t
+    } : i);
+  }, []);
+  let l = Object.values(t).some(e => e);
+  let d = useMemo(() => ({
+    isLoading: l,
+    registerItem: a,
+    unregisterItem: s,
+    setLoading: o
+  }), [l, a, s, o]);
+  return jsx(eK.Provider, {
+    value: d,
+    children: e
+  });
+}
+let e$ = "color_swatch--chit--4pGNc";
+function eZ({
+  asset: e,
+  recordingKey: t,
+  index: i,
+  onPaintChitClick: r,
+  onStyleChitClick: a
+}) {
+  switch (e.type) {
+    case "paint":
+      return jsx(eX, {
+        paint: e.stylePaint.paint,
+        recordingKey: Pt(t, "chit", i),
+        onClick: r
+      });
+    case "style":
+      return jsx(eQ, {
+        dsStyle: e.style,
+        onClick: a,
+        recordingKey: Pt(t, "chit", i)
+      });
+    case "variable":
+      return jsx(eJ, {
+        variable: e.variable,
+        variableCollection: e.variableCollection,
+        recordingKey: Pt(t, "chit", i),
+        onClick: r
+      });
+  }
+}
+function eX({
+  paint: e,
+  recordingKey: t,
+  onClick: i
+}) {
+  let a = useCallback(() => {
+    i(e);
+  }, [e, i]);
+  return jsx(_$$D, {
+    className: e$,
+    paint: e,
+    recordingKey: t,
+    onMouseDown: a
+  });
+}
+function eQ({
+  dsStyle: e,
+  recordingKey: t,
+  onClick: i
+}) {
+  let a = useCallback(() => {
+    i(e);
+  }, [e, i]);
+  return jsx(_$$D, {
+    className: e$,
+    fillStyle: e,
+    recordingKey: t,
+    onMouseDown: a
+  });
+}
+function eJ({
+  variable: e,
+  variableCollection: t,
+  recordingKey: i,
+  onClick: a
+}) {
+  let {
+    thumbnailValue,
+    isLoading
+  } = _$$A({
+    variable: e,
+    variableCollection: t
+  });
+  !function({
+    itemId: e,
+    isLoading: t
+  }) {
+    let {
+      registerItem,
+      unregisterItem,
+      setLoading
+    } = useContext(eK);
+    useEffect(() => (registerItem(e), () => {
+      unregisterItem(e);
+    }), [e, registerItem, unregisterItem]);
+    useEffect(() => {
+      setLoading(e, t);
+    }, [e, setLoading, t]);
+  }({
+    itemId: e.node_id,
+    isLoading
+  });
+  let l = useMemo(() => {
+    if (isNullish(thumbnailValue) || "MIXED" === thumbnailValue || thumbnailValue.resolvedType !== rXF.COLOR) return null;
+    let e = thumbnailValue.value;
+    return {
+      type: "SOLID",
+      color: e,
+      opacity: e.a
+    };
+  }, [thumbnailValue]);
+  let d = useCallback(() => {
+    l && a(l);
+  }, [l, a]);
+  return l ? jsx(_$$D, {
+    className: e$,
+    paint: l,
+    recordingKey: i,
+    onMouseDown: d
+  }) : jsx(eV, {});
+}
+function e6({
+  swatchSetIds: e,
+  selectedSwatchSetId: t,
+  subscribedLibraries: i,
+  recordingKey: s,
+  onChange: o
+}) {
+  let l = wA();
+  let d = Um();
+  let c = getFeatureFlags().eu_fpl_migration_styles_picker_selects;
+  let u = useMemo(() => ({
+    format: e => {
+      switch (e) {
+        case EU:
+          return _$$t2("fullscreen.properties_panel.current_page_colors");
+        case KV:
+          return _$$t2("fullscreen.properties_panel.local_assets");
+        default:
+          {
+            let t = i.find(t => t.fileKey === e);
+            return t?.fileName ?? "";
+          }
+      }
+    }
+  }), [i]);
+  let p = !e.every(_U);
+  let m = useCallback(e => {
+    let t = u.format(e).replace(/\W/g, "");
+    return c ? jsx(_$$c$, {
+      value: e,
+      children: u.format(e)
+    }, e) : jsx(_$$c$2, {
+      value: e,
+      recordingKey: Pt(s, t)
+    }, e);
+  }, [u, s, c]);
+  let g = useMemo(() => e.filter(_U).map(m), [m, e]);
+  let f = useMemo(() => e.filter(e => !_U(e)).map(m), [m, e]);
+  return c ? jsxs(_$$bL, {
+    value: t,
+    onChange: o,
+    recordingKey: s,
+    children: [jsx(l9, {
+      width: "fill",
+      label: jsx(_$$h3, {
+        children: u.format(t)
+      }),
+      "aria-label": _$$t2("fullscreen.properties_panel.library_swatch_select.aria_label")
+    }), jsxs(mc, {
+      children: [g, p && jsx(wv, {}), f]
+    })]
+  }) : jsxs(l6, {
+    ariaLabel: _$$t2("fullscreen.properties_panel.library_swatch_select.aria_label"),
+    formatter: u,
+    id: "color-picker-swatch-set-select-id",
+    property: t,
+    dropdownShown: d,
+    dispatch: l,
+    recordingKey: s,
+    onChange: o,
+    children: [g, p && jsx(sK, {}), f]
+  });
+}
+function e7({
+  onChange: e,
+  recordingKey: t,
+  onlySupportCurrentPage: i
+}) {
+  let a = useMemo(() => [rXF.COLOR], []);
+  let s = _$$A2(a, null);
+  let o = _$$tS();
+  let l = bR({
+    subscribedLibraries: s
+  });
+  let d = i ? [EU] : l;
+  let [c, u] = Wz("library-color-swatch-selected-swatch-set-id", d[0], {
+    parse: e => d.find(t => t === e) ? e : void 0,
+    stringify: e => e
+  });
+  let m = useCallback(e => {
+    i || u(e);
+  }, [u, i]);
+  let h = useCallback(t => {
+    if (Oo(t, o)) {
+      let i = Pdb.getColorForFillStyle({
+        nodeId: t.node_id
+      });
+      i && e(i);
+    } else Eo.getCanvas(t).then(t => {
+      let i = Pdb.getColorForSharedFillStyle(t);
+      i && e(i);
+    }).catch(() => {}) ;
+  }, [e, o]);
+  let g = useCallback(t => {
+    null != t.color && null != t.opacity && e({
+      ...t.color,
+      a: t.opacity
+    });
+  }, [e]);
+  return jsx(eY, {
+    children: jsx(e8, {
+      selectedSwatchSetId: c,
+      render: ({
+        isLoading: e,
+        colorAssets: r
+      }) => jsx(e9, {
+        colorAssets: r,
+        isLoading: e,
+        onPaintChitClick: g,
+        onStyleChitClick: h,
+        onSwatchSetChange: m,
+        onlySupportCurrentPage: !!i,
+        recordingKey: t,
+        selectedSwatchSetId: c,
+        subscribedLibraries: s,
+        swatchSetIds: d
+      })
+    })
+  });
+}
+function e8({
+  selectedSwatchSetId: e,
+  render: t
+}) {
+  let i = UV();
+  let n = Do();
+  let a = PC(e);
+  let s = useContext(eK);
+  let o = "loading" === a.status || s.isLoading;
+  let l = function() {
+    switch (e) {
+      case EU:
+        return i;
+      case KV:
+        return n;
+      default:
+        return a.data ?? [];
+    }
+  }();
+  let d = useMemo(() => {
+    let e = [];
+    if ("loaded" === a.status) for (let t of a.data) "style" === t.type && e.push(t.style);
+    return e;
+  }, [a]);
+  useEffect(() => {
+    rt(d);
+  }, [d]);
+  return t({
+    isLoading: o,
+    colorAssets: l
+  });
+}
+function e9({
+  swatchSetIds: e,
+  selectedSwatchSetId: t,
+  colorAssets: i,
+  subscribedLibraries: a,
+  isLoading: s,
+  recordingKey: o,
+  onSwatchSetChange: l,
+  onPaintChitClick: d,
+  onStyleChitClick: c,
+  onlySupportCurrentPage: u
+}) {
+  let p = s && 0 === i.length;
+  let m = X7();
+  let h = useRef(null);
+  let g = p ? 4 : Math.ceil(i.length / 9);
+  let f = useCallback(() => h.current, [h]);
+  let A = useCallback(() => 24, []);
+  let y = Te({
+    count: g,
+    getScrollElement: f,
+    estimateSize: A,
+    overscan: 8
+  });
+  let b = [];
+  for (let e of y.getVirtualItems()) {
+    let t = 9 * e.index;
+    let r = (e.index + 1) * 9;
+    for (let a = t; a < r; a++) {
+      let r = i[a];
+      if (!r && !p) break;
+      b.push(jsx("div", {
+        style: {
+          position: "absolute",
+          transform: `translate(${(a - t) * 24}px, ${24 * e.index}px)`
+        },
+        children: p ? jsx(eV, {}) : jsx(eZ, {
+          recordingKey: Pt(o, "swatch"),
+          index: a,
+          asset: r,
+          onPaintChitClick: d,
+          onStyleChitClick: c
+        })
+      }, r ? function(e, t) {
+        switch (e.type) {
+          case "paint":
+            return `${t}`;
+          case "style":
+            return e.style.key;
+          case "variable":
+            return e.variable.node_id;
+        }
+      }(r, a) : `loader-${a}`));
+    }
+  }
+  return jsxs(Id, {
+    className: _()("library_color_swatch--panel--dZ3D-", {
+      "library_color_swatch--panelNewUI--xR8Xb": m
+    }),
+    children: [!u && jsx("div", {
+      className: "library_color_swatch--select--k7pDM",
+      children: jsx(e6, {
+        swatchSetIds: e,
+        selectedSwatchSetId: t,
+        subscribedLibraries: a,
+        onChange: l,
+        recordingKey: Pt(o, "swatchSetSelect")
+      })
+    }), jsx(_$$P, {
+      className: _()("library_color_swatch--swatchScrollContainer--im6kP", {
+        "library_color_swatch--swatchScrollContainerNewUI--w7-PQ": m
+      }),
+      scrollContainerRef: h,
+      children: jsx("div", {
+        style: {
+          height: `${y.getTotalSize()}px`,
+          width: 216,
+          position: "relative",
+          paddingBottom: m ? 12 : 0,
+          zIndex: 0
+        },
+        children: b
+      })
+    })]
+  });
+}
+let t_ = l6;
+let tA = _$$c$2;
+function ty(e) {
+  let t = wA();
+  let i = new ZB(() => e.paint);
+  return jsx(t_, {
+    ariaLabel: _$$t2("fullscreen.properties_panel.color_picker.paint_type.aria_label"),
+    className: "type_select--typeSelect--URjN7",
+    dispatch: t,
+    dropdownClassName: "type_select--typeSelectDropdown--1qAZ9",
+    dropdownShown: e.dropdownShown,
+    formatter: i,
+    id: "color-picker-type-select",
+    inputClassName: "type_select--typeSelectInput--dpSQO",
+    minTop: 6,
+    onChange: e.onChange,
+    onMouseDown: dG,
+    property: e.paint.type,
+    recordingKey: e.recordingKey,
+    children: e.paintTypeOptions.map((t, i) => jsx(tA, {
+      value: t,
+      recordingKey: Pt(e, t)
+    }, i))
+  });
+}
+let tk = memo(function({
+  onColorPickerToggle: e,
+  onDeleteStop: t,
+  onSelectedStopIndexChange: i,
+  onStopsChange: a,
+  recordingKey: s,
+  selectedStopIndex: o,
+  stops: l,
+  stopsVar: d
+}) {
+  let [c, u] = useState(!1);
+  let [p, m] = useState(!1);
+  let h = useCallback((e, t, n, r, s) => {
+    let o = [...l];
+    let c = {
+      color: t,
+      position: n
+    };
+    o.splice(e, 1, c);
+    oV(o);
+    let u = o.indexOf(c);
+    let p = 0 === d.length ? l.map(Ug) : [...d];
+    let m = r ? {
+      color: t,
+      position: n,
+      colorVar: r
+    } : Ug(c);
+    p.splice(e, 1, m);
+    Zb(p);
+    a({
+      stops: o,
+      stopsVar: p
+    }, s);
+    e !== u && i(u);
+  }, [i, a, l, d]);
+  let g = useCallback(e => {
+    i(e);
+  }, [i]);
+  let f = useCallback(e => {
+    "Tab" === e.key && !e.shiftKey && o < l.length - 1 && (e.preventDefault(), u(!0), m(!1), i(o + 1));
+  }, [i, o, l.length]);
+  let _ = useCallback(e => {
+    "Tab" === e.key && e.shiftKey && o > 0 && (e.preventDefault(), m(!0), u(!1), i(o - 1));
+  }, [i, o]);
+  let A = e => d[e]?.colorVar?.value?.alias || null;
+  let [y, b] = useState([]);
+  useEffect(() => {
+    b(l.map(() => createRef()));
+  }, [l]);
+  let [v, I] = useState([]);
+  useEffect(() => {
+    I(l.map(() => createRef()));
+  }, [l]);
+  useEffect(() => {
+    c && y[o]?.current?.focus();
+    p && v[o]?.current?.focus();
+  }, [o, c, y, p, v]);
+  return jsx("div", {
+    className: "gradient_stop_list--root--yRCAd",
+    children: l.map((i, r) => jsx(tR, {
+      boundVariableId: A(r),
+      buttonRef: v[r],
+      handleTabNextRow: f,
+      handleTabPrevRow: _,
+      index: r,
+      inputRef: y[r],
+      isSelected: r === o,
+      onChange: h,
+      onColorPickerToggle: e,
+      onDelete: t,
+      onSelect: g,
+      recordingKey: Pt(s, "gradientStop", r),
+      setDeleteButtonFocused: m,
+      setPercentInputFocused: u,
+      stop: i,
+      stopVar: d[r],
+      totalStopCount: l.length
+    }, r))
+  });
+});
+function tR({
+  index: e,
+  isSelected: t,
+  onChange: i,
+  onColorPickerToggle: s,
+  onDelete: o,
+  onSelect: l,
+  recordingKey: c,
+  stop: u,
+  stopVar: m,
+  totalStopCount: h,
+  boundVariableId: g,
+  setPercentInputFocused: f,
+  setDeleteButtonFocused: A,
+  inputRef: y,
+  buttonRef: b,
+  handleTabNextRow: v,
+  handleTabPrevRow: I
+}) {
+  let x = wA();
+  let S = useRef(null);
+  let C = X7();
+  let T = useCallback(() => {
+    o(e);
+  }, [e, o]);
+  let k = useCallback((t, n) => {
+    i(e, u.color, t, m?.colorVar, n);
+  }, [e, i, u, m]);
+  let R = useCallback(() => {
+    l?.(e);
+  }, [e, l]);
+  let N = rf(Pt(c, "row"), "mousedown", R);
+  let P = useCallback((t, n) => {
+    i(e, t, u.position, void 0, n);
+  }, [e, i, u]);
+  let O = useCallback(() => {
+    _$$f(VD3.VARIABLE_DETACH, e0R.DIRECT, () => {
+      i(e, u.color, u.position, void 0, zk.YES);
+    });
+  }, [e, i, u]);
+  let D = useCallback(t => {
+    t.preventDefault();
+    S.current && s(e, cn(S.current));
+  }, [e, s]);
+  let L = useMemo(() => ({
+    blendMode: "NORMAL",
+    color: u.color,
+    type: "SOLID",
+    opacity: u.color.a
+  }), [u.color]);
+  return jsx(Fragment, {
+    children: jsxs(fI, {
+      className: "gradient_stop_list--row--uqT1N",
+      ref: S,
+      onMouseDownCapture: N,
+      selected: t,
+      children: [jsx("div", {
+        className: _()("gradient_stop_list--position--0dUS0", {
+          "gradient_stop_list--positionNewUI--bUNK-": C
+        }),
+        children: jsx(w2, {
+          "data-tooltip": _$$t2("fullscreen.properties_panel.gradient_picker.stop_position"),
+          "data-tooltip-type": Ib.TEXT,
+          decimals: 0,
+          dispatch: x,
+          forwardedRef: y,
+          onBlur: () => f(!1),
+          onFocus: () => f(!0),
+          onKeyDown: I,
+          onValueChange: k,
+          scrubbingDisabled: !0,
+          value: u.position
+        })
+      }), jsx("div", {
+        className: _()("gradient_stop_list--color--6drDT", {
+          "gradient_stop_list--colorNewUI--sF02Q": C,
+          [Qh]: g
+        }),
+        children: g ? jsx(rM, {
+          selected: t,
+          variableId: g,
+          paint: L,
+          onClick: D,
+          onDetachClick: O,
+          enableDetach: !0
+        }) : jsx(mu, {
+          color: u.color,
+          onChitMouseDown: D,
+          onColorChange: P,
+          opacityDecimals: 0,
+          recordingKey: c
+        })
+      }), jsx("div", {
+        className: "gradient_stop_list--actions--seaVY",
+        children: h > 1 && jsx(_$$K, {
+          onClick: T,
+          "aria-label": _$$t2("fullscreen.properties_panel.gradient_picker.delete_stop"),
+          htmlAttributes: {
+            "data-tooltip-type": Ib.TEXT,
+            "data-tooltip": _$$t2("fullscreen.properties_panel.gradient_picker.delete_stop"),
+            onMouseDown: dG,
+            onBlur: () => A(!1),
+            onFocus: () => A(!0),
+            onKeyDown: v
+          },
+          ref: b,
+          children: jsx(_$$O, {})
+        })
+      })]
+    })
+  });
+}
+function tN({
+  colorProfile: e,
+  currentSelectedGradientStop: t,
+  onChange: i,
+  onKeyDown: s,
+  onPaintTypeChange: o,
+  paint: l,
+  recordingKey: c,
+  variableScopes: h
+}) {
+  let g = Um();
+  let f = _$$C();
+  let A = wA();
+  let [b, v] = useState(null);
+  let I = useRef(-1);
+  let x = useRef(null);
+  let [S, C] = _$$L3(t.index, e => {
+    Y5.updateAppModel({
+      currentSelectedGradientStop: {
+        type: vRS.COLOR,
+        index: e
+      }
+    });
+  });
+  let T = useMemo(() => ({
+    stops: l.stops,
+    stopsVar: l.stopsVar
+  }), [l.stops, l.stopsVar]);
+  let [k, R] = _$$L3(T, (e, t) => {
+    i({
+      ...l,
+      stops: e.stops,
+      stopsVar: e.stopsVar
+    }, t);
+  });
+  let N = (e, t) => e >= t.length ? 0 : e;
+  let P = e => {
+    let t = [...k.stops];
+    t.splice(e, 1);
+    let i = 0 === k.stopsVar.length ? k.stops.map(Ug) : [...k.stopsVar];
+    i.splice(e, 1);
+    R({
+      stops: t,
+      stopsVar: i
+    }, zk.YES);
+  };
+  let O = k.stopsVar[S]?.colorVar;
+  let F = _$$u(MH(O) || void 0);
+  let M = useCallback(() => {
+    let e;
+    let t = k.stops[N(S, k.stops)];
+    let i = -1;
+    let n = null;
+    if (1 === k.stops.length) {
+      let t = k.stops[0];
+      i = t.position < .5 ? 1 : 0;
+      e = c4(t.color);
+    } else if (S < k.stops.length - 1) {
+      i = (k.stops[S + 1].position + t.position) / 2;
+      e = _R(k.stops, i);
+    } else {
+      let n = k.stops.slice(-2, -1)[0];
+      i = (t.position + n.position) / 2;
+      e = _R(k.stops, i);
+    }
+    if (e && i >= 0 && (n = {
+      color: e,
+      position: i
+    }), n) {
+      let e = oV([...k.stops, n]);
+      let t = 0 === k.stopsVar.length ? k.stops.map(Ug) : k.stopsVar;
+      R({
+        stops: e,
+        stopsVar: Zb([...t, Ug(n)])
+      });
+      let i = e.indexOf(n);
+      C(i);
+      I.current = i;
+    }
+  }, [S, k, C, R]);
+  let j = useCallback((e, t) => {
+    let i = [...k.stops];
+    let n = {
+      ...i[S],
+      color: e
+    };
+    i.splice(S, 1, n);
+    let r = 0 === k.stopsVar.length ? k.stops.map(Ug) : k.stopsVar.slice();
+    let a = Ug(n);
+    r.splice(S, 1, a);
+    R({
+      stops: i,
+      stopsVar: r
+    }, t);
+  }, [S, k, R]);
+  let B = async e => {
+    let t = await A(Oe(e));
+    let i = sH(t);
+    if (!i) return;
+    let n = {
+      value: {
+        alias: i
+      },
+      dataType: "ALIAS",
+      resolvedDataType: "COLOR"
+    };
+    let r = 0 === k.stopsVar.length ? k.stops.map(Ug) : k.stopsVar.slice();
+    let a = {
+      ...r[S],
+      colorVar: n
+    };
+    r.splice(S, 1, a);
+    oz("FILL_PAINT > GRADIENT_STOP_COLOR", n);
+    _$$f(VD3.VARIABLE_ATTACH, e0R.DIRECT, () => {
+      R({
+        stops: k.stops,
+        stopsVar: r
+      }, zk.YES);
+    });
+  };
+  let G = useCallback((e, t) => {
+    v(i => null == i ? (I.current = e, t) : e === I.current ? (I.current = -1, null) : (I.current = e, i));
+  }, []);
+  let z = useCallback(() => {
+    v(null);
+    I.current = -1;
+  }, []);
+  let H = x$(l);
+  let W = X7();
+  if (!H) return null;
+  let K = jsx(ty, {
+    paint: l,
+    paintTypeOptions: ["GRADIENT_LINEAR", "GRADIENT_RADIAL", "GRADIENT_ANGULAR", "GRADIENT_DIAMOND"],
+    onChange: o,
+    dropdownShown: g,
+    recordingKey: Pt(c, "gradientTypeSelect")
+  });
+  let Y = jsx(_$$K, {
+    actionOnPointerDown: !0,
+    onClick: t2E.rotateGradient90Degrees,
+    "aria-label": _$$t2("fullscreen.properties_panel.gradient_picker.rotate_90"),
+    htmlAttributes: {
+      "data-tooltip": _$$t2("fullscreen.properties_panel.gradient_picker.rotate_90"),
+      "data-tooltip-type": Ib.TEXT
+    },
+    children: jsx(_$$R, {})
+  });
+  let q = jsx(_$$n, {
+    gradientPaint: H,
+    onChange: i
+  });
+  return jsxs(_$$P, {
+    maxHeight: 500,
+    children: [jsxs(vL, {
+      className: "gradient_editor--root--YXS31",
+      ref: x,
+      focusOnMount: !0,
+      forceUpdate: f,
+      handleKeyDown: s,
+      name: "Color picker",
+      children: [W ? jsxs("div", {
+        className: "gradient_editor--gradientSettingsRow---SfrV",
+        children: [jsx("div", {
+          className: "gradient_editor--paintTypeSelect--ByiGb",
+          children: K
+        }), jsxs("div", {
+          className: "gradient_editor--gradientActions--64A-L",
+          children: [q, Y]
+        })]
+      }) : jsxs(fI, {
+        className: "gradient_editor--selectRow--wBc3J",
+        children: [jsx("div", {
+          className: "gradient_editor--select--JfYGn",
+          children: K
+        }), jsxs("div", {
+          className: "gradient_editor--actions--qmKUq",
+          children: [Y, q]
+        })]
+      }), jsxs(Zk, {
+        className: "gradient_editor--control--Vs6kX",
+        children: [jsx(_$$i2, {
+          colorProfile: e,
+          contextMenu: {
+            onColorPickerToggle: G,
+            onDeleteStop: P
+          },
+          paint: H,
+          onChange: i,
+          currentSelectedGradientStop: t,
+          hasFocus: (x.current && x.current.hasFocus()) ?? !1,
+          dispatch: A,
+          recordingKey: Pt(c, "gradient")
+        }), jsxs(fI, {
+          className: _()("gradient_editor--stopsHeaderRow--pxKWt", {
+            "gradient_editor--stopsHeaderRowNewUI--OtVTB": W
+          }),
+          children: [jsx("div", {
+            className: "gradient_editor--stopsHeaderLabel--fzmGs",
+            children: _$$t2("fullscreen.properties_panel.gradient_picker.stops")
+          }), jsx("div", {
+            className: _()("gradient_editor--stopsHeaderAddButton--1MI-j", {
+              "gradient_editor--stopsHeaderAddButtonNewUI--mNdDo": W
+            }),
+            children: jsx(_$$K, {
+              actionOnPointerDown: !0,
+              onClick: M,
+              "aria-label": _$$t2("fullscreen.properties_panel.gradient_picker.add_stop"),
+              htmlAttributes: {
+                "data-tooltip": _$$t2("fullscreen.properties_panel.gradient_picker.add_stop"),
+                "data-tooltip-type": Ib.TEXT
+              },
+              children: jsx(_$$e2, {})
+            })
+          })]
+        }), jsx(tk, {
+          onColorPickerToggle: G,
+          onDeleteStop: P,
+          onSelectedStopIndexChange: C,
+          onStopsChange: R,
+          recordingKey: Pt(c, "gradientStops"),
+          selectedStopIndex: S,
+          stops: k.stops,
+          stopsVar: k.stopsVar
+        }), jsx(_$$p2, {
+          paint: l,
+          onChange: i
+        })]
+      })]
+    }), b && jsx($$io0, {
+      boundVariable: F,
+      color: k.stops[N(S, k.stops)].color,
+      disabledVariableIds: new Set(),
+      initialPosition: b,
+      onChange: j,
+      onClose: z,
+      onVariableChange: B,
+      recordingKey: Pt(c, "colorPicker"),
+      variableScopes: h
+    }, S)]
+  });
+}
+let tV = "noise_settings_modal--noiseTypeIcon--nYOhR chit--chit--WdWdx";
+let tG = "noise_settings_modal--duotoneIcon--NvHlL";
+function tz(e) {
+  let [t, i] = useState(!1);
+  let [a, s] = useState(new Point(0, 0));
+  let o = useRef(null);
+  let l = () => {
+    i(!1);
+  };
+  function d(t) {
+    e.onChange({
+      ...e.paint,
+      color: t,
+      opacity: t.a
+    });
+  }
+  let c = DP();
+  let u = yM();
+  let p = {
+    ...e.paint.color,
+    a: 1
+  };
+  let m = _$$F.format(p);
+  let h = pw(u, m, c);
+  let g = {
+    r: 1 - e.paint.color.r,
+    g: 1 - e.paint.color.g,
+    b: 1 - e.paint.color.b,
+    a: 1
+  };
+  let f = _$$F.format(g);
+  let _ = new rC({
+    parseAlpha: !1
+  });
+  return jsxs(Fragment, {
+    children: [jsxs(Id, {
+      children: [jsx(cS, {
+        label: _$$tx("properties_panel.noise.noise_type"),
+        input: jsxs(_$$bL2, {
+          legend: jsx(_$$q, {
+            children: _$$tx("properties_panel.noise.noise_type")
+          }),
+          value: e.paint.noiseType,
+          onChange: function(t) {
+            e.onChange({
+              ...e.paint,
+              noiseType: t
+            });
+          },
+          children: [jsx(_$$c$3, {
+            icon: jsxs("div", {
+              className: tV,
+              children: [jsx("div", {
+                style: {
+                  background: m
+                },
+                className: tG
+              }), jsx("div", {
+                style: {
+                  background: f
+                },
+                className: tG
+              })]
+            }),
+            value: "DUOTONE",
+            "aria-label": _$$t2("properties_panel.noise.noise_type.duotone")
+          }), jsx(_$$c$3, {
+            icon: jsx("div", {
+              style: {
+                background: m
+              },
+              className: tV,
+              children: h && jsx("div", {
+                style: {
+                  boxShadow: h
+                },
+                className: "noise_settings_modal--borderShadow--VnWzy"
+              })
+            }),
+            value: "MONOTONE",
+            "aria-label": _$$t2("properties_panel.noise.noise_type.monotone")
+          }), jsx(_$$c$3, {
+            icon: jsx("div", {
+              className: "noise_settings_modal--multitoneIcon--BgMU2 noise_settings_modal--noiseTypeIcon--nYOhR chit--chit--WdWdx"
+            }),
+            value: "MULTITONE",
+            "aria-label": _$$t2("properties_panel.noise.noise_type.multitone")
+          })]
+        })
+      }), ("DUOTONE" === e.paint.noiseType || "MONOTONE" === e.paint.noiseType) && jsx(cS, {
+        ref: o,
+        label: null,
+        input: jsxs("div", {
+          className: "noise_settings_modal--colorValueContainer--K2zYz paint_panels--colorValueContainer--DGeSP raw_components--borderFocusWithin--BaipZ paint_panels--_baseColorValueContainer--t-UIV raw_components--base--T7G0z raw_components--singleRowHeight--dKM4t",
+          children: [jsx(_$$J, {
+            onClick: () => {
+              t ? l() : (s(cn(o.current)), i(!0));
+            },
+            className: "noise_settings_modal--chit--KFm5o",
+            color: e.paint.color,
+            opacity: 1
+          }), jsx(AN, {
+            property: e.paint.color,
+            onChange: d,
+            formatter: _,
+            noLeftBorder: !0,
+            noBorderOnFocus: !0
+          })]
+        })
+      }), jsx(cS, {
+        label: _$$tx("properties_panel.noise.opacity"),
+        input: jsx(w2, {
+          "data-tooltip": _$$t2("properties_panel.noise.opacity"),
+          "data-tooltip-type": Ib.TEXT,
+          dispatch: e.dispatch,
+          onValueChange: function(t) {
+            e.onChange({
+              ...e.paint,
+              opacity: t
+            });
+          },
+          value: e.paint.opacity,
+          min: 0,
+          max: 1
+        })
+      }), jsx(cS, {
+        label: _$$tx("properties_panel.noise.noise_size"),
+        input: jsx(gq, {
+          "data-tooltip": _$$t2("properties_panel.noise.noise_size"),
+          "data-tooltip-type": Ib.TEXT,
+          dispatch: e.dispatch,
+          onValueChange: function(t) {
+            e.onChange({
+              ...e.paint,
+              noiseSize: {
+                x: t,
+                y: t
+              }
+            });
+          },
+          value: e.paint.noiseSize.x,
+          smallNudgeAmount: 1,
+          bigNudgeAmount: 5,
+          min: .1,
+          max: 100
+        })
+      }), jsx(cS, {
+        label: _$$tx("properties_panel.noise.density"),
+        input: jsx(w2, {
+          "data-tooltip": _$$t2("properties_panel.noise.density"),
+          "data-tooltip-type": Ib.TEXT,
+          dispatch: e.dispatch,
+          onValueChange: function(t) {
+            e.onChange({
+              ...e.paint,
+              density: t
+            });
+          },
+          value: e.paint.density,
+          smallNudgeAmount: .1,
+          bigNudgeAmount: 1,
+          min: .01,
+          max: 1
+        })
+      })]
+    }), t && jsx($$io0, {
+      initialPosition: a,
+      color: {
+        ...e.paint.color,
+        a: e.paint.opacity
+      },
+      onChange: d,
+      onClose: l,
+      disabledVariableIds: new Set(),
+      boundVariable: null,
+      isVariableCreationEnabled: !1
+    })]
+  });
+}
+let tY = memo(function(e) {
+  return jsx("svg", {
+    width: "24",
+    height: "24",
+    fill: "none",
+    viewBox: "0 0 24 24",
+    ...e,
+    children: jsx("path", {
+      fill: "var(--color-icon)",
+      fillRule: "evenodd",
+      d: "M7 8a1 1 0 1 0 0-2 1 1 0 0 0 0 2m6-1a1 1 0 1 1-2 0 1 1 0 0 1 2 0m5 0a1 1 0 1 1-2 0 1 1 0 0 1 2 0m-5 5a1 1 0 1 1-2 0 1 1 0 0 1 2 0m4 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2m-9-1a1 1 0 1 1-2 0 1 1 0 0 1 2 0m4 6a1 1 0 1 0 0-2 1 1 0 0 0 0 2m6-1a1 1 0 1 1-2 0 1 1 0 0 1 2 0M7 18a1 1 0 1 0 0-2 1 1 0 0 0 0 2",
+      clipRule: "evenodd"
+    })
+  });
+});
+let tq = memo(function(e) {
+  return jsx("svg", {
+    width: "24",
+    height: "24",
+    fill: "none",
+    viewBox: "0 0 24 24",
+    ...e,
+    children: jsx("path", {
+      fill: "var(--color-icon)",
+      fillRule: "evenodd",
+      d: "M17 9a1 1 0 1 1 0-2 1 1 0 0 1 0 2m-1 3a1 1 0 1 0 2 0 1 1 0 0 0-2 0m0 4a1 1 0 1 0 2 0 1 1 0 0 0-2 0m-5-6a1 1 0 1 0 2 0 1 1 0 0 0-2 0m1 5a1 1 0 1 1 0-2 1 1 0 0 1 0 2m-1 3a1 1 0 1 0 2 0 1 1 0 0 0-2 0m1-11a1 1 0 1 1 0-2 1 1 0 0 1 0 2m-6 5a1 1 0 1 0 2 0 1 1 0 0 0-2 0m1 5a1 1 0 1 1 0-2 1 1 0 0 1 0 2M6 8a1 1 0 1 0 2 0 1 1 0 0 0-2 0",
+      clipRule: "evenodd"
+    })
+  });
+});
+let t$ = memo(function(e) {
+  return jsx("svg", {
+    width: "24",
+    height: "24",
+    fill: "none",
+    viewBox: "0 0 24 24",
+    ...e,
+    children: jsx("path", {
+      fill: "var(--color-icon)",
+      fillRule: "evenodd",
+      d: "M9 7a1 1 0 1 1-2 0 1 1 0 0 1 2 0m3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2m4 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2m-6 5a1 1 0 1 0 0-2 1 1 0 0 0 0 2m5-1a1 1 0 1 1-2 0 1 1 0 0 1 2 0m3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2M7 12a1 1 0 1 1-2 0 1 1 0 0 1 2 0m5 6a1 1 0 1 0 0-2 1 1 0 0 0 0 2m5-1a1 1 0 1 1-2 0 1 1 0 0 1 2 0m-9 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2",
+      clipRule: "evenodd"
+    })
+  });
+});
+let t8 = "pattern_settings_modal--inactiveLabel--ZYh90 transform_panel--inactiveLabel--fPCxr raw_components--iconInsideBorderFocusWithin--2g7fO";
+function t9(e) {
+  let {
+    Sprig
+  } = useSprigWithSampling();
+  let [i, a] = useState(e.paint.patternSpacing.x === e.paint.patternSpacing.y);
+  let s = dH();
+  let o = _$$eY();
+  let l = _$$dI(e.paint.sourceNodeId);
+  let c = fn(e.paint.sourceNodeId);
+  let u = useMemo(() => l && c ? o.get(l) : null, [l, c, o]);
+  let [m, g] = useState(null);
+  let [f, A] = useState(u && aT(u));
+  useEffect(() => {
+    if (l && c && Vzr) {
+      let [e, t] = Vzr.generateThumbnailForNode(l, 208, 208, 32, {
+        useRenderTreeWithoutEffects: !0
+      });
+      if (t) {
+        let e = new Blob([t], {
+          type: "image/png"
+        });
+        let i = URL.createObjectURL(e);
+        g(i);
+        return () => URL.revokeObjectURL(i);
+      }
+    }
+    g(null);
+  }, [c, l]);
+  useEffect(() => {
+    u && aT(u) ? A(!0) : A(!1);
+  }, [u]);
+  let y = useCallback(async () => {
+    u && (wr(), await UN().setCurrentPageFromNodeAsync(u.guid), Dh([u.guid]), Y5.triggerActionInUserEditScope("zoom-to-selection", void 0), s === NLJ.PATTERN_SOURCE_SELECTOR && Y5.triggerAction("set-tool-default", null));
+  }, [u, s]);
+  return jsxs(Id, {
+    children: [jsxs("div", {
+      className: "pattern_settings_modal--sourceNodeThumbnailContainer--fctgm",
+      style: {
+        width: 208,
+        height: 208
+      },
+      children: [jsx("div", {
+        className: "pattern_settings_modal--sourceNodeThumbnail--FG4nV",
+        style: {
+          backgroundImage: m ? `url(${m})` : "none"
+        }
+      }), jsx("div", {
+        className: _()("pattern_settings_modal--buttonContainer--HgJkZ", {
+          "pattern_settings_modal--buttonContainerShown--jC9-y": !u || s === NLJ.PATTERN_SOURCE_SELECTOR
+        }),
+        children: jsx("div", {
+          className: "pattern_settings_modal--buttonWrapper---yPaA",
+          children: jsx($n, {
+            onClick: () => {
+              Y5.triggerAction("set-tool-pattern-source-selector");
+              getFeatureFlags().ce_il_sprig_tracking && Sprig("setAttribute", "is_assets_visual_style_user", !0);
+            },
+            iconPrefix: jsx(_$$o, {}),
+            variant: s === NLJ.PATTERN_SOURCE_SELECTOR ? "primary" : "secondary",
+            recordingKey: Pt(e.recordingKey, "selectSource"),
+            children: _$$tx("properties_panel.pattern.select_source")
+          })
+        })
+      })]
+    }), u && jsxs("div", {
+      className: "pattern_settings_modal--sourceNodeInfo--QA6Ze",
+      children: [jsxs("div", {
+        className: "pattern_settings_modal--sourceNode--oTUjb",
+        children: [jsx(Bf, {
+          guid: u.guid,
+          useUI3Icon: !0,
+          isPatternSourceIcon: !0
+        }), jsx("span", {
+          className: "pattern_settings_modal--sourceNodeName--toYi8",
+          children: u.name
+        })]
+      }), jsx(_$$K, {
+        "aria-label": _$$t2("properties_panel.pattern.go_to_source"),
+        onClick: y,
+        children: jsx(_$$A3, {})
+      })]
+    }), jsx("div", {
+      className: "pattern_settings_modal--divider--cuS8M"
+    }), jsx(cS, {
+      label: _$$tx("properties_panel.pattern.tile_type"),
+      input: jsxs(_$$bL2, {
+        legend: jsx(_$$q, {
+          children: _$$tx("properties_panel.pattern.tile_type")
+        }),
+        value: "RECTANGULAR" === e.paint.patternTileType ? "RECTANGULAR" : "HEXAGONAL",
+        onChange: function(t) {
+          e.onChange({
+            ...e.paint,
+            patternTileType: "RECTANGULAR" === t ? "RECTANGULAR" : "HORIZONTAL_HEXAGONAL"
+          });
+        },
+        children: [jsx(_$$c$3, {
+          icon: jsx(tY, {}),
+          value: "RECTANGULAR",
+          "aria-label": _$$t2("properties_panel.pattern.rectangular")
+        }), jsx(_$$c$3, {
+          icon: "VERTICAL_HEXAGONAL" === e.paint.patternTileType ? jsx(tq, {}) : jsx(t$, {}),
+          value: "HEXAGONAL",
+          "aria-label": _$$t2("properties_panel.pattern.hexagonal")
+        })]
+      })
+    }), "RECTANGULAR" !== e.paint.patternTileType && jsx(cS, {
+      label: _$$tx("properties_panel.pattern.direction"),
+      input: jsxs(_$$bL2, {
+        legend: jsx(_$$q, {
+          children: _$$tx("properties_panel.pattern.tile_type")
+        }),
+        value: "VERTICAL_HEXAGONAL" === e.paint.patternTileType ? "VERTICAL" : "HORIZONTAL",
+        onChange: function(t) {
+          e.onChange({
+            ...e.paint,
+            patternTileType: "VERTICAL" === t ? "VERTICAL_HEXAGONAL" : "HORIZONTAL_HEXAGONAL"
+          });
+        },
+        children: [jsx(_$$c$3, {
+          icon: jsx(_$$o2, {}),
+          value: "HORIZONTAL",
+          "aria-label": _$$t2("properties_panel.pattern.horizontal")
+        }), jsx(_$$c$3, {
+          icon: jsx(_$$W, {}),
+          value: "VERTICAL",
+          "aria-label": _$$t2("properties_panel.pattern.vertical")
+        })]
+      })
+    }), jsx(cS, {
+      label: _$$tx("properties_panel.pattern.scale"),
+      input: jsx(w2, {
+        bigNudgeAmount: 10,
+        "data-tooltip": _$$t2("properties_panel.pattern.scale"),
+        "data-tooltip-type": Ib.TEXT,
+        dispatch: e.dispatch,
+        inputClassName: WC,
+        max: 20,
+        min: .01,
+        onValueChange: function(t) {
+          e.onChange({
+            ...e.paint,
+            scale: t
+          });
+        },
+        recordingKey: Pt(e, "scale"),
+        smallNudgeAmount: 1,
+        tooltipForScreenReadersOnly: !0,
+        value: e.paint.scale,
+        children: jsx(_$$l2, {
+          className: t8
+        })
+      })
+    }), jsx(cS, {
+      label: _$$tx("properties_panel.pattern.spacing"),
+      input: jsx(w2, {
+        bigNudgeAmount: 10,
+        "data-tooltip": _$$t2("properties_panel.pattern.spacing"),
+        "data-tooltip-type": Ib.TEXT,
+        dispatch: e.dispatch,
+        inputClassName: WC,
+        max: 20,
+        min: -.5,
+        onValueChange: function(t) {
+          e.onChange({
+            ...e.paint,
+            patternSpacing: {
+              x: t,
+              y: i ? t : e.paint.patternSpacing.y
+            },
+            spacing: 0
+          });
+        },
+        recordingKey: Pt(e, "spacing"),
+        smallNudgeAmount: 1,
+        tooltipForScreenReadersOnly: !0,
+        value: e.paint.patternSpacing.x,
+        children: jsx("span", {
+          className: t8,
+          children: _$$tx("fullscreen.properties_panel.transform_panel.x")
+        })
+      })
+    }), jsx(cS, {
+      label: null,
+      input: jsx(w2, {
+        bigNudgeAmount: 10,
+        "data-tooltip": _$$t2("properties_panel.pattern.spacing"),
+        "data-tooltip-type": Ib.TEXT,
+        dispatch: e.dispatch,
+        inputClassName: WC,
+        max: 20,
+        min: -.5,
+        onBlur: function(t) {
+          "" === t.target.value && (a(!0), e.onChange({
+            ...e.paint,
+            patternSpacing: {
+              x: e.paint.patternSpacing.x,
+              y: e.paint.patternSpacing.x
+            },
+            spacing: 0
+          }));
+        },
+        onValueChange: function(t) {
+          a(!1);
+          e.onChange({
+            ...e.paint,
+            patternSpacing: {
+              x: e.paint.patternSpacing.x,
+              y: t
+            },
+            spacing: 0
+          });
+        },
+        placeholder: i ? EV.format(e.paint.patternSpacing.y) : void 0,
+        smallNudgeAmount: 1,
+        tooltipForScreenReadersOnly: !0,
+        value: i ? void 0 : e.paint.patternSpacing.y,
+        children: jsx("span", {
+          className: t8,
+          children: _$$tx("fullscreen.properties_panel.transform_panel.y")
+        })
+      })
+    }), jsx(Zo, {
+      label: _$$tx("properties_panel.pattern.alignment"),
+      input: jsx(_$$V, {
+        anchorPoint: JX(e.paint),
+        onAnchorPointChange: function(t) {
+          e.onChange({
+            ...e.paint,
+            ...OO(t)
+          });
+        },
+        fullWidth: !0
+      }),
+      appendedClassName: "pattern_settings_modal--alignmentRow--fytTl"
+    }), jsx(_$$p2, {
+      paint: e.paint,
+      onChange: e.onChange
+    }), f && jsxs(Fragment, {
+      children: [jsx("div", {
+        className: "pattern_settings_modal--effectsDivider--TxZaG pattern_settings_modal--divider--cuS8M"
+      }), jsxs("div", {
+        className: "pattern_settings_modal--effectsError--gR9Bi",
+        children: [jsx(_$$b2, {
+          className: "pattern_settings_modal--infoIcon--g1dQX"
+        }), jsx("div", {
+          className: "pattern_settings_modal--effectsText--j0ZPF",
+          children: _$$t2("properties_panel.pattern.effects_error")
+        })]
+      })]
+    })]
+  });
+}
+function ie(e, t, i, n) {
+  let a = ZC(e);
+  useEffect(() => {
+    e !== a && (e !== NLJ.DROPPER_COLOR || t && t.includes("custom_color"));
+  }, [e, i, n, t, a]);
+}
+function it({
+  rightButtons: e,
+  recordingKey: t,
+  tabManager: i,
+  tabProps: r
+}) {
+  return jsxs(Y9, {
+    children: [jsx(r1, {
+      children: _$$tx("fullscreen.color_picker")
+    }), jsxs(qj, {
+      manager: i,
+      children: [jsx(_$$t.Tab, {
+        ...r.custom_color,
+        recordingKey: Pt(t, "viewTabs.customColor"),
+        children: _$$tx("fullscreen.properties_panel.color_picker.custom")
+      }), jsx(_$$t.Tab, {
+        ...r.library,
+        recordingKey: Pt(t, "viewTabs.library"),
+        children: _$$tx("fullscreen.properties_panel.color_picker.libraries")
+      }), r.cms && jsx(_$$t.Tab, {
+        ...r.cms,
+        recordingKey: Pt(t, "viewTabs.dakota"),
+        children: _$$tx("variables.binding_ui.variable_dakota_tab_name")
+      })]
+    }), e && jsx(jk, {
+      children: jsx("div", {
+        className: "color_picker_v2--headerButtonsWrapper--yKED7",
+        children: e
+      })
+    })]
+  });
+}
+export let $$ii1 = forwardRef(function({
+  paint: e,
+  paintId: t,
+  selectedStyle: i,
+  inheritStyleKeyField: a,
+  currentSelectedGradientStop: h,
+  colorFormat: f,
+  currentTool: A,
+  initialPosition: y,
+  initialView: b,
+  supportedViews: I,
+  initialCreationModalView: k,
+  initialStyleCreationPaint: P,
+  recordingKey: O,
+  dropdownShown: L,
+  onKeyDown: M,
+  onChange: j,
+  onColorChange: V,
+  onBlendModeChange: G,
+  onPaintTypeChange: z,
+  onColorVariableChange: H,
+  onApplyStyle: W,
+  onClose: K,
+  keepOpenOnItemSelect: Y,
+  dropImageOnPaintThumbnail: q,
+  updateStillImageAndSelectionPropertiesForGIF: $,
+  disableImagePaints: Z,
+  disablePatternPaints: X,
+  variableScopes: Q,
+  isInStyleModal: J,
+  solidPaintOnly: ee,
+  disableStyleModal: et,
+  paintPickerSessionId: ei,
+  hidePatternPaints: en,
+  canPickerShowColorContrast: er,
+  paintNodeIds: ea,
+  minimalUI: es,
+  positioningProps: eo
+}, el) {
+  let ed = _$$M(el);
+  let ec = X7();
+  let {
+    showDakotaFieldPicker,
+    filteredFieldTypes
+  } = ZI();
+  let em = cJ();
+  let eh = s6("currentPage", "currentSelectedProperty").currentSelectedProperty.type === rrT.STROKE;
+  let [eg, ef, e_] = _$$t.useTabs({
+    custom_color: !0,
+    library: !0,
+    cms: em && showDakotaFieldPicker && !eh
+  }, {
+    defaultActive: () => il({
+      initialView: b,
+      isBoundToLibraryAsset: !!e.colorVar || !!i,
+      isBoundToCms: !!e.imageVar && "CMS_ALIAS" === e.imageVar.dataType,
+      supportedViews: I
+    })
+  });
+  let eA = rW(e, ei);
+  let ey = useCallback(e => {
+    W && (T7(e, ei), W(e));
+  }, [W, ei]);
+  let eb = useCallback((e, t) => {
+    t && e.type && eA(e.type);
+    j(e, t);
+  }, [eA, j]);
+  let {
+    VariableAndStyleCreateModalRoot
+  } = useContext(_$$l) ?? {};
+  let [eI, eE] = useState(!1);
+  let ex = useRef();
+  ie(A, I, e_.setActiveTab, eI);
+  let eS = useMemo(() => {
+    let t = Ou(e);
+    let i = x$(e);
+    if (t && t.colorVar?.value?.alias) return {
+      type: Z_n.ALIAS,
+      resolvedType: rXF.COLOR,
+      value: dI(t.colorVar.value.alias)
+    };
+    if (!t && !i) return {
+      type: Z_n.COLOR,
+      resolvedType: rXF.COLOR,
+      value: {
+        r: 1,
+        g: 1,
+        b: 1,
+        a: 1
+      }
+    };
+    {
+      let e = iC(t || i, h);
+      return {
+        type: Z_n.COLOR,
+        resolvedType: rXF.COLOR,
+        value: e
+      };
+    }
+  }, [e, h]);
+  let ew = useCallback(() => {
+    let e = ed.current;
+    if (!e) return;
+    let t = cn(e, _$$i);
+    ex.current = t;
+    eE(!0);
+  }, [ed]);
+  let eC = useCallback(() => {
+    eE(!1);
+  }, [eE]);
+  useEffect(() => {
+    ec && A === NLJ.DROPPER_COLOR && eE(!1);
+  }, [A, ec]);
+  let eT = new Set([j0r.ALL_SCOPES]);
+  let ek = sO();
+  let eR = md(TN).length > 0;
+  let eN = es ? void 0 : jsx(it, {
+    recordingKey: O,
+    rightButtons: !J && jsx(_$$K, {
+      "aria-label": _$$t2("variables.binding_ui.create_style_or_variable_button_tooltip"),
+      recordingKey: Pt(O, "createVariable"),
+      onClick: ew,
+      htmlAttributes: {
+        "data-tooltip": _$$t2("variables.binding_ui.create_style_or_variable_button_tooltip"),
+        "data-tooltip-type": Ib.TEXT
+      },
+      disabled: ek && !eR,
+      children: jsx(_$$e2, {})
+    }),
+    tabManager: e_,
+    tabProps: eg
+  });
+  let eP = jsx(ia, {
+    canAcceptStyles: void 0 !== W,
+    canAcceptVariables: !0,
+    canPickerShowColorContrast: er && !J,
+    colorFormat: f,
+    currentSelectedGradientStop: h,
+    currentTool: A,
+    disableImagePaints: Z,
+    disablePatternPaints: X,
+    dropImageOnPaintThumbnail: q,
+    dropdownShown: L,
+    hidePatternPaints: en,
+    minimalUI: es,
+    onBlendModeChange: G,
+    onChange: eb,
+    onClose: K,
+    onColorChange: V,
+    onKeyDown: M,
+    onPaintTypeChange: z,
+    paint: e,
+    paintId: t,
+    paintPickerSessionId: ei,
+    recordingKey: O,
+    solidPaintOnly: ee,
+    updateStillImageAndSelectionPropertiesForGIF: $,
+    variableScopes: Q ?? eT
+  });
+  let eO = es ? eP : jsxs(Fragment, {
+    children: [jsx(_$$t.TabPanel, {
+      ...ef.custom_color,
+      children: eP
+    }), jsx(_$$t.TabPanel, {
+      ...ef.library,
+      children: jsx(is, {
+        disabledVariableIds: new Set(),
+        selectedItem: i || _$$L2(e),
+        recordingKey: Pt(O, "libraryColors"),
+        onVariableSelected: H,
+        onStyleSelected: W ? ey : void 0,
+        onClose: K,
+        keepOpenOnItemSelect: Y,
+        variableScopes: Q
+      })
+    }), eg.cms && jsx(_$$t.TabPanel, {
+      ...ef.cms,
+      children: jsx(_$$h, {
+        onClose: K,
+        cmsFieldTypes: filteredFieldTypes
+      })
+    })]
+  });
+  let eD = jsxs(Fragment, {
+    children: [jsx(_$$k2, {
+      name: "paint_picker_v2_modal",
+      children: jsx(bL, {
+        ref: ed,
+        onClose: ({
+          source: e
+        }) => {
+          "outside" !== e && (OmW?.toggleOffEyedropper(), K());
+        },
+        width: "sm",
+        defaultPosition: eo ? Yl({
+          ...eo,
+          modalWidth: 240
+        }) : y,
+        recordingKey: Pt(O, "modal"),
+        htmlAttributes: {
+          "data-testid": J ? "paint-picker-v2-style-modal" : "paint-picker-v2-modal"
+        },
+        children: jsxs(vo, {
+          allowOverflow: !0,
+          className: _()({
+            "color_picker_v2--hideCloseButton--Q1-f0": es
+          }),
+          children: [eN, jsx(nB, {
+            padding: 0,
+            children: eO
+          })]
+        })
+      })
+    }), eI && (ex.current && VariableAndStyleCreateModalRoot ? jsx(VariableAndStyleCreateModalRoot, {
+      disableStyleModal: et,
+      inheritStyleKeyField: a,
+      initialPosition: ex.current,
+      initialStyleCreationPaint: P,
+      initialVariableValue: eS,
+      initialView: x$(e) ? "createStyle" : k,
+      onClose: eC,
+      onCreateStyle: W,
+      onCreateVariable: H,
+      resolvedType: rXF.COLOR
+    }) : null)]
+  });
+  return er ? jsx(_$$tH, {
+    boundaryKey: "color_picker_with_color_contrast_tool",
+    fallback: eD,
+    team: _$$e.EDITOR_USABILITY,
+    sentryTags: {
+      area: _$$e.EDITOR_USABILITY
+    },
+    children: jsx(ir, {
+      paint: e,
+      colorFormat: f,
+      isCreationModalOpen: eI,
+      activeTab: e_.activeTab,
+      paintNodeIds: ea,
+      children: eD
+    })
+  }) : eD;
+});
+function ir({
+  paint: e,
+  colorFormat: t,
+  isCreationModalOpen: i,
+  activeTab: a,
+  children: s,
+  paintNodeIds: o
+}) {
+  let l = s2(Ou(e), Rh, t, o);
+  let {
+    showColorSwatchInfoFlyout,
+    setShowColorSwatchInfoFlyout
+  } = l.colorContrastInfo;
+  useEffect(() => {
+    (i || "custom_color" !== a) && setShowColorSwatchInfoFlyout(!1);
+  }, [i, setShowColorSwatchInfoFlyout, a]);
+  return jsxs(nZ.Provider, {
+    value: l,
+    children: [s, showColorSwatchInfoFlyout && jsx(_$$tX, {
+      foregroundPaint: e
+    })]
+  });
+}
+function ia({
+  paint: e,
+  paintId: t,
+  paintPickerSessionId: i,
+  currentSelectedGradientStop: s,
+  colorFormat: o,
+  currentTool: l,
+  recordingKey: d,
+  dropdownShown: c,
+  canAcceptStyles: u,
+  canAcceptVariables: p,
+  onKeyDown: m,
+  onChange: g,
+  onColorChange: f,
+  onBlendModeChange: b,
+  onPaintTypeChange: v,
+  variableScopes: x,
+  dropImageOnPaintThumbnail: S,
+  updateStillImageAndSelectionPropertiesForGIF: w,
+  disableImagePaints: C,
+  disablePatternPaints: T,
+  hidePatternPaints: k,
+  solidPaintOnly: R,
+  canPickerShowColorContrast: N,
+  minimalUI: O,
+  onClose: L
+}) {
+  let F = wA();
+  let U = Ep();
+  let B = X7();
+  let H = _$$C();
+  let Y = useRef(null);
+  let q = hC();
+  let $ = dq();
+  let Z = ol()?.id;
+  let X = Ou(e);
+  let Q = x$(e);
+  let J = y7(e);
+  let ee = _$$XE(e);
+  let et = Z3(e);
+  let ei = J && !!w && !!S;
+  let en = !X && !Q && !ei && !ee;
+  let er = useContext(nZ);
+  let ea = er.showColorContrast && N;
+  let es = useRef(!1);
+  useEffect(() => {
+    !es.current && N && X && !1 === er.colorContrastInfo.standardMet && (q("color_contrast.color_not_compliant_on_open", {}), es.current = !0);
+  }, [N, er.colorContrastInfo.standardMet, X, q, $, Z]);
+  let eo = useId();
+  return jsxs(Fragment, {
+    children: [!O && jsx("div", {
+      className: _()("color_picker_v2--typeAndBlendMode---Ry3A", {
+        "color_picker_v2--noBorder--1SBk9": en
+      }),
+      children: (B || !R) && jsxs(Fragment, {
+        children: [jsx(eC, {
+          figPaintType: e.type,
+          onChange: v,
+          disableImagePaints: C,
+          disablePatternPaints: T,
+          hidePatternPaints: k,
+          recordingKey: getFeatureFlags().eu_fpl_colors_tab ? d : Pt(d, "paintTypeGroupTabs")
+        }), jsxs("div", {
+          className: "color_picker_v2--rightButtons--d-dbS",
+          children: [jsx(Rk, {
+            blendMode: e.blendMode || "NORMAL",
+            onBlendModeChange: b,
+            dispatch: F,
+            dropdownShown: c,
+            recordingKey: Pt(d, "blendModeSelection"),
+            disabled: R
+          }, `color-picker-blend-mode-selection-${t}`), ea && jsx(O1, {
+            toggled: er.settings.contrastInfoShown,
+            setToggled: er.settings.setIsColorContrastInfoShown,
+            recordingKey: Pt(d, "colorContrastButton"),
+            panelID: eo
+          })]
+        })]
+      })
+    }), ea && jsx(AG, {
+      id: eo,
+      recordingKey: d,
+      onColorChange: f
+    }), X && function(e) {
+      let t = iC(e, s);
+      return jsxs(Fragment, {
+        children: [jsx(vL, {
+          name: "Color picker",
+          ref: Y,
+          handleKeyDown: m,
+          focusOnMount: !0,
+          forceUpdate: H,
+          children: jsx(S7, {
+            canAcceptStyles: u,
+            canAcceptVariables: p,
+            color: t,
+            colorFormat: o,
+            currentTool: l,
+            dispatch: F,
+            dropdownShown: c,
+            onColorChange: f,
+            paintPickerAnalytics: {
+              paintType: "SOLID"
+            },
+            paintPickerSessionId: i,
+            preventAutoFocus: !0,
+            recordingKey: Pt(d, "colorControls")
+          })
+        }), jsx(e7, {
+          recordingKey: d,
+          onChange: f,
+          onlySupportCurrentPage: !!O
+        })]
+      });
+    }(X), Q && (Q ? jsx(tN, {
+      colorProfile: U,
+      currentSelectedGradientStop: s,
+      onChange: g,
+      onKeyDown: m,
+      onPaintTypeChange: v,
+      paint: Q,
+      recordingKey: Pt(d, "gradientEditor"),
+      variableScopes: x
+    }) : null), ei ? jsx(SY, {
+      dispatch: F,
+      dropImageOnPaintThumbnail: S,
+      dropdownShown: c,
+      onChange: g,
+      onClose: L,
+      paint: J,
+      paintId: t,
+      recordingKey: Pt(d, "imageSettings"),
+      updateStillImageAndSelectionPropertiesForGIF: w
+    }) : null, _$$m().ce_il_pattern && ee && jsx(t9, {
+      paint: ee,
+      dispatch: F,
+      onChange: g,
+      recordingKey: Pt(d, "patternSettings")
+    }), _$$m().ce_il_noise && et && jsx(tz, {
+      paint: et,
+      dispatch: F,
+      onChange: g
+    })]
+  });
+}
+function is({
+  selectedItem: e,
+  disabledVariableIds: t,
+  recordingKey: i,
+  onVariableSelected: r,
+  onStyleSelected: a,
+  onClose: s,
+  keepOpenOnItemSelect: o,
+  variableScopes: l
+}) {
+  return jsx(Rp, {
+    disabledVariableIds: t,
+    keepOpenOnItemSelect: o,
+    onClose: s,
+    onStyleSelected: a,
+    onVariableSelected: r,
+    pickerType: "color-picker",
+    recordingKey: i,
+    resolvedType: rXF.COLOR,
+    selectedItem: e,
+    variableScopes: l
+  });
+}
+export function $$io0({
+  color: e,
+  boundVariable: t,
+  disabledVariableIds: i,
+  initialPosition: s,
+  initialView: m,
+  recordingKey: h,
+  onChange: g,
+  onVariableChange: f,
+  onClose: _,
+  hideLibraryContainer: A,
+  variableScopes: y,
+  isVariableCreationEnabled: b = !1
+}) {
+  let v = wA();
+  let I = Um();
+  let S = Ku();
+  let C = dH();
+  let T = useMemo(() => f ? ["custom_color", "library"] : ["custom_color"], [f]);
+  let [R, N, P] = _$$t.useTabs({
+    custom_color: T.includes("custom_color"),
+    library: T.includes("library"),
+    cms: !1
+  }, {
+    defaultActive: () => il({
+      initialView: m,
+      isBoundToLibraryAsset: !!t,
+      supportedViews: T
+    })
+  });
+  let D = P.activeTab;
+  useEffect(() => {
+    m && m !== D && P.setActiveTab(m);
+  }, [m]);
+  let M = useRef(null);
+  let [j, V] = useState(!1);
+  let G = useRef();
+  let z = rXF.COLOR;
+  let H = useMemo(() => t?.node_id ? {
+    type: Z_n.ALIAS,
+    resolvedType: z,
+    value: t.node_id
+  } : e ? {
+    type: Z_n.COLOR,
+    resolvedType: z,
+    value: e
+  } : void 0, [t, e, z]);
+  function K() {
+    let e = M.current;
+    if (!e) return;
+    let t = cn(e, _$$i);
+    G.current = t;
+    V(!0);
+  }
+  let Y = qP(h || "color_picker", "close", useCallback(() => {
+    OmW?.toggleOffEyedropper();
+    _ ? _() : v(XE());
+  }, [_, v]));
+  ie(C, T, P.setActiveTab, !1);
+  return jsxs(_$$k2, {
+    name: "color_picker",
+    children: [jsx(bL, {
+      ref: M,
+      width: "sm",
+      defaultPosition: s,
+      onClose: ({
+        source: e,
+        target: t
+      }) => {
+        "outside" === e && t && t.closest("#fullscreen-root") || Y();
+      },
+      recordingKey: Pt(h, "modal"),
+      children: jsxs(vo, {
+        allowOverflow: !0,
+        children: [jsx(it, {
+          rightButtons: function() {
+            if (b) return jsx(_$$K, {
+              "aria-label": _$$t2("variables.binding_ui.create_variable_button_tooltip"),
+              recordingKey: Pt(h, "createVariable"),
+              onClick: K,
+              htmlAttributes: {
+                "data-tooltip": _$$t2("variables.binding_ui.create_variable_button_tooltip"),
+                "data-tooltip-type": Ib.TEXT
+              },
+              children: jsx(_$$e2, {})
+            });
+          }(),
+          recordingKey: h,
+          tabManager: P,
+          tabProps: R
+        }), jsxs(nB, {
+          padding: 0,
+          children: [jsxs(_$$t.TabPanel, {
+            ...N.custom_color,
+            children: [jsx(S7, {
+              canAcceptStyles: !1,
+              canAcceptVariables: void 0 !== f,
+              color: e,
+              colorFormat: S,
+              currentTool: C,
+              dispatch: v,
+              dropdownShown: I,
+              onColorChange: g,
+              preventAutoFocus: !0,
+              recordingKey: Pt(h, "colorControls")
+            }), !A && jsx(e7, {
+              onChange: g,
+              recordingKey: h
+            })]
+          }), jsx(_$$t.TabPanel, {
+            ...N.library,
+            children: jsx(is, {
+              selectedItem: t,
+              disabledVariableIds: i,
+              recordingKey: Pt(h, "libraryColors"),
+              onVariableSelected: f,
+              variableScopes: y,
+              onClose: Y
+            })
+          })]
+        })]
+      })
+    }), j && (G.current && f ? jsx(_$$U, {
+      initialPosition: G.current,
+      initialValue: H,
+      initialWidth: _$$i,
+      resolvedType: rXF.COLOR,
+      onCreateVariable: f,
+      onClose: function() {
+        V(!1);
+      }
+    }) : null)]
+  });
+}
+function il({
+  initialView: e,
+  isBoundToLibraryAsset: t,
+  isBoundToCms: i,
+  supportedViews: n
+}) {
+  let r;
+  return (r = e || (t ? "library" : i ? "cms" : "custom_color"), n && !n.includes(r)) ? n[0] : r;
+}
+export const h = $$io0;
+export const q = $$ii1; 

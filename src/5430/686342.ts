@@ -1,0 +1,10 @@
+let $$s2 = "two_column_resource_page--autoLayoutContainer--odI-S";
+let $$i1 = "two_column_resource_page--leftSideRedesign--W3m0M";
+let $$n4 = "two_column_resource_page--rightSideRedesignCarousel--d7GTz two_column_resource_page--rightSideRedesign--KsU3v";
+let $$o0 = "two_column_resource_page--rightSideRedesignFallbackThumbnail--Ydb1e two_column_resource_page--rightSideRedesign--KsU3v";
+let $$a3 = "two_column_resource_page--scrollSentinel--B3rnT";
+export const LV = $$o0;
+export const e = $$i1;
+export const fG = $$s2;
+export const sR = $$a3;
+export const v8 = $$n4;

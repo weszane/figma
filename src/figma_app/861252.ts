@@ -1,0 +1,269 @@
+import { jsx, jsxs } from "react/jsx-runtime";
+import { memo } from "react";
+import { d4, wA } from "../vendor/514228";
+import { lQ } from "../905/934246";
+import { U1 } from "../figma_app/343967";
+import { Ez5 } from "../figma_app/763686";
+import { getFeatureFlags } from "../905/601108";
+import { Xr, fp, md } from "../figma_app/27355";
+import u from "classnames";
+import { parsePxNumber } from "../figma_app/783094";
+import { R as _$$R } from "../905/103090";
+import { gs } from "../figma_app/624706";
+import { o as _$$o } from "../905/821217";
+import { E as _$$E } from "../905/632989";
+import { x as _$$x } from "../905/587214";
+import { f as _$$f } from "../905/335032";
+import { Pt } from "../figma_app/806412";
+import { s as _$$s } from "../cssbuilder/589278";
+import { t, tx } from "../905/303541";
+import { Y5 } from "../figma_app/455680";
+import { Zr } from "../figma_app/678782";
+import { aV } from "../figma_app/722362";
+import { Ib } from "../905/129884";
+import { q as _$$q } from "../figma_app/57000";
+import { P4 } from "../905/18800";
+import { jl } from "../figma_app/471982";
+import { to } from "../figma_app/828186";
+import { U as _$$U } from "../905/492359";
+import { S as _$$S } from "../5132/724052";
+import { Ay } from "../905/612521";
+import { m as _$$m } from "../figma_app/694193";
+import { xo } from "../figma_app/473493";
+import { cJ, Em } from "../figma_app/976749";
+import { Yk } from "../figma_app/644079";
+import { DP } from "../905/640017";
+import { d1 } from "../905/766303";
+import { D as _$$D } from "../figma_app/740163";
+import { z4 } from "../905/37051";
+import { _6 } from "../figma_app/386952";
+import { ut } from "../figma_app/84367";
+import { Yj } from "../figma_app/951233";
+import { dE } from "../figma_app/598018";
+import { m as _$$m2 } from "../905/99004";
+import { x as _$$x2 } from "../905/106997";
+import { C as _$$C } from "../figma_app/859828";
+import { S as _$$S2 } from "../5132/525530";
+import { e6 } from "../figma_app/617427";
+import { c as _$$c } from "../905/370443";
+import { gh } from "../figma_app/598952";
+import { Px, Bl, go, HO, aN } from "../figma_app/57551";
+import { $A } from "../905/782918";
+import { B5 } from "../figma_app/552876";
+import { sO } from "../figma_app/21029";
+import { TH } from "../figma_app/751648";
+import { v as _$$v } from "../905/596134";
+import { if6 } from "../figma_app/27776";
+var p = u;
+let C = "zoom_menu--enabled--ZDTJg";
+let w = "zoom_menu--zoomIcon--ZU0yf";
+let O = memo(function ({
+  recordingKey: e
+}) {
+  let t = Zr("zoom-out");
+  let r = Zr("zoom-in");
+  let i = d4(e => !1 === e.mirror.appModel.showUi);
+  let s = aV();
+  return !Y5.isReady() || i ? null : jsx(_$$o, {
+    eventListeners: ["onClick"],
+    children: jsxs("div", {
+      "data-onboarding-key": _$$q,
+      className: p()("zoom_menu--zoomControls--Ob0t9", {
+        [_$$s.opacity0_3.eventsNone.$]: s
+      }),
+      children: [jsx(L, {
+        recordingKey: e,
+        canZoom: t
+      }), jsx("div", {
+        className: "zoom_menu--zoomMenuDivider--J0mae"
+      }), jsx(R, {
+        recordingKey: e,
+        canZoom: r
+      })]
+    })
+  });
+});
+function R(e) {
+  let {
+    recordingKey,
+    canZoom
+  } = e;
+  return jsx(_$$E, {
+    recordingKey: Pt(recordingKey, "zoomInButton"),
+    className: p()("zoom_menu--zoomPlus--zMtgE", {
+      [C]: canZoom
+    }),
+    disabled: !canZoom,
+    onClick: () => {
+      Y5.triggerAction("zoom-in");
+    },
+    htmlAttributes: {
+      "data-tooltip-type": Ib.LOOKUP,
+      "data-tooltip": "zoom-in"
+    },
+    "aria-label": t("fullscreen_actions.zoom-in"),
+    children: jsx("div", {
+      className: "zoom_menu--zoomPlusIcon--oPqo4",
+      "aria-hidden": !0,
+      children: jsx("span", {
+        className: w,
+        children: jsx(_$$x, {})
+      })
+    })
+  });
+}
+function L(e) {
+  let {
+    recordingKey,
+    canZoom
+  } = e;
+  return jsx(_$$E, {
+    recordingKey: Pt(recordingKey, "zoomOutButton"),
+    className: p()("zoom_menu--zoomMinus--BrHt4", {
+      [C]: canZoom
+    }),
+    disabled: !canZoom,
+    onClick: () => {
+      Y5.triggerAction("zoom-out");
+    },
+    htmlAttributes: {
+      "data-tooltip-type": Ib.LOOKUP,
+      "data-tooltip": "zoom-out"
+    },
+    "aria-label": t("fullscreen_actions.zoom-out"),
+    children: jsx("div", {
+      className: "zoom_menu--zoomMinusIcon--l-8CN",
+      "aria-hidden": !0,
+      children: jsx("span", {
+        className: w,
+        children: jsx(_$$f, {})
+      })
+    })
+  });
+}
+function B() {
+  let e = aV();
+  let t = d4(e => e.mirror.appModel.showUi);
+  return !e && t ? jsxs(_$$E, {
+    className: "x78zum5 x153ncpu x1q0g3np xl56j7k x6s0dn4 x1jnr06f xgqmno8 xsqpjig",
+    onClick: () => {
+      Ay.unsafeRedirect(_$$m, "_blank");
+    },
+    children: [jsx("div", {
+      className: "x1tk3asg x17akokd x1qxcl5b xclx6tv",
+      children: tx("cms.onboarding.give_feedback")
+    }), jsx(_$$S, {
+      className: "xwa2v1s"
+    })]
+  }) : null;
+}
+function es() {
+  let e = Xr(Px);
+  let t = Xr(Bl);
+  let r = Xr(go);
+  let [i, a] = fp(HO);
+  return i ? jsx(e6, {
+    className: "dev_mode_demo_file_restart_button--restartButton--jXEnp",
+    onClick: () => {
+      e(aN.STATUSES);
+      t(!1);
+      a(!1);
+      r(!1);
+    },
+    "data-onboarding-key": gh,
+    trackingProperties: {
+      trackingDescriptor: _$$c.RESTART_TOUR
+    },
+    children: jsx(_$$S2, {
+      className: "dev_mode_demo_file_restart_button--restartIcon--alSdl"
+    })
+  }) : null;
+}
+let e_ = parsePxNumber(if6);
+let $$eh0 = memo(function () {
+  let e = wA();
+  let t = cJ();
+  let r = xo();
+  let i = _$$C()?.setBottomRightToolsNode || lQ;
+  let u = U1(i);
+  let _ = _$$v();
+  let h = getFeatureFlags().dev_mode_demo_file || getFeatureFlags().logged_out_dev_mode_demo_file;
+  let g = window.FigmaMobile;
+  let {
+    keyboardShortcuts,
+    isEditingFile,
+    isDevHandoff,
+    modalShown,
+    orgUser,
+    user,
+    unsortedTeams
+  } = $$em2();
+  let v = _$$D();
+  let A = Em();
+  let x = _$$U();
+  let N = sO();
+  let C = to();
+  let w = !d4(e => e.mirror.appModel.showUi) || v;
+  let R = "dark" === DP();
+  let L = _6();
+  let F = B5(L);
+  let j = !!g?.shouldOptimizeForIpadApp || z4.getIsExtension() && isDevHandoff || F || w;
+  let U = $$eg1();
+  let H = md(P4);
+  let W = ut(Ez5?.uiState().inProductHelpSidePanelWidth, 0);
+  if (jl() || !_ && j) return null;
+  let q = jsxs("div", {
+    ref: u,
+    className: p()("bottom_right_tools_container--container--GhraJ", {
+      "bottom_right_tools_container--design--Yvkzk": A || N,
+      "bottom_right_tools_container--sites--Uvo6B": t,
+      "bottom_right_tools_container--cooper--u2PoH": C
+    }),
+    style: {
+      marginBottom: U,
+      "--inProductHelpSidePanelWidth": `${W}px`,
+      "--cookieBannerHeight": `${H}px`
+    },
+    "data-testid": "bottom-right-tools-container",
+    children: [_ && jsx(O, {
+      recordingKey: "bottomRightToolsZoomMenu"
+    }), h && r && jsx(es, {}), t && x && jsx(B, {}), !j && jsx(gs, {
+      dispatch: e,
+      hide: w,
+      isDarkMode: R,
+      isEditingFile,
+      keyboardShortcuts,
+      modalShown,
+      orgUser,
+      shouldShowBottomRightZoomMenu: _,
+      unsortedTeams,
+      user
+    })]
+  });
+  return jsx(_$$x2, {
+    children: jsx(_$$m2, {
+      role: "contentinfo",
+      children: q
+    })
+  });
+});
+export function $$em2() {
+  return _$$R(e => ({
+    keyboardShortcuts: e.mirror.appModel.keyboardShortcuts,
+    isEditingFile: !!d1(e),
+    isDevHandoff: $A(e.selectedView),
+    modalShown: e.modalShown,
+    orgUser: Yj(e),
+    user: e.user,
+    unsortedTeams: dE(e.user, e.roles, e.teams)
+  }));
+}
+export function $$eg1() {
+  let e = Yk();
+  let t = TH();
+  let r = _$$C()?.bottomRightToolsNode?.getBoundingClientRect();
+  return t && r && t.right + e_ > r.left ? e : 0;
+}
+export const mv = $$eh0;
+export const D = $$eg1;
+export const DF = $$em2;

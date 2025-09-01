@@ -1,0 +1,108 @@
+import { jsxs, jsx } from "react/jsx-runtime";
+import { useRef, useMemo } from "react";
+import { wA } from "../vendor/514228";
+import { md } from "../figma_app/27355";
+import { B } from "../905/714743";
+import { s as _$$s } from "../cssbuilder/589278";
+import { tx, t as _$$t } from "../905/303541";
+import { l4 } from "../905/124270";
+import { II, yA } from "../905/171315";
+import { s as _$$s2 } from "../figma_app/576667";
+import { f as _$$f } from "../figma_app/882858";
+import { A as _$$A } from "../905/484713";
+import { G } from "../figma_app/119843";
+import { oB, j7 } from "../905/929976";
+import { an } from "../905/81009";
+import { Um } from "../905/848862";
+import { WY, uR } from "../figma_app/162807";
+import { A as _$$A2 } from "../6828/154709";
+let T = e => {
+  switch (e) {
+    case WY.RESOURCE:
+      return tx("search.preview_section.all_files");
+    case WY.CREATOR:
+      return tx("search.facets.created_by", {
+        creator: _$$t("search.facets.anyone")
+      });
+    case WY.SPACE:
+      return tx("search.facets.space", {
+        space: _$$t("search.facets.all_spaces")
+      });
+    default:
+      return "";
+  }
+};
+export function $$I0({
+  dropdownId: e,
+  facetType: t,
+  containerRef: r,
+  hasQuickActionsStyling: I,
+  contentTargetRef: S
+}) {
+  let v = wA();
+  let A = useRef(null);
+  let x = S || A;
+  let N = Um();
+  let C = N?.type === e;
+  let w = md(l4(t ?? null));
+  let O = _$$f();
+  let R = _$$A();
+  let L = uR.DROPDOWN;
+  let P = useMemo(() => {
+    switch (t) {
+      case WY.RESOURCE:
+        return _$$t("search.facets.filter_by_resource");
+      case WY.CREATOR:
+        return _$$t("search.facets.filter_by_creator");
+      case WY.SPACE:
+        return _$$t("search.facets.filter_by_space");
+      default:
+        return "Filter";
+    }
+  }, [t]);
+  let D = I ? _$$s.relative.lhNormal.flex.itemsCenter.bRadius4.px8.py4.b1.colorBorder.fontMedium.$ : "facet_dropdown_entry--dropdownContainer--VoPFx tile_sort_filter--dropdownContainer--443h- text--fontPos11--2LvXf text--_fontBase--QdLsd";
+  let k = I ? _$$s.ml8.flex.itemsCenter.$ : "facet_dropdown_entry--caretContainer--4agJ1 tile_sort_filter--caretContainer--kkZQq";
+  let M = r && r.current ? r.current.getBoundingClientRect().right : void 0;
+  return jsxs("div", {
+    className: D,
+    onMouseDown: r => {
+      r.stopPropagation();
+      v(an());
+      C ? (v(oB()), R(L, t)) : x.current && (r.preventDefault(), v(j7({
+        type: e,
+        data: {
+          facetType: t,
+          targetRect: x.current.getBoundingClientRect()
+        }
+      })), O(L, t));
+    },
+    onClick: e => e.stopPropagation(),
+    role: "combobox",
+    "aria-expanded": C,
+    "aria-haspopup": "listbox",
+    "aria-controls": e,
+    "aria-label": P,
+    tabIndex: -1,
+    children: [jsx("span", {
+      ref: x,
+      className: _$$s.noWrap.$,
+      children: !w || II(w) ? T(t) : yA(w)
+    }), jsx("div", {
+      className: k,
+      children: jsx(B, {
+        svg: _$$A2,
+        className: `facet_dropdown_entry--caret--XFove tile_sort_filter--caret--AJHA9 ${C ? "facet_dropdown_entry--caretDown--ez1jh tile_sort_filter--caretDown--hIOid" : ""}`
+      })
+    }), C && jsx(G, {
+      dropdownId: e,
+      dropdownChild: jsx(_$$s2, {
+        facetType: t,
+        id: "",
+        path: []
+      }),
+      containerRefRight: M,
+      limitHeight: I
+    })]
+  });
+}
+export const l = $$I0;

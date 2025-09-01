@@ -1,0 +1,155 @@
+import { debounce } from "../905/915765";
+import { NC } from "../905/17179";
+import { sx } from "../905/449184";
+import { ce } from "../figma_app/347146";
+import { eD } from "../figma_app/876459";
+import { Ay } from "../905/612521";
+import { S as _$$S } from "../905/539306";
+import { sf } from "../905/929976";
+import { uM } from "../905/738636";
+import { xA } from "../905/766303";
+import { ZG } from "../figma_app/840917";
+import { FFileType } from "../figma_app/191312";
+import { ge } from "../figma_app/349248";
+import { getPermissionsStateMemoized, canMemberOrg } from "../figma_app/642025";
+import { xS } from "../figma_app/193867";
+import { w2 } from "../905/187165";
+import { wN } from "../figma_app/53721";
+import { ai, f6 } from "../figma_app/915202";
+import { uH, Rx } from "../figma_app/162807";
+import { vj } from "../905/574958";
+import { QB, bN } from "../figma_app/707808";
+import { nF } from "../905/350402";
+import { Rz, r0, ky } from "../905/977218";
+let x = nF((e, {
+  viewport: t
+}) => {
+  let {
+    selectedView
+  } = e.getState();
+  if ("fullscreen" === selectedView.view) {
+    e.dispatch(sf({
+      ...selectedView,
+      viewport: t
+    }));
+    let n = ZG()?.fileKey || selectedView.fileKey;
+    n && eD?.updateViewport(n, t);
+  }
+});
+let $$N6 = nF(e => {
+  let t = e.getState();
+  let r = $$k5(t);
+  e.dispatch(Rz({
+    query: t.desktopNewTab.searchQuery,
+    searchScope: r,
+    searchModelType: uH.FILES
+  }));
+  e.dispatch(r0({
+    entryPoint: "desktop_new_tab"
+  }));
+  t = e.getState();
+  let n = xS(t, {
+    view: "search",
+    entryPoint: "desktop_new_tab",
+    previousView: t.selectedView && (QB(t.selectedView) || bN(t.selectedView)) ? t.selectedView : void 0
+  });
+  Ay.redirect(n);
+});
+let $$C8 = NC("DESKTOP_NEW_TAB_SET_LOADING_BACKGROUND_COLOR");
+let $$w7 = NC("DESKTOP_NEW_TAB_SET_IS_SEARCH_BAR_FOCUSED");
+let $$O3 = NC("DESKTOP_NEW_TAB_SET_SEARCH_QUERY");
+let $$R0 = nF((e, t) => {
+  let r = e.getState();
+  let n = t.result;
+  let i = n.model;
+  let a = {
+    position: t.index,
+    resource_id: i.key,
+    resource_type: n.search_model_type.toString(),
+    matched_queries: n.matched_queries,
+    result: n
+  };
+  let s = {
+    plan: _$$S(r)
+  };
+  new vj.Analytics(r.search, a, s).click(n.search_model_type, r.selectedView, {
+    action: t.clickAction
+  });
+  e.dispatch(ky());
+  e.dispatch(sf({
+    view: "fullscreen",
+    fileKey: i.key,
+    editorType: wN(i.editor_type ?? FFileType.DESIGN)
+  }));
+});
+let $$L2 = nF(async (e, t, {
+  liveStore: r
+}) => {
+  let n = await r.fetchFile(t.fileKey);
+  sx("Desktop New Tab Open Recent", {
+    itemType: "prototype",
+    fileKey: n.key
+  });
+  e.dispatch(sf({
+    view: "prototype",
+    file: ge(n),
+    nodeId: t.pageId,
+    pageId: t.pageId
+  }));
+});
+let $$P1 = nF(async (e, t, {
+  liveStore: r
+}) => {
+  let n = await r.fetchFile(t.fileKey);
+  sx("Desktop New Tab Open Recent", {
+    itemType: "file",
+    fileKey: n.key
+  });
+  e.dispatch(sf({
+    view: "fullscreen",
+    fileKey: n.key,
+    editorType: wN(n.editor_type ?? FFileType.DESIGN)
+  }));
+});
+let $$D10 = nF((e, t) => {
+  let r = e.getState();
+  if (!r.desktopNewTab.isCreatingFile) {
+    let n = ce() ? ai.SAME_TAB : ai.NEW_TAB;
+    let i = xA({
+      state: e.getState(),
+      openNewFileIn: n,
+      folderOverride: t.projectId ? {
+        folderId: t.projectId
+      } : "drafts",
+      trackingInfo: {
+        from: f6.DESKTOP_NEW_TAB_BUTTON,
+        selectedView: r.selectedView
+      },
+      editorType: t.editorType
+    });
+    e.dispatch(uM(i));
+  }
+});
+export function $$k5(e) {
+  let t = getPermissionsStateMemoized(e);
+  return t.currentUserOrgId ? canMemberOrg(t.currentUserOrgId, t) ? Rx.ORG : Rx.ORG_GUEST : Rx.PERSONAL;
+}
+export function $$M9(e, t) {
+  return null == t ? "#00000000" : "whiteboard" === t ? "#ffffff" : `#${w2(e)}`;
+}
+export let $$F4 = debounce((e, t) => {
+  e.dispatch(x({
+    viewport: t
+  }));
+}, 1e3);
+export const Gb = $$R0;
+export const I$ = $$P1;
+export const Mx = $$L2;
+export const Ri = $$O3;
+export const c3 = $$F4;
+export const gt = $$k5;
+export const ht = $$N6;
+export const j3 = $$w7;
+export const mg = $$C8;
+export const on = $$M9;
+export const x3 = $$D10;

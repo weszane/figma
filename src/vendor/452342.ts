@@ -1,0 +1,14 @@
+let $$i1 = "datad0g.com";
+let $$s5 = "dd0g-gov.com";
+let $$o3 = "datadoghq.com";
+let $$a6 = "datadoghq.eu";
+let $$h4 = "ddog-gov.com";
+let $$d0 = "pci.browser-intake-datadoghq.com";
+let $$p2 = ["ddsource", "ddtags"];
+export const $A = $$d0;
+export const Bb = $$i1;
+export const Ih = $$p2;
+export const NW = $$o3;
+export const R8 = $$h4;
+export const TC = $$s5;
+export const dV = $$a6;

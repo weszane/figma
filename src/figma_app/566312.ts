@@ -1,0 +1,37 @@
+import { jsxs, jsx } from "react/jsx-runtime";
+import { k } from "../905/443820";
+import a from "classnames";
+import { Ay } from "../figma_app/778880";
+import { $$ } from "../figma_app/637027";
+import { t as _$$t } from "../905/303541";
+import { Td } from "../905/595131";
+var s = a;
+export function $$u0({
+  children: e,
+  isInsertingTemplate: t,
+  shouldUseOpaqueBackground: r = !1,
+  insertTemplate: a
+}) {
+  let u = Td();
+  let p = u ? _$$t("browse_templates_modal.add_template.disabled") : "";
+  return jsxs($$, {
+    className: s()("insert_template_cta--button--InTLP", r && "insert_template_cta--buttonOpaque--oEwuq"),
+    onClick: Ay.isIpad ? void 0 : a,
+    onPointerDown: Ay.isIpad ? a : void 0,
+    disabled: t || u,
+    "data-not-draggable": !0,
+    title: p,
+    children: [jsx("span", {
+      style: {
+        visibility: t ? "hidden" : "visible"
+      },
+      children: e
+    }), t && jsx("span", {
+      className: "insert_template_cta--spinner--xtwmE",
+      children: jsx(k, {
+        size: "md"
+      })
+    })]
+  });
+}
+export const i = $$u0;

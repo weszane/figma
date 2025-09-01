@@ -1,0 +1,104 @@
+import { jsx, Fragment, jsxs } from "react/jsx-runtime";
+import { b as _$$b } from "../905/946806";
+import { getFeatureFlags } from "../905/601108";
+import { FJ } from "../905/508367";
+import { A } from "../905/920142";
+import { getInitialOptions } from "../figma_app/169182";
+import { cn } from "../figma_app/141320";
+import { s as _$$s } from "../cssbuilder/589278";
+import { t as _$$t, tx } from "../905/303541";
+import { sx } from "../905/941192";
+import { fu, tf } from "../figma_app/831799";
+import { M4, IT } from "../905/713695";
+import { Cn } from "../c5e2cae0/453906";
+import { iZ } from "../905/372672";
+import { tY } from "../figma_app/831101";
+let g = M4.Query({
+  fetch: async () => (await Cn.maintenancePoc1()).data.meta
+});
+export function $$v0(e) {
+  if (!getFeatureFlags().campfire_cart_banner) return jsx(Fragment, {});
+  let {
+    isProCart,
+    isCampfireCart
+  } = e;
+  return jsx("div", {
+    style: sx.$$if(isProCart, sx.add({
+      marginTop: "-16px"
+    }).mb32, sx.mt16).$$if(isCampfireCart, sx.mt16.add({
+      marginBottom: "40px"
+    }), sx.flex.justifyCenter.px16).$,
+    children: jsx(y, {
+      ...e
+    })
+  });
+}
+function y({
+  billingPeriod: e = tY.ANNUAL,
+  isProCart: t,
+  isReviewPage: a,
+  isCampfireCart: h
+}) {
+  let v = iZ();
+  let y = function (e) {
+    let {
+      data,
+      status
+    } = function (e) {
+      let [t] = IT(g(null), {
+        enabled: getFeatureFlags().campfire_i18n_verbiage && e
+      });
+      return t;
+    }(e);
+    if ("loaded" === status && data?.strings.cart_banner) return {
+      info: data.strings.cart_banner.cart_banner_info,
+      edu_info: data.strings.cart_banner.cart_banner_edu_info
+    };
+  }(!0);
+  let T = getInitialOptions().analyze_data_flow_v2_until;
+  let N = cn(v) && t ? y?.edu_info.replace(/\[BILLING_REMODEL_GA_DATE\]/g, A(T).format("MMMM D, YYYY")) : y?.info.replace(/\[NEXT_RENEWAL_DATE\]/g, j(e));
+  let b = _$$t("checkout.banner.price_change", {
+    date: j(e)
+  });
+  return jsx(fu, {
+    name: "Campfire Cart Banner",
+    children: jsxs("div", {
+      className: _$$s.flex.justifyBetween.itemsCenter.minH40.px8.flexGrow1.colorBgWarningTertiary.$,
+      style: sx.add({
+        borderRadius: "13px"
+      }).$$if(a, sx.add({
+        maxWidth: t ? "693px" : "758px"
+      })).$,
+      "data-testid": "campfire-cart-banner",
+      children: [jsxs("div", {
+        className: _$$s.flex.itemsCenter.$,
+        children: [jsx(_$$b, {}), jsx("p", {
+          className: _$$s.fontMedium.px4.$,
+          children: h ? b : N
+        })]
+      }), jsx(S, {
+        onClick: () => FJ("https://help.figma.com/hc/articles/27468498501527", "_blank"),
+        children: tx("campfire_banner.learn_more")
+      })]
+    })
+  });
+}
+function j(e) {
+  let t = new Date();
+  t.setFullYear(t.getFullYear() + 1);
+  let a = new Date();
+  a.setFullYear(2025);
+  a.getDate() >= 11 ? a.setMonth(2) : a.setMonth(3);
+  return A(e === tY.ANNUAL ? t : a).format("MMMM D, YYYY");
+}
+let S = tf(function ({
+  onClick: e,
+  children: t
+}) {
+  return jsx("button", {
+    className: "campfire_cart_banner--mockUI3Button--Aw9Vz",
+    onClick: e,
+    children: t
+  });
+});
+export const W = $$v0;

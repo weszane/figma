@@ -1,0 +1,12 @@
+export var $$n2 = (e => (e.FETCH = "plugin-iframe-for-fetch", e.INSPECT = "plugin-iframe-in-inspect", e.MODAL = "plugin-iframe-in-modal", e.BUZZ_LEFT_PANEL = "plugin-iframe-in-buzz-left-panel", e))($$n2 || {});
+let $$r4 = 300;
+let $$a3 = 200;
+let $$s0 = "$INTERNAL_DO_NOT_USE$RERUN_PLUGIN$";
+let $$o5 = ["*"];
+let $$l1 = "window.parent.parent.parent";
+export const IN = $$s0;
+export const NO = $$l1;
+export const Wh = $$n2;
+export const Yw = $$a3;
+export const bA = $$r4;
+export const gH = $$o5;

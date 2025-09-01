@@ -1,0 +1,42 @@
+import { eU } from "../figma_app/27355";
+import { p9 } from "../figma_app/864723";
+import { yV } from "../figma_app/516028";
+import { bt } from "../905/270322";
+import { Z1 } from "../905/401885";
+import { r1 } from "../figma_app/545877";
+let d = bt(e => e.multiplayer.allUsers);
+eU(e => {
+  let t = e(p9);
+  let n = e(d);
+  if (t && 0 !== n.length) return n.filter(e => e.userID !== t.id);
+});
+let c = bt(e => e.multiplayer.deviceNameFilter);
+let $$m2 = eU(e => {
+  let t = e(d);
+  let n = e(c);
+  return null != e(yV) && null != n && new Set(t.filter(e => e.deviceName === n).map(e => e.userID)).size > 1;
+});
+let u = r1("seen_spotlight_hint");
+let $$p1 = Z1(u, (e, t) => {
+  let n = t(d);
+  let o = t(c);
+  if (t(h)) return !1;
+  let a = n.filter(e => e.deviceName === o);
+  let i = Math.max(...Object.values(a).map(e => e.joinedAtS)) - 300;
+  let s = new Set();
+  for (let e of a) e.joinedAtS >= i && s.add(e.userID);
+  return !(s.size < 5) && !e;
+});
+let h = bt(e => {
+  let t = "fullscreen" === e.selectedView.view && !e.mirror.appModel.showUi;
+  let n = "prototype" === e.selectedView.view && e.selectedView.hideUI;
+  return t || n;
+});
+let $$f0 = bt(e => {
+  let t = "fullscreen" === e.selectedView.view && e.mirror.appModel.showUi;
+  let n = "prototype" === e.selectedView.view && !e.selectedView.hideUI;
+  return t || n;
+});
+export const $5 = $$f0;
+export const E6 = $$p1;
+export const d9 = $$m2;

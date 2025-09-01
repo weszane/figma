@@ -1,0 +1,1 @@
+"undefined" != typeof process && process?.env?.DEBUG_PERMS;

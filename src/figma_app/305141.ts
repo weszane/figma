@@ -1,0 +1,45 @@
+import { useCallback } from "react";
+import { glU } from "../figma_app/763686";
+import { l7 } from "../905/189185";
+import { A } from "../vendor/90566";
+import { Z } from "../905/521211";
+import { Fk } from "../figma_app/167249";
+import { OG } from "../figma_app/876589";
+export function $$c0() {
+  let e = Z();
+  let {
+    guid,
+    title
+  } = Fk(e => {
+    let t = e.getCurrentPage();
+    let r = t?.responsiveSetSettings;
+    return {
+      guid: t?.guid,
+      title: r?.title
+    };
+  });
+  return {
+    title,
+    placeholder: e,
+    updateTitle: $$u1({
+      guid: guid ?? "0:1",
+      isSite: !0
+    })
+  };
+}
+export function $$u1({
+  guid: e,
+  isSite: t
+}) {
+  let r = OG(t ? "title" : "page_title");
+  let o = A(t => {
+    l7.user("set-responsive-set-settings", () => {
+      glU?.setResponsiveSetSettings({
+        title: t.trim()
+      }, [e]);
+    });
+  }, 500);
+  return useCallback(e => (o(e), r(), o.flush), [r, o]);
+}
+export const t = $$c0;
+export const z = $$u1;

@@ -1,0 +1,32 @@
+import { jsx } from "react/jsx-runtime";
+import { tx } from "../905/303541";
+import { G$ } from "../figma_app/646357";
+export function $$s1({
+  numComponents: e,
+  numStateGroups: t,
+  numVariableCollections: i,
+  numVariables: r,
+  numStyles: s
+}) {
+  return jsx("span", {
+    children: G$({
+      numProductComponents: e + t,
+      numStyles: s ?? 0,
+      numVariables: r ?? 0,
+      numVariableCollections: i ?? 0
+    })
+  });
+}
+export function $$o0({
+  numComponents: e,
+  numStateGroups: t
+}) {
+  let i = e + t;
+  return jsx("span", {
+    children: 0 === i ? tx("design_systems.libraries_modal.no_components") : tx("design_systems.libraries_modal.plural.num_component", {
+      numComponents: i
+    })
+  });
+}
+export const a = $$o0;
+export const c = $$s1;

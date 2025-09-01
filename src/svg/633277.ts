@@ -1,0 +1,2 @@
+export let $$i0 = '<svg xmlns="http://www.w3.org/2000/svg" width="13" height="17" viewBox="0 0 13 17"><path fill="#000" fill-opacity="1" fill-rule="evenodd" stroke="none" d="M10 4.5V7H3V4.5C3 2.567 4.566 1 6.5 1c1.031 0 1.959.446 2.6 1.156.56.62.9 1.443.9 2.344M2 7V4.5C2 2.015 4.016 0 6.5 0 8.984 0 11 2.015 11 4.5V7h2v10H0V7zM1 8v8h11V8z"/></svg>';
+export const A = $$i0;

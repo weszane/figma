@@ -1,0 +1,12 @@
+let $$n3 = "permissions_banners--draftsMoveBanner--M3JYb";
+let $$r2 = "permissions_banners--draftsMoveIcon--miH8V";
+let $$a1 = "permissions_banners--draftsMoveFile--0VOU9 blue_link--blueLink--9rlnd";
+let $$s0 = "permissions_banners--userSharingRestrictedBanner--tRANF";
+let $$o5 = "permissions_banners--userSharingRestrictedIcon--54u6w";
+let $$l4 = "permissions_banners--userSharingRestrictedSupportLink--2-Yi2 blue_link--blueLink--9rlnd";
+export const $F = $$s0;
+export const MC = $$a1;
+export const RA = $$r2;
+export const W5 = $$n3;
+export const e1 = $$l4;
+export const et = $$o5;

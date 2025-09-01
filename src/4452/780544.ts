@@ -1,0 +1,10 @@
+let $$s4 = 443 == require.j ? "Admin settings onboarding - admin nav changes -" : null;
+let $$n0 = "admin_sidebar_plan_information_onboarding_key";
+let $$r2 = "admin_sidebar_back_to_files_onboarding_key";
+let $$i1 = "admin_dashboard_onboarding_key";
+let $$l3 = "admin_seat_approval_settings_onboarding_key";
+export const KB = $$n0;
+export const LX = $$i1;
+export const lR = $$r2;
+export const qf = $$l3;
+export const tg = $$s4;

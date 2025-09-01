@@ -1,0 +1,30 @@
+var r = "\ud800-\udfff";
+var n = "\\u2700-\\u27bf";
+var i = "a-z\\xdf-\\xf6\\xf8-\\xff";
+var s = "A-Z\\xc0-\\xd6\\xd8-\\xde";
+var o = "\\xac\\xb1\\xd7\\xf7\\x00-\\x2f\\x3a-\\x40\\x5b-\\x60\\x7b-\\xbf\\u2000-\\u206f \\t\\x0b\\f\\xa0\\ufeff\\n\\r\\u2028\\u2029\\u1680\\u180e\\u2000\\u2001\\u2002\\u2003\\u2004\\u2005\\u2006\\u2007\\u2008\\u2009\\u200a\\u202f\\u205f\\u3000";
+var a = "['\u2019]";
+var h = "[" + o + "]";
+var d = "\\d+";
+var p = "[" + n + "]";
+var g = "[" + i + "]";
+var m = "[^" + r + o + d + n + i + s + "]";
+var v = "(?:\ud83c[\udde6-\uddff]){2}";
+var y = "[\ud800-\udbff][\udc00-\udfff]";
+var b = "[" + s + "]";
+var O = "(?:" + g + "|" + m + ")";
+var x = "(?:" + b + "|" + m + ")";
+var w = "(?:" + a + "(?:d|ll|m|re|s|t|ve))?";
+var k = "(?:" + a + "(?:D|LL|M|RE|S|T|VE))?";
+var _ = "(?:[\\u0300-\\u036f\\ufe20-\\ufe2f\\u20d0-\\u20ff]|\ud83c[\udffb-\udfff])?";
+var S = "[\\ufe0e\\ufe0f]?";
+var E = "(?:\\u200d(?:" + ["[^" + r + "]", v, y].join("|") + ")" + S + _ + ")*";
+var A = "\\d*(?:1st|2nd|3rd|(?![123])\\dth)(?=\\b|[A-Z_])";
+var C = "\\d*(?:1ST|2ND|3RD|(?![123])\\dTH)(?=\\b|[a-z_])";
+var T = S + _ + E;
+var I = "(?:" + [p, v, y].join("|") + ")" + T;
+var P = RegExp([b + "?" + g + "+" + w + "(?=" + [h, b, "$"].join("|") + ")", x + "+" + k + "(?=" + [h, b + O, "$"].join("|") + ")", b + "?" + O + "+" + w, b + "+" + k, C, A, d, I].join("|"), "g");
+function R(e) {
+  return e.match(P) || [];
+}
+module.exports = R;

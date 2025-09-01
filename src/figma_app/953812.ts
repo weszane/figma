@@ -1,0 +1,27 @@
+import { jsx } from "react/jsx-runtime";
+import { ce } from "../figma_app/347146";
+import { eD } from "../figma_app/876459";
+import { f } from "../figma_app/316722";
+import { Y } from "../figma_app/667500";
+export function $$l0() {
+  return !!eD || ce();
+}
+export function $$d1({
+  parentBackgroundColor: e
+}) {
+  let {
+    goBack,
+    goForward,
+    canGoBack,
+    canGoForward
+  } = Y();
+  return jsx(f, {
+    onLeftClick: goBack,
+    onRightClick: goForward,
+    isLeftEnabled: canGoBack,
+    isRightEnabled: canGoForward,
+    parentBackgroundColor: e
+  });
+}
+export const E = $$l0;
+export const J = $$d1;

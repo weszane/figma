@@ -1,0 +1,77 @@
+import { Nfd } from "../figma_app/763686";
+import { SceneGraphUnavailableError } from "../figma_app/518682";
+import { fn, sH } from "../905/871411";
+import { UN } from "../905/700578";
+import { getFeatureFlags } from "../905/601108";
+import { Ay } from "../905/612521";
+import { serializeQuery } from "../905/634134";
+import { gN } from "../905/760074";
+import { EO } from "../905/691205";
+export function $$p4(e, t) {
+  (e = e ? e.slice(1) : "") && ("commentPreferences" === e ? t.showCommentPreferencesPicker = !0 : t.commentThreadId = e);
+}
+export function $$m8(e, t) {
+  e["node-id"] && (t.nodeId = e["node-id"]);
+  e["version-id"] && (t.versionId = e["version-id"]);
+  e["try-plugin-id"] && (t.tryPluginId = e["try-plugin-id"]);
+  e["try-plugin-version-id"] && (t.tryPluginVersionId = e["try-plugin-version-id"]);
+  e["try-plugin-name"] && (t.tryPluginName = e["try-plugin-name"]);
+  "1" === e["is-playground-file"] && (t.isPlaygroundFile = !0);
+}
+export function $$h7(e = !1) {
+  return e ? `/test/eval/view${Ay.location.search}` : `/test/interactions${Ay.location.search}`;
+}
+export function $$g3(e, t, i, n, r, a = !1) {
+  if (n) return gN(n, r || null, e);
+  let s = `/${e}/${t}`;
+  a || (i ? s += `/${i}` : s += "/Untitled");
+  return s;
+}
+export function $$f6(e, t) {
+  t && fn(sH(t)) && (e["node-id"] = EO(t));
+}
+export function $$_2(e, t) {
+  t && (e["version-id"] = t);
+}
+export function $$A9(e, t) {
+  t && (e += `#${t}`);
+  return e;
+}
+export function $$y10(e, t) {
+  Object.keys(t).length > 0 && (e += `?${serializeQuery(t)}`);
+  return e;
+}
+export function $$b0(e, t) {
+  if (t && fn(sH(t))) try {
+    let i = UN().get(t)?.type;
+    i && ["CANVAS", "DOCUMENT"].includes(i || "") && (e.p = "f");
+  } catch (e) {
+    if (!(e instanceof SceneGraphUnavailableError)) throw e;
+  }
+}
+export function $$v1(e) {
+  switch (e) {
+    case Nfd.CODE:
+      return "code";
+    case Nfd.DAKOTA:
+      return "cms";
+    case Nfd.SETTINGS:
+      return "settings";
+    case Nfd.FILE:
+      return null;
+  }
+}
+export function $$I5(e) {
+  return "code" === e && (getFeatureFlags().sts_code_authoring || getFeatureFlags().sts_code_authoring_by_plan) ? Nfd.CODE : "cms" === e && getFeatureFlags().dakota ? Nfd.DAKOTA : "settings" === e ? Nfd.SETTINGS : Nfd.FILE;
+}
+export const H_ = $$b0;
+export const Hz = $$v1;
+export const Wi = $$_2;
+export const ZH = $$g3;
+export const d8 = $$p4;
+export const eE = $$I5;
+export const gR = $$f6;
+export const oU = $$h7;
+export const qi = $$m8;
+export const qr = $$A9;
+export const sR = $$y10;

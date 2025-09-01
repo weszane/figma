@@ -1,0 +1,14 @@
+let $$n4 = "a047d87bd41a4e4377a982c674c40929ff668730";
+let $$r5 = "4326f8c1325b3a45331651aca034ee5ac08390c0";
+let $$a3 = 240 / 135;
+let $$s1 = 240;
+let $$o2 = "browser_notifications_onboarding_bell_target_key";
+let $$l6 = "browser_notifications_onboarding_comment_reply_target_key";
+let $$d0 = "browser_notifications_onboarding_new_comment_target_key";
+export const UU = $$d0;
+export const V_ = $$s1;
+export const fD = $$o2;
+export const mk = $$a3;
+export const qH = $$n4;
+export const vH = $$r5;
+export const ym = $$l6;

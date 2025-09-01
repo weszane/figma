@@ -1,0 +1,41 @@
+import { ex } from "../905/524523";
+import { jsxs, jsx } from "react/jsx-runtime";
+import { s } from "../cssbuilder/589278";
+import { tx } from "../905/303541";
+export let $$s0 = ex("style_info", function (e) {
+  let {
+    styleName,
+    styleDescription,
+    styleFileName,
+    styleElementType
+  } = e;
+  return jsxs("div", {
+    className: s.alignLeft.$,
+    children: [styleName && jsx("div", {
+      children: styleName
+    }), styleElementType && jsx("div", {
+      children: styleElementType
+    }), styleDescription && jsxs("div", {
+      children: [(styleName || styleElementType) && jsx("br", {}), styleDescription]
+    }), styleFileName && jsx("div", {
+      style: {
+        fontStyle: "italic"
+      },
+      children: tx("design_systems.styles.style_name_tooltip", {
+        fileName: styleFileName
+      })
+    })]
+  });
+}, e => {
+  let t = e.getAttribute("data-tooltip-style-name") || "";
+  let i = e.getAttribute("data-tooltip-style-description") || "";
+  let n = e.getAttribute("data-tooltip-style-element-type") || "";
+  return {
+    styleName: t,
+    styleDescription: i,
+    styleFileName: e.getAttribute("data-tooltip-style-file-name") || "",
+    styleElementType: n,
+    unconstrainWidth: "true" === e.getAttribute("data-tooltip-unconstrain-width")
+  };
+});
+export const Z = $$s0;

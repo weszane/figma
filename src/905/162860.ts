@@ -1,0 +1,2 @@
+export var $$n0 = (e => (e[e.GENERIC = 0] = "GENERIC", e[e.FIGMA_FILE = 1] = "FIGMA_FILE", e[e.FIGMA_PROTOTYPE = 2] = "FIGMA_PROTOTYPE", e[e.PAGE = 3] = "PAGE", e[e.FRAME = 4] = "FRAME", e[e.MAILTO = 5] = "MAILTO", e[e.INVALID = 6] = "INVALID", e[e.MISSING = 7] = "MISSING", e[e.NOT_LOADED = 8] = "NOT_LOADED", e[e.TEL = 9] = "TEL", e[e.FIGMA_VERSION = 10] = "FIGMA_VERSION", e))($$n0 || {});
+export const F = $$n0;

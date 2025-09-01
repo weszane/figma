@@ -1,0 +1,14 @@
+import { E3 } from "../figma_app/27355";
+import { r1 } from "../figma_app/545877";
+let $$a5 = "user_has_generated_ai_summary";
+let $$s3 = "has_dismissed_summarization_nudge";
+let $$o4 = r1($$a5);
+let $$l1 = r1($$s3);
+let $$d2 = E3("last_saw_summarization_nudge", "0");
+let $$c0 = E3("seen_summarization_nudge_count", 0);
+export const EH = $$c0;
+export const MC = $$l1;
+export const ji = $$d2;
+export const l0 = $$s3;
+export const xo = $$o4;
+export const zp = $$a5;

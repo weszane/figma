@@ -1,0 +1,82 @@
+import { jsx, Fragment } from "react/jsx-runtime";
+import { md } from "../figma_app/27355";
+import { h as _$$h } from "../905/207101";
+import { tx } from "../905/303541";
+import { c as _$$c } from "../905/370443";
+import { e as _$$e } from "../905/621515";
+import { r1 } from "../figma_app/545877";
+import { N } from "../figma_app/268271";
+import { rq } from "../905/425180";
+import { R } from "../905/11928";
+import { F_ } from "../905/858282";
+import { ak5 } from "../figma_app/6204";
+let g = r1("seen_dtm_deprecation_post_migration_overlay");
+export function $$f0(e) {
+  let t = md(g);
+  let {
+    show,
+    isShowing,
+    complete
+  } = _$$e({
+    overlay: ak5,
+    priority: N.DEFAULT_MODAL
+  }, [t]);
+  _$$h(() => {
+    show({
+      canShow: e => !e
+    });
+  });
+  let h = jsx(Fragment, {});
+  let b = jsx(Fragment, {});
+  if ("plan_nav" === e.entryPoint) {
+    let t = tx("file_browser.drafts_to_move.drafts_to_move_files_are_now_in_org_name", {
+      orgName: e.planName || ""
+    });
+    let n = tx("file_browser.drafts_to_move.the_drafts_to_move_section_has_been_removed", {
+      orgName: e.planName || ""
+    });
+    let a = tx("file_browser.drafts_to_move.any_files_from_that_page_are_now_in_a_new_free_starter_team");
+    let r = tx("file_browser.drafts_to_move.you_can_now_find_them_in_drafts_within_team_name", {
+      teamName: e.planName || ""
+    });
+    let i = tx("file_browser.drafts_to_move.drafts_to_move_files_have_relocated");
+    let s = tx("file_browser.drafts_to_move.looking_for_your_drafts_to_move");
+    h = e.isOrg ? t : e.starterTeamCreated ? i : s;
+    b = e.isOrg ? n : e.starterTeamCreated ? a : r;
+  } else {
+    h = e.isOrg ? tx("file_browser.drafts_to_move.drafts_to_move_files_have_relocated") : tx("file_browser.drafts_to_move.looking_for_your_drafts_to_move");
+    b = e.isOrg ? tx("file_browser.drafts_to_move.the_files_that_were_on_that_page_can_now_be_found_here") : tx("file_browser.drafts_to_move.you_can_now_find_them_in_drafts_within_team_name", {
+      teamName: e.planName || ""
+    });
+  }
+  return jsx(rq, {
+    arrowPosition: F_.LEFT_TITLE,
+    description: jsx("p", {
+      children: b
+    }),
+    emphasized: !0,
+    isShowing,
+    onClose: complete,
+    primaryCta: {
+      label: e.navigateToPlan ? tx("file_browser.drafts_to_move.show_me") : tx("file_browser.modal.got_it"),
+      type: "button",
+      onClick: () => {
+        e.navigateToPlan && e.navigateToPlan();
+        complete();
+      },
+      ctaTrackingDescriptor: _$$c.DONE
+    },
+    secondaryCta: {
+      label: tx("file_browser.drafts_to_move.viewbar_learn_more_link"),
+      type: "link",
+      href: "https://help.figma.com/hc/articles/18409526530967",
+      ctaTrackingDescriptor: _$$c.LEARN_MORE
+    },
+    targetKey: e.targetKey || "dtm_deprecation_post_migration_overlay_drafts_key",
+    title: h,
+    trackingContextName: "Dtm Deprecation Post Migration Overlay",
+    width: 350,
+    zIndex: R.MODAL
+  });
+}
+export const a = $$f0;

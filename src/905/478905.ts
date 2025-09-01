@@ -1,0 +1,14 @@
+let $$n4 = "archived_branch_footer--container--Tg4c5";
+let $$r5 = "archived_branch_footer--footer--BdCHW";
+let $$a1 = "archived_branch_footer--footerLeft--rlbGQ text--fontNeg12--2PWcg text--_fontBase--QdLsd text--_negText--j9g-L";
+let $$s6 = "archived_branch_footer--footerRight--pGVqa";
+let $$o3 = "archived_branch_footer--lockIcon--f3v-B";
+let $$l2 = "archived_branch_footer--titleText--1MgwI";
+let $$d0 = "archived_branch_footer--messageText--mdRS1";
+export const Lo = $$d0;
+export const PU = $$a1;
+export const Qw = $$l2;
+export const hz = $$o3;
+export const kL = $$n4;
+export const qr = $$r5;
+export const wV = $$s6;

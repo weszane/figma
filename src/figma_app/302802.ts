@@ -1,0 +1,342 @@
+import { useEffect, useMemo, useState, useCallback, useRef } from "react";
+import { d4 } from "../vendor/514228";
+import { lV, MK } from "../figma_app/617606";
+import { J } from "../figma_app/710077";
+import { RM, F$, es } from "../figma_app/304955";
+import { ServiceCategories as _$$e } from "../905/165054";
+import { glU, Ws0, mNT, Nfd, Ez5, K$p, mSn } from "../figma_app/763686";
+import { Tq, _H } from "../figma_app/243058";
+import { l7 } from "../905/189185";
+import { UN } from "../905/700578";
+import { eU, zl, fp, md, Xr } from "../figma_app/27355";
+import { debugState } from "../905/407919";
+import { $D } from "../905/11";
+import { sf } from "../905/929976";
+import { Mk } from "../figma_app/31188";
+import { R9 } from "../905/977824";
+import { f9 } from "../figma_app/722362";
+import { KP } from "../figma_app/440875";
+import { iZ } from "../905/372672";
+import { Wh } from "../figma_app/615482";
+import { J2, lu } from "../figma_app/84367";
+import { Fk } from "../figma_app/167249";
+import { PW } from "../905/497152";
+import { sM, pS } from "../figma_app/346422";
+import { s0 } from "../figma_app/115923";
+import { jT as _$$jT, K8 } from "../figma_app/108909";
+import { Oc } from "../figma_app/552876";
+import { YD, Vo, KL, TJ } from "../figma_app/690664";
+import { Ho, a5 } from "../figma_app/337924";
+import { E as _$$E } from "../figma_app/626557";
+import { VF } from "../figma_app/251814";
+import { cu } from "../figma_app/139865";
+import { wh, UM, Zr, ZY } from "../figma_app/114522";
+var $$M0 = ((e) => (e.BUILD = "build", e.RUNTIME = "runtime", e))($$M0 || {});
+let F = Wh(() => eU([]));
+let j = eU(null);
+export function $$U2() {
+  zl.set(F, []);
+}
+export function $$B13() {
+  let [e, t] = fp(F);
+  let [r, i] = fp(j);
+  let a = md(wh);
+  let s = Oc();
+  useEffect(() => {
+    null === r ? i(a) : JSON.stringify(a) !== JSON.stringify(r) && (s || t([]), i(a));
+  }, [a, r, t, i, s]);
+  return [e, t];
+}
+export function $$G4(e) {
+  let t = md(Mk[PW.CODE_COMPONENT].local);
+  return e?.isCodeFile ? Object.values(t).filter((t) => t.exportedFromCodeFileId === Tq.fromLocalNodeIdObj(e)).sort((e, t) => "default" === e.codeExportName ? -1 : "default" === t.codeExportName ? 1 : e.name.localeCompare(t.name)) : [];
+}
+export function $$V19() {
+  let e = KP();
+  let t = R9.useInfoBySessionId({
+    updateSynchronously: !1
+  });
+  let r = iZ();
+  return function(e, t, r, n) {
+    if (!e || !r || !n) return !1;
+    for (let r of t) if (r.userID !== e.id && r.activeCodeComponentId === n.guid) return !0;
+    return !1;
+  }(r, d4(({
+    multiplayer: {
+      allUsers: e
+    }
+  }) => e), t[e], f9());
+}
+export function $$H7(e) {
+  let t = Fk((e, t) => {
+    if (t) return t.collaborativeSourceCode;
+  }, e);
+  let r = t?.handle;
+  return useMemo(() => t, [r]);
+}
+export function $$z9(e) {
+  return Fk((e, t) => {
+    if (!t || !t.isAlive) return {};
+    try {
+      return _$$jT(t);
+    } catch (e) {
+      $D(_$$e.MAKE, e);
+      return {};
+    }
+  }, e);
+}
+export function $$W16(e) {
+  var t;
+  let r = Xr(YD);
+  let i = Xr(Vo);
+  let [a, s] = useState(0);
+  let [o, l] = useState(null);
+  let d = null;
+  e?.isCodeInstance ? d = e?.backingCodeComponent : e?.isCodeComponent && (d = e);
+  let c = Object.keys((t = d, Fk((e, t) => t && t.isAlive ? t.componentPropertyDefinitions() : {}, t))).length;
+  useEffect(() => {
+    d && (d.guid === o && c > a && (r(!0), i("properties")), l(d.guid));
+    s(c);
+  }, [c, a, d, o, r, i]);
+}
+export function $$K8(e) {
+  return Fk((e, t) => {
+    if (!t || !t.isAlive) return {};
+    try {
+      return K8(t);
+    } catch (e) {
+      $D(_$$e.MAKE, e);
+      return {};
+    }
+  }, e);
+}
+export function $$Y14() {
+  useEffect(() => {
+    sM().then(() => {
+      console.log("[devtools] Initialized LS");
+    }).catch((e) => {
+      Ho(e, lV.CODE_IN_SITES, a5.PREVIEW);
+    });
+  }, []);
+}
+export async function $$$1({
+  node: e,
+  tailwind: t,
+  jsxDev: r,
+  shadcn: n,
+  noWrapper: i
+}) {
+  if (!e.isAlive || !glU) return null;
+  let a = RM(e.codeFileFullPath);
+  let s = F$(a, e.codeFileFullPath);
+  let l = glU.deriveFilesystemFromEntrypointNodeIds([e.guid]);
+  let c = es(a, l.codeFilesystem);
+  return {
+    ...(await pS({
+      entrypointsOrIdentifierToFileName: [s],
+      filesystem: c,
+      tailwind: t,
+      minify: !1,
+      shadcn: n,
+      jsxDev: r,
+      noWrapper: i
+    })),
+    ...l,
+    codeFilesystem: c,
+    codeBuildId: glU.generateUniqueID()
+  };
+}
+export function $$X20(e) {
+  let t = UN();
+  let [r, n] = fp(KL);
+  let i = Fk((e, t, r) => {
+    if (!t) return null;
+    if (t in r) return r[t];
+    let i = e.get(t);
+    if (!i) return null;
+    let a = null;
+    !function(e, t) {
+      let r;
+      Ws0?.isStagingChanges(e) && (r = Ws0?.openChangesStagerScope());
+      try {
+        return t();
+      } finally {
+        null != r && Ws0?.closeChangesStagerScope(r);
+      }
+    }(mNT.DESIGN_TO_CODE, () => {
+      a = i.createUntrackedCodeInstanceOnInternalCanvas();
+    });
+    a && n({
+      ...r,
+      [i.guid]: a
+    });
+  }, e, r, n);
+  return (i ? t.get(i) : null) ?? t.get(e ?? "");
+}
+export function $$q3() {
+  let [e, t] = fp(s0);
+  return useCallback((e) => {
+    e && (t(Nfd.FILE), UM(), l7.user("sites-add-code-instance-to-canvas", () => {
+      glU.startInsertingCodeComponentOnCanvas(e.guid);
+    }));
+  }, [t]);
+}
+export function $$J18() {
+  let e = Object.values(md(Mk[PW.CODE_FILE].local)).filter((e) => !e.isSoftDeleted);
+  useEffect(() => {
+    if (e.length > 0 && Ez5?.codeSelection().fullscreenCodeNodeIds.getCopy().length === 0) {
+      let t = e[0]?.assetId;
+      t && Ez5.codeSelection().fullscreenCodeNodeIds.set([Tq.toGuidStrIfLocal(t)]);
+    }
+  }, [e]);
+}
+export function $$Z6(e) {
+  let t = J2(Ez5.codeBuildBindings().buildNumberByNodeId);
+  return useMemo(() => t.get(e?.guid || "") ?? -1, [t, e]);
+}
+export function $$Q17(e) {
+  return useCallback(() => J(e), [e]);
+}
+function ee(e) {
+  let t = {
+    ...debugState.getState().selectedView,
+    codeNodeId: e
+  };
+  debugState.dispatch(sf(t));
+}
+export function $$et10() {
+  let e = Oc();
+  let t = md(s0);
+  let r = useRef(!0);
+  let i = useRef(!1);
+  let [a, s] = useState(null);
+  let [o, l] = useState(null);
+  useEffect(() => {
+    if (e) return;
+    let n = debugState.getState().selectedView.codeNodeId;
+    if (!Ez5) return;
+    let i = Ez5.codeSelection();
+    if (t === Nfd.CODE) {
+      let e = i.fullscreenCodeNodeIds;
+      r.current && n && l(n);
+      r.current = !1;
+      ee(e?.getCopy()[0]);
+      return lu(e, {
+        onChangeImmediate() {
+          e?.getCopy()[0] && ee(e?.getCopy()[0]);
+        }
+      });
+    }
+    {
+      let e = i.selectedCodeNodeIds;
+      r.current && n && s(n);
+      r.current = !1;
+      ee(e?.getCopy()[0]);
+      return lu(e, {
+        onChangeImmediate() {
+          ee(e?.getCopy()[0]);
+        }
+      });
+    }
+  }, [t, e]);
+  let c = Fk((e, t, r) => !i.current && (!!t || !!r) && !!e.get(t || r || ""), o, a);
+  useEffect(() => {
+    if (e || !c || i.current) return;
+    i.current = !0;
+    let r = UN();
+    if (t === Nfd.CODE) {
+      let e = r.get(o);
+      e && Ez5?.codeSelection().fullscreenCodeNodeIds.set([e.guid]);
+    } else {
+      let e = r.get(a);
+      if (e) {
+        Ez5?.codeSelection().selectedCanvasNodeIds.set([e.guid]);
+        let t = VF(e, !1) ?? e;
+        (t.isCodeComponent || t.isCodeFile || t.isCodeInstance) && Zr(t);
+      }
+    }
+  }, [c, t, o, a, e]);
+}
+export function $$er12(e) {
+  let t = _$$E(e);
+  let r = useMemo(() => (t || []).map((e) => {
+    if (e.type !== K$p.USER_MESSAGE) return null;
+    let {
+      imports
+    } = MK(e.textContent);
+    return imports && 0 !== imports.length ? imports.map((e) => "node" === e.type && e.communityAttribution ? e.communityAttribution : null).filter((e) => !!e) : null;
+  }).filter((e) => !!e).flat(), [t]);
+  return useMemo(() => r.filter((e, t, r) => t === r.findIndex((t) => t.hubFileId === e.hubFileId)), [r]);
+}
+export function $$en5(e) {
+  return e?.isCodeFile ? e : e?.isCodeComponent ? e.exportedFromCodeFile : e?.isCodeInstance ? e.backingCodeComponent?.exportedFromCodeFile ?? null : null;
+}
+export function $$ei11(e, t) {
+  let r = UN();
+  let i = md(s0);
+  let a = $$en5(e);
+  let s = function(e) {
+    let t = $$G4($$en5(e));
+    if (e?.isCodeComponent) return e;
+    let r = t[0];
+    let n = r && _H.fromString(r.assetId);
+    let i = n && _H.toGuidStrIfLocal(n);
+    return i ? UN().get(i) : null;
+  }(e);
+  let o = md(TJ);
+  let l = a ? o[a.guid] ?? s?.guid ?? null : null;
+  let u = l === s?.guid;
+  let h = $$X20(l);
+  let m = e ? mSn?.findMainComponentLikeCodeInstance(r.scene, e.guid) : null;
+  let g = cu();
+  let f = h?.guid;
+  let E = useMemo(() => f ? [f] : [], [f]);
+  let y = useMemo(() => m ? [m] : E, [m, E]);
+  let b = md(ZY) || i === Nfd.CODE || 0 === g.length;
+  let T = useMemo(() => u ? b ? y : g : E, [u, b, E, y, g]);
+  return useMemo(() => {
+    let e = UN();
+    let r = T[0];
+    let n = r ? e.get(r) : null;
+    if (!n) return null;
+    if (!t) return {
+      type: "instance",
+      codeInstanceNode: n,
+      allCodeInstanceNodeIds: T
+    };
+    {
+      let r = e.get(l);
+      return r ? {
+        type: "behavior",
+        codeBehaviorNode: r,
+        targetNode: e.get(t.targetNodeId) ?? void 0,
+        exampleObject: t.exampleObject ?? void 0,
+        codeInstanceNode: n
+      } : null;
+    }
+  }, [T, l, t]);
+}
+export function $$ea15(e) {
+  return Fk((e, t) => !!t && (!t.isMainComponentLikeCodeNode && !t.isLayerLikeCodeNode || t.isInstanceSublayer), e);
+}
+export const S4 = $$M0;
+export const gz = $$$1;
+export const px = $$U2;
+export const C9 = $$q3;
+export const H1 = $$G4;
+export const f6 = $$en5;
+export const IO = $$Z6;
+export const OV = $$H7;
+export const cH = $$K8;
+export const GW = $$z9;
+export const tq = $$et10;
+export const qe = $$ei11;
+export const yj = $$er12;
+export const jT = $$B13;
+export const pO = $$Y14;
+export const wE = $$ea15;
+export const jS = $$W16;
+export const I4 = $$Q17;
+export const XW = $$J18;
+export const b_ = $$V19;
+export const vD = $$X20; 

@@ -1,0 +1,251 @@
+import { jsx, jsxs, Fragment } from "react/jsx-runtime";
+import { useState, useMemo } from "react";
+import { wA, d4 } from "../vendor/514228";
+import o from "classnames";
+import { xf } from "../figma_app/416935";
+import { Rs } from "../figma_app/288654";
+import { CY } from "../figma_app/637027";
+import { T as _$$T } from "../figma_app/257703";
+import { tx, t as _$$t } from "../905/303541";
+import { cL } from "../905/748726";
+import { to, Lo } from "../905/156213";
+import { MB } from "../figma_app/996356";
+import { fu } from "../figma_app/831799";
+import { Gu } from "../905/513035";
+import { sZ } from "../905/845253";
+import { FPlanFeatureType } from "../figma_app/191312";
+import { s5A } from "../figma_app/43951";
+import { H_ } from "../figma_app/336853";
+import { d as _$$d } from "../905/44199";
+import { Gv } from "../figma_app/736948";
+import { um } from "../figma_app/761870";
+import { Ju } from "../905/102752";
+import { e as _$$e } from "../905/393279";
+import { OJ } from "../905/519092";
+import { yX } from "../figma_app/918700";
+import { jE } from "../figma_app/639088";
+var l = o;
+export function $$I0(e) {
+  return jsx("div", {
+    children: e.token.content
+  });
+}
+export function $$U3({
+  licenseGroupId: e,
+  workspaceId: i,
+  seatType: t,
+  configs: o
+}) {
+  var l;
+  let p = wA();
+  let E = sZ();
+  let T = d4(e => e.orgDomains.domains);
+  let R = d4(({
+    licenseGroups: i
+  }) => e ? i[e] : void 0);
+  let N = Rs(s5A, {
+    workspaceId: i
+  }, {
+    enabled: !!i
+  });
+  let A = N.data?.workspace;
+  let O = d4(e => e.selectedView);
+  let j = d4(e => e.idpUserById.isCreatingOrgInvite);
+  let [I, U] = useState(!1);
+  let M = useMemo(() => o?.groupNameClassName ? e => jsx("span", {
+    className: o.groupNameClassName,
+    children: e
+  }) : e => e, [o?.groupNameClassName]);
+  let y = useMemo(() => R && A ? tx("org_invite.email_input_description.billing_group_and_workspace_disclaimer", {
+    billingGroupName: M(R.name),
+    workspaceName: M(A.name)
+  }) : R ? tx("org_invite.email_input_description.billing_group_disclaimer", {
+    billingGroupName: M(R.name)
+  }) : A ? tx("org_invite.email_input_description.workspace_disclaimer", {
+    workspaceName: M(A.name)
+  }) : null, [R, A, M]);
+  let D = n => {
+    p(MB({
+      emails: um(n),
+      licenseGroupId: e,
+      workspaceId: i,
+      billableProductKey: t === Gu.VIEW ? null : t
+    }));
+    p(cL());
+  };
+  l = O.view;
+  let G = !E.invite_whitelist_member_allowlist_enabled || "orgAdminSettings" === l;
+  let P = S(E, O.view);
+  let F = useMemo(() => {
+    if (P) return tx("org_invite.email_input_description.guest_invite_allow_list", {
+      orgName: E.name
+    });
+    let e = T.map(e => `@${e.domain}`);
+    if (I) return tx("org_invite.email_input_description.multiple_domains.expanded", {
+      orgName: E.name,
+      domainList: jsx(_$$T, {
+        children: e.map(e => jsx("span", {
+          children: e
+        }, e))
+      })
+    });
+    let i = e[0];
+    let t = e.length - 1;
+    return 0 === t ? tx("org_invite.email_input_description.single_domain", {
+      domain: i,
+      orgName: E.name
+    }) : tx("org_invite.email_input_description.multiple_domains.with_expand_link", {
+      orgName: E.name,
+      domain: i,
+      expandLink: jsx(CY, {
+        onClick: () => U(!0),
+        trusted: !0,
+        children: tx("org_invite.email_input_description.multiple_domains.expand_link", {
+          remainingDomainCount: t
+        })
+      })
+    });
+  }, [T, I, E.name, P]);
+  let V = L(E, P);
+  return {
+    isSubmitting: j,
+    submit: e => {
+      if (T.length >= 1) {
+        let i = um(e).filter(e => xf(e) && !H_(T, e));
+        if ((i = [...new Set(i)]).length > 0) {
+          p(to({
+            type: C,
+            data: {
+              emails: i,
+              onConfirm: () => {
+                D(e);
+              }
+            }
+          }));
+          return;
+        }
+      }
+      D(e);
+    },
+    onValidateToken: e => {
+      let i = xf(e) && H_(T, e) && G;
+      let t = xf(e) && P;
+      return {
+        state: i || t ? _$$d.OK : _$$d.ERROR,
+        content: e
+      };
+    },
+    infoText: jsxs(Fragment, {
+      children: [F, " ", y]
+    }),
+    title: V
+  };
+}
+function L(e, i) {
+  return i ? _$$t("org_invite.invite_users", {
+    orgName: e.name
+  }) : _$$t("org_invite.invite_members", {
+    orgName: e.name
+  });
+}
+export function $$M2({
+  licenseGroupId: e,
+  workspaceId: i,
+  dispatch: t,
+  multiLineForm: a,
+  buttonClassName: o,
+  modalWrapperClassName: d,
+  descriptionClassName: s
+}) {
+  let _ = d4(e => e.autocomplete);
+  let {
+    isSubmitting,
+    onValidateToken,
+    submit,
+    infoText
+  } = $$U3({
+    licenseGroupId: e,
+    workspaceId: i
+  });
+  return jsxs("div", {
+    className: l()("org_invite_modal--modalWrapper--oH5a6", d),
+    children: [jsx("p", {
+      className: l()("org_invite_modal--description--dT4ZB", s),
+      children: infoText
+    }), jsx(_$$e, {
+      TokenComponent: $$I0,
+      autocomplete: _,
+      buttonClassName: o,
+      buttonText: _$$t("org_invite.invite_button"),
+      dispatch: t,
+      dropdownShown: null,
+      inviteLevel: FPlanFeatureType.STARTER,
+      isSubmitting,
+      multiLineForm: !!a,
+      onSubmit: submit,
+      shouldAutoFocus: !0,
+      validateToken: onValidateToken
+    })]
+  });
+}
+function S(e, i) {
+  return e.invite_whitelist_guest_invite_setting === Gv.REQUIRE_APPROVAL && "licenseGroup" !== i;
+}
+let $$y1 = Ju(function ({
+  licenseGroupId: e,
+  workspaceId: i
+}) {
+  let t = sZ();
+  let a = wA();
+  let o = d4(e => e.selectedView);
+  if (!t) return jsx(Fragment, {});
+  let l = S(t, o.view);
+  let d = L(t, l);
+  return jsx(fu, {
+    name: "Org Invite Modal",
+    children: jsx(OJ, {
+      title: d,
+      onClose: () => {
+        a(Lo());
+        a(cL());
+      },
+      children: jsx($$M2, {
+        licenseGroupId: e,
+        workspaceId: i,
+        dispatch: a
+      })
+    })
+  });
+}, "ORG_INVITE_MODAL");
+let C = Ju(function (e) {
+  return jsx(yX, {
+    confirmationTitle: _$$t("org_invite.pending_guest_confirmation.title"),
+    confirmText: _$$t("org_invite.pending_guest_confirmation.button"),
+    disableClickOutsideToHide: !0,
+    onConfirm: e.onConfirm,
+    popStack: !0,
+    size: "small",
+    children: jsx("div", {
+      className: jE,
+      children: jsxs(Fragment, {
+        children: [tx("org_invite.pending_guest_confirmation.description", {
+          numEmails: e.emails.length,
+          emailList: jsx(_$$T, {
+            className: "org_invite_modal--orgGuestEmails--JpKT2",
+            children: e.emails
+          })
+        }), jsxs("a", {
+          className: "org_invite_modal--orgGuestLink--tugVV blue_link--blueLink--9rlnd",
+          target: "_blank",
+          rel: "noopener",
+          href: "https://help.figma.com/hc/articles/4420557314967-Members-versus-guests",
+          children: [" ", tx("org_invite.pending_guest_confirmation.learn_more_link")]
+        })]
+      })
+    })
+  });
+}, "CONFIRM_WHITELIST_ORG_GUEST_INVITE_MODAL");
+export const rG = $$I0;
+export const F4 = $$y1;
+export const v$ = $$M2;
+export const _u = $$U3;

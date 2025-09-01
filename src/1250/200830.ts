@@ -1,0 +1,2586 @@
+import { jsx, jsxs, Fragment } from "react/jsx-runtime";
+import { XN, rr } from "../figma_app/778880";
+import { md, Iz, eU as _$$eU } from "../figma_app/27355";
+import { getFeatureFlags } from "../905/601108";
+import s from "classnames";
+import { vd, nD as _$$nD, $9, eM as _$$eM, Kz } from "../figma_app/637027";
+import { tx as _$$tx, t as _$$t } from "../905/303541";
+import { F_ } from "../905/748636";
+import { CR, NJ } from "../figma_app/419216";
+import { fu, jm } from "../figma_app/831799";
+import { E as _$$E } from "../905/453826";
+import { e as _$$e } from "../905/621515";
+import { r1, GW, qG, Fu } from "../figma_app/545877";
+import { N as _$$N } from "../figma_app/268271";
+import { M as _$$M } from "../905/152487";
+import { LB2, I3H, Ob5, X5_, USq, sqw, yjU, MwQ, NdL, bGx, Qlc, I$z, Kgs, BTz, dYj, Ult, kmq, Sgd, Wb3 } from "../figma_app/6204";
+import { h as _$$h } from "../905/207101";
+import { tH as _$$tH, mp, Ot, d2, Vm, Fy, Qm, zN } from "../figma_app/579169";
+import { f as _$$f } from "../1250/46310";
+import { xZ } from "../1250/927871";
+import { useEffect, useState, useCallback, useMemo, createElement, useRef, memo } from "react";
+import { wA, d4 } from "../vendor/514228";
+import { lQ } from "../905/934246";
+import { DN } from "../905/657224";
+import { ZC } from "../figma_app/39751";
+import { buildStaticUrl, buildUploadUrl, getInitialOptions } from "../figma_app/169182";
+import { zl } from "../905/862321";
+import { yl } from "../figma_app/275462";
+import { b as _$$b } from "../905/985254";
+import { A as _$$A } from "../905/956262";
+import { UC, uA } from "../figma_app/33126";
+import { of, mW } from "../figma_app/797994";
+import { _q } from "../figma_app/242339";
+import { qo } from "../905/696396";
+import { U as _$$U } from "../905/455766";
+import { h as _$$h2 } from "../905/284399";
+import { Rx, IY, q9 } from "../1556/690522";
+import { q3, M_ } from "../figma_app/450829";
+import { S as _$$S } from "../1556/805548";
+import { c as _$$c } from "../905/370443";
+import { X as _$$X } from "../905/482718";
+import { Q as _$$Q, R as _$$R } from "../905/11928";
+import { o as _$$o } from "../905/821217";
+import { pP, nz as _$$nz } from "../1250/214905";
+import { l as _$$l } from "../1250/135829";
+import { uZ, Jo } from "../figma_app/544879";
+import { vM, J5 } from "../figma_app/692865";
+import { U as _$$U2 } from "../1250/501209";
+import { Gv, ak, iy, GV } from "../figma_app/532170";
+import { debugState } from "../905/407919";
+import { uM } from "../905/738636";
+import { xA } from "../905/766303";
+import { ai as _$$ai } from "../figma_app/915202";
+import { c4, Au } from "../figma_app/518077";
+import { K as _$$K } from "../1250/166809";
+import { OC } from "../1250/791136";
+import { $z } from "../figma_app/617427";
+import { y as _$$y } from "../905/129046";
+import { s as _$$s } from "../cssbuilder/589278";
+import { D6 } from "../figma_app/863319";
+import { Z as _$$Z } from "../905/296690";
+import { RG } from "../figma_app/684446";
+import { sortByPropertyWithOptions, shuffle } from "../figma_app/656233";
+import { ServiceCategories as _$$e2 } from "../905/165054";
+import { $D } from "../905/11";
+import { Z1 } from "../905/401885";
+import { g as _$$g } from "../1250/695038";
+import { sZ, dq } from "../905/845253";
+import { saW, bel } from "../figma_app/43951";
+import { D6 as _$$D2, S2 } from "../figma_app/465071";
+import { G as _$$G } from "../figma_app/124713";
+import { sx } from "../905/449184";
+import { tM as _$$tM, vd as _$$vd } from "../figma_app/60079";
+import { Jn } from "../905/17223";
+import { P as _$$P } from "../905/347284";
+import { x as _$$x } from "../7021/270993";
+import { z6 } from "../figma_app/805373";
+import { ey as _$$ey } from "../figma_app/918700";
+import { P as _$$P2 } from "../1250/527167";
+import { j0 } from "../1250/524544";
+import { U as _$$U3 } from "../1250/641541";
+import { FY } from "../figma_app/24841";
+import { DP } from "../905/640017";
+import { d as _$$d } from "../905/647058";
+import { O as _$$O } from "../905/833838";
+import { WZ } from "../905/893645";
+import { EL, F_ as _$$F_ } from "../905/858282";
+import { Ay as _$$Ay } from "../905/612521";
+import { E as _$$E2 } from "../905/984674";
+import { rq } from "../905/425180";
+import { xX, j9 } from "../figma_app/211146";
+import { _6 } from "../figma_app/386952";
+import { f as _$$f2 } from "../905/940356";
+import { ng as _$$ng, u_, $g, Jy, v$ } from "../figma_app/205827";
+import { Y as _$$Y } from "../905/830372";
+import { In } from "../905/672640";
+import { B as _$$B } from "../905/714743";
+import { A as _$$A2 } from "../svg/831814";
+import { Ce, to as _$$to } from "../905/156213";
+import { bE } from "../figma_app/375098";
+import { WW, Wf, w5 } from "../figma_app/345997";
+import { Mm, iX, bo, h3, $Q, TB, PG, NN } from "../5885/399780";
+import { Ju } from "../905/102752";
+import { A as _$$A3 } from "../svg/219958";
+import { A as _$$A4 } from "../svg/638742";
+import { s as _$$s2 } from "../905/573154";
+import { sf } from "../905/929976";
+import { cw, g_ } from "../5885/925885";
+import { nl as _$$nl } from "../905/590952";
+import { P as _$$P3 } from "../905/566881";
+import { WX } from "../figma_app/482142";
+import { X as _$$X2 } from "../5885/331878";
+import { UG } from "../905/414007";
+import { Bq, lc } from "../figma_app/598111";
+import { bt } from "../905/270322";
+import { Hj } from "../figma_app/336229";
+import { p as _$$p } from "../figma_app/288654";
+import { I as _$$I } from "../c5e2cae0/718426";
+import { FC } from "../figma_app/212807";
+import { canEditTeam } from "../figma_app/642025";
+import { b0 } from "../905/763690";
+import { Om, tv as _$$tv, au } from "../figma_app/979714";
+import { Fz } from "../1250/610336";
+import { P as _$$P4 } from "../1250/15189";
+import { HH } from "../7222/418961";
+import { p as _$$p2 } from "../figma_app/353099";
+import { A as _$$A5 } from "../1250/487166";
+import { Ay as _$$Ay2 } from "../1250/615231";
+import { fn, ih } from "../figma_app/297957";
+import { P as _$$P5 } from "../1250/232298";
+import { A as _$$A6 } from "../1250/545022";
+import { C as _$$C } from "../1250/50098";
+import { NuxOnboardingOverlay } from "../4452/529989";
+import { A as _$$A7 } from "../1250/318790";
+import { oA } from "../905/723791";
+import { I7 } from "../figma_app/594947";
+import { FPlanNameType } from "../figma_app/191312";
+import { _l, B$ } from "../figma_app/995208";
+import { C5 } from "../7021/95197";
+import { $ as _$$$ } from "../1250/770005";
+import { x$ } from "../figma_app/141320";
+import { ol } from "../figma_app/598018";
+import { ZL } from "../1250/272654";
+import { Dw } from "../figma_app/976345";
+import { QL, EM } from "../905/609392";
+import { q as _$$q } from "../figma_app/712384";
+import { V as _$$V } from "../905/223767";
+import { I as _$$I2 } from "../905/641938";
+import { dR } from "../figma_app/109538";
+import { b as _$$b2 } from "../905/165519";
+var l = s;
+function m(e) {
+  return jsx("div", {
+    className: l()("custom_sections_onboarding_modal--overlay---qTEB", {
+      "custom_sections_onboarding_modal--overlayRedesigned--YOArU": getFeatureFlags().file_browser_sidebar_row_ui
+    }),
+    children: jsxs(CR, {
+      width: 360,
+      dismissModal: e.onClickPrimaryCta,
+      targetKey: "custom-sections-nudge-modal",
+      topPadding: 4,
+      arrowPosition: F_.LEFT_TITLE,
+      pointerBackgroundColor: "var(--color-bg, $figmaBGWhite)",
+      children: [jsx("h1", {
+        className: "custom_sections_onboarding_modal--header--Z4mnG",
+        children: _$$tx("favorited_resources.custom_sections_nudge_header")
+      }), jsx("p", {
+        children: _$$tx("favorited_resources.custom_sections_nudge_body", {
+          ellipses: jsx("strong", {
+            children: _$$tx("favorited_resources.ellipses")
+          }),
+          plus: jsx("strong", {
+            children: _$$tx("favorited_resources.plus")
+          })
+        })
+      }), jsx("div", {
+        className: "custom_sections_onboarding_modal--footerContainerButtonRight--EToy- custom_sections_onboarding_modal--footerContainer---KhkM",
+        children: jsx(vd, {
+          onClick: e.onClickPrimaryCta,
+          children: _$$tx("rcs.file_browser.got_it")
+        })
+      })]
+    })
+  });
+}
+let v = "seen_custom_sections_nudge";
+let $$w0 = "favorites-count-crossed-threshold";
+let T = r1(v);
+function j() {
+  let e = md(T);
+  let t = _$$e({
+    overlay: LB2,
+    priority: _$$N.OVERRIDING_MODAL
+  }, [e]);
+  _$$E(t.uniqueId, $$w0, () => {
+    t.show({
+      canShow: e => !e
+    });
+  });
+  return jsx(_$$M, {
+    isShowing: t.isShowing,
+    userFlagOnShow: v,
+    children: jsx(fu, {
+      name: "Custom Sections Nudge",
+      children: jsx(m, {
+        onClickPrimaryCta: t.complete
+      })
+    })
+  });
+}
+let $$A1 = "seen_whats_new_v2_modal";
+let S = r1($$A1);
+let N = _$$tH("last_figjam_at");
+function O() {
+  let e = md(GW);
+  let t = md(mp);
+  let n = md(N);
+  let r = md(S);
+  let o = md(Ot);
+  let {
+    show,
+    isShowing,
+    complete
+  } = _$$e({
+    overlay: I3H,
+    priority: _$$N.DEFAULT_MODAL
+  }, [e, t, r, o]);
+  _$$h(() => {
+    show({
+      canShow: (e, t, a, r) => e && !r && _$$f({
+        lastUsedFigjamDate: n,
+        userCreatedAt: t,
+        hasSeenOverlayV2: a
+      })
+    });
+  });
+  return jsx(xZ, {
+    context: "file_browser",
+    isShowing,
+    onClose: complete
+  });
+}
+let et = "File Browser Onboarding -";
+function en(e) {
+  return jsx(_$$X, {
+    description: _$$tx("rcs.take_tour.see_how_to_create_files_learn_about_drafts_and_teams_ways_to_access_community_and_more"),
+    emphasized: !0,
+    isShowing: e.isShowing,
+    onClose: e.onManualDismiss,
+    position: _$$Q.BOTTOM_RIGHT,
+    primaryCta: {
+      label: _$$tx("rcs.take_tour.let_s_go"),
+      type: "button",
+      onClick: e.onClickPrimaryCta,
+      ctaTrackingDescriptor: _$$c.LETS_GO
+    },
+    secondaryCta: {
+      label: _$$tx("rcs.take_tour.no_thanks"),
+      type: "button",
+      onClick: e.onManualDismiss,
+      ctaTrackingDescriptor: _$$c.NO_THANKS
+    },
+    testId: "TakeTourOfFileBrowserOverlay",
+    title: _$$tx("rcs.take_tour.take_a_quick_tour_of_the_file_browser"),
+    trackingContextName: `${et} Take tour`
+  });
+}
+function ea(e) {
+  let {
+    close
+  } = _$$S();
+  let n = () => {
+    close();
+    e.onClickPrimaryCta();
+  };
+  return jsx(_$$h2, {
+    testId: "AccountSettingsOverlay",
+    modalType: q3.SELF_CONTAINED,
+    trackingContextName: `${et} Account settings`,
+    element: e => jsx(Rx, {
+      dismissModal: e.dismissModal,
+      onClickPrimaryCta: n,
+      forceRender: e.forceRender,
+      step: 5,
+      totalSteps: 6
+    }),
+    isShowing: e.isShowing,
+    onClickPrimaryCta: n,
+    onClose: e.onClose,
+    onManualDismiss: e.onManualDismiss
+  });
+}
+function es(e) {
+  let t = wA();
+  let n = d4(e => e.user?.drafts_folder_id);
+  useEffect(() => (pP(), () => void _$$nz()), [t, n]);
+  return jsx(_$$o, {
+    eventListeners: ["onMouseDown"],
+    children: jsxs(NJ, {
+      dismissModal: e.dismissModal,
+      width: 228,
+      targetKey: _$$l,
+      topPadding: 12,
+      alignPointerToLeft: !0,
+      children: [_$$tx("rcs.create_files.create_files_from_scratch_import_designs_from_sketch_or_start_from_templates"), jsx(IY, {
+        onClick: e.onClickPrimaryCta,
+        step: 1,
+        totalSteps: 6
+      })]
+    })
+  });
+}
+function el(e) {
+  return jsx(_$$h2, {
+    testId: "CreateFilesOverlay",
+    modalType: q3.SELF_CONTAINED,
+    trackingContextName: `${et} Create files`,
+    element: es,
+    isShowing: e.isShowing,
+    onClickPrimaryCta: e.onClickPrimaryCta,
+    onClose: e.onClose,
+    onManualDismiss: e.onManualDismiss
+  });
+}
+function ec(e) {
+  return jsxs(NJ, {
+    dismissModal: e.dismissModal,
+    width: 228,
+    targetKey: uZ,
+    topPadding: 8,
+    alignPointerToLeft: !0,
+    children: [_$$tx("rcs.create_files.files_are_great_for_collaboration_while_your_drafts_are_more_personal_if_you_share_them_they_re_view_only"), jsx(IY, {
+      onClick: e.onClickPrimaryCta,
+      step: 2,
+      totalSteps: 6
+    })]
+  });
+}
+function e_(e) {
+  return jsx(_$$h2, {
+    testId: "DraftsOverlay",
+    modalType: q3.SELF_CONTAINED,
+    trackingContextName: `${et} Drafts`,
+    element: ec,
+    isShowing: e.isShowing,
+    onClickPrimaryCta: e.onClickPrimaryCta,
+    onClose: e.onClose,
+    onManualDismiss: e.onManualDismiss
+  });
+}
+function em(e) {
+  let {
+    open
+  } = _$$S();
+  return jsxs(NJ, {
+    dismissModal: e.dismissModal,
+    width: 247,
+    targetKey: vM,
+    alignPointerToLeft: !0,
+    topPadding: 12,
+    children: [_$$tx("rcs.account_switching.explore_files_plugins_and_widgets_created_by_the_figma_community"), jsx(IY, {
+      onClick: () => {
+        open();
+        e.onClickPrimaryCta();
+      },
+      step: 4,
+      totalSteps: 6
+    })]
+  });
+}
+function ep(e) {
+  return jsx(_$$h2, {
+    testId: "ExploreCommunityOverlay",
+    modalType: q3.SELF_CONTAINED,
+    trackingContextName: `${et} Community Hub`,
+    element: em,
+    isShowing: e.isShowing,
+    onClickPrimaryCta: e.onClickPrimaryCta,
+    onClose: e.onClose,
+    onManualDismiss: e.onManualDismiss
+  });
+}
+function ef(e) {
+  let {
+    open
+  } = _$$S();
+  return jsxs(NJ, {
+    dismissModal: e.dismissModal,
+    width: 247,
+    targetKey: _$$U2,
+    alignPointerToLeft: !0,
+    topPadding: 12,
+    children: [_$$tx("rcs.account_switching.explore_resource_hub"), jsx(IY, {
+      onClick: () => {
+        open();
+        e.onClickPrimaryCta();
+      },
+      step: 4,
+      totalSteps: 6
+    })]
+  });
+}
+function eh(e) {
+  return jsx(_$$h2, {
+    testId: "ExploreResourceHubOverlay",
+    modalType: q3.SELF_CONTAINED,
+    trackingContextName: `${et} Resource Hub`,
+    element: ef,
+    isShowing: e.isShowing,
+    onClickPrimaryCta: e.onClickPrimaryCta,
+    onClose: e.onClose,
+    onManualDismiss: e.onManualDismiss
+  });
+}
+function ex() {
+  return jsxs("div", {
+    children: [jsx(Gv, {
+      src: buildStaticUrl("app/onboarding/page-4.gif")
+    }), jsxs(ak, {
+      children: [_$$tx("rcs.import.one_of_the_coolest_things_about_figma_is_that_you_don_t_have_to_start_from_scratch_to_get_to_work"), jsx("br", {}), jsx("br", {}), _$$tx("rcs.import.just_drag_your_sketch_files_onto_the_browser_and_we_ll_convert_them_to_figma_for_you")]
+    })]
+  });
+}
+function ey(e) {
+  return jsx(_$$h2, {
+    currentStepIndex: e.currentStepIndex,
+    element: ex,
+    isShowing: e.isShowing,
+    modalType: q3.DRAGGABLE,
+    onClickPrimaryCta: e.onClickPrimaryCta,
+    onClose: e.onClose,
+    onManualDismiss: e.onManualDismiss,
+    onboardingKey: "import",
+    testId: "ImportOverlay",
+    title: () => _$$t("rcs.import.import_sketch_files"),
+    totalNumSteps: e.totalNumSteps,
+    trackingContextName: "Import Sketch File Onboarding Modal",
+    userFlagOnShow: "import_file_onboarded"
+  });
+}
+function ev(e) {
+  return jsx(_$$h2, {
+    testId: "NotificationsOverlay",
+    modalType: q3.SELF_CONTAINED,
+    trackingContextName: `${et} Notifications`,
+    element: e => jsx(q9, {
+      dismissModal: e.dismissModal,
+      onClickPrimaryCta: e.onClickPrimaryCta,
+      forceRender: e.forceRender,
+      step: 6,
+      totalSteps: 6
+    }),
+    isShowing: e.isShowing,
+    onClickPrimaryCta: e.onClickPrimaryCta,
+    onClose: e.onClose,
+    onManualDismiss: e.onManualDismiss
+  });
+}
+function eE(e) {
+  return jsx(_$$h2, {
+    ctaText: _$$tx("rcs.open_file.create_file"),
+    currentStepIndex: e.currentStepIndex,
+    element: () => jsx(ak, {
+      children: _$$tx("rcs.open_file.open_a_file_to_learn_more_about_figma_s_powerful_editing_features")
+    }),
+    isShowing: e.isShowing,
+    modalType: q3.DRAGGABLE,
+    onClickPrimaryCta: () => {
+      e.onClickPrimaryCta();
+      (function () {
+        let e = debugState.getState();
+        debugState.dispatch(uM(xA({
+          state: e,
+          openNewFileIn: _$$ai.SAME_TAB
+        })));
+      })();
+    },
+    onClose: e.onClose,
+    onManualDismiss: e.onManualDismiss,
+    testId: "OpenFileOverlay",
+    title: () => _$$t("rcs.open_file.edit_a_file"),
+    totalNumSteps: e.totalNumSteps,
+    trackingContextName: "Edit a File Onboarding Modal"
+  });
+}
+function eI() {
+  let e = d4(e => e.currentUserOrgId);
+  let t = c4(e).data ?? !1;
+  let n = _$$tx("rcs.org_welcome.click_the_all_teams_button_on_the_left_to_find_teams_to_join");
+  t && (n = _$$tx("rcs.bigma_org_welcome.click_the_all_workspaces_button_on_the_left_to_find_teams_to_join"));
+  return jsxs("div", {
+    children: [jsx(Gv, {
+      src: buildUploadUrl("6f3307f82aeddf6f609eaf97ee9e66e788d485c1"),
+      width: 215,
+      margin: "14px 0px 14px 27px"
+    }), jsxs(ak, {
+      children: [jsx("p", {
+        children: _$$tx("rcs.org_welcome.figma_organization_connects_files_projects_libraries_and_teams_securely_across_your_company")
+      }), n]
+    })]
+  });
+}
+function eA(e) {
+  return jsx(_$$h2, {
+    currentStepIndex: e.currentStepIndex,
+    element: eI,
+    highlightOnlyKey: "new-team-icon",
+    isShowing: e.isShowing,
+    modalType: q3.DRAGGABLE,
+    onClickPrimaryCta: e.onClickPrimaryCta,
+    onClose: e.onClose,
+    onManualDismiss: e.onManualDismiss,
+    testId: "OrgWelcomeOverlay",
+    title: () => _$$t("rcs.org_welcome.welcome_to_your_figma_organization"),
+    totalNumSteps: e.totalNumSteps,
+    trackingContextName: "Orgs Welcome Onboarding Modal",
+    userFlagOnShow: "orgs_onboarded",
+    width: 376
+  });
+}
+function eO(e) {
+  let {
+    open,
+    close
+  } = OC();
+  useEffect(() => {
+    open();
+  }, [open]);
+  return jsxs(NJ, {
+    dismissModal: e.dismissModal,
+    width: 228,
+    targetKey: _$$K,
+    topPadding: 8,
+    alignPointerToLeft: !0,
+    className: "plan_spaces_overlay--planSpacesPointerModal--aClGx pointer_modal--pointerModalBlue--9Jjg8 pointer_modal--pointerModal--wrpFz",
+    children: [_$$tx("rcs.plan_spaces.file_browser_onboarding_step.seat_rename"), jsx(IY, {
+      onClick: () => {
+        close();
+        e.onClickPrimaryCta();
+      },
+      step: 3,
+      totalSteps: 6
+    })]
+  });
+}
+function eR(e) {
+  return jsx(_$$h2, {
+    testId: "PlanSpacesOverlay",
+    modalType: q3.SELF_CONTAINED,
+    trackingContextName: `${et} Plan Spaces`,
+    element: eO,
+    isShowing: e.isShowing,
+    onClickPrimaryCta: e.onClickPrimaryCta,
+    onClose: e.onClose,
+    onManualDismiss: e.onManualDismiss
+  });
+}
+function eP(e) {
+  return jsxs(Fragment, {
+    children: [jsxs(ak, {
+      children: [_$$tx("rcs.welcome_step.welcome_to_figma"), jsx("br", {}), jsx("br", {}), _$$tx("rcs.welcome_step.we_re_different_from_other_design_tools_in_some_really_special_ways_so_we_d_like_to_take_you_through_them")]
+    }), jsx(iy, {
+      children: jsx($z, {
+        onClick: e.onClickPrimaryCta,
+        variant: "primary",
+        children: _$$tx("rcs.welcome_step_view.next")
+      })
+    })]
+  });
+}
+function eD(e) {
+  let t = d4(e => e.user?.name);
+  let n = t ? _$$t("rcs.welcome_step.welcome_user_name", {
+    userFirstName: t
+  }) : _$$t("rcs.welcome_step.welcome");
+  return jsx(_$$h2, {
+    currentStepIndex: e.currentStepIndex,
+    disableFooter: !0,
+    element: eP,
+    isShowing: e.isShowing,
+    modalType: q3.DRAGGABLE,
+    onClickPrimaryCta: e.onClickPrimaryCta,
+    onClose: e.onClose,
+    onManualDismiss: e.onManualDismiss,
+    testId: "WelcomeOnboardingOverlay",
+    title: () => n,
+    totalNumSteps: e.totalNumSteps,
+    trackingContextName: "Welcome Onboarding Modal",
+    userFlagOnShow: "welcome_onboarded"
+  });
+}
+let eL = r1("file_browser_onboarded");
+let eF = ["seen_sidebar_workspace_onboarding", "seen_search_workspace_onboarding", "seen_libraries_workspace_onboarding"];
+let eB = e => ["file_browser_onboarded", "community_hub_onboarded", "variants_onboarded", "account_switcher_onboarded", ...(e ? eF : [])];
+let eU = () => {
+  let e = DN();
+  try {
+    return !!e.get(zl);
+  } catch (e) {}
+  return !1;
+};
+function eG() {
+  let e = wA();
+  let t = md(qG);
+  let n = md(eL);
+  let r = ZC(n);
+  let s = md(d2);
+  let l = d4(e => e.currentUserOrgId);
+  let d = UC(l);
+  let c = md(d);
+  let _ = md(Ot);
+  let u = _$$e({
+    overlay: Ob5,
+    priority: _$$N.OVERRIDING_MODAL
+  }, [t, s, c, _]);
+  let [m, p] = useState([]);
+  let [x, v] = useState([]);
+  let w = useCallback(e => {
+    u.show({
+      canShow: (t, n, a, r) => {
+        let i = function ({
+          userFlags: e,
+          userSpace: t,
+          isReset: n,
+          isOrgUserExternallyRestricted: a
+        }) {
+          let r = t === qo.ORG;
+          let i = of(e);
+          let s = getFeatureFlags().limited_plan_spaces && getInitialOptions().is_limited_team_plan;
+          let l = mW(e, "not_gen_0");
+          let d = mW(e, "welcome_onboarded");
+          let c = mW(e, "file_browser_onboarded");
+          let _ = [eA, ey, _q(e) || a ? null : eE];
+          let u = [...(a ? [] : [el, e_]), eR, yl() ? eh : ep, ea, ev];
+          let m = [en, ...u];
+          return s ? [] : n || l || r ? !n && (r || l) && c ? [] : r ? _ : i ? m : l ? eU() || d ? [en, ...u] : [eD, ...u] : m : c ? [] : m;
+        }({
+          userFlags: t,
+          userSpace: n,
+          isReset: e,
+          isOrgUserExternallyRestricted: r
+        }).filter(e => !!e);
+        return !!i.length && (p(i), v(eB(n === qo.ORG && a)), !0);
+      }
+    });
+  }, [u]);
+  _$$h(() => {
+    w(!1);
+  });
+  _$$E(u.uniqueId, "Reset Onboarding", () => w(!0));
+  useEffect(() => {
+    u.isShowing && r?.status === "loaded" && r?.data === !1 && n?.status === "loaded" && n?.data === !0 && u.complete();
+  }, [u, n, r]);
+  let T = useCallback(() => {
+    let t = {};
+    for (let e of x) t[e] = !0;
+    e(_$$b(t));
+    u.complete();
+  }, [e, u, x]);
+  return u.isShowing && 0 !== m.length ? jsx(eW, {
+    steps: m,
+    onComplete: T
+  }) : null;
+}
+function eW(e) {
+  let {
+    steps,
+    onComplete
+  } = e;
+  let r = _$$A({
+    numSteps: steps.length,
+    onComplete
+  });
+  return jsx(_$$U, {
+    currentStep: r.currentStep,
+    isShowing: !0,
+    children: useMemo(() => steps.map((e, a) => createElement(e, {
+      onClickPrimaryCta: r.next,
+      onClose: lQ,
+      onManualDismiss: onComplete,
+      isShowing: !0,
+      currentStepIndex: a,
+      totalNumSteps: steps.length
+    })), [steps, r, onComplete])
+  });
+}
+function eK() {
+  let e = d4(e => e.currentUserOrgId);
+  let t = md(_$$Z);
+  let n = RG();
+  let r = _$$tx("rcs.org_welcome.click_on_the_organization_button_on_the_left_to_find_teams_to_join");
+  D6(e) ? r = n ? _$$tx("rcs.bigma_org_welcome.click_the_all_workspaces_button_on_the_left_to_find_teams_to_join") : _$$tx("rcs.org_welcome.click_the_all_teams_button_on_the_left_to_find_teams_to_join") : t && (r = _$$tx("rcs.org_welcome.click_the_current_org_name_span_button_on_the_left_to_find_teams_to_join", {
+    orgName: jsx("span", {
+      className: _$$s.fontBold.$,
+      children: t.name
+    })
+  }));
+  return jsxs(Fragment, {
+    children: [jsx("p", {
+      className: _$$s.pb8.$,
+      children: _$$tx("rcs.org_welcome.figma_organization_connects_files_projects_libraries_and_teams_securely_across_your_company")
+    }), r]
+  });
+}
+let eY = "orgs_onboarded";
+let eQ = r1(eY);
+function eZ() {
+  let e = md(d2);
+  let t = md(eQ);
+  let n = _$$e({
+    overlay: X5_,
+    priority: _$$N.OVERRIDING_MODAL
+  }, [e, t]);
+  _$$h(() => {
+    n.show({
+      canShow: (e, t) => e === qo.ORG && !t
+    });
+  });
+  return jsx(_$$X, {
+    description: jsx(eK, {}),
+    isShowing: n.isShowing,
+    media: jsx(_$$y, {
+      src: buildUploadUrl("87621fc5a99a1d24beb515288cf764febb8f01e9.png"),
+      alt: "A screenshot of the teams list with cursor hovering over the 'Request to Join' link",
+      aspectRatio: 1.75
+    }),
+    onClose: n.complete,
+    position: _$$Q.CENTER,
+    primaryCta: {
+      label: _$$tx("rcs.rcs_shared.done"),
+      type: "button",
+      onClick: n.complete,
+      ctaTrackingDescriptor: _$$c.DONE
+    },
+    title: _$$tx("rcs.org_welcome.welcome_to_your_figma_organization"),
+    trackingContextName: "Orgs Welcome Onboarding Modal",
+    userFlagOnShow: eY,
+    width: 350
+  });
+}
+let tr = "workspace_selector";
+function ti({
+  workspaces: e,
+  onModalClose: t
+}) {
+  let [n, r] = useState(null);
+  let i = wA();
+  let o = d4(({
+    selectedView: e
+  }) => e);
+  let s = sZ();
+  if (!s) throw Error("org is not defined");
+  ("fullscreen" === o.view || "prototype" === o.view) && t();
+  let l = jsxs("div", {
+    className: _$$s.flexShrink0.flex.flexColumn.itemsCenter.gap8.$,
+    children: [jsx("img", {
+      className: _$$s.w100.h100.$,
+      src: buildUploadUrl("b907892c6132bbea2173d8e95c096187288f54f9"),
+      alt: "",
+      width: 100,
+      height: 100
+    }), jsx("span", {
+      className: _$$s.textHeadingLarge.colorText.$,
+      children: _$$tx("onboarding.workspace_step.title")
+    }), jsx("span", {
+      className: _$$s.textBodyLarge.colorText.$,
+      children: jsx("div", {
+        className: "workspace_selector--descriptionContainer---ZBF1",
+        children: _$$tx("onboarding.workspace_step.subtitle_v2", {
+          orgName: s.name,
+          tipText: jsx("span", {
+            className: _$$s.textBodyLargeStrong.$,
+            children: _$$tx("onboarding.workspace_step.tip")
+          })
+        })
+      })
+    })]
+  });
+  let d = jsx(_$$P, {
+    className: _$$s.flexShrink1.minH200.mt24.$,
+    innerClassName: _$$s.flex.flexColumn.gap12.p16.pt2.$,
+    children: e.map(e => jsx(to, {
+      workspace: e,
+      onClick: () => r(e),
+      isSelected: n?.id === e.id
+    }, e.id))
+  });
+  let _ = jsx("div", {
+    className: _$$s.flex.justifyEnd.p16.colorBorder.bSolid.bt1.$,
+    children: jsxs("div", {
+      className: _$$s.flex.gap10.$,
+      children: [jsx(_$$tM, {
+        onClick: t,
+        trackingProperties: {
+          trackingDescriptor: _$$c.SKIP
+        },
+        children: _$$tx("onboarding.skip")
+      }), jsx(_$$vd, {
+        onClick: () => {
+          n && (i(_$$x({
+            workspace: n
+          })), t());
+        },
+        disabled: null === n,
+        trackingProperties: {
+          trackingDescriptor: _$$c.JOIN
+        },
+        children: _$$tx("onboarding.workspace_step.join")
+      })]
+    })
+  });
+  return jsx(fu, {
+    name: tr,
+    children: jsxs(_$$ey, {
+      className: _$$s.relative.$,
+      size: 680,
+      height: 576,
+      padding: 0,
+      tintedModalBackground: !0,
+      hide: e => {
+        sx("Modal Close", {
+          source: e,
+          trackingContext: tr
+        });
+        t();
+      },
+      disableClickOutsideToHide: !0,
+      children: [jsxs("div", {
+        className: _$$s.flex.flexColumn.hFull.$,
+        children: [jsxs(_$$P, {
+          className: _$$s.flexGrow1.$,
+          innerClassName: _$$s.borderBox.hFull.flex.flexColumn.itemsCenter.alignCenter.px32.pt32.$,
+          children: [l, d]
+        }), _]
+      }), jsx(Jn, {
+        className: _$$s.absolute.top0.right0.mt8.mr8.$,
+        onClick: t,
+        trackingProperties: {
+          trackingDescriptor: _$$c.CLOSE_BUTTON
+        }
+      })]
+    })
+  });
+}
+function to({
+  workspace: e,
+  isSelected: t,
+  onClick: n
+}) {
+  return jsxs("button", {
+    className: l()("workspace_selector--workspaceOptionButton--hqNFy", {
+      "workspace_selector--workspaceOptionButtonSelected--9bqpX": t
+    }),
+    onClick: n,
+    type: "button",
+    children: [jsx(z6, {
+      entity: e,
+      size: 32
+    }), jsx("span", {
+      className: _$$s.flexGrow1.truncate.textBodyLarge.colorText.ml16.$,
+      children: e.name
+    }), jsx("div", {
+      className: l()("workspace_selector--radioButton--So7uS", {
+        "workspace_selector--radioButtonSelected--6Dl1H": t
+      })
+    })]
+  });
+}
+let ts = "workspace_selector_seen";
+let tl = _$$g(ts);
+let td = Iz(e => Z1(saW.Query({
+  orgId: e
+}), e => {
+  if (!e.org?.workspaces) return null;
+  let t = e.org.workspaces.filter(e => e.canView);
+  sortByPropertyWithOptions(t, "name");
+  return t;
+}));
+function tc() {
+  let e = dq();
+  let t = _$$D2("OrgSelectWorkspaceOverlay");
+  let n = "loaded" === t.status ? t?.data?.key.parentId ?? void 0 : void 0;
+  let r = useRef();
+  r.current = n;
+  let o = md(d2);
+  let s = md(uA);
+  let l = Au(e);
+  let d = md(td(e));
+  let c = md(tl);
+  let {
+    show,
+    complete,
+    isShowing
+  } = _$$e({
+    overlay: USq,
+    priority: _$$N.HIGH_PRIORITY_MODAL
+  }, [o, s, l, d, c, t]);
+  return (_$$h(() => {
+    show({
+      canShow: (e, t, n, a, r, i) => e === qo.ORG && !!t && !n && !!a && 0 !== a.length && !r && !!i,
+      onShow: () => {
+        _$$G.postOrgUserFlags({
+          orgUserId: r.current,
+          flags: {
+            [ts]: !0
+          }
+        });
+      }
+    });
+  }), isShowing && "loaded" === d.status) ? d.data ? jsx(_$$M, {
+    isShowing: !0,
+    testId: "org-select-workspace-overlay",
+    children: jsx(ti, {
+      onModalClose: complete,
+      workspaces: d.data
+    })
+  }) : ($D(_$$e2.SCALE, Error("workspaceSelectorOptionsAtomQuery.data not present after OrgSelectWorkspace overlay is showing")), complete(), null) : null;
+}
+let tw = (e, t) => e ? jsx(_$$E2, {
+  fontSize: 20,
+  fontWeight: "medium",
+  children: _$$tx("rcs.plan_spaces.drafts_have_a_new_home")
+}) : t ? jsx(_$$E2, {
+  fontSize: 20,
+  fontWeight: "medium",
+  children: _$$tx("rcs.plan_spaces.a_simpler_switcher_menu")
+}) : jsx(_$$E2, {
+  fontSize: 20,
+  fontWeight: "medium",
+  children: _$$tx("rcs.plan_spaces.changes_to_your_drafts")
+});
+let tT = (e, t) => e ? jsx(_$$E2, {
+  fontSize: 14,
+  children: _$$tx("rcs.plan_spaces.drafts_lived_in_separate_area")
+}) : t ? jsx(_$$E2, {
+  fontSize: 14,
+  children: _$$tx("rcs.plan_spaces.a_simpler_switcher_menu.description")
+}) : jsx(_$$E2, {
+  fontSize: 14,
+  children: _$$tx("rcs.plan_spaces.starter_pro.onboarding_modal_description")
+});
+let tj = (e, t) => e ? jsx(_$$E2, {
+  fontSize: 14,
+  children: _$$tx("rcs.plan_spaces.nothing_else_has_changed")
+}) : t ? jsx(_$$E2, {
+  fontSize: 14,
+  color: "secondary",
+  children: _$$tx("rcs.plan_spaces.user_help_migrating_drafts_awareness")
+}) : jsx(_$$E2, {
+  fontSize: 14,
+  children: _$$tx("rcs.plan_spaces.starter_pro.onboarding_modal_body")
+});
+let tk = (e, t) => jsx(_$$E2, {
+  fontSize: 13,
+  children: _$$tx(t || e ? "rcs.plan_spaces.got_it" : "rcs.plan_spaces.show_me_what_changed")
+});
+let tE = memo(({
+  hasOrgPlan: e,
+  assetSrc: t,
+  onClickPrimaryCTA: n,
+  hasOnlyOneStarterPlan: r
+}) => jsx(tC, {
+  onClickPrimaryCTA: n,
+  titleText: tw(r, e),
+  descriptionText: tT(r, e),
+  secondaryDescriptionText: tj(r, e),
+  primaryButtonText: tk(r, e),
+  assetSrc: t,
+  hasOnlyOneStarterPlan: r
+}));
+let tC = memo(({
+  titleText: e,
+  descriptionText: t,
+  onClickPrimaryCTA: n,
+  secondaryDescriptionText: r,
+  primaryButtonText: i,
+  assetSrc: o,
+  hasOnlyOneStarterPlan: s
+}) => {
+  let l = useCallback(() => {
+    _$$Ay.unsafeRedirect("https://www.figma.com/blog/updates-to-how-drafts-work/", "_blank");
+  }, []);
+  return jsxs("div", {
+    className: "plan_spaces_launch_modal_components--container--rGlQs",
+    children: [jsxs("div", {
+      className: "plan_spaces_launch_modal_components--textContainer--PGuuG",
+      children: [jsx("p", {
+        className: "plan_spaces_launch_modal_components--titleProperties--rAj1j",
+        children: e
+      }), jsx("div", {
+        className: _$$s.pb16.$,
+        children: t
+      }), jsx("div", {
+        children: r
+      }), jsxs("div", {
+        className: "plan_spaces_launch_modal_components--ctaRow--3DVA8",
+        children: [jsx(_$$nD, {
+          onClick: n,
+          children: i
+        }), jsx($9, {
+          onClick: l,
+          children: jsx(_$$E2, {
+            fontSize: 13,
+            children: _$$tx("rcs.plan_spaces.learn_more")
+          })
+        })]
+      })]
+    }), s ? jsx("img", {
+      src: o,
+      alt: "An illustration of the Figma sidebar",
+      width: 364
+    }) : jsx(GV, {
+      width: 364,
+      src: o
+    })]
+  });
+});
+let tI = new Date("2024-05-15T20:00:00.000Z").getTime();
+function tA() {
+  return jsx(tS, {});
+}
+function tS() {
+  let e = d4(e => e.plans);
+  let t = d4(e => e.teams);
+  let n = d4(e => e.userFlags.personal_draft_migration_scheduled);
+  let r = e.filter(e => e.plan_type === _$$O.TEAM).map(e => t[e.plan_id]).filter(e => !!e);
+  let s = wA();
+  let l = DP();
+  let d = md(mp);
+  let _ = e.some(e => e.plan_type === _$$O.ORG);
+  let u = 1 === r.length && r[0].starter_team && !_;
+  let m = function (e, t, n) {
+    let a = {
+      darkMode: {
+        org: buildUploadUrl("35339bd6f100fd7c2dca24546e4ded3f7397d137"),
+        teams: buildUploadUrl("055e7f20c52382bdb565fbe89f04d9673952663a"),
+        starter: buildUploadUrl("6327332cd808163a39e7093c9c388f6e16927cc4")
+      },
+      lightMode: {
+        org: buildUploadUrl("d26daa4a5677426d2b01aa43677bf4c65f50b0bd"),
+        teams: buildUploadUrl("1c1ca856971dff41eff57240862cf81437cb4dce"),
+        starter: buildUploadUrl("b425061637a5821d58f2ce45dee702f544ea52d6")
+      }
+    };
+    let r = e ? "darkMode" : "lightMode";
+    return n ? a[r].starter : t ? a[r].org : a[r].teams;
+  }("dark" === l, _, u);
+  let p = j0();
+  let g = _$$d();
+  let h = !!getFeatureFlags().ps_personal_draft_migration && !n && u;
+  let x = !h && p > 0;
+  let {
+    currentStep,
+    next
+  } = _$$A({
+    numSteps: 2,
+    onComplete: lQ
+  });
+  let T = [{
+    title: _$$tx("rcs.plan_spaces_onboarding_sequence.drafts_in_a_team"),
+    description: _$$tx("rcs.plan_spaces_onboarding_sequence.private_drafts_folder"),
+    trackingContextName: "Plan spaces onboarding - Team drafts folder",
+    targetKey: uZ,
+    emphasized: !0,
+    pointToLeftEdge: !0,
+    disableHighlight: !0
+  }, {
+    title: _$$tx("rcs.plan_spaces_onboarding_sequence.new_space_for_teams"),
+    description: _$$tx("rcs.plan_spaces_onboarding_sequence.switch_between_teams"),
+    trackingContextName: "Plan spaces onboarding - A new way to access teams",
+    targetKey: _$$U3,
+    emphasized: !0,
+    shouldCenterArrow: EL.BEST_EFFORT,
+    disableHighlight: !0
+  }];
+  x && T.push({
+    title: _$$tx("rcs.plan_spaces_onboarding_sequence.lets_move_these_files"),
+    description: _$$tx("rcs.plan_spaces_onboarding_sequence.finding_the_right_home"),
+    trackingContextName: "Plan spaces onboarding - Drafts to move",
+    targetKey: _$$P2,
+    emphasized: !0,
+    disableHighlight: !0,
+    pointToLeftEdge: !0
+  });
+  let {
+    show,
+    isShowing,
+    complete
+  } = _$$e({
+    overlay: sqw,
+    priority: _$$N.DEFAULT_MODAL + 1
+  }, [d]);
+  useEffect(() => {
+    g || show({
+      canShow: e => !!e && (e.getTime() <= tI || p > 0)
+    });
+  }, [g, p, show]);
+  let I = !!e && e.length > 0;
+  useEffect(() => {
+    h && I && s(FY());
+  }, [s, h, I]);
+  let A = useCallback(e => jsx(tE, {
+    hasOrgPlan: _,
+    hasOnlyOneStarterPlan: u,
+    assetSrc: m,
+    onClickPrimaryCTA: e.onClickPrimaryCta
+  }), [_, m, u]);
+  return e.length ? jsxs(_$$U, {
+    currentStep,
+    isShowing,
+    children: [jsx(_$$h2, {
+      closeButtonStyle: M_.ON_LIGHT,
+      disableClickOutsideToHide: !0,
+      element: A,
+      isShowing,
+      modalType: q3.FEATURE_UPDATE,
+      onClickPrimaryCta: _ ? complete : next,
+      onClose: lQ,
+      onManualDismiss: complete,
+      trackingContextName: "plan_spaces_launch_modal",
+      userFlagOnShow: "seen_limited_spaces_onboarding"
+    }), jsx(WZ, {
+      steps: T,
+      isShowing,
+      onComplete: complete
+    })]
+  }) : null;
+}
+let tO = "saw_recreated_starter_team_onboarding";
+let tR = r1(tO);
+let tM = r1("had_recreated_starter_team");
+function tP() {
+  let e = md(tR);
+  let t = _$$d();
+  let n = md(tM);
+  let {
+    show,
+    isShowing,
+    complete
+  } = _$$e({
+    overlay: yjU,
+    priority: _$$N.DEFAULT_MODAL
+  }, [e, n]);
+  _$$h(() => {
+    t || show({
+      canShow: (e, t) => !e && t
+    });
+  });
+  return jsx(rq, {
+    arrowPosition: _$$F_.LEFT_TITLE,
+    description: jsx("p", {
+      children: _$$tx("rcs.plan_spaces_new_starter_team.text")
+    }),
+    emphasized: !0,
+    isShowing,
+    onClose: complete,
+    targetKey: _$$U3,
+    testId: "PlanSpacesRecreatedStarterTeamOverlay",
+    title: _$$tx("rcs.plan_spaces_new_starter_team.title"),
+    trackingContextName: "plan_spaces_recreated_starter_team_modal",
+    userFlagOnShow: tO
+  });
+}
+function tW({
+  title: e,
+  leftComponent: t,
+  isExpanded: n,
+  onClick: r,
+  children: i
+}) {
+  let [o, s] = useState(n ?? !1);
+  useEffect(() => {
+    void 0 !== n && s(n);
+  }, [n]);
+  return jsxs(_$$Y, {
+    verticalAlignItems: "start",
+    width: "100%",
+    height: "hug-contents",
+    children: [t, jsxs(_$$Y, {
+      direction: "vertical",
+      children: [jsx("div", {
+        tabIndex: 0,
+        className: _$$s.wFull.$,
+        role: "button",
+        onClick: () => {
+          r && r(o);
+          s(e => !e);
+        },
+        children: jsxs(_$$Y, {
+          horizontalAlignItems: "space-between",
+          verticalAlignItems: "center",
+          children: [jsx("div", {
+            className: _$$s.font14.fontMedium.$,
+            children: e
+          }), jsx(In, {
+            icon: o ? "chevron-up-32" : "chevron-down-32"
+          })]
+        })
+      }), o && jsx("div", {
+        className: _$$s.font13.$,
+        children: i
+      })]
+    })]
+  });
+}
+function t$({
+  hideModal: e,
+  trackingName: t,
+  trackingProperties: n,
+  children: r
+}) {
+  return jsx(fu, {
+    name: t,
+    properties: {
+      ...n,
+      ..._$$ng.getTrackingProperties()
+    },
+    children: jsx(_$$ey, {
+      hide: e,
+      size: "any",
+      className: "pro_trial_form_modal--modalContainer--mKui2",
+      children: r
+    })
+  });
+}
+function tV(e) {
+  let {
+    stepProps,
+    titleText,
+    descriptionText,
+    middleContent,
+    ctaOnClick,
+    ctaDisabled,
+    ctaText,
+    textCtaOnClick,
+    textCtaText,
+    hideModal
+  } = e;
+  return jsxs("div", {
+    className: "pro_trial_form_modal--container--Wv6Lg",
+    children: [jsxs("div", {
+      className: "pro_trial_form_modal--header--yEBLV",
+      children: [jsx(_$$B, {
+        svg: _$$A2,
+        className: "pro_trial_form_modal--icon--CKqnw",
+        useOriginalSrcFills_DEPRECATED: !0
+      }), jsx(Jn, {
+        innerText: "Close",
+        onClick: hideModal
+      })]
+    }), jsxs("div", {
+      className: "pro_trial_form_modal--content--cB6wt text--fontPos13--xW8hS text--_fontBase--QdLsd",
+      children: [jsxs("div", {
+        className: "pro_trial_form_modal--titleTextContainer--Whf8N",
+        children: [stepProps && jsx(_$$E2, {
+          color: "secondary",
+          fontSize: 13,
+          children: _$$tx("pro_trials_v3.pro_trial_initiation_modal.step_counter", {
+            currentStep: stepProps.currentStep + 1,
+            totalSteps: stepProps.totalSteps
+          })
+        }), titleText, descriptionText]
+      }), middleContent, jsxs("div", {
+        className: "pro_trial_form_modal--footer--xDAGh",
+        children: [jsx(_$$nD, {
+          onClick: ctaOnClick,
+          className: "pro_trial_form_modal--footerCTA--bb-GE",
+          disabled: ctaDisabled,
+          trackingProperties: _$$ng.getTrackingProperties("continue"),
+          children: ctaText
+        }), jsx(_$$eM, {
+          trackingProperties: _$$ng.getTrackingProperties("go back"),
+          onClick: textCtaOnClick,
+          children: textCtaText
+        })]
+      })]
+    })]
+  });
+}
+function t0() {
+  let [e, t] = useState();
+  let n = useMemo(() => [{
+    title: jsx(_$$E2, {
+      children: _$$tx("pro_trials_v3.downgrade_modal.feature_downgrade.consumption_limit.title", {
+        maxNumOfFiles: WW,
+        maxNumOfProjects: Wf
+      })
+    }),
+    children: jsx(_$$E2, {
+      children: _$$tx("pro_trials_v3.downgrade_modal.feature_downgrade.consumption_limit.description")
+    }),
+    leftComponent: jsx(_$$Y, {
+      width: "hug-contents",
+      height: "hug-contents",
+      padding: {
+        top: 8
+      },
+      children: jsx(_$$B, {
+        svg: _$$A3,
+        className: _$$s.colorIconDanger.$
+      })
+    })
+  }, {
+    title: jsx(_$$E2, {
+      children: _$$tx("pro_trials_v3.downgrade_modal.feature_downgrade.team_library.title")
+    }),
+    children: jsx(_$$E2, {
+      children: _$$tx("pro_trials_v3.downgrade_modal.feature_downgrade.team_library.description")
+    }),
+    leftComponent: jsx(_$$Y, {
+      width: "hug-contents",
+      height: "hug-contents",
+      padding: {
+        top: 8
+      },
+      children: jsx(_$$B, {
+        svg: _$$A4,
+        className: _$$s.colorIconDanger.$
+      })
+    })
+  }, {
+    title: jsx(_$$E2, {
+      children: _$$tx("pro_trials_v3.downgrade_modal.feature_downgrade.other.title")
+    }),
+    children: jsx(_$$E2, {
+      children: _$$tx("pro_trials_v3.downgrade_modal.feature_downgrade.other.description")
+    }),
+    leftComponent: jsx(_$$Y, {
+      width: "hug-contents",
+      height: "hug-contents",
+      padding: {
+        top: 8
+      },
+      children: jsx(_$$B, {
+        svg: _$$A4,
+        className: _$$s.colorIconDanger.$
+      })
+    })
+  }], []);
+  return jsx(_$$Y, {
+    width: "100%",
+    direction: "vertical",
+    spacing: 24,
+    padding: {
+      top: 32
+    },
+    children: n.map(({
+      title: n,
+      children: r,
+      leftComponent: i
+    }, o) => jsx(_$$Y, {
+      height: "hug-contents",
+      strokeColor: "default",
+      strokeWidth: {
+        left: 0,
+        top: 0,
+        right: 0,
+        bottom: 1
+      },
+      padding: {
+        bottom: 24
+      },
+      children: jsx(tW, {
+        leftComponent: i,
+        title: n,
+        isExpanded: e === o,
+        onClick: e => {
+          e ? t(void 0) : t(o);
+        },
+        children: r
+      })
+    }, o))
+  });
+}
+let t1 = Ju(function ({
+  teamId: e
+}) {
+  let t = wA();
+  let n = useCallback(() => {
+    t(Ce());
+  }, [t]);
+  let r = useCallback(() => {
+    n();
+    t(bE({
+      all_team_flags: [{
+        team_id: e,
+        flags: {
+          [u_]: !1
+        }
+      }]
+    }));
+  }, [t, n, e]);
+  return jsx(t$, {
+    trackingName: Mm,
+    hideModal: n,
+    children: jsx(tV, {
+      titleText: jsx(_$$E2, {
+        fontSize: 24,
+        fontWeight: "bold",
+        children: _$$tx("pro_trials_v3.downgrade_modal.title")
+      }),
+      descriptionText: jsx(_$$E2, {
+        color: "secondary",
+        fontSize: 13,
+        children: _$$tx("pro_trials_v3.downgrade_modal.description")
+      }),
+      middleContent: jsx(t0, {}),
+      ctaOnClick: n,
+      ctaDisabled: !1,
+      ctaText: jsx(_$$E2, {
+        children: _$$tx("pro_trials_v3.downgrade_modal.cta.text")
+      }),
+      textCtaOnClick: r,
+      textCtaText: jsx(_$$E2, {
+        children: _$$tx("pro_trials_v3.downgrade_modal.text_cta.text")
+      }),
+      hideModal: n
+    })
+  });
+}, "ProTrialDowngradeModal");
+function t3(e) {
+  let {
+    selectedFeatures,
+    setSelectedFeatures,
+    shuffledFeaturesContent,
+    hideModal,
+    onClickCTA,
+    onBack
+  } = e;
+  return jsx(fu, {
+    name: iX[iX.SELECT_FEATURES],
+    children: jsx(tV, {
+      ctaDisabled: 0 === selectedFeatures.size,
+      ctaOnClick: onClickCTA,
+      ctaText: jsx(_$$E2, {
+        children: _$$tx("pro_trials_v3.pro_trial_initiation_modal.finish")
+      }),
+      descriptionText: jsx(_$$E2, {
+        fontSize: 13,
+        children: _$$tx("pro_trials_v3.pro_trial_initiation_modal.you_have_14_days", {
+          proTrialDuration: $g
+        })
+      }),
+      hideModal,
+      middleContent: jsx("div", {
+        className: "pro_trial_form_modal--proTrialFeatureSelectContainer--8j6DA",
+        children: shuffledFeaturesContent.map(({
+          featureType: e,
+          featureText: r
+        }) => jsx(t6, {
+          featureIcon: bo[e],
+          featureText: r,
+          onClick: () => {
+            selectedFeatures.has(e) ? setSelectedFeatures(new Set([...selectedFeatures].filter(t => e !== t))) : setSelectedFeatures(new Set([...selectedFeatures, e]));
+          },
+          isSelected: selectedFeatures.has(e)
+        }, e))
+      }),
+      stepProps: {
+        currentStep: iX.SELECT_FEATURES,
+        totalSteps: h3
+      },
+      textCtaOnClick: onBack,
+      textCtaText: jsx(_$$E2, {
+        fontSize: 13,
+        children: _$$tx("pro_trials_v3.pro_trial_initiation_modal.go_back")
+      }),
+      titleText: jsx(_$$E2, {
+        fontSize: 24,
+        fontWeight: "bold",
+        children: _$$tx("pro_trials_v3.pro_trial_initiation_modal.what_are_you_excited")
+      })
+    })
+  });
+}
+function t6(e) {
+  let {
+    featureIcon,
+    featureText,
+    onClick,
+    isSelected
+  } = e;
+  return jsx(jm, {
+    role: "button",
+    className: isSelected ? "pro_trial_form_modal--proTrialFeatureContainerSelected--t69-D pro_trial_form_modal--proTrialFeatureContainer--RI3Vx" : "pro_trial_form_modal--proTrialFeatureContainer--RI3Vx",
+    onClick,
+    children: jsxs(_$$Y, {
+      direction: "horizontal",
+      horizontalAlignItems: "start",
+      verticalAlignItems: "center",
+      spacing: "12px",
+      children: [jsx(_$$Y, {
+        direction: "horizontal",
+        horizontalAlignItems: "center",
+        verticalAlignItems: "center",
+        width: 32,
+        height: 32,
+        children: featureIcon
+      }), featureText]
+    })
+  });
+}
+function t8(e) {
+  let {
+    selectedTeamName,
+    setSelectedTeamType,
+    selectedTeamType,
+    shuffledTeamTypeContent,
+    hideModal,
+    onClickCTA,
+    onBack
+  } = e;
+  return jsx(fu, {
+    name: iX[iX.SELECT_TEAM_TYPE],
+    children: jsx(tV, {
+      ctaDisabled: void 0 === selectedTeamType,
+      ctaOnClick: onClickCTA,
+      ctaText: jsx(_$$E2, {
+        children: _$$tx("pro_trials_v3.pro_trial_initiation_modal.continue")
+      }),
+      descriptionText: jsx(_$$E2, {
+        fontSize: 13,
+        children: _$$tx("pro_trials_v3.pro_trial_initiation_modal.not_being_nosy")
+      }),
+      hideModal,
+      middleContent: jsx(_$$Y, {
+        direction: "horizontal",
+        horizontalAlignItems: "center",
+        verticalAlignItems: "center",
+        spacing: "12px",
+        children: shuffledTeamTypeContent.map(({
+          teamType: e,
+          imageAltText: t,
+          descriptionText: i
+        }) => jsx(t9, {
+          isSelected: e === selectedTeamType,
+          onClick: () => {
+            e !== selectedTeamType ? setSelectedTeamType(e) : setSelectedTeamType(void 0);
+          },
+          image: jsx("img", {
+            src: $Q[e],
+            alt: t(),
+            height: 110
+          }),
+          text: i
+        }, e))
+      }),
+      stepProps: {
+        currentStep: iX.SELECT_TEAM_TYPE,
+        totalSteps: h3
+      },
+      textCtaOnClick: onBack,
+      textCtaText: jsx(_$$E2, {
+        fontSize: 13,
+        children: _$$tx("pro_trials_v3.pro_trial_initiation_modal.go_back")
+      }),
+      titleText: jsx(_$$E2, {
+        fontSize: 24,
+        fontWeight: "bold",
+        children: _$$tx("pro_trials_v3.pro_trial_initiation_modal.what_type_of_team", {
+          teamName: selectedTeamName
+        })
+      })
+    })
+  });
+}
+function t9(e) {
+  let {
+    image,
+    text,
+    onClick,
+    isSelected
+  } = e;
+  return jsx(jm, {
+    role: "button",
+    className: isSelected ? "pro_trial_form_modal--teamTypeCardContainerSelected--kq22n pro_trial_form_modal--teamTypeCardContainer--HEdI4" : "pro_trial_form_modal--teamTypeCardContainer--HEdI4",
+    onClick,
+    children: jsxs(_$$Y, {
+      direction: "vertical",
+      horizontalAlignItems: "center",
+      verticalAlignItems: "start",
+      spacing: 8,
+      padding: {
+        horizontal: 12
+      },
+      height: 195,
+      children: [image, text]
+    })
+  });
+}
+function nt(e) {
+  let {
+    teams,
+    setSelectedTeamID,
+    selectedTeamID,
+    hideModal,
+    onClickCTA,
+    onBack
+  } = e;
+  return jsx(fu, {
+    name: iX[iX.SELECT_TEAM],
+    children: jsx(tV, {
+      ctaDisabled: void 0 === selectedTeamID,
+      ctaOnClick: onClickCTA,
+      ctaText: jsx(_$$E2, {
+        children: _$$tx("pro_trials_v3.pro_trial_initiation_modal.upgrade_to_pro")
+      }),
+      descriptionText: jsx(_$$E2, {
+        fontSize: 13,
+        children: _$$tx("pro_trials_v3.pro_trial_initiation_modal.everyone_will_be_upgraded")
+      }),
+      hideModal,
+      middleContent: jsx("div", {
+        className: "pro_trial_form_modal--teamSelectContainer--S4x5O",
+        children: teams.map(e => jsx(nn, {
+          team: e,
+          onClick: () => {
+            e.id !== selectedTeamID ? setSelectedTeamID(e.id) : setSelectedTeamID(void 0);
+          },
+          isSelected: e.id === selectedTeamID
+        }, e.id))
+      }),
+      stepProps: {
+        currentStep: iX.SELECT_TEAM,
+        totalSteps: h3
+      },
+      textCtaOnClick: onBack,
+      textCtaText: jsx(_$$E2, {
+        fontSize: 13,
+        children: _$$tx("pro_trials_v3.pro_trial_initiation_modal.cancel")
+      }),
+      titleText: jsx(_$$E2, {
+        fontSize: 24,
+        fontWeight: "bold",
+        children: _$$tx("pro_trials_v3.pro_trial_initiation_modal.pick_a_team")
+      })
+    })
+  });
+}
+function nn(e) {
+  let {
+    team,
+    onClick,
+    isSelected
+  } = e;
+  return jsxs(jm, {
+    role: "button",
+    className: isSelected ? "pro_trial_form_modal--teamContainerSelected--Meavl pro_trial_form_modal--teamContainer--tLBf7" : "pro_trial_form_modal--teamContainer--tLBf7",
+    onClick,
+    children: [jsxs("div", {
+      className: "pro_trial_form_modal--teamContainerHead--EvWS5",
+      children: [jsx(_$$nl, {
+        team,
+        size: _$$P3.LARGE
+      }), jsx("div", {
+        className: "pro_trial_form_modal--teamNameContainer--cwtSb",
+        children: jsx(_$$E2, {
+          children: team.name,
+          fontSize: 14,
+          truncate: "end",
+          fontWeight: "medium"
+        })
+      })]
+    }), jsx(_$$E2, {
+      color: "secondary",
+      fontSize: 14,
+      fontWeight: "medium",
+      children: _$$tx("pro_trials_v3.pro_trial_initiation_modal.editors.seat_rename", {
+        numEditors: team.editors
+      })
+    })]
+  });
+}
+let na = Ju(function () {
+  let [e, t] = useState(iX.SELECT_TEAM);
+  let [n, r] = useState();
+  let [i, o] = useState();
+  let [s, l] = useState(new Set());
+  let [d, _] = useState(TB);
+  let [u, m] = useState(PG);
+  let p = xX();
+  let g = wA();
+  let f = useCallback(() => p.find(e => e.id === n)?.name ?? _$$t("pro_trials_v3.pro_trial_initiation_modal.your_team"), [p, n]);
+  let h = useCallback(() => g(Ce()), [g]);
+  let b = _$$t("payments.pro_trial.start_pro_trial_error");
+  useEffect(() => {
+    _(shuffle(TB));
+    m(shuffle(PG));
+  }, []);
+  let x = useCallback(() => {
+    void 0 === n ? t(iX.SELECT_TEAM) : p.find(e => e.id === n) ? g(cw({
+      teamId: n,
+      surveyResult: {
+        teamId: n,
+        teamType: i,
+        features: Array.from(s)
+      }
+    })) : (g(sf({
+      view: "recentsAndSharing"
+    })), g(_$$s2.error(b)));
+    h();
+  }, [p, g, h, n, i, s, b]);
+  0 === p.length && h();
+  return jsxs(t$, {
+    trackingName: NN,
+    trackingProperties: {
+      currentStage: iX[e],
+      teamId: n,
+      selectedTeamType: i ?? null,
+      selectedFeatures: s.size > 0 ? Array.from(s).join(" ") : null
+    },
+    hideModal: h,
+    children: [e === iX.SELECT_TEAM && jsx(nt, {
+      teams: p,
+      setSelectedTeamID: r,
+      selectedTeamID: n,
+      hideModal: h,
+      onClickCTA: () => t(iX.SELECT_TEAM_TYPE),
+      onBack: h
+    }), e === iX.SELECT_TEAM_TYPE && jsx(t8, {
+      selectedTeamName: f(),
+      setSelectedTeamType: o,
+      selectedTeamType: i,
+      shuffledTeamTypeContent: d,
+      hideModal: h,
+      onClickCTA: () => t(iX.SELECT_FEATURES),
+      onBack: () => {
+        t(iX.SELECT_TEAM);
+        o(void 0);
+      }
+    }), e === iX.SELECT_FEATURES && jsx(t3, {
+      selectedFeatures: s,
+      setSelectedFeatures: l,
+      shuffledFeaturesContent: u,
+      hideModal: h,
+      onClickCTA: x,
+      onBack: () => {
+        t(iX.SELECT_TEAM_TYPE);
+        l(new Set());
+      }
+    })]
+  });
+}, "ProTrialInitiationModal");
+function no(e) {
+  let {
+    hideModal
+  } = e;
+  let n = wA();
+  let r = jsxs(Fragment, {
+    children: [jsx(_$$E2, {
+      fontSize: 13,
+      children: _$$tx("pro_trials_v3.entry_modal_explanation")
+    }), jsx(nc, {})]
+  });
+  let i = jsx(_$$nD, {
+    onClick: () => {
+      hideModal();
+      n(_$$to({
+        type: na
+      }));
+    },
+    trackingProperties: _$$ng.getTrackingProperties("Start professional trial"),
+    children: jsx(_$$E2, {
+      fontSize: 13,
+      children: _$$tx("pro_trials_v3.entry_modal_cta_text")
+    })
+  });
+  return jsx(nd, {
+    titleText: jsx(_$$E2, {
+      fontSize: 24,
+      fontWeight: "bold",
+      children: _$$tx("pro_trials_v3.entry_modal_title")
+    }),
+    descriptionText: r,
+    ctaButton: i,
+    imgSrc: buildUploadUrl("4323e87513cec17f5decef84ebf66c12c0d2ea59")
+  });
+}
+function ns(e) {
+  let {
+    teamId,
+    hideModal
+  } = e;
+  let r = wA();
+  let i = jsxs(Fragment, {
+    children: [jsx(_$$E2, {
+      fontSize: 13,
+      children: _$$tx("pro_trials_v3.team_welcome_modal_explanation")
+    }), jsx(nc, {})]
+  });
+  let o = jsx(_$$nD, {
+    onClick: () => {
+      hideModal();
+      r(sf({
+        view: "team",
+        teamId
+      }));
+    },
+    trackingProperties: _$$ng.getTrackingProperties("Team welcome to Professional trial"),
+    children: jsx(_$$E2, {
+      fontSize: 13,
+      children: _$$tx("pro_trials_v3.team_welcome_modal_cta")
+    })
+  });
+  return jsx(nd, {
+    descriptionText: i,
+    titleText: jsx(_$$E2, {
+      fontSize: 24,
+      fontWeight: "bold",
+      children: _$$tx("pro_trials_v3.team_welcome_modal_title")
+    }),
+    imgSrc: buildUploadUrl("4323e87513cec17f5decef84ebf66c12c0d2ea59"),
+    ctaButton: o
+  });
+}
+function nl(e) {
+  let {
+    hideModal,
+    teamId
+  } = e;
+  let r = wA();
+  let i = {
+    view: "team",
+    teamId
+  };
+  let o = jsx(_$$nD, {
+    onClick: () => {
+      hideModal();
+      r(WX({
+        teamId,
+        selectedView: i
+      }));
+    },
+    trackingProperties: _$$ng.getTrackingProperties("Upgrade from Pro trial expiry modal"),
+    children: jsx(_$$E2, {
+      fontSize: 13,
+      children: _$$tx("pro_trials_v3.expiry_modal_cta_text")
+    })
+  });
+  let s = jsx($9, {
+    onClick: () => {
+      r(_$$to({
+        type: t1,
+        data: {
+          teamId
+        }
+      }));
+    },
+    trackingProperties: _$$ng.getTrackingProperties("Go back to Starter from Pro trial expiry modal"),
+    children: jsx(_$$E2, {
+      fontSize: 13,
+      children: _$$tx("pro_trials_v3.expiry_modal_secondary_cta_text")
+    })
+  });
+  return jsx(nd, {
+    titleText: jsx(_$$E2, {
+      fontSize: 24,
+      fontWeight: "bold",
+      children: _$$tx("pro_trials_v3.expiry_modal_title")
+    }),
+    descriptionText: jsx(_$$E2, {
+      fontSize: 13,
+      children: _$$tx("pro_trials_v3.expiry_modal_explanation")
+    }),
+    ctaButton: o,
+    secondaryCtaButton: s,
+    imgSrc: buildUploadUrl("47a15784276e736195c9794a0c47c4d02c4c3ca4")
+  });
+}
+function nd(e) {
+  let {
+    titleText,
+    descriptionText,
+    ctaButton,
+    imgSrc,
+    secondaryCtaButton
+  } = e;
+  return jsxs("div", {
+    className: "pro_trials_v3_modal_components--container--vGyv-",
+    children: [jsxs("div", {
+      className: "pro_trials_v3_modal_components--textContainer--jYLvj",
+      children: [jsx("p", {
+        children: titleText
+      }), jsx("div", {
+        children: descriptionText
+      }), jsxs("div", {
+        className: "pro_trials_v3_modal_components--ctaRow--ENAnk",
+        children: [ctaButton, secondaryCtaButton]
+      })]
+    }), jsx(Gv, {
+      width: 313,
+      src: imgSrc
+    })]
+  });
+}
+function nc() {
+  return jsxs("div", {
+    className: "pro_trials_v3_modal_components--proFeatureCheckBullets--B5Jb5",
+    children: [jsx(_$$X2, {
+      bulletLabel: _$$t("pro_trials_v3.entry_modal_bullet_pt_1")
+    }), jsx(_$$X2, {
+      bulletLabel: _$$t("pro_trials_v3.entry_modal_bullet_pt_2")
+    }), jsx(_$$X2, {
+      bulletLabel: _$$t("pro_trials_v3.entry_modal_bullet_pt_3")
+    })]
+  });
+}
+function n_() {
+  let e = _$$e({
+    overlay: MwQ,
+    priority: _$$N.DEFAULT_MODAL
+  });
+  let t = wA();
+  _$$h(() => {
+    e.show();
+  });
+  return jsx(_$$h2, {
+    closeButtonStyle: M_.ON_DARK,
+    disableClickOutsideToHide: !0,
+    element: () => jsx(no, {
+      hideModal: e.complete
+    }),
+    height: 404,
+    isShowing: e.isShowing,
+    modalType: q3.FEATURE_UPDATE,
+    onClickPrimaryCta: e.complete,
+    onClose: () => {
+      t(_$$b({
+        [Jy]: !0
+      }));
+      e.complete();
+    },
+    onManualDismiss: e.complete,
+    trackingContextName: "pro_trials_entry_modal",
+    trackingProperties: _$$ng.getTrackingProperties(),
+    width: 700
+  });
+}
+function nu(e) {
+  let t = _$$e({
+    overlay: NdL,
+    priority: _$$N.DEFAULT_MODAL
+  });
+  let {
+    proTrial
+  } = e;
+  let r = proTrial.teamId;
+  let i = wA();
+  _$$h(() => {
+    t.show();
+  });
+  let o = useCallback(() => i(bE({
+    all_team_flags: [{
+      team_id: r,
+      flags: {
+        [u_]: !0
+      }
+    }]
+  })), [i, r]);
+  return jsx(_$$h2, {
+    closeButtonStyle: M_.ON_LIGHT,
+    disableClickOutsideToHide: !0,
+    element: () => jsx(nl, {
+      teamId: r,
+      hideModal: t.complete
+    }),
+    height: 404,
+    isShowing: t.isShowing,
+    modalType: q3.FEATURE_UPDATE,
+    onClickPrimaryCta: t.complete,
+    onClose: () => {
+      o();
+      t.complete();
+    },
+    onManualDismiss: t.complete,
+    trackingContextName: "pro_trials_expiry_modal",
+    trackingProperties: _$$ng.getTrackingProperties(),
+    width: 700
+  });
+}
+function nm(e) {
+  let t = _$$e({
+    overlay: bGx,
+    priority: _$$N.DEFAULT_MODAL
+  });
+  let {
+    proTrial
+  } = e;
+  let r = proTrial.teamId;
+  let i = wA();
+  _$$h(() => {
+    t.show();
+  });
+  let o = useCallback(() => i(bE({
+    all_team_flags: [{
+      team_id: r,
+      flags: {
+        [v$]: !0
+      }
+    }]
+  })), [i, r]);
+  return jsx(_$$h2, {
+    closeButtonStyle: M_.ON_DARK,
+    disableClickOutsideToHide: !0,
+    element: () => jsx(ns, {
+      teamId: r,
+      hideModal: t.complete
+    }),
+    height: 404,
+    isShowing: t.isShowing,
+    modalType: q3.FEATURE_UPDATE,
+    onClickPrimaryCta: t.complete,
+    onClose: () => {
+      o();
+      t.complete();
+    },
+    onManualDismiss: t.complete,
+    trackingContextName: "pro_trials_v3_team_welcome_modal",
+    trackingProperties: _$$ng.getTrackingProperties(),
+    width: 700
+  });
+}
+function np() {
+  let e = _6();
+  let t = d4(e => e.userTeamFlags);
+  let n = d4(e => !!e.modalShown);
+  let r = _$$f2(Jy);
+  let i = xX();
+  let {
+    ongoingTrials,
+    expiredTrials
+  } = j9();
+  let l = _$$ng.entryEnabled() && i.length > 0 && !r;
+  let d = ongoingTrials.find(e => {
+    let n = t[e.teamId]?.[v$];
+    return !e.isOwner && !n && e.daysLeft > 0;
+  });
+  let c = expiredTrials.find(e => {
+    if (!_$$ng.canSeeProTrialExpiryUx(e)) return !1;
+    let n = t[e.teamId]?.[u_];
+    return e.isOwner && !n;
+  });
+  let _ = useCallback(() => l ? jsx(n_, {}) : c ? jsx(nu, {
+    proTrial: c
+  }) : d ? jsx(nm, {
+    proTrial: d
+  }) : null, [l, c, d]);
+  return !_$$ng.isEligibleTrialEntryView(e) || n ? null : jsx("div", {
+    "data-testid": "proTrialsV3FileBrowserOverlayWrapper",
+    children: _()
+  });
+}
+let nb = _$$eU(() => {
+  let e = UG();
+  try {
+    return e.get(Bq);
+  } catch (e) {
+    console.error("Failed to get show modal cookie", e);
+  }
+  return !1;
+});
+let nx = bt(e => null != e.payment.promo);
+let ny = Z1(Vm, e => (e ?? []).some(e => null != e && !w5({
+  subscription: e.subscription,
+  student_team: !!e.studentTeamAt,
+  grace_period_end: e.gracePeriodEnd ? e.gracePeriodEnd.toISOString() : null
+}) && !e.orgId && e.canEdit));
+function nw({
+  dismissModal: e
+}) {
+  let t = d4(({
+    payment: e
+  }) => e.promo);
+  return (_$$h(() => {
+    lc();
+  }), useEffect(() => {
+    null == t && e();
+  }, [e, t]), null == t) ? null : jsxs(NJ, {
+    targetKey: _$$U3,
+    dismissModal: e,
+    width: 301,
+    shouldScrollTargetIntoView: !0,
+    children: [jsx("div", {
+      className: Hj,
+      children: _$$tx("rcs.promo_new_team_create_pointer.first_create_a_team")
+    }), _$$tx("rcs.promo_new_team_create_pointer.to_get_professional_free_for_days_you_ll_need_to_set_up_a_new_team_first_it_ll_take_less_than_a_minute", {
+      days: parseInt(t.promo_value)
+    })]
+  });
+}
+function nT() {
+  let e = md(ny);
+  let t = md(nb);
+  let n = md(nx);
+  let r = _$$e({
+    overlay: Qlc,
+    priority: _$$N.OVERRIDING_MODAL
+  }, [e]);
+  let o = useCallback(() => {
+    t && n && r.show({
+      canShow: e => !e
+    });
+  }, [t, n, r]);
+  _$$h(() => {
+    o();
+  });
+  return jsx(_$$h2, {
+    element: nw,
+    isShowing: r.isShowing,
+    modalType: q3.SELF_CONTAINED,
+    onClickPrimaryCta: r.complete,
+    onClose: r.complete,
+    onManualDismiss: r.complete,
+    trackingContextName: "Redeem Promo Code > Create Team"
+  });
+}
+function nI(e) {
+  let t = wA();
+  let n = e.promo;
+  let r = "";
+  let i = parseInt(n.promo_value);
+  if (n.claims_end_at) {
+    let e = new Date(Date.parse(n.claims_end_at));
+    r = n.is_multi_redeemable ? _$$t("promo.select_team.multi_redeem_w_deadline_promo_str.seat_rename", {
+      days: i,
+      date: e
+    }) : _$$t("promo.select_team.single_redeem_w_deadline_promo_str.seat_rename", {
+      days: i,
+      date: e
+    });
+  } else r = n.is_multi_redeemable ? _$$t("promo.select_team.multi_redeem_without_deadline_promo_str.seat_rename", {
+    days: i
+  }) : _$$t("promo.select_team.single_redeem_without_deadline_promo_str.seat_rename", {
+    days: i
+  });
+  return jsxs(_$$ey, {
+    hide: e.dismissModal,
+    size: 437,
+    className: "promo_code_select_team_content--modal--20aUA",
+    children: [jsx("div", {
+      className: "promo_code_select_team_content--promoSelectTeamTitle--f1dSV text--fontPos13--xW8hS text--_fontBase--QdLsd",
+      children: _$$tx("promo.select_team.choose_teams_to_upgrade")
+    }), jsx("div", {
+      className: "promo_code_select_team_content--promoSelectTeamDescription--pHb18 text--fontPos11--2LvXf text--_fontBase--QdLsd",
+      children: r
+    }), jsx(Jn, {
+      className: "promo_code_select_team_content--closeButton--iQ6-4",
+      onClick: e.dismissModal,
+      innerText: "close"
+    }), jsx(Kz, {
+      multiple: 2
+    }), jsx(_$$I, {
+      eligibleTeams: e.starterTeams,
+      selectTeam: n => {
+        t(g_({
+          teamId: n.id,
+          teamName: n.name,
+          previousView: e.previousView
+        }));
+      },
+      numDesignFilesPerTeam: e.filesPerStarterTeam
+    })]
+  });
+}
+function nA({
+  dismissModal: e
+}) {
+  let t = d4(({
+    payment: e
+  }) => e.promo);
+  let n = d4(({
+    selectedView: e
+  }) => e);
+  let r = d4(e => e.teams);
+  let i = FC();
+  let o = useMemo(() => Object.values(r).filter(e => !w5(e) && canEditTeam(e.id, i)), [r, i]);
+  let s = [];
+  let l = useMemo(() => o.map(e => ({
+    teamId: e.id
+  })), [o]);
+  return (_$$p(bel, l).forEach(e => {
+    s.push(e.result.data?.team?.teamFileCounts?.designFileCount ?? 0);
+  }), _$$h(() => {
+    lc();
+  }), useEffect(() => {
+    (null == t || 0 === o.length) && e();
+  }, [e, t, o]), null == t || 0 === o.length) ? null : jsx(nI, {
+    starterTeams: o,
+    promo: t,
+    filesPerStarterTeam: s,
+    dismissModal: e,
+    previousView: n
+  });
+}
+function nS() {
+  let e = md(ny);
+  let t = md(nb);
+  let n = md(nx);
+  let r = _$$e({
+    overlay: I$z,
+    priority: _$$N.OVERRIDING_MODAL
+  }, [e]);
+  let o = useCallback(() => {
+    t && n && r.show({
+      canShow: e => e
+    });
+  }, [t, n, r]);
+  _$$h(() => {
+    o();
+  });
+  return jsx(_$$h2, {
+    element: nA,
+    isShowing: r.isShowing,
+    modalType: q3.WELCOME,
+    onClickPrimaryCta: r.complete,
+    onClose: r.complete,
+    onManualDismiss: r.complete,
+    trackingContextName: "Redeem Promo Code > Select Team"
+  });
+}
+let nD = r1(J5);
+function nL() {
+  let e = md(nD);
+  let t = md(Fy);
+  let n = Fz();
+  let {
+    show,
+    isShowing,
+    complete
+  } = _$$e({
+    overlay: Kgs,
+    priority: _$$N.DEFAULT_MODAL
+  }, [e, t]);
+  _$$h(() => {
+    show({
+      canShow: (e, t) => !e && t && Date.now() <= new Date("2025-06-23T16:00:00Z").getTime() + 2592e6 && n
+    });
+  });
+  let l = Om();
+  let d = _$$tv();
+  let _ = _$$P4();
+  return jsx(rq, {
+    arrowPosition: _$$F_.LEFT_TITLE,
+    description: _$$tx("community.resource_hub.promotion"),
+    emphasized: !0,
+    isShowing,
+    onClose: complete,
+    primaryCta: {
+      label: _$$tx("community.resource_hub.promotion.show_me_more"),
+      type: "button",
+      onClick: () => {
+        _$$Ay.push(new au({
+          ...l,
+          tab: _
+        }, d).href);
+        complete();
+      },
+      ctaTrackingDescriptor: _$$c.SHOW_ME_MORE
+    },
+    secondaryCta: {
+      label: _$$tx("community.resource_hub.promotion.cancel"),
+      type: "button",
+      onClick: complete,
+      ctaTrackingDescriptor: _$$c.CANCEL
+    },
+    targetKey: "resource_hub_link",
+    title: _$$tx("community.resource_hub.promotion.title"),
+    trackingContextName: HH.RESOURCE_HUB_PROMOTIONAL_OVERLAY,
+    userFlagOnShow: J5,
+    width: 300
+  });
+}
+let nW = "seen_team_project_link_overlay";
+let nz = r1(nW);
+function n$() {
+  let e = md(nz);
+  let t = fn();
+  let n = () => t === ih.CONTROL;
+  let {
+    show,
+    isShowing,
+    complete
+  } = _$$e({
+    overlay: BTz,
+    priority: _$$N.DEFAULT_MODAL,
+    experiment: {
+      check: () => n(),
+      predicate: e => !e,
+      postCheck: e => !e
+    }
+  }, [e]);
+  _$$h(() => {
+    show({
+      canShow: e => !e
+    });
+  });
+  return jsx(rq, {
+    arrowPosition: F_.LEFT_TITLE,
+    description: _$$tx("team_project_link.overlay.description"),
+    emphasized: !0,
+    isShowing,
+    onClose: complete,
+    targetKey: Jo,
+    trackingContextName: "Team Project Link Overlay",
+    userFlagOnShow: nW,
+    zIndex: _$$R.MODAL
+  });
+}
+function n0() {
+  let {
+    getConfig
+  } = I7("starter_global_file_limits");
+  let t = S2();
+  let n = oA(t?.data?.tier);
+  let {
+    show,
+    isShowing,
+    complete
+  } = _$$e({
+    overlay: dYj,
+    priority: _$$N.DEFAULT_MODAL,
+    experiment: {
+      check: () => {
+        if (!getFeatureFlags().sts_starter_enabled) return !1;
+        let t = new Date("2025-04-26T23:59:59").getTime();
+        return !(Date.now() > t) && getConfig().get("enabled", !1);
+      },
+      predicate: e => e,
+      postCheck: () => !0
+    }
+  }, [t]);
+  _$$h(() => {
+    show({
+      canShow: e => e?.tier === FPlanNameType.STARTER
+    });
+  });
+  return jsx(_l, {
+    closeButtonColor: "dark",
+    description: _$$tx("starter_plan_updates_modal.description"),
+    isShowing,
+    media: jsx(B$, {
+      aspectRatio: 1.625,
+      width: 700,
+      src: buildUploadUrl("8bed8822b149a1da0cefb322e58ed4bd83ed7a28"),
+      alt: "An illustration of several Figma features"
+    }),
+    onClose: complete,
+    orientation: "landscape",
+    primaryCta: {
+      label: _$$tx("starter_plan_updates_modal.primary_cta_button"),
+      type: "button",
+      onClick: complete,
+      ctaTrackingDescriptor: _$$c.GOT_IT
+    },
+    secondaryCta: {
+      label: _$$tx("starter_plan_updates_modal.secondary_cta_button"),
+      type: "link",
+      href: "https://help.figma.com/hc/categories/31823555275671-Figma-Sites",
+      ctaTrackingDescriptor: _$$c.LEARN_MORE
+    },
+    title: _$$tx("starter_plan_updates_modal.title"),
+    trackingContextName: "starter_plan_updates_overlay",
+    trackingProperties: {
+      plan: n
+    }
+  });
+}
+function n6() {
+  let e = md(qG);
+  let t = md(Qm);
+  let n = md(zN);
+  let a = ol();
+  let r = wA();
+  let o = _$$e({
+    overlay: Ult,
+    priority: _$$N.HIGH_PRIORITY_MODAL
+  }, [e, t, n]);
+  _$$h(() => {
+    o.show({
+      canShow: (e, t, n) => !mW(e, "seen_edu_offboarding_modal") && x$(t, n) !== 1 / 0,
+      onShow: () => {
+        r(_$$to({
+          type: ZL,
+          data: {
+            teamId: a?.id
+          }
+        }));
+        r(_$$b({
+          seen_edu_offboarding_modal: !0
+        }));
+        o.complete();
+      }
+    });
+  });
+  return null;
+}
+let n7 = {
+  key: "createEduTeam",
+  value: "1"
+};
+let ae = {
+  key: "upgradeEduTeam",
+  value: "1"
+};
+function an() {
+  let e = _$$e({
+    overlay: kmq,
+    priority: _$$N.HIGH_PRIORITY_MODAL
+  });
+  let t = wA();
+  _$$h(() => {
+    let n = QL(n7.key);
+    let a = QL(ae.key);
+    n === n7.value ? e.show({
+      onShow: () => {
+        t(Dw({
+          isEduTeam: !0
+        }));
+        EM(n7.key);
+      }
+    }) : a === ae.value && e.show({
+      onShow: () => {
+        t(_$$to({
+          type: _$$q
+        }));
+        EM(ae.key);
+      }
+    });
+  });
+  return null;
+}
+let aa = Fu("seen_plan_spaces_launch_modal");
+let ar = Fu("seen_limited_spaces_onboarding");
+let ai = new Date("2024-10-30T20:00:00.000Z").getTime();
+function ao() {
+  let e = d4(e => e.plans);
+  let t = md(mp);
+  let n = md(aa);
+  let r = md(ar);
+  let s = e.some(e => e.plan_type === _$$O.TEAM && e.is_guest);
+  let l = !!getFeatureFlags().limited_plan_spaces && s;
+  let {
+    show,
+    isShowing,
+    complete
+  } = _$$e({
+    overlay: Sgd,
+    priority: _$$N.HIGH_PRIORITY_MODAL
+  }, [t, n, r]);
+  return (useEffect(() => {
+    l && show({
+      canShow: (e, t, n) => !!t && !n && e.getTime() <= ai
+    });
+  }, [l, show]), e.length) ? jsx(rq, {
+    arrowPosition: _$$F_.RIGHT_TITLE,
+    description: _$$tx("rcs.limited_spaces.external_projects"),
+    disableHighlight: !0,
+    emphasized: !0,
+    isShowing,
+    onClose: complete,
+    primaryCta: {
+      label: _$$tx("rcs.got_it"),
+      type: "button",
+      onClick: complete,
+      ctaTrackingDescriptor: _$$c.GOT_IT
+    },
+    targetKey: _$$U3,
+    testId: "limited_plan_spaces_onboarding_test_id",
+    title: _$$tx("rcs.limited_spaces.find_shared_projects"),
+    trackingContextName: "Limited Spaces Onboarding Overlay"
+  }) : null;
+}
+function a_() {
+  let e = wA();
+  let t = md(d2);
+  let n = _$$e({
+    overlay: Wb3,
+    priority: _$$N.URGENT_ALERT
+  }, [t]);
+  _$$h(() => {
+    let t = QL("upgrade");
+    let a = QL("entryPoint");
+    switch (t) {
+      case "pro":
+        n.show({
+          canShow: e => e === qo.PERSONAL,
+          onShow: () => {
+            let t = {
+              dispatch: e,
+              plan: _$$I2.PRO,
+              upsellSource: _$$b2.UNIVERSAL_UPGRADE_SEQUENCE_MACHINE,
+              entryPoint: a ? parseInt(a) : void 0
+            };
+            e(_$$to({
+              type: dR,
+              data: {
+                ...t
+              }
+            }));
+            n.complete();
+          }
+        });
+        break;
+      case "plan_comparison":
+        n.show({
+          canShow: e => e === qo.PERSONAL,
+          onShow: () => {
+            e(_$$to({
+              type: _$$V,
+              data: {
+                upsellSource: _$$b2.DEEPLINK
+              }
+            }));
+            n.complete();
+          }
+        });
+    }
+  });
+  return null;
+}
+export function $$au2() {
+  let e = !!dq();
+  return jsxs(Fragment, {
+    children: [jsx(_$$p2, {
+      children: jsx(_$$$, {})
+    }), jsx(_$$p2, {
+      children: jsx(a_, {})
+    }), jsx(_$$p2, {
+      children: jsx(an, {})
+    }), jsx(_$$p2, {
+      children: jsx(n6, {})
+    }), jsx(_$$p2, {
+      children: jsx(NuxOnboardingOverlay, {
+        entryPoint: C5.FileBrowser
+      })
+    }), (XN || !rr) && jsxs(Fragment, {
+      children: [jsx(_$$p2, {
+        children: jsx(eG, {})
+      }), jsx(_$$p2, {
+        children: jsx(_$$P5, {})
+      }), jsx(_$$p2, {
+        children: jsx(_$$A5, {})
+      }), jsx(_$$p2, {
+        children: jsx(_$$Ay2, {})
+      }), jsx(_$$p2, {
+        children: jsx(_$$A7, {})
+      }), jsx(_$$p2, {
+        children: jsx(_$$A6, {})
+      })]
+    }), jsx(_$$p2, {
+      featureFlag: "pro_trials_v3_ux",
+      children: jsx(np, {})
+    }), jsx(_$$p2, {
+      children: jsx(n0, {})
+    }), jsxs(_$$p2, {
+      children: [jsx(tA, {}), jsx(ao, {})]
+    }), jsx(_$$p2, {
+      children: jsx(tP, {})
+    }), jsx(_$$p2, {
+      children: jsx(n$, {})
+    }), jsxs(_$$p2, {
+      children: [jsx(nT, {}), jsx(nS, {})]
+    }), jsx(_$$p2, {
+      children: jsx(O, {})
+    }), jsx(_$$p2, {
+      children: jsx(j, {})
+    }), e && jsx(_$$p2, {
+      children: jsx(tc, {})
+    }), jsx(_$$p2, {
+      children: jsx(eZ, {})
+    }), jsx(_$$p2, {
+      featureFlag: "scrub_file_browser_search_results",
+      children: jsx(b0, {})
+    }), jsx(_$$p2, {
+      children: jsx(_$$C, {
+        source: "file_browser"
+      })
+    }), jsx(_$$p2, {
+      featureFlag: "cmty_resource_hub",
+      children: jsx(nL, {})
+    })]
+  });
+}
+export const FAVORITES_COUNT_CROSSED_THRESHOLD_EVENT = $$w0;
+export const USER_FLAG_V2 = $$A1;
+export const _$$default = $$au2;

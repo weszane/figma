@@ -1,0 +1,88 @@
+import { jsx } from "react/jsx-runtime";
+import { useCallback, useMemo } from "react";
+import { z0 } from "../figma_app/492908";
+import { lQ } from "../905/934246";
+import { isNullish } from "../figma_app/95419";
+import { glU } from "../figma_app/763686";
+import { nc } from "../905/189185";
+import { t as _$$t } from "../905/303541";
+import { wA } from "../figma_app/167249";
+import { ZU, Wg } from "../figma_app/986347";
+import { Xo } from "../figma_app/687767";
+import { s1 } from "../figma_app/226737";
+import { vK } from "../figma_app/587612";
+export function $$g1() {
+  let e = s1();
+  let t = Xo(e);
+  let r = E(t);
+  let n = useCallback(e => ({
+    displayText: e.name,
+    sideText: r[e.node_id] ? _$$t("slides.properties_panel.text.style_description_font_size", {
+      fontSize: z0(r[e.node_id])
+    }) : void 0,
+    callback: nc.user("replace-text-style", () => {
+      glU?.updateExistingStyleFromSelection("inheritTextStyleKey", e.node_id);
+    }),
+    recordingKey: e.name
+  }), [r]);
+  return useMemo(() => ({
+    displayText: _$$t("slides.properties_panel.text_style.replace_style"),
+    children: [{
+      displayText: _$$t("slides.properties_panel.text_styles.styles"),
+      header: !0
+    }, ...t.map(n)],
+    recordingKey: "replaceStyle"
+  }), [t, n]);
+}
+export function $$f0() {
+  let e = s1();
+  let t = Xo(e);
+  let r = E(t);
+  let u = useMemo(() => {
+    let e = t.map(e => {
+      let t = r[e.node_id];
+      return {
+        type: ZU.CUSTOM_ACTION,
+        customActionType: Wg.STANDARD_BUTTON,
+        onClick: nc.user("replace-text-style", () => {
+          glU?.updateExistingStyleFromSelection("inheritTextStyleKey", e.node_id);
+        }),
+        rightIcon: isNullish(t) ? void 0 : jsx("span", {
+          className: "x7ey041",
+          children: z0(t)
+        }),
+        preventHoisting: !0,
+        getTitle: () => e.name,
+        recordingKey: `replaceStyle.${e.name}`
+      };
+    });
+    e.unshift({
+      type: ZU.CUSTOM_ACTION,
+      customActionType: Wg.DROPDOWN_GROUP_HEADER,
+      onClick: lQ,
+      getTitle: () => _$$t("slides.properties_panel.text_styles.styles"),
+      preventHoisting: !0,
+      recordingKey: "stylesHeader"
+    });
+    return e;
+  }, [t, r]);
+  let g = vK();
+  return useMemo(() => {
+    if (g) return {
+      type: ZU.ACTION_SUBMENU,
+      recordingKey: "replaceStyle",
+      getTitle: () => _$$t("slides.properties_panel.text_style.replace_style"),
+      items: u,
+      preventHoisting: !0
+    };
+  }, [u, g]);
+}
+function E(e) {
+  return wA((e, t) => t.reduce((t, r) => {
+    let n = e.get(r);
+    n && (t[r] = n.fontSize);
+    return t;
+  }, {}), e.map(e => e.node_id));
+}
+export const h = $$f0;
+export const r = $$g1;

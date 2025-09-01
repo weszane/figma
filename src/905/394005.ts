@@ -1,0 +1,388 @@
+import { sx } from '../905/449184';
+import { FJ } from '../905/508367';
+import { Ay } from '../905/612521';
+import { ED, x1 } from '../905/714362';
+import { createDeferredPromise } from '../905/874553';
+import { getInitialOptions } from '../figma_app/169182';
+import { xb } from '../figma_app/465776';
+
+// Constants
+const AWS_WAF_TOKEN_CHALLENGE_ATTEMPTS_KEY = 'aws_waf_token_challenge_attempts';
+
+// Type definitions for WAF validation
+interface WAFVerificationState {
+  type: 'challenge' | 'captcha';
+  deferred: any; // v() return type
+  startTime: number;
+  iframe?: HTMLIFrameElement;
+  clearTimeout?: () => void;
+  popupWindow?: Window;
+}
+
+/**
+ * Web Application Firewall (WAF) Manager
+ * Handles CAPTCHA and challenge validation for AWS WAF integration
+ */
+export class WAFManager {
+  private readonly WAF_POPUP_MODAL = 'WAF-popup-modal';
+  private readonly WAF_REFRESH_MODAL = 'WAF-refresh-modal';
+  private readonly WAF_EVENT_NAME = 'WAF challenge';
+  private pendingWAFVerification?: WAFVerificationState;
+  constructor() {
+    // Bind event handlers to maintain context
+    this.onMessage = this.onMessage.bind(this);
+  }
+
+  /**
+   * Tracks WAF-related events with analytics
+   */
+  private trackEvent = (eventName: string, eventData: Record<string, any>) => {
+    sx(eventName, {
+      ...eventData,
+      visibilityState: document.visibilityState
+    }, {
+      batchRequest: false,
+      forwardToDatadog: true
+    });
+  };
+
+  /**
+   * Handles messages from WAF validation iframe/popup
+   */
+  private onMessage = (event: MessageEvent) => {
+    if (!this.pendingWAFVerification || event.data !== 'waf-successful') {
+      return;
+    }
+    ED('[WAFManager]', 'WAF validation successful', {
+      type: this.pendingWAFVerification.type
+    });
+    if (this.pendingWAFVerification.type === 'captcha') {
+      this.handleCaptchaSuccess();
+    } else {
+      this.handleChallengeSuccess();
+    }
+    this.cleanupAndResolve(this.pendingWAFVerification.deferred, 'success');
+  };
+
+  /**
+   * Handles successful CAPTCHA validation
+   */
+  private handleCaptchaSuccess(): void {
+    if (!this.pendingWAFVerification) return;
+    if (this.pendingWAFVerification.popupWindow) {
+      const {
+        popupWindow
+      } = this.pendingWAFVerification;
+      popupWindow.close();
+      document.getElementById(this.WAF_POPUP_MODAL)?.remove();
+    } else {
+      this.openRefreshModal();
+    }
+  }
+
+  /**
+   * Handles successful challenge validation
+   */
+  private handleChallengeSuccess(): void {
+    if (!this.pendingWAFVerification) return;
+    if (this.pendingWAFVerification.type === 'challenge') {
+      this.pendingWAFVerification.clearTimeout?.();
+    } else {
+      xb(this.pendingWAFVerification);
+    }
+  }
+
+  /**
+   * Waits for WAF validation to complete (challenge or captcha)
+   */
+  waitForWAFValidation(validationType: 'challenge' | 'captcha'): Promise<void> {
+    if (this.pendingWAFVerification) {
+      return this.pendingWAFVerification.deferred.promise;
+    }
+    const deferred = createDeferredPromise();
+    const startTime = performance.now();
+    this.updateChallengeAttempts();
+    if (validationType === 'challenge') {
+      return this.initializeChallengeValidation(deferred, startTime);
+    }
+    if (validationType === 'captcha') {
+      return this.initializeCaptchaValidation(deferred, startTime);
+    }
+
+    // Fallback for unknown validation type
+    xb(validationType, {
+      reportAsSentryError: true
+    });
+    return Promise.reject(new Error(`Unknown validation type: ${validationType}`));
+  }
+
+  /**
+   * Updates challenge attempts in localStorage
+   */
+  private updateChallengeAttempts(): void {
+    try {
+      const storedAttempts = localStorage.getItem(AWS_WAF_TOKEN_CHALLENGE_ATTEMPTS_KEY);
+      if (storedAttempts) {
+        const attemptData = JSON.parse(storedAttempts);
+        attemptData.attempts = 1;
+        localStorage.setItem(AWS_WAF_TOKEN_CHALLENGE_ATTEMPTS_KEY, JSON.stringify(attemptData));
+      }
+    } catch (error) {
+      console.error('Failed to update WAF challenge attempts:', error);
+    }
+  }
+
+  /**
+   * Initializes challenge validation with iframe
+   */
+  private initializeChallengeValidation(deferred: any, startTime: number): Promise<void> {
+    const clearTimeoutFn = this.createTimeout(deferred, 5000);
+    const iframe = this.createWAFIframe();
+    window.addEventListener('message', this.onMessage);
+    this.pendingWAFVerification = {
+      type: 'challenge',
+      deferred,
+      iframe,
+      clearTimeout: clearTimeoutFn,
+      startTime
+    };
+    return deferred.promise;
+  }
+
+  /**
+   * Initializes captcha validation with popup
+   */
+  private initializeCaptchaValidation(deferred: any, startTime: number): Promise<void> {
+    this.pendingWAFVerification = {
+      type: 'captcha',
+      deferred,
+      startTime
+    };
+    this.openPopupInterstitialModal();
+    return deferred.promise;
+  }
+
+  /**
+   * Creates a hidden iframe for WAF validation
+   */
+  private createWAFIframe(): HTMLIFrameElement {
+    const iframe = document.createElement('iframe');
+    iframe.style.position = 'absolute';
+    iframe.style.zIndex = '-9999';
+    iframe.style.height = '0';
+    iframe.style.width = '0';
+    iframe.id = 'waf-iframe';
+
+    // Determine iframe source based on context
+    const isEmbedContext = getInitialOptions().frame_context?.type === 'embed';
+    iframe.src = isEmbedContext ? `${window.location.origin}/embed/waf-validation` : `${window.location.origin}/waf-validation`;
+    document.body.appendChild(iframe);
+    return iframe;
+  }
+
+  /**
+   * Opens the popup modal for CAPTCHA verification
+   */
+  openPopupInterstitialModal(): void {
+    if (document.getElementById(this.WAF_POPUP_MODAL)) {
+      return;
+    }
+    const modal = this.createModal(this.WAF_POPUP_MODAL, {
+      title: 'Figma needs to verify you are not a bot.',
+      subtitle: 'Please click \'Verify\' and complete the CAPTCHA.',
+      buttonText: 'Verify',
+      buttonId: 'WAF-open-popup-button'
+    });
+    document.body.appendChild(modal);
+    this.attachPopupButtonHandler();
+  }
+
+  /**
+   * Attaches click handler to the popup verification button
+   */
+  private attachPopupButtonHandler(): void {
+    const button = document.getElementById('WAF-open-popup-button');
+    button?.addEventListener('click', () => {
+      if (!this.pendingWAFVerification || this.pendingWAFVerification.type !== 'captcha') {
+        this.openRefreshModal();
+        return;
+      }
+      const popup = FJ(`${window.location.origin}/waf-validation-captcha`, '_blank', 'popup');
+      if (!popup) {
+        this.openRefreshModal();
+        return;
+      }
+      this.monitorPopupWindow(popup);
+      this.pendingWAFVerification.popupWindow = popup;
+      window.addEventListener('message', this.onMessage);
+    });
+  }
+
+  /**
+   * Monitors popup window for closure
+   */
+  private monitorPopupWindow(popup: Window): void {
+    const checkInterval = setInterval(() => {
+      if (popup.closed) {
+        if (this.pendingWAFVerification) {
+          this.openRefreshModal();
+        }
+        clearInterval(checkInterval);
+      }
+    }, 500);
+  }
+
+  /**
+   * Opens the refresh modal when verification fails
+   */
+  openRefreshModal(): void {
+    // Remove popup modal if it exists
+    const popupModal = document.getElementById(this.WAF_POPUP_MODAL);
+    popupModal?.remove();
+    if (document.getElementById(this.WAF_REFRESH_MODAL)) {
+      return;
+    }
+    const modal = this.createModal(this.WAF_REFRESH_MODAL, {
+      title: 'Figma could not verify that you are not a bot.',
+      subtitle: 'Please refresh the page to continue.',
+      buttonText: 'Refresh',
+      buttonId: 'WAF-refresh-button'
+    });
+    document.body.appendChild(modal);
+    this.attachRefreshButtonHandler();
+  }
+
+  /**
+   * Attaches click handler to the refresh button
+   */
+  private attachRefreshButtonHandler(): void {
+    const button = document.getElementById('WAF-refresh-button');
+    button?.addEventListener('click', () => {
+      Ay.reload('WAF');
+    });
+  }
+
+  /**
+   * Creates a modal element with the specified configuration
+   */
+  private createModal(id: string, config: {
+    title: string;
+    subtitle: string;
+    buttonText: string;
+    buttonId: string;
+  }): HTMLDivElement {
+    const modal = document.createElement('div');
+    modal.id = id;
+    modal.style.cssText = 'position: fixed; display: flex; top: 0; bottom: 0; left: 0; right: 0; background-color: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center;';
+    modal.innerHTML = `
+      <div style="background-color: var(--color-bg, white); height: 150px; width: 50%; max-width: 450px; display: flex; flex-direction: column; padding: 8px;">
+        <div style="font-family: Inter; color: var(--color-text, black); flex: 1; display: flex; flex-direction: column;">
+          <div>${config.title}</div>
+          <div style="margin-top: 4px">${config.subtitle}</div>
+        </div>
+        <div style="margin-left: auto">
+          <button id="${config.buttonId}" style="cursor: pointer; margin-left: auto; font-family: Inter; background-color: var(--color-bg-brand); padding: 0 12px; font-weight: 500; height: 32px;">${config.buttonText}</button>
+        </div>
+      </div>
+    `;
+    return modal;
+  }
+
+  /**
+   * Cleans up WAF verification state and resolves the deferred promise
+   */
+  cleanupAndResolve(deferred: any, state: string): void {
+    if (!this.pendingWAFVerification) {
+      return;
+    }
+    const {
+      type,
+      startTime
+    } = this.pendingWAFVerification;
+    this.trackEvent(this.WAF_EVENT_NAME, {
+      durationMs: Math.round(performance.now() - startTime),
+      state,
+      type
+    });
+    if (type === 'challenge') {
+      this.pendingWAFVerification.iframe?.remove();
+      this.pendingWAFVerification.clearTimeout?.();
+    }
+    window.removeEventListener('message', this.onMessage);
+    this.pendingWAFVerification = undefined;
+    deferred.resolve();
+  }
+
+  /**
+   * Gets the current WAF state from the iframe
+   */
+  async getWafStateFromIframe(): Promise<string> {
+    if (this.pendingWAFVerification?.type !== 'challenge') {
+      return 'stuck';
+    }
+    const contentWindow = this.pendingWAFVerification?.iframe?.contentWindow;
+    if (!contentWindow) {
+      return 'stuck';
+    }
+
+    // Check if AWS WAF Integration is available
+    const wafIntegration = (contentWindow as any).AwsWafIntegration;
+    if (!wafIntegration) {
+      return 'stuck:waf-script-not-loaded';
+    }
+    try {
+      await wafIntegration.forceRefreshToken();
+      ED('[WAFManager]', 'AwsWafIntegration.forceRefreshToken succeeded', {}, {
+        reportAsSentryError: false
+      });
+      return 'success';
+    } catch (error) {
+      x1('[WAFManager]', 'AwsWafIntegration.forceRefreshToken failed', {
+        error
+      }, {
+        reportAsSentryError: true
+      });
+      return 'stuck:waf-token-refresh-failed';
+    }
+  }
+
+  /**
+   * Creates a timeout for WAF validation
+   */
+  private createTimeout(deferred: any, timeoutMs: number): () => void {
+    const timeoutId = window.setTimeout(() => {
+      x1('[WAFManager]', 'WAF validation timed out.', {}, {
+        reportAsSentryError: true
+      });
+      this.getWafStateFromIframe().then(state => {
+        this.cleanupAndResolve(deferred, state);
+      });
+    }, timeoutMs);
+    return () => {
+      window.clearTimeout(timeoutId);
+    };
+  }
+}
+
+// Create singleton instance
+export const wafManager = new WAFManager();
+
+/**
+ * Extracts WAF challenge type from XHR response
+ * @param xhr - XMLHttpRequest object
+ * @returns WAF challenge type or null
+ */
+export function getWAFChallengeType(xhr: XMLHttpRequest): 'challenge' | 'captcha' | null {
+  if (!xhr.responseURL || !xhr.responseURL.startsWith(window.location.origin)) {
+    return null;
+  }
+  const wafAction = xhr.getResponseHeader('x-amzn-waf-action');
+  if (!wafAction) {
+    return null;
+  }
+  return wafAction === 'challenge' ? 'challenge' : 'captcha';
+}
+
+// Legacy exports for backward compatibility
+export const H = getWAFChallengeType;
+export const K = wafManager;

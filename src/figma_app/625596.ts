@@ -1,0 +1,14 @@
+let $$n5 = "show_m10n_approval_banner";
+let $$i0 = "show_m10n_stripe_onboarding_incomplete";
+let $$a2 = "show_m10n_stripe_adtl_info_needed_banner";
+let $$s1 = "seen_advanced_prototyping_upsell";
+let $$o3 = new Set(["seen_pro_cart_abandon_survey", "seen_drafts_collaboration_survey", "seen_first_use_survey", "seen_type_of_work_survey", "seen_org_admin_survey", "seen_pro_admin_survey", "seen_org_cart_abandon_survey", "seen_remote_templates_opt_out_survey", "seen_editor_new_user_survey", "seen_editor_new_user_research_intake", "seen_starter_team_loophole_survey", "dismissed_starter_team_loophole_survey", "completed_starter_team_loophole_survey"]);
+let $$l4 = ["collective_upsell_widget_seen_1", "collective_upsell_widget_seen_10", "collective_upsell_widget_seen_100"];
+let $$d6 = ["collective_upsell_full_screen_seen_1", "collective_upsell_full_screen_seen_10"];
+export const BY = $$i0;
+export const IR = $$s1;
+export const Q7 = $$a2;
+export const V5 = $$o3;
+export const WB = $$l4;
+export const WE = $$n5;
+export const h4 = $$d6;

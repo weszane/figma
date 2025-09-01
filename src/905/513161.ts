@@ -1,0 +1,87 @@
+import { Ju } from "../905/102752";
+import { jsxs, jsx } from "react/jsx-runtime";
+import { useCallback } from "react";
+import { wA, d4 } from "../vendor/514228";
+import { hS } from "../905/437088";
+import { bL } from "../905/38914";
+import { hE } from "../figma_app/272243";
+import { N } from "../905/438674";
+import { s_ } from "../905/17223";
+import { $z } from "../figma_app/617427";
+import { tx } from "../905/303541";
+import { F } from "../905/302958";
+import { XU } from "../905/576487";
+import { h as _$$h } from "../905/142086";
+import { Ce } from "../905/156213";
+import { c as _$$c } from "../905/370443";
+import { up } from "../905/760074";
+import { q5 } from "../figma_app/516028";
+export let $$b0 = Ju(function ({
+  titleText: e,
+  bodyText: t,
+  ...i
+}) {
+  let b = hS(i);
+  let v = wA();
+  let I = d4(e => e.repos);
+  let E = q5();
+  let x = useCallback(e => {
+    v(F.enqueue({
+      type: "file-moved",
+      i18n: {
+        id: XU.FILE_MOVE_FOLDER_BELL_ID,
+        params: {
+          text: e
+        }
+      }
+    }));
+  }, [v]);
+  return jsxs(bL, {
+    width: "sm",
+    manager: b,
+    children: [jsx(hE, {
+      children: e
+    }), jsx(s_, {
+      dispatch: v
+    }), t, jsx("div", {
+      className: "upsell_modals--footerRow--barMd modal--buttonRow--o2A0S",
+      children: jsxs("div", {
+        className: "upsell_modals--rightAlignedButtons--Y-exM",
+        children: [jsx($z, {
+          variant: "secondary",
+          onClick: () => {
+            v(Ce());
+          },
+          trackingProperties: {
+            trackingDescriptor: _$$c.CANCEL
+          },
+          children: tx("upsell.shared.cancel")
+        }), jsx("div", {
+          className: "upsell_modals--confirmButton--Yk-OB modal--confirmButton--SNUDv",
+          children: jsx(N.Button, {
+            href: "#",
+            onClick: () => {
+              if (!E) return;
+              let e = up(E, I);
+              _$$h({
+                key: E.key,
+                name: E.name,
+                folder_id: E.folderId,
+                team_id: E.teamId,
+                editor_type: E.editorType,
+                is_team_template: E.isTeamTemplate,
+                is_published_site: E.isPublishedSite,
+                parent_org_id: E.parentOrgId
+              }, e, v, {
+                handlesVisualBell: !0,
+                callback: x
+              });
+            },
+            children: tx("upsell.move_file_modes.move_to_team")
+          })
+        })]
+      })
+    })]
+  });
+}, "MoveFileProPlus");
+export const Y = $$b0;

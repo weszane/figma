@@ -1,0 +1,52 @@
+import { Qw } from "../905/989992";
+import { IT, mI } from "../figma_app/566371";
+import { $D } from "../905/11";
+import { FOrganizationLevelType } from "../figma_app/191312";
+import { zqW } from "../figma_app/43951";
+import { XP } from "../figma_app/465071";
+export function $$$$d1({
+  planType: e,
+  planParentId: t
+}) {
+  let [r] = IT(zqW({
+    orgId: t
+  }), {
+    enabled: e === FOrganizationLevelType.ORG && !!t
+  });
+  let {
+    status,
+    errors,
+    suspense,
+    data
+  } = r;
+  switch (status) {
+    case "loading":
+      return Qw.loadingSuspendable(suspense);
+    case "loaded":
+      return Qw.loadedSuspendable(data?.org?.activeOrgBillingPeriod?.isEla ?? !1, errors, suspense);
+    case "disabled":
+      return Qw.loadedSuspendable(!1, [], suspense);
+    case "errors":
+      return Qw.errorSuspendable(errors, suspense);
+  }
+}
+export function $$c0({
+  reportErrorsToTeam: e
+}) {
+  let t = XP({
+    reportErrorsToTeam: e
+  });
+  let r = $$$$d1({
+    planType: t.type,
+    planParentId: t.key.parentId
+  });
+  let [n] = mI(r);
+  if ("loaded" !== n.status) {
+    let t = Error("Error fetching isELA info");
+    $D(e, t);
+    return t;
+  }
+  return n.data;
+}
+export const d = $$c0;
+export const h = $$$$d1;

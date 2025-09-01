@@ -1,0 +1,966 @@
+import { jsxs, jsx, Fragment } from "react/jsx-runtime";
+import { useRef, useState, useMemo, Children, useEffect, useCallback, useContext } from "react";
+import { wA, d4 } from "../vendor/514228";
+import { SupportedLocales } from "../905/631683";
+import { qE } from "../figma_app/492908";
+import { Ez5, FAf, lyf, glU, nQ7, NLJ, rcl } from "../figma_app/763686";
+import { n3, IA } from "../905/859698";
+import { dI, fn } from "../905/871411";
+import { getFeatureFlags } from "../905/601108";
+import { fp, Xr } from "../figma_app/27355";
+import { G as _$$G } from "../figma_app/318030";
+import m from "classnames";
+import { parsePxNumber } from "../figma_app/783094";
+import { Uz } from "../905/63728";
+import { k as _$$k2 } from "../905/582200";
+import { V as _$$V } from "../905/506207";
+import { Gq } from "../figma_app/363242";
+import { CA } from "../figma_app/327588";
+import { to } from "../figma_app/828186";
+import { e as _$$e } from "../1528/93111";
+import { fk } from "../figma_app/618433";
+import { sw, Zs } from "../figma_app/914957";
+import { B as _$$B } from "../905/330741";
+import { Dm } from "../figma_app/8833";
+import { qw, UK } from "../figma_app/740163";
+import { q as _$$q, T as _$$T } from "../figma_app/590592";
+import { E7, _W } from "../905/216495";
+import { b as _$$b } from "../figma_app/755529";
+import { p8, dH, KH, eY as _$$eY, aV } from "../figma_app/722362";
+import { q5, tS } from "../figma_app/516028";
+import { o3, nt } from "../905/226610";
+import R, { VP } from "../905/18797";
+import { ut } from "../figma_app/84367";
+import { t as _$$t } from "../figma_app/501766";
+import { yU } from "../figma_app/221114";
+import { A5 } from "../figma_app/274104";
+import { vL } from "../905/826900";
+import { At } from "../figma_app/74043";
+import { M as _$$M } from "../figma_app/119924";
+import { zK, zM, lk } from "../905/182453";
+import { P as _$$P } from "../905/347284";
+import { B7 } from "../figma_app/144692";
+import { iP } from "../figma_app/803054";
+import { s4 } from "../figma_app/276332";
+import { of, Pt, rf } from "../figma_app/806412";
+import { Point } from "../905/736624";
+import { t as _$$t2, tx } from "../905/303541";
+import { eE as _$$eE } from "../905/709171";
+import { aY, NT } from "../figma_app/741237";
+import { IW, Gj } from "../figma_app/646357";
+import { VF } from "../figma_app/679183";
+import { $n } from "../905/521428";
+import { bL } from "../905/911410";
+import { vo, Y9, hE, nB } from "../figma_app/272243";
+import { UN } from "../905/700578";
+import { AutoLayout } from "../figma_app/947482";
+import { $$ } from "../figma_app/637027";
+import { XE, Uv } from "../figma_app/91703";
+import { u as _$$u } from "../9410/354452";
+import { O8 } from "../figma_app/393980";
+import { sO } from "../figma_app/21029";
+import { s1 } from "../figma_app/226737";
+import { Rc } from "../figma_app/634146";
+import { tA, rp } from "../figma_app/229710";
+import { Ao } from "../905/748636";
+import { FY, lf, Lp, Ph, ux, KE, eu as _$$eu, eh as _$$eh, By, w1, gq, jG, Mf, yR, iV, A7, tq, wR, qq, R as _$$R, dn, Fo, Ar, K8, ew as _$$ew, Jq, IV } from "../figma_app/386160";
+import { At as _$$At } from "../905/973142";
+import { Fk } from "../figma_app/167249";
+import { N as _$$N } from "../905/438674";
+import { b as _$$b2 } from "../905/217163";
+import { Zk, fI } from "../figma_app/626177";
+import { x1 } from "../905/714362";
+import { S as _$$S } from "../figma_app/552746";
+import { vq } from "../905/8732";
+import { ft } from "../figma_app/753501";
+import { m0 } from "../figma_app/976749";
+import { k as _$$k3 } from "../figma_app/564183";
+import { Y5 } from "../figma_app/455680";
+import { Um } from "../905/848862";
+import { Xo } from "../figma_app/482495";
+import { se } from "../642/171234";
+import { j as _$$j } from "../642/638075";
+import { cJ } from "../905/561485";
+import { G$ } from "../figma_app/159296";
+import { GY, _w } from "../642/435480";
+import { t as _$$t3 } from "../905/150656";
+import { sx } from "../905/449184";
+import { WN } from "../figma_app/638601";
+import { U as _$$U } from "../905/492359";
+import { D as _$$D } from "../642/26273";
+import { D9 } from "../figma_app/433401";
+import { H as _$$H } from "../figma_app/378458";
+import { m as _$$m } from "../905/717445";
+import { nT } from "../figma_app/53721";
+import { lY } from "../figma_app/779965";
+import { v2 } from "../1528/88743";
+import { bo } from "../figma_app/447445";
+import { uj0 } from "../figma_app/27776";
+var g = m;
+function ef({
+  initialPosition: e,
+  styleNameInputPrefix: t,
+  styleType: s,
+  inheritStyleKeyField: l,
+  onCreate: a,
+  recordingKey: d
+}) {
+  let c = wA();
+  let p = d4(e => e.mirror.selectedStyleProperties);
+  let h = d4(e => e.mirror.sceneGraphSelection);
+  let m = 1 === Object.keys(h).length ? Object.keys(h)[0] : null;
+  let g = m ? UN().get(m)?.type === "CMS_RICH_TEXT" : null;
+  let f = useRef(!g && Object.keys(h).length > 0);
+  let [x, y] = useState(!f.current && void 0);
+  let _ = sO();
+  let [b, C] = useState(s1());
+  let j = _ && Rc(s);
+  let {
+    styleRef,
+    createStyle
+  } = _$$u({
+    inheritStyleKeyField: l,
+    isCreatingFromSelection: f.current,
+    trackingOptions: {
+      styleType: s
+    },
+    shouldUseEyedropperStyleCreationFlow: !1
+  });
+  let w = of(d, "submit", () => {
+    let e = createStyle();
+    j && Ez5.slideThemeLibBindings().addStyleToLocalTheme(e || "", b);
+    c(XE());
+    g || c(Uv());
+    c(sw());
+    a && a(e || "");
+  });
+  let T = d4(e => {
+    let t = e.mirror.selectedStyleProperties;
+    switch (s) {
+      case "FILL":
+        return t.fillPaints && "length" in t.fillPaints && t.fillPaints.length > 0;
+      case "GRID":
+        return t.layoutGrids && t.layoutGrids.length > 0;
+      case "EFFECT":
+        return t.effects && t.effects.length > 0;
+      default:
+        return !0;
+    }
+  });
+  let N = e => {
+    switch (e) {
+      case "FILL":
+        return _$$t2("design_systems.create_style.color");
+      case "TEXT":
+        return _$$t2("design_systems.create_style.text");
+      case "EFFECT":
+        return _$$t2("design_systems.create_style.effect");
+      case "EXPORT":
+        return _$$t2("design_systems.create_style.export");
+      case "GRID":
+        return _$$t2("design_systems.create_style.guide");
+      default:
+        return _$$t2("design_systems.create_style.create_new_style_generic");
+    }
+  };
+  if (!p.styleType) return null;
+  let I = jsxs("div", {
+    className: FY,
+    children: [jsx(O8, {
+      isInspectPanel: !1,
+      onEnterPressed: w,
+      recordingKey: "createStyleModal",
+      selectedStyleProperties: p,
+      setSlideThemeId: C,
+      showProperties: x,
+      showSlideThemeField: j,
+      slideThemeId: b,
+      styleNameInputPrefix: t,
+      type: p.styleType
+    }), !styleRef && jsx("div", {
+      className: "create_style_modal--errorMessage--8ZpFE",
+      children: tx("design_systems.create_style.an_error_occurred_while_creating_the_style")
+    }), jsxs(AutoLayout, {
+      horizontalAlignItems: f.current ? void 0 : "end",
+      verticalAlignItems: "center",
+      spacing: f.current ? "auto" : void 0,
+      padding: 8,
+      children: [f.current && jsx($n, {
+        variant: "link",
+        onClick: () => y(!x),
+        recordingKey: Pt("createStyleModal", "moreOptions"),
+        children: x ? tx("design_systems.create_style.hide_options") : tx("design_systems.create_style.show_more_options")
+      }), getFeatureFlags().ce_tv_fpl_create_style_modal ? jsx($n, {
+        onClick: w,
+        disabled: !T || !styleRef,
+        children: tx("design_systems.create_style.create_style")
+      }) : jsx($$, {
+        style: {
+          justifySelf: "right"
+        },
+        onClick: w,
+        disabled: !T || !styleRef,
+        tabIndex: 0,
+        children: tx("design_systems.create_style.create_style")
+      })]
+    })]
+  });
+  return getFeatureFlags().ce_tv_fpl_create_style_modal ? jsx(zK.Provider, {
+    value: zM.CREATE_STYLE,
+    children: jsx(bL, {
+      onClose: () => {
+        c(sw());
+      },
+      width: tA,
+      defaultPosition: e,
+      draggable: "header",
+      recordingKey: Pt("createStyleModal"),
+      children: jsxs(vo, {
+        children: [jsx(Y9, {
+          children: jsx(hE, {
+            children: N(p.styleType)
+          })
+        }), jsx(nB, {
+          padding: 0,
+          children: I
+        })]
+      })
+    })
+  }) : jsx(zK.Provider, {
+    value: zM.CREATE_STYLE,
+    children: jsx(Ao, {
+      title: N(p.styleType),
+      headerSize: "small",
+      initialWidth: tA,
+      initialPosition: e,
+      onClose: () => {
+        c(sw());
+      },
+      recordingKey: Pt("createStyleModal"),
+      dragHeaderOnly: !0,
+      children: I
+    })
+  });
+}
+function e_({
+  canEdit: e,
+  isInspectPanel: t,
+  isRenaming: s,
+  recordingKey: n,
+  stylePreviewShown: l
+}) {
+  let a = wA();
+  let o = d4(e => e.mirror.selectedStyleProperties);
+  let d = IW(l);
+  let u = dI(o.guid);
+  let p = p8("isReadOnly");
+  let h = !!d || !e || p;
+  let m = "";
+  let g = "";
+  let [f, x] = Fk((e, t) => {
+    if (d) return ["", ""];
+    let s = e.get(t);
+    return [s?.name || "", s?.description || ""];
+  }, u);
+  d ? (m = d.name || "", g = d.description_rt ? _$$At(d.description_rt) : d.description || "") : dI(o.guid) && (m = f, g = _$$At(x));
+  return jsx(zK.Provider, {
+    value: zM.EDIT_STYLE,
+    children: jsx(O8, {
+      recordingKey: n,
+      isInspectPanel: t,
+      isRenaming: s,
+      onEnterPressed: () => a(sw()),
+      selectedStyleProperties: o,
+      styleDescription: g,
+      styleName: m,
+      type: o.styleType,
+      viewOnly: h
+    })
+  });
+}
+function ev({
+  stylePreviewShown: e
+}) {
+  let t = IW(e);
+  let s = _$$b2({
+    libraryKey: t?.library_key,
+    nodeId: t?.node_id
+  });
+  let i = useMemo(() => s.data?.type === "team", [s.data]);
+  let l = useMemo(() => s.data?.type === "team" ? s.data.link : null, [s.data]);
+  return l && i ? jsx(_$$k2, {
+    name: "external_style_options",
+    children: jsx(Zk, {
+      children: jsx(fI, {
+        children: jsx("div", {
+          className: lf,
+          children: jsx(_$$N, {
+            newTab: !0,
+            href: l,
+            trusted: !0,
+            children: tx("fullscreen.properties_panel.go_to_style_definition_to_edit")
+          })
+        })
+      })
+    }, "external-style-options")
+  }) : null;
+}
+function eS({
+  onCloseStylePreviewModal: e,
+  recordingKey: t
+}) {
+  let s = q5();
+  let n = ut(aY(), FAf.DESIGN);
+  let l = p8("topLevelMode");
+  let a = d4(e => e.library);
+  let d = d4(e => e.stylePreviewShown);
+  let u = _$$b("guid");
+  let p = _$$b("styleType");
+  if (!d.isShown || ![FAf.DESIGN, FAf.SITE, FAf.INSPECT, FAf.ILLUSTRATION].includes(n)) return null;
+  let h = new Point(d.rowLeft - tA, d.rowTop);
+  if (d.isCreating) {
+    let {
+      styleType,
+      inheritStyleKeyField,
+      styleNameInputPrefix
+    } = d;
+    return jsx(ef, {
+      recordingKey: "createStyleModal",
+      initialPosition: h,
+      styleNameInputPrefix,
+      styleType,
+      inheritStyleKeyField
+    });
+  }
+  let m = E7(u);
+  let g = _W(p, s4.NONE);
+  if (null === m) return null;
+  let f = !_$$eE(d.style, s);
+  let x = dI(m);
+  if (!(a.local.styles[x] && !a.local.styles[x]?.is_soft_deleted) && !f) return null;
+  let y = s?.canEdit ?? !1;
+  let _ = f || !y || l === lyf.BRANCHING;
+  return jsx(zK.Provider, {
+    value: zM.EDIT_STYLE,
+    children: jsx(Ao, {
+      title: function (e, t) {
+        if (t) switch (e) {
+          case "FILL":
+            return _$$t2("design_systems.styles.view_color_style");
+          case "TEXT":
+            return _$$t2("design_systems.styles.view_text_style");
+          case "EFFECT":
+            return _$$t2("design_systems.styles.view_effect_style");
+          case "GRID":
+            return _$$t2("design_systems.styles.view_guide_style");
+          default:
+            return _$$t2("design_systems.styles.view_style");
+        }
+        switch (e) {
+          case "FILL":
+            return _$$t2("design_systems.styles.edit_color_style");
+          case "TEXT":
+            return _$$t2("design_systems.styles.edit_text_style");
+          case "EFFECT":
+            return _$$t2("design_systems.styles.edit_effect_style");
+          case "GRID":
+            return _$$t2("design_systems.styles.edit_guide_style");
+          default:
+            return _$$t2("design_systems.styles.edit_style");
+        }
+      }(g, _),
+      headerSize: "small",
+      initialWidth: tA,
+      initialPosition: h,
+      onClose: e,
+      recordingKey: Pt(t, "modal"),
+      dragHeaderOnly: !0,
+      children: jsxs("div", {
+        className: FY,
+        children: [jsx(VF, {
+          isVisible: !0,
+          children: () => jsx(e_, {
+            recordingKey: Pt(t, "stylePreviewPanel"),
+            canEdit: y,
+            isInspectPanel: n === FAf.INSPECT,
+            isRenaming: a.isRenamingSelectedStyle,
+            stylePreviewShown: d
+          }, "style-preview-panel")
+        }), jsx(VF, {
+          isVisible: f,
+          children: () => jsx(ev, {
+            stylePreviewShown: d
+          })
+        })]
+      })
+    }, Gj(d.style))
+  });
+}
+function ek({
+  onCloseStylePreviewModal: e,
+  onKeyDown: t,
+  recordingKey: s,
+  shouldAnimate: n
+}) {
+  return jsx(vL, {
+    name: "propertiesPanel",
+    focusOnMount: !0,
+    handleKeyDown: t,
+    children: jsxs(_$$V, {
+      className: g()(Lp, Ph),
+      children: [jsx(_$$P, {
+        hideScrollbar: !0,
+        scrollingDisabled: !0,
+        className: g()(ux, KE, Dm, Ph, {
+          [_$$eu]: n
+        }),
+        width: iP,
+        children: jsx("div", {
+          className: _$$eh,
+          "data-non-interactive": !0,
+          children: jsx(B7, {})
+        })
+      }), jsx(eS, {
+        onCloseStylePreviewModal: e,
+        recordingKey: s
+      })]
+    })
+  });
+}
+function eK({
+  activeTab: e,
+  children: t,
+  isStyleEditMode: s,
+  recordingKey: l,
+  refMainScrollContainer: a
+}) {
+  var d;
+  let c = wA();
+  let u = p8("isReadOnly");
+  let h = p8("topLevelMode");
+  let m = Um();
+  let f = Xo();
+  let [x, y] = fp(_$$j);
+  let _ = cJ();
+  let b = !!(m || f?.modal);
+  let C = rf(l, "mousedown", () => {
+    Y5.deselectProperty();
+    c(XE());
+    c(vq());
+    c(sw());
+    c(Uv());
+    _ && (y([]), glU?.setSelectedInteractions([]));
+  });
+  let j = se();
+  let v = m0();
+  let S = e === FAf.COMMENT;
+  let w = sO();
+  let T = !s || !b;
+  let N = !S && T;
+  let I = ft();
+  let E = G$();
+  d = {
+    tab: FAf[e],
+    topLevelMode: lyf[h],
+    shouldRenderInspectTab: E
+  };
+  0 === Children.toArray(t).length && x1("PropertiesPanel", "Rendering empty properties panel", d);
+  let M = _$$k3();
+  let P = S && !(u && !v) && !w;
+  let L = jsx(_$$S.div, {
+    className: g()({
+      [By]: P,
+      [_$$eh]: !P,
+      [w1]: M
+    }),
+    onMouseDown: I ? void 0 : C,
+    onPointerDown: I ? C : void 0,
+    "data-non-interactive": !0,
+    children: t
+  });
+  return S ? L : jsx("div", {
+    className: gq,
+    onFocus: j,
+    children: jsx(_$$P, {
+      enableOverscroll: !0,
+      ref: a,
+      className: jG,
+      containerId: rp,
+      hideScrollbar: !N,
+      onContextMenu: GY,
+      scrollingDisabled: S || (s ? b : !!m),
+      children: L
+    }, e)
+  });
+}
+eK.displayName = "PropertiesPanel";
+function eq(e, t) {
+  return {
+    [FAf.DESIGN]: {
+      label: _$$t2("fullscreen.properties_panel.design"),
+      tab: FAf.DESIGN,
+      className: Mf,
+      recordingKey: "designTab",
+      analyticsName: "design"
+    },
+    [FAf.PROTOTYPE]: {
+      label: t ? _$$t2("fullscreen.properties_panel.interactive") : _$$t2("fullscreen.properties_panel.prototype"),
+      tab: FAf.PROTOTYPE,
+      className: Mf,
+      recordingKey: t ? "interactionsTab" : "prototypeTab",
+      analyticsName: t ? "interactions" : "prototype"
+    },
+    [FAf.INSPECT]: {
+      label: _$$t2("fullscreen.properties_panel.properties"),
+      tab: FAf.INSPECT,
+      className: Mf,
+      recordingKey: "inspectTab",
+      analyticsName: "inspect"
+    },
+    [FAf.COMMENT]: {
+      label: _$$t2("fullscreen.properties_panel.comments"),
+      tab: FAf.COMMENT,
+      className: Mf,
+      recordingKey: "commentTab",
+      analyticsName: "comment"
+    },
+    [FAf.EXPORT]: {
+      label: _$$t2("fullscreen.properties_panel.export"),
+      tab: FAf.EXPORT,
+      className: Mf,
+      recordingKey: "exportTab",
+      analyticsName: "export"
+    },
+    [FAf.SLIDE]: {
+      label: _$$t2("fullscreen.properties_panel.design"),
+      tab: FAf.SLIDE,
+      className: Mf,
+      recordingKey: "designTab",
+      analyticsName: "design"
+    },
+    [FAf.SLIDE_ANIMATION]: {
+      label: _$$t2("slides.properties_panel.animate"),
+      tab: FAf.SLIDE_ANIMATION,
+      className: Mf,
+      recordingKey: "animateTab",
+      analyticsName: "animate"
+    },
+    [FAf.SITE]: {
+      label: _$$t2("fullscreen.properties_panel.design"),
+      tab: FAf.SITE,
+      className: Mf,
+      recordingKey: "sitesTab",
+      analyticsName: "sites"
+    },
+    [FAf.DAKOTA]: {
+      label: _$$t2("dakota.properties_panel.dakota_panel.tab_title"),
+      tab: FAf.DAKOTA,
+      className: Mf,
+      recordingKey: "dakotaTab",
+      analyticsName: "dakota"
+    },
+    [FAf.ILLUSTRATION]: {
+      label: _$$t2("fullscreen.properties_panel.draw"),
+      tab: FAf.ILLUSTRATION,
+      className: Mf,
+      recordingKey: "illustrationTab",
+      analyticsName: "illustration"
+    },
+    [FAf.COOPER]: {
+      label: _$$t2("fullscreen.properties_panel.design"),
+      tab: FAf.COOPER,
+      className: Mf,
+      recordingKey: "designTab",
+      analyticsName: "design"
+    }
+  }[e];
+}
+function eJ({
+  activeTab: e,
+  recordingKey: t
+}) {
+  let s = _$$e();
+  let l = G$();
+  let a = d4(e => e.mirror.appModel.topLevelMode);
+  let d = dH();
+  let c = p8("isReadOnly");
+  let u = m0();
+  let p = c && !u;
+  let h = sO();
+  let m = cJ();
+  let g = to();
+  let f = _$$U();
+  let x = d4(e => {
+    var t;
+    t = e.selectedView;
+    return !!_$$m().ce_il_root && "fullscreen" === t.view && t.editorType === nT.Illustration;
+  });
+  let y = KH();
+  let _ = useMemo(() => Object.keys(y), [y]);
+  let b = _$$eY();
+  let [C, S] = useState(!1);
+  let k = ut(Ez5?.interopToolMode(), nQ7.SELF) === nQ7.DESIGN;
+  useEffect(() => {
+    if (f) {
+      if (_$$D(b, _)?.fieldSchemaStableId) {
+        S(!0);
+        return;
+      }
+      e === FAf.DAKOTA && NT(FAf.SITE);
+      S(!1);
+    }
+  }, [f, _, b, e]);
+  let w = (() => {
+    let t = h || m ? [FAf.COMMENT] : [FAf.COMMENT, FAf.INSPECT];
+    switch (a) {
+      case lyf.LAYOUT:
+        if (p) return t;
+        if (e === FAf.COMMENT) return [FAf.COMMENT];
+        if (x) return [FAf.ILLUSTRATION];
+        if (m) {
+          if (s) return [FAf.DAKOTA];
+          return C ? [FAf.SITE, FAf.PROTOTYPE, FAf.DAKOTA] : [FAf.SITE, FAf.PROTOTYPE];
+        }
+        if (h) return [FAf.SLIDE, FAf.SLIDE_ANIMATION];
+        if (g) return [FAf.DESIGN];
+        return l ? [FAf.DESIGN, FAf.PROTOTYPE, FAf.INSPECT] : [FAf.DESIGN, FAf.PROTOTYPE];
+      case lyf.PREVIEW:
+      case lyf.DEV_HANDOFF:
+        return t;
+      case lyf.BRANCHING:
+        return [FAf.INSPECT];
+      default:
+        return [FAf.DESIGN, FAf.PROTOTYPE, FAf.INSPECT];
+    }
+  })();
+  let T = w.find(t => t === e);
+  let N = w.map((t, s) => {
+    let r = eq(t, m);
+    let n = r.tab === e || 0 === s && void 0 === T;
+    let i = r.className;
+    n && (i = w.length > 1 ? yR : iV);
+    return {
+      ...r,
+      className: i,
+      active: n,
+      topLevelMode: a,
+      currentTool: d
+    };
+  });
+  return w.length && (!g || k) ? jsx(eZ, {
+    recordingKey: t,
+    tabInfo: N
+  }) : null;
+}
+function eZ({
+  tabInfo: e,
+  recordingKey: t
+}) {
+  let s = _$$k3();
+  let n = WN();
+  let l = e.reduce((e, t) => (e[t.tab] = !0, e), {});
+  let a = e.find(e => e.active);
+  let [d,, c] = _$$t3.useManagedTabs(l, a?.tab.toString() ?? "", e => {
+    let t = parseInt(e);
+    let r = eq(t, u).analyticsName;
+    if (sx("properties-panel-select-tab", {
+      tab: r
+    }), p === NLJ.SCALE && t === FAf.PROTOTYPE && Y5.triggerAction("set-tool-default"), t === FAf.INSPECT && s) {
+      n(rcl.ENTER_INSPECT_MODE);
+      return;
+    }
+    NT(t);
+    h === lyf.PREVIEW && (t === FAf.COMMENT ? Y5.triggerAction("set-tool-comments") : Y5.triggerAction("set-tool-default"));
+  }, {
+    recordingKey: Pt(t, "tabs")
+  });
+  let u = cJ();
+  let p = dH();
+  let h = d4(e => e.mirror.appModel.topLevelMode);
+  return jsxs("div", {
+    className: A7,
+    children: [jsx("div", {
+      className: tq,
+      children: jsx(_$$t3.TabStrip, {
+        manager: c,
+        children: e.map((e, t) => jsx(_$$t3.Tab, {
+          ...d[e.tab],
+          children: e.label
+        }, `props-panel-tab-${t}`))
+      })
+    }), jsx("div", {
+      className: wR,
+      children: jsx(_$$H, {
+        recordingKey: Pt(t, "zoomMenu")
+      })
+    }), jsx("div", {
+      "data-onboarding-key": D9,
+      className: qq
+    })]
+  });
+}
+export function $$e20({
+  activeTab: e,
+  children: t,
+  getPanelMode: s,
+  recordingKey: l,
+  refMainScrollContainer: a,
+  trackingAlwaysEnabled: p = !1,
+  shouldDeferCanvasUpdateOnPanelResize: h
+}) {
+  let m = wA();
+  let g = aV();
+  let f = _$$b("guid");
+  let _ = fn(E7(f));
+  let b = useCallback(e => {
+    _ && (e.event.keyCode === Uz.ESCAPE ? (e.accept(), glU?.selectStyle(n3.INVALID, IA.INVALID)) : e.event.keyCode === Uz.F && glU?.selectStyle(n3.INVALID, IA.INVALID));
+  }, [_]);
+  let C = d4(e => e.loadingState);
+  let j = VP(C, "edit_button_upgrading_to_edit");
+  let v = g || j;
+  let S = useCallback(() => {
+    glU?.selectStyle(n3.INVALID, IA.INVALID);
+    m(sw());
+    m(_$$B());
+  }, [m]);
+  let T = e === FAf.COMMENT;
+  let N = useCallback(() => void 0, []);
+  let I = function (e) {
+    let t = p8("currentPage") || "0:1";
+    let s = KH();
+    let r = e();
+    return useCallback(() => ({
+      pageId: t,
+      selectedNodeIds: Object.keys(s),
+      panelMode: r
+    }), [t, s, r]);
+  }(s ?? N);
+  let P = useCallback(({
+    styleType: e,
+    inheritStyleKeyField: t,
+    nodeId: s,
+    rowLeft: r,
+    rowTop: n
+  }) => {
+    m(sw());
+    m(Zs({
+      rowLeft: r,
+      rowTop: n,
+      styleType: e,
+      inheritStyleKeyField: t,
+      nodeId: s
+    }));
+  }, [m]);
+  return v ? jsx(ek, {
+    onKeyDown: b,
+    onCloseStylePreviewModal: S,
+    shouldAnimate: g
+  }) : jsx(_$$k2, {
+    name: "properties_panel",
+    trackingEnabled: getFeatureFlags().trackable_properties || p,
+    alsoTrack: I,
+    trackImpressions: !1,
+    children: jsx(vL, {
+      name: "propertiesPanel",
+      focusOnMount: !T,
+      handleKeyDown: b,
+      children: jsx(lk.Provider, {
+        value: P,
+        children: jsx(e4, {
+          activeTab: e,
+          recordingKey: l,
+          refMainScrollContainer: a,
+          onCloseStylePreviewModal: S,
+          shouldDeferCanvasUpdateOnPanelResize: h,
+          children: t
+        })
+      })
+    })
+  });
+}
+function e4({
+  activeTab: e,
+  children: t,
+  recordingKey: s,
+  refMainScrollContainer: i,
+  onCloseStylePreviewModal: l,
+  shouldDeferCanvasUpdateOnPanelResize: a
+}) {
+  let d = _$$e();
+  let m = _$$b("guid");
+  let f = fn(E7(m));
+  let x = e === FAf.COMMENT;
+  let y = p8("topLevelMode") === lyf.HISTORY;
+  let b = function () {
+    let e = qw();
+    return "number" != typeof e || e < e9 ? (UK().propertiesPanelSplitPosition.set(e9), e9) : e;
+  }();
+  let k = ut(Ez5?.uiState().inProductHelpSidePanelWidth, 0);
+  let {
+    inProductHelpViewType
+  } = A5();
+  let {
+    isRightPanelCollapsed
+  } = useContext(_$$t);
+  let K = R;
+  let V = _$$q();
+  let U = to();
+  let z = CA();
+  U && x && (K = !1);
+  let W = p8("showUi");
+  let $ = tS();
+  let Y = fk($);
+  let X = o3(nt.newResizablePanel);
+  let q = ut(UK().renderRulers, !1);
+  let J = _$$T();
+  let Z = getFeatureFlags().properties_panel_resize_lag_fix;
+  let Q = Xr(At);
+  let {
+    setRulerVisibilityOnInitialSizeChange,
+    setRulerVisibilityOnDragEnd,
+    shouldShowGhostRulers
+  } = _$$M({
+    shouldDeferCanvasUpdateOnPanelResize: !!a
+  });
+  let er = jsxs(_w, {
+    showRightSidebarPill: K,
+    children: [jsx(v2, {
+      recordingKey: s
+    }), y && jsx(yU, {
+      recordingKey: "versionHistoryView",
+      fileHasCMSData: Y
+    }), !K && !y && jsxs(Fragment, {
+      children: [jsx(eJ, {
+        recordingKey: s,
+        activeTab: e
+      }), jsx(eK, {
+        recordingKey: s,
+        activeTab: e,
+        isStyleEditMode: f,
+        refMainScrollContainer: i,
+        children: t
+      })]
+    }), jsx(eS, {
+      onCloseStylePreviewModal: l,
+      recordingKey: s
+    })]
+  });
+  return X ? jsx(_$$V, {
+    children: jsx(_$$G, {
+      className: g()(Lp, {
+        [_$$R]: !W,
+        [dn]: K,
+        [Ph]: !V && !d || z,
+        [Fo]: "side_panel" === inProductHelpViewType,
+        [Ar]: getFeatureFlags().properties_panel_isolate,
+        [K8]: shouldShowGhostRulers
+      }),
+      "data-cancel-insertable-resource-drag-and-drop": !0,
+      "data-onboarding-key": "properties-panel",
+      "data-testid": "properties-panel",
+      defaultSize: b,
+      maxSize: e7,
+      minSize: e9,
+      onContextMenu: GY,
+      onDragEnd: e => {
+        a && (te(e), setRulerVisibilityOnDragEnd());
+        Q(!1);
+      },
+      onInitialSizeChange: () => {
+        a && (te(e9), setRulerVisibilityOnInitialSizeChange());
+        Q(!0);
+      },
+      onSizeChange__SLOW: a ? void 0 : te,
+      recordingKey: "propertiesPanelContainer.resizablePanel",
+      shouldDeferCanvasUpdateOnPanelResize: a,
+      side: "left",
+      style: {
+        "--inProductHelpSidePanelWidth": `${k}px`
+      },
+      children: jsx(bo, {
+        children: jsx("div", {
+          className: g()(ux, Dm, {
+            [_$$ew]: q,
+            [Ph]: !V && !d || z,
+            [Jq]: !J
+          }),
+          children: er
+        })
+      })
+    })
+  }) : jsx(_$$V, {
+    className: g()(Lp, {
+      [IV]: Z,
+      [_$$R]: !W,
+      [dn]: K,
+      [Ph]: !V && !d || z,
+      [Fo]: "side_panel" === inProductHelpViewType,
+      [Ar]: getFeatureFlags().properties_panel_isolate
+    }),
+    style: {
+      width: Z ? void 0 : b,
+      "--inProductHelpSidePanelWidth": `${k}px`
+    },
+    children: jsx(bo, {
+      children: jsx(e6, {
+        isCollapsed: isRightPanelCollapsed,
+        isUIMinimized: V,
+        width: b,
+        children: er
+      })
+    })
+  });
+}
+let e5 = e => {
+  te(e);
+};
+function e6({
+  children: e,
+  isUIMinimized: t,
+  width: s
+}) {
+  let n = _$$e();
+  let i = CA();
+  let l = ut(UK().renderRulers, !1);
+  let a = _$$T();
+  return jsx(lY, {
+    className: g()(ux, Dm, {
+      [_$$ew]: l,
+      [Ph]: !t && !n || i,
+      [Jq]: !a
+    }),
+    "data-cancel-insertable-resource-drag-and-drop": !0,
+    "data-onboarding-key": "properties-panel",
+    "data-testid": "properties-panel",
+    onContextMenu: GY,
+    onResize: e5,
+    recordingKey: "propertiesPanelContainer.resizablePanel",
+    side: "left",
+    size: s,
+    children: e
+  });
+}
+let e8 = {
+  aaa: 1,
+  aal: 1.3,
+  en: 1,
+  "es-es": 1,
+  "es-la": 1,
+  "ko-kr": 1,
+  ja: 1,
+  "pt-br": 1
+};
+let e7 = 500;
+let e9 = function (e) {
+  let t = parsePxNumber(e) + 1;
+  if (!getFeatureFlags().ui3p_locale_aware_properties_panel) return t;
+  let s = Gq().getPrimaryLocale(!0);
+  for (let e of SupportedLocales) if (s === e) return Math.min(Math.ceil(t * e8[e]), e7);
+  return t;
+}(uj0);
+function te(e) {
+  let t = qE(e, e9, e7);
+  UK().propertiesPanelSplitPosition.set(t);
+  getFeatureFlags().properties_panel_resize_lag_fix && document.documentElement.style.setProperty("--properties-panel-width", `${t}px`);
+}
+export const j = $$e20;

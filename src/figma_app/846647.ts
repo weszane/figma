@@ -1,0 +1,58 @@
+import { jsx } from "react/jsx-runtime";
+import { useState } from "react";
+import { wA } from "../vendor/514228";
+import { h } from "../905/207101";
+import { tx } from "../905/303541";
+import { b as _$$b } from "../905/985254";
+import { Z } from "../905/104740";
+import { VF } from "../figma_app/989514";
+import { b as _$$b2 } from "../figma_app/5657";
+import { zU } from "../figma_app/202626";
+import { F_, EL } from "../905/748636";
+export let $$h0 = "text-panel-container";
+export function $$m1(e) {
+  let [t, r] = useState(!1);
+  let m = Z();
+  let g = wA();
+  if (h(() => {
+    queueMicrotask(async function () {
+      let t = e.getNodeForViewportFocus?.();
+      let n = e.getNodeToSelect();
+      n ? (await zU({
+        navigate: m,
+        guidToFocus: t?.guid,
+        guidToSelect: n.guid
+      }), r(!0), g(_$$b({
+        format_text_step_shown: !0
+      }))) : e.skip();
+    });
+  }), !t) return null;
+  let f = e.fromCursorBot ? _$$b2 : VF;
+  let E = {
+    dismissModal: e.onClose,
+    disableHighlight: !0,
+    targetKey: $$h0,
+    title: e.title || tx("tooltips_plus_onboarding.text_formatting.title"),
+    trackingContextName: "Tooltips+ Text Formatting Step",
+    lowerLeftText: e.lowerLeftText,
+    onSecondaryCtaClick: e.onSecondaryCtaClick,
+    onPrimaryCtaClick: e.onPrimaryCtaClick,
+    arrowPosition: F_.RIGHT_BODY,
+    shouldCenterArrow: EL.FALLBACK,
+    pointsTo: "designPanel",
+    primaryCtaProps: e.primaryCtaProps,
+    secondaryCtaProps: e.secondaryCtaProps
+  };
+  let y = {
+    ...E,
+    collapseToTopRight: e.fromCursorBot,
+    trackingContextName: "Cursor Bot Text Formatting Step" + (e.isFollowUp ? " (Reactive Follow Up)" : "")
+  };
+  let b = tx("tooltips_plus_onboarding.text_formatting_ui3.description");
+  return jsx(f, {
+    ...(e.fromCursorBot ? y : E),
+    children: e.bodyText || b
+  });
+}
+export const B = $$h0;
+export const P = $$m1;

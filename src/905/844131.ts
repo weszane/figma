@@ -1,0 +1,91 @@
+import { DN } from "../905/657224";
+import { sn } from "../905/542194";
+import { sf } from "../905/929976";
+import { yJ, bE, sF } from "../figma_app/78808";
+import { OB, M3, ST } from "../figma_app/91703";
+import { MV, lX, Xk, zU, q0, N, hh } from "../figma_app/107215";
+import { ge } from "../figma_app/349248";
+import { K } from "../905/301652";
+import { oD } from "../figma_app/53721";
+export let $$p1 = {
+  view: "recentsAndSharing"
+};
+export function $$m0(e = $$p1, t) {
+  if (sf.matches(t)) {
+    sn.start("page_selected_view");
+    let {
+      fromPopstate,
+      forceReplaceState,
+      ...n
+    } = t.payload;
+    return n;
+  }
+  if (OB.matches(t)) {
+    let i = {
+      ...e,
+      fileKey: t.payload.file.key
+    };
+    oD(e.editorType) !== oD(t.payload.fullscreenEditorType) && (i.editorType = t.payload.fullscreenEditorType);
+    return i;
+  }
+  if (MV.matches(t)) return {
+    ...e,
+    tryPluginId: void 0,
+    tryPluginName: void 0,
+    tryPluginVersionId: void 0
+  };
+  if (M3.matches(t)) return {
+    ...e,
+    filePermissionsModalTab: t.payload.view
+  };
+  if ((yJ.matches(t) || bE.matches(t) || sF.matches(t)) && "prototype" === e.view) {
+    if (t.payload.file.key === e.file.key) return {
+      ...e,
+      file: ge({
+        ...e.file,
+        ...t.payload.file
+      })
+    };
+  } else if (ST.matches(t) && ("fullscreen" === e.view || "prototype" === e.view)) return {
+    ...e,
+    commentThreadId: void 0
+  };else if (lX.matches(t) && "fullscreen" === e.view) {
+    let i = e.workshopUserNames || {};
+    let r = !!t.payload && t.payload.id;
+    let a = !!r && localStorage.getItem(K(r));
+    r && a && (i[r] = a);
+    let s = !!DN().get(Xk);
+    return {
+      ...e,
+      workshopModeInfo: r ? {
+        id: r,
+        until: t.payload.until
+      } : void 0,
+      workshopModeInfoLoaded: t.payload.loaded,
+      workshopUserNames: i,
+      starterKitHasBeenHidden: !1,
+      figjamEditorOnboardingStarted: s,
+      figjamEditorOnboardingFinishedOrDismissed: s
+    };
+  } else if (zU.matches(t) && "fullscreen" === e.view) {
+    let i = e.workshopModeInfo?.id;
+    let n = e.workshopUserNames || {};
+    i && (n[i] = t.payload.name);
+    return {
+      ...e,
+      workshopUserNames: n
+    };
+  } else if (q0.matches(t)) return {
+    ...e,
+    starterKitHasBeenHidden: !0
+  };else if (N.matches(t)) return {
+    ...e,
+    figjamEditorOnboardingStarted: !0
+  };else if (hh.matches(t)) return {
+    ...e,
+    figjamEditorOnboardingFinishedOrDismissed: !0
+  };
+  return e;
+}
+export const NG = $$m0;
+export const o0 = $$p1;

@@ -1,0 +1,1 @@
+export { Lg, Ns, PN, QJ, b_, lZ, nl, tw } from "../figma_app/897289";

@@ -1,0 +1,269 @@
+import { jsx } from "react/jsx-runtime";
+import { useEffect } from "react";
+import { wA, d4 } from "../vendor/514228";
+import { filterNotNullish } from "../figma_app/656233";
+import { getFeatureFlags } from "../905/601108";
+import { eU, zl } from "../figma_app/27355";
+import { ED } from "../905/714362";
+import { t as _$$t } from "../905/303541";
+import { to } from "../905/156213";
+import { PK } from "../figma_app/124493";
+import { Dm } from "../figma_app/8833";
+import { F as _$$F } from "../905/224";
+import { HZ } from "../figma_app/186343";
+import { p8 } from "../figma_app/722362";
+import { q5, yV } from "../figma_app/516028";
+import { FFileType } from "../figma_app/191312";
+import { J9 } from "../figma_app/345997";
+import { b as _$$b } from "../905/165519";
+import { vL } from "../905/652992";
+import { ZN } from "../figma_app/630077";
+import { Q } from "../figma_app/320600";
+import { hZ } from "../0c62c2fd/646972";
+import { cT } from "../figma_app/32128";
+import { J } from "../905/521144";
+import { A as _$$A } from "../figma_app/965813";
+import { DV } from "../905/739964";
+import { E as _$$E } from "../figma_app/999099";
+import { HZ as _$$HZ, $t } from "../figma_app/29287";
+if (443 == require.j) {}
+if (443 == require.j) {}
+export let $$R1 = eU(!1);
+export function $$A0({
+  clientX: e,
+  clientY: t,
+  pageIds: r,
+  selectedView: A,
+  shouldShowDuplicateOption: O
+}) {
+  let F = wA();
+  let P = d4(e => e.mirror.appModel);
+  let L = q5();
+  let D = p8("pagesList");
+  let M = HZ();
+  let B = _$$F.useShouldHideStarterCtaForOpenFile();
+  let U = cT();
+  let W = hZ();
+  let $ = 1 === r.length && void 0 !== r[0] ? function ({
+    pageId: e,
+    openFile: t,
+    pagesList: r,
+    team: a,
+    shouldShowDuplicateOption: s,
+    shouldPaywallForDraftsPageLimitV1: i,
+    dispatch: n,
+    hideUpsellPlanCta: l,
+    isFileReadOnly: _,
+    isK12OrgStudent: f
+  }) {
+    var g;
+    let h = r.length;
+    let j = r.filter(e => !e.isDivider).length;
+    let T = r.find(t => t.nodeId === e);
+    let E = !!T && T.isDivider;
+    let R = r => _$$HZ() && T && t && t.editorType === FFileType.WHITEBOARD ? [{
+      separator: !0
+    }, {
+      name: "create-slides-outline-from-figjam",
+      callback: () => $t({
+        pageGuids: [e],
+        dispatch: r,
+        source: _$$E.FJ_PAGE_MENU
+      })
+    }] : [];
+    if (_ || f) return [{
+      action: "page-copy-link",
+      args: {
+        nodeId: e
+      }
+    }, ...R(n)];
+    let A = () => getFeatureFlags().move_page_to_new_file && T && t ? (ED("getPageMoveMenuItem", "Parameters", {
+      pageId: e,
+      folderId: "1",
+      fileKey: t.key
+    }), {
+      name: "page-move-to-new-file",
+      callback: () => {
+        !function (e, t, r, a, s = {}, i = !0) {
+          if (!e) return;
+          let n = {
+            ...s,
+            type: _$$A.FILE,
+            fileKey: e.key,
+            file: e,
+            afterFileMove: void 0,
+            isMovePageToNewFile: i,
+            page_id: r
+          };
+          t(to({
+            type: J(),
+            data: n
+          }));
+        }({
+          key: t.key,
+          name: t.name,
+          folder_id: t.folderId,
+          team_id: t.teamId,
+          editor_type: t.editorType
+        }, n, e);
+      }
+    }) : null;
+    let O = s ? (g = E ? _$$t("fullscreen_actions.divider-duplicate") : _$$t("fullscreen_actions.page-duplicate"), t && (J9({
+      openFile: t,
+      pageCount: h
+    }) || i({
+      openFile: t,
+      pageCount: h
+    })) ? {
+      name: "page-duplicate",
+      callback: () => {
+        n(to({
+          type: DV,
+          data: {
+            team: a,
+            resource: vL.PAGE,
+            action: ZN.DUPLICATE_PAGE,
+            editorType: t.editorType,
+            currentPlan: _$$F.Plan.STARTER,
+            upsellPlan: _$$F.Plan.PRO,
+            hideUpsellPlanCta: l,
+            upsellSource: _$$b.CREATE_NEW_PAGE
+          }
+        }));
+      },
+      displayText: g
+    } : {
+      action: "page-duplicate",
+      args: {
+        nodeId: e
+      },
+      loadingIndicatorString: "Duplicating",
+      displayText: g
+    }) : null;
+    return E ? [O, A(), {
+      action: "page-delete",
+      args: {
+        nodeIds: [e]
+      },
+      loadingIndicatorString: "Deleting",
+      displayText: _$$t("fullscreen_actions.divider-delete")
+    }] : [{
+      action: "page-copy-link",
+      args: {
+        nodeId: e
+      }
+    }, {
+      separator: !0
+    }, {
+      action: "page-rename",
+      args: {
+        nodeId: e
+      },
+      displayText: _$$t("fullscreen_actions.pages-rename", {
+        pageCount: 1
+      })
+    }, O, A(), {
+      separator: !0
+    }, {
+      action: "page-delete",
+      callback: () => n(PK({})),
+      args: {
+        nodeIds: [e]
+      },
+      loadingIndicatorString: "Deleting",
+      disabled: 1 === j,
+      displayText: _$$t("fullscreen_actions.pages-delete", {
+        pageCount: 1
+      })
+    }, ...R(n)];
+  }({
+    pageId: r[0],
+    team: L ? L.team : null,
+    shouldShowDuplicateOption: O,
+    openFile: L,
+    pagesList: D,
+    shouldPaywallForDraftsPageLimitV1: M,
+    dispatch: F,
+    hideUpsellPlanCta: B,
+    isFileReadOnly: U,
+    isK12OrgStudent: W
+  }) : function ({
+    pageIds: e,
+    pagesList: t,
+    dispatch: r,
+    isFileReadOnly: a,
+    isK12OrgStudent: s
+  }) {
+    if (a || s) return [];
+    let i = new Set(t.filter(e => !e.isDivider).map(e => e.nodeId));
+    let n = e.filter(e => i.has(e));
+    let o = n.length;
+    return 0 === o ? [] : [{
+      action: "batch-page-rename",
+      args: {
+        nodeIds: n
+      },
+      displayText: _$$t("fullscreen_actions.pages-rename", {
+        pageCount: o
+      })
+    }, {
+      separator: !0
+    }, {
+      action: "page-delete",
+      callback: () => r(PK({})),
+      args: {
+        nodeIds: n
+      },
+      loadingIndicatorString: "Deleting",
+      displayText: _$$t("fullscreen_actions.pages-delete", {
+        pageCount: o
+      }),
+      disabled: i.size <= o
+    }, ...(t => {
+      if (!_$$HZ()) return [];
+      let r = zl.get(yV);
+      return r && r.editorType === FFileType.WHITEBOARD ? [{
+        separator: !0
+      }, {
+        name: "create-slides-outline-from-figjam",
+        callback: () => $t({
+          pageGuids: Array.from(e),
+          dispatch: t,
+          source: _$$E.FJ_PAGE_MENU
+        })
+      }] : [];
+    })(r)];
+  }({
+    pageIds: r,
+    pagesList: D,
+    dispatch: F,
+    isFileReadOnly: U,
+    isK12OrgStudent: W
+  });
+  useEffect(() => (zl.set($$R1, !0), () => {
+    zl.set($$R1, !1);
+  }), []);
+  return jsx("div", {
+    className: `${Dm}`,
+    children: jsx(Q, {
+      appModel: P,
+      menuItems: filterNotNullish($),
+      dispatch: F,
+      selectedView: A,
+      showPoint: !1,
+      targetRect: {
+        width: 10,
+        height: 10,
+        left: e + 100,
+        top: t,
+        right: e + 110,
+        bottom: t - 10
+      },
+      removeDisabledItems: !1,
+      isLimitedDevMode: !1,
+      recordingKey: "pageMenu"
+    })
+  });
+}
+export const W = $$A0;
+export const l = $$R1;

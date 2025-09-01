@@ -1,0 +1,14 @@
+let $$o1 = "dlt_universal_insert_collage--universalInsertCollageIcon--1oKSL";
+let $$a6 = "dlt_universal_insert_collage--collageIconContainer--Mkqay";
+let $$i5 = "dlt_universal_insert_collage--ignorePointerEvents--G4rRr";
+let $$s4 = "dlt_universal_insert_collage--collageScaleContainer--uLvqK";
+let $$r3 = "dlt_universal_insert_collage--collageImage--LdlFw";
+let $$l2 = "dlt_universal_insert_collage--errorBoundaryFallback--6P7SR";
+let $$d0 = "dlt_universal_insert_collage--universalInsertCollageIconContainer--yExun";
+export const Ge = $$d0;
+export const JY = $$o1;
+export const V6 = $$l2;
+export const VF = $$r3;
+export const f_ = $$s4;
+export const r3 = $$i5;
+export const s = $$a6;

@@ -1,0 +1,76 @@
+import { getFeatureFlags } from "../905/601108";
+import { zl, md, eU } from "../figma_app/27355";
+import { Co, x4 } from "../905/657224";
+import { Ay } from "../905/612521";
+import { b as _$$b } from "../905/985254";
+import { FFileType } from "../figma_app/191312";
+import { imP } from "../figma_app/43951";
+import { YP } from "../figma_app/193867";
+import { e as _$$e } from "../905/859735";
+import { GZ } from "../905/508367";
+import { eD } from "../figma_app/876459";
+import { debugState } from "../905/407919";
+import { getInitialOptions } from "../figma_app/169182";
+let g = (() => {
+  if (Co) {
+    let e = "initialPathName";
+    if (Co[e]) return Co[e];
+    Co[e] = Ay.location.pathname;
+  }
+  return Ay.location.pathname;
+})();
+export function $$f2() {
+  return !GZ() && !eD && !!((getInitialOptions().editing_file || getInitialOptions().link_password_input) && E(y) || E(b));
+}
+function E(e) {
+  return e(g) && e(Ay.location.pathname);
+}
+function y(e) {
+  return ["/file/", ...Object.values({
+    [FFileType.DESIGN]: "/design/",
+    [FFileType.WHITEBOARD]: "/board/",
+    [FFileType.SLIDES]: "/slides/",
+    [FFileType.SITES]: "/site/",
+    [FFileType.COOPER]: "/buzz/",
+    [FFileType.FIGMAKE]: "/make/"
+  })].some(t => e.startsWith(t));
+}
+function b(e) {
+  let t = YP(e);
+  return t.length >= 4 && "files" === t[1] && "feed-posts" === t[2] && !!t[3];
+}
+let T = "autoOpenInDesktopApp";
+let I = "openInDesktopAppMenuModal";
+export function $$S5() {
+  return getFeatureFlags().desktop_use_db_auto_open_pref ? zl.get(C) : x4 ? x4[T] : void 0;
+}
+export function $$v3(e) {
+  x4 && (x4[T] = e);
+  getFeatureFlags().desktop_write_auto_open_pref && (_$$e.setPreferenceValue({
+    key: "auto_open_in_desktop",
+    value: e
+  }), debugState.dispatch(_$$b({
+    user_changed_auto_open_pref: !0
+  })));
+}
+export function $$A0() {
+  return x4 ? x4[I] : void 0;
+}
+export function $$x1(e) {
+  x4 && (x4[I] = e);
+}
+export function $$N4() {
+  return md(C);
+}
+let C = eU(e => {
+  let t = e(imP.Query({}));
+  let r = getInitialOptions().user_data?.auto_open_in_desktop;
+  "loaded" === t.status && t.data?.currentUser?.userPreferences?.status === "loaded" && (r = t.data.currentUser.userPreferences.data?.preferences.auto_open_in_desktop);
+  return r;
+});
+export const W2 = $$A0;
+export const _A = $$x1;
+export const _p = $$f2;
+export const hW = $$v3;
+export const ji = $$N4;
+export const vn = $$S5;

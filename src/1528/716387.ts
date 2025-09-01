@@ -1,0 +1,1236 @@
+import { jsx, jsxs, Fragment } from "react/jsx-runtime";
+import { memo, useCallback, useMemo, useContext, useState, useRef, useLayoutEffect, useEffect } from "react";
+import { wA, d4 } from "../vendor/514228";
+import { z as _$$z } from "../vendor/999105";
+import { lQ } from "../905/934246";
+import { i as _$$i } from "../905/718764";
+import { K as _$$K } from "../905/443068";
+import { E as _$$E } from "../905/632989";
+import { T as _$$T } from "../905/745591";
+import { E as _$$E2 } from "../905/172252";
+import { h as _$$h } from "../905/994594";
+import { A as _$$A } from "../905/251970";
+import { l as _$$l } from "../1250/91689";
+import { k as _$$k } from "../905/888808";
+import { Lov, EW4, YEY, dNx, Ifi, h3O, xal } from "../figma_app/763686";
+import { AD, Xy } from "../905/871411";
+import { getFeatureFlags } from "../905/601108";
+import { eU as _$$eU, Xr, md } from "../figma_app/27355";
+import I from "classnames";
+import { $ as _$$$ } from "../905/455748";
+import { Fo, Uz, vN, xH, Te } from "../905/63728";
+import { yZ } from "../905/407352";
+import { Ay } from "../figma_app/778880";
+import { Pt } from "../figma_app/806412";
+import { D8, GG } from "../905/511649";
+import { w as _$$w } from "../905/835474";
+import { jN } from "../figma_app/930338";
+import { Wy, ml, Fk, Ch, hw } from "../905/125333";
+import { ph } from "../figma_app/709893";
+import { b as _$$b } from "../figma_app/556971";
+import { dW } from "../figma_app/858013";
+import { P as _$$P } from "../905/347284";
+import { B as _$$B } from "../905/714743";
+import { t as _$$t, tx } from "../905/303541";
+import { F as _$$F } from "../905/302958";
+import { to } from "../figma_app/828186";
+import { V2, DI } from "../figma_app/712525";
+import { Y5 } from "../figma_app/455680";
+import { r as _$$r } from "../figma_app/860474";
+import { gk } from "../figma_app/540726";
+import { Z as _$$Z } from "../905/104740";
+import { Uc } from "../figma_app/741237";
+import { p8, eY } from "../figma_app/722362";
+import { lH, Fy } from "../figma_app/623300";
+import { _Y } from "../figma_app/162807";
+import { Ib } from "../905/129884";
+import { b as _$$b2, bL, mc } from "../figma_app/860955";
+import { o as _$$o } from "../905/821217";
+import { H_ } from "../905/963340";
+import { O as _$$O } from "../905/969533";
+import { BK } from "../905/848862";
+import { Vz, v9, ei as _$$ei, G$, PP, Wv, Fn, Z9, S as _$$S, dz, sb, Jo, bB, T as _$$T2, fz, Nf, HR, fp, AX, du, _M, qp, hY, kQ, eO as _$$eO, rB, hs, V3, wH, r9, Xt, rX, Dw, _P, D6, c1, QF, VQ, Gu, of } from "../9410/733790";
+import { mapFilter } from "../figma_app/656233";
+import { v as _$$v } from "../905/213481";
+import { xk } from "@stylexjs/stylex";
+import { kM } from "../figma_app/421886";
+import { p9, D4, IM, OP } from "../figma_app/463678";
+import { f as _$$f } from "../905/54715";
+import { VS, JE, oZ, WP, _0 } from "../9410/763216";
+import { Bf } from "../figma_app/249941";
+import { cJ } from "../905/561485";
+import { Nl } from "../figma_app/115923";
+import { sO } from "../figma_app/21029";
+import { II, EA, SQ, CT, A5, aH, ih, WB, L4 } from "../9410/499229";
+import { a as _$$a } from "../9410/20763";
+import { Od, I_ } from "../9410/542126";
+import { am } from "../figma_app/901889";
+import { U5, W0, f7 } from "../figma_app/896988";
+import { A as _$$A2 } from "../6828/523860";
+import { A as _$$A3 } from "../6828/85206";
+import { A as _$$A4 } from "../6828/954206";
+import { A as _$$A5 } from "../6828/255111";
+import { A as _$$A6 } from "../svg/279162";
+var N = I;
+var et = (e => (e[e.NONE = 0] = "NONE", e[e.TOP = 1] = "TOP", e[e.MIDDLE = 2] = "MIDDLE", e[e.BOTTOM = 3] = "BOTTOM", e[e.ALL = 4] = "ALL", e))(et || {});
+var en = (e => (e[e.NONE = 0] = "NONE", e[e.SINGLE = 1] = "SINGLE", e[e.MULTI = 2] = "MULTI", e))(en || {});
+let el = _$$eU(!1);
+let er = memo(function (e) {
+  let t = Xr(el);
+  let n = wA();
+  let l = d4(e => e.canvasSearch.scope);
+  let i = d4(e => e.mirror.appModel.pagesList);
+  let {
+    allInstancesExpanded
+  } = e;
+  let {
+    getTriggerProps,
+    manager
+  } = _$$b2();
+  let u = es(l);
+  return jsx(_$$o, {
+    eventListeners: ["onClick"],
+    children: jsxs(bL, {
+      manager,
+      children: [jsxs(_$$E, {
+        recordingKey: "figma_design_search_page_scope_dropdown",
+        className: Vz,
+        "aria-label": _$$t("canvas_search.scope_dropdown_aria_label", {
+          scope: u
+        }),
+        "data-testid": "figma-design-search-scope-dropdown",
+        ...getTriggerProps(),
+        children: [u, jsx(_$$O, {})]
+      }), jsxs(mc, {
+        children: [jsx(ei, {
+          option: Lov.ACTIVE_PAGE,
+          activeOption: l,
+          onClickCallback: e => {
+            n(V2(e));
+          }
+        }), jsx(ei, {
+          option: Lov.ALL_PAGES,
+          activeOption: l,
+          onClickCallback: e => {
+            lH(i) || !allInstancesExpanded ? (t(!0), requestAnimationFrame(() => {
+              n(V2(e));
+              t(!1);
+            })) : n(V2(e));
+          }
+        })]
+      })]
+    })
+  });
+});
+function ei({
+  option: e,
+  activeOption: t,
+  onClickCallback: n
+}) {
+  let l = BK("CANVAS_SEARCH_PAGE_SCOPE_DROPDOWN");
+  return jsx(H_, {
+    recordingKey: `figma_design_search_page_scope.${e}`,
+    checked: e === t,
+    onChange: () => {
+      l.hide();
+      n(e);
+    },
+    children: es(e)
+  }, e);
+}
+let es = e => {
+  switch (e) {
+    case Lov.ACTIVE_PAGE:
+      return _$$t("canvas_search.this_page");
+    case Lov.ALL_PAGES:
+      return _$$t("canvas_search.all_pages");
+  }
+};
+function eh({
+  short: e,
+  options: t,
+  recordingKey: n
+}) {
+  let i = wA();
+  let s = d4(e => e.canvasSearch.filters);
+  let o = _$$b();
+  let d = useCallback(e => {
+    i(DI(e));
+  }, [i]);
+  let c = useMemo(() => mapFilter(t, e => s[e] ? jsx(_$$v, {
+    hasCloseButton: !0,
+    onClose: () => d(e),
+    "aria-label": _$$t("canvas_search.filter.remove_filter", {
+      filter: p9(e)
+    }),
+    recordingKey: Pt(n, kM[e], "remove"),
+    children: p9(e)
+  }, `filter-chip-${e}`) : null), [s, d, t, n]);
+  return c.length ? jsx("div", {
+    "data-testid": "search-filter-chip-container",
+    ...xk(em.filterChips, o && em.filterChipsLeftRail, e && em.filterChipsShort),
+    children: c
+  }) : null;
+}
+let em = {
+  filterChips: {
+    display: "x78zum5",
+    flexWrap: "x1a02dak",
+    gap: "x1jnr06f",
+    rowGap: null,
+    columnGap: null,
+    padding: "xkl4b8w",
+    paddingInline: null,
+    paddingStart: null,
+    paddingLeft: null,
+    paddingEnd: null,
+    paddingRight: null,
+    paddingBlock: null,
+    paddingTop: null,
+    paddingBottom: null,
+    $$css: !0
+  },
+  filterChipsLeftRail: {
+    padding: "x18jrek7",
+    paddingInline: null,
+    paddingStart: null,
+    paddingLeft: null,
+    paddingEnd: null,
+    paddingRight: null,
+    paddingBlock: null,
+    paddingTop: null,
+    paddingBottom: null,
+    $$css: !0
+  },
+  filterChipsShort: {
+    paddingBottom: "xjkvuk6",
+    $$css: !0
+  }
+};
+function ex({
+  short: e,
+  mode: t,
+  recordingKey: n
+}) {
+  let l = wA();
+  let i = d4(e => e.canvasSearch.filters);
+  let s = t === EW4.FIND ? D4 : IM;
+  let o = _$$b();
+  let d = mapFilter(s, e => i[e] ? jsx(eg, {
+    option: e,
+    onClose: () => {
+      l(DI(e));
+    },
+    recordingKey: n
+  }, e) : null);
+  return 0 === d.length ? null : jsx("div", {
+    className: N()(VS, {
+      [JE]: e,
+      [oZ]: o
+    }),
+    children: d
+  });
+}
+function eg({
+  option: e,
+  onClose: t,
+  recordingKey: n
+}) {
+  return jsxs("div", {
+    className: WP,
+    children: [p9(e), jsx(_$$E, {
+      className: _0,
+      onClick: t,
+      "aria-label": _$$t("canvas_search.filter.remove"),
+      "aria-describedby": p9(e),
+      recordingKey: Pt(n, kM[e], "remove"),
+      children: jsx(_$$f, {})
+    })]
+  });
+}
+function eL(e, t = !1) {
+  if (t || U5(e, W0.YES)) {
+    let t = f7(e);
+    t && e.stopPropagation();
+    return t;
+  }
+  return !1;
+}
+function eR(e, t, n, a) {
+  let i = II();
+  let o = function () {
+    let e = _$$Z("canvas_search_navigate");
+    let t = d4(e => e.canvasSearch.scope);
+    let n = am();
+    let a = useContext(EA);
+    let i = useCallback(() => {
+      n("canvas_search_multi_hierarchy", {
+        order: "down"
+      });
+      YEY && e(YEY.moveActiveResultsDownOneLevelAndGetViewportSettings(), {
+        additionalTrackEventParams: {
+          searchScope: Lov[t]
+        }
+      });
+    }, [e, t, n]);
+    return a ? i : lQ;
+  }();
+  let d = function () {
+    let e = _$$Z("canvas_search_navigate");
+    let t = d4(e => e.canvasSearch.scope);
+    let n = am();
+    let a = useContext(EA);
+    let i = useCallback(() => {
+      n("canvas_search_multi_hierarchy", {
+        order: "up"
+      });
+      YEY && e(YEY.moveActiveResultsUpOneLevelAndGetViewportSettings(), {
+        additionalTrackEventParams: {
+          searchScope: Lov[t]
+        }
+      });
+    }, [e, t, n]);
+    return a ? i : lQ;
+  }();
+  let c = useContext(EA);
+  return useCallback(l => {
+    switch (c ? Fo(l) && !l.shiftKey ? a(en.SINGLE) : l.shiftKey ? a(en.MULTI) : a(en.NONE) : a(en.NONE), l.keyCode) {
+      case Uz.P:
+      case Uz.UP_ARROW:
+        (l.keyCode !== Uz.P || Ay.mac && vN(l, xH.CONTROL)) && (e(OP.PREV, "keyboard"), l.stopPropagation(), l.preventDefault());
+        break;
+      case Uz.N:
+      case Uz.DOWN_ARROW:
+        (l.keyCode !== Uz.N || Ay.mac && vN(l, xH.CONTROL)) && (e(OP.NEXT, "keyboard"), l.stopPropagation(), l.preventDefault());
+        break;
+      case Uz.ENTER:
+        if (YEY && Fo(l)) {
+          YEY.exitSearchMode(dNx.SELECT_ACTIVE);
+          break;
+        }
+        if (i()) break;
+        l.shiftKey ? t ? d() : e(OP.PREV, "keyboard") : t ? o() : e(OP.NEXT, "keyboard");
+        l.stopPropagation();
+        l.preventDefault();
+        break;
+      case Uz.ESCAPE:
+        YEY && YEY.exitSearchMode(dNx.NONE);
+        l.preventDefault();
+        l.stopPropagation();
+        break;
+      default:
+        n(l);
+    }
+  }, [c, a, i, n, e, t, d, o]);
+}
+function eD(e) {
+  return useCallback(t => {
+    if (t.keyCode === Uz.SHIFT) {
+      (!Ay.mac || t.metaKey) && (Ay.mac || t.ctrlKey) || e(en.NONE);
+      return;
+    }
+    let n = Ay.mac && "Meta" === t.key;
+    let a = !Ay.mac && t.keyCode === Uz.CTRL;
+    (n || a) && !t.shiftKey && e(en.NONE);
+  }, [e]);
+}
+function eO(e) {
+  switch (e.keyCode) {
+    case Uz.DELETE:
+    case Uz.BACKSPACE:
+      if (YEY) return YEY.getNextResultForActiveResultRemoval();
+      break;
+    case Uz.X:
+      if (Te(e) && YEY) return YEY.getNextResultForActiveResultRemoval();
+      break;
+    case Uz.H:
+    case Uz.R:
+      if (Fo(e) && e.shiftKey && YEY) return YEY.getNextResultForActiveResultRemoval();
+  }
+  return AD;
+}
+export let $$eF0 = memo(function ({
+  showFilter: e
+}) {
+  let {
+    query,
+    resultsOnOtherPages,
+    next,
+    exit,
+    setNavigateNearestOnce,
+    search,
+    showSearch,
+    mode,
+    isLoading,
+    allInstancesExpanded,
+    missingResultsOnSomePages
+  } = SQ();
+  let [y, C] = useState("");
+  let {
+    focusedByButtons,
+    inputRef
+  } = CT();
+  let L = useRef(null);
+  let R = to();
+  let j = _$$Z("canvas_search_navigate");
+  let w = md(Wy);
+  let P = md(ml);
+  let M = useContext(EA);
+  let z = md(el);
+  let [U, V] = useState(null);
+  let [$, W] = useState(en.NONE);
+  let [q, Z] = useState(!1);
+  useLayoutEffect(() => {
+    if (M) {
+      if (P.size > 1 || w.size > 1) {
+        Z(!0);
+        return;
+      }
+      for (let e of w.values()) e.size > 1 && Z(!0);
+    }
+  }, [w, M, P]);
+  let J = (e, t) => {
+    Z(!1);
+    next(e, t);
+  };
+  let Q = function (e, t, n) {
+    if (!n) return !1;
+    if (t.size > 1 || e.size > 1) return !0;
+    for (let t of e.values()) return t.size > 1;
+    return !1;
+  }(w, P, M);
+  let ee = function (e, t, n, a, r) {
+    let i = eR(e, n, e => {
+      let n = (e.keyCode === Uz.D || e.keyCode === Uz.F) && Fo(e) && e.shiftKey;
+      eL(e) && !n && t.current?.focus();
+    }, r);
+    return useCallback(e => {
+      let l = eO(e);
+      switch (e.keyCode) {
+        case Uz.RIGHT_ARROW:
+        case Uz.LEFT_ARROW:
+          Te(e) || i(e);
+          break;
+        case Uz.C:
+        case Uz.X:
+          Te(e) && window.getSelection && !window.getSelection().toString() && (Y5.triggerAction(e.keyCode === Uz.C ? "copy" : "cut"), e.preventDefault(), e.stopPropagation(), e.keyCode === Uz.X && t.current?.focus());
+          break;
+        case Uz.V:
+        case Uz.Z:
+          break;
+        default:
+          i(e);
+      }
+      YEY && !n && l !== AD && a(YEY.setActiveResultAndGetViewportSettings(l, 0), {
+        delay: 300
+      });
+    }, [n, i, t, a]);
+  }(J, L, Q, j, W);
+  let et = eD(W);
+  A5(inputRef, next, focusedByButtons);
+  let er = aH();
+  let ei = _$$b();
+  if (!showSearch) return null;
+  let es = jsxs(Fragment, {
+    children: [jsx("div", {
+      className: N()(v9, {
+        [_$$ei]: "" === query
+      }),
+      children: jsx(_$$h, {})
+    }), jsx(ih, {
+      onChange: e => {
+        Z(!1);
+        search(e);
+      },
+      query,
+      focusedByButtons,
+      onKeyDown: ee,
+      onKeyUp: et,
+      innerRef: inputRef,
+      onPasteCapture: e => {
+        gk(e) && (Y5.triggerActionInUserEditScope("paste"), e.preventDefault(), L.current?.focus());
+      },
+      editorType: _Y.DESIGN
+    })]
+  });
+  return jsx(_$$i, {
+    children: jsxs("div", {
+      "data-testid": "search-sidebar",
+      className: G$,
+      onBlurCapture: e => {
+        e.relatedTarget && !e.currentTarget.contains(e.relatedTarget) && (YEY.setOverlayVisible(!1), setNavigateNearestOnce(), W(en.NONE));
+      },
+      children: [jsxs("div", {
+        className: PP,
+        children: [jsxs("div", {
+          className: N()(Wv, ei && Fn),
+          children: [jsx("div", {
+            className: Z9,
+            children: es
+          }), e && jsx(Od, {
+            lean: I_.RIGHT,
+            shouldShowSearchCategories: !R,
+            minWidth: getFeatureFlags().eu_fpl_migration_search_settings_menu ? 156 : void 0,
+            recordingKey: "figma_design_search"
+          }), jsx(_$$K, {
+            onClick: e => {
+              exit();
+              er(e);
+            },
+            "aria-label": _$$t("canvas_search.close"),
+            recordingKey: "figma_design_search.close",
+            htmlAttributes: {
+              "data-tooltip-type": Ib.TEXT,
+              "data-tooltip": _$$t("canvas_search.close")
+            },
+            children: jsx(_$$A, {})
+          })]
+        }), getFeatureFlags().eu_fpl_search_result_chips && jsx(eh, {
+          recordingKey: "figma_design_search.filterChips",
+          options: mode === EW4.FIND ? D4 : IM,
+          short: mode === EW4.REPLACE
+        }), !getFeatureFlags().eu_fpl_search_result_chips && jsx(ex, {
+          mode,
+          short: mode === EW4.REPLACE,
+          recordingKey: "figma_design_search.filterPills"
+        }), mode === EW4.REPLACE && jsx(_$$a, {
+          query,
+          value: y,
+          onChange: C,
+          onFocus: (e, n) => {
+            !query && n && inputRef.current?.focus();
+          },
+          hasMultipleSelections: Q,
+          recordingKey: "figma_design_search"
+        })]
+      }), isLoading || z ? jsx("div", {
+        className: N()(_$$S, dz),
+        children: jsx(dW, {
+          size: "medium",
+          testId: "canvas-search-loading-spinner"
+        })
+      }) : query && !jN(query) && jsx(eM, {
+        allInstancesExpanded,
+        hasMultipleSelections: Q,
+        hoverSelectMode: $,
+        hoveredResult: U,
+        isInMultiselectMode: q,
+        missingResultsOnSomePages,
+        navigate: j,
+        onNext: J,
+        replacement: mode === EW4.REPLACE ? y : void 0,
+        resultInputHandlerRef: L,
+        resultsOnOtherPages,
+        setHoverSelectMode: W,
+        setHoveredResult: V,
+        setIsInMultiselectMode: Z
+      })]
+    })
+  });
+});
+function eM({
+  onNext: e,
+  navigate: t,
+  replacement: n,
+  resultsOnOtherPages: o,
+  resultInputHandlerRef: u,
+  hoveredResult: p,
+  hasMultipleSelections: h,
+  isInMultiselectMode: m,
+  missingResultsOnSomePages: f,
+  hoverSelectMode: I,
+  setIsInMultiselectMode: C,
+  setHoverSelectMode: S,
+  setHoveredResult: T,
+  allInstancesExpanded: R
+}) {
+  let D = wA();
+  let j = WB();
+  let k = II();
+  let P = p8("currentPage");
+  let M = useRef(null);
+  let B = d4(e => e.canvasSearch.scope);
+  let U = YEY.hasDirtyPrimaryInstances();
+  let K = md(Fk);
+  let V = md(Ch);
+  let W = md(Wy);
+  let Y = md(ml);
+  let q = md(hw);
+  let Z = useContext(EA);
+  let J = !m;
+  let Q = null == n;
+  let ee = L4();
+  let el = function (e, t) {
+    let n = _$$Z("canvas_search_navigate");
+    let a = d4(e => e.canvasSearch.scope);
+    let i = am();
+    let o = useContext(EA);
+    let d = useCallback(l => {
+      if (!YEY) return;
+      let {
+        nav,
+        numNewNodes,
+        numNewTextMatches
+      } = YEY.addActiveResultsAndGetViewportSettings(l);
+      e && i("canvas_search_enter_multi_select", {
+        numberOfNodes: numNewNodes,
+        numberOfTextMatches: numNewTextMatches,
+        source: "shift+click",
+        mode: t ? "find" : "replace"
+      });
+      n(nav, {
+        additionalTrackEventParams: {
+          searchScope: Lov[a]
+        }
+      });
+    }, [t, n, a, i, e]);
+    return o ? d : lQ;
+  }(J, Q);
+  let er = function () {
+    let e = _$$Z("canvas_search_navigate");
+    let t = d4(e => e.canvasSearch.scope);
+    let n = useContext(EA);
+    let a = useCallback((n, a, l) => {
+      YEY && e(YEY.removeActiveResultAndGetViewportSettings(n, a, l), {
+        additionalTrackEventParams: {
+          searchScope: Lov[t]
+        }
+      });
+    }, [e, t]);
+    return n ? a : lQ;
+  }();
+  let [ei, es] = function (...e) {
+    let [t, n] = useState(() => e.reduce((e, t) => (e[t] = !0, e), {}));
+    return [t, useCallback((e, t = !0) => {
+      n(n => n[e] !== t ? {
+        ...n,
+        [e]: t
+      } : n);
+    }, [])];
+  }(Xy, P);
+  let eo = useRef({});
+  let ed = useMemo(() => {
+    let e = [];
+    let t = j.find(e => e.pageId === Xy);
+    let n = B === Lov.ALL_PAGES || !!t;
+    let a = j.find(e => e.pageId === P);
+    let l = j;
+    B === Lov.ACTIVE_PAGE && (l = [], t && l.push(t), a && l.push(a));
+    let r = 0;
+    for (let {
+      pageId,
+      results
+    } of (eo.current = {}, l)) {
+      if (0 === results.length) continue;
+      let l = !!ei[pageId];
+      if (n && (e.push({
+        type: "header",
+        data: {
+          pageId,
+          open: l,
+          numResults: results.reduce((e, t) => e += t.textMatches.length, 0)
+        }
+      }), ++r), n && !l) continue;
+      eo.current[pageId] = r;
+      let i = 0;
+      for (let n of results) {
+        let {
+          textMatches,
+          ...l
+        } = n;
+        textMatches.forEach((n, a) => {
+          e.push({
+            type: "result",
+            data: {
+              ...l,
+              matchIndex: a,
+              textMatch: n,
+              index: i,
+              pageId
+            }
+          });
+          ++i;
+          ++r;
+        });
+      }
+    }
+    return e;
+  }, [P, ei, B, j]);
+  useEffect(() => {
+    null != V && es(V.pageId);
+  }, [V, es]);
+  let ec = _$$z({
+    size: ed.length,
+    parentRef: M,
+    overscan: 10
+  });
+  let eu = e => {
+    if (null == V || null == V.index) return [];
+    let t = eo.current[V.pageId];
+    if (null == t) return [];
+    let n = t + V.index;
+    if (n === e) return [];
+    let a = [];
+    let l = Math.min(n, e);
+    let r = Math.max(n, e);
+    if ("header" === ed[e].type) return a;
+    for (let e = l; e <= r; e++) "result" === ed[e].type && a.push(ed[e].data);
+    return a;
+  };
+  let eh = useCallback(e => !!Z && "header" !== e.type && (!!m || I !== en.NONE) && (e.data.textMatch.matchType === Ifi.TEXT_MATCH && Y.has(e.data.resultGuid) && !W.has(e.data.resultGuid) || q.has(e.data.resultGuid)), [W, Z, Y, I, q, m]);
+  let em = useCallback(e => "header" !== e.type && (Z ? e.data.textMatch.matchType === Ifi.PAGE_MATCH ? e.data.index === V?.index && e.data.pageId === V?.pageId : e.data.textMatch.matchType === Ifi.LAYER_MATCH ? Y.has(e.data.resultGuid) && !W.get(e.data.resultGuid) : W.get(e.data.resultGuid)?.has(e.data.matchIndex) ?? !1 : e.data.index === V?.index && e.data.pageId === V?.pageId), [V?.index, V?.pageId, W, Z, Y]);
+  let e_ = useCallback((e, t, n) => {
+    let a = e + n;
+    let l = t + n;
+    let r = e => "result" === e.type && (em(e) || eh(e));
+    for (; a > 0 && a <= ed.length && r(ed[a - 1]);) a -= 1;
+    for (; l < ed.length && r(ed[l]);) l += 1;
+    return [a - n, l - n];
+  }, [eh, em, ed]);
+  let eE = useCallback((e, t) => {
+    if (e + t >= ed.length) return !1;
+    let n = ed[e + t];
+    return !em(n) && !eh(n);
+  }, [eh, em, ed]);
+  let ex = useCallback((e, t, n) => {
+    let a = !1;
+    for (let l = e; l <= t && !(l + n >= ed.length); l += 1) {
+      let e = ed[l + n];
+      if (!em(e) && !eh(e)) {
+        a = !0;
+        break;
+      }
+    }
+    return a;
+  }, [eh, em, ed]);
+  let [eg, ef] = useMemo(() => {
+    let e = p?.nodeGuid ?? AD;
+    let t = V?.pageId != null ? eo.current[V.pageId] : null;
+    if (Z && I !== en.NONE && p && e !== AD && p.pageId === V?.pageId && null != t) {
+      let n = p.index;
+      let a = p.matchIndex;
+      if ((I === en.SINGLE || V?.index == null) && eE(n, t)) return [n, YEY.getSingleHoveredSelectionEndIndex(e, a)];
+      if (I === en.MULTI && V?.index != null && V.index !== p.index) {
+        let l = n > V.index ? V.index : n;
+        return ex(l, n > V.index ? n : V.index, t) ? e_(l, YEY.getMultiHoveredSelectionEndIndex(e, a), t) : [null, null];
+      }
+    }
+    return [null, null];
+  }, [V?.index, V?.pageId, Z, e_, I, p, ex, eE]);
+  let ev = useCallback(e => !Z || null == eg || null == ef || e < eg || e >= ef ? et.NONE : e === eg && e === ef - 1 ? et.ALL : e === eg ? et.TOP : e === ef - 1 ? et.BOTTOM : et.MIDDLE, [Z, eg, ef]);
+  let eN = _$$$(V);
+  useEffect(() => {
+    if (m || I !== en.NONE || null == V || null == V.index || 0 === ed.length || !eN) return;
+    let e = eo.current[V.pageId];
+    if (null == e) return;
+    let t = e + V.index;
+    let n = t >= ec.virtualItems[0].index && t <= ec.virtualItems[ec.virtualItems.length - 1].index;
+    let a = !1;
+    if (n) {
+      let e = ec.virtualItems.find(e => e.index === t);
+      if (e) {
+        let {
+          start,
+          size
+        } = e;
+        a = function (e, t) {
+          if (!t) return !0;
+          let n = t.scrollTop;
+          let a = n + t.clientHeight;
+          return e.top >= n && e.bottom <= a;
+        }({
+          top: start,
+          bottom: start + size
+        }, M.current);
+      }
+    }
+    a || U || ec.scrollToIndex(t, {
+      align: "center"
+    });
+  }, [V, eN, u, m, ed, U, ec, I]);
+  let eb = (e, t, n, a) => {
+    let l = () => {
+      a ? er(t.resultGuid, t.matchIndex, t.textMatch.matchType) : el([{
+        nodeId: t.resultGuid,
+        matchIndices: [t.matchIndex],
+        searchResultType: t.textMatch.matchType
+      }]);
+    };
+    t.pageId === Xy ? (k(t.guid), es(t.guid), C(!1)) : Z && t.pageId === V?.pageId ? e.shiftKey && V?.index == null ? (a || l(), C(!0)) : e.shiftKey ? ((() => {
+      let e = eu(n);
+      let t = [];
+      e.forEach(e => {
+        let n = t.length ? t[t.length - 1] : void 0;
+        n?.nodeId === e.resultGuid && n?.searchResultType === Ifi.TEXT_MATCH ? n.matchIndices.push(e.matchIndex) : t.push({
+          nodeId: e.resultGuid,
+          matchIndices: [e.matchIndex],
+          searchResultType: e.textMatch.matchType
+        });
+      });
+      el(t);
+    })(), C(!0)) : Fo(e) && t.textMatch.matchType !== Ifi.PAGE_MATCH ? (l(), C(!0)) : (ee(t.resultGuid, t.matchIndex), C(!1)) : (ee(t.resultGuid, t.matchIndex), C(!1));
+  };
+  let eC = function (e, t, n, a, i, o, d) {
+    let c = function (e, t) {
+      let n = _$$Z("canvas_search_navigate");
+      let a = d4(e => e.canvasSearch.scope);
+      let i = am();
+      let o = useContext(EA);
+      let d = useCallback(() => {
+        if (!YEY) return;
+        let {
+          nav,
+          numNewNodes,
+          numNewTextMatches
+        } = YEY.setAllResultsAsActiveAndGetViewportSettings();
+        e && i("canvas_search_enter_multi_select", {
+          numberOfNodes: numNewNodes,
+          numberOfTextMatches: numNewTextMatches,
+          source: "cmd/ctrl+A",
+          mode: t ? "find" : "replace"
+        });
+        n(nav, {
+          additionalTrackEventParams: {
+            searchScope: Lov[a]
+          }
+        });
+      }, [t, n, a, i, e]);
+      return o ? d : lQ;
+    }(n, a);
+    let u = useContext(EA);
+    let p = eR(e, i, eL, o);
+    return useCallback(e => {
+      let n = eO(e);
+      switch (e.keyCode) {
+        case Uz.UP_ARROW:
+        case Uz.DOWN_ARROW:
+        case Uz.RIGHT_ARROW:
+        case Uz.LEFT_ARROW:
+          i ? (!function () {
+            let e = document.getElementById("fullscreen-root")?.getElementsByClassName("focus-target");
+            if (null != e && 0 !== e.length) {
+              for (let t of e) if (t.hasAttribute("readonly") && "application" === t.getAttribute("role")) {
+                t?.focus();
+                break;
+              }
+            }
+          }(), eL(e, !0)) : p(e);
+          break;
+        case Uz.A:
+          if (u && Te(e)) {
+            c();
+            d(!0);
+            e.stopPropagation();
+            e.preventDefault();
+            break;
+          }
+          eL(e);
+          break;
+        case Uz.C:
+          Te(e) ? (Y5.triggerActionInUserEditScope("copy"), e.stopPropagation()) : eL(e);
+          break;
+        case Uz.V:
+          Te(e) ? (Y5.triggerActionInUserEditScope("paste"), e.stopPropagation()) : eL(e);
+          break;
+        case Uz.X:
+          Te(e) ? (Y5.triggerActionInUserEditScope("cut"), e.stopPropagation()) : eL(e);
+          break;
+        case Uz.DELETE:
+        case Uz.BACKSPACE:
+          eL(e, !0);
+          break;
+        default:
+          p(e);
+      }
+      YEY && !i && n !== AD && t(YEY.setActiveResultAndGetViewportSettings(n, 0), {
+        delay: 300
+      });
+    }, [i, u, p, c, d, t]);
+  }(e, t, J, Q, h, S, C);
+  let eT = eD(S);
+  let ej = Xr(Nl);
+  return jsxs("div", {
+    className: sb,
+    children: [jsxs("div", {
+      className: Jo,
+      children: [jsx(eB, {
+        totalOnActivePage: K.total,
+        resultsOnOtherPages: o,
+        allInstancesExpanded: R
+      }), 0 !== ed.length && jsxs(Fragment, {
+        children: [jsx(_$$K, {
+          onClick: t => {
+            e(OP.PREV, "button");
+          },
+          "aria-label": _$$t("canvas_search.previous"),
+          recordingKey: "figma_design_search.previous",
+          disabled: K.total <= 1,
+          htmlAttributes: {
+            "data-tooltip-type": Ib.TEXT,
+            "data-tooltip": _$$t("canvas_search.previous"),
+            "data-tooltip-shortcut-key": "canvas-search-prev"
+          },
+          children: jsx(_$$l, {})
+        }), jsx(_$$K, {
+          onClick: t => {
+            e(OP.NEXT, "button");
+          },
+          "aria-label": _$$t("canvas_search.next"),
+          recordingKey: "figma_design_search.next",
+          disabled: K.total <= 1,
+          htmlAttributes: {
+            "data-tooltip-type": Ib.TEXT,
+            "data-tooltip": _$$t("canvas_search.next"),
+            "data-tooltip-shortcut-key": "canvas-search-next"
+          },
+          children: jsx(_$$k, {})
+        })]
+      })]
+    }), jsxs(_$$P, {
+      className: bB,
+      scrollContainerRef: M,
+      children: [jsx(D8, {
+        style: {
+          height: ec.totalSize,
+          position: "relative"
+        },
+        tabIndex: 0,
+        role: "listbox",
+        recordingKey: "figma_design_search.results_list",
+        onKeyDown: eC,
+        onKeyUp: eT,
+        forwardedRef: u,
+        children: ec.virtualItems.map(e => {
+          let t = ed[e.index];
+          if (!t) return null;
+          let l = em(t);
+          let r = "result" === t.type && t.data.pageId === V?.pageId ? ev(t.data.index) : et.NONE;
+          return jsx("div", {
+            ref: e.measureRef,
+            className: N()({
+              [_$$T2]: r === et.TOP,
+              [fz]: r === et.MIDDLE,
+              [Nf]: r === et.BOTTOM,
+              [HR]: (I === en.SINGLE || V?.index == null) && p?.isPurple
+            }),
+            style: {
+              position: "absolute",
+              top: 0,
+              left: 0,
+              width: "100%",
+              transform: `translateY(${e.start}px)`
+            },
+            children: "header" === t.type ? jsx(ez, {
+              ...t.data,
+              setOpen: e => es(t.data.pageId, e)
+            }) : jsx(eG, {
+              activePageId: V?.pageId,
+              hasMultipleSelections: h,
+              indirectlySelected: eh(t),
+              isInHoveredSelectMode: I !== en.NONE && !!p,
+              isInMultiselectMode: m,
+              onDoubleClick: () => {
+                ej(void 0);
+                YEY.exitSearchMode(dNx.SELECT_ACTIVE);
+              },
+              onSelect: n => eb(n, t.data, e.index, l),
+              replacement: n,
+              result: t.data,
+              resultInputHandlerRef: u,
+              selected: l,
+              setHoveredResult: T,
+              singletonHoverSelected: r === et.ALL
+            })
+          }, "header" === t.type ? t.data.pageId : `${t.data.pageId}#${t.data.index}`);
+        })
+      }), U && jsx("div", {
+        className: _$$S,
+        children: jsx(dW, {
+          size: "medium"
+        })
+      }), o && B === Lov.ACTIVE_PAGE && jsx(_$$E, {
+        recordingKey: "figma_design_search.other_pages_button",
+        className: N()(fp, AX),
+        onClick: () => {
+          D(V2(Lov.ALL_PAGES));
+        },
+        children: tx("canvas_search.results_other_pages")
+      }), f && B === Lov.ALL_PAGES && jsx("div", {
+        className: du,
+        children: tx("canvas_search.results_unavailable_offline")
+      })]
+    })]
+  });
+}
+function eB({
+  totalOnActivePage: e,
+  resultsOnOtherPages: t,
+  allInstancesExpanded: n
+}) {
+  let l = sO();
+  let i = cJ();
+  let s = to();
+  let o = d4(e => e.mirror.appModel.pagesList);
+  let d = "";
+  d = 0 === e ? lH(o) || !n ? l ? _$$t("canvas_search.no_results_in_this_deck") : i ? _$$t("canvas_search.no_results_on_site") : s ? _$$t("canvas_search.no_results_in_buzz_file") : _$$t("canvas_search.no_results_on_page") : t ? _$$t("canvas_search.no_results") : _$$t("canvas_search.no_results_in_file") : _$$t("canvas_search.results_count", {
+    total: e
+  });
+  let c = (!l && !i && !s || getFeatureFlags().interop_pages) && (e > 0 || t || lH(o) || !n);
+  return jsxs("div", {
+    className: _M,
+    children: [jsx(_$$T, {
+      "data-testid": "canvas-search-info",
+      className: qp,
+      role: e > 0 ? "status" : "alert",
+      children: d
+    }), c && jsxs(Fragment, {
+      children: [jsx("span", {
+        className: hY,
+        children: "\xb7"
+      }), jsx(er, {
+        allInstancesExpanded: n
+      })]
+    })]
+  });
+}
+function ez({
+  pageId: e,
+  open: t,
+  setOpen: n,
+  numResults: l
+}) {
+  let r = eY().get(e);
+  let i = e === Xy ? _$$t("fullscreen.canvas_search.pages") : r.name;
+  return jsxs(GG, {
+    className: kQ,
+    onClick: () => n(!t),
+    children: [jsx(_$$B, {
+      className: _$$eO,
+      svg: t ? _$$A2 : _$$A3
+    }), jsx("span", {
+      className: rB,
+      children: i
+    }), jsx("span", {
+      className: hs,
+      children: l
+    })]
+  });
+}
+function eG({
+  result: e,
+  replacement: t,
+  activePageId: n,
+  resultInputHandlerRef: l,
+  selected: i,
+  indirectlySelected: o,
+  singletonHoverSelected: d,
+  onSelect: c,
+  onDoubleClick: u,
+  isInMultiselectMode: p,
+  isInHoveredSelectMode: h,
+  hasMultipleSelections: m,
+  setHoveredResult: _
+}) {
+  let E = eY();
+  let f = p8("currentPage");
+  let v = e.textMatch.matchType === Ifi.TEXT_MATCH;
+  let I = null != t && v && (E.get(e.guid)?.hasMissingFont || !1);
+  let y = !yZ();
+  let b = d4(e => e.mirror.appModel.pagesList);
+  let R = y && e.textMatch.matchType === Ifi.PAGE_MATCH && h3O.isIncrementalSession() && Fy(b, e.resultGuid) !== xal.LOADED;
+  let D = wA();
+  let O = N()(V3, {
+    [HR]: e.isPurple,
+    [wH]: i,
+    [r9]: R
+  });
+  let j = jsx(Bf, {
+    className: O,
+    guid: e.guid
+  });
+  I ? j = jsx("div", {
+    className: v9 + " " + O,
+    children: jsx(_$$B, {
+      svg: _$$A6
+    })
+  }) : e.guid === f && (j = jsx("div", {
+    className: v9 + " " + O,
+    children: jsx(_$$B, {
+      svg: _$$A4
+    })
+  }));
+  return jsxs(GG, {
+    className: N()({
+      [AX]: !0,
+      [wH]: i,
+      [Xt]: !i && o,
+      [rX]: d,
+      [Dw]: h,
+      [HR]: e.isPurple,
+      [r9]: R
+    }),
+    onMouseDown: e => {
+      e.preventDefault();
+    },
+    onClick: t => {
+      R ? D(_$$F.enqueue({
+        type: "offline-page-switch",
+        message: _$$t("fullscreen.pages_panel.unavailable_offline")
+      })) : (l.current?.focus(), p || !i || (Ay.mac ? t.metaKey : t.ctrlKey) || e.textMatch.matchType === Ifi.PAGE_MATCH ? c(t) : m || YEY.setOverlayVisible(!0));
+      t.preventDefault();
+      t.stopPropagation();
+    },
+    onDoubleClick: p || R ? lQ : u,
+    onMouseEnter: () => {
+      e.pageId === Xy || e.pageId !== n ? _(null) : _({
+        nodeGuid: e.resultGuid,
+        pageId: e.pageId,
+        index: e.index,
+        matchIndex: e.matchIndex,
+        isPurple: e.isPurple
+      });
+      v ? YEY.setHoveredResult(e.resultGuid, e.matchIndex) : e.textMatch.matchType === Ifi.LAYER_MATCH && Uc(e.resultGuid);
+    },
+    onMouseLeave: () => {
+      Uc("");
+      _(null);
+      YEY.setHoveredResult(AD, -1);
+    },
+    recordingKey: Pt("figma_design_search", "result", e.pageId, e.index),
+    children: [jsx("div", {
+      className: _P,
+      children: j
+    }), jsx("div", {
+      className: N()(D6, {
+        [c1]: v
+      }),
+      children: e.textContent && v ? jsx(eK, {
+        text: e.textContent,
+        match: e.textMatch,
+        replacement: I ? void 0 : t,
+        multiline: !0
+      }) : jsx(eU, {
+        result: e
+      })
+    }), R && jsx("div", {
+      className: QF,
+      "data-tooltip-type": Ib.TEXT,
+      "data-tooltip": _$$t("fullscreen.pages_panel.unavailable_offline"),
+      "data-onboarding-key": "page-unavailable-offline",
+      children: jsx(_$$B, {
+        className: VQ,
+        svg: _$$A5
+      })
+    })]
+  });
+}
+function eU({
+  result: e
+}) {
+  let {
+    query
+  } = d4(e => e.canvasSearch);
+  let n = e.name && e.stateGroupName ? _$$w(e.name) : e.name;
+  if (!n) return null;
+  let l = e.stateGroupName || e.containerName;
+  let i = -1;
+  e.textContent && (n = e.textContent, i = e.name?.toLowerCase().indexOf(query) ?? -1, l = e.name);
+  let s = n.toLowerCase().indexOf(query) ?? -1;
+  return jsxs("div", {
+    children: [n && s > -1 ? jsx(eK, {
+      text: n,
+      match: {
+        start: s,
+        end: s + query.length,
+        matchType: Ifi.LAYER_MATCH
+      },
+      multiline: !0
+    }) : jsx(ph, {
+      text: n
+    }), l && jsx("div", {
+      className: Gu,
+      children: i > -1 ? jsx(eK, {
+        text: l,
+        match: {
+          start: i,
+          end: i + query.length,
+          matchType: Ifi.LAYER_MATCH
+        }
+      }) : jsx(ph, {
+        text: l
+      })
+    })]
+  });
+}
+function eK({
+  text: e,
+  match: t,
+  replacement: n,
+  multiline: r
+}) {
+  let [i, s] = useState(e);
+  let [o, d] = useState(!1);
+  useEffect(() => {
+    s(e);
+  }, [e]);
+  useEffect(() => {
+    if (!o || i !== e) return;
+    let n = t.start;
+    let a = 0;
+    for (let t = n - 1; t >= 0; --t) if (/\s/.test(e[t]) && a++, 3 === a) {
+      n = t;
+      break;
+    }
+    a < 3 && (n = 0);
+    s(e.slice(n));
+  }, [o, i, e, t.start]);
+  let c = useMemo(() => jsx(eH, {
+    text: i,
+    replacement: n,
+    fullString: e,
+    match: t
+  }), [i, t, n, e]);
+  return jsx(ph, {
+    className: r ? c1 : "",
+    text: c,
+    multiline: r,
+    onTruncationChange: d
+  });
+}
+function eH({
+  text: e,
+  replacement: t,
+  fullString: n,
+  match: l
+}) {
+  let r = 0;
+  n && e !== n && (r = n.length - e.length);
+  let i = l.start - r;
+  let s = l.end - r;
+  let o = e.substring(0, i);
+  let d = e.substring(i, s);
+  let c = e.substring(s);
+  if (t && d.toLocaleLowerCase() !== t.toLocaleLowerCase()) {
+    let e = _$$r.detectTextTransform(d);
+    t = _$$r.applyTextTransform(t, e);
+  }
+  return jsxs(Fragment, {
+    children: [r ? "\u2026" : "", o, t ? jsxs(Fragment, {
+      children: [jsx(_$$E2, {
+        children: tx("canvas_search.original_replace_value")
+      }), jsx("span", {
+        className: of,
+        children: jsx("s", {
+          children: d
+        })
+      }), jsx(_$$E2, {
+        children: tx("canvas_search.updated_replace_value")
+      }), jsx("b", {
+        children: t
+      })]
+    }) : jsx("b", {
+      children: d
+    }), c]
+  });
+}
+export const f = $$eF0;

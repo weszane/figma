@@ -1,0 +1,26 @@
+import { d4 } from "../vendor/514228";
+import { Ez5, nQ7 } from "../figma_app/763686";
+import { getFeatureFlags } from "../905/601108";
+import { ut } from "../figma_app/84367";
+import { nT } from "../figma_app/53721";
+export function $$l2(e) {
+  return e?.view === "fullscreen" && e?.editorType === nT.Cooper;
+}
+export function $$d3(e) {
+  return $$l2(e.selectedView);
+}
+export function $$c4() {
+  return d4($$d3);
+}
+export function $$u0() {
+  return !!getFeatureFlags().cooper;
+}
+export function $$p1() {
+  let e = $$c4();
+  return ut(Ez5?.interopToolMode(), nQ7.SELF) === nQ7.DESIGN && e;
+}
+export const HH = $$u0;
+export const Oe = $$p1;
+export const eM = $$l2;
+export const im = $$d3;
+export const to = $$c4;

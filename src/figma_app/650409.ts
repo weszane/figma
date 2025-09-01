@@ -1,0 +1,10 @@
+var $$n1 = (e => (e.DASHBOARD = "", e.WORKSPACES = "workspaces", e.TEAMS = "teams", e.MEMBERS = "members", e.CONTENT = "content", e.ACTIVITY = "activity", e.BILLING = "billing", e.RESOURCES = "resources", e.SETTINGS = "settings", e))($$n1 || {});
+var $$i3 = (e => (e.WORKSPACES = "workspaces", e.TEAMS = "teams", e.ABANDONED_DRAFTS = "abandoned-drafts", e.CONNECTED_PROJECTS = "connected-projects", e.FILE_LIST_BETA = "file-list-beta", e.ACCESS_INSIGHT = "access-insight", e))($$i3 || {});
+var $$a4 = (e => (e.LIBRARIES = "libraries", e.SHARED_FONTS = "fonts", e.APPROVED_PLUGINS = "plugins", e.APPROVED_WIDGETS = "widgets", e))($$a4 || {});
+var $$s0 = (e => (e.OVERVIEW = "overview", e.INVOICES = "invoices", e.BILLING_GROUPS = "billing-groups", e))($$s0 || {});
+var $$o2 = (e => (e.ALL_MEMBERS = "all-members", e.USER_GROUPS = "user-groups", e))($$o2 || {});
+export const G_ = $$s0;
+export const J7 = $$n1;
+export const M7 = $$o2;
+export const SN = $$i3;
+export const _d = $$a4;

@@ -1,0 +1,91 @@
+import { jsxs, jsx } from "react/jsx-runtime";
+import { TU, xw, zw } from "../905/585727";
+import { bL, l9, mc, c$ } from "../905/493196";
+import { h } from "../905/270045";
+import { getFeatureFlags } from "../905/601108";
+import { dZ } from "../figma_app/459490";
+import { t as _$$t, tx } from "../905/303541";
+import { sZ } from "../905/845253";
+import { JT } from "../figma_app/632248";
+export function $$p0(e, t) {
+  switch (e) {
+    case JT.EDIT_IMAGE:
+      return function (e) {
+        let t = [];
+        getFeatureFlags().aip_edit_image_model_picker && (dZ(e) || t.push({
+          label: _$$t("image_ai.model_type.gpt_image_1"),
+          value: TU.OPENAI_GPT_IMAGE_1
+        }), t.push({
+          label: _$$t("image_ai.model_type.gemini_2_0_flash_preview_image_generation"),
+          value: TU.GOOGLE_GEMINI_2_0_FLASH_PREVIEW_IMAGE_GENERATION
+        }));
+        return t;
+      }(t);
+    case JT.GENERATE_IMAGE:
+      return function (e) {
+        let t = [];
+        dZ(e) || t.push({
+          label: _$$t("image_ai.model_type.gpt_image_1"),
+          value: xw.GPT_4O_IMAGE
+        });
+        t.push({
+          label: _$$t("image_ai.model_type.imagen_3"),
+          value: xw.IMAGEN_3
+        });
+        t.push({
+          label: _$$t("image_ai.model_type.titan_v2"),
+          value: xw.TITAN_V2
+        });
+        return t;
+      }(t);
+    case JT.IMAGE_FILL:
+      return function (e) {
+        let t = [];
+        dZ(e) || t.push({
+          label: _$$t("image_ai.model_type.gpt_image_1"),
+          value: zw.GPT_4O_IMAGE
+        });
+        t.push({
+          label: _$$t("image_ai.model_type.imagen_3"),
+          value: zw.IMAGEN_3
+        });
+        t.push({
+          label: _$$t("image_ai.model_type.titan_v2"),
+          value: zw.TITAN_V2
+        });
+        t.push({
+          label: _$$t("image_ai.model_type.unsplash"),
+          value: zw.UNSPLASH
+        });
+        return t;
+      }(t);
+  }
+}
+export function $$m1({
+  modelType: e,
+  setModelType: t,
+  action: i
+}) {
+  let r = $$p0(i, sZ());
+  if (!r[0]) return null;
+  let o = e ?? r[0].value;
+  return jsxs(bL, {
+    value: o,
+    onChange: e => t(e),
+    children: [jsx(l9, {
+      label: jsx(h, {
+        children: tx("image_ai.model_type")
+      })
+    }), jsxs(mc, {
+      children: [jsx("div", {
+        className: "xclx6tv x17akokd x1qxcl5b x1betce5 xno9bf3 x7ey041 xa1e1dt",
+        children: tx("image_ai.model_type")
+      }), r.map(e => jsx(c$, {
+        value: e.value,
+        children: e.label
+      }, e.value))]
+    })]
+  });
+}
+export const O = $$p0;
+export const n = $$m1;

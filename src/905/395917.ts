@@ -1,0 +1,16 @@
+import { NC } from "../905/17179";
+import { b1, KW } from "../905/890368";
+let $$a5 = NC("ORGS_BATCH_PUT");
+let $$s3 = NC("ORGS_LOCK_ACCOUNT");
+let $$o1 = NC("ORGS_UNLOCK_ORGS");
+let $$l4 = NC("ORGS_LOCK_ORGS");
+let $$d2 = NC("ORGS_SET_ORG_ID");
+let $$c0 = b1;
+let $$u6 = KW;
+export const F6 = $$c0;
+export const K5 = $$o1;
+export const _P = $$d2;
+export const dH = $$s3;
+export const tJ = $$l4;
+export const uo = $$a5;
+export const yJ = $$u6;

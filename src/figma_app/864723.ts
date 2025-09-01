@@ -1,0 +1,12 @@
+import { eU } from "../figma_app/27355";
+import { bt } from "../905/270322";
+let $$a4 = bt(e => e.user);
+let $$s2 = eU(e => e($$a4)?.id);
+let $$o3 = eU(e => e($$a4)?.created_at);
+let $$l1 = bt(e => e.userStateLoaded);
+let $$d0 = bt(e => e.isStarterUser);
+export const UQ = $$d0;
+export const VF = $$l1;
+export const kS = $$s2;
+export const mp = $$o3;
+export const p9 = $$a4;

@@ -1,0 +1,215 @@
+import { useRef } from "react";
+import { rXF, Z_n, CWU, mHF } from "../figma_app/763686";
+import { dI } from "../905/871411";
+import { dI as _$$dI } from "../905/805904";
+import { getFeatureFlags } from "../905/601108";
+import { zl } from "../figma_app/27355";
+import { az } from "../905/449184";
+import { debugState } from "../905/407919";
+import { h as _$$h } from "../905/207101";
+import { ZC } from "../figma_app/39751";
+import { x1 } from "../905/714362";
+import { ds } from "../figma_app/314264";
+import { ZR, O8 } from "../905/313095";
+import { X } from "../905/853613";
+import { tS } from "../figma_app/516028";
+import { TA } from "../905/372672";
+import { Ev, Eo } from "../figma_app/216057";
+import { y as _$$y, v as _$$v } from "../905/456837";
+function T(e) {
+  switch (e) {
+    case rXF.BOOLEAN:
+      return "boolean";
+    case rXF.FLOAT:
+      return "float";
+    case rXF.STRING:
+      return "string";
+    case rXF.COLOR:
+      return "color";
+    case rXF.MAP:
+      return "map";
+    case rXF.SYMBOL_ID:
+      return "symbol_id";
+    case rXF.FONT_STYLE:
+      return "font_style";
+    case rXF.TEXT_DATA:
+      return "text_data";
+    case rXF.IMAGE:
+      return "image";
+    case rXF.LINK:
+      return "link";
+    case rXF.JS_RUNTIME_ALIAS:
+      return "js_runtime_alias";
+    case rXF.SLOT_CONTENT_ID:
+      return "slot_content_id";
+  }
+}
+export function $$I0({
+  isLoading: e,
+  eventName: t
+}) {
+  let r = ZC(e);
+  let i = useRef();
+  _$$h(() => {
+    i.current = performance.now();
+  });
+  let a = function (e) {
+    let t = useRef(!1);
+    return function () {
+      t.current || (e(), t.current = !0);
+    };
+  }(function () {
+    if (i.current) {
+      let e = performance.now() - i.current;
+      az.trackDefinedMetric(t, {
+        loadTimeMs: e
+      });
+    }
+  });
+  r && !e && a();
+}
+export function $$S1({
+  resolvedType: e
+}) {
+  let t = tS();
+  let r = TA();
+  _$$h(() => {
+    t && r && az.trackDefinedEvent("variables.inline_creation_dialog_opened", {
+      fileKey: t,
+      userId: r,
+      resolvedType: T(e)
+    });
+  });
+}
+function v(e) {
+  return "type" in e;
+}
+export function $$A2(e, t, r) {
+  try {
+    if (v(t) ? t.type === Z_n.ALIAS : "ALIAS" === t.dataType) {
+      let d = v(t) ? t.value : _$$dI(t.value?.alias);
+      let u = v(t) ? T(t.resolvedType) : t.resolvedDataType;
+      let p = debugState.getState();
+      let _ = Object.keys(p.mirror.sceneGraphSelection);
+      let f = p.openFile?.key;
+      let E = p.user && p.user.id;
+      let I = zl.get(Ev(d));
+      let S = I?.variableSetId ? zl.get(Eo(I?.variableSetId))?.node_id : null;
+      let A = I?.variableSetId ? zl.get(Eo(I?.variableSetId))?.sortPosition : null;
+      let x = CWU.getSubscribedVariableInfo(d);
+      let N = ZR(I ?? O8(x), p.openFile);
+      let C = X(N);
+      let w = p.mirror.selectedStyleProperties.guid;
+      w && (_ = [dI(w)]);
+      let O = function () {
+        if (getFeatureFlags().aip_flower_garden_design_logging && mHF) return JSON.stringify(Object.fromEntries(mHF.getVariableSetConsumptionForDocument()));
+      }();
+      let R = _$$y(d);
+      for (let t of (_$$v(d), _)) {
+        var n;
+        let a = function (e) {
+          if (getFeatureFlags().aip_flower_garden_design_logging && mHF) return JSON.stringify(Object.fromEntries(mHF.getVariableSetConsumptionForHighestNodeContainer(e)));
+        }(t);
+        ds("ds_variable_reference_set", f, p, {
+          userId: E,
+          variable_id: d,
+          collection_id: S,
+          value_type: u?.toString().toUpperCase(),
+          node_id: t,
+          variable_field_id: e,
+          is_style: !!w,
+          is_shared: I?.subscriptionStatus === "SUBSCRIBED",
+          library_key: N,
+          partner_type: C,
+          appleEulaAccepted: !!p.userFlags.apple_eula_accepted,
+          attachmentSurfaceKey: r?.attachmentSurfaceKey,
+          attachmentRecordingKey: r?.attachmentRecordingKey,
+          previousValueVariableKey: r?.previousVariableKey,
+          previousValueStyleLibraryKey: r?.previousStyleKey,
+          hasVisiblePaintBelow: r?.hasVisiblePaintBelow,
+          modeContext: (n = r?.modeContext) ? JSON.stringify(Object.entries(n).map(([e, t]) => ({
+            variableSetKey: e,
+            modeGuidOrMixed: t
+          }))) : null,
+          variableSetConsumptionForSelection: a,
+          variableSetConsumptionForDocument: O,
+          sessionId: r?.sessionId,
+          elapsedSecondsSinceLastInsertions: R,
+          rerankerQueryId: r?.queryId,
+          variable_collection_position: A
+        }, {
+          forwardToDatadog: !0
+        });
+      }
+    } else if (v(t) && t.type === Z_n.FONT_STYLE) {
+      let r = t.value.asString ?? t.value.asFloat;
+      let n = debugState.getState();
+      let s = Object.keys(n.mirror.sceneGraphSelection);
+      let o = n.openFile?.key;
+      let d = n.user && n.user.id;
+      let u = zl.get(Ev(r?.value));
+      let p = u?.variableSetId ? zl.get(Eo(u?.variableSetId))?.node_id : null;
+      let _ = u?.variableSetId ? zl.get(Eo(u?.variableSetId))?.sortPosition : null;
+      let f = CWU.getSubscribedVariableInfo(r?.value);
+      let E = ZR(u ?? O8(f), n.openFile);
+      let b = X(E);
+      let I = n.mirror.selectedStyleProperties.guid;
+      for (let t of (I && (s = [dI(I)]), s)) ds("ds_variable_reference_set", o, n, {
+        userId: d,
+        variable_id: r?.value,
+        collection_id: p,
+        value_type: r?.resolvedType ? T(r?.resolvedType).toUpperCase() : void 0,
+        node_id: t,
+        variable_field_id: e,
+        is_style: !!I,
+        is_shared: u?.subscriptionStatus === "SUBSCRIBED",
+        library_key: E,
+        partner_type: b,
+        appleEulaAccepted: !!n.userFlags.apple_eula_accepted,
+        variable_collection_position: _
+      }, {
+        forwardToDatadog: !0
+      });
+    }
+  } catch (e) {
+    x1("variables", "Could not log variable consumption", {
+      exception: e
+    }, {
+      reportAsSentryError: !0
+    });
+  }
+}
+export function $$x3(e, t) {
+  try {
+    let r = debugState.getState();
+    let n = Object.keys(r.mirror.sceneGraphSelection);
+    let a = r.openFile?.key;
+    let s = r.user && r.user.id;
+    let o = zl.get(Ev(e));
+    let d = CWU.getSubscribedVariableInfo(e);
+    let u = ZR(o ?? O8(d), r.openFile);
+    let p = X(u);
+    for (let i of n) ds("ds_variable_reference_set", a, r, {
+      userId: s,
+      variable_id: e,
+      value_type: T(t),
+      node_id: i,
+      variable_field_id: "VARIANT_PROPERTIES",
+      library_key: u,
+      partner_type: p,
+      appleEulaAccepted: !!r.userFlags.apple_eula_accepted
+    }, {
+      forwardToDatadog: !0
+    });
+  } catch (e) {
+    x1("variables", "Could not log variant binding variable consumption", {
+      exception: e
+    }, {
+      reportAsSentryError: !0
+    });
+  }
+}
+export const D = $$I0;
+export const NF = $$S1;
+export const oz = $$A2;
+export const ty = $$x3;

@@ -1,0 +1,29 @@
+import { jsx } from "react/jsx-runtime";
+import { useCallback } from "react";
+import a from "classnames";
+import { P } from "../905/347284";
+import { yc } from "../905/825399";
+var s = a;
+export function $$d0(e) {
+  let {
+    onScroll,
+    className,
+    ...a
+  } = e;
+  let {
+    isScrolled,
+    handleScroll
+  } = yc();
+  let u = useCallback((e, i) => {
+    handleScroll(e);
+    onScroll?.(e, i);
+  }, [handleScroll, onScroll]);
+  return jsx(P, {
+    ...a,
+    onScroll: u,
+    className: s()(e.className, "scroll_container_with_border--container--bOpnt", {
+      "scroll_container_with_border--withBorder--L0j77": isScrolled
+    })
+  });
+}
+export const $ = $$d0;

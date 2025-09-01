@@ -1,0 +1,305 @@
+import { jsx } from "react/jsx-runtime";
+import { useCallback, useMemo } from "react";
+import { d4, wA } from "../vendor/514228";
+import { ServiceCategories as _$$e } from "../905/165054";
+import { E as _$$E } from "../905/632989";
+import { J } from "../905/125993";
+import { D } from "../905/716990";
+import { glU } from "../figma_app/763686";
+import { Pt } from "../figma_app/806412";
+import { nl } from "../figma_app/257275";
+import { tH } from "../905/751457";
+import { t as _$$t } from "../905/303541";
+import { Fj } from "../figma_app/793429";
+import { sf } from "../905/929976";
+import { AS, $O } from "../905/156213";
+import { T as _$$T } from "../905/858738";
+import { _6 } from "../figma_app/386952";
+import { Fk } from "../figma_app/167249";
+import { Ib } from "../905/129884";
+import { cn } from "../905/959568";
+import { P } from "../905/647955";
+import { WP, W8, iB, wR, E6, Gw, vl, b6 } from "../905/560959";
+import { Zh, g_, _o } from "../905/729876";
+function x({
+  toggled: e,
+  onClick: t,
+  recordingKey: r
+}) {
+  return jsx(tH, {
+    boundaryKey: "varDetails_inspectEntry",
+    fallback: jsx(O, {}),
+    team: _$$e.DEVELOPER_TOOLS,
+    sentryTags: {
+      area: _$$e.DEVELOPER_TOOLS
+    },
+    children: jsx(_$$E, {
+      "aria-label": _$$t("dev_handoff.variables.details_button_aria_label"),
+      onClick: t,
+      className: e ? Zh : g_,
+      "aria-pressed": e,
+      recordingKey: r,
+      htmlAttributes: {
+        "data-tooltip": _$$t("dev_handoff.variables.details_button_aria_label"),
+        "data-tooltip-type": Ib.TEXT
+      },
+      children: jsx(J, {})
+    })
+  });
+}
+function N({
+  toggled: e,
+  matchingVars: t,
+  onClick: r,
+  recordingKey: i
+}) {
+  let a = t.ids.length;
+  return jsx(tH, {
+    boundaryKey: "suggestedVars_inspectEntry",
+    fallback: jsx(O, {}),
+    team: _$$e.DEVELOPER_TOOLS,
+    sentryTags: {
+      area: _$$e.DEVELOPER_TOOLS
+    },
+    children: jsx(_$$E, {
+      "aria-label": _$$t("dev_handoff.code_panel.suggested_vars_tooltip", {
+        count: a
+      }),
+      onClick: r,
+      className: e ? Zh : g_,
+      "aria-pressed": e,
+      recordingKey: i,
+      htmlAttributes: {
+        "data-tooltip": _$$t("dev_handoff.code_panel.suggested_vars_tooltip", {
+          count: a
+        }),
+        "data-tooltip-type": Ib.TEXT
+      },
+      children: jsx(D, {})
+    })
+  });
+}
+function C({
+  toggled: e,
+  onClick: t,
+  recordingKey: r
+}) {
+  return jsx(tH, {
+    boundaryKey: "styleDetails_inspectEntry",
+    fallback: jsx(O, {}),
+    team: _$$e.DEVELOPER_TOOLS,
+    sentryTags: {
+      area: _$$e.DEVELOPER_TOOLS
+    },
+    children: jsx(_$$E, {
+      "aria-label": _$$t("dev_handoff.styles.details_button_aria_label"),
+      onClick: t,
+      className: e ? Zh : g_,
+      "aria-pressed": e,
+      recordingKey: r,
+      htmlAttributes: {
+        "data-tooltip": _$$t("dev_handoff.styles.details_button_aria_label"),
+        "data-tooltip-type": Ib.TEXT
+      },
+      children: jsx(J, {})
+    })
+  });
+}
+export function $$w2(e) {
+  let t = d4((e) => e.modalShown);
+  let r = !!t && t.type === WP && t.data?.rowRef && t.data.rowRef.current === e?.current;
+  let n = !!t && t.type === W8 && t.data?.rowRef && t.data.rowRef.current === e?.current;
+  return r || n;
+}
+function O() {
+  return jsx("div", {
+    className: _o
+  });
+}
+export function $$R0({
+  variableId: e,
+  matchingVars: t,
+  rowRef: r,
+  rowRefForModalId: i,
+  isHovered: a,
+  recordingKey: s
+}) {
+  return jsx($$L1, {
+    variableId: e,
+    matchingVars: t,
+    rowRef: r,
+    rowRefForModalId: i,
+    isHovered: a,
+    recordingKey: s
+  });
+}
+export function $$L1({
+  variableId: e,
+  matchingVars: t,
+  styleId: r,
+  styleNodeId: s,
+  styleType: o,
+  rowRef: l,
+  rowRefForModalId: d,
+  isHovered: _,
+  recordingKey: h
+}) {
+  let {
+    isDetailModalShownForRow,
+    toggleDetailModal
+  } = function (e, t, r) {
+    let n = wA();
+    let s = d4((e) => e.modalShown);
+    let o = _6();
+    let l = !!s && s.type === WP;
+    let d = l && s.data.variableId === t && s.data.rowRef.current === (r?.current ?? e?.current) || !!o.variableIdForDetailsPanel && o.variableIdForDetailsPanel === t;
+    return {
+      toggleDetailModal: useCallback((i) => {
+        if (i.stopPropagation(), e?.current && t && "fullscreen" === o.view) {
+          if (d) {
+            _$$T() ? n(sf({
+              ...o,
+              variableIdForDetailsPanel: void 0
+            })) : n(AS());
+            return;
+          }
+          if (_$$T()) n(sf({
+            ...o,
+            variableIdForDetailsPanel: t
+          }));else {
+            l && n(AS());
+            let i = cn(e?.current, iB + wR);
+            n($O({
+              type: WP,
+              data: {
+                position: i,
+                variableId: t,
+                rowRef: r ?? e,
+                entryPoint: E6.Properties
+              },
+              optOutOfPrevModal: !0
+            }));
+          }
+        }
+      }, [n, l, d, e, r, o, t]),
+      isDetailModalShownForRow: d
+    };
+  }(l, e, d);
+  let {
+    isMatchingVarsModalShownForRow,
+    toggleMatchingVarsModal
+  } = function (e, t, r) {
+    let n = wA();
+    let s = d4((e) => e.modalShown);
+    let o = !!s && s.type === W8;
+    let l = o && s.data?.rowRef && s.data.rowRef.current === (r?.current ?? e?.current);
+    return {
+      toggleMatchingVarsModal: useCallback((i) => {
+        if (i.stopPropagation(), !e?.current || !t) return;
+        if (l) {
+          n(AS());
+          return;
+        }
+        o && n(AS());
+        let a = cn(e?.current, Gw + wR);
+        n($O({
+          type: W8,
+          data: {
+            vars: t,
+            position: a,
+            rowRef: r ?? e,
+            entryPoint: E6.Properties
+          },
+          optOutOfPrevModal: !0
+        }));
+      }, [n, o, l, e, r, t]),
+      isMatchingVarsModalShownForRow: l
+    };
+  }(l, t, d);
+  let {
+    isStyleDetailModalShownForRow,
+    toggleStyleDetailModal
+  } = function (e, t, r, n, s) {
+    let o = wA();
+    let l = d4((e) => e.modalShown);
+    let d = _6();
+    let u = !!l && l.type === vl;
+    let p = u && l.data?.rowRef && l.data.rowRef.current === (s?.current ?? e?.current) || d.styleForDetailsPanel?.styleId === t;
+    let {
+      key,
+      content_hash,
+      style_type
+    } = Fj(t) ?? {};
+    let S = useMemo(() => key ? {
+      key,
+      version: content_hash
+    } : void 0, [key, content_hash]);
+    let A = Fk((e, t) => t ? e?.getStyleNodeByRef(t)?.guid : void 0, S) ?? r;
+    return {
+      toggleStyleDetailModal: useCallback((r) => {
+        if (r.stopPropagation(), e?.current && t && A && n) {
+          if (p) {
+            _$$T() ? o(sf({
+              ...d,
+              styleForDetailsPanel: void 0
+            })) : o(AS());
+            return;
+          }
+          if (glU?.selectStyleByGuid(A), _$$T()) o(sf({
+            ...d,
+            styleForDetailsPanel: {
+              styleId: t,
+              styleNodeId: A,
+              styleType: style_type ?? n
+            }
+          }));else {
+            u && o(AS());
+            let r = cn(e.current, b6 + wR);
+            o($O({
+              type: vl,
+              data: {
+                styleId: t,
+                styleNodeId: A,
+                styleType: style_type ?? n,
+                position: r,
+                rowRef: s ?? e
+              },
+              optOutOfPrevModal: !0
+            }));
+          }
+        }
+      }, [o, u, p, e, s, d, t, A, n, style_type]),
+      isStyleDetailModalShownForRow: p
+    };
+  }(l, r, s, o, d);
+  if (P()) return jsx(O, {});
+  if (e && (_ || isDetailModalShownForRow || nl())) return jsx("div", {
+    className: _o,
+    children: jsx(x, {
+      onClick: toggleDetailModal,
+      toggled: isDetailModalShownForRow,
+      recordingKey: Pt(h, `details_entry.${e}`)
+    })
+  });
+  if (s && o && (_ || isStyleDetailModalShownForRow || nl())) return jsx("div", {
+    className: _o,
+    children: jsx(C, {
+      onClick: toggleStyleDetailModal,
+      toggled: isStyleDetailModalShownForRow,
+      recordingKey: Pt(h, `styleDetails_entry.${s}`)
+    })
+  });
+  let k = !!t && t.ids.length > 0;
+  return !_$$T() && !e && k && (_ || isMatchingVarsModalShownForRow || nl()) ? jsx("div", {
+    className: _o,
+    children: jsx(N, {
+      onClick: toggleMatchingVarsModal,
+      matchingVars: t,
+      toggled: isMatchingVarsModalShownForRow,
+      recordingKey: Pt(h, `suggestions_entry.${t?.rawValue.value.toString()}`)
+    })
+  }) : jsx(O, {});
+}
+export const $Q = $$R0;
+export const J3 = $$L1;
+export const Yq = $$w2;

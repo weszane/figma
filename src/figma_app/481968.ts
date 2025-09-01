@@ -1,0 +1,163 @@
+import { useRef, useMemo, useState, useCallback } from "react";
+import { Hur, glU } from "../figma_app/763686";
+import { l7 } from "../905/189185";
+import { UN } from "../905/700578";
+import { md } from "../figma_app/27355";
+import { am } from "../figma_app/901889";
+import { jk } from "../905/609396";
+import { useSprigWithSampling } from "../905/99656";
+import { fF } from "../905/471229";
+import { t as _$$t } from "../905/303541";
+import { Ay } from "../figma_app/432652";
+import { _s } from "../figma_app/33126";
+import { J as _$$J } from "../905/915227";
+import { kS } from "../figma_app/864723";
+import { Z } from "../905/104740";
+import { i as _$$i } from "../figma_app/741237";
+import { QZ } from "../figma_app/62612";
+import { As, ze } from "../figma_app/516028";
+import { l0 } from "../figma_app/610446";
+import { um, E$, ez } from "../figma_app/835718";
+import { Ux } from "../figma_app/864246";
+import v from "../figma_app/101849";
+let A = e => ({
+  ...e,
+  width: e.w,
+  height: e.h
+});
+export function $$x1() {
+  let e = useRef(_$$t("whiteboard.ai_cluster.loading_section_base"));
+  let t = useMemo(() => UN(), []);
+  let {
+    Sprig
+  } = useSprigWithSampling();
+  let [x, N] = useState(!1);
+  let C = am();
+  let w = useRef();
+  let O = Z("figjam_summary_navigate");
+  let R = um();
+  let L = md(_s);
+  let P = md(As);
+  let D = md(kS);
+  let k = md(ze);
+  let M = md(_$$J);
+  let F = {
+    orgId: L,
+    teamId: P || null,
+    fileKey: k,
+    userId: D || null,
+    trackingSessionId: fF(),
+    fileSeq: M?.toString() || null
+  };
+  let j = useCallback(e => {
+    let r = t.get(e);
+    r?.isAlive && l7.system("remove-cluster-placeholder", () => Hur?.removePlaceholder(e));
+    w.current && (clearInterval(w.current), w.current = void 0);
+  }, [w, t]);
+  return {
+    clusterCanvasSelection: () => {
+      if (!glU) return;
+      let n = new jk(Ux.TIME_TAKEN_TO_COMPLETE, {});
+      n.start();
+      N(e => !e);
+      let s = glU.getSelectionBounds();
+      let {
+        v,
+        data,
+        characterCount
+      } = v.zi(t);
+      let u = e.current + ".";
+      let p = l7.system("create-cluster-placeholder", () => {
+        if (!Hur) return;
+        let e = Hur.createPlaceholder(s);
+        _$$i(e, u);
+        return e;
+      });
+      p && (O(QZ({
+        nodeId: p,
+        alwaysPan: !1
+      })), w.current = setInterval(() => {
+        u.length === e.current.length + 3 ? u = e.current + "." : u += ".";
+        l7.system("update-cluster-placeholder-text", () => _$$i(p, u));
+      }, 1e3), Ay.figjam.cluster({
+        v,
+        data,
+        tokenCount: characterCount / 4
+      }, F).then(e => {
+        let o = t.get(p);
+        let d = o?.containingCanvas;
+        if (!o?.isAlive || !d) return;
+        let u = o?.absoluteRenderBounds;
+        let _ = u ? A(u) : s;
+        j(p);
+        let [h, m] = l7.user("create-and-place-clusters", () => Hur ? Hur.createAndPlaceClusters(e.clusters, _, d, !1) : [void 0, void 0]);
+        Sprig("track", l0);
+        N(!1);
+        let g = n.stop();
+        g && C(Ux.TIME_TAKEN_TO_COMPLETE, {
+          elapsed_ms: g
+        }, {
+          forwardToDatadog: !0
+        });
+        C("ai_sticky_clusters_created", {
+          request_id: e.requestUuid,
+          nodes_clustered: data.map(e => e.id.split("|")).flat(),
+          num_characters_input: characterCount,
+          success: !0,
+          output_section_node_ids: m,
+          output_sticky_node_ids: h,
+          failure_reason: ""
+        });
+      }).catch(e => {
+        j(p);
+        let t = E$(e, ez.CLUSTER);
+        C("ai_sticky_clusters_created", {
+          nodes_clustered: data.map(e => e.id.split("|")).flat(),
+          num_characters_input: characterCount,
+          success: !1,
+          failure_reason: t.message
+        });
+        R(t.message, ez.CLUSTER);
+      }));
+    },
+    requestIsPending: x
+  };
+}
+export function $$N0(e, t = !1) {
+  let r = useMemo(() => UN(), []);
+  let [o, l] = useState(!1);
+  let d = useRef();
+  let c = Z("figjam_local_cluster_navigate");
+  let u = useCallback(e => {
+    let t = r.get(e);
+    t?.isAlive && l7.system("remove-cluster-placeholder", () => Hur?.removePlaceholder(e));
+    d.current && (clearInterval(d.current), d.current = void 0);
+  }, [d, r]);
+  return {
+    cluster: () => {
+      if (!glU) return;
+      l(e => !e);
+      let n = glU.getSelectionBounds();
+      let s = e();
+      let o = l7.system("create-cluster-placeholder", () => {
+        if (Hur) return Hur.createPlaceholder(n);
+      });
+      if (!o) return;
+      c(QZ({
+        nodeId: o,
+        alwaysPan: !1
+      }));
+      let d = r.get(o);
+      let p = d?.containingCanvas;
+      if (!d?.isAlive || !p) return;
+      let _ = d?.absoluteRenderBounds;
+      let h = _ ? A(_) : n;
+      u(o);
+      l7.system("create-and-place-clusters", () => Hur?.createAndPlaceClusters(s, h, p, t));
+      l(!1);
+    },
+    requestIsPending: o
+  };
+}
+export const J = $$N0;
+export const f = $$x1; 

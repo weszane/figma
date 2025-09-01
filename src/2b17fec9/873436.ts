@@ -1,0 +1,76 @@
+import { jsx } from "react/jsx-runtime";
+import { useState, useEffect } from "react";
+import { Ez5 } from "../figma_app/763686";
+import { fp } from "../figma_app/27355";
+import { gB } from "../905/723791";
+import { tx } from "../905/303541";
+import { ut } from "../figma_app/84367";
+import { WZ } from "../905/893645";
+import { F_ } from "../905/858282";
+import { xT } from "../figma_app/195407";
+import { oh } from "../905/526509";
+import { c8 } from "../2b17fec9/446151";
+import { ke } from "../9410/757252";
+let $$_2 = "figjam-shapes-sidebar-onboarding-key";
+let $$x0 = "figjam-developer-shapes-onboarding-key";
+let $$g1 = "figjam-more-shapes-onboarding-key";
+export function $$j3({
+  complete: e
+}) {
+  let [t, i] = fp(oh);
+  let j = ut(Ez5?.figjamState().isShapesSidebarOpen, !1);
+  let b = gB({
+    shapesSidebarOpen: j
+  });
+  let [y, v] = useState(!1);
+  let [C, T] = useState(!1);
+  let E = ke();
+  useEffect(() => {
+    C && !("open" === t.state && "shape" === t.tool) && e();
+  }, [b, C, e, t]);
+  return jsx(WZ, {
+    isShowing: !0,
+    steps: [{
+      title: tx("whiteboard.ad_onboarding.shapes_sidebar.header"),
+      description: tx("whiteboard.ad_onboarding.shapes_sidebar.body"),
+      targetKey: $$_2,
+      trackingContextName: "AD Onboarding > Shapes Sidebar",
+      arrowPosition: F_.LEFT_TITLE,
+      whenTargetLost: "complete",
+      highlightBlue: !0
+    }, {
+      title: tx("whiteboard.ad_onboarding.developer_shapes.header"),
+      description: tx("whiteboard.ad_onboarding.developer_shapes.body"),
+      targetKey: $$x0,
+      trackingContextName: "AD Onboarding > Developer Shapes",
+      arrowPosition: F_.LEFT_TITLE,
+      onStepShow: () => {
+        y || v(!0);
+        let e = xT($$x0);
+        e && e.scrollIntoView();
+      },
+      whenTargetLost: "complete",
+      disableHighlight: !0
+    }, {
+      title: tx("whiteboard.ad_onboarding.more_shapes_button.header"),
+      description: tx("whiteboard.ad_onboarding.more_shapes_button.body"),
+      targetKey: $$g1,
+      trackingContextName: "AD Onboarding > More Shapes",
+      onStepShow: () => {
+        C || (E(), i({
+          type: "open",
+          tool: "shape"
+        }), T(!0));
+      },
+      arrowPosition: F_.LEFT_TITLE,
+      whenTargetLost: "complete",
+      highlightBlue: !0
+    }],
+    onComplete: e,
+    userFlagOnShow: c8
+  });
+}
+export const D8 = $$x0;
+export const W2 = $$g1;
+export const Zh = $$_2;
+export const sD = $$j3;

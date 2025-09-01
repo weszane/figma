@@ -1,0 +1,14 @@
+import i from "../vendor/853880";
+import s from "../vendor/638593";
+import o from "../vendor/45683";
+import a from "../vendor/701311";
+import h from "../vendor/262717";
+import d from "../vendor/9233";
+import p, { alea, xor128, xorwow, xorshift7, xor4096, tychei } from "../vendor/294757";
+alea = i;
+xor128 = s;
+xorwow = o;
+xorshift7 = a;
+xor4096 = h;
+tychei = d;
+module.exports = p;

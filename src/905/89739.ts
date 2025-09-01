@@ -1,0 +1,16 @@
+let $$n0 = "scale_factor_modal--scaleFactorDescription--tm4w2 text--fontPos11--2LvXf text--_fontBase--QdLsd";
+let $$r4 = "scale_factor_modal--scaleFactorInputContainer--ph9uk";
+let $$a3 = "scale_factor_modal--scaleFactorInput--bEj9D";
+let $$s5 = "scale_factor_modal--scaleFactorDropdownContainer--GsEeY";
+let $$o6 = "scale_factor_modal--scaleFactorDropdown--Nzf4c";
+let $$l7 = "scale_factor_modal--scaleFactorDropdownSpacer--ZrQgd";
+let $$d1 = "scale_factor_modal--rem--Vw4CA";
+let $$c2 = "scale_factor_modal--languageDropdownContainer--IMaqY";
+export const A3 = $$n0;
+export const D0 = $$d1;
+export const DT = $$c2;
+export const IC = $$a3;
+export const hq = $$r4;
+export const iF = $$s5;
+export const j8 = $$o6;
+export const rc = $$l7;

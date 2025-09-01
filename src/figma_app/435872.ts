@@ -1,0 +1,65 @@
+import { zl } from "../figma_app/27355";
+import { NC } from "../905/17179";
+import { sx } from "../905/449184";
+import { eD } from "../figma_app/876459";
+import { nF } from "../905/350402";
+import { sf } from "../905/929976";
+import { h } from "../905/662353";
+import { wI, JI, kl, OL, Gc } from "../figma_app/840917";
+import { hp, c6, ec, m6 } from "../905/725909";
+import { M4 } from "../905/713695";
+let $$_4 = nF(async (e, t) => {
+  let r = e.getState()?.user?.id;
+  if (!r) return;
+  let n = Object.keys(t);
+  await wI(r, n);
+  hp.sendToAllTabs(c6, n);
+  sx("Delete New Autosave Files", {
+    deletedCount: n.length
+  });
+});
+let $$h0 = nF(async e => {
+  let t = e.getState();
+  let r = t.user?.id;
+  if (!r) return;
+  await JI(r);
+  let n = await kl(r);
+  e.dispatch($$f2({
+    filesWithChangesInIDB: n.unsyncedFiles,
+    filesCreatedOffline: n.newFiles
+  }));
+  e.dispatch($$m1(n.nextGarbageCollectionTimestamp));
+});
+let $$m1 = NC("SET_AUTOSAVE_NEXT_GARBAGE_COLLECTION_TIMESTAMP");
+let $$g5 = NC("SET_AUTOSAVE_SNOOZE");
+let $$f2 = NC("SET_UNCLAIMED_FILES");
+export function $$E3(e) {
+  hp.register(ec, () => function (e) {
+    let t = e.getState().user?.id ?? null;
+    M4.fetch(OL({
+      userId: t
+    }), {
+      policy: "networkOnly"
+    });
+  }(e));
+  hp.register(c6, t => function (e, t) {
+    let r = zl.get(h);
+    r && t.includes(r) && (eD ? eD.close({
+      suppressReopening: !0,
+      shouldForceClose: !0
+    }) : e.dispatch(sf({
+      view: "recentsAndSharing"
+    })));
+    e.dispatch($$h0());
+  }(e, t));
+  hp.register(m6, ({
+    localFileKey: e,
+    realFileKey: t
+  }) => Gc(e, t));
+}
+export const Jw = $$h0;
+export const TP = $$m1;
+export const Y3 = $$f2;
+export const h0 = $$E3;
+export const vv = $$_4;
+export const zE = $$g5;

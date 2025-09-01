@@ -1,0 +1,103 @@
+import { useMemo, useCallback } from "react";
+import { wA } from "../vendor/514228";
+import { md, zl } from "../figma_app/27355";
+import { BJ } from "../figma_app/9054";
+import { sx } from "../905/449184";
+import { sn } from "../905/542194";
+import { U } from "../figma_app/901889";
+import { wS } from "../figma_app/221240";
+import { uQ } from "../figma_app/311375";
+import { d as _$$d } from "../9410/441456";
+import { to } from "../905/156213";
+import { gl } from "../905/216495";
+import { eY } from "../figma_app/722362";
+import { tS } from "../figma_app/516028";
+import { iZ } from "../905/372672";
+import { Fk } from "../figma_app/167249";
+import { ku, jo, EH } from "../figma_app/241341";
+import { $ } from "../905/330495";
+export function $$C0(e) {
+  let t = uQ();
+  let {
+    backingSymbolGUID
+  } = $([e ?? ""]);
+  let a = useMemo(() => null === backingSymbolGUID || gl(backingSymbolGUID) ? null : backingSymbolGUID, [backingSymbolGUID]);
+  let s = wA();
+  return useCallback(() => {
+    e && a && (sn.reset("dev_handoff.view_history", e), sn.start("dev_handoff.view_history", {
+      key: e
+    }), sx("Diff Modal Compare Changes Clicked", {
+      nodeId: e,
+      mainComponentNodeId: a,
+      origin: "cc_overrides"
+    }), s(to({
+      type: ku,
+      data: {
+        changeNodeId: e,
+        basisNodeId: a,
+        initialSelectedNodeId: t && t !== e ? t : void 0,
+        isComparingOverrides: !0
+      }
+    })));
+  }, [s, t, e, a]);
+}
+export function $$v2(e) {
+  let t = wS();
+  let i = uQ();
+  let a = wA();
+  let s = U();
+  return useCallback(() => {
+    i && "loaded" === t.status && (s("Diff Modal Compare Changes Clicked", {
+      nodeId: i,
+      origin: "cc_detached_component"
+    }), sn.reset("dev_handoff.view_history", i), sn.start("dev_handoff.view_history", {
+      key: i
+    }), a(to({
+      type: jo,
+      data: {
+        nodeId: i,
+        detachedInfoStatus: t,
+        origin: e
+      }
+    })));
+  }, [i, t, s, a, e]);
+}
+export function $$E1(e, t) {
+  let i = iZ()?.id;
+  let d = uQ();
+  let c = Fk((e, t) => e?.get(t ?? "")?.name.trim(), d);
+  let m = tS();
+  let b = wA();
+  let C = md(_$$d);
+  let v = eY();
+  return useCallback(() => {
+    if (sn.reset("dev_handoff.view_history", e || void 0), sn.start("dev_handoff.view_history", {
+      key: e || void 0
+    }), sx("Diff Modal Compare Changes Clicked", {
+      userId: i,
+      fileKey: m,
+      frameId: e,
+      entrypoint: "lego_layer",
+      analyticsEventOrigin: t
+    }), e) {
+      let t = BJ(v, e, !0);
+      if (t) {
+        let i = t.lastEditedAt;
+        C[e] = new Date(i);
+        zl.set(_$$d, {
+          ...C
+        });
+      }
+    }
+    b(to({
+      type: EH,
+      data: {
+        nodeId: e,
+        layerName: c
+      }
+    }));
+  }, [t, b, m, e, c, v, C, i]);
+}
+export const Xn = $$C0;
+export const dU = $$E1;
+export const xY = $$v2;

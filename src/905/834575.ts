@@ -1,0 +1,159 @@
+import { vh } from "../figma_app/181241";
+import { XHR } from "../905/910117";
+import { $V } from "../figma_app/831101";
+import { e6 } from "../905/557142";
+export let $$o0 = new class {
+  constructor() {
+    this.MembersSchemaValidator = vh();
+    this.TeamUsersSchemaValidator = vh();
+    this.TeamSchemaValidator = vh();
+    this.DeletedSchemaValidator = vh();
+    this.TeamNameSchemaValidator = vh();
+    this.SubscriptionStatusSchemaValidator = vh();
+    this.UsersLastActiveSchemaValidator = vh();
+    this.FoldersSchemaValidator = vh();
+    this.TeamAdminsSchemaValidator = vh();
+    this.TeamDeletionFileCountSchemaValidator = vh();
+    this.HasPublishedSiteSchemaValidator = vh();
+    this.TeamUserInvariantBackfillStatsSchemaValidator = vh();
+    this.TeamRoleRequestSchemaValidator = vh();
+    this.showDanglingTeamUserBackfillBannerSchemaValidator = vh();
+  }
+  getMembers(e) {
+    return this.MembersSchemaValidator.validate(async ({
+      xr: t
+    }) => await t.get(`/api/teams/${e.teamId}/members`));
+  }
+  getTeamUsers(e) {
+    return this.TeamUsersSchemaValidator.validate(async ({
+      xr: t
+    }) => await t.get(`/api/teams/${e.teamId}/team_users`));
+  }
+  getTeam(e) {
+    return this.TeamSchemaValidator.validate(async ({
+      xr: t
+    }) => await t.get(`/api/teams/${e.teamId}`));
+  }
+  getDeleted(e) {
+    return this.DeletedSchemaValidator.validate(async ({
+      xr: t
+    }) => await t.get(`/api/teams/deleted/${e.teamId}`));
+  }
+  getTeamName(e) {
+    return this.TeamNameSchemaValidator.validate(async ({
+      xr: t
+    }) => await t.get(`/api/teams/${e.teamId}/team_name`));
+  }
+  getSubscriptionStatus(e) {
+    return this.SubscriptionStatusSchemaValidator.validate(async ({
+      xr: t
+    }) => await t.get(`/api/teams/${e.teamId}/subscription_status`));
+  }
+  getUsersLastActive(e) {
+    return this.UsersLastActiveSchemaValidator.validate(async ({
+      xr: t
+    }) => await t.get(`/api/teams/${e.teamId}/users/${e.teamMemberId}/last_active`));
+  }
+  getFolders(e) {
+    return this.FoldersSchemaValidator.validate(async ({
+      xr: t
+    }) => await t.get(`/api/teams/${e.teamId}/folders`));
+  }
+  getTeamAdmins(e) {
+    return this.TeamAdminsSchemaValidator.validate(async ({
+      xr: t
+    }) => await t.get(`/api/teams/${e.teamId}/team_admins`));
+  }
+  getDeletionFileCount(e) {
+    return this.TeamDeletionFileCountSchemaValidator.validate(async ({
+      xr: t
+    }) => await t.get(`/api/teams/${e.teamId}/deletion_file_count`));
+  }
+  getHasPublishedSite(e) {
+    return this.HasPublishedSiteSchemaValidator.validate(async ({
+      xr: t
+    }) => await t.get(`/api/teams/${e.teamId}/has_published_site`));
+  }
+  fetchTeamUserInvariantBackfillStats(e) {
+    return this.TeamUserInvariantBackfillStatsSchemaValidator.validate(async ({
+      xr: t
+    }) => await t.get(`/api/teams/${e.teamId}/num_backfilled_team_user`));
+  }
+  requestTeamRole(e) {
+    return this.TeamRoleRequestSchemaValidator.validate(async ({
+      xr: t
+    }) => await t.post("/api/team_role_requests", {
+      team_id: e.teamId,
+      level: e6.VIEWER
+    }));
+  }
+  showDanglingTeamUserBackfillBanner(e) {
+    return this.showDanglingTeamUserBackfillBannerSchemaValidator.validate(async ({
+      xr: t
+    }) => await t.get(`/api/teams/${e.teamId}/show_dangling_team_user_backfill_banner`));
+  }
+  updateAiFeaturesDisabled(e) {
+    return this.TeamSchemaValidator.validate(async ({
+      xr: t
+    }) => await t.put(`/api/teams/${e.teamId}`, {
+      ai_features_disabled: e.aiFeaturesDisabled
+    }));
+  }
+  updateTeamName(e) {
+    return this.TeamSchemaValidator.validate(async ({
+      xr: t
+    }) => await t.put(`/api/teams/${e.teamId}`, {
+      name: e.updatedDisplayName,
+      legal_name: e.updatedLegalName
+    }));
+  }
+  updateDisplayName(e) {
+    return this.TeamSchemaValidator.validate(async ({
+      xr: t
+    }) => await t.put(`/api/teams/${e.teamId}`, {
+      name: e.updatedDisplayName
+    }));
+  }
+  updateShippingAddress(e) {
+    return this.TeamSchemaValidator.validate(async ({
+      xr: t
+    }) => await t.put(`/api/teams/${e.teamId}`, {
+      shipping_address: e.shippingAddress,
+      legal_name: e.updatedLegalName
+    }));
+  }
+  updatePresetsDisabled(e) {
+    return this.TeamSchemaValidator.validate(async ({
+      xr: t
+    }) => await t.put(`/api/teams/${e.teamId}`, {
+      figma_provided_libraries_disabled: e.presetsDisabled
+    }));
+  }
+  updateAiDataSharing(e) {
+    return XHR.put(`/api/teams/${e.teamId}/ai_data_sharing`, {
+      enabled: e.enabled
+    });
+  }
+  validateAddresses(e) {
+    return this.TeamSchemaValidator.validate(async ({
+      xr: t
+    }) => await t.post("/api/validate_address", {
+      billing_address: $V(e.billingAddress) ? null : e.billingAddress,
+      shipping_address: $V(e.shippingAddress) ? null : e.shippingAddress,
+      team_id: e.teamId,
+      is_checkout: e.isCheckout
+    }));
+  }
+  validateCurrency(e) {
+    return this.TeamSchemaValidator.validate(async ({
+      xr: t
+    }) => await t.post("/api/validate_currency", {
+      team_id: e.teamId,
+      currency: e.currency,
+      is_checkout: e.isCheckout,
+      billing_address: $V(e.billingAddress) ? null : e.billingAddress,
+      shipping_address: $V(e.shippingAddress) ? null : e.shippingAddress
+    }));
+  }
+}();
+export const $ = $$o0;

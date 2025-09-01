@@ -1,0 +1,10 @@
+let $$n3 = "#f24e1e";
+let $$r2 = "#ffc700";
+let $$a1 = "#0fa958";
+let $$s0 = "#5551ff";
+let $$o4 = "#a259ff";
+export const S0 = $$s0;
+export const Ts = $$a1;
+export const fr = $$r2;
+export const qE = $$n3;
+export const xl = $$o4;

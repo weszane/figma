@@ -1,0 +1,351 @@
+import { jsxs, Fragment, jsx } from "react/jsx-runtime";
+import { d4 } from "../vendor/514228";
+import a from "classnames";
+import { Ex, zE, vj } from "../figma_app/919079";
+import { G } from "../figma_app/361869";
+import { Kz, Us } from "../figma_app/637027";
+import { tx, t as _$$t } from "../905/303541";
+import { c as _$$c } from "../905/370443";
+import { m as _$$m } from "../figma_app/160942";
+import { FFileType } from "../figma_app/191312";
+import { vr } from "../figma_app/514043";
+import { tY, Ye, MC } from "../figma_app/831101";
+import { of, vg, hy, sH, q9, qS } from "../figma_app/81441";
+var s = a;
+export function $$f3({
+  isPromo: e,
+  isEducationTeam: t,
+  claimsEndAtDate: r
+}) {
+  var i;
+  return e ? {
+    trackingDescriptor: _$$c.START_PRO_PLAN_FOR_FREE,
+    buttonText: tx("pro_cart.review.start_professional_plan_for_free"),
+    finePrint: jsxs(Fragment, {
+      children: [tx("pro_cart.review.offer_redeem_agree", {
+        termsOfServiceLink: jsx(O, {})
+      }), r && jsxs(Fragment, {
+        children: [" ", tx("pro_cart.review.redeem_offer_by", {
+          date: (i = new Date(r), new Intl.DateTimeFormat("en-US", {
+            month: "long",
+            day: "numeric",
+            year: "numeric"
+          }).format(i))
+        })]
+      })]
+    })
+  } : t ? {
+    trackingDescriptor: _$$c.COMPLETE_UPGRADE,
+    buttonText: tx("pro_cart.review.complete_upgrade"),
+    finePrint: tx("pro_cart.review.all_editors_on_an_education_team_must_be_verified.seat_rename")
+  } : {
+    trackingDescriptor: _$$c.COMPLETE_PURCHASE,
+    buttonText: tx("pro_cart.review.complete_purchase"),
+    finePrint: tx("pro_cart.review.your_subscription_will_automatically_renew_without_link.seat_rename")
+  };
+}
+export function $$E5(e, t, r, n, i) {
+  let a = new vr(i).formatMoney(n, {
+    showCents: !r
+  });
+  let s = _$$t("all_carts.num_editors.seat_rename", {
+    numEditors: t
+  });
+  let o = _$$t("all_carts.plural_months", {
+    months: e ? 12 : 1
+  });
+  return _$$t("all_carts.cost_equation", {
+    money: a,
+    editors: s,
+    billingTime: o
+  });
+}
+function y({
+  currentBillingPeriod: e,
+  numEditors: t,
+  noCents: r,
+  shouldStrikethroughMonthlyUnitCostIfAnnual: i,
+  currency: a
+}) {
+  let {
+    getDesignUnitCost
+  } = _$$m({
+    currency: a
+  });
+  return e === tY.STUDENT ? null : jsx(b, {
+    isAnnual: e === tY.ANNUAL,
+    numEditors: t,
+    noCents: r,
+    unitCost: getDesignUnitCost(e),
+    currency: a,
+    monthlyUnitCostForStrikethrough: i ? getDesignUnitCost(tY.MONTHLY) : void 0
+  });
+}
+function b({
+  isAnnual: e,
+  numEditors: t,
+  noCents: r,
+  unitCost: i,
+  monthlyUnitCostForStrikethrough: a,
+  currency: s
+}) {
+  let o = new vr(s);
+  let l = o.formatMoney(i, {
+    showCents: !r
+  });
+  let d = _$$t("all_carts.num_editors.seat_rename", {
+    numEditors: t
+  });
+  let u = _$$t("all_carts.plural_months", {
+    months: e ? 12 : 1
+  });
+  return "number" == typeof a && e ? tx("all_carts.cost_equation_strikethrough_unit_price", {
+    strikethroughUnitPrice: jsx("span", {
+      className: of,
+      children: o.formatMoney(a, {
+        showCents: !r
+      })
+    }),
+    money: l,
+    editors: d,
+    billingTime: u
+  }) : tx("all_carts.cost_equation", {
+    money: l,
+    editors: d,
+    billingTime: u
+  });
+}
+function T({
+  currentBillingPeriod: e,
+  numEditors: t,
+  noCents: r,
+  shouldStrikethroughMonthlyUnitCostIfAnnual: i,
+  currency: a
+}) {
+  let {
+    getWhiteboardUnitCost
+  } = _$$m({
+    currency: a
+  });
+  return jsx(b, {
+    isAnnual: e === tY.ANNUAL,
+    numEditors: t,
+    unitCost: getWhiteboardUnitCost(e),
+    noCents: r,
+    currency: a,
+    monthlyUnitCostForStrikethrough: i ? getWhiteboardUnitCost(tY.MONTHLY) : void 0
+  });
+}
+export function $$I1(e, t) {
+  return Math.ceil((1 - 12 * e / (12 * t)) * 100);
+}
+function S({
+  noCents: e = !0,
+  shouldStrikethroughMonthlyUnitCostIfAnnual: t,
+  currency: r,
+  numEditors: a
+}) {
+  let s = d4(e => e.payment.billingPeriod);
+  let o = d4(e => e.payment.numWhiteboardEditors);
+  return s === tY.STUDENT ? null : jsx(T, {
+    currentBillingPeriod: s,
+    numEditors: a || o,
+    noCents: e,
+    currency: r,
+    shouldStrikethroughMonthlyUnitCostIfAnnual: t
+  });
+}
+function v({
+  editorType: e,
+  numEditors: t,
+  currency: r
+}) {
+  let n;
+  let {
+    estimatedDesignCost,
+    estimatedWhiteboardCost
+  } = _$$m({
+    currency: r
+  });
+  n = "design" === e ? estimatedDesignCost(t, tY.MONTHLY) : estimatedWhiteboardCost(t, tY.MONTHLY);
+  let s = new vr(r);
+  return tx("edu.cost_per_month", {
+    cost: s.formatMoney(n)
+  });
+}
+export function $$A4({
+  "data-testid": e,
+  discountPercentage: t,
+  mainText: r,
+  priceText: i,
+  strikethroughPriceText: a,
+  strikethroughPriceClassName: u,
+  subText: p,
+  showDevModeIncludedText: _
+}) {
+  let h = t => void 0 === e ? void 0 : `${e}-${t}`;
+  return jsxs("div", {
+    "data-testid": e,
+    children: [jsxs("div", {
+      className: vg,
+      "data-testid": h("cost-row"),
+      children: [jsx("span", {
+        "data-testid": h("main-text"),
+        children: r
+      }), jsxs("span", {
+        "data-testid": h("price-section"),
+        children: [a && jsxs(Fragment, {
+          children: [jsx("span", {
+            className: s()(u, hy, sH),
+            "data-testid": h("strikethrough-price-text"),
+            children: a
+          }), "\xa0"]
+        }), jsx("span", {
+          className: sH,
+          "data-testid": h("price-text"),
+          children: i
+        })]
+      })]
+    }), _ && jsxs(Fragment, {
+      children: [jsx(Kz, {
+        multiple: .2
+      }), jsx(G, {}), jsx(Kz, {
+        multiple: .1
+      })]
+    }), jsxs("div", {
+      className: q9,
+      "data-testid": h("sub-row"),
+      children: [jsx("span", {
+        "data-testid": h("sub-text"),
+        children: p
+      }), t && jsx("span", {
+        "data-testid": h("discount-percentage"),
+        children: jsx(Ex, {
+          className: qS,
+          color: zE.SUCCESS,
+          size: vj.LARGE,
+          subtle: !0,
+          text: tx("pro_cart.sidebar.annual_savings_percentage", {
+            percentage: t
+          })
+        })
+      })]
+    })]
+  });
+}
+function x({
+  payment: e,
+  currency: t,
+  isPromo: r,
+  isEducationTeam: i,
+  ...a
+}) {
+  let s;
+  let o;
+  let l;
+  let d;
+  let u;
+  let {
+    estimatedDesignCost,
+    estimatedWhiteboardCost
+  } = _$$m({
+    currency: t
+  });
+  let f = new vr(t);
+  let {
+    editorType
+  } = a;
+  "design" === editorType ? (o = e.numDesignEditors, l = N(Ye, e.taxes?.lines) ?? estimatedDesignCost(o, e.billingPeriod), s = tx("pro_cart.info.figma_design_editors.seat_rename", {
+    numEditors: o
+  }), u = i ? jsx(v, {
+    editorType,
+    currency: t,
+    numEditors: e.numDesignEditors
+  }) : null, i || a.hasCartStickerShock || (d = jsx(y, {
+    currentBillingPeriod: e.billingPeriod,
+    numEditors: e.numDesignEditors,
+    noCents: !1,
+    currency: t
+  }))) : (o = a.numPaidFigjamEditors, l = N(MC, e.taxes?.lines) ?? estimatedWhiteboardCost(o, e.billingPeriod), d = !i && !a.hasCartStickerShock && jsx(S, {
+    noCents: !1,
+    currency: t,
+    numEditors: o
+  }), s = tx("pro_cart.info.figjam_editors.seat_rename", {
+    numEditors: o
+  }), u = i ? jsx(v, {
+    editorType,
+    currency: t,
+    numEditors: e.numWhiteboardEditors
+  }) : null);
+  r && (d = tx("pro_cart.review.free_for_days", {
+    days: e.promo?.promo_value
+  }), u = f.formatMoney(l, {
+    showCents: !0
+  }));
+  return jsx($$A4, {
+    "data-testid": `confirm-${editorType}-summary`,
+    mainText: s,
+    strikethroughPriceText: u,
+    priceText: f.formatMoney(r || i ? 0 : l, {
+      showCents: !0
+    }),
+    subText: d,
+    showDevModeIncludedText: "design" === editorType
+  });
+}
+function N(e, t) {
+  return t?.filter(t => e.includes(t.product)).reduce((e, t) => e + t.sub_total, 0);
+}
+export function $$C0(e) {
+  return jsxs(Fragment, {
+    children: [jsx(x, {
+      ...e,
+      editorType: FFileType.DESIGN
+    }), jsx(Kz, {
+      multiple: 2
+    }), jsx(x, {
+      ...e,
+      editorType: FFileType.WHITEBOARD,
+      numPaidFigjamEditors: e.payment.numWhiteboardEditors
+    }), jsx(Kz, {
+      multiple: 2
+    })]
+  });
+}
+export function $$w2() {
+  return tx("pro_cart.review.agree_with_privacy_and_cancellation", {
+    termsOfServiceLink: jsx(O, {}),
+    privacyLink: jsx(R, {}),
+    cancellationLink: jsx(L, {})
+  });
+}
+function O() {
+  return jsx(Us, {
+    href: "/tos",
+    target: "_blank",
+    trusted: !0,
+    children: tx("pro_cart.review.tos")
+  });
+}
+function R() {
+  return jsx(Us, {
+    href: "/privacy",
+    target: "_blank",
+    trusted: !0,
+    children: tx("pro_cart.review.privacy_policy")
+  });
+}
+function L() {
+  return jsx(Us, {
+    href: "/pricing-faq/#how-do-i-cancel-my-paid-plan",
+    target: "_blank",
+    trusted: !0,
+    children: tx("pro_cart.review.cancellation_policy")
+  });
+}
+export const $c = $$C0;
+export const U1 = $$I1;
+export const Um = $$w2;
+export const V8 = $$f3;
+export const Wy = $$A4;
+export const mx = $$E5;

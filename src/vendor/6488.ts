@@ -1,0 +1,126 @@
+import { bin } from "../vendor/919823";
+import { utf8 } from "../vendor/919823";
+import { bytesToWords, endian, wordsToBytes, bytesToHex } from "../vendor/353575";
+import s from "../vendor/518849";
+!function () {
+  var i = utf8;
+  var o = bin;
+  var a = function (e, n) {
+    e.constructor == String ? e = n && "binary" === n.encoding ? o.stringToBytes(e) : i.stringToBytes(e) : s(e) ? e = Array.prototype.slice.call(e, 0) : Array.isArray(e) || e.constructor === Uint8Array || (e = e.toString());
+    for (h = bytesToWords(e), d = 8 * e.length, p = 0x67452301, g = -0x10325477, m = -0x67452302, v = 0x10325476, y = 0, void 0; y < h.length; y++) {
+      var h;
+      var d;
+      var p;
+      var g;
+      var m;
+      var v;
+      var y;
+      h[y] = (h[y] << 8 | h[y] >>> 24) & 0xff00ff | (h[y] << 24 | h[y] >>> 8) & 0xff00ff00;
+    }
+    h[d >>> 5] |= 128 << d % 32;
+    h[(d + 64 >>> 9 << 4) + 14] = d;
+    for (b = a._ff, O = a._gg, x = a._hh, w = a._ii, y = 0, void 0; y < h.length; y += 16) {
+      var b;
+      var O;
+      var x;
+      var w;
+      var y;
+      var k = p;
+      var _ = g;
+      var S = m;
+      var E = v;
+      p = b(p, g, m, v, h[y + 0], 7, -0x28955b88);
+      v = b(v, p, g, m, h[y + 1], 12, -0x173848aa);
+      m = b(m, v, p, g, h[y + 2], 17, 0x242070db);
+      g = b(g, m, v, p, h[y + 3], 22, -0x3e423112);
+      p = b(p, g, m, v, h[y + 4], 7, -0xa83f051);
+      v = b(v, p, g, m, h[y + 5], 12, 0x4787c62a);
+      m = b(m, v, p, g, h[y + 6], 17, -0x57cfb9ed);
+      g = b(g, m, v, p, h[y + 7], 22, -0x2b96aff);
+      p = b(p, g, m, v, h[y + 8], 7, 0x698098d8);
+      v = b(v, p, g, m, h[y + 9], 12, -0x74bb0851);
+      m = b(m, v, p, g, h[y + 10], 17, -42063);
+      g = b(g, m, v, p, h[y + 11], 22, -0x76a32842);
+      p = b(p, g, m, v, h[y + 12], 7, 0x6b901122);
+      v = b(v, p, g, m, h[y + 13], 12, -0x2678e6d);
+      m = b(m, v, p, g, h[y + 14], 17, -0x5986bc72);
+      g = b(g, m, v, p, h[y + 15], 22, 0x49b40821);
+      p = O(p, g, m, v, h[y + 1], 5, -0x9e1da9e);
+      v = O(v, p, g, m, h[y + 6], 9, -0x3fbf4cc0);
+      m = O(m, v, p, g, h[y + 11], 14, 0x265e5a51);
+      g = O(g, m, v, p, h[y + 0], 20, -0x16493856);
+      p = O(p, g, m, v, h[y + 5], 5, -0x29d0efa3);
+      v = O(v, p, g, m, h[y + 10], 9, 0x2441453);
+      m = O(m, v, p, g, h[y + 15], 14, -0x275e197f);
+      g = O(g, m, v, p, h[y + 4], 20, -0x182c0438);
+      p = O(p, g, m, v, h[y + 9], 5, 0x21e1cde6);
+      v = O(v, p, g, m, h[y + 14], 9, -0x3cc8f82a);
+      m = O(m, v, p, g, h[y + 3], 14, -0xb2af279);
+      g = O(g, m, v, p, h[y + 8], 20, 0x455a14ed);
+      p = O(p, g, m, v, h[y + 13], 5, -0x561c16fb);
+      v = O(v, p, g, m, h[y + 2], 9, -0x3105c08);
+      m = O(m, v, p, g, h[y + 7], 14, 0x676f02d9);
+      g = O(g, m, v, p, h[y + 12], 20, -0x72d5b376);
+      p = x(p, g, m, v, h[y + 5], 4, -378558);
+      v = x(v, p, g, m, h[y + 8], 11, -0x788e097f);
+      m = x(m, v, p, g, h[y + 11], 16, 0x6d9d6122);
+      g = x(g, m, v, p, h[y + 14], 23, -0x21ac7f4);
+      p = x(p, g, m, v, h[y + 1], 4, -0x5b4115bc);
+      v = x(v, p, g, m, h[y + 4], 11, 0x4bdecfa9);
+      m = x(m, v, p, g, h[y + 7], 16, -0x944b4a0);
+      g = x(g, m, v, p, h[y + 10], 23, -0x41404390);
+      p = x(p, g, m, v, h[y + 13], 4, 0x289b7ec6);
+      v = x(v, p, g, m, h[y + 0], 11, -0x155ed806);
+      m = x(m, v, p, g, h[y + 3], 16, -0x2b10cf7b);
+      g = x(g, m, v, p, h[y + 6], 23, 0x4881d05);
+      p = x(p, g, m, v, h[y + 9], 4, -0x262b2fc7);
+      v = x(v, p, g, m, h[y + 12], 11, -0x1924661b);
+      m = x(m, v, p, g, h[y + 15], 16, 0x1fa27cf8);
+      g = x(g, m, v, p, h[y + 2], 23, -0x3b53a99b);
+      p = w(p, g, m, v, h[y + 0], 6, -0xbd6ddbc);
+      v = w(v, p, g, m, h[y + 7], 10, 0x432aff97);
+      m = w(m, v, p, g, h[y + 14], 15, -0x546bdc59);
+      g = w(g, m, v, p, h[y + 5], 21, -0x36c5fc7);
+      p = w(p, g, m, v, h[y + 12], 6, 0x655b59c3);
+      v = w(v, p, g, m, h[y + 3], 10, -0x70f3336e);
+      m = w(m, v, p, g, h[y + 10], 15, -1051523);
+      g = w(g, m, v, p, h[y + 1], 21, -0x7a7ba22f);
+      p = w(p, g, m, v, h[y + 8], 6, 0x6fa87e4f);
+      v = w(v, p, g, m, h[y + 15], 10, -0x1d31920);
+      m = w(m, v, p, g, h[y + 6], 15, -0x5cfebcec);
+      g = w(g, m, v, p, h[y + 13], 21, 0x4e0811a1);
+      p = w(p, g, m, v, h[y + 4], 6, -0x8ac817e);
+      v = w(v, p, g, m, h[y + 11], 10, -0x42c50dcb);
+      m = w(m, v, p, g, h[y + 2], 15, 0x2ad7d2bb);
+      g = w(g, m, v, p, h[y + 9], 21, -0x14792c6f);
+      p = p + k >>> 0;
+      g = g + _ >>> 0;
+      m = m + S >>> 0;
+      v = v + E >>> 0;
+    }
+    return endian([p, g, m, v]);
+  };
+  a._ff = function (e, r, n, i, s, o, a) {
+    var h = e + (r & n | ~r & i) + (s >>> 0) + a;
+    return (h << o | h >>> 32 - o) + r;
+  };
+  a._gg = function (e, r, n, i, s, o, a) {
+    var h = e + (r & i | n & ~i) + (s >>> 0) + a;
+    return (h << o | h >>> 32 - o) + r;
+  };
+  a._hh = function (e, r, n, i, s, o, a) {
+    var h = e + (r ^ n ^ i) + (s >>> 0) + a;
+    return (h << o | h >>> 32 - o) + r;
+  };
+  a._ii = function (e, r, n, i, s, o, a) {
+    var h = e + (n ^ (r | ~i)) + (s >>> 0) + a;
+    return (h << o | h >>> 32 - o) + r;
+  };
+  a._blocksize = 16;
+  a._digestsize = 16;
+  module.exports = function (e, n) {
+    if (null == e) throw Error("Illegal argument " + e);
+    var i = wordsToBytes(a(e, n));
+    return n && n.asBytes ? i : n && n.asString ? o.bytesToString(i) : bytesToHex(i);
+  };
+}();

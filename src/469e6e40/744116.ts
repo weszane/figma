@@ -1,0 +1,89 @@
+import { jsx } from "react/jsx-runtime";
+import { Suspense } from "react";
+import { wA } from "../vendor/514228";
+import { ServiceCategories as _$$e } from "../905/165054";
+import { h as _$$h } from "../905/207101";
+import { tx } from "../905/303541";
+import { y3 } from "../figma_app/307841";
+import { eC } from "../figma_app/982327";
+import { Ut } from "../figma_app/425283";
+import { b as _$$b } from "../905/985254";
+import { c as _$$c } from "../905/370443";
+import { E as _$$E } from "../905/453826";
+import { e as _$$e2 } from "../905/621515";
+import { d as _$$d } from "../figma_app/603561";
+import { f as _$$f } from "../905/940356";
+import { N as _$$N } from "../figma_app/268271";
+import { rq } from "../905/425180";
+import { F_ } from "../905/858282";
+import { d8X } from "../figma_app/6204";
+if (443 == require.j) {}
+if (443 == require.j) {}
+let y = "seen_seat_approval_overlay";
+let $$w1 = "settings_tab_click";
+function k({
+  isTeam: e,
+  org: t,
+  team: a
+}) {
+  let s = wA();
+  let r = y3(t?.created_at || a?.created_at, a?.last_upgraded_at);
+  let h = _$$f(y);
+  let {
+    show,
+    isShowing,
+    complete,
+    uniqueId
+  } = _$$e2({
+    overlay: d8X,
+    priority: _$$N.DEFAULT_MODAL
+  });
+  let S = (e) => s(_$$b({
+    [y]: e
+  }));
+  let N = () => {
+    S(!0);
+    complete();
+  };
+  _$$h(() => {
+    !r || h || a?.student_team || show();
+  });
+  _$$E(uniqueId, "settings_tab_click", () => {
+    isShowing && N();
+  });
+  let I = e ? tx("billing_modals.seat_approval_overlay.description") : tx("billing_modals.seat_approval_overlay.org_description");
+  return jsx(rq, {
+    arrowPosition: F_.LEFT_TITLE,
+    description: I,
+    disableHighlight: !0,
+    emphasized: !0,
+    isShowing,
+    onClose: N,
+    primaryCta: {
+      label: tx("billing_modals.seat_approval_overlay.cta"),
+      type: "button",
+      onClick: N,
+      ctaTrackingDescriptor: _$$c.DONE
+    },
+    targetKey: e ? eC : Ut,
+    title: tx("billing_modals.seat_approval_overlay.title"),
+    trackingContextName: "Billing Seat Approval Overlay"
+  });
+}
+function E(e) {
+  return _$$d({
+    reportErrorsToTeam: _$$e.MONETIZATION_EXPANSION
+  }) ? null : jsx(k, {
+    ...e
+  });
+}
+export function $$C0(e) {
+  return jsx(Suspense, {
+    fallback: null,
+    children: jsx(E, {
+      ...e
+    })
+  });
+}
+export const d = $$C0;
+export const o = $$w1;

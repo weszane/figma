@@ -1,0 +1,16 @@
+let $$r2 = "ready_for_dev_signals_upsell--tooltipContainer--MfMyF pointer_modal--walkThroughModal--6eTVS pointer_modal--pointerModal--wrpFz";
+let $$n5 = "ready_for_dev_signals_upsell--closeButton--IqINb";
+let $$a3 = "ready_for_dev_signals_upsell--tooltipHeader--vN9FE";
+let $$s4 = "ready_for_dev_signals_upsell--tooltipPageIdNodeHeader--9D-dA ready_for_dev_signals_upsell--tooltipHeader--vN9FE";
+let $$o1 = "ready_for_dev_signals_upsell--tooltipBody--LCLlM";
+let $$l0 = "ready_for_dev_signals_upsell--tooltipFooter--bN45f";
+let $$d7 = "ready_for_dev_signals_upsell--tooltipBodyText--fXjaC";
+let $$c6 = "ready_for_dev_signals_upsell--videoContainer--Hcl5T";
+export const JP = $$l0;
+export const O6 = $$o1;
+export const R3 = $$r2;
+export const Rg = $$a3;
+export const Xq = $$s4;
+export const b = $$n5;
+export const j = $$c6;
+export const zu = $$d7;

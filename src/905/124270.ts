@@ -1,0 +1,210 @@
+import { Jj } from "../905/382883";
+import { eU, M2, Iz, zl } from "../figma_app/27355";
+import a from "../vendor/373725";
+import o from "../vendor/128080";
+import { hO } from "../figma_app/545293";
+import { nX, ES, wG, II, Nz, KI } from "../905/171315";
+import { R9, BA } from "../905/61477";
+import { WY, qy, $L } from "../figma_app/162807";
+var s = a;
+var l = o;
+let $$m3 = eU(null);
+let $$h15 = eU(null);
+let $$g6 = eU(null);
+let $$f16 = eU(null);
+let $$_0 = eU(e => {
+  let t = e(M);
+  let i = e(j);
+  let n = e(U);
+  let r = e(R9);
+  return nX(t, i, n, r ?? void 0);
+});
+let $$A2 = eU(e => e(y));
+let y = M2(eU([]));
+let $$b10 = eU(e => {
+  let t = e($$A2);
+  return t.length > 0 ? t[t.length - 1] : null;
+});
+let $$v14 = eU(null);
+let $$I8 = eU(e => e(M));
+let $$E1 = eU(e => e(j));
+let $$x4 = eU(e => e(U));
+let $$S17 = eU(e => {
+  if (e(hO.isFragmentSearchAtom)) return [WY.CREATOR, WY.SPACE];
+  let t = e(M);
+  return t && -1 === ES().indexOf(t.value) ? Object.values(WY).filter(e => e !== WY.CREATOR) : Object.values(WY);
+});
+let $$w11 = eU(e => {
+  if (e(hO.isFragmentSearchAtom)) return [qy.FOLDER, qy.TEAM];
+  let t = e(M);
+  return C(t?.value || null);
+});
+let C = e => e === $L.USERS || e === $L.TEAMS ? [qy.ORG] : e === $L.PROJECTS ? [qy.TEAM, qy.ORG] : e === $L.PLUGINS || e === $L.WIDGETS ? [] : [qy.FOLDER, qy.TEAM, qy.ORG];
+let $$T7 = eU(e => {
+  let t = e(j);
+  let i = e(U);
+  let n = e(BA);
+  return n ? ES() : R(t, i, n);
+});
+let $$k5 = eU(e => R(e(j), e(U), e(BA)));
+let R = (e, t, i) => {
+  let n = i ? ES().concat($L.ALL_FILES) : ES();
+  let r = n.concat([$L.USERS, $L.PROJECTS, $L.TEAMS]);
+  if (e && e.value.length > 0) return n;
+  if (t && !wG(t.value)) {
+    let e = t.value[qy.FOLDER].length > 0;
+    let i = t.value[qy.TEAM].length > 0;
+    if (t.value[qy.ORG].length > 0) return r;
+    if (i) return n.concat([$L.PROJECTS]);
+    if (e) return n;
+  }
+  return r;
+};
+let $$N9 = Iz(e => eU(t => e === WY.RESOURCE ? t(M) : e === WY.CREATOR ? t(j) : e === WY.SPACE ? t(U) : null, (t, i, r) => {
+  if (!e) return null;
+  let a = !r || II(r);
+  if (e === WY.RESOURCE ? i(M, a ? null : r) : e === WY.CREATOR ? i(j, a ? null : r) : e === WY.SPACE && i(U, a ? null : r), t($$v14) && i($$v14, null), a) {
+    let n = t(y);
+    i(y, n.filter(t => t.type !== e));
+  } else {
+    let a = t(y);
+    let s = [];
+    let o = [];
+    if (e === WY.RESOURCE) {
+      let e = Nz(WY.RESOURCE, a);
+      let t = {
+        type: WY.RESOURCE,
+        value: r.value
+      };
+      o = [...a];
+      -1 === e ? o.push(t) : o[e] = t;
+      s = O(t, o);
+    } else if (e === WY.CREATOR) s = D(o = P(t(M), r, t(U), a));else if (e === WY.SPACE) {
+      let e = t(M);
+      let i = t(j);
+      let n = t(BA);
+      o = P(e, i, r, a);
+      s = L(r, i, n, o);
+    }
+    i(y, o.filter(e => !Jj(s, e)));
+    s.forEach(e => {
+      if (e.type === WY.RESOURCE) i(M, null);else if (e.type === WY.CREATOR) i(j, null);else if (e.type === WY.SPACE) {
+        let n = {
+          ...t(U)
+        };
+        n.value[e.spaceType] = [];
+        i(U, n);
+      }
+    });
+  }
+}));
+let P = (e, t, i, r) => {
+  let a = [];
+  if (e && a.push({
+    type: WY.RESOURCE,
+    value: e.value
+  }), t && !II(t) && t.value.forEach(e => a.push({
+    type: WY.CREATOR,
+    value: e
+  })), i && !II(i)) {
+    let e = i.value;
+    for (let t of Object.values(qy)) for (let i of e[t]) {
+      let e = KI(t, i);
+      e && a.push(e);
+    }
+  }
+  let o = [];
+  r.forEach(e => {
+    Jj(a, e) && o.push(e);
+  });
+  let d = s()(a, o, l());
+  o.push(...d);
+  return o;
+};
+let O = (e, t) => {
+  let i = [];
+  let n = C(e.value);
+  t.filter(t => {
+    t.type === WY.SPACE && -1 === n.indexOf(t.spaceType) && i.push(t);
+    t.type === WY.CREATOR && e.value !== $L.ALL_FILES && e.value !== $L.DESIGN_FILES && e.value !== $L.FIGJAM_FILES && e.value !== $L.SLIDES && e.value !== $L.SITES && e.value !== $L.BUZZ && e.value !== $L.MAKE && i.push(t);
+  });
+  return i;
+};
+let D = e => {
+  let t = [];
+  e.forEach(e => {
+    e.type === WY.RESOURCE && e.value !== $L.DESIGN_FILES && e.value !== $L.FIGJAM_FILES && e.value !== $L.SLIDES && e.value !== $L.SITES && e.value !== $L.BUZZ && e.value !== $L.MAKE && e.value !== $L.ALL_FILES && t.push(e);
+  });
+  return t;
+};
+let L = (e, t, i, n) => {
+  let r = [];
+  let a = R(t, e, i);
+  n.forEach(e => {
+    e.type === WY.RESOURCE && -1 === a.indexOf(e.value) && r.push(e);
+  });
+  return r;
+};
+let $$F12 = eU(e => {}, (e, t) => {
+  e($$A2).forEach(e => {
+    t($$N9(e.type), null);
+  });
+  t(R9, null);
+});
+let M = eU(null);
+let j = eU(null);
+let U = eU(null);
+export function $$B13() {
+  let e = zl.get($$A2);
+  let t = [];
+  let i = [];
+  let n = [];
+  let a = [];
+  let s = [];
+  e.forEach(e => {
+    switch (e.type) {
+      case WY.CREATOR:
+        t.push(e.value.id);
+        break;
+      case WY.SPACE:
+        switch (e.spaceType) {
+          case qy.FOLDER:
+            i.push(e.value.id);
+            break;
+          case qy.TEAM:
+            n.push(e.value.id);
+            break;
+          case qy.ORG:
+            a.push(e.value.id);
+        }
+        break;
+      case WY.RESOURCE:
+        s.push(e.value);
+    }
+  });
+  return {
+    facet_creator_ids: t,
+    facet_folder_ids: i,
+    facet_team_ids: n,
+    facet_org_ids: a,
+    facet_resource_types: s
+  };
+}
+export const CZ = $$_0;
+export const J = $$E1;
+export const L8 = $$A2;
+export const OM = $$m3;
+export const P_ = $$x4;
+export const _4 = $$k5;
+export const a3 = $$g6;
+export const a6 = $$T7;
+export const jM = $$I8;
+export const l4 = $$N9;
+export const oT = $$b10;
+export const q$ = $$w11;
+export const q4 = $$F12;
+export const qB = $$B13;
+export const rG = $$v14;
+export const wf = $$h15;
+export const z5 = $$f16;
+export const zD = $$S17;

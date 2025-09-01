@@ -1,0 +1,284 @@
+import { jsx, jsxs, Fragment } from "react/jsx-runtime";
+import { useState, useEffect, useCallback, useMemo, createRef } from "react";
+import { Ng, wA } from "../vendor/514228";
+import { debounce } from "../905/915765";
+import { $n } from "../905/521428";
+import { o as _$$o } from "../905/821217";
+import { d as _$$d } from "../905/976845";
+import { k as _$$k } from "../905/443820";
+import { E as _$$E } from "../905/632989";
+import { hS } from "../905/437088";
+import { bL } from "../905/38914";
+import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
+import { P as _$$P } from "../905/537307";
+import { getFeatureFlags } from "../905/601108";
+import { c$, ms, MM } from "../figma_app/236327";
+import { B as _$$B } from "../905/714743";
+import { $z } from "../figma_app/617427";
+import { Ph } from "../905/160095";
+import { tx, t as _$$t } from "../905/303541";
+import { oB, j7 } from "../905/929976";
+import { $O, Lo } from "../905/156213";
+import { $$do, F1, Nw, ui, LN, Kq } from "../905/941249";
+import { S as _$$S } from "../1e926454/283343";
+import { C1 } from "../figma_app/12796";
+import { e6 } from "../905/557142";
+import { Ib } from "../905/129884";
+import { Ju } from "../905/102752";
+import { Cf } from "../905/504727";
+import { b8 } from "../figma_app/926061";
+import { A as _$$A } from "../2854/769773";
+let A = "team_join_link_permissions--loadedViewWrapper--LjAIr";
+let O = "team_join_link_permissions--urlText--jcjRH ellipsis--ellipsis--Tjyfa";
+let P = debounce((e, t, r) => e($$do({
+  teamId: t,
+  level: r
+})));
+let $$L0 = Ng(e => ({
+  teamJoinLinks: e.teamJoinLinks
+}), null, (e, t, r) => ({
+  ...e,
+  ...r,
+  ...t
+}))(function (e) {
+  let {
+    dispatch,
+    teamId,
+    initialInviteLevel,
+    teamPermissions
+  } = e;
+  let [l, d] = useState(initialInviteLevel);
+  let c = _$$S(teamId);
+  let u = "loading" === c.status;
+  let m = c.data;
+  useEffect(() => (P(dispatch, teamId, initialInviteLevel), () => {
+    dispatch(F1(null));
+  }), [dispatch, teamId, initialInviteLevel]);
+  let _ = e.teamPermissions.canEdit && !!e.teamJoinLinks?.url && e.includeCopyLinkButton;
+  let p = useCallback(() => {
+    dispatch($O({
+      type: U,
+      data: {
+        resetLink: () => {
+          dispatch(Nw({
+            teamId,
+            level: l,
+            shouldShowVisualBell: !0
+          }));
+        }
+      }
+    }));
+  }, [dispatch, teamId, l]);
+  let f = useCallback(() => jsx(D, {
+    dropdownShown: e.dropdownShown,
+    resetInviteLinks: p,
+    disableInviteLinks: () => dispatch(ui({
+      teamId
+    })),
+    loading: u,
+    canAdmin: teamPermissions.canAdmin
+  }), [dispatch, e.dropdownShown, u, p, teamPermissions.canAdmin, teamId,,]);
+  let g = useCallback(() => {
+    m && dispatch(LN({
+      teamId: e.teamId,
+      url: m,
+      source: Kq.TEAM_PERMISSIONS_MODAL
+    }));
+  }, [dispatch, e.teamId, m]);
+  let h = useMemo(() => e.includeCopyLinkButton ? jsx($n, {
+    onClick: g,
+    disabled: !m,
+    children: tx("team_join_links.copy_link")
+  }) : f(), [g, e.includeCopyLinkButton, m, f]);
+  return !u && !e.teamJoinLinks || !teamPermissions.canAdmin && e.teamJoinLinks?.disabled ? null : jsxs(Fragment, {
+    children: [jsxs("div", {
+      style: _ ? {
+        justifyContent: "space-between"
+      } : {
+        justifyContent: "flex-start"
+      },
+      className: "team_join_link_permissions--inviteLinkTitleWrapper--LSkbL",
+      children: [jsx("span", {
+        className: "team_join_link_permissions--inviteHeader--80xpy",
+        children: tx("team_join_links.invite_link")
+      }), _ && f()]
+    }), "loading" === c.status || e.teamJoinLinks?.url ? jsx(M, {
+      dropdownShown: e.dropdownShown,
+      getPermissionDescriptionText: e.getPermissionDescriptionText,
+      showDropdownSeparators: e.showDropdownSeparators,
+      setLevel: e => {
+        l !== e && (d(e), dispatch($$do({
+          teamId,
+          level: e,
+          shouldShowFailureMessage: !0,
+          callbackOnFailure: () => d(l)
+        })));
+      },
+      currentLevel: l,
+      url: u ? void 0 : e.teamJoinLinks?.url,
+      inviteLevels: teamPermissions.canEdit ? [e6.VIEWER, e6.EDITOR] : [e6.VIEWER],
+      teamId: e.teamId,
+      button: h
+    }) : jsx(B, {
+      turnOnInviteLinks: () => dispatch(Nw({
+        teamId,
+        level: l
+      }))
+    })]
+  });
+});
+function D(e) {
+  let t = wA();
+  let r = "team-link-settings-dropdown";
+  let n = createRef();
+  let o = () => e.dropdownShown?.type === r;
+  return jsxs(_$$o, {
+    eventListeners: ["onMouseDown"],
+    children: [jsx("div", {
+      ref: n,
+      children: jsx(_$$d, {
+        "aria-expanded": o(),
+        disabled: e.loading,
+        "aria-label": _$$t("team_join_links.team_invite_link_settings"),
+        onClick: () => {
+          let e = n.current?.getBoundingClientRect();
+          o() ? t(oB()) : e && t(j7({
+            type: r,
+            data: {
+              targetRect: e
+            }
+          }));
+        },
+        htmlAttributes: {
+          "data-tooltip-type": Ib.TEXT,
+          "data-tooltip": _$$t("team_join_links.team_invite_link_settings")
+        },
+        children: jsx(_$$P, {})
+      })
+    }), o() && jsxs(Cf, {
+      targetRect: e.dropdownShown.data.targetRect,
+      maxWidth: 140,
+      minWidth: 140,
+      lean: "left",
+      propagateCloseClick: !0,
+      children: [jsx(c$, {
+        onClick: e.resetInviteLinks,
+        children: tx("team_join_links.reset_invite_links")
+      }), e.canAdmin && jsx(c$, {
+        onClick: e.disableInviteLinks,
+        children: tx("team_join_links.turn_off_invite_links")
+      })]
+    })]
+  });
+}
+function M(e) {
+  let t = wA();
+  let r = "join-link-permission-level-dropdown";
+  let s = e.currentLevel === e6.VIEWER ? "-32px" : "-61px";
+  let n = jsxs("div", {
+    className: "team_join_link_permissions--linkAndDropdown--dOdkB",
+    children: [jsxs("span", {
+      className: "team_join_link_permissions--urlSection--fh6VF",
+      children: [!e.url && jsx(_$$k, {}), e.url && jsx("span", {
+        className: O,
+        children: e.url
+      })]
+    }), jsxs("div", {
+      children: [jsxs(_$$E, {
+        onClick: a => {
+          a.stopPropagation();
+          e.url && (e.dropdownShown ? t(oB()) : t(j7({
+            type: r
+          })));
+        },
+        className: "team_join_link_permissions--permissionLevelDropdown--xuQLz role_row--select--6VpSS",
+        children: [jsx("span", {
+          children: C1(e.currentLevel)
+        }), jsx("div", {
+          className: "team_join_link_permissions--caretWrapper--OXpki role_row--caretWrapper--P1Mak",
+          children: jsx(_$$B, {
+            svg: _$$A
+          })
+        })]
+      }), e.dropdownShown && e.dropdownShown.type === r && jsx(ms, {
+        className: "team_join_link_permissions--permissionLevelDropdownOptions--cgu-T",
+        style: {
+          marginTop: s
+        },
+        children: e.inviteLevels.map((t, r) => jsx(MM, {
+          checked: t === e.currentLevel,
+          onClick: () => e.setLevel(t),
+          children: C1(t)
+        }, r))
+      })]
+    })]
+  });
+  let o = jsxs("div", {
+    className: "team_join_link_permissions--linkAndDropdownV2--7DFWL",
+    children: [jsxs("div", {
+      className: "team_join_link_permissions--urlSectionV2--YS4eI",
+      children: [!e.url && jsx(_$$k, {}), e.url && jsx("span", {
+        className: O,
+        children: e.url
+      })]
+    }), jsx("div", {
+      className: "team_join_link_permissions--permissionLevelDropdownWrapper--yCu62",
+      children: jsx(b8, {
+        value: e.currentLevel,
+        options: e.inviteLevels,
+        getPermissionName: C1,
+        getPermissionDescription: e.getPermissionDescriptionText,
+        showSeparators: e.showDropdownSeparators,
+        onChange: e.setLevel
+      })
+    })]
+  });
+  return jsxs("div", {
+    className: A,
+    children: [getFeatureFlags().team_permission_modal_styling ? o : n, e.button]
+  });
+}
+function B(e) {
+  return jsxs("div", {
+    className: A,
+    children: [tx("team_join_links.share_a_secret_link_people_can_use_to_join_your_team"), " ", jsx(Ph, {
+      href: "#",
+      onClick: e.turnOnInviteLinks,
+      children: tx("team_join_links.turn_on_invite_links")
+    })]
+  });
+}
+let U = "RESET_LINKS_CONFIRMATION_MODAL";
+Ju(function (e) {
+  let t = wA();
+  let r = hS(e);
+  return jsx(bL, {
+    width: "md",
+    manager: r,
+    children: jsxs(vo, {
+      children: [jsx(Y9, {
+        children: jsx(hE, {
+          children: tx("team_join_links.reset_invite_links")
+        })
+      }), jsx(nB, {
+        children: tx("team_join_links.modal_description")
+      }), jsx(wi, {
+        children: jsxs(jk, {
+          children: [jsx($z, {
+            variant: "secondary",
+            onClick: () => t(Lo()),
+            children: tx("team_join_links.cancel")
+          }), jsx($z, {
+            variant: "destructive",
+            onClick: () => {
+              e.resetLink();
+              t(Lo());
+            },
+            children: tx("team_join_links.reset_links")
+          })]
+        })
+      })]
+    })
+  });
+}, U);
+export const i = $$L0;

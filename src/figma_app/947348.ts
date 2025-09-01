@@ -1,0 +1,14 @@
+let $$n1 = "draw_onboarding_draw_toggle";
+let $$i0 = "draw_onboarding_design_toggle";
+let $$a2 = "draw_onboarding_properties_panel";
+let $$s4 = "draw_onboarding_properties_panel_transform";
+let $$o6 = "draw_onboarding_secondary_toolbelt";
+let $$l3 = "draw_onboarding_variable_width_stroke";
+let $$d5 = "draw_onboarding_scatter_brushes";
+export const Qj = $$i0;
+export const aQ = $$n1;
+export const dP = $$a2;
+export const hg = $$l3;
+export const m9 = $$s4;
+export const yl = $$d5;
+export const zk = $$o6;

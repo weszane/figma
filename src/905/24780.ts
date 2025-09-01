@@ -1,0 +1,14 @@
+let $$n4 = "variables_modal--container--m0ds4";
+let $$r5 = "variables_modal--rightSide--NUIy-";
+let $$a6 = "variables_modal--footer--A8Mbk";
+let $$s0 = "variables_modal--debugVariablesBadge--tmWCJ";
+let $$o3 = "variables_modal--createVariableButton--0IrOC raw_components--iconButtonEnabled--WmVk5 raw_components--_iconButton---ybo6";
+let $$l1 = "variables_modal--createVariableDropdownOption--GDEyr";
+let $$d2 = "variables_modal--contextMenu--iBwak";
+export const ED = $$s0;
+export const Fs = $$l1;
+export const He = $$d2;
+export const ZS = $$o3;
+export const kL = $$n4;
+export const ok = $$r5;
+export const qr = $$a6;

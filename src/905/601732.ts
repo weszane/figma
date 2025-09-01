@@ -1,0 +1,133 @@
+import { jsx, jsxs } from "react/jsx-runtime";
+import { useMemo } from "react";
+import { xb } from "../figma_app/465776";
+import { lQ } from "../905/934246";
+import { b } from "../905/22449";
+import { c as _$$c } from "../905/34525";
+import { t } from "../905/303541";
+import { H8, nl } from "../905/590952";
+import { Lz, Zc } from "../905/497882";
+import { LG } from "../905/448440";
+import { jr, j4, Z7, MO } from "../figma_app/599979";
+import { mr } from "../figma_app/45218";
+import { o1 } from "../figma_app/10554";
+import { A as _$$A } from "../905/567946";
+import { iy, uK, O0, Ee, I1 } from "../905/916525";
+export function $$$$A0({
+  authorField: e
+}) {
+  let {
+    allowedAuthors,
+    existingResourceContent
+  } = e.deps;
+  let a = Lz(e, void 0);
+  let s = useMemo(() => LG(existingResourceContent) ? allowedAuthors.filter(e => jr(e)) : [...allowedAuthors].sort((e, t) => v(e) - v(t)), [allowedAuthors, existingResourceContent]);
+  return existingResourceContent && mr(existingResourceContent) && !Zc(e) ? jsx(x, {
+    existingResourceContent
+  }) : jsx(_$$A, {
+    label: t("community.publishing.author_share_as"),
+    children: jsx(b, {
+      className: iy,
+      value: a ? $$b1(a) : void 0,
+      readonly: !Zc(e),
+      onChange: t => {
+        let i = s.find(e => $$b1(e) === t);
+        Zc(e) && e.setValue(i);
+      },
+      children: s.map(e => jsx(y, {
+        author: e,
+        existingResourceContent
+      }, $$b1(e)))
+    })
+  });
+}
+function y({
+  author: e,
+  existingResourceContent: t
+}) {
+  let i = j4(e);
+  let r = $$b1(e);
+  return i ? jsxs("label", {
+    className: uK,
+    children: [E(e, i), jsx(_$$c, {
+      value: r,
+      id: r,
+      className: O0
+    }), jsx("div", {
+      className: Ee,
+      children: i.name
+    }), jsx("div", {
+      className: I1,
+      children: I(e)
+    })]
+  }) : t && mr(t) ? jsx(S, {
+    publisher: t.publisher,
+    value: r
+  }) : null;
+}
+export function $$b1(e) {
+  return jr(e) ? `user-${e.user_id}` : Z7(e) ? `team-${e.team_id}` : MO(e) ? `org-${e.org_id}` : void xb(e);
+}
+let v = e => jr(e) ? 1 : Z7(e) ? 2 : MO(e) ? 3 : void xb(e);
+let I = e => jr(e) ? t("community.publishing.individual_creator") : Z7(e) ? t("community.publishing.team_author") : MO(e) ? t("community.publishing.organization_author") : xb(e);
+let E = (e, t) => jr(e) ? jsx(H8, {
+  user: t
+}) : Z7(e) || MO(e) ? jsx(nl, {
+  team: t
+}) : xb(e);
+function x({
+  existingResourceContent: e
+}) {
+  let {
+    id
+  } = e.publisher;
+  return jsx(_$$A, {
+    label: t("community.publishing.author_share_as"),
+    children: jsx(b, {
+      className: iy,
+      value: id,
+      readonly: !0,
+      onChange: lQ,
+      children: jsx(S, {
+        publisher: e.publisher,
+        value: id
+      })
+    })
+  });
+}
+function S({
+  publisher: e,
+  value: t
+}) {
+  let {
+    name,
+    img_url
+  } = e;
+  return jsxs("label", {
+    className: uK,
+    children: [e.entity_type === o1.USER ? jsx(H8, {
+      user: {
+        imageUrl: img_url,
+        name
+      }
+    }) : jsx(nl, {
+      team: {
+        imageUrl: img_url,
+        name
+      }
+    }), jsx(_$$c, {
+      value: t,
+      id: t,
+      className: O0
+    }), jsx("div", {
+      className: Ee,
+      children: name
+    }), jsx("div", {
+      className: I1,
+      children: w(e)
+    })]
+  });
+}
+let w = e => e.entity_type === o1.USER ? t("community.publishing.individual_creator") : e.entity_type === o1.TEAM ? t("community.publishing.team_author") : e.entity_type === o1.ORG ? t("community.publishing.organization_author") : void 0;
+export const A = $$$$A0;
+export const s = $$b1;

@@ -1,0 +1,2 @@
+export var $$n0 = (e => (e[e.DEFAULT = 1] = "DEFAULT", e[e.INITIAL_DRAG_ON_DLT = 2] = "INITIAL_DRAG_ON_DLT", e[e.DRAG_ON_CANVAS = 3] = "DRAG_ON_CANVAS", e[e.DRAG_RETURN_TO_DLT = 4] = "DRAG_RETURN_TO_DLT", e))($$n0 || {});
+export const k = $$n0;

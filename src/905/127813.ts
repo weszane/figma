@@ -1,0 +1,13 @@
+import { eU } from "../figma_app/27355";
+let $$r0 = eU(null);
+let $$a4 = eU([]);
+let $$s3 = eU(!1);
+let $$o5 = eU(!1);
+let $$l1 = "guidelines.md";
+let $$d2 = "global.css";
+export const Om = $$r0;
+export const R6 = $$l1;
+export const Ul = $$d2;
+export const Zc = $$s3;
+export const jb = $$a4;
+export const tI = $$o5;

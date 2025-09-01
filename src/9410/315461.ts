@@ -1,0 +1,87 @@
+import { useCallback } from "react";
+import { d4 } from "../vendor/514228";
+import { luZ } from "../figma_app/763686";
+import { az } from "../905/449184";
+import { gl } from "../905/216495";
+import { tS } from "../figma_app/516028";
+import { AF } from "../figma_app/889655";
+import { Jb } from "../figma_app/224338";
+function u() {
+  let e = tS() ?? "";
+  let t = Jb() ?? "";
+  let i = d4(AF);
+  return {
+    fileKey: e,
+    slideId: t,
+    nodeId: i?.guid
+  };
+}
+export function $$p5() {
+  let e = u();
+  return useCallback((t, i) => {
+    az.trackDefinedEvent("slides.modify_object_animation.type", {
+      ...e,
+      oldValue: t,
+      newValue: i
+    });
+  }, [e]);
+}
+export function $$h6() {
+  let e = u();
+  return useCallback((t, i) => {
+    az.trackDefinedEvent("slides.modify_object_animation.duration", {
+      ...e,
+      oldValue: t,
+      newValue: i
+    });
+  }, [e]);
+}
+export function $$m0() {
+  let e = u();
+  return useCallback((t, i) => {
+    let r = e => void 0 === e ? void 0 : gl(e) ? "MIXED" : e === luZ.TRIGGER ? "TRIGGER" : "AFTER_PREVIOUS";
+    az.trackDefinedEvent("slides.modify_object_animation.start_condition", {
+      ...e,
+      oldValue: r(t),
+      newValue: r(i)
+    });
+  }, [e]);
+}
+export function $$f4() {
+  let e = u();
+  return useCallback((t, i) => {
+    az.trackDefinedEvent("slides.modify_object_animation.phase", {
+      ...e,
+      oldValue: t,
+      newValue: i
+    });
+  }, [e]);
+}
+export function $$g3() {
+  let e = u();
+  return useCallback(() => {
+    az.trackDefinedEvent("slides.reorder_object_animation", e);
+  }, [e]);
+}
+export function $$_1() {
+  let e = u();
+  return useCallback(() => {
+    az.trackDefinedEvent("slides.delete_object_animation", e);
+  }, [e]);
+}
+export function $$x2() {
+  let e = u();
+  return useCallback(t => {
+    az.trackDefinedEvent("slides.preview_object_animation", {
+      ...e,
+      numAnimations: t
+    });
+  }, [e]);
+}
+export const AC = $$m0;
+export const D0 = $$_1;
+export const Mp = $$x2;
+export const Z4 = $$g3;
+export const sQ = $$f4;
+export const tx = $$p5;
+export const xl = $$h6;

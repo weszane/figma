@@ -1,0 +1,593 @@
+import { jsx, jsxs, Fragment } from "react/jsx-runtime";
+import { useState, useRef, useCallback, useMemo, useEffect } from "react";
+import { wA, d4 } from "../vendor/514228";
+import { ServiceCategories as _$$e } from "../905/165054";
+import o from "classnames";
+import { Rs } from "../figma_app/288654";
+import { $D } from "../905/11";
+import { Ex, zE } from "../figma_app/919079";
+import { ks, nR, vd, Us } from "../figma_app/637027";
+import { a_ } from "../figma_app/858013";
+import { P as _$$P } from "../905/347284";
+import { s as _$$s } from "../cssbuilder/589278";
+import { tx, t as _$$t } from "../905/303541";
+import { F as _$$F } from "../905/302958";
+import { Pf, nl } from "../905/590952";
+import { U as _$$U } from "../905/566881";
+import { Cy } from "../905/844322";
+import { to } from "../905/156213";
+import { fu } from "../figma_app/831799";
+import { z as _$$z } from "../905/373223";
+import { mE } from "../905/561087";
+import { fileEntityDataMapper } from "../905/943101";
+import { FFileType, FUserRoleType, FPlanRestrictionType } from "../figma_app/191312";
+import { G0Y } from "../figma_app/43951";
+import { kA } from "../figma_app/336853";
+import { XX, oc } from "../figma_app/345997";
+import { getPermissionsStateMemoized } from "../figma_app/642025";
+import { e6 } from "../905/557142";
+import { k as _$$k } from "../905/93362";
+import { Ju } from "../905/102752";
+import { fZ } from "../figma_app/805373";
+import { Dd, OJ } from "../905/519092";
+import { hK } from "../figma_app/211706";
+import { bUL } from "../figma_app/822011";
+import { s as _$$s2 } from "../905/573154";
+import { E as _$$E } from "../905/984674";
+import { KQ } from "../figma_app/475472";
+import { A as _$$A } from "../6828/7452";
+import { A as _$$A2 } from "../1617/567223";
+var l = o;
+let M = Ju(function(e) {
+  let {
+    teamName,
+    userHasAdminLevelPermissions,
+    draftsToMove,
+    imminentDraftMoveUpgradeReason,
+    onConfirm,
+    onClose
+  } = e;
+  let l = draftsToMove.length;
+  let d = () => "figjam" === imminentDraftMoveUpgradeReason ? tx("file_browser.draft_move_confirmation_modal.seat_type_figjam") : tx("file_browser.draft_move_confirmation_modal.seat_type_design");
+  let c = () => userHasAdminLevelPermissions ? tx("file_browser.draft_move_confirmation_modal.move_drafts_team_owner_substring") : tx("file_browser.draft_move_confirmation_modal.move_drafts_team_member_substring");
+  return jsx(fu, {
+    name: "Plan Spaces Pro Draft Move Confirmation Modal",
+    children: jsx(Dd, {
+      title: _$$t("file_browser.draft_move_modal.confirmation_modal_header", {
+        fileCount: l,
+        teamName
+      }),
+      maxWidth: 430,
+      minWidth: 430,
+      onClose,
+      onConfirm,
+      confirmText: _$$t("file_browser.file_move.move"),
+      dataTestId: "draft-move-confirmation-modal",
+      fixedCenter: !0,
+      focus: !0,
+      children: jsxs(Fragment, {
+        children: [l > 1 ? "designAndFigjam" === imminentDraftMoveUpgradeReason ? tx("file_browser.draft_move_confirmation_modal.move_multiple_drafts_dual_upgrade", {
+          pluralizedDraftsRemainingString: tx("file_browser.draft_move_confirmation_modal.pluralized_remaining_drafts", {
+            remainingDraftCount: l - 1
+          }),
+          draftName: draftsToMove[0].name,
+          teamName,
+          roleContextSubstring: c()
+        }) : tx("file_browser.draft_move_confirmation_modal.move_multiple_drafts_singular_upgrade", {
+          draftName: (e => {
+            let t = draftsToMove.find(t => "figjam" === e && t.editorType === FFileType.WHITEBOARD || "design" === e && t.editorType === FFileType.DESIGN);
+            return t ? t.name : draftsToMove[0].name;
+          })(imminentDraftMoveUpgradeReason),
+          pluralizedDraftsRemainingString: tx("file_browser.draft_move_confirmation_modal.pluralized_remaining_drafts", {
+            remainingDraftCount: l - 1
+          }),
+          seatType: d(),
+          teamName,
+          roleContextSubstring: c()
+        }) : tx("file_browser.draft_move_confirmation_modal.move_one_draft_singular", {
+          fileTypeMoniker: "figjam" === imminentDraftMoveUpgradeReason ? tx("file_browser.draft_move_confirmation_modal.board") : tx("file_browser.draft_move_confirmation_modal.file"),
+          seatType: d(),
+          teamName,
+          roleContextSubstring: c()
+        }), jsx(hK, {
+          height: 16
+        })]
+      })
+    })
+  });
+}, "DRAFT_MOVE_CONFIRMATION_MODAL");
+var j = (e => (e.DESIGN = "design", e.FIGJAM = "figjam", e.DESIGN_AND_FIGJAM = "designAndFigjam", e.NONE = "none", e))(j || {});
+let z = "draft_move_modal--modalBody--tk8mC";
+let H = "draft_move_modal--folderName--Edpgq ellipsis--ellipsis--Tjyfa";
+let W = "draft_move_modal--destinationHeading--dBe0G";
+let $$K = "draft_move_modal--destinationDescription--fMcX-";
+let Y = "draft_move_modal--folderRow--ploo8";
+let q = "draft_move_modal--hoverableFolderRow--hUAas";
+let $ = "draft_move_modal--selectedFolderRow--XmVi7";
+let Z = "draft_move_modal--iconContainer--YfzDe";
+let X = "draft_move_modal--learnMoreLink--b5crD";
+let Q = Ju(function(e) {
+  let {
+    setNewlyCreatedTeamName,
+    setHasCreatedTeam,
+    onClose
+  } = e;
+  let [o, l] = useState("");
+  let d = wA();
+  let c = !o.trim().length;
+  return jsx(fu, {
+    name: "Plan Spaces Pro Draft Move Confirmation Modal",
+    children: jsx(Dd, {
+      cancelText: _$$t("file_browser.draft_move_modal.back"),
+      confirmText: _$$t("file_browser.draft_move_modal.create_and_move_drafts"),
+      disabled: c,
+      fixedCenter: !0,
+      focus: !0,
+      maxWidth: 480,
+      minWidth: 480,
+      onClose,
+      onSubmit: () => {
+        if (c) {
+          d(_$$s2.error(_$$t("team_creation.your_team_name_cannot_be_empty")));
+          return;
+        }
+        d(KQ({
+          teamName: o,
+          orgAccess: bUL.PUBLIC,
+          dontRedirect: !0,
+          ignoreCurrentPlan: !0
+        }));
+        setNewlyCreatedTeamName(o);
+        setHasCreatedTeam(!0);
+        onClose();
+      },
+      title: _$$t("file_browser.draft_move_modal.creating_your_new_team_header"),
+      truncateTitleText: !0,
+      children: jsxs(Fragment, {
+        children: [jsx(_$$E, {
+          children: tx("file_browser.draft_move_modal.before_we_move_your_drafts")
+        }), jsx(hK, {
+          height: 16
+        }), jsx(_$$E, {
+          fontWeight: "medium",
+          children: tx("file_browser.draft_move_modal.team_name")
+        }), jsx(hK, {
+          height: 8
+        }), jsx(ks, {
+          value: o,
+          onChange: e => {
+            l(e.target.value);
+          },
+          className: "draft_move_modal--teamCreationInput--oJhmi",
+          maxLength: 118,
+          placeholder: _$$t("file_browser.draft_move_modal.team_creation_placeholder"),
+          autoFocus: !0
+        }), jsx(hK, {
+          height: 8
+        })]
+      })
+    })
+  });
+}, "DRAFT_MOVE_TEAM_CREATION_MODAL");
+let et = "https://help.figma.com/hc/articles/18409526530967";
+var ei = (e => (e.FREE = "Free", e.LOCKED = "Locked", e.EDU = "Edu", e.PRO = "Pro", e.ORG = "Org", e.ENT = "Enterprise", e.GUEST = "Guest", e))(ei || {});
+export let $$en0 = Ju(function(e) {
+  let {
+    onClose,
+    draftsToMove,
+    reposToMove,
+    onMoveSuccess,
+    setSynchronousFileTransferInProgress,
+    moveAllDraftsAsync,
+    isMoveAll
+  } = e;
+  let [U, B] = useState(null);
+  let [V, G] = useState(!1);
+  let [X, et] = useState("");
+  let [ei, en] = useState(!1);
+  let [es, eo] = useState([]);
+  let el = d4(e => e.teamCreation.loading);
+  let ed = useRef(null);
+  let ec = useRef(null);
+  let eu = d4(e => getPermissionsStateMemoized(e));
+  let ep = Rs(G0Y, {
+    orgId: null
+  });
+  let em = wA();
+  let eh = _$$z();
+  let eg = useCallback(() => {
+    onClose();
+    eh();
+  }, [eh, onClose]);
+  let ef = useMemo(() => {
+    let e = e => e ? XX(e) ? e.studentTeamAt ? "Edu" : "Pro" : oc(e.id, eu) ? "Locked" : "Free" : "Free";
+    let t = ({
+      orgId: e,
+      orgPermission: t,
+      isEnterprise: i = !1
+    }) => t === FUserRoleType.GUEST ? "Guest" : e && i ? "Enterprise" : "Org";
+    let i = e => !!e && kA(eu.orgById[e]);
+    let n = (ep.data?.currentUser?.teamRoles?.map(e => e.team).filter(e => !!e) ?? []).filter(e => e && !e.deletedAt).sort((e, t) => e.name.localeCompare(t.name)).map(t => ({
+      name: t?.name ?? "",
+      folderId: t?.currentTeamUser?.draftsFolderId,
+      imgUrl: t?.imgUrl,
+      teamId: t?.id,
+      destinationBadgeType: e(t),
+      isDisabled: !1,
+      teamCreatedAt: t?.createdAt
+    })).filter(e => !!e.folderId) ?? [];
+    eo(ep.data?.currentUser?.allOrgUsers?.map(e => ({
+      name: e?.org?.name ?? "",
+      folderId: e?.draftsFolderId,
+      imgUrl: e?.org?.imgUrl,
+      teamId: e?.draftsProject?.teamId,
+      isDisabled: !0,
+      destinationBadgeType: t({
+        orgId: e?.orgId,
+        orgPermission: e?.permission,
+        isEnterprise: i(e?.orgId)
+      })
+    })).filter(e => !!e.folderId) ?? []);
+    return n;
+  }, [eu, ep.data?.currentUser?.teamRoles, ep.data?.currentUser?.allOrgUsers]);
+  useEffect(() => {
+    let e = ef.filter(e => e.name === X).reduce((e, t) => {
+      let i = e ? e.teamCreatedAt : null;
+      let n = t.teamCreatedAt;
+      return !i || n > i ? t : e;
+    }, null);
+    if (ei && X && e && (B(e.folderId), ed.current && ec.current)) {
+      let e = ed.current;
+      let t = ec.current;
+      let i = e.getBoundingClientRect();
+      let n = t.getScrollContainer().getBoundingClientRect();
+      let r = i.top - n.top;
+      r + 200 > t.getScrollContainer().clientHeight ? t.scrollTo(r - t.getScrollContainer().clientHeight + 200) : r < 0 && t.scrollTo(r);
+      en(!1);
+      et("");
+    }
+  }, [ei, X, ef]);
+  let e_ = draftsToMove.map(e => e.name).concat(reposToMove.map(e => e.name));
+  let eA = e_.length > 1 ? _$$t("file_browser.draft_move_modal.header_multiple_files_move", {
+    fileCount: e_.length
+  }) : _$$t("file_browser.draft_move_modal.header_single_file_move", {
+    fileName: e_[0]
+  });
+  let ey = e => _$$k.migrateAllPersonalDrafts(e).then(() => em(_$$F.enqueue({
+    message: _$$t("file_browser.draft_move_modal.async_draft_move_scheduled")
+  }))).catch(() => em(_$$F.enqueue({
+    message: _$$t("file_browser.draft_move_modal.async_draft_move_scheduling_error")
+  })));
+  let eb = (e, t) => {
+    let n = draftsToMove.map(e => fileEntityDataMapper.toSinatra(e));
+    let r = onMoveSuccess ? e => onMoveSuccess(e, n.length) : void 0;
+    n.length > 0 && em(Cy({
+      files: n,
+      folderName: e,
+      folderId: t,
+      isDraftsToMove: !0,
+      onFinishCallback: r,
+      fromFileModal: !0
+    }));
+    reposToMove.length > 0 && em(mE({
+      repos: reposToMove,
+      folderId: t,
+      folderName: e
+    }));
+  };
+  let ev = () => {
+    let e = ef.find(e => e.folderId === U);
+    U && e && (moveAllDraftsAsync ? ey(e.teamId) : (setSynchronousFileTransferInProgress(draftsToMove.length > 0), eb(e.name, U)), onClose());
+  };
+  let eI = (e, t, n) => {
+    em(to({
+      type: M,
+      data: {
+        onConfirm: ev,
+        teamName: e,
+        userHasAdminLevelPermissions: t,
+        imminentDraftMoveUpgradeReason: n,
+        draftsToMove
+      }
+    }));
+  };
+  let eE = e => {
+    let {
+      teamId
+    } = e;
+    return ep.data?.currentUser?.teamRoles?.find(e => e.team?.id === teamId);
+  };
+  let ex = e => {
+    let t = draftsToMove.some(e => e.editorType === FFileType.DESIGN);
+    return {
+      hasDesignFiles: t,
+      hasFigjamFiles: draftsToMove.some(e => e.editorType === FFileType.WHITEBOARD),
+      isFullSeatForDesign: e?.designPaidStatus === FPlanRestrictionType.FULL,
+      isFullSeatForFigjam: e?.whiteboardPaidStatus === FPlanRestrictionType.FULL
+    };
+  };
+  let eS = (e, t) => !!t && t.level >= e6.ADMIN;
+  let ew = (e, t) => {
+    if (!t) return !1;
+    let {
+      hasDesignFiles,
+      hasFigjamFiles,
+      isFullSeatForDesign,
+      isFullSeatForFigjam
+    } = ex(t.team?.currentTeamUser);
+    return hasDesignFiles && hasFigjamFiles ? isFullSeatForDesign && isFullSeatForFigjam : hasDesignFiles ? isFullSeatForDesign : !!hasFigjamFiles && isFullSeatForFigjam;
+  };
+  let eC = (e, t) => {
+    if (!t) return j.NONE;
+    let {
+      hasDesignFiles,
+      hasFigjamFiles,
+      isFullSeatForDesign,
+      isFullSeatForFigjam
+    } = ex(t.team?.currentTeamUser);
+    return hasDesignFiles && hasFigjamFiles && !isFullSeatForDesign && !isFullSeatForFigjam ? j.DESIGN_AND_FIGJAM : hasDesignFiles && !isFullSeatForDesign ? j.DESIGN : hasFigjamFiles && !isFullSeatForFigjam ? j.FIGJAM : j.NONE;
+  };
+  return "loading" === ep.status || el ? jsx(OJ, {
+    title: eA,
+    fixedCenter: !0,
+    minWidth: 480,
+    maxWidth: 480,
+    onClose,
+    truncateTitleText: !0,
+    children: jsx("div", {
+      className: z,
+      children: jsx(a_, {
+        className: "draft_move_modal--spinner--G4CKo"
+      })
+    })
+  }) : jsx(fu, {
+    name: "draftMoveModal",
+    properties: {
+      itemCount: e_.length,
+      IsMoveAsync: !!moveAllDraftsAsync,
+      isMoveAll: !!isMoveAll
+    },
+    children: jsx(OJ, {
+      title: eA,
+      fixedCenter: !0,
+      minWidth: 480,
+      maxWidth: 480,
+      onClose,
+      truncateTitleText: !0,
+      children: jsxs("div", {
+        className: z,
+        children: [ef && jsx(_$$P, {
+          width: 480,
+          ref: ec,
+          children: jsxs("div", {
+            className: _$$s.pl8.pr8.$,
+            children: [jsx(function(e) {
+              return jsxs("button", {
+                "data-testid": "drafts-move-new-starter-team-button",
+                className: l()(Y, e.checked ? $ : "", e.isHoverableRow ? q : ""),
+                onClick: e.onClick,
+                children: [jsx("div", {
+                  className: Z,
+                  children: jsx(fZ, {
+                    size: Pf.MEDIUM,
+                    shape: "CIRCLE",
+                    removeCustomFill: !0,
+                    className: e.checked ? "draft_move_modal--newStarterTeamAvatarSelected--QfQVr" : "draft_move_modal--newStarterTeamAvatar--HHodh",
+                    color: null,
+                    svg: e.checked ? _$$A : _$$A2
+                  })
+                }), jsxs("div", {
+                  className: H,
+                  children: [jsx("span", {
+                    className: W,
+                    children: tx("file_browser.draft_move_modal.a_new_starter_team")
+                  }), jsx("span", {
+                    className: $$K,
+                    children: tx("file_browser.draft_move_modal.none_of_these_teams_feel_right")
+                  })]
+                })]
+              });
+            }, {
+              isHoverableRow: !V,
+              checked: V,
+              onClick: () => {
+                B(null);
+                V || G(!V);
+              }
+            }), ef.map(e => {
+              let t = U === e.folderId;
+              let i = t ? ed : null;
+              return jsx(ea, {
+                checked: t,
+                destinationBadgeType: e.destinationBadgeType,
+                folderId: e.folderId,
+                folderRef: i,
+                imgUrl: e.imgUrl,
+                isDisabled: e.isDisabled,
+                name: e.name,
+                onSelect: () => {
+                  G(!1);
+                  B(e.folderId);
+                },
+                teamCreatedAt: e.teamCreatedAt,
+                teamId: e.teamId
+              }, e.folderId);
+            })]
+          })
+        }), jsxs("div", {
+          className: "draft_move_modal--footer--g-XqF",
+          children: [jsx(er, {
+            userOrgDestinations: es,
+            onCreateNewTeamClick: eg
+          }), jsxs("div", {
+            className: "draft_move_modal--footerCTA--A8uBM",
+            children: [jsx(nR, {
+              onClick: onClose,
+              children: tx("modal.cancel")
+            }), V ? jsx(vd, {
+              disabled: !V,
+              onClick: () => {
+                G(!1);
+                em(to({
+                  type: Q,
+                  data: {
+                    setNewlyCreatedTeamName: et,
+                    setHasCreatedTeam: en
+                  }
+                }));
+              },
+              children: _$$t("file_browser.draft_move_modal.continue")
+            }) : jsx(vd, {
+              disabled: !U,
+              onClick: () => {
+                let e = ef.find(e => e.folderId === U);
+                if (!e) {
+                  $D(_$$e.WORKFLOW, Error("Draft Move attempted without a selected destination folder"));
+                  onClose();
+                  return;
+                }
+                let {
+                  destinationBadgeType,
+                  name
+                } = e;
+                let r = eE(e);
+                "Pro" !== destinationBadgeType || ew(e, r) ? ev() : eI(name, eS(e, r), eC(e, r));
+              },
+              children: _$$t("file_browser.file_move.move")
+            })]
+          })]
+        })]
+      })
+    })
+  });
+}, "DraftMoveModal");
+function er(e) {
+  return e.userOrgDestinations.length ? jsx("div", {
+    className: "draft_move_modal--chooseTeamOrOrgRow--OPBwF",
+    "data-testid": "org-restriction-text",
+    children: tx("file_browser.draft_move_modal.drafts_cannot_be_moved_to_organizations", {
+      userOrgNames: function(e) {
+        let t = e.map(e => e.name);
+        let i = e => jsx("span", {
+          className: _$$s.fontSemiBold.$,
+          children: e
+        });
+        switch (t.length) {
+          case 0:
+            return "";
+          case 1:
+            return i(t[0]);
+          case 2:
+            return tx("file_browser.draft_move_modal.org_restriction_text_two_orgs", {
+              orgName1: i(t[0]),
+              orgName2: i(t[1])
+            });
+          case 3:
+            return tx("file_browser.draft_move_modal.org_restriction_text_three_orgs", {
+              orgName1: i(t[0]),
+              orgName2: i(t[1]),
+              orgName3: i(t[2])
+            });
+          default:
+            return tx("file_browser.draft_move_modal.org_restriction_text_multiple_orgs", {
+              orgName1: i(t[0]),
+              orgName2: i(t[1]),
+              orgName3: i(t[2]),
+              numRemainingOrgsSubstring: jsx("span", {
+                className: _$$s.fontSemiBold.$,
+                children: tx("file_browser.drafts_to_move.org_restriction_text_orgs_remaining", {
+                  numRemainingOrgs: t.length - 3
+                })
+              })
+            });
+        }
+      }(e.userOrgDestinations),
+      learnMoreLink: jsx(Us, {
+        className: X,
+        trusted: !0,
+        target: "_blank",
+        href: et,
+        children: tx("file_browser.draft_move_modal.learn_more_link")
+      })
+    })
+  }) : null;
+}
+function ea(e) {
+  let t;
+  let i;
+  let r = jsx(Us, {
+    className: X,
+    trusted: !0,
+    target: "_blank",
+    href: et,
+    children: tx("file_browser.draft_move_modal.learn_more_link")
+  });
+  let a = tx("file_browser.draft_move_modal.destination_description_cannot_be_moved_here", {
+    learnMoreLink: r
+  });
+  switch (e.destinationBadgeType) {
+    case "Free":
+      t = tx("file_browser.draft_move_modal.destination_description_access_will_become_view_only");
+      i = _$$t("file_browser.draft_move_modal.destination_description_badge_free");
+      break;
+    case "Locked":
+      t = tx("file_browser.draft_move_modal.destination_description_access_will_become_view_only");
+      i = _$$t("file_browser.draft_move_modal.destination_description_badge_locked");
+      break;
+    case "Edu":
+      t = tx("file_browser.draft_move_modal.destination_description_collaborator_access_may_change");
+      i = _$$t("file_browser.draft_move_modal.destination_description_badge_edu");
+      break;
+    case "Pro":
+      t = tx("file_browser.draft_move_modal.destination_description_collaborator_access_may_change");
+      i = _$$t("file_browser.draft_move_modal.destination_description_badge_pro");
+      break;
+    case "Org":
+      i = _$$t("file_browser.draft_move_modal.destination_description_badge_org");
+      t = a;
+      break;
+    case "Enterprise":
+      i = _$$t("file_browser.draft_move_modal.destination_description_badge_ent");
+      t = a;
+      break;
+    case "Guest":
+      i = _$$t("file_browser.draft_move_modal.destination_description_badge_guest");
+      t = a;
+  }
+  let s = ["Org", "Enterprise", "Guest"].includes(e.destinationBadgeType);
+  let o = !e.checked && !s;
+  return jsxs("button", {
+    "data-testid": `${e.name}-button`,
+    className: l()(Y, e.checked ? $ : "", o ? q : ""),
+    onClick: e.onSelect,
+    disabled: e.isDisabled,
+    ref: e.folderRef,
+    children: [jsx("div", {
+      className: Z,
+      children: jsx(nl, {
+        size: Pf.MEDIUM,
+        shape: "CIRCLE",
+        fallbackDisplay: _$$U.HIDDEN,
+        team: {
+          id: e.teamId,
+          imgUrl: e.imgUrl
+        }
+      })
+    }), jsxs("div", {
+      className: H,
+      children: [jsx("span", {
+        className: W,
+        children: e.name
+      }), jsx("span", {
+        className: s ? "draft_move_modal--destinationDescriptionOrg--wEClH draft_move_modal--destinationDescription--fMcX-" : $$K,
+        children: t
+      })]
+    }), jsx(Ex, {
+      text: i,
+      dataTestId: `${e.name}-badge`,
+      color: e.checked ? zE.TOOLBAR_SELECTED : zE.DEFAULT,
+      className: l()("draft_move_modal--teamBadge--ODLch", _$$s.mr8.$$if(!e.checked, _$$s.colorBgBrandTertiary.colorText).$)
+    })]
+  });
+}
+export const K = $$en0; 

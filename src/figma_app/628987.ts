@@ -1,0 +1,350 @@
+import { jsx, jsxs, Fragment } from "react/jsx-runtime";
+import { useRef, useCallback, useState, useEffect } from "react";
+import { wA, d4 } from "../vendor/514228";
+import { c2 } from "../905/382883";
+import { isNotNullish } from "../figma_app/95419";
+import { K as _$$K } from "../905/443068";
+import { E as _$$E } from "../905/632989";
+import { U as _$$U } from "../905/708285";
+import { Ez5, nQ7 } from "../figma_app/763686";
+import { getFeatureFlags } from "../905/601108";
+import { eU, fp } from "../figma_app/27355";
+import h from "classnames";
+import { sx } from "../905/449184";
+import { parsePxNumber } from "../figma_app/783094";
+import { K4, P6 } from "../905/535224";
+import { h as _$$h } from "../905/207101";
+import { R as _$$R } from "../905/103090";
+import { buildStaticUrl } from "../figma_app/169182";
+import { Pt } from "../figma_app/806412";
+import { D8 } from "../905/511649";
+import { nl } from "../figma_app/257275";
+import { E as _$$E2 } from "../905/277716";
+import { XHR } from "../905/910117";
+import { B as _$$B } from "../905/714743";
+import { t as _$$t } from "../905/303541";
+import { to } from "../figma_app/828186";
+import { XE, Uv, u1 } from "../figma_app/91703";
+import { to as _$$to } from "../905/156213";
+import { J6 } from "../figma_app/8833";
+import { XE as _$$XE } from "../figma_app/976749";
+import { Y5 } from "../figma_app/455680";
+import { O as _$$O } from "../905/291654";
+import { Kk } from "../905/777093";
+import { Cy } from "../905/571439";
+import { E7 } from "../905/216495";
+import { Um } from "../905/848862";
+import { Xo } from "../figma_app/482495";
+import { f as _$$f } from "../905/940356";
+import { ut } from "../figma_app/84367";
+import { Lh, D8 as _$$D } from "../figma_app/242339";
+import { Ib } from "../905/129884";
+import { cn } from "../905/959568";
+import { a3 } from "../905/188421";
+import { Cn } from "../905/882267";
+import { q9 } from "../905/698759";
+import { fI } from "../figma_app/626177";
+import { c$, sK, uQ } from "../905/794875";
+import { We } from "../905/805224";
+import { JD } from "../905/468313";
+import { DE, Ad } from "../figma_app/811257";
+import { x as _$$x } from "../905/961957";
+import { sO } from "../figma_app/21029";
+import { Z9, Ds, DK, nO, wH, uG, q_, ac, OW, UU, A5, YV } from "../905/71683";
+import { kaq } from "../figma_app/27776";
+import { A as _$$A } from "../3850/217317";
+var m = h;
+let ea = buildStaticUrl("font/previews");
+let es = getFeatureFlags().font_index_250317 ? "font_previews.3e7c0297f334e1a1002e3f2f2dc38dcb.json.br" : "font_previews.be806b368d91ef4a0f93e8d2136d49a9.json.br";
+let eo = `${ea}/${es}`;
+let el = !1;
+class ed extends a3 { }
+class ec extends c$ { }
+export function $$eu1() {
+  let e = _$$R(e => Cy(e.mirror));
+  let t = useRef(e);
+  e.length > 0 && !c2(t.current, e) && (t.current = e);
+  return t;
+}
+let ep = eU(void 0);
+export function $$e_0() {
+  let [e, t] = fp(ep);
+  _$$h(() => {
+    r();
+  });
+  let r = useCallback(() => {
+    !e && q9() && XHR.crossOriginGet(`${eo}`, null, {
+      headers: {
+        "Content-Type": "text/plain"
+      }
+    }).then(({
+      data: e
+    }) => {
+      null === e && console.error("Failed to load google font previews.");
+      let r = new Map();
+      for (let t of Object.entries(e)) {
+        let e = t[1].replace("#", "%23");
+        r.set(t[0], e);
+      }
+      t(r);
+    }).catch(e => {
+      console.error("Failed to load google font previews: ", e);
+    });
+  }, [e, t]);
+  return e;
+}
+let eh = {
+  format: e => e
+};
+export function $$em2({
+  fontFamily: e,
+  boundVariable: t,
+  recordingKey: r,
+  onChange: s,
+  onDetachVariableClick: _,
+  showPlaceholder: h,
+  disabled: y,
+  useLegacyFontPickerDropdown: b,
+  hideTypographyVariableOptions: T,
+  clearable: x,
+  id: F,
+  fonts: K,
+  restrictedFontSet: $,
+  versionsForStyles: ea,
+  editingStyleGuid: es,
+  fontPickerId: eo = J6,
+  customPlaceholder: ep,
+  variant: em = "row"
+}) {
+  let eg = wA();
+  let ef = Xo();
+  let eE = Um();
+  let ey = ut(Ez5?.interopToolMode(), nQ7.SELF);
+  let eb = sO() && ey === nQ7.SELF;
+  let eT = to();
+  let eI = d4(e => e.selectedView);
+  let eS = _$$XE(eI);
+  let ev = d4(e => e.userFlags);
+  let eA = _$$f("completed_font_installer_modal");
+  let ex = d4(e => e.localFontAgentVersion);
+  let [eN, eC] = useState(!1);
+  let [ew, eO] = useState([]);
+  let eR = $$e_0();
+  let eL = d4(e => e.mirror.appModel.currentPage);
+  let eP = $$eu1();
+  let eD = useCallback(() => {
+    var e = [];
+    for (let t in K) 0 !== Object.keys(ea[t] || {}).length && e.push(t);
+    e.sort((e, t) => {
+      let r = e.startsWith(".");
+      let n = t.startsWith(".");
+      return r && !n ? 1 : !r && n ? -1 : e.localeCompare(t);
+    });
+    eO(e);
+  }, [K, ea]);
+  let ek = {
+    format: e => e,
+    parse(e) {
+      if (Object.keys(K[e] ?? {}).length > 0) return e;
+      throw Error("Invalid family");
+    },
+    increment(e, t, r) {
+      let n = ew.indexOf(e);
+      return t ? ew[Math.min(n + 1, ew.length - 1)] : ew[Math.max(n - 1, 0)];
+    },
+    autocomplete(e) {
+      for (let t of (e = e.toLowerCase(), ew)) if (t && t.toLowerCase().startsWith(e)) return t;
+      return null;
+    },
+    isEqual: (e, t) => e === t
+  };
+  let eM = useCallback(() => {
+    !K4() || Kk() || eA || el || (el = !0, P6().catch(() => {
+      eg(_$$to({
+        type: _$$x
+      }));
+    }));
+  }, [eg, eA]);
+  let eF = useRef(null);
+  let ej = useRef(null);
+  let eU = useCallback(e => {
+    if (ef?.id === eo) eg(XE()); else {
+      eC(!0);
+      eg(Uv());
+      let e = "row" === em ? cn(ej.current, parsePxNumber(kaq)) : ej.current.getBoundingClientRect();
+      eg(u1({
+        id: eo,
+        initialX: e.x,
+        initialY: e.y,
+        modal: !0
+      }));
+      sx("font picker opened", {
+        pageId: eL,
+        nodeIds: eP.current
+      });
+    }
+    e.stopPropagation();
+  }, [eg, eL, ef?.id, eo, eP, em]);
+  useEffect(() => {
+    eD();
+  }, [K, ea, e, eD]);
+  let eB = [];
+  let eG = E7(e);
+  let eV = Y5?.isFontListLoaded() && isNotNullish(eG) && (_$$O(eG, K, ev, eS) || !K[eG] || 0 === Object.keys(K[eG] ?? {}).length);
+  for (let e of (!eG || eG in ea || (eB.push(jsx(ec, {
+    value: eG,
+    disabled: !0,
+    recordingKey: Pt(r, eG)
+  }, `current-font-${eG}`)), eB.push(jsx(sK, {}, "current-font-divider"))), ew)) eB.push(jsx(ec, {
+    value: e,
+    recordingKey: Pt(r, e),
+    children: e
+  }, `font-name-${e}`));
+  let eH = !nl() || ef?.id === eo || eN;
+  return jsxs(Fragment, {
+    children: [function() {
+      let i;
+      if (t && !T) {
+        let e = jsx(We, {
+          children: jsx("div", {
+            className: Z9,
+            children: jsx(JD, {
+              elementRef: ej,
+              variable: t,
+              isInStyleModal: !!es,
+              invalid: eV,
+              tooltip: eV ? _$$t("variables.binding_ui.missing_font_family", {
+                fontFamily: eG
+              }) : void 0
+            })
+          })
+        });
+        let r = _ ? jsx("span", {
+          className: Ds,
+          children: jsx(_$$K, {
+            ref: eF,
+            onClick: _,
+            "aria-label": _$$t("variables.binding_ui.detach_variable_tooltip"),
+            htmlAttributes: {
+              "data-tooltip": _$$t("variables.binding_ui.detach_variable_tooltip"),
+              "data-tooltip-type": Ib.TEXT
+            },
+            children: jsx(_$$U, {})
+          })
+        }) : null;
+        return jsx(DE, {
+          appendedClassName: DK,
+          ref: ej,
+          label: null,
+          input: e,
+          icon: r
+        });
+      }
+      let a = ef?.id === eo;
+      let o = eG || (ep ?? _$$t("fullscreen.mixed"));
+      let u = jsx(_$$E2, {
+        name: "open_font_picker_button",
+        children: jsxs(_$$E, {
+          actionOnPointerDown: !0,
+          "aria-autocomplete": "none",
+          "aria-controls": eo,
+          "aria-expanded": a,
+          "aria-haspopup": "dialog",
+          "aria-label": _$$t("fullscreen.type_panel.font_family"),
+          className: m()({
+            [nO]: !0,
+            [wH]: a,
+            [uG]: eV
+          }),
+          "data-onboarding-key": Lh(_$$D.TEXT_PANEL, "font-picker-button"),
+          disabled: y,
+          htmlAttributes: {
+            role: "combobox"
+          },
+          onClick: eU,
+          recordingKey: Pt(r, "openFontPickerButton"),
+          children: [eV && jsx(_$$B, {
+            svg: _$$A,
+            className: q_
+          }), jsx(uQ, {
+            formatter: eh,
+            property: o,
+            inputClassName: m()(ac, {
+              [OW]: ef?.id === eo
+            }),
+            isDisabled: y,
+            screenreaderVisible: !0
+          })]
+        })
+      });
+      if (b) i = jsx(ed, {
+        ariaLabel: _$$t("fullscreen.type_panel.font_family"),
+        className: UU,
+        disabled: y,
+        dispatch: eg,
+        dropdownShown: eE,
+        forceInputPlaceholder: !!eV && !!h,
+        formatter: ek,
+        iconClassName: q_,
+        id: F,
+        onChange: s,
+        onMouseDown: eM,
+        placeholder: eV && h ? ep ?? _$$t("fullscreen.type_panel.type_or_choose") : void 0,
+        property: e,
+        recordingKey: r,
+        willShowDropdown: () => (getFeatureFlags().ce_properties_panel_tracking && sx("editor-type-panel-dropdown-show", {
+          key: "fontFamily"
+        }), getFeatureFlags().ce_font_picker_metrics && sx("font picker opened", {
+          pageId: eL,
+          nodeIds: eP.current
+        }), Promise.resolve()),
+        children: eB
+      }); else if (eb || eT) return jsx(Ad, {
+        ref: ej,
+        label: null,
+        input: u
+      }); else if ("button" === em) return jsx(D8, {
+        forwardedRef: ej,
+        "data-non-interactive": !0,
+        children: u
+      }); else return jsx(DE, {
+        appendedClassName: m()({
+          [A5]: a
+        }),
+        ref: ej,
+        label: null,
+        icon: null,
+        input: u
+      });
+      return jsx(fI, {
+        ref: ej,
+        className: m()(YV, {
+          [wH]: a
+        }),
+        children: i
+      });
+    }(), !b && eH && jsx(Cn, {
+      clearable: x,
+      currentFont: e,
+      dispatch: eg,
+      dropdown: eE,
+      fonts: K,
+      googleFontPreviews: eR,
+      hideTypographyVariableOptions: T,
+      id: F,
+      localFontAgentVersion: ex,
+      onFontChange: s,
+      pickerId: eo,
+      pickerShown: ef,
+      recordingKey: r,
+      restrictedFontSet: $,
+      selectedNodeIds: eP.current,
+      selectedView: eI,
+      versionsForStyles: ea
+    })]
+  });
+}
+$$em2.displayName = "fontFamily";
+export const UG = $$e_0;
+export const Wc = $$eu1;
+export const ay = $$em2; 

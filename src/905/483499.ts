@@ -1,0 +1,2 @@
+export var $$n0 = (e => (e[e.Folder = 0] = "Folder", e[e.Team = 1] = "Team", e[e.Favorite = 2] = "Favorite", e[e.SidebarSection = 3] = "SidebarSection", e[e.LicenseGroup = 4] = "LicenseGroup", e[e.None = 5] = "None", e))($$n0 || {});
+export const R = $$n0;

@@ -1,0 +1,349 @@
+import { jsx, jsxs } from "react/jsx-runtime";
+import { useMemo, useRef, useState } from "react";
+import { wA, d4 } from "../vendor/514228";
+import { $n } from "../905/521428";
+import { d as _$$d } from "../905/976845";
+import { J } from "../905/125993";
+import { getFeatureFlags } from "../905/601108";
+import { sx } from "../905/449184";
+import { vj } from "../figma_app/919079";
+import { gS, c$ } from "../figma_app/236327";
+import { h1 } from "../905/986103";
+import { p as _$$p } from "../905/991924";
+import { t as _$$t, tx } from "../905/303541";
+import { WB } from "../905/761735";
+import { XHR } from "../905/910117";
+import { s as _$$s } from "../905/573154";
+import { F as _$$F } from "../905/302958";
+import { E9, pf } from "../figma_app/314264";
+import { J8, By } from "../905/760074";
+import { nF } from "../905/350402";
+import { oB, j7, sf } from "../905/929976";
+import { S as _$$S } from "../figma_app/78808";
+import { kj } from "../905/191601";
+import { to, Ce } from "../905/156213";
+import { d as _$$d2 } from "../905/91820";
+import { nT } from "../figma_app/53721";
+import { Ib } from "../905/129884";
+import { e0 } from "../905/696396";
+import { Ro } from "../figma_app/805373";
+import { e as _$$e } from "../905/225961";
+import { Cf } from "../905/504727";
+import { a$ } from "../905/467351";
+function g(e) {
+  return e.isRenaming ? jsx(_$$p, {
+    className: `renamable_title--renameInput--kVdEz text--fontPos13--xW8hS text--_fontBase--QdLsd ${e.className || ""}`,
+    placeholderValue: e.placeholderValue,
+    submit: e.submitTitle,
+    cancel: e.cancelTitle
+  }) : jsx("span", {
+    className: `renamable_title--title--Z-8GR text--fontPos13--xW8hS text--_fontBase--QdLsd ellipsis--ellipsis--Tjyfa ${e.className || ""}`,
+    children: e.title
+  });
+}
+let x = nF(async (e, t) => {
+  let i = {
+    key: t.branch.key,
+    name: t.name,
+    updated_at: new Date().toISOString()
+  };
+  let n = XHR.put(`/api/files/${t.branch.key}`, i);
+  await WB().optimisticallyUpdate({
+    File: {
+      [t.branch.key]: {
+        key: t.branch.key,
+        _name: t.name
+      }
+    }
+  }, n).catch(t => {
+    let i = t.data.message || _$$t("collaboration.branching.an_error_occurred_while_renaming_this_file");
+    e.dispatch(_$$s.error(i));
+  });
+  E9("File Renamed", t.branch, {
+    fileName: t.name
+  });
+});
+let S = nF(async (e, t) => {
+  let i = await J8(t.branches.map(e => e.key));
+  "error" === i.status ? e.dispatch(_$$s.error(i.message)) : e.dispatch(_$$F.enqueue({
+    type: "file_restored",
+    message: _$$t("collaboration.branching.branches_restored", {
+      branchCount: t.branches.length
+    })
+  }));
+  pf("File Restored", t.branches);
+});
+let w = nF(async (e, t) => {
+  let i = XHR.del("/api/files_batch", {
+    files: t.branches.map(e => ({
+      key: e.key
+    })),
+    trashed: !0
+  });
+  let n = {
+    File: {}
+  };
+  let r = new Date();
+  t.branches.forEach(e => {
+    let t = {
+      key: e.key
+    };
+    t.trashedAt = r;
+    n.File[e.key] = t;
+  });
+  try {
+    let r = await WB().optimisticallyUpdate(n, i);
+    if (207 === r.status) {
+      try {
+        let t = JSON.parse(r.response);
+        e.dispatch(_$$s.error(t.message));
+      } catch (t) {
+        e.dispatch(_$$s.error(_$$t("collaboration.branching.an_error_occurred_while_deleting_these_files")));
+      }
+      return;
+    }
+    let a = {
+      text: _$$t("collaboration.branching.undo_archive"),
+      action: () => {
+        e.dispatch(S({
+          branches: t.branches
+        }));
+        e.dispatch(_$$F.dequeue({}));
+      }
+    };
+    e.dispatch(_$$F.enqueue({
+      type: "file_deleted",
+      message: _$$t("collaboration.branching.branch_archived"),
+      button: a
+    }));
+  } catch ({
+    response: i
+  }) {
+    try {
+      let t = JSON.parse(i);
+      e.dispatch(_$$s.error(t.message));
+    } catch (i) {
+      e.dispatch(_$$s.error(_$$t("collaboration.branching.error_archiving_branches", {
+        branchCount: t.branches.length
+      })));
+    }
+  }
+  pf("File Trashed", t.branches);
+});
+let U = (e, t) => e ? [t] : [];
+function B(e) {
+  let t = jsx("div", {
+    className: "branch_row--subtitleUsername---eghJ text--fontPos11--2LvXf text--_fontBase--QdLsd ellipsis--ellipsis--Tjyfa",
+    children: e.user.handle || ""
+  });
+  let i = useMemo(() => jsx(h1, {
+    date: e.touchedAt
+  }), [e.touchedAt]);
+  return e.isMain || !e.isArchived ? tx("collaboration.branching.edited", {
+    userHandle: t,
+    relativeTimestamp: i
+  }) : e.isMerged ? tx("collaboration.branching.merged_v2", {
+    userHandle: t,
+    relativeTimestamp: i
+  }) : tx("collaboration.branching.archived_v2", {
+    userHandle: t,
+    relativeTimestamp: i
+  });
+}
+export function $$V0(e) {
+  let t = wA();
+  let i = `branch-row-${e.branch.key}`;
+  let m = d4(e => e.dropdownShown?.type === i);
+  let h = d4(e => !!e.dropdownShown?.data?.contextClick);
+  let _ = d4(e => e.dropdownShown?.data?.targetRect);
+  let A = useRef(null);
+  let [y, b] = useState(!1);
+  let {
+    branch
+  } = e;
+  let E = !e.isMain && !e.isArchived && branch.canManage;
+  let V = !e.isMain && e.isArchived && branch.canManage && (!e.isMerged || !!getFeatureFlags().branching_restore_branches);
+  let G = !e.isMain && e.isArchived && branch.canManage;
+  let z = !e.isMain && !e.isArchived && branch.canEdit;
+  let H = [...U(E, jsx(gS, {
+    onClick: () => {
+      t(w({
+        branches: [e.branch]
+      }));
+    },
+    trackingProperties: {
+      fileKey: e.branch.key,
+      fileRepoId: e.branch.fileRepoId
+    },
+    children: tx("collaboration.branching.archive")
+  }, "archive")), ...U(V, jsx(c$, {
+    onClick: () => {
+      t(S({
+        branches: [e.branch]
+      }));
+    },
+    children: tx("collaboration.branching.restore")
+  }, "restore")), jsx(c$, {
+    onClick: () => {
+      t(_$$S({
+        fileKey: e.branch.key,
+        url: By(e.branch, e.repo, "file").href,
+        source: _$$d2.FULLSCREEN_BRANCH
+      }));
+    },
+    children: tx("collaboration.branching.copy_link")
+  }, "copy-link"), ...U(G, jsx(c$, {
+    onClick: () => {
+      t(to({
+        type: _$$e,
+        data: {
+          fileName: e.branch.name,
+          onConfirm: () => t(kj({
+            fileKeys: {
+              [e.branch.key]: !0
+            },
+            userInitiated: !0
+          }))
+        }
+      }));
+    },
+    children: tx("collaboration.branching.delete")
+  }, "delete")), ...U(z, jsx(c$, {
+    onClick: () => {
+      b(!0);
+    },
+    children: tx("collaboration.branching.rename")
+  }, "rename"))];
+  return jsxs("li", {
+    className: `branch_row--container--MD7zC ${e.isSelected ? "branch_row--selected--qBm47" : ""}`,
+    onContextMenu: e => {
+      if (e.preventDefault(), e.stopPropagation(), m) t(oB()); else {
+        let n = {
+          top: e.clientY,
+          right: e.clientX,
+          bottom: e.clientY,
+          left: e.clientX,
+          width: 0,
+          height: 0
+        };
+        t(j7({
+          type: i,
+          data: {
+            targetRect: n,
+            contextClick: !0
+          }
+        }));
+      }
+    },
+    children: [jsxs("div", {
+      className: "branch_row--mainColumn--88gdl",
+      children: [jsxs("div", {
+        className: "branch_row--titleRow--Ckvrd text--fontPos12--YsUAh text--_fontBase--QdLsd",
+        children: [jsx(g, {
+          className: "branch_row--title--3n9K0 ellipsis--ellipsis--Tjyfa",
+          isRenaming: y,
+          submitTitle: i => {
+            b(!1);
+            t(x({
+              branch: e.branch,
+              name: i
+            }));
+          },
+          cancelTitle: () => {
+            b(!1);
+          },
+          placeholderValue: e.name,
+          title: e.name
+        }), e.isCurrentBranch && !y && jsx("span", {
+          className: "branch_row--currentBranchIndicator--78nIx",
+          children: tx("collaboration.branching.current_branch")
+        }), !y && jsx("div", {
+          className: "branch_row--branchStatus--FFzmU",
+          children: jsx(a$, {
+            branchFileKey: e.branch.key,
+            size: vj.SMALL
+          })
+        })]
+      }), e.isLoadingActivity ? jsx("div", {
+        className: "branch_row--activityLoading--OM839"
+      }) : e.user && jsx(function(e) {
+        return jsxs("div", {
+          className: "branch_row--subtitleRow--VZQWb",
+          children: [jsx(Ro, {
+            entity: e.user,
+            size: 12
+          }), jsx("div", {
+            className: "branch_row--subtitleActivity--c-22X",
+            children: jsx(B, {
+              user: e.user,
+              isMain: e.isMain,
+              isMerged: e.isMerged,
+              isArchived: e.isArchived,
+              touchedAt: e.touchedAt
+            })
+          })]
+        });
+      }, {
+        user: e.user,
+        isMain: e.isMain,
+        isMerged: e.isMerged,
+        isArchived: e.isArchived,
+        touchedAt: e.touchedAt
+      })]
+    }), jsx("div", {
+      className: "branch_row--buttonColumn--UJ-mZ",
+      children: !e.isCurrentBranch && jsx($n, {
+        variant: "ghost",
+        onClick: () => {
+          t(Ce());
+          t(sf({
+            view: "fullscreen",
+            fileKey: e.branch.key,
+            editorType: nT.Design
+          }));
+          sx("Open File Click", {
+            fileKey: e.branch.key,
+            source: e0.BRANCHES_MODAL,
+            fileRepoId: e.branch.fileRepoId
+          });
+        },
+        children: tx("collaboration.branching.open")
+      })
+    }), jsx("div", {
+      className: "branch_row--menuColumn--XSWVZ",
+      children: jsx(_$$d, {
+        onClick: e => {
+          if (e.stopPropagation(), e.preventDefault(), m) t(oB()); else {
+            let e = A.current;
+            t(j7({
+              type: i,
+              data: {
+                targetRect: e?.getBoundingClientRect() || null,
+                contextClick: !1
+              }
+            }));
+          }
+        },
+        "aria-label": _$$t("collaboration.branching.options"),
+        htmlAttributes: {
+          "data-tooltip-type": Ib.TEXT,
+          "data-tooltip": _$$t("collaboration.branching.options")
+        },
+        ref: A,
+        "aria-expanded": m && !h,
+        children: jsx(J, {})
+      })
+    }), m && jsx(Cf, {
+      targetRect: _,
+      showPoint: !h,
+      lean: h ? "right" : "left",
+      leanPadding: h ? 0 : -1,
+      maxWidth: 140,
+      minWidth: 140,
+      disableDropdownScrollContainer: !0,
+      propagateCloseClick: !0,
+      children: H
+    })]
+  });
+}
+export const v = $$V0; 

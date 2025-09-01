@@ -1,0 +1,202 @@
+import { jsx, jsxs, Fragment } from "react/jsx-runtime";
+import { useCallback } from "react";
+import { wA } from "../vendor/514228";
+import { N } from "../905/438674";
+import { $n } from "../905/521428";
+import { k } from "../905/443820";
+import { Dk } from "../figma_app/623293";
+import { getSupportEmail } from "../figma_app/169182";
+import { T } from "../figma_app/257703";
+import { t as _$$t, tx } from "../905/303541";
+import { F } from "../905/302958";
+import { mW } from "../469e6e40/182832";
+import { to, Lo } from "../905/156213";
+import { _g } from "../figma_app/336853";
+import { Ct } from "../figma_app/736948";
+import { Ju } from "../905/102752";
+import { OJ } from "../905/519092";
+import { wz, Vq, tp, FK, jE, Yy } from "../469e6e40/442006";
+function j(e) {
+  let t = wA();
+  let a = useCallback(() => {
+    t(to({
+      type: mW,
+      data: {
+        dispatch: t,
+        org: e.org,
+        orgDomains: e.orgDomains,
+        orgSamlConfig: e.orgSamlConfig
+      }
+    }));
+  }, [t, e.org, e.orgDomains, e.orgSamlConfig]);
+  let o = useCallback((e, a) => {
+    Dk(e).then(() => {
+      t(F.enqueue({
+        type: a,
+        message: _$$t("org_settings.sso.copied")
+      }));
+    });
+  }, [t]);
+  let b = useCallback(() => {
+    let t = e.orgDomains.map(e => e.domain);
+    return jsx("p", {
+      className: wz,
+      children: tx("org_settings.sso.domain_requirement", {
+        domains: jsx(T, {
+          formatType: "disjunction",
+          children: t.map(e => jsx("span", {
+            className: Vq,
+            children: e
+          }, e))
+        }),
+        contactSupport: jsx(N, {
+          href: `mailto:${getSupportEmail()}`,
+          children: tx("org_settings.sso.contact_support")
+        })
+      })
+    });
+  }, [e.orgDomains]);
+  let v = useCallback(() => {
+    let t = e.orgSamlConfig;
+    let a = document.queryCommandSupported("copy") && t && jsx("span", {
+      style: {
+        marginLeft: "20px"
+      },
+      children: jsx($n, {
+        variant: "link",
+        onClick: () => o(t.id, "saml_tenant_id_copied_to_clipboard"),
+        children: tx("org_settings.sso.copy")
+      })
+    });
+    let s = [{
+      rowName: _$$t("org_settings.sso.tenant_id"),
+      value: t.id,
+      action: a
+    }, {
+      rowName: _$$t("org_settings.sso.sp_entity_id"),
+      value: t.sp_entity_id
+    }, {
+      rowName: _$$t("org_settings.sso.sp_acs_url"),
+      value: t.sp_acs_target_url
+    }];
+    return jsx("table", {
+      className: tp,
+      children: jsx("tbody", {
+        children: s.map(e => jsxs("tr", {
+          children: [jsx("th", {
+            children: e.rowName
+          }), jsxs("td", {
+            children: [e.value || "Not configured", e.action]
+          })]
+        }, `row-${e.rowName}`))
+      })
+    });
+  }, [o, e.orgSamlConfig]);
+  let j = !!e.orgSamlConfig.idp_name;
+  let y = useCallback(() => {
+    let t = _g(e.org) === Ct.SAML;
+    return jsx($n, {
+      disabled: t,
+      onClick: a,
+      children: j ? "Edit configuration" : "Configure SAML"
+    });
+  }, [j, a, e.org]);
+  let w = useCallback(() => {
+    let t = {
+      okta: _$$t("org_settings.sso.okta"),
+      azure: _$$t("org_settings.sso.azure"),
+      onelogin: _$$t("org_settings.sso.one_login"),
+      other: _$$t("org_settings.sso.other")
+    };
+    let a = _$$t("org_settings.sso.not_configured");
+    let s = e.orgSamlConfig.idp_name;
+    let i = [{
+      rowName: _$$t("org_settings.sso.idp"),
+      value: s && t[s] || s
+    }, {
+      rowName: _$$t("org_settings.sso.idp_entity_id"),
+      value: e.orgSamlConfig.idp_entity_id
+    }, {
+      rowName: _$$t("org_settings.sso.idp_sso_url"),
+      value: e.orgSamlConfig.idp_sso_target_url
+    }];
+    return jsxs("div", {
+      children: [jsx("p", {
+        className: FK,
+        children: tx("org_settings.sso.your_configuration_details")
+      }), jsx("table", {
+        className: tp,
+        children: jsx("tbody", {
+          children: i.map(e => jsxs("tr", {
+            children: [jsx("th", {
+              children: e.rowName
+            }), jsxs("td", {
+              children: [e.value || a, e.action]
+            })]
+          }, `row-${e.rowName}`))
+        })
+      })]
+    });
+  }, [e.orgSamlConfig.idp_entity_id, e.orgSamlConfig.idp_name, e.orgSamlConfig.idp_sso_target_url]);
+  return jsxs(Fragment, {
+    children: [jsx("p", {
+      className: wz,
+      children: tx("org_settings.sso.saml_sso_description", {
+        helpArticle: jsx(N, {
+          href: "https://help.figma.com/hc/articles/360040532333",
+          newTab: !0,
+          children: tx("org_settings.sso.help_article")
+        })
+      })
+    }), jsxs("div", {
+      children: [b(), v(), w(), !e.hideEditButton && y()]
+    })]
+  });
+}
+export let $$y0 = Ju(function (e) {
+  let t = wA();
+  let a = e.org;
+  let s = e.orgSamlConfig;
+  let r = e.orgDomains;
+  let d = !s || 0 == r.length;
+  let c = () => t(Lo());
+  return jsx(OJ, {
+    title: _$$t("org_settings.sso.saml_sso"),
+    onClose: c,
+    maxWidth: 536,
+    minWidth: 536,
+    fixedTopDynamic: !0,
+    children: jsxs("div", {
+      className: jE,
+      children: [d && jsx(k, {}), !d && jsxs(Fragment, {
+        children: [jsx(j, {
+          hideEditButton: !0,
+          org: a,
+          orgDomains: r,
+          orgSamlConfig: s
+        }), jsxs("div", {
+          className: Yy,
+          children: [jsx($n, {
+            variant: "secondary",
+            onClick: () => {
+              t(to({
+                type: mW,
+                data: {
+                  dispatch: t,
+                  org: a,
+                  orgDomains: r,
+                  orgSamlConfig: s
+                }
+              }));
+            },
+            children: tx("org_settings.sso.edit_configuration")
+          }), jsx($n, {
+            onClick: c,
+            children: tx("org_settings.sso.done")
+          })]
+        })]
+      })]
+    })
+  });
+}, "VIEW_SAML_CONFIG_MODAL");
+export const p = $$y0;

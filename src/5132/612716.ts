@@ -1,0 +1,312 @@
+import { jsxs, jsx } from "react/jsx-runtime";
+import { Suspense, useState } from "react";
+import { wA } from "../vendor/514228";
+import { ServiceCategories as _$$e } from "../905/165054";
+import c from "classnames";
+import { P as _$$P } from "../vendor/348225";
+import { mI } from "../figma_app/566371";
+import { s_ } from "../905/17223";
+import { tH } from "../905/751457";
+import { s as _$$s } from "../cssbuilder/589278";
+import { tx } from "../905/303541";
+import { Y, M as _$$M } from "../905/830372";
+import { V } from "../905/355181";
+import { E as _$$E } from "../905/984674";
+import { c as _$$c } from "../905/370443";
+import { L0, jm, fu } from "../figma_app/831799";
+import { SK, Fq } from "../905/84777";
+import { ud } from "../905/513035";
+import { Oq } from "../905/332483";
+import { K } from "../905/3140";
+import { LN, vr } from "../figma_app/514043";
+import { Ju, IX } from "../905/712921";
+import { N as _$$N } from "../905/809096";
+import { ey } from "../figma_app/918700";
+var $$n = c;
+var $$$$I1 = ((e) => (e[e.SMALL = 0] = "SMALL", e[e.LARGE = 1] = "LARGE", e))($$$$I1 || {});
+function z({
+  headerText: e,
+  descriptionText: l,
+  imgSrc: i,
+  loadingColor: r
+}) {
+  return jsxs(Y, {
+    direction: "vertical",
+    verticalAlignItems: "start",
+    strokeColor: "default",
+    strokeWidth: 1,
+    cornerRadius: 6,
+    spacing: 0,
+    height: "fill-parent",
+    children: [jsx(Suspense, {
+      fallback: jsx("div", {
+        className: "fullscreen_help_upsells_modal_base--cardPlaceholder--j3U6P",
+        style: {
+          backgroundColor: r
+        }
+      }),
+      children: jsx("img", {
+        alt: e,
+        className: "fullscreen_help_upsells_modal_base--cardImage--HNMiP",
+        src: i,
+        width: 189,
+        height: 146
+      })
+    }), jsxs("div", {
+      className: _$$s.p12.pl10.pr10.flex.flexColumn.gap2.$,
+      children: [jsx(_$$E, {
+        fontSize: 13,
+        fontWeight: "medium",
+        color: "default",
+        children: e
+      }), jsx("div", {
+        className: _$$s.minH32.$,
+        children: jsx(_$$E, {
+          fontSize: 11,
+          color: "secondary",
+          children: l
+        })
+      })]
+    })]
+  });
+}
+function C({
+  isClickable: e,
+  url: l,
+  ...i
+}) {
+  return e && void 0 !== l ? jsx(L0, {
+    href: l,
+    target: "_blank",
+    className: "fullscreen_help_upsells_modal_base--clickableCard--056mH",
+    trackingProperties: {
+      card: i.headerText
+    },
+    children: jsx(z, {
+      ...i
+    })
+  }) : jsx(z, {
+    ...i
+  });
+}
+function E() {
+  let e = LN();
+  let l = Oq.exclude([ud.DEV_MODE]).dict((l) => ({
+    currency: e,
+    billableProductKey: l,
+    billableProductVariantKey: null,
+    tier: Ju.PRO,
+    renewalTerm: IX.YEAR,
+    unit: IX.MONTH
+  }));
+  let i = SK(l, Fq.UPSELL_MODALS);
+  let [a] = mI(i);
+  if (null === a.data) throw Error("Price data is null");
+  let r = new vr(e);
+  let s = a.data[ud.DESIGN].amount;
+  let c = a.data[ud.FIGJAM].amount;
+  return jsxs(Y, {
+    padding: 14,
+    direction: "vertical",
+    verticalAlignItems: "end",
+    children: [jsxs("div", {
+      className: "fullscreen_help_upsells_modal_base--priceContainer--XWuz1",
+      children: [jsxs("div", {
+        className: _$$s.wHalf.flex.flexColumn.gap8.$,
+        "data-testid": "fullscreen_help_upsells_modal_pricing_text_design",
+        children: [jsx(_$$E, {
+          color: "design",
+          fontSize: 11,
+          fontWeight: "semi-bold",
+          children: tx("help_widget.collective_upsells.fullscreen.price_title.figma_design")
+        }), jsx(_$$E, {
+          fontWeight: "semi-bold",
+          fontSize: 18,
+          children: r.formatMoney(s)
+        })]
+      }), jsx("div", {
+        className: "fullscreen_help_upsells_modal_base--priceContainerDivider--zsPMB"
+      }), jsxs("div", {
+        className: _$$s.wHalf.flex.flexColumn.gap8.$,
+        "data-testid": "fullscreen_help_upsells_modal_pricing_text_figjam",
+        children: [jsx(_$$E, {
+          color: "figjam",
+          fontSize: 11,
+          fontWeight: "semi-bold",
+          children: tx("help_widget.collective_upsells.fullscreen.price_title.figjam")
+        }), jsx(_$$E, {
+          fontWeight: "semi-bold",
+          fontSize: 18,
+          children: r.formatMoney(c)
+        })]
+      })]
+    }), jsx("div", {
+      className: _$$s.p4.pt0.$,
+      children: jsx(_$$E, {
+        color: "secondary",
+        fontSize: 11,
+        children: tx("help_widget.collective_upsells.fullscreen.price.disclaimer.seat_rename")
+      })
+    })]
+  });
+}
+export function $$N0({
+  panelTabs: e,
+  panelTitle: l,
+  modalProps: i,
+  contentTitle: c,
+  contents: d,
+  ctaPrimaryText: h,
+  clickPrimaryBtn: x,
+  secondaryBtn: y,
+  dismissModal: w,
+  showPricing: j = !0,
+  panelTitleSize: T = 0,
+  cardsClickable: I
+}) {
+  let [z, N] = useState(e[0].id);
+  let M = wA();
+  let W = 1 === T ? jsx("div", {
+    className: _$$s.p16.pt14.pb36.$,
+    children: jsx(_$$E, {
+      fontSize: 18,
+      fontWeight: "semi-bold",
+      children: l
+    })
+  }) : jsx("div", {
+    className: _$$s.p16.pt14.pb4.$,
+    children: jsx(_$$E, {
+      fontSize: 13,
+      color: "secondary",
+      children: l
+    })
+  });
+  let F = e.map((e) => jsx(jm, {
+    role: "button",
+    tabIndex: 0,
+    className: $$n()("fullscreen_help_upsells_modal_base--panelTabs--WjAUp", z === e.id && "fullscreen_help_upsells_modal_base--panelTabsActive--cM4NL"),
+    onClick: () => {
+      N(e.id);
+    },
+    trackingProperties: {
+      tab: e.id,
+      prevTab: z
+    },
+    children: jsx(_$$E, {
+      fontSize: 13,
+      children: e.text
+    })
+  }, e.id));
+  let P = d[z].map((e, l) => jsx(C, {
+    isClickable: I,
+    ...e
+  }, z + e.headerText + l));
+  return jsx(tH, {
+    boundaryKey: "FullscreenHelpUpsellsModalBase",
+    fallback: jsx(K, {}),
+    team: _$$e.MONETIZATION_UPGRADES,
+    children: jsx(Suspense, {
+      fallback: jsx(_$$N, {
+        hiddenTitle: l || "",
+        estimatedWidth: 900,
+        estimatedHeight: 600
+      }),
+      children: jsx(fu, {
+        name: "FullscreenHelpUpsellsModalBase",
+        children: jsx(ey, {
+          size: 900,
+          className: "fullscreen_help_upsells_modal_base--largeModal--8j2D0",
+          ...i,
+          hide: w,
+          children: jsx(_$$P.div, {
+            initial: {
+              opacity: 0
+            },
+            animate: {
+              opacity: 1
+            },
+            transition: {
+              duration: .5
+            },
+            children: jsxs(Y, {
+              verticalAlignItems: "start",
+              height: 604,
+              spacing: 0,
+              children: [jsxs(Y, {
+                direction: "vertical",
+                width: 230,
+                strokeWidth: {
+                  right: 1
+                },
+                padding: 0,
+                spacing: 0,
+                strokeColor: "default",
+                height: "fill-parent",
+                verticalAlignItems: "start",
+                children: [jsx(_$$M, {
+                  minSize: 16
+                }), jsxs(Y, {
+                  direction: "vertical",
+                  height: "fill-parent",
+                  spacing: 0,
+                  children: [l && W, F]
+                }), j && jsx(E, {})]
+              }), jsxs(Y, {
+                direction: "vertical",
+                height: "fill-parent",
+                spacing: 0,
+                children: [jsxs("div", {
+                  className: _$$s.pl32.pt24.pb20.$,
+                  children: [c && jsx(_$$E, {
+                    fontSize: 20,
+                    fontWeight: "semi-bold",
+                    children: c
+                  }), jsx(s_, {
+                    customStyle: {
+                      right: "8px",
+                      top: "8px"
+                    },
+                    dispatch: M,
+                    onClose: w,
+                    trackingProperties: {
+                      trackingDescriptor: _$$c.CLOSE
+                    }
+                  })]
+                }), jsx("div", {
+                  className: _$$s.wFull.hFull.overflowAuto.$,
+                  children: jsx("div", {
+                    className: _$$s.pl32.pb24.$,
+                    children: jsx(Y, {
+                      spacing: 16,
+                      verticalAlignItems: "start",
+                      direction: "vertical",
+                      children: jsx("div", {
+                        className: "fullscreen_help_upsells_modal_base--cardGrid--Yss71",
+                        children: P
+                      })
+                    })
+                  })
+                }), jsxs(Y, {
+                  height: 64,
+                  padding: 16,
+                  horizontalAlignItems: "end",
+                  strokeColor: "default",
+                  strokeWidth: {
+                    top: 1
+                  },
+                  children: [y, jsx(V, {
+                    variant: "primary",
+                    onClick: x,
+                    children: h
+                  })]
+                })]
+              })]
+            })
+          })
+        })
+      })
+    })
+  });
+}
+export const n = $$N0;
+export const I = $$$$I1;
