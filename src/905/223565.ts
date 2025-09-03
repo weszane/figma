@@ -1,4 +1,4 @@
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { getFeatureFlags } from "../905/601108";
 import { tx, t as _$$t } from "../905/303541";
 import { tc } from "../905/15667";
@@ -54,7 +54,7 @@ export function $$p11(e, t, i, c, u) {
         planName: t
       });
     default:
-      xb(e);
+      throwTypeError(e);
   }
   switch (e) {
     case FProductAccessType.DESIGN:
@@ -72,7 +72,7 @@ export function $$p11(e, t, i, c, u) {
     case FProductAccessType.COOPER:
       return tx("request_upgrade_modal.body.no_plan_name.design");
     default:
-      xb(e);
+      throwTypeError(e);
   }
 }
 export function $$m9(e, t) {
@@ -95,7 +95,7 @@ export function $$m9(e, t) {
     case FProductAccessType.COOPER:
       return null;
     default:
-      xb(e);
+      throwTypeError(e);
   }
 }
 export function $$h5(e, t, i, o) {
@@ -134,7 +134,7 @@ export function $$h5(e, t, i, o) {
     case FProductAccessType.COOPER:
       return null;
     default:
-      xb(e);
+      throwTypeError(e);
   }
 }
 export function $$g3(e, t) {
@@ -163,7 +163,7 @@ export function $$g3(e, t) {
     case FProductAccessType.DEV_MODE:
       return null;
     default:
-      xb(e);
+      throwTypeError(e);
   }
 }
 export function $$f8(e) {
@@ -180,7 +180,7 @@ export function $$f8(e) {
     case FProductAccessType.COOPER:
       return null;
     default:
-      xb(e);
+      throwTypeError(e);
   }
 }
 export function $$_10(e) {
@@ -199,7 +199,7 @@ export function $$_10(e) {
     case FProductAccessType.DEV_MODE:
       return null;
     default:
-      xb(e);
+      throwTypeError(e);
   }
 }
 export function $$A1(e, t, i, c, u) {
@@ -253,7 +253,7 @@ export function $$A1(e, t, i, c, u) {
         planName: t
       });
     default:
-      xb(e);
+      throwTypeError(e);
   }
   switch (e) {
     case FProductAccessType.DESIGN:
@@ -287,7 +287,7 @@ export function $$A1(e, t, i, c, u) {
         numDays: 3
       });
     default:
-      xb(e);
+      throwTypeError(e);
   }
 }
 export function $$y7(e) {
@@ -321,7 +321,7 @@ export function $$y7(e) {
         numDays: 3
       });
     default:
-      xb(e);
+      throwTypeError(e);
   }
 }
 export function $$b2(e, t) {
@@ -342,7 +342,7 @@ export function $$b2(e, t) {
     case FProductAccessType.COOPER:
       return _$$t("request_upgrade.placeholder.design");
     default:
-      return xb(e);
+      return throwTypeError(e);
   }
 }
 export function $$v0(e, t) {
@@ -362,7 +362,7 @@ export function $$v0(e, t) {
     case FProductAccessType.COOPER:
       return tx("upgrades.drafts_move_drafts_share.provisional_access.curf.design");
     default:
-      return xb(e);
+      return throwTypeError(e);
   } else switch (e) {
     case FProductAccessType.DESIGN:
       return tx("upgrades.drafts_move_drafts_share.provisional_access.design");
@@ -379,7 +379,7 @@ export function $$v0(e, t) {
     case FProductAccessType.COOPER:
       return tx("upgrades.drafts_move_drafts_share.provisional_access.design");
     default:
-      return xb(e);
+      return throwTypeError(e);
   }
 }
 export const C8 = $$v0;

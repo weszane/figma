@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { d4 } from "../vendor/514228";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { c2 } from "../905/382883";
 import { lQ } from "../905/934246";
 import { AD } from "../905/871411";
@@ -124,7 +124,7 @@ export function $$E0({
         });
         i(code);
         I(r.stop(), t);
-      } else xb(t.type);
+      } else throwTypeError(t.type);
     })();
     return () => {
       n = !0;

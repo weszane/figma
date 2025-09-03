@@ -123,7 +123,7 @@ function _(e) {
     userId: e.userId,
     sentAt: t,
     timestamp: t,
-    context: function(e = {}) {
+    context: function (e = {}) {
       let t = {
         country: getInitialOptions().iso_code || null,
         city: getInitialOptions().viewer_city || null
@@ -234,7 +234,7 @@ class x {
 class S {
   constructor(e) {
     if (!I()) return;
-    !function() {
+    !function () {
       let e = !1;
       try {
         e = y in window.parent;
@@ -1896,7 +1896,7 @@ let $$et5 = _$$n((e, t = {}, i = {}) => {
   er(e, t, i);
 });
 let ei = !!navigator.cookieEnabled && localStorage.getItem('DEV_LOG_ANALYTICS') === 'yes';
-window.setDevLogAnalytics = function(e = !0) {
+window.setDevLogAnalytics = function (e = !0) {
   localStorage.setItem('DEV_LOG_ANALYTICS', e ? 'yes' : 'no');
   (ei = e) ? _$$k2.log('dev logging of analytics is enabled') : _$$k2.log('dev logging of analytics is disabled');
 };
@@ -1905,7 +1905,7 @@ let en = _$$n((e, t, i) => {
     id: e,
     properties: t
   });
-  (getFeatureFlags().analytics_log_to_console || ei) && _$$k2.log(`%ctrack: ${e}`, 'font-weight: bold', function(e) {
+  (getFeatureFlags().analytics_log_to_console || ei) && _$$k2.log(`%ctrack: ${e}`, 'font-weight: bold', function (e) {
     let t = {};
     for (let i in e) {
       e.hasOwnProperty(i) && e instanceof Object && (t[i] = JSON.stringify(e[i]));
@@ -1921,7 +1921,7 @@ let en = _$$n((e, t, i) => {
       stack: new Error().stack
     }
   });
-  (function(e, t, i) {
+  (function (e, t, i) {
     K.track(e, t, i);
     J6.addAction(e, _$$e.UNOWNED, i.addToRUM ? _$$$.INFO : _$$$.DEBUG, t, {
       forceEnable: !!i.forceEnableActionLogging
@@ -1948,6 +1948,9 @@ function er(e, t, i) {
 }
 let $$ea2 = () => b();
 let $$es1 = new class {
+  trackDefinedEvent(arg0: string, arg1: { apiMethod: string; pluginId: any; editorType: any; fileKey: any; userId: any; }) {
+    throw new Error('Method not implemented.');
+  }
   constructor() {
     this.resetEventDetails = () => {
       this.sentEventDetails = {};

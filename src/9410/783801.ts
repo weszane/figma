@@ -24,7 +24,7 @@ import { Pt } from "../figma_app/806412";
 import { W as _$$W } from "../905/95038";
 import { Um } from "../905/848862";
 import { y as _$$y } from "../905/725962";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { ZC } from "../figma_app/39751";
 import { F as _$$F } from "../905/302958";
 import { zX } from "../905/576487";
@@ -295,7 +295,7 @@ function H({
           t = Error("useMergeStatus: Open merge was not closed in 30 seconds");
           break;
         default:
-          xb(o.state);
+          throwTypeError(o.state);
       }
       HJ(t, PW.ON_MERGE, e, {
         file_merge_id: c?.id

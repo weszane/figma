@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
 import { wA, Pj, d4 } from "../vendor/514228";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { hS } from "../905/437088";
 import { $n } from "../905/521428";
 import { bL } from "../905/38914";
@@ -45,7 +45,7 @@ export function $$U2(e) {
     case "connected_project_admin_ui_flyout":
       return !0;
     default:
-      xb(e);
+      throwTypeError(e);
   }
 }
 function B(e) {

@@ -1,4 +1,4 @@
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { sYL } from "../figma_app/763686";
 import { Kn } from "../905/535806";
 let s = [];
@@ -19,7 +19,7 @@ export function $$d1(e) {
     case Kn.FROM_SOURCE:
       return sYL.SOURCE;
     default:
-      xb(e);
+      throwTypeError(e);
   }
 }
 export function $$c3({
@@ -33,7 +33,7 @@ export function $$c3({
     case Kn.FROM_SOURCE:
       return e;
     default:
-      xb(i);
+      throwTypeError(i);
   }
 }
 export function $$u0(e) {

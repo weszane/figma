@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { a as _$$a } from "../0c62c2fd/950366";
 import { Ci } from "../figma_app/765689";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { av } from "../figma_app/687776";
 import { h as _$$h } from "../figma_app/334471";
 import { FPermissionDenialReason } from "../figma_app/191312";
@@ -75,14 +75,14 @@ export function $$R0({
               case J.RE_REQUEST_PATHWAY:
                 return _ ? "UPGRADE_PENDING" : "CAN_REQUEST_UPGRADE";
               default:
-                xb(p);
+                throwTypeError(p);
             }
           case q.CANNOT_UPGRADE:
             return _ ? "UPGRADE_PENDING" : "CANNOT_CREATE";
           case q.UPGRADE_NOT_NEEDED:
             return l ? "CAN_CREATE" : "CANNOT_CREATE";
           default:
-            xb(m);
+            throwTypeError(m);
         }
       })();
       let m = (() => {
@@ -95,7 +95,7 @@ export function $$R0({
           case "UPGRADE_PENDING":
             return !0;
           default:
-            xb(c);
+            throwTypeError(c);
         }
       })();
       return {
@@ -188,7 +188,7 @@ export function $$R0({
                 handleUpgradeBuilder: a
               });
             default:
-              xb(t);
+              throwTypeError(t);
           }
         }({
           fileCreationOptionState: l,
@@ -216,7 +216,7 @@ export function $$R0({
               case m.CAN_REQUEST_UPGRADE:
                 return !0;
               default:
-                xb(t);
+                throwTypeError(t);
             }
           })();
           return {

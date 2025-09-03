@@ -1,4 +1,4 @@
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { n3, ey, yG } from "../905/859698";
 import a from "../vendor/923386";
 import { A as _$$A } from "../905/920142";
@@ -94,7 +94,7 @@ function _(e) {
     case jg.YEAR:
       return 365;
     default:
-      xb(e);
+      throwTypeError(e);
   }
 }
 function A(e) {

@@ -1,5 +1,5 @@
 import { wA } from "../vendor/514228";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { t as _$$t } from "../905/303541";
 import { AC, Pg } from "../figma_app/777551";
 import { JZ } from "../figma_app/696043";
@@ -92,7 +92,7 @@ export function $$v2(e, t) {
         displayText: _$$t("universal_insert.manifest_error_view")
       };
     default:
-      xb(e);
+      throwTypeError(e);
   }
 }
 export function $$A5(e, t, r, i = k2.EDITOR) {

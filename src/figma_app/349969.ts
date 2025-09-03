@@ -1,4 +1,4 @@
-import { B1 } from "../figma_app/465776";
+import { assertNotNullish } from "../figma_app/465776";
 import { E } from "../905/484990";
 import { eo } from "../905/505138";
 import { o as _$$o } from "../905/873528";
@@ -103,7 +103,7 @@ let v = e => {
 export function $$A5(e) {
   if (!e) return;
   let t = $$d10[e];
-  B1(t?.inlinePreviewInfo, "inline preview device info should not be null if we're preloading the device image. (presetDeviceSupportsInlinePreview == true)");
+  assertNotNullish(t?.inlinePreviewInfo, "inline preview device info should not be null if we're preloading the device image. (presetDeviceSupportsInlinePreview == true)");
   v(t.url);
   v(t.inlinePreviewInfo.hitTargetSvgUrl);
 }

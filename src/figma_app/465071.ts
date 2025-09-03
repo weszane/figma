@@ -1,6 +1,6 @@
 import { useState, useEffect, useMemo } from "react";
 import { d4 } from "../vendor/514228";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { getFeatureFlags } from "../905/601108";
 import { md } from "../figma_app/27355";
 import { R } from "../905/103090";
@@ -146,7 +146,7 @@ export function $$G0(e, t) {
     case FMemberRoleType.GUEST:
       return $$B9(e) || U(e) || j(e);
     default:
-      xb(t);
+      throwTypeError(t);
   }
 }
 export function $$V11(e) {

@@ -1,7 +1,7 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useState, useMemo, useLayoutEffect, useCallback, useRef, useEffect } from "react";
 import { _p, q5 } from "../figma_app/11610";
-import { vA } from "../figma_app/465776";
+import { assert } from "../figma_app/465776";
 import { vNG } from "../figma_app/763686";
 import { l7 } from "../905/189185";
 import { UN } from "../905/700578";
@@ -166,7 +166,7 @@ export class $$ee0 {
     imageAssetsHolder: d,
     fileKey: c = null
   }) {
-    vA(!this.sitesPreview, "SitesPreview already exists");
+    assert(!this.sitesPreview, "SitesPreview already exists");
     this.sitesPreview = new ei({
       history: e,
       options: l,
@@ -705,7 +705,7 @@ class ei {
             totalGeneratedAssetImages: totals.generatedImages,
             totalGeneratedAssetSvgs: totals.generatedSvgs
           });
-          vA(!!this.website, "Website data not set. Unable to add asset files.");
+          assert(!!this.website, "Website data not set. Unable to add asset files.");
           this.files = {
             ...this.website.files,
             ...files
@@ -731,7 +731,7 @@ class ei {
   }
   async debugCompareLayout(e, t, r) {
     let n = this.clonedNodes.get(e);
-    n?.clone || (n = new ea(sF(e).id), vA(!!n.clone));
+    n?.clone || (n = new ea(sF(e).id), assert(!!n.clone));
     let i = await _p({
       id: n.clone.guid
     }, t, r, {

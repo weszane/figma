@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { bN } from "../vendor/514228";
-import { j as _$$j } from "../figma_app/465776";
+import { noop } from "../figma_app/465776";
 import { D2E } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { DD, k9 } from "../905/19536";
@@ -480,7 +480,7 @@ class B {
             case D2E.LOW:
               return "low";
             default:
-              _$$j(e);
+              noop(e);
               return "low";
           }
         }(e)

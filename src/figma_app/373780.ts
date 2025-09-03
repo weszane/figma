@@ -37,7 +37,7 @@ import { p8, KH } from "../figma_app/722362";
 import { _ as _$$_, W as _$$W } from "../905/898204";
 import { vF } from "../figma_app/290870";
 import { a0, RG, rs } from "../figma_app/440994";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { s as _$$s } from "../905/583953";
 import { R as _$$R } from "../905/103090";
 import { Z as _$$Z } from "../905/104740";
@@ -519,7 +519,7 @@ function eb({
                 case null:
                   return _$$t("fullscreen.accessibility.design.boolean_group");
                 default:
-                  xb(e.booleanOperation);
+                  throwTypeError(e.booleanOperation);
               }
             }(e);
           case "SYMBOL":

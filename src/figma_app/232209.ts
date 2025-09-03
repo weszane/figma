@@ -48,7 +48,7 @@ let p = o.merge(z.object({
   inspectedElement: u.optional(),
   errors: z.array(z.string()).optional(),
   requestUuid: z.string().optional(),
-  retryType: z.$$enum(["unclosed_tags_benign", "mid_stream_request_exceeds_context_limit"]).optional(),
+  retryType: z.enum(["unclosed_tags_benign", "mid_stream_request_exceeds_context_limit"]).optional(),
   selectedNodeIds: z.array(z.string()).optional()
 }));
 let _ = z.object({
@@ -58,7 +58,7 @@ let _ = z.object({
   }).merge(p)]),
   nodeThumbnailBase64: z.string().optional()
 });
-let h = z.$$enum(["plan", "work", "summary", "message", "code"]);
+let h = z.enum(["plan", "work", "summary", "message", "code"]);
 let m = z.object({
   codeSnapshotKey: z.string(),
   fileVersionId: z.string().optional()
@@ -157,7 +157,7 @@ let $$C1 = z.object({
 let w = z.object({
   force: z.boolean().optional()
 }).merge($$C1);
-!function(e) {
+!function (e) {
   e.MAKE_STANDALONE = "figmake";
   e.CODE_LAYERS = "code_layers";
 }($$n0 || ($$n0 = {}));

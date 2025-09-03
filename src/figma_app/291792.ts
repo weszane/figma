@@ -1,6 +1,6 @@
 import { useMemo, useCallback, createElement } from "react";
 import { d4, wA } from "../vendor/514228";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { b as _$$b } from "../figma_app/124186";
 import { n as _$$n } from "../5132/715664";
 import { D as _$$D } from "../5132/780644";
@@ -280,7 +280,7 @@ function Q({
               disabled: i
             };
           default:
-            xb(e);
+            throwTypeError(e);
         }
       });
       let [r, ...i] = e;

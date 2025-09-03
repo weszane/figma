@@ -38,7 +38,7 @@ let I = {
   [JT.IMAGE_TO_DESIGN]: _$$e.AI_GENERATION
 };
 let S = "__ABORTED__";
-export async function $$v0(e, t, r, n) {
+export async function $$v0(e, t, r, n?: any) {
   let s = T(e);
   let {
     state,

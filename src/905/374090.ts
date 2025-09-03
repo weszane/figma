@@ -62,9 +62,9 @@ let A = z.object({
   useServerSideChat: z.boolean(),
   threadId: z.string().nullable(),
   fileKey: z.string(),
-  privacyMode: z.$$enum(["user", "file"]),
+  privacyMode: z.enum(["user", "file"]),
   planParentId: z.string(),
-  planParentType: z.$$enum(["team", "organization"])
+  planParentType: z.enum(["team", "organization"])
 });
 let $$y1 = z.object({
   messages: z.array($$_0).readonly(),

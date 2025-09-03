@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { useState } from "react";
 import { wA, d4 } from "../vendor/514228";
-import { B1 } from "../figma_app/465776";
+import { assertNotNullish } from "../figma_app/465776";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { _Z } from "../figma_app/819288";
 import { Rs } from "../figma_app/288654";
@@ -90,7 +90,7 @@ function w({
   workspace: t
 }) {
   let r = e.parentOrgId;
-  B1(r);
+  assertNotNullish(r);
   let s = d4(({
     orgById: e
   }) => e[r].name);

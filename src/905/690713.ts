@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useCallback } from "react";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { Uz, xH } from "../905/63728";
 import { Pt } from "../figma_app/806412";
 import { tx } from "../905/303541";
@@ -80,7 +80,7 @@ function k({
             case "SELECT":
               return sd.SELECT;
             default:
-              xb(e);
+              throwTypeError(e);
           }
         }(e.type)
       });
@@ -106,7 +106,7 @@ function k({
         case "SELECT":
           return tx("image_ai.image_modification.select");
         default:
-          xb(e.type);
+          throwTypeError(e.type);
       }
     }(e)
   }, e.type);

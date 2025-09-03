@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { wA, d4 } from "../vendor/514228";
-import { KF, xb } from "../figma_app/465776";
+import { debug, throwTypeError } from "../figma_app/465776";
 import { N7, QV } from "../905/508367";
 import { aw, eD } from "../figma_app/876459";
 import { Ay } from "../905/612521";
@@ -72,7 +72,7 @@ let w = ({
   target: r
 }) => {
   if (!eD) {
-    KF(!0, "Should not be calling openGenericTileDesktop if not in the desktop app");
+    debug(!0, "Should not be calling openGenericTileDesktop if not in the desktop app");
     return;
   }
   r = r ?? aw.FOCAL_TAB;
@@ -125,7 +125,7 @@ let w = ({
       }));
       break;
     default:
-      xb(e);
+      throwTypeError(e);
   }
 };
 let C = ({
@@ -229,7 +229,7 @@ let T = async ({
       }));
       break;
     default:
-      xb(e);
+      throwTypeError(e);
   }
 };
 export const v = $$S0;

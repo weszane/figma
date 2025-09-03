@@ -30,7 +30,7 @@ let $$l5 = z.object({
   m11: z.number(),
   m12: z.number()
 });
-let d = z.$$enum(["STRING", "FLOAT", "BOOLEAN", "COLOR", "IMAGE"]);
+let d = z.enum(["STRING", "FLOAT", "BOOLEAN", "COLOR", "IMAGE"]);
 let $$c4 = z.object({
   type: z.literal("VARIABLE_ALIAS"),
   id: z.string(),

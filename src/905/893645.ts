@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useCallback, useEffect } from "react";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { tx } from "../905/303541";
 import { c as _$$c } from "../905/370443";
 import { A as _$$A } from "../905/956262";
@@ -41,7 +41,7 @@ export function $$u0(e) {
         if (f) return h("target_lost");
         return next();
       default:
-        xb(A);
+        throwTypeError(A);
     }
   }, [y, A, f, next, h]);
   if (!g) {

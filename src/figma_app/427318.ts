@@ -1,4 +1,4 @@
-import { xb, S9 } from "../figma_app/465776";
+import { throwTypeError, returnSecond } from "../figma_app/465776";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { $D } from "../905/11";
 import { L } from "../905/178090";
@@ -11,10 +11,10 @@ import { U, vt as _$$vt, xQ, I0, m3 } from "../figma_app/45218";
 import { LE as _$$LE } from "../905/71785";
 import { l$ } from "../figma_app/275462";
 export function $$m15(e) {
-  return $$L32(e) || $$P4(e) ? e.resource_type : U(e) ? _$$vt.HUB_FILE : xQ(e) ? _$$vt.WIDGET : I0(e) ? _$$vt.PLUGIN : void xb(e);
+  return $$L32(e) || $$P4(e) ? e.resource_type : U(e) ? _$$vt.HUB_FILE : xQ(e) ? _$$vt.WIDGET : I0(e) ? _$$vt.PLUGIN : void throwTypeError(e);
 }
 export function $$g20(e) {
-  return U(e) ? $$W25(e.viewer_mode) : xQ(e) ? vt.WIDGET : I0(e) ? vt.PLUGIN : void xb(e);
+  return U(e) ? $$W25(e.viewer_mode) : xQ(e) ? vt.WIDGET : I0(e) ? vt.PLUGIN : void throwTypeError(e);
 }
 export function $$f3(e) {
   return $$D16(e) ? e.resource_type === vt.UI_KIT && TX(e.content.hub_file?.id) : U(e) && e.viewer_mode === FTemplateCategoryType.LIBRARY && TX(e.id);
@@ -121,7 +121,7 @@ export function $$H7(e) {
     case vt.UI_KIT:
       return null;
     default:
-      return S9(e, null);
+      return returnSecond(e, null);
   }
 }
 export function $$z26(e) {
@@ -163,7 +163,7 @@ export function $$W25(e) {
     case FTemplateCategoryType.FIGMAKE_TEMPLATE:
       return vt.FIGMAKE_TEMPLATE;
     default:
-      xb(e);
+      throwTypeError(e);
   }
 }
 export function $$K13(e) {
@@ -182,7 +182,7 @@ export function $$K13(e) {
     case FFileType.DESIGN:
       return vt.DESIGN_TEMPLATE;
     default:
-      return S9(e.editorType, vt.DESIGN_TEMPLATE);
+      return returnSecond(e.editorType, vt.DESIGN_TEMPLATE);
   }
 }
 export function $$Y8(e) {

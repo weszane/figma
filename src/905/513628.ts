@@ -1,4 +1,4 @@
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { c2 } from "../905/382883";
 import a from "../vendor/223926";
 import o from "../vendor/149674";
@@ -15,7 +15,7 @@ function m(e, t) {
     if (e.type !== t.type) return !1;
     if ("image" === e.type) return "image" === t.type && e.url === t.url && e.sha1 === t.sha1 && e.buffer.length === t.buffer.length;
     if ("video" === e.type) return "video" === t.type && e.url === t.url && e.sha1 === t.sha1 && e.buffer.length === t.buffer.length && e.thumbnail_url === t.thumbnail_url && e.thumbnail_sha1 === t.thumbnail_sha1 && e.thumbnail_buffer.length === t.thumbnail_buffer.length;
-    xb(e);
+    throwTypeError(e);
   }
   return c2(e, t);
 }

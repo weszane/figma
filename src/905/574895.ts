@@ -1,5 +1,5 @@
 import { jsxs, jsx } from "react/jsx-runtime";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { getFeatureFlags } from "../905/601108";
 import { t as _$$t } from "../905/303541";
 import { vt } from "../figma_app/306946";
@@ -47,7 +47,7 @@ export function $$m0({
         if (m === vt.PLUGIN && !getFeatureFlags().buzz_plugins_publishing) return null;
         return _$$t("community.detail_view.made_for_buzz");
       default:
-        return xb(h);
+        return throwTypeError(h);
     }
   })();
   return g ? jsxs("div", {

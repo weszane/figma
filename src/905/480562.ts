@@ -34,7 +34,7 @@ import { fX, Im } from "../905/627262";
 import { bu, k9, DQ, y$ } from "../905/712714";
 import { JK } from "../figma_app/514043";
 import { A as _$$A3 } from "../905/27250";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { t as _$$t2 } from "../905/150656";
 import { J as _$$J } from "../905/270045";
 import { bL, DZ, mc, zW, c$ } from "../905/493196";
@@ -661,7 +661,7 @@ function eE({
     status: p
   }), [p, u, c]);
 }
-let eS = _$$ex("dsa_graph", function({
+let eS = _$$ex("dsa_graph", function ({
   numInsertions: e,
   dateString: t
 }) {
@@ -733,7 +733,7 @@ function eC({
     primaryTeamUsage: s
   });
 }
-function eT({ }) {
+function eT({}) {
   return jsxs(Fragment, {
     children: [jsx("div", {
       className: $,
@@ -1188,7 +1188,7 @@ function eq({
         libraryFile: o
       });
     default:
-      xb(t);
+      throwTypeError(t);
   }
 }
 function e$({
@@ -1398,4 +1398,4 @@ function e1() {
     })]
   });
 }
-export const O = $$eJ0; 
+export const O = $$eJ0;

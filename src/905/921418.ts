@@ -1,4 +1,4 @@
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { l as _$$l } from "../905/716947";
 import { zl } from "../figma_app/27355";
 import s from "../vendor/946678";
@@ -37,64 +37,54 @@ class M {
   constructor() {
     this.dirtySources = !1;
     this.subscribedLibraryKeys = new Set();
-    this.queryDidChange = (e) => {
+    this.queryDidChange = e => {
       this.debouncedComputeResults(e);
     };
-    this.searchOptionsDidChange = (e) => {
+    this.searchOptionsDidChange = e => {
       this.debouncedComputeResults(e);
     };
     this.subscriptionsDidChange = (e, t, i) => {
       this.subscribedLibraryKeys = i;
       this.debouncedComputeResults(e);
     };
-    this.refreshSourcesIfNeeded = (e) => {
+    this.refreshSourcesIfNeeded = e => {
       this.dirtySources && (this.initSources(e), this.dirtySources = !1);
     };
-    this.runComputeResultWithSourceChange = (e) => {
+    this.runComputeResultWithSourceChange = e => {
       this.initSources(e);
       this.dirtySources = !1;
       this.debouncedComputeResults(e);
     };
-    this.debouncedComputeResults = debounce((e) => {
+    this.debouncedComputeResults = debounce(e => {
       this.refreshSourcesIfNeeded(e);
-      "" === e.getState().library.assetsPanelSearch.query ||
-      e.getState().search.sessionId ||
-      e.dispatch(
-        Dy({
-          entryPoint: "editor:assets_panel"
-        })
-      );
+      "" === e.getState().library.assetsPanelSearch.query || e.getState().search.sessionId || e.dispatch(Dy({
+        entryPoint: "editor:assets_panel"
+      }));
       this.computeResultsRedux(e);
     }, 200);
-    this.initSources = (e) => {};
-    this.computeResultsRedux = (e) => {};
+    this.initSources = e => {};
+    this.computeResultsRedux = e => {};
   }
   sourcesDidChange() {
     this.dirtySources = !0;
   }
 }
-let $$U4 = [
-{
+let $$U4 = [{
   name: "name",
   weight: 0.6
-},
-{
+}, {
   name: "stateNames",
   weight: 0.4
-},
-{
+}, {
   name: "containing_frame.name",
   weight: 0.1
-},
-{
+}, {
   name: "containing_frame.pageName",
   weight: 0.1
-},
-{
+}, {
   name: "description",
   weight: 0.05
 }];
-
 let $$B2 = {
   threshold: 0.3,
   tokenize: !0,
@@ -109,41 +99,22 @@ let $$G0 = new class extends M {
     super(...arguments);
     this.lastUpdatedQuery = PN() ? 0 : Date.now();
     this.expSearchUnpublishedAssetsEnabled = void 0;
-    this.initSources = (e) => {
+    this.initSources = e => {
       let t = e.getState();
       let i = d1(t);
-      i &&
-      ((e, n) => {
+      i && ((e, n) => {
         let r = [];
         let a = new Set();
-        let s = (e) => {
+        let s = e => {
           for (let t of e) {
             let e = _$$V(t);
-            e && a.has(e) || (
-            e && a.add(e),
-            r.push({
+            e && a.has(e) || (e && a.add(e), r.push({
               ...t
             }));
           }
         };
         s(X0(n));
-        t.library.assetsPanelSearch.shouldSearchDefaultLibraries && (
-        s(
-          A0(
-            t.library,
-            cO(t.library.defaultPublished.componentsByLibraryKey),
-            i,
-            this.subscribedLibraryKeys
-          )
-        ),
-        s(
-          A0(
-            t.library,
-            t.library.defaultPublished.stateGroupsByLibraryKey,
-            i,
-            this.subscribedLibraryKeys
-          )
-        ));
+        t.library.assetsPanelSearch.shouldSearchDefaultLibraries && (s(A0(t.library, cO(t.library.defaultPublished.componentsByLibraryKey), i, this.subscribedLibraryKeys)), s(A0(t.library, t.library.defaultPublished.stateGroupsByLibraryKey, i, this.subscribedLibraryKeys)));
         let o = Object.values(WV(t.library.local.components));
         let l = Object.values(t.library.local.stateGroups);
         s(Gg(l, o));
@@ -153,8 +124,11 @@ let $$G0 = new class extends M {
     this.computeLocalResultsPromise = async (e, t, i) => {
       let n = B0();
       let r = dm(V, e);
-      let a = (await r).filter((e) => Oo(e, t));
-      let { elapsedTime, backgrounded } = n();
+      let a = (await r).filter(e => Oo(e, t));
+      let {
+        elapsedTime,
+        backgrounded
+      } = n();
       az.trackDefinedEvent("asset_search.compute_local_results_time", {
         elapsedTime,
         searchSessionId: i ?? "",
@@ -165,107 +139,33 @@ let $$G0 = new class extends M {
         unsubscribedSearchResults: []
       };
     };
-    this.computeFileResultsPromise = async (e, t, i, n, r, a, s, o) =>
-    await Og(e, t, i, n, r, a, s, o);
-    this.computeAllResultsPromise = async (
-    e,
-    t,
-    i,
-    n,
-    r,
-    a,
-    s,
-    o,
-    l,
-    d,
-    c,
-    u,
-    p,
-    m = !1,
-    h) =>
-
-    await BG(
-      e,
-      t,
-      i,
-      n,
-      r,
-      a,
-      s,
-      o,
-      l,
-      V,
-      this.subscribedLibraryKeys,
-      d,
-      c,
-      u,
-      p,
-      m,
-      h
-    );
-    this.computeResultsReduxSearchTypeHelper = async (
-    e,
-    t,
-    i,
-    s,
-    o,
-    c,
-    u,
-    p,
-    m,
-    h) =>
-    {
+    this.computeFileResultsPromise = async (e, t, i, n, r, a, s, o) => await Og(e, t, i, n, r, a, s, o);
+    this.computeAllResultsPromise = async (e, t, i, n, r, a, s, o, l, d, c, u, p, m = !1, h) => await BG(e, t, i, n, r, a, s, o, l, V, this.subscribedLibraryKeys, d, c, u, p, m, h);
+    this.computeResultsReduxSearchTypeHelper = async (e, t, i, s, o, c, u, p, m, h) => {
       let g;
       let f = B0();
       let A = debugState.getState();
       let y = ET(A, debugState.dispatch);
-      let { elapsedTime: _elapsedTime, backgrounded: _backgrounded } = f();
-      az.trackDefinedEvent(
-        "asset_search.compute_results_redux.get_used_product_component_keys_time",
-        {
-          elapsedTime: _elapsedTime,
-          backgrounded: _backgrounded,
-          searchSessionId: o ?? ""
-        }
-      );
+      let {
+        elapsedTime: _elapsedTime,
+        backgrounded: _backgrounded
+      } = f();
+      az.trackDefinedEvent("asset_search.compute_results_redux.get_used_product_component_keys_time", {
+        elapsedTime: _elapsedTime,
+        backgrounded: _backgrounded,
+        searchSessionId: o ?? ""
+      });
       let I = zl.get(lj).length > 0;
       switch (t?.type) {
         case _$$I.LOCAL:
           return this.computeLocalResultsPromise(e, A.openFile?.key, o);
         case _$$I.FILE:
-          g = this.computeFileResultsPromise(
-            e,
-            t.libraryKey,
-            A.selectedView?.view === "fullscreen" &&
-            A.selectedView?.fileKey ||
-            A.openFile?.key,
-            o,
-            A.openFile?.editorType?.toString(),
-            u,
-            c,
-            h
-          );
+          g = this.computeFileResultsPromise(e, t.libraryKey, A.selectedView?.view === "fullscreen" && A.selectedView?.fileKey || A.openFile?.key, o, A.openFile?.editorType?.toString(), u, c, h);
           break;
         case _$$I.RECENT:
         case void 0:
         case _$$I.ALL:
-          g = this.computeAllResultsPromise(
-            e,
-            i,
-            A.fileVersion,
-            A.openFile?.parentOrgId ?? null,
-            A.openFile,
-            A.selectedView,
-            s,
-            o,
-            y,
-            u,
-            c,
-            p,
-            m,
-            I,
-            h
-          );
+          g = this.computeAllResultsPromise(e, i, A.fileVersion, A.openFile?.parentOrgId ?? null, A.openFile, A.selectedView, s, o, y, u, c, p, m, I, h);
           break;
         case _$$I.SITE_KIT:
           return Promise.resolve({
@@ -273,7 +173,7 @@ let $$G0 = new class extends M {
             unsubscribedSearchResults: []
           });
         default:
-          return xb(t, "unknown search type");
+          return throwTypeError(t, "unknown search type");
       }
       let x = await Ci(!0);
       let S = await g;
@@ -294,18 +194,18 @@ let $$G0 = new class extends M {
         query: e,
         searchType: t?.type ?? _$$I.ALL
       });
-      let { elapsedTime, backgrounded } = w();
-      az.trackDefinedEvent(
-        "asset_search.compute_results_redux.track_top_k_results_time",
-        {
-          elapsedTime,
-          backgrounded,
-          searchSessionId: o ?? ""
-        }
-      );
+      let {
+        elapsedTime,
+        backgrounded
+      } = w();
+      az.trackDefinedEvent("asset_search.compute_results_redux.track_top_k_results_time", {
+        elapsedTime,
+        backgrounded,
+        searchSessionId: o ?? ""
+      });
       return g;
     };
-    this.computeResultsRedux = async (e) => {
+    this.computeResultsRedux = async e => {
       let t = B0();
       let i = e.getState();
       let n = Ei();
@@ -316,26 +216,20 @@ let $$G0 = new class extends M {
       let m = i.openFile?.parentOrgId;
       if (!s || !d) {
         e.dispatch(xI());
-        e.dispatch(
-          eK({
-            queryId: null
-          })
-        );
+        e.dispatch(eK({
+          queryId: null
+        }));
         return;
       }
-      e.dispatch(
-        eK({
-          queryId: n
-        })
-      );
+      e.dispatch(eK({
+        queryId: n
+      }));
       let _ = i.library.assetsPanelSearch.searchOptions;
       if (_ && !eu(_)) {
         e.dispatch(xI());
-        e.dispatch(
-          eK({
-            queryId: null
-          })
-        );
+        e.dispatch(eK({
+          queryId: null
+        }));
         return;
       }
       let A = await Ci(!0);
@@ -353,15 +247,7 @@ let $$G0 = new class extends M {
       i.search.sessionId && e.dispatch(pY());
       let v = Date.now();
       if (v <= this.lastUpdatedQuery) return;
-      let E = await this.computeResultsReduxSearchTypeHelper(
-        s,
-        _,
-        b,
-        r,
-        i.search.sessionId,
-        i.library.assetsPanelSearch.entryPoint,
-        n
-      );
+      let E = await this.computeResultsReduxSearchTypeHelper(s, _, b, r, i.search.sessionId, i.library.assetsPanelSearch.entryPoint, n);
       let x = {
         aiResultsEnabled: A,
         query: s,
@@ -371,34 +257,27 @@ let $$G0 = new class extends M {
         fileKey: d,
         fileOrgId: m ?? void 0,
         fileTeamId: u ?? void 0,
-        selectedViewFileKey:
-        "fullscreen" === i.selectedView.view && i.selectedView.fileKey ?
-        i.selectedView.fileKey :
-        void 0,
+        selectedViewFileKey: "fullscreen" === i.selectedView.view && i.selectedView.fileKey ? i.selectedView.fileKey : void 0,
         totalShownResults: E.normalizedSearchResults.length,
         tier: Al()
       };
       if (_?.type === _$$I.LOCAL) {
         e.dispatch(Y1(E));
-        e.dispatch(
-          w2({
-            sessionId: i.search.sessionId,
-            query: s,
-            queryId: n
-          })
-        );
-        null === i.search.sessionId &&
-        sx(
-          "asset_search.missing_session_id",
-          {
-            previousSessionId: i.search.lastLoadedQuery.sessionId,
-            entryPoint: i.library.assetsPanelSearch.entryPoint
-          },
-          {
-            forwardToDatadog: !0
-          }
-        );
-        let { elapsedTime, backgrounded } = t();
+        e.dispatch(w2({
+          sessionId: i.search.sessionId,
+          query: s,
+          queryId: n
+        }));
+        null === i.search.sessionId && sx("asset_search.missing_session_id", {
+          previousSessionId: i.search.lastLoadedQuery.sessionId,
+          entryPoint: i.library.assetsPanelSearch.entryPoint
+        }, {
+          forwardToDatadog: !0
+        });
+        let {
+          elapsedTime,
+          backgrounded
+        } = t();
         let o = {
           elapsedTime,
           backgrounded,
@@ -422,26 +301,22 @@ let $$G0 = new class extends M {
       }
       if (s !== e.getState().library.assetsPanelSearch.query) return;
       e.dispatch(Y1(E));
-      e.dispatch(
-        w2({
-          sessionId: i.search.sessionId,
-          query: s,
-          queryId: i.search.queryId
-        })
-      );
-      let [S, C] = o()(E.normalizedSearchResults, (e) => Oo(e, d));
-      null === i.search.sessionId &&
-      sx(
-        "asset_search.missing_session_id",
-        {
-          previousSessionId: i.search.lastLoadedQuery.sessionId,
-          entryPoint: i.library.assetsPanelSearch.entryPoint
-        },
-        {
-          forwardToDatadog: !0
-        }
-      );
-      let { elapsedTime, backgrounded } = t();
+      e.dispatch(w2({
+        sessionId: i.search.sessionId,
+        query: s,
+        queryId: i.search.queryId
+      }));
+      let [S, C] = o()(E.normalizedSearchResults, e => Oo(e, d));
+      null === i.search.sessionId && sx("asset_search.missing_session_id", {
+        previousSessionId: i.search.lastLoadedQuery.sessionId,
+        entryPoint: i.library.assetsPanelSearch.entryPoint
+      }, {
+        forwardToDatadog: !0
+      });
+      let {
+        elapsedTime,
+        backgrounded
+      } = t();
       let D = {
         elapsedTime,
         backgrounded,
@@ -452,12 +327,7 @@ let $$G0 = new class extends M {
       };
       let F = {};
       let M = i.selectedView;
-      if (
-      "fullscreen" === M.view && (
-      M.editorType === nT.Sites || M.editorType === nT.Figmake) &&
-      _?.type &&
-      [_$$I.ALL, _$$I.SITE_KIT].includes(_?.type))
-      {
+      if ("fullscreen" === M.view && (M.editorType === nT.Sites || M.editorType === nT.Figmake) && _?.type && [_$$I.ALL, _$$I.SITE_KIT].includes(_?.type)) {
         let e = zl.get(Sv);
         F = {
           siteKitSearchResultsCount: e,
@@ -482,26 +352,23 @@ let $$G0 = new class extends M {
     };
   }
 }();
-let $$z3 = nF((e, { ignoreLoadingState: t = !1 } = {}) => {
-  e.getState().search.sessionId ||
-  e.dispatch(
-    Dy({
-      entryPoint: "editor:assets_panel"
-    })
-  );
+let $$z3 = nF((e, {
+  ignoreLoadingState: t = !1
+} = {}) => {
+  e.getState().search.sessionId || e.dispatch(Dy({
+    entryPoint: "editor:assets_panel"
+  }));
   $$H5(e.getState(), {
     ignoreLoadingState: t
   }) && $$G0.runComputeResultWithSourceChange(e);
 });
-let $$H5 = _$$n((e, { ignoreLoadingState: t = !1 } = {}) =>
-t ?
-!!(e.openFile && e.fileVersion) :
-!!(e.openFile && e.fileVersion && D2(e.loadingState, yD(e.openFile.key)))
-);
-let W = (e) => e.type === PW.COMPONENT;
-let K = (e) => e.type === PW.STATE_GROUP;
+let $$H5 = _$$n((e, {
+  ignoreLoadingState: t = !1
+} = {}) => t ? !!(e.openFile && e.fileVersion) : !!(e.openFile && e.fileVersion && D2(e.loadingState, yD(e.openFile.key))));
+let W = e => e.type === PW.COMPONENT;
+let K = e => e.type === PW.STATE_GROUP;
 export function $$Y1(e) {
-  return e.filter((e) => W(e) || K(e));
+  return e.filter(e => W(e) || K(e));
 }
 export const YG = $$G0;
 export const Ow = $$Y1;

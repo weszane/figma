@@ -1,5 +1,5 @@
 import { createElement } from "react";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { glU, _gJ } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { zl } from "../figma_app/27355";
@@ -15,7 +15,7 @@ import { TN } from "../figma_app/147952";
 import { IN } from "../905/116101";
 import { Y5 } from "../figma_app/455680";
 import { ax } from "../figma_app/741237";
-import { j } from "../905/813868";
+import { noop } from "../905/813868";
 import { cb } from "../figma_app/12796";
 import { _V } from "../figma_app/300692";
 import { R as _$$R } from "../figma_app/612938";
@@ -67,7 +67,7 @@ export let $$j0 = nF(async (e, t) => {
     await W9({
       [tryPluginId]: [tryPluginVersionId]
     }, m);
-    j({
+    noop({
       pluginID: tryPluginId,
       widgetName: tryPluginName,
       pluginVersionID: tryPluginVersionId
@@ -187,7 +187,7 @@ export let $$j0 = nF(async (e, t) => {
     case nT.Figmake:
       break;
     default:
-      xb(fullscreenEditorType);
+      throwTypeError(fullscreenEditorType);
   }
 });
 export const $ = $$j0;

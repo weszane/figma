@@ -1,4 +1,4 @@
-import { xb, S9 } from "../figma_app/465776";
+import { throwTypeError, returnSecond } from "../figma_app/465776";
 import i from "../vendor/197638";
 import { sx } from "../905/449184";
 import { tx } from "../905/303541";
@@ -38,7 +38,7 @@ export function $$y6(e, t) {
     case vt.PROTOTYPE:
       return tx("community.duplicate.open_in_figma");
     default:
-      xb(e);
+      throwTypeError(e);
   }
 }
 function b(e) {
@@ -81,7 +81,7 @@ export function $$S8(e) {
     case vt.FIGMAKE_TEMPLATE:
       return tx("community.detail_view.figmake_template");
     default:
-      return S9(e.resource_type, "");
+      return returnSecond(e.resource_type, "");
   } else {
     if (U(e)) switch (e.viewer_mode) {
       case FTemplateCategoryType.WHITEBOARD:
@@ -100,7 +100,7 @@ export function $$S8(e) {
       case FTemplateCategoryType.FIGMAKE_TEMPLATE:
         return tx("community.detail_view.figmake_template");
       default:
-        return S9(e.viewer_mode, "");
+        return returnSecond(e.viewer_mode, "");
     }
     return I0(e) ? tx("community.detail_view.plugin") : xQ(e) ? tx("community.detail_view.widget") : tx("community.detail_view.design_file");
   }
@@ -167,7 +167,7 @@ export function $$D15(e, t) {
     case L.BrowseResourceTypes.WIDGETS:
       return a;
     default:
-      return S9(e, []);
+      return returnSecond(e, []);
   }
 }
 export const AC = $$v0;

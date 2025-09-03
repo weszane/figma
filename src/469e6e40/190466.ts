@@ -1,7 +1,7 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useId, useRef, useState, useEffect, Fragment as _$$Fragment, useCallback, forwardRef, useLayoutEffect } from "react";
 import { wA, d4 } from "../vendor/514228";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { lQ } from "../905/934246";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { fP, mc, i3 } from "../905/691059";
@@ -346,7 +346,7 @@ function eL(e) {
             case "separator":
               return jsx(sK, {}, `separator-${a}`);
             default:
-              xb(t);
+              throwTypeError(t);
           }
         })
       })
@@ -871,7 +871,7 @@ function eK(e) {
   let a;
   let o;
   let d = wA();
-  let c = function(e) {
+  let c = function (e) {
     let t = wA();
     let a = !!e;
     return useCallback(n => {
@@ -903,7 +903,7 @@ function eK(e) {
       t = () => e.onRemoveMemberOrChangeMemberPermission(e6.ADMIN);
       break;
     default:
-      xb(e);
+      throwTypeError(e);
   } else if ("revoke" === e.adminAccessAction) switch (a = _$$t2("member_flyout_modal.revoke_admin_access_label"), o = "revoke-admin", e.planType) {
     case FOrganizationLevelType.ORG:
       t = () => {
@@ -918,8 +918,8 @@ function eK(e) {
       t = () => e.onRemoveMemberOrChangeMemberPermission(e6.EDITOR);
       break;
     default:
-      xb(e);
-  } else "invite" === e.adminAccessAction ? (a = _$$t2("member_flyout_modal.invite_admin_access_label"), o = "invite-admin", t = () => c(e.member.email)) : xb(e.adminAccessAction);
+      throwTypeError(e);
+  } else "invite" === e.adminAccessAction ? (a = _$$t2("member_flyout_modal.invite_admin_access_label"), o = "invite-admin", t = () => c(e.member.email)) : throwTypeError(e.adminAccessAction);
   return jsx($z, {
     variant: "secondary",
     onClick: t,
@@ -945,7 +945,7 @@ function eX(e) {
       a = e.onRemoveUserFromTeam;
       break;
     default:
-      xb(e);
+      throwTypeError(e);
   }
   return jsx($z, {
     variant: "destructiveSecondary",
@@ -978,7 +978,7 @@ function eQ(e) {
       ...e,
       adminAccessAction: a
     } : null;
-  } else xb(e);
+  } else throwTypeError(e);
   let o = [{
     key: "admin-access",
     content: t && jsx(eK, {
@@ -1089,7 +1089,7 @@ function e0(e) {
         onIntersectionChange: e => {
           u(!e.isIntersecting);
         }
-      }), o.map(t => function(e, t) {
+      }), o.map(t => function (e, t) {
         let a = $X(e, t.org.name, t.orgUser.user.email || "", t.displayPlanUserMembershipRecord);
         return null === a ? jsx(Fragment, {}) : jsxs("div", {
           className: `member_flyout--tableRow--T8j4q ${_$$s2.flex.itemsCenter.justifyBetween.minH48.my4.mx24.bt1.bSolid.$}`,
@@ -1204,11 +1204,11 @@ export let $$e50 = {
       children: e.children
     })
   })),
-  Contents: function(e) {
+  Contents: function (e) {
     let t;
     let a;
     let l = d4(e => !!e.modalShown);
-    let o = function(e) {
+    let o = function (e) {
       let t;
       let a = _$$m.useClose();
       switch (e.planType) {
@@ -1225,7 +1225,7 @@ export let $$e50 = {
           };
           break;
         default:
-          xb(e);
+          throwTypeError(e);
       }
       let n = Rs(BGY, {
         ...t,
@@ -1290,4 +1290,4 @@ export let $$e50 = {
     });
   }
 };
-export const E = $$e50; 
+export const E = $$e50;

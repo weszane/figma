@@ -14,7 +14,7 @@ import { rg } from "../figma_app/401069";
 import { Ce } from "../905/156213";
 import { J2 } from "../figma_app/84367";
 import { Ju } from "../905/102752";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { Ay } from "../figma_app/778880";
 import { Ho, JI, GU, t_, dB, Kj } from "../905/416496";
 import { J as _$$J } from "../905/270045";
@@ -42,7 +42,7 @@ function E(e) {
     case v8u.PDF:
       return "PDF";
     default:
-      xb(e);
+      throwTypeError(e);
   }
 }
 function x(e) {
@@ -54,7 +54,7 @@ function x(e) {
     case ZRE.GRID:
       return _$$t("whiteboard.figjam_export.grid");
     default:
-      xb(e);
+      throwTypeError(e);
   }
 }
 function S(e) {
@@ -64,7 +64,7 @@ function S(e) {
     case EUU.STICKY:
       return _$$t("whiteboard.figjam_export.sticky");
     default:
-      xb(e);
+      throwTypeError(e);
   }
 }
 function w(e) {
@@ -74,7 +74,7 @@ function w(e) {
     case "file":
       return _$$t("whiteboard.figjam_export.entire_file");
     default:
-      xb(e);
+      throwTypeError(e);
   }
 }
 function C(e) {
@@ -88,7 +88,7 @@ function C(e) {
     case v8u.PDF:
       return [ZRE.SOLID];
     default:
-      xb(e);
+      throwTypeError(e);
   }
 }
 function T() {
@@ -220,7 +220,7 @@ function H(e) {
         className: $$B()(F, "figjam_export_pickers--solidIcon--Gt-95")
       });
     default:
-      xb(e.background);
+      throwTypeError(e.background);
   }
 }
 function W(e) {
@@ -434,7 +434,7 @@ let J = memo(function (e) {
             case v8u.CSV:
               return !1;
             default:
-              xb(e);
+              throwTypeError(e);
           }
         }(w, M, pickerInfo) && jsxs("div", {
           className: "figjam_export_pickers--exportWarning--KzT0q",

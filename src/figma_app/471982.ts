@@ -1,5 +1,5 @@
 import { B6 } from "../vendor/130505";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { Et } from "../905/125019";
 import { getFeatureFlags } from "../905/601108";
 import o from "../vendor/128080";
@@ -81,7 +81,7 @@ export function $$V34(e) {
     case FFileType.FIGMAKE:
       return LE.FIGMAKE;
     default:
-      xb(e);
+      throwTypeError(e);
   }
 }
 export function $$H31(e, t) {
@@ -140,7 +140,7 @@ export function $$X1(e) {
     case vt.WIDGET:
       return Uo.WIDGET;
     default:
-      xb(e.resource_type);
+      throwTypeError(e.resource_type);
   }
 }
 export function $$q35(e, {
@@ -155,7 +155,7 @@ export function $$q35(e, {
     case _$$vt.WIDGET:
       return t ? UF.WIDGET : Uo.WIDGET;
     default:
-      xb(r);
+      throwTypeError(r);
   }
 }
 var J = (e => (e.HUB_FILES = "hub_files", e.PLUGINS = "plugins", e.WIDGETS = "widgets", e))(J || {});

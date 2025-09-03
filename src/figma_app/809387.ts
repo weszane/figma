@@ -1,4 +1,4 @@
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { getFeatureFlags } from "../905/601108";
 import { t as _$$t } from "../905/303541";
 import { J7, M7, G_, _d, SN } from "../figma_app/650409";
@@ -66,7 +66,7 @@ export function $$o0(e, t) {
           return _$$t("org_admin_tab.content");
       }
     default:
-      xb(e);
+      throwTypeError(e);
   }
 }
 export const O = $$o0;

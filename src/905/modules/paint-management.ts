@@ -1,19 +1,22 @@
 /**
  * Paint Management Module
- * 
+ *
  * Handles paint-related functionality including color palettes, matrix transformations,
  * paint type conversions, and paint processing for various node types.
- * 
+ *
  * Original functions: e$, eZ, eQ, eJ, e0, e1, e2, e3, e4, e5
  * Original constants: eG, ez
  */
 
+import { nj } from '../125019'
+import { dI } from '../871411'
+
 /**
  * Paint Management Module
- * 
+ *
  * Handles paint-related functionality including color palettes, matrix transformations,
  * paint type conversions, and paint processing for various node types.
- * 
+ *
  * Original functions: e$, eZ, eQ, eJ, e0, e1, e2, e3, e4, e5
  * Original constants: eG, ez
  */
@@ -51,22 +54,10 @@ export const LIGHT_COLOR_PALETTE = {
 }
 
 /**
- * Transform matrix interface
- */
-interface TransformMatrix {
-  m00: number
-  m01: number
-  m02: number
-  m10: number
-  m11: number
-  m12: number
-}
-
-/**
  * Converts a transform matrix to a 2D array format
  * Original function: e$
  */
-export function transformMatrixToArray(matrix: TransformMatrix): [[number, number, number], [number, number, number]] {
+export function transformMatrixToArray(matrix: Transform): TransformMatrix {
   return [
     [matrix.m00, matrix.m01, matrix.m02],
     [matrix.m10, matrix.m11, matrix.m12],
@@ -77,7 +68,7 @@ export function transformMatrixToArray(matrix: TransformMatrix): [[number, numbe
  * Converts a 2D array to a transform matrix format, or returns identity matrix
  * Original function: eZ
  */
-export function arrayToTransformMatrix(array?: [[number, number, number], [number, number, number]]): TransformMatrix {
+export function arrayToTransformMatrix(array?: TransformMatrix): Transform {
   return array
     ? {
       m00: array[0][0],
@@ -119,60 +110,180 @@ export function normalizeBlendMode(blendMode: string): string {
 /**
  * Paint type definitions
  */
-interface Color {
+export interface Color {
   r: number
   g: number
   b: number
   a?: number
 }
 
-interface BasePaint {
+export interface BasePaint {
   type: string
   visible: boolean
   opacity: number
   blendMode: string
 }
 
-interface SolidPaint extends BasePaint {
+export interface VariableAlias {
+  type: 'VARIABLE_ALIAS'
+  id: string
+}
+export interface VariableValue {
+  textValue?: string
+  boolValue?: boolean
+  floatValue?: number
+  colorValue?: Color
+  alias?: string
+  expressionValue?: ExpressionValue
+  mapValue?: {
+    values?: Array<{
+      key: string
+      value?: any
+    }>
+  }
+  symbolIdValue?: string
+}
+
+export interface ExpressionValue {
+  expressionFunction: string
+  expressionArguments: IVariableData[]
+}
+
+export interface IVariableData {
+  dataType?: 'STRING' | 'BOOLEAN' | 'FLOAT' | 'COLOR' | 'ALIAS' | 'EXPRESSION' | 'MAP' | 'SYMBOL_ID'
+  resolvedDataType?: 'STRING' | 'BOOLEAN' | 'FLOAT' | 'COLOR' | 'MAP' | 'SYMBOL_ID'
+  value?: VariableValue | any
+  type?: 'BOOLEAN' | 'COLOR' | 'FLOAT' | 'STRING' | 'VARIABLE_ALIAS' | 'EXPRESSION' | 'SYMBOL_ID' | 'MAP'
+  resolvedType?: 'BOOLEAN' | 'COLOR' | 'FLOAT' | 'STRING'
+  color?: {
+    id: string;
+    type: string
+  }
+}
+
+export interface ImageReference {
+  hash: Uint8Array
+  dataBlob?: number
+}
+
+export type BlendMode
+  = | 'NORMAL' | 'MULTIPLY' | 'SCREEN' | 'OVERLAY' | 'SOFT_LIGHT'
+  | 'HARD_LIGHT' | 'COLOR_DODGE' | 'COLOR_BURN' | 'DARKEN'
+  | 'LIGHTEN' | 'DIFFERENCE' | 'EXCLUSION' | 'HUE'
+  | 'SATURATION' | 'COLOR' | 'LUMINOSITY'
+
+export type PatternTileType = 'RECTANGULAR' | 'HEXAGONAL'
+export type PatternAlignment = 'START' | 'CENTER' | 'END'
+export type ImageScaleMode = 'FILL' | 'FIT' | 'CROP' | 'TILE' | 'STRETCH'
+
+export interface SolidPaint extends BasePaint {
   type: 'SOLID'
   color: Color
-  boundVariables?: { color?: any }
+  boundVariables?: { color?: VariableAlias }
+  colorVar?: IVariableData
 }
 
-interface GradientStop {
+export interface Transform {
+  m00: number
+  m01: number
+  m02: number
+  m10: number
+  m11: number
+  m12: number
+}
+
+export interface PaintFilter {
+  exposure?: number
+  contrast?: number
+  saturation?: number
+  vibrance?: number
+  temperature?: number
+  tint?: number
+  highlights?: number
+  shadows?: number
+}
+
+export interface TransformMatrix {
+  [0]: [number, number, number]
+  [1]: [number, number, number]
+}
+
+export interface GradientStop {
   color: Color
   position: number
-  boundVariables?: { color?: any }
+  boundVariables?: {
+    color?: VariableAlias
+  }
 }
 
-interface GradientPaint extends BasePaint {
+export interface PatternSpacing {
+  x: number
+  y: number
+}
+
+export interface GradientPaint extends BasePaint {
   type: 'GRADIENT_LINEAR' | 'GRADIENT_RADIAL' | 'GRADIENT_ANGULAR' | 'GRADIENT_DIAMOND'
-  gradientStops: GradientStop[]
-  gradientTransform: [[number, number, number], [number, number, number]]
+  transform?: Transform
+  stops?: GradientStop[]
+  stopsVar?: Array<{
+    color: Color
+    position: number
+    colorVar?: IVariableData
+  }>
+  gradientStops?: GradientStop[]
+  gradientTransform?: TransformMatrix
 }
 
-interface ImagePaint extends BasePaint {
-  type: 'IMAGE' | 'VIDEO'
-  imageHash?: string | null
-  videoHash?: string | null
-  scaleMode: string
-  imageTransform: [[number, number, number], [number, number, number]]
+export interface ImagePaint extends BasePaint {
+  type: 'IMAGE'
+  imageScaleMode?: ImageScaleMode
+  transform?: Transform
+  paintFilter?: PaintFilter
+  scale?: number
   scalingFactor?: number
   rotation?: number
-  filters: any
+  scaleMode?: ImageScaleMode
+  imageTransform?: TransformMatrix
+  animatedImage?: ImageReference
+  filters?: PaintFilter
+  image?: ImageReference
+  imageHash?: string | null
 }
 
-interface PatternPaint extends BasePaint {
+export interface VideoPaint extends BasePaint {
+  animatedImage?: ImageReference 
+  loop?: boolean
+  autoPlay?: boolean
+  type: 'VIDEO'
+  imageScaleMode?: ImageScaleMode
+  transform?: Transform
+  paintFilter?: PaintFilter
+  scale?: number
+  scalingFactor?: number
+  rotation?: number
+  scaleMode?: ImageScaleMode
+  videoTransform?: TransformMatrix
+  imageTransform?: TransformMatrix
+  filters?: PaintFilter
+  image?: ImageReference
+  video?: ImageReference
+  videoHash?: string | null
+}
+
+export interface PatternPaint extends BasePaint {
   type: 'PATTERN'
-  sourceNodeId: string
-  tileType: string
-  scalingFactor: number
-  spacing: { x: number; y: number }
-  horizontalAlignment: string
-  verticalAlignment: string
+  sourceNodeId?: { sessionID: number, localID: number }
+  patternTileType?: PatternTileType
+  scale?: number
+  scalingFactor?: number
+  patternSpacing?: PatternSpacing
+  spacing?: PatternSpacing
+  horizontalAlignment: PatternAlignment
+  verticalAlignment: PatternAlignment
+  tileType?: PatternTileType
 }
 
-export type Paint = SolidPaint | GradientPaint | ImagePaint | PatternPaint
+export type Paint = SolidPaint | GradientPaint | ImagePaint | PatternPaint | VideoPaint
 
 /**
  * Merges an object with defaults, preserving existing values
@@ -184,7 +295,7 @@ function mergeWithDefaults<T>(obj: Partial<T>, defaults: T): T {
 /**
  * Processes image filter data for external format
  */
-function processImageFilters(paintFilter: any) {
+export function processImageFilters(paintFilter: any) {
   const defaultFilters = {
     exposure: 0,
     contrast: 0,
@@ -195,7 +306,8 @@ function processImageFilters(paintFilter: any) {
     shadows: 0,
   }
 
-  if (!paintFilter) return defaultFilters
+  if (!paintFilter)
+    return defaultFilters
 
   return mergeWithDefaults({
     exposure: paintFilter.exposure,
@@ -212,32 +324,32 @@ function processImageFilters(paintFilter: any) {
  * Converts internal paint data to external paint format
  * Original function: e0
  */
-export function convertInternalPaintToExternal(internalPaint: any): Paint {
+export function convertInternalPaintToExternal(paint: any): Paint {
   const basePaint: BasePaint = {
-    type: internalPaint.type,
-    visible: internalPaint.visible,
-    opacity: internalPaint.opacity,
-    blendMode: normalizeBlendMode(internalPaint.blendMode),
+    type: paint.type,
+    visible: paint.visible,
+    opacity: paint.opacity,
+    blendMode: normalizeBlendMode(paint.blendMode),
   }
 
-  switch (internalPaint.type) {
+  switch (paint.type) {
     case 'SOLID': {
       const solidPaint: SolidPaint = {
         ...basePaint,
         type: 'SOLID',
-        color: { ...internalPaint.color },
+        color: { ...paint.color },
         boundVariables: {},
       }
-      
-      if (internalPaint.colorVar?.value?.alias) {
-        solidPaint.boundVariables!.color = createVariableAlias(internalPaint.colorVar.value.alias)
+
+      if (paint.colorVar?.value?.alias) {
+        solidPaint.boundVariables!.color = createVariableAlias(paint.colorVar.value.alias)
       }
-      
+
       // Remove alpha from color
       if (solidPaint.color.a !== undefined) {
         delete solidPaint.color.a
       }
-      
+
       return solidPaint
     }
 
@@ -247,15 +359,15 @@ export function convertInternalPaintToExternal(internalPaint: any): Paint {
     case 'GRADIENT_DIAMOND': {
       const gradientPaint: GradientPaint = {
         ...basePaint,
-        type: internalPaint.type,
-        gradientStops: internalPaint.stops?.map((stop: any, index: number) => ({
+        type: paint.type,
+        gradientStops: paint.stops?.map((stop: any, index: number) => ({
           color: stop.color,
           position: stop.position,
-          boundVariables: internalPaint.stopsVar?.length && internalPaint.stopsVar?.[index]?.colorVar?.value?.alias
-            ? { color: createVariableAlias(internalPaint.stopsVar[index].colorVar.value.alias) }
+          boundVariables: paint.stopsVar?.length && paint.stopsVar?.[index]?.colorVar?.value?.alias
+            ? { color: createVariableAlias(paint.stopsVar[index].colorVar.value.alias) }
             : {},
         })) || [],
-        gradientTransform: transformMatrixToArray(internalPaint.transform),
+        gradientTransform: transformMatrixToArray(paint.transform),
       }
       return gradientPaint
     }
@@ -264,48 +376,58 @@ export function convertInternalPaintToExternal(internalPaint: any): Paint {
       const patternPaint: PatternPaint = {
         ...basePaint,
         type: 'PATTERN',
-        sourceNodeId: internalPaint.sourceNodeId || '',
-        tileType: internalPaint.patternTileType ?? 'RECTANGULAR',
-        scalingFactor: internalPaint.scale ?? 1,
-        spacing: internalPaint.patternSpacing ?? { x: 0, y: 0 },
-        horizontalAlignment: internalPaint.horizontalAlignment ?? 'START',
-        verticalAlignment: internalPaint.verticalAlignment ?? 'START',
+        sourceNodeId: dI(paint.sourceNodeId) ?? '-1:-1',
+        tileType: paint.patternTileType ?? 'RECTANGULAR',
+        scalingFactor: paint.scale ?? 1,
+        spacing: paint.patternSpacing ?? { x: 0, y: 0 },
+        horizontalAlignment: paint.horizontalAlignment ?? 'START',
+        verticalAlignment: paint.verticalAlignment ?? 'START',
       }
       return patternPaint
     }
 
     case 'VIDEO':
     case 'IMAGE': {
-      const scaleMode = internalPaint.imageScaleMode === 'STRETCH' ? 'CROP' : internalPaint.imageScaleMode
-      const rotation = internalPaint.rotation ? internalPaint.rotation % 360 : 0
-      
-      const imagePaint: ImagePaint = {
+      const scaleMode = paint.imageScaleMode === 'STRETCH' ? 'CROP' : paint.imageScaleMode
+      const rotation = paint.rotation ? paint.rotation % 360 : 0
+
+      let imagePaint: ImagePaint = {
         ...basePaint,
-        type: internalPaint.type,
+        type: paint.type,
         scaleMode,
-        imageTransform: transformMatrixToArray(internalPaint.transform),
-        scalingFactor: internalPaint.scale,
+        imageTransform: transformMatrixToArray(paint.transform),
+        scalingFactor: paint.scale,
         rotation,
-        filters: processImageFilters(internalPaint.paintFilter),
+        filters: processImageFilters(paint.paintFilter),
       }
 
-      if (internalPaint.type === 'VIDEO') {
-        imagePaint.videoHash = internalPaint.video?.hash || null
-      } else {
-        if (internalPaint.animatedImage?.hash) {
-          imagePaint.imageHash = internalPaint.animatedImage.hash
-        } else if (internalPaint.image?.hash) {
-          imagePaint.imageHash = internalPaint.image.hash
-        } else {
+      if (paint.type === 'VIDEO') {
+        const videoPaint = imagePaint as unknown as VideoPaint
+        (videoPaint).videoTransform = paint.imageTransform
+        if (paint.video && paint.video.hash) {
+          videoPaint.videoHash = nj(paint.video.hash)
+        }
+        else {
+          videoPaint.videoHash = null
+        }
+        return videoPaint
+      }
+      else {
+        if (paint.animatedImage?.hash) {
+          imagePaint.imageHash = nj(paint.animatedImage.hash)
+        }
+        else if (paint.image?.hash) {
+          imagePaint.imageHash = nj(paint.image.hash)
+        }
+        else {
           imagePaint.imageHash = null
         }
       }
-
       return imagePaint
     }
 
     default:
-      console.warn(`Paint type ${internalPaint.type} is not yet supported`)
+      console.warn(`Paint type ${paint.type} is not yet supported`)
       return basePaint as Paint
   }
 }
@@ -326,16 +448,16 @@ export function convertTextDecorationPaints(paints?: any[]) {
   if (!paints || paints.length === 0) {
     return { value: 'AUTO' }
   }
-  
+
   const convertedPaints = paints.map(convertInternalPaintToExternal)
   if (convertedPaints.length !== 1) {
     throw new Error('Text decoration color must have exactly one paint')
   }
-  
+
   const paint = convertedPaints[0]
   if (paint.type !== 'SOLID') {
     throw new Error('Text decoration color must be a solid color')
   }
-  
+
   return { value: paint }
 }

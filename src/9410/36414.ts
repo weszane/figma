@@ -1,4 +1,4 @@
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { buildUploadUrl } from "../figma_app/169182";
 import { F } from "../figma_app/954027";
 import { Pt } from "../figma_app/806412";
@@ -34,7 +34,7 @@ export function $$f1(e) {
     case "Section":
       return t("whiteboard.inserts.section_title");
     default:
-      xb(e);
+      throwTypeError(e);
   }
 }
 export function $$g2(e) {

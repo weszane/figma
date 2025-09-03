@@ -1,7 +1,7 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useState, useCallback, useEffect } from "react";
 import { d4, wA } from "../vendor/514228";
-import { wc } from "../figma_app/465776";
+import { throwError } from "../figma_app/465776";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { sx, az } from "../905/449184";
 import { xf } from "../figma_app/416935";
@@ -1122,7 +1122,7 @@ function eZ({
           case tn.CONFIRM_PAY:
             return tx("checkout.everything_look_good");
           default:
-            wc(e);
+            throwError(e);
         }
       }(e, t, r())
     }), e === tn.CHOOSE_PLAN && jsx("p", {

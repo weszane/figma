@@ -1,4 +1,4 @@
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { getFeatureFlags } from "../905/601108";
 import { JI, Ho } from "../905/416496";
 export function $$s1(e) {
@@ -39,7 +39,7 @@ export function $$s1(e) {
     svgIDMode: e.svgIDMode || "IF_NEEDED",
     svgForceStrokeMasks: e.svgForceStrokeMasks ?? !0,
     colorProfile: e.colorProfile ?? "DOCUMENT"
-  } : void xb(e.imageType);
+  } : void throwTypeError(e.imageType);
 }
 export function $$o0(e) {
   return "JPEG" === e.imageType || "PNG" == e.imageType;

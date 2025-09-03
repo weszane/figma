@@ -1,10 +1,10 @@
 import { z } from "../vendor/835909";
-let r = z.$$enum(["gpt-3.5-turbo", "gpt-3.5-turbo-0125", "gpt-4", "gpt-4-0314", "gpt-4-0613", "gpt-4-1106-preview", "gpt-4-vision-preview", "gpt-4-turbo-2024-04-09", "gpt-4o-2024-05-13", "gpt-4o-2024-08-06", "ft:gpt-4o-2024-08-06:figma-development::A95wrEFE:ckpt-step-732", "ft:gpt-4o-2024-08-06:figma-development::ANRnWJ0Y", "ft:gpt-4o-2024-08-06:figma-development::AOJ3FqLB", "gpt-4o-mini", "gpt-4o-mini-2024-07-18", "o1-preview-2024-09-12", "o1-mini-2024-09-12", "o3-mini-2025-01-31", "o3-2025-04-16", "o4-mini-2025-04-16", "gemini-1.5-pro-latest"], {
+let r = z.enum(["gpt-3.5-turbo", "gpt-3.5-turbo-0125", "gpt-4", "gpt-4-0314", "gpt-4-0613", "gpt-4-1106-preview", "gpt-4-vision-preview", "gpt-4-turbo-2024-04-09", "gpt-4o-2024-05-13", "gpt-4o-2024-08-06", "ft:gpt-4o-2024-08-06:figma-development::A95wrEFE:ckpt-step-732", "ft:gpt-4o-2024-08-06:figma-development::ANRnWJ0Y", "ft:gpt-4o-2024-08-06:figma-development::AOJ3FqLB", "gpt-4o-mini", "gpt-4o-mini-2024-07-18", "o1-preview-2024-09-12", "o1-mini-2024-09-12", "o3-mini-2025-01-31", "o3-2025-04-16", "o4-mini-2025-04-16", "gemini-1.5-pro-latest"], {
   description: "The specified model is not an allowed chat completion model"
 });
-z.$$enum(["gpt-35-turbo", "gpt-4", "gpt-4-turbo", "gpt-4-vision", "gpt-35-turbo-instruct", "gpt-4o", "gpt-4o-mini", "gpt-4o-2024-08-06", "text-embedding-ada-002", "text-embedding-3-small", "text-embedding-3-large", "no-fallback"]);
-z.$$enum(["gpt-4-visual", "gpt-4-vision-preview", "gpt-4-turbo-2024-04-09", "gpt-4o-2024-05-13"]);
-let a = z.$$enum(["system", "user", "assistant", "function", "tool"]);
+z.enum(["gpt-35-turbo", "gpt-4", "gpt-4-turbo", "gpt-4-vision", "gpt-35-turbo-instruct", "gpt-4o", "gpt-4o-mini", "gpt-4o-2024-08-06", "text-embedding-ada-002", "text-embedding-3-small", "text-embedding-3-large", "no-fallback"]);
+z.enum(["gpt-4-visual", "gpt-4-vision-preview", "gpt-4-turbo-2024-04-09", "gpt-4o-2024-05-13"]);
+let a = z.enum(["system", "user", "assistant", "function", "tool"]);
 let s = z.object({
   stream: z.boolean().optional(),
   temperature: z.number().optional(),
@@ -18,7 +18,7 @@ let s = z.object({
   logprobs: z.boolean().optional(),
   stop: z.array(z.string()).or(z.string()).optional(),
   response_format: z.union([z.object({
-    type: z.$$enum(["text", "json_object"])
+    type: z.enum(["text", "json_object"])
   }), z.object({
     type: z.literal("json_schema"),
     json_schema: z.record(z.any())

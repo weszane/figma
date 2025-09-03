@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { useState, useEffect, useMemo, useCallback } from "react";
 import a, { zw } from "../905/585727";
-import { B1, xb } from "../figma_app/465776";
+import { assertNotNullish, throwTypeError } from "../figma_app/465776";
 import { lQ } from "../905/934246";
 import { c as _$$c } from "../905/752260";
 import { biQ } from "../figma_app/763686";
@@ -80,7 +80,7 @@ function k({
   onUndo: m
 }) {
   let g = zA()[0];
-  B1(g);
+  assertNotNullish(g);
   let {
     promptHistory,
     addPromptToHistory
@@ -406,7 +406,7 @@ export function $$U1() {
     case qy.CANCELLED:
       return null;
     default:
-      xb(state);
+      throwTypeError(state);
   }
 }
 export const F = $$D0;

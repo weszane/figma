@@ -47,7 +47,7 @@ import { X as _$$X2 } from "../905/698965";
 import { Ju } from "../905/102752";
 import { A as _$$A2 } from "../svg/562672";
 import { A as _$$A3 } from "../svg/57540";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { K as _$$K2 } from "../905/443068";
 import { o as _$$o } from "../905/821217";
 import { J as _$$J2 } from "../905/614223";
@@ -495,7 +495,7 @@ function eR(e) {
   }, {
     enabled: "org" === resourceType
   });
-  let j = useMemo(() => "team" === resourceType ? !!F.data?.team?.canAdmin : "org" === resourceType ? !!M.data?.org?.canAdmin : void xb(resourceType), [F, M, resourceType]);
+  let j = useMemo(() => "team" === resourceType ? !!F.data?.team?.canAdmin : "org" === resourceType ? !!M.data?.org?.canAdmin : void throwTypeError(resourceType), [F, M, resourceType]);
   let U = (e, t, r) => {
     let s = sharedFonts.fontsByResourceId[e];
     if (!s) return [];

@@ -1,4 +1,4 @@
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { Z } from "../vendor/39153";
 import { $T, nw } from "../figma_app/422062";
 import { m as _$$m } from "../905/931569";
@@ -130,7 +130,7 @@ export function $$G1(e) {
     case "abuseReportForm":
       return !1;
     default:
-      xb(t);
+      throwTypeError(t);
   }
 }
 export function $$V16(e) {

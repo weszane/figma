@@ -8,7 +8,7 @@ import { n as _$$n } from "../1577/959155";
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useMemo, useState, useEffect, createRef } from "react";
 import { Agb } from "../figma_app/822011";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { $n } from "../905/521428";
 import { hS } from "../905/437088";
 import { Z as _$$Z } from "../905/279476";
@@ -107,7 +107,7 @@ import { jN } from "../905/612685";
 import { QF } from "../figma_app/502247";
 import { S as _$$S } from "../figma_app/787550";
 import { f as _$$f2 } from "../figma_app/24747";
-import { wc } from "../1250/559338";
+import { throwError } from "../1250/559338";
 import { k as _$$k2 } from "../905/443820";
 import { Q as _$$Q2 } from "../1250/220026";
 import { kD, tS as _$$tS2, ac, J3, kN } from "../figma_app/622574";
@@ -320,7 +320,7 @@ let tL = {
         mainText: "80% of memory used",
         customElem: jsx("div", {
           className: DB,
-          children: jsx(wc, {
+          children: jsx(throwError, {
             memoryUsagePercent: 80
           })
         }),
@@ -1099,7 +1099,7 @@ function t0(e) {
       t = _$$t("general.figma_rev");
       break;
     default:
-      xb(e);
+      throwTypeError(e);
   }
   return _$$t("banner.multiplayer_session_upgrade.with_editor_type", {
     editorType: t

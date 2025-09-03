@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
 import { wA, d4 } from "../vendor/514228";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { P as _$$P } from "../905/697522";
 import { getFeatureFlags } from "../905/601108";
 import { debugState } from "../905/407919";
@@ -48,7 +48,7 @@ let O = new class {
 let U = "confirm_org_user_actions--bold--FUp4f";
 let F = "confirm_org_user_actions--spacing--ZBS-Z";
 let q = "confirm_org_user_actions--learnMoreLink--M---Z confirm_org_user_actions--link--kN9aV blue_link--blueLink--9rlnd";
-export let $$z2 = Ju(function(e) {
+export let $$z2 = Ju(function (e) {
   let t = wA();
   let a = _$$k2();
   let s = e.orgUserIds.length;
@@ -167,7 +167,7 @@ function V(e) {
   }
   let d = e.orgUserIds.length;
   let c = e.accountType === FPlanFeatureType.FULL;
-  let u = function(e, t, a) {
+  let u = function (e, t, a) {
     var i;
     if (e) switch (t) {
       case ud.DESIGN:
@@ -287,7 +287,7 @@ function V(e) {
           })]
         });
       default:
-        xb(t);
+        throwTypeError(t);
     } else switch (t) {
       case ud.DESIGN:
         return jsxs(Fragment, {
@@ -401,7 +401,7 @@ function V(e) {
           })]
         });
       default:
-        xb(t);
+        throwTypeError(t);
     }
   }(c, e.licenseType, d);
   return jsx(fu, {
@@ -414,7 +414,7 @@ function V(e) {
     },
     children: jsx(yX, {
       confirmText: c ? _$$t("confirm_account_change.grant_edit_access_confirm_text") : _$$t("confirm_account_change.remove_edit_access_confirm_text"),
-      confirmationTitle: function(e, t, a) {
+      confirmationTitle: function (e, t, a) {
         if (e) switch (t) {
           case ud.DESIGN:
             return jsx("span", {
@@ -438,7 +438,7 @@ function V(e) {
               })
             });
           default:
-            xb(t);
+            throwTypeError(t);
         } else switch (t) {
           case ud.DESIGN:
             return jsx("span", {
@@ -462,7 +462,7 @@ function V(e) {
               })
             });
           default:
-            xb(t);
+            throwTypeError(t);
         }
       }(c, e.licenseType, d),
       destructive: !c,
@@ -471,7 +471,7 @@ function V(e) {
       onCancel: e.onHide,
       onConfirm: () => {
         e.licenseType !== ud.DEV_MODE || c || a();
-        (function() {
+        (function () {
           let a = {
             org_user_ids: e.orgUserIds,
             paid_statuses: {
@@ -509,12 +509,12 @@ function V(e) {
     })
   });
 }
-let $$W1 = Ju(function(e) {
+let $$W1 = Ju(function (e) {
   return jsx(V, {
     ...e
   });
 }, "OrgConfirmAccountChangeModal");
-let $$H3 = Ju(function(e) {
+let $$H3 = Ju(function (e) {
   let t = wA();
   return jsx(yX, {
     confirmationTitle: _$$t("confirm_billing_group_change.title"),
@@ -578,7 +578,7 @@ let $$H3 = Ju(function(e) {
     })()
   });
 }, "OrgConfirmLicenseGroupChangeModal");
-let $$Y0 = Ju(function(e) {
+let $$Y0 = Ju(function (e) {
   let t = e.selectedOrgJoinRequest;
   let a = d4(e => e.orgById[e.currentUserOrgId]);
   let r = d4(e => e.orgSamlConfig);
@@ -722,4 +722,4 @@ let $$Y0 = Ju(function(e) {
 export const pp = $$Y0;
 export const PT = $$W1;
 export const IY = $$z2;
-export const FW = $$H3; 
+export const FW = $$H3;

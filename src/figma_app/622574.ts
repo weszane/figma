@@ -1,6 +1,6 @@
 import { useMemo, useState, useCallback, useEffect, useRef } from "react";
 import { d4, Pj } from "../vendor/514228";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { lQ } from "../905/934246";
 import { getFeatureFlags } from "../905/601108";
 import { eU, fp } from "../figma_app/27355";
@@ -59,7 +59,7 @@ export function $$k15(e) {
 }
 export function $$M3() {
   let e = q5();
-  let t = function() {
+  let t = function () {
     let e = $$P2();
     let t = q5();
     return d4(r => !!t && !!t.folderId && (e?.type === "team" ? ye(r.folders[t.folderId]) : e?.type === "org" && _$$Gi(r.folders[t.folderId])));
@@ -82,7 +82,7 @@ export function $$F4(e) {
     case "FILE_IN_DRAFTS_CANNOT_MOVE":
       return !1;
     default:
-      xb(e);
+      throwTypeError(e);
   }
 }
 export function $$j8({
@@ -329,7 +329,7 @@ export function $$W11({
   let {
     teamTemplates,
     isDoneInitialProcessing
-  } = function(e) {
+  } = function (e) {
     let [t, r] = useState([]);
     let [i, a] = useState([]);
     let [s, o] = useState(!1);
@@ -465,7 +465,7 @@ export function $$$14({
       let e = a?.templatesByTeam;
       e && e.hasNextPage() && !e?.isLoadingNextPage && e.loadNext(r);
     },
-    templatesByTeam: function(e) {
+    templatesByTeam: function (e) {
       let t;
       if (e && e.templatesByTeam) {
         e.templatesByTeam.sort((e, t) => e.sortOrder - t.sortOrder).map(e => {
@@ -656,4 +656,4 @@ export const mZ = $$k15;
 export const qI = $$G16;
 export const qY = $$et17;
 export const tS = $$D18;
-export const wv = $$Z19; 
+export const wv = $$Z19;

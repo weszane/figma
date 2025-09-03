@@ -9,7 +9,7 @@ let d = {
   migrate_team_data_to_livegraph: ServiceCategories.SCALE,
   test_config: ServiceCategories.FRONTEND_PLATFORM
 };
-let c = z.$$enum(["passthrough", "shadowread", "cutover"]);
+let c = z.enum(["passthrough", "shadowread", "cutover"]);
 export function $$u4(e, t) {
   let r = m(e, t);
   return "shadowread" === r || "cutover" === r;

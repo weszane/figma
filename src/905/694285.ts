@@ -1,4 +1,4 @@
-import { j } from "../figma_app/465776";
+import { noop } from "../figma_app/465776";
 import r from "../vendor/128080";
 import { parseQuerySimple } from "../905/634134";
 var a = r;
@@ -101,7 +101,7 @@ export class $$o1 {
           t += `/multiplayer_journal_diff/${r.fileKey}`;
           break;
         default:
-          j(r);
+          noop(r);
       }
       if ("backend" in r && i.set("backend", r.backend || ""), "diffKey" in r && r.diffKey && i.set("diffKey", r.diffKey), "server_file_validation_checkpoint" === r.type || "server_file_validation_checkpoint_diff" === r.type) {
         let {
@@ -148,7 +148,7 @@ export class $$o1 {
         case "multiplayer_journal_diff":
           return `FigmaScope (Journal Diff for ${e.urlParams.fileKey})`;
         default:
-          j(e.urlParams);
+          noop(e.urlParams);
       }
       return "FigmaScope";
     }

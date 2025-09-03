@@ -15,7 +15,7 @@ import { GG } from "../905/511649";
 import { B as _$$B } from "../905/714743";
 import { t } from "../905/303541";
 import { m as _$$m } from "../905/99004";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { d as _$$d } from "../vendor/456530";
 import { G } from "../vendor/697048";
 import { Bn, BI, Uj, Gy, kS } from "../3276/256210";
@@ -127,7 +127,7 @@ function E(e) {
         })
       });
     default:
-      xb(dockedStyle);
+      throwTypeError(dockedStyle);
   }
 }
 let D = ({

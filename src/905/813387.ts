@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { forwardRef, useRef, useCallback, useId, useImperativeHandle } from "react";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { o as _$$o } from "../905/821217";
 import { E as _$$E } from "../905/172252";
 import { Y } from "../905/246212";
@@ -23,7 +23,7 @@ let y = e => {
         maxLength: e.data.maxLength
       });
     default:
-      return xb(e);
+      return throwTypeError(e);
   }
 };
 let $$b0 = forwardRef(function ({

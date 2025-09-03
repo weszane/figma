@@ -1,41 +1,42 @@
-import { xb } from "../figma_app/465776";
-import { allEqual } from "../figma_app/656233";
-import { ValueType, ExtendedValueType } from "../905/880730";
-import { VariablesBindings } from "../figma_app/13528";
-let $$o13 = [ValueType.COLOR, ValueType.FLOAT, ValueType.STRING, ValueType.BOOLEAN];
-let $$l5 = ["fontFamily", "fontSize", "fontStyle", "fontWeight", "letterSpacing", "lineHeight", "paragraphSpacing", "paragraphIndent"];
-let $$d4 = ["fontFamily", "fontSize", "fontStyle", "fontWeight", "letterSpacing", "lineHeight"];
-let $$c12 = ["height", "width", "characters", "itemSpacing", "paddingLeft", "paddingRight", "paddingTop", "paddingBottom", "visible", "cornerRadius", "topLeftRadius", "topRightRadius", "bottomLeftRadius", "bottomRightRadius", "strokeWeight", "strokeTopWeight", "strokeBottomWeight", "strokeLeftWeight", "strokeRightWeight", "minWidth", "maxWidth", "minHeight", "maxHeight", "counterAxisSpacing", "opacity", "gridRowGap", "gridColumnGap", ...$$l5];
-let $$u2 = ["color"];
-let $$p9 = ["color", "radius", "spread", "offsetX", "offsetY"];
-let $$m0 = ["radius"];
-let $$h6 = ["sectionSize"];
-let $$g1 = ["sectionSize", "count", "offset", "gutterSize"];
-let $$f7 = ["sectionSize", "count", "gutterSize"];
-let $$_11 = ["count", "offset", "gutterSize"];
-let $$A10 = ["value"];
+import { ExtendedValueType, ValueType } from '../905/880730';
+import { VariablesBindings } from '../figma_app/13528';
+import { throwTypeError } from '../figma_app/465776';
+import { allEqual } from '../figma_app/656233';
+
+let $$o13 = [ValueType.COLOR, ValueType.FLOAT, ValueType.STRING, ValueType.BOOLEAN] as const;
+let $$l5 = ['fontFamily', 'fontSize', 'fontStyle', 'fontWeight', 'letterSpacing', 'lineHeight', 'paragraphSpacing', 'paragraphIndent'] as const;
+let $$d4 = ['fontFamily', 'fontSize', 'fontStyle', 'fontWeight', 'letterSpacing', 'lineHeight'] as const;
+let $$c12 = ['height', 'width', 'characters', 'itemSpacing', 'paddingLeft', 'paddingRight', 'paddingTop', 'paddingBottom', 'visible', 'cornerRadius', 'topLeftRadius', 'topRightRadius', 'bottomLeftRadius', 'bottomRightRadius', 'strokeWeight', 'strokeTopWeight', 'strokeBottomWeight', 'strokeLeftWeight', 'strokeRightWeight', 'minWidth', 'maxWidth', 'minHeight', 'maxHeight', 'counterAxisSpacing', 'opacity', 'gridRowGap', 'gridColumnGap', ...$$l5] as const;
+let $$u2 = ['color'] as const;
+let $$p9 = ['color', 'radius', 'spread', 'offsetX', 'offsetY'] as const;
+let $$m0 = ['radius'] as const;
+let $$h6 = ['sectionSize'] as const;
+let $$g1 = ['sectionSize', 'count', 'offset', 'gutterSize'] as const;
+let $$f7 = ['sectionSize', 'count', 'gutterSize'] as const;
+let $$_11 = ['count', 'offset', 'gutterSize'] as const;
+let $$A10 = ['value'] as const;
 export function $$y8(e, t) {
   let i = function (e, t) {
     switch (e) {
       case ValueType.BOOLEAN:
-        return "boolean" == typeof t ? t : null;
+        return typeof t == 'boolean' ? t : null;
       case ValueType.STRING:
-        return "string" == typeof t ? t : null;
+        return typeof t == 'string' ? t : null;
       case ValueType.FLOAT:
-        if (Array.isArray(t)) return t.every(e => "number" == typeof e) && allEqual(t) ? t[0] : null;
-        return "number" == typeof t ? t : null;
+        if (Array.isArray(t)) return t.every(e => typeof e == 'number') && allEqual(t) ? t[0] : null;
+        return typeof t == 'number' ? t : null;
       case ValueType.COLOR:
       case ValueType.MAP:
-        return "object" == typeof t ? t : null;
+        return typeof t == 'object' ? t : null;
       case ValueType.SYMBOL_ID:
-        return "string" == typeof t ? t : null;
+        return typeof t == 'string' ? t : null;
       case ValueType.FONT_STYLE:
       case ValueType.TEXT_DATA:
       case ValueType.IMAGE:
       case ValueType.LINK:
       case ValueType.JS_RUNTIME_ALIAS:
       case ValueType.SLOT_CONTENT_ID:
-        return "object" == typeof t ? t : null;
+        return typeof t == 'object' ? t : null;
     }
   }(e, t);
   switch (e) {
@@ -49,7 +50,7 @@ export function $$y8(e, t) {
       return {
         resolvedType: e,
         type: ExtendedValueType.STRING,
-        value: i ?? VariablesBindings?.getDefaultStringVariableValue() ?? ""
+        value: i ?? VariablesBindings?.getDefaultStringVariableValue() ?? ''
       };
     case ValueType.FLOAT:
       return {
@@ -78,7 +79,7 @@ export function $$y8(e, t) {
       return {
         resolvedType: e,
         type: ExtendedValueType.SYMBOL_ID,
-        value: i ?? "SymbolId:-1:-1"
+        value: i ?? 'SymbolId:-1:-1'
       };
     case ValueType.FONT_STYLE:
       return {
@@ -117,37 +118,37 @@ export function $$y8(e, t) {
         value: i ?? {}
       };
     default:
-      xb(e, "Unknown VariableResolvedDataType");
+      throwTypeError(e, 'Unknown VariableResolvedDataType');
   }
 }
 export function $$b3(e) {
   switch (e) {
     case ValueType.BOOLEAN:
-      return "BOOLEAN";
+      return 'BOOLEAN';
     case ValueType.COLOR:
-      return "COLOR";
+      return 'COLOR';
     case ValueType.FLOAT:
-      return "FLOAT";
+      return 'FLOAT';
     case ValueType.STRING:
-      return "STRING";
+      return 'STRING';
     case ValueType.SYMBOL_ID:
-      return "SYMBOL_ID";
+      return 'SYMBOL_ID';
     case ValueType.MAP:
-      return "MAP";
+      return 'MAP';
     case ValueType.FONT_STYLE:
-      return "FONT_STYLE";
+      return 'FONT_STYLE';
     case ValueType.TEXT_DATA:
-      return "TEXT_DATA";
+      return 'TEXT_DATA';
     case ValueType.IMAGE:
-      return "IMAGE";
+      return 'IMAGE';
     case ValueType.LINK:
-      return "LINK";
+      return 'LINK';
     case ValueType.JS_RUNTIME_ALIAS:
-      return "JS_RUNTIME_ALIAS";
+      return 'JS_RUNTIME_ALIAS';
     case ValueType.SLOT_CONTENT_ID:
-      return "SLOT_CONTENT_ID";
+      return 'SLOT_CONTENT_ID';
     default:
-      xb(e);
+      throwTypeError(e);
   }
 }
 export const HC = $$m0;

@@ -8,6 +8,10 @@
 
 // Navigation and action processing types
 export interface NavigationAction {
+  resetScrollPosition: any
+  preserveScrollPosition: any
+  resetInteractiveComponents: any
+  resetVideoPosition: boolean
   type: string
   destinationId?: string | null
   navigation?: string | null
@@ -34,6 +38,8 @@ export interface TransitionConfig {
 }
 
 export interface EasingConfig {
+  easingFunctionSpring: { mass: any; stiffness: any; damping: any }
+  easingFunctionCubicBezier: { x1: any; y1: any; x2: any; y2: any }
   type: string
 }
 
@@ -272,7 +278,7 @@ export class AdvancedNavigationProcessor {
 
     if (nodeInfo) {
       action.destinationId = this.getNodeGuid(nodeInfo.guid)
-      
+
       // Handle overlay positioning
       if (navigationType === 'OVERLAY' && nodeInfo.overlayPositionType === 'MANUAL') {
         action.overlayRelativePosition = {
@@ -389,7 +395,7 @@ export class AdvancedNavigationProcessor {
   /**
    * Process easing configuration
    */
-  private processEasingConfig(e: any): EasingConfig {
+  private processEasingConfig(e: any) {
     const easingType = e.easingType || 'OUT_CUBIC'
 
     switch (easingType) {
@@ -543,8 +549,8 @@ export class AdvancedPropertyWriter {
    * Original function: writePropertyInner (472793.ts:1603-1660)
    */
   writePropertyInner(node: any, propertyName: string, value: any): void {
-    if (propertyName === 'widgetEvents' || 
-      propertyName === 'widgetInputBehavior' || 
+    if (propertyName === 'widgetEvents' ||
+      propertyName === 'widgetInputBehavior' ||
       propertyName === 'widgetTooltip') {
       this.writeWidgetProperty(node, propertyName, value)
     }

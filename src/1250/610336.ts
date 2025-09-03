@@ -1,4 +1,4 @@
-import { S9, xb } from "../figma_app/465776";
+import { returnSecond, throwTypeError } from "../figma_app/465776";
 import { getFeatureFlags } from "../905/601108";
 import { N } from "../figma_app/469468";
 import { t } from "../905/303541";
@@ -46,7 +46,7 @@ export function $$b3(e, t, n) {
     case null:
       return !1;
     default:
-      return S9(e, !1);
+      return returnSecond(e, !1);
   }
 }
 export function $$x2(e) {
@@ -80,7 +80,7 @@ export function $$y5(e) {
     case M.RECENTLY_ADDED_TEMPLATES:
       return t("community.resource_hub.recently_added_templates");
     default:
-      xb(e);
+      throwTypeError(e);
   }
 }
 export function $$v4(e) {
@@ -102,7 +102,7 @@ export function $$v4(e) {
     case M.LIBRARIES:
       return [];
     default:
-      xb(e);
+      throwTypeError(e);
   }
 }
 export const Fz = $$f0;

@@ -1,4 +1,4 @@
-import { KF } from "../figma_app/465776";
+import { debug } from "../figma_app/465776";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { $D } from "../905/11";
 import { rT } from "../905/557142";
@@ -27,7 +27,7 @@ export function $$c1(e, n) {
       pending: e.pending,
       userId: e.userId
     }
-  }), KF(!1, "toSinatraConfirmedRole received a pending or null user_id"));
+  }), debug(!1, "toSinatraConfirmedRole received a pending or null user_id"));
   let t = d.toSinatra(e);
   let s = W.toSinatra(n);
   return {
@@ -44,7 +44,7 @@ export function $$p0(e, n) {
       pending: e.pending,
       userId: e.userId
     }
-  }), KF(!1, "toSinatraPendingRole received a non-pending or non-null user_id"));
+  }), debug(!1, "toSinatraPendingRole received a non-pending or non-null user_id"));
   let t = d.toSinatra(e);
   return {
     ...t,

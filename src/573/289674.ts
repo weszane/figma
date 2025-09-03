@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { useRef, useMemo, useState, useCallback, useEffect } from "react";
 import { lV } from "../figma_app/617606";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { w as _$$w } from "../figma_app/970433";
 import { glU, K$p } from "../figma_app/763686";
 import { ClipboardContentType, ChatRole } from "../figma_app/175377";
@@ -159,7 +159,7 @@ class d {
         this.lastCommittedMessageIndex = e.lastCommittedMessageIndex;
         break;
       default:
-        xb(e);
+        throwTypeError(e);
     }
     this.onUpdate?.(this.exchange);
   }

@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback, useMemo, useEffect, useState, useLayoutEffect } from "react";
 import { wA, d4 } from "../vendor/514228";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { t as _$$t, tx } from "../905/303541";
 import { Jj, bY } from "../figma_app/2023";
 import { FPublicationStatusType, FTemplateCategoryType, FFileType } from "../figma_app/191312";
@@ -1856,7 +1856,7 @@ export function $$th0({
       });
       break;
     default:
-      xb(e);
+      throwTypeError(e);
   }
   return "loading" === status || "loading" === h.status ? null : jsx(_$$r3, {
     title: _$$t("community.publishing.publish_your_file_to_community")

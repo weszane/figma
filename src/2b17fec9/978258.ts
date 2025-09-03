@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { useState, useRef, useEffect, useMemo, useCallback } from "react";
 import { d4 } from "../vendor/514228";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { QOV, Ez5, cfv, glU } from "../figma_app/763686";
 import { r as _$$r } from "../905/249071";
 import { fp } from "../figma_app/27355";
@@ -147,7 +147,7 @@ function b({
       case cfv.RIGHT:
         return [Yh(e, 20), a ? tJ(e, t) : e.y];
       default:
-        xb(i);
+        throwTypeError(i);
     }
   }, [k, a]);
   let H = useCallback((e, t, i) => {

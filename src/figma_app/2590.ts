@@ -1,4 +1,4 @@
-import { xb, B1, vA } from "../figma_app/465776";
+import { throwTypeError, assertNotNullish, assert } from "../figma_app/465776";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { bq3 } from "../figma_app/763686";
 import { Ay } from "../vendor/159563";
@@ -22,7 +22,7 @@ export function $$g9(e) {
     case "PRESENTATION":
       return bq3.PRESENTATION;
     default:
-      xb(e);
+      throwTypeError(e);
   }
 }
 export function $$f11(e) {
@@ -58,7 +58,7 @@ export function $$I3(e) {
     rotation: t.rotation || "NONE"
   };
 }
-let S = (e) => "PRESET" === e.type ? e.presetIdentifier : "";
+let S = e => "PRESET" === e.type ? e.presetIdentifier : "";
 export function $$v0(e, t) {
   if ("NONE" === e) Y5.updateSelectionProperties({
     prototypeDevice: {
@@ -124,7 +124,7 @@ let $$x2 = nF((e, t) => {
   }
   let r = e.getState().selectedView;
   if ("prototype" === r.view) {
-    let n = Ay(r, (e) => {
+    let n = Ay(r, e => {
       void 0 === e.scalingInfo && (e.scalingInfo = {});
       t.hasOwnProperty("viewportScalingMode") && (e.scalingInfo.viewportScalingMode = t.viewportScalingMode);
       t.hasOwnProperty("contentScalingMode") && (e.scalingInfo.contentScalingMode = t.contentScalingMode);
@@ -148,8 +148,8 @@ nF((e, {
   showDeviceFrame: t
 }) => {
   let r = e.getState().selectedView;
-  B1(r, "selectedView must be defined to show device frame");
-  vA("prototype" === r.view, "must be in the view to show device frame");
+  assertNotNullish(r, "selectedView must be defined to show device frame");
+  assert("prototype" === r.view, "must be in the view to show device frame");
   let i = {
     ...r,
     showDeviceFrame: t
@@ -160,8 +160,8 @@ nF((e, {
   newDevice: t
 }) => {
   let r = e.getState().selectedView;
-  B1(r, "selectedView must be defined to set initial device frame");
-  vA("prototype" === r.view, "must be in the view to set initial device frame");
+  assertNotNullish(r, "selectedView must be defined to set initial device frame");
+  assert("prototype" === r.view, "must be in the view to set initial device frame");
   let i = {
     ...r,
     initialDevice: t,
@@ -173,8 +173,8 @@ nF((e, {
   newDevice: t
 }) => {
   let r = e.getState().selectedView;
-  B1(r, "selectedView must be defined to set override device frame");
-  vA("prototype" === r.view, "must be in the view to set override device frame");
+  assertNotNullish(r, "selectedView must be defined to set override device frame");
+  assert("prototype" === r.view, "must be in the view to set override device frame");
   let i = {
     ...r,
     overrideDevice: t

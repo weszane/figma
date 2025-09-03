@@ -78,7 +78,7 @@ let $$u4 = k({
   name: "str_replace_editor",
   trackingName: "str_replace_editor",
   parameters: z.object({
-    command: z.$$enum(["view", "create", "str_replace"]).describe("The commands to run. Allowed options are: `view`, `create`, `str_replace`."),
+    command: z.enum(["view", "create", "str_replace"]).describe("The commands to run. Allowed options are: `view`, `create`, `str_replace`."),
     path: z.string().describe("Absolute path to file or directory, relative to the root at /, e.g. `/App.tsx` or `/`."),
     file_text: z.string().optional().describe("Required parameter of `create` command, with the content of the file to be created."),
     old_str: z.string().optional().describe("Required parameter of `str_replace` command containing the string in `path` to replace."),
@@ -140,7 +140,7 @@ let f = k({
   name: "semantic_merge_editor",
   trackingName: "semantic_merge_editor",
   parameters: z.object({
-    command: z.$$enum(["view", "create", "edit"]).describe("The commands to run. Allowed options are: `view`, `create`, `edit`."),
+    command: z.enum(["view", "create", "edit"]).describe("The commands to run. Allowed options are: `view`, `create`, `edit`."),
     path: z.string().describe("Absolute path to file or directory, e.g. `/repo/file.py` or `/repo`."),
     file_text: z.string().optional().describe("Required parameter of `create` command, with the content of the file to be created."),
     semantic_edit_snippet: z.string().optional().describe(`Required parameter of \`edit\` command. The 'lazified' edit to an existing file.

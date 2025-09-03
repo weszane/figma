@@ -120,12 +120,12 @@ let $$Y32 = _$$z.object({
   editorType: Ip.filteredArray(_$$z.nativeEnum($$W5)).optional(),
   containsWidget: _$$z.boolean().optional(),
   widgetApi: _$$z.string().optional(),
-  permissions: Ip.filteredArray(_$$z.union([_$$z.$$enum($$A33), _$$z.$$enum($$S19)])).optional(),
+  permissions: Ip.filteredArray(_$$z.union([_$$z.enum($$A33), _$$z.enum($$S19)])).optional(),
   enableReadOnly: _$$z.boolean().optional(),
-  capabilities: Ip.filteredArray(_$$z.$$enum($$w4)).optional(),
+  capabilities: Ip.filteredArray(_$$z.enum($$w4)).optional(),
   codegenLanguages: _$$z.array(U).optional(),
   codegenPreferences: j.optional(),
-  documentAccess: _$$z.$$enum(["dynamic-page"]).optional()
+  documentAccess: _$$z.enum(["dynamic-page"]).optional()
 });
 (e => {
   e.PluginVersionSchema = _$$z.object({
@@ -335,8 +335,8 @@ export function $$em6(e, t) {
 export function $$eg30(e, t) {
   return t ? `GET_WIDGET_ALLOW_LIST_${e}_${t}` : `GET_WIDGET_ALLOW_LIST_${e}`;
 }
-let ef = _$$z.$$enum(["default", "textreview", "inspect", "codegen", "linkpreview", "auth"]);
-let eE = _$$z.union([_$$z.$$enum(["contextmenu", "filemenu", "runlast", "osmenu", "relaunch", "quick-actions", "universal-insert", "parameter-entry", "paste_from_url", "textreview", "handoff-relaunch", "handoff-panel", "codegen", "related-link-click", "related-link-preview", "related-link-auth", "pinned", "try-plugin-params", "auto-run"]), MM]);
+let ef = _$$z.enum(["default", "textreview", "inspect", "codegen", "linkpreview", "auth"]);
+let eE = _$$z.union([_$$z.enum(["contextmenu", "filemenu", "runlast", "osmenu", "relaunch", "quick-actions", "universal-insert", "parameter-entry", "paste_from_url", "textreview", "handoff-relaunch", "handoff-panel", "codegen", "related-link-click", "related-link-preview", "related-link-auth", "pinned", "try-plugin-params", "auto-run"]), MM]);
 let $$ey14 = _$$z.object({
   plugin: _$$z.union([$$$15, X]),
   command: _$$z.string(),

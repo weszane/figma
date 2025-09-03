@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useCallback, useMemo, useState, useEffect, useRef } from "react";
 import { d4 } from "../vendor/514228";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { lQ } from "../905/934246";
 import { t as _$$t } from "../905/150656";
 import { r as _$$r } from "../905/571838";
@@ -94,8 +94,8 @@ export function $$ef1({
       });
     }
   }, [o, l, f]);
-  let P = useCallback((e) => {
-    let t = new IntersectionObserver((e) => x(!1, e), {
+  let P = useCallback(e => {
+    let t = new IntersectionObserver(e => x(!1, e), {
       threshold: 1
     });
     e && t.observe(e);
@@ -103,8 +103,8 @@ export function $$ef1({
       t.disconnect();
     };
   }, [x]);
-  let j = useCallback((e) => {
-    let t = new IntersectionObserver((e) => x(!0, e), {
+  let j = useCallback(e => {
+    let t = new IntersectionObserver(e => x(!0, e), {
       threshold: 1
     });
     e && t.observe(e);
@@ -153,7 +153,7 @@ export function $$ef1({
   let eA = 0 === ev.length;
   let ex = !currentSearch && !b && (!I.length || kK());
   let [eN, eC] = useState(!1);
-  let ew = useCallback((e) => {
+  let ew = useCallback(e => {
     eC(e);
   }, []);
   let eO = !r && !s || ex;
@@ -248,7 +248,7 @@ export function $$ef1({
       })
     });
   }
-  let eG = (e) => {
+  let eG = e => {
     let t = e ? l : o;
     let r = e ? jsx(z6, {
       initialTab: Qx.COMMUNITY
@@ -413,7 +413,7 @@ export function $$eE0({
   });
   let [eR, eL] = fp(B1);
   let eP = Nv(currentSearch?.input.type === "input-text");
-  let eD = useCallback((e) => {
+  let eD = useCallback(e => {
     az.trackDefinedEvent("asset_search.misc_feature_usage", {
       aiResultsEnabled: eP,
       entryPoint: "actions-assets-tab",
@@ -498,7 +498,7 @@ export function $$eE0({
     numRecentItems: eV,
     isEmptySearchQuery: 0 === C.length
   });
-  let eH = useCallback((e) => {
+  let eH = useCallback(e => {
     switch (e) {
       case xA.COMPONENTS:
         d && cancelDebouncedFragmentTextSearch();
@@ -516,12 +516,12 @@ export function $$eE0({
         G1(C, !0) && (_debouncedFragmentTextSearch(C), _flushDebouncedFragmentTextSearch());
         break;
       default:
-        xb(e);
+        throwTypeError(e);
     }
     eU.setActiveTab(eF[e].id);
     m.current?.focus();
   }, [cancelDebouncedFragmentTextSearch, debouncedAssetSearch, eR, flushDebouncedAssetSearch, cancelDebouncedAssetSearch, debouncedFragmentTextSearch, flushDebouncedFragmentTextSearch, C, eU, eF, d, c, _cancelDebouncedFragmentTextSearch, _debouncedFragmentTextSearch, _flushDebouncedFragmentTextSearch]);
-  let ez = useCallback((e) => {
+  let ez = useCallback(e => {
     w(e);
     R(_$$g());
     (eU.activeTab === xA.COMPONENTS || 0 === e.length) && debouncedAssetSearch(e, eR);
@@ -570,7 +570,7 @@ export function $$eE0({
     })]
   }) : void 0;
   let eq = currentSearch && !eE;
-  let eJ = useCallback((e) => {
+  let eJ = useCallback(e => {
     d && jk(e);
   }, [d]);
   let eZ = _M({

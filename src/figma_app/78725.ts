@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { wA } from "../vendor/514228";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { Xr, fp } from "../figma_app/27355";
 import { Rs } from "../figma_app/288654";
 import { Lo, to } from "../905/156213";
@@ -177,7 +177,7 @@ let w = Ju(function ({
       });
       break;
     default:
-      xb(r);
+      throwTypeError(r);
   }
   switch (r) {
     case "stop-auto-run-from-user":
@@ -193,7 +193,7 @@ let w = Ju(function ({
       });
       break;
     default:
-      xb(r);
+      throwTypeError(r);
   }
   let N = hS({
     open: n,
@@ -265,7 +265,7 @@ export function $$O3(e) {
           })) : _$$s.updateUserAutoRunPluginId(t, FInheritanceType.OVERRIDE);
           break;
         default:
-          xb(e);
+          throwTypeError(e);
       }
     }, [u, h, o.loaded, o.plugin?.name, o.plugin?.plugin_id, c.loaded, c.autoRunPrefs, m.autoRunPrefs?.autoRunPluginBehavior, t, g, r])
   };

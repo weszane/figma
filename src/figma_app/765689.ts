@@ -1,4 +1,4 @@
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { z } from "../905/239603";
 import { FProductAccessType, FFileType, FPlanAccessType } from "../figma_app/191312";
 export let $$s4 = {
@@ -20,7 +20,7 @@ export function $$l7(e) {
     case FFileType.WHITEBOARD:
       return $$s4.WHITEBOARD;
     default:
-      xb(e);
+      throwTypeError(e);
   }
 }
 export function $$d8(e) {
@@ -43,7 +43,7 @@ export function $$c0(e) {
     case null:
       return null;
     default:
-      xb(e);
+      throwTypeError(e);
   }
 }
 export function $$u6(e) {

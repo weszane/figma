@@ -11,7 +11,7 @@ var $$o2 = (e => (e.TITLE = "title", e.BODY = "body", e.LABEL = "label", e))($$o
 var $$l4 = (e => (e.BOLD = "bold", e.MEDIUM = "medium", e.REGULAR = "regular", e))($$l4 || {});
 let d = z.object({
   value: z.number(),
-  units: z.$$enum(["RAW", "PIXELS", "PERCENT"])
+  units: z.enum(["RAW", "PIXELS", "PERCENT"])
 });
 let c = z.object({
   fontName: z.object({

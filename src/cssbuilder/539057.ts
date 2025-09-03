@@ -1,4 +1,4 @@
-import { wc } from "../figma_app/465776";
+import { throwError } from "../figma_app/465776";
 import { defaultCornerRadius, modalZ, secondaryModalZ, curatorTertiaryModalZ, topBarZ, templateModalTeamName } from "../figma_app/786175";
 let t = {
   display: [["block", "block"], ["flex", "flex"], ["grid", "grid"], ["hidden", "none"], ["inline", "inline"], ["inlineBlock", "inline-block"], ["inlineFlex", "inline-flex"]],
@@ -369,7 +369,7 @@ export class $$n0 extends a {
     return Object.entries(this.rules).map(([o, r]) => `${o.replace(/[A-Z]/g, o => `-${o.toLowerCase()}`)}: ${r}`).join("; ");
   }
   toString() {
-    wc("Used toString on StyleBuilder. Use `$` or `str` instead.");
+    throwError("Used toString on StyleBuilder. Use `$` or `str` instead.");
   }
   if(o, r, e) {
     return o ? this.add(r) : e ? this.add(e) : this;

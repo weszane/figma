@@ -1,4 +1,4 @@
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { l7 } from "../905/189185";
 import { UN } from "../905/700578";
 import { x1 } from "../905/714362";
@@ -54,7 +54,7 @@ export class $$u0 {
           this.displayErrorVisualBell("on_save");
           return n;
         default:
-          xb(e);
+          throwTypeError(e);
       }
     }
     n = t8({
@@ -124,7 +124,7 @@ export class $$u0 {
               this.displayErrorVisualBell("on_save");
               break;
             default:
-              xb(t);
+              throwTypeError(t);
           }
         });
       });
@@ -185,7 +185,7 @@ export class $$u0 {
           this.displayErrorVisualBell("on_save");
           return;
         default:
-          xb(i);
+          throwTypeError(i);
       }
       t = Lh({
         existingClassNames: t,

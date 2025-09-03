@@ -326,7 +326,7 @@ import { yZ } from "../905/407352";
 import { DP } from "../905/640017";
 import { v9 } from "../figma_app/623300";
 import { $y, dW } from "../figma_app/858013";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { g as _$$g4 } from "../905/880308";
 import { ry as _$$ry } from "../9410/534867";
 import { c2 } from "../905/382883";
@@ -8828,7 +8828,7 @@ function oN({
           r = "quick-actions-click";
           break;
         default:
-          xb(i);
+          throwTypeError(i);
       }
       a({
         args: {

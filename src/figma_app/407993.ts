@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { memo, createContext, useState, useRef, useMemo, useContext, useCallback, useEffect, useLayoutEffect, Fragment as _$$Fragment } from "react";
 import { createPortal } from "../vendor/944059";
 import { wA, d4 } from "../vendor/514228";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { r as _$$r } from "../905/840133";
 import { r as _$$r2 } from "../905/216849";
 import { H as _$$H } from "../905/56919";
@@ -374,7 +374,7 @@ function eg({
         e.action(i, p);
         break;
       default:
-        xb(a);
+        throwTypeError(a);
     }
   }, [I, y, p]);
   let z = l && !T;

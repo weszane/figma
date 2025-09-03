@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback, useRef } from "react";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { g as _$$g } from "../905/757007";
 import { generateRecordingKey } from "../figma_app/878298";
 import { Uz, xH } from "../905/63728";
@@ -108,7 +108,7 @@ let E = (e, t, i) => jsx(B, {
             case "UNDO_MAKE_CHANGES":
               return sd.UNDO_MAKE_CHANGES;
             default:
-              xb(e);
+              throwTypeError(e);
           }
         }(e.type)
       }), e.type) {
@@ -124,7 +124,7 @@ let E = (e, t, i) => jsx(B, {
           e.callback();
           break;
         default:
-          xb(e.type);
+          throwTypeError(e.type);
       }
     },
     variant: e.isPrimary ? "primary" : "secondary",
@@ -154,7 +154,7 @@ let E = (e, t, i) => jsx(B, {
         case "BACK":
           return _$$t("ai.back");
         default:
-          xb(e.type);
+          throwTypeError(e.type);
       }
     }(e)
   }, e.type))

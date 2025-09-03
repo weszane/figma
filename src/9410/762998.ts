@@ -1,5 +1,5 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { B1 } from "../figma_app/465776";
+import { assertNotNullish } from "../figma_app/465776";
 import { xOL } from "../figma_app/763686";
 import { UN } from "../905/700578";
 import o from "classnames";
@@ -40,7 +40,7 @@ export function $$g0({
   let y = 1;
   let b = !1;
   if (i) {
-    B1(s, "prototypeDevice should be set when device frame is shown");
+    assertNotNullish(s, "prototypeDevice should be set when device frame is shown");
     let {
       presetIdentifier,
       rotation
@@ -48,7 +48,7 @@ export function $$g0({
     let r = hY[presetIdentifier];
     if (o) {
       let e = r?.inlinePreviewInfo;
-      B1(e, "inlinePreviewDeviceData should exist since device is supported for inline preview");
+      assertNotNullish(e, "inlinePreviewDeviceData should exist since device is supported for inline preview");
     }
     f = r.url;
     x = c(presetIdentifier);

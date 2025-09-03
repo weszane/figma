@@ -11,13 +11,13 @@ let u = _$$s();
 let $$p4 = D((e, t, i, n) => {
   y("error", e, t, i, n);
 });
-export function $$m5(e, t, i, n) {
+export function $$m5(e, t, i, n?: any) {
   y("warning", e, t, i, n);
 }
-export function $$h0(e, t, i, n) {
+export function $$h0(e, t, i, n?: any) {
   y("debug", e, t, i, n);
 }
-export let $$g1 = D((e, t, i, n) => {
+export let $$g1 = D((e, t, i, n?: any) => {
   y("info", e, t, i, n);
 });
 export function $$f2(e, t, i, r, a, s, o) {

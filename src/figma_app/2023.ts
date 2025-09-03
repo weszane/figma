@@ -1,4 +1,4 @@
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { oA } from "../905/663269";
 import a from "../vendor/961736";
 import { A } from "../905/920142";
@@ -335,7 +335,7 @@ export function $$C1(e, t) {
           orgName: t.name
         });
       default:
-        xb(audience);
+        throwTypeError(audience);
     }
   }(e, t);
   let i = function (e) {
@@ -352,7 +352,7 @@ export function $$C1(e, t) {
       case "proto-view-only":
         return _$$t("file_access_row.can_view_prototypes");
       default:
-        xb(level);
+        throwTypeError(level);
     }
   }(e);
   return `${r} ${i}`;

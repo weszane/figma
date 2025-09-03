@@ -1,3 +1,4 @@
+import type { Fn } from '../../types/global'
 import { v as isValidVariableCollection } from '../905/219968'
 // Imports grouped and renamed for clarity and maintainability
 import { kiwiParserCodec } from '../905/294864'
@@ -11,40 +12,13 @@ import { AD as INVALID_GUID } from '../905/871411'
 import { documentStateTsApi } from '../905/880730'
 import { WI as normalizeOptions } from '../905/929949'
 import { Q as ChangeListenerQueue, P as ChangeListeners } from '../905/931498'
-import {
-  glU as DetachedComponentsManager,
-  XJn as FirstDraftManager,
-  fHP as GroupTypeEnum,
-  mHF as LinterManager,
-  NfO as NodeGroupManager,
-  CUU as SceneActions,
-  Pt4 as StyleKeyManager,
-  Egt as SymbolUpdater,
-  CWU as VariableManager,
-} from
-  '../figma_app/13528'
-import {
-  PWo as AssetTypeEnum,
-  iZB as ConstraintsFacetTsApiGenerated,
-  Sie as NodeContextEnum,
-  UNF as NodeTsApi,
-  Fk7 as NodeTsApiGenerated,
-  $DY as PrototypingFacetTsApiGenerated,
-  ppO as RenderableBaseFacetTsApiGenerated,
-  mSn as SceneGraphTsApi,
-  juq as SceneTypeEnum,
-  vNG as SceneUpdater,
-  KtY as StackFacetTsApiGenerated,
-  HzA as TrackingEnum,
-} from
-  '../figma_app/175377'
+import { glU as DetachedComponentsManager, XJn as FirstDraftManager, fHP as GroupTypeEnum, mHF as LinterManager, NfO as NodeGroupManager, CUU as SceneActions, Pt4 as StyleKeyManager, Egt as SymbolUpdater, CWU as VariableManager } from '../figma_app/13528'
+import { PWo as AssetTypeEnum, iZB as ConstraintsFacetTsApiGenerated, Sie as NodeContextEnum, UNF as NodeTsApi, Fk7 as NodeTsApiGenerated, $DY as PrototypingFacetTsApiGenerated, ppO as RenderableBaseFacetTsApiGenerated, mSn as SceneGraphTsApi, juq as SceneTypeEnum, vNG as SceneUpdater, KtY as StackFacetTsApiGenerated, HzA as TrackingEnum } from '../figma_app/175377'
 import { gr as VariableCollectionId, sD as VariableId } from '../figma_app/243058'
-import { KF as assert, xb as unreachable } from '../figma_app/465776'
-
-
+import { debug, throwTypeError } from '../figma_app/465776'
 
 /** @type {number} Index for history document. */
-export let HISTORY_DOCUMENT_INDEX: number = 1
+export let HISTORY_DOCUMENT_INDEX = 1
 
 /** Error thrown when SceneGraph APIs are unavailable. */
 // SceneGraphUnavailableError
@@ -60,13 +34,7 @@ export class NodeTsApiUnavailableError extends Error { }
  */
 // getApis
 function getApis() {
-  if (
-    !NodeTsApi
-    || !NodeTsApiGenerated
-    || !StackFacetTsApiGenerated
-    || !PrototypingFacetTsApiGenerated
-    || !RenderableBaseFacetTsApiGenerated
-    || !ConstraintsFacetTsApiGenerated) {
+  if (!NodeTsApi || !NodeTsApiGenerated || !StackFacetTsApiGenerated || !PrototypingFacetTsApiGenerated || !RenderableBaseFacetTsApiGenerated || !ConstraintsFacetTsApiGenerated) {
     throw new SceneGraphUnavailableError()
   }
   if (!SceneGraphTsApi)
@@ -87,18 +55,11 @@ function getApis() {
  */
 // TSSceneGraph
 export class TSSceneGraph {
-  /** @private */
   private _nodeContext: any
   sceneType: any
-  getSceneType: () => any
-  getSceneTypeDebugString: () => any
-  get: (id: string) => any;
-  getOrThrow: (id: string) => any
-  getRoot: () => any
-  getInternalCanvas: () => any
-  setCurrentPage_DEPRECATED: (pageGuid: string) => void
-  changeListeners: ChangeListeners<any>
-  deleteListeners: Set<Function>
+  changeListeners: import('/Users/allen/github/fig/src/905/931498').$$a0
+  deleteListeners: Set<Fn>
+  /** @private */
 
   /** Returns the current node context. */
   get nodeContext() {
@@ -109,7 +70,7 @@ export class TSSceneGraph {
   get scene() {
     if (this.sceneType === sceneDocumentType)
       return documentStateTsApi.getActiveDocument()
-    assert(typeof this.sceneType !== 'symbol', 'this.sceneType cannot be Symbol')
+    debug(typeof this.sceneType !== 'symbol', 'this.sceneType cannot be Symbol')
     switch (this.sceneType) {
       case SceneTypeEnum.DETACHED_COMPONENTS:
         return DetachedComponentsManager.getDetachedComponentsScene()
@@ -126,7 +87,7 @@ export class TSSceneGraph {
       case SceneTypeEnum.AUTO_SUGGEST:
         throw new Error('Auto suggest scene should be retrieved via TSAutoSuggestSceneGraph')
       default:
-        unreachable(this.sceneType)
+        throwTypeError(this.sceneType)
     }
   }
 
@@ -144,7 +105,7 @@ export class TSSceneGraph {
    * Returns nodes for the given array of IDs.
    * @param ids - Array of node IDs.
    */
-  getNodes(ids: string[]) {
+  getNodes(ids) {
     return ids.map(id => this.get(id)).filter(node => node != null)
   }
 
@@ -152,29 +113,18 @@ export class TSSceneGraph {
    * Gets a node from a stable path.
    * @param path - The stable path.
    */
-  getFromStablePath(path: string) {
-    const unstable = NodeTsApi?.setGlobalUnstableNodeByStablePath(
-      this.scene,
-      path,
-      this.nodeContext,
-    )
-    return NodeTsApi?.exists(this.nodeContext) && unstable
-      ? this.getInternal(unstable, false)
-      : null
+  getFromStablePath(path) {
+    const unstable = NodeTsApi?.setGlobalUnstableNodeByStablePath(this.scene, path, this.nodeContext)
+    return NodeTsApi?.exists(this.nodeContext) && unstable ? this.getInternal(unstable, false) : null
   }
 
   /**
    * Gets a node from a developer-friendly ID.
    * @param id - The developer-friendly ID.
    */
-  getFromDeveloperFriendlyId(id: string) {
-    const unstable = NodeTsApi?.setGlobalUnstableNodeByDeveloperFriendlyId(
-      this.scene,
-      id,
-    )
-    return NodeTsApi?.exists(this.nodeContext) && unstable
-      ? this.getInternal(unstable, false)
-      : null
+  getFromDeveloperFriendlyId(id) {
+    const unstable = NodeTsApi?.setGlobalUnstableNodeByDeveloperFriendlyId(this.scene, id)
+    return NodeTsApi?.exists(this.nodeContext) && unstable ? this.getInternal(unstable, false) : null
   }
 
   /** Gets the current page node. */
@@ -187,7 +137,7 @@ export class TSSceneGraph {
    * Sets the current page asynchronously.
    * @param pageGuid - The page GUID.
    */
-  async setCurrentPageAsync(pageGuid: string) {
+  async setCurrentPageAsync(pageGuid) {
     if (this.sceneType !== sceneDocumentType)
       throw new Error('TSSceneGraph.setCurrentPage - Not implemented except for current document')
     const promise = new Promise((resolve) => {
@@ -203,7 +153,7 @@ export class TSSceneGraph {
    * Sets the current page from a node asynchronously.
    * @param nodeGuid - The node GUID.
    */
-  async setCurrentPageFromNodeAsync(nodeGuid: string) {
+  async setCurrentPageFromNodeAsync(nodeGuid) {
     if (this.sceneType !== sceneDocumentType)
       throw new Error('TSSceneGraph.setCurrentPage - Not implemented except for current document')
     const promise = new Promise((resolve) => {
@@ -218,21 +168,17 @@ export class TSSceneGraph {
    * @param type - The node type.
    * @param options - Creation options.
    */
-  createNode(
-    type: string,
-    options = {
-      tracking: TrackingEnum.TRACK,
-    },
-  ) {
+  createNode(type, options = {
+    tracking: TrackingEnum.TRACK,
+  }) {
     const nodeType = kiwiParserCodec.NodeType[type]
     let guid = null
     if (SceneActions) {
       guid = SceneActions.createNode(nodeType, options, this.nodeContext, this.scene)
     }
-    else
-      if (SceneGraphTsApi) {
-        guid = SceneGraphTsApi.createNode(nodeType, options, this.scene)
-      }
+    else if (SceneGraphTsApi) {
+      guid = SceneGraphTsApi.createNode(nodeType, options, this.scene)
+    }
     if (!guid)
       throw new Error(`Cannot create node with type ${type}`)
     return this.getInternal(guid, false)
@@ -243,12 +189,9 @@ export class TSSceneGraph {
    * @param svg - SVG string.
    * @param options - Creation options.
    */
-  createNodeFromSVG(
-    svg: string,
-    options = {
-      tracking: TrackingEnum.TRACK,
-    },
-  ) {
+  createNodeFromSVG(svg, options = {
+    tracking: TrackingEnum.TRACK,
+  }) {
     const guid = SceneActions?.createNodeFromSVG(svg, options, this.nodeContext, this.scene)
     if (!guid)
       throw new Error('Cannot create node from SVG')
@@ -259,7 +202,7 @@ export class TSSceneGraph {
    * Creates a component from a node.
    * @param nodeGuid - The node GUID.
    */
-  createComponentFromNode(nodeGuid: string) {
+  createComponentFromNode(nodeGuid) {
     const guid = SceneActions?.createSymbolFromNode(nodeGuid, this.nodeContext)
     if (!guid)
       throw new Error(`Cannot create component from node ${nodeGuid}`)
@@ -270,7 +213,7 @@ export class TSSceneGraph {
    * Checks if a developer-friendly ID is a GUID path.
    * @param id - The ID to check.
    */
-  isDeveloperFriendlyIdAGuidPath(id: string) {
+  isDeveloperFriendlyIdAGuidPath(id) {
     return SceneActions?.isDeveloperFriendlyIdAGuidPath(id) ?? false
   }
 
@@ -278,7 +221,7 @@ export class TSSceneGraph {
    * Gets GUID from developer-friendly ID.
    * @param id - The developer-friendly ID.
    */
-  guidFromDeveloperFriendlyId(id: string) {
+  guidFromDeveloperFriendlyId(id) {
     return SceneActions?.guidFromDeveloperFriendlyId(id, this.scene) ?? ''
   }
 
@@ -286,7 +229,7 @@ export class TSSceneGraph {
    * Gets developer-friendly ID from GUID.
    * @param guid - The GUID.
    */
-  developerFriendlyIdFromGuid(guid: string) {
+  developerFriendlyIdFromGuid(guid) {
     return SceneActions?.developerFriendlyIdFromGuid(guid, this.scene) ?? ''
   }
 
@@ -294,7 +237,7 @@ export class TSSceneGraph {
    * Sets the change listeners config.
    * @param config - The config object.
    */
-  setChangeListenersConfig(config: any) {
+  setChangeListenersConfig(config) {
     this.changeListeners.config = config
   }
 
@@ -303,7 +246,7 @@ export class TSSceneGraph {
    * @param event - The event name.
    * @param handler - The handler function.
    */
-  onChange(event: string, handler: Function) {
+  onChange(event, handler) {
     return this.changeListeners.add(event, handler)
   }
 
@@ -311,7 +254,7 @@ export class TSSceneGraph {
    * Adds a delete event handler.
    * @param handler - The handler function.
    */
-  onDelete(handler: Function) {
+  onDelete(handler) {
     this.deleteListeners.add(handler)
     return () => this.deleteListeners?.delete(handler)
   }
@@ -325,7 +268,7 @@ export class TSSceneGraph {
    * Triggers all delete callbacks.
    * @param arg - Argument to pass to callbacks.
    */
-  triggerDeleteCallbacks(arg: any) {
+  triggerDeleteCallbacks(arg) {
     for (const cb of this.deleteListeners) cb(arg)
   }
 
@@ -333,7 +276,7 @@ export class TSSceneGraph {
    * Gets a variable node by ID.
    * @param id - The variable ID.
    */
-  getVariableNode(id: string) {
+  getVariableNode(id) {
     return this.getVariableFacetInternal(id, true) ?? undefined
   }
 
@@ -341,7 +284,7 @@ export class TSSceneGraph {
    * Gets a code file node by asset ID.
    * @param assetId - The asset ID.
    */
-  getCodeFileNode(assetId: string) {
+  getCodeFileNode(assetId) {
     if (!assetId)
       return
     if (!SceneGraphTsApi)
@@ -355,7 +298,7 @@ export class TSSceneGraph {
    * Gets a code component node by asset ID.
    * @param assetId - The asset ID.
    */
-  getCodeComponentNode(assetId: string) {
+  getCodeComponentNode(assetId) {
     if (!assetId)
       return
     if (!SceneGraphTsApi)
@@ -369,15 +312,8 @@ export class TSSceneGraph {
    * Gets all local variable nodes.
    * @param options - Options for filtering.
    */
-  getLocalVariableNodes(options?: { includeSoftDeleted?: boolean, resolvedDataType?: any }) {
-    return (VariableManager?.getLocalVariablesInfoForScene(this.scene) ?? [])
-      .map(e => this.getVariableFacetInternal(e.id, false))
-      .filter(t => !!options?.includeSoftDeleted || !t.isSoftDeleted)
-      .filter(
-        t =>
-          options?.resolvedDataType === void 0
-          || t.variableResolvedType === options.resolvedDataType,
-      )
+  getLocalVariableNodes(options) {
+    return (VariableManager?.getLocalVariablesInfoForScene(this.scene) ?? []).map(e => this.getVariableFacetInternal(e.id, false)).filter(t => !!options?.includeSoftDeleted || !t.isSoftDeleted).filter(t => options?.resolvedDataType === void 0 || t.variableResolvedType === options.resolvedDataType)
   }
 
   /**
@@ -386,7 +322,7 @@ export class TSSceneGraph {
    * @param type - Variable type.
    * @param options - Creation options.
    */
-  createVariable(name: string, type: string, options: any) {
+  createVariable(name, type, options) {
     const opts = normalizeOptions(options)
     const guid = SceneActions?.createVariable(this.scene, name, type, opts)
     const id = guid ? VariableId.fromString(guid) : null
@@ -399,7 +335,7 @@ export class TSSceneGraph {
    * Gets a variable collection node by ID.
    * @param id - The collection ID.
    */
-  getVariableCollectionNode(id: string) {
+  getVariableCollectionNode(id) {
     return this.getVariableCollectionFacetInternal(id, true) ?? undefined
   }
 
@@ -407,17 +343,15 @@ export class TSSceneGraph {
    * Gets all local variable collection nodes.
    * @param options - Options for filtering.
    */
-  getLocalVariableCollectionNodes(options?: { includeSoftDeleted?: boolean }) {
-    return (VariableManager?.getLocalVariableSetsInfoForScene(this.scene) ?? [])
-      .map(e => this.getVariableCollectionFacetInternal(e.id, false))
-      .filter(t => !!options?.includeSoftDeleted || !t.isSoftDeleted)
+  getLocalVariableCollectionNodes(options) {
+    return (VariableManager?.getLocalVariableSetsInfoForScene(this.scene) ?? []).map(e => this.getVariableCollectionFacetInternal(e.id, false)).filter(t => !!options?.includeSoftDeleted || !t.isSoftDeleted)
   }
 
   /**
    * Creates a variable collection.
    * @param options - Creation options.
    */
-  createVariableCollection(options: any) {
+  createVariableCollection(options) {
     let guid = SceneActions?.createVariableCollection(this.scene, options)
     let id = guid ? VariableCollectionId.fromString(guid) : null
     if (!id)
@@ -429,7 +363,7 @@ export class TSSceneGraph {
    * Gets a style node by ID.
    * @param id - The style ID.
    */
-  getStyleNode(id: string) {
+  getStyleNode(id) {
     return this.getStyleFacetInternal(id, true) ?? undefined
   }
 
@@ -437,13 +371,9 @@ export class TSSceneGraph {
    * Gets a style node by reference.
    * @param ref - The style reference.
    */
-  getStyleNodeByRef(ref: { key: string, version: string }) {
+  getStyleNodeByRef(ref) {
     if (StyleKeyManager) {
-      return (
-        this.getStyleFacetInternal(
-          StyleKeyManager.styleIdFromKeyAndVersion(this.scene, ref.key, ref.version),
-          true,
-        ) ?? undefined)
+      return this.getStyleFacetInternal(StyleKeyManager.styleIdFromKeyAndVersion(this.scene, ref.key, ref.version), true) ?? undefined
     }
   }
 
@@ -451,25 +381,21 @@ export class TSSceneGraph {
    * Gets all local style nodes of a given type.
    * @param type - The style type.
    */
-  getLocalStyleNodes(type: string) {
+  getLocalStyleNodes(type) {
     let styleType = kiwiParserCodec.StyleType[type]
     if (typeof styleType !== 'number')
       throw new Error('Invalid style type')
-    return (DetachedComponentsManager ? DetachedComponentsManager.getAllLocalStyles(this.scene, styleType) : [])
-      .map((e: any) =>
-        this.getStyleNodeByRef({
-          key: e.styleKey,
-          version: e.versionHash,
-        }),
-      )
-      .filter((e: any) => !!e)
+    return (DetachedComponentsManager ? DetachedComponentsManager.getAllLocalStyles(this.scene, styleType) : []).map(e => this.getStyleNodeByRef({
+      key: e.styleKey,
+      version: e.versionHash,
+    })).filter(e => !!e)
   }
 
   /**
    * Creates a style.
    * @param type - The style type.
    */
-  createStyle(type: string) {
+  createStyle(type) {
     let styleType = kiwiParserCodec.StyleType[type]
     if (typeof styleType !== 'number')
       throw new Error('Invalid style type')
@@ -478,10 +404,7 @@ export class TSSceneGraph {
     let ref = SceneActions.createStyle(styleType, this.nodeContext, this.scene)
     if (!ref)
       throw new Error('Failed to create style')
-    return this.getStyleFacetInternal(
-      StyleKeyManager.styleIdFromKeyAndVersion(this.scene, ref.key, ref.version),
-      false,
-    )
+    return this.getStyleFacetInternal(StyleKeyManager.styleIdFromKeyAndVersion(this.scene, ref.key, ref.version), false)
   }
 
   /** Gets directly selected nodes on the current page. */
@@ -494,21 +417,13 @@ export class TSSceneGraph {
    * @param guid - The node GUID.
    * @param setUnstable - Whether to set unstable node context.
    */
-  getInternal(guid: string, setUnstable: boolean) {
+  getInternal(guid, setUnstable) {
     if (!guid)
       return null
     let apis = getApis()
     let n = parseInteger(guid, 0)
     let i = parseInteger(guid, guid.indexOf(':') + 1)
-    if (
-      setUnstable && (
-        apis.NodeTsApi.setGlobalUnstableNodeByID(
-          this.scene,
-          n,
-          i,
-          this.nodeContext,
-        ),
-        !apis.NodeTsApi.exists(this.nodeContext))) {
+    if (setUnstable && (apis.NodeTsApi.setGlobalUnstableNodeByID(this.scene, n, i, this.nodeContext), !apis.NodeTsApi.exists(this.nodeContext))) {
       return null
     }
     return new NodeWrapper(guid, this, apis)
@@ -519,23 +434,14 @@ export class TSSceneGraph {
    * @param id - The variable ID.
    * @param setUnstable - Whether to set unstable node context.
    */
-  getVariableFacetInternal(id: string, setUnstable: boolean) {
+  getVariableFacetInternal(id, setUnstable) {
     if (!id)
       return null
     let apis = getApis()
-    let guid
-      = apis.SceneGraphTsApi.getGUIDForAssetId(this.scene, id, AssetTypeEnum.VARIABLE) ?? INVALID_GUID
+    let guid = apis.SceneGraphTsApi.getGUIDForAssetId(this.scene, id, AssetTypeEnum.VARIABLE) ?? INVALID_GUID
     let n = parseInteger(guid, 0)
     let s = parseInteger(guid, guid.indexOf(':') + 1)
-    if (
-      setUnstable && (
-        apis.NodeTsApi.setGlobalUnstableNodeByID(
-          this.scene,
-          n,
-          s,
-          this.nodeContext,
-        ),
-        !apis.NodeTsApi.exists(this.nodeContext))) {
+    if (setUnstable && (apis.NodeTsApi.setGlobalUnstableNodeByID(this.scene, n, s, this.nodeContext), !apis.NodeTsApi.exists(this.nodeContext))) {
       return null
     }
     let node = new NodeWrapper(guid, this, apis)
@@ -547,24 +453,14 @@ export class TSSceneGraph {
    * @param id - The collection ID.
    * @param setUnstable - Whether to set unstable node context.
    */
-  getVariableCollectionFacetInternal(id: string, setUnstable: boolean) {
+  getVariableCollectionFacetInternal(id, setUnstable) {
     if (!id)
       return null
     let apis = getApis()
-    let guid
-      = apis.SceneGraphTsApi.getGUIDForAssetId(this.scene, id, AssetTypeEnum.VARIABLE_SET)
-        ?? INVALID_GUID
+    let guid = apis.SceneGraphTsApi.getGUIDForAssetId(this.scene, id, AssetTypeEnum.VARIABLE_SET) ?? INVALID_GUID
     let n = parseInteger(guid, 0)
     let s = parseInteger(guid, guid.indexOf(':') + 1)
-    if (
-      setUnstable && (
-        apis.NodeTsApi.setGlobalUnstableNodeByID(
-          this.scene,
-          n,
-          s,
-          this.nodeContext,
-        ),
-        !apis.NodeTsApi.exists(this.nodeContext))) {
+    if (setUnstable && (apis.NodeTsApi.setGlobalUnstableNodeByID(this.scene, n, s, this.nodeContext), !apis.NodeTsApi.exists(this.nodeContext))) {
       return null
     }
     let node = new NodeWrapper(guid, this, apis)
@@ -576,22 +472,14 @@ export class TSSceneGraph {
    * @param id - The style ID.
    * @param setUnstable - Whether to set unstable node context.
    */
-  getStyleFacetInternal(id: string, setUnstable: boolean) {
+  getStyleFacetInternal(id, setUnstable) {
     if (!id)
       return null
     let apis = getApis()
     let guid = apis.SceneGraphTsApi.getGUIDForAssetId(this.scene, id, AssetTypeEnum.STYLE) ?? INVALID_GUID
     let n = parseInteger(guid, 0)
     let s = parseInteger(guid, guid.indexOf(':') + 1)
-    if (
-      setUnstable && (
-        apis.NodeTsApi.setGlobalUnstableNodeByID(
-          this.scene,
-          n,
-          s,
-          this.nodeContext,
-        ),
-        !apis.NodeTsApi.exists(this.nodeContext))) {
+    if (setUnstable && (apis.NodeTsApi.setGlobalUnstableNodeByID(this.scene, n, s, this.nodeContext), !apis.NodeTsApi.exists(this.nodeContext))) {
       return null
     }
     let node = new NodeWrapper(guid, this, apis)
@@ -603,7 +491,7 @@ export class TSSceneGraph {
    * @param nodes - Array of node IDs.
    * @param action - The styling action.
    */
-  applyTextStylingActionToNodes(nodes: string[], action: any) {
+  applyTextStylingActionToNodes(nodes, action) {
     return SceneActions?.applyTextStylingActionToNodes(nodes, this.nodeContext, action)
   }
 
@@ -617,7 +505,7 @@ export class TSSceneGraph {
    * Sets the slide grid.
    * @param grid - 2D array of nodes.
    */
-  setSlideGrid(grid: any[][]) {
+  setSlideGrid(grid) {
     let mapped = grid.map(row => row.map(node => node.guid))
     SceneActions?.setSlideGrid(mapped, this.nodeContext, this.scene)
   }
@@ -626,7 +514,7 @@ export class TSSceneGraph {
    * Updates derived symbol data on primary instances.
    * @param nodes - Array of nodes.
    */
-  updateDerivedSymbolDataOnPrimaryInstances(nodes: any[]) {
+  updateDerivedSymbolDataOnPrimaryInstances(nodes) {
     SymbolUpdater?.updateDerivedSymbolDataOnPrimaryInstances(nodes, this.scene)
   }
 
@@ -640,7 +528,7 @@ export class TSSceneGraph {
    * @param fn - The function to run.
    * @param args - Arguments to pass.
    */
-  runWithPluginContext<T>(fn: (...args: any[]) => T, ...args: any[]): T {
+  runWithPluginContext(fn, ...args) {
     let prevContext = this._nodeContext
     this._nodeContext = NodeContextEnum.PLUGIN
     try {
@@ -657,15 +545,8 @@ export class TSSceneGraph {
    * @param session - Session info.
    * @param parentId - Parent ID.
    */
-  combineAsVariants(nodes: any[], session: any, parentId?: any) {
-    let guid = NodeGroupManager.groupNodes(
-      GroupTypeEnum.STATE_GROUP,
-      nodes.map(n => n.guid),
-      session.sessionID,
-      session.localID,
-      parentId ?? -1,
-      this.scene,
-    )
+  combineAsVariants(nodes, session, parentId) {
+    let guid = NodeGroupManager.groupNodes(GroupTypeEnum.STATE_GROUP, nodes.map(n => n.guid), session.sessionID, session.localID, parentId ?? -1, this.scene)
     return this.getInternal(guid, false)
   }
 
@@ -675,15 +556,8 @@ export class TSSceneGraph {
    * @param session - Session info.
    * @param parentId - Parent ID.
    */
-  group(nodes: any[], session: any, parentId?: any) {
-    let guid = NodeGroupManager.groupNodes(
-      GroupTypeEnum.GROUP,
-      nodes.map(n => n.guid),
-      session.sessionID,
-      session.localID,
-      parentId ?? -1,
-      this.scene,
-    )
+  group(nodes, session, parentId) {
+    let guid = NodeGroupManager.groupNodes(GroupTypeEnum.GROUP, nodes.map(n => n.guid), session.sessionID, session.localID, parentId ?? -1, this.scene)
     return this.getInternal(guid, false)
   }
 
@@ -693,15 +567,8 @@ export class TSSceneGraph {
    * @param session - Session info.
    * @param parentId - Parent ID.
    */
-  union(nodes: any[], session: any, parentId?: any) {
-    let guid = NodeGroupManager.groupNodes(
-      GroupTypeEnum.UNION,
-      nodes.map(n => n.guid),
-      session.sessionID,
-      session.localID,
-      parentId ?? -1,
-      this.scene,
-    )
+  union(nodes, session, parentId) {
+    let guid = NodeGroupManager.groupNodes(GroupTypeEnum.UNION, nodes.map(n => n.guid), session.sessionID, session.localID, parentId ?? -1, this.scene)
     return this.getInternal(guid, false)
   }
 
@@ -711,15 +578,8 @@ export class TSSceneGraph {
    * @param session - Session info.
    * @param parentId - Parent ID.
    */
-  subtract(nodes: any[], session: any, parentId?: any) {
-    let guid = NodeGroupManager.groupNodes(
-      GroupTypeEnum.SUBTRACT,
-      nodes.map(n => n.guid),
-      session.sessionID,
-      session.localID,
-      parentId ?? -1,
-      this.scene,
-    )
+  subtract(nodes, session, parentId) {
+    let guid = NodeGroupManager.groupNodes(GroupTypeEnum.SUBTRACT, nodes.map(n => n.guid), session.sessionID, session.localID, parentId ?? -1, this.scene)
     return this.getInternal(guid, false)
   }
 
@@ -729,15 +589,8 @@ export class TSSceneGraph {
    * @param session - Session info.
    * @param parentId - Parent ID.
    */
-  intersect(nodes: any[], session: any, parentId?: any) {
-    let guid = NodeGroupManager.groupNodes(
-      GroupTypeEnum.INTERSECT,
-      nodes.map(n => n.guid),
-      session.sessionID,
-      session.localID,
-      parentId ?? -1,
-      this.scene,
-    )
+  intersect(nodes, session, parentId) {
+    let guid = NodeGroupManager.groupNodes(GroupTypeEnum.INTERSECT, nodes.map(n => n.guid), session.sessionID, session.localID, parentId ?? -1, this.scene)
     return this.getInternal(guid, false)
   }
 
@@ -747,15 +600,8 @@ export class TSSceneGraph {
    * @param session - Session info.
    * @param parentId - Parent ID.
    */
-  exclude(nodes: any[], session: any, parentId?: any) {
-    let guid = NodeGroupManager.groupNodes(
-      GroupTypeEnum.XOR,
-      nodes.map(n => n.guid),
-      session.sessionID,
-      session.localID,
-      parentId ?? -1,
-      this.scene,
-    )
+  exclude(nodes, session, parentId) {
+    let guid = NodeGroupManager.groupNodes(GroupTypeEnum.XOR, nodes.map(n => n.guid), session.sessionID, session.localID, parentId ?? -1, this.scene)
     return this.getInternal(guid, false)
   }
 
@@ -765,14 +611,8 @@ export class TSSceneGraph {
    * @param session - Session info.
    * @param parentId - Parent ID.
    */
-  flatten(nodes: any[], session?: any, parentId?: any) {
-    let guid = NodeGroupManager.flattenNodes(
-      nodes.map(n => n.guid),
-      session?.sessionID ?? -1,
-      session?.localID ?? -1,
-      parentId ?? -1,
-      this.scene,
-    )
+  flatten(nodes, session, parentId) {
+    let guid = NodeGroupManager.flattenNodes(nodes.map(n => n.guid), session?.sessionID ?? -1, session?.localID ?? -1, parentId ?? -1, this.scene)
     return this.getInternal(guid, false)
   }
 
@@ -780,10 +620,8 @@ export class TSSceneGraph {
    * Ungroups a node.
    * @param node - The group node.
    */
-  ungroup(node: any) {
-    return NodeGroupManager.ungroupNode(node.guid, this.scene).map((guid: string) =>
-      this.getInternal(guid, false),
-    )
+  ungroup(node) {
+    return NodeGroupManager.ungroupNode(node.guid, this.scene).map(guid => this.getInternal(guid, false))
   }
 
   /**
@@ -791,47 +629,50 @@ export class TSSceneGraph {
    * @param nodeContext - The node context.
    * @param sceneType - The scene type.
    */
-  constructor(nodeContext: any, sceneType: any = sceneDocumentType) {
+  constructor(nodeContext, sceneType = sceneDocumentType) {
     this.sceneType = sceneType
-    this.getSceneType = () => this.sceneType
-    this.getSceneTypeDebugString = () => {
-      if (this.sceneType === sceneDocumentType)
-        return 'CURRENT_DOCUMENT'
-      assert(typeof this.sceneType !== 'symbol', 'this.sceneType cannot be Symbol')
-      switch (this.sceneType) {
-        case SceneTypeEnum.DETACHED_COMPONENTS:
-          return 'DETACHED_COMPONENTS'
-        case SceneTypeEnum.LIVE_FILE:
-          return 'LIVE_FILE'
-        case SceneTypeEnum.HISTORY:
-          return 'HISTORY'
-        case SceneTypeEnum.PLAYGROUND:
-          return 'PLAYGROUND'
-        case SceneTypeEnum.FIRST_DRAFT:
-          return 'FIRST_DRAFT'
-        case SceneTypeEnum.LINTER:
-          return 'LINTER'
-        case SceneTypeEnum.AUTO_SUGGEST:
-          return 'AUTO_SUGGEST'
-        default:
-          unreachable(this.sceneType)
-      }
-    }
-    this.get = (id: string) => this.getInternal(id, true)
-    this.getOrThrow = (id: string) => this.getInternal(id, false)
-    this.getRoot = () => this.getInternal('0:0', false)
-    this.getInternalCanvas = () => {
-      let guid = SceneGraphTsApi?.getInternalCanvas(this.scene)
-      return guid ? this.getInternal(guid, false) : null
-    }
-    this.setCurrentPage_DEPRECATED = (pageGuid: string) => {
-      let err = SceneActions.setCurrentPageAsync(pageGuid, this.nodeContext)
-      if (err)
-        throw new Error(err)
-    }
     this.changeListeners = new ChangeListeners(ChangeListenerQueue)
     this.deleteListeners = new Set()
     this._nodeContext = nodeContext
+  }
+
+  getSceneType = () => this.sceneType
+  getSceneTypeDebugString = () => {
+    if (this.sceneType === sceneDocumentType)
+      return 'CURRENT_DOCUMENT'
+    debug(typeof this.sceneType !== 'symbol', 'this.sceneType cannot be Symbol')
+    switch (this.sceneType) {
+      case SceneTypeEnum.DETACHED_COMPONENTS:
+        return 'DETACHED_COMPONENTS'
+      case SceneTypeEnum.LIVE_FILE:
+        return 'LIVE_FILE'
+      case SceneTypeEnum.HISTORY:
+        return 'HISTORY'
+      case SceneTypeEnum.PLAYGROUND:
+        return 'PLAYGROUND'
+      case SceneTypeEnum.FIRST_DRAFT:
+        return 'FIRST_DRAFT'
+      case SceneTypeEnum.LINTER:
+        return 'LINTER'
+      case SceneTypeEnum.AUTO_SUGGEST:
+        return 'AUTO_SUGGEST'
+      default:
+        throwTypeError(this.sceneType)
+    }
+  }
+
+  get = id => this.getInternal(id, true)
+  getOrThrow = id => this.getInternal(id, false)
+  getRoot = () => this.getInternal('0:0', false)
+  getInternalCanvas = () => {
+    let guid = SceneGraphTsApi?.getInternalCanvas(this.scene)
+    return guid ? this.getInternal(guid, false) : null
+  }
+
+  setCurrentPage_DEPRECATED = (pageGuid) => {
+    let err = SceneActions.setCurrentPageAsync(pageGuid, this.nodeContext)
+    if (err)
+      throw new Error(err)
   }
 }
 

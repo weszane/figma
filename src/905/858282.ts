@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { Fragment as _$$Fragment } from "react";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { Ay } from "../figma_app/272902";
 import o from "classnames";
 import { A as _$$A } from "../vendor/518290";
@@ -92,7 +92,7 @@ export class $$w2 extends uA {
           this.props.onDrag(e);
           break;
         default:
-          xb(this.dragState);
+          throwTypeError(this.dragState);
       }
     }, {
       recordMetadata: e => ({
@@ -113,7 +113,7 @@ export class $$w2 extends uA {
         case "None":
           return aH;
         default:
-          xb(this.dragState);
+          throwTypeError(this.dragState);
       }
     });
     this.onClick = e => {

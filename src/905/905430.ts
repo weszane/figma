@@ -1,4 +1,4 @@
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { xg, Au, Av } from "../figma_app/155287";
 import { c } from "../905/882587";
 export const z = function e(t, i, s = []) {
@@ -38,6 +38,6 @@ export const z = function e(t, i, s = []) {
         path: s
       };
     }
-    xb(t);
+    throwTypeError(t);
   });
 };

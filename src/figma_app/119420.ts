@@ -1,5 +1,5 @@
 import { useCallback, useState, useEffect, useMemo, useRef } from "react";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { debounce } from "../905/915765";
 import { FDn, glU, tvY } from "../figma_app/763686";
 import { l7, Hq } from "../905/189185";
@@ -42,7 +42,7 @@ export function $$w13(e) {
     case "node":
       return "FIGMA_NODE";
     default:
-      xb(e);
+      throwTypeError(e);
   }
 }
 export function $$O9(e) {
@@ -83,7 +83,7 @@ export function $$O9(e) {
       t(_$$t("figmake.attachments.generic_failed_to_load_attachment_toast"));
       break;
     default:
-      xb(e);
+      throwTypeError(e);
   }
 }
 export function $$R5(e) {

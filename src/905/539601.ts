@@ -1,4 +1,4 @@
-import { vA, xb } from "../figma_app/465776";
+import { assert, throwTypeError } from "../figma_app/465776";
 import { Iz, eU } from "../figma_app/27355";
 import { Qw } from "../905/989992";
 import { oE } from "../905/953718";
@@ -9,7 +9,7 @@ import { Z1 } from "../905/401885";
 import { sMZ } from "../figma_app/43951";
 class p {
   constructor(e) {
-    vA(!!e.userFlagName);
+    assert(!!e.userFlagName);
     this.lifecycle = e;
     this.userFlagName = e.userFlagName;
   }
@@ -63,7 +63,7 @@ export function $$_0({
         case "MONTH_AND_A_HALF":
           return 45;
         default:
-          xb(e);
+          throwTypeError(e);
       }
     }(e);
     return A(t).isAfter(A().subtract(i, "day"));
@@ -79,7 +79,7 @@ export function $$A1(e) {
     case "MAX_TIMES":
       return "The overlay has been shown the maximum number of times";
     default:
-      xb(e);
+      throwTypeError(e);
   }
 }
 export const $1 = $$_0;

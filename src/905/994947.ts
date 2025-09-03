@@ -1,5 +1,5 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { eD } from "../figma_app/876459";
 import { PureComponent, createContext } from "react";
 import { wA, Pj, d4 } from "../vendor/514228";
@@ -521,7 +521,7 @@ function em(e) {
         data: data.model
       });
     default:
-      return xb(data);
+      return throwTypeError(data);
   }
 }
 let {

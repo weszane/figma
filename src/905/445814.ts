@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { memo, useCallback } from "react";
-import { S9, xb } from "../figma_app/465776";
+import { returnSecond, throwTypeError } from "../figma_app/465776";
 import { H as _$$H } from "../905/507464";
 import { e } from "../905/435763";
 import { v as _$$v } from "../905/92662";
@@ -640,7 +640,7 @@ export function $$er3() {
     if (t.lastPublishedAt && t.editorType === FFileType.DESIGN) return 7;
     if (t.fileRepoId) return 9;
     let i = e && !!t.isTeamTemplate;
-    return t.editorType === FFileType.WHITEBOARD ? i ? 5 : 4 : t.editorType === FFileType.SLIDES ? i ? 11 : 10 : t.editorType === FFileType.SITES ? 12 : t.editorType === FFileType.COOPER ? i ? 14 : 13 : t.editorType === FFileType.FIGMAKE ? 15 : t.editorType === FFileType.DESIGN || null === t.editorType ? 0 : S9(t.editorType, 0);
+    return t.editorType === FFileType.WHITEBOARD ? i ? 5 : 4 : t.editorType === FFileType.SLIDES ? i ? 11 : 10 : t.editorType === FFileType.SITES ? 12 : t.editorType === FFileType.COOPER ? i ? 14 : 13 : t.editorType === FFileType.FIGMAKE ? 15 : t.editorType === FFileType.DESIGN || null === t.editorType ? 0 : returnSecond(t.editorType, 0);
   }, [e]);
 }
 export function $$ea4() {
@@ -665,7 +665,7 @@ export function $$es2(e) {
     case FFileType.DESIGN:
       return 0;
     default:
-      xb(e);
+      throwTypeError(e);
   }
 }
 export const w4 = $$en0;

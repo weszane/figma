@@ -1,4 +1,4 @@
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { glU } from "../figma_app/763686";
 import { l7 } from "../905/189185";
 import { l as _$$l } from "../905/716947";
@@ -89,7 +89,7 @@ export function $$_5(e = []) {
     stateGroups: [],
     styles: []
   };
-  for (let i of $$f4(e)) i.type === PW.STYLE ? t.styles.push(i) : i.type === PW.STATE_GROUP ? t.stateGroups.push(i) : i.type === PW.VARIABLE_SET || i.type === PW.VARIABLE || (i.type === PW.COMPONENT ? t.components.push(i) : i.type === PW.MODULE || xb(i, "Unhandled item type"));
+  for (let i of $$f4(e)) i.type === PW.STYLE ? t.styles.push(i) : i.type === PW.STATE_GROUP ? t.stateGroups.push(i) : i.type === PW.VARIABLE_SET || i.type === PW.VARIABLE || (i.type === PW.COMPONENT ? t.components.push(i) : i.type === PW.MODULE || throwTypeError(i, "Unhandled item type"));
   return t;
 }
 export const $l = $$m0;

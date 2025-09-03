@@ -1,5 +1,5 @@
 import { defaultLanguage } from "../905/816253";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { M7s } from "../figma_app/763686";
 import { $$default } from "../vendor/73080";
 import { x1 } from "../905/714362";
@@ -14,7 +14,7 @@ class u {
       var n;
       var u;
       var p;
-      let m = (n = e) === M7s.DATE ? "date" : n === M7s.TIME ? "time" : n === M7s.NUMBER ? "number" : n === M7s.TEXT ? "text" : void xb(n);
+      let m = (n = e) === M7s.DATE ? "date" : n === M7s.TIME ? "time" : n === M7s.NUMBER ? "number" : n === M7s.TEXT ? "text" : void throwTypeError(n);
       if ("text" === m) return i;
       let h = defaultLanguage;
       let g = `{parsedPlaceholder, ${m}, ${t}}`;
@@ -26,7 +26,7 @@ class u {
       }(p) : u === M7s.TIME ? function (e) {
         let t = new Date(new Date().toDateString() + " " + e);
         return c(t) ? t : new Date(0);
-      }(p) : u === M7s.NUMBER ? Number(p) : u === M7s.TEXT ? p : void xb(u);
+      }(p) : u === M7s.NUMBER ? Number(p) : u === M7s.TEXT ? p : void throwTypeError(u);
       try {
         let n = new $$default(g, h).format({
           parsedPlaceholder: f

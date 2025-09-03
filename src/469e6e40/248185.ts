@@ -4,7 +4,7 @@ import { wA } from "../vendor/514228";
 import { Y, M } from "../905/830372";
 import { sf } from "../905/929976";
 import { _6 } from "../figma_app/386952";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { t as _$$t } from "../905/303541";
 import { V0, rj, m2 } from "../figma_app/858344";
 import { f, r as _$$r } from "../905/136283";
@@ -51,7 +51,7 @@ export function $$$$m0({
             case m2.SETTINGS:
               return _$$t("workspace_admin_tab.settings");
             default:
-              xb(e);
+              throwTypeError(e);
           }
         }(e)
       }, e))

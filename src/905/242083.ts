@@ -93,7 +93,7 @@ import { QC } from '../905/461516';
 import { Q as _$$Q } from '../905/463586';
 import { Sh } from '../905/470286';
 import { MZ } from '../905/470594';
-import { $$ap1 } from '../905/472793';
+import { createPluginInstance } from '../905/472793';
 import { A as _$$A } from '../905/482208';
 import { Vy, zT } from '../905/484695';
 import { S3 } from '../905/485103';
@@ -342,7 +342,7 @@ import { A0, R4 } from '../figma_app/454974';
 import { $q, lQ as _$$lQ, s$ as _$$s$, _W, fT, QT, uF, XT, Y5, Zi } from '../figma_app/455680';
 import { lt as _$$lt, dZ, y8 } from '../figma_app/459490';
 import { EA } from '../figma_app/462456';
-import { KF, xb } from '../figma_app/465776';
+import { debug, throwTypeError } from '../figma_app/465776';
 import { T as _$$T2 } from '../figma_app/472024';
 import { rd as _$$rd, v7 } from '../figma_app/475303';
 import { _ as _$$_2 } from '../figma_app/485258';
@@ -479,7 +479,7 @@ function c(e, t) {
     console.log(`${e} took ${n - i}ms`);
   }, 8e3);
 }
-getInitialOptions().cluster_name !== 'prod' && (window.runGettersBenchmark = function() {
+getInitialOptions().cluster_name !== 'prod' && (window.runGettersBenchmark = function () {
   let e = AlE && mSn?.getCurrentPage(Sie.PLUGIN, AlE.getActiveDocument());
   if (!e) throw new Error('Missing active page; run this bench in the editor');
   let t = window.performance.now();
@@ -487,7 +487,7 @@ getInitialOptions().cluster_name !== 'prod' && (window.runGettersBenchmark = fun
     if (i(t), d(t), !CUU) throw new Error('SceneNodeCpp undefined');
     for (let t of CUU.getReversedChildren(Sie.REDUX)) e(t, i);
   }(e, e => {
-    (function(e) {
+    (function (e) {
       if (d(e), !UNF || !sbT || !Fk7 || !CUU || !H9y || !mSn || !AlE || !x7E || !tEb || !KG_ || !OGQ || !hR8 || !KtY || !ByZ || !qOu || !$DY || !ppO || !RsU || !iZB || !fRZ || !jDJ) throw new Error('Bindings undefined');
       UNF.exists(Sie.REDUX);
       sbT.getType(Sie.REDUX);
@@ -663,7 +663,7 @@ getInitialOptions().cluster_name !== 'prod' && (window.runGettersBenchmark = fun
   });
   let i = window.performance.now();
   console.log(`Getters bench: ${i - t}ms`);
-}, window.runBindingsBenchmark = function() {
+}, window.runBindingsBenchmark = function () {
   let e = yDE;
   if (!e) throw new Error('BindingsPerfBench is not initialized');
   c('10000 x [empty(): void]', () => {
@@ -765,7 +765,7 @@ async function ti(e, t, i) {
     newSessionID: e.newSessionID,
     startTime: e.startTime,
     endTime: e.endTime,
-    autosaveChanges: function(e) {
+    autosaveChanges: function (e) {
       let {
         commit,
         commitPolicy,
@@ -1006,7 +1006,7 @@ let iT = {
   }
 };
 function ik(e) {
-  !function(e, t) {
+  !function (e, t) {
     let i = _$$Fk(e => {
       let t = e.getDirectlySelectedNodes()[0];
       return t ? t.guid : null;
@@ -1534,7 +1534,7 @@ let nG = new Lk({
 });
 let nz = {
   'mouse movement': n_,
-  'viewport movement': function(e, t, i = {}) {
+  'viewport movement': function (e, t, i = {}) {
     let n = i.sessionID ?? Math.floor(2e3 * e()) + 200;
     let r = window.INITIAL_OPTIONS.user_data.id;
     let a = i.canvasGuid || nP();
@@ -1587,7 +1587,7 @@ let nz = {
       cleanUpMessages: [d]
     };
   },
-  'reactions': function(e, t, i = {}) {
+  'reactions': function (e, t, i = {}) {
     let n = n_(e, t, i);
     let r = [];
     for (let t of n.repeatMessages) {
@@ -1607,7 +1607,7 @@ let nz = {
       repeatMessages: r
     };
   },
-  'chatter': function(e, t, i = {}) {
+  'chatter': function (e, t, i = {}) {
     let {
       canvasBounds,
       centerX,
@@ -1675,8 +1675,8 @@ let nH = (e, t, i = 20, n = 'mouse movement', r = 0, a = 0) => {
         centerY: a
       }));
     }
-    return function(e, t) {
-      if (e === null) return () => { };
+    return function (e, t) {
+      if (e === null) return () => {};
       let i = 0;
       let n = !1;
       let r = setInterval(() => {
@@ -1693,7 +1693,7 @@ let nH = (e, t, i = 20, n = 'mouse movement', r = 0, a = 0) => {
         clearInterval(r);
         nl(e.cleanUpFrame);
       };
-    }(function(e) {
+    }(function (e) {
       if (!e.length) return null;
       if (e.some(t => t.repeatMessages.length !== e[0].repeatMessages.length)) throw new Error(`All scenarios must have the same length of repeat messages to be compiled together ${e.map(e => e.repeatMessages.length).join(', ')}`);
       let t = e => {
@@ -1958,7 +1958,7 @@ let rx = _$$Ju(() => {
   let e = _$$n5({
     type: rx
   });
-  let t = function() {
+  let t = function () {
     let [{
       windowInnerWidth: e,
       windowInnerHeight: t
@@ -1969,7 +1969,7 @@ let rx = _$$Ju(() => {
     let [a] = useState(() => {
       let a = Number(i?.getItem('fragment-inspect-modal-width'));
       let s = Number(i?.getItem('fragment-inspect-modal-height'));
-      let o = function() {
+      let o = function () {
         let e = i?.getItem('fragment-inspect-modal-position');
         if (!e) return;
         let t = JSON.parse(e);
@@ -2128,7 +2128,7 @@ function rL() {
           });
           close();
         },
-        getCustomDisabledTextFromSelectedNodes: e => function(e) {
+        getCustomDisabledTextFromSelectedNodes: e => function (e) {
           let t = _$$tx('first_draft.link_component.component_selection_instruction');
           if (e.length !== 1 || e[0].type !== 'SYMBOL') return t;
         }(e),
@@ -2140,7 +2140,7 @@ function rL() {
         children: _$$tx('first_draft.link_component.component_selection_instruction')
       });
     default:
-      xb(e);
+      throwTypeError(e);
   }
 }
 let r0 = (e, t) => {
@@ -2336,7 +2336,7 @@ function am(e, t) {
     let e = dE(t);
     e && (i.fill = e);
   }
-  (t.type === 'LINE' || t.strokes?.length) && (i.line = function(e) {
+  (t.type === 'LINE' || t.strokes?.length) && (i.line = function (e) {
     let t = {
       width: e.strokeWeight
     };
@@ -2362,7 +2362,7 @@ function am(e, t) {
     return t;
   }(t));
   t.rotation && (i.rotate = 180 * t.rotation / Math.PI % 360);
-  (function(e) {
+  (function (e) {
     let t = e.type === 'SHAPE_WITH_TEXT' && e.shapeType === 'SQUARE';
     let i = e.type === 'ROUNDED_RECTANGLE';
     return t || i || e.type === 'FRAME';
@@ -2432,7 +2432,7 @@ function a_(e, t, i, n, r) {
     a.options = {
       ...a.options,
       indentLevel: void 0 !== e ? e - 1 : 0,
-      bullet: function(e, t) {
+      bullet: function (e, t) {
         let i = e.lineTypes?.[t];
         return !!i && (i === 'ORDERED' ? {
           type: 'number'
@@ -2497,7 +2497,7 @@ async function ab(e, t, i, n, r) {
     if (l) {
       if (l.type === 'SLIDE') {
         try {
-          let e = function(e) {
+          let e = function (e) {
             let t = e.slideSpeakerNotes;
             return t ? El(t) : null;
           }(l);
@@ -2564,7 +2564,7 @@ async function ab(e, t, i, n, r) {
                 let {
                   rows,
                   props
-                } = function(e, t) {
+                } = function (e, t) {
                   let i = [];
                   let n = {
                     ...W9(e, t)
@@ -2589,7 +2589,7 @@ async function ab(e, t, i, n, r) {
                   }))).forEach(([t, n]) => {
                     let r = parseInt(t);
                     n.forEach((t, n) => {
-                      let o = function(e, t) {
+                      let o = function (e, t) {
                         let i = {
                           text: t.characters ?? '',
                           options: {}
@@ -3020,7 +3020,7 @@ class aZ extends PureComponent {
         try {
           r = new RegExp(this.state.matchPattern || '.*');
         } catch (e) {
-          if (e instanceof SyntaxError) r = this.state.matchPattern; else throw e;
+          if (e instanceof SyntaxError) r = this.state.matchPattern;else throw e;
         }
         let o = this.state.replacePattern.replace(new RegExp(aY.source, 'g'), e => a$(a, e.length - 1)).replace(new RegExp(aq.source, 'g'), e => a$(s, e.length - 1));
         return t[n].replace(r, o);
@@ -3331,7 +3331,7 @@ class sT {
     ++this._numReports;
   }
 }
-class sR { }
+class sR {}
 function sN(e) {
   return class extends e {
     constructor() {
@@ -3547,7 +3547,7 @@ async function sq(e, t, i) {
     let _ = UN();
     l7.user('smart-paste', () => {
       function o(e, t) {
-        let i = function(e, t) {
+        let i = function (e, t) {
           let i = new Map();
           !function e(t, i, n) {
             if (n.set(t.guid, i.guid), t.childCount !== i.childCount) throw new Error('Mismatched node trees');
@@ -3637,7 +3637,7 @@ function or({
   let r = n.getState();
   let a = dK(r);
   if (O5(a, r.mirror.appModel.currentPage).length) {
-    !function({
+    !function ({
       startingBreakpointFrameId: e,
       mode: t = 'modal',
       testFlags: i
@@ -4154,7 +4154,7 @@ let oN = class e {
     let r = null;
     try {
       r = self.localStorage;
-    } catch (e) { }
+    } catch (e) {}
     let a = !!(r && !0 === r['low-power']);
     this._worker.postMessage({
       id: 'init',
@@ -4198,7 +4198,7 @@ class oq {
     this._hashToCmsItemFieldValue = new Map();
   }
   storeVariableData(e) {
-    let t = function(e) {
+    let t = function (e) {
       let t = 0;
       if (e.length === 0) return t;
       for (let i = 0; i < e.length; i++) {
@@ -4294,7 +4294,7 @@ let lw = new class {
       noOpVm
     } = _$$e8();
     addShutdownAction(() => Y5.commit());
-    $$ap1(noOpVm, {
+    createPluginInstance(noOpVm, {
       stats: new _$$P3(),
       name: 'First Party',
       command: JSON.stringify(t),
@@ -4395,7 +4395,7 @@ async function lN({
   }
   if (getFeatureFlags().widgets_multiplayer_local) {
     if (!p) {
-      let i = function({
+      let i = function ({
         pluginID: e,
         lifecycleCommand: t
       }) {
@@ -4662,7 +4662,7 @@ let lM = new class {
     }
     let t = {
       ...e,
-      promise: new Promise(() => { })
+      promise: new Promise(() => {})
     };
     t.promise = (async () => {
       try {
@@ -4726,7 +4726,7 @@ class lB {
     this.runWidgets = e;
     this.hostInfoMap = new Map();
     this.stickableInfoMap = new Map();
-    this.queueRun = function(e) {
+    this.queueRun = function (e) {
       let t = debugState.getState().mirror.appModel.activeUserAction;
       debugState.subscribe(() => {
         t = debugState.getState().mirror.appModel.activeUserAction;
@@ -4863,7 +4863,7 @@ class lV {
     let i = await Dz(debugState);
     i?.canEditCanvas && (debugState?.dispatch(Cf({
       widgetIDAndVersions: t
-    })), this.didStartPreloadingSandbox || (_$$a4('cppvm').catch(() => {}) , this.didStartPreloadingSandbox = !0));
+    })), this.didStartPreloadingSandbox || (_$$a4('cppvm').catch(() => {}), this.didStartPreloadingSandbox = !0));
     return !0;
   }
   trackLocalWidgetsInPlaygroundFile(e) {
@@ -5640,7 +5640,7 @@ let lX = class e extends sP(sN(sR)) {
   }
   handleFileThumbnailMenuItem() {
     let e = this.openFileKey();
-    KF(e != null, 'should have editing file key');
+    debug(e != null, 'should have editing file key');
     this._store.dispatch($m({
       file_key: e,
       thumbnail_guid: this._shouldShowFileThumbnailReset() ? null : this._selectedValidThumbnailNodeIds()[0]
@@ -5815,7 +5815,7 @@ let lX = class e extends sP(sN(sR)) {
       id: _$$O
     }));
   }
-  openFplDebug() { }
+  openFplDebug() {}
   hidePicker() {
     this.dispatch(XE());
   }
@@ -5875,7 +5875,7 @@ let lX = class e extends sP(sN(sR)) {
     }));
   }
   getClipboardData(e) {
-    KF(_$$eD != null, 'clipboard only available on desktop app');
+    debug(_$$eD != null, 'clipboard only available on desktop app');
     return _$$eD.getClipboardData([e]).then(({
       data: t,
       format: i
@@ -5929,7 +5929,7 @@ let lX = class e extends sP(sN(sR)) {
     let t = [];
     for (let i of e) {
       if (i.types.includes('image/png')) {
-        if (oz() && function(e) {
+        if (oz() && function (e) {
           if (!oz()) return !1;
           let t = oH();
           return e.types.includes(t);
@@ -5952,7 +5952,7 @@ let lX = class e extends sP(sN(sR)) {
       for (let t of await navigator.clipboard.read()) {
         if (t.types.includes(e)) return !0;
       }
-    } catch { }
+    } catch {}
     return !1;
   }
   decodePackedHTML(e) {
@@ -6040,7 +6040,7 @@ let lX = class e extends sP(sN(sR)) {
         await navigator.clipboard.write([new ClipboardItem(i)]);
         this.showVisualBellLocalized('copy-as', 'visual_bell.copied_as_png', {}, !1);
         return !0;
-      } catch (e) { }
+      } catch (e) {}
     }
     let r = [new ClipboardItem(n)];
     try {
@@ -6110,7 +6110,7 @@ let lX = class e extends sP(sN(sR)) {
           'Content-Type': 'multipart/form-data'
         }
       });
-      if (e.status === 204) o('clipboard_data_upload_success'); else throw new Error(`Failed to upload serialized clipboard data to S3 with status code: ${e.status}`);
+      if (e.status === 204) o('clipboard_data_upload_success');else throw new Error(`Failed to upload serialized clipboard data to S3 with status code: ${e.status}`);
     } catch (e) {
       o('clipboard_data_upload_error', e);
       return e;
@@ -6393,7 +6393,7 @@ let lX = class e extends sP(sN(sR)) {
         }));
       }
     } : void 0;
-    let n = function(e) {
+    let n = function (e) {
       switch (e) {
         case KAf.EMBED:
           return _$$t('bindings.embed_paste_notice');
@@ -6541,7 +6541,7 @@ let lX = class e extends sP(sN(sR)) {
     }
   }
   activateVotingStampTool() {
-    !function() {
+    !function () {
       let e = hf(null).find(e => e.name === _$$sn);
       let t = e && k6(e, '');
       t && e.label && be(t, e.label);
@@ -6608,7 +6608,7 @@ let lX = class e extends sP(sN(sR)) {
           movableItemIds: n
         }
       }));
-    }).catch(() => {}) );
+    }).catch(() => {}));
   }
   _selectedValidThumbnailNodeIds() {
     let e = this._store.getState();
@@ -6755,7 +6755,7 @@ let lX = class e extends sP(sN(sR)) {
           d = m ? _$$t('desktop_bindings.visual_bell.summary_link_copied') : a?.type === 'FRAME' ? _$$t('desktop_bindings.interstitial.frame_link_copied') : a?.type === 'SECTION' ? _$$t('desktop_bindings.interstitial.section_link_copied') : r.appModel.pagesList.length > 1 ? _$$t('desktop_bindings.interstitial.page_link_copied') : _$$P(this._state.selectedView) ? _$$t('desktop_bindings.visual_bell.slide_deck_link_copied') : _$$t('desktop_bindings.visual_bell.file_link_copied');
           break;
         default:
-          xb(t);
+          throwTypeError(t);
       }
     } else {
       console.error(`file key is empty in copying link, pathname is ${_$$Ay2.location.pathname}`);
@@ -6899,7 +6899,7 @@ let lX = class e extends sP(sN(sR)) {
       }, '*');
       S3('performance.fullscreen.load_time', t / 1e3);
       _$$xK.start('fullscreenIsReady');
-      (function() {
+      (function () {
         if (!getFeatureFlags().internal_only_debug_tools) {
           window.DebuggingHelpers = {};
           return;
@@ -6970,7 +6970,7 @@ let lX = class e extends sP(sN(sR)) {
       setTimeout(() => {
         let e = {};
         'figmaExVm' in window && (e.figmaEx = !0);
-        (function(e) {
+        (function (e) {
           for (let t of (getComputedStyle(document.body).fontFamily.includes('apple-system') && (e.figgyFontFamilyAppleSystem = !0), document.querySelectorAll('style'))) {
             if (t.textContent && t.textContent.includes('canvas editing page')) {
               e.figgyCanvasEditingPage = !0;
@@ -6978,7 +6978,7 @@ let lX = class e extends sP(sN(sR)) {
             }
           }
         })(e);
-        (function(e) {
+        (function (e) {
           let t = window.webkit;
           t && (e.figmacWebkit = !0);
           let i = t && t.messageHandlers;
@@ -7002,7 +7002,7 @@ let lX = class e extends sP(sN(sR)) {
     getFeatureFlags()?.fullscreen_use_threaded_rendering && oN.getInstance().spawnAndStart();
     this.reparentRootElement(this.containerElement);
     _$$m && e.startFetchingFontList();
-    KF(e.fontListPromise != null, 'should have loaded font list by the time fullscreen is ready');
+    debug(e.fontListPromise != null, 'should have loaded font list by the time fullscreen is ready');
     let i = (e, t) => {
       Nz(t) && gg();
       let i = LQ(t);
@@ -7202,7 +7202,7 @@ let lX = class e extends sP(sN(sR)) {
     t?._native_contextual_toolbar_request_menu_items && t._native_contextual_toolbar_request_menu_items(e);
   }
   mimeTypeToExportedFileType(e) {
-    return e === 'application/pdf' ? _$$g4.PDF : e === 'image/jpeg' ? _$$g4.JPEG : e === 'image/png' ? _$$g4.PNG : void KF(!1, 'Unexpected MIME type when exporting FigJam selection');
+    return e === 'application/pdf' ? _$$g4.PDF : e === 'image/jpeg' ? _$$g4.JPEG : e === 'image/png' ? _$$g4.PNG : void debug(!1, 'Unexpected MIME type when exporting FigJam selection');
   }
   startMovePagesJob(e, t, i, n) {
     ED('startMovePagesJob', 'Send request to start move pages job.');
@@ -7934,8 +7934,8 @@ let lX = class e extends sP(sN(sR)) {
     return CV(this._store.dispatch, e, WJ.PASTE).valid;
   }
   generateFlappFromPastedText(e) {
-    return !function(e) {
-      let t = function(e) {
+    return !function (e) {
+      let t = function (e) {
         let t = e.match(/^(https?:\/\/)/);
         return t ? e.replace(/#.+$/, '').substr(t[1].length) : '';
       }(e);
@@ -7980,7 +7980,7 @@ let lX = class e extends sP(sN(sR)) {
       }
     });
   }
-  findCodebaseSuggestions() { }
+  findCodebaseSuggestions() {}
   openQuickActionsAssetsTab(e, t) {
     $I({
       moduleToOpen: {
@@ -8384,4 +8384,4 @@ lX.fontListPromise = null;
 export let $$lQ0 = lX;
 Cs() && $$lQ0.startFetchingFontList();
 export const W = $$lQ0;
-export const a = $$lq1; 
+export const a = $$lq1;

@@ -1,6 +1,6 @@
 import { jsx, Fragment } from "react/jsx-runtime";
 import { useRef, useEffect } from "react";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { cfv } from "../figma_app/763686";
 import { eU, zl, fp } from "../figma_app/27355";
 import { xi } from "../905/714362";
@@ -73,7 +73,7 @@ export function $$g1() {
           expandSelectedMindmapNode();
           break;
         default:
-          xb(r);
+          throwTypeError(r);
       }
     };
   }();

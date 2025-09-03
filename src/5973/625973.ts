@@ -32,25 +32,21 @@ import { MaterializeInvisibleChildrenBindings } from '../figma_app/175377';
 import { Hc, kX, mu } from '../figma_app/197743';
 import { PK, sD } from '../figma_app/243058';
 import { Ji, MT } from '../figma_app/387100';
-
-import { xb } from '../figma_app/465776';
+import { throwTypeError } from '../figma_app/465776';
 import { CUSTOM_IMAGE_TYPE_STR, getComponentInfoById, getInstanceIdsForDef, getInstanceNodeProps, getTypeInfoCached, toCamelCase, toTitleCase, usagePropsToRawProps } from '../figma_app/664063';
 import { HzA, lKz, mKm, O3Z, rXF, sAE, vr8, zkO } from '../figma_app/763686';
 import { QW, si } from '../figma_app/941074';
 import { z as _$$z } from '../vendor/835909';
-
 let n;
 function l(e, t, i) {
-  return e && t ?
-    function(e, t) {
-      let i = MaterializeInvisibleChildrenBindings?.openScope(e.id, e.sceneGraph.scene);
-      try {
-        return t();
-      } finally {
-        i != null && MaterializeInvisibleChildrenBindings?.closeScope(i);
-      }
-    }(t, i) :
-    i();
+  return e && t ? function (e, t) {
+    let i = MaterializeInvisibleChildrenBindings?.openScope(e.id, e.sceneGraph.scene);
+    try {
+      return t();
+    } finally {
+      i != null && MaterializeInvisibleChildrenBindings?.closeScope(i);
+    }
+  }(t, i) : i();
 }
 function d(e) {
   return e?.isStateGroup ? e : e?.type === 'SYMBOL' ? e.parentNode?.isStateGroup ? e.parentNode : e : null;
@@ -64,7 +60,7 @@ function m(e) {
 function g(e) {
   let t = d(e);
   if (t) {
-    return function(e) {
+    return function (e) {
       let t = toTitleCase(e, c);
       return f === t ? 'ComponentDefinitionRef2' : t;
     }(t.name);
@@ -78,8 +74,7 @@ function y(e, t) {
     for (let r of _$$B([i, n], {
       followInstances: !0
     })) {
-      if (g(r).toLowerCase() === e.toLowerCase())
-        return b(r.guid, t);
+      if (g(r).toLowerCase() === e.toLowerCase()) return b(r.guid, t);
     }
   }
   return null;
@@ -87,10 +82,8 @@ function y(e, t) {
 function b(e, t) {
   let i = t.get(e);
   if (i) {
-    if (i.isLooseComponent)
-      return i;
-    if (i.isStateGroup)
-      return i.defaultVariant ? (i.defaultVariant) : null;
+    if (i.isLooseComponent) return i;
+    if (i.isStateGroup) return i.defaultVariant ? i.defaultVariant : null;
   }
   return null;
 }
@@ -98,12 +91,11 @@ function S({
   name: e,
   usedNames: t
 }) {
-  if (!t.has(e))
-    return e;
+  if (!t.has(e)) return e;
   let i = e.match(/^(.*?)(\d*)$/);
   let n = i ? i[1] ?? '' : e;
   let r = 1;
-  t.forEach((e) => {
+  t.forEach(e => {
     if (e.startsWith(n)) {
       let t = parseInt(e.slice(n.length), 10);
       !isNaN(t) && t > r && (r = t);
@@ -120,7 +112,7 @@ export function $$C37({
   oldDeclarativeNode: i,
   offset: n
 }) {
-  t && !e.isGroup && e.type !== 'BOOLEAN_OPERATION' && ['x', 'y'].forEach((r) => {
+  t && !e.isGroup && e.type !== 'BOOLEAN_OPERATION' && ['x', 'y'].forEach(r => {
     let o = t.layoutMetadata?.[r];
     typeof o == 'number' && void 0 !== n && (o += n[r]);
     let a = i ? i?.layoutMetadata?.[r] : void 0;
@@ -134,9 +126,8 @@ export function $$w36({
   newParentDirection: n,
   oldParentDirection: r
 }) {
-  t && (i || (i = null), (t.layoutMetadata?.width !== i?.layoutMetadata?.width || t.layoutMetadata?.height !== i?.layoutMetadata?.height || t.layoutMetadata?.fallbackWidthIfHug !== i?.layoutMetadata?.fallbackWidthIfHug || t.layoutMetadata?.fallbackHeightIfHug !== i?.layoutMetadata?.fallbackHeightIfHug || n !== r || t.layoutMetadata?.direction !== i?.layoutMetadata?.direction) && function(e, t, i) {
-    if (!e)
-      return;
+  t && (i || (i = null), (t.layoutMetadata?.width !== i?.layoutMetadata?.width || t.layoutMetadata?.height !== i?.layoutMetadata?.height || t.layoutMetadata?.fallbackWidthIfHug !== i?.layoutMetadata?.fallbackWidthIfHug || t.layoutMetadata?.fallbackHeightIfHug !== i?.layoutMetadata?.fallbackHeightIfHug || n !== r || t.layoutMetadata?.direction !== i?.layoutMetadata?.direction) && function (e, t, i) {
+    if (!e) return;
     let n = e.layoutMetadata?.width;
     let r = e.layoutMetadata?.height;
     let o = t.isGroup || t.type === 'BOOLEAN_OPERATION';
@@ -149,14 +140,12 @@ export function $$w36({
     }
     try {
       n === 'fill-parent' ? t.writeProperty('stackHorizontalLayoutSize', mKm.FILL_CONTAINER) : n === 'hug-contents' && A(e) && t.writeProperty('stackHorizontalLayoutSize', mKm.HUG_CONTENT);
-    }
-    catch {
+    } catch {
       n === 'fill-parent' ? i === 'HORIZONTAL' ? t.writeProperty('stackChildPrimaryGrow', 1) : i === 'VERTICAL' && (t.writeProperty('stackChildAlignSelf', 'STRETCH'), A(e) && t.writeProperty('stackPrimarySizing', 'FIXED')) : n === 'hug-contents' && A(e) && (e.props.stackMode === 'HORIZONTAL' ? t.writeProperty('stackPrimarySizing', 'RESIZE_TO_FIT_WITH_IMPLICIT_SIZE') : e.props.stackMode === 'VERTICAL' && t.writeProperty('stackCounterSizing', 'RESIZE_TO_FIT_WITH_IMPLICIT_SIZE'));
     }
     try {
       r === 'fill-parent' ? t.writeProperty('stackVerticalLayoutSize', mKm.FILL_CONTAINER) : r === 'hug-contents' && A(e) && t.writeProperty('stackVerticalLayoutSize', mKm.HUG_CONTENT);
-    }
-    catch {
+    } catch {
       r === 'fill-parent' ? i === 'VERTICAL' ? t.writeProperty('stackChildPrimaryGrow', 1) : i === 'HORIZONTAL' && (t.writeProperty('stackChildAlignSelf', 'STRETCH'), A(e) && t.writeProperty('stackPrimarySizing', 'FIXED')) : r === 'hug-contents' && A(e) && (e.props.stackMode === 'HORIZONTAL' ? t.writeProperty('stackCounterSizing', 'RESIZE_TO_FIT_WITH_IMPLICIT_SIZE') : e.props.stackMode === 'VERTICAL' && t.writeProperty('stackPrimarySizing', 'RESIZE_TO_FIT_WITH_IMPLICIT_SIZE'));
     }
   }(t, e, n));
@@ -180,8 +169,7 @@ export function $$P32({
   declarativeNode: t,
   oldDeclarativeNode: i
 }) {
-  if (!t || e.isGroup || e.type === 'BOOLEAN_OPERATION')
-    return;
+  if (!t || e.isGroup || e.type === 'BOOLEAN_OPERATION') return;
   i || (i = null);
   let {
     height,
@@ -202,7 +190,7 @@ export function $$P32({
     topOffset: y,
     bottomOffset: -y
   });
-  c2(xConstraint, i?.layoutMetadata?.xConstraint) && c2(yConstraint, i?.layoutMetadata?.yConstraint) || function({
+  c2(xConstraint, i?.layoutMetadata?.xConstraint) && c2(yConstraint, i?.layoutMetadata?.yConstraint) || function ({
     xConstraint: e,
     yConstraint: t,
     x: i,
@@ -220,7 +208,7 @@ export function $$P32({
     let {
       forceWidth,
       forceHeight
-    } = function(e, t, i) {
+    } = function (e, t, i) {
       let n;
       let r;
       if (e) {
@@ -321,14 +309,13 @@ function L(e) {
 async function D({
   declarativeNode: e
 }) {
-  let t = function(e) {
+  let t = function (e) {
     let t = [];
     let i = [e];
     let n = new Set();
     for (; i.length > 0;) {
       let e = i.pop();
-      if (!e)
-        continue;
+      if (!e) continue;
       let r = L(e.textMetadata?.style?.fontName) ? e.textMetadata?.style?.fontName : void 0;
       if (r && e.textMetadata?.style?.fontWeight) {
         let i = j(r, e.textMetadata.style.fontWeight);
@@ -357,7 +344,7 @@ async function D({
     loadedFonts: {},
     fontFallbacks: {}
   };
-  await Promise.all(t.map(async (e) => {
+  await Promise.all(t.map(async e => {
     let {
       fontName,
       weight
@@ -367,8 +354,7 @@ async function D({
       i.loadedFonts[fontName.family] = i.loadedFonts[fontName.family] || {};
       i.loadedFonts[fontName.family][fontName.style] = !0;
       return;
-    }
-    catch { }
+    } catch {}
     let r = ye(fontName.family, weight, fontName.style.includes('Italic'));
     i.fontFallbacks[fontName.family] = i.fontFallbacks[fontName.family] || {};
     try {
@@ -379,8 +365,7 @@ async function D({
       await EV(e);
       i.fontFallbacks[fontName.family][fontName.style] = e;
       return;
-    }
-    catch { }
+    } catch {}
     i.fontFallbacks[fontName.family][fontName.style] = null;
   }));
   return i;
@@ -444,7 +429,7 @@ async function M({
           n && i.writeProperty('inheritedTextStyle', n);
           break;
         default:
-          xb(e);
+          throwTypeError(e);
       }
     }
   })), typeof e.characters == 'string' && e.characters !== t?.characters && i.writeCustomProperty({
@@ -459,14 +444,12 @@ async function M({
   }
 }
 function F(e, t, i) {
-  t in e ?
-    Object.defineProperty(e, t, {
-      value: i,
-      enumerable: !0,
-      configurable: !0,
-      writable: !0
-    }) :
-    e[t] = i;
+  t in e ? Object.defineProperty(e, t, {
+    value: i,
+    enumerable: !0,
+    configurable: !0,
+    writable: !0
+  }) : e[t] = i;
   return e;
 }
 class X {
@@ -486,7 +469,6 @@ class X {
     o && a && t.push(3);
     return t;
   }
-
   split() {
     let e = this.bounds.width / 2;
     let t = this.bounds.height / 2;
@@ -519,7 +501,6 @@ class X {
       this.nodes.push(i);
     }
   }
-
   insert(e) {
     if (this.nodes.length) {
       for (let t of this.getIndices(e)) {
@@ -538,7 +519,6 @@ class X {
       this.rects = [];
     }
   }
-
   retrieve(e) {
     let t = this.getIndices(e);
     let i = this.rects;
@@ -550,23 +530,20 @@ class X {
     }
     return i;
   }
-
   clear() {
     for (let e of (this.rects = [], this.nodes)) e.clear();
     this.nodes = [];
   }
-
   toDebugString() {
     let e = '  '.repeat(this.level);
-    let t = this.nodes.map((e) => e.toDebugString()).join('\n');
-    let i = this.rects.map((e) => B(e)).join(', ');
+    let t = this.nodes.map(e => e.toDebugString()).join('\n');
+    let i = this.rects.map(e => B(e)).join(', ');
     return `${e}QuadTree: [bounds: ${B(this.bounds)}]
   ${e}rects: ${i}
   ${e}nodes:
 
 ${t}`;
   }
-
   constructor(e) {
     F(this, 'bounds', void 0);
     F(this, 'nodes', []);
@@ -586,14 +563,12 @@ function B(e) {
 function J(e) {
   return e.reduce((e, t) => {
     let i = t.absoluteBoundingBox;
-    return i ?
-      yX(e, {
-        x: i.x,
-        y: i.y,
-        width: i.w,
-        height: i.h
-      }) :
-      e;
+    return i ? yX(e, {
+      x: i.x,
+      y: i.y,
+      width: i.w,
+      height: i.h
+    }) : e;
   }, {
     x: 1 / 0,
     y: 1 / 0,
@@ -602,111 +577,101 @@ function J(e) {
   });
 }
 function H(e) {
-  return 'childrenNodes' in e ?
-    e.childrenDisplayOrder === _$$k.DOM || !e.absoluteRenderBounds || e.type === 'BOOLEAN_OPERATION' || e.isStateGroup ?
-      e.childrenNodes :
-      function(e) {
-        let t = e.absoluteRenderBounds;
-        if (!t)
-          return [];
-        let i = e.childrenNodes;
-        if (i.length > 500)
-          return [i];
-        let n = {};
-        for (let [e, t] of i.entries()) {
-          if (n[t.guid] = e, t.mask)
-            return [i];
+  return 'childrenNodes' in e ? e.childrenDisplayOrder === _$$k.DOM || !e.absoluteRenderBounds || e.type === 'BOOLEAN_OPERATION' || e.isStateGroup ? e.childrenNodes : function (e) {
+    let t = e.absoluteRenderBounds;
+    if (!t) return [];
+    let i = e.childrenNodes;
+    if (i.length > 500) return [i];
+    let n = {};
+    for (let [e, t] of i.entries()) {
+      if (n[t.guid] = e, t.mask) return [i];
+    }
+    let r = Object.fromEntries(i.map(e => [e.guid, []]));
+    let o = new X({
+      bounds: {
+        x: t.x,
+        y: t.y,
+        width: t.w,
+        height: t.h
+      },
+      maxObjects: 10,
+      maxLevels: 4
+    });
+    for (let e of i) {
+      let t = e.absoluteRenderBounds;
+      t && o.insert({
+        x: t.x,
+        y: t.y,
+        width: t.w,
+        height: t.h,
+        guid: e.guid
+      });
+    }
+    for (let e of i) {
+      let t = e.absoluteRenderBounds ?? (e.mask ? e.absoluteBoundingBox : void 0);
+      if (t) {
+        let i = {
+          x: t.x,
+          y: t.y,
+          width: t.w,
+          height: t.h
+        };
+        let n = o.retrieve(i);
+        r[e.guid] = n.filter(e => function (e, t) {
+          let i = e.x < t.x + t.width && e.x + e.width > t.x;
+          let n = e.y < t.y + t.height && e.y + e.height > t.y;
+          return i && n;
+        }(i, e)).map(e => e.guid);
+      }
+    }
+    let a = {};
+    let l = [];
+    for (let e of i) {
+      if (!a[e.guid]) {
+        let t = new Set();
+        let i = [e.guid];
+        for (; i.length > 0;) {
+          let e = i.pop();
+          if (!a[e]) {
+            for (let n of (a[e] = !0, t.add(e), r[e])) a[n] || i.push(n);
+          }
         }
-        let r = Object.fromEntries(i.map((e) => [e.guid, []]));
-        let o = new X({
-          bounds: {
-            x: t.x,
-            y: t.y,
-            width: t.w,
-            height: t.h
-          },
-          maxObjects: 10,
-          maxLevels: 4
+        l.push(t);
+      }
+    }
+    return l.map(e => {
+      let t = [];
+      for (let i of e) {
+        t.push({
+          guid: i,
+          idx: n[i]
         });
-        for (let e of i) {
-          let t = e.absoluteRenderBounds;
-          t && o.insert({
-            x: t.x,
-            y: t.y,
-            width: t.w,
-            height: t.h,
-            guid: e.guid
-          });
-        }
-        for (let e of i) {
-          let t = e.absoluteRenderBounds ?? (e.mask ? e.absoluteBoundingBox : void 0);
-          if (t) {
-            let i = {
-              x: t.x,
-              y: t.y,
-              width: t.w,
-              height: t.h
-            };
-            let n = o.retrieve(i);
-            r[e.guid] = n.filter((e) => function(e, t) {
-              let i = e.x < t.x + t.width && e.x + e.width > t.x;
-              let n = e.y < t.y + t.height && e.y + e.height > t.y;
-              return i && n;
-            }(i, e)).map((e) => e.guid);
-          }
-        }
-        let a = {};
-        let l = [];
-        for (let e of i) {
-          if (!a[e.guid]) {
-            let t = new Set();
-            let i = [e.guid];
-            for (; i.length > 0;) {
-              let e = i.pop();
-              if (!a[e]) {
-                for (let n of (a[e] = !0, t.add(e), r[e])) a[n] || i.push(n);
-              }
-            }
-            l.push(t);
-          }
-        }
-        return l.map((e) => {
-          let t = [];
-          for (let i of e) {
-            t.push({
-              guid: i,
-              idx: n[i]
-            });
-          }
-          return t.sort((e, t) => e.idx - t.idx).map(({
-            idx: e
-          }) => i[e]);
-        });
-      }(e).sort((e, t) => {
-        let i = J(e);
-        let n = J(t);
-        return Math.abs(i.y - n.y) > 0.1 ? i.y - n.y : Math.abs(i.x - n.x) > 0.1 ? i.x - n.x : 0;
-      }).flat() :
-    [];
+      }
+      return t.sort((e, t) => e.idx - t.idx).map(({
+        idx: e
+      }) => i[e]);
+    });
+  }(e).sort((e, t) => {
+    let i = J(e);
+    let n = J(t);
+    return Math.abs(i.y - n.y) > 0.1 ? i.y - n.y : Math.abs(i.x - n.x) > 0.1 ? i.x - n.x : 0;
+  }).flat() : [];
 }
 function $(e) {
   return 'childrenNodes' in e ? e.childrenDisplayOrder === _$$k.DOM ? e.childrenNodes : e.reversedChildrenNodes : [];
 }
 function W(e, t, i) {
-  t in e ?
-    Object.defineProperty(e, t, {
-      value: i,
-      enumerable: !0,
-      configurable: !0,
-      writable: !0
-    }) :
-    e[t] = i;
+  t in e ? Object.defineProperty(e, t, {
+    value: i,
+    enumerable: !0,
+    configurable: !0,
+    writable: !0
+  }) : e[t] = i;
   return e;
 }
 export class $$K15 {
   writeComponentProps(e) {
-    if (this.type !== 'INSTANCE')
-      return;
+    if (this.type !== 'INSTANCE') return;
     e.componentId && this.writeCustomProperty({
       key: 'componentId',
       value: e.componentId
@@ -724,11 +689,10 @@ export class $$K15 {
     if (e.nestedInstancesVisibility) {
       for (let [n, r] of Object.entries(e.nestedInstancesVisibility)) {
         let e = t.getMatchingInstanceSublayer(n);
-        if (!e)
-          continue;
-        let o = (e).visible;
+        if (!e) continue;
+        let o = e.visible;
         this.runtime.editScope('figma-jsx-writeComponentProps', () => {
-          (e).visible = r;
+          e.visible = r;
         });
         i = i || !o && r;
       }
@@ -736,14 +700,13 @@ export class $$K15 {
     if (i && t.materializeDescendants(), e.componentPropsNested) {
       for (let [i, n] of Object.entries(e.componentPropsNested)) {
         let e = t.getMatchingInstanceSublayer(i);
-        e && (e).isVisibleInInstance && new $$K15({
+        e && e.isVisibleInInstance && new $$K15({
           guid: e.guid,
           runtime: this.runtime
         }).writeComponentProps(n);
       }
     }
   }
-
   writeProperty(e, t) {
     this.runtime.safeWriteProperty(() => this.runtime.editScope('figma-jsx-writeProperty', () => {
       let i = this.getTSSceneNodeOrThrow();
@@ -779,7 +742,6 @@ export class $$K15 {
       }
     }));
   }
-
   writeCustomProperty({
     key: e,
     value: t
@@ -872,11 +834,10 @@ export class $$K15 {
           }
           break;
         default:
-          xb(e);
+          throwTypeError(e);
       }
     }));
   }
-
   async writeTextRange(e) {
     let {
       start,
@@ -895,8 +856,7 @@ export class $$K15 {
           break;
         case 'fontName':
           {
-            if (!n)
-              break;
+            if (!n) break;
             n.family = n.family ?? r.fontName?.family;
             n.style = n.style ?? r.fontName?.style;
             let e = L(n) ? n : void 0;
@@ -980,20 +940,18 @@ export class $$K15 {
           }
           break;
         default:
-          xb(e);
+          throwTypeError(e);
       }
     }));
     r.update();
   }
-
   applyOverrides(e) {
     let t = this.getTSSceneNodeOrThrow();
     for (let [i, n] of (t.resetOverrides(), Object.entries(e))) {
       let e = i.split(';');
       let r = t.getSublayerByOverridePath(e);
       let o = r ? this.runtime.getScene().get(r) : null;
-      if (!o)
-        continue;
+      if (!o) continue;
       let a = new $$K15({
         guid: o.guid,
         runtime: this.runtime
@@ -1008,63 +966,50 @@ export class $$K15 {
       }));
     }
   }
-
   get type() {
     return this.getTSSceneNodeOrThrow().type;
   }
-
   get isGroup() {
     return this.getTSSceneNodeOrThrow().isGroup;
   }
-
   get isStack() {
     return this.getTSSceneNodeOrThrow().isStack;
   }
-
   get isLayoutContainer() {
     return this.getTSSceneNodeOrThrow().isLayoutContainer;
   }
-
   get parent() {
     let e = this.getTSSceneNodeOrThrow().parentGuid;
-    return e ?
-      new $$K15({
-        guid: e,
-        runtime: this.runtime
-      }) :
-      null;
+    return e ? new $$K15({
+      guid: e,
+      runtime: this.runtime
+    }) : null;
   }
-
   get children() {
-    return this.getTSSceneNodeOrThrow().childrenGuids.map((e) => new $$K15({
+    return this.getTSSceneNodeOrThrow().childrenGuids.map(e => new $$K15({
       guid: e,
       runtime: this.runtime
     }));
   }
-
   get childrenLayerOrdered() {
-    return $(this.getTSSceneNodeOrThrow()).map((e) => new $$K15({
+    return $(this.getTSSceneNodeOrThrow()).map(e => new $$K15({
       guid: e.guid,
       runtime: this.runtime
     }));
   }
-
   get childrenVisuallyOrdered() {
-    return H(this.getTSSceneNodeOrThrow()).map((e) => new $$K15({
+    return H(this.getTSSceneNodeOrThrow()).map(e => new $$K15({
       guid: e.guid,
       runtime: this.runtime
     }));
   }
-
   get numAutoPositionedChildren() {
-    return this.getTSSceneNodeOrThrow().childrenNodes.filter((e) => e.stackPositioning === 'AUTO').length;
+    return this.getTSSceneNodeOrThrow().childrenNodes.filter(e => e.stackPositioning === 'AUTO').length;
   }
-
   get isNodeAlive() {
     let e = this.getTSSceneNode();
     return !!e && e.isAlive;
   }
-
   getSize() {
     let e = this.getTSSceneNodeOrThrow();
     e.update();
@@ -1074,20 +1019,17 @@ export class $$K15 {
       height: t.y
     };
   }
-
   getParentSizeForConstraints() {
     let e = this.getTSSceneNodeOrThrow();
     e.update();
     let t = Ji(e);
-    if (!t)
-      throw new Error('Containing parent not found');
+    if (!t) throw new Error('Containing parent not found');
     let i = t.size;
     return {
       width: i.x,
       height: i.y
     };
   }
-
   resize(e, t) {
     let i = this.getTSSceneNodeOrThrow();
     this.runtime.editScope('figma-jsx-resize', () => {
@@ -1095,7 +1037,6 @@ export class $$K15 {
       i.resizeWithConstraints(e, t);
     });
   }
-
   insertChild(e, t) {
     let i = this.getTSSceneNodeOrThrow();
     let n = this.runtime.getScene().get(t);
@@ -1111,23 +1052,18 @@ export class $$K15 {
       }
     });
   }
-
   removeNode() {
     this.runtime.editScope('figma-jsx-removeNode', () => {
       this.runtime.removeNode(this.guid);
     });
   }
-
   getTextSublayerOrSelf() {
     let e = this.getTSSceneNodeOrThrow();
-    return e.textSublayer ?
-      new $$K15({
-        guid: e.textSublayer.guid,
-        runtime: this.runtime
-      }) :
-      this;
+    return e.textSublayer ? new $$K15({
+      guid: e.textSublayer.guid,
+      runtime: this.runtime
+    }) : this;
   }
-
   getTSSceneNode() {
     if (!this.sceneNodeCached) {
       let e = this.runtime.getScene().get(this.guid) ?? null;
@@ -1136,14 +1072,11 @@ export class $$K15 {
     }
     return this.sceneNodeCached;
   }
-
   getTSSceneNodeOrThrow() {
     let e = this.getTSSceneNode();
-    if (!e)
-      throw new Error(`node not found: ${this.guid}`);
+    if (!e) throw new Error(`node not found: ${this.guid}`);
     return e;
   }
-
   constructor({
     guid: e,
     runtime: t
@@ -1156,28 +1089,23 @@ export class $$K15 {
   }
 }
 function q(e, t, i) {
-  t in e ?
-    Object.defineProperty(e, t, {
-      value: i,
-      enumerable: !0,
-      configurable: !0,
-      writable: !0
-    }) :
-    e[t] = i;
+  t in e ? Object.defineProperty(e, t, {
+    value: i,
+    enumerable: !0,
+    configurable: !0,
+    writable: !0
+  }) : e[t] = i;
   return e;
 }
 export class $$Y13 {
   safeWriteProperty(e) {
     this.errorGuard.guard(e);
   }
-
   async safeWritePropertyAsync(e) {
     return this.errorGuard.guardAsync(e);
   }
-
   editScope(e, t) {
-    if (this.editScopeIsActive)
-      return t();
+    if (this.editScopeIsActive) return t();
     let i = () => {
       try {
         this.editScopeIsActive = !0;
@@ -1188,44 +1116,35 @@ export class $$Y13 {
     };
     return this.outerEditScopeLabel ? l7(this.outerEditScopeType, this.outerEditScopeLabel, () => l7(zkO.SYSTEM, e, () => i())) : l7(zkO.SYSTEM, e, () => i());
   }
-
   getSafeFontNameOrNull(e) {
     return this.resourceStatus.loadedFonts[e.family]?.[e.style] ? e : this.resourceStatus.fontFallbacks[e.family]?.[e.style] ?? null;
   }
-
   trackInstanceIdTouched(e) {
     this.instanceIdsTouched.add(e);
   }
-
   getInstanceIdsTouched() {
     return Array.from(this.instanceIdsTouched);
   }
-
   async getOrLoadFontName(e) {
     let t = this.getSafeFontNameOrNull(e);
-    if (t)
-      return t;
+    if (t) return t;
     try {
       await EV(e);
       this.resourceStatus.loadedFonts[e.family] = this.resourceStatus.loadedFonts[e.family] || {};
       this.resourceStatus.loadedFonts[e.family][e.style] = !0;
       return e;
-    }
-    catch {
+    } catch {
       return null;
     }
   }
-
   createNode(e, t = HzA.TRACK) {
-    if (!e || typeof e != 'object')
-      throw new Error('invalid node passed to createNode');
+    if (!e || typeof e != 'object') throw new Error('invalid node passed to createNode');
     let i = e.nodeType;
     return this.createNodeFromType(i, e.requiredProps, t);
   }
-
   createNodeFromType(e, t, i = HzA.TRACK) {
     let n = this.recorder;
-    let r = (e) => {
+    let r = e => {
       let t = this.scene.createNode(e, {
         tracking: i
       });
@@ -1239,8 +1158,7 @@ export class $$Y13 {
           (i = r(e)).isCullingDisabledForGroup = !0;
           break;
         case 'BOOLEAN_OPERATION':
-          if (i = r(e), !t.booleanOperation)
-            throw new Error('BOOLEAN_OPERATION nodes must have a booleanOperation');
+          if (i = r(e), !t.booleanOperation) throw new Error('BOOLEAN_OPERATION nodes must have a booleanOperation');
           i.booleanOperation = t.booleanOperation;
           break;
         case 'CANVAS':
@@ -1264,16 +1182,12 @@ export class $$Y13 {
           break;
         case 'INSTANCE':
           {
-            if (!t.componentId)
-              throw new Error('INSTANCE nodes must have a componentId');
-            if (n)
-              throw new Error('INSTANCE nodes cannot be recorded');
+            if (!t.componentId) throw new Error('INSTANCE nodes must have a componentId');
+            if (n) throw new Error('INSTANCE nodes cannot be recorded');
             let e = this.scene.get(t.componentId);
-            if (e?.type !== 'SYMBOL')
-              throw new Error(`Invalid component Id: ${t.componentId}`);
+            if (e?.type !== 'SYMBOL') throw new Error(`Invalid component Id: ${t.componentId}`);
             let r = e.createInstance();
-            if (!r)
-              throw new Error(`Failed to create instance for componentId: ${t.componentId}`);
+            if (!r) throw new Error(`Failed to create instance for componentId: ${t.componentId}`);
             i = r;
             break;
           }
@@ -1289,13 +1203,11 @@ export class $$Y13 {
       });
     });
   }
-
   removeNode(e) {
     let t = this.scene.get(e);
     if (t) {
       if (this.serializerOptions?.reconcileById) {
-        if (this.reparentedNodeIds.has(e))
-          return;
+        if (this.reparentedNodeIds.has(e)) return;
         this.removedNodeIds.add(e);
         let i = this.scene.getCurrentPage();
         i && i.appendChild(t);
@@ -1304,21 +1216,17 @@ export class $$Y13 {
       }
     }
   }
-
   cleanUpRemovedNodes() {
     this.serializerOptions?.reconcileById && (this.editScope('figma-jsx-cleanUpRemovedNodes', () => {
       for (let e of this.removedNodeIds) this.scene.get(e)?.removeSelfAndChildren();
     }), this.removedNodeIds.clear());
   }
-
   reparentNodeIfExists(e, t, i) {
     let n = e.debuggingMetadata?.originalId;
-    if (!n)
-      return null;
+    if (!n) return null;
     let r = this.scene.get(n);
-    if (!r)
-      return null;
-    let o = t.children.findIndex((e) => e.guid === n);
+    if (!r) return null;
+    let o = t.children.findIndex(e => e.guid === n);
     (r.parentGuid !== t.guid || o !== i) && t.insertChild(i, n);
     this.unmarkNodeAsRemoved(n);
     this.reparentedNodeIds.add(n);
@@ -1327,19 +1235,15 @@ export class $$Y13 {
       runtime: this
     });
   }
-
   getScene() {
     return this.scene;
   }
-
   getExistingDeclarativeNode(e) {
     return this.existingDeclarativeNodes?.get(e);
   }
-
   unmarkNodeAsRemoved(e) {
     this.removedNodeIds.$$delete(e);
   }
-
   constructor({
     resourceStatus: e,
     recorder: t = null,
@@ -1386,19 +1290,16 @@ async function Z({
   newNodeIds: u,
   appliedNormalization: p = 'unapplied'
 }) {
-  if (!e)
-    return null;
-  let c = (e) => !d.modifiableIds || !!e && (d.modifiableIds.includes(e) || u.has(e));
-  if (o && !c(o.guid))
-    return o;
+  if (!e) return null;
+  let c = e => !d.modifiableIds || !!e && (d.modifiableIds.includes(e) || u.has(e));
+  if (o && !c(o.guid)) return o;
   let f = () => {
     if (d?.reconcileById && e && e.debuggingMetadata?.originalId) {
       let t = e.debuggingMetadata?.originalId;
       let i = s.getExistingDeclarativeNode(t);
       if (t && i && h(i, e)) {
         let t = s.reparentNodeIfExists(e, a, l);
-        if (t)
-          return t;
+        if (t) return t;
       }
     }
     if (c(a.guid)) {
@@ -1415,17 +1316,15 @@ async function Z({
     let r = d?.reconcileById && e.debuggingMetadata?.originalId !== t.debuggingMetadata?.originalId;
     return !i && !n && !r;
   }
-  let m = (e) => {
+  let m = e => {
     e && c(e.guid) && e.removeNode();
   };
-  if (!t && !e)
-    return null;
+  if (!t && !e) return null;
   if (t || (t = null), !t && o && m(o), t && !e) {
     m(o);
     return null;
   }
-  if (!t && e && (o = f()), !e || (!t || e?.deserializeMetadata.isUnknownNode || h(t, e) || (t = null, m(o), o = f()), !o && !(o = f())))
-    return null;
+  if (!t && e && (o = f()), !e || (!t || e?.deserializeMetadata.isUnknownNode || h(t, e) || (t = null, m(o), o = f()), !o && !(o = f()))) return null;
   let g = d.orderChildrenByXY ? o.childrenVisuallyOrdered : o.childrenLayerOrdered;
   (!e.deserializeMetadata?.isUnknownNode || e.deserializeMetadata?.isUnknownNode && !t) && ($$Q41({
     declarativeNode: e,
@@ -1452,14 +1351,12 @@ async function Z({
     oldDeclarativeNode: t
   };
   let b = !(o.isGroup || o.type === 'BOOLEAN_OPERATION');
-  d.normalizeRootXY && (p === 'unapplied' ?
-    y = void 0 :
-    p === 'shouldApply' && (y = {
-      nodeShim: o,
-      declarativeNode: e,
-      oldDeclarativeNode: t,
-      offset: i
-    }));
+  d.normalizeRootXY && (p === 'unapplied' ? y = void 0 : p === 'shouldApply' && (y = {
+    nodeShim: o,
+    declarativeNode: e,
+    oldDeclarativeNode: t,
+    offset: i
+  }));
   let S = p === 'applied' || b ? 'applied' : 'shouldApply';
   void 0 !== y && s.safeWriteProperty(() => {
     $$C37(y);
@@ -1517,7 +1414,7 @@ async function Z({
       m(o);
       return null;
     }
-    let t = (e) => d.orderChildrenByXY ? o.childrenVisuallyOrdered[e] : o.childrenLayerOrdered[e];
+    let t = e => d.orderChildrenByXY ? o.childrenVisuallyOrdered[e] : o.childrenLayerOrdered[e];
     let n = 0;
     for (let e = 0; e < x.length; e++) {
       let r = x[e];
@@ -1548,7 +1445,7 @@ async function Z({
     }
     e.nodeType === 'GROUP' && o.writeProperty('isCullingDisabledForGroup', !1);
   }
-  s.generationRequests.push(...Object.entries(e.deserializeMetadata.generationRequests ?? {}).flatMap(([e, t]) => t.map((t) => ({
+  s.generationRequests.push(...Object.entries(e.deserializeMetadata.generationRequests ?? {}).flatMap(([e, t]) => t.map(t => ({
     type: e,
     guid: o.guid,
     ...t
@@ -1590,17 +1487,15 @@ async function ee({
     let d = await D({
       declarativeNode: t
     });
-    let u = n.reconcileById && i ?
-      function(e) {
-        let t = [e];
-        let i = new Map();
-        for (; t.length > 0;) {
-          let e = t.pop();
-          e && (e.debuggingMetadata?.originalId && i.set(e.debuggingMetadata.originalId, e), e.childrenMetadata?.children && t.push(...e.childrenMetadata.children));
-        }
-        return i;
-      }(i) :
-      new Map();
+    let u = n.reconcileById && i ? function (e) {
+      let t = [e];
+      let i = new Map();
+      for (; t.length > 0;) {
+        let e = t.pop();
+        e && (e.debuggingMetadata?.originalId && i.set(e.debuggingMetadata.originalId, e), e.childrenMetadata?.children && t.push(...e.childrenMetadata.children));
+      }
+      return i;
+    }(i) : new Map();
     s = new $$Y13({
       resourceStatus: d,
       outerEditScopeType: r ?? zk.USER,
@@ -1611,17 +1506,13 @@ async function ee({
     });
     let p = e ? a.get(e) : null;
     let c = n.parentNodeId ? a.get(n.parentNodeId) : p ? p.parentNode : a.getCurrentPage();
-    if (!c)
-      throw new Error('Could not find parent node');
+    if (!c) throw new Error('Could not find parent node');
     let f = void 0 !== n.indexInParent ? n.indexInParent : e && p ? p.parentNode?.childrenGuids.indexOf(e) : c.childrenGuids.length;
-    if (void 0 === f)
-      throw new Error('Could not find index in parent');
-    let h = e ?
-      new $$K15({
-        guid: e,
-        runtime: s
-      }) :
-      null;
+    if (void 0 === f) throw new Error('Could not find index in parent');
+    let h = e ? new $$K15({
+      guid: e,
+      runtime: s
+    }) : null;
     let m = new $$K15({
       guid: c.guid,
       runtime: s
@@ -1666,7 +1557,7 @@ async function ee({
     s?.cleanUpRemovedNodes();
   }
 }
-let ei = function(e) {
+let ei = function (e) {
   return e;
 };
 let en = _$$z.object({
@@ -1710,7 +1601,6 @@ class eo {
     this.data.push(e);
     return this;
   }
-
   codefence(e, t = 'jsx') {
     this.data.push('```');
     this.data.push(t);
@@ -1720,31 +1610,26 @@ class eo {
     this.data.push('```');
     return this;
   }
-
   newline() {
     this.data.push('\n');
     return this;
   }
-
   toString(e = '') {
     return this.data.join(e);
   }
-
   constructor() {
-    !function(e, t, i) {
-      t in e ?
-        Object.defineProperty(e, t, {
-          value: i,
-          enumerable: !0,
-          configurable: !0,
-          writable: !0
-        }) :
-        e[t] = i;
+    !function (e, t, i) {
+      t in e ? Object.defineProperty(e, t, {
+        value: i,
+        enumerable: !0,
+        configurable: !0,
+        writable: !0
+      }) : e[t] = i;
     }(this, 'data', []);
   }
 }
 function ea(e, t) {
-  return e.split('\n').map((e) => `${t}${e}`).join('\n');
+  return e.split('\n').map(e => `${t}${e}`).join('\n');
 }
 function el(e) {
   return `  return (
@@ -1777,9 +1662,8 @@ let ec = ei({
   outputSchema: () => ep,
   defaults: () => ({}),
   serialize: (e, t, i) => {
-    if (e.type !== 'INSTANCE' || !e.symbolId || t.ignoreComponentProps)
-      return;
-    let n = function(e, t) {
+    if (e.type !== 'INSTANCE' || !e.symbolId || t.ignoreComponentProps) return;
+    let n = function (e, t) {
       let i = {
         ...e
       };
@@ -1824,13 +1708,12 @@ let ec = ei({
     if (t.serializeAsComponentDefinition) {
       let n = '';
       let r = e.componentPropertyReferences()?.mainComponent;
-      let o = i.getRootComponentTypeInfo()?.parsedDefs.find((t) => {
+      let o = i.getRootComponentTypeInfo()?.parsedDefs.find(t => {
         if (t.def.type === 'NESTED_INSTANCE') {
           for (let n of getInstanceIdsForDef(i.getRootComponentTypeInfo()?.componentId ?? '', t, {
             exposeAllNestedInstances: !0
           })) {
-            if (n === e.guid)
-              return !0;
+            if (n === e.guid) return !0;
           }
         }
         return r && t.rawProp === r;
@@ -1871,71 +1754,64 @@ let ec = ei({
     elem: r
   }) => {
     let o = t.topLevelComponentProps ? e : e.componentProps;
-    return typeof o == 'object' && n ?
-      {
-        componentProps: function(e, t, i) {
-          let n = {
-            ...e
-          };
-          let r = [];
-          for (Object.entries(n).forEach(([e, t]) => {
-            r.push({
-              obj: t,
-              key: e,
-              parent: n
-            });
-          }); r.length > 0;) {
-            let {
-              obj,
-              key,
-              parent
-            } = r.shift();
-            if (typeof obj == 'object' && obj !== null) {
-              if (Bj(obj)) {
-                let r = t.jsxExpressionContainerToVariableAlias(obj, i);
-                r && (parent[key] = r);
-              } else {
-                Object.entries(obj).forEach(([t, i]) => {
-                  typeof i == 'object' && i !== null && r.push({
-                    obj: i,
-                    key: t,
-                    parent: obj
-                  });
+    return typeof o == 'object' && n ? {
+      componentProps: function (e, t, i) {
+        let n = {
+          ...e
+        };
+        let r = [];
+        for (Object.entries(n).forEach(([e, t]) => {
+          r.push({
+            obj: t,
+            key: e,
+            parent: n
+          });
+        }); r.length > 0;) {
+          let {
+            obj,
+            key,
+            parent
+          } = r.shift();
+          if (typeof obj == 'object' && obj !== null) {
+            if (Bj(obj)) {
+              let r = t.jsxExpressionContainerToVariableAlias(obj, i);
+              r && (parent[key] = r);
+            } else {
+              Object.entries(obj).forEach(([t, i]) => {
+                typeof i == 'object' && i !== null && r.push({
+                  obj: i,
+                  key: t,
+                  parent: obj
                 });
-              }
+              });
             }
           }
-          return n;
-        }(usagePropsToRawProps(o, n, (e) => {
-          let n = i.findComponentIdFromJSXName(e);
-          return n ?
-            getComponentInfoById(n, {
-              enableTsArrays: !1,
-              noTypeInfoCache: t.noTypeInfoCache,
-              exposeAllNestedInstances: !0,
-              bubbleInstanceSwapProps: !0
-            }) :
-            null;
-        }, {
-          exposeAllNestedInstances: !0
-        }), i, r)
-      } :
-      {};
+        }
+        return n;
+      }(usagePropsToRawProps(o, n, e => {
+        let n = i.findComponentIdFromJSXName(e);
+        return n ? getComponentInfoById(n, {
+          enableTsArrays: !1,
+          noTypeInfoCache: t.noTypeInfoCache,
+          exposeAllNestedInstances: !0,
+          bubbleInstanceSwapProps: !0
+        }) : null;
+      }, {
+        exposeAllNestedInstances: !0
+      }), i, r)
+    } : {};
   }
 });
 let ef = _$$z.object({
   name: _$$z.string().optional()
 });
 function eh(e) {
-  if (e.type === 'TEXT' && e.name === e.characters)
-    return {};
+  if (e.type === 'TEXT' && e.name === e.characters) return {};
   let t = ey[e.type];
   let i = e.name.replace(/\d/g, '').replace(/\s/g, '');
-  return t && t.includes(i) ?
-    {} :
-    {
-      name: e.name
-    };
+  return t && t.includes(i) ? {} : {
+    name: e.name
+  };
 }
 function em({
   params: e
@@ -1956,9 +1832,8 @@ let eg = ei({
   defaults: () => ({}),
   serialize: (e, t) => {
     if (e.type === 'INSTANCE') {
-      let t = e.mainComponent ? d((e.mainComponent)) : null;
-      if (e.name === t?.name)
-        return {};
+      let t = e.mainComponent ? d(e.mainComponent) : null;
+      if (e.name === t?.name) return {};
     }
     return (e.type !== 'SYMBOL' || !t.serializeAsComponentDefinition) && (e.isState || t.includeNames) ? eh(e) : {};
   },
@@ -1998,18 +1873,16 @@ function eE(e, t, i) {
   let r = i.variableAliasToJSXExpressionContainer(t.includeVariables ? e.boundVariables.paddingLeft : void 0) ?? i.maybeNormalizePxValue(e.stackLeftPadding, 'x');
   let o = i.variableAliasToJSXExpressionContainer(t.includeVariables ? e.boundVariables.paddingRight : void 0) ?? i.maybeNormalizePxValue(e.stackRightPadding, 'x');
   let a = i.variableAliasToJSXExpressionContainer(t.includeVariables ? e.boundVariables.paddingBottom : void 0) ?? i.maybeNormalizePxValue(e.stackBottomPadding, 'y');
-  return t.normalizePxToRange01 || (n !== r || r !== o || o !== a || a !== n) && (typeof n != 'object' || typeof r != 'object' || typeof o != 'object' || typeof a != 'object' || n.expression !== r.expression || r.expression !== o.expression || o.expression !== a.expression || a.expression !== n.expression) ?
-    {
-      padding: {
-        top: n,
-        left: r,
-        right: o,
-        bottom: a
-      }
-    } :
-    {
-      padding: n
-    };
+  return t.normalizePxToRange01 || (n !== r || r !== o || o !== a || a !== n) && (typeof n != 'object' || typeof r != 'object' || typeof o != 'object' || typeof a != 'object' || n.expression !== r.expression || r.expression !== o.expression || o.expression !== a.expression || a.expression !== n.expression) ? {
+    padding: {
+      top: n,
+      left: r,
+      right: o,
+      bottom: a
+    }
+  } : {
+    padding: n
+  };
 }
 function eN({
   padding: e,
@@ -2024,41 +1897,38 @@ function eN({
       n.stackLeftPadding = t.maybeDenormalizePxValue(e, 'x');
       n.stackRightPadding = t.maybeDenormalizePxValue(e, 'x');
       n.stackBottomPadding = t.maybeDenormalizePxValue(e, 'y');
-    } else
-      if (Bj(e)) {
-        let n = t.jsxExpressionContainerToVariableAlias(e, i);
-        r.paddingTop = n;
-        r.paddingLeft = n;
-        r.paddingRight = n;
-        r.paddingBottom = n;
-      } else {
-        if ('vertical' in e) {
-          if (typeof e?.vertical == 'number') {
-            n.stackTopPadding = t.maybeDenormalizePxValue(e.vertical, 'y');
-            n.stackBottomPadding = t.maybeDenormalizePxValue(e.vertical, 'y');
-          } else
-            if (Bj(e.vertical)) {
-              let n = t.jsxExpressionContainerToVariableAlias(e.vertical, i);
-              r.paddingTop = n;
-              r.paddingBottom = n;
-            }
+    } else if (Bj(e)) {
+      let n = t.jsxExpressionContainerToVariableAlias(e, i);
+      r.paddingTop = n;
+      r.paddingLeft = n;
+      r.paddingRight = n;
+      r.paddingBottom = n;
+    } else {
+      if ('vertical' in e) {
+        if (typeof e?.vertical == 'number') {
+          n.stackTopPadding = t.maybeDenormalizePxValue(e.vertical, 'y');
+          n.stackBottomPadding = t.maybeDenormalizePxValue(e.vertical, 'y');
+        } else if (Bj(e.vertical)) {
+          let n = t.jsxExpressionContainerToVariableAlias(e.vertical, i);
+          r.paddingTop = n;
+          r.paddingBottom = n;
         }
-        if ('horizontal' in e) {
-          if (typeof e?.horizontal == 'number') {
-            n.stackLeftPadding = t.maybeDenormalizePxValue(e.horizontal, 'x');
-            n.stackRightPadding = t.maybeDenormalizePxValue(e.horizontal, 'x');
-          } else
-            if (Bj(e.horizontal)) {
-              let n = t.jsxExpressionContainerToVariableAlias(e.horizontal, i);
-              r.paddingLeft = n;
-              r.paddingRight = n;
-            }
-        }
-        'top' in e && (typeof e?.top == 'number' ? n.stackTopPadding = t.maybeDenormalizePxValue(e.top, 'y') : Bj(e.top) && (r.paddingTop = t.jsxExpressionContainerToVariableAlias(e.top, i)));
-        'left' in e && (typeof e?.left == 'number' ? n.stackLeftPadding = t.maybeDenormalizePxValue(e.left, 'x') : Bj(e.left) && (r.paddingLeft = t.jsxExpressionContainerToVariableAlias(e.left, i)));
-        'right' in e && (typeof e?.right == 'number' ? n.stackRightPadding = t.maybeDenormalizePxValue(e.right, 'x') : Bj(e.right) && (r.paddingRight = t.jsxExpressionContainerToVariableAlias(e.right, i)));
-        'bottom' in e && (typeof e?.bottom == 'number' ? n.stackBottomPadding = t.maybeDenormalizePxValue(e.bottom, 'y') : Bj(e.bottom) && (r.paddingBottom = t.jsxExpressionContainerToVariableAlias(e.bottom, i)));
       }
+      if ('horizontal' in e) {
+        if (typeof e?.horizontal == 'number') {
+          n.stackLeftPadding = t.maybeDenormalizePxValue(e.horizontal, 'x');
+          n.stackRightPadding = t.maybeDenormalizePxValue(e.horizontal, 'x');
+        } else if (Bj(e.horizontal)) {
+          let n = t.jsxExpressionContainerToVariableAlias(e.horizontal, i);
+          r.paddingLeft = n;
+          r.paddingRight = n;
+        }
+      }
+      'top' in e && (typeof e?.top == 'number' ? n.stackTopPadding = t.maybeDenormalizePxValue(e.top, 'y') : Bj(e.top) && (r.paddingTop = t.jsxExpressionContainerToVariableAlias(e.top, i)));
+      'left' in e && (typeof e?.left == 'number' ? n.stackLeftPadding = t.maybeDenormalizePxValue(e.left, 'x') : Bj(e.left) && (r.paddingLeft = t.jsxExpressionContainerToVariableAlias(e.left, i)));
+      'right' in e && (typeof e?.right == 'number' ? n.stackRightPadding = t.maybeDenormalizePxValue(e.right, 'x') : Bj(e.right) && (r.paddingRight = t.jsxExpressionContainerToVariableAlias(e.right, i)));
+      'bottom' in e && (typeof e?.bottom == 'number' ? n.stackBottomPadding = t.maybeDenormalizePxValue(e.bottom, 'y') : Bj(e.bottom) && (r.paddingBottom = t.jsxExpressionContainerToVariableAlias(e.bottom, i)));
+    }
   }
   return {
     props: n,
@@ -2072,28 +1942,25 @@ let ev = _$$z.object({
   expression: _$$z.string()
 }).partial();
 let eO = _$$z.object({
-  flex: _$$z.$$enum(['vertical', 'horizontal']).optional().describe('Enables auto-layout for this frame and determines whether children are laid out horizontally or vertically. If not defined, then all children are absolutely positioned.'),
+  flex: _$$z.enum(['vertical', 'horizontal']).optional().describe('Enables auto-layout for this frame and determines whether children are laid out horizontally or vertically. If not defined, then all children are absolutely positioned.'),
   padding: eI,
   spacing: _$$z.union([_$$z.literal('auto'), _$$z.number(), ev]).optional().describe('Determines distance between children of this frame. A single number value or "auto" controls both horizontal and vertical gap. "auto" spacing is the same as `justify-content: space-between` in css.'),
   wrap: _$$z.boolean().optional().describe('Determines whether children that overflow the bounds of this frame will wrap to a new line. Only applicable when `flex` is set to "horizontal"'),
-  horizontalAlignItems: _$$z.$$enum(['start', 'end', 'center']).optional().describe('Determines how the children in this frame should be aligned in the horizontal direction.'),
-  verticalAlignItems: _$$z.$$enum(['start', 'end', 'center', 'baseline']).optional().describe('Determines how the children in this frame should be aligned in the vertical direction. "baseline" can only be set on horizontal auto-layout frames, and aligns all children along the text baseline.')
+  horizontalAlignItems: _$$z.enum(['start', 'end', 'center']).optional().describe('Determines how the children in this frame should be aligned in the horizontal direction.'),
+  verticalAlignItems: _$$z.enum(['start', 'end', 'center', 'baseline']).optional().describe('Determines how the children in this frame should be aligned in the vertical direction. "baseline" can only be set on horizontal auto-layout frames, and aligns all children along the text baseline.')
 }).describe('Fields that control how children are laid out in an auto-layout frame. Only when `flex` is defined will the other fields here take effect.');
 let eA = _$$z.object({
-  direction: _$$z.$$enum(['vertical', 'horizontal']).optional().describe('Determines whether children are laid out horizontally or vertically.  Defaults to `vertical`')
+  direction: _$$z.enum(['vertical', 'horizontal']).optional().describe('Determines whether children are laid out horizontally or vertically.  Defaults to `vertical`')
 }).merge(eO.omit({
   flex: !0
 }));
 function eC(e, t, i, n) {
-  if (!e.isStack)
-    return;
+  if (!e.isStack) return;
   let r = {};
-  e.stackMode === 'HORIZONTAL' ? (
-    r.flex = 'horizontal', r.wrap = e.stackWrap === 'WRAP', r.wrap && (r.spacing = {
-      horizontal: i.variableAliasToJSXExpressionContainer(t.includeVariables ? e.boundVariables.itemSpacing : void 0) ?? i.maybeNormalizePxValue(e.stackSpacing, 'x'),
-      vertical: i.variableAliasToJSXExpressionContainer(t.includeVariables ? e.boundVariables.counterAxisSpacing : void 0) ?? i.maybeNormalizePxValue(e.stackCounterSpacing, 'y')
-    }, e.stackCounterAlignContent === 'SPACE_BETWEEN' && (r.spacing.vertical = 'auto'), (e.stackPrimaryAlignItems === 'SPACE_BETWEEN' || e.stackPrimaryAlignItems === 'SPACE_EVENLY') && (r.spacing.horizontal = 'auto'), (r.spacing.horizontal === r.spacing.vertical || typeof r.spacing.horizontal == 'object' && typeof r.spacing.vertical == 'object' && r.spacing.horizontal?.expression === r.spacing.vertical?.expression) && (r.spacing = r.spacing.horizontal))) :
-    e.stackMode === 'VERTICAL' && (r.flex = 'vertical');
+  e.stackMode === 'HORIZONTAL' ? (r.flex = 'horizontal', r.wrap = e.stackWrap === 'WRAP', r.wrap && (r.spacing = {
+    horizontal: i.variableAliasToJSXExpressionContainer(t.includeVariables ? e.boundVariables.itemSpacing : void 0) ?? i.maybeNormalizePxValue(e.stackSpacing, 'x'),
+    vertical: i.variableAliasToJSXExpressionContainer(t.includeVariables ? e.boundVariables.counterAxisSpacing : void 0) ?? i.maybeNormalizePxValue(e.stackCounterSpacing, 'y')
+  }, e.stackCounterAlignContent === 'SPACE_BETWEEN' && (r.spacing.vertical = 'auto'), (e.stackPrimaryAlignItems === 'SPACE_BETWEEN' || e.stackPrimaryAlignItems === 'SPACE_EVENLY') && (r.spacing.horizontal = 'auto'), (r.spacing.horizontal === r.spacing.vertical || typeof r.spacing.horizontal == 'object' && typeof r.spacing.vertical == 'object' && r.spacing.horizontal?.expression === r.spacing.vertical?.expression) && (r.spacing = r.spacing.horizontal))) : e.stackMode === 'VERTICAL' && (r.flex = 'vertical');
   e.stackWrap !== 'WRAP' && typeof e.stackSpacing == 'number' && (e.stackPrimaryAlignItems === 'SPACE_BETWEEN' || e.stackPrimaryAlignItems === 'SPACE_EVENLY' ? r.spacing = 'auto' : r.spacing = i.variableAliasToJSXExpressionContainer(t.includeVariables ? e.boundVariables.itemSpacing : void 0) ?? i.maybeNormalizePxValue(e.stackSpacing, e.stackMode === 'HORIZONTAL' ? 'x' : 'y'));
   let o = e.stackMode === 'HORIZONTAL' ? 'horizontalAlignItems' : 'verticalAlignItems';
   switch (e.stackPrimaryAlignItems) {
@@ -2111,7 +1978,7 @@ function eC(e, t, i, n) {
       r[o] = void 0;
       break;
     default:
-      xb(e.stackPrimaryAlignItems);
+      throwTypeError(e.stackPrimaryAlignItems);
   }
   let a = e.stackMode === 'HORIZONTAL' ? 'verticalAlignItems' : 'horizontalAlignItems';
   switch (e.stackCounterAlignItems) {
@@ -2128,9 +1995,9 @@ function eC(e, t, i, n) {
       a === 'verticalAlignItems' ? r[a] = 'baseline' : r[a] = 'end';
       break;
     default:
-      xb(e.stackCounterAlignItems);
+      throwTypeError(e.stackCounterAlignItems);
   }
-  return (Object.assign(r, eE(e, t, i)), n && (r = function(e, t) {
+  return (Object.assign(r, eE(e, t, i)), n && (r = function (e, t) {
     let i = {};
     e.flex === 'horizontal' && t.includes('stack-wrap') && (i.wrap = e.wrap);
     (t.includes('stack-spacing') || t.includes('stack-primary-align-items') || t.includes('stack-counter-align-content')) && (i.spacing = e.spacing);
@@ -2138,56 +2005,51 @@ function eC(e, t, i, n) {
     t.includes('stack-counter-align-items') && (i.flex === 'horizontal' ? i.verticalAlignItems = e.verticalAlignItems : i.horizontalAlignItems = e.horizontalAlignItems);
     (t.includes('stack-padding-top') || t.includes('stack-padding-bottom') || t.includes('stack-padding-left') || t.includes('stack-padding-right')) && (i.padding = e.padding);
     return i;
-  }(r, n)), t.tailwind) ?
-    function(e) {
-      let {
-        flex,
-        wrap,
-        horizontalAlignItems,
-        verticalAlignItems,
-        padding,
-        spacing
-      } = e;
-      let l = [];
-      if (flex && (flex === 'vertical' ? l.push('flex-col') : flex === 'horizontal' && l.push('flex')), spacing && (typeof spacing == 'number' ? l.push(`gap-${_$$h(spacing)}`) : spacing === 'auto' ? (l.push('justify-between'), wrap && l.push('content-between')) : typeof spacing == 'object' && 'horizontal' in spacing && (typeof spacing.horizontal == 'number' ? l.push(`gap-x-${_$$h(spacing.horizontal)}`) : spacing.horizontal === 'auto' && flex === 'horizontal' && l.push('justify-between'), typeof spacing.vertical == 'number' ? l.push(`gap-y-${_$$h(spacing.vertical)}`) : spacing.vertical === 'auto' && (flex === 'vertical' ? l.push('justify-between') : wrap && l.push('content-between')))), wrap && l.push('flex-wrap'), horizontalAlignItems && horizontalAlignItems !== 'start' && l.push(`${flex === 'horizontal' ? 'justify' : 'items'}-${horizontalAlignItems}`), verticalAlignItems && verticalAlignItems !== 'start' && l.push(`${flex === 'horizontal' ? 'items' : 'justify'}-${verticalAlignItems}`), padding) {
-        if (typeof padding == 'number') {
-          l.push(`p-${_$$h(padding)}`);
-        } else
-          if (typeof padding == 'object' && !Bj(padding) && void 0 !== padding.top && void 0 !== padding.bottom && void 0 !== padding.left && void 0 !== padding.right && !Bj(padding.top) && !Bj(padding.bottom) && !Bj(padding.left) && !Bj(padding.right)) {
-            let {
-              top,
-              left,
-              right,
-              bottom
-            } = padding;
-            top === bottom ? top > 0 && l.push(`py-${_$$h(top)}`) : (top > 0 && l.push(`pt-${_$$h(top)}`), bottom > 0 && l.push(`pb-${_$$h(bottom)}`));
-            left === right ? left > 0 && l.push(`px-${_$$h(left)}`) : (left > 0 && l.push(`pl-${_$$h(left)}`), right > 0 && l.push(`pr-${_$$h(right)}`));
-          }
-      }
-      return {
-        className: l.join(' ')
-      };
-    }(r) :
-    t.flavor === 'flow' ?
-      function(e) {
+  }(r, n)), t.tailwind) ? function (e) {
+    let {
+      flex,
+      wrap,
+      horizontalAlignItems,
+      verticalAlignItems,
+      padding,
+      spacing
+    } = e;
+    let l = [];
+    if (flex && (flex === 'vertical' ? l.push('flex-col') : flex === 'horizontal' && l.push('flex')), spacing && (typeof spacing == 'number' ? l.push(`gap-${_$$h(spacing)}`) : spacing === 'auto' ? (l.push('justify-between'), wrap && l.push('content-between')) : typeof spacing == 'object' && 'horizontal' in spacing && (typeof spacing.horizontal == 'number' ? l.push(`gap-x-${_$$h(spacing.horizontal)}`) : spacing.horizontal === 'auto' && flex === 'horizontal' && l.push('justify-between'), typeof spacing.vertical == 'number' ? l.push(`gap-y-${_$$h(spacing.vertical)}`) : spacing.vertical === 'auto' && (flex === 'vertical' ? l.push('justify-between') : wrap && l.push('content-between')))), wrap && l.push('flex-wrap'), horizontalAlignItems && horizontalAlignItems !== 'start' && l.push(`${flex === 'horizontal' ? 'justify' : 'items'}-${horizontalAlignItems}`), verticalAlignItems && verticalAlignItems !== 'start' && l.push(`${flex === 'horizontal' ? 'items' : 'justify'}-${verticalAlignItems}`), padding) {
+      if (typeof padding == 'number') {
+        l.push(`p-${_$$h(padding)}`);
+      } else if (typeof padding == 'object' && !Bj(padding) && void 0 !== padding.top && void 0 !== padding.bottom && void 0 !== padding.left && void 0 !== padding.right && !Bj(padding.top) && !Bj(padding.bottom) && !Bj(padding.left) && !Bj(padding.right)) {
         let {
-          flex = 'horizontal',
-          padding,
-          spacing,
-          wrap,
-          horizontalAlignItems,
-          verticalAlignItems
-        } = e;
-        return {
-          direction: flex,
-          padding,
-          spacing,
-          wrap,
-          horizontalAlignItems,
-          verticalAlignItems
-        };
-      }(r) :
-      r;
+          top,
+          left,
+          right,
+          bottom
+        } = padding;
+        top === bottom ? top > 0 && l.push(`py-${_$$h(top)}`) : (top > 0 && l.push(`pt-${_$$h(top)}`), bottom > 0 && l.push(`pb-${_$$h(bottom)}`));
+        left === right ? left > 0 && l.push(`px-${_$$h(left)}`) : (left > 0 && l.push(`pl-${_$$h(left)}`), right > 0 && l.push(`pr-${_$$h(right)}`));
+      }
+    }
+    return {
+      className: l.join(' ')
+    };
+  }(r) : t.flavor === 'flow' ? function (e) {
+    let {
+      flex = 'horizontal',
+      padding,
+      spacing,
+      wrap,
+      horizontalAlignItems,
+      verticalAlignItems
+    } = e;
+    return {
+      direction: flex,
+      padding,
+      spacing,
+      wrap,
+      horizontalAlignItems,
+      verticalAlignItems
+    };
+  }(r) : r;
 }
 function ew({
   params: e,
@@ -2196,125 +2058,118 @@ function ew({
   elem: n,
   deserializingOverrides: r
 }) {
-  t.tailwind ?
-    e = function(e) {
-      let {
-        className
-      } = e;
-      let i = {};
-      let n = {};
-      let r = {};
-      for (let {
-        classParts,
-        isNegative
-      } of (i.flex = className?.includes('flex') ? className.includes('flex-col') ? 'vertical' : 'horizontal' : void 0, mu(className))) {
-        let t = classParts[0];
-        if (t) {
-          if (t === 'flex') {
-            switch (classParts[1]) {
-              case 'nowrap':
-                i.wrap = !1;
-                break;
-              case 'wrap':
-                i.wrap = !0;
-            }
-          } else
-            if (t === 'justify') {
+  t.tailwind ? e = function (e) {
+    let {
+      className
+    } = e;
+    let i = {};
+    let n = {};
+    let r = {};
+    for (let {
+      classParts,
+      isNegative
+    } of (i.flex = className?.includes('flex') ? className.includes('flex-col') ? 'vertical' : 'horizontal' : void 0, mu(className))) {
+      let t = classParts[0];
+      if (t) {
+        if (t === 'flex') {
+          switch (classParts[1]) {
+            case 'nowrap':
+              i.wrap = !1;
+              break;
+            case 'wrap':
+              i.wrap = !0;
+          }
+        } else if (t === 'justify') {
+          switch (classParts[1]) {
+            case 'start':
+            case 'end':
+            case 'center':
+              i.flex === 'horizontal' ? i.horizontalAlignItems = classParts[1] : i.flex === 'vertical' && (i.verticalAlignItems = classParts[1]);
+              break;
+            case 'between':
+              i.flex && (r[i.flex] = 'auto');
+          }
+        } else if (t === 'items') {
+          switch (classParts[1]) {
+            case 'start':
+            case 'end':
+            case 'center':
+              i.flex === 'vertical' ? i.horizontalAlignItems = classParts[1] : i.flex === 'horizontal' && (i.verticalAlignItems = classParts[1]);
+          }
+        } else if (t === 'content') {
+          classParts[1] === 'between' && (r.vertical = 'auto');
+        } else if (['p', 'pt', 'pb', 'pl', 'pr', 'py', 'px'].includes(t)) {
+          let r = () => {
+            let t = pu[classParts[1]] ?? Hc(classParts[1]) ?? 0;
+            return isNegative ? -1 * t : t;
+          };
+          switch (t) {
+            case 'p':
+              i.padding = r();
+              break;
+            case 'pt':
+              n.top = r();
+              break;
+            case 'pb':
+              n.bottom = r();
+              break;
+            case 'pl':
+              n.left = r();
+              break;
+            case 'pr':
+              n.right = r();
+              break;
+            case 'py':
+              n.top = r();
+              n.bottom = r();
+              break;
+            case 'px':
+              n.left = r();
+              n.right = r();
+          }
+        } else if (t === 'gap') {
+          let t = (() => {
+            let t = classParts.length - 1;
+            let i = pu[classParts[t]] ?? Hc(classParts[t]) ?? void 0;
+            return void 0 === i ? i : isNegative ? -1 * i : i;
+          })();
+          if (void 0 !== t) {
+            if (classParts.length === 2) {
+              i.spacing = t;
+            } else {
               switch (classParts[1]) {
-                case 'start':
-                case 'end':
-                case 'center':
-                  i.flex === 'horizontal' ? i.horizontalAlignItems = classParts[1] : i.flex === 'vertical' && (i.verticalAlignItems = classParts[1]);
+                case 'x':
+                  r.horizontal = t;
                   break;
-                case 'between':
-                  i.flex && (r[i.flex] = 'auto');
+                case 'y':
+                  r.vertical = t;
               }
-            } else
-              if (t === 'items') {
-                switch (classParts[1]) {
-                  case 'start':
-                  case 'end':
-                  case 'center':
-                    i.flex === 'vertical' ? i.horizontalAlignItems = classParts[1] : i.flex === 'horizontal' && (i.verticalAlignItems = classParts[1]);
-                }
-              } else
-                if (t === 'content') {
-                  classParts[1] === 'between' && (r.vertical = 'auto');
-                } else
-                  if (['p', 'pt', 'pb', 'pl', 'pr', 'py', 'px'].includes(t)) {
-                    let r = () => {
-                      let t = pu[classParts[1]] ?? Hc(classParts[1]) ?? 0;
-                      return isNegative ? -1 * t : t;
-                    };
-                    switch (t) {
-                      case 'p':
-                        i.padding = r();
-                        break;
-                      case 'pt':
-                        n.top = r();
-                        break;
-                      case 'pb':
-                        n.bottom = r();
-                        break;
-                      case 'pl':
-                        n.left = r();
-                        break;
-                      case 'pr':
-                        n.right = r();
-                        break;
-                      case 'py':
-                        n.top = r();
-                        n.bottom = r();
-                        break;
-                      case 'px':
-                        n.left = r();
-                        n.right = r();
-                    }
-                  } else
-                    if (t === 'gap') {
-                      let t = (() => {
-                        let t = classParts.length - 1;
-                        let i = pu[classParts[t]] ?? Hc(classParts[t]) ?? void 0;
-                        return void 0 === i ? i : isNegative ? -1 * i : i;
-                      })();
-                      if (void 0 !== t) {
-                        if (classParts.length === 2) {
-                          i.spacing = t;
-                        } else {
-                          switch (classParts[1]) {
-                            case 'x':
-                              r.horizontal = t;
-                              break;
-                            case 'y':
-                              r.vertical = t;
-                          }
-                        }
-                      }
-                    }
+            }
+          }
         }
       }
-      Object.keys(n).length > 0 && (i.padding = n);
-      Object.keys(r).length > 0 && (r.vertical === 'auto' && void 0 === r.horizontal ? i.spacing = 'auto' : r.horizontal === r.vertical ? i.spacing = r.horizontal : i.spacing = r);
-      return i;
-    }(e) :
-    t.flavor === 'flow' && (e = function(e) {
-      let {
-        direction = 'horizontal',
-        padding,
-        spacing,
-        wrap,
-        horizontalAlignItems,
-        verticalAlignItems
-      } = e;
-      return {
-        flex: direction,
-        padding,
-        spacing,
-        wrap,
-        horizontalAlignItems,
-        verticalAlignItems
-      };
-    }(e));
+    }
+    Object.keys(n).length > 0 && (i.padding = n);
+    Object.keys(r).length > 0 && (r.vertical === 'auto' && void 0 === r.horizontal ? i.spacing = 'auto' : r.horizontal === r.vertical ? i.spacing = r.horizontal : i.spacing = r);
+    return i;
+  }(e) : t.flavor === 'flow' && (e = function (e) {
+    let {
+      direction = 'horizontal',
+      padding,
+      spacing,
+      wrap,
+      horizontalAlignItems,
+      verticalAlignItems
+    } = e;
+    return {
+      flex: direction,
+      padding,
+      spacing,
+      wrap,
+      horizontalAlignItems,
+      verticalAlignItems
+    };
+  }(e));
   let {
     flex,
     wrap,
@@ -2323,11 +2178,9 @@ function ew({
     padding,
     spacing
   } = e;
-  let p = r ?
-    {} :
-    {
-      stackMode: 'NONE'
-    };
+  let p = r ? {} : {
+    stackMode: 'NONE'
+  };
   if (!r && !flex) {
     return {
       props: p
@@ -2354,28 +2207,23 @@ function ew({
   if (typeof spacing == 'number') {
     p.stackSpacing = i.maybeDenormalizePxValue(spacing, flex === 'horizontal' ? 'x' : 'y');
     b && (p.stackCounterSpacing = i.maybeDenormalizePxValue(spacing, 'y'));
-  } else
-    if (spacing === 'auto') {
-      p.stackPrimaryAlignItems = 'SPACE_BETWEEN';
-      b && (p.stackCounterAlignContent = 'SPACE_BETWEEN');
-    } else
-      if (Bj(spacing)) {
-        let e = i.jsxExpressionContainerToVariableAlias(spacing, n);
-        c.itemSpacing = e;
-        b && (c.counterAxisSpacing = e);
-      } else
-        if (flex === 'horizontal' && typeof spacing == 'object' && (b && 'vertical' in spacing && (typeof spacing?.vertical == 'number' ? p.stackCounterSpacing = i.maybeDenormalizePxValue(spacing.vertical, 'y') : spacing?.vertical === 'auto' ? p.stackCounterAlignContent = 'SPACE_BETWEEN' : Bj(spacing.vertical) && (c.counterAxisSpacing = i.jsxExpressionContainerToVariableAlias(spacing.vertical, n))), 'horizontal' in spacing && (typeof spacing?.horizontal == 'number' ? p.stackSpacing = i.maybeDenormalizePxValue(spacing.horizontal, 'x') : spacing?.horizontal === 'auto' ? p.stackPrimaryAlignItems = 'SPACE_BETWEEN' : Bj(spacing.horizontal) && (c.itemSpacing = i.jsxExpressionContainerToVariableAlias(spacing.horizontal, n))), Bj(spacing))) {
-          let e = i.jsxExpressionContainerToVariableAlias(spacing, n);
-          c.itemSpacing = e;
-          c.counterAxisSpacing = e;
-        }
+  } else if (spacing === 'auto') {
+    p.stackPrimaryAlignItems = 'SPACE_BETWEEN';
+    b && (p.stackCounterAlignContent = 'SPACE_BETWEEN');
+  } else if (Bj(spacing)) {
+    let e = i.jsxExpressionContainerToVariableAlias(spacing, n);
+    c.itemSpacing = e;
+    b && (c.counterAxisSpacing = e);
+  } else if (flex === 'horizontal' && typeof spacing == 'object' && (b && 'vertical' in spacing && (typeof spacing?.vertical == 'number' ? p.stackCounterSpacing = i.maybeDenormalizePxValue(spacing.vertical, 'y') : spacing?.vertical === 'auto' ? p.stackCounterAlignContent = 'SPACE_BETWEEN' : Bj(spacing.vertical) && (c.counterAxisSpacing = i.jsxExpressionContainerToVariableAlias(spacing.vertical, n))), 'horizontal' in spacing && (typeof spacing?.horizontal == 'number' ? p.stackSpacing = i.maybeDenormalizePxValue(spacing.horizontal, 'x') : spacing?.horizontal === 'auto' ? p.stackPrimaryAlignItems = 'SPACE_BETWEEN' : Bj(spacing.horizontal) && (c.itemSpacing = i.jsxExpressionContainerToVariableAlias(spacing.horizontal, n))), Bj(spacing))) {
+    let e = i.jsxExpressionContainerToVariableAlias(spacing, n);
+    c.itemSpacing = e;
+    c.counterAxisSpacing = e;
+  }
   return {
-    props: Object.keys(c).length > 0 ?
-      {
-        ...p,
-        boundVariables: c
-      } :
-      p,
+    props: Object.keys(c).length > 0 ? {
+      ...p,
+      boundVariables: c
+    } : p,
     layoutMetadata: f
   };
 }
@@ -2383,7 +2231,7 @@ let eR = ei({
   name: 'AutoLayout',
   includeInTailwind: !0,
   fieldGroups: new Set(['layout']),
-  outputSchema: (e) => e.tailwind ? zA : e.flavor === 'flow' ? eA : eO,
+  outputSchema: e => e.tailwind ? zA : e.flavor === 'flow' ? eA : eO,
   defaults: ({
     nodeInfo: e,
     options: t
@@ -2411,22 +2259,16 @@ let eR = ei({
     }
     return {};
   },
-  serializeNodeInfoForDefaults: (e) => ({
+  serializeNodeInfoForDefaults: e => ({
     isAutoLayout: e.isStack
   }),
-  deserializeNodeInfoForDefaults: (e, t) => t.flavor === 'flow' ?
-    {
-      isAutoLayout: !0
-    } :
-    'flex' in e ?
-      {
-        isAutoLayout: !!e.flex
-      } :
-      'className' in e && e.className ?
-        {
-          isAutoLayout: e.className.includes('flex')
-        } :
-        {},
+  deserializeNodeInfoForDefaults: (e, t) => t.flavor === 'flow' ? {
+    isAutoLayout: !0
+  } : 'flex' in e ? {
+    isAutoLayout: !!e.flex
+  } : 'className' in e && e.className ? {
+    isAutoLayout: e.className.includes('flex')
+  } : {},
   serialize: (e, t, i) => eC(e, t, i, null),
   serializeOverrides: ({
     node: e,
@@ -2459,14 +2301,12 @@ let eR = ei({
 });
 let eP = ['FRAME', 'SYMBOL', 'INSTANCE'];
 let ek = _$$z.object({
-  overflow: _$$z.$$enum(['hidden', 'visible']).optional()
+  overflow: _$$z.enum(['hidden', 'visible']).optional()
 });
 function ej(e) {
-  return eP.includes(e.type) ?
-    {
-      overflow: e.frameMaskDisabled ? 'visible' : 'hidden'
-    } :
-    {};
+  return eP.includes(e.type) ? {
+    overflow: e.frameMaskDisabled ? 'visible' : 'hidden'
+  } : {};
 }
 function eL({
   params: e
@@ -2486,12 +2326,10 @@ let eD = ei({
   outputSchema: () => ek,
   defaults: ({
     nodeType: e
-  }) => eP.includes(e) ?
-      {
-        overflow: 'hidden'
-      } :
-      {},
-  serialize: (e) => ej(e),
+  }) => eP.includes(e) ? {
+    overflow: 'hidden'
+  } : {},
+  serialize: e => ej(e),
   serializeOverrides: ({
     node: e,
     fieldNames: t
@@ -2551,55 +2389,42 @@ let e_ = ei({
   name: 'PositionSize',
   includeInTailwind: !0,
   fieldGroups: new Set(['layout']),
-  outputSchema: (e) => e.tailwindOnly ?
-    zA :
-    e.tailwind ?
-      eM :
-      e.flavor === 'flow' ?
-        eV :
-        eV.omit({
-          gridRowStart: !0,
-          gridRowSpan: !0,
-          gridColumnStart: !0,
-          gridColumnSpan: !0
-        }),
+  outputSchema: e => e.tailwindOnly ? zA : e.tailwind ? eM : e.flavor === 'flow' ? eV : eV.omit({
+    gridRowStart: !0,
+    gridRowSpan: !0,
+    gridColumnStart: !0,
+    gridColumnSpan: !0
+  }),
   defaults: ({
     nodeType: e,
     nodeInfo: t,
     options: i
   }) => {
-    if (i.tailwind)
-      return {};
+    if (i.tailwind) return {};
     let n = {
       minWidth: null,
       minHeight: null,
       maxWidth: null,
       maxHeight: null
     };
-    return e === 'TEXT' ?
-      {
-        ...n,
-        width: i.flavor === 'flow' ? 'fill-parent' : 'hug-contents',
-        height: 'hug-contents'
-      } :
-      e === 'FRAME' && (t.isAutoLayout || i.flavor === 'flow') ?
-        {
-          ...n,
-          width: 'hug-contents',
-          height: 'hug-contents'
-        } :
-        n;
+    return e === 'TEXT' ? {
+      ...n,
+      width: i.flavor === 'flow' ? 'fill-parent' : 'hug-contents',
+      height: 'hug-contents'
+    } : e === 'FRAME' && (t.isAutoLayout || i.flavor === 'flow') ? {
+      ...n,
+      width: 'hug-contents',
+      height: 'hug-contents'
+    } : n;
   },
   serialize: (e, t, i) => {
-    if (!e.size)
-      return;
-    let n = function(e, t, i) {
+    if (!e.size) return;
+    let n = function (e, t, i) {
       let n = i.isSerializationRoot(e);
       function r(e, t) {
         return n ? e : i.maybeNormalizePxValue(e, t);
       }
-      if (t.normalizeRootXY && n)
-        return {};
+      if (t.normalizeRootXY && n) return {};
       if (t.forceAbsolutePosition) {
         return {
           x: r(e.x, 'x'),
@@ -2607,11 +2432,9 @@ let e_ = ei({
         };
       }
       let o = e.parentNode?.isStackOrFixedSizeContainer && e.parentNode?.isLayoutContainer;
-      if (o && e.stackPositioning === 'AUTO')
-        return {};
+      if (o && e.stackPositioning === 'AUTO') return {};
       let a = {};
-      if ((o || t.flavor === 'flow' && !e.parentNode?.isGroup && e.parentNode?.type !== 'BOOLEAN_OPERATION') && (a.position = 'absolute'), e.isGroup || e.type === 'BOOLEAN_OPERATION')
-        return a;
+      if ((o || t.flavor === 'flow' && !e.parentNode?.isGroup && e.parentNode?.type !== 'BOOLEAN_OPERATION') && (a.position = 'absolute'), e.isGroup || e.type === 'BOOLEAN_OPERATION') return a;
       let l = Ji(e);
       if (!l || !eB(e, l)) {
         let n = e.x;
@@ -2673,7 +2496,7 @@ let e_ = ei({
             a.x = e.x;
             break;
           default:
-            xb(horizontalConstraint);
+            throwTypeError(horizontalConstraint);
         }
       }
       if (verticalConstraint) {
@@ -2714,14 +2537,13 @@ let e_ = ei({
             a.y = e.y;
             break;
           default:
-            xb(verticalConstraint);
+            throwTypeError(verticalConstraint);
         }
       }
       return a;
     }(e, t, i);
-    Object.assign(n, function(e, t, i) {
-      if (t.flavor !== 'flow' || !e.isGridChild)
-        return {};
+    Object.assign(n, function (e, t, i) {
+      if (t.flavor !== 'flow' || !e.isGridChild) return {};
       let {
         gridRowAnchorIndex,
         gridRowSpan,
@@ -2736,13 +2558,11 @@ let e_ = ei({
       };
     }(e, t, 0));
     let r = e.isGroup || e.type === 'BOOLEAN_OPERATION';
-    if (e.isInstance)
-      return t.tailwind ? eF(n, !!t.tailwindOnly) : n;
+    if (e.isInstance) return t.tailwind ? eF(n, !!t.tailwindOnly) : n;
     let o = Ji(e);
-    if (e.type === 'LINE')
-      return (o && e.stackHorizontalLayoutSize === mKm.FILL_CONTAINER ? n.length = 'fill-parent' : r || (n.length = i.maybeNormalizePxValue(e.size.x, 'x')), t.tailwind) ? eF(n, !!t.tailwindOnly) : n;
+    if (e.type === 'LINE') return (o && e.stackHorizontalLayoutSize === mKm.FILL_CONTAINER ? n.length = 'fill-parent' : r || (n.length = i.maybeNormalizePxValue(e.size.x, 'x')), t.tailwind) ? eF(n, !!t.tailwindOnly) : n;
     let a = eB(e, o);
-    let l = e.childrenNodes.filter((e) => e.stackPositioning === 'AUTO').length;
+    let l = e.childrenNodes.filter(e => e.stackPositioning === 'AUTO').length;
     let {
       horizontalConstraint,
       stackHorizontalLayoutSize,
@@ -2767,7 +2587,7 @@ let e_ = ei({
     depth: r
   }) => {
     let o = e;
-    t.tailwind && (o = function(e) {
+    t.tailwind && (o = function (e) {
       let {
         className,
         x,
@@ -2789,88 +2609,81 @@ let e_ = ei({
         if (t) {
           if (t === 'absolute') {
             a.position = 'absolute';
-          } else
-            if (['top', 'left', 'bottom', 'right'].includes(t)) {
-              let n = () => {
-                let t = classParts.length - 1;
-                let n = pu[classParts[t]] ?? Hc(classParts[t]) ?? 0;
-                return isNegative ? -1 * n : n;
-              };
-              switch (t) {
-                case 'left':
-                case 'right':
-                  if (a.x) {
-                    if (typeof a.x == 'object') {
-                      let e = a.x;
-                      a.x = {
-                        type: 'left-right',
-                        leftOffset: e.type === 'left' ? e.offset : n(),
-                        rightOffset: e.type === 'right' ? e.offset : n()
-                      };
-                    }
-                  } else {
+          } else if (['top', 'left', 'bottom', 'right'].includes(t)) {
+            let n = () => {
+              let t = classParts.length - 1;
+              let n = pu[classParts[t]] ?? Hc(classParts[t]) ?? 0;
+              return isNegative ? -1 * n : n;
+            };
+            switch (t) {
+              case 'left':
+              case 'right':
+                if (a.x) {
+                  if (typeof a.x == 'object') {
+                    let e = a.x;
                     a.x = {
-                      type: t,
-                      offset: n()
+                      type: 'left-right',
+                      leftOffset: e.type === 'left' ? e.offset : n(),
+                      rightOffset: e.type === 'right' ? e.offset : n()
                     };
                   }
-                  break;
-                case 'top':
-                case 'bottom':
-                  if (a.y) {
-                    if (typeof a.y == 'object') {
-                      let e = a.y;
-                      a.y = {
-                        type: 'top-bottom',
-                        topOffset: e.type === 'top' ? e.offset : n(),
-                        bottomOffset: e.type === 'bottom' ? e.offset : n()
-                      };
-                    }
-                  } else {
-                    a.y = {
-                      type: t,
-                      offset: n()
-                    };
-                  }
-              }
-            } else
-              if (['w', 'h'].includes(t)) {
-                let i = () => classParts[1] === 'full' ? 'fill-parent' : classParts[1] === 'fit' ? 'hug-contents' : pu[classParts[1]] ?? Hc(classParts[1]) ?? void 0;
-                if (t === 'w') {
-                  let e = i();
-                  void 0 !== e && (a.width = e);
-                } else
-                  if (t === 'h') {
-                    let e = i();
-                    void 0 !== e && (a.height = e);
-                  }
-              } else
-                if (['min', 'max'].includes(t)) {
-                  let i = () => {
-                    let t = classParts.length - 1;
-                    return classParts[0] === 'max' && classParts[1] === 'w' && y$[classParts[t]] ? y$[classParts[t]] : pu[classParts[t]] ?? Hc(classParts[t]) ?? void 0;
+                } else {
+                  a.x = {
+                    type: t,
+                    offset: n()
                   };
-                  if (t === 'min') {
-                    if (classParts[1] === 'w') {
-                      let e = i();
-                      void 0 !== e && (a.minWidth = e);
-                    } else
-                      if (classParts[1] === 'h') {
-                        let e = i();
-                        void 0 !== e && (a.minHeight = e);
-                      }
-                  } else
-                    if (t === 'max') {
-                      if (classParts[1] === 'w') {
-                        let e = i();
-                        void 0 !== e && (a.maxWidth = e);
-                      } else
-                        if (classParts[1] === 'h') {
-                          let e = i();
-                          void 0 !== e && (a.maxHeight = e);
-                        }
-                    }
                 }
+                break;
+              case 'top':
+              case 'bottom':
+                if (a.y) {
+                  if (typeof a.y == 'object') {
+                    let e = a.y;
+                    a.y = {
+                      type: 'top-bottom',
+                      topOffset: e.type === 'top' ? e.offset : n(),
+                      bottomOffset: e.type === 'bottom' ? e.offset : n()
+                    };
+                  }
+                } else {
+                  a.y = {
+                    type: t,
+                    offset: n()
+                  };
+                }
+            }
+          } else if (['w', 'h'].includes(t)) {
+            let i = () => classParts[1] === 'full' ? 'fill-parent' : classParts[1] === 'fit' ? 'hug-contents' : pu[classParts[1]] ?? Hc(classParts[1]) ?? void 0;
+            if (t === 'w') {
+              let e = i();
+              void 0 !== e && (a.width = e);
+            } else if (t === 'h') {
+              let e = i();
+              void 0 !== e && (a.height = e);
+            }
+          } else if (['min', 'max'].includes(t)) {
+            let i = () => {
+              let t = classParts.length - 1;
+              return classParts[0] === 'max' && classParts[1] === 'w' && y$[classParts[t]] ? y$[classParts[t]] : pu[classParts[t]] ?? Hc(classParts[t]) ?? void 0;
+            };
+            if (t === 'min') {
+              if (classParts[1] === 'w') {
+                let e = i();
+                void 0 !== e && (a.minWidth = e);
+              } else if (classParts[1] === 'h') {
+                let e = i();
+                void 0 !== e && (a.minHeight = e);
+              }
+            } else if (t === 'max') {
+              if (classParts[1] === 'w') {
+                let e = i();
+                void 0 !== e && (a.maxWidth = e);
+              } else if (classParts[1] === 'h') {
+                let e = i();
+                void 0 !== e && (a.maxHeight = e);
+              }
+            }
+          }
         }
       }
       a.width || (a.width = 'hug-contents');
@@ -2893,7 +2706,7 @@ let e_ = ei({
     let {
       props,
       layoutMetadata
-    } = function({
+    } = function ({
       normalizedParams: e,
       context: t,
       depth: i
@@ -2921,7 +2734,7 @@ let e_ = ei({
     });
     let {
       props: _props
-    } = function({
+    } = function ({
       normalizedParams: e
     }) {
       let {
@@ -2959,12 +2772,10 @@ let e_ = ei({
     void 0 !== flipVertical && (z.flipVertical = !!flipVertical);
     void 0 !== flipHorizontal && (z.flipHorizontal = !!flipHorizontal);
     return {
-      props: Object.keys(T).length > 0 ?
-        {
-          ...props,
-          boundVariables: T
-        } :
-        props,
+      props: Object.keys(T).length > 0 ? {
+        ...props,
+        boundVariables: T
+      } : props,
       layoutMetadata,
       customProperties: z
     };
@@ -3000,20 +2811,16 @@ function eF(e, t) {
   let g = {
     className: h.join(' ')
   };
-  return t ?
-    g :
-    {
-      ...g,
-      ...m,
-      flipHorizontal,
-      flipVertical
-    };
+  return t ? g : {
+    ...g,
+    ...m,
+    flipHorizontal,
+    flipVertical
+  };
 }
 function eX(e, t) {
-  if (void 0 === e)
-    return e;
-  if (typeof e == 'number')
-    return t.maybeDenormalizePxValue(e, 'x');
+  if (void 0 === e) return e;
+  if (typeof e == 'number') return t.maybeDenormalizePxValue(e, 'x');
   if (typeof e == 'object') {
     switch (e.type) {
       case 'left':
@@ -3040,15 +2847,14 @@ function eX(e, t) {
       case 'scale':
         break;
       default:
-        xb(e);
+        throwTypeError(e);
     }
   }
   return e;
 }
 function eB(e, t) {
   let i = t?.isStackOrFixedSizeContainer && t?.isLayoutContainer;
-  if (!t)
-    return !1;
+  if (!t) return !1;
   let n = e.parentNode;
   for (; n && n.guid !== t.guid && n.parentGuid !== t.guid;) n = n.parentNode;
   let r = e.stackPositioning === 'ABSOLUTE' || n?.isGroup && n.stackPositioning === 'ABSOLUTE';
@@ -3087,8 +2893,7 @@ function eH({
       ...e.hidden,
       expression: n
     }, t);
-    if (!r)
-      return;
+    if (!r) return;
     return {
       props: {
         boundVariables: {
@@ -3119,7 +2924,7 @@ let e$ = ei({
       if (t && 'visible' in t) {
         let e = t.visible;
         let n = i.getRootComponentTypeInfo();
-        let r = n && n.parsedDefs.find((t) => t.rawProp === e);
+        let r = n && n.parsedDefs.find(t => t.rawProp === e);
         if (r) {
           let e = (r.devFriendlyProp.type === 'DERIVED_BOOLEAN' ? r.devFriendlyProp.devFriendlyProp : r.devFriendlyProp).key;
           return {
@@ -3162,8 +2967,7 @@ let eW = ei({
   deserialize: ({
     params: e
   }) => {
-    if (!('rotation' in e) || void 0 === e.rotation)
-      return;
+    if (!('rotation' in e) || void 0 === e.rotation) return;
     let {
       rotation
     } = e;
@@ -3201,7 +3005,7 @@ let eQ = ei({
   defaults: () => ({
     blendMode: 'pass-through'
   }),
-  serialize: (e) => eY(e),
+  serialize: e => eY(e),
   serializeOverrides: ({
     node: e,
     fieldNames: t
@@ -3209,7 +3013,7 @@ let eQ = ei({
   deserialize: eZ,
   deserializeOverrides: eZ
 });
-let e6 = (e) => void 0 !== e;
+let e6 = e => void 0 !== e;
 function e4(e, t) {
   return Math.abs(e - t) < 0.001 ? t : e;
 }
@@ -3228,7 +3032,7 @@ let e3 = {
   rotation: 0
 };
 function e9(e) {
-  Object.keys(e).forEach((t) => {
+  Object.keys(e).forEach(t => {
     e[t] === e3[t] && delete e[t];
     void 0 === e[t] && delete e[t];
   });
@@ -3240,7 +3044,7 @@ let e7 = {
   rotation: 0
 };
 function te(e) {
-  Object.keys(e).forEach((t) => {
+  Object.keys(e).forEach(t => {
     e[t] === e7[t] && delete e[t];
     void 0 === e[t] && delete e[t];
   });
@@ -3265,26 +3069,23 @@ function tt(e, t) {
   });
 }
 let ti = (e, t, i, n) => {
-  let r = e.filter((e) => e.visible && e.opacity !== 0);
-  if (r.length === 0)
-    return [];
+  let r = e.filter(e => e.visible && e.opacity !== 0);
+  if (r.length === 0) return [];
   let o = r[r.length - 1];
   if (o && o.type === 'SOLID' && (r.length === 1 && o.blendMode === 'NORMAL' || t.onlyIncludeTopPaint)) {
     if (t.includeVariables) {
       let e = i.variableDataToJSXExpressionContainer(o.colorVar);
-      if (e)
-        return e;
+      if (e) return e;
     }
     return si(o.color, o.opacity);
   }
   let a = r.map((e, r) => {
-    let o = n?.find((e) => e.type !== 'vector' && e.paintIndex === r);
-    return function(e, t, i, n) {
+    let o = n?.find(e => e.type !== 'vector' && e.paintIndex === r);
+    return function (e, t, i, n) {
       if (e.type) {
         if (e.type === 'SOLID') {
           let n = si(e.color);
-          if (!n)
-            return;
+          if (!n) return;
           let r = t.includeVariables ? i.variableDataToJSXExpressionContainer(e.colorVar) : void 0;
           return e9({
             type: 'solid',
@@ -3296,17 +3097,15 @@ let ti = (e, t, i, n) => {
         if (e.type.includes('GRADIENT')) {
           return e9({
             type: e.type.toLowerCase().replace('_', '-'),
-            gradientStops: (e.stopsVar && e.stopsVar.length > 0 ? e.stopsVar : e.stops)?.map((e) => {
+            gradientStops: (e.stopsVar && e.stopsVar.length > 0 ? e.stopsVar : e.stops)?.map(e => {
               let n = t.includeVariables && 'colorVar' in e ? i.variableDataToJSXExpressionContainer(e.colorVar) : void 0;
               let r = e.color ? si(e.color) : void 0;
               let o = n ?? r;
-              return o && void 0 !== e.position ?
-                {
-                  color: o,
-                  position: e.position
-                } :
-                null;
-            }).filter((e) => e !== null) ?? [],
+              return o && void 0 !== e.position ? {
+                color: o,
+                position: e.position
+              } : null;
+            }).filter(e => e !== null) ?? [],
             gradientHandlePositions: e.type === 'GRADIENT_LINEAR' ? gJ(e.transform) : NN(e.transform),
             blendMode: _$$nl(e.blendMode),
             opacity: e.opacity
@@ -3350,7 +3149,7 @@ let ti = (e, t, i, n) => {
             highlights: e.paintFilter.highlights,
             shadows: e.paintFilter.shadows
           });
-          e.imageScaleMode && (i.scaleMode = function(e) {
+          e.imageScaleMode && (i.scaleMode = function (e) {
             switch (e) {
               case 'STRETCH':
                 return 'crop';
@@ -3379,15 +3178,13 @@ let tn = ({
 }) => {
   if (typeof e == 'string') {
     let t = /^image\(([^)]+)\)$/i.exec(e);
-    e = t ?
-      [{
-        type: 'image-generation',
-        caption: t[1]
-      }] :
-      [{
-        type: 'solid',
-        color: e
-      }];
+    e = t ? [{
+      type: 'image-generation',
+      caption: t[1]
+    }] : [{
+      type: 'solid',
+      color: e
+    }];
   }
   if (Array.isArray(e)) {
     let r = [];
@@ -3396,7 +3193,7 @@ let tn = ({
       let {
         paint,
         imageGenerationRequest
-      } = function({
+      } = function ({
         paint: e,
         options: t,
         context: i,
@@ -3404,21 +3201,17 @@ let tn = ({
       }) {
         if (e.type === 'solid') {
           let r = typeof e.color == 'string' ? QW(e.color) : e.color;
-          if (!r)
-            return {};
+          if (!r) return {};
           if (Bj(r)) {
-            if (!t.includeVariables)
-              return {};
+            if (!t.includeVariables) return {};
             let o = i.jsxExpressionContainerToVariableData(r, n);
-            return o ?
-              {
-                paint: te({
-                  type: 'SOLID',
-                  colorVar: o,
-                  blendMode: hA(e.blendMode)
-                })
-              } :
-              {};
+            return o ? {
+              paint: te({
+                type: 'SOLID',
+                colorVar: o,
+                blendMode: hA(e.blendMode)
+              })
+            } : {};
           }
           {
             let t = Math.min(e.opacity ?? 1, r.a);
@@ -3434,16 +3227,14 @@ let tn = ({
           }
         }
         if (e.type === 'gradient-angular' || e.type === 'gradient-linear' || e.type === 'gradient-radial' || e.type === 'gradient-diamond') {
-          let r = e.gradientStops.map((e) => {
+          let r = e.gradientStops.map(e => {
             let r = typeof e.color == 'string' ? QW(e.color) : e.color;
             if (r) {
               let o;
               if (Bj(r)) {
-                if (!t.includeVariables)
-                  return;
+                if (!t.includeVariables) return;
                 let o = i.jsxExpressionContainerToVariableData(r, n);
-                if (!o)
-                  return;
+                if (!o) return;
                 return {
                   colorVar: o,
                   color: {
@@ -3470,8 +3261,8 @@ let tn = ({
                 position: o.position
               };
             }
-          }).filter((e) => void 0 !== e);
-          let o = r.map((e) => ({
+          }).filter(e => void 0 !== e);
+          let o = r.map(e => ({
             color: e.color,
             position: e.position
           }));
@@ -3491,48 +3282,43 @@ let tn = ({
           if (void 0 !== e.imageRef && e.imageRef !== 'unknown') {
             try {
               i = aD(e.imageRef);
-            }
-            catch { }
+            } catch {}
           }
-          return void 0 === i ?
-            {
-              paint: tt(e, t)
-            } :
-            {
-              paint: te({
-                type: 'IMAGE',
-                image: {
-                  hash: i
-                },
-                imageShouldColorManage: !0,
-                opacity: e.opacity,
-                rotation: e.scaleMode != 'crop' ? e.rotation : void 0,
-                scale: e.scaleMode == 'tile' ? e.scalingFactor : void 0,
-                blendMode: hA(e.blendMode),
-                imageScaleMode: function(e) {
-                  switch (e) {
-                    case 'fill':
-                      break;
-                    case 'fit':
-                      return 'FIT';
-                    case 'tile':
-                      return 'TILE';
-                    case 'crop':
-                      return 'STRETCH';
-                  }
-                  return 'FILL';
-                }(e.scaleMode),
-                transform: e.imageTransform && e.imageTransform.length === 2 && e.imageTransform[0]?.length === 3 && e.imageTransform[1]?.length === 3 ? D6(e.imageTransform) : void 0,
-                paintFilter: e.filters
-              })
-            };
+          return void 0 === i ? {
+            paint: tt(e, t)
+          } : {
+            paint: te({
+              type: 'IMAGE',
+              image: {
+                hash: i
+              },
+              imageShouldColorManage: !0,
+              opacity: e.opacity,
+              rotation: e.scaleMode != 'crop' ? e.rotation : void 0,
+              scale: e.scaleMode == 'tile' ? e.scalingFactor : void 0,
+              blendMode: hA(e.blendMode),
+              imageScaleMode: function (e) {
+                switch (e) {
+                  case 'fill':
+                    break;
+                  case 'fit':
+                    return 'FIT';
+                  case 'tile':
+                    return 'TILE';
+                  case 'crop':
+                    return 'STRETCH';
+                }
+                return 'FILL';
+              }(e.scaleMode),
+              transform: e.imageTransform && e.imageTransform.length === 2 && e.imageTransform[0]?.length === 3 && e.imageTransform[1]?.length === 3 ? D6(e.imageTransform) : void 0,
+              paintFilter: e.filters
+            })
+          };
         }
-        return e.type === 'image-generation' ?
-          {
-            paint: tt(e, t),
-            imageGenerationRequest: e.caption
-          } :
-          {};
+        return e.type === 'image-generation' ? {
+          paint: tt(e, t),
+          imageGenerationRequest: e.caption
+        } : {};
       }({
         paint: a,
         options: t,
@@ -3548,18 +3334,16 @@ let tn = ({
   }
   if (t.includeVariables && Bj(e)) {
     let t = i.jsxExpressionContainerToVariableData(e, n);
-    return t ?
-      {
-        paints: [{
-          type: 'SOLID',
-          colorVar: t
-        }],
-        imageGenerationRequests: new Map()
-      } :
-      {
-        paints: [],
-        imageGenerationRequests: new Map()
-      };
+    return t ? {
+      paints: [{
+        type: 'SOLID',
+        colorVar: t
+      }],
+      imageGenerationRequests: new Map()
+    } : {
+      paints: [],
+      imageGenerationRequests: new Map()
+    };
   }
   return {
     paints: [],
@@ -3574,8 +3358,7 @@ function tl(e, t, i) {
   let {
     fills
   } = e = MT(e.type) ? e.immutableFrameShape ?? e : e;
-  if (!fills)
-    return;
+  if (!fills) return;
   if (t.includeStyles && e.inheritedFillStyle) {
     let t = e.sceneGraph.getStyleNodeByRef(e.inheritedFillStyle);
     if (t) {
@@ -3584,7 +3367,7 @@ function tl(e, t, i) {
       };
     }
   }
-  let r = t.assetGenerationRequests?.filter((t) => t.guid === e.guid && t.type === 'fill') || [];
+  let r = t.assetGenerationRequests?.filter(t => t.guid === e.guid && t.type === 'fill') || [];
   let o = {
     fill: ti(fills, e5({
       ...t,
@@ -3603,7 +3386,7 @@ function ts({
 }) {
   let a = e;
   t.tailwind && (a = tp(e, i));
-  let l = r.find((e) => e.styleType === 'FILL');
+  let l = r.find(e => e.styleType === 'FILL');
   if (l) {
     return {
       props: {
@@ -3618,13 +3401,11 @@ function ts({
     fill
   } = a;
   if (!fill) {
-    return t.tailwind ?
-      {
-        props: {
-          fills: []
-        }
-      } :
-      {};
+    return t.tailwind ? {
+      props: {
+        fills: []
+      }
+    } : {};
   }
   let {
     paints,
@@ -3656,7 +3437,7 @@ let td = ei({
   name: 'Fill',
   includeInTailwind: !0,
   fieldGroups: new Set(['rendering']),
-  outputSchema: (e) => {
+  outputSchema: e => {
     let t = to;
     e.tailwindOnly ? t = zA : e.tailwind && (t = ta);
     !e.includeAssetGenerationRequests && 'fill' in t.shape && (t = t.omit({
@@ -3669,22 +3450,18 @@ let td = ei({
   defaults: ({
     nodeType: e,
     options: t
-  }) => t.tailwind ?
-      {} :
-      e === 'TEXT' ?
-        {
-          fill: '#000'
-        } :
-        {
-          fill: []
-        },
+  }) => t.tailwind ? {} : e === 'TEXT' ? {
+    fill: '#000'
+  } : {
+    fill: []
+  },
   serialize: (e, t, i) => tl(e, t, i),
   serializeOverrides: ({
     node: e,
     fieldNames: t
   }, i, n) => t.includes('fill-paint-data') ? tl(e, i, n) : {},
   deserialize: ts,
-  deserializeOverrides: (e) => (e.options.tailwind && e.context.trackDeserializeIssue({
+  deserializeOverrides: e => (e.options.tailwind && e.context.trackDeserializeIssue({
     message: 'Tailwind not currently supported for paint overrides',
     context: {
       jsxElement: e.elem
@@ -3699,34 +3476,24 @@ function tu(e, t, i) {
   let {
     fill
   } = e;
-  return fill ?
-    typeof fill == 'string' ?
-      t === 'TEXT' && fill === '#000' ?
-        {} :
-        function(e, t) {
-          let i = QW(e);
-          if (i) {
-            let e = si({
-              r: i.r,
-              g: i.g,
-              b: i.b,
-              a: 1
-            });
-            let n = JQ(i.a);
-            return {
-              className: `${t === 'TEXT' ? 'text' : 'bg'}-${_$$iz(e)}${n}`
-            };
-          }
-          return {};
-        }(fill, t) :
-      Array.isArray(fill) && fill.length >= 1 ?
-        i ?
-          {} :
-          {
-            fill
-          } :
-        {} :
-    {};
+  return fill ? typeof fill == 'string' ? t === 'TEXT' && fill === '#000' ? {} : function (e, t) {
+    let i = QW(e);
+    if (i) {
+      let e = si({
+        r: i.r,
+        g: i.g,
+        b: i.b,
+        a: 1
+      });
+      let n = JQ(i.a);
+      return {
+        className: `${t === 'TEXT' ? 'text' : 'bg'}-${_$$iz(e)}${n}`
+      };
+    }
+    return {};
+  }(fill, t) : Array.isArray(fill) && fill.length >= 1 ? i ? {} : {
+    fill
+  } : {} : {};
 }
 function tp(e, t) {
   let {
@@ -3745,13 +3512,11 @@ function tp(e, t) {
     let t = classParts[0];
     if (t && ['bg', 'text'].includes(t)) {
       let t = c1(classParts);
-      t && (typeof t == 'string' ?
-        r.fill = t :
-        typeof t == 'object' && 'a' in t && (r.fill = [{
-          type: 'solid',
-          color: t,
-          opacity: t.a
-        }]));
+      t && (typeof t == 'string' ? r.fill = t : typeof t == 'object' && 'a' in t && (r.fill = [{
+        type: 'solid',
+        color: t,
+        opacity: t.a
+      }]));
     }
   }
   r.fill || t !== 'TEXT' || (r.fill = [{
@@ -3776,64 +3541,58 @@ let tc = _$$z.object({
 });
 let tf = zA;
 function th(e, t, i) {
-  if (!e.cornerRadius && !e.rectangleCornerRadiiIndependent)
-    return;
+  if (!e.cornerRadius && !e.rectangleCornerRadiiIndependent) return;
   let n = i.variableAliasToJSXExpressionContainer(t.includeVariables ? e.boundVariables.topLeftRadius : void 0) ?? e.rectangleTopLeftCornerRadius;
   let r = i.variableAliasToJSXExpressionContainer(t.includeVariables ? e.boundVariables.topRightRadius : void 0) ?? e.rectangleTopRightCornerRadius;
   let o = i.variableAliasToJSXExpressionContainer(t.includeVariables ? e.boundVariables.bottomRightRadius : void 0) ?? e.rectangleBottomRightCornerRadius;
   let a = i.variableAliasToJSXExpressionContainer(t.includeVariables ? e.boundVariables.bottomLeftRadius : void 0) ?? e.rectangleBottomLeftCornerRadius;
-  let l = e.rectangleCornerRadiiIndependent ?
-    {
-      cornerRadius: {
-        topLeft: n,
-        topRight: r,
-        bottomRight: o,
-        bottomLeft: a
-      }
-    } :
-    {
-      cornerRadius: e.cornerRadius
-    };
-  return t.tailwind ?
-    function(e) {
+  let l = e.rectangleCornerRadiiIndependent ? {
+    cornerRadius: {
+      topLeft: n,
+      topRight: r,
+      bottomRight: o,
+      bottomLeft: a
+    }
+  } : {
+    cornerRadius: e.cornerRadius
+  };
+  return t.tailwind ? function (e) {
+    let {
+      cornerRadius
+    } = e;
+    let i = [];
+    if (typeof cornerRadius == 'number') {
+      i.push(`rounded${ty(cornerRadius)}`);
+    } else if (typeof cornerRadius == 'object' && !Bj(cornerRadius)) {
       let {
-        cornerRadius
-      } = e;
-      let i = [];
-      if (typeof cornerRadius == 'number') {
-        i.push(`rounded${ty(cornerRadius)}`);
-      } else
-        if (typeof cornerRadius == 'object' && !Bj(cornerRadius)) {
-          let {
-            topLeft,
-            topRight,
-            bottomLeft,
-            bottomRight
-          } = cornerRadius;
-          if (topLeft === topRight && topRight === bottomLeft && bottomLeft === bottomRight && typeof topLeft == 'number') {
-            topLeft > 0 && i.push(`rounded${ty(topLeft)}`);
-          } else {
-            let t = {
-              topLeft: typeof topLeft == 'number' && topLeft > 0,
-              topRight: typeof topRight == 'number' && topRight > 0,
-              bottomLeft: typeof bottomLeft == 'number' && bottomLeft > 0,
-              bottomRight: typeof bottomRight == 'number' && bottomRight > 0
-            };
-            typeof topLeft == 'number' && t.topLeft && t.bottomLeft && topLeft === bottomLeft && (i.push(`rounded-l${ty(topLeft)}`), t.topLeft = !1, t.bottomLeft = !1);
-            typeof topRight == 'number' && t.topRight && t.bottomRight && topRight === bottomRight && (i.push(`rounded-r${ty(topRight)}`), t.topRight = !1, t.bottomRight = !1);
-            typeof topLeft == 'number' && t.topLeft && t.topRight && topLeft === topRight && (i.push(`rounded-t${ty(topLeft)}`), t.topLeft = !1, t.topRight = !1);
-            typeof bottomLeft == 'number' && t.bottomLeft && t.bottomRight && bottomLeft === bottomRight && (i.push(`rounded-b${ty(bottomLeft)}`), t.bottomLeft = !1, t.bottomRight = !1);
-            typeof topLeft == 'number' && t.topLeft && i.push(`rounded-tl${ty(topLeft)}`);
-            typeof bottomLeft == 'number' && t.bottomLeft && i.push(`rounded-bl${ty(bottomLeft)}`);
-            typeof topRight == 'number' && t.topRight && i.push(`rounded-tr${ty(topRight)}`);
-            typeof bottomRight == 'number' && t.bottomRight && i.push(`rounded-br${ty(bottomRight)}`);
-          }
-        }
-      return {
-        className: i.join(' ')
-      };
-    }(l) :
-    l;
+        topLeft,
+        topRight,
+        bottomLeft,
+        bottomRight
+      } = cornerRadius;
+      if (topLeft === topRight && topRight === bottomLeft && bottomLeft === bottomRight && typeof topLeft == 'number') {
+        topLeft > 0 && i.push(`rounded${ty(topLeft)}`);
+      } else {
+        let t = {
+          topLeft: typeof topLeft == 'number' && topLeft > 0,
+          topRight: typeof topRight == 'number' && topRight > 0,
+          bottomLeft: typeof bottomLeft == 'number' && bottomLeft > 0,
+          bottomRight: typeof bottomRight == 'number' && bottomRight > 0
+        };
+        typeof topLeft == 'number' && t.topLeft && t.bottomLeft && topLeft === bottomLeft && (i.push(`rounded-l${ty(topLeft)}`), t.topLeft = !1, t.bottomLeft = !1);
+        typeof topRight == 'number' && t.topRight && t.bottomRight && topRight === bottomRight && (i.push(`rounded-r${ty(topRight)}`), t.topRight = !1, t.bottomRight = !1);
+        typeof topLeft == 'number' && t.topLeft && t.topRight && topLeft === topRight && (i.push(`rounded-t${ty(topLeft)}`), t.topLeft = !1, t.topRight = !1);
+        typeof bottomLeft == 'number' && t.bottomLeft && t.bottomRight && bottomLeft === bottomRight && (i.push(`rounded-b${ty(bottomLeft)}`), t.bottomLeft = !1, t.bottomRight = !1);
+        typeof topLeft == 'number' && t.topLeft && i.push(`rounded-tl${ty(topLeft)}`);
+        typeof bottomLeft == 'number' && t.bottomLeft && i.push(`rounded-bl${ty(bottomLeft)}`);
+        typeof topRight == 'number' && t.topRight && i.push(`rounded-tr${ty(topRight)}`);
+        typeof bottomRight == 'number' && t.bottomRight && i.push(`rounded-br${ty(bottomRight)}`);
+      }
+    }
+    return {
+      className: i.join(' ')
+    };
+  }(l) : l;
 }
 function tm({
   params: e,
@@ -3842,7 +3601,7 @@ function tm({
   elem: n
 }) {
   let r = e;
-  t.tailwind && (r = function(e) {
+  t.tailwind && (r = function (e) {
     let {
       className
     } = e;
@@ -3865,56 +3624,54 @@ function tm({
           let r = Hc(classParts[1]);
           if (typeof t == 'number') {
             i.cornerRadius = t;
-          } else
-            if (r) {
-              i.cornerRadius = r;
-            } else {
-              let t = () => {
-                if (classParts.length === 2)
-                  return 4;
-                let t = classParts.length - 1;
-                return x_[classParts[t]] ?? Hc(classParts[t]) ?? 0;
-              };
-              switch (classParts[1]) {
-                case 't':
-                  n.topLeft = t();
-                  n.topRight = t();
-                  break;
-                case 'e':
-                case 'r':
-                  n.topRight = t();
-                  n.bottomRight = t();
-                  break;
-                case 'b':
-                  n.bottomLeft = t();
-                  n.bottomRight = t();
-                  break;
-                case 's':
-                case 'l':
-                  n.bottomLeft = t();
-                  n.topLeft = t();
-                  break;
-                case 'ss':
-                case 'tl':
-                  n.topLeft = t();
-                  break;
-                case 'se':
-                case 'tr':
-                  n.topRight = t();
-                  break;
-                case 'es':
-                case 'bl':
-                  n.bottomLeft = t();
-                  break;
-                case 'ee':
-                case 'br':
-                  n.bottomRight = t();
-              }
+          } else if (r) {
+            i.cornerRadius = r;
+          } else {
+            let t = () => {
+              if (classParts.length === 2) return 4;
+              let t = classParts.length - 1;
+              return x_[classParts[t]] ?? Hc(classParts[t]) ?? 0;
+            };
+            switch (classParts[1]) {
+              case 't':
+                n.topLeft = t();
+                n.topRight = t();
+                break;
+              case 'e':
+              case 'r':
+                n.topRight = t();
+                n.bottomRight = t();
+                break;
+              case 'b':
+                n.bottomLeft = t();
+                n.bottomRight = t();
+                break;
+              case 's':
+              case 'l':
+                n.bottomLeft = t();
+                n.topLeft = t();
+                break;
+              case 'ss':
+              case 'tl':
+                n.topLeft = t();
+                break;
+              case 'se':
+              case 'tr':
+                n.topRight = t();
+                break;
+              case 'es':
+              case 'bl':
+                n.bottomLeft = t();
+                break;
+              case 'ee':
+              case 'br':
+                n.bottomRight = t();
             }
+          }
         }
       }
     }
-    Object.values(n).some((e) => e > 0) && (i.cornerRadius = n);
+    Object.values(n).some(e => e > 0) && (i.cornerRadius = n);
     'cornerRadius' in i || (i.cornerRadius = 0);
     return i;
   }(e));
@@ -3942,45 +3699,39 @@ function tm({
         }
       };
     }
-  } else
-    if (typeof cornerRadius == 'object') {
-      let e = {
-        rectangleCornerRadiiIndependent: !0
-      };
-      let t = {};
-      typeof cornerRadius.topLeft == 'number' ? e.rectangleTopLeftCornerRadius = cornerRadius.topLeft : Bj(cornerRadius.topLeft) && (t.topLeftRadius = i.jsxExpressionContainerToVariableAlias(cornerRadius.topLeft, n));
-      typeof cornerRadius.topRight == 'number' ? e.rectangleTopRightCornerRadius = cornerRadius.topRight : Bj(cornerRadius.topRight) && (t.topRightRadius = i.jsxExpressionContainerToVariableAlias(cornerRadius.topRight, n));
-      typeof cornerRadius.bottomLeft == 'number' ? e.rectangleBottomLeftCornerRadius = cornerRadius.bottomLeft : Bj(cornerRadius.bottomLeft) && (t.bottomLeftRadius = i.jsxExpressionContainerToVariableAlias(cornerRadius.bottomLeft, n));
-      typeof cornerRadius.bottomRight == 'number' ? e.rectangleBottomRightCornerRadius = cornerRadius.bottomRight : Bj(cornerRadius.bottomRight) && (t.bottomRightRadius = i.jsxExpressionContainerToVariableAlias(cornerRadius.bottomRight, n));
-      return {
-        props: Object.keys(t).length > 0 ?
-          {
-            ...e,
-            boundVariables: t
-          } :
-          e
-      };
-    }
+  } else if (typeof cornerRadius == 'object') {
+    let e = {
+      rectangleCornerRadiiIndependent: !0
+    };
+    let t = {};
+    typeof cornerRadius.topLeft == 'number' ? e.rectangleTopLeftCornerRadius = cornerRadius.topLeft : Bj(cornerRadius.topLeft) && (t.topLeftRadius = i.jsxExpressionContainerToVariableAlias(cornerRadius.topLeft, n));
+    typeof cornerRadius.topRight == 'number' ? e.rectangleTopRightCornerRadius = cornerRadius.topRight : Bj(cornerRadius.topRight) && (t.topRightRadius = i.jsxExpressionContainerToVariableAlias(cornerRadius.topRight, n));
+    typeof cornerRadius.bottomLeft == 'number' ? e.rectangleBottomLeftCornerRadius = cornerRadius.bottomLeft : Bj(cornerRadius.bottomLeft) && (t.bottomLeftRadius = i.jsxExpressionContainerToVariableAlias(cornerRadius.bottomLeft, n));
+    typeof cornerRadius.bottomRight == 'number' ? e.rectangleBottomRightCornerRadius = cornerRadius.bottomRight : Bj(cornerRadius.bottomRight) && (t.bottomRightRadius = i.jsxExpressionContainerToVariableAlias(cornerRadius.bottomRight, n));
+    return {
+      props: Object.keys(t).length > 0 ? {
+        ...e,
+        boundVariables: t
+      } : e
+    };
+  }
 }
 let tg = ei({
   name: 'CornerRadius',
   includeInTailwind: !0,
   fieldGroups: new Set(['rendering']),
-  outputSchema: (e) => e.tailwind ? tf : tc,
+  outputSchema: e => e.tailwind ? tf : tc,
   defaults: ({
     options: e
-  }) => e.tailwind ?
-      {} :
-      {
-        cornerRadius: 0
-      },
+  }) => e.tailwind ? {} : {
+    cornerRadius: 0
+  },
   serialize: (e, t, i) => th(e, t, i),
   serializeOverrides: ({
     node: e,
     fieldNames: t
   }, i, n) => {
-    if (['rectangle-top-left-corner-radius', 'rectangle-top-right-corner-radius', 'rectangle-bottom-left-corner-radius', 'rectangle-bottom-right-corner-radius', 'rectangle-corner-radii-independent', 'corner-radius'].some((e) => t.includes(e)))
-      return th(e, i, n);
+    if (['rectangle-top-left-corner-radius', 'rectangle-top-right-corner-radius', 'rectangle-bottom-left-corner-radius', 'rectangle-bottom-right-corner-radius', 'rectangle-corner-radii-independent', 'corner-radius'].some(e => t.includes(e))) return th(e, i, n);
   },
   deserialize: tm,
   deserializeOverrides: tm
@@ -3990,8 +3741,8 @@ function ty(e) {
     alwaysUsePreciseValues: !0
   });
 }
-let tb = _$$z.$$enum(['inside', 'outside', 'center']);
-let tS = _$$z.$$enum(['none', 'round', 'square', 'arrow-lines', 'arrow-equilateral']);
+let tb = _$$z.enum(['inside', 'outside', 'center']);
+let tS = _$$z.enum(['none', 'round', 'square', 'arrow-lines', 'arrow-equilateral']);
 let tT = _$$z.object({
   stroke: y4.optional(),
   strokeDashPattern: _$$z.array(_$$z.number()).optional().describe('The alternating stroke dash and gap lengths, in pixels, in the format `<length> <gap>`. An empty array gives a solid stroke and a single value will be applied to both the dash and gap length.'),
@@ -4014,7 +3765,7 @@ let tx = ei({
   name: 'Stroke',
   includeInTailwind: !0,
   fieldGroups: new Set(['rendering']),
-  outputSchema: (e) => {
+  outputSchema: e => {
     let t = tT;
     e.tailwindOnly ? t = zA : e.tailwind && (t = tz);
     !e.includeAssetGenerationRequests && 'stroke' in t.shape && (t = _$$z.object({
@@ -4026,21 +3777,17 @@ let tx = ei({
   },
   defaults: ({
     options: e
-  }) => e.tailwindOnly ?
-      {} :
-      e.tailwind ?
-        {
-          strokeAlign: 'inside',
-          strokeCap: 'none',
-          strokeDashPattern: []
-        } :
-        {
-          stroke: [],
-          strokeAlign: 'inside',
-          strokeWidth: 1,
-          strokeCap: 'none',
-          strokeDashPattern: []
-        },
+  }) => e.tailwindOnly ? {} : e.tailwind ? {
+    strokeAlign: 'inside',
+    strokeCap: 'none',
+    strokeDashPattern: []
+  } : {
+    stroke: [],
+    strokeAlign: 'inside',
+    strokeWidth: 1,
+    strokeCap: 'none',
+    strokeDashPattern: []
+  },
   serialize(e, t, i) {
     let {
       strokePaints,
@@ -4050,10 +3797,9 @@ let tx = ei({
       dashPattern,
       strokeCap
     } = e;
-    let d = strokePaints.data.filter((e) => !!e.visible && e.opacity !== 0);
-    if (!strokePaints || d.length === 0)
-      return;
-    let u = t.assetGenerationRequests?.filter((t) => t.guid === e.guid && t.type === 'stroke') || [];
+    let d = strokePaints.data.filter(e => !!e.visible && e.opacity !== 0);
+    if (!strokePaints || d.length === 0) return;
+    let u = t.assetGenerationRequests?.filter(t => t.guid === e.guid && t.type === 'stroke') || [];
     let p = ti(d, e5(t), i, u);
     let c = i.variableAliasToJSXExpressionContainer(t.includeVariables ? e.boundVariables.strokeTopWeight : void 0) ?? e.borderTopWeight;
     let f = i.variableAliasToJSXExpressionContainer(t.includeVariables ? e.boundVariables.strokeBottomWeight : void 0) ?? e.borderBottomWeight;
@@ -4062,66 +3808,60 @@ let tx = ei({
     let g = {
       stroke: p,
       strokeAlign: strokeAlign.toLowerCase(),
-      strokeWidth: borderStrokeWeightsIndependent ?
-        {
-          top: c,
-          bottom: f,
-          left: h,
-          right: m
-        } :
-        strokeWeight,
+      strokeWidth: borderStrokeWeightsIndependent ? {
+        top: c,
+        bottom: f,
+        left: h,
+        right: m
+      } : strokeWeight,
       strokeCap: strokeCap?.toLowerCase()
     };
-    return (dashPattern.length !== 0 && (g.strokeDashPattern = dashPattern), t.tailwind) ?
-      function(e, t, i) {
+    return (dashPattern.length !== 0 && (g.strokeDashPattern = dashPattern), t.tailwind) ? function (e, t, i) {
+      let {
+        stroke,
+        strokeDashPattern,
+        strokeAlign,
+        strokeCap
+      } = e;
+      let l = [];
+      let s = {
+        strokeAlign,
+        strokeCap,
+        strokeDashPattern
+      };
+      let d = !t.borderStrokeWeightsIndependent && t.strokeWeight > 0 || t.borderStrokeWeightsIndependent && [t.borderBottomWeight, t.borderLeftWeight, t.borderRightWeight, t.borderTopWeight].some(e => e > 0);
+      let u = DI(t.strokePaints.data);
+      if (u && d) {
         let {
-          stroke,
-          strokeDashPattern,
-          strokeAlign,
-          strokeCap
-        } = e;
-        let l = [];
-        let s = {
-          strokeAlign,
-          strokeCap,
-          strokeDashPattern
-        };
-        let d = !t.borderStrokeWeightsIndependent && t.strokeWeight > 0 || t.borderStrokeWeightsIndependent && [t.borderBottomWeight, t.borderLeftWeight, t.borderRightWeight, t.borderTopWeight].some((e) => e > 0);
-        let u = DI(t.strokePaints.data);
-        if (u && d) {
+          hexStr,
+          opacitySuffix
+        } = u;
+        l.push(`border-${_$$iz(hexStr)}${opacitySuffix}`);
+      } else {
+        Array.isArray(stroke) && (s.stroke = stroke);
+      }
+      if (d) {
+        let e = e => e === 1 ? '' : `-${qK(e)}`;
+        if (t.borderStrokeWeightsIndependent) {
           let {
-            hexStr,
-            opacitySuffix
-          } = u;
-          l.push(`border-${_$$iz(hexStr)}${opacitySuffix}`);
+            borderLeftWeight,
+            borderBottomWeight,
+            borderRightWeight,
+            borderTopWeight
+          } = t;
+          borderLeftWeight === borderRightWeight && borderRightWeight === borderBottomWeight && borderBottomWeight === borderTopWeight ? l.push(`border${e(borderLeftWeight)}`) : (borderLeftWeight === borderRightWeight ? borderLeftWeight > 0 && l.push(`border-x${e(borderLeftWeight)}`) : (borderLeftWeight > 0 && l.push(`border-l${e(borderLeftWeight)}`), borderRightWeight > 0 && l.push(`border-r${e(borderRightWeight)}`)), borderBottomWeight === borderTopWeight ? borderBottomWeight > 0 && l.push(`border-y${e(borderBottomWeight)}`) : (borderTopWeight > 0 && l.push(`border-t${e(borderTopWeight)}`), borderBottomWeight > 0 && l.push(`border-b${e(borderBottomWeight)}`)));
         } else {
-          Array.isArray(stroke) && (s.stroke = stroke);
+          l.push(`border${e(t.strokeWeight)}`);
         }
-        if (d) {
-          let e = (e) => e === 1 ? '' : `-${qK(e)}`;
-          if (t.borderStrokeWeightsIndependent) {
-            let {
-              borderLeftWeight,
-              borderBottomWeight,
-              borderRightWeight,
-              borderTopWeight
-            } = t;
-            borderLeftWeight === borderRightWeight && borderRightWeight === borderBottomWeight && borderBottomWeight === borderTopWeight ? l.push(`border${e(borderLeftWeight)}`) : (borderLeftWeight === borderRightWeight ? borderLeftWeight > 0 && l.push(`border-x${e(borderLeftWeight)}`) : (borderLeftWeight > 0 && l.push(`border-l${e(borderLeftWeight)}`), borderRightWeight > 0 && l.push(`border-r${e(borderRightWeight)}`)), borderBottomWeight === borderTopWeight ? borderBottomWeight > 0 && l.push(`border-y${e(borderBottomWeight)}`) : (borderTopWeight > 0 && l.push(`border-t${e(borderTopWeight)}`), borderBottomWeight > 0 && l.push(`border-b${e(borderBottomWeight)}`)));
-          } else {
-            l.push(`border${e(t.strokeWeight)}`);
-          }
-        }
-        let p = l.length > 0 ? l.join(' ') : void 0;
-        return i ?
-          {
-            className: p
-          } :
-          {
-            ...s,
-            className: p
-          };
-      }(g, e, !!t.tailwindOnly) :
-      g;
+      }
+      let p = l.length > 0 ? l.join(' ') : void 0;
+      return i ? {
+        className: p
+      } : {
+        ...s,
+        className: p
+      };
+    }(g, e, !!t.tailwindOnly) : g;
   },
   deserialize({
     params: e,
@@ -4130,7 +3870,7 @@ let tx = ei({
     elem: n
   }) {
     let r = e;
-    t.tailwind && (r = function(e) {
+    t.tailwind && (r = function (e) {
       let {
         className,
         stroke,
@@ -4166,48 +3906,46 @@ let tx = ei({
               if (r) {
                 a.strokeWidth = r;
                 t();
-              } else
-                if (['x', 'y', 'l', 'r', 't', 'b'].includes(i)) {
-                  let t = () => {
-                    if (classParts.length === 2)
-                      return 1;
-                    let t = classParts.length - 1;
-                    let i = classParts[t];
-                    let n = Number(i);
-                    return isNaN(n) ? Hc(i, 2) ?? 0 : n;
-                  };
-                  switch (i) {
-                    case 'x':
-                      l.left = t();
-                      l.right = t();
-                      break;
-                    case 'y':
-                      l.top = t();
-                      l.bottom = t();
-                      break;
-                    case 'l':
-                      l.left = t();
-                      break;
-                    case 'r':
-                      l.right = t();
-                      break;
-                    case 't':
-                      l.top = t();
-                      break;
-                    case 'b':
-                      l.bottom = t();
-                  }
-                } else {
-                  let t = c1(classParts);
-                  if (t) {
-                    let e = typeof t == 'string' ? QW(t) : typeof t == 'object' && 'r' in t ? t : null;
-                    e && (a.stroke = [{
-                      type: 'solid',
-                      color: e,
-                      opacity: e.a
-                    }]);
-                  }
+              } else if (['x', 'y', 'l', 'r', 't', 'b'].includes(i)) {
+                let t = () => {
+                  if (classParts.length === 2) return 1;
+                  let t = classParts.length - 1;
+                  let i = classParts[t];
+                  let n = Number(i);
+                  return isNaN(n) ? Hc(i, 2) ?? 0 : n;
+                };
+                switch (i) {
+                  case 'x':
+                    l.left = t();
+                    l.right = t();
+                    break;
+                  case 'y':
+                    l.top = t();
+                    l.bottom = t();
+                    break;
+                  case 'l':
+                    l.left = t();
+                    break;
+                  case 'r':
+                    l.right = t();
+                    break;
+                  case 't':
+                    l.top = t();
+                    break;
+                  case 'b':
+                    l.bottom = t();
                 }
+              } else {
+                let t = c1(classParts);
+                if (t) {
+                  let e = typeof t == 'string' ? QW(t) : typeof t == 'object' && 'r' in t ? t : null;
+                  e && (a.stroke = [{
+                    type: 'solid',
+                    color: e,
+                    opacity: e.a
+                  }]);
+                }
+              }
             }
           } else {
             a.strokeWidth = 1;
@@ -4215,7 +3953,7 @@ let tx = ei({
           }
         }
       }
-      Object.values(l).some((e) => e > 0) && (a.strokeWidth = l);
+      Object.values(l).some(e => e > 0) && (a.strokeWidth = l);
       return a;
     }(e));
     let {
@@ -4230,17 +3968,15 @@ let tx = ei({
     let {
       paints,
       imageGenerationRequests
-    } = stroke ?
-        tn({
-          prop: stroke,
-          options: e5(t),
-          context: i,
-          element: n
-        }) :
-        {
-          paints: [],
-          imageGenerationRequests: new Map()
-        };
+    } = stroke ? tn({
+      prop: stroke,
+      options: e5(t),
+      context: i,
+      element: n
+    }) : {
+      paints: [],
+      imageGenerationRequests: new Map()
+    };
     if (paints.length === 0) {
       return {
         props: {
@@ -4267,12 +4003,10 @@ let tx = ei({
       typeof strokeWidth == 'object' ? (h.borderStrokeWeightsIndependent = !0, typeof strokeWidth.top == 'number' ? h.borderTopWeight = strokeWidth.top : Bj(strokeWidth.top) && (m.strokeTopWeight = i.jsxExpressionContainerToVariableAlias(strokeWidth.top, n)), typeof strokeWidth.bottom == 'number' ? h.borderBottomWeight = strokeWidth.bottom : Bj(strokeWidth.bottom) && (m.strokeBottomWeight = i.jsxExpressionContainerToVariableAlias(strokeWidth.bottom, n)), typeof strokeWidth.left == 'number' ? h.borderLeftWeight = strokeWidth.left : Bj(strokeWidth.left) && (m.strokeLeftWeight = i.jsxExpressionContainerToVariableAlias(strokeWidth.left, n)), typeof strokeWidth.right == 'number' ? h.borderRightWeight = strokeWidth.right : Bj(strokeWidth.right) && (m.strokeRightWeight = i.jsxExpressionContainerToVariableAlias(strokeWidth.right, n))) : h.strokeWeight = strokeWidth;
     }
     return {
-      props: Object.keys(m).length > 0 ?
-        {
-          ...h,
-          boundVariables: m
-        } :
-        h,
+      props: Object.keys(m).length > 0 ? {
+        ...h,
+        boundVariables: m
+      } : h,
       deserializeMetadata: {
         generationRequests: {
           stroke: [...imageGenerationRequests.entries()].map(([e, t]) => ({
@@ -4325,8 +4059,7 @@ function tO(e, t, i) {
   let s = t.includeVariables ? i.variableDataToJSXExpressionContainer(e.yVar) : void 0;
   switch (e.type) {
     case 'DROP_SHADOW':
-      if (!e.color || !e.offset || void 0 === e.radius)
-        return;
+      if (!e.color || !e.offset || void 0 === e.radius) return;
       let d = {
         type: 'drop-shadow',
         color: r ?? si(e.color),
@@ -4342,8 +4075,7 @@ function tO(e, t, i) {
       e.showShadowBehindNode && (d.showShadowBehindNode = !0);
       return d;
     case 'INNER_SHADOW':
-      if (!e.color || !e.offset || void 0 === e.radius)
-        return;
+      if (!e.color || !e.offset || void 0 === e.radius) return;
       let u = {
         type: 'inner-shadow',
         color: r ?? si(e.color),
@@ -4358,8 +4090,7 @@ function tO(e, t, i) {
       e.visible || (u.visible = !1);
       return u;
     case 'FOREGROUND_BLUR':
-      if (!e.radius && !o)
-        return;
+      if (!e.radius && !o) return;
       let p = {
         type: 'layer-blur',
         blur: o ?? e.radius
@@ -4367,8 +4098,7 @@ function tO(e, t, i) {
       e.visible || (p.visible = !1);
       return p;
     case 'BACKGROUND_BLUR':
-      if (!e.radius && !o)
-        return;
+      if (!e.radius && !o) return;
       let c = {
         type: 'background-blur',
         blur: o ?? e.radius
@@ -4397,23 +4127,17 @@ function tA(e, t, i) {
         visible: e.visible ?? !0,
         showShadowBehindNode: e.showShadowBehindNode ?? !1
       };
-      r ?
-        n.colorVar = r :
-        n.color = typeof e.color == 'string' ?
-          QW(e.color) ?? {
-            r: 0,
-            g: 0,
-            b: 0,
-            a: 1
-          } :
-          Bj(e.color) ?
-            {
-              r: 0,
-              g: 0,
-              b: 0,
-              a: 1
-            } :
-            e.color;
+      r ? n.colorVar = r : n.color = typeof e.color == 'string' ? QW(e.color) ?? {
+        r: 0,
+        g: 0,
+        b: 0,
+        a: 1
+      } : Bj(e.color) ? {
+        r: 0,
+        g: 0,
+        b: 0,
+        a: 1
+      } : e.color;
       o ? n.radiusVar = o : n.radius = Bj(e.blur) ? 0 : e.blur;
       a ? n.spreadVar = a : n.spread = Bj(e.spread) ? 0 : e.spread ?? 0;
       l && (n.xVar = l);
@@ -4429,23 +4153,17 @@ function tA(e, t, i) {
         blendMode: hA(e.blendMode),
         visible: e.visible ?? !0
       };
-      r ?
-        n.colorVar = r :
-        n.color = typeof e.color == 'string' ?
-          QW(e.color) ?? {
-            r: 0,
-            g: 0,
-            b: 0,
-            a: 1
-          } :
-          Bj(e.color) ?
-            {
-              r: 0,
-              g: 0,
-              b: 0,
-              a: 1
-            } :
-            e.color;
+      r ? n.colorVar = r : n.color = typeof e.color == 'string' ? QW(e.color) ?? {
+        r: 0,
+        g: 0,
+        b: 0,
+        a: 1
+      } : Bj(e.color) ? {
+        r: 0,
+        g: 0,
+        b: 0,
+        a: 1
+      } : e.color;
       o ? n.radiusVar = o : n.radius = Bj(e.blur) ? 0 : e.blur;
       a ? n.spreadVar = a : n.spread = Bj(e.spread) ? 0 : e.spread ?? 0;
       l && (n.xVar = l);
@@ -4491,7 +4209,7 @@ function tw(e, t, i) {
       }
     }
     return {
-      effect: e.effects.map((e) => tO(e, {
+      effect: e.effects.map(e => tO(e, {
         includeVariables: t.includeVariables
       }, i)).filter(e6)
     };
@@ -4503,29 +4221,24 @@ function tR({
   elem: i,
   styles: n
 }) {
-  if (!e.effect)
-    return;
-  let r = n.find((e) => e.styleType === 'EFFECT');
-  return r ?
-    {
-      props: {
-        inheritedEffectStyle: {
-          key: r.styleKeyForPublish,
-          version: r.getStyleVersion()
-        }
+  if (!e.effect) return;
+  let r = n.find(e => e.styleType === 'EFFECT');
+  return r ? {
+    props: {
+      inheritedEffectStyle: {
+        key: r.styleKeyForPublish,
+        version: r.getStyleVersion()
       }
-    } :
-    Array.isArray(e.effect) ?
-      {
-        props: {
-          effects: e.effect.map((e) => tA(e, t, i)).filter(e6)
-        }
-      } :
-      {
-        props: {
-          effects: [tA(e.effect, t, i)]
-        }
-      };
+    }
+  } : Array.isArray(e.effect) ? {
+    props: {
+      effects: e.effect.map(e => tA(e, t, i)).filter(e6)
+    }
+  } : {
+    props: {
+      effects: [tA(e.effect, t, i)]
+    }
+  };
 }
 let tP = ei({
   name: 'Effects',
@@ -4598,12 +4311,10 @@ function tV({
   let o = {};
   typeof opacity == 'number' ? r.opacity = opacity : Bj(opacity) && (o.opacity = t.jsxExpressionContainerToVariableAlias(opacity, i));
   return {
-    props: Object.keys(o).length > 0 ?
-      {
-        ...r,
-        boundVariables: o
-      } :
-      r
+    props: Object.keys(o).length > 0 ? {
+      ...r,
+      boundVariables: o
+    } : r
   };
 }
 let tM = ei({
@@ -4651,16 +4362,12 @@ let tB = ei({
   fieldGroups: new Set([]),
   outputSchema: () => tX,
   defaults: () => ({}),
-  serialize: (e, t) => e.isSymbolSublayer && e.overrideKey !== AD && e.overrideKey !== e.guid ?
-    {
-      overrideKey: e.overrideKey
-    } :
-    t.forcePopulateOverrideKey ?
-      {
-        overrideKey: e.guid
-      } :
-      {},
-  deserialize: (e) => ({})
+  serialize: (e, t) => e.isSymbolSublayer && e.overrideKey !== AD && e.overrideKey !== e.guid ? {
+    overrideKey: e.overrideKey
+  } : t.forcePopulateOverrideKey ? {
+    overrideKey: e.guid
+  } : {},
+  deserialize: e => ({})
 });
 let tG = _$$z.object({
   sessionID: _$$z.number(),
@@ -4670,12 +4377,12 @@ let tJ = _$$z.object({
   x: _$$z.number(),
   y: _$$z.number()
 });
-let tH = _$$z.$$enum(['INSTANT_TRANSITION', 'DISSOLVE', 'FADE', 'SLIDE_FROM_LEFT', 'SLIDE_FROM_RIGHT', 'SLIDE_FROM_TOP', 'SLIDE_FROM_BOTTOM', 'PUSH_FROM_LEFT', 'PUSH_FROM_RIGHT', 'PUSH_FROM_TOP', 'PUSH_FROM_BOTTOM', 'MOVE_FROM_LEFT', 'MOVE_FROM_RIGHT', 'MOVE_FROM_TOP', 'MOVE_FROM_BOTTOM', 'SLIDE_OUT_TO_LEFT', 'SLIDE_OUT_TO_RIGHT', 'SLIDE_OUT_TO_TOP', 'SLIDE_OUT_TO_BOTTOM', 'MOVE_OUT_TO_LEFT', 'MOVE_OUT_TO_RIGHT', 'MOVE_OUT_TO_TOP', 'MOVE_OUT_TO_BOTTOM', 'MAGIC_MOVE', 'SMART_ANIMATE', 'SCROLL_ANIMATE']);
-let t$ = _$$z.$$enum(['IN_CUBIC', 'OUT_CUBIC', 'INOUT_CUBIC', 'LINEAR', 'IN_BACK_CUBIC', 'OUT_BACK_CUBIC', 'INOUT_BACK_CUBIC', 'CUSTOM_CUBIC', 'SPRING', 'GENTLE_SPRING', 'CUSTOM_SPRING', 'SPRING_PRESET_ONE', 'SPRING_PRESET_TWO', 'SPRING_PRESET_THREE']);
-let tU = _$$z.$$enum(['NAVIGATE', 'OVERLAY', 'SWAP', 'SWAP_STATE', 'SCROLL_TO']);
-let tW = _$$z.$$enum(['PLAY', 'PAUSE', 'TOGGLE_PLAY_PAUSE', 'MUTE', 'UNMUTE', 'TOGGLE_MUTE_UNMUTE', 'SKIP_FORWARD', 'SKIP_BACKWARD', 'SKIP_TO', 'SET_PLAYBACK_RATE']);
-let tK = _$$z.$$enum(['NONE', 'FADE', 'SLIDE_FROM_LEFT', 'SLIDE_FROM_RIGHT', 'SLIDE_FROM_TOP', 'SLIDE_FROM_BOTTOM']);
-let tq = _$$z.$$enum(['IN', 'OUT']);
+let tH = _$$z.enum(['INSTANT_TRANSITION', 'DISSOLVE', 'FADE', 'SLIDE_FROM_LEFT', 'SLIDE_FROM_RIGHT', 'SLIDE_FROM_TOP', 'SLIDE_FROM_BOTTOM', 'PUSH_FROM_LEFT', 'PUSH_FROM_RIGHT', 'PUSH_FROM_TOP', 'PUSH_FROM_BOTTOM', 'MOVE_FROM_LEFT', 'MOVE_FROM_RIGHT', 'MOVE_FROM_TOP', 'MOVE_FROM_BOTTOM', 'SLIDE_OUT_TO_LEFT', 'SLIDE_OUT_TO_RIGHT', 'SLIDE_OUT_TO_TOP', 'SLIDE_OUT_TO_BOTTOM', 'MOVE_OUT_TO_LEFT', 'MOVE_OUT_TO_RIGHT', 'MOVE_OUT_TO_TOP', 'MOVE_OUT_TO_BOTTOM', 'MAGIC_MOVE', 'SMART_ANIMATE', 'SCROLL_ANIMATE']);
+let t$ = _$$z.enum(['IN_CUBIC', 'OUT_CUBIC', 'INOUT_CUBIC', 'LINEAR', 'IN_BACK_CUBIC', 'OUT_BACK_CUBIC', 'INOUT_BACK_CUBIC', 'CUSTOM_CUBIC', 'SPRING', 'GENTLE_SPRING', 'CUSTOM_SPRING', 'SPRING_PRESET_ONE', 'SPRING_PRESET_TWO', 'SPRING_PRESET_THREE']);
+let tU = _$$z.enum(['NAVIGATE', 'OVERLAY', 'SWAP', 'SWAP_STATE', 'SCROLL_TO']);
+let tW = _$$z.enum(['PLAY', 'PAUSE', 'TOGGLE_PLAY_PAUSE', 'MUTE', 'UNMUTE', 'TOGGLE_MUTE_UNMUTE', 'SKIP_FORWARD', 'SKIP_BACKWARD', 'SKIP_TO', 'SET_PLAYBACK_RATE']);
+let tK = _$$z.enum(['NONE', 'FADE', 'SLIDE_FROM_LEFT', 'SLIDE_FROM_RIGHT', 'SLIDE_FROM_TOP', 'SLIDE_FROM_BOTTOM']);
+let tq = _$$z.enum(['IN', 'OUT']);
 let tY = _$$z.object({
   guid: tG.optional()
 });
@@ -4684,7 +4391,7 @@ let tZ = _$$z.object({
 });
 let tQ = _$$z.object({
   stablePathToNode: tZ.optional(),
-  nodeField: _$$z.$$enum(['MISSING', 'COMPONENT_PROP_ASSIGNMENTS']).optional(),
+  nodeField: _$$z.enum(['MISSING', 'COMPONENT_PROP_ASSIGNMENTS']).optional(),
   indexOrKey: _$$z.string().optional()
 });
 let t0 = _$$z.object({
@@ -4693,8 +4400,8 @@ let t0 = _$$z.object({
 });
 let t1 = _$$z.lazy(() => _$$z.object({
   value: t2,
-  dataType: _$$z.$$enum(['BOOLEAN', 'FLOAT', 'STRING', 'ALIAS', 'COLOR', 'EXPRESSION', 'MAP', 'SYMBOL_ID', 'FONT_STYLE', 'TEXT_DATA', 'INVALID', 'NODE_FIELD_ALIAS', 'CMS_ALIAS', 'PROP_REF', 'IMAGE', 'MANAGED_STRING_ALIAS', 'LINK', 'JS_RUNTIME_ALIAS', 'SLOT_CONTENT_ID', 'DATE']),
-  resolvedDataType: _$$z.$$enum(['BOOLEAN', 'FLOAT', 'STRING', 'COLOR', 'MAP', 'SYMBOL_ID', 'FONT_STYLE', 'TEXT_DATA', 'IMAGE', 'LINK', 'JS_RUNTIME_ALIAS', 'SLOT_CONTENT_ID'])
+  dataType: _$$z.enum(['BOOLEAN', 'FLOAT', 'STRING', 'ALIAS', 'COLOR', 'EXPRESSION', 'MAP', 'SYMBOL_ID', 'FONT_STYLE', 'TEXT_DATA', 'INVALID', 'NODE_FIELD_ALIAS', 'CMS_ALIAS', 'PROP_REF', 'IMAGE', 'MANAGED_STRING_ALIAS', 'LINK', 'JS_RUNTIME_ALIAS', 'SLOT_CONTENT_ID', 'DATE']),
+  resolvedDataType: _$$z.enum(['BOOLEAN', 'FLOAT', 'STRING', 'COLOR', 'MAP', 'SYMBOL_ID', 'FONT_STYLE', 'TEXT_DATA', 'IMAGE', 'LINK', 'JS_RUNTIME_ALIAS', 'SLOT_CONTENT_ID'])
 }));
 let t2 = _$$z.object({
   boolValue: _$$z.boolean().optional(),
@@ -4708,7 +4415,7 @@ let t2 = _$$z.object({
     a: _$$z.number()
   }).optional(),
   expressionValue: _$$z.object({
-    expressionFunction: _$$z.$$enum(['ADDITION', 'SUBTRACTION', 'RESOLVE_VARIANT', 'MULTIPLY', 'DIVIDE', 'EQUALS', 'NOT_EQUAL', 'LESS_THAN', 'LESS_THAN_OR_EQUAL', 'GREATER_THAN', 'GREATER_THAN_OR_EQUAL', 'AND', 'OR', 'NOT', 'STRINGIFY', 'TERNARY', 'VAR_MODE_LOOKUP', 'NEGATE', 'IS_TRUTHY']),
+    expressionFunction: _$$z.enum(['ADDITION', 'SUBTRACTION', 'RESOLVE_VARIANT', 'MULTIPLY', 'DIVIDE', 'EQUALS', 'NOT_EQUAL', 'LESS_THAN', 'LESS_THAN_OR_EQUAL', 'GREATER_THAN', 'GREATER_THAN_OR_EQUAL', 'AND', 'OR', 'NOT', 'STRINGIFY', 'TERNARY', 'VAR_MODE_LOOKUP', 'NEGATE', 'IS_TRUTHY']),
     expressionArguments: _$$z.array(t1)
   }).optional(),
   mapValue: _$$z.object({
@@ -4845,7 +4552,7 @@ let io = _$$z.object({
   animationState: t5
 });
 let ia = _$$z.object({
-  connectionType: _$$z.$$enum(['INTERNAL_NODE']),
+  connectionType: _$$z.enum(['INTERNAL_NODE']),
   navigationType: tU.optional(),
   transitionNodeID: _$$z.string().optional(),
   transitionType: tH.optional(),
@@ -4867,8 +4574,8 @@ let id = _$$z.object({
   sessionID: _$$z.number(),
   localID: _$$z.number()
 });
-let iu = _$$z.$$enum(['ON_CLICK', 'AFTER_TIMEOUT', 'MOUSE_IN', 'MOUSE_OUT', 'ON_HOVER', 'MOUSE_DOWN', 'MOUSE_UP', 'ON_PRESS', 'NONE', 'DRAG', 'ON_KEY_DOWN', 'ON_VOICE', 'ON_MEDIA_HIT', 'ON_MEDIA_END', 'MOUSE_ENTER', 'MOUSE_LEAVE']);
-let ip = _$$z.$$enum(['KEYBOARD', 'UNKNOWN_CONTROLLER', 'XBOX_ONE', 'PS4', 'SWITCH_PRO']);
+let iu = _$$z.enum(['ON_CLICK', 'AFTER_TIMEOUT', 'MOUSE_IN', 'MOUSE_OUT', 'ON_HOVER', 'MOUSE_DOWN', 'MOUSE_UP', 'ON_PRESS', 'NONE', 'DRAG', 'ON_KEY_DOWN', 'ON_VOICE', 'ON_MEDIA_HIT', 'ON_MEDIA_END', 'MOUSE_ENTER', 'MOUSE_LEAVE']);
+let ip = _$$z.enum(['KEYBOARD', 'UNKNOWN_CONTROLLER', 'XBOX_ONE', 'PS4', 'SWITCH_PRO']);
 let ic = _$$z.object({
   keyCodes: _$$z.array(_$$z.number()).optional(),
   triggerDevice: ip.optional()
@@ -4878,13 +4585,13 @@ let ih = _$$z.object({
 });
 let im = _$$z.object({
   stablePathToNode: _$$z.array(id),
-  nodeField: _$$z.$$enum(['MISSING', 'COMPONENT_PROP_ASSIGNMENTS']),
+  nodeField: _$$z.enum(['MISSING', 'COMPONENT_PROP_ASSIGNMENTS']),
   indexOrKey: _$$z.string()
 });
 let ig = _$$z.lazy(() => _$$z.object({
   value: iy,
-  dataType: _$$z.$$enum(['BOOLEAN', 'FLOAT', 'STRING', 'ALIAS', 'COLOR', 'EXPRESSION', 'MAP', 'SYMBOL_ID', 'FONT_STYLE', 'TEXT_DATA', 'INVALID', 'NODE_FIELD_ALIAS', 'CMS_ALIAS', 'PROP_REF', 'IMAGE', 'MANAGED_STRING_ALIAS', 'LINK', 'JS_RUNTIME_ALIAS', 'SLOT_CONTENT_ID', 'DATE']),
-  resolvedDataType: _$$z.$$enum(['BOOLEAN', 'FLOAT', 'STRING', 'COLOR', 'MAP', 'SYMBOL_ID', 'FONT_STYLE', 'TEXT_DATA', 'IMAGE', 'LINK', 'JS_RUNTIME_ALIAS', 'SLOT_CONTENT_ID'])
+  dataType: _$$z.enum(['BOOLEAN', 'FLOAT', 'STRING', 'ALIAS', 'COLOR', 'EXPRESSION', 'MAP', 'SYMBOL_ID', 'FONT_STYLE', 'TEXT_DATA', 'INVALID', 'NODE_FIELD_ALIAS', 'CMS_ALIAS', 'PROP_REF', 'IMAGE', 'MANAGED_STRING_ALIAS', 'LINK', 'JS_RUNTIME_ALIAS', 'SLOT_CONTENT_ID', 'DATE']),
+  resolvedDataType: _$$z.enum(['BOOLEAN', 'FLOAT', 'STRING', 'COLOR', 'MAP', 'SYMBOL_ID', 'FONT_STYLE', 'TEXT_DATA', 'IMAGE', 'LINK', 'JS_RUNTIME_ALIAS', 'SLOT_CONTENT_ID'])
 }));
 let iy = _$$z.object({
   boolValue: _$$z.boolean().optional(),
@@ -4898,7 +4605,7 @@ let iy = _$$z.object({
     a: _$$z.number()
   }).optional(),
   expressionValue: _$$z.object({
-    expressionFunction: _$$z.$$enum(['ADDITION', 'SUBTRACTION', 'RESOLVE_VARIANT', 'MULTIPLY', 'DIVIDE', 'EQUALS', 'NOT_EQUAL', 'LESS_THAN', 'LESS_THAN_OR_EQUAL', 'GREATER_THAN', 'GREATER_THAN_OR_EQUAL', 'AND', 'OR', 'NOT', 'STRINGIFY', 'TERNARY', 'VAR_MODE_LOOKUP', 'NEGATE', 'IS_TRUTHY']),
+    expressionFunction: _$$z.enum(['ADDITION', 'SUBTRACTION', 'RESOLVE_VARIANT', 'MULTIPLY', 'DIVIDE', 'EQUALS', 'NOT_EQUAL', 'LESS_THAN', 'LESS_THAN_OR_EQUAL', 'GREATER_THAN', 'GREATER_THAN_OR_EQUAL', 'AND', 'OR', 'NOT', 'STRINGIFY', 'TERNARY', 'VAR_MODE_LOOKUP', 'NEGATE', 'IS_TRUTHY']),
     expressionArguments: _$$z.array(ig)
   }).optional(),
   mapValue: _$$z.object({
@@ -4989,7 +4696,7 @@ let iI = ib.extend({
   mediaHitTime: _$$z.number().optional()
 });
 let iE = ib.extend({
-  interactionType: _$$z.$$enum(['ON_CLICK', 'MOUSE_IN', 'MOUSE_OUT', 'ON_HOVER', 'MOUSE_DOWN', 'MOUSE_UP', 'ON_PRESS', 'NONE', 'DRAG', 'MOUSE_ENTER', 'MOUSE_LEAVE'])
+  interactionType: _$$z.enum(['ON_CLICK', 'MOUSE_IN', 'MOUSE_OUT', 'ON_HOVER', 'MOUSE_DOWN', 'MOUSE_UP', 'ON_PRESS', 'NONE', 'DRAG', 'MOUSE_ENTER', 'MOUSE_LEAVE'])
 });
 let iN = _$$z.discriminatedUnion('interactionType', [iS, iT, iz, ix, iI, iE]);
 let iv = _$$z.object({
@@ -5003,58 +4710,42 @@ function iO(e) {
   let t = {
     ...e
   };
-  return e.connectionType === 'INTERNAL_NODE' ?
-    {
-      ...t,
-      transitionNodeID: sH(e.transitionNodeID) ?? void 0
-    } :
-    e.connectionType === 'SET_VARIABLE' ?
-      {
-        ...t,
-        targetVariable: e.targetVariable,
-        targetVariableData: e.targetVariableData
-      } :
-      e.connectionType === 'CONDITIONAL' ?
-        {
-          ...t,
-          conditionalActions: e.conditionalActions?.map((e) => ({
-            actions: e.actions.map(iO),
-            condition: e.condition
-          }))
-        } :
-        t;
+  return e.connectionType === 'INTERNAL_NODE' ? {
+    ...t,
+    transitionNodeID: sH(e.transitionNodeID) ?? void 0
+  } : e.connectionType === 'SET_VARIABLE' ? {
+    ...t,
+    targetVariable: e.targetVariable,
+    targetVariableData: e.targetVariableData
+  } : e.connectionType === 'CONDITIONAL' ? {
+    ...t,
+    conditionalActions: e.conditionalActions?.map(e => ({
+      actions: e.actions.map(iO),
+      condition: e.condition
+    }))
+  } : t;
 }
 function iA(e) {
   return {
     id: sH(e.id) ?? void 0,
-    event: e.event ?
-      function(e) {
-        let t = {
-          interactionType: e.interactionType
-        };
-        return e.interactionType === 'ON_MEDIA_HIT' ?
-          {
-            ...t,
-            mediaHitTime: e.mediaHitTime
-          } :
-          e.interactionType === 'ON_VOICE' ?
-            {
-              ...t,
-              voiceEventPhrase: e.voiceEventPhrase
-            } :
-            e.interactionType === 'ON_KEY_DOWN' ?
-              {
-                ...t,
-                keyTrigger: e.keyTrigger
-              } :
-              e.interactionType === 'AFTER_TIMEOUT' ?
-                {
-                  ...t,
-                  transitionTimeout: e.transitionTimeout
-                } :
-                t;
-      }(e.event) :
-      void 0,
+    event: e.event ? function (e) {
+      let t = {
+        interactionType: e.interactionType
+      };
+      return e.interactionType === 'ON_MEDIA_HIT' ? {
+        ...t,
+        mediaHitTime: e.mediaHitTime
+      } : e.interactionType === 'ON_VOICE' ? {
+        ...t,
+        voiceEventPhrase: e.voiceEventPhrase
+      } : e.interactionType === 'ON_KEY_DOWN' ? {
+        ...t,
+        keyTrigger: e.keyTrigger
+      } : e.interactionType === 'AFTER_TIMEOUT' ? {
+        ...t,
+        transitionTimeout: e.transitionTimeout
+      } : t;
+    }(e.event) : void 0,
     actions: e.actions.map(iO)
   };
 }
@@ -5081,30 +4772,27 @@ let iR = ei({
     prototypeInteractions: []
   }),
   serialize: (e, t, i) => {
-    let n = e.prototypeInteractions.map((t) => function(e, t, i) {
+    let n = e.prototypeInteractions.map(t => function (e, t, i) {
       return {
         id: dI(e.id) ?? '-1:-1',
-        event: e.event ?
-          function(e, t, i) {
-            let n = {
-              interactionType: e.interactionType ?? 'NONE',
-              voiceEventPhrase: e.voiceEventPhrase ?? void 0,
-              keyTrigger: e.keyTrigger ?? void 0,
-              transitionTimeout: e.transitionTimeout ?? void 0,
-              mediaHitTime: e.mediaHitTime ?? void 0
-            };
-            let r = iN.safeParse(n);
-            if (r.success)
-              return r.data;
-            i.trackSerializeIssue({
-              message: `Failed to parse prototype event ${e.interactionType}`,
-              context: {
-                guid: t.guid
-              }
-            });
-          }(e.event, t, i) :
-          void 0,
-        actions: (e.actions ?? []).map((e) => function e(t, i, n) {
+        event: e.event ? function (e, t, i) {
+          let n = {
+            interactionType: e.interactionType ?? 'NONE',
+            voiceEventPhrase: e.voiceEventPhrase ?? void 0,
+            keyTrigger: e.keyTrigger ?? void 0,
+            transitionTimeout: e.transitionTimeout ?? void 0,
+            mediaHitTime: e.mediaHitTime ?? void 0
+          };
+          let r = iN.safeParse(n);
+          if (r.success) return r.data;
+          i.trackSerializeIssue({
+            message: `Failed to parse prototype event ${e.interactionType}`,
+            context: {
+              guid: t.guid
+            }
+          });
+        }(e.event, t, i) : void 0,
+        actions: (e.actions ?? []).map(e => function e(t, i, n) {
           let r = {
             transitionType: t.transitionType ?? void 0,
             navigationType: t.navigationType ?? void 0,
@@ -5125,9 +4813,9 @@ let iR = ei({
             linkParam: t.linkParam ?? void 0,
             cmsTarget: t.cmsTarget ?? void 0,
             transitionNodeID: t.transitionNodeID ? `${t.transitionNodeID?.sessionID ?? -1}:${t.transitionNodeID?.localID ?? -1}` : void 0,
-            conditionalActions: t.conditionalActions?.map((t) => ({
+            conditionalActions: t.conditionalActions?.map(t => ({
               condition: t.condition,
-              actions: t.actions?.map((t) => e(t, i, n)).filter(Boolean) ?? []
+              actions: t.actions?.map(t => e(t, i, n)).filter(Boolean) ?? []
             })),
             targetVariableSetID: t.targetVariableSetID ?? void 0,
             targetVariableModeID: t.targetVariableModeID ?? void 0,
@@ -5142,22 +4830,18 @@ let iR = ei({
             transitionResetInteractiveComponents: t.transitionResetInteractiveComponents ?? void 0
           };
           let o = is.safeParse(r);
-          return o.success ?
-            o.data : (
-              n.trackSerializeIssue({
-                message: `Failed to parse prototype action ${t.connectionType}`,
-                context: {
-                  guid: i.guid
-                }
-              }), null);
-        }(e, t, i)).filter((e) => e !== null)
+          return o.success ? o.data : (n.trackSerializeIssue({
+            message: `Failed to parse prototype action ${t.connectionType}`,
+            context: {
+              guid: i.guid
+            }
+          }), null);
+        }(e, t, i)).filter(e => e !== null)
       };
     }(t, e, i));
-    return n.length === 0 ?
-      {} :
-      {
-        prototypeInteractions: n
-      };
+    return n.length === 0 ? {} : {
+      prototypeInteractions: n
+    };
   },
   serializeOverrides: () => ({}),
   deserialize: iw,
@@ -5169,19 +4853,13 @@ let iD = new Set();
 let iV = _$$f(fg, (e, t) => e === rw ? (iL.add(t.join('/')), _$$z.string()) : e === bG ? (iD.add(t.join('/')), ij) : e);
 function iM(e, t, i) {
   let [n, ...r] = t;
-  return e && void 0 !== n && void 0 !== e[n] ?
-    n === '*' ?
-      Array.isArray(e) ? e.map((e) => iM(e, r, i)) : e :
-      r.length === 0 ?
-        {
-          ...e,
-          [n]: i(e[n])
-        } :
-        {
-          ...e,
-          [n]: iM(e[n], r, i)
-        } :
-    e;
+  return e && void 0 !== n && void 0 !== e[n] ? n === '*' ? Array.isArray(e) ? e.map(e => iM(e, r, i)) : e : r.length === 0 ? {
+    ...e,
+    [n]: i(e[n])
+  } : {
+    ...e,
+    [n]: iM(e[n], r, i)
+  } : e;
 }
 let i_ = ei({
   name: 'Behavior',
@@ -5193,8 +4871,7 @@ let i_ = ei({
   }),
   serialize(e) {
     let t = fg.safeParse(e.behaviors);
-    if (!t || !t.success)
-      return;
+    if (!t || !t.success) return;
     let {
       data
     } = t;
@@ -5223,8 +4900,7 @@ let i_ = ei({
     let {
       data
     } = n;
-    if (void 0 === data || Object.keys(data).length === 0)
-      return;
+    if (void 0 === data || Object.keys(data).length === 0) return;
     let o = data;
     for (let e of iL) o = iM(o, e.split('/'), sH);
     for (let e of iD) o = iM(o, e.split('/'), D6);
@@ -5258,22 +4934,19 @@ let iB = ei({
       m10,
       m11
     } = _$$n(e, 0);
-    return (t = Math.abs(m00), r = Math.abs(m11), Math.abs(m01) < 0.001 && Math.abs(m10) < 0.001) ?
-      {} :
-      {
-        transformMatrix: {
-          m00,
-          m01,
-          m10,
-          m11
-        }
-      };
+    return (t = Math.abs(m00), r = Math.abs(m11), Math.abs(m01) < 0.001 && Math.abs(m10) < 0.001) ? {} : {
+      transformMatrix: {
+        m00,
+        m01,
+        m10,
+        m11
+      }
+    };
   },
   deserialize: ({
     params: e
   }) => {
-    if (!('transformMatrix' in e) || void 0 === e.transformMatrix)
-      return;
+    if (!('transformMatrix' in e) || void 0 === e.transformMatrix) return;
     let {
       transformMatrix
     } = e;
@@ -5307,7 +4980,7 @@ function iU({
   guid: e,
   options: t
 }) {
-  return t.includeAssetGenerationRequests ? t.assetGenerationRequests?.find((t) => t.type === 'vector' && t.guid === e) : void 0;
+  return t.includeAssetGenerationRequests ? t.assetGenerationRequests?.find(t => t.type === 'vector' && t.guid === e) : void 0;
 }
 let iW = ei({
   name: 'VectorData',
@@ -5316,9 +4989,8 @@ let iW = ei({
   outputSchema: () => i$,
   defaults: () => ({}),
   serialize: (e, t, i) => {
-    if (t.excludeVectorData || t.inlineVectorData || !e.vectorDataInfo)
-      return;
-    let n = function(e) {
+    if (t.excludeVectorData || t.inlineVectorData || !e.vectorDataInfo) return;
+    let n = function (e) {
       let t = e.vectorDataInfo;
       let i = Et(t.blobs[t.data.vectorNetworkBlob].bytes);
       return `asset:${i.slice(0, 8)}`;
@@ -5335,21 +5007,18 @@ let iW = ei({
       type: 'vector',
       data: o,
       nodeIds: [...l, s]
-    }), t.vectorPlaceholderAssetId) ?
-      {
-        data: `asset:${t.vectorPlaceholderAssetId}`
-      } :
-      {
-        data: n
-      };
+    }), t.vectorPlaceholderAssetId) ? {
+      data: `asset:${t.vectorPlaceholderAssetId}`
+    } : {
+      data: n
+    };
   },
   deserialize: ({
     params: e,
     options: t,
     context: i
   }) => {
-    if (t.excludeVectorData || t.inlineVectorData || !t.assetsByName)
-      return {};
+    if (t.excludeVectorData || t.inlineVectorData || !t.assetsByName) return {};
     let n = e.data;
     if (n && t.assetsByName[n]) {
       let e = t.assetsByName[n];
@@ -5382,10 +5051,10 @@ function iK(e, t, i) {
   let n = Kx(e);
   let r = Hn(n);
   let o = e.cornerRadiusOrMixed;
-  return r.map((n) => {
+  return r.map(n => {
     let r = n.data;
     if (t.tempExternalPathData) {
-      let n = function(e) {
+      let n = function (e) {
         let t = yS(e);
         return `asset:${t.slice(0, 8)}`;
       }(r);
@@ -5435,15 +5104,13 @@ function iq({
       data: a.props.data
     }));
   }
-  return t.tempExternalPathData ?
-    {
-      cornerRadius: n,
-      vectorNetwork: void 0
-    } :
-    {
-      cornerRadius: n,
-      vectorNetwork: VS(o)
-    };
+  return t.tempExternalPathData ? {
+    cornerRadius: n,
+    vectorNetwork: void 0
+  } : {
+    cornerRadius: n,
+    vectorNetwork: VS(o)
+  };
 }
 let iY = ei({
   name: 'CaptionedVectorData',
@@ -5456,31 +5123,26 @@ let iY = ei({
       guid: e.guid,
       options: t
     });
-    return i ?
-      {
-        data: `caption:${i.caption}`
-      } :
-      {};
+    return i ? {
+      data: `caption:${i.caption}`
+    } : {};
   },
   deserialize: ({
     params: e,
     options: t
   }) => {
-    if (!t.includeAssetGenerationRequests)
-      return {};
+    if (!t.includeAssetGenerationRequests) return {};
     let i = e.data?.startsWith('caption:') ? e.data.slice(8) : void 0;
-    return i ?
-      {
-        props: {},
-        deserializeMetadata: {
-          generationRequests: {
-            vector: [{
-              caption: i
-            }]
-          }
+    return i ? {
+      props: {},
+      deserializeMetadata: {
+        generationRequests: {
+          vector: [{
+            caption: i
+          }]
         }
-      } :
-      {};
+      }
+    } : {};
   }
 });
 let iZ = {
@@ -5488,12 +5150,9 @@ let iZ = {
   getJSXType: (e, t) => iU({
     guid: e.guid,
     options: t
-  }) ?
-    'Vector' :
-    e.type !== 'FRAME' || e.isGroup || t.flavor === 'flow' && (e.isStack || e.isGrid) ? void 0 : t.useDivTagsForFrames ? 'div' : 'Frame',
+  }) ? 'Vector' : e.type !== 'FRAME' || e.isGroup || t.flavor === 'flow' && (e.isStack || e.isGrid) ? void 0 : t.useDivTagsForFrames ? 'div' : 'Frame',
   fromJSXType(e, t) {
-    if (e === 'Frame' || e === 'div' && t.useDivTagsForFrames || e === f && t.tempDeserializeComponentsAsFrames)
-      return 'FRAME';
+    if (e === 'Frame' || e === 'div' && t.useDivTagsForFrames || e === f && t.tempDeserializeComponentsAsFrames) return 'FRAME';
   },
   getFieldSerializers(e) {
     let t = iH(e);
@@ -5516,26 +5175,22 @@ let iZ = {
 let i0 = {
   name: 'Star',
   getJSXType(e) {
-    if (e.type === 'STAR')
-      return 'Star';
+    if (e.type === 'STAR') return 'Star';
   },
   fromJSXType(e) {
-    if (e === 'Star')
-      return 'STAR';
+    if (e === 'Star') return 'STAR';
   },
-  getFieldSerializers: (e) => iH(e),
+  getFieldSerializers: e => iH(e),
   supportsChildren: () => 'none',
   possibleTagNames: ['Star']
 };
 let i1 = {
   name: 'Document',
   getJSXType(e) {
-    if (e.type === 'DOCUMENT')
-      return 'Document';
+    if (e.type === 'DOCUMENT') return 'Document';
   },
   fromJSXType(e) {
-    if (e === 'Document')
-      return 'DOCUMENT';
+    if (e === 'Document') return 'DOCUMENT';
   },
   getFieldSerializers: () => [],
   supportsChildren: () => 'nodes',
@@ -5544,18 +5199,16 @@ let i1 = {
 let i2 = {
   name: 'Page',
   getJSXType(e) {
-    if (e.type === 'CANVAS')
-      return 'Page';
+    if (e.type === 'CANVAS') return 'Page';
   },
   fromJSXType(e) {
-    if (e === 'Page')
-      return 'CANVAS';
+    if (e === 'Page') return 'CANVAS';
   },
-  getFieldSerializers: (e) => iG(e),
+  getFieldSerializers: e => iG(e),
   supportsChildren: () => 'nodes',
   possibleTagNames: ['Page']
 };
-let i8 = _$$z.$$enum(['union', 'intersect', 'subtract', 'xor']);
+let i8 = _$$z.enum(['union', 'intersect', 'subtract', 'xor']);
 let i6 = _$$z.object({
   operation: i8.optional()
 });
@@ -5570,7 +5223,7 @@ let i4 = ei({
   }) => {
     if (typeof e == 'string') {
       return {
-        operation: function(e) {
+        operation: function (e) {
           switch (e) {
             case 'UNION':
               return 'union';
@@ -5581,7 +5234,7 @@ let i4 = ei({
             case 'XOR':
               return 'xor';
             default:
-              xb(e);
+              throwTypeError(e);
           }
         }(e)
       };
@@ -5595,7 +5248,7 @@ let i4 = ei({
     if (e) {
       return {
         requiredProps: {
-          booleanOperation: function(e) {
+          booleanOperation: function (e) {
             switch (e) {
               case 'union':
                 return 'UNION';
@@ -5606,7 +5259,7 @@ let i4 = ei({
               case 'xor':
                 return 'XOR';
               default:
-                xb(e);
+                throwTypeError(e);
             }
           }(e)
         }
@@ -5619,12 +5272,9 @@ let i5 = {
   getJSXType: (e, t) => iU({
     guid: e.guid,
     options: t
-  }) ?
-    'Vector' :
-    e.type === 'BOOLEAN_OPERATION' ? 'BooleanOperation' : void 0,
+  }) ? 'Vector' : e.type === 'BOOLEAN_OPERATION' ? 'BooleanOperation' : void 0,
   fromJSXType(e) {
-    if (e === 'BooleanOperation')
-      return 'BOOLEAN_OPERATION';
+    if (e === 'BooleanOperation') return 'BOOLEAN_OPERATION';
   },
   getFieldSerializers(e) {
     let t = iH(e);
@@ -5678,7 +5328,7 @@ function ne(e, t, i) {
     listOptions: o === 'mixed' ? 'PLAIN' : o,
     boundVariables: a
   }, n, i);
-  let s = e.getStyledTextSegments(t.tailwind ? i9.filter((e) => e !== 'fillStyleId' && e !== 'textStyleId') : i9).reduce((e, t) => {
+  let s = e.getStyledTextSegments(t.tailwind ? i9.filter(e => e !== 'fillStyleId' && e !== 'textStyleId') : i9).reduce((e, t) => {
     if (e.length === 0) {
       e.push([t]);
     } else {
@@ -5690,20 +5340,18 @@ function ne(e, t, i) {
   }, []);
   return s.map((r, o) => {
     let a = r[0];
-    if (!a)
-      return null;
+    if (!a) return null;
     let d = a.listOptions;
     let u = o === s.length - 1;
-    let p = t.assetGenerationRequests?.filter((t) => t.type === 'textRange' && t.guid === e.guid);
+    let p = t.assetGenerationRequests?.filter(t => t.type === 'textRange' && t.guid === e.guid);
     if (d === 'PLAIN') {
       let o = r[r.length - 1];
       o && !u && o.characters.endsWith('\n') && (o.characters = o.characters.slice(0, -1));
-      return r.map((r) => {
-        let o = p?.find((e) => e.rangeStart === r.start && e.rangeEnd === r.end);
+      return r.map(r => {
+        let o = p?.find(e => e.rangeStart === r.start && e.rangeEnd === r.end);
         let a = nr(r, t);
         let s = nt(r, l, t, i, o);
-        if (Object.keys(s).length === 0)
-          return e.boundVariables.characters && t.includeVariables ? i.variableAliasToJSXExpressionContainer(e.boundVariables.characters) : a;
+        if (Object.keys(s).length === 0) return e.boundVariables.characters && t.includeVariables ? i.variableAliasToJSXExpressionContainer(e.boundVariables.characters) : a;
         let d = ni(s);
         let u = [];
         if (s.fillStyleId) {
@@ -5719,14 +5367,13 @@ function ne(e, t, i) {
         };
       });
     }
-    return function(r, o, a) {
+    return function (r, o, a) {
       let d = r[0];
-      if (!d)
-        return [];
+      if (!d) return [];
       let u = d.listOptions;
       let p = r.length === 1;
-      let c = function(e, t) {
-        let i = e.map((e) => e.characters.split('\n').map((t) => ({
+      let c = function (e, t) {
+        let i = e.map(e => e.characters.split('\n').map(t => ({
           ...e,
           characters: t
         })));
@@ -5734,32 +5381,30 @@ function ne(e, t, i) {
         for (let [e, t] of i.entries()) {
           let r = i[e - 1];
           if (!r) {
-            n.push(...t.map((e) => [e]));
+            n.push(...t.map(e => [e]));
             continue;
           }
           if (r[r.length - 1]?.characters === '') {
-            n.push(...t.map((e) => [e]));
+            n.push(...t.map(e => [e]));
           } else {
             let e = n[n.length - 1];
             e && (e.push(t[0]), t.shift());
-            n.push(...t.map((e) => [e]));
+            n.push(...t.map(e => [e]));
           }
         }
-        return n = n.map((e) => e.filter((e) => e.characters !== '')).filter((e, i) => e.length > 0 && e[0]?.characters !== '' || i === n.length - 1 && t);
-      }(r, o).map((r) => function({
+        return n = n.map(e => e.filter(e => e.characters !== '')).filter((e, i) => e.length > 0 && e[0]?.characters !== '' || i === n.length - 1 && t);
+      }(r, o).map(r => function ({
         line: t,
         listHasSameStyling: r,
         options: o,
         generationRequests: a
       }) {
-        let s = t.map((t) => {
+        let s = t.map(t => {
           let s = nr(t, o);
-          if (r)
-            return s;
-          let d = a?.find((e) => e.rangeStart === t.start && e.rangeEnd === t.end);
+          if (r) return s;
+          let d = a?.find(e => e.rangeStart === t.start && e.rangeEnd === t.end);
           let u = nt(t, l, o, i, d);
-          if (Object.keys(u).length === 0)
-            return s;
+          if (Object.keys(u).length === 0) return s;
           let p = ni(u);
           let c = [];
           if (u.fillStyleId) {
@@ -5774,30 +5419,27 @@ function ne(e, t, i) {
             spreadAttributes: c
           };
         });
-        return s.length === 1 && typeof s[0] == 'object' && s[0].type === 'Span' ?
-          {
-            type: 'ListItem',
-            props: s[0].props,
-            children: s[0].children
-          } :
-          {
-            type: 'ListItem',
-            props: {},
-            children: s
-          };
+        return s.length === 1 && typeof s[0] == 'object' && s[0].type === 'Span' ? {
+          type: 'ListItem',
+          props: s[0].props,
+          children: s[0].children
+        } : {
+          type: 'ListItem',
+          props: {},
+          children: s
+        };
       }({
         line: r,
         listHasSameStyling: p,
         options: t,
         generationRequests: a
       }));
-      if (!(s.length > 1) && !l.href)
-        return c;
+      if (!(s.length > 1) && !l.href) return c;
       {
         let r = {};
         let o = [];
         if (p) {
-          let s = a?.find((e) => e.rangeStart === d.start && e.rangeEnd === d.end);
+          let s = a?.find(e => e.rangeStart === d.start && e.rangeEnd === d.end);
           let u = nt(d, l, t, i, s);
           if (Object.keys(u).length > 0) {
             let a = ni(u);
@@ -5808,26 +5450,24 @@ function ne(e, t, i) {
             u.spreadAttribute && o.push(u.spreadAttribute);
           }
         }
-        return r.href ?
-          [{
-            type: 'Link',
-            props: r,
-            children: [{
-              type: u === 'UNORDERED_LIST' ? 'UnorderedList' : 'OrderedList',
-              props: {},
-              children: c
-            }],
-            spreadAttributes: o
-          }] :
-          [{
+        return r.href ? [{
+          type: 'Link',
+          props: r,
+          children: [{
             type: u === 'UNORDERED_LIST' ? 'UnorderedList' : 'OrderedList',
-            props: r,
-            children: c,
-            spreadAttributes: o
-          }];
+            props: {},
+            children: c
+          }],
+          spreadAttributes: o
+        }] : [{
+          type: u === 'UNORDERED_LIST' ? 'UnorderedList' : 'OrderedList',
+          props: r,
+          children: c,
+          spreadAttributes: o
+        }];
       }
     }(r, u, p);
-  }).filter((e) => e !== null).flat();
+  }).filter(e => e !== null).flat();
 }
 function nt(e, t, i, n, r) {
   let o = nu(e, {
@@ -5867,8 +5507,7 @@ function nn({
       r += l.length;
       continue;
     }
-    if (Bj(l))
-      continue;
+    if (Bj(l)) continue;
     if (!i7.includes(l.type)) {
       i.trackDeserializeIssue({
         message: 'Unexpected child type',
@@ -5879,7 +5518,7 @@ function nn({
       });
       continue;
     }
-    let s = l.spreadAttributes?.map((e) => i.jsxSpreadAttributeToStyle(e, l)).filter((e) => void 0 !== e) ?? [];
+    let s = l.spreadAttributes?.map(e => i.jsxSpreadAttributeToStyle(e, l)).filter(e => void 0 !== e) ?? [];
     let d = l.children[0];
     if (l.type === 'UnorderedList' || l.type === 'OrderedList' || l.type === 'Link' && typeof d == 'object' && ['UnorderedList', 'OrderedList'].includes(d.type)) {
       let e = o[o.length - 1];
@@ -5896,24 +5535,21 @@ function nn({
     let c = a === e.children.length - 1;
     if (l.type === 'UnorderedList' || l.type === 'OrderedList') {
       p && !c && (p.characters = `${p.characters}\n`, p.end += 1);
-    } else
-      if (l.type === 'ListItem') {
-        p && !c && (p.characters = `${p.characters}\n`, p.end += 1);
-      } else
-        if (l.type === 'Link') {
-          let e = l.children[l.children.length - 1];
-          p && !c && typeof e == 'object' && ['UnorderedList', 'OrderedList'].includes(e.type) && (p.characters = `${p.characters}\n`, p.end += 1);
-        } else
-          if (l.type === 'Span' && (l.children.length !== 1 || typeof l.children[0] != 'string')) {
-            i.trackDeserializeIssue({
-              message: 'Unexpected span child',
-              context: {
-                jsxElement: e
-              },
-              location: l?.parsedLocations?.full ?? e.parsedLocations?.children ?? e.parsedLocations?.full
-            });
-            continue;
-          }
+    } else if (l.type === 'ListItem') {
+      p && !c && (p.characters = `${p.characters}\n`, p.end += 1);
+    } else if (l.type === 'Link') {
+      let e = l.children[l.children.length - 1];
+      p && !c && typeof e == 'object' && ['UnorderedList', 'OrderedList'].includes(e.type) && (p.characters = `${p.characters}\n`, p.end += 1);
+    } else if (l.type === 'Span' && (l.children.length !== 1 || typeof l.children[0] != 'string')) {
+      i.trackDeserializeIssue({
+        message: 'Unexpected span child',
+        context: {
+          jsxElement: e
+        },
+        location: l?.parsedLocations?.full ?? e.parsedLocations?.children ?? e.parsedLocations?.full
+      });
+      continue;
+    }
     let f = l.props;
     let h = {
       jsxType: 'Span',
@@ -5936,7 +5572,7 @@ function nn({
       styles: s,
       elem: l
     });
-    o.push(...u.map((e) => ({
+    o.push(...u.map(e => ({
       ...e,
       imageGenerationRequests: 'fills' in e.style ? e.imageGenerationRequests : imageGenerationRequests,
       style: {
@@ -5950,7 +5586,7 @@ function nn({
   switch (e.type) {
     case 'UnorderedList':
     case 'OrderedList':
-      return o.map((t) => ({
+      return o.map(t => ({
         ...t,
         style: {
           ...t.style,
@@ -5988,7 +5624,7 @@ let ns = ei({
   name: 'Font',
   includeInTailwind: !0,
   fieldGroups: new Set(['text']),
-  outputSchema: (e) => {
+  outputSchema: e => {
     let t = na;
     e.tailwindOnly ? t = zA : e.tailwind && (t = nl);
     !e.includeAssetGenerationRequests && 'fill' in t.shape && (t = t.omit({
@@ -6001,38 +5637,33 @@ let ns = ei({
   defaults: ({
     nodeType: e,
     options: t
-  }) => e !== 'TEXT' && e !== 'STICKY' || t.tailwindOnly ?
-      {} :
-      e === 'STICKY' ?
-        {
-          fontFamily: 'Inter',
-          fontWeight: 500,
-          fontSize: 16,
-          lineHeight: 1.5,
-          letterSpacing: '-1.1%',
-          textCase: 'original',
-          textDecoration: 'none',
-          truncate: !1,
-          italic: !1
-        } :
-        {
-          fontFamily: 'Inter',
-          fontWeight: 400,
-          fontSize: 12,
-          lineHeight: 'auto',
-          letterSpacing: 0,
-          textCase: 'original',
-          textDecoration: 'none',
-          truncate: !1,
-          italic: !1
-        },
+  }) => e !== 'TEXT' && e !== 'STICKY' || t.tailwindOnly ? {} : e === 'STICKY' ? {
+    fontFamily: 'Inter',
+    fontWeight: 500,
+    fontSize: 16,
+    lineHeight: 1.5,
+    letterSpacing: '-1.1%',
+    textCase: 'original',
+    textDecoration: 'none',
+    truncate: !1,
+    italic: !1
+  } : {
+    fontFamily: 'Inter',
+    fontWeight: 400,
+    fontSize: 12,
+    lineHeight: 'auto',
+    letterSpacing: 0,
+    textCase: 'original',
+    textDecoration: 'none',
+    truncate: !1,
+    italic: !1
+  },
   serialize: (e, t, i) => {
     let {
       type,
       fontName
     } = e = MT(e.type) ? e.textSublayer ?? e : e;
-    if (type !== 'TEXT' || !fontName || fontName.family === '')
-      return;
+    if (type !== 'TEXT' || !fontName || fontName.family === '') return;
     let {
       defaultFlavorProps,
       serializationOptions,
@@ -6084,7 +5715,7 @@ let ns = ei({
     node: e,
     fieldNames: t
   }, i, n) => {
-    let r = [...SE, 'characters'].some((t) => void 0 !== e.boundVariables[t]);
+    let r = [...SE, 'characters'].some(t => void 0 !== e.boundVariables[t]);
     if (t.includes('text-data') || r && i.includeVariables) {
       let r = ne(e, i, n);
       let {
@@ -6109,8 +5740,7 @@ let ns = ei({
     context: i,
     elem: n
   }) => {
-    if (!e.text)
-      return {};
+    if (!e.text) return {};
     let r = e.text;
     if (r) {
       let e;
@@ -6132,12 +5762,10 @@ let ns = ei({
         let t = i.jsxExpressionContainerToVariableAlias(e, n);
         t && (a.characters = t);
       }
-      let l = o.length > 0 ?
-        {
-          characters: o.map((e) => e.characters).join(''),
-          ranges: o
-        } :
-        {};
+      let l = o.length > 0 ? {
+        characters: o.map(e => e.characters).join(''),
+        ranges: o
+      } : {};
       return {
         props: {
           boundVariables: a,
@@ -6146,7 +5774,7 @@ let ns = ei({
         textMetadata: l,
         deserializeMetadata: {
           generationRequests: {
-            textRange: o.flatMap((e) => [...e.imageGenerationRequests.entries()].map(([t, i]) => ({
+            textRange: o.flatMap(e => [...e.imageGenerationRequests.entries()].map(([t, i]) => ({
               paintIndex: t,
               rangeStart: e.start,
               rangeEnd: e.end,
@@ -6184,22 +5812,16 @@ function nd({
       l.lineHeight = i.jsxExpressionContainerToVariableAlias(e.lineHeight, r);
     } else {
       let t = _$$O(e.lineHeight);
-      t && (t.units === 'AUTO' ?
-        o.lineHeight = {
-          units: 'PERCENT',
-          value: 100
-        } :
-        t.units === 'PIXELS' ?
-          o.lineHeight = {
-            ...t,
-            value: i.maybeDenormalizePxValue(t.value, 'y')
-          } :
-          t.units === 'PERCENT' ?
-            o.lineHeight = {
-              units: 'RAW',
-              value: t.value / 100
-            } :
-            o.lineHeight = t);
+      t && (t.units === 'AUTO' ? o.lineHeight = {
+        units: 'PERCENT',
+        value: 100
+      } : t.units === 'PIXELS' ? o.lineHeight = {
+        ...t,
+        value: i.maybeDenormalizePxValue(t.value, 'y')
+      } : t.units === 'PERCENT' ? o.lineHeight = {
+        units: 'RAW',
+        value: t.value / 100
+      } : o.lineHeight = t);
     }
   }
   if (void 0 !== e.letterSpacing) {
@@ -6207,25 +5829,19 @@ function nd({
       l.letterSpacing = i.jsxExpressionContainerToVariableAlias(e.letterSpacing, r);
     } else {
       let t = _$$O(e.letterSpacing);
-      t && (t.units === 'AUTO' ?
-        o.letterSpacing = {
-          units: 'PERCENT',
-          value: 100
-        } :
-        t.value === 0 ?
-          o.letterSpacing = {
-            units: 'PERCENT',
-            value: 0
-          } :
-          t.units === 'PIXELS' ?
-            o.letterSpacing = {
-              ...t,
-              value: i.maybeDenormalizePxValue(t.value, 'x')
-            } :
-            o.letterSpacing = t);
+      t && (t.units === 'AUTO' ? o.letterSpacing = {
+        units: 'PERCENT',
+        value: 100
+      } : t.value === 0 ? o.letterSpacing = {
+        units: 'PERCENT',
+        value: 0
+      } : t.units === 'PIXELS' ? o.letterSpacing = {
+        ...t,
+        value: i.maybeDenormalizePxValue(t.value, 'x')
+      } : o.letterSpacing = t);
     }
   }
-  if (e.textCase && (o.textCase = function(e) {
+  if (e.textCase && (o.textCase = function (e) {
     switch (e) {
       case 'original':
         return 'ORIGINAL';
@@ -6240,9 +5856,9 @@ function nd({
       case 'small_caps_forced':
         return 'SMALL_CAPS_FORCED';
       default:
-        xb(e);
+        throwTypeError(e);
     }
-  }(e.textCase)), e.textDecoration && (o.textDecoration = function(e) {
+  }(e.textCase)), e.textDecoration && (o.textDecoration = function (e) {
     switch (e) {
       case 'none':
         return 'NONE';
@@ -6251,15 +5867,13 @@ function nd({
       case 'strikethrough':
         return 'STRIKETHROUGH';
       default:
-        xb(e);
+        throwTypeError(e);
     }
-  }(e.textDecoration)), e.href ?
-      o.hyperlink = {
-        value: e.href,
-        type: 'URL'
-      } :
-      t.jsxType === 'Text' && (o.hyperlink = null), t.jsxType === 'Text' && (o.textTruncation = e.truncate ? 'ENDING' : 'DISABLED', typeof e.truncate == 'number' ? o.maxLines = e.truncate : !0 === e.truncate ? o.maxLines = 1 : o.maxLines = null), t.jsxType === 'Span') {
-    let l = n.find((e) => e.styleType === 'FILL');
+  }(e.textDecoration)), e.href ? o.hyperlink = {
+    value: e.href,
+    type: 'URL'
+  } : t.jsxType === 'Text' && (o.hyperlink = null), t.jsxType === 'Text' && (o.textTruncation = e.truncate ? 'ENDING' : 'DISABLED', typeof e.truncate == 'number' ? o.maxLines = e.truncate : !0 === e.truncate ? o.maxLines = 1 : o.maxLines = null), t.jsxType === 'Span') {
+    let l = n.find(e => e.styleType === 'FILL');
     if (l && (o.fillStyleId = {
       key: l.styleKeyForPublish,
       version: l.getStyleVersion()
@@ -6280,7 +5894,7 @@ function nd({
       };
     }
   }
-  let s = n.find((e) => e.styleType === 'TEXT');
+  let s = n.find(e => e.styleType === 'TEXT');
   s && (o.textStyleId = {
     key: s.styleKeyForPublish,
     version: s.getStyleVersion()
@@ -6295,7 +5909,7 @@ function nu(e, t, i) {
   let n = {};
   if (t.jsxType === 'Span') {
     if (e.fills) {
-      let r = e.fills.data.filter((e) => e.visible && e.opacity !== 0);
+      let r = e.fills.data.filter(e => e.visible && e.opacity !== 0);
       r.length === 1 && r[0]?.type === 'SOLID' && r[0]?.blendMode === 'NORMAL' && t.generationRequest ? n.fill = `image(${t.generationRequest.caption})` : n.fill = ti(e.fills.data, t.paintOptions ?? {}, i);
     }
     t.includeStyles && e.fillStyleId && Object.keys(e.fillStyleId).length > 0 && (n.fillStyleId = e.fillStyleId);
@@ -6328,7 +5942,7 @@ function nu(e, t, i) {
       let r = i.variableAliasToJSXExpressionContainer(t.includeVariables ? e.boundVariables?.letterSpacing : void 0);
       r && (n.letterSpacing = r);
     }
-    e.textCase && (n.textCase = function(e) {
+    e.textCase && (n.textCase = function (e) {
       switch (e) {
         case 'ORIGINAL':
           return 'original';
@@ -6343,10 +5957,10 @@ function nu(e, t, i) {
         case 'SMALL_CAPS_FORCED':
           return 'small_caps_forced';
         default:
-          xb(e);
+          throwTypeError(e);
       }
     }(e.textCase));
-    e.textDecoration && (n.textDecoration = function(e) {
+    e.textDecoration && (n.textDecoration = function (e) {
       switch (e) {
         case 'NONE':
           return 'none';
@@ -6355,12 +5969,12 @@ function nu(e, t, i) {
         case 'STRIKETHROUGH':
           return 'strikethrough';
         default:
-          xb(e);
+          throwTypeError(e);
       }
     }(e.textDecoration));
   }
   e.hyperlink && (n.href = e.hyperlink.value);
-  e.listOptions && (n.listOptions = function(e) {
+  e.listOptions && (n.listOptions = function (e) {
     switch (e) {
       case 'PLAIN':
       case 'BLOCKQUOTE':
@@ -6371,7 +5985,7 @@ function nu(e, t, i) {
       case 'UNORDERED_LIST':
         return 'unordered';
       default:
-        xb(e);
+        throwTypeError(e);
     }
   }(e.listOptions));
   t.jsxType === 'Text' && e.textTruncation === 'ENDING' && (n.truncate = !((e.maxLines ?? 0) > 1) || e.maxLines);
@@ -6446,7 +6060,7 @@ function nc(e, t, i, n) {
   }
   italic && c.push('italic');
   let f = t.lineHeight;
-  if (lineHeight && lineHeight !== 'auto' && f && c.push(`leading-${((e) => {
+  if (lineHeight && lineHeight !== 'auto' && f && c.push(`leading-${(e => {
     switch (e.units) {
       case 'RAW':
         return _$$rt(100 * e.value, 'PERCENT');
@@ -6455,7 +6069,7 @@ function nc(e, t, i, n) {
       case 'PIXELS':
         return _$$rt(e.value, 'PIXELS');
       default:
-        xb(e.units);
+        throwTypeError(e.units);
     }
   })(f)}`), fill) {
     let e = tu({
@@ -6479,14 +6093,12 @@ function nc(e, t, i, n) {
     }
   }
   let h = c.length > 0 ? c.join(' ') : void 0;
-  return n ?
-    {
-      className: h
-    } :
-    {
-      ...p,
-      className: h
-    };
+  return n ? {
+    className: h
+  } : {
+    ...p,
+    className: h
+  };
 }
 function nf(e, t) {
   let {
@@ -6505,57 +6117,51 @@ function nf(e, t) {
           return sJ[classParts[t]];
         })();
         t && (n.fontWeight = t);
-      } else
-        if (o === 'text') {
-          let r = (() => {
-            let t = classParts.length - 1;
-            return fx[classParts[t]] ?? Hc(classParts[t]);
-          })();
-          if (r && (n.fontSize = r), t.jsxType === 'Span') {
-            let e = tp({
-              className,
-              fill: n.fill
-            }, 'TEXT');
-            n.fill = e.fill;
-          }
-        } else
-          if (o === 'leading') {
-            let t = (() => {
-              let t = classParts.length - 1;
-              let i = u0[classParts[t]];
-              if (i)
-                return i;
-              let n = Cv[classParts[t]];
-              if (n)
-                return `${n}px`;
-              let r = Hc(classParts[t]);
-              if (r)
-                return `${r.toFixed(0)}px`;
-              let o = kX(classParts[t]);
-              return o ? o / 100 : null;
-            })();
-            t && (n.lineHeight = t);
-          } else {
-            _className === 'underline' ? n.textDecoration = 'underline' : _className === 'line-through' ? n.textDecoration = 'strikethrough' : _className === 'italic' ? n.italic = !0 : _className === 'uppercase' ? n.textCase = 'upper' : _className === 'lowercase' ? n.textCase = 'lower' : _className === 'capitalize' && (n.textCase = 'title');
-          }
+      } else if (o === 'text') {
+        let r = (() => {
+          let t = classParts.length - 1;
+          return fx[classParts[t]] ?? Hc(classParts[t]);
+        })();
+        if (r && (n.fontSize = r), t.jsxType === 'Span') {
+          let e = tp({
+            className,
+            fill: n.fill
+          }, 'TEXT');
+          n.fill = e.fill;
+        }
+      } else if (o === 'leading') {
+        let t = (() => {
+          let t = classParts.length - 1;
+          let i = u0[classParts[t]];
+          if (i) return i;
+          let n = Cv[classParts[t]];
+          if (n) return `${n}px`;
+          let r = Hc(classParts[t]);
+          if (r) return `${r.toFixed(0)}px`;
+          let o = kX(classParts[t]);
+          return o ? o / 100 : null;
+        })();
+        t && (n.lineHeight = t);
+      } else {
+        _className === 'underline' ? n.textDecoration = 'underline' : _className === 'line-through' ? n.textDecoration = 'strikethrough' : _className === 'italic' ? n.italic = !0 : _className === 'uppercase' ? n.textCase = 'upper' : _className === 'lowercase' ? n.textCase = 'lower' : _className === 'capitalize' && (n.textCase = 'title');
+      }
     }
   }
   return n;
 }
 let nh = (e, t, i) => {
   let n = e.includes('variable-consumption-map') && i.includeVariables;
-  let r = e.map((e) => e.replace(/-/g, '').toLowerCase());
+  let r = e.map(e => e.replace(/-/g, '').toLowerCase());
   for (let [e, i] of Object.entries(t)) r.includes(e.toLowerCase()) || Bj(i) && n || delete t[e];
   return t;
 };
 let nm = _$$z.object({
-  horizontalAlignText: _$$z.$$enum(['left', 'right', 'center', 'justified']).optional(),
-  verticalAlignText: _$$z.$$enum(['top', 'center', 'bottom']).optional()
+  horizontalAlignText: _$$z.enum(['left', 'right', 'center', 'justified']).optional(),
+  verticalAlignText: _$$z.enum(['top', 'center', 'bottom']).optional()
 });
 let ng = zA;
 function ny(e, t) {
-  if (e.type !== 'TEXT')
-    return;
+  if (e.type !== 'TEXT') return;
   let i = {};
   if (e.textAlignHorizontal) {
     switch (e.textAlignHorizontal) {
@@ -6586,45 +6192,43 @@ function ny(e, t) {
         i.verticalAlignText = 'bottom';
     }
   }
-  return t.tailwind ?
-    function(e) {
-      let {
-        horizontalAlignText,
-        verticalAlignText
-      } = e;
-      let n = [];
-      if (horizontalAlignText && horizontalAlignText !== 'left') {
-        switch (horizontalAlignText) {
-          case 'center':
-            n.push('text-center');
-            break;
-          case 'right':
-            n.push('text-right');
-            break;
-          case 'justified':
-            n.push('text-justify');
-        }
+  return t.tailwind ? function (e) {
+    let {
+      horizontalAlignText,
+      verticalAlignText
+    } = e;
+    let n = [];
+    if (horizontalAlignText && horizontalAlignText !== 'left') {
+      switch (horizontalAlignText) {
+        case 'center':
+          n.push('text-center');
+          break;
+        case 'right':
+          n.push('text-right');
+          break;
+        case 'justified':
+          n.push('text-justify');
       }
-      if (verticalAlignText && verticalAlignText !== 'top') {
-        switch (verticalAlignText) {
-          case 'center':
-            n.push('align-middle');
-            break;
-          case 'bottom':
-            n.push('align-bottom');
-        }
+    }
+    if (verticalAlignText && verticalAlignText !== 'top') {
+      switch (verticalAlignText) {
+        case 'center':
+          n.push('align-middle');
+          break;
+        case 'bottom':
+          n.push('align-bottom');
       }
-      return {
-        className: n.join(' ')
-      };
-    }(i) :
-    i;
+    }
+    return {
+      className: n.join(' ')
+    };
+  }(i) : i;
 }
 function nb({
   params: e,
   options: t
 }) {
-  t.tailwind && (e = function(e) {
+  t.tailwind && (e = function (e) {
     let {
       className
     } = e;
@@ -6648,19 +6252,18 @@ function nb({
             case 'justify':
               i.horizontalAlignText = 'justified';
           }
-        } else
-          if (t === 'align') {
-            switch (classParts[1]) {
-              case 'top':
-                i.verticalAlignText = 'top';
-                break;
-              case 'middle':
-                i.verticalAlignText = 'center';
-                break;
-              case 'bottom':
-                i.verticalAlignText = 'bottom';
-            }
+        } else if (t === 'align') {
+          switch (classParts[1]) {
+            case 'top':
+              i.verticalAlignText = 'top';
+              break;
+            case 'middle':
+              i.verticalAlignText = 'center';
+              break;
+            case 'bottom':
+              i.verticalAlignText = 'bottom';
           }
+        }
       }
     }
     return i;
@@ -6670,7 +6273,7 @@ function nb({
     verticalAlignText
   } = e;
   let r = {};
-  horizontalAlignText && (r.textAlignHorizontal = function(e) {
+  horizontalAlignText && (r.textAlignHorizontal = function (e) {
     switch (e) {
       case 'left':
       default:
@@ -6683,7 +6286,7 @@ function nb({
         return 'JUSTIFIED';
     }
   }(horizontalAlignText));
-  verticalAlignText && (r.textAlignVertical = function(e) {
+  verticalAlignText && (r.textAlignVertical = function (e) {
     switch (e) {
       case 'top':
       default:
@@ -6702,16 +6305,14 @@ let nS = ei({
   name: 'TextLayout',
   includeInTailwind: !0,
   fieldGroups: new Set(['text']),
-  outputSchema: (e) => e.tailwind ? ng : nm,
+  outputSchema: e => e.tailwind ? ng : nm,
   defaults: ({
     nodeType: e,
     options: t
-  }) => e !== 'TEXT' || t.tailwindOnly ?
-      {} :
-      {
-        horizontalAlignText: 'left',
-        verticalAlignText: 'top'
-      },
+  }) => e !== 'TEXT' || t.tailwindOnly ? {} : {
+    horizontalAlignText: 'left',
+    verticalAlignText: 'top'
+  },
   serialize: (e, t) => ny(e, t),
   serializeOverrides: ({
     node: e,
@@ -6724,23 +6325,18 @@ let nT = {
   name: 'Text',
   getJSXType(e, t) {
     if (e.type === 'TEXT') {
-      if (t.flattenTextContent)
-        return 'Text';
-      if (e.hyperlink && e.hyperlink !== 'mixed')
-        return 'Link';
+      if (t.flattenTextContent) return 'Text';
+      if (e.hyperlink && e.hyperlink !== 'mixed') return 'Link';
       let i = e.getRangeLineType(0, e.characters.length - 1);
       if (i !== 'mixed' && i !== 'PLAIN') {
-        if (i === 'ORDERED_LIST')
-          return 'OrderedList';
-        if (i === 'UNORDERED_LIST')
-          return 'UnorderedList';
+        if (i === 'ORDERED_LIST') return 'OrderedList';
+        if (i === 'UNORDERED_LIST') return 'UnorderedList';
       }
       return 'Text';
     }
   },
   fromJSXType(e) {
-    if (e === 'Text' || e === 'Link' || e === 'OrderedList' || e === 'UnorderedList')
-      return 'TEXT';
+    if (e === 'Text' || e === 'Link' || e === 'OrderedList' || e === 'UnorderedList') return 'TEXT';
   },
   getFieldSerializers(e) {
     let t = [];
@@ -6756,7 +6352,7 @@ let nT = {
       if (t && 'characters' in t) {
         let e = t.characters;
         let n = i.getRootComponentTypeInfo();
-        let r = n && n.parsedDefs.find((t) => t.rawProp === e);
+        let r = n && n.parsedDefs.find(t => t.rawProp === e);
         if (r) {
           return [{
             type: 'JSXExpressionContainer',
@@ -6767,11 +6363,9 @@ let nT = {
     }
     if (t.includeVariables) {
       let t = i.variableAliasToJSXExpressionContainer(e.boundVariables.characters);
-      if (t)
-        return [t];
+      if (t) return [t];
     }
-    if (!e.characters)
-      return [];
+    if (!e.characters) return [];
     let n = nr(e, t);
     if (t.flattenTextContent) {
       let e = n;
@@ -6784,15 +6378,13 @@ let nT = {
     let r = e.children[0];
     if (i.includeVariables && r && e.children.length === 1 && Bj(r)) {
       let t = n.jsxExpressionContainerToVariableAlias(r, e);
-      return t ?
-        {
-          props: {
-            boundVariables: {
-              characters: t
-            }
+      return t ? {
+        props: {
+          boundVariables: {
+            characters: t
           }
-        } :
-        {};
+        }
+      } : {};
     }
     let o = nn({
       element: e,
@@ -6803,12 +6395,12 @@ let nT = {
     });
     return {
       textMetadata: {
-        characters: o.map((e) => e.characters).join(''),
+        characters: o.map(e => e.characters).join(''),
         ranges: o
       },
       deserializeMetadata: {
         generationRequests: {
-          textRange: o.flatMap((e) => [...e.imageGenerationRequests.entries()].map(([t, i]) => ({
+          textRange: o.flatMap(e => [...e.imageGenerationRequests.entries()].map(([t, i]) => ({
             paintIndex: t,
             rangeStart: e.start,
             rangeEnd: e.end,
@@ -6822,19 +6414,17 @@ let nT = {
     jsxType: 'Span',
     fieldSerializers: [ns]
   }, {
-      jsxType: 'ListItem',
-      fieldSerializers: [ns]
-    }]
+    jsxType: 'ListItem',
+    fieldSerializers: [ns]
+  }]
 };
 let nz = {
   name: 'Vector',
   getJSXType(e) {
-    if (e.type === 'VECTOR')
-      return 'Vector';
+    if (e.type === 'VECTOR') return 'Vector';
   },
   fromJSXType(e) {
-    if (e === 'Vector')
-      return 'VECTOR';
+    if (e === 'Vector') return 'VECTOR';
   },
   getFieldSerializers(e) {
     let t = [];
@@ -6848,8 +6438,7 @@ let nz = {
   supportsChildren: () => 'nodes',
   getJSXChildren: (e, t, i) => !t.excludeVectorData && (!t.fieldGroups || t.fieldGroups.includes('rendering')) && e.vectorDataInfo && t.inlineVectorData ? iK(e, t, i) : [],
   fromJSXChildren(e, t, i, n) {
-    if (i.excludeVectorData || !i.inlineVectorData)
-      return {};
+    if (i.excludeVectorData || !i.inlineVectorData) return {};
     let {
       cornerRadius,
       vectorNetwork
@@ -6872,12 +6461,10 @@ let nz = {
 let nx = {
   name: 'AutoLayout',
   getJSXType(e) {
-    if (e.type === 'FRAME' && !e.isGroup && e.isStack)
-      return 'AutoLayout';
+    if (e.type === 'FRAME' && !e.isGroup && e.isStack) return 'AutoLayout';
   },
   fromJSXType(e) {
-    if (e === 'AutoLayout')
-      return 'FRAME';
+    if (e === 'AutoLayout') return 'FRAME';
   },
   getFieldSerializers(e) {
     let t = iH(e);
@@ -6886,7 +6473,7 @@ let nx = {
     return t;
   },
   supportsChildren: () => 'nodes',
-  possibleTagNames: (e) => e.flavor === 'flow' ? ['AutoLayout'] : []
+  possibleTagNames: e => e.flavor === 'flow' ? ['AutoLayout'] : []
 };
 let nI = _$$z.object({
   arcData: _$$z.object({
@@ -6896,8 +6483,7 @@ let nI = _$$z.object({
   }).optional()
 });
 function nE(e) {
-  if (!e.arcData)
-    return {};
+  if (!e.arcData) return {};
   let t = {};
   (e.arcData.innerRadius !== 0 || e.arcData.startingAngle !== 0 || e.arcData.endingAngle !== 6.2831854820251465) && (t.arcData = {
     innerRadius: e4(e.arcData.innerRadius, 0),
@@ -6909,8 +6495,7 @@ function nE(e) {
 function nN({
   params: e
 }) {
-  if (void 0 === e.arcData)
-    return;
+  if (void 0 === e.arcData) return;
   let {
     arcData
   } = e;
@@ -6933,16 +6518,14 @@ let nv = ei({
   outputSchema: () => nI,
   defaults: ({
     nodeType: e
-  }) => e !== 'ELLIPSE' ?
-      {} :
-      {
-        arcData: {
-          innerRadius: 0,
-          startingAngle: 0,
-          endingAngle: 6.2831854820251465
-        }
-      },
-  serialize: (e) => nE(e),
+  }) => e !== 'ELLIPSE' ? {} : {
+    arcData: {
+      innerRadius: 0,
+      startingAngle: 0,
+      endingAngle: 6.2831854820251465
+    }
+  },
+  serialize: e => nE(e),
   serializeOverrides: ({
     node: e,
     fieldNames: t
@@ -6953,12 +6536,10 @@ let nv = ei({
 let nO = {
   name: 'Ellipse',
   getJSXType(e) {
-    if (e.type === 'ELLIPSE')
-      return 'Ellipse';
+    if (e.type === 'ELLIPSE') return 'Ellipse';
   },
   fromJSXType(e) {
-    if (e === 'Ellipse')
-      return 'ELLIPSE';
+    if (e === 'Ellipse') return 'ELLIPSE';
   },
   getFieldSerializers(e) {
     let t = iH(e);
@@ -6971,12 +6552,10 @@ let nO = {
 let nA = {
   name: 'Component',
   getJSXType(e, t) {
-    if (e.type === 'SYMBOL')
-      return t.serializeAsComponentDefinition ? t.useDivTagsForFrames ? 'div' : 'Frame' : f;
+    if (e.type === 'SYMBOL') return t.serializeAsComponentDefinition ? t.useDivTagsForFrames ? 'div' : 'Frame' : f;
   },
   fromJSXType(e, t) {
-    if (e === f && !t.tempDeserializeComponentsAsFrames)
-      return 'SYMBOL';
+    if (e === f && !t.tempDeserializeComponentsAsFrames) return 'SYMBOL';
   },
   getFieldSerializers(e) {
     let t = iH(e);
@@ -6991,12 +6570,10 @@ let nA = {
 let nC = {
   name: 'ComponentSet',
   getJSXType(e, t) {
-    if (e.type === 'FRAME' && e.isStateGroup)
-      return h;
+    if (e.type === 'FRAME' && e.isStateGroup) return h;
   },
   fromJSXType(e, t) {
-    if (e === h)
-      return 'FRAME';
+    if (e === h) return 'FRAME';
   },
   fromJSXElement: (e, t) => ({
     props: {
@@ -7010,19 +6587,16 @@ let nC = {
     return t;
   },
   supportsChildren: () => 'nodes',
-  possibleTagNames: (e) => e.flavor === 'flow' ? ['ComponentSet'] : ['Frame']
+  possibleTagNames: e => e.flavor === 'flow' ? ['ComponentSet'] : ['Frame']
 };
 let nw = {
   name: 'Group',
   getJSXType: (e, t) => iU({
     guid: e.guid,
     options: t
-  }) ?
-    'Vector' :
-    e.isGroup || e.type === 'GROUP' ? 'Group' : void 0,
+  }) ? 'Vector' : e.isGroup || e.type === 'GROUP' ? 'Group' : void 0,
   fromJSXType(e) {
-    if (e === 'Group')
-      return 'GROUP';
+    if (e === 'Group') return 'GROUP';
   },
   getFieldSerializers(e) {
     let t = iJ(e);
@@ -7051,38 +6625,33 @@ let nR = {
     }
   },
   fromJSXType(e) {
-    if (e === 'Rectangle')
-      return 'ROUNDED_RECTANGLE';
+    if (e === 'Rectangle') return 'ROUNDED_RECTANGLE';
   },
-  getFieldSerializers: (e) => iH(e),
+  getFieldSerializers: e => iH(e),
   supportsChildren: () => 'none',
   possibleTagNames: ['Rectangle']
 };
 let nP = {
   name: 'Line',
   getJSXType(e) {
-    if (e.type === 'LINE')
-      return 'Line';
+    if (e.type === 'LINE') return 'Line';
   },
   fromJSXType(e) {
-    if (e === 'Line')
-      return 'LINE';
+    if (e === 'Line') return 'LINE';
   },
-  getFieldSerializers: (e) => iH(e),
+  getFieldSerializers: e => iH(e),
   supportsChildren: () => 'none',
   possibleTagNames: ['Line']
 };
 let nk = {
   name: 'Slice',
   getJSXType(e) {
-    if (e.type === 'SLICE')
-      return 'Slice';
+    if (e.type === 'SLICE') return 'Slice';
   },
   fromJSXType(e) {
-    if (e === 'Slice')
-      return 'SLICE';
+    if (e === 'Slice') return 'SLICE';
   },
-  getFieldSerializers: (e) => iJ(e),
+  getFieldSerializers: e => iJ(e),
   supportsChildren: () => 'none',
   possibleTagNames: ['Slice']
 };
@@ -7115,7 +6684,7 @@ let nV = ei({
   defaults: () => ({
     sides: 3
   }),
-  serialize: (e) => nL(e),
+  serialize: e => nL(e),
   serializeOverrides: ({
     node: e,
     fieldNames: t
@@ -7126,12 +6695,10 @@ let nV = ei({
 let nM = {
   name: 'Polygon',
   getJSXType(e) {
-    if (e.type === 'REGULAR_POLYGON')
-      return 'Polygon';
+    if (e.type === 'REGULAR_POLYGON') return 'Polygon';
   },
   fromJSXType(e) {
-    if (e === 'Polygon')
-      return 'REGULAR_POLYGON';
+    if (e === 'Polygon') return 'REGULAR_POLYGON';
   },
   getFieldSerializers(e) {
     let t = iH(e);
@@ -7146,8 +6713,7 @@ let nF = {
   name: 'Unknown',
   getJSXType: () => n_,
   fromJSXType(e) {
-    if (e === n_)
-      return 'FRAME';
+    if (e === n_) return 'FRAME';
   },
   getJSXChildren: () => [],
   fromJSXChildren: () => ({}),
@@ -7155,14 +6721,12 @@ let nF = {
     if (e.type === n_) {
       let n = {};
       'name' in e.props || (typeof e.props?.originalType == 'string' ? n.name = `Unhandled ${e.props?.originalType}` : n.name = 'Unhandled Node');
-      t.unknownNodeFallbackHex ?
-        n.fills = tn({
-          prop: t.unknownNodeFallbackHex,
-          options: e5(t),
-          context: i,
-          element: e
-        }).paints :
-        n.fills = [];
+      t.unknownNodeFallbackHex ? n.fills = tn({
+        prop: t.unknownNodeFallbackHex,
+        options: e5(t),
+        context: i,
+        element: e
+      }).paints : n.fills = [];
       return {
         props: n,
         deserializeMetadata: {
@@ -7178,19 +6742,17 @@ let nF = {
       };
     }
   },
-  getFieldSerializers: (e) => iJ(e),
+  getFieldSerializers: e => iJ(e),
   supportsChildren: () => 'nodes',
   possibleTagNames: [n_]
 };
 let nX = {
   name: 'Sticky',
   getJSXType(e) {
-    if (e.type === 'STICKY')
-      return 'Sticky';
+    if (e.type === 'STICKY') return 'Sticky';
   },
   fromJSXType(e) {
-    if (e === 'Sticky')
-      return 'STICKY';
+    if (e === 'Sticky') return 'STICKY';
   },
   getFieldSerializers(e) {
     let t = iJ({
@@ -7212,7 +6774,7 @@ let nX = {
     });
     return {
       textMetadata: {
-        characters: r.map((e) => e.characters).join(''),
+        characters: r.map(e => e.characters).join(''),
         ranges: r
       }
     };
@@ -7222,14 +6784,12 @@ let nX = {
 let nB = {
   name: 'Section',
   getJSXType(e) {
-    if (e.type === 'SECTION')
-      return 'Section';
+    if (e.type === 'SECTION') return 'Section';
   },
   fromJSXType(e) {
-    if (e === 'Section')
-      return 'SECTION';
+    if (e === 'Section') return 'SECTION';
   },
-  getFieldSerializers: (e) => iH(e),
+  getFieldSerializers: e => iH(e),
   supportsChildren: () => 'nodes',
   possibleTagNames: ['Section']
 };
@@ -7237,12 +6797,10 @@ let nG = 'Slide';
 let nJ = {
   name: nG,
   getJSXType(e) {
-    if (e.type === 'SLIDE')
-      return nG;
+    if (e.type === 'SLIDE') return nG;
   },
   fromJSXType(e) {
-    if (e === nG)
-      return 'SLIDE';
+    if (e === nG) return 'SLIDE';
   },
   getFieldSerializers(e) {
     let t = iH(e);
@@ -7255,24 +6813,22 @@ let nJ = {
 function nH(e) {
   if (e.startsWith('repeat(')) {
     let t = e.match(/repeat\((\d+), (.*)\)/);
-    if (!t)
-      return;
+    if (!t) return;
     let [, i, n] = t;
-    if (void 0 === i || void 0 === n)
-      return;
+    if (void 0 === i || void 0 === n) return;
     let r = n$(n);
-    if (!r)
-      return;
-    return Array.from({ length: parseInt(i) }).fill(0).map(() => ({
+    if (!r) return;
+    return Array.from({
+      length: parseInt(i)
+    }).fill(0).map(() => ({
       trackSize: r
     }));
   }
   {
     let t = e.replaceAll(', ', ',').split(' ');
-    let i = t.map(n$).filter((e) => void 0 !== e);
-    if (i.length !== t.length)
-      return;
-    return i.map((e) => ({
+    let i = t.map(n$).filter(e => void 0 !== e);
+    if (i.length !== t.length) return;
+    return i.map(e => ({
       trackSize: e
     }));
   }
@@ -7280,14 +6836,11 @@ function nH(e) {
 function n$(e) {
   if (e.startsWith('minmax(')) {
     let t = e.match(/minmax\((.*),(.*)\)/);
-    if (!t)
-      return;
-    let [, , i] = t;
-    if (void 0 === i)
-      return;
+    if (!t) return;
+    let [,, i] = t;
+    if (void 0 === i) return;
     let n = nU(i);
-    if (!n)
-      return;
+    if (!n) return;
     return {
       minSizing: {
         type: sAE.FIXED,
@@ -7298,8 +6851,7 @@ function n$(e) {
   }
   {
     let t = nU(e);
-    if (!t)
-      return;
+    if (!t) return;
     return {
       minSizing: {
         type: sAE.FIXED,
@@ -7311,19 +6863,13 @@ function n$(e) {
 }
 function nU(e) {
   let t = parseFloat(e);
-  return isNaN(t) ?
-    void 0 :
-    e.match(/.*px\w*/) ?
-      {
-        type: sAE.FIXED,
-        value: t
-      } :
-      e.match(/.*fr\w*/) ?
-        {
-          type: sAE.FLEX,
-          value: t
-        } :
-        void 0;
+  return isNaN(t) ? void 0 : e.match(/.*px\w*/) ? {
+    type: sAE.FIXED,
+    value: t
+  } : e.match(/.*fr\w*/) ? {
+    type: sAE.FLEX,
+    value: t
+  } : void 0;
 }
 let nW = _$$z.object({
   vertical: _$$z.number().or(M1),
@@ -7362,23 +6908,21 @@ let nq = ei({
       gridTemplateColumns: gridColumnSizingCSS.trim()
     };
     Object.assign(o, eE(e, t, i));
-    Object.assign(o, function(e, t, i) {
+    Object.assign(o, function (e, t, i) {
       let n = i.variableAliasToJSXExpressionContainer(t.includeVariables ? e.boundVariables.gridRowGap : void 0);
       let r = i.variableAliasToJSXExpressionContainer(t.includeVariables ? e.boundVariables.gridColumnGap : void 0);
       let o = {
         horizontal: n ?? i.maybeNormalizePxValue(e.gridRowGap, 'x'),
         vertical: r ?? i.maybeNormalizePxValue(e.gridColumnGap, 'y')
       };
-      return t.normalizePxToRange01 || typeof o.horizontal != 'number' || o.horizontal !== o.vertical ?
-        {
-          spacing: {
-            vertical: o.vertical,
-            horizontal: o.horizontal
-          }
-        } :
-        {
-          spacing: o.horizontal
-        };
+      return t.normalizePxToRange01 || typeof o.horizontal != 'number' || o.horizontal !== o.vertical ? {
+        spacing: {
+          vertical: o.vertical,
+          horizontal: o.horizontal
+        }
+      } : {
+        spacing: o.horizontal
+      };
     }(e, t, i));
     return o;
   },
@@ -7432,7 +6976,7 @@ let nq = ei({
     let {
       props: _props2,
       boundVariables: _boundVariables
-    } = function({
+    } = function ({
       spacing: e,
       context: t,
       elem: i
@@ -7466,12 +7010,10 @@ let nq = ei({
 let nY = {
   name: 'Grid',
   getJSXType(e) {
-    if (e.type === 'FRAME' && !e.isGroup && e.isGrid)
-      return 'Grid';
+    if (e.type === 'FRAME' && !e.isGroup && e.isGrid) return 'Grid';
   },
   fromJSXType(e) {
-    if (e === 'Grid')
-      return 'FRAME';
+    if (e === 'Grid') return 'FRAME';
   },
   getFieldSerializers(e) {
     let t = iH(e);
@@ -7480,7 +7022,7 @@ let nY = {
     return t;
   },
   supportsChildren: () => 'nodes',
-  possibleTagNames: (e) => e.flavor === 'flow' ? ['Grid'] : []
+  possibleTagNames: e => e.flavor === 'flow' ? ['Grid'] : []
 };
 export function $$nZ29(e) {
   let t = {
@@ -7488,12 +7030,11 @@ export function $$nZ29(e) {
     ...e
   };
   let i = [nC, iZ];
-  return (t.flavor === 'flow' && (i.push(nx), i.push(nY)), i.push(nw, nk, nA, nO, nM, rt, nT, nz, i5, i1, i2, nP, nR, i0, nB, nX, nJ, nF), t.testOnlyOmitNodeSerializers) ? i.filter((e) => !t.testOnlyOmitNodeSerializers || !t.testOnlyOmitNodeSerializers.includes(e.name)) : i;
+  return (t.flavor === 'flow' && (i.push(nx), i.push(nY)), i.push(nw, nk, nA, nO, nM, rt, nT, nz, i5, i1, i2, nP, nR, i0, nB, nX, nJ, nF), t.testOnlyOmitNodeSerializers) ? i.filter(e => !t.testOnlyOmitNodeSerializers || !t.testOnlyOmitNodeSerializers.includes(e.name)) : i;
 }
 function nQ(e, t, i) {
   for (let n of $$nZ29(t)) {
-    if (n.getJSXType(e, t, i))
-      return n;
+    if (n.getJSXType(e, t, i)) return n;
   }
   return null;
 }
@@ -7508,15 +7049,12 @@ function n8({
   if (i) {
     for (let o of Object.keys(i)) {
       if (o !== 'spreadAttribute') {
-        if (n && !n.has(o))
-          throw new Error(`Prop ${o} not a valid key`);
+        if (n && !n.has(o)) throw new Error(`Prop ${o} not a valid key`);
         if (o === 'className') {
           i[o] && (t.props[o] ? t.props[o] = [t.props[o], i[o]].join(' ') : t.props[o] = i[o]);
         } else {
-          if (void 0 !== t.props[o])
-            throw new Error(`Prop ${o} already set on node ${e.guid}`);
-          if (r && o in r && c2(i[o], r[o]))
-            continue;
+          if (void 0 !== t.props[o]) throw new Error(`Prop ${o} already set on node ${e.guid}`);
+          if (r && o in r && c2(i[o], r[o])) continue;
           t.props[o] = i[o];
         }
       }
@@ -7541,8 +7079,7 @@ function n6({
   }
   for (let d of t) {
     let u = d.getJSXType(e, i, n);
-    if (!u)
-      continue;
+    if (!u) continue;
     let p = {
       type: u,
       props: {},
@@ -7570,17 +7107,15 @@ function n6({
       let r;
       let o = t.outputSchema(i);
       let a = (o._def.typeName === 'ZodNullable' ? o.unwrap() : o).shape;
-      if (!a)
-        throw new Error(`No output schema in fieldSerializer=${t.name} for flavor=${i.flavor}`);
+      if (!a) throw new Error(`No output schema in fieldSerializer=${t.name} for flavor=${i.flavor}`);
       let l = new Set(Object.keys(a));
       if (i.maxNodeswithFields && s && s > i.maxNodeswithFields) {
         r = {};
       } else {
         try {
           r = t.serialize(e, i, n);
-          r = function(e, t, i) {
-            if (!i || !Object.keys(i).length || t.fieldGroups.size === 0 || !e)
-              return e;
+          r = function (e, t, i) {
+            if (!i || !Object.keys(i).length || t.fieldGroups.size === 0 || !e) return e;
             let n = [];
             for (let e of t.fieldGroups) {
               let t = i[e];
@@ -7588,8 +7123,7 @@ function n6({
             }
             return n.length ? Object.fromEntries(Object.entries(e).filter(([e]) => n.includes(e))) : e;
           }(r, t, i.fieldGroupFilters);
-        }
-        catch (i) {
+        } catch (i) {
           n.trackSerializeIssue({
             message: `Could not serialize ${t.name} fields${i instanceof Error ? `: ${i.message}` : ''}`,
             context: {
@@ -7618,26 +7152,24 @@ function n6({
     let m = d?.getJSXChildren?.(e, i, n);
     if (m) {
       p.children = m;
-    } else
-      if (!a && 'childrenNodes' in e && e.childrenNodes) {
-        for (let a of i.orderChildrenByXY ? H(e) : $(e)) {
-          let e = n6({
-            node: a,
-            nodeSerializers: t,
-            options: i,
-            context: n,
-            depth: r + 1,
-            serializeReason: o,
-            startTime: l
-          });
-          e && p.children.push(e);
-        }
+    } else if (!a && 'childrenNodes' in e && e.childrenNodes) {
+      for (let a of i.orderChildrenByXY ? H(e) : $(e)) {
+        let e = n6({
+          node: a,
+          nodeSerializers: t,
+          options: i,
+          context: n,
+          depth: r + 1,
+          serializeReason: o,
+          startTime: l
+        });
+        e && p.children.push(e);
       }
+    }
     if (i.excludeEmptyContainers && !a && (e.isGroup || e.type === 'FRAME')) {
       let t = e.isGroup ? ey.GROUP : ey.FRAME;
       let i = e.name.replace(/\d/g, '').replace(/\s/g, '');
-      if (t && t.includes(i) && !p.children.length)
-        return null;
+      if (t && t.includes(i) && !p.children.length) return null;
     }
     return p;
   }
@@ -7649,7 +7181,7 @@ function n6({
   });
   return null;
 }
-!function(e) {
+!function (e) {
   e[e.CONTINUE = 0] = 'CONTINUE';
   e[e.BREAK = 1] = 'BREAK';
   e[e.SKIP = 2] = 'SKIP';
@@ -7690,8 +7222,7 @@ function n5(e, t, i) {
             };
             continue;
           }
-          if (void 0 !== e[n][r])
-            throw new Error(`prop ${n}.${r} already set elem=${JSON.stringify(i)}, declarativeNode=${JSON.stringify(e)}`);
+          if (void 0 !== e[n][r]) throw new Error(`prop ${n}.${r} already set elem=${JSON.stringify(i)}, declarativeNode=${JSON.stringify(e)}`);
           e[n][r] = o;
         }
       }
@@ -7707,10 +7238,8 @@ function n3({
 }) {
   for (let o of t) {
     let a = o.fromJSXType(e.type, i, n);
-    if (!a)
-      continue;
-    if (i?.includeNodeTypes && !i.includeNodeTypes.includes(a))
-      return null;
+    if (!a) continue;
+    if (i?.includeNodeTypes && !i.includeNodeTypes.includes(a)) return null;
     let l = o.getFieldSerializers(i);
     l = _$$c(l, {
       ...i
@@ -7735,39 +7264,38 @@ function n3({
     let u = o?.fromJSXChildren?.(e, s, i, n);
     if (u) {
       n5(s, u, e);
-    } else
-      if (e.children.length) {
-        for (let o of (s.childrenMetadata.children = [], e.children)) {
-          if (o) {
-            if (_$$id(o)) {
-              s.childrenMetadata.children.push(...function e(o) {
-                let a = [];
-                if (o.type === 'Fragment' || o.type === '') {
-                  for (let t of o.children) _$$id(t) && a.push(...e(t));
-                } else {
-                  let e = n3({
-                    jsxElement: o,
-                    nodeSerializers: t,
-                    options: i,
-                    context: n,
-                    depth: r + 1
-                  });
-                  e && a.push(e);
-                }
-                return a;
-              }(o));
-              continue;
-            }
-            n.trackDeserializeIssue({
-              message: 'Unhandled child value',
-              context: {
-                jsxElement: e
-              },
-              location: Bj(o) ? o.location : e.parsedLocations?.children ?? e.parsedLocations?.full
-            });
+    } else if (e.children.length) {
+      for (let o of (s.childrenMetadata.children = [], e.children)) {
+        if (o) {
+          if (_$$id(o)) {
+            s.childrenMetadata.children.push(...function e(o) {
+              let a = [];
+              if (o.type === 'Fragment' || o.type === '') {
+                for (let t of o.children) _$$id(t) && a.push(...e(t));
+              } else {
+                let e = n3({
+                  jsxElement: o,
+                  nodeSerializers: t,
+                  options: i,
+                  context: n,
+                  depth: r + 1
+                });
+                e && a.push(e);
+              }
+              return a;
+            }(o));
+            continue;
           }
+          n.trackDeserializeIssue({
+            message: 'Unhandled child value',
+            context: {
+              jsxElement: e
+            },
+            location: Bj(o) ? o.location : e.parsedLocations?.children ?? e.parsedLocations?.full
+          });
         }
       }
+    }
     return s;
   }
   return (n.trackDeserializeIssue({
@@ -7776,21 +7304,19 @@ function n3({
       jsxElement: e
     },
     location: e.parsedLocations?.full
-  }), i.transformUnhandledNodes) ?
-    n3({
-      jsxElement: Aw(e),
-      nodeSerializers: t,
-      options: {
-        ...i,
-        tailwind: !0
-      },
-      context: n,
-      depth: r
-    }) :
-    null;
+  }), i.transformUnhandledNodes) ? n3({
+    jsxElement: Aw(e),
+    nodeSerializers: t,
+    options: {
+      ...i,
+      tailwind: !0
+    },
+    context: n,
+    depth: r
+  }) : null;
 }
 export function $$n918(e, t, i, n, r, o, a) {
-  let l = n.spreadAttributes?.map((e) => o.jsxSpreadAttributeToStyle(e, n)).filter((e) => void 0 !== e) ?? [];
+  let l = n.spreadAttributes?.map(e => o.jsxSpreadAttributeToStyle(e, n)).filter(e => void 0 !== e) ?? [];
   let s = {};
   for (let e of t) {
     let t = e.deserializeNodeInfoForDefaults?.(n.props, r);
@@ -7798,8 +7324,7 @@ export function $$n918(e, t, i, n, r, o, a) {
   }
   for (let d of t) {
     let t = d.outputSchema(r);
-    if (!t)
-      throw new Error(`No output schema in fieldSerializer=${d.name} for flavor=${r.flavor}`);
+    if (!t) throw new Error(`No output schema in fieldSerializer=${d.name} for flavor=${r.flavor}`);
     let u = t.safeParse(n.props);
     if (!u.success) {
       let {
@@ -7890,8 +7415,7 @@ let re = ei({
       let s = {};
       let d = l.getFieldSerializers(t);
       for (let n of (a.type === 'INSTANCE' && (d = Array.from(new Set([...d, ...iZ.getFieldSerializers(t)]))), d)) {
-        if (!n.serializeOverrides)
-          continue;
+        if (!n.serializeOverrides) continue;
         let r = n.serializeOverrides({
           node: a,
           fieldNames: o.overriddenFields,
@@ -7921,8 +7445,7 @@ let re = ei({
     elem: n,
     depth: r
   }) {
-    if (!e.overrides)
-      return {};
+    if (!e.overrides) return {};
     let o = i.findComponentIdFromJSXName(n.type);
     let a = o ? t.scene.get(o) : null;
     if (!a) {
@@ -7955,12 +7478,10 @@ let re = ei({
           for (let [e, n] of Object.entries(i)) {
             if (e === t.guid) {
               for (let [e, t] of Object.entries(n)) {
-                typeof p[e] != 'object' || typeof t != 'object' || Array.isArray(p[e]) || Array.isArray(t) ?
-                  p[e] = t :
-                  p[e] = {
-                    ...p[e],
-                    ...t
-                  };
+                typeof p[e] != 'object' || typeof t != 'object' || Array.isArray(p[e]) || Array.isArray(t) ? p[e] = t : p[e] = {
+                  ...p[e],
+                  ...t
+                };
               }
               delete p[e];
             }
@@ -7968,12 +7489,10 @@ let re = ei({
           for (let [i, c] of Object.entries(p)) {
             if (sH(i)) {
               let d = function e(t, i) {
-                if (t.overrideKey === i || t.guid === i)
-                  return t;
+                if (t.overrideKey === i || t.guid === i) return t;
                 for (let n of t.childrenNodes) {
                   let t = e(n, i);
-                  if (t)
-                    return t;
+                  if (t) return t;
                 }
                 return null;
               }(t, i);
@@ -8015,8 +7534,7 @@ let re = ei({
             let i = t.type === 'SYMBOL' ? 'INSTANCE' : t.type;
             let u = e.getFieldSerializers(r);
             for (let e of (i === 'INSTANCE' && (u = Array.from(new Set([...u, ...iZ.getFieldSerializers(r)]))), u)) {
-              if (!e.deserializeOverrides)
-                continue;
+              if (!e.deserializeOverrides) continue;
               let u = e.deserializeOverrides({
                 params: d,
                 options: r,
@@ -8064,9 +7582,8 @@ let rt = {
   getJSXType(e, t, i) {
     if (e.type === 'INSTANCE') {
       let t = e.mainComponent;
-      if (!t)
-        throw new Error('Cannot find component for instance');
-      return i.getJSXNameForComponent((t));
+      if (!t) throw new Error('Cannot find component for instance');
+      return i.getJSXNameForComponent(t);
     }
   },
   fromJSXType(e, t, i) {
@@ -8093,10 +7610,9 @@ let rt = {
     }
     return t;
   },
-  supportsChildren: (e) => e.includeInstanceSublayers ? 'nodes' : 'none',
+  supportsChildren: e => e.includeInstanceSublayers ? 'nodes' : 'none',
   getJSXChildren(e, t, i) {
-    if (!t.includeInstanceSublayers)
-      return [];
+    if (!t.includeInstanceSublayers) return [];
   },
   fromJSXChildren: () => ({}),
   possibleTagNames: ['ComponentXYZ']
@@ -8121,29 +7637,25 @@ function rn(e, t = null) {
   ri === null && (ri = rt.getFieldSerializers({
     scene: UN(),
     ...KQ
-  }).map((e) => `${e.name}Fields`));
+  }).map(e => `${e.name}Fields`));
   let r = ri;
   i.propsTypeRepr.typeDefBody !== '{}' && (r = [...r, `{ componentProps: ${i.propsTypeRepr.typeDefBody} }`]);
   n.push(`type ${t || i.jsxName} = React.FC<${r.join(' & ')}>`);
   return n.join('\n');
 }
 export async function $$rr26(e) {
-  let t = e.type === 'INSTANCE' ?
-    [e] :
-    e.findAllWithCriteriaGUIDs({
-      types: ['INSTANCE', 'COMPONENT']
-    }).map((t) => e.sceneGraph.get(t)).filter(Boolean);
-  if (t.length === 0)
-    return '';
+  let t = e.type === 'INSTANCE' ? [e] : e.findAllWithCriteriaGUIDs({
+    types: ['INSTANCE', 'COMPONENT']
+  }).map(t => e.sceneGraph.get(t)).filter(Boolean);
+  if (t.length === 0) return '';
   let i = _$$B(t, {
     followInstances: !0
   });
   i.reverse();
-  return i.map((e) => {
+  return i.map(e => {
     try {
       return rn(e);
-    }
-    catch (t) {
+    } catch (t) {
       return `// Failed to generate schema for ${e.name}`;
     }
   }).join('\n\n');
@@ -8158,39 +7670,32 @@ function rl(e, t) {
     };
   }
   let n = t.getVariableCollectionNode(i.variableCollectionId);
-  return n ?
-    {
-      collectionName: n.name,
-      variableName: i.name
-    } :
-    {
-      collectionName: null,
-      variableName: null
-    };
+  return n ? {
+    collectionName: n.name,
+    variableName: i.name
+  } : {
+    collectionName: null,
+    variableName: null
+  };
 }
 let rs = 'styles';
 function rd(e, t, i) {
-  t in e ?
-    Object.defineProperty(e, t, {
-      value: i,
-      enumerable: !0,
-      configurable: !0,
-      writable: !0
-    }) :
-    e[t] = i;
+  t in e ? Object.defineProperty(e, t, {
+    value: i,
+    enumerable: !0,
+    configurable: !0,
+    writable: !0
+  }) : e[t] = i;
   return e;
 }
 class ru {
   getRootComponentTypeInfo() {
     return this.componentTypeInfo ?? null;
   }
-
   getJSXNameForComponent(e) {
     let t = d(e);
-    if (!t)
-      throw new Error('Node is not a Component or Component Set');
-    if (t.guid in this.componentIdToJSXName)
-      return this.componentIdToJSXName[t.guid];
+    if (!t) throw new Error('Node is not a Component or Component Set');
+    if (t.guid in this.componentIdToJSXName) return this.componentIdToJSXName[t.guid];
     let i = S({
       name: g(t),
       usedNames: new Set(Object.keys(this.componentJSXNameToId))
@@ -8199,11 +7704,9 @@ class ru {
     this.componentJSXNameToId[i] = t.guid;
     return i;
   }
-
   getComponentJSXNameToIdMap() {
     return this.componentJSXNameToId;
   }
-
   findComponentIdFromJSXName(e) {
     let t = e.toLowerCase();
     let i = this.options.componentInfoByJSXName?.[e]?.guid ?? this.componentJSXNameToId[t];
@@ -8213,20 +7716,16 @@ class ru {
     }
     return i ?? null;
   }
-
   variableAliasToJSXExpressionContainer(e) {
-    if (!e)
-      return null;
+    if (!e) return null;
     let t = sD.fromString(e.id);
     return t ? this.variableIdToJSXExpresssionContainer(t) : null;
   }
-
   variableIdToJSXExpresssionContainer(e) {
     if (this.options.substituteWebSyntaxForVariables) {
-      let t = function(e, t) {
+      let t = function (e, t) {
         let i = t.getVariableNode(e);
-        if (!i)
-          return null;
+        if (!i) return null;
         let n = i.variableCodeSyntax?.WEB;
         return n ? JSON.stringify(n) : null;
       }(e, this.options.scene);
@@ -8241,52 +7740,43 @@ class ru {
       collectionName,
       variableName
     } = rl(e, this.options.scene);
-    return collectionName && variableName ? (
-      this.trackVariableUsage(e), {
-        type: 'JSXExpressionContainer',
-        expression: `${ra}[${JSON.stringify(collectionName)}][${JSON.stringify(variableName)}]`
-      }) :
-      null;
+    return collectionName && variableName ? (this.trackVariableUsage(e), {
+      type: 'JSXExpressionContainer',
+      expression: `${ra}[${JSON.stringify(collectionName)}][${JSON.stringify(variableName)}]`
+    }) : null;
   }
-
   variableDataToJSXExpressionContainer(e) {
     if (e?.value?.alias) {
       let t = e.value.alias;
       let i = sD.fromKiwi(t);
-      if (i)
-        return this.variableIdToJSXExpresssionContainer(i);
+      if (i) return this.variableIdToJSXExpresssionContainer(i);
     }
     return null;
   }
-
   jsxExpressionContainerToVariable(e, t) {
-    if (!Bj(e))
-      return;
+    if (!Bj(e)) return;
     let {
       isVariableExpression,
       collectionName,
       variableName
-    } = function(e) {
+    } = function (e) {
       if (!e.startsWith(`${ra}[`)) {
         return {
           isVariableExpression: !1
         };
       }
       let t = e.match(/^variables\["([^"]+)"\]\["([^"]+)"\]$/);
-      return t ?
-        {
-          isVariableExpression: !0,
-          collectionName: t[1],
-          variableName: t[2]
-        } :
-        {
-          isVariableExpression: !0,
-          collectionName: void 0,
-          variableName: void 0
-        };
+      return t ? {
+        isVariableExpression: !0,
+        collectionName: t[1],
+        variableName: t[2]
+      } : {
+        isVariableExpression: !0,
+        collectionName: void 0,
+        variableName: void 0
+      };
     }(e.expression);
-    if (!isVariableExpression)
-      return;
+    if (!isVariableExpression) return;
     if (!collectionName || !variableName) {
       this.trackDeserializeIssue({
         message: 'Could not parse variable expression',
@@ -8310,7 +7800,6 @@ class ru {
     }
     return o;
   }
-
   jsxExpressionContainerToVariableData(e, t) {
     let i = this.jsxExpressionContainerToVariable(e, t);
     if (i) {
@@ -8323,7 +7812,6 @@ class ru {
       };
     }
   }
-
   jsxExpressionContainerToVariableAlias(e, t) {
     let i = this.jsxExpressionContainerToVariable(e, t);
     if (i) {
@@ -8333,38 +7821,29 @@ class ru {
       };
     }
   }
-
   findVariableCollection(e) {
     let t = this.variableCollectionNameToId[e];
-    if (t)
-      return this.options.scene.getVariableCollectionNode(t) ?? null;
-    let i = this.options.scene.getLocalVariableCollectionNodes().find((t) => t.name === e);
+    if (t) return this.options.scene.getVariableCollectionNode(t) ?? null;
+    let i = this.options.scene.getLocalVariableCollectionNodes().find(t => t.name === e);
     return i ? (this.variableCollectionNameToId[e] = i.id, i) : null;
   }
-
   findVariable(e, t) {
     let i = this.variableNameToId[t];
-    if (i)
-      return this.options.scene.getVariableNode(i) ?? null;
+    if (i) return this.options.scene.getVariableNode(i) ?? null;
     let n = this.findVariableCollection(e);
-    if (!n)
-      return null;
-    let r = n.variableIds.map((e) => this.options.scene.getVariableNode(sD.fromString(e))).filter(e6).find((e) => e.name === t);
+    if (!n) return null;
+    let r = n.variableIds.map(e => this.options.scene.getVariableNode(sD.fromString(e))).filter(e6).find(e => e.name === t);
     return r ? (this.variableNameToId[t] = r.id, r) : null;
   }
-
   trackVariableUsage(e) {
     this.variablesUsed.add(e);
   }
-
   getVariablesUsed() {
     return this.variablesUsed;
   }
-
   getJSXNameForStyle(e) {
     let t = toCamelCase(e.name);
-    if (e.id in this.styleIdToJSXName)
-      return this.styleIdToJSXName[e.id];
+    if (e.id in this.styleIdToJSXName) return this.styleIdToJSXName[e.id];
     let i = S({
       name: t,
       usedNames: new Set(Object.keys(this.styleJSXNameToId))
@@ -8373,7 +7852,6 @@ class ru {
     this.styleJSXNameToId[i] = e.id;
     return i;
   }
-
   getStyleInfoByName() {
     let e = {};
     let t = UN();
@@ -8387,31 +7865,25 @@ class ru {
     }
     return e;
   }
-
   styleToJSXSpreadAttribute(e) {
     return {
       type: 'JSXSpreadAttribute',
       argument: `styles.${this.getJSXNameForStyle(e)}`
     };
   }
-
   jsxSpreadAttributeToStyle(e, t) {
     let i;
-    if (!fW(e))
-      return;
+    if (!fW(e)) return;
     let {
       isStyleExpression,
       name
-    } = (i = e.argument).startsWith(`${rs}.`) ?
-        {
-          isStyleExpression: !0,
-          name: i.slice(rs.length + 1)
-        } :
-        {
-          isStyleExpression: !1
-        };
-    if (!isStyleExpression)
-      return;
+    } = (i = e.argument).startsWith(`${rs}.`) ? {
+      isStyleExpression: !0,
+      name: i.slice(rs.length + 1)
+    } : {
+      isStyleExpression: !1
+    };
+    if (!isStyleExpression) return;
     if (!name) {
       this.trackDeserializeIssue({
         message: 'Could not parse style expression',
@@ -8447,67 +7919,51 @@ class ru {
     }
     return s;
   }
-
   trackAssetInfo(e, t) {
     this.assetInfoByHash[e] = t;
   }
-
   getAssets() {
     return this.assetInfoByHash;
   }
-
   isSerializationRoot(e) {
     return e.guid === this.rootId;
   }
-
   maybeNormalizePxValue(e, t) {
     return this.options.normalizePxToRange01 && this.options.flavor === 'default' && this.rootNodeSize ? e / this.rootNodeSize[t] : e;
   }
-
   maybeDenormalizePxValue(e, t) {
     return this.options.normalizePxToRange01 && this.options.flavor === 'default' && this.rootNodeSize ? e * this.rootNodeSize[t] : e;
   }
-
   trackComponentLookup() {
     this.deserializeStats.numComponents += 1;
   }
-
   trackComponentLookupSuccess() {
     this.trackComponentLookup();
     this.deserializeStats.componentLookupSuccesses += 1;
   }
-
   trackComponentLookupFailure() {
     this.trackComponentLookup();
     this.deserializeStats.componentLookupFailures += 1;
   }
-
   trackSerializeIssue(e) {
-    if (this.options.strict)
-      throw new LV(e.message, e.context);
+    if (this.options.strict) throw new LV(e.message, e.context);
     this.serializeIssues.push(e);
   }
-
   getSerializeIssues() {
     return this.serializeIssues;
   }
-
   getDeserializeStats() {
     return {
       ...this.deserializeStats
     };
   }
-
   trackDeserializeIssue(e) {
-    if (this.options.strict)
-      throw new Ug(e.message, e.context);
+    if (this.options.strict) throw new Ug(e.message, e.context);
     this.deserializeIssues.push(e);
   }
-
   getDeserializeIssues() {
     return this.deserializeIssues;
   }
-
   constructor(e, t) {
     rd(this, 'rootId', void 0);
     rd(this, 'rootNodeSize', void 0);
@@ -8552,10 +8008,8 @@ export function $$rc25(e, t, i, n = 2) {
   for (let e = 1; e <= d.length; e++) {
     let t = e + l - 1;
     let i = d[e - 1];
-    if (void 0 === i)
-      throw new Error('Input line is undefined');
-    if (u.push(`| ${i}`), t < o.line || t > a.line)
-      continue;
+    if (void 0 === i) throw new Error('Input line is undefined');
+    if (u.push(`| ${i}`), t < o.line || t > a.line) continue;
     let n = t === o.line ? Math.max(o.column, 1) : 1;
     let r = t === a.line ? Math.min(a.column, i.length) : i.length;
     u.push(`| ${' '.repeat(n - 1)}${'^'.repeat(r - n + 1)}`);
@@ -8642,263 +8096,235 @@ export function $$rg40(e, t = {}) {
     }
   });
   return l(i.materializeInvisibleChildren, e, () => {
-    let t = i.focusNodeId ?
-      function({
-        node: e,
-        nodeSerializers: t,
-        options: i,
-        context: r,
-        serializeReason: o,
-        startTime: a,
-        serializedIds: l
-      }) {
-        let s = i.scene;
-        let d = i.focusNodeId;
-        if (!d)
-          return null;
-        let u = s.get(d);
-        if (!u) {
+    let t = i.focusNodeId ? function ({
+      node: e,
+      nodeSerializers: t,
+      options: i,
+      context: r,
+      serializeReason: o,
+      startTime: a,
+      serializedIds: l
+    }) {
+      let s = i.scene;
+      let d = i.focusNodeId;
+      if (!d) return null;
+      let u = s.get(d);
+      if (!u) {
+        r.trackSerializeIssue({
+          message: 'Focus node not found',
+          context: {
+            guid: d
+          }
+        });
+        return null;
+      }
+      let p = {};
+      let c = [u];
+      if (u.guid !== e.guid) {
+        let t = u.parentNode;
+        for (; t && t.guid !== e.guid && t.type !== 'CANVAS';) {
+          c.push(t);
+          let e = t.parentNode;
+          if (!e) return null;
+          t = e;
+        }
+        if (!t || t.guid !== e.guid) {
           r.trackSerializeIssue({
-            message: 'Focus node not found',
+            message: 'Focus node is not a descendant of the node',
             context: {
               guid: d
             }
           });
           return null;
         }
-        let p = {};
-        let c = [u];
-        if (u.guid !== e.guid) {
-          let t = u.parentNode;
-          for (; t && t.guid !== e.guid && t.type !== 'CANVAS';) {
-            c.push(t);
-            let e = t.parentNode;
-            if (!e)
-              return null;
-            t = e;
-          }
-          if (!t || t.guid !== e.guid) {
-            r.trackSerializeIssue({
-              message: 'Focus node is not a descendant of the node',
-              context: {
-                guid: d
-              }
-            });
-            return null;
-          }
-          c.push(t);
+        c.push(t);
+      }
+      let f = new Set();
+      let h = 0;
+      let m = u;
+      if (i.serializeAllFocusNodeAncestors) {
+        for (let e of c) {
+          let n = n6({
+            node: e,
+            nodeSerializers: t,
+            options: i,
+            context: r,
+            depth: 0,
+            startTime: a,
+            serializeReason: o,
+            excludeChildren: !0
+          });
+          n && (p[e.guid] = n, h++);
         }
-        let f = new Set();
-        let h = 0;
-        let m = u;
-        if (i.serializeAllFocusNodeAncestors) {
-          for (let e of c) {
-            let n = n6({
+      }
+      for (let [e, l] of c.entries()) {
+        if (i.maxSerializeNodes && h >= i.maxSerializeNodes || i.maxSerializeTimeMs && performance.now() - a >= i.maxSerializeTimeMs) break;
+        m = l;
+        (function (e, t, i) {
+          let n = [e];
+          for (; n.length;) {
+            let e = n.shift();
+            if (!e) continue;
+            let {
+              node,
+              depth
+            } = e;
+            if (t.has(node.guid)) continue;
+            t.add(node.guid);
+            let a = i({
+              node,
+              depth
+            });
+            if (a === 1) break;
+            if (a !== 2) {
+              for (let e of node.childrenNodes) {
+                n.push({
+                  node: e,
+                  depth: depth + 1
+                });
+              }
+            }
+          }
+        })({
+          node: l,
+          depth: c.length - e - 1
+        }, f, ({
+          node: e,
+          depth: l
+        }) => {
+          if (i.maxSerializeNodes && h >= i.maxSerializeNodes || i.maxSerializeTimeMs && performance.now() - a >= i.maxSerializeTimeMs) return n.BREAK;
+          if (!p[e.guid]) {
+            let s = n6({
               node: e,
               nodeSerializers: t,
               options: i,
               context: r,
-              depth: 0,
+              depth: l,
               startTime: a,
               serializeReason: o,
-              excludeChildren: !0
+              excludeChildren: !0,
+              nodeCount: h
             });
-            n && (p[e.guid] = n, h++);
+            if (!s) return n.SKIP;
+            p[e.guid] = s;
+            h++;
           }
-        }
-        for (let [e, l] of c.entries()) {
-          if (i.maxSerializeNodes && h >= i.maxSerializeNodes || i.maxSerializeTimeMs && performance.now() - a >= i.maxSerializeTimeMs)
-            break;
-          m = l;
-          (function(e, t, i) {
-            let n = [e];
-            for (; n.length;) {
-              let e = n.shift();
-              if (!e)
-                continue;
-              let {
-                node,
-                depth
-              } = e;
-              if (t.has(node.guid))
-                continue;
-              t.add(node.guid);
-              let a = i({
-                node,
-                depth
-              });
-              if (a === 1)
-                break;
-              if (a !== 2) {
-                for (let e of node.childrenNodes) {
-                  n.push({
-                    node: e,
-                    depth: depth + 1
-                  });
-                }
-              }
-            }
-          })({
-            node: l,
-            depth: c.length - e - 1
-          }, f, ({
-            node: e,
-            depth: l
-          }) => {
-            if (i.maxSerializeNodes && h >= i.maxSerializeNodes || i.maxSerializeTimeMs && performance.now() - a >= i.maxSerializeTimeMs)
-              return n.BREAK;
-            if (!p[e.guid]) {
-              let s = n6({
-                node: e,
-                nodeSerializers: t,
-                options: i,
-                context: r,
-                depth: l,
-                startTime: a,
-                serializeReason: o,
-                excludeChildren: !0,
-                nodeCount: h
-              });
-              if (!s)
-                return n.SKIP;
-              p[e.guid] = s;
-              h++;
-            }
-            return e.isInstance && !i.includeInstanceSublayers || e.isInImmutableFrame ? n.SKIP : n.CONTINUE;
-          });
-        }
-        let g = i.serializeAllFocusNodeAncestors ? e : m;
-        !function e(t, i) {
-          for (let n of t.childrenNodes) e(n, i);
-          i(t);
-        }(g, (e) => {
-          let t = p[e.guid];
-          if (t) {
-            for (let n of i.orderChildrenByXY ? H(e) : $(e)) {
-              let e = p[n.guid];
-              e && t.children.push(e);
-            }
-            if (i.excludeEmptyContainers && (e.isGroup || e.type === 'FRAME')) {
-              let i = e.isGroup ? ey.GROUP : ey.FRAME;
-              let n = e.name.replace(/\d/g, '').replace(/\s/g, '');
-              i && i.includes(n) && !t.children.length && delete p[e.guid];
-            }
-          }
+          return e.isInstance && !i.includeInstanceSublayers || e.isInImmutableFrame ? n.SKIP : n.CONTINUE;
         });
-        let y = p[g.guid];
-        if (!y)
-          return null;
-        for (let e of Object.keys(p)) l?.add(e);
-        return y;
-      }(d) :
-      n6(d);
+      }
+      let g = i.serializeAllFocusNodeAncestors ? e : m;
+      !function e(t, i) {
+        for (let n of t.childrenNodes) e(n, i);
+        i(t);
+      }(g, e => {
+        let t = p[e.guid];
+        if (t) {
+          for (let n of i.orderChildrenByXY ? H(e) : $(e)) {
+            let e = p[n.guid];
+            e && t.children.push(e);
+          }
+          if (i.excludeEmptyContainers && (e.isGroup || e.type === 'FRAME')) {
+            let i = e.isGroup ? ey.GROUP : ey.FRAME;
+            let n = e.name.replace(/\d/g, '').replace(/\s/g, '');
+            i && i.includes(n) && !t.children.length && delete p[e.guid];
+          }
+        }
+      });
+      let y = p[g.guid];
+      if (!y) return null;
+      for (let e of Object.keys(p)) l?.add(e);
+      return y;
+    }(d) : n6(d);
     if (!t) {
       throw new LV('Unable to serialize node', {
         guid: e.guid
       });
     }
-    let l = i.ignoreFetchingComponentData ?
-      {} :
-      function(e, t, i) {
-        let n = {};
-        for (let o of _$$B([e], {
-          followInstances: !0
-        })) {
-          let e = n6({
-            node: o,
-            options: t,
-            nodeSerializers: $$nZ29(t),
-            context: i,
-            depth: 0,
-            startTime: performance.now(),
-            serializeReason: 'referenced-component'
-          });
-          if (e) {
-            let a = _$$V(e);
-            let l = i.getJSXNameForComponent(o);
-            if (n[l] = {
-              guid: o.guid,
-              name: o.name,
-              jsxStr: a,
-              jsxName: l
-            }, t.includeTypescriptTypes) {
-              try {
-                n[l].typescriptType = rn(o, l);
-              }
-              catch (e) {
-                if (t.strict)
-                  throw e;
-              }
+    let l = i.ignoreFetchingComponentData ? {} : function (e, t, i) {
+      let n = {};
+      for (let o of _$$B([e], {
+        followInstances: !0
+      })) {
+        let e = n6({
+          node: o,
+          options: t,
+          nodeSerializers: $$nZ29(t),
+          context: i,
+          depth: 0,
+          startTime: performance.now(),
+          serializeReason: 'referenced-component'
+        });
+        if (e) {
+          let a = _$$V(e);
+          let l = i.getJSXNameForComponent(o);
+          if (n[l] = {
+            guid: o.guid,
+            name: o.name,
+            jsxStr: a,
+            jsxName: l
+          }, t.includeTypescriptTypes) {
+            try {
+              n[l].typescriptType = rn(o, l);
+            } catch (e) {
+              if (t.strict) throw e;
             }
           }
         }
-        return n;
-      }(e, i, o);
-    let u = i.includeVariables ?
-      function(e, t) {
-        let i = {};
-        for (let n of e) {
-          let e = t.getVariableNode(n);
-          if (e) {
-            let n = t.getVariableCollectionNode(e.variableCollectionId);
-            if (!n)
-              continue;
-            let r = n.name;
-            i[r] || (i[r] = {});
-            i[r][e.name] = e.valuesByMode[n.defaultModeId];
-          }
+      }
+      return n;
+    }(e, i, o);
+    let u = i.includeVariables ? function (e, t) {
+      let i = {};
+      for (let n of e) {
+        let e = t.getVariableNode(n);
+        if (e) {
+          let n = t.getVariableCollectionNode(e.variableCollectionId);
+          if (!n) continue;
+          let r = n.name;
+          i[r] || (i[r] = {});
+          i[r][e.name] = e.valuesByMode[n.defaultModeId];
         }
-        return Object.keys(i).length === 0 ?
-          null :
-          function(e, t) {
-            let i = new eo();
-            for (let [n, r] of (i.append('const variables = {'), i.newline(), Object.entries(e))) {
-              for (let [e, o] of (i.append(`  ${JSON.stringify(n)}: {`), i.newline(), Object.entries(r))) {
-                if (typeof o == 'object' && 'type' in o && o.type === 'VARIABLE_ALIAS') {
-                  let n = sD.fromString(o.id);
-                  if (!n)
-                    continue;
-                  let {
-                    collectionName,
-                    variableName
-                  } = rl(n, t);
-                  if (!collectionName || !variableName)
-                    continue;
-                  i.append(`    ${JSON.stringify(e)}: () => variables[${JSON.stringify(collectionName)}][${JSON.stringify(variableName)}],`);
-                } else {
-                  i.append(`    ${JSON.stringify(e)}: ${JSON.stringify(o)},`);
-                }
-                i.newline();
-              }
-              i.append('  },');
-              i.newline();
+      }
+      return Object.keys(i).length === 0 ? null : function (e, t) {
+        let i = new eo();
+        for (let [n, r] of (i.append('const variables = {'), i.newline(), Object.entries(e))) {
+          for (let [e, o] of (i.append(`  ${JSON.stringify(n)}: {`), i.newline(), Object.entries(r))) {
+            if (typeof o == 'object' && 'type' in o && o.type === 'VARIABLE_ALIAS') {
+              let n = sD.fromString(o.id);
+              if (!n) continue;
+              let {
+                collectionName,
+                variableName
+              } = rl(n, t);
+              if (!collectionName || !variableName) continue;
+              i.append(`    ${JSON.stringify(e)}: () => variables[${JSON.stringify(collectionName)}][${JSON.stringify(variableName)}],`);
+            } else {
+              i.append(`    ${JSON.stringify(e)}: ${JSON.stringify(o)},`);
             }
-            i.append('}');
-            return i.toString();
-          }(i, t);
-      }(o.getVariablesUsed(), i.scene) ?? void 0 :
-      void 0;
+            i.newline();
+          }
+          i.append('  },');
+          i.newline();
+        }
+        i.append('}');
+        return i.toString();
+      }(i, t);
+    }(o.getVariablesUsed(), i.scene) ?? void 0 : void 0;
     return {
       jsxElement: t,
       componentInfoByJSXName: l,
       assetsByName: o.getAssets(),
       originalSize: e.size,
       issues: o.getSerializeIssues(),
-      ...(i.focusNodeId ?
-        {
-          serializedIds: Array.from(a)
-        } :
-        {}),
-      ...(i.includeVariables ?
-        {
-          variablesObjDefinition: u
-        } :
-        {}),
-      ...(i.includeStyles ?
-        {
-          styleInfoByName: o.getStyleInfoByName()
-        } :
-        {})
+      ...(i.focusNodeId ? {
+        serializedIds: Array.from(a)
+      } : {}),
+      ...(i.includeVariables ? {
+        variablesObjDefinition: u
+      } : {}),
+      ...(i.includeStyles ? {
+        styleInfoByName: o.getStyleInfoByName()
+      } : {})
     };
   });
 }
@@ -8916,8 +8342,7 @@ export async function $$ry21(e, t = {}) {
   return n;
 }
 async function rb(e, t, i) {
-  if (!t.componentInfoByJSXName)
-    return;
+  if (!t.componentInfoByJSXName) return;
   let n = t.scene;
   for (let r of function e(t) {
     let i = new Set();
@@ -8930,8 +8355,7 @@ async function rb(e, t, i) {
   }(e)) {
     let o = r.type;
     let a = t.componentInfoByJSXName[o];
-    if (!a || !a.jsxStr || y(o, n))
-      continue;
+    if (!a || !a.jsxStr || y(o, n)) continue;
     let l = await $$ry21(a.jsxStr, t);
     if (l.node && l.node.type === 'SYMBOL') {
       let r = g(l.node);
@@ -8942,15 +8366,13 @@ async function rb(e, t, i) {
         jsxName: r
       };
       let o = n.getInternalCanvas();
-      o ?
-        o.appendChild(l.node) :
-        i.trackDeserializeIssue({
-          message: 'Could not find hidden canvas to place deserialized component',
-          context: {
-            jsxElement: e
-          },
-          location: e.parsedLocations?.full
-        });
+      o ? o.appendChild(l.node) : i.trackDeserializeIssue({
+        message: 'Could not find hidden canvas to place deserialized component',
+        context: {
+          jsxElement: e
+        },
+        location: e.parsedLocations?.full
+      });
     }
   }
 }
@@ -9077,16 +8499,14 @@ export async function $$rz35({
     }
     i || (i = $$rg40(t, s).jsxElement);
   }
-  let c = i ?
-    n3({
-      jsxElement: i,
-      options: s,
-      context: d,
-      nodeSerializers: $$nZ29(s),
-      depth: 0
-    }) :
-    null;
-  n.checkEditQuality && (rf(d, u), function(e, t, i) {
+  let c = i ? n3({
+    jsxElement: i,
+    options: s,
+    context: d,
+    nodeSerializers: $$nZ29(s),
+    depth: 0
+  }) : null;
+  n.checkEditQuality && (rf(d, u), function (e, t, i) {
     let n = i?.sceneGraph ?? UN();
     if (!n) {
       console.debug('No active scene graph found for self-healing');
@@ -9142,8 +8562,7 @@ export function $$rx31(e) {
         formatted: $$rc25(e, t, i)
       };
     }
-  }
-  catch (n) {
+  } catch (n) {
     let t = n.message.replace(/ *(\d+:\d+)$/, '');
     let i = {
       start: n.loc,
@@ -9161,14 +8580,12 @@ export function $$rx31(e) {
   return null;
 }
 function rI(e, t, i) {
-  t in e ?
-    Object.defineProperty(e, t, {
-      value: i,
-      enumerable: !0,
-      configurable: !0,
-      writable: !0
-    }) :
-    e[t] = i;
+  t in e ? Object.defineProperty(e, t, {
+    value: i,
+    enumerable: !0,
+    configurable: !0,
+    writable: !0
+  }) : e[t] = i;
   return e;
 }
 let $$rE12 = _$$z.array(_$$z.number());
@@ -9232,47 +8649,36 @@ let rL = class {
     this.heap.push(e);
     this.bubbleUp(this.heap.length - 1);
   }
-
   pop() {
-    if (this.heap.length === 0)
-      return;
-    if (this.heap.length === 1)
-      return this.heap.pop();
+    if (this.heap.length === 0) return;
+    if (this.heap.length === 1) return this.heap.pop();
     let e = this.heap[0];
     this.heap[0] = this.heap.pop();
     this.bubbleDown(0);
     return e;
   }
-
   get size() {
     return this.heap.length;
   }
-
   bubbleUp(e) {
-    if (e === 0)
-      return;
+    if (e === 0) return;
     let t = Math.floor((e - 1) / 2);
-    if (!this.heap[t] || !this.heap[e])
-      throw new Error('Invalid heap state');
+    if (!this.heap[t] || !this.heap[e]) throw new Error('Invalid heap state');
     this.compare(this.heap[e], this.heap[t]) < 0 && ([this.heap[e], this.heap[t]] = [this.heap[t], this.heap[e]], this.bubbleUp(t));
   }
-
   bubbleDown(e) {
     let t = 2 * e + 1;
     let i = 2 * e + 2;
     let n = e;
     let r = this.heap[n];
-    if (!r)
-      throw new Error('Invalid heap state');
+    if (!r) throw new Error('Invalid heap state');
     if (t < this.heap.length && this.heap[t] && this.compare(this.heap[t], r) < 0 && (n = t), i < this.heap.length && this.heap[i] && this.compare(this.heap[i], r) < 0 && (n = i), n !== e) {
       let t = this.heap[e];
-      if (!t)
-        throw new Error('Invalid heap state');
+      if (!t) throw new Error('Invalid heap state');
       [this.heap[e], this.heap[n]] = [r, t];
       this.bubbleDown(n);
     }
   }
-
   constructor(e) {
     rI(this, 'compare', void 0);
     rI(this, 'heap', void 0);
@@ -9281,8 +8687,7 @@ let rL = class {
   }
 };
 function rD(e, t = [], i = [], n = 0) {
-  if (!e)
-    return [];
+  if (!e) return [];
   let r = [];
   r.push({
     element: e,
@@ -9309,32 +8714,25 @@ function rV(e) {
   }
 }
 function rM(e, t) {
-  if (e === t)
-    return !0;
-  if (e == null || t == null || typeof e != typeof t || typeof e != 'object' || Array.isArray(e) !== Array.isArray(t))
-    return !1;
+  if (e === t) return !0;
+  if (e == null || t == null || typeof e != typeof t || typeof e != 'object' || Array.isArray(e) !== Array.isArray(t)) return !1;
   if (Array.isArray(e)) {
-    if (e.length !== t.length)
-      return !1;
+    if (e.length !== t.length) return !1;
     for (let i = 0; i < e.length; i++) {
-      if (!rM(e[i], t[i]))
-        return !1;
+      if (!rM(e[i], t[i])) return !1;
     }
     return !0;
   }
   let i = Object.keys(e);
   let n = Object.keys(t);
-  if (i.length !== n.length)
-    return !1;
+  if (i.length !== n.length) return !1;
   for (let r of i) {
-    if (!n.includes(r) || !rM(e[r], t[r]))
-      return !1;
+    if (!n.includes(r) || !rM(e[r], t[r])) return !1;
   }
   return !0;
 }
 export function $$r_23(e, t) {
-  if (!e && !t)
-    return [];
+  if (!e && !t) return [];
   if (!e && t) {
     return [$$rv3.parse({
       type: 'INSERT',
@@ -9352,23 +8750,16 @@ export function $$r_23(e, t) {
     })];
   }
   if (!e || !t || function e(t, i) {
-    if (t === i)
-      return !0;
-    if (!t || !i || typeof t != typeof i)
-      return !1;
-    if (typeof t == 'string')
-      return t === i;
+    if (t === i) return !0;
+    if (!t || !i || typeof t != typeof i) return !1;
+    if (typeof t == 'string') return t === i;
     if (typeof t == 'object' && typeof i == 'object') {
-      if (t.type !== i.type)
-        return !1;
-      if (t.type === 'JSXExpressionContainer' && i.type === 'JSXExpressionContainer')
-        return t.expression === i.expression;
+      if (t.type !== i.type) return !1;
+      if (t.type === 'JSXExpressionContainer' && i.type === 'JSXExpressionContainer') return t.expression === i.expression;
       if ('children' in t && 'children' in i) {
-        if (t.children.length !== i.children.length || !rM(t.props, i.props) || !rM(t.spreadAttributes, i.spreadAttributes))
-          return !1;
+        if (t.children.length !== i.children.length || !rM(t.props, i.props) || !rM(t.spreadAttributes, i.spreadAttributes)) return !1;
         for (let n = 0; n < t.children.length; n++) {
-          if (!e(t.children[n], i.children[n]))
-            return !1;
+          if (!e(t.children[n], i.children[n])) return !1;
         }
         return !0;
       }
@@ -9387,13 +8778,13 @@ export function $$r_23(e, t) {
     cost: 0,
     patchNode: null
   });
-  let a = (e) => `${e.leftIndex},${e.rightIndex}`;
+  let a = e => `${e.leftIndex},${e.rightIndex}`;
   for (; o.size > 0;) {
     let e = o.pop();
     let t = a(e);
     if (!r.has(t)) {
       if (r.add(t), e.leftIndex >= i.length && e.rightIndex >= n.length) {
-        return function(e) {
+        return function (e) {
           let t = [];
           let i = e;
           for (; i;) {
@@ -9401,9 +8792,9 @@ export function $$r_23(e, t) {
             i = i.parent;
           }
           return t;
-        }(e.patchNode).map((e) => $$rj8.parse(e));
+        }(e.patchNode).map(e => $$rj8.parse(e));
       }
-      for (let t of function(e, t, i) {
+      for (let t of function (e, t, i) {
         let n = [];
         let {
           leftIndex,
@@ -9413,8 +8804,7 @@ export function $$r_23(e, t) {
         } = e;
         if (leftIndex < t.length) {
           let e = t[leftIndex];
-          if (!e)
-            return n;
+          if (!e) return n;
           let i = $$rO5.parse({
             type: 'REMOVE',
             path: e.parentPath,
@@ -9433,8 +8823,7 @@ export function $$r_23(e, t) {
         }
         if (rightIndex < i.length) {
           let e = i[rightIndex];
-          if (!e)
-            return n;
+          if (!e) return n;
           let t = $$rv3.parse({
             type: 'INSERT',
             path: e.parentPath,
@@ -9462,68 +8851,59 @@ export function $$r_23(e, t) {
           let m;
           let e = t[leftIndex];
           let g = i[rightIndex];
-          if (!e || !g)
-            return n;
+          if (!e || !g) return n;
           if (s = e.element, d = g.element, typeof s == 'string' && typeof d == 'string' || typeof s == 'object' && s.type === 'JSXExpressionContainer' && typeof d == 'object' && d.type === 'JSXExpressionContainer' || typeof s == 'object' && 'type' in s && typeof s.type == 'string' && typeof d == 'object' && 'type' in d && typeof d.type == 'string' && s.type === d.type) {
             let t = [];
             let i = rV('match');
-            typeof e.element == 'string' && typeof g.element == 'string' ? (
-              u = e.element, p = g.element, c = e.path, (t = u !== p ?
-                [$$rP11.parse({
-                  type: 'SET_TEXT',
-                  path: c,
-                  text: p,
-                  previousText: u
-                })] :
-                []).length > 0 && (i = rV('update'))) :
-              typeof e.element == 'object' && e.element.type === 'JSXExpressionContainer' && typeof g.element == 'object' && g.element.type === 'JSXExpressionContainer' ? (
-                f = e.element, h = g.element, m = e.path, (t = f.expression !== h.expression ?
-                  [$$rA7.parse({
-                    type: 'REPLACE',
-                    path: m,
-                    element: h,
-                    replacedElement: f
-                  })] :
-                  []).length > 0 && (i = rV('update'))) :
-                typeof e.element == 'object' && 'type' in e.element && typeof g.element == 'object' && 'type' in g.element && (t = function(e, t, i) {
-                  let n = [];
-                  if (!rM(e.spreadAttributes, t.spreadAttributes)) {
-                    let r = $$rR10.parse({
-                      type: 'SET_SPREAD',
+            typeof e.element == 'string' && typeof g.element == 'string' ? (u = e.element, p = g.element, c = e.path, (t = u !== p ? [$$rP11.parse({
+              type: 'SET_TEXT',
+              path: c,
+              text: p,
+              previousText: u
+            })] : []).length > 0 && (i = rV('update'))) : typeof e.element == 'object' && e.element.type === 'JSXExpressionContainer' && typeof g.element == 'object' && g.element.type === 'JSXExpressionContainer' ? (f = e.element, h = g.element, m = e.path, (t = f.expression !== h.expression ? [$$rA7.parse({
+              type: 'REPLACE',
+              path: m,
+              element: h,
+              replacedElement: f
+            })] : []).length > 0 && (i = rV('update'))) : typeof e.element == 'object' && 'type' in e.element && typeof g.element == 'object' && 'type' in g.element && (t = function (e, t, i) {
+              let n = [];
+              if (!rM(e.spreadAttributes, t.spreadAttributes)) {
+                let r = $$rR10.parse({
+                  type: 'SET_SPREAD',
+                  path: i,
+                  spread: t.spreadAttributes,
+                  previousSpread: e.spreadAttributes
+                });
+                n.push(r);
+              }
+              let r = e.props || {};
+              let o = t.props || {};
+              for (let e of new Set([...Object.keys(r), ...Object.keys(o)])) {
+                let t = r[e];
+                let a = o[e];
+                if (!rM(t, a)) {
+                  if (void 0 === a) {
+                    let r = $$rw4.parse({
+                      type: 'REMOVE_PROP',
                       path: i,
-                      spread: t.spreadAttributes,
-                      previousSpread: e.spreadAttributes
+                      prop: e,
+                      removedValue: t
+                    });
+                    n.push(r);
+                  } else {
+                    let r = $$rC9.parse({
+                      type: 'SET_PROP',
+                      path: i,
+                      prop: e,
+                      value: a,
+                      previousValue: t
                     });
                     n.push(r);
                   }
-                  let r = e.props || {};
-                  let o = t.props || {};
-                  for (let e of new Set([...Object.keys(r), ...Object.keys(o)])) {
-                    let t = r[e];
-                    let a = o[e];
-                    if (!rM(t, a)) {
-                      if (void 0 === a) {
-                        let r = $$rw4.parse({
-                          type: 'REMOVE_PROP',
-                          path: i,
-                          prop: e,
-                          removedValue: t
-                        });
-                        n.push(r);
-                      } else {
-                        let r = $$rC9.parse({
-                          type: 'SET_PROP',
-                          path: i,
-                          prop: e,
-                          value: a,
-                          previousValue: t
-                        });
-                        n.push(r);
-                      }
-                    }
-                  }
-                  return n;
-                }(e.element, g.element, e.path)).length > 0 && (i = rV('update'));
+                }
+              }
+              return n;
+            }(e.element, g.element, e.path)).length > 0 && (i = rV('update'));
             let s = patchNode;
             for (let e of t) {
               s = {
@@ -9556,15 +8936,13 @@ export function $$r_23(e, t) {
 let rF = /^@name\(([A-Za-z1-9]+)\)\s*(.*)/;
 function rX(e) {
   let t = e.match(rF);
-  return t ?
-    {
-      name: t[1] ?? '',
-      description: t[2] ?? ''
-    } :
-    {
-      name: '',
-      description: e
-    };
+  return t ? {
+    name: t[1] ?? '',
+    description: t[2] ?? ''
+  } : {
+    name: '',
+    description: e
+  };
 }
 let rB = ['onCopy', 'onCopyCapture', 'onCut', 'onCutCapture', 'onPaste', 'onPasteCapture', 'onFocus', 'onFocusCapture', 'onBlur', 'onBlurCapture', 'onKeyDown', 'onKeyDownCapture', 'onKeyPress', 'onKeyPressCapture', 'onKeyUp', 'onKeyUpCapture', 'onAuxClick', 'onAuxClickCapture', 'onClick', 'onClickCapture', 'onContextMenu', 'onContextMenuCapture', 'onDoubleClick', 'onDoubleClickCapture', 'onDrag', 'onDragCapture', 'onDragEnd', 'onDragEndCapture', 'onDragEnter', 'onDragEnterCapture', 'onDragExit', 'onDragExitCapture', 'onDragLeave', 'onDragLeaveCapture', 'onDragOver', 'onDragOverCapture', 'onDragStart', 'onDragStartCapture', 'onDrop', 'onDropCapture', 'onMouseDown', 'onMouseDownCapture', 'onMouseEnter', 'onMouseLeave', 'onMouseMove', 'onMouseMoveCapture', 'onMouseOut', 'onMouseOutCapture', 'onMouseOver', 'onMouseOverCapture', 'onMouseUp', 'onMouseUpCapture', 'onSelect', 'onSelectCapture', 'onTouchCancel', 'onTouchCancelCapture', 'onTouchEnd', 'onTouchEndCapture', 'onTouchMove', 'onTouchMoveCapture', 'onTouchStart', 'onTouchStartCapture', 'onPointerDown', 'onPointerDownCapture', 'onPointerMove', 'onPointerMoveCapture', 'onPointerUp', 'onPointerUpCapture', 'onPointerCancel', 'onPointerCancelCapture', 'onPointerEnter', 'onPointerEnterCapture', 'onPointerLeave', 'onPointerLeaveCapture', 'onPointerOver', 'onPointerOverCapture', 'onPointerOut', 'onPointerOutCapture', 'onGotPointerCapture', 'onGotPointerCaptureCapture', 'onLostPointerCapture', 'onLostPointerCaptureCapture', 'onScroll', 'onScrollCapture', 'onWheel', 'onWheelCapture'];
 export async function $$rG27(e, {
@@ -9591,7 +8969,7 @@ import React, { FC, PropsWithChildren, ReactNode } from 'react'`;
   let d = {
     TextChildren: '{ children?: string | number | boolean | null | undefined }'
   };
-  t && (d.SupportedInteractions = rB.map((e) => `
+  t && (d.SupportedInteractions = rB.map(e => `
   | "${e}"`).join(''), d.Interactions = '{ [k in SupportedInteractions]?: React.DOMAttributes<HTMLElement>[k] }');
   let u = {};
   for (let e of n) {
@@ -9599,15 +8977,13 @@ import React, { FC, PropsWithChildren, ReactNode } from 'react'`;
     for (let {
       jsxType,
       fieldSerializers
-    } of (Array.isArray(e.possibleTagNames) ? e.possibleTagNames : e.possibleTagNames(i)).map((e) => typeof e == 'string' ?
-      {
-        jsxType: e
-      } :
-      e)) {
+    } of (Array.isArray(e.possibleTagNames) ? e.possibleTagNames : e.possibleTagNames(i)).map(e => typeof e == 'string' ? {
+      jsxType: e
+    } : e)) {
       if (!u[jsxType]) {
-        let l = function(e, t, i) {
+        let l = function (e, t, i) {
           let n = {};
-          let r = (e) => {
+          let r = e => {
             let i = {};
             Object.entries(e.shape).forEach(([e, n]) => {
               let r = n._def.typeName === 'ZodOptional';
@@ -9622,14 +8998,10 @@ import React, { FC, PropsWithChildren, ReactNode } from 'react'`;
                   }
                   return name;
                 }
-                if (t._def.typeName === 'ZodOptional')
-                  return `${e(t._def.innerType, i, n)} | undefined`;
-                if (t._def.typeName === 'ZodNumber')
-                  return 'number';
-                if (t._def.typeName === 'ZodString')
-                  return 'string';
-                if (t._def.typeName === 'ZodBoolean')
-                  return 'boolean';
+                if (t._def.typeName === 'ZodOptional') return `${e(t._def.innerType, i, n)} | undefined`;
+                if (t._def.typeName === 'ZodNumber') return 'number';
+                if (t._def.typeName === 'ZodString') return 'string';
+                if (t._def.typeName === 'ZodBoolean') return 'boolean';
                 if (t._def.typeName === 'ZodArray') {
                   let n = e(t._def.type, i);
                   let r = t._def.exactLength?.value;
@@ -9651,8 +9023,7 @@ import React, { FC, PropsWithChildren, ReactNode } from 'react'`;
                       location,
                       ...r
                     } = n;
-                    if (!(Object.keys(r).length > 0))
-                      return null;
+                    if (!(Object.keys(r).length > 0)) return null;
                     n = r;
                   }
                   return `{ ${Object.entries(n).map(([e, {
@@ -9665,7 +9036,7 @@ import React, { FC, PropsWithChildren, ReactNode } from 'react'`;
                   let r = e(t._def.valueType, i);
                   return `Record<${n}, ${r}>`;
                 }
-                return t._def.typeName === 'ZodEnum' ? t._def.values.map((e) => `'${e}'`).join(' | ') : t._def.typeName === 'ZodUnion' || t._def.typeName === 'ZodDiscriminatedUnion' ? t._def.options.map((t) => e(t, i)).filter(Boolean).join(' | ') : t._def.typeName === 'ZodNullable' ? `${e(t._def.innerType, i, n)} | null` : t._def.typeName === 'ZodLiteral' ? typeof t._def.value == 'string' ? `'${t._def.value}'` : `${t._def.value}` : t._def.typeName === 'ZodTuple' ? `[${t._def.items.map(e).join(', ')}]` : 'any';
+                return t._def.typeName === 'ZodEnum' ? t._def.values.map(e => `'${e}'`).join(' | ') : t._def.typeName === 'ZodUnion' || t._def.typeName === 'ZodDiscriminatedUnion' ? t._def.options.map(t => e(t, i)).filter(Boolean).join(' | ') : t._def.typeName === 'ZodNullable' ? `${e(t._def.innerType, i, n)} | null` : t._def.typeName === 'ZodLiteral' ? typeof t._def.value == 'string' ? `'${t._def.value}'` : `${t._def.value}` : t._def.typeName === 'ZodTuple' ? `[${t._def.items.map(e).join(', ')}]` : 'any';
               }(r ? n._def.innerType : n, t);
               o && (i[e] = {
                 type: o,
@@ -9681,10 +9052,8 @@ import React, { FC, PropsWithChildren, ReactNode } from 'react'`;
               let {
                 description
               } = rX(i ?? '');
-              let o = description ?
-                `  /** ${description} */
-` :
-                '';
+              let o = description ? `  /** ${description} */
+` : '';
               return `${o}  ${e}${n ? '?' : ''}: ${t};`;
             }).join('\n');
             if (n) {
@@ -9696,20 +9065,19 @@ ${n}
               };
             }
           };
-          e.forEach((e) => {
+          e.forEach(e => {
             let t = e.outputSchema(i);
             let o = t._def.typeName === 'ZodNullable';
             let a = o ? t.unwrap() : t;
-            if (!a.shape)
-              return;
+            if (!a.shape) return;
             let l = `${e.name}Fields`;
             let s = r(a);
             s && (o && (s.body += ' | null'), n[l] = s);
           });
           return n;
-        }(_$$c((fieldSerializers ?? n).filter((e) => e.name !== 'SharedPluginData'), i), d, i);
+        }(_$$c((fieldSerializers ?? n).filter(e => e.name !== 'SharedPluginData'), i), d, i);
         Object.assign(a, l);
-        let s = Object.keys(l).map((e) => `${e}`);
+        let s = Object.keys(l).map(e => `${e}`);
         let p = e.supportsChildren(i);
         p === 'text' && s.push('TextChildren');
         t && s.push('Interactions');
@@ -9727,26 +9095,21 @@ ${n}
     typeIntersection: t,
     supportsNodeChildren: i
   }] of Object.entries(u)) {
-    let n = t ?
-      `
+    let n = t ? `
 ${t}
-` :
-      '{}';
+` : '{}';
     let r = i ? `FC<PropsWithChildren<${n}>>` : `FC<${n}>`;
     s.push(`export const ${e}: ${r}`);
   }
   let p = [];
   for (let [e, t] of Object.entries(a).sort(([e], [t]) => e.localeCompare(t))) {
-    p.push(`${t.docstring ?
-      `/** ${t.docstring} */
-` :
-      ''}type ${e} = ${t.body}`);
+    p.push(`${t.docstring ? `/** ${t.docstring} */
+` : ''}type ${e} = ${t.body}`);
   }
   return [r, l.join('\n\n'), p.join('\n\n'), s.join('\n')].join('\n\n');
 }
 export function $$rJ30(e, t, i) {
-  if (!(e.type === 'SYMBOL' || e.isStateGroup))
-    throw new Error(`Expected SYMBOL or isStateGroup, got: ${e.type}`);
+  if (!(e.type === 'SYMBOL' || e.isStateGroup)) throw new Error(`Expected SYMBOL or isStateGroup, got: ${e.type}`);
   t = {
     includePropsType: !0,
     enableTsArrays: !1,
@@ -9761,11 +9124,10 @@ export function $$rJ30(e, t, i) {
     noTypeInfoCache: !!t.noTypeInfoCache,
     exposeAllNestedInstances: !0
   });
-  if (!n)
-    throw new Error(`Could not find typeInfo for node: ${e.guid}`);
+  if (!n) throw new Error(`Could not find typeInfo for node: ${e.guid}`);
   let r = Object.values(n.prefixTypes);
   let o = new eo();
-  let a = n.parsedDefs.map((e) => e.devFriendlyProp.type === 'DERIVED_BOOLEAN' ? '' : e.devFriendlyProp.type === 'SIMPLE_CHOICE' ? e.def.type === 'VARIANT' && 'defaultValue' in e.def ? `${e.devFriendlyProp.key} = ${JSON.stringify(e.def.defaultValue)}` : e.devFriendlyProp.key : e.devFriendlyProp.type === 'GROUPED_INSTANCE_SWAP' || e.devFriendlyProp.type === 'IMAGE' ? e.devFriendlyProp.key : e.devFriendlyProp.type === 'SIMPLE' ? 'defaultValue' in e.def ? `${e.devFriendlyProp.key} = ${JSON.stringify(e.def.defaultValue)}` : e.devFriendlyProp.key : e.devFriendlyProp.type === 'ARRAY' ? t.enableTsArrays ? e.devFriendlyProp.index !== 0 ? '' : e.devFriendlyProp.key : e.devFriendlyProp.nonArrayKey : void xb(e.devFriendlyProp)).filter(Boolean);
+  let a = n.parsedDefs.map(e => e.devFriendlyProp.type === 'DERIVED_BOOLEAN' ? '' : e.devFriendlyProp.type === 'SIMPLE_CHOICE' ? e.def.type === 'VARIANT' && 'defaultValue' in e.def ? `${e.devFriendlyProp.key} = ${JSON.stringify(e.def.defaultValue)}` : e.devFriendlyProp.key : e.devFriendlyProp.type === 'GROUPED_INSTANCE_SWAP' || e.devFriendlyProp.type === 'IMAGE' ? e.devFriendlyProp.key : e.devFriendlyProp.type === 'SIMPLE' ? 'defaultValue' in e.def ? `${e.devFriendlyProp.key} = ${JSON.stringify(e.def.defaultValue)}` : e.devFriendlyProp.key : e.devFriendlyProp.type === 'ARRAY' ? t.enableTsArrays ? e.devFriendlyProp.index !== 0 ? '' : e.devFriendlyProp.key : e.devFriendlyProp.nonArrayKey : void throwTypeError(e.devFriendlyProp)).filter(Boolean);
   if (t.includePropsType) {
     let e = `${n.jsxName}Props`;
     a.length > 0 && n.propsTypeRepr.typeDefBody && (o.append(`type ${e} = `), o.append(es(n.propsTypeRepr.typeDefBody)), o.newline());
@@ -9781,52 +9143,46 @@ export function $$rJ30(e, t, i) {
     o.append(t.formatJSX ? el(r$(e, t, i)) : `  return ${r$(e, t, i)}`);
     o.newline();
     o.append('}');
-  } else
-    if (e.isStateGroup) {
-      let n = !0;
-      if (t.serializeAllVariants) {
-        let r = t.maxVariantsResultSize;
-        let a = 0;
-        for (let l of e.childrenNodes) {
-          let e = new eo();
-          if (l.type !== 'SYMBOL')
-            continue;
-          let s = l.variantProperties();
-          if (s) {
-            if (n && t.formatJSX && e.append('  '), n || e.append(' else '), e.append('if ('), e.append(Object.entries(s).map(([e, t]) => `${toCamelCase(e)} === ${JSON.stringify(t)}`).join(' && ')), e.append(') {'), t.formatJSX ? (e.newline(), e.append(ea(el(r$(l, t, i)), '  ')), e.newline(), e.append('  }')) : (e.append(`    return ${r$(l, t, i)}`), e.newline(), e.append('}')), r) {
-              let t = e.toString().length;
-              if (!n && a + t > r)
-                break;
-              a += t;
-            }
-            o.append(e.toString());
-            n = !1;
+  } else if (e.isStateGroup) {
+    let n = !0;
+    if (t.serializeAllVariants) {
+      let r = t.maxVariantsResultSize;
+      let a = 0;
+      for (let l of e.childrenNodes) {
+        let e = new eo();
+        if (l.type !== 'SYMBOL') continue;
+        let s = l.variantProperties();
+        if (s) {
+          if (n && t.formatJSX && e.append('  '), n || e.append(' else '), e.append('if ('), e.append(Object.entries(s).map(([e, t]) => `${toCamelCase(e)} === ${JSON.stringify(t)}`).join(' && ')), e.append(') {'), t.formatJSX ? (e.newline(), e.append(ea(el(r$(l, t, i)), '  ')), e.newline(), e.append('  }')) : (e.append(`    return ${r$(l, t, i)}`), e.newline(), e.append('}')), r) {
+            let t = e.toString().length;
+            if (!n && a + t > r) break;
+            a += t;
           }
-        }
-        t.formatJSX ? (o.newline(), o.append('  return null')) : o.append('  return null;');
-      } else {
-        let n = e.defaultVariant;
-        if (n) {
-          let e = (n);
-          o.append(t.formatJSX ? el(r$(e, t, i)) : `  return ${r$(e, t, i)}`);
-        } else {
-          o.append('return null');
+          o.append(e.toString());
+          n = !1;
         }
       }
-      o.newline();
-      o.append('}');
+      t.formatJSX ? (o.newline(), o.append('  return null')) : o.append('  return null;');
+    } else {
+      let n = e.defaultVariant;
+      if (n) {
+        let e = n;
+        o.append(t.formatJSX ? el(r$(e, t, i)) : `  return ${r$(e, t, i)}`);
+      } else {
+        o.append('return null');
+      }
     }
+    o.newline();
+    o.append('}');
+  }
   return {
     nodeId: e.guid,
-    prefixTypes: t.formatJSX ?
-      r.map((e) => function(e) {
-        if (e === CUSTOM_IMAGE_TYPE_STR)
-          return e;
-        let t = e.indexOf('{');
-        let i = e.lastIndexOf('}');
-        return t === -1 || i === -1 ? e : e.substring(0, t) + es(e.substring(t, i + 1)) + e.substring(i + 1);
-      }(e)) :
-      r,
+    prefixTypes: t.formatJSX ? r.map(e => function (e) {
+      if (e === CUSTOM_IMAGE_TYPE_STR) return e;
+      let t = e.indexOf('{');
+      let i = e.lastIndexOf('}');
+      return t === -1 || i === -1 ? e : e.substring(0, t) + es(e.substring(t, i + 1)) + e.substring(i + 1);
+    }(e)) : r,
     jsxStr: o.toString()
   };
 }
@@ -9841,9 +9197,8 @@ let rH = {
   ignoreFetchingComponentData: !0
 };
 function r$(e, t, i = {}) {
-  if (e.type !== 'SYMBOL')
-    throw new Error(`Unexpected node type: ${e.type}`);
-  return function(e, t = {}) {
+  if (e.type !== 'SYMBOL') throw new Error(`Unexpected node type: ${e.type}`);
+  return function (e, t = {}) {
     let {
       jsxElement,
       ...n
@@ -9859,14 +9214,12 @@ function r$(e, t, i = {}) {
   }).jsxStr || 'null';
 }
 function rW(e, t, i) {
-  t in e ?
-    Object.defineProperty(e, t, {
-      value: i,
-      enumerable: !0,
-      configurable: !0,
-      writable: !0
-    }) :
-    e[t] = i;
+  t in e ? Object.defineProperty(e, t, {
+    value: i,
+    enumerable: !0,
+    configurable: !0,
+    writable: !0
+  }) : e[t] = i;
   return e;
 }
 class rK {
@@ -9882,7 +9235,6 @@ class rK {
       editReference: i
     };
   }
-
   recordSetProperty(e, t, i) {
     let n = {
       editType: 'setProperty',
@@ -9893,19 +9245,15 @@ class rK {
     for (let [t, i] of Object.entries(this.guidToSubtree)) i.descendants.includes(e.guid) || this.finalizeSubtree(t);
     (n.guid !== this.rootGuid || n.key !== 'x' && n.key !== 'y') && this.edits.push(n);
   }
-
   finalize() {
     for (let e in this.guidToSubtree) this.finalizeSubtree(e);
   }
-
   finalizeSubtree(e) {
     let t = this.guidToSubtree[e];
-    if (!t)
-      throw new Error(`Subtree not found for guid ${e}`);
+    if (!t) throw new Error(`Subtree not found for guid ${e}`);
     let i = t.editReference;
     let n = UN().get(e);
-    if (!n)
-      throw new Error(`Node not found for guid ${e}`);
+    if (!n) throw new Error(`Node not found for guid ${e}`);
     let a = {
       scene: n.sceneGraph,
       ...KQ,
@@ -9932,7 +9280,6 @@ class rK {
     this.edits = s;
     delete this.guidToSubtree[e];
   }
-
   recordFunctionCall(e, t, i) {
     t === 'insertChild' && i[1] === e.childrenNodes.length && (t = 'appendChild', i = [i[0], i[2]]);
     for (let e = 0; e < i.length; e++) {
@@ -9949,11 +9296,10 @@ class rK {
         delete this.guidToSubtree[e];
       } else {
         let t = UN().get(e);
-        if (!t)
-          throw new Error(`Child ${e} not found in guidToSubtree`);
+        if (!t) throw new Error(`Child ${e} not found in guidToSubtree`);
         n.descendants.push(...function e(t) {
           let i = [t.guid];
-          t.childrenNodes.forEach((t) => {
+          t.childrenNodes.forEach(t => {
             i.push(t.guid);
             i.push(...e(t));
           });
@@ -9968,7 +9314,6 @@ class rK {
       args: i
     });
   }
-
   createProxy(e) {
     let t = this;
     return new Proxy(e, {
@@ -9984,7 +9329,6 @@ class rK {
       }
     });
   }
-
   constructor({
     context: e,
     rootGuid: t
@@ -10073,23 +9417,20 @@ export async function $$rq38({
     });
     t.finalize();
     return {
-      jsStr: function(e, t) {
+      jsStr: function (e, t) {
         let i = [];
         let n = 0;
         let r = {};
         let o = {};
-        let a = (e) => {
-          if (e in o)
-            throw new Error('Attempt to assign guid to variable twice');
+        let a = e => {
+          if (e in o) throw new Error('Attempt to assign guid to variable twice');
           e === t ? o[e] = 'root' : (o[e] = `node${n}`, n += 1);
           return o[e];
         };
-        let l = (e) => {
-          if (e in o)
-            return o[e];
+        let l = e => {
+          if (e in o) return o[e];
           {
-            if (e in r)
-              throw new Error('Cannot reference node created through JSX');
+            if (e in r) throw new Error('Cannot reference node created through JSX');
             let t = a(e);
             i.push(`const ${t} = await figma.getNodeByIdAsync(${JSON.stringify(e)})`);
             return t;
@@ -10139,7 +9480,7 @@ export async function $$rq38({
                     }
                     break;
                   default:
-                    i.push(`${e}.${t.funcName.toString()}(${t.args.map((e) => JSON.stringify(e)).join(', ')})`);
+                    i.push(`${e}.${t.funcName.toString()}(${t.args.map(e => JSON.stringify(e)).join(', ')})`);
                 }
               }
           }

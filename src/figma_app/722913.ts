@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { qE } from "../figma_app/492908";
 import { l7 } from "../905/189185";
 import { dI } from "../905/871411";
@@ -19,7 +19,7 @@ let E = e => {
     wiggle,
     smoothen
   } = lF;
-  return !(("frequency" in e ? e.frequency === frequency : "interval" in e ? e.interval === frequency : xb) && e.wiggle === wiggle && e.smoothen === smoothen);
+  return !(("frequency" in e ? e.frequency === frequency : "interval" in e ? e.interval === frequency : throwTypeError) && e.wiggle === wiggle && e.smoothen === smoothen);
 };
 export function $$y1() {
   let e = C8(Gt("strokeBrushGuid"));

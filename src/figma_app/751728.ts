@@ -1,5 +1,5 @@
 import { jsxs, jsx } from "react/jsx-runtime";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { r as _$$r } from "../905/571838";
 import { md } from "../figma_app/27355";
 import o from "../vendor/524488";
@@ -241,7 +241,7 @@ export function $$O1({
           E = `${t.hub_file_id}-${t.node_id}`;
           break;
         default:
-          xb(t);
+          throwTypeError(t);
       }
       let b = s ? s - 1 : e.length - 1;
       return jsxs(_$$x.Item, {

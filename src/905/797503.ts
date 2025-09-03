@@ -1,4 +1,4 @@
-import { vA } from "../figma_app/465776";
+import { assert } from "../figma_app/465776";
 import { HzA } from "../figma_app/763686";
 import { UN } from "../905/700578";
 let s = null;
@@ -13,7 +13,7 @@ export function $$l0(e) {
     }
     if (null === t) {
       let i = e.getInternalCanvas();
-      vA(null !== i);
+      assert(null !== i);
       (t = e.createNode("GROUP", {
         tracking: HzA.IGNORE
       })).name = o;
@@ -27,7 +27,7 @@ export function $$l0(e) {
     guid: i
   });
   let l = UN().get(i);
-  vA(null !== l);
+  assert(null !== l);
   return l;
 }
 export const X = $$l0;

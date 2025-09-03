@@ -12,7 +12,7 @@ let u = z.object({
 });
 let $$p0 = z.object({
   name: z.string(),
-  type: z.$$enum(["group", "chat", "chatV2", "objectV2", "embeddings", "embedV2", "error", "image", "imageV2"]),
+  type: z.enum(["group", "chat", "chatV2", "objectV2", "embeddings", "embedV2", "error", "image", "imageV2"]),
   start: z.number(),
   end: z.number().optional(),
   chat: z.object({

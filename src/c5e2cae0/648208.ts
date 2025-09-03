@@ -1,5 +1,5 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { wc } from "../figma_app/465776";
+import { throwError } from "../figma_app/465776";
 import { isNullish } from "../figma_app/95419";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { w as _$$w } from "../c5e2cae0/59973";
@@ -246,7 +246,7 @@ function I({
     case Ju.PRO:
       return t ? tx("checkout.purchase_summary.plan_renewal_pro_annual") : tx("checkout.purchase_summary.plan_renewal_pro_monthly");
     default:
-      wc(e);
+      throwError(e);
   }
 }
 function k({

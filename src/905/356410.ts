@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import r, { createContext, useState, useEffect, useContext, useMemo, useReducer } from "react";
 import { wA } from "../vendor/514228";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { c2 } from "../905/382883";
 import l from "classnames";
 import { sx } from "../905/449184";
@@ -169,7 +169,7 @@ function N(e, t) {
         questions: HX(e.questions)
       };
     default:
-      xb(t);
+      throwTypeError(t);
   }
 }
 function D({
@@ -539,7 +539,7 @@ function z({
       r = "brand";
       break;
     default:
-      xb(e);
+      throwTypeError(e);
   }
   return jsx(_$$z, {
     iconSrc: i,

@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { wA } from "../vendor/514228";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { getFeatureFlags } from "../905/601108";
 import { eD } from "../figma_app/876459";
 import { Rs } from "../figma_app/288654";
@@ -179,7 +179,7 @@ var $$n0;
       case Bi.MCP:
         return _$$t("consumption_paywalls.mcp.no_mcp_access");
       default:
-        xb(t);
+        throwTypeError(t);
     }
   }
   (e => {
@@ -262,7 +262,7 @@ var $$n0;
       case Bi.CODE_CHAT_LIBRARY_IMPORT:
         return _$$t("consumption_paywalls.code_chat_library_import.bring_styling_context");
       default:
-        xb(e);
+        throwTypeError(e);
     }
   };
   let k = (e, t) => {
@@ -309,7 +309,7 @@ var $$n0;
       case Bi.ORG:
         return "";
       default:
-        xb(e);
+        throwTypeError(e);
     }
   };
   let R = (e, t) => {
@@ -354,7 +354,7 @@ var $$n0;
       case Bi.CODE_CHAT_LIBRARY_IMPORT:
         return k(e, t);
       default:
-        xb(e);
+        throwTypeError(e);
     }
   };
   let N = (e, t) => 2 === t ? e === Bi.PLUGIN_ANALYTICS ? [{
@@ -450,7 +450,7 @@ var $$n0;
     })
   }, {
     text: _$$t("consumption_paywalls.workspaces")
-  }] : void xb(e);
+  }] : void throwTypeError(e);
   let F = (t, i, n) => 0 === t ? [{
     text: _$$t("consumption_paywalls.free_project_limit", {
       project_limit: e.getResourceLimit(vL.FOLDER, i)
@@ -678,7 +678,7 @@ var $$n0;
       case Bi.CODE_CHAT_LIBRARY_IMPORT:
         return _$$t("consumption_paywalls.code_chat_library_import.title");
       default:
-        xb(e);
+        throwTypeError(e);
     }
   };
   e.getModalLearnMoreLink = function (e) {
@@ -790,14 +790,14 @@ var $$n0;
       case Bi.CODE_CHAT_LIBRARY_IMPORT:
         return _$$t("consumption_paywalls.code_chat_library_import.subtitle");
       default:
-        xb(t);
+        throwTypeError(t);
     }
   };
   e.getModalTrackingName = function (e, t) {
     let i = Object.values(Pj).includes(e);
     let n = Object.values(Bi).includes(e);
     let r = Object.values(vL).includes(e);
-    if (i) return e === Pj.TEAM_CREATION_SPEED_BUMP ? "Team creation speed bump upsell modal" : xb(e);
+    if (i) return e === Pj.TEAM_CREATION_SPEED_BUMP ? "Team creation speed bump upsell modal" : throwTypeError(e);
     if (n) switch (e) {
       case Bi.TEAM_LIBRARY:
         return "Team Library Paywall Modal";
@@ -863,7 +863,7 @@ var $$n0;
       case Bi.CODE_CHAT_LIBRARY_IMPORT:
         return "Code Chat Library Import Paywall Modal";
       default:
-        return xb(e);
+        return throwTypeError(e);
     } else if (r && t) switch (t) {
       case ZN.CREATE_FILE:
       case ZN.CREATE_FOLDER:
@@ -896,7 +896,7 @@ var $$n0;
       case FFileType.FIGMAKE:
         return "figmake";
       default:
-        return xb(e);
+        return throwTypeError(e);
     }
   };
   e.isNegativeText = B;

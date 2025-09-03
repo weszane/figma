@@ -1,7 +1,7 @@
 import { z } from "../905/239603";
 import { p } from "../905/42189";
 var $$a2 = (e => (e.ALL = "All", e.STICKERS_AND_COMPONENTS = "Stickers", e.TEMPLATES = "Templates", e.TEAM_TEMPLATES = "TeamTemplates", e.WIDGETS = "Widgets", e.PLUGINS = "Plugins", e.MORE = "More", e.ORG_FACE_STAMPS = "OrgFaceStamps", e))($$a2 || {});
-export let $$s1 = z.$$enum(["universal-insert-figjam-all", "universal-insert-figjam-all-use-case", "universal-insert-figjam-templates", "universal-insert-figjam-stickers", "universal-insert-figjam-stickers-compact-view", "universal-insert-figjam-widgets", "universal-insert-figjam-plugins", "universal-insert-figjam-more", "universal-insert-figjam-collage", "universal-insert-figjam-all-whiteboard-tools"]);
+export let $$s1 = z.enum(["universal-insert-figjam-all", "universal-insert-figjam-all-use-case", "universal-insert-figjam-templates", "universal-insert-figjam-stickers", "universal-insert-figjam-stickers-compact-view", "universal-insert-figjam-widgets", "universal-insert-figjam-plugins", "universal-insert-figjam-more", "universal-insert-figjam-collage", "universal-insert-figjam-all-whiteboard-tools"]);
 export function $$o3(e) {
   switch (e) {
     case p.ALL:

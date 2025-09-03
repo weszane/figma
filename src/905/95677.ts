@@ -8,6 +8,8 @@ export function $$r0(e) {
   }
 }
 class a {
+  width: number;
+  height: number;
   numFrames() {
     return this._frames.length;
   }
@@ -25,10 +27,10 @@ class a {
     let r;
     if (e === this.currentFrame) return t;
     if (this.frameNeedsBackfill(e)) {
-      if (!this.currentFrame || e < this.currentFrame) for (r = e - 1; r >= 0 && this.frameNeedsBackfill(r);) r--;else r = this.currentFrame;
+      if (!this.currentFrame || e < this.currentFrame) for (r = e - 1; r >= 0 && this.frameNeedsBackfill(r);) r--; else r = this.currentFrame;
     } else r = e;
     let a = !1;
-    if (0 === r) a = !0;else {
+    if (0 === r) a = !0; else {
       let e = this.frameInfo(r - 1);
       2 === e.disposal && this.frameIsFullSized(e) && (a = !0);
     }
@@ -91,7 +93,7 @@ class a {
                 t += 14;
                 this.loop_count = e[t++] | e[t++] << 8;
                 t++;
-              } else for (t += 12;;) {
+              } else for (t += 12; ;) {
                 var c = e[t++];
                 if (!(c >= 0)) throw Error("Invalid block size");
                 if (0 === c) break;
@@ -110,7 +112,7 @@ class a {
               break;
             case 254:
             case 1:
-              for (;;) {
+              for (; ;) {
                 var p = e[t++];
                 if (!(p >= 0)) throw Error("Invalid block size");
                 if (0 === p) break;
@@ -136,7 +138,7 @@ class a {
           A && (E = !0, v = t, I = b, t += 3 * b);
           var x = t;
           var S = !1;
-          for (t++;;) {
+          for (t++; ;) {
             var w = e[t++];
             if (void 0 === w) {
               S = !0;
@@ -191,7 +193,7 @@ class a {
       var g;
       var f;
       var _ = r[g];
-      if (0 === d && (p += m, d = o, p >= u && (m = 4 * l + 4 * this.width * (h - 1), p = c + (o + l) * (h << 1), h >>= 1)), _ === s) p += 4;else {
+      if (0 === d && (p += m, d = o, p >= u && (m = 4 * l + 4 * this.width * (h - 1), p = c + (o + l) * (h << 1), h >>= 1)), _ === s) p += 4; else {
         var A = this.buf[a + 3 * _];
         var y = this.buf[a + 3 * _ + 1];
         var b = this.buf[a + 3 * _ + 2];
@@ -204,7 +206,7 @@ class a {
     }
   }
   GifReaderLZWOutputIndexStream(e, t, i) {
-    for (n = this.buf[e++], r = 1 << n, a = r + 1, s = a + 1, o = n + 1, l = (1 << o) - 1, d = 0, c = 0, u = 0, p = this.buf[e++], m = new Int32Array(4096), h = null, void 0;;) {
+    for (n = this.buf[e++], r = 1 << n, a = r + 1, s = a + 1, o = n + 1, l = (1 << o) - 1, d = 0, c = 0, u = 0, p = this.buf[e++], m = new Int32Array(4096), h = null, void 0; ;) {
       var n;
       var r;
       var a;

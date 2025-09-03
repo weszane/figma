@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { createRef } from "react";
 import { Ng } from "../vendor/514228";
 import { filterNotNullish } from "../figma_app/656233";
-import { vA, KF } from "../figma_app/465776";
+import { assert, debug } from "../figma_app/465776";
 import { encodeStringToBase64, encodeBase64 } from "../905/561685";
 import { ServiceCategories as _$$e } from "../905/165054";
 import c from "classnames";
@@ -37,7 +37,7 @@ import { A as _$$A2 } from "../1617/377036";
 var u = c;
 let U = "Loading suggestions...";
 function G(e) {
-  vA(null !== e, "We should never be in the middle state if there are no optional parameters");
+  assert(null !== e, "We should never be in the middle state if there are no optional parameters");
 }
 class K extends o6 {
   onSuggestions = e => {
@@ -147,7 +147,7 @@ class K extends o6 {
       let a = this.state.items[e];
       "skip" === a || ("freeform" === a ? n[i.key] = {
         name: this.state.searchQuery
-      } : (KF(!this.state.loadingMessage, "Selected item while loading"), n[i.key] = a));
+      } : (debug(!this.state.loadingMessage, "Selected item while loading"), n[i.key] = a));
     }
     let a = this.firstOptionalIndex;
     if ("middle" === r) {

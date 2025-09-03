@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useMemo, useState, useRef, useCallback, useContext, useLayoutEffect } from "react";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { k as _$$k } from "../905/443820";
 import { rXF, CWU, Z_n, NLJ } from "../figma_app/763686";
 import { s4 } from "../figma_app/276332";
@@ -96,7 +96,7 @@ export function $$Q1({
       case "SUBSCRIBED_VARIABLES":
         return ee;
       default:
-        xb(e, "Unhandled view for picker body");
+        throwTypeError(e, "Unhandled view for picker body");
     }
   }(currentView);
   let I = useMemo(() => J({

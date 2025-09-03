@@ -29,7 +29,7 @@ import { Bu } from "../figma_app/53721";
 import { ZQ } from "../figma_app/155287";
 import { d4 } from "../figma_app/474636";
 import { I as _$$I, o8, r_ } from "../905/622391";
-import { $$aE2, $$ap1 } from "../905/472793";
+import { $$aE2, createPluginInstance } from "../905/472793";
 import { NoOpVm } from "../905/700654";
 import { gH, Yx, Ew } from "../figma_app/985200";
 import { j as _$$j } from "../905/535481";
@@ -377,7 +377,7 @@ async function ei(e) {
   });
   await runResult;
   let s = !1;
-  for (let e of [Array.prototype, Function.prototype, Object.prototype, Date.prototype, Object.getPrototypeOf(function*() {
+  for (let e of [Array.prototype, Function.prototype, Object.prototype, Date.prototype, Object.getPrototypeOf(function* () {
     yield 0;
   }), "Object.getPrototypeOf(async () => {})", "Object.getPrototypeOf(async function*(){ yield 0 })"]) {
     if ("string" == typeof e) try {
@@ -433,7 +433,7 @@ export function $$ea2(e) {
   yp($$ea2);
   try {
     if (_$$et()) return;
-    n && function(e) {
+    n && function (e) {
       let t = new NoOpVm();
       let i = [() => t.destroy(), () => JX, () => Y5.triggerAction("commit")];
       let n = () => {
@@ -448,7 +448,7 @@ export function $$ea2(e) {
       let r = () => (n(), Promise.resolve());
       JX();
       let a = $$aE2();
-      $$ap1(t, {
+      createPluginInstance(t, {
         ...a,
         openFileKey: e.openFileKey,
         userID: e.userID,
@@ -532,7 +532,7 @@ export let $$eo4 = _$$n(async e => {
         el(t, e.isWidget);
       } else try {
         let n = await ed(e, i, e.plugin);
-        await function({
+        await function ({
           pluginVersion: e,
           runPluginArgs: t,
           stats: i,
@@ -582,7 +582,7 @@ export let $$eo4 = _$$n(async e => {
             productType: Bu(_),
             isWidget,
             isMonetized: v,
-            paidStatus: function(e) {
+            paidStatus: function (e) {
               let t = m3(e);
               let i = e?.community_resource_payment;
               return t && i ? i.status === G3.TRIALING ? "trial" : "paid" : "none";
@@ -893,7 +893,7 @@ function em({
 }) {
   return {
     name: e.name,
-    allowedDomains: function(e, t) {
+    allowedDomains: function (e, t) {
       let {
         networkAccess
       } = e;

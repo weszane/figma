@@ -26,7 +26,7 @@ import { fu } from "../figma_app/831799";
 import { R as _$$R } from "../905/263821";
 import { Cu } from "../figma_app/314264";
 import { VG, A7, F2, E2, ju } from "../905/389382";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { ud } from "../905/513035";
 import { FProductAccessType, FOrganizationLevelType, FPlanNameType, FMemberRoleType, FFileType } from "../figma_app/191312";
 import { _6 } from "../figma_app/386952";
@@ -107,7 +107,7 @@ function L(e, t, i, n) {
         case ud.CONTENT:
           return _$$t("request_upgrade_modal.header.content");
         default:
-          xb(t);
+          throwTypeError(t);
       }
     case tc.PUBLISH_SITES:
       if (e === FProductAccessType.FIGMAKE) return _$$t("request_upgrade.header.figmake.publish");
@@ -318,7 +318,7 @@ export function $$eb0(e) {
   let [Q, J] = useState(0);
   let [ee, et] = fp(eA);
   let ei = !!e.getIsEligibleForProvisionalAccess && e.getIsEligibleForProvisionalAccess(Z);
-  let en = function(e) {
+  let en = function (e) {
     let t = md(UQ);
     let i = q5();
     return !t && !!i && i.editorType === FFileType.DESIGN && (e === i$.BlockingModal || e === i$.Upsell);
@@ -326,7 +326,7 @@ export function $$eb0(e) {
   let er = e.entryPoint === tc.ASK_TO_EDIT_ONE_CLICK || en;
   let ea = useRef();
   let es = L(Z, e.seatTypeKey, e.entryPoint, er);
-  let eo = function(e, t, i, r, a, s) {
+  let eo = function (e, t, i, r, a, s) {
     let o = sp(t, e, a, i, s);
     if (i === tc.USER_SETTINGS) return jsx(Fragment, {
       children: o
@@ -341,7 +341,7 @@ export function $$eb0(e) {
     onClose,
     onSuccess,
     trackingProperties
-  } = function(e) {
+  } = function (e) {
     let [t, i] = fp(_$$t2);
     let n = _$$W();
     let a = useCallback(() => {
@@ -594,4 +594,4 @@ export function $$eb0(e) {
   });
 }
 Ju($$eb0, "RequestUpgradeModal");
-export const R9 = $$eb0; 
+export const R9 = $$eb0;

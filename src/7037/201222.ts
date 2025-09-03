@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useRef, useState, useLayoutEffect, useMemo, useEffect, useCallback } from "react";
 import { wA, d4 } from "../vendor/514228";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { sx } from "../905/449184";
 import { Ay } from "../905/612521";
 import { ZC } from "../figma_app/39751";
@@ -49,7 +49,7 @@ import { ZA, OQ, jS, dC, TI, ZO, IL, wV, _S } from "../figma_app/809086";
 import { bIZ } from "../figma_app/6204";
 import { g as _$$g } from "../7037/183814";
 import { HH } from "../figma_app/841415";
-import { d_ } from "../figma_app/918700";
+import { utilityNoop } from "../figma_app/918700";
 import { Kc, Zp, rS, DG, dy } from "../905/462076";
 import { x as _$$x } from "../7037/837002";
 import { i as _$$i } from "../7037/201545";
@@ -290,7 +290,7 @@ export let $$eb0 = Ju(function (e) {
     case "errors":
       return jsx(eC, {});
     case "loading":
-      return jsx(d_, {
+      return jsx(utilityNoop, {
         className: ef,
         size: "any"
       });
@@ -299,10 +299,10 @@ export let $$eb0 = Ju(function (e) {
       t(Ce());
       return null;
     default:
-      xb(b);
+      throwTypeError(b);
   }
   return jsxs(Fragment, {
-    children: [jsx(d_, {
+    children: [jsx(utilityNoop, {
       className: ef,
       size: "any",
       children: jsx("div", {

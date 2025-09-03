@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useCallback, Component } from "react";
 import { wA, d4 } from "../vendor/514228";
-import { wc } from "../figma_app/465776";
+import { throwError } from "../figma_app/465776";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { az, sx } from "../905/449184";
 import { zN, qe } from "../figma_app/416935";
@@ -85,7 +85,7 @@ function C({
   t.forEach(t => {
     e[t].eligibleUsers.forEach(e => {
       if (!r[e]) {
-        if (s[e]) r[e] = s[e]; else {
+        if (s[e]) r[e] = s[e];else {
           let s = a[e];
           i[e] || (i[e] = []);
           i[e].push(s.recommendedSeatTypeByTeamId[t]);
@@ -98,7 +98,7 @@ function C({
     ...Object.keys(i).reduce((e, t) => (e[t] = Up(i[t]), e), {})
   };
 }
-let $ = tf(function(e) {
+let $ = tf(function (e) {
   return jsx("div", {
     className: Nd,
     onClick: e.onClick,
@@ -182,7 +182,7 @@ function U(e) {
             tier: Ju.ORG,
             isCampfireCart: !!e.isCampfireCart
           });
-          let a = function(e) {
+          let a = function (e) {
             switch (e) {
               case X1.ChoosePlan:
                 return tn.PLAN_COMPARISON;
@@ -302,7 +302,7 @@ let eI = ({
   let [n, d] = useState(l);
   let o = useCallback(e => {
     try {
-      d(t => function(e, t) {
+      d(t => function (e, t) {
         let a = n5(e, t);
         switch (a.type) {
           case "success":
@@ -313,7 +313,7 @@ let eI = ({
             throw Error("sent error");
         }
       }(t, e));
-    } catch (e) { }
+    } catch (e) {}
   }, []);
   return {
     changeUserSeatType: useCallback((e, t) => {
@@ -439,7 +439,7 @@ export class $$eM2 extends Component {
         case X1.Confirmation:
           break;
         default:
-          wc(e);
+          throwError(e);
       }
     };
     this.getNextButtonText = () => {
@@ -459,7 +459,7 @@ export class $$eM2 extends Component {
         case X1.Confirmation:
           return "";
         default:
-          wc(e);
+          throwError(e);
       }
     };
     this.getIsNextButtonDisabled = () => {
@@ -478,7 +478,7 @@ export class $$eM2 extends Component {
         case X1.SeatSelect:
           return !1;
         default:
-          wc(e);
+          throwError(e);
       }
     };
     this.getIsNextButtonLoading = () => this.state.loading || this.state.apiPending;
@@ -699,7 +699,7 @@ export class $$eM2 extends Component {
         selectedTeamIds,
         eligibleUsersByUserId,
         selectedUserSeatTypes
-      } = function(e, t) {
+      } = function (e, t) {
         let a = e.reduce((e, t) => (e[t.id] = {
           ...t,
           eligibleUsers: new Set()
@@ -783,7 +783,7 @@ export class $$eM2 extends Component {
     }
     if (this.setState({
       apiPending: !0
-    }), a && !(await _$$V(a, e.country, () => { }, this.onVatValidationFail))) return;
+    }), a && !(await _$$V(a, e.country, () => {}, this.onVatValidationFail))) return;
     if (this.props.canSeeBillingAddressExp && !this.state.nameOnPaymentMethod) {
       let e = _$$t("org_self_serve.payment_step.name_on_payment_method_is_required");
       this.trackError(e);
@@ -793,7 +793,7 @@ export class $$eM2 extends Component {
       });
       return;
     }
-    if (s && !(await _$$V(s, e.country, () => { }, this.onVatValidationFail, e.region))) return;
+    if (s && !(await _$$V(s, e.country, () => {}, this.onVatValidationFail, e.region))) return;
     let r = this.props.canSeeBillingAddressExp ? {
       name: this.state.nameOnPaymentMethod,
       address_line1: e.line1,
@@ -977,7 +977,7 @@ export class $$eM2 extends Component {
           onToggle: this.onTeamToggle,
           newTeamName: this.state.newTeamName
         })), t === X1.SeatSelect && (this.state.loading ? jsx(_$$f, {}) : jsx(ek, {
-          users: function({
+          users: function ({
             eligibleUsersByUserId: e,
             eligibleTeamsByTeamId: t,
             selectedTeamIds: a
@@ -1146,7 +1146,7 @@ export function $$eR1(e) {
 export function $$eO0({
   step: e
 }) {
-  let t = function(e) {
+  let t = function (e) {
     switch (e) {
       case X1.TeamSelect:
         return _$$t("checkout.org_self_serve.select_teams_title");
@@ -1160,7 +1160,7 @@ export function $$eO0({
         return null;
     }
   }(e);
-  let a = function(e) {
+  let a = function (e) {
     let t = jsx(Ph, {
       href: "/pricing",
       trackingProperties: {
@@ -1201,4 +1201,4 @@ export function $$eO0({
 $$eM2.displayName = "OrgSelfServePage";
 export const OrgHeader = $$eO0;
 export const OrgSelfServeBillingRemodelPage = $$eR1;
-export const OrgSelfServeBillingRemodelPageInner = $$eM2; 
+export const OrgSelfServeBillingRemodelPageInner = $$eM2;

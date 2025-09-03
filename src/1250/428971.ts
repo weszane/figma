@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useEffect } from "react";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { md } from "../figma_app/27355";
 import { Vc } from "../figma_app/211694";
 import { tx } from "../905/303541";
@@ -86,7 +86,7 @@ function v(e) {
         trackingContextName: "dev_mode_component_browser_step_3 - review or edit the mapping"
       });
     default:
-      xb(step);
+      throwTypeError(step);
   }
 }
 export function $$w0({

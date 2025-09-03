@@ -1,5 +1,5 @@
 import _require from "../0c62c2fd/653470";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { NUh, h62, glU, MEW } from "../figma_app/763686";
 import { zl } from "../figma_app/27355";
@@ -1854,7 +1854,7 @@ async function Q(e, t, i) {
       }
     }, {
       functionName: e.paintInlineImageXObject.name,
-      isErrorOfInterest: (e) => "invalid format" === e.message,
+      isErrorOfInterest: e => "invalid format" === e.message,
       callOnFailure: () => {
         Lo("pdf", "Unsupported image", void 0, {
           logToConsole: NUh.ALWAYS
@@ -1862,13 +1862,13 @@ async function Q(e, t, i) {
       }
     }, {
       functionName: e.addFontStyle.name,
-      isErrorOfInterest: (e) => e.message.startsWith("addFontStyle: No font data available"),
+      isErrorOfInterest: e => e.message.startsWith("addFontStyle: No font data available"),
       callOnFailure: () => {
         Lo("pdf", "Unsupported font", void 0, {
           logToConsole: NUh.ALWAYS
         });
       }
-    }].forEach((t) => {
+    }].forEach(t => {
       !function (e, t) {
         let {
           functionName,
@@ -1902,13 +1902,13 @@ async function Q(e, t, i) {
         /(bold|700)/i.test(o) && l.add(r.loadedName);
       }
     }
-    e === r.OPS.showText && s.argsArray[t][0].forEach((e) => {
+    e === r.OPS.showText && s.argsArray[t][0].forEach(e => {
       "object" == typeof e && ("\0" !== e.unicode ? e.fontChar = e.unicode : n?.[e.originalCharCode] ? e.fontChar = n[e.originalCharCode] : e.fontChar = "\u25A1", " " === e.fontChar && (e.isInFont = !0));
     });
   }), !i.preserveClipPaths) {
-    let e = (e) => e !== r.OPS.clip && e !== r.OPS.eoClip;
+    let e = e => e !== r.OPS.clip && e !== r.OPS.eoClip;
     s.argsArray = s.argsArray.filter((t, i) => e(s.fnArray[i]));
-    s.fnArray = s.fnArray.filter((t) => e(t));
+    s.fnArray = s.fnArray.filter(t => e(t));
   }
   return {
     svgElement: await a.getSVG(s, t),
@@ -1923,7 +1923,7 @@ function J(e, t) {
 }
 function ee(e) {
   let t = e.pendingRemovals;
-  t && (e.children = e.children.filter((e) => !t.has(e)), e.pendingRemovals = void 0);
+  t && (e.children = e.children.filter(e => !t.has(e)), e.pendingRemovals = void 0);
 }
 function et(e, t) {
   return [e[0] * t[0] + e[2] * t[1], e[1] * t[0] + e[3] * t[1], e[0] * t[2] + e[2] * t[3], e[1] * t[2] + e[3] * t[3], e[0] * t[4] + e[2] * t[5] + e[4], e[1] * t[4] + e[3] * t[5] + e[5]];
@@ -1959,7 +1959,7 @@ let ea = {
   name: "combineOutlineAndFill",
   fn: () => ({
     element: {
-      enter: (e) => {
+      enter: e => {
         let t = e.children.reduce((e, t) => {
           if ("element" === t.type && "path" === t.name) {
             let i = t.attributes.d || "";
@@ -1969,7 +1969,7 @@ let ea = {
           return e;
         }, {});
         let i = new Set();
-        Object.values(t).forEach((e) => {
+        Object.values(t).forEach(e => {
           if (e.length > 1) {
             let t = {};
             e.forEach((e, n) => {
@@ -1981,7 +1981,7 @@ let ea = {
             e[0].attributes = t;
           }
         });
-        i.size > 0 && (e.children = e.children.filter((e) => !i.has(e)));
+        i.size > 0 && (e.children = e.children.filter(e => !i.has(e)));
       }
     }
   })
@@ -1990,7 +1990,7 @@ let es = {
   name: "combineLucidGroupedOutlineAndFill",
   fn: () => ({
     element: {
-      enter: (e) => {
+      enter: e => {
         if ("element" !== e.type || "g" !== e.name) return;
         let t = e.children.reduce((e, t) => {
           if ("element" === t.type && "g" === t.name) {
@@ -2004,7 +2004,7 @@ let es = {
           return e;
         }, {});
         let i = new Set();
-        Object.values(t).forEach((e) => {
+        Object.values(t).forEach(e => {
           if (e.length > 1) {
             let t = {};
             e.forEach((e, n) => {
@@ -2016,12 +2016,12 @@ let es = {
             e[0].children[0].attributes = t;
           }
         });
-        i.size > 0 && (e.children = e.children.filter((e) => !i.has(e)));
+        i.size > 0 && (e.children = e.children.filter(e => !i.has(e)));
       }
     }
   })
 };
-let eo = (e) => {
+let eo = e => {
   let t = /url\((.+)\)/.exec(e);
   if (!t) return;
   let i = t[1];
@@ -2033,7 +2033,7 @@ let el = {
     let e = {};
     return {
       element: {
-        enter: (t) => {
+        enter: t => {
           if ("linearGradient" === t.name) {
             let i = t.children[t.children.length - 1];
             if (i && "element" === i.type && "stop" === i.name) {
@@ -2053,7 +2053,7 @@ let ed = {
   name: "addWhitespaceToTspans",
   fn: () => ({
     element: {
-      enter: (e) => {
+      enter: e => {
         "tspan" === e.name && (e.attributes["white-space"] = "pre");
       }
     }
@@ -2077,7 +2077,7 @@ let ec = {
                 let t = [1, 0, 0, 1, 0, 0];
                 if (!e || "" === e.trim()) return t;
                 let i = e.match(/(matrix|translate|scale|rotate|skewX|skewY)\s*\(([-\d\s.,e]+)\)/g);
-                i && i.forEach((e) => {
+                i && i.forEach(e => {
                   let [i, n] = e.split(/\s*\(\s*|\s*\)\s*/);
                   if (void 0 === n) return;
                   let r = n.split(/[\s,]+/).map(Number);
@@ -2212,7 +2212,7 @@ let ep = {
     }
   })
 };
-let em = (e) => {
+let em = e => {
   let t = {
     makeArcs: !1,
     curveSmoothShorthands: !1
@@ -2272,7 +2272,7 @@ function eA(e, t, i) {
   let r = i * Math.abs(e.bottom - e.top);
   return e.top - r < t.top && e.left - n < t.left && e.right + n > t.right && e.bottom + r > t.bottom;
 }
-let ey = (e) => {
+let ey = e => {
   let t = (e, t, i = 1) => Math.abs(e - t) < i;
   let i = e.element.parentElement;
   let n = i?.parentElement;
@@ -2321,7 +2321,7 @@ async function eb(e, t) {
       findFontIdsToBold: !d
     });
     d ? function (e) {
-      e.querySelectorAll("image").forEach((e) => {
+      e.querySelectorAll("image").forEach(e => {
         if ("154px" === e.getAttribute("width") && "142px" === e.getAttribute("height") && "0" === e.getAttribute("x") && "-142" === e.getAttribute("y") && "scale(0.0064935065 -0.0070422535)" === e.getAttribute("transform")) {
           let t = document.createElement("rect");
           t.setAttribute("fill", "#fff");
@@ -2329,7 +2329,7 @@ async function eb(e, t) {
         }
       });
     }(svgElement) : t === h62.MIRO && function (e) {
-      e.querySelectorAll("image").forEach((e) => {
+      e.querySelectorAll("image").forEach(e => {
         let t = e.parentElement;
         let i = t?.nextElementSibling;
         let n = i?.children ? i.children[0] : null;
@@ -2338,14 +2338,14 @@ async function eb(e, t) {
     }(svgElement);
     let m = await P(svgElement);
     document.body.prepend(svgElement);
-    let h = Array.from(svgElement.querySelectorAll("text")).map((e) => ({
+    let h = Array.from(svgElement.querySelectorAll("text")).map(e => ({
       element: e,
       rect: e.getBoundingClientRect(),
       matched: !1
     }));
     document.body.removeChild(svgElement);
     d && function (e) {
-      Array.from(e.querySelectorAll("text")).forEach((e) => {
+      Array.from(e.querySelectorAll("text")).forEach(e => {
         let t = Array.from(e.querySelectorAll("tspan"));
         if (t.length > 0) {
           let i = t[t.length - 1];
@@ -2363,7 +2363,7 @@ async function eb(e, t) {
       document.body.prepend(e);
       let r = [];
       let a = Array.from(e.querySelectorAll("path"));
-      let s = Array.from(e.querySelectorAll("image")).concat(a).map((e) => ({
+      let s = Array.from(e.querySelectorAll("image")).concat(a).map(e => ({
         element: e,
         rect: e.getBoundingClientRect()
       }));
@@ -2371,7 +2371,7 @@ async function eb(e, t) {
         url: e,
         rect: t
       }) => {
-        let a = n.find((e) => {
+        let a = n.find(e => {
           let n = i ? Math.min(Math.max(e.rect.height, e.rect.width) / 3, 15) : 15;
           return function (e, t, i = 15) {
             return e.top - i < t.top && e.left - i < t.left && e.right + i > t.right && e.bottom + i > t.bottom;
@@ -2383,7 +2383,7 @@ async function eb(e, t) {
           a.element.appendChild(t);
           return;
         }
-        let o = s.find((e) => e_(t, e.rect, 5));
+        let o = s.find(e => e_(t, e.rect, 5));
         if (o) {
           let t = ey(o);
           if (t) {
@@ -2405,10 +2405,10 @@ async function eb(e, t) {
       return r;
     }(svgElement, function (e, t, i) {
       let n = [];
-      e.filter((e) => 2 === e.annotationType).map((e) => ({
+      e.filter(e => 2 === e.annotationType).map(e => ({
         url: e.url,
         rect: function (e, t, i) {
-          let n = [e[0], t[3] - e[1] + t[1], e[2], t[3] - e[3] + t[1]].map((e) => e * i);
+          let n = [e[0], t[3] - e[1] + t[1], e[2], t[3] - e[3] + t[1]].map(e => e * i);
           return {
             top: Math.min(n[1], n[3]),
             left: Math.min(n[0], n[2]),
@@ -2416,14 +2416,14 @@ async function eb(e, t) {
             bottom: Math.max(n[1], n[3])
           };
         }(e.rect, t, i)
-      })).forEach((e) => {
-        n.some((t) => e.url === t.url && e_(e.rect, t.rect)) || n.push(e);
+      })).forEach(e => {
+        n.some(t => e.url === t.url && e_(e.rect, t.rect)) || n.push(e);
       });
       return n;
     }(await a.getAnnotations(), l.viewBox, s), d, h);
     d && (!function (e, t) {
       document.body.prepend(e);
-      let i = Array.from(e.querySelectorAll("path")).map((e) => ({
+      let i = Array.from(e.querySelectorAll("path")).map(e => ({
         element: e,
         rect: e.getBoundingClientRect()
       }));
@@ -2444,7 +2444,7 @@ async function eb(e, t) {
             continue;
           }
           r.matched = !0;
-          let s = (e) => {
+          let s = e => {
             let t = document.createElement("tspan");
             t.textContent = " ";
             e.appendChild(t);
@@ -2476,7 +2476,7 @@ async function eb(e, t) {
       }
     }(svgElement, h), function (e) {
       document.body.prepend(e);
-      let t = Array.from(e.querySelectorAll("path")).map((e) => ({
+      let t = Array.from(e.querySelectorAll("path")).map(e => ({
         element: e,
         rect: e.getBoundingClientRect()
       }));
@@ -2503,7 +2503,7 @@ async function eb(e, t) {
           name: "repairBoldText",
           fn: () => ({
             element: {
-              enter: (e) => {
+              enter: e => {
                 if ("tspan" !== e.name) return;
                 let i = e.attributes["font-family"];
                 i && t.has(i) && (e.attributes["font-weight"] = "bold");
@@ -2521,7 +2521,7 @@ async function eb(e, t) {
       e.innerHTML = c().sanitize(_, {
         ADD_ATTR: ["imageHash"]
       });
-      e.querySelectorAll("image").forEach((e) => {
+      e.querySelectorAll("image").forEach(e => {
         let t = e.getAttribute("imagehash");
         t && (e.setAttribute("imageHash", t), e.removeAttribute("imagehash"));
       });
@@ -2568,7 +2568,7 @@ async function eb(e, t) {
     }) => {
       t.push(e);
       n = n || a;
-      r.forEach((e) => {
+      r.forEach(e => {
         i.has(e.sha1Hash) || i.set(e.sha1Hash, e);
       });
     });
@@ -2592,14 +2592,14 @@ class eI {
     return zl.get(_$$D2);
   }
   getPdfSource(e) {
-    this.getPdfSourcePromise || (this.getPdfSourcePromise = new Promise((t) => {
+    this.getPdfSourcePromise || (this.getPdfSourcePromise = new Promise(t => {
       debugState.dispatch(to({
-        type: n ??= Ju(_$$A.createLazyComponent(() => Promise.all([]).then(_require).then((e) => e.PdfConfirmationModal), Ij("PdfConfirmationModal"))),
+        type: n ??= Ju(_$$A.createLazyComponent(() => Promise.all([]).then(_require).then(e => e.PdfConfirmationModal), Ij("PdfConfirmationModal"))),
         data: {
           fileImportDescription: _$$t("file_browser.file_import_view.select_pdf_source_description_within_figjam", {
             pdfCount: e
           }),
-          onConfirm: (e) => {
+          onConfirm: e => {
             debugState.dispatch(AS());
             t({
               pdfType: e
@@ -2621,7 +2621,7 @@ class eI {
     this.getPdfSourcePromise = null;
   }
   populatePdfImagesWithImageBytes(e) {
-    let t = e.map((e) => e.nodeIds.map((t) => ({
+    let t = e.map(e => e.nodeIds.map(t => ({
       nodeId: t,
       bytes: e.bytes
     }))).reduce((e, t) => e.concat(t), []);
@@ -2672,7 +2672,7 @@ class eI {
         r = _$$P(t);
         break;
       default:
-        xb(d);
+        throwTypeError(d);
     }
     debugState.dispatch(_$$F.enqueue({
       type: eg,
@@ -2714,7 +2714,7 @@ class eI {
             i.has(t) || i.set(t, []);
             i.get(t)?.push(e);
           });
-          return e.map((e) => ({
+          return e.map(e => ({
             ...e,
             nodeIds: i.get(e.sha1Hash) ?? []
           }));

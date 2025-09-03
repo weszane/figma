@@ -1,4 +1,4 @@
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { FContainerType } from "../figma_app/191312";
 export let $$a1 = {
   ORG: "org",
@@ -11,7 +11,7 @@ export function $$s0(e) {
     case "org":
       return FContainerType.ORG;
     default:
-      xb(e);
+      throwTypeError(e);
   }
 }
 export const V = $$s0;

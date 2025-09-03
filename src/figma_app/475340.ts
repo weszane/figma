@@ -1,6 +1,6 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useRef, useEffect } from "react";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import s from "classnames";
 import { Lg } from "../figma_app/257275";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -27,7 +27,7 @@ export function $$u0({
     animationDelay: `${p}ms`,
     backgroundColor: function (e) {
       if ("default" === e) return "var(--color-bg)";
-      xb(e);
+      throwTypeError(e);
     }(e)
   };
   return jsxs(Fragment, {

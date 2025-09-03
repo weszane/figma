@@ -1,4 +1,4 @@
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { pu, x_, Fy, KF, y$, fx, u0, Cv as _$$Cv, sJ, UF, _L, hN, c, uZ, dP, dJ } from "../905/532366";
 import { Hc, rR, G2, kG, kX } from "../figma_app/197743";
 import { QW } from "../figma_app/941074";
@@ -492,7 +492,7 @@ export function $$R21(e, t) {
       for (let [t, r] of Object.entries(u0)) if (Math.round(100 * r) === Math.round(e)) return t;
       return `[${e.toFixed(0)}%]`;
     default:
-      xb(t);
+      throwTypeError(t);
   }
 }
 export function $$L20(e) {

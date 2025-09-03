@@ -1,6 +1,6 @@
 import { c as _$$c } from "../905/94678";
 import { Ye } from "../905/75000";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { id } from "../905/648693";
 import { Lq } from "../905/926939";
 import { wn } from "../905/581923";
@@ -58,7 +58,7 @@ export const A = function e(t, i, p, m) {
             }
             break;
           default:
-            xb(i);
+            throwTypeError(i);
         }
         if (void 0 === n) return n;
         switch (i.valueType) {
@@ -178,7 +178,7 @@ export const A = function e(t, i, p, m) {
         h.sharedPluginData[_.rawProp] = A?.id ?? A?.description ?? A?.alt ?? "";
         break;
       default:
-        xb(_.def);
+        throwTypeError(_.def);
     }
   }
   return h;

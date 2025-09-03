@@ -1,4 +1,4 @@
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { Une } from "../figma_app/763686";
 import { H } from "../905/561433";
 export let $$s0 = new class {
@@ -30,7 +30,7 @@ export let $$s0 = new class {
   }
   cancelCallback(e) {
     let t = this.cancelHandle.get(e);
-    t && ("timeout" === t.type ? clearTimeout(t.id) : "postTask" === t.type ? t.controller.abort() : xb(t), this.cancelHandle.$$delete(e));
+    t && ("timeout" === t.type ? clearTimeout(t.id) : "postTask" === t.type ? t.controller.abort() : throwTypeError(t), this.cancelHandle.$$delete(e));
   }
   setTimeout(e, t) {
     return setTimeout(() => Une?.timeoutCallback(e), t);

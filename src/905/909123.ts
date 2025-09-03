@@ -1,4 +1,4 @@
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { $D } from "../905/11";
 import { XW } from "../figma_app/427318";
@@ -27,7 +27,7 @@ let $$$$m1 = M4.Query({
           widgetId: t
         })).data.meta.plugin;
       default:
-        xb(e, `Unknown resource type: ${e}`);
+        throwTypeError(e, `Unknown resource type: ${e}`);
     }
   },
   output: ({

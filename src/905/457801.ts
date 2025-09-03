@@ -1,5 +1,5 @@
 import { useCallback, useEffect } from "react";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { fp } from "../figma_app/27355";
 import { TQ, tl } from "../905/657224";
@@ -46,13 +46,13 @@ let $$g0 = new class {
           this.setRecentsLocalStorage([n]);
           return;
         }
-        let s = [n, ...a.filter((n) => i - n.timestamp < this.expiry && !(n.nodeId === t.node_id && n.fileKey === t.file_key && n.userId === e))].slice(0, this.maxRecents);
+        let s = [n, ...a.filter(n => i - n.timestamp < this.expiry && !(n.nodeId === t.node_id && n.fileKey === t.file_key && n.userId === e))].slice(0, this.maxRecents);
         this.setRecentsLocalStorage(s);
         break;
       case "hub-file-fragment":
         throw Error(`Unimplemented ${t.type}`);
       default:
-        xb(t);
+        throwTypeError(t);
     }
   }
   clear() {
@@ -67,18 +67,18 @@ async function f(e, t, i) {
       return;
     }
     let r = Date.now();
-    let a = n.filter((t) => r - t.timestamp < 6048e5 && t.userId === e);
+    let a = n.filter(t => r - t.timestamp < 6048e5 && t.userId === e);
     if (0 === a.length) {
       i([]);
       return;
     }
     let s = (await D.lookupFragments({
       file_key: t,
-      fragments: a.map((e) => ({
+      fragments: a.map(e => ({
         file_key: e.fileKey,
         node_id: e.nodeId
       }))
-    })).data.meta.results.map((e) => ({
+    })).data.meta.results.map(e => ({
       ...e,
       type: "fig-file-fragment"
     }));
@@ -98,10 +98,10 @@ export function $$_1(e = !1) {
   useEffect(() => {
     r && a && l();
   }, [r, a, l]);
-  let d = useCallback((e) => {
+  let d = useCallback(e => {
     l();
   }, [l]);
-  let m = useCallback((e) => e.key === h, []);
+  let m = useCallback(e => e.key === h, []);
   tl({
     onSync: d,
     shouldSyncValue: m

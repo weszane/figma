@@ -68,7 +68,7 @@ import { x as _$$x } from "../905/211326";
 import { DP } from "../905/640017";
 import { B8 } from "../905/993733";
 import { FO } from "../905/869235";
-import { xb, B1 } from "../figma_app/465776";
+import { throwTypeError, assertNotNullish } from "../figma_app/465776";
 import { Ib } from "../905/129884";
 import { A as _$$A } from "../3850/839808";
 import { A as _$$A2 } from "../3850/204081";
@@ -435,7 +435,7 @@ function eD({
     children: y
   });
 }
-let eL = memo(function(e) {
+let eL = memo(function (e) {
   let {
     chunkDetail
   } = e;
@@ -604,7 +604,7 @@ function eH(e) {
     case Dje.UNMODIFIED:
       return null;
     default:
-      xb(e.phase);
+      throwTypeError(e.phase);
   }
 }
 var eK = eW;
@@ -688,7 +688,7 @@ function e1(e) {
     let {
       removed,
       added
-    } = function(e, t) {
+    } = function (e, t) {
       let i = [];
       let n = t ? [...t] : [];
       e && e.forEach(e => {
@@ -830,7 +830,7 @@ class e7 extends Component {
       hasError: !0
     };
   }
-  componentDidCatch() { }
+  componentDidCatch() {}
   render() {
     return this.state.hasError ? _$$tx("collaboration.branching_chunk.error") : jsx(e6, {
       changes: this.props.changes,
@@ -840,7 +840,7 @@ class e7 extends Component {
 }
 let tl = _$$tx("collaboration.branching_chunk.tile_preview_node_fallback");
 let td = _$$tx("collaboration.branching_chunk.tile_empty_page_fallback");
-let tc = memo(function(e) {
+let tc = memo(function (e) {
   let {
     displayNode,
     parentNode,
@@ -1112,7 +1112,7 @@ function tI(e) {
   }, d);
 }
 var tE = (e => (e[e.GRID = 0] = "GRID", e[e.LIST = 1] = "LIST", e))(tE || {});
-let tx = memo(function(e) {
+let tx = memo(function (e) {
   let {
     displayGroups,
     onChangeVisibleGroups,
@@ -1246,7 +1246,7 @@ let tx = memo(function(e) {
     })
   });
 });
-let tw = memo(function(e) {
+let tw = memo(function (e) {
   let {
     displayGroupsByPage,
     pageIdToInfo,
@@ -1383,7 +1383,7 @@ let tw = memo(function(e) {
     }) : e.node) : "No incoming changes to show."
   });
 });
-let tk = memo(function(e) {
+let tk = memo(function (e) {
   let {
     displayGroup,
     onChunkClick,
@@ -1528,10 +1528,10 @@ function tj(e) {
         currentView
       });
     default:
-      xb(currentView);
+      throwTypeError(currentView);
   }
 }
-let tU = memo(function(e) {
+let tU = memo(function (e) {
   let {
     displayGroup,
     onChunkClick,
@@ -1674,7 +1674,7 @@ let tZ = createContext(void 0);
 function tX(e) {
   let t = {};
   tJ(e, (e, i) => {
-    let n = function(e) {
+    let n = function (e) {
       let t = CWU.getLocalVariableInfo(e);
       if (t) return {
         type: "local",
@@ -2060,29 +2060,29 @@ function iO({
   modeID: t,
   aliasCache: i
 }) {
-  switch (B1(e.dataType), e.dataType) {
+  switch (assertNotNullish(e.dataType), e.dataType) {
     case "BOOLEAN":
-      B1(e.value?.boolValue);
+      assertNotNullish(e.value?.boolValue);
       return jsx(ik, {
         value: e.value.boolValue
       });
     case "FLOAT":
-      B1(e.value?.floatValue);
+      assertNotNullish(e.value?.floatValue);
       return jsx(iT, {
         value: e.value.floatValue
       });
     case "STRING":
-      B1(e.value?.textValue);
+      assertNotNullish(e.value?.textValue);
       return jsx(iC, {
         value: e.value.textValue
       });
     case "COLOR":
-      B1(e.value?.colorValue);
+      assertNotNullish(e.value?.colorValue);
       return jsx(iw, {
         value: e.value.colorValue
       });
     case "ALIAS":
-      B1(e.value?.alias);
+      assertNotNullish(e.value?.alias);
       return jsx(iD, {
         variableID: _$$dI(e.value.alias),
         modeID: dI(t),
@@ -2106,7 +2106,7 @@ function iO({
     case "DATE":
       return jsx(Fragment, {});
     default:
-      xb(e.dataType);
+      throwTypeError(e.dataType);
   }
 }
 function iD({
@@ -2261,7 +2261,7 @@ function iM(e, t) {
 }
 let iz = "branching_reviews_modals--input--0a8d0";
 var iH = (e => (e.APPROVED = "approve", e.CHANGES_REQUESTED = "suggest_changes", e))(iH || {});
-let iW = Ju(function(e) {
+let iW = Ju(function (e) {
   var t;
   var i;
   let s = wA();
@@ -2357,11 +2357,11 @@ let iW = Ju(function(e) {
     })
   });
 }, "leave-review-modal");
-let iK = Ju(function(e) {
+let iK = Ju(function (e) {
   let [t, i] = useState(e.existingMergeRequest?.description || "");
   let a = hS({
     open: !0,
-    onClose: e.onClose ? e.onClose : () => { }
+    onClose: e.onClose ? e.onClose : () => {}
   });
   let s = _$$t("collaboration.branching_reviews.add_context_optional");
   let o = e.existingMergeRequest ? _$$t("collaboration.branching_reviews.give_reviewers_more_context_for_your_latest_changes") : _$$t("collaboration.branching_reviews.give_reviewers_more_context_for_your_changes");
@@ -2704,7 +2704,7 @@ function nA(e) {
   let y = new Set(e.reviewers.map(e => e.user.id));
   useEffect(() => {
     let e = !1;
-    (async function() {
+    (async function () {
       h(!0);
       return await fG(t, s, !1);
     })().then(t => {
@@ -2835,7 +2835,7 @@ function ny(e) {
   let u = useMemo(() => d.transform(e => e.file?.repo ? _$$H.toSinatra(e.file.repo) : null).data, [d]);
   let p = useRef(null);
   let m = _$$iZ();
-  let h = function(e, t, i = 3) {
+  let h = function (e, t, i = 3) {
     return Rs(Xw7, {
       repoId: e || ""
     }, {
@@ -3159,7 +3159,7 @@ function nS(e) {
     })
   });
 }
-let nw = memo(function(e) {
+let nw = memo(function (e) {
   let t = wA();
   let [i, s] = useState({
     view: tN.SUMMARY
@@ -3305,7 +3305,7 @@ let nw = memo(function(e) {
     displayGroupsByLibrary,
     sortedPageIds
   } = useMemo(() => e.styleKeyToFileKey ? on(e.displayGroups ?? [], e.styleKeyToFileKey, e.styleKeyToLibraryKey ?? {}, Kn.TO_SOURCE) : on([], {}, {}, Kn.TO_SOURCE), [e.displayGroups, e.styleKeyToFileKey, e.styleKeyToLibraryKey]);
-  let ex = function(e, t, i, n, a, s, o, l) {
+  let ex = function (e, t, i, n, a, s, o, l) {
     let [d, c] = useState(null);
     let [u, p] = useState({});
     let h = useRef(new Set());
@@ -3347,7 +3347,7 @@ let nw = memo(function(e) {
       e = g.current;
       (t = (t = a).filter(t => !e.has(dI(t.mainChunk.displayNode.guid)))).length || e.size || (t = n.slice(0, 20));
       let i = t;
-      let r = function(e, t, i) {
+      let r = function (e, t, i) {
         if (e.view === tN.DETAIL || e.view === tN.AFFECTED_DETAIL || e.view === tN.VARIANT_SUMMARY || e.view === tN.VARIANT_DETAIL) {
           let t = nx(e);
           return t && !i.has(dI(t.mainChunk.displayNode.guid)) ? t : null;
@@ -3365,7 +3365,7 @@ let nw = memo(function(e) {
             nodeId,
             to,
             fromPromise
-          } = function(e, t) {
+          } = function (e, t) {
             let i = dI(e.mainChunk.displayNode.guid);
             let n = KZ(e.mainChunk.displayNode.styleType);
             let r = [{
@@ -3507,7 +3507,7 @@ let nw = memo(function(e) {
     if (!y) return;
     let e = "BranchPermissionsDebugger";
     window[e] = {
-      logPermissions: function() {
+      logPermissions: function () {
         console.log(f);
       }
     };
@@ -3861,7 +3861,7 @@ function nk(e, t) {
 }
 var nN = nR;
 let nO = _$$eU("off");
-let nF = memo(function(e) {
+let nF = memo(function (e) {
   let {
     mainPickDisplayGroups,
     mainPickGUIDs,
@@ -3892,7 +3892,7 @@ let nF = memo(function(e) {
     displayGroupsByVariableSet,
     displayGroupsByLibrary,
     pageIdToInfo
-  } = useMemo(() => function(e, t, i, n) {
+  } = useMemo(() => function (e, t, i, n) {
     if (!(t.length > 0)) return {
       ...on(e, i, n, Kn.FROM_SOURCE),
       otherChanges: []
@@ -3929,7 +3929,7 @@ let nF = memo(function(e) {
       forwardToDatadog: !0
     });
   }, [j, e.sourceKey, e.branchKey, e.checkpointDiffKey, e.fromCheckpointKey, M, identicalChunkGUIDs, k]);
-  let U = function(e, t, i, n, a, s, o, l, d) {
+  let U = function (e, t, i, n, a, s, o, l, d) {
     let [c, u] = useState(!1);
     let [p, m] = useState(null);
     let [h, g] = useState(null);
@@ -3946,7 +3946,7 @@ let nF = memo(function(e) {
     });
     let A = useContext(ss);
     return (useEffect(() => {
-      setTimeout(async function() {
+      setTimeout(async function () {
         if (!c) return;
         let e = d.filter(e => {
           let t = dI(e.mainChunk.displayNode.guid);
@@ -3981,7 +3981,7 @@ let nF = memo(function(e) {
   if (useEffect(() => {
     "loading" === B && ("loaded" === U.status || "error" === U.status) && V("loaded");
   }, [U, B, V]), "error" === U.status) throw U.error;
-  let z = useCallback(function(e) {
+  let z = useCallback(function (e) {
     C(e);
   }, [C]);
   return jsxs("div", {
@@ -4136,7 +4136,7 @@ function nY({
   let {
     leftChildren,
     rightChildren
-  } = function() {
+  } = function () {
     let i = [];
     let n = [];
     e?.displayNode.name !== t?.displayNode.name && (i.push(o({
@@ -4284,7 +4284,7 @@ function n2({
   let {
     leftChildren,
     rightChildren
-  } = function() {
+  } = function () {
     let t = [];
     let n = [];
     h.forEach(([e, i], r) => {
@@ -4662,7 +4662,7 @@ function rd({
   mainAliasCache: l,
   branchAliasCache: d
 }) {
-  let c = function() {
+  let c = function () {
     if (!s && !t) return null;
     if ("VARIABLE_SET" === (s ?? t).displayNode.type) return jsx(nY, {
       mainChunk: s,
@@ -4698,7 +4698,7 @@ function rd({
   }) : null;
 }
 function rg(e) {
-  let t = function(e) {
+  let t = function (e) {
     switch (e) {
       case Wo.BRANCH:
         return _$$t("collaboration.branching_from_source.branch");
@@ -5024,7 +5024,7 @@ function rk(e, t, i, n) {
     aliasVariableCache: s
   };
 }
-let rR = memo(function(e) {
+let rR = memo(function (e) {
   let {
     conflictDetection,
     picks,
@@ -5042,14 +5042,14 @@ let rR = memo(function(e) {
   let y = ud();
   let b = md(qp);
   let I = d4(e => e.mirror.appModel.pagesList);
-  let x = useMemo(() => function(e, t, i, n, r, a) {
+  let x = useMemo(() => function (e, t, i, n, r, a) {
     let s = {};
     let o = {};
     let l = {};
     let d = {};
     let c = {};
     e.forEach(e => {
-      let t = function(e, t, i, n, r) {
+      let t = function (e, t, i, n, r) {
         let {
           sourceChunks,
           branchChunks
@@ -5095,7 +5095,7 @@ let rR = memo(function(e) {
         l[t.key] = t.name;
       } else throw Error("No section for conflict group");
     });
-    let u = ["Variables", "Styles", "Multipage"].filter(e => c[e]).map(e => [function(e) {
+    let u = ["Variables", "Styles", "Multipage"].filter(e => c[e]).map(e => [function (e) {
       switch (e) {
         case "Styles":
           return _$$t("collaboration.conflict_local_styles");
@@ -5125,7 +5125,7 @@ let rR = memo(function(e) {
   let M = S[w];
   let j = useRef(null);
   let [U, B] = useState(null);
-  let V = function(e, t, i, n, a) {
+  let V = function (e, t, i, n, a) {
     let [s, o] = useState({
       status: "loading",
       id: null
@@ -5136,7 +5136,7 @@ let rR = memo(function(e) {
       extraGuidsToApplyToGenerateMainImageFromDiff,
       branchGuidsToAlwaysApplyToGenerateImages,
       extraGuidsToApplyToGenerateBranchImageFromConflictDiff
-    } = useMemo(() => function(e, t, i) {
+    } = useMemo(() => function (e, t, i) {
       let {
         conflictGroups: _conflictGroups,
         nonConflictingBranchChunkGUIDs,
@@ -5181,7 +5181,7 @@ let rR = memo(function(e) {
         if (s.id === i.id) return;
         s.timer && clearTimeout(s.timer);
       }
-      let e = setTimeout(function() {
+      let e = setTimeout(function () {
         try {
           let e = Date.now();
           let t = i.sourceChunks.length;
@@ -5308,7 +5308,7 @@ let rR = memo(function(e) {
     children: [jsx(rb, {
       conflictGroups,
       picks,
-      setAllPicks: function(e) {
+      setAllPicks: function (e) {
         choosePicks(conflictGroups.map(t => ({
           group: t,
           choice: e
@@ -5360,7 +5360,7 @@ let rR = memo(function(e) {
     }), !viewOnly && jsx("div", {
       className: "conflict_resolution--sidebarFooter--be5Kq conflict_resolution--sidebarBorder--6T7B7",
       children: pickedAllFromBranch && !hasNonConflictDisplayGroups ? jsx(IK, {
-        onClick: function(i) {
+        onClick: function (i) {
           if (!D) {
             L(!0);
             try {
@@ -5389,7 +5389,7 @@ let rR = memo(function(e) {
     })]
   });
 });
-let rN = memo(function(e) {
+let rN = memo(function (e) {
   let {
     conflictDetection,
     isConflictDetectionLoading,
@@ -5434,7 +5434,7 @@ let rN = memo(function(e) {
     if (!y) return;
     let e = "BranchPermissionsDebugger";
     window[e] = {
-      logPermissions: function() {
+      logPermissions: function () {
         console.log(x);
       }
     };
@@ -5491,7 +5491,7 @@ let rN = memo(function(e) {
           branchKey: e.branch?.key,
           branchName: e.branch?.name,
           branchPickGUIDs: M,
-          choosePicks: function(e) {
+          choosePicks: function (e) {
             let t = {};
             e.forEach(e => {
               t[e.group.id] = e.choice;
@@ -5501,7 +5501,7 @@ let rN = memo(function(e) {
               ...t
             }));
           },
-          completeResolution: function() {
+          completeResolution: function () {
             b_();
             p(!0);
           },
@@ -5557,7 +5557,7 @@ let rN = memo(function(e) {
       sourceKey: e.branch.source_file_key,
       styleKeyToFileKey: e.styleKeyToFileKey ?? {},
       styleKeyToLibraryKey: e.styleKeyToLibraryKey ?? {},
-      uncompleteResolution: function() {
+      uncompleteResolution: function () {
         b_();
         p(!1);
       },
@@ -5683,7 +5683,7 @@ function rF(e) {
   } = YH(sYL.SOURCE, e.branchKey, e.sourceKey, e.direction, t, i, e.sourceCheckpointKey ?? null);
   if (error) throw error;
   useEffect(() => {
-    (async function() {
+    (async function () {
       null !== _diffInfo.displayGroups && null !== diffInfo.displayGroups && (await _$$w(o, e.direction), h(!0));
     })();
   }, [_diffInfo.displayGroups, diffInfo.displayGroups, o, e.direction]);
@@ -5798,7 +5798,7 @@ function rM(e) {
   useEffect(() => {
     en && l === Kn.FROM_SOURCE && en.to_checkpoint_key === en.from_checkpoint_key && cb(Error("No changes from main"));
   }, [en, l]);
-  (function(e, t, i, n, a) {
+  (function (e, t, i, n, a) {
     let s = getFeatureFlags().internal_only_debug_tools ?? !1;
     let o = useContext(ss);
     useEffect(() => {
@@ -5976,7 +5976,7 @@ function rM(e) {
     })]
   });
 }
-export let $$rj0 = Ju(function(e) {
+export let $$rj0 = Ju(function (e) {
   _$$h(() => (sx("Branch Modal Opened", {
     branchKey: e.branchKey,
     sourceKey: e.sourceKey,
@@ -6006,4 +6006,4 @@ export let $$rj0 = Ju(function(e) {
     })
   });
 }, "BranchMergeModalWithDeferredConflicts", ZU.YES);
-export const $l = $$rj0; 
+export const $l = $$rj0;

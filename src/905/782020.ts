@@ -1,4 +1,4 @@
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { CWU, Z_n } from "../figma_app/763686";
 import { md } from "../figma_app/27355";
 import s from "../vendor/626715";
@@ -184,7 +184,7 @@ export function $$M18(e) {
     case Z_n.SLOT_CONTENT_ID:
       return;
     default:
-      xb(e, "Unknown VariableDataType when converting to VariableModeValue");
+      throwTypeError(e, "Unknown VariableDataType when converting to VariableModeValue");
   }
 }
 export const B9 = $$T0;

@@ -1,7 +1,7 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useMemo, useCallback, Fragment as _$$Fragment, useRef, useState, useContext } from "react";
 import { wA } from "../vendor/514228";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { lQ } from "../905/934246";
 import { d as _$$d } from "../905/49800";
 import { J } from "../905/270045";
@@ -246,7 +246,7 @@ export function $$z2(e) {
     case Z_n.SLOT_CONTENT_ID:
       return jsx(Fragment, {});
     default:
-      xb(_, "Unknown VariableDataType");
+      throwTypeError(_, "Unknown VariableDataType");
   }
 }
 function H({

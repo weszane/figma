@@ -1,5 +1,5 @@
 import { useCallback, useEffect } from "react";
-import { KF } from "../figma_app/465776";
+import { debug } from "../figma_app/465776";
 import { k } from "../905/749197";
 import { KjJ } from "../figma_app/763686";
 import { F0, rV, PA, nO } from "../figma_app/387100";
@@ -27,7 +27,7 @@ export function $$E9(e, t, r) {
     let o = a - 1;
     if (t <= 0) return 0;
     if (t >= e[a - 1].top + e[a - 1].height) return a - 1;
-    for (KF(s <= o, "binary search min <= max predicate failed"); s <= o;) if ((n = e[r = (s + o) / 2 | 0]).top + n.height < t) s = r + 1;else if (n.top > t) o = r - 1;else break;
+    for (debug(s <= o, "binary search min <= max predicate failed"); s <= o;) if ((n = e[r = (s + o) / 2 | 0]).top + n.height < t) s = r + 1;else if (n.top > t) o = r - 1;else break;
     return r;
   };
   let a = t / 2;
@@ -37,7 +37,7 @@ export function $$E9(e, t, r) {
 }
 function y(e, t, r) {
   let n = e.get(t);
-  if (KF(null != n, "node not found in scenegraph"), !(n.isExpanded || n.isTemporarilyExpanded) || 0 === n.uiOrderedChildren.length) return r[t];
+  if (debug(null != n, "node not found in scenegraph"), !(n.isExpanded || n.isTemporarilyExpanded) || 0 === n.uiOrderedChildren.length) return r[t];
   let a = r[t];
   for (let t of (n.fixedChildrenCount > 0 && (a += 2 * _$$n), n.uiOrderedChildren)) a += y(e, t, r);
   return a;
@@ -45,10 +45,10 @@ function y(e, t, r) {
 export function $$b11(e, t) {
   let r = [];
   let n = t.get(e);
-  for (KF(null != n, "node not found in scenegraph"); n && "CANVAS" !== n.type;) {
+  for (debug(null != n, "node not found in scenegraph"); n && "CANVAS" !== n.type;) {
     let e = n.guid;
     n = n.parentNode;
-    KF(null != n, "parent node not found in scenegraph");
+    debug(null != n, "parent node not found in scenegraph");
     let t = n.uiOrderedChildren.indexOf(e);
     r.push(t);
   }
@@ -57,7 +57,7 @@ export function $$b11(e, t) {
 }
 export function $$T13(e, t, r) {
   let n = e.reduce((e, r) => t.get(e.uiOrderedChildren[r]), t.get(r));
-  KF(null != n, "node from path is not found in scenegraph");
+  debug(null != n, "node from path is not found in scenegraph");
   return n.guid;
 }
 export function $$I0(e, t, r, n, i, a = !1) {
@@ -181,7 +181,7 @@ function P(e, t, r, n, a, l, d, c, u, p) {
     let r = function (e, t) {
       if ("CANVAS" === t.parent.type || "DOCUMENT" === t.parent.type || t.index !== t.parent.uiOrderedChildren.length || t.section === KjJ.FIXED) return t;
       let r = PA(e, t.parent.guid);
-      KF(null != r, "parent node not in scenegraph");
+      debug(null != r, "parent node not in scenegraph");
       let n = r.uiOrderedChildren.indexOf(t.parent.guid);
       return {
         parent: r,
@@ -199,7 +199,7 @@ function P(e, t, r, n, a, l, d, c, u, p) {
     let r = function (e, t) {
       if (0 === t.index) return t;
       let r = e.get(t.parent.uiOrderedChildren[t.index - 1]);
-      return (KF(null != r, "node not in scenegraph"), nO(r.type) && t.index !== t.parent.fixedChildrenCount && (r.isExpanded || r.isTemporarilyExpanded || !(r.uiOrderedChildren.length > 0))) ? {
+      return (debug(null != r, "node not in scenegraph"), nO(r.type) && t.index !== t.parent.fixedChildrenCount && (r.isExpanded || r.isTemporarilyExpanded || !(r.uiOrderedChildren.length > 0))) ? {
         parent: r,
         index: r.uiOrderedChildren.length,
         section: KjJ.SCROLLS
@@ -229,7 +229,7 @@ function D(e, t, r, n, a, l, d, c, u, _) {
   let m = r[a];
   let g = n[a];
   let f = PA(e, a);
-  KF(null != f, "parent not found");
+  debug(null != f, "parent not found");
   let E = f.uiOrderedChildren.indexOf(a);
   let b = nO(h.type) && !$$F15(c);
   let T = (i, a, s) => P(e, t, r, n, l, i, a, s, u, _);
@@ -252,7 +252,7 @@ function D(e, t, r, n, a, l, d, c, u, _) {
     let t = h;
     for (; "CANVAS" !== t.type;) {
       let r = null != t.parentGuid ? e.get(t.parentGuid) : null;
-      KF(null != r, "node not in scenegraph");
+      debug(null != r, "node not in scenegraph");
       t = r;
     }
     return T(t, t.uiOrderedChildren.length, "before");
@@ -285,7 +285,7 @@ export function $$k6(e, t, r, n, a, o, l, d, c, u, _) {
       {
         var h;
         let l = e.get(a.parentGuid);
-        KF(null != l, "parent node not in scenegraph");
+        debug(null != l, "parent node not in scenegraph");
         h = a.type === KjJ.FIXED ? 0 : l.fixedChildrenCount;
         return P(e, t, r, n, o, l, h, "before", c, u);
       }

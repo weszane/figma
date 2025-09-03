@@ -1,4 +1,4 @@
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { daH } from "../figma_app/763686";
 import { YU } from "../figma_app/191804";
 import { t } from "../905/303541";
@@ -116,7 +116,7 @@ export let $$m0 = {
       case "DUOTONE_LIGHT":
         return t("whiteboard.code_blocks.theme.duotone_light");
       default:
-        return xb(e);
+        return throwTypeError(e);
     }
   }
 };

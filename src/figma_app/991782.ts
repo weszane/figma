@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { memo, useMemo, useRef, useState, useEffect, useCallback, Suspense } from "react";
-import { vA } from "../figma_app/465776";
+import { assert } from "../figma_app/465776";
 import { $n } from "../905/521428";
 import { K } from "../905/443068";
 import { bL, l9, mc, c$, wv } from "../905/493196";
@@ -154,7 +154,7 @@ function W({
     icon
   } = e[t.category];
   let d = t.icon ?? icon;
-  vA(!!d, "icon is required");
+  assert(!!d, "icon is required");
   return jsxs("div", {
     className: "lint_error_modal--lintErrorsItemRow--bwpl0",
     children: [jsxs("div", {

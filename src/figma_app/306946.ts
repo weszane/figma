@@ -244,7 +244,7 @@ let $$C9 = z.object({
   updated_at: z.string()
 }).optional();
 let w = b.and(z.object({
-  resource_type: z.$$enum(["design_template", "figjam_template", "slide_template", "cooper_template_file", "figmake_template", "site_template"])
+  resource_type: z.enum(["design_template", "figjam_template", "slide_template", "cooper_template_file", "figmake_template", "site_template"])
 }));
 let $$O0 = z.object({
   recommended_resources: z.array(w),

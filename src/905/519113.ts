@@ -98,7 +98,7 @@ import { B as _$$B3 } from "../905/714743";
 import { $8, Ni, md as _$$md, i4, $j, nw, Np } from "../905/737988";
 import { A as _$$A } from "../1617/316388";
 import { T as _$$T } from "../905/485734";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { K as _$$K } from "../905/443068";
 import { A as _$$A2 } from "../905/24328";
 import { Z as _$$Z } from "../905/279476";
@@ -860,7 +860,7 @@ function tF({
       });
       break;
     default:
-      xb(e);
+      throwTypeError(e);
   }
   let W = (e.type === PW.STATE_GROUP || e.type === PW.COMPONENT) && zE(e);
   let K = useMemo(() => M && e.isPublishable ? "library_item_row--libraryItemRow--epEU4 library_item_row--libraryItemRowBase--2ciyc" : "library_item_row--libraryItemRowDisabled--1ZYNB library_item_row--libraryItemRow--epEU4 library_item_row--libraryItemRowBase--2ciyc", [e, M]);

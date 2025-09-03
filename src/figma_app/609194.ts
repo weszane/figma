@@ -1,4 +1,4 @@
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { t as _$$t } from "../905/303541";
 import { r3 } from "../figma_app/599327";
 import { FUserRoleType } from "../figma_app/191312";
@@ -43,7 +43,7 @@ export function $$c5(e, t) {
     case Od.UPGRADE_DATE:
       return _$$t("members_table.column_header.upgrade_date");
     default:
-      xb(e);
+      throwTypeError(e);
   }
 }
 export function $$u0(e, t) {

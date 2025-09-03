@@ -1,6 +1,6 @@
 import { useContext, useMemo } from "react";
 import { d4 } from "../vendor/514228";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { pi } from "../figma_app/314264";
 import { q5, _G } from "../figma_app/516028";
 import { I as _$$I } from "../905/342732";
@@ -76,7 +76,7 @@ export function $$m0({
         case PW.MANAGED_STRING:
           return;
         default:
-          xb(e, "Can't get asset type for logging");
+          throwTypeError(e, "Can't get asset type for logging");
       }
     }(r),
     sectionPosition: m,

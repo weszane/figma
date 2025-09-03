@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useState, useEffect, createContext, useContext, useRef, useCallback, useMemo, useId } from "react";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { useHandleKeyboardEvent, useHandleInputEvent, generateRecordingKey } from "../figma_app/878298";
 import { xH } from "../905/63728";
 import { Ay } from "../figma_app/778880";
@@ -85,7 +85,7 @@ let g = (e, t) => {
     case Sn.FOR_TESTING:
       return !0;
     default:
-      xb(e);
+      throwTypeError(e);
   }
 };
 export function $$f5({
@@ -191,7 +191,7 @@ function b(e, t, r, n) {
         case xH.SHIFT:
           return t.shiftKey;
         default:
-          xb(e);
+          throwTypeError(e);
       }
     }(t, e)))) {
       r(e, {

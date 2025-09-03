@@ -1,11 +1,11 @@
 import { YV, td } from "../figma_app/181241";
 import { z } from "../905/239603";
 import { n as _$$n } from "../905/347702";
-let a = z.$$enum(["color", "float"]);
-let s = z.$$enum(["LOCAL", "LIBRARY", "SUBSCRIBED"]);
-z.$$enum(["PROPS_PANEL", "LINTER"]);
-let o = z.$$enum(["FILL", "STROKE", "STACK_PADDING", "STACK_SPACING", "CORNER_RADIUS", "FONT_SIZE", "LINE_HEIGHT", "LETTER_SPACING", "MULTI", "UNKNOWN"]);
-let l = z.$$enum(["FRAME", "TEXT", "VECTOR", "INSTANCE", "SYMBOL", "ICON-LIKE", "OTHER"]);
+let a = z.enum(["color", "float"]);
+let s = z.enum(["LOCAL", "LIBRARY", "SUBSCRIBED"]);
+z.enum(["PROPS_PANEL", "LINTER"]);
+let o = z.enum(["FILL", "STROKE", "STACK_PADDING", "STACK_SPACING", "CORNER_RADIUS", "FONT_SIZE", "LINE_HEIGHT", "LETTER_SPACING", "MULTI", "UNKNOWN"]);
+let l = z.enum(["FRAME", "TEXT", "VECTOR", "INSTANCE", "SYMBOL", "ICON-LIKE", "OTHER"]);
 let d = z.object({
   r: z.number(),
   g: z.number(),

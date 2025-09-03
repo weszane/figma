@@ -1,4 +1,4 @@
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { FPlanNameType, FOrganizationLevelType } from "../figma_app/191312";
 import { s$, i5, LC } from "../figma_app/421473";
 let s = {
@@ -71,7 +71,7 @@ function l(e, t, r = window.INITIAL_OPTIONS.cluster_name) {
       if (i === i5.ELIGIBLE) return e.aiFeaturesEnabled ? LC.ENABLED : LC.DISABLED;
       return LC.DISABLED;
     default:
-      xb(t, "Unknown plan feature");
+      throwTypeError(t, "Unknown plan feature");
   }
 }
 export function $$d2(e) {
@@ -102,7 +102,7 @@ export function $$c3(e, t) {
     case FOrganizationLevelType.ORG:
       return t.org;
     default:
-      xb(e);
+      throwTypeError(e);
   }
 }
 export function $$u1(e, t) {

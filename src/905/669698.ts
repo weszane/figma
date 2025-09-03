@@ -1,4 +1,4 @@
-import { KF } from "../figma_app/465776";
+import { debug } from "../figma_app/465776";
 import { getFeatureFlags } from "../905/601108";
 import { EvaluationReason } from "../vendor/625526";
 import { sx } from "../905/449184";
@@ -70,7 +70,7 @@ let _ = class e {
   }
   static typeGuardBoolean(e) {
     let t = "boolean" == typeof e;
-    t || KF(!1, "Expected boolean, got " + typeof e);
+    t || debug(!1, "Expected boolean, got " + typeof e);
     return t;
   }
   static getDynamicConfigBoolean(e, t, i, n = this.DefaultSourceLoggingString) {
@@ -85,7 +85,7 @@ let _ = class e {
   }
   static typeGuardNumber(e) {
     let t = "number" == typeof e;
-    t || KF(!1, "Expected number, got " + typeof e);
+    t || debug(!1, "Expected number, got " + typeof e);
     return t;
   }
   static getDynamicConfigNumber(e, t, i, n = this.DefaultSourceLoggingString) {
@@ -100,7 +100,7 @@ let _ = class e {
   }
   static typeGuardString(e) {
     let t = "string" == typeof e;
-    t || KF(!1, "Expected string, got " + typeof e);
+    t || debug(!1, "Expected string, got " + typeof e);
     return t;
   }
   static getDynamicConfigString(e, t, i, n = this.DefaultSourceLoggingString) {

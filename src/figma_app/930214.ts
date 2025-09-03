@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { tB, ll, U6, cW, ZT, $1 } from "../figma_app/844435";
 import { Ro } from "../figma_app/564095";
 import { Dd } from "../figma_app/599979";
@@ -150,7 +150,7 @@ export function $$T8(e) {
         return !!publishedExtension && !!t && (Ro(publishedExtension, t) || Dd(publishedExtension, t)) && !localPublishedExtension;
       }(e, t);
     default:
-      xb(e);
+      throwTypeError(e);
   }
 }
 export function $$I6(e, t) {

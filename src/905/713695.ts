@@ -10,7 +10,7 @@ import { AT, q6 } from "../905/155604";
 import { _ as _$$_ } from "../vendor/413384";
 import { wm } from "../vendor/284502";
 import { atomWithObservable } from "../vendor/812047";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { Qw } from "../905/989992";
 import { jM, ht, Ay } from "../vendor/159563";
 import { g as _$$g } from "../905/880308";
@@ -71,7 +71,7 @@ async function g() {
 async function f(e, t, i, n = {}, r) {
   let a;
   if ("write" in i) {
-    let s = e.sub(i, () => { });
+    let s = e.sub(i, () => {});
     let o = n.policy || "cacheFirst";
     let l = !!r?.enabled;
     "networkOnly" === o || l ? await t.fetchQuery({
@@ -348,7 +348,7 @@ function L(e, t, i, r, a) {
   let p = new Map();
   let m = new Map();
   let h = e => {
-    let [n, s] = function(e, t) {
+    let [n, s] = function (e, t) {
       t.zodSchema.safeParse(e).success;
       let {
         entities,
@@ -357,7 +357,7 @@ function L(e, t, i, r, a) {
       return [entities, result];
     }(e, t);
     r.set(d, s);
-    (function(e, t, i, n, r) {
+    (function (e, t, i, n, r) {
       for (let a in e) {
         let s = e[a];
         if (!s) continue;
@@ -370,10 +370,10 @@ function L(e, t, i, r, a) {
     })(F(s, t.normalizrSchema, i, r, {
       hydrate: !1
     }), m, i, r, u);
-    (function(e, t) {
+    (function (e, t) {
       for (let i in e) t[i].remoteUpdate(e[i]);
     })(n, i);
-    a && function(e, t, i) {
+    a && function (e, t, i) {
       for (let n in e) {
         if (!e[n]) continue;
         let r = i[n];
@@ -420,7 +420,7 @@ function F(e, t, i, n, {
     }
   } else if (t instanceof wQ.Array) for (let s of e) F(s, t.schema, i, n, {
     hydrate: r
-  }, a); else if (t instanceof wQ.Object) for (let s in t.schema) F(e[s], t.schema[s], i, n, {
+  }, a);else if (t instanceof wQ.Object) for (let s in t.schema) F(e[s], t.schema[s], i, n, {
     hydrate: r
   }, a);
   return a;
@@ -505,13 +505,13 @@ class z {
     var d;
     this.extrasProvider = t;
     this.getQueryContext = () => this.queryProviderContext;
-    this.Query = (r = this.extrasProvider, a = this.getQueryContext, e => function(e, t, i) {
+    this.Query = (r = this.extrasProvider, a = this.getQueryContext, e => function (e, t, i) {
       if (e.key && i().uniqueQueryKeys.add(e.key), void 0 !== e.refetchIntervalMs && e.refetchIntervalMs < 1e3) throw Error(`\u26D4\uFE0F Whoa there! You're trying to poll a query every ${e.refetchIntervalMs}ms -- that's probably much faster than you actually want. Please use a value of at least 1000ms, or reach out to #a-frontend-platform if you have a different use case.`);
       let r = Iz(a => {
         let s = t();
         let o = [++E];
         let d = !e.enabled || e.enabled(a);
-        let c = new _$$W(() => zl.sub(w, () => { }));
+        let c = new _$$W(() => zl.sub(w, () => {}));
         let m = async () => {
           Lg() || (await _$$p());
           let t = e.fetch(a, s);
@@ -525,7 +525,7 @@ class z {
           });
           return t;
         };
-        let [, h] = function(e, t = e => e(l)) {
+        let [, h] = function (e, t = e => e(l)) {
           return b(e, t, (e, t) => new _$$$(e, t), async (e, t, i) => {
             if ("refetch" === e.type) {
               await _$$p();
@@ -533,7 +533,7 @@ class z {
                 cancelRefetch: !1
               });
             }
-            xb(e.type);
+            throwTypeError(e.type);
           });
         }(t => ({
           queryKey: o,
@@ -593,7 +593,7 @@ class z {
             args: a
           }, s) : n;
         });
-        let w = LJ(S, e => function(e, t, i, n) {
+        let w = LJ(S, e => function (e, t, i, n) {
           let r = e(i);
           if (!n.enabled) return Qw.disabledSuspendable(n.suspenseContext);
           let a = e(t);
@@ -606,7 +606,7 @@ class z {
               if (void 0 === a) return Qw.loadingSuspendable(n.suspenseContext);
               return Qw.loadedSuspendable(a, r.error || [], n.suspenseContext);
             default:
-              xb(r);
+              throwTypeError(r);
           }
         }(e, S, h, {
           enabled: d,
@@ -620,12 +620,12 @@ class z {
       }, N7);
       return e => (i().registerQueryAtomFamily(r), r(e));
     }(e, r, a));
-    this.PaginatedQuery = (s = this.extrasProvider, o = this.getQueryContext, e => function(e, t, i) {
+    this.PaginatedQuery = (s = this.extrasProvider, o = this.getQueryContext, e => function (e, t, i) {
       let r = Iz(r => {
         let a = t();
         let s = [++E];
         let o = !e.enabled || e.enabled(r);
-        let [, d] = function(e, t = e => e(l)) {
+        let [, d] = function (e, t = e => e(l)) {
           return b(e, t, (e, t) => new _$$z(e, t), (e, t, i, n) => {
             if ("refetch" === e.type) return t.refetch({
               refetchPage: (e, t) => 0 === t
@@ -646,7 +646,7 @@ class z {
               });
               return t.fetchPreviousPage(i);
             }
-            xb(e);
+            throwTypeError(e);
           });
         }(t => ({
           queryKey: s,
@@ -673,7 +673,7 @@ class z {
         let c = [];
         let m = eU(e => {
           let t = e(d).data?.pages || [];
-          let i = t?.map((e, t) => (c[t] || (c[t] = eU(e => e(d).data?.pages[t]?.data, () => { })), c[t]));
+          let i = t?.map((e, t) => (c[t] || (c[t] = eU(e => e(d).data?.pages[t]?.data, () => {})), c[t]));
           c.length > t.length && c.splice(t.length, c.length - t.length);
           return i;
         }, (e, t, n) => {
@@ -695,7 +695,7 @@ class z {
               if (i) zl.set(i, {
                 type: "REMOTE_UPDATE",
                 data: e
-              }); else throw Error(`No pageDataAtom found for index ${t}`);
+              });else throw Error(`No pageDataAtom found for index ${t}`);
             });
           });
         }
@@ -729,7 +729,7 @@ class z {
             nextPage: n?.[t]?.nextPage,
             prevPage: n?.[t]?.prevPage
           }));
-          return e.joinPages ? e.joinPages(r) : function(e) {
+          return e.joinPages ? e.joinPages(r) : function (e) {
             let t = [];
             e.forEach(e => {
               if (!Array.isArray(e.data)) throw Error("Expected array data in page");
@@ -749,7 +749,7 @@ class z {
             args: r
           }, a) : n;
         });
-        return Object.assign(LJ(A, e => function(e, t, i, n) {
+        return Object.assign(LJ(A, e => function (e, t, i, n) {
           let r = e(i);
           if (!n.enabled) return Qw.Paginated.disabled();
           let a = e(t);
@@ -777,10 +777,10 @@ class z {
       }, N7);
       return e => r(e);
     }(e, s, o));
-    this.Mutation = function(e, t) {
+    this.Mutation = function (e, t) {
       return i => {
         let n = [++E];
-        let [r, a] = function(e, t = e => e(l)) {
+        let [r, a] = function (e, t = e => e(l)) {
           return b(e, t, (e, t) => new _$$_(e, t), (e, t) => t.mutate(...e));
         }(r => ({
           mutationKey: n,
@@ -807,14 +807,14 @@ class z {
       };
     }(this.extrasProvider, this.getQueryContext);
     this.ObjectQuery = (d = this.getQueryContext, e => Iz(t => {
-      if (!t) return eU(Qw.disabled(), () => { });
+      if (!t) return eU(Qw.disabled(), () => {});
       let i = yu(e.atom(t), () => {
         let i = d();
         i.atomStore.get(e.atom(t)) === F5 && h(i.atomStore, e, t, {
           policy: "networkOnly"
         }, i.gremlinConfig);
       });
-      return eU(n => function(e, t, i) {
+      return eU(n => function (e, t, i) {
         switch (t) {
           case F5:
             return Qw.loading();
@@ -835,7 +835,7 @@ class z {
     this.gremlinConfig = void 0;
     this.getMutation = e => t => this.queryProviderContext.atomStore.get(e).mutate(t);
     this.fetch = (e, t = {}) => f(this.getQueryContext().atomStore, this.queryProviderContext.queryClient, e, t);
-    this.getCachedData = e => function(e, t) {
+    this.getCachedData = e => function (e, t) {
       let i = e.get(t);
       return "loaded" !== i.status ? null : i.data;
     }(this.getQueryContext().atomStore, e);
@@ -853,11 +853,11 @@ class z {
         let n = this.getQueryContext().atomStore;
         return await h(n, i, e, t, this.gremlinConfig);
       };
-      this[`readCached${t}`] = e => function(e, t, i) {
+      this[`readCached${t}`] = e => function (e, t, i) {
         let n = e.get(t.atom(i));
         return n === F5 || n === ET ? null : n;
       }(this.getQueryContext().atomStore, i, e);
-      this[`useCached${t}`] = function(e) {
+      this[`useCached${t}`] = function (e) {
         return md(i.atom(e));
       };
     }
@@ -1008,9 +1008,9 @@ let el = {
   Folder: _$$Y(() => debugState, () => V$),
   Team: _$$p2(() => debugState, () => V$)
 };
-let ed = function(e, t = () => ({}), i) {
+let ed = function (e, t = () => ({}), i) {
   return new z(e, t, i);
-}(zl, function() {
+}(zl, function () {
   return {
     atomStore: zl,
     xr: XHR,
@@ -1037,7 +1037,7 @@ let ed = function(e, t = () => ({}), i) {
 })(el));
 ed.setMetricsReporter(et);
 export let $$ec0 = Object.assign(ed, {
-  useFile: e => function(e, t) {
+  useFile: e => function (e, t) {
     let i = t.useCachedFile(e || "");
     useEffect(() => {
       e && F5;

@@ -1,16 +1,16 @@
-import { vA, B1 } from "../figma_app/465776";
+import { assert, assertNotNullish } from "../figma_app/465776";
 import { xOL } from "../figma_app/763686";
 import { hY } from "../figma_app/349969";
 export function $$s0(e) {
   let t = e.getCurrentPage();
-  vA(!!t, "expected currentPage to exist");
+  assert(!!t, "expected currentPage to exist");
   let r = t.prototypeDevice;
   return r ? r.presetIdentifier : null;
 }
 export function $$o3(e, t, r) {
   let i = t.x / t.y;
   let a = e.x / e.y;
-  vA(.01 > Math.abs(i - a), `Expected ${i} \u2248 ${a}`);
+  assert(.01 > Math.abs(i - a), `Expected ${i} \u2248 ${a}`);
   let s = e.x / t.x;
   return {
     x: r.x * s,
@@ -26,7 +26,7 @@ export function $$l1(e, t, r) {
 }
 let d = e => {
   let t = hY[e];
-  B1(t, "getDeviceImageIdealSize must take in a valid presetIdentifier");
+  assertNotNullish(t, "getDeviceImageIdealSize must take in a valid presetIdentifier");
   return {
     x: t.imageSize.x / t.scaleFactor,
     y: t.imageSize.y / t.scaleFactor
@@ -60,8 +60,8 @@ export function $$c4(e, t) {
 export function $$u2(e, t) {
   let r = hY[e];
   let i = hY[t];
-  B1(r, "expected device1 to exist");
-  B1(i, "expected device2 to exist");
+  assertNotNullish(r, "expected device1 to exist");
+  assertNotNullish(i, "expected device2 to exist");
   return r.deviceName === i.deviceName && r.imageSize.x === i.imageSize.x && r.imageSize.y === i.imageSize.y;
 }
 export const $W = $$s0;

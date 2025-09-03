@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { Component, useMemo, useCallback, useRef, useEffect } from "react";
 import { Ng, d4, wA } from "../vendor/514228";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { c2 } from "../905/382883";
 import { Ay } from "../figma_app/778880";
 import { r } from "../905/398386";
@@ -62,7 +62,7 @@ import { Y as _$$Y } from "../905/720957";
 import { P as _$$P } from "../905/347284";
 import { ky as _$$ky } from "../figma_app/925970";
 import { Ju } from "../905/102752";
-import { d_ } from "../figma_app/918700";
+import { utilityNoop } from "../figma_app/918700";
 import { s as _$$s } from "../figma_app/576667";
 import { n as _$$n } from "../905/914485";
 import { j as _$$j } from "../905/294703";
@@ -127,8 +127,8 @@ class U extends Component {
         e = Vg;
         break;
       default:
-        xb(this.props.searchModelType);
-    } else xb(this.props.viewMode);
+        throwTypeError(this.props.searchModelType);
+    } else throwTypeError(this.props.viewMode);
     e += this.props.isLoggedIn ? ` ${Vz}` : "";
     let t = this.props.didSucceed && 0 === this.props.searchResults.length;
     return jsx(_$$x, {
@@ -333,7 +333,7 @@ class V extends Component {
         case t2.PROTOTYPE:
           return !1;
         default:
-          xb(t.filters.fileType);
+          throwTypeError(t.filters.fileType);
       }
     }) : e;
   }
@@ -764,7 +764,7 @@ let eK = Ju(function () {
   let _ = t.data.width ? {
     width: `${t.data.width - 2 * ez}px`
   } : void 0;
-  return jsx(d_, {
+  return jsx(utilityNoop, {
     absolutePosition: {
       top: t.data.top,
       left: t.data.left

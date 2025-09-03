@@ -1,5 +1,5 @@
 import _require from "../2824/40443";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { getFeatureFlags } from "../905/601108";
 import { x } from "../905/392802";
 import { F } from "../905/672930";
@@ -174,7 +174,7 @@ function v(e) {
               A(t.data.messageId, t.data.reactCode);
               break;
             default:
-              xb(t.data);
+              throwTypeError(t.data);
           }
         });
       }

@@ -1,4 +1,4 @@
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { k } from "../905/651849";
 import { y } from "../905/958284";
 import { r as _$$r } from "../905/121508";
@@ -12,7 +12,7 @@ let o = e => {
     case "disabled":
       return !1;
     default:
-      xb(e);
+      throwTypeError(e);
   }
 };
 export function $$l0(e, t) {
@@ -83,7 +83,7 @@ export function $$l0(e, t) {
           case "lifecycle_check_failed":
             return `The overlay ${y(e.properties.overlayId)} failed the lifecycle check: ${e.properties.description}`;
           default:
-            xb(e);
+            throwTypeError(e);
         }
       }(e)
     };

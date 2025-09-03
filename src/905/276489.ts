@@ -1,5 +1,5 @@
 import { createElement } from "react";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { debugState } from "../905/407919";
 import { t as _$$t } from "../905/303541";
 import { F } from "../905/302958";
@@ -67,7 +67,7 @@ export const q = function e(t, i) {
               hideForQuickCommand: e
             };
           default:
-            return xb(t.name);
+            return throwTypeError(t.name);
         }
       }
     case "separator":
@@ -82,7 +82,7 @@ export const q = function e(t, i) {
     case "submenu":
       {
         let n = [];
-        t.submenu.forEach((t) => {
+        t.submenu.forEach(t => {
           n.push(e(t, i));
         });
         return {
@@ -94,6 +94,6 @@ export const q = function e(t, i) {
         };
       }
     default:
-      xb(t);
+      throwTypeError(t);
   }
 };

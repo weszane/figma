@@ -35,7 +35,7 @@ import { p as _$$p } from "../905/42189";
 import { e as _$$e } from "../1291/265452";
 import { ik, mk, cX, hY } from "../figma_app/920333";
 import { ZA } from "../1291/533467";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { md } from "../figma_app/27355";
 import { lW } from "../figma_app/850075";
 import { ow } from "../figma_app/976749";
@@ -166,7 +166,7 @@ let ee = e => {
     case rp.THIN_3_COL:
       throw Error("THIN_3_COL layout not implemented for library items compact view");
     default:
-      xb(e);
+      throwTypeError(e);
   }
 };
 let ei = "libraries_tab--libraryPadding--Dwvws";

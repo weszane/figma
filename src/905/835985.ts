@@ -1,4 +1,4 @@
-import { vA, xb } from "../figma_app/465776";
+import { assert, throwTypeError } from "../figma_app/465776";
 import { c2 } from "../905/382883";
 import { m as _$$m } from "../905/18160";
 import { HzA, ryE } from "../figma_app/763686";
@@ -39,13 +39,7 @@ let c = new class {
 function f(e, t) {
   for (let i of $U) e.hasOwnProperty(i) && t(i, e[i]);
 }
-let _ = [
-"layoutMode",
-"wrap",
-"componentId",
-"componentProps",
-"nestedInstancesVisibility"];
-
+let _ = ["layoutMode", "wrap", "componentId", "componentProps", "nestedInstancesVisibility"];
 let A = new Set(_);
 let y = ["minWidth", "minHeight", "maxWidth", "maxHeight"];
 let b = new Set(y);
@@ -64,19 +58,14 @@ export function $$v0({
   let f = function (e, t, i) {
     if (!e) return null;
     let r = t.children[0];
-    return t.children.length > 1 ?
-    {
+    return t.children.length > 1 ? {
       type: "more_than_one_root"
-    } :
-    !r && e.rootNode ?
-    {
+    } : !r && e.rootNode ? {
       type: "no_root"
-    } :
-    function e(t, r) {
-      vA(!!r);
+    } : function e(t, r) {
+      assert(!!r);
       let a = t.getType();
-      if (
-      !function (e, t) {
+      if (!function (e, t) {
         if (!t) return !1;
         switch (e) {
           case "span":
@@ -99,11 +88,9 @@ export function $$v0({
           case "instance":
             return "INSTANCE" === t;
           default:
-            xb(e);
+            throwTypeError(e);
         }
-      }(r.type, a))
-
-      return {
+      }(r.type, a)) return {
         type: "node_type_mismatch",
         nodeID: t.getID(),
         expectedType: r.type,
@@ -117,13 +104,11 @@ export function $$v0({
           let i = t.style.fontName ?? null;
           if (1 === t.ranges.length) {
             let e = t.ranges[0];
-            if (0 === e.start && e.end === t.characters.length)
-            return e.style.fontName ?? i;
+            if (0 === e.start && e.end === t.characters.length) return e.style.fontName ?? i;
           }
           return i;
         }(r);
-        if (i && (i.family !== e.family || i.style !== e.style))
-        return {
+        if (i && (i.family !== e.family || i.style !== e.style)) return {
           type: "node_font_mismatch",
           nodeID: t.getID(),
           expectedFont: i,
@@ -133,8 +118,7 @@ export function $$v0({
       if ("frame" === r.type || "autolayout" === r.type) {
         let n = MI(r.renderMetaData.children ?? [], i).filter(Boolean);
         let a = t.children;
-        if (n.length !== a.length)
-        return {
+        if (n.length !== a.length) return {
           type: "child_count_mismatch",
           nodeID: t.getID()
         };
@@ -148,31 +132,23 @@ export function $$v0({
   }(i, a.getSceneNodeAdapter(g.guid), a);
   if (f) {
     i = null;
-    let t =
-    "Scene has diverged from the expected state. " + (
-    "figma" === T() ?
-    "This is either because you have manually edited widget sublayers in Figma, or because of a bug in the widget. If the latter, your render function is likely non-deterministic. " :
-    "This is likely a bug in the widget. Your render function is likely non-deterministic.") +
-    "Here is more info: \n\n";
-    let r = new o9(
-      t +
-      function (e) {
-        switch (e.type) {
-          case "more_than_one_root":
-            return "Widget on canvas has more children at the root than expected";
-          case "no_root":
-            return "Widget on canvas is missing a child at the root";
-          case "node_type_mismatch":
-            return `Child of a widget node doesn't match the expected type from render. Expected ${e.expectedType} but got ${e.actualType}. Node ID: ${e.nodeID}`;
-          case "node_font_mismatch":
-            return `Child of a widget node doesn't match the expected font from render. Expected ${JSON.stringify(e.expectedFont)} but got ${JSON.stringify(e.actualFont)}. Node ID: ${e.nodeID}`;
-          case "child_count_mismatch":
-            return `Widget sub-node has different number of children than expected. Node ID: ${e.nodeID}`;
-          default:
-            xb(e);
-        }
-      }(f)
-    );
+    let t = "Scene has diverged from the expected state. " + ("figma" === T() ? "This is either because you have manually edited widget sublayers in Figma, or because of a bug in the widget. If the latter, your render function is likely non-deterministic. " : "This is likely a bug in the widget. Your render function is likely non-deterministic.") + "Here is more info: \n\n";
+    let r = new o9(t + function (e) {
+      switch (e.type) {
+        case "more_than_one_root":
+          return "Widget on canvas has more children at the root than expected";
+        case "no_root":
+          return "Widget on canvas is missing a child at the root";
+        case "node_type_mismatch":
+          return `Child of a widget node doesn't match the expected type from render. Expected ${e.expectedType} but got ${e.actualType}. Node ID: ${e.nodeID}`;
+        case "node_font_mismatch":
+          return `Child of a widget node doesn't match the expected font from render. Expected ${JSON.stringify(e.expectedFont)} but got ${JSON.stringify(e.actualFont)}. Node ID: ${e.nodeID}`;
+        case "child_count_mismatch":
+          return `Widget sub-node has different number of children than expected. Node ID: ${e.nodeID}`;
+        default:
+          throwTypeError(e);
+      }
+    }(f));
     let a = !g.widgetVersionId;
     console.warn(r);
     widgetErrorTracker.trackSceneDivergenceError(r, {
@@ -183,14 +159,11 @@ export function $$v0({
       widgetName: g.name
     });
   }
-  if (!i)
-  for (; g.reversedChildrenGuids.length;) {
+  if (!i) for (; g.reversedChildrenGuids.length;) {
     let e = getSceneGraphInstance().get(g.reversedChildrenGuids[0]);
     e?.removeSelfAndChildren();
   }
-  let _ = g.reversedChildrenGuids[0] ?
-  a.getSceneNodeAdapter(g.reversedChildrenGuids[0]) :
-  null;
+  let _ = g.reversedChildrenGuids[0] ? a.getSceneNodeAdapter(g.reversedChildrenGuids[0]) : null;
   c.startReconciliation(g.widgetId);
   let A = new Set();
   let y = new Set();
@@ -211,20 +184,15 @@ export function $$v0({
     inputNodes: A,
     textNodes: y
   });
-  "NONE" === g.stackMode && (
-  g.stackMode = "VERTICAL",
-  g.stackPrimarySizing = "RESIZE_TO_FIT_WITH_IMPLICIT_SIZE",
-  g.stackCounterSizing = "RESIZE_TO_FIT_WITH_IMPLICIT_SIZE");
+  "NONE" === g.stackMode && (g.stackMode = "VERTICAL", g.stackPrimarySizing = "RESIZE_TO_FIT_WITH_IMPLICIT_SIZE", g.stackCounterSizing = "RESIZE_TO_FIT_WITH_IMPLICIT_SIZE");
   E({
     inputNodes: A,
     textNodes: y
   });
-  g.setWidgetPropertyMenuItems(
-    r.map((e) => ({
-      ...e,
-      itemType: e.itemType.toUpperCase().replace("-", "_")
-    }))
-  );
+  g.setWidgetPropertyMenuItems(r.map(e => ({
+    ...e,
+    itemType: e.itemType.toUpperCase().replace("-", "_")
+  })));
   c.logAndClear();
   g.isForcedStickable = o?.isStickable ?? !1;
   g.shouldHideCursorsOnWidgetHover = d ?? !1;
@@ -246,8 +214,7 @@ export function $$I1({
   let c = new Set();
   let u = t.getSceneNodeAdapter(i);
   let p = a ? t.getSceneNodeAdapter(a) : null;
-  let m = l7.plugin(l ?? "widget-render", () =>
-  S({
+  let m = l7.plugin(l ?? "widget-render", () => S({
     widgetNodeID: "",
     oldVNode: r ?? null,
     newVNode: n,
@@ -262,21 +229,21 @@ export function $$I1({
     tracking: HzA.TRACK,
     inputNodes: d,
     textNodes: c
-  })
-  );
+  }));
   E({
     inputNodes: d,
     textNodes: c
   });
   return m;
 }
-function E({ inputNodes: e, textNodes: t }) {
-  for (let t of e)
-  l7.plugin("adjust-widget-input-node", () => {
+function E({
+  inputNodes: e,
+  textNodes: t
+}) {
+  for (let t of e) l7.plugin("adjust-widget-input-node", () => {
     ryE.adjustWidgetInputNodeAfterCreation(t);
   });
-  for (let e of t)
-  l7.plugin("adjust-widget-text-node", () => {
+  for (let e of t) l7.plugin("adjust-widget-text-node", () => {
     ryE.adjustTextNodeAfterCreation(e);
   });
 }
@@ -314,42 +281,29 @@ function S({
     n?.remove();
     return null;
   }
-  if (
-  !t && i && (n = O()),
-  !i || (
-  (P = t) && (
-  P.type !== i.type ||
-  P?.renderMetaData.key !== i.renderMetaData.key ||
-  _L(i) &&
-  i.renderMetaData.direction !== P.renderMetaData.direction) && (
-  t = null, n?.remove(), n = O()),
-  n || (n = O()),
-  function (e, t, i) {
+  if (!t && i && (n = O()), !i || ((P = t) && (P.type !== i.type || P?.renderMetaData.key !== i.renderMetaData.key || _L(i) && i.renderMetaData.direction !== P.renderMetaData.direction) && (t = null, n?.remove(), n = O()), n || (n = O()), function (e, t, i) {
     if ("inputframe" !== e.type) return !1;
     let n = t.children;
     if (!n || n.length < 2) return !1;
     let r = n[1];
     return i.getMultiplayerSelection().has(r.getID());
-  }(i, n, I)))
-
-  return null;
+  }(i, n, I))) return null;
   c.incrementComponent(i.type);
-  i.renderMetaData.src !== t?.renderMetaData.src &&
-  "svg" === i.type &&
-  t?.type === "svg" && (
-  t = null, n.remove(), n = O());
+  i.renderMetaData.src !== t?.renderMetaData.src && "svg" === i.type && t?.type === "svg" && (t = null, n.remove(), n = O());
   let D = t ? x(t) : [];
   let L = x(i);
   c2(D, L) || n.writeProperty("widgetEvents", L);
-  (function ({ figmaNode: e, newVNode: t, oldVNode: i, imageInfoMap: n }) {
+  (function ({
+    figmaNode: e,
+    newVNode: t,
+    oldVNode: i,
+    imageInfoMap: n
+  }) {
     let r = i?.renderMetaData.fillSrc;
     let a = t.renderMetaData.fillSrc;
     if (r && w(i, n.get(r)), a && w(t, n.get(a)), a) {
       let s = n.get(a);
-      s ?
-      t.props.fills[0].imageHash = s.hash :
-      t.props.fills = [
-      {
+      s ? t.props.fills[0].imageHash = s.hash : t.props.fills = [{
         type: "SOLID",
         color: {
           r: 1,
@@ -357,13 +311,7 @@ function S({
           b: 1
         }
       }];
-
-      i &&
-      r === a && (
-      s && e.getImageFillHashOrNull() === s.hash ?
-      i.props.fills[0].imageHash = s.hash :
-      i.props.fills = [
-      {
+      i && r === a && (s && e.getImageFillHashOrNull() === s.hash ? i.props.fills[0].imageHash = s.hash : i.props.fills = [{
         type: "SOLID",
         color: {
           r: 1,
@@ -371,7 +319,6 @@ function S({
           b: 1
         }
       }]);
-
     }
   })({
     figmaNode: n,
@@ -385,7 +332,7 @@ function S({
       n.writeProperty(e, t);
     });
   };
-  let j = (e) => {
+  let j = e => {
     let n = i.props[e];
     let a = t ? t.props?.[e] : void 0;
     (E.includes(e) || !c2(a, n)) && M(e, n);
@@ -399,18 +346,18 @@ function S({
   }) {
     let s = t?.renderMetaData.textStyle;
     let o = i.renderMetaData.textStyle;
-    if (!(!o || c2(s, o) && !a))
-    for (let t of (f(o.style, (t, i) => {
+    if (!(!o || c2(s, o) && !a)) for (let t of (f(o.style, (t, i) => {
       n.guard(() => {
         e.writeProperty(t, i);
       });
-    }),
-    null != o.characters &&
-    n.guard(() => {
+    }), null != o.characters && n.guard(() => {
       e.writeProperty("characters", o.characters);
-    }),
-    o.ranges)) {
-      let { start, end, style } = t;
+    }), o.ranges)) {
+      let {
+        start,
+        end,
+        style
+      } = t;
       f(style, (t, a) => {
         n.guard(() => {
           e.writeTextRange(t, a, start, end);
@@ -429,17 +376,14 @@ function S({
     t in i.props && j(t);
   }
   for (let e in i.props) A.has(e) || b.has(e) || j(e);
-  if (
-  !function (e, t) {
+  if (!function (e, t) {
     if (0 === e.length) return;
     let i = getSceneGraphInstance().get(t);
     if (!i) return;
     let n = !i.widgetVersionId;
     if (n && 0 !== e.length) {
       let t = "\n\n * ";
-      throw new o9(
-        `Got the following errors when rendering the widget: ${t}${e.join(t)}`
-      );
+      throw new o9(`Got the following errors when rendering the widget: ${t}${e.join(t)}`);
     }
     widgetErrorTracker.trackValidationErrors(e, {
       isLocalWidget: n,
@@ -448,25 +392,12 @@ function S({
       widgetVersionID: i.widgetVersionId,
       widgetName: i.name
     });
-  }(F.errors, e),
-  (i.renderMetaData.width !== t?.renderMetaData.width ||
-  i.renderMetaData.height !== t?.renderMetaData.height ||
-  g !== v ||
-  i.renderMetaData.direction !== t?.renderMetaData.direction) &&
-  BM(i, n, g),
-  ["x", "y"].forEach((e) => {
+  }(F.errors, e), (i.renderMetaData.width !== t?.renderMetaData.width || i.renderMetaData.height !== t?.renderMetaData.height || g !== v || i.renderMetaData.direction !== t?.renderMetaData.direction) && BM(i, n, g), ["x", "y"].forEach(e => {
     let n = i.renderMetaData?.[e];
     n !== (t ? t.renderMetaData?.[e] : void 0) && M(e, n);
-  }),
-  c2(i.renderMetaData.constraints, t?.renderMetaData.constraints) ||
-  $T(i, n, o, !0),
-  y.forEach((e) => {
+  }), c2(i.renderMetaData.constraints, t?.renderMetaData.constraints) || $T(i, n, o, !0), y.forEach(e => {
     i.props[e] !== (t ? t.props[e] : void 0) && M(e, i.props[e]);
-  }),
-  "text" === i.type && N.add(n.getID()),
-  !i.renderMetaData.children)
-
-  return n;
+  }), "text" === i.type && N.add(n.getID()), !i.renderMetaData.children) return n;
   let U = t?.renderMetaData?.children ? MI(t?.renderMetaData?.children) : [];
   let B = MI(i?.renderMetaData?.children, I);
   let V = n.children;
@@ -501,21 +432,16 @@ function S({
 }
 function w(e, t) {
   if (t) {
-    let { width, height } = t;
+    let {
+      width,
+      height
+    } = t;
     e.renderMetaData.width = e.renderMetaData.width ?? width;
     e.renderMetaData.height = e.renderMetaData.height ?? height;
-  } else
-  e.renderMetaData.width && e.renderMetaData.height ? (
-  e.renderMetaData.width = e.renderMetaData.width,
-  e.renderMetaData.height = e.renderMetaData.height) :
-  e.props.visible = !1;
+  } else e.renderMetaData.width && e.renderMetaData.height ? (e.renderMetaData.width = e.renderMetaData.width, e.renderMetaData.height = e.renderMetaData.height) : e.props.visible = !1;
 }
 function C(e, t) {
-  return "inputframe" === e.type || t?.type === "inputframe" ?
-  ["characters", "visible"] :
-  "instance" === e.type ?
-  ["nestedInstancesVisibility"] :
-  [];
+  return "inputframe" === e.type || t?.type === "inputframe" ? ["characters", "visible"] : "instance" === e.type ? ["nestedInstancesVisibility"] : [];
 }
 export const Lb = $$v0;
 export const _b = $$I1;

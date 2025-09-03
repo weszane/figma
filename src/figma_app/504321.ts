@@ -1,4 +1,4 @@
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 export function $$i1(e) {
   return `.${e.className.replace(/([ .#,:\[\]()])/g, "\\$1")} { ${e.cssRules.map(e => `${e.property}: ${e.value};`).join(" ")} }`;
 }
@@ -84,7 +84,7 @@ export function $$l0(e) {
     case "unknown":
       return !1;
     default:
-      xb(e.editingInfo.classNameAttribute);
+      throwTypeError(e.editingInfo.classNameAttribute);
   }
 }
 export const $5 = $$l0;

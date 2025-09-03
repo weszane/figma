@@ -1,4 +1,4 @@
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { DN } from "../905/657224";
 let a = "curatorLoggingEnabled";
 export function $$s0(e) {
@@ -14,7 +14,7 @@ export function $$s0(e) {
       t.$$delete(a);
       break;
     default:
-      xb(e);
+      throwTypeError(e);
   }
   return `Curator logging set to ${e}`;
 }

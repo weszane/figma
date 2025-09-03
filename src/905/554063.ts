@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, useRef, useCallback, useEffect } from "react";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { lQ } from "../905/934246";
 import { o as _$$o } from "../905/821217";
 import { t as _$$t } from "../905/303541";
@@ -32,7 +32,7 @@ let x = e => {
     case "INVALID_COCREATORS":
       return;
     default:
-      return xb(e);
+      return throwTypeError(e);
   }
 };
 export function $$S0({

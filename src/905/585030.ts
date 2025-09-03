@@ -1,6 +1,6 @@
 import { useState, useRef, useContext, useEffect } from "react";
 import { wA } from "../vendor/514228";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { sYL, egF, Xts, BtE, xSx, i0e, _em, dPJ } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
@@ -71,7 +71,7 @@ export function $$k6() {
         t = Error("Error recreating branch point: version mismatch");
         break;
       default:
-        xb(e);
+        throwTypeError(e);
     }
     cb(t);
     return t;
@@ -95,7 +95,7 @@ export function $$R5(e, t = BtE.PREVIEW) {
         e = Error("Error merging diff: Version mismatch");
         break;
       default:
-        xb(i);
+        throwTypeError(i);
     }
     t === BtE.PREVIEW ? cb(e) : HJ(e, PW.ON_MERGE, Kn.TO_SOURCE);
     return e;
@@ -116,7 +116,7 @@ export function $$N7() {
         t = Error("Error unapplying chunks: unable to undo changes");
         break;
       default:
-        xb(e);
+        throwTypeError(e);
     }
     cb(t);
     return t;
@@ -140,7 +140,7 @@ export function $$P3(e, t, i = BtE.PREVIEW) {
         e = Error("Error applying chunks: invalid index");
         break;
       default:
-        xb(n);
+        throwTypeError(n);
     }
     i === BtE.PREVIEW ? cb(e) : HJ(e, PW.ON_MERGE, Kn.FROM_SOURCE);
     return e;
@@ -163,7 +163,7 @@ let D = async (e, t, i, n, r) => {
     case sYL.COMPARE:
       throw Error("Unexpected DiffType: COMPARE");
     default:
-      xb(i);
+      throwTypeError(i);
   }
   let {
     data: {
@@ -470,4 +470,4 @@ export const _l = $$k6;
 export const b_ = $$N7;
 export const zZ = $$V8;
 export const YH = $$G9;
-export const Mt = $$B10; 
+export const Mt = $$B10;

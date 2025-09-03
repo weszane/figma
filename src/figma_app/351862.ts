@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { toCamelCase } from "../figma_app/664063";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { ii, F7 } from "../905/859698";
 import { VTL, glU, DV9, rcl, NLJ, V5h, BXd, zol, ZiZ, Ez5 } from "../figma_app/763686";
@@ -157,7 +157,7 @@ import { A as _$$A131 } from "../svg/381071";
 var n;
 var h = _;
 (e => {
-  e.AWS = function() {
+  e.AWS = function () {
     return jsxs("svg", {
       width: "32",
       height: "32",
@@ -195,7 +195,7 @@ var h = _;
       })]
     });
   };
-  e.Azure = function() {
+  e.Azure = function () {
     return jsxs("svg", {
       width: "32",
       height: "32",
@@ -269,7 +269,7 @@ var h = _;
       })]
     });
   };
-  e.GoogleCloud = function() {
+  e.GoogleCloud = function () {
     return jsxs("svg", {
       width: "32",
       height: "32",
@@ -293,7 +293,7 @@ var h = _;
       })]
     });
   };
-  e.Kubernetes = function() {
+  e.Kubernetes = function () {
     return jsxs("svg", {
       width: "32",
       height: "32",
@@ -313,7 +313,7 @@ var h = _;
       })]
     });
   };
-  e.Cisco = function() {
+  e.Cisco = function () {
     return jsxs("svg", {
       width: "32",
       height: "32",
@@ -756,7 +756,7 @@ export function $$t716({
   searchState: r
 }) {
   if ("complete" === r.state || "inactive" === r.state) return;
-  let n = function(e) {
+  let n = function (e) {
     switch (e) {
       case 0:
         return "SELECTED_SHAPE";
@@ -797,7 +797,7 @@ export function $$re18() {
       case "CURVED":
         return r;
       default:
-        xb(i);
+        throwTypeError(i);
     }
   }, [e, r, t, n]);
 }
@@ -810,7 +810,7 @@ export function $$rt15(e) {
     case "CURVED":
       return rcl.SET_TOOL_CONNECTOR_CURVED;
     default:
-      xb(e);
+      throwTypeError(e);
   }
 }
 export const fT = $$t80;
@@ -832,4 +832,4 @@ export const tl = $$rt15;
 export const ko = $$t716;
 export const vD = $$t617;
 export const DP = $$re18;
-export const vz = $$t919; 
+export const vz = $$t919;

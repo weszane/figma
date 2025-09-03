@@ -21,7 +21,7 @@ import { E7, gl, hS } from "../905/216495";
 import { av } from "../figma_app/316316";
 import { ZM } from "../figma_app/505098";
 import { cJ } from "../905/561485";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { lQ } from "../905/934246";
 import { E as _$$E } from "../905/632989";
 import { aI, Hr, dI } from "../905/871411";
@@ -314,7 +314,7 @@ function Y({
           });
         }
       default:
-        xb(e.connectionType);
+        throwTypeError(e.connectionType);
     }
   };
   let C = d()({
@@ -446,7 +446,7 @@ function Y({
           case "OBJECT_ANIMATION":
             return jsx(Fragment, {});
           default:
-            xb(e.connectionType);
+            throwTypeError(e.connectionType);
         }
       })(e)]
     })

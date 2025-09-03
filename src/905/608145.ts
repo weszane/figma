@@ -1,5 +1,5 @@
 import { PluginMenu } from "../905/791556";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { _gJ } from "../figma_app/763686";
 import { getSceneGraphInstance } from "../905/830071";
@@ -26,7 +26,7 @@ import { nV } from "../905/625959";
 import { Y5 } from "../figma_app/455680";
 import { Br, ax, gX } from "../figma_app/741237";
 import { $4 } from "../figma_app/506364";
-import { j as _$$j } from "../905/813868";
+import { noop } from "../905/813868";
 import { xG } from "../905/277373";
 import { M as _$$M } from "../figma_app/170366";
 import { T as _$$T, Ar, JT } from "../figma_app/300692";
@@ -109,7 +109,7 @@ export function $$J0(e, t, i) {
           return;
         }
         let t = localExtensions[i.localFileId];
-        t ? _$$j({
+        t ? noop({
           pluginID: t.plugin_id,
           widgetName: t.name,
           pluginVersionID: ""
@@ -134,7 +134,7 @@ export function $$J0(e, t, i) {
         }
         let t = e.publishedWidgets[i.pluginId];
         let n = Ar(t);
-        t && n ? _$$j({
+        t && n ? noop({
           pluginID: t.id,
           widgetName: n.name,
           pluginVersionID: n.id
@@ -479,7 +479,7 @@ export function $$J0(e, t, i) {
         return;
       }
     default:
-      xb(i);
+      throwTypeError(i);
   }
 }
 export const Im = $$J0;
@@ -512,7 +512,7 @@ export const aS = function e(t, i) {
         };
       }
     default:
-      xb(t);
+      throwTypeError(t);
   }
 };
 export const ft = $$Y2;

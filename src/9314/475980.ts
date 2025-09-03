@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useCallback, useEffect, useRef, useMemo, useContext } from "react";
 import { wA, d4 } from "../vendor/514228";
-import { j as _$$j, KF } from "../figma_app/465776";
+import { noop, debug } from "../figma_app/465776";
 import { debounce } from "../905/915765";
 import { y1 } from "../figma_app/492908";
 import { n3, IA } from "../905/859698";
@@ -814,7 +814,7 @@ function eK(e) {
         label: _$$t("design_systems.styles.dropdown.effect")
       };
     default:
-      _$$j(e);
+      noop(e);
       return Error(`Invalid style type: ${e}`);
   }
 }
@@ -969,7 +969,7 @@ function eY({
     };
   }, [g]);
   let K = useCallback(e => {
-    KF(null != e.content_hash, "style does not have a hash");
+    debug(null != e.content_hash, "style does not have a hash");
     glU.selectStyleByGuid(e.node_id);
     a(ay({
       isRenaming: !1

@@ -1,5 +1,5 @@
 import { useCallback, useMemo } from "react";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { isNotNullish } from "../figma_app/95419";
 import { z2, PK } from "../figma_app/914216";
 import { ZU } from "../figma_app/986347";
@@ -33,7 +33,7 @@ export function $$d0(e) {
         case ZU.CUSTOM_ACTION:
           return n;
         default:
-          xb(n);
+          throwTypeError(n);
       }
     }, [e, getMaybeEnabledItem, getMaybeSubmenuWithEnabledItems]);
   }();

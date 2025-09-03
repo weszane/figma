@@ -1,4 +1,4 @@
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { getFeatureFlags } from "../905/601108";
 import { debugState } from "../905/407919";
 import { dW } from "../905/515076";
@@ -52,7 +52,7 @@ let m = class {
         await wY();
         return;
       default:
-        xb(e);
+        throwTypeError(e);
     }
   }
 };

@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { memo, useContext, useState, useRef, useEffect } from "react";
 import { wA } from "../vendor/514228";
-import { KF } from "../figma_app/465776";
+import { debug } from "../figma_app/465776";
 import { oB } from "../figma_app/273493";
 import { glU, KWd, xbm } from "../figma_app/763686";
 import d from "classnames";
@@ -170,7 +170,7 @@ export let $$x0 = memo(function ({
             });
             W(!1);
             X($ + 1);
-          } else KF(!1, "Delightful tool is missing the toolref!");
+          } else debug(!1, "Delightful tool is missing the toolref!");
         },
         onDragStart: (t, r) => {
           dispatch({
@@ -192,7 +192,7 @@ export let $$x0 = memo(function ({
           let i = J.current;
           if (i) {
             let e = i.closest("." + kl);
-            KF(!!e, "Delightful tool can't find containing toolbar!");
+            debug(!!e, "Delightful tool can't find containing toolbar!");
             ea(e.getBoundingClientRect());
             N && N();
           }

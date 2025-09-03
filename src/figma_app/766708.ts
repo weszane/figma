@@ -1,4 +1,4 @@
-import n, { KF } from "../figma_app/465776";
+import n, { debug } from "../figma_app/465776";
 export function $$i0(e, t) {
   return +(e < t) - +(e > t);
 }
@@ -12,40 +12,40 @@ export function $$s6(e) {
   return !0;
 }
 export function $$o4(e) {
-  KF(0 !== e.length, "");
+  debug(0 !== e.length, "");
   let t = e.length - 1;
   let r = t;
   for (; r >= 0;) {
     let t = e.charCodeAt(r);
     if (t > 33) {
       let i = e.substr(0, r) + String.fromCharCode(t - 1);
-      KF($$s6(i), "");
+      debug($$s6(i), "");
       return i;
     }
     r--;
   }
   let i = e.substr(0, t) + " ~";
-  KF($$s6(i), "");
+  debug($$s6(i), "");
   return i;
 }
 export function $$l3(e) {
-  KF(0 !== e.length, "");
+  debug(0 !== e.length, "");
   let t = e.length - 1;
   for (; t >= 0;) {
     let r = e.charCodeAt(t);
     if (r < 126) {
       let i = e.substr(0, t) + String.fromCharCode(r + 1);
-      KF($$s6(i), "");
+      debug($$s6(i), "");
       return i;
     }
     t--;
   }
   let r = e + "!";
-  KF($$s6(r), "");
+  debug($$s6(r), "");
   return r;
 }
 export function $$d5(e, t) {
-  KF(e < t, "");
+  debug(e < t, "");
   let r = e.length;
   let i = t.length;
   let a = !1;
@@ -66,9 +66,9 @@ export function $$d5(e, t) {
     }
   }
   a && (o += "O");
-  KF(e < o, "");
-  KF(o < t, "");
-  KF($$s6(o), "");
+  debug(e < o, "");
+  debug(o < t, "");
+  debug($$s6(o), "");
   return o;
 }
 let c = Math.floor(Math.log10(95) + 1);

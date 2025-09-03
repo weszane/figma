@@ -1,4 +1,4 @@
-import { KF } from "../figma_app/465776";
+import { debug } from "../figma_app/465776";
 import { Ez5, glU, zMY } from "../figma_app/763686";
 import { UN } from "../905/700578";
 import { zl, md, fp, Ut } from "../figma_app/27355";
@@ -89,7 +89,7 @@ export function $$C1() {
   let r = md(u2);
   let [a, d] = fp($K);
   return R(() => {
-    KF(!!r, "slideCreationData is undefined. This should never happen");
+    debug(!!r, "slideCreationData is undefined. This should never happen");
     Ez5?.slideThemeLibBindings().insertDefaultLocalTheme(zMY.LIGHT, "Template style");
     Ez5?.uiState().leftPanelCollapsedUI3.set(!0);
     debugState.dispatch(F.enqueue({

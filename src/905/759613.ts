@@ -1,5 +1,5 @@
 import { jsx } from "react/jsx-runtime";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { J } from "../905/614223";
 import { g } from "../905/687265";
 import { Ay } from "@stylexjs/stylex";
@@ -126,7 +126,7 @@ export function $$h0(e) {
             children: g
           });
         default:
-          xb(ctaButtonMeta);
+          throwTypeError(ctaButtonMeta);
       }
     case "primary-large-wide":
       if ("button" !== ctaButtonMeta.type) {
@@ -180,10 +180,10 @@ export function $$h0(e) {
             children: g
           });
         default:
-          xb(ctaButtonMeta);
+          throwTypeError(ctaButtonMeta);
       }
     default:
-      xb(f);
+      throwTypeError(f);
   }
 }
 export const F = $$h0;

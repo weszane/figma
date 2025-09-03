@@ -32,25 +32,25 @@ let g = _$$z.object({
   width: _$$z.number(),
   height: _$$z.number()
 });
-let f = _$$z.$$enum(["PASS_THROUGH", "NORMAL", "DARKEN", "MULTIPLY", "LINEAR_BURN", "COLOR_BURN", "LIGHTEN", "SCREEN", "LINEAR_DODGE", "COLOR_DODGE", "OVERLAY", "SOFT_LIGHT", "HARD_LIGHT", "DIFFERENCE", "EXCLUSION", "HUE", "SATURATION", "COLOR", "LUMINOSITY"]);
-let _ = _$$z.$$enum(["FIXED", "SCROLLS", "STICKY_SCROLLS"]);
-let A = _$$z.$$enum(["UNION", "INTERSECT", "SUBTRACT", "EXCLUDE"]);
-let y = _$$z.$$enum(["TOP", "BOTTOM", "TOP_BOTTOM", "STRETCH", "SCALE"]);
-let b = _$$z.$$enum(["LEFT", "RIGHT", "LEFT_RIGHT", "STRETCH", "SCALE"]);
-let v = _$$z.$$enum(["CENTER", "INSIDE", "OUTSIDE"]);
-let I = _$$z.$$enum(["NONE", "ROUND", "SQUARE", "LINE_ARROW", "TRIANGLE_ARROW", "DIAMOND_FILLED", "CIRCLE_FILLED", "TRIANGLE_FILLED"]);
-let E = _$$z.$$enum(["MITER", "BEVEL", "ROUND"]);
+let f = _$$z.enum(["PASS_THROUGH", "NORMAL", "DARKEN", "MULTIPLY", "LINEAR_BURN", "COLOR_BURN", "LIGHTEN", "SCREEN", "LINEAR_DODGE", "COLOR_DODGE", "OVERLAY", "SOFT_LIGHT", "HARD_LIGHT", "DIFFERENCE", "EXCLUSION", "HUE", "SATURATION", "COLOR", "LUMINOSITY"]);
+let _ = _$$z.enum(["FIXED", "SCROLLS", "STICKY_SCROLLS"]);
+let A = _$$z.enum(["UNION", "INTERSECT", "SUBTRACT", "EXCLUDE"]);
+let y = _$$z.enum(["TOP", "BOTTOM", "TOP_BOTTOM", "STRETCH", "SCALE"]);
+let b = _$$z.enum(["LEFT", "RIGHT", "LEFT_RIGHT", "STRETCH", "SCALE"]);
+let v = _$$z.enum(["CENTER", "INSIDE", "OUTSIDE"]);
+let I = _$$z.enum(["NONE", "ROUND", "SQUARE", "LINE_ARROW", "TRIANGLE_ARROW", "DIAMOND_FILLED", "CIRCLE_FILLED", "TRIANGLE_FILLED"]);
+let E = _$$z.enum(["MITER", "BEVEL", "ROUND"]);
 let x = _$$z.object({
   horizontal: b.optional(),
   vertical: y.optional()
 });
-let S = _$$z.$$enum(["NONE", "HORIZONTAL_SCROLLING", "VERTICAL_SCROLLING", "HORIZONTAL_AND_VERTICAL_SCROLLING"]);
-let w = _$$z.$$enum(["MIN", "CENTER", "MAX", "STRETCH", "BASELINE", "INHERIT"]);
-let C = _$$z.$$enum(["NONE", "VERTICAL", "HORIZONTAL"]);
-let T = _$$z.$$enum(["MIN", "MAX", "CENTER", "BASELINE"]);
-let k = _$$z.$$enum(["MIN", "MAX", "CENTER", "SPACE_EVENLY", "SPACE_BETWEEN"]);
-let R = _$$z.$$enum(["FIXED", "AUTO"]);
-let N = _$$z.$$enum(["FIXED", "AUTO"]);
+let S = _$$z.enum(["NONE", "HORIZONTAL_SCROLLING", "VERTICAL_SCROLLING", "HORIZONTAL_AND_VERTICAL_SCROLLING"]);
+let w = _$$z.enum(["MIN", "CENTER", "MAX", "STRETCH", "BASELINE", "INHERIT"]);
+let C = _$$z.enum(["NONE", "VERTICAL", "HORIZONTAL"]);
+let T = _$$z.enum(["MIN", "MAX", "CENTER", "BASELINE"]);
+let k = _$$z.enum(["MIN", "MAX", "CENTER", "SPACE_EVENLY", "SPACE_BETWEEN"]);
+let R = _$$z.enum(["FIXED", "AUTO"]);
+let N = _$$z.enum(["FIXED", "AUTO"]);
 let P = {
   layoutMode: C.optional(),
   layoutAlign: w.optional(),
@@ -64,10 +64,10 @@ let P = {
   paddingTop: _$$z.number().optional(),
   paddingBottom: _$$z.number().optional()
 };
-let O = _$$z.$$enum(["AUTO", "ABSOLUTE"]);
+let O = _$$z.enum(["AUTO", "ABSOLUTE"]);
 let D = _$$z.union([_$$z.object({
-  pattern: _$$z.$$enum(["COLUMNS", "ROWS"]),
-  alignment: _$$z.$$enum(["MIN", "MAX"]),
+  pattern: _$$z.enum(["COLUMNS", "ROWS"]),
+  alignment: _$$z.enum(["MIN", "MAX"]),
   gutterSize: _$$z.number(),
   count: l,
   sectionSize: _$$z.number().min(0),
@@ -75,7 +75,7 @@ let D = _$$z.union([_$$z.object({
   visible: _$$z.boolean().optional(),
   color: c.optional()
 }), _$$z.object({
-  pattern: _$$z.$$enum(["COLUMNS", "ROWS"]),
+  pattern: _$$z.enum(["COLUMNS", "ROWS"]),
   alignment: _$$z.literal("STRETCH"),
   gutterSize: _$$z.number(),
   count: l,
@@ -83,7 +83,7 @@ let D = _$$z.union([_$$z.object({
   visible: _$$z.boolean().optional(),
   color: c.optional()
 }), _$$z.object({
-  pattern: _$$z.$$enum(["COLUMNS", "ROWS"]),
+  pattern: _$$z.enum(["COLUMNS", "ROWS"]),
   alignment: _$$z.literal("CENTER"),
   gutterSize: _$$z.number(),
   count: l,
@@ -114,7 +114,7 @@ let M = _$$z.object({
   showShadowBehindNode: _$$z.boolean().optional()
 });
 let j = _$$z.object({
-  type: _$$z.$$enum(["LAYER_BLUR", "BACKGROUND_BLUR"]),
+  type: _$$z.enum(["LAYER_BLUR", "BACKGROUND_BLUR"]),
   radius: _$$z.number().min(0),
   visible: _$$z.boolean()
 });
@@ -124,7 +124,7 @@ let V = _$$z.object({
   position: s,
   color: c
 });
-let G = _$$z.$$enum(["EASE_IN", "EASE_OUT", "EASE_IN_AND_OUT", "LINEAR", "EASE_IN_BACK", "EASE_OUT_BACK", "EASE_IN_AND_OUT_BACK", "CUSTOM_CUBIC_BEZIER", "GENTLE", "QUICK", "BOUNCY", "SLOW", "CUSTOM_SPRING"]);
+let G = _$$z.enum(["EASE_IN", "EASE_OUT", "EASE_IN_AND_OUT", "LINEAR", "EASE_IN_BACK", "EASE_OUT_BACK", "EASE_IN_AND_OUT_BACK", "CUSTOM_CUBIC_BEZIER", "GENTLE", "QUICK", "BOUNCY", "SLOW", "CUSTOM_SPRING"]);
 let z = _$$z.discriminatedUnion("type", [_$$z.object({
   type: _$$z.literal("SOLID"),
   color: d,
@@ -132,7 +132,7 @@ let z = _$$z.discriminatedUnion("type", [_$$z.object({
   opacity: s.optional(),
   blendMode: f.optional()
 }), _$$z.object({
-  type: _$$z.$$enum(["GRADIENT_LINEAR", "GRADIENT_RADIAL", "GRADIENT_ANGULAR", "GRADIENT_DIAMOND"]),
+  type: _$$z.enum(["GRADIENT_LINEAR", "GRADIENT_RADIAL", "GRADIENT_ANGULAR", "GRADIENT_DIAMOND"]),
   gradientTransform: p,
   gradientStops: _$$z.array(V),
   visible: _$$z.boolean().optional(),
@@ -140,7 +140,7 @@ let z = _$$z.discriminatedUnion("type", [_$$z.object({
   blendMode: f.optional()
 }), _$$z.object({
   type: _$$z.literal("IMAGE"),
-  scaleMode: _$$z.$$enum(["FILL", "FIT", "CROP", "TILE"]).optional(),
+  scaleMode: _$$z.enum(["FILL", "FIT", "CROP", "TILE"]).optional(),
   imageRef: _$$z.string(),
   scalingFactor: o.optional(),
   rotation: l.optional(),
@@ -155,7 +155,7 @@ let W = _$$z.object({
   endingAngle: _$$z.number(),
   innerRadius: s
 });
-let K = _$$z.$$enum(["NONZERO", "EVENODD"]);
+let K = _$$z.enum(["NONZERO", "EVENODD"]);
 let Y = _$$z.object({
   x: _$$z.number(),
   y: _$$z.number(),
@@ -180,15 +180,15 @@ let Z = _$$z.object({
   regions: _$$z.array($).optional()
 });
 let X = _$$z.discriminatedUnion("format", [_$$z.object({
-  format: _$$z.$$enum(["PNG", "JPG"]),
+  format: _$$z.enum(["PNG", "JPG"]),
   contentsOnly: _$$z.boolean().optional(),
   suffix: _$$z.string().optional(),
   useAbsoluteBounds: _$$z.boolean().optional(),
   constraint: _$$z.union([_$$z.object({
-    type: _$$z.$$enum(["SCALE"]),
+    type: _$$z.enum(["SCALE"]),
     value: _$$z.number()
   }), _$$z.object({
-    type: _$$z.$$enum(["WIDTH", "HEIGHT"]),
+    type: _$$z.enum(["WIDTH", "HEIGHT"]),
     value: _$$z.number().$$int()
   })]).optional()
 }), _$$z.object({
@@ -224,8 +224,8 @@ let ei = {
   }).optional()
 };
 let en = _$$z.object(ei);
-let er = _$$z.$$enum(["ORIGINAL", "UPPER", "LOWER", "TITLE"]);
-let ea = _$$z.$$enum(["NO_WRAP", "WRAP"]);
+let er = _$$z.enum(["ORIGINAL", "UPPER", "LOWER", "TITLE"]);
+let ea = _$$z.enum(["NO_WRAP", "WRAP"]);
 let es = _$$z.object({
   family: _$$z.string(),
   style: _$$z.string()
@@ -238,11 +238,11 @@ let eo = _$$z.object({
   fillPaints: H.optional()
 });
 let el = _$$z.array(_$$z.record(_$$z.string()));
-let ed = _$$z.$$enum(["SQUARE", "ELLIPSE", "DIAMOND", "TRIANGLE_UP", "TRIANGLE_DOWN", "ROUNDED_RECTANGLE", "PARALLELOGRAM_RIGHT", "PARALLELOGRAM_LEFT", "ENG_DATABASE", "ENG_QUEUE", "ENG_FILE", "ENG_FOLDER", "TRAPEZOID", "PREDEFINED_PROCESS", "SHIELD", "DOCUMENT_SINGLE", "DOCUMENT_MULTIPLE", "MANUAL_INPUT", "HEXAGON", "CHEVRON", "PENTAGON", "OCTAGON", "STAR", "PLUS", "ARROW_LEFT", "ARROW_RIGHT", "SUMMING_JUNCTION", "OR", "SPEECH_BUBBLE", "INTERNAL_STORAGE"]);
-let ec = _$$z.$$enum(["NONE", "ARROW_EQUILATERAL", "ARROW_LINES", "TRIANGLE_FILLED", "DIAMOND_FILLED", "CIRCLE_FILLED"]);
+let ed = _$$z.enum(["SQUARE", "ELLIPSE", "DIAMOND", "TRIANGLE_UP", "TRIANGLE_DOWN", "ROUNDED_RECTANGLE", "PARALLELOGRAM_RIGHT", "PARALLELOGRAM_LEFT", "ENG_DATABASE", "ENG_QUEUE", "ENG_FILE", "ENG_FOLDER", "TRAPEZOID", "PREDEFINED_PROCESS", "SHIELD", "DOCUMENT_SINGLE", "DOCUMENT_MULTIPLE", "MANUAL_INPUT", "HEXAGON", "CHEVRON", "PENTAGON", "OCTAGON", "STAR", "PLUS", "ARROW_LEFT", "ARROW_RIGHT", "SUMMING_JUNCTION", "OR", "SPEECH_BUBBLE", "INTERNAL_STORAGE"]);
+let ec = _$$z.enum(["NONE", "ARROW_EQUILATERAL", "ARROW_LINES", "TRIANGLE_FILLED", "DIAMOND_FILLED", "CIRCLE_FILLED"]);
 let eu = _$$z.union([_$$z.object({
   endpointNodeId: _$$z.string(),
-  magnet: _$$z.$$enum(["NONE", "AUTO", "TOP", "LEFT", "BOTTOM", "RIGHT"])
+  magnet: _$$z.enum(["NONE", "AUTO", "TOP", "LEFT", "BOTTOM", "RIGHT"])
 }), _$$z.object({
   endpointNodeId: _$$z.string().optional(),
   position: _$$z.object({
@@ -258,7 +258,7 @@ let ep = {
   locked: _$$z.boolean().optional(),
   scrollBehavior: _.optional(),
   pluginData: _$$z.object({
-    desiredSize: _$$z.$$enum(["small", "medium", "large", "notice"]).optional(),
+    desiredSize: _$$z.enum(["small", "medium", "large", "notice"]).optional(),
     pluginSvgPreviewUrl: _$$z.string().optional(),
     pluginSvgPreviewData: _$$z.string().optional()
   }).optional()
@@ -347,7 +347,7 @@ let eC = _$$z.object({
   ...ev
 });
 let eT = _$$z.object({
-  type: _$$z.$$enum(["STAR", "LINE", "REGULAR_POLYGON", "RECTANGLE"]),
+  type: _$$z.enum(["STAR", "LINE", "REGULAR_POLYGON", "RECTANGLE"]),
   ...ev
 });
 let ek = _$$z.object({
@@ -365,7 +365,7 @@ let eN = _$$z.object({
   ...ev,
   ...eA
 });
-let eP = _$$z.$$enum(["ORDERED", "UNORDERED", "NONE"]);
+let eP = _$$z.enum(["ORDERED", "UNORDERED", "NONE"]);
 let eO = {
   characters: _$$z.string(),
   style: eo.optional(),
@@ -404,14 +404,14 @@ let eU = _$$z.object({
   ...e_,
   ...eE
 });
-!function(e) {
+!function (e) {
   e.COMPONENT = "COMPONENT";
   e.COMPONENT_SET = "COMPONENT_SET";
 }(n || (n = {}));
 let eB = _$$z.object({
   type: _$$z.literal("INSTANCE"),
   componentKey: _$$z.string(),
-  componentType: _$$z.$$enum(["COMPONENT", "COMPONENT_SET"]),
+  componentType: _$$z.enum(["COMPONENT", "COMPONENT_SET"]),
   componentId: _$$z.string().optional(),
   uniformScaleFactor: _$$z.number().optional(),
   ...ep,
@@ -459,7 +459,7 @@ let eH = _$$z.object({
   connectorStartStrokeCap: ec,
   connectorEndStrokeCap: ec,
   textBackground: et.merge(en).optional(),
-  connectorLineType: _$$z.$$enum(["ELBOWED", "STRAIGHT"]),
+  connectorLineType: _$$z.enum(["ELBOWED", "STRAIGHT"]),
   ...ep,
   ...eg,
   ...em,
@@ -513,13 +513,13 @@ let eq = _$$z.lazy(() => _$$z.discriminatedUnion("type", [eC, eT, ek, eN, eL, eB
 let e$ = new WeakMap();
 let eZ = new WeakMap();
 let eX = new WeakMap();
-!function(e) {
+!function (e) {
   e.DESCRIPTION = "description";
   e.PASSTHROUGH_XML_DEBUG_ONLY = "passthroughXmlDebugOnly";
 }($$r0 || ($$r0 = {}));
 export let $$eJ1 = _$$z.object({
   prompt: _$$z.string(),
-  mode: _$$z.$$enum(Object.values($$r0)).optional()
+  mode: _$$z.enum(Object.values($$r0)).optional()
 });
 _$$z.discriminatedUnion("type", [_$$z.object({
   type: _$$z.literal("TAG_OPEN"),
@@ -539,7 +539,7 @@ let e0 = _$$z.string();
 let $$e12 = _$$z.object({
   requestId: _$$z.string().optional(),
   createNodes: _$$z.object({
-    node: function(e, t) {
+    node: function (e, t) {
       e$.set(e, e._def.getType);
       eZ.set(e, t);
       e._def.getType = (...t) => {

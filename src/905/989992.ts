@@ -1,6 +1,6 @@
 import { useCallback, useMemo } from "react";
 import { c2 } from "../905/382883";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { ResourceStatus } from "../905/957591";
 import { DD } from "../905/19536";
 import { xx } from "../figma_app/815945";
@@ -119,7 +119,7 @@ export let $$p1 = {
       case "loaded":
         return x(e.data, e.errors, i);
       default:
-        xb(e);
+        throwTypeError(e);
     }
   };
   e.loading = function () {
@@ -186,10 +186,6 @@ let m = class {
   }
 };
 let h = class {
-  suspense;
-  status;
-  data;
-  errors;
   constructor(e) {
     this.suspense = e;
     this.status = "loading";
@@ -215,10 +211,6 @@ let g = class {
   }
 };
 let f = class {
-  suspense;
-  status;
-  data;
-  errors;
   constructor(e) {
     this.suspense = e;
     this.status = "disabled";
@@ -233,9 +225,6 @@ let f = class {
   }
 };
 let _ = class {
-  data;
-  errors;
-  status;
   constructor(e, t) {
     this.data = e;
     this.errors = t;
@@ -249,10 +238,6 @@ let _ = class {
   }
 };
 let A = class {
-  data;
-  errors;
-  suspense;
-  status;
   constructor(e, t, i) {
     this.data = e;
     this.errors = t;
@@ -267,9 +252,6 @@ let A = class {
   }
 };
 let y = class {
-  errors;
-  status;
-  data;
   constructor(e) {
     this.errors = e;
     this.status = "errors";
@@ -283,10 +265,6 @@ let y = class {
   }
 };
 let b = class {
-  errors;
-  suspense;
-  status;
-  data;
   constructor(e, t) {
     this.errors = e;
     this.suspense = t;

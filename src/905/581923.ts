@@ -1,4 +1,4 @@
-import { xb as _$$xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { Cb, wP, yu, Sn, k4, Au } from "../905/327738";
 import { UN } from "../905/700578";
 export let $$s0 = "Component";
@@ -279,7 +279,7 @@ export function $$R1(e, t = !0, i) {
     case "DERIVED_BOOLEAN":
       return "";
     default:
-      _$$xb(r);
+      throwTypeError(r);
   }
 }
 export function $$N2(e, t) {
@@ -298,7 +298,7 @@ export function $$N2(e, t) {
       }
       return e.typeRepr.typeName;
     default:
-      _$$xb(e.devFriendlyProp);
+      throwTypeError(e.devFriendlyProp);
   }
 }
 export function $$P14(e, t) {

@@ -88,7 +88,7 @@ import { xk, Ay as _$$Ay2 } from "@stylexjs/stylex";
 import { B as _$$B2 } from "../905/714743";
 import { A as _$$A } from "../svg/546647";
 import { A as _$$A2 } from "../svg/831814";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { g as _$$g2 } from "../905/687265";
 import { Ph, o as _$$o } from "../905/160095";
 import { sx as _$$sx } from "../figma_app/307841";
@@ -1216,7 +1216,7 @@ function rm({
                 case ud.CONTENT:
                   return _$$t("nux.campfire.content_seat");
                 default:
-                  xb(e);
+                  throwTypeError(e);
               }
             }(t)
           })]
@@ -3384,7 +3384,7 @@ function tH(e) {
     case pu.WHICH_SEAT_WOULD_YOU_LIKE:
       return jsx(te, {});
     default:
-      return xb(e.currentQuestion);
+      return throwTypeError(e.currentQuestion);
   }
 }
 let tV = forwardRef(function (e, r) {

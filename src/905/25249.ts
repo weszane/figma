@@ -1,7 +1,7 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useMemo, useState, useLayoutEffect, useEffect, useCallback } from "react";
 import { wA, d4 } from "../vendor/514228";
-import { xb, KF } from "../figma_app/465776";
+import { throwTypeError, debug } from "../figma_app/465776";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { hS } from "../905/437088";
 import { Cs } from "../figma_app/59509";
@@ -718,7 +718,7 @@ export let $$eK0 = Ju(function (e) {
                   rightSideActions: t ? i : void 0
                 });
               default:
-                xb(el);
+                throwTypeError(el);
             }
           })()
         }), jsx(nB, {
@@ -727,7 +727,7 @@ export let $$eK0 = Ju(function (e) {
               let e = [];
               canEdit && e.push(e6.EDITOR);
               canRead && e.push(e6.VIEWER);
-              KF(e.length > 0, "there should be at least one role (the user's own)");
+              debug(e.length > 0, "there should be at least one role (the user's own)");
               return jsxs(Fragment, {
                 children: [_$$r2(q) ? jsx(_$$X, {
                   resourceType: "folder"

@@ -9,7 +9,7 @@ import { xR } from "../vendor/558427";
 import { UN } from "../905/700578";
 import { isNotNullish } from "../figma_app/95419";
 import { glU, mov, HzA, mKm } from "../figma_app/763686";
-import { xb, vA, wc } from "../figma_app/465776";
+import { throwTypeError, assert, throwError } from "../figma_app/465776";
 import { l7 } from "../905/189185";
 import { ye, EV } from "../905/426868";
 import { _g, qE } from "../figma_app/492908";
@@ -4024,7 +4024,7 @@ function e9(e, t, i) {
           }(e));
           break;
         default:
-          xb(r);
+          throwTypeError(r);
       }
       return i.toReversed();
     }(t.styles.backgroundImage, i) : null;
@@ -4229,8 +4229,8 @@ function tn(e, t, i) {
     postscript: "Arimo"
   };
   let s = PW(t.styles.fontSize ?? "16px");
-  vA(null != r, `Expected font to be parsed: ${t.styles.fontFamily}`);
-  vA(null != s, `Expected font size to be parsed: ${t.styles.fontSize}`);
+  assert(null != r, `Expected font to be parsed: ${t.styles.fontFamily}`);
+  assert(null != s, `Expected font size to be parsed: ${t.styles.fontSize}`);
   i.fontName = r;
   i.fontSize = s;
   i.lineHeight = function (e) {
@@ -4272,7 +4272,7 @@ function tn(e, t, i) {
       case "match-parent":
         throw Error(`Unsupported text-align: ${e}`);
       default:
-        xb(e);
+        throwTypeError(e);
     }
   }(t.styles.textAlign ?? "left");
   i.fills = [e5(t.styles.color ?? "rgb(0, 0, 0)")];
@@ -4393,7 +4393,7 @@ export async function $$tu1(e, t, i, r = HzA.IGNORE) {
         };
       }
       if (i.nodeType === HZ.TEXT_NODE) {
-        vA(null != a, "Expected parent element to be defined for TEXT_NODE");
+        assert(null != a, "Expected parent element to be defined for TEXT_NODE");
         let s = t.createNode("TEXT", {
           tracking: r
         });
@@ -4528,7 +4528,7 @@ export async function $$tg2(e, t, i, r = HzA.IGNORE) {
         };
       }
       if (i.nodeType === HZ.TEXT_NODE) {
-        vA(null != a, "Expected parent element to be defined for TEXT_NODE");
+        assert(null != a, "Expected parent element to be defined for TEXT_NODE");
         let s = t.createNode("TEXT", {
           tracking: r
         });
@@ -4687,7 +4687,7 @@ export async function $$tx3(e, t, i, r = HzA.IGNORE) {
             case "pre-line":
               return t.text.replace(/[^\S\n]+/g, " ").replace(/^[ ]+|[ ]+$/gm, "");
             default:
-              wc(`Unsupported white-space: ${e.styles.whiteSpace}`);
+              throwError(`Unsupported white-space: ${e.styles.whiteSpace}`);
           }
         }(i, e);
         if (0 === s.length) return !1;
@@ -4743,7 +4743,7 @@ export async function $$tx3(e, t, i, r = HzA.IGNORE) {
                 a.stackCounterAlignItems = "MAX";
                 break;
               default:
-                wc(`Unsupported align-items value: ${i.styles.alignItems}`);
+                throwError(`Unsupported align-items value: ${i.styles.alignItems}`);
             }
             if (i.styles.justifyContent) switch (i.styles.justifyContent) {
               case "normal":
@@ -4763,7 +4763,7 @@ export async function $$tx3(e, t, i, r = HzA.IGNORE) {
                 a.stackPrimaryAlignItems = "SPACE_BETWEEN";
                 break;
               default:
-                wc(`Unsupported justify-content value: ${i.styles.justifyContent}`);
+                throwError(`Unsupported justify-content value: ${i.styles.justifyContent}`);
             }
             break;
           case "flex":
@@ -4784,7 +4784,7 @@ export async function $$tx3(e, t, i, r = HzA.IGNORE) {
             a.removeSelfAndChildren();
             return !1;
           default:
-            wc(`Unsupported display type: ${e.styles.display}`);
+            throwError(`Unsupported display type: ${e.styles.display}`);
         }
       }
     }, (e, i, s) => {
@@ -4838,7 +4838,7 @@ export async function $$tx3(e, t, i, r = HzA.IGNORE) {
             break;
           }
         default:
-          wc(`Unsupported display type: ${e.styles.display}`);
+          throwError(`Unsupported display type: ${e.styles.display}`);
       }
       if (!(e.styles.marginTop || e.styles.marginBottom || e.styles.marginLeft || e.styles.marginRight)) return;
       let l = {
@@ -4887,7 +4887,7 @@ export async function $$tx3(e, t, i, r = HzA.IGNORE) {
           d.resizeWithConstraints(d.size.x, d.size.y);
           break;
         default:
-          wc(`Unsupported display type: ${e.styles.display}`);
+          throwError(`Unsupported display type: ${e.styles.display}`);
       }
     });
     t.updateAll();

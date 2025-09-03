@@ -1,6 +1,6 @@
 import { getComponentInfoById, cleanComponentPropNameForUsage, groupByCommonPrefixSorted, getInstanceIdsForDef, toCamelCase, IMAGE_NAME_FORMAT } from "../figma_app/664063";
 import { Ed } from "../figma_app/774411";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { c as _$$c } from "../905/94678";
 import { UN } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
@@ -207,7 +207,7 @@ export function $$I3(e, t) {
       componentDefinitionTypeInfo: s
     };
     let _ = new _$$f();
-    let m = s.parsedDefs.map(e => "DERIVED_BOOLEAN" === e.devFriendlyProp.type ? "" : "SIMPLE_CHOICE" === e.devFriendlyProp.type ? "VARIANT" === e.def.type && "defaultValue" in e.def ? `${e.devFriendlyProp.key} = ${JSON.stringify(e.def.defaultValue)}` : e.devFriendlyProp.key : "GROUPED_INSTANCE_SWAP" === e.devFriendlyProp.type || "IMAGE" === e.devFriendlyProp.type ? e.devFriendlyProp.key : "SIMPLE" === e.devFriendlyProp.type ? "defaultValue" in e.def ? `${e.devFriendlyProp.key} = ${JSON.stringify(e.def.defaultValue)}` : e.devFriendlyProp.key : "ARRAY" === e.devFriendlyProp.type ? getFeatureFlags().first_draft_ts_arrays ? 0 !== e.devFriendlyProp.index ? "" : e.devFriendlyProp.key : e.devFriendlyProp.nonArrayKey : void xb(e.devFriendlyProp)).filter(Boolean);
+    let m = s.parsedDefs.map(e => "DERIVED_BOOLEAN" === e.devFriendlyProp.type ? "" : "SIMPLE_CHOICE" === e.devFriendlyProp.type ? "VARIANT" === e.def.type && "defaultValue" in e.def ? `${e.devFriendlyProp.key} = ${JSON.stringify(e.def.defaultValue)}` : e.devFriendlyProp.key : "GROUPED_INSTANCE_SWAP" === e.devFriendlyProp.type || "IMAGE" === e.devFriendlyProp.type ? e.devFriendlyProp.key : "SIMPLE" === e.devFriendlyProp.type ? "defaultValue" in e.def ? `${e.devFriendlyProp.key} = ${JSON.stringify(e.def.defaultValue)}` : e.devFriendlyProp.key : "ARRAY" === e.devFriendlyProp.type ? getFeatureFlags().first_draft_ts_arrays ? 0 !== e.devFriendlyProp.index ? "" : e.devFriendlyProp.key : e.devFriendlyProp.nonArrayKey : void throwTypeError(e.devFriendlyProp)).filter(Boolean);
     if (r.includePropsType ? (m.length > 0 && s.propsTypeRepr.typeDefBody && (_.append(`type ${s.jsxName}Props = `), _.append(CT(s.propsTypeRepr.typeDefBody)), _.newline()), _.append(`function ${s.jsxName}(`), m.length > 0 && (_.append(`{ ${m.join(", ")} }`), _.append(`: ${s.jsxName}Props`)), _.append(") {")) : (_.append(`const ${s.jsxName}: React.FC<${s.propsTypeRepr.typeDefBody ?? "{}"}> = (`), m.length > 0 && _.append(`{${m.join(", ")}}`), _.append(") => {")), _.newline(), "SYMBOL" === e.type) {
       _.append(c.formatJSX ? uG(S(e, c)) : `  return ${S(e, c)}`);
       _.newline();

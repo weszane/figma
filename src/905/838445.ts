@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { forwardRef, useRef, useImperativeHandle, useState, useCallback } from "react";
-import { j } from "../figma_app/465776";
+import { noop } from "../figma_app/465776";
 import { p } from "../905/71149";
 import { jk } from "../905/499018";
 import { Ib } from "../905/129884";
@@ -46,7 +46,7 @@ export let $$c0 = forwardRef(function (e, t) {
       case "black":
         return 900;
       default:
-        j(e);
+        noop(e);
         return 400;
     }
   }(fontWeight));
@@ -63,7 +63,7 @@ export let $$c0 = forwardRef(function (e, t) {
       case "whyte-inktrap":
         return "WhyteInktrap, sans-serif";
       default:
-        j(e);
+        noop(e);
         return t;
     }
   }(fontFamily));
@@ -84,7 +84,7 @@ export let $$c0 = forwardRef(function (e, t) {
           textAlign: "left"
         };
       default:
-        j(e);
+        noop(e);
         return t;
     }
   }(!0 === truncate ? "end" : truncate));

@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useMemo, useRef, useEffect, useCallback, forwardRef, useState } from "react";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { E as _$$E } from "../905/632989";
 import { fp } from "../figma_app/27355";
 import { sx } from "../905/449184";
@@ -51,7 +51,7 @@ function N({
       case "fullscreen_hero":
         return "grid_view--carouselGridViewFullscreenHero--wJryP grid_view--carouselGridView--kG9U6 text--fontNeg40--v1X92 text--_fontBase--QdLsd text--_negText--j9g-L";
       default:
-        xb(r);
+        throwTypeError(r);
     }
   }, [r]);
   let d = useMemo(() => _$$sx.$$if(!!o, {
@@ -548,7 +548,7 @@ export function $$U0({
             })]
           });
         default:
-          xb(i);
+          throwTypeError(i);
       }
     }(eo), ea && jsxs("div", {
       ref: v,
@@ -574,7 +574,7 @@ export function $$U0({
             thumbnailUrls: r.thumbnailUrls,
             altText: a,
             size: "thumbnail"
-          }) : xb(r);
+          }) : throwTypeError(r);
           return jsx(D, {
             ref: e => {
               z.current[i] = e;

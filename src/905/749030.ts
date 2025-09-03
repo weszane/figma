@@ -1,6 +1,6 @@
 import { jsx, Fragment } from "react/jsx-runtime";
 import { useMemo } from "react";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { rXF } from "../figma_app/763686";
 import { l as _$$l } from "../905/716947";
 import { zN } from "../905/19536";
@@ -64,7 +64,7 @@ export function $$$$A0(e, t, i) {
           case null:
             return ["numVariables"];
           default:
-            xb(e, `Unhandled resolved type ${e}`);
+            throwTypeError(e, `Unhandled resolved type ${e}`);
         }
       }(t, i)), e), []))) if ("number" == typeof e[n] && +e[n] > 0) return !0;
       return !1;

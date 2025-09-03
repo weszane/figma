@@ -1,5 +1,5 @@
 import { mapFilter } from "../figma_app/656233";
-import { vA, xb } from "../figma_app/465776";
+import { assert, throwTypeError } from "../figma_app/465776";
 import { Det, egF, H$z, Dje, sYL, kz3 } from "../figma_app/763686";
 import { zl } from "../figma_app/27355";
 import { sx } from "../905/449184";
@@ -56,7 +56,7 @@ class f extends Error {
     sx("Branch Modal Load Time", i);
   }
   function n(e, i) {
-    vA(e.type === Det.GENERIC);
+    assert(e.type === Det.GENERIC);
     e.variantChunks.length > 0 && cb(Error("Non-state group chunk with variants"));
     e.variableChunks.length > 0 && cb(Error("Non-variable collection with variable chunks"));
     let {
@@ -75,7 +75,7 @@ class f extends Error {
     switch (i.type) {
       case Det.STATE_GROUP:
         return function (e, i) {
-          vA(e.type === Det.STATE_GROUP);
+          assert(e.type === Det.STATE_GROUP);
           e.variableChunks.length > 0 && cb(Error("Non-variable collection with variable chunks"));
           let {
             basisChunkGuid,
@@ -93,7 +93,7 @@ class f extends Error {
         }(i, o);
       case Det.VARIABLE_COLLECTION:
         return function (i, n) {
-          vA(i.type === Det.VARIABLE_COLLECTION);
+          assert(i.type === Det.VARIABLE_COLLECTION);
           i.variantChunks.length > 0 && cb(Error("Non-state group chunk with variants"));
           let {
             basisChunkGuid,
@@ -138,7 +138,7 @@ class f extends Error {
       case Det.GENERIC:
         return n(i, o);
       default:
-        xb(i.type);
+        throwTypeError(i.type);
     }
   }
   function _(e, t, i) {
@@ -158,7 +158,7 @@ class f extends Error {
       case H$z.INTERNAL_ERROR:
         throw Error("could not get fullscreen app instance");
       default:
-        xb(o);
+        throwTypeError(o);
     }
     return o;
   };
@@ -237,7 +237,7 @@ class f extends Error {
         i = e.parentHierarchyGuids;
         break;
       default:
-        xb(t);
+        throwTypeError(t);
     }
     if (i && i.length > 0) return _(e.diffType, i[0], t);
   };
@@ -251,7 +251,7 @@ class f extends Error {
         i = e.parentHierarchyGuids;
         break;
       default:
-        xb(t);
+        throwTypeError(t);
     }
     if (i && i.length > 0) return _(e.diffType, i[i.length - 1], t);
   };

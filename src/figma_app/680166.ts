@@ -1,7 +1,7 @@
 import { useCallback, useMemo } from "react";
 import { wA } from "../vendor/514228";
 import { zRx } from "../figma_app/822011";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { getFeatureFlags } from "../905/601108";
 import { k9 } from "../905/19536";
@@ -364,7 +364,7 @@ export function $$B5(e) {
           case ud.CONTENT:
             return t.needUpgradeExpert;
           default:
-            xb(n);
+            throwTypeError(n);
         }
       }(e, t, i) ? _$$q.UPGRADE_NOT_NEEDED : !function (e, t, r) {
         let n = W({
@@ -382,7 +382,7 @@ export function $$B5(e) {
           case ud.CONTENT:
             return t.canUpgradeContent;
           default:
-            xb(n);
+            throwTypeError(n);
         }
       }(e, t, i) ? _$$q.CANNOT_UPGRADE : _$$q.CAN_UPGRADE : _$$q.CANNOT_UPGRADE;
     }({
@@ -479,7 +479,7 @@ export function $$B5(e) {
             case FProductAccessType.COOPER:
               return _$$t("fullscreen.toolbar_banner.provisional_access.curf.design");
             default:
-              return xb(e);
+              return throwTypeError(e);
           } else switch (e) {
             case FProductAccessType.DEV_MODE:
               return _$$t("fullscreen.toolbar_banner.provisional_access.dev_mode");
@@ -496,7 +496,7 @@ export function $$B5(e) {
             case FProductAccessType.COOPER:
               return _$$t("fullscreen.toolbar_banner.provisional_access.design");
             default:
-              return xb(e);
+              return throwTypeError(e);
           }
         }(t, n),
         shouldShowCurf: n

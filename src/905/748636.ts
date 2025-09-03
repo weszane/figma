@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { forwardRef, useRef, useId, useState, useImperativeHandle, useEffect, useCallback, useLayoutEffect, Component } from "react";
-import { xb, vA } from "../figma_app/465776";
+import { throwTypeError, assert } from "../figma_app/465776";
 import { n as _$$n } from "../vendor/547481";
 import { parsePxInt } from "../figma_app/783094";
 import { ZC } from "../figma_app/39751";
@@ -178,7 +178,7 @@ class y extends Component {
             break;
           }
         default:
-          xb(e);
+          throwTypeError(e);
       }
     };
     this.onDrag = e => {
@@ -271,8 +271,8 @@ class y extends Component {
     };
   }
   getCurrentContentSize() {
-    vA(!!this.props.height);
-    vA(!!this.props.width);
+    assert(!!this.props.height);
+    assert(!!this.props.width);
     return {
       x: this.props.width,
       y: this.props.height - $$g6

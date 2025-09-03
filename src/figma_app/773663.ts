@@ -1,5 +1,5 @@
 import { useLayoutEffect } from "react";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { getFeatureFlags } from "../905/601108";
 import { Ay } from "../905/612521";
 import { k as _$$k } from "../905/22009";
@@ -167,7 +167,7 @@ export function $$d4(e = _$$k.Editors.ALL, t, r) {
           };
       }
     default:
-      xb(e);
+      throwTypeError(e);
   }
 }
 export function $$c3() {
@@ -205,7 +205,7 @@ export function $$p1(e, t, r) {
         resourceType: t
       };
     default:
-      xb(r.anchorOn);
+      throwTypeError(r.anchorOn);
   }
 }
 export function $$_2(e, t) {

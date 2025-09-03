@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useEffect, useMemo, useRef, useState, useCallback } from "react";
 import { wA, d4 } from "../vendor/514228";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { Im } from "../figma_app/493477";
 import { Y9, Wk } from "../figma_app/272243";
 import { hS } from "../905/437088";
@@ -585,7 +585,7 @@ function em(e) {
           });
           break;
         default:
-          xb(t);
+          throwTypeError(t);
       }
       onTemplateInsertedNewFile?.();
     }

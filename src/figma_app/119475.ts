@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { createContext, forwardRef, useRef, useCallback, useMemo, useState, useContext, useEffect } from "react";
 import { popLast, findPrevious, findNext, findNearest } from "../figma_app/656233";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { lQ } from "../905/934246";
 import { isNullish, assertNotNullish } from "../figma_app/95419";
 import { zN } from "../905/19536";
@@ -393,7 +393,7 @@ export function $$T8(e = "real") {
         fauxBlurItem();
         break;
       default:
-        xb(e);
+        throwTypeError(e);
     }
   }, [blurItem, fauxBlurItem, e]);
 }

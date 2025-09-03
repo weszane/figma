@@ -3,7 +3,7 @@ import { useCallback, useMemo, useState } from "react";
 import { wA, d4 } from "../vendor/514228";
 import { defaultLanguage, languageCodes, subsetLanguages, allLanguages } from "../905/816253";
 import { Pu, Xo } from "../905/528121";
-import { wc } from "../figma_app/465776";
+import { throwError } from "../figma_app/465776";
 import { hS } from "../905/437088";
 import { bL, Rq } from "../905/38914";
 import { Y9, hE, nB, wi, jk } from "../figma_app/272243";
@@ -213,7 +213,7 @@ export function $$O2() {
 }
 export var $$D1 = (e => (e.USER_SETTINGS = "User Settings", e.HELP = "Help", e.ANNOUNCEMENT_MODAL = "Announcement Modal", e))($$D1 || {});
 function L(e) {
-  void 0 === e && wc(`Unsupported locale in language selector: ${e}`);
+  void 0 === e && throwError(`Unsupported locale in language selector: ${e}`);
   return Xo(e);
 }
 export const kA = $$P0;

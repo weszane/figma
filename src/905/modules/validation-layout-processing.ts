@@ -1,6 +1,8 @@
 // Phase 24: Advanced Validation and Layout Processing Systems
 // Extracted from 472793.ts - validation utilities, layout grid processing, export settings, and geometry functions
 
+import { Color, VariableAlias } from "./paint-management"
+
 // Import required dependencies (from main file)
 declare const _$$k2: any
 declare const iE: any
@@ -65,18 +67,21 @@ export interface ListType {
 
 export interface GridLayoutConfig {
   pattern: string
-  axis: string
-  numSections: number
-  type: any
-  gutterSize: any
-  sectionSize: any
-  offset: any
+  axis?: string
+  numSections?: number
+  type?: any
+  gutterSize?: any
+  sectionSize?: any
+  offset?: any
   visible: boolean
-  color: any
+  color: Color
   numSectionsVar?: any
   sectionSizeVar?: any
   offsetVar?: any
   gutterSizeVar?: any
+  boundVariables?: VariableAlias
+  alignment?: string  
+  count?: number
 }
 
 export interface GeometryObject {

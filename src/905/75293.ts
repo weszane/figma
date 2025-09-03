@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, createRef, memo, useContext, useRef, useCallback, useId, cloneElement } from "react";
 import { wA } from "../vendor/514228";
 import { languageCodes } from "../905/816253";
-import { B1 } from "../figma_app/465776";
+import { assertNotNullish } from "../figma_app/465776";
 import { M9 } from "../figma_app/492908";
 import { bL } from "../905/911410";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
@@ -703,7 +703,7 @@ function eb({
     if (e) {
       let i = await p(Oe(e));
       let n = sH(i);
-      B1(n);
+      assertNotNullish(n);
       let r = {
         resolvedDataType: "FLOAT",
         dataType: "ALIAS",

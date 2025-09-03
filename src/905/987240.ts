@@ -1,4 +1,4 @@
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { bOM, X3B } from "../figma_app/763686";
 import { fn, sH } from "../905/871411";
@@ -43,7 +43,7 @@ export let $$y0 = nF((e, {
         t = _$$t("proto.status_messages.a_prototype_with_connections_needs_a_valid_top_level_frame_as_the_origin");
         break;
       default:
-        xb(w);
+        throwTypeError(w);
     }
     e.dispatch(F.enqueue({
       type: "proto-editor-play-button-clicked",
@@ -61,7 +61,7 @@ export let $$y0 = nF((e, {
     zl.set(hg, {
       type: "OPEN_INLINE_PREVIEW",
       payload: {
-        onOpen: (t) => {
+        onOpen: t => {
           let i = x.mirror.sceneGraph.getCurrentPage()?.prototypeDevice?.presetIdentifier || "";
           e.dispatch(Zh({
             name: "prototype.editor_play_button_clicked",

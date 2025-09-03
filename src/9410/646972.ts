@@ -1,4 +1,4 @@
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { nn } from "../figma_app/186343";
 import { q5 } from "../figma_app/516028";
 import { sZ } from "../905/845253";
@@ -37,7 +37,7 @@ export function $$f0({
     case "k12":
       return null;
     default:
-      xb(t);
+      throwTypeError(t);
   }
 }
 export function $$g2() {

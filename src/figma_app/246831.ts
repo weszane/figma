@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { memo, useRef, useEffect, useContext, useCallback, useMemo, useState, useId } from "react";
 import { wA, d4 } from "../vendor/514228";
 import { _m } from "../vendor/891888";
-import { KF, xb } from "../figma_app/465776";
+import { debug, throwTypeError } from "../figma_app/465776";
 import { assertNotNullish, isNullish } from "../figma_app/95419";
 import { $n } from "../905/521428";
 import { d as _$$d } from "../905/976845";
@@ -146,7 +146,7 @@ let eD = memo(function ({
   let U = d4(Sh);
   let B = useCallback(t => {
     t.stopPropagation();
-    KF(null != e.content_hash, "style does not have a hash");
+    debug(null != e.content_hash, "style does not have a hash");
     let r = e.isLocal ? e.node_id : Pt4.getStyleNodeId(e.key, e.content_hash);
     _$$F2.trackFromFullscreen("text_style_override_reverted", {
       node_ids: U
@@ -354,7 +354,7 @@ function ek({
         })
       });
     default:
-      xb(u);
+      throwTypeError(u);
   }
 }
 let eM = _$$f();
@@ -662,7 +662,7 @@ function eG({
       },
       showStyleDetails(e, t, n) {
         if (stylePreviewShown.isShown && !stylePreviewShown.isCreating && stylePreviewShown.style?.node_id === e.node_id && EF(stylePreviewShown.style, e)) i();else {
-          KF(null != e.content_hash, "style does not have a hash");
+          debug(null != e.content_hash, "style does not have a hash");
           let i = e.isLocal ? e.node_id : Pt4.getStyleNodeId(e.key, e.content_hash);
           fn(sH(i)) ? glU.selectStyleByGuid(i) : Eo.getCanvas(e).then(e => {
             glU.selectExternalStyle(e);

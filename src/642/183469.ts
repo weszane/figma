@@ -2,7 +2,7 @@ import { Wh } from "../figma_app/615482";
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useMemo, useState, useEffect, useCallback, useContext, useRef, createRef } from "react";
 import { wA, d4 } from "../vendor/514228";
-import { KF } from "../figma_app/465776";
+import { debug } from "../figma_app/465776";
 import { IL, Im } from "../figma_app/493477";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { glU, KjJ, m1T, JA, Egt, Ez5 } from "../figma_app/763686";
@@ -565,7 +565,7 @@ class ez extends o6 {
           if (n && r(n, n.top, t.top) || t.top > s) return;
           n = t;
         }
-        KF(!!n, "has at least one top level section");
+        debug(!!n, "has at least one top level section");
         r(n, n.top, Number.POSITIVE_INFINITY);
       }
     };
@@ -634,7 +634,7 @@ class ez extends o6 {
     }, {
       recordMetadata: e => {
         let t = this.guidAtMousePosition(e.clientY);
-        KF(!!t, "interaction test does not support rare case of no guid under mouse (empty layers panel?)");
+        debug(!!t, "interaction test does not support rare case of no guid under mouse (empty layers panel?)");
         return {
           path: _$$eT(t, this.getScene()),
           clientX: e.clientX
@@ -711,7 +711,7 @@ class ez extends o6 {
         let t = this.getScene();
         let s = this.guidAtMousePosition(e.clientY);
         let r = this.relativeY(e.clientY);
-        KF(!!s, "interaction test does not support rare case of no guid under mouse (empty layers panel?)");
+        debug(!!s, "interaction test does not support rare case of no guid under mouse (empty layers panel?)");
         let n = this.topByGuid[s];
         let i = this.heightByGuid[s];
         return {
@@ -958,7 +958,7 @@ class ez extends o6 {
     let s = null;
     if (e && "sticky" !== e.parentTop) {
       let r = this.getScene().get(e.parentGuid);
-      KF(!!r, "parentGuid should point to a valid node");
+      debug(!!r, "parentGuid should point to a valid node");
       let n = this.heightByGuid[e.parentGuid];
       let i = t > e.parentTop + n / 3 && t < e.parentTop + 2 * n / 3;
       r.uiOrderedChildren.length && i && (s = r.guid);

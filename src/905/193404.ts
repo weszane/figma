@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { memo, useMemo, useState, useRef, useCallback } from "react";
 import { sortByPropertyWithOptions, sortByProperty, sortByDateProperty } from "../figma_app/656233";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { lQ } from "../905/934246";
 import { e as _$$e } from "../905/916195";
 import { fp, E3 } from "../figma_app/27355";
@@ -281,7 +281,7 @@ export function $$M2({
       case _$$l.FILES:
         return null;
       default:
-        xb(e);
+        throwTypeError(e);
     }
   }, [e, t]);
   return i ? jsx("h3", {

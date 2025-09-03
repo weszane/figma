@@ -1,7 +1,7 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState, useCallback, useRef, useLayoutEffect, useMemo, useEffect, useContext } from "react";
 import { d4, wA } from "../vendor/514228";
-import { xb, B1 } from "../figma_app/465776";
+import { throwTypeError, assertNotNullish } from "../figma_app/465776";
 import { c2 } from "../905/382883";
 import { qE } from "../figma_app/492908";
 import { isNotNullish } from "../figma_app/95419";
@@ -55,7 +55,7 @@ import { P as _$$P2 } from "../figma_app/120873";
 import { oz } from "../figma_app/406976";
 import { gJ } from "../905/923433";
 import { Ao } from "../905/748636";
-import { Pf, xb as _$$xb, wh, w1, dl, X9, Rq, T1, lg, ui, Xp, wd } from "../figma_app/164212";
+import { Pf, throwTypeError, wh, w1, dl, X9, Rq, T1, lg, ui, Xp, wd } from "../figma_app/164212";
 import { xP, Zu, Kn } from "../figma_app/65182";
 import { u as _$$u3 } from "../figma_app/940920";
 import { D as _$$D } from "../905/589275";
@@ -133,7 +133,7 @@ export function $$eE1({
   }, []);
   return (getFeatureFlags().ds_variable_props_number_def || e.type !== J0O.NUMBER) && e.type !== J0O.IMAGE && (getFeatureFlags().dse_slots || e.type !== J0O.SLOT) ? jsxs(Ao, {
     title: _$$t("design_systems.component_properties.edit_component_property", {
-      propType: _$$xb(e.type).toLocaleLowerCase()
+      propType: throwTypeError(e.type).toLocaleLowerCase()
     }),
     initialPosition: B,
     initialWidth: wh,
@@ -466,7 +466,7 @@ function eI({
       onChange: e => {
         l(e.value);
       },
-      recordingKey: Pt("editComponentPropDefaultValue", _$$xb(e.type)),
+      recordingKey: Pt("editComponentPropDefaultValue", throwTypeError(e.type)),
       innerContainerClassName: "edit_component_prop_picker--booleanCellOverride--F9fS2"
     }) : jsxs(l6, {
       ariaLabel: _$$t("design_systems.component_properties.default_value"),
@@ -477,7 +477,7 @@ function eI({
       formatter: X9,
       dropdownShown: t,
       inputClassName: e_,
-      recordingKey: Pt("editComponentPropDefaultValue", _$$xb(e.type)),
+      recordingKey: Pt("editComponentPropDefaultValue", throwTypeError(e.type)),
       children: [jsx(c$, {
         value: !0
       }), jsx(c$, {
@@ -515,7 +515,7 @@ function eS({
         },
         value: r,
         onFocus: e => e.currentTarget?.select(),
-        recordingKey: Pt("editComponentPropDefaultValue", _$$xb(e.type))
+        recordingKey: Pt("editComponentPropDefaultValue", throwTypeError(e.type))
       })
     })
   });
@@ -550,7 +550,7 @@ function ev({
         },
         value: lg(r),
         onFocus: e => e.currentTarget?.select(),
-        recordingKey: Pt("editComponentPropDefaultValue", _$$xb(e.type))
+        recordingKey: Pt("editComponentPropDefaultValue", throwTypeError(e.type))
       })
     })
   });
@@ -642,7 +642,7 @@ function eN({
         def: e
       });
     default:
-      xb(e);
+      throwTypeError(e);
   }
 }
 function eC({
@@ -657,7 +657,7 @@ function eC({
   let c = useMemo(() => e.type !== J0O.INSTANCE_SWAP && isNotNullish(variableType) && isNotNullish(requestedTypes), [e.type, requestedTypes, variableType]);
   let u = useCallback(async n => {
     if (void 0 === n) return;
-    B1(variableType);
+    assertNotNullish(variableType);
     let i = await t(Oe(n));
     i && (l7.user("component-prop-def", () => glU.setComponentPropDefVariableData(e.explicitDefID, y$(variableType, i))), oz("component_prop_def", {
       type: Z_n.ALIAS,
@@ -672,7 +672,7 @@ function eC({
       children: tx("design_systems.component_properties.default_value")
     }), jsx(_$$e, {
       condition: c,
-      wrapper: e => (B1(variableType), jsxs(hu, {
+      wrapper: e => (assertNotNullish(variableType), jsxs(hu, {
         boundVariableId: void 0,
         resolvedType: variableType,
         requestedTypes,
@@ -736,7 +736,7 @@ function ew({
     case J0O.SLOT:
       return null;
     default:
-      xb(e.type);
+      throwTypeError(e.type);
   }
 }
 export const aR = $$ef0;

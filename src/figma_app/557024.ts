@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useMemo, useCallback, useState } from "react";
 import { wA, d4 } from "../vendor/514228";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { hS } from "../905/437088";
 import { t as _$$t } from "../905/150656";
 import { bL } from "../905/38914";
@@ -143,7 +143,7 @@ function F() {
           selectedBranches: "loaded" === U.status ? U.data.archivedBranches : []
         };
       default:
-        xb(w.activeTab);
+        throwTypeError(w.activeTab);
     }
   }, [w, U]);
   let z = useMemo(() => selectedBranches.length < 1, [selectedBranches]);

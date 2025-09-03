@@ -1,7 +1,7 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useState, useCallback, useRef } from "react";
 import { wA } from "../vendor/514228";
-import { KF } from "../figma_app/465776";
+import { debug } from "../figma_app/465776";
 import { Pt } from "../figma_app/806412";
 import { E as _$$E } from "../905/277716";
 import { k } from "../905/582200";
@@ -142,7 +142,7 @@ export function $$w1() {
     canAddOverlay: e,
     overlayPaint: t,
     onOpacityChange: e => {
-      KF(hS(t), "overlay paint should not be mixed");
+      debug(hS(t), "overlay paint should not be mixed");
       var o = {
         ...(t || T)
       };
@@ -150,7 +150,7 @@ export function $$w1() {
       l(o);
     },
     onPaintChange: e => {
-      KF(hS(t), "overlay paint should not be mixed");
+      debug(hS(t), "overlay paint should not be mixed");
       var o = {
         ...e
       };

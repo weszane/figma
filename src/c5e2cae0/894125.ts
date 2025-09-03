@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { wA, d4 } from "../vendor/514228";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { az } from "../905/449184";
 import { clearPaymentFlowData } from "../figma_app/169182";
 import { On } from "../9420/975542";
@@ -51,7 +51,7 @@ function T(e, t, a, s) {
       s === Sc.TEAM && (r ? l.push(4) : a || (l.push(4), l.push(5)), l.push(6));
       break;
     default:
-      xb(e);
+      throwTypeError(e);
   }
   return l.map(e => function (e) {
     switch (e) {

@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useContext } from "react";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { E } from "../905/632989";
 import o from "classnames";
 import { sg } from "../figma_app/48566";
@@ -40,7 +40,7 @@ export function $$_0(e) {
       };
       break;
     default:
-      xb(buttonType);
+      throwTypeError(buttonType);
   }
   return jsx(E, {
     "aria-disabled": I,

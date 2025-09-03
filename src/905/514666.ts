@@ -1,4 +1,4 @@
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { Ez } from "../figma_app/766708";
 import { tx } from "../905/303541";
 import { to } from "../905/156213";
@@ -24,7 +24,7 @@ export function $$d3(e) {
     case E8.NOT_STAGED:
       return "";
     default:
-      xb(e);
+      throwTypeError(e);
   }
 }
 export function $$c1(e, t) {

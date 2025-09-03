@@ -1,6 +1,6 @@
 import { useState, useMemo, useCallback } from "react";
 import { wA } from "../vendor/514228";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { Rs } from "../figma_app/288654";
 import { oA } from "../905/723791";
 import { t } from "../905/303541";
@@ -23,7 +23,7 @@ let g = e => {
     case FAccessRequestStatusType.PENDING:
       return;
     default:
-      xb(e);
+      throwTypeError(e);
   }
 };
 export function $$h0(e) {

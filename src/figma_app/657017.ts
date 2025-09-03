@@ -1,4 +1,4 @@
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { md, eU } from "../figma_app/27355";
 import { isGovCluster } from "../figma_app/169182";
 import { zl } from "../905/276025";
@@ -37,7 +37,7 @@ function m(e) {
     case nT.Whiteboard:
       return !1;
     default:
-      xb(e);
+      throwTypeError(e);
   }
 }
 export const JB = $$h0;

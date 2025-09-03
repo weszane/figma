@@ -39,7 +39,7 @@ import { J as _$$J } from "../905/614223";
 import { pw } from "../1528/157131";
 import U from "lodash-es/mapValues";
 import { oe } from "../figma_app/376315";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { ZH } from "../figma_app/504823";
 import { E as _$$E } from "../905/632989";
 import { g as _$$g } from "../905/687265";
@@ -117,7 +117,7 @@ class $ {
       case "stopped":
         return "dormant";
       default:
-        xb(e);
+        throwTypeError(e);
     }
   }
   currentTime() {
@@ -145,7 +145,7 @@ class $ {
         });
         break;
       default:
-        xb(e);
+        throwTypeError(e);
     }
     return Promise.resolve();
   }
@@ -171,7 +171,7 @@ class $ {
         this._resetListeners.push(t);
         break;
       default:
-        xb(e);
+        throwTypeError(e);
     }
   }
   removeEventListener(e, t) {
@@ -192,7 +192,7 @@ class $ {
         this._resetListeners = this._resetListeners.filter(e => e !== t);
         break;
       default:
-        xb(e);
+        throwTypeError(e);
     }
   }
   triggerReset() {

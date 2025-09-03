@@ -31,7 +31,7 @@ import { D4, nz } from '../905/697795';
 import { l as _$$l } from '../905/714607';
 import { NA } from '../905/738636';
 import { CE, mr, SA } from '../905/760074';
-import { j as _$$j2 } from '../905/834956';
+import { noop } from '../905/834956';
 import { BK } from '../905/848862';
 import { n as _$$n, g4, m8, SW, Ul, v_ } from '../905/864644';
 import { F as _$$F3 } from '../905/915030';
@@ -52,7 +52,7 @@ import { MG } from '../figma_app/277330';
 import { ce } from '../figma_app/347146';
 import { _H, ae, CS, gX, nL, zj } from '../figma_app/448654';
 import { D6 as _$$D, Kd } from '../figma_app/465071';
-import { wc, xb } from '../figma_app/465776';
+import { throwError, throwTypeError } from '../figma_app/465776';
 import { jn } from '../figma_app/522082';
 import { Gi } from '../figma_app/528509';
 import { nb, Tf, Y6 } from '../figma_app/543100';
@@ -225,7 +225,7 @@ export function $$ek0(e) {
         }));
         return;
       default:
-        xb(t);
+        throwTypeError(t);
     }
   };
   let e0 = e => {
@@ -497,7 +497,7 @@ export function $$ek0(e) {
       case 'hidden':
         break;
       default:
-        xb(n.status);
+        throwTypeError(n.status);
     }
   };
   let th = (e, t, n) => {
@@ -780,7 +780,7 @@ export function $$ek0(e) {
               callback: () => tn(e.file)
             };
           default:
-            xb(e);
+            throwTypeError(e);
         }
       },
       [eC.MOVE_FILE]: (e, t, i) => ({
@@ -810,7 +810,7 @@ export function $$ek0(e) {
               }
             };
           default:
-            wc(eC.RESTORE_FROM_VERSION);
+            throwError(eC.RESTORE_FROM_VERSION);
         }
       },
       [eC.SHARE]: e => {
@@ -858,7 +858,7 @@ export function $$ek0(e) {
               callback: () => eQ(e)
             };
           default:
-            wc(eC.SHOW_IN_FOLDER);
+            throwError(eC.SHOW_IN_FOLDER);
         }
       },
       [eC.UNPIN_FILE_FROM_FOLDER]: e => ({
@@ -1117,7 +1117,7 @@ export function $$ek0(e) {
   });
   return jsx(v, {
     portalTarget: document.body,
-    children: jsx(_$$j2, {
+    children: jsx(noop, {
       autofocusPrevOnDismount: !0,
       dispatch: i,
       items: ix,
@@ -1134,4 +1134,4 @@ export function $$ek0(e) {
   });
 }
 export const w = $$ek0;
-export const L = $$eT1; 
+export const L = $$eT1;

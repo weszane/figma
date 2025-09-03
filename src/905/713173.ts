@@ -1,4 +1,4 @@
-import { vA } from "../figma_app/465776";
+import { assert } from "../figma_app/465776";
 import { Z_n } from "../figma_app/763686";
 import { b } from "../905/428797";
 function s(e) {
@@ -11,13 +11,13 @@ function s(e) {
 export const A = function e(t, i) {
   let [a, o] = s(t);
   if (!a) throw Error("Could not find matching rule for " + JSON.stringify(t));
-  vA(!!a.stringify);
+  assert(!!a.stringify);
   return a.stringify({
     current: () => t,
     stringifyArgument: (a, l = !0) => {
-      vA(t.type === Z_n.EXPRESSION);
+      assert(t.type === Z_n.EXPRESSION);
       let d = t.value.expressionArguments[a];
-      vA(!!d);
+      assert(!!d);
       let c = e(d, i);
       if (!l) return c;
       let [u, p] = s(d);

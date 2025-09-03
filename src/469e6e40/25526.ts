@@ -13,7 +13,7 @@ import { d as _$$d } from "../469e6e40/744116";
 import { RR, y3 } from "../figma_app/307841";
 import { i as _$$i } from "../469e6e40/549061";
 import { ZY } from "../figma_app/845611";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { md, eU as _$$eU, Xr } from "../figma_app/27355";
 import { h as _$$h } from "../905/207101";
 import { tx as _$$tx, t as _$$t } from "../905/303541";
@@ -292,7 +292,7 @@ function V(e) {
         userFlagOnShow: G
       });
     default:
-      xb(step);
+      throwTypeError(step);
   }
 }
 function W() {
@@ -902,335 +902,335 @@ let tK = (e, t, a) => [tD, {
   value: tL,
   description: _$$tx("activity_log.filter.files")
 }, {
-    value: ["fig_file_create"],
-    description: _$$tx("activity_log.filter.created_a_file")
-  }, {
-    value: ["fig_file_duplicate"],
-    description: _$$tx("activity_log.filter.duplicated_a_file")
-  }, {
-    value: ["fig_file_export"],
-    description: _$$tx("activity_log.filter.exported_a_file")
-  }, {
-    value: ["fig_file_image_download"],
-    description: _$$tx("activity_log.filter.downloaded_an_image")
-  }, {
-    value: ["fig_file_link_access_change"],
-    description: _$$tx("activity_log.filter.file_link_access_changed")
-  }, {
-    value: ["fig_file_link_expiration_change"],
-    description: _$$tx("activity_log.filter.file_link_expiration_changed")
-  }, {
-    value: ["fig_file_viewer_access_change"],
-    description: _$$tx("activity_log.filter.viewer_permissions_changed")
-  }, {
-    value: ["fig_file_member_add", "fig_file_member_permission_change", "fig_file_member_remove"],
-    description: _$$tx("activity_log.filter.file_membership_changed")
-  }, {
-    value: ["fig_file_move"],
-    description: _$$tx("activity_log.filter.moved_a_file")
-  }, {
-    value: ["fig_file_permanent_delete"],
-    description: _$$tx("activity_log.filter.permanently_deleted_a_file")
-  }, {
-    value: ["fig_file_permanent_undelete", "fig_file_restore"],
-    description: _$$tx("activity_log.filter.restored_a_file")
-  }, {
-    value: ["fig_file_set_password"],
-    description: _$$tx("activity_log.filter.fig_file_set_password")
-  }, {
-    value: ["fig_file_unset_password"],
-    description: _$$tx("activity_log.filter.fig_file_unset_password")
-  }, {
-    value: ["fig_file_rename"],
-    description: _$$tx("activity_log.filter.renamed_a_file")
-  }, {
-    value: ["fig_file_save_as"],
-    description: _$$tx("activity_log.filter.saved_a_file")
-  }, {
-    value: ["fig_file_trash"],
-    description: _$$tx("activity_log.filter.trashed_a_file")
-  }, {
-    value: ["fig_file_view"],
-    description: _$$tx("activity_log.filter.viewed_a_file")
-  }, {
-    value: ["fig_file_view_prototype"],
-    description: _$$tx("activity_log.filter.viewed_a_prototype")
-  }, {
-    value: ["open_sessions_start"],
-    description: _$$tx("activity_log.filter.open_sessions_start")
-  }, {
-    value: ["open_sessions_end"],
-    description: _$$tx("activity_log.filter.open_sessions_end")
-  }, ...tM, ...tJ, {
-    value: tL,
-    description: _$$tx("activity_log.filter.projects")
-  }, {
-    value: ["folder_create"],
-    description: _$$tx("activity_log.filter.created_a_project")
-  }, {
-    value: ["folder_delete", "folder_trash", "folder_export", "folder_restore"],
-    description: _$$tx("activity_log.filter.deleted_a_project")
-  }, {
-    value: ["folder_member_add", "folder_member_permission_change", "folder_member_remove"],
-    description: _$$tx("activity_log.filter.project_membership_changed")
-  }, {
-    value: ["folder_move"],
-    description: _$$tx("activity_log.filter.moved_a_project")
-  }, {
-    value: ["folder_rename"],
-    description: _$$tx("activity_log.filter.renamed_a_project")
-  }, {
-    value: ["folder_team_access_change"],
-    description: _$$tx("activity_log.filter.changed_the_team_access_of_a_project")
-  }, {
-    value: ["folder_transfer_sent", "folder_transfer_copy_sent", "folder_export"],
-    description: _$$tx("activity_log.filter.outgoing_transfers")
-  }, {
-    value: ["folder_transfer_received", "folder_transfer_copy_received", "folder_transfer_approved", "folder_transfer_copy_approved", "folder_import"],
-    description: _$$tx("activity_log.filter.incoming_transfers")
-  }, {
-    value: tL,
-    description: _$$tx("activity_log.filter.teams")
-  }, {
-    value: ["team_create", "team_import"],
-    description: _$$tx("activity_log.filter.created_a_team")
-  }, {
-    value: ["team_delete", "team_export"],
-    description: _$$tx("activity_log.filter.deleted_a_team")
-  }, {
-    value: ["team_transfer_sent", "team_export"],
-    description: _$$tx("activity_log.filter.outgoing_transfers")
-  }, {
-    value: ["team_transfer_received", "team_transfer_approved", "team_import"],
-    description: _$$tx("activity_log.filter.incoming_transfers")
-  }, {
-    value: ["team_restore"],
-    description: _$$tx("activity_log.filter.restored_a_team")
-  }, {
-    value: ["team_member_add", "team_member_permission_change", "team_member_remove"],
-    description: _$$tx("activity_log.filter.team_membership_changed")
-  }, {
-    value: ["team_rename"],
-    description: _$$tx("activity_log.filter.renamed_a_team")
-  }, {
-    value: ["team_org_access_change"],
-    description: _$$tx("activity_log.filter.changed_the_org_access_of_a_team")
-  }, {
-    value: ["team_license_group_change", "team_workspace_change"],
-    description: _$$tx("activity_log.filter.changed_the_workspace_of_a_team")
-  }, {
-    value: ["org_team_creation_controls"],
-    description: _$$tx("activity_log.filter.changed_team_creation_controls")
-  }, {
-    value: tL,
-    description: _$$tx("activity_log.filter.organizations")
-  }, {
-    value: ["org_merge"],
-    description: _$$tx("activity_log.filter.org_merged")
-  }, {
-    value: ["org_user_create", "org_user_permission_change", "org_user_delete"],
-    description: _$$tx("activity_log.filter.org_membership_changed")
-  }, {
-    value: ["roster_exported"],
-    description: _$$tx("activity_log.filter.exported_the_members_list")
-  }, {
-    value: ["org_team_csv_exported"],
-    description: _$$tx("activity_log.filter.exported_the_org_team_list")
-  }, {
-    value: ["workspace_team_csv_exported"],
-    description: _$$tx("activity_log.filter.exported_the_workspace_team_list")
-  }, ...(e ? tV : []), {
-    value: ["org_invite_create"],
-    description: _$$tx("activity_log.filter.org_invite_created")
-  }, {
-    value: ["org_auto_approval_setting_update"],
-    description: jsx(Fragment, {
-      children: _$$tx("activity_log.filter.auto_approval_settings_updated")
-    })
-  }, {
-    value: ["cursor_chat_setting_change"],
-    description: _$$tx("activity_log.filter.cursor_chat_setting_change")
-  }, ...(e ? [{
-    value: ["idle_timeout_setting_change"],
-    description: _$$tx("activity_log.filter.idle_timeout_setting_change")
-  }] : []), ...(e && t.shared_container_setting?.configured_upgrade_request_setting ? [{
-    value: ["configurable_upgrade_request_setting_change", "configurable_upgrade_request_message_change"],
-    description: _$$tx("activity_log.filter.configurable_upgrade_request_flow_changed")
-  }] : []), {
-    value: ["scim_token_generate", "scim_token_revoke"],
-    description: _$$tx("activity_log.filter.scim_token_generated_revoked")
-  }, {
-    value: ["ai_features_enable", "ai_features_disable"],
-    description: _$$tx("activity_log.filter.ai_features_setting_change")
-  }, {
-    value: ["ai_content_training_enable", "ai_content_training_disable"],
-    description: _$$tx("activity_log.filter.ai_content_training_setting_change")
-  }, {
-    value: ["seats_renew"],
-    description: _$$tx("activity_log.filter.seats_renew")
-  }, ...(e && a ? [{
-    value: ["mfa_required_setting_change"],
-    description: _$$tx("activity_log.filter.mfa_required_setting_change")
-  }] : []), {
-    value: tL,
-    description: _$$tx("activity_log.filter.seat_changes")
-  }, {
-    value: ["org_default_license_type_change"],
-    description: _$$tx("activity_log.filter.changed_default_role.seat_rename")
-  }, {
-    value: ["org_user_account_type_upgrade_requested", "org_user_account_type_upgrade_approved", "org_user_account_type_upgrade_denied", "provisional_access_start", "provisional_access_end_request_approved", "provisional_access_end_request_denied", "provisional_access_end_new_request"],
-    description: _$$tx("activity_log.filter.upgrade_requests_and_activity")
-  }, {
-    value: ["org_user_account_type_change", "org_user_account_type_change_to_full"],
-    description: _$$tx("activity_log.filter.org_role_changed.seat_rename")
-  }, ...(e ? tq.concat([{
-    value: ["workspace_public_link_setting_change"],
-    description: _$$tx("activity_log.filter.changed_workspace_public_link_setting")
-  }, {
-    value: ["external_collaboration_controls_setting_change"],
-    description: _$$tx("activity_log.filter.external_collaboration_controls_setting_change")
-  }]) : tq), ...(e ? tB : []), ...(e ? tG : []), ...(t.can_use_multi_idp ? tY : []), ...(e ? tz : []), ...(e ? tF : []), {
-    value: tL,
-    description: _$$tx("activity_log.filter.libraries")
-  }, {
-    value: ["org_library_setting_change"],
-    description: _$$tx("activity_log.filter.org_library_setting_changed")
-  }, ...(e ? t$ : []), ...(e && Oe(t) ? [{
-    value: ["workspace_library_approve", "workspace_library_unapprove"],
-    description: _$$tx("activity_log.filter.workspace_library_approval_changed")
-  }] : []), ...(e && Oe(t) ? [{
-    value: ["org_library_approve", "org_library_unapprove"],
-    description: _$$tx("activity_log.filter.org_library_approval_changed")
-  }] : []), {
-    value: tL,
-    description: _$$tx("activity_log.filter.users")
-  }, ...(e ? [{
-    value: ["user_idle_session_timeout"],
-    description: _$$tx("activity_log.filter.user_session_timed_out")
-  }] : []), {
-    value: ["user_sign_in", "user_sign_out"],
-    description: _$$tx("activity_log.filter.user_signed_in_signed_out")
-  }, {
-    value: tL,
-    description: _$$tx("activity_log.filter.community")
-  }, {
-    value: ["community_hub_file_publish", "community_hub_file_update", "community_hub_file_delete"],
-    description: _$$tx("activity_log.filter.file_published_updated_deleted")
-  }, {
-    value: ["community_plugin_publish", "community_plugin_update", "community_plugin_delete"],
-    description: _$$tx("activity_log.filter.plugin_published_updated_deleted")
-  }, {
-    value: ["community_widget_publish", "community_widget_update", "community_widget_delete"],
-    description: _$$tx("activity_log.filter.widget_published_updated_deleted")
-  }, {
-    value: tL,
-    description: _$$tx("activity_log.filter.private_plugins")
-  }, {
-    value: ["private_plugin_publish"],
-    description: _$$tx("activity_log.filter.plugin_published")
-  }, {
-    value: ["private_plugin_update"],
-    description: _$$tx("activity_log.filter.plugin_updated")
-  }, {
-    value: ["private_plugin_delete"],
-    description: _$$tx("activity_log.filter.plugin_deleted")
-  }, {
-    value: tL,
-    description: _$$tx("activity_log.filter.plugin_management")
-  }, {
-    value: ["plugin_approvelist_enable", "plugin_approvelist_disable"],
-    description: _$$tx("activity_log.filter.plugin_approve_list_setting_changed")
-  }, {
-    value: ["plugin_approvelist_request_org"],
-    description: _$$tx("activity_log.filter.plugin_approve_list_requested")
-  }, {
-    value: ["plugin_approvelist_request_approve_org", "plugin_approvelist_request_reject_org", "plugin_approvelist_request_approve_workspace", "plugin_approvelist_request_reject_workspace", "plugin_approvelist_add", "plugin_approvelist_add_workspace", "plugin_approvelist_remove", "plugin_approvelist_remove_workspace"],
-    description: _$$tx("activity_log.filter.approve_list_plugins_reviewed")
-  }, {
-    value: ["plugin_install", "plugin_uninstall"],
-    description: _$$tx("activity_log.filter.install_plugins_org_wide")
-  }, {
-    value: tL,
-    description: _$$tx("activity_log.filter.plugin_publishers")
-  }, {
-    value: ["plugin_publisher_accept_invite", "plugin_publisher_remove_invite"],
-    description: _$$tx("activity_log.filter.plugin_publisher_accept_remove_invite")
-  }, {
-    value: ["plugin_publisher_invite"],
-    description: _$$tx("activity_log.filter.plugin_publisher_invite")
-  }, {
-    value: ["plugin_publisher_remove"],
-    description: _$$tx("activity_log.filter.plugin_publisher_remove")
-  }, {
-    value: ["plugin_ownership_transfer"],
-    description: _$$tx("activity_log.filter.plugin_ownership_transfer")
-  }, {
-    value: tL,
-    description: _$$tx("activity_log.filter.private_widgets")
-  }, {
-    value: ["private_widget_publish"],
-    description: _$$tx("activity_log.filter.widget_published")
-  }, {
-    value: ["private_widget_update"],
-    description: _$$tx("activity_log.filter.widget_updated")
-  }, {
-    value: ["private_widget_delete"],
-    description: _$$tx("activity_log.filter.widget_deleted")
-  }, {
-    value: tL,
-    description: _$$tx("activity_log.filter.widget_management")
-  }, {
-    value: ["widgets_enabled", "widgets_disable"],
-    description: _$$tx("activity_log.filter.widget_approve_list_setting_changed")
-  }, {
-    value: ["widget_approvelist_request_org"],
-    description: _$$tx("activity_log.filter.widget_approve_list_requested")
-  }, {
-    value: ["widget_approvelist_request_approve_org", "widget_approvelist_request_reject_org", "widget_approvelist_request_approve_workspace", "widget_approvelist_request_reject_workspace", "widget_approvelist_add", "widget_approvelist_add_workspace", "widget_approvelist_remove", "widget_approvelist_remove_workspace"],
-    description: _$$tx("activity_log.filter.approve_list_widgets_reviewed")
-  }, {
-    value: ["widget_install", "widget_uninstall"],
-    description: _$$tx("activity_log.filter.install_widgets_org_wide")
-  }, {
-    value: tL,
-    description: _$$tx("activity_log.filter.widget_publishers")
-  }, {
-    value: ["widget_publisher_accept_invite", "widget_publisher_remove_invite"],
-    description: _$$tx("activity_log.filter.widget_publisher_accept_remove_invite")
-  }, {
-    value: ["widget_publisher_invite"],
-    description: _$$tx("activity_log.filter.widget_publisher_invite")
-  }, {
-    value: ["widget_publisher_remove"],
-    description: _$$tx("activity_log.filter.widget_publisher_remove")
-  }, {
-    value: ["widget_ownership_transfer"],
-    description: _$$tx("activity_log.filter.widget_ownership_transfer")
-  }, ...tU, {
-    value: tL,
-    description: _$$tx("activity_log.filter.audio")
-  }, {
-    value: ["voice_call_join_req"],
-    description: _$$tx("activity_log.filter.user_joined_audio_call")
-  }, {
-    value: tL,
-    description: _$$tx("activity_log.filter.integrations")
-  }, {
-    value: ["personal_access_token_create", "personal_access_token_delete"],
-    description: _$$tx("activity_log.filter.personal_access_token_create_delete")
-  }, {
-    value: ["oauth_token_grant", "oauth_token_revoke"],
-    description: _$$tx("activity_log.filter.oauth_token_grant_revoke")
-  }, ...(p3() ? [{
-    value: ["supabase_setting_change"],
-    description: _$$tx("activity_log.filter.supabase_setting_change")
-  }, {
-    value: ["supabase_project_connected"],
-    description: _$$tx("activity_log.filter.supabase_project_connected")
-  }, {
-    value: ["supabase_project_disconnected"],
-    description: _$$tx("activity_log.filter.supabase_project_disconnected")
-  }] : []), ...tW, ...tH, ...tP];
+  value: ["fig_file_create"],
+  description: _$$tx("activity_log.filter.created_a_file")
+}, {
+  value: ["fig_file_duplicate"],
+  description: _$$tx("activity_log.filter.duplicated_a_file")
+}, {
+  value: ["fig_file_export"],
+  description: _$$tx("activity_log.filter.exported_a_file")
+}, {
+  value: ["fig_file_image_download"],
+  description: _$$tx("activity_log.filter.downloaded_an_image")
+}, {
+  value: ["fig_file_link_access_change"],
+  description: _$$tx("activity_log.filter.file_link_access_changed")
+}, {
+  value: ["fig_file_link_expiration_change"],
+  description: _$$tx("activity_log.filter.file_link_expiration_changed")
+}, {
+  value: ["fig_file_viewer_access_change"],
+  description: _$$tx("activity_log.filter.viewer_permissions_changed")
+}, {
+  value: ["fig_file_member_add", "fig_file_member_permission_change", "fig_file_member_remove"],
+  description: _$$tx("activity_log.filter.file_membership_changed")
+}, {
+  value: ["fig_file_move"],
+  description: _$$tx("activity_log.filter.moved_a_file")
+}, {
+  value: ["fig_file_permanent_delete"],
+  description: _$$tx("activity_log.filter.permanently_deleted_a_file")
+}, {
+  value: ["fig_file_permanent_undelete", "fig_file_restore"],
+  description: _$$tx("activity_log.filter.restored_a_file")
+}, {
+  value: ["fig_file_set_password"],
+  description: _$$tx("activity_log.filter.fig_file_set_password")
+}, {
+  value: ["fig_file_unset_password"],
+  description: _$$tx("activity_log.filter.fig_file_unset_password")
+}, {
+  value: ["fig_file_rename"],
+  description: _$$tx("activity_log.filter.renamed_a_file")
+}, {
+  value: ["fig_file_save_as"],
+  description: _$$tx("activity_log.filter.saved_a_file")
+}, {
+  value: ["fig_file_trash"],
+  description: _$$tx("activity_log.filter.trashed_a_file")
+}, {
+  value: ["fig_file_view"],
+  description: _$$tx("activity_log.filter.viewed_a_file")
+}, {
+  value: ["fig_file_view_prototype"],
+  description: _$$tx("activity_log.filter.viewed_a_prototype")
+}, {
+  value: ["open_sessions_start"],
+  description: _$$tx("activity_log.filter.open_sessions_start")
+}, {
+  value: ["open_sessions_end"],
+  description: _$$tx("activity_log.filter.open_sessions_end")
+}, ...tM, ...tJ, {
+  value: tL,
+  description: _$$tx("activity_log.filter.projects")
+}, {
+  value: ["folder_create"],
+  description: _$$tx("activity_log.filter.created_a_project")
+}, {
+  value: ["folder_delete", "folder_trash", "folder_export", "folder_restore"],
+  description: _$$tx("activity_log.filter.deleted_a_project")
+}, {
+  value: ["folder_member_add", "folder_member_permission_change", "folder_member_remove"],
+  description: _$$tx("activity_log.filter.project_membership_changed")
+}, {
+  value: ["folder_move"],
+  description: _$$tx("activity_log.filter.moved_a_project")
+}, {
+  value: ["folder_rename"],
+  description: _$$tx("activity_log.filter.renamed_a_project")
+}, {
+  value: ["folder_team_access_change"],
+  description: _$$tx("activity_log.filter.changed_the_team_access_of_a_project")
+}, {
+  value: ["folder_transfer_sent", "folder_transfer_copy_sent", "folder_export"],
+  description: _$$tx("activity_log.filter.outgoing_transfers")
+}, {
+  value: ["folder_transfer_received", "folder_transfer_copy_received", "folder_transfer_approved", "folder_transfer_copy_approved", "folder_import"],
+  description: _$$tx("activity_log.filter.incoming_transfers")
+}, {
+  value: tL,
+  description: _$$tx("activity_log.filter.teams")
+}, {
+  value: ["team_create", "team_import"],
+  description: _$$tx("activity_log.filter.created_a_team")
+}, {
+  value: ["team_delete", "team_export"],
+  description: _$$tx("activity_log.filter.deleted_a_team")
+}, {
+  value: ["team_transfer_sent", "team_export"],
+  description: _$$tx("activity_log.filter.outgoing_transfers")
+}, {
+  value: ["team_transfer_received", "team_transfer_approved", "team_import"],
+  description: _$$tx("activity_log.filter.incoming_transfers")
+}, {
+  value: ["team_restore"],
+  description: _$$tx("activity_log.filter.restored_a_team")
+}, {
+  value: ["team_member_add", "team_member_permission_change", "team_member_remove"],
+  description: _$$tx("activity_log.filter.team_membership_changed")
+}, {
+  value: ["team_rename"],
+  description: _$$tx("activity_log.filter.renamed_a_team")
+}, {
+  value: ["team_org_access_change"],
+  description: _$$tx("activity_log.filter.changed_the_org_access_of_a_team")
+}, {
+  value: ["team_license_group_change", "team_workspace_change"],
+  description: _$$tx("activity_log.filter.changed_the_workspace_of_a_team")
+}, {
+  value: ["org_team_creation_controls"],
+  description: _$$tx("activity_log.filter.changed_team_creation_controls")
+}, {
+  value: tL,
+  description: _$$tx("activity_log.filter.organizations")
+}, {
+  value: ["org_merge"],
+  description: _$$tx("activity_log.filter.org_merged")
+}, {
+  value: ["org_user_create", "org_user_permission_change", "org_user_delete"],
+  description: _$$tx("activity_log.filter.org_membership_changed")
+}, {
+  value: ["roster_exported"],
+  description: _$$tx("activity_log.filter.exported_the_members_list")
+}, {
+  value: ["org_team_csv_exported"],
+  description: _$$tx("activity_log.filter.exported_the_org_team_list")
+}, {
+  value: ["workspace_team_csv_exported"],
+  description: _$$tx("activity_log.filter.exported_the_workspace_team_list")
+}, ...(e ? tV : []), {
+  value: ["org_invite_create"],
+  description: _$$tx("activity_log.filter.org_invite_created")
+}, {
+  value: ["org_auto_approval_setting_update"],
+  description: jsx(Fragment, {
+    children: _$$tx("activity_log.filter.auto_approval_settings_updated")
+  })
+}, {
+  value: ["cursor_chat_setting_change"],
+  description: _$$tx("activity_log.filter.cursor_chat_setting_change")
+}, ...(e ? [{
+  value: ["idle_timeout_setting_change"],
+  description: _$$tx("activity_log.filter.idle_timeout_setting_change")
+}] : []), ...(e && t.shared_container_setting?.configured_upgrade_request_setting ? [{
+  value: ["configurable_upgrade_request_setting_change", "configurable_upgrade_request_message_change"],
+  description: _$$tx("activity_log.filter.configurable_upgrade_request_flow_changed")
+}] : []), {
+  value: ["scim_token_generate", "scim_token_revoke"],
+  description: _$$tx("activity_log.filter.scim_token_generated_revoked")
+}, {
+  value: ["ai_features_enable", "ai_features_disable"],
+  description: _$$tx("activity_log.filter.ai_features_setting_change")
+}, {
+  value: ["ai_content_training_enable", "ai_content_training_disable"],
+  description: _$$tx("activity_log.filter.ai_content_training_setting_change")
+}, {
+  value: ["seats_renew"],
+  description: _$$tx("activity_log.filter.seats_renew")
+}, ...(e && a ? [{
+  value: ["mfa_required_setting_change"],
+  description: _$$tx("activity_log.filter.mfa_required_setting_change")
+}] : []), {
+  value: tL,
+  description: _$$tx("activity_log.filter.seat_changes")
+}, {
+  value: ["org_default_license_type_change"],
+  description: _$$tx("activity_log.filter.changed_default_role.seat_rename")
+}, {
+  value: ["org_user_account_type_upgrade_requested", "org_user_account_type_upgrade_approved", "org_user_account_type_upgrade_denied", "provisional_access_start", "provisional_access_end_request_approved", "provisional_access_end_request_denied", "provisional_access_end_new_request"],
+  description: _$$tx("activity_log.filter.upgrade_requests_and_activity")
+}, {
+  value: ["org_user_account_type_change", "org_user_account_type_change_to_full"],
+  description: _$$tx("activity_log.filter.org_role_changed.seat_rename")
+}, ...(e ? tq.concat([{
+  value: ["workspace_public_link_setting_change"],
+  description: _$$tx("activity_log.filter.changed_workspace_public_link_setting")
+}, {
+  value: ["external_collaboration_controls_setting_change"],
+  description: _$$tx("activity_log.filter.external_collaboration_controls_setting_change")
+}]) : tq), ...(e ? tB : []), ...(e ? tG : []), ...(t.can_use_multi_idp ? tY : []), ...(e ? tz : []), ...(e ? tF : []), {
+  value: tL,
+  description: _$$tx("activity_log.filter.libraries")
+}, {
+  value: ["org_library_setting_change"],
+  description: _$$tx("activity_log.filter.org_library_setting_changed")
+}, ...(e ? t$ : []), ...(e && Oe(t) ? [{
+  value: ["workspace_library_approve", "workspace_library_unapprove"],
+  description: _$$tx("activity_log.filter.workspace_library_approval_changed")
+}] : []), ...(e && Oe(t) ? [{
+  value: ["org_library_approve", "org_library_unapprove"],
+  description: _$$tx("activity_log.filter.org_library_approval_changed")
+}] : []), {
+  value: tL,
+  description: _$$tx("activity_log.filter.users")
+}, ...(e ? [{
+  value: ["user_idle_session_timeout"],
+  description: _$$tx("activity_log.filter.user_session_timed_out")
+}] : []), {
+  value: ["user_sign_in", "user_sign_out"],
+  description: _$$tx("activity_log.filter.user_signed_in_signed_out")
+}, {
+  value: tL,
+  description: _$$tx("activity_log.filter.community")
+}, {
+  value: ["community_hub_file_publish", "community_hub_file_update", "community_hub_file_delete"],
+  description: _$$tx("activity_log.filter.file_published_updated_deleted")
+}, {
+  value: ["community_plugin_publish", "community_plugin_update", "community_plugin_delete"],
+  description: _$$tx("activity_log.filter.plugin_published_updated_deleted")
+}, {
+  value: ["community_widget_publish", "community_widget_update", "community_widget_delete"],
+  description: _$$tx("activity_log.filter.widget_published_updated_deleted")
+}, {
+  value: tL,
+  description: _$$tx("activity_log.filter.private_plugins")
+}, {
+  value: ["private_plugin_publish"],
+  description: _$$tx("activity_log.filter.plugin_published")
+}, {
+  value: ["private_plugin_update"],
+  description: _$$tx("activity_log.filter.plugin_updated")
+}, {
+  value: ["private_plugin_delete"],
+  description: _$$tx("activity_log.filter.plugin_deleted")
+}, {
+  value: tL,
+  description: _$$tx("activity_log.filter.plugin_management")
+}, {
+  value: ["plugin_approvelist_enable", "plugin_approvelist_disable"],
+  description: _$$tx("activity_log.filter.plugin_approve_list_setting_changed")
+}, {
+  value: ["plugin_approvelist_request_org"],
+  description: _$$tx("activity_log.filter.plugin_approve_list_requested")
+}, {
+  value: ["plugin_approvelist_request_approve_org", "plugin_approvelist_request_reject_org", "plugin_approvelist_request_approve_workspace", "plugin_approvelist_request_reject_workspace", "plugin_approvelist_add", "plugin_approvelist_add_workspace", "plugin_approvelist_remove", "plugin_approvelist_remove_workspace"],
+  description: _$$tx("activity_log.filter.approve_list_plugins_reviewed")
+}, {
+  value: ["plugin_install", "plugin_uninstall"],
+  description: _$$tx("activity_log.filter.install_plugins_org_wide")
+}, {
+  value: tL,
+  description: _$$tx("activity_log.filter.plugin_publishers")
+}, {
+  value: ["plugin_publisher_accept_invite", "plugin_publisher_remove_invite"],
+  description: _$$tx("activity_log.filter.plugin_publisher_accept_remove_invite")
+}, {
+  value: ["plugin_publisher_invite"],
+  description: _$$tx("activity_log.filter.plugin_publisher_invite")
+}, {
+  value: ["plugin_publisher_remove"],
+  description: _$$tx("activity_log.filter.plugin_publisher_remove")
+}, {
+  value: ["plugin_ownership_transfer"],
+  description: _$$tx("activity_log.filter.plugin_ownership_transfer")
+}, {
+  value: tL,
+  description: _$$tx("activity_log.filter.private_widgets")
+}, {
+  value: ["private_widget_publish"],
+  description: _$$tx("activity_log.filter.widget_published")
+}, {
+  value: ["private_widget_update"],
+  description: _$$tx("activity_log.filter.widget_updated")
+}, {
+  value: ["private_widget_delete"],
+  description: _$$tx("activity_log.filter.widget_deleted")
+}, {
+  value: tL,
+  description: _$$tx("activity_log.filter.widget_management")
+}, {
+  value: ["widgets_enabled", "widgets_disable"],
+  description: _$$tx("activity_log.filter.widget_approve_list_setting_changed")
+}, {
+  value: ["widget_approvelist_request_org"],
+  description: _$$tx("activity_log.filter.widget_approve_list_requested")
+}, {
+  value: ["widget_approvelist_request_approve_org", "widget_approvelist_request_reject_org", "widget_approvelist_request_approve_workspace", "widget_approvelist_request_reject_workspace", "widget_approvelist_add", "widget_approvelist_add_workspace", "widget_approvelist_remove", "widget_approvelist_remove_workspace"],
+  description: _$$tx("activity_log.filter.approve_list_widgets_reviewed")
+}, {
+  value: ["widget_install", "widget_uninstall"],
+  description: _$$tx("activity_log.filter.install_widgets_org_wide")
+}, {
+  value: tL,
+  description: _$$tx("activity_log.filter.widget_publishers")
+}, {
+  value: ["widget_publisher_accept_invite", "widget_publisher_remove_invite"],
+  description: _$$tx("activity_log.filter.widget_publisher_accept_remove_invite")
+}, {
+  value: ["widget_publisher_invite"],
+  description: _$$tx("activity_log.filter.widget_publisher_invite")
+}, {
+  value: ["widget_publisher_remove"],
+  description: _$$tx("activity_log.filter.widget_publisher_remove")
+}, {
+  value: ["widget_ownership_transfer"],
+  description: _$$tx("activity_log.filter.widget_ownership_transfer")
+}, ...tU, {
+  value: tL,
+  description: _$$tx("activity_log.filter.audio")
+}, {
+  value: ["voice_call_join_req"],
+  description: _$$tx("activity_log.filter.user_joined_audio_call")
+}, {
+  value: tL,
+  description: _$$tx("activity_log.filter.integrations")
+}, {
+  value: ["personal_access_token_create", "personal_access_token_delete"],
+  description: _$$tx("activity_log.filter.personal_access_token_create_delete")
+}, {
+  value: ["oauth_token_grant", "oauth_token_revoke"],
+  description: _$$tx("activity_log.filter.oauth_token_grant_revoke")
+}, ...(p3() ? [{
+  value: ["supabase_setting_change"],
+  description: _$$tx("activity_log.filter.supabase_setting_change")
+}, {
+  value: ["supabase_project_connected"],
+  description: _$$tx("activity_log.filter.supabase_project_connected")
+}, {
+  value: ["supabase_project_disconnected"],
+  description: _$$tx("activity_log.filter.supabase_project_disconnected")
+}] : []), ...tW, ...tH, ...tP];
 let tX = [{
   value: {
     start: _$$A2().format("YYYY-MM-DD"),
@@ -1476,7 +1476,7 @@ class tZ extends PureComponent {
     let a = this.displayedFilterParams(t);
     let n = this.displayedFilterParams(this.state);
     if (e3()(a, n) || this.filterLogs(), e.activityLogs.logs !== this.props.activityLogs.logs) {
-      let e = this.props.activityLogs.logs.filter(e => function(e, t) {
+      let e = this.props.activityLogs.logs.filter(e => function (e, t) {
         if (tB.includes(t)) switch (e.event_name) {
           case "license_group_create":
           case "license_group_rename":
@@ -1804,7 +1804,7 @@ function aa() {
     onComplete: complete
   });
 }
-let aw = Ju(function(e) {
+let aw = Ju(function (e) {
   let t = wA();
   let a = MX();
   let n = hS(e);
@@ -2003,7 +2003,7 @@ function aC({
     })
   });
 }
-let aS = Ju(function(e) {
+let aS = Ju(function (e) {
   let t = wA();
   let [a, n] = useState(null);
   let l = dq();
@@ -2559,7 +2559,7 @@ function a3(e) {
       total: 0
     }))
   }, [], {
-    release: () => { }
+    release: () => {}
   }), [a, o]);
   let c = useMemo(() => o.transform(e => {
     let t = {
@@ -2850,7 +2850,7 @@ let nx = e => {
       return _$$tx("workspace.create_confirmation_modal.description.list.libraries");
   }
 };
-let nb = Ju(function({
+let nb = Ju(function ({
   onConfirm: e
 }) {
   let t = wA();
@@ -2890,7 +2890,7 @@ let nv = "workspace_edit_modal--adminRow---ltkO workspace_edit_modal--inputRow--
 let nf = "workspace_edit_modal--inputLabel--azeeV";
 let nj = "workspace_edit_modal--adminField--JKgPu";
 let nw = "First Workspace Created";
-let nk = Ju(function(e) {
+let nk = Ju(function (e) {
   let t = wA();
   let [a, n] = useState(null);
   let l = X$("WorkspaceEditModal").unwrapOr(null);
@@ -3122,7 +3122,7 @@ function nS() {
     userFlagOnShow: nE
   });
 }
-let nL = Ju(function(e) {
+let nL = Ju(function (e) {
   let t = wA();
   let a = d4(e => e.currentUserOrgId);
   let n = _$$q(OK, !0);
@@ -3298,7 +3298,7 @@ function nM({
     }, "delete")]
   }) : null;
 }
-(n || (n = {})).PenCheckmark = function() {
+(n || (n = {})).PenCheckmark = function () {
   return jsxs("svg", {
     width: "49",
     height: "49",
@@ -3855,7 +3855,7 @@ function n4(e) {
     children: _$$tx("members_table.invite_users_button")
   }) : jsx($n, {
     variant: "primary",
-    onClick: () => { },
+    onClick: () => {},
     "aria-label": _$$t("members_table.create_user_group_button"),
     iconPrefix: jsx(_$$x, {}),
     children: _$$tx("members_table.create_user_group_button")
@@ -3892,7 +3892,7 @@ let n8 = new class {
       let {
         meta
       } = t;
-      return function(e) {
+      return function (e) {
         let t = {};
         e.org_analytics.forEach(e => {
           let {
@@ -4026,7 +4026,7 @@ function su({
     approved: e => e.approvedAt.getTime()
   }), []);
   let u = wA();
-  let m = function(e, t) {
+  let m = function (e, t) {
     let a = new Map();
     for (let n of e) {
       if (n.plugin.status !== _$$tT.Loaded) continue;
@@ -4046,7 +4046,7 @@ function su({
       let {
         createdAt
       } = n;
-      let _ = function(e) {
+      let _ = function (e) {
         let {
           allowlistGroupType
         } = e;
@@ -4365,7 +4365,7 @@ function sb() {
     })
   });
 }
-let sy = Ju(function({
+let sy = Ju(function ({
   extension: e,
   isWidget: t,
   declineModalParams: a,
@@ -5352,4 +5352,4 @@ function sB(e) {
     }), (e.selectedTab === J7.TEAMS || e.selectedTab === J7.ACTIVITY) && jsx(eK, {}), e.selectedTab === J7.CONTENT && jsx(nX, {}), jsx(K, {})]
   });
 }
-export const OrgAdminSettingsPageView = $$s$0; 
+export const OrgAdminSettingsPageView = $$s$0;

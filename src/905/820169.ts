@@ -1,4 +1,4 @@
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { qE } from "../figma_app/492908";
 import { isNullish } from "../figma_app/95419";
 import { Ez5, Z_n, rXF } from "../figma_app/763686";
@@ -387,7 +387,7 @@ export function $$N7(e, t) {
     case "CMS_FIELDS":
       return y;
     default:
-      xb(e);
+      throwTypeError(e);
   }
 }
 export function $$P13(e, t) {
@@ -411,7 +411,7 @@ export function $$P13(e, t) {
       let a = e.item.value.id;
       return [e.type, t, a].join("-");
     default:
-      xb(e);
+      throwTypeError(e);
   }
 }
 export function $$O12(e) {

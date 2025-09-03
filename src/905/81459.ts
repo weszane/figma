@@ -1,5 +1,5 @@
 import { f6 } from "../figma_app/516324";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { getFeatureFlags } from "../905/601108";
 import { NC } from "../905/17179";
@@ -93,7 +93,7 @@ let $$C6 = nF(async e => {
             teamName: e
           });
         default:
-          xb(R);
+          throwTypeError(R);
       }
     })();
     e.dispatch($$O10({

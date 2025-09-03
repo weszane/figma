@@ -1,4 +1,4 @@
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { glU } from "../figma_app/763686";
 import { De } from "../figma_app/545293";
 import { n as _$$n } from "../905/347702";
@@ -18,7 +18,7 @@ let $$o0 = _$$n(async (e, t) => {
       i = (await De.getHubFileFragmentCopyPasteBufferUrl(e, t)).data.meta.url;
       break;
     default:
-      xb(e);
+      throwTypeError(e);
   }
   let r = await fetch(i);
   if (!r.ok) throw Error(`HTTP error, status = ${r.status}`);

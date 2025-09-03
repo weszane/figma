@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useEffect, useCallback, useRef, useState, useMemo, useId } from "react";
 import { wA } from "../vendor/514228";
-import { B1 } from "../figma_app/465776";
+import { assertNotNullish } from "../figma_app/465776";
 import { isNotNullish } from "../figma_app/95419";
 import { bL } from "../905/911410";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
@@ -87,7 +87,7 @@ export function $$W7({
         let t = r ?? CWU.createVariableSet(_$$t("variables.variable_collection"), G6k.AUTOMATIC_FIRST_COLLECTION);
         let a = CWU.createVariable(n, t, i, HS4.VARIABLE_PICKER);
         let o = CWU.getLocalVariableInfo(a);
-        B1(o, `variable with id ${a} not found`);
+        assertNotNullish(o, `variable with id ${a} not found`);
         e(kz(o));
       });
       t();

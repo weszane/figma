@@ -1,4 +1,4 @@
-import { vA } from "../figma_app/465776";
+import { assert } from "../figma_app/465776";
 import { c2 } from "../905/382883";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { l7 } from "../905/189185";
@@ -337,7 +337,7 @@ export class $$T0 {
         return () => {Math.random = originalRand}
       })()
       `);
-    vA("SUCCESS" === e.type);
+    assert("SUCCESS" === e.type);
     this.vm.retainHandle(e.handle);
     this.reenableUnsafeGlobalsHandle = e.handle;
   }

@@ -1,15 +1,15 @@
 // Phase 23: Advanced Image Processing and Effects Management Systems
 // Extracted from 472793.ts - image processing, effects management, and unit conversion utilities
 
+import { IVariableData } from "./paint-management"
+
 // Import required dependencies (from main file)
 declare const vX: any
 declare const eQ: any
 declare const eJ: any
 declare const getFeatureFlags: any
 declare const _$$m: any
-declare const iE: any
-declare const iS: any
-declare const Mi: any
+
 
 // Interfaces for Image Processing and Effects Management
 export interface ImageProcessor {
@@ -43,6 +43,18 @@ export interface EffectConfig {
   startOffset?: any
   endOffset?: any
   boundVariables?: any
+  spreadVar?: IVariableData
+  colorVar?: IVariableData
+  radiusVar?: IVariableData
+  xVar?: IVariableData
+  yVar?: IVariableData
+  blurOpType?: string
+
+  refraction?: number
+  depth?: number
+  lightAngle?: number
+  lightIntensity?: number
+  dispersion?: number
 }
 
 export interface LineHeightUnit {

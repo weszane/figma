@@ -40,7 +40,7 @@ import { Ad, Y9, Oe } from "../figma_app/811257";
 import { rf } from "../figma_app/960196";
 import { yw, li, ir, iQ, I6 } from "../905/159279";
 import { wA } from "../vendor/514228";
-import { B1 } from "../figma_app/465776";
+import { assertNotNullish } from "../figma_app/465776";
 import { sH, dI } from "../905/805904";
 import $ from "classnames";
 import { Oe as _$$Oe } from "../figma_app/933328";
@@ -140,7 +140,7 @@ function ed({
     if (t && e) {
       let i = await c(_$$Oe(e));
       let n = sH(i);
-      B1(n);
+      assertNotNullish(n);
       let r = {
         resolvedDataType: "colorVar" === t ? "COLOR" : "FLOAT",
         dataType: "ALIAS",

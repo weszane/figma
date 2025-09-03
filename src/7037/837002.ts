@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState, useEffect, useRef, useMemo, useCallback, Fragment as _$$Fragment } from "react";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import a from "classnames";
 import { _ as _$$_ } from "../vendor/853977";
 import { H0 } from "../figma_app/191804";
@@ -271,7 +271,7 @@ function H(e) {
     };
   }, [J, e.source]);
   useEffect(() => {
-    l.current || (l.current = !0, async function() {
+    l.current || (l.current = !0, async function () {
       window.VIDEOJS_NO_DYNAMIC_STYLE = !0;
       let n = await Fe();
       if (r.current) return;
@@ -543,7 +543,7 @@ function ei(e) {
         prototypeContent: t
       });
     default:
-      xb(t);
+      throwTypeError(t);
   }
 }
 function es(e) {
@@ -589,7 +589,7 @@ function es(e) {
         isThumbnail: e.isThumbnail
       });
     default:
-      xb(e.content);
+      throwTypeError(e.content);
   }
 }
 export function $$ea0(e) {
@@ -691,7 +691,7 @@ function ed(e) {
       inline: "nearest"
     });
   }, [e.direction, e.selectedIdx]);
-  let n = function() {
+  let n = function () {
     let e = fp(k)[0];
     return useCallback(t => {
       e && e.ref?.current && (t && t !== e?.feedPostUuid || e.ref?.current.pause());
@@ -795,4 +795,4 @@ function ed(e) {
     });
   }
 }
-export const x = $$ea0; 
+export const x = $$ea0;

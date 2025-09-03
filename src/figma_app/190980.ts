@@ -1,4 +1,4 @@
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { x4 } from "../905/657224";
 import { my } from "../figma_app/976749";
 import { FPublisherType } from "../figma_app/191312";
@@ -90,7 +90,7 @@ export function $$I6(e) {
     case vt.TeamTemplate:
       return e.key;
     default:
-      xb(e);
+      throwTypeError(e);
   }
 }
 export function $$S4(e) {

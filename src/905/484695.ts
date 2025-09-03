@@ -1,4 +1,4 @@
-import { KF } from "../figma_app/465776";
+import { debug } from "../figma_app/465776";
 import { az } from "../905/449184";
 var a = (e => (e.SLIDE = "SLIDE", e.SLIDE_MASTER = "SLIDE_MASTER", e.SLIDE_LAYOUT = "SLIDE_LAYOUT", e.NODE = "NODE", e.META = "META", e))(a || {});
 var $$s1 = (e => (e.IMPORT = "IMPORT", e.EXPORT = "EXPORT", e))($$s1 || {});
@@ -44,7 +44,7 @@ let o = class e {
   }
   closeScope(e) {
     let t = this.scopes[e];
-    KF(null != t && null == t.durationMs, "Scope should exist and not have a duration");
+    debug(null != t && null == t.durationMs, "Scope should exist and not have a duration");
     let i = Date.now() - t.start;
     t.durationMs = i;
   }
@@ -91,7 +91,7 @@ let o = class e {
   }
   static debug(e, t, ...i) {}
   static error(e, t, i) {
-    KF(null != t, "Should have a current scope");
+    debug(null != t, "Should have a current scope");
     t.errors || (t.errors = []);
     t.errors.push([e, i]);
   }

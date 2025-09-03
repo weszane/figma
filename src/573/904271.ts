@@ -104,7 +104,7 @@ import { O as _$$O2 } from "../905/221694";
 import { Qe, Nx } from "../figma_app/112055";
 import { D as _$$D } from "../905/367723";
 import { pR, xO } from "../figma_app/585235";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { oz, zq, l$ } from "../figma_app/782261";
 import { V as _$$V } from "../figma_app/473391";
 import { ZC } from "../figma_app/39751";
@@ -951,7 +951,7 @@ function tW({
       });
       break;
     default:
-      xb(s.type);
+      throwTypeError(s.type);
   }
   for (let e of s.subtrees) getFeatureFlags().dse_templates_proto && Qe(e) || tW({
     prevParent: g,

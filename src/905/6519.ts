@@ -25,7 +25,7 @@ import { lk } from "../figma_app/109538";
 import { B as _$$B2 } from "../905/380801";
 import { to } from "../905/156213";
 import { c as _$$c } from "../905/370443";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { lQ } from "../905/934246";
 import W from "lodash-es/mapValues";
 import { mI } from "../figma_app/566371";
@@ -267,7 +267,7 @@ function es({
       case FPlanNameType.STUDENT:
         return Ju.PRO;
       default:
-        xb(e);
+        throwTypeError(e);
     }
   }(i);
   let d = e === R$.ANNUAL ? IX.YEAR : IX.MONTH;

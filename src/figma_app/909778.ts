@@ -1,4 +1,4 @@
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { c as _$$c, r as _$$r } from "../905/676456";
 import { NC } from "../905/17179";
 import { K2, Pe, Dr, SX, gB, to as _$$to, j4 } from "../figma_app/310688";
@@ -290,7 +290,7 @@ let $$L5 = MM("BULK_RESOURCE_SET_FAVORITE", (e, t, {
         orderedFavoritedResourceIds: k
       }
     }
-  }, O); else {
+  }, O);else {
     let e = {
       id: t.fileBrowserPrefs?.id || "optimistic-id",
       orderedFavoritedResourceIds: k,
@@ -337,7 +337,7 @@ let $$P12 = nF((e, t) => {
     case nb.OFFLINE_FILE:
       return;
     default:
-      xb(tile);
+      throwTypeError(tile);
   }
 });
 let $$D16 = MM("REMOVE_FOLDER_FAVORITE", (e, t, {
@@ -407,7 +407,7 @@ let $$k1 = nF(async (e, t, {
     case nb.OFFLINE_FILE:
       return;
     default:
-      xb(tile);
+      throwTypeError(tile);
   }
 });
 let $$M4 = MM("ADD_FOLDER_FAVORITE", (e, t, {
@@ -581,7 +581,7 @@ let $$W2 = nF((e, t) => {
           userId: u
         }
       }
-    }, c); else if (e.getState().currentTeamId && e.getState().currentTeamId === t.file.teamId || e.getState().currentUserOrgId && t.file.parentOrgId) {
+    }, c);else if (e.getState().currentTeamId && e.getState().currentTeamId === t.file.teamId || e.getState().currentUserOrgId && t.file.parentOrgId) {
       let r = h7(fileEntityDataMapper.toSinatra(file));
       WB().optimisticallyCreate({
         FavoritedFile: {
@@ -683,4 +683,4 @@ export const qP = $$H20;
 export const to = $$v21;
 export const vg = $$x22;
 export const vr = $$X23;
-export const yH = $$O24; 
+export const yH = $$O24;

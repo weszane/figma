@@ -51,7 +51,7 @@ import { r as _$$r } from "../905/149895";
 import { z as _$$z } from "../905/284530";
 import { A as _$$A3 } from "../5724/663128";
 import { X0 } from "../905/784221";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { c2 } from "../905/382883";
 import { J as _$$J } from "../905/341359";
 import { A as _$$A4 } from "../vendor/90566";
@@ -321,7 +321,7 @@ function eB({
     })]
   });
 }
-let eV = e => e === _$$i.TEAM ? _$$t("templates.publishing.scope.team") : e === _$$i.ORG ? _$$t("templates.publishing.scope.organization") : xb(e);
+let eV = e => e === _$$i.TEAM ? _$$t("templates.publishing.scope.team") : e === _$$i.ORG ? _$$t("templates.publishing.scope.organization") : throwTypeError(e);
 let e2 = {
   [_$$i.ORG]: FContainerType.ORG,
   [_$$i.TEAM]: FContainerType.TEAM
@@ -795,7 +795,7 @@ let ts = e => {
       case "UNPUBLISHING_ALL_COMPONENTS":
         return _$$t("design_systems.libraries_modal.no_publishable_assets");
       default:
-        xb(t);
+        throwTypeError(t);
     }
   }
 };

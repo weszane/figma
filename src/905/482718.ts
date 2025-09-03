@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useRef, useMemo, useCallback } from "react";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import s from "classnames";
 import { parsePxInt } from "../figma_app/783094";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -15,7 +15,7 @@ import { Q } from "../905/11928";
 import { helpWidgetSizePlusMargin, designToolbarHeight } from "../figma_app/786175";
 import { P } from "../figma_app/546366";
 var o = s;
-let b = (e) => {
+let b = e => {
   switch (e) {
     case Q.BOTTOM_RIGHT:
       return {
@@ -38,7 +38,7 @@ let b = (e) => {
         left: "calc(var(--left-panel-width) + 24px)"
       };
     default:
-      xb(e);
+      throwTypeError(e);
   }
 };
 function v(e) {

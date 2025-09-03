@@ -86,7 +86,7 @@ async function u(e) {
           i = !1;
           continue;
         }
-        for (let [t, r] of Object.entries(d.props)) if (id(r) && id(s.props[t])) e([s.props[t]], [r], n) || (i = !1);else if (Array.isArray(r) && Array.isArray(s.props[t])) {
+        for (let [t, r] of Object.entries(d.props)) if (id(r) && id(s.props[t])) e([s.props[t]], [r], n) || (i = !1); else if (Array.isArray(r) && Array.isArray(s.props[t])) {
           let a = s.props[t];
           for (let t = 0; t < r.length; t++) if (t >= a.length && (i = !1), id(r[t]) && id(a[t])) {
             let s = r[t];
@@ -465,7 +465,7 @@ export async function $$M7(e, t, r, n) {
       if (a.useShareJSX) p && (props.sharedPluginData = {
         ...props.sharedPluginData,
         type
-      }, n.getComponentInfoByJSXName(type));else {
+      }, n.getComponentInfoByJSXName(type)); else {
         let e = n.customJSXElementToInstanceElement({
           type,
           props,
@@ -710,7 +710,7 @@ z.object({
     start: z.number(),
     end: z.number(),
     duration: z.number(),
-    status: z.$$enum(["success", "failure", "blocked"])
+    status: z.enum(["success", "failure", "blocked"])
   }))
 });
 export class $$$1 {

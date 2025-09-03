@@ -29,7 +29,7 @@ import { Ju, IX } from "../905/712921";
 import { Ro } from "../figma_app/805373";
 import { N as _$$N } from "../905/809096";
 import { ey } from "../figma_app/918700";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { isNullish } from "../figma_app/95419";
 import { A as _$$A } from "../905/251970";
 import { g as _$$g } from "../905/125190";
@@ -146,7 +146,7 @@ function W({
               case ud.CONTENT:
                 return _$$t("nux.campfire.content_seat");
               default:
-                xb(e);
+                throwTypeError(e);
             }
           }(e)
         })]

@@ -1,4 +1,4 @@
-import { S9 } from "../figma_app/465776";
+import { returnSecond } from "../figma_app/465776";
 import { FFileType } from "../figma_app/191312";
 export function $$a0(e) {
   switch (e) {
@@ -15,7 +15,7 @@ export function $$a0(e) {
     case FFileType.COOPER:
       return "cooper";
     default:
-      return S9(e, "design");
+      return returnSecond(e, "design");
   }
 }
 export const K = $$a0;

@@ -1,5 +1,5 @@
 import { z } from "../vendor/835909";
-export let $$n0 = z.$$enum(["layout", "rendering", "text", "interactivity"]);
+export let $$n0 = z.enum(["layout", "rendering", "text", "interactivity"]);
 export function $$r1(e, t) {
   let {
     fieldGroups,

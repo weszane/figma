@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { wA } from "../vendor/514228";
-import { vA } from "../figma_app/465776";
+import { assert } from "../figma_app/465776";
 import { P } from "../figma_app/529847";
 import { uo } from "../figma_app/990058";
 import { Gu } from "../905/513035";
@@ -30,7 +30,7 @@ export function $$m0(e) {
       key: i,
       license_types: r(i)
     });
-    vA(e.planType === OL.TEAM);
+    assert(e.planType === OL.TEAM);
     t(P({
       teamId: e.planId,
       deltas: n.map(({
@@ -63,7 +63,7 @@ export function $$m0(e) {
     seatIncreaseAuthorized: s,
     seatSwapIntended: c
   }) => {
-    vA(e.planType === OL.ORG);
+    assert(e.planType === OL.ORG);
     t(uo({
       orgId: e.planId,
       lastUpdateTimestampOverride: i,

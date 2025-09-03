@@ -1,4 +1,4 @@
-import { vA } from "../figma_app/465776";
+import { assert } from "../figma_app/465776";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { MoD, Msn } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
@@ -109,7 +109,7 @@ async function f(e) {
     case "GENERATED_ASSET":
       return await y(e);
     default:
-      vA(!1, "Unknown asset type: " + e.type);
+      assert(!1, "Unknown asset type: " + e.type);
   }
 }
 async function E(e) {
@@ -140,7 +140,7 @@ async function y(e) {
   if (i) t = "image/svg+xml";else {
     let e = r.url.split(".");
     let i = e[e.length - 1];
-    vA(!!i, "Unable to find file extension for filename: " + r.url);
+    assert(!!i, "Unable to find file extension for filename: " + r.url);
     t = `image/${i.toLowerCase()}`;
   }
   return new Blob([i ? function (e, t = {

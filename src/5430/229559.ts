@@ -1,7 +1,7 @@
 import { l as _$$l } from "../5430/795130";
 import { U } from "../5430/189384";
 import { jsxs, jsx } from "react/jsx-runtime";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { I } from "../figma_app/4253";
 import { Qo, cX } from "../figma_app/471982";
 import { _K } from "../figma_app/808294";
@@ -77,7 +77,7 @@ export function $$y0({
       case vt.COOPER_TEMPLATE_ASSET:
         return null;
       default:
-        xb(e.resource_type);
+        throwTypeError(e.resource_type);
     }
   }(e, r) : function (e, t) {
     if (Qo(e)) return cX(e) ? jsx(h, {

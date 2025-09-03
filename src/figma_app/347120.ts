@@ -1,4 +1,4 @@
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { XJn } from "../figma_app/763686";
 import { l7 } from "../905/189185";
 import { r as _$$r } from "../905/249071";
@@ -71,7 +71,7 @@ function E(e) {
       case "copiedDesigns":
         return "Copied Designs";
       default:
-        xb(e);
+        throwTypeError(e);
     }
   }(e);
   let r = UN().getCurrentPage()?.childrenNodes.find(e => "SECTION" === e.type && e.name === t);

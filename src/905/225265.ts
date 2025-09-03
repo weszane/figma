@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback, useMemo } from "react";
 import { d4 } from "../vendor/514228";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { c2 } from "../905/382883";
 import { l as _$$l } from "../905/716947";
 import { Iz, eU, Zb, md, zl, Xr, fp } from "../figma_app/27355";
@@ -38,7 +38,7 @@ import { vz, dO } from "../905/921418";
 import { Sv, eB, B0, PS } from "../figma_app/807786";
 import { f$, K4, lR, AG, dm, Cc, d5, KK as _$$KK } from "../figma_app/707943";
 var u = c;
-var $$z0 = ((e) => (e[e.AssetsPanel = 0] = "AssetsPanel", e[e.InstanceSwapper = 1] = "InstanceSwapper", e[e.QuickActions = 2] = "QuickActions", e[e.FigJam = 3] = "FigJam", e))($$z0 || {});
+var $$z0 = (e => (e[e.AssetsPanel = 0] = "AssetsPanel", e[e.InstanceSwapper = 1] = "InstanceSwapper", e[e.QuickActions = 2] = "QuickActions", e[e.FigJam = 3] = "FigJam", e))($$z0 || {});
 let H = {
   0: 200
 };
@@ -49,12 +49,12 @@ let W = {
   3: "figjam_tool_bar"
 };
 let $$K2 = W;
-let Y = Iz((e) => eU((t) => (t(Z(e).debouncedValueAtom), t(ee(e)), Ei())));
+let Y = Iz(e => eU(t => (t(Z(e).debouncedValueAtom), t(ee(e)), Ei())));
 function q(e, t) {
   return t(et(e)).queryId ?? t(Y(e));
 }
 let $ = {};
-let Z = (e) => {
+let Z = e => {
   if (!$[e]) {
     if (H[e]) $[e] = Zb("", H[e]);else {
       let t = eU("");
@@ -73,27 +73,27 @@ export function $$X3() {
   } = Z(0);
   let t = md(debouncedValueAtom);
   let [i, a] = useState(!1);
-  let s = d4((e) => e.library.assetsPanelSearch.query);
+  let s = d4(e => e.library.assetsPanelSearch.query);
   useEffect(() => {
-    _$$Z2().then((e) => {
+    _$$Z2().then(e => {
       a(!!e);
     });
   }, [a]);
   return i ? t : s;
 }
-let Q = Iz((e) => eU((t) => q(e, t)));
+let Q = Iz(e => eU(t => q(e, t)));
 export function $$J1(e) {
   return md(Q(e.includes("figjam") ? 3 : 0));
 }
 let ee = Iz((e, t) => eU(t ?? void 0), (e, t) => e === t);
-let et = Iz((e) => eU({}));
+let et = Iz(e => eU({}));
 let ei = bt(vx);
-let en = eU((e) => e(lj).length > 0);
+let en = eU(e => e(lj).length > 0);
 let er = {
   normalizedSearchResults: [],
   unsubscribedSearchResults: []
 };
-let ea = bt((e) => {
+let ea = bt(e => {
   let {
     componentsByLibraryKey,
     stateGroupsByLibraryKey
@@ -103,7 +103,7 @@ let ea = bt((e) => {
     defaultPublishedStateGroups: stateGroupsByLibraryKey
   };
 });
-let es = bt((e) => {
+let es = bt(e => {
   let {
     components,
     stateGroups
@@ -113,21 +113,21 @@ let es = bt((e) => {
     stateGroups
   };
 });
-let eo = bt((e) => e.library.assetsPanelSearch.shouldSearchDefaultLibraries);
-let el = bt((e) => e.search.sessionId);
-let ed = selectAtom(OC, (e) => XE(e) === nT.Design);
+let eo = bt(e => e.library.assetsPanelSearch.shouldSearchDefaultLibraries);
+let el = bt(e => e.search.sessionId);
+let ed = selectAtom(OC, e => XE(e) === nT.Design);
 let ec = selectAtom(yV, f$, c2);
-let eu = Iz((e) => eU(void 0));
-let ep = Iz((e) => eU((t) => {
+let eu = Iz(e => eU(void 0));
+let ep = Iz(e => eU(t => {
   let {
     libraryKeyBackingSelectedItems
   } = t(et(e));
   let n = t(cY("libraryKey"));
   return libraryKeyBackingSelectedItems ? new Set([...n, libraryKeyBackingSelectedItems]) : n;
 }));
-let em = selectAtom(qp, (e) => new Set(Object.keys(e)), yZ);
-var eh = ((e) => (e[e.None = 0] = "None", e[e.All = 1] = "All", e[e.File = 2] = "File", e[e.Local = 3] = "Local", e))(eh || {});
-let eg = Iz((e) => eU(async (t) => {
+let em = selectAtom(qp, e => new Set(Object.keys(e)), yZ);
+var eh = (e => (e[e.None = 0] = "None", e[e.All = 1] = "All", e[e.File = 2] = "File", e[e.Local = 3] = "Local", e))(eh || {});
+let eg = Iz(e => eU(async t => {
   let i = t(Z(e).debouncedValueAtom);
   let n = t(ee(e));
   if (!i || !(await _$$Z2())) return 0;
@@ -143,10 +143,10 @@ let eg = Iz((e) => eU(async (t) => {
     case _$$I.SITE_KIT:
       return 0;
     default:
-      return xb(n, "unknown search type");
+      return throwTypeError(n, "unknown search type");
   }
 }));
-let ef = eU((e) => {
+let ef = eU(e => {
   let {
     components,
     stateGroups
@@ -157,7 +157,7 @@ let ef = eU((e) => {
   } = e(ea);
   let a = [];
   let s = new Set();
-  let o = (e) => {
+  let o = e => {
     for (let t of e) {
       let e = _$$V(t);
       e && s.has(e) || (e && s.add(e), a.push({
@@ -166,7 +166,7 @@ let ef = eU((e) => {
     }
   };
   o(X0(components));
-  e(eo) && [defaultPublishedComponents, defaultPublishedStateGroups].forEach((e) => {
+  e(eo) && [defaultPublishedComponents, defaultPublishedStateGroups].forEach(e => {
     for (let t of Object.values(e)) o(Object.values(t));
   });
   let l = Object.values(WV(components));
@@ -174,12 +174,12 @@ let ef = eU((e) => {
   o(Gg(d, l));
   return a;
 });
-let e_ = selectAtom(ef, (e) => e, (e, t) => {
-  let i = new Set(e.map((e) => _$$V(e)));
-  let n = new Set(t.map((e) => _$$V(e)));
-  return i.size === n.size && [...i].every((e) => n.has(e));
+let e_ = selectAtom(ef, e => e, (e, t) => {
+  let i = new Set(e.map(e => _$$V(e)));
+  let n = new Set(t.map(e => _$$V(e)));
+  return i.size === n.size && [...i].every(e => n.has(e));
 });
-let eA = eU((e) => {
+let eA = eU(e => {
   let t = new KH({
     keys: vz,
     ...dO
@@ -188,7 +188,7 @@ let eA = eU((e) => {
   t.set(i);
   return t;
 });
-let ey = Iz((e) => eU(async (t) => {
+let ey = Iz(e => eU(async t => {
   let i;
   let n = await t(eg(e));
   if (0 === n) return er;
@@ -245,7 +245,7 @@ let ey = Iz((e) => eU(async (t) => {
         tier: e(KK(!0)).data?.tier
       };
       if (g?.type === _$$I.LOCAL) S.localSearchResultCount = i.normalizedSearchResults.length;else {
-        let [e, t] = u()(i.normalizedSearchResults, (e) => e.library_key && e.library_key === r);
+        let [e, t] = u()(i.normalizedSearchResults, e => e.library_key && e.library_key === r);
         S.localSearchResultCount = e.length;
         S.subscribedSearchResultCount = t.length;
         S.unsubscribedSearchResultsCount = i.unsubscribedSearchResults.length;
@@ -298,7 +298,7 @@ let ey = Iz((e) => eU(async (t) => {
       d = m.didNetworkFetch;
       break;
     default:
-      return xb(n, "unknown search operation");
+      return throwTypeError(n, "unknown search operation");
   }
   r(i, s(), d);
   return i;
@@ -306,7 +306,7 @@ let ey = Iz((e) => eU(async (t) => {
 let eb = async (e, t) => {
   let i = t(ec);
   return {
-    normalizedSearchResults: (await t(eE(e))).filter((e) => Ui(e, _$$l(i?.libraryKey ?? ""))),
+    normalizedSearchResults: (await t(eE(e))).filter(e => Ui(e, _$$l(i?.libraryKey ?? ""))),
     unsubscribedSearchResults: []
   };
 };
@@ -359,7 +359,7 @@ let eI = async (e, t) => {
     didNetworkFetch: n === lastQueryId
   };
 };
-let eE = Iz((e) => eU(async (t) => {
+let eE = Iz(e => eU(async t => {
   if (![3, 1].includes(await t(eg(e)))) return [];
   let i = new rw();
   let n = t(Z(e).debouncedValueAtom);
@@ -368,7 +368,7 @@ let eE = Iz((e) => eU(async (t) => {
   eO("asset_search.latency_segment.local_fuse", i, e, t);
   return a;
 }));
-let ex = Iz((e) => eU(async (t) => {
+let ex = Iz(e => eU(async t => {
   if ((await t(eg(e))) !== 1) return {
     results: [],
     lastQueryId: ""
@@ -392,7 +392,7 @@ let ex = Iz((e) => eU(async (t) => {
     lastQueryId: p
   };
 }));
-let eS = Iz((e) => eU(async (t) => {
+let eS = Iz(e => eU(async t => {
   if ((await t(eg(e))) !== 1) return {
     results: [],
     lastQueryId: ""
@@ -409,7 +409,7 @@ let eS = Iz((e) => eU(async (t) => {
     lastQueryId: s
   };
 }));
-let ew = Iz((e) => eU(async (t) => {
+let ew = Iz(e => eU(async t => {
   if ((await t(eg(e))) !== 2) return {
     results: [],
     lastQueryId: ""
@@ -434,7 +434,7 @@ let ew = Iz((e) => eU(async (t) => {
 }));
 async function eC(e, t) {
   let i = new rw();
-  1 === (await t(eg(e))) && (await QO(I1, (e) => {
+  1 === (await t(eg(e))) && (await QO(I1, e => {
     let t = zl.get(I1);
     "loaded" === t.status && e(t);
   }));
@@ -493,16 +493,16 @@ export async function $$ek5(e, t, i, n = {}) {
   zl.set(et(i), n);
   return await zl.get(ey(i));
 }
-let eR = Iz((e) => eU(null));
+let eR = Iz(e => eU(null));
 let eN = bt(_$$Z);
-let eP = bt((e) => e.search.lastLoadedQuery);
+let eP = bt(e => e.search.lastLoadedQuery);
 function eO(e, t, i, n) {
   let {
     sessionId
   } = n(et(i));
   let a = sessionId ?? zl.get(el);
   let s = q(i, n);
-  t.stop((i) => {
+  t.stop(i => {
     az.trackDefinedEvent(e, {
       elapsedTime: i,
       backgrounded: t.backgrounded || t.offlined,

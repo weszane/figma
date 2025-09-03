@@ -29,10 +29,10 @@ let $$p0 = $$l3.merge(z.object({
 }));
 let $$m4 = z.object({
   config: z.object({
-    codeOption: z.$$enum(Kg).describe("The code option to use"),
+    codeOption: z.enum(Kg).describe("The code option to use"),
     codeConnectToolsEnabled: z.boolean().describe("Whether to enable the code connect tools"),
     codebaseSuggestionsEnabled: z.boolean().describe("Whether to enable the codebase suggestions"),
-    markupImageOptions: z.$$enum(iD).describe("Whether to use placeholder images or local images"),
+    markupImageOptions: z.enum(iD).describe("Whether to use placeholder images or local images"),
     mockCodeConnect: z.record(z.string(), z.object({
       componentName: z.string().optional(),
       source: z.string().optional(),

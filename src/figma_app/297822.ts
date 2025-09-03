@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { d4 } from "../vendor/514228";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { md, zl, eU, E2 } from "../figma_app/27355";
 import { z } from "../905/239603";
 import { sx } from "../905/449184";
@@ -70,7 +70,7 @@ export function $$T8(e) {
     case Sn.ASSETS_TAB_DETAIL_VIEW:
       return tq;
     default:
-      xb(e);
+      throwTypeError(e);
   }
 }
 export function $$I9(e) {
@@ -156,14 +156,14 @@ export function $$A1(e) {
     case Sn.MAKE_VIDEO:
       return !1;
     default:
-      xb(e);
+      throwTypeError(e);
   }
 }
 export function $$x2({
   isQAV2: e,
   moduleToOpen: t
 }) {
-  return !e || !t || ("tab" === t.type ? $$A1(t.module) : "custom" === t.type ? $$A1(t.name) : void xb(t));
+  return !e || !t || ("tab" === t.type ? $$A1(t.module) : "custom" === t.type ? $$A1(t.name) : void throwTypeError(t));
 }
 export function $$N5(e) {
   sx(W3, e, {

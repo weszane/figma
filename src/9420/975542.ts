@@ -1,10 +1,10 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { PureComponent } from "react";
-import { KF } from "../figma_app/465776";
+import { debug } from "../figma_app/465776";
 export class $$s0 extends PureComponent {
   render() {
-    KF(Number.isInteger(this.props.number), "breadcrumb step must be an integer");
-    KF(this.props.number >= 1 && this.props.number <= 20, "breadcrumb step is out of expected range");
+    debug(Number.isInteger(this.props.number), "breadcrumb step must be an integer");
+    debug(this.props.number >= 1 && this.props.number <= 20, "breadcrumb step is out of expected range");
     let e = "";
     this.props.selected ? (e += "step_breadcrumb--stepSelected--aaq-4 step_breadcrumb--step--h0dTR", this.props.lightText && (e += " step_breadcrumb--whiteText--TeOgy")) : (e += "step_breadcrumb--step--h0dTR", this.props.lightText && (e += " step_breadcrumb--greyText--Xid8Q"));
     this.props.canClick && (this.props.lightText ? e += " step_breadcrumb--stepClickableLight--e7tX-" : e += " step_breadcrumb--stepClickable--t001q step_breadcrumb--step--h0dTR step_breadcrumb--stepClickable-on-hover---oTm4");

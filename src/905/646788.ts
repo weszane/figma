@@ -59,7 +59,7 @@ import { jN } from "../905/612685";
 import { EO, Ml } from "../905/691205";
 import { lD, qI } from "../figma_app/831696";
 import { Hz as _$$Hz } from "../905/366346";
-import { wD, B1, mu, $Y, $S, h1 } from "../905/918620";
+import { wD, assertNotNullish, mu, $Y, $S, h1 } from "../905/918620";
 import { wN as _$$wN, XR, aL as _$$aL, Xh, SV, G2, Ke, Ah, By, py, W2, Em } from "../905/959395";
 import { c as _$$c } from "../905/144429";
 import { X3B, bOM, Qej, Ez5, Egt } from "../figma_app/763686";
@@ -131,7 +131,7 @@ import { YW } from "../figma_app/553488";
 import { X as _$$X2 } from "../905/802843";
 import { $u } from "../figma_app/524655";
 import { fS, st as _$$st, d3, dG, QU as _$$QU, VA, bV, ts as _$$ts, Fk, pi, tl as _$$tl2, Ph, ER, p3, fA, U5, WZ as _$$WZ, ix as _$$ix, G as _$$G, HL, HO, Zq, QW, mq, O6, hz, ZD, Ac, Uo, Kz, oT, hC, N1, TK, i1 as _$$i3, IH, iA as _$$iA, UB, KN, Cr, E_, BA, QA, eF as _$$eF, Zk, Ed, Sc, Bd, v7, DA, IE, vv } from "../figma_app/538002";
-import { xb, vA, KF } from "../figma_app/465776";
+import { throwTypeError, assert, debug } from "../figma_app/465776";
 import { bL as _$$bL, l9, mc, c$ } from "../905/493196";
 import { Uz, Gc } from "../905/63728";
 import { i as _$$i4 } from "../905/385727";
@@ -506,7 +506,7 @@ function eM({
     repo: t
   })();
   let o = _$$L();
-  let l = B1();
+  let l = assertNotNullish();
   let d = getFeatureFlags().fpl_textarea_migration;
   let c = useCallback(e => {
     e.target.select();
@@ -2113,7 +2113,7 @@ function i5(e, t, i) {
     case Dp.CUSTOM:
       return _$$t("permissions_modal.file_share_settings.custom_time");
     default:
-      return xb(e);
+      return throwTypeError(e);
   }
 }
 function i4(e) {
@@ -4307,7 +4307,7 @@ let rI = memo(e => {
         link: r
       });
     default:
-      vA(JU(publishTemplateStatus));
+      assert(JU(publishTemplateStatus));
   }
   if (!publishedTemplate) return _$$tx("publishing.templates.menu.description.unpublished");
   let a = publishedTemplate.publishedByUser?.name;
@@ -4955,7 +4955,7 @@ function ad(e) {
                     });
                     break;
                   default:
-                    xb(unit);
+                    throwTypeError(unit);
                 }
                 t.push(_$$t("permissions_modal.file_share_settings.only_public_for", {
                   durationText: r
@@ -5378,7 +5378,7 @@ function aY({
     let i = HW();
     if (t?.sharing_restricted) return !1;
     let n = !e.canView && e.canViewPrototype;
-    return (n && KF(i, "How did a prototype viewer sneak into non-prototype mode?!"), i) ? !n && !Ir(e) : !Ir(e);
+    return (n && debug(i, "How did a prototype viewer sneak into non-prototype mode?!"), i) ? !n && !Ir(e) : !Ir(e);
   }(e) ? null : e.hasEditRole || e.hasViewRole ? jsx(a$, {
     ...t,
     file: e
@@ -5988,7 +5988,7 @@ function a5({
         team: r
       });
     default:
-      xb(C);
+      throwTypeError(C);
   }
 }
 function a6({
@@ -6201,7 +6201,7 @@ function st({
     case A5.UPDATE_SEAT:
       return _$$tx("file_permissions_modal.update_seat_tab.title");
     default:
-      xb(e);
+      throwTypeError(e);
   }
 }
 function si() {

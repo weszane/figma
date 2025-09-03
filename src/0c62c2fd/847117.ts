@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, useEffect, useMemo, useCallback } from "react";
 import { wA, d4 } from "../vendor/514228";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
@@ -71,7 +71,7 @@ function q(e) {
     statusIcon,
     statusMessage,
     statusMessageSecondary
-  } = function(e, t, r) {
+  } = function (e, t, r) {
     let s = null;
     let i = null;
     let o = null;
@@ -112,7 +112,7 @@ function q(e) {
         i = tx("file_browser.file_import_view.repo.error");
         break;
       default:
-        xb(e);
+        throwTypeError(e);
     }
     return s && i ? {
       statusIcon: s,
@@ -132,7 +132,7 @@ function q(e) {
     dispatch: _,
     stats: p,
     shouldShowMoveToProjectButton: !1,
-    onMoveToProject: () => { },
+    onMoveToProject: () => {},
     filesToMove: [],
     onCancel
   });
@@ -241,7 +241,7 @@ export function $$Z0() {
           onMoveToProject: o
         });
       default:
-        xb(fileImport.step);
+        throwTypeError(fileImport.step);
     }
   })();
   return jsx(fu, {
@@ -278,7 +278,7 @@ export function $$ee2({
     statusMessageSecondary
   } = $$er5(g, m, y);
   let C = f && (b || v) && m.importedFiles >= 1;
-  let k = useMemo(() => function(e, t) {
+  let k = useMemo(() => function (e, t) {
     let r = [];
     if (!e) return r;
     for (let e of Object.values(t)) e.fileKey && r.push({
@@ -296,7 +296,7 @@ export function $$ee2({
     stats: m,
     shouldShowMoveToProjectButton: C,
     onMoveToProject: n,
-    filesToMove: useMemo(() => function(e) {
+    filesToMove: useMemo(() => function (e) {
       let t = [];
       for (let r of e) {
         let e = r.result.data?.file;
@@ -412,7 +412,7 @@ export function $$et4({
     },
     children: tx("file_browser.file_import_view.done")
   }, "doneButton"))];
-  o && m.push(function({
+  o && m.push(function ({
     onMoveToProject: e,
     filesToMove: t,
     stats: r,
@@ -522,7 +522,7 @@ export function $$es3(e) {
           o++;
           break;
         default:
-          xb(r.status);
+          throwTypeError(r.status);
       }
       kI(r.name) && l++;
       d.add(NU(r));
@@ -611,7 +611,7 @@ function en({
         type: Y8(t)
       });
     default:
-      xb(e.status);
+      throwTypeError(e.status);
   }
 }
 function eo(e) {
@@ -654,4 +654,4 @@ export const fileImportStats = $$es3;
 export const getFooterButtons = $$et4;
 export const getStatusComponents = $$er5;
 export const useCloseTabWarningWhenImportInProgress = $$el6;
-export const useCurrentFolderTeam = $$ea7; 
+export const useCurrentFolderTeam = $$ea7;

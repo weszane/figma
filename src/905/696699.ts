@@ -1,4 +1,4 @@
-import { B1 } from "../figma_app/465776";
+import { assertNotNullish } from "../figma_app/465776";
 import { A } from "../905/284190";
 import { TF, vf, kz } from "../905/18922";
 import { sH } from "../905/871411";
@@ -16,7 +16,7 @@ function c(e, t, i) {
 }
 export function $$u1(e) {
   let t = e.vectorDataInfo;
-  B1(t?.data.vectorNetworkBlob, "Figma Internal Error: vector is missing data");
+  assertNotNullish(t?.data.vectorNetworkBlob, "Figma Internal Error: vector is missing data");
   let i = {
     strokeCap: e.strokeCap,
     strokeJoin: e.strokeJoin,
@@ -34,7 +34,7 @@ export function $$u1(e) {
   let s = new Map();
   let o = new Map();
   for (let e of (s.set(0, i), o.set(0, r), t.data.styleOverrideTable || [])) {
-    B1(e.styleID, "Figma Internal Error: missing styleID when decoding vector network");
+    assertNotNullish(e.styleID, "Figma Internal Error: missing styleID when decoding vector network");
     s.set(e.styleID, {
       strokeCap: "strokeCap" in e ? e.strokeCap : i.strokeCap,
       strokeJoin: "strokeJoin" in e ? e.strokeJoin : i.strokeJoin,

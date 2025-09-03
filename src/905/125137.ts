@@ -31,10 +31,10 @@ var $$n0;
     b: e.ZeroToOne,
     a: e.ZeroToOne
   });
-  e.BuzzAssetType = _$$z.$$enum(XH);
-  e.VariableDataType = _$$z.$$enum(["BOOLEAN", "FLOAT", "STRING", "VARIABLE_ALIAS", "COLOR", "EXPRESSION", "MAP", "SYMBOL_ID"]);
-  e.VariableResolvedDataType = _$$z.$$enum(["BOOLEAN", "COLOR", "FLOAT", "STRING"]);
-  e.ExpressionFunction = _$$z.$$enum(["ADDITION", "SUBTRACTION", "RESOLVE_VARIANT", "MULTIPLICATION", "DIVISION", "EQUALS", "NOT_EQUAL", "LESS_THAN", "LESS_THAN_OR_EQUAL", "GREATER_THAN", "GREATER_THAN_OR_EQUAL", "AND", "OR", "NOT", "STRINGIFY", "TERNARY", "VAR_MODE_LOOKUP", "NEGATE", "IS_TRUTHY"]);
+  e.BuzzAssetType = _$$z.enum(XH);
+  e.VariableDataType = _$$z.enum(["BOOLEAN", "FLOAT", "STRING", "VARIABLE_ALIAS", "COLOR", "EXPRESSION", "MAP", "SYMBOL_ID"]);
+  e.VariableResolvedDataType = _$$z.enum(["BOOLEAN", "COLOR", "FLOAT", "STRING"]);
+  e.ExpressionFunction = _$$z.enum(["ADDITION", "SUBTRACTION", "RESOLVE_VARIANT", "MULTIPLICATION", "DIVISION", "EQUALS", "NOT_EQUAL", "LESS_THAN", "LESS_THAN_OR_EQUAL", "GREATER_THAN", "GREATER_THAN_OR_EQUAL", "AND", "OR", "NOT", "STRINGIFY", "TERNARY", "VAR_MODE_LOOKUP", "NEGATE", "IS_TRUTHY"]);
   e.VariableAlias = _$$z.strictObject({
     type: _$$z.literal("VARIABLE_ALIAS"),
     id: _$$z.string()
@@ -48,9 +48,9 @@ var $$n0;
     expressionFunction: e.ExpressionFunction,
     expressionArguments: _$$z.array(_$$z.lazy(() => e.VariableData))
   });
-  e.Navigation = _$$z.$$enum(["NAVIGATE", "SWAP", "OVERLAY", "SCROLL_TO", "CHANGE_TO"]);
+  e.Navigation = _$$z.enum(["NAVIGATE", "SWAP", "OVERLAY", "SCROLL_TO", "CHANGE_TO"]);
   e.Easing = _$$z.strictObject({
-    type: _$$z.$$enum(["EASE_IN", "EASE_OUT", "EASE_IN_AND_OUT", "LINEAR", "EASE_IN_BACK", "EASE_OUT_BACK", "EASE_IN_AND_OUT_BACK", "CUSTOM_CUBIC_BEZIER", "GENTLE", "QUICK", "BOUNCY", "SLOW", "CUSTOM_SPRING"]),
+    type: _$$z.enum(["EASE_IN", "EASE_OUT", "EASE_IN_AND_OUT", "LINEAR", "EASE_IN_BACK", "EASE_OUT_BACK", "EASE_IN_AND_OUT_BACK", "CUSTOM_CUBIC_BEZIER", "GENTLE", "QUICK", "BOUNCY", "SLOW", "CUSTOM_SPRING"]),
     easingFunctionCubicBezier: _$$z.strictObject({
       x1: e.FiniteNumber,
       y1: e.FiniteNumber,
@@ -64,13 +64,13 @@ var $$n0;
     }).optional()
   });
   e.SimpleTransition = _$$z.strictObject({
-    type: _$$z.$$enum(["DISSOLVE", "SMART_ANIMATE", "SCROLL_ANIMATE"]),
+    type: _$$z.enum(["DISSOLVE", "SMART_ANIMATE", "SCROLL_ANIMATE"]),
     easing: e.Easing,
     duration: e.FiniteNumber
   });
   e.DirectionalTransition = _$$z.strictObject({
-    type: _$$z.$$enum(["MOVE_IN", "MOVE_OUT", "PUSH", "SLIDE_IN", "SLIDE_OUT"]),
-    direction: _$$z.$$enum(["LEFT", "RIGHT", "TOP", "BOTTOM"]),
+    type: _$$z.enum(["MOVE_IN", "MOVE_OUT", "PUSH", "SLIDE_IN", "SLIDE_OUT"]),
+    direction: _$$z.enum(["LEFT", "RIGHT", "TOP", "BOTTOM"]),
     matchLayers: _$$z.boolean(),
     easing: e.Easing,
     duration: e.FiniteNumber
@@ -81,7 +81,7 @@ var $$n0;
     y: e.FiniteNumber
   });
   e.ReactionActionNoConditional = _$$z.union([_$$z.strictObject({
-    type: _$$z.$$enum(["BACK", "CLOSE"])
+    type: _$$z.enum(["BACK", "CLOSE"])
   }), _$$z.strictObject({
     type: _$$z.literal("URL"),
     url: _$$z.string(),
@@ -89,16 +89,16 @@ var $$n0;
   }), _$$z.strictObject({
     type: _$$z.literal("UPDATE_MEDIA_RUNTIME"),
     destinationId: _$$z.union([_$$z.string(), _$$z.$$null()]),
-    mediaAction: _$$z.$$enum(["PLAY", "PAUSE", "TOGGLE_PLAY_PAUSE", "MUTE", "UNMUTE", "TOGGLE_MUTE_UNMUTE"])
+    mediaAction: _$$z.enum(["PLAY", "PAUSE", "TOGGLE_PLAY_PAUSE", "MUTE", "UNMUTE", "TOGGLE_MUTE_UNMUTE"])
   }), _$$z.strictObject({
     type: _$$z.literal("UPDATE_MEDIA_RUNTIME"),
     destinationId: _$$z.union([_$$z.string(), _$$z.$$null()]),
-    mediaAction: _$$z.$$enum(["SKIP_FORWARD", "SKIP_BACKWARD"]),
+    mediaAction: _$$z.enum(["SKIP_FORWARD", "SKIP_BACKWARD"]),
     amountToSkip: e.FiniteNumber
   }), _$$z.strictObject({
     type: _$$z.literal("UPDATE_MEDIA_RUNTIME"),
     destinationId: _$$z.union([_$$z.string(), _$$z.$$null()]),
-    mediaAction: _$$z.$$enum(["SKIP_TO"]),
+    mediaAction: _$$z.enum(["SKIP_TO"]),
     newTimestamp: e.FiniteNumber
   }), _$$z.strictObject({
     type: _$$z.literal("NODE"),
@@ -120,16 +120,16 @@ var $$n0;
     variableModeId: _$$z.union([_$$z.string(), _$$z.$$null()])
   })]);
   e.Trigger = _$$z.union([_$$z.strictObject({
-    type: _$$z.$$enum(["ON_CLICK", "ON_HOVER", "ON_PRESS", "ON_DRAG", "ON_MEDIA_END"])
+    type: _$$z.enum(["ON_CLICK", "ON_HOVER", "ON_PRESS", "ON_DRAG", "ON_MEDIA_END"])
   }), _$$z.strictObject({
     type: _$$z.literal("AFTER_TIMEOUT"),
     timeout: e.FiniteNumber
   }), _$$z.strictObject({
-    type: _$$z.$$enum(["MOUSE_ENTER", "MOUSE_LEAVE", "MOUSE_UP", "MOUSE_DOWN"]),
+    type: _$$z.enum(["MOUSE_ENTER", "MOUSE_LEAVE", "MOUSE_UP", "MOUSE_DOWN"]),
     delay: e.FiniteNumber
   }), _$$z.strictObject({
     type: _$$z.literal("ON_KEY_DOWN"),
-    device: _$$z.$$enum(["KEYBOARD", "XBOX_ONE", "PS4", "SWITCH_PRO", "UNKNOWN_CONTROLLER"]),
+    device: _$$z.enum(["KEYBOARD", "XBOX_ONE", "PS4", "SWITCH_PRO", "UNKNOWN_CONTROLLER"]),
     keyCodes: _$$z.array(e.FiniteNumber)
   }), _$$z.strictObject({
     type: _$$z.literal("ON_MEDIA_HIT"),
@@ -149,10 +149,10 @@ var $$n0;
     trigger: _$$z.union([e.Trigger, _$$z.$$null()])
   });
   e.Reactions = _$$z.array(e.Reaction);
-  e.MaskType = _$$z.$$enum(["ALPHA", "VECTOR", "LUMINANCE"]);
+  e.MaskType = _$$z.enum(["ALPHA", "VECTOR", "LUMINANCE"]);
   e.UInt8Array = _$$z.$$instanceof(Uint8Array);
   e.ColorInput = _$$z.union([_$$z.string(), e.ColorA, e.Color]);
-  e.BlendMode = _$$z.$$enum(["PASS_THROUGH", "NORMAL", "DARKEN", "MULTIPLY", "LINEAR_BURN", "COLOR_BURN", "LIGHTEN", "SCREEN", "LINEAR_DODGE", "COLOR_DODGE", "OVERLAY", "SOFT_LIGHT", "HARD_LIGHT", "DIFFERENCE", "EXCLUSION", "HUE", "SATURATION", "COLOR", "LUMINOSITY"]);
+  e.BlendMode = _$$z.enum(["PASS_THROUGH", "NORMAL", "DARKEN", "MULTIPLY", "LINEAR_BURN", "COLOR_BURN", "LIGHTEN", "SCREEN", "LINEAR_DODGE", "COLOR_DODGE", "OVERLAY", "SOFT_LIGHT", "HARD_LIGHT", "DIFFERENCE", "EXCLUSION", "HUE", "SATURATION", "COLOR", "LUMINOSITY"]);
   e.PaintBoundVariables = _$$z.strictObject({
     color: _$$z.strictObject({
       type: _$$z.literal("VARIABLE_ALIAS"),
@@ -224,18 +224,18 @@ var $$n0;
   }).strict();
   let g = _$$z.strictObject({
     type: _$$z.literal("PATTERN"),
-    tileType: _$$z.$$enum(["RECTANGULAR", "HORIZONTAL_HEXAGONAL", "VERTICAL_HEXAGONAL"]),
+    tileType: _$$z.enum(["RECTANGULAR", "HORIZONTAL_HEXAGONAL", "VERTICAL_HEXAGONAL"]),
     scalingFactor: e.PositiveFloat.optional(),
     spacing: e.Vector.optional(),
-    horizontalAlignment: _$$z.$$enum(["START", "CENTER", "END"]).optional(),
-    verticalAlignment: _$$z.$$enum(["START", "CENTER", "END"]).optional(),
+    horizontalAlignment: _$$z.enum(["START", "CENTER", "END"]).optional(),
+    verticalAlignment: _$$z.enum(["START", "CENTER", "END"]).optional(),
     sourceNodeId: _$$z.string(),
     visible: _$$z.boolean().optional(),
     opacity: e.ZeroToOne.optional(),
     blendMode: e.BlendMode.optional()
   }).strict();
   e.Paint = _$$z.discriminatedUnion("type", [h, _$$z.strictObject({
-    type: _$$z.$$enum(["GRADIENT_LINEAR", "GRADIENT_RADIAL", "GRADIENT_ANGULAR", "GRADIENT_DIAMOND"]),
+    type: _$$z.enum(["GRADIENT_LINEAR", "GRADIENT_RADIAL", "GRADIENT_ANGULAR", "GRADIENT_DIAMOND"]),
     gradientTransform: e.Matrix,
     gradientStops: _$$z.array(n),
     visible: _$$z.boolean().optional(),
@@ -243,7 +243,7 @@ var $$n0;
     blendMode: e.BlendMode.optional()
   }).strict(), _$$z.strictObject({
     type: _$$z.literal("IMAGE"),
-    scaleMode: _$$z.$$enum(["FILL", "FIT", "CROP", "TILE"]),
+    scaleMode: _$$z.enum(["FILL", "FIT", "CROP", "TILE"]),
     imageHash: _$$z.string(),
     scalingFactor: e.PositiveFloat.optional(),
     rotation: e.PositiveInteger.optional(),
@@ -254,7 +254,7 @@ var $$n0;
     blendMode: e.BlendMode.optional()
   }).strict(), _$$z.strictObject({
     type: _$$z.literal("VIDEO"),
-    scaleMode: _$$z.$$enum(["FILL", "FIT", "CROP", "TILE"]),
+    scaleMode: _$$z.enum(["FILL", "FIT", "CROP", "TILE"]),
     videoHash: _$$z.string(),
     scalingFactor: e.PositiveFloat.optional(),
     rotation: e.PositiveInteger.optional(),
@@ -297,8 +297,8 @@ var $$n0;
     showShadowBehindNode: _$$z.boolean().optional()
   });
   let y = {
-    type: _$$z.$$enum(["LAYER_BLUR", "BACKGROUND_BLUR"]),
-    blurType: _$$z.$$enum(["NORMAL", "PROGRESSIVE"]).optional(),
+    type: _$$z.enum(["LAYER_BLUR", "BACKGROUND_BLUR"]),
+    blurType: _$$z.enum(["NORMAL", "PROGRESSIVE"]).optional(),
     radius: e.Float.min(0),
     visible: _$$z.boolean(),
     boundVariables: e.BlurEffectBoundVariables.optional()
@@ -363,8 +363,8 @@ var $$n0;
   e.EffectIncludingDrawMode = _$$z.union([_, A, E, T, k, R]).refine(e => !("GLASS" === e.type && !getFeatureFlags().mix_gl));
   e.EffectsIncludingDrawMode = _$$z.array(e.EffectIncludingDrawMode).refine(e => !getFeatureFlags().mix_gl || e.filter(e => "GLASS" === e.type).length <= 1, eM);
   let N = _$$z.strictObject({
-    pattern: _$$z.$$enum(["COLUMNS", "ROWS"]),
-    alignment: _$$z.$$enum(["MIN", "MAX"]),
+    pattern: _$$z.enum(["COLUMNS", "ROWS"]),
+    alignment: _$$z.enum(["MIN", "MAX"]),
     gutterSize: e.Float,
     count: _$$z.union([e.PositiveInteger, _$$z.literal(1 / 0)]),
     sectionSize: e.PositiveFloat,
@@ -379,7 +379,7 @@ var $$n0;
     }).partial().optional()
   }).strict();
   let P = _$$z.strictObject({
-    pattern: _$$z.$$enum(["COLUMNS", "ROWS"]),
+    pattern: _$$z.enum(["COLUMNS", "ROWS"]),
     alignment: _$$z.literal("STRETCH"),
     gutterSize: e.Float,
     count: _$$z.number().finite().min(0),
@@ -393,7 +393,7 @@ var $$n0;
     }).partial().optional()
   }).strict();
   let O = _$$z.strictObject({
-    pattern: _$$z.$$enum(["COLUMNS", "ROWS"]),
+    pattern: _$$z.enum(["COLUMNS", "ROWS"]),
     alignment: _$$z.literal("CENTER"),
     gutterSize: e.Float,
     count: _$$z.union([e.PositiveInteger, _$$z.literal(1 / 0)]),
@@ -427,12 +427,12 @@ var $$n0;
     start: e.FiniteNumber.$$int(),
     end: e.FiniteNumber.$$int(),
     suggestions: _$$z.array(_$$z.string()),
-    color: _$$z.$$enum(["RED", "BLUE", "GREEN"]).optional()
+    color: _$$z.enum(["RED", "BLUE", "GREEN"]).optional()
   }));
   e.CodegenResultSchema = _$$z.array(_$$z.strictObject({
     title: _$$z.string(),
     code: _$$z.string(),
-    language: _$$z.$$enum(["TYPESCRIPT", "CPP", "RUBY", "CSS", "JAVASCRIPT", "HTML", "JSON", "GRAPHQL", "PYTHON", "GO", "SQL", "SWIFT", "KOTLIN", "RUST", "BASH", "PLAINTEXT", "DART"])
+    language: _$$z.enum(["TYPESCRIPT", "CPP", "RUBY", "CSS", "JAVASCRIPT", "HTML", "JSON", "GRAPHQL", "PYTHON", "GO", "SQL", "SWIFT", "KOTLIN", "RUST", "BASH", "PLAINTEXT", "DART"])
   }));
   let L = _$$z.strictObject({
     type: _$$z.literal("AUTH_REQUIRED")
@@ -450,7 +450,7 @@ var $$n0;
     type: _$$z.union([_$$z.literal("READY_FOR_DEV"), _$$z.literal("COMPLETED")]),
     description: _$$z.string().optional()
   });
-  let M = _$$z.$$enum(N2);
+  let M = _$$z.enum(N2);
   let j = _$$z.array(_$$z.strictObject({
     label: _$$z.string().optional(),
     labelMarkdown: _$$z.string().optional(),
@@ -463,7 +463,7 @@ var $$n0;
   e.AnnotationsMarkdownMultipleAnnotationsPerNode = j;
   e.AnnotationMeasurementStartEnd = _$$z.strictObject({
     node: _$$z.any(),
-    side: _$$z.$$enum(SI)
+    side: _$$z.enum(SI)
   });
   let U = _$$z.discriminatedUnion("type", [_$$z.strictObject({
     type: _$$z.literal("INNER"),
@@ -480,8 +480,8 @@ var $$n0;
     offset: U.optional(),
     freeText: _$$z.string().optional()
   });
-  e.StrokeAlign = _$$z.$$enum(["CENTER", "INSIDE", "OUTSIDE"]);
-  e.NumberUnit = _$$z.$$enum(["PIXELS", "PERCENT"]);
+  e.StrokeAlign = _$$z.enum(["CENTER", "INSIDE", "OUTSIDE"]);
+  e.NumberUnit = _$$z.enum(["PIXELS", "PERCENT"]);
   e.LetterSpacing = _$$z.strictObject({
     value: _$$z.number().finite(),
     unit: e.NumberUnit
@@ -492,12 +492,12 @@ var $$n0;
   }).strict(), _$$z.strictObject({
     unit: _$$z.literal("AUTO")
   }).strict()]);
-  e.LeadingTrim = _$$z.$$enum(["CAP_HEIGHT", "NONE"]);
-  e.TextAlignHorizontal = _$$z.$$enum(["LEFT", "CENTER", "RIGHT", "JUSTIFIED"]);
-  e.TextAlignVertical = _$$z.$$enum(["TOP", "CENTER", "BOTTOM"]);
-  e.TextCase = _$$z.$$enum(["ORIGINAL", "UPPER", "LOWER", "TITLE", "SMALL_CAPS", "SMALL_CAPS_FORCED"]);
-  e.TextDecoration = _$$z.$$enum(["NONE", "UNDERLINE", "STRIKETHROUGH"]);
-  e.TextDecorationStyle = _$$z.$$enum(["SOLID", "DOTTED", "WAVY"]);
+  e.LeadingTrim = _$$z.enum(["CAP_HEIGHT", "NONE"]);
+  e.TextAlignHorizontal = _$$z.enum(["LEFT", "CENTER", "RIGHT", "JUSTIFIED"]);
+  e.TextAlignVertical = _$$z.enum(["TOP", "CENTER", "BOTTOM"]);
+  e.TextCase = _$$z.enum(["ORIGINAL", "UPPER", "LOWER", "TITLE", "SMALL_CAPS", "SMALL_CAPS_FORCED"]);
+  e.TextDecoration = _$$z.enum(["NONE", "UNDERLINE", "STRIKETHROUGH"]);
+  e.TextDecorationStyle = _$$z.enum(["SOLID", "DOTTED", "WAVY"]);
   e.TextDecorationOffset = _$$z.discriminatedUnion("unit", [_$$z.strictObject({
     value: _$$z.number().finite(),
     unit: e.NumberUnit
@@ -515,19 +515,19 @@ var $$n0;
   }).strict(), _$$z.strictObject({
     value: _$$z.literal("AUTO")
   }).strict()]);
-  e.TextAutoResize = _$$z.$$enum(["NONE", "WIDTH_AND_HEIGHT", "HEIGHT", "TRUNCATE"]);
-  e.TextListType = _$$z.$$enum(["NONE", "ORDERED", "UNORDERED"]);
+  e.TextAutoResize = _$$z.enum(["NONE", "WIDTH_AND_HEIGHT", "HEIGHT", "TRUNCATE"]);
+  e.TextListType = _$$z.enum(["NONE", "ORDERED", "UNORDERED"]);
   e.TextListOptions = _$$z.strictObject({
     type: e.TextListType
   });
   e.TextIndentation = _$$z.number().finite().$$int().min(0).max(5);
-  e.TextHyperlinkType = _$$z.$$enum(["URL", "NODE"]);
+  e.TextHyperlinkType = _$$z.enum(["URL", "NODE"]);
   e.TextHyperlinkOptions = _$$z.union([_$$z.strictObject({
     type: e.TextHyperlinkType,
     value: _$$z.string()
   }), _$$z.$$null()]);
   e.FindCriteriaWithPluginDataSchema = _$$z.strictObject({
-    types: _$$z.array(_$$z.$$enum(_$$$)).optional(),
+    types: _$$z.array(_$$z.enum(_$$$)).optional(),
     sharedPluginData: _$$z.strictObject({
       namespace: _$$z.string(),
       keys: _$$z.array(_$$z.string()).optional()
@@ -540,18 +540,18 @@ var $$n0;
   e.PluginDataEntryNormalLimitSchema = _$$z.array(_$$z.string()).refine(t => t.reduce((e, t) => e + hp.byteLength(t), 0) <= e.getPluginDataNormalLimit());
   e.getPluginDataEscapeHatchLimit = _$$n(() => 0x4000000);
   e.PluginDataEntryEscapeHatchLimitSchema = _$$z.array(_$$z.string()).refine(t => t.reduce((e, t) => e + hp.byteLength(t), 0) <= e.getPluginDataEscapeHatchLimit());
-  e.TextTruncation = _$$z.$$enum(["DISABLED", "ENDING"]);
-  e.exportColorProfile = _$$z.$$enum(["DOCUMENT", "SRGB", "DISPLAY_P3_V4"]).optional();
+  e.TextTruncation = _$$z.enum(["DISABLED", "ENDING"]);
+  e.exportColorProfile = _$$z.enum(["DOCUMENT", "SRGB", "DISPLAY_P3_V4"]).optional();
   let B = _$$z.strictObject({
-    format: _$$z.$$enum(["PNG", "JPG"]),
+    format: _$$z.enum(["PNG", "JPG"]),
     contentsOnly: _$$z.boolean().optional(),
     suffix: _$$z.string().optional(),
     useAbsoluteBounds: _$$z.boolean().optional(),
     constraint: _$$z.union([_$$z.strictObject({
-      type: _$$z.$$enum(["SCALE"]),
+      type: _$$z.enum(["SCALE"]),
       value: e.FiniteNumber
     }), _$$z.strictObject({
-      type: _$$z.$$enum(["WIDTH", "HEIGHT"]),
+      type: _$$z.enum(["WIDTH", "HEIGHT"]),
       value: e.FiniteNumber
     })]).optional(),
     colorProfile: e.exportColorProfile
@@ -564,7 +564,7 @@ var $$n0;
     colorProfile: e.exportColorProfile
   });
   let G = _$$z.strictObject({
-    format: _$$z.$$enum(["SVG", "SVG_STRING"]),
+    format: _$$z.enum(["SVG", "SVG_STRING"]),
     contentsOnly: _$$z.boolean().optional(),
     suffix: _$$z.string().optional(),
     svgOutlineText: _$$z.boolean().optional(),
@@ -574,43 +574,43 @@ var $$n0;
     colorProfile: e.exportColorProfile
   });
   let z = [B, V, G];
-  e.getExportAsyncSetting = function(e = !1) {
+  e.getExportAsyncSetting = function (e = !1) {
     return _$$z.discriminatedUnion("format", [...z, _$$z.strictObject({
-      format: e ? _$$z.$$enum(["JSON_REST_V1", "FIRST_DRAFT_JSON"]) : _$$z.$$enum(["JSON_REST_V1"])
+      format: e ? _$$z.enum(["JSON_REST_V1", "FIRST_DRAFT_JSON"]) : _$$z.enum(["JSON_REST_V1"])
     })]);
   };
-  e.ConstraintType = _$$z.$$enum(["MIN", "CENTER", "MAX", "STRETCH", "SCALE"]);
+  e.ConstraintType = _$$z.enum(["MIN", "CENTER", "MAX", "STRETCH", "SCALE"]);
   e.Constraints = _$$z.strictObject({
     horizontal: e.ConstraintType,
     vertical: e.ConstraintType
   });
-  e.OverflowDirection = _$$z.$$enum(["NONE", "HORIZONTAL", "VERTICAL", "BOTH"]);
-  e.LayoutAlign = _$$z.$$enum(["MIN", "CENTER", "MAX", "STRETCH", "INHERIT"]);
-  e.LayoutMode = _$$z.$$enum(["NONE", "HORIZONTAL", "VERTICAL", "GRID"]);
-  e.StackWrap = _$$z.$$enum(["NO_WRAP", "WRAP"]);
-  e.StackCounterAlignContent = _$$z.$$enum(["AUTO", "SPACE_BETWEEN"]);
-  e.StackJustify = _$$z.$$enum(["MIN", "MAX", "CENTER", "SPACE_BETWEEN"]);
-  e.StackJustifyLegacy = _$$z.$$enum(["MIN", "MAX", "CENTER", "SPACE_BETWEEN", "SPACE_BETWEEN_LEGACY"]);
-  e.StackAlign = _$$z.$$enum(["MIN", "MAX", "CENTER", "BASELINE"]);
-  e.SizingMode = _$$z.$$enum(["FIXED", "AUTO"]);
-  e.SizingModeLegacy = _$$z.$$enum(["FIXED", "AUTO", "LEGACY_AUTO"]);
-  e.LayoutSizing = _$$z.$$enum(["FIXED", "HUG", "FILL"]);
-  e.LayoutPositioning = _$$z.$$enum(["AUTO", "ABSOLUTE"]);
-  e.GridTrackSizingType = _$$z.$$enum(["FLEX", "FIXED", "HUG"]);
-  e.GridChildAlign = _$$z.$$enum(["MIN", "CENTER", "MAX", "AUTO"]);
+  e.OverflowDirection = _$$z.enum(["NONE", "HORIZONTAL", "VERTICAL", "BOTH"]);
+  e.LayoutAlign = _$$z.enum(["MIN", "CENTER", "MAX", "STRETCH", "INHERIT"]);
+  e.LayoutMode = _$$z.enum(["NONE", "HORIZONTAL", "VERTICAL", "GRID"]);
+  e.StackWrap = _$$z.enum(["NO_WRAP", "WRAP"]);
+  e.StackCounterAlignContent = _$$z.enum(["AUTO", "SPACE_BETWEEN"]);
+  e.StackJustify = _$$z.enum(["MIN", "MAX", "CENTER", "SPACE_BETWEEN"]);
+  e.StackJustifyLegacy = _$$z.enum(["MIN", "MAX", "CENTER", "SPACE_BETWEEN", "SPACE_BETWEEN_LEGACY"]);
+  e.StackAlign = _$$z.enum(["MIN", "MAX", "CENTER", "BASELINE"]);
+  e.SizingMode = _$$z.enum(["FIXED", "AUTO"]);
+  e.SizingModeLegacy = _$$z.enum(["FIXED", "AUTO", "LEGACY_AUTO"]);
+  e.LayoutSizing = _$$z.enum(["FIXED", "HUG", "FILL"]);
+  e.LayoutPositioning = _$$z.enum(["AUTO", "ABSOLUTE"]);
+  e.GridTrackSizingType = _$$z.enum(["FLEX", "FIXED", "HUG"]);
+  e.GridChildAlign = _$$z.enum(["MIN", "CENTER", "MAX", "AUTO"]);
   e.GridTrackSize = _$$z.strictObject({
     type: e.GridTrackSizingType,
     value: e.PositiveFloat.optional()
   });
-  e.HandleMirroring = _$$z.$$enum(["NONE", "ANGLE", "ANGLE_AND_LENGTH"]);
-  e.StrokeJoin = _$$z.$$enum(["MITER", "BEVEL", "ROUND"]);
-  e.StrokeCap = _$$z.$$enum(["NONE", "ROUND", "SQUARE", "ARROW_LINES", "ARROW_EQUILATERAL", "DIAMOND_FILLED", "TRIANGLE_FILLED", "CIRCLE_FILLED"]);
+  e.HandleMirroring = _$$z.enum(["NONE", "ANGLE", "ANGLE_AND_LENGTH"]);
+  e.StrokeJoin = _$$z.enum(["MITER", "BEVEL", "ROUND"]);
+  e.StrokeCap = _$$z.enum(["NONE", "ROUND", "SQUARE", "ARROW_LINES", "ARROW_EQUILATERAL", "DIAMOND_FILLED", "TRIANGLE_FILLED", "CIRCLE_FILLED"]);
   let H = _$$z.object({
     id: _$$z.string()
   });
   let W = _$$z.array(H);
   e.CanvasGrid = _$$z.array(W);
-  let K = _$$z.$$enum(["NONZERO", "EVENODD"]);
+  let K = _$$z.enum(["NONZERO", "EVENODD"]);
   let Y = _$$z.strictObject({
     windingRule: _$$z.union([K, _$$z.literal("NONE")]),
     data: _$$z.string()
@@ -654,7 +654,7 @@ var $$n0;
     integrity: _$$z.string().optional()
   }).optional();
   e.Guide = _$$z.strictObject({
-    axis: _$$z.$$enum(["X", "Y"]),
+    axis: _$$z.enum(["X", "Y"]),
     offset: _$$z.number().finite()
   }).strict();
   e.Guides = _$$z.array(e.Guide);
@@ -675,7 +675,7 @@ var $$n0;
     start: e.PositiveInteger,
     end: e.PositiveInteger
   }).strict(), _$$z.$$null()]);
-  e.BooleanOperation = _$$z.$$enum(["UNION", "INTERSECT", "SUBTRACT", "EXCLUDE"]);
+  e.BooleanOperation = _$$z.enum(["UNION", "INTERSECT", "SUBTRACT", "EXCLUDE"]);
   e.ArcData = _$$z.strictObject({
     startingAngle: _$$z.number().finite(),
     endingAngle: _$$z.number().finite(),
@@ -684,17 +684,17 @@ var $$n0;
   e.ExportSetting = _$$z.discriminatedUnion("format", [B, V, G]);
   e.ExportSettings = _$$z.array(e.ExportSetting);
   let Q = _$$z.strictObject({
-    type: _$$z.literal(e.VariableDataType.$$enum.COLOR),
+    type: _$$z.literal(e.VariableDataType.enum.COLOR),
     value: e.ColorA
   });
   e.VariableDataSchema = _$$z.discriminatedUnion("type", [_$$z.strictObject({
-    type: _$$z.literal(e.VariableDataType.$$enum.STRING),
+    type: _$$z.literal(e.VariableDataType.enum.STRING),
     value: _$$z.string()
   }), _$$z.strictObject({
-    type: _$$z.literal(e.VariableDataType.$$enum.BOOLEAN),
+    type: _$$z.literal(e.VariableDataType.enum.BOOLEAN),
     value: _$$z.boolean()
   }), _$$z.strictObject({
-    type: _$$z.literal(e.VariableDataType.$$enum.FLOAT),
+    type: _$$z.literal(e.VariableDataType.enum.FLOAT),
     value: _$$z.number().finite()
   }), Q, _$$z.strictObject({
     type: _$$z.literal(Z_n.ALIAS),
@@ -702,20 +702,20 @@ var $$n0;
     resolvedType: _$$z.nativeEnum(rXF)
   })]);
   e.RelaunchData = _$$z.record(_$$z.string());
-  e.StyledTextSegmentFields = _$$z.array(_$$z.$$enum(["fontSize", "fontName", "fontWeight", "textDecoration", "textDecorationStyle", "textDecorationSkipInk", "textDecorationOffset", "textDecorationThickness", "textDecorationColor", "textCase", "lineHeight", "letterSpacing", "fills", "textStyleId", "fillStyleId", "listOptions", "indentation", "hyperlink", "openTypeFeatures", "boundVariables", "textStyleOverrides", "paragraphSpacing", "listSpacing", "paragraphIndent"]));
-  e.ShapeWithTextType = _$$z.$$enum(["SQUARE", "ELLIPSE", "ROUNDED_RECTANGLE", "DIAMOND", "TRIANGLE_UP", "TRIANGLE_DOWN", "PARALLELOGRAM_RIGHT", "PARALLELOGRAM_LEFT", "ENG_DATABASE", "ENG_QUEUE", "ENG_FILE", "ENG_FOLDER", "TRAPEZOID", "PREDEFINED_PROCESS", "SHIELD", "DOCUMENT_SINGLE", "DOCUMENT_MULTIPLE", "MANUAL_INPUT", "HEXAGON", "CHEVRON", "PENTAGON", "OCTAGON", "STAR", "PLUS", "ARROW_LEFT", "ARROW_RIGHT", "SUMMING_JUNCTION", "OR", "SPEECH_BUBBLE", "INTERNAL_STORAGE"]);
-  e.CodeBlockLanguage = _$$z.$$enum(["TYPESCRIPT", "CPP", "RUBY", "CSS", "JAVASCRIPT", "HTML", "JSON", "GRAPHQL", "PYTHON", "GO", "SQL", "SWIFT", "KOTLIN", "RUST", "BASH", "PLAINTEXT", "DART"]);
+  e.StyledTextSegmentFields = _$$z.array(_$$z.enum(["fontSize", "fontName", "fontWeight", "textDecoration", "textDecorationStyle", "textDecorationSkipInk", "textDecorationOffset", "textDecorationThickness", "textDecorationColor", "textCase", "lineHeight", "letterSpacing", "fills", "textStyleId", "fillStyleId", "listOptions", "indentation", "hyperlink", "openTypeFeatures", "boundVariables", "textStyleOverrides", "paragraphSpacing", "listSpacing", "paragraphIndent"]));
+  e.ShapeWithTextType = _$$z.enum(["SQUARE", "ELLIPSE", "ROUNDED_RECTANGLE", "DIAMOND", "TRIANGLE_UP", "TRIANGLE_DOWN", "PARALLELOGRAM_RIGHT", "PARALLELOGRAM_LEFT", "ENG_DATABASE", "ENG_QUEUE", "ENG_FILE", "ENG_FOLDER", "TRAPEZOID", "PREDEFINED_PROCESS", "SHIELD", "DOCUMENT_SINGLE", "DOCUMENT_MULTIPLE", "MANUAL_INPUT", "HEXAGON", "CHEVRON", "PENTAGON", "OCTAGON", "STAR", "PLUS", "ARROW_LEFT", "ARROW_RIGHT", "SUMMING_JUNCTION", "OR", "SPEECH_BUBBLE", "INTERNAL_STORAGE"]);
+  e.CodeBlockLanguage = _$$z.enum(["TYPESCRIPT", "CPP", "RUBY", "CSS", "JAVASCRIPT", "HTML", "JSON", "GRAPHQL", "PYTHON", "GO", "SQL", "SWIFT", "KOTLIN", "RUST", "BASH", "PLAINTEXT", "DART"]);
   let J = ["BOOLEAN", "TEXT", "INSTANCE_SWAP", "IMAGE"];
   let ee = [...J, "NUMBER"];
   let et = [...J, "VARIANT"];
   let ei = [...ee, "VARIANT"];
-  e.ComponentPropertyType = _$$z.$$enum(et);
-  e.ComponentPropertyTypeWithNumber = _$$z.$$enum(ei);
+  e.ComponentPropertyType = _$$z.enum(et);
+  e.ComponentPropertyTypeWithNumber = _$$z.enum(ei);
   e.ComponentPropertyValue = _$$z.union([_$$z.boolean(), _$$z.string()]);
   e.ComponentPropertyValueWithNumber = _$$z.union([_$$z.boolean(), _$$z.string(), _$$z.number().finite()]);
   e.ComponentPropertyValueWithVariable = _$$z.union([_$$z.boolean(), _$$z.string(), e.VariableAlias]);
   e.ComponentPropertyValueWithNumberAndVariable = _$$z.union([_$$z.boolean(), _$$z.string(), _$$z.number().finite(), e.VariableAlias]);
-  e.InstanceSwapPreferredValueType = _$$z.$$enum(["COMPONENT", "COMPONENT_SET"]);
+  e.InstanceSwapPreferredValueType = _$$z.enum(["COMPONENT", "COMPONENT_SET"]);
   e.InstanceSwapPreferredValue = _$$z.strictObject({
     type: e.InstanceSwapPreferredValueType,
     key: _$$z.string()
@@ -749,7 +749,7 @@ var $$n0;
     characters: _$$z.string().optional(),
     mainComponent: _$$z.string().optional()
   }).strict();
-  e.ConnectorMagnet = _$$z.$$enum(["NONE", "AUTO", "TOP", "LEFT", "BOTTOM", "RIGHT", "CENTER"]);
+  e.ConnectorMagnet = _$$z.enum(["NONE", "AUTO", "TOP", "LEFT", "BOTTOM", "RIGHT", "CENTER"]);
   e.ConnectorEndpoint = _$$z.union([_$$z.strictObject({
     endpointNodeId: _$$z.string(),
     position: e.Vector
@@ -759,7 +759,7 @@ var $$n0;
     endpointNodeId: _$$z.string(),
     magnet: e.ConnectorMagnet
   })]);
-  e.ConnectorLineType = _$$z.$$enum(["ELBOWED", "STRAIGHT", "CURVED"]);
-  e.ConnectorStrokeCap = _$$z.$$enum(["NONE", "ARROW_EQUILATERAL", "ARROW_LINES", "TRIANGLE_FILLED", "DIAMOND_FILLED", "CIRCLE_FILLED"]);
+  e.ConnectorLineType = _$$z.enum(["ELBOWED", "STRAIGHT", "CURVED"]);
+  e.ConnectorStrokeCap = _$$z.enum(["NONE", "ARROW_EQUILATERAL", "ARROW_LINES", "TRIANGLE_FILLED", "DIAMOND_FILLED", "CIRCLE_FILLED"]);
 })($$n0 || ($$n0 = {}));
 export const N = $$n0; 

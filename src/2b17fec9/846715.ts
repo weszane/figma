@@ -110,7 +110,7 @@ import { Qv } from "../figma_app/967873";
 import { s as _$$s3 } from "../figma_app/666387";
 import { kk, cd as _$$cd } from "../figma_app/650460";
 import { V as _$$V2 } from "../figma_app/177090";
-import { KF } from "../figma_app/465776";
+import { debug } from "../figma_app/465776";
 import { n6 } from "../9410/67768";
 import { f7, az } from "../2b17fec9/523222";
 import { s as _$$s4 } from "../2b17fec9/641273";
@@ -872,7 +872,7 @@ let tg = memo(function () {
   let t = md(c5);
   let i = Xr(n6);
   let a = f7();
-  KF(void 0 !== t, "There should be at least one collapsedStage threshold width less than our current container width.");
+  debug(void 0 !== t, "There should be at least one collapsedStage threshold width less than our current container width.");
   let s = a.slice(0, t.numPrimaryTools);
   let o = e && void 0 === s.find(e => "stamp" === e.toolType);
   useEffect(() => {

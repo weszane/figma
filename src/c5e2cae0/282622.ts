@@ -8,7 +8,7 @@ import { Ju } from "../905/712921";
 import { $V, NW } from "../figma_app/831101";
 import { x as _$$x } from "../c5e2cae0/907085";
 import { useState } from "react";
-import { wc } from "../figma_app/465776";
+import { throwError } from "../figma_app/465776";
 import { S as _$$S } from "../905/274480";
 import { J } from "../905/270045";
 import { k as _$$k } from "../905/443820";
@@ -183,7 +183,7 @@ function k({
                 monthlyPriceLink: E
               }) : tx("checkout.cart_review_upgrade_info_pro_monthly");
             default:
-              wc(e);
+              throwError(e);
           }
         }(e, t)
       }), jsx(Ph, {

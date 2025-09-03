@@ -1,4 +1,4 @@
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 export function $$r0(e) {
   if ("communityHub" !== e.view) return !1;
   switch (e.subView) {
@@ -12,7 +12,7 @@ export function $$r0(e) {
     case "monetizationRedirectView":
       return !1;
     default:
-      return xb(e);
+      return throwTypeError(e);
   }
 }
 export const V = $$r0;

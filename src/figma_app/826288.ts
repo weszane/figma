@@ -1,4 +1,4 @@
-import { KF } from "../figma_app/465776";
+import { debug } from "../figma_app/465776";
 import { getFeatureFlags } from "../905/601108";
 import a from "../vendor/635";
 import { Ax } from "../figma_app/616261";
@@ -29,7 +29,7 @@ export class $$E2 {
       selectedView: t
     })) return;
     let i = "children" in r;
-    if (!_o(r) || i || r.hideForQuickCommand || this._addToIndexInternal(r), "plugins-menu" !== r.name && "widgets-menu" !== r.name && i) for (let i of (KF(null != r.children, "this should be the type of menu groups that has FullscreenMenuItem as children"), r.children)) this.addFigmaMenuItemsToSearchMap(e, t, i);
+    if (!_o(r) || i || r.hideForQuickCommand || this._addToIndexInternal(r), "plugins-menu" !== r.name && "widgets-menu" !== r.name && i) for (let i of (debug(null != r.children, "this should be the type of menu groups that has FullscreenMenuItem as children"), r.children)) this.addFigmaMenuItemsToSearchMap(e, t, i);
   }
   _addToIndexInternal(e) {
     let {

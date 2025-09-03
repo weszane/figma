@@ -1,7 +1,7 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useMemo, useRef, useState, useCallback } from "react";
 import { d4, wA } from "../vendor/514228";
-import { xb, KF } from "../figma_app/465776";
+import { throwTypeError, debug } from "../figma_app/465776";
 import { xk } from "@stylexjs/stylex";
 import { md, Xr } from "../figma_app/27355";
 import { m8 } from "../905/864644";
@@ -55,7 +55,7 @@ import { M4 } from "../905/713695";
 import { e0 } from "../905/696396";
 import { g as _$$g } from "../905/880308";
 import { oB, j7 } from "../905/929976";
-import { j as _$$j2 } from "../905/834956";
+import { noop } from "../905/834956";
 import { kE } from "../905/466026";
 import { i as _$$i } from "../905/977961";
 import { TF, l1, X_, TM } from "../905/811749";
@@ -100,7 +100,7 @@ function $(e) {
     case nb.PROTOTYPE:
       return tx(e.shorter ? "tile.file_tile.password_protected_shorter" : "tile.file_tile.password_protected_prototype");
     default:
-      xb(e.tile);
+      throwTypeError(e.tile);
   }
 }
 function X(e) {
@@ -210,7 +210,7 @@ function eg(e) {
   };
   return jsx(ef, {
     dropdownId,
-    renderDropdown: e => jsx(_$$j2, {
+    renderDropdown: e => jsx(noop, {
       items: menuItems,
       parentRect: e,
       dispatch: l,
@@ -286,7 +286,7 @@ let e_ = (e, t, i, n, r, a) => {
       case "disabled":
         break;
       default:
-        xb(r.status);
+        throwTypeError(r.status);
     }
     o.push({
       separator: !0,
@@ -513,13 +513,13 @@ let eC = e => {
         t.push(e);
         break;
       case nb.PINNED_FILE:
-        KF(!0, "Do not expect to be rendering project or pinned tiles here");
+        debug(!0, "Do not expect to be rendering project or pinned tiles here");
         break;
       case nb.OFFLINE_FILE:
         r.push(e);
         break;
       default:
-        xb(e);
+        throwTypeError(e);
     }
   });
   return {

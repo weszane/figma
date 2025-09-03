@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { createContext, useState, useRef, useMemo } from "react";
-import { KF } from "../figma_app/465776";
+import { debug } from "../figma_app/465776";
 import { NLJ, rcl } from "../figma_app/763686";
 import { t } from "../905/303541";
 import { YV } from "../figma_app/240545";
@@ -36,10 +36,10 @@ export function $$_1(e) {
     shouldDragCancel: l,
     onDragStart: e => {
       let t = document.getElementById(HY);
-      KF(!!t, "Can't find delightful toolbar");
+      debug(!!t, "Can't find delightful toolbar");
       t && (_.current = t.getBoundingClientRect());
       let r = document.getElementById(V4);
-      KF(!!r, "Can't find delightful toolbar submenu");
+      debug(!!r, "Can't find delightful toolbar submenu");
       r && (m.current = r.getBoundingClientRect());
       let n = document.getElementById(YV);
       n && (g.current = n.getBoundingClientRect());

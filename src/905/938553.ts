@@ -145,7 +145,7 @@ import { iu as _$$iu, Ql, Ay as _$$Ay } from "../905/918143";
 import { A as _$$A23 } from "../905/440661";
 import { A as _$$A24 } from "../905/826099";
 import { A as _$$A25 } from "../905/560753";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { _ as _$$_ } from "../figma_app/169991";
 import { A as _$$A26 } from "../1617/755299";
 import { A as _$$A27 } from "../905/81613";
@@ -214,7 +214,7 @@ function eN(e) {
     })]
   });
 }
-let eP = function({
+let eP = function ({
   showLoading: e,
   hasSrc: t
 }) {
@@ -224,7 +224,7 @@ let eP = function({
     cardType: "upload"
   });
 };
-let eD = _$$tf(function(e) {
+let eD = _$$tf(function (e) {
   let [t, i] = useState(!1);
   let [n, s] = useState(!0);
   let {
@@ -289,7 +289,7 @@ let eD = _$$tf(function(e) {
     subtitle
   });
 });
-let eF = Ju(function(e) {
+let eF = Ju(function (e) {
   let {
     isWidget,
     onConfirm,
@@ -536,7 +536,7 @@ function e6({
     })
   });
 }
-let e9 = function({
+let e9 = function ({
   pluginId: e,
   metadata: t,
   publishModalRef: i,
@@ -760,7 +760,7 @@ function ta({
     })
   });
 }
-let to = Ju(function(e) {
+let to = Ju(function (e) {
   return jsx(_$$yX, {
     destructive: !0,
     confirmationTitle: _$$t("community.publishing.confirm_change_plugin_profile_modal.profile_will_be_removed", {
@@ -783,7 +783,7 @@ let to = Ju(function(e) {
     })
   });
 }, "ConfirmChangePluginProfileModal");
-let tl = Ju(function(e) {
+let tl = Ju(function (e) {
   let t = {
     authorName: jsx(_$$E, {
       fontWeight: "bold",
@@ -857,7 +857,7 @@ function tx({
     content: a
   };
 }
-let tC = Ju(function(e) {
+let tC = Ju(function (e) {
   return jsxs(_$$yX, {
     destructive: !0,
     confirmationTitle: e.isWidget ? _$$t("community.publishing.confirm_plugin_ownership_transfer_modal.transfer_plugin_ownership.widget") : _$$t("community.publishing.confirm_plugin_ownership_transfer_modal.transfer_plugin_ownership.plugin"),
@@ -880,7 +880,7 @@ function tR(e) {
   return {
     type: "option",
     key: e,
-    text: function(e) {
+    text: function (e) {
       switch (e) {
         case kM.OWNER:
           return _$$t("community.publishing.publisher_role_owner");
@@ -967,7 +967,7 @@ function tO({
                 resource: l
               }));
             },
-            onCancel: () => { }
+            onCancel: () => {}
           },
           showModalsBeneath: !0
         })) : (c(wx({
@@ -1099,7 +1099,7 @@ function tM({
       buttonText: _$$t("file_permissions_modal.send_invite"),
       dispatch: A,
       dropdownShown: null,
-      getSearchResults: function(i) {
+      getSearchResults: function (i) {
         var r;
         let {
           usersByEmail
@@ -1108,7 +1108,7 @@ function tM({
           ...usersByEmail,
           [t.email]: t
         });
-        let s = function(e, t, i, n) {
+        let s = function (e, t, i, n) {
           let r = tE(t, i, n);
           for (let t of e.tokens) r.add("string" == typeof t.content ? t.content.trim() : t.content.email);
           return r;
@@ -1128,10 +1128,10 @@ function tM({
       },
       inviteLevel: kM.PUBLISHER,
       isSubmitting: f,
-      onAutocompleteChange: function(e) {
+      onAutocompleteChange: function (e) {
         g(e);
       },
-      onSubmit: function(e) {
+      onSubmit: function (e) {
         let t = xf(e.inputValue) ? {
           inputValue: "",
           tokens: [...e.tokens, y(e.inputValue)],
@@ -1170,7 +1170,7 @@ function tM({
           _(!1);
         });
       },
-      searchResultToken: function(t) {
+      searchResultToken: function (t) {
         return tx({
           email: t.email,
           usersByEmail: e.usersByEmail,
@@ -1359,7 +1359,7 @@ function tY({
     children: _$$tx(a ? "community.publishing.figma_reviews_all_resources_published_to_community_org_private.widget" : "community.publishing.figma_reviews_all_resources_published_to_community_org_private.plugin", {
       orgName: n.org.name
     })
-  }); else {
+  });else {
     let e = jsx(CY, {
       href: "https://help.figma.com/hc/articles/360039958914",
       target: "_blank",
@@ -1710,7 +1710,7 @@ function iE({
         })
       })
     })
-  }); else if (t) {
+  });else if (t) {
     let o = UR(t, e);
     s = a && e ? e.status === FRequestStatusType.APPROVED ? jsx(ix, {
       children: jsx(_$$E, {
@@ -1798,7 +1798,7 @@ function iE({
       });
       break;
     default:
-      xb(e.status);
+      throwTypeError(e.status);
   }
   return jsx(_$$A6, {
     label: _$$t("community.publishing.data_security"),
@@ -1869,7 +1869,7 @@ function iO({
     })
   });
 }
-forwardRef(function({
+forwardRef(function ({
   maxLength: e,
   warningLength: t,
   ...i
@@ -2175,7 +2175,7 @@ class iW extends Component {
       }
       let t = "";
       let i = this.props.publishingState.metadata.author;
-      if ("org_id" in i) t = i.org_id; else if ("team_id" in i) {
+      if ("org_id" in i) t = i.org_id;else if ("team_id" in i) {
         let e = this.props.teams[i.team_id];
         t = e?.org_id ?? "";
       }
@@ -2243,7 +2243,7 @@ class iW extends Component {
           onConfirm: () => {
             this.createOrUpdatePluginVersion(i);
           },
-          onCancel: () => { }
+          onCancel: () => {}
         },
         showModalsBeneath: !0
       })) : this.createOrUpdatePluginVersion(i);
@@ -2524,7 +2524,7 @@ class iW extends Component {
         }));
       });
     };
-    this.isWidget = () => function(e, t) {
+    this.isWidget = () => function (e, t) {
       return !!e.is_widget || !!t && !!t.manifest.containsWidget;
     }(this.props.publishedPlugin, this.props.localPlugin);
     this.resourceType = () => nF(this.isWidget());
@@ -2695,7 +2695,7 @@ class iW extends Component {
       try {
         let e = await ec.getPermissions(i);
         if (200 === e.status) return e.data.meta;
-      } catch (e) { }
+      } catch (e) {}
     };
     this.getPublishFormPrimaryButtonText = () => {
       let e = this.getReviewStatus();
@@ -3346,7 +3346,7 @@ class iW extends Component {
         role: publishedPlugin.roles,
         initialStep: l
       })) : e = this.renderErrorScreen();
-    } else if (this.state.activeTab === KM.PUBLISH) e = this.renderForm(); else if (this.state.activeTab === KM.PERMISSIONS) e = jsx(tU, {
+    } else if (this.state.activeTab === KM.PUBLISH) e = this.renderForm();else if (this.state.activeTab === KM.PERMISSIONS) e = jsx(tU, {
       allowedTabs: this.state.allowedTabs,
       closePluginPublishModal: this.close,
       contacts: this.props.contacts,
@@ -3358,7 +3358,7 @@ class iW extends Component {
       pluginName: this.props.publishingState.metadata.name,
       publishedPlugin: this.props.publishedPlugin,
       userIsAdmin: this.props.isAdminOfPrivateOrgPlugin
-    }); else if (this.state.activeTab === KM.DATA_SECURITY) {
+    });else if (this.state.activeTab === KM.DATA_SECURITY) {
       let t = Tk(this.props.unpublishedPlugins, this.props.unpublishedWidgets, this.props.localPlugin);
       e = jsx(_$$A4, {
         localSecurityFormResponse: this.state.localSecurityFormResponse,
@@ -3471,7 +3471,7 @@ let iY = Ng((e, t) => {
     isRepublishingUnpublishedPlugin: !d.id && !!c
   };
 })(iW);
-let $$iq0 = Ju(function(e) {
+let $$iq0 = Ju(function (e) {
   let {
     Sprig
   } = useSprigWithSampling();
@@ -3493,7 +3493,7 @@ let $$iq0 = Ju(function(e) {
     existingSecurityFormResponse: l.data
   }) : jsx(kt, {});
 }, "PluginPublishModal", ZU.YES);
-(n || (n = {})).PublishModalPostFormFlow = function(e) {
+(n || (n = {})).PublishModalPostFormFlow = function (e) {
   let t = wA();
   let i = Pc();
   let {
@@ -3611,4 +3611,4 @@ let $$iq0 = Ju(function(e) {
   }) : jsx(Fragment, {});
 };
 let i$ = n.PublishModalPostFormFlow;
-export const o = $$iq0; 
+export const o = $$iq0;

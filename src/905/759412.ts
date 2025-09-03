@@ -1,4 +1,4 @@
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { A } from "../905/920142";
 import { t as _$$t } from "../905/303541";
 var $$s0 = (e => (e.DAY = "24_hours", e.WEEK = "7_days", e.CUSTOM = "custom", e))($$s0 || {});
@@ -67,7 +67,7 @@ export function $$c12(e, t) {
         num
       });
     default:
-      xb(unit);
+      throwTypeError(unit);
   }
 }
 export function $$u6(e, t = !1) {

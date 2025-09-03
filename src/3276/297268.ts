@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { memo, useContext, useRef, useState, useEffect, useCallback, useMemo } from "react";
 import { wA, d4 } from "../vendor/514228";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { NLJ, Ez5, m1T, QOV } from "../figma_app/763686";
 import { md } from "../figma_app/27355";
@@ -288,7 +288,7 @@ let er = memo(function (e) {
     } : e.sidebarItemType === kT.LITMUS_COMMENT_THREAD ? {
       ...r,
       type: kT.LITMUS_COMMENT_THREAD
-    } : void xb(e);
+    } : void throwTypeError(e);
   }, [n, eF, eB, eU]);
   let eW = useMemo(() => e.threads.reduce((e, t) => {
     let {

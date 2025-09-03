@@ -1,4 +1,4 @@
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { dI } from "../905/871411";
 import { sH } from "../905/805904";
 import { sH as _$$sH } from "../905/537777";
@@ -25,7 +25,7 @@ export function $$u2(e) {
       i = e.node_id;
       return dI(_$$sH(i)?.guid);
     default:
-      xb(e);
+      throwTypeError(e);
   }
 }
 export function $$p0(e, t) {

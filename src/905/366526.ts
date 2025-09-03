@@ -432,7 +432,7 @@ import { Y5 } from '../figma_app/455680';
 import { Cp as _$$Cp } from '../figma_app/457074';
 import { q as _$$q } from '../figma_app/458300';
 import { D6 as _$$D3, Kd as _$$Kd, px as _$$px, j_, S2 } from '../figma_app/465071';
-import { j as _$$j, KF, vA, xb } from '../figma_app/465776';
+import { noop, debug, assert, throwTypeError } from '../figma_app/465776';
 import { ck as _$$ck2, MP } from '../figma_app/469876';
 import { G as _$$G } from '../figma_app/471068';
 import { Cg, Ug, v7 } from '../figma_app/475303';
@@ -608,7 +608,7 @@ function B(e) {
   (async () => {
     if (_$$eD && e.getState().selectedView.view === 'fullscreen' && (await Y5.onReady(), Y5.isReady())) {
       let t = e.getState();
-      !function(e, t, i) {
+      !function (e, t, i) {
         if (!_$$eD || e.view !== 'fullscreen') return;
         let n = {
           selectedView: e,
@@ -706,7 +706,7 @@ class G {
   }
   getLabel(e, t) {
     let i = t.displayText ?? _$$A3(e, t.args);
-    return this.options.isEnLocale ? function(e) {
+    return this.options.isEnLocale ? function (e) {
       let t = e.split(' ');
       for (let e = 1; e < t.length - 1; e++) {
         let i = t[e];
@@ -749,7 +749,7 @@ async function el() {
       ED('[rehydrateStorageAccessIfNeeded]', 'Storage Access API is not available. Give up.');
       return;
     }
-    if (function() {
+    if (function () {
       try {
         _$$A4.set(es, 'enabled', {
           sameSite: 'None',
@@ -821,7 +821,7 @@ class ey {
     this.seenMoveStartEvents = new WeakSet();
     this.seenMoveCaptureEvents = new WeakSet();
     this.seenMoveEndCaptureEvents = new WeakSet();
-    this.getSourceClientOffset = e => function(e) {
+    this.getSourceClientOffset = e => function (e) {
       let t = e.nodeType === 1 ? e : e.parentElement;
       if (!t) return null;
       let {
@@ -837,7 +837,7 @@ class ey {
       this.checkAndMarkEventSeen(this.seenMoveStartCaptureEvents, e) || (this.moveStartSourceIds = []);
     };
     this.handleMoveStart = (e, t) => {
-      !function(e) {
+      !function (e) {
         return 'which' in e ? e.which === 3 : 'button' in e && e.button === 2;
       }(t) && this.moveStartSourceIds?.unshift(e);
     };
@@ -1080,7 +1080,7 @@ function e0(e) {
     let e = getInitialOptions().cluster_name;
     getFeatureFlags().statsig_suspend_gremlin && _$$cZ(e);
   }, []);
-  let l = function() {
+  let l = function () {
     let e = _$$md(ZJ).status;
     let t = _$$md(gR);
     let [i, n] = useState(!1);
@@ -1095,10 +1095,10 @@ function e0(e) {
       initStarted: r,
       statsigPromise: null,
       userVersion: t,
-      updateUser: () => { }
+      updateUser: () => {}
     }), [a, i, r, t]);
   }();
-  return (!function(e) {
+  return (!function (e) {
     let {
       userId: _userId,
       teamId: _teamId = '',
@@ -1132,7 +1132,7 @@ function e0(e) {
     orgId,
     planKey,
     callingHookLocation: 'StatsigBaseRelayProvider (from redux flow)'
-  }), !function(e) {
+  }), !function (e) {
     let {
       userId: _userId2,
       teamId: _teamId2 = '',
@@ -1203,9 +1203,9 @@ function e1({
   _$$h(() => {
     N6(getFeatureFlags().statsig_plan_key_bootstrap ?? !1, getInitialOptions().statsig_plan_key ?? 'null', getInitialOptions().org_id ?? 'null', c ?? 'null', u ?? 'null', r ?? 'null', p?.view ?? 'null', s ?? 'null', a ?? 'null', i);
   });
-  !function(e, t, i) {
+  !function (e, t, i) {
     let n = Xr(_$$oo);
-    let r = function(e, t, i) {
+    let r = function (e, t, i) {
       let n = Rs(hbX, {
         currentOrgId: t
       });
@@ -1292,7 +1292,7 @@ async function e7(e) {
     document.querySelector('#filebrowser-loading-page')?.remove();
   }
 }
-let t_ = e => t => async function(i) {
+let t_ = e => t => async function (i) {
   let n = e.getState();
   if (Ts.matches(i)) {
     i.payload.formState = i.payload.formState || getInitialOptions().form_state || qB.SIGN_UP;
@@ -1607,7 +1607,7 @@ let t_ = e => t => async function(i) {
     a.password !== a.password_retype ? e.dispatch(Qg({
       message: _$$t2('auth.reset-password.password-retype-error'),
       invalidInput: RE.PASSWORD
-    })) : XHR.post('/api/password/recover', a).then(({ }) => {
+    })) : XHR.post('/api/password/recover', a).then(({}) => {
       _$$g2('reset_password_success', n.auth.origin);
       e.dispatch(My());
     }).catch(t => e.dispatch(P8({
@@ -1833,7 +1833,7 @@ function iv() {
   fZb?.startProfile(vV, 100);
   try {
     _$$q.onFrame();
-  } catch (e) { }
+  } catch (e) {}
   Y5?.onFrame();
   getFeatureFlags()?.comments_react || _$$iZ?.onFrame();
   fZb?.startProfile('redux-frame-handler', 100);
@@ -1848,7 +1848,7 @@ function iv() {
 }
 let iC = new Set();
 let iP = iN;
-let iz = e => t => function(i) {
+let iz = e => t => function (i) {
   if (P6.matches(i) || YK.matches(i)) {
     let n = P6.matches(i);
     let r = !!i.payload.hideVisualBell;
@@ -1868,7 +1868,7 @@ let iz = e => t => function(i) {
         i && Xm(i) && (l = !0);
       }
       let d = () => {
-        vA(P6.matches(i), 'undoDelete was called after deleteFilesForever which should be impossible');
+        assert(P6.matches(i), 'undoDelete was called after deleteFilesForever which should be impossible');
         e.dispatch(b4({
           fileKeys: Object.keys(i.payload.fileKeys),
           repoIds: i.payload.repoIds || []
@@ -1876,7 +1876,7 @@ let iz = e => t => function(i) {
         e.dispatch(_$$F.dequeue({}));
       };
       if (o.then(o => {
-        if (vA(P6.matches(i) || YK.matches(i)), _$$eD) {
+        if (assert(P6.matches(i) || YK.matches(i)), _$$eD) {
           let t = e.getState();
           t.openFile && i.payload.fileKeys[t.openFile?.key] && _$$eD.close({
             suppressReopening: !0
@@ -2039,7 +2039,7 @@ let iz = e => t => function(i) {
   }
   return t(i);
 };
-let iK = e => t => function(i) {
+let iK = e => t => function (i) {
   if (_$$sf.matches(i)) {
     e.getState().creatingNewFolder && (e.dispatch(Ce()), e.dispatch(bx()));
   } else if (yH.matches(i)) {
@@ -2099,7 +2099,7 @@ let iK = e => t => function(i) {
 };
 let i$ = NC('REALTIME_UNSUBSCRIBE');
 let iZ = NC('REALTIME_BATCH_SUBSCRIBE');
-let i2 = e => t => function(i) {
+let i2 = e => t => function (i) {
   if (_$$yH.matches(i)) {
     let n = e.getState();
     let r = e.getState()?.user;
@@ -2200,7 +2200,7 @@ let i2 = e => t => function(i) {
   }
   return t(i);
 };
-let i6 = e => t => function(i) {
+let i6 = e => t => function (i) {
   if (_$$yJ.matches(i)) {
     if (i.payload.userInitiated) {
       return _$$Q3({
@@ -2292,7 +2292,7 @@ let na = async e => {
     a && (Il(a.id), e.dispatch(_$$cR(a)));
   }
 };
-let ns = e => t => function(i) {
+let ns = e => t => function (i) {
   if (Qv.matches(i)) {
     let n = t(i);
     _$$F3.clearCache();
@@ -2325,7 +2325,7 @@ let ns = e => t => function(i) {
   }
   return t(i);
 };
-let ng = e => t => function(i) {
+let ng = e => t => function (i) {
   if (!_$$sf.matches(i)) return t(i);
   {
     let n = e.getState();
@@ -2336,9 +2336,9 @@ let ng = e => t => function(i) {
       isInFullscreen: !0,
       currentFileKey: n.selectedView.fileKey
     } : {
-        isInFullscreen: !1,
-        currentFileKey: void 0
-      };
+      isInFullscreen: !1,
+      currentFileKey: void 0
+    };
     let {
       isEnteringFullscreen,
       newFileKey
@@ -2346,9 +2346,9 @@ let ng = e => t => function(i) {
       isEnteringFullscreen: !0,
       newFileKey: i.payload.fileKey
     } : {
-        isEnteringFullscreen: !1,
-        newFileKey: void 0
-      };
+      isEnteringFullscreen: !1,
+      newFileKey: void 0
+    };
     (isInFullscreen && !isEnteringFullscreen || currentFileKey && currentFileKey !== newFileKey) && (Object.values(n.library.local.thumbnails).forEach(({
       url: e
     }) => {
@@ -2377,7 +2377,7 @@ let nx = new class {
     }) => await t.get(`/api/proto/${e.fileKey}/${e.currentPageId}`));
   }
 }();
-let nS = e => t => function(i) {
+let nS = e => t => function (i) {
   if (_$$ce() && _$$sf.matches(i)) {
     let n = e.getState();
     if (n.selectedView === _$$o4 || i.payload === _$$o4) return t(i);
@@ -2524,7 +2524,7 @@ let nS = e => t => function(i) {
           thumbnail: e
         });
       }
-    }).catch(e => { });
+    }).catch(e => {});
   } else if (SL.matches(i)) {
     _$$eD.isFileBrowserTab() || _$$eD.setMergingStatus(_$$y2.MERGING);
   } else if (_$$E3.matches(i)) {
@@ -2608,7 +2608,7 @@ function nZ(e) {
 function nX(e) {
   e.view === 'fullscreen' && e.showDevModeComponentBrowser ? w3z?.setDevComponentBrowser(!0) : w3z?.setDevComponentBrowser(!1);
 }
-let nQ = e => t => function(i) {
+let nQ = e => t => function (i) {
   if (_$$sf.matches(i)) {
     let n = e.getState();
     let r = n.selectedView;
@@ -3411,7 +3411,7 @@ let ar = () => ({
   [_$$X2.PLUGINS]: _$$t2('org_view.plugins'),
   [_$$X2.WIDGETS]: _$$t2('org_view.widgets')
 });
-class aa extends _$$o5 { }
+class aa extends _$$o5 {}
 let as = Ju(e => {
   let t = wA();
   let i = _6();
@@ -3496,14 +3496,14 @@ let as = Ju(e => {
                 permissionsState: o
               });
             default:
-              xb(e.tab);
+              throwTypeError(e.tab);
           }
         })()
       })
     })
   });
 }, _$$C3, ZU.YES);
-let ao = e => t => function(i) {
+let ao = e => t => function (i) {
   if (Qv.matches(i)) {
     t(i);
     e.dispatch(UK({
@@ -3535,7 +3535,7 @@ let ao = e => t => function(i) {
   })));
   return t(i);
 };
-let ac = e => t => function(i) {
+let ac = e => t => function (i) {
   let n = e.getState();
   if (_$$sf.matches(i) && (i.payload.view === 'teamUpgrade' || i.payload.view === 'promoReview' || i.payload.view === 'eduReview')) {
     let r = i.payload.teamId;
@@ -3573,7 +3573,7 @@ let ac = e => t => function(i) {
   }
   return t(i);
 };
-let am = e => t => function(i) {
+let am = e => t => function (i) {
   if (_$$sf.matches(i)) {
     let t = $A(e.getState().selectedView);
     let n = i.payload.view === 'fullscreen' && i.payload.editorType === _$$nT.DevHandoff;
@@ -3592,7 +3592,7 @@ let aT = new _$$H6({
   ..._$$uu,
   livegraphView: M7X,
   livegraphArgs: () => ({}),
-  convertLivegraphMessage: (e, t, { }, i) => function(e, t) {
+  convertLivegraphMessage: (e, t, {}, i) => function (e, t) {
     let i = [];
     let n = e.getState().communityPayments;
     let r = new Map();
@@ -3725,7 +3725,7 @@ let aj = new _$$H6({
   livegraphArgs: e => ({
     teamId: e
   }),
-  convertLivegraphMessage: (e, t, i, n) => function(e, t) {
+  convertLivegraphMessage: (e, t, i, n) => function (e, t) {
     let i = [];
     let n = [];
     let r = [];
@@ -3769,7 +3769,7 @@ let aU = new _$$H6({
   livegraphArgs: e => ({
     projectId: e
   }),
-  convertLivegraphMessage: (e, t, i, n) => function(e, t) {
+  convertLivegraphMessage: (e, t, i, n) => function (e, t) {
     let i = [];
     let n = [];
     let r = [];
@@ -3816,7 +3816,7 @@ let aB = new _$$H6({
   }),
   convertLivegraphMessage: (e, t, {
     fileKey: i
-  }, n) => function(e, t, i) {
+  }, n) => function (e, t, i) {
     let n = [];
     let r = [];
     let a = [];
@@ -3940,7 +3940,7 @@ let az = new _$$H6({
   livegraphArgs: e => ({
     teamId: e
   }),
-  convertLivegraphMessage: (e, t, i, n) => function(e, t) {
+  convertLivegraphMessage: (e, t, i, n) => function (e, t) {
     let i = [];
     let n = [];
     let r = [];
@@ -3984,7 +3984,7 @@ let aH = new _$$H6({
   livegraphArgs: e => ({
     projectId: e
   }),
-  convertLivegraphMessage: (e, t, i, n) => function(e, t) {
+  convertLivegraphMessage: (e, t, i, n) => function (e, t) {
     let i = [];
     let n = [];
     let r = [];
@@ -4031,7 +4031,7 @@ let aW = new _$$H6({
   }),
   convertLivegraphMessage: (e, t, {
     fileKey: i
-  }, n) => function(e, t, i) {
+  }, n) => function (e, t, i) {
     let n = [];
     let r = [];
     let a = [];
@@ -4145,7 +4145,7 @@ let aQ = new _$$H6({
     teamId: e ?? null,
     updatedAtTimestamp: t
   }),
-  convertLivegraphMessage: (e, t, i, n) => function(e, t) {
+  convertLivegraphMessage: (e, t, i, n) => function (e, t) {
     if (!t.team || !t.team.fontFileUpdateForTeam) return [];
     let i = _$$oA(t.team.fontFileUpdateForTeam);
     return i ? aX(e, i) : [];
@@ -4162,7 +4162,7 @@ let aJ = new _$$H6({
     orgId: e ?? null,
     updatedAtTimestamp: t
   }),
-  convertLivegraphMessage: (e, t, i, n) => function(e, t) {
+  convertLivegraphMessage: (e, t, i, n) => function (e, t) {
     if (!t.org || !t.org.fontFileUpdateForOrg) return [];
     let i = _$$oA(t.org.fontFileUpdateForOrg);
     return i ? aX(e, i) : [];
@@ -4178,7 +4178,7 @@ let a1 = new _$$H6({
   livegraphArgs: e => ({
     orgId: e
   }),
-  convertLivegraphMessage: (e, t, i, n) => function(e, t) {
+  convertLivegraphMessage: (e, t, i, n) => function (e, t) {
     return t.org?.id ? [{
       method: 'put',
       type: 'org',
@@ -4199,7 +4199,7 @@ let a2 = new _$$H6({
   ..._$$uu,
   livegraphView: o8f,
   livegraphArgs: e => ({}),
-  convertLivegraphMessage: (e, t, i, n) => function(e, t) {
+  convertLivegraphMessage: (e, t, i, n) => function (e, t) {
     if (e.getState().user?.id !== t.currentUser.id) return [];
     let i = [];
     let n = e.getState().orgUsersByOrgId;
@@ -4273,7 +4273,7 @@ let a6 = new _$$H6({
     orgId: e ?? null,
     updatedAtTimestamp: t
   }),
-  convertLivegraphMessage: (e, t, i, n) => function(e, t) {
+  convertLivegraphMessage: (e, t, i, n) => function (e, t) {
     if (!t.org) return [];
     let i = [];
     let n = e.getState().publishedPlugins;
@@ -4450,7 +4450,7 @@ let si = new _$$H6({
   }),
   convertLivegraphMessage: (e, t, {
     repoId: i
-  }, n) => function(e, t, i) {
+  }, n) => function (e, t, i) {
     let n = [];
     let r = e.getState().repos[i];
     t.repo && (r ? se(t.repo, r) && n.push({
@@ -4476,7 +4476,7 @@ let sn = new _$$H6({
   livegraphArgs: e => ({
     fileKey: e
   }),
-  convertLivegraphMessage: (e, t, i, n) => function(e, t) {
+  convertLivegraphMessage: (e, t, i, n) => function (e, t) {
     let i = [];
     if (t.file?.repo) {
       let n = e.getState().repos[t.file.repo.id];
@@ -4505,7 +4505,7 @@ let sr = new _$$H6({
     teamId: e,
     updatedAtTimestamp: t
   }),
-  convertLivegraphMessage: (e, t, i, n) => function(e, t) {
+  convertLivegraphMessage: (e, t, i, n) => function (e, t) {
     let i = [];
     for (let n of t.team?.repoUpdates || []) {
       let t = e.getState().repos[n.id];
@@ -4534,7 +4534,7 @@ let sa = new _$$H6({
     folderId: e,
     updatedAtTimestamp: t
   }),
-  convertLivegraphMessage: (e, t, i, n) => function(e, t) {
+  convertLivegraphMessage: (e, t, i, n) => function (e, t) {
     let i = [];
     for (let n of t.project?.repoUpdates || []) {
       let t = e.getState().repos[n.id];
@@ -4585,7 +4585,7 @@ function sl(e) {
     let n = i.payload && i.payload.role;
     if (n && n.resource_type === e) {
       let e = n.resource_id_or_key;
-      let r = function(e = {}, t) {
+      let r = function (e = {}, t) {
         if (_$$bE4.matches(t) || _$$yJ5.matches(t)) {
           let i;
           let n = t.payload.role;
@@ -4673,7 +4673,7 @@ let sm = new _$$H6({
   }),
   convertLivegraphMessage: (e, t, {
     teamId: i
-  }, n) => function(e, t, i) {
+  }, n) => function (e, t, i) {
     let n = [];
     let r = t.getState().teams[e];
     i.team && (r ? (!r.updated_at || i.team.updatedAt > new Date(r.updated_at) || r.restrictions_list !== i.team.restrictionsList) && n.push({
@@ -4756,7 +4756,7 @@ let sf = new _$$H6({
   livegraphArgs: (e, t) => ({
     updatedAtTimestamp: t
   }),
-  convertLivegraphMessage: (e, t, i, n) => function(e, t) {
+  convertLivegraphMessage: (e, t, i, n) => function (e, t) {
     let i = [];
     let {
       roles,
@@ -4876,7 +4876,7 @@ let s_ = new _$$H6({
   }),
   convertLivegraphMessage: (e, t, {
     teamId: i
-  }, n) => function(e, t, i, n) {
+  }, n) => function (e, t, i, n) {
     let r = [];
     let {
       roles,
@@ -5090,7 +5090,7 @@ class sI {
       this.logSingleMessageToFigment(null, e);
     }
   }
-  logMessages(e, t) { }
+  logMessages(e, t) {}
 }
 let sS = new _$$H6({
   name: 'TeamRoleRequestShim',
@@ -5099,7 +5099,7 @@ let sS = new _$$H6({
   livegraphArgs: (e, t) => ({
     updatedAtTimestamp: t
   }),
-  convertLivegraphMessage: (e, t, i, n) => function(e, t) {
+  convertLivegraphMessage: (e, t, i, n) => function (e, t) {
     if (!t.currentUser.teamRoleRequestUpdates) return [];
     let i = _$$oA2(t.currentUser.teamRoleRequestUpdates);
     if (!i) return [];
@@ -5157,7 +5157,7 @@ let sk = new _$$H6({
   livegraphArgs: (e, t, i) => ({
     updatedAtTimestamp: t
   }),
-  convertLivegraphMessage: (e, t, i, n) => function(e, t) {
+  convertLivegraphMessage: (e, t, i, n) => function (e, t) {
     if (!t.currentUser.eduGracePeriodUpdate) return [];
     let i = [];
     let n = getResourceDataOrFallback(t.currentUser.eduGracePeriodUpdate);
@@ -5181,7 +5181,7 @@ let sP = new _$$H6({
   ..._$$uu,
   livegraphView: Ra2,
   livegraphArgs: e => ({}),
-  convertLivegraphMessage: (e, t, i, n) => function(e, t) {
+  convertLivegraphMessage: (e, t, i, n) => function (e, t) {
     let i;
     if (e.getState().user?.id !== t.currentUser.id) return [];
     let n = JSON.stringify(t);
@@ -5226,7 +5226,7 @@ let sP = new _$$H6({
         community_commenting_blocked_at: i.communityCommentingBlockedAt?.toISOString() || null,
         community_blocked_at: i.communityBlockedAt?.toISOString() || null,
         cmty_buyer_tos_accepted_at: i.userMonetizationMetadata?.cmtyBuyerTosAcceptedAt?.toISOString() || null,
-        stripe_account_status: function(e) {
+        stripe_account_status: function (e) {
           if (!e) return _$$P6.NONE;
           switch (e) {
             case FFeatureAdoptionStatusType.NONE:
@@ -5262,7 +5262,7 @@ let sO = new _$$H6({
   ..._$$uu,
   livegraphView: vvS,
   livegraphArgs: e => ({}),
-  convertLivegraphMessage: (e, t, i, n) => function(e, t) {
+  convertLivegraphMessage: (e, t, i, n) => function (e, t) {
     if (!t.currentUser || !t.currentUser.userTeamFlags) return [];
     let i = t.currentUser.userTeamFlags;
     let n = e.getState().userTeamFlags;
@@ -5313,7 +5313,7 @@ let sF = new _$$H6({
   livegraphArgs: e => ({
     orgId: e
   }),
-  convertLivegraphMessage: (e, t, i, n) => function(e, t) {
+  convertLivegraphMessage: (e, t, i, n) => function (e, t) {
     if (!t.org?.id) return [];
     let i = sL.get(t.org.id);
     if (!i) {
@@ -5366,13 +5366,13 @@ let sM = new _$$H6({
     orgId: e ?? null,
     updatedAtTimestamp: t
   }),
-  convertLivegraphMessage: (e, t, i, n) => function(e, t) {
+  convertLivegraphMessage: (e, t, i, n) => function (e, t) {
     if (!t.org) return [];
     let i = [];
     let n = e.getState().publishedWidgets;
     for (let e of _$$oA(t.org.widgetUpdates) || []) {
       let r = n[e.id];
-      let a = function(e, t) {
+      let a = function (e, t) {
         let i = a7(e, t);
         return i ? {
           ...i,
@@ -5702,7 +5702,7 @@ function sV(e) {
     t?.realtime_token && o(t.realtime_token);
   }
   e.dispatch(iZ(n));
-  t.selectedView.view === 'fullscreen' && function(e, t, i) {
+  t.selectedView.view === 'fullscreen' && function (e, t, i) {
     let n = e.getState();
     let r = new Set();
     let a = zl.get(qp);
@@ -5763,7 +5763,7 @@ let sH = (e, t) => {
     }
   }
 };
-let sW = getInitialOptions().disable_realtime ? e => e => e : e => t => function(i) {
+let sW = getInitialOptions().disable_realtime ? e => e => e : e => t => function (i) {
   let n = t(i);
   if (_$$os.matches(i)) {
     let t = i.payload.users.filter(e => e.realtime_token_inactive).map(e => EM(e.realtime_token_inactive));
@@ -5771,7 +5771,7 @@ let sW = getInitialOptions().disable_realtime ? e => e => e : e => t => function
   }
   if (Qv.matches(i)) {
     J1.setCallback(t => {
-      !function(e, t) {
+      !function (e, t) {
         if (sj.shimLogger.logMessages([t], {
           origin: 'handleFayeMessage'
         }), t.type === 'token_expired' && sB('realtime token expired', e), t.new_team_feed_post) {
@@ -5895,13 +5895,13 @@ let sW = getInitialOptions().disable_realtime ? e => e => e : e => t => function
   }
   return n;
 };
-let sK = e => t => function(i) {
+let sK = e => t => function (i) {
   _$$sf.matches(i) && e.dispatch(Z8({
     selectedView: i.payload
   }));
   return t(i);
 };
-let sq = e => t => function(i) {
+let sq = e => t => function (i) {
   if (_$$sf.matches(i)) {
     let n;
     let r;
@@ -6176,10 +6176,10 @@ function oi(e, t) {
 }
 function on(e = ot, t) {
   if (Qv.matches(t)) {
-    return function() {
+    return function () {
       let e = x4 != null ? x4.getItem(s9) : null;
       if (e) {
-        return function(e) {
+        return function (e) {
           try {
             let t = JSON.parse(e);
             let i = {
@@ -6207,7 +6207,7 @@ function on(e = ot, t) {
         }(e);
       }
       let t = x4 != null ? x4.getItem('persisted-sorting') : null;
-      return t && function(e) {
+      return t && function (e) {
         let t;
         function i(e) {
           let t = C0[C0[e]];
@@ -6325,12 +6325,12 @@ let or = e => {
     try {
       let t = JSON.stringify(e);
       x4.setItem(s9, t);
-    } catch (e) { }
+    } catch (e) {}
   }
 };
 let oa = !1;
 let os = !1;
-let oo = e => t => function(i) {
+let oo = e => t => function (i) {
   if (_$$sf.matches(i)) {
     let n = e.getState().selectedView;
     let {
@@ -6411,7 +6411,7 @@ let oo = e => t => function(i) {
   return t(i);
 };
 var ol = (e => (e.NOTIFICATION = 'notification', e.SUBSCRIPTION = 'subscription', e.LINK_UNFURL = 'link-unfurl', e))(ol || {});
-let od = e => e => function(t) {
+let od = e => e => function (t) {
   if (_$$sf.matches(t)) {
     let e = new URLSearchParams(_$$Ay.location.search);
     let i = e.get('utm_source');
@@ -6511,10 +6511,10 @@ function og(e, t) {
   }
   return e;
 }
-let of = e => t => function(i) {
+let of = e => t => function (i) {
   if (_$$sf.matches(i)) {
     let t = e.getState().selectedView;
-    !(t.view === 'folder' && i.payload.view === 'folder' && t.folderId === i.payload.folderId || _$$K3(t) && _$$K3(i.payload)) && function(e) {
+    !(t.view === 'folder' && i.payload.view === 'folder' && t.folderId === i.payload.folderId || _$$K3(t) && _$$K3(i.payload)) && function (e) {
       let t = 0;
       if (e) {
         for (let i of Object.keys(e)) t += Object.keys(e[i]).length;
@@ -6524,7 +6524,7 @@ let of = e => t => function(i) {
   }
   return t(i);
 };
-let oA = e => t => function(i) {
+let oA = e => t => function (i) {
   if (_$$os.matches(i)) {
     let t = e.getState().loadingState;
     if (!_$$ck2() && i.payload.orgs.length > 0) {
@@ -6534,7 +6534,7 @@ let oA = e => t => function(i) {
   }
   return t(i);
 };
-let ob = e => t => function(i) {
+let ob = e => t => function (i) {
   if (_$$sf.matches(i)) {
     let n = e.getState();
     let r = n.selectedView && _$$U2(n.selectedView);
@@ -9593,7 +9593,7 @@ let dZ = {
   selectedSwatchSetId: EU
 };
 function dX(e, t) {
-  return e ? dq.matches(t) ? (KF(t.payload.swatchId !== '', 'selectedSwatchSetId must be a valid swatch set ID'), {
+  return e ? dq.matches(t) ? (debug(t.payload.swatchId !== '', 'selectedSwatchSetId must be a valid swatch set ID'), {
     ...e,
     selectedSwatchSetId: t.payload.swatchId
   }) : e : dZ;
@@ -10091,7 +10091,7 @@ if (x4) {
   let e = x4.getItem(ck);
   try {
     (cR = e && JSON.parse(e) || {})['toggle-bold'] = (cR['text-toggle-bold'] || 0) + (cR['toggle-bold'] || 0);
-  } catch (e) { }
+  } catch (e) {}
 }
 function cN(e = cR, t) {
   if (_$$yu.matches(t)) {
@@ -10113,7 +10113,7 @@ function cP(e = !1, t) {
   return !_$$Ts.matches(t) && (!!vg.matches(t) || !Wk.matches(t) && e);
 }
 function cO(e = null, t) {
-  return _$$Ts.matches(t) ? function(e = {}) {
+  return _$$Ts.matches(t) ? function (e = {}) {
     let t = getInitialOptions().editing_file;
     if (!t) return null;
     let i = t.folder ? {
@@ -10461,7 +10461,7 @@ function uv(e = {}, t) {
   return e;
 }
 function uI(e) {
-  return function(t = {}, i) {
+  return function (t = {}, i) {
     if (_$$Qv2.matches(i)) {
       let e = {
         ...t
@@ -12538,7 +12538,7 @@ let pg = {
             };
             try {
               x4 && (x4.setItem(pm, enabled ? '1' : '0'), t.localStoredPreference = enabled);
-            } catch (e) { }
+            } catch (e) {}
             if (user) {
               let i = e.serverStoredPreference;
               t.serverStoredPreference = enabled;
@@ -12554,7 +12554,7 @@ let pg = {
             return t;
           }
         default:
-          xb(scope);
+          throwTypeError(scope);
       }
     } else if (_$$mC.matches(t)) {
       let {
@@ -12955,7 +12955,7 @@ function pE() {
   };
   return jsx('div', {
     className: pA,
-    children: function() {
+    children: function () {
       let t = e === 'moving';
       return jsxs(Fragment, {
         children: [jsx(_$$E9, {
@@ -13139,7 +13139,7 @@ async function p$(e, t) {
     case 'error':
       return i;
     default:
-      xb(i);
+      throwTypeError(i);
   }
 }
 async function pZ(e) {
@@ -13168,9 +13168,9 @@ async function pJ(e, t) {
   let n = fm(i).then(() => ({
     status: 'done'
   }));
-  let r = () => { };
+  let r = () => {};
   let a = new Promise(i => {
-    r = function(e, t, i) {
+    r = function (e, t, i) {
       let n = setInterval(async () => {
         let n = await p$(e, t);
         (n.status === 'canceled' || n.status === 'changed') && i(n);
@@ -13195,7 +13195,7 @@ async function pJ(e, t) {
           status: 'done'
         };
       default:
-        xb(i);
+        throwTypeError(i);
     }
   }
 }
@@ -13209,7 +13209,7 @@ async function p0(e, t) {
       pX('updated_reload_request');
       return p0(e, i.reloadRequest);
     default:
-      xb(i);
+      throwTypeError(i);
   }
 }
 function p1(e, t, i) {
@@ -13232,7 +13232,7 @@ function p1(e, t, i) {
     disableFullscreenBanner: t.disableFullscreenBanner,
     disableAutomaticReload: t.disableAutomaticReload,
     isBackgrounded: document.hidden
-  }) : xb(e);
+  }) : throwTypeError(e);
 }
 async function p2(e, t, i) {
   if (Lo('force client reload', 'Release is poisoned', t), p1('poisoned', t, i), (await p0(e, t)).status === 'canceled') {
@@ -13272,7 +13272,7 @@ class p4 {
           this._state = e === 'reloading' ? 'reloading' : 'safe';
         }
       } else {
-        this._state === 'reloading' ? t.status === 'safe' && (_$$l2(), zl.set(_$$T4, !1), this._state = 'safe', pX('reload_cancel_after_interval')) : this._state === 'waiting_for_reload_interval' ? Lo('force client reload', 'Skipping check because reload interval is in progress') : xb(this._state);
+        this._state === 'reloading' ? t.status === 'safe' && (_$$l2(), zl.set(_$$T4, !1), this._state = 'safe', pX('reload_cancel_after_interval')) : this._state === 'waiting_for_reload_interval' ? Lo('force client reload', 'Skipping check because reload interval is in progress') : throwTypeError(this._state);
       }
     } catch (e) {
       pQ || ($D(_$$e.SCENEGRAPH_AND_SYNC, e, {
@@ -13299,7 +13299,7 @@ let md = _$$nF2((e, {
   if (void 0 !== t.urlNodeId) {
     let r = n.selectedView;
     if (!(n.versionHistory.loading || r.versionId && r.versionId !== n.versionHistory.activeId)) {
-      let n = function(e, t) {
+      let n = function (e, t) {
         return void 0 !== e.urlNodeId ? e.urlNodeId != null && e.urlNodeId !== '' ? e.urlNodeId : null : t.urlNodeId != null ? t.urlNodeId : null;
       }(t, i);
       if (n !== r.nodeId) {
@@ -13314,7 +13314,7 @@ let md = _$$nF2((e, {
   void 0 !== t.currentPage && e.dispatch(UU());
   let r = i.multiplayerSessionState;
   let a = t.multiplayerSessionState;
-  void 0 !== a && function(e, t, i) {
+  void 0 !== a && function (e, t, i) {
     _$$QI(t, i);
     i === kul.SHOULD_UPGRADE ? (_$$sx('Upgrade Banner Shown'), e.dispatch(_$$il())) : i === kul.JOINED && e.dispatch(D9());
   }(e, r, a);
@@ -13345,7 +13345,7 @@ let mm = _$$nF2((e, t) => {
   } else {
     r.stylePickerShown.isShown && (o && o[ibQ.FILL_ITEM] || e.dispatch(_$$Uv()));
   }
-  if (i && (a.isInitialized && e.getState().progressBarState.mode === Oin.OFF && function(e, t, i, n) {
+  if (i && (a.isInitialized && e.getState().progressBarState.mode === Oin.OFF && function (e, t, i, n) {
     if (Ok()) {
       for (let r in i) {
         let a = mf.get(r);
@@ -13374,7 +13374,7 @@ let mm = _$$nF2((e, t) => {
 });
 let mh = _$$nF2((e, t) => {
   let i = e.getState();
-  _$$eD && function(e, t) {
+  _$$eD && function (e, t) {
     if (V || !t.isInitialized || (V = !0, e.view !== 'fullscreen')) return;
     let i = _$$K(t.keyboardShortcuts);
     _$$eD?.updateFullscreenMenuState({
@@ -13419,7 +13419,7 @@ let mf = new Map([['hideMultiplayerCursors', e => ({
 async function my(e) {
   try {
     let t = await _$$dO(e);
-    !function(e, t) {
+    !function (e, t) {
       let i = v7();
       let n = Object.entries(aTn).find(([e, t]) => t === i)?.[0];
       let r = _$$ZN(t);
@@ -13460,7 +13460,7 @@ class mS {
       sendEventsOnlyForVariation: !0
     });
     let n = !!t;
-    !function(e, t, i) {
+    !function (e, t, i) {
       let n = e => ({
         duration: performance.now() - t,
         source: 'figma_app',
@@ -13775,7 +13775,7 @@ function m3() {
   return null;
 }
 let hl = !0;
-let hd = e => t => function(i) {
+let hd = e => t => function (i) {
   if (getFeatureFlags().contentful_paint_performance_monitor && _$$sf.matches(i)) {
     if (hl) {
       hl = !1;
@@ -13786,7 +13786,7 @@ let hd = e => t => function(i) {
   }
   return t(i);
 };
-let hc = e => t => function(i) {
+let hc = e => t => function (i) {
   if (getFeatureFlags().datadog_rum_selected_view && _$$sf.matches(i)) {
     let t = e.getState().selectedView.view;
     let n = i.payload.view;
@@ -13799,14 +13799,14 @@ let hc = e => t => function(i) {
   return t(i);
 };
 let hm = _$$ck4();
-let hh = e => e => hm ? function(t) {
+let hh = e => e => hm ? function (t) {
   return $O.matches(t) && t.payload.type === _$$x4 ? window.self.origin !== window.parent.origin ? e(t) : void _$$m3({
     action: 'showAuthModal',
     payload: {
       type: 'auth'
     }
   }) : _$$sf.matches(t) && (_$$K3(t.payload) || t.payload.view === 'folder') || Pp.matches(t) ? void 0 : e(t);
-} : function(t) {
+} : function (t) {
   return e(t);
 };
 let hv = 'frontend_commit_preview_tooltip--header--Lahum';
@@ -13824,7 +13824,7 @@ let hx = _$$ex('frontend_commit_preview_indicator', ({
   blockedReason: t
 }) => {
   let i = wA();
-  let r = function() {
+  let r = function () {
     let e = UG().get(H_);
     return e != null && typeof e == 'object' && e.feature_flags && e.sha ? e : null;
   }();
@@ -13870,7 +13870,7 @@ let hx = _$$ex('frontend_commit_preview_indicator', ({
                 blockedReason: t
               });
             }
-            _$$j(t);
+            noop(t);
             return _$$tx('frontend_sha_override_indicator.description');
         }
       })()
@@ -13917,7 +13917,7 @@ let hT = {
   left: 30
 };
 function hk(e) {
-  let [t, i] = function() {
+  let [t, i] = function () {
     let e = _$$l1();
     let [t, i] = Vc('developerDraggableIndicator', hT, {
       debounceTime: 1e3
@@ -13947,7 +13947,7 @@ function hk(e) {
         let r = qE(e.clientY, 0, window.innerHeight);
         let a = n.current;
         let s = t - a.left;
-        i(function({
+        i(function ({
           top: e,
           left: t,
           bottom: i,
@@ -13973,7 +13973,7 @@ function hk(e) {
         }));
       }
     });
-    return [useMemo(() => function(e, t) {
+    return [useMemo(() => function (e, t) {
       let i = t.windowInnerHeight - 40;
       let n = t.windowInnerWidth - 40;
       let r = {
@@ -14139,7 +14139,7 @@ export async function $$hz0(e, t, d = {
     kF('ReduxDevtoolsInstalled', !!window.__REDUX_DEVTOOLS_EXTENSION__);
     let p = Zz(Tw(u, ao, t_, sW, iK, iz, nS, nQ, i2, i6, ng, ns, am, oA, od, _$$Ay5, ob, ac, _$$v3, sK, sq, oo, of, hc, hd, hh), c && window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__({
       stateSanitizer: mN
-    }) : e => e, function(e, t) {
+    }) : e => e, function (e, t) {
       let i = null;
       function n() {
         if (e?.(), i) {
@@ -14149,7 +14149,7 @@ export async function $$hz0(e, t, d = {
         }
         t?.();
       }
-      return function(e) {
+      return function (e) {
         let t = [];
         let i = t;
         function n() {
@@ -14159,7 +14159,7 @@ export async function $$hz0(e, t, d = {
           let t = !0;
           n();
           i.push(e);
-          return function() {
+          return function () {
             if (!t) return;
             t = !1;
             n();
@@ -14190,7 +14190,7 @@ export async function $$hz0(e, t, d = {
         i = e;
       });
     }(hW, hK));
-    let b = y$(function() {
+    let b = y$(function () {
       let e = {
         ...pg,
         ...df(),
@@ -14259,7 +14259,7 @@ export async function $$hz0(e, t, d = {
     throttle(b);
     let x = await ZO('initI18nStateWithLocale', _$$e.GROWTH_PLATFORM, () => yF(!0));
     _$$X.i18nInitStateWithLocaleDurationMs = Math.round(x.duration);
-    (function() {
+    (function () {
       let e = Gq()?.getPrimaryLocale(!1);
       switch (e) {
         case 'ja':
@@ -14293,7 +14293,7 @@ export async function $$hz0(e, t, d = {
     let k = vU(b.getState(), _$$Ay.location.pathname).view;
     let R = window.sessionStateXHR;
     let P = window.userStateXHR;
-    !function(e, t) {
+    !function (e, t) {
       let i = getInitialOptions().user_data?.id;
       if (!i) return;
       MV(i);
@@ -14724,12 +14724,12 @@ export async function $$hz0(e, t, d = {
         }
       });
       _$$eD && _$$eD.setLocales(Gq().locales);
-      (function(e) {
+      (function (e) {
         let t = e.getState().selectedView;
         t.view === 'fullscreen' && _$$eD?.setEditorType(YP(e.getState().selectedView.editorType));
         t.view === 'prototype' && t.file.editor_type === 'slides' && _$$eD?.setEditorType('slides');
       })(b);
-      (function() {
+      (function () {
         let e = _$$eD;
         e != null && (J(Z, t => {
           t != null && e.updateColorProfile(t);
@@ -14740,7 +14740,7 @@ export async function $$hz0(e, t, d = {
       GH();
       _$$aZ2(b);
       wy();
-      (function(e) {
+      (function (e) {
         let t = Gq()?.getPrimaryLocale(!1);
         if (!t || !_$$eD) return;
         let i = hM(t);
@@ -14752,7 +14752,7 @@ export async function $$hz0(e, t, d = {
       IK(b);
       _$$r3(b);
       R_(b);
-      (function(e) {
+      (function (e) {
         let t;
         let n;
         let r;
@@ -14768,7 +14768,7 @@ export async function $$hz0(e, t, d = {
           t && w(t);
         }
         _$$T5() && (window.addEventListener('message', t => {
-          (t.data.source === 'figma-vscode' || t.data.source === 'figma-vscode-index') && function(t) {
+          (t.data.source === 'figma-vscode' || t.data.source === 'figma-vscode-index') && function (t) {
             switch (t.type) {
               case 'REGISTER_UI_CHANGE_OBSERVER':
               case 'REGISTER_CODE_CHANGE_OBSERVER':
@@ -14796,7 +14796,7 @@ export async function $$hz0(e, t, d = {
               case 'GET_FONT_IMPORTS':
                 break;
               case 'SELECT_LAYER':
-                (function(t, i) {
+                (function (t, i) {
                   if (!t) throw new Error('No guid');
                   let n = m(e.getState().mirror.sceneGraph.guidFromDeveloperFriendlyId(t));
                   n ? (w3z.selectAndPanToNode(n.guid), i && setTimeout(() => {
@@ -14805,7 +14805,7 @@ export async function $$hz0(e, t, d = {
                 })(t.data.guid, t.data.zoomToSelection);
                 break;
               case 'EXPAND_LAYER':
-                (function() {
+                (function () {
                   if (!o) return;
                   let e = w3z?.getAssetInfo(o.guid);
                   if (o?.childrenGuids && o.childCount > 0 && !vY(e, !0)) {
@@ -14819,7 +14819,7 @@ export async function $$hz0(e, t, d = {
                 l !== null && c !== null && w3z.selectAndPanToNode(l.guid);
                 break;
               case 'SELECT_NEXT_LAYER':
-                (function() {
+                (function () {
                   let e;
                   let t;
                   if (l !== null && c !== null && v(c, l) && o?.guid !== _()) {
@@ -14836,7 +14836,7 @@ export async function $$hz0(e, t, d = {
                 })();
                 break;
               case 'SELECT_PREVIOUS_LAYER':
-                (function() {
+                (function () {
                   if (o?.guid === _()) {
                     ;
                   } else {
@@ -14871,7 +14871,7 @@ export async function $$hz0(e, t, d = {
                 }));
                 break;
               case 'OPEN_FIGMA_FILE_URL':
-                (function(t) {
+                (function (t) {
                   let i = new URL(`https://figma.com/file/${t}`);
                   let n = vU(e.getState(), i.pathname, i.search, i.hash);
                   'editorType' in n && (n.editorType = _$$nT.DevHandoff);
@@ -14895,7 +14895,7 @@ export async function $$hz0(e, t, d = {
                 w(t.data.theme);
                 break;
               case 'GET_THUMBNAIL':
-                (function(e) {
+                (function (e) {
                   let t;
                   let i = m(e);
                   if (!i) return;
@@ -14958,7 +14958,7 @@ export async function $$hz0(e, t, d = {
               data: JSON.stringify(t)
             }, '*');
           }
-        }), function() {
+        }), function () {
           let i = null;
           let r = null;
           let a = null;
@@ -14977,7 +14977,7 @@ export async function $$hz0(e, t, d = {
             let _ = Object.keys(p.sceneGraphSelection);
             let y = _.length > 0 ? _[0] : null;
             let b = i !== y;
-            g !== a && (c = s, g !== null && g !== AD && (_$$px2(c).rebuildNodeCache(), function(e, t) {
+            g !== a && (c = s, g !== null && g !== AD && (_$$px2(c).rebuildNodeCache(), function (e, t) {
               let i = {};
               let n = [[e, 0]];
               for (; n.length > 0;) {
@@ -15202,7 +15202,7 @@ export async function $$hz0(e, t, d = {
       })(b);
       _$$z2();
       wH(b);
-      (function(e) {
+      (function (e) {
         Rh('session_start', {});
         setInterval(() => {
           Rh('active_session', {
@@ -15242,7 +15242,7 @@ export async function $$hz0(e, t, d = {
         window.addEventListener('online', async () => await p6?.check());
       })(b);
       let u = xK.time('initialReactRender', () => vo('initialRender', _$$e.CLIENT_PLATFORM, () => {
-        let t = function(e) {
+        let t = function (e) {
           if (!mx()) return e;
           let t = getInitialOptions().launchdarkly_client_side_id || '';
           try {
@@ -15330,7 +15330,7 @@ function hW() {
   let e = XP();
   Object.keys(e).length > 0 && debugState.dispatch(mp(e));
   TG();
-  (function() {
+  (function () {
     if (iC.size === 0) return;
     let e = [...iC];
     for (let t of (iC = new Set(), e)) t();
@@ -15340,4 +15340,4 @@ function hK() {
   _$$rH.stop('react-render');
   (!_$$ck2() || MP()) && F2.focusIfUnfocused();
 }
-export const n = $$hz0; 
+export const n = $$hz0;

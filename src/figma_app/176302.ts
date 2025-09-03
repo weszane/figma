@@ -1,6 +1,6 @@
 import { useRef, useCallback, useEffect, useState } from "react";
 import { wA } from "../vendor/514228";
-import { KF } from "../figma_app/465776";
+import { debug } from "../figma_app/465776";
 import { glU, Ez5 } from "../figma_app/763686";
 import { eU, md, fp, Xr, Ut } from "../figma_app/27355";
 import { az } from "../905/449184";
@@ -161,7 +161,7 @@ export function $$R4() {
     R("visible" === e);
   }));
   return _$$R(() => {
-    KF(!!y, "makeCreationData is undefined. This should never happen");
+    debug(!!y, "makeCreationData is undefined. This should never happen");
     e(F.enqueue({
       message: y.exceedsMakePasteThreshold ? _$$t("figmake.send_to_make_from_design.visual_bell.copying_complex_frames") : _$$t("figmake.send_to_make_from_design.visual_bell.copying_frames"),
       type: "send-to-make-from-design-load",
@@ -223,4 +223,4 @@ export const MD = $$O0;
 export const Ng = $$x1;
 export const YT = $$C2;
 export const aQ = $$A3;
-export const vG = $$R4; 
+export const vG = $$R4;

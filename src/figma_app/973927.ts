@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { l as _$$l } from "../905/716947";
 import { FTemplateCategoryType, FFileType } from "../figma_app/191312";
 import { T5 } from "../figma_app/465071";
@@ -14,7 +14,7 @@ export function $$c3(e) {
     case _$$n.TeamTemplateLg:
       return e.template.fileKey;
     default:
-      return xb(e);
+      return throwTypeError(e);
   }
 }
 export function $$u0(e) {
@@ -25,7 +25,7 @@ export function $$u0(e) {
     case _$$n.TeamTemplateLg:
       return e.template.libraryKey;
     default:
-      return xb(e);
+      return throwTypeError(e);
   }
 }
 export function $$p2(e) {
@@ -36,7 +36,7 @@ export function $$p2(e) {
     case _$$n.TeamTemplateLg:
       return e.template.name;
     default:
-      return xb(e);
+      return throwTypeError(e);
   }
 }
 export function $$_1() {
@@ -54,7 +54,7 @@ export function $$_1() {
         case _$$n.TeamTemplateLg:
           return e.template.description;
         default:
-          return xb(e);
+          return throwTypeError(e);
       }
     }(e);
     let {
@@ -125,7 +125,7 @@ export function $$_1() {
           };
         }
       default:
-        xb(type);
+        throwTypeError(type);
     }
   }, [t, r]);
 }

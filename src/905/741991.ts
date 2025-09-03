@@ -1,4 +1,4 @@
-import { j } from "../figma_app/465776";
+import { noop } from "../figma_app/465776";
 import { xN } from "../figma_app/492908";
 import { Ws, GU, PK, sD, Kw, gr, cd, _H, Tq, eJ } from "../figma_app/243058";
 import { sg, Xf, iU } from "../905/859698";
@@ -61,7 +61,7 @@ export class $$g0 extends _$$s {
         case "GRID":
           return "GRID_STYLE";
         default:
-          j(e);
+          noop(e);
       }
     } else if ("FRAME" === e && this.nodeChange.resizeToFit) return "GROUP";
     return e;

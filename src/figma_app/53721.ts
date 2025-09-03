@@ -1,4 +1,4 @@
-import { S9 } from "../figma_app/465776";
+import { returnSecond } from "../figma_app/465776";
 import { _YF } from "../figma_app/763686";
 import { x1 } from "../905/714362";
 import { FFileType } from "../figma_app/191312";
@@ -168,7 +168,7 @@ export function $$b5(e) {
     case 1:
       return "design";
     default:
-      return S9(e, "design");
+      return returnSecond(e, "design");
   }
 }
 export function $$T12(e) {
@@ -292,7 +292,7 @@ export function $$x14(e) {
     case FFileType.FIGMAKE:
       return "5";
     default:
-      return S9(e, "0");
+      return returnSecond(e, "0");
   }
 }
 export const $t = $$u0;

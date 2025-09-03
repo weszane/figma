@@ -1,5 +1,5 @@
 import { kiwiParserCodec } from "../905/294864";
-import { KF } from "../figma_app/465776";
+import { debug } from "../figma_app/465776";
 import { debounce } from "../905/915765";
 import { Egt, KjJ, glU, Ez5 } from "../figma_app/763686";
 import { dI, Hr as _$$Hr } from "../905/871411";
@@ -152,7 +152,7 @@ export function $$q10(e, t, r, a, o) {
       if (a = $$J20(a), t?.guid) {
         if (d) {
           let e = d.fontFamily && d.fontStyle;
-          if (KF(!e, "UI should never simultaneously update font family and style"), d.fontFamily && t.fontStyle && (c.fontName = {
+          if (debug(!e, "UI should never simultaneously update font family and style"), d.fontFamily && t.fontStyle && (c.fontName = {
             family: d.fontFamily,
             style: t.fontStyle,
             postscript: ""
@@ -174,7 +174,7 @@ export function $$q10(e, t, r, a, o) {
           nodeChanges: [c]
         });
         glU?.updateSelectedStyleProperties(e, r, a === zk.YES);
-        KF(null != t.styleType, "unknown style type");
+        debug(null != t.styleType, "unknown style type");
         Z(t.styleType);
       } else {
         let e = kiwiParserCodec.encodeMessage({
@@ -222,7 +222,7 @@ export function $$en12() {
   return e;
 }
 function ei(e) {
-  KF(!Q.invalidateSceneGraph, "We should get at most one sceneGraphMirrorUpdate per frame. We got two.");
+  debug(!Q.invalidateSceneGraph, "We should get at most one sceneGraphMirrorUpdate per frame. We got two.");
   Q.invalidateSceneGraph = {
     rebuildRows: !e || e.rebuildRows
   };
@@ -231,7 +231,7 @@ function ea(e, t) {
   return e[t] | e[t + 1] << 8 | e[t + 2] << 16 | e[t + 3] << 24;
 }
 function es(e) {
-  KF(!Q.selection?.replace, "addSelectors and replaceSelectors called on the same frame");
+  debug(!Q.selection?.replace, "addSelectors and replaceSelectors called on the same frame");
   Q.selection ||= Object.create(null);
   Q.selection.add ||= Object.create(null);
   Q.selection.userTriggered ||= e.userTriggered;
@@ -247,7 +247,7 @@ function es(e) {
   }
 }
 function eo(e) {
-  KF(!Q.selection?.replace, "removeSelectors and replaceSelectors called on the same frame");
+  debug(!Q.selection?.replace, "removeSelectors and replaceSelectors called on the same frame");
   Q.selection ||= Object.create(null);
   Q.selection.remove ||= Object.create(null);
   Q.selection.userTriggered ||= e.userTriggered;
@@ -263,8 +263,8 @@ function eo(e) {
   }
 }
 function el(e) {
-  KF(!Q.selection?.add, "addSelectors and replaceSelectors called on the same frame");
-  KF(!Q.selection?.remove, "removeSelectors and replaceSelectors called on the same frame");
+  debug(!Q.selection?.add, "addSelectors and replaceSelectors called on the same frame");
+  debug(!Q.selection?.remove, "removeSelectors and replaceSelectors called on the same frame");
   Q.selection ||= Object.create(null);
   Q.selection.replace ||= Object.create(null);
   Q.selection.userTriggered ||= e.userTriggered;
@@ -326,7 +326,7 @@ function ed({
 function ec(e) {
   let t = e.buffer && e.buffer.length > 0 ? kiwiParserCodec.decodeMessage(e.buffer) : null;
   delete e.buffer;
-  KF(!Q.selectionProperties, "Updating selectionProperties multiple times on a frame");
+  debug(!Q.selectionProperties, "Updating selectionProperties multiple times on a frame");
   Q.selectionProperties = {
     message: t,
     derivedProperties: e

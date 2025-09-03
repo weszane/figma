@@ -1,10 +1,10 @@
 /**
  * Phase 26: Advanced Core Utilities and Data Processing Systems
- * 
+ *
  * This module provides comprehensive core utility functions, data processing,
  * URL handling, validation utilities, and node creation management.
  * Extracted from 472793.ts to improve code organization and maintainability.
- * 
+ *
  * Functions: eA, ey, eb, eZ, e7, e8, tB, tq
  */
 
@@ -27,7 +27,7 @@ export class AdvancedDataStructureManager {
   }
 
   /**
-   * Extract name from key array - ey function  
+   * Extract name from key array - ey function
    * Gets the name from a user plugin key array (index 2)
    */
   static extractNameFromKeyArray(e) {
@@ -198,22 +198,22 @@ export class CoreUtilitiesFactory {
  */
 export interface Phase26CoreUtilities {
   // Data Structure Operations
-  extractUserPluginKeyArray(data: any): any[]
-  extractNameFromKeyArray(array: any[]): any
+  extractUserPluginKeyArray: (data: any) => any[]
+  extractNameFromKeyArray: (array: any[]) => any
 
-  // Validation Operations  
-  validateStorageCredentials(credentials: any): void
-  isNotNull(value: any): boolean
+  // Validation Operations
+  validateStorageCredentials: (credentials: any) => void
+  isNotNull: (value: any) => boolean
 
   // Transformation Operations
-  convertMatrixToObject(matrix: any): any
+  convertMatrixToObject: (matrix: any) => any
 
   // Node Creation Operations
-  createTrackedNode(nodeData: any, tracking?: any): any
-  getNodeById(id: string): any
+  createTrackedNode: (nodeData: any, tracking?: any) => any
+  getNodeById: (id: string) => any
 
   // URL Processing Operations
-  processURL(url: string): any
+  processURL: (url: string) => any
 }
 
 /**
@@ -222,7 +222,7 @@ export interface Phase26CoreUtilities {
  */
 export class DefaultPhase26CoreUtilities implements Phase26CoreUtilities {
   private dataStructure = AdvancedDataStructureManager
-  private validation = AdvancedValidationManager  
+  private validation = AdvancedValidationManager
   private transformation = AdvancedTransformationManager
   private nodeCreation = AdvancedNodeCreationManager
   private urlProcessor = AdvancedURLProcessor

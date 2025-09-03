@@ -1,7 +1,7 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState } from "react";
 import { wA } from "../vendor/514228";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { G } from "../905/289770";
 import { J } from "../905/614223";
@@ -74,7 +74,7 @@ let O = (e, t) => {
     case ud.CONTENT:
       return tx("seat_selection_in_nux.content_seat_auto_approved");
     default:
-      xb(t);
+      throwTypeError(t);
   } else switch (t) {
     case ud.COLLABORATOR:
       return tx("seat_selection_in_nux.collab_seat_manual_request");
@@ -85,7 +85,7 @@ let O = (e, t) => {
     case ud.CONTENT:
       return tx("seat_selection_in_nux.content_seat_manual_request");
     default:
-      xb(t);
+      throwTypeError(t);
   }
 };
 let D = (e, t) => {
@@ -98,7 +98,7 @@ let D = (e, t) => {
     case ud.CONTENT:
       return buildUploadUrl("e64c10dbcf541d5c046e504238332a5a4e6c3936");
     default:
-      xb(t);
+      throwTypeError(t);
   } else switch (t) {
     case ud.COLLABORATOR:
       return buildUploadUrl(k);
@@ -108,7 +108,7 @@ let D = (e, t) => {
     case ud.CONTENT:
       return buildUploadUrl("8ccf73b4d60956f75e7d328f2f84303814551671");
     default:
-      xb(t);
+      throwTypeError(t);
   }
 };
 let $$L0 = Ju(function (e) {

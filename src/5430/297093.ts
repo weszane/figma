@@ -1,4 +1,4 @@
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { t as _$$t } from "../905/303541";
 import { l$ } from "../figma_app/275462";
 import { M } from "../905/722875";
@@ -30,7 +30,7 @@ export function $$_4(e) {
     case k.Editors.FIGMAKE:
       return _$$t("community.view_bar.figmake");
     default:
-      xb(e);
+      throwTypeError(e);
   }
 }
 export function $$p2(e, t, r) {
@@ -101,7 +101,7 @@ export function $$g1(e, t = !0) {
         case "widgets":
           return _$$t("community.view_bar.widgets");
         default:
-          xb(e);
+          throwTypeError(e);
       }
     }(e) : function (e) {
       switch (e) {
@@ -112,7 +112,7 @@ export function $$g1(e, t = !0) {
         case _$$t2.WIDGETS:
           return _$$t("community.view_bar.widgets");
         default:
-          xb(e);
+          throwTypeError(e);
       }
     }(e)
   }));

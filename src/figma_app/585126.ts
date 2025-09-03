@@ -1,4 +1,4 @@
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { A } from "../905/920142";
 import { parseQuery } from "../905/634134";
 import { CC } from "../figma_app/609194";
@@ -106,7 +106,7 @@ export function $$_1(e) {
             case rk["1yr"]:
               return A().subtract(1, "year");
             default:
-              xb(e);
+              throwTypeError(e);
           }
         }(r).utc().format();
     }

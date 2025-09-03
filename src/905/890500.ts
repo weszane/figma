@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { wA } from "../vendor/514228";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { b, q7, bL, mc } from "../figma_app/860955";
 import { d as _$$d } from "../905/976845";
 import { J } from "../905/125993";
@@ -39,7 +39,7 @@ export function $$y0(e) {
         S();
         break;
       default:
-        xb(t);
+        throwTypeError(t);
     }
   };
   let E = () => {
@@ -118,7 +118,7 @@ export function $$y0(e) {
       O = e.comment.user_id === A?.id ? [T, k, N] : [T, k];
       break;
     default:
-      xb(e.thread);
+      throwTypeError(e.thread);
   } else e.comment.user_id === A?.id && (O = O.concat(P));
   if (0 === O.filter(Boolean).length) return null;
   let {

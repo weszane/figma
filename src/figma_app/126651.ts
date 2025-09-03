@@ -1,4 +1,4 @@
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { getFeatureFlags } from "../905/601108";
 import { t } from "../905/303541";
 import { FProductAccessType } from "../figma_app/191312";
@@ -19,7 +19,7 @@ export function $$o1(e) {
     case FProductAccessType.COOPER:
       return t("general.figma_buzz");
     default:
-      xb(e);
+      throwTypeError(e);
   }
 }
 export function $$l0(e) {
@@ -39,7 +39,7 @@ export function $$l0(e) {
     case FProductAccessType.COOPER:
       return t("general.figma_buzz");
     default:
-      xb(e);
+      throwTypeError(e);
   }
 }
 export const $ = $$l0;

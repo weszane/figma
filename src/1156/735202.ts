@@ -3,7 +3,7 @@ import { UN } from "../905/700578";
 import { lV, Li, Us, VH } from "../figma_app/617606";
 import { RM, Hg, o9, mJ, F$ } from "../figma_app/304955";
 import { Hq } from "../905/189185";
-import { vA } from "../figma_app/465776";
+import { assert } from "../figma_app/465776";
 import { Ur } from "../figma_app/735943";
 import { J } from "../figma_app/710077";
 export function $$u0(e, t, n, u, x, m, h) {
@@ -13,7 +13,7 @@ export function $$u0(e, t, n, u, x, m, h) {
   let y = t.chatMessages || [];
   let _ = [...y, ...f];
   if (Hq.ai("update-source-code-and-chat-messages", () => {
-    for (let [e, i] of (vA(void 0 !== glU, "Fullscreen must be defined"), t.chatMessages = _, Object.entries(n))) {
+    for (let [e, i] of (assert(void 0 !== glU, "Fullscreen must be defined"), t.chatMessages = _, Object.entries(n))) {
       let n = mJ(g, e);
       let {
         codeFile
@@ -49,4 +49,4 @@ export function $$u0(e, t, n, u, x, m, h) {
     J(t);
   }
 }
-export const E = $$u0; 
+export const E = $$u0;

@@ -49,7 +49,7 @@ import { A as _$$A } from "../905/482208";
 import { J as _$$J } from "../figma_app/900567";
 import { Zh, $y, yG, dR, vu, ll, bz, ke, zO, bj, Bx, z6, ac, cq, UJ } from "../figma_app/731560";
 import { wA, d4 } from "../vendor/514228";
-import { KF, xb } from "../figma_app/465776";
+import { debug, throwTypeError } from "../figma_app/465776";
 import { oB } from "../figma_app/273493";
 import { d as _$$d } from "../vendor/456530";
 import { N as _$$N } from "../vendor/930821";
@@ -123,7 +123,7 @@ let Q = um({
   draggedTool: void 0,
   draggedToolCanCancel: !0,
   shouldFinishClick: !0
-}, function(e, t) {
+}, function (e, t) {
   switch (t.type) {
     case "start click":
       return {
@@ -289,7 +289,7 @@ let en = forwardRef((e, t) => {
     }), jsx(D8, {
       "aria-disabled": disabled,
       "aria-hidden": !inTabOrder,
-      "aria-label": w && inTabOrder ? function(e) {
+      "aria-label": w && inTabOrder ? function (e) {
         try {
           return _$$A(e) || e;
         } catch (t) {
@@ -340,7 +340,7 @@ let er = forwardRef(({
     children: h
   });
 });
-let ef = memo(function({
+let ef = memo(function ({
   toolType: e,
   color: t,
   isActive: i,
@@ -395,7 +395,7 @@ let ef = memo(function({
   let D = Pl({
     subscribeToUpdates_expensive: A
   });
-  let U = function(e) {
+  let U = function (e) {
     switch (e) {
       case "NONE":
         return 0;
@@ -486,7 +486,7 @@ let ef = memo(function({
             });
             T(!1);
             L(I + 1);
-          } else KF(!1, "Delightful tool is missing the toolref!");
+          } else debug(!1, "Delightful tool is missing the toolref!");
         },
         onDragStart: (t, i) => {
           y({
@@ -507,7 +507,7 @@ let ef = memo(function({
           }
           if (M.current) {
             let e = $R();
-            KF(!!e, "ToolIcon can't find containing toolbar!");
+            debug(!!e, "ToolIcon can't find containing toolbar!");
             W(e?.getBoundingClientRect());
             l && l();
           }
@@ -629,7 +629,7 @@ function eS({
     })
   });
 }
-let ew = memo(function({
+let ew = memo(function ({
   shapeType: e,
   toolbarIconScale: t,
   onClick: i,
@@ -716,7 +716,7 @@ function eI({
 function eL(e) {
   return `translate(${e.x}px, ${e.y}px)`;
 }
-let eN = memo(function({
+let eN = memo(function ({
   collageItem: e,
   onClick: t,
   disabled: i
@@ -740,7 +740,7 @@ let eN = memo(function({
     })
   });
 });
-let eA = memo(function({
+let eA = memo(function ({
   shapeType: e,
   collageItem: t,
   onClick: i,
@@ -1034,7 +1034,7 @@ function e0({
 }
 function e1() {
   let e = md(_$$ez);
-  let t = function(e) {
+  let t = function (e) {
     let t = md(SK);
     let i = Xr(_$$ez);
     let {
@@ -1207,7 +1207,7 @@ function ts({
     colors,
     paletteType,
     isCustomPalette
-  } = function(e) {
+  } = function (e) {
     let t = Z9();
     let i = t.type === Yv.CUSTOM;
     let n = GQ(e);
@@ -1339,7 +1339,7 @@ function td({
     }
   });
 }
-let tc = memo(function({
+let tc = memo(function ({
   numSwatchesLoading: e
 }) {
   let t = ZC(e);
@@ -1386,7 +1386,7 @@ function tE(e) {
     case null:
       return null;
     default:
-      xb(e);
+      throwTypeError(e);
   }
 }
 function tS() {
@@ -1422,7 +1422,7 @@ function tN() {
     let n = B9(i);
     n !== s && a({
       paintHex: n,
-      imageSrc: function(e) {
+      imageSrc: function (e) {
         let t = (e.originalImageWidth || 244) / (e.originalImageHeight || 244);
         let i = jS(e, new Point(244 * t, 244), {
           r: 0,
@@ -1443,7 +1443,7 @@ function tA() {
     colorSetLegend,
     canEditColor,
     canApplyCustomColor
-  } = function() {
+  } = function () {
     let e = md(_$$XS);
     let t = tC();
     let i = tT();
@@ -1482,10 +1482,10 @@ function tA() {
           canEditColor: !1
         };
       default:
-        return xb(e);
+        return throwTypeError(e);
     }
   }();
-  let l = function() {
+  let l = function () {
     let e = md(_$$XS);
     let [t, i] = fp(GI);
     let [n, a] = fp(IZ);
@@ -1512,7 +1512,7 @@ function tA() {
         case null:
           break;
         default:
-          xb(e);
+          throwTypeError(e);
       }
       _$$F3.trackFromFullscreen("Drawing Tool Change Color", {
         source: "default",
@@ -1537,7 +1537,7 @@ function tA() {
 }
 function tO() {
   let e = tE(md(_$$XS));
-  let t = function() {
+  let t = function () {
     let e = md(_$$XS);
     let [t, i] = fp(GI);
     let [n, a] = fp(IZ);
@@ -1560,7 +1560,7 @@ function tO() {
         case null:
           break;
         default:
-          xb(e);
+          throwTypeError(e);
       }
       sx("Drawing Tool Change Thickness", {
         thickness: r,
@@ -1568,7 +1568,7 @@ function tO() {
       });
     }, [e, t, n, i, a]);
   }();
-  let i = function() {
+  let i = function () {
     let e = md(_$$XS);
     switch (e) {
       case NLJ.VECTOR_PENCIL:
@@ -1579,7 +1579,7 @@ function tO() {
       case null:
         return !1;
       default:
-        xb(e);
+        throwTypeError(e);
     }
   }();
   return jsxs(Fragment, {
@@ -3307,7 +3307,7 @@ function tZ({
   let {
     patternSrc,
     isCustom
-  } = function() {
+  } = function () {
     let e = tS();
     return {
       patternSrc: e && buildUploadUrl(e),
@@ -3594,12 +3594,12 @@ let t1 = {
 function t2({
   disabled: e
 }) {
-  let t = function() {
+  let t = function () {
     let e = md(_$$B);
     let t = md(BB) && e === cxo.PENCIL_TOOL;
     return !!md(_$$XS) || t;
   }();
-  let i = function() {
+  let i = function () {
     let e = md(_$$XS) ?? void 0;
     let t = PD(e);
     return e || t || gf;
@@ -3609,7 +3609,7 @@ function t2({
   let {
     handleToolAction
   } = _$$W();
-  !function() {
+  !function () {
     let e = md(_$$o);
     let t = tS();
     useEffect(() => {
@@ -3670,7 +3670,7 @@ function t3({
         size: tW.TOOLBELT_LARGE
       });
     default:
-      xb(e);
+      throwTypeError(e);
   }
 }
 let t5 = [NLJ.VECTOR_PENCIL, NLJ.HIGHLIGHTER, NLJ.WASHI_TAPE, NLJ.ERASER];
@@ -3763,7 +3763,7 @@ function t8({
     case NLJ.ERASER:
       return jsx(tP, {});
     default:
-      xb(e);
+      throwTypeError(e);
   }
 }
 function t7() {
@@ -3896,9 +3896,9 @@ function iT({
       easing: "cubic-bezier(0.37, 0, 0.48, 1.33)"
     }));
     n.play();
-    n.finished.then(() => r.play()).catch(() => {}) ;
-    r.finished.then(() => a.play()).catch(() => {}) ;
-    a.finished.then(() => s.play()).catch(() => {}) ;
+    n.finished.then(() => r.play()).catch(() => {});
+    r.finished.then(() => a.play()).catch(() => {});
+    a.finished.then(() => s.play()).catch(() => {});
     return () => {
       n.cancel();
       a.cancel();
@@ -3980,7 +3980,7 @@ function iL({
   let a = lO(activeToolId);
   let s = activeToolId === NLJ.STAMP;
   let l = _$$iT();
-  let d = function(e) {
+  let d = function (e) {
     let t = XM();
     let i = md(nf);
     let n = ej();
@@ -3991,7 +3991,7 @@ function iL({
     numVotesRemaining,
     hasRemainingVotes,
     leaveVotingSessionAndCloseWheel
-  } = function() {
+  } = function () {
     let e = wA();
     let t = XM();
     let i = hr();
@@ -4008,7 +4008,7 @@ function iL({
   }();
   let {
     handleStampToolClick
-  } = function(e) {
+  } = function (e) {
     let t = LR();
     return {
       handleStampToolClick: useCallback(() => {
@@ -4115,14 +4115,14 @@ function iD({
   let [d, c] = useState(!1);
   let [u, p] = useState(_$$k2.DEFAULT);
   let h = 240 / (rX * e);
-  let m = function() {
+  let m = function () {
     let e = md(qL);
     let t = zS(e, "sticky");
     let i = _$$F2.format(e);
     return t ? MV(t, i) : "rgba(230, 230, 230, 1)";
   }();
   let f = md(Q);
-  let _ = function() {
+  let _ = function () {
     let {
       activeSecondaryToolbeltId
     } = LH();
@@ -4255,7 +4255,7 @@ export function $$iU0() {
 function iF({
   children: e
 }) {
-  let t = function() {
+  let t = function () {
     let e = useRef(null);
     let t = wY(e);
     let i = t?.width ?? Hu().thresholdWidth + 260;
@@ -4266,7 +4266,7 @@ function iF({
     }, [i, a, n]);
     return e;
   }();
-  !function(e, t) {
+  !function (e, t) {
     let i = _$$C();
     let n = i?.setWhiteboardToolbeltContainerNode || lQ;
     let s = i?.setWhiteboardToolbeltNode || lQ;
@@ -4315,7 +4315,7 @@ function iB() {
     activeBannerType
   } = Dm();
   qv();
-  !function() {
+  !function () {
     let {
       activeToolId
     } = _$$W();
@@ -4332,7 +4332,7 @@ function iB() {
       setActiveSecondaryToolbeltId(t => activeToolId === $o && t === _$$w2.DiagrammingTools ? _$$w2.DiagrammingTools : _$$L(activeToolId) ? _$$w2.DrawingTools : activeToolId === NLJ.STICKY ? _$$w2.StickyTools : eg(activeToolId) && !n ? _$$w2.DiagrammingTools : null);
     }, [activeToolId, setActiveSecondaryToolbeltId, i, n]);
   }();
-  !function() {
+  !function () {
     let {
       activeToolId
     } = _$$W();
@@ -4351,7 +4351,7 @@ function iB() {
       };
     }, [activeToolId, activeSecondaryToolbeltId, setActiveSecondaryToolbeltId, n]);
   }();
-  !function(e) {
+  !function (e) {
     let {
       setActiveSecondaryToolbeltId
     } = LH();
@@ -4366,7 +4366,7 @@ function iB() {
     }, [setActiveSecondaryToolbeltId, e]);
   }(editModeType);
   _$$m2(hV);
-  !function() {
+  !function () {
     let {
       activeSecondaryToolbeltId
     } = LH();
@@ -4446,4 +4446,4 @@ function iK() {
     isCommentsDisabled: !(e || i) && t
   };
 }
-export const WhiteboardUI3ToolbeltWithErrorBoundary = $$iU0; 
+export const WhiteboardUI3ToolbeltWithErrorBoundary = $$iU0;

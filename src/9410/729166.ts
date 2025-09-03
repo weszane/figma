@@ -58,7 +58,7 @@ import { Zu, $y, Jy } from "../905/708651";
 import { G as _$$G2 } from "../905/750789";
 import { s as _$$s } from "../cssbuilder/589278";
 import { E6 } from "../905/560959";
-import { xb, vA, B1 } from "../figma_app/465776";
+import { throwTypeError, assert, assertNotNullish } from "../figma_app/465776";
 import { $D } from "../905/11";
 import { ON, oy, gs } from "../figma_app/31103";
 import { Ku, UK, dP } from "../figma_app/740163";
@@ -757,7 +757,7 @@ function eK({
     case Z_n.DATE:
       return null;
     default:
-      xb(p);
+      throwTypeError(p);
   }
 }
 function eH({
@@ -2712,7 +2712,7 @@ let r0 = memo(function ({
       type: "CLOSE_INLINE_PREVIEW"
     });
   }, [x, _]);
-  let V = useCallback(() => (vA(!!k), vA(!!j), {
+  let V = useCallback(() => (assert(!!k), assert(!!j), {
     x: j,
     y: k - uF
   }), [k, j]);
@@ -2723,7 +2723,7 @@ let r0 = memo(function ({
   let Y = useCallback(() => {
     let e = V();
     if (!R) return e;
-    B1(O, "devicePresetIdentifier must be set");
+    assertNotNullish(O, "devicePresetIdentifier must be set");
     let t = A.rotation;
     let {
       framePresetSize,
@@ -2744,12 +2744,12 @@ let r0 = memo(function ({
   let q = useCallback(e => {
     if (!J) return;
     let t = Y();
-    vA(!!d, "currentPresentedNode must be set");
+    assert(!!d, "currentPresentedNode must be set");
     let i = y.get(d);
-    vA(!!i, "expected selectedNode to exist");
+    assert(!!i, "expected selectedNode to exist");
     let r = HS(y, i);
     let n = hX(t, i, r, y);
-    vA(n.breakpoint.type !== l5.DEVICE, "fit to aspect ratio not allowed for device");
+    assert(n.breakpoint.type !== l5.DEVICE, "fit to aspect ratio not allowed for device");
     W(n.initialViewerSize);
     x(Zh({
       name: "prototype.resize_to_fit_aspect_ratio",
@@ -2823,8 +2823,8 @@ let r0 = memo(function ({
     };
   }, [R, O, A?.rotation]);
   let ei = useCallback(e => {
-    vA(m?.breakpoint.type === l5.DEVICE, "device must be set to toggle device frame");
-    vA(!!A, "prototypeDevice must be set to toggle device frame");
+    assert(m?.breakpoint.type === l5.DEVICE, "device must be set to toggle device frame");
+    assert(!!A, "prototypeDevice must be set to toggle device frame");
     let t = Y();
     if (e) {
       let e = A.presetIdentifier;
@@ -2835,7 +2835,7 @@ let r0 = memo(function ({
       ee(Ho(t, framePresetSize, idealDeviceSize));
     } else W(t);
   }, [m?.breakpoint.type, A, Y, W, ee]);
-  vA(!C || null !== m, "sizeInfo should always be set when open");
+  assert(!C || null !== m, "sizeInfo should always be set when open");
   useLayoutEffect(() => {
     if (E !== v) {
       if (R) {
@@ -2926,10 +2926,10 @@ let r0 = memo(function ({
       openFileKey: s || void 0,
       resizeToActualSize: () => {
         if (!X()) return;
-        vA(!!d);
-        vA(!!m);
+        assert(!!d);
+        assert(!!m);
         let e = y.get(d);
-        vA(!!e);
+        assert(!!e);
         x(Zh({
           name: "prototype.resize_to_actual_size"
         }));

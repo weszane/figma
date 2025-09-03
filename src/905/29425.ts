@@ -1,4 +1,4 @@
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { fZb } from "../figma_app/763686";
 import { eU, zl } from "../figma_app/27355";
 import s from "../vendor/128080";
@@ -476,7 +476,7 @@ let D = class e extends HTMLElement {
         case kT.LITMUS_COMMENT_THREAD:
           break;
         default:
-          xb(r);
+          throwTypeError(r);
       }
       e.applyClusterToAvatarPin(t, i, a, this.ds.selectedPinId, this.ds.dimUnselectedPins, this.ds.clusters.minimizeUnpinned);
       nt.commentsA11y.getValue() && (a.onkeydown = e => {

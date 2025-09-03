@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useMemo, useState, useEffect, useRef } from "react";
-import { wc } from "../figma_app/465776";
+import { throwError } from "../figma_app/465776";
 import { A as _$$A } from "../905/920142";
 import { Zr } from "../figma_app/930338";
 import { t as _$$t } from "../905/303541";
@@ -61,7 +61,7 @@ function h(e, t) {
     case "year":
       return 31536e6 * e;
     default:
-      wc(`Unsupported relative time unit (${t})`);
+      throwError(`Unsupported relative time unit (${t})`);
   }
 }
 let g = Object.values({

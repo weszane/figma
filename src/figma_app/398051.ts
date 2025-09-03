@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { useRef, useEffect } from "react";
 import { wA } from "../vendor/514228";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { B } from "../905/872019";
 import { _ as _$$_ } from "../905/862468";
 import { X3B, FAf, uQ6 } from "../figma_app/763686";
@@ -88,7 +88,7 @@ function j() {
           g.current = null;
           start({});
         },
-        getCustomDisabledTextFromSelectedNodes: (t) => {
+        getCustomDisabledTextFromSelectedNodes: t => {
           let r;
           let n;
           tlfAmount > 10 && (r = tx("magic_link.tlf_selection_too_large"), n = "Select 10 or fewer frames");
@@ -166,7 +166,7 @@ function j() {
       Y5.triggerAction("end-magic-link");
       return null;
     default:
-      xb(state);
+      throwTypeError(state);
   }
 }
 function U() {

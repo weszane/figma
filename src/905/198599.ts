@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { l as _$$l } from "../905/716947";
 import { eU, Xr, zl } from "../figma_app/27355";
@@ -154,7 +154,7 @@ export async function $$H1(e, t) {
         });
         break;
       default:
-        xb(h);
+        throwTypeError(h);
     }
     if (zl.get($$V3).currentSearch?.queryId !== U) return;
     null === G && sx("asset_search.missing_session_id", {

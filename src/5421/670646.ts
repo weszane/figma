@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { memo, useRef, useCallback, PureComponent, useId, useMemo, useEffect } from "react";
 import { wA } from "../vendor/514228";
-import { B1, KF } from "../figma_app/465776";
+import { assertNotNullish, debug } from "../figma_app/465776";
 import { n4 } from "../905/955878";
 import { fn } from "../905/871411";
 import { Pt, o6 } from "../figma_app/806412";
@@ -1074,10 +1074,10 @@ export let $$e70 = kp(function (e) {
     let o = Gt("videoMuted");
     let i = Gt("numVideosSelected");
     if (e) {
-      B1(t);
-      B1(n);
-      B1(o);
-      B1(i);
+      assertNotNullish(t);
+      assertNotNullish(n);
+      assertNotNullish(o);
+      assertNotNullish(i);
       return {
         autoplay: n,
         muted: o,
@@ -1125,7 +1125,7 @@ export let $$e70 = kp(function (e) {
   });
   let er = !R && ((isValidPrototypingSourceSelected ?? !0) || isSectionSelected && YR());
   let ea = !R;
-  KF(U || R || hS(prototypeDevice), "should not have mixed device selection");
+  debug(U || R || hS(prototypeDevice), "should not have mixed device selection");
   return jsxs("div", {
     ref: q,
     onBlur: G,

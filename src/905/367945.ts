@@ -1,5 +1,5 @@
 import { jsx } from "react/jsx-runtime";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { S } from "../905/274480";
 import { J } from "../905/270045";
 import { N } from "../905/438674";
@@ -30,7 +30,7 @@ let f = e => {
     case "PRICE_CANNOT_BE_INCREASED":
       break;
     default:
-      return xb(e);
+      return throwTypeError(e);
   }
 };
 let _ = e => {
@@ -49,7 +49,7 @@ let _ = e => {
         learnMoreLink: jsx(y, {})
       });
     default:
-      return xb(e.key);
+      return throwTypeError(e.key);
   }
 };
 export function $$A0({

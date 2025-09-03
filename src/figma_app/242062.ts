@@ -47,7 +47,7 @@ import { oP } from "../figma_app/580087";
 import { w3 } from "../figma_app/728075";
 import { Rt, iU, VW, S8, z8, bu, iY, Lo, vD, hD, Dy, or, p as _$$p3, u0, Bj, DE, Lw, W7, PT, zr } from "../figma_app/938674";
 import { S as _$$S } from "../figma_app/403368";
-import { KF } from "../figma_app/465776";
+import { debug } from "../figma_app/465776";
 import { x as _$$x2 } from "../905/437800";
 import { Ay } from "../figma_app/778880";
 import { mZ, AS } from "../figma_app/991227";
@@ -1077,7 +1077,7 @@ function e8({
 }) {
   let [t, r] = useState(!1);
   if (!e4.has(e)) {
-    KF(!!e, `Unknown color ${e} for Cursor High Fives`);
+    debug(!!e, `Unknown color ${e} for Cursor High Fives`);
     return jsx(Fragment, {});
   }
   let n = eJ(t ? e3 : e, z7E.HIGH_FIVE, !1);

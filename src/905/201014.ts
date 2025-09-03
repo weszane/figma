@@ -41,7 +41,7 @@ import { Pq, Pe } from "../figma_app/12796";
 import { pS } from "../905/588985";
 import { qH } from "../figma_app/300692";
 import { FW } from "../figma_app/155287";
-import { $$ap1 } from "../905/472793";
+import { createPluginInstance } from "../905/472793";
 import { createPluginContext as _$$e2 } from "../905/700654";
 import { gH } from "../figma_app/985200";
 import { P as _$$P2 } from "../905/545265";
@@ -579,7 +579,7 @@ function H(e, t) {
 }
 function W(e) {
   let t = [];
-  if (e instanceof _$$a) t.push(...K(e.name, null));else {
+  if (e instanceof _$$a) t.push(...K(e.name, null)); else {
     let {
       backgrounds = []
     } = e.fills.filter(({
@@ -1751,7 +1751,7 @@ function eY(e, t, i = _$$DX) {
     let i = backgrounds.map(e => e.fill);
     let a = i.some(ej);
     let s = oQ(e.fillStyle);
-    if (s && !a) n.set(l, new kz(e.fillStyle.name, new eK(i), t, void 0, e.fillStyle.id));else {
+    if (s && !a) n.set(l, new kz(e.fillStyle.name, new eK(i), t, void 0, e.fillStyle.id)); else {
       r[l] = function (e, t, i) {
         if (!t && !i) return A2.NoStyleForColor;
       }(0, a, s);
@@ -1922,7 +1922,7 @@ function eY(e, t, i = _$$DX) {
               offsetY: g,
               radius: f,
               color: y
-            })]));else {
+            })])); else {
               let e = new eb([{
                 offsetX: h,
                 offsetY: g,
@@ -2029,9 +2029,9 @@ function eq(e, t, {
     styleMap: i,
     preferences: t
   }) : {
-    fallbackHints: {},
-    fallbackStyleMap: new ek()
-  };
+      fallbackHints: {},
+      fallbackStyleMap: new ek()
+    };
   return {
     styleMap: i,
     hints: o,
@@ -2223,7 +2223,7 @@ function tt(e, t, i, n) {
     n && n.length > 0 && t.set("font-variant-numeric", new _$$O$(n.join(" ")));
     let r = [];
     Object.entries(i).forEach(([e, i]) => {
-      if ("KERN" === e) t.set("font-kerning", new _$$O$(i ? "normal" : "none"));else {
+      if ("KERN" === e) t.set("font-kerning", new _$$O$(i ? "normal" : "none")); else {
         if ("LNUM" === e || "ONUM" === e || "TNUM" === e || "PNUM" === e || "FRAC" === e || "ORDN" === e || "ZERO" === e) return;
         r.push(`'${e.toLowerCase()}' ${i ? "on" : "off"}`);
       }
@@ -2607,7 +2607,7 @@ async function tp(e, t) {
       e.forEach((t, i) => {
         if (s.test(t.characters)) {
           let s = t.characters.match(a);
-          if (null === s) n.push(t);else if (1 === s.length) {
+          if (null === s) n.push(t); else if (1 === s.length) {
             n.push(t);
             r.push(n);
             n = [];
@@ -2693,9 +2693,9 @@ async function tp(e, t) {
       hints,
       preferences: t
     }) : {
-      fallbackHints: {},
-      fallbackStyleMap: new ek()
-    };
+        fallbackHints: {},
+        fallbackStyleMap: new ek()
+      };
     ts(e, i, n, t);
     ts(e, fallbackStyleMap, n, t);
     return {
@@ -2769,7 +2769,7 @@ async function tm(e, t) {
     d.includes(n) || h.includes(n) || I.includes(n) ? P.push(u) : v.includes(n) ? O.push(u) : c.includes(n) ? E.push(u) : p.includes(n) ? "position" === n ? m.includes(`${a}`) && S.push(u) : S.push(u) : g.includes(n) ? C.push(u) : y.includes(n) ? R.push(u) : f.includes(n) ? N.push(u) : w.push(u);
   });
   let L = e instanceof _$$z;
-  if (L && oQ(e.textStyle)) i = e.textStyle.name;else if (L && e.textSegments[0].textStyleId) {
+  if (L && oQ(e.textStyle)) i = e.textStyle.name; else if (L && e.textSegments[0].textStyleId) {
     let t = V$({
       textStyleId: e.textSegments[0].textStyleId
     }, e.nodeCache.stylesResolver);
@@ -2903,7 +2903,7 @@ async function tm(e, t) {
         });
       }(t.documentElement.outerHTML)
     });
-  } catch {}
+  } catch { }
   return U;
 }
 async function th(e, t) {
@@ -2965,7 +2965,7 @@ async function tA(e, t, i) {
   let n = {};
   let r = 0;
   let a = [e];
-  for (;;) {
+  for (; ;) {
     let e = a.pop();
     if (!e || i && r >= i) break;
     let {
@@ -3962,7 +3962,7 @@ async function tX(e, t) {
               } = zr(e, "itemSpacing", r.toString());
               let l = new Set();
               let d = tv(variable, r, l, "CGFloat", t);
-              if (d) a.push(`spacing: ${d}`);else {
+              if (d) a.push(`spacing: ${d}`); else {
                 let n = `${r}`;
                 i = Kp({
                   value: n,
@@ -4015,7 +4015,7 @@ async function tX(e, t) {
               } = zr(e, "itemSpacing", r.toString());
               let l = new Set();
               let d = tv(variable, r, l, "CGFloat", t);
-              if (d) a.push(`spacing: ${d}`);else {
+              if (d) a.push(`spacing: ${d}`); else {
                 let n = `${r}`;
                 i = Kp({
                   value: n,
@@ -4449,7 +4449,7 @@ class ic {
       closePlugin,
       noOpVm
     } = _$$e2();
-    $$ap1(noOpVm, {
+    createPluginInstance(noOpVm, {
       stats: new _$$P2(),
       pluginVersionID: "",
       name: "First Party",

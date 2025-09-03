@@ -4,7 +4,7 @@ import { Z_n, CWU, Ez5, ibQ, glU, J0O, rrT, rXF, ZiZ, VQu } from "../figma_app/7
 import { q as _$$q } from "../figma_app/905311";
 import { wA, d4 } from "../vendor/514228";
 import { Bq } from "../figma_app/656233";
-import { B1 } from "../figma_app/465776";
+import { assertNotNullish } from "../figma_app/465776";
 import { lQ } from "../905/934246";
 import { isNotNullish } from "../figma_app/95419";
 import { ServiceCategories as _$$e } from "../905/165054";
@@ -119,7 +119,7 @@ function eO({
       "aria-label": _$$t("design_systems.component_properties.detach_property"),
       children: jsx(_$$U, {})
     })
-  }) : (B1(r), jsxs(hu, {
+  }) : (assertNotNullish(r), jsxs(hu, {
     boundVariableId: void 0,
     resolvedType: r,
     requestedTypes: s,
@@ -167,7 +167,7 @@ function ek(e, t) {
   if (gl(e)) return new Uint8Array();
   let r = e[t];
   if (!r) return new Uint8Array();
-  let n = function(e) {
+  let n = function (e) {
     let t = new Uint8Array(20);
     for (let r = 0; r < 20; r++) t[r] = parseInt(e.slice(2 * r, 2 * r + 2), 16);
     return t;
@@ -190,7 +190,7 @@ new class {
     e?.skipFlush !== !0 && (await this.flushBufferAsync());
     this.calls = [];
   }
-  async flushBufferAsync() { }
+  async flushBufferAsync() {}
   addCall(e) {
     this.calls.push(e);
   }
@@ -255,7 +255,7 @@ function eU(e) {
     onDragEnter,
     onDragLeave,
     onDropImage
-  } = function({
+  } = function ({
     typedPropDef: e,
     instanceGuids: t,
     codeComponentId: r
@@ -301,7 +301,7 @@ function eU(e) {
   });
   let e_ = jsx(_$$e2, {
     condition: X,
-    wrapper: e => (B1(variableType), jsxs(hu, {
+    wrapper: e => (assertNotNullish(variableType), jsxs(hu, {
       boundVariableId: void 0,
       resolvedType: variableType,
       requestedTypes,
@@ -452,7 +452,7 @@ function eU(e) {
           l7.user("component-prop-assignment", () => glU?.setComponentPropAssignmentVariableData(guids, typedPropDef.explicitDefID, t, forBubbledProps));
         },
         onVariableSelected: async e => {
-          if (B1(variableType), void 0 === e) return;
+          if (assertNotNullish(variableType), void 0 === e) return;
           let t = await R(Oe(e));
           if (!t) return;
           let n = y$(variableType, t);
@@ -978,7 +978,7 @@ function eJ({
   pickerWidth: _
 }) {
   let h = t.explicitDefID;
-  let m = useMemo(() => function(e) {
+  let m = useMemo(() => function (e) {
     if (gl(e)) return eD(e);
     let t = ek(e, "image");
     if (t.every(e => 0 === e)) return eD(e);
@@ -1085,7 +1085,7 @@ function e0({
   let u = ZC(d);
   let _ = useRef(null);
   let [h] = useState(!d.image);
-  useEffect(function() {
+  useEffect(function () {
     (r || h) && _.current?.focus();
   }, [r, h]);
   let [m, g, f] = _$$e3(!1);
@@ -1105,10 +1105,10 @@ function e0({
       T.current && S(_$$J(e));
     }).catch(e => $D(_$$e.DESIGN_SYSTEMS_FOUNDATIONS, e));
   }, [d]);
-  useEffect(function() {
+  useEffect(function () {
     (v && !A || v && e !== x) && N();
   }, [v, A, e, x, N]);
-  useEffect(function() {
+  useEffect(function () {
     return () => {
       T.current = !1;
     };
@@ -1236,4 +1236,4 @@ export function $$e10({
     recordingKey: m
   });
 }
-export const c = $$e10; 
+export const c = $$e10;

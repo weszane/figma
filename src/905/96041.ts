@@ -28,7 +28,7 @@ import { d_, Uv } from "../905/712373";
 let n;
 var r;
 var a;
-let l = _$$z.$$enum(["STICKY", "SHAPE_WITH_TEXT", "TEXT"], {
+let l = _$$z.enum(["STICKY", "SHAPE_WITH_TEXT", "TEXT"], {
   invalid_type_error: "Not an allowed type in summarize"
 });
 let d = _$$z.record(_$$z.number(), {
@@ -72,7 +72,7 @@ _$$z.object({
     message: _$$z.string()
   })
 });
-let g = _$$z.$$enum(["TEXT", "STICKY", "CODE_BLOCK", "SHAPE_WITH_TEXT", "TABLE", "EXPLORE_CLASS", "EXPLORE_OPTION", "GET_MORE_OPTION"]);
+let g = _$$z.enum(["TEXT", "STICKY", "CODE_BLOCK", "SHAPE_WITH_TEXT", "TABLE", "EXPLORE_CLASS", "EXPLORE_OPTION", "GET_MORE_OPTION"]);
 let f = _$$z.array(_$$z.object({
   id: _$$z.string(),
   type: g,
@@ -104,11 +104,11 @@ let b = _$$z.array(_$$z.object({
 let v = _$$z.object({
   use_cache: _$$z.boolean().optional().$$default(!0)
 });
-let E = _$$z.$$enum(["claude-instant-1.2", "claude-1.3", "claude-2.0", "claude-2.1", "claude-3-opus-20240229", "claude-3-sonnet-20240229", "claude-3-haiku-20240307", "claude-3-5-sonnet-20240620", "claude-3-5-sonnet-20241022"], {
+let E = _$$z.enum(["claude-instant-1.2", "claude-1.3", "claude-2.0", "claude-2.1", "claude-3-opus-20240229", "claude-3-sonnet-20240229", "claude-3-haiku-20240307", "claude-3-5-sonnet-20240620", "claude-3-5-sonnet-20241022"], {
   description: "The specified model is not an allowed anthropic chat model"
 });
-let x = _$$z.$$enum(["user", "assistant"]);
-_$$z.$$enum(["stop_sequence", "max_tokens"]);
+let x = _$$z.enum(["user", "assistant"]);
+_$$z.enum(["stop_sequence", "max_tokens"]);
 let S = _$$z.object({
   type: _$$z.literal("ephemeral")
 });
@@ -117,7 +117,7 @@ let w = _$$z.object({
   text: _$$z.string(),
   cache_control: S.optional()
 });
-let C = _$$z.$$enum(["image/jpeg", "image/png", "image/gif", "image/webp"]);
+let C = _$$z.enum(["image/jpeg", "image/png", "image/gif", "image/webp"]);
 let T = _$$z.object({
   type: _$$z.literal("base64"),
   media_type: C,
@@ -190,7 +190,7 @@ let B = _$$z.object({
   index: _$$z.number()
 });
 _$$z.discriminatedUnion("type", [L, F, M, j, U, B]);
-let W = _$$z.union([_$$z.$$enum(["anthropic-claude-3.7-sonnet", "anthropic-claude-4-sonnet", "gpt-4o-mini-2024-07-18"]), _$$z.string()]);
+let W = _$$z.union([_$$z.enum(["anthropic-claude-3.7-sonnet", "anthropic-claude-4-sonnet", "gpt-4o-mini-2024-07-18"]), _$$z.string()]);
 let K = _$$z.object({
   jsx: _$$z.string().optional(),
   reasoning: _$$z.string().optional(),
@@ -208,13 +208,13 @@ let Y = _$$z.object({
   systemPrompt: _$$z.string().optional(),
   reasoningTokens: _$$z.number().optional(),
   omitImage: _$$z.boolean().optional(),
-  userMessageFormat: _$$z.$$enum(["default", "first-party"]).optional(),
+  userMessageFormat: _$$z.enum(["default", "first-party"]).optional(),
   duplicateAndRun: _$$z.boolean().optional()
 });
 let q = _$$z.object({
   jsxSerializerOverrides: Y_.partial(),
   componentSerializerOverrides: Y_.partial(),
-  diffFormat: _$$z.$$enum(["aider", "jsxquery"]),
+  diffFormat: _$$z.enum(["aider", "jsxquery"]),
   previewIncrementalEdits: _$$z.boolean().optional(),
   generateReconciledJsx: _$$z.boolean().optional(),
   silentOnNoChanges: _$$z.boolean().optional(),
@@ -267,7 +267,7 @@ let X = _$$z.object({
 let Q = _$$z.object({
   systemPrompt: _$$z.string()
 });
-!function(e) {
+!function (e) {
   e.NO_CHANGES_MADE = "No changes made";
   e.SERIALIZATION_TIMEOUT = "Serialization timeout";
 }(r || (r = {}));
@@ -350,7 +350,7 @@ let en = _$$z.object({
   systemPrompt: _$$z.string()
 });
 let er = _$$z.object({
-  content: _$$z.$$enum(["0", "1"]),
+  content: _$$z.enum(["0", "1"]),
   rationale: _$$z.string()
 });
 _$$z.object({
@@ -566,7 +566,7 @@ _$$z.object({
 });
 let eO = _$$z.union([_$$z.object({
   type: _$$z.literal("TOPLEVEL"),
-  variant: _$$z.$$enum(["gpt", "llama", "gpt-fine-tuned", "llama-fine-tuned", "gpt-fine-tuned-v2", "llama-fine-tuned-v2", "gpt-fine-tuned-vision", "llama-fine-tuned-vision", "gpt-multi-stage-captioning", "llama-multi-stage-captioning", "ensemble", "ensemble-v2"]),
+  variant: _$$z.enum(["gpt", "llama", "gpt-fine-tuned", "llama-fine-tuned", "gpt-fine-tuned-v2", "llama-fine-tuned-v2", "gpt-fine-tuned-vision", "llama-fine-tuned-vision", "gpt-multi-stage-captioning", "llama-multi-stage-captioning", "ensemble", "ensemble-v2"]),
   topLevelFrames: _$$z.string(),
   unfilteredScene: _$$z.string(),
   imageBase64: _$$z.string().optional(),
@@ -660,7 +660,7 @@ let eK = _$$z.object({
     })
   }))
 });
-let eq = _$$z.$$enum(["chapter", "slide"]);
+let eq = _$$z.enum(["chapter", "slide"]);
 let e$ = _$$z.object({
   type: eq,
   content: _$$z.string(),
@@ -680,13 +680,13 @@ let eJ = _$$z.object({
   outline: eZ,
   layouts: eQ
 });
-let e0 = _$$z.$$enum(["presentation_title", "chapter_title", "agenda", "content", "comparison", "process", "summary", "closing", "text_focus", "metric_focus", "image_focus", "design_mockup_focus"]);
+let e0 = _$$z.enum(["presentation_title", "chapter_title", "agenda", "content", "comparison", "process", "summary", "closing", "text_focus", "metric_focus", "image_focus", "design_mockup_focus"]);
 let e1 = _$$z.object({
   layoutId: _$$z.string(),
   role: e0,
   content: _$$z.string()
 });
-_$$z.$$enum(["Arabic", "Chinese (Simplified)", "Chinese (Traditional)", "Dutch", "English (United Kingdom)", "English (United States)", "Tagalog", "French", "German", "Hindi", "Indonesian", "Italian", "Japanese", "Korean", "Malay", "Polish", "Portuguese (Brazil)", "Portuguese (Portugal)", "Russian", "Spanish (Latin America)", "Spanish (Spain)", "Swedish", "Tamil", "Thai", "Turkish", "Ukrainian", "Urdu", "Vietnamese"]);
+_$$z.enum(["Arabic", "Chinese (Simplified)", "Chinese (Traditional)", "Dutch", "English (United Kingdom)", "English (United States)", "Tagalog", "French", "German", "Hindi", "Indonesian", "Italian", "Japanese", "Korean", "Malay", "Polish", "Portuguese (Brazil)", "Portuguese (Portugal)", "Russian", "Spanish (Latin America)", "Spanish (Spain)", "Swedish", "Tamil", "Thai", "Turkish", "Ukrainian", "Urdu", "Vietnamese"]);
 let e2 = _$$z.discriminatedUnion("type", [_$$z.object({
   type: _$$z.literal("TRANSLATE"),
   language: _$$z.string()
@@ -733,7 +733,7 @@ let e7 = _$$z.lazy(() => _$$z.object({
   w: _$$z.number().optional(),
   h: _$$z.number().optional(),
   text: _$$z.string().optional(),
-  autolayout: _$$z.$$enum(["VERTICAL", "HORIZONTAL", "NONE"]).optional(),
+  autolayout: _$$z.enum(["VERTICAL", "HORIZONTAL", "NONE"]).optional(),
   children: _$$z.array(e7).optional()
 }));
 let e8 = _$$z.union([_$$z.object({
@@ -782,7 +782,7 @@ let ts = _$$z.object({
     width: _$$z.number()
   })
 });
-let tl = _$$z.$$enum(["STICKY", "SHAPE_WITH_TEXT", "TEXT", "SECTION"], {
+let tl = _$$z.enum(["STICKY", "SHAPE_WITH_TEXT", "TEXT", "SECTION"], {
   invalid_type_error: "Not an allowed type in slides"
 });
 let td = _$$z.object({
@@ -800,13 +800,13 @@ let tc = _$$z.object({
 _$$z.object({
   delta: _$$z.string()
 });
-let tu = _$$z.$$enum(["h1", "h2", "h3", "h4", "li", "p"]);
+let tu = _$$z.enum(["h1", "h2", "h3", "h4", "li", "p"]);
 let tp = _$$z.object({
   type: tu,
   content: _$$z.string()
 });
 let tm = _$$z.object({
-  slideType: _$$z.$$enum(["TITLE", "CHAPTER", "BODY"]),
+  slideType: _$$z.enum(["TITLE", "CHAPTER", "BODY"]),
   content: _$$z.array(tp)
 });
 let th = _$$z.object({
@@ -873,10 +873,10 @@ let tC = _$$z.object({
   height: _$$z.number(),
   objects: _$$z.array(tw)
 }).passthrough();
-let tT = _$$z.$$enum(["STICKY", "SHAPE_WITH_TEXT", "TEXT"], {
+let tT = _$$z.enum(["STICKY", "SHAPE_WITH_TEXT", "TEXT"], {
   invalid_type_error: "Not an allowed type in ideate"
 });
-let tk = _$$z.$$enum(["IMG"]);
+let tk = _$$z.enum(["IMG"]);
 let tR = _$$z.object({
   guid: _$$z.string(),
   type: tT,
@@ -926,7 +926,7 @@ let tM = _$$z.object({
 let tj = _$$z.object({
   userPrompt: _$$z.string(),
   imageContents: _$$z.array(_$$z.string()),
-  outputType: _$$z.$$enum(["image", "ideas"])
+  outputType: _$$z.enum(["image", "ideas"])
 });
 let tU = _$$z.object({
   data: _$$z.string()
@@ -968,7 +968,7 @@ let tX = _$$z.object({
 });
 let tQ = _$$z.object({
   type: _$$z.literal("field"),
-  fieldType: _$$z.$$enum(["PLAIN_TEXT", "SLUG", "IMAGE", "RICH_TEXT", "LINK"]).describe("Type of the field, based on the specifics of the content we are displaying in this collection"),
+  fieldType: _$$z.enum(["PLAIN_TEXT", "SLUG", "IMAGE", "RICH_TEXT", "LINK"]).describe("Type of the field, based on the specifics of the content we are displaying in this collection"),
   name: _$$z.string().describe("Name of the field"),
   reasoning: _$$z.string().describe("Reasoning for the field"),
   confidence: _$$z.number().min(0).max(1).describe("Confidence score between 0 and 1")
@@ -1055,9 +1055,9 @@ let is = _$$z.object({
 let io = _$$z.object({
   layout: _$$z.string()
 });
-let il = _$$z.$$enum(["minimal", "concise", "detailed", "extensive"]);
-let id = _$$z.$$enum(["auto", "pitch", "product_showcase", "product_management", "sales", "proposal", "research_report", "knowledge", "meeting", "portfolio"]);
-let ic = _$$z.$$enum(["chapter", "slide"]);
+let il = _$$z.enum(["minimal", "concise", "detailed", "extensive"]);
+let id = _$$z.enum(["auto", "pitch", "product_showcase", "product_management", "sales", "proposal", "research_report", "knowledge", "meeting", "portfolio"]);
+let ic = _$$z.enum(["chapter", "slide"]);
 let iu = _$$z.object({
   slideCount: _$$z.number().min(1).max(25),
   textDensity: il,
@@ -1182,7 +1182,7 @@ let ij = _$$z.object({
   urls: _$$z.record(_$$z.string())
 });
 let iU = _$$z.object({});
-!function(e) {
+!function (e) {
   e.VEO3 = "veo-3.0-generate-preview";
   e.VEO2 = "veo-2.0-generate-001";
   e.VEO3_FAST = "veo-3.0-fast-generate-preview";
@@ -1266,7 +1266,7 @@ function iK(e, t, i, r) {
     let u = await l.json();
     return i.parse(u);
   }
-  return async function(t, i, n) {
+  return async function (t, i, n) {
     try {
       return await a(t, i, n);
     } catch (t) {
@@ -1326,7 +1326,7 @@ function i$(e, t, i, r) {
       message: `Failed to fetch ${e}, no body`,
       status: c.status
     });
-    let m = c.body.pipeThrough(function() {
+    let m = c.body.pipeThrough(function () {
       let e;
       let t = new TextDecoder();
       return new TransformStream({
@@ -1355,7 +1355,7 @@ function i$(e, t, i, r) {
       }
     }));
     let h = c.headers.get("X-Cortex-Request-UUID");
-    (function(e, t) {
+    (function (e, t) {
       if (!t) return !1;
       let i = e.safeParse({
         requestUuid: t
@@ -1373,7 +1373,7 @@ function i$(e, t, i, r) {
     }))));
     return m.pipeThrough(new TransformStream({
       transform(e, t) {
-        let n = function(e) {
+        let n = function (e) {
           if (null == e || "object" != typeof e || !("trace" in e) || null == e.trace) return null;
           let t = _$$B.safeParse(e.trace);
           return t.success ? t.data : null;
@@ -1382,19 +1382,19 @@ function i$(e, t, i, r) {
           t.enqueue(e);
           return;
         }
-        (function(e, t) {
+        (function (e, t) {
           try {
             let i = e?.fileKey;
             if (!t || !i || "undefined" == typeof indexedDB) return;
             let n = "cortex-execution-traces";
             let r = "traces";
             let a = indexedDB.open(n, 1);
-            a.onupgradeneeded = function() {
+            a.onupgradeneeded = function () {
               this.result.objectStoreNames.contains(r) || this.result.createObjectStore(r, {
                 keyPath: "fileKey"
               });
             };
-            a.onsuccess = function() {
+            a.onsuccess = function () {
               let e = this.result.transaction(r, "readwrite").objectStore(r);
               let a = e.get(i);
               a.onsuccess = () => {
@@ -1458,7 +1458,7 @@ function i$(e, t, i, r) {
       highWaterMark: 100
     })));
   }
-  return async function(t, i, n) {
+  return async function (t, i, n) {
     try {
       return await a(t, i, n);
     } catch (t) {
@@ -1493,7 +1493,7 @@ function iQ(e) {
   return "string" == typeof t && ("Failed to fetch" === t || "TypeError: Load failed" === t || t.includes("NetworkError") || t.toLowerCase().includes("network error"));
 }
 function iJ(e, t) {
-  let i = function(e, t) {
+  let i = function (e, t) {
     let i = e.message;
     return "string" == typeof i ? i : t;
   }(e, t);
@@ -1507,7 +1507,7 @@ async function i0(e, t) {
   try {
     i = await t.json();
   } catch (e) {
-    return function(e, t) {
+    return function (e, t) {
       switch (e.status) {
         case 404:
           return new G1("service_busy", {
@@ -1539,7 +1539,7 @@ async function i0(e, t) {
     };
     return n;
   }
-  let r = function(e) {
+  let r = function (e) {
     if (null !== e && "object" == typeof e && e.error) return e.error;
   }(i);
   return null != r ? r : new G1("generic", {

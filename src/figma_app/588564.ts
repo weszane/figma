@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useCallback, useState } from "react";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { T as _$$T } from "../905/2124";
 import { md, fp, E3 } from "../figma_app/27355";
 import { tx, t as _$$t } from "../905/303541";
@@ -205,7 +205,7 @@ export function $$M0() {
             useClose: w
           });
         default:
-          xb(er.state);
+          throwTypeError(er.state);
       }
     case qy.ERROR:
       let ea;
@@ -267,7 +267,7 @@ export function $$M0() {
     case qy.CANCELLED:
       return null;
     default:
-      xb(state);
+      throwTypeError(state);
   }
 }
 export const w = $$M0;

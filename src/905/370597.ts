@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useMemo, useRef, useEffect, useCallback, forwardRef } from "react";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { lQ } from "../905/934246";
 import { t } from "../905/150656";
 import { T as _$$T } from "../905/336775";
@@ -184,7 +184,7 @@ export function $$ec2({
       case xA.COMMUNITY:
         return u;
       default:
-        xb(W.activeTab);
+        throwTypeError(W.activeTab);
     }
   })();
   let ea = useCallback(e => {
@@ -261,7 +261,7 @@ export function $$ec2({
                     case "input-text":
                       throw Error("Cannot run visual search on text input");
                     default:
-                      xb(currentSearch.input);
+                      throwTypeError(currentSearch.input);
                   }
                 },
                 value: p,
@@ -454,7 +454,7 @@ export function $$eg3(e) {
       t = `${e.input.file_key}-${e.input.node.guid}`;
       break;
     default:
-      xb(e.input);
+      throwTypeError(e.input);
   }
   let n = e.result.status;
   return `${i}-${t}-${n}`;

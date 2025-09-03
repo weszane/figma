@@ -3,7 +3,7 @@ import { to } from "../905/156213";
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useCallback, useState, useMemo } from "react";
 import { wA } from "../vendor/514228";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, r1, nB, wi, jk, Y9, hE } from "../figma_app/272243";
@@ -653,7 +653,7 @@ function V(e) {
       }) : "confirm_cancel" === t ? jsx(z, {
         ...e,
         scheduledCancellationDate: n
-      }) : void xb(t, "Unexpected step in OrgScheduleCancellationModal")
+      }) : void throwTypeError(t, "Unexpected step in OrgScheduleCancellationModal")
     })
   });
 }
@@ -782,4 +782,4 @@ export function $$Y1(e) {
   } : null : null;
 }
 export const a = $$H0;
-export const h = $$Y1; 
+export const h = $$Y1;

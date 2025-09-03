@@ -11,7 +11,7 @@ import { F } from '../905/844311';
 import { isDevEnvironment } from '../figma_app/169182';
 import { Bs, Jq, Sv, Zs } from '../figma_app/195123';
 import { Lg } from '../figma_app/257275';
-import { xb } from '../figma_app/465776';
+import { throwTypeError } from '../figma_app/465776';
 import { O4 } from '../vendor/338581';
 let n;
 class y {
@@ -61,7 +61,7 @@ class y {
           r ? n[i] = new v(i, r, t || {}) : n[i] = new v(i, W, t || {});
           break;
         default:
-          xb(i);
+          throwTypeError(i);
       }
       return n;
     }, {});
@@ -213,7 +213,7 @@ let $$T3 = D((e, t, r, n, i, l = 'dictionaryUrl') => {
         $D(_$$e.GROWTH_PLATFORM, new Error(p));
         return;
       default:
-        xb(n);
+        throwTypeError(n);
     }
   } else if (!b()) {
     switch (n) {
@@ -227,7 +227,7 @@ let $$T3 = D((e, t, r, n, i, l = 'dictionaryUrl') => {
         console.warn(`I18n Warning: ${p}`);
         return;
       default:
-        xb(n);
+        throwTypeError(n);
     }
   }
 });

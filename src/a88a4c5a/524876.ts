@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { memo, useState, useRef, useCallback, useEffect } from "react";
 import { wA, d4, Pj } from "../vendor/514228";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { K as _$$K } from "../905/443068";
 import { $n } from "../905/521428";
 import { N as _$$N } from "../905/7587";
@@ -134,7 +134,7 @@ let ea = e => {
     case Wn.FAILED_TO_UPLOAD:
       return _$$t("comments.upload_error.failed_to_upload", e.params);
     default:
-      xb(e);
+      throwTypeError(e);
   }
 };
 export function $$ed1(e) {

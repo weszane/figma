@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { useRef, useCallback, forwardRef, useImperativeHandle } from "react";
 import { d4 } from "../vendor/514228";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { nzw, qmM, miS, cfv } from "../figma_app/763686";
 import { parsePxInt } from "../figma_app/783094";
 import { XN } from "../figma_app/778880";
@@ -33,7 +33,7 @@ export function $$m4() {
   return "whiteboard" === n ? t ? 40 : i && XN ? 40 : r ? 20 + h / 2 : qmM?.shouldRenderTableUiForSelection() !== miS.HIDE ? 20 + h / 2 : 16 : "cooper" === n ? e ? 40 : 30 : 8;
 }
 export function $$f3() {
-  return d4((e) => e.mirror.appModel.hyperlinkLocation);
+  return d4(e => e.mirror.appModel.hyperlinkLocation);
 }
 export function $$g1(e, t, i, r) {
   switch (r) {
@@ -46,7 +46,7 @@ export function $$g1(e, t, i, r) {
     case cfv.RIGHT:
       return t > e.x ? cfv.RIGHT : cfv.LEFT;
     default:
-      xb(r);
+      throwTypeError(r);
   }
 }
 export function $$_2(e) {
@@ -72,11 +72,11 @@ export function $$_2(e) {
     }, 0));
   }, [e]);
   return {
-    markSelectionChanged: useCallback((e) => {
+    markSelectionChanged: useCallback(e => {
       Object.keys(t.current.lastSelection).length && (t.current.didSelectionChange = !0, i());
       t.current.lastSelection = e;
     }, [i]),
-    markPositionChanged: useCallback((e) => {
+    markPositionChanged: useCallback(e => {
       let {
         current
       } = t;

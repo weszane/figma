@@ -54,7 +54,7 @@ let g = u.extend({
 });
 let $$f1 = z.union([h, m, g]);
 let $$_3 = z.object({
-  type: z.$$enum(["vector", "vector-path"]),
+  type: z.enum(["vector", "vector-path"]),
   data: z.string(),
   nodeIds: z.array(z.string())
 });

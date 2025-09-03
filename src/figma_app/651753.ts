@@ -1,5 +1,5 @@
 import { useState, useCallback } from "react";
-import { B1 } from "../figma_app/465776";
+import { assertNotNullish } from "../figma_app/465776";
 import { rXF, Z_n, JTp } from "../figma_app/763686";
 import { sH } from "../905/871411";
 import { sH as _$$sH } from "../905/805904";
@@ -145,7 +145,7 @@ export function $$u2(e) {
       }
       r.targetVariableData && (r.targetVariableData = d(r.targetVariableData.type, r.targetVariableData.resolvedType, r.targetVariableData.value));
     } else if ("SET_VARIABLE_MODE" === r.connectionType) {
-      B1(r.targetVariableModeID, "targetVariableModeID");
+      assertNotNullish(r.targetVariableModeID, "targetVariableModeID");
       r.targetVariableModeID = sH(r.targetVariableModeID) || void 0;
     } else if ("CONDITIONAL" === r.connectionType && r.conditionalActions) {
       var n = [];

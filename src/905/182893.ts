@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useRef, createRef, useMemo, useCallback } from "react";
 import { wA } from "../vendor/514228";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { bL, l9, mc, c$ } from "../905/493196";
 import { h as _$$h } from "../905/270045";
 import { fp, md } from "../figma_app/27355";
@@ -178,7 +178,7 @@ function k(e) {
     case "last_modified":
       return t("fragment_search.sort_last_modified");
     default:
-      xb(e);
+      throwTypeError(e);
   }
 }
 export const s = $$w0;

@@ -1,4 +1,4 @@
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { MEW, glU } from "../figma_app/763686";
 import { zl } from "../figma_app/27355";
@@ -32,7 +32,7 @@ export function $$A0(e, t, i, r) {
           error: void 0
         };
       default:
-        xb(e);
+        throwTypeError(e);
     }
   }(e);
   az.trackDefinedMetric("file_import.pdf_import_completed", {
@@ -63,7 +63,7 @@ export async function $$y1(e, t, i, o) {
     case MEW.ERROR_OTHER:
       throw new OL.GenericPdfError(o);
     default:
-      xb(y);
+      throwTypeError(y);
   }
   let {
     images,
@@ -72,7 +72,7 @@ export async function $$y1(e, t, i, o) {
   let I = !1;
   try {
     !function (e) {
-      let t = e.map((e) => e.nodeIds.map((t) => ({
+      let t = e.map(e => e.nodeIds.map(t => ({
         nodeId: t,
         imageHash: e.sha1Hash
       }))).reduce((e, t) => e.concat(t), []);
@@ -83,7 +83,7 @@ export async function $$y1(e, t, i, o) {
     $D(_$$e.FIGJAM, e);
   }
   let E = glU.getScene();
-  images.forEach((e) => {
+  images.forEach(e => {
     Jr().forgetImage(e.sha1Hash);
   });
   return {

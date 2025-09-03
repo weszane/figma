@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useLayoutEffect, forwardRef, useRef, useImperativeHandle, useMemo, useCallback } from "react";
 import { d4 } from "../vendor/514228";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { d as _$$d } from "../905/976845";
 import { E as _$$E } from "../905/632989";
@@ -248,7 +248,7 @@ function ea({
         });
       }
     default:
-      xb(e);
+      throwTypeError(e);
   }
 }
 var es = (e => (e[e.NONE = 0] = "NONE", e[e.HIGHLIGHTED = 1] = "HIGHLIGHTED", e))(es || {});
@@ -978,7 +978,7 @@ function ey({
     case Yc.CMS_FIELDS:
       return null;
     default:
-      xb(e);
+      throwTypeError(e);
   }
 }
 function eb({

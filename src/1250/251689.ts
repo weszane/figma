@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { createContext, useContext, useState } from "react";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { $n } from "../905/521428";
 import { sx } from "../905/449184";
 import { h as _$$h } from "../905/207101";
@@ -213,7 +213,7 @@ function U({
         onAction?.();
         break;
       default:
-        xb(e);
+        throwTypeError(e);
     }
   };
   return l ? jsxs("div", {
@@ -272,7 +272,7 @@ export function $$q0({
   let [n, o] = useState(null);
   let [g, f] = useState(0);
   let [h, b] = useState(new Set());
-  let x = function(e) {
+  let x = function (e) {
     let t = X$("useScriptInitOptions").unwrapOr(null);
     let n = t?.key;
     if (!e || !n) return null;
@@ -298,7 +298,7 @@ export function $$q0({
             value: "YOUR_ORG_ID"
           };
         default:
-          xb(type);
+          throwTypeError(type);
       }
     })();
     let s = (() => {
@@ -312,7 +312,7 @@ export function $$q0({
       }
     })();
     return {
-      apiToken: function(e) {
+      apiToken: function (e) {
         let t = e.type;
         switch (t) {
           case "generate-token":
@@ -320,7 +320,7 @@ export function $$q0({
           case "use-existing-token":
             return "YOUR_API_TOKEN";
           default:
-            xb(t);
+            throwTypeError(t);
         }
       }(e),
       planIdentifier: o,
@@ -458,7 +458,7 @@ React.render(<App>,..)` : "";
       case null:
         return [];
       default:
-        xb(e);
+        throwTypeError(e);
     }
   })();
   return jsx(fu, {
@@ -472,7 +472,7 @@ React.render(<App>,..)` : "";
         title: e.title,
         description: e.description,
         component: e.component ? e.component() : void 0,
-        onAction: () => function(e, t) {
+        onAction: () => function (e, t) {
           b(t => (t.add(e.id), t));
           let n = t + 1;
           n < g || f(n);
@@ -481,4 +481,4 @@ React.render(<App>,..)` : "";
     })
   });
 }
-export const o = $$q0; 
+export const o = $$q0;

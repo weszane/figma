@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { memo, PureComponent, useContext, useCallback, forwardRef, useState, useMemo, useRef, useEffect, useId, createRef } from "react";
 import { Ng, wA, d4 } from "../vendor/514228";
-import { KF } from "../figma_app/465776";
+import { debug } from "../figma_app/465776";
 import { t as _$$t } from "../905/150656";
 import { d as _$$d } from "../905/976845";
 import { K as _$$K } from "../905/443068";
@@ -2960,7 +2960,7 @@ class iS extends PureComponent {
       getFeatureFlags().ce_properties_panel_tracking && sx("editor_type_panel_change", {
         key: "fontFamily"
       });
-      KF(!(void 0 === e && void 0 === t), "onFontFamilyChange called without a fontFamily or previewFontFamily");
+      debug(!(void 0 === e && void 0 === t), "onFontFamilyChange called without a fontFamily or previewFontFamily");
       this.maybeUnsetVariableTab();
       PK({
         fontFamily: e,

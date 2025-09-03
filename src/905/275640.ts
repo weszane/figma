@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { KF } from "../figma_app/465776";
+import { debug } from "../figma_app/465776";
 import { R } from "../905/103090";
 import { Y5 } from "../figma_app/455680";
 import { oV } from "../905/216495";
@@ -16,7 +16,7 @@ export function $$c4(...e) {
     let i = t.mirror.selectionProperties;
     let n = {};
     for (let t of e) {
-      KF(i[t] !== oV, `Mixed value for ${t} found in useNonMixedSelectionPropertyValues. Use useSelectionPropertyValues and handle the MIXED value instead.`);
+      debug(i[t] !== oV, `Mixed value for ${t} found in useNonMixedSelectionPropertyValues. Use useSelectionPropertyValues and handle the MIXED value instead.`);
       n[t] = i[t];
     }
     return n;
@@ -36,7 +36,7 @@ export function $$p1(...e) {
     let n = {};
     for (let a of e) {
       i ? n[a] = t.mirror.selectedStyleProperties[a] : n[a] = t.mirror.selectionProperties[a];
-      KF(n[a] !== oV, `Mixed value for ${a} found in useNonMixedSelectionPropertyValues. Use useSelectionPropertyValues and handle the MIXED value instead.`);
+      debug(n[a] !== oV, `Mixed value for ${a} found in useNonMixedSelectionPropertyValues. Use useSelectionPropertyValues and handle the MIXED value instead.`);
     }
     return n;
   });
@@ -58,7 +58,7 @@ export function $$f8(e) {
 export function $$_3(e) {
   return R(t => {
     let i = t.mirror.selectionProperties[e];
-    KF(i !== oV, `Mixed value for ${e} found in useNonMixedSelectionPropertyValue. Use useSelectionPropertyValue and handle the MIXED value instead.`);
+    debug(i !== oV, `Mixed value for ${e} found in useNonMixedSelectionPropertyValue. Use useSelectionPropertyValue and handle the MIXED value instead.`);
     return i;
   });
 }

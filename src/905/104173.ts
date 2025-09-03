@@ -1,4 +1,4 @@
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { A } from "../905/17894";
 import { k } from "../905/22009";
 import { nT } from "../905/448740";
@@ -28,7 +28,7 @@ export function $$p3(e, t) {
     case FTemplateCategoryType.FIGMAKE_TEMPLATE:
       return k.Editors.FIGMAKE;
     default:
-      xb(t);
+      throwTypeError(t);
   }
   if (e) switch (e) {
     case FFileType.DESIGN:
@@ -53,7 +53,7 @@ export function $$p3(e, t) {
     case FW.BUZZ:
       return k.Editors.COOPER;
     default:
-      xb(e);
+      throwTypeError(e);
   }
 }
 export function $$m0(e) {

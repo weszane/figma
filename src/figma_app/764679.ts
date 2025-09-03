@@ -1,7 +1,7 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { memo, useState } from "react";
 import { wA } from "../vendor/514228";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { lQ } from "../905/934246";
 import { getFeatureFlags } from "../905/601108";
 import { sx } from "../905/449184";
@@ -24,7 +24,7 @@ import { zF } from "../figma_app/45218";
 import { wN, nT } from "../figma_app/53721";
 import { FW, Pe } from "../figma_app/155287";
 import { C as _$$C } from "../905/180";
-import { j as _$$j } from "../905/834956";
+import { noop } from "../905/834956";
 import { it } from "../905/504727";
 import { S as _$$S } from "../905/404161";
 import { dn } from "../figma_app/994403";
@@ -189,7 +189,7 @@ function G(e) {
             case FFileType.FIGMAKE:
               return y1.DESIGN;
             default:
-              xb(e.editor_type);
+              throwTypeError(e.editor_type);
           }
         }(e),
         fileName: e.name,
@@ -284,7 +284,7 @@ export function $$H1(e, t, r) {
         case FW.BUZZ:
           return nT.Cooper;
         default:
-          xb(e);
+          throwTypeError(e);
       }
     }))).filter(e => null != e);
     let H = B.map(t => ({
@@ -308,7 +308,7 @@ export function $$H1(e, t, r) {
             case nT.Illustration:
               return y1.DESIGN;
             default:
-              xb(e);
+              throwTypeError(e);
           }
         }(t),
         onClick: () => {
@@ -358,7 +358,7 @@ export function $$H1(e, t, r) {
       j ? t.push(W) : t.push(z);
       return t;
     })();
-    return jsx(_$$j, {
+    return jsx(noop, {
       autoHeight: !0,
       className: qN,
       dispatch: p,

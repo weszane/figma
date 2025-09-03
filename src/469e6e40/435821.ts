@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { wA } from "../vendor/514228";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { sx } from "../905/449184";
 import { B } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -14,7 +14,7 @@ import { sx as _$$sx } from "../905/941192";
 import { FRequestStatusType } from "../figma_app/191312";
 import { Ju } from "../905/102752";
 import { g as _$$g } from "../905/356410";
-import { d_ } from "../figma_app/918700";
+import { utilityNoop } from "../figma_app/918700";
 import { A as _$$A } from "../5724/663128";
 import { to } from "../905/156213";
 import { Ib } from "../905/129884";
@@ -70,7 +70,7 @@ let w = Ju(function ({
   }) : tx("community.detail_view.data_security_modal_explanation_plugin", {
     assessmentProgramLink: i
   });
-  return jsxs(d_, {
+  return jsxs(utilityNoop, {
     size: 600,
     title: _$$t("community.detail_view.data_security"),
     children: [jsx(s_, {
@@ -212,7 +212,7 @@ function I(e) {
         value: question.value ?? ""
       });
     default:
-      xb(question);
+      throwTypeError(question);
   }
 }
 var $$O0 = (e => (e.COMMUNITY_DETAIL = "community_detail", e.ADMIN_REVIEW = "admin_review", e.ADMIN_MANAGE = "admin_manage", e))($$O0 || {});
@@ -241,7 +241,7 @@ export function $$L1({
       })]
     }) : null : status === FRequestStatusType.APPROVED ? tx("community.badge.extension_security_approved") : status === FRequestStatusType.PENDING ? "admin_manage" === t ? tx("community.badge.extension_security_updated_on", {
       date: updatedAt
-    }) : tx("community.badge.extension_security_pending") : void xb(status);
+    }) : tx("community.badge.extension_security_pending") : void throwTypeError(status);
   }(e, t);
   if (!m) return null;
   let p = e.status === FRequestStatusType.REJECTED ? jsx(D, {

@@ -42,7 +42,7 @@ import { FX, St } from "../figma_app/558805";
 import { oA } from "../figma_app/812915";
 import { Oc } from "../figma_app/552876";
 import { H as _$$H2 } from "../1156/461363";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { N as _$$N2 } from "../905/438674";
 import { $ as _$$$ } from "../905/692618";
 import { Yy } from "../figma_app/59509";
@@ -1215,7 +1215,7 @@ function tW() {
           title: null
         };
       default:
-        xb(e);
+        throwTypeError(e);
     }
   }(i, s?.name || a?.name || "");
   return jsx(fu, {

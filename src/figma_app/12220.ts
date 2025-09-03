@@ -1,4 +1,4 @@
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { getFeatureFlags } from "../905/601108";
 import { cm } from "../figma_app/815945";
 import { L4 } from "../figma_app/819288";
@@ -231,7 +231,7 @@ export function $$P17(e, t, r, i) {
         case kT.FEED_POST:
           return b1;
         default:
-          xb(e);
+          throwTypeError(e);
       }
     }(i).getPinSize(r).width;
     let l = o + $$g9.x + b(a) + 25;

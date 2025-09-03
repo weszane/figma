@@ -1,6 +1,6 @@
 import { UN } from "../905/700578";
 import { c as _$$c } from "../905/94678";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { J, O as _$$O } from "../905/223510";
 import { ep, GN, Hd, L_, rB, j3, WG, _j, _e, go, fy, R0, Vv, O7, QJ, hM, xb as _$$xb, Ho, bi } from "../905/581923";
 import { C as _$$C, $x, vR, VV, yu, Se, vh, iR } from "../905/926939";
@@ -335,7 +335,7 @@ function E(e, t, i) {
               break;
             }
           default:
-            xb(i);
+            throwTypeError(i);
         }
         return null;
       }({
@@ -417,7 +417,7 @@ function E(e, t, i) {
                   };
                 }
               default:
-                xb(i);
+                throwTypeError(i);
             }
           }({
             usageProp: r,
@@ -467,7 +467,7 @@ function E(e, t, i) {
           };
           break;
         default:
-          xb(t);
+          throwTypeError(t);
       }
     }
     for (let e of E) {
@@ -554,7 +554,7 @@ function E(e, t, i) {
                 break;
               }
             default:
-              xb(s);
+              throwTypeError(s);
           }
         }(e.key, i.typeRepr, r, t);
         let s = x(i.typeRepr);

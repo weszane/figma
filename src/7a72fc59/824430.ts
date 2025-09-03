@@ -145,7 +145,7 @@ import { q as _$$q3 } from "../905/524117";
 import { j as _$$j3 } from "../905/523935";
 import { bj } from "../905/420347";
 import { ZA, Wv } from "../figma_app/633080";
-import { j as _$$j4 } from "../5430/262192";
+import { noop } from "../5430/262192";
 import { oW as _$$oW } from "../905/675859";
 import { x as _$$x2 } from "../905/587214";
 import { fG, NH } from "../figma_app/973927";
@@ -166,7 +166,7 @@ import { X as _$$X2 } from "../1250/115566";
 import { yH } from "../1250/461992";
 import { Uf } from "../figma_app/223206";
 import { EI as _$$EI } from "../figma_app/21029";
-import { d_ as _$$d_ } from "../figma_app/918700";
+import { utilityNoop } from "../figma_app/918700";
 import { p as _$$p4 } from "../figma_app/353099";
 import { P as _$$P2 } from "../905/175083";
 import { k9 } from "../905/19536";
@@ -204,7 +204,7 @@ import { R as _$$R5 } from "../9410/46722";
 import { i as _$$i2 } from "../905/433860";
 import { $ as _$$$3 } from "../905/411599";
 import { X as _$$X3 } from "../905/647103";
-import { j as _$$j7 } from "../905/253683";
+import { noop } from "../905/253683";
 import { s as _$$s2 } from "../905/702260";
 import { W as _$$W2 } from "../905/378870";
 import { y as _$$y } from "../905/292472";
@@ -449,13 +449,13 @@ import { A as _$$A20 } from "../642/502017";
 import { Kd, n8 as _$$n7 } from "../figma_app/121043";
 import { v as _$$v5 } from "../6388/254246";
 import { ie as _$$ie, Z as _$$Z3 } from "../figma_app/524655";
-import { xb as _$$xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { R as _$$R8 } from "../figma_app/941983";
 import { Xo } from "../figma_app/482495";
 import { L as _$$L5 } from "../642/269105";
 import { Y as _$$Y4 } from "../8618/378618";
 import { P as _$$P7 } from "../905/201667";
-import { j as _$$j8 } from "../642/671529";
+import { noop } from "../642/671529";
 import { o as _$$o3 } from "../642/854123";
 import { tZ as _$$tZ } from "../figma_app/960196";
 import { F as _$$F9 } from "../905/427107";
@@ -509,7 +509,7 @@ class h extends Error {
     this.name = "ExportCanceledError";
   }
 }
-!function(e) {
+!function (e) {
   e.AVC_MAIN_LEVEL_4 = "avc1.4d0028";
   e.AVC_HIGH_LEVEL_5 = "avc1.640032";
   e.AVC_HIGH_LEVEL_6 = "avc1.64003c";
@@ -543,7 +543,7 @@ function K(e, t) {
   return n;
 }
 function W() {
-  let e = function() {
+  let e = function () {
     let e = Pc();
     let t = kG();
     let n = Ci();
@@ -568,7 +568,7 @@ function W() {
 function H({
   buzzFrameIds: e
 }) {
-  let t = function(e) {
+  let t = function (e) {
     let t = useCallback((e, t) => e.nodeId ? {
       nodeId: e.nodeId,
       position: t
@@ -639,7 +639,7 @@ function Y({
   let l = _$$eY();
   let r = bd() === e;
   let i = useMemo(() => K(e, l), [e, l]);
-  let [s, c, u] = function(e, t, n, l) {
+  let [s, c, u] = function (e, t, n, l) {
     let [r, i] = useState("dormant");
     let [o, s, c] = _$$J2([]);
     let [u, x, p] = _$$J2([]);
@@ -666,7 +666,7 @@ function Y({
       let t = f[e.nodeId]?.currentVolume;
       return null != t ? t : 1;
     }), [b, f]);
-    let y = function(e, t, n, l, r, i, o, s) {
+    let y = function (e, t, n, l, r, i, o, s) {
       let d = useRef(i);
       let c = useRef(o);
       return useCallback(async () => {
@@ -712,15 +712,15 @@ function Y({
       _$$PN();
       return e;
     }, []);
-    useEffect(() => () => { }, [E]);
+    useEffect(() => () => {}, [E]);
     useEffect(() => {
       E.updateUnderlyingVideoState(s, r, y);
     }, [s, r, y, E]);
     let v = useCallback(({
       preserveEndedState: t
     } = {
-        preserveEndedState: !1
-      }) => {
+      preserveEndedState: !1
+    }) => {
       function n() {
         b.forEach(e => {
           let t = UN().get(e.nodeId);
@@ -750,7 +750,7 @@ function Y({
     }, [E, m, o, u, e, i, g, c, p, b]);
     let T = useRef(v);
     T.current = v;
-    (function(e, t, n, l, r, i) {
+    (function (e, t, n, l, r, i) {
       let o = useRef(i);
       o.current = i;
       useEffect(() => {
@@ -1018,7 +1018,7 @@ let el = (e, t) => {
   useEffect(() => {
     if (!n || 0 === e.mp4Configs.length) return;
     let r = e => {
-      CZ(e, "EXPORT_COMPLETED") && e.data.data.error && function(e) {
+      CZ(e, "EXPORT_COMPLETED") && e.data.data.error && function (e) {
         let t = new h();
         return e.name === t.name;
       }(e.data.data.error) && (t(), l(!1), window.removeEventListener("message", r));
@@ -1117,7 +1117,7 @@ function eP() {
 }
 let eO = _$$um({
   activePanel: null
-}, function(e, t) {
+}, function (e, t) {
   switch (t.type) {
     case "open_panel":
       ez(t.payload.panel) ? DN() : _$$u2();
@@ -1381,7 +1381,7 @@ function tv() {
   let e = Fj(isProdCluster() ? "cooper_use_case_to_categories_and_resource_ids_map" : "cooper_use_case_to_categories_and_resource_ids_map_staging");
   let t = Fj(isProdCluster() ? "buzz_use_case_to_categories_and_shelf_ids_map" : "buzz_use_case_to_categories_and_shelf_ids_map_staging");
   let n = Fj(isProdCluster() ? "cooper_explore_resource_ids" : "cooper_explore_resource_ids_staging");
-  return useMemo(() => function(e, t, n) {
+  return useMemo(() => function (e, t, n) {
     let l = D7();
     if (isLocalCluster()) return {
       exploreResourceIds: [],
@@ -1472,7 +1472,7 @@ function tz({
   }, ...Object.entries(i).map(([e]) => ({
     type: _$$k2.TEXT,
     id: mF.USE_CASE,
-    text: function(e) {
+    text: function (e) {
       switch (e) {
         case "SOCIAL":
           return _$$t("cooper.templates.use_case.social");
@@ -2262,7 +2262,7 @@ function nm({
   let {
     numColumns,
     containerRef
-  } = function() {
+  } = function () {
     let e = useRef(null);
     let [t, n] = useState(4);
     useEffect(() => {
@@ -2593,7 +2593,7 @@ function nH({
     headerRef,
     isHeaderStickied,
     setIsHeaderStickied
-  } = function() {
+  } = function () {
     let [e, t] = useState(!0);
     let [n, l] = useState(!1);
     let r = useRef(null);
@@ -2818,7 +2818,7 @@ function nQ({
     },
     allowDroppingOnLockedTemplate: !0,
     afterSuccessfulInsert: () => {
-      r && _$$j4.addResourceUse({
+      r && noop.addResourceUse({
         resourceId: r
       });
       h(!1);
@@ -3350,7 +3350,7 @@ function lE() {
   }) : null;
 }
 function lv() {
-  let e = function() {
+  let e = function () {
     let {
       exploreResourceIds
     } = tv();
@@ -3371,7 +3371,7 @@ function lv() {
       className: na,
       children: [t && n() && jsx(lu, {
         onMakeATemplateSelected: l,
-        onStartFromDesignSelected: function() {
+        onStartFromDesignSelected: function () {
           s({
             type: mF.IMPORT_FROM_DESIGN
           });
@@ -3642,12 +3642,12 @@ function lz({
     isFetchingNextPage: R,
     fetchNextPage: L
   } : {
-      assets: T,
-      status: I,
-      hasNextPage: S,
-      isFetchingNextPage: k,
-      fetchNextPage: C
-    };
+    assets: T,
+    status: I,
+    hasNextPage: S,
+    isFetchingNextPage: k,
+    fetchNextPage: C
+  };
   let D = "loading" === status || j && "loading" === v;
   let $ = b?.dimensions ? {
     width: b.dimensions.x,
@@ -3657,7 +3657,7 @@ function lz({
     dimensions: $,
     assets
   }) : assets ?? void 0;
-  let G = function({
+  let G = function ({
     shuffledCuratedAssets: e,
     shuffledFirstPartyAssets: t,
     queryCuratedAssets: n,
@@ -3966,7 +3966,7 @@ function lV({
   let {
     yourTemplates,
     isLoading
-  } = function({
+  } = function ({
     plan: e
   }) {
     let {
@@ -4224,7 +4224,7 @@ function lY({
 function lq({
   useCase: e
 }) {
-  let t = function(e) {
+  let t = function (e) {
     let t = D7();
     let {
       useCaseMap,
@@ -4233,11 +4233,11 @@ function lq({
     let r = (t ? useCaseMapV2 : useCaseMap)[e]?.category_slugs;
     return r && r.length > 0 ? r[0] : void 0;
   }(e);
-  let n = function(e) {
+  let n = function (e) {
     let t = tk();
     return t[e]?.resource_ids || [];
   }(e);
-  let l = function(e) {
+  let l = function (e) {
     let t = tC();
     let n = t[e]?.shelf_ids;
     return n && n.length > 0 ? n[0] : void 0;
@@ -4385,7 +4385,7 @@ function l5({
   children: e
 }) {
   let t = g5("modal");
-  return jsx(_$$d_, {
+  return jsx(utilityNoop, {
     className: "cooper_template_modal--templateModal--s4Z-R",
     size: parsePxInt(CVP),
     tintedModalBackground: !0,
@@ -4512,7 +4512,7 @@ let rE = {
     $$css: !0
   }
 };
-let rv = forwardRef(function({
+let rv = forwardRef(function ({
   children: e
 }, t) {
   return jsx("div", {
@@ -4521,7 +4521,7 @@ let rv = forwardRef(function({
     children: e
   });
 });
-let rT = forwardRef(function({
+let rT = forwardRef(function ({
   children: e
 }, t) {
   return jsx("div", {
@@ -4719,7 +4719,7 @@ function rM({
     })
   });
 }
-let rB = memo(function(e) {
+let rB = memo(function (e) {
   return jsx("svg", {
     width: "24",
     height: "24",
@@ -4734,7 +4734,7 @@ let rB = memo(function(e) {
     })
   });
 });
-let rW = memo(function(e) {
+let rW = memo(function (e) {
   return jsx("svg", {
     width: "24",
     height: "24",
@@ -4937,7 +4937,7 @@ function iI(e) {
   return e.toLowerCase().includes("italic");
 }
 function iS() {
-  let e = function() {
+  let e = function () {
     let e = ik();
     return e ? "MIXED_PAINT" === e.type ? _$$oV : "IMAGE" === e.paint.type ? [e.paint, e.index] : void 0 : e;
   }();
@@ -4945,7 +4945,7 @@ function iS() {
 }
 function ik() {
   let [e] = _$$lJ2("fillsType");
-  return function(e, t, n) {
+  return function (e, t, n) {
     if (!t) return;
     if (gl(t)) return {
       type: "MIXED_PAINT",
@@ -5164,7 +5164,7 @@ let ok = "font_picker--check--pO21Q";
 let oC = "font_picker--badgeContainer--WZyXG";
 let oA = "font_picker--newBadge--X0MRm text--fontPos9--naThA text--_fontBase--QdLsd";
 let oP = "font-set-dropdown";
-let oO = memo(function({
+let oO = memo(function ({
   dispatch: e,
   recordingKey: t,
   currentFont: n,
@@ -5580,7 +5580,7 @@ function oM({
     })
   });
 }
-let oF = memo(function({
+let oF = memo(function ({
   fontItem: e,
   index: t,
   isSelected: n,
@@ -5827,9 +5827,9 @@ function o7({
     selectStyle(e) {
       l(e, u);
     },
-    showStyleDetails(e, t, n) { },
-    showStyleContextMenu(e, t) { },
-    deleteStyle(e) { },
+    showStyleDetails(e, t, n) {},
+    showStyleContextMenu(e, t) {},
+    deleteStyle(e) {},
     stylePreviewShown
   }), [l, u, stylePreviewShown]);
   let R = _$$F5.useCombobox({
@@ -5898,7 +5898,7 @@ function an({
   let t = createRef();
   let {
     fontFamily
-  } = function({
+  } = function ({
     inheritTextStyleKey: e
   }) {
     let {
@@ -6372,7 +6372,7 @@ function a_({
       disabled: e === iy.DISABLED,
       onClick: () => Y5.triggerActionInUserEditScope("toggle-bold"),
       recordingKey: "cooperInlineBoldControl",
-      children: jsx(_$$j7, {})
+      children: jsx(noop, {})
     }), " "]
   });
 }
@@ -6491,8 +6491,8 @@ function aN({
   idealMaxWidth: e
 }) {
   let [t, n] = useState("DEFAULT");
-  let l = function() {
-    let e = [function() {
+  let l = function () {
+    let e = [function () {
       let e = PE();
       let t = MK(JT.SHORTEN_TEXT);
       let n = MK(JT.REWRITE_TEXT);
@@ -6566,7 +6566,7 @@ function aN({
         }]
       });
       return e ? r : null;
-    }(), ...function() {
+    }(), ...function () {
       let e = ii();
       let t = PE();
       let n = Zr(JT.EDIT_IMAGE);
@@ -6640,7 +6640,7 @@ function aN({
   let {
     topLevelActions,
     remainingSections
-  } = function(e, t) {
+  } = function (e, t) {
     let n = aR({
       actions: [{
         type: 0,
@@ -6653,7 +6653,7 @@ function aN({
         trackingId: _$$_2.SelectMatching
       }]
     });
-    let l = function() {
+    let l = function () {
       let {
         anyCooperFrames
       } = Cl();
@@ -6671,7 +6671,7 @@ function aN({
       });
       return anyCooperFrames ? null : t;
     }();
-    let r = function() {
+    let r = function () {
       let e = kl("inheritTextStyleKey");
       let t = aI();
       let n = _$$d(e => e.fonts);
@@ -6680,7 +6680,7 @@ function aN({
       let i = [];
       e || r.bold === iy.DISABLED || i.push({
         type: 0,
-        icon: jsx(_$$j7, {}),
+        icon: jsx(noop, {}),
         label: _$$t("cooper.inline_menu.bold"),
         fullscreenAction: "toggle-bold",
         execute: () => {
@@ -6721,7 +6721,7 @@ function aN({
       });
       return t ? c : null;
     }();
-    let i = [n, l, r, function() {
+    let i = [n, l, r, function () {
       let e = GV();
       let t = aR({
         actions: [{
@@ -6746,7 +6746,7 @@ function aN({
       });
       let n = vK();
       return !e[ibQ.TYPE_ITEM] || n ? null : t;
-    }(), function(e) {
+    }(), function (e) {
       let {
         anyCooperFrames,
         onlyDetached
@@ -6787,7 +6787,7 @@ function aN({
           trackingId: _$$_2.LayoutAlignmentEntryPoint
         }]
       });
-    }(t), function() {
+    }(t), function () {
       let e = kl("locked");
       let t = !!(gl(e) || e);
       let n = "lock-selected-nodes";
@@ -7200,7 +7200,7 @@ function aH({
     })
   });
 }
-let aq = forwardRef(function({
+let aq = forwardRef(function ({
   paint: e,
   ...t
 }, n) {
@@ -7422,7 +7422,7 @@ function a7() {
 function a8({
   recordingKey: e
 }) {
-  let t = function() {
+  let t = function () {
     let {
       anyCooperFrames
     } = Cl();
@@ -7437,7 +7437,7 @@ function a8({
       return l;
     }, [t, n, anyCooperFrames]);
   }();
-  let n = function({
+  let n = function ({
     recordingKey: e
   }) {
     return useMemo(() => ({
@@ -7743,7 +7743,7 @@ function sh({
   let s = e || i;
   let d = sx(sc());
   let c = sf.filter(e => !d.some(t => Vm(e, t.color)));
-  let u = function(e, t, n) {
+  let u = function (e, t, n) {
     let l = !ib(e, t.map(e => e?.color).filter(isNotNullish)) && !ib(e, n);
     return useMemo(() => l && e && hS(e) && !ig(e) ? [...t].concat(e) : t, [l, e, t]);
   }(t, d, c);
@@ -8145,7 +8145,7 @@ function sR({
   let n = Ep();
   let l = VG(n);
   let r = useRef(null);
-  let i = useCallback(function(t) {
+  let i = useCallback(function (t) {
     let n = Eh(t, l);
     if (!n || !e) return;
     let r = n.createPattern(_$$L3, "repeat");
@@ -8200,8 +8200,8 @@ function sP() {
     activePanel,
     togglePanel
   } = ew();
-  return !function() {
-    let e = function() {
+  return !function () {
+    let e = function () {
       let e = ik();
       return e ? "MIXED_PAINT" === e.type ? _$$oV : "VIDEO" === e.paint.type ? [e.paint, e.index] : void 0 : e;
     }();
@@ -8430,7 +8430,7 @@ function sY({
   let d = _$$u4();
   let u = MK(JT.GENERATE_IMAGE);
   let x = Xr(Lk);
-  let m = function() {
+  let m = function () {
     let e = wA();
     let {
       close
@@ -8678,7 +8678,7 @@ let s2 = {
 };
 function s4() {
   let e = _$$d(e => e.mirror.appModel.activeCanvasEditModeType);
-  let t = function() {
+  let t = function () {
     let e = _$$d(e => e.mirror.appModel.activeCanvasEditModeType);
     let {
       activePanel
@@ -8697,7 +8697,7 @@ function s4() {
   let u = !i || "MIXED_PAINT" === i.type;
   let x = i ? i.paint : void 0;
   let m = u ? void 0 : i.index;
-  let [h, g, f] = function() {
+  let [h, g, f] = function () {
     let {
       anyCooperFrames
     } = Cl();
@@ -8773,9 +8773,9 @@ function s6({
   useEffect(() => {
     n.setActiveTab(x);
   }, [x]);
-  !function(e, t, n) {
+  !function (e, t, n) {
     let l = ij();
-    let r = function() {
+    let r = function () {
       let e = _$$d(e => e.mirror.appModel.activeCanvasEditModeType);
       return useCallback(t => {
         hS(t) && bn(t?.type) && e !== m1T.GRADIENT && Y5.triggerAction("toggle-gradient-edit-mode");
@@ -8798,7 +8798,7 @@ function s6({
       }
       if (!m) return;
       let e = i.current;
-      if (e && hS(e)) "SOLID" === e.type ? o.current = e : e.type?.startsWith("GRADIENT") ? c.current = e : ("IMAGE" === e.type || "VIDEO" === e.type) && (u.current = e); else if (gl(e) && p.current && Array.isArray(p.current) && p.current.length > 1) {
+      if (e && hS(e)) "SOLID" === e.type ? o.current = e : e.type?.startsWith("GRADIENT") ? c.current = e : ("IMAGE" === e.type || "VIDEO" === e.type) && (u.current = e);else if (gl(e) && p.current && Array.isArray(p.current) && p.current.length > 1) {
         let e = p.current[p.current.length - 1];
         o.current = {
           type: "SOLID",
@@ -8988,7 +8988,7 @@ function dn({
   useEffect(() => {
     x && s.setActiveTab(dl(t.imageScaleMode));
   }, [x, t.imageScaleMode, s]);
-  let p = function(e) {
+  let p = function (e) {
     let {
       onlyDetached
     } = Cl();
@@ -9182,7 +9182,7 @@ function dc({
     })
   });
 }
-let dx = memo(function(e) {
+let dx = memo(function (e) {
   return jsx("svg", {
     width: "24",
     height: "24",
@@ -9197,7 +9197,7 @@ let dx = memo(function(e) {
     })
   });
 });
-let dh = Ju(function(e) {
+let dh = Ju(function (e) {
   let t = _$$hS(e);
   let {
     onClose
@@ -9316,13 +9316,13 @@ function dE() {
   });
 }
 function dv() {
-  let e = function() {
+  let e = function () {
     let {
       onlyCooperFrames
     } = Cl();
     let t = GV();
     let n = dg(_$$x.FIELDS);
-    let l = function() {
+    let l = function () {
       let e = _$$d(Sh);
       let t = _$$eY();
       return e.every(e => {
@@ -9333,7 +9333,7 @@ function dv() {
     let r = _$$uM();
     let i = aI();
     let o = jw();
-    let a = function() {
+    let a = function () {
       let e = kl("numSelectedByType");
       return !(!e || gl(e)) && OU(e, ["TEXT", "TEXT_PATH"]);
     }();
@@ -9376,7 +9376,7 @@ function dI() {
     })
   }) : null;
 }
-let dS = memo(function() {
+let dS = memo(function () {
   let {
     activePanel,
     togglePanel
@@ -9733,7 +9733,7 @@ function dV({
     })
   });
 }
-let dU = memo(function() {
+let dU = memo(function () {
   let e = HW();
   let t = GV();
   let n = Vi();
@@ -9753,7 +9753,7 @@ let dU = memo(function() {
     let t = e.mirror.appModel.onCanvasNameEditorInfo.mode;
     return t === nzw.FRAME_NAME || t === nzw.CANVAS_GRID_ROW_NAME;
   });
-  let b = function() {
+  let b = function () {
     let e = gI();
     let [t, n] = useState({});
     let l = k9(() => t, [t]);
@@ -9776,7 +9776,7 @@ let dU = memo(function() {
     }, [e]);
     return useMemo(() => Object.entries(l).reduce((e, [t, n]) => {
       let l = n?.absoluteBounds;
-      return l ? function(e, t) {
+      return l ? function (e, t) {
         if (null == e && null == t) return null;
         {
           if (null == e) return t;
@@ -9839,7 +9839,7 @@ function dK() {
   }, [e, l, closePanel]);
   return jsx(Fragment, {});
 }
-function dW({ }) {
+function dW({}) {
   return jsx(_$$k4, {
     name: _$$$2.TemplateSetNudgeDesignModeMenu,
     children: jsx(ro, {
@@ -9905,7 +9905,7 @@ function dY({
     onlyCooperFrames,
     anyCooperFrames
   } = Cl();
-  let a = function() {
+  let a = function () {
     let e = Jo();
     let {
       anyCooperFrames: _anyCooperFrames
@@ -9964,7 +9964,7 @@ function dq() {
     children: [jsx(_$$c4, {}), jsx(a4, {})]
   });
 }
-let dQ = memo(function(e) {
+let dQ = memo(function (e) {
   return jsx("svg", {
     width: "24",
     height: "24",
@@ -10136,7 +10136,7 @@ function cg() {
   }
   return onlyInstances ?? !1;
 }
-let c_ = memo(function(e) {
+let c_ = memo(function (e) {
   return jsx("svg", {
     width: "24",
     height: "24",
@@ -10815,7 +10815,7 @@ function uu({
     }), l(_$$x.TEMPLATES)) : (l(_$$x.TEMPLATES), y("COMMUNITY"));
   }, [l, y, v, E]);
   return jsxs(Fragment, {
-    children: [j && jsx(function() {
+    children: [j && jsx(function () {
       let e = jL();
       return jsx("div", {
         className: "x78zum5 xh8yej3 xctdprf x1n5zjp5 x9f619",
@@ -10958,7 +10958,7 @@ function uI({
     l(!1);
     e(t, n);
   }, [e]);
-  let d = function({
+  let d = function ({
     onImportFailure: e
   }) {
     let t = wA();
@@ -10972,7 +10972,7 @@ function uI({
   }({
     onImportFailure: r
   });
-  let c = function({
+  let c = function ({
     onImportSuccess: e,
     importFileError: t
   }) {
@@ -10988,7 +10988,7 @@ function uI({
         error: () => {
           t(_$$t("buzz.bulk_create.import.failure"));
         }
-      }); else if ("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" === l.type) {
+      });else if ("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" === l.type) {
         let r = new FileReader();
         r.onload = l => {
           _$$jL().then(r => {
@@ -11048,7 +11048,7 @@ function uI({
                       l = !0;
                     }
                   }
-                  if (p) n.push(p); else if (d) c < _$$c7 ? (n.push(DG(d)), m || (r = !0)) : (i[x] = uT + x, o[x] = d, n.push(uT + x)); else {
+                  if (p) n.push(p);else if (d) c < _$$c7 ? (n.push(DG(d)), m || (r = !0)) : (i[x] = uT + x, o[x] = d, n.push(uT + x));else {
                     let e = s.value || "";
                     n.push(e.toString());
                   }
@@ -11075,7 +11075,7 @@ function uI({
     onImportSuccess: i,
     importFileError: d
   });
-  let u = function({
+  let u = function ({
     setIsLoading: e,
     importFileError: t,
     importLocalFile: n
@@ -11174,7 +11174,7 @@ let uk = {
     $$css: !0
   }
 };
-let uA = memo(function(e) {
+let uA = memo(function (e) {
   return _$$O4() ? jsx("svg", {
     width: "16",
     height: "16",
@@ -11419,7 +11419,7 @@ function uK() {
   let {
     setCurrentView,
     currentPluginView
-  } = function() {
+  } = function () {
     let e = Xr(hO);
     let [t, n] = fp(zM);
     let l = AY(zM);
@@ -11457,8 +11457,8 @@ function uK() {
     },
     setCurrentViewOrTab: setCurrentView,
     currentView: currentPluginView,
-    closeModal: () => { },
-    pinModal: () => { }
+    closeModal: () => {},
+    pinModal: () => {}
   }), [n, setCurrentView, currentPluginView]);
   return jsx(_$$Y, {
     direction: "vertical",
@@ -11590,7 +11590,7 @@ function u4({
     isImage,
     isVideo,
     isMedia
-  } = function(e, t) {
+  } = function (e, t) {
     let {
       mediaPaint,
       mediaPaintIndex
@@ -11710,7 +11710,7 @@ function xe({
   let s = gl(t) ? _$$t("design_systems.component_properties.mixed") : t;
   let d = useRef(null);
   let [c, u] = useState(null);
-  let x = function(e, t) {
+  let x = function (e, t) {
     let n = Th();
     let l = jw();
     let r = _$$U();
@@ -11868,7 +11868,7 @@ function xl() {
     showAllMediaFields,
     setShowAllMediaFields,
     shouldNeverTruncateMediaFields
-  } = function(e) {
+  } = function (e) {
     let t = e.length <= 3;
     let [n, l] = useState(t);
     return {
@@ -12012,7 +12012,7 @@ function xs() {
 function xx({
   tab: e
 }) {
-  let t = function(e) {
+  let t = function (e) {
     let t = _$$md(uM);
     let n = _$$md(_$$d6);
     let l = _$$md(d3);
@@ -12097,11 +12097,11 @@ async function xE(e, t, n, l) {
     let p = await UD(x, "image/png", t);
     _$$l2.user("insert-unsplash-photo", () => {
       if (s) {
-        o.forEach(e => function(e, t) {
+        o.forEach(e => function (e, t) {
           let n = xg()(e.fills, e => "IMAGE" === e.type);
           e.setImageInFillPaint(t, n);
         }(e, p));
-        a.forEach(e => function(e, t) {
+        a.forEach(e => function (e, t) {
           e.insertImageInFillPaint(t, "FILL");
         }(e, p));
       } else if (u) {
@@ -12109,7 +12109,7 @@ async function xE(e, t, n, l) {
         xv(e, u, n);
         u.appendChild(e);
         e.insertImageInFillPaint(p, "FILL");
-      } else !function(e, t, n, l) {
+      } else !function (e, t, n, l) {
         let r = Y5.getViewportInfo();
         let i = {
           x: r.offsetX,
@@ -12126,7 +12126,7 @@ async function xE(e, t, n, l) {
           let s = t?.[r]?.[a];
           let c = s ? e.get(s) : null;
           if (c && !c.isInstance) {
-            let e = function(e) {
+            let e = function (e) {
               let t = e.absoluteBoundingBox;
               return {
                 x: t.x + t.w / 2,
@@ -12232,7 +12232,7 @@ function xI({
         },
         children: _$$t("buzz.stock_photos.add_image")
       })
-    }), jsx(xS, {}), alt_description && function({
+    }), jsx(xS, {}), alt_description && function ({
       description: e
     }) {
       return jsx("p", {
@@ -12311,7 +12311,7 @@ let xC = {
     $$css: !0
   }
 };
-let xN = memo(function({
+let xN = memo(function ({
   thumbnailUrl: e,
   altText: t,
   onClickImage: n,
@@ -12472,7 +12472,7 @@ function xP({
 }) {
   let l = Array.from({
     length: t
-  }, (t, n) => function(e, t) {
+  }, (t, n) => function (e, t) {
     let n = Math.floor(e / t);
     return 0 == e % t == (n % 2 == 0) ? 140 : 80;
   }(n, e));
@@ -12655,7 +12655,7 @@ function xH() {
     hasNextPage,
     isFetchingNextPage,
     fetchNextPage
-  } = function(e, t = !0) {
+  } = function (e, t = !0) {
     let [n, l] = fp(d9);
     let [r, i] = fp(cl);
     let o = n.trim();
@@ -12688,10 +12688,10 @@ function xH() {
         isLoading: "loading" === m || g
       }));
     }, [b, m, g, i]);
-    (function(e, t, n, l) {
+    (function (e, t, n, l) {
       let r = _$$U();
       let i = _$$d(e => e.search.sessionId);
-      let o = function() {
+      let o = function () {
         let e = useContext(ch);
         if (!e) throw Error("useBuzzStockPhotosViewType must be used within a BuzzStockPhotosViewTypeContext");
         return e;
@@ -13000,7 +13000,7 @@ function x2() {
     !u && !r && i && s && teamTemplates && teamTemplates.length > 0 && (t("INTERNAL"), x(!0));
   }, [s, teamTemplates, t, r, i, u, x]), isLoading) return jsx(_$$ah, {});
   let k = null;
-  if ("COMMUNITY" === e) k = r && categorySlug ? jsx(x1, {}) : jsx(lT, {}); else switch (n.type) {
+  if ("COMMUNITY" === e) k = r && categorySlug ? jsx(x1, {}) : jsx(lT, {});else switch (n.type) {
     case mF.ALL:
     case mF.ORG:
     case mF.IMPORT_FROM_DESIGN:
@@ -13082,7 +13082,7 @@ function x2() {
 }
 function x4() {
   let [e, t] = fp(Lk);
-  let n = function() {
+  let n = function () {
     let [e, t] = fp(Lk);
     let n = _$$ut(Ez5?.uiState().showCanvasSearch, !1);
     let {
@@ -13102,7 +13102,7 @@ function x4() {
     }, [e]);
     return e === _$$x.FIND;
   }();
-  let [l, r] = function(e) {
+  let [l, r] = function (e) {
     let [t, n] = useState(e);
     let [l, r] = useState(!1);
     let i = ZC(e);
@@ -13129,7 +13129,7 @@ function x4() {
   let x = Xr(U_);
   let m = bd();
   let h = useRef(null);
-  let g = function({
+  let g = function ({
     tab: e
   }) {
     let [t, n] = fp(uM);
@@ -13169,7 +13169,7 @@ function x4() {
   }({
     tab: l
   });
-  let f = function() {
+  let f = function () {
     let e = lJ();
     let t = Xr(YA);
     let n = Xr(_$$az);
@@ -13733,7 +13733,7 @@ function pI() {
     defaultTab: FAf.DESIGN,
     getActiveTab: n
   });
-  let r = function() {
+  let r = function () {
     let e = GV();
     let t = _$$Ku();
     let n = Um();
@@ -13776,7 +13776,7 @@ function pI() {
   return (useEffect(() => {
     m.current ? m.current = !1 : kB(p.current?.offsetWidth || 0);
     l !== FAf.COMMENT || 0 !== UK().propertiesPanelSplitPosition.getCopy() || u || UK().propertiesPanelSplitPosition.set(p.current?.offsetWidth || _$$R8.propertiesPanelSplitPosition);
-  }, [l, x, i, u]), u) ? jsxs(_$$j8, {
+  }, [l, x, i, u]), u) ? jsxs(noop, {
     recordingKey: "propertiesPanel",
     activeTab: l,
     children: [jsx("div", {
@@ -13785,13 +13785,13 @@ function pI() {
       ...r,
       scrollContainer: null
     })]
-  }) : c ? jsxs(_$$j8, {
+  }) : c ? jsxs(noop, {
     recordingKey: "propertiesPanel",
     activeTab: FAf.COMMENT,
     children: [jsx("div", {
       ref: p
     }), jsx(_$$L5, {})]
-  }) : jsx(_$$j8, {
+  }) : jsx(noop, {
     recordingKey: "propertiesPanel",
     activeTab: l !== FAf.COMMENT ? l : FAf.DESIGN,
     children: jsx("div", {
@@ -13799,7 +13799,7 @@ function pI() {
     })
   });
 }
-let pC = memo(function() {
+let pC = memo(function () {
   return jsxs(_$$o3, {
     boundaryKey: "CooperPropertiesPanel",
     children: [jsx(pI, {}), jsx(_$$tZ, {})]
@@ -13876,7 +13876,7 @@ function pB({
 }) {
   let r = U1();
   let i = kl("numSelectedByType");
-  let c = function(e) {
+  let c = function (e) {
     let t = wA();
     return useCallback(async n => {
       let l = await t(Oe(n));
@@ -13896,7 +13896,7 @@ function pB({
       }, zk.YES);
     }, [t, e]);
   }(l);
-  let u = function(e) {
+  let u = function (e) {
     let t = wA();
     return useCallback((n, l) => {
       t(AV({
@@ -14171,7 +14171,7 @@ function pJ({
   interactableId: n
 }) {
   let l = useCallback((n, l, r) => {
-    !function(e, t, n, l, r) {
+    !function (e, t, n, l, r) {
       let i = {
         ...e.paintFilter,
         [t]: n
@@ -14270,20 +14270,20 @@ function p4({
 let p6 = "12px";
 let p7 = {
   [eC.COLOR_PICKER]: {
-    entireContentsOverride: jsx(function() {
-      let [e, t] = function() {
-        let e = function() {
+    entireContentsOverride: jsx(function () {
+      let [e, t] = function () {
+        let e = function () {
           let e = eP();
           return e?.panel === eC.COLOR_PICKER ? e.args?.type ?? "FILL" : "FILL";
         }();
-        let t = function() {
+        let t = function () {
           let e = _$$d(e => e.mirror.selectionProperties?.fillPaints);
           return {
             paint: gl(e) ? _$$oV : e?.[0],
             onPaintChange: ij()
           };
         }();
-        let n = function() {
+        let n = function () {
           let [e, t] = _$$lJ2("strokePaints");
           return {
             paint: e ? hS(e) ? e[0] : _$$oV : void 0,
@@ -14315,8 +14315,8 @@ let p7 = {
   },
   [eC.ADJUST_IMAGE]: {
     headerLeft: _$$t("cooper.inline_menu.floating_panel.adjust_image"),
-    body: jsx(function() {
-      let e = function() {
+    body: jsx(function () {
+      let e = function () {
         let e = kl("fillPaints");
         if (!e || gl(e)) return null;
         for (let t = e.length - 1; t >= 0; t--) {
@@ -14335,9 +14335,9 @@ let p7 = {
   },
   [eC.ADJUST_VIDEO]: {
     headerLeft: _$$t("cooper.inline_menu.floating_panel.adjust_video"),
-    body: jsx(function() {
+    body: jsx(function () {
       let e = getFeatureFlags().buzz_video_export;
-      let t = function() {
+      let t = function () {
         let e = kl("fillPaints");
         if (!e || gl(e)) return null;
         for (let t = e.length - 1; t >= 0; t--) {
@@ -14362,7 +14362,7 @@ let p7 = {
   },
   [eC.VARIANT_SWAP]: {
     headerLeft: _$$t("cooper.inline_menu.floating_panel.variant_swap"),
-    body: jsx(function() {
+    body: jsx(function () {
       return jsx(_$$k4, {
         name: _$$$2.VariantSwapPanel,
         children: jsx(aD, {
@@ -14430,7 +14430,7 @@ function p3() {
         activePanel: e
       }, e);
     default:
-      _$$xb(e);
+      throwTypeError(e);
   }
 }
 function p9() {
@@ -14453,7 +14453,7 @@ function mh({
     })
   });
 }
-let mI = memo(function({
+let mI = memo(function ({
   pageId: e,
   viewerControl: t
 }) {
@@ -14476,7 +14476,7 @@ let mI = memo(function({
         payload: {
           sceneGraph: d,
           requestedNodeId: e,
-          onOpen: () => { }
+          onOpen: () => {}
         }
       });
     });
@@ -14497,7 +14497,7 @@ let mI = memo(function({
     })
   }, n);
 });
-let mS = memo(function({
+let mS = memo(function ({
   pageId: e,
   viewerControl: t,
   sizeInfo: n,
@@ -14566,7 +14566,7 @@ let mw = memo(({
   let y = _$$d(e => e.universalInsertModal);
   let E = wA();
   Gb(_);
-  !function() {
+  !function () {
     let {
       Sprig
     } = useSprigWithSampling();
@@ -14639,4 +14639,4 @@ export function $$mL0() {
     })
   });
 }
-export const CooperView = $$mL0; 
+export const CooperView = $$mL0;

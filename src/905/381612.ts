@@ -1,4 +1,4 @@
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { x4 } from "../905/657224";
 import a from "../vendor/946678";
 import o from "../vendor/626715";
@@ -128,7 +128,7 @@ if (x4) {
     N = B(N);
     P = B(P);
     O = B(O);
-  } catch (e) { }
+  } catch (e) {}
 }
 let D = {
   [$A.Design]: R,
@@ -215,7 +215,7 @@ let $$z1 = {
   fetchTemplatesMetadata: T
 };
 let $$H0 = HY({
-  libraryItems: function(e = D, t) {
+  libraryItems: function (e = D, t) {
     if (PI.matches(t)) {
       if (!t.payload.storeInRecentsKey) return e;
       let i = MF(t.payload.item);
@@ -238,7 +238,7 @@ let $$H0 = HY({
           } : {})
         }
       }, ...d].slice(0, 21);
-      x4?.setItem(function(e) {
+      x4?.setItem(function (e) {
         switch (e) {
           case $A.Design:
             return x;
@@ -259,7 +259,7 @@ let $$H0 = HY({
     }
     return e;
   },
-  widgets: function(e = L, t) {
+  widgets: function (e = L, t) {
     if (QN.matches(t)) {
       let {
         storeInRecentsKey
@@ -307,7 +307,7 @@ let $$H0 = HY({
       }
     } : e;
   },
-  plugins: function(e = F, t) {
+  plugins: function (e = F, t) {
     if (jX.matches(t)) {
       let {
         storeInRecentsKey
@@ -355,7 +355,7 @@ let $$H0 = HY({
       }
     } : e;
   },
-  templates: function(e = M, t) {
+  templates: function (e = M, t) {
     if (pj.matches(t)) {
       let i;
       let {
@@ -380,7 +380,7 @@ let $$H0 = HY({
           case vt.TeamTemplate:
             return payload.type === vt.TeamTemplate && e.key === payload.file_key;
           default:
-            xb(_type);
+            throwTypeError(_type);
         }
       });
       let m = {
@@ -405,7 +405,7 @@ let $$H0 = HY({
           };
           break;
         default:
-          xb(type);
+          throwTypeError(type);
       }
       let h = [i, ...p].slice(0, 4);
       x4?.setItem(o, JSON.stringify(h));
@@ -419,7 +419,7 @@ let $$H0 = HY({
       [t.payload.storeInRecentsKey]: t.payload.recentTemplates
     } : e;
   },
-  faceStamps: function(e = j, t) {
+  faceStamps: function (e = j, t) {
     if (F9.matches(t)) {
       if (t.payload.storeInRecentsKey !== $A.FigJam) throw Error("Recently used facestamps currently only implemented for Figjam.");
       let [[i], n] = s()(e[t.payload.storeInRecentsKey], e => e.user.id === t.payload.item.user.id);
@@ -445,7 +445,7 @@ let $$H0 = HY({
       [t.payload.storeInRecentsKey]: t.payload.recentFaceStamps
     } : e;
   },
-  whiteboardTools: function(e = U, t) {
+  whiteboardTools: function (e = U, t) {
     if (ay.matches(t)) {
       if (t.payload.storeInRecentsKey !== $A.FigJam) throw Error("Recently used whiteboard tools currently only implemented for Figjam.");
       let [[i], n] = s()(e[t.payload.storeInRecentsKey], e => e.id === t.payload.item.id);
@@ -472,4 +472,4 @@ let $$H0 = HY({
   }
 });
 export const Cs = $$H0;
-export const cd = $$z1; 
+export const cd = $$z1;

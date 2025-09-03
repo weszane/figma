@@ -6,7 +6,7 @@ export let $$o1 = "multiplayer_user_state_change";
 export var $$l5 = (e => (e[e.NONE = 0] = "NONE", e[e.FOR_OPEN = 1] = "FOR_OPEN", e[e.FOR_MENU = 2] = "FOR_MENU", e))($$l5 || {});
 let d = z.object({
   extensionId: z.string(),
-  extensionType: z.$$enum(["plugin", "widget"]),
+  extensionType: z.enum(["plugin", "widget"]),
   currentExtensionVersionId: z.string().nullable(),
   localFileId: z.number().nullable()
 });

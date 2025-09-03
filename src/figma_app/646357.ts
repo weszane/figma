@@ -1,7 +1,7 @@
 import { createContext, useMemo, useCallback, useEffect } from "react";
 import { d4, wA } from "../vendor/514228";
 import { filterNotNullish } from "../figma_app/656233";
-import { xb, KF } from "../figma_app/465776";
+import { throwTypeError, debug } from "../figma_app/465776";
 import { debounce } from "../905/915765";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { n3, F7, Rf, Pg, IA } from "../905/859698";
@@ -106,14 +106,14 @@ export function $$es33(e) {
         version: e.version
       };
     default:
-      xb(e, `Unknown type ${e?.type}`);
+      throwTypeError(e, `Unknown type ${e?.type}`);
   }
 }
 export function $$eo3(e) {
   let {
     key
   } = $$es33(e);
-  KF(void 0 !== key, "Asset had no key", {
+  debug(void 0 !== key, "Asset had no key", {
     asset: e
   });
   return key;
@@ -213,7 +213,7 @@ export async function $$ev90(e) {
   let r = e.map(e => e.key);
   if (r.forEach(e => $$eS.add(e)), getFeatureFlags().ds_file_proxy_for_style_assets) await Promise.all(r.map(e => Eo.getCanvas({
     canvas_url: t.get(e)
-  }))); else {
+  })));else {
     if (0 === r.length) return;
     try {
       let e = await XHR.post("/style/canvases", {
@@ -296,7 +296,7 @@ function ew(e, t, r) {
 let eO = e => null !== e.design && null !== e.figjam && null !== e.slides;
 export function $$eR35(e) {
   let t = md(GO);
-  let r = function(e) {
+  let r = function (e) {
     let t = Nn();
     return useMemo(() => e ? t ? gB(ew(t, e, Qh.COMMUNITY)) : Xm() : gB({
       design: !1,
@@ -510,7 +510,7 @@ export function $$eX24(e) {
   })), eY(t.library.local.modules, _newLocal3) && getFeatureFlags().dse_module_publish && e.dispatch(I0({
     local: _newLocal3,
     type: PW.MODULE
-  })), function(e, t) {
+  })), function (e, t) {
     if (!e && !t) return !1;
     if (!e || !t || Object.keys(e).length !== Object.keys(t).length) return !0;
     for (let r in e) if (!t[r] || e[r].url !== t[r].url || e[r].content_hash !== t[r].content_hash) return !0;
@@ -866,7 +866,7 @@ export function $$to85(e, t = [], r = [], n, i, a, s = !1) {
         l = !0;
       }
     }
-    if (g) o[$$eo3(g)] = g; else if (l) {
+    if (g) o[$$eo3(g)] = g;else if (l) {
       if (!m || o[m] || !r.reversedChildrenGuids.some(t => {
         let r = e.get(t)?.componentKey;
         return r && !o[r];
@@ -1001,7 +1001,7 @@ export function $$tE61(e, t, r, n) {
   return a ? a[r] : null;
 }
 export function $$ty80(e, t) {
-  return function(e, t) {
+  return function (e, t) {
     if (t.components[e]) {
       let r = t.components[e];
       let n = r.containing_frame?.containingStateGroup?.nodeId;
@@ -1017,15 +1017,15 @@ export function $$tb107(e) {
 export function $$tT43(e) {
   return e.variableSetError !== HG$.NONE;
 }
-let $$tI27 = () => { };
+let $$tI27 = () => {};
 let $$tS36 = new Promise(e => {
   $$tI27 = e;
 });
-let $$tv55 = () => { };
+let $$tv55 = () => {};
 let $$tA38 = new Promise(e => {
   $$tv55 = e;
 });
-let tx = () => { };
+let tx = () => {};
 let tN = new Promise(e => {
   tx = e;
 });
@@ -1035,11 +1035,11 @@ let $$tC78 = e => ({
   resetPromise: tD,
   loadingKey: `GET_USED_COMPONENTS_STATE_GROUPS_FOR_${e.getState().openFile?.key}`
 });
-let $$tw76 = () => { };
+let $$tw76 = () => {};
 let $$tO77 = new Promise(e => {
   $$tw76 = e;
 });
-let $$tR65 = () => { };
+let $$tR65 = () => {};
 let $$tL83 = new Promise(e => {
   $$tR65 = e;
 });
@@ -1111,9 +1111,9 @@ export function $$tj56(e, t, r) {
       n = e.version;
       break;
     default:
-      xb(e);
+      throwTypeError(e);
   }
-  (r || a.content_hash !== n || !OM(o)) && (e.type === PW.COMPONENT || e.type === PW.STATE_GROUP || e.type === PW.MODULE || e.type === PW.RESPONSIVE_SET || e.type === PW.CODE_COMPONENT ? o = r2(i) : e.type === PW.STYLE ? o = fP(e) ? jh() : aV(i, e.style_type) : e.type === PW.VARIABLE || e.type === PW.VARIABLE_SET || e.type === PW.MANAGED_STRING ? o = jh() : xb(e));
+  (r || a.content_hash !== n || !OM(o)) && (e.type === PW.COMPONENT || e.type === PW.STATE_GROUP || e.type === PW.MODULE || e.type === PW.RESPONSIVE_SET || e.type === PW.CODE_COMPONENT ? o = r2(i) : e.type === PW.STYLE ? o = fP(e) ? jh() : aV(i, e.style_type) : e.type === PW.VARIABLE || e.type === PW.VARIABLE_SET || e.type === PW.MANAGED_STRING ? o = jh() : throwTypeError(e));
   return o;
 }
 export function $$tU13({
@@ -1148,7 +1148,7 @@ export function $$tG47(e, t, r, n) {
   return o ? o.name : s;
 }
 export function $$tV6(e, t, r) {
-  let n = e.reduce((r, n) => (t[n] ? r[n] = t[n] : KF(!1, "Expected nodeIdsToMove to be a subset of movableNodeIdToOldKey", {
+  let n = e.reduce((r, n) => (t[n] ? r[n] = t[n] : debug(!1, "Expected nodeIdsToMove to be a subset of movableNodeIdToOldKey", {
     nodeIdsToMove: e,
     movableNodeIdToOldKey: t
   }), r), Object.create(null));
@@ -1210,7 +1210,7 @@ export function $$tq29(e) {
     case jg.YEAR:
       return _$$t("design_systems.libraries_modal.year");
     default:
-      xb(e);
+      throwTypeError(e);
   }
 }
 export function $$tJ12(e) {
@@ -1298,7 +1298,7 @@ export function $$rt40(e, t, r) {
   let u = t ? t.pageId : void 0;
   let p = t ? t.sortPosition : void 0;
   let _ = !r?.compareSortPositions || o === p;
-  return (n !== l || i !== d || a !== c || !_ || !!s || !u) && !(null == e && null == t || !(null == e || null == t || !$$re86(e.nodeId, t.nodeId) || !$$re86(e.name, t.name) || !$$re86(e.backgroundColor, t.backgroundColor) || !$$re86(e.pageName, t.pageName) || !$$re86(e.pageId, t.pageId) || r?.compareSortPositions && !$$re86(e.sortPosition, t.sortPosition)) && function(e, t) {
+  return (n !== l || i !== d || a !== c || !_ || !!s || !u) && !(null == e && null == t || !(null == e || null == t || !$$re86(e.nodeId, t.nodeId) || !$$re86(e.name, t.name) || !$$re86(e.backgroundColor, t.backgroundColor) || !$$re86(e.pageName, t.pageName) || !$$re86(e.pageId, t.pageId) || r?.compareSortPositions && !$$re86(e.sortPosition, t.sortPosition)) && function (e, t) {
     if (null == e && null == t) return !0;
     if (null == e || null == t) return !1;
     for (let r of ["nodeId", "name"]) if (!$$re86(e[r], t[r])) return !1;
@@ -1418,4 +1418,4 @@ export const w3 = $$eL103;
 export const w8 = $$e0104;
 export const wn = $$eP105;
 export const yh = $$ep106;
-export const zE = $$tb107; 
+export const zE = $$tb107;

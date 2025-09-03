@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useEffect, createElement, useCallback, useMemo, useRef, useState, Component } from "react";
 import { wA, d4 } from "../vendor/514228";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { E as _$$E } from "../905/632989";
 import { O as _$$O } from "../905/969533";
 import { md, fp, Xr } from "../figma_app/27355";
@@ -71,7 +71,7 @@ function A(e) {
     className: "search_model_toggle--tabsRedesign--dUZl9",
     children: jsx(t.TabStrip, {
       manager: s,
-      children: i.map((e) => createElement(t.Tab, {
+      children: i.map(e => createElement(t.Tab, {
         ...n[e],
         key: e
       }, q6(e)))
@@ -107,9 +107,9 @@ function M({
     children: [jsx("div", {
       className: D,
       children: tx("tile.sort_filter.sort_by_label")
-    }), o.map((t) => jsxs("div", {
+    }), o.map(t => jsxs("div", {
       className: O,
-      onMouseDown: (e) => {
+      onMouseDown: e => {
         m(e, t);
       },
       role: "button",
@@ -127,7 +127,7 @@ function M({
       })]
     }), n.map((n, a) => jsxs("div", {
       className: O,
-      onMouseDown: (t) => m(t, e, n),
+      onMouseDown: t => m(t, e, n),
       role: "button",
       tabIndex: -1,
       children: [i(n, _$$E2(e)), t === n && jsx(_$$B, {
@@ -143,7 +143,7 @@ let Q = "SEARCH_WORKSPACE_ONBOARDING_KEY";
 let J = r1("file_browser_onboarded");
 let ee = r1(X);
 function et() {
-  let e = d4((e) => e.currentUserOrgId);
+  let e = d4(e => e.currentUserOrgId);
   let t = UC(e);
   let i = md(t);
   let n = md(J);
@@ -180,7 +180,7 @@ function er({
   onChange: o
 }) {
   let l = wA();
-  let d = useCallback((e) => {
+  let d = useCallback(e => {
     e.stopPropagation();
     l(oB());
   }, [l]);
@@ -190,7 +190,7 @@ function er({
       children: tx("search.facets.workspaces")
     }), jsxs("div", {
       className: ei,
-      onMouseDown: (e) => {
+      onMouseDown: e => {
         d(e);
         n();
       },
@@ -200,9 +200,9 @@ function er({
         svg: _$$A,
         className: en
       })]
-    }, "ALL"), e.map((e) => jsxs("div", {
+    }, "ALL"), e.map(e => jsxs("div", {
       className: ei,
-      onMouseDown: (t) => {
+      onMouseDown: t => {
         d(t);
         o?.(e);
       },
@@ -227,7 +227,7 @@ let ep = (e, t) => {
   return i < n ? -1 : i > n ? 1 : 0;
 };
 function em(e) {
-  let t = d4((e) => e.currentUserOrgId);
+  let t = d4(e => e.currentUserOrgId);
   let i = "NON_ORG_TEAMS" !== e.planId && e.planId || t;
   let n = Rs(N63, {
     orgId: i
@@ -238,10 +238,10 @@ function em(e) {
   } = useMemo(() => {
     if ("loaded" === n.status) {
       let e = n.data?.org?.workspaces;
-      let t = e?.filter((e) => e.canView);
-      let i = n.data?.currentUser.baseOrgUser?.workspaceUsers?.find((e) => e.isMainWorkspace)?.workspaceId;
+      let t = e?.filter(e => e.canView);
+      let i = n.data?.currentUser.baseOrgUser?.workspaceUsers?.find(e => e.isMainWorkspace)?.workspaceId;
       return {
-        currentWorkspace: t?.find((e) => e.id === i),
+        currentWorkspace: t?.find(e => e.id === i),
         viewableWorkspaces: t
       };
     }
@@ -250,13 +250,13 @@ function em(e) {
       viewableWorkspaces: []
     };
   }, [n]);
-  let d = d4((e) => e.orgById[i]);
+  let d = d4(e => e.orgById[i]);
   eu.ALL = _$$t("search.search_filter.all_org_results", {
     orgName: d?.name
   });
   let u = [];
   let p = md(P_);
-  return useMemo(() => p && !p.value[qy.FOLDER].length && !p.value[qy.TEAM].length && 1 === p.value[qy.ORG].length, [p]) && e.planId && "NON_ORG_TEAMS" !== e.planId && viewableWorkspaces?.length ? (currentWorkspace && u.push(currentWorkspace.id), viewableWorkspaces?.sort(ep).forEach((e) => {
+  return useMemo(() => p && !p.value[qy.FOLDER].length && !p.value[qy.TEAM].length && 1 === p.value[qy.ORG].length, [p]) && e.planId && "NON_ORG_TEAMS" !== e.planId && viewableWorkspaces?.length ? (currentWorkspace && u.push(currentWorkspace.id), viewableWorkspaces?.sort(ep).forEach(e => {
     e.id !== currentWorkspace?.id && u.push(e.id);
     eu[e.id] = e.name;
   }), jsxs("div", {
@@ -277,14 +277,14 @@ function em(e) {
 function eh(e) {
   let t = wA();
   let i = useRef(null);
-  let n = d4((e) => e.dropdownShown);
+  let n = d4(e => e.dropdownShown);
   let o = n?.type === e.dropdownId;
-  let l = (e) => {
+  let l = e => {
     e.stopPropagation();
   };
   return jsxs("div", {
     className: e.sortControlsDisabled && "ALL" === e.checkedValue ? es : ea,
-    onMouseDown: (n) => {
+    onMouseDown: n => {
       o ? (t(oB()), e.onClickDropdown(tC.CLOSE)) : i.current && (t(j7({
         type: e.dropdownId,
         data: {
@@ -320,12 +320,12 @@ let eS = "NON_ORG_TEAMS";
 let ew = {};
 function eC(e) {
   let t = iZ();
-  let i = d4((e) => t ? e.authedUsers.byId[t.id]?.plans : null);
+  let i = d4(e => t ? e.authedUsers.byId[t.id]?.plans : null);
   if (i && 0 === i.length) return jsx(Fragment, {});
   let n = [];
   ew.ALL = _$$t("search.search_filter.all_organizations_results");
   let a = !1;
-  i?.forEach((e) => {
+  i?.forEach(e => {
     e.is_org ? (n.push(e.plan_id), ew[e.plan_id] = e.name) : a = !0;
   });
   a && (n.push(eS), ew[eS] = _$$t("search.search_filter.non_org_teams"));
@@ -342,7 +342,7 @@ function eC(e) {
 function eT(e) {
   let t = wA();
   let i = useRef(null);
-  let n = d4((e) => e.dropdownShown);
+  let n = d4(e => e.dropdownShown);
   let o = n?.type === e.dropdownId;
   let [l, d] = useState(window.innerHeight - 175);
   useEffect(() => {
@@ -352,7 +352,7 @@ function eT(e) {
     window.addEventListener("resize", e);
     return () => window.removeEventListener("resize", e);
   }, []);
-  let c = (e) => {
+  let c = e => {
     e.stopPropagation();
   };
   let u = () => {
@@ -360,7 +360,7 @@ function eT(e) {
   };
   return jsxs("div", {
     className: e.sortControlsDisabled && "ALL" === e.checkedValue ? es : ea,
-    onMouseDown: (n) => {
+    onMouseDown: n => {
       o ? (t(oB()), e.onClickDropdown(tC.CLOSE)) : i.current && (t(j7({
         type: e.dropdownId,
         data: {
@@ -400,7 +400,7 @@ function eT(e) {
           e.onResetFilter();
         },
         children: ew.ALL
-      }, "ALL"), jsx(ex, {}), e.values.map((t) => jsx(MM, {
+      }, "ALL"), jsx(ex, {}), e.values.map(t => jsx(MM, {
         checked: t === e.checkedValue,
         onClick: () => {
           u();
@@ -411,7 +411,7 @@ function eT(e) {
     })]
   });
 }
-((e) => {
+(e => {
   class t extends Component {
     constructor() {
       super(...arguments);
@@ -490,7 +490,7 @@ function eT(e) {
       case uH.PRIVATE_WIDGETS:
         return null;
       default:
-        xb(e.searchModelType);
+        throwTypeError(e.searchModelType);
     }
   };
 })(n || (n = {}));
@@ -525,7 +525,7 @@ function eP(e) {
     case uH.PRIVATE_WIDGETS:
       return null;
     default:
-      return xb(e.searchModelType);
+      return throwTypeError(e.searchModelType);
   }
 }
 export let $$eO1 = {
@@ -562,8 +562,8 @@ export let $$eO1 = {
 };
 export function $$eD0(e) {
   let t = wA();
-  let i = d4((e) => e.search.parameters);
-  let n = d4((e) => e.viewBarViewModeOptionByView);
+  let i = d4(e => e.search.parameters);
+  let n = d4(e => e.viewBarViewModeOptionByView);
   let [o, l] = fp(R9);
   let d = md(P_);
   let p = md(_$$J);
@@ -581,7 +581,7 @@ export function $$eD0(e) {
   let O = _$$L(N ? "fragment_search_modal" : "file_browser", P, !1);
   let D = md(Q8);
   let L = Xr(l4(WY.RESOURCE));
-  let F = useCallback((e) => {
+  let F = useCallback(e => {
     if (e === h) return;
     let i = Wr(e);
     let n = jN(i);
@@ -594,7 +594,7 @@ export function $$eD0(e) {
     O(D, e, s, !0, !0, !1);
     window.scrollTo(0, 0);
   }, [h, t, p, d, O, D, L, l]);
-  let M = (e) => {
+  let M = e => {
     t(vj({
       clickType: e
     }));
@@ -603,7 +603,7 @@ export function $$eD0(e) {
     viewMode: k,
     searchModelType: h,
     sortState: i.sortState,
-    onChange: (e) => {
+    onChange: e => {
       t(qv({
         sortState: e
       }));
@@ -621,7 +621,7 @@ export function $$eD0(e) {
     children: jsx(eC, {
       sortControlsDisabled: e.sortControlsDisabled,
       planFilter: i.planFilter,
-      onChangePlanFilter: (e) => {
+      onChangePlanFilter: e => {
         t(c3({
           planFilter: e
         }));
@@ -650,7 +650,7 @@ export function $$eD0(e) {
     children: jsx(em, {
       sortControlsDisabled: e.sortControlsDisabled,
       workspaceFilter: i.workspaceFilter,
-      onChangeWorkspaceFilter: (e) => {
+      onChangeWorkspaceFilter: e => {
         t(MB({
           workspaceFilter: e
         }));
@@ -678,7 +678,7 @@ function eL(e) {
   let i = useRef(null);
   let n = Um();
   let o = n?.type === e.dropdownId;
-  let c = (n) => {
+  let c = n => {
     n.stopPropagation();
     o ? t(oB()) : i.current && t(j7({
       type: e.dropdownId,
@@ -703,7 +703,7 @@ function eL(e) {
   return jsxs("div", {
     className: u,
     children: [jsxs(_$$E, {
-      onClick: (e) => {
+      onClick: e => {
         c(e);
       },
       "aria-expanded": o,

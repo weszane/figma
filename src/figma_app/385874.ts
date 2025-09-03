@@ -1,5 +1,5 @@
 import { kiwiParserCodec } from "../905/294864";
-import { KF } from "../figma_app/465776";
+import { debug } from "../figma_app/465776";
 import { isNotNullish } from "../figma_app/95419";
 import { qN, kE } from "../figma_app/273493";
 import { eVK, glU } from "../figma_app/763686";
@@ -292,7 +292,7 @@ export function $$B13(e, t) {
   }
   {
     let t = $$A6(e);
-    KF(!!t, "paint is neither a gradient nor a solid");
+    debug(!!t, "paint is neither a gradient nor a solid");
     return {
       ...t.color,
       a: t.opacity ?? 1

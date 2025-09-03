@@ -1,6 +1,6 @@
 import { useCallback, useEffect } from "react";
 import { wA } from "../vendor/514228";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { getFeatureFlags } from "../905/601108";
 import { eU, Xr, md } from "../figma_app/27355";
 import { sx } from "../905/449184";
@@ -195,7 +195,7 @@ let x = ({
     case "None":
       break;
     default:
-      xb(e);
+      throwTypeError(e);
   }
 };
 export const $D = $$v0;

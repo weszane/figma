@@ -22,7 +22,7 @@ import { Q } from "../905/978641";
 import { vt } from "../figma_app/306946";
 import { l as _$$l } from "../905/716947";
 import { on } from "../905/420347";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { F } from "../905/171275";
 import { J } from "../905/341359";
 import { y3 } from "../figma_app/876459";
@@ -113,7 +113,7 @@ function E({
         case vt.COOPER_TEMPLATE_ASSET:
           return F.COOPER;
         default:
-          xb(e);
+          throwTypeError(e);
       }
     }(c),
     noBorder: !0,
@@ -155,7 +155,7 @@ function E({
             case vt.FIGMAKE_TEMPLATE:
               return y1.FIGMAKE;
             default:
-              xb(e);
+              throwTypeError(e);
           }
         }(c)
       }),

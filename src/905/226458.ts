@@ -1,4 +1,4 @@
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { NN, y1 } from "../905/445814";
 import { nb } from "../figma_app/543100";
 import { FFileType } from "../figma_app/191312";
@@ -15,13 +15,13 @@ export function $$o0(e) {
       if (e.file.editorType === FFileType.COOPER) return y1.COOPER;
       if (e.file.editorType === FFileType.FIGMAKE) return y1.FIGMAKE;
       if (e.file.editorType === FFileType.DESIGN || null === e.file.editorType) return y1.DESIGN;
-      xb(e.file.editorType);
+      throwTypeError(e.file.editorType);
     case nb.PROTOTYPE:
       return y1.PROTOTYPE;
     case nb.REPO:
       return y1.REPO;
     default:
-      xb(e);
+      throwTypeError(e);
   }
 }
 export const C = $$o0;

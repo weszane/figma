@@ -427,7 +427,7 @@ export function setupLayoutPositioning(config: NodeAPIConfig, handle: any) {
  * Grid Properties - Grid layout system
  */
 export namespace Grid {
-    
+
   /**
    * Setup gridRowCount method for grid row count
    */
@@ -609,7 +609,7 @@ export namespace Grid {
  * Visual Properties - Visual appearance and styling
  */
 export namespace VisualProperties {
-    
+
   /**
    * Setup opacity method for opacity control
    */
@@ -710,7 +710,7 @@ export namespace VisualProperties {
  * Position/Transform Properties - Position, size, and transformation
  */
 export namespace PositionTransform {
-    
+
   /**
    * Setup x method for horizontal position
    */
@@ -2005,12 +2005,12 @@ export interface NodeAPIConfig {
  * Organizes all node-related API methods in a hierarchical namespace structure
  */
 export namespace NodeAPI {
-  
+
   /**
    * Core Node Operations - Basic node manipulation methods
    */
   export namespace Operations {
-    
+
     /**
      * Setup toString method for generating node string representations
      * Original function: e.toString
@@ -2128,7 +2128,7 @@ export namespace NodeAPI {
    * Node Hierarchy - Parent-child relationships and tree traversal
    */
   export namespace Hierarchy {
-    
+
     /**
      * Setup parent property for accessing parent node
      * Original function: e.parent
@@ -2191,7 +2191,7 @@ export namespace NodeAPI {
           get() {
             const childrenArray = vm.newArray()
             const node = getNode(this)
-            
+
             // Simplified children logic
             if (node.type === 'TABLE') {
               const cells = node.sortedTableCells || []
@@ -2205,7 +2205,7 @@ export namespace NodeAPI {
                 vm.setProp(childrenArray, i.toString(), getNodeFactory().createNode(childGuid, 'node.children'))
               }
             }
-            
+
             vm.deepFreezeObject(childrenArray)
             return childrenArray
           },
@@ -2220,7 +2220,7 @@ export namespace NodeAPI {
    * Node Search - Methods for finding nodes with specific criteria
    */
   export namespace Search {
-    
+
     /**
      * Setup findOne method for finding single node
      * Original function: e.findOne
@@ -2235,7 +2235,7 @@ export namespace NodeAPI {
           // Simplified findOne logic - placeholder
           const _node = getNode(this)
           const _predicate = vm.newFunction(() => { }) // Placeholder
-          
+
           // Return placeholder for now
           return vm.undefined
         },
@@ -2258,7 +2258,7 @@ export namespace NodeAPI {
           // Simplified findAll logic - placeholder
           const _node = getNode(this)
           const _predicate = vm.newFunction(() => { }) // Placeholder
-          
+
           // Return empty array for now
           return vm.newArray()
         },
@@ -2272,7 +2272,7 @@ export namespace NodeAPI {
    * Node Properties - Common node properties like name, visible, locked, etc.
    */
   export namespace Properties {
-    
+
     /**
      * Setup name property for node name access
      * Original function: e.name
@@ -2287,8 +2287,8 @@ export namespace NodeAPI {
           metricsKey: 'node.name',
           get() {
             const node = getNode(this)
-            return node.type === 'DOCUMENT' 
-              ? vm.createString(node.name || 'Document') 
+            return node.type === 'DOCUMENT'
+              ? vm.createString(node.name || 'Document')
               : vm.createString(node.name || '')
           },
           set(value: any) {
@@ -2390,11 +2390,11 @@ export namespace NodeAPI {
             const stuckArray = vm.newArray()
             const node = getNode(this)
             const stuckGuids = (node.stuckNodes || []).map((n: any) => n.guid)
-            
+
             for (let i = 0; i < stuckGuids.length; i++) {
               vm.setProp(stuckArray, String(i), getNodeFactory().createNode(stuckGuids[i], 'node.stuckNodes'))
             }
-            
+
             vm.deepFreezeObject(stuckArray)
             return stuckArray
           },
@@ -2470,8 +2470,8 @@ export namespace NodeAPI {
           metricsKey: 'node.stuckTo',
           get() {
             const node = getNode(this)
-            return node.stickableHost == null 
-              ? vm.undefined 
+            return node.stickableHost == null
+              ? vm.undefined
               : getNodeFactory().createNode(node.stickableHost, 'node.stuckTo')
           },
         },
@@ -2485,7 +2485,7 @@ export namespace NodeAPI {
    * Variable Management - Methods for handling variable modes and bindings
    */
   export namespace Variables {
-    
+
     /**
      * Setup resolvedVariableModes property for resolved variable modes
      * Original function: e.resolvedVariableModes
@@ -2537,7 +2537,7 @@ export namespace NodeAPI {
    * Advanced Search Operations - Complex search and filtering methods
    */
   export namespace AdvancedSearch {
-    
+
     /**
      * Setup findAllWithCriteria method for advanced node searching with criteria
      */
@@ -2606,7 +2606,7 @@ export namespace NodeAPI {
    * Page and Document Methods - Page-level operations and properties
    */
   export namespace PageDocument {
-    
+
     /**
      * Setup isPageDivider method for checking if node is a page divider
      */
@@ -2650,7 +2650,7 @@ export namespace NodeAPI {
    * Node Management Operations - Advanced node manipulation and lifecycle
    */
   export namespace NodeManagement {
-    
+
     /**
      * Setup loadAsync method for asynchronous node loading
      */
@@ -2701,7 +2701,7 @@ export namespace NodeAPI {
    * Widget Properties - Widget-specific properties and state management
    */
   export namespace WidgetProperties {
-    
+
     /**
      * Setup widgetId method for widget identification
      */
@@ -2767,7 +2767,7 @@ export namespace NodeAPI {
    * Layout Properties - Layout system and positioning
    */
   export namespace Layout {
-    
+
     /**
      * Setup constraints method for layout constraints
      */
@@ -2781,7 +2781,7 @@ export namespace NodeAPI {
           get() {
             let node = config.getNode(this)
             if (node.type === 'BOOLEAN_OPERATION') return config.vm.undefined
-            
+
             let constraints = {
               horizontal: node.horizontalConstraint,
               vertical: node.verticalConstraint,
@@ -2889,12 +2889,12 @@ export const NodeAPISetupUtils = {
   setupSetWidgetSyncedState: NodeAPI.Operations.setupSetWidgetSyncedState,
   setupRemove: NodeAPI.Operations.setupRemove,
   setupExportNode: NodeAPI.Operations.setupExportNode,
-  
+
   // Hierarchy Management
   setupParent: NodeAPI.Hierarchy.setupParent,
   setupGetTopLevelFrame: NodeAPI.Hierarchy.setupGetTopLevelFrame,
   setupChildren: NodeAPI.Hierarchy.setupChildren,
-  
+
   // Search Operations
   setupFindOne: NodeAPI.Search.setupFindOne,
   setupFindAll: NodeAPI.Search.setupFindAll,
@@ -3080,50 +3080,50 @@ export const NodeAPISetupUtils = {
   setupHasMissingFont: setupHasMissingFont,
 
   // Missing methods that are used in main file
-  setupNodeGetNode: function(config: NodeAPIConfig, handle: any) {
+  setupNodeGetNode: function (config: NodeAPIConfig, handle?: any) {
     // Implementation for getting node
     return config.getNode ? config.getNode(handle) : handle
   },
-  
-  setupNodeGetVariableNode: function(config: NodeAPIConfig, handle: any) {
+
+  setupNodeGetVariableNode: function (config: NodeAPIConfig, handle: any) {
     // Implementation for getting variable node
     return config.getNode ? config.getNode(handle) : handle
   },
-  
-  setupNodeGetVariableCollectionNode: function(config: NodeAPIConfig, handle: any) {
+
+  setupNodeGetVariableCollectionNode: function (config: NodeAPIConfig, handle: any) {
     // Implementation for getting variable collection node
     return config.getNode ? config.getNode(handle) : handle
   },
-  
-  setupNodeGetAnnotationCategory: function(config: NodeAPIConfig, handle: any) {
+
+  setupNodeGetAnnotationCategory: function (config: NodeAPIConfig, handle: any) {
     // Implementation for getting annotation category
     return config.getNode ? config.getNode(handle) : handle
   },
 
   // Video setup methods
-  setupVideoCreateVideoAsync: function(config: NodeAPIConfig) {
-    return function() { return config.vm.undefined }
+  setupVideoCreateVideoAsync: function (config: NodeAPIConfig) {
+    return function () { return config.vm.undefined }
   },
-  
-  setupVideoGetOrCreatePrivateVideo: function(config: NodeAPIConfig) {
-    return function() { return config.vm.undefined }
+
+  setupVideoGetOrCreatePrivateVideo: function (config: NodeAPIConfig) {
+    return function () { return config.vm.undefined }
   },
-  
-  setupVideoGetThumbnailImageForVideo: function(config: NodeAPIConfig) {
-    return function() { return config.vm.undefined }
+
+  setupVideoGetThumbnailImageForVideo: function (config: NodeAPIConfig) {
+    return function () { return config.vm.undefined }
   },
-  
-  setupVideoGetPrivateVideoOrThrow: function(config: NodeAPIConfig) {
-    return function() { return config.vm.undefined }
+
+  setupVideoGetPrivateVideoOrThrow: function (config: NodeAPIConfig) {
+    return function () { return config.vm.undefined }
   },
 
   // Telemetry setup methods
-  setupTelemetryLogError: function(config: NodeAPIConfig) {
-    return function() { return config.vm.undefined }
+  setupTelemetryLogError: function (config: NodeAPIConfig) {
+    return function () { return config.vm.undefined }
   },
-  
-  setupTelemetryMaybeLogError: function(config: NodeAPIConfig) {
-    return function() { return config.vm.undefined }
+
+  setupTelemetryMaybeLogError: function (config: NodeAPIConfig) {
+    return function () { return config.vm.undefined }
   },
 
   // Additional setup methods
@@ -3615,7 +3615,7 @@ function setupInsertCharacters({
       let o = _$$u({
         vm: e,
         handle: r,
-        zSchema: _$$z.$$enum(['BEFORE', 'AFTER']).optional(),
+        zSchema: _$$z.enum(['BEFORE', 'AFTER']).optional(),
         property: 'useStyle',
       })
       let l = i(this)
@@ -4358,13 +4358,13 @@ function setupReactions({
     hasEditScope: !0,
     parseThis: e => r(e),
     resolveValue(t) {
-      let i = (function(e) {
+      let i = (function (e) {
         let t = []
         for (let i of e) {
           let e = i.actions && i.actions.length > 0 ? tZNew(i.actions[0]) : null
           let n = []
           i.actions && (n = i.actions.map(tZ).filter(tq))
-          let r = (function(e) {
+          let r = (function (e) {
             let t = {}
             let i = e?.interactionType || 'ON_CLICK'
             switch (i) {
@@ -4570,7 +4570,7 @@ function setupSelection({
       set(t) {
         let i = n(this)
         if (e.isNull(t)) {
-          (function(e) {
+          (function (e) {
             let t = e.directlySelectedNodes
             return t.length === 1 && t[0].type === 'TEXT' ? t[0] : null
           })(i) && Y5.triggerAction('leave-edit-mode')
@@ -5210,7 +5210,7 @@ function setupSetBoundVariable({
         zSchema: _$$N.VariableBindableNodeField,
         property: 'field',
       })
-      let u = (function({
+      let u = (function ({
         callerName: e,
         consoleLogger: t,
         getNode: i,
@@ -5403,17 +5403,17 @@ function setupOutlineStroke({
       let t = n(this)
       let a = t.createOutlineStroke()
       if (!a) return e.$$null
-      
+
       let s = i()
       let o = s.createNode(a.guid, 'node.createOutlineStroke')
-      
+
       // Track plugin creation for metrics
       let l = e.getStats()
       if (l) {
         let t = e.getStringProp(this, 'id')
         l.recordOutlineStrokeCreation(t, r)
       }
-      
+
       return o
     },
     isAllowedInReadOnly: !1,
@@ -5427,7 +5427,7 @@ function setupOutlineStroke({
       let t = n(this)
       let r = t.getOutlineStroke()
       if (!r) return e.$$null
-      
+
       let a = i()
       return a.createNode(r.guid, 'node.getOutlineStroke')
     },
@@ -5441,14 +5441,14 @@ function setupOutlineStroke({
     cb() {
       let t = n(this)
       let i = t.removeOutlineStroke()
-      
+
       // Track plugin removal for metrics
       let a = e.getStats()
       if (a) {
         let t = e.getStringProp(this, 'id')
         a.recordOutlineStrokeRemoval(t, r)
       }
-      
+
       return e.newBoolean(i)
     },
     isAllowedInReadOnly: !1,

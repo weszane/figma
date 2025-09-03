@@ -1,4 +1,4 @@
-import { vA } from "../figma_app/465776";
+import { assert } from "../figma_app/465776";
 import { b } from "../905/428797";
 import { q as _$$q } from "../905/113809";
 class s {
@@ -18,7 +18,7 @@ class s {
     for (let i of b[e]) if (this.current().type === i.tokenMatch) {
       this.next();
       let r = this.parseAtLevel(e);
-      vA(!!i.parseOperator);
+      assert(!!i.parseOperator);
       return i.parseOperator(t ? [t, r] : [r]);
     }
     return null;
@@ -45,7 +45,7 @@ class s {
   }
   parseHighestPrecedence() {
     for (let e of b[0]) if (this.current().type === e.tokenMatch) {
-      vA(!!e.parseToken);
+      assert(!!e.parseToken);
       let t = e.parseToken(this, this.variableContext);
       this.next();
       return t;

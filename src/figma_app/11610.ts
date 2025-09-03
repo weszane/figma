@@ -1,4 +1,4 @@
-import { KF, vA } from "../figma_app/465776";
+import { debug, assert } from "../figma_app/465776";
 import { xN, qE } from "../figma_app/492908";
 import { mKm } from "../figma_app/763686";
 import { l7 } from "../905/189185";
@@ -30,7 +30,7 @@ export async function $$c3(e, t, r, i = {}) {
     debugOutlines: !0
   };
   let p = r.width;
-  if (KF(void 0 !== p, "Expect site preview window size to be defined"), l.isResponsiveSet) {
+  if (debug(void 0 !== p, "Expect site preview window size to be defined"), l.isResponsiveSet) {
     let e = l.childrenNodes.sort((e, t) => e.size.x - t.size.x);
     let t = e[0].size.x;
     for (let r of (l = e[0], e)) {
@@ -160,7 +160,7 @@ function f(e) {
 }
 function E(e) {
   let t = e.absoluteBoundingBox;
-  vA(null !== e.absoluteRenderBounds, "Node being compared should not be clipped.");
+  assert(null !== e.absoluteRenderBounds, "Node being compared should not be clipped.");
   return function e(t, r, n, i) {
     let a = t.childrenNodes.filter(e => e.visible);
     let s = function (e, t) {

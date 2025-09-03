@@ -1,4 +1,4 @@
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { sx } from "../905/449184";
 export class $$a0 {
   constructor(e) {
@@ -46,7 +46,7 @@ export class $$a0 {
           this.reset();
           break;
         default:
-          xb(e);
+          throwTypeError(e);
       }
     };
   }

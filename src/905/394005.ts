@@ -4,30 +4,21 @@ import { Ay } from '../905/612521';
 import { ED, x1 } from '../905/714362';
 import { createDeferredPromise } from '../905/874553';
 import { getInitialOptions } from '../figma_app/169182';
-import { xb } from '../figma_app/465776';
+import { throwTypeError } from '../figma_app/465776';
 
 // Constants
 const AWS_WAF_TOKEN_CHALLENGE_ATTEMPTS_KEY = 'aws_waf_token_challenge_attempts';
 
 // Type definitions for WAF validation
-interface WAFVerificationState {
-  type: 'challenge' | 'captcha';
-  deferred: any; // v() return type
-  startTime: number;
-  iframe?: HTMLIFrameElement;
-  clearTimeout?: () => void;
-  popupWindow?: Window;
-}
 
 /**
  * Web Application Firewall (WAF) Manager
  * Handles CAPTCHA and challenge validation for AWS WAF integration
  */
 export class WAFManager {
-  private readonly WAF_POPUP_MODAL = 'WAF-popup-modal';
-  private readonly WAF_REFRESH_MODAL = 'WAF-refresh-modal';
-  private readonly WAF_EVENT_NAME = 'WAF challenge';
-  private pendingWAFVerification?: WAFVerificationState;
+  WAF_POPUP_MODAL = 'WAF-popup-modal';
+  WAF_REFRESH_MODAL = 'WAF-refresh-modal';
+  WAF_EVENT_NAME = 'WAF challenge';
   constructor() {
     // Bind event handlers to maintain context
     this.onMessage = this.onMessage.bind(this);
@@ -36,7 +27,7 @@ export class WAFManager {
   /**
    * Tracks WAF-related events with analytics
    */
-  private trackEvent = (eventName: string, eventData: Record<string, any>) => {
+  trackEvent = (eventName, eventData) => {
     sx(eventName, {
       ...eventData,
       visibilityState: document.visibilityState
@@ -49,7 +40,7 @@ export class WAFManager {
   /**
    * Handles messages from WAF validation iframe/popup
    */
-  private onMessage = (event: MessageEvent) => {
+  onMessage = event => {
     if (!this.pendingWAFVerification || event.data !== 'waf-successful') {
       return;
     }
@@ -67,7 +58,7 @@ export class WAFManager {
   /**
    * Handles successful CAPTCHA validation
    */
-  private handleCaptchaSuccess(): void {
+  handleCaptchaSuccess() {
     if (!this.pendingWAFVerification) return;
     if (this.pendingWAFVerification.popupWindow) {
       const {
@@ -83,19 +74,19 @@ export class WAFManager {
   /**
    * Handles successful challenge validation
    */
-  private handleChallengeSuccess(): void {
+  handleChallengeSuccess() {
     if (!this.pendingWAFVerification) return;
     if (this.pendingWAFVerification.type === 'challenge') {
       this.pendingWAFVerification.clearTimeout?.();
     } else {
-      xb(this.pendingWAFVerification);
+      throwTypeError(this.pendingWAFVerification);
     }
   }
 
   /**
    * Waits for WAF validation to complete (challenge or captcha)
    */
-  waitForWAFValidation(validationType: 'challenge' | 'captcha'): Promise<void> {
+  waitForWAFValidation(validationType) {
     if (this.pendingWAFVerification) {
       return this.pendingWAFVerification.deferred.promise;
     }
@@ -110,7 +101,7 @@ export class WAFManager {
     }
 
     // Fallback for unknown validation type
-    xb(validationType, {
+    throwTypeError(validationType, {
       reportAsSentryError: true
     });
     return Promise.reject(new Error(`Unknown validation type: ${validationType}`));
@@ -119,7 +110,7 @@ export class WAFManager {
   /**
    * Updates challenge attempts in localStorage
    */
-  private updateChallengeAttempts(): void {
+  updateChallengeAttempts() {
     try {
       const storedAttempts = localStorage.getItem(AWS_WAF_TOKEN_CHALLENGE_ATTEMPTS_KEY);
       if (storedAttempts) {
@@ -135,7 +126,7 @@ export class WAFManager {
   /**
    * Initializes challenge validation with iframe
    */
-  private initializeChallengeValidation(deferred: any, startTime: number): Promise<void> {
+  initializeChallengeValidation(deferred, startTime) {
     const clearTimeoutFn = this.createTimeout(deferred, 5000);
     const iframe = this.createWAFIframe();
     window.addEventListener('message', this.onMessage);
@@ -152,7 +143,7 @@ export class WAFManager {
   /**
    * Initializes captcha validation with popup
    */
-  private initializeCaptchaValidation(deferred: any, startTime: number): Promise<void> {
+  initializeCaptchaValidation(deferred, startTime) {
     this.pendingWAFVerification = {
       type: 'captcha',
       deferred,
@@ -165,7 +156,7 @@ export class WAFManager {
   /**
    * Creates a hidden iframe for WAF validation
    */
-  private createWAFIframe(): HTMLIFrameElement {
+  createWAFIframe() {
     const iframe = document.createElement('iframe');
     iframe.style.position = 'absolute';
     iframe.style.zIndex = '-9999';
@@ -183,7 +174,7 @@ export class WAFManager {
   /**
    * Opens the popup modal for CAPTCHA verification
    */
-  openPopupInterstitialModal(): void {
+  openPopupInterstitialModal() {
     if (document.getElementById(this.WAF_POPUP_MODAL)) {
       return;
     }
@@ -200,7 +191,7 @@ export class WAFManager {
   /**
    * Attaches click handler to the popup verification button
    */
-  private attachPopupButtonHandler(): void {
+  attachPopupButtonHandler() {
     const button = document.getElementById('WAF-open-popup-button');
     button?.addEventListener('click', () => {
       if (!this.pendingWAFVerification || this.pendingWAFVerification.type !== 'captcha') {
@@ -221,7 +212,7 @@ export class WAFManager {
   /**
    * Monitors popup window for closure
    */
-  private monitorPopupWindow(popup: Window): void {
+  monitorPopupWindow(popup) {
     const checkInterval = setInterval(() => {
       if (popup.closed) {
         if (this.pendingWAFVerification) {
@@ -235,7 +226,7 @@ export class WAFManager {
   /**
    * Opens the refresh modal when verification fails
    */
-  openRefreshModal(): void {
+  openRefreshModal() {
     // Remove popup modal if it exists
     const popupModal = document.getElementById(this.WAF_POPUP_MODAL);
     popupModal?.remove();
@@ -255,7 +246,7 @@ export class WAFManager {
   /**
    * Attaches click handler to the refresh button
    */
-  private attachRefreshButtonHandler(): void {
+  attachRefreshButtonHandler() {
     const button = document.getElementById('WAF-refresh-button');
     button?.addEventListener('click', () => {
       Ay.reload('WAF');
@@ -265,12 +256,7 @@ export class WAFManager {
   /**
    * Creates a modal element with the specified configuration
    */
-  private createModal(id: string, config: {
-    title: string;
-    subtitle: string;
-    buttonText: string;
-    buttonId: string;
-  }): HTMLDivElement {
+  createModal(id, config) {
     const modal = document.createElement('div');
     modal.id = id;
     modal.style.cssText = 'position: fixed; display: flex; top: 0; bottom: 0; left: 0; right: 0; background-color: rgba(0,0,0,0.5); z-index: 1000; align-items: center; justify-content: center;';
@@ -291,7 +277,7 @@ export class WAFManager {
   /**
    * Cleans up WAF verification state and resolves the deferred promise
    */
-  cleanupAndResolve(deferred: any, state: string): void {
+  cleanupAndResolve(deferred, state) {
     if (!this.pendingWAFVerification) {
       return;
     }
@@ -316,7 +302,7 @@ export class WAFManager {
   /**
    * Gets the current WAF state from the iframe
    */
-  async getWafStateFromIframe(): Promise<string> {
+  async getWafStateFromIframe() {
     if (this.pendingWAFVerification?.type !== 'challenge') {
       return 'stuck';
     }
@@ -326,7 +312,7 @@ export class WAFManager {
     }
 
     // Check if AWS WAF Integration is available
-    const wafIntegration = (contentWindow as any).AwsWafIntegration;
+    const wafIntegration = contentWindow.AwsWafIntegration;
     if (!wafIntegration) {
       return 'stuck:waf-script-not-loaded';
     }
@@ -349,7 +335,7 @@ export class WAFManager {
   /**
    * Creates a timeout for WAF validation
    */
-  private createTimeout(deferred: any, timeoutMs: number): () => void {
+  createTimeout(deferred, timeoutMs) {
     const timeoutId = window.setTimeout(() => {
       x1('[WAFManager]', 'WAF validation timed out.', {}, {
         reportAsSentryError: true
@@ -372,7 +358,7 @@ export const wafManager = new WAFManager();
  * @param xhr - XMLHttpRequest object
  * @returns WAF challenge type or null
  */
-export function getWAFChallengeType(xhr: XMLHttpRequest): 'challenge' | 'captcha' | null {
+export function getWAFChallengeType(xhr) {
   if (!xhr.responseURL || !xhr.responseURL.startsWith(window.location.origin)) {
     return null;
   }

@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useMemo, useEffect, useCallback } from "react";
 import { d4, wA } from "../vendor/514228";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { bL, mc as _$$mc, c$ } from "../905/493196";
 import { v as _$$v } from "../905/213481";
 import { b as _$$b, bL as _$$bL, mc as _$$mc2, YJ, hE } from "../figma_app/860955";
@@ -68,7 +68,7 @@ export let $$C2 = {
             return _$$t("tile.sort_filter.sort_direction_descending");
         }
       default:
-        xb(e);
+        throwTypeError(e);
     }
   }
 };

@@ -1,4 +1,4 @@
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { eU } from "../figma_app/27355";
 import { bt } from "../905/111321";
 import { c as _$$c, r as _$$r } from "../905/676456";
@@ -86,7 +86,7 @@ export class $$m0 {
       updates: e
     }));
     return e => {
-      "COMMIT" === e ? t(_$$c(i)) : "REJECT" === e ? t(_$$r(i)) : xb(e);
+      "COMMIT" === e ? t(_$$c(i)) : "REJECT" === e ? t(_$$r(i)) : throwTypeError(e);
     };
   }
   createAtom(e) {

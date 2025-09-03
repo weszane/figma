@@ -1,7 +1,7 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useState, memo, useCallback, useRef, useMemo, PureComponent, Component } from "react";
 import { d4, wA, Ng } from "../vendor/514228";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import p from "classnames";
 import { Ay } from "../905/612521";
 import { oJ, Gc } from "../905/63728";
@@ -906,7 +906,7 @@ $$ev7.defaultProps = {
                   resource: e
                 }, e.id);
               default:
-                xb(t);
+                throwTypeError(t);
             }
           }), jsx($$ev7, {
             numResources: this.props.resources.length,

@@ -1,5 +1,5 @@
 import { zRx } from "../figma_app/822011";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { t as _$$t } from "../905/303541";
 import { ud, Gu } from "../905/513035";
 import { Gj } from "../figma_app/217457";
@@ -53,7 +53,7 @@ export function $$m7(e, t, r, s) {
       if (t || !r) return _$$t("plan_settings.auto_approval_settings.options.manual_approval.description.hide_free_access");
       return _$$t("plan_settings.auto_approval_settings.options.manual_approval.description");
     default:
-      xb(e);
+      throwTypeError(e);
   }
 }
 export function $$g2(e, t) {
@@ -65,7 +65,7 @@ export function $$g2(e, t) {
     case zRx.MANUAL_APPROVAL:
       return null;
     default:
-      xb(e);
+      throwTypeError(e);
   }
 }
 export function $$f5(e) {

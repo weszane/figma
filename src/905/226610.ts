@@ -1,4 +1,4 @@
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { zGX } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { zl, md } from "../figma_app/27355";
@@ -263,7 +263,7 @@ export function $$S1(e) {
     case zGX.COMMENTS_A11Y:
       return $$x0.commentsA11y.getValue();
     default:
-      xb(e);
+      throwTypeError(e);
   }
 }
 export const nt = $$x0;

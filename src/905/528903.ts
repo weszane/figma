@@ -1,7 +1,7 @@
 import { z } from "../vendor/835909";
 var $$n0;
-let a = z.$$enum(["fill", "stroke"]);
-!function(e) {
+let a = z.enum(["fill", "stroke"]);
+!function (e) {
   e.MISSING_COLOR_TOKEN = "MISSING_COLOR_TOKEN";
   e.MISSING_CORNER_RADII = "MISSING_CORNER_RADII";
 }($$n0 || ($$n0 = {}));
@@ -17,7 +17,7 @@ let o = z.object({
     value: a
   }), z.object({
     ruleType: z.literal("MISSING_CORNER_RADII"),
-    value: z.$$enum(["topLeftRadius", "topRightRadius", "bottomLeftRadius", "bottomRightRadius"])
+    value: z.enum(["topLeftRadius", "topRightRadius", "bottomLeftRadius", "bottomRightRadius"])
   })]),
   newValue: z.string().optional(),
   deleted: z.boolean().optional()

@@ -3,7 +3,7 @@ import _require from "../0c62c2fd/322783";
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useMemo, useCallback, useRef, useState, useEffect } from "react";
 import { wA, d4 } from "../vendor/514228";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { N as _$$N } from "../905/438674";
 import { b as _$$b } from "../905/946806";
@@ -734,7 +734,7 @@ let e5 = kp(function (e) {
             case UW.MORE_THREE_MONTHS:
               return _$$t("team_view.team_members_table.filters.last_active..more_than_3_months_ago");
             default:
-              xb(e);
+              throwTypeError(e);
           }
         }(e),
         updateFilter: t => e.onFilter({
@@ -1157,7 +1157,7 @@ function tG(e) {
       case ud.COLLABORATOR:
         return e || t.unwrapOr(null)?.upgradeApprovalSettingsCollaborator === zRx.INSTANT_APPROVAL;
       default:
-        xb(a);
+        throwTypeError(a);
     }
   }, !1);
   _$$S(UC, () => {
@@ -2386,7 +2386,7 @@ export function $$aG0(e) {
       });
       break;
     default:
-      return xb(Q);
+      return throwTypeError(Q);
   }
   V && (K ||= "loading" === W.status);
   let en = K || "loading" === R.status || C;

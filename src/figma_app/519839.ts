@@ -1,4 +1,4 @@
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { isNotNullish } from "../figma_app/95419";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { XJn, NUh, glU } from "../figma_app/763686";
@@ -605,7 +605,7 @@ let $$eo4 = nF(async (e, t = {}) => {
       case PW.MANAGED_STRING:
         break;
       default:
-        xb(r);
+        throwTypeError(r);
     }
     t === M$.UNPUBLISH && (a = `${a}Unpublished`);
     let s = a;

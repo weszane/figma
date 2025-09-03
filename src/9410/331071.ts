@@ -31,7 +31,7 @@ import { x as _$$x } from "../905/179739";
 import { Ev, eg as _$$eg, HD, NH, i6 as _$$i2, lw as _$$lw, F$, Mq, vI, mi } from "../figma_app/297822";
 import { kz, s3 as _$$s2 } from "../figma_app/171177";
 import { p as _$$p } from "../9410/363670";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { lQ as _$$lQ } from "../905/934246";
 import { useHandleMouseEvent, generateRecordingKey } from "../figma_app/878298";
 import { Uz, xH } from "../905/63728";
@@ -449,13 +449,13 @@ async function eZ(e, t, i) {
     messages: [...t, e]
   })).pipeThrough((r = {}, new TransformStream({
     async transform(e, t) {
-      if (e.choices.length && (r = function(e, t) {
+      if (e.choices.length && (r = function (e, t) {
         let i = (e, t) => {
           for (let [r, n] of (e = {
             ...e
           }, Object.entries(t))) if (void 0 === e[r] || null === e[r]) {
             if (e[r] = n, Array.isArray(e[r])) for (let t of e[r]) delete t.index;
-          } else if ("string" == typeof e[r] && "string" == typeof n) e[r] += n; else if ("number" == typeof e[r] && "number" == typeof n) e[r] = n; else if (Array.isArray(e[r]) && Array.isArray(n)) {
+          } else if ("string" == typeof e[r] && "string" == typeof n) e[r] += n;else if ("number" == typeof e[r] && "number" == typeof n) e[r] = n;else if (Array.isArray(e[r]) && Array.isArray(n)) {
             let t = e[r];
             for (let e = 0; e < n.length; e++) {
               let {
@@ -859,7 +859,7 @@ async function tC(e, t, i, r) {
     }));
     let o = [];
     for (let e of t) {
-      let t = function(e) {
+      let t = function (e) {
         if ("tool" !== e.role) return e;
         let t = e.content;
         let i = "string" == typeof t ? JSON.parse(t) : t;
@@ -881,13 +881,13 @@ async function tC(e, t, i, r) {
           case "request-feature":
             return e;
           default:
-            xb(n);
+            throwTypeError(n);
         }
       }(e);
       o.push(t);
     }
     let l = (await eZ(s, o, r)).getReader();
-    for (; ;) {
+    for (;;) {
       let {
         done,
         value
@@ -902,7 +902,7 @@ async function tC(e, t, i, r) {
       let {
         sendFollowup,
         newMessages
-      } = function(e) {
+      } = function (e) {
         if ("tool" !== e.role) return {
           sendFollowup: !1,
           newMessages: []
@@ -938,7 +938,7 @@ async function tC(e, t, i, r) {
               newMessages: []
             };
           default:
-            xb(n);
+            throwTypeError(n);
         }
       }(value);
       newMessages.length > 0 && sendFollowup && (n = newMessages[newMessages.length - 1]);
@@ -959,7 +959,7 @@ async function tC(e, t, i, r) {
     }));
   }
 }
-let tA = memo(function(e) {
+let tA = memo(function (e) {
   return jsx("svg", {
     width: "24",
     height: "24",
@@ -998,7 +998,7 @@ function t0(e) {
           obj: e,
           depth
         });
-      } catch (e) { }
+      } catch (e) {}
       return obj.startsWith("data:image") ? jsx(t$, {
         url: obj
       }) : obj.length > 300 && obj.match(/^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)?$/) ? jsx(t$, {
@@ -1062,7 +1062,7 @@ function t2({
     })
   });
 }
-let t3 = Ju(function({
+let t3 = Ju(function ({
   messages: e
 }) {
   let t = wA();
@@ -1251,7 +1251,7 @@ function t8({
       });
       break;
     default:
-      xb(e);
+      throwTypeError(e);
   }
   return jsx(_$$N, {
     mode: "popLayout",
@@ -1367,14 +1367,14 @@ function it({
   try {
     let i = new DOMParser().parseFromString(e, "text/xml").getElementsByTagName("user_input");
     i.length > 0 && (t = i[0].textContent || "");
-  } catch { }
+  } catch {}
   return jsx("div", {
     children: t.split("\n").map((e, t) => jsxs("span", {
       children: [e, jsx("br", {})]
     }, `l-${t}`))
   });
 }
-let ic = memo(function(e) {
+let ic = memo(function (e) {
   return jsx("svg", {
     width: "24",
     height: "24",
@@ -1429,7 +1429,7 @@ function i_(e) {
     case null:
       return 100;
     default:
-      return xb(e);
+      return throwTypeError(e);
   }
 }
 let iw = new Set([_$$JT.REMOVE_BACKGROUND, _$$JT.UPSCALE_IMAGE]);
@@ -1465,7 +1465,7 @@ function iW({
     })]
   });
 }
-let i$ = memo(function(e) {
+let i$ = memo(function (e) {
   return jsx("svg", {
     width: "24",
     height: "24",
@@ -1480,7 +1480,7 @@ let i$ = memo(function(e) {
     })
   });
 });
-let i8 = memo(function(e) {
+let i8 = memo(function (e) {
   return _$$O() ? jsx("svg", {
     width: "24",
     height: "24",
@@ -1574,7 +1574,7 @@ async function r$(e, t, i) {
   for (let n of i.flatMap(e => e.nodeWeightInfos)) {
     let i = r.get(n.nodeId);
     if (!i) continue;
-    let a = function(e, t, i, r) {
+    let a = function (e, t, i, r) {
       if (!_$$z2[t]) return;
       let n = _$$z2[e];
       if (n) return n[i][r];
@@ -1633,7 +1633,7 @@ async function nt({
     return !1;
   }
   if (ne.set(s, !0), !a.getSharedPluginData("jsx", "isImage")) {
-    _$$l2.ai("first-draft-iterate-text-content", () => function({
+    _$$l2.ai("first-draft-iterate-text-content", () => function ({
       node: e,
       textContent: t
     }) {
@@ -1730,7 +1730,7 @@ function nl() {
   let e = _$$eY();
   let t = Object.entries(KH()).filter(([e, t]) => t).map(([e]) => e);
   let i = null;
-  for (let r of t) if (i = function(t) {
+  for (let r of t) if (i = function (t) {
     let i = "";
     let r = t;
     for (; !i && r;) {
@@ -2003,7 +2003,7 @@ var nX = (e => (e.TITLE = "title", e.BODY = "body", e.LABLE = "label", e))(nX ||
 let nZ = "theme_editor--svgText--yyKtR";
 let nQ = createContext({
   activeTab: nq.COLOR,
-  onTabChange: () => { },
+  onTabChange: () => {},
   recordingKey: void 0
 });
 function n$({
@@ -2196,7 +2196,7 @@ function n9(e) {
   return jsx(nQ.Provider, {
     value: o,
     children: jsx(nB, {
-      defaultActiveIndex: function(e) {
+      defaultActiveIndex: function (e) {
         switch (e) {
           case nq.COLOR:
             return 0;
@@ -2251,7 +2251,7 @@ function n9(e) {
   });
 }
 let ae = {
-  [nq.COLOR]: function(e) {
+  [nq.COLOR]: function (e) {
     let t = DP();
     let [i, r] = useState(!1);
     let {
@@ -2301,7 +2301,7 @@ let ae = {
       })]
     });
   },
-  [nq.RADIUS]: function(e) {
+  [nq.RADIUS]: function (e) {
     let [t, i] = useState(e.cornerRadiusStop);
     return jsxs("div", {
       className: _$$s3.flex.flexRow.flexGrow1.itemsCenter.p16.gap16.$,
@@ -2324,7 +2324,7 @@ let ae = {
       })]
     });
   },
-  [nq.SPACING]: function(e) {
+  [nq.SPACING]: function (e) {
     let [t, i] = useState(e.spacingStop);
     return jsxs("div", {
       className: _$$s3.flex.flexRow.flexGrow1.itemsCenter.p16.gap16.$,
@@ -2347,7 +2347,7 @@ let ae = {
       })]
     });
   },
-  [nq.FONT]: function(e) {
+  [nq.FONT]: function (e) {
     let [t, i, r] = _$$t3.useTabs({
       [nX.TITLE]: null !== e.titleFont,
       [nX.BODY]: null !== e.bodyFont,
@@ -2650,7 +2650,7 @@ function af(e) {
     applyMakeChanges,
     resetMakeChanges,
     instrumentationRef
-  } = function({
+  } = function ({
     clientLifecycleId: e
   }) {
     let [t] = useState({
@@ -2698,7 +2698,7 @@ function af(e) {
               let {
                 content
               } = a;
-              content && function(e, t, i) {
+              content && function (e, t, i) {
                 let r = UN().get(e);
                 if (!r) return;
                 let n = _$$BY(r);
@@ -2707,7 +2707,7 @@ function af(e) {
                   jR(r, e, n);
                 }
                 let a = t.darkMode ? _$$lH.DARK : _$$lH.LIGHT;
-                let s = t.brandColor ?? function(e) {
+                let s = t.brandColor ?? function (e) {
                   let t = uP(e, {
                     ignoreOpacity: !0
                   });
@@ -2879,7 +2879,7 @@ function af(e) {
         return;
       }
       let h = A.current || "";
-      let _ = function(e) {
+      let _ = function (e) {
         if (!getFeatureFlags().first_draft_prompt_history || !getFeatureFlags().first_draft_make_changes_history) return [];
         let t = Q_();
         if (!t) return [];
@@ -2888,10 +2888,10 @@ function af(e) {
         if (!r) return [];
         try {
           return _$$z.array(Db).parse(JSON.parse(r));
-        } catch { }
+        } catch {}
         return [];
       }(f.guid);
-      let y = function(e) {
+      let y = function (e) {
         let t = uP(e, {
           ignoreOpacity: !0
         });
@@ -2920,7 +2920,7 @@ function af(e) {
       _.push({
         prompt: h
       });
-      (function(e, t) {
+      (function (e, t) {
         let i = Q_();
         if (!i) return;
         let r = `${rX}${e}`;
@@ -2928,7 +2928,7 @@ function af(e) {
       })(f.guid, _);
       let v = C.getReader();
       let E = [];
-      for (; ;) {
+      for (;;) {
         let {
           done,
           value
@@ -3082,7 +3082,7 @@ function af(e) {
                 case "other":
                   break;
                 default:
-                  return xb(t);
+                  return throwTypeError(t);
               }
             }
           }
@@ -3139,7 +3139,7 @@ function af(e) {
         aiTrackingContext: t
       });
     default:
-      xb(y);
+      throwTypeError(y);
   }
 }
 function ag({
@@ -3241,7 +3241,7 @@ function ag({
   let V = useRef(null);
   let W = useRef(null);
   let Y = useCallback((e, t) => {
-    if (W.current) V.current = [e, W.current]; else {
+    if (W.current) V.current = [e, W.current];else {
       W.current = e;
       let i = F_(t);
       _$$l2.user("first-draft-apply-brand-color", () => {
@@ -3524,13 +3524,13 @@ function aI({
   }
 }
 function ak(e) {
-  let t = function(e, t) {
+  let t = function (e, t) {
     let i = {};
     for (let r of e.childrenNodes) !function e(t, i, r, n, a = null) {
       var s;
       let o = r.components[t.guid];
       s = r.isMobileDesign;
-      let l = ("FRAME" === t.type || "INSTANCE" === t.type) && (!s || function(e, t, i = .1) {
+      let l = ("FRAME" === t.type || "INSTANCE" === t.type) && (!s || function (e, t, i = .1) {
         return Math.abs(e - t) < i;
       }(t.size.x, i.size.x - i.stackLeftPadding - i.stackLeftPadding));
       let c = [];
@@ -3553,7 +3553,7 @@ function ak(e) {
         descendantComponentGuids: c,
         parentComponent: a
       };
-      (function(e) {
+      (function (e) {
         let {
           node,
           tree,
@@ -3579,7 +3579,7 @@ function ak(e) {
           e && (e.isListItem = !0, e.isBuildingBlock = !1);
         }
       })(u);
-      (function(e) {
+      (function (e) {
         let {
           node,
           tree,
@@ -3594,7 +3594,7 @@ function ak(e) {
           inferReason: "component-for-orphaned-atoms"
         });
       })(u);
-      (function(e) {
+      (function (e) {
         let {
           node,
           tree,
@@ -3609,7 +3609,7 @@ function ak(e) {
           inferReason: "component-for-uncomponentized-element"
         });
       })(u);
-      (function(e) {
+      (function (e) {
         let {
           node,
           designNode,
@@ -3624,7 +3624,7 @@ function ak(e) {
           aI(e);
         }
       })(u);
-      (function({
+      (function ({
         node: e,
         tree: t,
         parentComponent: i,
@@ -3653,7 +3653,7 @@ function ak(e) {
           });
         }
       })(u);
-      let p = function({
+      let p = function ({
         node: e,
         designNode: t,
         tree: i,
@@ -3700,7 +3700,7 @@ function ak(e) {
   let {
     suggestedComponentTree,
     node
-  } = function(e, t) {
+  } = function (e, t) {
     let i = XJn.detachDesignForComponentize(e.guid, Object.keys(t));
     let r = {};
     for (let [e, n] of Object.entries(t)) {
@@ -3745,7 +3745,7 @@ function aN() {
       let {
         nodes,
         nodeMappings
-      } = _$$l2.user("clone-nodes", () => function(e, t) {
+      } = _$$l2.user("clone-nodes", () => function (e, t) {
         let i = [];
         let r = {
           x: NY(t.copiedDesigns).right() + CN,
@@ -3781,7 +3781,7 @@ function aN() {
             r && (e.components[i] = r, delete e.components[t]);
           }
           _$$l2.user("componentize", () => {
-            !function(e, t) {
+            !function (e, t) {
               let i = UN();
               if (!i.getCurrentPage()) return;
               let r = NY(t.buildingBlocks);
@@ -3800,7 +3800,7 @@ function aN() {
                 name,
                 isBuildingBlock
               } of e) {
-                let e = i.get(function(e, t) {
+                let e = i.get(function (e, t) {
                   for (; t[e];) e = t[e];
                   return e;
                 }(guid, o));
@@ -3808,7 +3808,7 @@ function aN() {
                 let c = XJn.findSimilarNodes(e.guid, t.buildingBlocks.guid, !1, !0, !0).concat(XJn.findSimilarNodes(e.guid, t.atoms.guid, !1, !0, !0));
                 let u = c[0] ? i.get(c[0]) : null;
                 if (!u) {
-                  if ("FRAME" === e.type) (u = i.createComponentFromNode(e.clone())).name = name; else {
+                  if ("FRAME" === e.type) (u = i.createComponentFromNode(e.clone())).name = name;else {
                     if (!(u = i.get(e.clone()))) throw Error("Failed to clone instance");
                     _$$T6(u);
                   }
@@ -4062,7 +4062,7 @@ function aB(e) {
         aiTrackingContext
       });
     default:
-      xb(f);
+      throwTypeError(f);
   }
 }
 let aU = async ({
@@ -4158,7 +4158,7 @@ function aG(e) {
         aiTrackingContext
       });
     default:
-      xb(f);
+      throwTypeError(f);
   }
 }
 function aK(e) {
@@ -4216,10 +4216,10 @@ function aK(e) {
         case qy.DONE:
           return jsx(zY, {});
         default:
-          xb(_state);
+          throwTypeError(_state);
       }
     default:
-      xb(state);
+      throwTypeError(state);
   }
 }
 async function aH(e, t) {
@@ -4249,7 +4249,7 @@ async function aH(e, t) {
     });
     let a = n.choices[0]?.message.content;
     return a ? {
-      ...function(e) {
+      ...function (e) {
         if (!e) throw Error("No content detected in GPT response");
         let t = JSON.parse(e.replace(/```json\n|```/g, ""));
         let i = _$$AR.parse(t);
@@ -4431,20 +4431,20 @@ let aJ = async ({
     for (let r of (i.name = "Results", biQ.setTextContentOnTextNode(i.guid, `False Negative Count: ${l.reduce((e, t) => e + t.falseNegativeCount, 0)}
 False Positive Count: ${l.reduce((e, t) => e + t.falsePositiveCount, 0)}
 Correct Count: ${l.reduce((e, t) => e + t.correctCount, 0)}`), i.x = 10, i.y = 10, i.size = {
-        x: 200,
-        y: 200
-      }, i.fills = i.fills.concat([{
-        type: "SOLID",
-        color: {
-          r: 0,
-          g: 0,
-          b: 0,
-          a: 1
-        },
-        visible: !0,
-        opacity: 1,
-        blendMode: "NORMAL"
-      }]), t.appendChild(i), e.appendChild(t), l)) {
+      x: 200,
+      y: 200
+    }, i.fills = i.fills.concat([{
+      type: "SOLID",
+      color: {
+        r: 0,
+        g: 0,
+        b: 0,
+        a: 1
+      },
+      visible: !0,
+      opacity: 1,
+      blendMode: "NORMAL"
+    }]), t.appendChild(i), e.appendChild(t), l)) {
       let t = r.result;
       if (!yZ(t.expectedComponents, t.components)) {
         let i = XJn.cloneNodeForComponentize(t.node.guid);
@@ -4621,8 +4621,8 @@ function sc({
             dir: "auto",
             maxLength: 100,
             onChange: e => {
-              !function(e) {
-                if (d(e), 0 === e.length) g(null); else {
+              !function (e) {
+                if (d(e), 0 === e.length) g(null);else {
                   let t = e.toLowerCase();
                   g(allUsableKitEntries.filter(e => sp(e).toLowerCase().includes(t)));
                 }
@@ -4741,7 +4741,7 @@ function sp(e) {
       if (e.metadata.identifier) return _$$t(`first_draft.kits.${e.metadata.identifier}`) || e.name;
       return e.name;
     default:
-      return xb(e.dsKitKey);
+      return throwTypeError(e.dsKitKey);
   }
 }
 function sh() {
@@ -4884,7 +4884,7 @@ function sg({
   allowNodeAttachments: h
 }) {
   let m;
-  let [f] = useState(function(e = 3, t) {
+  let [f] = useState(function (e = 3, t) {
     let i = getFeatureFlags().first_draft_new_prompt_pills;
     let r = [{
       label: _$$t("first_draft.prompts.pricing_page.label"),
@@ -5590,7 +5590,7 @@ function sw({
     case qy.CANCELLED:
       return null;
     default:
-      xb(state);
+      throwTypeError(state);
   }
 }
 let sI = "7f12ea1300756f144a0fb5daaf68dbfc01103a46";
@@ -5719,7 +5719,7 @@ async function sz(e, t, i, r, n, a, s, o) {
   }
   if (!node) throw Error(`Failed to deserialize node${issues.length ? `: ${issues.map(e => e.message).join(", ")}` : ""}`);
   let p = await Promise.all(s.objects.filter(e => "image" === e.cls || "vector" === e.cls).map(async e => {
-    let t = function(e, t, i, r) {
+    let t = function (e, t, i, r) {
       let n = new Uint8Array(r.width * r.height * 4);
       for (let i = 0; i < r.height; i++) for (let a = 0; a < r.width; a++) {
         let s = r.x + a;
@@ -5735,7 +5735,7 @@ async function sz(e, t, i, r, n, a, s, o) {
         width: r.width,
         height: r.height
       };
-    }(function(e, t, i, r) {
+    }(function (e, t, i, r) {
       let n = new Uint8Array(e.length);
       for (let a = 0; a < r; a++) for (let r = 0; r < i; r++) {
         let s = (a * i + r) * 4;
@@ -5746,7 +5746,7 @@ async function sz(e, t, i, r, n, a, s, o) {
         n[s + 3] = (e[s + 3] ?? 0) * (o ?? 0) / 255;
       }
       return n;
-    }(r, function(e, t, i, r, n) {
+    }(r, function (e, t, i, r, n) {
       let a = new Uint8Array(r * n);
       for (let s = 0; s < n; s++) for (let o = 0; o < r; o++) {
         let l = Math.floor(o * t / r);
@@ -5760,13 +5760,13 @@ async function sz(e, t, i, r, n, a, s, o) {
       width: e.width,
       height: e.height
     });
-    let i = sB(function(e, t, i) {
+    let i = sB(function (e, t, i) {
       let r = t * i * 4;
       if (e.length !== r) throw Error(`Data length (${e.length}) does not match expected dimensions (${r})`);
       let {
         canvas,
         ctx
-      } = function(e, t) {
+      } = function (e, t) {
         let i = document.createElement("canvas");
         i.width = e;
         i.height = t;
@@ -5776,7 +5776,7 @@ async function sz(e, t, i, r, n, a, s, o) {
           ctx: r
         };
       }(t, i);
-      (function(e, t, i, r) {
+      (function (e, t, i, r) {
         let n = e.createImageData(t, i);
         n.data.set(r);
         e.putImageData(n, 0, 0);
@@ -5797,12 +5797,12 @@ async function sz(e, t, i, r, n, a, s, o) {
     u();
     return new _$$lc2();
   }
-  let h = function({
+  let h = function ({
     node: e,
     graphics: t
   }) {
     var i;
-    let [r, n] = function(e, t) {
+    let [r, n] = function (e, t) {
       let i = [];
       !function e(t) {
         if (i.push(t), t.childrenNodes) for (let i of t.childrenNodes) e(i);
@@ -5816,7 +5816,7 @@ async function sz(e, t, i, r, n, a, s, o) {
           let {
             relativeBounds,
             isVisible
-          } = function(e, t) {
+          } = function (e, t) {
             let i = e.absoluteBoundingBox;
             if (!i) return {
               relativeBounds: void 0,
@@ -5846,7 +5846,7 @@ async function sz(e, t, i, r, n, a, s, o) {
       });
       return [n, a];
     }(e, e => sO(e) || sD(e));
-    let [a, s] = function(e, t) {
+    let [a, s] = function (e, t) {
       let i = e.filter(t);
       return [i.map(e => ({
         boundingBox: {
@@ -5857,11 +5857,11 @@ async function sz(e, t, i, r, n, a, s, o) {
         }
       })), i];
     }(t, e => "image" === e.type || "vector" === e.type);
-    let [o, l] = function(e, t, i = sN.intersectionOverUnion) {
+    let [o, l] = function (e, t, i = sN.intersectionOverUnion) {
       let {
         columnsForRow,
         rowForColumn
-      } = function(e, t = !1) {
+      } = function (e, t = !1) {
         if (0 === e.length || 0 === e[0].length) return {
           columnsForRow: [],
           rowForColumn: [],
@@ -5891,7 +5891,7 @@ async function sz(e, t, i, r, n, a, s, o) {
             predecessors,
             updatedU,
             updatedV
-          } = function(e, t, i, r, n, a) {
+          } = function (e, t, i, r, n, a) {
             let s = r.length;
             let o = r[0].length;
             let l = Array(s).fill(0);
@@ -5946,7 +5946,7 @@ async function sz(e, t, i, r, n, a, s, o) {
           l = updatedU;
           d = updatedV;
           let c = sink;
-          for (; ;) {
+          for (;;) {
             let e = predecessors[c];
             s[c] = e;
             let i = o[e];
@@ -5968,7 +5968,7 @@ async function sz(e, t, i, r, n, a, s, o) {
           rowForColumn: o,
           gain: c
         };
-      }(function(e, t, i) {
+      }(function (e, t, i) {
         let {
           distanceFunction,
           options
@@ -5999,7 +5999,7 @@ async function sz(e, t, i, r, n, a, s, o) {
           let i = s[t];
           let r = n[e];
           if (r && i?.imageSetForInsertion) {
-            if (sO(r)) r.insertImageInFillPaint(i.imageSetForInsertion); else if (sD(r)) {
+            if (sO(r)) r.insertImageInFillPaint(i.imageSetForInsertion);else if (sD(r)) {
               let e = d.createNode("RECTANGLE");
               e.name = r.name || r.type;
               e.size = {
@@ -6140,7 +6140,7 @@ let sX = async ({
       pixelData,
       width,
       height
-    } = function(e) {
+    } = function (e) {
       let t = sG(e);
       if (!t) throw Error("Cannot process image");
       return t;
@@ -6148,7 +6148,7 @@ let sX = async ({
     let {
       node,
       location
-    } = function(e, t, i) {
+    } = function (e, t, i) {
       return {
         node: e.parentNode,
         location: new Point(e.x + t + (t + i) / 2 * .15, e.y)
@@ -6581,7 +6581,7 @@ let oi = [{
   featureFlags: ["first_draft_fine_tune"],
   quickAction: {
     module: {
-      module: jsx(function() {
+      module: jsx(function () {
         let e = lazy(() => _require2);
         let {
           aiTrackingContext
@@ -6625,7 +6625,7 @@ let oi = [{
   notFeatureFlags: ["first_draft_use_gemini"],
   quickAction: {
     module: {
-      module: jsx(function() {
+      module: jsx(function () {
         let e = nl();
         let [t] = useState(e);
         return jsx(am, {
@@ -6645,7 +6645,7 @@ let oi = [{
   featureFlags: ["first_draft_native", "first_draft_make_kit"],
   quickAction: {
     module: {
-      module: jsx(function() {
+      module: jsx(function () {
         let {
           pop
         } = cq();
@@ -6679,7 +6679,7 @@ let oi = [{
   featureFlags: ["first_draft_native", "first_draft_make_kit", "first_draft_debug"],
   quickAction: {
     module: {
-      module: jsx(function() {
+      module: jsx(function () {
         let e = wA();
         let {
           close
@@ -6687,8 +6687,8 @@ let oi = [{
         let {
           inputs,
           renderInput
-        } = function(e, t, i) {
-          let r = useMemo(() => function(e) {
+        } = function (e, t, i) {
+          let r = useMemo(() => function (e) {
             let t = e.reduce((e, t) => (e[t] = _$$z.object({
               override: _$$z.string(),
               enabled: _$$z.boolean()
@@ -6700,7 +6700,7 @@ let oi = [{
             setInputs,
             handleInputChange,
             handleCheckboxChange
-          } = function(e, t, i, r) {
+          } = function (e, t, i, r) {
             let [n, s] = useState(() => {
               let n = localStorage.getItem(t);
               if (n) try {
@@ -6748,7 +6748,7 @@ let oi = [{
             label: t,
             rows: i = 3,
             placeholder: r = "Enter override"
-          }) => function(e, t, i, r, a, s = 3, o = "Enter override") {
+          }) => function (e, t, i, r, a, s = 3, o = "Enter override") {
             let l = e[t] || {
               override: "",
               enabled: !1
@@ -6790,7 +6790,7 @@ let oi = [{
             renderInput: c
           };
         }(aq, "firstDraftMakeKitDebugState");
-        let o = useMemo(() => inputs.componentizeResultMapping.enabled ? async () => await function(e) {
+        let o = useMemo(() => inputs.componentizeResultMapping.enabled ? async () => await function (e) {
           if (!e || "" === e.trim()) return {};
           try {
             return JSON.parse(e);
@@ -6904,7 +6904,7 @@ let oi = [{
   featureFlags: ["first_draft_native", "first_draft_debug"],
   quickAction: {
     module: {
-      module: jsx(function() {
+      module: jsx(function () {
         let e = lazy(() => _require3);
         return jsx(_$$tH, {
           boundaryKey: "MakeEdits",
@@ -7074,7 +7074,7 @@ let oi = [{
   iconType: jsx(_$$T3, {}),
   quickAction: {
     module: {
-      module: jsx(function() {
+      module: jsx(function () {
         let e = _$$to2();
         let {
           close
@@ -7236,7 +7236,7 @@ let oi = [{
   iconType: jsx(_$$f3, {}),
   quickAction: {
     module: {
-      module: jsx(function() {
+      module: jsx(function () {
         let {
           start
         } = RL(_$$JT.IMAGE_TO_DESIGN, sX);
@@ -7265,7 +7265,7 @@ let oi = [{
   iconType: jsx(_$$V2, {}),
   quickAction: {
     module: {
-      module: jsx(function() {
+      module: jsx(function () {
         let {
           start
         } = RL(_$$JT.IMAGE_TO_DESIGN_ORACLE, sZ);
@@ -7310,7 +7310,7 @@ let oi = [{
   iconType: jsx(_$$r2, {}),
   quickAction: {
     module: {
-      module: jsx(function() {
+      module: jsx(function () {
         let e = RL(_$$JT.MERMAID_TO_DIAGRAM, rk);
         let {
           start,
@@ -7559,8 +7559,8 @@ function ov() {
   let {
     reason,
     dismissKey
-  } = function() {
-    let e = function() {
+  } = function () {
+    let e = function () {
       let e = useMemo(() => [], []);
       let t = _$$R5();
       let i = D6("useAIDisabledReasons").unwrapOr(null);
@@ -7593,7 +7593,7 @@ function ov() {
     };
     return useMemo(() => {
       for (let i of e) {
-        let e = function(e) {
+        let e = function (e) {
           switch (e) {
             case oy.ROLLING_OUT:
               return "seen_no_ai_rolling_out";
@@ -7607,7 +7607,7 @@ function ov() {
             case null:
               return null;
             default:
-              xb(e);
+              throwTypeError(e);
           }
         }(i);
         if (!e) return {
@@ -7648,7 +7648,7 @@ function ov() {
       });
       break;
     default:
-      xb(reason);
+      throwTypeError(reason);
   }
   return jsx("div", {
     className: _$$s3.mx8.mb8.$,
@@ -7678,7 +7678,7 @@ function oE(e) {
     case null:
       return 1e3;
     default:
-      xb(e);
+      throwTypeError(e);
   }
 }
 function oN(e) {
@@ -7701,9 +7701,9 @@ function oN(e) {
   if (ZQ(extension)) return {
     text: _$$t("qa.extensions.development")
   };
-  if (canRun); else if (o) return {
+  if (canRun) ;else if (o) return {
     text: _$$t("qa.extensions.approval_pending")
-  }; else if (canRequest) return {
+  };else if (canRequest) return {
     text: _$$t("qa.extensions.needs_approval")
   };
   return null;
@@ -7741,7 +7741,7 @@ function oO(e) {
   });
 }
 let oM = e => Zj(e) && !e.hideCheckForQuickCommand;
-let oP = () => { };
+let oP = () => {};
 function oF({
   item: e,
   searchQuery: t,
@@ -7864,7 +7864,7 @@ function oF({
         }
         break;
       default:
-        xb(a);
+        throwTypeError(a);
     }
     if (l) {
       push({
@@ -7954,7 +7954,7 @@ function oF({
       disabled: e.disabled,
       displayNode: A,
       label: EG(e),
-      icon: function(e) {
+      icon: function (e) {
         if ("plugins-menu-item" === e.name) {
           let t;
           return (e.pluginId && (t = DM({
@@ -8054,13 +8054,13 @@ function oB({
   useEffect(() => {
     u.current = l;
   }, [l]);
-  let f = function() {
+  let f = function () {
     let e = _$$FX();
     let t = or();
-    let i = function() {
+    let i = function () {
       let e = d4(e => e.mirror.appModel.isReadOnly);
       let t = c4();
-      let i = function() {
+      let i = function () {
         let e = wo();
         let t = cW();
         let i = ZT();
@@ -8102,7 +8102,7 @@ function oB({
         }
       }), [e, t, i]);
     }();
-    let r = function() {
+    let r = function () {
       let e = p8("pagesList");
       let t = bG({
         pagesList: e,
@@ -8127,10 +8127,10 @@ function oB({
         })
       })) : [], [e, t]);
     }();
-    let o = function() {
+    let o = function () {
       let e = _p();
       let t = Zr("send-to-make-from-design");
-      let i = function() {
+      let i = function () {
         let e = UN().getDirectlySelectedNodes();
         return _$$j(e.map(e => e.name)) ?? null;
       }();
@@ -8147,7 +8147,7 @@ function oB({
         })
       }] : [], [t, i, e, r]);
     }();
-    let l = function() {
+    let l = function () {
       let e = Zr("send-to-buzz-from-design");
       let t = d4(_$$tB);
       let i = d4(vx);
@@ -8206,7 +8206,7 @@ function oB({
   }();
   let g = eP();
   let _ = iD(g, f);
-  let x = function(e, t, i, r) {
+  let x = function (e, t, i, r) {
     let o = wo();
     let l = filterNotNullish(o.map(i => {
       let r = t.getItem(e, i.displayName);
@@ -8215,13 +8215,13 @@ function oB({
     })).slice(0, 3);
     let {
       items
-    } = function(e, t, i) {
+    } = function (e, t, i) {
       let r = PE();
       let n = ZC(r);
-      let o = function(e, t, i) {
+      let o = function (e, t, i) {
         let r = ig();
         let n = t.map(e);
-        let o = function() {
+        let o = function () {
           let e = m0();
           let t = _$$e3();
           let i = ZO();
@@ -8229,8 +8229,8 @@ function oB({
           let n = PE();
           return t ? "VARIABLES_TABLE" : i ? "COMPONENT_BROWSER" : e ? "DEV" : !1 === r ? "DESIGN_VIEWER" : r && n ? "DESIGN_EDITOR_AI" : r && !n ? "DESIGN_EDITOR_NO_AI" : "NONE";
         }();
-        let l = function(e, t) {
-          let i = function() {
+        let l = function (e, t) {
+          let i = function () {
             let e = d4(e => e.mirror?.appModel);
             let t = ig();
             let {
@@ -8269,7 +8269,7 @@ function oB({
                 c.push(_$$JT.CONTENT_FILL, _$$JT.TRANSLATE_TEXT, _$$JT.REWRITE_TEXT, _$$JT.SHORTEN_TEXT, _$$JT.SLIDES_GENERATE_SPEAKER_NOTES, _$$JT.SLIDES_REWRITE_TEXT, _$$JT.GENERATE_IMAGE, _$$JT.REMOVE_BACKGROUND, _$$JT.UPSCALE_IMAGE, _$$JT.EDIT_IMAGE, _$$JT.FIRST_DRAFT_MAKE_CHANGES, _$$JT.AUTO_RENAME_LAYERS, _$$JT.MAGIC_LINK, _$$JT.FIND_INSPIRATION, _$$JT.FIRST_DRAFT, _$$JT.MAKE_EDITS, _$$JT.FIRST_DRAFT_FINE_TUNE, _$$JT.SUMMARIZE_STICKIES, _$$JT.SORT_STICKIES_BY_TOPIC, _$$JT.MIND_MAP_GENERATE_IDEAS);
                 o && c.push(OZ);
                 let p = [...c].map(e => t(d, e)).filter(e => !!e);
-                let m = p.sort((e, t) => function(e, t, i) {
+                let m = p.sort((e, t) => function (e, t, i) {
                   if (1 === e) {
                     if (iw.has(t.action ?? "") && !iw.has(i.action ?? "")) return -1;
                     if (!iw.has(t.action ?? "") && iw.has(i.action ?? "")) return 1;
@@ -8294,7 +8294,7 @@ function oB({
           let [r] = useState(() => i(e, ""));
           return r;
         }(t, 0);
-        let c = function(e, t) {
+        let c = function (e, t) {
           let i = !iR();
           return useCallback(() => {
             if (i) {
@@ -8311,7 +8311,7 @@ function oB({
             return r;
           }, [e, t, i]);
         }(e, l);
-        let u = function() {
+        let u = function () {
           let e = I9();
           let t = p8("activeCanvasEditModeType");
           let i = _$$C2();
@@ -8405,7 +8405,7 @@ function oB({
             case "NONE":
               return [];
             default:
-              xb(o);
+              throwTypeError(o);
           }
         }, [g, o, l, m, f, c, u]);
         return {
@@ -8421,7 +8421,7 @@ function oB({
     }(e, t, l);
     let p = "" !== i;
     let m = useMemo(() => "" === i ? [] : t.search(e, i).slice(0, 25), [e, t, i]);
-    let f = function(e, t) {
+    let f = function (e, t) {
       let i = my() === _$$nT.Design;
       let r = q5();
       let o = _$$V4();
@@ -8440,7 +8440,7 @@ function oB({
             args: {
               searchQuery: e
             },
-            callback: () => { },
+            callback: () => {},
             displayNode: m ? _$$tx("fullscreen_actions.quick_actions.find-in-community", {
               searchQuery: jsx(_$$E, {
                 color: "secondary",
@@ -8478,7 +8478,7 @@ function oB({
             args: {
               searchQuery: e
             },
-            callback: () => { },
+            callback: () => {},
             displayNode: m ? o ? _$$tx("fullscreen_actions.quick_actions.find-at-plan-file", {
               searchQuery: jsx(_$$E, {
                 color: "secondary",
@@ -8534,7 +8534,7 @@ function oB({
             args: {
               searchQuery: e
             },
-            callback: () => { },
+            callback: () => {},
             displayNode: m ? _$$tx(getFeatureFlags().actions_prioritize_search ? "fullscreen_actions.quick_actions.search-at-plan-file-and-community" : "fullscreen_actions.quick_actions.find-at-plan-file-and-community", {
               searchQuery: jsx(_$$E, {
                 color: "secondary",
@@ -8584,7 +8584,7 @@ function oB({
             args: {
               searchQuery: e
             },
-            callback: () => { },
+            callback: () => {},
             displayNode: _$$tx("fullscreen_actions.assistant-chat-query", {
               query: jsx(_$$E, {
                 color: "secondary",
@@ -8642,7 +8642,7 @@ function oB({
   });
   let y = _$$X2(x);
   let b = x.length;
-  let v = function(e) {
+  let v = function (e) {
     let t = im()(ip()(e, e => e.category), (e, t) => ({
       category: Object.values(_$$b4).find(e => t === e) || null,
       items: e
@@ -8698,7 +8698,7 @@ function oB({
         items: t,
         globalIdxOfFirstItem: i
       }) => null !== e && t.length > 0 && v.length > 1 ? jsx(_$$B6.Section, {
-        header: function(e) {
+        header: function (e) {
           switch (e) {
             case _$$b4.RECENTS:
               return _$$t("qa.category.recents");
@@ -8727,7 +8727,7 @@ function oB({
             case _$$b4.TEMPLATES_AND_DIAGRAMS:
               return _$$t("qa.category.templates_and_diagrams");
             default:
-              return xb(e);
+              return throwTypeError(e);
           }
         }(e),
         children: t.map((e, t) => jsx(oF, {
@@ -8869,7 +8869,7 @@ function ly(e) {
   let t = wA();
   let i = lx(e);
   return useCallback(r => {
-    if (i) t(_$$oB2()); else {
+    if (i) t(_$$oB2());else {
       let i = r.getBoundingClientRect();
       t(j7({
         type: l_,
@@ -9101,7 +9101,7 @@ function lj({
   let {
     onAction,
     actionText
-  } = function({
+  } = function ({
     manifestError: e,
     augmentedExtension: t,
     submenuRef: i
@@ -9483,7 +9483,7 @@ function l2({
   invitedWidgets: t,
   selectedFilter: i
 }) {
-  let r = function({
+  let r = function ({
     invitedPlugins: e,
     invitedWidgets: t,
     selectedFilter: i
@@ -9499,7 +9499,7 @@ function l2({
       case BY.FROM_ORG:
         return [];
       default:
-        xb(i);
+        throwTypeError(i);
     }
   }({
     invitedPlugins: e,
@@ -9719,12 +9719,12 @@ function ds({
   let {
     loaded,
     extensions
-  } = function(e) {
+  } = function (e) {
     let t = Oy();
     let {
       loaded: _loaded,
       extensions: _extensions
-    } = function() {
+    } = function () {
       let e = wA();
       let t = _$$lg();
       let [i, r] = useState([]);
@@ -9732,7 +9732,7 @@ function ds({
       let l = useMemo(() => {
         let e = {
           resourceType: [vt.PLUGIN, vt.WIDGET],
-          editorType: function(e) {
+          editorType: function (e) {
             switch (e) {
               case FFileType.SLIDES:
                 return _$$q5.SLIDES;
@@ -9793,7 +9793,7 @@ function ds({
     myExtensions,
     suggestedExtensions,
     otherExtensionsFromOrg
-  } = function(e, t) {
+  } = function (e, t) {
     let i = vA(t);
     let r = [];
     let n = [];
@@ -9822,7 +9822,7 @@ function ds({
   let v = t === BY.DEVELOPMENT;
   let S = t === BY.FROM_ORG;
   let I = loaded || S || v;
-  let N = function({
+  let N = function ({
     myExtensions: e,
     suggestedExtensions: t,
     otherExtensionsFromOrg: i,
@@ -9969,13 +9969,13 @@ function dv({
     publicExtensions,
     privateExtensions,
     localExtensions
-  } = function(e) {
+  } = function (e) {
     let {
       status,
       results,
       errors
-    } = function(e) {
-      let t = function(e) {
+    } = function (e) {
+      let t = function (e) {
         switch (e) {
           case _$$nT.Design:
           case _$$nT.Illustration:
@@ -9994,7 +9994,7 @@ function dv({
           case _$$nT.Figmake:
             return _$$k6.Editors.ALL;
           default:
-            xb(e);
+            throwTypeError(e);
         }
       }(my());
       let i = U5();
@@ -10027,7 +10027,7 @@ function dv({
         errors: s
       };
     }(e);
-    let n = function(e) {
+    let n = function (e) {
       let t = $1();
       let i = useMemo(() => Object.values(t), [t]);
       let r = useMemo(() => new Ef(i, Ih), [i]);
@@ -10072,11 +10072,11 @@ function dv({
             localExtensions: []
           };
         default:
-          xb(status);
+          throwTypeError(status);
       }
     }, [results?.private, results?.public, n, status, errors]);
   }(p);
-  let b = function(e, t) {
+  let b = function (e, t) {
     let i = lk(t);
     let r = useMemo(() => new Ef(i, zd), [i]);
     return useMemo(() => r.search(e), [r, e]);
@@ -10092,7 +10092,7 @@ function dv({
     myExtensions,
     fromOrgExtensions,
     communityExtensions
-  } = dw(function({
+  } = dw(function ({
     publicExtensions: e,
     privateExtensions: t,
     localExtensions: i
@@ -10110,7 +10110,7 @@ function dv({
     localExtensions
   }), e, t);
   let N = myExtensions.length + fromOrgExtensions.length + communityExtensions.length + b.length;
-  let A = function({
+  let A = function ({
     myExtensions: e,
     actionItems: t,
     fromOrgExtensions: i,
@@ -10228,7 +10228,7 @@ function dS({
   }) : jsx(_$$R6, {});
 }
 function dI() {
-  !function() {
+  !function () {
     let e = md(IH);
     let t = md(_$$f);
     let {
@@ -10238,7 +10238,7 @@ function dI() {
       let e = debugState.getState();
       e.modalShown || e.dropdownShown || e.pickerShown || autoClose();
     }, [autoClose]);
-    !function({
+    !function ({
       ref: e,
       handler: t,
       eventType: i = "mousedown",
@@ -10417,7 +10417,7 @@ function dI() {
           })]
         })
       }), jsx(_$$n.Body, {
-        children: function() {
+        children: function () {
           switch (u) {
             case Jc.ALL:
               ey(!0);
@@ -10435,7 +10435,7 @@ function dI() {
                 selectedFilter: l
               });
             default:
-              return xb(u);
+              return throwTypeError(u);
           }
         }()
       })]
@@ -10464,7 +10464,7 @@ let dN = (e, t) => {
   });
 };
 function dA() {
-  !function() {
+  !function () {
     let e = Xr(P_);
     let t = FG();
     let i = AR();
@@ -10802,4 +10802,4 @@ function dK() {
   let i = XV();
   return e ? jsx(dA, {}) : t ? jsx(dP, {}) : i ? jsx(dB, {}) : null;
 }
-export const l = $$dG0; 
+export const l = $$dG0;

@@ -1,6 +1,6 @@
 import { d4 } from "../vendor/514228";
 import { filterNotNullish } from "../figma_app/656233";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { getFeatureFlags } from "../905/601108";
 import { xx } from "../figma_app/815945";
 import { Ek } from "../905/553831";
@@ -147,7 +147,7 @@ function k(e) {
         starterRestrictionType: "fullyRestricted"
       };
     default:
-      xb(e);
+      throwTypeError(e);
   }
 }
 export function $$M14(e, t) {
@@ -175,7 +175,7 @@ export function $$M14(e, t) {
             }
             return !0;
           default:
-            xb(r);
+            throwTypeError(r);
         }
       }
     case 3:
@@ -195,11 +195,11 @@ export function $$M14(e, t) {
               return !0;
             }
           default:
-            xb(r);
+            throwTypeError(r);
         }
       }
     default:
-      xb(t);
+      throwTypeError(t);
   }
 }
 export function $$F24(e, t) {
@@ -296,7 +296,7 @@ export function $$V23(e, t) {
           return _$$t("team_view.toolbar.billing");
       }
     default:
-      xb(e);
+      throwTypeError(e);
   }
 }
 let H = new RegExp(/[https?:?\/\/]?[a-z.]*figma[\-.\da-z:]*\/files\/([A-z0-9]*)\/team\/(\d+)/);

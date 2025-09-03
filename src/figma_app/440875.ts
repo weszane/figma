@@ -1,6 +1,6 @@
 import { useCallback, useState, useEffect } from "react";
 import { wA, d4 } from "../vendor/514228";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { isNotNullish, isNullish } from "../figma_app/95419";
 import { h3O } from "../figma_app/763686";
 import { md } from "../figma_app/27355";
@@ -130,7 +130,7 @@ export function $$R12(e) {
       case "initial":
         return S;
       default:
-        xb(m);
+        throwTypeError(m);
     }
   })();
   return {

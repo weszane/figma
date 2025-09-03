@@ -73,10 +73,10 @@ let u = _$$z.object({
   opacity: _$$z.number(),
   transform: bG
 });
-let p = _$$z.$$enum(["PAGE_LOAD", "THIS_LAYER_IN_VIEW", "OTHER_LAYER_IN_VIEW", "SCROLL_DIRECTION"]);
-let m = _$$z.$$enum(["PAGE_HEIGHT", "THIS_LAYER_IN_VIEW", "OTHER_LAYER_IN_VIEW"]);
+let p = _$$z.enum(["PAGE_LOAD", "THIS_LAYER_IN_VIEW", "OTHER_LAYER_IN_VIEW", "SCROLL_DIRECTION"]);
+let m = _$$z.enum(["PAGE_HEIGHT", "THIS_LAYER_IN_VIEW", "OTHER_LAYER_IN_VIEW"]);
 let h = _$$z.object({
-  behaviorType: _$$z.literal(d.$$enum.Appear),
+  behaviorType: _$$z.literal(d.enum.Appear),
   trigger: p,
   enterTransition: c,
   enterState: u
@@ -88,74 +88,74 @@ let g = _$$z.object({
 });
 let f = _$$z.object({
   ...h.shape,
-  trigger: _$$z.literal(p.$$enum.PAGE_LOAD)
+  trigger: _$$z.literal(p.enum.PAGE_LOAD)
 });
 let _ = _$$z.object({
   ...g.shape,
-  trigger: _$$z.literal(p.$$enum.THIS_LAYER_IN_VIEW),
+  trigger: _$$z.literal(p.enum.THIS_LAYER_IN_VIEW),
   playsOnce: _$$z.boolean()
 });
 let A = _$$z.object({
   ...g.shape,
-  trigger: _$$z.literal(p.$$enum.OTHER_LAYER_IN_VIEW),
+  trigger: _$$z.literal(p.enum.OTHER_LAYER_IN_VIEW),
   otherLayer: rw,
   playsOnce: _$$z.boolean()
 });
 let y = _$$z.object({
   ...h.shape,
-  trigger: _$$z.literal(p.$$enum.SCROLL_DIRECTION),
+  trigger: _$$z.literal(p.enum.SCROLL_DIRECTION),
   playsOnce: _$$z.boolean()
 });
 let b = _$$z.object({
-  behaviorType: _$$z.literal(d.$$enum.Hover),
+  behaviorType: _$$z.literal(d.enum.Hover),
   transition: c,
   state: u
 });
 let v = _$$z.object({
-  behaviorType: _$$z.literal(d.$$enum.Press),
+  behaviorType: _$$z.literal(d.enum.Press),
   transition: c,
   state: u
 });
 let I = _$$z.object({
-  behaviorType: _$$z.literal(d.$$enum.Focus),
+  behaviorType: _$$z.literal(d.enum.Focus),
   transition: c,
   state: u
 });
 let E = _$$z.object({
-  behaviorType: _$$z.literal(d.$$enum.ScrollParallax),
+  behaviorType: _$$z.literal(d.enum.ScrollParallax),
   speed: _$$z.number()
 });
 let x = _$$z.object({
-  behaviorType: _$$z.literal(d.$$enum.ScrollTransform),
+  behaviorType: _$$z.literal(d.enum.ScrollTransform),
   fromState: u,
   toState: u,
   transition: c
 });
 let S = _$$z.object({
   ...x.shape,
-  trigger: _$$z.literal(m.$$enum.PAGE_HEIGHT)
+  trigger: _$$z.literal(m.enum.PAGE_HEIGHT)
 });
 let w = _$$z.object({
   ...x.shape,
-  trigger: _$$z.literal(m.$$enum.THIS_LAYER_IN_VIEW),
+  trigger: _$$z.literal(m.enum.THIS_LAYER_IN_VIEW),
   playsOnce: _$$z.boolean()
 });
 let C = _$$z.object({
   ...x.shape,
-  trigger: _$$z.literal(m.$$enum.OTHER_LAYER_IN_VIEW),
+  trigger: _$$z.literal(m.enum.OTHER_LAYER_IN_VIEW),
   otherLayer: rw,
   playsOnce: _$$z.boolean()
 });
 let T = _$$z.object({
-  behaviorType: _$$z.literal(d.$$enum.Cursor),
+  behaviorType: _$$z.literal(d.enum.Cursor),
   hotspotX: _$$z.number(),
   hotspotY: _$$z.number(),
   cursorGuid: rw,
   cursorFileName: _$$z.string().optional()
 });
 let k = _$$z.object({
-  behaviorType: _$$z.literal(d.$$enum.Marquee),
-  direction: _$$z.$$enum(["LEFT", "RIGHT", "UP", "DOWN"]),
+  behaviorType: _$$z.literal(d.enum.Marquee),
+  direction: _$$z.enum(["LEFT", "RIGHT", "UP", "DOWN"]),
   speed: _$$z.number(),
   shouldLoopInfinitely: _$$z.boolean()
 });
@@ -175,7 +175,7 @@ _$$z.object({
   width: _$$z.number().optional()
 });
 let N = _$$z.object({
-  behaviorType: _$$z.literal(d.$$enum.Code),
+  behaviorType: _$$z.literal(d.enum.Code),
   codeComponentId: _$$z.string(),
   assignments: _$$z.record(_$$z.string(), _$$z.union([_$$z.string(), _$$z.boolean(), _$$z.number(), R])),
   codeBehaviorData: _$$z.object({
@@ -210,7 +210,7 @@ let j = _$$z.object({
   visible: _$$z.boolean().optional(),
   locked: _$$z.boolean().optional(),
   isFixed: _$$z.boolean().optional(),
-  scrollBehavior: _$$z.$$enum(["SCROLLS", "FIXED", "STICKY_SCROLLS"]).optional(),
+  scrollBehavior: _$$z.enum(["SCROLLS", "FIXED", "STICKY_SCROLLS"]).optional(),
   componentPropertyReferences: _$$z.record(_$$z.string()).optional(),
   boundVariables: o,
   explicitVariableModes: _$$z.record(_$$z.string()).optional(),
@@ -238,21 +238,21 @@ let H = _$$z.object({
   constraints: G.optional(),
   relativeTransform: QV,
   size: $l,
-  layoutAlign: _$$z.$$enum(["INHERIT", "STRETCH", "MIN", "CENTER", "MAX"]).optional(),
+  layoutAlign: _$$z.enum(["INHERIT", "STRETCH", "MIN", "CENTER", "MAX"]).optional(),
   layoutGrow: _$$z.number().optional(),
-  layoutPositioning: _$$z.$$enum(["AUTO", "ABSOLUTE"]).optional(),
+  layoutPositioning: _$$z.enum(["AUTO", "ABSOLUTE"]).optional(),
   gridColumnAnchorIndex: _$$z.number().optional(),
   gridRowAnchorIndex: _$$z.number().optional(),
   gridColumnSpan: _$$z.number().optional(),
   gridRowSpan: _$$z.number().optional(),
-  gridChildHorizontalAlign: _$$z.$$enum(["MIN", "CENTER", "MAX"]).optional(),
-  gridChildVerticalAlign: _$$z.$$enum(["MIN", "CENTER", "MAX"]).optional(),
+  gridChildHorizontalAlign: _$$z.enum(["MIN", "CENTER", "MAX"]).optional(),
+  gridChildVerticalAlign: _$$z.enum(["MIN", "CENTER", "MAX"]).optional(),
   minWidth: _$$z.number().optional().nullable(),
   maxWidth: _$$z.number().optional().nullable(),
   minHeight: _$$z.number().optional().nullable(),
   maxHeight: _$$z.number().optional().nullable(),
-  layoutSizingHorizontal: _$$z.$$enum(["FIXED", "HUG", "FILL"]).optional(),
-  layoutSizingVertical: _$$z.$$enum(["FIXED", "HUG", "FILL"]).optional(),
+  layoutSizingHorizontal: _$$z.enum(["FIXED", "HUG", "FILL"]).optional(),
+  layoutSizingVertical: _$$z.enum(["FIXED", "HUG", "FILL"]).optional(),
   targetAspectRatio: $l.optional(),
   constraintValues: _$$z.object({
     top: z,
@@ -285,7 +285,7 @@ let Y = _$$z.object({
 });
 let q = _$$z.object({
   ...W.shape,
-  type: _$$z.$$enum(["GRADIENT_LINEAR", "GRADIENT_RADIAL", "GRADIENT_ANGULAR", "GRADIENT_DIAMOND"]),
+  type: _$$z.enum(["GRADIENT_LINEAR", "GRADIENT_RADIAL", "GRADIENT_ANGULAR", "GRADIENT_DIAMOND"]),
   transform: QV,
   gradientStops: _$$z.array(Y)
 });
@@ -301,7 +301,7 @@ let $ = _$$z.object({
 let Z = _$$z.object({
   ...W.shape,
   type: _$$z.literal("IMAGE"),
-  scaleMode: _$$z.$$enum(["FILL", "FIT", "TILE", "STRETCH"]),
+  scaleMode: _$$z.enum(["FILL", "FIT", "TILE", "STRETCH"]),
   imageRef: _$$z.string(),
   imageTransform: QV.optional(),
   scalingFactor: _$$z.number().optional(),
@@ -319,7 +319,7 @@ let X = _$$z.object({
   videoRef: _$$z.string(),
   imageTransform: QV.optional(),
   scalingFactor: _$$z.number().optional(),
-  scaleMode: _$$z.$$enum(["FILL", "FIT", "TILE", "STRETCH"])
+  scaleMode: _$$z.enum(["FILL", "FIT", "TILE", "STRETCH"])
 });
 let Q = _$$z.object({
   ...W.shape,
@@ -332,7 +332,7 @@ let ee = _$$z.object({
 let et = _$$z.object({
   strokes: _$$z.array(J),
   strokeWeight: _$$z.number(),
-  strokeAlign: _$$z.$$enum(["INSIDE", "OUTSIDE", "CENTER"]),
+  strokeAlign: _$$z.enum(["INSIDE", "OUTSIDE", "CENTER"]),
   strokeDashes: _$$z.array(_$$z.number())
 }).partial();
 let ei = _$$z.object({
@@ -364,7 +364,7 @@ let ea = _$$z.object({
 });
 _$$z.union([er, ea]);
 let es = _$$z.object({
-  type: _$$z.$$enum(["LAYER_BLUR", "BACKGROUND_BLUR"]),
+  type: _$$z.enum(["LAYER_BLUR", "BACKGROUND_BLUR"]),
   radius: _$$z.number().gte(0),
   boundVariables: _$$z.object({
     radius: Yj
@@ -378,7 +378,7 @@ let el = _$$z.object({
   type: _$$z.literal("TEXTURE")
 });
 let ed = _$$z.object({
-  type: _$$z.$$enum(["REPEAT", "SYMMETRY", "GLASS"])
+  type: _$$z.enum(["REPEAT", "SYMMETRY", "GLASS"])
 });
 let ec = _$$z.discriminatedUnion("type", [er, ea, es, eo, el, ed]);
 let eu = _$$z.object({
@@ -386,7 +386,7 @@ let eu = _$$z.object({
 });
 let ep = _$$z.object({
   isMask: _$$z.boolean(),
-  maskType: _$$z.$$enum(["ALPHA", "VECTOR", "LUMINANCE"])
+  maskType: _$$z.enum(["ALPHA", "VECTOR", "LUMINANCE"])
 }).partial();
 let em = _$$z.object({
   isBreakpointFrame: _$$z.boolean()
@@ -430,14 +430,14 @@ let ey = _$$z.object({
   itemId: _$$z.string().optional(),
   fieldSchemaId: _$$z.string().optional()
 });
-let eb = _$$z.$$enum(["ON_CLICK", "AFTER_TIMEOUT", "MOUSE_IN", "MOUSE_OUT", "ON_HOVER", "MOUSE_DOWN", "MOUSE_UP", "ON_PRESS", "NONE", "DRAG", "ON_KEY_DOWN", "ON_VOICE", "ON_MEDIA_HIT", "ON_MEDIA_END", "MOUSE_ENTER", "MOUSE_LEAVE"]);
-let ev = _$$z.$$enum(["INSTANT_TRANSITION", "DISSOLVE", "FADE", "SLIDE_FROM_LEFT", "SLIDE_FROM_RIGHT", "SLIDE_FROM_TOP", "SLIDE_FROM_BOTTOM", "PUSH_FROM_LEFT", "PUSH_FROM_RIGHT", "PUSH_FROM_TOP", "PUSH_FROM_BOTTOM", "MOVE_FROM_LEFT", "MOVE_FROM_RIGHT", "MOVE_FROM_TOP", "MOVE_FROM_BOTTOM", "SLIDE_OUT_TO_LEFT", "SLIDE_OUT_TO_RIGHT", "SLIDE_OUT_TO_TOP", "SLIDE_OUT_TO_BOTTOM", "MOVE_OUT_TO_LEFT", "MOVE_OUT_TO_RIGHT", "MOVE_OUT_TO_TOP", "MOVE_OUT_TO_BOTTOM", "SMART_ANIMATE", "SCROLL_ANIMATE"]);
-let eI = _$$z.$$enum(["NONE", "INTERNAL_NODE", "URL", "BACK", "CLOSE", "SET_VARIABLE", "UPDATE_MEDIA_RUNTIME", "CONDITIONAL", "SET_VARIABLE_MODE", "OBJECT_ANIMATION"]);
-let eE = _$$z.$$enum(["NAVIGATE", "SWAP", "OVERLAY", "SCROLL_TO", "CHANGE_TO", "OPEN_OVERLAY", "CLOSE_OVERLAY", "SWAP_STATE"]);
-let ex = _$$z.$$enum(["PLAY", "PAUSE", "TOGGLE_PLAY_PAUSE", "MUTE", "UNMUTE", "TOGGLE_MUTE_UNMUTE", "SKIP_FORWARD", "SKIP_BACKWARD", "SKIP_TO"]);
-let eS = _$$z.$$enum(["NONE", "FADE", "SLIDE_FROM_LEFT", "SLIDE_FROM_RIGHT", "SLIDE_FROM_TOP", "SLIDE_FROM_BOTTOM"]);
-let ew = _$$z.$$enum(["IN", "OUT"]);
-let eC = _$$z.$$enum(["KEYBOARD", "UNKNOWN_CONTROLLER", "XBOX_ONE", "PS4", "SWITCH_PRO"]);
+let eb = _$$z.enum(["ON_CLICK", "AFTER_TIMEOUT", "MOUSE_IN", "MOUSE_OUT", "ON_HOVER", "MOUSE_DOWN", "MOUSE_UP", "ON_PRESS", "NONE", "DRAG", "ON_KEY_DOWN", "ON_VOICE", "ON_MEDIA_HIT", "ON_MEDIA_END", "MOUSE_ENTER", "MOUSE_LEAVE"]);
+let ev = _$$z.enum(["INSTANT_TRANSITION", "DISSOLVE", "FADE", "SLIDE_FROM_LEFT", "SLIDE_FROM_RIGHT", "SLIDE_FROM_TOP", "SLIDE_FROM_BOTTOM", "PUSH_FROM_LEFT", "PUSH_FROM_RIGHT", "PUSH_FROM_TOP", "PUSH_FROM_BOTTOM", "MOVE_FROM_LEFT", "MOVE_FROM_RIGHT", "MOVE_FROM_TOP", "MOVE_FROM_BOTTOM", "SLIDE_OUT_TO_LEFT", "SLIDE_OUT_TO_RIGHT", "SLIDE_OUT_TO_TOP", "SLIDE_OUT_TO_BOTTOM", "MOVE_OUT_TO_LEFT", "MOVE_OUT_TO_RIGHT", "MOVE_OUT_TO_TOP", "MOVE_OUT_TO_BOTTOM", "SMART_ANIMATE", "SCROLL_ANIMATE"]);
+let eI = _$$z.enum(["NONE", "INTERNAL_NODE", "URL", "BACK", "CLOSE", "SET_VARIABLE", "UPDATE_MEDIA_RUNTIME", "CONDITIONAL", "SET_VARIABLE_MODE", "OBJECT_ANIMATION"]);
+let eE = _$$z.enum(["NAVIGATE", "SWAP", "OVERLAY", "SCROLL_TO", "CHANGE_TO", "OPEN_OVERLAY", "CLOSE_OVERLAY", "SWAP_STATE"]);
+let ex = _$$z.enum(["PLAY", "PAUSE", "TOGGLE_PLAY_PAUSE", "MUTE", "UNMUTE", "TOGGLE_MUTE_UNMUTE", "SKIP_FORWARD", "SKIP_BACKWARD", "SKIP_TO"]);
+let eS = _$$z.enum(["NONE", "FADE", "SLIDE_FROM_LEFT", "SLIDE_FROM_RIGHT", "SLIDE_FROM_TOP", "SLIDE_FROM_BOTTOM"]);
+let ew = _$$z.enum(["IN", "OUT"]);
+let eC = _$$z.enum(["KEYBOARD", "UNKNOWN_CONTROLLER", "XBOX_ONE", "PS4", "SWITCH_PRO"]);
 let eT = _$$z.object({
   triggerDevice: eC,
   keyCodes: _$$z.array(_$$z.number())
@@ -512,12 +512,12 @@ let eF = _$$z.object({
 });
 let eM = _$$z.object({
   clipsContent: _$$z.boolean(),
-  overflowDirection: _$$z.$$enum(["HORIZONTAL_SCROLLING", "VERTICAL_SCROLLING", "HORIZONTAL_AND_VERTICAL_SCROLLING", "NONE"]),
-  layoutMode: _$$z.$$enum(["NONE", "HORIZONTAL", "VERTICAL", "GRID"]),
-  primaryAxisSizingMode: _$$z.$$enum(["FIXED", "AUTO"]),
-  counterAxisSizingMode: _$$z.$$enum(["FIXED", "AUTO"]),
-  primaryAxisAlignItems: _$$z.$$enum(["MIN", "CENTER", "MAX", "SPACE_BETWEEN"]),
-  counterAxisAlignItems: _$$z.$$enum(["MIN", "CENTER", "MAX", "BASELINE"]),
+  overflowDirection: _$$z.enum(["HORIZONTAL_SCROLLING", "VERTICAL_SCROLLING", "HORIZONTAL_AND_VERTICAL_SCROLLING", "NONE"]),
+  layoutMode: _$$z.enum(["NONE", "HORIZONTAL", "VERTICAL", "GRID"]),
+  primaryAxisSizingMode: _$$z.enum(["FIXED", "AUTO"]),
+  counterAxisSizingMode: _$$z.enum(["FIXED", "AUTO"]),
+  primaryAxisAlignItems: _$$z.enum(["MIN", "CENTER", "MAX", "SPACE_BETWEEN"]),
+  counterAxisAlignItems: _$$z.enum(["MIN", "CENTER", "MAX", "BASELINE"]),
   paddingLeft: _$$z.number(),
   paddingRight: _$$z.number(),
   paddingTop: _$$z.number(),
@@ -525,9 +525,9 @@ let eM = _$$z.object({
   itemSpacing: _$$z.number(),
   itemReverseZIndex: _$$z.boolean(),
   strokesIncludedInLayout: _$$z.boolean(),
-  layoutWrap: _$$z.$$enum(["NO_WRAP", "WRAP"]),
+  layoutWrap: _$$z.enum(["NO_WRAP", "WRAP"]),
   counterAxisSpacing: _$$z.number(),
-  counterAxisAlignContent: _$$z.$$enum(["AUTO", "SPACE_BETWEEN"]),
+  counterAxisAlignContent: _$$z.enum(["AUTO", "SPACE_BETWEEN"]),
   gridColumnCount: _$$z.number().optional(),
   gridRowCount: _$$z.number().optional(),
   gridRowGap: _$$z.number().optional(),
@@ -593,7 +593,7 @@ _$$z.object({
   ...eG.shape
 });
 let eW = _$$z.object({
-  type: _$$z.$$enum(["URL", "NODE"]),
+  type: _$$z.enum(["URL", "NODE"]),
   url: _$$z.string().optional(),
   nodeID: _$$z.string().optional(),
   openInNewTab: _$$z.boolean()
@@ -601,9 +601,9 @@ let eW = _$$z.object({
 let eK = _$$z.number();
 let eY = _$$z.number();
 let eq = _$$z.number();
-let e$ = _$$z.$$enum(["NONE", "WIDTH_AND_HEIGHT", "HEIGHT", "TRUNCATE"]);
-let eZ = _$$z.$$enum(["LEFT", "RIGHT", "CENTER", "JUSTIFIED"]);
-let eX = _$$z.$$enum(["TOP", "CENTER", "BOTTOM"]);
+let e$ = _$$z.enum(["NONE", "WIDTH_AND_HEIGHT", "HEIGHT", "TRUNCATE"]);
+let eZ = _$$z.enum(["LEFT", "RIGHT", "CENTER", "JUSTIFIED"]);
+let eX = _$$z.enum(["TOP", "CENTER", "BOTTOM"]);
 let eQ = _$$z.object({
   fontFamily: Yj,
   fontSize: Yj,
@@ -614,12 +614,12 @@ let eQ = _$$z.object({
   paragraphSpacing: Yj,
   paragraphIndent: Yj
 });
-let eJ = _$$z.$$enum(["ORIGINAL", "UPPER", "LOWER", "TITLE", "SMALL_CAPS", "SMALL_CAPS_FORCED"]);
+let eJ = _$$z.enum(["ORIGINAL", "UPPER", "LOWER", "TITLE", "SMALL_CAPS", "SMALL_CAPS_FORCED"]);
 let e0 = _$$z.object({
   lineHeightPx: _$$z.number(),
   lineHeightPercent: _$$z.number(),
   lineHeightPercentFontSize: _$$z.number().optional(),
-  lineHeightUnit: _$$z.$$enum(["PIXELS", "FONT_SIZE_%", "INTRINSIC_%"])
+  lineHeightUnit: _$$z.enum(["PIXELS", "FONT_SIZE_%", "INTRINSIC_%"])
 });
 let e1 = _$$z.object({
   fontFamily: _$$z.string(),
@@ -635,26 +635,26 @@ let e1 = _$$z.object({
   textCase: eJ,
   textDecoration: _$$z.nativeEnum(i8),
   textDecorationSkipInk: _$$z.boolean(),
-  textUnderlineOffsetUnit: _$$z.$$enum(["PIXELS", "PERCENT"]).optional(),
+  textUnderlineOffsetUnit: _$$z.enum(["PIXELS", "PERCENT"]).optional(),
   textUnderlineOffsetValue: _$$z.number().optional(),
-  textDecorationThicknessUnit: _$$z.$$enum(["PIXELS", "PERCENT"]).optional(),
+  textDecorationThicknessUnit: _$$z.enum(["PIXELS", "PERCENT"]).optional(),
   textDecorationThicknessValue: _$$z.number().optional(),
-  textDecorationStyle: _$$z.$$enum(["solid", "dotted", "wavy"]),
+  textDecorationStyle: _$$z.enum(["solid", "dotted", "wavy"]),
   textDecorationFills: _$$z.array(J).optional(),
   textAutoResize: e$,
-  textTruncation: _$$z.$$enum(["DISABLED", "ENDING"]),
+  textTruncation: _$$z.enum(["DISABLED", "ENDING"]),
   maxLines: _$$z.number().optional(),
   textAlignHorizontal: eZ,
   textAlignVertical: eX,
   letterSpacing: _$$z.number(),
   letterSpacingValue: _$$z.number(),
-  letterSpacingUnit: _$$z.$$enum(["PIXELS", "PERCENT"]),
+  letterSpacingUnit: _$$z.enum(["PIXELS", "PERCENT"]),
   fills: _$$z.array(J).optional(),
   hyperlink: eW.optional(),
   opentypeFlags: _$$z.record(_$$z.number()).optional(),
   ...e0.shape,
   hangingList: _$$z.boolean().optional(),
-  leadingTrim: _$$z.$$enum(["NONE", "CAP_HEIGHT"]).optional(),
+  leadingTrim: _$$z.enum(["NONE", "CAP_HEIGHT"]).optional(),
   hangingPunctuation: _$$z.boolean().optional(),
   boundVariables: eQ.partial().optional(),
   styleIdForText: _$$z.string().optional(),
@@ -667,11 +667,11 @@ let e2 = _$$z.object({
   fontSize: _$$z.number().optional(),
   letterSpacing: _$$z.number().optional(),
   letterSpacingValue: _$$z.number().optional(),
-  letterSpacingUnit: _$$z.$$enum(["PIXELS", "PERCENT"]).optional(),
+  letterSpacingUnit: _$$z.enum(["PIXELS", "PERCENT"]).optional(),
   lineHeightPx: _$$z.number().optional(),
   lineHeightPercent: _$$z.number().optional(),
   lineHeightPercentFontSize: _$$z.number().optional(),
-  lineHeightUnit: _$$z.$$enum(["PIXELS", "FONT_SIZE_%", "INTRINSIC_%"]).optional(),
+  lineHeightUnit: _$$z.enum(["PIXELS", "FONT_SIZE_%", "INTRINSIC_%"]).optional(),
   paragraphSpacing: eq.optional()
 });
 let e5 = _$$z.object({
@@ -697,7 +697,7 @@ let e3 = _$$z.object({
   lineIndentations: _$$z.array(_$$z.number()),
   listStartOffsets: _$$z.array(_$$z.number().nullable()),
   lineStyleOverrides: _$$z.array(_$$z.number()),
-  lineTextDirections: _$$z.array(_$$z.$$enum(["ltr", "rtl", "auto"])).nullable().optional(),
+  lineTextDirections: _$$z.array(_$$z.enum(["ltr", "rtl", "auto"])).nullable().optional(),
   lineStartsWithPunctuation: _$$z.record(_$$z.string(), _$$z.boolean()).optional(),
   listSpacing: eK.optional(),
   paragraphIndent: eY.optional(),
@@ -708,9 +708,9 @@ let e3 = _$$z.object({
   responsiveTextStyleVariants: _$$z.array(e5).optional(),
   ...eA.shape
 });
-_$$z.$$enum(["BOOLEAN", "INSTANCE_SWAP", "TEXT", "VARIANT", "NUMBER", "IMAGE"]);
+_$$z.enum(["BOOLEAN", "INSTANCE_SWAP", "TEXT", "VARIANT", "NUMBER", "IMAGE"]);
 let e6 = _$$z.object({
-  type: _$$z.$$enum(["COMPONENT", "COMPONENT_SET"]),
+  type: _$$z.enum(["COMPONENT", "COMPONENT_SET"]),
   key: _$$z.string()
 });
 let e7 = e3.omit({
@@ -927,7 +927,7 @@ let t_ = tf.extend({
   color: $$tp0
 });
 let tA = tf.extend({
-  type: _$$z.$$enum(["gradient-linear", "gradient-radial", "gradient-angular", "gradient-diamond"]),
+  type: _$$z.enum(["gradient-linear", "gradient-radial", "gradient-angular", "gradient-diamond"]),
   gradientHandlePositions: _$$z.array(tm).length(3),
   gradientStops: _$$z.array(tg)
 });
@@ -943,7 +943,7 @@ let ty = _$$z.object({
 let tb = tf.extend({
   type: _$$z.literal("image"),
   imageRef: _$$z.string().describe("The hash of the image to be used for this fill"),
-  scaleMode: _$$z.$$enum(["fill", "fit", "tile", "crop"]).optional(),
+  scaleMode: _$$z.enum(["fill", "fit", "tile", "crop"]).optional(),
   imageTransform: $$th7.optional().describe('Applicable only for scaleMode == "crop". Determines how the image is positioned (thus, cropped) within the layer.'),
   scalingFactor: _$$z.number().optional().describe('Applicable only for scaleMode == "tile" (automatic for other modes). Determines the scaling (thus, repetition) of the image within the layer.'),
   rotation: _$$z.number().optional().describe('Applicable only for scaleMode == "tile" | "fill" | "fit" (automatic for scaleMode == "CROP"). Determines the rotation of the image within the layer. Must be in increments of +90.'),

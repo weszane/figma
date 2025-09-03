@@ -1,4 +1,4 @@
-import { B1 } from "../figma_app/465776";
+import { assertNotNullish } from "../figma_app/465776";
 import { c2 } from "../905/382883";
 import { rXF, Z_n, y0x, J0O, JTp } from "../figma_app/763686";
 import { dI } from "../905/805904";
@@ -37,8 +37,8 @@ export function $$p12(e, t) {
     case "STRING":
       return e.value.textValue === t.value.textValue;
     case "COLOR":
-      B1(e.value.colorValue);
-      B1(t.value.colorValue);
+      assertNotNullish(e.value.colorValue);
+      assertNotNullish(t.value.colorValue);
       return YU(e.value.colorValue) === YU(t.value.colorValue);
     default:
       return c2(e, t);

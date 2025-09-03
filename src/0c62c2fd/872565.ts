@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback, useState, useEffect, PureComponent, createRef, useMemo, useRef } from "react";
 import { wA, d4 } from "../vendor/514228";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { getFeatureFlags } from "../905/601108";
 import l from "../vendor/805353";
 import { sx } from "../905/449184";
@@ -151,7 +151,7 @@ function el({
             className: _$$s.fontSemiBold.$,
             children: tx("viewer_upgrade_awareness.you_re_working_in_drafts_on_a_free_seat")
           }), jsx("p", {
-            children: function(e, t, r) {
+            children: function (e, t, r) {
               switch (r) {
                 case eo.SHARE_DRAFT:
                   if (t === _$$O.ORG) {
@@ -360,7 +360,7 @@ let eS = async (e, t, r, a, s = !1, i = !1, o, l, d, c) => {
       case _$$A.FILE_IMPORT:
         return t.files.map(e => NU(e));
       default:
-        xb(t);
+        throwTypeError(t);
     }
   })();
   let x = new Set(Object.values(u).flat().filter(e => h.every(t => !!t && d6(e, t))).map(e => e.id));
@@ -505,7 +505,7 @@ export function $$e57(e) {
     case _$$A.FILE_IMPORT:
       return null;
     default:
-      xb(e);
+      throwTypeError(e);
   }
 }
 export function $$e83(e) {
@@ -530,7 +530,7 @@ export function $$e83(e) {
   "errors" === x.status && (console.error("Loading AccessibleFolders from LiveGraph: "), console.error(x.errors));
   let b = "loaded" === x.status && ("loaded" === h.status || e.type === _$$A.FILE_IMPORT) ? {
     fetched: x,
-    transformed: function(e, t, r, a) {
+    transformed: function (e, t, r, a) {
       let s = {
         id: e.currentUser.id,
         student_validated_at: e.currentUser.studentValidatedAt && e.currentUser.studentValidatedAt.toString()
@@ -696,7 +696,7 @@ export function $$e83(e) {
     let t = v.userResources.teams[e];
     "ok" !== t.subscription && T.push(t.id);
   }
-  let E = function(e) {
+  let E = function (e) {
     let [t, r] = useState(Xm());
     let a = e.join(",");
     useEffect(() => {
@@ -897,7 +897,7 @@ export class $$e32 extends PureComponent {
           }));
           break;
         default:
-          xb(t);
+          throwTypeError(t);
       }
     }, 2e3, {
       leading: !0,
@@ -1105,7 +1105,7 @@ export class $$e32 extends PureComponent {
         r = null;
         break;
       default:
-        xb(_);
+        throwTypeError(_);
     }
     return jsx(fu, {
       name: _$$e2.FILE_MOVE_MODAL,
@@ -1561,4 +1561,4 @@ export const TeamSection = $$e95;
 export const TeamsDisplay = $$tt6;
 export const getCurrentFolderId = $$e57;
 export const getTargetAttribute = $$e48;
-export const isSubscribedLG = $$e29; 
+export const isSubscribedLG = $$e29;

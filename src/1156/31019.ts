@@ -3,7 +3,7 @@ import { wA } from "../vendor/514228";
 import { lV } from "../figma_app/617606";
 import { J } from "../figma_app/710077";
 import { V, Yg, F$ } from "../figma_app/304955";
-import { vA } from "../figma_app/465776";
+import { assert } from "../figma_app/465776";
 import { glU } from "../figma_app/763686";
 import { Hq } from "../905/189185";
 import { UN } from "../905/700578";
@@ -136,7 +136,7 @@ async function z({
   let j = p ? V() : y ? V(g) : Yg(i);
   let w = Object.fromEntries(j.map(e => [e.codeFileFullPathWithoutScheme, e]));
   Hq.ai("restore-version", () => {
-    if (vA(void 0 !== glU, "Fullscreen must be defined"), p || y) {
+    if (assert(void 0 !== glU, "Fullscreen must be defined"), p || y) {
       let {
         entrypointFilePath
       } = function (e, t) {
@@ -169,8 +169,8 @@ async function z({
       }
     } else {
       let e = Object.entries(h);
-      vA(1 === j.length, "Code layer must have exactly one code file");
-      vA(1 === e.length, "Code layer snapshot must have exactly one code file");
+      assert(1 === j.length, "Code layer must have exactly one code file");
+      assert(1 === e.length, "Code layer snapshot must have exactly one code file");
       let [t, n] = e[0];
       let {
         codeFile

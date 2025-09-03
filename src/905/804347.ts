@@ -55,7 +55,7 @@ import { hasViewerRoleAccessOnTeam, canMemberOrg } from "../figma_app/642025";
 import { G as _$$G2 } from "../figma_app/471068";
 import { p as _$$p2 } from "../905/195198";
 import { Ru } from "../905/572991";
-import { KF } from "../figma_app/465776";
+import { debug } from "../figma_app/465776";
 import { getFeatureFlags } from "../905/601108";
 import { Cm } from "../905/174697";
 import { d as _$$d } from "../905/720066";
@@ -85,7 +85,7 @@ import { A as _$$A } from "../905/351112";
 import { S as _$$S } from "../figma_app/11182";
 import { BK } from "../905/848862";
 import { w as _$$w2 } from "../figma_app/883622";
-import { j as _$$j2 } from "../905/834956";
+import { noop } from "../905/834956";
 import { N as _$$N2 } from "../figma_app/609500";
 function y(e) {
   let {
@@ -510,7 +510,7 @@ let eL = e => {
     case C0.SEARCH_RELEVANCE:
       return Lk.RELEVANCY;
     default:
-      KF(!0, "Should not try to sort by any other key in search list view");
+      debug(!0, "Should not try to sort by any other key in search list view");
       return Lk.NAME;
   }
 };
@@ -633,7 +633,7 @@ let eG = e => {
     case Dq.CREATED_AT:
       return mp.CREATED_AT;
     default:
-      KF(!0, "Should not try to sort by any other key in search list view");
+      debug(!0, "Should not try to sort by any other key in search list view");
       return mp.NAME;
   }
 };
@@ -644,7 +644,7 @@ let ez = e => {
     case mp.CREATED_AT:
       return Dq.CREATED_AT;
     default:
-      KF(!0, "Should not try to sort by any other key in search project list view");
+      debug(!0, "Should not try to sort by any other key in search project list view");
       return Dq.NAME;
   }
 };
@@ -753,7 +753,7 @@ function e6(e) {
       }));
     }
   });
-  return jsx(_$$j2, {
+  return jsx(noop, {
     dispatch: r,
     parentRect: targetRect,
     rootAndSubmenuMinWidth: 120,

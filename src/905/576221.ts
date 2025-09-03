@@ -1,4 +1,4 @@
-import { wc } from "../figma_app/465776";
+import { throwError } from "../figma_app/465776";
 import { glU } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import s from "../vendor/223926";
@@ -17,7 +17,7 @@ class m {
         t[e.type][i].push(e);
         return this.shouldReturnEarlyOnUpdate;
       }
-      wc("Unexpected library item type: " + e.type);
+      throwError("Unexpected library item type: " + e.type);
     };
     this.publishItem = (e, t) => this.addItem(e, t, M$.PUBLISH);
     this.unpublishItem = (e, t) => this.addItem(e, t, M$.UNPUBLISH);

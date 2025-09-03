@@ -1,6 +1,6 @@
 import { useCallback, useRef, useEffect } from "react";
 import { d4 } from "../vendor/514228";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { getFeatureFlags } from "../905/601108";
 import { tT } from "../905/663269";
 import { az } from "../905/449184";
@@ -242,7 +242,7 @@ export function $$en26({
       case FOrganizationLevelType.TEAM:
         return getConfig().get("enabled", !1);
       default:
-        xb(n);
+        throwTypeError(n);
     }
   }, [t, _getConfig3, getConfig, r]);
 }

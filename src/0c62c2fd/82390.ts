@@ -260,7 +260,7 @@ import { Y as _$$Y7 } from '../905/830372';
 import { O as _$$O2 } from '../905/833838';
 import { u as _$$u0 } from '../905/834238';
 import { $ as _$$$3 } from '../905/834575';
-import { j as _$$j } from '../905/834956';
+import { noop } from '../905/834956';
 import { Cy } from '../905/844322';
 import { dq as _$$dq, sZ as _$$sZ } from '../905/845253';
 import { BK, Um } from '../905/848862';
@@ -525,7 +525,7 @@ import { zh } from '../figma_app/448654';
 import { e3 as _$$e15, UX, v$ } from '../figma_app/455722';
 import { s1 as _$$s6 } from '../figma_app/464758';
 import { D6 as _$$D, fh as _$$fh, px as _$$px, sI as _$$sI, T5 as _$$T, X$ as _$$X$, H3, j_, Kd, No, S2, W8, XP, YY } from '../figma_app/465071';
-import { xb as _$$xb, S9, vA } from '../figma_app/465776';
+import { throwTypeError, returnSecond, assert } from '../figma_app/465776';
 import { G as _$$G4, o as _$$o0 } from '../figma_app/471068';
 import { A as _$$A2, x as _$$x } from '../figma_app/475340';
 import { KQ as _$$KQ, Rw } from '../figma_app/475472';
@@ -887,7 +887,7 @@ function tt(e) {
     isIntendedAudience: e.org.bigma_enabled && !r
   });
   if (!(r || _ || f)) return null;
-  let h = function(e) {
+  let h = function (e) {
     switch (e.view) {
       case 'orgAdminSettings':
       case 'billingGroupDashboard':
@@ -1052,7 +1052,7 @@ function tv(e) {
   let {
     shouldShowFirstDtmPostMigrationOverlay,
     switchedFromDtmOnboarding
-  } = function() {
+  } = function () {
     let e = S2();
     let {
       isDraftsToMovePlan,
@@ -1183,7 +1183,7 @@ function tA(e) {
     displayText: _$$t('sidebar.delete_section'),
     callback: () => s()
   }];
-  return jsx(_$$j, {
+  return jsx(noop, {
     depth: 0,
     dispatch: t,
     hidePointWhenContentOffScreen: !0,
@@ -1352,7 +1352,7 @@ function rh(e) {
   }, {
     disabled: !(p && d)
   })];
-  return jsx(_$$j, {
+  return jsx(noop, {
     items: f,
     parentRect: u.data.targetRect,
     showPoint: !1,
@@ -1375,7 +1375,7 @@ function rx(e) {
     }));
     t(_$$oB());
   })];
-  return jsx(_$$j, {
+  return jsx(noop, {
     items: s,
     parentRect: r.data.targetRect,
     showPoint: !1,
@@ -1400,7 +1400,7 @@ function rb(e) {
     }
     t(_$$oB());
   })];
-  return jsx(_$$j, {
+  return jsx(noop, {
     items: s,
     parentRect: r.data.targetRect,
     showPoint: !1,
@@ -1423,7 +1423,7 @@ function rv(e) {
     }));
     t(_$$oB());
   })];
-  return jsx(_$$j, {
+  return jsx(noop, {
     items: s,
     parentRect: r.data.targetRect,
     showPoint: !1,
@@ -1446,7 +1446,7 @@ function ry(e) {
     }));
     t(_$$oB());
   })];
-  return jsx(_$$j, {
+  return jsx(noop, {
     items: s,
     parentRect: r.data.targetRect,
     showPoint: !1,
@@ -2277,7 +2277,7 @@ function rH(e) {
               showGrabber: !1
             });
           default:
-            _$$xb(b);
+            throwTypeError(b);
         }
       })()
     })
@@ -3409,7 +3409,7 @@ function a8(e) {
   });
 }
 function ss(e, t, r) {
-  let a = function(e, t) {
+  let a = function (e, t) {
     let r = _$$jv({
       billableProductKeys: _$$N_,
       baseQuery: {
@@ -3606,7 +3606,7 @@ function sw(e) {
   }
 }
 function sj() {
-  let e = function() {
+  let e = function () {
     let e = _$$ol();
     let t = wA();
     let r = _$$d(e => e.teamBilling.summary);
@@ -3643,7 +3643,7 @@ function sj() {
       teamId: e.id
     })), d) : null;
   }();
-  let t = function() {
+  let t = function () {
     let e = _$$iZ();
     let t = _$$ol();
     let r = FC();
@@ -3675,7 +3675,7 @@ function sj() {
     }
     return null;
   }();
-  let r = function() {
+  let r = function () {
     let e = _$$iZ();
     let t = _$$d(e => e.teams);
     let r = _$$ol();
@@ -3696,9 +3696,9 @@ function sj() {
       }
     } : null;
   }();
-  let a = function() {
+  let a = function () {
     let e = _$$d(e => e.userFlags);
-    let t = function() {
+    let t = function () {
       let e = FC();
       let t = _$$R6(e => ({
         orgUsersByOrgId: e.orgUsersByOrgId,
@@ -3723,7 +3723,7 @@ function sj() {
       overrideLocation: sl.IN_FOOTER
     });
   }();
-  let s = function() {
+  let s = function () {
     let e = _$$iZ();
     let t = _$$d(e => e.teams);
     let r = _$$ol();
@@ -3743,7 +3743,7 @@ function sj() {
       overrideLocation: sl.IN_FOOTER
     };
   }();
-  let n = function() {
+  let n = function () {
     let e = _$$iZ();
     let t = _$$ol();
     let r = _$$d2();
@@ -3900,12 +3900,12 @@ function sW(e) {
   let t = Fz();
   let r = _$$T('SidebarFooter');
   let s = _$$LQ(r);
-  let i = function() {
+  let i = function () {
     let e = _$$lH();
     let t = _$$md(Bb);
     return !!_$$Ay.chromeos && !!_$$Ay.chrome && !e && !!t;
   }();
-  let n = function() {
+  let n = function () {
     let {
       data
     } = _$$E5();
@@ -4481,7 +4481,7 @@ function iN(e) {
   let d = _$$K2();
   let u = _$$sZ();
   let m = d && u && !_$$T3.includes(r.view);
-  !function() {
+  !function () {
     let e = Pj();
     useEffect(() => {
       let t = e.getState();
@@ -4503,7 +4503,7 @@ function iN(e) {
   }, []);
   let {
     scrollPerformanceMonitorRef
-  } = function({
+  } = function ({
     flowName: e,
     scrollStopDelay: t = 150,
     context: r
@@ -4947,7 +4947,7 @@ function nn(e) {
       },
       'data-onboarding-key': e.dataOnboardingKey,
       'children': jsx(_$$k2, {})
-    }), l && T8(jsx(_$$j, {
+    }), l && T8(jsx(noop, {
       parentRect: n?.data?.targetRect,
       minWidth: 224,
       rootAndSubmenuMaxWidth: 224,
@@ -5106,7 +5106,7 @@ function nT({
   let l = useRef(null);
   let [d, c] = useState(!1);
   let u = DP();
-  let m = function(e) {
+  let m = function (e) {
     try {
       if (e) return H0(e);
     } catch (e) {
@@ -5419,7 +5419,7 @@ function nB(e) {
   let _ = window.innerWidth <= parsePxInt(tgj);
   let p = workspace ? workspace.id : _$$O;
   let f = ih(workspace);
-  let g = function(e) {
+  let g = function (e) {
     if (e && e !== 'unset') return kx(e) ? 'dark' : 'light';
   }(f);
   let h = (workspace?.members || []).length;
@@ -5477,7 +5477,7 @@ function nB(e) {
     monochrome: !!f,
     size: 'lg'
   }), [p, v, o, f]);
-  let j = function() {
+  let j = function () {
     let e = nf();
     let t = wA();
     let [r, a] = _$$fp(ip);
@@ -5857,7 +5857,7 @@ let n2 = Ju(({
   }, {
     enabled: !!u
   });
-  let f = function({
+  let f = function ({
     searchQuery: e,
     workspaceId: t
   }) {
@@ -5869,12 +5869,12 @@ let n2 = Ju(({
       } of e.currentUser?.recentFiles2) file && t.push(file);
       return t;
     });
-    let a = function({
+    let a = function ({
       searchQuery: e,
       workspaceId: t
     }) {
       let r = _$$dq();
-      vA(!!r, 'currentUserOrgId must be defined in useSearchWorkspaceFilesQuery');
+      assert(!!r, 'currentUserOrgId must be defined in useSearchWorkspaceFilesQuery');
       let a = Rs(Imb, {
         query: e,
         workspaceId: t,
@@ -6120,7 +6120,7 @@ function oo({
   workspaceId: e
 }) {
   let t;
-  let r = function(e) {
+  let r = function (e) {
     let t = Qw.useTransform(Rs(m28, {}), e => {
       if (!e.currentUser.recentFiles2) return [];
       let t = [];
@@ -6571,13 +6571,13 @@ function oR({
   let i = Rs(nD$, {
     workspaceId: e
   }).transform(e => e.workspace?.members ?? null);
-  let n = function(e) {
+  let n = function (e) {
     let t = !!getFeatureFlags().fb_paginated_workspace_teams_shadow_reads;
     let [r] = IT(QJZ(t ? {
       workspaceId: e,
       firstPageSize: 50
     } : null));
-    let a = r.transform(e => function(e) {
+    let a = r.transform(e => function (e) {
       let t = [];
       for (let r of e) {
         if (r.team) {
@@ -6764,7 +6764,7 @@ function lr(e, t, r) {
   }[t] : void 0;
   if (a) return a;
   let s = WG(e);
-  let i = r ? function(e, t) {
+  let i = r ? function (e, t) {
     let r = {
       [LJ.whiteboarding]: {
         [_$$L3.BrowseResourceTypes.WIDGETS]: _$$t('categories.widgets')
@@ -6820,7 +6820,7 @@ function lo({
   let d = o?.tagSlug;
   let c = _$$vA(Dv);
   let m = c?.resource_type;
-  let _ = l && function(e, t) {
+  let _ = l && function (e, t) {
     if (!e) return null;
     let r = WG(e);
     return e === LJ.whiteboarding ? t === _$$L3.BrowseResourceTypes.WIDGETS ? o9.PLUGINS_AND_WIDGETS : o9.WHITEBOARDING : o8.has(r) ? o9.WHITEBOARDING : o6.has(r) ? o9.PLUGINS_AND_WIDGETS : o5.has(r) ? o9.DESIGN_RESOURCES : o3.has(r) ? o9.PRESENTATIONS : o7.has(r) ? o9.WEBSITES : null;
@@ -7899,7 +7899,7 @@ let lK = {
 };
 function lY() {
   let e = _$$w6();
-  let t = function(e) {
+  let t = function (e) {
     let t = {
       'designer': ['visualAssets', 'presentationsSmall', 'editingEffects'],
       'developer': ['diagramming', 'development', 'teamMeetingsSmall'],
@@ -7921,7 +7921,7 @@ function lY() {
     editor_type: e.editorType || void 0
   })));
   let i = t.map(t => ({
-    ...function(e) {
+    ...function (e) {
       switch (e) {
         case LJ.brainstorming:
           return {
@@ -8014,7 +8014,7 @@ function lY() {
             description: _$$t('community.resource_hub.category_description.workshop_templates')
           };
         default:
-          _$$xb(e);
+          throwTypeError(e);
       }
     }(t.category),
     size: t.size,
@@ -8060,7 +8060,7 @@ var lq = (e => (e.BRAINSTORMING = 'brainstorming', e.COOPER_TEMPLATE = 'cooperTe
 function lX({
   sizingInfo: e
 }) {
-  let t = function(e) {
+  let t = function (e) {
     let t = {
       brainstorming: {
         key: 'brainstorming',
@@ -8730,7 +8730,7 @@ function db({
   let t = Om();
   let r = _$$tv();
   let s = _$$i_(e);
-  let i = function(e) {
+  let i = function (e) {
     switch (e) {
       case _$$M2.PLUGINS:
         return jsx(_$$u5, {});
@@ -8749,7 +8749,7 @@ function db({
       case _$$M2.RECENTLY_ADDED_TEMPLATES:
         break;
       default:
-        S9(e, null);
+        returnSecond(e, null);
     }
     return null;
   }(e);
@@ -9122,7 +9122,7 @@ function dk({
       });
       break;
     default:
-      _$$xb(tab);
+      throwTypeError(tab);
   }
   return jsx('div', {
     className: dS,
@@ -9140,7 +9140,7 @@ function dF() {
     try {
       let e = W6(resourceTypeSlug);
       e.length > 0 && e[0] && (a = J2(e[0]));
-    } catch { }
+    } catch {}
   }
   let s = e.data?.type === FOrganizationLevelType.ORG ? templatesTeamId : e.data?.key.parentId;
   return _$$li({
@@ -9680,7 +9680,7 @@ function d8({
       ...(r && {
         'data-onboarding-key': d5
       }),
-      children: function(e, t) {
+      children: function (e, t) {
         switch (e) {
           case N$.INTERNAL:
             if (t) {
@@ -9692,7 +9692,7 @@ function d8({
           case N$.COMMUNITY:
             return _$$t('community.resource_hub.community_tab');
           default:
-            _$$xb(e);
+            throwTypeError(e);
         }
       }(N$[e], t)
     }, e);
@@ -9758,7 +9758,7 @@ function ci() {
   let {
     onSubmit,
     setSelectedDropdownTab
-  } = function() {
+  } = function () {
     let e = _$$P4();
     let t = Rd(_$$au)?.tab || e;
     let [r, a] = useState(t);
@@ -10252,7 +10252,7 @@ function cO({
     return jsxs(_$$t5.Tab, {
       ...d[_$$t7[e]],
       children: [jsx('span', {
-        children: function(e, t) {
+        children: function (e, t) {
           switch (e) {
             case _$$t7.FILES:
               if (t === N$.COMMUNITY) return _$$t('community.view_bar.files_and_templates_tab');
@@ -10262,7 +10262,7 @@ function cO({
             case _$$t7.WIDGETS:
               return _$$t('community.view_bar.widgets');
             default:
-              _$$xb(e);
+              throwTypeError(e);
           }
         }(_$$t7[e], i)
       }), jsx('span', {
@@ -10562,7 +10562,7 @@ function cB({
       i(C);
     }
   }, [C, S]);
-  v && r && (m = [...m, ...function({
+  v && r && (m = [...m, ...function ({
     currentCategory: e,
     currentParentCategory: t,
     currentTag: r,
@@ -10745,7 +10745,7 @@ function ua(e) {
   }, [e.itemIdx, e.post, t, e.feedIdx, requestToOpenPostByFeedIdx]);
   let {
     refSetter
-  } = function(e) {
+  } = function (e) {
     let t = useRef(null);
     let r = useRef(e);
     r.current = e;
@@ -11848,7 +11848,7 @@ function me({
         if (t.type === _$$nb.FILE || t.type === _$$nb.PINNED_FILE || t.type === _$$nb.OFFLINE_FILE) return r === 'figmake';
         return !1;
       default:
-        _$$xb(e);
+        throwTypeError(e);
     }
   };
   let Q = (e, t) => !e || e === `${_$$Tf.getSharedBy(t)}`;
@@ -11925,7 +11925,7 @@ function me({
       currentSharedByFilter: t,
       isListView: K
     });
-    (function({
+    (function ({
       tile: e,
       e: t,
       dispatch: r,
@@ -11993,7 +11993,7 @@ function me({
             }));
             break;
           default:
-            _$$xb(e);
+            throwTypeError(e);
         }
         return;
       }
@@ -12099,7 +12099,7 @@ function me({
           }));
           break;
         default:
-          _$$xb(e);
+          throwTypeError(e);
       }
     })({
       tile: r,
@@ -12144,7 +12144,7 @@ function me({
   let [eo, el] = useState([]);
   let {
     setVisibleTiles
-  } = function({
+  } = function ({
     shouldLogVisibleTileCount: e,
     viewMode: t,
     sortedFilteredTilesLength: r
@@ -12173,7 +12173,7 @@ function me({
     viewMode: H,
     sortedFilteredTilesLength: et.length
   });
-  if (Cm(eo), !function(e) {
+  if (Cm(eo), !function (e) {
     let t = _$$_();
     let r = wA();
     let a = k9(() => {
@@ -12378,7 +12378,7 @@ function ma() {
   let {
     creatorFilter,
     fileTypeFilter
-  } = function(e) {
+  } = function (e) {
     let t = 'your_files';
     switch (e.tileSortFilterConfig.filters.creator) {
       case _$$rJ.SELF:
@@ -12391,7 +12391,7 @@ function ma() {
         t = 'all';
         break;
       default:
-        _$$xb(e.tileSortFilterConfig.filters.creator);
+        throwTypeError(e.tileSortFilterConfig.filters.creator);
     }
     let r = '';
     switch (e.tileSortFilterConfig.filters.fileType) {
@@ -12420,7 +12420,7 @@ function ma() {
         r = '';
         break;
       default:
-        _$$xb(e.tileSortFilterConfig.filters.fileType);
+        throwTypeError(e.tileSortFilterConfig.filters.fileType);
     }
     return {
       creatorFilter: t,
@@ -12434,7 +12434,7 @@ function ma() {
     subscription,
     fetchNextPage,
     isFetchingNextPage
-  } = function(e) {
+  } = function (e) {
     let t = Rs(R89, {
       ...e,
       firstPageSize: 55
@@ -12458,7 +12458,7 @@ function ma() {
             sharedWithYouFields: null
           }));
         } else if (t.repo && t.repo.trashedAt) {
-          let r = function(e) {
+          let r = function (e) {
             if (!e.sourceFile) return null;
             let t = _$$H3.toSinatra(e);
             return {
@@ -12886,7 +12886,7 @@ function mv(e) {
       let e = m.team;
       return {
         viewMode: void 0 !== e.viewMode ? e.viewMode : XU.GRID,
-        sortKey: function(e) {
+        sortKey: function (e) {
           switch (e) {
             case C0.NAME:
               return 'name';
@@ -12905,7 +12905,7 @@ function mv(e) {
             case C0.PROJECT_NAME:
               return 'name';
             default:
-              _$$xb(e);
+              throwTypeError(e);
           }
         }(e.sort.key),
         sortDesc: e.sort.dir === _$$ue.DESC
@@ -13107,7 +13107,7 @@ let mS = e => {
     case _$$t6.ANY:
       return '';
     default:
-      _$$xb(e);
+      throwTypeError(e);
   }
 };
 let mk = e => {
@@ -13190,7 +13190,7 @@ function m3(e, t, r) {
   return useMemo(() => c.transform(({
     canAdmin: r,
     canMember: s
-  }) => function(e, t, r, s) {
+  }) => function (e, t, r, s) {
     let i;
     if (!e.currentUserOrgId || !wn(e.currentUserOrgId, e)) return null;
     let n = e.orgById[e.currentUserOrgId];
@@ -13250,7 +13250,7 @@ function m9(e, t, r, i, n, l) {
   }), [r, i]);
   let c = MF({
     oldValue: Qw.useMemoizedLoaded(d),
-    newValue: function(e) {
+    newValue: function (e) {
       let t = Rs(yQw(_$$_X(Pw.GROUP_7) && e ? {
         teamId: e
       } : null));
@@ -13278,7 +13278,7 @@ function m9(e, t, r, i, n, l) {
     }
   });
   let m = m3(i, n, l);
-  return useMemo(() => Qw.transformAll([m, c], (s, l) => s || function(e, t, r, s, i, n) {
+  return useMemo(() => Qw.transformAll([m, c], (s, l) => s || function (e, t, r, s, i, n) {
     let l = r ? s.teams[r] : null;
     if (r && !l || e === 'file') return null;
     let d = s.currentTeamId;
@@ -13336,7 +13336,7 @@ function m9(e, t, r, i, n, l) {
     let B = _$$_b(l);
     let U = l && l.subscription_raw !== FPaymentHealthStatusType.OK && WQ(l) && y && _$$ng2.getProTrialStatus(l) !== _$$a10.IN_TRIAL && B;
     let W = ['team', 'folder'].includes(e) && w && _$$cU(l);
-    let $ = w && function(e, t) {
+    let $ = w && function (e, t) {
       let r = e && t[e.id]?.dismissed_legacy_team_upgrade_notice_banner;
       return zs(e) && !r;
     }(l, s.userTeamFlags);
@@ -14017,7 +14017,7 @@ function _c(e) {
   }) => e);
   let l = I7('exp_aa_test_org_drafts');
   o && l.getConfig();
-  let d = () => { };
+  let d = () => {};
   let [c, u] = mC({
     folderId: e.folderId
   });
@@ -14306,7 +14306,7 @@ function _P(e) {
       case 'deleted-draft-files':
         return _$$t('file_browser.drafts_to_move.deleted_drafts');
       default:
-        _$$xb(e);
+        throwTypeError(e);
     }
   };
   let r = t => {
@@ -14609,7 +14609,7 @@ function _M() {
       }
     }));
   };
-  let ev = function(e, t, r, s) {
+  let ev = function (e, t, r, s) {
     let i = s >= 1200;
     let n = [{
       name: _$$t('file_browser.drafts_to_move.table_header_name'),
@@ -15228,7 +15228,7 @@ let pr = (e, t) => e ? _$$Dw.loadingKeyForPayload({
 }) : _$$sz.loadingKeyForPayload({
   shelfType: _$$cS.FILE_BROWSER_RECOMMENDED_TEMPLATES
 });
-let pa = _$$n4(e => function(e) {
+let pa = _$$n4(e => function (e) {
   if (!e) return 'OTH';
   let t = {
     'software-development': 'ENG',
@@ -15332,7 +15332,7 @@ function pu(e) {
     numTemplates,
     templateWidth,
     templateHeight
-  } = function(e) {
+  } = function (e) {
     let t = useRef(null);
     let [r, a] = useState(0);
     let i = Math.min(r - 4, 2229);
@@ -15734,7 +15734,7 @@ function pk({
   let {
     shouldShowTemplatesBar,
     hideTemplatesBar
-  } = function({
+  } = function ({
     folderId: e,
     hideTemplatesUserFlag: t,
     isShowingLockedRedesign: r,
@@ -15927,12 +15927,12 @@ function p5({
 }) {
   let n = wA();
   let o = _$$d(e => e.selectedView.view === 'folder' && e.selectedView.shouldShowRenameModal || !1);
-  let l = function() {
+  let l = function () {
     let e = vt();
     let t = jn();
     return e || t;
   }();
-  let d = function() {
+  let d = function () {
     let e = Pj();
     return useCallback(async t => {
       try {
@@ -15950,7 +15950,7 @@ function p5({
     }, [e]);
   }();
   let c = useCallback(() => d(t.id), [d, t.id]);
-  let u = function(e) {
+  let u = function (e) {
     let t = wA();
     let r = e.canEdit;
     return useCallback(() => {
@@ -15974,7 +15974,7 @@ function p5({
     lgFolder: t,
     currentOrgId: p
   });
-  let b = function({
+  let b = function ({
     lgFolder: e
   }) {
     let t = eN({
@@ -16024,7 +16024,7 @@ function p5({
     };
     t ? n(Mv(s)) : n(jv(s));
   };
-  let F = function(e) {
+  let F = function (e) {
     let t = _$$u7(e.id);
     let r = e.canRead;
     let i = e.team?.org?.id;
@@ -16188,7 +16188,7 @@ function p8({
   let t = Rs(L8O, {
     projectId: e
   });
-  !function(e) {
+  !function (e) {
     let [t] = IT(oFF({
       projectId: e
     }), {
@@ -16200,7 +16200,7 @@ function p8({
     }, [r]);
   }(e);
   let r = FC();
-  let [n, l] = function(e) {
+  let [n, l] = function (e) {
     let t = !!getFeatureFlags().file_browser_paginated_folder_full_reads;
     let r = LK(e, !t);
     let [a, i] = mC({
@@ -16756,7 +16756,7 @@ function fw({
     org: n
   });
   return jsx(_$$J5, {
-    children: jsx(_$$j, {
+    children: jsx(noop, {
       parentRect: t,
       items: _$$o7(l),
       dispatch: o,
@@ -16843,7 +16843,7 @@ function fk(e) {
   let g = _$$md(_$$aN(workspace.id));
   let h = _$$Y8(workspace.id, FEntityType.WORKSPACE, m);
   let x = useMemo(() => h.status === 'loaded' && void 0 !== h.favorite, [h]);
-  f && (f = function(e, t, r) {
+  f && (f = function (e, t, r) {
     try {
       let a = H0(t);
       let s = kx(a);
@@ -16948,7 +16948,7 @@ function fR() {
   } = LM(r ? {
     id: r
   } : null, null);
-  let d = function(e, {
+  let d = function (e, {
     description: t,
     level: r = _$$$.INFO,
     start: a = !0,
@@ -17603,7 +17603,7 @@ function f3({
           newFileFrom: e
         }, 'figmake');
       default:
-        _$$xb(t);
+        throwTypeError(t);
     }
   }).filter(Boolean);
   l.push(jsx(f4, {
@@ -17851,7 +17851,7 @@ function gy() {
   }] = IT(_$$a0.getHomeShelfContent({
     seenResourceIds: t
   }));
-  let d = function() {
+  let d = function () {
     let e = useRef(null);
     let [t, r] = useState(0);
     let [a, i] = useState(0);
@@ -17889,7 +17889,7 @@ function gy() {
       sizeRef: e
     }), [a, n, t, e]);
   }();
-  let c = function(e, t) {
+  let c = function (e, t) {
     let r = gi();
     return useMemo(() => {
       let a = r.slice();
@@ -17904,7 +17904,7 @@ function gy() {
   }(n?.data.meta.recommended_resources ?? [], d.numberOfTiles);
   let {
     trackRejectedResources
-  } = function({
+  } = function ({
     visibleResources: e
   }) {
     let {
@@ -18245,7 +18245,7 @@ let gE = {
 var gI = (e => (e.SHOW_NOTHING = 'SHOW_NOTHING', e.SHOW_HOME_SHELF = 'SHOW_HOME_SHELF', e))(gI || {});
 function gN() {
   let e = Xr(gt);
-  let t = function() {
+  let t = function () {
     let e = !!_$$d(e => e.userFlags).dismissed_community_home_shelf_v2_recommendations;
     let t = _$$d(({
       currentUserOrgId: e
@@ -18546,7 +18546,7 @@ function gz(e) {
     subscription,
     fetchNextPage,
     isFetchingNextPage
-  } = function(e) {
+  } = function (e) {
     let {
       subscription: _subscription,
       fetchNextPage: _fetchNextPage,
@@ -18558,7 +18558,7 @@ function gz(e) {
     return {
       subscription: useMemo(() => _subscription.transform(e => e.sharedWithYouResources.reduce((e, t) => {
         if (t.sharedWithYouFile) {
-          let r = function(e) {
+          let r = function (e) {
             if (e == null || e.file == null) return null;
             let {
               file,
@@ -18578,7 +18578,7 @@ function gz(e) {
           }(t.sharedWithYouFile);
           r && e.push(r);
         } else if (t.sharedWithYouRepo) {
-          let r = function(e) {
+          let r = function (e) {
             let {
               repo,
               ...r
@@ -18608,7 +18608,7 @@ function gz(e) {
           }(t.sharedWithYouRepo);
           r && e.push(r);
         } else if (t.sharedWithYouPrototype) {
-          let r = function(e) {
+          let r = function (e) {
             let {
               prototype,
               ...r
@@ -18655,7 +18655,7 @@ function gz(e) {
         case _$$t6.ANY:
           return null;
         default:
-          _$$xb(e);
+          throwTypeError(e);
       }
     })(n.filters.fileType) ?? '',
     sortOrder: n.sort.dir === _$$ue.ASC ? 'asc' : 'desc',
@@ -18739,7 +18739,7 @@ function gH(e) {
     subscription,
     fetchNextPage,
     isFetchingNextPage
-  } = function(e) {
+  } = function (e) {
     let {
       subscription: _subscription2,
       fetchNextPage: _fetchNextPage2,
@@ -18867,7 +18867,7 @@ let g0 = Ju(e => {
             case 'WorkspaceActivity':
               return _$$t('interstitial.workspace_activity');
             default:
-              _$$xb(e.policyType);
+              throwTypeError(e.policyType);
           }
         })()),
         emailAddress: gZ(r.email)
@@ -18913,7 +18913,7 @@ function g2({
   isEligbileForProTeamLockedRevampUI: e
 }) {
   let t = _$$d(e => e.tileSortFilterStateByView.recentsAndSharing.recents);
-  !function({
+  !function ({
     sort: e,
     viewMode: t
   }) {
@@ -18950,12 +18950,12 @@ function g2({
   let l = O8();
   let d = useMemo(() => n.transform(e => e.map(e => _$$fA(e))), [n]);
   let c = useMemo(() => l.transform(e => e.map(Nu)), [l]);
-  let u = function() {
+  let u = function () {
     let e = _$$d(e => e.recentRepos);
     let t = _$$d(e => e.selectedBranchKeyByRepoId);
     return useMemo(() => e.map(e => _$$uy(e, t)), [e, t]);
   }();
-  let m = function() {
+  let m = function () {
     let e = Rp();
     return useMemo(() => Object.values(e).map(_$$gB), [e]);
   }();
@@ -19043,7 +19043,7 @@ let ht = e => {
     case _$$G4.SHARED_FILES:
       return _$$t('file_browser.recents_and_sharing_view.shared_files_tab_name');
     default:
-      _$$xb(e);
+      throwTypeError(e);
   }
 };
 function hr(e) {
@@ -19081,7 +19081,7 @@ function ha(e) {
   let n = _$$_();
   let l = _$$d(e => e.tileSortFilterStateByView);
   let d = t === _$$G4.SHARED_PROJECTS ? ['folder'] : ['file', 'file_repo', 'prototype'];
-  let c = function(e) {
+  let c = function (e) {
     let [t, r] = useState(g9());
     let a = e.join('&resource_type[]=');
     useEffect(() => {
@@ -19103,7 +19103,7 @@ function ha(e) {
     }, [a]);
     return t;
   }(d);
-  let u = function() {
+  let u = function () {
     let e = TA();
     let t = _$$d(e => e.authedUsers);
     let r = _$$d(e => e.plans);
@@ -19136,7 +19136,7 @@ function ha(e) {
       ...g3()
     });
   }();
-  let m = function(e) {
+  let m = function (e) {
     let t = e.join('&resource_type[]=');
     let [r] = _$$IT(g7(t));
     return r.data || g3();
@@ -19165,7 +19165,7 @@ function ha(e) {
         e = l.recentsAndSharing.sharedProjects;
         break;
       default:
-        _$$xb(t);
+        throwTypeError(t);
     }
     return {
       tileSortFilterConfig: e,
@@ -19311,7 +19311,7 @@ function hi(e) {
     viewbar: c,
     toolbar: jsx(gN, {}),
     viewBarSticky: !0,
-    content: function(e, t) {
+    content: function (e, t) {
       switch (e) {
         case _$$G4.SHARED_FILES:
           return jsx(gz, {
@@ -19326,7 +19326,7 @@ function hi(e) {
             isEligbileForProTeamLockedRevampUI: t?.isEligbileForProTeamLockedRevampUI
           });
         default:
-          _$$xb(e);
+          throwTypeError(e);
       }
     }(selectedTab, {
       isEligbileForProTeamLockedRevampUI: r
@@ -20040,7 +20040,7 @@ function hM({
     header: jsx(iV, {
       avatar: V,
       title: e.name,
-      rightSideActions: function(e, t, r, s, i, o, l, d, c) {
+      rightSideActions: function (e, t, r, s, i, o, l, d, c) {
         let u = [];
         let m = !!Object.keys(o).includes(e.id) && o[e.id]?.status === _$$c8.PENDING;
         let _ = i.canAdminTeam && !i.isInTeam;
@@ -20633,7 +20633,7 @@ let xr = e => {
       let e = data.userPublic?.paginatedRecentFiles.data;
       let t = [];
       for (let r of e || []) {
-        r.file === null || r.file.parentOrgId !== u || r.file.isDraftFile || r.file.trashedAt !== null || t.push(function(e) {
+        r.file === null || r.file.parentOrgId !== u || r.file.isDraftFile || r.file.trashedAt !== null || t.push(function (e) {
           return {
             key: e.file.key,
             name: e.file.name,
@@ -20693,7 +20693,7 @@ let xr = e => {
       case _$$t6.MAKE:
         return e.editor_type === 'figmake';
       default:
-        _$$xb(h.filters.fileType);
+        throwTypeError(h.filters.fileType);
     }
   }), [v, h]);
   let $ = useMemo(() => C ? {
@@ -20773,7 +20773,7 @@ let xr = e => {
       }
     });
   }, [show]);
-  let et = useMemo(() => $.status === _$$r1.SUCCESS ? $.value.map(e => function(e) {
+  let et = useMemo(() => $.status === _$$r1.SUCCESS ? $.value.map(e => function (e) {
     let t = {
       ...e,
       name: e.source_file_name ? `${e.source_file_name}: ${e.name}` : e.name,
@@ -21014,7 +21014,7 @@ function x_({
   useEffect(() => {
     _$$o(t);
   }, [t]);
-  let r = function() {
+  let r = function () {
     let e = wA();
     let t = Pc();
     let r = _$$dq();
@@ -21022,7 +21022,7 @@ function x_({
     let o = _$$cD();
     let l = _$$sZ();
     let d = _$$d(e => e.search);
-    let c = function() {
+    let c = function () {
       let e = eN({
         project: 'drafts'
       });
@@ -21135,7 +21135,7 @@ function x_({
               })
             };
           default:
-            _$$xb(n);
+            throwTypeError(n);
         }
       case 'licenseGroup':
         if (n.subView === GN.ADMIN) {
@@ -21149,7 +21149,7 @@ function x_({
             })
           };
         }
-        _$$xb(n);
+        throwTypeError(n);
       case 'org':
         return {
           pageHeaderContent: l ? jsx(al, {}) : void 0,
@@ -21583,7 +21583,7 @@ function xP(e) {
       t(Jw());
     };
     _$$hp2.register(_$$a14, e);
-    return function() {
+    return function () {
       _$$hp2.unregister(_$$a14, e);
       t(ES({
         type: EO.type
@@ -22275,7 +22275,7 @@ function br({
         className: t ? 'file_browser_drop_zone--dragTargetDragging--giyPY file_browser_drop_zone--dragTargetNormal--TOR0f' : 'file_browser_drop_zone--dragTargetNormal--TOR0f'
       });
     default:
-      _$$xb(e);
+      throwTypeError(e);
   }
 }
 function ba(e) {
@@ -22305,7 +22305,7 @@ export function $$bo0() {
   let R = _$$d2();
   let A = _$$d(e => e.downtime);
   let O = _$$d(e => e.notifications);
-  !function() {
+  !function () {
     let e = Pj();
     let t = useMemo(() => _$$g6(), []);
     let r = Rs(__y, {
@@ -22405,7 +22405,7 @@ export function $$bo0() {
     }));
   }, [I, e]);
   let W = _$$uG;
-  if (!function() {
+  if (!function () {
     let e = _$$_();
     let t = wA();
     let r = TA();
@@ -22504,4 +22504,4 @@ export function $$bo0() {
     })]
   }) : (console.error('No current organization or team plan set for user. Redirecting to /files'), Ay.redirect('/files'), null) : (console.error(`Signed out page: unrecognized route ${Ay.location.pathname}, redirecting to /`), Ay.redirect('/'), null);
 }
-export const FileBrowserView = $$bo0; 
+export const FileBrowserView = $$bo0;

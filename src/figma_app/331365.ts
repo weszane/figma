@@ -1,4 +1,4 @@
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { c2 } from "../905/382883";
 import { eU, zl } from "../figma_app/27355";
 import { az } from "../905/449184";
@@ -137,7 +137,7 @@ export class $$u1 {
   processEvent(e, t) {
     if (this._bundledSourceCode = t, "elementChanged" === e.type) {
       if (zl.set(this._directManipulationEnabledAtom, !0), zl.set(this._latestInspectedElementUIEventAtom, t => this.memoizeEventPieces(e, t)), e.selectedElement) for (let t of e.selectedElement.classToStyles) this.selectedElementsClassToStyles.set(t.className, t);
-    } else "enabledChanged" === e.type ? (zl.set(this._directManipulationEnabledAtom, e.enabled), e.enabled || zl.set(this._latestInspectedElementUIEventAtom, null)) : xb(e);
+    } else "enabledChanged" === e.type ? (zl.set(this._directManipulationEnabledAtom, e.enabled), e.enabled || zl.set(this._latestInspectedElementUIEventAtom, null)) : throwTypeError(e);
   }
   selectedElementIdChanged() {
     let e = zl.get(this.selectedElementIdAtom);

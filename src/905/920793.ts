@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { PureComponent, useId } from "react";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { S as _$$S } from "../905/274480";
 import { J as _$$J } from "../905/270045";
 import { bL } from "../905/911410";
@@ -57,7 +57,7 @@ let $$M4 = {
       case Kj.HIGH:
         return _$$t("fullscreen.properties_panel.export_settings_quality.high");
       default:
-        xb(e);
+        throwTypeError(e);
     }
   }
 };

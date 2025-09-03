@@ -17,13 +17,13 @@ import { J as _$$J } from "../573/772431";
 import { bt } from "../905/270322";
 import { Sh } from "../figma_app/889655";
 import { eY as _$$eY, aV as _$$aV, p8, ax as _$$ax, dH } from "../figma_app/722362";
-import { j as _$$j } from "../2b17fec9/703025";
+import { noop } from "../2b17fec9/703025";
 import { Fk } from "../figma_app/167249";
 import { lg as _$$lg, m0, ow as _$$ow, my } from "../figma_app/976749";
 import { FPlanNameType, FFileType } from "../figma_app/191312";
 import { T as _$$T } from "../905/172092";
 import { m as _$$m } from "../905/99004";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { ZC } from "../figma_app/39751";
 import { lQ as _$$lQ } from "../905/934246";
 import { w as _$$w } from "../573/289674";
@@ -301,7 +301,7 @@ import { Wd, LI } from "../figma_app/970285";
 import { iP as _$$iP, Dj } from "../figma_app/803054";
 import { S2 } from "../figma_app/159296";
 import { q as _$$q3 } from "../573/775640";
-import { j as _$$j4 } from "../642/671529";
+import { noop } from "../642/671529";
 import { cJ } from "../905/561485";
 import { nl as _$$nl } from "../figma_app/359943";
 import { Ay as _$$Ay3 } from "../642/964720";
@@ -401,8 +401,8 @@ let T = _$$eU(e => {
   return l && l.length > 0 ? l : t;
 });
 function M(e) {
-  let t = function(e) {
-    let t = _$$j(e);
+  let t = function (e) {
+    let t = noop(e);
     let l = md(E);
     let n = z(l ?? [], e);
     return l && l.length > 0 ? n : t;
@@ -463,7 +463,7 @@ function $() {
 }
 let P = () => {
   let e = $();
-  let t = function() {
+  let t = function () {
     let e = md(_$$J);
     let t = md(T);
     let {
@@ -563,7 +563,7 @@ let G = {
 function U() {
   let e = $();
   let t = md(T).length;
-  let l = function() {
+  let l = function () {
     let e = md(T).length;
     let {
       isOpen
@@ -677,7 +677,7 @@ function K() {
 }
 function X() {
   let e = U();
-  let t = function(e) {
+  let t = function (e) {
     let t = M(e);
     let l = MG({
       subscribeToUpdates_expensive: !0
@@ -706,7 +706,7 @@ function X() {
   }) : null;
 }
 function Q() {
-  let e = function() {
+  let e = function () {
     let {
       prompt
     } = S();
@@ -732,7 +732,7 @@ function ey({
   let u = useRef(null);
   let {
     isPositioned
-  } = function(e, t) {
+  } = function (e, t) {
     let l = _X({
       subscribeToUpdates_expensive: !0
     });
@@ -886,7 +886,7 @@ function eb() {
   } = S();
   let l = Q();
   let r = md(j);
-  let s = function() {
+  let s = function () {
     let {
       showChat
     } = _$$U();
@@ -941,9 +941,9 @@ function ej() {
 }
 function ev() {
   let e = U();
-  !function() {
+  !function () {
     let e = useRef(0);
-    let t = function() {
+    let t = function () {
       let {
         prompt
       } = S();
@@ -957,7 +957,7 @@ function ev() {
       w();
       e.current = 0;
     }, [e]);
-    !function(e) {
+    !function (e) {
       let t = md(L);
       let l = ZC(t);
       useEffect(() => {
@@ -1005,7 +1005,7 @@ function ev() {
           l();
           break;
         default:
-          xb(i.type);
+          throwTypeError(i.type);
       }
     }, [t, l, n]));
   }();
@@ -1064,7 +1064,7 @@ function eU({
             trackingDescriptor: _$$c2.MARK_READY_FOR_DEV
           },
           variant: "primary",
-          onClick: function() {
+          onClick: function () {
             e && (l(), z4.setNodesReady(!0, [e], "dev-node-change-upsell", null));
           },
           children: _$$t("dev_handoff.rfd_signals_upsell.mark_ready_for_dev")
@@ -1185,7 +1185,7 @@ function e7() {
     exportId,
     activeId,
     showing
-  } = function() {
+  } = function () {
     let e = md(NT);
     let t = _$$lS();
     let {
@@ -1225,7 +1225,7 @@ function e7() {
       showing: _isShowing ? "export" : isShowing ? "measure" : void 0
     };
   }();
-  !function(e, t) {
+  !function (e, t) {
     let l = useRef(t);
     useEffect(() => {
       l.current = t;
@@ -1290,7 +1290,7 @@ function th() {
   let [l, r] = useState(null);
   useEffect(() => {
     if (!t) {
-      let e = function() {
+      let e = function () {
         let e;
         let t = UN();
         let l = t => {
@@ -2937,7 +2937,7 @@ function ne({
     "data-testid": `${l6}-continue-button`,
     onClick: e,
     htmlAttributes: {
-      "data-tooltip": function({
+      "data-tooltip": function ({
         step: e,
         hasNoSelectedNodes: t,
         doesExceedLimit: l
@@ -2993,7 +2993,7 @@ function nn() {
   let {
     layerCount,
     didExceedCountMax
-  } = function() {
+  } = function () {
     let e = 1.5 * nl();
     return Fk(t => {
       let l = t.getDirectlySelectedNodes();
@@ -3218,7 +3218,7 @@ function nR(e) {
 function nL(e) {
   return useMemo(() => {
     if ("loaded" === e.status) return 0 === e.data.length ? _$$oV.EMPTY : _$$oV.CONTENT;
-    if ("errors" === e.status || "disabled" === e.status); else if ("loading" === e.status) return _$$oV.LOADING;
+    if ("errors" === e.status || "disabled" === e.status) ;else if ("loading" === e.status) return _$$oV.LOADING;
     return _$$oV.ERROR;
   }, [e]);
 }
@@ -3612,7 +3612,7 @@ function nQ() {
       e instanceof yU ? l(FR.LANDING_PAGE_LIMIT_EXCEEDED) : e instanceof F7 && l(FR.LANDING_PAGE_NO_SELECTION);
     }
   }, [availableLibraryKeys, b, checkedLibraryKeys, l, c, subscribedLibraries, w]);
-  !function(e, t, l, n) {
+  !function (e, t, l, n) {
     let r = useRef(t.status);
     let s = e === FR.LIBRARY_SELECTOR_INITIAL;
     let o = "loaded" === t.status && "loaded" !== r.current;
@@ -3749,8 +3749,8 @@ let n1 = {
     $$css: !0
   }
 };
-let n8 = memo(function() {
-  let e = function() {
+let n8 = memo(function () {
+  let e = function () {
     let e = dG(_$$s2.TEXT, null);
     let t = md(Ut);
     return useMemo(() => {
@@ -3761,14 +3761,14 @@ let n8 = memo(function() {
       };
     }, [e, t]);
   }();
-  return (function({
+  return (function ({
     status: e,
     libraries: t
   }) {
     let [l, n] = fp(jq);
     let r = md(Ut);
     let s = md(yV);
-    let o = function() {
+    let o = function () {
       let e = md(n6);
       return md(qp) ? e : [];
     }();
@@ -4026,7 +4026,7 @@ function iS({
     }) : null]
   });
 }
-let iw = memo(function({
+let iw = memo(function ({
   isHighlighted: e,
   isSelected: t,
   keyboardNavigationPath: l,
@@ -4224,7 +4224,7 @@ function i$({
               let i = UN();
               let r = i.get(t);
               if (!r) return;
-              if ("DOCUMENT" === r.type) l = i.createNode("FRAME").guid; else {
+              if ("DOCUMENT" === r.type) l = i.createNode("FRAME").guid;else {
                 if ("CANVAS" === r.type) return;
                 l = r.clone();
               }
@@ -4273,7 +4273,7 @@ function i$({
         }
         let d = UN().getCurrentPage();
         _$$l6(zkO.USER, "debug-linter-visual-groups", () => {
-          n && (d?.appendChild(n), function(e, t) {
+          n && (d?.appendChild(n), function (e, t) {
             let l = UN();
             for (let n of e) {
               let e = l.get(n);
@@ -4334,7 +4334,7 @@ function iV() {
     handleClick
   } = i$({
     title: "Visual Hashes",
-    getItems: useCallback(() => function(e) {
+    getItems: useCallback(() => function (e) {
       let t = new Map();
       let l = UN();
       e.forEach(e => {
@@ -4363,7 +4363,7 @@ function iD() {
   let e = md(u2);
   let t = md(fY);
   let l = t?.guids ?? [];
-  let r = function() {
+  let r = function () {
     let e = md(fY);
     let [t, l] = useState(0);
     useEffect(() => {
@@ -4386,11 +4386,11 @@ function iD() {
   let {
     status
   } = md(v4);
-  let d = function() {
+  let d = function () {
     let e = md(m7);
     return useMemo(() => Array.from(e.values()).reduce((e, t) => e + t.size, 0), [e]);
   }();
-  let u = function() {
+  let u = function () {
     let [e, t] = useState(0);
     let l = md(Iy);
     let n = md(m7);
@@ -4403,7 +4403,7 @@ function iD() {
     }, [n, l]);
     return e;
   }();
-  let c = function() {
+  let c = function () {
     let e = md(m7);
     return useMemo(() => {
       let t = {};
@@ -4648,7 +4648,7 @@ function iJ() {
   let {
     libraryData,
     hasLoaded
-  } = function() {
+  } = function () {
     let {
       subscribedLibraries
     } = nw();
@@ -4693,11 +4693,11 @@ function iJ() {
       hasLoaded: "loaded" === subscribedLibraries.status
     };
   }();
-  !function(e, t) {
+  !function (e, t) {
     let [l, n] = fp(Ut);
     let r = bk();
     useEffect(() => {
-      (async function() {
+      (async function () {
         t && !l && (n(new Set(e.map(e => e.key))), await r());
       })();
     }, [t, e, l, n, r]);
@@ -4861,7 +4861,7 @@ function rt(e, t) {
       if (l) {
         let i = l.type;
         if ("SOLID" === i) {
-          s(function(e) {
+          s(function (e) {
             let t = e.color;
             if (!t) return re();
             let l = e.opacity ?? 1;
@@ -4906,7 +4906,7 @@ function rl(e, t, l) {
     bg: r.src,
     type: "image"
   };
-  let a = function(e, t) {
+  let a = function (e, t) {
     let l = mHF?.copyNodeToLinterScene(e);
     if (!l) return null;
     let n = new qo(juq.LINTER).get(l);
@@ -4931,7 +4931,7 @@ function rl(e, t, l) {
     type: "image"
   };
 }
-let rn = memo(function() {
+let rn = memo(function () {
   let e = _i();
   let t = md(_$$E4);
   let l = md($H);
@@ -4954,7 +4954,7 @@ let rn = memo(function() {
     })
   });
 });
-let ri = memo(function() {
+let ri = memo(function () {
   return jsxs("div", {
     className: "x78zum5 xdt5ytf x6s0dn4 xl56j7k x1nfngrj x98rzlu",
     children: [jsx(_$$k2, {}), jsx("span", {
@@ -4963,7 +4963,7 @@ let ri = memo(function() {
     }), getFeatureFlags().aip_flower_garden_debug && jsx(iX, {})]
   });
 });
-let rr = forwardRef(function(e, t) {
+let rr = forwardRef(function (e, t) {
   let l = md(Bd);
   let i = Te({
     count: l?.length ?? 0,
@@ -4997,7 +4997,7 @@ let rr = forwardRef(function(e, t) {
     })]
   });
 });
-let rs = memo(function({
+let rs = memo(function ({
   group: e,
   virtualRow: t
 }) {
@@ -5043,7 +5043,7 @@ let rs = memo(function({
     children: jsx(_$$e5, {})
   })) : null;
 });
-let ro = memo(function({
+let ro = memo(function ({
   rootNodeId: e
 }) {
   let t = _$$ei(e);
@@ -5256,8 +5256,8 @@ function r_(e, t, l) {
   let {
     violationsWithFixes,
     areFixesReady
-  } = function(e) {
-    let t = function(e) {
+  } = function (e) {
+    let t = function (e) {
       let t = md(IZ);
       return useMemo(() => {
         if (!e) return [];
@@ -5303,8 +5303,8 @@ function r_(e, t, l) {
         let p = x;
         let h = "";
         if (i) {
-          h = function(e) {
-            let t = JSON.stringify(e.map(e => function({
+          h = function (e) {
+            let t = JSON.stringify(e.map(e => function ({
               violation: e,
               selectedFix: t
             }) {
@@ -5330,7 +5330,7 @@ function r_(e, t, l) {
           });
           console.error("Error generating thumbnail: Called showError on delegate");
         };
-        if ((n = i ? await rj(t, l, h, violationsWithFixes, m, r.signal) : function(e, t, l, n) {
+        if ((n = i ? await rj(t, l, h, violationsWithFixes, m, r.signal) : function (e, t, l, n) {
           let i = mHF?.copyNodeToLinterScene(e);
           if (!i) throw Error("Current linter scene guid not found");
           let r = UN().get(e);
@@ -5358,7 +5358,7 @@ function r_(e, t, l) {
             thumbnail: n.thumbnail,
             status: "loaded"
           });
-          (function(e, t) {
+          (function (e, t) {
             let l = new Map(zl.get(qL));
             l.set(e, t);
             zl.set(qL, l);
@@ -5475,7 +5475,7 @@ function rC(e) {
       console.error(`Failed to get unrotated bounds for linter node ${e.guid}, error:`, t);
     }
     t.set(e.guid, {
-      absoluteRenderBounds: function(e, t) {
+      absoluteRenderBounds: function (e, t) {
         let l = t ? e.absoluteRenderBounds : e.absoluteBoundingBox;
         return l ? {
           x: l.x,
@@ -5622,7 +5622,7 @@ function rB({
   } else l = SF[ruleId].toLowerCase();
   let y = l.includes("right");
   let _ = l.includes("bottom");
-  let b = function(e, t, l, n, i) {
+  let b = function (e, t, l, n, i) {
     let r = Math.min(t / (e.topLeft + e.topRight), 1);
     let s = Math.min(l / (e.topRight + e.bottomRight), 1);
     let o = Math.min(t / (e.bottomLeft + e.bottomRight), 1);
@@ -5639,7 +5639,7 @@ function rB({
   let {
     borderWidth,
     borderLength
-  } = function(e, t, l, n, i, r, s, o) {
+  } = function (e, t, l, n, i, r, s, o) {
     let a = i ? "bottom" : "top";
     let d = n ? "Right" : "Left";
     let u = n ? r[`${a}Left`] : r[`${a}Right`];
@@ -5913,7 +5913,7 @@ function rG(e) {
     ...t
   }) : null;
 }
-let rU = memo(function(e) {
+let rU = memo(function (e) {
   let {
     overlayInfoList,
     transform
@@ -6079,10 +6079,10 @@ function rZ({
 }
 let rY = [2, 3, 6, 13, 25, 50, 75, 100, 200, 300, 1e3];
 var rQ = (e => (e.CURRENT = "current", e.SUGGESTED = "suggested", e))(rQ || {});
-let rJ = memo(function() {
+let rJ = memo(function () {
   let {
     rootNodeId
-  } = function() {
+  } = function () {
     let e = md(E$);
     let t = md(Bp) ?? "";
     let l = useMemo(() => e && t ? e.rootNodeIdToViolatingNodeIdSet.get(t) ?? new Set() : new Set(), [t, e]);
@@ -6108,7 +6108,7 @@ function r0({
   suggestedImage: l
 }) {
   let i = md($H);
-  let [r, s] = function(e) {
+  let [r, s] = function (e) {
     let t = md(hx);
     if (!e) return [[], []];
     let l = UN();
@@ -6151,7 +6151,7 @@ function r0({
   let {
     current,
     suggested
-  } = function(e, t, l) {
+  } = function (e, t, l) {
     let n = {
       current: null,
       suggested: null
@@ -6163,7 +6163,7 @@ function r0({
       suggestedActiveToLinterGuidsMap,
       suggestedLinterToActiveGuidsMap
     } = rk(e);
-    let [a, d] = function(e) {
+    let [a, d] = function (e) {
       let t = zl.get(qL);
       let l = t.get(rb(e, rQ.CURRENT));
       let n = t.get(rb(e, rQ.SUGGESTED));
@@ -6252,7 +6252,7 @@ function r1(e, t, l, n) {
       let l = r2(t, i);
       E.set(e, l);
     }
-    let S = function(e, t, l) {
+    let S = function (e, t, l) {
       let n = UN();
       let i = l?.get(e);
       if (!i) return !1;
@@ -6367,7 +6367,7 @@ function r4({
     }), l]
   });
 }
-let r7 = memo(function() {
+let r7 = memo(function () {
   let e = md(vu).length;
   let t = 0 === md(QU).violationCount;
   return jsx("div", {
@@ -6576,7 +6576,7 @@ function sf({
 }) {
   let r = md(sg);
   let s = md(sh);
-  let o = useMemo(() => s && s.blockId === l ? function(e, t) {
+  let o = useMemo(() => s && s.blockId === l ? function (e, t) {
     let l = new Map();
     for (let t of e) l.set(t, "none");
     if (0 === t.size) return l;
@@ -6588,19 +6588,19 @@ function sf({
         continue;
       }
       let r = n;
-      let s = function(e, t, l) {
+      let s = function (e, t, l) {
         let n = l;
         for (; n + 1 < e.length;) {
           let l = e[n + 1];
-          if (l && t.has(l)) n++; else break;
+          if (l && t.has(l)) n++;else break;
         }
         return n;
       }(e, t, r);
-      !function(e, t, l, n) {
+      !function (e, t, l, n) {
         let i = t[l];
         let r = t[n];
         if (i && r) {
-          if (l === n) e.set(i, "only"); else {
+          if (l === n) e.set(i, "only");else {
             e.set(i, "first");
             e.set(r, "last");
             for (let i = l + 1; i < n; i++) {
@@ -6728,7 +6728,7 @@ function sR({
   } = sb(l);
   let {
     ignoreRowsWithNoSuggestions
-  } = function(e) {
+  } = function (e) {
     let [t, l] = useState("idle");
     return {
       ignoreRowsWithNoSuggestions: useCallback(() => {
@@ -6766,14 +6766,14 @@ function sR({
       status: t
     };
   }(l);
-  let c = function(e) {
+  let c = function (e) {
     let t = md($C);
     return (Object.keys(e) || []).every(e => {
       let l = t?.get(e);
       return l?.status !== "loading";
     });
   }(l);
-  let x = function(e) {
+  let x = function (e) {
     let t = md($C);
     return (Object.keys(e) || []).every(e => {
       let l = t?.get(e);
@@ -6934,7 +6934,7 @@ function sI({
   let {
     applyFixToRow,
     isApplying
-  } = function(e, t) {
+  } = function (e, t) {
     let [l, n] = useState("idle");
     return {
       applyFixToRow: useCallback(() => {
@@ -7011,7 +7011,7 @@ function sN({
     children: t
   });
 }
-let sA = forwardRef(function({
+let sA = forwardRef(function ({
   onClick: e,
   type: t
 }, l) {
@@ -7058,7 +7058,7 @@ function sO({
     })]
   });
 }
-let sz = forwardRef(function({
+let sz = forwardRef(function ({
   children: e,
   onClick: t,
   tooltip: l,
@@ -8411,7 +8411,7 @@ function oi({
   if (!e) return null;
   let t = e.color;
   let l = e.opacity;
-  let i = `${z5.format(t)}${l && l < 1 ? ` \xb7 ${function(e) {
+  let i = `${z5.format(t)}${l && l < 1 ? ` \xb7 ${function (e) {
     let t = new _$$t3({
       min: 0,
       max: 100
@@ -8579,12 +8579,12 @@ function os() {
     }, e.id))
   }, pZ.EXTENSIBILITY_RULE) : null;
 }
-let oo = memo(function({
+let oo = memo(function ({
   groupKey: e,
   violations: t,
   isApplying: l
 }) {
-  let r = useMemo(() => function(e) {
+  let r = useMemo(() => function (e) {
     let t = {};
     for (let l of e) {
       let e = l.detectionContext;
@@ -9022,7 +9022,7 @@ function o_({
   if (!e) return null;
   let t = e.fillColor;
   let l = e.fillOpacity;
-  let i = `${z5.format(t)}${l && l < 1 ? ` \xb7 ${function(e) {
+  let i = `${z5.format(t)}${l && l < 1 ? ` \xb7 ${function (e) {
     let t = new _$$t3({
       min: 0,
       max: 100
@@ -9124,7 +9124,7 @@ function ob({
       backgroundColor,
       contrastRatios
     } = d;
-    let s = function(e) {
+    let s = function (e) {
       if ("LIST" !== e.type || !e.variable || !allResolvedVariables) return null;
       let t = e.variable.node_id;
       let l = allResolvedVariables.libraryVariables[t]?.resolvedValue ?? allResolvedVariables.localVariables[t]?.resolvedValue;
@@ -9397,47 +9397,47 @@ function oS({
 }
 _$$g.textBodyMediumStrong;
 let ow = "design-linter-group-view-next-button";
-let oR = memo(function() {
+let oR = memo(function () {
   let [e, t] = useState(!1);
   let l = _$$sf();
   let r = gx();
-  let s = function() {
-    let e = function() {
+  let s = function () {
+    let e = function () {
       let {
         blocks,
         totalViolations
       } = md(_$$r5);
       return !!blocks.length && !!totalViolations;
     }();
-    let t = function() {
+    let t = function () {
       let {
         blocks,
         totalViolations
       } = md(GM);
       return !!blocks.length && !!totalViolations;
     }();
-    let l = function() {
+    let l = function () {
       let {
         blocks,
         totalViolations
       } = md(d9);
       return !!blocks.length && !!totalViolations;
     }();
-    let r = function() {
+    let r = function () {
       let {
         blocks,
         totalViolations
       } = md(qQ);
       return !!blocks.length && !!totalViolations;
     }();
-    let s = function() {
+    let s = function () {
       let {
         blocks,
         totalViolations
       } = md(LG);
       return !!blocks.length && !!totalViolations;
     }();
-    let o = function() {
+    let o = function () {
       let {
         blocks,
         totalViolations
@@ -9476,7 +9476,7 @@ let oR = memo(function() {
   let {
     nextGroup,
     hasNextGroup
-  } = function(e) {
+  } = function (e) {
     let t = md(NM);
     let l = useRef(null);
     let n = useRef(null);
@@ -9639,8 +9639,8 @@ function oI({
     })
   });
 }
-let oN = memo(function() {
-  !function() {
+let oN = memo(function () {
+  !function () {
     let e = md(vu);
     useEffect(() => {
       e.length && Egt?.replaceSelection(e, !0);
@@ -9673,11 +9673,11 @@ let oA = {
     $$css: !0
   }
 };
-let oM = memo(function() {
+let oM = memo(function () {
   let e = _i();
   let t = _$$l2() && !e;
   let l = md(_M);
-  return (!function(e) {
+  return (!function (e) {
     let t = wA();
     let l = _$$f("seen_linter_home_view");
     useEffect(() => {
@@ -9711,7 +9711,7 @@ let oO = {
 let oz = parsePxNumber(ij);
 function oB() {
   let e = _$$ox();
-  let t = function() {
+  let t = function () {
     let e = GQ();
     let t = md(_M);
     let l = useMemo(() => new Point(e + parsePxNumber(ij), parsePxNumber(ij)), [e]);
@@ -9733,13 +9733,13 @@ function oB() {
       initialWidth: Math.min(r - 2 * oz, s)
     };
   }();
-  let l = function() {
+  let l = function () {
     let e = Xr($H);
     return useMemo(() => ia()(t => {
       e(t);
     }, 100), [e]);
   }();
-  let r = function() {
+  let r = function () {
     let e = Xr(_$$r3);
     return useMemo(() => ia()(t => {
       e(t);
@@ -9854,7 +9854,7 @@ function oP() {
   let [e, t] = fp(_M);
   let [l, s] = fp(Dg);
   let o = !_$$f("seen_linter_libraries_callout") && l;
-  !function(e) {
+  !function (e) {
     let t = wA();
     useEffect(() => {
       if (!e) return;
@@ -9946,7 +9946,7 @@ let oH = memo(() => {
   }, []), mr(), vP(), fx(e, t), e) ? r ? jsx(l9, {}) : l ? jsx(nQ, {}) : jsx(oB, {}) : null;
 });
 function oG() {
-  !function() {
+  !function () {
     let e = wA();
     let t = md(ui);
     let l = d4(e => e.mirror.sceneGraphSelection);
@@ -10092,7 +10092,7 @@ function ah({
   });
 }
 function ag(e) {
-  !function() {
+  !function () {
     let {
       isPropertiesPanelCollapsed,
       setPropertiesPanelCollapsed
@@ -10117,7 +10117,7 @@ function ag(e) {
   let s = e => {
     l = e;
   };
-  return jsx(_$$j4, {
+  return jsx(noop, {
     recordingKey: e.recordingKey,
     activeTab: e.propertiesPanelTab,
     refMainScrollContainer: s,
@@ -10129,7 +10129,7 @@ function ag(e) {
     })
   });
 }
-let a_ = memo(function() {
+let a_ = memo(function () {
   let e = _$$R(e => getPermissionsState(e));
   let t = _$$aV();
   let l = d4(e => e.loadingState);
@@ -10340,7 +10340,7 @@ function dc({
   } = _$$E9(t, _$$lV.CODE_IN_SITES);
   let m = _$$P4();
   let f = RM(t.codeFileFullPath);
-  (function(e, t) {
+  (function (e, t) {
     let l = _$$eY();
     let {
       attachments,
@@ -10350,7 +10350,7 @@ function dc({
     let a = Ez5?.codeSelection();
     let d = ut(a?.selectedPromptFrames, []);
     let u = useCallback(() => {
-      d && d.length > 0 && t === df.EMPTY && (_$$E0(d[0] || null, l, setAttachments, () => { }, claimAPendingAttachmentOrMakeOne), n1M?.clearSelectedPromptFrames());
+      d && d.length > 0 && t === df.EMPTY && (_$$E0(d[0] || null, l, setAttachments, () => {}, claimAPendingAttachmentOrMakeOne), n1M?.clearSelectedPromptFrames());
     }, [l, setAttachments, claimAPendingAttachmentOrMakeOne, t, d]);
     useEffect(() => {
       0 === attachments.length && u();
@@ -10487,7 +10487,7 @@ function dy({
   let [l, r] = useState("preview");
   let [s, o] = useState(!1);
   let a = _$$f3(e);
-  let d = function(e) {
+  let d = function (e) {
     let [t, l] = useState(0);
     let {
       exchange
@@ -10505,7 +10505,7 @@ function dy({
     t?.();
     setAttachments([]);
   }, [t, setAttachments]);
-  let x = function() {
+  let x = function () {
     let e;
     let [{
       windowInnerWidth: t,
@@ -10728,7 +10728,7 @@ let dj = {
   targetPercentWidth: .6,
   aspectRatio: 1.5
 };
-let dN = memo(function({
+let dN = memo(function ({
   shouldShowDragAndDropBorder: e
 }) {
   let t = p8("isReadOnly");
@@ -10795,7 +10795,7 @@ let dN = memo(function({
     })]
   });
 });
-let dA = memo(function() {
+let dA = memo(function () {
   let e = p8("topLevelMode");
   let t = _$$ax();
   let l = dH();
@@ -10811,7 +10811,7 @@ let dA = memo(function() {
     children: [jsx(a_, {}), jsx(dM, {})]
   });
 });
-let dM = memo(function() {
+let dM = memo(function () {
   return jsxs(Fragment, {
     children: [jsx(_$$p2, {
       children: jsx(NuxOnboardingOverlay, {
@@ -10865,4 +10865,4 @@ export function $$dO0() {
     })
   });
 }
-export const DesignView = $$dO0; 
+export const DesignView = $$dO0;

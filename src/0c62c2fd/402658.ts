@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { wA } from "../vendor/514228";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { hS } from "../905/437088";
 import { nB, vo, Y9, hE, wi, jk } from "../figma_app/272243";
 import { k } from "../905/443820";
@@ -128,7 +128,7 @@ function E(e) {
               case cm.ACTIVE_RESOURCE_CONNECTION:
                 return tx("file_browser.trash_project.warning.active_resource_connection");
               default:
-                xb(e);
+                throwTypeError(e);
             }
           })(e.folderState)
         })
@@ -161,4 +161,4 @@ function E(e) {
     })]
   });
 }
-export const FolderTrashConfirmModal = $$T0; 
+export const FolderTrashConfirmModal = $$T0;

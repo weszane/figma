@@ -1,4 +1,4 @@
-import { j } from "../figma_app/465776";
+import { noop } from "../figma_app/465776";
 export let $$r2 = {
   NONE: "NONE",
   DOCUMENT: "DOC",
@@ -145,7 +145,7 @@ export function $$s1(e) {
     case "WEBPAGE":
       return 4;
     default:
-      j(e);
+      noop(e);
       return 4;
   }
 }

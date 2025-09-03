@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { d4 } from "../vendor/514228";
-import { KF } from "../figma_app/465776";
+import { debug } from "../figma_app/465776";
 import { debounce } from "../905/915765";
 import { glU, vmp } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
@@ -517,7 +517,7 @@ export function $$Y4(e, t, r, n) {
       case Ib.SPECIAL:
         {
           let t = e.getAttribute("data-tooltip");
-          KF(-1 !== Object.values(MW).indexOf(t) || $L(t), "missing/invalid tooltip key");
+          debug(-1 !== Object.values(MW).indexOf(t) || $L(t), "missing/invalid tooltip key");
           let r = {
             kind: Ui.ELEMENT,
             key: t

@@ -135,7 +135,7 @@ import { bv, IV, uw, Vq } from '../figma_app/421401';
 import { OL as _$$OL } from '../figma_app/421473';
 import { e6 as _$$e3, Z as _$$Z, B7, hn, JB, O4, pv, RF, X_ } from '../figma_app/425283';
 import { j_, No, px, S2 } from '../figma_app/465071';
-import { xb } from '../figma_app/465776';
+import { throwTypeError } from '../figma_app/465776';
 import { Y as _$$Y3 } from '../figma_app/515088';
 import { NJ } from '../figma_app/518077';
 import { $u, cE, oi } from '../figma_app/527041';
@@ -271,7 +271,7 @@ function ts(e) {
       t = _$$t('add_unassigned_members_modal.bespoke_seat_type.view.tooltip');
       break;
     default:
-      xb(a);
+      throwTypeError(a);
   }
   return jsx('div', {
     'data-tooltip-type': Ib.TEXT,
@@ -712,7 +712,7 @@ function tv({
     });
   }
   let Y = !!t;
-  let K = function(e, t, a) {
+  let K = function (e, t, a) {
     let s = [];
     s.push({
       name: _$$aM(Od.NAME, e.featured_scim_metadata),
@@ -1322,7 +1322,7 @@ function tK(e) {
         userFlagOnShow: tH
       });
     default:
-      xb(step);
+      throwTypeError(step);
   }
 }
 function tQ(e) {
@@ -1586,7 +1586,7 @@ function an(e) {
   }]));
 }
 function as(e, t) {
-  let a = function(e) {
+  let a = function (e) {
     let {
       billingGroups,
       hasBilling,
@@ -1689,7 +1689,7 @@ function ar(e) {
   }
 }
 function al(e) {
-  let t = function(e) {
+  let t = function (e) {
     let t = S2().unwrapOr(null);
     let a = Rs(B5G, {
       orgId: t?.key?.parentId ?? null
@@ -1747,7 +1747,7 @@ function al(e) {
   let {
     filterSections
   } = as(e.currentFilters, t);
-  let r = function(e) {
+  let r = function (e) {
     let t = t9();
     return [{
       type: t8.BILLING_GROUPS,
@@ -3181,7 +3181,7 @@ export function $$nc0(e) {
   });
   let W = useMemo(() => (V.status === 'loaded' ? oA(V.data?.org)?.baseOrgUserMembersById ?? [] : []).map(e => _$$f(e)), [V.status, V.data?.org]);
   let H = useMemo(() => searchQuery && W.length !== 0 ? (nl.set(W), nl.search(searchQuery)) : W, [searchQuery, W]);
-  let Y = useCallback(e => function(e, t) {
+  let Y = useCallback(e => function (e, t) {
     let a = t[_$$e2.licenseGroupFilter];
     let n = t[_$$e2.workspaceFilter];
     let s = t[_$$e2.permissionFilter];
@@ -3236,7 +3236,7 @@ export function $$nc0(e) {
     columnName: sort.columnName === Od.SEARCH_SCORE ? Od.SEARCH_SCORE : _$$aM(sort.columnName ?? Od.NAME, org.featured_scim_metadata),
     isReversed: sort.isReversed
   };
-  let eh = function(e, t, a, s, i, r, l, o, d, c) {
+  let eh = function (e, t, a, s, i, r, l, o, d, c) {
     let _ = [];
     if (_.push({
       name: _$$aM(Od.NAME, e.featured_scim_metadata),
@@ -3448,4 +3448,4 @@ export function $$nc0(e) {
   });
 }
 export const KX = $$nc0;
-export const Bk = $$nr1; 
+export const Bk = $$nr1;

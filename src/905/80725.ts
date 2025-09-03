@@ -1,4 +1,4 @@
-import { vA } from "../figma_app/465776";
+import { assert } from "../figma_app/465776";
 import { c2 } from "../905/382883";
 export function $$a1(e, t) {
   if (typeof e != typeof t) return !1;
@@ -20,7 +20,7 @@ export function $$s2(e) {
       let t = e({
         type: "refetch"
       });
-      vA(t instanceof Promise);
+      assert(t instanceof Promise);
       return t;
     }
   };
@@ -32,7 +32,7 @@ export function $$o0(e) {
       let t = e({
         type: "refetch"
       });
-      vA(t instanceof Promise);
+      assert(t instanceof Promise);
       return t;
     },
     fetchNextPage: t => {
@@ -41,7 +41,7 @@ export function $$o0(e) {
         type: "fetchNextPage",
         options: t
       });
-      vA(i instanceof Promise);
+      assert(i instanceof Promise);
       return i;
     },
     fetchPreviousPage: t => {
@@ -50,7 +50,7 @@ export function $$o0(e) {
         type: "fetchPreviousPage",
         options: t
       });
-      vA(i instanceof Promise);
+      assert(i instanceof Promise);
       return i;
     }
   };

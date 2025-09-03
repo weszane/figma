@@ -1,5 +1,5 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { KF } from "../figma_app/465776";
+import { debug } from "../figma_app/465776";
 import { bL, c$ } from "../905/867927";
 import { q } from "../905/932270";
 import { $ } from "../905/137257";
@@ -39,7 +39,7 @@ export function $$T2({
 }) {
   e = e || !((0 | t) & 1 << mrc.TEXT_AUTO_RESIZE);
   let s = ae();
-  e || KF(null != r, "TypePanel missing textAutoResize");
+  e || debug(null != r, "TypePanel missing textAutoResize");
   let o = jsx($$I0, {
     disabled: e,
     textAutoResize: r,

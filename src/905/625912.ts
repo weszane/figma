@@ -16,7 +16,7 @@ import { Vzr } from "../figma_app/763686";
 import { c1 } from "../905/589717";
 import { HJx, EJM, hVg, k$X } from "../figma_app/27776";
 import { l3, _Y, A9, fQ } from "../905/721983";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { PZ } from "../figma_app/766708";
 import { F as _$$F } from "../905/989956";
 import { y as _$$y } from "../905/829723";
@@ -200,7 +200,7 @@ function j({
         value: new Date(e.value).toLocaleString()
       });
     default:
-      xb(e);
+      throwTypeError(e);
   }
 }
 let U = _$$s.noWrap;

@@ -1,27 +1,88 @@
-import { isNullish } from "../figma_app/95419";
-export function $$i5(e, t = "") {
-  if (!e) throw Error(`Assertion failure${t ? `: ${t}` : ""}`);
+import { isNullish } from '../figma_app/95419'
+
+/**
+ * Throws an error if the condition is falsy.
+ * @param condition - The condition to assert.
+ * @param message - Optional message for the error.
+ * @throws {Error} If the condition is falsy.
+ * (Original: $$i5)
+ */
+export function assert(condition: unknown, message = ''): void {
+  if (!condition) {
+    throw new Error(`Assertion failure${message ? `: ${message}` : ''}`)
+  }
 }
-export function $$a0(e, t) {
-  if (isNullish(e)) throw Error(t ?? "Expected value not to be nullish");
+
+/**
+ * Throws an error if the value is nullish (null or undefined).
+ * @param value - The value to check.
+ * @param message - Optional error message.
+ * @throws {Error} If the value is nullish.
+ * (Original: $$a0)
+ */
+export function assertNotNullish<T>(value: T, message?: string): asserts value is NonNullable<T> {
+  if (isNullish(value)) {
+    throw new Error(message ?? 'Expected value not to be nullish')
+  }
 }
-export function $$s7(e, t) {
-  throw Error(t ?? `Uncaught type ${JSON.stringify(e)}`);
+
+/**
+ * Throws an error with the provided message or the stringified value.
+ * @param value - The value to include in the error.
+ * @param message - Optional error message.
+ * @throws {Error} Always throws.
+ * (Original: $$s7)
+ */
+export function throwTypeError(value: unknown, message?: string): never {
+  throw new Error(message ?? `Uncaught type ${JSON.stringify(value)}`)
 }
-export function $$o4(e) {}
-export function $$l6(e) {
-  throw Error(e);
+
+/**
+ * No-op function.
+ * (Original: $$o4)
+ */
+export function noop(_arg?: unknown): void {}
+
+/**
+ * Throws an error with the provided message.
+ * @param message - The error message.
+ * @throws {Error} Always throws.
+ * (Original: $$l6)
+ */
+export function throwError(message: string): never {
+  throw new Error(message)
 }
-export function $$d1(e, t, ...r) {}
-export function $$c2(e, t, r) {
-  return t;
+
+/**
+ * No-op debug function.
+ * (Original: $$d1)
+ */
+export function debug(_arg1: unknown, _arg2: unknown, ..._rest: unknown[]): void {}
+
+/**
+ * Returns the second argument.
+ * @param _arg1 - Ignored.
+ * @param arg2 - Returned value.
+ * @param _arg3 - Ignored.
+ * @returns The second argument.
+ * (Original: $$c2)
+ */
+export function returnSecond<T>(_arg1: unknown, arg2: T, _arg3: unknown): T {
+  return arg2
 }
-export function $$u3(e) {}
-export const B1 = $$a0;
-export const KF = $$d1;
-export const S9 = $$c2;
-export const d_ = $$u3;
-export const j = $$o4;
-export const vA = $$i5;
-export const wc = $$l6;
-export const xb = $$s7;
+
+/**
+ * No-op utility function.
+ * (Original: $$u3)
+ */
+export function utilityNoop(_arg?: unknown): void {}
+
+// Export aliases for backward compatibility with original names
+export const B1 = assertNotNullish
+export const KF = debug
+export const S9 = returnSecond
+export const d_ = utilityNoop
+export const j = noop
+export const vA = assert
+export const wc = throwError
+export const xb = throwTypeError

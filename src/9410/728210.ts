@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useMemo, useContext, useRef, useEffect, useState, useCallback } from "react";
 import { d4 } from "../vendor/514228";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { h3O } from "../figma_app/763686";
 import { md, fp } from "../figma_app/27355";
 import d from "classnames";
@@ -354,7 +354,7 @@ function $(e) {
       case "none":
         return [e, t];
       default:
-        xb(e);
+        throwTypeError(e);
     }
   }(W, q);
   let ei = et;
@@ -502,7 +502,7 @@ function $(e) {
               case "none":
                 return null;
               default:
-                xb(ee);
+                throwTypeError(ee);
             }
           })()
         })
@@ -615,7 +615,7 @@ function $(e) {
               case "none":
                 return null;
               default:
-                xb(ei);
+                throwTypeError(ei);
             }
           })()
         })

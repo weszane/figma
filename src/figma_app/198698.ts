@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useRef, useEffect, useMemo } from "react";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { U1 } from "../figma_app/343967";
 import { Cs } from "../figma_app/59509";
 import { Q } from "../905/363675";
@@ -112,7 +112,7 @@ export function $$w0(e) {
       r = "warn";
       break;
     default:
-      xb(content.bannerType);
+      throwTypeError(content.bannerType);
   }
   let D = p()(t, {
     [JT]: !content.positionStatic
@@ -144,7 +144,7 @@ export function $$w0(e) {
     case x1.FPL_WARN:
       break;
     default:
-      xb(content.bannerType);
+      throwTypeError(content.bannerType);
   }
   let k = null;
   if (content.button) {
@@ -170,7 +170,7 @@ export function $$w0(e) {
         });
         break;
       default:
-        xb(e);
+        throwTypeError(e);
     }
   }
   let M = useMemo(() => content.dismissedAtom ?? eU(!1), [content.dismissedAtom]);

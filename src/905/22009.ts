@@ -1,4 +1,4 @@
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { FFileType } from "../figma_app/191312";
 var $$n0;
 (e => {
@@ -31,7 +31,7 @@ var $$n0;
       case FFileType.SITES:
         return "sites";
       default:
-        xb(e);
+        throwTypeError(e);
     }
   };
 })($$n0 || ($$n0 = {}));

@@ -1,7 +1,7 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useMemo, useEffect, createRef, useRef, useCallback, useState } from "react";
 import { Ng, wA } from "../vendor/514228";
-import { KF } from "../figma_app/465776";
+import { debug } from "../figma_app/465776";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { E as _$$E } from "../905/632989";
 import { b as _$$b, bL, mc, r1 } from "../figma_app/860955";
@@ -1041,7 +1041,7 @@ class eM extends uA {
   getOpenFile() {
     let e = this.props.openFile;
     null == e && x1("history", "history view should only be possible to open when we have a file");
-    KF(null != e, "history view should only be possible to open when we have a file");
+    debug(null != e, "history view should only be possible to open when we have a file");
     return e;
   }
   canEditFile() {

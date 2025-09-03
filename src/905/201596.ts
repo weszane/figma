@@ -1,6 +1,6 @@
 import { useRef, useEffect, useMemo, useState, useCallback } from "react";
 import { d4, wA } from "../vendor/514228";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { Ez5 } from "../figma_app/763686";
 import { Rs } from "../figma_app/288654";
 import { t } from "../905/303541";
@@ -100,7 +100,7 @@ export function $$R5(e) {
     case "CANNOT_PUBLISH_REMIX":
       return t("community.publish.hub_file_error.remixes_unavailable_until_first_publish");
     default:
-      xb(e);
+      throwTypeError(e);
   }
 }
 export function $$N0({
@@ -168,4 +168,4 @@ export const Of = $$T1;
 export const Pb = $$C2;
 export const Q1 = $$k3;
 export const T6 = $$P4;
-export const Yw = $$R5; 
+export const Yw = $$R5;

@@ -1,4 +1,4 @@
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { a as _$$a } from "../vendor/294044";
 import { D } from "../vendor/606294";
 import { Hi, xN } from "../905/117560";
@@ -68,7 +68,7 @@ export function $$d1(e, t) {
       }];
       break;
     default:
-      xb(e);
+      throwTypeError(e);
   }
   let r = i[0].x;
   let a = i[1].x;

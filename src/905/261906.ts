@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { memo, useMemo } from "react";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { K } from "../905/276259";
 import { M } from "../905/413543";
 import { u as _$$u } from "../905/158787";
@@ -237,7 +237,7 @@ function w(e) {
         backgroundColor: "var(--color-bg-brand-tertiary)"
       };
     default:
-      xb(e);
+      throwTypeError(e);
   }
 }
 export function $$C1(e) {

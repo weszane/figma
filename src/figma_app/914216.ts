@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { memo, useEffect, useCallback } from "react";
 import { d4 } from "../vendor/514228";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { b as _$$b, bL, mc, YJ, hE } from "../figma_app/860955";
 import { E as _$$E } from "../905/632989";
 import { O as _$$O } from "../905/969533";
@@ -210,7 +210,7 @@ export let $$j1 = memo(function ({
         canEdit: l?.canEdit || !1
       });
     default:
-      xb(e);
+      throwTypeError(e);
   }
 });
 export function $$U3() {

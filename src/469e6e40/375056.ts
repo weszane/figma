@@ -64,7 +64,7 @@ import { a as _$$a } from "../905/948337";
 import { b as _$$b2 } from "../905/946806";
 import eH from "../vendor/781591";
 import { RG } from "../figma_app/684446";
-import { S9 } from "../figma_app/465776";
+import { returnSecond } from "../figma_app/465776";
 import { sf } from "../905/929976";
 import { J7 } from "../figma_app/650409";
 import { Od } from "../figma_app/967319";
@@ -1147,7 +1147,7 @@ function e3(e) {
     if (e.trueUpState === fx.LOCKED) return _$$t2("plan_invoices.locked_invoice.title", {
       date: a
     });
-    if (e.trueUpState !== fx.REVIEW) return S9(e.trueUpState, "");
+    if (e.trueUpState !== fx.REVIEW) return returnSecond(e.trueUpState, "");
     {
       let n = !!e.orgHasAutomaticUpcomingInvoice;
       let s = TV(e.invoice, n);

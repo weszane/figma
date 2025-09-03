@@ -1,6 +1,6 @@
 import { useCallback, useMemo } from "react";
 import { wA, d4 } from "../vendor/514228";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { glU, Pt4, IPu } from "../figma_app/763686";
 import { l as _$$l } from "../905/716947";
 import { getFeatureFlags } from "../905/601108";
@@ -205,7 +205,7 @@ export function $$$$j0(e) {
           case PW.MODULE:
             return;
           default:
-            xb(e, "Unhandled asset type");
+            throwTypeError(e, "Unhandled asset type");
         }
       }(e);
       return i && t[i]?.url || (e.thumbnail_url && getInitialOptions().user_data?.id ? NQ(e.thumbnail_url, "fuid", getInitialOptions().user_data.id) : e.thumbnail_url || "");

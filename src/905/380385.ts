@@ -1,4 +1,4 @@
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { z, Ip } from "../905/239603";
 export let $$a7 = "at-mentions-typeahead";
 var $$s3 = (e => (e.prevButton = "prevButton", e.nextButton = "nextButton", e.accessibilityCommentPin = "accessibilityCommentPin", e))($$s3 || {});
@@ -13,7 +13,7 @@ export function $$c13(e) {
     case 0:
       return !1;
     default:
-      xb(e);
+      throwTypeError(e);
   }
 }
 export function $$u6(e) {
@@ -24,7 +24,7 @@ export function $$u6(e) {
     case 0:
       return !1;
     default:
-      xb(e);
+      throwTypeError(e);
   }
 }
 export function $$p8(e) {
@@ -35,7 +35,7 @@ export function $$p8(e) {
     case 0:
       return !1;
     default:
-      xb(e);
+      throwTypeError(e);
   }
 }
 export function $$m9(e) {
@@ -46,7 +46,7 @@ export function $$m9(e) {
     case 0:
       return !1;
     default:
-      xb(e);
+      throwTypeError(e);
   }
 }
 export var $$h12 = (e => (e[e.FEED_POST = 0] = "FEED_POST", e[e.COMMENT_THREAD = 1] = "COMMENT_THREAD", e[e.LITMUS_COMMENT_THREAD = 2] = "LITMUS_COMMENT_THREAD", e))($$h12 || {});
@@ -68,7 +68,7 @@ export function $$_0(e) {
     case "FeedPostPopoverModalThreadCommentComposer":
       return !0;
     default:
-      xb(e);
+      throwTypeError(e);
   }
 }
 export let $$A11 = z.object({

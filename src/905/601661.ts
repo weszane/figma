@@ -1,4 +1,4 @@
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { bOM } from "../figma_app/763686";
 import { iX } from "../figma_app/471982";
 import { a6, x0 } from "../figma_app/198840";
@@ -66,7 +66,7 @@ export let $$d0 = {
         }];
         break;
       default:
-        xb(c);
+        throwTypeError(c);
     }
   },
   canSet: ({

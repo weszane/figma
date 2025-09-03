@@ -21,7 +21,7 @@ let o = z.object({
   tone: z.nativeEnum($$n0),
   weight: z.number()
 }).array();
-let l = z.$$enum(["design", "slides", "figjam"]);
+let l = z.enum(["design", "slides", "figjam"]);
 let $$d3 = z.union([z.object({
   text: z.string(),
   tones: o,

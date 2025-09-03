@@ -1,4 +1,4 @@
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { isNotNullish } from "../figma_app/95419";
 import { _7 } from "../figma_app/562352";
 import { ServiceCategories as _$$e } from "../905/165054";
@@ -131,9 +131,9 @@ let $$R3 = nF((e, t) => {
     type
   } of t.thumbnails) {
     let h;
-    if (type === PW.COMPONENT) h = a; else if (type === PW.STATE_GROUP) h = s; else if (type === PW.STYLE) h = o; else {
+    if (type === PW.COMPONENT) h = a;else if (type === PW.STATE_GROUP) h = s;else if (type === PW.STYLE) h = o;else {
       if (type === PW.VARIABLE || type === PW.VARIABLE_SET || type === PW.VARIABLE_OVERRIDE || type === PW.RESPONSIVE_SET || type === PW.CONSTRAINED_TEMPLATE || type === PW.CODE_LIBRARY || type === PW.CODE_FILE || type === PW.MANAGED_STRING || type === PW.CODE_COMPONENT) continue;
-      type === PW.MODULE ? h = l : xb(type);
+      type === PW.MODULE ? h = l : throwTypeError(type);
     }
     if (t.styleKind === AT.LOCAL && !(nodeId in h)) continue;
     let g = r[nodeId] && r[nodeId].url;
@@ -153,7 +153,7 @@ let $$R3 = nF((e, t) => {
         case PW.CODE_COMPONENT:
           return f.version;
         default:
-          xb(f, "Unhandled item type");
+          throwTypeError(f, "Unhandled item type");
       }
     })();
     let A = (d || r)[nodeId];
@@ -277,4 +277,4 @@ export const rb = $$N4;
 export const sA = $$E5;
 export const t9 = $$x6;
 export const us = $$T7;
-export const xp = $$k8; 
+export const xp = $$k8;

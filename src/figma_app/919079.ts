@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { PureComponent } from "react";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import s from "classnames";
 import { B } from "../905/714743";
 import { ZN, v, TT, Ww, o9, WH, _W, sM, Dt, JR, uS, Pu, xi, KK, M6, A4, uo, FZ, B4, yZ, C0, KT, zB, ko, Iv, rL, Xo, vg, rJ, vT, Fw, Uu, gL, _X, Sx, t1, aK, rw, W5, eD } from "../905/937197";
@@ -61,7 +61,7 @@ export class $$h0 extends PureComponent {
         case 17:
           return t1;
         default:
-          xb(e, "cases exhausted: this shouldn't happen");
+          throwTypeError(e, "cases exhausted: this shouldn't happen");
       }
     }(this.props.color, this.props.subtle);
     let s = this.props.subtle ? aK : "";

@@ -23,7 +23,7 @@ import { JuA } from "../figma_app/43951";
 import { X$, H3 } from "../figma_app/465071";
 import { pk } from "../figma_app/300692";
 import { Y3 } from "../figma_app/455620";
-import { xb as _$$xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { tKW } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { Ay as _$$Ay } from "../vendor/159563";
@@ -113,7 +113,7 @@ class P {
             if (-1 !== n) r.pins.splice(n + 1, 0, {
               pluginId: e,
               inherited: a
-            }); else {
+            });else {
               let n = this.orgPinsNotInUserPins();
               let i = n.findIndex(e => e.pluginId === t.id);
               if (-1 === i) throw Error("Invalid pin to move after");
@@ -286,7 +286,7 @@ class P {
         };
         break;
       default:
-        _$$xb(e.type);
+        throwTypeError(e.type);
     }
     return t;
   }
@@ -329,7 +329,7 @@ export function $$F0() {
   let {
     loaded,
     preferences
-  } = function() {
+  } = function () {
     let e = TA();
     let {
       loaded: _loaded,
@@ -514,7 +514,7 @@ export function $$U2() {
   let {
     loaded: _loaded3,
     plugin
-  } = function() {
+  } = function () {
     let e = tS();
     let t = md(_$$x);
     let r = d4(e => e.figFileDuplicatedFromHubFile);
@@ -581,4 +581,4 @@ function V(e) {
 }
 export const VR = $$F0;
 export const IE = $$j1;
-export const iA = $$U2; 
+export const iA = $$U2;

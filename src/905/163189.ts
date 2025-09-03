@@ -1,4 +1,4 @@
-import { S9, xb } from "../figma_app/465776";
+import { returnSecond, throwTypeError } from "../figma_app/465776";
 import { h62 } from "../figma_app/763686";
 import { FFileType } from "../figma_app/191312";
 export let $$s1 = [FFileType.DESIGN, FFileType.WHITEBOARD, FFileType.SLIDES, FFileType.SITES, FFileType.COOPER, FFileType.FIGMAKE];
@@ -34,7 +34,7 @@ export function $$m0(e) {
     case "figmake":
       return FFileType.FIGMAKE;
     default:
-      return S9(e, null);
+      return returnSecond(e, null);
   }
 }
 export function $$h4(e) {
@@ -50,7 +50,7 @@ export function $$h4(e) {
     case h62.UNKNOWN:
       return "Unknown";
     default:
-      xb(e);
+      throwTypeError(e);
   }
 }
 export const Ec = $$m0;

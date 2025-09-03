@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { forwardRef, useRef, useId, useImperativeHandle } from "react";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { E as _$$E } from "../905/172252";
 import { o as _$$o } from "../905/821217";
 import l from "classnames";
@@ -29,7 +29,7 @@ let y = e => {
           maxLength: e.data.maxLength
         });
       default:
-        return xb(t);
+        return throwTypeError(t);
     }
   }
 };

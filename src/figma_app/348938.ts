@@ -1,4 +1,4 @@
-import { KF } from "../figma_app/465776";
+import { debug } from "../figma_app/465776";
 import { isNotNullish } from "../figma_app/95419";
 import { k } from "../905/749197";
 import { Egt, KjJ } from "../figma_app/763686";
@@ -31,7 +31,7 @@ export class $$f3 {
     let t = this.ancestorInfos[e];
     if (t) return t;
     let r = this.getNode(e);
-    if (KF(null != r, "getAncestorInfo called on invalid node"), r && r.parentGuid) {
+    if (debug(null != r, "getAncestorInfo called on invalid node"), r && r.parentGuid) {
       let n = this.getAncestorInfo(r.parentGuid);
       t = {
         isAncestorHidden: n.isAncestorHidden || !r.visible,
@@ -54,7 +54,7 @@ export class $$f3 {
     let t = this.maskInfos[e];
     if (t) return t;
     let r = this.getNode(e);
-    if (KF(null != r, "getMaskInfo called on invalid node"), "CANVAS" === r.type) this.maskInfos[e] = {
+    if (debug(null != r, "getMaskInfo called on invalid node"), "CANVAS" === r.type) this.maskInfos[e] = {
       level: 0,
       isMaskedAtLevels: "",
       isLastMaskedAtLevels: ""

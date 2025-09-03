@@ -1,6 +1,6 @@
 import { K$p } from "../figma_app/763686";
 import { gB, rU, z7 } from "../figma_app/383733";
-import { KF } from "../figma_app/465776";
+import { debug } from "../figma_app/465776";
 export function $$s14(e) {
   switch (e.type) {
     case K$p.ASSISTANT_MESSAGE:
@@ -176,7 +176,7 @@ export function $$S7(e) {
 }
 export function $$v0(e) {
   if (!e) return null;
-  KF(e.isCodeInstance, "Node is not a code instance");
+  debug(e.isCodeInstance, "Node is not a code instance");
   let t = e.backingCodeComponent;
   if (!t) return null;
   let r = t.exportedFromCodeFile;

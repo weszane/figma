@@ -1,4 +1,4 @@
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { h62 } from "../figma_app/763686";
 import { t } from "../905/303541";
 export function $$s0(e) {
@@ -14,7 +14,7 @@ export function $$s0(e) {
     case h62.UNKNOWN:
       return t("fullscreen.file_import.import_unknown_pdf_failed");
     default:
-      xb(e);
+      throwTypeError(e);
   }
 }
 export const P = $$s0;

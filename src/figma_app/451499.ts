@@ -1,4 +1,4 @@
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { AD } from "../905/871411";
 import { getFeatureFlags } from "../905/601108";
 import { k as _$$k } from "../905/651849";
@@ -586,7 +586,7 @@ export class $$C11 {
         case "ON_MEDIA_END":
           return _$$t("proto.interaction.type.when_video_ends");
         default:
-          xb(e);
+          throwTypeError(e);
       }
     };
   }
@@ -629,7 +629,7 @@ export class $$w3 {
         case "ON_MEDIA_END":
           return _$$t("proto.interaction.type.when_video_ends");
         default:
-          xb(e);
+          throwTypeError(e);
       }
     };
   }
@@ -672,7 +672,7 @@ export class $$O7 {
         case "ON_MEDIA_END":
           return _$$t("proto.interaction.type.video_ends");
         default:
-          return xb(e);
+          return throwTypeError(e);
       }
     };
   }
@@ -715,7 +715,7 @@ export class $$R4 {
         case "ON_MEDIA_END":
           return _$$t("proto.interaction.type.video_ends");
         default:
-          return xb(e);
+          return throwTypeError(e);
       }
     };
   }
@@ -829,7 +829,7 @@ export class $$$$D22 {
         case "MISC":
           return _$$t("whiteboard.shape_collection_type.misc");
         default:
-          return xb(e);
+          return throwTypeError(e);
       }
     };
   }
@@ -847,7 +847,7 @@ export class $$k0 {
         case "STRAIGHT_NO_ENDPOINTS":
           return _$$t("whiteboard.shapes_sidebar.connector_no_endpoints");
         default:
-          return xb(e);
+          return throwTypeError(e);
       }
     };
   }

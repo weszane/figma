@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { d4 } from "../vendor/514228";
-import { xb, KF } from "../figma_app/465776";
+import { throwTypeError, debug } from "../figma_app/465776";
 import { eU, md, Iz } from "../figma_app/27355";
 import { Qw } from "../905/989992";
 import { oA } from "../905/723791";
@@ -70,7 +70,7 @@ export function $$A9(e) {
       case "OFFLINE_FILE":
         return t[_$$F.OFFLINE_FILES][r];
       default:
-        xb(e);
+        throwTypeError(e);
     }
   }), [e, t]);
 }
@@ -87,7 +87,7 @@ export class $$x1 {
       case "OFFLINE_FILE":
         return e.file.fileKey;
       default:
-        xb(e);
+        throwTypeError(e);
     }
   }
   static sameObject(e, t) {
@@ -103,7 +103,7 @@ export class $$x1 {
       case "OFFLINE_FILE":
         return e.file.fileKey === t.file.fileKey;
       default:
-        xb(e);
+        throwTypeError(e);
     }
   }
   static getName(e) {
@@ -117,7 +117,7 @@ export class $$x1 {
       case "REPO":
         return oj(e.repo);
       default:
-        xb(e);
+        throwTypeError(e);
     }
   }
   static getAccessedAt(e) {
@@ -133,7 +133,7 @@ export class $$x1 {
       case "OFFLINE_FILE":
         return new Date(e.file.lastUpdatedAt).toISOString();
       default:
-        xb(e);
+        throwTypeError(e);
     }
   }
   static getSharedAt(e) {
@@ -148,7 +148,7 @@ export class $$x1 {
       case "OFFLINE_FILE":
         return null;
       default:
-        xb(e);
+        throwTypeError(e);
     }
   }
   static getCreatedAt(e) {
@@ -163,7 +163,7 @@ export class $$x1 {
       case "OFFLINE_FILE":
         return new Date(e.file.createdAt).toISOString();
       default:
-        xb(e);
+        throwTypeError(e);
     }
   }
   static getTouchedAt(e) {
@@ -179,7 +179,7 @@ export class $$x1 {
       case "OFFLINE_FILE":
         return new Date(e.file.lastUpdatedAt).toISOString();
       default:
-        xb(e);
+        throwTypeError(e);
     }
   }
   static getTrashedAt(e) {
@@ -194,7 +194,7 @@ export class $$x1 {
       case "OFFLINE_FILE":
         return null;
       default:
-        xb(e);
+        throwTypeError(e);
     }
   }
   static getTrashedUserId(e) {
@@ -207,7 +207,7 @@ export class $$x1 {
       case "OFFLINE_FILE":
         return null;
       default:
-        xb(e);
+        throwTypeError(e);
     }
   }
   static getIsFavorited(e) {
@@ -222,7 +222,7 @@ export class $$x1 {
       case "OFFLINE_FILE":
         return !1;
       default:
-        xb(e);
+        throwTypeError(e);
     }
   }
   static getFavoritedResourceType(e) {
@@ -235,7 +235,7 @@ export class $$x1 {
       case "PROTOTYPE":
         return FEntityType.PROTOTYPE;
       default:
-        xb(e);
+        throwTypeError(e);
     }
   }
   static getFileOrMainBranchKey(e) {
@@ -250,7 +250,7 @@ export class $$x1 {
       case "OFFLINE_FILE":
         return;
       default:
-        xb(e);
+        throwTypeError(e);
     }
   }
   static getFileOrSelectedBranchKey(e) {
@@ -265,7 +265,7 @@ export class $$x1 {
       case "OFFLINE_FILE":
         return;
       default:
-        xb(e);
+        throwTypeError(e);
     }
   }
   static getUrl(e, t) {
@@ -282,7 +282,7 @@ export class $$x1 {
       case "OFFLINE_FILE":
         return "";
       default:
-        xb(e);
+        throwTypeError(e);
     }
   }
   static getEditUrl(e, t) {
@@ -302,7 +302,7 @@ export class $$x1 {
       case "OFFLINE_FILE":
         return "";
       default:
-        xb(e);
+        throwTypeError(e);
     }
   }
   static getFavoriteResourceId(e) {
@@ -317,7 +317,7 @@ export class $$x1 {
       case "OFFLINE_FILE":
         return e.file.fileKey;
       default:
-        xb(e);
+        throwTypeError(e);
     }
   }
   static getIsTeamTemplate(e) {
@@ -330,7 +330,7 @@ export class $$x1 {
       case "OFFLINE_FILE":
         return !1;
       default:
-        xb(e);
+        throwTypeError(e);
     }
   }
   static getOrgId(e) {
@@ -345,7 +345,7 @@ export class $$x1 {
       case "OFFLINE_FILE":
         return e.file.orgId;
       default:
-        xb(e);
+        throwTypeError(e);
     }
   }
   static getFavoriteResourceTeamId(e) {
@@ -373,7 +373,7 @@ export class $$x1 {
       case "OFFLINE_FILE":
         return null;
       default:
-        xb(e);
+        throwTypeError(e);
     }
   }
   static getSharedByName(e) {
@@ -385,13 +385,13 @@ export class $$x1 {
       case "REPO":
         return e.repo.shared_by_user?.name;
       case "PINNED_FILE":
-        KF(!0, "Cannot get shared by name from a pinned file");
+        debug(!0, "Cannot get shared by name from a pinned file");
         return null;
       case "OFFLINE_FILE":
-        KF(!0, "Cannot get shared by name from an offline file");
+        debug(!0, "Cannot get shared by name from an offline file");
         return null;
       default:
-        xb(e);
+        throwTypeError(e);
     }
   }
   static getOwner(e) {
@@ -402,10 +402,10 @@ export class $$x1 {
       case "PROTOTYPE":
       case "REPO":
       case "OFFLINE_FILE":
-        KF(!0, "Did not expect to render owner for non-file tiles");
+        debug(!0, "Did not expect to render owner for non-file tiles");
         return;
       default:
-        xb(e);
+        throwTypeError(e);
     }
   }
   static useIsRenaming(e) {
@@ -425,7 +425,7 @@ export class $$x1 {
       case "PROTOTYPE":
         return !1;
       default:
-        xb(e);
+        throwTypeError(e);
     }
   }
   static getIsPasswordProtected(e) {
@@ -444,7 +444,7 @@ export class $$x1 {
       case "OFFLINE_FILE":
         return !1;
       default:
-        xb(e);
+        throwTypeError(e);
     }
   }
   static getFolderId(e) {
@@ -459,7 +459,7 @@ export class $$x1 {
       case "OFFLINE_FILE":
         return null;
       default:
-        xb(e);
+        throwTypeError(e);
     }
   }
   static getTeamId(e) {
@@ -474,7 +474,7 @@ export class $$x1 {
       case "OFFLINE_FILE":
         return null;
       default:
-        xb(e);
+        throwTypeError(e);
     }
   }
   static getThumbnailUrl(e) {
@@ -490,7 +490,7 @@ export class $$x1 {
       case "OFFLINE_FILE":
         return null;
       default:
-        xb(e);
+        throwTypeError(e);
     }
   }
   static getIsThumbnailFullWidth(e) {
@@ -506,7 +506,7 @@ export class $$x1 {
       case "OFFLINE_FILE":
         return null;
       default:
-        xb(e);
+        throwTypeError(e);
     }
   }
   static getEditorType(e) {
@@ -520,7 +520,7 @@ export class $$x1 {
       case "PROTOTYPE":
         return null;
       default:
-        xb(e);
+        throwTypeError(e);
     }
   }
   static getClientMeta(e) {
@@ -535,7 +535,7 @@ export class $$x1 {
       case "OFFLINE_FILE":
         return null;
       default:
-        xb(e);
+        throwTypeError(e);
     }
   }
   static getPreviewThumbnailUrls(e) {
@@ -553,7 +553,7 @@ export class $$x1 {
       case "OFFLINE_FILE":
         return null;
       default:
-        xb(e);
+        throwTypeError(e);
     }
   }
 }
@@ -567,7 +567,7 @@ let $$C7 = Iz(e => eU(t => "FILE" === e.type || "PINNED_FILE" === e.type ? t(sMs
   repoId: e.repo.id
 })).transform(e => !!oA(e.repo)?.canView) : "PROTOTYPE" === e.type ? t(eSI.Query({
   prototypeId: e.prototype.id
-})).transform(e => !!oA(e.prototype)?.canRead) : "OFFLINE_FILE" === e.type ? Qw.loaded(!0) : void xb(e)), $$x1.sameObject);
+})).transform(e => !!oA(e.prototype)?.canRead) : "OFFLINE_FILE" === e.type ? Qw.loaded(!0) : void throwTypeError(e)), $$x1.sameObject);
 let $$w3 = {
   FILE: _$$F.FILES,
   PROTOTYPE: _$$F.PROTOTYPES,

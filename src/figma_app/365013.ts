@@ -1,5 +1,5 @@
 import { N8 } from "../vendor/792931";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 function a(e, t, r) {
   t in e ? Object.defineProperty(e, t, {
     value: r,
@@ -22,7 +22,7 @@ export class $$s0 {
       case "undefined-input":
         return;
       default:
-        xb(r);
+        throwTypeError(r);
     }
   }
   getAccumulatedText() {

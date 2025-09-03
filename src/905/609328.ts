@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useMemo } from "react";
 import { wA, d4 } from "../vendor/514228";
-import { KF } from "../figma_app/465776";
+import { debug } from "../figma_app/465776";
 import { Pt4, glU } from "../figma_app/763686";
 import { l7 } from "../905/189185";
 import { fn, sH } from "../905/871411";
@@ -57,7 +57,7 @@ export function $$I1() {
         position: a
       }) {
         if (i.isShown && !i.isCreating && i.style?.node_id === n.node_id && EF(i.style, n)) r();else {
-          KF(null != n.content_hash, "style does not have a hash");
+          debug(null != n.content_hash, "style does not have a hash");
           let i = Oo(n, t) ? n.node_id : Pt4.getStyleNodeId(n.key, n.content_hash);
           fn(sH(i)) ? glU.selectStyleByGuid(i) : Eo.getCanvas(n).then(e => {
             glU.selectExternalStyle(e);

@@ -22,7 +22,7 @@ import { h as _$$h } from "../905/881732";
 import { RI } from "../figma_app/621201";
 import { L as _$$L } from "../905/121508";
 import { useState, useContext, useRef, useMemo, useCallback, useEffect, useLayoutEffect } from "react";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { ServiceCategories as _$$e2 } from "../905/165054";
 import { wm } from "../905/19536";
 import { Qw } from "../905/989992";
@@ -470,7 +470,7 @@ export function $$es0({
             }, "debug");
             break;
           default:
-            xb(i);
+            throwTypeError(i);
         }
       },
       postChecks: P,

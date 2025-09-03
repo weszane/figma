@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { getFeatureFlags } from "../905/601108";
 import { zN, xf } from "../figma_app/416935";
 import { isGovCluster, isDevEnvironment } from "../figma_app/169182";
@@ -46,7 +46,7 @@ export function $$S8(e) {
     case Gv.BANNED:
       return t("org_settings.guest_control.banned");
     default:
-      xb(e);
+      throwTypeError(e);
   }
 }
 export function $$v20(e) {
@@ -63,7 +63,7 @@ export function $$A13(e) {
     case FCostCenterType.DEPARTMENT:
       return t("scim_metadata_display_text.department");
     default:
-      xb(e);
+      throwTypeError(e);
   }
 }
 export function $$x11(e) {

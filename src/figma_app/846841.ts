@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useRef, useEffect, useState, useCallback, useMemo } from "react";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { lQ } from "../905/934246";
 import { t as _$$t } from "../905/150656";
 import { E as _$$E } from "../905/632989";
@@ -230,7 +230,7 @@ export function $$eR6({
         });
         break;
       default:
-        xb(t);
+        throwTypeError(t);
     }
     return jsxs("div", {
       className: r,
@@ -340,7 +340,7 @@ export function $$eR6({
         G1(er, !0) && (_debouncedFragmentTextSearch(er), _flushDebouncedFragmentTextSearch());
         break;
       default:
-        xb(t);
+        throwTypeError(t);
     }
     tc.setActiveTab(tl[t].id);
     az.trackDefinedEvent("asset_search.actions_search_panel_open", {
@@ -439,7 +439,7 @@ export function $$eR6({
       case Qx.COMMUNITY:
         return tz;
       default:
-        xb(tc.activeTab);
+        throwTypeError(tc.activeTab);
     }
   })();
   let tZ = e ? "visualSearchView" : "assetsDetailView";
@@ -523,7 +523,7 @@ export function $$eR6({
                         flushDebouncedAssetSearch();
                         return;
                       default:
-                        xb(currentSearch.input);
+                        throwTypeError(currentSearch.input);
                     }
                   },
                   value: ti,

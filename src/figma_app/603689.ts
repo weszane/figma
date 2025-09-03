@@ -412,7 +412,7 @@ import { r1 as _$$r, _W, BI, Vv, w8, Y5, ZP } from '../figma_app/455680';
 import { Ws } from '../figma_app/459125';
 import { wV } from '../figma_app/462456';
 import { D6, j_ } from '../figma_app/465071';
-import { vA, xb } from '../figma_app/465776';
+import { assert, throwTypeError } from '../figma_app/465776';
 import { _I as _$$_I, l7 as _$$l5, xo as _$$xo, U4 } from '../figma_app/473493';
 import { A as _$$A4 } from '../figma_app/475340';
 import { yZ } from '../figma_app/476572';
@@ -542,7 +542,7 @@ import { Dt } from '../figma_app/912411';
 import { f as _$$f } from '../figma_app/913332';
 import { QE, z0 } from '../figma_app/914216';
 import { ai as _$$ai, f6 } from '../figma_app/915202';
-import { d_ as _$$d_ } from '../figma_app/918700';
+import { utilityNoop } from '../figma_app/918700';
 import { Ex as _$$Ex, zE } from '../figma_app/919079';
 import { w as _$$w } from '../figma_app/922802';
 import { E as _$$E } from '../figma_app/924252';
@@ -670,7 +670,7 @@ function ec(e) {
 }
 function eu() {
   let e = wA();
-  !function() {
+  !function () {
     let e = Pj();
     let t = useMemo(() => _$$g(), []);
     let r = md(_$$d2);
@@ -713,7 +713,7 @@ function eu() {
     userStateLoaded: e.userStateLoaded,
     user: e.user
   }));
-  vA(selectedView.view === 'feed', 'UserNotificationDesktopDropdownContainer: wrong view, quick replies may not work');
+  assert(selectedView.view === 'feed', 'UserNotificationDesktopDropdownContainer: wrong view, quick replies may not work');
   let a = selectedView.quickReplyInfo;
   let [s, o] = useState(0);
   useEffect(() => {
@@ -1284,7 +1284,7 @@ function rl(e, t) {
 }
 let rd = new class {
   getParsedCodeTokens(e, t, r) {
-    return function(e, t, r) {
+    return function (e, t, r) {
       let n = '';
       switch (t) {
         case 'typescript':
@@ -1457,7 +1457,7 @@ function rH(e) {
 function rz(e) {
   let t = [];
   for (let r of e) {
-    let e = function(e) {
+    let e = function (e) {
       let t = [{
         node: e,
         children: isValidElement(e) && 'children' in e.props ? Children.toArray(e.props.children) : null,
@@ -1499,7 +1499,7 @@ function rz(e) {
         }
       }
       return e;
-    }(function(e) {
+    }(function (e) {
       let t = [];
       for (let r = 0; r < e.length; r++) {
         let n = e[r];
@@ -1521,7 +1521,7 @@ function rz(e) {
 }
 let rW = new class {
   readRichTextFromHtml(e) {
-    return function(e) {
+    return function (e) {
       let t = '';
       let r = [];
       let n = [];
@@ -1569,7 +1569,7 @@ let rW = new class {
               let {
                 treatment,
                 style
-              } = function(e, t) {
+              } = function (e, t) {
                 let r = null;
                 let n = t;
                 if (['block', 'inline', 'none'].includes(e.style.display)) {
@@ -1657,7 +1657,7 @@ let rW = new class {
     }(new DOMParser().parseFromString(e, 'text/html'));
   }
   createHtmlFromTextNodes(e) {
-    return function(e) {
+    return function (e) {
       let t = [];
       for (let r of e) {
         let e = UN().get(r);
@@ -1817,7 +1817,7 @@ let ns = {
   },
   ThumbhashBindings: () => we
 };
-let nu = function() {
+let nu = function () {
   return null;
 };
 let nB = document.documentElement.style;
@@ -2065,7 +2065,7 @@ function iL() {
         cancelCallback && cancelCallback();
         break;
       default:
-        xb(t.source);
+        throwTypeError(t.source);
     }
   }, [cancelCallback]);
   return _ ? jsxs('div', {
@@ -2401,7 +2401,7 @@ class au extends ad {
     }
   }
 }
-class ap extends _$$E2 { }
+class ap extends _$$E2 {}
 class af extends _$$R3 {
   constructor({
     migrationVersion: e,
@@ -2432,7 +2432,7 @@ class af extends _$$R3 {
     let {
       chunkIndex,
       guid
-    } = function(e) {
+    } = function (e) {
       let [t, r] = e.split('-');
       return {
         chunkIndex: Number(t),
@@ -2920,7 +2920,7 @@ class ak extends ad {
     return t ? this.editScopePropertyGenerator.generateEditScopeSnapshotsItem(t) : null;
   }
 }
-class aM extends _$$E2 { }
+class aM extends _$$E2 {}
 async function aF(e) {
   for (let t of [250, 250, 250, 500, 1e3, 1e3, ...Array.from({
     length: 24
@@ -3269,7 +3269,7 @@ async function a5(e) {
   let {
     entry
   } = (await getRequest(`/api/admin/multiplayer_journal/${e.fileKey}/${e.endSequenceNumber}`)).data.meta;
-  return new Uint8Array(function(e) {
+  return new Uint8Array(function (e) {
     let t = atob(e);
     let r = t.length;
     let n = new Uint8Array(r);
@@ -3851,7 +3851,7 @@ let s2 = 'survey_view--multipleChoiceQuestionsGrid--VZOFn';
 let s5 = 'survey_view--multipleChoiceQuestionsChoice---6Xmx';
 (e => {
   e.DEFAULT_WIDTH = 340;
-  e.useSurveyState = function(t) {
+  e.useSurveyState = function (t) {
     let {
       completeStates,
       dismissModal,
@@ -3891,7 +3891,7 @@ let s5 = 'survey_view--multipleChoiceQuestionsChoice---6Xmx';
       width: g
     };
   };
-  e.useAutosizedSurveyState = function(e) {
+  e.useAutosizedSurveyState = function (e) {
     let {
       completeStates,
       dismissModal,
@@ -4017,14 +4017,14 @@ let s5 = 'survey_view--multipleChoiceQuestionsChoice---6Xmx';
     });
   }
   e.SurveyContent = t;
-  e.SurveyButton = function(e) {
+  e.SurveyButton = function (e) {
     return jsx(Ih, {
       variant: 'secondary',
       onClick: () => e.onClickAnswer(e.answer),
       children: e.answer.answer
     });
   };
-  e.QuestionView = function({
+  e.QuestionView = function ({
     question: e,
     surveyAnswers: t,
     onSubmitAnswer: r
@@ -4057,7 +4057,7 @@ let s5 = 'survey_view--multipleChoiceQuestionsChoice---6Xmx';
       })]
     });
   };
-  e.MultipleChoiceQuestionsView = function(e) {
+  e.MultipleChoiceQuestionsView = function (e) {
     let t = Array.from({
       length: e.questions.length
     }).fill(e.defaultChoice.displayValue);
@@ -4121,7 +4121,7 @@ let s5 = 'survey_view--multipleChoiceQuestionsChoice---6Xmx';
       })]
     });
   };
-  e.EnterFreeFormView = function(e) {
+  e.EnterFreeFormView = function (e) {
     let [t, r] = useState('');
     let [n, i] = useState(void 0);
     let a = useRef(null);
@@ -4212,7 +4212,7 @@ let s5 = 'survey_view--multipleChoiceQuestionsChoice---6Xmx';
       })]
     });
   };
-  e.CompleteView = function({
+  e.CompleteView = function ({
     customSuccessMessage: e
   }) {
     return jsx(Fragment, {
@@ -4231,7 +4231,7 @@ let s5 = 'survey_view--multipleChoiceQuestionsChoice---6Xmx';
       })
     });
   };
-  e.ModalView = function(e) {
+  e.ModalView = function (e) {
     let t = jsx(i, {
       ...e
     });
@@ -4571,7 +4571,7 @@ function oO({
 }) {
   if (!e || e.status !== _$$Q4.EXPIRED) return null;
   let t = e.planType === FPlanTierType.ENTERPRISE ? _$$tx('payments_modal.org_trial.enterprise') : _$$tx('payments_modal.org_trial.organization');
-  return jsxs(_$$d_, {
+  return jsxs(utilityNoop, {
     'className': ow,
     'size': 360,
     'title': jsx(_$$E4, {
@@ -4664,7 +4664,7 @@ function oj(e) {
     'children': _$$tx('payments_modal.org_trial_pending.ssa_link')
   });
   let m = _$$tx('payments_modal.org_trial_pending.i_agree');
-  return jsxs(_$$d_, {
+  return jsxs(utilityNoop, {
     'className': ow,
     'size': d ? 380 : 360,
     'title': jsx(_$$E4, {
@@ -4813,7 +4813,7 @@ let oz = M4.Mutation(async e => {
 });
 let oK = Iz(e => Z1(O24.Query({
   orgId: e
-}), e => e?.org?.canAdmin && e.org.billingTrials?.length ? function(e) {
+}), e => e?.org?.canAdmin && e.org.billingTrials?.length ? function (e) {
   let t = e.filter(e => e.status === _$$Q4.PENDING && e.trialType === FBillingEntityType.PRODUCT);
   return sortByDateProperty(t, 'createdAt')[0] || null;
 }(e.org.billingTrials) : null));
@@ -4826,7 +4826,7 @@ function oZ({
   let a = hS({
     preventUserClose: !0,
     open: !0,
-    onClose: () => { }
+    onClose: () => {}
   });
   let s = useCallback(async () => {
     if (!t) {
@@ -5171,7 +5171,7 @@ function lF({
       s = $X;
       break;
     default:
-      xb(e);
+      throwTypeError(e);
   }
   let d = r ? r.project.id : void 0;
   let c = !!r && !_$$rR(Z_(r.team), {
@@ -5199,7 +5199,7 @@ function lF({
         'new_file_card--preventInteraction--iAf9o': p
       }),
       'disabled': p,
-      'onClick': function() {
+      'onClick': function () {
         if (!n) {
           if (c && r) {
             e === FFileType.SITES && _$$M4 ? o(_$$to({
@@ -5419,7 +5419,7 @@ function l3({
       i = e.prototype.url;
       break;
     default:
-      xb(e);
+      throwTypeError(e);
   }
   let h = Tf.getAccessedAt(e);
   return jsx('li', {
@@ -5486,7 +5486,7 @@ function l4({
       children: jsx(w4, {
         'size': 16,
         'type': t,
-        'aria-label': function(e) {
+        'aria-label': function (e) {
           switch (e) {
             case y1.DESIGN:
               return _$$t('desktop_new_tab.file_type.design');
@@ -5513,7 +5513,7 @@ function l4({
             case y1.COOPER_TEMPLATE:
               return _$$t('desktop_new_tab.file_type.buzz_template');
             default:
-              xb(e, `Unknown FileIconType: ${e}`);
+              throwTypeError(e, `Unknown FileIconType: ${e}`);
           }
         }(t)
       })
@@ -5602,7 +5602,7 @@ function dr() {
   let _ = mw(!!md(_$$t4).data, p);
   let [h, m] = useState(void 0);
   let g = null;
-  let f = function({
+  let f = function ({
     enabled: e = !0
   } = {}) {
     let t = Rs(_Dk, {
@@ -5767,7 +5767,7 @@ function dE({
   onDiff: t
 }) {
   let r = useRef({});
-  let n = function(e) {
+  let n = function (e) {
     let t = _$$U4();
     return useMemo(() => e ?? ((e, r, n) => {
       t('LiveGraph Diff', {
@@ -5813,9 +5813,9 @@ let dO = e => {
   return t;
 };
 function dR() {
-  (function() {
+  (function () {
     let e = wA();
-    !function() {
+    !function () {
       let e = !!getFeatureFlags().ds_componentbykey_shadow_read;
       let t = _$$d(OQ);
       let r = useMemo(() => t.map(e => ({
@@ -5825,7 +5825,7 @@ function dR() {
         enabled: e
       });
     }();
-    let t = function() {
+    let t = function () {
       let e = _$$tS();
       let t = _$$n4();
       let r = md(TG);
@@ -5865,7 +5865,7 @@ function dR() {
       localUnpublishedStyles,
       unpublishedLocalStyleKeyToNodeIds,
       usedLocalStyles
-    } = function() {
+    } = function () {
       let e = _$$tS();
       let t = K5();
       let r = _$$eY();
@@ -5917,7 +5917,7 @@ function dR() {
         sourceAssetKeyToDestinationKey,
         sourceAssetKeyToFileName,
         destinationStyleKeyToLegacySourceStyle
-      } = function(e) {
+      } = function (e) {
         let t = Object.create(null);
         let r = Object.create(null);
         let n = Object.create(null);
@@ -5989,7 +5989,7 @@ function dB({
   children: e,
   maxSubscriptionsBeforeCleanup: t
 }) {
-  !function() {
+  !function () {
     let e = wA();
     let t = _$$tS();
     let r = Rs(ozA, {
@@ -6016,7 +6016,7 @@ function dG({
   maxSubscriptionsBeforeCleanup: t
 }) {
   let r = q5()?.canEdit;
-  !function() {
+  !function () {
     let e = useRef(new Set());
     let t = wA();
     let r = md(dU);
@@ -6048,7 +6048,7 @@ function dV() {
   return null;
 }
 function dH() {
-  !function() {
+  !function () {
     let e = wA();
     let t = _$$lg();
     let r = _$$d(e => e.library.publishProgress);
@@ -6489,12 +6489,12 @@ function cs() {
 }
 function co() {
   let e = dJ();
-  vA(!!e, 'Folder id is undefined');
+  assert(!!e, 'Folder id is undefined');
   let t = LK(e);
   let [r] = mI(t);
   let n = r.unwrapOr(void 0)?.files;
-  vA(!!n, 'Files is undefined');
-  vA(n.length > 0, 'No files in folder');
+  assert(!!n, 'Files is undefined');
+  assert(n.length > 0, 'No files in folder');
   let [i] = IT(CH9({
     folderId: e
   }));
@@ -6527,13 +6527,13 @@ function cc() {
 }
 function cu() {
   let e = dJ();
-  vA(!!e, 'Folder id is undefined');
+  assert(!!e, 'Folder id is undefined');
   let [t] = IT(CH9({
     folderId: e
   }));
   let [r] = mI(t);
   let n = r.unwrapOr(void 0)?.project?.pinnedFiles;
-  vA(!!n, 'Pinned Files is undefined');
+  assert(!!n, 'Pinned Files is undefined');
   let i = useMemo(() => n.filter(e => !!e.file).map(e => ({
     type: _$$nb.PINNED_FILE,
     file: e.file
@@ -6600,14 +6600,14 @@ function cm() {
 }
 function cg() {
   let e = dJ();
-  vA(!!e, 'Folder id is undefined');
+  assert(!!e, 'Folder id is undefined');
   let [t] = IT(L8O({
     projectId: e
   }));
   let [r] = mI(t);
   let n = r.unwrapOr(void 0)?.project;
   let i = wA();
-  vA(!!n, 'Project is null');
+  assert(!!n, 'Project is null');
   return jsxs(Fragment, {
     children: [jsxs('div', {
       ...xk(ch.header),
@@ -6727,7 +6727,7 @@ function c2() {
   let t = q5();
   let r = _$$tS();
   let n = _$$iZ();
-  let i = function() {
+  let i = function () {
     let e = q5();
     let t = _$$J6();
     let r = _$$tS();
@@ -6915,7 +6915,7 @@ function ut({
   let s = _$$xo();
   let o = _$$iZ();
   let d = !!hA() && a;
-  !function() {
+  !function () {
     let e = wA();
     let t = _$$tS();
     let r = _$$xo();
@@ -7354,7 +7354,7 @@ function uF() {
   });
 }
 function uj() {
-  let e = function() {
+  let e = function () {
     let e = _$$_I();
     let t = q5();
     let r = t?.currentPartialOrgUser?.designAccountTypeRequest;
@@ -7364,7 +7364,7 @@ function uj() {
     n?.status === 'approved' ? a = !0 : n?.status === 'denied' && r?.status === 'approved' && (a = !0);
     return !!e && !!i && a;
   }();
-  let t = function() {
+  let t = function () {
     let e = _$$_I();
     let t = md(fC).data;
     let r = MY();
@@ -7617,7 +7617,7 @@ function pm(e) {
   let {
     hoistedToolbeltItems,
     modalTargetPanelRef
-  } = function() {
+  } = function () {
     let e = useRef(null);
     let t = _$$ut(Ez5?.propertiesPanelState().shownPropertiesPanels, []);
     let r = _$$M5(t);
@@ -7778,7 +7778,7 @@ function pN() {
 }
 function pC() {
   let e = _$$ut(Ez5?.devHandoffState().nodeIds, []);
-  let t = function() {
+  let t = function () {
     let e = hA();
     let t = _$$ut(Ez5?.devHandoffState().focusNodeVisuallySortedChildren, []);
     return e ? t : [];
@@ -7793,8 +7793,8 @@ function pw() {
 function pP({
   handleAction: e
 }) {
-  let t = function() {
-    !function() {
+  let t = function () {
+    !function () {
       let e = Xr(_$$r5);
       let t = pN();
       useEffect(() => {
@@ -7823,7 +7823,7 @@ function pP({
         width: l.w,
         height: l.h
       });
-      s(function(e, t) {
+      s(function (e, t) {
         let r = 0;
         let n = 0;
         if (t.width / e.width > t.height / e.height ? (r = t.width, n = e.width) : (r = t.height, n = e.height), e.zoomScale < 0.5 && r / n < 0.25) return !0;
@@ -7843,7 +7843,7 @@ function pP({
     nodesForStepper,
     handleStepForward,
     handleStepBack
-  } = function(e) {
+  } = function (e) {
     let t = pC();
     let r = pw();
     let n = r < t.length - 1;
@@ -8046,7 +8046,7 @@ function pz() {
   } = _$$rM(_$$u6);
   let n = E3();
   let i = _$$aV();
-  let a = function() {
+  let a = function () {
     let e = _$$l6();
     let t = _$$e10();
     let r = _$$ZO2();
@@ -8237,7 +8237,7 @@ function p3(e) {
       modalType: _$$s7.type
     });
   }
-  e.AccountSettingsModalInIframe = function() {
+  e.AccountSettingsModalInIframe = function () {
     return jsx(t, {
       tab: _$$c0.ACCOUNT
     });
@@ -8400,7 +8400,7 @@ class _p extends _a {
         case _$$_3.SUBSCRIBED_TO_COMMENT_NOTIFICATIONS:
           return _$$t('comments.turn_on');
         default:
-          xb(t);
+          throwTypeError(t);
       }
     };
     this.actionCallback = () => {
@@ -8432,7 +8432,7 @@ class _p extends _a {
           e && (glU.pasteFromSerializedClipboardData(e.downloadUrl, e.deviceType, e.timestamp), e.acceptCallback && e.acceptCallback());
           return;
         default:
-          xb(t);
+          throwTypeError(t);
       }
     };
     this.position = () => {
@@ -8453,7 +8453,7 @@ class _p extends _a {
         case _$$_3.CLIPBOARD_DATA_AVAILABLE:
           return e.isFigJam ? _i.TOP_CENTER : _i.BOTTOM_RIGHT;
         default:
-          xb(t);
+          throwTypeError(t);
       }
     };
     this.isError = () => {
@@ -8473,7 +8473,7 @@ class _p extends _a {
         case _$$_3.SUBSCRIBED_TO_COMMENT_NOTIFICATIONS:
           return !1;
         default:
-          xb(t);
+          throwTypeError(t);
       }
     };
     this.dequeueNotification = () => {
@@ -8515,7 +8515,7 @@ function _I() {
   let a = i ? n[i] : null;
   let s = r.orderedIds.filter(e => t?.id !== e).map(e => r.byId[e]);
   useEffect(() => {
-    !function() {
+    !function () {
       let e = document.getElementById('filebrowser-loading-page');
       e && (e.classList.add('fadeOut'), setTimeout(() => {
         e.classList.add('hidden');
@@ -8773,9 +8773,9 @@ let _C = memo(() => {
       document.body.removeEventListener('blur', e, !0);
     };
   }, []);
-  (function() {
+  (function () {
     let e = wA();
-    let t = function() {
+    let t = function () {
       let e = useMemo(() => _$$g(), []);
       let t = Rs(oMw, {
         cacheNonce: e
@@ -8785,7 +8785,7 @@ let _C = memo(() => {
           let e = t.data.clientReload;
           if (e) {
             return {
-              shouldReload: function(e, t) {
+              shouldReload: function (e, t) {
                 let r = getInitialOptions().user_data?.id;
                 if (r && e.target_user_id === r) {
                   let n = _$$pp2();
@@ -8825,7 +8825,7 @@ let _C = memo(() => {
       })));
     }, [e, t.shouldReload, t.reason]);
   })();
-  (function() {
+  (function () {
     let e = useMemo(() => _$$g(), []);
     let t = Rs(xaw, {
       cacheNonce: e
@@ -8838,7 +8838,7 @@ let _C = memo(() => {
       }
     }, [t]);
   })();
-  (function() {
+  (function () {
     let e = ZA();
     useEffect(() => {
       if (e != null) {
@@ -8847,7 +8847,7 @@ let _C = memo(() => {
       }
     }, [e]);
   })();
-  (function() {
+  (function () {
     let e = debugState;
     let t = useMemo(() => _$$g(), []);
     let r = Rs(SCo, {
@@ -8930,7 +8930,7 @@ let _C = memo(() => {
 });
 let _O = createDeferredPromise();
 _$$v.setDelegate(new Bf());
-(function(e) {
+(function (e) {
   if (!getFeatureFlags().web_vitals_report) return;
   let t = Ay.location.pathname + Ay.location.search;
   let r = !!document.querySelector('meta[name="is_preload_streaming"]');
@@ -8960,7 +8960,7 @@ _$$v.setDelegate(new Bf());
     let s = {
       name: a,
       google_rating: 'not-applicable',
-      navigation: function() {
+      navigation: function () {
         let e = window.performance && performance.getEntriesByType && performance.getEntriesByType('navigation')[0];
         return e ? document.prerendering || (e.activationStart || 0) > 0 ? 'prerender' : document.wasDiscarded ? 'restore' : e.type.replace(/_/g, '-') : 'navigate';
       }(),
@@ -9103,7 +9103,7 @@ t(async () => {
   if (Ay.location.pathname === '/preload-editor') {
     F$('prototype-lib').then(() => {
       xK.start('editorPreloaded');
-      window.startPreloadedTab = function(e) {
+      window.startPreloadedTab = function (e) {
         if (window.preloadedTabStart = performance.now(), !getInitialOptions().user_data) {
           Ay.replace(e.path, null);
           Ay.reload('preloaded tab not logged in');
@@ -9155,7 +9155,7 @@ t(async () => {
         deprecatedJsSceneHooks: void 0
       };
       t.skipViewer || (r = await _$$pp());
-      e = function(e) {
+      e = function (e) {
         return {
           CommonApp: () => ({
             appType: () => uCV.InteractionTest,
@@ -9269,4 +9269,4 @@ t(async () => {
     window.FigmaMobile && document.body.classList.add('FigmaMobile');
   }
   _O.resolve();
-}); 
+});

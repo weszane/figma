@@ -7,7 +7,7 @@ import { If, XS, fJ, b_, yG } from "../figma_app/319440";
 import { S } from "../figma_app/924300";
 import { ZU } from "../figma_app/986347";
 import { U } from "../figma_app/427950";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { Pt } from "../figma_app/806412";
 import { uc } from "../figma_app/930338";
 import { QE } from "../figma_app/914216";
@@ -57,7 +57,7 @@ function f({
         })
       }, e.recordingKey);
     default:
-      xb(e);
+      throwTypeError(e);
   }
 }
 export let $$_0 = memo(e => {

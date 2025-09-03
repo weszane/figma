@@ -1,4 +1,4 @@
-import { xb as _$$xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { y3 } from "../figma_app/876459";
 import { Ay } from "../905/612521";
@@ -48,7 +48,7 @@ import { FFileType, FOrganizationLevelType } from "../figma_app/191312";
 import { Ar, lT } from "../figma_app/300692";
 import { nT } from "../figma_app/53721";
 import { vt as _$$vt } from "../905/862883";
-import { j as _$$j } from "../5430/262192";
+import { noop } from "../5430/262192";
 import { H as _$$H } from "../5430/992445";
 import { to as _$$to } from "../figma_app/764679";
 import { H as _$$H2 } from "../905/548668";
@@ -338,7 +338,7 @@ export function $$ec3(e, t) {
     case null:
       break;
     default:
-      _$$xb(t.editorType);
+      throwTypeError(t.editorType);
   }
 }
 export function $$ed0(e, t, r, n) {
@@ -392,7 +392,7 @@ export function $$ed0(e, t, r, n) {
     case vt.COOPER_TEMPLATE_ASSET:
       break;
     default:
-      _$$xb(t.resource_type);
+      throwTypeError(t.resource_type);
   }
 }
 function eu(e) {
@@ -403,9 +403,9 @@ function eu(e) {
     t = r?.library_key;
   }
   if (t) {
-    r ? _$$j.addResourceUse({
+    r ? noop.addResourceUse({
       templateId: e.id
-    }) : _$$j.addResourceUse({
+    }) : noop.addResourceUse({
       resourceId: e.id
     });
     let s = _$$H2(FFileType.SLIDES, t);
@@ -442,9 +442,9 @@ function em(e, t) {
       templateName: s,
       openInNewTab: !0
     }));
-    n ? _$$j.addResourceUse({
+    n ? noop.addResourceUse({
       templateId: t.id
-    }) : _$$j.addResourceUse({
+    }) : noop.addResourceUse({
       resourceId: t.id
     });
   } else {
@@ -466,9 +466,9 @@ function e_(e) {
     t = r?.library_key;
   }
   if (t) {
-    r ? _$$j.addResourceUse({
+    r ? noop.addResourceUse({
       templateId: e.id
-    }) : _$$j.addResourceUse({
+    }) : noop.addResourceUse({
       resourceId: e.id
     });
     let s = _$$H2(FFileType.COOPER, t);
@@ -505,9 +505,9 @@ function ep(e, t) {
       templateName: s,
       openInNewTab: !0
     }));
-    n ? _$$j.addResourceUse({
+    n ? noop.addResourceUse({
       templateId: t.id
-    }) : _$$j.addResourceUse({
+    }) : noop.addResourceUse({
       resourceId: t.id
     });
   } else {

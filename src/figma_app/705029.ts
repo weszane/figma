@@ -108,7 +108,7 @@ let _ = z.object({
   affectedId: z.string(),
   content: z.string()
 });
-let h = z.$$enum(["font", "layout", "component", "other"]);
+let h = z.enum(["font", "layout", "component", "other"]);
 let m = z.object({
   type: z.literal("theme"),
   content: l.partial()
@@ -123,7 +123,7 @@ let f = [z.object({
 }), z.object({
   type: z.literal("move"),
   affectedId: z.string(),
-  insertBehavior: z.$$enum(["above", "below"]),
+  insertBehavior: z.enum(["above", "below"]),
   destinationId: z.string()
 }), z.object({
   type: z.literal("replaceClasses"),
@@ -133,7 +133,7 @@ let f = [z.object({
 let E = [z.object({
   type: z.literal("insert"),
   affectedId: z.string(),
-  insertBehavior: z.$$enum(["above", "below"]),
+  insertBehavior: z.enum(["above", "below"]),
   jsxToInsert: z.string()
 }), z.object({
   type: z.literal("replace"),
@@ -162,7 +162,7 @@ z.object({
   error: z.boolean().optional(),
   message: z.string().optional()
 });
-let I = z.$$enum(["normal", "transparent", "segment"]);
+let I = z.enum(["normal", "transparent", "segment"]);
 let $$S12 = z.object({
   imageB64: z.string()
 });

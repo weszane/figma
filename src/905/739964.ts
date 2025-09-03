@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useRef, useEffect, Suspense } from "react";
 import { wA } from "../vendor/514228";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { isNotNullish } from "../figma_app/95419";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { q as _$$q } from "../905/636218";
@@ -45,7 +45,7 @@ import { E as _$$E } from "../figma_app/126651";
 import { Ju as _$$Ju } from "../905/102752";
 import { hK } from "../figma_app/211706";
 import { N as _$$N } from "../905/809096";
-import { d_ } from "../figma_app/918700";
+import { utilityNoop } from "../figma_app/918700";
 var m = p;
 let Q = "consumption_paywall_modals--planDescription--cFNva";
 function J(e) {
@@ -163,7 +163,7 @@ function en(e) {
     case _$$F2.Plan.ENTERPRISE:
       return Ju.ENTERPRISE;
     default:
-      xb(e);
+      throwTypeError(e);
   }
 }
 function er({
@@ -315,7 +315,7 @@ function ea({
                   case ud.CONTENT:
                     return _$$t("consumption_paywalls.content_seat");
                   default:
-                    xb(e);
+                    throwTypeError(e);
                 }
               }(e)
             })]
@@ -377,7 +377,7 @@ function eo({
       case _$$F2.Plan.ENTERPRISE:
         return _$$t("consumption_paywalls.plan_name_enterprise");
       default:
-        xb(e);
+        throwTypeError(e);
     }
   }(e);
   let A = e !== d || t === Bi.SHARED_FONTS;
@@ -392,7 +392,7 @@ function eo({
       case _$$F2.Plan.ENTERPRISE:
         return _$$t("consumption_paywalls.campfire.plan_description_ent");
       default:
-        xb(e);
+        throwTypeError(e);
     }
   }(e) : function (e) {
     switch (e) {
@@ -405,7 +405,7 @@ function eo({
       case _$$F2.Plan.ENTERPRISE:
         return _$$t("consumption_paywalls.plan_description_enterprise_pricing_variant");
       default:
-        xb(e);
+        throwTypeError(e);
     }
   }(e);
   let v = _$$F2.getPaywallFeatureList(t, e, d, i, g);
@@ -580,7 +580,7 @@ function ec(e) {
       t = () => {};
       break;
     default:
-      xb(upsellPlan);
+      throwTypeError(upsellPlan);
   }
   let Y = !hideUpsellPlanCta;
   let q = function (e, t) {
@@ -614,7 +614,7 @@ function ec(e) {
       ...w
     },
     trackingOptions: Z,
-    children: jsxs(d_, {
+    children: jsxs(utilityNoop, {
       "data-testid": "consumption-paywall-modal-plans-pricing-inner-modal",
       title: L,
       titleClassName: C ? "consumption_paywall_modals--campfireLargeModalTitle--1D-kj" : "consumption_paywall_modals--largeModalTitle--kOqov",

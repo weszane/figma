@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { useRef, useCallback, useEffect } from "react";
 import { wA } from "../vendor/514228";
-import { KF } from "../figma_app/465776";
+import { debug } from "../figma_app/465776";
 import { getFeatureFlags } from "../905/601108";
 import { jM } from "../905/508367";
 import { V } from "../905/749397";
@@ -86,7 +86,7 @@ function T({
       let {
         google_client_id
       } = getInitialOptions();
-      KF(void 0 !== google_client_id, "google_client_id should be defined in initialOptions");
+      debug(void 0 !== google_client_id, "google_client_id should be defined in initialOptions");
       t.accounts.id.initialize({
         client_id: google_client_id,
         callback: S,

@@ -1,7 +1,7 @@
 import _require2 from "../905/10835";
 import _require from "../905/10835";
 import { jsx, jsxs } from "react/jsx-runtime";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { N } from "../905/438674";
 import { J } from "../905/614223";
 import { getFeatureFlags } from "../905/601108";
@@ -54,7 +54,7 @@ export function $$I2(e, t) {
           aiTrackingContext: e.aiTrackingContext
         });
       default:
-        return xb(e, `visual bell message component key ${e.messageComponentKey} does not exist`);
+        return throwTypeError(e, `visual bell message component key ${e.messageComponentKey} does not exist`);
     }
   }(e) : e?.i18n ? function ({
     i18n: e
@@ -106,7 +106,7 @@ export function $$I2(e, t) {
           })
         });
       default:
-        xb(id);
+        throwTypeError(id);
     }
   }(e) : function (e, t) {
     if (!e) return "";

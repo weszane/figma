@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useCallback } from "react";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { g as _$$g } from "../9410/995605";
 import { UN } from "../905/700578";
 import { zl } from "../figma_app/27355";
@@ -169,7 +169,7 @@ export function $$j1() {
     case qy.CANCELLED:
       return null;
     default:
-      xb(state);
+      throwTypeError(state);
   }
 }
 export const $ = $$S0;

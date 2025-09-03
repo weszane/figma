@@ -1,7 +1,7 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { createContext, useState, useCallback, forwardRef, useEffect, useContext, useMemo, memo, useId, useRef } from "react";
 import { d4, wA } from "../vendor/514228";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { c2 } from "../905/382883";
 import { lQ } from "../905/934246";
 import { k as _$$k } from "../905/443820";
@@ -1241,7 +1241,7 @@ let eS = memo(function (e) {
                 }, t.id)]
               });
             default:
-              xb(t);
+              throwTypeError(t);
           }
         })
       }), errorComponent]

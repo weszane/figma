@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { PureComponent } from "react";
 import { d4 } from "../vendor/514228";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { d as _$$d } from "../905/75621";
 import { B as _$$B } from "../905/853081";
 import { E as _$$E } from "../905/407172";
@@ -156,7 +156,7 @@ export function $$tI2(e) {
         case "MAX":
           return _$$A39;
         default:
-          xb(e.stackPrimaryAlignItems);
+          throwTypeError(e.stackPrimaryAlignItems);
       } else switch (e.stackCounterAlignItems) {
         case "BASELINE":
         case "MIN":
@@ -167,7 +167,7 @@ export function $$tI2(e) {
         case "MAX":
           return _$$A31;
         default:
-          xb(e.stackCounterAlignItems);
+          throwTypeError(e.stackCounterAlignItems);
       }
     case "VERTICAL":
       switch (e.stackCounterAlignItems) {
@@ -180,7 +180,7 @@ export function $$tI2(e) {
         case "MAX":
           return _$$A36;
         default:
-          xb(e.stackCounterAlignItems);
+          throwTypeError(e.stackCounterAlignItems);
       }
   }
   return _$$A14;
@@ -297,7 +297,7 @@ export function $$tI2(e) {
                   case "MAX":
                     return jsx(_$$E, {});
                   default:
-                    xb(e.stackPrimaryAlignItems);
+                    throwTypeError(e.stackPrimaryAlignItems);
                 } else switch (e.stackCounterAlignItems) {
                   case "BASELINE":
                   case "MIN":
@@ -308,7 +308,7 @@ export function $$tI2(e) {
                   case "MAX":
                     return jsx(_$$n, {});
                   default:
-                    xb(e.stackCounterAlignItems);
+                    throwTypeError(e.stackCounterAlignItems);
                 }
               case "VERTICAL":
                 switch (e.stackCounterAlignItems) {
@@ -321,7 +321,7 @@ export function $$tI2(e) {
                   case "MAX":
                     return jsx(_$$A, {});
                   default:
-                    xb(e.stackCounterAlignItems);
+                    throwTypeError(e.stackCounterAlignItems);
                 }
             }
             return jsx(_$$q, {});

@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useRef, useState, useCallback, useMemo, useEffect, useLayoutEffect, memo, useContext } from "react";
 import { wA, d4, Ng } from "../vendor/514228";
-import { KF } from "../figma_app/465776";
+import { debug } from "../figma_app/465776";
 import { RR } from "../figma_app/338442";
 import { Ez5, NLJ, QOV, glU, ibQ, yFm, mrc } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
@@ -860,7 +860,7 @@ export let $$eD3 = s.ConnectedGridsPanel;
       fontVariations
     } = a("hasHadRTLText", "textUserLayoutVersion", "textExplicitLayoutVersion", "textBidiVersion", "fontVariations");
     let eg = wR("guid") ?? null;
-    (0 | n) & 1 << mrc.TEXT_TRUNCATION && KF(null != maxLines, "TypePanel missing maxLines");
+    (0 | n) & 1 << mrc.TEXT_TRUNCATION && debug(null != maxLines, "TypePanel missing maxLines");
     let {
       smallNudgeAmount,
       bigNudgeAmount

@@ -1,4 +1,4 @@
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { daH, Ez5 } from "../figma_app/763686";
 import { buildUploadUrl } from "../figma_app/169182";
 import { F } from "../905/989956";
@@ -156,7 +156,7 @@ export function $$E2(e) {
       t = Ku().map(e => f(e, "sticky"));
       break;
     default:
-      xb(e);
+      throwTypeError(e);
   }
   return t.filter(e => null !== e);
 }

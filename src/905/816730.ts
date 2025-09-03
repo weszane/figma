@@ -1,4 +1,4 @@
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { x1 } from "../905/714362";
 import { NoOpVm } from "../905/700654";
 import { N } from "../905/125137";
@@ -52,15 +52,15 @@ let $$d1 = {
   function: o({
     type: "function"
   }),
-  arrayOf: (e) => o({
+  arrayOf: e => o({
     type: "array",
     __contentType: e
   }),
-  dictionaryOf: (e) => o({
+  dictionaryOf: e => o({
     type: "dictionary",
     __contentType: e
   }),
-  exact: (e) => o({
+  exact: e => o({
     type: "exact",
     __shape: e
   }),
@@ -90,18 +90,18 @@ export function $$c6({
   let a = i.safeParse(r);
   if (a.success) return a.data;
   !function (e, t) {
-    let i = e.issues.map((e) => function e(t, i) {
+    let i = e.issues.map(e => function e(t, i) {
       let {
         issueSeparator = "\n",
         unionSeparator = "\n",
         indent = 0
       } = i || {};
-      let s = t.path.map((e) => "number" == typeof e ? `[${e}]` : `.${e}`).join("");
+      let s = t.path.map(e => "number" == typeof e ? `[${e}]` : `.${e}`).join("");
       if ("invalid_union" === t.code) return `${" ".repeat(indent)}Expected ${t.path.length > 0 ? s + " to be " : ""}one of the following, but none matched:
 ` + t.unionErrors.reduce((r, o) => {
         let l = o.issues.length > 1;
         let d = (l ? `${" ".repeat(indent + 2)}Multiple issues${t.path.length > 0 ? " at " + s : ""}:
-` : "") + o.issues.map((t) => e(t, {
+` : "") + o.issues.map(t => e(t, {
           ...i,
           indent: indent + (l ? 4 : 2)
         })).join(issueSeparator);
@@ -196,7 +196,7 @@ export function $$u0({
               throw e;
             }
             throw `Expected "${a}" to be one of the following, but none matched: 
-` + n.map((e) => e.split("\n").map((e) => "  " + e).join("\n")).join("\n");
+` + n.map(e => e.split("\n").map(e => "  " + e).join("\n")).join("\n");
           }
         case "boolean":
           if ("boolean" !== s) throw o();
@@ -254,7 +254,7 @@ export function $$u0({
           if (!t.isFunction(i) || "function" !== s) throw o();
           return t.deepUnwrap(i, !0);
         default:
-          xb(r);
+          throwTypeError(r);
       }
     }(e, t, i, r);
   } catch (e) {
@@ -272,7 +272,7 @@ function p(e, t) {
     case "optional":
       return `(optional) ${p(e.__schema, t + 1)}`;
     case "oneOf":
-      return `oneOf(${e.__options.map((e) => p(e, t + 1)).join(", ")})`;
+      return `oneOf(${e.__options.map(e => p(e, t + 1)).join(", ")})`;
     case "boolean":
       return "boolean";
     case "uint8array":
@@ -288,7 +288,7 @@ function p(e, t) {
     case "dictionary":
       return `{object with values of type ${p(e.__contentType, t + 1)}}`;
     case "exact":
-      return `{${Object.keys(e.__shape).map((i) => i + ": " + p(e.__shape[i], t + 1)).join(", ")}}`;
+      return `{${Object.keys(e.__shape).map(i => i + ": " + p(e.__shape[i], t + 1)).join(", ")}}`;
     case "function":
       return "function";
   }
@@ -352,7 +352,7 @@ export const c0 = function e(t, i, r) {
   }
   if (i) switch (i.type) {
     case "optional":
-      Array.isArray(t) && 0 === t.length || void 0 === t || null == t || e(t, i.__schema, r).forEach((e) => {
+      Array.isArray(t) && 0 === t.length || void 0 === t || null == t || e(t, i.__schema, r).forEach(e => {
         a.push(e);
       });
       break;
@@ -370,9 +370,9 @@ export const c0 = function e(t, i, r) {
               a = [];
               break;
             }
-            l.forEach((e) => a.push(e));
+            l.forEach(e => a.push(e));
           }
-          o ? e(t, s, r).forEach((e) => a.push(e)) : a.push(`Expected "${n}" to be one of the allowed values for this property`);
+          o ? e(t, s, r).forEach(e => a.push(e)) : a.push(`Expected "${n}" to be one of the allowed values for this property`);
         }
         break;
       }
@@ -383,7 +383,7 @@ export const c0 = function e(t, i, r) {
           if (0 === i.length) return a;
           n.push(...i);
         }
-        let s = n.map((e) => e.split("\n").map((e) => "  " + e).join("\n"));
+        let s = n.map(e => e.split("\n").map(e => "  " + e).join("\n"));
         a.push(`Expected "${r}" to be one of the following, but none matched: 
 ` + s.join("\n"));
         break;
@@ -406,25 +406,25 @@ export const c0 = function e(t, i, r) {
     case "array":
       if (Array.isArray(t)) {
         let n = t.length;
-        for (let s = 0; s < n; s++) e(t[s], i.__contentType, r + `.[${s}]`).forEach((e) => a.push(e));
+        for (let s = 0; s < n; s++) e(t[s], i.__contentType, r + `.[${s}]`).forEach(e => a.push(e));
       } else a.push(s());
       break;
     case "dictionary":
-      "object" != typeof t || Array.isArray(t) || null === t ? a.push(s()) : Object.keys(t).forEach((n) => {
-        e(t[n], i.__contentType, r + `["${n}"]`).forEach((e) => a.push(e));
+      "object" != typeof t || Array.isArray(t) || null === t ? a.push(s()) : Object.keys(t).forEach(n => {
+        e(t[n], i.__contentType, r + `["${n}"]`).forEach(e => a.push(e));
       });
       break;
     case "exact":
-      "object" != typeof t || null === t ? a.push(s()) : Object.keys(i.__shape).forEach((n) => {
+      "object" != typeof t || null === t ? a.push(s()) : Object.keys(i.__shape).forEach(n => {
         let s = i.__shape[n];
-        e(t[n], s, r + "." + n).forEach((e) => a.push(e));
+        e(t[n], s, r + "." + n).forEach(e => a.push(e));
       });
       break;
     case "function":
       "function" != typeof t && a.push(s());
       break;
     default:
-      xb(i);
+      throwTypeError(i);
   }
   return a;
 };

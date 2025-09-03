@@ -1,4 +1,4 @@
-import { KF } from "../figma_app/465776";
+import { debug } from "../figma_app/465776";
 import { glU } from "../figma_app/763686";
 import { sx } from "../905/449184";
 import { Oo } from "../905/709171";
@@ -182,7 +182,7 @@ export function $$v6(e, t, r, a, s, c, p) {
         let e = i.slice(s, i.length).find(e => e.type === PW.STYLE);
         if (!e) return r.length - 1;
         let t = a.indexOf(e.node_id);
-        KF(-1 !== t, "style to insert before does not exist in the stored list");
+        debug(-1 !== t, "style to insert before does not exist in the stored list");
         return t - 1;
       }
       {
@@ -190,7 +190,7 @@ export function $$v6(e, t, r, a, s, c, p) {
         let s = i.slice(t + 1).reverse().find(e => e.type === PW.STYLE);
         if (!s) return r.length - 1;
         let o = a.indexOf(s.node_id);
-        KF(-1 !== o, "style to insert after does not exist in the stored list");
+        debug(-1 !== o, "style to insert after does not exist in the stored list");
         return o;
       }
     }
@@ -204,7 +204,7 @@ export function $$v6(e, t, r, a, s, c, p) {
       let s = i.slice(e, i.length).find(e => e.type === PW.STYLE);
       if (!s) return r.length - 1;
       let o = a.indexOf(s.node_id);
-      KF(-1 !== o, "style to insert before does not exist in the stored list");
+      debug(-1 !== o, "style to insert before does not exist in the stored list");
       return o - 1;
     }
   }(t, r, c, s)));
@@ -319,7 +319,7 @@ export function $$x9({
   if (h <= m) {
     p = m;
     _ = e ? e.type === PW.STYLE ? In(e.name) : e.name : "";
-  } else if (KF(null != e, "Dragging after an item that doesn't exist"), u.type === PW.STYLE || s >= .5) {
+  } else if (debug(null != e, "Dragging after an item that doesn't exist"), u.type === PW.STYLE || s >= .5) {
     p = h;
     _ = In(e.name);
   } else {

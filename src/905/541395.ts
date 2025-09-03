@@ -1,5 +1,5 @@
 import { z } from "../vendor/835909";
-let r = z.$$enum(["text-embedding-ada-002", "text-embedding-3-small", "text-embedding-3-large"]);
+let r = z.enum(["text-embedding-ada-002", "text-embedding-3-small", "text-embedding-3-large"]);
 let $$a1 = z.object({
   model: r,
   input: z.string().or(z.string().array())

@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { forwardRef, useRef, useImperativeHandle, useState, createContext, useContext, Fragment as _$$Fragment, useCallback, useMemo, useId, useEffect } from "react";
 import { wA, d4 } from "../vendor/514228";
-import { xb, B1 } from "../figma_app/465776";
+import { throwTypeError, assertNotNullish } from "../figma_app/465776";
 import { c2 } from "../905/382883";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { t as _$$t } from "../905/150656";
@@ -197,7 +197,7 @@ let z = e => {
       case "DISCOUNT_NOT_WHOLE_NUMBER":
         return _$$t2("community.seller.discount_must_follow_format");
       default:
-        return xb(t);
+        return throwTypeError(t);
     }
   }
 };
@@ -584,7 +584,7 @@ function eF({
       r = "brand";
       break;
     default:
-      xb(e);
+      throwTypeError(e);
   }
   return jsx(Yy, {
     variant: r,
@@ -762,7 +762,7 @@ function eG({
   }) : null;
 }
 function eZ(e) {
-  if (e && "exception" !== e.type) return "ICON_MISSING" === e.key ? _$$t2("community.publishing.you_must_set_an_icon_for_your_resource") : xb(e.key);
+  if (e && "exception" !== e.type) return "ICON_MISSING" === e.key ? _$$t2("community.publishing.you_must_set_an_icon_for_your_resource") : throwTypeError(e.key);
 }
 let eX = forwardRef(function ({
   iconFieldManager: e,
@@ -951,7 +951,7 @@ function e6({
 let tc = e => {
   if (e && "validation" === e.type) {
     let t = e.key;
-    return "EDITOR_TYPE_MISMATCH" === t ? _$$t2("community.publishing.extension_playground_file_editor_type_error") : xb(t);
+    return "EDITOR_TYPE_MISMATCH" === t ? _$$t2("community.publishing.extension_playground_file_editor_type_error") : throwTypeError(t);
   }
 };
 let tu = forwardRef(function ({
@@ -1157,7 +1157,7 @@ let tx = e => {
     case "USER_IS_NOT_EXTENSION_OWNER":
       return _$$t2("community.publishing.you_must_be_the_owner_to_update_where_this_is_published");
     default:
-      return xb(e.key);
+      return throwTypeError(e.key);
   }
 };
 function tS({
@@ -1222,7 +1222,7 @@ function tw({
   });
 }
 let tT = e => {
-  if (e && "validation" === e.type) return "RELEASE_NOTES_TOO_LONG" === e.key ? _$$t2("community.publishing.release_notes_must_be_at_most_10000_characters_long") : xb(e.key);
+  if (e && "validation" === e.type) return "RELEASE_NOTES_TOO_LONG" === e.key ? _$$t2("community.publishing.release_notes_must_be_at_most_10000_characters_long") : throwTypeError(e.key);
 };
 let tk = forwardRef(function ({
   releaseNotesField: e,
@@ -1278,7 +1278,7 @@ let tk = forwardRef(function ({
 let tN = e => {
   if (e && "validation" === e.type) {
     let t = e.key;
-    return "WIDGET_SNAPSHOT_MISSING" === t ? _$$t2("community.publishing.you_must_set_a_snapshot_for_your_widget") : xb(t);
+    return "WIDGET_SNAPSHOT_MISSING" === t ? _$$t2("community.publishing.you_must_set_a_snapshot_for_your_widget") : throwTypeError(t);
   }
 };
 let tP = forwardRef(function ({
@@ -1409,7 +1409,7 @@ let tU = e => {
       case "TAGLINE_TOO_LONG":
         return _$$t2("community.publishing.tagline_must_be_at_most_100_characters_long");
       default:
-        return xb(t);
+        return throwTypeError(t);
     }
   }
 };
@@ -1582,7 +1582,7 @@ async function is(e) {
     localExtension
   } = e;
   let y = c_(category).currentValue?.id;
-  B1(y);
+  assertNotNullish(y);
   let b = !!c_(price).currentValue;
   let v = function (e, t, i, n) {
     if (t && Ro(t, n.id)) return;
@@ -1681,7 +1681,7 @@ async function il(e) {
   let w = c_(publishRole).currentValue;
   S && (MO(S) ? t = S.org_id : Z7(S) ? t = debugState.getState().teams[S.team_id]?.org_id || void 0 : "org" in w && (t = w.org?.id));
   let C = c_(category).currentValue?.id;
-  B1(C);
+  assertNotNullish(C);
   let T = c_(releaseNotes).currentValue;
   let R = {
     icon_uploaded: !!E,
@@ -3495,7 +3495,7 @@ let iB = e => {
       case "ACCOUNT_DETAILS_CHANGED":
         return _$$t2("community.publishing.we_detected_a_change_to_your_account_details_please_contact_support_figma_com_to_publish_this_plugin");
       default:
-        xb(t);
+        throwTypeError(t);
     }
   }
 };

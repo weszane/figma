@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useMemo } from "react";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { lQ } from "../905/934246";
 import { b } from "../905/22449";
 import { c as _$$c } from "../905/34525";
@@ -66,15 +66,15 @@ function y({
   }) : null;
 }
 export function $$b1(e) {
-  return jr(e) ? `user-${e.user_id}` : Z7(e) ? `team-${e.team_id}` : MO(e) ? `org-${e.org_id}` : void xb(e);
+  return jr(e) ? `user-${e.user_id}` : Z7(e) ? `team-${e.team_id}` : MO(e) ? `org-${e.org_id}` : void throwTypeError(e);
 }
-let v = e => jr(e) ? 1 : Z7(e) ? 2 : MO(e) ? 3 : void xb(e);
-let I = e => jr(e) ? t("community.publishing.individual_creator") : Z7(e) ? t("community.publishing.team_author") : MO(e) ? t("community.publishing.organization_author") : xb(e);
+let v = e => jr(e) ? 1 : Z7(e) ? 2 : MO(e) ? 3 : void throwTypeError(e);
+let I = e => jr(e) ? t("community.publishing.individual_creator") : Z7(e) ? t("community.publishing.team_author") : MO(e) ? t("community.publishing.organization_author") : throwTypeError(e);
 let E = (e, t) => jr(e) ? jsx(H8, {
   user: t
 }) : Z7(e) || MO(e) ? jsx(nl, {
   team: t
-}) : xb(e);
+}) : throwTypeError(e);
 function x({
   existingResourceContent: e
 }) {

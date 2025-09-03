@@ -1,5 +1,5 @@
 import { jsx } from "react/jsx-runtime";
-import { KF } from "../figma_app/465776";
+import { debug } from "../figma_app/465776";
 import { lQ } from "../905/934246";
 import { j7 } from "../905/929976";
 import { jv } from "../figma_app/357047";
@@ -34,7 +34,7 @@ export function $$p0(e, t, i) {
       triggeredFrom: t
     } : null;
   }(e, t);
-  if (KF(null !== p, "Can only run parameter entry for plugins that have parameters"), gn()) {
+  if (debug(null !== p, "Can only run parameter entry for plugins that have parameters"), gn()) {
     $I({
       moduleToOpen: {
         type: "custom",

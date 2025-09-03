@@ -1,5 +1,5 @@
 import { bN } from "../vendor/514228";
-import { xb, vA, B1 } from "../figma_app/465776";
+import { throwTypeError, assert, assertNotNullish } from "../figma_app/465776";
 import { XQq, xOL } from "../figma_app/763686";
 import { t as _$$t } from "../905/303541";
 import { F } from "../905/302958";
@@ -61,7 +61,7 @@ export function $$S9(e, t) {
         y: t.absoluteBoundingBox.h
       };
     default:
-      xb(e);
+      throwTypeError(e);
   }
 }
 export function $$v10(e, t) {
@@ -151,7 +151,7 @@ let x = (e, {
 };
 export function $$N5(e, t, r, a, s) {
   let o = s.get(a);
-  vA(!!o, "expected node to exist");
+  assert(!!o, "expected node to exist");
   let c = $$I2(s, o);
   if (e && bN(e.breakpoint, c) && !t) return e;
   let h = Y5.getViewportInfo();
@@ -173,7 +173,7 @@ export function $$N5(e, t, r, a, s) {
     };
   }
   let b = s.getCurrentPage()?.prototypeDevice?.rotation;
-  B1(b, "expected device rotation to exist");
+  assertNotNullish(b, "expected device rotation to exist");
   let {
     idealDeviceSize,
     framePresetSize
@@ -192,7 +192,7 @@ export function $$N5(e, t, r, a, s) {
   };
 }
 export function $$C6(e, t, r, n) {
-  vA(0 !== r.type, "Can't fit to aspect ratio for devices");
+  assert(0 !== r.type, "Can't fit to aspect ratio for devices");
   let a = $$S9(r, t);
   if (e.x < a.x) switch (r.type) {
     case 1:
@@ -211,7 +211,7 @@ export function $$C6(e, t, r, n) {
         break;
       }
     default:
-      xb(r);
+      throwTypeError(r);
   }
   return {
     initialViewerSize: a = x(a, {

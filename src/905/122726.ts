@@ -1,6 +1,6 @@
 import { languageCodes } from "../905/816253";
 import { jt } from "../905/528121";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { Ay } from "../905/612521";
 import { parseQuery } from "../905/634134";
 import { UI } from "../figma_app/471982";
@@ -116,7 +116,7 @@ export class $$y0 {
     if ("handle" === e.subView) return `@${e.handle}`;
     if ("searchAndBrowse" === e.subView) return "Community";
     if ("monetizationRedirectView" === e.subView) return "Stripe onboarding complete";
-    xb(e);
+    throwTypeError(e);
   }
   selectedViewToPath(e, t) {
     if ("modalInIFrame" === e.view) return `/community/iframe_modal/${e.modalInIFrameType}`;

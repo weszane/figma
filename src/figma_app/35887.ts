@@ -1,4 +1,4 @@
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { fc, z } from "../905/239603";
 import { cD } from "../905/513035";
 import { FPlanFeatureType, FUserRoleType, FProductAccessType } from "../figma_app/191312";
@@ -96,7 +96,7 @@ function S(e, t) {
     case FProductAccessType.DEV_MODE:
       return e.dev_mode_paid_status;
     default:
-      xb(t);
+      throwTypeError(t);
   }
 }
 export function $$v5(e, t) {
@@ -107,7 +107,7 @@ export function $$v5(e, t) {
     case FProductAccessType.DEV_MODE:
       return S(e, FProductAccessType.DESIGN) === FPlanFeatureType.FULL ? FPlanFeatureType.FULL : S(e, t);
     default:
-      xb(t);
+      throwTypeError(t);
   }
 }
 export const Ru = $$T0;
@@ -115,4 +115,4 @@ export const WU = $$I1;
 export const Wd = $$b2;
 export const jh = $$y3;
 export const kc = $$m4;
-export const x0 = $$v5; 
+export const x0 = $$v5;

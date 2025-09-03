@@ -13,7 +13,7 @@ let $$l1 = z.object({
   includeIDs: z.boolean().optional().describe("Include node id in the jsx "),
   includeNames: z.boolean().optional().describe("Include node name in the jsx ")
 });
-let d = z.$$enum(["default", "flow"]);
+let d = z.enum(["default", "flow"]);
 let c = z.object({
   ignoreDeveloperFriendlyIds: z.boolean().optional().describe("Ignore developer-friendly IDs"),
   excludeImageData: z.boolean().optional().describe("Exclude image data"),
@@ -104,7 +104,7 @@ export let $$h2 = $$m4.parse({
   strict: !0
 });
 export function $$g3() {
-  return function(e) {
+  return function (e) {
     let t = {};
     for (let [i, n] of Object.entries(e)) n instanceof z.ZodOptional && n.unwrap() instanceof z.ZodBoolean && n._def.description && "string" == typeof n._def.description && (t[i] = n._def.description);
     return t;

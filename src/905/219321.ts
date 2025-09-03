@@ -13,7 +13,7 @@ let $$r1 = z.object({
   seed: z.number().optional(),
   cfgScale: z.number().optional()
 });
-let a = z.$$enum(["png", "jpeg", "webp"]);
+let a = z.enum(["png", "jpeg", "webp"]);
 let $$s0 = z.object({
   images: z.array(z.string()),
   imageFormat: a

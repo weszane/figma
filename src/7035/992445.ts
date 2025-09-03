@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { getFeatureFlags } from "../905/601108";
 import { r as _$$r } from "../905/620668";
 import { FFileType, FProductAccessType } from "../figma_app/191312";
@@ -39,7 +39,7 @@ export function $$g0(e, t, n, i) {
       case FFileType.FIGMAKE:
         break;
       default:
-        xb(t);
+        throwTypeError(t);
     }
   }
   let g = _ ? wN(_) : null;

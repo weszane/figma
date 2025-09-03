@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useCallback, useMemo } from "react";
 import { wA } from "../vendor/514228";
-import { B1 } from "../figma_app/465776";
+import { assertNotNullish } from "../figma_app/465776";
 import { rXF, glU, Z_n, JTp, j0r } from "../figma_app/763686";
 import { sH } from "../905/805904";
 import { Yi, Oe } from "../figma_app/933328";
@@ -99,7 +99,7 @@ export function $$E0({
   async function A(e) {
     if (e) {
       let i = await u(Oe(e));
-      B1(sH(i));
+      assertNotNullish(sH(i));
       updateVariableConsumption(y$(rXF.STRING, i));
       t?.();
     } else clearVariableConsumption(zk.YES);
@@ -130,7 +130,7 @@ function x() {
         return;
       }
       let i = await e(Oe(t));
-      B1(sH(i));
+      assertNotNullish(sH(i));
       t.resolvedType === rXF.STRING ? updateVariableConsumption({
         type: Z_n.FONT_STYLE,
         resolvedType: rXF.FONT_STYLE,

@@ -1,5 +1,5 @@
 import { z } from "../vendor/835909";
-export let $$n0 = z.$$enum(["pass-through", "normal", "darken", "multiply", "color-burn", "lighten", "screen", "color-dodge", "overlay", "soft-light", "hard-light", "difference", "exclusion", "hue", "saturation", "color", "luminosity", "normal", "linear-burn", "linear-dodge"]).describe("@name(BlendMode)");
+export let $$n0 = z.enum(["pass-through", "normal", "darken", "multiply", "color-burn", "lighten", "screen", "color-dodge", "overlay", "soft-light", "hard-light", "difference", "exclusion", "hue", "saturation", "color", "luminosity", "normal", "linear-burn", "linear-dodge"]).describe("@name(BlendMode)");
 export function $$r2(e) {
   if (e) return e.toLowerCase().replace(/_/g, "-");
 }

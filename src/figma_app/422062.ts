@@ -1,4 +1,4 @@
-import { KF, xb } from "../figma_app/465776";
+import { debug, throwTypeError } from "../figma_app/465776";
 import { K } from "../905/807535";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { getFeatureFlags } from "../905/601108";
@@ -799,7 +799,7 @@ export class $$q1 {
       let n = W[r].areDifferent;
       return !!n && n(e, t);
     }
-    KF(!1, "view selector code which should be unreachable was reached");
+    debug(!1, "view selector code which should be unreachable was reached");
   }
   selectedViewToPath(e, t) {
     let r = $$K2.find(t => t === e.view);
@@ -933,7 +933,7 @@ export class $$q1 {
             p = "/community/search";
             break;
           default:
-            xb(b.searchScope);
+            throwTypeError(b.searchScope);
         }
         break;
       case "user":

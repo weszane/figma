@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { forwardRef, useRef, useImperativeHandle } from "react";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import s from "classnames";
 import { t as _$$t } from "../905/303541";
 import { U } from "../905/331038";
@@ -33,7 +33,7 @@ let _ = e => {
     case "AUTHOR_MUST_BE_USER":
       break;
     default:
-      return xb(e);
+      return throwTypeError(e);
   }
 };
 let $$A0 = forwardRef(function ({

@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { useRef, Component } from "react";
 import { Ng } from "../vendor/514228";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import o from "classnames";
 import { F2 } from "../905/826900";
 var l = o;
@@ -64,7 +64,7 @@ class _ extends Component {
       case "contents":
         return "displayContents";
       default:
-        xb(displayAs);
+        throwTypeError(displayAs);
     }
   }
   render() {

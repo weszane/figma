@@ -7,7 +7,7 @@ let o = e => {
   if (e instanceof z.ZodEffects) return o(e.innerType());
   if (e instanceof z.ZodLiteral) return [e.value];
   if (e instanceof z.ZodEnum) return e.options;
-  if (e instanceof z.ZodNativeEnum) return Object.keys(e.$$enum);
+  if (e instanceof z.ZodNativeEnum) return Object.keys(e.enum);
   if (e instanceof z.ZodDefault) return o(e._def.innerType);
   if (e instanceof z.ZodUndefined) return [void 0]; else if (e instanceof z.ZodNull) return [null]; else return null;
 };

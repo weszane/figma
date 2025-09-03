@@ -19,7 +19,7 @@ import { n as _$$n2 } from "../905/823050";
 import { z as _$$z2 } from "../905/239603";
 import { u as _$$u, Kb } from "../905/816730";
 import { N as _$$N } from "../905/125137";
-import { $$ap1, $$at0 } from "../905/472793";
+import { createPluginInstance, $$at0 } from "../905/472793";
 import { NoOpVm } from "../905/700654";
 import K from "../905/536567";
 import { VY } from "../figma_app/985200";
@@ -103,7 +103,7 @@ class I {
           try {
             i = n.getString(n.getPropStr(t, "name"));
           } catch (e) { }
-          let a = function() { };
+          let a = function () { };
           if (r = i, v.test(r) && !b.has(r)) try {
             a = Function(`return function ${i}() {}`)();
           } catch (e) { }
@@ -148,7 +148,7 @@ class I {
       if (c) {
         i.retainHandle(l);
         let e = this;
-        p.get = function() {
+        p.get = function () {
           if (e.vmWasDestroyed()) throw Error("(this plugin run has ended)");
           let n = e.valuesToHandles.get(this);
           void 0 === n && (n = t);
@@ -737,7 +737,7 @@ class en extends (a = PluginWrapper, r = J, a) {
     let {
       realm,
       iframe
-    } = function() {
+    } = function () {
       if (!q || !q.contentWindow || !q.contentWindow.Realm) throw Error("need to load realm before using it");
       let e = q.contentWindow.document.body.lastChild;
       let t = q.contentWindow.Realm.makeRootRealm();
@@ -1294,7 +1294,7 @@ let $$eu1 = _$$n(async e => {
       };
       let $ = j.get("pluginIds", []);
       let Z = e.pluginID || "";
-      let X = $$ap1(M, {
+      let X = createPluginInstance(M, {
         addShutdownAction: getFeatureFlags().plugins_async_on_close_handler ? e => {
           K.includes(e) || K.unshift(e);
         } : q,
@@ -1332,7 +1332,7 @@ let $$eu1 = _$$n(async e => {
       disableSilenceConsole || q(() => AK());
       q(() => Y5.triggerAction("commit"));
       $$at0(M, stats, name);
-      (function(e, t, i) {
+      (function (e, t, i) {
         if (!e.isEqual(e.undefined, e.getProp(e.global, "setTimeout"))) return;
         let n = new Map();
         let r = new Map();
@@ -1423,7 +1423,7 @@ let $$eu1 = _$$n(async e => {
         isLocal
       });
       q(() => Q.destroyIframe());
-      (function(e, t, i) {
+      (function (e, t, i) {
         e.isEqual(e.undefined, e.getProp(e.global, "fetch")) && e.setProp(e.global, "fetch", e.newFunction("fetch", (n, r) => {
           null !== t && t.increment("fetch");
           let a = _$$u({
@@ -1509,7 +1509,7 @@ let $$eu1 = _$$n(async e => {
           return promise;
         }));
       })(M, stats, Q);
-      nl() && function(e, t) {
+      nl() && function (e, t) {
         let i = e.newObject();
         e.setProp(e.global, "__TEST__", i);
         t && (e.defineFunction(i, "sendMessage", null, i => (t.sendMessageToTest(e.toString(i)), e.undefined)), e.defineFunction(i, "onMessage", null, i => {
@@ -1529,7 +1529,7 @@ let $$eu1 = _$$n(async e => {
       q(qC(e => {
         stats.stackInvariantsEnforced(e);
       }));
-      $$ap1(J, {
+      createPluginInstance(J, {
         addShutdownAction: q,
         allowedDomains: e.allowedDomains,
         apiMode: {

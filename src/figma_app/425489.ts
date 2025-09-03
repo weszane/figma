@@ -1,4 +1,4 @@
-import { vA, B1, xb } from "../figma_app/465776";
+import { assert, assertNotNullish, throwTypeError } from "../figma_app/465776";
 import { X3B } from "../figma_app/763686";
 import { fn, sH } from "../905/871411";
 import { um, zl } from "../figma_app/27355";
@@ -23,8 +23,8 @@ let f = () => {
 let E = () => {
   (g += 1) >= 5 && f();
 };
-var $$y2 = ((e) => (e[e.SHOWN = 0] = "SHOWN", e[e.HIDDEN = 1] = "HIDDEN", e[e.LOAD_PENDING = 2] = "LOAD_PENDING", e[e.LOAD_FORBIDDEN = 3] = "LOAD_FORBIDDEN", e))($$y2 || {});
-var $$b0 = ((e) => (e[e.OPEN = 0] = "OPEN", e[e.CLOSED = 1] = "CLOSED", e[e.NOT_LOADED = 2] = "NOT_LOADED", e))($$b0 || {});
+var $$y2 = (e => (e[e.SHOWN = 0] = "SHOWN", e[e.HIDDEN = 1] = "HIDDEN", e[e.LOAD_PENDING = 2] = "LOAD_PENDING", e[e.LOAD_FORBIDDEN = 3] = "LOAD_FORBIDDEN", e))($$y2 || {});
+var $$b0 = (e => (e[e.OPEN = 0] = "OPEN", e[e.CLOSED = 1] = "CLOSED", e[e.NOT_LOADED = 2] = "NOT_LOADED", e))($$b0 || {});
 let T = {
   navigateForwardEnabled: !1,
   navigateBackwardEnabled: !1,
@@ -55,7 +55,7 @@ let T = {
     totalTimeMs: 0
   }
 };
-let I = (e) => (_$$A.ensureClosed(), f(), {
+let I = e => (_$$A.ensureClosed(), f(), {
   ...e,
   requestedNodeId: null,
   currentPresentedNode: null,
@@ -78,7 +78,7 @@ let $$S1 = um(T, (e, t) => {
         _$$A.notifyWasModalOpenedSinceViewerLoaded(!0);
         zl.set(yw, !0);
         let l = sceneGraph.get(requestedNodeId);
-        vA(!!l, "expected selectedNode to exist");
+        assert(!!l, "expected selectedNode to exist");
         let d = hF(e.sizeInfo, !1, e.showDeviceFrameEnabled, requestedNodeId, sceneGraph);
         onOpen(d.initialViewerSize);
         let u = e.isCrashed ? e.previewKeyForErrorBoundary + 1 : e.previewKeyForErrorBoundary;
@@ -124,7 +124,7 @@ let $$S1 = um(T, (e, t) => {
         _$$A.notifyWasModalOpenedSinceViewerLoaded(!0);
         zl.set(yw, !0);
         let d = sceneGraph.get(requestedNodeId);
-        vA(!!d, "expected selectedNode to exist");
+        assert(!!d, "expected selectedNode to exist");
         let u = hF(e.sizeInfo, !1, e.showDeviceFrameEnabled, requestedNodeId, sceneGraph);
         onOpen(u.initialViewerSize);
         let p = e.isCrashed ? e.previewKeyForErrorBoundary + 1 : e.previewKeyForErrorBoundary;
@@ -195,7 +195,7 @@ let $$S1 = um(T, (e, t) => {
         break;
       }
     case "UPDATE_PRESENTED_NODE":
-      e.targetFrameFollowingEnabled && t.payload.nodeId !== e.currentPresentedNode && (E(), tJ([t.payload.nodeId], !1), vA(!!e.targetFrameFollowingScrollToNode, "Scroll callback should have been set already through SET_SCROLL_CALLBACK."), e.targetFrameFollowingScrollToNode(t.payload.nodeId));
+      e.targetFrameFollowingEnabled && t.payload.nodeId !== e.currentPresentedNode && (E(), tJ([t.payload.nodeId], !1), assert(!!e.targetFrameFollowingScrollToNode, "Scroll callback should have been set already through SET_SCROLL_CALLBACK."), e.targetFrameFollowingScrollToNode(t.payload.nodeId));
       o = {
         ...e,
         currentPresentedNode: t.payload.nodeId
@@ -213,7 +213,7 @@ let $$S1 = um(T, (e, t) => {
         let r;
         let i;
         if (0 !== e.modalStatus) break;
-        B1(e.sizeInfo, "sizeInfo must be set");
+        assertNotNullish(e.sizeInfo, "sizeInfo must be set");
         let {
           sceneGraph,
           oldPresetIdentifier,
@@ -221,17 +221,17 @@ let $$S1 = um(T, (e, t) => {
           newPresetIdentifier,
           newRotation
         } = t.payload;
-        ((e) => {
+        (e => {
           e[e.DEVICE = 0] = "DEVICE";
           e[e.ROTATION = 1] = "ROTATION";
           e[e.STYLE = 2] = "STYLE";
         })(r || (r = {}));
         let u = !!oldPresetIdentifier && !!newPresetIdentifier;
         let p = oldRotation === newRotation && u && Ew(newPresetIdentifier, oldPresetIdentifier);
-        if (oldPresetIdentifier !== newPresetIdentifier && p ? i = 2 : oldPresetIdentifier === newPresetIdentifier && u ? oldRotation !== newRotation && (i = 1) : i = 0, vA(void 0 !== i, "changeType must be set"), 1 === i) {
-          vA(!!e.getCurrentViewerSize, "getCurrentViewerSize must be set");
+        if (oldPresetIdentifier !== newPresetIdentifier && p ? i = 2 : oldPresetIdentifier === newPresetIdentifier && u ? oldRotation !== newRotation && (i = 1) : i = 0, assert(void 0 !== i, "changeType must be set"), 1 === i) {
+          assert(!!e.getCurrentViewerSize, "getCurrentViewerSize must be set");
           let t = e.getCurrentViewerSize();
-          vA(e.sizeInfo.breakpoint.type === l5.DEVICE, "breakpoint must be device");
+          assert(e.sizeInfo.breakpoint.type === l5.DEVICE, "breakpoint must be device");
           o = {
             ...e,
             sizeInfo: {
@@ -247,13 +247,13 @@ let $$S1 = um(T, (e, t) => {
             }
           };
         } else if (0 === i) {
-          vA(!!e.currentPresentedNode, "currentPresentedNode must be set");
+          assert(!!e.currentPresentedNode, "currentPresentedNode must be set");
           let t = hF(e.sizeInfo, !0, e.showDeviceFrameEnabled, e.currentPresentedNode, sceneGraph);
           o = {
             ...e,
             sizeInfo: t
           };
-        } else 2 === i || xb(i);
+        } else 2 === i || throwTypeError(i);
         break;
       }
     case "RESIZE_MODAL":
@@ -261,10 +261,10 @@ let $$S1 = um(T, (e, t) => {
         let {
           sceneGraph
         } = t.payload;
-        vA(!!e.currentPresentedNode, "currentPresentedNode must be set");
-        vA(!!e.sizeInfo, "sizeInfo must be set");
+        assert(!!e.currentPresentedNode, "currentPresentedNode must be set");
+        assert(!!e.sizeInfo, "sizeInfo must be set");
         let i = sceneGraph.get(e.currentPresentedNode);
-        vA(!!i, "expected selectedNode to exist");
+        assert(!!i, "expected selectedNode to exist");
         let a = HS(sceneGraph, i);
         o = {
           ...e,
@@ -395,7 +395,7 @@ let $$S1 = um(T, (e, t) => {
         break;
       }
     default:
-      xb(type);
+      throwTypeError(type);
   }
   if (!o.forceScalingInfo && o.sizeInfo?.breakpoint?.type !== e.sizeInfo?.breakpoint?.type) {
     let e = v(o);
@@ -408,7 +408,7 @@ let $$S1 = um(T, (e, t) => {
   N(e, o, t);
   return o;
 });
-let v = (e) => e.sizeInfo?.breakpoint?.type === l5.DEVICE ? {
+let v = e => e.sizeInfo?.breakpoint?.type === l5.DEVICE ? {
   viewportScalingMode: "fit-width",
   contentScalingMode: "fixed"
 } : {
@@ -451,7 +451,7 @@ let N = (e, t, r) => {
   let {
     type
   } = r;
-  let a = (e) => {
+  let a = e => {
     Y5.triggerAction("inline-preview-presented-node-changed", {
       currentHighlightedNode: e
     });
@@ -496,7 +496,7 @@ let N = (e, t, r) => {
     case "UPDATE_TIMELINE_PLAYER_STATE":
       break;
     default:
-      xb(type);
+      throwTypeError(type);
   }
 };
 export const bi = $$b0;

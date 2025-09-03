@@ -23,7 +23,7 @@ import { getResourceTeamId, hasEditorRoleAccessOnTeam, hasAdminRoleAccessOnTeam 
 import { e6 } from "../905/557142";
 import { t as _$$t2 } from "../figma_app/32680";
 import { oE } from "../905/249410";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { R as _$$R } from "../905/441305";
 import { oj } from "../905/760074";
 import { M4 } from "../905/713695";
@@ -140,7 +140,7 @@ function j(e) {
         break;
       }
     default:
-      xb(n.resource_type);
+      throwTypeError(n.resource_type);
   }
   return jsx(_$$R, {
     confirmText: i,
@@ -176,7 +176,7 @@ let G = nF((e, {
         [t.id]: null
       }
     }, i);
-  } catch (e) { }
+  } catch (e) {}
 });
 let z = nF((e, {
   role: t,
@@ -327,7 +327,7 @@ function W(e, t, i) {
         teamId: i,
         canEditTeam: void 0
       }
-    })); else {
+    }));else {
       let t = {
         ...n.teams[i],
         canEdit: hasEditorRoleAccessOnTeam(i, n),
@@ -455,4 +455,4 @@ let $$X3 = nF((e, {
 export const hw = $$q0;
 export const lP = $$Z1;
 export const zO = $$$2;
-export const yN = $$X3; 
+export const yN = $$X3;

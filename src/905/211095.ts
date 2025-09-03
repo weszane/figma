@@ -1,6 +1,6 @@
 import { useMemo, useCallback } from "react";
 import { wA } from "../vendor/514228";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { J0O, glU, fOf, YIb } from "../figma_app/763686";
 import { l7 } from "../905/189185";
 import { l as _$$l } from "../905/745972";
@@ -140,7 +140,7 @@ export function $$C0({
           });
           break;
         default:
-          xb(e);
+          throwTypeError(e);
       }
     });
     l();

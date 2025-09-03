@@ -1,4 +1,4 @@
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { Nfd } from "../figma_app/763686";
 export function $$a0(e) {
   switch (e) {
@@ -13,7 +13,7 @@ export function $$a0(e) {
     case Nfd.INSERT:
       return "INSERT";
     default:
-      xb(e);
+      throwTypeError(e);
   }
 }
 export const R = $$a0;

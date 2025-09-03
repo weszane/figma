@@ -1,4 +1,4 @@
-import { vA } from "../figma_app/465776";
+import { assert } from "../figma_app/465776";
 import { Ez5, dBj } from "../figma_app/763686";
 import { UN } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
@@ -24,7 +24,7 @@ let b = Wh(() => eU(0));
 let $$T9 = eU(null, (e, t, r) => {
   if (2 === e(b) && 2 !== r && e($$E5)) {
     let t = e(f);
-    vA(!!t, "sitePreviewState should not be null");
+    assert(!!t, "sitePreviewState should not be null");
     t.history.refresh();
     zl.set($$E5, !1);
   }
@@ -51,7 +51,7 @@ let $$x6 = eU(e => e(f), (e, t, r) => {
     });
   }(r.mode), r) {
     let e = UN().get(r.startingNodeId);
-    vA(!!e, `Node with id ${r.startingNodeId} not found`);
+    assert(!!e, `Node with id ${r.startingNodeId} not found`);
     let t = lB(e);
     let i = $$if(e) && t ? t : e.name;
     s = {

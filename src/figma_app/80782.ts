@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { wA, d4 } from "../vendor/514228";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { y1 } from "../figma_app/492908";
 import { lQ } from "../905/934246";
 import { k as _$$k } from "../905/443820";
@@ -204,7 +204,7 @@ function G({
       case "lightest":
         return Y;
       default:
-        xb(e);
+        throwTypeError(e);
     }
   }(e);
   return jsx(zq, {

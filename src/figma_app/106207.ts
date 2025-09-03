@@ -1,6 +1,6 @@
 import { useMemo, useCallback, useState, useRef, useEffect } from "react";
 import { wA, d4 } from "../vendor/514228";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { hKj, zkO, glU } from "../figma_app/763686";
 import { l7 } from "../905/189185";
 import { sx } from "../905/449184";
@@ -60,7 +60,7 @@ let F = ({
     case _$$n2.TeamTemplateLg:
       return t.fileKey;
     default:
-      xb(e);
+      throwTypeError(e);
   }
 };
 let j = ({
@@ -84,7 +84,7 @@ let j = ({
         file_key: e.fileKey
       };
     default:
-      xb(t);
+      throwTypeError(t);
   }
 };
 export async function $$U2({
@@ -244,7 +244,7 @@ export function $$z6(e) {
           template: s[e.key]
         };
       default:
-        xb(type);
+        throwTypeError(type);
     }
   }).filter(({
     template: e
@@ -332,7 +332,7 @@ export function $$q7(e, t, r, i = 10) {
   let [o, l] = useState(0);
   let [d, c] = useState(!1);
   let [u, p] = useState([]);
-  let _ = function() {
+  let _ = function () {
     let e = useRef();
     return useCallback((t, r) => {
       e.current = t;
@@ -402,4 +402,4 @@ export const Fz = $$H4;
 export const WS = $$X5;
 export const eE = $$z6;
 export const Ou = $$q7;
-export const _R = $$Z8; 
+export const _R = $$Z8;

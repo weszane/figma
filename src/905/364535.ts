@@ -1,5 +1,5 @@
 import { filterNotNullish } from "../figma_app/656233";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { lyf, Ez5 } from "../figma_app/763686";
 import { oz, o5, hx, dZ } from "../905/292918";
 import { j, l as _$$l } from "../905/618243";
@@ -26,7 +26,7 @@ export function $$d1(e, t, i) {
           });
           break;
         default:
-          xb(e.createBranch.status);
+          throwTypeError(e.createBranch.status);
       }
       a(s);
     }

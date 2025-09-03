@@ -1,5 +1,5 @@
 import { memo } from "react";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { jsx } from "react/jsx-runtime";
 import { p as _$$p } from "../905/730229";
 import { X } from "../905/737763";
@@ -126,7 +126,7 @@ export function $$E1(e, t) {
         IconUI3: X
       };
     default:
-      xb(e, "Unknown VariableResolvedDataType");
+      throwTypeError(e, "Unknown VariableResolvedDataType");
   }
 }
 export function $$x0(e) {
@@ -149,7 +149,7 @@ export function $$x0(e) {
     case rXF.SLOT_CONTENT_ID:
       return _$$A2;
     default:
-      xb(e, "Unknown VariableResolvedDataType");
+      throwTypeError(e, "Unknown VariableResolvedDataType");
   }
 }
 export const U = $$x0;

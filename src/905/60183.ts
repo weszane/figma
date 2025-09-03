@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { forwardRef, useRef, useImperativeHandle } from "react";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { N } from "../905/438674";
 import { x } from "../905/811596";
 import { ks } from "../figma_app/637027";
@@ -26,7 +26,7 @@ let h = e => {
           profileHandle: e.data.sanitizedProfileHandle
         });
       default:
-        return xb(t);
+        return throwTypeError(t);
     }
   }
 };

@@ -140,7 +140,7 @@ import { V as _$$V3 } from '../figma_app/312987';
 import { ag as _$$ag, nn as _$$nn, s as _$$s3, _g, cg, du, kA, mU, oB, OW, W3, ZY } from '../figma_app/336853';
 import { UE } from '../figma_app/345997';
 import { H3, S2 } from '../figma_app/465071';
-import { xb } from '../figma_app/465776';
+import { throwTypeError } from '../figma_app/465776';
 import { Jt } from '../figma_app/481749';
 import { $q, Sm, w_ } from '../figma_app/482728';
 import { _ as _$$_2, S as _$$S5 } from '../figma_app/490799';
@@ -413,7 +413,7 @@ let eu = Ju(() => {
   let a = d4(e => e.orgSamlConfig);
   let r = _g(t);
   let [l, o] = useState(r);
-  let d = function(e) {
+  let d = function (e) {
     let t = I7('ff_mfa_for_members');
     return !!(e && kA(e) && e.security_add_on_enabled_at && t.getConfig().getValue('enabled', !1));
   }(t);
@@ -3393,7 +3393,7 @@ let nC = Ju(e => {
   let r = !!a?.security_add_on_enabled_at;
   let l = nh(r);
   let [o, d] = useState(e.idleTimeoutDurationInSecs ? ng.CONFIGURED : ng.DEFAULT);
-  let [c, _] = useState(function(e, t) {
+  let [c, _] = useState(function (e, t) {
     if (!e) return nx();
     let [a, n] = qr(e);
     return n in nh(t) ? {
@@ -3532,7 +3532,7 @@ let nC = Ju(e => {
               onChange: b
             }), jsx(nw, {
               id: 'TIME_UNIT_DROPDOWN',
-              options: function(e, t) {
+              options: function (e, t) {
                 let a = [{
                   type: 'option',
                   key: vS.HOURS,
@@ -3595,7 +3595,7 @@ let nT = Ju(e => {
   let u = useCallback(e => _(e.currentTarget.value), []);
   let m = nI(c);
   let p = e.ipAllowlistEnabled !== r;
-  let g = r && function(e, t) {
+  let g = r && function (e, t) {
     let a = new Set(t);
     let n = new Set(e);
     return !t5()(a, n);
@@ -4052,7 +4052,7 @@ function n3(e) {
   });
   let [l] = mI(r);
   a = l.data !== null ? l.data : 'usd';
-  let o = function({
+  let o = function ({
     billableSeats: e,
     currency: t,
     orgId: a,
@@ -4543,7 +4543,7 @@ export function $$sr0(e) {
       case ud.COLLABORATOR:
         return e || t.unwrapOr(null)?.upgradeApprovalSettingsCollaborator === r.zRx.INSTANT_APPROVAL;
       default:
-        xb(a);
+        throwTypeError(a);
     }
   }, !1);
   let V = _$$t2();
@@ -4828,7 +4828,7 @@ export function $$sr0(e) {
   isGovCluster() || e5.push(jsx(x8, {
     label: _$$t('settings_tab.authentication_label'),
     description: _$$t('settings_tab.authentication_description'),
-    currentValue: function(e) {
+    currentValue: function (e) {
       let t = _g(e);
       switch (t) {
         case Ct.SAML:
@@ -4838,7 +4838,7 @@ export function $$sr0(e) {
         case Ct.ANY:
           return _$$t('settings_tab.sso_method.any_method');
         default:
-          xb(t);
+          throwTypeError(t);
       }
     }(org),
     onClick: () => {

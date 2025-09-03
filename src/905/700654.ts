@@ -2,24 +2,27 @@
 import { PLUGIN_CLOSED_ERROR, PluginError, PluginWrapper } from '../905/572400'
 import { H } from '../905/823050'
 
-const INTERNAL = Symbol('internal')
+const inter = Symbol('internal')
 const WAS_DESTROYED = Symbol('wasDestroyed')
 const APPLY = Function.prototype.apply
 
-export function wrapHandle(vm: NoOpVm, value: unknown) {
+export interface INoOpVm<T  = any> {
+  [inter]: T
+}
+export function wrapHandle<T  = any>(vm: NoOpVm, value: T): INoOpVm<T> {
   if (vm[WAS_DESTROYED])
     throw new Error(PLUGIN_CLOSED_ERROR)
-  if (typeof value === 'object' && value !== null && INTERNAL in value)
+  if (typeof value === 'object' && value !== null && inter in value)
     throw new Error('Wrapping a handle twice!')
-  return { [INTERNAL]: value }
+  return { [inter]: value as T }
 }
 
-function unwrapHandle(vm: NoOpVm, handle: unknown) {
+function unwrapHandle<T = any>(vm: NoOpVm, handle: T) {
   if (vm[WAS_DESTROYED])
     throw new Error(PLUGIN_CLOSED_ERROR)
-  if (typeof handle !== 'object' || handle === null || !(INTERNAL in handle))
+  if (typeof handle !== 'object' || handle === null || !(inter in handle))
     throw new Error('The provided value is not a handle')
-  return handle[INTERNAL]
+  return handle[inter] as T
 }
 
 export class NoOpVm extends PluginWrapper {
@@ -32,11 +35,12 @@ export class NoOpVm extends PluginWrapper {
   $$null: any
   undefined: any
   vmType: string
+  scope: any
 
   constructor() {
     super()
     this.vmType = 'noopvm'
-    this.errorHandler = () => {}
+    this.errorHandler = () => { }
     this.executionDepth = 0
     this[WAS_DESTROYED] = false
     this._stats = null
@@ -188,11 +192,11 @@ export class NoOpVm extends PluginWrapper {
     return wrapHandle(this, Symbol(value))
   }
 
-  newObject(protoHandle?: any) {
+  newObject<T = any>(protoHandle?: any): INoOpVm<T> {
     if (!protoHandle)
-      return wrapHandle(this, {})
+      return wrapHandle(this, {} as T)
     try {
-      const proto = unwrapHandle(this, protoHandle)
+      const proto = unwrapHandle<object>(this, protoHandle)
       return wrapHandle(this, Object.create(proto))
     }
     catch (err) {
@@ -246,7 +250,7 @@ export class NoOpVm extends PluginWrapper {
 
   newPrototype(name: string) {
     if (!this.canEval)
-      return wrapHandle(this, function () {}.prototype)
+      return wrapHandle(this, function () { }.prototype)
     const result = this.evalTrustedCode(`(function ${name}() {}).prototype`)
     if (result.type !== 'SUCCESS')
       throw new Error('Internal eval error')
@@ -258,8 +262,8 @@ export class NoOpVm extends PluginWrapper {
   }
 
   newPromise() {
-    let resolve: (v: any) => void = () => {}
-    let reject: (e: any) => void = () => {}
+    let resolve: (v: any) => void = () => { }
+    let reject: (e: any) => void = () => { }
     const promise = new Promise((res, rej) => {
       resolve = res
       reject = rej
@@ -372,7 +376,7 @@ export class NoOpVm extends PluginWrapper {
     return this.evalTopLevelCode(code)
   }
 
-  setAbortHandler(_handler: any) {}
+  setAbortHandler(_handler: any) { }
   setErrorHandler(handler: (e: any) => void) {
     this.errorHandler = handler
   }
@@ -393,8 +397,8 @@ export class NoOpVm extends PluginWrapper {
     return this[WAS_DESTROYED]
   }
 
-  retainHandle(_handle: any) {}
-  releaseHandle(_handle: any) {}
+  retainHandle(_handle: any) { }
+  releaseHandle(_handle: any) { }
 }
 
 export class ScopedNoOpVm extends NoOpVm {
@@ -475,4 +479,3 @@ export function createPluginContext() {
     noOpVm: vm,
   }
 }
-

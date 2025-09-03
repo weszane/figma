@@ -15,16 +15,16 @@ export interface VariableValue {
 }
 
 export interface ExpressionFunction {
-  type: 'ADDITION' | 'SUBTRACTION' | 'MULTIPLICATION' | 'DIVISION' | 
-  'EQUALS' | 'NOT_EQUAL' | 'LESS_THAN' | 'LESS_THAN_OR_EQUAL' |
-  'GREATER_THAN' | 'GREATER_THAN_OR_EQUAL' | 'AND' | 'OR' | 'NOT' |
-  'STRINGIFY' | 'TERNARY' | 'VAR_MODE_LOOKUP' | 'NEGATE' | 'IS_TRUTHY' |
-  'RESOLVE_VARIANT'
+  type: 'ADDITION' | 'SUBTRACTION' | 'MULTIPLICATION' | 'DIVISION'
+  | 'EQUALS' | 'NOT_EQUAL' | 'LESS_THAN' | 'LESS_THAN_OR_EQUAL'
+  | 'GREATER_THAN' | 'GREATER_THAN_OR_EQUAL' | 'AND' | 'OR' | 'NOT'
+  | 'STRINGIFY' | 'TERNARY' | 'VAR_MODE_LOOKUP' | 'NEGATE' | 'IS_TRUTHY'
+  | 'RESOLVE_VARIANT'
 }
 
 export interface VariableDataType {
-  type: 'BOOLEAN' | 'COLOR' | 'FLOAT' | 'STRING' | 'VARIABLE_ALIAS' | 
-  'EXPRESSION' | 'SYMBOL_ID' | 'MAP'
+  type: 'BOOLEAN' | 'COLOR' | 'FLOAT' | 'STRING' | 'VARIABLE_ALIAS'
+  | 'EXPRESSION' | 'SYMBOL_ID' | 'MAP'
 }
 
 export interface ProcessedVariable {
@@ -57,26 +57,26 @@ export class AdvancedVariableExpressionProcessor {
   // Convert internal variable to external format (original tX function)
   convertVariableToExternal(e: any): ProcessedVariable {
     let t: ProcessedVariable = {}
-    
+
     if (e.value !== undefined) {
       t.value = this.processVariableValue(e.value)
     }
-    
+
     if (e.type !== undefined) {
       t.dataType = this.convertDataType(e.type)
     }
-    
+
     if (e.resolvedType !== undefined) {
       t.resolvedDataType = this.convertResolvedDataType(e.resolvedType)
     }
-    
+
     return t
   }
 
   // Process variable value with all supported types
   private processVariableValue(e: any): VariableValue {
     let t: VariableValue = {}
-    
+
     if (typeof e === 'boolean') {
       t.boolValue = e
     }
@@ -115,7 +115,7 @@ export class AdvancedVariableExpressionProcessor {
     else {
       throw new Error(`Invalid variable value type provided: ${JSON.stringify(e)}`)
     }
-    
+
     return t
   }
 
@@ -218,22 +218,23 @@ export class AdvancedVariableParser {
 
   // Convert external variable to internal format (original tQ function)
   convertVariableToInternal(e: any): any {
-    if (e === undefined) return undefined
-    
+    if (e === undefined)
+      return undefined
+
     let t: any = {}
-    
+
     if (e.value !== undefined) {
       t.value = this.parseVariableValue(e.value)
     }
-    
-    if (e.dataType !== undefined) {
-      t.type = this.parseDataType(e.dataType)
+
+    if (e.type !== undefined) {
+      t.dataType = this.parseDataType(e.dataType)
     }
-    
+
     if (e.resolvedDataType !== undefined) {
       t.resolvedType = this.parseResolvedDataType(e.resolvedDataType)
     }
-    
+
     return t
   }
 
@@ -253,9 +254,9 @@ export class AdvancedVariableParser {
         id: this.dIFunction(e.alias),
       }
     }
-    if (e.expressionValue !== undefined && 
-      e.expressionValue.expressionFunction !== undefined && 
-      e.expressionValue.expressionArguments) {
+    if (e.expressionValue !== undefined
+      && e.expressionValue.expressionFunction !== undefined
+      && e.expressionValue.expressionArguments) {
       let t: any[] = []
       for (let i of e.expressionValue.expressionArguments || []) {
         let e = this.convertVariableToInternal(i)
@@ -368,22 +369,36 @@ export class AdvancedVariableParser {
 export function createAdvancedVariableExpressionProcessor(
   config?: Partial<VariableExpressionConfig>,
   hrUtilities?: any,
-  dIFunction?: any, 
-  sHFunction?: any
+  dIFunction?: any,
+  sHFunction?: any,
 ): AdvancedVariableExpressionProcessor {
   const defaultConfig: VariableExpressionConfig = {
     supportedFunctions: new Set([
-      'ADDITION', 'SUBTRACTION', 'MULTIPLICATION', 'DIVISION',
-      'EQUALS', 'NOT_EQUAL', 'LESS_THAN', 'GREATER_THAN',
-      'AND', 'OR', 'NOT', 'STRINGIFY', 'TERNARY'
+      'ADDITION',
+      'SUBTRACTION',
+      'MULTIPLICATION',
+      'DIVISION',
+      'EQUALS',
+      'NOT_EQUAL',
+      'LESS_THAN',
+      'GREATER_THAN',
+      'AND',
+      'OR',
+      'NOT',
+      'STRINGIFY',
+      'TERNARY',
     ]),
     supportedDataTypes: new Set([
-      'BOOLEAN', 'COLOR', 'FLOAT', 'STRING', 'VARIABLE_ALIAS'
+      'BOOLEAN',
+      'COLOR',
+      'FLOAT',
+      'STRING',
+      'VARIABLE_ALIAS',
     ]),
     enableExpressionValidation: true,
-    maxExpressionDepth: 10
+    maxExpressionDepth: 10,
   }
-  
+
   const finalConfig = { ...defaultConfig, ...config }
   return new AdvancedVariableExpressionProcessor(finalConfig, hrUtilities, dIFunction, sHFunction)
 }
@@ -391,7 +406,7 @@ export function createAdvancedVariableExpressionProcessor(
 // Factory function to create variable parser
 export function createAdvancedVariableParser(
   processor: AdvancedVariableExpressionProcessor,
-  dIFunction?: any
+  dIFunction?: any,
 ): AdvancedVariableParser {
   return new AdvancedVariableParser(processor, dIFunction)
 }
@@ -405,13 +420,13 @@ export class VariableExpressionUtils {
       case 'BOOLEAN':
         return 'BOOLEAN' // rXF.BOOLEAN
       case 'FLOAT':
-        return 'FLOAT'   // rXF.FLOAT
+        return 'FLOAT' // rXF.FLOAT
       case 'STRING':
-        return 'STRING'  // rXF.STRING
+        return 'STRING' // rXF.STRING
       case 'COLOR':
-        return 'COLOR'   // rXF.COLOR
+        return 'COLOR' // rXF.COLOR
       case 'MAP':
-        return 'MAP'     // rXF.MAP
+        return 'MAP' // rXF.MAP
       case 'SYMBOL_ID':
         return 'SYMBOL_ID' // rXF.SYMBOL_ID
       default:
@@ -535,8 +550,9 @@ export class VariableExpressionUtils {
   // Validate variable expression depth
   static validateExpressionDepth(expr: any, maxDepth: number = 10): boolean {
     function checkDepth(e: any, currentDepth: number): number {
-      if (currentDepth > maxDepth) return currentDepth
-      
+      if (currentDepth > maxDepth)
+        return currentDepth
+
       if (e && e.expressionValue && e.expressionValue.expressionArguments) {
         let maxChildDepth = currentDepth
         for (let arg of e.expressionValue.expressionArguments) {
@@ -545,10 +561,10 @@ export class VariableExpressionUtils {
         }
         return maxChildDepth
       }
-      
+
       return currentDepth
     }
-    
+
     return checkDepth(expr, 0) <= maxDepth
   }
 

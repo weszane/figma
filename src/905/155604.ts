@@ -1,4 +1,4 @@
-import { vA } from "../figma_app/465776";
+import { assert } from "../figma_app/465776";
 import { z, kY } from "../905/239603";
 import { wQ } from "../905/893701";
 import { livestoreNormalized, livestorePrimaryKey } from "../905/67898";
@@ -12,8 +12,8 @@ export function $$o0(e) {
   let t = e.description.split(":")[1];
   let i = null;
   let a = e.shape;
-  for (let t in a) a[t].description?.includes(livestorePrimaryKey) && (vA(!i, `normalizedObject ${e.description} entry has more than one primaryKey`), i = t);
-  vA(!!i, `normalizedObject ${e.description} entry has no primaryKey`);
+  for (let t in a) a[t].description?.includes(livestorePrimaryKey) && (assert(!i, `normalizedObject ${e.description} entry has more than one primaryKey`), i = t);
+  assert(!!i, `normalizedObject ${e.description} entry has no primaryKey`);
   return {
     uniqueName: t,
     primaryKey: i
@@ -34,7 +34,7 @@ export function $$l1(e, t) {
         primaryKey
       } = l;
       let r = i.get(uniqueName);
-      vA(!!r, `No objectDef found for ${uniqueName}`);
+      assert(!!r, `No objectDef found for ${uniqueName}`);
       return Object.assign(new wQ.Entity(uniqueName, {}, {
         idAttribute: primaryKey,
         processStrategy: e => e

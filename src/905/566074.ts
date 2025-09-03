@@ -1,4 +1,4 @@
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { getFeatureFlags } from "../905/601108";
 import { PW } from "../figma_app/633080";
 export function $$s1(e) {
@@ -23,7 +23,7 @@ export function $$s1(e) {
     case PW.CODE_FILE:
       return !!getFeatureFlags().sts_code;
     default:
-      xb(e, "Unhandled asset type");
+      throwTypeError(e, "Unhandled asset type");
   }
 }
 export function $$o0(e) {
@@ -50,7 +50,7 @@ export function $$o0(e) {
     case PW.MANAGED_STRING:
       return !1;
     default:
-      xb(e, "Unhandled asset type");
+      throwTypeError(e, "Unhandled asset type");
   }
 }
 export const O = $$o0;

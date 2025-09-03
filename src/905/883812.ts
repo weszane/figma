@@ -1,4 +1,4 @@
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { parsePxInt } from "../figma_app/783094";
 import { b } from "../905/857767";
 import { IZ, D$, rP, C3, Wn } from "../905/334362";
@@ -73,7 +73,7 @@ export function $$h2(e, t) {
     let t = s.secondaryText ?? "";
     return i + (d.get(e)?.get(t) || 32);
   }
-  return s.type === b.StylesRow ? i + 32 : s.type === b.Separator ? i + 16 : void xb(s);
+  return s.type === b.StylesRow ? i + 32 : s.type === b.Separator ? i + 16 : void throwTypeError(s);
 }
 export const I = $$p0;
 export const LB = $$m1;

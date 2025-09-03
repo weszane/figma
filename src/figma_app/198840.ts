@@ -1,4 +1,4 @@
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { X3B, bOM } from "../figma_app/763686";
 import { xf } from "../figma_app/416935";
 import { Ay } from "../905/612521";
@@ -110,7 +110,7 @@ export function $$N15(e) {
     case FFileType.FIGMAKE:
       return FTemplateCategoryType.FIGMAKE_TEMPLATE;
     default:
-      xb(e);
+      throwTypeError(e);
   }
 }
 export function $$C11(e, t, r, n) {

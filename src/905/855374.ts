@@ -17,7 +17,7 @@ import { zy } from "../figma_app/915202";
 import { GI, Fq, s5, U$ } from "../figma_app/633080";
 import { Ju, ZU } from "../905/102752";
 import { P as _$$P } from "../905/201667";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { t } from "../905/150656";
 import { bL, _L } from "../905/911410";
 import { vo, Y9, r1, nB } from "../figma_app/272243";
@@ -1032,7 +1032,7 @@ function eA(e) {
       x1("variables", "Unsupported variable type");
       return null;
     default:
-      xb(variableType);
+      throwTypeError(variableType);
   }
   return jsxs("div", {
     className: "edit_variable_modal--sectionTitleWithInfoIcon--dUJpP edit_variable_modal--sectionTitle--AymF1",
@@ -1317,7 +1317,7 @@ function e8(e) {
           return e3()([...n.current.filter(e => !a.has(e)), ...y1(r, e), e]).sort();
         }
       default:
-        xb(a);
+        throwTypeError(a);
     }
   }, []);
 }

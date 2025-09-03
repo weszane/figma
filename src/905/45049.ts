@@ -1,6 +1,6 @@
 import { useCallback, useRef, useEffect, useState } from "react";
 import { wA } from "../vendor/514228";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { md } from "../figma_app/27355";
 import { sx } from "../905/449184";
 import { Uz, xH } from "../905/63728";
@@ -66,7 +66,7 @@ function B(e) {
         sx("Fragment search file opened", h);
         break;
       default:
-        xb(n);
+        throwTypeError(n);
     }
     Ay.redirect(n.url, "_blank");
   }, [e, c, d, l, r, t, i]);
@@ -380,7 +380,7 @@ export function $$$0(e, t, i, y, b) {
           sx("Fragment search preview closed", n);
           break;
         default:
-          xb(e);
+          throwTypeError(e);
       }
       S(Lo());
       t.current?.focus();
@@ -406,7 +406,7 @@ export function $$$0(e, t, i, y, b) {
             sx("Fragment search preview opened", R);
             break;
           default:
-            xb(n);
+            throwTypeError(n);
         }
         S(to({
           type: K,

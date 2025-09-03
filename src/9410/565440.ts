@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, useEffect, useRef } from "react";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { R } from "../9410/46722";
 import { t as _$$t, tx } from "../905/303541";
 import { to } from "../figma_app/828186";
@@ -289,7 +289,7 @@ export function $$A0() {
     case qy.CANCELLED:
       return null;
     default:
-      xb(state);
+      throwTypeError(state);
   }
 }
 export const K = $$A0;

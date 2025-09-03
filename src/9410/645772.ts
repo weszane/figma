@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { NLJ } from "../figma_app/763686";
 import { md } from "../figma_app/27355";
 import { LH } from "../figma_app/384673";
@@ -51,7 +51,7 @@ export function $$E1() {
             break;
           }
         default:
-          xb(s);
+          throwTypeError(s);
       }
     }, [e, c, h, f, m, activeSecondaryToolbeltId, setActiveSecondaryToolbeltId]);
   }(t.activateTool);

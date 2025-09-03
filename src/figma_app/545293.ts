@@ -1,5 +1,5 @@
 import { h as _$$h, G } from "../905/706725";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { zl } from "../figma_app/27355";
 import { sx } from "../905/449184";
 import { g as _$$g } from "../905/880308";
@@ -30,7 +30,7 @@ export function $$E9(e, t, r, n, a, s, o) {
         case "input-image":
           return "image";
         default:
-          xb(e);
+          throwTypeError(e);
       }
     }(n),
     query_text: "input-text" === n.type ? n.value : void 0,
@@ -43,7 +43,7 @@ export function $$E9(e, t, r, n, a, s, o) {
         case "input-selection":
           return A(e.node) || 1 === e.node.childCount && A(e.node.childrenNodes[0]);
         default:
-          xb(e);
+          throwTypeError(e);
       }
     }(n),
     query_file_key: n.file_key,
@@ -58,7 +58,7 @@ export function $$E9(e, t, r, n, a, s, o) {
             query_height: e.node.absoluteBoundingBox.h
           };
         default:
-          xb(e);
+          throwTypeError(e);
       }
     }(n),
     ...b(s),
@@ -83,7 +83,7 @@ export function $$y10(e) {
     case void 0:
       return;
     default:
-      xb(e);
+      throwTypeError(e);
   }
 }
 function b(e) {
@@ -195,7 +195,7 @@ export async function $$N7(e, t, r, l, c, u, p, _) {
         a = await $$C17(e, b, r, c, u);
         break;
       default:
-        xb(e);
+        throwTypeError(e);
     }
     let o = [];
     if (o = u ? a.map(e => ({

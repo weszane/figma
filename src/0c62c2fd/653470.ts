@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, useMemo, useCallback } from "react";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { U } from "../905/807535";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
@@ -36,7 +36,7 @@ export function $$x0({
           case h62.UNKNOWN:
             return _$$t("file_browser.file_import_view.select_pdf_source_input_unknown_value");
           default:
-            xb(e);
+            throwTypeError(e);
         }
       }(e)
     }));

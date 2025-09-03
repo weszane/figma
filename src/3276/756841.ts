@@ -1,7 +1,7 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useRef, memo, useMemo, useCallback, useState, useContext, useEffect, forwardRef } from "react";
 import { wA, d4, Pj } from "../vendor/514228";
-import { xb, B1 } from "../figma_app/465776";
+import { throwTypeError, assertNotNullish } from "../figma_app/465776";
 import { T as _$$T } from "../905/745591";
 import { U1 } from "../figma_app/343967";
 import { getFeatureFlags } from "../905/601108";
@@ -107,14 +107,14 @@ import { A as _$$A9 } from "../2854/890611";
 function R(e) {
   let t = useRef(null);
   let n = wY(t) ?? cU;
-  let i = function(e) {
+  let i = function (e) {
     switch (e.display) {
       case "inline-flex":
         return e.selected ? "card--selectedCard---f8bk card--_card--xs0Vl" : "card--card---tdpz card--_card--xs0Vl";
       case "flex":
         return e.selected ? "card--flexSelectedCard---zq1t card--selectedCard---f8bk card--_card--xs0Vl" : "card--flexCard--i3MFT card--card---tdpz card--_card--xs0Vl";
       default:
-        xb(e.display);
+        throwTypeError(e.display);
     }
   }(e);
   return jsxs("div", {
@@ -142,7 +142,7 @@ function R(e) {
 }
 var W = K;
 let et = "comment_avatar_list--avatarListElement--7ghSl";
-let en = memo(function(e) {
+let en = memo(function (e) {
   let {
     userId,
     imgUrl,
@@ -191,7 +191,7 @@ function eo(e) {
     })]
   });
 }
-let er = memo(function(e) {
+let er = memo(function (e) {
   return jsxs("div", {
     className: "comment_metadata--commentMetadata---ku0T",
     children: [(e.orderId || e.parentName && !e.hideParentName) && jsx("span", {
@@ -355,7 +355,7 @@ function ex(e) {
 let eb = "comments_row_presentation--button--wBibN";
 let ey = "comments_row_presentation--headerElement--FStcl";
 let eC = "comments_row_presentation--countMetadata--xGPiX";
-let eM = memo(function(e) {
+let eM = memo(function (e) {
   return jsxs("div", {
     className: "comments_row_presentation--replyAndAttachmentCount--OrlJC",
     children: [0 !== e.replyCount && jsxs(Fragment, {
@@ -376,7 +376,7 @@ let eM = memo(function(e) {
     })]
   });
 });
-let eE = memo(function(e) {
+let eE = memo(function (e) {
   return jsxs(Fragment, {
     children: [e.postTitle && jsx("div", {
       className: "comments_row_presentation--postTitle--9oNMe",
@@ -392,7 +392,7 @@ let eE = memo(function(e) {
   });
 });
 let eN = e => e.stopPropagation();
-let eS = memo(function(e) {
+let eS = memo(function (e) {
   let {
     copyLink,
     isPendingFromSinatra,
@@ -566,7 +566,7 @@ function eJ(e) {
   let t = d4(e => e.mirror.appModel.pagesList);
   return null === e.page || Fy(t, e.page) === xal.LOADED;
 }
-let e0 = memo(function(e) {
+let e0 = memo(function (e) {
   let {
     element
   } = e;
@@ -624,7 +624,7 @@ let e0 = memo(function(e) {
     onChangeResolveState,
     onCanvasMentionCopyLink,
     openPostDetailModal
-  } = function(e, t, n) {
+  } = function (e, t, n) {
     let o = wA();
     let {
       comments: _comments
@@ -865,7 +865,7 @@ let e0 = memo(function(e) {
     })
   });
 });
-let e1 = memo(function(e) {
+let e1 = memo(function (e) {
   let {
     index,
     start,
@@ -966,7 +966,7 @@ function e2(e) {
     })
   });
 }
-let e5 = memo(function(e) {
+let e5 = memo(function (e) {
   let {
     onResolveComment,
     hideResolve,
@@ -1447,7 +1447,7 @@ export function $$tT0(e) {
     n && !a && A.current?.focus();
   }, [E, t, activeFilters]);
   let S = useCallback(e => {
-    B1(e.comments[0], "thread.comments[0] is null");
+    assertNotNullish(e.comments[0], "thread.comments[0] is null");
     t(Mv({
       comment: e.comments[0]
     }));
@@ -1531,4 +1531,4 @@ export function $$tT0(e) {
     })]
   });
 }
-export const B = $$tT0; 
+export const B = $$tT0;

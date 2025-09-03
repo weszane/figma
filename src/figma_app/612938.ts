@@ -1,6 +1,6 @@
 import { useCallback, useEffect } from "react";
 import { bT } from "../905/851937";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { lQ } from "../905/934246";
 import { yQ } from "../905/236856";
 import { k } from "../905/651849";
@@ -131,7 +131,7 @@ let y = class e {
       let r = e.runTasks;
       if (0 === r.length) break;
       e.runTasks = [];
-      await Promise.allSettled(r.map((e) => this.resolvePromise(e)));
+      await Promise.allSettled(r.map(e => this.resolvePromise(e)));
       t++;
     }
     await this.maybeTerminatePluginAfterRunSettled(e);
@@ -149,7 +149,7 @@ let y = class e {
         this.runQueue.push(e);
         break;
       default:
-        xb(e.mode);
+        throwTypeError(e.mode);
     }
   }
   async maybeTerminatePluginBeforeRun() {
@@ -170,7 +170,7 @@ let y = class e {
         await this.terminatePlugin();
         break;
       default:
-        xb(mode);
+        throwTypeError(mode);
     }
   }
   async terminatePlugin() {
@@ -184,7 +184,7 @@ let y = class e {
     mode: t
   }) {
     let r = this.currentRunState?.runPluginArgs.plugin.plugin_id;
-    return r === e.plugin.plugin_id && hw()?.plugin_id === r ? this.currentRunState : this.runQueue.find((r) => r.runPluginArgs.plugin.plugin_id === e.plugin.plugin_id && r.mode === t);
+    return r === e.plugin.plugin_id && hw()?.plugin_id === r ? this.currentRunState : this.runQueue.find(r => r.runPluginArgs.plugin.plugin_id === e.plugin.plugin_id && r.mode === t);
   }
   isCurrentlyRunning({
     runPluginArgs: e,
@@ -229,7 +229,7 @@ export function $$T1() {
       editorType: e?.editorType || null
     }
   });
-  let r = useCallback((r) => {
+  let r = useCallback(r => {
     if (!e) return;
     let n = wR(e.editorType);
     handleUpgrade({

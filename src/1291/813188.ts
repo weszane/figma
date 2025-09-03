@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
 import { wA } from "../vendor/514228";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { g as _$$g } from "../905/687265";
 import { Ay } from "@stylexjs/stylex";
 import { ms, c$ } from "../figma_app/236327";
@@ -185,7 +185,7 @@ let k = e => {
         gridClassName: Ox
       };
     default:
-      xb(e);
+      throwTypeError(e);
   }
 };
 let L = ms;

@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { wA } from "../vendor/514228";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { CNR, glU, qmM } from "../figma_app/763686";
 import { l7 } from "../905/189185";
@@ -126,7 +126,7 @@ export function $$L0(e, t) {
           });
           break;
         default:
-          xb(n);
+          throwTypeError(n);
       }
       s || XG({
         isSearchResult: !0,

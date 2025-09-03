@@ -1,6 +1,6 @@
 import { useCallback, useMemo, useEffect } from "react";
 import { d4 } from "../vendor/514228";
-import { KF } from "../figma_app/465776";
+import { debug } from "../figma_app/465776";
 import { z as _$$z } from "../905/639107";
 import { M as _$$M } from "../905/702374";
 import { v as _$$v } from "../905/181101";
@@ -523,7 +523,7 @@ export function $$eT8() {
 }
 class eI extends PZ {
   format(e) {
-    return null == e ? "" : "number" != typeof e && e !== Q8 ? e === $$ew43 ? _$$t("fullscreen.properties_panel.apply_variable_ellipses") : (KF(!0, "Unknown stack spacing dropdown option: '" + e + "'"), "") : super.format(e);
+    return null == e ? "" : "number" != typeof e && e !== Q8 ? e === $$ew43 ? _$$t("fullscreen.properties_panel.apply_variable_ellipses") : (debug(!0, "Unknown stack spacing dropdown option: '" + e + "'"), "") : super.format(e);
   }
 }
 export class $$eS17 extends Lk {
@@ -570,7 +570,7 @@ export class $$eS17 extends Lk {
           let n = "width" === this.activeDimension && this.minmax.width.max.enabled || "height" === this.activeDimension && this.minmax.height.max.enabled;
           return r && n ? _$$t("fullscreen.properties_panel.stack_panel.remove_min_and_max") : r ? _$$t("fullscreen.properties_panel.stack_panel.remove_min") : _$$t("fullscreen.properties_panel.stack_panel.remove_max");
         default:
-          KF(!0, "Unknown width/height dropdown option: '" + e + "'");
+          debug(!0, "Unknown width/height dropdown option: '" + e + "'");
           return "";
       }
     }
@@ -592,7 +592,7 @@ class ev extends Lk {
       case $$ew43:
         return _$$t("fullscreen.properties_panel.apply_variable_ellipses");
       default:
-        KF(!0, "Unknown width/height dropdown option: '" + e + "'");
+        debug(!0, "Unknown width/height dropdown option: '" + e + "'");
         return "";
     }
     return super.format(e);

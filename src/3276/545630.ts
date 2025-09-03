@@ -69,7 +69,7 @@ import { O1, KD } from "../figma_app/317394";
 import { z3, _6 } from "../figma_app/386952";
 import { t0 as _$$t3 } from "../figma_app/198840";
 import { dDF } from "../figma_app/43951";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { qE } from "../figma_app/492908";
 import { k as _$$k3 } from "../905/443820";
 import { sx } from "../905/449184";
@@ -1467,7 +1467,7 @@ function t8(e) {
       case Eq.accessibilityCommentPin:
         break;
       default:
-        xb(s);
+        throwTypeError(s);
     }
   }, [e.mountUnfocused, s]);
   I_();
@@ -1813,7 +1813,7 @@ function nr(e) {
       case Eq.nextButton:
         break;
       default:
-        xb(n);
+        throwTypeError(n);
     }
   }, [P, e.mountUnfocused, n]);
   let eq = useRef(null);
@@ -2033,7 +2033,7 @@ function nr(e) {
             user: e.user,
             viewportInfo: e.viewportInfo,
             viewportPositionFromClientPosition: e.viewportPositionFromClientPosition
-          }) : thread.sidebarItemType === kT.LITMUS_COMMENT_THREAD ? null : void xb(thread)]
+          }) : thread.sidebarItemType === kT.LITMUS_COMMENT_THREAD ? null : void throwTypeError(thread)]
         })]
       })]
     });

@@ -63,7 +63,7 @@ import { xE } from "../figma_app/581520";
 import { cY, UU, BN } from "../vendor/343575";
 import { fP, mc as _$$mc } from "../905/691059";
 import { R as _$$R } from "../7a72fc59/583347";
-import { xb, vA } from "../figma_app/465776";
+import { throwTypeError, assert } from "../figma_app/465776";
 import { Ay as _$$Ay } from "../vendor/917855";
 import { az } from "../905/449184";
 import { R as _$$R2 } from "../905/103090";
@@ -106,7 +106,7 @@ import { N as _$$N } from "../905/568293";
 import { K as _$$K3 } from "../905/459096";
 import { h as _$$h4 } from "../905/123399";
 import { W as _$$W } from "../7a72fc59/509666";
-import { j as _$$j } from "../905/253683";
+import { noop } from "../905/253683";
 import { s as _$$s3 } from "../905/702260";
 import { W as _$$W2 } from "../905/378870";
 import { f as _$$f2 } from "../905/335032";
@@ -651,7 +651,7 @@ function eB(e) {
       case "border-color":
         return _$$t("figmake.toolbar.border_color");
       default:
-        xb(e);
+        throwTypeError(e);
     }
   }(e.property);
   return jsx(eC, {
@@ -1536,7 +1536,7 @@ function tA() {
       tooltipType: Ib.LOOKUP,
       isActive: r,
       onClick: a,
-      children: jsx(_$$j, {})
+      children: jsx(noop, {})
     })
   });
 }
@@ -1837,7 +1837,7 @@ function tJ() {
   } = _$$q();
   let r = useCallback(() => {
     let n = zl.get(directManipulationEditor.selectedElementIdAtom);
-    vA(null !== n);
+    assert(null !== n);
     handleHtmlToDesign({
       mode: _$$y.API,
       selectedElementId: n,
@@ -2233,7 +2233,7 @@ class nC {
               };
               break;
             default:
-              xb(d);
+              throwTypeError(d);
           }
           if (e && c) {
             let e = nE({
@@ -2401,7 +2401,7 @@ function nE({
           ...t
         });
       default:
-        xb(e);
+        throwTypeError(e);
     }
   }
   let l = e.collaborativeSourceCode;

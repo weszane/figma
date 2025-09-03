@@ -1,6 +1,6 @@
 import { createElement } from "react";
 import { filterNotNullish } from "../figma_app/656233";
-import { KF } from "../figma_app/465776";
+import { debug } from "../figma_app/465776";
 import { GI, Si } from "../figma_app/387100";
 import { getFeatureFlags } from "../905/601108";
 import { y3 } from "../figma_app/876459";
@@ -108,7 +108,7 @@ export const jv = function e(t, i) {
     if (!(_o(t) && t.disabledAndForceVisible) && o && i.removeDisabledItems) return null;
     if (_o(t) && t.nodeId) return function (e, t, i) {
       if (!e) return null;
-      KF(null != i.sceneGraph && null != i.sceneGraphSelection, "You should be providing a scene graph and a selection if you are rendering a menu item for a particular layer");
+      debug(null != i.sceneGraph && null != i.sceneGraphSelection, "You should be providing a scene graph and a selection if you are rendering a menu item for a particular layer");
       let r = i.sceneGraph.get(t);
       if (!r) return null;
       let o = K3(i.sceneGraphSelection, t);

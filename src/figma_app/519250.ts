@@ -1,5 +1,5 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
-import { KF } from "../figma_app/465776";
+import { debug } from "../figma_app/465776";
 import { bL, c$ } from "../905/867927";
 import { q } from "../905/932270";
 import { h as _$$h } from "../905/513745";
@@ -79,7 +79,7 @@ export function $$O3({
   let u = _W(kl("missingFont"), !1);
   let p = !((0 | J2(Ez5.propertiesPanelState().enabledTypePanelControls)) & 1 << mrc.TEXT_ALIGN_HORIZONTAL);
   let _ = vK();
-  KF(!!(r || p), "TypePanel missing textAlignHorizontal");
+  debug(!!(r || p), "TypePanel missing textAlignHorizontal");
   return jsxs(bL, {
     legend: jsx(q, {
       children: _$$t("fullscreen.type_panel.align_horizontal")

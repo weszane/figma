@@ -1,4 +1,4 @@
-import { vA } from "../figma_app/465776";
+import { assert } from "../figma_app/465776";
 import { c2 } from "../905/382883";
 import { cd, _H } from "../figma_app/243058";
 import { glU, Vzr } from "../figma_app/763686";
@@ -90,7 +90,7 @@ let E = e => {
 };
 let x = Iz(e => {
   let t = E(e);
-  vA(!!t, "A valid nodeId is required for local asset thumbnail atom");
+  assert(!!t, "A valid nodeId is required for local asset thumbnail atom");
   return Wh(() => eU(null));
 }, c2);
 let S = Iz(e => eU(t => t(x(e)), (t, i, n) => {

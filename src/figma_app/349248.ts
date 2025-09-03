@@ -1,4 +1,4 @@
-import { wc } from "../figma_app/465776";
+import { throwError } from "../figma_app/465776";
 import { mW, Pg, ii, F7, q, Rf, IA, n3, ey, nK, yG, Vt } from "../905/859698";
 import { rXF, QjO } from "../figma_app/763686";
 import { sH, Hr } from "../905/871411";
@@ -315,7 +315,7 @@ export function $$G22(e) {
     case "TEXT_DATA":
       return rXF.TEXT_DATA;
     default:
-      wc(`Unhandled livegraph type: ${e}`);
+      throwError(`Unhandled livegraph type: ${e}`);
   }
 }
 function V(e, t) {
@@ -444,7 +444,7 @@ let Y = e => {
     case "LITE_TEMPLATE":
       return QjO.LITE_TEMPLATE;
     default:
-      wc(`Unhandled livegraph module source: ${e}`);
+      throwError(`Unhandled livegraph module source: ${e}`);
   }
 };
 export function $$$0(e) {

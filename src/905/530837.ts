@@ -1,4 +1,4 @@
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 var $$r2 = (e => (e.NODE = "node", e.IMAGE = "image", e.VIDEO = "video", e.PROTOTYPE = "prototype", e))($$r2 || {});
 export function $$a0(e) {
   switch (e.type) {
@@ -9,7 +9,7 @@ export function $$a0(e) {
     case "prototype":
       return !1;
     default:
-      xb(e);
+      throwTypeError(e);
   }
 }
 export function $$s1(e) {
@@ -22,7 +22,7 @@ export function $$s1(e) {
     case "prototype":
       return !1;
     default:
-      xb(e);
+      throwTypeError(e);
   }
 }
 export const Dr = $$a0;

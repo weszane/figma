@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { Qej } from "../figma_app/763686";
 import { UN } from "../905/700578";
 import { eU, zl, md, fp } from "../figma_app/27355";
@@ -401,7 +401,7 @@ function Q(e) {
     case Qej.COPY_SELECTION_TOAST:
       return "COPY_SELECTION_TOAST";
     default:
-      xb(e);
+      throwTypeError(e);
   }
 }
 function ee(e) {

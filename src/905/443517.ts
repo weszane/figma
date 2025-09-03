@@ -30,7 +30,7 @@ import { s as _$$s } from '../cssbuilder/589278';
 import { Dm } from '../figma_app/8833';
 import { fp } from '../figma_app/27355';
 import { kz } from '../figma_app/171177';
-import { KF, vA, xb } from '../figma_app/465776';
+import { debug, assert, throwTypeError } from '../figma_app/465776';
 import { Tk, ZR } from '../figma_app/575164';
 import { Q8 } from '../figma_app/604494';
 import { wC } from '../figma_app/632248';
@@ -226,7 +226,7 @@ export function $$K0(e) {
           };
           break;
         default:
-          KF(W?.type !== 'LOADING', 'Selected item while loading');
+          debug(W?.type !== 'LOADING', 'Selected item while loading');
           n[t.key] = e;
       }
     }
@@ -368,7 +368,7 @@ export function $$K0(e) {
           });
           break;
         default:
-          xb(e);
+          throwTypeError(e);
       }
       let r = e_(W.type === 'SUGGESTIONS' ? W?.suggestions ?? [] : []);
       let a = parameters[eh];
@@ -464,7 +464,7 @@ function Y({
   });
 }
 function q(e) {
-  vA(e !== null, 'We should never be in the middle state if there are no optional parameters');
+  assert(e !== null, 'We should never be in the middle state if there are no optional parameters');
 }
 function $({
   searchQuery: e,

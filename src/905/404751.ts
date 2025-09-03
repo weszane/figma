@@ -23,7 +23,7 @@ import { ZN } from "../figma_app/630077";
 import { J } from "../905/202542";
 import { W as _$$W } from "../905/522628";
 import { jsx } from "react/jsx-runtime";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { R as _$$R } from "../905/441305";
 import { Ju } from "../905/102752";
 import { DV } from "../905/739964";
@@ -83,7 +83,7 @@ let P = Ju(function (e) {
           })
         };
       default:
-        xb(type);
+        throwTypeError(type);
     }
   }(e.modalConfig, e.numFilesMoved);
   t = title ?? tx("modal.are_you_sure");

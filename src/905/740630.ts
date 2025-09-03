@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useMemo, useRef, useCallback, useState, useLayoutEffect } from "react";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { bL, l9, mc, c$, wv, YJ, WL } from "../905/493196";
 import { h as _$$h } from "../905/270045";
 import { l as _$$l } from "../905/716947";
@@ -49,7 +49,7 @@ export function $$x0({
       case _$$I.SITE_KIT:
         throw Error("asset type not supported");
       default:
-        xb(i);
+        throwTypeError(i);
     }
   }, [T, i]);
   let L = useRef(null);

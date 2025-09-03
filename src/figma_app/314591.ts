@@ -1,4 +1,4 @@
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { isNotNullish } from "../figma_app/95419";
 import { xal, v4N, Hcu, Egt, Uze, J0O, SoG } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
@@ -6,7 +6,7 @@ import { w } from "../905/5147";
 import { zS } from "../figma_app/930338";
 import { KV } from "../figma_app/952446";
 import { Fy } from "../figma_app/623300";
-import { xb as _$$xb } from "../figma_app/164212";
+import { throwTypeError } from "../figma_app/164212";
 import { E as _$$E } from "../905/142894";
 import { y as _$$y } from "../905/829723";
 import { dB, c1, SW } from "../905/589717";
@@ -722,7 +722,7 @@ class S extends _$$E {
       value: error
     }), !!propType && B_("Prop type", {
       type: "nonUserText",
-      value: _$$xb(propType)
+      value: throwTypeError(propType)
     }), !!explicitDefID && B_("Explicit def ID", {
       type: "genericGuid",
       value: c1.fromString(explicitDefID)
@@ -842,7 +842,7 @@ class S extends _$$E {
           case SoG.INVALID:
             return "Invalid";
           default:
-            xb(r);
+            throwTypeError(r);
         }
       })()
     })];

@@ -21,7 +21,7 @@ import { H as _$$H, S as _$$S2 } from "../905/348433";
 import { t as _$$t2 } from "../905/150656";
 import { m3, hx, a8, E4, bj, Tq, ej as _$$ej, p1, $_, Y7 } from "../905/66449";
 import { W as _$$W2 } from "../905/729905";
-import { vA, wc, xb } from "../figma_app/465776";
+import { assert, throwError, throwTypeError } from "../figma_app/465776";
 import { assertNotNullish, isNotNullish } from "../figma_app/95419";
 import { U as _$$U } from "../905/763676";
 import { mq, _w, Ir } from "../905/789781";
@@ -235,7 +235,7 @@ function ea({
   let {
     debouncedSearchQuery
   } = zm();
-  let u = function() {
+  let u = function () {
     let e = Um();
     let t = wA();
     return useCallback(() => {
@@ -319,7 +319,7 @@ function eo({
     return t?.subscriptionType;
   }, [e.library_key, a.data]);
   let [l, d] = _$$e(!1);
-  let c = function(e, t) {
+  let c = function (e, t) {
     let i = ol();
     let n = sv();
     let {
@@ -465,7 +465,7 @@ function eu() {
     viewLibraryDetails(i, t, n, r);
   }, [t, viewLibraryDetails]);
 }
-let eh = memo(function(e) {
+let eh = memo(function (e) {
   return jsx("svg", {
     width: "24",
     height: "24",
@@ -919,7 +919,7 @@ function eQ({
     filterOnAdded,
     toggleFilterOnAdded,
     canFilterLibraries
-  } = function(e) {
+  } = function (e) {
     let [t, i, n, a] = _$$e(!1);
     let {
       tabManager,
@@ -1014,7 +1014,7 @@ function e2() {
     draftLibraries,
     otherLibraries,
     isLoading
-  } = function() {
+  } = function () {
     let {
       workspaces: _workspaces
     } = zm();
@@ -1427,11 +1427,11 @@ function tl({
     teamsWithLibraries,
     draftLibraries,
     isLoading
-  } = function(e) {
+  } = function (e) {
     let {
       teams,
       status
-    } = function(e) {
+    } = function (e) {
       let t = LH();
       let [i, n] = useState({});
       let [a] = _$$IT(jl4({
@@ -1691,7 +1691,7 @@ function tm() {
   } = mG();
   let i = assertNotNullish(sv(), "org object should always be defined in library modal org tab");
   let r = hasEntAccess && i.workspaces_count && i.workspaces_count > 0;
-  vA(hasOrgAccess, "Org tab should not render if user does not have org access");
+  assert(hasOrgAccess, "Org tab should not render if user does not have org access");
   return jsx(ec, {
     children: r ? jsx(e2, {}) : jsx(tp, {})
   });
@@ -1785,7 +1785,7 @@ function tx() {
   });
 }
 function tS() {
-  let e = function() {
+  let e = function () {
     let {
       workspaceApprovedLibraryKeys,
       orgApprovedLibraryKeys
@@ -1909,7 +1909,7 @@ function tM({
   openFile: e,
   isPublishedLibrary: t
 }) {
-  let i = function() {
+  let i = function () {
     let e = _$$Xm();
     let t = md(y6(e));
     let i = t.productComponents.modified.wellFormed.length;
@@ -2009,7 +2009,7 @@ function tW({
     url,
     shouldCover
   } = _$$t3();
-  let o = function() {
+  let o = function () {
     let e = _G();
     let t = _$$tS();
     let i = _$$bj([assertNotNullish(e)], {
@@ -2142,8 +2142,8 @@ function t$() {
 function tZ({
   results: e
 }) {
-  !function() {
-    let e = function() {
+  !function () {
+    let e = function () {
       let {
         dismissLibraryDetails
       } = useContext(ed);
@@ -2334,7 +2334,7 @@ function il({
   });
 }
 function id() {
-  let e = function() {
+  let e = function () {
     let e = ol();
     let t = wA();
     let {
@@ -2366,7 +2366,7 @@ function id() {
       });
     }, [t, a, e, n, sessionId]);
   }();
-  let t = function() {
+  let t = function () {
     let e = ol();
     let t = _$$x();
     return useMemo(() => e && Object.values(t).some(t => t.id === e.id), [e, t]);
@@ -2402,7 +2402,7 @@ function id() {
   });
 }
 function ic() {
-  let e = function() {
+  let e = function () {
     let e = wA();
     let t = q5();
     let {
@@ -2566,7 +2566,7 @@ function ib() {
     missingLibraryKeys
   } = _$$i2();
   let c = useMemo(() => "loading" === missingLibraryKeys.status || "loading" === usedInThisFile.status ? Xm() : "loaded" !== missingLibraryKeys.status ? missingLibraryKeys : gB(missingLibraryKeys.data.length > 0), [missingLibraryKeys, usedInThisFile]);
-  !function({
+  !function ({
     subscribedLibraries: e,
     usedInThisFile: t
   }) {
@@ -2708,7 +2708,7 @@ let iJ = Iz(e => _$$eU(t => {
   let s = t(Q$);
   return i.map(e => ({
     ...e,
-    movedFromFileName: s[e.key] ? void 0 : function(e, t, i, n) {
+    movedFromFileName: s[e.key] ? void 0 : function (e, t, i, n) {
       if (e.localIdsToUpdate.some(e => i.includes(e))) return _$$t("design_systems.updates.this_file");
       for (let i of e.oldSubscribedKeysToUpdate) if (t[i] && n.includes(i)) return t[i];
     }(e, n, r, a)
@@ -2746,7 +2746,7 @@ function np({
   let {
     numOutdatedInstances,
     toggleReviewUpdatesModal
-  } = function(e) {
+  } = function (e) {
     let t = wA();
     let i = no(e);
     let n = e.type === PW.STYLE;
@@ -2768,7 +2768,7 @@ function np({
             updateStyle: e,
             updatesModalScope: i
           }
-        })) : r ? wc("individual updates not supported for variable sets") : a ? wc("individual updates not supported for modules") : xb(e, "item is neither an instance or style update");
+        })) : r ? throwError("individual updates not supported for variable sets") : a ? throwError("individual updates not supported for modules") : throwTypeError(e, "item is neither an instance or style update");
       } : null
     };
   }(e);
@@ -2983,7 +2983,7 @@ function ny({
 }) {
   SR();
   let c = _$$er();
-  let h = function() {
+  let h = function () {
     let [e, t] = fp(iz);
     let i = wA();
     let {
@@ -3011,7 +3011,7 @@ function ny({
       if (e?.refs && Bq(g, e?.refs)) return;
       t(null);
       let r = ++_.current;
-      (function({
+      (function ({
         component_keys: e,
         state_group_keys: t,
         style_keys: i,
@@ -3202,7 +3202,7 @@ function ny({
   } = E4({
     path: [m3.UpdatesSection.Footer, m3.UpdatesSectionFooter.AllPagesToggle]
   });
-  !function(e, t) {
+  !function (e, t) {
     let i = e.current === document.activeElement;
     let n = ZC(i);
     let a = _$$$2(t);
@@ -3286,7 +3286,7 @@ function nb({
     var i;
     i = p ?? aD.ALL;
     return _$$eU(n => {
-      let r = n(function(e, t) {
+      let r = n(function (e, t) {
         let i = Yy(t);
         return _$$eU(t => {
           let n = t(qp);
@@ -3296,7 +3296,7 @@ function nb({
           }));
         });
       }(t, i));
-      let a = n(function(e, t) {
+      let a = n(function (e, t) {
         let i = Bw(t);
         return _$$eU(t => {
           let n = t(qp);
@@ -3346,7 +3346,7 @@ function nb({
         let i = e.variable_set_key_to_checkpoint_id?.[t.key];
         i && g(i, t).variableSets.push(t);
       }
-      for (let t of d) if (t.type !== PW.CODE_COMPONENT) continue; else {
+      for (let t of d) if (t.type !== PW.CODE_COMPONENT) continue;else {
         let i = e.library_key_and_asset_key_to_checkpoint_id?.[t.sourceLibraryKey]?.[t.key];
         g(i, t)?.codeComponents.push(t);
       }
@@ -3512,7 +3512,7 @@ function nM() {
   }, [onFocusSearchBar]);
   let l = useRef(null);
   p1(l);
-  useEffect(function() {
+  useEffect(function () {
     let e = lo();
     let t = t => {
       "Tab" === t.key && t.target === e && l.current?.focus();
@@ -3522,7 +3522,7 @@ function nM() {
       document.removeEventListener("keydown", t);
     };
   }, []);
-  useEffect(function() {
+  useEffect(function () {
     let e = modalRef?.current?.getEl();
     if (!e) return;
     let t = e => {
@@ -3702,4 +3702,4 @@ export function $$nG0({
     })
   });
 }
-export const b = $$nG0; 
+export const b = $$nG0;

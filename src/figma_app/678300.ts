@@ -1,4 +1,4 @@
-import { KF } from "../figma_app/465776";
+import { debug } from "../figma_app/465776";
 import { hV, Si } from "../figma_app/387100";
 import { Ts } from "../905/929976";
 import { p5 } from "../figma_app/91703";
@@ -11,7 +11,7 @@ export function $$l2(e = Object.create(null), t) {
       remove,
       replace
     } = t.payload.selection;
-    if (KF(!((add || remove) && replace), "We expect either an add or remove OR a replace."), replace) return replace;
+    if (debug(!((add || remove) && replace), "We expect either an add or remove OR a replace."), replace) return replace;
     let s = Object.assign(Object.create(null), e, add);
     for (let e in remove) delete s[e];
     return s;

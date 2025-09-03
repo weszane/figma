@@ -2,7 +2,7 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { useEffect, useState, useMemo, useCallback } from "react";
 import { d4, wA } from "../vendor/514228";
 import { arraysEqual } from "../figma_app/656233";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { nj } from "../905/125019";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { NLJ, glU, Ez5, Bko } from "../figma_app/763686";
@@ -32,7 +32,7 @@ import { Yh } from "../figma_app/357047";
 import { b as _$$b } from "../905/635568";
 import { JI, Vq, pf, pc, xH, $$in, sg, Ud } from "../figma_app/942553";
 import { KT, AO } from "../figma_app/325158";
-import { j as _$$j } from "../figma_app/628249";
+import { noop } from "../figma_app/628249";
 import { qW, Jc } from "../figma_app/27927";
 import { Qc, Iw, M8, gC } from "../figma_app/368611";
 import { B as _$$B } from "../figma_app/371825";
@@ -1034,7 +1034,7 @@ let ed = nc.user("ios-native-toolbar", e => {
 function ec(e) {
   if (void 0 !== e) switch (e) {
     case pc.V3:
-      return function(e) {
+      return function (e) {
         let t = [{
           itemStringType: "tool",
           identifier: "PENCIL",
@@ -1214,7 +1214,7 @@ function ec(e) {
         };
       }(en());
     case pc.V4:
-      return function() {
+      return function () {
         let e = [{
           itemStringType: "tool",
           identifier: "PENCIL",
@@ -1428,7 +1428,7 @@ function ec(e) {
         };
       }();
     default:
-      xb(e);
+      throwTypeError(e);
   }
 }
 function eu(e, t) {
@@ -1496,7 +1496,7 @@ export function $$em6() {
       if (n) {
         let t = setTimeout(() => {
           window.FigmaMobile.nativeToolbarSupportedVersions = void 0;
-          n._native_toolbar_confirm_configuration = () => { };
+          n._native_toolbar_confirm_configuration = () => {};
           $D(_$$e.FIGJAM, Error(`Native toolbar did not confirm configuration before timeout, version ${e}`));
         }, 2e3);
         n._native_toolbar_confirm_configuration = () => {
@@ -1515,7 +1515,7 @@ export function $$em6() {
       $$el4(e);
     });
   }, [r, n, u]);
-  let _ = _$$j();
+  let _ = noop();
   useEffect(() => {
     r && n && (_$$I(a), n._native_toolbar_set_tool_color = eu, n._native_toolbar_set_tool_preset = (e, t) => {
       switch (e) {
@@ -1659,7 +1659,7 @@ export function $$eE0() {
   let d = er();
   let u = useMemo(() => {
     let e = ec(d);
-    return e ? function(e) {
+    return e ? function (e) {
       let t = h()(e.items, e => function e(t) {
         switch (t.itemStringType) {
           case "action":
@@ -1794,7 +1794,7 @@ export function $$eE0() {
     return "REACTING_OR_CHATTING" === t.type && !!t.imageUrl;
   });
   let Z = useCallback(e => {
-    if (q) CB.closeWheel(); else {
+    if (q) CB.closeWheel();else {
       let {
         viewportX,
         viewportY
@@ -1896,4 +1896,4 @@ export const pK = $$ea2;
 export const Jh = $$es3;
 export const Jm = $$el4;
 export const W6 = $$eh5;
-export const H_ = $$em6; 
+export const H_ = $$em6;

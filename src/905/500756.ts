@@ -1,5 +1,5 @@
 import { jsx } from "react/jsx-runtime";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { isNotNullish, isNullish } from "../figma_app/95419";
 import { aD } from "../905/125019";
 import { $ } from "../905/953280";
@@ -126,7 +126,7 @@ export function $$x1({
         children: jsx(_$$I, {})
       });
     default:
-      xb(e);
+      throwTypeError(e);
   }
 }
 export const gF = $$E0;

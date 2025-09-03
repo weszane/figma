@@ -47,7 +47,7 @@ import { Ro } from "../figma_app/805373";
 import { H as _$$H2 } from "../905/209153";
 import { H as _$$H3 } from "../1577/640070";
 import { UC, zr, AS } from "../figma_app/50271";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { sx, az } from "../905/449184";
 import { x1 } from "../905/714362";
 import { p as _$$p } from "../figma_app/941287";
@@ -477,7 +477,7 @@ function ej(e) {
   if ("today" !== a && "new" !== a) {
     let e = new Date(createdAt);
     let i = {};
-    i = !function(e) {
+    i = !function (e) {
       let t = new Date();
       t.setDate(t.getDate() - 365);
       return e >= t;
@@ -642,7 +642,7 @@ function eL(e) {
           currentView: i
         });
       default:
-        xb(t);
+        throwTypeError(t);
     }
   };
   let A = (t, i, a) => {
@@ -1029,7 +1029,7 @@ function eW(e, t) {
       children: eI[e.notificationPriorityGroup]
     }) : null;
   }
-  e.Feed = function(e) {
+  e.Feed = function (e) {
     let a = Pc();
     let l = d4(e => a ? e.authedUsers.byId[a.id]?.plans : null);
     let s = Pj();
@@ -1081,7 +1081,7 @@ function eW(e, t) {
       if (!_$$eD && r) d(_$$H({
         params: n.searchParams.toString(),
         hash: n.hash
-      })); else if (t.deeplink.use_unsafe) Ay.unsafeRedirect(n.href, _$$eD ? void 0 : "_blank"); else if (e.inDesktopTray) Ay.redirect(n.href); else try {
+      }));else if (t.deeplink.use_unsafe) Ay.unsafeRedirect(n.href, _$$eD ? void 0 : "_blank");else if (e.inDesktopTray) Ay.redirect(n.href);else try {
         let e = vU(s.getState(), o);
         if ("teamFeed" === e.view) {
           m && t.plan?.id.toString() === m.id ? d(sf(e)) : Ay.redirect(n.href, _$$eD ? void 0 : "_blank");
@@ -1153,10 +1153,10 @@ function eW(e, t) {
       });
     }
   };
-  e.UnreadBar = function(e) {
+  e.UnreadBar = function (e) {
     return eW(e.isFetchingNotifications, e.notifications) ? jsxs("div", {
       className: "user_notifications_dropdown--unreadToggleBar---1U5q",
-      children: [function(e) {
+      children: [function (e) {
         let t = e.reduce((e, t) => e + Number(t.is_unread), 0);
         return jsx("div", {
           className: "user_notifications_dropdown--unread--e14XU",
@@ -1173,7 +1173,7 @@ function eW(e, t) {
   };
   e.DateHeader = t;
   e.PriorityHeader = i;
-  e.Header = function(e) {
+  e.Header = function (e) {
     let t = q5();
     let i = !e.inDesktopTray && (!!t || !!getFeatureFlags().notif_settings_button);
     return jsxs("div", {
@@ -1190,7 +1190,7 @@ function eW(e, t) {
       }), e.children]
     });
   };
-  e.FilterToggle = function(e) {
+  e.FilterToggle = function (e) {
     let t = jsxs(_$$t.TabStrip, {
       manager: e.tabManager,
       children: [jsx(_$$t.Tab, {
@@ -1198,7 +1198,7 @@ function eW(e, t) {
         children: _$$t2("user_notification.all")
       }), jsx(_$$t.Tab, {
         ...e.tabPropsMap.priority,
-        children: function(e) {
+        children: function (e) {
           let t = e.reduce((e, t) => e + Number(eT(t)), 0);
           return 0 === t ? _$$t2("user_notifications.requests_empty") : _$$t2("user_notifications.requests_toggle_count", {
             actionableCount: t
@@ -1206,7 +1206,7 @@ function eW(e, t) {
         }(e.notifications)
       }), jsx(_$$t.Tab, {
         ...e.tabPropsMap.unread,
-        children: function(e) {
+        children: function (e) {
           let t = e.reduce((e, t) => e + Number(t.is_unread), 0);
           return 0 === t ? _$$t2("user_notifications.unread_empty") : _$$t2("user_notifications.unread_toggle_count", {
             unreadCount: t
@@ -1228,4 +1228,4 @@ export const IP = $$eX0;
 export const fd = $$a1;
 export const he = $$eJ2;
 export const e8 = $$eK3;
-export const ql = $$eY4; 
+export const ql = $$eY4;

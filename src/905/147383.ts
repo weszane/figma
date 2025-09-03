@@ -1,4 +1,4 @@
-import { vA } from "../figma_app/465776";
+import { assert } from "../figma_app/465776";
 import { Iz, E2, eU, zl } from "../figma_app/27355";
 import { Qw } from "../905/989992";
 import { TQ, x4 } from "../905/657224";
@@ -26,7 +26,7 @@ let g = Iz(e => E2(h(e), m() && TQ() ? null : u, p, {
 }));
 export class $$f0 {
   constructor(e) {
-    vA(!!e.localStorageName);
+    assert(!!e.localStorageName);
     this.lifecycle = e;
     this.baseAtom = g(this.lifecycle.localStorageName);
   }

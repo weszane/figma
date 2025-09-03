@@ -1,4 +1,4 @@
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { xH, Uz } from "../905/63728";
 import { Ay } from "../figma_app/778880";
 function s(e) {
@@ -12,7 +12,7 @@ function s(e) {
     case xH.META:
       return Ay.mac ? "\u2318" : "Ctrl";
     default:
-      xb(e);
+      throwTypeError(e);
   }
 }
 export function $$o0(e) {
@@ -138,7 +138,7 @@ export function $$o0(e) {
       case Uz.NUMPAD_9:
         return "9";
       default:
-        xb(e);
+        throwTypeError(e);
     }
   }(key);
   return `${a}${o}`;

@@ -46,7 +46,7 @@ import { N as _$$N } from "../figma_app/268271";
 import { R as _$$R } from "../905/298004";
 import { rq } from "../905/425180";
 import { Ql8, YHe } from "../figma_app/6204";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { Rs } from "../figma_app/288654";
 import { A as _$$A2 } from "../905/956262";
 import { dq } from "../905/845253";
@@ -105,7 +105,7 @@ import { V as _$$V } from "../figma_app/312987";
 import { n as _$$n } from "../4452/511872";
 import { am } from "../4452/575555";
 import { _6 } from "../figma_app/386952";
-import { j as _$$j } from "../905/834956";
+import { noop } from "../905/834956";
 import { hP, cE, $u, ld } from "../figma_app/527041";
 import { A as _$$A3 } from "../6828/493300";
 import t_ from "../vendor/239910";
@@ -250,7 +250,7 @@ function eu(e) {
         userFlagOnShow: eo
       });
     default:
-      xb(step);
+      throwTypeError(step);
   }
 }
 let eV = Ju(function ({
@@ -1047,7 +1047,7 @@ function tc({
     children: [jsx(_$$B, {
       svg: _$$A3,
       className: "paginated_teams_table--menuIcon--tIIAY admin_settings_page--menuIcon--EE6RZ"
-    }), z && t && t?.data?.targetRect && jsx(_$$j, {
+    }), z && t && t?.data?.targetRect && jsx(noop, {
       showPoint: !1,
       items: V,
       onSelectItem: e => {

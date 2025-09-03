@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useEffect, useCallback } from "react";
-import { xb } from "../figma_app/465776";
+import { throwTypeError } from "../figma_app/465776";
 import { _ as _$$_ } from "../905/862468";
 import { k as _$$k } from "../905/727631";
 import { uQ6, glU } from "../figma_app/763686";
@@ -316,7 +316,7 @@ export function $$D0(e) {
     case qy.CANCELLED:
       return jsx(Fragment, {});
     default:
-      xb(state);
+      throwTypeError(state);
   }
 }
 export const A = $$D0;
