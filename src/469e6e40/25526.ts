@@ -156,7 +156,7 @@ import { sx as _$$sx2 } from "../905/941192";
 import { V as _$$V2, $ as _$$$ } from "../905/355181";
 import { R as _$$R2 } from "../7021/67076";
 import { S as _$$S3 } from "../469e6e40/885592";
-import { Qw } from "../905/989992";
+import { resourceUtils } from "../905/989992";
 import { aO as _$$aO } from "../figma_app/109538";
 import { h as _$$h2, a as _$$a } from "../469e6e40/313497";
 import { hY } from "../figma_app/80683";
@@ -2551,7 +2551,7 @@ function a3(e) {
   let d = useMemo(() => a ? o.transform(e => ({
     split: "none",
     data: e
-  })) : Qw.loadedSuspendable({
+  })) : resourceUtils.loadedSuspendable({
     split: "none",
     data: Ye.dict(() => ({
       assigned: 0,

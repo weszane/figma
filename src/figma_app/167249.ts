@@ -1,7 +1,7 @@
 import { D } from "../905/347702";
 import { useRef, useCallback, useSyncExternalStore, useState, useEffect } from "react";
 import { M, L } from "../905/151578";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { hk } from "../figma_app/632319";
 export function $$l1(e, ...t) {
@@ -26,12 +26,12 @@ export function $$u6(e, ...t) {
   }, e, ...t);
 }
 function p(e, t, ...r) {
-  let s = useRef(new M(UN(), t, e));
+  let s = useRef(new M(getSingletonSceneGraph(), t, e));
   let o = useCallback(() => s.current.readValue(...r), [s, ...r]);
   return useSyncExternalStore(e => s.current.subscribe(e), o);
 }
 export let $$_5 = D((e, ...t) => {
-  let r = useRef(new L(UN(), e));
+  let r = useRef(new L(getSingletonSceneGraph(), e));
   let [s, o] = useState(() => r.current.readValue(...t));
   useEffect(() => {
     let e = r.current.readValue(...t);

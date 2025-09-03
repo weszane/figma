@@ -1,6 +1,6 @@
 import _require from "../2824/40443";
 import { l7 } from "../905/189185";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { eU, zl } from "../figma_app/27355";
 import o from "lodash-es/snakeCase";
@@ -129,7 +129,7 @@ async function b(e, t) {
   URL.revokeObjectURL(n);
 }
 export async function $$v1(e) {
-  let t = UN().getCurrentPage().childrenNodes.filter(e => "SECTION" === e.type);
+  let t = getSingletonSceneGraph().getCurrentPage().childrenNodes.filter(e => "SECTION" === e.type);
   if (0 === t.length) {
     e(F.enqueue({
       message: "No top-level sections found.",

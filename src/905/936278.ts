@@ -1,6 +1,6 @@
 import { useMemo, useState, useRef, useCallback, useEffect } from "react";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { AW, sN } from "../figma_app/191804";
 import { hC } from "../figma_app/901889";
 import { $D } from "../905/11";
@@ -8,8 +8,8 @@ import { Lg } from "../figma_app/257275";
 import { sb, bn } from "../figma_app/385874";
 import { Fk } from "../figma_app/167249";
 import { X7 } from "../905/713167";
-var $$m2 = ((e) => (e.LOADING = "LOADING", e.LOADED = "LOADED", e.TIMED_OUT = "TIMED_OUT", e))($$m2 || {});
-var $$h3 = ((e) => (e.TextInBackground = "TextInBackground", e.VideoInBackground = "VideoInBackground", e.ImageInBackground = "ImageInBackground", e.GradientInBackground = "GradientInBackground", e.BlendModeInBackground = "BlendModeInBackground", e.BlendModeInForeground = "BlendModeInForeground", e.MixedBackgrounds = "MixedBackgrounds", e.MixedStandards = "MixedStandards", e.Unavailable = "Unavailable", e))($$h3 || {});
+var $$m2 = (e => (e.LOADING = "LOADING", e.LOADED = "LOADED", e.TIMED_OUT = "TIMED_OUT", e))($$m2 || {});
+var $$h3 = (e => (e.TextInBackground = "TextInBackground", e.VideoInBackground = "VideoInBackground", e.ImageInBackground = "ImageInBackground", e.GradientInBackground = "GradientInBackground", e.BlendModeInBackground = "BlendModeInBackground", e.BlendModeInForeground = "BlendModeInForeground", e.MixedBackgrounds = "MixedBackgrounds", e.MixedStandards = "MixedStandards", e.Unavailable = "Unavailable", e))($$h3 || {});
 function g(e) {
   return {
     x: e.x,
@@ -40,7 +40,7 @@ export function $$_4(e, t, i) {
   } = function e(t, i, n) {
     let r = [];
     let s = !1;
-    let o = UN().get(t);
+    let o = getSingletonSceneGraph().get(t);
     if (!o) return {
       nodes: r,
       stopSearching: !0
@@ -81,7 +81,7 @@ export function $$A0(e, t, i, r) {
         unavailableReason: void 0
       };
       if (!r || !t || 0 === e.length) {
-        i((e) => "TIMED_OUT" === e ? e : "LOADED");
+        i(e => "TIMED_OUT" === e ? e : "LOADED");
         return {
           blendedBackground: void 0,
           unavailableReason: "Unavailable"
@@ -114,8 +114,8 @@ export function $$A0(e, t, i, r) {
       };
     }, [r, t, e, a, i]);
   }(function (e, t, i, r) {
-    let a = Fk((e, t) => t.map((t) => e.get(t)?.absoluteBoundingBox), e);
-    let s = Fk((e) => e.getCurrentPage()?.guid);
+    let a = Fk((e, t) => t.map(t => e.get(t)?.absoluteBoundingBox), e);
+    let s = Fk(e => e.getCurrentPage()?.guid);
     let l = hC();
     let c = !Lg() && e.length > 1;
     let p = useMemo(() => {
@@ -133,7 +133,7 @@ export function $$A0(e, t, i, r) {
     let [m, h] = useState(void 0);
     let g = useRef(!1);
     let f = useRef(0);
-    let A = useCallback((t, n) => new Promise((o) => {
+    let A = useCallback((t, n) => new Promise(o => {
       if (!a.length) {
         h([]);
         o();
@@ -253,8 +253,8 @@ export function $$y1(e) {
   }
   return {
     blendedBackground: function (e) {
-      let t = e.map((e) => {
-        let t = e.filter((e) => sb(e.type)).filter((e) => e.visible).map((e) => e.opacity && e.color ? {
+      let t = e.map(e => {
+        let t = e.filter(e => sb(e.type)).filter(e => e.visible).map(e => e.opacity && e.color ? {
           ...e,
           color: {
             ...e.color,
@@ -262,7 +262,7 @@ export function $$y1(e) {
           }
         } : e);
         return AW(t);
-      }).filter((e) => void 0 !== e).reverse();
+      }).filter(e => void 0 !== e).reverse();
       if (0 !== t.length) return sN(...t);
     }(n)
   };

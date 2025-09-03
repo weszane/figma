@@ -5,7 +5,7 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import { CNR, glU, qmM } from "../figma_app/763686";
 import { l7 } from "../905/189185";
 import { s as _$$s } from "../905/583953";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { md } from "../figma_app/27355";
 import { sx } from "../905/449184";
 import { $D } from "../905/11";
@@ -31,7 +31,7 @@ import { n as _$$n } from "../905/347702";
 import { X } from "../905/123783";
 let D = _$$n((e, t, i, n) => {
   let r = e.childrenNodes[0];
-  let a = i && UN().get(i);
+  let a = i && getSingletonSceneGraph().get(i);
   if (a) {
     a.appendChild(r);
     let e = CNR.slideWidth() - r.size.x / 2;
@@ -75,9 +75,9 @@ export function $$L0(e, t) {
       let s = e === G4.FIGMAKE;
       let m = await _$$g(n, B ?? void 0);
       l7.user("Fragment search: insert suggestion", () => {
-        let e = UN().createNode("FRAME");
+        let e = getSingletonSceneGraph().createNode("FRAME");
         if (e.stackMode = "VERTICAL", e.stackPrimarySizing = "RESIZE_TO_FIT_WITH_IMPLICIT_SIZE", e.stackCounterSizing = "RESIZE_TO_FIT_WITH_IMPLICIT_SIZE", e.size = new Point(n.width, n.height), s) {
-          let r = UN().getInternalCanvas();
+          let r = getSingletonSceneGraph().getInternalCanvas();
           if (r) r.appendChild(e);else throw Error("Internal canvas not found");
           if (!_$$o(n.node_id, m, e.guid)) {
             e.removeSelfAndChildren();
@@ -94,7 +94,7 @@ export function $$L0(e, t) {
           ...e.relativeTransform,
           m02: a.x,
           m12: a.y
-        }, UN().getCurrentPage().appendChild(e)) : qmM.insertNodeAtPoint(U, e.guid, r, a), !_$$o(n.node_id, m, e.guid)) {
+        }, getSingletonSceneGraph().getCurrentPage().appendChild(e)) : qmM.insertNodeAtPoint(U, e.guid, r, a), !_$$o(n.node_id, m, e.guid)) {
           e.removeSelfAndChildren();
           return Error("Couldn't paste suggestion");
         }

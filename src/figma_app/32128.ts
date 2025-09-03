@@ -1,202 +1,195 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
-import { Z } from '../905/116724'
-import { s as _$$s } from '../905/139639'
-import { l7 } from '../905/189185'
-import { F as _$$F2 } from '../905/302958'
-import { t as _$$t } from '../905/303541'
-import { sx } from '../905/449184'
-import { YQ } from '../905/502364'
-import { F as _$$F } from '../905/680873'
-import { UN } from '../905/700578'
-import { eU, fp, Iz } from '../figma_app/27355'
-import { ZC } from '../figma_app/39751'
-import { ut } from '../figma_app/84367'
-import { L3 } from '../figma_app/385215'
-import { Y5 } from '../figma_app/455680'
-import { Wh } from '../figma_app/615482'
-import { p8 } from '../figma_app/722362'
-import { dP, UK } from '../figma_app/740163'
-import { i as _$$i, BH, hq } from '../figma_app/741237'
-import { Ez5, lyf, xae, xc1 } from '../figma_app/763686'
-import { tu } from '../figma_app/779249'
-import { parseMsNumber } from '../figma_app/783094'
-import { d as _$$d, W as _$$W } from '../figma_app/833988'
-import { R } from '../figma_app/941983'
-import { U } from '../figma_app/964810'
-import { d4, wA } from '../vendor/514228'
-
-let $$w4 = 240
-let $$O10 = 500
-let $$R14 = 240
-let $$L13 = 280
-let $$P6 = 350
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { Z } from '../905/116724';
+import { s as _$$s } from '../905/139639';
+import { l7 } from '../905/189185';
+import { F as _$$F2 } from '../905/302958';
+import { t as _$$t } from '../905/303541';
+import { sx } from '../905/449184';
+import { YQ } from '../905/502364';
+import { F as _$$F } from '../905/680873';
+import { getSingletonSceneGraph } from '../905/700578';
+import { eU, fp, Iz } from '../figma_app/27355';
+import { ZC } from '../figma_app/39751';
+import { ut } from '../figma_app/84367';
+import { L3 } from '../figma_app/385215';
+import { Y5 } from '../figma_app/455680';
+import { Wh } from '../figma_app/615482';
+import { p8 } from '../figma_app/722362';
+import { dP, UK } from '../figma_app/740163';
+import { i as _$$i, BH, hq } from '../figma_app/741237';
+import { Ez5, lyf, xae, xc1 } from '../figma_app/763686';
+import { tu } from '../figma_app/779249';
+import { parseMsNumber } from '../figma_app/783094';
+import { d as _$$d, W as _$$W } from '../figma_app/833988';
+import { R } from '../figma_app/941983';
+import { U } from '../figma_app/964810';
+import { d4, wA } from '../vendor/514228';
+let $$w4 = 240;
+let $$O10 = 500;
+let $$R14 = 240;
+let $$L13 = 280;
+let $$P6 = 350;
 export function $$D1(e) {
-  return e.reduce((e, t, r) => (e[t.nodeId] = r, e), {})
+  return e.reduce((e, t, r) => (e[t.nodeId] = r, e), {});
 }
 export function $$k0(e = $$w4, t = $$O10) {
-  return F(dP(), e, t)
+  return F(dP(), e, t);
 }
 export function $$M16(e, t, r) {
-  let n = F(e, t, r)
-  document.documentElement.style.setProperty('--left-panel-width', `${n}px`)
-  UK().sidebarSplitPosition.set(n)
+  let n = F(e, t, r);
+  document.documentElement.style.setProperty('--left-panel-width', `${n}px`);
+  UK().sidebarSplitPosition.set(n);
 }
 function F(e, t, r) {
-  return Math.max(t, Math.min(r, e || 0))
+  return Math.max(t, Math.min(r, e || 0));
 }
 export function $$j3() {
-  ut(Ez5?.editorPreferences()?.showSidebar, R.showSidebar)
-  return ut(Ez5?.uiState()?.leftPanelCollapsedUI3, !R.showSidebar)
+  ut(Ez5?.editorPreferences()?.showSidebar, R.showSidebar);
+  return ut(Ez5?.uiState()?.leftPanelCollapsedUI3, !R.showSidebar);
 }
 export function $$U9() {
-  return useMemo(() => parseMsNumber(getComputedStyle(document.body).getPropertyValue('--duration-md')) / 1e3, [])
+  return useMemo(() => parseMsNumber(getComputedStyle(document.body).getPropertyValue('--duration-md')) / 1e3, []);
 }
 export function $$B11({
-  onLeftPanelCollapsedChange: e,
+  onLeftPanelCollapsedChange: e
 }) {
-  !(function (e) {
-    let t = $$j3()
-    let r = ZC(t)
-    let i = p8('showUi')
-    let a = ZC(i)
+  !function (e) {
+    let t = $$j3();
+    let r = ZC(t);
+    let i = p8('showUi');
+    let a = ZC(i);
     let s = Z(() => {
-      e(t)
-    })
+      e(t);
+    });
     useEffect(() => {
-      void 0 !== r && t !== r && s.start(10)
-      void 0 !== a && i !== a && s.start(1)
-    })
-  }(e))
-  return null
+      void 0 !== r && t !== r && s.start(10);
+      void 0 !== a && i !== a && s.start(1);
+    });
+  }(e);
+  return null;
 }
 export function $$G7() {
-  !(function (e) {
-    let t = $$j3()
-    let r = ZC(e)
-    let i = useRef()
+  !function (e) {
+    let t = $$j3();
+    let r = ZC(e);
+    let i = useRef();
     useEffect(() => {
-      e !== r && void 0 !== r && (e
-        ? t
-          ? i.current = !1
-          : (Y5.triggerAction('toggle-sidebar', {
-              source: 'spotlight-following',
-            }), i.current = !0)
-        : i.current && t && Y5.triggerAction('toggle-sidebar', {
-          source: 'spotlight-following',
-        }))
-    }, [e, r, t])
-  }(d4(e => L3(e.multiplayer))))
+      e !== r && void 0 !== r && (e ? t ? i.current = !1 : (Y5.triggerAction('toggle-sidebar', {
+        source: 'spotlight-following'
+      }), i.current = !0) : i.current && t && Y5.triggerAction('toggle-sidebar', {
+        source: 'spotlight-following'
+      }));
+    }, [e, r, t]);
+  }(d4(e => L3(e.multiplayer)));
 }
 export function $$V8() {
-  return d4(e => e.mirror.appModel.isReadOnly || e.mirror.appModel.topLevelMode === lyf.HISTORY)
+  return d4(e => e.mirror.appModel.isReadOnly || e.mirror.appModel.topLevelMode === lyf.HISTORY);
 }
 export function $$H12() {
-  return p8('pagesList')
+  return p8('pagesList');
 }
 export function $$z2() {
-  let [e, t] = useState(null)
-  let r = _$$F(e)
-  let l = U()
-  let d = $$V8()
-  let c = d4(e => e.openFile ? e.leftPanel.activeTab : xae.LAYERS)
-  let p = _$$F(c)
-  let _ = wA()
+  let [e, t] = useState(null);
+  let r = _$$F(e);
+  let l = U();
+  let d = $$V8();
+  let c = d4(e => e.openFile ? e.leftPanel.activeTab : xae.LAYERS);
+  let p = _$$F(c);
+  let _ = wA();
   let {
-    setIsLayersOpen,
-  } = $$K15()
-  let y = _$$W()
-  let T = _$$s()
-  let I = useCallback((e) => {
-    if (d)
-      return
-    let r = UN().get(e)
+    setIsLayersOpen
+  } = $$K15();
+  let y = _$$W();
+  let T = _$$s();
+  let I = useCallback(e => {
+    if (d) return;
+    let r = getSingletonSceneGraph().get(e);
     if (r?.isResponsiveSetOrWebpage && r.parentNode?.defaultResponsiveSetId === e) {
       _(_$$F2.enqueue({
-        message: _$$t('sites.panel.pages_panel.cant_rename_default_responsive_set'),
-      }))
-      return
+        message: _$$t('sites.panel.pages_panel.cant_rename_default_responsive_set')
+      }));
+      return;
     }
-    !r?.isReactFiber && (p.current !== xae.LAYERS && p.current !== xae.CODE && l.showLayersPanel(), setIsLayersOpen(!0), t(e), r?.parentGuid && hq(r.parentGuid))
-  }, [p, _, d, l, setIsLayersOpen])
+    !r?.isReactFiber && (p.current !== xae.LAYERS && p.current !== xae.CODE && l.showLayersPanel(), setIsLayersOpen(!0), t(e), r?.parentGuid && hq(r.parentGuid));
+  }, [p, _, d, l, setIsLayersOpen]);
   let S = useCallback((e, n, i) => {
-    if (d)
-      return
-    let l = r.current
+    if (d) return;
+    let l = r.current;
     if (l && e) {
-      let e = UN().get(l)
-      let t = n || ''
-      let r = Ez5.uiState().focusModeState.getCopy()
-      e?.isCodeFile ? (t = tu(t), (!n || T(e.codeFilePath, i, t)) && (t = e.name), l7.user('set-node-name', () => _$$i(l, t))) : e?.isResponsiveSetOrWebpage || e?.isBreakpointFrame || e?.isDerivedWebpageBreakpoint ? (t ||= e?.name, l7.user('set-node-name', () => _$$i(l, t))) : xc1.RESPONSIVE_SET === r || xc1.COMPONENT_SET === r ? l7.user('set-node-name', () => BH(t)) : l7.user('set-node-name', () => _$$i(l, t))
-      Y5.commit()
+      let e = getSingletonSceneGraph().get(l);
+      let t = n || '';
+      let r = Ez5.uiState().focusModeState.getCopy();
+      e?.isCodeFile ? (t = tu(t), (!n || T(e.codeFilePath, i, t)) && (t = e.name), l7.user('set-node-name', () => _$$i(l, t))) : e?.isResponsiveSetOrWebpage || e?.isBreakpointFrame || e?.isDerivedWebpageBreakpoint ? (t ||= e?.name, l7.user('set-node-name', () => _$$i(l, t))) : xc1.RESPONSIVE_SET === r || xc1.COMPONENT_SET === r ? l7.user('set-node-name', () => BH(t)) : l7.user('set-node-name', () => _$$i(l, t));
+      Y5.commit();
       t !== i && e?.type && ['FRAME', 'SECTION'].includes(e.type) && (y({
         newTitle: t,
-        nodeType: e.type,
+        nodeType: e.type
       }), e.type === 'FRAME' && _$$d(t).length > 0 && YQ({
         id: 'frame_node_name_changed_with_rfd_indicator',
         properties: {
-          nodeId: l,
-        },
-      }))
+          nodeId: l
+        }
+      }));
     }
-    t(null)
-  }, [d, r, y, T])
+    t(null);
+  }, [d, r, y, T]);
   useEffect(() => {
     let e = ({
-      nodeId: e,
+      nodeId: e
     }) => {
-      I(e)
-    }
-    Y5.fromFullscreen.on('startRenamingNode', e)
+      I(e);
+    };
+    Y5.fromFullscreen.on('startRenamingNode', e);
     return () => {
-      Y5.fromFullscreen.removeListener('startRenamingNode', e)
-    }
-  }, [I])
+      Y5.fromFullscreen.removeListener('startRenamingNode', e);
+    };
+  }, [I]);
   return useMemo(() => ({
     renamingNodeGuid: e,
     startRenamingNode: I,
-    stopRenamingNode: S,
-  }), [e, I, S])
+    stopRenamingNode: S
+  }), [e, I, S]);
 }
-let W = Iz(e => Wh(() => eU(e)))
+let W = Iz(e => Wh(() => eU(e)));
 export function $$K15() {
-  let [e, t] = fp(W(!0))
-  let r = _$$F(e)
+  let [e, t] = fp(W(!0));
+  let r = _$$F(e);
   let i = useCallback(() => {
-    let e = !r.current
+    let e = !r.current;
     sx('objects_panel_open_toggle', {
-      isLayersOpen: e,
-    })
-    t(e)
-  }, [r, t])
+      isLayersOpen: e
+    });
+    t(e);
+  }, [r, t]);
   return {
     isLayersOpen: e,
     setIsLayersOpen: t,
-    toggleLayersAction: i,
-  }
+    toggleLayersAction: i
+  };
 }
 export function $$Y5() {
-  let e = U()
+  let e = U();
   return useCallback(() => {
-    e.showLayersPanel()
+    e.showLayersPanel();
     Y5.triggerAction('canvas-search', {
-      source: 'toolbar',
-    })
-  }, [e])
+      source: 'toolbar'
+    });
+  }, [e]);
 }
-export const GQ = $$k0
-export const Pe = $$D1
-export const TU = $$z2
-export const Ye = $$j3
-export const Yh = $$w4
-export const _4 = $$Y5
-export const bQ = $$P6
-export const bi = $$G7
-export const cT = $$V8
-export const dc = $$U9
-export const g_ = $$O10
-export const jq = $$B11
-export const n0 = $$H12
-export const nJ = $$L13
-export const qm = $$R14
-export const vr = $$K15
-export const xT = $$M16
+export const GQ = $$k0;
+export const Pe = $$D1;
+export const TU = $$z2;
+export const Ye = $$j3;
+export const Yh = $$w4;
+export const _4 = $$Y5;
+export const bQ = $$P6;
+export const bi = $$G7;
+export const cT = $$V8;
+export const dc = $$U9;
+export const g_ = $$O10;
+export const jq = $$B11;
+export const n0 = $$H12;
+export const nJ = $$L13;
+export const qm = $$R14;
+export const vr = $$K15;
+export const xT = $$M16;

@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { useCallback } from "react";
 import { throwTypeError } from "../figma_app/465776";
 import { g as _$$g } from "../9410/995605";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { zl } from "../figma_app/27355";
 import { tx } from "../905/303541";
 import { on } from "../figma_app/456871";
@@ -49,7 +49,7 @@ let $$S0 = async ({
       excludeLockedNodes: !0
     }),
     parameters: null,
-    selection: UN().getCurrentPage()?.directlySelectedNodes ?? [],
+    selection: getSingletonSceneGraph().getCurrentPage()?.directlySelectedNodes ?? [],
     activeNodes: a
   };
   zl.set(DZ, null);

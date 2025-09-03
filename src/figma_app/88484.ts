@@ -1,6 +1,6 @@
 import { useEffect, useMemo } from "react";
 import { wA, d4 } from "../vendor/514228";
-import { Qw } from "../905/989992";
+import { resourceUtils } from "../905/989992";
 import { debugState } from "../905/407919";
 import { WB } from "../905/761735";
 import { uo } from "../figma_app/78808";
@@ -53,9 +53,9 @@ export async function $$I1(e) {
   OH("File RecentFiles Removed", t);
   await a;
 }
-export let $$S3 = function() {
+export let $$S3 = function () {
   let e = wA();
-  useEffect(() => function(e) {
+  useEffect(() => function (e) {
     b.getRecentPrototypes({
       isGlobal: !0,
       includeRepo: !0
@@ -73,12 +73,12 @@ export let $$S3 = function() {
       e(_$$uo({
         repos: recent_prototype_repos
       }));
-    }).catch(e => { });
+    }).catch(e => {});
   }(e), [e]);
   let t = d4(e => e.recentPrototypes);
   return useMemo(() => {
     let e = t.filter(e => !e.trashed);
-    return Qw.from({
+    return resourceUtils.from({
       status: "loaded",
       data: e,
       errors: []
@@ -113,4 +113,4 @@ export function $$A0(e) {
 export const Wn = $$A0;
 export const yN = $$I1;
 export const ql = $$v2;
-export const O8 = $$S3; 
+export const O8 = $$S3;

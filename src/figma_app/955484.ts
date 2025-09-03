@@ -6,7 +6,7 @@ import { s as _$$s } from "../905/403855";
 import { r as _$$r } from "../905/619088";
 import { Ez5, w3z, Pt4 } from "../figma_app/763686";
 import { l7 } from "../905/189185";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { eU, zl, md } from "../figma_app/27355";
 import h from "classnames";
@@ -178,7 +178,7 @@ function K({
   return i || e ? jsx(_$$E, {
     actionOnPointerDown: !0,
     onClick: () => {
-      let e = UN().get(t);
+      let e = getSingletonSceneGraph().get(t);
       e && l7.user("set-locked-in-dev-mode", () => {
         e.isLockedInDevMode = !e.isLockedInDevMode;
         let t = debugState.getState();

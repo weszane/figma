@@ -3,10 +3,10 @@ import { wA } from "../vendor/514228";
 import { Ez5, zMY, zkO, QjO } from "../figma_app/763686";
 import { l7, nc } from "../905/189185";
 import { l as _$$l } from "../905/716947";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { md, Xr, fp } from "../figma_app/27355";
-import { Qw, H as _$$H } from "../905/989992";
+import { resourceUtils, LOADING_STATUS } from "../905/989992";
 import { Vc } from "../905/657224";
 import E from "../vendor/116389";
 import { A as _$$A } from "../vendor/850789";
@@ -54,7 +54,7 @@ export function $$G1(e) {
     return t || r;
   }(e);
   return useCallback(() => {
-    let _ = UN().get(e);
+    let _ = getSingletonSceneGraph().get(e);
     l7.system("slides-remove-source-library-key", () => {
       _ && (_.sourceLibraryKey = _$$l(""));
       t === r && Ez5?.slideThemeLibBindings().setDocumentTemplateLibraryKey(_$$l(""));
@@ -95,18 +95,18 @@ let Q = (e, t) => {
 export function $$X5(e) {
   let t = uW(new Set(f()([e])), QjO.SLIDES_TEMPLATE);
   return useMemo(() => {
-    if (!e) return Qw.loaded([]);
-    if (t.status === _$$H.LOADING) return Qw.loading();
+    if (!e) return resourceUtils.loaded([]);
+    if (t.status === LOADING_STATUS.LOADING) return resourceUtils.loading();
     let r = t.data;
-    if (!r) return Qw.loaded([]);
+    if (!r) return resourceUtils.loaded([]);
     let _ = (r[e] || []).sort(Q);
-    return Qw.loaded(_);
+    return resourceUtils.loaded(_);
   }, [t.status, t.data, e]);
 }
 export function $$$11(e) {
   let t = $$X5(e);
   return useMemo(() => {
-    if (t.status !== _$$H.LOADING) return f()((t.data ?? []).map(e => e.thumbnail_url));
+    if (t.status !== LOADING_STATUS.LOADING) return f()((t.data ?? []).map(e => e.thumbnail_url));
   }, [t.status, t.data]);
 }
 export function $$J7() {

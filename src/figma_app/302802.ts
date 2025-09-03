@@ -7,7 +7,7 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import { glU, Ws0, mNT, Nfd, Ez5, K$p, mSn } from "../figma_app/763686";
 import { Tq, _H } from "../figma_app/243058";
 import { l7 } from "../905/189185";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { eU, zl, fp, md, Xr } from "../figma_app/27355";
 import { debugState } from "../905/407919";
 import { $D } from "../905/11";
@@ -31,7 +31,7 @@ import { E as _$$E } from "../figma_app/626557";
 import { VF } from "../figma_app/251814";
 import { cu } from "../figma_app/139865";
 import { wh, UM, Zr, ZY } from "../figma_app/114522";
-var $$M0 = ((e) => (e.BUILD = "build", e.RUNTIME = "runtime", e))($$M0 || {});
+var $$M0 = (e => (e.BUILD = "build", e.RUNTIME = "runtime", e))($$M0 || {});
 let F = Wh(() => eU([]));
 let j = eU(null);
 export function $$U2() {
@@ -49,7 +49,7 @@ export function $$B13() {
 }
 export function $$G4(e) {
   let t = md(Mk[PW.CODE_COMPONENT].local);
-  return e?.isCodeFile ? Object.values(t).filter((t) => t.exportedFromCodeFileId === Tq.fromLocalNodeIdObj(e)).sort((e, t) => "default" === e.codeExportName ? -1 : "default" === t.codeExportName ? 1 : e.name.localeCompare(t.name)) : [];
+  return e?.isCodeFile ? Object.values(t).filter(t => t.exportedFromCodeFileId === Tq.fromLocalNodeIdObj(e)).sort((e, t) => "default" === e.codeExportName ? -1 : "default" === t.codeExportName ? 1 : e.name.localeCompare(t.name)) : [];
 }
 export function $$V19() {
   let e = KP();
@@ -57,7 +57,7 @@ export function $$V19() {
     updateSynchronously: !1
   });
   let r = iZ();
-  return function(e, t, r, n) {
+  return function (e, t, r, n) {
     if (!e || !r || !n) return !1;
     for (let r of t) if (r.userID !== e.id && r.activeCodeComponentId === n.guid) return !0;
     return !1;
@@ -114,7 +114,7 @@ export function $$Y14() {
   useEffect(() => {
     sM().then(() => {
       console.log("[devtools] Initialized LS");
-    }).catch((e) => {
+    }).catch(e => {
       Ho(e, lV.CODE_IN_SITES, a5.PREVIEW);
     });
   }, []);
@@ -147,7 +147,7 @@ export async function $$$1({
   };
 }
 export function $$X20(e) {
-  let t = UN();
+  let t = getSingletonSceneGraph();
   let [r, n] = fp(KL);
   let i = Fk((e, t, r) => {
     if (!t) return null;
@@ -155,7 +155,7 @@ export function $$X20(e) {
     let i = e.get(t);
     if (!i) return null;
     let a = null;
-    !function(e, t) {
+    !function (e, t) {
       let r;
       Ws0?.isStagingChanges(e) && (r = Ws0?.openChangesStagerScope());
       try {
@@ -175,14 +175,14 @@ export function $$X20(e) {
 }
 export function $$q3() {
   let [e, t] = fp(s0);
-  return useCallback((e) => {
+  return useCallback(e => {
     e && (t(Nfd.FILE), UM(), l7.user("sites-add-code-instance-to-canvas", () => {
       glU.startInsertingCodeComponentOnCanvas(e.guid);
     }));
   }, [t]);
 }
 export function $$J18() {
-  let e = Object.values(md(Mk[PW.CODE_FILE].local)).filter((e) => !e.isSoftDeleted);
+  let e = Object.values(md(Mk[PW.CODE_FILE].local)).filter(e => !e.isSoftDeleted);
   useEffect(() => {
     if (e.length > 0 && Ez5?.codeSelection().fullscreenCodeNodeIds.getCopy().length === 0) {
       let t = e[0]?.assetId;
@@ -243,7 +243,7 @@ export function $$et10() {
   useEffect(() => {
     if (e || !c || i.current) return;
     i.current = !0;
-    let r = UN();
+    let r = getSingletonSceneGraph();
     if (t === Nfd.CODE) {
       let e = r.get(o);
       e && Ez5?.codeSelection().fullscreenCodeNodeIds.set([e.guid]);
@@ -259,29 +259,29 @@ export function $$et10() {
 }
 export function $$er12(e) {
   let t = _$$E(e);
-  let r = useMemo(() => (t || []).map((e) => {
+  let r = useMemo(() => (t || []).map(e => {
     if (e.type !== K$p.USER_MESSAGE) return null;
     let {
       imports
     } = MK(e.textContent);
-    return imports && 0 !== imports.length ? imports.map((e) => "node" === e.type && e.communityAttribution ? e.communityAttribution : null).filter((e) => !!e) : null;
-  }).filter((e) => !!e).flat(), [t]);
-  return useMemo(() => r.filter((e, t, r) => t === r.findIndex((t) => t.hubFileId === e.hubFileId)), [r]);
+    return imports && 0 !== imports.length ? imports.map(e => "node" === e.type && e.communityAttribution ? e.communityAttribution : null).filter(e => !!e) : null;
+  }).filter(e => !!e).flat(), [t]);
+  return useMemo(() => r.filter((e, t, r) => t === r.findIndex(t => t.hubFileId === e.hubFileId)), [r]);
 }
 export function $$en5(e) {
   return e?.isCodeFile ? e : e?.isCodeComponent ? e.exportedFromCodeFile : e?.isCodeInstance ? e.backingCodeComponent?.exportedFromCodeFile ?? null : null;
 }
 export function $$ei11(e, t) {
-  let r = UN();
+  let r = getSingletonSceneGraph();
   let i = md(s0);
   let a = $$en5(e);
-  let s = function(e) {
+  let s = function (e) {
     let t = $$G4($$en5(e));
     if (e?.isCodeComponent) return e;
     let r = t[0];
     let n = r && _H.fromString(r.assetId);
     let i = n && _H.toGuidStrIfLocal(n);
-    return i ? UN().get(i) : null;
+    return i ? getSingletonSceneGraph().get(i) : null;
   }(e);
   let o = md(TJ);
   let l = a ? o[a.guid] ?? s?.guid ?? null : null;
@@ -295,7 +295,7 @@ export function $$ei11(e, t) {
   let b = md(ZY) || i === Nfd.CODE || 0 === g.length;
   let T = useMemo(() => u ? b ? y : g : E, [u, b, E, y, g]);
   return useMemo(() => {
-    let e = UN();
+    let e = getSingletonSceneGraph();
     let r = T[0];
     let n = r ? e.get(r) : null;
     if (!n) return null;
@@ -339,4 +339,4 @@ export const jS = $$W16;
 export const I4 = $$Q17;
 export const XW = $$J18;
 export const b_ = $$V19;
-export const vD = $$X20; 
+export const vD = $$X20;

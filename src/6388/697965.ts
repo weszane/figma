@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback, useState, useMemo, useEffect, useLayoutEffect, useRef } from "react";
 import { Ez5, CNR, NLJ } from "../figma_app/763686";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import a from "classnames";
 import { _ as _$$_ } from "../vendor/853977";
@@ -276,7 +276,7 @@ function K(e) {
   let em = useCallback((e, t) => {
     t && "function" == typeof t.stopPropagation && t.stopPropagation();
     Ez5 && Ez5.singleSlideView && Ez5.singleSlideView().isCarouselFocused.set(!0);
-    let l = UN().get(e);
+    let l = getSingletonSceneGraph().get(e);
     l && (l.isExpanded ? q.current?.add(e) : q.current?.delete(e), toggleCollapsed(e));
   }, [toggleCollapsed, q]);
   let ev = Object.values(Q.carouselItemsById).every(e => 0 === e.coord.row);

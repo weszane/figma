@@ -2,7 +2,7 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { useState, useRef, useCallback, useEffect } from "react";
 import { J } from "../905/614223";
 import { Egt } from "../figma_app/763686";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { fp, Xr, md } from "../figma_app/27355";
 import { az } from "../905/449184";
 import { buildUploadUrl } from "../figma_app/169182";
@@ -125,7 +125,7 @@ export function $$O1() {
     }
   });
   async function U() {
-    c && i && Egt && (await UN().setCurrentPageAsync(i), Egt.replaceSelection([c], !0), await R(await QZ({
+    c && i && Egt && (await getSingletonSceneGraph().setCurrentPageAsync(i), Egt.replaceSelection([c], !0), await R(await QZ({
       nodeId: c,
       alwaysPan: !0
     }), {
@@ -145,7 +145,7 @@ export function $$O1() {
       $$A("already_seen_upsell_this_session");
       return;
     }
-    let t = UN().get(e.properties.pageId);
+    let t = getSingletonSceneGraph().get(e.properties.pageId);
     if (!t) {
       $$A("page_not_found");
       return;

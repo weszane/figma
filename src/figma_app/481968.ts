@@ -1,7 +1,7 @@
 import { useRef, useMemo, useState, useCallback } from "react";
 import { Hur, glU } from "../figma_app/763686";
 import { l7 } from "../905/189185";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { md } from "../figma_app/27355";
 import { am } from "../figma_app/901889";
 import { jk } from "../905/609396";
@@ -19,7 +19,6 @@ import { As, ze } from "../figma_app/516028";
 import { l0 } from "../figma_app/610446";
 import { um, E$, ez } from "../figma_app/835718";
 import { Ux } from "../figma_app/864246";
-import v from "../figma_app/101849";
 let A = e => ({
   ...e,
   width: e.w,
@@ -27,7 +26,7 @@ let A = e => ({
 });
 export function $$x1() {
   let e = useRef(_$$t("whiteboard.ai_cluster.loading_section_base"));
-  let t = useMemo(() => UN(), []);
+  let t = useMemo(() => getSingletonSceneGraph(), []);
   let {
     Sprig
   } = useSprigWithSampling();
@@ -124,7 +123,7 @@ export function $$x1() {
   };
 }
 export function $$N0(e, t = !1) {
-  let r = useMemo(() => UN(), []);
+  let r = useMemo(() => getSingletonSceneGraph(), []);
   let [o, l] = useState(!1);
   let d = useRef();
   let c = Z("figjam_local_cluster_navigate");
@@ -160,4 +159,4 @@ export function $$N0(e, t = !1) {
   };
 }
 export const J = $$N0;
-export const f = $$x1; 
+export const f = $$x1;

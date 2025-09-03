@@ -1,5 +1,5 @@
 import { O5 } from "../figma_app/387100";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { zl } from "../figma_app/27355";
 import { debugState } from "../905/407919";
 import { WB } from "../905/761735";
@@ -13,10 +13,10 @@ export async function $$p0(e) {
   if (!r) throw Error("No current user found");
   let p = function () {
     try {
-      let e = UN();
+      let e = getSingletonSceneGraph();
       let t = e.getCurrentPage();
       if (!t) return [];
-      return O5(e, t.guid).map((e) => e.guid);
+      return O5(e, t.guid).map(e => e.guid);
     } catch (e) {
       console.warn("Could not get responsive sets for site publishing:", e);
       return [];
@@ -56,11 +56,11 @@ export async function $$p0(e) {
       }, 6e4);
       let s = r.subscribe(DuV, {
         fileKey: e
-      }, (e) => {
+      }, e => {
         try {
           if ("loaded" === e.status) {
             let r = oA(e.data?.siteBundles);
-            let o = r?.find((e) => e.id === t);
+            let o = r?.find(e => e.id === t);
             o?.status === "succeeded" ? (clearTimeout(a), s?.(), n()) : o?.status === "failed" && (clearTimeout(a), s?.(), i(Error(`Site publishing failed: ${o.error || "Unknown error"}`)));
           }
         } catch (e) {

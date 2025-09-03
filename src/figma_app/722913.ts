@@ -3,7 +3,7 @@ import { throwTypeError } from "../figma_app/465776";
 import { qE } from "../figma_app/492908";
 import { l7 } from "../905/189185";
 import { dI } from "../905/871411";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { md } from "../figma_app/27355";
 import { t } from "../905/303541";
 import { Y5 } from "../figma_app/455680";
@@ -121,7 +121,7 @@ export function $$w5(e, t) {
   };
 }
 function O(e) {
-  UN().getDirectlySelectedNodes().forEach(t => function e(t, r) {
+  getSingletonSceneGraph().getDirectlySelectedNodes().forEach(t => function e(t, r) {
     if (t.isGroup) for (let n of t.childrenNodes) e(n, r);else r(t);
   }(t, e));
 }

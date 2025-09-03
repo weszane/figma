@@ -1,6 +1,6 @@
 import { getFeatureFlags } from "../905/601108";
 import { Iz, eU, md } from "../figma_app/27355";
-import { Qw } from "../905/989992";
+import { resourceUtils } from "../905/989992";
 import { Xf } from "../figma_app/153916";
 import { A as _$$A } from "../905/920142";
 import { getInitialOptions } from "../figma_app/169182";
@@ -14,7 +14,7 @@ export let $$p1 = Iz(e => eU(t => e ? t(WF4.Query({
   orgId: e
 })).transform(({
   org: e
-}) => !!oA(e?.isSalesAssistedPlanProperty)?.value && !oA(e?.subscriptionShouldNotAutoRenewPlanProperty) && oA(e?.plan?.termsOfServiceAcceptanceByTermsKey)?.termsKey !== FBillingModelType.SEATS_MODEL_BILLING_2025) : Qw.disabled()));
+}) => !!oA(e?.isSalesAssistedPlanProperty)?.value && !oA(e?.subscriptionShouldNotAutoRenewPlanProperty) && oA(e?.plan?.termsOfServiceAcceptanceByTermsKey)?.termsKey !== FBillingModelType.SEATS_MODEL_BILLING_2025) : resourceUtils.disabled()));
 export function $$h0(e, t) {
   let i = CT();
   let o = Xf(e?.id);

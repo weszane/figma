@@ -2,7 +2,7 @@ import { lQ } from "../905/934246";
 import { SceneGraphUnavailableError } from "../figma_app/518682";
 import { lyf, hMR } from "../figma_app/763686";
 import { fn, sH } from "../905/871411";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { zl } from "../figma_app/27355";
 import { O } from "../905/561581";
@@ -182,7 +182,7 @@ export class $$D1 {
         repo
       } = t.resources || this.DEPRECATED_getDefaultResources(e);
       if (file ? i = gN(file, repo || null, A) : (i = `/${A}/${h}`, null == e.fileKey || (a ? i += `/${a}` : i += "/Untitled")), e.landingState && "DUPLICATE" === e.landingState && (i += "/duplicate"), "design" === A && "auto" === e.mode && (p.m = "auto"), e.versionId && (p["version-id"] = e.versionId), e.compareVersionId && (p["compare-version-id"] = e.compareVersionId), e.compareLatest && (p["compare-latest"] = "1"), e.newFile && (p.$$new = "1"), e.nodeId && fn(sH(e.nodeId)) && (p["node-id"] = EO(e.nodeId)), e.codeNodeId && fn(sH(e.codeNodeId)) && (p["code-node-id"] = EO(e.codeNodeId)), e.editorType === nT.Sites && e.sitesView && (p.view = Hz(e.sitesView)), e.nodeId && fn(sH(e.nodeId))) try {
-        let t = UN().get(e.nodeId)?.type;
+        let t = getSingletonSceneGraph().get(e.nodeId)?.type;
         t && ["CANVAS", "DOCUMENT"].includes(t || "") && (p.p = "f");
       } catch (e) {
         if (!(e instanceof SceneGraphUnavailableError)) throw e;

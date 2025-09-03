@@ -7,7 +7,7 @@ import { Rs, p as _$$p } from "../figma_app/288654";
 import { Ay as _$$Ay } from "../figma_app/778880";
 import { j as _$$j } from "../905/35621";
 import { G as _$$G } from "../905/186289";
-import { Qw } from "../905/989992";
+import { resourceUtils } from "../905/989992";
 import { aQ } from "../figma_app/672951";
 import { L as _$$L } from "../905/406205";
 import { oGE, y_L, H5I } from "../figma_app/43951";
@@ -95,7 +95,7 @@ function y(e) {
   let n = _$$x();
   let s = d4(e => (i && (e.teams[i]?.name || n[i]?.name)) ?? null);
   let o = searchResult.files_last_touched_at ? new Date(searchResult.files_last_touched_at) : null;
-  let l = useMemo(() => Qw.loaded(searchResult.recent_files), [searchResult.recent_files]);
+  let l = useMemo(() => resourceUtils.loaded(searchResult.recent_files), [searchResult.recent_files]);
   return createElement(_$$L, {
     ...e,
     key: searchResult.model.id,

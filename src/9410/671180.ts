@@ -4,7 +4,7 @@ import { yT, eb, Kf, BW, JF, sw } from "../figma_app/257655";
 import { G1, Iu } from "../figma_app/691470";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { oVz } from "../figma_app/763686";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { A as _$$A } from "../vendor/90566";
 import { rI } from "../905/485103";
@@ -192,7 +192,7 @@ export function $$E1({
           T.current.queuedEffects = T.current.queuedEffects || {};
         } catch (e) {
           $D(_$$e.AI_GENERATION, e instanceof Error ? e : Error(e));
-          w.current && !UN().get(w.current) && (w.current = null, T.current.jsxStr = void 0, T.current.jsxJSON = void 0, T.current.expandedJsx = void 0);
+          w.current && !getSingletonSceneGraph().get(w.current) && (w.current = null, T.current.jsxStr = void 0, T.current.jsxJSON = void 0, T.current.expandedJsx = void 0);
         }
         try {
           if (w.current) {

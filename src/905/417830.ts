@@ -1,43 +1,81 @@
-import { DEFAULT_LOADING_STATE } from "../905/957591";
-import { noop2 } from "../905/419236";
-import { J } from "../905/251556";
-export class $$s0 {
-  constructor(e, t) {
-    this.client = e;
-    this.notifyUpdate = t;
+import { serializeJSON } from '../905/251556'
+import { noop2 } from '../905/419236'
+import { DEFAULT_LOADING_STATE } from '../905/957591'
+
+export class SubscriptionManager {
+  constructor(client: any, notifyUpdate: () => void) {
+    this.client = client
+    this.notifyUpdate = notifyUpdate
   }
-  view = null;
-  stringifiedArgs = new WeakMap();
-  subscriptions = new Map();
-  update(e, t) {
-    e !== this.view && (this.clear(), this.view = e);
-    let i = new Set();
-    for (let e of t) i.add(this.stringify(e));
-    for (let [e, t] of this.subscriptions.entries()) i.has(e) || (t.unsubscribe(), this.subscriptions.$$delete(e));
-    for (let i of t) {
-      let t = this.stringify(i);
-      if (this.subscriptions.has(t)) continue;
-      let a = {
+
+  client: any
+  notifyUpdate: () => void
+  view: any = null
+  stringifiedArgs = new WeakMap()
+  subscriptions = new Map()
+
+  update(view: any, argsList: any[]) {
+    if (view !== this.view) {
+      this.clear()
+      this.view = view
+    }
+
+    const currentStringifiedArgs = new Set()
+    for (const args of argsList) {
+      currentStringifiedArgs.add(this.stringify(args))
+    }
+
+    // Remove subscriptions that are no longer needed
+    for (const [stringifiedArgs, subscription] of this.subscriptions.entries()) {
+      if (!currentStringifiedArgs.has(stringifiedArgs)) {
+        subscription.unsubscribe()
+        this.subscriptions.delete(stringifiedArgs)
+      }
+    }
+
+    // Add new subscriptions
+    for (const args of argsList) {
+      const stringifiedArgs = this.stringify(args)
+      if (this.subscriptions.has(stringifiedArgs))
+        continue
+
+      const subscription = {
         unsubscribe: noop2,
-        result: DEFAULT_LOADING_STATE
-      };
-      this.client && (a.unsubscribe = this.client.subscribe(e, i, e => {
-        a.result !== e && (a.result = e, this.notifyUpdate());
-      }));
-      this.subscriptions.set(t, a);
+        result: DEFAULT_LOADING_STATE,
+      }
+
+      if (this.client) {
+        subscription.unsubscribe = this.client.subscribe(view, args, (result: any) => {
+          if (subscription.result !== result) {
+            subscription.result = result
+            this.notifyUpdate()
+          }
+        })
+      }
+
+      this.subscriptions.set(stringifiedArgs, subscription)
     }
   }
+
   clear() {
-    for (let e of this.subscriptions.values()) e.unsubscribe();
-    this.subscriptions.clear();
+    for (const subscription of this.subscriptions.values()) {
+      subscription.unsubscribe()
+    }
+    this.subscriptions.clear()
   }
-  currentResult(e) {
-    return this.subscriptions.get(this.stringify(e))?.result || DEFAULT_LOADING_STATE;
+
+  currentResult(args: any) {
+    return this.subscriptions.get(this.stringify(args))?.result || DEFAULT_LOADING_STATE
   }
-  stringify(e) {
-    let t = this.stringifiedArgs.get(e);
-    t || (t = J(e), this.stringifiedArgs.set(e, t));
-    return t;
+
+  stringify(args: any) {
+    let stringified = this.stringifiedArgs.get(args)
+    if (!stringified) {
+      stringified = serializeJSON(args)
+      this.stringifiedArgs.set(args, stringified)
+    }
+    return stringified
   }
 }
-export const A = $$s0;
+
+export const A = SubscriptionManager

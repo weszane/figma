@@ -137,7 +137,7 @@ import { X as _$$X2 } from "../905/853613";
 import { dD } from "../905/519113";
 import { RR as _$$RR } from "../905/514666";
 import { $3 } from "../905/946937";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { IK, $n } from "../905/521428";
 import { LJ } from "../figma_app/930386";
 import { $E } from "../figma_app/805898";
@@ -320,7 +320,7 @@ let ei = {
   height: en,
   width: en
 };
-let el = forwardRef(function({
+let el = forwardRef(function ({
   keyPrefix: e,
   name: t,
   onClick: s,
@@ -546,7 +546,7 @@ function e3({
     sourceForTracking: s === _$$tM3 ? s : mZ
   });
   let et = _$$F(e, _$$K2.ASSETS_PANEL, p, u);
-  let es = function(e, t) {
+  let es = function (e, t) {
     let s = d4(dK);
     let r = e.isLocal && PN() ? _$$eT(e.node_id, s).join("-") : e.node_id;
     return _$$rf(`componentThumb.${r}`, "contextmenu", e => {
@@ -752,7 +752,7 @@ function e7({
   width: e,
   children: t
 }) {
-  let s = function(e) {
+  let s = function (e) {
     let t = wA();
     let {
       query,
@@ -894,7 +894,7 @@ function tp({
     overscan: 6,
     initialOffset: s
   });
-  let c = function({
+  let c = function ({
     scrollContainerRef: e,
     initialScrollTop: t,
     onScroll: s,
@@ -932,7 +932,7 @@ function tp({
       let s = e.current?.scrollHeight && d && e.current?.scrollHeight !== d;
       if (t && c(e.current?.scrollHeight), void 0 !== a && void 0 !== m.offset && r && t && s) {
         let t = i.getVirtualItems().find(e => l(e).some(e => m.keys.includes(e)));
-        if (t) i.scrollToOffset(t.start - m.offset); else {
+        if (t) i.scrollToOffset(t.start - m.offset);else {
           let t = a / d;
           let s = e.current.scrollHeight * t;
           i.scrollToOffset(s);
@@ -998,9 +998,9 @@ function tj(e, t = "", {
   isPreset: s,
   sortingFn: r
 } = {
-    isPreset: !1,
-    sortingFn: void 0
-  }) {
+  isPreset: !1,
+  sortingFn: void 0
+}) {
   let n = new Map();
   let i = [];
   r ? e.sort(r) : gO(e, {
@@ -1149,7 +1149,7 @@ function tv(e, t, {
     let y = {
       name: t,
       id: e,
-      previewAsset: function({
+      previewAsset: function ({
         componentSubtree: e,
         exampleSubtree: t,
         templateSubtree: s
@@ -1379,7 +1379,7 @@ function tV() {
   let {
     componentLayouts,
     exampleLayout
-  } = function({
+  } = function ({
     sidebarWidth: e
   }) {
     let t = useMemo(() => e - tO, [e]);
@@ -1553,7 +1553,7 @@ function t1({
     afterSuccessfulInsert: M,
     onDragStart: f
   }), [s, i, M, f]);
-  let P = function({
+  let P = function ({
     item: e,
     cmsCollectionMappings: t,
     sectionNameForTracking: s,
@@ -1739,7 +1739,7 @@ function sd({
   let {
     thumbWidth,
     thumbHeight
-  } = function() {
+  } = function () {
     let [e] = MA();
     let {
       width
@@ -1789,7 +1789,7 @@ function sc({
   let {
     currentView
   } = wV();
-  let y = function(e, t, s) {
+  let y = function (e, t, s) {
     let [r] = MA();
     let i = Ew({
       assetKey: e.name,
@@ -1955,7 +1955,7 @@ function sp(e, t, s) {
 function sh(e) {
   let t = e.dragState;
   if (!t?.dragPosition || !t?.grabbedPointerPercentageOffset) return null;
-  let s = function(e) {
+  let s = function (e) {
     let {
       draggingResource
     } = e;
@@ -2851,11 +2851,11 @@ function rB() {
     analyticsData,
     debugString,
     isInitialized
-  } = function(e = !1) {
-    let t = function(e) {
+  } = function (e = !1) {
+    let t = function (e) {
       getInitialOptions().anticipation_config || (getInitialOptions().anticipation_config = PV);
       let t = getInitialOptions().anticipation_config.dominantFrameConfig;
-      return function({
+      return function ({
         targetNodeGuid: e,
         disabled: t
       }) {
@@ -2866,7 +2866,7 @@ function rB() {
         let {
           isLoaded
         } = _$$y();
-        let a = function() {
+        let a = function () {
           let {
             isLoaded: _isLoaded
           } = _$$y();
@@ -2892,7 +2892,7 @@ function rB() {
           isLoading: _isLoading,
           suggestionsNodeGuid,
           debugString: _debugString
-        } = function({
+        } = function ({
           targetNodeGuid: e,
           disabled: t
         }) {
@@ -2906,7 +2906,7 @@ function rB() {
           let x = _$$r5();
           useEffect(() => {
             if (t || !x) return;
-            let s = UN();
+            let s = getSingletonSceneGraph();
             let n = e ? s.get(e) : void 0;
             let i = new AbortController();
             if (n && h) {
@@ -2951,7 +2951,7 @@ function rB() {
                   signal.aborted || (c(!1), l(rw(n) + " - FINISHED"));
                   try {
                     d.destroy();
-                  } catch (e) { }
+                  } catch (e) {}
                 });
               } else n && (c(!1), r([]), p(n.guid), l(rw(n) + " - INVALID TARGET"));
             } else {
@@ -2999,7 +2999,7 @@ function rB() {
           debugString: _debugString
         };
       }({
-        targetNodeGuid: function({
+        targetNodeGuid: function ({
           selectedNode: e,
           config: t,
           disabled: s
@@ -3051,7 +3051,7 @@ function rB() {
     gb(analyticsData, e ? _$$GG.PANEL_OPENED : _$$GG.PANEL_CLOSED, _$$qd.ASSET_PANEL);
   }, [C, analyticsData]);
   useEffect(() => {
-    if (a.current?.clientHeight) m(a.current?.clientHeight); else {
+    if (a.current?.clientHeight) m(a.current?.clientHeight);else {
       let e = rR + 8;
       C && (e += x);
       getFeatureFlags().anticipation_trigger_debug && (e += 16);
@@ -3111,7 +3111,7 @@ function rK() {
 }
 function rG() {
   let e = rK();
-  return (function() {
+  return (function () {
     let e = md(W9);
     let t = ZC(e);
     let {
@@ -3177,7 +3177,7 @@ function r4() {
   let v = fi();
   let S = Bv();
   let k = md(TG);
-  return useMemo(() => function({
+  return useMemo(() => function ({
     localComponentsInfo: e,
     localTemplatesInfo: t,
     localThumbnailUrl: s,
@@ -3197,7 +3197,7 @@ function r4() {
       libraryKeyToSubscribedItems,
       subscribedFiles
     } = n;
-    let x = function({
+    let x = function ({
       subscribedFiles: e,
       libraryKeyToSubscribedComponents: t,
       approvedLibraryKeysByResourceType: s
@@ -3229,7 +3229,7 @@ function r4() {
       libraryKeyToSubscribedComponents: libraryKeyToSubscribedItems,
       approvedLibraryKeysByResourceType: d
     });
-    let y = function(e, t) {
+    let y = function (e, t) {
       if (!e) return new Map();
       let {
         libraryKeyToSubscribedItems: _libraryKeyToSubscribedItems,
@@ -3263,7 +3263,7 @@ function r4() {
       }
       return n;
     }(i, m);
-    let _ = function(e, t, s, r, n, i, l, a) {
+    let _ = function (e, t, s, r, n, i, l, a) {
       let {
         privateItems,
         numPublished
@@ -3458,7 +3458,7 @@ let ne = e => {
   let [t, s] = useMemo(() => 0 === e.length ? [[], void 0] : [e.slice(0, -1), e[e.length - 1]], [e]);
   let [r, i] = useState([]);
   let l = useRef([]);
-  useEffect(function() {
+  useEffect(function () {
     l.current.length > t.length && (l.current = l.current.slice(0, t.length));
     r.length > t.length && i(e => e.slice(0, t.length));
   }, [t, r.length, e.length]);
@@ -3467,7 +3467,7 @@ let ne = e => {
   let {
     width
   } = e8();
-  useLayoutEffect(function() {
+  useLayoutEffect(function () {
     let e = a.current;
     if (!e) return;
     let t = e.children;
@@ -3475,7 +3475,7 @@ let ne = e => {
     if (s < 0) {
       let e = l.current[r.length];
       e && i(t => [...t, e.scrollWidth]);
-    } else if (0 === s) return; else if (r.length > 0) {
+    } else if (0 === s) return;else if (r.length > 0) {
       let e = r.length - 1;
       s > r[e] - (o.current && 1 === r.length ? o.current.scrollWidth : 0) && i(e => e.slice(0, -1));
     }
@@ -3593,7 +3593,7 @@ function nr({
     focusBackButton,
     focusSearchBar
   } = _$$rl();
-  let _ = function() {
+  let _ = function () {
     let {
       libraries,
       siteLibraries,
@@ -3883,11 +3883,11 @@ function nv({
   assets: s,
   children: r
 }) {
-  let i = function(e) {
+  let i = function (e) {
     let {
       data
     } = gL(e);
-    return useMemo(() => data ? function(e) {
+    return useMemo(() => data ? function (e) {
       let t = e.sort((e, t) => Ez(t.position, e.position));
       let s = t.filter(e => "plain_text" === e.fieldType);
       let r = s.find(e => "title" === e.name.toLowerCase()) || s[0];
@@ -3904,17 +3904,17 @@ function nv({
       imageFieldId: null
     }, [data]);
   }(e);
-  let l = function(e) {
+  let l = function (e) {
     let t = _$$t3();
     return useMemo(() => t ? Object.fromEntries([[t.primaryTextFieldId, e.primaryTextFieldId], [t.secondaryTextFieldId, e.secondaryTextFieldId], [t.imageFieldId, e.imageFieldId]].filter(e => null != e[1])) : {}, [t, e]);
   }(i);
   return r({
-    asset: function(e, t) {
+    asset: function (e, t) {
       let s = _$$t3();
       let r = s?.assetNames;
       return useMemo(() => {
         if (!r) return null;
-        let s = function(e, t) {
+        let s = function (e, t) {
           let {
             primaryTextFieldId,
             secondaryTextFieldId,
@@ -3959,7 +3959,7 @@ function nI({
   children: i
 }) {
   let l = useMemo(() => tw(e.assets), [e.assets]);
-  let a = function() {
+  let a = function () {
     let {
       windowInnerWidth
     } = _$$l3();
@@ -4331,13 +4331,13 @@ function nV({
     let t = e.libraryKey === y?.libraryKey ? "localLibrary" : e.libraryKey;
     return Pt("assetsLibrary", t);
   }, [e.libraryKey, y?.libraryKey]);
-  let O = function(e, t = !1) {
+  let O = function (e, t = !1) {
     let s = q5();
     let r = wA();
     let i = e.libraryKey === s?.libraryKey;
     let l = _9(e.libraryKey, "assets_panel_library_context_menu");
     let o = useCallback(() => l(!1), [l]);
-    let d = function() {
+    let d = function () {
       let e = wA();
       let t = q5();
       let s = d4(e => e.teams);
@@ -4417,7 +4417,7 @@ function nV({
     }, [e.type, r, p, i, c, t, h, d, o, m, f]);
   }(e, d);
   let D = !!dj(e.libraryKey);
-  let F = function(e, t) {
+  let F = function (e, t) {
     let s = "dark" === DP() ? "dark" : "light";
     return useMemo(() => {
       if (!t) return;
@@ -5840,7 +5840,7 @@ function ir({
   let {
     flyout,
     ...h
-  } = function(e, t) {
+  } = function (e, t) {
     let s = useRef(new Map());
     let i = useRef(null);
     let l = useRef(null);
@@ -5851,12 +5851,12 @@ function ir({
       setSafePolygon,
       isInSafePolygon,
       cursorXSpeedRef
-    } = function() {
+    } = function () {
       let e = useRef(null);
       let t = useCallback(t => {
         e.current = t;
       }, []);
-      let s = function() {
+      let s = function () {
         let e = useRef(0);
         let t = useRef(null);
         let s = useRef(null);
@@ -5887,11 +5887,11 @@ function ir({
       }();
       return {
         setSafePolygon: t,
-        isInSafePolygon: useCallback(t => !!e.current && function(e, t) {
+        isInSafePolygon: useCallback(t => !!e.current && function (e, t) {
           let [s, r] = e;
           let n = !1;
           let i = t.length;
-          for (function() {
+          for (function () {
             let e = 0;
             let l = i - 1;
           }(); e < i; l = e++) {
@@ -6075,7 +6075,7 @@ function ii({
     onKeyDown: focusFirstItem,
     onClick: focusSearchBar
   });
-  let _ = function(e, t) {
+  let _ = function (e, t) {
     let s = q5();
     let r = wA();
     let i = e === s?.libraryKey;
@@ -6087,7 +6087,7 @@ function ii({
     let d = useMemo(() => {
       if (o.data?.type === "team") return o.data.link;
     }, [o]);
-    let c = useCallback(() => UN().setCurrentPageAsync(t ?? ""), [t]);
+    let c = useCallback(() => getSingletonSceneGraph().setCurrentPageAsync(t ?? ""), [t]);
     let u = useCallback(() => {
       az.trackDefinedEvent("assets_panel.go_to_page", {
         libraryKey: e ?? "",
@@ -6208,7 +6208,7 @@ function ib({
     widthForCentering,
     textRef,
     iconRef
-  } = function(e) {
+  } = function (e) {
     let [t, s] = useState(void 0);
     let r = useCallback(e => s(e?.scrollWidth), []);
     let [i, l] = useState(void 0);
@@ -6270,7 +6270,7 @@ function iS({
   hideScrollbar: s,
   isLoading: i
 }) {
-  !function({
+  !function ({
     isLoading: e
   }) {
     let {
@@ -6300,7 +6300,7 @@ function iS({
     thumbWidth,
     thumbHeight,
     numColumns
-  } = function() {
+  } = function () {
     let {
       width
     } = e8();
@@ -6322,7 +6322,7 @@ function iS({
     };
   }();
   let m = useMemo(() => {
-    if (e?.type === yW.SITE && "grid" === l) return function(e, t, s, n) {
+    if (e?.type === yW.SITE && "grid" === l) return function (e, t, s, n) {
       let i = Array.from(e.pages);
       let l = [];
       let a = s + 2 * iy + ix + i_;
@@ -6496,7 +6496,7 @@ function iM() {
     })]
   });
 }
-let iH = function({
+let iH = function ({
   isLoading: e,
   children: t
 }) {
@@ -6545,7 +6545,7 @@ function iW() {
   let [h, m] = useState([]);
   let [g, f] = useState(!1);
   useLayoutEffect(() => {
-    (async function() {
+    (async function () {
       if (u && iz.set(l ?? []), !query || 0 === iz.list().length) {
         m([]);
         return;
@@ -6793,7 +6793,7 @@ function i3() {
     tileHeight,
     tileWidth,
     numColumns
-  } = function(e) {
+  } = function (e) {
     let [t] = MA();
     let s = e - tO;
     let r = Math.min(useMemo(() => tA({
@@ -7200,7 +7200,7 @@ function li({
   let {
     localAssets
   } = e;
-  !function(e, t, s, r) {
+  !function (e, t, s, r) {
     let i = q5();
     let [l, o] = fp(GT);
     let d = t.length + s.length + r.length;
@@ -7526,7 +7526,7 @@ function lR({
     goToRecents,
     changeAssetsView,
     toggleShowFolders
-  } = function(e) {
+  } = function (e) {
     let t = q5();
     let s = _$$sN();
     let {
@@ -7766,7 +7766,7 @@ function lQ({
   }, [e, c]);
   let m = useMemo(() => {
     if (!a) return null;
-    let e = UN().get(a);
+    let e = getSingletonSceneGraph().get(a);
     if (!e) return null;
     let t = T1(e);
     return t ? t.startsWith("data:image") ? t : `data:image/png;base64,${t}` : null;
@@ -8139,7 +8139,7 @@ function an({
   width: e
 }) {
   let t = r4();
-  let s = function(e) {
+  let s = function (e) {
     let t = _$$iZ();
     let s = q5();
     let r = jO();
@@ -8241,7 +8241,7 @@ function ai({
 function al({
   children: e
 }) {
-  !function() {
+  !function () {
     let {
       libraryKey,
       pageId,
@@ -8269,7 +8269,7 @@ function al({
       x && f.size > 0 && (hB(() => navigateToLibrary(x)), y(null));
     }, [navigateToLibrary, f.size, x, y]);
     _$$sH();
-    useEffect(function() {
+    useEffect(function () {
       if (currentView !== S5.Assets && currentView !== S5.Pages) return;
       let n = getLibrary(libraryKey);
       let a = f.get(libraryKey);
@@ -8294,11 +8294,11 @@ function al({
         }
       }
     }, [onBack, u, currentView, pageId, folderPath, navigateToTop, navigateToPage, getLibrary, getFolder, navigateToPath, setLastNavAction, g, c, f, libraryKey]);
-    useEffect(function() {
+    useEffect(function () {
       let r = getLibrary(libraryKey);
       if (!r || u) return;
       let n = Cg(r);
-      if (currentView === S5.Pages && n) navigateToPage(n.id); else if (currentView === S5.Assets) {
+      if (currentView === S5.Pages && n) navigateToPage(n.id);else if (currentView === S5.Assets) {
         let r = getFolder(libraryKey, pageId, folderPath);
         if (!r) return;
         let n = xc(r);
@@ -8327,4 +8327,4 @@ export function $$ao0({
     })
   });
 }
-export const g = $$ao0; 
+export const g = $$ao0;

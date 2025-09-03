@@ -1,4 +1,4 @@
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { zl } from "../figma_app/27355";
 import { az } from "../905/449184";
@@ -93,7 +93,7 @@ async function v({
 }
 export function $$I2(e, t, i, a) {
   if (!(!getFeatureFlags().anticipation_suggestions_shadow || !e || a?.startsWith("auto-suggest"))) try {
-    let r = UN();
+    let r = getSingletonSceneGraph();
     let s = r.get(i);
     let o = s?.symbolId ? r.get(s.symbolId) : void 0;
     let d = s?.parentNode;
@@ -131,7 +131,7 @@ export function $$I2(e, t, i, a) {
 export function $$E0() {
   if (!getFeatureFlags().anticipation_suggestions_shadow) return null;
   try {
-    let e = UN();
+    let e = getSingletonSceneGraph();
     let t = Y5.getViewportInfo();
     let i = fX(t, Z9());
     let r = i ? e.get(i) : null;
@@ -162,7 +162,7 @@ export function $$E0() {
 }
 export function $$x1(e, t) {
   if (getFeatureFlags().anticipation_suggestions_shadow) try {
-    let i = UN();
+    let i = getSingletonSceneGraph();
     let r = i.get(e);
     let a = i.get(t);
     let s = r?.symbolId;

@@ -3,7 +3,7 @@ import { d4 } from "../vendor/514228";
 import { Ez5, Egt, glU, lyf } from "../figma_app/763686";
 import { l7 } from "../905/189185";
 import { AD } from "../905/871411";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { fp, eU } from "../figma_app/27355";
 import c from "../vendor/128080";
 import { U } from "../figma_app/901889";
@@ -319,7 +319,7 @@ export function $$A3(e, t, i, d) {
   let f = useRef(e);
   useEffect(() => {
     f.current.flat().forEach(e => {
-      let t = UN().get(e);
+      let t = getSingletonSceneGraph().get(e);
       t && (t.isExpanded = !0);
     });
   }, []);
@@ -387,7 +387,7 @@ export function $$A3(e, t, i, d) {
     let i = e.flat().filter(e => {
       let i = t[e];
       if (!i) return !1;
-      let r = i.parentGuid ? UN().get(i.parentGuid) : void 0;
+      let r = i.parentGuid ? getSingletonSceneGraph().get(i.parentGuid) : void 0;
       return 0 === i.indent || r?.isExpanded;
     });
     return {
@@ -397,7 +397,7 @@ export function $$A3(e, t, i, d) {
   }, [E, e]);
   useRef(carouselItemsById).current = carouselItemsById;
   let S = useCallback(e => {
-    let t = UN();
+    let t = getSingletonSceneGraph();
     let i = t.get(e);
     if (i) {
       if (i.isExpanded) {
@@ -424,7 +424,7 @@ export function $$A3(e, t, i, d) {
       if (e && e.isCollapsed) {
         if (d && d.current && d.current.has(t.parentGuid)) return;
         l7.user("expand-row-ssv", () => {
-          let e = UN().get(t.parentGuid);
+          let e = getSingletonSceneGraph().get(t.parentGuid);
           e && (e.isExpanded = !0, Y5.commit());
         });
       }

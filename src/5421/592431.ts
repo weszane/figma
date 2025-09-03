@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
 import { uN } from "../figma_app/338442";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { Pt } from "../figma_app/806412";
 import { Point } from "../905/736624";
 import { t } from "../905/303541";
@@ -42,7 +42,7 @@ export function $$x0({
       hideIcon: n,
       instanceSwapPickerIdPrefix: "code-editor" === d ? "code-editor-instance-swap-prop-assignment-picker-" : void 0,
       recordingKey: Pt(t, "propDefs", uN.TYPED),
-      sceneGraph: UN(),
+      sceneGraph: getSingletonSceneGraph(),
       typedPropDefs: typedPropDefsExcludingHidden,
       viewOnly: g
     })

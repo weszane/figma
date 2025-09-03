@@ -1,6 +1,6 @@
 import { useMemo, useCallback } from "react";
 import { d4, bN, wA } from "../vendor/514228";
-import { Qw } from "../905/989992";
+import { resourceUtils } from "../905/989992";
 import { p as _$$p, Rs } from "../figma_app/288654";
 import { s as _$$s } from "../905/573154";
 import { t as _$$t } from "../905/303541";
@@ -20,8 +20,8 @@ export function $$g3(e, t = {}) {
   })), [e, o]);
   let d = _$$p(PG0, l, t);
   let c = Au(o);
-  let u = Qw.all([c, ...d.map(e => e.result)]);
-  return Qw.useTransform(u, ([t, ...n]) => {
+  let u = resourceUtils.all([c, ...d.map(e => e.result)]);
+  return resourceUtils.useTransform(u, ([t, ...n]) => {
     let i = new Map();
     n.forEach((n, a) => {
       let {
@@ -80,7 +80,7 @@ function f(e, t) {
 }
 export function $$E5(e, t = {}) {
   let r = $$g3(useMemo(() => e ? [e] : [], [e]), t);
-  return Qw.useTransformShallowEqual(r, t => t.get(e ?? ""));
+  return resourceUtils.useTransformShallowEqual(r, t => t.get(e ?? ""));
 }
 export function $$y6(e, t) {
   let r = function (e, {
@@ -91,15 +91,15 @@ export function $$y6(e, t) {
     }, {
       enabled: t
     });
-    return Qw.useTransformShallowEqual(r, e => {
+    return resourceUtils.useTransformShallowEqual(r, e => {
       if (!e.workspace || !e.workspace.pinnedFiles) return null;
       let t = [];
       for (let r of e.workspace.pinnedFiles) r.file && t.push(r.file.id);
       return t;
     });
   }(t);
-  let n = Qw.all([e, r]);
-  return Qw.useTransformShallowEqual(n, ([e, r]) => {
+  let n = resourceUtils.all([e, r]);
+  return resourceUtils.useTransformShallowEqual(n, ([e, r]) => {
     if (!e) return [];
     let n = [];
     let i = new Set(...(r ?? []));

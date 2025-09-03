@@ -115,7 +115,7 @@ import { ZG } from "../figma_app/840917";
 import { p8, dH } from "../figma_app/722362";
 import { BI, m0 as _$$m, pt, Ef } from "../figma_app/546509";
 import { Yh } from "../figma_app/357047";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { getResourceDataOrFallback } from "../905/419236";
 import { am } from "../figma_app/901889";
 import { au } from "../figma_app/124493";
@@ -887,7 +887,7 @@ export function $$t80({
       useEffect(() => {
         t && (t._select_page = async e => {
           l === e && s(au({}));
-          await UN().setCurrentPageAsync(e);
+          await getSingletonSceneGraph().setCurrentPageAsync(e);
         });
       }, [s, t, l]);
       useEffect(() => {

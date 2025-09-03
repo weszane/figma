@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { throwTypeError } from "../figma_app/465776";
 import { Qej } from "../figma_app/763686";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { eU, zl, md, fp } from "../figma_app/27355";
 import { az } from "../905/449184";
 import { rJ, I, ZM, rT, KV, zZ, L2 } from "../figma_app/542202";
@@ -286,7 +286,7 @@ export function $$W5(e, t) {
       }
     }
     let u = 0;
-    let p = UN();
+    let p = getSingletonSceneGraph();
     let _ = ac(e);
     let h = p.get(_ ?? null);
     h && eA(h, () => {

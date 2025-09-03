@@ -1,4 +1,4 @@
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { eU } from "../figma_app/27355";
 import { r } from "../905/520829";
 import { Wh } from "../figma_app/615482";
@@ -11,7 +11,7 @@ let $$u1 = eU(e => e(c), (e, t, r) => {
   let a = "function" == typeof r ? r(i) : r;
   if (i !== a) {
     if (t(c, a), a) {
-      let e = UN().get(a);
+      let e = getSingletonSceneGraph().get(a);
       t($$l2, e?.name || "");
     } else t($$l2, null);
   }

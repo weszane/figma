@@ -2,7 +2,7 @@ import { jsx, jsxs } from "react/jsx-runtime";
 import { Component, PureComponent } from "react";
 import { wA } from "../vendor/514228";
 import { sortByPropertyWithOptions } from "../figma_app/656233";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { parsePxInt, parsePxNumber } from "../figma_app/783094";
 import { DV } from "../figma_app/930338";
 import { o as _$$o } from "../905/605383";
@@ -169,7 +169,7 @@ export function $$D1(e) {
         }
       }
     }));
-    e.sceneGraphSelection && e.sceneGraph && !sp(e.sceneGraph, e.sceneGraphSelection, t.node_id) && (wr(), await UN().setCurrentPageFromNodeAsync(t.node_id), Dh([t.node_id]), Y5.commit());
+    e.sceneGraphSelection && e.sceneGraph && !sp(e.sceneGraph, e.sceneGraphSelection, t.node_id) && (wr(), await getSingletonSceneGraph().setCurrentPageFromNodeAsync(t.node_id), Dh([t.node_id]), Y5.commit());
   };
   let d = null;
   let v = !1;

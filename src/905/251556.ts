@@ -1,37 +1,88 @@
-export function $$n0(e) {
-  let t = [];
-  let i = e => {
-    if (e && e.toJSON && "function" == typeof e.toJSON && (e = e.toJSON()), e instanceof Set) return i(Array.from(e.values()));
-    if (e instanceof Map) {
-      let t = {};
-      e.forEach((e, i) => {
-        t[i] = e;
-      });
-      return i(t);
+export function serializeJSON(value: any) {
+  const seenObjects: any[] = []
+
+  const serialize = (obj: any): string |undefined => {
+    // Handle toJSON method
+    if (obj && obj.toJSON && typeof obj.toJSON === 'function') {
+      obj = obj.toJSON()
     }
-    if (void 0 === e) return;
-    if ("number" == typeof e) return isFinite(e) ? "" + e : "null";
-    if ("object" != typeof e) return JSON.stringify(e);
-    if (Array.isArray(e)) {
-      let t = "[";
-      for (let n = 0; n < e.length; n++) {
-        n && (t += ",");
-        t += i(e[n]) || "null";
+
+    // Handle Set conversion
+    if (obj instanceof Set) {
+      return serialize(Array.from(obj.values()))
+    }
+
+    // Handle Map conversion
+    if (obj instanceof Map) {
+      const converted: Record<any, any> = {}
+      obj.forEach((value, key) => {
+        converted[key] = value
+      })
+      return serialize(converted)
+    }
+
+    // Handle undefined
+    if (obj === undefined) {
+      return undefined
+    }
+
+    // Handle numbers
+    if (typeof obj === 'number') {
+      return isFinite(obj) ? String(obj) : 'null'
+    }
+
+    // Handle primitives
+    if (typeof obj !== 'object') {
+      return JSON.stringify(obj)
+    }
+
+    // Handle arrays
+    if (Array.isArray(obj)) {
+      let result = '['
+      for (let i = 0; i < obj.length; i++) {
+        if (i > 0) {
+          result += ','
+        }
+        const serialized = serialize(obj[i])
+        result += serialized !== undefined ? serialized : 'null'
       }
-      return t + "]";
+      return `${result}]`
     }
-    if (null === e) return "null";
-    if (-1 !== t.indexOf(e)) throw TypeError("Converting circular structure to JSON");
-    let n = t.push(e) - 1;
-    let r = Object.keys(e).sort();
-    let a = "";
-    for (let t of r) {
-      let n = i(e[t]);
-      n && (a && (a += ","), a += JSON.stringify(t) + ":" + n);
+
+    // Handle null
+    if (obj === null) {
+      return 'null'
     }
-    t.splice(n, 1);
-    return "{" + a + "}";
-  };
-  return i(e);
+
+    // Handle circular references
+    if (seenObjects.includes(obj)) {
+      throw new TypeError('Converting circular structure to JSON')
+    }
+
+    // Add to seen objects
+    const objectIndex = seenObjects.push(obj) - 1
+
+    // Handle objects
+    const keys = Object.keys(obj).sort()
+    let result = ''
+
+    for (const key of keys) {
+      const serializedValue = serialize(obj[key])
+      if (serializedValue !== undefined) {
+        if (result) {
+          result += ','
+        }
+        result += `${JSON.stringify(key)}:${serializedValue}`
+      }
+    }
+
+    // Remove from seen objects
+    seenObjects.splice(objectIndex, 1)
+
+    return `{${result}}`
+  }
+
+  return serialize(value)
 }
-export const J = $$n0;
+
+export const J = serializeJSON

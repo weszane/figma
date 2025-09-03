@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { wA, d4 } from "../vendor/514228";
 import { glU, xal } from "../figma_app/763686";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { fp, Xr } from "../figma_app/27355";
 import { am } from "../figma_app/901889";
 import { YQ } from "../905/502364";
@@ -34,7 +34,7 @@ export function $$h0(e) {
   let C = useCallback(() => h(null), [h]);
   let S = useCallback(async () => {
     if (!r) return;
-    let a = UN().get(r);
+    let a = getSingletonSceneGraph().get(r);
     let s = a?.name;
     let o = x || "";
     let l = await zO({

@@ -3,7 +3,7 @@ import { Pj, d4 } from "../vendor/514228";
 import { c2 } from "../905/382883";
 import { Im } from "../figma_app/493477";
 import { juq } from "../figma_app/763686";
-import { qo } from "../905/700578";
+import { ReduxSceneGraph } from "../905/700578";
 import { R } from "../905/103090";
 import { T } from "../905/868547";
 let u = e => e?.mirror?.sceneGraph;
@@ -12,7 +12,7 @@ export function $$_7() {
   return d4(u);
 }
 export function $$h3() {
-  return useMemo(() => new qo(juq.PLAYGROUND), []);
+  return useMemo(() => new ReduxSceneGraph(juq.PLAYGROUND), []);
 }
 export let $$m1 = () => d4(e => e.mirror.sceneGraphSelection);
 export function $$g5() {

@@ -2,7 +2,7 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import { Iz, eU, zl } from "../figma_app/27355";
 import { getInitialOptions } from "../figma_app/169182";
 import { WB } from "../905/761735";
-import { Ek } from "../905/553831";
+import { subscribeAndAwaitData } from "../905/553831";
 import { Rs } from "../figma_app/288654";
 import { $D } from "../905/11";
 import { sMZ } from "../figma_app/43951";
@@ -21,7 +21,7 @@ class p {
       }
       this.pendingIncrementCount += 1;
       try {
-        e = await Ek(sMZ, {
+        e = await subscribeAndAwaitData(sMZ, {
           name: this.userFlagName
         });
       } catch (e) {
@@ -58,7 +58,7 @@ class p {
         $D(_$$e.GROWTH_PLATFORM, Error(`Attempted to reset user flag counter ${this.userFlagName} for anonymous user; this is a no-op.`));
         return;
       }
-      let e = await Ek(sMZ, {
+      let e = await subscribeAndAwaitData(sMZ, {
         name: this.userFlagName
       });
       let t = e.currentUser?.userFlagByName;

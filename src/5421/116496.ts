@@ -1,6 +1,6 @@
 import { throwTypeError } from "../figma_app/465776";
 import { l7 } from "../905/189185";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { x1 } from "../905/714362";
 import { dZ } from "../figma_app/741237";
 import { a as _$$a } from "../5421/59825";
@@ -97,7 +97,7 @@ export class $$u0 {
       folderPath,
       fileName
     } = n;
-    let u = $v(UN(), folderPath, fileName);
+    let u = $v(getSingletonSceneGraph(), folderPath, fileName);
     let h = !1;
     if (u) {
       let t = n.editingInfo.classNameAttribute;

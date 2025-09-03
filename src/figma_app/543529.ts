@@ -1,5 +1,5 @@
 import { d4 } from "../vendor/514228";
-import { Qw } from "../905/989992";
+import { resourceUtils } from "../905/989992";
 import { IT, mI } from "../figma_app/566371";
 import { sZ, dq } from "../905/845253";
 import { FUserRoleType, FPlanNameType } from "../figma_app/191312";
@@ -30,8 +30,8 @@ export function $$h3() {
     enabled: !!e
   });
   let c = mI(t, r);
-  let u = Qw.all(c);
-  return Qw.useTransform(u, ([e, t]) => e.tier === FPlanNameType.ENTERPRISE && !!t.org?.orgSamlConfigs?.some(e => "loaded" === e.hasSeatManagedViaScim.status && e.hasSeatManagedViaScim.data));
+  let u = resourceUtils.all(c);
+  return resourceUtils.useTransform(u, ([e, t]) => e.tier === FPlanNameType.ENTERPRISE && !!t.org?.orgSamlConfigs?.some(e => "loaded" === e.hasSeatManagedViaScim.status && e.hasSeatManagedViaScim.data));
 }
 export const Cb = $$u0;
 export const U5 = $$p1;

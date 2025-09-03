@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { useRef, useCallback } from "react";
 import { wA } from "../vendor/514228";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { md } from "../figma_app/27355";
 import { b as _$$b } from "../905/985254";
 import { E as _$$E } from "../905/453826";
@@ -45,7 +45,7 @@ export function $$C0() {
   }, [L, R, w, P, D, M]);
   let U = useCallback(() => {
     let n = (() => {
-      let e = UN();
+      let e = getSingletonSceneGraph();
       let t = e?.getCurrentPage();
       return !!t && (!t.childCount || t.childrenAreAllGhosts);
     })();

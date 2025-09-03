@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { createContext, useContext, useCallback, useMemo, useRef, useState, useEffect, createRef } from "react";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { Pt } from "../figma_app/806412";
 import { Fk, x3 } from "../figma_app/167249";
 import { E as _$$E } from "../905/632989";
@@ -60,19 +60,19 @@ function u(e) {
     invalidateThumbnail: i
   }) {
     let p = useCallback((e, l) => {
-      let a = UN().get(t);
+      let a = getSingletonSceneGraph().get(t);
       a && a.setInteractiveSlideConfigData(e, l);
     }, [t]);
-    let d = useCallback((e) => {
-      let l = UN().get(t);
+    let d = useCallback(e => {
+      let l = getSingletonSceneGraph().get(t);
       l && l.deleteInteractiveSlideConfigData(e);
     }, [t]);
     let u = useCallback((e, l) => {
-      let a = UN().get(t);
+      let a = getSingletonSceneGraph().get(t);
       a && a.setInteractiveSlideParticipantData(e, l);
     }, [t]);
     let m = useCallback(() => {
-      let e = UN().get(t);
+      let e = getSingletonSceneGraph().get(t);
       e && e.resetInteractiveSlideParticipantData();
     }, [t]);
     let f = Fk((e, t) => {
@@ -186,10 +186,10 @@ function T({
     type: "text",
     placeholder: _$$t("slides.flapp.alignment.prompt_placeholder"),
     value: t,
-    onChange: (e) => {
+    onChange: e => {
       l(e.target.value);
     },
-    onPaste: (e) => {
+    onPaste: e => {
       l(e.clipboardData.getData("text"));
     },
     recordingKey: e
@@ -290,7 +290,7 @@ function V({
   onScaleClick: l
 }) {
   let n = useRef(null);
-  let i = l ? (e) => {
+  let i = l ? e => {
     let t = e.currentTarget.getBoundingClientRect();
     let a = e.clientX - t.left;
     let s = e.clientY - t.top;
@@ -319,7 +319,7 @@ function V({
         }), jsx("div", {
           className: "alignment_scale--scaleMarker100--AHcJW alignment_scale--_scaleMarker---mTsV"
         })]
-      }), e && n.current ? t.map((e) => jsx("img", {
+      }), e && n.current ? t.map(e => jsx("img", {
         src: _$$p(e.thumbnailUrl),
         alt: e.name,
         className: "alignment_scale--alignmentScaleVote--zkhC9",
@@ -353,7 +353,7 @@ function A({
 }) {
   let l;
   let s = e;
-  t && (s = [t, ...e.filter((e) => e.userId !== t.userId)]);
+  t && (s = [t, ...e.filter(e => e.userId !== t.userId)]);
   l = 0 === s.length ? _$$t("slides.flapp.results.no_votes_yet") : 1 === s.length ? t ? _$$t("slides.flapp.results.single_self_vote") : _$$t("slides.flapp.results.single_other_vote", {
     person: s[0].name
   }) : t ? _$$t("slides.flapp.results.multiple_votes_including_user", {
@@ -380,14 +380,14 @@ function $({
   e.length > t + 1 && (l = t);
   let s = e.slice(0, l);
   let n = e.slice(l);
-  let i = n.map((e) => ({
+  let i = n.map(e => ({
     id: e.userId,
     handle: e.name,
     img_url: e.thumbnailUrl
   }));
   return jsxs("div", {
     className: "alignment_scale--voteProfilesContainer--wbH0G",
-    children: [s.map((e) => jsx("img", {
+    children: [s.map(e => jsx("img", {
       className: "alignment_scale--voteProfile--Um0e6",
       alt: e.name,
       src: _$$p(e.thumbnailUrl),
@@ -432,7 +432,7 @@ let z = {
     let s = jsx(T, {
       recordingKey: f(nodeId, "slides-alignment-scale-prompt-input"),
       prompt: configData.prompt,
-      setPrompt: (e) => {
+      setPrompt: e => {
         l7.user("slides-update-alignment-scale-prompt", () => {
           setConfigData("prompt", e);
         });
@@ -453,7 +453,7 @@ let z = {
       promptElement: jsx(L, {
         prompt: configData.prompt
       }),
-      onVoteRequest: (e) => {
+      onVoteRequest: e => {
         l7.user("slides-update-alignment-scale-vote", () => {
           setParticipantData(e.userId, JSON.stringify(e));
         });
@@ -501,11 +501,11 @@ function et({
     type: "text",
     placeholder: _$$t("slides.flapp.facepile.prompt_placeholder"),
     value: e,
-    onChange: (e) => {
+    onChange: e => {
       t(e);
     },
     htmlAttributes: {
-      onPaste: (e) => {
+      onPaste: e => {
         t(e.clipboardData.getData("text"));
       }
     },
@@ -602,7 +602,7 @@ function es({
   let d = e && s && !currentUserStamped;
   return jsxs("div", {
     className: _$$s.flex.gap12.pt36.pb24.itemsCenter.alignCenter.$,
-    children: [p.map((e) => {
+    children: [p.map(e => {
       let t = n && s && e.userId === s.id;
       let l = {
         text: e.name,
@@ -656,7 +656,7 @@ function en({
 function ei({
   overflowStamps: e
 }) {
-  let t = e.map((e) => ({
+  let t = e.map(e => ({
     id: e.userId,
     handle: e.name,
     img_url: e.thumbnailUrl
@@ -712,7 +712,7 @@ let ep = {
     } = p();
     let l = jsx(et, {
       prompt: configData.prompt,
-      setPrompt: (e) => {
+      setPrompt: e => {
         l7.user("slides-update-facepile-question", () => {
           setConfigData("prompt", e);
         });
@@ -768,7 +768,7 @@ function ek({
   } = d();
   let c = wA();
   let u = iZ();
-  let m = nc.system("slides-update-poll-votes", (e) => {
+  let m = nc.system("slides-update-poll-votes", e => {
     if (!u) {
       c(_$$s2.error(_$$t("slides.flapp.poll.vote_failure")));
       return;
@@ -782,7 +782,7 @@ function ek({
     };
     setParticipantData(t.userId, JSON.stringify(t));
   });
-  let f = t.map((e) => ({
+  let f = t.map(e => ({
     id: e.userId,
     handle: e.name,
     img_url: e.thumbnailUrl
@@ -842,17 +842,17 @@ function eF({
     deleteConfigData
   } = p();
   let h = eE(configData);
-  let g = (e) => `option${e}`;
-  let x = nc.user(ev, (e) => {
+  let g = e => `option${e}`;
+  let x = nc.user(ev, e => {
     setConfigData(g(o), e);
   });
-  let v = nc.user(ev, (e) => {
+  let v = nc.user(ev, e => {
     setConfigData(g(o), e.clipboardData.getData("text"));
   });
-  let j = nc.user(e_, (e) => {
+  let j = nc.user(e_, e => {
     o === h.length - 1 && ("Enter" === e.key && h.length < 6 ? (setConfigData(g(o + 1), ""), d(!0)) : h.length > 2 && 0 === h[o].length && ("Backspace" === e.key || "Delete" === e.key) && (deleteConfigData && (deleteConfigData(g(o)), e.preventDefault()), d(!0)));
   });
-  let N = t.map((e) => ({
+  let N = t.map(e => ({
     id: e.userId,
     handle: e.name,
     img_url: e.thumbnailUrl
@@ -988,8 +988,8 @@ function eL({
   useEffect(() => {
     if (isViewer) return;
     let e = N.current;
-    let t = new ResizeObserver((e) => {
-      let t = UN().get(nodeId);
+    let t = new ResizeObserver(e => {
+      let t = getSingletonSceneGraph().get(nodeId);
       if (t) for (let l of e) l7.system("slides-poll-auto-resize", () => {
         let e = getComputedStyle(l.target);
         let a = parseFloat(e.paddingTop);
@@ -1006,8 +1006,8 @@ function eL({
       e && t.unobserve(e);
     };
   }, [nodeId, isViewer]);
-  let y = (e) => `option${e}`;
-  let w = nc.user("slides-update-poll-results-visibility", (e) => {
+  let y = e => `option${e}`;
+  let w = nc.user("slides-update-poll-results-visibility", e => {
     setConfigData("resultsShown", e ? "true" : "false");
   });
   let {
@@ -1032,7 +1032,7 @@ function eL({
     }, []).sort((e, t) => e.timestamp - t.timestamp);
     let r = 0;
     let o = s.map((e, t) => {
-      let l = i.filter((e) => e.selectedOption === t);
+      let l = i.filter(e => e.selectedOption === t);
       r = l.length > r ? l.length : r;
       return l;
     });
@@ -1093,7 +1093,7 @@ function eL({
           firstVoteByTimestamp
         }), jsx(eD, {
           resultsShown: h,
-          setResultsShown: (e) => w(e)
+          setResultsShown: e => w(e)
         })]
       })]
     })
@@ -1107,10 +1107,10 @@ function eB() {
     nodeId
   } = p();
   let n = configData.question || "";
-  let i = nc.user(ex, (e) => {
+  let i = nc.user(ex, e => {
     setConfigData("question", e);
   });
-  let r = nc.user(ex, (e) => {
+  let r = nc.user(ex, e => {
     setConfigData("question", e.clipboardData.getData("text"));
   });
   return isViewer ? jsx("h1", {
@@ -1123,7 +1123,7 @@ function eB() {
     placeholder: _$$t("slides.flapp.poll.question_placeholder"),
     onChange: i,
     htmlAttributes: {
-      onPaste: (e) => r(e)
+      onPaste: e => r(e)
     },
     recordingKey: f(nodeId, "questionInput")
   });
@@ -1177,7 +1177,7 @@ function eq({
     children: [configData.srcUrl && configData.title ? jsx("iframe", {
       src: configData.srcUrl,
       className: _$$s.wFull.hFull.$,
-      onLoad: (e) => t?.(e.target),
+      onLoad: e => t?.(e.target),
       title: configData.title,
       allowFullScreen: !1,
       allow: "autoplay"
@@ -1218,9 +1218,9 @@ let eY = {
       isReadOnly
     } = p();
     return (useEffect(() => {
-      isReadOnly || configData.srcUrl || eR(configData.url).then(async (e) => {
+      isReadOnly || configData.srcUrl || eR(configData.url).then(async e => {
         if (!e) return;
-        let a = UN().get(nodeId);
+        let a = getSingletonSceneGraph().get(nodeId);
         if (a && (l7.system("initializing-youtube", () => {
           _$$r(() => {
             a.resizeWithConstraints(e.width, e.height);
@@ -1259,7 +1259,7 @@ let eY = {
       nodeId,
       viewer
     } = p();
-    let l = useCallback((l) => {
+    let l = useCallback(l => {
       viewer && viewer.associateYoutubeWithNode(nodeId, l);
     }, [viewer, nodeId]);
     useEffect(() => () => {

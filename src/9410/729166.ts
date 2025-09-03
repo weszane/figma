@@ -138,7 +138,7 @@ import { b as _$$b2 } from "../905/985254";
 import { f as _$$f4 } from "../905/940356";
 import { c as _$$c } from "../1250/425092";
 import { l as _$$l } from "../905/479687";
-import { Ek } from "../905/553831";
+import { subscribeAndAwaitData } from "../905/553831";
 import { Qp, JR } from "../figma_app/162641";
 import { H8 } from "../905/590952";
 import { FEventType } from "../figma_app/191312";
@@ -180,7 +180,7 @@ import { A as _$$A9 } from "../905/891805";
 import { V as _$$V3 } from "../1577/311426";
 import { e as _$$e6 } from "../905/916195";
 import { H as _$$H2 } from "../905/999677";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { generateRecordingKey } from "../figma_app/878298";
 import { Lg, nl } from "../figma_app/257275";
 import { Point } from "../905/736624";
@@ -1558,7 +1558,7 @@ function ij({
     let a = null;
     if (n && (s("Dev Mode Activity Compare Changes", {
       source: "compare_previous_overview"
-    }), "loaded" === (a = await Ek(WND, {
+    }), "loaded" === (a = await subscribeAndAwaitData(WND, {
       fileKey: n,
       nodeId: e
     })).file.status && a.file.data)) {
@@ -2683,7 +2683,7 @@ let r0 = memo(function ({
   let [w, S] = useState(T);
   let [j, I] = useState(v.x);
   let [k, N] = useState(v.y + uF);
-  let A = UN().getCurrentPage()?.prototypeDevice || null;
+  let A = getSingletonSceneGraph().getCurrentPage()?.prototypeDevice || null;
   let O = A?.presetIdentifier;
   let L = !!O && L_(O);
   let R = C && L && f;
@@ -2885,7 +2885,7 @@ let r0 = memo(function ({
   let {
     x: _x,
     y: _y
-  } = _$$ut(UN(), !0);
+  } = _$$ut(getSingletonSceneGraph(), !0);
   let ec = !C || !m?.initialViewerSize;
   return jsx(od, {
     ResizeTargetComponent: et,

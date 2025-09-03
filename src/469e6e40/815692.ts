@@ -66,7 +66,7 @@ import { ud } from '../905/513035';
 import { $n as _$$$n } from '../905/515076';
 import { Dd, OJ } from '../905/519092';
 import { $n } from '../905/521428';
-import { Ek } from '../905/553831';
+import { subscribeAndAwaitData } from '../905/553831';
 import { mL, UC } from '../905/563637';
 import { r as _$$r3 } from '../905/571562';
 import { s as _$$s2 } from '../905/573154';
@@ -1959,7 +1959,7 @@ async function aL(e, t, a) {
   };
   if (s == null) return i;
   try {
-    n = await Ek(k_1, {
+    n = await subscribeAndAwaitData(k_1, {
       pluginId: s,
       orgId: t.id
     });

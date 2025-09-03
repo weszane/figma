@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useRef, useState, useMemo, useCallback, useEffect } from "react";
 import { q7, bL, mc, b as _$$b } from "../figma_app/860955";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { Ay } from "@stylexjs/stylex";
 import { getFeatureFlags } from "../905/601108";
 import { fp } from "../figma_app/27355";
@@ -71,7 +71,7 @@ function N({
   });
 }
 function T(e) {
-  let t = UN();
+  let t = getSingletonSceneGraph();
   if (!t) return;
   let n = t.get(e.guid);
   if (n) return n.sourceCode;
@@ -144,7 +144,7 @@ function k({
   file: t,
   handleRename: n
 }) {
-  let i = UN().get(t.guid);
+  let i = getSingletonSceneGraph().get(t.guid);
   let l = Q();
   return jsx(bL, {
     manager: e,
@@ -215,13 +215,13 @@ function O({
     manager
   } = _$$b();
   let [v, I] = useState(!1);
-  let C = UN().get(t.guid);
+  let C = getSingletonSceneGraph().get(t.guid);
   return jsxs("button", {
     "aria-label": _$$t("figmake.filesystem.file.description", {
       name: t.name
     }),
     onClick: () => {
-      let e = UN().get(t.guid);
+      let e = getSingletonSceneGraph().get(t.guid);
       e && nU(e);
     },
     className: "x10w6t97 x78zum5 x6s0dn4",
@@ -404,7 +404,7 @@ export function $$F0({
   let f = useCallback(() => {
     let e = m.children.find(e => "file" === e.type && "App.tsx" === e.name)?.guid;
     if (e || (e = m.children.find(e => "file" === e.type)?.guid), e) {
-      let t = UN().get(e);
+      let t = getSingletonSceneGraph().get(e);
       t && nU(t);
     }
   }, [m]);

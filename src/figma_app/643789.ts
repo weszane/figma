@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { Qw } from "../905/989992";
+import { resourceUtils } from "../905/989992";
 import { p } from "../figma_app/288654";
 import { FMemberRoleType } from "../figma_app/191312";
 import { y_L, Bl3 } from "../figma_app/43951";
@@ -29,7 +29,7 @@ export function $$u2(e) {
       enabled: t
     });
     return {
-      teams: useMemo(() => Qw.all(s.map(e => e.result)).transform(t => {
+      teams: useMemo(() => resourceUtils.all(s.map(e => e.result)).transform(t => {
         let r = {};
         for (let n = 0; n < e.length; n++) {
           let i = e[n];
@@ -62,7 +62,7 @@ export function $$p0(e, t = !0) {
   let s = p(Bl3, r, {
     enabled: t
   });
-  return useMemo(() => Qw.all(s.map(e => e.result)).transform(t => e.reduce((e, r, n) => (e[r] = !!t[n]?.team?.hasPermission, e), {})), [s, e]);
+  return useMemo(() => resourceUtils.all(s.map(e => e.result)).transform(t => e.reduce((e, r, n) => (e[r] = !!t[n]?.team?.hasPermission, e), {})), [s, e]);
 }
 export const GG = $$p0;
 export const ci = $$c1;

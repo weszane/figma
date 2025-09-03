@@ -123,7 +123,7 @@ import { p as _$$p2 } from '../905/682418';
 import { f as _$$f, h as _$$h7 } from '../905/693155';
 import { e0 as _$$e4 } from '../905/696396';
 import { Wq } from '../905/697795';
-import { M3 } from '../905/700578';
+import { SingletonSceneGraph } from '../905/700578';
 import { E as _$$E4 } from '../905/701278';
 import { s as _$$s3 } from '../905/702260';
 import { U as _$$U } from '../905/708285';
@@ -528,7 +528,7 @@ async function tR(e) {
   let t = [];
   let i = i => {
     let n = {
-      label: function(e) {
+      label: function (e) {
         let t;
         if ('message' in e) {
           if (t = e.message, e.message) {
@@ -3115,7 +3115,7 @@ async function tJ() {
     let n = [];
     let s = e => {
       let i = e.absoluteBoundingBox;
-      i && function(e, t) {
+      i && function (e, t) {
         let i = Math.max(e.x, t.x);
         let n = Math.max(e.y, t.y);
         return Math.max(0, Math.min(e.x + e.width, t.x + t.width) - i) * Math.max(0, Math.min(e.y + e.height, t.y + t.height) - n) / (e.width * e.height);
@@ -3143,7 +3143,7 @@ async function t0() {
   }
   let t = e[0];
   (await t1(t)).detections.forEach(e => {
-    !function(e, t, i, n, r) {
+    !function (e, t, i, n, r) {
       let a = figma.createFrame();
       a.x = e;
       a.y = t;
@@ -3234,7 +3234,7 @@ function iY(e) {
       try {
         let e = JSON.parse(d);
         getInitialOptions().anticipation_config = e;
-        let t = function(e) {
+        let t = function (e) {
           let t = [];
           let i = e.getCurrentPage();
           let n = i?.childrenNodes.filter(e => e.type === 'FRAME' && e.name.toLowerCase().startsWith(iU));
@@ -3675,8 +3675,8 @@ let nE = [{
   action: 'update-via-instance-swap',
   featureFlags: ['ds_update_via_instance_swap'],
   callback: (e, t, i) => {
-    !function(e, t) {
-      let i = M3.instance;
+    !function (e, t) {
+      let i = SingletonSceneGraph.instance;
       let n = Object.keys(e);
       let r = e => {
         let t = e.symbolId;
@@ -3890,7 +3890,7 @@ export function $$nN0(e) {
     flags: ['!figmake']
   }, {
     separator: !0
-  }, ...(fileMenuArgs ? function({
+  }, ...(fileMenuArgs ? function ({
     branchingActionsStatus: e,
     saveAsState: t,
     topLevelMode: i,
@@ -3917,7 +3917,7 @@ export function $$nN0(e) {
           Dc(hV.SaveLocalFile, t, n, e, ['0:0'], 'save-as');
           ce();
         };
-        c ? function({
+        c ? function ({
           dispatch: e,
           onSaveClick: t
         }) {
@@ -3976,7 +3976,7 @@ export function $$nN0(e) {
     }, {
       separator: !0,
       flags: ['whiteboard']
-    }] : []), ...function(e) {
+    }] : []), ...function (e) {
       if (!e) return [];
       let t = debugState.getState();
       return [{
@@ -5586,13 +5586,13 @@ export function $$nN0(e) {
     }]
   }, {
     separator: !0
-  }, ...(pluginAndWidgetMenuArgs ? nT(function(e) {
+  }, ...(pluginAndWidgetMenuArgs ? nT(function (e) {
     {
       if (!e || !e.userCanViewPlugins) return [];
       let t = qz(e, 'filemenu');
       return t ? [t] : [];
     }
-  }(pluginAndWidgetMenuArgs)) : []), ...(pluginAndWidgetMenuArgs ? nT(pluginAndWidgetMenuArgs && !pluginAndWidgetMenuArgs.isReadOnly ? [Vd(pluginAndWidgetMenuArgs, 'filemenu')] : []) : []), ...function() {
+  }(pluginAndWidgetMenuArgs)) : []), ...(pluginAndWidgetMenuArgs ? nT(pluginAndWidgetMenuArgs && !pluginAndWidgetMenuArgs.isReadOnly ? [Vd(pluginAndWidgetMenuArgs, 'filemenu')] : []) : []), ...function () {
     let e = debugState.getState();
     let t = _$$td(e.currentUserOrgId, e.orgById);
     let i = [{
@@ -5649,7 +5649,7 @@ export function $$nN0(e) {
       name: 'dev-handoff-code-settings-unit',
       flags: ['dev_handoff', '!limited_dev_mode'],
       featureFlags: [],
-      children: nT(function(e) {
+      children: nT(function (e) {
         let t = e.devHandoffCodeLanguage;
         return t.type !== 'first-party' ? [] : [tB('dev-handoff-code-settings-unit-pixel', 'dev-handoff-code-settings-unit-pixel-quick-command', tKW.PIXEL, e), tB('dev-handoff-code-settings-unit-scaled', 'dev-handoff-code-settings-unit-scaled-quick-command', tKW.SCALED, e, {
           scaledUnit: b1(t.id)
@@ -5914,7 +5914,7 @@ export function $$nN0(e) {
           zl.set(SV, !Lw());
         },
         featureFlags: ['dt_my_cool_plugin_codebase_suggestions']
-      }, ...function() {
+      }, ...function () {
         if (!_$$eD?.hasFeature('addMcpImageSupport') || zl.get(Kx) === 'xml') return [];
         let e = [{
           name: 'dev-mode-mcp-server-settings',
@@ -6045,7 +6045,7 @@ export function $$nN0(e) {
       flags: ['design', 'dev_handoff', 'slides', 'cooper', 'sites'],
       featureFlags: [],
       children: nT(YA(theme))
-    }, ...nT(function() {
+    }, ...nT(function () {
       let e = Object.values(_$$nt);
       let t = e.filter(e => e.canOverride());
       let i = () => e.filter(e => e.isOverridden(debugState.getState().userFlags));
@@ -7384,4 +7384,4 @@ export function $$nN0(e) {
   }, ..._$$i2];
 }
 export const p = $$nN0;
-export const P = $$nR1; 
+export const P = $$nR1;

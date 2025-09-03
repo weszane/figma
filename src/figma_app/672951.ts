@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { Qw } from "../905/989992";
+import { resourceUtils } from "../905/989992";
 import { Rs, p } from "../figma_app/288654";
 import { VI, DI } from "../figma_app/687776";
 import { oGE, rH3 } from "../figma_app/43951";
@@ -33,7 +33,7 @@ export function $$d2(e, t = !0) {
   }, {
     enabled: t
   });
-  return Qw.useTransform(r, e => e.project ? $$l3(e.project) : null);
+  return resourceUtils.useTransform(r, e => e.project ? $$l3(e.project) : null);
 }
 export function $$c1(e) {
   return function (e, t = !0) {
@@ -44,7 +44,7 @@ export function $$c1(e) {
       enabled: t
     });
     return {
-      projects: useMemo(() => Qw.all(d.map(e => e.result)).transform(t => {
+      projects: useMemo(() => resourceUtils.all(d.map(e => e.result)).transform(t => {
         let r = {};
         for (let n = 0; n < e.length; n++) {
           let i = e[n];
@@ -93,7 +93,7 @@ export function $$u0(e, t = !0) {
   let s = p(rH3, r, {
     enabled: t
   });
-  return useMemo(() => Qw.all(s.map(e => e.result)).transform(t => e.reduce((e, r, n) => (e[r] = !!t[n]?.project?.canRead, e), {})), [s, e]);
+  return useMemo(() => resourceUtils.all(s.map(e => e.result)).transform(t => e.reduce((e, r, n) => (e[r] = !!t[n]?.project?.canRead, e), {})), [s, e]);
 }
 export const Cm = $$u0;
 export const MD = $$c1;

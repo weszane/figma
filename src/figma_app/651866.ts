@@ -2,7 +2,7 @@ import _require from "../5973/625973";
 import { biQ, glU, zvt } from "../figma_app/763686";
 import { l7 } from "../905/189185";
 import { hV } from "../figma_app/387100";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { R } from "../905/531474";
 var $$n4;
 export function $$d3(e, t) {
@@ -161,7 +161,7 @@ export async function $$f7(e) {
   }
 }
 async function E(e) {
-  let t = UN().get(e.findContainingTopLevelFrameOrSelf());
+  let t = getSingletonSceneGraph().get(e.findContainingTopLevelFrameOrSelf());
   return t ? (await Promise.all([]).then(_require)).serializeJSX(t, {
     includeIDs: !0,
     excludeImageData: !0,

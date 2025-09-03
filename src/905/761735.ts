@@ -5,7 +5,7 @@ import { L as _$$L } from '../905/270963';
 import { oJ as _$$oJ } from '../905/312028';
 import { g as _$$g2 } from '../905/346780';
 import { D as _$$D } from '../905/412108';
-import { Z as _$$Z } from '../905/441145';
+import { observableState } from '../905/441145';
 import { az as _$$az, sx as _$$sx } from '../905/449184';
 import { Rh as _$$Rh, rI as _$$rI, S3 as _$$S2, BO } from '../905/485103';
 import { createFieldRef } from '../905/552287';
@@ -93250,7 +93250,7 @@ let NS = new class {
 let Nw = ['AWSALBTG', 'AWSALBTGCORS', 'AWSALB', 'AWSALBCORS'];
 let NC = [wZi, ib2, $kt, w2r, ehp];
 export function $$NT0(e) {
-  let t = _$$Z.get();
+  let t = observableState.get();
   if (t) {
     if (e === t.userId || _$$nl() || Lg()) return t;
     console.warn(`[livegraph] userId changed after livegraph client creation. userId == null, before: ${t.userId == null}, after: ${e == null}`);
@@ -93258,7 +93258,7 @@ export function $$NT0(e) {
   }
   let i = window.LGEarlyWS;
   delete window.LGEarlyWS;
-  _$$Z.set(function (e, t) {
+  observableState.set(function (e, t) {
     let i = function () {
       let e = window.INITIAL_OPTIONS?.figma_url;
       let t = !!window.INITIAL_OPTIONS?.feature_flags?.livegraph_connect_next;
@@ -93402,7 +93402,7 @@ export function $$NT0(e) {
     return d;
   }(e, i));
   let n = XRH();
-  let r = _$$Z.get();
+  let r = observableState.get();
   window.LIVEGRAPH = {
     client: r,
     logger: Nx,
@@ -93420,12 +93420,12 @@ export function $$NT0(e) {
     }
   };
   ZO('LiveGraph connection', _$$e.WEB_PLATFORM, async () => {
-    await _$$Z.get().connect();
+    await observableState.get().connect();
   });
-  return _$$Z.get();
+  return observableState.get();
 }
 export function $$Nk1() {
-  return _$$Z.get();
+  return observableState.get();
 }
 export function $$NR2() {
   let e = Nx.startRecording();

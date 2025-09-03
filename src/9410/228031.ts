@@ -9,7 +9,7 @@ import { f as _$$f } from "../9410/764883";
 import { r as _$$r } from "../905/857502";
 import { N as _$$N } from "../905/201779";
 import { m1T } from "../figma_app/763686";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { Pt } from "../figma_app/806412";
 import { tx, t as _$$t } from "../905/303541";
@@ -141,14 +141,14 @@ function K({
 }
 let H = e => "TEXT" === e.type && !!e.hyperlink;
 export function $$z1() {
-  return !!UN().getDirectlySelectedNodes().find(H);
+  return !!getSingletonSceneGraph().getDirectlySelectedNodes().find(H);
 }
 export function $$V3() {
   return Fk(e => e.getDirectlySelectedNodes().some(H));
 }
 let W = e => !!("TEXT" === e.type && e.textData?.styleOverrideTable?.length) && !!e.textData.styleOverrideTable.find(e => !!e.hyperlink && !!e.hyperlink.url || !!e.hyperlink?.guid);
 export function $$Y2() {
-  return !!UN().getDirectlySelectedNodes().find(W);
+  return !!getSingletonSceneGraph().getDirectlySelectedNodes().find(W);
 }
 export function $$J4() {
   return Fk(e => e.getDirectlySelectedNodes().some(W));
@@ -162,7 +162,7 @@ export function $$q0({
   showCMSLinkFields: j = !1,
   recordingKey: N
 }) {
-  let A = UN().getCurrentPage();
+  let A = getSingletonSceneGraph().getCurrentPage();
   let O = useMemo(() => (A?.childrenNodes.filter(e => e.isResponsiveSet && !e.getNearestDakotaCollectionId()) ?? []).sort((e, t) => e.name.localeCompare(t.name)), [A?.childrenNodes]);
   let {
     cmsLinkOptions,
@@ -175,7 +175,7 @@ export function $$q0({
     recordingKey: e,
     showCMSLinkFields: t
   }) {
-    let i = UN();
+    let i = getSingletonSceneGraph();
     let a = i.getCurrentPage();
     let s = i.getDirectlySelectedNodes();
     let o = function (e, t) {
@@ -198,7 +198,7 @@ export function $$q0({
         recordingKey: n,
         hasPartialTextSelection: a
       }) {
-        let s = UN().getDirectlySelectedNodes();
+        let s = getSingletonSceneGraph().getDirectlySelectedNodes();
         if (0 === s.length || a) return [];
         let o = [];
         if (t && J6(s, t)) {

@@ -1,282 +1,375 @@
-import { useCallback, useMemo } from "react";
-import { c2 } from "../905/382883";
-import { throwTypeError } from "../figma_app/465776";
-import { ResourceStatus } from "../905/957591";
-import { DD } from "../905/19536";
-import { xx } from "../figma_app/815945";
-import { A as _$$A } from "../905/605584";
-var n;
-var $$r0;
-!function (e) {
-  e.loadedInTest = function (e, t) {
-    return $$r0.loadedSuspendable(e, t || [], {
-      release: () => {}
-    });
-  };
-  e.loadingInTest = function () {
-    return $$r0.loadingSuspendable({
-      getPromise: () => Promise.resolve(),
-      retain: () => {}
-    });
-  };
-  e.disabledInTest = function () {
-    return $$r0.disabledSuspendable({
-      release: () => {}
-    });
-  };
-  e.errorInTest = function (e) {
-    return $$r0.errorSuspendable(e, {
-      release: () => {}
-    });
-  };
-}(n || (n = {}));
-export let $$p1 = {
-  LOADING: "loading",
-  DISABLED: "disabled",
-  ERRORS: "errors",
-  LOADED: "loaded"
-};
-!function (e) {
-  var t;
-  function i(e, ...t) {
-    return e.transform(e => t.reduce((e, t) => e = [...(e || []), ...t], e));
-  }
-  e.merge = function (t, ...n) {
-    if (t.some(e => "loading" === e.status)) return e.loading();
-    let r = t.filter(e => e.errors && "errors" === e.status).map(e => e.errors);
-    if (r.length) return e.error(r.flatMap(e => e));
-    if (t.filter(e => "disabled" === e.status).length > 0) return e.disabled();
-    let a = e.loaded([]);
-    for (let e of t) a = i(a, e.data);
-    return i(a, ...n);
-  };
-  e.all = function (t) {
-    if (t.some(e => "loading" === e.status)) return e.loading();
-    let i = t.filter(e => null != e.errors && "errors" === e.status).map(e => e.errors);
-    if (i.length > 0) return e.error(i.flatMap(e => e));
-    if (t.filter(e => "disabled" === e.status).length > 0) return e.disabled();
-    let n = t.map(e => e.data);
-    return e.loaded(n);
-  };
-  e.transformAll = function (t, i) {
-    return e.all(t).transform(e => i(...e));
-  };
-  let n = Symbol("empty");
-  function r(e, t, i = Object.is) {
-    let s = useCallback((e, t) => e !== n && t !== n && i(e, t), [i]);
-    let {
-      status,
-      data
-    } = e;
-    let c = DD(() => "loaded" === status ? t(data) : n, [status, data, t], s);
-    return useMemo(() => e.transform(t => {
-      if (c === n) throw Error("useTransform: unexpected EMPTY while result is " + e.status);
-      return c;
-    }), [c, e]);
-  }
-  function p(t) {
-    switch (t.status) {
-      case "disabled":
-        return e.disabled();
-      case "loading":
-        return e.loading();
-      case "errors":
-        return e.error(t.errors);
-      case "loaded":
-        return e.loaded(t.data, t.errors);
+import { useCallback, useMemo } from 'react'
+import { DD } from '../905/19536'
+import { c2 } from '../905/382883'
+import { A as _$$A } from '../905/605584'
+import { ResourceStatus } from '../905/957591'
+import { throwTypeError } from '../figma_app/465776'
+import { xx } from '../figma_app/815945'
+
+// Original: $$p1
+const LOADING_STATUS = {
+  LOADING: 'loading',
+  DISABLED: 'disabled',
+  ERRORS: 'errors',
+  LOADED: 'loaded',
+}
+export const H = LOADING_STATUS
+
+// Original: $$r0
+export const resourceUtils = {
+  // Original: merge function
+  merge(resources: any[], ...additionalData: any[]) {
+    if (resources.some(r => r.status === 'loading')) {
+      return this.loading()
     }
-  }
-  function v(e) {
-    return new h(e);
-  }
-  function I(e) {
-    return new f(e);
-  }
-  function E(e, t) {
-    return new b(e, t);
-  }
-  function x(e, t, i) {
-    return new A(e, t || [], i);
-  }
-  e.useTransform = r;
-  e.useTransformShallowEqual = function (e, t) {
-    return r(e, t, _$$A);
-  };
-  e.useTransformDeepEqual = function (e, t) {
-    return r(e, t, c2);
-  };
-  e.from = p;
-  e.fromMemoized = xx(p);
-  e.suspendableFrom = function (e, t, i) {
-    switch (e.status) {
-      case "disabled":
-        return I(i);
-      case "loading":
-        i.registerPromise(t());
-        return v(i);
-      case "errors":
-        return E(e.errors, i);
-      case "loaded":
-        return x(e.data, e.errors, i);
+    const errorResources = resources.filter(r => r.errors && r.status === 'errors').map(r => r.errors)
+    if (errorResources.length) {
+      return this.error(errorResources.flat())
+    }
+    if (resources.filter(r => r.status === 'disabled').length > 0) {
+      return this.disabled()
+    }
+    let result = this.loaded([])
+    for (const r of resources) {
+      result = this.transformData(result, r.data)
+    }
+    return this.transformData(result, ...additionalData)
+  },
+
+  // Original: all function
+  all(resources: any[]) {
+    if (resources.some(r => r.status === 'loading')) {
+      return this.loading()
+    }
+    const errorResources = resources.filter(r => r.errors != null && r.status === 'errors').map(r => r.errors)
+    if (errorResources.length > 0) {
+      return this.error(errorResources.flat())
+    }
+    if (resources.filter(r => r.status === 'disabled').length > 0) {
+      return this.disabled()
+    }
+    const data = resources.map(r => r.data)
+    return this.loaded(data)
+  },
+
+  // Original: transformAll function
+  transformAll(resources: any[], transformFn: (...args: any[]) => any) {
+    return this.all(resources).transform((data: any[]) => transformFn(...data))
+  },
+
+  // Original: useTransform function
+  useTransform(resource: any, transformFn: (data: any) => any, equalityFn: (a: any, b: any) => boolean = Object.is) {
+    const emptySymbol = Symbol('empty')
+    const memoizedTransform = useCallback((prev: any, curr: any) => prev !== emptySymbol && curr !== emptySymbol && equalityFn(prev, curr), [equalityFn])
+    const { status, data } = resource
+    const transformedData = DD(() => status === 'loaded' ? transformFn(data) : emptySymbol, [status, data, transformFn], memoizedTransform)
+    return useMemo(() => resource.transform(() => {
+      if (transformedData === emptySymbol) {
+        throw new Error(`useTransform: unexpected EMPTY while result is ${resource.status}`)
+      }
+      return transformedData
+    }), [transformedData, resource])
+  },
+
+  // Original: useTransformShallowEqual function
+  useTransformShallowEqual(resource: any, transformFn: (data: any) => any) {
+    return this.useTransform(resource, transformFn, _$$A)
+  },
+
+  // Original: useTransformDeepEqual function
+  useTransformDeepEqual(resource: any, transformFn: (data: any) => any) {
+    return this.useTransform(resource, transformFn, c2)
+  },
+
+  // Original: from function
+  from(resource: any) {
+    switch (resource.status) {
+      case 'disabled':
+        return this.disabled()
+      case 'loading':
+        return this.loading()
+      case 'errors':
+        return this.error(resource.errors)
+      case 'loaded':
+        return this.loaded(resource.data, resource.errors)
       default:
-        throwTypeError(e);
+        throwTypeError(resource)
     }
-  };
-  e.loading = function () {
-    return new m();
-  };
-  e.loadingSuspendable = v;
-  e.disabled = function () {
-    return new g();
-  };
-  e.disabledSuspendable = I;
-  e.error = function (e) {
-    return new y(e);
-  };
-  e.errorSuspendable = E;
-  e.loaded = function (e, t) {
-    return new _(e, t || []);
-  };
-  e.useMemoizedLoaded = function (t, i) {
-    return useMemo(() => e.loaded(t, i), [t, i]);
-  };
-  e.loadedSuspendable = x;
-  e.useFromOptionalField = function (t) {
-    return useMemo(() => void 0 === t || t.status === ResourceStatus.Error ? e.loading() : e.loaded(t.data), [t]);
-  };
-  (t = e.Paginated || (e.Paginated = {})).loading = function () {
-    return Object.assign(new m(), {
-      hasNextPage: void 0,
-      hasPreviousPage: void 0,
-      isFetchingNextPage: !1,
-      isFetchingPreviousPage: !1
-    });
-  };
-  t.disabled = function () {
-    return Object.assign(new g(), {
-      hasNextPage: void 0,
-      hasPreviousPage: void 0,
-      isFetchingNextPage: !1,
-      isFetchingPreviousPage: !1
-    });
-  };
-  t.error = function (e) {
-    return Object.assign(new y(e), {
-      hasNextPage: void 0,
-      hasPreviousPage: void 0,
-      isFetchingNextPage: !1,
-      isFetchingPreviousPage: !1
-    });
-  };
-  t.loaded = function (e, t, i = []) {
-    return Object.assign(new _(e, i || []), {
-      ...t
-    });
-  };
-}($$r0 || ($$r0 = {}));
-let m = class {
-  status = "loading";
-  data = null;
-  errors = null;
-  unwrapOr(e) {
-    return e;
+  },
+
+  // Original: fromMemoized function
+  fromMemoized: xx((resource: any) => {
+    switch (resource.status) {
+      case 'disabled':
+        return resourceUtils.disabled()
+      case 'loading':
+        return resourceUtils.loading()
+      case 'errors':
+        return resourceUtils.error(resource.errors)
+      case 'loaded':
+        return resourceUtils.loaded(resource.data, resource.errors)
+      default:
+        throwTypeError(resource)
+    }
+  }),
+
+  // Original: suspendableFrom function
+  suspendableFrom(resource: any, promiseFn: () => Promise<any>, suspense: any) {
+    switch (resource.status) {
+      case 'disabled':
+        return new DisabledSuspendableResource(suspense)
+      case 'loading':
+        suspense.registerPromise(promiseFn())
+        return new LoadingSuspendableResource(suspense)
+      case 'errors':
+        return new ErrorSuspendableResource(resource.errors, suspense)
+      case 'loaded':
+        return new LoadedSuspendableResource(resource.data, resource.errors, suspense)
+      default:
+        throwTypeError(resource)
+    }
+  },
+
+  // Original: loading function
+  loading() {
+    return new LoadingResource()
+  },
+
+  // Original: loadingSuspendable function
+  loadingSuspendable(suspense: any) {
+    return new LoadingSuspendableResource(suspense)
+  },
+
+  // Original: disabled function
+  disabled() {
+    return new DisabledResource()
+  },
+
+  // Original: disabledSuspendable function
+  disabledSuspendable(suspense: any) {
+    return new DisabledSuspendableResource(suspense)
+  },
+
+  // Original: error function
+  error(errors: any[]) {
+    return new ErrorResource(errors)
+  },
+
+  // Original: errorSuspendable function
+  errorSuspendable(errors: any[], suspense: any) {
+    return new ErrorSuspendableResource(errors, suspense)
+  },
+
+  // Original: loaded function
+  loaded(data: any, errors: any[] = []) {
+    return new LoadedResource(data, errors)
+  },
+
+  // Original: useMemoizedLoaded function
+  useMemoizedLoaded(data: any, errors: any[] = []) {
+    return useMemo(() => this.loaded(data, errors), [data, errors])
+  },
+
+  // Original: loadedSuspendable function
+  loadedSuspendable(data: any, errors: any[] = [], suspense: any) {
+    return new LoadedSuspendableResource(data, errors, suspense)
+  },
+
+  // Original: useFromOptionalField function
+  useFromOptionalField(field: any) {
+    return useMemo(() => field === undefined || field.status === ResourceStatus.Error ? this.loading() : this.loaded(field.data), [field])
+  },
+
+  // Helper for transforming data (original: i function)
+  transformData(resource: any, ...data: any[]) {
+    return resource.transform((existing: any) => data.reduce((acc, item) => [...(acc || []), ...item], existing))
+  },
+
+  // Original: Paginated namespace
+  Paginated: {
+    loading() {
+      return Object.assign(new LoadingResource(), {
+        hasNextPage: undefined,
+        hasPreviousPage: undefined,
+        isFetchingNextPage: false,
+        isFetchingPreviousPage: false,
+      })
+    },
+    disabled() {
+      return Object.assign(new DisabledResource(), {
+        hasNextPage: undefined,
+        hasPreviousPage: undefined,
+        isFetchingNextPage: false,
+        isFetchingPreviousPage: false,
+      })
+    },
+    error(errors: any[]) {
+      return Object.assign(new ErrorResource(errors), {
+        hasNextPage: undefined,
+        hasPreviousPage: undefined,
+        isFetchingNextPage: false,
+        isFetchingPreviousPage: false,
+      })
+    },
+    loaded(data: any, pagination: any, errors: any[] = []) {
+      return Object.assign(new LoadedResource(data, errors), {
+        ...pagination,
+      })
+    },
+  },
+}
+
+// Original: m class
+class LoadingResource {
+  status: string = 'loading'
+  data: any = null
+  errors: any = null
+
+  unwrapOr(defaultValue: any): any {
+    return defaultValue
   }
-  transform() {
-    return $$r0.loading();
+
+  transform(): LoadingResource {
+    return resourceUtils.loading()
   }
-};
-let h = class {
-  constructor(e) {
-    this.suspense = e;
-    this.status = "loading";
-    this.data = null;
-    this.errors = null;
+}
+
+// Original: h class
+class LoadingSuspendableResource {
+  status: string = 'loading'
+  data: any = null
+  errors: any = null
+  suspense: any
+
+  constructor(suspense: any) {
+    this.suspense = suspense
   }
-  unwrapOr(e) {
-    return e;
+
+  unwrapOr(defaultValue: any): any {
+    return defaultValue
   }
-  transform() {
-    return $$r0.loadingSuspendable(this.suspense);
+
+  transform(): LoadingSuspendableResource {
+    return resourceUtils.loadingSuspendable(this.suspense)
   }
-};
-let g = class {
-  status = "disabled";
-  data = null;
-  errors = null;
-  unwrapOr(e) {
-    return e;
+}
+
+// Original: g class
+class DisabledResource {
+  status: string = 'disabled'
+  data: any = null
+  errors: any = null
+
+  unwrapOr(defaultValue: any): any {
+    return defaultValue
   }
-  transform() {
-    return $$r0.disabled();
+
+  transform(): DisabledResource {
+    return resourceUtils.disabled()
   }
-};
-let f = class {
-  constructor(e) {
-    this.suspense = e;
-    this.status = "disabled";
-    this.data = null;
-    this.errors = null;
+}
+
+// Original: f class
+class DisabledSuspendableResource {
+  status: string = 'disabled'
+  data: any = null
+  errors: any = null
+  suspense: any
+
+  constructor(suspense: any) {
+    this.suspense = suspense
   }
-  unwrapOr(e) {
-    return e;
+
+  unwrapOr(defaultValue: any): any {
+    return defaultValue
   }
-  transform() {
-    return $$r0.disabledSuspendable(this.suspense);
+
+  transform(): DisabledSuspendableResource {
+    return resourceUtils.disabledSuspendable(this.suspense)
   }
-};
-let _ = class {
-  constructor(e, t) {
-    this.data = e;
-    this.errors = t;
-    this.status = "loaded";
+}
+
+// Original: _ class
+class LoadedResource {
+  status: string = 'loaded'
+  data: any
+  errors: any[]
+
+  constructor(data: any, errors: any[] = []) {
+    this.data = data
+    this.errors = errors
   }
-  unwrapOr() {
-    return this.data;
+
+  unwrapOr(): any {
+    return this.data
   }
-  transform(e) {
-    return $$r0.loaded(e(this.data), this.errors);
+
+  transform(transformFn: (data: any) => any): LoadedResource {
+    return resourceUtils.loaded(transformFn(this.data), this.errors)
   }
-};
-let A = class {
-  constructor(e, t, i) {
-    this.data = e;
-    this.errors = t;
-    this.suspense = i;
-    this.status = "loaded";
+}
+
+// Original: A class
+class LoadedSuspendableResource {
+  status: string = 'loaded'
+  data: any
+  errors: any[]
+  suspense: any
+
+  constructor(data: any, errors: any[] = [], suspense: any) {
+    this.data = data
+    this.errors = errors
+    this.suspense = suspense
   }
-  unwrapOr() {
-    return this.data;
+
+  unwrapOr(): any {
+    return this.data
   }
-  transform(e) {
-    return $$r0.loadedSuspendable(e(this.data), this.errors, this.suspense);
+
+  transform(transformFn: (data: any) => any): LoadedSuspendableResource {
+    return resourceUtils.loadedSuspendable(transformFn(this.data), this.errors, this.suspense)
   }
-};
-let y = class {
-  constructor(e) {
-    this.errors = e;
-    this.status = "errors";
-    this.data = null;
+}
+
+// Original: y class
+class ErrorResource {
+  status: string = 'errors'
+  data: any = null
+  errors: any[]
+
+  constructor(errors: any[]) {
+    this.errors = errors
   }
-  unwrapOr(e) {
-    return e;
+
+  unwrapOr(defaultValue: any): any {
+    return defaultValue
   }
-  transform() {
-    return $$r0.error(this.errors);
+
+  transform(): ErrorResource {
+    return resourceUtils.error(this.errors)
   }
-};
-let b = class {
-  constructor(e, t) {
-    this.errors = e;
-    this.suspense = t;
-    this.status = "errors";
-    this.data = null;
+}
+
+// Original: b class
+class ErrorSuspendableResource {
+  status: string = 'errors'
+  data: any = null
+  errors: any[]
+  suspense: any
+
+  constructor(errors: any[], suspense: any) {
+    this.errors = errors
+    this.suspense = suspense
   }
-  unwrapOr(e) {
-    return e;
+
+  unwrapOr(defaultValue: any): any {
+    return defaultValue
   }
-  transform() {
-    return $$r0.errorSuspendable(this.errors, this.suspense);
+
+  transform(): ErrorSuspendableResource {
+    return resourceUtils.errorSuspendable(this.errors, this.suspense)
   }
-};
-export const Qw = $$r0;
-export const H = $$p1;
+}
+
+// Exports (original: Qw = $$r0, H = $$p1)
+export const Qw = resourceUtils

@@ -3,7 +3,7 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import { E as _$$E } from "../905/632989";
 import { o as _$$o } from "../905/530496";
 import { Xr } from "../figma_app/27355";
-import { Qw } from "../905/989992";
+import { resourceUtils } from "../905/989992";
 import { z } from "../905/239603";
 import c from "classnames";
 import { hC } from "../figma_app/901889";
@@ -19,8 +19,8 @@ import { q5 } from "../figma_app/516028";
 import { SPC } from "../figma_app/43951";
 import { S } from "../figma_app/787550";
 import { qp } from "../figma_app/932601";
-if (443 == require.j) { }
-if (443 == require.j) { }
+if (443 == require.j) {}
+if (443 == require.j) {}
 var u = c;
 export function $$E0({
   pageRowRef: e,
@@ -100,7 +100,7 @@ export function $$E0({
 }
 let I = z.record(z.object({
   thumbnail_url: z.string(),
-  thumbnail_meta: z.object({}).passthrough().transform((e) => JSON.stringify(e)),
+  thumbnail_meta: z.object({}).passthrough().transform(e => JSON.stringify(e)),
   created_at: z.string().optional()
 }));
 export function $$N1(e) {
@@ -110,7 +110,7 @@ export function $$N1(e) {
   }, {
     enabled: !!(t?.key && e)
   });
-  return Qw.useTransform(r, (e) => {
+  return resourceUtils.useTransform(r, e => {
     if (e?.file?.pagesSignedThumbnailData.status !== tT.Loaded) return null;
     try {
       if (!e?.file?.pagesSignedThumbnailData.data) return null;
@@ -130,4 +130,4 @@ export function $$N1(e) {
   });
 }
 export const c0 = $$E0;
-export const Jc = $$N1; 
+export const Jc = $$N1;

@@ -1,7 +1,7 @@
 import { VH } from "../figma_app/178419";
 import { Et } from "../905/125019";
 import { Vzr } from "../figma_app/763686";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { sf } from "../figma_app/12535";
 export async function $$l0(e, t) {
   try {
@@ -22,7 +22,7 @@ export async function $$l0(e, t) {
 }
 async function d() {
   try {
-    let e = VH(UN());
+    let e = VH(getSingletonSceneGraph());
     if (!e) return;
     let t = await $$u1(e.guid, {
       fixedWidth: 1920,

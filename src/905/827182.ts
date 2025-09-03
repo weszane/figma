@@ -9,7 +9,7 @@ import { W } from "../905/63398";
 import { J as _$$J } from "../905/614223";
 import { Ez5, Vzr, glU, rcl, plo } from "../figma_app/763686";
 import { oY } from "../figma_app/387100";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import f from "classnames";
 import { A as _$$A } from "../vendor/850789";
@@ -168,7 +168,7 @@ export function $$G1(e) {
       }
       G(function (e) {
         if (!Vzr || !e) return;
-        let t = UN().get(e);
+        let t = getSingletonSceneGraph().get(e);
         if (!t) return;
         let i = 10 / t.size.y;
         return $A({

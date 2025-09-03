@@ -1,6 +1,6 @@
 import { useMemo, useRef, useEffect } from "react";
 import { rXF } from "../figma_app/763686";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { eU, fp, md } from "../figma_app/27355";
 import { k9 } from "../905/19536";
@@ -62,7 +62,7 @@ export function $$A1({
   orgId: v
 }) {
   let A = useMemo(() => !!f.sessionId, [f]);
-  let x = function(e, t) {
+  let x = function (e, t) {
     let r = uQ();
     let [i, a] = fp(b);
     useEffect(() => {
@@ -102,7 +102,7 @@ export function $$A1({
   let N = k9(() => A ? t.map(e => e) : [], [t, A]);
   let C = k9(() => A ? e.map(e => e) : [], [e, A]);
   let w = k9(() => A ? r.map(e => e.libraryKey) : [], [r, A]);
-  !function(e, t, r) {
+  !function (e, t, r) {
     let [i, a] = fp(T);
     let l = useMemo(() => _$$UN(e), [e]);
     useEffect(() => (r ? (a({
@@ -139,7 +139,7 @@ export function $$A1({
       });
     }), [t, l, a, r]);
   }(f.suggestionType, w, A);
-  let O = function(e, t, r, i) {
+  let O = function (e, t, r, i) {
     let a = md(b);
     let l = md(T);
     let [d, c] = fp(I);
@@ -188,13 +188,13 @@ export function $$A1({
     }, [e, t, r, h, a, u, g, l, m, c, i]);
     return d;
   }(C, N, f, A);
-  let R = function(e, t) {
+  let R = function (e, t) {
     let r = uQ();
     let [i] = fp(b);
     return useMemo(() => {
       if (!getFeatureFlags().aip_flower_garden_shadow_reranker || !r || !t || !e || "loaded" !== i.status) return null;
       let n = performance.now();
-      let o = UN().get(r);
+      let o = getSingletonSceneGraph().get(r);
       return o ? {
         context: cQ(o, t, i.data.variableConsumptionInDocument, i.data.variableConsumptionInSubtree),
         timing: performance.now() - n
@@ -220,7 +220,7 @@ export function $$A1({
       });
     }
   }, [x, O, R, f, A]);
-  (function({
+  (function ({
     variableRerankingData: e,
     candidates: t,
     selectionContext: r,
@@ -250,7 +250,7 @@ export function $$A1({
       e.queryId = c;
       try {
         D.recommendVariables(p);
-      } catch { }
+      } catch {}
     }, [t, o, a, e, r, l, d]);
   })({
     candidates: O,
@@ -264,4 +264,4 @@ export function $$A1({
 }
 export const Fs = $$v0;
 export const g$ = $$A1;
-export const rv = $$S2; 
+export const rv = $$S2;

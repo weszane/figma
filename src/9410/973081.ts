@@ -56,7 +56,7 @@ import { S as _$$S } from "../figma_app/420927";
 import { y as _$$y2 } from "../905/409121";
 import { a as _$$a } from "../905/518538";
 import { AD } from "../905/871411";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { parsePxNumber, parsePxInt } from "../figma_app/783094";
 import { cm } from "../9410/486658";
 import { wq, I_ } from "../905/234821";
@@ -632,7 +632,7 @@ function ej({
       n.forEach(e => {
         let t = e.comments[0]?.client_meta?.node_id;
         if (!t || !e.canvasPosition) return;
-        let i = UN().get(t);
+        let i = getSingletonSceneGraph().get(t);
         let n = i?.containingCooperFrameId() ?? AD;
         n !== AD && e.canvasPosition && (s(t => new Map(t.set(e.id, e.canvasPosition))), r(t => new Map(t.set(e.id, n))));
       });
@@ -662,7 +662,7 @@ function ej({
     if (t) return t;
     let i = e.comments[0]?.client_meta?.node_id;
     if (!i) return AD;
-    let r = UN().get(i);
+    let r = getSingletonSceneGraph().get(i);
     return r?.containingCooperFrameId() ?? AD;
   }, [l]);
   let p = _$$R2();
@@ -828,7 +828,7 @@ function eM({
   let g = useCallback(e => {
     if (!i) return !1;
     let t = e && s ? o.getCommentDestinationForCanvasPosition(e, s)?.nodeId : void 0;
-    return !t || !_$$rV(UN(), i, t);
+    return !t || !_$$rV(getSingletonSceneGraph(), i, t);
   }, [s, o, i]);
   let x = useMemo(() => {
     let e = {
@@ -1262,7 +1262,7 @@ class tk extends PureComponent {
       let t = pP(JT.AUTO_RENAME_LAYERS).state;
       t === qy.DONE ? this.props.exports.items.forEach(t => {
         if (!e.includes(t.nodeID)) return;
-        let i = UN().get(t.nodeID)?.name;
+        let i = getSingletonSceneGraph().get(t.nodeID)?.name;
         t.filename = t.filename.replace(t.title, i || t.title);
         t.title = i || t.title;
         t.isBeingRenamed = !1;
@@ -2788,7 +2788,7 @@ let ne = {
   flags: ["edit", "design"],
   callback: (e, t, i) => {
     let r = debugState.getState();
-    let n = UN();
+    let n = getSingletonSceneGraph();
     let a = _$$j(n.getDirectlySelectedNodes().map(e => e.guid));
     let s = r.openFile?.key;
     let o = r.fileVersion;
@@ -3148,7 +3148,7 @@ let ns = class e extends PureComponent {
       flags: ["edit", "!slides", "sites"],
       featureFlags: ["sites"],
       callback: () => {
-        let t = UN().getCurrentPage()?.guid;
+        let t = getSingletonSceneGraph().getCurrentPage()?.guid;
         void 0 !== t && _$$l.user("set-responsive-set-settings", () => {
           glU?.setResponsiveSetSettings({
             faviconID: e ? "" : this.getSelectionGuid()
@@ -3250,7 +3250,7 @@ let ns = class e extends PureComponent {
           attributionContext: t ? _$$b2(this.props.attributionContextKey, _$$d.FULLSCREEN_CONTEXT_MENU) : null
         });
         if (getFeatureFlags().ce_copy_labelled_links) {
-          let t = UN().get(this.getSelectionGuid());
+          let t = getSingletonSceneGraph().get(this.getSelectionGuid());
           e = t ? t.name : this.props.openFile.name;
         }
         s && zl.set(ui, c ?? null);
@@ -3299,7 +3299,7 @@ let ns = class e extends PureComponent {
             }(this.state.nodeTypeForCopyLinkText)
           };
           if (n && c) {
-            let e = UN().get(c);
+            let e = getSingletonSceneGraph().get(c);
             if (e) return {
               visualBellMessageOverride: _$$t("copy_to_clipboard.slides.link_to_slide_copied_to_clipboard", {
                 name: e.name
@@ -3788,7 +3788,7 @@ let ns = class e extends PureComponent {
   skipSlidesMenu() {
     let e = (() => {
       for (let e of Object.keys(this.props.sceneGraphSelection)) {
-        let t = UN().get(e);
+        let t = getSingletonSceneGraph().get(e);
         if (!_$$Y2(t)) return !1;
       }
       return !0;
@@ -3798,7 +3798,7 @@ let ns = class e extends PureComponent {
       separator: !0
     }, (() => {
       for (let e of Object.keys(this.props.sceneGraphSelection)) {
-        let t = UN().get(e);
+        let t = getSingletonSceneGraph().get(e);
         if (!_$$Y2(t) || !t.isSkippedSlide) return !1;
       }
       return !0;
@@ -3813,7 +3813,7 @@ let ns = class e extends PureComponent {
   slidesObjectAnimationMenu() {
     return (() => {
       for (let e of Object.keys(this.props.sceneGraphSelection)) {
-        let t = UN().get(e);
+        let t = getSingletonSceneGraph().get(e);
         if (!t || !t.isInSlide) return !1;
       }
       return !0;
@@ -4206,7 +4206,7 @@ function nl(e) {
   let g = J2(UK().spellCheckPreference);
   let _ = _$$R(e => {
     let t = Object.keys(e.mirror.sceneGraphSelection);
-    let i = 1 === t.length ? UN().get(t[0]) : null;
+    let i = 1 === t.length ? getSingletonSceneGraph().get(t[0]) : null;
     let r = null != i && ("FRAME" === i.type && !i.resizeToFit || "SYMBOL" === i.type || "SECTION" === i.type || "RESPONSIVE_SET" === i.type || "WEBPAGE" === i.type);
     let n = null != i && "FRAME" === i.type && i.isTopLevelFrame();
     let a = e.selectedView.editorType;
@@ -4300,7 +4300,7 @@ function nc(e) {
   let g = J2(UK().spellCheckPreference);
   let _ = _$$R(e => {
     let t = Object.keys(e.mirror.sceneGraphSelection);
-    let i = 1 === t.length ? UN().get(t[0]) : null;
+    let i = 1 === t.length ? getSingletonSceneGraph().get(t[0]) : null;
     let r = null != i && ("FRAME" === i.type && !i.resizeToFit || "SYMBOL" === i.type || "SECTION" === i.type);
     let n = e.selectedView.editorType;
     let a = r && !i?.isInstanceSublayer;
@@ -4765,7 +4765,7 @@ function nk({
 }) {
   let i = wA();
   let s = d4(e => e.mirror.appModel);
-  let l = UN();
+  let l = getSingletonSceneGraph();
   let d = _$$ni();
   let c = xo();
   let u = useCallback(() => {
@@ -4939,7 +4939,7 @@ function nY({
 }) {
   let s = wA();
   let u = d4(e => e.mirror.appModel);
-  let p = UN();
+  let p = getSingletonSceneGraph();
   let h = mJ(t);
   let m = !!h?.hasReadyStatus;
   let f = !!h?.hasCompletedStatus;
@@ -5526,7 +5526,7 @@ function ab({
     });
     let r = i.zoomScale;
     let a = useMemo(() => {
-      let t = UN().get(e);
+      let t = getSingletonSceneGraph().get(e);
       if (!t) return null;
       let i = t.absoluteBoundingBox;
       return {

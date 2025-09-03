@@ -1,4 +1,4 @@
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { gL } from "../figma_app/618433";
 import { X } from "../905/880040";
@@ -39,7 +39,7 @@ export function $$_0() {
 export function $$h1() {
   let e = ZS();
   let t = function () {
-    let e = UN().getDirectlySelectedNodes();
+    let e = getSingletonSceneGraph().getDirectlySelectedNodes();
     let t = e[0]?.getNearestDakotaCollectionId();
     let r = gL(t ?? "");
     return !!(r.data?.fieldSchemas ?? []).some(e => _j.IMAGE === e.fieldType);

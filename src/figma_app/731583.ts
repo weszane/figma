@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { flushSync } from "../vendor/944059";
 import { glU } from "../figma_app/763686";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 let o = {};
 export function $$l0(e, t, r) {
   o[e] = r;
@@ -28,7 +28,7 @@ export function $$u3(e, t, r, a = {}) {
       currentNodePosition
     } = $$l0(e, t, e => {
       let t = () => c(t => {
-        if (!UN().get(e.nodeId) || !e.position) return t;
+        if (!getSingletonSceneGraph().get(e.nodeId) || !e.position) return t;
         let n = e.position;
         _(e.position) && (n = h(n));
         p(e.position) && (n = m(n));
@@ -43,7 +43,7 @@ export function $$u3(e, t, r, a = {}) {
       }) : t();
     });
     let o = Object.entries(currentNodePosition).reduce((e, [t, n]) => {
-      if (UN().get(t) && n?.position) {
+      if (getSingletonSceneGraph().get(t) && n?.position) {
         let i = n?.position;
         _(n?.position) && (i = h(i));
         p(n?.position) && (i = m(i));

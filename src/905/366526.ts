@@ -175,7 +175,7 @@ import { a as _$$a4, V as _$$V2 } from '../905/541060';
 import { R as _$$R5 } from '../905/542113';
 import { rH as _$$rH } from '../905/542194';
 import { xH } from '../905/546357';
-import { RI } from '../905/553831';
+import { subscribeAndGetStatus } from '../905/553831';
 import { $B, aL as _$$aL, hT as _$$hT2, Y4 } from '../905/561087';
 import { H as _$$H2, R as _$$R2 } from '../905/561433';
 import { i as _$$i2 } from '../905/565139';
@@ -225,7 +225,7 @@ import { N as _$$N } from '../905/696711';
 import { R as _$$R3, V as _$$V3 } from '../905/697254';
 import { De as _$$De } from '../905/697795';
 import { X as _$$X2 } from '../905/698965';
-import { M3 as _$$M2, UN as _$$UN } from '../905/700578';
+import { SingletonSceneGraph, getSingletonSceneGraph } from '../905/700578';
 import { o as _$$o8 } from '../905/701807';
 import { U as _$$U } from '../905/707331';
 import { S3 } from '../905/708054';
@@ -2001,7 +2001,7 @@ let iz = e => t => function (i) {
       let o = Ns(s, s.key);
       o && WB().optimisticallyUpdate(o, n);
       let l = e.getState();
-      l.selectedView.view === 'fullscreen' && l.openFile && o && RI(ehp, {
+      l.selectedView.view === 'fullscreen' && l.openFile && o && subscribeAndGetStatus(ehp, {
         fileKey: s.key
       }).then(t => {
         if (t === 'loading') {
@@ -10033,7 +10033,7 @@ let cE = HY({
     } : e;
   },
   sceneGraph(e = cy, t) {
-    return _$$Ts.matches(t) || _$$a4.matches(t) ? (X0(), cy) : _$$p3.matches(t) && t.payload.invalidateSceneGraph ? (WR(), new _$$M2()) : e;
+    return _$$Ts.matches(t) || _$$a4.matches(t) ? (X0(), cy) : _$$p3.matches(t) && t.payload.invalidateSceneGraph ? (WR(), new SingletonSceneGraph()) : e;
   },
   sceneGraphSelection: bp,
   objectsPanelRowRebuildCounter(e = 0, t) {
@@ -15191,7 +15191,7 @@ export async function $$hz0(e, t, d = {
           });
         }
         async function x(e) {
-          await _$$UN().setCurrentPageFromNodeAsync(e);
+          await getSingletonSceneGraph().setCurrentPageFromNodeAsync(e);
         }
         function w(t) {
           e.dispatch(_$$Qh({
@@ -15308,7 +15308,7 @@ export async function $$hz0(e, t, d = {
       _$$X.report(_$$sx);
     }
     await (eo || (eo = el()), eo);
-    _$$UN().setChangeListenersConfig({
+    getSingletonSceneGraph().setChangeListenersConfig({
       getCurrentTimeMs: () => Date.now(),
       getTimeBudgetMs: () => 10,
       deferFn: e => (iC.add(e), _$$H2(), () => iC.$$delete(e))

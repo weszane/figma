@@ -1,4 +1,4 @@
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { zl } from "../figma_app/27355";
 import { az } from "../905/449184";
@@ -28,7 +28,7 @@ function g({
   isDelayed: i
 }) {
   let r = zl.get(W);
-  let s = UN();
+  let s = getSingletonSceneGraph();
   let h = s.get(t);
   let g = h?.parentNode;
   let f = r ? s.get(r) : void 0;

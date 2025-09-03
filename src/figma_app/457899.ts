@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { isNullish } from "../figma_app/95419";
-import { Qw } from "../905/989992";
+import { resourceUtils } from "../905/989992";
 import { IT, mI } from "../figma_app/566371";
 import { Ln } from "../905/84777";
 import { Gu } from "../905/513035";
@@ -52,7 +52,7 @@ export function $$h2({
     if (e) return e;
     let r = u.data;
     let n = h.data;
-    return r ? n ? Qw.loadedSuspendable(N_.dict(e => t === e || $$_1({
+    return r ? n ? resourceUtils.loadedSuspendable(N_.dict(e => t === e || $$_1({
       prices: r,
       currentSeatType: t,
       nextSeatType: e

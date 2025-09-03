@@ -6,7 +6,7 @@ import { j } from "../figma_app/171378";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { glU } from "../figma_app/763686";
 import { l7 } from "../905/189185";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { md, zl, Xr } from "../figma_app/27355";
 import { FJ } from "../905/508367";
@@ -113,7 +113,7 @@ export function $$L1() {
 }
 export function $$P3() {
   useEffect(() => {
-    let e = UN();
+    let e = getSingletonSceneGraph();
     let t = VH(e);
     let r = t?.backingCodeComponent;
     let n = r?.exportedFromCodeFile;

@@ -61,7 +61,7 @@ import { I as _$$I2 } from "../905/706464";
 import { glU, m1T } from "../figma_app/763686";
 import { D as _$$D2 } from "../905/499575";
 import { GI, oY } from "../figma_app/387100";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { q as _$$q3 } from "../905/196201";
 import { xx } from "../figma_app/815945";
@@ -505,7 +505,7 @@ export function $$tI2(e) {
         };
       case "WIDGET":
         {
-          let t = e.guid ? UN().get(e.guid.toString()) : null;
+          let t = e.guid ? getSingletonSceneGraph().get(e.guid.toString()) : null;
           if (t && "EMBED_WIDGET" === t.widgetId) return {
             src: n ? jsx(_$$G2, {}) : _$$A13,
             tooltip: _$$t3("layer_icon.tooltip.embed")

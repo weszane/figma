@@ -1,7 +1,7 @@
 import { sj, uf } from "../figma_app/728005";
 import { l7 } from "../905/189185";
 import { hV } from "../figma_app/387100";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { getInitialOptions } from "../figma_app/169182";
 import { F } from "../905/302958";
 import { UK } from "../figma_app/740163";
@@ -21,7 +21,7 @@ async function b(e, t) {
   let n = 0;
   let o = [];
   for (let s of t) {
-    let c = UN().get(s.data.nodeId);
+    let c = getSingletonSceneGraph().get(s.data.nodeId);
     if (!c) {
       g(e, `Node ${s.data.nodeId} not found.`);
       return null;
@@ -84,7 +84,7 @@ export async function $$y0(e) {
     backendEnv: getInitialOptions().cluster_name
   };
   let n = iy();
-  let a = UN().getCurrentPage().childrenNodes.filter(e => "SECTION" === e.type);
+  let a = getSingletonSceneGraph().getCurrentPage().childrenNodes.filter(e => "SECTION" === e.type);
   let r = function (e, t) {
     let n = t.find(e => "Codebases" === e.name);
     if (!n) {

@@ -2,7 +2,7 @@ import { R0 } from "../figma_app/273493";
 import { qmM, Ez5, GP2, zbP, zd5, PVe } from "../figma_app/763686";
 import { r as _$$r } from "../905/249071";
 import { M } from "../905/512402";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { zl } from "../figma_app/27355";
 import { t as _$$t } from "../905/303541";
 import { j } from "../905/881708";
@@ -39,7 +39,7 @@ export class $$A0 extends j {
   render(e, t) {
     if (!qmM.shouldRenderAddButton()) return;
     let i = qmM.findNodeForAddButton();
-    let l = UN().get(i);
+    let l = getSingletonSceneGraph().get(i);
     if (l) {
       let i = l.absoluteBoundingBox;
       let o = new M(i.x + i.w / 2, i.y + i.h);

@@ -1,4 +1,4 @@
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { c as _$$c } from "../905/94678";
 import { throwTypeError } from "../figma_app/465776";
 import { J, O as _$$O } from "../905/223510";
@@ -128,7 +128,7 @@ function E(e, t, i) {
       for (let e of r) {
         let r = i[e];
         if ("INSTANCE_SWAP" === r.type) {
-          let i = UN().get(r.defaultValue);
+          let i = getSingletonSceneGraph().get(r.defaultValue);
           if (i && "SYMBOL" === i.type) {
             if ("Slot" === i.name) {
               a.push({
@@ -202,7 +202,7 @@ function E(e, t, i) {
           s[e] = {};
           let i = {};
           if (a.fixed) {
-            let o = UN().get(r);
+            let o = getSingletonSceneGraph().get(r);
             if (o) {
               let n = $$I1(o, t);
               let r = a.fixed?.split(",").map(e => e.trim()) ?? [];
@@ -315,7 +315,7 @@ function E(e, t, i) {
                   referencedTypes: a
                 };
               }
-              let a = UN().get(i.defaultValue);
+              let a = getSingletonSceneGraph().get(i.defaultValue);
               if (a && "SYMBOL" === a.type) return A({
                 component: a,
                 rawProp: t,
@@ -326,7 +326,7 @@ function E(e, t, i) {
           case "NESTED_INSTANCE":
             {
               let e = i.componentId;
-              let a = UN().get(e);
+              let a = getSingletonSceneGraph().get(e);
               if (a && ("SYMBOL" === a.type || a.isStateGroup)) return A({
                 component: a,
                 rawProp: t,
@@ -403,7 +403,7 @@ function E(e, t, i) {
                 };
               case "GROUPED_INSTANCE_SWAP":
                 {
-                  let e = UN().get(i.defaultValue);
+                  let e = getSingletonSceneGraph().get(i.defaultValue);
                   if (!e || "SYMBOL" !== e.type) return {
                     type: "SIMPLE",
                     valueType: "UNKNOWN",
@@ -531,7 +531,7 @@ function E(e, t, i) {
               break;
             case "COMPONENT_JSX":
               {
-                let t = UN().get(s.componentId);
+                let t = getSingletonSceneGraph().get(s.componentId);
                 if (t) {
                   let n = $$I1(t, r);
                   for (let [t, r] of Object.entries(n.prefixTypes)) i(`${e}${bi(t)}`, r);
@@ -542,7 +542,7 @@ function E(e, t, i) {
             case "COMPONENT_INLINED":
             case "COMPONENT":
               {
-                let t = UN().get(s.componentId);
+                let t = getSingletonSceneGraph().get(s.componentId);
                 if (t) {
                   let n = $$I1(t, r);
                   for (let [t, r] of Object.entries(n.prefixTypes)) i(`${e}${bi(t)}`, r);

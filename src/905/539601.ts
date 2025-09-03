@@ -1,6 +1,6 @@
 import { assert, throwTypeError } from "../figma_app/465776";
 import { Iz, eU } from "../figma_app/27355";
-import { Qw } from "../905/989992";
+import { resourceUtils } from "../905/989992";
 import { oE } from "../905/953718";
 import { A } from "../905/920142";
 import { C5 } from "../905/147383";
@@ -30,7 +30,7 @@ class p {
     FC(this.userFlagName);
   }
 }
-let m = Qw.loaded({
+let m = resourceUtils.loaded({
   lifecycleState: null
 });
 function h(e) {

@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { useState } from "react";
 import { wA } from "../vendor/514228";
 import { glU } from "../figma_app/763686";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { h as _$$h } from "../905/207101";
 import { tx } from "../905/303541";
 import { b as _$$b } from "../905/985254";
@@ -31,7 +31,7 @@ export function $$E0({
 }) {
   let w = wA();
   let O = Vr();
-  let R = x?.(UN()) || eN(UN(), "FRAME", O);
+  let R = x?.(getSingletonSceneGraph()) || eN(getSingletonSceneGraph(), "FRAME", O);
   let L = _$$Z();
   let [P, D] = useState(!1);
   if (_$$h(() => {

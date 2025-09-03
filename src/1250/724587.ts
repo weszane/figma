@@ -12,7 +12,7 @@ import { kA } from "../figma_app/336853";
 import { getPermissionsStateMemoized, hasEditorRoleAccessOnTeam } from "../figma_app/642025";
 import { useState, useRef } from "react";
 import { getFeatureFlags } from "../905/601108";
-import { Qw } from "../905/989992";
+import { resourceUtils } from "../905/989992";
 import { sx } from "../905/449184";
 import { Rs } from "../figma_app/288654";
 import { V } from "../905/223767";
@@ -85,7 +85,7 @@ function R(e) {
     enabled: !p && _X(Pw.GROUP_7)
   });
   let M = MF({
-    oldValue: Qw.loaded(hasEditorRoleAccessOnTeam(e.teamId, u)),
+    oldValue: resourceUtils.loaded(hasEditorRoleAccessOnTeam(e.teamId, u)),
     newValue: R.transform(({
       team: e
     }) => !!(e?.roleOnObjectForUser && e.roleOnObjectForUser.level >= e6.EDITOR)),

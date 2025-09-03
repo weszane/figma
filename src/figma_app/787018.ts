@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { Qw } from "../905/989992";
+import { resourceUtils } from "../905/989992";
 import { p } from "../figma_app/288654";
 import { vE } from "../figma_app/43951";
 export function $$o1(e) {
@@ -16,7 +16,7 @@ export function $$l0(e, t = !0) {
   let d = p(vE, r, {
     enabled: t
   });
-  return useMemo(() => Qw.all(d.map(e => e.result)).transform(e => {
+  return useMemo(() => resourceUtils.all(d.map(e => e.result)).transform(e => {
     let t = {};
     for (let r of e) {
       let e = r.prototype;

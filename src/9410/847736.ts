@@ -69,7 +69,7 @@ import { RL, B3 } from "../figma_app/862289";
 import { zF } from "../figma_app/297822";
 import { v0, Hn, Wb, Gd, M0 } from "../9410/341455";
 import { S as _$$S, E as _$$E } from "../figma_app/999099";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { fF } from "../905/471229";
 import { Ay, c6 } from "../figma_app/432652";
 import { _s } from "../figma_app/33126";
@@ -740,7 +740,7 @@ async function eZ({
 }
 let eQ = _$$n2(e => {
   if (!e) return [];
-  let t = UN().get(e);
+  let t = getSingletonSceneGraph().get(e);
   if (!t) return [];
   let i = [];
   t.childrenNodes.forEach(e => {
@@ -775,7 +775,7 @@ async function e0(e, t) {
 function e1(e) {
   e && l7.user("remove-hidden-preset-nodes", () => {
     for (let t of e) {
-      let e = UN().get(t);
+      let e = getSingletonSceneGraph().get(t);
       if (e) try {
         e.removeSelfAndChildren();
       } catch (e) {

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { A } from "../vendor/850789";
 import { qc, _X } from "../figma_app/62612";
 let $$o0 = "1.2";
@@ -24,7 +24,7 @@ export function $$d5(e, t, r) {
   return a;
 }
 export function $$c3(e, t) {
-  let r = UN().getCurrentPage();
+  let r = getSingletonSceneGraph().getCurrentPage();
   if (!r) return;
   let n = function (e, t, r) {
     let n = function (e) {

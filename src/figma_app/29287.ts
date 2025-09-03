@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { wA } from "../vendor/514228";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { md, zl } from "../figma_app/27355";
 import { debugState } from "../905/407919";
 import { y8 } from "../figma_app/459490";
@@ -26,7 +26,7 @@ export function $$b3() {
     e && I({
       figjamData: {
         figjamFileKey: e,
-        selectedGuids: UN().getDirectlySelectedNodes().slice(0, S).map(e => e.guid),
+        selectedGuids: getSingletonSceneGraph().getDirectlySelectedNodes().slice(0, S).map(e => e.guid),
         pageGuids: [d]
       },
       newFileState: l,

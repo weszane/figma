@@ -1,7 +1,7 @@
-import { J as _$$J } from "../905/251556";
+import { serializeJSON } from "../905/251556";
 import { A as _$$A } from "../905/763387";
 export function $$a1(e, t) {
-  return _$$J([e, t]);
+  return serializeJSON([e, t]);
 }
 export class $$s0 {
   constructor(e, t, i, n) {
@@ -11,7 +11,6 @@ export class $$s0 {
     this.observable = n;
     this.root = new _$$A(this, i, {}, t.root, []);
   }
-  root;
   viewResultForDebugging = void 0;
   get path() {
     return [this.key];

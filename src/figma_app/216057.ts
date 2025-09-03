@@ -5,7 +5,7 @@ import { ey, yG } from "../905/859698";
 import { Ez5, CWU } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { eU, FZ, Iz } from "../figma_app/27355";
-import { Qw } from "../905/989992";
+import { resourceUtils } from "../905/989992";
 import u from "../vendor/223926";
 import _ from "../vendor/239910";
 import m from "lodash-es/mapValues";
@@ -214,7 +214,7 @@ let $$Q24 = Iz(e => eU(t => {
   return r;
 }), arraysEqual);
 export function $$ee10(e) {
-  let t = g()(h()(e), () => Qw.disabled());
+  let t = g()(h()(e), () => resourceUtils.disabled());
   return eU(t);
 }
 let et = eU(e => {

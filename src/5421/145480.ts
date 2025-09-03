@@ -3,7 +3,7 @@ import { wA } from "../vendor/514228";
 import { MO, hq, UQ } from "../2824/40443";
 import { glU } from "../figma_app/763686";
 import { l7, zk } from "../905/189185";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { md } from "../figma_app/27355";
 import { Xt } from "../figma_app/623293";
 import { XHRError } from "../905/910117";
@@ -155,11 +155,11 @@ export function $$S1() {
           "canvas" === target ? function (e, t, n) {
             let o = Ze(e);
             o && l7.user("paste-buffer-to-canvas", () => {
-              let e = UN().createNode("FRAME");
+              let e = getSingletonSceneGraph().createNode("FRAME");
               e.stackMode = "VERTICAL";
               e.stackPrimarySizing = "RESIZE_TO_FIT_WITH_IMPLICIT_SIZE";
               e.stackCounterSizing = "RESIZE_TO_FIT_WITH_IMPLICIT_SIZE";
-              let i = UN();
+              let i = getSingletonSceneGraph();
               let r = i.getInternalCanvas();
               if (r) r.appendChild(e);else throw Error("Internal canvas not found");
               if (!glU?.directlyPasteSuggestion(o, e.parentGuid ?? "", null, e.guid)) {
@@ -183,7 +183,7 @@ export function $$S1() {
           if (v.isAborted()) return;
           if (!e?.root) throw Error("No DOM data received from preview iframe");
           let t = E[mode];
-          let n = await t(e, UN(), {
+          let n = await t(e, getSingletonSceneGraph(), {
             decodeImage: UD
           });
           await new Promise(e => requestAnimationFrame(() => requestAnimationFrame(e)));

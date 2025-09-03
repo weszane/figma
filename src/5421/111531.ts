@@ -16,7 +16,7 @@ import { x as _$$x } from "../905/149501";
 import { a as _$$a } from "../5421/219397";
 import { Tj } from "../figma_app/342207";
 import { Ez5, Nfd, glU, z6l } from "../figma_app/763686";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { md, zl, fp, Xr } from "../figma_app/27355";
 import { t as _$$t, tx as _$$tx } from "../905/303541";
@@ -1953,7 +1953,7 @@ function ny({
   let m = iZ();
   let g = _$$tS();
   let y = Xu();
-  let f = useMemo(() => UN().get(t), [t]);
+  let f = useMemo(() => getSingletonSceneGraph().get(t), [t]);
   let _ = Oc();
   let b = _ ? lV.FIGMAKE : lV.CODE_IN_SITES;
   let {
@@ -2154,7 +2154,7 @@ class nC {
         modifiedCodeFileNodeIds: []
       };
     }
-    let s = UN();
+    let s = getSingletonSceneGraph();
     let {
       folderPath,
       fileName
@@ -3331,7 +3331,7 @@ function nU({
   let [l] = fp(Y_);
   let [s, c] = fp(TJ);
   let b = useCallback(e => {
-    let t = UN().get(e);
+    let t = getSingletonSceneGraph().get(e);
     let n = t?.exportedFromCodeFile;
     t && n && c(e => ({
       ...e,
@@ -3343,7 +3343,7 @@ function nU({
   let P = H1(A ?? null);
   let D = P[0];
   let V = s[w] ?? D?.localGuid;
-  let B = UN();
+  let B = getSingletonSceneGraph();
   let H = cu();
   let U = H[0] ? B.get(H[0]) : null;
   let F = wE(U);
@@ -3657,7 +3657,7 @@ class n$ {
   }
   getNode() {
     if (!this.nodeId) throw Error("Node ID is not set");
-    let e = UN().get(this.nodeId);
+    let e = getSingletonSceneGraph().get(this.nodeId);
     if (!e || !e.isAlive) throw Error("Node no longer exists in the scene");
     return e;
   }

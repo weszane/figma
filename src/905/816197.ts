@@ -1,7 +1,7 @@
 import { ServiceCategories as _$$e } from "../905/165054";
 import { dPJ, DPQ, h3O, kul, xal } from "../figma_app/763686";
 import { getSceneGraphInstance } from "../905/830071";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { debugState } from "../905/407919";
 import { $D } from "../905/11";
 import { IL } from "../figma_app/582924";
@@ -10,10 +10,10 @@ import { n as _$$n } from "../905/347702";
 let p = getSceneGraphInstance();
 let m = _$$n(() => 10);
 let h = {
-  invalidIncremental: (e) => `Cannot call with documentAccess: dynamic-page. Use ${e} instead.`,
+  invalidIncremental: e => `Cannot call with documentAccess: dynamic-page. Use ${e} instead.`,
   incrementalUnsafeMemberWarning: (e, t) => `\`${e}\` is deprecated. Please use \`${t}\` to ensure consistent results.`,
-  invalidPageIncremental: (e) => `Cannot access ${e} on a page that has not been explicitly loaded. Remember to call \`await page.loadAsync()\` or \`await figma.loadAllPagesAsync()' first.`,
-  invalidPageRelaxedWarning: (e) => `You are accessing ${e} on a page that has not been explicitly loaded. This is not recommended and may lead to unexpected behavior. Remember to call \`await page.loadAsync()\` or \`await figma.loadAllPagesAsync()' first.`
+  invalidPageIncremental: e => `Cannot access ${e} on a page that has not been explicitly loaded. Remember to call \`await page.loadAsync()\` or \`await figma.loadAllPagesAsync()' first.`,
+  invalidPageRelaxedWarning: e => `You are accessing ${e} on a page that has not been explicitly loaded. This is not recommended and may lead to unexpected behavior. Remember to call \`await page.loadAsync()\` or \`await figma.loadAllPagesAsync()' first.`
 };
 export class $$g4 {
   constructor(e) {
@@ -32,7 +32,7 @@ export class $$g4 {
     return Array.from(this.loadedPages);
   }
   addLoadedPageIds(e) {
-    e.forEach((e) => {
+    e.forEach(e => {
       this.loadedPages.has(e) || this.stats.incrementNumPagesLoaded();
       this.loadedPages.add(e);
     });
@@ -67,7 +67,7 @@ function _(e) {
   return t;
 }
 async function A(e, t) {
-  if ((!S() || !$$v0()) && (await Promise.race([(async () => (await oJ(kul.JOINED), !1))(), (async () => (await new Promise((e) => setTimeout(e, 1e3 * m())), !0))()]))) throw Error(`Unable to establish connection to Figma after ${m()} seconds. Please check your internet connection.`);
+  if ((!S() || !$$v0()) && (await Promise.race([(async () => (await oJ(kul.JOINED), !1))(), (async () => (await new Promise(e => setTimeout(e, 1e3 * m())), !0))()]))) throw Error(`Unable to establish connection to Figma after ${m()} seconds. Please check your internet connection.`);
   await t.stats.markAndAggregateDuration("totalLoadPagesDuration", async () => {
     await _(e);
   });
@@ -78,7 +78,7 @@ export function $$y2(e, t, i = {}) {
   if (s) {
     if (t.hasLoadedPageId(s)) return;
     if (i.ignoreReduxState) t.addLoadedPageIds([s]);else {
-      let e = debugState.getState().mirror.appModel.pagesList.find((e) => e.nodeId === s);
+      let e = debugState.getState().mirror.appModel.pagesList.find(e => e.nodeId === s);
       e && e.status === xal.LOADED ? t.addLoadedPageIds([s]) : $D(_$$e.EXTENSIBILITY, Error("Cannot call markPageLoaded without having loaded the page first."));
     }
   }
@@ -89,7 +89,7 @@ export async function $$b5(e, t) {
   let n = i?.containingCanvas;
   if (n) {
     if (t.hasLoadedPageId(n)) return;
-    let e = debugState.getState().mirror.appModel.pagesList.find((e) => e.nodeId === n);
+    let e = debugState.getState().mirror.appModel.pagesList.find(e => e.nodeId === n);
     if (e && e.loadedForPlugins) {
       t.addLoadedPageIds([n]);
       return;
@@ -101,17 +101,17 @@ export async function $$b5(e, t) {
 }
 export let $$v0 = _$$n(() => !1);
 export async function $$I3(e, t) {
-  await Promise.all(e.map((e) => $$b5(e, t)));
+  await Promise.all(e.map(e => $$b5(e, t)));
 }
 async function E(e) {
-  let t = UN().getInternalCanvas();
+  let t = getSingletonSceneGraph().getInternalCanvas();
   if (!t) {
     $D(_$$e.EXTENSIBILITY, Error("loadInternalCanvas: internalCanvas does not exist"));
     return;
   }
   await $$b5(t.guid, e);
 }
-let $$x1 = _$$n(async (e) => await E(e));
+let $$x1 = _$$n(async e => await E(e));
 let S = _$$n(() => h3O.getSessionState() === kul.JOINED);
 export const Jp = $$v0;
 export const Ux = $$x1;

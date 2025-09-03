@@ -1,7 +1,7 @@
 import { useState, useContext, useCallback } from "react";
 import { Z } from "../905/829242";
 import { l7 } from "../905/189185";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import o from "../vendor/267721";
 import { Ay } from "../figma_app/432652";
 import { vh } from "../905/296461";
@@ -49,8 +49,8 @@ function x(e) {
         componentPropertyReferences: {}
       };
       for (let [t, r] of Object.entries(e.nodeIdsToPropertyNames)) {
-        let e = UN().guidFromDeveloperFriendlyId(t);
-        let n = UN().get(e);
+        let e = getSingletonSceneGraph().guidFromDeveloperFriendlyId(t);
+        let n = getSingletonSceneGraph().get(e);
         n && "TEXT" === n.type && (i.componentPropertyDefinitions.push({
           name: r,
           type: "TEXT"
@@ -61,7 +61,7 @@ function x(e) {
       p0(t, i);
       aj(t, e.componentDescription);
     } else for (let i of (t.description || (t.description = e.componentDescription), Object.keys(e.nodeIdsToPropertyNames))) {
-      let r = UN().get(i);
+      let r = getSingletonSceneGraph().get(i);
       if (!r || "TEXT" !== r.type || r.isInstanceSublayer) continue;
       let n = t.componentPropertyDefinitions();
       let a = r.componentPropertyReferences();
@@ -91,8 +91,8 @@ export function $$y0() {
   let o = i?.getSuggestedProps;
   return {
     submit: useCallback(async (e, i, r) => {
-      let d = UN().getCurrentPage()?.childrenNodes.find(e => "SECTION" === e.type && e.name === vh);
-      let u = UN().getCurrentPage()?.childrenNodes.find(e => "SECTION" === e.type && "Atoms" === e.name);
+      let d = getSingletonSceneGraph().getCurrentPage()?.childrenNodes.find(e => "SECTION" === e.type && e.name === vh);
+      let u = getSingletonSceneGraph().getCurrentPage()?.childrenNodes.find(e => "SECTION" === e.type && "Atoms" === e.name);
       if (0 === (r = r ?? [...(d?.childrenNodes ?? []), ...(u?.childrenNodes ?? [])]).length) return;
       let p = r.filter(g);
       for (let r of (t({

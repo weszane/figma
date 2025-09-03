@@ -1,7 +1,7 @@
 import { Ed } from "../figma_app/562352";
 import { getFeatureFlags } from "../905/601108";
 import a from "../vendor/239910";
-import { S8 } from "../905/553831";
+import { subscribeMultipleAndAwaitAll } from "../905/553831";
 import { serializeQuery } from "../905/634134";
 import { XHR } from "../905/910117";
 import { d6 } from "../figma_app/687776";
@@ -88,7 +88,7 @@ async function j({
   state: n,
   toDraft: i
 }) {
-  let a = await S8(M5e, e.map(e => ({
+  let a = await subscribeMultipleAndAwaitAll(M5e, e.map(e => ({
     fileKey: e
   })));
   let s = [];
@@ -266,4 +266,4 @@ let $$G0 = nF((e, t) => {
 export const W6 = $$G0;
 export const b4 = $$F1;
 export const g4 = $$B2;
-export const n_ = $$U3; 
+export const n_ = $$U3;

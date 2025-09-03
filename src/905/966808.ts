@@ -1,7 +1,7 @@
 import { IPu, glU, Ez5, vmp, Egt } from "../figma_app/763686";
 import { M } from "../905/512402";
 import { AD } from "../905/871411";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { x7 } from "../905/435079";
 import { Ds, vo } from "../figma_app/3776";
@@ -18,7 +18,7 @@ export class $$p0 extends j {
   }
   render(e, t) {
     if (-1 === this._hoveredRowIndex || "" === this._hoveredRowGuid || null === this._stateGroupError || null === this._mousePosition) return;
-    let i = UN().get(this._hoveredRowGuid)?.name || "";
+    let i = getSingletonSceneGraph().get(this._hoveredRowGuid)?.name || "";
     let a = IPu?.getBuzzVariantText(this._hoveredRowGuid) || "";
     let o = Ds(e, this._hoveredRowIndex, !0);
     if (!o) return;
@@ -35,7 +35,7 @@ export class $$p0 extends j {
     if (!getFeatureFlags().buzz_template_sets) return;
     let t = x7(e);
     let i = Ez5?.canvasGrid().getRowGUID(t) ?? AD;
-    let d = !!UN().get(i)?.isCanvasGridStateGroupRow;
+    let d = !!getSingletonSceneGraph().get(i)?.isCanvasGridStateGroupRow;
     let c = glU?.getStateGroupError(i) || null;
     d && c ? (this._hoveredRowIndex = t, this._hoveredRowGuid = i, this._stateGroupError = c, this._mousePosition = M.fromVectorD(e.canvasSpaceMouse())) : (this._hoveredRowIndex = -1, this._hoveredRowGuid = "", this._stateGroupError = null, this._mousePosition = null, this._isTooltipRendered = !1, Ez5?.hideCanvasTooltip());
   }

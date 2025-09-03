@@ -6,7 +6,7 @@ import { l as _$$l } from "../6401/369764";
 import { Ez5, xOL, oHM, XQq } from "../figma_app/763686";
 import { l7 } from "../905/189185";
 import { dI } from "../905/871411";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import p from "classnames";
 import { hk, O5 } from "../figma_app/632319";
@@ -59,7 +59,7 @@ export function $$L0(e) {
   }, [e.configData]);
   useEffect(() => {
     if (!f) return;
-    let e = UN().get(nodeId);
+    let e = getSingletonSceneGraph().get(nodeId);
     let i = N ?? v;
     e && i && l7.system("resizing-embed", () => {
       let t = e.size.x > 0 ? e.size.x : 400;
@@ -222,7 +222,7 @@ export let $$F4 = memo(({
     let i = null;
     (async () => {
       try {
-        let n = UN().get(t);
+        let n = getSingletonSceneGraph().get(t);
         if (!n || !n.fills || 0 === n.fills.length) return;
         let r = n.fills.find(e => "IMAGE" === e.type && e.image?.hash);
         if (!r || !r.image?.hash) return;

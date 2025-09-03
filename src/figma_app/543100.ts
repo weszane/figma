@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { d4 } from "../vendor/514228";
 import { throwTypeError, debug } from "../figma_app/465776";
 import { eU, md, Iz } from "../figma_app/27355";
-import { Qw } from "../905/989992";
+import { resourceUtils } from "../905/989992";
 import { oA } from "../905/723791";
 import { LH, oj, mr, CE, yR } from "../905/760074";
 import { fileEntityDataMapper } from "../905/943101";
@@ -567,7 +567,7 @@ let $$C7 = Iz(e => eU(t => "FILE" === e.type || "PINNED_FILE" === e.type ? t(sMs
   repoId: e.repo.id
 })).transform(e => !!oA(e.repo)?.canView) : "PROTOTYPE" === e.type ? t(eSI.Query({
   prototypeId: e.prototype.id
-})).transform(e => !!oA(e.prototype)?.canRead) : "OFFLINE_FILE" === e.type ? Qw.loaded(!0) : void throwTypeError(e)), $$x1.sameObject);
+})).transform(e => !!oA(e.prototype)?.canRead) : "OFFLINE_FILE" === e.type ? resourceUtils.loaded(!0) : void throwTypeError(e)), $$x1.sameObject);
 let $$w3 = {
   FILE: _$$F.FILES,
   PROTOTYPE: _$$F.PROTOTYPES,

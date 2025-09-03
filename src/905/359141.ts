@@ -72,7 +72,7 @@ import { B as _$$B } from "../905/224000";
 import { d as _$$d2 } from "../905/49800";
 import { J as _$$J } from "../905/270045";
 import { N as _$$N } from "../905/438674";
-import { H as _$$H2 } from "../905/989992";
+import { LOADING_STATUS } from "../905/989992";
 import { IT as _$$IT } from "../figma_app/566371";
 import { f9 } from "../figma_app/328188";
 import { ig as _$$ig } from "../figma_app/713624";
@@ -1450,7 +1450,7 @@ function tl({
       });
       let [s, o] = useState(a.status);
       useLayoutEffect(() => {
-        if (a.status !== _$$H2.LOADED) return;
+        if (a.status !== LOADING_STATUS.LOADED) return;
         o(a.status);
         let e = a.data?.orgTeams?.map(e => e.team).filter(isNotNullish).map(e => ({
           id: e.id,

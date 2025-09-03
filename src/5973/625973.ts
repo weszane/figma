@@ -16,7 +16,7 @@ import { Cv, fx, pu, sJ, u0, x_, y$ } from '../905/532366';
 import { yX } from '../905/642476';
 import { id as _$$id, Bj, fW } from '../905/648693';
 import { iN as _$$iN, Hn, Kx, VS } from '../905/696699';
-import { UN } from '../905/700578';
+import { getSingletonSceneGraph } from '../905/700578';
 import { nl as _$$nl, hA, U3 } from '../905/722575';
 import { k as _$$k } from '../905/749197';
 import { f as _$$f } from '../905/797463';
@@ -7635,7 +7635,7 @@ function rn(e, t = null) {
     }
   }
   ri === null && (ri = rt.getFieldSerializers({
-    scene: UN(),
+    scene: getSingletonSceneGraph(),
     ...KQ
   }).map(e => `${e.name}Fields`));
   let r = ri;
@@ -7854,7 +7854,7 @@ class ru {
   }
   getStyleInfoByName() {
     let e = {};
-    let t = UN();
+    let t = getSingletonSceneGraph();
     for (let [i, n] of Object.entries(this.styleJSXNameToId)) {
       let r = t.getStyleNode(n);
       r && (e[i] = {
@@ -7906,7 +7906,7 @@ class ru {
       });
       return;
     }
-    let s = UN().getStyleNode(l);
+    let s = getSingletonSceneGraph().getStyleNode(l);
     if (!s) {
       this.trackDeserializeIssue({
         message: 'Could not find style',
@@ -8379,7 +8379,7 @@ async function rb(e, t, i) {
 export async function $$rS22(e, t = {}) {
   let i = {
     ...KQ,
-    scene: UN(),
+    scene: getSingletonSceneGraph(),
     ...t,
     componentInfoByJSXName: {
       ...(t.componentInfoByJSXName || {})
@@ -8463,7 +8463,7 @@ export async function $$rz35({
       issues: []
     };
   }
-  let l = t?.sceneGraph ?? UN();
+  let l = t?.sceneGraph ?? getSingletonSceneGraph();
   let s = {
     ...KQ,
     scene: l,
@@ -8507,7 +8507,7 @@ export async function $$rz35({
     depth: 0
   }) : null;
   n.checkEditQuality && (rf(d, u), function (e, t, i) {
-    let n = i?.sceneGraph ?? UN();
+    let n = i?.sceneGraph ?? getSingletonSceneGraph();
     if (!n) {
       console.debug('No active scene graph found for self-healing');
       return;
@@ -8950,7 +8950,7 @@ export async function $$rG27(e, {
 } = {}) {
   let i = {
     ...KQ,
-    scene: UN(),
+    scene: getSingletonSceneGraph(),
     ...e
   };
   let n = $$nZ29(i);
@@ -9252,7 +9252,7 @@ class rK {
     let t = this.guidToSubtree[e];
     if (!t) throw new Error(`Subtree not found for guid ${e}`);
     let i = t.editReference;
-    let n = UN().get(e);
+    let n = getSingletonSceneGraph().get(e);
     if (!n) throw new Error(`Node not found for guid ${e}`);
     let a = {
       scene: n.sceneGraph,
@@ -9295,7 +9295,7 @@ class rK {
         n.descendants.push(...t.descendants);
         delete this.guidToSubtree[e];
       } else {
-        let t = UN().get(e);
+        let t = getSingletonSceneGraph().get(e);
         if (!t) throw new Error(`Child ${e} not found in guidToSubtree`);
         n.descendants.push(...function e(t) {
           let i = [t.guid];

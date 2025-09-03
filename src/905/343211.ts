@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { d4 } from "../vendor/514228";
-import { Qw } from "../905/989992";
+import { resourceUtils } from "../905/989992";
 import { Xf } from "../figma_app/153916";
 import { Be } from "../figma_app/920435";
 import { FOrganizationLevelType, FPlanNameType } from "../figma_app/191312";
@@ -13,9 +13,9 @@ export function $$c0(e) {
     let t = e.teamBilling.summary;
     return !!t.annual_subscription || !!t.monthly_subscription;
   });
-  let p = useMemo(() => Qw.loading(), []);
-  let m = useMemo(() => Qw.loaded(!0), []);
-  let h = useMemo(() => Qw.loaded(!1), []);
+  let p = useMemo(() => resourceUtils.loading(), []);
+  let m = useMemo(() => resourceUtils.loaded(!0), []);
+  let h = useMemo(() => resourceUtils.loaded(!1), []);
   switch (e.tier) {
     case FPlanNameType.ENTERPRISE:
     case FPlanNameType.ORG:

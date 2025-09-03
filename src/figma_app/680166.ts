@@ -5,7 +5,7 @@ import { throwTypeError } from "../figma_app/465776";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { getFeatureFlags } from "../905/601108";
 import { k9 } from "../905/19536";
-import { Qw } from "../905/989992";
+import { resourceUtils } from "../905/989992";
 import { oA } from "../905/663269";
 import p from "../vendor/626715";
 import { Ay } from "../905/612521";
@@ -849,14 +849,14 @@ export function $$X1(e) {
   }), {
     enabled: !!(e.fileKey && e.userId && e.enabled)
   });
-  let r = useMemo(() => e.enabled ? Qw.from(t).transform(e => {
+  let r = useMemo(() => e.enabled ? resourceUtils.from(t).transform(e => {
     let t = [...(e.file?.currentPlanUser?.seatTypeLicenseTypes ?? []), ...(e.file?.currentPlanUser?.provisionalLicenseTypes ?? [])];
     t.push(...(e.file?.connectedPlanUser?.seatTypeLicenseTypes ?? []), ...(e.file?.connectedPlanUser?.provisionalLicenseTypes ?? []));
     getFeatureFlags().product_trials_lg && (t.push(...(e.file?.plan?.activeTrialLicenseTypes ?? [])), t.push(...(e.file?.connectedPlan?.activeTrialLicenseTypes ?? [])));
     return {
       availableLicenses: _()(t)
     };
-  }) : Qw.loaded(null), [e.enabled, t]);
+  }) : resourceUtils.loaded(null), [e.enabled, t]);
   return {
     userLacksLicenseAccess: useCallback(e => {
       if (!r || "loaded" !== r.status) return null;

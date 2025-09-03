@@ -99,7 +99,7 @@ import { u as _$$u } from "../905/866761";
 import ez from "../vendor/260986";
 import { E as _$$E } from "../905/984674";
 import { XE, ow as _$$ow, E3 as _$$E2, m0, my, lg as _$$lg } from "../figma_app/976749";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { Lo, xi } from "../905/714362";
 import { Ay } from "../figma_app/432652";
 import { z as _$$z } from "../905/239603";
@@ -593,7 +593,7 @@ async function tx(e) {
     case "autocomplete":
     case "view_user_selection":
       {
-        let e = UN().getCurrentPage()?.directlySelectedNodes ?? [];
+        let e = getSingletonSceneGraph().getCurrentPage()?.directlySelectedNodes ?? [];
         let t = e?.slice(0, 10);
         let i = t.map(e => {
           let t = T1(e, UF.GPT);
@@ -621,7 +621,7 @@ async function tx(e) {
       {
         let r = [];
         if ("visual_search_with_selection" === e.$$function.name) {
-          let e = UN().getCurrentPage()?.directlySelectedNodes;
+          let e = getSingletonSceneGraph().getCurrentPage()?.directlySelectedNodes;
           if (!e || 0 === e.length) throw Error("No selection found");
           r = (await _$$lc({
             type: "input-selection",
@@ -844,7 +844,7 @@ async function tb(e) {
 async function tC(e, t, i, r) {
   try {
     let n;
-    let a = UN().getCurrentPage()?.directlySelectedNodes;
+    let a = getSingletonSceneGraph().getCurrentPage()?.directlySelectedNodes;
     let s = "string" == typeof e ? {
       role: "user",
       content: [{
@@ -1570,7 +1570,7 @@ function rY(e, t) {
 }
 let rX = "first_draft_prompt_history_";
 async function r$(e, t, i) {
-  let r = UN();
+  let r = getSingletonSceneGraph();
   for (let n of i.flatMap(e => e.nodeWeightInfos)) {
     let i = r.get(n.nodeId);
     if (!i) continue;
@@ -1621,7 +1621,7 @@ async function nt({
   containingNodeId: r,
   instrumentationRef: n
 }) {
-  let a = UN().get(e.affectedId);
+  let a = getSingletonSceneGraph().get(e.affectedId);
   if (!a) return !1;
   let s = `${t}:${e.affectedId}`;
   if (ne.has(s)) {
@@ -1685,9 +1685,9 @@ async function na({
       affectedId,
       jsxToInsert
     } = e;
-    let l = UN().get(affectedId);
+    let l = getSingletonSceneGraph().get(affectedId);
     if (!l) throw Error("Could not find affected node in the scene");
-    let d = UN().get(a);
+    let d = getSingletonSceneGraph().get(a);
     if (!d) throw Error("Could not find root node in the scene");
     let c = _$$BY(d);
     let u = l.parentNode;
@@ -2517,7 +2517,7 @@ function al(e) {
   } = cq();
   f4(i => {
     if (e) for (let e of Object.keys(i.mirror.sceneGraphSelection)) {
-      let i = UN().get(e);
+      let i = getSingletonSceneGraph().get(e);
       if (i && !i.isOrInFirstDraft) {
         close();
         return;
@@ -2581,7 +2581,7 @@ let ap = {
 function ah(e, {
   pinnedRanges: t
 } = {}) {
-  let i = UN().get(e);
+  let i = getSingletonSceneGraph().get(e);
   if (!i) return ap;
   let r = _$$BY(i);
   let n = uP(i, {
@@ -2671,7 +2671,7 @@ function af(e) {
           if (!function e(t, i, r) {
             let n = t.get(i);
             return !!n && (n.guid === r || !!n.parentGuid && e(t, n.parentGuid, r));
-          }(UN(), e, s.rootNodeId)) {
+          }(getSingletonSceneGraph(), e, s.rootNodeId)) {
             $D(_$$e.AI_GENERATION, Error("first-draft: Node does not have root node as ancestor"), {
               extra: {
                 nodeId: e,
@@ -2699,7 +2699,7 @@ function af(e) {
                 content
               } = a;
               content && function (e, t, i) {
-                let r = UN().get(e);
+                let r = getSingletonSceneGraph().get(e);
                 if (!r) return;
                 let n = _$$BY(r);
                 if (["borderRadii", "spacing", "colors", "fontFamilies"].some(e => e in i)) {
@@ -2749,7 +2749,7 @@ function af(e) {
             break;
           case "remove":
             _$$l2.ai("first-draft-make-changes-remove", () => {
-              let e = UN().get(a.affectedId);
+              let e = getSingletonSceneGraph().get(a.affectedId);
               e && e.removeSelfAndChildren();
             });
             break;
@@ -2761,7 +2761,7 @@ function af(e) {
                 insertBehavior
               } = a;
               _$$l2.ai("first-draft-make-changes-move", () => {
-                let r = UN();
+                let r = getSingletonSceneGraph();
                 let n = r.get(affectedId);
                 let a = r.get(destinationId);
                 let s = a?.parentNode;
@@ -2776,7 +2776,7 @@ function af(e) {
                 affectedId,
                 classes
               } = a;
-              let i = UN().get(affectedId);
+              let i = getSingletonSceneGraph().get(affectedId);
               let r = i?.isIconLike && Dk(i) === _$$lg2.CONTENT ? "Icon" : void 0;
               _$$l2.ai("first-draft-make-changes-replace-classes", () => {
                 for (let i of classes) _$$w3(affectedId, i, r);
@@ -3667,7 +3667,7 @@ function ak(e) {
         for (let l of [a, s]) {
           if (l?.type !== "FRAME" || l.size.x < 100 || l.size.y < 20) continue;
           let a = XJn.findSimilarNodes(l.guid, e.guid, !1, !1, !0);
-          let s = [l, ...a.map(e => UN().get(e)).filter(e => !!e)];
+          let s = [l, ...a.map(e => getSingletonSceneGraph().get(e)).filter(e => !!e)];
           let c = Array.from(_i(new Set(e.childrenGuids), new Set([l.guid, ...a])));
           if (s.length >= 2 && s.length >= e.childCount - 1 && c.length <= 1) {
             let a = c[0];
@@ -3714,7 +3714,7 @@ function ak(e) {
     }
     let n = i.get(e.guid);
     if (!n) throw Error("Failed to detach design");
-    let a = UN().get(n);
+    let a = getSingletonSceneGraph().get(n);
     if (!a) throw Error("Failed to detach design");
     e.parentNode && e.parentNode.appendChild(a);
     a.x = e.x;
@@ -3756,7 +3756,7 @@ function aN() {
           let e = XJn.cloneNodeForComponentize(a.guid);
           let s = e.get(a.guid);
           if (!s) continue;
-          let o = UN().get(s);
+          let o = getSingletonSceneGraph().get(s);
           o && (t.copiedDesigns.appendChild(o), i.push(o), o.relativeTransform = {
             ...o.relativeTransform,
             m02: r.x,
@@ -3782,7 +3782,7 @@ function aN() {
           }
           _$$l2.user("componentize", () => {
             !function (e, t) {
-              let i = UN();
+              let i = getSingletonSceneGraph();
               if (!i.getCurrentPage()) return;
               let r = NY(t.buildingBlocks);
               let n = NY(t.atoms);
@@ -3994,7 +3994,7 @@ function aB(e) {
     progress
   } = aN();
   let p = useCallback(async () => {
-    let e = UN().getCurrentPage();
+    let e = getSingletonSceneGraph().getCurrentPage();
     if (!e) return;
     let t = e.directlySelectedNodes;
     0 !== t.length && (await start({
@@ -4091,7 +4091,7 @@ function aG(e) {
     aiTrackingContext
   } = s;
   let p = useCallback(async () => {
-    let e = UN().getCurrentPage();
+    let e = getSingletonSceneGraph().getCurrentPage();
     if (!e) return;
     let t = e.directlySelectedNodes;
     0 !== t.length && (await start({
@@ -4179,7 +4179,7 @@ function aK(e) {
     state: _state
   } = RL(_$$JT.FIRST_DRAFT_SUGGEST_PROPS, aU);
   let u = useCallback(async () => {
-    let e = UN().getCurrentPage();
+    let e = getSingletonSceneGraph().getCurrentPage();
     if (!e) return;
     let i = e.directlySelectedNodes;
     0 !== i.length && (await start({
@@ -4314,7 +4314,7 @@ let aY = async ({
   componentizePromptOverride: e,
   dispatch: t
 }) => {
-  let i = UN().getCurrentPage();
+  let i = getSingletonSceneGraph().getCurrentPage();
   if (!i) return;
   let r = i.directlySelectedNodes;
   if (0 === r.length) {
@@ -4349,7 +4349,7 @@ let aY = async ({
       }));
       return;
     }
-    for (let e of ak(r)) UN().get(e.guid).name = `[COMPONENT] ${e.name}`;
+    for (let e of ak(r)) getSingletonSceneGraph().get(e.guid).name = `[COMPONENT] ${e.name}`;
   }
 };
 let aJ = async ({
@@ -4357,7 +4357,7 @@ let aJ = async ({
   dispatch: t,
   close: i
 }) => {
-  let r = UN().getCurrentPage();
+  let r = getSingletonSceneGraph().getCurrentPage();
   if (!r) return;
   let n = r.childrenNodes.filter(e => "FRAME" === e.type);
   if (0 === n.length) {
@@ -4405,9 +4405,9 @@ let aJ = async ({
     });
   }
   _$$l2.ai("eval-componentize", () => {
-    let e = UN().createNode("CANVAS");
+    let e = getSingletonSceneGraph().createNode("CANVAS");
     e.name = `Eval Run ${r.name} ${new Date().toISOString()}`;
-    let t = UN().createNode("FRAME");
+    let t = getSingletonSceneGraph().createNode("FRAME");
     t.name = "Results Frame";
     t.x = -1e3;
     t.y = -1e3;
@@ -4427,7 +4427,7 @@ let aJ = async ({
       opacity: 1,
       blendMode: "NORMAL"
     }];
-    let i = UN().createNode("TEXT");
+    let i = getSingletonSceneGraph().createNode("TEXT");
     for (let r of (i.name = "Results", biQ.setTextContentOnTextNode(i.guid, `False Negative Count: ${l.reduce((e, t) => e + t.falseNegativeCount, 0)}
 False Positive Count: ${l.reduce((e, t) => e + t.falsePositiveCount, 0)}
 Correct Count: ${l.reduce((e, t) => e + t.correctCount, 0)}`), i.x = 10, i.y = 10, i.size = {
@@ -4448,7 +4448,7 @@ Correct Count: ${l.reduce((e, t) => e + t.correctCount, 0)}`), i.x = 10, i.y = 1
       let t = r.result;
       if (!yZ(t.expectedComponents, t.components)) {
         let i = XJn.cloneNodeForComponentize(t.node.guid);
-        let n = UN().get(i.get(t.node.guid));
+        let n = getSingletonSceneGraph().get(i.get(t.node.guid));
         if (!n) throw Error("Failed to clone node");
         n.name = t.node.name + ` (FNC: ${r.falseNegativeCount} FPC: ${r.falsePositiveCount} CC: ${r.correctCount})`;
         let a = (e, t) => {
@@ -4474,7 +4474,7 @@ Correct Count: ${l.reduce((e, t) => e + t.correctCount, 0)}`), i.x = 10, i.y = 1
         for (let [e, t] of i.entries()) s.set(t, e);
         for (let e of _i(t.expectedComponents, t.components)) {
           let t = i.get(e);
-          a(UN().get(t), {
+          a(getSingletonSceneGraph().get(t), {
             r: 1,
             g: 0,
             b: 0,
@@ -4483,7 +4483,7 @@ Correct Count: ${l.reduce((e, t) => e + t.correctCount, 0)}`), i.x = 10, i.y = 1
         }
         for (let e of _i(t.components, t.expectedComponents)) {
           let t = i.get(e);
-          a(UN().get(t), {
+          a(getSingletonSceneGraph().get(t), {
             r: 0,
             g: 0,
             b: 1,
@@ -4492,7 +4492,7 @@ Correct Count: ${l.reduce((e, t) => e + t.correctCount, 0)}`), i.x = 10, i.y = 1
         }
         for (let e of _$$iR(t.expectedComponents, t.components)) {
           let t = i.get(e);
-          a(UN().get(t), {
+          a(getSingletonSceneGraph().get(t), {
             r: 0,
             g: 1,
             b: 0,
@@ -4502,7 +4502,7 @@ Correct Count: ${l.reduce((e, t) => e + t.correctCount, 0)}`), i.x = 10, i.y = 1
         e.appendChild(n);
       }
     }
-    UN().setCurrentPageAsync(e.guid);
+    getSingletonSceneGraph().setCurrentPageAsync(e.guid);
   });
   t(_$$F.enqueue({
     type: "eval-componentize",
@@ -5991,7 +5991,7 @@ async function sz(e, t, i, r, n, a, s, o) {
       }
       return [columnsForRow, rowForColumn];
     }(r, a);
-    let d = UN();
+    let d = getSingletonSceneGraph();
     _$$l2.ai("reconcile all graphics", () => {
       for (let e = 0; e < r.length; e++) {
         let t = o[e];
@@ -6128,7 +6128,7 @@ let sX = async ({
   abortController: e
 }) => {
   let t;
-  let i = UN().getCurrentPage()?.directlySelectedNodes;
+  let i = getSingletonSceneGraph().getCurrentPage()?.directlySelectedNodes;
   if (!i || 1 !== i.length || void 0 === i[0]) throw Error("No image selected");
   let r = i[0];
   let n = r.size.x;
@@ -6154,7 +6154,7 @@ let sX = async ({
         location: new Point(e.x + t + (t + i) / 2 * .15, e.y)
       };
     }(r, width, height);
-    let p = UN();
+    let p = getSingletonSceneGraph();
     let h = p.getCurrentPage();
     if (!h) throw Error("Cannot get current page from scene");
     t = await sH(p, node ?? h, location, n, a, base64, mimeType);
@@ -6186,7 +6186,7 @@ let sZ = async ({
   let i;
   let r = (t.width + t.height) / 2;
   let n = new Point(t.node.x + t.width + .15 * r, t.node.y);
-  let a = UN();
+  let a = getSingletonSceneGraph();
   let s = a.getCurrentPage();
   if (!s) throw Error("Cannot get current page from scene");
   let o = sG(t.node);
@@ -6277,7 +6277,7 @@ function s1({
                   r.onload = async () => {
                     let i = r.width;
                     let n = r.height;
-                    let a = UN();
+                    let a = getSingletonSceneGraph();
                     let s = a.getCurrentPage();
                     if (!s) return;
                     let o = Y5.getViewportInfo();
@@ -7274,7 +7274,7 @@ let oi = [{
           instruction: _$$tx("image_to_design.oracle_instruction"),
           disableImageUpload: !0,
           onPerform: () => {
-            let t = UN().getCurrentPage()?.directlySelectedNodes;
+            let t = getSingletonSceneGraph().getCurrentPage()?.directlySelectedNodes;
             if (!t || 1 !== t.length || void 0 === t[0]) return;
             let i = t[0];
             start({
@@ -8131,7 +8131,7 @@ function oB({
       let e = _p();
       let t = Zr("send-to-make-from-design");
       let i = function () {
-        let e = UN().getDirectlySelectedNodes();
+        let e = getSingletonSceneGraph().getDirectlySelectedNodes();
         return _$$j(e.map(e => e.name)) ?? null;
       }();
       let r = useMemo(() => i ? jsx(_$$E, {
@@ -8248,7 +8248,7 @@ function oB({
                 actions: frecencyByAction
               });
               let p = n.filter(e => {
-                let t = UN().get(e);
+                let t = getSingletonSceneGraph().get(e);
                 return t?.isSlide;
               }).length > 0;
               let h = Yh(e, "send-to-make-from-design");

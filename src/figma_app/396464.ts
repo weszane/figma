@@ -1,9 +1,8 @@
 import { useMemo } from "react";
 import { d4 } from "../vendor/514228";
-
 import { fn, sH } from "../905/871411";
 import { bV } from "../figma_app/387100";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { k9 } from "../905/19536";
 export function $$c7(e, t) {
   return "SLIDE_ROW" === e.type || t && e.isStateGroup;
@@ -12,7 +11,7 @@ export function $$u2() {
   let e = function () {
     let e = function () {
       let e = function () {
-        let e = UN();
+        let e = getSingletonSceneGraph();
         return e && e.isValidScene ? bV(e, "0:1") : [];
       }().filter(e => "SLIDE_GRID" === e.type);
       if (e.length) {
@@ -44,7 +43,7 @@ export function $$h4() {
   return useMemo(() => {
     let t = new Set();
     Object.keys(e).forEach(e => {
-      let r = UN().get(e);
+      let r = getSingletonSceneGraph().get(e);
       let n = r?.containingCooperFrameId();
       n && fn(sH(n)) && t.add(n);
     });
@@ -57,7 +56,7 @@ export function $$m6() {
   return k9(() => {
     let t = new Set();
     Object.keys(e).forEach(e => {
-      let r = UN().get(e);
+      let r = getSingletonSceneGraph().get(e);
       let n = r?.containingCooperFrameId();
       n && fn(sH(n)) && t.add(n);
     });
@@ -69,7 +68,7 @@ export function $$g5() {
   return k9(() => {
     let t = new Set();
     Object.keys(e).forEach(e => {
-      let r = UN().get(e);
+      let r = getSingletonSceneGraph().get(e);
       r && $$c7(r, !0) && t.add(r.guid);
     });
     return [...t];
@@ -77,7 +76,7 @@ export function $$g5() {
 }
 export function $$f1(e) {
   let t = e.containingCooperFrame();
-  return !!t && (t).isInstance;
+  return !!t && t.isInstance;
 }
 export const Pc = $$_0;
 export const Pk = $$f1;

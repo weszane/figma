@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useEffect, useMemo, useCallback, useRef } from "react";
 import { d4, wA } from "../vendor/514228";
-import { Qw } from "../905/989992";
+import { resourceUtils } from "../905/989992";
 import { Wn } from "../figma_app/88484";
 import { Uz } from "../905/63728";
 import { Rs, p as _$$p } from "../figma_app/288654";
@@ -56,13 +56,13 @@ export function $$L1(e) {
   r = $$R5();
   o = useMemo(() => {
     let e = r.data || [];
-    return Qw.loaded(e.filter(e => e.file?.parentOrgId === d));
+    return resourceUtils.loaded(e.filter(e => e.file?.parentOrgId === d));
   }, [r, d]);
   l = e.editorTypes;
   t = useMemo(() => {
     if (!l || 0 === l.length) return o;
     let e = o.data || [];
-    return Qw.loaded(e.filter(e => e.file?.editorType != null && l.includes(e.file.editorType)));
+    return resourceUtils.loaded(e.filter(e => e.file?.editorType != null && l.includes(e.file.editorType)));
   }, [o, l]);
   let c = useMemo(() => "loaded" !== t.status ? [] : t.data.flatMap(e => null !== e.file ? [{
     type: nb.FILE,

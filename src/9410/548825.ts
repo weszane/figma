@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { Ez5 } from "../figma_app/763686";
 import { v } from "../figma_app/163822";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { Wn, mK, NB } from "../vendor/693164";
 import { DF } from "../vendor/463802";
 import { zl, Xr } from "../figma_app/27355";
@@ -20,7 +20,7 @@ export function $$g6(e, t = "history-push") {
   });
 }
 export function $$_8(e, t) {
-  let i = UN().get(e);
+  let i = getSingletonSceneGraph().get(e);
   if (i) try {
     i.slideSpeakerNotes = t;
   } catch (e) {
@@ -64,7 +64,7 @@ export function $$T2(e, t, i, r) {
   return e.visible && (a || n);
 }
 export async function $$w3(e) {
-  let t = UN().get(e);
+  let t = getSingletonSceneGraph().get(e);
   if (t) return await v(t);
 }
 export const B_ = $$b0;

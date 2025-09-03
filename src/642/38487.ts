@@ -5,7 +5,7 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import { R as _$$R } from "../905/256203";
 import { uQ6, Egt } from "../figma_app/763686";
 import { MT } from "../figma_app/387100";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { md } from "../figma_app/27355";
 import { useHandleMouseEvent } from "../figma_app/878298";
@@ -581,7 +581,7 @@ let eA = memo(function (e) {
   let eD = void 0 !== e.panelWidth && eR + eO > e.panelWidth + e.scrollLeft;
   let eF = 0 === e.level;
   let eB = A0(uQ6.LAYERS_PANEL_ACTION_ROW);
-  let eK = UN().get(e.guid);
+  let eK = getSingletonSceneGraph().get(e.guid);
   let eG = eB && eF && X && eK && sq(eK);
   let eH = "REACT_FIBER" !== e.nodeType && "SLIDE" !== e.nodeType;
   let eV = md(r8(e.guid))?.state === "pending";

@@ -2,7 +2,7 @@ import { useMemo, useEffect } from "react";
 import { d4 } from "../vendor/514228";
 import { m1T } from "../figma_app/763686";
 import { l as _$$l } from "../905/716947";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { fp } from "../figma_app/27355";
 import { k9 } from "../905/19536";
@@ -20,7 +20,7 @@ import { Sh } from "../figma_app/889655";
 import { C1 } from "../figma_app/505098";
 import { HW } from "../figma_app/357367";
 function v(e, t, r = !0) {
-  let n = UN();
+  let n = getSingletonSceneGraph();
   if (r && (!e.visible || e.locked)) return [];
   let i = [];
   i.push(...e.childrenGuids.flatMap(e => {
@@ -39,7 +39,7 @@ export function $$x11(e) {
 var $$N3 = (e => (e.TEXT = "TEXT", e.IMAGE = "IMAGE", e.INSTANCE = "INSTANCE", e))($$N3 || {});
 var C = (e => (e.INSTANCE = "INSTANCE", e.DETACHED = "DETACHED", e.MIXED = "MIXED", e))(C || {});
 export function $$w1() {
-  let e = UN();
+  let e = getSingletonSceneGraph();
   let t = gI();
   let r = d4(Sh);
   let a = null;
@@ -64,7 +64,7 @@ export function $$w1() {
 export function $$O14() {
   let e = KH();
   return k9(() => {
-    let t = UN();
+    let t = getSingletonSceneGraph();
     let r = new Set();
     Object.keys(e).forEach(e => {
       let n = t.get(e)?.containingCooperFrameId();
@@ -113,7 +113,7 @@ export let $$M12 = Mz([C1], e => {
   if (!e) return [];
   let t = new Set();
   Object.keys(e).forEach(e => {
-    let r = UN().get(e);
+    let r = getSingletonSceneGraph().get(e);
     let n = r?.containingCooperFrameId();
     n && "-1:-1" !== n && t.add(n);
   });
@@ -153,9 +153,9 @@ export function $$U7() {
   let c = d4(e => e.mirror.sceneGraphSelection);
   let u = ZC(c);
   let m = e => e.some(e => {
-    let t = UN().get(e);
+    let t = getSingletonSceneGraph().get(e);
     let r = t?.containingCooperFrameId();
-    let n = r && UN().get(r);
+    let n = r && getSingletonSceneGraph().get(r);
     return t && n && n.isInstance && t.isInstanceSublayer && t.isOrInCooperFrame;
   });
   let g = useMemo(() => m(Object.keys(c)), [c]);

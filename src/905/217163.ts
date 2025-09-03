@@ -1,4 +1,4 @@
-import { Qw } from "../905/989992";
+import { resourceUtils } from "../905/989992";
 import { Rs } from "../figma_app/288654";
 import { jN, X$ } from "../905/612685";
 import { iAs } from "../figma_app/43951";
@@ -21,7 +21,7 @@ export function $$o0({
   }), {
     enabled: !t && !!e
   });
-  return Qw.useTransform(f, e => $$l1({
+  return resourceUtils.useTransform(f, e => $$l1({
     data: e,
     nodeId: i,
     stateGroupId: o,

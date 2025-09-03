@@ -4,7 +4,7 @@ import { _p, q5 } from "../figma_app/11610";
 import { assert } from "../figma_app/465776";
 import { vNG } from "../figma_app/763686";
 import { l7 } from "../905/189185";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { eU, fp, zl, md } from "../figma_app/27355";
 import { Rz, az } from "../905/449184";
@@ -685,7 +685,7 @@ class ei {
       if (this.website = bundle, this.options.generateFullAssets && (this.files = await Ct(p)), getFeatureFlags().internal_only_debug_tools && console.log("Generated site result:", {
         bundle,
         assetInstructions
-      }), this.skipSetPreviewedNode || new vNG(UN().scene).sitesPreviewObserverReference().setPreviewedNodeID(id), t({
+      }), this.skipSetPreviewedNode || new vNG(getSingletonSceneGraph().scene).sitesPreviewObserverReference().setPreviewedNodeID(id), t({
         website: bundle,
         cmsBundle: u
       }), this.perfTracker.record("asset_generation_start", {
@@ -920,7 +920,7 @@ ${t}
 }
 class ea {
   constructor(e) {
-    this.clone = l7.system("sites-debug-compare-layout", () => UN().get(UN().get(e).clone()));
+    this.clone = l7.system("sites-debug-compare-layout", () => getSingletonSceneGraph().get(getSingletonSceneGraph().get(e).clone()));
     setTimeout(() => {
       this.remove();
     }, 1e3);

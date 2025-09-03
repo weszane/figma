@@ -1,4 +1,4 @@
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import r from "../vendor/260986";
 import { Gs } from "../figma_app/949105";
 import { n6 } from "../figma_app/193952";
@@ -8,12 +8,12 @@ let $$d1 = "Presets";
 let $$c2 = "\u2726/";
 export function $$u0(e) {
   if (!e) return [];
-  let t = UN().get(e);
+  let t = getSingletonSceneGraph().get(e);
   let i = t?.childrenNodes.find(e => n6(e.name, $$l3));
   let r = i?.childrenNodes.filter(e => Gs(e)) ?? [];
   return a()(r.map(e => {
     if (e.symbolId) {
-      let t = UN().get(e.symbolId);
+      let t = getSingletonSceneGraph().get(e.symbolId);
       if (t) return t.isState ? t.parentNode : t;
     }
     return null;

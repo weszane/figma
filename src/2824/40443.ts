@@ -6,7 +6,7 @@ import y from "../formatter/335834";
 import v from "../formatter/998035";
 import { QP } from "../vendor/335500";
 import { xR } from "../vendor/558427";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { isNotNullish } from "../figma_app/95419";
 import { glU, mov, HzA, mKm } from "../figma_app/763686";
 import { throwTypeError, assert, throwError } from "../figma_app/465776";
@@ -2570,7 +2570,7 @@ class ef {
     return this.domSubstitutionController.applyTextReplacements(e);
   }
   maybeBubbleUpSymbol(e) {
-    let t = UN().get(e);
+    let t = getSingletonSceneGraph().get(e);
     if (!t) throw Error("Component not found");
     if (!t.isState) return t;
     {
@@ -2651,7 +2651,7 @@ class ef {
     await s(e);
   }
   async getComponentForSymbolId(e) {
-    let t = UN().get(e);
+    let t = getSingletonSceneGraph().get(e);
     if (!t) throw Error("Component not found");
     if (t.isState) {
       let e = t.parentNode;
@@ -2663,7 +2663,7 @@ class ef {
     let r = this.componentIdToComponentData.get(i) ?? null;
     if (r) return r;
     let s = document.implementation.createHTMLDocument();
-    let a = Array.from(this.symbolIdsConsumed).map(e => UN().get(e)).filter(isNotNullish);
+    let a = Array.from(this.symbolIdsConsumed).map(e => getSingletonSceneGraph().get(e)).filter(isNotNullish);
     await Promise.all(a.map(e => eo(e, s, this.serializeNodeToHtml, this.variantSerializationMode)));
     (r = await this.makeComponentFromFigmaComponent(t, s)) && this.componentIdToComponentData.set(i, r);
     return r;
@@ -2924,7 +2924,7 @@ function eb(e) {
   let t = e;
   ["_background", "_border", "_clipper", "_shadow", "_sticky-wrapper", "_transform-wrapper-outer", "_transform-wrapper-inner"].some(e => t.endsWith(e)) && (t = t.slice(0, t.lastIndexOf("_")));
   let i = t = t.replace(/^node-/, "").replace(/_/g, ":");
-  return UN().getFromDeveloperFriendlyId(i);
+  return getSingletonSceneGraph().getFromDeveloperFriendlyId(i);
 }
 async function ey(e, t, i) {
   let r = [];
@@ -4015,7 +4015,7 @@ function e9(e, t, i) {
           let e = t.get(r.value);
           if (null == e) return null;
           i.push(function (e) {
-            let t = UN().createNode("FRAME");
+            let t = getSingletonSceneGraph().createNode("FRAME");
             t.fills = [];
             t.insertImageInFillPaint(e, "FIT");
             let [i] = t.fills;

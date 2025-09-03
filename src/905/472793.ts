@@ -1,15 +1,17 @@
-import type { ImagePaint, SolidPaint, VideoPaint } from './modules/paint-management'
-import { processImageFilters } from './modules/paint-management'
+import type { ActionGroup, AnnotationCategoryFactoryOptions, ComponentInfo, ComponentProps, ConditionalAction, EasingData, GradientPaint, GridLayoutConfig, NavigationAction, PatternPaint, ProcessedRegion, SolidPaint, TransitionData, VariableResult, VideoPaint } from './types/index'
+import { keyBy } from 'lodash-es'
 import { useState } from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
+
+// Import type definitions
+
 import { z as _$$z } from 'zod'
 import { $D } from '../905/11'
-import { SS } from '../905/2122'
+import { WidgetManager } from '../905/2122'
 import { w as _$$w3 } from '../905/5147'
 import { w as _$$w } from '../905/70843'
 import { w as _$$w4 } from '../905/83498'
 import { J as _$$J2 } from '../905/95677'
-import { k as _$$k2 } from '../905/651849'
 import { Ju, ZU } from '../905/102752'
 import { aD, B9, Et } from '../905/125019'
 import { N as _$$N } from '../905/125137'
@@ -20,6 +22,7 @@ import { h as _$$h } from '../905/193918'
 import { gl, hS } from '../905/216495'
 import { isPluginConfigMatching } from '../905/240440'
 import { widgetErrorTracker } from '../905/250412'
+import { mN } from '../905/261467'
 import { k as getFeatureFlags3 } from '../905/263346'
 import { J as _$$J3 } from '../905/270045'
 import { S as _$$S } from '../905/274480'
@@ -27,6 +30,7 @@ import { Ay as _$$Ay3, jX } from '../905/281495'
 import { E as _$$E3 } from '../905/282455'
 import { A as _$$A } from '../905/284190'
 import { m as _$$m2 } from '../905/294113'
+import { kiwiParserCodec as _$$w2 } from '../905/294864'
 import { K as _$$K } from '../905/301652'
 import { t as _$$t, tx as _$$tx } from '../905/303541'
 import { qW, TP } from '../905/327571'
@@ -47,7 +51,7 @@ import { J as _$$J } from '../905/526136'
 import { cd as _$$cd, HB, P5 } from '../905/531105'
 import { fn as _$$fn2 } from '../905/537777'
 import { P as _$$P2 } from '../905/545265'
-import { Ek } from '../905/553831'
+import { subscribeAndAwaitData } from '../905/553831'
 import { decodeBase64, encodeBase64, isValidBase64 } from '../905/561685'
 import { pN } from '../905/571565'
 import { getFunctionHandle, memoizedHandle } from '../905/572400'
@@ -55,10 +59,11 @@ import { pS } from '../905/588985'
 import { getFeatureFlags } from '../905/601108'
 import { Ay } from '../905/612521'
 import { I as _$$I, np as _$$np, CQ, fb, o8 } from '../905/622391'
+import { k as _$$k2 } from '../905/651849'
 import { e9 as _$$e2, jE } from '../905/656545'
 import { X as _$$X } from '../905/661977'
 import { iN as _$$iN, Hn, Kx, ur, VS } from '../905/696699'
-import { qo, UN } from '../905/700578'
+import { getSingletonSceneGraph, ReduxSceneGraph } from '../905/700578'
 import { createPluginContext, NoOpVm, ScopedNoOpVm } from '../905/700654'
 import { Ug } from '../905/706046'
 import { Oo } from '../905/709171'
@@ -74,14 +79,14 @@ import { k as getFeatureFlags4 } from '../905/783825'
 import { fn as _$$fn, sH as _$$sH, dI as debugStateI, w1 } from '../905/805904'
 import { av, u1 as DocumentAccess, fs, Ux, vf, xc } from '../905/816197'
 import { u as _$$u, c0, fp, Kb } from '../905/816730'
-import { getSceneGraphInstance } from '../905/830071'
+import { getSceneGraphInstance, NT } from '../905/830071'
 import { Y as _$$Y } from '../905/830372'
 import { _b } from '../905/835985'
 import { P as _$$P3, V as _$$V } from '../905/837980'
-import { $f as _$$$f2, o9 } from '../905/845428'
+import { InternalError, RequestError } from '../905/845428'
 import { Ot } from '../905/850476'
 import { T as _$$T } from '../905/858738'
-import { ey as _$$ey, ii as _$$ii, n3 as _$$n, F7, IA, yG } from '../905/859698'
+import { ey as _$$ey, n3 as _$$n, IA, yG } from '../905/859698'
 import { qg, vX, xF } from '../905/866640'
 import { AD, dI, fn, Hr, sH } from '../905/871411'
 import { d5, QO, Y4 } from '../905/888985'
@@ -94,7 +99,7 @@ import { c as _$$c } from '../905/949750'
 import { r as _$$r } from '../905/955316'
 import { At, Ul } from '../905/973142'
 import { E as _$$E2 } from '../905/984674'
-import { Qw } from '../905/989992'
+import { resourceUtils } from '../905/989992'
 import { y as _$$y } from '../905/994901'
 import { l as _$$l2 } from '../905/997221'
 import { F as _$$F2 } from '../figma_app/8833'
@@ -112,6 +117,8 @@ import { isNullish } from '../figma_app/95419'
 import { P$ } from '../figma_app/152368'
 import { FW, ZQ } from '../figma_app/155287'
 import { Yi as _$$Yi, k4 } from '../figma_app/164212'
+import { getInitialOptions } from '../figma_app/169182'
+import { mKm } from '../figma_app/175377'
 import { i as _$$i2, uS } from '../figma_app/186343'
 import { mx as _$$mx, tK as _$$tK, di } from '../figma_app/191804'
 import { zg } from '../figma_app/193867'
@@ -119,7 +126,7 @@ import { Ae, gK } from '../figma_app/198712'
 import { Ho } from '../figma_app/216057'
 import { gr, sD } from '../figma_app/243058'
 import { nl as _$$nl } from '../figma_app/257275'
-import { eX as _$$eX, nM as _$$nM } from '../figma_app/276332'
+import { eX as _$$eX, nM as _$$nM, M7 } from '../figma_app/276332'
 import { qH } from '../figma_app/300692'
 import { Co, Iy, Me, SD, TU, WV } from '../figma_app/317076'
 import { eG as _$$eG, oJ } from '../figma_app/334505'
@@ -132,6 +139,7 @@ import { Qn } from '../figma_app/415217'
 import { Ay as _$$Ay2 } from '../figma_app/432652'
 import { Up } from '../figma_app/455620'
 import { Y5 } from '../figma_app/455680'
+import { l0, lM, Md, VB } from '../figma_app/463500'
 import { assert, assertNotNullish, throwTypeError } from '../figma_app/465776'
 import { $f as _$$$f, rp as _$$rp } from '../figma_app/474636'
 import { tB as _$$tB } from '../figma_app/516028'
@@ -140,7 +148,7 @@ import { $y, i1 as _$$i, iP as _$$iP, nf as _$$nf, po as _$$po, _C, B_, b_, Bs, 
 import { Jr } from '../figma_app/624361'
 import { Dt, E8, kz, xA, ZA } from '../figma_app/633080'
 import { m3 as _$$m3 } from '../figma_app/645694'
-import { bp, NW, oH, Qb, yh } from '../figma_app/646357'
+import { bp, NW, oH, Qb, w8, yh } from '../figma_app/646357'
 import { lu } from '../figma_app/656233'
 import { ug } from '../figma_app/656450'
 import * as _require from '../figma_app/664063'
@@ -148,19 +156,25 @@ import { WJ } from '../figma_app/671547'
 import { UK } from '../figma_app/740163'
 import { Br } from '../figma_app/741237'
 import { OU } from '../figma_app/757723'
-import { _em, Bll, BXd, CUU, CWU, Egt, Ez5, fHP, fZl, glU, HzA, iIc, IPu, IQ2, j0r, JTp, L5V, mgy, mSn, NFK, NfO, NUh, Osy, oVz, QCv, RN1, rXF, sAE, SpR, tbx, tKW, UcW, uQ6, v$l, w3z, XJn, y0x, Z64, ZHy, zIx, ZiZ, zkO, zol } from '../figma_app/763686'
+import { _em, Bll, BXd, CUU, CWU, Egt, Ez5, fHP, fZl, glU, HzA, iIc, IPu, IQ2, j0r, L5V, mgy, mSn, NFK, NfO, NUh, Osy, oVz, QCv, RN1, rXF, sAE, SpR, tbx, tKW, UcW, uQ6, v$l, w3z, XJn, y0x, Z64, ZHy, zIx, ZiZ, zkO, zol } from '../figma_app/763686'
 import { AC } from '../figma_app/777551'
 import { l6, uA } from '../figma_app/781512'
 import { tK as _$$tK2, bh } from '../figma_app/803787'
 import { I1 } from '../figma_app/825489'
 import { Ag } from '../figma_app/862289'
 import { eD as _$$eD } from '../figma_app/876459'
+
+// Import Data Structures and Collections Management - Phase 16
+
 import { QC } from '../figma_app/913823'
 import { KJ } from '../figma_app/916560'
+// Import UI Components and Controls Library - Phase 14
+
 import { Ky, u7, Yf, Yi, zn } from '../figma_app/933328'
 import { LZ, oy } from '../figma_app/964367'
-import { _x, mN as FullUiFactory, gH, IN } from '../figma_app/985200'
-import * as rv from '../vendor/239910'
+import { _x, gH, IN } from '../figma_app/985200'
+import { In } from './309735'
+import { MT } from './321380'
 import {
   // Navigation and action processing
   AdvancedNavigationProcessor,
@@ -168,22 +182,17 @@ import {
   convertInternalPaintToExternal,
   createVariableAlias,
   // Variable and paint utilities
-
   getAllStorageKeys,
   getStorageValue,
   NodeAPISetupUtils,
   normalizeBlendMode,
   // Storage functions
-
   PaintConversionUtils,
   processURL,
   // Storage and utility functions that exist
-
   setStorageValue,
-  transformMatrixToArray
+  transformMatrixToArray,
 } from './modules'
-// Import Data Structures and Collections Management - Phase 16
-
 import {
   // Phase 26: Advanced Core Utilities and Data Processing Systems
   AdvancedDataStructureManager,
@@ -195,35 +204,18 @@ import {
 import {
   // Phase 23: Advanced Image Processing and Effects Management Systems
   createImageEffectsProcessingNew,
-  EffectConfig,
 } from './modules/image-effects-processing'
-// Import UI Components and Controls Library - Phase 14
-
-import { createAdvancedFillManager, createAdvancedPaintProcessor } from './modules/paint-fill-processing'
-import {
-  AdvancedAlignmentProcessor,
-  AdvancedEffectProcessor,
-  AdvancedImageHashManager,
-  AdvancedSizingConverter,
-  AdvancedTextFormattingManager,
-  AdvancedTextStylingManager,
-  // Phase 25: Advanced UI Enhancements and Text Processing Systems
-  AdvancedUIPropertyManager,
-} from './modules/ui-enhancements-text-processing'
+import { createUtilityFunctionsNew } from './modules/node-factory-management'
+import { processImageFilters } from './modules/paint-management'
 import {
   // Phase 24: Advanced Validation and Layout Processing Systems
   createValidationLayoutProcessingNew,
-  GridLayoutConfig,
 } from './modules/validation-layout-processing'
 import {
   // Phase 21: Advanced Variable and Expression Processing Systems
   createAdvancedVariableExpressionProcessor,
   createAdvancedVariableParser,
-  VariableExpressionUtils
 } from './modules/variable-expression-processing'
-import { createUtilityFunctionsNew } from './modules/node-factory-management'
-import { MT } from './321380'
-import type { EasingConfig, NavigationAction, TransitionConfig } from './modules/navigation-action-processing'
 // Refactored layer renaming functions - now use the extracted module
 // Original functions en and er have been moved to ./modules/layer-renaming.ts
 // These are now just simple wrappers that maintain the original API
@@ -279,24 +271,24 @@ async function renameLayersForNode(node) {
  * @param node - The root node to start traversal from
  * @returns Object containing arrays of GUIDs for locking and renaming
  */
-function collectGuidsForRenaming(node) {
+function collectGuidsForRenaming(node: any) {
   const result = {
-    lockGuids: [],
-    renameGuids: [],
+    lockGuids: [] as string[],
+    renameGuids: [] as string[],
   }
   const queue = [node.guid]
   while (queue.length > 0) {
     const currentGuid = queue.pop()
     if (!currentGuid)
-      continue;
-    const currentNode = UN().get(currentGuid)
+      continue
+    const currentNode = getSingletonSceneGraph().get(currentGuid)
     if (!currentNode)
-      continue;
+      continue
     if (jX(currentNode, false)) {
       if (shouldRenameNode(currentNode)) {
         result.renameGuids.push(currentNode.guid)
       }
- else {
+      else {
         result.lockGuids.push(currentNode.guid)
       }
     }
@@ -333,9 +325,9 @@ function shouldRenameNode(node) {
  * Renames layers for all directly selected nodes on the current page.
  */
 async function renameSelectedLayers() {
-  const currentPage = UN().getCurrentPage()
+  const currentPage = getSingletonSceneGraph().getCurrentPage()
   if (!currentPage)
-    return;
+    return
   const selectedNodes = currentPage.directlySelectedNodes
   try {
     for (const node of selectedNodes) {
@@ -404,6 +396,75 @@ let ez = {
 }
 
 /**
+ * Property Type to API Property Name Mapping - maps internal property type enums to API property names
+ * Used for variable binding, property access, and API serialization across the plugin system
+ */
+const propertyTypeToApiNameMap = {
+  [L5V.WIDTH]: 'width',
+  [L5V.HEIGHT]: 'height',
+  [L5V.MAX_WIDTH]: 'maxWidth',
+  [L5V.MIN_WIDTH]: 'minWidth',
+  [L5V.MAX_HEIGHT]: 'maxHeight',
+  [L5V.MIN_HEIGHT]: 'minHeight',
+  [L5V.FILL]: 'fills',
+  [L5V.STROKE]: 'strokes',
+  [L5V.EFFECT]: 'effects',
+  [L5V.STROKE_WIDTH]: 'strokeWeight',
+  [L5V.CORNER_RADIUS]: 'cornerRadius',
+  [L5V.TEXT_STYLE]: 'textStyleId',
+  [L5V.TEXT_ALIGN_HORIZONTAL]: 'textAlignHorizontal',
+  [L5V.FONT_FAMILY]: 'fontFamily',
+  [L5V.FONT_STYLE]: 'fontStyle',
+  [L5V.FONT_SIZE]: 'fontSize',
+  [L5V.FONT_WEIGHT]: 'fontWeight',
+  [L5V.LINE_HEIGHT]: 'lineHeight',
+  [L5V.LETTER_SPACING]: 'letterSpacing',
+  [L5V.STACK_SPACING]: 'itemSpacing',
+  [L5V.STACK_PADDING]: 'padding',
+  [L5V.STACK_MODE]: 'layoutMode',
+  [L5V.STACK_ALIGNMENT]: 'alignItems',
+  [L5V.OPACITY]: 'opacity',
+  [L5V.COMPONENT]: 'mainComponent',
+  [L5V.GRID_ROW_GAP]: 'gridRowGap',
+  [L5V.GRID_COLUMN_GAP]: 'gridColumnGap',
+  [L5V.GRID_ROW_COUNT]: 'gridRowCount',
+  [L5V.GRID_COLUMN_COUNT]: 'gridColumnCount',
+  [L5V.GRID_ROW_ANCHOR_INDEX]: 'gridRowAnchorIndex',
+  [L5V.GRID_COLUMN_ANCHOR_INDEX]: 'gridColumnAnchorIndex',
+  [L5V.GRID_ROW_SPAN]: 'gridRowSpan',
+  [L5V.GRID_COLUMN_SPAN]: 'gridColumnSpan',
+}
+
+/**
+ * API Property Name to Property Type Mapping - reverse mapping for API name lookup
+ * Generated from the primary mapping above for bidirectional property type resolution
+ */
+const apiNameToPropertyTypeMap = Object.entries(propertyTypeToApiNameMap).reduce((accumulator, [enumKey, apiName]) => ({
+  ...accumulator,
+  [apiName]: Number(enumKey),
+}), {})
+
+/**
+ * Constraint Position Mapping - maps constraint position enums to string representations
+ * Used for converting internal constraint positions to API format
+ */
+const constraintPositionMapping = {
+  [ZHy.TOP]: 'TOP',
+  [ZHy.BOTTOM]: 'BOTTOM',
+  [ZHy.LEFT]: 'LEFT',
+  [ZHy.RIGHT]: 'RIGHT',
+}
+
+/**
+ * Reverse Constraint Position Mapping - maps string constraint positions back to enum values
+ * Generated from the primary mapping for bidirectional constraint position resolution
+ */
+const reverseConstraintPositionMapping = Object.entries(constraintPositionMapping).reduce((accumulator, [enumKey, stringValue]) => ({
+  ...accumulator,
+  [stringValue]: Number(enumKey),
+}), {})
+
+/**
  * Convert Paint Array Data - processes array of paint data through conversion utilities
  * @param paintDataArray - Array of paint data to convert
  * @returns Array of converted paint data
@@ -434,9 +495,9 @@ function extractSolidColorFromPaints(paints) {
     value: paint,
   }
 }
-function processValidPaintValues(imageStore, videoStore, config, blobs) {
+function processValidPaintValues(imageStore: any, videoStore: any, config: any, blobs: any[]) {
   // e4 - Process paint value configuration, filtering out AUTO values and processing valid paints
-  const validPaintValues = []
+  const validPaintValues: any[] = []
 
   // Only process non-AUTO paint values
   if (config.value !== 'AUTO') {
@@ -493,8 +554,8 @@ function processPaint(imageStore, videoStore, config, blobs) {
  * @param commonProps - Common paint properties
  * @returns Processed solid paint object
  */
-function processSolidPaint(config, visible, opacity, blendMode) {
-  const solidPaint: SolidPaint = {
+function processSolidPaint(config: any, visible: boolean, opacity: number, blendMode: string): SolidPaint {
+  const solidPaint: any = {
     type: 'SOLID',
     color: {
       ...config.color,
@@ -516,35 +577,40 @@ function processSolidPaint(config, visible, opacity, blendMode) {
       },
     }
   }
-  return solidPaint
+  return solidPaint as SolidPaint
 }
 
 /**
  * Process gradient paint with stops and transformation
  * @param config - Paint configuration for gradient
- * @param commonProps - Common paint properties
+ * @param visible - Visibility flag
+ * @param opacity - Opacity value
+ * @param blendMode - Blend mode
  * @returns Processed gradient paint object
  */
-function processGradientPaint(config, visible, opacity, blendMode) {
-  const gradientPaint = {
+function processGradientPaint(config: any, visible: boolean, opacity: number, blendMode: string): GradientPaint {
+  const gradientPaint: GradientPaint = {
     type: config.type,
     transform: arrayToTransformMatrix(config.gradientTransform),
-    stopsVar: config.gradientStops.map(e => e.boundVariables?.color?.id && e.boundVariables.color?.type === 'VARIABLE_ALIAS' && _$$fn(e.boundVariables.color.id)
+    stopsVar: config.gradientStops.map((e: any) => e.boundVariables?.color?.id && e.boundVariables.color?.type === 'VARIABLE_ALIAS' && _$$fn(e.boundVariables.color.id)
       ? {
-          color: e.color,
-          position: e.position,
-          colorVar: {
-            dataType: 'ALIAS',
-            resolvedDataType: 'COLOR',
-            value: {
-              alias: _$$sH(e.boundVariables.color.id),
-            }
+        color: e.color,
+        position: e.position,
+        colorVar: {
+          dataType: 'ALIAS',
+          resolvedDataType: 'COLOR',
+          value: {
+            alias: _$$sH(e.boundVariables.color.id),
           },
-        }
-: Ug(e)),
+        },
+      }
+      : Ug(e)),
     stops: config.gradientStops.map(({
       color,
       position,
+    }: {
+      color: any
+      position: number
     }) => ({
       color,
       position,
@@ -558,12 +624,13 @@ function processGradientPaint(config, visible, opacity, blendMode) {
 
 /**
  * Process pattern paint with image scaling and transformation
- * @param paintConfig - Paint configuration for pattern
- * @param commonProps - Common paint properties
- * @param imageManager - Manager for image operations
+ * @param config - Paint configuration for pattern
+ * @param visible - Visibility flag
+ * @param opacity - Opacity value
+ * @param blendMode - Blend mode
  * @returns Processed pattern paint object
  */
-function processPatternPaint(config, visible, opacity, blendMode) {
+function processPatternPaint(config: any, visible: boolean, opacity: number, blendMode: string): PatternPaint {
   let {
     scalingFactor,
   } = config
@@ -623,12 +690,12 @@ function processPatternPaint(config, visible, opacity, blendMode) {
     visible,
     opacity,
     blendMode,
-  }
+  } as PatternPaint
 }
 
 /**
  * Process video paint with playback and thumbnail properties
- * @param config - Paint configuration for video
+ * @param params - Object containing paint configuration and related properties
  * @returns Processed video paint object
  */
 function processVideoPaint({
@@ -639,7 +706,15 @@ function processVideoPaint({
   blendMode,
   thumbnailManager,
   blobs,
-}) {
+}: {
+  imageManager: any
+  config: any
+  visible: boolean
+  opacity: number
+  blendMode: string
+  thumbnailManager: any
+  blobs: any[]
+}): VideoPaint {
   const {
     scalingFactor,
     rotation,
@@ -657,7 +732,7 @@ function processVideoPaint({
   const hash = type === 'IMAGE' ? config.imageHash : thumbnailManager.generateThumbnailImageForVideo(config.videoHash)
   const transform = type === 'IMAGE' ? config.imageTransform : config.videoTransform
   const scaleMode = config.scaleMode === 'CROP' ? 'STRETCH' : config.scaleMode
-  const currentPaint: ImagePaint | VideoPaint = {
+  const currentPaint: any = {
     type: config.type,
     imageScaleMode: scaleMode,
     transform: arrayToTransformMatrix(transform),
@@ -671,7 +746,7 @@ function processVideoPaint({
     },
   }
   if (type === 'VIDEO') {
-    (currentPaint as VideoPaint).video = {
+    currentPaint.video = {
       hash: aD(config.videoHash),
     }
   }
@@ -683,7 +758,7 @@ function processVideoPaint({
     try {
       let t = imageManager.getPrivateImageOrThrow(hash)
       assertNotNullish(t.bytes, 'Missing bytes for image')
-      currentPaint.image!.dataBlob = blobs
+      currentPaint.image.dataBlob = blobs
       blobs.push({
         bytes: t.bytes,
       })
@@ -712,20 +787,21 @@ function processVideoPaint({
       }
     }
   }
-  return currentPaint
+  return currentPaint as VideoPaint
 }
 
 // Refactored plugin runtime - now uses the extracted node management module
 // Original class e9 has been moved to ./modules/node-management.ts
 export class PluginRuntimeBridge {
-  pluginID: any
+  pluginID: string
   vm: any
-  constructor(pluginID, vm) {
+
+  constructor(pluginID: string, vm: any) {
     this.pluginID = pluginID
     this.vm = vm
   }
 
-  getMultiplayerSelection() {
+  getMultiplayerSelection(): Set<any> {
     let e = new Set()
     for (let {
       selection,
@@ -735,16 +811,16 @@ export class PluginRuntimeBridge {
     return e
   }
 
-  figma() {
+  figma(): any {
     return this.vm.scope.figma
   }
 
-  logWarning(...e) {
-    (_$$nl() || this.pluginID.startsWith('TEST') || Object.values(debugState.getState().localPlugins).some((e: any) => e.plugin_id === this.pluginID)) && console.warn(...e)
+  logWarning(...e: any[]): void {
+    (_$$nl() || this.pluginID.startsWith('TEST') || Object.values(debugState.getState().localPlugins).some((item: any) => item.plugin_id === this.pluginID)) && console.warn(...e)
   }
 
-  createPluginNode(e, t, i, n = !1) {
-    let r
+  createPluginNode(e: any, t: any, i: any, n: boolean = false): any {
+    let r: any
     if (!e || typeof e != 'object')
       throw new Error('invalid node passed to createPluginNode')
     let a = e.type
@@ -760,7 +836,7 @@ export class PluginRuntimeBridge {
         break
       case 'svg':
         // Refactored SVG node creation and widget ancestor assignment (original IIFE replaced with named recursive function)
-        r = UN().createNodeFromSVG(e.renderMetaData.src ?? '', {
+        r = getSingletonSceneGraph().createNodeFromSVG(e.renderMetaData.src ?? '', {
           tracking: i,
         })
 
@@ -769,11 +845,13 @@ export class PluginRuntimeBridge {
          * @param node - The root node to start assignment from.
          * @param ancestor - The widget ancestor to assign.
          */
-        function assignWidgetCachedAncestor(node, ancestor) {
+        function assignWidgetCachedAncestor(node: any, ancestor: any) {
           for (const childGuid of node.reversedChildrenGuids) {
-            const childNode = e8New(childGuid)!
-            childNode.widgetCachedAncestor = ancestor
-            assignWidgetCachedAncestor(childNode, ancestor)
+            const childNode = e8New(childGuid)
+            if (childNode) {
+              childNode.widgetCachedAncestor = ancestor
+              assignWidgetCachedAncestor(childNode, ancestor)
+            }
           }
         }
         assignWidgetCachedAncestor(r, t)
@@ -790,16 +868,16 @@ export class PluginRuntimeBridge {
       case 'fragment':
       case 'span':
         if (n)
-          throw new o9(`Unsupported root node type: ${a}`)
+          throw new InternalError(`Unsupported root node type: ${a}`)
         throw new Error(`Attempting to create a ${a} node`)
       case 'instance':
-      {
-        let t = this.figma().getNodeById(e.props.componentId)
-        if (t?.type !== 'COMPONENT')
-          throw new Error(`Invalid component Id: ${e.props.componentId}`)
-        r = e8New(t.createInstance().id)
-        break;
-      }
+        {
+          let instanceNode = this.figma().getNodeById(e.props.componentId)
+          if (instanceNode?.type !== 'COMPONENT')
+            throw new Error(`Invalid component Id: ${e.props.componentId}`)
+          r = e8New(instanceNode.createInstance().id)
+          break
+        }
       default:
         throwTypeError(a)
     }
@@ -807,19 +885,19 @@ export class PluginRuntimeBridge {
     return this.figma().getNodeById(r.guid)
   }
 
-  loadFontAsync(e) {
+  loadFontAsync(e: any): Promise<void> {
     return this.figma().loadFontAsync(e)
   }
 
-  createImage(e) {
+  createImage(e: any) {
     return this.figma().createImage(e)
   }
 
-  getNodeById(e) {
+  getNodeById(e: string) {
     return this.figma().getNodeById(e)
   }
 
-  getSceneNodeAdapter(e, t = null) {
+  getSceneNodeAdapter(e: string, t: any = null) {
     return new PluginSceneNodeAdapter(e, t, this)
   }
 }
@@ -834,17 +912,18 @@ export class PluginRuntimeBridge {
  * Refactored for clarity, maintainability, and type safety.
  */
 class PluginSceneNodeAdapter {
-  id: any
+  id: string
   pluginNode: any
   runtime: any
   shimNode: any
+
   /**
    * Constructs a new PluginSceneNodeAdapter.
    * @param id - The node's unique identifier.
    * @param pluginNode - The plugin node instance.
    * @param runtime - The plugin runtime bridge.
    */
-  constructor(id, pluginNode, runtime) {
+  constructor(id: string, pluginNode: any, runtime: any) {
     this.id = id
     this.pluginNode = pluginNode
     this.runtime = runtime
@@ -910,9 +989,9 @@ class PluginSceneNodeAdapter {
    * @param node - The node to apply properties to.
    * @param props - The properties to apply.
    */
-  applyComponentProps(node, props: { nestedInstancesVisibility?: Record<string, any>, componentPropsNested?: Record<string, any>, componentId?: string, [key: string]: any }) {
+  applyComponentProps(node, props: ComponentProps) {
     if (node.type !== 'INSTANCE')
-      return;
+      return
     if (props.componentId) {
       try {
         const component = e8New(props.componentId)
@@ -935,7 +1014,7 @@ class PluginSceneNodeAdapter {
       try {
         node.setProperties(props.componentProps, true)
       }
- catch (err) {
+      catch (err) {
         this.runtime.logWarning(`Error setting component props: ${err}`)
       }
     }
@@ -944,7 +1023,7 @@ class PluginSceneNodeAdapter {
       for (const [key, visible] of Object.entries(props.nestedInstancesVisibility)) {
         const sublayer = node.getMatchingInstanceSublayer(key)
         if (!sublayer)
-          continue;
+          continue
         const sublayerShim = sublayer
         const wasVisible = sublayerShim.visible
         sublayerShim.visible = visible
@@ -958,7 +1037,7 @@ class PluginSceneNodeAdapter {
       for (const [key, nestedProps] of Object.entries(props.componentPropsNested)) {
         const sublayer = node.getMatchingInstanceSublayer(key)
         if (!sublayer)
-          continue;
+          continue
         const sublayerShim = sublayer
         if (sublayerShim.isVisibleInInstance) {
           this.applyComponentProps(sublayerShim, nestedProps)
@@ -1170,61 +1249,224 @@ class PluginSceneNodeAdapter {
     return fill.type !== 'IMAGE' ? null : fill.imageHash ?? null
   }
 }
-
 /**
  * Style Manager Test Environment - provides test environment for style management operations
  * Manages style creation, modification, and testing within isolated plugin context
  */
-class StyleManagerTestEnvironment {
-  styleManagerWrapper: any
-  constructor(_e) {
-    // Create a mock scene graph and use the extracted style manager wrapper
-    const mockSceneGraph = {
-      scene: {},
-      getStyleNodeByRef: _ref => null,
-      createStyle: _e => ({
-        idForPluginApi: 'mock-id',
-      }),
+export class StyleManager {
+  sceneGraph: any
+
+  constructor(sceneGraph: any) {
+    this.sceneGraph = sceneGraph ?? NT()
+  }
+
+  fullscreenStyleDataToLocalStyle(e: any) {
+    return w8(null, null, e, '', '')
+  }
+
+  /**
+   * Moves a style to a new position within the style hierarchy.
+   * Original: moveStyle
+   * @param styleNode - The style node to move
+   * @param referenceNode - The reference node to move relative to (or null)
+   * @param styleType - The style type (string or enum)
+   * @returns An empty string on success, or an error message
+   */
+  moveStyle(styleNode: any, referenceNode: any, styleType: any) {
+    // Resolve style type enum value
+    const styleTypeEnum = _$$w2.StyleType[styleNode.styleType]
+    if (typeof styleTypeEnum !== 'number')
+      return 'Unable to parse style type of target node'
+
+    // Get all local styles of the given type and map to local style objects
+    const allLocalStyles = glU.getAllLocalStyles(this.sceneGraph.scene, styleTypeEnum).map(this.fullscreenStyleDataToLocalStyle)
+    const mappedStyles = lM(allLocalStyles, styleType)
+    const styleHierarchy = l0(mappedStyles)
+    const folderName = In(styleNode.name)
+
+    // Initialize variables for tracking nodes and folders
+    let targetStyle: any = null
+    let referenceStyle: any = null
+    let targetFolder: any = null
+    let referenceFolder: any = null
+    let firstStyleInTargetFolder: any = null
+    let moveAfterStyle: any = null
+
+    // Find target style, reference style, and their folders in the hierarchy
+    for (let i = 0; i < styleHierarchy.length; i++) {
+      const node = styleHierarchy[i]
+      if (node.type === 'STYLE_FOLDER') {
+        moveAfterStyle = node
+      }
+      else {
+        if (node.node_id === styleNode.guid) {
+          targetStyle = node
+          targetFolder = moveAfterStyle
+        }
+        if (referenceNode !== null && node.node_id === referenceNode.guid) {
+          referenceStyle = node
+          referenceFolder = moveAfterStyle
+        }
+      }
     }
-    // StyleManagerWrapper initialization - using type assertion for now
-    this.styleManagerWrapper = mockSceneGraph
+
+    // Get the first style in the target folder, if available
+    if (targetFolder && targetFolder.styles && targetFolder.styles[0])
+      firstStyleInTargetFolder = targetFolder.styles[0]
+    if (!targetStyle)
+      return `No local target node found with style key: ${styleNode.styleKeyForPublish}`
+
+    // Determine move destination and reference
+    let destinationFolder: any = null
+    let destinationReference: any = null
+    if (referenceNode === null) {
+      destinationFolder = targetFolder
+      destinationReference = firstStyleInTargetFolder
+    }
+    else {
+      if (folderName !== In(referenceNode.name))
+        return 'Target and reference node must live in the same folder.'
+      if (!referenceStyle)
+        return `No local reference node found with style key: ${styleNode.styleKeyForPublish}`
+      destinationFolder = referenceStyle
+      destinationReference = referenceFolder
+    }
+
+    // Move the style if possible
+    if (Md(destinationFolder, targetStyle, destinationReference, folderName))
+      VB([targetStyle], destinationFolder, destinationReference, folderName, styleHierarchy, allLocalStyles, false)
+    return ''
   }
 
-  localStyleToStyleKey(e) {
-    return this.styleManagerWrapper.localStyleToStyleKey(e)
+  /**
+   * Retrieves all local styles of a given type.
+   * Original: getAllLocalStyles
+   * @param styleType - The style type (string or enum)
+   * @returns Array of StyleKey objects
+   */
+  getAllLocalStyles(styleType: any) {
+    const styleTypeEnum = _$$w2.StyleType[styleType]
+    if (typeof styleTypeEnum !== 'number')
+      return []
+    const allLocalStyles = glU.getAllLocalStyles(this.sceneGraph.scene, styleTypeEnum).map(this.fullscreenStyleDataToLocalStyle)
+    const mappedStyles = lM(allLocalStyles, styleType)
+    const styleHierarchy = l0(mappedStyles)
+    const styleKeys: any[] = []
+    for (const node of styleHierarchy) {
+      if (node.type !== 'STYLE_FOLDER') {
+        const key = this.localStyleToStyleKey(node)
+        styleKeys.push(key)
+      }
+    }
+    return styleKeys
   }
 
-  fullscreenStyleDataToLocalStyle(e) {
-    return this.styleManagerWrapper.fullscreenStyleDataToLocalStyle(e)
+  /**
+   * Moves a style folder to a new position within the style hierarchy.
+   * Original: moveFolder
+   * @param targetFolderName - The name of the folder to move
+   * @param referenceFolderName - The name of the reference folder to move relative to (or null)
+   * @param styleType - The style type (string or enum)
+   * @returns An empty string on success, or an error message
+   */
+  moveFolder(targetFolderName: string, referenceFolderName: string, styleType: any) {
+    let targetFolder: any = null
+    let referenceFolder: any = null
+    let parentFolder: any = null
+    const styleTypeEnum = _$$w2.StyleType[styleType]
+    if (typeof styleTypeEnum !== 'number')
+      return `Unable to parse style type: ${styleType}`
+
+    // Get all local styles and build the folder hierarchy
+    const allLocalStyles = glU.getAllLocalStyles(this.sceneGraph.scene, styleTypeEnum).map(this.fullscreenStyleDataToLocalStyle)
+    const mappedStyles = lM(allLocalStyles, styleType)
+    const styleHierarchy = l0(mappedStyles)
+
+    // Recursive function to find target and reference folders
+    const findFolders = (folder: any) => {
+      if (folder.subfolders) {
+        folder.subfolders.forEach((subfolder: any) => {
+          if (subfolder.name === targetFolderName) {
+            targetFolder = subfolder
+            parentFolder = folder
+          }
+          if (subfolder.name === referenceFolderName) {
+            referenceFolder = subfolder
+          }
+        })
+        folder.subfolders.forEach(findFolders)
+      }
+    }
+    findFolders(mappedStyles)
+    if (!targetFolder || !parentFolder)
+      return `The target folder named "${targetFolderName}" could not be found`
+    if (referenceFolderName !== null && !referenceFolder)
+      return `The reference folder named "${referenceFolderName}" could not be found`
+    if (referenceFolder && referenceFolder.name && targetFolder.name && In(referenceFolder.name) !== In(targetFolder.name)) {
+      return 'The target folder and the reference folder must live in the same parent folder'
+    }
+
+    // Find the reference node for moving
+    const parentHierarchy = l0(parentFolder)
+    let afterFolder: any = null
+    let lastStyleInParent: any = (parentFolder.styles && parentFolder.styles.length) ? parentFolder.styles[parentFolder.styles.length - 1] : parentFolder
+    let firstSubfolder: any = (parentFolder.subfolders && parentFolder.subfolders[0]) ? parentFolder.subfolders[0] : null
+    let previousFolder: any = null
+    for (const node of parentHierarchy) {
+      if (node.type === 'STYLE_FOLDER') {
+        if (previousFolder === referenceFolder) {
+          afterFolder = node
+          break
+        }
+        previousFolder = node
+      }
+    }
+    const referenceStyle = referenceFolder ? (referenceFolder.styles && referenceFolder.styles[referenceFolder.styles.length - 1]) : lastStyleInParent
+    const afterReference = referenceFolder ? afterFolder : firstSubfolder
+
+    // Move the folder if possible
+    if (Md(referenceStyle, targetFolder, afterReference, parentFolder.name))
+      VB([targetFolder], referenceStyle, afterReference, parentFolder.name, styleHierarchy, allLocalStyles, true)
+    return ''
   }
 
-  get(e) {
-    return this.styleManagerWrapper.get(e)
+  softDeleteStyle(e: any) {
+    if (e && e.removeSelfAndChildren) {
+      e.removeSelfAndChildren()
+    }
   }
 
-  moveStyle(e, t, i) {
-    return this.styleManagerWrapper.moveStyle(e, t, i)
+  localStyleToStyleKey(localStyle: any) {
+    return {
+      key: localStyle.key,
+      version: 'INVALID',
+    }
   }
 
-  moveFolder(e, t, i) {
-    return this.styleManagerWrapper.moveFolder(e, t, i)
+  get(styleId: string) {
+    let t = _$$eX(styleId)
+    if (!t)
+      return null
+    let i = this.sceneGraph.getStyleNodeByRef ? this.sceneGraph.getStyleNodeByRef(t) : null
+    return i && !i.isSoftDeleted ? i : null
   }
 
-  createStyle(e) {
-    return this.styleManagerWrapper.createStyle(e)
+  create(style: any) {
+    // Implementation based on the interface
+    return ''
   }
 
-  softDeleteStyle(e) {
-    this.styleManagerWrapper.softDeleteStyle(e)
+  delete(styleId: string) {
+    // Implementation based on the interface
   }
 
-  getAllLocalStyles(e) {
-    return this.styleManagerWrapper.getAllLocalStyles(e)
+  createStyle(styleData: any) {
+    if (this.sceneGraph && this.sceneGraph.createStyle) {
+      return this.sceneGraph.createStyle(styleData).idForPluginApi
+    }
+    return ''
   }
 }
-
-// Legacy compatibility alias
-const StyleManager = StyleManagerTestEnvironment
 
 /**
  * Process URL Data - handles URL data processing through URL utilities
@@ -1247,11 +1489,6 @@ function t$(e) {
   // TODO: Implement proper ReactionsActionProcessor when available
   return e
 }
-function tZProcessAction(e) {
-  // Delegate to the extracted ActionProcessor
-  // TODO: Implement proper ActionProcessor when available
-  return e
-}
 
 // Cleaned up orphaned code from previous extraction
 
@@ -1271,7 +1508,7 @@ function tQNewVariableData(e) {
   return navigationProcessor.processVariableData(e)
 }
 function denormalizeTransition(transitionConfig) {
-  const transitionData = {} as TransitionConfig
+  const transitionData = {} as TransitionData
   let isValidTransition = true
   const transitionType = String(transitionConfig.transitionType || 'INSTANT_TRANSITION')
   switch (transitionType) {
@@ -1328,7 +1565,7 @@ function denormalizeTransition(transitionConfig) {
   }
 
   // Process easing
-  const easingData = {} as EasingConfig
+  const easingData = {} as EasingData
   switch (transitionConfig.easingType || 'OUT_CUBIC') {
     case 'IN_CUBIC':
       easingData.type = 'EASE_IN'
@@ -1406,198 +1643,199 @@ function tZ(connectionConfig) {
         type: 'CLOSE',
       }
     case 'URL':
-    {
-      const urlConnection = {
-        type: 'URL',
-        url: connectionConfig.connectionURL || '',
-        openInNewTab: connectionConfig.openUrlInNewTab ?? true,
-      };
-      return urlConnection
-    }
+      {
+        const urlConnection = {
+          type: 'URL',
+          url: connectionConfig.connectionURL || '',
+          openInNewTab: connectionConfig.openUrlInNewTab ?? true,
+        }
+        return urlConnection
+      }
     case 'SET_VARIABLE':
-    {
-      const targetVariableId = connectionConfig.targetVariable?.id
-      let resolvedVariableId = null
-      if (targetVariableId) {
-        resolvedVariableId = debugStateI(targetVariableId)
+      {
+        const targetVariableId = connectionConfig.targetVariable?.id
+        let resolvedVariableId = null
+        if (targetVariableId) {
+          resolvedVariableId = debugStateI(targetVariableId)
+        }
+        return {
+          type: 'SET_VARIABLE',
+          variableId: resolvedVariableId,
+          variableValue: tQNewVariableData(connectionConfig.targetVariableData),
+        }
       }
-      return {
-        type: 'SET_VARIABLE',
-        variableId: resolvedVariableId,
-        variableValue: tQNewVariableData(connectionConfig.targetVariableData),
-      };
-    }
     case 'SET_VARIABLE_MODE':
-    {
-      if (!getFeatureFlags().prototype_set_mode_action) {
-        return null
+      {
+        if (!getFeatureFlags().prototype_set_mode_action) {
+          return null
+        }
+        const targetVariableSetId = connectionConfig.targetVariableSetID
+        let resolvedCollectionId = null
+        if (targetVariableSetId) {
+          resolvedCollectionId = gr.fromKiwi(targetVariableSetId)
+        }
+        return {
+          type: 'SET_VARIABLE_MODE',
+          variableCollectionId: resolvedCollectionId,
+          variableModeId: dI(connectionConfig.targetVariableModeID),
+        }
       }
-      const targetVariableSetId = connectionConfig.targetVariableSetID
-      let resolvedCollectionId = null
-      if (targetVariableSetId) {
-        resolvedCollectionId = gr.fromKiwi(targetVariableSetId)
-      }
-      return {
-        type: 'SET_VARIABLE_MODE',
-        variableCollectionId: resolvedCollectionId,
-        variableModeId: dI(connectionConfig.targetVariableModeID),
-      };
-    }
     case 'CONDITIONAL':
-    {
-      const conditionalActions: any[] = []
-      if (connectionConfig.conditionalActions) {
-        for (const conditionalAction of connectionConfig.conditionalActions) {
-          /**
-           * Processes a conditional action configuration into a structured action group.
-           * @param conditionalActionConfig - The configuration object for the conditional action.
-           * @returns An object containing the processed actions and optional condition.
-           */
-          function processConditionalAction(conditionalActionConfig) {
-            const actionGroup: any = {
-              actions: [],
-            }
+      {
+        const conditionalActions: ConditionalAction[] = []
+        if (connectionConfig.conditionalActions) {
+          for (const conditionalAction of connectionConfig.conditionalActions) {
+            /**
+             * Processes a conditional action configuration into a structured action group.
+             * @param conditionalActionConfig - The configuration object for the conditional action.
+             * @returns An object containing the processed actions and optional condition.
+             */
+            function processConditionalAction(conditionalActionConfig) {
+              const actionGroup: ActionGroup = {
+                actions: [],
+              }
 
-            // Early return if config is undefined
-            if (conditionalActionConfig === undefined) {
+              // Early return if config is undefined
+              if (conditionalActionConfig === undefined) {
+                return actionGroup
+              }
+
+              // Process condition if present
+              if (conditionalActionConfig.condition !== undefined) {
+                actionGroup.condition = tQNewExpressionParser(conditionalActionConfig.condition)
+              }
+
+              // Process actions if present
+              if (conditionalActionConfig.actions !== undefined && Array.isArray(conditionalActionConfig.actions)) {
+                const processedActions: NavigationAction[] = []
+                for (const action of conditionalActionConfig.actions) {
+                  const processedAction = tZNew(action)
+                  if (processedAction !== null) {
+                    processedActions.push(processedAction)
+                  }
+                }
+                actionGroup.actions = processedActions
+              }
               return actionGroup
             }
-
-            // Process condition if present
-            if (conditionalActionConfig.condition !== undefined) {
-              actionGroup.condition = tQNewExpressionParser(conditionalActionConfig.condition)
-            }
-
-            // Process actions if present
-            if (conditionalActionConfig.actions !== undefined && Array.isArray(conditionalActionConfig.actions)) {
-              const processedActions: any[] = []
-              for (const action of conditionalActionConfig.actions) {
-                const processedAction = tZNew(action)
-                if (processedAction !== null) {
-                  processedActions.push(processedAction)
-                }
-              }
-              actionGroup.actions = processedActions
-            }
-            return actionGroup
+            const processedAction = processConditionalAction(conditionalAction)
+            conditionalActions.push(processedAction)
           }
-          const processedAction = processConditionalAction(conditionalAction)
-          conditionalActions.push(processedAction)
+        }
+        return {
+          type: 'CONDITIONAL',
+          conditionalBlocks: conditionalActions,
         }
       }
-      return {
-        type: 'CONDITIONAL',
-        conditionalBlocks: conditionalActions,
-      };
-    }
     case 'UPDATE_MEDIA_RUNTIME':
-    {
-      if (connectionConfig.mediaAction === undefined) {
-        return null
-      }
-      switch (connectionConfig.mediaAction) {
-        case 'PLAY':
-        case 'PAUSE':
-        case 'TOGGLE_PLAY_PAUSE':
-        case 'MUTE':
-        case 'UNMUTE':
-        case 'TOGGLE_MUTE_UNMUTE':
-        {
-          const transitionNodeId = dI(connectionConfig.transitionNodeID)
-          const targetNode = transitionNodeId ? tY.get(transitionNodeId) : null
-          return {
-            type: 'UPDATE_MEDIA_RUNTIME',
-            destinationId: targetNode ? tY.guidFromDeveloperFriendlyId(targetNode.guid) : null,
-            mediaAction: connectionConfig.mediaAction,
-          };
-        }
-        case 'SKIP_FORWARD':
-        case 'SKIP_BACKWARD':
-        {
-          const transitionNodeId = dI(connectionConfig.transitionNodeID)
-          const targetNode = transitionNodeId ? tY.get(transitionNodeId) : null
-          const targetNodeGuid = targetNode ? tY.guidFromDeveloperFriendlyId(targetNode.guid) : null
-          const skipAmount = connectionConfig.mediaSkipByAmount || 5
-          return {
-            type: 'UPDATE_MEDIA_RUNTIME',
-            destinationId: targetNodeGuid,
-            mediaAction: connectionConfig.mediaAction,
-            skipAmount,
-          };
-        }
-        case 'SKIP_TO':
-        {
-          const transitionNodeId = dI(connectionConfig.transitionNodeID)
-          const targetNode = transitionNodeId ? tY.get(transitionNodeId) : null
-          const targetNodeGuid = targetNode ? tY.guidFromDeveloperFriendlyId(targetNode.guid) : null
-          const skipToTime = connectionConfig.mediaSkipToTime || 0
-          return {
-            type: 'UPDATE_MEDIA_RUNTIME',
-            destinationId: targetNodeGuid,
-            mediaAction: connectionConfig.mediaAction,
-            newTimestamp: skipToTime,
-          };
-        }
-        default:
-          _$$k2.warn('Prototype action contains a Connection Type that the plugin API does not support')
+      {
+        if (connectionConfig.mediaAction === undefined) {
           return null
-      }
-    }
-    case 'INTERNAL_NODE':
-    {
-      const navigationData: NavigationAction = { type: 'NODE' } as NavigationAction
-
-      const transitionNodeId = dI(connectionConfig.transitionNodeID)
-      const targetNode = transitionNodeId ? tY.get(transitionNodeId) : null
-      const navigationType = connectionConfig.navigationType || 'NAVIGATE'
-
-      // Set destination ID and overlay position
-      if (targetNode) {
-        navigationData.destinationId = tY.guidFromDeveloperFriendlyId(targetNode.guid)
-        if (navigationType === 'OVERLAY' && targetNode.overlayPositionType === 'MANUAL') {
-          navigationData.overlayRelativePosition = {
-            x: connectionConfig.overlayRelativePosition?.x || 0,
-            y: connectionConfig.overlayRelativePosition?.y || 0,
-          };
+        }
+        switch (connectionConfig.mediaAction) {
+          case 'PLAY':
+          case 'PAUSE':
+          case 'TOGGLE_PLAY_PAUSE':
+          case 'MUTE':
+          case 'UNMUTE':
+          case 'TOGGLE_MUTE_UNMUTE':
+            {
+              const transitionNodeId = dI(connectionConfig.transitionNodeID)
+              const targetNode = transitionNodeId ? tY.get(transitionNodeId) : null
+              return {
+                type: 'UPDATE_MEDIA_RUNTIME',
+                destinationId: targetNode ? tY.guidFromDeveloperFriendlyId(targetNode.guid) : null,
+                mediaAction: connectionConfig.mediaAction,
+              }
+            }
+          case 'SKIP_FORWARD':
+          case 'SKIP_BACKWARD':
+            {
+              const transitionNodeId = dI(connectionConfig.transitionNodeID)
+              const targetNode = transitionNodeId ? tY.get(transitionNodeId) : null
+              const targetNodeGuid = targetNode ? tY.guidFromDeveloperFriendlyId(targetNode.guid) : null
+              const skipAmount = connectionConfig.mediaSkipByAmount || 5
+              return {
+                type: 'UPDATE_MEDIA_RUNTIME',
+                destinationId: targetNodeGuid,
+                mediaAction: connectionConfig.mediaAction,
+                skipAmount,
+              }
+            }
+          case 'SKIP_TO':
+            {
+              const transitionNodeId = dI(connectionConfig.transitionNodeID)
+              const targetNode = transitionNodeId ? tY.get(transitionNodeId) : null
+              const targetNodeGuid = targetNode ? tY.guidFromDeveloperFriendlyId(targetNode.guid) : null
+              const skipToTime = connectionConfig.mediaSkipToTime || 0
+              return {
+                type: 'UPDATE_MEDIA_RUNTIME',
+                destinationId: targetNodeGuid,
+                mediaAction: connectionConfig.mediaAction,
+                newTimestamp: skipToTime,
+              }
+            }
+          default:
+            _$$k2.warn('Prototype action contains a Connection Type that the plugin API does not support')
+            return null
         }
       }
-      else {
-        navigationData.destinationId = null
-      }
+    case 'INTERNAL_NODE':
+      {
+        const navigationData: NavigationAction = {
+          type: 'NODE',
+        }
+        const transitionNodeId = dI(connectionConfig.transitionNodeID)
+        const targetNode = transitionNodeId ? tY.get(transitionNodeId) : null
+        const navigationType = connectionConfig.navigationType || 'NAVIGATE'
 
-      // Set navigation type
-      switch (navigationType) {
-        case 'NAVIGATE':
-        case 'SWAP':
-        case 'OVERLAY':
-        case 'SCROLL_TO':
-          navigationData.navigation = navigationType
-          break;
-        case 'SWAP_STATE':
-          navigationData.navigation = 'CHANGE_TO'
-          break;
-        default:
-          _$$k2.warn('Prototype action contains a Navigation Type that the plugin API does not support')
-          navigationData.navigation = null
-      }
+        // Set destination ID and overlay position
+        if (targetNode) {
+          navigationData.destinationId = tY.guidFromDeveloperFriendlyId(targetNode.guid)
+          if (navigationType === 'OVERLAY' && targetNode.overlayPositionType === 'MANUAL') {
+            navigationData.overlayRelativePosition = {
+              x: connectionConfig.overlayRelativePosition?.x || 0,
+              y: connectionConfig.overlayRelativePosition?.y || 0,
+            }
+          }
+        }
+        else {
+          navigationData.destinationId = null
+        }
 
-      // Process transition
-      navigationData.transition = denormalizeTransition(connectionConfig)
-      navigationData.resetVideoPosition = !!connectionConfig.transitionResetVideoPosition
+        // Set navigation type
+        switch (navigationType) {
+          case 'NAVIGATE':
+          case 'SWAP':
+          case 'OVERLAY':
+          case 'SCROLL_TO':
+            navigationData.navigation = navigationType
+            break
+          case 'SWAP_STATE':
+            navigationData.navigation = 'CHANGE_TO'
+            break
+          default:
+            _$$k2.warn('Prototype action contains a Navigation Type that the plugin API does not support')
+            navigationData.navigation = null
+        }
 
-      // Handle scroll position settings
-      const hasPreserveScrollSetting = connectionConfig.transitionPreserveScroll !== undefined
-      if (connectionConfig.transitionResetScrollPosition !== undefined) {
-        navigationData.resetScrollPosition = connectionConfig.transitionResetScrollPosition
+        // Process transition
+        navigationData.transition = denormalizeTransition(connectionConfig)
+        navigationData.resetVideoPosition = !!connectionConfig.transitionResetVideoPosition
+
+        // Handle scroll position settings
+        const hasPreserveScrollSetting = connectionConfig.transitionPreserveScroll !== undefined
+        if (connectionConfig.transitionResetScrollPosition !== undefined) {
+          navigationData.resetScrollPosition = connectionConfig.transitionResetScrollPosition
+        }
+        else if (hasPreserveScrollSetting) {
+          navigationData.preserveScrollPosition = connectionConfig.transitionPreserveScroll
+        }
+        if (connectionConfig.transitionResetInteractiveComponents !== undefined) {
+          navigationData.resetInteractiveComponents = connectionConfig.transitionResetInteractiveComponents
+        }
+        return navigationData
       }
- else if (hasPreserveScrollSetting) {
-        navigationData.preserveScrollPosition = connectionConfig.transitionPreserveScroll
-      }
-      if (connectionConfig.transitionResetInteractiveComponents !== undefined) {
-        navigationData.resetInteractiveComponents = connectionConfig.transitionResetInteractiveComponents
-      }
-      return navigationData
-    }
     case 'OBJECT_ANIMATION':
       return {
         type: 'OBJECT_ANIMATION',
@@ -1605,23 +1843,6 @@ function tZ(connectionConfig) {
     default:
       return null
   }
-}
-
-// Phase 21: Advanced Variable and Expression Processing Systems - Wrapper Functions
-function tXNew(e) {
-  // Use extracted Phase 21 Advanced Variable Expression Processor
-  // Original tX function logic moved to ./modules/variable-expression-processing.ts
-  const variableProcessor = createAdvancedVariableExpressionProcessor(undefined,
-    // config
-    {
-      w1,
-      Hr,
-    },
-    // hrUtilities
-    debugStateI,
-    // dIFunction
-    _$$sH, // sHFunction  );
-  return variableProcessor.convertVariableToExternal(e)
 }
 function tQNewExpressionParser(e) {
   // Use extracted Phase 21 Advanced Variable Parser
@@ -1635,37 +1856,9 @@ function tQNewExpressionParser(e) {
     // hrUtilities
     debugStateI,
     // dIFunction
-    _$$sH, // sHFunction  );
+    _$$sH) // sHFunction  );
   const variableParser = createAdvancedVariableParser(variableProcessor, debugStateI)
   return variableParser.convertVariableToInternal(e)
-}
-
-// Phase 21: Variable and Expression Enum Conversion Utilities - Wrapper Functions
-function tJNew(e) {
-  // Use extracted Phase 21 Variable Expression Utils
-  // Original tJ function logic moved to ./modules/variable-expression-processing.ts
-  return VariableExpressionUtils.convertResolvedDataTypeWithEnum(e, rXF)
-}
-function t0New(e) {
-  // Use extracted Phase 21 Variable Expression Utils
-  // Original t0 function logic moved to ./modules/variable-expression-processing.ts
-  return VariableExpressionUtils.convertExpressionFunctionWithEnum(e, JTp)
-}
-function tX(e) {
-  // Use extracted Phase 21 Advanced Variable Expression Processor
-  return tXNew(e)
-}
-function tQ(e) {
-  // Use extracted Phase 21 Advanced Variable Parser
-  return tQNewExpressionParser(e)
-}
-function tJ(e) {
-  // Use extracted Phase 21 Variable Expression Utils
-  return tJNew(e)
-}
-function t0(variableExpressionInput) {
-  // Variable Expression Utility Processor - handles complex variable expression calculations and optimizations (t0 function)
-  return t0New(variableExpressionInput)
 }
 
 // Animation Transition Styles - defines all supported transition animations for UI components
@@ -1697,17 +1890,17 @@ function processPublishStatus(e) {
 }
 
 // Public Variable Scopes - filtered keys from j0r excluding STROKE and FONT_VARIATIONS, plus additional stroke/font properties
-const publicVariableScopes = Object.keys(j0r).filter(scopeKey => isNaN(Number(scopeKey)) && scopeKey !== 'STROKE' && scopeKey !== 'FONT_VARIATIONS').concat(['STROKE_COLOR', 'FONT_WEIGHT'])
+const publicVariableScopes = Object.keys(j0r).filter(scopeKey => isNaN(Number(scopeKey)) && scopeKey !== 'STROKE' && scopeKey !== 'FONT_VARIATIONS').concat(['STROKE_COLOR', 'FONT_WEIGHT']) as [string, ...string[]]
 
 // Public Variable Code Syntax Platform Properties - filtered numeric keys from y0x for platform-specific variable syntax
-const publicVariableCodeSyntaxPlatformProperties = Object.keys(y0x).filter(propertyKey => isNaN(Number(propertyKey)))
+const publicVariableCodeSyntaxPlatformProperties = Object.keys(y0x).filter(propertyKey => isNaN(Number(propertyKey))) as [string, ...string[]]
 const variableAlias = _$$z.strictObject({
   id: _$$z.string(),
   type: _$$z.literal('VARIABLE_ALIAS'),
 })
-export const n = {
-  PublicVariableScope: _$$z.enum([...publicVariableScopes] as [string, ...string[]]),
-  PublicVariableCodeSyntaxPlatformPropType: _$$z.enum([...publicVariableCodeSyntaxPlatformProperties] as [string, ...string[]]),
+export const variableDefinitions = {
+  PublicVariableScope: _$$z.enum([...publicVariableScopes]),
+  PublicVariableCodeSyntaxPlatformPropType: _$$z.enum([...publicVariableCodeSyntaxPlatformProperties]),
   PublicVariableResolvedType: _$$z.enum([...primitiveTypes]),
   VariableBindableNodeField: _$$z.enum([...hp]),
   VariableBindableTextField: _$$z.enum([...SE]),
@@ -1739,19 +1932,19 @@ function processWidgetSyncData(vm, state, i) {
     syncedState: vm.isUndefined(state)
       ? void 0
       : _$$u({
-          vm,
-          handle: state,
-          zSchema: _$$z.record(_$$z.any()).optional(),
-          property: 'cloneWidget',
-        }),
+        vm,
+        handle: state,
+        zSchema: _$$z.record(_$$z.any()).optional(),
+        property: 'cloneWidget',
+      }),
     syncedMap: vm.isUndefined(i)
       ? void 0
       : _$$u({
-          vm,
-          handle: i,
-          zSchema: _$$z.record(_$$z.record(_$$z.any())).optional(),
-          property: 'cloneWidget',
-        }),
+        vm,
+        handle: i,
+        zSchema: _$$z.record(_$$z.record(_$$z.any())).optional(),
+        property: 'cloneWidget',
+      }),
   }
 }
 function isInImmutableContext(e, t) {
@@ -1818,17 +2011,19 @@ function handlePaintProperty({
     hasEditScope: true,
   })
 }
-function createNodeHash(vm, targetData) {
+
+function createNodeHash(vm: NoOpVm, targetData: any) {
   // Data Processor Function - handles input and target data processing (i_ function)
   let i = vm.newObject()
   vm.defineProp(i, 'hash', {
-    enumerable: !1,
+    enumerable: false,
     metricsKey: 'node.hash',
     value: vm.deepWrap(targetData.sha1),
   })
   return i
 }
-function createImageProcessor(vm, imageData) {
+
+function createImageProcessor(vm: NoOpVm, imageData: any) {
   const processor = vm.newObject()
 
   // Define hash property
@@ -1846,10 +2041,10 @@ function createImageProcessor(vm, imageData) {
       reject,
     } = vm.newPromise()
     const asyncOperation = vm.registerPromise(imageData.getBytesAsync())
-    asyncOperation.then((result) => {
+    asyncOperation.then((result: any) => {
       resolve(vm.deepWrap(result))
     })
-    asyncOperation.catch((error) => {
+    asyncOperation.catch((error: any) => {
       reject(vm.deepWrap(error))
     })
     return promise
@@ -1864,14 +2059,14 @@ function createImageProcessor(vm, imageData) {
     } = vm.newPromise()
     const processImageSize = () => {
       if (imageData.bytes) {
-        vX(imageData.bytes).then(size => resolve(vm.deepWrap(size))).catch(error => reject(vm.deepWrap(error)))
+        vX(imageData.bytes).then((size: any) => resolve(vm.deepWrap(size))).catch((error: any) => reject(vm.deepWrap(error)))
       }
- else {
-        imageData.getBytesAsync().then((bytes) => {
+      else {
+        imageData.getBytesAsync().then((bytes: any) => {
           imageData.bytes = bytes
           return vX(bytes)
-        }).then(size => resolve(vm.deepWrap(size))).catch(() => {
-          reject(vm.deepWrap('Image dimensions not available'))
+        }).then((size: any) => resolve(vm.deepWrap(size))).catch(() => {
+          reject(vm.newString('Image dimensions not available'))
         })
       }
     }
@@ -1880,7 +2075,8 @@ function createImageProcessor(vm, imageData) {
   })
   return processor
 }
-function setupPrototypeFromArgs(context, target, ...additionalInputs) {
+
+function setupPrototypeFromArgs(context: any, target: string, ...additionalInputs: Array<(context: any, prototype: any) => void>) {
   const prototype = context.vm.newPrototype(target)
   for (const additionalInput of additionalInputs) {
     additionalInput(context, prototype)
@@ -1888,7 +2084,8 @@ function setupPrototypeFromArgs(context, target, ...additionalInputs) {
   context.vm.retainHandle(prototype)
   return prototype
 }
-function convertEffectType(effectType) {
+
+function convertEffectType(effectType: string): string {
   switch (effectType) {
     case 'FOREGROUND_BLUR':
       return 'LAYER_BLUR'
@@ -1901,19 +2098,20 @@ function convertEffectType(effectType) {
       return effectType
   }
 }
-function processEffect(effect) {
+
+function processEffect(effect: any) {
   // Iteration Processor Function - handles iteration input processing (iI function)
   const type = convertEffectType(effect.type)
   const baseEffect = effect.type === 'NOISE'
     ? {
-        type,
-        visible: effect.visible,
-      }
-: {
-        type,
-        visible: effect.visible,
-        radius: effect.radius,
-      };
+      type,
+      visible: effect.visible,
+    }
+    : {
+      type,
+      visible: effect.visible,
+      radius: effect.radius,
+    }
   const boundVariables: any = {}
   if (effect.colorVar?.value?.alias) {
     boundVariables.color = createVariableAlias(effect.colorVar.value.alias)
@@ -2009,6 +2207,7 @@ function processEffect(effect) {
       return processedEffect
   }
 }
+
 /**
  * Clamps a value between a minimum and maximum.
  * Original: iE
@@ -2017,8 +2216,8 @@ function processEffect(effect) {
  * @param max - The maximum allowed value.
  * @returns The clamped value.
  */
-function clampValue(value, min, max) {
-  return Math.max(min, Math.min(max, value))
+function clampValue(value: number, min: number, max: number): number {
+  return Math.min(Math.max(value, min), max)
 }
 
 /**
@@ -2030,16 +2229,17 @@ function clampValue(value, min, max) {
  * @param propertyName - The property name for logging.
  * @returns The clamped value.
  */
-function validateGlassEffectValue(value, min, max, propertyName) {
+function validateGlassEffectValue(value: number, min: number, max: number, propertyName: string): number {
   if (value > max) {
     _$$k2.warn(`Glass effect ${propertyName} of ${value} is too large and will be clamped to ${max}`)
   }
- else if (value < min) {
+  else if (value < min) {
     _$$k2.warn(`Glass effect ${propertyName} of ${value} is too small and will be clamped to ${min}`)
   }
   return clampValue(value, min, max)
 }
-function handleFrameSpread(i) {
+
+function handleFrameSpread(i: any) {
   if (i.fills.length === 0 || i.fills.every(e => !(e.visible && e.opacity))) {
     _$$k2.warn('The \'spread\' parameter is not supported when frames or components have no visible fills')
   }
@@ -2048,10 +2248,12 @@ function handleFrameSpread(i) {
   }
   return 0
 }
-function handleOtherSpread(i) {
+
+function handleOtherSpread(i: any) {
   _$$k2.warn(`Spread is not supported for node type ${i.type}`)
   return 1
 }
+
 /**
  * Processes and normalizes effect configuration, clamping values and mapping types as needed.
  * Original: ix
@@ -2059,7 +2261,7 @@ function handleOtherSpread(i) {
  * @param node - The node to which the effect is applied (optional).
  * @returns The processed effect configuration.
  */
-function processEffectWithValidation(effect, node) {
+function processEffectWithValidation(effect: any, node: any) {
   let processed = {
     ...effect,
   }
@@ -2072,8 +2274,9 @@ function processEffectWithValidation(effect, node) {
 
   // Clamp TEXTURE radius
   if (effect.type === 'TEXTURE') {
-    if (effect.radius > mx)
+    if (effect.radius > mx) {
       _$$k2.warn(`Effect radius of ${effect.radius} is too large and will be clamped to ${mx}`)
+    }
     processed.radius = clampValue(effect.radius, 0, mx)
   }
 
@@ -2085,9 +2288,12 @@ function processEffectWithValidation(effect, node) {
 
   // Clamp noiseSize for NOISE or TEXTURE
   if (effect.type === 'NOISE' || effect.type === 'TEXTURE') {
-    if (effect.noiseSize > Mo)
-      _$$k2.warn(`Effect noiseSize of ${effect.noiseSize} is too large and will be clamped to ${Mo}`); else if (effect.noiseSize < 0)
+    if (effect.noiseSize > Mo) {
+      _$$k2.warn(`Effect noiseSize of ${effect.noiseSize} is too large and will be clamped to ${Mo}`)
+    }
+    else if (effect.noiseSize < 0) {
       _$$k2.warn(`Effect noiseSize of ${effect.noiseSize} is too small and will be clamped to 0`)
+    }
     const clampedNoiseSize = clampValue(effect.noiseSize, 0, Mo)
     processed.noiseSize = new Mi(clampedNoiseSize, clampedNoiseSize)
   }
@@ -2114,22 +2320,28 @@ function processEffectWithValidation(effect, node) {
     if (effect.spread === undefined) {
       delete processed.spread
     }
- else if (effect.spread !== 0 && (!node || !['ROUNDED_RECTANGLE', 'RECTANGLE', 'ELLIPSE'].includes(node.type) && (['INSTANCE', 'SYMBOL', 'FRAME'].includes(node.type) ? handleFrameSpread(node) : handleOtherSpread(node)))) {
+    else if (effect.spread !== 0 && (!node || !['ROUNDED_RECTANGLE', 'RECTANGLE', 'ELLIPSE'].includes(node.type) && (['INSTANCE', 'SYMBOL', 'FRAME'].includes(node.type) ? handleFrameSpread(node) : handleOtherSpread(node)))) {
       processed.spread = 0
     }
- else {
-      if (effect.spread > yj)
-        _$$k2.warn(`Effect spread of ${effect.spread} is too large and will be clamped to ${yj}`); else if (effect.spread < cT)
+    else {
+      if (effect.spread > yj) {
+        _$$k2.warn(`Effect spread of ${effect.spread} is too large and will be clamped to ${yj}`)
+      }
+      else if (effect.spread < cT) {
         _$$k2.warn(`Effect spread of ${effect.spread} is too small and will be clamped to ${cT}`)
+      }
       processed.spread = clampValue(effect.spread, cT, yj)
     }
   }
 
   // Clamp radius for supported types
   if (effect.radius !== undefined) {
-    if (effect.radius > DW)
-      _$$k2.warn(`Effect radius of ${effect.radius} is too large and will be clamped to ${DW}`); else if (effect.radius < V8)
+    if (effect.radius > DW) {
+      _$$k2.warn(`Effect radius of ${effect.radius} is too large and will be clamped to ${DW}`)
+    }
+    else if (effect.radius < V8) {
       _$$k2.warn(`Effect radius of ${effect.radius} is too small and will be clamped to ${V8}`)
+    }
     processed.radius = clampValue(effect.radius, V8, DW)
   }
 
@@ -2279,13 +2491,13 @@ function convertListOption(listOption) {
   if (listOption === 'ORDERED_LIST') {
     type = 'ORDERED'
   }
- else if (listOption === 'UNORDERED_LIST') {
+  else if (listOption === 'UNORDERED_LIST') {
     type = 'UNORDERED'
   }
- else if (listOption === 'PLAIN') {
+  else if (listOption === 'PLAIN') {
     type = 'NONE'
   }
- else {
+  else {
     throw new Error('Unknown list option')
   }
   return {
@@ -2357,277 +2569,514 @@ function processGridLayout(gridLayoutConfig) {
   }
   return config
 }
-function iL(e) {
-  return iLNew(e)
+/**
+ * Converts a grid layout configuration from plugin API format to internal format.
+ * Original function: iL
+ * @param config - The grid layout configuration from the plugin API.
+ * @returns The normalized internal grid layout configuration.
+ */
+function convertGridLayoutConfig(config) {
+  // Use Kb to normalize the input config with default values
+  const normalized = Kb(config, {
+    alignment: 'STRETCH',
+    count: 5,
+    gutterSize: 20,
+    sectionSize: 10,
+    offset: 0,
+    visible: true,
+    color: {
+      r: 1,
+      g: 0,
+      b: 0,
+      a: 0.1,
+    },
+  })
+
+  // Map normalized config to internal format
+  const internalConfig: GridLayoutConfig = {
+    pattern: normalized.pattern === 'COLUMNS' || normalized.pattern === 'ROWS' ? 'STRIPES' : normalized.pattern,
+    axis: normalized.pattern === 'COLUMNS' ? 'X' : 'Y',
+    numSections: Math.min(normalized.count, _$$F2),
+    type: normalized.alignment,
+    gutterSize: normalized.gutterSize,
+    sectionSize: normalized.sectionSize,
+    offset: normalized.offset,
+    visible: normalized.visible,
+    color: normalized.color,
+  }
+
+  // Handle bound variables if present
+  if (config.boundVariables) {
+    if (config.boundVariables?.count?.id) {
+      internalConfig.numSectionsVar = {
+        dataType: 'ALIAS',
+        resolvedDataType: 'FLOAT',
+        value: {
+          alias: _$$sH(config.boundVariables.count.id),
+        },
+      }
+    }
+    if (config.boundVariables?.sectionSize?.id) {
+      internalConfig.sectionSizeVar = {
+        dataType: 'ALIAS',
+        resolvedDataType: 'FLOAT',
+        value: {
+          alias: _$$sH(config.boundVariables.sectionSize.id),
+        },
+      }
+    }
+    if (config.boundVariables?.offset?.id) {
+      internalConfig.offsetVar = {
+        dataType: 'ALIAS',
+        resolvedDataType: 'FLOAT',
+        value: {
+          alias: _$$sH(config.boundVariables.offset.id),
+        },
+      }
+    }
+    if (config.boundVariables?.gutterSize?.id) {
+      internalConfig.gutterSizeVar = {
+        dataType: 'ALIAS',
+        resolvedDataType: 'FLOAT',
+        value: {
+          alias: _$$sH(config.boundVariables.gutterSize.id),
+        },
+      }
+    }
+  }
+  return internalConfig
 }
-function iF(frameInput, targetFrame) {
-  // Frame Processor Function - handles frame input and target frame processing (iF function)
-  return iFNew(frameInput, targetFrame)
+
+/**
+ * Converts a rectangle-like object to a VM-wrapped rectangle.
+ * Original function: iF
+ * @param vm - The VM context.
+ * @param rect - The rectangle object with x, y, w, h properties.
+ * @returns The VM-wrapped rectangle object.
+ */
+function createVmRect(vm, rect) {
+  const result = vm.newObject()
+  vm.setProp(result, 'x', vm.newNumber(rect.x))
+  vm.setProp(result, 'y', vm.newNumber(rect.y))
+  vm.setProp(result, 'width', vm.newNumber(rect.w))
+  vm.setProp(result, 'height', vm.newNumber(rect.h))
+  return result
 }
-function iM(moduleConfig, moduleTarget) {
-  // Module Configuration Processor - handles module configuration and target processing (iM function)
-  return iMNew(moduleConfig, moduleTarget)
+/**
+ * Converts sizing mode to string representation for VM.
+ * Original: iM
+ * @param vm - The VM context.
+ * @param sizingMode - The sizing mode value.
+ * @returns The string representation of the sizing mode.
+ */
+function sizingModeToString(vm, sizingMode) {
+  return vm.newString(mapSizingModeToString(sizingMode))
 }
-function ij(joinInput) {
-  // Join Processor Function - handles join input processing and operations (ij function)
-  return ijNew(joinInput)
+
+/**
+ * Maps sizing mode to its string representation.
+ * Original: ij
+ * @param sizingMode - The sizing mode value.
+ * @returns The string representation.
+ */
+function mapSizingModeToString(sizingMode) {
+  switch (sizingMode) {
+    case 'FIXED':
+      return 'FIXED'
+    case 'RESIZE_TO_FIT':
+    case 'RESIZE_TO_FIT_WITH_IMPLICIT_SIZE':
+      return 'AUTO'
+    default:
+      return sizingMode
+  }
 }
-function iU(unionInput) {
-  // Union Processor Function - handles union input processing and operations (iU function)
-  return iUNew(unionInput)
+
+/**
+ * Maps layout align value to its string representation.
+ * Original: iU
+ * @param align - The layout align value.
+ * @returns The string representation.
+ */
+function layoutAlignToString(align) {
+  switch (align) {
+    case 'MIN':
+    case 'CENTER':
+    case 'MAX':
+    case 'BASELINE':
+    case 'STRETCH':
+      return align
+    case 'AUTO':
+      return 'INHERIT'
+    default:
+      return align
+  }
 }
-function iB(batchInput) {
-  // Batch Processor Function - handles batch input processing and operations (iB function)
-  return iBNew(batchInput)
+
+/**
+ * Maps primary axis align items value to its string representation.
+ * Original: iB
+ * @param align - The primary axis align items value.
+ * @returns The string representation.
+ */
+function primaryAxisAlignItemsToString(align) {
+  switch (align) {
+    case 'MIN':
+      return 'MIN'
+    case 'MAX':
+      return 'MAX'
+    case 'CENTER':
+      return 'CENTER'
+    case 'SPACE_EVENLY':
+    case 'SPACE_BETWEEN':
+      return 'SPACE_BETWEEN'
+    default:
+      return align
+  }
 }
-function iV(valueInput) {
-  // Value Processor Function - handles value input processing and validation (iV function)
-  return iVNew(valueInput)
+
+/**
+ * Maps layout sizing value to its string representation.
+ * Original: iV
+ * @param sizing - The layout sizing value.
+ * @returns The string representation.
+ */
+function layoutSizingToString(sizing) {
+  switch (sizing) {
+    case mKm.FIXED:
+      return 'FIXED'
+    case mKm.HUG_CONTENT:
+      return 'HUG'
+    case mKm.FILL_CONTAINER:
+      return 'FILL'
+    default:
+      return sizing
+  }
 }
-function iG(groupInput) {
-  // Group Processor Function - handles group input processing and operations (iG function)
-  return iGNew(groupInput)
+
+/**
+ * Maps string representation to layout sizing enum.
+ * Original: iG
+ * @param sizing - The string representation.
+ * @returns The layout sizing enum value.
+ */
+function stringToLayoutSizing(sizing) {
+  switch (sizing) {
+    case 'FIXED':
+      return mKm.FIXED
+    case 'HUG':
+      return mKm.HUG_CONTENT
+    case 'FILL':
+      return mKm.FILL_CONTAINER
+    default:
+      return sizing
+  }
 }
-function iz(zoomConfig, zoomProcessor, zoomSettings, zoomContext) {
-  // Zoom Configuration Processor - processes zoom configuration with processor, settings and context by delegating to enhanced zoom handler (iz function)
-  return izNew(zoomConfig, zoomProcessor, zoomSettings, zoomContext)
+
+/**
+ * Normalizes text case and small caps values for VM.
+ * Original: iz
+ * @param vm - The VM context.
+ * @param fallback - The fallback value.
+ * @param textCase - The text case value.
+ * @param smallCaps - The small caps value.
+ * @returns The normalized string value.
+ */
+function normalizeTextCase(vm, fallback, textCase, smallCaps) {
+  if (textCase === 'mixed')
+    return fallback
+  let result = textCase || 'ORIGINAL'
+  if (smallCaps !== undefined && result === 'ORIGINAL') {
+    if (smallCaps === 'mixed')
+      return fallback
+    if (smallCaps === 'SMALL')
+      result = 'SMALL_CAPS'; else if (smallCaps === 'ALL_SMALL')
+      result = 'SMALL_CAPS_FORCED'
+  }
+  return vm.newString(result)
 }
-function tnode0(e, t, {
-  vm: i,
-  getNode: n,
-  defineVmProp: r,
-}, a) {
-  r({
-    handle: a,
-    key: t,
+/**
+ * Defines a VM property for grid track sizes (row or column) with getter and setter.
+ * Original: tnode0
+ * @param dimension - 'row' or 'column'
+ * @param propName - Property name (e.g., 'gridRowSizes', 'gridColumnSizes')
+ * @param context - Object containing VM, getNode, and defineVmProp
+ * @param handle - VM handle for the property
+ */
+function defineGridTrackSizesProperty(dimension, propName, {
+  vm,
+  getNode,
+  defineVmProp,
+}, handle) {
+  defineVmProp({
+    handle,
+    key: propName,
     options: {
-      enumerable: !0,
-      metricsKey: `node.${t}`,
+      enumerable: true,
+      metricsKey: `node.${propName}`,
       get() {
-        let r = n(this)
-        let a = i.newArray()
-        let s = e === 'column' ? r.gridColumnSizesInOrder : r.gridRowSizesInOrder
-        for (let n = 0; n < s.length; n++) {
-          let o = s[n]
-          o && i.defineProp(a, String(n), {
-            enumerable: !0,
+        const node = getNode(this)
+        const arr = vm.newArray()
+        const sizes = dimension === 'column' ? node.gridColumnSizesInOrder : node.gridRowSizesInOrder
+        for (let idx = 0; idx < sizes.length; idx++) {
+          const sizeObj = sizes[idx]
+          if (!sizeObj)
+            continue
+          vm.defineProp(arr, String(idx), {
+            enumerable: true,
             get() {
-              let t = i.newObject()
-              i.defineProp(t, 'type', {
-                enumerable: !0,
-                get: () => i.newString(sAE[o.maxSizing.type]),
-                set(t) {
+              const track = vm.newObject()
+              // Track type property
+              vm.defineProp(track, 'type', {
+                enumerable: true,
+                get: () => vm.newString(sAE[sizeObj.maxSizing.type]),
+                set(val) {
                   l7.plugin('plugin-grid-track-size', () => {
-                    r.setGridTrackType(e, n, sAE[_$$u({
-                      vm: i,
-                      handle: t,
+                    node.setGridTrackType(dimension, idx, sAE[_$$u({
+                      vm,
+                      handle: val,
                       zSchema: _$$N.GridTrackSizingType,
                       property: 'gridTrackSizeType',
                     })])
                   })
-                  return i.undefined
+                  return vm.undefined
                 },
               })
-              i.defineProp(t, 'value', {
-                enumerable: !0,
-                get: () => i.newNumber(o.maxSizing.value),
-                set(t) {
+              // Track value property
+              vm.defineProp(track, 'value', {
+                enumerable: true,
+                get: () => vm.newNumber(sizeObj.maxSizing.value),
+                set(val) {
                   l7.plugin('plugin-grid-track-size', () => {
-                    r.setGridTrackSize(e, n, _$$u({
-                      vm: i,
-                      handle: t,
+                    node.setGridTrackSize(dimension, idx, _$$u({
+                      vm,
+                      handle: val,
                       zSchema: _$$N.PositiveFloat,
                       property: 'gridTrackSizeValue',
                     }))
                   })
-                  return i.undefined
+                  return vm.undefined
                 },
               })
-              return t
+              return track
             },
-            set(a) {
-              let s = _$$u({
-                vm: i,
-                handle: a,
+            set(val) {
+              const parsed = _$$u({
+                vm,
+                handle: val,
                 zSchema: _$$N.GridTrackSize,
-                property: t,
+                property: propName,
               })
               l7.plugin('plugin-grid-track-size', () => {
-                if (r.setGridTrackType(e, n, sAE[s.type]), s.type === 'FIXED') {
-                  if (!s.value) {
+                node.setGridTrackType(dimension, idx, sAE[parsed.type])
+                if (parsed.type === 'FIXED') {
+                  if (!parsed.value) {
                     throw new Error('Grid track size value must be non-negative for FIXED tracks')
                   }
-                  r.setGridTrackSize(e, n, s.value)
+                  node.setGridTrackSize(dimension, idx, parsed.value)
                 }
               })
-              return i.undefined
+              return vm.undefined
             },
           })
         }
-        return a
+        return arr
       },
-      set(r) {
-        let a = n(this)
-        let s = e === 'column' ? a.gridColumnSizesInOrder : a.gridRowSizesInOrder
-        let o = _$$u({
-          vm: i,
-          handle: r,
+      set(val) {
+        const node = getNode(this)
+        const sizes = dimension === 'column' ? node.gridColumnSizesInOrder : node.gridRowSizesInOrder
+        const parsedArr = _$$u({
+          vm,
+          handle: val,
           zSchema: _$$z.array(_$$N.GridTrackSize),
-          property: t,
+          property: propName,
         })
-        if (o.length !== s.length) {
-          throw new Error(`Grid track sizes must be the same length as the grid ${e} count`)
+        if (parsedArr.length !== sizes.length) {
+          throw new Error(`Grid track sizes must be the same length as the grid ${dimension} count`)
         }
-        for (let t = 0; t < o.length; t++) {
-          let i = o[t]
-          if (!i)
-            throw new Error(`Grid track size is undefined at index ${t}`)
+        for (let idx = 0; idx < parsedArr.length; idx++) {
+          const item = parsedArr[idx]
+          if (!item)
+            throw new Error(`Grid track size is undefined at index ${idx}`)
           l7.plugin('plugin-grid-track-size', () => {
-            a.setGridTrackType(e, t, sAE[i.type])
-            i.value && a.setGridTrackSize(e, t, i.value)
+            node.setGridTrackType(dimension, idx, sAE[item.type])
+            if (item.value)
+              node.setGridTrackSize(dimension, idx, item.value)
           })
         }
-        return i.undefined
+        return vm.undefined
       },
     },
-    canWriteInReadOnly: !1,
-    hasEditScope: !0,
+    canWriteInReadOnly: false,
+    hasEditScope: true,
   })
 }
-function inode1(e, t) {
+
+/**
+ * Factory for min/max width/height VM property definitions.
+ * Original: inode1
+ * @param propName - The property name (e.g., 'minWidth')
+ * @param boundType - 'min' or 'max'
+ */
+function defineMinMaxProperty(propName, boundType) {
   return function ({
-    vm: i,
-    defineVmProp: n,
-    getNode: r,
-  }, a) {
-    n({
-      handle: a,
-      key: e,
+    vm,
+    defineVmProp,
+    getNode,
+  }, handle) {
+    defineVmProp({
+      handle,
+      key: propName,
       options: {
-        enumerable: !0,
-        metricsKey: `node.${e}`,
+        enumerable: true,
+        metricsKey: `node.${propName}`,
         get() {
-          let t = r(this)[e]
-          return t == null ? i.$$null : i.newNumber(t)
+          const val = getNode(this)[propName]
+          return val == null ? vm.$$null : vm.newNumber(val)
         },
-        set(n) {
-          let a = r(this)
-          let s = _$$u({
-            vm: i,
-            handle: n,
+        set(val) {
+          const node = getNode(this)
+          const parsed = _$$u({
+            vm,
+            handle: val,
             zSchema: _$$N.PositiveFloat.nullable(),
-            property: e,
+            property: propName,
           })
-          if (s != null) {
-            let i = a.parentNode
-            if (a.stackMode === 'NONE' && (!i || i.stackMode === 'NONE')) {
-              throw new Error(`Can only set ${e} on auto layout nodes and their children`)
+          if (parsed != null) {
+            const parent = node.parentNode
+            if (node.stackMode === 'NONE' && (!parent || parent.stackMode === 'NONE')) {
+              throw new Error(`Can only set ${propName} on auto layout nodes and their children`)
             }
-            if (a.type === 'SLIDE')
-              throw new Error(`Cannot set ${e} on slide nodes`)
-            if (t === 'min' && s === 0)
-              throw new Error(`${e} cannot be set to 0, use null to unset`)
-            if (t === 'max' && s === 1 / 0) {
-              throw new Error(`${e} cannot be set to Infinity, use null to unset`)
+            if (node.type === 'SLIDE')
+              throw new Error(`Cannot set ${propName} on slide nodes`)
+            if (boundType === 'min' && parsed === 0) {
+              throw new Error(`${propName} cannot be set to 0, use null to unset`)
+            }
+            if (boundType === 'max' && parsed === Infinity) {
+              throw new Error(`${propName} cannot be set to Infinity, use null to unset`)
             }
           }
           getFeatureFlags().dse_min_max_plugin_behavior
-            ? Egt?.setNodeTransformProperties(a.guid, {
-                [e]: s,
-              })
-            : a[e] = s
-          return i.undefined
+            ? Egt?.setNodeTransformProperties(node.guid, {
+              [propName]: parsed,
+            })
+            : node[propName] = parsed
+          return vm.undefined
         },
       },
-      canWriteInReadOnly: !1,
-      hasEditScope: !0,
+      canWriteInReadOnly: false,
+      hasEditScope: true,
     })
   }
 }
-let rnode2 = (e, t, i, n) => {
-  let r = _$$u({
-    vm: e,
-    handle: i,
+
+/**
+ * Validates and returns width/height for resizing nodes.
+ * Original: rnode2
+ */
+function validateResizeDimensions(node, widthHandle, heightHandle, vm) {
+  const width = _$$u({
+    vm,
+    handle: widthHandle,
     zSchema: _$$N.PositiveFloat,
     property: 'width',
   })
-  let a = _$$u({
-    vm: e,
-    handle: n,
+  const height = _$$u({
+    vm,
+    handle: heightHandle,
     zSchema: _$$N.PositiveFloat,
     property: 'height',
   })
-  if (t.type === 'VECTOR' && Math.abs(r) < 0.01 && Math.abs(a) < 0.01)
+  if (node.type === 'VECTOR' && Math.abs(width) < 0.01 && Math.abs(height) < 0.01) {
     throw new Error('Cannot set width and height of vector node to zero')
-  if (t.type === 'SECTION' && t.sectionContentsHidden)
+  }
+  if (node.type === 'SECTION' && node.sectionContentsHidden)
     throw new Error('Cannot resize hidden sections')
-  if (t.type === 'SLIDE')
+  if (node.type === 'SLIDE')
     throw new Error('Cannot resize slide nodes')
   return {
-    width: r,
-    height: a,
+    width,
+    height,
   }
 }
-function anode3(e, t) {
+/**
+ * Factory for independent stroke weight VM property definitions.
+ * Original: anode3
+ * @param propName - The property name (e.g., 'strokeTopWeight')
+ * @param nodeField - The corresponding node field (e.g., 'borderTopWeight')
+ */
+function defineStrokeWeightProperty(propName, nodeField) {
   return function ({
-    vm: i,
-    defineVmProp: n,
-    getNode: r,
-  }, a) {
-    n({
-      handle: a,
-      key: e,
+    vm,
+    defineVmProp,
+    getNode,
+  }, handle) {
+    defineVmProp({
+      handle,
+      key: propName,
       options: {
-        enumerable: !0,
-        metricsKey: `node.${e}`,
+        enumerable: true,
+        metricsKey: `node.${propName}`,
         get() {
-          let e = r(this)
-          let n = e.borderStrokeWeightsIndependent ? e[t] : e.strokeWeight
-          return i.newNumber(n)
+          const node = getNode(this)
+          const val = node.borderStrokeWeightsIndependent ? node[nodeField] : node.strokeWeight
+          return vm.newNumber(val)
         },
-        set(n) {
-          let a = r(this)
-          let s = _$$u({
-            vm: i,
-            handle: n,
+        set(val) {
+          const node = getNode(this)
+          const parsed = _$$u({
+            vm,
+            handle: val,
             zSchema: _$$N.PositiveFloat,
-            property: e,
+            property: propName,
           })
-          a[t] = s;
-          [a.borderTopWeight, a.borderBottomWeight, a.borderLeftWeight, a.borderRightWeight].every(e => e === s) ? (a.borderStrokeWeightsIndependent = !1, a.strokeWeight = s) : a.borderStrokeWeightsIndependent = !0
-          return i.undefined
+          node[nodeField] = parsed
+          const allEqual = [node.borderTopWeight, node.borderBottomWeight, node.borderLeftWeight, node.borderRightWeight].every(v => v === parsed)
+          if (allEqual) {
+            node.borderStrokeWeightsIndependent = false
+            node.strokeWeight = parsed
+          }
+          else {
+            node.borderStrokeWeightsIndependent = true
+          }
+          return vm.undefined
         },
       },
-      canWriteInReadOnly: !1,
-      hasEditScope: !0,
+      canWriteInReadOnly: false,
+      hasEditScope: true,
     })
   }
 }
-async function snode4(e) {
+
+/**
+ * Checks and returns publish status for a node.
+ * Original: snode4
+ * @param node - The node to check
+ * @returns Promise<string> - The publish status
+ */
+async function getNodePublishStatus(node) {
   QC(debugState)
   await NW
-  let t = debugState.getState()
-  let i = d1(t)
-  if (!i)
+  const state = debugState.getState()
+  const file = d1(state)
+  if (!file)
     return 'UNPUBLISHED'
-  let n = _$$l2(i)
-  if (e.type === 'SYMBOL') {
-    let r = t.library.publishedByLibraryKey.components
-    let a = bp(n, i.team_id, e.guid, r)
-    let s = null
-    if (!a || a.unpublished_at)
+  const fileId = _$$l2(file)
+  if (node.type === 'SYMBOL') {
+    const components = state.library.publishedByLibraryKey.components
+    const symbol = bp(fileId, file.team_id, node.guid, components)
+    if (!symbol || symbol.unpublished_at)
       return 'UNPUBLISHED'
-    if (s = a.content_hash)
-      return e.getSharedSymbolVersion() === s ? 'CURRENT' : 'CHANGED'
+    if (symbol.content_hash) {
+      return node.getSharedSymbolVersion() === symbol.content_hash ? 'CURRENT' : 'CHANGED'
+    }
   }
- else if (e.isStateGroup) {
-    let r = t.library.publishedByLibraryKey.stateGroups
-    let a = bp(n, i.team_id, e.guid, r)
-    return !a || a.unpublished_at ? 'UNPUBLISHED' : e.getSharedStateGroupVersion() === a.version ? 'CURRENT' : 'CHANGED'
+  else if (node.isStateGroup) {
+    const stateGroups = state.library.publishedByLibraryKey.stateGroups
+    const group = bp(fileId, file.team_id, node.guid, stateGroups)
+    return !group || group.unpublished_at ? 'UNPUBLISHED' : node.getSharedStateGroupVersion() === group.version ? 'CURRENT' : 'CHANGED'
   }
   return 'UNPUBLISHED'
 }
-let onode5 = false
 
 /**
  * Processes OpenType feature settings for a node, combining and normalizing features.
@@ -2661,7 +3110,7 @@ function processOpenTypeFeatures({
     if (result[feature]) {
       delete result[feature]
     }
- else {
+    else {
       result[feature] = false
     }
   }
@@ -2738,7 +3187,7 @@ function fetchRelatedLinks({
       const {
         nodeId,
       } = await resolveNodeFileKey(node, openFileKey)
-      const sceneType = new qo(sceneGraph.getSceneType())
+      const sceneType = new ReduxSceneGraph(sceneGraph.getSceneType())
       const nodeGuids = result.map(e => sceneGraph.guidFromDeveloperFriendlyId(e.nodeId) || e.nodeId)
       const subtreeNodes = new Set(node.filterSubtreeNodes(nodeGuids))
       const relatedLinks: any[] = []
@@ -2759,7 +3208,7 @@ function fetchRelatedLinks({
       resolve(vm.deepWrap(relatedLinks))
     }).catch(() => reject(vm.newString('Failed to get related links')))
   }
- else {
+  else {
     vm.registerPromise(async function () {
       const {
         fileKey,
@@ -2801,7 +3250,17 @@ async function resolveNodeFileKey(node, openFileKey) {
     orgId: debugState.getState().currentUserOrgId,
   })))[0]
   let resolvedFileKey = null
-  if (libraryInfo && (ZA(libraryInfo) && xA(libraryInfo) ? resolvedFileKey = libraryInfo.hub_file_id : 'library_file_key' in libraryInfo && (resolvedFileKey = libraryInfo.library_file_key)) && resolvedFileKey !== null && resolvedFileKey !== openFileKey && node.publishID && fn(sH(node.publishID))) {
+
+  // Extract file key based on library info type
+  if (libraryInfo) {
+    if (ZA(libraryInfo) && xA(libraryInfo)) {
+      resolvedFileKey = libraryInfo.hub_file_id
+    }
+    else if ('library_file_key' in libraryInfo) {
+      resolvedFileKey = libraryInfo.library_file_key
+    }
+  }
+  if (libraryInfo && resolvedFileKey !== null && resolvedFileKey !== openFileKey && node.publishID && fn(sH(node.publishID))) {
     return {
       fileKey: resolvedFileKey,
       nodeId: CUU.developerFriendlyIdFromGuid(node.publishID, node.sceneGraph.scene) || node.publishID,
@@ -3060,6 +3519,19 @@ function setRelatedLinkPreview({
   }
   return promise
 }
+function it(e) {
+  switch (e) {
+    case 'WEB':
+      return y0x.WEB
+    case 'ANDROID':
+      return y0x.ANDROID
+    case 'iOS':
+      return y0x.iOS
+  }
+}
+
+let onode5 = false
+
 export const NodeAPI = {
   /**
    * Returns a string representation of the node.
@@ -3227,100 +3699,151 @@ export const NodeAPI = {
     })
   },
   exportNode({
-    vm: e,
-    defineVmFunction: t,
-    getNode: i,
-    validatedPermissions: n,
-    documentAccessState: r,
-    pluginID: a,
-    editorType: s,
-    openFileKey: o,
-  }, l) {
-    t({
-      handle: l,
+    vm,
+    defineVmFunction,
+    getNode,
+    validatedPermissions,
+    documentAccessState,
+    pluginID,
+    editorType,
+    openFileKey,
+  }, handle) {
+    defineVmFunction({
+      handle,
       key: 'exportAsync',
       metricsKey: 'node.exportAsync',
-      cb(t) {
-        let {
+      cb: (settingsHandle) => {
+        const {
           promise,
           resolve,
           reject,
-        } = e.newPromise()
+        } = vm.newPromise()
         try {
-          getFeatureFlags().plugins_check_viewer_export_restricted && !CQ() && az.trackDefinedEvent('extensibility.plugins_check_viewer_export_restricted', {
-            apiMethod: 'node.exportAsync',
-            pluginId: a,
-            editorType: Bu(s),
-            fileKey: o,
-            userId: o8(),
-          })
-          let u = i(this)
-          r.checkAllowedPage(u, {
+          // Track export analytics if enabled
+          this.trackExportAnalytics(pluginID, editorType, openFileKey)
+          const node = getNode(this)
+          documentAccessState.checkAllowedPage(node, {
             method: 'exportAsync',
           })
-          let p = n.permissions.includes('cortex') || n.permissions.includes('firstdraft')
-          let m = _$$N.getExportAsyncSetting(p)
-          let h = _$$u({
-            vm: e,
-            handle: t,
-            zSchema: m.optional(),
-            property: 'settings',
-          }) || {
-            format: 'PNG',
+
+          // Parse and validate export settings
+          const settings = this.parseExportSettings(settingsHandle, validatedPermissions, vm)
+
+          // Handle special export formats
+          if (this.isSpecialFormat(settings.format)) {
+            return this.handleSpecialFormat(node, settings, vm, resolve)
           }
-          let g = !1
-          if (h.format === 'SVG_STRING' && (h.format = 'SVG', g = !0), (function (e) {
-            let t = e
-            for (; t;) {
-              if (t.isInternalOnlyNode) 
-return !0
-              t = t.parentNode
-            }
-            return !1
-          }(u)) && h.format === 'SVG' && !1 === h.contentsOnly && reject(e.newString('You must set contentsOnly to true when exporting a remote component as an SVG')), h.format === 'JSON_REST_V1') {
-            resolve(e.deepWrap(u.getRestfulJSON()))
-            return promise
-          }
-          if (h.format === 'FIRST_DRAFT_JSON') {
-            resolve(e.deepWrap(u.getFirstDraftJSON()))
-            return promise
-          }
-          e.registerPromise(u.loadImagesAndExport(iw([h]))).then((t) => {
-            if (t.length === 0 && reject(e.newString('Failed to export node. This node may not have any visible layers.')), g) {
-              let i = new TextDecoder().decode(t)
-              resolve(e.newString(i))
-            }
- else {
-              resolve(e.newUint8Array(t))
-            }
-          }, (t) => {
-            x1('node.exportAsync', 'Failed at node.loadImagesAndExport', {
-              error: t,
-              fileKey: o,
-              pluginId: a,
-            }, {
-              reportAsSentryError: !0,
-              logToConsole: NUh.NEVER,
-            })
-            reject(e.newString('Failed to export node'))
-          })
+
+          // Validate SVG export constraints
+          this.validateSvgExportConstraints(node, settings, reject, vm)
+
+          // Process export
+          vm.registerPromise(this.processNodeExport(node, settings)).then(exportData => this.handleExportSuccess(exportData, settings, resolve, reject, vm)).catch(error => this.handleExportError(error, reject, vm, openFileKey, pluginID))
+        }
+        catch (error) {
+          this.handleUnexpectedError(error, openFileKey, pluginID)
           return promise
         }
- catch (e) {
-          x1('node.exportAsync', 'Unexpected error', {
-            error: e,
-            fileKey: o,
-            pluginId: a,
-          }, {
-            reportAsSentryError: !0,
-            logToConsole: NUh.NEVER,
-          })
-          return e
-        }
+        return promise
       },
-      isAllowedInReadOnly: !0,
-      hasEditScope: !1,
+      isAllowedInReadOnly: true,
+      hasEditScope: false,
     })
+  },
+  // Helper methods for export functionality
+  trackExportAnalytics(pluginID, editorType, openFileKey) {
+    if (getFeatureFlags().plugins_check_viewer_export_restricted && !CQ()) {
+      az.trackDefinedEvent('extensibility.plugins_check_viewer_export_restricted', {
+        apiMethod: 'node.exportAsync',
+        pluginId: pluginID,
+        editorType: Bu(editorType),
+        fileKey: openFileKey,
+        userId: o8(),
+      })
+    }
+  },
+  parseExportSettings(settingsHandle, validatedPermissions, vm) {
+    const hasSpecialPermissions = validatedPermissions.permissions.includes('cortex') || validatedPermissions.permissions.includes('firstdraft')
+    const settingsSchema = _$$N.getExportAsyncSetting(hasSpecialPermissions)
+    let settings = _$$u({
+      vm,
+      handle: settingsHandle,
+      zSchema: settingsSchema.optional(),
+      property: 'settings',
+    }) || {
+      format: 'PNG',
+    }
+
+    // Handle SVG_STRING format conversion
+    if (settings.format === 'SVG_STRING') {
+      settings.format = 'SVG'
+      settings._returnAsString = true
+    }
+    return settings
+  },
+  isSpecialFormat(format) {
+    return format === 'JSON_REST_V1' || format === 'FIRST_DRAFT_JSON'
+  },
+  handleSpecialFormat(node, settings, vm, resolve) {
+    if (settings.format === 'JSON_REST_V1') {
+      resolve(vm.deepWrap(node.getRestfulJSON()))
+    }
+    else if (settings.format === 'FIRST_DRAFT_JSON') {
+      resolve(vm.deepWrap(node.getFirstDraftJSON()))
+    }
+  },
+  validateSvgExportConstraints(node, settings, reject, vm) {
+    const isInternalOnlyNode = this.checkInternalOnlyNode(node)
+    if (isInternalOnlyNode && settings.format === 'SVG' && settings.contentsOnly !== true) {
+      reject(vm.newString('You must set contentsOnly to true when exporting a remote component as an SVG'))
+    }
+  },
+  checkInternalOnlyNode(node) {
+    let currentNode = node
+    while (currentNode) {
+      if (currentNode.isInternalOnlyNode)
+        return true
+      currentNode = currentNode.parentNode
+    }
+    return false
+  },
+  processNodeExport(node, settings) {
+    return node.loadImagesAndExport(iw([settings]))
+  },
+  handleExportSuccess(exportData, settings, resolve, reject, vm) {
+    if (exportData.length === 0) {
+      reject(vm.newString('Failed to export node. This node may not have any visible layers.'))
+      return
+    }
+    if (settings._returnAsString) {
+      const svgString = new TextDecoder().decode(exportData)
+      resolve(vm.newString(svgString))
+    }
+    else {
+      resolve(vm.newUint8Array(exportData))
+    }
+  },
+  handleExportError(error, reject, vm, openFileKey, pluginID) {
+    x1('node.exportAsync', 'Failed at node.loadImagesAndExport', {
+      error,
+      fileKey: openFileKey,
+      pluginId: pluginID,
+    }, {
+      reportAsSentryError: true,
+      logToConsole: NUh.NEVER,
+    })
+    reject(vm.newString('Failed to export node'))
+  },
+  handleUnexpectedError(error, openFileKey, pluginID) {
+    x1('node.exportAsync', 'Unexpected error', {
+      error,
+      fileKey: openFileKey,
+      pluginId: pluginID,
+    }, {
+      reportAsSentryError: true,
+      logToConsole: NUh.NEVER,
+    })
+    return error
   },
   resolvedVariableModes({
     vm: e,
@@ -3428,19 +3951,20 @@ return !0
           if (r.type === 'TEXT' || MT(r.type)) {
             r.autoRename = !1
           }
- else if (r.type === 'DOCUMENT') {
+          else if (r.type === 'DOCUMENT') {
             if (e.isString(t)) {
               _$$k2.warn('Setting the document name is currently not supported')
               return e.undefined
             }
             throw new Error('Setting the document name is currently not supported')
           }
-          if (r.name = _$$u({
+          r.name = _$$u({
             vm: e,
             handle: t,
             zSchema: _$$z.string(),
             property: 'name',
-          }), r.type === 'CANVAS') {
+          })
+          if (r.type === 'CANVAS') {
             if (n.hasLoadedPageId(r.guid)) {
               let e = uS({
                 openFile: debugState.getState().openFile,
@@ -3449,7 +3973,7 @@ return !0
               })
               r.isPageDivider = e
             }
- else {
+            else {
               _$$i2(r, r.name) ? _$$k2.warn('Cannot set page divider status for unloaded pages. Please call loadAsync() first.') : r.isPageDivider = !1
             }
           }
@@ -3627,7 +4151,7 @@ return !0
             i(this)
             return e.newBoolean(!1)
           }
- catch (t) {
+          catch (t) {
             if (t instanceof ApplicationError)
               return e.newBoolean(!0)
             throw t
@@ -3655,13 +4179,14 @@ return !0
         get() {
           let i = e.newArray()
           let s = r(this)
-          if (n.checkAllowedPage(s, {
+          n.checkAllowedPage(s, {
             property: 'children',
-          }), s.type === 'TABLE') {
+          })
+          if (s.type === 'TABLE') {
             let n = s.sortedTableCells
             for (let r = 0; r < n.length; r++) e.setProp(i, r.toString(), t().createNode(n[r], 'node.children'))
           }
- else {
+          else {
             let n = s.reversedChildrenGuids
             let r = n.length
             if (e.getStringProp(this, 'id') !== '0:0') {
@@ -3670,10 +4195,7 @@ return !0
               }
             }
             else {
-              for ((function () {
-                let s = 0
-                let o = 0
-              }()); s < r; s++) {
+              for (let s = 0; s < r; s++) {
                 let l = n[r - s - 1]
                 if (!getNodeById(l, a).isInternalOnlyNode) {
                   e.setProp(i, onode5.toString(), t().createNode(l, 'node.children'))
@@ -3754,7 +4276,7 @@ return !0
           for (let n = 0; n < l; n++) {
             let d = getNodeById(o[l - n - 1], a)
             if (r && d.isInternalOnlyNode || isInImmutableContext(e, d))
-              continue;
+              continue
             let c = t().createNode(d.guid, 'node.findOne')
             let u = e.callFunction(i, e.$$null, c)
             if (u.type === 'FAILURE')
@@ -3777,109 +4299,184 @@ return !0
       hasEditScope: !1,
     })
   },
-  findAll({
-    vm: e,
-    getNodeFactory: t,
-    defineVmFunction: i,
-    documentAccessState: n,
-    getNode: r,
-    sceneGraph: a,
-  }, s) {
-    i({
-      handle: s,
+  /**
+   * findAll - Traverse node hierarchy and find matching nodes based on callback
+   *
+   * Recursively traverses the node tree starting from the current node and returns
+   * all nodes that match the provided callback function. Handles special cases like
+   * table cells, internal nodes, and immutable contexts with proper filtering.
+   *
+   * @param config - Configuration object with VM, node factory, and utility functions
+   * @param handle - VM handle for the node to define the method on
+   */
+  findAll(config, handle) {
+    const {
+      defineVmFunction,
+    } = config
+    defineVmFunction({
+      handle,
       key: 'findAll',
       metricsKey: 'node.findAll',
-      cb(i) {
-        let s = e.toBoolean(i)
-        let o = e.newArray()
-        let l = 0
-        let d = (n, r) => {
-          let c = n.type === 'TABLE' ? n.sortedTableCells.reverse() : n.reversedChildrenGuids
-          let u = c.length
-          for (let n = 0; n < u; n++) {
-            let p = getNodeById(c[u - n - 1], a)
-            if (r && p.isInternalOnlyNode || isInImmutableContext(e, p))
-              continue;
-            let m = t().createNode(p.guid, 'node.findAll')
-            if (s) {
-              let t = e.callFunction(i, e.$$null, m)
-              if (t.type === 'FAILURE') {
-                throw new Error(`"findAll" callback crashed: ${t.error.message}`)
-              }
-              e.toBoolean(t.handle) && (e.setProp(o, `${l}`, m), l++)
-            }
- else {
-              e.setProp(o, `${l}`, m)
-              l++
-            }
-            d(p, !1)
-          }
-        }
-        let c = r(this)
-        n.checkAllowedMethodDocumentOrPage(c, {
-          method: 'findAll',
-        })
-        d(c, c.guid === '0:0')
-        return o
-      },
-      isAllowedInReadOnly: !0,
-      hasEditScope: !1,
+      cb: callbackHandle => this.executeFindAllTraversal(callbackHandle, config),
+      isAllowedInReadOnly: true,
+      hasEditScope: false,
     })
   },
-  findAllWithCriteria({
-    vm: e,
-    getNodeFactory: t,
-    pluginID: i,
-    defineVmFunction: n,
-    documentAccessState: r,
-    getNode: a,
-  }, s) {
-    n({
-      handle: s,
+  /**
+   * Execute findAll traversal with callback filtering
+   * @private
+   */
+  executeFindAllTraversal(callbackHandle, config) {
+    const {
+      vm,
+      getNodeFactory,
+      documentAccessState,
+      getNode,
+      sceneGraph,
+    } = config
+    const hasCallback = vm.toBoolean(callbackHandle)
+    const resultArray = vm.newArray()
+    let resultIndex = 0
+    const traverseNode = (currentNode, isRootLevel) => {
+      const children = this.getNodeChildren(currentNode)
+      for (let i = children.length - 1; i >= 0; i--) {
+        const childNode = getNodeById(children[i], sceneGraph)
+        if (this.shouldSkipNode(childNode, isRootLevel, vm)) {
+          continue
+        }
+        const nodeHandle = getNodeFactory().createNode(childNode.guid, 'node.findAll')
+        if (this.shouldIncludeNode(nodeHandle, hasCallback, callbackHandle, vm)) {
+          vm.setProp(resultArray, String(resultIndex), nodeHandle)
+          resultIndex++
+        }
+
+        // Recursively traverse child nodes
+        traverseNode(childNode, false)
+      }
+    }
+    const rootNode = getNode(this)
+    documentAccessState.checkAllowedMethodDocumentOrPage(rootNode, {
+      method: 'findAll',
+    })
+    traverseNode(rootNode, rootNode.guid === '0:0')
+    return resultArray
+  },
+  /**
+   * Get children nodes for traversal
+   * @private
+   */
+  getNodeChildren(node) {
+    return node.type === 'TABLE' ? node.sortedTableCells.reverse() : node.reversedChildrenGuids
+  },
+  /**
+   * Check if node should be skipped during traversal
+   * @private
+   */
+  shouldSkipNode(node, isRootLevel, vm) {
+    return isRootLevel && node.isInternalOnlyNode || isInImmutableContext(vm, node)
+  },
+  /**
+   * Check if node should be included in results
+   * @private
+   */
+  shouldIncludeNode(nodeHandle, hasCallback, callbackHandle, vm) {
+    if (!hasCallback) {
+      return true
+    }
+    const callbackResult = vm.callFunction(callbackHandle, vm.$$null, nodeHandle)
+    if (callbackResult.type === 'FAILURE') {
+      throw new Error(`"findAll" callback crashed: ${callbackResult.error.message}`)
+    }
+    return vm.toBoolean(callbackResult.handle)
+  },
+  /**
+   * findAllWithCriteria - Find nodes matching specific criteria
+   *
+   * Uses optimized search with criteria-based filtering for better performance.
+   * Supports filtering by node types, plugin data, and shared plugin data with
+   * proper validation and namespace checking.
+   *
+   * @param config - Configuration object with VM, plugin ID, and utility functions
+   * @param handle - VM handle for the node to define the method on
+   */
+  findAllWithCriteria(config, handle) {
+    const {
+      defineVmFunction,
+    } = config
+    defineVmFunction({
+      handle,
       key: 'findAllWithCriteria',
       metricsKey: 'node.findAllWithCriteria',
-      cb(n) {
-        let s
-        let o = _$$u({
-          vm: e,
-          handle: n,
-          zSchema: _$$N.FindCriteriaWithPluginDataSchema,
-          property: 'criteria',
-        })
-        let l = e.newArray()
-        let d = 0
-        if (o.sharedPluginData?.namespace && validateNamespace(o.sharedPluginData.namespace), o.pluginData) {
-          if (i) {
-            s = {
-              ...o.pluginData,
-              pluginID: i,
-            }
-          }
-          else {
-            throw new Error('Cannot filter by pluginData outside of a plugin')
-          }
-        }
-        let c = {
-          ...o,
-          types: o.types,
-          pluginData: s,
-        }
-        if (Object.values(c).every(e => !e)) {
-          throw new Error('Must specify at least one criteria with findAllWithCriteria')
-        }
-        let u = a(this)
-        for (let i of (r.checkAllowedMethodDocumentOrPage(u, {
-          method: 'findAllWithCriteria',
-        }), u.findAllWithCriteria(c))) {
-          let [n, r] = i
-          e.setProp(l, `${d}`, t().createNodeWithDevFriendlyId(n, r.toUpperCase(), 'node.findAllWithCriteria'))
-          d++
-        }
-        return l
-      },
-      isAllowedInReadOnly: !0,
-      hasEditScope: !1,
+      cb: criteriaHandle => this.executeFindAllWithCriteria(criteriaHandle, config),
+      isAllowedInReadOnly: true,
+      hasEditScope: false,
     })
+  },
+  /**
+   * Execute findAllWithCriteria search
+   * @private
+   */
+  executeFindAllWithCriteria(criteriaHandle, config) {
+    const {
+      vm,
+      getNodeFactory,
+      pluginID,
+      documentAccessState,
+      getNode,
+    } = config
+    const criteria = _$$u({
+      vm,
+      handle: criteriaHandle,
+      zSchema: _$$N.FindCriteriaWithPluginDataSchema,
+      property: 'criteria',
+    })
+    this.validateCriteria(criteria, pluginID)
+    const processedCriteria = this.processCriteria(criteria, pluginID)
+    const resultArray = vm.newArray()
+    const rootNode = getNode(this)
+    documentAccessState.checkAllowedMethodDocumentOrPage(rootNode, {
+      method: 'findAllWithCriteria',
+    })
+    let resultIndex = 0
+    for (const [nodeId, nodeType] of rootNode.findAllWithCriteria(processedCriteria)) {
+      const nodeHandle = getNodeFactory().createNodeWithDevFriendlyId(nodeId, nodeType.toUpperCase(), 'node.findAllWithCriteria')
+      vm.setProp(resultArray, String(resultIndex), nodeHandle)
+      resultIndex++
+    }
+    return resultArray
+  },
+  /**
+   * Validate search criteria
+   * @private
+   */
+  validateCriteria(criteria, pluginID) {
+    if (criteria.sharedPluginData?.namespace) {
+      validateNamespace(criteria.sharedPluginData.namespace)
+    }
+    if (criteria.pluginData && !pluginID) {
+      throw new Error('Cannot filter by pluginData outside of a plugin')
+    }
+    if (Object.values(criteria).every(value => !value)) {
+      throw new Error('Must specify at least one criteria with findAllWithCriteria')
+    }
+  },
+  /**
+   * Process and normalize criteria for search
+   * @private
+   */
+  processCriteria(criteria, pluginID) {
+    let processedPluginData
+    if (criteria.pluginData && pluginID) {
+      processedPluginData = {
+        ...criteria.pluginData,
+        pluginID,
+      }
+    }
+    return {
+      ...criteria,
+      types: criteria.types,
+      pluginData: processedPluginData,
+    }
   },
   findChild({
     vm: e,
@@ -3904,7 +4501,7 @@ return !0
         for (let n = 0; n < d; n++) {
           let a = getNodeById(l[d - n - 1], r)
           if (o && a.isInternalOnlyNode)
-            continue;
+            continue
           let s = t().createNode(a.guid, 'node.findChild')
           let c = e.callFunction(i, e.$$null, s)
           if (c.type === 'FAILURE')
@@ -3919,189 +4516,196 @@ return !0
     })
   },
   findChildren({
-    vm: e,
-    getNodeFactory: t,
-    defineVmFunction: i,
-    getNode: n,
-    sceneGraph: r,
-    documentAccessState: a,
-  }, s) {
-    i({
-      handle: s,
+    vm,
+    getNodeFactory,
+    defineVmFunction,
+    getNode,
+    sceneGraph,
+    documentAccessState,
+  }, handle) {
+    defineVmFunction({
+      handle,
       key: 'findChildren',
       metricsKey: 'node.findChildren',
-      cb(i) {
-        let s = n(this)
-        a.checkAllowedPage(s, {
+      cb(callbackHandle) {
+        const node = getNode(this)
+        documentAccessState.checkAllowedPage(node, {
           method: 'findChildren',
         })
-        let o = s.guid === '0:0'
-        let l = e.newArray()
-        let d = 0
-        let c = s.type === 'TABLE' ? s.sortedTableCells.reverse() : s.reversedChildrenGuids
-        let u = c.length
-        for (let n = 0; n < u; n++) {
-          let a = getNodeById(c[u - n - 1], r)
-          if (o && a.isInternalOnlyNode || isInImmutableContext(e, a))
-            continue;
-          let s = t().createNode(a.guid, 'node.findChildren')
-          let p = e.callFunction(i, e.$$null, s)
-          if (p.type === 'FAILURE') {
-            throw new Error(`"findChildren" callback crashed: ${p.error.message}`)
+        const isRoot = node.guid === '0:0'
+        const result = vm.newArray()
+        let resultIndex = 0
+        const children = node.type === 'TABLE' ? node.sortedTableCells.reverse() : node.reversedChildrenGuids
+        for (let i = 0; i < children.length; i++) {
+          const childNode = getNodeById(children[children.length - i - 1], sceneGraph)
+          if (isRoot && childNode.isInternalOnlyNode || isInImmutableContext(vm, childNode)) {
+            continue
           }
-          e.toBoolean(p.handle) && (e.setProp(l, `${d}`, s), d++)
+          const childHandle = getNodeFactory().createNode(childNode.guid, 'node.findChildren')
+          const cbResult = vm.callFunction(callbackHandle, vm.$$null, childHandle)
+          if (cbResult.type === 'FAILURE') {
+            throw new Error(`"findChildren" callback crashed: ${cbResult.error.message}`)
+          }
+          if (vm.toBoolean(cbResult.handle)) {
+            vm.setProp(result, `${resultIndex}`, childHandle)
+            resultIndex++
+          }
         }
-        return l
+        return result
       },
-      isAllowedInReadOnly: !0,
-      hasEditScope: !1,
+      isAllowedInReadOnly: true,
+      hasEditScope: false,
     })
   },
   findWidgetNodesByWidgetId({
-    vm: e,
-    getNodeFactory: t,
-    defineVmFunction: i,
-    getNode: n,
-    sceneGraph: r,
-    documentAccessState: a,
-  }, s) {
-    i({
-      handle: s,
+    vm,
+    getNodeFactory,
+    defineVmFunction,
+    getNode,
+    sceneGraph,
+    documentAccessState,
+  }, handle) {
+    defineVmFunction({
+      handle,
       key: 'findWidgetNodesByWidgetId',
       metricsKey: 'node.findWidgetNodesByWidgetId',
-      cb(i) {
-        let s = e.newArray()
-        let o = _$$u({
-          vm: e,
-          handle: i,
+      cb(widgetIdHandle) {
+        const result = vm.newArray()
+        const widgetId = _$$u({
+          vm,
+          handle: widgetIdHandle,
           zSchema: _$$z.string(),
           property: 'widgetId',
         })
-        if (!o)
-          return s
-        let l = n(this)
-        a.checkAllowedMethodDocumentOrPage(l, {
+        if (!widgetId)
+          return result
+        const node = getNode(this)
+        documentAccessState.checkAllowedMethodDocumentOrPage(node, {
           method: 'findWidgetNodesByWidgetId',
         })
-        let d = l.findAllWithCriteria({
+        const found = node.findAllWithCriteria({
           types: ['WIDGET'],
         })
-        let c = 0
-        d.forEach(([i]) => {
-          let a = r.get(i)
-          if (a?.widgetId !== o)
-            return;
-          let l = t().createNode(i, 'node.findWidgetNodesByWidgetId')
-          e.setProp(s, c.toString(), l)
-          c++
+        let idx = 0
+        found.forEach(([id]) => {
+          const n = sceneGraph.get(id)
+          if (n?.widgetId !== widgetId)
+            return
+          const handle = getNodeFactory().createNode(id, 'node.findWidgetNodesByWidgetId')
+          vm.setProp(result, idx.toString(), handle)
+          idx++
         })
-        return s
+        return result
       },
-      isAllowedInReadOnly: !0,
-      hasEditScope: !1,
+      isAllowedInReadOnly: true,
+      hasEditScope: false,
     })
   },
   loadAsync({
-    vm: e,
-    defineVmFunction: t,
-    documentAccessState: i,
-    getNode: n,
-  }, r) {
-    t({
-      handle: r,
+    vm,
+    defineVmFunction,
+    documentAccessState,
+    getNode,
+  }, handle) {
+    defineVmFunction({
+      handle,
       key: 'loadAsync',
       metricsKey: 'node.loadAsync',
       cb() {
-        let t = n(this)
-        if (t.type !== 'CANVAS')
+        const node = getNode(this)
+        if (node.type !== 'CANVAS')
           throw new Error('Cannot call loadAsync on a non-page node.')
-        let {
+        const {
           promise,
           resolve,
           reject,
-        } = e.newPromise()
-        e.registerPromise(vf(t.guid, i)).then(() => {
-          resolve(e.$$null)
-        }).catch((t) => {
-          reject(e.newString(t.message))
+        } = vm.newPromise()
+        vm.registerPromise(vf(node.guid, documentAccessState)).then(() => {
+          resolve(vm.$$null)
+        }).catch((err) => {
+          reject(vm.newString(err.message))
         })
         return promise
       },
-      isAllowedInReadOnly: !0,
-      hasEditScope: !1,
+      isAllowedInReadOnly: true,
+      hasEditScope: false,
     })
   },
   appendChild({
-    vm: e,
-    defineVmFunction: t,
-    getNode: i,
-    sceneGraph: n,
-    documentAccessState: r,
-    enableResponsiveSetHierarchyMutations: a,
-  }, s) {
-    t({
-      handle: s,
+    vm,
+    defineVmFunction,
+    getNode,
+    sceneGraph,
+    documentAccessState,
+    enableResponsiveSetHierarchyMutations,
+  }, handle) {
+    defineVmFunction({
+      handle,
       key: 'appendChild',
       metricsKey: 'node.appendChild',
-      cb(t) {
-        let n = i(this)
-        if (n.isOrInResponsiveSet && !a)
+      cb(childHandle) {
+        const node = getNode(this)
+        if (node.isOrInResponsiveSet && !enableResponsiveSetHierarchyMutations)
           throw new Error('Cannot modify children of nodes in a webpage.')
-        r.checkAllowedPage(n, {
+        documentAccessState.checkAllowedPage(node, {
           method: 'appendChild',
         })
-        n.appendChild(i(t))
-        return e.$$null
+        node.appendChild(getNode(childHandle))
+        return vm.$$null
       },
-      isAllowedInReadOnly: !1,
-      hasEditScope: !0,
+      isAllowedInReadOnly: false,
+      hasEditScope: true,
     })
-    t({
-      handle: s,
+    defineVmFunction({
+      handle,
       key: 'insertChild',
       metricsKey: 'node.insertChild',
-      cb(t, s) {
-        let o = _$$u({
-          vm: e,
-          handle: t,
+      cb(indexHandle, childHandle) {
+        let index = _$$u({
+          vm,
+          handle: indexHandle,
           zSchema: _$$N.Integer,
           property: 'index',
         })
-        let l = i(this)
-        if (l.isOrInResponsiveSet && !a)
+        const node = getNode(this)
+        if (node.isOrInResponsiveSet && !enableResponsiveSetHierarchyMutations)
           throw new Error('Cannot modify children of nodes in a webpage.')
-        if (r.checkAllowedPage(l, {
+        documentAccessState.checkAllowedPage(node, {
           method: 'insertChild',
-        }), e.getStringProp(this, 'id') === '0:0') {
-          let e = l.reversedChildrenGuids
-          let t = e.length
-          for (let i = 0; i < t && i < o; i++) getNodeById(e[t - i - 1], n).isInternalOnlyNode && o++
+        })
+        if (vm.getStringProp(this, 'id') === '0:0') {
+          const children = node.reversedChildrenGuids
+          let len = children.length
+          for (let i = 0; i < len && i < index; i++) {
+            if (getNodeById(children[len - i - 1], sceneGraph).isInternalOnlyNode)
+              index++
+          }
         }
-        l.insertChild(i(s), o)
-        return e.$$null
+        node.insertChild(getNode(childHandle), index)
+        return vm.$$null
       },
-      isAllowedInReadOnly: !1,
-      hasEditScope: !0,
+      isAllowedInReadOnly: false,
+      hasEditScope: true,
     })
   },
   widgetId({
-    vm: e,
-    defineVmProp: t,
-    getNode: i,
-  }, n) {
-    t({
-      handle: n,
+    vm,
+    defineVmProp,
+    getNode,
+  }, handle) {
+    defineVmProp({
+      handle,
       key: 'widgetId',
       options: {
-        enumerable: !0,
+        enumerable: true,
         metricsKey: 'node.widgetId',
         get() {
-          let t = i(this)
-          return t.type !== 'WIDGET' ? (_$$k2.warn('Cannot call widgetId on non widget node'), e.undefined) : e.newString(t.widgetId)
+          const node = getNode(this)
+          return node.type !== 'WIDGET' ? (_$$k2.warn('Cannot call widgetId on non widget node'), vm.undefined) : vm.newString(node.widgetId)
         },
       },
-      canWriteInReadOnly: !1,
-      hasEditScope: !1,
+      canWriteInReadOnly: false,
+      hasEditScope: false,
     })
   },
   widgetSyncedState({
@@ -4191,7 +4795,7 @@ return !0
         get() {
           let t
           t = n(this).stackChildAlignSelf
-          return e.newString(iU(t))
+          return e.newString(layoutAlignToString(t))
         },
         set(t) {
           let r = _$$u({
@@ -4216,185 +4820,196 @@ return !0
     })
   },
   layoutMode({
-    vm: e,
-    defineVmProp: t,
-    stats: i,
-    getNode: n,
-    enableResponsiveSetHierarchyMutations: r,
-  }, a) {
-    t({
-      handle: a,
+    vm,
+    defineVmProp,
+    stats,
+    getNode,
+    enableResponsiveSetHierarchyMutations,
+  }, handle) {
+    defineVmProp({
+      handle,
       key: 'layoutMode',
       options: {
-        enumerable: !0,
+        enumerable: true,
         metricsKey: 'node.layoutMode',
         get() {
-          return e.newString(n(this).stackMode)
+          return vm.newString(getNode(this).stackMode)
         },
-        set(t) {
-          let a = n(this)
-          if (a.isOrInResponsiveSet && !r && !a.isInWidget)
+        set(value) {
+          const node = getNode(this)
+          if (node.isOrInResponsiveSet && !enableResponsiveSetHierarchyMutations && !node.isInWidget) {
             throw new Error('Cannot change layoutMode in a webpage')
-          let s = _$$u({
-            vm: e,
-            handle: t,
+          }
+          const mode = _$$u({
+            vm,
+            handle: value,
             zSchema: _$$N.LayoutMode,
             property: 'layoutMode',
           })
-          a.stackWrap === 'WRAP' && s !== 'HORIZONTAL' && (a.stackWrap = 'NO_WRAP')
-          s === 'GRID' ? (a.stackCounterSizing = 'FIXED', a.stackPrimarySizing = 'FIXED', a.stackMode = s, a.setGridRowCount(2), a.setGridColumnCount(2)) : a.stackMode = s
-          i.stackFieldSet(a.guid, 'stack-mode')
-          return e.undefined
+          if (node.stackWrap === 'WRAP' && mode !== 'HORIZONTAL')
+            node.stackWrap = 'NO_WRAP'
+          if (mode === 'GRID') {
+            node.stackCounterSizing = 'FIXED'
+            node.stackPrimarySizing = 'FIXED'
+            node.stackMode = mode
+            node.setGridRowCount(2)
+            node.setGridColumnCount(2)
+          }
+          else {
+            node.stackMode = mode
+          }
+          stats.stackFieldSet(node.guid, 'stack-mode')
+          return vm.undefined
         },
       },
-      canWriteInReadOnly: !1,
-      hasEditScope: !0,
+      canWriteInReadOnly: false,
+      hasEditScope: true,
     })
   },
   layoutWrap({
-    vm: e,
-    defineVmProp: t,
-    stats: i,
-    getNode: n,
-  }, r) {
-    t({
-      handle: r,
+    vm,
+    defineVmProp,
+    stats,
+    getNode,
+  }, handle) {
+    defineVmProp({
+      handle,
       key: 'layoutWrap',
       options: {
-        enumerable: !0,
+        enumerable: true,
         metricsKey: 'node.layoutWrap',
         get() {
-          return e.newString(n(this).stackWrap)
+          return vm.newString(getNode(this).stackWrap)
         },
-        set(t) {
-          let r = _$$u({
-            vm: e,
-            handle: t,
+        set(value) {
+          const wrap = _$$u({
+            vm,
+            handle: value,
             zSchema: _$$N.StackWrap,
             property: 'layoutWrap',
           })
-          let a = n(this)
-          if (r === 'WRAP' && a.stackMode !== 'HORIZONTAL') {
+          const node = getNode(this)
+          if (wrap === 'WRAP' && node.stackMode !== 'HORIZONTAL') {
             throw new Error('Can only set layoutWrap = WRAP on nodes with layoutMode === HORIZONTAL')
           }
-          a.stackWrap = r
-          i.stackFieldSet(a.guid, 'stack-wrap')
-          return e.undefined
+          node.stackWrap = wrap
+          stats.stackFieldSet(node.guid, 'stack-wrap')
+          return vm.undefined
         },
       },
-      canWriteInReadOnly: !1,
-      hasEditScope: !0,
+      canWriteInReadOnly: false,
+      hasEditScope: true,
     })
   },
   counterAxisAlignContent({
-    vm: e,
-    defineVmProp: t,
-    stats: i,
-    getNode: n,
-  }, r) {
-    t({
-      handle: r,
+    vm,
+    defineVmProp,
+    stats,
+    getNode,
+  }, handle) {
+    defineVmProp({
+      handle,
       key: 'counterAxisAlignContent',
       options: {
-        enumerable: !0,
+        enumerable: true,
         metricsKey: 'node.counterAxisAlignContent',
         get() {
-          return e.newString(n(this).stackCounterAlignContent)
+          return vm.newString(getNode(this).stackCounterAlignContent)
         },
-        set(t) {
-          let r = n(this)
-          let a = _$$u({
-            vm: e,
-            handle: t,
+        set(value) {
+          const node = getNode(this)
+          const alignContent = _$$u({
+            vm,
+            handle: value,
             zSchema: _$$N.StackCounterAlignContent,
             property: 'counterAxisAlignContent',
           })
-          r.stackCounterAlignContent = a
-          i.stackFieldSet(r.guid, 'stack-counter-align-content')
-          return e.undefined
+          node.stackCounterAlignContent = alignContent
+          stats.stackFieldSet(node.guid, 'stack-counter-align-content')
+          return vm.undefined
         },
       },
-      canWriteInReadOnly: !1,
-      hasEditScope: !0,
+      canWriteInReadOnly: false,
+      hasEditScope: true,
     })
   },
   counterAxisSizingMode({
-    vm: e,
-    defineVmProp: t,
-    stats: i,
-    getNode: n,
-  }, r) {
-    t({
-      handle: r,
+    vm,
+    defineVmProp,
+    stats,
+    getNode,
+  }, handle) {
+    defineVmProp({
+      handle,
       key: 'counterAxisSizingMode',
       options: {
-        enumerable: !0,
+        enumerable: true,
         metricsKey: 'node.counterAxisSizingMode',
         get() {
-          return iM(e, n(this).stackCounterSizing)
+          return sizingModeToString(vm, getNode(this).stackCounterSizing)
         },
-        set(t) {
-          let r = _$$u({
-            vm: e,
-            handle: t,
+        set(value) {
+          const sizingMode = _$$u({
+            vm,
+            handle: value,
             zSchema: getFeatureFlags().ce_legacy_al ? _$$N.SizingModeLegacy : _$$N.SizingMode,
             property: 'counterAxisSizingMode',
           })
-          let a = n(this)
-          switch (r) {
+          const node = getNode(this)
+          switch (sizingMode) {
             case 'FIXED':
-              a.stackCounterSizing = 'FIXED'
+              node.stackCounterSizing = 'FIXED'
               break
             case 'AUTO':
-              a.stackCounterSizing = 'RESIZE_TO_FIT_WITH_IMPLICIT_SIZE'
+              node.stackCounterSizing = 'RESIZE_TO_FIT_WITH_IMPLICIT_SIZE'
           }
-          i.stackFieldSet(a.guid, 'stack-counter-sizing')
-          return e.undefined
+          stats.stackFieldSet(node.guid, 'stack-counter-sizing')
+          return vm.undefined
         },
       },
-      canWriteInReadOnly: !1,
-      hasEditScope: !0,
+      canWriteInReadOnly: false,
+      hasEditScope: true,
     })
   },
   primaryAxisSizingMode({
-    vm: e,
-    defineVmProp: t,
-    stats: i,
-    getNode: n,
-  }, r) {
-    t({
-      handle: r,
+    vm,
+    defineVmProp,
+    stats,
+    getNode,
+  }, handle) {
+    defineVmProp({
+      handle,
       key: 'primaryAxisSizingMode',
       options: {
-        enumerable: !0,
+        enumerable: true,
         metricsKey: 'node.primaryAxisSizingMode',
         get() {
-          return iM(e, n(this).stackPrimarySizing)
+          return sizingModeToString(vm, getNode(this).stackPrimarySizing)
         },
-        set(t) {
-          let r = _$$u({
-            vm: e,
-            handle: t,
+        set(value) {
+          const sizingMode = _$$u({
+            vm,
+            handle: value,
             zSchema: getFeatureFlags().ce_legacy_al ? _$$N.SizingModeLegacy : _$$N.SizingMode,
             property: 'primaryAxisSizingMode',
           })
-          let a = n(this)
-          switch (r) {
+          const node = getNode(this)
+          switch (sizingMode) {
             case 'FIXED':
-              a.stackPrimarySizing = 'FIXED'
+              node.stackPrimarySizing = 'FIXED'
               break
             case 'AUTO':
-              a.stackPrimarySizing = 'RESIZE_TO_FIT_WITH_IMPLICIT_SIZE'
+              node.stackPrimarySizing = 'RESIZE_TO_FIT_WITH_IMPLICIT_SIZE'
               break
             case 'LEGACY_AUTO':
-              a.stackPrimarySizing = 'RESIZE_TO_FIT'
+              node.stackPrimarySizing = 'RESIZE_TO_FIT'
           }
-          i.stackFieldSet(a.guid, 'stack-primary-sizing')
-          return e.undefined
+          stats.stackFieldSet(node.guid, 'stack-primary-sizing')
+          return vm.undefined
         },
       },
-      canWriteInReadOnly: !1,
-      hasEditScope: !0,
+      canWriteInReadOnly: false,
+      hasEditScope: true,
     })
   },
   primaryAxisAlignItems({
@@ -4411,7 +5026,7 @@ return !0
         get() {
           let t
           t = i(this).stackPrimaryAlignItems
-          return e.newString(iB(t))
+          return e.newString(primaryAxisAlignItemsToString(t))
         },
         set(t) {
           let n = _$$u({
@@ -4523,7 +5138,7 @@ return !0
         metricsKey: 'node.layoutSizingHorizontal',
         get() {
           let t = i(this).stackHorizontalLayoutSize
-          return e.newString(iV(t))
+          return e.newString(layoutSizingToString(t))
         },
         set(t) {
           let n = _$$u({
@@ -4532,7 +5147,7 @@ return !0
             zSchema: _$$N.LayoutSizing,
             property: 'layoutSizingHorizontal',
           })
-          i(this).stackHorizontalLayoutSize = iG(n)
+          i(this).stackHorizontalLayoutSize = stringToLayoutSizing(n)
           return e.undefined
         },
       },
@@ -4553,7 +5168,7 @@ return !0
         metricsKey: 'node.layoutSizingVertical',
         get() {
           let t = i(this).stackVerticalLayoutSize
-          return e.newString(iV(t))
+          return e.newString(layoutSizingToString(t))
         },
         set(t) {
           let n = _$$u({
@@ -4562,7 +5177,7 @@ return !0
             zSchema: _$$N.LayoutSizing,
             property: 'layoutSizingVertical',
           })
-          i(this).stackVerticalLayoutSize = iG(n)
+          i(this).stackVerticalLayoutSize = stringToLayoutSizing(n)
           return e.undefined
         },
       },
@@ -4826,7 +5441,7 @@ return !0
           if (r === 'AUTO') {
             a.stackPositioning = r
           }
- else {
+          else {
             let e = a.parentNode
             if (!e || e.stackMode === 'NONE') {
               throw new Error('Can only set layoutPositioning = ABSOLUTE if the parent node has layoutMode !== NONE')
@@ -5008,10 +5623,10 @@ return !0
     })
   },
   gridRowSizes(e, i) {
-    tnode0('row', 'gridRowSizes', e, i)
+    defineGridTrackSizesProperty('row', 'gridRowSizes', e, i)
   },
   gridColumnSizes(e, i) {
-    tnode0('column', 'gridColumnSizes', e, i)
+    defineGridTrackSizesProperty('column', 'gridColumnSizes', e, i)
   },
   appendChildAt(e, t) {
     let {
@@ -5525,7 +6140,7 @@ return !0
               status: zIx.NONE,
               sourceForLogging: 'plugin',
               editScopeType: zkO.PLUGIN,
-            } as any)
+            })
           }
           return e.undefined
         },
@@ -5534,10 +6149,10 @@ return !0
       hasEditScope: !0,
     })
   },
-  minWidth: inode1('minWidth', 'min'),
-  minHeight: inode1('minHeight', 'min'),
-  maxWidth: inode1('maxWidth', 'max'),
-  maxHeight: inode1('maxHeight', 'max'),
+  minWidth: defineMinMaxProperty('minWidth', 'min'),
+  minHeight: defineMinMaxProperty('minHeight', 'min'),
+  maxWidth: defineMinMaxProperty('maxWidth', 'max'),
+  maxHeight: defineMinMaxProperty('maxHeight', 'max'),
   absoluteRenderBounds({
     vm: e,
     defineVmProp: t,
@@ -5553,7 +6168,7 @@ return !0
           let t = i(this).absoluteRenderBounds
           if (!t)
             return e.$$null
-          let n = iF(e, t)
+          let n = createVmRect(e, t)
           e.shallowFreezeObject(n)
           return n
         },
@@ -5577,7 +6192,7 @@ return !0
           let t = i(this).absoluteBoundingBox
           if (!t)
             return e.$$null
-          let n = iF(e, t)
+          let n = createVmRect(e, t)
           e.shallowFreezeObject(n)
           return n
         },
@@ -5606,7 +6221,7 @@ return !0
         let {
           width,
           height,
-        } = rnode2(e, o, t, s)
+        } = validateResizeDimensions(e, o, t, s)
         o.resizeWithoutConstraints(width, height)
         return e.undefined
       },
@@ -5634,7 +6249,7 @@ return !0
         let {
           width,
           height,
-        } = rnode2(e, o, t, s)
+        } = validateResizeDimensions(e, o, t, s)
         o.resizeWithConstraints(width, height)
         return e.undefined
       },
@@ -5820,133 +6435,134 @@ return !0
     })
   },
   isMask({
-    vm: e,
-    defineVmProp: t,
-    getNode: i,
-  }, n) {
-    t({
-      handle: n,
+    vm,
+    defineVmProp,
+    getNode,
+  }, handle) {
+    defineVmProp({
+      handle,
       key: 'isMask',
       options: {
-        enumerable: !0,
+        enumerable: true,
         metricsKey: 'node.isMask',
         get() {
-          return e.newBoolean(i(this).mask)
+          return vm.newBoolean(getNode(this).mask)
         },
-        set(t) {
-          i(this).mask = _$$u({
-            vm: e,
-            handle: t,
+        set(value) {
+          getNode(this).mask = _$$u({
+            vm,
+            handle: value,
             zSchema: _$$z.boolean(),
             property: 'isMask',
           })
-          return e.undefined
+          return vm.undefined
         },
       },
-      canWriteInReadOnly: !1,
-      hasEditScope: !0,
+      canWriteInReadOnly: false,
+      hasEditScope: true,
     })
   },
   maskType({
-    vm: e,
-    defineVmProp: t,
-    getNode: i,
-  }, n) {
-    t({
-      handle: n,
+    vm,
+    defineVmProp,
+    getNode,
+  }, handle) {
+    defineVmProp({
+      handle,
       key: 'maskType',
       options: {
-        enumerable: !0,
+        enumerable: true,
         metricsKey: 'node.maskType',
         get() {
-          let t
-          return e.newString((t = i(this).maskType) === 'OUTLINE' ? 'VECTOR' : t)
+          const type = getNode(this).maskType
+          return vm.newString(type === 'OUTLINE' ? 'VECTOR' : type)
         },
-        set(t) {
-          let n
-          i(this).maskType = (n = _$$u({
-            vm: e,
-            handle: t,
+        set(value) {
+          const n = _$$u({
+            vm,
+            handle: value,
             zSchema: _$$N.MaskType,
             property: 'maskType',
-          })) === 'VECTOR'
-            ? 'OUTLINE'
-            : n
-          return e.undefined
+          })
+          getNode(this).maskType = n === 'VECTOR' ? 'OUTLINE' : n
+          return vm.undefined
         },
       },
-      canWriteInReadOnly: !1,
-      hasEditScope: !0,
+      canWriteInReadOnly: false,
+      hasEditScope: true,
     })
   },
   effects({
-    vm: e,
-    defineVmProp: t,
-    getNode: i,
-  }, n) {
-    t({
-      handle: n,
+    vm,
+    defineVmProp,
+    getNode,
+  }, handle) {
+    defineVmProp({
+      handle,
       key: 'effects',
       options: {
-        enumerable: !0,
+        enumerable: true,
         metricsKey: 'node.effects',
         get() {
-          let t = e.deepWrap(i(this).effects.map(processEffect))
-          e.deepFreezeObject(t)
-          return t
+          const effects = vm.deepWrap(getNode(this).effects.map(processEffect))
+          vm.deepFreezeObject(effects)
+          return effects
         },
-        set(t) {
-          let n = i(this)
-          n.effects = _$$u({
-            vm: e,
-            handle: t,
+        set(value) {
+          const node = getNode(this)
+          node.effects = _$$u({
+            vm,
+            handle: value,
             zSchema: _$$m().ce_il_root ? _$$N.EffectsIncludingDrawMode : _$$N.Effects,
             property: 'effects',
-          }).map(e => processEffectWithValidation(e, n))
-          return e.undefined
+          }).map(e => processEffectWithValidation(e, node))
+          return vm.undefined
         },
       },
-      canWriteInReadOnly: !1,
-      hasEditScope: !0,
+      canWriteInReadOnly: false,
+      hasEditScope: true,
     })
   },
   effectStyleId({
-    vm: e,
-    defineVmIncrementalProp: t,
-    incrementalSafeApi: i,
-    getNode: n,
-    documentAccessState: r,
-    allowIncrementalUnsafeApiCalls: a,
-  }, s) {
-    t({
-      handle: s,
+    vm,
+    defineVmIncrementalProp,
+    incrementalSafeApi,
+    getNode,
+    documentAccessState,
+    allowIncrementalUnsafeApiCalls,
+  }, handle) {
+    defineVmIncrementalProp({
+      handle,
       key: 'effectStyleId',
       metricsKey: 'node.effectStyleId',
       incrementalSafeApiSetKey: 'setEffectStyleIdAsync',
       incrementalSafeApiSetMetricsKey: 'node.setEffectStyleIdAsync',
-      retainGetter: !0,
-      enumerable: !0,
-      parseThis: e => n(e),
-      resolveValue: t => e.newString(_$$nM(t.inheritedEffectStyle)),
-      prepareDocument: async (_e) => {
-        await Ux(r)
+      retainGetter: true,
+      enumerable: true,
+      parseThis: e => getNode(e),
+      resolveValue: t => vm.newString(_$$nM(t.inheritedEffectStyle)),
+      prepareDocument: async () => {
+        await Ux(documentAccessState)
       },
-      setValue: (t, i) => {
-        let n = _$$eX(_$$u({
-          vm: e,
-          handle: i,
+      setValue: (node, value) => {
+        const styleId = _$$eX(_$$u({
+          vm,
+          handle: value,
           zSchema: _$$z.string(),
           property: 'effectStyleId',
         }))
-        t.inheritedEffectStyle = n
-        return e.undefined
+        node.inheritedEffectStyle = styleId
+        return vm.undefined
       },
-      incrementalSafeApi: i,
-      parseIncrementalValueArg: t => e.toString(t),
-      setValueIncremental: (t, i) => (t.inheritedEffectStyle = _$$eX(i), e.undefined),
-      allowIncrementalUnsafeApiCalls: a,
-      canWriteInReadOnly: !1,
-      hasEditScope: !0,
+      incrementalSafeApi,
+      parseIncrementalValueArg: t => vm.toString(t),
+      setValueIncremental: (node, value) => {
+        node.inheritedEffectStyle = _$$eX(value)
+        return vm.undefined
+      },
+      allowIncrementalUnsafeApiCalls,
+      canWriteInReadOnly: false,
+      hasEditScope: true,
     })
   },
   cornerRadius({
@@ -6040,7 +6656,7 @@ return !0
         get() {
           let t = r(this).widgetHoverStyle
           return e.deepWrap(function (e) {
-            let t: any = {}
+            let t = {}
             e.fill && (t.fill = convertPaintArrayData(e.fill.data))
             e.stroke && (t.stroke = convertPaintArrayData(e.stroke.data))
             void 0 !== e.opacity && (t.opacity = e.opacity)
@@ -6050,20 +6666,20 @@ return !0
         set(t) {
           let a = e.deepUnwrap(t)
           r(this).widgetHoverStyle = (function (e, t, i) {
-            let n: any = {}
+            let n = {}
             if (i.fill) {
               let r = []
               n.fill = {
                 data: mapPaintConfigurations(e, t, i.fill, r),
                 blobs: r,
-              };
+              }
             }
             if (i.stroke) {
               let r = []
               n.stroke = {
                 data: mapPaintConfigurations(e, t, i.stroke, r),
                 blobs: r,
-              };
+              }
             }
             void 0 !== i.opacity && (n.opacity = i.opacity)
             return n
@@ -6098,7 +6714,7 @@ return !0
           zSchema: _$$N.PaintsWithPattern,
           property: 'fills',
         })
-        let d: any[] = []
+        let d = []
         for (let e of l) e.type === 'PATTERN' && d.push(e.sourceNodeId)
         let {
           promise,
@@ -6164,7 +6780,10 @@ return !0
       },
       incrementalSafeApi: n,
       parseIncrementalValueArg: t => e.toString(t),
-      setValueIncremental: (t, i) => (t.inheritedFillStyle = _$$eX(i), e.undefined),
+      setValueIncremental: (t, i) => {
+        t.inheritedFillStyle = _$$eX(i)
+        return e.undefined
+      },
       allowIncrementalUnsafeApiCalls: s,
       canWriteInReadOnly: !1,
       hasEditScope: !0,
@@ -6192,7 +6811,7 @@ return !0
           zSchema: _$$N.PaintsWithPattern,
           property: 'strokes',
         })
-        let d: any[] = []
+        let d = []
         for (let e of l) e.type === 'PATTERN' && d.push(e.sourceNodeId)
         let {
           promise,
@@ -6274,113 +6893,118 @@ return !0
     })
   },
   strokeGeometry({
-    vm: e,
-    defineVmProp: t,
-    getNode: i,
-  }, n) {
-    t({
-      handle: n,
+    vm,
+    defineVmProp,
+    getNode,
+  }, handle) {
+    defineVmProp({
+      handle,
       key: 'strokeGeometry',
       options: {
-        enumerable: !0,
+        enumerable: true,
         metricsKey: 'node.strokeGeometry',
         get() {
-          let t = i(this)
-          let n = e.deepWrap(t.strokeGeometry)
-          e.deepFreezeObject(n)
-          return n
+          const node = getNode(this)
+          const wrapped = vm.deepWrap(node.strokeGeometry)
+          vm.deepFreezeObject(wrapped)
+          return wrapped
         },
       },
-      canWriteInReadOnly: !1,
-      hasEditScope: !1,
+      canWriteInReadOnly: false,
+      hasEditScope: false,
     })
   },
   strokeStyleId({
-    vm: e,
-    defineVmIncrementalProp: t,
-    incrementalSafeApi: i,
-    getNode: n,
-    documentAccessState: r,
-    allowIncrementalUnsafeApiCalls: a,
-  }, s) {
-    t({
-      handle: s,
+    vm,
+    defineVmIncrementalProp,
+    incrementalSafeApi,
+    getNode,
+    documentAccessState,
+    allowIncrementalUnsafeApiCalls,
+  }, handle) {
+    defineVmIncrementalProp({
+      handle,
       key: 'strokeStyleId',
       metricsKey: 'node.strokeStyleId',
       incrementalSafeApiSetKey: 'setStrokeStyleIdAsync',
       incrementalSafeApiSetMetricsKey: 'node.setStrokeStyleIdAsync',
-      retainGetter: !0,
-      enumerable: !0,
-      parseThis: e => n(e),
-      resolveValue: t => e.newString(_$$nM(t.inheritedFillStyleForStroke)),
-      prepareDocument: async (_e) => {
-        await Ux(r)
+      retainGetter: true,
+      enumerable: true,
+      parseThis: e => getNode(e),
+      resolveValue: node => vm.newString(_$$nM(node.inheritedFillStyleForStroke)),
+      prepareDocument: async () => {
+        await Ux(documentAccessState)
       },
-      setValue: (t, i) => {
-        let n = _$$eX(_$$u({
-          vm: e,
-          handle: i,
+      setValue: (node, value) => {
+        const styleId = _$$eX(_$$u({
+          vm,
+          handle: value,
           zSchema: _$$z.string(),
-          property: 'effectStyleId',
+          property: 'strokeStyleId',
         }))
-        t.inheritedFillStyleForStroke = n
-        return e.undefined
+        node.inheritedFillStyleForStroke = styleId
+        return vm.undefined
       },
-      incrementalSafeApi: i,
-      parseIncrementalValueArg: t => e.toString(t),
-      setValueIncremental: (t, i) => (t.inheritedFillStyleForStroke = _$$eX(i), e.undefined),
-      allowIncrementalUnsafeApiCalls: a,
-      canWriteInReadOnly: !1,
-      hasEditScope: !0,
+      incrementalSafeApi,
+      parseIncrementalValueArg: value => vm.toString(value),
+      setValueIncremental: (node, value) => {
+        node.inheritedFillStyleForStroke = _$$eX(value)
+        return vm.undefined
+      },
+      allowIncrementalUnsafeApiCalls,
+      canWriteInReadOnly: false,
+      hasEditScope: true,
     })
   },
   strokeWeight({
-    vm: e,
-    defineVmProp: t,
-    mixedSentinel: i,
-    getNode: n,
-  }, r) {
-    t({
-      handle: r,
+    vm,
+    defineVmProp,
+    mixedSentinel,
+    getNode,
+  }, handle) {
+    defineVmProp({
+      handle,
       key: 'strokeWeight',
       options: {
-        enumerable: !0,
+        enumerable: true,
         metricsKey: 'node.strokeWeight',
         get() {
-          let t = n(this)
-          if (!t.borderStrokeWeightsIndependent)
-            return e.newNumber(t.strokeWeight)
-          let r = t.borderTopWeight
-          let a = t.borderBottomWeight
-          let s = t.borderLeftWeight
-          let o = t.borderRightWeight
-          return r === a && r === s && r === o ? e.newNumber(r) : i
+          const node = getNode(this)
+          if (!node.borderStrokeWeightsIndependent)
+            return vm.newNumber(node.strokeWeight)
+          const {
+            borderTopWeight,
+            borderBottomWeight,
+            borderLeftWeight,
+            borderRightWeight,
+          } = node
+          return borderTopWeight === borderBottomWeight && borderTopWeight === borderLeftWeight && borderTopWeight === borderRightWeight ? vm.newNumber(borderTopWeight) : mixedSentinel
         },
-        set(t) {
-          let i = n(this)
-          let r = _$$u({
-            vm: e,
-            handle: t,
+        set(value) {
+          const node = getNode(this)
+          const weight = _$$u({
+            vm,
+            handle: value,
             zSchema: _$$N.PositiveFloat,
             property: 'strokeWeight',
           })
-          i.strokeWeight = r
-          i.borderStrokeWeightsIndependent = !1
-          i.borderTopWeight = r
-          i.borderBottomWeight = r
-          i.borderLeftWeight = r
-          i.borderRightWeight = r
-          return e.undefined
+          node.strokeWeight = weight
+          node.borderStrokeWeightsIndependent = false
+          node.borderTopWeight = weight
+          node.borderBottomWeight = weight
+          node.borderLeftWeight = weight
+          node.borderRightWeight = weight
+          return vm.undefined
         },
       },
-      canWriteInReadOnly: !1,
-      hasEditScope: !0,
+      canWriteInReadOnly: false,
+      hasEditScope: true,
     })
   },
-  strokeTopWeight: anode3('strokeTopWeight', 'borderTopWeight'),
-  strokeBottomWeight: anode3('strokeBottomWeight', 'borderBottomWeight'),
-  strokeLeftWeight: anode3('strokeLeftWeight', 'borderLeftWeight'),
-  strokeRightWeight: anode3('strokeRightWeight', 'borderRightWeight'),
+  strokeTopWeight: defineStrokeWeightProperty('strokeTopWeight', 'borderTopWeight'),
+  strokeBottomWeight: defineStrokeWeightProperty('strokeBottomWeight', 'borderBottomWeight'),
+  strokeLeftWeight: defineStrokeWeightProperty('strokeLeftWeight', 'borderLeftWeight'),
+  strokeRightWeight: defineStrokeWeightProperty('strokeRightWeight', 'borderRightWeight'),
   strokeAlign({
     vm: e,
     defineVmProp: t,
@@ -6599,7 +7223,7 @@ return !0
             }
             a.fills = o.data
           }
- else {
+          else {
             for (let e of o.data) {
               if (e.colorVar) {
                 throw new Error('page backgrounds cannot be bound to variables')
@@ -6712,164 +7336,164 @@ return !0
     })
   },
   layoutGrids({
-    vm: e,
-    defineVmProp: t,
-    getNode: i,
-  }, n) {
-    t({
-      handle: n,
+    vm,
+    defineVmProp,
+    getNode,
+  }, handle) {
+    defineVmProp({
+      handle,
       key: 'layoutGrids',
       options: {
-        enumerable: !0,
+        enumerable: true,
         metricsKey: 'node.layoutGrids',
         get() {
-          let t
-          let n = e.deepWrap(void 0 === (t = i(this).layoutGrids) ? [] : t.map(processGridLayout))
-          e.deepFreezeObject(n)
-          return n
+          const grids = getNode(this).layoutGrids
+          const wrapped = vm.deepWrap(grids === undefined ? [] : grids.map(processGridLayout))
+          vm.deepFreezeObject(wrapped)
+          return wrapped
         },
-        set(t) {
-          i(this).layoutGrids = _$$u({
-            vm: e,
-            handle: t,
+        set(value) {
+          getNode(this).layoutGrids = _$$u({
+            vm,
+            handle: value,
             zSchema: _$$N.LayoutGrids,
             property: 'layoutGrids',
-          }).map(iL)
-          return e.undefined
+          }).map(convertGridLayoutConfig)
+          return vm.undefined
         },
       },
-      canWriteInReadOnly: !1,
-      hasEditScope: !0,
+      canWriteInReadOnly: false,
+      hasEditScope: true,
     })
   },
   gridStyleId({
-    vm: e,
-    defineVmIncrementalProp: t,
-    incrementalSafeApi: i,
-    getNode: n,
-    documentAccessState: r,
-    allowIncrementalUnsafeApiCalls: a,
-  }, s) {
-    t({
-      handle: s,
+    vm,
+    defineVmIncrementalProp,
+    incrementalSafeApi,
+    getNode,
+    documentAccessState,
+    allowIncrementalUnsafeApiCalls,
+  }, handle) {
+    defineVmIncrementalProp({
+      handle,
       key: 'gridStyleId',
       metricsKey: 'node.gridStyleId',
       incrementalSafeApiSetKey: 'setGridStyleIdAsync',
       incrementalSafeApiSetMetricsKey: 'node.setGridStyleIdAsync',
-      retainGetter: !0,
-      enumerable: !0,
-      parseThis: e => n(e),
-      resolveValue: t => e.newString(_$$nM(t.inheritedGridStyle)),
-      prepareDocument: async (_e) => {
-        await Ux(r)
+      retainGetter: true,
+      enumerable: true,
+      parseThis: e => getNode(e),
+      resolveValue: node => vm.newString(_$$nM(node.inheritedGridStyle)),
+      prepareDocument: async () => {
+        await Ux(documentAccessState)
       },
-      setValue: (t, i) => {
-        let n = _$$eX(_$$u({
-          vm: e,
-          handle: i,
+      setValue: (node, value) => {
+        node.inheritedGridStyle = _$$eX(_$$u({
+          vm,
+          handle: value,
           zSchema: _$$z.string(),
           property: 'gridStyleId',
         }))
-        t.inheritedGridStyle = n
-        return e.undefined
+        return vm.undefined
       },
-      incrementalSafeApi: i,
-      parseIncrementalValueArg: t => e.toString(t),
-      setValueIncremental: (t, i) => (t.inheritedGridStyle = _$$eX(i), e.undefined),
-      allowIncrementalUnsafeApiCalls: a,
-      canWriteInReadOnly: !1,
-      hasEditScope: !0,
+      incrementalSafeApi,
+      parseIncrementalValueArg: value => vm.toString(value),
+      setValueIncremental: (node, value) => {
+        node.inheritedGridStyle = _$$eX(value)
+        return vm.undefined
+      },
+      allowIncrementalUnsafeApiCalls,
+      canWriteInReadOnly: false,
+      hasEditScope: true,
     })
   },
   clipsContent({
-    vm: e,
-    defineVmProp: t,
-    getNode: i,
-  }, n) {
-    t({
-      handle: n,
+    vm,
+    defineVmProp,
+    getNode,
+  }, handle) {
+    defineVmProp({
+      handle,
       key: 'clipsContent',
       options: {
-        enumerable: !0,
+        enumerable: true,
         metricsKey: 'node.clipsContent',
         get() {
-          return e.newBoolean(!i(this).frameMaskDisabled)
+          return vm.newBoolean(!getNode(this).frameMaskDisabled)
         },
-        set(t) {
-          i(this).frameMaskDisabled = !_$$u({
-            vm: e,
-            handle: t,
+        set(value) {
+          getNode(this).frameMaskDisabled = !_$$u({
+            vm,
+            handle: value,
             zSchema: _$$z.boolean(),
             property: 'clipsContent',
           })
-          return e.undefined
+          return vm.undefined
         },
       },
-      canWriteInReadOnly: !1,
-      hasEditScope: !0,
+      canWriteInReadOnly: false,
+      hasEditScope: true,
     })
   },
   overflowDirection({
-    vm: e,
-    defineVmProp: t,
-    getNode: i,
-  }, n) {
-    t({
-      handle: n,
+    vm,
+    defineVmProp,
+    getNode,
+  }, handle) {
+    defineVmProp({
+      handle,
       key: 'overflowDirection',
       options: {
-        enumerable: !0,
+        enumerable: true,
         metricsKey: 'node.overflowDirection',
         get() {
-          let t = i(this)
-          return e.newString(t.scrollDirection)
+          return vm.newString(getNode(this).scrollDirection)
         },
-        set(t) {
-          i(this).scrollDirection = _$$u({
-            vm: e,
-            handle: t,
+        set(value) {
+          getNode(this).scrollDirection = _$$u({
+            vm,
+            handle: value,
             zSchema: _$$N.OverflowDirection,
             property: 'overflowDirection',
           })
-          return e.undefined
+          return vm.undefined
         },
       },
-      canWriteInReadOnly: !1,
-      hasEditScope: !0,
+      canWriteInReadOnly: false,
+      hasEditScope: true,
     })
   },
   numberOfFixedChildren({
-    vm: e,
-    defineVmProp: t,
-    getNode: i,
-  }, n) {
-    t({
-      handle: n,
+    vm,
+    defineVmProp,
+    getNode,
+  }, handle) {
+    defineVmProp({
+      handle,
       key: 'numberOfFixedChildren',
       options: {
-        enumerable: !0,
+        enumerable: true,
         metricsKey: 'node.numberOfFixedChildren',
         get() {
-          let t = i(this)
-          return e.newNumber(t.fixedChildrenCount)
+          return vm.newNumber(getNode(this).fixedChildrenCount)
         },
-        set(t) {
-          let n = i(this)
-          let r = _$$u({
-            vm: e,
-            handle: t,
+        set(value) {
+          const node = getNode(this)
+          const count = _$$u({
+            vm,
+            handle: value,
             zSchema: _$$N.PositiveInteger,
             property: 'numberOfFixedChildren',
           })
-          if (r > n.reversedChildrenGuids.length) {
+          if (count > node.reversedChildrenGuids.length) {
             throw new Error('numberOfFixedChildren must be <= the number of children in the node')
           }
-          n.fixedChildrenCount = r
-          return e.undefined
+          node.fixedChildrenCount = count
+          return vm.undefined
         },
       },
-      canWriteInReadOnly: !1,
-      hasEditScope: !0,
+      canWriteInReadOnly: false,
+      hasEditScope: true,
     })
   },
   description({
@@ -6937,156 +7561,189 @@ return !0
     })
   },
   documentationLinks({
-    vm: e,
-    defineVmProp: t,
-    getNode: i,
-  }, n) {
-    t({
-      handle: n,
+    vm,
+    defineVmProp,
+    getNode,
+  }, handle) {
+    const self = this
+    defineVmProp({
+      handle,
       key: 'documentationLinks',
       options: {
-        enumerable: !0,
+        enumerable: true,
         metricsKey: 'node.documentationLinks',
         get() {
-          let t = e.newArray()
-          let n = i(this).symbolLinks?.filter(e => e.uri).map(e => e.uri) || []
-          if (n) {
-            for (let i = 0; i < n.length; i++) {
-              let r = e.newObject()
-              e.setProp(r, 'uri', e.newString(n[i]))
-              e.setProp(t, i.toString(), r)
-            }
+          const linksArray = vm.newArray()
+          const node = getNode(this)
+          const uris = node.symbolLinks?.filter(link => link.uri).map(link => link.uri) || []
+
+          for (let i = 0; i < uris.length; i++) {
+            const linkObject = vm.newObject()
+            vm.setProp(linkObject, 'uri', vm.newString(uris[i]))
+            vm.setProp(linksArray, i.toString(), linkObject)
           }
-          return t
+
+          return linksArray
         },
-        set(t) {
-          let n = _$$u({
-            vm: e,
-            handle: t,
+        set(value) {
+          const node = getNode(self)
+          const links = _$$u({
+            vm,
+            handle: value,
             zSchema: _$$z.array(_$$z.strictObject({
               uri: _$$z.string(),
             })),
             property: 'documentationLinks',
           })
-          if (n.length > 1) {
+
+          if (links.length > 1) {
             throw new Error('Documentation links API takes a list of size 0 or 1')
+            return vm.undefined
           }
-          let r: any[] = []
-          if (n.length === 1) {
-            let e = n[0]
-            if (!e.uri.match(/^\w+:/))
-              throw new Error('Documentation link must be a URL')
-            r = [{
-              uri: e.uri,
-            }]
-          }
-          i(this).symbolLinks = r
-          return e.undefined
         },
-      },
-      canWriteInReadOnly: !1,
-      hasEditScope: !0,
+        canWriteInReadOnly: false,
+        hasEditScope: true,
+      }
     })
   },
+  /**
+   * Remote property API - checks if node is a subscribed asset from library
+   * @param vm - Virtual machine instance for creating boolean values
+   * @param defineVmProp - Function to define VM property with getter
+   * @param getNode - Function to retrieve node from VM handle
+   * @param handle - VM handle for the node
+   */
   remote({
-    vm: e,
-    defineVmProp: t,
-    getNode: i,
-  }, n) {
-    t({
-      handle: n,
+    vm,
+    defineVmProp,
+    getNode,
+  }, handle) {
+    defineVmProp({
+      handle,
       key: 'remote',
       options: {
-        enumerable: !0,
+        enumerable: true,
         metricsKey: 'node.remote',
         get() {
-          let t = i(this)
-          return e.newBoolean(t.isSubscribedAsset)
+          const node = getNode(this)
+          return vm.newBoolean(node.isSubscribedAsset)
         },
       },
-      canWriteInReadOnly: !1,
-      hasEditScope: !1,
+      canWriteInReadOnly: false,
+      hasEditScope: false,
     })
   },
+  /**
+   * Get publish status API - returns async publish status for the node
+   * @param vm - Virtual machine instance for promise and function management
+   * @param getNode - Function to retrieve node from VM handle
+   * @param handle - VM handle for the node
+   */
   getPublishStatus({
-    vm: e,
-    getNode: t,
-  }, i) {
-    e.defineFunction(i, 'getPublishStatusAsync', 'node.getPublishStatusAsync', function () {
-      let i = t(this)
-      let {
+    vm,
+    getNode,
+  }, handle) {
+    const self = this
+    vm.defineFunction(handle, 'getPublishStatusAsync', 'node.getPublishStatusAsync', function () {
+      const node = getNode(self)
+      const {
         promise,
         resolve,
         reject,
-      } = e.newPromise()
-      e.registerPromise(snode4(i)).then(t => resolve(e.newString(t)), () => {
-        reject(e.newString('Failed to get node publish status'))
-      })
+      } = vm.newPromise()
+      vm.registerPromise(getNodePublishStatus(node)).then(status => resolve(vm.newString(status)), () => reject(vm.newString('Failed to get node publish status')))
       return promise
     })
   },
+  /**
+   * Hidden from publishing property API - controls node visibility in publishing
+   * @param vm - Virtual machine instance for boolean and property management
+   * @param defineVmProp - Function to define VM property with getter/setter
+   * @param getNode - Function to retrieve node from VM handle
+   * @param handle - VM handle for the node
+   */
   hiddenFromPublishing({
-    vm: e,
-    defineVmProp: t,
-    getNode: i,
-  }, n) {
-    t({
-      handle: n,
+    vm,
+    defineVmProp,
+    getNode,
+  }, handle) {
+    defineVmProp({
+      handle,
       key: 'hiddenFromPublishing',
       options: {
-        enumerable: !0,
+        enumerable: true,
         metricsKey: 'node.hiddenFromPublishing',
         get() {
-          let t = i(this)
-          return e.newBoolean(t.hiddenFromPublishing)
+          const node = getNode(this)
+          return vm.newBoolean(node.hiddenFromPublishing)
         },
-        set(t) {
-          i(this).hiddenFromPublishing = _$$u({
-            vm: e,
-            handle: t,
+        set(value) {
+          const hiddenValue = _$$u({
+            vm,
+            handle: value,
             zSchema: _$$z.boolean(),
             property: 'hiddenFromPublishing',
           })
-          return e.undefined
+          getNode(this).hiddenFromPublishing = hiddenValue
+          return vm.undefined
         },
       },
-      canWriteInReadOnly: !1,
-      hasEditScope: !0,
+      canWriteInReadOnly: false,
+      hasEditScope: true,
     })
   },
+  /**
+   * Default variant property API - gets the default variant for component sets
+   * @param vm - Virtual machine instance for object management
+   * @param defineVmProp - Function to define VM property with getter
+   * @param getNodeFactory - Function to get node factory for creating nodes
+   * @param getNode - Function to retrieve node from VM handle
+   * @param handle - VM handle for the node
+   */
   defaultVariant({
-    vm: e,
-    defineVmProp: t,
-    getNodeFactory: i,
-    getNode: n,
-  }, r) {
-    t({
-      handle: r,
+    vm,
+    defineVmProp,
+    getNodeFactory,
+    getNode,
+  }, handle) {
+    defineVmProp({
+      handle,
       key: 'defaultVariant',
       options: {
-        enumerable: !0,
+        enumerable: true,
         metricsKey: 'node.defaultVariant',
         get() {
-          let t = (function (e) {
-            let t = e.sceneGraph
-            let i = Egt.getAssetKeyForPublish(e.guid)
-            let n = _$$m3(debugState.getState())[i]
-            if (n) {
-              for (let i of e.reversedChildrenGuids) {
-                let e = t.get(i)
-                if (e && e.componentKey === n.default_state_key) 
-return e
+          /**
+           * Helper method to get default variant node from component set
+           * @param componentSetNode - The component set node to find default variant for
+           * @returns Default variant node or null if not found
+           */
+          function getDefaultVariantNode(componentSetNode) {
+            const sceneGraph = componentSetNode.sceneGraph
+            const assetKey = Egt.getAssetKeyForPublish(componentSetNode.guid)
+            const publishedComponentSet = _$$m3(debugState.getState())[assetKey]
+
+            // Check published component set for default state
+            if (publishedComponentSet) {
+              for (const childGuid of componentSetNode.reversedChildrenGuids) {
+                const childNode = sceneGraph.get(childGuid)
+                if (childNode && childNode.componentKey === publishedComponentSet.default_state_key) {
+                  return childNode
+                }
               }
             }
-            let r = glU.getDefaultStateForLocalStateGroup(e.guid)
-            let a = t.get(r)
-            return r && void 0 !== a ? a : null
-          }(n(this)))
-          return t ? i().createNode(t.guid, 'node.defaultVariant') : e.$$null
+
+            // Fallback to local default state
+            const localDefaultStateGuid = glU.getDefaultStateForLocalStateGroup(componentSetNode.guid)
+            const localDefaultState = sceneGraph.get(localDefaultStateGuid)
+            return localDefaultStateGuid && localDefaultState !== undefined ? localDefaultState : null
+          }
+          const defaultVariantNode = getDefaultVariantNode(getNode(this))
+          return defaultVariantNode ? getNodeFactory().createNode(defaultVariantNode.guid, 'node.defaultVariant') : vm.$$null
         },
       },
-      canWriteInReadOnly: !1,
-      hasEditScope: !1,
+      canWriteInReadOnly: false,
+      hasEditScope: false,
     })
   },
   mainComponent({
@@ -7233,127 +7890,134 @@ return e
     })
   },
   detachInstance({
-    defineVmFunction: e,
-    getNodeFactory: t,
-    getNode: i,
-  }, n) {
-    e({
-      handle: n,
+    defineVmFunction,
+    getNodeFactory,
+    getNode,
+  }, handle) {
+    defineVmFunction({
+      handle,
       key: 'detachInstance',
       metricsKey: 'node.detachInstance',
       cb() {
-        let e = i(this)
-        if (e.type !== 'INSTANCE')
+        const node = getNode(this)
+        if (node.type !== 'INSTANCE')
           throw new Error('Cannot detach a non-instance')
-        let n = e.detachInstance()
-        return t().createNode(n, 'node.detachInstance')
+        const detached = node.detachInstance()
+        return getNodeFactory().createNode(detached, 'node.detachInstance')
       },
-      isAllowedInReadOnly: !1,
-      hasEditScope: !0,
+      isAllowedInReadOnly: false,
+      hasEditScope: true,
     })
   },
   detachedInfo({
-    vm: e,
-    defineVmProp: t,
-    getNode: i,
-  }, n) {
-    t({
-      handle: n,
+    vm,
+    defineVmProp,
+    getNode,
+  }, handle) {
+    defineVmProp({
+      handle,
       key: 'detachedInfo',
       options: {
-        enumerable: !0,
+        enumerable: true,
         metricsKey: 'node.detachedInfo',
         get() {
-          let t = i(this)
-          if (t.type === 'INSTANCE' || t.type === 'SYMBOL')
-            return e.$$null
-          let n = t.detachedInfo
-          if (!n)
-            return e.$$null
-          let r = !!n.componentKey
-          let a = e.newObject()
-          r ? (e.setProp(a, 'type', e.newString('library')), e.setProp(a, 'componentKey', e.newString(n.componentKey))) : (e.setProp(a, 'type', e.newString('local')), e.setProp(a, 'componentId', e.newString(n.symbolId)))
-          return a
+          const node = getNode(this)
+          if (node.type === 'INSTANCE' || node.type === 'SYMBOL')
+            return vm.$$null
+          const info = node.detachedInfo
+          if (!info)
+            return vm.$$null
+          const isLibrary = !!info.componentKey
+          const obj = vm.newObject()
+          if (isLibrary) {
+            vm.setProp(obj, 'type', vm.newString('library'))
+            vm.setProp(obj, 'componentKey', vm.newString(info.componentKey))
+          }
+          else {
+            vm.setProp(obj, 'type', vm.newString('local'))
+            vm.setProp(obj, 'componentId', vm.newString(info.symbolId))
+          }
+          return obj
         },
       },
-      canWriteInReadOnly: !1,
-      hasEditScope: !1,
+      canWriteInReadOnly: false,
+      hasEditScope: false,
     })
   },
   tableNumRows({
-    vm: e,
-    defineVmProp: t,
-    getNode: i,
-  }, n) {
-    t({
-      handle: n,
+    vm,
+    defineVmProp,
+    getNode,
+  }, handle) {
+    defineVmProp({
+      handle,
       key: 'numRows',
       options: {
-        enumerable: !0,
+        enumerable: true,
         metricsKey: 'node.numRows',
         get() {
-          return e.newNumber(i(this).tableNumRows)
+          return vm.newNumber(getNode(this).tableNumRows)
         },
       },
-      canWriteInReadOnly: !1,
-      hasEditScope: !1,
+      canWriteInReadOnly: false,
+      hasEditScope: false,
     })
   },
   tableNumColumns({
-    vm: e,
-    defineVmProp: t,
-    getNode: i,
-  }, n) {
-    t({
-      handle: n,
+    vm,
+    defineVmProp,
+    getNode,
+  }, handle) {
+    defineVmProp({
+      handle,
       key: 'numColumns',
       options: {
-        enumerable: !0,
+        enumerable: true,
         metricsKey: 'node.numColumns',
         get() {
-          return e.newNumber(i(this).tableNumColumns)
+          return vm.newNumber(getNode(this).tableNumColumns)
         },
       },
-      canWriteInReadOnly: !1,
-      hasEditScope: !1,
+      canWriteInReadOnly: false,
+      hasEditScope: false,
     })
   },
   tableCellRowIndex({
-    vm: e,
-    defineVmProp: t,
-    getNode: i,
-  }, n) {
-    t({
-      handle: n,
+    vm,
+    defineVmProp,
+    getNode,
+  }, handle) {
+    defineVmProp({
+      handle,
       key: 'rowIndex',
       options: {
-        enumerable: !0,
+        enumerable: true,
         metricsKey: 'node.rowIndex',
         get() {
-          return e.newNumber(i(this).tableCellRowIndex)
+          return vm.newNumber(getNode(this).tableCellRowIndex)
         },
       },
-      canWriteInReadOnly: !1,
-      hasEditScope: !1,
+      canWriteInReadOnly: false,
+      hasEditScope: false,
     })
   },
   tableCellColumnIndex({
-    vm: e,
-    defineVmProp: t,
-    getNode: i,
-  }, n) {
-    t({
-      handle: n,
+    vm,
+    defineVmProp,
+    getNode,
+  }, handle) {
+    defineVmProp({
+      handle,
       key: 'columnIndex',
       options: {
-        enumerable: !0,
+        enumerable: true,
         metricsKey: 'node.columnIndex',
         get() {
-          return e.newNumber(i(this).tableCellColumnIndex)
+          return vm.newNumber(getNode(this).tableCellColumnIndex)
         },
       },
-      canWriteInReadOnly: !1,
-      hasEditScope: !1,
+      canWriteInReadOnly: false,
+      hasEditScope: false,
     })
   },
   cellAt({
@@ -7528,142 +8192,145 @@ return e
     })
   },
   moveColumn({
-    vm: e,
-    defineVmFunction: t,
-    getNode: i,
-  }, n) {
-    t({
-      handle: n,
+    vm,
+    defineVmFunction,
+    getNode,
+  }, handle) {
+    defineVmFunction({
+      handle,
       key: 'moveColumn',
       metricsKey: 'node.moveColumn',
-      cb(t, n) {
-        let r = i(this)
-        if (r.type !== 'TABLE')
+      cb(fromHandle, toHandle) {
+        const node = getNode(this)
+        if (node.type !== 'TABLE')
           throw new Error('Can only get cells from a table node')
-        let a = _$$u({
-          vm: e,
-          handle: t,
-          zSchema: _$$z.number().int().min(0).max(r.tableNumColumns - 1),
+        const fromIndex = _$$u({
+          vm,
+          handle: fromHandle,
+          zSchema: _$$z.number().int().min(0).max(node.tableNumColumns - 1),
           property: 'fromIndex',
         })
-        let s = _$$u({
-          vm: e,
-          handle: n,
-          zSchema: _$$z.number().int().min(0).max(r.tableNumColumns - 1),
+        const toIndex = _$$u({
+          vm,
+          handle: toHandle,
+          zSchema: _$$z.number().int().min(0).max(node.tableNumColumns - 1),
           property: 'toIndex',
         })
-        r.moveColumn(a, s)
-        return e.undefined
+        node.moveColumn(fromIndex, toIndex)
+        return vm.undefined
       },
-      isAllowedInReadOnly: !1,
-      hasEditScope: !0,
+      isAllowedInReadOnly: false,
+      hasEditScope: true,
     })
   },
   resizeRow({
-    vm: e,
-    defineVmFunction: t,
-    getNode: i,
-  }, n) {
-    t({
-      handle: n,
+    vm,
+    defineVmFunction,
+    getNode,
+  }, handle) {
+    defineVmFunction({
+      handle,
       key: 'resizeRow',
       metricsKey: 'node.resizeRow',
-      cb(t, n) {
-        let r = i(this)
-        if (r.type !== 'TABLE')
+      cb(indexHandle, heightHandle) {
+        const node = getNode(this)
+        if (node.type !== 'TABLE')
           throw new Error('Can only get cells from a table node')
-        let a = _$$u({
-          vm: e,
-          handle: t,
-          zSchema: _$$z.number().int().min(0).max(r.tableNumRows - 1),
+        const index = _$$u({
+          vm,
+          handle: indexHandle,
+          zSchema: _$$z.number().int().min(0).max(node.tableNumRows - 1),
           property: 'index',
         })
-        let s = _$$u({
-          vm: e,
-          handle: n,
+        const height = _$$u({
+          vm,
+          handle: heightHandle,
           zSchema: _$$N.PositiveFloat,
           property: 'height',
         })
-        r.resizeRow(a, s)
-        return e.undefined
+        node.resizeRow(index, height)
+        return vm.undefined
       },
-      isAllowedInReadOnly: !1,
-      hasEditScope: !0,
+      isAllowedInReadOnly: false,
+      hasEditScope: true,
     })
   },
   resizeColumn({
-    vm: e,
-    defineVmFunction: t,
-    getNode: i,
-  }, n) {
-    t({
-      handle: n,
+    vm,
+    defineVmFunction,
+    getNode,
+  }, handle) {
+    defineVmFunction({
+      handle,
       key: 'resizeColumn',
       metricsKey: 'node.resizeColumn',
-      cb(t, n) {
-        let r = i(this)
-        if (r.type !== 'TABLE')
+      cb(indexHandle, widthHandle) {
+        const node = getNode(this)
+        if (node.type !== 'TABLE')
           throw new Error('Can only get cells from a table node')
-        let a = _$$u({
-          vm: e,
-          handle: t,
-          zSchema: _$$z.number().int().min(0).max(r.tableNumColumns - 1),
+        const index = _$$u({
+          vm,
+          handle: indexHandle,
+          zSchema: _$$z.number().int().min(0).max(node.tableNumColumns - 1),
           property: 'index',
         })
-        let s = _$$u({
-          vm: e,
-          handle: n,
+        const width = _$$u({
+          vm,
+          handle: widthHandle,
           zSchema: _$$N.PositiveFloat,
           property: 'width',
         })
-        r.resizeColumn(a, s)
-        return e.undefined
+        node.resizeColumn(index, width)
+        return vm.undefined
       },
-      isAllowedInReadOnly: !1,
-      hasEditScope: !0,
+      isAllowedInReadOnly: false,
+      hasEditScope: true,
     })
   },
   textStyleId({
-    vm: e,
-    defineVmIncrementalProp: t,
-    mixedSentinel: i,
-    incrementalSafeApi: n,
-    getNode: r,
-    documentAccessState: a,
-    allowIncrementalUnsafeApiCalls: s,
-  }, o) {
-    t({
-      handle: o,
+    vm,
+    defineVmIncrementalProp,
+    mixedSentinel,
+    incrementalSafeApi,
+    getNode,
+    documentAccessState,
+    allowIncrementalUnsafeApiCalls,
+  }, handle) {
+    defineVmIncrementalProp({
+      handle,
       key: 'textStyleId',
       metricsKey: 'node.textStyleId',
       incrementalSafeApiSetKey: 'setTextStyleIdAsync',
       incrementalSafeApiSetMetricsKey: 'node.setTextStyleIdAsync',
-      retainGetter: !0,
-      enumerable: !0,
-      parseThis: e => r(e),
-      resolveValue: (t) => {
-        let n = t.inheritedTextStyleOrMixed
-        return n === 'mixed' ? i : e.newString(_$$nM(n))
+      retainGetter: true,
+      enumerable: true,
+      parseThis: e => getNode(e),
+      resolveValue: (node) => {
+        const val = node.inheritedTextStyleOrMixed
+        return val === 'mixed' ? mixedSentinel : vm.newString(_$$nM(val))
       },
-      prepareDocument: async (_e) => {
-        await Ux(a)
+      prepareDocument: async () => {
+        await Ux(documentAccessState)
       },
-      setValue: (t, i) => {
-        let n = _$$eX(_$$u({
-          vm: e,
-          handle: i,
+      setValue: (node, value) => {
+        const styleId = _$$eX(_$$u({
+          vm,
+          handle: value,
           zSchema: _$$z.string(),
           property: 'textStyleId',
         }))
-        t.inheritedTextStyle = n
-        return e.undefined
+        node.inheritedTextStyle = styleId
+        return vm.undefined
       },
-      incrementalSafeApi: n,
-      parseIncrementalValueArg: t => e.toString(t),
-      setValueIncremental: (t, i) => (t.inheritedTextStyle = _$$eX(i), e.undefined),
-      allowIncrementalUnsafeApiCalls: s,
-      canWriteInReadOnly: !1,
-      hasEditScope: !0,
+      incrementalSafeApi,
+      parseIncrementalValueArg: value => vm.toString(value),
+      setValueIncremental: (node, value) => {
+        node.inheritedTextStyle = _$$eX(value)
+        return vm.undefined
+      },
+      allowIncrementalUnsafeApiCalls,
+      canWriteInReadOnly: false,
+      hasEditScope: true,
     })
   },
   characters({
@@ -8110,7 +8777,7 @@ return e
         metricsKey: 'node.textCase',
         get() {
           let t = n(this)
-          return iz(e, i, t.textCaseOrMixed, t.fontVariantCapsOrMixed)
+          return normalizeTextCase(e, i, t.textCaseOrMixed, t.fontVariantCapsOrMixed)
         },
         set(t) {
           let i = _$$u({
@@ -8348,136 +9015,146 @@ return e
     })
   },
   textAutoResize({
-    vm: e,
-    defineVmProp: t,
-    stats: i,
-    getNode: n,
-  }, r) {
-    t({
-      handle: r,
+    vm,
+    defineVmProp,
+    stats,
+    getNode,
+  }, handle) {
+    defineVmProp({
+      handle,
       key: 'textAutoResize',
       options: {
-        enumerable: !0,
+        enumerable: true,
         metricsKey: 'node.textAutoResize',
         get() {
-          let {
+          const node = getNode(this)
+          const {
             textAutoResize,
             textTruncation,
-          } = n(this)
-          let r = textAutoResize === 'NONE' && textTruncation === 'ENDING'
-          r && !onode5 && (console.warn('`textAutoResize` will stop returning `TRUNCATE` in a future version - read from `textTruncation` instead'), onode5 = !0)
-          return e.newString(r ? 'TRUNCATE' : textAutoResize)
+          } = node
+          const isTruncateMode = textAutoResize === 'NONE' && textTruncation === 'ENDING'
+          if (isTruncateMode && !onode5) {
+            console.warn('[textAutoResize](file:///Users/allen/sigma-main/src/905/897942.ts#L46-L48) will stop returning `TRUNCATE` in a future version - read from `textTruncation` instead')
+            onode5 = true
+          }
+          return vm.newString(isTruncateMode ? 'TRUNCATE' : textAutoResize)
         },
-        set(t) {
-          let r = _$$u({
-            vm: e,
-            handle: t,
+        set(value) {
+          const autoResizeValue = _$$u({
+            vm,
+            handle: value,
             zSchema: _$$N.TextAutoResize,
             property: 'textAutoResize',
           })
-          let a = r === 'TRUNCATE'
-          let s = n(this)
-          s.textAutoResize = a ? 'NONE' : r
-          s.textTruncation = a ? 'ENDING' : 'DISABLED'
-          i.stackFieldSet(s.guid, 'text-auto-resize')
-          i.stackFieldSet(s.guid, 'text-truncation')
-          a && console.warn('setting `textAutoResize = "TRUNCATE"` is deprecated and will be removed in a future version. please use `textTruncation = "ENDING"` instead')
-          return e.undefined
+          const isTruncateMode = autoResizeValue === 'TRUNCATE'
+          const node = getNode(this)
+          node.textAutoResize = isTruncateMode ? 'NONE' : autoResizeValue
+          node.textTruncation = isTruncateMode ? 'ENDING' : 'DISABLED'
+          stats.stackFieldSet(node.guid, 'text-auto-resize')
+          stats.stackFieldSet(node.guid, 'text-truncation')
+          if (isTruncateMode) {
+            console.warn('setting `textAutoResize = "TRUNCATE"` is deprecated and will be removed in a future version. please use `textTruncation = "ENDING"` instead')
+          }
+          return vm.undefined
         },
       },
-      canWriteInReadOnly: !1,
-      hasEditScope: !0,
+      canWriteInReadOnly: false,
+      hasEditScope: true,
     })
   },
   lineHeight({
-    vm: e,
-    defineVmProp: t,
-    mixedSentinel: i,
-    getNode: n,
-  }, r) {
-    t({
-      handle: r,
+    vm,
+    defineVmProp,
+    mixedSentinel,
+    getNode,
+  }, handle) {
+    defineVmProp({
+      handle,
       key: 'lineHeight',
       options: {
-        enumerable: !0,
+        enumerable: true,
         metricsKey: 'node.lineHeight',
         get() {
-          let t = n(this).lineHeightOrMixed
-          if (t === 'mixed')
-            return i
-          let r = e.deepWrap(iC(t))
-          e.deepFreezeObject(r)
-          return r
+          const lineHeight = getNode(this).lineHeightOrMixed
+          if (lineHeight === 'mixed') {
+            return mixedSentinel
+          }
+          const wrappedLineHeight = vm.deepWrap(iC(lineHeight))
+          vm.deepFreezeObject(wrappedLineHeight)
+          return wrappedLineHeight
         },
-        set(t) {
-          n(this).lineHeight = iT(_$$u({
-            vm: e,
-            handle: t,
+        set(value) {
+          const lineHeightValue = _$$u({
+            vm,
+            handle: value,
             zSchema: _$$N.LineHeight,
             property: 'lineHeight',
-          }))
-          return e.undefined
+          })
+          getNode(this).lineHeight = iT(lineHeightValue)
+          return vm.undefined
         },
       },
-      canWriteInReadOnly: !1,
-      hasEditScope: !0,
+      canWriteInReadOnly: false,
+      hasEditScope: true,
     })
   },
   leadingTrim({
-    vm: e,
-    defineVmProp: t,
-    getNode: i,
-  }, n) {
-    t({
-      handle: n,
+    vm,
+    defineVmProp,
+    getNode,
+  }, handle) {
+    defineVmProp({
+      handle,
       key: 'leadingTrim',
       options: {
-        enumerable: !0,
+        enumerable: true,
         metricsKey: 'node.leadingTrim',
         get() {
-          return e.newString(i(this).leadingTrim)
+          return vm.newString(getNode(this).leadingTrim)
         },
-        set(t) {
-          i(this).leadingTrim = _$$u({
-            vm: e,
-            handle: t,
+        set(value) {
+          const leadingTrimValue = _$$u({
+            vm,
+            handle: value,
             zSchema: _$$N.LeadingTrim,
             property: 'leadingTrim',
           })
-          return e.undefined
+          getNode(this).leadingTrim = leadingTrimValue
+          return vm.undefined
         },
       },
-      canWriteInReadOnly: !1,
-      hasEditScope: !0,
+      canWriteInReadOnly: false,
+      hasEditScope: true,
     })
   },
   textTruncation({
-    vm: e,
-    defineVmProp: t,
-    getNode: i,
-  }, n) {
-    t({
-      handle: n,
+    vm,
+    defineVmProp,
+    getNode,
+  }, handle) {
+    defineVmProp({
+      handle,
       key: 'textTruncation',
       options: {
-        enumerable: !0,
+        enumerable: true,
         metricsKey: 'node.textTruncation',
         get() {
-          let t = i(this).textTruncation
-          return e.newString(t)
+          const textTruncation = getNode(this).textTruncation
+          return vm.newString(textTruncation)
         },
-        set(t) {
-          i(this).textTruncation = _$$u({
-            vm: e,
-            handle: t,
+        set(value) {
+          const textTruncationValue = _$$u({
+            vm,
+            handle: value,
             zSchema: _$$N.TextTruncation,
             property: 'textTruncation',
           })
-          return e.undefined
+          getNode(this).textTruncation = textTruncationValue
+          return vm.undefined
         },
       },
-      canWriteInReadOnly: !1,
-      hasEditScope: !0,
+      canWriteInReadOnly: false,
+      hasEditScope: true,
     })
   },
   maxLines({
@@ -8662,55 +9339,89 @@ return e
       hasEditScope: !1,
     })
   },
+  /**
+   * pointCount - Manages the point count property for polygon and star nodes
+   *
+   * Provides getter/setter for the number of points in polygon/star shapes.
+   * Validates that point count is at least 3 and is an integer value.
+   *
+   * @param context - API context containing vm, defineVmProp, and getNode
+   * @param handle - VM handle for the node prototype
+   */
   pointCount({
-    vm: e,
-    defineVmProp: t,
-    getNode: i,
-  }, n) {
-    t({
-      handle: n,
+    vm,
+    defineVmProp,
+    getNode,
+  }, handle) {
+    defineVmProp({
+      handle,
       key: 'pointCount',
       options: {
-        enumerable: !0,
+        enumerable: true,
         metricsKey: 'node.pointCount',
         get() {
-          return e.newNumber(i(this).count)
+          const node = getNode(this)
+          return vm.newNumber(node.count)
         },
-        set(t) {
-          i(this).count = _$$u({
-            vm: e,
-            handle: t,
+        set(valueHandle) {
+          const node = getNode(this)
+          const pointCount = _$$u({
+            vm,
+            handle: valueHandle,
             zSchema: _$$z.number().min(3).int().finite(),
             property: 'pointCount',
           })
-          return e.undefined
+          node.count = pointCount
+          return vm.undefined
         },
       },
-      canWriteInReadOnly: !1,
-      hasEditScope: !0,
+      canWriteInReadOnly: false,
+      hasEditScope: true,
     })
   },
+  /**
+   * vectorNetwork - Manages vector network data for vector nodes
+   *
+   * Provides comprehensive vector network management including vertices, segments,
+   * and regions with proper validation, incremental API support, and paint processing.
+   * Handles both synchronous and asynchronous operations for vector data manipulation.
+   *
+   * @param context - API context with vm, defineVmIncrementalProp, stores, etc.
+   * @param handle - VM handle for the node prototype
+   */
   vectorNetwork({
-    vm: e,
-    defineVmIncrementalProp: t,
-    incrementalSafeApi: i,
-    imageStore: n,
-    videoStore: r,
-    getNode: a,
-    sceneGraph: s,
-    documentAccessState: o,
-    allowIncrementalUnsafeApiCalls: l,
-  }, d) {
-    function c(t) {
-      let i = Kb(_$$u({
-        vm: e,
-        handle: t,
+    vm,
+    defineVmIncrementalProp,
+    incrementalSafeApi,
+    imageStore,
+    videoStore,
+    getNode,
+    sceneGraph,
+    documentAccessState,
+    allowIncrementalUnsafeApiCalls,
+  }, handle) {
+    /**
+     * parseVectorNetworkInput - Parse and validate vector network input data
+     *
+     * Processes vector network data from VM handles, applying defaults and
+     * validating structure. Handles fill styles, paints, and region data.
+     *
+     * @param inputHandle - VM handle containing vector network data
+     * @returns Processed vector network object with validated structure
+     */
+    function parseVectorNetworkInput(inputHandle) {
+      // Extract and apply defaults to input data
+      const vectorData = Kb(_$$u({
+        vm,
+        handle: inputHandle,
         zSchema: _$$N.VectorNetwork,
         property: 'vectorNetwork',
       }), {
         regions: [],
       })
-      i.segments = i.segments.map(e => Kb(e, {
+
+      // Apply defaults to segments (tangent vectors)
+      vectorData.segments = vectorData.segments.map(segment => Kb(segment, {
         tangentStart: {
           x: 0,
           y: 0,
@@ -8720,61 +9431,128 @@ return e
           y: 0,
         },
       }))
-      let a = {
-        vertices: i.vertices,
-        segments: i.segments,
-        regions: i.regions.map((e) => {
-          let t = {
-            windingRule: e.windingRule,
-            loops: e.loops,
-          }
-          if (e.fillStyleId) {
-            let i = _$$eX(e.fillStyleId)
-            assertNotNullish(i, `Invalid fillStyleId ${e.fillStyleId}`)
-            t.fillStyleRef = i
-          }
-          if (e.fills) {
-            let i = []
-            t.fillPaints = {
-              data: mapPaintConfigurations(n, r, e.fills, i),
-              blobs: i,
-            }
-          }
-          return t
-        }),
+
+      // Process vector network structure
+      const processedNetwork = {
+        vertices: vectorData.vertices,
+        segments: vectorData.segments,
+        regions: vectorData.regions.map(processVectorRegion),
       }
-      ur(a)
-      return a
+
+      // Validate the final vector network structure
+      ur(processedNetwork)
+      return processedNetwork
     }
-    t({
-      handle: d,
+
+    /**
+     * processVectorRegion - Process a single vector region with fills and styles
+     *
+     * Handles region winding rules, loops, fill styles, and paint configurations.
+     * Manages both style references and direct paint specifications.
+     *
+     * @param region - Raw region data from input
+     * @returns Processed region object with validated fills and styles
+     */
+    function processVectorRegion(region) {
+      const processedRegion = {
+        windingRule: region.windingRule,
+        loops: region.loops,
+      }
+
+      // Handle fill style ID reference
+      if (region.fillStyleId) {
+        const styleRef = _$$eX(region.fillStyleId)
+        assertNotNullish(styleRef, `Invalid fillStyleId ${region.fillStyleId}`)
+        processedRegion.fillStyleRef = styleRef
+      }
+
+      // Handle direct fill paints
+      if (region.fills) {
+        const paintBlobs = []
+        processedRegion.fillPaints = {
+          data: mapPaintConfigurations(imageStore, videoStore, region.fills, paintBlobs),
+          blobs: paintBlobs,
+        }
+      }
+      return processedRegion
+    }
+
+    // Setup incremental property with comprehensive vector network handling
+    defineVmIncrementalProp({
+      handle,
       key: 'vectorNetwork',
       metricsKey: 'node.vectorNetwork',
       incrementalSafeApiSetKey: 'setVectorNetworkAsync',
       incrementalSafeApiSetMetricsKey: 'node.setVectorNetworkAsync',
-      incrementalSafeApi: i,
-      retainGetter: !0,
-      enumerable: !0,
-      canWriteInReadOnly: !1,
-      hasEditScope: !0,
-      parseThis: e => a(e),
-      resolveValue(t) {
-        let i = processVectorData(Kx(t))
-        let n = e.deepWrap(i)
-        e.deepFreezeObject(n)
-        return n
+      incrementalSafeApi,
+      retainGetter: true,
+      enumerable: true,
+      canWriteInReadOnly: false,
+      hasEditScope: true,
+      parseThis: nodeHandle => getNode(nodeHandle),
+      /**
+       * resolveValue - Convert internal vector data to API format
+       *
+       * Processes internal vector network data and converts it to the format
+       * expected by the plugin API, with proper freezing for immutability.
+       *
+       * @param node - The node containing vector network data
+       * @returns VM-wrapped vector network object
+       */
+      resolveValue(node) {
+        const vectorData = processVectorData(Kx(node))
+        const wrappedData = vm.deepWrap(vectorData)
+        vm.deepFreezeObject(wrappedData)
+        return wrappedData
       },
+      /**
+       * prepareDocument - Prepare document for vector network operations
+       *
+       * Ensures document is properly loaded for vector network access.
+       * Required for incremental safe API operations.
+       */
       async prepareDocument() {
-        await Ux(o)
+        await Ux(documentAccessState)
       },
-      setValue(t, i) {
-        let n = c(i)
-        _$$iN(t, n, s)
-        return e.undefined
+      /**
+       * setValue - Set vector network data synchronously
+       *
+       * Processes input data and applies it to the node's vector network.
+       * Used for direct property assignment operations.
+       *
+       * @param node - Target node to modify
+       * @param inputHandle - VM handle with new vector network data
+       * @returns VM undefined value
+       */
+      setValue(node, inputHandle) {
+        const processedNetwork = parseVectorNetworkInput(inputHandle)
+        _$$iN(node, processedNetwork, sceneGraph)
+        return vm.undefined
       },
-      parseIncrementalValueArg: e => c(e),
-      setValueIncremental: (t, i) => (_$$iN(t, i, s), e.undefined),
-      allowIncrementalUnsafeApiCalls: l,
+      /**
+       * parseIncrementalValueArg - Parse input for incremental operations
+       *
+       * Processes vector network input for async incremental operations.
+       *
+       * @param inputHandle - VM handle with vector network data
+       * @returns Processed vector network object
+       */
+      parseIncrementalValueArg: inputHandle => parseVectorNetworkInput(inputHandle),
+      /**
+       * setValueIncremental - Set vector network data asynchronously
+       *
+       * Applies processed vector network data in incremental safe mode.
+       * Used for async property assignment operations.
+       *
+       * @param node - Target node to modify
+       * @param processedNetwork - Pre-processed vector network data
+       * @returns VM undefined value
+       */
+      setValueIncremental: (node, processedNetwork) => {
+        _$$iN(node, processedNetwork, sceneGraph)
+        return vm.undefined
+      },
+      allowIncrementalUnsafeApiCalls,
     })
   },
   readOnlyVectorNetwork({
@@ -8880,10 +9658,15 @@ return e
         enumerable: !0,
         metricsKey: 'node.guides',
         get() {
-          let t = e.deepWrap(i(this).guides.map(e => (assertNotNullish(e.axis, 'Figma Internal Error: guide missing data'), assertNotNullish(e.offset, 'Figma Internal Error: guide missing data'), {
-            axis: e.axis,
-            offset: e.offset,
-          })))
+          const s2 = i(this).guides.map((e) => {
+            assertNotNullish(e.axis, 'Figma Internal Error: guide missing data')
+            assertNotNullish(e.offset, 'Figma Internal Error: guide missing data')
+            return {
+              axis: e.axis,
+              offset: e.offset,
+            }
+          })
+          let t = e.deepWrap(s2)
           e.deepFreezeObject(t)
           return t
         },
@@ -9010,14 +9793,12 @@ return e
     getNode,
     incrementalSafeApi,
   }, handle) {
-    const parseReactions = (handleValue: any) =>
-      _$$u({
-        vm,
-        handle: handleValue,
-        zSchema: _$$N.Reactions,
-        property: 'reactions',
-      })
-
+    const parseReactions = handleValue => _$$u({
+      vm,
+      handle: handleValue,
+      zSchema: _$$N.Reactions,
+      property: 'reactions',
+    })
     defineVmIncrementalProp({
       handle,
       key: 'reactions',
@@ -9032,13 +9813,13 @@ return e
       hasEditScope: true,
       parseThis: e => getNode(e),
       resolveValue(node) {
-        const mapReactions = (interactions: any[]) => {
-          const result: any[] = []
+        const mapReactions = (interactions) => {
+          const result = []
           for (const interaction of interactions) {
             const action = interaction.actions && interaction.actions.length > 0 ? tZ(interaction.actions[0]) : null
             const actions = interaction.actions ? interaction.actions.map(tZ).filter(tq) : []
             const event = interaction.event || {}
-            let trigger: any = {}
+            let trigger:any = {}
             let type = event?.interactionType || 'ON_CLICK'
             switch (type) {
               case 'NONE':
@@ -9068,20 +9849,20 @@ return e
                   trigger.type = 'MOUSE_ENTER'
                   trigger.deprecatedVersion = true
                 }
- else if (type === 'MOUSE_ENTER') {
+                else if (type === 'MOUSE_ENTER') {
                   trigger.type = 'MOUSE_ENTER'
                 }
- else if (type === 'MOUSE_OUT') {
+                else if (type === 'MOUSE_OUT') {
                   trigger.type = 'MOUSE_LEAVE'
                   trigger.deprecatedVersion = true
                 }
- else if (type === 'MOUSE_LEAVE') {
+                else if (type === 'MOUSE_LEAVE') {
                   trigger.type = 'MOUSE_LEAVE'
                 }
- else if (type === 'MOUSE_UP') {
+                else if (type === 'MOUSE_UP') {
                   trigger.type = 'MOUSE_UP'
                 }
- else if (type === 'MOUSE_DOWN') {
+                else if (type === 'MOUSE_DOWN') {
                   trigger.type = 'MOUSE_DOWN'
                 }
                 trigger.delay = event.interactionMaintained ? event.interactionDuration || 0.3 : 0
@@ -9203,7 +9984,7 @@ return e
               const n = validateImmutableFrame(node)
               vm.setProp(arr, idx.toString(), getNodeFactory().createNode(n.guid, 'node.selection'))
             }
- else {
+            else {
               vm.setProp(arr, idx.toString(), getNodeFactory().createNode(node.guid, 'node.selection'))
             }
             idx++
@@ -9215,7 +9996,7 @@ return e
           if (!vm.isArray(val))
             throw new Error('The selection must be an array')
           const len = vm.getNumberProp(val, 'length')
-          const nodes: string[] = []
+          const nodes = []
           for (let i = 0; i < len; i++) {
             const n = getNode(vm.getProp(val, i.toString()))
             Egt.expandUpToRoot(n.guid)
@@ -9261,12 +10042,13 @@ return e
           })
           const a = getNode(vm.getProp(val, 'node'))
           if (!r)
-            return;
+            return
           if (r.end < r.start)
             throw new Error('selectedTextRange must have (start <= end)')
           const s = a.characters.length
-          if (r.start > s || r.end > s)
+          if (r.start > s || r.end > s) {
             throw new Error('selectedTextRange must have (start < # of characters), (end < # of characters)')
+          }
           node.directlySelectedNodes = [a]
           Y5.triggerAction('request-edit-mode')
           node.setSelectedTextRange(a.guid, r.start, r.end)
@@ -9386,12 +10168,15 @@ return e
         },
         set(t) {
           let n = i(this)
-          n.type === 'SLIDE' || (n.rectangleCornerRadiiIndependent = !0, n.rectangleTopLeftCornerRadius = _$$u({
-            vm: e,
-            handle: t,
-            zSchema: _$$N.PositiveFloat,
-            property: 'topLeftRadius',
-          }))
+          if (n.type === 'SLIDE') {
+            n.rectangleCornerRadiiIndependent = !0
+            n.rectangleTopLeftCornerRadius = _$$u({
+              vm: e,
+              handle: t,
+              zSchema: _$$N.PositiveFloat,
+              property: 'topLeftRadius',
+            })
+          }
           return e.undefined
         },
       },
@@ -9416,12 +10201,15 @@ return e
         },
         set(t) {
           let n = i(this)
-          n.type === 'SLIDE' || (n.rectangleCornerRadiiIndependent = !0, n.rectangleTopRightCornerRadius = _$$u({
-            vm: e,
-            handle: t,
-            zSchema: _$$N.PositiveFloat,
-            property: 'topRightRadius',
-          }))
+          if (n.type === 'SLIDE') {
+            n.rectangleCornerRadiiIndependent = !0
+            n.rectangleTopRightCornerRadius = _$$u({
+              vm: e,
+              handle: t,
+              zSchema: _$$N.PositiveFloat,
+              property: 'topRightRadius',
+            })
+          }
           return e.undefined
         },
       },
@@ -9446,12 +10234,15 @@ return e
         },
         set(t) {
           let n = i(this)
-          n.type === 'SLIDE' || (n.rectangleCornerRadiiIndependent = !0, n.rectangleBottomLeftCornerRadius = _$$u({
-            vm: e,
-            handle: t,
-            zSchema: _$$N.PositiveFloat,
-            property: 'bottomLeftRadius',
-          }))
+          if (n.type === 'SLIDE') {
+            n.rectangleCornerRadiiIndependent = !0
+            n.rectangleBottomLeftCornerRadius = _$$u({
+              vm: e,
+              handle: t,
+              zSchema: _$$N.PositiveFloat,
+              property: 'bottomLeftRadius',
+            })
+          }
           return e.undefined
         },
       },
@@ -9476,12 +10267,15 @@ return e
         },
         set(t) {
           let n = i(this)
-          n.type === 'SLIDE' || (n.rectangleCornerRadiiIndependent = !0, n.rectangleBottomRightCornerRadius = _$$u({
-            vm: e,
-            handle: t,
-            zSchema: _$$N.PositiveFloat,
-            property: 'bottomRightRadius',
-          }))
+          if (n.type === 'SLIDE') {
+            n.rectangleCornerRadiiIndependent = !0
+            n.rectangleBottomLeftCornerRadius = _$$u({
+              vm: e,
+              handle: t,
+              zSchema: _$$N.PositiveFloat,
+              property: 'bottomRightRadius',
+            })
+          }
           return e.undefined
         },
       },
@@ -9506,7 +10300,7 @@ return e
           const settings = node.exportSettings ?? []
           const wrapped = vm.deepWrap(settings.map((setting) => {
             const format = setting.imageType === 'JPEG' ? 'JPG' : setting.imageType
-            const result: any = {
+            const result:any = {
               format,
               suffix: setting.suffix || '',
               contentsOnly: !!setting.contentsOnly,
@@ -9823,7 +10617,7 @@ return e
         const field = _$$u({
           vm,
           handle: fieldHandle,
-          zSchema: n.VariableBindableNodeField,
+          zSchema: variableDefinitions.VariableBindableNodeField,
           property: 'field',
         })
         const getVariableId = ({
@@ -9840,8 +10634,9 @@ return e
             return null
           if (vm.isObject(handle)) {
             const node = getNode(handle)
-            if (!node || node.type !== 'VARIABLE')
+            if (!node || node.type !== 'VARIABLE') {
               throw new Error(`Cannot call ${callerName}  with a non-variable node.`)
+            }
             return vm.getStringProp(handle, 'id')
           }
           if (vm.isString(handle)) {
@@ -9979,933 +10774,997 @@ return e
     })
   },
   textRangeFunctions({
-    vm: e,
-    defineVmFunction: t,
-    defineVmIncrementalMethod: i,
-    mixedSentinel: r,
-    imageStore: a,
-    videoStore: s,
-    getNode: o,
-    incrementalSafeApi: d,
-    documentAccessState: c,
-    allowIncrementalUnsafeApiCalls: u,
-  }, p) {
-    function m(t, i, n) {
-      let r = _$$u({
-        vm: e,
-        handle: i,
+    vm,
+    defineVmFunction,
+    defineVmIncrementalMethod,
+    mixedSentinel,
+    imageStore,
+    videoStore,
+    getNode,
+    incrementalSafeApi,
+    documentAccessState,
+    allowIncrementalUnsafeApiCalls,
+  }, handle) {
+    const parseRange = (node, startHandle, endHandle) => {
+      const start = _$$u({
+        vm,
+        handle: startHandle,
         zSchema: _$$N.PositiveInteger,
         property: 'start',
       })
-      let a = _$$u({
-        vm: e,
-        handle: n,
+      const end = _$$u({
+        vm,
+        handle: endHandle,
         zSchema: _$$N.PositiveInteger,
         property: 'end',
       })
-      if (r >= a) {
+      if (start >= end) {
         throw new Error('Empty range selected. \'end\' must be greater than \'start\'')
       }
-      if (a > t.characters.length) {
+      if (end > node.characters.length) {
         throw new Error('Range outside of available characters. \'start\' must be less than node.characters.length and \'end\' must be less than or equal to node.characters.length')
       }
-      return [r, a]
+      return [start, end]
     }
-    t({
-      handle: p,
+    defineVmFunction({
+      handle,
       key: 'getRangeFontSize',
       metricsKey: 'node.getRangeFontSize',
-      cb(t, i) {
-        let n = o(this)
-        let [a, s] = m(n, t, i)
-        let l = n.getRangeFontSize(a, s)
-        return l === 'mixed' ? r : e.newNumber(l)
+      cb(start, end) {
+        const node = getNode(this)
+        const [s, e] = parseRange(node, start, end)
+        const val = node.getRangeFontSize(s, e)
+        return val === 'mixed' ? mixedSentinel : vm.newNumber(val)
       },
-      isAllowedInReadOnly: !0,
-      hasEditScope: !1,
+      isAllowedInReadOnly: true,
+      hasEditScope: false,
     })
-    t({
-      handle: p,
+    defineVmFunction({
+      handle,
       key: 'setRangeFontSize',
       metricsKey: 'node.setRangeFontSize',
-      cb(t, i, n) {
-        let r = o(this)
-        let [a, s] = m(r, t, i)
-        let l = _$$u({
-          vm: e,
-          handle: n,
+      cb(start, end, value) {
+        const node = getNode(this)
+        const [s, e] = parseRange(node, start, end)
+        const v = _$$u({
+          vm,
+          handle: value,
           zSchema: _$$z.number().finite().min(1),
           property: 'value',
         })
-        r.setRangeFontSize(a, s, l)
-        return e.undefined
+        node.setRangeFontSize(s, e, v)
+        return vm.undefined
       },
-      isAllowedInReadOnly: !1,
-      hasEditScope: !0,
+      isAllowedInReadOnly: false,
+      hasEditScope: true,
     })
-    t({
-      handle: p,
+    defineVmFunction({
+      handle,
       key: 'getRangeFontName',
       metricsKey: 'node.getRangeFontName',
-      cb(t, i) {
-        let n = o(this)
-        let [a, s] = m(n, t, i)
-        let l = n.getRangeFontName(a, s)
-        if (l === 'mixed')
-          return r
-        let d = e.deepWrap({
-          family: l.family,
-          style: l.style,
+      cb(start, end) {
+        const node = getNode(this)
+        const [s, e] = parseRange(node, start, end)
+        const val = node.getRangeFontName(s, e)
+        if (val === 'mixed')
+          return mixedSentinel
+        const wrapped = vm.deepWrap({
+          family: val.family,
+          style: val.style,
         })
-        e.deepFreezeObject(d)
-        return d
+        vm.deepFreezeObject(wrapped)
+        return wrapped
       },
-      isAllowedInReadOnly: !0,
-      hasEditScope: !1,
+      isAllowedInReadOnly: true,
+      hasEditScope: false,
     })
-    t({
-      handle: p,
+    defineVmFunction({
+      handle,
       key: 'setRangeFontName',
       metricsKey: 'node.setRangeFontName',
-      cb(t, i, n) {
-        let r = o(this)
-        let [a, s] = m(r, t, i)
-        let l = _$$u({
-          vm: e,
-          handle: n,
+      cb(start, end, value) {
+        const node = getNode(this)
+        const [s, e] = parseRange(node, start, end)
+        const v = _$$u({
+          vm,
+          handle: value,
           zSchema: _$$N.FontName,
           property: 'value',
         })
-        r.setRangeFontName(a, s, l)
-        return e.undefined
+        node.setRangeFontName(s, e, v)
+        return vm.undefined
       },
-      isAllowedInReadOnly: !1,
-      hasEditScope: !0,
+      isAllowedInReadOnly: false,
+      hasEditScope: true,
     })
-    t({
-      handle: p,
+    defineVmFunction({
+      handle,
       key: 'getRangeAllFontNames',
       metricsKey: 'node.getRangeAllFontNames',
-      cb(t, i) {
-        let n = o(this)
-        let [r, a] = m(n, t, i)
-        let s = n.getRangeAllFontNames(r, a)
-        let l = e.deepWrap(s.map(({
-          family: e,
-          style: t,
+      cb(start, end) {
+        const node = getNode(this)
+        const [s, e] = parseRange(node, start, end)
+        const arr = node.getRangeAllFontNames(s, e)
+        const wrapped = vm.deepWrap(arr.map(({
+          family,
+          style,
         }) => ({
-          family: e,
-          style: t,
+          family,
+          style,
         })))
-        e.deepFreezeObject(l)
-        return l
+        vm.deepFreezeObject(wrapped)
+        return wrapped
       },
-      isAllowedInReadOnly: !0,
-      hasEditScope: !1,
+      isAllowedInReadOnly: true,
+      hasEditScope: false,
     })
-    t({
-      handle: p,
+    defineVmFunction({
+      handle,
       key: 'getRangeFontWeight',
       metricsKey: 'node.getRangeFontWeight',
-      cb(t, i) {
-        let n = o(this)
-        let [a, s] = m(n, t, i)
-        let l = n.getRangeFontWeight(a, s)
-        if (l === 'mixed')
-          return r
-        let d = e.newNumber(l)
-        e.deepFreezeObject(d)
-        return d
+      cb(start, end) {
+        const node = getNode(this)
+        const [s, e] = parseRange(node, start, end)
+        const val = node.getRangeFontWeight(s, e)
+        if (val === 'mixed')
+          return mixedSentinel
+        const n = vm.newNumber(val)
+        vm.deepFreezeObject(n)
+        return n
       },
-      isAllowedInReadOnly: !0,
-      hasEditScope: !1,
+      isAllowedInReadOnly: true,
+      hasEditScope: false,
     })
-    t({
-      handle: p,
+    defineVmFunction({
+      handle,
       key: 'getRangeTextDecoration',
       metricsKey: 'node.getRangeTextDecoration',
-      cb(t, i) {
-        let n = o(this)
-        let [a, s] = m(n, t, i)
-        let l = n.getRangeTextDecoration(a, s)
-        return l === 'mixed' ? r : e.newString(l)
+      cb(start, end) {
+        const node = getNode(this)
+        const [s, e] = parseRange(node, start, end)
+        const val = node.getRangeTextDecoration(s, e)
+        return val === 'mixed' ? mixedSentinel : vm.newString(val)
       },
-      isAllowedInReadOnly: !0,
-      hasEditScope: !1,
+      isAllowedInReadOnly: true,
+      hasEditScope: false,
     })
-    t({
-      handle: p,
+    defineVmFunction({
+      handle,
       key: 'setRangeTextDecoration',
       metricsKey: 'node.setRangeTextDecoration',
-      cb(t, i, n) {
-        let r = o(this)
-        let [a, s] = m(r, t, i)
-        let l = _$$u({
-          vm: e,
-          handle: n,
+      cb(start, end, value) {
+        const node = getNode(this)
+        const [s, e] = parseRange(node, start, end)
+        const v = _$$u({
+          vm,
+          handle: value,
           zSchema: _$$N.TextDecoration,
           property: 'value',
         })
-        r.setRangeTextDecoration(a, s, l)
-        return e.undefined
+        node.setRangeTextDecoration(s, e, v)
+        return vm.undefined
       },
-      isAllowedInReadOnly: !1,
-      hasEditScope: !0,
+      isAllowedInReadOnly: false,
+      hasEditScope: true,
     })
-    t({
-      handle: p,
+    defineVmFunction({
+      handle,
       key: 'getRangeTextDecorationStyle',
       metricsKey: 'node.getRangeTextDecorationStyle',
-      cb(t, i) {
-        let n = o(this)
-        let [a, s] = m(n, t, i)
-        let l = n.getRangeTextDecorationStyle(a, s)
-        return l === null ? e.$$null : l === 'mixed' ? r : e.newString(l)
+      cb(start, end) {
+        const node = getNode(this)
+        const [s, e] = parseRange(node, start, end)
+        const val = node.getRangeTextDecorationStyle(s, e)
+        return val === null ? vm.$$null : val === 'mixed' ? mixedSentinel : vm.newString(val)
       },
-      isAllowedInReadOnly: !0,
-      hasEditScope: !1,
+      isAllowedInReadOnly: true,
+      hasEditScope: false,
     })
-    t({
-      handle: p,
+    defineVmFunction({
+      handle,
       key: 'setRangeTextDecorationStyle',
       metricsKey: 'node.setRangeTextDecorationStyle',
-      cb(t, i, n) {
-        let r = o(this)
-        let [a, s] = m(r, t, i)
-        let l = _$$u({
-          vm: e,
-          handle: n,
+      cb(start, end, value) {
+        const node = getNode(this)
+        const [s, e] = parseRange(node, start, end)
+        const v = _$$u({
+          vm,
+          handle: value,
           zSchema: _$$N.TextDecorationStyle,
           property: 'value',
         })
-        r.setRangeTextDecorationStyle(a, s, l)
-        return e.undefined
+        node.setRangeTextDecorationStyle(s, e, v)
+        return vm.undefined
       },
-      isAllowedInReadOnly: !1,
-      hasEditScope: !0,
+      isAllowedInReadOnly: false,
+      hasEditScope: true,
     })
-    t({
-      handle: p,
+    defineVmFunction({
+      handle,
       key: 'getRangeTextDecorationSkipInk',
       metricsKey: 'node.getRangeTextDecorationSkipInk',
-      cb(t, i) {
-        let n = o(this)
-        let [a, s] = m(n, t, i)
-        let l = n.getRangeTextDecorationSkipInk(a, s)
-        return l === null ? e.$$null : l === 'mixed' ? r : e.newBoolean(l)
+      cb(start, end) {
+        const node = getNode(this)
+        const [s, e] = parseRange(node, start, end)
+        const val = node.getRangeTextDecorationSkipInk(s, e)
+        return val === null ? vm.$$null : val === 'mixed' ? mixedSentinel : vm.newBoolean(val)
       },
-      isAllowedInReadOnly: !0,
-      hasEditScope: !1,
+      isAllowedInReadOnly: true,
+      hasEditScope: false,
     })
-    t({
-      handle: p,
+    defineVmFunction({
+      handle,
       key: 'setRangeTextDecorationSkipInk',
       metricsKey: 'node.setRangeTextDecorationSkipInk',
-      cb(t, i, n) {
-        let r = o(this)
-        let [a, s] = m(r, t, i)
-        let l = _$$u({
-          vm: e,
-          handle: n,
+      cb(start, end, value) {
+        const node = getNode(this)
+        const [s, e] = parseRange(node, start, end)
+        const v = _$$u({
+          vm,
+          handle: value,
           zSchema: _$$z.boolean(),
           property: 'value',
         })
-        r.setRangeTextDecorationSkipInk(a, s, l)
-        return e.undefined
+        node.setRangeTextDecorationSkipInk(s, e, v)
+        return vm.undefined
       },
-      isAllowedInReadOnly: !1,
-      hasEditScope: !0,
+      isAllowedInReadOnly: false,
+      hasEditScope: true,
     })
-    t({
-      handle: p,
+    defineVmFunction({
+      handle,
       key: 'getRangeTextDecorationOffset',
       metricsKey: 'node.getRangeTextDecorationOffset',
-      cb(t, i) {
-        let n = o(this)
-        let [a, s] = m(n, t, i)
-        let l = n.getRangeTextDecorationOffset(a, s)
-        if (l === null)
-          return e.$$null
-        if (l === 'mixed')
-          return r
-        let d = e.deepWrap(ik(l))
-        e.deepFreezeObject(d)
-        return d
+      cb(start, end) {
+        const node = getNode(this)
+        const [s, e] = parseRange(node, start, end)
+        const val = node.getRangeTextDecorationOffset(s, e)
+        if (val === null)
+          return vm.$$null
+        if (val === 'mixed')
+          return mixedSentinel
+        const wrapped = vm.deepWrap(ik(val))
+        vm.deepFreezeObject(wrapped)
+        return wrapped
       },
-      isAllowedInReadOnly: !0,
-      hasEditScope: !1,
+      isAllowedInReadOnly: true,
+      hasEditScope: false,
     })
-    t({
-      handle: p,
+    defineVmFunction({
+      handle,
       key: 'setRangeTextDecorationOffset',
       metricsKey: 'node.setRangeTextDecorationOffset',
-      cb(t, i, n) {
-        let r = o(this)
-        let [a, s] = m(r, t, i)
-        let l = iR(_$$u({
-          vm: e,
-          handle: n,
+      cb(start, end, value) {
+        const node = getNode(this)
+        const [s, e] = parseRange(node, start, end)
+        const v = iR(_$$u({
+          vm,
+          handle: value,
           zSchema: _$$N.TextDecorationOffset,
           property: 'value',
         }))
-        r.setRangeTextDecorationOffset(a, s, l)
-        return e.undefined
+        node.setRangeTextDecorationOffset(s, e, v)
+        return vm.undefined
       },
-      isAllowedInReadOnly: !1,
-      hasEditScope: !0,
+      isAllowedInReadOnly: false,
+      hasEditScope: true,
     })
-    t({
-      handle: p,
+    defineVmFunction({
+      handle,
       key: 'getRangeTextDecorationThickness',
       metricsKey: 'node.getRangeTextDecorationThickness',
-      cb(t, i) {
-        let n = o(this)
-        let [a, s] = m(n, t, i)
-        let l = n.getRangeTextDecorationThickness(a, s)
-        if (l === null)
-          return e.$$null
-        if (l === 'mixed')
-          return r
-        let d = e.deepWrap(convertTextDecorationThicknessFromLegacy(l))
-        e.deepFreezeObject(d)
-        return d
+      cb(start, end) {
+        const node = getNode(this)
+        const [s, e] = parseRange(node, start, end)
+        const val = node.getRangeTextDecorationThickness(s, e)
+        if (val === null)
+          return vm.$$null
+        if (val === 'mixed')
+          return mixedSentinel
+        const wrapped = vm.deepWrap(convertTextDecorationThicknessFromLegacy(val))
+        vm.deepFreezeObject(wrapped)
+        return wrapped
       },
-      isAllowedInReadOnly: !0,
-      hasEditScope: !1,
+      isAllowedInReadOnly: true,
+      hasEditScope: false,
     })
-    t({
-      handle: p,
+    defineVmFunction({
+      handle,
       key: 'setRangeTextDecorationThickness',
       metricsKey: 'node.setRangeTextDecorationThickness',
-      cb(t, i, n) {
-        let r = o(this)
-        let [a, s] = m(r, t, i)
-        let l = convertTextDecorationThicknessToLegacy(_$$u({
-          vm: e,
-          handle: n,
+      cb(start, end, value) {
+        const node = getNode(this)
+        const [s, e] = parseRange(node, start, end)
+        const v = convertTextDecorationThicknessToLegacy(_$$u({
+          vm,
+          handle: value,
           zSchema: _$$N.TextDecorationThickness,
           property: 'value',
         }))
-        r.setRangeTextDecorationThickness(a, s, l)
-        return e.undefined
+        node.setRangeTextDecorationThickness(s, e, v)
+        return vm.undefined
       },
-      isAllowedInReadOnly: !1,
-      hasEditScope: !0,
+      isAllowedInReadOnly: false,
+      hasEditScope: true,
     })
-    t({
-      handle: p,
+    defineVmFunction({
+      handle,
       key: 'getRangeTextDecorationColor',
       metricsKey: 'node.getRangeTextDecorationColor',
-      cb(t, i) {
-        let n = o(this)
-        let [a, s] = m(n, t, i)
-        let l = n.getRangeTextDecorationFillPaints(a, s)
-        if (l === null)
-          return e.$$null
-        if (l === 'mixed')
-          return r
-        let d = extractSolidColorFromPaints(l.data)
-        let c = e.deepWrap(d)
-        e.deepFreezeObject(c)
-        return c
+      cb(start, end) {
+        const node = getNode(this)
+        const [s, e] = parseRange(node, start, end)
+        const val = node.getRangeTextDecorationFillPaints(s, e)
+        if (val === null)
+          return vm.$$null
+        if (val === 'mixed')
+          return mixedSentinel
+        const color = extractSolidColorFromPaints(val.data)
+        const wrapped = vm.deepWrap(color)
+        vm.deepFreezeObject(wrapped)
+        return wrapped
       },
-      isAllowedInReadOnly: !0,
-      hasEditScope: !1,
+      isAllowedInReadOnly: true,
+      hasEditScope: false,
     })
-    t({
-      handle: p,
+    defineVmFunction({
+      handle,
       key: 'setRangeTextDecorationColor',
       metricsKey: 'node.setRangeTextDecorationColor',
-      cb(t, i, n) {
-        let r = o(this)
-        let [l, d] = m(r, t, i)
-        let c = []
-        let u = {
-          data: processValidPaintValues(a, s, _$$u({
-            vm: e,
-            handle: n,
+      cb(start, end, value) {
+        const node = getNode(this)
+        const [s, e] = parseRange(node, start, end)
+        const blobs = []
+        const paints = {
+          data: processValidPaintValues(imageStore, videoStore, _$$u({
+            vm,
+            handle: value,
             zSchema: _$$N.TextDecorationColor,
             property: 'textDecorationColor',
-          }), c),
-          blobs: c,
+          }), blobs),
+          blobs,
         }
-        r.setRangeTextDecorationFillPaints(l, d, u)
-        return e.undefined
+        node.setRangeTextDecorationFillPaints(s, e, paints)
+        return vm.undefined
       },
-      isAllowedInReadOnly: !1,
-      hasEditScope: !0,
+      isAllowedInReadOnly: false,
+      hasEditScope: true,
     })
-    t({
-      handle: p,
+    defineVmFunction({
+      handle,
       key: 'getRangeTextCase',
       metricsKey: 'node.getRangeTextCase',
-      cb(t, i) {
-        let n = o(this)
-        let [a, s] = m(n, t, i)
-        return iz(e, r, n.getRangeTextCase(a, s), n.getRangeFontVariantCaps(a, s))
+      cb(start, end) {
+        const node = getNode(this)
+        const [s, e] = parseRange(node, start, end)
+        return normalizeTextCase(vm, mixedSentinel, node.getRangeTextCase(s, e), node.getRangeFontVariantCaps(s, e))
       },
-      isAllowedInReadOnly: !0,
-      hasEditScope: !1,
+      isAllowedInReadOnly: true,
+      hasEditScope: false,
     })
-    t({
-      handle: p,
+    defineVmFunction({
+      handle,
       key: 'setRangeTextCase',
       metricsKey: 'node.setRangeTextCase',
-      cb(t, i, n) {
-        let r = o(this)
-        let [a, s] = m(r, t, i)
-        let {
+      cb(start, end, value) {
+        const node = getNode(this)
+        const [s, e] = parseRange(node, start, end)
+        const {
           textCase,
           fontVariantCaps,
-        } = processTextCaseForSmallCaps(r, a, s, _$$u({
-          vm: e,
-          handle: n,
+        } = processTextCaseForSmallCaps(node, s, e, _$$u({
+          vm,
+          handle: value,
           zSchema: _$$N.TextCase,
           property: 'textCase',
         }))
-        r.setRangeTextCase(a, s, textCase)
-        r.setRangeFontVariantCaps(a, s, fontVariantCaps)
-        return e.undefined
+        node.setRangeTextCase(s, e, textCase)
+        node.setRangeFontVariantCaps(s, e, fontVariantCaps)
+        return vm.undefined
       },
-      isAllowedInReadOnly: !1,
-      hasEditScope: !0,
+      isAllowedInReadOnly: false,
+      hasEditScope: true,
     })
-    t({
-      handle: p,
+    defineVmFunction({
+      handle,
       key: 'getRangeOpenTypeFeatures',
       metricsKey: 'node.getRangeOpenTypeFeatures',
-      cb(t, i) {
-        let n = o(this)
-        let [a, s] = m(n, t, i)
+      cb(start, end) {
+        const node = getNode(this)
+        const [s, e] = parseRange(node, start, end)
         return processOpenTypeFeatures({
-          vm: e,
-          mixedSentinel: r,
-        }, n.getRangeToggledOnOpenTypeFeatures(a, s), n.getRangeToggledOffOpenTypeFeatures(a, s), n.getRangeFontVariantNumericFigure(a, s), n.getRangeFontVariantNumericSpacing(a, s), n.getRangeFontVariantNumericFraction(a, s), n.getRangeFontVariantPosition(a, s))
+          vm,
+          mixedSentinel,
+        }, node.getRangeToggledOnOpenTypeFeatures(s, e), node.getRangeToggledOffOpenTypeFeatures(s, e), node.getRangeFontVariantNumericFigure(s, e), node.getRangeFontVariantNumericSpacing(s, e), node.getRangeFontVariantNumericFraction(s, e), node.getRangeFontVariantPosition(s, e))
       },
-      isAllowedInReadOnly: !0,
-      hasEditScope: !1,
+      isAllowedInReadOnly: true,
+      hasEditScope: false,
     })
-    t({
-      handle: p,
+    defineVmFunction({
+      handle,
       key: 'getRangeLineHeight',
       metricsKey: 'node.getRangeLineHeight',
-      cb(t, i) {
-        let n = o(this)
-        let [a, s] = m(n, t, i)
-        let l = n.getRangeLineHeight(a, s)
-        if (l === 'mixed')
-          return r
-        let d = e.deepWrap(iC(l))
-        e.deepFreezeObject(d)
-        return d
+      cb(start, end) {
+        const node = getNode(this)
+        const [s, e] = parseRange(node, start, end)
+        const val = node.getRangeLineHeight(s, e)
+        if (val === 'mixed')
+          return mixedSentinel
+        const wrapped = vm.deepWrap(iC(val))
+        vm.deepFreezeObject(wrapped)
+        return wrapped
       },
-      isAllowedInReadOnly: !0,
-      hasEditScope: !1,
+      isAllowedInReadOnly: true,
+      hasEditScope: false,
     })
-    t({
-      handle: p,
+    defineVmFunction({
+      handle,
       key: 'setRangeLineHeight',
       metricsKey: 'node.setRangeLineHeight',
-      cb(t, i, n) {
-        let r = o(this)
-        let [a, s] = m(r, t, i)
-        let l = iT(_$$u({
-          vm: e,
-          handle: n,
+      cb(start, end, value) {
+        const node = getNode(this)
+        const [s, e] = parseRange(node, start, end)
+        const v = iT(_$$u({
+          vm,
+          handle: value,
           zSchema: _$$N.LineHeight,
           property: 'value',
         }))
-        r.setRangeLineHeight(a, s, l)
-        return e.undefined
+        node.setRangeLineHeight(s, e, v)
+        return vm.undefined
       },
-      isAllowedInReadOnly: !1,
-      hasEditScope: !0,
+      isAllowedInReadOnly: false,
+      hasEditScope: true,
     })
-    getFeatureFlags().ce_mixed_text_spacing && (t({
-      handle: p,
-      key: 'getRangeParagraphSpacing',
-      metricsKey: 'node.getRangeParagraphSpacing',
-      cb(t, i) {
-        let n = o(this)
-        let [a, s] = m(n, t, i)
-        let l = n.getRangeParagraphSpacing(a, s)
-        return l === 'mixed' ? r : e.newNumber(l)
-      },
-      isAllowedInReadOnly: !0,
-      hasEditScope: !1,
-    }), t({
-      handle: p,
-      key: 'setRangeParagraphSpacing',
-      metricsKey: 'node.setRangeParagraphSpacing',
-      cb(t, i, n) {
-        let r = o(this)
-        let [a, s] = m(r, t, i)
-        let l = _$$u({
-          vm: e,
-          handle: n,
-          zSchema: _$$z.number().finite().min(0),
-          property: 'value',
-        })
-        r.setRangeParagraphSpacing(a, s, l)
-        return e.undefined
-      },
-      isAllowedInReadOnly: !1,
-      hasEditScope: !0,
-    }))
-    t({
-      handle: p,
+    if (getFeatureFlags().ce_mixed_text_spacing) {
+      defineVmFunction({
+        handle,
+        key: 'getRangeParagraphSpacing',
+        metricsKey: 'node.getRangeParagraphSpacing',
+        cb(start, end) {
+          const node = getNode(this)
+          const [s, e] = parseRange(node, start, end)
+          const val = node.getRangeParagraphSpacing(s, e)
+          return val === 'mixed' ? mixedSentinel : vm.newNumber(val)
+        },
+        isAllowedInReadOnly: true,
+        hasEditScope: false,
+      })
+      defineVmFunction({
+        handle,
+        key: 'setRangeParagraphSpacing',
+        metricsKey: 'node.setRangeParagraphSpacing',
+        cb(start, end, value) {
+          const node = getNode(this)
+          const [s, e] = parseRange(node, start, end)
+          const v = _$$u({
+            vm,
+            handle: value,
+            zSchema: _$$z.number().finite().min(0),
+            property: 'value',
+          })
+          node.setRangeParagraphSpacing(s, e, v)
+          return vm.undefined
+        },
+        isAllowedInReadOnly: false,
+        hasEditScope: true,
+      })
+    }
+    defineVmFunction({
+      handle,
       key: 'getRangeLetterSpacing',
       metricsKey: 'node.getRangeLetterSpacing',
-      cb(t, i) {
-        let n = o(this)
-        let [a, s] = m(n, t, i)
-        let l = n.getRangeLetterSpacing(a, s)
-        if (l === 'mixed')
-          return r
-        let d = e.deepWrap({
-          unit: l.units,
-          value: l.value,
+      cb(start, end) {
+        const node = getNode(this)
+        const [s, e] = parseRange(node, start, end)
+        const val = node.getRangeLetterSpacing(s, e)
+        if (val === 'mixed')
+          return mixedSentinel
+        const wrapped = vm.deepWrap({
+          unit: val.units,
+          value: val.value,
         })
-        e.deepFreezeObject(d)
-        return d
+        vm.deepFreezeObject(wrapped)
+        return wrapped
       },
-      isAllowedInReadOnly: !0,
-      hasEditScope: !1,
+      isAllowedInReadOnly: true,
+      hasEditScope: false,
     })
-    t({
-      handle: p,
+    defineVmFunction({
+      handle,
       key: 'setRangeLetterSpacing',
       metricsKey: 'node.setRangeLetterSpacing',
-      cb(t, i, n) {
-        let r = o(this)
-        let [a, s] = m(r, t, i)
-        let l = _$$u({
-          vm: e,
-          handle: n,
+      cb(start, end, value) {
+        const node = getNode(this)
+        const [s, e] = parseRange(node, start, end)
+        const v = _$$u({
+          vm,
+          handle: value,
           zSchema: _$$N.LetterSpacing,
           property: 'value',
         })
-        r.setRangeLetterSpacing(a, s, {
-          units: l.unit,
-          value: l.value,
+        node.setRangeLetterSpacing(s, e, {
+          units: v.unit,
+          value: v.value,
         })
-        return e.undefined
+        return vm.undefined
       },
-      isAllowedInReadOnly: !1,
-      hasEditScope: !0,
+      isAllowedInReadOnly: false,
+      hasEditScope: true,
     })
-    t({
-      handle: p,
+    defineVmFunction({
+      handle,
       key: 'getRangeBoundVariable',
       metricsKey: 'node.getRangeBoundVariable',
-      cb(t, i, a) {
-        let s = o(this)
-        let [l, d] = m(s, t, i)
-        let c = _$$u({
-          vm: e,
-          handle: a,
-          zSchema: n.VariableBindableTextField,
+      cb(start, end, fieldHandle) {
+        const node = getNode(this)
+        const [s, e] = parseRange(node, start, end)
+        const field = _$$u({
+          vm,
+          handle: fieldHandle,
+          zSchema: variableDefinitions.VariableBindableTextField,
           property: 'field',
         })
-        let u = s.getRangeBoundVariable(l, d, c)
-        return u === 'mixed' ? r : e.deepWrap(u)
+        const val = node.getRangeBoundVariable(s, e, field)
+        return val === 'mixed' ? mixedSentinel : vm.deepWrap(val)
       },
-      isAllowedInReadOnly: !0,
-      hasEditScope: !1,
+      isAllowedInReadOnly: true,
+      hasEditScope: false,
     })
-    t({
-      handle: p,
+    defineVmFunction({
+      handle,
       key: 'setRangeBoundVariable',
       metricsKey: 'node.setRangeBoundVariable',
-      cb(t, i, r, a) {
-        let s = o(this)
-        let [l, d] = m(s, t, i)
-        let c = _$$u({
-          vm: e,
-          handle: r,
-          zSchema: getFeatureFlags().ce_mixed_text_spacing ? n.VariableBindableTextField : n.VariableBindableSubstringField,
+      cb(start, end, fieldHandle, variableHandle) {
+        const node = getNode(this)
+        const [s, e] = parseRange(node, start, end)
+        const field = _$$u({
+          vm,
+          handle: fieldHandle,
+          zSchema: getFeatureFlags().ce_mixed_text_spacing ? variableDefinitions.VariableBindableTextField : variableDefinitions.VariableBindableSubstringField,
           property: 'field',
         })
-        if (e.isNull(a)) {
-          s.setRangeBoundVariable(l, d, c, null)
-          return e.undefined
+        if (vm.isNull(variableHandle)) {
+          node.setRangeBoundVariable(s, e, field, null)
+          return vm.undefined
         }
-        if (o(a).type !== 'VARIABLE') {
+        if (getNode(variableHandle).type !== 'VARIABLE') {
           throw new Error('Cannot call setBoundVariable with a non-variable node.')
         }
-        let u = e.getStringProp(a, 'id')
-        s.setRangeBoundVariable(l, d, c, u)
-        return e.undefined
+        const id = vm.getStringProp(variableHandle, 'id')
+        node.setRangeBoundVariable(s, e, field, id)
+        return vm.undefined
       },
-      isAllowedInReadOnly: !1,
-      hasEditScope: !0,
+      isAllowedInReadOnly: false,
+      hasEditScope: true,
     })
-    t({
-      handle: p,
+    defineVmFunction({
+      handle,
       key: 'getRangeFills',
       metricsKey: 'node.getRangeFills',
-      cb(t, i) {
-        let n = o(this)
-        let [a, s] = m(n, t, i)
-        let l = n.getRangeFillPaints(a, s)
-        if (l === 'mixed')
-          return r
-        let d = e.deepWrap(convertPaintArrayData(l.data))
-        e.deepFreezeObject(d)
-        return d
+      cb(start, end) {
+        const node = getNode(this)
+        const [s, e] = parseRange(node, start, end)
+        const val = node.getRangeFillPaints(s, e)
+        if (val === 'mixed')
+          return mixedSentinel
+        const wrapped = vm.deepWrap(convertPaintArrayData(val.data))
+        vm.deepFreezeObject(wrapped)
+        return wrapped
       },
-      isAllowedInReadOnly: !0,
-      hasEditScope: !1,
+      isAllowedInReadOnly: true,
+      hasEditScope: false,
     })
-    t({
-      handle: p,
+    defineVmFunction({
+      handle,
       key: 'setRangeFills',
       metricsKey: 'node.setRangeFills',
-      cb(t, i, n) {
-        let r = o(this)
-        let [l, d] = m(r, t, i)
-        let c = []
-        let u = {
-          data: mapPaintConfigurations(a, s, _$$u({
-            vm: e,
-            handle: n,
+      cb(start, end, value) {
+        const node = getNode(this)
+        const [s, e] = parseRange(node, start, end)
+        const blobs = []
+        const paints = {
+          data: mapPaintConfigurations(imageStore, videoStore, _$$u({
+            vm,
+            handle: value,
             zSchema: _$$N.Paints,
             property: 'value',
-          }), c),
-          blobs: c,
+          }), blobs),
+          blobs,
         }
-        r.setRangeFillPaints(l, d, u)
-        return e.undefined
+        node.setRangeFillPaints(s, e, paints)
+        return vm.undefined
       },
-      isAllowedInReadOnly: !1,
-      hasEditScope: !0,
+      isAllowedInReadOnly: false,
+      hasEditScope: true,
     })
-    t({
-      handle: p,
+    defineVmFunction({
+      handle,
       key: 'getRangeTextStyleId',
       metricsKey: 'node.getRangeTextStyleId',
-      cb(t, i) {
-        let n = o(this)
-        let [a, s] = m(n, t, i)
-        let l = n.getRangeInheritedTextStyle(a, s)
-        return l === 'mixed' ? r : e.newString(_$$nM(l))
+      cb(start, end) {
+        const node = getNode(this)
+        const [s, e] = parseRange(node, start, end)
+        const val = node.getRangeInheritedTextStyle(s, e)
+        return val === 'mixed' ? mixedSentinel : vm.newString(_$$nM(val))
       },
-      isAllowedInReadOnly: !0,
-      hasEditScope: !1,
+      isAllowedInReadOnly: true,
+      hasEditScope: false,
     })
-    i({
-      handle: p,
+    defineVmIncrementalMethod({
+      handle,
       key: 'setRangeTextStyleId',
       metricsKey: 'node.setRangeTextStyleId',
       incrementalSafeApiKey: 'setRangeTextStyleIdAsync',
       incrementalSafeApiMetricsKey: 'node.setRangeTextStyleIdAsync',
-      parseThis(e) {
-        return o(e)
-      },
-      parseArg(t, i, n, r) {
-        let [a, s] = m(t, i, n)
+      parseThis: getNode,
+      parseArg(node, start, end, value) {
+        const [s, e] = parseRange(node, start, end)
         return {
-          start: a,
-          end: s,
+          start: s,
+          end: e,
           styleKey: _$$eX(_$$u({
-            vm: e,
-            handle: r,
+            vm,
+            handle: value,
             zSchema: _$$z.string(),
             property: 'value',
           })),
         }
       },
-      prepareDocument: async (_e, { }) => {
-        await Ux(c)
+      prepareDocument: async () => {
+        await Ux(documentAccessState)
       },
-      resolveValue: (t, {
-        start: i,
-        end: n,
-        styleKey: r,
-      }) => (t.setRangeInheritedTextStyle(i, n, r), e.undefined),
-      incrementalSafeApi: d,
-      allowIncrementalUnsafeApiCalls: u,
-      isAllowedInReadOnly: !1,
-      hasEditScope: !0,
+      resolveValue: (node, {
+        start,
+        end,
+        styleKey,
+      }) => {
+        node.setRangeInheritedTextStyle(start, end, styleKey)
+        return vm.undefined
+      },
+      incrementalSafeApi,
+      allowIncrementalUnsafeApiCalls,
+      isAllowedInReadOnly: false,
+      hasEditScope: true,
     })
-    t({
-      handle: p,
+    defineVmFunction({
+      handle,
       key: 'getRangeFillStyleId',
       metricsKey: 'node.getRangeFillStyleId',
-      cb(t, i) {
-        let n = o(this)
-        let [a, s] = m(n, t, i)
-        let l = n.getRangeInheritedFillStyle(a, s)
-        return l === 'mixed' ? r : e.newString(_$$nM(l))
+      cb(start, end) {
+        const node = getNode(this)
+        const [s, e] = parseRange(node, start, end)
+        const val = node.getRangeInheritedFillStyle(s, e)
+        return val === 'mixed' ? mixedSentinel : vm.newString(_$$nM(val))
       },
-      isAllowedInReadOnly: !0,
-      hasEditScope: !1,
+      isAllowedInReadOnly: true,
+      hasEditScope: false,
     })
-    i({
-      handle: p,
+    defineVmIncrementalMethod({
+      handle,
       key: 'setRangeFillStyleId',
       metricsKey: 'node.setRangeFillStyleId',
       incrementalSafeApiKey: 'setRangeFillStyleIdAsync',
       incrementalSafeApiMetricsKey: 'node.setRangeFillStyleIdAsync',
-      parseThis(e) {
-        return o(e)
-      },
-      parseArg(t, i, n, r) {
-        let [a, s] = m(t, i, n)
+      parseThis: getNode,
+      parseArg(node, start, end, value) {
+        const [s, e] = parseRange(node, start, end)
         return {
-          start: a,
-          end: s,
+          start: s,
+          end: e,
           styleKey: _$$eX(_$$u({
-            vm: e,
-            handle: r,
+            vm,
+            handle: value,
             zSchema: _$$z.string(),
             property: 'value',
           })),
         }
       },
-      prepareDocument: async (_e, { }) => {
-        await Ux(c)
+      prepareDocument: async () => {
+        await Ux(documentAccessState)
       },
-      resolveValue: (t, {
-        start: i,
-        end: n,
-        styleKey: r,
-      }) => (t.setRangeInheritedFillStyle(i, n, r), e.undefined),
-      incrementalSafeApi: d,
-      allowIncrementalUnsafeApiCalls: u,
-      isAllowedInReadOnly: !1,
-      hasEditScope: !0,
+      resolveValue: (node, {
+        start,
+        end,
+        styleKey,
+      }) => {
+        node.setRangeInheritedFillStyle(start, end, styleKey)
+        return vm.undefined
+      },
+      incrementalSafeApi,
+      allowIncrementalUnsafeApiCalls,
+      isAllowedInReadOnly: false,
+      hasEditScope: true,
     })
-    t({
-      handle: p,
+    defineVmFunction({
+      handle,
       key: 'getRangeListOptions',
       metricsKey: 'node.getRangeListOptions',
-      cb(t, i) {
-        let n = o(this)
-        let [a, s] = m(n, t, i)
-        let l = n.getRangeLineType(a, s)
-        return l === 'mixed' ? r : e.deepWrap(convertListOption(l))
+      cb(start, end) {
+        const node = getNode(this)
+        const [s, e] = parseRange(node, start, end)
+        const val = node.getRangeLineType(s, e)
+        return val === 'mixed' ? mixedSentinel : vm.deepWrap(convertListOption(val))
       },
-      isAllowedInReadOnly: !0,
-      hasEditScope: !1,
+      isAllowedInReadOnly: true,
+      hasEditScope: false,
     })
-    t({
-      handle: p,
+    defineVmFunction({
+      handle,
       key: 'setRangeListOptions',
       metricsKey: 'node.setRangeListOptions',
-      cb(t, i, n) {
-        let r = o(this)
-        let [a, s] = m(r, t, i)
-        let l = (function (e) {
-          if (e.type === 'ORDERED') 
-return 'ORDERED_LIST'
-          if (e.type === 'UNORDERED') 
-return 'UNORDERED_LIST'
-          if (e.type === 'NONE') 
-return 'PLAIN'
-          throw new Error('Unknown list option')
-        }(_$$u({
-          vm: e,
-          handle: n,
+      cb(start, end, value) {
+        const node = getNode(this)
+        const [s, e] = parseRange(node, start, end)
+        const v = _$$u({
+          vm,
+          handle: value,
           zSchema: _$$N.TextListOptions,
           property: 'options',
-        })))
-        r.setRangeLineType(a, s, l)
-        return e.undefined
-      },
-      isAllowedInReadOnly: !1,
-      hasEditScope: !0,
-    })
-    getFeatureFlags().ce_mixed_text_spacing && (t({
-      handle: p,
-      key: 'getRangeListSpacing',
-      metricsKey: 'node.getRangeListSpacing',
-      cb(t, i) {
-        let n = o(this)
-        let [a, s] = m(n, t, i)
-        let l = n.getRangeListSpacing(a, s)
-        return l === 'mixed' ? r : e.newNumber(l)
-      },
-      isAllowedInReadOnly: !0,
-      hasEditScope: !1,
-    }), t({
-      handle: p,
-      key: 'setRangeListSpacing',
-      metricsKey: 'node.setRangeListSpacing',
-      cb(t, i, n) {
-        let r = o(this)
-        let [a, s] = m(r, t, i)
-        let l = _$$u({
-          vm: e,
-          handle: n,
-          zSchema: _$$z.number().finite().min(0),
-          property: 'value',
         })
-        r.setRangeListSpacing(a, s, l)
-        return e.undefined
+        let type
+        if (v.type === 'ORDERED')
+          type = 'ORDERED_LIST'; else if (v.type === 'UNORDERED')
+          type = 'UNORDERED_LIST'; else if (v.type === 'NONE')
+          type = 'PLAIN'; else throw new Error('Unknown list option')
+        node.setRangeLineType(s, e, type)
+        return vm.undefined
       },
-      isAllowedInReadOnly: !1,
-      hasEditScope: !0,
-    }))
-    t({
-      handle: p,
+      isAllowedInReadOnly: false,
+      hasEditScope: true,
+    })
+    if (getFeatureFlags().ce_mixed_text_spacing) {
+      defineVmFunction({
+        handle,
+        key: 'getRangeListSpacing',
+        metricsKey: 'node.getRangeListSpacing',
+        cb(start, end) {
+          const node = getNode(this)
+          const [s, e] = parseRange(node, start, end)
+          const val = node.getRangeListSpacing(s, e)
+          return val === 'mixed' ? mixedSentinel : vm.newNumber(val)
+        },
+        isAllowedInReadOnly: true,
+        hasEditScope: false,
+      })
+      defineVmFunction({
+        handle,
+        key: 'setRangeListSpacing',
+        metricsKey: 'node.setRangeListSpacing',
+        cb(start, end, value) {
+          const node = getNode(this)
+          const [s, e] = parseRange(node, start, end)
+          const v = _$$u({
+            vm,
+            handle: value,
+            zSchema: _$$z.number().finite().min(0),
+            property: 'value',
+          })
+          node.setRangeListSpacing(s, e, v)
+          return vm.undefined
+        },
+        isAllowedInReadOnly: false,
+        hasEditScope: true,
+      })
+    }
+    defineVmFunction({
+      handle,
       key: 'getRangeIndentation',
       metricsKey: 'node.getRangeIndentation',
-      cb(t, i) {
-        let n = o(this)
-        let [a, s] = m(n, t, i)
-        let l = n.getRangeLineIndentation(a, s)
-        return l === 'mixed' ? r : e.newNumber(l)
+      cb(start, end) {
+        const node = getNode(this)
+        const [s, e] = parseRange(node, start, end)
+        const val = node.getRangeLineIndentation(s, e)
+        return val === 'mixed' ? mixedSentinel : vm.newNumber(val)
       },
-      isAllowedInReadOnly: !0,
-      hasEditScope: !1,
+      isAllowedInReadOnly: true,
+      hasEditScope: false,
     })
-    t({
-      handle: p,
+    defineVmFunction({
+      handle,
       key: 'setRangeIndentation',
       metricsKey: 'node.setRangeIndentation',
-      cb(t, i, n) {
-        let r = o(this)
-        let [a, s] = m(r, t, i)
-        let l = _$$u({
-          vm: e,
-          handle: n,
+      cb(start, end, value) {
+        const node = getNode(this)
+        const [s, e] = parseRange(node, start, end)
+        const v = _$$u({
+          vm,
+          handle: value,
           zSchema: _$$N.TextIndentation,
           property: 'indentation',
         })
-        r.setRangeLineIndentation(a, s, l)
-        return e.undefined
+        node.setRangeLineIndentation(s, e, v)
+        return vm.undefined
       },
-      isAllowedInReadOnly: !1,
-      hasEditScope: !0,
+      isAllowedInReadOnly: false,
+      hasEditScope: true,
     })
-    getFeatureFlags().ce_mixed_text_spacing && (t({
-      handle: p,
-      key: 'getRangeParagraphIndent',
-      metricsKey: 'node.getRangeParagraphIndent',
-      cb(t, i) {
-        let n = o(this)
-        let [a, s] = m(n, t, i)
-        let l = n.getRangeParagraphIndent(a, s)
-        return l === 'mixed' ? r : e.newNumber(l)
-      },
-      isAllowedInReadOnly: !0,
-      hasEditScope: !1,
-    }), t({
-      handle: p,
-      key: 'setRangeParagraphIndent',
-      metricsKey: 'node.setRangeParagraphIndent',
-      cb(t, i, n) {
-        let r = o(this)
-        let [a, s] = m(r, t, i)
-        let l = _$$u({
-          vm: e,
-          handle: n,
-          zSchema: _$$z.number().finite().min(0),
-          property: 'value',
-        })
-        r.setRangeParagraphIndent(a, s, l)
-        return e.undefined
-      },
-      isAllowedInReadOnly: !1,
-      hasEditScope: !0,
-    }))
-    t({
-      handle: p,
+    if (getFeatureFlags().ce_mixed_text_spacing) {
+      defineVmFunction({
+        handle,
+        key: 'getRangeParagraphIndent',
+        metricsKey: 'node.getRangeParagraphIndent',
+        cb(start, end) {
+          const node = getNode(this)
+          const [s, e] = parseRange(node, start, end)
+          const val = node.getRangeParagraphIndent(s, e)
+          return val === 'mixed' ? mixedSentinel : vm.newNumber(val)
+        },
+        isAllowedInReadOnly: true,
+        hasEditScope: false,
+      })
+      defineVmFunction({
+        handle,
+        key: 'setRangeParagraphIndent',
+        metricsKey: 'node.setRangeParagraphIndent',
+        cb(start, end, value) {
+          const node = getNode(this)
+          const [s, e] = parseRange(node, start, end)
+          const v = _$$u({
+            vm,
+            handle: value,
+            zSchema: _$$z.number().finite().min(0),
+            property: 'value',
+          })
+          node.setRangeParagraphIndent(s, e, v)
+          return vm.undefined
+        },
+        isAllowedInReadOnly: false,
+        hasEditScope: true,
+      })
+    }
+    defineVmFunction({
+      handle,
       key: 'getRangeHyperlink',
       metricsKey: 'node.getRangeHyperlink',
-      cb(t, i) {
-        let n = o(this)
-        let [a, s] = m(n, t, i)
-        let l = n.getRangeHyperlink(a, s)
-        return l === 'mixed' ? r : e.deepWrap(l || e.$$null)
+      cb(start, end) {
+        const node = getNode(this)
+        const [s, e] = parseRange(node, start, end)
+        const val = node.getRangeHyperlink(s, e)
+        return val === 'mixed' ? mixedSentinel : vm.deepWrap(val || vm.$$null)
       },
-      isAllowedInReadOnly: !0,
-      hasEditScope: !1,
+      isAllowedInReadOnly: true,
+      hasEditScope: false,
     })
-    t({
-      handle: p,
+    defineVmFunction({
+      handle,
       key: 'setRangeHyperlink',
       metricsKey: 'node.setRangeHyperlink',
-      cb(t, i, n) {
-        let r = o(this)
-        let [a, s] = m(r, t, i)
-        let l = _$$u({
-          vm: e,
-          handle: n,
+      cb(start, end, value) {
+        const node = getNode(this)
+        const [s, e] = parseRange(node, start, end)
+        const v = _$$u({
+          vm,
+          handle: value,
           zSchema: _$$N.TextHyperlinkOptions,
           property: 'hyperlink',
         })
-        r.setRangeHyperlink(a, s, l)
-        return e.undefined
+        node.setRangeHyperlink(s, e, v)
+        return vm.undefined
       },
-      isAllowedInReadOnly: !1,
-      hasEditScope: !0,
+      isAllowedInReadOnly: false,
+      hasEditScope: true,
     })
-    t({
-      handle: p,
+    defineVmFunction({
+      handle,
       key: 'getStyledTextSegments',
       metricsKey: 'node.getStyledTextSegments',
-      cb(t, i, n) {
-        let a
-        let s = o(this)
-        let d = _$$u({
-          vm: e,
-          handle: t,
+      cb(fieldsHandle, start, end) {
+        let node = getNode(this)
+        let fields = _$$u({
+          vm,
+          handle: fieldsHandle,
           zSchema: _$$N.StyledTextSegmentFields,
           property: 'getStyledTextSegments',
         })
-        if (d.includes('textCase') && d.push('fontVariantCaps'), d.includes('openTypeFeatures') && (d.push('fontVariantNumericFigure'), d.push('fontVariantNumericSpacing'), d.push('fontVariantNumericFraction'), d.push('fontVariantPosition'), d.push('toggledOnOTFeatures'), d.push('toggledOffOTFeatures')), d.includes('textDecorationColor') && d.push('textDecorationFills'), e.isUndefined(i) || e.isUndefined(n)) {
-          if (e.isUndefined(i) && e.isUndefined(n)) {
-            a = s.getStyledTextSegments(d)
-          }
- else {
-            throw new TypeError('Invalid range. Must provide both \'start\' and \'end\'')
-          }
+        if (fields.includes('textCase'))
+          fields.push('fontVariantCaps')
+        if (fields.includes('openTypeFeatures')) {
+          fields.push('fontVariantNumericFigure', 'fontVariantNumericSpacing', 'fontVariantNumericFraction', 'fontVariantPosition', 'toggledOnOTFeatures', 'toggledOffOTFeatures')
+        }
+        if (fields.includes('textDecorationColor'))
+          fields.push('textDecorationFills')
+        let segments
+        if (vm.isUndefined(start) && vm.isUndefined(end)) {
+          segments = node.getStyledTextSegments(fields)
+        }
+        else if (vm.isUndefined(start) || vm.isUndefined(end)) {
+          throw new TypeError('Invalid range. Must provide both \'start\' and \'end\'')
         }
         else {
-          let [e, t] = m(s, i, n)
-          a = s.getStyledTextSegments(d, e, t)
+          const [s, e] = parseRange(node, start, end)
+          segments = node.getStyledTextSegments(fields, s, e)
         }
-        let c = e.newArray()
-        for (let [t, i] of a.entries()) {
-          let n = e.newObject()
-          if (e.setProp(n, 'characters', e.newString(i.characters)), e.setProp(n, 'start', e.newNumber(i.start)), e.setProp(n, 'end', e.newNumber(i.end)), void 0 !== i.fontSize && e.setProp(n, 'fontSize', e.newNumber(i.fontSize)), void 0 !== i.fontName) {
-            let t = e.deepWrap({
-              family: i.fontName.family,
-              style: i.fontName.style,
+        const arr = vm.newArray()
+        for (const [idx, seg] of segments.entries()) {
+          const obj = vm.newObject()
+          vm.setProp(obj, 'characters', vm.newString(seg.characters))
+          vm.setProp(obj, 'start', vm.newNumber(seg.start))
+          vm.setProp(obj, 'end', vm.newNumber(seg.end))
+          if (seg.fontSize !== undefined)
+            vm.setProp(obj, 'fontSize', vm.newNumber(seg.fontSize))
+          if (seg.fontName !== undefined) {
+            const fontName = vm.deepWrap({
+              family: seg.fontName.family,
+              style: seg.fontName.style,
             })
-            e.setProp(n, 'fontName', t)
+            vm.setProp(obj, 'fontName', fontName)
           }
-          if (void 0 !== i.fontWeight && e.setProp(n, 'fontWeight', e.newNumber(i.fontWeight)), void 0 !== i.textDecoration && e.setProp(n, 'textDecoration', e.newString(i.textDecoration)), void 0 !== i.textDecorationStyle && e.setProp(n, 'textDecorationStyle', i.textDecorationStyle ? e.newString(i.textDecorationStyle) : e.$$null), void 0 !== i.textDecorationSkipInk && e.setProp(n, 'textDecorationSkipInk', i.textDecorationSkipInk !== null ? e.newBoolean(i.textDecorationSkipInk) : e.$$null), void 0 !== i.textDecorationOffset && e.setProp(n, 'textDecorationOffset', i.textDecorationOffset ? e.deepWrap(ik(i.textDecorationOffset)) : e.$$null), void 0 !== i.textDecorationThickness && e.setProp(n, 'textDecorationThickness', i.textDecorationThickness ? e.deepWrap(convertTextDecorationThicknessFromLegacy(i.textDecorationThickness)) : e.$$null), void 0 !== i.textDecorationFills && e.setProp(n, 'textDecorationColor', i.textDecorationFills ? e.deepWrap(extractSolidColorFromPaints(i.textDecorationFills.data)) : e.$$null), void 0 !== i.textCase && e.setProp(n, 'textCase', iz(e, r, i.textCase, i.fontVariantCaps)), void 0 !== i.lineHeight && e.setProp(n, 'lineHeight', e.deepWrap(iC(i.lineHeight))), void 0 !== i.letterSpacing) {
-            let t = e.deepWrap({
-              unit: i.letterSpacing.units,
-              value: i.letterSpacing.value,
+          if (seg.fontWeight !== undefined)
+            vm.setProp(obj, 'fontWeight', vm.newNumber(seg.fontWeight))
+          if (seg.textDecoration !== undefined)
+            vm.setProp(obj, 'textDecoration', vm.newString(seg.textDecoration))
+          if (seg.textDecorationStyle !== undefined) {
+            vm.setProp(obj, 'textDecorationStyle', seg.textDecorationStyle ? vm.newString(seg.textDecorationStyle) : vm.$$null)
+          }
+          if (seg.textDecorationSkipInk !== undefined) {
+            vm.setProp(obj, 'textDecorationSkipInk', seg.textDecorationSkipInk !== null ? vm.newBoolean(seg.textDecorationSkipInk) : vm.$$null)
+          }
+          if (seg.textDecorationOffset !== undefined) {
+            vm.setProp(obj, 'textDecorationOffset', seg.textDecorationOffset ? vm.deepWrap(ik(seg.textDecorationOffset)) : vm.$$null)
+          }
+          if (seg.textDecorationThickness !== undefined) {
+            vm.setProp(obj, 'textDecorationThickness', seg.textDecorationThickness ? vm.deepWrap(convertTextDecorationThicknessFromLegacy(seg.textDecorationThickness)) : vm.$$null)
+          }
+          if (seg.textDecorationFills !== undefined) {
+            vm.setProp(obj, 'textDecorationColor', seg.textDecorationFills ? vm.deepWrap(extractSolidColorFromPaints(seg.textDecorationFills.data)) : vm.$$null)
+          }
+          if (seg.textCase !== undefined) {
+            vm.setProp(obj, 'textCase', normalizeTextCase(vm, mixedSentinel, seg.textCase, seg.fontVariantCaps))
+          }
+          if (seg.lineHeight !== undefined)
+            vm.setProp(obj, 'lineHeight', vm.deepWrap(iC(seg.lineHeight)))
+          if (seg.letterSpacing !== undefined) {
+            const ls = vm.deepWrap({
+              unit: seg.letterSpacing.units,
+              value: seg.letterSpacing.value,
             })
-            e.setProp(n, 'letterSpacing', t)
+            vm.setProp(obj, 'letterSpacing', ls)
           }
-          void 0 !== i.fills && e.setProp(n, 'fills', e.deepWrap(convertPaintArrayData(i.fills.data)))
-          void 0 !== i.textStyleId && e.setProp(n, 'textStyleId', e.newString(_$$nM(i.textStyleId)))
-          void 0 !== i.fillStyleId && e.setProp(n, 'fillStyleId', e.newString(_$$nM(i.fillStyleId)))
-          void 0 !== i.listOptions && e.setProp(n, 'listOptions', e.deepWrap(convertListOption(i.listOptions)))
-          void 0 !== i.indentation && e.setProp(n, 'indentation', e.newNumber(i.indentation))
-          void 0 !== i.hyperlink && e.setProp(n, 'hyperlink', i.hyperlink ? e.deepWrap(i.hyperlink) : e.$$null)
-          void 0 !== i.boundVariables && e.setProp(n, 'boundVariables', i.boundVariables ? e.deepWrap(i.boundVariables) : e.$$null)
-          void 0 !== i.textStyleOverrides && e.setProp(n, 'textStyleOverrides', i.textStyleOverrides ? e.deepWrap(i.textStyleOverrides) : e.$$null)
-          void 0 !== i.paragraphSpacing && e.setProp(n, 'paragraphSpacing', e.newNumber(i.paragraphSpacing))
-          void 0 !== i.listSpacing && e.setProp(n, 'listSpacing', e.newNumber(i.listSpacing))
-          void 0 !== i.paragraphIndent && e.setProp(n, 'paragraphIndent', e.newNumber(i.paragraphIndent))
-          void 0 !== i.fontVariantNumericFigure && void 0 !== i.fontVariantNumericSpacing && void 0 !== i.fontVariantNumericFraction && void 0 !== i.toggledOnOTFeatures && void 0 !== i.toggledOffOTFeatures && void 0 !== i.fontVariantPosition && e.setProp(n, 'openTypeFeatures', processOpenTypeFeatures({
-            vm: e,
-            mixedSentinel: r,
-          }, i.toggledOnOTFeatures, i.toggledOffOTFeatures, i.fontVariantNumericFigure, i.fontVariantNumericSpacing, i.fontVariantNumericFraction, i.fontVariantPosition))
-          e.setProp(c, t.toString(), n)
+          if (seg.fills !== undefined) {
+            vm.setProp(obj, 'fills', vm.deepWrap(convertPaintArrayData(seg.fills.data)))
+          }
+          if (seg.textStyleId !== undefined) {
+            vm.setProp(obj, 'textStyleId', vm.newString(_$$nM(seg.textStyleId)))
+          }
+          if (seg.fillStyleId !== undefined) {
+            vm.setProp(obj, 'fillStyleId', vm.newString(_$$nM(seg.fillStyleId)))
+          }
+          if (seg.listOptions !== undefined) {
+            vm.setProp(obj, 'listOptions', vm.deepWrap(convertListOption(seg.listOptions)))
+          }
+          if (seg.indentation !== undefined)
+            vm.setProp(obj, 'indentation', vm.newNumber(seg.indentation))
+          if (seg.hyperlink !== undefined) {
+            vm.setProp(obj, 'hyperlink', seg.hyperlink ? vm.deepWrap(seg.hyperlink) : vm.$$null)
+          }
+          if (seg.boundVariables !== undefined) {
+            vm.setProp(obj, 'boundVariables', seg.boundVariables ? vm.deepWrap(seg.boundVariables) : vm.$$null)
+          }
+          if (seg.textStyleOverrides !== undefined) {
+            vm.setProp(obj, 'textStyleOverrides', seg.textStyleOverrides ? vm.deepWrap(seg.textStyleOverrides) : vm.$$null)
+          }
+          if (seg.paragraphSpacing !== undefined) {
+            vm.setProp(obj, 'paragraphSpacing', vm.newNumber(seg.paragraphSpacing))
+          }
+          if (seg.listSpacing !== undefined)
+            vm.setProp(obj, 'listSpacing', vm.newNumber(seg.listSpacing))
+          if (seg.paragraphIndent !== undefined) {
+            vm.setProp(obj, 'paragraphIndent', vm.newNumber(seg.paragraphIndent))
+          }
+          if (seg.fontVariantNumericFigure !== undefined && seg.fontVariantNumericSpacing !== undefined && seg.fontVariantNumericFraction !== undefined && seg.toggledOnOTFeatures !== undefined && seg.toggledOffOTFeatures !== undefined && seg.fontVariantPosition !== undefined) {
+            vm.setProp(obj, 'openTypeFeatures', processOpenTypeFeatures({
+              vm,
+              mixedSentinel,
+            }, seg.toggledOnOTFeatures, seg.toggledOffOTFeatures, seg.fontVariantNumericFigure, seg.fontVariantNumericSpacing, seg.fontVariantNumericFraction, seg.fontVariantPosition))
+          }
+          vm.setProp(arr, idx.toString(), obj)
         }
-        e.deepFreezeObject(c)
-        return c
+        vm.deepFreezeObject(arr)
+        return arr
       },
-      isAllowedInReadOnly: !0,
-      hasEditScope: !1,
+      isAllowedInReadOnly: true,
+      hasEditScope: false,
     })
   },
   outlineStroke({
@@ -10927,7 +11786,7 @@ return 'PLAIN'
         try {
           return i().createNode(a, 'node.outlineStroke')
         }
- catch (i) {
+        catch (i) {
           if (i instanceof ApplicationError && t.type === 'TEXT') {
             x1('node.outlineStroke', 'Attempted to create an outline stroke from a text node with no existing stroke', {
               pluginId: r,
@@ -11068,7 +11927,10 @@ return 'PLAIN'
             zSchema: _$$N.CodeBlockLanguage,
             property: 'codeLanguage',
           })
-          n === 'DART' && ($D(_$$e.EXTENSIBILITY, new Error('codeLanguage incorrectly set to DART')), n = 'TYPESCRIPT')
+          if (n === 'DART') {
+            $D(_$$e.EXTENSIBILITY, new Error('codeLanguage incorrectly set to DART'))
+            n = 'TYPESCRIPT'
+          }
           i(this).codeBlockLanguage = n
         },
       },
@@ -11205,23 +12067,23 @@ return 'PLAIN'
         s = d === 'VARIANT'
           ? o.addVariantComponentPropertyDefinition(l, u)
           : o.addComponentPropertyDefinition(l, (function (e) {
-              switch (e) {
-                case 'BOOLEAN':
-                  return 'BOOL'
-            case 'TEXT':
-                  return 'TEXT'
-            case 'INSTANCE_SWAP':
-                  return 'INSTANCE_SWAP'
-            case 'NUMBER':
-                  return 'NUMBER'
-            case 'IMAGE':
-                  return 'IMAGE'
-            case 'SLOT':
-                  return 'SLOT'
-            default:
-                  return ''
-          }
-            }(d)), u, m)
+            switch (e) {
+              case 'BOOLEAN':
+                return 'BOOL'
+              case 'TEXT':
+                return 'TEXT'
+              case 'INSTANCE_SWAP':
+                return 'INSTANCE_SWAP'
+              case 'NUMBER':
+                return 'NUMBER'
+              case 'IMAGE':
+                return 'IMAGE'
+              case 'SLOT':
+                return 'SLOT'
+              default:
+                return ''
+            }
+          }(d)), u, m)
         return e.newString(s)
       },
       isAllowedInReadOnly: !1,
@@ -11352,134 +12214,136 @@ return 'PLAIN'
     })
   },
   exposedInstances({
-    vm: e,
-    defineVmProp: t,
-    getNodeFactory: i,
-    getNode: n,
-  }, r) {
-    t({
-      handle: r,
+    vm,
+    defineVmProp,
+    getNodeFactory,
+    getNode,
+  }, handle) {
+    defineVmProp({
+      handle,
       key: 'exposedInstances',
       options: {
-        enumerable: !0,
+        enumerable: true,
         metricsKey: 'node.exposedInstances',
         get() {
-          let t = n(this).exposedInstances.map(e => e.guid)
-          let r = e.newArray()
-          let a = 0
-          for (let n of t) {
-            let t = i().createNode(n, 'node.exposedInstances')
-            !e.isNull(t) && (e.setProp(r, a.toString(), t), a++)
+          const guids = getNode(this).exposedInstances.map(x => x.guid)
+          const arr = vm.newArray()
+          let idx = 0
+          for (const guid of guids) {
+            const node = getNodeFactory().createNode(guid, 'node.exposedInstances')
+            if (!vm.isNull(node)) {
+              vm.setProp(arr, idx.toString(), node)
+              idx++
+            }
           }
-          e.deepFreezeObject(r)
-          return r
+          vm.deepFreezeObject(arr)
+          return arr
         },
       },
-      canWriteInReadOnly: !1,
-      hasEditScope: !1,
+      canWriteInReadOnly: false,
+      hasEditScope: false,
     })
   },
   overrides({
-    vm: e,
-    defineVmProp: t,
-    getNode: i,
-  }, n) {
-    t({
-      handle: n,
+    vm,
+    defineVmProp,
+    getNode,
+  }, handle) {
+    defineVmProp({
+      handle,
       key: 'overrides',
       options: {
-        enumerable: !0,
+        enumerable: true,
         metricsKey: 'node.overrides',
         get() {
-          let t = i(this).overrides
-          for (let e of t) {
-            let t = e.overriddenFields.indexOf('strokeTopWeight')
-            t >= 0 && (e.overriddenFields[t] = 'stokeTopWeight')
+          const overrides = getNode(this).overrides
+          for (const o of overrides) {
+            const idx = o.overriddenFields.indexOf('strokeTopWeight')
+            if (idx >= 0)
+              o.overriddenFields[idx] = 'stokeTopWeight'
           }
-          let n = e.deepWrap(t)
-          e.deepFreezeObject(n)
-          return n
+          const wrapped = vm.deepWrap(overrides)
+          vm.deepFreezeObject(wrapped)
+          return wrapped
         },
       },
-      canWriteInReadOnly: !1,
-      hasEditScope: !1,
+      canWriteInReadOnly: false,
+      hasEditScope: false,
     })
   },
   resetOverrides({
-    vm: e,
-    defineVmFunction: t,
-    getNode: i,
-  }, n) {
-    t({
-      handle: n,
+    vm,
+    defineVmFunction,
+    getNode,
+  }, handle) {
+    defineVmFunction({
+      handle,
       key: 'resetOverrides',
       metricsKey: 'node.resetOverrides',
       cb() {
-        i(this).resetOverrides()
-        return e.undefined
+        getNode(this).resetOverrides()
+        return vm.undefined
       },
-      isAllowedInReadOnly: !1,
-      hasEditScope: !0,
+      isAllowedInReadOnly: false,
+      hasEditScope: true,
     })
   },
   instances({
-    vm: e,
-    defineVmIncrementalProp: t,
-    getNodeFactory: i,
-    incrementalSafeApi: n,
-    getNode: r,
-    documentAccessState: a,
-    allowIncrementalUnsafeApiCalls: s,
-  }, o) {
-    t({
-      handle: o,
+    vm,
+    defineVmIncrementalProp,
+    getNodeFactory,
+    incrementalSafeApi,
+    getNode,
+    documentAccessState,
+    allowIncrementalUnsafeApiCalls,
+  }, handle) {
+    defineVmIncrementalProp({
+      handle,
       key: 'instances',
       metricsKey: 'node.instances',
-      enumerable: !0,
+      enumerable: true,
       incrementalSafeApiKey: 'getInstancesAsync',
       incrementalSafeApiMetricsKey: 'node.getInstancesAsync',
-      canWriteInReadOnly: !1,
-      resolveValue: (t) => {
-        let n = t.instances.map(e => e.guid)
-        let r = e.newArray()
-        for (let t = 0; t < n.length; t++) {
-          let a = i().createNode(n[t], 'node.instances')
-          e.setProp(r, String(t), a)
+      canWriteInReadOnly: false,
+      resolveValue: (node) => {
+        const guids = node.instances.map(x => x.guid)
+        const arr = vm.newArray()
+        for (let i = 0; i < guids.length; i++) {
+          const n = getNodeFactory().createNode(guids[i], 'node.instances')
+          vm.setProp(arr, String(i), n)
         }
-        e.shallowFreezeObject(r)
-        return r
+        vm.shallowFreezeObject(arr)
+        return arr
       },
-      prepareDocument: async (e) => {
-        let t = e.instances.map(e => e.guid)
-        await fs(t, a)
+      prepareDocument: async (node) => {
+        const guids = node.instances.map(x => x.guid)
+        await fs(guids, documentAccessState)
       },
-      parseThis(e) {
-        return r(e)
-      },
-      incrementalSafeApi: n,
-      allowIncrementalUnsafeApiCalls: s,
-      hasEditScope: !1,
+      parseThis: getNode,
+      incrementalSafeApi,
+      allowIncrementalUnsafeApiCalls,
+      hasEditScope: false,
     })
   },
   textSublayer({
-    vm: e,
-    defineVmProp: t,
-    getNodeFactory: i,
-    getNode: n,
-  }, r) {
-    t({
-      handle: r,
+    vm,
+    defineVmProp,
+    getNodeFactory,
+    getNode,
+  }, handle) {
+    defineVmProp({
+      handle,
       key: 'text',
       options: {
-        enumerable: !0,
+        enumerable: true,
         metricsKey: 'node.text',
         get() {
-          let t = n(this).textSublayer
-          return t ? i().createNode(t.guid, 'node.text') : e.$$null
+          const sub = getNode(this).textSublayer
+          return sub ? getNodeFactory().createNode(sub.guid, 'node.text') : vm.$$null
         },
       },
-      canWriteInReadOnly: !1,
-      hasEditScope: !1,
+      canWriteInReadOnly: false,
+      hasEditScope: false,
     })
   },
   immutableFrameLabel({
@@ -11519,7 +12383,7 @@ return 'PLAIN'
           metricsKey: `node.${a}`,
           get() {
             let t = i(this)[a]
-            let n: any = {
+            let n = {
               endpointNodeId: t.endpointNodeID,
             }
             t.magnet === SpR.NONE ? n.position = t.position : n.magnet = _$$w3.ConnectorMagnet[t.magnet]
@@ -11638,7 +12502,7 @@ return 'PLAIN'
         let r = _$$u({
           vm: e,
           handle: t,
-          zSchema: _$$z.record(getFeatureFlags().ds_variable_props_number_def ? _$$z.union([_$$z.boolean(), _$$z.string(), _$$z.number().finite(), n.VariableBinding]) : _$$z.union([_$$z.boolean(), _$$z.string(), n.VariableBinding])),
+          zSchema: _$$z.record(getFeatureFlags().ds_variable_props_number_def ? _$$z.union([_$$z.boolean(), _$$z.string(), _$$z.number().finite(), variableDefinitions.VariableBinding]) : _$$z.union([_$$z.boolean(), _$$z.string(), variableDefinitions.VariableBinding])),
           property: 'setProperties.properties',
         })
         i(this).setProperties(r)
@@ -11861,7 +12725,7 @@ return 'PLAIN'
             node.setAnnotations([])
             return vm.undefined
           }
-          const result: any[] = []
+          const result = []
           for (const ann of annotations) {
             const {
               label,
@@ -11888,7 +12752,7 @@ return 'PLAIN'
             if (label) {
               labelStr = getFeatureFlags().ext_lexical_markdown_annotations ? `{"root":{"children":[{"children":[{"detail":0,"format":0,"mode":"normal","style":"","text":"${label}","type":"text","version":1}],"direction":"ltr","format":"","indent":0,"type":"paragraph","version":1,"textFormat":0,"textStyle":""}],"direction":"ltr","format":"","indent":0,"type":"root","version":1}}` : Ul(label)
             }
- else if (hasLabelMarkdown && ann.labelMarkdown) {
+            else if (hasLabelMarkdown && ann.labelMarkdown) {
               const parsed = _$$nB(ann.labelMarkdown)
               const converted = Kq(parsed)
               labelStr = getFeatureFlags().ext_lexical_markdown_annotations ? converted.lexical : converted.html
@@ -11936,34 +12800,35 @@ return 'PLAIN'
     const mapMeasurementToVm = (measurement, metricsKey) => {
       let offsetValue
       const endNode = sceneGraph.getFromStablePath(measurement.toNode)
-      if (!endNode)
+      if (!endNode) {
         throw new Error(`Couldn't find endNode of measurement ${measurement.id}`)
+      }
       const startNode = getNodeFactory().createNode(measurement.fromNode, metricsKey)
       const endNodeObj = getNodeFactory().createNode(endNode.guid, metricsKey)
       const fromSide = constraintPositionMapping[measurement.fromNodeSide]
       const toSide = measurement.toSameSide
         ? fromSide
         : (() => {
-            switch (fromSide) {
-              case 'TOP':
-                return 'BOTTOM'
-              case 'BOTTOM':
-                return 'TOP'
-              case 'LEFT':
-                return 'RIGHT'
-              case 'RIGHT':
-                return 'LEFT'
-            }
-          })()
+          switch (fromSide) {
+            case 'TOP':
+              return 'BOTTOM'
+            case 'BOTTOM':
+              return 'TOP'
+            case 'LEFT':
+              return 'RIGHT'
+            case 'RIGHT':
+              return 'LEFT'
+          }
+        })()
       offsetValue = measurement.outerOffsetFixed === 0
         ? {
-            type: 'INNER',
-            relative: measurement.innerOffsetRelative,
-          }
-: {
-            type: 'OUTER',
-            fixed: measurement.outerOffsetFixed,
-          };
+          type: 'INNER',
+          relative: measurement.innerOffsetRelative,
+        }
+        : {
+          type: 'OUTER',
+          fixed: measurement.outerOffsetFixed,
+        }
       const startObj = vm.newObject()
       vm.setProp(startObj, 'node', startNode)
       vm.setProp(startObj, 'side', vm.newString(fromSide))
@@ -12083,10 +12948,12 @@ return 'PLAIN'
             throw new Error('Start node is not on the current page')
           if (endNode.containingCanvas !== node.guid)
             throw new Error('End node is not on the current page')
-          if (!startNode.canHaveAnnotation)
+          if (!startNode.canHaveAnnotation) {
             throw new Error(`Can't add measurement to a ${_$$w4(startNode)} node`)
-          if (!endNode.canHaveAnnotation)
+          }
+          if (!endNode.canHaveAnnotation) {
             throw new Error(`Can't add measurement to a ${_$$w4(endNode)} node`)
+          }
           const axis = side => side === 'TOP' || side === 'BOTTOM' ? 'y' : 'x'
           if (startNode.guid === endNode.guid && startObj.side === endObj.side)
             throw new Error('Measurement can\'t point to itself')
@@ -12101,7 +12968,7 @@ return 'PLAIN'
             if (opts.offset.type === 'INNER') {
               innerOffset = opts.offset.relative
             }
- else {
+            else {
               innerOffset = opts.offset.fixed > 0 ? 1 : -1
               outerOffset = opts.offset.fixed
             }
@@ -12135,14 +13002,14 @@ return 'PLAIN'
             property: 'newValue',
           })
           const measurementNode = findStartNode(measurementId, node.guid)
-          const update: any = {}
+          const update:any = {}
           if (value.offset) {
             let innerOffset = 0
             let outerOffset = 0
             if (value.offset.type === 'INNER') {
               innerOffset = value.offset.relative
             }
- else {
+            else {
               innerOffset = value.offset.fixed > 0 ? 1 : -1
               outerOffset = value.offset.fixed
             }
@@ -12449,11 +13316,11 @@ return 'PLAIN'
               paddingRight: r.stackPaddingRight,
               paddingTop: r.stackPaddingTop,
               paddingBottom: r.stackPaddingBottom,
-              counterAxisSizingMode: ij(_$$w3.StackSize[r.stackCounterSizing]),
-              primaryAxisSizingMode: ij(_$$w3.StackSize[r.stackPrimarySizing]),
-              primaryAxisAlignItems: iB(_$$w3.StackJustify[r.stackPrimaryAlignItems]),
+              counterAxisSizingMode: mapSizingModeToString(_$$w3.StackSize[r.stackCounterSizing]),
+              primaryAxisSizingMode: mapSizingModeToString(_$$w3.StackSize[r.stackPrimarySizing]),
+              primaryAxisAlignItems: primaryAxisAlignItemsToString(_$$w3.StackJustify[r.stackPrimaryAlignItems]),
               counterAxisAlignItems: _$$w3.StackAlign[r.stackCounterAlignItems],
-              layoutAlign: iU(_$$w3.StackCounterAlign[r.stackChildAlignSelf]),
+              layoutAlign: layoutAlignToString(_$$w3.StackCounterAlign[r.stackChildAlignSelf]),
               layoutGrow: r.stackChildPrimaryGrow,
               itemSpacing: r.stackSpacing,
               layoutPositioning: _$$w3.StackPositioning[r.stackPositioning],
@@ -12468,11 +13335,11 @@ return 'PLAIN'
               paddingRight: n.stackRightPadding,
               paddingTop: n.stackTopPadding,
               paddingBottom: n.stackBottomPadding,
-              counterAxisSizingMode: ij(n.stackCounterSizing),
-              primaryAxisSizingMode: ij(n.stackPrimarySizing),
-              primaryAxisAlignItems: iB(n.stackPrimaryAlignItems),
+              counterAxisSizingMode: mapSizingModeToString(n.stackCounterSizing),
+              primaryAxisSizingMode: mapSizingModeToString(n.stackPrimarySizing),
+              primaryAxisAlignItems: primaryAxisAlignItemsToString(n.stackPrimaryAlignItems),
               counterAxisAlignItems: n.stackCounterAlignItems,
-              layoutAlign: iU(n.stackChildAlignSelf),
+              layoutAlign: layoutAlignToString(n.stackChildAlignSelf),
               layoutGrow: n.stackChildPrimaryGrow,
               itemSpacing: n.stackSpacing,
               layoutPositioning: n.stackPositioning,
@@ -12502,7 +13369,7 @@ return 'PLAIN'
           editorType: Bu(r),
           fileKey: a,
           userId: o8(),
-        } as any)
+        })
         getFeatureFlags().plugins_check_viewer_export_restricted && !CQ() && az.trackDefinedEvent('extensibility.plugins_check_viewer_export_restricted', {
           apiMethod: 'node.getCSSAsync',
           pluginId: n,
@@ -12527,8 +13394,8 @@ return 'PLAIN'
             for (let e of t) {
               for (let t of e.lines) {
                 let [e, n] = typeof t.code == 'string' ? t.code.split(':') : [void 0, void 0]
-                if (!e || !n) 
-continue;
+                if (!e || !n)
+                  continue
                 let r = e.trim()
                 let a = n.trim().replace(';', '')
                 i[r] = a
@@ -12724,22 +13591,21 @@ continue;
     })
   },
   getSlideTransition({
-    vm: e,
-    defineVmFunction: t,
-    getNode: i,
-  }, n) {
-    t({
-      handle: n,
+    vm,
+    defineVmFunction,
+    getNode,
+  }, handle) {
+    defineVmFunction({
+      handle,
       key: 'getSlideTransition',
       metricsKey: 'node.getSlideTransition',
       cb() {
-        let t = i(this)
-        if (t?.isSlide && Ez5) {
-          let n
-          let i = Ez5.slideAnimationBindings().getSlideTransition(t.guid)
-          return e.deepWrap({
-            style: (function (e) {
-              switch (e) {
+        const node = getNode(this)
+        if (node?.isSlide && Ez5) {
+          const transition = Ez5.slideAnimationBindings().getSlideTransition(node.guid)
+          return vm.deepWrap({
+            style: (() => {
+              switch (transition.type) {
                 case v$l.DISSOLVE:
                   return 'DISSOLVE'
                 case v$l.SLIDE_FROM_LEFT:
@@ -12787,10 +13653,10 @@ continue;
                 default:
                   return 'NONE'
               }
-            }(i.type)),
-            duration: i.duration,
-            curve: (function (e) {
-              switch (e) {
+            })(),
+            duration: transition.duration,
+            curve: (() => {
+              switch (transition.easingType) {
                 case mgy.IN_CUBIC:
                   return 'EASE_IN'
                 case mgy.OUT_CUBIC:
@@ -12810,53 +13676,52 @@ continue;
                 default:
                   return 'LINEAR'
               }
-            }(i.easingType)),
-            timing: (n = i.trigger).type === tbx.AFTER_DELAY
+            })(),
+            timing: transition.trigger.type === tbx.AFTER_DELAY
               ? {
-                  type: 'AFTER_DELAY',
-                  delay: n.delay,
-                }
-: {
-                  type: 'ON_CLICK',
-                }
+                type: 'AFTER_DELAY',
+                delay: transition.trigger.delay,
+              }
+              : {
+                type: 'ON_CLICK',
+              },
           })
         }
-        return e.$$null
+        return vm.$$null
       },
-      isAllowedInReadOnly: !0,
-      hasEditScope: !0,
+      isAllowedInReadOnly: true,
+      hasEditScope: true,
     })
   },
   setSlideTransition({
-    vm: e,
-    defineVmFunction: t,
-    getNode: i,
-  }, n) {
-    t({
-      handle: n,
+    vm,
+    defineVmFunction,
+    getNode,
+  }, handle) {
+    defineVmFunction({
+      handle,
       key: 'setSlideTransition',
       metricsKey: 'node.setSlideTransition',
-      cb(t) {
-        let n = i(this)
-        if (n?.isSlide && Ez5) {
-          let r
-          let i = _$$u({
-            vm: e,
-            handle: t,
+      cb(value) {
+        const node = getNode(this)
+        if (node?.isSlide && Ez5) {
+          const transition = _$$u({
+            vm,
+            handle: value,
             zSchema: _$$z.object({
               style: _$$z.enum(animationTransitionStyles),
               duration: _$$z.number().finite().gte(0.01).lte(10),
               curve: _$$z.enum(animationEasingCurves),
               timing: _$$z.object({
                 type: _$$z.enum(animationTriggerTypes),
-                delay: _$$z.number().finite().gte(0).lte(30).optional()
-              })
+                delay: _$$z.number().finite().gte(0).lte(30).optional(),
+              }),
             }),
             property: 'slideTransition',
           })
-          Ez5.slideAnimationBindings().setSlideTransition(n.guid, {
-            type: (function (e) {
-              switch (e) {
+          Ez5.slideAnimationBindings().setSlideTransition(node.guid, {
+            type: (() => {
+              switch (transition.style) {
                 case 'DISSOLVE':
                   return v$l.DISSOLVE
                 case 'SLIDE_FROM_LEFT':
@@ -12904,10 +13769,10 @@ continue;
                 default:
                   return v$l.NONE
               }
-            }(i.style)),
-            duration: i.duration,
-            easingType: (function (e) {
-              switch (e) {
+            })(),
+            duration: transition.duration,
+            easingType: (() => {
+              switch (transition.curve) {
                 case 'EASE_IN':
                   return mgy.IN_CUBIC
                 case 'EASE_OUT':
@@ -12915,7 +13780,6 @@ continue;
                 case 'EASE_IN_AND_OUT':
                   return mgy.INOUT_CUBIC
                 case 'LINEAR':
-                default:
                   return mgy.LINEAR
                 case 'GENTLE':
                   return mgy.GENTLE_SPRING
@@ -12925,96 +13789,29 @@ continue;
                   return mgy.SPRING_PRESET_TWO
                 case 'SLOW':
                   return mgy.SPRING_PRESET_THREE
+                default:
+                  return mgy.LINEAR
               }
-            }(i.curve)),
-            trigger: (r = i.timing).type === 'AFTER_DELAY'
+            })(),
+            trigger: transition.timing.type === 'AFTER_DELAY'
               ? {
-                  type: tbx.AFTER_DELAY,
-                  delay: r.delay ?? 0,
-                }
-: {
-                  type: tbx.ON_CLICK,
-                  delay: 0,
-                }
+                type: tbx.AFTER_DELAY,
+                delay: transition.timing.delay ?? 0,
+              }
+              : {
+                type: tbx.ON_CLICK,
+                delay: 0,
+              },
           })
-          return e.undefined
+          return vm.undefined
         }
-        return e.$$null
+        return vm.$$null
       },
-      isAllowedInReadOnly: !0,
-      hasEditScope: !0,
+      isAllowedInReadOnly: true,
+      hasEditScope: true,
     })
   },
 }
-
-/**
- * Property Type to API Property Name Mapping - maps internal property type enums to API property names
- * Used for variable binding, property access, and API serialization across the plugin system
- */
-const propertyTypeToApiNameMap = {
-  [L5V.WIDTH]: 'width',
-  [L5V.HEIGHT]: 'height',
-  [L5V.MAX_WIDTH]: 'maxWidth',
-  [L5V.MIN_WIDTH]: 'minWidth',
-  [L5V.MAX_HEIGHT]: 'maxHeight',
-  [L5V.MIN_HEIGHT]: 'minHeight',
-  [L5V.FILL]: 'fills',
-  [L5V.STROKE]: 'strokes',
-  [L5V.EFFECT]: 'effects',
-  [L5V.STROKE_WIDTH]: 'strokeWeight',
-  [L5V.CORNER_RADIUS]: 'cornerRadius',
-  [L5V.TEXT_STYLE]: 'textStyleId',
-  [L5V.TEXT_ALIGN_HORIZONTAL]: 'textAlignHorizontal',
-  [L5V.FONT_FAMILY]: 'fontFamily',
-  [L5V.FONT_STYLE]: 'fontStyle',
-  [L5V.FONT_SIZE]: 'fontSize',
-  [L5V.FONT_WEIGHT]: 'fontWeight',
-  [L5V.LINE_HEIGHT]: 'lineHeight',
-  [L5V.LETTER_SPACING]: 'letterSpacing',
-  [L5V.STACK_SPACING]: 'itemSpacing',
-  [L5V.STACK_PADDING]: 'padding',
-  [L5V.STACK_MODE]: 'layoutMode',
-  [L5V.STACK_ALIGNMENT]: 'alignItems',
-  [L5V.OPACITY]: 'opacity',
-  [L5V.COMPONENT]: 'mainComponent',
-  [L5V.GRID_ROW_GAP]: 'gridRowGap',
-  [L5V.GRID_COLUMN_GAP]: 'gridColumnGap',
-  [L5V.GRID_ROW_COUNT]: 'gridRowCount',
-  [L5V.GRID_COLUMN_COUNT]: 'gridColumnCount',
-  [L5V.GRID_ROW_ANCHOR_INDEX]: 'gridRowAnchorIndex',
-  [L5V.GRID_COLUMN_ANCHOR_INDEX]: 'gridColumnAnchorIndex',
-  [L5V.GRID_ROW_SPAN]: 'gridRowSpan',
-  [L5V.GRID_COLUMN_SPAN]: 'gridColumnSpan',
-}
-
-/**
- * API Property Name to Property Type Mapping - reverse mapping for API name lookup
- * Generated from the primary mapping above for bidirectional property type resolution
- */
-const apiNameToPropertyTypeMap = Object.entries(propertyTypeToApiNameMap).reduce((accumulator, [enumKey, apiName]) => ({
-  ...accumulator,
-  [apiName]: Number(enumKey),
-}), {})
-
-/**
- * Constraint Position Mapping - maps constraint position enums to string representations
- * Used for converting internal constraint positions to API format
- */
-const constraintPositionMapping = {
-  [ZHy.TOP]: 'TOP',
-  [ZHy.BOTTOM]: 'BOTTOM',
-  [ZHy.LEFT]: 'LEFT',
-  [ZHy.RIGHT]: 'RIGHT',
-}
-
-/**
- * Reverse Constraint Position Mapping - maps string constraint positions back to enum values
- * Generated from the primary mapping for bidirectional constraint position resolution
- */
-const reverseConstraintPositionMapping = Object.entries(constraintPositionMapping).reduce((accumulator, [enumKey, stringValue]) => ({
-  ...accumulator,
-  [stringValue]: Number(enumKey),
-}), {})
 
 /**
  * Original function: iq
@@ -13050,7 +13847,7 @@ function processTextCaseForSmallCaps(node, start, end, textCase) {
     adjustedTextCase = 'ORIGINAL'
     fontVariantCaps = 'SMALL'
   }
- else if (textCase === 'SMALL_CAPS_FORCED') {
+  else if (textCase === 'SMALL_CAPS_FORCED') {
     adjustedTextCase = 'ORIGINAL'
     fontVariantCaps = 'ALL_SMALL'
   }
@@ -13112,6 +13909,7 @@ function validateAndExtractCollectionId({
   // Invalid handle type
   throw new Error(`Cannot call ${callerName} without a collection node parameter.`)
 }
+let colors = ['yellow', 'orange', 'red', 'pink', 'violet', 'blue', 'teal', 'green']
 
 /**
  * Validates a collection ID
@@ -13309,12 +14107,12 @@ export const AnnotationCategoryAPI = {
             return cat.custom === null
               ? cat
               : {
-                  ...cat,
-                  custom: {
-                    ...cat.custom,
-                    color: mapColorName(colorValue),
-                  }
-                }
+                ...cat,
+                custom: {
+                  ...cat.custom,
+                  color: mapColorName(colorValue),
+                },
+              }
           }
           return e
         })
@@ -13361,12 +14159,12 @@ export const AnnotationCategoryAPI = {
             return cat.custom === null
               ? cat
               : {
-                  ...cat,
-                  custom: {
-                    ...cat.custom,
-                    label: labelValue,
-                  }
-                }
+                ...cat,
+                custom: {
+                  ...cat.custom,
+                  label: labelValue,
+                },
+              }
           }
           return e
         })
@@ -13383,25 +14181,27 @@ export const AnnotationCategoryAPI = {
     })
   },
 }
+let annotationCategoryApiMethods = [AnnotationCategoryAPI.label, AnnotationCategoryAPI.color, AnnotationCategoryAPI.isPreset, AnnotationCategoryAPI.remove, AnnotationCategoryAPI.setColor, AnnotationCategoryAPI.setLabel]
 class AnnotationCategoryFactory {
-  vm: any
+  vm: NoOpVm
   annotationCategoryPrototype: any
   sceneGraph: any
-  constructor(e) {
+
+  constructor(e: AnnotationCategoryFactoryOptions) {
     // Set properties with proper types
     this.vm = e.vm
     this.annotationCategoryPrototype = setupPrototypeFromArgs(e, 'AnnotationCategory', ...annotationCategoryApiMethods)
     this.sceneGraph = e.sceneGraph
   }
 
-  createAnnotationCategoryHandle(e) {
+  createAnnotationCategoryHandle(e: string) {
     let t = this.vm
     if (!fn(sH(e)))
       return t.$$null
     let i = t.newObject(this.annotationCategoryPrototype)
     t.defineProp(i, 'id', {
-      enumerable: !0,
-      writable: !1,
+      enumerable: true,
+      writable: false,
       value: t.newString(e),
     })
     return i
@@ -13417,23 +14217,23 @@ class AnnotationCategoryFactory {
     getFeatureFlags().plugins_annotations_seat_check && !fb()
       ? reject(e.newString('A Full or Dev seat is required to get annotation categories'))
       : e.registerPromise(iJ(this.sceneGraph)).then((t) => {
-          let r = e.newArray()
-          for (let [i, a] of t.entries()) {
-            let t = this.createAnnotationCategoryHandle(a.id)
-            if (e.isNull(t)) {
-              reject(e.newString('Failed to create annotation category'))
-              return;
-            }
-            e.setProp(r, i.toString(), t)
+        let r = e.newArray()
+        for (let [i, a] of t.entries()) {
+          let t = this.createAnnotationCategoryHandle(a.id)
+          if (e.isNull(t)) {
+            reject(e.newString('Failed to create annotation category'))
+            return
           }
-          resolve(r)
-        }).catch((t) => {
-          reject(e.newString(t.message))
-        })
+          e.setProp(r, i.toString(), t)
+        }
+        resolve(r)
+      }).catch((t) => {
+        reject(e.newString(t.message))
+      })
     return promise
   }
 
-  getLocalAnnotationCategoryByIdAsync(e) {
+  getLocalAnnotationCategoryByIdAsync(e: string) {
     let t = this.vm
     let {
       promise,
@@ -13443,19 +14243,19 @@ class AnnotationCategoryFactory {
     getFeatureFlags().plugins_annotations_seat_check && !fb()
       ? reject(t.newString('A Full or Dev seat is required to get annotation categories'))
       : t.registerPromise(iJ(this.sceneGraph)).then((i) => {
-          let r = i.find(t => t.id === e)
-          if (void 0 === r) {
-            resolve(t.$$null)
-            return;
-          }
-          resolve(this.createAnnotationCategoryHandle(r.id))
-        }).catch((e) => {
-          reject(t.newString(e.message))
-        })
+        let r = i.find(t => t.id === e)
+        if (void 0 === r) {
+          resolve(t.$$null)
+          return
+        }
+        resolve(this.createAnnotationCategoryHandle(r.id))
+      }).catch((e) => {
+        reject(t.newString(e.message))
+      })
     return promise
   }
 
-  createAnnotationCategoryAsync(e, t) {
+  createAnnotationCategoryAsync(e: string, t: string) {
     let i = this.vm
     let {
       promise,
@@ -13465,31 +14265,31 @@ class AnnotationCategoryFactory {
     getFeatureFlags().plugins_annotations_seat_check && !fb()
       ? reject(i.newString('A Full seat is required to create annotation categories'))
       : i.registerPromise(iJ(this.sceneGraph)).then((n) => {
-          let s = fO(this.sceneGraph)
-          let o = {
-            id: s,
-            preset: Bll.NONE,
-            custom: {
-              label: e,
-              color: mapColorName(t),
-            }
+        let s = fO(this.sceneGraph)
+        let o = {
+          id: s,
+          preset: Bll.NONE,
+          custom: {
+            label: e,
+            color: mapColorName(t),
+          },
+        }
+        let l = this.sceneGraph.getRoot()
+        let d = [...n, o]
+        _$$r(() => l7.plugin('update-annotation-categories', () => {
+          let e = l.setAnnotationCategories(d)
+          if (e !== '') {
+            reject(i.newString(e))
+            return
           }
-          let l = this.sceneGraph.getRoot()
-          let d = [...n, o]
-          _$$r(() => l7.plugin('update-annotation-categories', () => {
-            let e = l.setAnnotationCategories(d)
-            if (e !== '') {
-              reject(i.newString(e))
-              return;
-            }
-            let t = this.createAnnotationCategoryHandle(s)
-            if (i.isNull(t)) {
-              reject(i.newString('Failed to create annotation category'))
-              return;
-            }
-            resolve(t)
-          }))
-        })
+          let t = this.createAnnotationCategoryHandle(s)
+          if (i.isNull(t)) {
+            reject(i.newString('Failed to create annotation category'))
+            return
+          }
+          resolve(t)
+        }))
+      })
     return promise
   }
 }
@@ -13515,8 +14315,6 @@ async function iJ(nodeAdapter) {
   }
   return annotationCategories
 }
-let annotationCategoryApiMethods = [AnnotationCategoryAPI.label, AnnotationCategoryAPI.color, AnnotationCategoryAPI.isPreset, AnnotationCategoryAPI.remove, AnnotationCategoryAPI.setColor, AnnotationCategoryAPI.setLabel]
-let colors = ['yellow', 'orange', 'red', 'pink', 'violet', 'blue', 'teal', 'green'] as const
 function mapColorName(colorName) {
   switch (colorName) {
     case 'yellow':
@@ -13555,7 +14353,7 @@ async function loadFontsForTextNode(textNode) {
    */
   async function loadFontIfNeeded(fontName) {
     // Create unique identifier from font family and style
-    const fontIdentifier: string = fontName && `${fontName.family}|${fontName.style}`
+    const fontIdentifier = fontName && `${fontName.family}|${fontName.style}`
 
     // Check if font is already loaded in cache
     if (!loadedFonts.includes(fontIdentifier)) {
@@ -13662,7 +14460,7 @@ function normalizeColorObjectAlpha(colorInput) {
     // Color object already has alpha channel, return as-is
     return colorInput
   }
- else {
+  else {
     // Color object missing alpha channel, add default alpha of 1.0
     return {
       r: colorInput.r,
@@ -13702,63 +14500,49 @@ let timerAndStateEvents = _$$z.union([_$$z.enum(['close', 'selectionchange', 'cu
  * Image Store Class - manages private image cache with hash-based storage and retrieval
  * Handles image bytes loading, animated image info, and SHA1-based image management
  */
-class ImageStore {
-  hashToPrivateImage: Map<any, any>
-  tearDown: () => void
-  /**
-   * Constructor - initializes the image store with empty cache and teardown functionality
-   */
+export class ImageStore {
+  hashToPrivateImage: Map<string, any>
+
   constructor() {
-    // Private image cache mapping SHA1 hashes to image data
     this.hashToPrivateImage = new Map()
-
-    // Teardown function to clear the cache when needed
-    this.tearDown = () => {
-      this.hashToPrivateImage = new Map()
-    }
   }
 
   /**
-   * Get Internal Image Bytes - retrieves cached image bytes for a given SHA1 hash
-   * @param imageHash - SHA1 hash of the image
-   * @returns Uint8Array - the image bytes from cache
-   * @throws Error if image not found in cache
+   * Clean up image store resources
    */
-  internalBytesForImage(imageHash) {
-    return this.getPrivateImageOrThrow(imageHash).bytes
+  tearDown = () => {
+    this.hashToPrivateImage = new Map()
   }
 
   /**
-   * Get Image Bytes Async - retrieves image bytes with automatic loading if not cached
-   * @param imageHash - SHA1 hash of the image to retrieve
-   * @returns Promise<Uint8Array> - the image bytes after ensuring they're loaded
+   * Get internal bytes for an image synchronously
    */
-  async bytesFromImage(imageHash) {
-    const privateImage = this.getPrivateImageOrThrow(imageHash)
+  internalBytesForImage(hash: string) {
+    return this.getPrivateImageOrThrow(hash).bytes
+  }
 
-    // Load image bytes if not already cached
+  /**
+   * Get image bytes asynchronously, loading if necessary
+   */
+  async bytesFromImage(hash: string) {
+    const privateImage = this.getPrivateImageOrThrow(hash)
     if (privateImage.bytes == null) {
       try {
-        // Try to get image bytes directly
-        privateImage.bytes = NfO.getImageBytes(imageHash)
+        privateImage.bytes = NfO.getImageBytes(hash)
       }
- catch {
-        // If direct loading fails, load image by hash first then retry
-        await Jr().loadImageByHash(imageHash)
-        privateImage.bytes = NfO.getImageBytes(imageHash)
+      catch {
+        await Jr().loadImageByHash(hash)
+        privateImage.bytes = NfO.getImageBytes(hash)
       }
     }
     return new Uint8Array(privateImage.bytes)
   }
 
   /**
-   * Get Private Image Or Throw - safely retrieves private image data from cache
-   * @param imageHash - SHA1 hash of the image to retrieve
-   * @returns object - the private image data object
-   * @throws Error if image hash not found in cache
+   * Get private image or throw error if not found
    */
-  getPrivateImageOrThrow(imageHash) {
-    const privateImage = this.hashToPrivateImage.get(imageHash)
+  getPrivateImageOrThrow(hash: string) {
+    const privateImage = this.hashToPrivateImage.get(hash)
     if (privateImage === undefined) {
       throw new Error('SHA1 hash does not correspond to an existing image')
     }
@@ -13766,130 +14550,86 @@ class ImageStore {
   }
 
   /**
-   * Get Or Create Private Image - retrieves existing or creates new private image entry
-   * @param imageHash - SHA1 hash of the image
-   * @param animatedInfo - animation information for the image
-   * @returns object - the private image data object (existing or newly created)
+   * Get or create a private image entry
    */
-  getOrCreatePrivateImage(imageHash, animatedInfo) {
-    let privateImage = this.hashToPrivateImage.get(imageHash)
-
-    // Create new private image entry if not found
+  getOrCreatePrivateImage(hash: string, animatedInfo: any) {
+    let privateImage = this.hashToPrivateImage.get(hash)
     if (privateImage === undefined) {
       privateImage = {
-        sha1: imageHash,
+        sha1: hash,
         animated: animatedInfo,
         bytes: null,
         coverBytes: null,
-        getBytesAsync: () => this.bytesFromImage(imageHash),
+        getBytesAsync: () => this.bytesFromImage(hash),
       }
     }
-
-    // Store/update the private image in cache
-    this.hashToPrivateImage.set(imageHash, privateImage)
+    this.hashToPrivateImage.set(hash, privateImage)
     return privateImage
   }
 
   /**
-   * Get Image From SHA1 - retrieves image from hash with animated info consideration
-   * @param imageHash - SHA1 hash of the image to retrieve
-   * @returns object | null - the private image object or null if not loaded
+   * Get image from SHA1 hash
    */
-  getImageFromSHA1(imageHash) {
-    // Check if image already exists in cache
-    const cachedImage = this.hashToPrivateImage.get(imageHash)
-    if (cachedImage !== undefined) {
-      return cachedImage
+  getImageFromSHA1(hash: string) {
+    const existingImage = this.hashToPrivateImage.get(hash)
+    if (existingImage !== undefined) {
+      return existingImage
     }
-
-    // Get animated image information for the hash
-    const animatedImageInfo = NfO.getAnimatedImageInfo(imageHash)
-
-    // Return null if image is not loaded, otherwise create private image entry
-    return animatedImageInfo.status === NFK.UNLOADED ? null : this.getOrCreatePrivateImage(imageHash, animatedImageInfo)
+    const animatedInfo = NfO.getAnimatedImageInfo(hash)
+    return animatedInfo.status === NFK.UNLOADED ? null : this.getOrCreatePrivateImage(hash, animatedInfo)
   }
 
   /**
-   * Create Image Function - processes raw image bytes and creates a private image entry
-   * Handles animated GIFs with cover frame extraction and validation
-   * @param imageBytes - raw image bytes (ArrayBuffer or similar)
-   * @returns object - the created private image object with processed data
+   * Create image from bytes and handle animated image processing
    */
-  createImage(imageBytes) {
-    // Convert input to Uint8Array for processing
-    const imageData = new Uint8Array(imageBytes)
-
-    // Validate that the image data is valid
-    NfO.isImageValid(imageData)
-
-    // Generate SHA1 hash for the image
-    const imageHash = Et(imageData)
-
-    // Create or get private image entry with initial animated info
-    const privateImage = this.getOrCreatePrivateImage(imageHash, {
+  createImage(imageBytes: any) {
+    const uint8Array = new Uint8Array(imageBytes)
+    NfO.isImageValid(uint8Array)
+    const hash = Et(uint8Array)
+    const privateImage = this.getOrCreatePrivateImage(hash, {
       status: NFK.UNLOADED,
       coverFrameHash: '',
     })
+    privateImage.bytes = uint8Array
 
-    // Store the image bytes
-    privateImage.bytes = imageData
-
-    // Check if this is an animated image (likely GIF)
-    /**
-     * Extract cover frame from animated image data - helper function
-     * Creates canvas and extracts first frame as base64 PNG data
-     * @param animatedImageData - animated image data to process
-     * @returns extracted cover frame bytes or null if extraction fails
-     */
-    const extractAnimatedImageCoverFrame = (animatedImageData) => {
-      // Parse the animated image data
-      const parsedAnimatedImage = _$$J2(animatedImageData)
-      if (parsedAnimatedImage) {
-        // Create canvas for cover frame extraction
-        const canvas = document.createElement('canvas')
-        canvas.width = parsedAnimatedImage.width
-        canvas.height = parsedAnimatedImage.height
-        const canvasContext = canvas.getContext('2d')
-        if (canvasContext) {
-          // Create ImageData for the first frame
-          const firstFrameImageData = new ImageData(parsedAnimatedImage.width, parsedAnimatedImage.height)
-
-          // Blit the first frame to the ImageData
-          if (parsedAnimatedImage.blitFrame) {
-            parsedAnimatedImage.blitFrame(0, firstFrameImageData, canvasContext)
-          }
-
-          // Convert canvas to base64 data URL
-          const dataUrl = canvas.toDataURL()
-          const base64Parts = dataUrl.split(',')
-
-          // Extract base64 data if it's a PNG
-          if (base64Parts[0] === 'data:image/png;base64') {
-            return decodeBase64(base64Parts[1])
-          }
-        }
-      }
-
-      // Return null if cover frame extraction failed
-      return null
-    }
-    if (fB(imageData)) {
-      // Extract cover frame from animated image
-      const coverFrameBytes = extractAnimatedImageCoverFrame(imageData)
-
-      // Process cover frame if extraction was successful
-      if (coverFrameBytes != null) {
-        // Store cover frame bytes and update animated status
-        privateImage.coverBytes = coverFrameBytes
+    // Handle animated images (GIF processing)
+    if (fB(uint8Array)) {
+      const coverBytes = this.extractAnimatedImageCover(uint8Array)
+      if (coverBytes != null) {
+        privateImage.coverBytes = coverBytes
         privateImage.animated.status = NFK.ANIMATED
-        privateImage.animated.coverFrameHash = Et(coverFrameBytes)
+        privateImage.animated.coverFrameHash = Et(coverBytes)
       }
- else {
-        // Log error if animated GIF couldn't be parsed
+      else {
         $D(_$$e.EXTENSIBILITY, new Error('Got unparseable animated gif'))
       }
     }
     return privateImage
+  }
+
+  /**
+   * Extract cover frame from animated image
+   */
+  extractAnimatedImageCover(imageBytes: any) {
+    const animatedImage = _$$J2(imageBytes)
+    if (!animatedImage) {
+      return null
+    }
+    const canvas = document.createElement('canvas')
+    canvas.width = animatedImage.width
+    canvas.height = animatedImage.height
+    const context = canvas.getContext('2d')
+    if (!context) {
+      return null
+    }
+    const imageData = new ImageData(animatedImage.width, animatedImage.height)
+    animatedImage.blitFrame(0, imageData, context)
+    const dataUrl = canvas.toDataURL()
+    const [header, base64Data] = dataUrl.split(',')
+    if (header === 'data:image/png;base64') {
+      return decodeBase64(base64Data)
+    }
+    return null
   }
 }
 /**
@@ -13899,14 +14639,14 @@ class ImageStore {
  * @param options - generation options including includeIDs flag
  * @returns Promise<string | null> - JSX string representation or null if node not found
  */
-async function generateJsxFromNode(nodeReference, options: any = {
+async function generateJsxFromNode(nodeReference, options = {
   includeIDs: true,
 }) {
   // Apply default filter to only include visible elements in JSX output
   options.filterFunction = element => element.visible
 
   // Get the node instance from the scene graph
-  const nodeInstance = UN().get(nodeReference.guid)
+  const nodeInstance = getSingletonSceneGraph().get(nodeReference.guid)
   if (nodeInstance) {
     // Generate JSX representation using the JSX processor
     const jsxResult = await oy(nodeInstance, options)
@@ -14224,24 +14964,14 @@ const focusedSlideApiMethods = [NodeAPI.focusedSlide]
  */
 const focusedNodeApiMethods = [NodeAPI.focusedNode]
 
-// Legacy compatibility variables
-
 // Phase 22: Advanced Utility Functions and Data Processing Systems - Wrapper Functions
 let _$$utilityFuncs = createUtilityFunctionsNew()
-
-// Phase 22 wrapper functions for extracted utility functions
-function t9New(e) {
-  return _$$utilityFuncs.processPublishStatus(e)
-}
-function itNew(e) {
-  return _$$utilityFuncs.processPlatformType(e)
-}
 function processVectorData(e) {
   return {
     vertices: e.vertices,
     segments: e.segments,
     regions: e.regions.map((region) => {
-      let processedRegion = {
+      let processedRegion: ProcessedRegion = {
         windingRule: region.windingRule,
         loops: region.loops,
       }
@@ -14276,29 +15006,9 @@ function getNodeById(nodeId, nodeMap) {
   }
   return node
 }
-function iuNew(e) {
-  return _$$utilityFuncs.hasResizeToFit(e)
-}
-function imNew(e, t) {
-  return _$$utilityFuncs.isInImmutableContext(e, t)
-}
-function ihNew(e) {
-  return _$$utilityFuncs.validateNamespace(e)
-}
-function ipNew(e, t, i) {
-  return _$$utilityFuncs.processWidgetSyncData(e, t, i)
-}
 
 // Phase 23: Advanced Image Processing and Effects Management Systems - Wrapper Functions
 let _$$imageEffectsProc = createImageEffectsProcessingNew(this)
-
-// Phase 23 wrapper functions for extracted image and effects processing functions
-function iANew(_e, t) {
-  return _$$imageEffectsProc.createImageProcessor(t)
-}
-function iINew(e) {
-  return _$$imageEffectsProc.processEffectConfig(e)
-}
 function iCNew(e) {
   return _$$imageEffectsProc.convertLineHeightFromLegacy(e)
 }
@@ -14312,18 +15022,6 @@ function ikNew(e) {
 // Phase 24: Advanced Validation and Layout Processing Systems - Wrapper Functions
 // Initialize Phase 24 and Phase 25 processors
 let validationLayoutProc = createValidationLayoutProcessingNew(this)
-let uiEnhancementsTextProc = {
-  defineVmPropWithFillProcessing: AdvancedUIPropertyManager.defineVmPropWithFillProcessing,
-  createHashObject: AdvancedImageHashManager.createHashObject,
-  processEffectWithValidation: AdvancedEffectProcessor.processEffectWithValidation,
-  createStringFromTextResizeMode: AdvancedTextFormattingManager.createStringFromTextResizeMode,
-  convertTextResizeMode: AdvancedTextFormattingManager.convertTextResizeMode,
-  processPrimaryAxisAlignment: AdvancedAlignmentProcessor.processPrimaryAxisAlignment,
-  processCrossAxisAlignment: AdvancedAlignmentProcessor.processCrossAxisAlignment,
-  convertSizingModeToString: AdvancedSizingConverter.convertSizingModeToString,
-  convertStringToSizingMode: AdvancedSizingConverter.convertStringToSizingMode,
-  processTextStyling: AdvancedTextStylingManager.processTextStyling,
-}
 let coreUtilitiesDataProc = {
   extractUserPluginKeyArray: AdvancedDataStructureManager.extractUserPluginKeyArray,
   extractNameFromKeyArray: AdvancedDataStructureManager.extractNameFromKeyArray,
@@ -14340,71 +15038,13 @@ function iwNew(e) {
 function iRNew(e) {
   return validationLayoutProc.convertTextDecorationOffsetToLegacy(e)
 }
-function iNNew(e) {
-  return validationLayoutProc.convertTextDecorationThicknessFromLegacy(e)
-}
-function iPNew(e) {
-  return validationLayoutProc.convertTextDecorationThicknessToLegacy(e)
-}
-function iONew(e) {
-  return validationLayoutProc.convertListOption(e)
-}
-function iLNew(e) {
-  return validationLayoutProc.processGridLayout(e)
-}
-function iFNew(_e, t) {
-  return validationLayoutProc.createGeometryObject(t)
-}
-
-// Phase 25 wrapper functions for extracted UI enhancements and text processing functions
-function igNew({
-  vm: e,
-  defineVmProp: t,
-  mixedSentinel: i,
-  imageStore: n,
-  videoStore: r,
-  getNode: a,
-}, s, o) {
-  return uiEnhancementsTextProc.defineVmPropWithFillProcessing({
-    vm: e,
-    defineVmProp: t,
-    mixedSentinel: i,
-    imageStore: n,
-    videoStore: r,
-    getNode: a,
-  }, s, o)
-}
-function ixNew(e, t) {
-  return uiEnhancementsTextProc.processEffectWithValidation(e, t)
-}
-function iMNew(e, t) {
-  return uiEnhancementsTextProc.createStringFromTextResizeMode(e, t)
-}
-function ijNew(e) {
-  return uiEnhancementsTextProc.convertTextResizeMode(e)
-}
-function iUNew(e) {
-  return uiEnhancementsTextProc.processPrimaryAxisAlignment(e)
-}
-function iBNew(e) {
-  return uiEnhancementsTextProc.processCrossAxisAlignment(e)
-}
-function iVNew(e) {
-  return uiEnhancementsTextProc.convertSizingModeToString(e)
-}
-function iGNew(e) {
-  return uiEnhancementsTextProc.convertStringToSizingMode(e)
-}
-function izNew(e, t, i, n) {
-  return uiEnhancementsTextProc.processTextStyling(e, t, i, n)
-}
 function e7New(e, t = HzA.TRACK) {
-  return UN().createNode(e, {
+  return getSingletonSceneGraph().createNode(e, {
     tracking: t,
   })
 }
-function e8New(e): any {
-  return UN().get(e) ?? null
+function e8New(e) {
+  return getSingletonSceneGraph().get(e) ?? null
 }
 function tqNew(e) {
   return coreUtilitiesDataProc.isNotNull(e)
@@ -14415,10 +15055,10 @@ function tqNew(e) {
  * This class serves as the central factory for all node types in the plugin system
  */
 class NodeFactory {
-  cache: Map<any, any>
+  cache: Map<string, any>
   incLoadingErrorLogger: any
   sceneGraph: any
-  vm: any
+  vm: NoOpVm
   fullscreenEditorType: any
   documentNodePrototype: any
   pageNodePrototype: any
@@ -14464,219 +15104,8 @@ class NodeFactory {
   codeLayerNodePrototype: any
   repeaterNodePrototype: any
   cmsRichTextNodePrototype: any
-  /**
-   * Cache for storing node instances and prototypes
-   */
 
-  /**
-   * Loading error logger for handling incremental loading errors
-   */
-
-  /**
-   * Scene graph reference for managing the visual scene structure
-   */
-
-  /**
-   * Virtual machine reference for executing plugin code
-   */
-
-  /**
-   * Type of fullscreen editor being used
-   */
-
-  /**
-   * Document node prototype for document-level operations
-   */
-
-  /**
-   * Page node prototype for page-level operations
-   */
-
-  /**
-   * Slice node prototype for slice node operations
-   */
-
-  /**
-   * Frame node prototype for frame node operations
-   */
-
-  /**
-   * Group node prototype for group node operations
-   */
-
-  /**
-   * Component node prototype for component operations
-   */
-
-  /**
-   * Component set node prototype for component set operations
-   */
-
-  /**
-   * Instance node prototype for instance operations
-   */
-
-  /**
-   * Boolean operation node prototype for boolean operations
-   */
-
-  /**
-   * Vector node prototype for vector operations
-   */
-
-  /**
-   * Star node prototype for star shape operations
-   */
-
-  /**
-   * Line node prototype for line operations
-   */
-
-  /**
-   * Ellipse node prototype for ellipse operations
-   */
-
-  /**
-   * Polygon node prototype for polygon operations
-   */
-
-  /**
-   * Rectangle node prototype for rectangle operations
-   */
-
-  /**
-   * Text node prototype for text operations
-   */
-
-  /**
-   * Text path node prototype for text path operations
-   */
-
-  /**
-   * Transform node prototype for transform group operations
-   */
-
-  /**
-   * Code block node prototype for code block operations
-   */
-
-  /**
-   * Stamp node prototype for stamp operations
-   */
-
-  /**
-   * Sticky node prototype for sticky note operations
-   */
-
-  /**
-   * Widget node prototype for widget operations
-   */
-
-  /**
-   * Embed node prototype for embed operations
-   */
-
-  /**
-   * Link unfurl node prototype for link unfurl operations
-   */
-
-  /**
-   * Media node prototype for media operations
-   */
-
-  /**
-   * Connector node prototype for connector operations
-   */
-
-  /**
-   * Shape with text node prototype for shape with text operations
-   */
-
-  /**
-   * Section node prototype for section operations
-   */
-
-  /**
-   * Highlight node prototype for highlight operations
-   */
-
-  /**
-   * Washi tape node prototype for washi tape operations
-   */
-
-  /**
-   * Table node prototype for table operations
-   */
-
-  /**
-   * Table cell node prototype for table cell operations
-   */
-
-  /**
-   * Text sublayer node prototype for text sublayer operations
-   */
-
-  /**
-   * Alignable text sublayer node prototype for alignable text sublayer operations
-   */
-
-  /**
-   * Label sublayer node prototype for label sublayer operations
-   */
-
-  /**
-   * Embed prototype for embed operations
-   */
-
-  /**
-   * Link unfurl prototype for link unfurl operations
-   */
-
-  /**
-   * Media prototype for media operations
-   */
-
-  /**
-   * Section prototype for section operations
-   */
-
-  /**
-   * Slide node prototype for slide operations
-   */
-
-  /**
-   * Slide grid node prototype for slide grid operations
-   */
-
-  /**
-   * Slide row node prototype for slide row operations
-   */
-
-  /**
-   * Flapp node prototype for interactive slide element operations
-   */
-
-  /**
-   * Module node prototype for module operations
-   */
-
-  /**
-   * Webpage node prototype for webpage operations
-   */
-
-  /**
-   * Code layer node prototype for code layer operations
-   */
-
-  /**
-   * Repeater node prototype for repeater operations
-   */
-
-  /**
-   * CMS rich text node prototype for CMS rich text operations
-   */
-
-  constructor(e, t) {
+  constructor(e: NoOpVm, t: NodeFactoryOptions) {
     this.cache = new Map()
     let i = {
       vm: e,
@@ -14718,7 +15147,7 @@ class NodeFactory {
     this.addTypeToPrototype(this.vectorNodePrototype, 'VECTOR')
     this.starNodePrototype = setupPrototypeFromArgs(i, 'StarNode', ...l, ...cornerStylingApiMethods, ...polygonShapeApiMethods, ...starShapeApiMethods, ...interactiveReactionApiMethods, ...playbackSettingsApiMethods, ...annotationApiMethods)
     this.addTypeToPrototype(this.starNodePrototype, 'STAR')
-    this.lineNodePrototype = setupPrototypeFromArgs(i, 'LineNode', ...l.filter((e: any) => !aspectRatioActions.includes(e)), ...interactiveReactionApiMethods, ...playbackSettingsApiMethods, ...annotationApiMethods)
+    this.lineNodePrototype = setupPrototypeFromArgs(i, 'LineNode', ...l.filter(e => !aspectRatioActions.includes(e)), ...interactiveReactionApiMethods, ...playbackSettingsApiMethods, ...annotationApiMethods)
     this.addTypeToPrototype(this.lineNodePrototype, 'LINE')
     this.ellipseNodePrototype = setupPrototypeFromArgs(i, 'EllipseNode', ...l, ...cornerStylingApiMethods, ...arcDataApiMethods, ...interactiveReactionApiMethods, ...playbackSettingsApiMethods, ...annotationApiMethods)
     this.addTypeToPrototype(this.ellipseNodePrototype, 'ELLIPSE')
@@ -14908,7 +15337,8 @@ class NodeFactory {
   createNodeWithDevFriendlyId(e, t, i) {
     let n = this.cache.get(e)
     let r = this.sceneGraph.guidFromDeveloperFriendlyId(e)
-    if (getFeatureFlags().ext_inc_loading_logging && this.incLoadingErrorLogger.maybeLogError(r, i), void 0 !== n) {
+    getFeatureFlags().ext_inc_loading_logging && this.incLoadingErrorLogger.maybeLogError(r, i)
+    if (void 0 !== n) {
       return n
     }
     let a = this.vm
@@ -14926,7 +15356,8 @@ class NodeFactory {
 
   createNode(e, t) {
     let i = this.cache.get(e)
-    if (getFeatureFlags().ext_inc_loading_logging && this.incLoadingErrorLogger.maybeLogError(e, t), void 0 !== i) {
+    getFeatureFlags().ext_inc_loading_logging && this.incLoadingErrorLogger.maybeLogError(e, t)
+    if (void 0 !== i) {
       return i
     }
     let n = this.vm
@@ -14936,7 +15367,7 @@ class NodeFactory {
       let e = validateImmutableFrame(r)
       i = this.createSublayerVMObject(a, _$$w4(e))
     }
- else {
+    else {
       i = this.createVMObject(a)
     }
     let s = this.sceneGraph.developerFriendlyIdFromGuid(e)
@@ -15089,10 +15520,10 @@ export const StyleAPI = {
           const consumerObj = vm.newObject()
           const nodeObj = sceneGraph.get(consumer.id)
           if (!nodeObj || nodeObj.isInternalOnlyNode)
-            continue;
+            continue
           const nodeHandle = getNodeFactory().createNode(consumer.id, 'node.consumers')
           if (!nodeHandle)
-            continue;
+            continue
           vm.setProp(consumerObj, 'node', nodeHandle)
           const fieldsArray = vm.newArray()
           for (let i = 0; i < consumer.inheritStyleFields.length; i++) {
@@ -15143,7 +15574,7 @@ export const StyleAPI = {
     vm,
     getNode,
   }, handle) {
-    vm.defineFunction(handle, 'getPublishStatusAsync', 'style.getPublishStatusAsync',  function (this: any) {
+    vm.defineFunction(handle, 'getPublishStatusAsync', 'style.getPublishStatusAsync', function () {
       const node = getNode(this)
       const {
         promise,
@@ -15162,11 +15593,10 @@ export const StyleAPI = {
    */
   remove({
     vm,
-    stats,
     getNode,
     styleManager,
   }, handle) {
-    vm.defineFunction(handle, 'remove', 'style.remove', function (this: any) {
+    vm.defineFunction(handle, 'remove', 'style.remove', function () {
       l7.plugin('plugin-remove-style', () => {
         styleManager.softDeleteStyle(getNode(this))
       })
@@ -15226,7 +15656,7 @@ export const StyleAPI = {
         const field = _$$u({
           vm,
           handle: fieldHandle,
-          zSchema: n.VariableBindableTextField,
+          zSchema: variableDefinitions.VariableBindableTextField,
           property: 'field',
         })
         if (vm.isNull(variableHandle)) {
@@ -15253,47 +15683,16 @@ let re = [...n6, NodeAPI.layoutGrids, StyleAPI.boundVariables]
  * This class handles the creation of various style types including paint, text, effect, and grid styles
  */
 class StyleFactory {
-  cache: Map<any, any>
-  vm: any
-  pluginId: any
-  styleManager: any
+  cache: Map<string, any>
+  vm: NoOpVm
+  pluginId: string
+  styleManager: StyleManager
   paintStylePrototype: any
   textStylePrototype: any
   effectStylePrototype: any
   gridStylePrototype: any
-  /**
-   * Cache for storing style instances
-   */
 
-  /**
-   * Virtual machine reference for executing style-related code
-   */
-
-  /**
-   * Plugin ID for identification
-   */
-
-  /**
-   * Style manager for handling style data
-   */
-
-  /**
-   * Paint style prototype for fill-related styles
-   */
-
-  /**
-   * Text style prototype for text formatting styles
-   */
-
-  /**
-   * Effect style prototype for visual effects
-   */
-
-  /**
-   * Grid style prototype for layout grid styles
-   */
-
-  constructor(e) {
+  constructor(e: StyleFactoryOptions) {
     this.cache = new Map()
     let t = {
       ...e,
@@ -15323,7 +15722,7 @@ class StyleFactory {
    * @param styleId - The unique identifier for the style
    * @returns VM-wrapped style object or null if style doesn't exist
    */
-  createStyle(styleId) {
+  createStyle(styleId: string) {
     const vm = this.vm
     const cachedStyle = this.cache.get(styleId)
     const styleData = this.styleManager.get(styleId)
@@ -15359,7 +15758,7 @@ class StyleFactory {
    * @param styleType - The type of style to create (FILL, TEXT, EFFECT, GRID)
    * @returns VM object with appropriate prototype
    */
-  createStyleObjectByType(styleType) {
+  createStyleObjectByType(styleType: string) {
     const vm = this.vm
     const stylePrototypes = {
       FILL: this.paintStylePrototype,
@@ -15384,7 +15783,7 @@ class StyleFactory {
    * @param styleObject - The VM style object to configure
    * @param styleId - The style identifier for property and cache setup
    */
-  configureStyleObject(styleObject, styleId) {
+  configureStyleObject(styleObject: any, styleId: string) {
     const vm = this.vm
 
     // Define ID property
@@ -15397,6 +15796,36 @@ class StyleFactory {
     vm.shallowFreezeObject(styleObject)
     this.cache.set(styleId, styleObject)
     vm.retainHandle(styleObject)
+  }
+
+  /**
+   * Retrieves a style by its ID.
+   * @param styleId - The ID of the style to retrieve
+   * @returns The style object or null if not found
+   */
+  getStyleById(styleId: string) {
+    return this.createStyle(styleId)
+  }
+
+  /**
+   * Asynchronously imports a style by its key.
+   * @param styleKey - The key of the style to import
+   * @returns Promise resolving to the imported style
+   */
+  importStyleByKeyAsync(styleKey: string) {
+    const {
+      promise,
+      resolve,
+      reject,
+    } = this.vm.newPromise()
+    this.vm.registerPromise(fetchAndSubscribeStyle(styleKey)).then(styleInfo => resolve(l7.plugin('plugin-create-style', () => this.createStyle(styleInfo)))).catch((error) => {
+      let errorMessage = `unable to import style with key ${styleKey}`
+      if (typeof error === 'string')
+        errorMessage = error; else if (error instanceof Error)
+        errorMessage = error.message
+      reject(this.vm.newString(errorMessage))
+    })
+    return promise
   }
 }
 let rp = Ju(({
@@ -15420,14 +15849,14 @@ let rp = Ju(({
       children: i.length > 50
         ? _$$tx('textreview.use_plugin_name_title_default', {})
         : _$$tx('textreview.use_plugin_name_title', {
-            pluginName: i,
-          }),
+          pluginName: i,
+        }),
     }),
     confirmText: i.length > 20
       ? _$$t('textreview.use_plugin_name_confirm_default', {})
       : _$$t('textreview.use_plugin_name_confirm', {
-          pluginName: i,
-        }),
+        pluginName: i,
+      }),
     onCancel: o,
     onClose: o,
     onConfirm: () => {
@@ -15460,7 +15889,7 @@ let rp = Ju(({
     }),
   })
 }, 'TEXT_REVIEW_REQUEST_MODAL', ZU.NO)
-let rI = rv
+
 /**
  * VariableCollectionAPI - Provides property and method definitions for variable collection objects.
  * Handles modes, default mode, key, remote status, variable IDs, publish status, removal, mode management, extension, etc.
@@ -15490,24 +15919,24 @@ export const VariableCollectionAPI = {
             let collectionId = getVariableCollectionNode(this).id
             let backingCollection
             if (isExtension) {
-              backingCollection = UN().getVariableCollectionNode(getVariableCollectionNode(this).backingVariableCollectionId)
+              backingCollection = getSingletonSceneGraph().getVariableCollectionNode(getVariableCollectionNode(this).backingVariableCollectionId)
             }
             return vm.deepWrap(isExtension
               ? modes.map((mode) => {
-                  let parentModeId = ''
-                  if (mode.parentModeID && backingCollection) {
-                    parentModeId = CUU?.isVariableSetExtension(backingCollection.id) ? `${backingCollection.id}/${mode.parentModeID}` : mode.parentModeID
-                  }
-                  return {
-                    name: mode.name,
-                    modeId: `${collectionId}/${mode.modeID}`,
-                    parentModeId,
-                  };
-                })
-              : modes.map(mode => ({
+                let parentModeId = ''
+                if (mode.parentModeID && backingCollection) {
+                  parentModeId = CUU?.isVariableSetExtension(backingCollection.id) ? `${backingCollection.id}/${mode.parentModeID}` : mode.parentModeID
+                }
+                return {
                   name: mode.name,
-                  modeId: mode.modeID,
-                })))
+                  modeId: `${collectionId}/${mode.modeID}`,
+                  parentModeId,
+                }
+              })
+              : modes.map(mode => ({
+                name: mode.name,
+                modeId: mode.modeID,
+              })))
           }
           return vm.newArray()
         },
@@ -15961,10 +16390,6 @@ let rC = [NodeAPI.name, NodeAPI.hiddenFromPublishing, NodeAPI.pluginData, Variab
 let rT = [...rC, VariableCollectionAPI.addMode, VariableCollectionAPI.removeMode, VariableCollectionAPI.renameMode, VariableCollectionAPI.setDefaultMode]
 let rk = [...rC, ExtendedVariableCollectionAPI.parentVariableCollectionId, ExtendedVariableCollectionAPI.variableOverrides, ...processFeatureFlagFunctions('ds_extended_collections_modes_creation', [VariableCollectionAPI.addMode]), ...processFeatureFlagFunctions('ds_extended_collections_vars_creation', [ExtendedVariableCollectionAPI.localVariableIds, ExtendedVariableCollectionAPI.inheritedVariableIds]), ExtendedVariableCollectionAPI.removeOverridesForVariable]
 class VariableCollectionFactory {
-  vm: any
-  variableCollectionPrototype: any
-  extendedVariableCollectionPrototype: any
-  sceneGraph: any
   constructor(e) {
     this.vm = e.vm
     this.variableCollectionPrototype = setupPrototypeFromArgs(e, 'VariableCollection', ...rT)
@@ -16066,7 +16491,7 @@ async function rN(variableSetKey) {
 async function rP(variableSetKey) {
   // rP - Fetch variable collection from external API and process it
 
-  const apiResponse = await Ek(bsh, {
+  const apiResponse = await subscribeAndAwaitData(bsh, {
     key: variableSetKey.toString(),
   })
   const variableCollection = apiResponse.variableCollection
@@ -16081,20 +16506,20 @@ async function rO(variableCollectionInputs) {
   const libraryKeys = Ho(variableCollectionInputs.map(input => input.libraryKey))
 
   // Fetch library data and process variable collections
-  const libraryData: any = await QO(libraryKeys, (resolve, reject) => {
-    const cachedLibraries: any = zl.get(libraryKeys)
-    const allLibrariesResult = Qw.all(Object.values(cachedLibraries))
+  const libraryData = await QO(libraryKeys, (resolve, reject) => {
+    const cachedLibraries = zl.get<ComponentInfo>(libraryKeys)
+    const allLibrariesResult = resourceUtils.all(Object.values(cachedLibraries))
     if (allLibrariesResult.status === 'loaded') {
       resolve(cachedLibraries)
     }
- else if (allLibrariesResult.status === 'errors') {
+    else if (allLibrariesResult.status === 'errors') {
       reject('error fetching variable collections from libraries')
     }
-  })
+  }) as ComponentInfo
 
   // Process collections from library data
-  const processedCollections = []
-  const libraryNameMap = rI(variableCollectionInputs, input => input.libraryKey)
+  const processedCollections: any[] = []
+  const libraryNameMap = keyBy(variableCollectionInputs, input => input.libraryKey)
   for (const [libraryKey, libraryResult] of Object.entries(libraryData)) {
     if (libraryResult.status === 'loaded') {
       const libraryFileData = libraryResult.data?.file
@@ -16141,7 +16566,7 @@ async function rL() {
     if (cachedLibraries.status === 'loaded') {
       resolve(cachedLibraries)
     }
- else if (cachedLibraries.status === 'errors') {
+    else if (cachedLibraries.status === 'errors') {
       reject('error in querying available libraries')
     }
   })
@@ -16188,7 +16613,7 @@ function validateVariableCollectionNode(collectionId) {
   let nodeId = gr.fromString(collectionId ?? '')
   if (!nodeId)
     throw new Error('Invalid variable collection id')
-  let collectionNode = UN().getVariableCollectionNode(nodeId)
+  let collectionNode = getSingletonSceneGraph().getVariableCollectionNode(nodeId)
   if (!collectionNode)
     throw new Error('Cannot find variable collection node')
   if (CUU && !CUU.isVariableSetExtension(collectionNode.id)) {
@@ -16224,11 +16649,11 @@ export const d = {
         metricsKey: 'variable.resolvedType',
         get() {
           return e.newString(rG(i(this).variableResolvedType))
-        }
+        },
       },
       canWriteInReadOnly: !1,
       hasEditScope: !1,
-    });
+    })
   },
   variableCollectionId({
     vm: e,
@@ -16243,11 +16668,11 @@ export const d = {
         metricsKey: 'variable.variableCollectionId',
         get() {
           return e.newString(i(this).variableCollectionId)
-        }
+        },
       },
       canWriteInReadOnly: !1,
       hasEditScope: !1,
-    });
+    })
   },
   key({
     vm: e,
@@ -16263,11 +16688,11 @@ export const d = {
         get() {
           let t = i(this).variableKeyForPublish
           return t ? e.newString(t) : e.$$null
-        }
+        },
       },
       canWriteInReadOnly: !1,
       hasEditScope: !1,
-    });
+    })
   },
   remote({
     vm: e,
@@ -16282,11 +16707,11 @@ export const d = {
         metricsKey: 'variable.remote',
         get() {
           return e.newBoolean(i(this).isSubscribedAsset)
-        }
+        },
       },
       canWriteInReadOnly: !1,
       hasEditScope: !1,
-    });
+    })
   },
   resolveForConsumer({
     vm: e,
@@ -16300,40 +16725,41 @@ export const d = {
       cb(t) {
         let n = e.getStringProp(this, 'id')
         return (function (e, t) {
-          let i;
-          let n = e.newObject();
-          if (!t) return e.$$null;
+          let i
+          let n = e.newObject()
+          if (!t)
+            return e.$$null
           switch (t.resolvedType) {
             case rXF.COLOR:
-              i = e.deepWrap(t.value);
-              break;
+              i = e.deepWrap(t.value)
+              break
             case rXF.STRING:
-              i = e.newString(t.value);
-              break;
+              i = e.newString(t.value)
+              break
             case rXF.FLOAT:
-              i = e.newNumber(t.value);
-              break;
+              i = e.newNumber(t.value)
+              break
             case rXF.BOOLEAN:
-              i = e.newBoolean(t.value);
-              break;
+              i = e.newBoolean(t.value)
+              break
             case rXF.SYMBOL_ID:
-              i = e.newString(t.value);
-              break;
+              i = e.newString(t.value)
+              break
             case rXF.MAP:
-              i = e.deepWrap(t.value);
-              break;
+              i = e.deepWrap(t.value)
+              break
             default:
-              throwTypeError(t);
+              throwTypeError(t)
           }
-          let r = e.newString(rG(t.resolvedType));
-          e.setProp(n, 'value', i);
-          e.setProp(n, 'resolvedType', r);
-          return n;
-        }(e, i(t).resolveVariable(n)));
+          let r = e.newString(rG(t.resolvedType))
+          e.setProp(n, 'value', i)
+          e.setProp(n, 'resolvedType', r)
+          return n
+        }(e, i(t).resolveVariable(n)))
       },
       isAllowedInReadOnly: !0,
       hasEditScope: !1,
-    });
+    })
   },
   remove({
     vm: e,
@@ -16350,7 +16776,7 @@ export const d = {
       },
       isAllowedInReadOnly: !1,
       hasEditScope: !0,
-    });
+    })
   },
   getPublishStatus({
     vm: e,
@@ -16367,14 +16793,14 @@ export const d = {
           resolve,
           reject,
         } = e.newPromise()
-        if (i(this).isSubscribedAsset) 
-throw new Error('can only query publish status for local variables')
+        if (i(this).isSubscribedAsset)
+          throw new Error('can only query publish status for local variables')
         e.registerPromise(fetchPublishStatusForCollection(e.getStringProp(this, 'id'))).then(t => resolve(e.newString(t))).$$catch(reject)
         return promise
       },
       isAllowedInReadOnly: !0,
       hasEditScope: !1,
-    });
+    })
   },
   valuesByMode({
     vm: e,
@@ -16389,11 +16815,11 @@ throw new Error('can only query publish status for local variables')
         metricsKey: 'variable.valuesByMode',
         get() {
           return e.deepWrap(i(this).valuesByMode)
-        }
+        },
       },
       canWriteInReadOnly: !1,
       hasEditScope: !1,
-    });
+    })
   },
   setValueForMode({
     vm: e,
@@ -16410,38 +16836,40 @@ throw new Error('can only query publish status for local variables')
           handle: r,
           zSchema: _$$z.string(),
           property: 'modeId',
-        });
+        })
         let l = _$$u({
           vm: e,
           handle: s,
-          zSchema: n.VariableValue,
+          zSchema: variableDefinitions.VariableValue,
           property: 'newValue',
-        });
-        if (_$$k().ds_extended_collections && isVariableNameWithMode(o)) {
+        })
+        if (getFeatureFlags().ds_extended_collections && isVariableNameWithMode(o)) {
           let {
             collectionId,
             modeId,
           } = rF(o)
-          if (!collectionId) 
-throw new Error('Cannot set value for extended mode')
+          if (!collectionId)
+            throw new Error('Cannot set value for extended mode')
           if (collectionId === a(this).variableCollectionId) {
             a(this).setValueForMode(modeId, l)
             return e.undefined
           }
           let r = validateVariableCollectionNode(collectionId)
-          if (!r.modes.find(e => e.modeID === modeId)) 
-throw new Error('Cannot find mode on extended variable collection')
-          if (!mSn?.getVariableKeysInCollectionChain().includes(a(this).variableKeyForPublish ?? '')) 
-throw new Error('Cannot override value on a variable that is not inherited by this collection')
+          if (!r.modes.find(e => e.modeID === modeId))
+            throw new Error('Cannot find mode on extended variable collection')
+          if (!mSn?.getVariableKeysInCollectionChain().includes(a(this).variableKeyForPublish ?? '')) {
+            throw new Error('Cannot override value on a variable that is not inherited by this collection')
+          }
           r.setVariableOverrideForMode(a(this).id, modeId, l)
-        } else {
+        }
+        else {
           a(this).setValueForMode(o, l)
         }
         return e.undefined
       },
       isAllowedInReadOnly: !1,
       hasEditScope: !0,
-    });
+    })
   },
   removeOverrideForMode({
     vm: e,
@@ -16458,9 +16886,10 @@ throw new Error('Cannot override value on a variable that is not inherited by th
           handle: n,
           zSchema: _$$z.string(),
           property: 'modeId',
-        });
-        if (!isVariableNameWithMode(a)) 
-throw new Error('Cannot remove override: the specified modeId does not refer to an extended collection that inherits this variable.')
+        })
+        if (!isVariableNameWithMode(a)) {
+          throw new Error('Cannot remove override: the specified modeId does not refer to an extended collection that inherits this variable.')
+        }
         let {
           collectionId,
           modeId,
@@ -16470,7 +16899,7 @@ throw new Error('Cannot remove override: the specified modeId does not refer to 
       },
       isAllowedInReadOnly: !1,
       hasEditScope: !0,
-    });
+    })
   },
   scopes({
     vm: e,
@@ -16489,7 +16918,7 @@ throw new Error('Cannot remove override: the specified modeId does not refer to 
             let i
             i = t.variableResolvedType
             return e === 'STROKE' ? 'STROKE_COLOR' : e === 'FONT_STYLE' && i === rXF.FLOAT ? 'FONT_WEIGHT' : e
-          });
+          })
           return e.deepWrap(n)
         },
         set(t) {
@@ -16497,19 +16926,21 @@ throw new Error('Cannot remove override: the specified modeId does not refer to 
           let a = _$$u({
             vm: e,
             handle: t,
-            zSchema: _$$z.array(n.PublicVariableScope),
+            zSchema: _$$z.array(variableDefinitions.PublicVariableScope),
             property: 'scopes',
           }).map(e => (function (e, t) {
-            if (t === 'FONT_WEIGHT' && e !== rXF.FLOAT || t === 'FONT_STYLE' && e !== rXF.STRING) throw new Error('Invalid scope for this variable type');
-            return t === 'STROKE_COLOR' ? 'STROKE' : t === 'FONT_WEIGHT' && e === rXF.FLOAT ? 'FONT_STYLE' : t;
-          }(r.variableResolvedType, e)));
+            if (t === 'FONT_WEIGHT' && e !== rXF.FLOAT || t === 'FONT_STYLE' && e !== rXF.STRING) {
+              throw new Error('Invalid scope for this variable type')
+            }
+            return t === 'STROKE_COLOR' ? 'STROKE' : t === 'FONT_WEIGHT' && e === rXF.FLOAT ? 'FONT_STYLE' : t
+          }(r.variableResolvedType, e)))
           r.variableScopes = gK(a)
           return e.undefined
-        }
+        },
       },
       canWriteInReadOnly: !1,
       hasEditScope: !0,
-    });
+    })
   },
   codeSyntax({
     vm: e,
@@ -16526,11 +16957,11 @@ throw new Error('Cannot remove override: the specified modeId does not refer to 
         get() {
           let t = r(this).variableCodeSyntax
           return e.deepWrap(t)
-        }
+        },
       },
       canWriteInReadOnly: !1,
       hasEditScope: !1,
-    });
+    })
     i({
       handle: a,
       key: 'setVariableCodeSyntax',
@@ -16539,22 +16970,22 @@ throw new Error('Cannot remove override: the specified modeId does not refer to 
         let a = _$$u({
           vm: e,
           handle: t,
-          zSchema: n.PublicVariableCodeSyntaxPlatformPropType,
+          zSchema: variableDefinitions.PublicVariableCodeSyntaxPlatformPropType,
           property: 'codeSyntaxPlatform',
-        });
+        })
         let s = _$$u({
           vm: e,
           handle: i,
           zSchema: _$$z.string(),
           property: 'codeSyntaxValue',
-        });
+        })
         let o = it(a)
         r(this).setVariableCodeSyntax(o, s)
         return e.deepWrap(r(this).variableCodeSyntax)
       },
       isAllowedInReadOnly: !1,
       hasEditScope: !0,
-    });
+    })
     i({
       handle: a,
       key: 'removeVariableCodeSyntax',
@@ -16563,7 +16994,7 @@ throw new Error('Cannot remove override: the specified modeId does not refer to 
         let i = it(_$$u({
           vm: e,
           handle: t,
-          zSchema: n.PublicVariableCodeSyntaxPlatformPropType,
+          zSchema: variableDefinitions.PublicVariableCodeSyntaxPlatformPropType,
           property: 'codeSyntaxPlatform',
         }))
         r(this).removeVariableCodeSyntax(i)
@@ -16571,46 +17002,48 @@ throw new Error('Cannot remove override: the specified modeId does not refer to 
       },
       isAllowedInReadOnly: !1,
       hasEditScope: !0,
-    });
+    })
   },
 }
 class VariableFactory {
-  vm: any
+  vm: NoOpVm
   variablePrototype: any
   sceneGraph: any
-  constructor(e) {
+
+  constructor(e: any) {
     this.vm = e.vm
     this.variablePrototype = setupPrototypeFromArgs(e, 'Variable', ...rB)
     this.sceneGraph = e.sceneGraph
   }
 
-  createVariableHandle(e, t) {
+  createVariableHandle(e: string, t: any) {
     let i = this.vm
     let n = sD.fromString(e)
     if (!n || !t.getVariableNode(n))
       return i.$$null
     let r = i.newObject(this.variablePrototype)
     i.defineProp(r, 'id', {
-      enumerable: !0,
-      writable: !1,
+      enumerable: true,
+      writable: false,
       value: i.newString(e),
     })
     return r
   }
 
-  createNewVariable(e, t, i) {
-    if (isPrivateVariableType(i) && logInternalVariableExposure(i), !getFeatureFlags().ds_extended_collections_vars_creation && CUU?.isVariableSetExtension(t)) {
+  createNewVariable(e: string, t: string, i: string) {
+    isPrivateVariableType(i) && logInternalVariableExposure(i)
+    if (!getFeatureFlags().ds_extended_collections_vars_creation && CUU?.isVariableSetExtension(t)) {
       throw new Error('Cannot create variables in extended variable collections')
     }
     return this.sceneGraph.createVariable(e, t, rV(i)).id
   }
 
-  getLocalVariables(e) {
+  getLocalVariables(e?: string) {
     let t = this.vm
     let i = t.newArray()
     let n = e ? rV(e) : null
     let r = this.sceneGraph.getLocalVariableNodes({
-      resolvedDataType: n ?? void 0,
+      resolvedDataType: n ?? undefined,
     })
     for (let [n, a] of (r.length > 0 && isPrivateVariableType(e) && logInternalVariableExposure(e), r.entries())) {
       let e = this.createVariableHandle(a.id, this.sceneGraph)
@@ -16624,7 +17057,7 @@ class VariableFactory {
    * @param variableType - Optional variable type string to filter by.
    * @returns VM array of variable handles.
    */
-  getSubscribedVariables(variableType) {
+  getSubscribedVariables(variableType?: string) {
     const vm = this.vm
     const resultArray = vm.newArray()
     const resolvedType = variableType ? rV(variableType) : null
@@ -16645,7 +17078,7 @@ class VariableFactory {
    * @param collectionKey - The key of the variable collection.
    * @returns Promise resolving to a VM-wrapped array of variables.
    */
-  getVariablesInLibraryCollectionAsync(collectionKey) {
+  getVariablesInLibraryCollectionAsync(collectionKey: string) {
     const {
       promise,
       resolve,
@@ -16662,7 +17095,7 @@ class VariableFactory {
    * @param variableKey - The key of the variable to import.
    * @returns Promise resolving to the created variable handle.
    */
-  importByKeyAsync(variableKey) {
+  importByKeyAsync(variableKey: string) {
     const {
       promise,
       resolve,
@@ -16684,15 +17117,15 @@ async function rU(variableCollectionKey) {
   const queryParams = d5({
     variableCollectionKey,
   })
-  const collectionResult: any = await QO(queryParams, (resolve, reject) => {
-    const cachedCollection = zl.get(queryParams)
+  const collectionResult = await QO(queryParams, (resolve, reject) => {
+    const cachedCollection = zl.get<VariableResult>(queryParams)
     if (cachedCollection.status === 'loaded') {
       resolve(cachedCollection)
     }
- else if (cachedCollection.status === 'errors') {
+    else if (cachedCollection.status === 'errors') {
       reject(`error fetching variables in collection with id "${variableCollectionKey}"`)
     }
-  })
+  }) as VariableResult
 
   // Transform variables from the collection
   const variables = collectionResult.data?.variableCollection?.variables.map((variable) => {
@@ -16769,12 +17202,8 @@ function mapInternalTypeToVariableType(internalType) {
     case rXF.LINK:
       return 'LINK'
     case rXF.JS_RUNTIME_ALIAS:
-      return 'JS_RUNTIME_ALIAS'
     case rXF.SLOT_CONTENT_ID:
-      return 'SLOT_CONTENT_ID'
-    default:
       throwTypeError(internalType, `Unsupported variable resolved type: ${internalType}`)
-      return 'UNKNOWN'
   }
 }
 function rG(internalType) {
@@ -16810,15 +17239,15 @@ async function fetchAndProcessVariableData(variableKey) {
   const queryParams = Y4({
     key: variableKey,
   })
-  const variableResult: any = await QO(queryParams, (resolve, reject) => {
-    const cachedVariable: any = zl.get(queryParams)
+  const variableResult = await QO(queryParams, (resolve, reject) => {
+    const cachedVariable = zl.get<VariableResult>(queryParams)
     if (cachedVariable.status === 'loaded') {
       resolve(cachedVariable)
     }
- else if (cachedVariable.status === 'errors') {
+    else if (cachedVariable.status === 'errors') {
       reject(cachedVariable.errors)
     }
-  })
+  }) as VariableResult
   const fileInfo = variableResult.data?.variable?.file
   const hubFileInfo = variableResult.data?.variable?.hubFile && oA(variableResult.data.variable.hubFile, null)
   const processedFile = Zt(fileInfo, hubFileInfo)
@@ -16860,40 +17289,83 @@ function logInternalVariableExposure(variableType) {
   // rY - Log warning when internal variable type is exposed to user
   x1('variables-plugin', `Internal only variable type exposed to user: ${variableType}`)
 }
-class VideoStore {
+export class VideoStore {
   thumbnailGenerator: any
-  hashToPrivateVideo: Map<any, any>
-  hashToCoverImageHash: Map<any, any>
-  hashToCoverThumbnailImageHash: Map<any, any>
-  tearDown: () => void
+  hashToPrivateVideo: Map<string, any>
+  hashToCoverImageHash: Map<string, string>
+  hashToCoverThumbnailImageHash: Map<string, string>
+
   constructor() {
     this.thumbnailGenerator = _$$t2
     this.hashToPrivateVideo = new Map()
     this.hashToCoverImageHash = new Map()
     this.hashToCoverThumbnailImageHash = new Map()
-    this.tearDown = () => {
-      this.hashToPrivateVideo = new Map()
-      this.hashToCoverImageHash = new Map()
-      this.hashToCoverThumbnailImageHash = new Map()
-    }
   }
 
-  createVideoAsync = NodeAPISetupUtils.setupVideoCreateVideoAsync
-  getOrCreatePrivateVideo = NodeAPISetupUtils.setupVideoGetOrCreatePrivateVideo
-  getThumbnailImageForVideo = NodeAPISetupUtils.setupVideoGetThumbnailImageForVideo
-  getPrivateVideoOrThrow = NodeAPISetupUtils.setupVideoGetPrivateVideoOrThrow
-}
-/**
- * NoOp Function - placeholder function that performs no operations
- * Used as a default callback or fallback handler where no action is required
- */
-function noOpFunction() {
-  // Intentionally empty - serves as a no-operation placeholder
+  /**
+   * Create video from bytes asynchronously
+   */
+  async createVideoAsync(videoBytes: any) {
+    const uint8Array = new Uint8Array(videoBytes)
+    NfO.isVideoValid(uint8Array)
+    let i = Et(uint8Array)
+    let n = this.thumbnailGenerator.createVideo()
+    return this.thumbnailGenerator.loadVideo(uint8Array, n).then(() => {
+      let e = NfO.uploadVideo(uint8Array, n)
+      this.hashToCoverImageHash.set(i, e.coverHash)
+      this.hashToCoverThumbnailImageHash.set(i, e.coverThumbnailHash)
+      return this.getOrCreatePrivateVideo(i)
+    }).catch(() => {
+      throw new Error(`Unable to generate a thumbnail for video`)
+    })
+  }
+
+  /**
+   * Get or create private video by hash
+   */
+  getOrCreatePrivateVideo(hash: string) {
+    let video = this.hashToPrivateVideo.get(hash)
+    if (!video) {
+      video = {
+        sha1: hash,
+      }
+      this.hashToPrivateVideo.set(hash, video)
+    }
+    return video
+  }
+
+  /**
+   * Get thumbnail image for video
+   */
+  getThumbnailImageForVideo(hash: string) {
+    return this.hashToCoverImageHash.get(hash) || ''
+  }
+
+  /**
+   * Get private video or throw error
+   */
+  getPrivateVideoOrThrow(hash: string) {
+    const video = this.hashToPrivateVideo.get(hash)
+    if (!video) {
+      throw new Error('SHA1 hash does not correspond to an existing video')
+    }
+    return video
+  }
+
+  /**
+   * Clean up video resources
+   */
+  tearDown() {
+    this.hashToPrivateVideo = new Map()
+    this.hashToCoverImageHash = new Map()
+    this.hashToCoverThumbnailImageHash = new Map()
+  }
 }
 class IncLoadingErrorLogger {
-  options: any
-  loggedApiCalls: Set<unknown>
-  constructor(e) {
+  options: IncLoadingErrorLoggerOptions
+  loggedApiCalls: Set<string>
+
+  constructor(e: IncLoadingErrorLoggerOptions) {
     this.options = e
     this.loggedApiCalls = new Set()
   }
@@ -16940,7 +17412,7 @@ function r5(widgetState, uiManager) {
  * @returns Promise<boolean> indicating if event was processed successfully
  */
 async function processWidgetEventHandlers({
-  vm: vmInstance,
+  vm: NoOpVm,
   command: eventCommand,
   vNode: virtualNode,
   runtime: widgetRuntime,
@@ -16965,10 +17437,10 @@ async function processWidgetEventHandlers({
 
   // Process each event handler
   for (const currentHandler of eventHandlers) {
-    const eventData = createEventDataObject(vmInstance, currentHandler, eventCommand)
-    const functionResult = executeEventHandler(vmInstance, currentHandler, eventData, eventCommand, editScope)
-    if (isPromiseLike(vmInstance, functionResult)) {
-      promiseQueue.push(trackEventHandlerPromise(vmInstance, functionResult, widgetController))
+    const eventData = createEventDataObject(NoOpVm, currentHandler, eventCommand)
+    const functionResult = executeEventHandler(NoOpVm, currentHandler, eventData, eventCommand, editScope)
+    if (isPromiseLike(NoOpVm, functionResult)) {
+      promiseQueue.push(trackEventHandlerPromise(NoOpVm, functionResult, widgetController))
     }
   }
 
@@ -17005,8 +17477,8 @@ function getWidgetNodeById(widgetNodeID) {
 /**
  * createEventDataObject - Create event data object for handler execution
  */
-function createEventDataObject(vmInstance, handler, _eventCommand) {
-  return vmInstance.deepWrap({
+function createEventDataObject(NoOpVm, handler, _eventCommand) {
+  return NoOpVm.deepWrap({
     offsetX: handler.bubbleInfo.offsetX,
     offsetY: handler.bubbleInfo.offsetY,
     canvasX: handler.bubbleInfo.canvasX,
@@ -17017,16 +17489,16 @@ function createEventDataObject(vmInstance, handler, _eventCommand) {
 /**
  * executeEventHandler - Execute event handler function with proper error handling
  */
-function executeEventHandler(vmInstance, handler, eventData, eventCommand, editScope) {
-  return l7.plugin(editScope, () => vmInstance.callFunction(getFunctionHandle(handler.handle), vmInstance.undefined, eventCommand.name === 'textEditEnd' ? vmInstance.deepWrap(eventCommand.event) : eventData))
+function executeEventHandler(NoOpVm, handler, eventData, eventCommand, editScope) {
+  return l7.plugin(editScope, () => NoOpVm.callFunction(getFunctionHandle(handler.handle), NoOpVm.undefined, eventCommand.name === 'textEditEnd' ? NoOpVm.deepWrap(eventCommand.event) : eventData))
 }
 
 /**
  * trackEventHandlerPromise - Track promise for widget lifecycle management
  */
-function trackEventHandlerPromise(vmInstance, functionResult, widgetController) {
+function trackEventHandlerPromise(NoOpVm, functionResult, widgetController) {
   widgetController.trackPromise()
-  return vmInstance.unwrapPromise(functionResult).finally(() => {
+  return NoOpVm.unwrapPromise(functionResult).finally(() => {
     widgetController.untrackPromise()
   })
 }
@@ -17042,7 +17514,7 @@ async function processPromiseQueue(promiseQueue, widgetController, uiManager) {
   try {
     await Promise.all(promiseQueue)
   }
- catch (error) {
+  catch (error) {
     // Log error but don't throw to prevent widget termination
     console.error('Widget event handler error:', error)
   }
@@ -17091,7 +17563,7 @@ function extractWidgetEventHandlers(vNode, widgetNode, command, runtime) {
       currentNode = currentNode.children[childIndex]
       addEventHandler(currentVNode, currentBubbleNode)
     }
- else {
+    else {
       break
     }
   }
@@ -17116,7 +17588,7 @@ async function updateWidgetProperties({
 
   // Handle execution failure
   if (callbackResult.type === 'FAILURE') {
-    throw new o9(callbackResult.error)
+    throw new InternalError(callbackResult.error)
   }
 
   // Show warning if callback doesn't return a promise
@@ -17132,7 +17604,7 @@ async function updateWidgetProperties({
   })
 }
 async function handleStuckStatusChange({
-  vm: vmInstance,
+  vm: NoOpVm,
   handler: stuckStatusHandler,
   event: stuckEvent,
 }) {
@@ -17144,25 +17616,25 @@ async function handleStuckStatusChange({
   }
 
   // Execute handler with event data
-  const handlerResult = vmInstance.callFunction(stuckStatusHandler, vmInstance.undefined, vmInstance.deepWrap({
+  const handlerResult = NoOpVm.callFunction(stuckStatusHandler, NoOpVm.undefined, NoOpVm.deepWrap({
     newHostId: stuckEvent.newHost,
     oldHostId: stuckEvent.oldHost,
   }))
 
   // Handle execution failure
   if (handlerResult.type === 'FAILURE') {
-    throw new o9(handlerResult.error)
+    throw new InternalError(handlerResult.error)
   }
 
   // Wait for handler completion
   await wrapVmPromise({
-    vm: vmInstance,
+    vm: NoOpVm,
     promiseHandle: handlerResult.handle,
     shouldRetainResult: false,
   })
 }
 async function handleAttachedStickablesChange({
-  vm: vmInstance,
+  vm: NoOpVm,
   handler: stickablesHandler,
   event: stickablesEvent,
 }) {
@@ -17174,19 +17646,19 @@ async function handleAttachedStickablesChange({
   }
 
   // Execute handler with stickables data
-  const handlerResult = vmInstance.callFunction(stickablesHandler, vmInstance.undefined, vmInstance.deepWrap({
+  const handlerResult = NoOpVm.callFunction(stickablesHandler, NoOpVm.undefined, NoOpVm.deepWrap({
     stuckNodeIds: stickablesEvent.addedNodes,
     unstuckNodeIds: stickablesEvent.removedNodes,
   }))
 
   // Handle execution failure
   if (handlerResult.type === 'FAILURE') {
-    throw new o9(handlerResult.error)
+    throw new InternalError(handlerResult.error)
   }
 
   // Wait for handler completion
   await wrapVmPromise({
-    vm: vmInstance,
+    vm: NoOpVm,
     promiseHandle: handlerResult.handle,
     shouldRetainResult: false,
   })
@@ -17207,6 +17679,7 @@ ${message}`
         : `From the current plugin:
 
 ${message}`
+      // eslint-disable-next-line no-alert
       alert(formattedMessage)
       return e.undefined
     })
@@ -17231,7 +17704,7 @@ ${message}`
  * @throws Error if array is invalid, nodes are in responsive sets, or parameters are invalid
  */
 function processNodeArrayForHierarchyOperation({
-  vm: vmInstance,
+  vm: NoOpVm,
   callerName: operationName,
   nodes: nodeArray,
   parentArg: parentHandle,
@@ -17240,14 +17713,14 @@ function processNodeArrayForHierarchyOperation({
   enableResponsiveSetHierarchyMutations: allowResponsiveOperations,
 }) {
   // Validate input array
-  validateNodeArray(nodeArray, operationName, vmInstance)
+  validateNodeArray(nodeArray, operationName, NoOpVm)
 
   // Extract and validate nodes
-  const nodeIds = extractAndValidateNodes(nodeArray, operationName, vmInstance, nodeGetter, allowResponsiveOperations)
+  const nodeIds = extractAndValidateNodes(nodeArray, operationName, NoOpVm, nodeGetter, allowResponsiveOperations)
 
   // Process parent and index parameters
-  const parentNode = processParentParameter(parentHandle, vmInstance, nodeGetter)
-  const insertionIndex = processIndexParameter(indexHandle, operationName, vmInstance)
+  const parentNode = processParentParameter(parentHandle, NoOpVm, nodeGetter)
+  const insertionIndex = processIndexParameter(indexHandle, operationName, NoOpVm)
   return {
     nodeIds,
     parent: parentNode,
@@ -17258,11 +17731,11 @@ function processNodeArrayForHierarchyOperation({
 /**
  * validateNodeArray - Validate that input is a non-empty array
  */
-function validateNodeArray(nodeArray, operationName, vmInstance) {
-  if (!vmInstance.isArray(nodeArray)) {
+function validateNodeArray(nodeArray, operationName, NoOpVm) {
+  if (!NoOpVm.isArray(nodeArray)) {
     throw new TypeError(`First argument to ${operationName}() must be an array`)
   }
-  const arrayLength = vmInstance.getNumberProp(nodeArray, 'length')
+  const arrayLength = NoOpVm.getNumberProp(nodeArray, 'length')
   if (arrayLength < 1) {
     throw new Error(`First argument to ${operationName}() must be an array of at least one node`)
   }
@@ -17271,11 +17744,11 @@ function validateNodeArray(nodeArray, operationName, vmInstance) {
 /**
  * extractAndValidateNodes - Extract node GUIDs and validate responsive set constraints
  */
-function extractAndValidateNodes(nodeArray, operationName, vmInstance, nodeGetter, allowResponsiveOperations) {
-  const arrayLength = vmInstance.getNumberProp(nodeArray, 'length')
+function extractAndValidateNodes(nodeArray, operationName, NoOpVm, nodeGetter, allowResponsiveOperations) {
+  const arrayLength = NoOpVm.getNumberProp(nodeArray, 'length')
   const nodeIds = []
   for (let nodeIndex = 0; nodeIndex < arrayLength; nodeIndex++) {
-    const nodeHandle = vmInstance.getProp(nodeArray, nodeIndex.toString())
+    const nodeHandle = NoOpVm.getProp(nodeArray, nodeIndex.toString())
     const targetNode = nodeGetter(nodeHandle)
 
     // Validate responsive set constraints
@@ -17290,47 +17763,32 @@ function extractAndValidateNodes(nodeArray, operationName, vmInstance, nodeGette
 /**
  * processParentParameter - Process optional parent node parameter
  */
-function processParentParameter(parentHandle, vmInstance, nodeGetter) {
-  return vmInstance.isUndefined(parentHandle) ? undefined : nodeGetter(parentHandle)
+function processParentParameter(parentHandle, NoOpVm, nodeGetter) {
+  return NoOpVm.isUndefined(parentHandle) ? undefined : nodeGetter(parentHandle)
 }
 
 /**
  * processIndexParameter - Process optional index parameter with validation
  */
-function processIndexParameter(indexHandle, operationName, vmInstance) {
-  if (vmInstance.isUndefined(indexHandle)) {
+function processIndexParameter(indexHandle, operationName, NoOpVm) {
+  if (NoOpVm.isUndefined(indexHandle)) {
     return -1
   }
   return _$$u({
-    vm: vmInstance,
+    vm: NoOpVm,
     handle: indexHandle,
     zSchema: _$$N.PositiveInteger,
     property: `${operationName} index`,
   })
 }
+export const RESTRICTED_TRIGGERS = {
+  NO_UI: new Set(['codegen', 'related-link-preview', 'textreview']),
+  NO_CHECKOUT: new Set(['codegen', 'linkpreview', 'textreview']),
+}
 
 // Keep original function name for backward compatibility
 const ai = processNodeArrayForHierarchyOperation
 let an = new Set(['codegen', 'related-link-preview', 'textreview'])
-// Mock action creators for missing functions
-function switchToPage(pageGuid) {
-  return {
-    type: 'SWITCH_TO_PAGE',
-    pageGuid,
-  }
-}
-function setSelection(selection) {
-  return {
-    type: 'SET_SELECTION',
-    selection,
-  }
-}
-function setViewportZoom(zoom) {
-  return {
-    type: 'SET_VIEWPORT_ZOOM',
-    zoom
-  }
-}
 let ar = new Set(['codegen', 'linkpreview', 'textreview'])
 let aa = _$$z.object({
   origin: _$$z.string().optional(),
@@ -17340,2354 +17798,738 @@ let ao = []
 let al = ['message']
 let ad = ['input']
 let ac = [_$$nT.Design, _$$nT.Whiteboard, _$$nT.DevHandoff, _$$nT.Slides, _$$nT.Sites, _$$nT.Illustration, _$$nT.Cooper]
-
-// ============================================================================
-// REFACTORED PLUGIN API ARCHITECTURE
-// ============================================================================
-
-/**
- * APIContext - Shared context interface for all API modules
- */
-
-/**
- * CoreAPIModule - Handles basic figma API setup and core functions
- */
-class CoreAPIModule {
-  context: any
-  constructor(context) {
-    this.context = context
-  }
-
-  setupCoreAPI(figmaHandle) {
-    const {
-      vm,
-      options,
-      defineVmFunction,
-      defineVmProp,
-    } = this.context
-
-    // Setup API version
-    defineVmProp({
-      handle: figmaHandle,
-      key: 'apiVersion',
-      options: {
-        enumerable: false,
-        writable: false,
-        metricsKey: 'figma.apiVersion',
-        value: vm.newString(options.apiVersion),
-      },
-      canWriteInReadOnly: false,
-      isAllowedInWidgetRender: false,
-      hasEditScope: false,
-    })
-
-    // Setup getHTMLString
-    defineVmFunction({
-      handle: figmaHandle,
-      key: 'getHTMLString',
-      metricsKey: 'figma.getHTMLString',
-      cb: () => vm.newString(options.html ?? ''),
-      isAllowedInReadOnly: true,
-      hasEditScope: false,
-    })
-
-    // Setup fileKey if permissions allow
-    if (options.enablePrivatePluginApi || options.validatedPermissions.permissions.includes('filekey')) {
-      defineVmProp({
-        handle: figmaHandle,
-        key: 'fileKey',
-        options: {
-          enumerable: false,
-          writable: false,
-          metricsKey: 'figma.fileKey',
-          value: vm.newString(options.openFileKey),
-        },
-        canWriteInReadOnly: false,
-        isAllowedInWidgetRender: false,
-        hasEditScope: false,
-      })
-    }
-  }
-}
-
-/**
- * UIAPIModule - Handles UI-related API functionality
- */
-class UIAPIModule {
-  context: any
-  constructor(context) {
-    this.context = context
-  }
-
-  setupUIAPI(figmaHandle) {
-    const {
-      vm,
-      options,
-      defineVmFunction,
-    } = this.context
-
-    // showUI function
-    defineVmFunction({
-      handle: figmaHandle,
-      key: 'showUI',
-      metricsKey: 'figma.showUI',
-      cb: (htmlHandle, optionsHandle) => {
-        const html = vm.toString(htmlHandle)
-        const uiOptions = optionsHandle ? this.parseUIOptions(optionsHandle) : {}
-
-        // Implementation would continue here...
-        return vm.undefined
-      },
-      isAllowedInReadOnly: true,
-      isAllowedInWidgetRender: false,
-      hasEditScope: false,
-    })
-
-    // closePluginWithFailure function
-    if (_$$nl()) {
-      defineVmFunction({
-        handle: figmaHandle,
-        key: 'closePluginWithFailure',
-        metricsKey: 'figma.closePluginWithFailure',
-        cb: (messageHandle) => {
-          let message
-          try {
-            message = vm.toString(messageHandle)
-          }
- catch {
-            message = 'The plugin called "closePluginWithFailure"'
-          }
-          this.context.closePlugin({
-            message,
-            isError: true,
-          })
-          return vm.undefined
-        },
-        isAllowedInReadOnly: true,
-        isAllowedInWidgetRender: false,
-        hasEditScope: false,
-      })
-    }
-  }
-
-  parseUIOptions(_optionsHandle) {
-    // Parse UI options from VM handle
-    return {}
-  }
-}
-
-/**
- * NodeAPIModule - Handles node-related API functionality
- */
-class NodeAPIModule {
-  context: any
-  constructor(context) {
-    this.context = context
-  }
-
-  setupNodeAPI(figmaHandle) {
-    const {
-      vm,
-      defineVmFunction,
-      defineVmProp,
-      getNode,
-      nodeFactory,
-    } = this.context
-
-    // currentPage property
-    defineVmProp({
-      handle: figmaHandle,
-      key: 'currentPage',
-      options: {
-        enumerable: false,
-        metricsKey: 'figma.currentPage',
-        get: memoizedHandle(vm, () => {
-          const currentPageGuid = debugState.getState().currentPageGuid
-          return currentPageGuid ? nodeFactory.createNode(currentPageGuid, 'figma.currentPage') : vm.$$null
-        }),
-        set: (pageHandle) => {
-          const page = getNode(pageHandle)
-          if (page.type !== 'PAGE') {
-            throw new Error('Node must be a page')
-          }
-          debugState.dispatch(switchToPage(page.guid))
-          return vm.undefined
-        },
-      },
-      canWriteInReadOnly: false,
-      isAllowedInWidgetRender: false,
-      hasEditScope: true,
-    })
-
-    // root property
-    defineVmProp({
-      handle: figmaHandle,
-      key: 'root',
-      options: {
-        enumerable: false,
-        metricsKey: 'figma.root',
-        get: memoizedHandle(vm, () => {
-          const rootGuid = debugState.getState().rootGuid
-          return rootGuid ? nodeFactory.createNode(rootGuid, 'figma.root') : vm.$$null
-        }),
-      },
-      canWriteInReadOnly: false,
-      isAllowedInWidgetRender: false,
-      hasEditScope: false,
-    })
-    this.setupNodeCreationMethods(figmaHandle)
-    this.setupNodeSelectionMethods(figmaHandle)
-  }
-
-  setupNodeCreationMethods(figmaHandle) {
-    const {
-      vm,
-      defineVmFunction,
-      nodeFactory,
-    } = this.context
-
-    // createRectangle
-    defineVmFunction({
-      handle: figmaHandle,
-      key: 'createRectangle',
-      metricsKey: 'figma.createRectangle',
-      cb: () => {
-        const rectGuid = this.createNodeGuid('RECTANGLE')
-        return nodeFactory.createNode(rectGuid, 'figma.createRectangle')
-      },
-      isAllowedInReadOnly: false,
-      isAllowedInWidgetRender: false,
-      hasEditScope: true,
-    })
-
-    // createEllipse
-    defineVmFunction({
-      handle: figmaHandle,
-      key: 'createEllipse',
-      metricsKey: 'figma.createEllipse',
-      cb: () => {
-        const ellipseGuid = this.createNodeGuid('ELLIPSE')
-        return nodeFactory.createNode(ellipseGuid, 'figma.createEllipse')
-      },
-      isAllowedInReadOnly: false,
-      isAllowedInWidgetRender: false,
-      hasEditScope: true,
-    })
-
-    // createFrame
-    defineVmFunction({
-      handle: figmaHandle,
-      key: 'createFrame',
-      metricsKey: 'figma.createFrame',
-      cb: () => {
-        const frameGuid = this.createNodeGuid('FRAME')
-        return nodeFactory.createNode(frameGuid, 'figma.createFrame')
-      },
-      isAllowedInReadOnly: false,
-      isAllowedInWidgetRender: false,
-      hasEditScope: true,
-    })
-
-    // createText
-    defineVmFunction({
-      handle: figmaHandle,
-      key: 'createText',
-      metricsKey: 'figma.createText',
-      cb: () => {
-        const textGuid = this.createNodeGuid('TEXT')
-        return nodeFactory.createNode(textGuid, 'figma.createText')
-      },
-      isAllowedInReadOnly: false,
-      isAllowedInWidgetRender: false,
-      hasEditScope: true,
-    })
-  }
-
-  setupNodeSelectionMethods(figmaHandle) {
-    const {
-      vm,
-      defineVmProp,
-      nodeFactory,
-    } = this.context
-
-    // selection property
-    defineVmProp({
-      handle: figmaHandle,
-      key: 'selection',
-      options: {
-        enumerable: false,
-        metricsKey: 'figma.selection',
-        get: memoizedHandle(vm, () => {
-          const selection = debugState.getState().selection
-          const selectionArray = vm.newArray()
-          selection.forEach((nodeGuid, index) => {
-            const nodeObject = nodeFactory.createNode(nodeGuid, 'figma.selection')
-            vm.setProp(selectionArray, index.toString(), nodeObject)
-          })
-          return selectionArray
-        }),
-        set: (selectionHandle) => {
-          const newSelection = this.parseSelectionFromVM(selectionHandle)
-          debugState.dispatch(setSelection(newSelection))
-          return vm.undefined
-        },
-      },
-      canWriteInReadOnly: false,
-      isAllowedInWidgetRender: false,
-      hasEditScope: true,
-    })
-  }
-
-  createNodeGuid(nodeType) {
-    // Implementation for creating new node GUID
-    // This would interface with the scene graph to create a new node
-    return `temp_${nodeType.toLowerCase()}_${Date.now()}`
-  }
-
-  parseSelectionFromVM(_selectionHandle) {
-    // Parse selection array from VM and return node GUIDs
-    return []
-  }
-}
-
-/**
- * DocumentAPIModule - Handles document-level API functionality
- */
-class DocumentAPIModule {
-  context: any
-  constructor(context) {
-    this.context = context
-  }
-
-  setupDocumentAPI(figmaHandle) {
-    const {
-      vm,
-      defineVmFunction,
-      defineVmProp,
-    } = this.context
-
-    // viewport property
-    defineVmProp({
-      handle: figmaHandle,
-      key: 'viewport',
-      options: {
-        enumerable: false,
-        metricsKey: 'figma.viewport',
-        get: memoizedHandle(vm, () => {
-          const viewportObject = vm.newObject()
-          this.setupViewportMethods(viewportObject)
-          return viewportObject
-        }),
-      },
-      canWriteInReadOnly: false,
-      isAllowedInWidgetRender: false,
-      hasEditScope: false,
-    })
-
-    // Mixed sentinel
-    defineVmProp({
-      handle: figmaHandle,
-      key: 'mixed',
-      options: {
-        enumerable: false,
-        writable: false,
-        metricsKey: 'figma.mixed',
-        value: this.getMixedSentinel(),
-      },
-      canWriteInReadOnly: false,
-      isAllowedInWidgetRender: false,
-      hasEditScope: false,
-    })
-    this.setupDocumentUtilityMethods(figmaHandle)
-  }
-
-  setupViewportMethods(viewportObject) {
-    const {
-      vm,
-      defineVmFunction,
-    } = this.context
-
-    // scrollAndZoomIntoView
-    defineVmFunction({
-      handle: viewportObject,
-      key: 'scrollAndZoomIntoView',
-      metricsKey: 'viewport.scrollAndZoomIntoView',
-      cb: (nodeArrayHandle) => {
-        const nodeGuids = this.parseNodeArray(nodeArrayHandle)
-        // Implementation for scrolling and zooming
-        return vm.undefined
-      },
-      isAllowedInReadOnly: true,
-      isAllowedInWidgetRender: false,
-      hasEditScope: false,
-    })
-
-    // zoom property
-    const {
-      defineVmProp,
-    } = this.context
-    defineVmProp({
-      handle: viewportObject,
-      key: 'zoom',
-      options: {
-        enumerable: false,
-        metricsKey: 'viewport.zoom',
-        get: () => {
-          const zoom = debugState.getState().viewport.zoom
-          return vm.newNumber(zoom)
-        },
-        set: (zoomHandle) => {
-          const zoom = vm.toNumber(zoomHandle)
-          debugState.dispatch(setViewportZoom(zoom))
-          return vm.undefined
-        },
-      },
-      canWriteInReadOnly: false,
-      isAllowedInWidgetRender: false,
-      hasEditScope: false,
-    })
-  }
-
-  setupDocumentUtilityMethods(figmaHandle) {
-    const {
-      vm,
-      defineVmFunction,
-    } = this.context
-
-    // getNodeById
-    defineVmFunction({
-      handle: figmaHandle,
-      key: 'getNodeById',
-      metricsKey: 'figma.getNodeById',
-      cb: (idHandle) => {
-        const nodeId = vm.toString(idHandle)
-        const nodeGuid = this.findNodeByPublicId(nodeId)
-        return nodeGuid ? this.context.nodeFactory.createNode(nodeGuid, 'figma.getNodeById') : vm.$$null
-      },
-      isAllowedInReadOnly: true,
-      isAllowedInWidgetRender: true,
-      hasEditScope: false,
-    })
-
-    // createSavepoint
-    defineVmFunction({
-      handle: figmaHandle,
-      key: 'createSavepoint',
-      metricsKey: 'figma.createSavepoint',
-      cb: (nameHandle) => {
-        const name = nameHandle ? vm.toString(nameHandle) : undefined
-        const savepoint = this.createDocumentSavepoint(name)
-        return vm.newString(savepoint)
-      },
-      isAllowedInReadOnly: false,
-      isAllowedInWidgetRender: false,
-      hasEditScope: true,
-    })
-  }
-
-  getMixedSentinel() {
-    const {
-      vm,
-    } = this.context
-    if (!this.context.mixedSentinel) {
-      this.context.mixedSentinel = vm.newObject()
-      vm.freeze(this.context.mixedSentinel)
-    }
-    return this.context.mixedSentinel
-  }
-
-  parseNodeArray(_nodeArrayHandle) {
-    // Parse array of nodes from VM and return GUIDs
-    return []
-  }
-
-  findNodeByPublicId(_publicId) {
-    // Find node GUID by public ID
-    return null
-  }
-
-  createDocumentSavepoint(_name) {
-    // Create document savepoint and return savepoint ID
-    return `savepoint_${Date.now()}`
-  }
-}
-
-/**
- * EventAPIModule - Handles event system API functionality
- */
-class EventAPIModule {
-  context: any
-  constructor(context) {
-    this.context = context
-  }
-
-  setupEventAPI(figmaHandle) {
-    const {
-      vm,
-      defineVmFunction,
-    } = this.context
-
-    // on method
-    defineVmFunction({
-      handle: figmaHandle,
-      key: 'on',
-      metricsKey: 'figma.on',
-      cb: (eventTypeHandle, handlerHandle) => {
-        const eventType = vm.toString(eventTypeHandle)
-        const handler = handlerHandle
-        this.registerEventHandler(eventType, handler, false)
-        return vm.undefined
-      },
-      isAllowedInReadOnly: true,
-      isAllowedInWidgetRender: false,
-      hasEditScope: false,
-    })
-
-    // once method
-    defineVmFunction({
-      handle: figmaHandle,
-      key: 'once',
-      metricsKey: 'figma.once',
-      cb: (eventTypeHandle, handlerHandle) => {
-        const eventType = vm.toString(eventTypeHandle)
-        const handler = handlerHandle
-        this.registerEventHandler(eventType, handler, true)
-        return vm.undefined
-      },
-      isAllowedInReadOnly: true,
-      isAllowedInWidgetRender: false,
-      hasEditScope: false,
-    })
-
-    // off method
-    defineVmFunction({
-      handle: figmaHandle,
-      key: 'off',
-      metricsKey: 'figma.off',
-      cb: (eventTypeHandle, handlerHandle) => {
-        const eventType = vm.toString(eventTypeHandle)
-        const handler = handlerHandle
-        this.unregisterEventHandler(eventType, handler)
-        return vm.undefined
-      },
-      isAllowedInReadOnly: true,
-      isAllowedInWidgetRender: false,
-      hasEditScope: false,
-    })
-  }
-
-  registerEventHandler(eventType, handler, isOnceOnly) {
-    // Register event handler implementation
-    const {
-      eventHandlers,
-    } = this.context
-    if (!eventHandlers.has(eventType)) {
-      eventHandlers.set(eventType, [])
-    }
-    eventHandlers.get(eventType).push({
-      handler,
-      isOnceOnly,
-    })
-  }
-
-  unregisterEventHandler(eventType, handler) {
-    // Unregister event handler implementation
-    const {
-      eventHandlers,
-    } = this.context
-    if (!eventHandlers.has(eventType))
-      return;
-    const handlers = eventHandlers.get(eventType)
-    if (handler) {
-      const index = handlers.findIndex(h => h.handler === handler)
-      if (index !== -1)
-        handlers.splice(index, 1)
-    }
- else {
-      handlers.length = 0 // Clear all handlers for this event type
-    }
-  }
-}
-
-/**
- * BuzzAPIModule - Handles Buzz-specific API functionality
- */
-class BuzzAPIModule {
-  context: any
-  constructor(context) {
-    this.context = context
-  }
-
-  setupBuzzAPI(figmaHandle) {
-    const {
-      vm,
-      defineVmProp,
-    } = this.context
-    if (!this.shouldEnableBuzz())
-      return;
-    defineVmProp({
-      handle: figmaHandle,
-      key: 'buzz',
-      options: {
-        enumerable: false,
-        metricsKey: 'figma.buzz',
-        get: memoizedHandle(vm, () => {
-          const buzzHandle = vm.newObject()
-          this.setupBuzzMethods(buzzHandle)
-          return buzzHandle
-        }),
-      },
-      canWriteInReadOnly: false,
-      isAllowedInWidgetRender: false,
-      hasEditScope: false,
-    })
-  }
-
-  shouldEnableBuzz() {
-    return this.context.inBuzz?.() && getFeatureFlags().buzz_plugins
-  }
-
-  setupBuzzMethods(buzzHandle) {
-    const {
-      vm,
-      defineVmFunction,
-      getNode,
-      nodeFactory,
-      documentAccessState,
-    } = this.context
-
-    // createFrame method
-    defineVmFunction({
-      handle: buzzHandle,
-      key: 'createFrame',
-      metricsKey: 'figma.buzz.createFrame',
-      cb: (canvasRowHandle, canvasColumnHandle) => {
-        const canvasRow = _$$u({
-          vm,
-          handle: canvasRowHandle,
-          zSchema: _$$z.number().finite().min(0).int().optional(),
-          property: 'canvasRow',
-        })
-        const canvasColumn = _$$u({
-          vm,
-          handle: canvasColumnHandle,
-          zSchema: _$$z.number().finite().min(0).int().optional(),
-          property: 'canvasColumn',
-        })
-        const assetType = _$$n2.get('CUSTOM')
-        if (!assetType)
-          throw new Error('Invalid asset type')
-        const sizeConfig = fZl?.getCooperTemplateTypeSize(assetType)
-        if (!sizeConfig)
-          throw new Error('Failed fetching size for asset type')
-        const {
-          row,
-          col,
-        } = getRowColumn(canvasRow, canvasColumn)
-        const frameGuid = IPu?.createBlankChildAtCoord(row, col, sizeConfig, 'plugin_buzz_create_frame', true, assetType)
-        if (!frameGuid)
-          throw new Error('Failed to create frame')
-        av(frameGuid, documentAccessState)
-        Ez5?.canvasGrid().recomputeGrid()
-        return nodeFactory.createNode(frameGuid, 'figma.buzz.createFrame')
-      },
-      isAllowedInReadOnly: true,
-      isAllowedInWidgetRender: false,
-      hasEditScope: true,
-    })
-
-    // Add more Buzz methods as needed...
-  }
-}
-
-/**
- * StyleAPIModule - Handles style-related API functionality
- */
-class StyleAPIModule {
-  context: any
-  constructor(context) {
-    this.context = context
-  }
-
-  setupStyleAPI(figmaHandle) {
-    const {
-      vm,
-      defineVmProp,
-      styleFactory,
-    } = this.context
-    defineVmProp({
-      handle: figmaHandle,
-      key: 'getStyleById',
-      options: {
-        enumerable: false,
-        metricsKey: 'figma.getStyleById',
-        get: memoizedHandle(vm, () => {
-          return vm.defineFunction('getStyleById', (id) => {
-            const styleId = _$$u({
-              vm,
-              handle: id,
-              zSchema: _$$z.string(),
-              property: 'styleId',
-            })
-            return styleFactory.createStyle(styleId, 'figma.getStyleById')
-          })
-        }),
-      },
-      canWriteInReadOnly: false,
-      isAllowedInWidgetRender: true,
-      hasEditScope: false,
-    })
-  }
-}
-
-/**
- * VariableAPIModule - Handles variable-related API functionality
- */
-class VariableAPIModule {
-  context: any
-  constructor(context) {
-    this.context = context
-  }
-
-  setupVariableAPI(figmaHandle) {
-    const {
-      vm,
-      defineVmProp,
-      variableFactory,
-    } = this.context
-    defineVmProp({
-      handle: figmaHandle,
-      key: 'variables',
-      options: {
-        enumerable: false,
-        metricsKey: 'figma.variables',
-        get: memoizedHandle(vm, () => {
-          const variablesHandle = vm.newObject()
-          this.setupVariableMethods(variablesHandle)
-          return variablesHandle
-        }),
-      },
-      canWriteInReadOnly: false,
-      isAllowedInWidgetRender: true,
-      hasEditScope: false,
-    })
-  }
-
-  setupVariableMethods(variablesHandle) {
-    const {
-      vm,
-      defineVmFunction,
-      variableFactory,
-    } = this.context
-    defineVmFunction({
-      handle: variablesHandle,
-      key: 'getVariableById',
-      metricsKey: 'figma.variables.getVariableById',
-      cb: (variableIdHandle) => {
-        const variableId = _$$u({
-          vm,
-          handle: variableIdHandle,
-          zSchema: _$$z.string(),
-          property: 'variableId',
-        })
-        return variableFactory.createVariable(variableId, 'figma.variables.getVariableById')
-      },
-      isAllowedInReadOnly: true,
-      isAllowedInWidgetRender: true,
-      hasEditScope: false,
-    })
-    defineVmFunction({
-      handle: variablesHandle,
-      key: 'getLocalVariables',
-      metricsKey: 'figma.variables.getLocalVariables',
-      cb: () => {
-        return variableFactory.getLocalVariables('figma.variables.getLocalVariables')
-      },
-      isAllowedInReadOnly: true,
-      isAllowedInWidgetRender: true,
-      hasEditScope: false,
-    })
-  }
-}
-
-/**
- * StorageAPIModule - Handles storage-related API functionality
- */
-class StorageAPIModule {
-  context: any
-  constructor(context) {
-    this.context = context
-  }
-
-  setupStorageAPI(figmaHandle) {
-    const {
-      vm,
-      defineVmProp,
-    } = this.context
-    defineVmProp({
-      handle: figmaHandle,
-      key: 'clientStorage',
-      options: {
-        enumerable: false,
-        metricsKey: 'figma.clientStorage',
-        get: memoizedHandle(vm, () => {
-          const storageHandle = vm.newObject()
-          this.setupStorageMethods(storageHandle)
-          return storageHandle
-        }),
-      },
-      canWriteInReadOnly: false,
-      isAllowedInWidgetRender: false,
-      hasEditScope: false,
-    })
-  }
-
-  setupStorageMethods(storageHandle) {
-    const {
-      vm,
-      defineVmFunction,
-    } = this.context
-    defineVmFunction({
-      handle: storageHandle,
-      key: 'getAsync',
-      metricsKey: 'figma.clientStorage.getAsync',
-      cb: (keyHandle) => {
-        const key = _$$u({
-          vm,
-          handle: keyHandle,
-          zSchema: _$$z.string(),
-          property: 'key',
-        })
-        return this.getStorageValue(key)
-      },
-      isAllowedInReadOnly: true,
-      isAllowedInWidgetRender: false,
-      hasEditScope: false,
-    })
-    defineVmFunction({
-      handle: storageHandle,
-      key: 'setAsync',
-      metricsKey: 'figma.clientStorage.setAsync',
-      cb: (keyHandle, valueHandle) => {
-        const key = _$$u({
-          vm,
-          handle: keyHandle,
-          zSchema: _$$z.string(),
-          property: 'key',
-        })
-        const value = _$$u({
-          vm,
-          handle: valueHandle,
-          zSchema: _$$z.any(),
-          property: 'value',
-        })
-        return this.setStorageValue(key, value)
-      },
-      isAllowedInReadOnly: false,
-      isAllowedInWidgetRender: false,
-      hasEditScope: true,
-    })
-  }
-
-  getStorageValue(_key) {
-    // Implementation for getting storage value
-    const {
-      vm,
-    } = this.context
-    return new Promise((resolve) => {
-      // Mock implementation - replace with actual storage logic
-      resolve(vm.undefined)
-    })
-  }
-
-  setStorageValue(_key, _value) {
-    // Implementation for setting storage value
-    const {
-      vm,
-    } = this.context
-    return new Promise((resolve) => {
-      // Mock implementation - replace with actual storage logic
-      resolve(vm.undefined)
-    })
-  }
-}
-
-/**
- * MediaAPIModule - Handles media-related API functionality (images, videos)
- */
-class MediaAPIModule {
-  context: any
-  constructor(context) {
-    this.context = context
-  }
-
-  setupMediaAPI(figmaHandle) {
-    const {
-      vm,
-      defineVmProp,
-    } = this.context
-    defineVmProp({
-      handle: figmaHandle,
-      key: 'importImageFromBytes',
-      options: {
-        enumerable: false,
-        metricsKey: 'figma.importImageFromBytes',
-        get: memoizedHandle(vm, () => {
-          return vm.defineFunction('importImageFromBytes', (bytesHandle, nameHandle) => {
-            const bytes = _$$u({
-              vm,
-              handle: bytesHandle,
-              zSchema: _$$z.any(),
-              property: 'bytes',
-            })
-            const name = nameHandle
-              ? _$$u({
-                  vm,
-                  handle: nameHandle,
-                  zSchema: _$$z.string(),
-                  property: 'name',
-                })
-              : undefined
-            return this.importImageFromBytes(bytes, name)
-          })
-        }),
-      },
-      canWriteInReadOnly: false,
-      isAllowedInWidgetRender: false,
-      hasEditScope: true,
-    })
-  }
-
-  importImageFromBytes(_bytes, _name) {
-    const {
-      vm,
-    } = this.context
-    // Mock implementation - replace with actual media import logic
-    return vm.newPromise((resolve) => {
-      // Simulate async image import
-      setTimeout(() => {
-        resolve(vm.newObject()) // Return mock image object
-      }, 100)
-    })
-  }
-}
-
-/**
- * ComponentAPIModule - Handles component-related API functionality
- */
-class ComponentAPIModule {
-  context: any
-  constructor(context) {
-    this.context = context
-  }
-
-  setupComponentAPI(figmaHandle) {
-    const {
-      vm,
-      defineVmProp,
-    } = this.context
-    defineVmProp({
-      handle: figmaHandle,
-      key: 'getComponentByKey',
-      options: {
-        enumerable: false,
-        metricsKey: 'figma.getComponentByKey',
-        get: memoizedHandle(vm, () => {
-          return vm.defineFunction('getComponentByKey', (keyHandle) => {
-            const componentKey = _$$u({
-              vm,
-              handle: keyHandle,
-              zSchema: _$$z.string(),
-              property: 'componentKey',
-            })
-            return this.getComponentByKey(componentKey)
-          })
-        }),
-      },
-      canWriteInReadOnly: false,
-      isAllowedInWidgetRender: true,
-      hasEditScope: false,
-    })
-  }
-
-  getComponentByKey(componentKey) {
-    const {
-      vm,
-      nodeFactory,
-    } = this.context
-    // Mock implementation - replace with actual component lookup logic
-    const componentGuid = this.lookupComponentByKey(componentKey)
-    if (componentGuid) {
-      return nodeFactory.createNode(componentGuid, 'figma.getComponentByKey')
-    }
-    return vm.null
-  }
-
-  lookupComponentByKey(_componentKey) {
-    // Mock implementation - replace with actual component registry lookup
-    return null
-  }
-}
-
-/**
- * PaymentsAPIModule - Handles payments and checkout functionality
- */
-class PaymentsAPIModule {
-  context: any
-  constructor(context) {
-    this.context = context
-  }
-
-  setupPaymentsAPI(figmaHandle) {
-    const {
-      vm,
-      defineVmProp,
-    } = this.context
-    defineVmProp({
-      handle: figmaHandle,
-      key: 'payments',
-      options: {
-        enumerable: false,
-        metricsKey: 'figma.payments',
-        get: memoizedHandle(vm, () => {
-          const paymentsHandle = vm.newObject()
-          this.setupPaymentMethods(paymentsHandle)
-          return paymentsHandle
-        }),
-      },
-      canWriteInReadOnly: false,
-      isAllowedInWidgetRender: false,
-      hasEditScope: false,
-    })
-  }
-
-  setupPaymentMethods(paymentsHandle) {
-    const {
-      vm,
-      defineVmFunction,
-    } = this.context
-    defineVmFunction({
-      handle: paymentsHandle,
-      key: 'initiateCheckoutAsync',
-      metricsKey: 'figma.payments.initiateCheckoutAsync',
-      cb: (optionsHandle) => {
-        const options = optionsHandle
-          ? _$$u({
-              vm,
-              handle: optionsHandle,
-              zSchema: _$$z.object({}),
-              property: 'options',
-            })
-          : {}
-        return this.initiateCheckoutAsync(options)
-      },
-      isAllowedInReadOnly: false,
-      isAllowedInWidgetRender: false,
-      hasEditScope: false,
-    })
-  }
-
-  initiateCheckoutAsync(_options) {
-    const {
-      vm,
-    } = this.context
-    return vm.newPromise((resolve) => {
-      // Mock implementation - replace with actual checkout logic
-      setTimeout(() => {
-        resolve(vm.undefined)
-      }, 1000)
-    })
-  }
-}
-
-/**
- * UtilityAPIModule - Handles utility functions and miscellaneous API functionality
- */
-class UtilityAPIModule {
-  context: any
-  constructor(context) {
-    this.context = context
-  }
-
-  setupUtilityAPI(figmaHandle) {
-    const {
-      vm,
-      defineVmFunction,
-    } = this.context
-    defineVmFunction({
-      handle: figmaHandle,
-      key: 'base64Encode',
-      metricsKey: 'figma.base64Encode',
-      cb: (dataHandle) => {
-        const data = _$$u({
-          vm,
-          handle: dataHandle,
-          zSchema: _$$z.string(),
-          property: 'data',
-        })
-        return vm.newString(btoa(data))
-      },
-      isAllowedInReadOnly: true,
-      isAllowedInWidgetRender: true,
-      hasEditScope: false,
-    })
-    defineVmFunction({
-      handle: figmaHandle,
-      key: 'base64Decode',
-      metricsKey: 'figma.base64Decode',
-      cb: (encodedDataHandle) => {
-        const encodedData = _$$u({
-          vm,
-          handle: encodedDataHandle,
-          zSchema: _$$z.string(),
-          property: 'encodedData',
-        })
-        try {
-          return vm.newString(atob(encodedData))
-        }
- catch (error) {
-          throw new Error('Invalid base64 string')
-        }
-      },
-      isAllowedInReadOnly: true,
-      isAllowedInWidgetRender: true,
-      hasEditScope: false,
-    })
-  }
-}
-
-/**
- * PrototypeAPIModule - Handles prototype and interaction functionality
- */
-class PrototypeAPIModule {
-  context: any
-  constructor(context) {
-    this.context = context
-  }
-
-  setupPrototypeAPI(figmaHandle) {
-    const {
-      vm,
-      defineVmProp,
-    } = this.context
-    defineVmProp({
-      handle: figmaHandle,
-      key: 'trigger',
-      options: {
-        enumerable: false,
-        metricsKey: 'figma.trigger',
-        get: memoizedHandle(vm, () => {
-          return vm.defineFunction('trigger', (actionHandle, nodeHandle) => {
-            const action = _$$u({
-              vm,
-              handle: actionHandle,
-              zSchema: _$$z.any(),
-              property: 'action',
-            })
-            const node = nodeHandle
-              ? _$$u({
-                  vm,
-                  handle: nodeHandle,
-                  zSchema: _$$z.any(),
-                  property: 'node',
-                })
-              : undefined
-            return this.triggerAction(action, node)
-          })
-        }),
-      },
-      canWriteInReadOnly: false,
-      isAllowedInWidgetRender: false,
-      hasEditScope: true,
-    })
-  }
-
-  triggerAction(_action, _node) {
-    const {
-      vm,
-    } = this.context
-    // Mock implementation - replace with actual prototype trigger logic
-    return vm.undefined
-  }
-}
-
-/**
- * NetworkAPIModule - Handles network requests and external communication
- */
-class NetworkAPIModule {
-  context: any
-  constructor(context) {
-    this.context = context
-  }
-
-  setupNetworkAPI(figmaHandle) {
-    const {
-      vm,
-      defineVmProp,
-    } = this.context
-    defineVmProp({
-      handle: figmaHandle,
-      key: 'ui',
-      options: {
-        enumerable: false,
-        metricsKey: 'figma.ui',
-        get: memoizedHandle(vm, () => {
-          const uiHandle = vm.newObject()
-          this.setupUINetworkMethods(uiHandle)
-          return uiHandle
-        }),
-      },
-      canWriteInReadOnly: false,
-      isAllowedInWidgetRender: false,
-      hasEditScope: false,
-    })
-  }
-
-  setupUINetworkMethods(uiHandle) {
-    const {
-      vm,
-      defineVmFunction,
-    } = this.context
-    defineVmFunction({
-      handle: uiHandle,
-      key: 'postMessage',
-      metricsKey: 'figma.ui.postMessage',
-      cb: (messageHandle, optionsHandle) => {
-        const message = _$$u({
-          vm,
-          handle: messageHandle,
-          zSchema: _$$z.any(),
-          property: 'message',
-        })
-        const options = optionsHandle
-          ? _$$u({
-              vm,
-              handle: optionsHandle,
-              zSchema: _$$z.object({}),
-              property: 'options',
-            })
-          : undefined
-        return this.postMessage(message, options)
-      },
-      isAllowedInReadOnly: false,
-      isAllowedInWidgetRender: false,
-      hasEditScope: false,
-    })
-  }
-
-  postMessage(_message, _options) {
-    const {
-      vm,
-    } = this.context
-    // Mock implementation - replace with actual UI communication logic
-    return vm.undefined
-  }
-}
-
-/**
- * AnnotationsAPIModule - Handles annotations and comments functionality
- */
-class AnnotationsAPIModule {
-  context: any
-  constructor(context) {
-    this.context = context
-  }
-
-  setupAnnotationsAPI(figmaHandle) {
-    const {
-      vm,
-      defineVmProp,
-    } = this.context
-    defineVmProp({
-      handle: figmaHandle,
-      key: 'getComments',
-      options: {
-        enumerable: false,
-        metricsKey: 'figma.getComments',
-        get: memoizedHandle(vm, () => {
-          return vm.defineFunction('getComments', () => {
-            return this.getComments()
-          })
-        }),
-      },
-      canWriteInReadOnly: false,
-      isAllowedInWidgetRender: false,
-      hasEditScope: false,
-    })
-  }
-
-  getComments() {
-    const {
-      vm,
-    } = this.context
-    // Mock implementation - replace with actual comments retrieval logic
-    return vm.newArray([])
-  }
-}
-
-/**
- * FontAPIModule - Handles font loading and text styling functionality
- */
-class FontAPIModule {
-  context: any
-  constructor(context) {
-    this.context = context
-  }
-
-  setupFontAPI(figmaHandle) {
-    const {
-      vm,
-      defineVmProp,
-    } = this.context
-    defineVmProp({
-      handle: figmaHandle,
-      key: 'loadFontAsync',
-      options: {
-        enumerable: false,
-        metricsKey: 'figma.loadFontAsync',
-        get: memoizedHandle(vm, () => {
-          return vm.defineFunction('loadFontAsync', (fontHandle) => {
-            const font = _$$u({
-              vm,
-              handle: fontHandle,
-              zSchema: _$$z.object({}),
-              property: 'font',
-            })
-            return this.loadFontAsync(font)
-          })
-        }),
-      },
-      canWriteInReadOnly: false,
-      isAllowedInWidgetRender: false,
-      hasEditScope: false,
-    })
-    defineVmProp({
-      handle: figmaHandle,
-      key: 'listAvailableFontsAsync',
-      options: {
-        enumerable: false,
-        metricsKey: 'figma.listAvailableFontsAsync',
-        get: memoizedHandle(vm, () => {
-          return vm.defineFunction('listAvailableFontsAsync', () => {
-            return this.listAvailableFontsAsync()
-          })
-        }),
-      },
-      canWriteInReadOnly: false,
-      isAllowedInWidgetRender: false,
-      hasEditScope: false,
-    })
-  }
-
-  loadFontAsync(_font) {
-    const {
-      vm,
-    } = this.context
-    return vm.newPromise((resolve) => {
-      // Mock implementation - replace with actual font loading logic
-      setTimeout(() => {
-        resolve(vm.undefined)
-      }, 100)
-    })
-  }
-
-  listAvailableFontsAsync() {
-    const {
-      vm,
-    } = this.context
-    return vm.newPromise((resolve) => {
-      // Mock implementation - replace with actual font listing logic
-      setTimeout(() => {
-        resolve(vm.newArray([]))
-      }, 100)
-    })
-  }
-}
-
-/**
- * EffectsAPIModule - Handles effects and styling functionality
- */
-class EffectsAPIModule {
-  context: any
-  constructor(context) {
-    this.context = context
-  }
-
-  setupEffectsAPI(figmaHandle) {
-    const {
-      vm,
-      defineVmProp,
-    } = this.context
-    defineVmProp({
-      handle: figmaHandle,
-      key: 'createShadow',
-      options: {
-        enumerable: false,
-        metricsKey: 'figma.createShadow',
-        get: memoizedHandle(vm, () => {
-          return vm.defineFunction('createShadow', (effectHandle) => {
-            const effect = _$$u({
-              vm,
-              handle: effectHandle,
-              zSchema: _$$z.object({}),
-              property: 'effect',
-            })
-            return this.createShadow(effect)
-          })
-        }),
-      },
-      canWriteInReadOnly: false,
-      isAllowedInWidgetRender: false,
-      hasEditScope: false,
-    })
-  }
-
-  createShadow(_effect) {
-    const {
-      vm,
-    } = this.context
-    return vm.newObject()
-  }
-}
-
-/**
- * GradientAPIModule - Handles gradient creation and manipulation
- */
-class GradientAPIModule {
-  context: any
-  constructor(context) {
-    this.context = context
-  }
-
-  setupGradientAPI(figmaHandle) {
-    const {
-      vm,
-      defineVmProp,
-    } = this.context
-    defineVmProp({
-      handle: figmaHandle,
-      key: 'createGradient',
-      options: {
-        enumerable: false,
-        metricsKey: 'figma.createGradient',
-        get: memoizedHandle(vm, () => {
-          return vm.defineFunction('createGradient', (gradientHandle) => {
-            const gradient = _$$u({
-              vm,
-              handle: gradientHandle,
-              zSchema: _$$z.object({}),
-              property: 'gradient',
-            })
-            return this.createGradient(gradient)
-          })
-        }),
-      },
-      canWriteInReadOnly: false,
-      isAllowedInWidgetRender: false,
-      hasEditScope: false,
-    })
-  }
-
-  createGradient(_gradient) {
-    const {
-      vm,
-    } = this.context
-    return vm.newObject()
-  }
-}
-
-/**
- * TransformAPIModule - Handles geometric transformations
- */
-class TransformAPIModule {
-  context: any
-  constructor(context) {
-    this.context = context
-  }
-
-  setupTransformAPI(figmaHandle) {
-    const {
-      vm,
-      defineVmProp,
-    } = this.context
-    defineVmProp({
-      handle: figmaHandle,
-      key: 'createTransform',
-      options: {
-        enumerable: false,
-        metricsKey: 'figma.createTransform',
-        get: memoizedHandle(vm, () => {
-          return vm.defineFunction('createTransform', (transformHandle) => {
-            const transform = _$$u({
-              vm,
-              handle: transformHandle,
-              zSchema: _$$z.array(_$$z.array(_$$z.number())),
-              property: 'transform',
-            })
-            return this.createTransform(transform)
-          })
-        }),
-      },
-      canWriteInReadOnly: false,
-      isAllowedInWidgetRender: false,
-      hasEditScope: false,
-    })
-  }
-
-  createTransform(transform) {
-    const {
-      vm,
-    } = this.context
-    return vm.newArray(transform || [[1, 0, 0], [0, 1, 0]])
-  }
-}
-
-/**
- * LayerAPIModule - Handles layer management and hierarchy operations
- */
-class LayerAPIModule {
-  context: any
-  constructor(context) {
-    this.context = context
-  }
-
-  setupLayerAPI(figmaHandle) {
-    const {
-      vm,
-      defineVmProp,
-    } = this.context
-    defineVmProp({
-      handle: figmaHandle,
-      key: 'group',
-      options: {
-        enumerable: false,
-        metricsKey: 'figma.group',
-        get: memoizedHandle(vm, () => {
-          return vm.defineFunction('group', (nodesHandle, parentHandle, indexHandle) => {
-            const nodes = _$$u({
-              vm,
-              handle: nodesHandle,
-              zSchema: _$$z.array(_$$z.any()),
-              property: 'nodes',
-            })
-            const parent = _$$u({
-              vm,
-              handle: parentHandle,
-              zSchema: _$$z.any(),
-              property: 'parent',
-            })
-            const index = indexHandle
-              ? _$$u({
-                  vm,
-                  handle: indexHandle,
-                  zSchema: _$$z.number(),
-                  property: 'index',
-                })
-              : undefined
-            return this.groupNodes(nodes, parent, index)
-          })
-        }),
-      },
-      canWriteInReadOnly: false,
-      isAllowedInWidgetRender: false,
-      hasEditScope: true,
-    })
-    defineVmProp({
-      handle: figmaHandle,
-      key: 'ungroup',
-      options: {
-        enumerable: false,
-        metricsKey: 'figma.ungroup',
-        get: memoizedHandle(vm, () => {
-          return vm.defineFunction('ungroup', (groupHandle) => {
-            const group = _$$u({
-              vm,
-              handle: groupHandle,
-              zSchema: _$$z.any(),
-              property: 'group',
-            })
-            return this.ungroupNode(group)
-          })
-        }),
-      },
-      canWriteInReadOnly: false,
-      isAllowedInWidgetRender: false,
-      hasEditScope: true,
-    })
-  }
-
-  groupNodes(_nodes, _parent, _index) {
-    const {
-      vm,
-    } = this.context
-    // Mock implementation - replace with actual grouping logic
-    return vm.newObject()
-  }
-
-  ungroupNode(_group) {
-    const {
-      vm,
-    } = this.context
-    // Mock implementation - replace with actual ungrouping logic
-    return vm.newArray([])
-  }
-}
-
-/**
- * AnimationAPIModule - Handles animation and transition functionality
- */
-class AnimationAPIModule {
-  context: any
-  constructor(context) {
-    this.context = context
-  }
-
-  setupAnimationAPI(figmaHandle) {
-    const {
-      vm,
-      defineVmProp,
-    } = this.context
-    defineVmProp({
-      handle: figmaHandle,
-      key: 'animate',
-      options: {
-        enumerable: false,
-        metricsKey: 'figma.animate',
-        get: memoizedHandle(vm, () => {
-          return vm.defineFunction('animate', (nodeHandle, animationHandle) => {
-            const node = _$$u({
-              vm,
-              handle: nodeHandle,
-              zSchema: _$$z.any(),
-              property: 'node',
-            })
-            const animation = _$$u({
-              vm,
-              handle: animationHandle,
-              zSchema: _$$z.object({}),
-              property: 'animation',
-            })
-            return this.animateNode(node, animation)
-          })
-        }),
-      },
-      canWriteInReadOnly: false,
-      isAllowedInWidgetRender: false,
-      hasEditScope: true,
-    })
-  }
-
-  animateNode(_node, animation) {
-    const {
-      vm,
-    } = this.context
-    return vm.newPromise((resolve) => {
-      // Mock implementation - replace with actual animation logic
-      setTimeout(() => {
-        resolve(vm.undefined)
-      }, animation.duration || 1000)
-    })
-  }
-}
-
-/**
- * ExportAPIModule - Handles export and image generation functionality
- */
-class ExportAPIModule {
-  context: any
-  constructor(context) {
-    this.context = context
-  }
-
-  setupExportAPI(figmaHandle) {
-    const {
-      vm,
-      defineVmProp,
-    } = this.context
-    defineVmProp({
-      handle: figmaHandle,
-      key: 'exportAsync',
-      options: {
-        enumerable: false,
-        metricsKey: 'figma.exportAsync',
-        get: memoizedHandle(vm, () => {
-          return vm.defineFunction('exportAsync', (nodeHandle, settingsHandle) => {
-            const node = _$$u({
-              vm,
-              handle: nodeHandle,
-              zSchema: _$$z.any(),
-              property: 'node',
-            })
-            const settings = settingsHandle
-              ? _$$u({
-                  vm,
-                  handle: settingsHandle,
-                  zSchema: _$$z.object({}),
-                  property: 'settings',
-                })
-              : {
-                  format: 'PNG',
-                };
-            return this.exportNodeAsync(node, settings)
-          })
-        }),
-      },
-      canWriteInReadOnly: false,
-      isAllowedInWidgetRender: false,
-      hasEditScope: false,
-    })
-  }
-
-  exportNodeAsync(_node, _settings) {
-    const {
-      vm,
-    } = this.context
-    return vm.newPromise((resolve) => {
-      // Mock implementation - replace with actual export logic
-      setTimeout(() => {
-        const mockImageData = new Uint8Array([137, 80, 78, 71]) // PNG header
-        resolve(vm.newUint8Array(mockImageData))
-      }, 500)
-    })
-  }
-}
-
-/**
- * TextAPIModule - Handles text manipulation and typography functionality
- */
-class TextAPIModule {
-  context: any
-  constructor(context) {
-    this.context = context
-  }
-
-  setupTextAPI(figmaHandle) {
-    const {
-      vm,
-      defineVmProp,
-    } = this.context
-    defineVmProp({
-      handle: figmaHandle,
-      key: 'createTextNode',
-      options: {
-        enumerable: false,
-        metricsKey: 'figma.createTextNode',
-        get: memoizedHandle(vm, () => {
-          return vm.defineFunction('createTextNode', (textHandle) => {
-            const text = textHandle
-              ? _$$u({
-                  vm,
-                  handle: textHandle,
-                  zSchema: _$$z.string(),
-                  property: 'text',
-                })
-              : ''
-            return this.createTextNode(text)
-          })
-        }),
-      },
-      canWriteInReadOnly: false,
-      isAllowedInWidgetRender: false,
-      hasEditScope: true,
-    })
-    defineVmProp({
-      handle: figmaHandle,
-      key: 'getLocalTextStyles',
-      options: {
-        enumerable: false,
-        metricsKey: 'figma.getLocalTextStyles',
-        get: memoizedHandle(vm, () => {
-          return vm.defineFunction('getLocalTextStyles', () => {
-            return this.getLocalTextStyles()
-          })
-        }),
-      },
-      canWriteInReadOnly: true,
-      isAllowedInWidgetRender: true,
-      hasEditScope: false,
-    })
-  }
-
-  createTextNode(text) {
-    const {
-      vm,
-      nodeFactory,
-    } = this.context
-    // Mock implementation - replace with actual text node creation
-    return nodeFactory ? nodeFactory.createTextNode(text) : vm.newObject()
-  }
-
-  getLocalTextStyles() {
-    const {
-      vm,
-    } = this.context
-    // Mock implementation - replace with actual text styles retrieval
-    return vm.newArray([])
-  }
-}
-
-/**
- * ConfigAPIModule - Handles plugin configuration and settings
- */
-class ConfigAPIModule {
-  context: any
-  constructor(context) {
-    this.context = context
-  }
-
-  setupConfigAPI(figmaHandle) {
-    const {
-      vm,
-      defineVmProp,
-    } = this.context
-    defineVmProp({
-      handle: figmaHandle,
-      key: 'parameters',
-      options: {
-        enumerable: false,
-        metricsKey: 'figma.parameters',
-        get: memoizedHandle(vm, () => {
-          return this.getParameters()
-        }),
-      },
-      canWriteInReadOnly: true,
-      isAllowedInWidgetRender: true,
-      hasEditScope: false,
-    })
-    defineVmProp({
-      handle: figmaHandle,
-      key: 'command',
-      options: {
-        enumerable: false,
-        metricsKey: 'figma.command',
-        get: memoizedHandle(vm, () => {
-          return vm.newString(this.getCommand())
-        }),
-      },
-      canWriteInReadOnly: true,
-      isAllowedInWidgetRender: true,
-      hasEditScope: false,
-    })
-  }
-
-  getParameters() {
-    const {
-      vm,
-      options,
-    } = this.context
-    return vm.newObject() // Mock implementation
-  }
-
-  getCommand() {
-    const {
-      options,
-    } = this.context
-    return options.command || 'default'
-  }
-}
-
-/**
- * PerformanceAPIModule - Handles performance monitoring and optimization
- */
-class PerformanceAPIModule {
-  context: any
-  constructor(context) {
-    this.context = context
-  }
-
-  setupPerformanceAPI(figmaHandle) {
-    const {
-      vm,
-      defineVmProp,
-    } = this.context
-    defineVmProp({
-      handle: figmaHandle,
-      key: 'skipInvisibleInstanceChildren',
-      options: {
-        enumerable: false,
-        metricsKey: 'figma.skipInvisibleInstanceChildren',
-        set: (valueHandle) => {
-          const value = _$$u({
-            vm,
-            handle: valueHandle,
-            zSchema: _$$z.boolean(),
-            property: 'skipInvisibleInstanceChildren',
-          })
-          this.setSkipInvisibleInstanceChildren(value)
-        },
-        get: () => {
-          return vm.newBoolean(this.getSkipInvisibleInstanceChildren())
-        },
-      },
-      canWriteInReadOnly: true,
-      isAllowedInWidgetRender: true,
-      hasEditScope: false,
-    })
-  }
-
-  setSkipInvisibleInstanceChildren(value) {
-    // Mock implementation - replace with actual performance setting
-    console.log('Setting skipInvisibleInstanceChildren:', value)
-  }
-
-  getSkipInvisibleInstanceChildren() {
-    // Mock implementation - replace with actual performance setting retrieval
-    return false
-  }
-}
-
-/**
- * SecurityAPIModule - Handles security validation and access control
- */
-class SecurityAPIModule {
-  context: any
-  constructor(context) {
-    this.context = context
-  }
-
-  setupSecurityAPI(figmaHandle) {
-    const {
-      vm,
-      defineVmProp,
-    } = this.context
-    defineVmProp({
-      handle: figmaHandle,
-      key: 'currentUser',
-      options: {
-        enumerable: false,
-        metricsKey: 'figma.currentUser',
-        get: memoizedHandle(vm, () => {
-          return this.getCurrentUser()
-        }),
-      },
-      canWriteInReadOnly: true,
-      isAllowedInWidgetRender: true,
-      hasEditScope: false,
-    })
-    defineVmProp({
-      handle: figmaHandle,
-      key: 'permissions',
-      options: {
-        enumerable: false,
-        metricsKey: 'figma.permissions',
-        get: memoizedHandle(vm, () => {
-          return this.getPermissions()
-        }),
-      },
-      canWriteInReadOnly: true,
-      isAllowedInWidgetRender: true,
-      hasEditScope: false,
-    })
-  }
-
-  getCurrentUser() {
-    const {
-      vm,
-    } = this.context
-    // Mock implementation - replace with actual user data
-    const userObject = vm.newObject()
-    vm.setProp(userObject, 'id', vm.newString('user-123'))
-    vm.setProp(userObject, 'name', vm.newString('Anonymous User'))
-    return userObject
-  }
-
-  getPermissions() {
-    const {
-      vm,
-    } = this.context
-    // Mock implementation - replace with actual permissions
-    const permissionsObject = vm.newObject()
-    vm.setProp(permissionsObject, 'canEdit', vm.newBoolean(true))
-    vm.setProp(permissionsObject, 'canComment', vm.newBoolean(true))
-    return permissionsObject
-  }
-}
-
-/**
- * Refactored Plugin API class with modular architecture
- */
 class PluginRuntime {
-  // Core properties from original class
-
-  // Node API setup utilities
-  getNode = NodeAPISetupUtils.setupNodeGetNode
-  getVariableNode = NodeAPISetupUtils.setupNodeGetVariableNode
-  getVariableCollectionNode = NodeAPISetupUtils.setupNodeGetVariableCollectionNode
-  getAnnotationCategory = NodeAPISetupUtils.setupNodeGetAnnotationCategory
-  vm: any
-  options: any
-  eventHandlers: Map<any, any>
-  scheduledEvents: Map<any, any>
-  widgetManager: any
-  documentAccessState: any
-  privateSceneGraph: any
-  nodeFactory: any
-  styleFactory: any
-  previousSelection: never[]
-  previousSelectedTextRangeJson: null
+  // Core properties
+  vm: NoOpVm
+  options: PluginRuntimeOptions
   visualBellCounter: number
-  onMessageCallback: undefined
+  eventHandlers: Map<string, EventHandler[]>
+  eventHandlerTimeouts: Map<string, any>
+  scheduledEvents: Map<string, ScheduledEvent>
+  runningSyncEvent: string | null
+  runningCloseEventHandler: boolean
+  previousSelection: string[]
+  previousSelectedTextRangeJson: string
+  onMessageCallback: any
   queryMode: boolean
   checkoutRequested: boolean
+  widgetManager: any
   skipInvisibleInstanceChildren: boolean
-  runningCloseEventHandler: boolean
-  runningSyncEvent: null
+  spellCheckCallback: any
+  legacyCodegenCallback: any
+  codegenCallback: any
+  linkPreviewCallback: any
+  authCallback: any
   textReviewRequestRejects: number
   isTextReviewRequestModalOpen: boolean
-  eventHandlerTimeouts: Map<any, any>
-  spellCheckCallback: undefined
-  legacyCodegenCallback: undefined
-  codegenCallback: undefined
-  linkPreviewCallback: undefined
-  authCallback: undefined
-  styleManager: undefined
-  imageStore: undefined
-  videoStore: undefined
   isWidget: boolean
+  privateSceneGraph: any
+  styleManager: StyleManager
+  imageStore: ImageStore
+  videoStore: VideoStore
+  documentAccessState: DocumentAccessState
   _hasRegisteredWidgetFunction: boolean
-  uiHandle: undefined
-  variableFactory: any
-  variableCollectionFactory: any
-  coreAPIModule: CoreAPIModule
-  buzzAPIModule: BuzzAPIModule
-  uiAPIModule: UIAPIModule
-  nodeAPIModule: NodeAPIModule
-  documentAPIModule: DocumentAPIModule
-  eventAPIModule: EventAPIModule
-  styleAPIModule: StyleAPIModule
-  variableAPIModule: VariableAPIModule
-  storageAPIModule: StorageAPIModule
-  mediaAPIModule: MediaAPIModule
-  componentAPIModule: ComponentAPIModule
-  paymentsAPIModule: PaymentsAPIModule
-  utilityAPIModule: UtilityAPIModule
-  prototypeAPIModule: PrototypeAPIModule
-  networkAPIModule: NetworkAPIModule
-  annotationsAPIModule: AnnotationsAPIModule
-  fontAPIModule: FontAPIModule
-  effectsAPIModule: EffectsAPIModule
-  gradientAPIModule: GradientAPIModule
-  transformAPIModule: TransformAPIModule
-  layerAPIModule: LayerAPIModule
-  animationAPIModule: AnimationAPIModule
-  exportAPIModule: ExportAPIModule
-  textAPIModule: TextAPIModule
-  configAPIModule: ConfigAPIModule
-  performanceAPIModule: PerformanceAPIModule
-  securityAPIModule: SecurityAPIModule
-  paintProcessor: import('/Users/allen/github/fig/src/905/modules/paint-fill-processing').AdvancedPaintProcessor
-  fillManager: import('/Users/allen/github/fig/src/905/modules/paint-fill-processing').AdvancedFillManager
   fullscreenEditorType: any
   mixedSentinel: any
-  runtimeOptions: { allowVisibleIframe: boolean, iframeId: any, allowInitiateCheckout: boolean }
-  annotationCategoryFactory: AnnotationCategoryFactory
+  runtimeOptions: any
+  nodeFactory: NodeFactory
+  styleFactory: StyleFactory
+  variableFactory: VariableFactory
+  variableCollectionFactory: any
+  annotationCategoryFactory: any
+  uiHandle: UIHandle
 
-  // Modular API components
+  getNode = (e: any) => {
+    let t = this.vm
+    let i = this.privateSceneGraph
+    if (!t.isObject(e)) {
+      throw new TypeError(`Expected node, got ${t.isNull(e) ? 'null' : t.typeof(e)}`)
+    }
+    let n = t.getProp(e, 'id')
+    if (!t.isString(n))
+      throw new Error(`Expected node id to be a string, got ${t.typeof(n)}`)
+    let r = t.toString(n)
+    let a = sD.fromString(r)
+    let s = gr.fromString(r)
+    if (M7(r)) {
+      let e = this.styleManager.get(r)
+      if (!e) {
+        throw new ApplicationError(`The style with id ${JSON.stringify(r)} does not exist`)
+      }
+      return e
+    }
+    if (a) {
+      let e = i.getVariableNode(a)
+      if (void 0 === e) {
+        throw new ApplicationError(`The variable with id ${JSON.stringify(r)} does not exist`)
+      }
+      return e
+    }
+    if (s) {
+      let e = i.getVariableCollectionNode(s)
+      if (void 0 === e) {
+        throw new ApplicationError(`The variable collection with id ${JSON.stringify(r)} does not exist`)
+      }
+      return e
+    }
+    if (i.isDeveloperFriendlyIdAGuidPath(r)) {
+      let e = i.guidFromDeveloperFriendlyId(r)
+      let t = e ? i.get(e) : void 0
+      if (!t) {
+        throw new ApplicationError(`The node (instance sublayer or table cell) with id ${JSON.stringify(r)} does not exist`)
+      }
+      return t
+    }
+    {
+      let e = getNodeById(r, i)
+      if (e.isInWidget && !(getFeatureFlags().widgets_children_trait_for_test || t.vmType === 'scopednoopvm')) {
+        throw new ApplicationError(`The node (instance sublayer) with id ${JSON.stringify(r)} does not exist`)
+      }
+      return e
+    }
+  }
 
-  constructor(vmConfig, contextOptions) {
-    // Initialize core properties (preserved from original)
-    this.vm = vmConfig.vm
-    this.options = contextOptions
-    this.eventHandlers = new Map()
-    this.scheduledEvents = new Map()
-    this.widgetManager = contextOptions.widgetManager
-    this.documentAccessState = contextOptions.documentAccessState
-    this.privateSceneGraph = contextOptions.privateSceneGraph
-    this.nodeFactory = contextOptions.nodeFactory
-    this.styleFactory = contextOptions.styleFactory
-    this.previousSelection = []
-    this.previousSelectedTextRangeJson = null
+  getVariableNode = (e: any) => {
+    let t = this.vm
+    let i = this.privateSceneGraph
+    if (!t.isObject(e)) {
+      throw new TypeError(`Expected node, got ${t.isNull(e) ? 'null' : t.typeof(e)}`)
+    }
+    let n = t.getProp(e, 'id')
+    if (!t.isString(n))
+      throw new Error(`Expected node id to be a string, got ${t.typeof(n)}`)
+    let r = t.toString(n)
+    let a = sD.fromString(r)
+    if (!a)
+      throw new Error(`The variable id ${JSON.stringify(r)} is not valid`)
+    let s = i.getVariableNode(a)
+    if (void 0 === s) {
+      throw new ApplicationError(`The variable with id ${JSON.stringify(r)} does not exist`)
+    }
+    return s
+  }
 
-    // Initialize remaining properties
+  getVariableCollectionNode = (e: any) => {
+    let t = this.vm
+    let i = this.privateSceneGraph
+    if (!t.isObject(e)) {
+      throw new TypeError(`Expected node, got ${t.isNull(e) ? 'null' : t.typeof(e)}`)
+    }
+    let n = t.getProp(e, 'id')
+    if (!t.isString(n))
+      throw new Error(`Expected node id to be a string, got ${t.typeof(n)}`)
+    let r = t.toString(n)
+    let a = gr.fromString(r)
+    if (!a) {
+      throw new Error(`The variable collection id ${JSON.stringify(r)} is not valid`)
+    }
+    let s = i.getVariableCollectionNode(a)
+    if (void 0 === s) {
+      throw new ApplicationError(`The variable collection with id ${JSON.stringify(r)} does not exist`)
+    }
+    return s
+  }
+
+  getAnnotationCategory = (e: any) => {
+    let t = this.vm
+    let i = this.privateSceneGraph
+    if (!t.isObject(e)) {
+      throw new TypeError(`Expected node, got ${t.isNull(e) ? 'null' : t.typeof(e)}`)
+    }
+    let n = t.getProp(e, 'id')
+    if (!t.isString(n))
+      throw new Error(`Expected node id to be a string, got ${t.typeof(n)}`)
+    let r = t.toString(n)
+    if (!fn(sH(r))) {
+      throw new Error(`The annotation category id ${JSON.stringify(r)} is not valid`)
+    }
+    let a = i.getRoot().annotationCategories
+    if (a === null)
+      throw new Error('Annotation categories have not been initialized')
+    let s = a.find(e => e.id === r)
+    if (void 0 === s) {
+      throw new Error(`The annotation category with id ${JSON.stringify(r)} does not exist`)
+    }
+    return s
+  }
+
+  constructor(vm: NoOpVm, options: PluginRuntimeOptions) {
+    this.vm = vm
+    this.options = options
     this.visualBellCounter = 0
+    this.eventHandlers = new Map()
+    this.eventHandlerTimeouts = new Map()
+    this.scheduledEvents = new Map()
+    this.runningSyncEvent = null
+    this.runningCloseEventHandler = false
+    this.previousSelection = []
+    this.previousSelectedTextRangeJson = 'null'
     this.onMessageCallback = undefined
     this.queryMode = false
     this.checkoutRequested = false
+    this.widgetManager = undefined
     this.skipInvisibleInstanceChildren = false
-    this.runningCloseEventHandler = false
-    this.runningSyncEvent = null
+    this.spellCheckCallback = this.createPromiseCallback({
+      makeInputEvent: (e) => {
+        let t = this.vm.newObject()
+        this.vm.setProp(t, 'text', this.vm.newString(e))
+        return t
+      },
+      eventName: 'textreview',
+      zResultSchema: _$$N.TextReviewResultSchema,
+      defaultResult: [],
+      rejectMessage: 'Promise returned from \'textreview\' event rejected. Unable to show text review suggestions.',
+    })
+    this.legacyCodegenCallback = this.createPromiseCallback({
+      makeInputEvent: (e) => {
+        let t = this.vm.newObject()
+        let i = this.nodeFactory.createNode(e, 'codegen')
+        this.vm.setProp(t, 'node', i)
+        return t
+      },
+      eventName: 'codegen',
+      zResultSchema: _$$N.CodegenResultSchema,
+      defaultResult: [],
+      rejectMessage: 'Promise returned from codegen event rejected. Unable to generate code.',
+    })
+    this.codegenCallback = this.createPromiseCallback({
+      makeInputEvent: (e) => {
+        let t = this.vm.newObject()
+        let i = this.nodeFactory.createNode(e, 'generate')
+        this.vm.setProp(t, 'node', i)
+        this.vm.setProp(t, 'language', this.vm.newString(this.getCodegenLanguage()))
+        return t
+      },
+      eventName: 'generate',
+      zResultSchema: _$$N.CodegenResultSchema,
+      defaultResult: [],
+      rejectMessage: 'Promise returned from codegen \'generate\' event rejected. Unable to generate code.',
+    })
+    this.linkPreviewCallback = this.createPromiseCallback({
+      makeInputEvent: (e) => {
+        let t = this.vm.newObject()
+        this.vm.setProp(t, 'link', this.vm.deepWrap(e))
+        return t
+      },
+      eventName: 'linkpreview',
+      zResultSchema: _$$N.LinkPreviewResultSchema,
+      defaultResult: null,
+      rejectMessage: 'Promise returned from \'linkpreview\' event rejected. Unable to generate preview.',
+    })
+    this.authCallback = this.createPromiseCallback({
+      makeInputEvent: (e) => {
+        let t = this.vm.newObject()
+        this.vm.setProp(t, 'links', this.vm.deepWrap(e))
+        return t
+      },
+      eventName: 'auth',
+      zResultSchema: _$$N.AuthResultSchema,
+      rejectMessage: 'Promise returned from \'auth\' event rejected. Unable to authenticate.',
+      defaultResult: null,
+    })
     this.textReviewRequestRejects = 0
     this.isTextReviewRequestModalOpen = false
-    this.eventHandlerTimeouts = new Map()
-    this.spellCheckCallback = undefined
-    this.legacyCodegenCallback = undefined
-    this.codegenCallback = undefined
-    this.linkPreviewCallback = undefined
-    this.authCallback = undefined
-    this.styleManager = undefined
-    this.imageStore = undefined
-    this.videoStore = undefined
-    this.isWidget = false
+    this.isWidget = this.options.apiMode?.type === 'WIDGET'
+    this.privateSceneGraph = options.sceneGraph ?? NT()
+    this.styleManager = new StyleManager(this.privateSceneGraph)
+    this.imageStore = new ImageStore()
+    this.videoStore = new VideoStore()
+    this.documentAccessState = new DocumentAccess({
+      incrementalMode: this.options.incrementalSafeApi,
+      stats: options.stats,
+      allowIncrementalUnsafeApiCalls: !!options.allowIncrementalUnsafeApiCalls,
+    })
+    W5(this.pluginPageLoaded)
+    Ql(this.getAccessiblePages)
     this._hasRegisteredWidgetFunction = false
-    this.uiHandle = undefined
-
-    // Initialize paint processing
-    this.initializePaintProcessing()
-
-    // Initialize API modules
-    this.initializeAPIModules()
-    const apiContext = {
-      vm: this.vm,
-      options: this.options,
-      eventHandlers: this.eventHandlers,
-      widgetManager: this.widgetManager,
+    if (this.isWidget) {
+      const {
+        runtimeBridge,
+        shutdownCallback,
+      } = PluginRuntime.createRuntimeBridgeForWidgetReconciler(options.pluginID, vm)
+      this.widgetManager = new WidgetManager(vm, options.pluginID, runtimeBridge)
+      if (shutdownCallback) {
+        this.widgetManager.addShutdownAction(shutdownCallback)
+      }
+    }
+    let selectedView = debugState.getState().selectedView
+    if (ac.includes(selectedView.editorType) || vm.vmType === 'scopednoopvm') {
+      this.fullscreenEditorType = selectedView.editorType
+    }
+    else {
+      throw new Error(`Unsupported editor type: ${selectedView.editorType}`)
+    }
+    this.fullscreenEditorType = selectedView.editorType
+    this.mixedSentinel = vm.newSymbol('figma.mixed')
+    this.setSkipInvisibleInstanceChildren(this.fullscreenEditorType === _$$nT.DevHandoff || options.apiMode.type === 'WIDGET_RECONCILER')
+    vm.retainHandle(this.mixedSentinel)
+    this.runtimeOptions = getInitialOptions().ext_lego_plugins_runmode
+      ? {
+        allowVisibleIframe: !RESTRICTED_TRIGGERS.NO_CHECKOUT.has(this.getRunMode()),
+        iframeId: _$$E3({
+          runMode: this.getRunMode(),
+        }),
+        allowInitiateCheckout: !RESTRICTED_TRIGGERS.NO_CHECKOUT.has(this.getRunMode()),
+      }
+      : {
+        allowVisibleIframe: !RESTRICTED_TRIGGERS.NO_CHECKOUT.has(options.triggeredFrom),
+        iframeId: _$$E3({
+          triggeredFrom: options.triggeredFrom,
+        }),
+        allowInitiateCheckout: !options.triggeredFrom || !RESTRICTED_TRIGGERS.NO_UI.has(options.triggeredFrom),
+      }
+    vm.retainHandle(this.mixedSentinel)
+    this.nodeFactory = new NodeFactory(vm, {
+      pluginID: options.pluginID,
+      pluginVersionID: options.pluginVersionID,
+      imageStore: this.imageStore,
+      videoStore: this.videoStore,
+      getStyleFactory: () => this.styleFactory,
+      getVariableCollectionFactory: () => this.variableCollectionFactory,
       documentAccessState: this.documentAccessState,
-      privateSceneGraph: this.privateSceneGraph,
-      nodeFactory: this.nodeFactory,
-      styleFactory: this.styleFactory,
-      variableFactory: this.variableFactory,
-      variableCollectionFactory: this.variableCollectionFactory,
-      defineVmFunction: this.defineVmFunction.bind(this),
-      defineVmProp: this.defineVmProp.bind(this),
-      defineVmIncrementalFunction: this.defineVmIncrementalFunction.bind(this),
+      mixedSentinel: this.mixedSentinel,
+      stats: options.stats,
+      enableProposedApi: options.enableProposedApi,
+      isWidget: this.isWidget,
+      widgetManager: this.widgetManager,
+      validatedPermissions: options.validatedPermissions,
+      editorType: this.fullscreenEditorType,
+      defineVmFunction: this.defineVmFunction,
+      defineVmIncrementalMethod: this.defineVmIncrementalMethod,
+      defineVmProp: this.defineVmProp,
+      defineVmIncrementalProp: this.defineVmIncrementalProp,
+      addEventHandlersTo: this.addEventHandlersTo,
+      incLoadingErrorLogger: new IncLoadingErrorLogger({
+        pluginID: options.pluginID,
+        pluginVersionID: options.pluginVersionID,
+      }),
+      openFileKey: options.openFileKey,
+      apiMode: options.apiMode,
+      sceneGraph: this.privateSceneGraph,
       getNode: this.getNode,
-      addEventHandlersTo: this.addEventHandlersTo.bind(this),
+      getVariableNode: this.getVariableNode,
+      getVariableCollectionNode: this.getVariableCollectionNode,
+      getAnnotationCategory: this.getAnnotationCategory,
+      incrementalSafeApi: this.options.incrementalSafeApi,
+      allowIncrementalUnsafeApiCalls: !!this.options.allowIncrementalUnsafeApiCalls,
+      styleManager: this.styleManager,
+      isPluginExemptFromPluginDataLimits: options.isPluginExemptFromPluginDataLimits,
+      enableResponsiveSetHierarchyMutations: options.enableResponsiveSetHierarchyMutations,
+    })
+    Q4(this.getAllAccessedGuids)
+    this.styleFactory = new StyleFactory({
+      vm,
+      stats: this.options.stats,
+      pluginID: options.pluginID,
+      pluginVersionID: options.pluginVersionID,
+      getNodeFactory: () => this.nodeFactory,
+      getVariableCollectionFactory: () => this.variableCollectionFactory,
+      imageStore: this.imageStore,
+      videoStore: this.videoStore,
+      documentAccessState: this.documentAccessState,
+      mixedSentinel: this.mixedSentinel,
+      enableProposedApi: options.enableProposedApi,
+      isWidget: this.isWidget,
+      widgetManager: this.widgetManager,
+      validatedPermissions: options.validatedPermissions,
+      editorType: this.fullscreenEditorType,
+      defineVmFunction: this.defineVmFunction,
+      defineVmIncrementalMethod: this.defineVmIncrementalMethod,
+      defineVmProp: this.defineVmProp,
+      defineVmIncrementalProp: this.defineVmIncrementalProp,
+      addEventHandlersTo: this.addEventHandlersTo,
+      apiMode: options.apiMode,
+      openFileKey: options.openFileKey,
+      getNode: this.getNode,
+      getVariableNode: this.getVariableNode,
+      getVariableCollectionNode: this.getVariableCollectionNode,
+      getAnnotationCategory: this.getAnnotationCategory,
+      sceneGraph: this.privateSceneGraph,
+      incrementalSafeApi: this.options.incrementalSafeApi,
+      allowIncrementalUnsafeApiCalls: !!this.options.allowIncrementalUnsafeApiCalls,
+      styleManager: this.styleManager,
+      isPluginExemptFromPluginDataLimits: options.isPluginExemptFromPluginDataLimits,
+      enableResponsiveSetHierarchyMutations: options.enableResponsiveSetHierarchyMutations,
+    })
+    this.variableFactory = new VariableFactory({
+      vm,
+      stats: this.options.stats,
+      pluginID: options.pluginID,
+      pluginVersionID: options.pluginVersionID,
+      getNodeFactory: () => this.nodeFactory,
+      getStyleFactory: () => this.styleFactory,
+      getVariableCollectionFactory: () => this.variableCollectionFactory,
+      imageStore: this.imageStore,
+      videoStore: this.videoStore,
+      documentAccessState: this.documentAccessState,
+      mixedSentinel: this.mixedSentinel,
+      enableProposedApi: options.enableProposedApi,
+      isWidget: this.isWidget,
+      widgetManager: this.widgetManager,
+      validatedPermissions: options.validatedPermissions,
+      editorType: this.fullscreenEditorType,
+      defineVmFunction: this.defineVmFunction,
+      defineVmIncrementalMethod: this.defineVmIncrementalMethod,
+      defineVmProp: this.defineVmProp,
+      defineVmIncrementalProp: this.defineVmIncrementalProp,
+      addEventHandlersTo: this.addEventHandlersTo,
+      apiMode: options.apiMode,
+      openFileKey: options.openFileKey,
+      getNode: this.getNode,
+      getVariableNode: this.getVariableNode,
+      getVariableCollectionNode: this.getVariableCollectionNode,
+      getAnnotationCategory: this.getAnnotationCategory,
+      sceneGraph: this.privateSceneGraph,
+      incrementalSafeApi: this.options.incrementalSafeApi,
+      allowIncrementalUnsafeApiCalls: !!this.options.allowIncrementalUnsafeApiCalls,
+      styleManager: this.styleManager,
+      isPluginExemptFromPluginDataLimits: options.isPluginExemptFromPluginDataLimits,
+      enableResponsiveSetHierarchyMutations: options.enableResponsiveSetHierarchyMutations,
+    })
+    this.variableCollectionFactory = new VariableCollectionFactory({
+      vm,
+      stats: options.stats,
+      pluginID: options.pluginID,
+      pluginVersionID: options.pluginVersionID,
+      getNodeFactory: () => this.nodeFactory,
+      getStyleFactory: () => this.styleFactory,
+      getVariableCollectionFactory: () => this.variableCollectionFactory,
+      imageStore: this.imageStore,
+      videoStore: this.videoStore,
+      documentAccessState: this.documentAccessState,
+      mixedSentinel: this.mixedSentinel,
+      enableProposedApi: options.enableProposedApi,
+      isWidget: this.isWidget,
+      widgetManager: this.widgetManager,
+      validatedPermissions: options.validatedPermissions,
+      editorType: this.fullscreenEditorType,
+      defineVmFunction: this.defineVmFunction,
+      defineVmIncrementalMethod: this.defineVmIncrementalMethod,
+      defineVmProp: this.defineVmProp,
+      defineVmIncrementalProp: this.defineVmIncrementalProp,
+      addEventHandlersTo: this.addEventHandlersTo,
+      apiMode: options.apiMode,
+      openFileKey: options.openFileKey,
+      getNode: this.getNode,
+      getVariableNode: this.getVariableNode,
+      getVariableCollectionNode: this.getVariableCollectionNode,
+      getAnnotationCategory: this.getAnnotationCategory,
+      sceneGraph: this.privateSceneGraph,
+      incrementalSafeApi: this.options.incrementalSafeApi,
+      allowIncrementalUnsafeApiCalls: !!this.options.allowIncrementalUnsafeApiCalls,
+      styleManager: this.styleManager,
+      isPluginExemptFromPluginDataLimits: options.isPluginExemptFromPluginDataLimits,
+      enableResponsiveSetHierarchyMutations: options.enableResponsiveSetHierarchyMutations,
+    })
+    this.annotationCategoryFactory = new AnnotationCategoryFactory({
+      vm,
+      stats: this.options.stats,
+      pluginID: options.pluginID,
+      pluginVersionID: options.pluginVersionID,
+      getNodeFactory: () => this.nodeFactory,
+      getStyleFactory: () => this.styleFactory,
+      getVariableCollectionFactory: () => this.variableCollectionFactory,
+      imageStore: this.imageStore,
+      videoStore: this.videoStore,
+      documentAccessState: this.documentAccessState,
+      mixedSentinel: this.mixedSentinel,
+      enableProposedApi: options.enableProposedApi,
+      isWidget: this.isWidget,
+      widgetManager: this.widgetManager,
+      validatedPermissions: options.validatedPermissions,
+      editorType: this.fullscreenEditorType,
+      defineVmFunction: this.defineVmFunction,
+      defineVmIncrementalMethod: this.defineVmIncrementalMethod,
+      defineVmProp: this.defineVmProp,
+      defineVmIncrementalProp: this.defineVmIncrementalProp,
+      addEventHandlersTo: this.addEventHandlersTo,
+      apiMode: options.apiMode,
+      openFileKey: options.openFileKey,
+      getNode: this.getNode,
+      getVariableNode: this.getVariableNode,
+      getVariableCollectionNode: this.getVariableCollectionNode,
+      getAnnotationCategory: this.getAnnotationCategory,
+      sceneGraph: this.privateSceneGraph,
+      incrementalSafeApi: this.options.incrementalSafeApi,
+      allowIncrementalUnsafeApiCalls: !!this.options.allowIncrementalUnsafeApiCalls,
+      styleManager: this.styleManager,
+      isPluginExemptFromPluginDataLimits: options.isPluginExemptFromPluginDataLimits,
+      enableResponsiveSetHierarchyMutations: options.enableResponsiveSetHierarchyMutations,
+    })
+    let n = this.options.apiMode
+    if (n.type === 'CONSOLE_SHIM') {
+      this.uiHandle = n.uiHandle
     }
-    this.coreAPIModule = new CoreAPIModule(apiContext)
-    this.buzzAPIModule = new BuzzAPIModule(apiContext)
-    this.uiAPIModule = new UIAPIModule(apiContext)
-    this.nodeAPIModule = new NodeAPIModule(apiContext)
-    this.documentAPIModule = new DocumentAPIModule(apiContext)
-    this.eventAPIModule = new EventAPIModule(apiContext)
-    this.styleAPIModule = new StyleAPIModule(apiContext)
-    this.variableAPIModule = new VariableAPIModule(apiContext)
-    this.storageAPIModule = new StorageAPIModule(apiContext)
-    this.mediaAPIModule = new MediaAPIModule(apiContext)
-    this.componentAPIModule = new ComponentAPIModule(apiContext)
-    this.paymentsAPIModule = new PaymentsAPIModule(apiContext)
-    this.utilityAPIModule = new UtilityAPIModule(apiContext)
-    this.prototypeAPIModule = new PrototypeAPIModule(apiContext)
-    this.networkAPIModule = new NetworkAPIModule(apiContext)
-    this.annotationsAPIModule = new AnnotationsAPIModule(apiContext)
-    this.fontAPIModule = new FontAPIModule(apiContext)
-    this.effectsAPIModule = new EffectsAPIModule(apiContext)
-    this.gradientAPIModule = new GradientAPIModule(apiContext)
-    this.transformAPIModule = new TransformAPIModule(apiContext)
-    this.layerAPIModule = new LayerAPIModule(apiContext)
-    this.animationAPIModule = new AnimationAPIModule(apiContext)
-    this.exportAPIModule = new ExportAPIModule(apiContext)
-    this.textAPIModule = new TextAPIModule(apiContext)
-    this.configAPIModule = new ConfigAPIModule(apiContext)
-    this.performanceAPIModule = new PerformanceAPIModule(apiContext)
-    this.securityAPIModule = new SecurityAPIModule(apiContext)
+    else if (function (e) {
+      switch (e.type) {
+        case 'GLOBAL_API':
+        case 'CONSOLE_SHIM':
+        case 'SECURITY_CHECK':
+          return !1
+        case 'WIDGET_RECONCILER':
+          return !0
+        case 'WIDGET':
+        case 'PLUGIN':
+          return e.noOpUI
+      }
+    }(n)) {
+      this.uiHandle = new _x()
+    }
+    else {
+      let t = n.type !== 'GLOBAL_API' && n.type !== 'SECURITY_CHECK'
+      this.uiHandle = new mN(vm.vmType, this.options.pluginID, this.options.titleIconURL, this.options.name, this.options.validatedPermissions.permissions, this.isWidget, this.isWidget ? JSON.parse(this.options.command || '{}') : {}, t, this.uiCancelCallback, this.iframeMessageHandler, this.options.allowedDomains, this.options.isLocal, this.options.triggeredFrom, this.options.capabilities)
+    }
+    if (this.vm instanceof NoOpVm || this.vm instanceof ScopedNoOpVm) {
+      // No additional event callbacks needed for NoOp VMs
+    }
+    else {
+      LL(this.selectionCallback)
+      Xx(this.pageCallback)
+      Sf(this.timerCallback)
+      KB(this.dropCallback)
+      _$$i(this.codegenPreferencesChangeCallback)
+      _C(this.slidesViewChangeCallback)
+    }
+    this.options.addShutdownAction(e => this.tearDown(e))
+    this.previousSelection = this.privateSceneGraph.getDirectlySelectedNodes().map(e => e.guid)
+    NfO.resetSelectionCouldBeDirty()
+    this.createAPI()
   }
-
-  initializePaintProcessing() {
-    try {
-      this.paintProcessor = createAdvancedPaintProcessor()
-      this.fillManager = createAdvancedFillManager(this.paintProcessor)
-    }
- catch (error) {
-      console.warn('Paint processing initialization failed:', error)
-      this.paintProcessor = null
-      this.fillManager = null
-    }
-  }
-
-  initializeAPIModules() { }
 
   /**
-   * REFACTORED createAPI - Now uses modular approach
+   * defineVmIncrementalProp - Define incremental VM property with safe API support
    *
-   * This method demonstrates the refactored approach using modules:
-   * - CoreAPIModule: Basic API setup, version, HTML, fileKey
-   * - BuzzAPIModule: Buzz-specific functionality
-   * - UIAPIModule: UI operations (showUI, closePluginWithFailure)
-   * - NodeAPIModule: Node operations (creation, selection, properties)
-   * - DocumentAPIModule: Document-level operations (viewport, utilities)
-   * - EventAPIModule: Event system (on, once, off methods)
-   * - StyleAPIModule: Style-related API functionality
-   * - VariableAPIModule: Variable-related API functionality
-   * - StorageAPIModule: Storage-related API functionality
-   * - MediaAPIModule: Media operations (image/video import)
-   * - ComponentAPIModule: Component operations (getComponentByKey)
-   * - PaymentsAPIModule: Payments and checkout functionality
-   * - UtilityAPIModule: Utility functions (base64 encode/decode)
-   * - PrototypeAPIModule: Prototype and interaction functionality
-   * - NetworkAPIModule: Network requests and external communication
-   * - AnnotationsAPIModule: Annotations and comments functionality
-   * - FontAPIModule: Font loading and text styling functionality
-   * - EffectsAPIModule: Effects and styling functionality
-   * - GradientAPIModule: Gradient creation and manipulation
-   * - TransformAPIModule: Geometric transformations
-   * - LayerAPIModule: Layer management and hierarchy operations
-   * - AnimationAPIModule: Animation and transition functionality
-   * - ExportAPIModule: Export and image generation functionality
-   * - TextAPIModule: Text manipulation and typography functionality
-   * - ConfigAPIModule: Plugin configuration and settings
-   * - PerformanceAPIModule: Performance monitoring and optimization
-   * - SecurityAPIModule: Security validation and access control
+   * Sets up a VM property with getter/setter and optional incremental-safe variants.
+   * Handles document preparation, value resolution, and incremental API calls.
    *
-   * Benefits of this refactoring:
-   * 1. Separation of concerns - each module handles one API area
-   * 2. Testability - modules can be tested independently
-   * 3. Maintainability - easier to modify specific API areas
-   * 4. Reusability - modules can be reused in different contexts
-   * 5. Scalability - easy to add new modules for new functionality
+   * @param params.handle - VM object handle
+   * @param params.key - Property key
+   * @param params.metricsKey - Metrics key for tracking
+   * @param params.enumerable - Whether property is enumerable
+   * @param params.incrementalSafeApiKey - Key for incremental-safe getter
+   * @param params.incrementalSafeApiMetricsKey - Metrics key for incremental-safe getter
+   * @param params.incrementalSafeApiSetKey - Key for incremental-safe setter
+   * @param params.incrementalSafeApiSetMetricsKey - Metrics key for incremental-safe setter
+   * @param params.canWriteInReadOnly - Allow write in read-only mode
+   * @param params.parseThis - Function to parse 'this' context
+   * @param params.parseIncrementalValueArg - Function to parse incremental value argument
+   * @param params.prepareDocument - Async function to prepare document
+   * @param params.resolveValue - Function to resolve property value
+   * @param params.resolveValueIncremental - Function to resolve value incrementally
+   * @param params.retainGetter - Whether to retain getter for incremental API
+   * @param params.setValue - Function to set property value
+   * @param params.setValueIncremental - Function to set value incrementally
+   * @param params.incrementalSafeApi - Whether incremental safe API is enabled
+   * @param params.allowIncrementalUnsafeApiCalls - Allow unsafe incremental API calls
+   * @param params.isAllowedInWidgetRender - Allow in widget render
+   * @param params.hasEditScope - Use edit scope for operations
    */
-  createAPIModular() {
-    const vm = this.vm
-    const figmaHandle = vm.newObject()
-
-    // Set figma global
-    vm.setProp(vm.global, 'figma', figmaHandle)
-
-    // Setup all modular API components
-    this.coreAPIModule.setupCoreAPI(figmaHandle)
-    this.buzzAPIModule.setupBuzzAPI(figmaHandle)
-    this.uiAPIModule.setupUIAPI(figmaHandle)
-    this.nodeAPIModule.setupNodeAPI(figmaHandle)
-    this.documentAPIModule.setupDocumentAPI(figmaHandle)
-    this.eventAPIModule.setupEventAPI(figmaHandle)
-    this.styleAPIModule.setupStyleAPI(figmaHandle)
-    this.variableAPIModule.setupVariableAPI(figmaHandle)
-    this.storageAPIModule.setupStorageAPI(figmaHandle)
-    this.mediaAPIModule.setupMediaAPI(figmaHandle)
-    this.componentAPIModule.setupComponentAPI(figmaHandle)
-    this.paymentsAPIModule.setupPaymentsAPI(figmaHandle)
-    this.utilityAPIModule.setupUtilityAPI(figmaHandle)
-    this.prototypeAPIModule.setupPrototypeAPI(figmaHandle)
-    this.networkAPIModule.setupNetworkAPI(figmaHandle)
-    this.annotationsAPIModule.setupAnnotationsAPI(figmaHandle)
-    this.fontAPIModule.setupFontAPI(figmaHandle)
-    this.effectsAPIModule.setupEffectsAPI(figmaHandle)
-    this.gradientAPIModule.setupGradientAPI(figmaHandle)
-    this.transformAPIModule.setupTransformAPI(figmaHandle)
-    this.layerAPIModule.setupLayerAPI(figmaHandle)
-    this.animationAPIModule.setupAnimationAPI(figmaHandle)
-    this.exportAPIModule.setupExportAPI(figmaHandle)
-    this.textAPIModule.setupTextAPI(figmaHandle)
-    this.configAPIModule.setupConfigAPI(figmaHandle)
-    this.performanceAPIModule.setupPerformanceAPI(figmaHandle)
-    this.securityAPIModule.setupSecurityAPI(figmaHandle)
-
-    // Setup remaining API methods using the original approach
-    // TODO: Continue modularizing these into focused modules
-    this.setupLegacyAPIFeatures(figmaHandle)
-  }
-
-  /**
-   * setupLegacyAPIFeatures - Contains the remaining un-modularized API features
-   *
-   * This method contains the API features that haven't been moved to modules yet.
-   * Future refactoring should continue breaking this down into modules like:
-   * - NodeAPIModule, StyleAPIModule, DocumentAPIModule, etc.
-   */
-  setupLegacyAPIFeatures(_figmaHandle) {
-    // Placeholder for the remaining original createAPI content
-    // The original 3000+ line method content would continue here
-    // but organized into smaller, focused modules over time
-  }
-
-  defineVmIncrementalProp = ({
-    handle: e,
-    key: t,
-    metricsKey: i,
-    enumerable: n,
-    incrementalSafeApiKey: r,
-    incrementalSafeApiMetricsKey: a,
-    incrementalSafeApiSetKey: s,
-    incrementalSafeApiSetMetricsKey: o,
-    canWriteInReadOnly: l,
-    parseThis: d,
-    parseIncrementalValueArg: c,
-    prepareDocument: u,
-    resolveValue: p,
-    resolveValueIncremental: m,
-    retainGetter: h,
-    setValue: g,
-    setValueIncremental: f,
-    incrementalSafeApi: _,
-    allowIncrementalUnsafeApiCalls: y,
-    isAllowedInWidgetRender: b = !0,
-    hasEditScope: v = !0,
-  }) => {
-    // setupVmIncrementalProp - Setup incremental VM property with safe API handling
-    const vm = this.vm
-
+  defineVmIncrementalProp({
+    handle,
+    key,
+    metricsKey,
+    enumerable,
+    incrementalSafeApiKey,
+    incrementalSafeApiMetricsKey,
+    incrementalSafeApiSetKey,
+    incrementalSafeApiSetMetricsKey,
+    canWriteInReadOnly,
+    parseThis,
+    parseIncrementalValueArg,
+    prepareDocument,
+    resolveValue,
+    resolveValueIncremental,
+    retainGetter,
+    setValue,
+    setValueIncremental,
+    incrementalSafeApi,
+    allowIncrementalUnsafeApiCalls,
+    isAllowedInWidgetRender = true,
+    hasEditScope = true,
+  }) {
     // Define main property with getter/setter
-    this.defineVmProp({
-      handle: e,
-      key: t,
-      options: {
-        metricsKey: i,
-        enumerable: n,
-        get() {
-          // Check incremental safe API requirements
-          if (_ && a && !h) {
-            xc(y, i, a)
-          }
-          return p(d(this))
-        },
-        set: g ? function (e) {
-          // Handle incremental safe API for setters
-          if (_ && f) {
-            xc(y, `${i} =`, o)
-          }
-          return g(d(this), e)
-        } : void 0,
-      },
-      canWriteInReadOnly: l,
-      isAllowedInWidgetRender: b,
-      hasEditScope: v,
+    this.defineMainProperty({
+      handle,
+      key,
+      metricsKey,
+      enumerable,
+      canWriteInReadOnly,
+      parseThis,
+      resolveValue,
+      retainGetter,
+      setValue,
+      setValueIncremental,
+      incrementalSafeApi,
+      incrementalSafeApiMetricsKey,
+      incrementalSafeApiSetMetricsKey,
+      allowIncrementalUnsafeApiCalls,
+      isAllowedInWidgetRender,
+      hasEditScope,
     })
 
-    // Define incremental safe API methods if configured
-    if (r && a) {
-      this.defineVmFunction({
-        handle: e,
-        key: r,
-        metricsKey: a,
-        cb() {
-          const element = d(this)
-          const {
-            promise,
-            resolve,
-            reject,
-          } = vm.newPromise()
-          vm.registerPromise(u(element)).then(() => {
-            const result = m ? m(element) : p(element)
-            resolve(result)
-          }).catch((error) => {
-            reject(vm.newString(error.message))
-          })
-          return promise
-        },
-        isAllowedInReadOnly: !0,
-        isAllowedInWidgetRender: b,
-        hasEditScope: v,
+    // Define incremental-safe getter if configured
+    if (incrementalSafeApiKey && incrementalSafeApiMetricsKey) {
+      this.defineIncrementalGetter({
+        handle,
+        key: incrementalSafeApiKey,
+        metricsKey: incrementalSafeApiMetricsKey,
+        parseThis,
+        prepareDocument,
+        resolveValue,
+        resolveValueIncremental,
+        isAllowedInWidgetRender,
+        hasEditScope,
       })
     }
 
-    // Define incremental setter method if configured
-    if (s && o && f && c) {
-      this.defineVmFunction({
-        handle: e,
-        key: s,
-        metricsKey: o,
-        cb(e) {
-          const element = d(this)
-          const value = c(e)
-          const {
-            promise,
-            resolve,
-            reject,
-          } = vm.newPromise()
-          vm.registerPromise(u(element)).then(() => {
-            l7.plugin(s, () => {
-              f(element, value)
-              resolve(vm.undefined)
-            })
-          }).catch((error) => {
-            reject(vm.newString(error.message))
-          })
-          return promise
-        },
-        isAllowedInReadOnly: !1,
-        isAllowedInWidgetRender: b,
-        hasEditScope: v,
+    // Define incremental-safe setter if configured
+    if (incrementalSafeApiSetKey && incrementalSafeApiSetMetricsKey && setValueIncremental && parseIncrementalValueArg) {
+      this.defineIncrementalSetter({
+        handle,
+        key: incrementalSafeApiSetKey,
+        metricsKey: incrementalSafeApiSetMetricsKey,
+        parseThis,
+        parseIncrementalValueArg,
+        prepareDocument,
+        setValueIncremental,
+        canWriteInReadOnly,
+        isAllowedInWidgetRender,
+        hasEditScope,
       })
     }
+  }
+
+  /**
+   * defineMainProperty - Define the main VM property with getter/setter
+   */
+  defineMainProperty({
+    handle,
+    key,
+    metricsKey,
+    enumerable,
+    canWriteInReadOnly,
+    parseThis,
+    resolveValue,
+    retainGetter,
+    setValue,
+    setValueIncremental,
+    incrementalSafeApi,
+    incrementalSafeApiMetricsKey,
+    incrementalSafeApiSetMetricsKey,
+    allowIncrementalUnsafeApiCalls,
+    isAllowedInWidgetRender,
+    hasEditScope,
+  }) {
+    const self = this
+    this.defineVmProp({
+      handle,
+      key,
+      options: {
+        metricsKey,
+        enumerable,
+        get() {
+          if (incrementalSafeApi && incrementalSafeApiMetricsKey && !retainGetter) {
+            xc(allowIncrementalUnsafeApiCalls, metricsKey, incrementalSafeApiMetricsKey)
+          }
+          return resolveValue(parseThis(this))
+        },
+        set: setValue
+          ? function (value) {
+            if (incrementalSafeApi && setValueIncremental) {
+              xc(allowIncrementalUnsafeApiCalls, `${metricsKey} =`, incrementalSafeApiSetMetricsKey)
+            }
+            return setValue(parseThis(self), value)
+          }
+          : undefined,
+      },
+      canWriteInReadOnly,
+      isAllowedInWidgetRender,
+      hasEditScope,
+    })
+  }
+
+  /**
+   * defineIncrementalGetter - Define incremental-safe getter function
+   */
+  defineIncrementalGetter({
+    handle,
+    key,
+    metricsKey,
+    parseThis,
+    prepareDocument,
+    resolveValue,
+    resolveValueIncremental,
+    isAllowedInWidgetRender,
+    hasEditScope,
+  }) {
+    const vm = this.vm
+    this.defineVmFunction({
+      handle,
+      key,
+      metricsKey,
+      cb() {
+        const element = parseThis(this)
+        const {
+          promise,
+          resolve,
+          reject,
+        } = vm.newPromise()
+        vm.registerPromise(prepareDocument(element)).then(() => {
+          const result = resolveValueIncremental ? resolveValueIncremental(element) : resolveValue(element)
+          resolve(result)
+        }).catch((error) => {
+          reject(vm.newString(error.message))
+        })
+        return promise
+      },
+      isAllowedInReadOnly: true,
+      isAllowedInWidgetRender,
+      hasEditScope,
+    })
+  }
+
+  /**
+   * defineIncrementalSetter - Define incremental-safe setter function
+   */
+  defineIncrementalSetter({
+    handle,
+    key,
+    metricsKey,
+    parseThis,
+    parseIncrementalValueArg,
+    prepareDocument,
+    setValueIncremental,
+    canWriteInReadOnly,
+    isAllowedInWidgetRender,
+    hasEditScope,
+  }) {
+    const vm = this.vm
+    this.defineVmFunction({
+      handle,
+      key,
+      metricsKey,
+      cb(value) {
+        const element = parseThis(this)
+        const parsedValue = parseIncrementalValueArg(value)
+        const {
+          promise,
+          resolve,
+          reject,
+        } = vm.newPromise()
+        vm.registerPromise(prepareDocument(element)).then(() => {
+          l7.plugin(key, () => {
+            setValueIncremental(element, parsedValue)
+            resolve(vm.undefined)
+          })
+        }).catch((error) => {
+          reject(vm.newString(error.message))
+        })
+        return promise
+      },
+      isAllowedInReadOnly: canWriteInReadOnly,
+      isAllowedInWidgetRender,
+      hasEditScope,
+    })
   }
 
   /**
@@ -20036,7 +18878,7 @@ class PluginRuntime {
       if (this.options.allowIncrementalUnsafeApiCalls) {
         console.warn('To ensure consistent results for documentchange handler, call `await figma.loadAllPagesAsync()` first.')
       }
- else {
+      else {
         throw new Error('Cannot register documentchange handler in incremental mode without calling figma.loadAllPagesAsync first.')
       }
     }
@@ -20153,7 +18995,7 @@ class PluginRuntime {
           if (t === 'nodechange') {
             let t = this.getNode(e)
             if (n[r].pageGuid !== t.guid)
-              continue;
+              continue
           }
           n.splice(r, 1)
           this.vm.releaseHandle(i)
@@ -20228,6 +19070,7 @@ class PluginRuntime {
       hasEditScope: !1,
     })
   }
+
   selectionCallback = () => {
     this.fireDebouncedEventAsync('selectionchange', () => {
       let e = this.privateSceneGraph.getDirectlySelectedNodes().map(e => e.guid)
@@ -20238,11 +19081,13 @@ class PluginRuntime {
       NfO.resetSelectionCouldBeDirty()
     })
   }
+
   pageCallback = () => {
     this.fireDebouncedEventAsync('currentpagechange', () => {
       this.fireEventSync('currentpagechange', [])
     })
   }
+
   codegenPreferencesChangeCallback = (e) => {
     this.fireDebouncedEventAsync('preferenceschange', () => {
       this.overrideRuntimeOptions({
@@ -20298,10 +19143,10 @@ class PluginRuntime {
       return n.type === 'SUCCESS'
         ? isVMPromiseLike(e, n.handle)
           ? wrapVmPromise({
-              vm: e,
-              promiseHandle: n.handle,
-              shouldRetainResult: !0,
-            })
+            vm: e,
+            promiseHandle: n.handle,
+            shouldRetainResult: !0,
+          })
           : (e.retainHandle(n.handle), Promise.resolve(n.handle))
         : Promise.reject(new Error('Handler did not return success'))
     }))
@@ -20394,7 +19239,7 @@ class PluginRuntime {
     if (this.isStyleRelatedChange(changeData.type)) {
       this.handleStyleChanges(changeRecord, changeData)
     }
- else {
+    else {
       // Handle node changes
       this.handleNodeChanges(changeRecord, changeData, eventContext)
     }
@@ -20428,7 +19273,7 @@ class PluginRuntime {
     if (changeData.type === iIc.STYLE_DELETE) {
       this.vm.setProp(changeRecord, 'style', this.vm.$$null)
     }
- else {
+    else {
       // Handle STYLE_PROPERTY_CHANGE and STYLE_CREATE
       const styleObject = this.styleFactory.createStyle(changeData.styleKey)
       this.vm.setProp(changeRecord, 'style', styleObject)
@@ -20445,7 +19290,7 @@ class PluginRuntime {
       const nodeObject = this.nodeFactory.createNode(changeData.id, eventContext)
       this.vm.setProp(changeRecord, 'node', nodeObject)
     }
- else {
+    else {
       // Node was removed, create minimal removed node object
       const removedNodeObject = this.createRemovedNodeObject(changeData)
       this.vm.setProp(changeRecord, 'node', removedNodeObject)
@@ -20471,7 +19316,7 @@ class PluginRuntime {
       NfO.prepareToRunDocumentChangeCallback()
       this.fireEventSync('slidesviewchange', [t])
     }
- finally {
+    finally {
       NfO.finishedRunningDocumentChangeCallback()
     }
   }
@@ -20484,14 +19329,14 @@ class PluginRuntime {
       NfO.prepareToRunDocumentChangeCallback()
       this.fireEventSync('documentchange', [i])
     }
- finally {
+    finally {
       NfO.finishedRunningDocumentChangeCallback()
     }
   }
 
   styleChangeCallback = (e) => {
     if (e.length === 0)
-      return;
+      return
     let t = this.getChangeCallbackHandle('stylechange', e)
     let i = this.vm.newObject()
     this.vm.setProp(i, 'styleChanges', t)
@@ -20499,7 +19344,7 @@ class PluginRuntime {
       NfO.prepareToRunDocumentChangeCallback()
       this.fireEventSync('stylechange', [i])
     }
- finally {
+    finally {
       NfO.finishedRunningDocumentChangeCallback()
     }
   }
@@ -20507,7 +19352,7 @@ class PluginRuntime {
   nodeChangeCallback = (e) => {
     for (let [t, i] of this.eventsByPageGuid(e)) {
       if (i.length === 0)
-        continue;
+        continue
       let e = this.getChangeCallbackHandle('nodechange', i)
       let n = this.vm.newObject()
       this.vm.setProp(n, 'nodeChanges', e)
@@ -20515,7 +19360,7 @@ class PluginRuntime {
         NfO.prepareToRunDocumentChangeCallback()
         this.fireEventSyncForPage('nodechange', t, [n])
       }
- finally {
+      finally {
         NfO.finishedRunningDocumentChangeCallback()
       }
     }
@@ -20597,10 +19442,10 @@ class PluginRuntime {
     })
     return rawSuggestions.map(suggestion => typeof suggestion === 'string'
       ? {
-          name: suggestion,
-          data: undefined,
-        }
-: suggestion)
+        name: suggestion,
+        data: undefined,
+      }
+      : suggestion)
   }
 
   /**
@@ -20641,7 +19486,7 @@ class PluginRuntime {
       try {
         this.deepValidateSerializable(suggestion.data, JSON.parse(JSON.stringify(suggestion.data)))
       }
- catch (error) {
+      catch {
         throw new Error(`Contains value which could not be serialized to JSON: ${suggestion.data}`)
       }
     }
@@ -20821,7 +19666,7 @@ class PluginRuntime {
       let e = this.getPublishedExtension(this.options.pluginID)
       return this.userPaymentStatusType(e) === zH.PAID
     }
- catch (e) {
+    catch (e) {
       _$$k2.error(e)
     }
     return !1
@@ -20874,10 +19719,10 @@ class PluginRuntime {
     if (this.isPluginMessage(messageEvent.data)) {
       this.handlePluginMessage(messageEvent.data, messageOrigin, vmHandle)
     }
- else if (this.isPluginDropMessage(messageEvent.data)) {
+    else if (this.isPluginDropMessage(messageEvent.data)) {
       this.handlePluginDropMessage(messageEvent.data, vmHandle)
     }
- else {
+    else {
       _$$k2.warn('Ignoring postMessage from plugin UI iframe due to missing "pluginMessage" or "pluginDrop"')
     }
   }
@@ -20953,7 +19798,7 @@ class PluginRuntime {
       _$$k2.warn('Provided pluginId does not match id of currently running plugin')
       return false
     }
- else {
+    else {
       _$$k2.warn('Message from UI to plugin ignored due to missing pluginId in message. Please specify the pluginId that you wish to deliver the message to when using postMessage. You can also use \'*\' if it is safe to deliver the message to any plugin.\n\nExample: `parent.postMessage({pluginMessage: /*your message*/, pluginId: /*your plugin id*/}, \'*\')`.')
       return false
     }
@@ -21071,65 +19916,6 @@ class PluginRuntime {
   }
 
   /**
-   * Constructor - Initialize plugin API instance with VM and configuration options
-   *
-   * Sets up event handlers, promise callbacks for various plugin operations,
-   * and initializes all necessary state for plugin execution including
-   * spell check, codegen, link preview, and authentication callbacks.
-   *
-   * @param vmInstance - Virtual machine instance for plugin execution
-   * @param configOptions - Configuration options for plugin behavior
-   */
-  /**
-   * initializeBasicState - Set up basic instance state variables
-   */
-  initializeBasicState() {
-    this.visualBellCounter = 0
-    this.previousSelection = []
-    this.previousSelectedTextRangeJson = 'null'
-    this.onMessageCallback = undefined
-    this.queryMode = false
-    this.checkoutRequested = false
-    this.widgetManager = undefined
-    this.skipInvisibleInstanceChildren = false
-    this.runningCloseEventHandler = false
-    this.runningSyncEvent = null
-    this.textReviewRequestRejects = 0
-    this.isTextReviewRequestModalOpen = false
-  }
-
-  /**
-   * initializeEventSystem - Set up event handling data structures
-   */
-  initializeEventSystem() {
-    this.eventHandlers = new Map()
-    this.eventHandlerTimeouts = new Map()
-    this.scheduledEvents = new Map()
-  }
-
-  /**
-   * initializePromiseCallbacks - Set up promise-based callback handlers
-   */
-  initializePromiseCallbacks() {
-    this.spellCheckCallback = this.createSpellCheckCallback()
-    this.legacyCodegenCallback = this.createLegacyCodegenCallback()
-    this.codegenCallback = this.createCodegenCallback()
-    this.linkPreviewCallback = this.createLinkPreviewCallback()
-    this.authCallback = this.createAuthCallback()
-  }
-
-  createAuthCallback(): any {
-    throw new Error('Method not implemented.')
-  }
-
-  /**
-   * initializeComponents - Set up scene graph and other components
-   */
-  initializeComponents(configOptions) {
-    this.privateSceneGraph = configOptions.sceneGraph ?? getSceneGraphInstance()
-  }
-
-  /**
    * createSpellCheckCallback - Create spell check promise callback
    */
   createSpellCheckCallback() {
@@ -21200,8 +19986,7 @@ class PluginRuntime {
     })
   }
 
-  /**
-  private createAuthCallback() {
+  createAuthCallback() {
     return this.createPromiseCallback({
       makeInputEvent: (linkArray) => {
         const inputEvent = this.vm.newObject()
@@ -21213,30 +19998,6 @@ class PluginRuntime {
       rejectMessage: 'Promise returned from \'auth\' event rejected. Unable to authenticate.',
       defaultResult: null,
     })
-   
-    // Initialize remaining components
-    this.initializeRemainingComponents()
-  }
-   
-  /**
-   * initializeRemainingComponents - Initialize remaining components after promise callbacks
-   */
-  initializeRemainingComponents() {
-    this.styleManager = new StyleManager(this.privateSceneGraph)
-    this.imageStore = new ImageStore()
-    this.videoStore = new VideoStore()
-    this.documentAccessState = new DocumentAccess({
-      incrementalMode: this.options.incrementalSafeApi,
-      stats: this.options.stats,
-      allowIncrementalUnsafeApiCalls: !!this.options.allowIncrementalUnsafeApiCalls,
-    })
-    this.isWidget = this.options.apiMode.type === 'WIDGET'
-    this._hasRegisteredWidgetFunction = false
-    this.setupWidgetManager()
-    this.setupEditorType()
-    this.setupMixedSentinel()
-    this.setupRuntimeOptions()
-    this.setupFactories()
   }
 
   /**
@@ -21250,7 +20011,7 @@ class PluginRuntime {
         runtimeBridge,
         shutdownCallback,
       } = PluginRuntime.createRuntimeBridgeForWidgetReconciler(this.options.pluginID, this.vm)
-      this.widgetManager = new SS(this.vm, this.options.pluginID, runtimeBridge)
+      this.widgetManager = new WidgetManager(this.vm, this.options.pluginID, runtimeBridge)
       if (shutdownCallback) {
         this.widgetManager.addShutdownAction(shutdownCallback)
       }
@@ -21265,7 +20026,7 @@ class PluginRuntime {
     if (ac.includes(currentView.editorType) || this.vm.vmType === 'scopednoopvm') {
       this.fullscreenEditorType = currentView.editorType
     }
- else {
+    else {
       throw new Error(`Unsupported editor type: ${currentView.editorType}`)
     }
   }
@@ -21317,154 +20078,6 @@ class PluginRuntime {
   }
 
   /**
-   * setupFactories - Initialize node, style, variable, and variable collection factories
-   */
-  setupFactories() {
-    this.nodeFactory = new NodeFactory(this.vm, {
-      pluginID: this.options.pluginID,
-      pluginVersionID: this.options.pluginVersionID,
-      imageStore: this.imageStore,
-      videoStore: this.videoStore,
-      getStyleFactory: () => this.styleFactory,
-      getVariableCollectionFactory: () => this.variableCollectionFactory,
-      documentAccessState: this.documentAccessState,
-      mixedSentinel: this.mixedSentinel,
-      stats: this.options.stats,
-      enableProposedApi: this.options.enableProposedApi,
-      isWidget: this.isWidget,
-      widgetManager: this.widgetManager,
-      validatedPermissions: this.options.validatedPermissions,
-      editorType: this.fullscreenEditorType,
-      defineVmFunction: this.defineVmFunction,
-      defineVmIncrementalMethod: this.defineVmIncrementalMethod,
-      defineVmProp: this.defineVmProp,
-      defineVmIncrementalProp: this.defineVmIncrementalProp,
-      addEventHandlersTo: this.addEventHandlersTo,
-      incLoadingErrorLogger: new IncLoadingErrorLogger({
-        pluginID: this.options.pluginID,
-        pluginVersionID: this.options.pluginVersionID,
-      }),
-      openFileKey: this.options.openFileKey,
-      apiMode: this.options.apiMode,
-      sceneGraph: this.privateSceneGraph,
-      getNode: this.getNode,
-      getVariableNode: this.getVariableNode,
-      getVariableCollectionNode: this.getVariableCollectionNode,
-      getAnnotationCategory: this.getAnnotationCategory,
-      incrementalSafeApi: this.options.incrementalSafeApi,
-      allowIncrementalUnsafeApiCalls: !!this.options.allowIncrementalUnsafeApiCalls,
-      styleManager: this.styleManager,
-      isPluginExemptFromPluginDataLimits: this.options.isPluginExemptFromPluginDataLimits,
-      enableResponsiveSetHierarchyMutations: this.options.enableResponsiveSetHierarchyMutations,
-    })
-    Q4(this.getAllAccessedGuids)
-
-    // Initialize style factory
-    this.initializeStyleFactory()
-
-    // Initialize variable factory
-    this.initializeVariableFactory()
-
-    // Initialize variable collection factory
-    this.initializeVariableCollectionFactory()
-  }
-
-  /**
-   * initializeStyleFactory - Set up style factory with common configuration
-   */
-  initializeStyleFactory() {
-    this.styleFactory = new StyleFactory({
-      vm: this.vm,
-      stats: this.options.stats,
-      pluginID: this.options.pluginID,
-      pluginVersionID: this.options.pluginVersionID,
-      getNodeFactory: () => this.nodeFactory,
-      getVariableCollectionFactory: () => this.variableCollectionFactory,
-      imageStore: this.imageStore,
-      videoStore: this.videoStore,
-      documentAccessState: this.documentAccessState,
-      mixedSentinel: this.mixedSentinel,
-      enableProposedApi: this.options.enableProposedApi,
-      isWidget: this.isWidget,
-      widgetManager: this.widgetManager,
-      validatedPermissions: this.options.validatedPermissions,
-      editorType: this.fullscreenEditorType,
-      defineVmFunction: this.defineVmFunction,
-      defineVmIncrementalMethod: this.defineVmIncrementalMethod,
-      defineVmProp: this.defineVmProp,
-      defineVmIncrementalProp: this.defineVmIncrementalProp,
-      addEventHandlersTo: this.addEventHandlersTo,
-      apiMode: this.options.apiMode,
-      openFileKey: this.options.openFileKey,
-      getNode: this.getNode,
-      getVariableNode: this.getVariableNode,
-      getVariableCollectionNode: this.getVariableCollectionNode,
-      getAnnotationCategory: this.getAnnotationCategory,
-      sceneGraph: this.privateSceneGraph,
-      incrementalSafeApi: this.options.incrementalSafeApi,
-      allowIncrementalUnsafeApiCalls: !!this.options.allowIncrementalUnsafeApiCalls,
-      styleManager: this.styleManager,
-      isPluginExemptFromPluginDataLimits: this.options.isPluginExemptFromPluginDataLimits,
-      enableResponsiveSetHierarchyMutations: this.options.enableResponsiveSetHierarchyMutations,
-    })
-  }
-
-  /**
-   * initializeVariableFactory - Set up variable factory with common configuration
-   */
-  initializeVariableFactory() {
-    this.variableFactory = new VariableFactory({
-      vm: this.vm,
-      sceneGraph: this.privateSceneGraph,
-    }) // Type assertion for factory compatibility
-  }
-
-  /**
-   * initializeVariableCollectionFactory - Set up variable collection factory with common configuration
-   */
-  initializeVariableCollectionFactory() {
-    this.variableCollectionFactory = new VariableCollectionFactory({
-      vm: this.vm,
-      sceneGraph: this.privateSceneGraph,
-    }) // Type assertion for factory compatibility
-
-    // Initialize annotation category factory
-    this.initializeAnnotationCategoryFactory()
-  }
-
-  /**
-   * initializeAnnotationCategoryFactory - Set up annotation category factory
-   */
-  initializeAnnotationCategoryFactory() {
-    this.annotationCategoryFactory = new AnnotationCategoryFactory({
-      vm: this.vm,
-      sceneGraph: this.privateSceneGraph,
-    }) // Type assertion for factory compatibility
-
-    // Initialize UI handle
-    this.initializeUiHandle()
-  }
-
-  /**
-   * initializeUiHandle - Set up UI handle based on API mode
-   */
-  initializeUiHandle() {
-    const apiMode = this.options.apiMode
-    if (apiMode.type === 'CONSOLE_SHIM') {
-      this.uiHandle = apiMode.uiHandle
-    }
- else if (this.shouldCreateNoOpUiHandle(apiMode)) {
-      this.uiHandle = new _x()
-    }
- else {
-      this.uiHandle = this.createFullUiHandle(apiMode)
-    }
-
-    // Complete final initialization
-    this.completeInitialization()
-  }
-
-  /**
    * shouldCreateNoOpUiHandle - Check if NoOp UI handle should be created
    */
   shouldCreateNoOpUiHandle(apiMode) {
@@ -21481,27 +20094,6 @@ class PluginRuntime {
       default:
         return false
     }
-  }
-
-  /**
-   * createFullUiHandle - Create full UI handle with all options
-   */
-  createFullUiHandle(apiMode) {
-    const shouldUseAdvancedHandle = apiMode.type !== 'GLOBAL_API' && apiMode.type !== 'SECURITY_CHECK'
-    return new FullUiFactory(this.vm.vmType, this.options.pluginID, this.options.titleIconURL, this.options.name, this.options.validatedPermissions.permissions, this.isWidget, this.isWidget ? JSON.parse(this.options.command || '{}') : {}, shouldUseAdvancedHandle, this.uiCancelCallback, this.iframeMessageHandler, this.options.allowedDomains, this.options.isLocal, this.options.triggeredFrom, this.options.capabilities)
-  }
-
-  /**
-   * completeInitialization - Complete the final initialization steps
-   */
-  completeInitialization() {
-    // Set up event callbacks for non-NoOp VMs (type assertion for instanceof check)
-    if (!(this.vm instanceof NoOpVm) && !(this.vm instanceof ScopedNoOpVm)) {
-      this.setupEventCallbacks()
-    }
-
-    // Final initialization steps
-    this.finalizeInitialization()
   }
 
   /**
@@ -21546,7 +20138,7 @@ class PluginRuntime {
     try {
       return t()
     }
- finally {
+    finally {
       // Always restore original options
       this.runtimeOptions = originalOptions
     }
@@ -21561,7 +20153,7 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
     let i = t.position ?? this.runtimeOptions?.defaultIframePosition ?? 'last'
     if (t.visible && this.queryMode)
       throw new Error('Cannot show UI in queryMode.')
-    if (t.visible && !this.runtimeOptions.allowVisibleIframe)
+    if (t.visible && !this.runtimeOptions?.allowVisibleIframe)
       throw new Error('Cannot show UI')
     return {
       html: e,
@@ -21673,7 +20265,7 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
       // Handle widget-specific cleanup
       await this.handleWidgetCleanup()
     }
- catch (error) {
+    catch (error) {
       console.error('Error during tearDown:', error)
     }
   }
@@ -21710,7 +20302,7 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
       this.uiHandle.tearDown(shutdownReason)
       await this.fireCloseEventAsync()
     }
- else {
+    else {
       // Legacy sync close handling
       this.fireEventSync('close', [])
       this.uiHandle.tearDown(shutdownReason)
@@ -21729,7 +20321,7 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
    * releaseAllEventHandlers - Release all VM handles for event handlers
    */
   releaseAllEventHandlers() {
-    for (const [eventName, handlers] of this.eventHandlers.entries()) {
+    for (const [, handlers] of this.eventHandlers.entries()) {
       for (const handler of handlers) {
         this.vm.releaseHandle(handler.handler)
       }
@@ -21845,7 +20437,7 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
       // Handlers exist, fire immediately
       this.fireEventAsync(eventCallback)
     }
- else {
+    else {
       // No handlers yet, schedule for later
       this.scheduleEventForLater(eventName, eventCallback)
     }
@@ -21944,7 +20536,7 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
         once,
       }) => !once))
     }
- else {
+    else {
       handlers = []
     }
     return handlers
@@ -21975,8 +20567,8 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
     let n = this.eventHandlers.get(e)
     for (let r of (n
       ? this.eventHandlers.set(e, n.filter(({
-          once: e,
-        }) => !e))
+        once: e,
+      }) => !e))
       : n = [], n)) {
       let e = i.callFunction(r.handler, this.vm.undefined, ...t)
       if (e.type === 'SUCCESS' && !1 === i.deepUnwrap(e.handle))
@@ -22018,7 +20610,7 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
         if (result instanceof ArrayBuffer) {
           return vm.deepWrap(new Uint8Array(result))
         }
- else {
+        else {
           throw new TypeError('Failed to read file')
         }
       })
@@ -22057,19 +20649,19 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
     reader.onload = (_event) => {
       // Early return if VM is destroyed
       if (vm.isDestroyed())
-        return;
+        return
       try {
         const result = processResult(reader.result)
         resolve(result)
       }
- catch (error) {
+      catch (error) {
         reject(vm.deepWrap(error))
       }
     }
     reader.onerror = (_event) => {
       // Early return if VM is destroyed
       if (vm.isDestroyed())
-        return;
+        return
       reject(vm.deepWrap(reader.error))
     }
 
@@ -22077,7 +20669,7 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
     if (readMethod === 'arrayBuffer') {
       reader.readAsArrayBuffer(file)
     }
- else if (readMethod === 'text') {
+    else if (readMethod === 'text') {
       reader.readAsText(file)
     }
     return promise
@@ -22157,10 +20749,10 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
         if (result.type === 'SUCCESS') {
           const promise = isVMPromiseLike(vm, result.handle)
             ? wrapVmPromise({
-                vm,
-                promiseHandle: result.handle,
-                shouldRetainResult: true,
-              })
+              vm,
+              promiseHandle: result.handle,
+              shouldRetainResult: true,
+            })
             : (vm.retainHandle(result.handle), Promise.resolve(result.handle))
           return vm.registerPromise(promise).then((handle) => {
             const validatedResult = _$$u({
@@ -22194,12 +20786,12 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
    */
   async fireCloseEventAsync() {
     if (!dM())
-      return;
+      return
     this.runningCloseEventHandler = true
     try {
       await f2(5000) // 5 second timeout
     }
- finally {
+    finally {
       Vb(this.onCloseCallback)
       this.runningCloseEventHandler = false
     }
@@ -22390,7 +20982,7 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
       // Start new timer
       this.startNewTimer(targetDurationMs)
     }
- else {
+    else {
       // Adjust existing timer
       this.adjustExistingTimer(timerState, targetDurationMs, currentRemainingMs)
     }
@@ -22552,7 +21144,7 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
     if (isCurrentUser && !userData) {
       return this.getCurrentUserInfo()
     }
- else {
+    else {
       return this.getRemoteUserInfo(userData)
     }
   }
@@ -22572,7 +21164,7 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
       name = userState.name
       photoUrl = userState.img_url
     }
- else if (isWorkshopMode) {
+    else if (isWorkshopMode) {
       name = isFullscreenWorkshop ? localStorage.getItem(_$$K(selectedView.workshopModeInfo.id)) : null
     }
 
@@ -22605,7 +21197,7 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
     try {
       return tB(new URL(photoUrl))
     }
- catch {
+    catch {
       return null
     }
   }
@@ -22893,7 +21485,7 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
           if (viewType === 'grid' && isInFocusedNodeView) {
             Ez5.singleSlideView().exitFocusedNodeView()
           }
- else if (viewType === 'single-slide' && !isInFocusedNodeView) {
+          else if (viewType === 'single-slide' && !isInFocusedNodeView) {
             Y5.triggerAction('enter-single-slide-view')
           }
         },
@@ -22938,27 +21530,27 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
           })
           switch (this.fullscreenEditorType) {
             case _$$nT.Cooper:
-            {
-              const isInFocusedNodeView = Ez5?.cooperFocusView().isInFocusedNodeView.getCopy() ?? false
-              if (viewType === 'grid' && isInFocusedNodeView) {
-                Ez5?.cooperFocusView().exitFocusedNodeViewAndLeavePanelsOpen()
+              {
+                const isInFocusedNodeView = Ez5?.cooperFocusView().isInFocusedNodeView.getCopy() ?? false
+                if (viewType === 'grid' && isInFocusedNodeView) {
+                  Ez5?.cooperFocusView().exitFocusedNodeViewAndLeavePanelsOpen()
+                }
+                else if (viewType === 'single-asset' && !isInFocusedNodeView) {
+                  Ez5?.cooperFocusView().enterFocusedNodeView()
+                }
+                break
               }
- else if (viewType === 'single-asset' && !isInFocusedNodeView) {
-                Ez5?.cooperFocusView().enterFocusedNodeView()
-              }
-              break
-            }
             case _$$nT.Slides:
-            {
-              const isInFocusedNodeView = Ez5?.singleSlideView().isInFocusedNodeView.getCopy() ?? false
-              if (viewType === 'grid' && isInFocusedNodeView) {
-                Ez5?.singleSlideView().exitFocusedNodeView()
+              {
+                const isInFocusedNodeView = Ez5?.singleSlideView().isInFocusedNodeView.getCopy() ?? false
+                if (viewType === 'grid' && isInFocusedNodeView) {
+                  Ez5?.singleSlideView().exitFocusedNodeView()
+                }
+                else if (viewType === 'single-asset' && !isInFocusedNodeView) {
+                  Ez5?.singleSlideView().enterFocusedNodeView()
+                }
+                break
               }
- else if (viewType === 'single-asset' && !isInFocusedNodeView) {
-                Ez5?.singleSlideView().enterFocusedNodeView()
-              }
-              break
-            }
           }
         },
       },
@@ -23160,7 +21752,7 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
     const plugin = this.getPlugin()
     const pluginName = plugin?.name || 'Plugin'
     const enablementPromise = this.createTextReviewEnablementPromise(pluginName)
-    vm.registerPromise(enablementPromise).then(result => this.handleTextReviewSuccess(result, vm, resolve), () => this.handleTextReviewRejection(vm, reject)).$$finally(() => {
+    vm.registerPromise(enablementPromise).then(result => this.handleTextReviewSuccess(result, vm, resolve), () => this.handleTextReviewRejection(vm, reject)).finally(() => {
       this.isTextReviewRequestModalOpen = false
     })
   }
@@ -23199,13 +21791,13 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
     if (plugin) {
       const pluginConfig = ZQ(plugin)
         ? {
-            type: 'local',
-            localFileId: plugin.localFileId,
-          }
-: {
-            type: 'published',
-            pluginId: plugin.plugin_id,
-          };
+          type: 'local',
+          localFileId: plugin.localFileId,
+        }
+        : {
+          type: 'published',
+          pluginId: plugin.plugin_id,
+        }
       Br(pluginConfig)
     }
     requestAnimationFrame(() => resolve(vm.undefined))
@@ -23244,10 +21836,10 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
           Br(null)
           requestAnimationFrame(() => resolve(vm.undefined))
         }
- else if (activeTextReviewPlugin == null) {
+        else if (activeTextReviewPlugin == null) {
           resolve(vm.undefined)
         }
- else {
+        else {
           reject(vm.newString('The user currently has a text review plugin enabled that isn\'t yours. Did you mean to call figma.textreview.requestToBeEnabledAsync?'))
         }
         return promise
@@ -23350,7 +21942,7 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
         if (this.queryMode) {
           throw new Error('Cannot show UI in queryMode.')
         }
-        if (!this.runtimeOptions.allowVisibleIframe) {
+        if (!this.runtimeOptions?.allowVisibleIframe) {
           throw new Error('Cannot show UI')
         }
         this.uiHandle.showIframe()
@@ -23546,10 +22138,10 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
     if (vm.isNull(callbackHandle) || vm.isUndefined(callbackHandle)) {
       newCallback = undefined
     }
- else if (vm.isFunction(callbackHandle)) {
+    else if (vm.isFunction(callbackHandle)) {
       newCallback = callbackHandle
     }
- else {
+    else {
       throw new TypeError('onmessage must be a function')
     }
 
@@ -23655,9 +22247,9 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
           value,
           ...(stats
             ? {
-                stats,
-              }
-: {}),
+              stats,
+            }
+            : {}),
         }
         vm.registerPromise(setStorageEntry(requestParams)).then(() => resolve(vm.undefined), error => this.handleStorageError(reject, vm, 'set', key, error))
         return promise
@@ -23697,11 +22289,11 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
         })).then(
           // Type assertion to bypass interface restrictions
           () => resolve(vm.undefined),
-          error => {
+          (error) => {
             const keyStr = JSON.stringify(key)
             reject(vm.newString(`Failed to delete client storage key ${keyStr}: ${error}`))
-          }
-);
+          },
+        )
         return promise
       },
       isAllowedInReadOnly: true,
@@ -24361,7 +22953,7 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
    */
   defineWidgetApi(apiObject) {
     if (!this.isWidget)
-      return;
+      return
     const widgetManager = this.widgetManager
     if (!widgetManager) {
       throw new Error('WidgetManager not defined')
@@ -24423,10 +23015,10 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
         const pluginDataHash = await this.handlePluginDataUpdate(widgetNode)
         await this.processWidgetEvent(widgetEvent, widgetManager, pluginDataHash)
       }
- catch (error) {
+      catch (error) {
         this.handleWidgetError(error)
       }
- finally {
+      finally {
         await this.closePlugin(undefined)
       }
       await widgetManager.waitForFinish()
@@ -24597,10 +23189,10 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
    * handleWidgetError - Handle widget processing errors
    */
   handleWidgetError(error) {
-    if (error instanceof o9) {
+    if (error instanceof InternalError) {
       _$$k2.error(error)
     }
- else if (error instanceof _$$$f2) {
+    else if (error instanceof RequestError) {
       // Handle specific error type silently
     }
     else {
@@ -24624,7 +23216,7 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
         if (key === '') {
           vm.setProp(optionObject, 'tooltip', vm.newString(''))
         }
- else {
+        else {
           const tooltip = key.replace(/([A-Z])/g, ' $1').trim().split(' ').map(word => word[0].toUpperCase() + word.slice(1)).join(' ')
           vm.setProp(optionObject, 'tooltip', vm.newString(tooltip))
         }
@@ -24679,10 +23271,10 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
         widgetManager.runSyncedStateDefaultValueFunction(() => {
           const functionResult = vm.callFunction(defaultValueFunction, vm.undefined)
           if (functionResult.type === 'FAILURE') {
-            throw new o9(`Error in useSyncedState default value function: ${functionResult.error}`)
+            throw new InternalError(`Error in useSyncedState default value function: ${functionResult.error}`)
           }
           if (vm.isUndefined(functionResult.handle)) {
-            throw new o9('Cannot return undefined from default value function in useSyncedState')
+            throw new InternalError('Cannot return undefined from default value function in useSyncedState')
           }
           defaultValue = functionResult.handle
         })
@@ -24706,11 +23298,11 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
       const renderMode = widgetManager.getRenderMode(widgetNode.guid)
       const syncedData = _$$MN(renderMode, widgetNode)
       const defaultValue = getDefaultValue()
-      if (renderMode === 'current' && !vm.isUndefined(defaultValue) && !syncedData.hasOwnProperty(validatedStateKey)) {
+      if (renderMode === 'current' && !vm.isUndefined(defaultValue) && !Object.prototype.hasOwnProperty.call(syncedData, validatedStateKey)) {
         const unwrappedDefault = vm.deepUnwrap(defaultValue)
         _U(this.privateSceneGraph.get(currentWidgetNodeId), validatedStateKey, unwrappedDefault)
       }
-      return syncedData.hasOwnProperty(validatedStateKey) ? vm.deepWrap(syncedData[validatedStateKey]) : defaultValue
+      return Object.prototype.hasOwnProperty.call(syncedData, validatedStateKey) ? vm.deepWrap(syncedData[validatedStateKey]) : defaultValue
     }
     const setSyncedState = vm.newFunction('setSyncedState', (newValue) => {
       if (widgetManager.isRunningWidgetFunction()) {
@@ -24719,8 +23311,9 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
       const processedValue = vm.deepUnwrap((() => {
         if (vm.isFunction(newValue)) {
           const result = vm.callFunction(newValue, vm.undefined, getCurrentState())
-          if (result.type === 'FAILURE')
-            throw new o9(`Error in setSyncedState: ${result.error}`)
+          if (result.type === 'FAILURE') {
+            throw new InternalError(`Error in setSyncedState: ${result.error}`)
+          }
           return result.handle
         }
         return newValue
@@ -24782,19 +23375,19 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
         zSchema: _$$z.string(),
         property: 'map.key',
       })
-      return vm.newBoolean(getCurrentMapData().hasOwnProperty(validatedKey))
+      return vm.newBoolean(Object.prototype.hasOwnProperty.call(getCurrentMapData(), validatedKey))
     })
     vm.defineFunction(mapObject, 'delete', 'map.delete', (key) => {
       if (widgetManager.isRunningWidgetFunction())
         throw new Error('Cannot call map.delete while widget is rendering.')
       let a = _$$u({
-        vm: i,
+        vm,
         handle: key,
         zSchema: _$$z.string(),
         property: 'map.key',
       })
-      vH(this.privateSceneGraph.get(n), NodeAPI, a)
-      t.scheduleRender(n)
+      vH(this.privateSceneGraph.get(variableDefinitions), NodeAPI, a)
+      widgetManager.scheduleRender(variableDefinitions)
       return vm.undefined
     })
     vm.defineFunction(mapObject, 'keys', 'map.keys', () => vm.deepWrap(Object.keys(getCurrentMapData())))
@@ -25048,7 +23641,7 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
       metricsKey: 'firstDraft.deserializeProductComponentFromBuffer',
       cb: (idHandle, bufferHandle) => {
         if (!vm.isString(idHandle)) {
-          throw new TypeError(`Expected id to be a string, got ${vm.$$typeof(idHandle)}`)
+          throw new TypeError(`Expected id to be a string, got ${vm.typeof(idHandle)}`)
         }
         const id = vm.toString(idHandle)
         const buffer = _$$u({
@@ -25102,7 +23695,7 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
       metricsKey: 'firstDraft.getComponentVersion',
       cb: (idHandle) => {
         if (!vm.isString(idHandle)) {
-          throw new TypeError(`Expected id to be a string, got ${vm.$$typeof(idHandle)}`)
+          throw new TypeError(`Expected id to be a string, got ${vm.typeof(idHandle)}`)
         }
         const id = vm.toString(idHandle)
         if (!fn(sH(id))) {
@@ -25126,7 +23719,7 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
       metricsKey: 'firstDraft.getOverrideKeyForGuidOrNull',
       cb: (idHandle) => {
         if (!vm.isString(idHandle)) {
-          throw new TypeError(`Expected id to be a string, got ${vm.$$typeof(idHandle)}`)
+          throw new TypeError(`Expected id to be a string, got ${vm.typeof(idHandle)}`)
         }
         const id = vm.toString(idHandle)
         if (!fn(sH(id))) {
@@ -25296,32 +23889,48 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
   }
 
   /**
-   * createAnalyticsApi - Create analytics API for tracking events
+   * createAnalyticsApi - Creates the Analytics API object for plugin analytics tracking.
+   *
+   * Provides a 'track' method for sending analytics events with event name and properties.
+   * The API object is frozen to prevent modification.
+   *
+   * @returns VM object with analytics API methods
    */
   createAnalyticsApi() {
-    let e = this.vm
-    let t = e.newObject()
+    const vm = this.vm
+    const analyticsApi = vm.newObject()
+
+    /**
+     * track - Sends an analytics event with the specified name and properties.
+     * @param nameHandle - VM handle for the event name (string)
+     * @param propertiesHandle - VM handle for event properties (object)
+     */
     this.defineVmFunction({
-      handle: t,
+      handle: analyticsApi,
       key: 'track',
       metricsKey: 'analytics.track',
-      cb: (t, i) => (sx(_$$u({
-        vm: e,
-        handle: t,
-        zSchema: _$$z.string(),
-        property: 'analytics.track name',
-      }), _$$u({
-        vm: e,
-        handle: i,
-        zSchema: _$$z.record(_$$z.any()),
-        property: 'analytics.track properties',
-      })), e.undefined),
-      isAllowedInReadOnly: !0,
-      isAllowedInWidgetRender: !1,
-      hasEditScope: !1,
+      cb: (nameHandle, propertiesHandle) => {
+        const eventName = _$$u({
+          vm,
+          handle: nameHandle,
+          zSchema: _$$z.string(),
+          property: 'analytics.track name',
+        })
+        const eventProperties = _$$u({
+          vm,
+          handle: propertiesHandle,
+          zSchema: _$$z.record(_$$z.any()),
+          property: 'analytics.track properties',
+        })
+        sx(eventName, eventProperties)
+        return vm.undefined
+      },
+      isAllowedInReadOnly: true,
+      isAllowedInWidgetRender: false,
+      hasEditScope: false,
     })
-    e.shallowFreezeObject(t)
-    return t
+    vm.shallowFreezeObject(analyticsApi)
+    return analyticsApi
   }
 
   /**
@@ -25474,63 +24083,61 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
   /**
    * wrapReadableStream - Wrap a ReadableStream for VM context
    */
-  wrapReadableStream(e) {
-    let t = this.vm
-    let i = t.getProp(t.global, 'ReadableStream')
-    if (!i) {
+  wrapReadableStream(stream) {
+    const vm = this.vm
+    const ReadableStreamCtor = vm.getProp(vm.global, 'ReadableStream')
+    if (!ReadableStreamCtor) {
       _$$k2.error(`
 Import a polyfill to use this plugin API, eg:
 \`\`\`
-
 import { ReadableStream } from "web-streams-polyfill/es6";
 if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
   globalThis.ReadableStream = ReadableStream;
 }
 // Now it's safe to use APIs that return ReadableStreams
-
 \`\`\`
 `)
       return new Error('ReadableStream not available on the VM global object.')
     }
-    let n = t.newObject()
-    let r = e.getReader()
-    let a = (e, i, ...n) => {
-      let r = t.getProp(e, i)
-      return !!t.isFunction(r) && (t.callFunction(r, e, ...n).type !== 'FAILURE' || void _$$k2.error(`Error calling controller.${i}(\u2026)`))
+    const underlyingSource = vm.newObject()
+    const reader = stream.getReader()
+    const callController = (controller, method, ...args) => {
+      const fn = vm.getProp(controller, method)
+      return !!vm.isFunction(fn) && (vm.callFunction(fn, controller, ...args).type !== 'FAILURE' || void _$$k2.error(`Error calling controller.${method}(\u2026)`))
     }
-    t.defineFunction(n, 'pull', 'underlyingSource.pull', e => (t.retainHandle(e), this.wrapPromise((async () => {
-      try {
-        let {
-          done,
-          value,
-        } = await r.read()
-        if (t.isDestroyed()) {
-          r.cancel()
-          return
+    vm.defineFunction(underlyingSource, 'pull', 'underlyingSource.pull', (controller) => {
+      vm.retainHandle(controller)
+      return this.wrapPromise((async () => {
+        try {
+          const {
+            done,
+            value,
+          } = await reader.read()
+          if (vm.isDestroyed()) {
+            reader.cancel()
+            return
+          }
+          done ? callController(controller, 'close', vm.undefined) : callController(controller, 'enqueue', vm.deepWrap(value))
         }
-        done ? a(e, 'close', t.undefined) : a(e, 'enqueue', t.deepWrap(value))
-      }
- catch (t) {
-        _$$k2.error('ReadableStream: Error reading from stream passing to plugin vm', t)
-        a(e, 'error', this.wrapError(t))
-      }
- finally {
-        t.releaseHandle(e)
-      }
-    })())))
-    t.defineFunction(n, 'cancel', 'underlyingSource.cancel', _e => this.wrapPromise(r.cancel()))
-    t.shallowFreezeObject(n)
-    let s = t.callConstructor(i, n)
-    if (s.type === 'FAILURE') {
-      _$$k2.error(`Error creating ReadableStream: ${s.error}`)
-      return new Error(`Error creating ReadableStream: ${s.error}`)
+        catch (err) {
+          _$$k2.error('ReadableStream: Error reading from stream passing to plugin vm', err)
+          callController(controller, 'error', this.wrapError(err))
+        }
+        finally {
+          vm.releaseHandle(controller)
+        }
+      })())
+    })
+    vm.defineFunction(underlyingSource, 'cancel', 'underlyingSource.cancel', () => this.wrapPromise(reader.cancel()))
+    vm.shallowFreezeObject(underlyingSource)
+    const result = vm.callConstructor(ReadableStreamCtor, underlyingSource)
+    if (result.type === 'FAILURE') {
+      _$$k2.error(`Error creating ReadableStream: ${result.error}`)
+      return new Error(`Error creating ReadableStream: ${result.error}`)
     }
-    return s.handle
+    return result.handle
   }
 
-  /**
-   * setQueryMode - Set query mode for the plugin
-   */
   setQueryMode(e) {
     this.queryMode = e
     NfO.runInQueryMode(this.queryMode)
@@ -25706,1328 +24313,1155 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
       isAllowedInWidgetRender: !1,
       hasEditScope: !1,
     })
-    this.inBuzz() && getFeatureFlags().buzz_plugins && (function ({
-      vm: e,
-      figmaApi: t,
-      defineVmFunction: i,
-      defineVmProp: n,
-      getNode: r,
-      sceneGraph: a,
-      nodeFactory: s,
-      documentAccessState: o,
-      imageStore: l,
-      videoStore: d,
-    }) {
-      n({
-        handle: t,
+    // =====================
+    // REFACTORED: Modular Buzz API Extension
+    // =====================
+    if (this.inBuzz() && getFeatureFlags().buzz_plugins) {
+      const buzzApiConfig = {
+        vm: e,
+        figmaApi: y,
+        defineVmFunction: this.defineVmFunction,
+        defineVmProp: this.defineVmProp,
+        getNode: this.getNode,
+        sceneGraph: this.privateSceneGraph,
+        nodeFactory: this.nodeFactory,
+        documentAccessState: this.documentAccessState,
+        imageStore: this.imageStore,
+        videoStore: this.videoStore,
+      }
+      buzzApiConfig.defineVmProp({
+        handle: buzzApiConfig.figmaApi,
         key: 'buzz',
         options: {
-          enumerable: !1,
+          enumerable: false,
           metricsKey: 'figma.buzz',
-          get: memoizedHandle(e, () => (function () {
-            let t = e.newObject();
-            i({
-              handle: t,
+          get: memoizedHandle(buzzApiConfig.vm, () => {
+            const buzzObj = buzzApiConfig.vm.newObject()
+
+            // createFrame
+            buzzApiConfig.defineVmFunction({
+              handle: buzzObj,
               key: 'createFrame',
               metricsKey: 'figma.buzz.createFrame',
-              cb: (t, i) => {
-                let n = _$$u({
-                  vm: e,
-                  handle: t,
+              cb: (rowHandle, colHandle) => {
+                const row = _$$u({
+                  vm: buzzApiConfig.vm,
+                  handle: rowHandle,
                   zSchema: _$$z.number().finite().min(0).int().optional(),
-                  property: 'canvasRow'
-                });
-                let r = _$$u({
-                  vm: e,
-                  handle: i,
+                  property: 'canvasRow',
+                })
+                const col = _$$u({
+                  vm: buzzApiConfig.vm,
+                  handle: colHandle,
                   zSchema: _$$z.number().finite().min(0).int().optional(),
-                  property: 'canvasColumn'
-                });
-                let a = _$$n2.get('CUSTOM');
-                if (void 0 === a) throw new Error('Invalid asset type');
-                let l = fZl?.getCooperTemplateTypeSize(a);
-                if (!l) throw new Error('Failed fetching size for asset type');
-                let {
-                  row,
-                  col
-                } = getRowColumn(n, r);
-                let u = IPu?.createBlankChildAtCoord(row, col, l, 'plugin_buzz_create_frame', !0, a);
-                if (!u) throw new Error('Failed to create frame');
-                av(u, o);
-                Ez5?.canvasGrid().recomputeGrid();
-                return s.createNode(u, 'figma.buzz.createFrame');
-              },
-              isAllowedInReadOnly: !0,
-              isAllowedInWidgetRender: !1,
-              hasEditScope: !0
-            });
-            i({
-              handle: t,
-              key: 'createInstance',
-              metricsKey: 'figma.buzz.createInstance',
-              cb(t, i, n) {
-                let a = _$$u({
-                  vm: e,
-                  handle: i,
-                  zSchema: _$$N.PositiveInteger.optional(),
-                  property: 'canvasRow'
-                });
-                let l = _$$u({
-                  vm: e,
-                  handle: n,
-                  zSchema: _$$N.PositiveInteger.optional(),
-                  property: 'canvasColumn'
-                });
-                const targetNode = r(t);
-                if (targetNode.type !== 'SYMBOL') throw new Error('Node is not a component');
-                const componentInstanceGuid = targetNode.createInstance()?.guid || '';
-                const nodeObject = s.createNode(componentInstanceGuid, 'node.createInstance');
+                  property: 'canvasColumn',
+                })
+                const assetType = _$$n2.get('CUSTOM')
+                if (assetType === undefined)
+                  throw new Error('Invalid asset type')
+                const size = fZl?.getCooperTemplateTypeSize(assetType)
+                if (!size)
+                  throw new Error('Failed fetching size for asset type')
                 const {
-                  row,
-                  col
-                } = getRowColumn(a, l);
-                Ez5?.canvasGrid().moveChildrenToCoord([componentInstanceGuid], {
-                  row,
-                  col
-                });
-                av(componentInstanceGuid, o);
-                Ez5?.canvasGrid().recomputeGrid();
-                return nodeObject;
-              },
-              isAllowedInReadOnly: !1,
-              hasEditScope: !0
-            });
-
-            // Setup Buzz asset type getter
-            i({
-              handle: t,
-              key: 'getBuzzAssetTypeForNode',
-              metricsKey: 'figma.buzz.getBuzzAssetTypeForNode',
-              cb: t => {
-                let i = r(t);
-                if (i && fZl) {
-                  let t = fZl.getCooperTemplateType(i.guid);
-                  if (t != null) {
-                    let i = po.get(t);
-                    return i ? e.newString(i.toString()) : e.$$null;
-                  }
-                }
-                return e.$$null;
+                  row: r,
+                  col: c,
+                } = getRowColumn(row, col)
+                const guid = IPu?.createBlankChildAtCoord(r, c, size, 'plugin_buzz_create_frame', true, assetType)
+                if (!guid)
+                  throw new Error('Failed to create frame')
+                av(guid, buzzApiConfig.documentAccessState)
+                Ez5?.canvasGrid().recomputeGrid()
+                return buzzApiConfig.nodeFactory.createNode(guid, 'figma.buzz.createFrame')
               },
               isAllowedInReadOnly: true,
               isAllowedInWidgetRender: false,
-              hasEditScope: false
-            });
+              hasEditScope: true,
+            })
 
-            // Setup Buzz asset type setter
-            i({
-              handle: t,
+            // createInstance
+            buzzApiConfig.defineVmFunction({
+              handle: buzzObj,
+              key: 'createInstance',
+              metricsKey: 'figma.buzz.createInstance',
+              cb: (nodeHandle, rowHandle, colHandle) => {
+                const row = _$$u({
+                  vm: buzzApiConfig.vm,
+                  handle: rowHandle,
+                  zSchema: _$$N.PositiveInteger.optional(),
+                  property: 'canvasRow',
+                })
+                const col = _$$u({
+                  vm: buzzApiConfig.vm,
+                  handle: colHandle,
+                  zSchema: _$$N.PositiveInteger.optional(),
+                  property: 'canvasColumn',
+                })
+                const targetNode = buzzApiConfig.getNode(nodeHandle)
+                if (targetNode.type !== 'SYMBOL')
+                  throw new Error('Node is not a component')
+                const instanceGuid = targetNode.createInstance()?.guid || ''
+                const nodeObj = buzzApiConfig.nodeFactory.createNode(instanceGuid, 'node.createInstance')
+                const {
+                  row: r,
+                  col: c,
+                } = getRowColumn(row, col)
+                Ez5?.canvasGrid().moveChildrenToCoord([instanceGuid], {
+                  row: r,
+                  col: c,
+                })
+                av(instanceGuid, buzzApiConfig.documentAccessState)
+                Ez5?.canvasGrid().recomputeGrid()
+                return nodeObj
+              },
+              isAllowedInReadOnly: false,
+              hasEditScope: true,
+            })
+
+            // getBuzzAssetTypeForNode
+            buzzApiConfig.defineVmFunction({
+              handle: buzzObj,
+              key: 'getBuzzAssetTypeForNode',
+              metricsKey: 'figma.buzz.getBuzzAssetTypeForNode',
+              cb: (nodeHandle) => {
+                const node = buzzApiConfig.getNode(nodeHandle)
+                if (node && fZl) {
+                  const type = fZl.getCooperTemplateType(node.guid)
+                  if (type != null) {
+                    const label = po.get(type)
+                    return label ? buzzApiConfig.vm.newString(label.toString()) : buzzApiConfig.vm.$$null
+                  }
+                }
+                return buzzApiConfig.vm.$$null
+              },
+              isAllowedInReadOnly: true,
+              isAllowedInWidgetRender: false,
+              hasEditScope: false,
+            })
+
+            // setBuzzAssetTypeForNode
+            buzzApiConfig.defineVmFunction({
+              handle: buzzObj,
               key: 'setBuzzAssetTypeForNode',
               metricsKey: 'figma.buzz.setBuzzAssetTypeForNode',
-              cb: (t, i) => {
-                let n = r(t);
-                if (!n.isCooperFrame) {
-                  throw new Error('Can only set asset type on Buzz Asset Node');
+              cb: (nodeHandle, typeHandle) => {
+                const node = buzzApiConfig.getNode(nodeHandle)
+                if (!node.isCooperFrame)
+                  throw new Error('Can only set asset type on Buzz Asset Node')
+                if (node.isInstance) {
+                  throw new Error('Cannot set asset type on Locked Buzz Asset Node')
                 }
-                if (n.isInstance) {
-                  throw new Error('Cannot set asset type on Locked Buzz Asset Node');
-                }
-                let a = _$$u({
-                  vm: e,
-                  handle: i,
+                const assetType = _$$u({
+                  vm: buzzApiConfig.vm,
+                  handle: typeHandle,
                   zSchema: _$$N.BuzzAssetType,
-                  property: 'buzzAssetType'
-                });
-                let s = _$$n2.get(a);
-                fZl && s && fZl.setCooperTemplateType(n.guid, s);
-                return e.undefined;
+                  property: 'buzzAssetType',
+                })
+                const typeValue = _$$n2.get(assetType)
+                if (fZl && typeValue)
+                  fZl.setCooperTemplateType(node.guid, typeValue)
+                return buzzApiConfig.vm.undefined
               },
               isAllowedInReadOnly: false,
               isAllowedInWidgetRender: false,
-              hasEditScope: true
-            });
+              hasEditScope: true,
+            })
 
-            /**
-             * createBuzzTextContentArray - Create a VM array containing text field objects for Buzz content
-             *
-             * Each text field has isComponentProp, value getter, and setValueAsync method
-             * for managing text content in Buzz asset templates.
-             *
-             * @param targetNode - The Buzz asset node to extract text fields from
-             * @param vmHandle - VM handle for object creation
-             * @param nodeMap - Map to retrieve node data by GUID
-             * @returns VM array of text field objects
-             */
-            function createBuzzTextContentArray(targetNode, vmHandle, nodeMap) {
-              const textFieldArray = vmHandle.newArray();
-              targetNode.getBuzzTextFields().forEach((textField, fieldIndex) => {
-                const textFieldObject = vmHandle.newObject();
-
-                // Define property to check if this is a component property
-                vmHandle.defineProp(textFieldObject, 'isComponentProp', {
-                  enumerable: !1,
-                  get: () => vmHandle.newBoolean(textField.type === 'TEXT_PROP_DEF')
-                });
-
-                // Define property to get the current text value
-                vmHandle.defineProp(textFieldObject, 'value', {
-                  enumerable: !1,
-                  get: () => {
-                    const primaryGuid = textField.guids[0];
-                    if (primaryGuid) {
-                      const textNode = nodeMap.get(primaryGuid);
-                      if (textNode) {
-                        return vmHandle.newString(textNode.characters);
-                      }
-                    }
-                    return vmHandle.$$null;
-                  }
-                });
-
-                // Define async method to update text field value
-                vmHandle.defineFunction(textFieldObject, 'setValueAsync', 'buzz.textContent.setValueAsync', newValueHandle => {
-                  const newTextValue = _$$u({
-                    vm: vmHandle,
-                    handle: newValueHandle,
-                    zSchema: _$$z.string(),
-                    property: 'newBuzzTextFieldValue'
-                  });
-                  const {
-                    promise,
-                    resolve
-                  } = vmHandle.newPromise();
-                  vmHandle.registerPromise((async () => {
-                    // Prepare all text nodes for modification
-                    for (let guid of textField.guids) {
-                      if (!guid) continue;
-                      const textNode = nodeMap.get(guid);
-                      if (textNode) {
-                        await loadFontsForTextNode(textNode); // setupTextNodeForEdit (i6)
-                      }
-                    }
-
-                    // Apply the text value change
-                    l7.plugin('plugin-buzz-set-textfield-value', () => {
-                      textField.setValue(newTextValue);
-                    });
-                    resolve(vmHandle.$$null);
-                  })());
-                  return promise;
-                });
-                vmHandle.setProp(textFieldArray, fieldIndex.toString(), textFieldObject);
-              });
-              return textFieldArray;
-            }
-            i({
-              handle: t,
+            // getTextContent
+            buzzApiConfig.defineVmFunction({
+              handle: buzzObj,
               key: 'getTextContent',
               metricsKey: 'figma.buzz.getTextContent',
-              /**
-               * Get text content from a Buzz Asset Node - retrieves all text fields and their values
-               * @param nodeHandle - VM handle for the target node
-               * @returns VM array containing text field objects with isComponentProp, value, and setValueAsync method
-               * @throws Error if called on non-Buzz Asset Node
-               */
-              cb: nodeHandle => {
-                const targetNode = r(nodeHandle);
-                if (!targetNode.isCooperFrame) {
-                  throw new Error('Can only get Buzz Text Content on Buzz Asset Node');
+              cb: (nodeHandle) => {
+                const node = buzzApiConfig.getNode(nodeHandle)
+                if (!node.isCooperFrame) {
+                  throw new Error('Can only get Buzz Text Content on Buzz Asset Node')
                 }
-                return createBuzzTextContentArray(targetNode, e, a);
+                return createBuzzTextContentArray(node, buzzApiConfig.vm, buzzApiConfig.sceneGraph)
               },
-              isAllowedInReadOnly: !1,
-              isAllowedInWidgetRender: !1,
-              hasEditScope: !0
-            });
+              isAllowedInReadOnly: false,
+              isAllowedInWidgetRender: false,
+              hasEditScope: true,
+            })
 
-            /**
-             * Create a VM array containing media field objects for Buzz content
-             * Each media field has type, hash, node getters, and getMedia/setMedia methods
-             * @param targetNode - The Buzz asset node to extract media fields from
-             * @param vmHandle - VM handle for object creation
-             * @param imageStore - Store for image management
-             * @param videoStore - Store for video management
-             * @param nodeCreator - Function to create node references
-             * @returns VM array of media field objects
-             */
-            /**
-             * createBuzzMediaContentArray - Create a VM array containing media field objects for Buzz content
-             *
-             * Creates an array of media field objects where each object provides:
-             * - type, hash, node getters for media properties
-             * - getMedia() method to retrieve image/video objects
-             * - setMedia() method to update media content asynchronously
-             *
-             * @param targetNode - The Buzz asset node to extract media fields from
-             * @param vmHandle - VM handle for object creation and API calls
-             * @param imageStore - Store for image management and retrieval
-             * @param videoStore - Store for video management and retrieval
-             * @param nodeCreator - Function to create node references from GUIDs
-             * @returns VM array of media field objects with complete media API
-             */
-            function createBuzzMediaContentArray(targetNode, vmHandle, imageStore, videoStore, nodeCreator) {
-              const mediaFieldArray = vmHandle.newArray();
-              const mediaFields = oJ(targetNode);
-              for (const [fieldIndex, mediaField] of mediaFields.entries()) {
-                const mediaFieldObject = createMediaFieldObject(mediaField, vmHandle, imageStore, videoStore, nodeCreator);
-                if (mediaFieldObject) {
-                  vmHandle.setProp(mediaFieldArray, fieldIndex.toString(), mediaFieldObject);
-                }
-              }
-              return mediaFieldArray;
-            }
-
-            /**
-             * createMediaFieldObject - Create a single media field object with all properties and methods
-             */
-            function createMediaFieldObject(mediaField, vmHandle, imageStore, videoStore, nodeCreator) {
-              const {
-                mediaPaint,
-                mediaPaintIndex
-              } = _$$eG(mediaField);
-
-              // Skip invalid media paints
-              if (!isValidMediaPaint(mediaPaint, mediaPaintIndex)) {
-                return null;
-              }
-              const mediaFieldObject = vmHandle.newObject();
-
-              // Add all properties and methods
-              addMediaTypeProperty(mediaFieldObject, mediaField, vmHandle);
-              addMediaHashProperty(mediaFieldObject, mediaField, vmHandle);
-              addMediaNodeProperty(mediaFieldObject, mediaField, vmHandle, nodeCreator);
-              addGetMediaMethod(mediaFieldObject, mediaField, vmHandle, imageStore, videoStore);
-              addSetMediaMethod(mediaFieldObject, mediaField, vmHandle, imageStore, videoStore);
-              return mediaFieldObject;
-            }
-
-            /**
-             * isValidMediaPaint - Check if media paint is valid and has required properties
-             */
-            function isValidMediaPaint(mediaPaint, mediaPaintIndex) {
-              return mediaPaint != null && mediaPaintIndex != null && !gl(mediaPaint) && mediaPaint.image?.hash !== undefined;
-            }
-
-            /**
-             * addMediaTypeProperty - Add type property that returns the media type (IMAGE/VIDEO)
-             */
-            function addMediaTypeProperty(mediaFieldObject, mediaField, vmHandle) {
-              vmHandle.defineProp(mediaFieldObject, 'type', {
-                enumerable: false,
-                get: () => {
-                  const {
-                    mediaPaint
-                  } = _$$eG(mediaField);
-                  return mediaPaint && hS(mediaPaint) ? vmHandle.newString(mediaPaint.type) : vmHandle.$$null;
-                }
-              });
-            }
-
-            /**
-             * addMediaHashProperty - Add hash property that returns the media hash
-             */
-            function addMediaHashProperty(mediaFieldObject, mediaField, vmHandle) {
-              vmHandle.defineProp(mediaFieldObject, 'hash', {
-                enumerable: false,
-                get: () => {
-                  const {
-                    mediaPaint
-                  } = _$$eG(mediaField);
-                  if (!mediaPaint || gl(mediaPaint)) {
-                    return vmHandle.$$null;
-                  }
-                  const mediaHash = extractMediaHash(mediaPaint);
-                  return mediaHash ? vmHandle.newString(B9(mediaHash)) : vmHandle.$$null;
-                }
-              });
-            }
-
-            /**
-             * extractMediaHash - Extract hash from media paint based on type
-             */
-            function extractMediaHash(mediaPaint) {
-              switch (mediaPaint.type) {
-                case 'IMAGE':
-                  return mediaPaint.image?.hash;
-                case 'VIDEO':
-                  return mediaPaint.video?.hash;
-                default:
-                  return null;
-              }
-            }
-
-            /**
-             * addMediaNodeProperty - Add node property that returns the associated node
-             */
-            function addMediaNodeProperty(mediaFieldObject, mediaField, vmHandle, nodeCreator) {
-              vmHandle.defineProp(mediaFieldObject, 'node', {
-                enumerable: false,
-                get: () => nodeCreator.createNode(mediaField.guid, 'BuzzMediaField.node.get')
-              });
-            }
-
-            /**
-             * addGetMediaMethod - Add getMedia method for retrieving image/video objects
-             */
-            function addGetMediaMethod(mediaFieldObject, mediaField, vmHandle, imageStore, videoStore) {
-              vmHandle.defineFunction(mediaFieldObject, 'getMedia', 'buzz.mediaContent.getMedia', () => {
-                const {
-                  mediaPaint,
-                  mediaPaintIndex
-                } = _$$eG(mediaField);
-                validateMediaPaintForRetrieval(mediaPaint, mediaPaintIndex);
-                switch (mediaPaint.type) {
-                  case 'IMAGE':
-                    return getBuzzImageMedia(mediaPaint.image?.hash, vmHandle, imageStore);
-                  case 'VIDEO':
-                    return getBuzzVideoMedia(mediaPaint.video?.hash, vmHandle, videoStore);
-                  default:
-                    throwTypeError(mediaPaint.type, 'Unknown media type');
-                }
-              });
-            }
-
-            /**
-             * validateMediaPaintForRetrieval - Validate media paint can be retrieved
-             */
-            function validateMediaPaintForRetrieval(mediaPaint, mediaPaintIndex) {
-              if (mediaPaint == null || mediaPaintIndex == null) {
-                throw new Error('No media paint found');
-              }
-              if (gl(mediaPaint)) {
-                throw new Error('Mixed media paint not supported');
-              }
-            }
-
-            /**
-             * addSetMediaMethod - Add setMedia method for updating media content
-             */
-            function addSetMediaMethod(mediaFieldObject, mediaField, vmHandle, imageStore, videoStore) {
-              vmHandle.defineFunction(mediaFieldObject, 'setMedia', 'buzz.mediaContent.setMedia', (hashHandle, typeHandle) => {
-                const mediaParameters = extractMediaParameters(hashHandle, typeHandle, vmHandle);
-                const newPaint = createMediaPaint(mediaParameters, imageStore, videoStore);
-                return executeMediaUpdate(mediaField, newPaint, vmHandle);
-              });
-            }
-
-            /**
-             * extractMediaParameters - Extract and validate media parameters
-             */
-            function extractMediaParameters(hashHandle, typeHandle, vmHandle) {
-              const mediaHash = _$$u({
-                vm: vmHandle,
-                handle: hashHandle,
-                zSchema: _$$z.string(),
-                property: 'mediaHash'
-              });
-              const mediaType = _$$u({
-                vm: vmHandle,
-                handle: typeHandle,
-                zSchema: _$$z.enum(['IMAGE', 'VIDEO']),
-                property: 'mediaType'
-              });
-              return {
-                mediaHash,
-                mediaType
-              };
-            }
-
-            /**
-             * createMediaPaint - Create new paint object based on media type
-             */
-            function createMediaPaint({
-              mediaHash,
-              mediaType
-            }, imageStore, videoStore) {
-              const paintConfig = mediaType === 'IMAGE' ? {
-                type: 'IMAGE',
-                imageHash: mediaHash,
-                scaleMode: 'FILL'
-              } : {
-                type: 'VIDEO',
-                videoHash: mediaHash,
-                scaleMode: 'FILL'
-              };
-              return processPaint(imageStore, videoStore, paintConfig, []);
-            }
-
-            /**
-             * executeMediaUpdate - Execute the media update operation asynchronously
-             */
-            function executeMediaUpdate(mediaField, newPaint, vmHandle) {
-              const {
-                promise,
-                resolve
-              } = vmHandle.newPromise();
-              const {
-                mediaPaintIndex
-              } = _$$eG(mediaField);
-              vmHandle.registerPromise((async () => {
-                const currentFills = mediaField.fills.slice();
-                if (mediaPaintIndex !== null && currentFills[mediaPaintIndex]) {
-                  currentFills[mediaPaintIndex] = newPaint;
-                  mediaField.fills = currentFills;
-                }
-                resolve(vmHandle.$$null);
-              })());
-              return promise;
-            }
-
-            /**
-             * Get image media object from Buzz content
-             * @param imageHash - Hash of the image
-             * @param vmHandle - VM handle for object creation
-             * @param imageStore - Image storage system
-             * @returns VM image object
-             */
-            function getBuzzImageMedia(imageHash, vmHandle, imageStore) {
-              if (void 0 === imageHash) {
-                throw new Error('Invalid Image paint - no hash found');
-              }
-              const imageData = imageStore.getImageFromSHA1(B9(imageHash));
-              if (imageData === null) {
-                throw new Error('Could not retrieve image');
-              }
-              return createImageProcessor(vmHandle, imageData);
-            }
-
-            /**
-             * Get video media object from Buzz content
-             * @param videoHash - Hash of the video
-             * @param vmHandle - VM handle for object creation
-             * @param videoStore - Video storage system
-             * @returns VM video object
-             */
-            function getBuzzVideoMedia(videoHash, vmHandle, videoStore) {
-              if (void 0 === videoHash) {
-                throw new Error('Invalid Video paint - no hash found');
-              }
-              try {
-                const videoData = videoStore.getPrivateVideoOrThrow(B9(videoHash));
-                return createNodeHash(vmHandle, videoData);
-              } catch (error) {
-                throw new Error('getMedia is not currently supported for videos not directly created through plugins');
-              }
-            }
-            i({
-              handle: t,
+            // getMediaContent
+            buzzApiConfig.defineVmFunction({
+              handle: buzzObj,
               key: 'getMediaContent',
               metricsKey: 'figma.buzz.getMediaContent',
-              /**
-               * Get media content from a Buzz Asset Node - retrieves all media fields and their properties
-               * @param nodeHandle - VM handle for the target node
-               * @returns VM array containing media field objects with type, hash, node, getMedia, and setMedia methods
-               * @throws Error if called on non-Buzz Asset Node
-               */
-              cb: nodeHandle => {
-                const targetNode = r(nodeHandle);
-                if (!targetNode.isCooperFrame) {
-                  throw new Error('Can only get Buzz Media Content on Buzz Asset Node');
+              cb: (nodeHandle) => {
+                const node = buzzApiConfig.getNode(nodeHandle)
+                if (!node.isCooperFrame) {
+                  throw new Error('Can only get Buzz Media Content on Buzz Asset Node')
                 }
-                return createBuzzMediaContentArray(targetNode, e, l, d, s);
+                return createBuzzMediaContentArray(node, buzzApiConfig.vm, buzzApiConfig.imageStore, buzzApiConfig.videoStore, buzzApiConfig.nodeFactory)
               },
-              isAllowedInReadOnly: !1,
-              isAllowedInWidgetRender: !1,
-              hasEditScope: !0
-            });
-            i({
-              handle: t,
+              isAllowedInReadOnly: false,
+              isAllowedInWidgetRender: false,
+              hasEditScope: true,
+            })
+
+            // smartResize
+            buzzApiConfig.defineVmFunction({
+              handle: buzzObj,
               key: 'smartResize',
               metricsKey: 'figma.buzz.smartResize',
-              cb: (t, i, n) => {
-                let a = r(t);
-                if (!a.isCooperFrame) {
-                  throw new Error('Can only get Buzz Media Content on Buzz Asset Node');
+              cb: (nodeHandle, widthHandle, heightHandle) => {
+                const node = buzzApiConfig.getNode(nodeHandle)
+                if (!node.isCooperFrame) {
+                  throw new Error('Can only get Buzz Media Content on Buzz Asset Node')
                 }
-                if (a.isInstance) {
-                  throw new Error('Cannot smart resize Locked Buzz Asset Nodes');
+                if (node.isInstance) {
+                  throw new Error('Cannot smart resize Locked Buzz Asset Nodes')
                 }
-                let s = _$$u({
-                  vm: e,
-                  handle: i,
+                const width = _$$u({
+                  vm: buzzApiConfig.vm,
+                  handle: widthHandle,
                   zSchema: _$$N.PositiveFloat,
-                  property: 'width'
-                });
-                let o = _$$u({
-                  vm: e,
-                  handle: n,
+                  property: 'width',
+                })
+                const height = _$$u({
+                  vm: buzzApiConfig.vm,
+                  handle: heightHandle,
                   zSchema: _$$N.PositiveFloat,
-                  property: 'height'
-                });
-                fZl && (fZl.setCooperTemplateType(a.guid, Z64.CUSTOM), fZl.resizeNode(a.guid, s, o));
-                return e.undefined;
+                  property: 'height',
+                })
+                if (fZl) {
+                  fZl.setCooperTemplateType(node.guid, Z64.CUSTOM)
+                  fZl.resizeNode(node.guid, width, height)
+                }
+                return buzzApiConfig.vm.undefined
               },
-              isAllowedInReadOnly: !1,
-              isAllowedInWidgetRender: !1,
-              hasEditScope: !0
-            });
-            return t;
-          }()))
+              isAllowedInReadOnly: false,
+              isAllowedInWidgetRender: false,
+              hasEditScope: true,
+            })
+
+            // --- Helper Functions for Buzz API ---
+
+            /**
+             * Create a VM array of text field objects for Buzz content.
+             * Each object has isComponentProp, value, and setValueAsync.
+             */
+            function createBuzzTextContentArray(targetNode, vm, nodeMap) {
+              const arr = vm.newArray()
+              targetNode.getBuzzTextFields().forEach((field, idx) => {
+                const obj = vm.newObject()
+                vm.defineProp(obj, 'isComponentProp', {
+                  enumerable: false,
+                  get: () => vm.newBoolean(field.type === 'TEXT_PROP_DEF'),
+                })
+                vm.defineProp(obj, 'value', {
+                  enumerable: false,
+                  get: () => {
+                    const guid = field.guids[0]
+                    if (guid) {
+                      const textNode = nodeMap.get(guid)
+                      if (textNode)
+                        return vm.newString(textNode.characters)
+                    }
+                    return vm.$$null
+                  },
+                })
+                vm.defineFunction(obj, 'setValueAsync', 'buzz.textContent.setValueAsync', (newValueHandle) => {
+                  const newValue = _$$u({
+                    vm,
+                    handle: newValueHandle,
+                    zSchema: _$$z.string(),
+                    property: 'newBuzzTextFieldValue',
+                  })
+                  const {
+                    promise,
+                    resolve,
+                  } = vm.newPromise()
+                  vm.registerPromise((async () => {
+                    for (let guid of field.guids) {
+                      if (!guid)
+                        continue
+                      const textNode = nodeMap.get(guid)
+                      if (textNode)
+                        await loadFontsForTextNode(textNode)
+                    }
+                    l7.plugin('plugin-buzz-set-textfield-value', () => {
+                      field.setValue(newValue)
+                    })
+                    resolve(vm.$$null)
+                  })())
+                  return promise
+                })
+                vm.setProp(arr, idx.toString(), obj)
+              })
+              return arr
+            }
+
+            /**
+             * Create a VM array of media field objects for Buzz content.
+             * Each object has type, hash, node, getMedia, setMedia.
+             */
+            function createBuzzMediaContentArray(targetNode, vm, imageStore, videoStore, nodeFactory) {
+              const arr = vm.newArray()
+              const fields = oJ(targetNode)
+              fields.forEach((field, idx) => {
+                const obj = createMediaFieldObject(field, vm, imageStore, videoStore, nodeFactory)
+                if (obj)
+                  vm.setProp(arr, idx.toString(), obj)
+              })
+              return arr
+            }
+            function createMediaFieldObject(field, vm, imageStore, videoStore, nodeFactory) {
+              const {
+                mediaPaint,
+                mediaPaintIndex,
+              } = _$$eG(field)
+              if (!mediaPaint || mediaPaintIndex == null || gl(mediaPaint) || mediaPaint.image?.hash === undefined) {
+                return null
+              }
+              const obj = vm.newObject()
+              // type
+              vm.defineProp(obj, 'type', {
+                enumerable: false,
+                get: () => mediaPaint && hS(mediaPaint) ? vm.newString(mediaPaint.type) : vm.$$null,
+              })
+              // hash
+              vm.defineProp(obj, 'hash', {
+                enumerable: false,
+                get: () => {
+                  if (!mediaPaint || gl(mediaPaint))
+                    return vm.$$null
+                  let hash = null
+                  switch (mediaPaint.type) {
+                    case 'IMAGE':
+                      hash = mediaPaint.image?.hash
+                      break
+                    case 'VIDEO':
+                      hash = mediaPaint.video?.hash
+                      break
+                  }
+                  return hash ? vm.newString(B9(hash)) : vm.$$null
+                },
+              })
+              // node
+              vm.defineProp(obj, 'node', {
+                enumerable: false,
+                get: () => nodeFactory.createNode(field.guid, 'BuzzMediaField.node.get'),
+              })
+              // getMedia
+              vm.defineFunction(obj, 'getMedia', 'buzz.mediaContent.getMedia', () => {
+                if (!mediaPaint || mediaPaintIndex == null)
+                  throw new Error('No media paint found')
+                if (gl(mediaPaint))
+                  throw new Error('Mixed media paint not supported')
+                switch (mediaPaint.type) {
+                  case 'IMAGE':
+                    {
+                      const hash = mediaPaint.image?.hash
+                      if (hash === undefined)
+                        throw new Error('Invalid Image paint - no hash found')
+                      const img = imageStore.getImageFromSHA1(B9(hash))
+                      if (img === null)
+                        throw new Error('Could not retrieve image')
+                      return createImageProcessor(vm, img)
+                    }
+                  case 'VIDEO':
+                    {
+                      const hash = mediaPaint.video?.hash
+                      if (hash === undefined)
+                        throw new Error('Invalid Video paint - no hash found')
+                      try {
+                        const vid = videoStore.getPrivateVideoOrThrow(B9(hash))
+                        return createNodeHash(vm, vid)
+                      }
+                      catch {
+                        throw new Error('getMedia is not currently supported for videos not directly created through plugins')
+                      }
+                    }
+                  default:
+                    throwTypeError(mediaPaint.type, 'Unknown media type')
+                }
+              })
+              // setMedia
+              vm.defineFunction(obj, 'setMedia', 'buzz.mediaContent.setMedia', (hashHandle, typeHandle) => {
+                const hash = _$$u({
+                  vm,
+                  handle: hashHandle,
+                  zSchema: _$$z.string(),
+                  property: 'mediaHash',
+                })
+                const type = _$$u({
+                  vm,
+                  handle: typeHandle,
+                  zSchema: _$$z.enum(['IMAGE', 'VIDEO']),
+                  property: 'mediaType',
+                })
+                const paint = type === 'IMAGE'
+                  ? processPaint(imageStore, videoStore, {
+                    type: 'IMAGE',
+                    imageHash: hash,
+                    scaleMode: 'FILL',
+                  }, [])
+                  : processPaint(imageStore, videoStore, {
+                    type: 'VIDEO',
+                    videoHash: hash,
+                    scaleMode: 'FILL',
+                  }, [])
+                const {
+                  promise,
+                  resolve,
+                } = vm.newPromise()
+                const {
+                  mediaPaintIndex,
+                } = _$$eG(field)
+                vm.registerPromise((async () => {
+                  const fills = field.fills.slice()
+                  if (mediaPaintIndex !== null && fills[mediaPaintIndex]) {
+                    fills[mediaPaintIndex] = paint
+                    field.fills = fills
+                  }
+                  resolve(vm.$$null)
+                })())
+                return promise
+              })
+              return obj
+            }
+            return buzzObj
+          }),
         },
-        canWriteInReadOnly: !1,
-        isAllowedInWidgetRender: !1,
-        hasEditScope: !1,
-      });
-    }({
-      vm: e,
-      figmaApi: y,
-      getNode: this.getNode,
-      defineVmFunction: this.defineVmFunction,
-      defineVmProp: this.defineVmProp,
-      sceneGraph: this.privateSceneGraph,
-      nodeFactory: this.nodeFactory,
-      documentAccessState: this.documentAccessState,
-      imageStore: this.imageStore,
-      videoStore: this.videoStore,
-    }));
-    (this.inDesignOrDevHandoffOrIllustration() || this.inSites()) && ((function ({
-      vm: e,
-      figmaApi: t,
-      styleFactory: i,
-      defineVmFunction: n,
-      defineVmIncrementalFunction: r,
-      incrementalSafeApi: a,
-      getNode: s,
-      styleManager: o,
-      documentAccessState: l,
-      allowIncrementalUnsafeApiCalls: d,
-    }) {
-      for (let {
+        canWriteInReadOnly: false,
+        isAllowedInWidgetRender: false,
+        hasEditScope: false,
+      })
+    }
+    // =====================
+    // REFACTORED: Modular API Extensions for Styles, Variables, Team Library, and Annotations
+    // =====================
+
+    /**
+     * Register style-related API methods if in supported editor types.
+     * Handles getStyleById, moveStyle, moveFolder, createStyle, and getAllLocalStyles for each style type.
+     */
+    if (this.inDesignOrDevHandoffOrIllustration() || this.inSites()) {
+      const styleApiConfig = {
+        vm: e,
+        figmaApi: y,
+        styleFactory: this.styleFactory,
+        defineVmFunction: this.defineVmFunction,
+        defineVmIncrementalFunction: this.defineVmIncrementalFunction,
+        incrementalSafeApi: this.options.incrementalSafeApi,
+        getNode: this.getNode,
+        styleManager: this.styleManager,
+        documentAccessState: this.documentAccessState,
+        allowIncrementalUnsafeApiCalls: !!this.options.allowIncrementalUnsafeApiCalls,
+      }
+
+      // Register style API methods for each style type
+      for (const {
         styleType,
         moveMethod,
-      } of (r({
-          handle: t,
+        moveFolderMethod,
+        createMethod,
+        getMethod,
+        getMethodAsync,
+      } of Ut) {
+        // getStyleById (and async variant)
+        styleApiConfig.defineVmIncrementalFunction({
+          handle: styleApiConfig.figmaApi,
           key: 'getStyleById',
           metricsKey: 'figma.getStyleById',
           incrementalSafeApiKey: 'getStyleByIdAsync',
           incrementalSafeApiMetricsKey: 'figma.getStyleByIdAsync',
-          parseArg: t => e.toString(t),
-          prepareDocument: async (_e) => {
-            await Ux(l)
-        },
-          resolveValue: e => i.createStyle(e),
-          incrementalSafeApi: a,
-          allowIncrementalUnsafeApiCalls: d,
-          isAllowedInReadOnly: !0,
-          hasEditScope: !1,
-      }), Ut)) {
-        n({
-          handle: t,
+          parseArg: t => styleApiConfig.vm.toString(t),
+          prepareDocument: async () => {
+            await Ux(styleApiConfig.documentAccessState)
+          },
+          resolveValue: id => styleApiConfig.styleFactory.createStyle(id),
+          incrementalSafeApi: styleApiConfig.incrementalSafeApi,
+          allowIncrementalUnsafeApiCalls: styleApiConfig.allowIncrementalUnsafeApiCalls,
+          isAllowedInReadOnly: true,
+          hasEditScope: false,
+        })
+
+        // moveStyle
+        styleApiConfig.defineVmFunction({
+          handle: styleApiConfig.figmaApi,
           key: moveMethod,
           metricsKey: `figma.${moveMethod}`,
-          cb: (t, i) => {
-            let n = s(t)
-            let r = e.isNull(i) ? null : s(i)
-            if (n.styleType !== styleType) {
-              throw new Error(`Target node is a ${n.styleType} node, instead of ${styleType}`)
+          cb: (targetHandle, refHandle) => {
+            const target = styleApiConfig.getNode(targetHandle)
+            const ref = styleApiConfig.vm.isNull(refHandle) ? null : styleApiConfig.getNode(refHandle)
+            if (target.styleType !== styleType) {
+              throw new Error(`Target node is a ${target.styleType} node, instead of ${styleType}`)
             }
-            if (r !== null && r.styleType !== styleType) {
-              throw new Error(`Reference node is a ${r.styleType} node, instead of ${styleType}`)
+            if (ref !== null && ref.styleType !== styleType) {
+              throw new Error(`Reference node is a ${ref.styleType} node, instead of ${styleType}`)
             }
-            if (r !== null && r && n.guid === r.guid) {
+            if (ref !== null && target.guid === ref.guid)
               throw new Error('Target node and reference node cannot be equal')
-            }
-            let a = o.moveStyle(n, r, styleType)
-            if (a !== '') 
-throw new Error(a)
-            return e.undefined
+            const err = styleApiConfig.styleManager.moveStyle(target, ref, styleType)
+            if (err !== '')
+              throw new Error(err)
+            return styleApiConfig.vm.undefined
           },
-          isAllowedInReadOnly: !1,
-          hasEditScope: !0,
-        });
-      }
-      for (let {
-        styleType,
-        moveFolderMethod,
-      } of Ut) {
-        n({
-          handle: t,
+          isAllowedInReadOnly: false,
+          hasEditScope: true,
+        })
+
+        // moveFolder
+        styleApiConfig.defineVmFunction({
+          handle: styleApiConfig.figmaApi,
           key: moveFolderMethod,
           metricsKey: `figma.${moveFolderMethod}`,
-          cb: (t, n) => {
-            let r = e.toString(t)
-            let a = e.isNull(n) ? null : e.toString(n)
-            let s = o.moveFolder(r, a, styleType)
-            if (s !== '') 
-throw new Error(s)
-            return e.undefined
+          cb: (folderIdHandle, refFolderIdHandle) => {
+            const folderId = styleApiConfig.vm.toString(folderIdHandle)
+            const refFolderId = styleApiConfig.vm.isNull(refFolderIdHandle) ? null : styleApiConfig.vm.toString(refFolderIdHandle)
+            const err = styleApiConfig.styleManager.moveFolder(folderId, refFolderId, styleType)
+            if (err !== '')
+              throw new Error(err)
+            return styleApiConfig.vm.undefined
           },
-          isAllowedInReadOnly: !1,
-          hasEditScope: !0,
-        });
-      }
-      for (let {
-        styleType,
-        createMethod,
-      } of Ut) {
-        n({
-          handle: t,
+          isAllowedInReadOnly: false,
+          hasEditScope: true,
+        })
+
+        // createStyle
+        styleApiConfig.defineVmFunction({
+          handle: styleApiConfig.figmaApi,
           key: createMethod,
           metricsKey: `figma.${createMethod}`,
           cb: () => {
-            let t = o.createStyle(styleType)
-            if (!t) 
-throw new Error(`Could not create ${styleType} style`)
-            return i.createStyle(t)
+            const style = styleApiConfig.styleManager.createStyle(styleType)
+            if (!style)
+              throw new Error(`Could not create ${styleType} style`)
+            return styleApiConfig.styleFactory.createStyle(style)
           },
-          isAllowedInReadOnly: !1,
-          hasEditScope: !0,
-        });
-      }
-      for (let {
-        styleType,
-        getMethod,
-        getMethodAsync,
-      } of Ut) {
-        r({
-          handle: t,
+          isAllowedInReadOnly: false,
+          hasEditScope: true,
+        })
+
+        // getAllLocalStyles (and async variant)
+        styleApiConfig.defineVmIncrementalFunction({
+          handle: styleApiConfig.figmaApi,
           key: getMethod,
           metricsKey: `figma.${getMethod}`,
           incrementalSafeApiKey: getMethodAsync,
           incrementalSafeApiMetricsKey: `figma.${getMethodAsync}`,
-          parseArg: (_e) => { },
+          parseArg: () => { },
           prepareDocument: async () => { },
-          resolveValue: () => (function ({
-            styleType: t
-          }) {
-            let n = o.getAllLocalStyles(t).map(_$$nM);
-            let r = e.newArray();
-            let a = 0;
-            for (let t of n) {
-              let n = i.createStyle(t);
-              !e.isNull(n) && (e.setProp(r, a.toString(), n), a++);
+          resolveValue: () => {
+            const styles = styleApiConfig.styleManager.getAllLocalStyles(styleType).map(_$$nM)
+            const arr = styleApiConfig.vm.newArray()
+            let idx = 0
+            for (const style of styles) {
+              const styleObj = styleApiConfig.styleFactory.createStyle(style)
+              if (!styleApiConfig.vm.isNull(styleObj)) {
+                styleApiConfig.vm.setProp(arr, idx.toString(), styleObj)
+                idx++
+              }
             }
-            return r;
-          }({
-            styleType
-          })),
-          incrementalSafeApi: a,
-          allowIncrementalUnsafeApiCalls: d,
-          isAllowedInReadOnly: !0,
-          hasEditScope: !1,
-        });
+            return arr
+          },
+          incrementalSafeApi: styleApiConfig.incrementalSafeApi,
+          allowIncrementalUnsafeApiCalls: styleApiConfig.allowIncrementalUnsafeApiCalls,
+          isAllowedInReadOnly: true,
+          hasEditScope: false,
+        })
       }
-    }({
-      vm: e,
-      stats,
-      figmaApi: y,
-      styleFactory: this.styleFactory,
-      defineVmFunction: this.defineVmFunction,
-      defineVmIncrementalFunction: this.defineVmIncrementalFunction,
-      incrementalSafeApi: this.options.incrementalSafeApi,
-      getNode: this.getNode,
-      styleManager: this.styleManager,
-      documentAccessState: this.documentAccessState,
-      allowIncrementalUnsafeApiCalls: !!this.options.allowIncrementalUnsafeApiCalls,
-    })), (function ({
-      vm: e,
-      imageStore: t,
-      videoStore: i,
-      figmaApi: r,
-      variableFactory: a,
-      variableCollectionFactory: s,
-      defineVmFunction: o,
-      defineVmIncrementalFunction: l,
-      defineVmProp: d,
-      incrementalSafeApi: c,
-      documentAccessState: u,
-      pluginVersionID: p,
-      getNode: m,
-      getVariableNode: h,
-      allowIncrementalUnsafeApiCalls: f,
-      sceneGraph: A,
-    }) {
-      d({
-        handle: r,
+    }
+
+    /**
+     * Register variable and variable collection API methods.
+     * Handles getVariableById, getLocalVariables, getSubscribedVariables, getVariableCollectionById, getLocalVariableCollections,
+     * createVariableCollection, createVariable, createVariableAlias, createVariableAliasByIdAsync, importVariableByKeyAsync,
+     * extendLibraryCollectionByKeyAsync, setBoundVariableForPaint, setBoundVariableForEffect, setBoundVariableForLayoutGrid.
+     */
+    {
+      const variableApiConfig = {
+        vm: e,
+        videoStore: this.videoStore,
+        imageStore: this.imageStore,
+        figmaApi: y,
+        variableFactory: this.variableFactory,
+        variableCollectionFactory: this.variableCollectionFactory,
+        defineVmFunction: this.defineVmFunction,
+        defineVmIncrementalFunction: this.defineVmIncrementalFunction,
+        defineVmProp: this.defineVmProp,
+        incrementalSafeApi: this.options.incrementalSafeApi,
+        documentAccessState: this.documentAccessState,
+        pluginVersionID: this.options.pluginVersionID,
+        getNode: this.getNode,
+        getVariableNode: this.getVariableNode,
+        getVariableCollectionNode: this.getVariableCollectionNode,
+        allowIncrementalUnsafeApiCalls: !!this.options.allowIncrementalUnsafeApiCalls,
+        sceneGraph: this.privateSceneGraph,
+      }
+      variableApiConfig.defineVmProp({
+        handle: variableApiConfig.figmaApi,
         key: 'variables',
         options: {
-          enumerable: !1,
+          enumerable: false,
           metricsKey: 'figma.variables',
-          get: memoizedHandle(e, () => (function () {
-            let r = e.newObject();
-            l({
+          get: memoizedHandle(variableApiConfig.vm, () => {
+            const r = variableApiConfig.vm.newObject()
+            // getVariableById (and async)
+            variableApiConfig.defineVmIncrementalFunction({
               handle: r,
               key: 'getVariableById',
-              hasEditScope: !1,
+              hasEditScope: false,
               metricsKey: 'figma.variables.getVariableById',
               incrementalSafeApiKey: 'getVariableByIdAsync',
               incrementalSafeApiMetricsKey: 'figma.variables.getVariableByIdAsync',
-              parseArg: t => e.toString(t),
-              prepareDocument: async _e => {
-                await Ux(u);
+              parseArg: t => variableApiConfig.vm.toString(t),
+              prepareDocument: async () => {
+                await Ux(variableApiConfig.documentAccessState)
               },
-              resolveValue: e => a.createVariableHandle(e, A),
-              isAllowedInReadOnly: !0,
-              incrementalSafeApi: c,
-              allowIncrementalUnsafeApiCalls: f
-            });
-            l({
+              resolveValue: id => variableApiConfig.variableFactory.createVariableHandle(id, variableApiConfig.sceneGraph),
+              isAllowedInReadOnly: true,
+              incrementalSafeApi: variableApiConfig.incrementalSafeApi,
+              allowIncrementalUnsafeApiCalls: variableApiConfig.allowIncrementalUnsafeApiCalls,
+            })
+            // getLocalVariables (and async)
+            variableApiConfig.defineVmIncrementalFunction({
               handle: r,
               key: 'getLocalVariables',
-              hasEditScope: !1,
+              hasEditScope: false,
               metricsKey: 'figma.variables.getLocalVariables',
               incrementalSafeApiKey: 'getLocalVariablesAsync',
               incrementalSafeApiMetricsKey: 'figma.variables.getLocalVariablesAsync',
               parseArg: t => _$$u({
-                vm: e,
+                vm: variableApiConfig.vm,
                 handle: t,
-                zSchema: n.PublicVariableResolvedType.optional(),
-                property: 'resolvedType'
+                zSchema: variableDefinitions.PublicVariableResolvedType.optional(),
+                property: 'resolvedType',
               }) ?? null,
-              prepareDocument: async _e => { },
-              resolveValue: e => a.getLocalVariables(e),
-              isAllowedInReadOnly: !0,
-              incrementalSafeApi: c,
-              allowIncrementalUnsafeApiCalls: f
-            });
-            o({
+              prepareDocument: async () => { },
+              resolveValue: resolvedType => variableApiConfig.variableFactory.getLocalVariables(resolvedType),
+              isAllowedInReadOnly: true,
+              incrementalSafeApi: variableApiConfig.incrementalSafeApi,
+              allowIncrementalUnsafeApiCalls: variableApiConfig.allowIncrementalUnsafeApiCalls,
+            })
+            // getSubscribedVariables
+            variableApiConfig.defineVmFunction({
               handle: r,
               key: 'getSubscribedVariables',
-              hasEditScope: !1,
+              hasEditScope: false,
               metricsKey: 'figma.variables.getSubscribedVariables',
-              cb: t => {
-                let i = _$$u({
-                  vm: e,
+              cb: (t) => {
+                const resolvedType = _$$u({
+                  vm: variableApiConfig.vm,
                   handle: t,
-                  zSchema: n.PublicVariableResolvedType.optional(),
-                  property: 'resolvedType'
-                }) ?? null;
-                return a.getSubscribedVariables(i);
+                  zSchema: variableDefinitions.PublicVariableResolvedType.optional(),
+                  property: 'resolvedType',
+                }) ?? null
+                return variableApiConfig.variableFactory.getSubscribedVariables(resolvedType)
               },
-              isAllowedInReadOnly: !0
-            });
-            l({
+              isAllowedInReadOnly: true,
+            })
+            // getVariableCollectionById (and async)
+            variableApiConfig.defineVmIncrementalFunction({
               handle: r,
               key: 'getVariableCollectionById',
-              hasEditScope: !1,
+              hasEditScope: false,
               metricsKey: 'figma.variables.getVariableCollectionById',
               incrementalSafeApiKey: 'getVariableCollectionByIdAsync',
               incrementalSafeApiMetricsKey: 'figma.variables.getVariableCollectionByIdAsync',
-              parseArg: t => e.toString(t),
-              prepareDocument: async _e => {
-                await Ux(u);
+              parseArg: t => variableApiConfig.vm.toString(t),
+              prepareDocument: async () => {
+                await Ux(variableApiConfig.documentAccessState)
               },
-              resolveValue: e => s.createVariableCollectionHandle(e, A),
-              incrementalSafeApi: c,
-              isAllowedInReadOnly: !0,
-              allowIncrementalUnsafeApiCalls: f
-            });
-            l({
+              resolveValue: id => variableApiConfig.variableCollectionFactory.createVariableCollectionHandle(id, variableApiConfig.sceneGraph),
+              incrementalSafeApi: variableApiConfig.incrementalSafeApi,
+              isAllowedInReadOnly: true,
+              allowIncrementalUnsafeApiCalls: variableApiConfig.allowIncrementalUnsafeApiCalls,
+            })
+            // getLocalVariableCollections (and async)
+            variableApiConfig.defineVmIncrementalFunction({
               handle: r,
               key: 'getLocalVariableCollections',
-              hasEditScope: !1,
+              hasEditScope: false,
               metricsKey: 'figma.variables.getLocalVariableCollections',
               incrementalSafeApiKey: 'getLocalVariableCollectionsAsync',
               incrementalSafeApiMetricsKey: 'figma.variables.getLocalVariableCollectionsAsync',
-              parseArg: _e => { },
-              prepareDocument: async _e => { },
-              resolveValue: _e => s.getLocalVariableCollections(),
-              isAllowedInReadOnly: !0,
-              incrementalSafeApi: c,
-              allowIncrementalUnsafeApiCalls: f
-            });
-            o({
+              parseArg: () => { },
+              prepareDocument: async () => { },
+              resolveValue: () => variableApiConfig.variableCollectionFactory.getLocalVariableCollections(),
+              isAllowedInReadOnly: true,
+              incrementalSafeApi: variableApiConfig.incrementalSafeApi,
+              allowIncrementalUnsafeApiCalls: variableApiConfig.allowIncrementalUnsafeApiCalls,
+            })
+            // createVariableCollection
+            variableApiConfig.defineVmFunction({
               handle: r,
               key: 'createVariableCollection',
-              hasEditScope: !0,
+              hasEditScope: true,
               metricsKey: 'figma.variables.createVariableCollection',
-              cb: t => {
-                let i = _$$u({
-                  vm: e,
+              cb: (t) => {
+                const name = _$$u({
+                  vm: variableApiConfig.vm,
                   handle: t,
                   zSchema: _$$z.string(),
-                  property: 'name'
-                });
-                let n = s.createNewVariableCollection(i);
-                return s.createVariableCollectionHandle(n, A);
+                  property: 'name',
+                })
+                const collection = variableApiConfig.variableCollectionFactory.createNewVariableCollection(name)
+                return variableApiConfig.variableCollectionFactory.createVariableCollectionHandle(collection, variableApiConfig.sceneGraph)
               },
-              isAllowedInReadOnly: !1
-            });
-            o({
+              isAllowedInReadOnly: false,
+            })
+            // createVariable
+            variableApiConfig.defineVmFunction({
               handle: r,
               key: 'createVariable',
-              hasEditScope: !0,
+              hasEditScope: true,
               metricsKey: 'figma.variables.createVariable',
-              cb: (t, i, r) => {
-                let s = _$$u({
-                  vm: e,
-                  handle: t,
+              cb: (nameHandle, collectionHandle, typeHandle) => {
+                const name = _$$u({
+                  vm: variableApiConfig.vm,
+                  handle: nameHandle,
                   zSchema: _$$z.string(),
-                  property: 'name'
-                });
-                let o = validateAndExtractCollectionId({
+                  property: 'name',
+                })
+                const collectionId = validateAndExtractCollectionId({
                   callerName: 'createVariable',
                   consoleLogger: _$$k2,
-                  getNode: m,
-                  incrementalSafeApi: c,
-                  pluginVersionID: p,
-                  vm: e,
-                  vmHandle: i,
-                  allowIncrementalUnsafeApiCalls: f
-                });
-                let l = _$$u({
-                  vm: e,
-                  handle: r,
-                  zSchema: n.PublicVariableResolvedType,
-                  property: 'resolvedType'
-                });
-                let d = a.createNewVariable(s, o, l);
-                return a.createVariableHandle(d, A);
+                  getNode: variableApiConfig.getNode,
+                  incrementalSafeApi: variableApiConfig.incrementalSafeApi,
+                  pluginVersionID: variableApiConfig.pluginVersionID,
+                  vm: variableApiConfig.vm,
+                  vmHandle: collectionHandle,
+                  allowIncrementalUnsafeApiCalls: variableApiConfig.allowIncrementalUnsafeApiCalls,
+                })
+                const resolvedType = _$$u({
+                  vm: variableApiConfig.vm,
+                  handle: typeHandle,
+                  zSchema: variableDefinitions.PublicVariableResolvedType,
+                  property: 'resolvedType',
+                })
+                const variable = variableApiConfig.variableFactory.createNewVariable(name, collectionId, resolvedType)
+                return variableApiConfig.variableFactory.createVariableHandle(variable, variableApiConfig.sceneGraph)
               },
-              isAllowedInReadOnly: !1
-            });
-            o({
+              isAllowedInReadOnly: false,
+            })
+            // createVariableAlias
+            variableApiConfig.defineVmFunction({
               handle: r,
               key: 'createVariableAlias',
-              hasEditScope: !0,
+              hasEditScope: true,
               metricsKey: 'figma.variables.createVariableAlias',
-              cb: t => {
-                if (m(t).type !== 'VARIABLE') {
-                  throw new Error('Can only construct variable aliases from variables');
+              cb: (t) => {
+                if (variableApiConfig.getNode(t).type !== 'VARIABLE') {
+                  throw new Error('Can only construct variable aliases from variables')
                 }
-                let i = e.getStringProp(t, 'id');
-                return e.deepWrap({
+                const id = variableApiConfig.vm.getStringProp(t, 'id')
+                return variableApiConfig.vm.deepWrap({
                   type: 'VARIABLE_ALIAS',
-                  id: i
-                });
+                  id,
+                })
               },
-              isAllowedInReadOnly: !0
-            });
-            o({
+              isAllowedInReadOnly: true,
+            })
+            // createVariableAliasByIdAsync
+            variableApiConfig.defineVmFunction({
               handle: r,
               key: 'createVariableAliasByIdAsync',
               metricsKey: 'figma.variables.createVariableAliasByIdAsync',
-              cb: t => {
-                let i = _$$u({
-                  vm: e,
+              cb: (t) => {
+                const id = _$$u({
+                  vm: variableApiConfig.vm,
                   handle: t,
                   zSchema: _$$z.string(),
-                  property: 'variableId'
-                });
-                if (!sD.fromString(i)) throw new Error('Invalid variable id');
-                let {
+                  property: 'variableId',
+                })
+                if (!sD.fromString(id))
+                  throw new Error('Invalid variable id')
+                const {
                   promise,
                   resolve,
-                  reject
-                } = e.newPromise();
-                e.registerPromise(Ux(u)).then(() => {
-                  resolve(e.deepWrap({
+                  reject,
+                } = variableApiConfig.vm.newPromise()
+                variableApiConfig.vm.registerPromise(Ux(variableApiConfig.documentAccessState)).then(() => {
+                  resolve(variableApiConfig.vm.deepWrap({
                     type: 'VARIABLE_ALIAS',
-                    id: i
-                  }));
-                }).catch(t => {
-                  reject(e.newString(t.message));
-                });
-                return promise;
+                    id,
+                  }))
+                }).catch(err => reject(variableApiConfig.vm.newString(err.message)))
+                return promise
               },
-              isAllowedInReadOnly: !0,
-              hasEditScope: !1
-            });
-            o({
+              isAllowedInReadOnly: true,
+              hasEditScope: false,
+            })
+            // importVariableByKeyAsync
+            variableApiConfig.defineVmFunction({
               handle: r,
               key: 'importVariableByKeyAsync',
               metricsKey: 'figma.variables.importVariableByKeyAsync',
-              cb: t => {
-                let i = _$$u({
-                  vm: e,
+              cb: (t) => {
+                const key = _$$u({
+                  vm: variableApiConfig.vm,
                   handle: t,
                   zSchema: _$$z.string(),
-                  property: 'variableKey'
-                });
-                return a.importByKeyAsync(i);
+                  property: 'variableKey',
+                })
+                return variableApiConfig.variableFactory.importByKeyAsync(key)
               },
-              isAllowedInReadOnly: !1,
-              hasEditScope: !1
-            });
-            getFeatureFlags().ds_extended_collections && o({
-              handle: r,
-              key: 'extendLibraryCollectionByKeyAsync',
-              metricsKey: 'figma.variables.extendLibraryCollectionByKeyAsync',
-              cb: (t, i) => {
-                let n = _$$u({
-                  vm: e,
-                  handle: t,
-                  zSchema: _$$z.string(),
-                  property: 'collectionKey'
-                });
-                let r = _$$u({
-                  vm: e,
-                  handle: i,
-                  zSchema: _$$z.string(),
-                  property: 'name'
-                });
-                let {
-                  promise,
-                  resolve,
-                  reject
-                } = e.newPromise();
-                e.registerPromise(af(n, r, s)).then(e => {
-                  resolve(s.createExtendedVariableCollectionHandle(e));
-                }).catch(t => {
-                  reject(e.newString(t.message));
-                });
-                return promise;
-              },
-              isAllowedInReadOnly: !1,
-              hasEditScope: !0
-            });
-            o({
+              isAllowedInReadOnly: false,
+              hasEditScope: false,
+            })
+            // extendLibraryCollectionByKeyAsync (feature flag)
+            if (getFeatureFlags().ds_extended_collections) {
+              variableApiConfig.defineVmFunction({
+                handle: r,
+                key: 'extendLibraryCollectionByKeyAsync',
+                metricsKey: 'figma.variables.extendLibraryCollectionByKeyAsync',
+                cb: (collectionKeyHandle, nameHandle) => {
+                  const collectionKey = _$$u({
+                    vm: variableApiConfig.vm,
+                    handle: collectionKeyHandle,
+                    zSchema: _$$z.string(),
+                    property: 'collectionKey',
+                  })
+                  const name = _$$u({
+                    vm: variableApiConfig.vm,
+                    handle: nameHandle,
+                    zSchema: _$$z.string(),
+                    property: 'name',
+                  })
+                  const {
+                    promise,
+                    resolve,
+                    reject,
+                  } = variableApiConfig.vm.newPromise()
+                  variableApiConfig.vm.registerPromise(af(collectionKey, name, variableApiConfig.variableCollectionFactory)).then((result) => {
+                    resolve(variableApiConfig.variableCollectionFactory.createExtendedVariableCollectionHandle(result))
+                  }).catch(err => reject(variableApiConfig.vm.newString(err.message)))
+                  return promise
+                },
+                isAllowedInReadOnly: false,
+                hasEditScope: true,
+              })
+            }
+            // setBoundVariableForPaint
+            variableApiConfig.defineVmFunction({
               handle: r,
               key: 'setBoundVariableForPaint',
               metricsKey: 'figma.variables.setBoundVariableForPaint',
-              cb: (r, a, s) => {
-                let o = _$$u({
-                  vm: e,
-                  handle: r,
+              cb: (paintHandle, fieldHandle, variableHandle) => {
+                const paint = _$$u({
+                  vm: variableApiConfig.vm,
+                  handle: paintHandle,
                   zSchema: _$$N.Paint,
-                  property: 'paintCopy'
-                });
-                let l = _$$u({
-                  vm: e,
-                  handle: a,
-                  zSchema: n.VariableBindablePaintField,
-                  property: 'field'
-                });
-                if (e.isNull(s) || e.isUndefined(s)) {
-                  let n = processPaint(t, i, o, []);
-                  n.colorVar = void 0;
-                  return e.deepWrap(convertInternalPaintToExternal(n));
+                  property: 'paintCopy',
+                })
+                const field = _$$u({
+                  vm: variableApiConfig.vm,
+                  handle: fieldHandle,
+                  zSchema: variableDefinitions.VariableBindablePaintField,
+                  property: 'field',
+                })
+                if (variableApiConfig.vm.isNull(variableHandle) || variableApiConfig.vm.isUndefined(variableHandle)) {
+                  const n = processPaint(variableApiConfig.imageStore, variableApiConfig.videoStore, paint, [])
+                  n.colorVar = void 0
+                  return variableApiConfig.vm.deepWrap(convertInternalPaintToExternal(n))
                 }
-                let d = h(s);
-                if (!d || d.type !== 'VARIABLE' || d.variableResolvedType !== rXF.COLOR) {
-                  throw new Error(`can only bind color variables to ${l}`);
+                const variable = variableApiConfig.getVariableNode(variableHandle)
+                if (!variable || variable.type !== 'VARIABLE' || variable.variableResolvedType !== rXF.COLOR) {
+                  throw new Error(`can only bind color variables to ${field}`)
                 }
-                let c = processPaint(t, i, o, []);
-                if (c.type !== 'SOLID') {
-                  throw new Error('can only bind variables to solid paints');
-                }
-                c.colorVar = {
+                const n = processPaint(variableApiConfig.imageStore, variableApiConfig.videoStore, paint, [])
+                if (n.type !== 'SOLID')
+                  throw new Error('can only bind variables to solid paints')
+                n.colorVar = {
                   value: {
-                    alias: sD.toKiwi(d.id)
+                    alias: sD.toKiwi(variable.id),
                   },
                   dataType: 'ALIAS',
-                  resolvedDataType: 'COLOR'
-                };
-                return e.deepWrap(convertInternalPaintToExternal(c));
+                  resolvedDataType: 'COLOR',
+                }
+                return variableApiConfig.vm.deepWrap(convertInternalPaintToExternal(n))
               },
-              isAllowedInReadOnly: !0,
-              hasEditScope: !1
-            });
-            o({
+              isAllowedInReadOnly: true,
+              hasEditScope: false,
+            })
+            // setBoundVariableForEffect
+            variableApiConfig.defineVmFunction({
               handle: r,
               key: 'setBoundVariableForEffect',
               metricsKey: 'figma.variables.setBoundVariableForEffect',
-              /**
-               * Set bound variable for effect properties with comprehensive validation
-               * Handles shadow effects (color, radius, spread, offsetX, offsetY) and blur effects (radius)
-               * @param effectHandle - VM handle for the effect object
-               * @param fieldHandle - VM handle for the field name
-               * @param variableHandle - VM handle for the variable to bind (or null/undefined to unbind)
-               * @returns VM wrapped effect object with variable binding applied
-               */
               cb: (effectHandle, fieldHandle, variableHandle) => {
-                // Extract and validate effect object
                 const effectCopy = _$$u({
-                  vm: e,
+                  vm: variableApiConfig.vm,
                   handle: effectHandle,
                   zSchema: _$$m()?.ce_il_root ? _$$N.EffectIncludingDrawMode : _$$N.Effect,
-                  property: 'effectCopy'
-                });
-
-                // Handle variable unbinding (null or undefined variable)
-                if (e.isNull(variableHandle) || e.isUndefined(variableHandle)) {
-                  return this.unbindAllEffectVariables(effectCopy);
+                  property: 'effectCopy',
+                })
+                if (variableApiConfig.vm.isNull(variableHandle) || variableApiConfig.vm.isUndefined(variableHandle)) {
+                  return this.unbindAllEffectVariables(effectCopy)
                 }
-
-                // Get variable object and effect copy
-                const variableObject = h(variableHandle);
-                const mutableEffect = processEffectWithValidation(effectCopy, undefined);
-
-                // Process variable binding based on effect type
+                const variableObject = variableApiConfig.getVariableNode(variableHandle)
+                const mutableEffect = processEffectWithValidation(effectCopy, undefined)
                 if (this.isShadowEffect(mutableEffect)) {
-                  return this.bindShadowEffectVariable(mutableEffect, fieldHandle, variableObject);
-                } else {
-                  return this.bindBlurEffectVariable(mutableEffect, fieldHandle, variableObject);
+                  return this.bindShadowEffectVariable(mutableEffect, fieldHandle, variableObject)
+                }
+                else {
+                  return this.bindBlurEffectVariable(mutableEffect, fieldHandle, variableObject)
                 }
               },
-              isAllowedInReadOnly: !0,
-              hasEditScope: !1
-            });
-            o({
+              isAllowedInReadOnly: true,
+              hasEditScope: false,
+            })
+            // setBoundVariableForLayoutGrid
+            variableApiConfig.defineVmFunction({
               handle: r,
               key: 'setBoundVariableForLayoutGrid',
               metricsKey: 'figma.variables.setBoundVariableForLayoutGrid',
-              cb: (t, i, r) => {
-                let a = _$$u({
-                  vm: e,
-                  handle: t,
+              cb: (layoutGridHandle, fieldHandle, variableHandle) => {
+                const layoutGrid = _$$u({
+                  vm: variableApiConfig.vm,
+                  handle: layoutGridHandle,
                   zSchema: _$$N.LayoutGrid,
-                  property: 'layoutGridCopy'
-                });
-                if (e.isNull(r) || e.isUndefined(r)) {
-                  let t = iL(a);
-                  t.offsetVar = void 0;
-                  t.gutterSizeVar = void 0;
-                  t.numSectionsVar = void 0;
-                  t.sectionSizeVar = void 0;
-                  return e.deepWrap(processGridLayout(t));
+                  property: 'layoutGridCopy',
+                })
+                if (variableApiConfig.vm.isNull(variableHandle) || variableApiConfig.vm.isUndefined(variableHandle)) {
+                  const t = convertGridLayoutConfig(layoutGrid)
+                  t.offsetVar = void 0
+                  t.gutterSizeVar = void 0
+                  t.numSectionsVar = void 0
+                  t.sectionSizeVar = void 0
+                  return variableApiConfig.vm.deepWrap(processGridLayout(t))
                 }
-                let s = h(r);
-                if (!s || s.type !== 'VARIABLE' || s.variableResolvedType !== rXF.FLOAT) {
-                  throw new Error('can only bind float variables to layoutGrids');
+                const variable = variableApiConfig.getVariableNode(variableHandle)
+                if (!variable || variable.type !== 'VARIABLE' || variable.variableResolvedType !== rXF.FLOAT) {
+                  throw new Error('can only bind float variables to layoutGrids')
                 }
-                let o = iL(a);
-                if (o.pattern === 'GRID') {
-                  let t = _$$u({
-                    vm: e,
-                    handle: i,
-                    zSchema: n.VariableBindableGridLayoutField,
-                    property: 'field'
-                  });
-                  if (!s || s.type !== 'VARIABLE' || s.variableResolvedType !== rXF.FLOAT) {
-                    throw new Error(`can only bind float variables to ${t}`);
+                const grid = convertGridLayoutConfig(layoutGrid)
+                if (grid.pattern === 'GRID') {
+                  const field = _$$u({
+                    vm: variableApiConfig.vm,
+                    handle: fieldHandle,
+                    zSchema: variableDefinitions.VariableBindableGridLayoutField,
+                    property: 'field',
+                  })
+                  if (!variable || variable.type !== 'VARIABLE' || variable.variableResolvedType !== rXF.FLOAT) {
+                    throw new Error(`can only bind float variables to ${field}`)
                   }
-                  o.sectionSizeVar = {
+                  grid.sectionSizeVar = {
                     value: {
-                      alias: sD.toKiwi(s.id)
+                      alias: sD.toKiwi(variable.id),
                     },
                     dataType: 'ALIAS',
-                    resolvedDataType: 'FLOAT'
-                  };
-                } else {
-                  let t;
-                  switch (o.type) {
-                    case 'MIN':
-                    case 'MAX':
-                      t = _$$u({
-                        vm: e,
-                        handle: i,
-                        zSchema: n.VariableBindableMinMaxLayoutField,
-                        property: 'field'
-                      });
-                      break;
-                    case 'CENTER':
-                      t = _$$u({
-                        vm: e,
-                        handle: i,
-                        zSchema: n.VariableBindableCenterLayoutField,
-                        property: 'field'
-                      });
-                      break;
-                    case 'STRETCH':
-                      t = _$$u({
-                        vm: e,
-                        handle: i,
-                        zSchema: n.VariableBindableStretchLayoutField,
-                        property: 'field'
-                      });
-                  }
-                  switch (t) {
-                    case 'sectionSize':
-                      o.sectionSizeVar = {
-                        value: {
-                          alias: sD.toKiwi(s.id)
-                        },
-                        dataType: 'ALIAS',
-                        resolvedDataType: 'COLOR'
-                      };
-                      break;
-                    case 'offset':
-                      o.offsetVar = {
-                        value: {
-                          alias: sD.toKiwi(s.id)
-                        },
-                        dataType: 'ALIAS',
-                        resolvedDataType: 'FLOAT'
-                      };
-                      break;
-                    case 'count':
-                      o.numSectionsVar = {
-                        value: {
-                          alias: sD.toKiwi(s.id)
-                        },
-                        dataType: 'ALIAS',
-                        resolvedDataType: 'FLOAT'
-                      };
-                      break;
-                    case 'gutterSize':
-                      o.gutterSizeVar = {
-                        value: {
-                          alias: sD.toKiwi(s.id)
-                        },
-                        dataType: 'ALIAS',
-                        resolvedDataType: 'FLOAT'
-                      };
+                    resolvedDataType: 'FLOAT',
                   }
                 }
-                return e.deepWrap(processGridLayout(o));
+                else {
+                  let field
+                  switch (grid.type) {
+                    case 'MIN':
+                    case 'MAX':
+                      field = _$$u({
+                        vm: variableApiConfig.vm,
+                        handle: fieldHandle,
+                        zSchema: variableDefinitions.VariableBindableMinMaxLayoutField,
+                        property: 'field',
+                      })
+                      break
+                    case 'CENTER':
+                      field = _$$u({
+                        vm: variableApiConfig.vm,
+                        handle: fieldHandle,
+                        zSchema: variableDefinitions.VariableBindableCenterLayoutField,
+                        property: 'field',
+                      })
+                      break
+                    case 'STRETCH':
+                      field = _$$u({
+                        vm: variableApiConfig.vm,
+                        handle: fieldHandle,
+                        zSchema: variableDefinitions.VariableBindableStretchLayoutField,
+                        property: 'field',
+                      })
+                      break
+                  }
+                  switch (field) {
+                    case 'sectionSize':
+                      grid.sectionSizeVar = {
+                        value: {
+                          alias: sD.toKiwi(variable.id),
+                        },
+                        dataType: 'ALIAS',
+                        resolvedDataType: 'COLOR',
+                      }
+                      break
+                    case 'offset':
+                      grid.offsetVar = {
+                        value: {
+                          alias: sD.toKiwi(variable.id),
+                        },
+                        dataType: 'ALIAS',
+                        resolvedDataType: 'FLOAT',
+                      }
+                      break
+                    case 'count':
+                      grid.numSectionsVar = {
+                        value: {
+                          alias: sD.toKiwi(variable.id),
+                        },
+                        dataType: 'ALIAS',
+                        resolvedDataType: 'FLOAT',
+                      }
+                      break
+                    case 'gutterSize':
+                      grid.gutterSizeVar = {
+                        value: {
+                          alias: sD.toKiwi(variable.id),
+                        },
+                        dataType: 'ALIAS',
+                        resolvedDataType: 'FLOAT',
+                      }
+                      break
+                  }
+                }
+                return variableApiConfig.vm.deepWrap(processGridLayout(grid))
               },
-              isAllowedInReadOnly: !0,
-              hasEditScope: !1
-            });
-            e.shallowFreezeObject(r);
-            return r;
-          }()))
-        },
-        canWriteInReadOnly: !1,
-        isAllowedInWidgetRender: !1,
-        hasEditScope: !1,
-      });
-    }({
-      vm: e,
-      videoStore: this.videoStore,
-      imageStore: this.imageStore,
-      figmaApi: y,
-      variableFactory: this.variableFactory,
-      variableCollectionFactory: this.variableCollectionFactory,
-      defineVmFunction: this.defineVmFunction,
-      defineVmIncrementalFunction: this.defineVmIncrementalFunction,
-      defineVmProp: this.defineVmProp,
-      incrementalSafeApi: this.options.incrementalSafeApi,
-      documentAccessState: this.documentAccessState,
-      pluginVersionID: this.options.pluginVersionID,
-      getNode: this.getNode,
-      getVariableNode: this.getVariableNode,
-      getVariableCollectionNode: this.getVariableCollectionNode,
-      allowIncrementalUnsafeApiCalls: !!this.options.allowIncrementalUnsafeApiCalls,
-      sceneGraph: this.privateSceneGraph,
-    })), (function ({
-      vm: e,
-      stats: t,
-      validatedPermissions: i,
-      figmaApi: n,
-      variableFactory: r,
-      variableCollectionFactory: a,
-      defineVmFunction: s,
-      defineVmProp: o,
-    }) {
-      o({
-        handle: n,
-        key: 'teamLibrary',
-        options: {
-          enumerable: !1,
-          metricsKey: 'figma.teamLibrary',
-          get: memoizedHandle(e, () => {
-            if (!i.permissions.includes('teamlibrary')) {
-              throw new Error('"teamlibrary" permission not specified in manifest.json.')
-            }
-            return (function () {
-              let t = e.newObject();
-              s({
-                handle: t,
-                key: 'getAvailableLibraryVariableCollectionsAsync',
-                metricsKey: 'figma.teamLibrary.getAvailableLibraryVariableCollectionsAsync',
-                cb: () => a.getLibraryVariableCollectionsAsync(),
-                isAllowedInReadOnly: !0,
-                hasEditScope: !1
-              });
-              s({
-                handle: t,
-                key: 'getVariablesInLibraryCollectionAsync',
-                metricsKey: 'figma.teamLibrary.getVariablesInLibraryCollectionAsync',
-                cb: t => {
-                  let i = _$$u({
-                    vm: e,
-                    handle: t,
-                    zSchema: _$$z.string(),
-                    property: 'variableCollectionKey'
-                  });
-                  return r.getVariablesInLibraryCollectionAsync(i);
-                },
-                isAllowedInReadOnly: !0,
-                hasEditScope: !1
-              });
-              return t;
-            }());
+              isAllowedInReadOnly: true,
+              hasEditScope: false,
+            })
+            variableApiConfig.vm.shallowFreezeObject(r)
+            return r
           }),
         },
-        canWriteInReadOnly: !1,
-        isAllowedInWidgetRender: !1,
-        hasEditScope: !1,
-      });
-    }({
-      vm: e,
-      stats,
-      figmaApi: y,
-      validatedPermissions: this.options.validatedPermissions,
-      variableFactory: this.variableFactory,
-      variableCollectionFactory: this.variableCollectionFactory,
-      defineVmFunction: this.defineVmFunction,
-      defineVmProp: this.defineVmProp,
-    })), (function ({
-      vm: e,
-      figmaApi: t,
-      editorType: i,
-      annotationCategoryFactory: n,
-      defineVmFunction: r,
-      defineVmProp: a,
-    }) {
-      a({
-        handle: t,
+        canWriteInReadOnly: false,
+        isAllowedInWidgetRender: false,
+        hasEditScope: false,
+      })
+    }
+
+    /**
+     * Register teamLibrary API if permission is granted.
+     * Handles getAvailableLibraryVariableCollectionsAsync and getVariablesInLibraryCollectionAsync.
+     */
+    {
+      const teamLibraryApiConfig = {
+        vm: e,
+        stats,
+        figmaApi: y,
+        validatedPermissions: this.options.validatedPermissions,
+        variableFactory: this.variableFactory,
+        variableCollectionFactory: this.variableCollectionFactory,
+        defineVmFunction: this.defineVmFunction,
+        defineVmProp: this.defineVmProp,
+      }
+      teamLibraryApiConfig.defineVmProp({
+        handle: teamLibraryApiConfig.figmaApi,
+        key: 'teamLibrary',
+        options: {
+          enumerable: false,
+          metricsKey: 'figma.teamLibrary',
+          get: memoizedHandle(teamLibraryApiConfig.vm, () => {
+            if (!teamLibraryApiConfig.validatedPermissions.permissions.includes('teamlibrary')) {
+              throw new Error('"teamlibrary" permission not specified in manifest.json.')
+            }
+            const t = teamLibraryApiConfig.vm.newObject()
+            teamLibraryApiConfig.defineVmFunction({
+              handle: t,
+              key: 'getAvailableLibraryVariableCollectionsAsync',
+              metricsKey: 'figma.teamLibrary.getAvailableLibraryVariableCollectionsAsync',
+              cb: () => teamLibraryApiConfig.variableCollectionFactory.getLibraryVariableCollectionsAsync(),
+              isAllowedInReadOnly: true,
+              hasEditScope: false,
+            })
+            teamLibraryApiConfig.defineVmFunction({
+              handle: t,
+              key: 'getVariablesInLibraryCollectionAsync',
+              metricsKey: 'figma.teamLibrary.getVariablesInLibraryCollectionAsync',
+              cb: (variableCollectionKeyHandle) => {
+                const key = _$$u({
+                  vm: teamLibraryApiConfig.vm,
+                  handle: variableCollectionKeyHandle,
+                  zSchema: _$$z.string(),
+                  property: 'variableCollectionKey',
+                })
+                return teamLibraryApiConfig.variableFactory.getVariablesInLibraryCollectionAsync(key)
+              },
+              isAllowedInReadOnly: true,
+              hasEditScope: false,
+            })
+            return t
+          }),
+        },
+        canWriteInReadOnly: false,
+        isAllowedInWidgetRender: false,
+        hasEditScope: false,
+      })
+    }
+
+    /**
+     * Register annotations API for supported editor types.
+     * Handles getAnnotationCategoriesAsync, getAnnotationCategoryByIdAsync, addAnnotationCategoryAsync.
+     */
+    {
+      const annotationApiConfig = {
+        vm: e,
+        figmaApi: y,
+        editorType: this.fullscreenEditorType,
+        annotationCategoryFactory: this.annotationCategoryFactory,
+        defineVmFunction: this.defineVmFunction,
+        defineVmProp: this.defineVmProp,
+      }
+      annotationApiConfig.defineVmProp({
+        handle: annotationApiConfig.figmaApi,
         key: 'annotations',
         options: {
-          enumerable: !1,
+          enumerable: false,
           metricsKey: 'figma.annotations',
-          get: memoizedHandle(e, () => (function () {
-            let t = e.newObject();
-            r({
+          get: memoizedHandle(annotationApiConfig.vm, () => {
+            const t = annotationApiConfig.vm.newObject()
+            annotationApiConfig.defineVmFunction({
               handle: t,
               key: 'getAnnotationCategoriesAsync',
               metricsKey: 'figma.annotations.getAnnotationCategoriesAsync',
-              cb: () => n.getLocalAnnotationCategoriesAsync(),
-              hasEditScope: !0,
-              isAllowedInReadOnly: !0
-            });
-            r({
+              cb: () => annotationApiConfig.annotationCategoryFactory.getLocalAnnotationCategoriesAsync(),
+              hasEditScope: true,
+              isAllowedInReadOnly: true,
+            })
+            annotationApiConfig.defineVmFunction({
               handle: t,
               key: 'getAnnotationCategoryByIdAsync',
               metricsKey: 'figma.annotations.getAnnotationCategoryByIdAsync',
-              cb: t => {
-                let i = _$$u({
-                  vm: e,
-                  handle: t,
+              cb: (idHandle) => {
+                const id = _$$u({
+                  vm: annotationApiConfig.vm,
+                  handle: idHandle,
                   zSchema: _$$z.string(),
-                  property: 'annotationCategoryId'
-                });
-                return n.getLocalAnnotationCategoryByIdAsync(i);
+                  property: 'annotationCategoryId',
+                })
+                return annotationApiConfig.annotationCategoryFactory.getLocalAnnotationCategoryByIdAsync(id)
               },
-              hasEditScope: !0,
-              isAllowedInReadOnly: !0
-            });
-            r({
+              hasEditScope: true,
+              isAllowedInReadOnly: true,
+            })
+            annotationApiConfig.defineVmFunction({
               handle: t,
               key: 'addAnnotationCategoryAsync',
               metricsKey: 'figma.annotations.addAnnotationCategoryAsync',
-              cb: t => {
-                if (i !== _$$nT.DevHandoff && i !== _$$nT.Design && i !== _$$nT.Illustration) {
-                  throw new Error('Annotations can only be written in Dev Mode and Design Mode');
+              cb: (categoryInputHandle) => {
+                if (annotationApiConfig.editorType !== _$$nT.DevHandoff && annotationApiConfig.editorType !== _$$nT.Design && annotationApiConfig.editorType !== _$$nT.Illustration) {
+                  throw new Error('Annotations can only be written in Dev Mode and Design Mode')
                 }
-                let r = _$$u({
-                  vm: e,
-                  handle: t,
+                const input = _$$u({
+                  vm: annotationApiConfig.vm,
+                  handle: categoryInputHandle,
                   zSchema: i5,
-                  property: 'categoryInput'
-                });
-                return n.createAnnotationCategoryAsync(r.label, r.color);
+                  property: 'categoryInput',
+                })
+                return annotationApiConfig.annotationCategoryFactory.createAnnotationCategoryAsync(input.label, input.color)
               },
-              hasEditScope: !0,
-              isAllowedInReadOnly: !0
-            });
-            return t;
-          }()))
+              hasEditScope: true,
+              isAllowedInReadOnly: true,
+            })
+            return t
+          }),
         },
-        canWriteInReadOnly: !1,
-        isAllowedInWidgetRender: !1,
-        hasEditScope: !1,
-      });
-    }({
-      vm: e,
-      figmaApi: y,
-      editorType: this.fullscreenEditorType,
-      annotationCategoryFactory: this.annotationCategoryFactory,
-      defineVmFunction: this.defineVmFunction,
-      defineVmProp: this.defineVmProp,
-    })))
+        canWriteInReadOnly: false,
+        isAllowedInWidgetRender: false,
+        hasEditScope: false,
+      })
+    }
     this.defineVmProp({
       handle: y,
       key: 'root',
@@ -27148,7 +25582,7 @@ throw new Error(`Could not create ${styleType} style`)
           if (i.type !== 'CANVAS')
             throw new Error('figma.setCurrentPageAsync expects a PageNode')
           return this.privateSceneGraph.setCurrentPageAsync(i.guid)
-        }).then(() => resolve(e.$$null)).catch(t => reject(e.newString(t.message))).$$finally(() => {
+        }).then(() => resolve(e.$$null)).catch(t => reject(e.newString(t.message))).finally(() => {
           zl.set(_$$rp, !1)
         })
         return promise
@@ -27197,29 +25631,29 @@ throw new Error(`Could not create ${styleType} style`)
     })
     this.isWidget
       ? this.defineVmProp({
-          handle: y,
-          key: 'widgetId',
-          options: {
-            enumerable: !1,
-            metricsKey: 'figma.widgetId',
-            get: () => e.newString(this.options.pluginID),
-          },
-          canWriteInReadOnly: !1,
-          isAllowedInWidgetRender: !1,
-          hasEditScope: !1,
-        })
+        handle: y,
+        key: 'widgetId',
+        options: {
+          enumerable: !1,
+          metricsKey: 'figma.widgetId',
+          get: () => e.newString(this.options.pluginID),
+        },
+        canWriteInReadOnly: !1,
+        isAllowedInWidgetRender: !1,
+        hasEditScope: !1,
+      })
       : this.defineVmProp({
-          handle: y,
-          key: 'pluginId',
-          options: {
-            enumerable: !1,
-            metricsKey: 'figma.pluginId',
-            get: () => e.newString(this.options.pluginID),
-          },
-          canWriteInReadOnly: !1,
-          isAllowedInWidgetRender: !1,
-          hasEditScope: !1,
-        })
+        handle: y,
+        key: 'pluginId',
+        options: {
+          enumerable: !1,
+          metricsKey: 'figma.pluginId',
+          get: () => e.newString(this.options.pluginID),
+        },
+        canWriteInReadOnly: !1,
+        isAllowedInWidgetRender: !1,
+        hasEditScope: !1,
+      })
     this.defineVmProp({
       handle: y,
       key: 'command',
@@ -27303,124 +25737,165 @@ throw new Error(`Could not create ${styleType} style`)
     let R = this.inSlides()
     let D = this.inBuzz()
     let M = this.inSites()
-    for (let {
+    /**
+     * Register node creation methods for supported node types.
+     * Handles special cases for TABLE, SLIDE, and SLIDE_ROW node types.
+     * For other node types, registers a generic creation function.
+     */
+    for (const {
       nodeType,
       createMethod,
     } of h2) {
-      C && fx.includes(nodeType) || I && _$$tO.includes(nodeType) || R && J6.includes(nodeType) || M && lm.includes(nodeType) || D && _$$e3.includes(nodeType) || (nodeType === 'TABLE'
-        ? this.defineVmFunction({
-            handle: y,
-            key: createMethod,
-            metricsKey: `figma.${createMethod}`,
-            cb: (n, r) => {
-              let a = _$$u({
-                vm: e,
-                handle: n,
-                zSchema: _$$N.FiniteNumber.int().min(1).optional(),
-                property: 'options',
-              })
-          let s = _$$u({
-                vm: e,
-                handle: r,
-                zSchema: _$$N.FiniteNumber.int().min(1).optional(),
-                property: 'options',
-              })
-          let o = {
-                tracking: HzA.TRACK,
-                ...(a && {
-                  tableNumRows: a,
-                }),
-                ...(s && {
-                  tableNumColumns: s,
-                }),
-          }
-              let l = this.privateSceneGraph.createNode(nodeType, o)
-              av(l.guid, this.documentAccessState)
-              return this.nodeFactory.createNode(l.guid, `figma.${createMethod}`)
-            },
-            isAllowedInReadOnly: !1,
-            isAllowedInWidgetRender: !1,
-            hasEditScope: !0,
-          })
-        : nodeType === 'SLIDE'
-          ? this.defineVmFunction({
-              handle: y,
-              key: createMethod,
-              metricsKey: `figma.${createMethod}`,
-              cb: (e, n) => {
-                let r = _$$u({
-                  vm: this.vm,
-                  handle: e,
-                  zSchema: _$$z.number().finite().min(0).int().optional(),
-                  property: 'slideRow',
-                })
-          let a = _$$u({
-                  vm: this.vm,
-                  handle: n,
-                  zSchema: _$$z.number().finite().min(0).int().optional(),
-                  property: 'slideCol',
-                })
-          let s = {
-                  tracking: HzA.TRACK,
-                  ...(typeof r == 'number' && {
-                    slideRow: r,
-                  }),
-                  ...(typeof a == 'number' && {
-                    slideCol: a,
-                  }),
-          }
-                let o = this.privateSceneGraph.createNode(nodeType, s)
-                av(o.guid, this.documentAccessState)
-                return this.nodeFactory.createNode(o.guid, `figma.${createMethod}`)
-              },
-              isAllowedInReadOnly: !1,
-              isAllowedInWidgetRender: !1,
-              hasEditScope: !0,
+      // Determine if node type is allowed in the current editor context
+      const isAllowed = C && fx.includes(nodeType) || I && _$$tO.includes(nodeType) || R && J6.includes(nodeType) || M && lm.includes(nodeType) || D && _$$e3.includes(nodeType)
+      if (isAllowed)
+        continue
+
+      // Special handling for TABLE node type
+      if (nodeType === 'TABLE') {
+        /**
+         * Create a TABLE node with optional row and column counts.
+         * @param n - Number of rows (optional)
+         * @param r - Number of columns (optional)
+         */
+        this.defineVmFunction({
+          handle: y,
+          key: createMethod,
+          metricsKey: `figma.${createMethod}`,
+          cb: (n, r) => {
+            const numRows = _$$u({
+              vm: e,
+              handle: n,
+              zSchema: _$$N.FiniteNumber.int().min(1).optional(),
+              property: 'options',
             })
-          : nodeType === 'SLIDE_ROW'
-            ? this.defineVmFunction({
-                handle: y,
-                key: createMethod,
-                metricsKey: `figma.${createMethod}`,
-                cb: (e) => {
-                  let n = _$$u({
-                    vm: this.vm,
-                    handle: e,
-                    zSchema: _$$z.number().finite().min(0).int().optional(),
-                    property: 'slideRow',
-                  })
-          let r = {
-                    tracking: HzA.TRACK,
-                    ...(typeof n == 'number' && {
-                      slideRow: n,
-                    }),
+            const numCols = _$$u({
+              vm: e,
+              handle: r,
+              zSchema: _$$N.FiniteNumber.int().min(1).optional(),
+              property: 'options',
+            })
+            const options = {
+              tracking: HzA.TRACK,
+              ...(numRows && {
+                tableNumRows: numRows,
+              }),
+              ...(numCols && {
+                tableNumColumns: numCols,
+              }),
+            }
+            const node = this.privateSceneGraph.createNode(nodeType, options)
+            av(node.guid, this.documentAccessState)
+            return this.nodeFactory.createNode(node.guid, `figma.${createMethod}`)
+          },
+          isAllowedInReadOnly: false,
+          isAllowedInWidgetRender: false,
+          hasEditScope: true,
+        })
+        continue
+      }
+
+      // Special handling for SLIDE node type
+      if (nodeType === 'SLIDE') {
+        /**
+         * Create a SLIDE node with optional row and column indices.
+         * @param e - Slide row (optional)
+         * @param n - Slide column (optional)
+         */
+        this.defineVmFunction({
+          handle: y,
+          key: createMethod,
+          metricsKey: `figma.${createMethod}`,
+          cb: (e, n) => {
+            const slideRow = _$$u({
+              vm: this.vm,
+              handle: e,
+              zSchema: _$$z.number().finite().min(0).int().optional(),
+              property: 'slideRow',
+            })
+            const slideCol = _$$u({
+              vm: this.vm,
+              handle: n,
+              zSchema: _$$z.number().finite().min(0).int().optional(),
+              property: 'slideCol',
+            })
+            const options = {
+              tracking: HzA.TRACK,
+              ...(typeof slideRow === 'number' && {
+                slideRow,
+              }),
+              ...(typeof slideCol === 'number' && {
+                slideCol,
+              }),
+            }
+            const node = this.privateSceneGraph.createNode(nodeType, options)
+            av(node.guid, this.documentAccessState)
+            return this.nodeFactory.createNode(node.guid, `figma.${createMethod}`)
+          },
+          isAllowedInReadOnly: false,
+          isAllowedInWidgetRender: false,
+          hasEditScope: true,
+        })
+        continue
+      }
+
+      // Special handling for SLIDE_ROW node type
+      if (nodeType === 'SLIDE_ROW') {
+        /**
+         * Create a SLIDE_ROW node with optional row index.
+         * @param e - Slide row (optional)
+         */
+        this.defineVmFunction({
+          handle: y,
+          key: createMethod,
+          metricsKey: `figma.${createMethod}`,
+          cb: (e) => {
+            const slideRow = _$$u({
+              vm: this.vm,
+              handle: e,
+              zSchema: _$$z.number().finite().min(0).int().optional(),
+              property: 'slideRow',
+            })
+            const options = {
+              tracking: HzA.TRACK,
+              ...(typeof slideRow === 'number' && {
+                slideRow,
+              }),
+            }
+            const node = this.privateSceneGraph.createNode(nodeType, options)
+            av(node.guid, this.documentAccessState)
+            return this.nodeFactory.createNode(node.guid, `figma.${createMethod}`)
+          },
+          isAllowedInReadOnly: false,
+          isAllowedInWidgetRender: false,
+          hasEditScope: true,
+        })
+        continue
+      }
+
+      // Generic node creation for other node types
+      /**
+       * Create a node of the specified nodeType.
+       * Throws error if page limit is reached for CANVAS.
+       */
+      this.defineVmFunction({
+        handle: y,
+        key: createMethod,
+        metricsKey: `figma.${createMethod}`,
+        cb: () => {
+          if (nodeType === 'CANVAS' && createMethod === 'createPage' && this.hasFileReachedPageLimit()) {
+            throw new Error('The Starter plan only comes with 3 pages. Upgrade to Professional for unlimited pages.')
           }
-                  let a = this.privateSceneGraph.createNode(nodeType, r)
-                  av(a.guid, this.documentAccessState)
-                  return this.nodeFactory.createNode(a.guid, `figma.${createMethod}`)
-                },
-                isAllowedInReadOnly: !1,
-                isAllowedInWidgetRender: !1,
-                hasEditScope: !0,
-              })
-            : this.defineVmFunction({
-                handle: y,
-                key: createMethod,
-                metricsKey: `figma.${createMethod}`,
-                cb: () => {
-                  if (nodeType === 'CANVAS' && createMethod === 'createPage' && this.hasFileReachedPageLimit()) {
-                    throw new Error('The Starter plan only comes with 3 pages. Upgrade to Professional for unlimited pages.')
-                  }
-                  let e = this.privateSceneGraph.createNode(nodeType)
-                  av(e.guid, this.documentAccessState, {
-                    ignoreReduxState: nodeType === 'CANVAS',
-                  })
-          return this.nodeFactory.createNode(e.guid, `figma.${createMethod}`)
-                },
-                isAllowedInReadOnly: !1,
-                isAllowedInWidgetRender: !1,
-                hasEditScope: !0,
-              }))
+          const node = this.privateSceneGraph.createNode(nodeType)
+          av(node.guid, this.documentAccessState, {
+            ignoreReduxState: nodeType === 'CANVAS',
+          })
+          return this.nodeFactory.createNode(node.guid, `figma.${createMethod}`)
+        },
+        isAllowedInReadOnly: false,
+        isAllowedInWidgetRender: false,
+        hasEditScope: true,
+      })
     }
     this.defineVmFunction({
       handle: y,
@@ -27550,7 +26025,10 @@ throw new Error(`Could not create ${styleType} style`)
       handle: y,
       key: 'commitUndo',
       metricsKey: 'figma.commitUndo',
-      cb: _t => (Y5.triggerAction('commit'), e.undefined),
+      cb: (_t) => {
+        Y5.triggerAction('commit')
+        return e.undefined
+      },
       isAllowedInReadOnly: !1,
       isAllowedInWidgetRender: !1,
       hasEditScope: !0,
@@ -27559,7 +26037,10 @@ throw new Error(`Could not create ${styleType} style`)
       handle: y,
       key: 'triggerUndo',
       metricsKey: 'figma.triggerUndo',
-      cb: _t => (Y5.triggerAction('undo'), e.undefined),
+      cb: (_t) => {
+        Y5.triggerAction('undo')
+        return e.undefined
+      },
       isAllowedInReadOnly: !1,
       isAllowedInWidgetRender: !1,
       hasEditScope: !0,
@@ -27774,11 +26255,11 @@ throw new Error(`Could not create ${styleType} style`)
         method: n,
         sceneGraph: r,
       }) {
-        if (!vs.test(e)) 
-return t.$$null
+        if (!vs.test(e))
+          return t.$$null
         let a = r.guidFromDeveloperFriendlyId(e)
-        if (!a) 
-return t.$$null
+        if (!a)
+          return t.$$null
         let s = r.get(a)
         return !s || s && isInImmutableContext(t, s) ? t.$$null : i.createNode(a, n)
       }({
@@ -27821,9 +26302,9 @@ return t.$$null
           let a = n?.styleKeyForPublish
           return r && a
             ? this.styleFactory.createStyle(_$$nM({
-                key: a,
-                version: r,
-              }))
+              key: a,
+              version: r,
+            }))
             : null
         }).filter(e => e != null)
         let a = e.newArray()
@@ -27846,7 +26327,7 @@ return t.$$null
           })
           return this.nodeFactory.createNode(e.guid, 'figma.createNodeFromSvg')
         }
- catch (e) {
+        catch (e) {
           console.error(e)
           return new Error('Failed to convert SVG file')
         }
@@ -27954,10 +26435,10 @@ return t.$$null
         })
         u > 0 && _$$k2.warn('There are still font loads in progress. Please ensure `closePlugin` is not called until after the font loading has resolved.')
         i
-? this.closePlugin({
-          message: i,
-          isError: !1,
-        })
+          ? this.closePlugin({
+            message: i,
+            isError: !1,
+          })
           : this.closePlugin(undefined)
         return e.undefined
       },
@@ -27969,15 +26450,6 @@ return t.$$null
       handle: y,
       key: 'notify',
       metricsKey: 'figma.notify',
-      /**
-       * Display notification message with optional configuration and button action
-       * Creates a visual bell notification that can include error styling, custom timeout,
-       * action button with callback, and dequeue callback handler
-       * @param messageHandle - VM handle containing the notification message string
-       * @param optionsHandle - VM handle containing optional notification configuration
-       * @returns VM object with cancel method to dismiss the notification
-       * @throws Error if called in query mode
-       */
       cb: (messageHandle, optionsHandle) => {
         // Validate notification can be shown
         if (this.queryMode) {
@@ -28111,7 +26583,7 @@ return t.$$null
               vm.callFunction(dequeueHandler, vm.undefined, vm.newString(reason))
               vm.releaseHandle(dequeueHandler)
             }
- catch (error) {
+            catch (error) {
               console.error('onDequeueHandle error: ', error)
             }
           }
@@ -28121,7 +26593,7 @@ return t.$$null
             try {
               vm.releaseHandle(actionHandler)
             }
- catch (error) {
+            catch (error) {
               console.error('actionHandle error: ', error)
             }
           }
@@ -28141,35 +26613,59 @@ return t.$$null
       return controller
     }
     let j = as
-    if (enableProposedApi && (j = j.concat(ao)), this.options.isLocal || (j = j.concat(['codegen'])), j = j.concat(['stylechange']), this.addEventHandlersTo(y, j, 'figma', null), this.options.parameterValues
-      ? this.triggerOrScheduleRunEvent({
-          command: 'parameters',
-          parameters: this.options.parameterValues,
-        })
-      : this.options.deferRunEvent || this.triggerOrScheduleRunEvent({
+    // Add additional event handlers and API methods to the main figma API object (y)
+    if (enableProposedApi) {
+      j = j.concat(ao)
+    }
+    if (!this.options.isLocal) {
+      j = j.concat(['codegen'])
+    }
+    j = j.concat(['stylechange'])
+
+    // Register event handlers for all supported events
+    this.addEventHandlersTo(y, j, 'figma', null)
+
+    // Trigger run event for parameters if provided, otherwise defer or trigger default run event
+    if (this.options.parameterValues) {
+      this.triggerOrScheduleRunEvent({
         command: 'parameters',
-      }), _$$nl() && this.defineVmFunction({
-      handle: y,
-      key: 'closePluginWithFailure',
-      metricsKey: 'figma.closePluginWithFailure',
-      cb: (t) => {
-        let i
-        try {
-          i = e.toString(t)
-        }
- catch (e) {
-          i = 'The plugin called "closePluginWithFailure"'
-        }
-        this.closePlugin({
-          message: i,
-          isError: !0,
-        })
-        return e.undefined
-      },
-      isAllowedInReadOnly: !0,
-      isAllowedInWidgetRender: !1,
-      hasEditScope: !1,
-    }), this.defineVmFunction({
+        parameters: this.options.parameterValues,
+      })
+    }
+    else if (!this.options.deferRunEvent) {
+      this.triggerOrScheduleRunEvent({
+        command: 'parameters',
+      })
+    }
+
+    // Add closePluginWithFailure for supported environments
+    if (_$$nl()) {
+      this.defineVmFunction({
+        handle: y,
+        key: 'closePluginWithFailure',
+        metricsKey: 'figma.closePluginWithFailure',
+        cb: (t) => {
+          let i
+          try {
+            i = e.toString(t)
+          }
+          catch {
+            i = 'The plugin called "closePluginWithFailure"'
+          }
+          this.closePlugin({
+            message: i,
+            isError: !0,
+          })
+          return e.undefined
+        },
+        isAllowedInReadOnly: !0,
+        isAllowedInWidgetRender: !1,
+        hasEditScope: !1,
+      })
+    }
+
+    // showUI method for displaying plugin UI iframe
+    this.defineVmFunction({
       handle: y,
       key: 'showUI',
       metricsKey: 'figma.showUI',
@@ -28188,11 +26684,11 @@ return t.$$null
         let r = e.isObject(t) && e.getBooleanProp(t, '__html__') && this.options.html
           ? this.options.html
           : _$$u({
-              vm: e,
-              handle: t,
-              zSchema: _$$z.string(),
-              property: 'showUI',
-            })
+            vm: e,
+            handle: t,
+            zSchema: _$$z.string(),
+            property: 'showUI',
+          })
         let a = _$$u({
           vm: e,
           handle: i,
@@ -28221,7 +26717,10 @@ return t.$$null
       isAllowedInReadOnly: !0,
       isAllowedInWidgetRender: !1,
       hasEditScope: !1,
-    }), this.defineVmFunction({
+    })
+
+    // saveVersionHistoryAsync method for saving file version history
+    this.defineVmFunction({
       handle: y,
       key: 'saveVersionHistoryAsync',
       metricsKey: 'figma.saveVersionHistoryAsync',
@@ -28254,7 +26753,10 @@ return t.$$null
       isAllowedInReadOnly: !1,
       isAllowedInWidgetRender: !1,
       hasEditScope: !0,
-    }), this.defineVmFunction({
+    })
+
+    // Utility functions for base64 encoding/decoding
+    this.defineVmFunction({
       handle: y,
       key: 'base64Encode',
       metricsKey: 'figma.base64Encode',
@@ -28270,7 +26772,8 @@ return t.$$null
       isAllowedInReadOnly: !0,
       isAllowedInWidgetRender: !1,
       hasEditScope: !1,
-    }), this.defineVmFunction({
+    })
+    this.defineVmFunction({
       handle: y,
       key: 'base64Decode',
       metricsKey: 'figma.base64Decode',
@@ -28288,7 +26791,10 @@ return t.$$null
       isAllowedInReadOnly: !0,
       isAllowedInWidgetRender: !1,
       hasEditScope: !1,
-    }), this.defineVmIncrementalFunction({
+    })
+
+    // getFileThumbnailNode and setFileThumbnailNodeAsync for file thumbnail management
+    this.defineVmIncrementalFunction({
       handle: y,
       key: 'getFileThumbnailNode',
       metricsKey: 'figma.getFileThumbnailNode',
@@ -28307,42 +26813,48 @@ return t.$$null
       allowIncrementalUnsafeApiCalls: !!this.options.allowIncrementalUnsafeApiCalls,
       isAllowedInReadOnly: !0,
       hasEditScope: !1,
-    }), R || D || this.defineVmFunction({
-      handle: y,
-      key: 'setFileThumbnailNodeAsync',
-      metricsKey: 'figma.setFileThumbnailNodeAsync',
-      cb: (t) => {
-        let i
-        let n = debugState.getState()
-        let r = n.openFile?.key
-        if (r == null)
-          throw new Error('File must be open for editing')
-        if (e.isNull(t)) {
-          i = null
-        }
- else {
-          let e = this.getNode(t)
-          if (!((e.type === 'FRAME' || e.type === 'SYMBOL' || e.type === 'SECTION') && !e.resizeToFit)) {
-            throw new Error('Thumbnail node must be a FrameNode, ComponentNode, ComponentSetNode, or SectionNode')
+    })
+    if (!(R || D)) {
+      this.defineVmFunction({
+        handle: y,
+        key: 'setFileThumbnailNodeAsync',
+        metricsKey: 'figma.setFileThumbnailNodeAsync',
+        cb: (t) => {
+          let i
+          let n = debugState.getState()
+          let r = n.openFile?.key
+          if (r == null)
+            throw new Error('File must be open for editing')
+          if (e.isNull(t)) {
+            i = null
           }
-          i = e.guid
-        }
-        let {
-          promise,
-          resolve,
-          reject,
-        } = e.newPromise()
-        e.registerPromise(FE(r, i)).then(() => {
-          resolve(e.undefined)
-        }).catch((t) => {
-          reject(e.newString(`Failed to set thumbnail guid. Error: ${t.message}`))
-        })
-        return promise
-      },
-      isAllowedInReadOnly: !1,
-      isAllowedInWidgetRender: !1,
-      hasEditScope: !0,
-    }), this.defineVmProp({
+          else {
+            let e = this.getNode(t)
+            if (!((e.type === 'FRAME' || e.type === 'SYMBOL' || e.type === 'SECTION') && !e.resizeToFit)) {
+              throw new Error('Thumbnail node must be a FrameNode, ComponentNode, ComponentSetNode, or SectionNode')
+            }
+            i = e.guid
+          }
+          let {
+            promise,
+            resolve,
+            reject,
+          } = e.newPromise()
+          e.registerPromise(FE(r, i)).then(() => {
+            resolve(e.undefined)
+          }).catch((t) => {
+            reject(e.newString(`Failed to set thumbnail guid. Error: ${t.message}`))
+          })
+          return promise
+        },
+        isAllowedInReadOnly: !1,
+        isAllowedInWidgetRender: !1,
+        hasEditScope: !0,
+      })
+    }
+
+    // Register parameters, codegen, relatedLinks, devResources, vscode, ui, viewport, clientStorage, constants, and internal APIs
+    this.defineVmProp({
       handle: y,
       key: 'parameters',
       options: {
@@ -28352,7 +26864,8 @@ return t.$$null
       canWriteInReadOnly: !1,
       isAllowedInWidgetRender: !1,
       hasEditScope: !1,
-    }), this.defineVmProp({
+    })
+    this.defineVmProp({
       handle: y,
       key: 'codegen',
       options: {
@@ -28362,7 +26875,8 @@ return t.$$null
       canWriteInReadOnly: !1,
       isAllowedInWidgetRender: !1,
       hasEditScope: !1,
-    }), this.defineVmProp({
+    })
+    this.defineVmProp({
       handle: y,
       key: 'relatedLinks',
       options: {
@@ -28377,7 +26891,8 @@ return t.$$null
       canWriteInReadOnly: !1,
       isAllowedInWidgetRender: !1,
       hasEditScope: !1,
-    }), this.defineVmProp({
+    })
+    this.defineVmProp({
       handle: y,
       key: 'devResources',
       options: {
@@ -28387,7 +26902,8 @@ return t.$$null
       canWriteInReadOnly: !1,
       isAllowedInWidgetRender: !1,
       hasEditScope: !1,
-    }), this.defineVmProp({
+    })
+    this.defineVmProp({
       handle: y,
       key: 'vscode',
       options: {
@@ -28397,7 +26913,8 @@ return t.$$null
       canWriteInReadOnly: !1,
       isAllowedInWidgetRender: !1,
       hasEditScope: !1,
-    }), this.defineVmProp({
+    })
+    this.defineVmProp({
       handle: y,
       key: 'ui',
       options: {
@@ -28407,7 +26924,8 @@ return t.$$null
       canWriteInReadOnly: !1,
       isAllowedInWidgetRender: !1,
       hasEditScope: !1,
-    }), this.defineVmProp({
+    })
+    this.defineVmProp({
       handle: y,
       key: 'viewport',
       options: {
@@ -28417,7 +26935,8 @@ return t.$$null
       canWriteInReadOnly: !1,
       isAllowedInWidgetRender: !1,
       hasEditScope: !1,
-    }), this.defineVmProp({
+    })
+    this.defineVmProp({
       handle: y,
       key: 'clientStorage',
       options: {
@@ -28427,7 +26946,8 @@ return t.$$null
       canWriteInReadOnly: !1,
       isAllowedInWidgetRender: !1,
       hasEditScope: !1,
-    }), this.defineVmProp({
+    })
+    this.defineVmProp({
       handle: y,
       key: 'constants',
       options: {
@@ -28437,19 +26957,25 @@ return t.$$null
       canWriteInReadOnly: !1,
       isAllowedInWidgetRender: !0,
       hasEditScope: !1,
-    }), getFeatureFlags().internal_only_debug_tools && this.defineVmProp({
-      handle: y,
-      key: 'internal',
-      options: {
-        enumerable: !1,
-        value: this.createInternalApi(),
-      },
-      canWriteInReadOnly: !1,
-      isAllowedInWidgetRender: !1,
-      hasEditScope: !1,
-    }), C) {
-      let t = 'createLinkPreviewAsync'
-      let i = this
+    })
+    if (getFeatureFlags().internal_only_debug_tools) {
+      this.defineVmProp({
+        handle: y,
+        key: 'internal',
+        options: {
+          enumerable: !1,
+          value: this.createInternalApi(),
+        },
+        canWriteInReadOnly: !1,
+        isAllowedInWidgetRender: !1,
+        hasEditScope: !1,
+      })
+    }
+
+    // createLinkPreviewAsync for FigJam (C)
+    if (C) {
+      const t = 'createLinkPreviewAsync'
+      const i = this
       this.defineVmFunction({
         handle: y,
         key: t,
@@ -28535,58 +27061,60 @@ return t.$$null
       hasEditScope: !0,
     })
     this.isWidget ? this.defineWidgetApi(y) : this.defineWidgetLiteApi(y)
-    this.options.enableNativeJsx && this.defineVmFunction({
-      handle: y,
-      key: 'reconcileNodeFromJSXAsync',
-      metricsKey: 'figma.reconcileNodeFromJSXAsync',
-      cb: (t, i, n) => {
-        let r = e.deepUnwrap(t, !0)
-        let a = U(i, e, this.options)
-        let s = U(n, e, this.options)
-        let {
-          runtimeBridge,
-          shutdownCallback,
-        } = PluginRuntime.createRuntimeBridgeForWidgetReconciler(this.options.pluginID, this.vm)
-        shutdownCallback && this.options.addShutdownAction(shutdownCallback)
-        let d = qg(() => ({
-          rootNode: a,
-          syncedState: {},
-        }), runtimeBridge, this.options.allowedDomains)
-        let c = qg(() => ({
-          rootNode: s,
-          syncedState: {},
-        }), runtimeBridge, this.options.allowedDomains)
-        let {
-          promise,
-          resolve,
-          reject,
-        } = e.newPromise()
-        e.registerPromise((async () => {
-          try {
-            let [e, t] = await Promise.all([d, c])
-            let i = this.privateSceneGraph.getCurrentPage()
-            let n = _b({
-              vNode: t.vRoot.rootNode,
-              oldVNode: e.vRoot.rootNode,
-              imgInfoMap: t.imgInfoMap,
-              runtime: runtimeBridge,
-              parentId: i.guid,
-              currentNodeId: r.id,
-              editScopeLabel: 'reconcile-node-from-jsx',
-            })
-            let a = this.nodeFactory.createNode(n.getID(), 'figma.reconcileNodeFromJSXAsync')
-            resolve(a)
-          }
- catch (t) {
-            reject(e.newString(t.message))
-          }
-        })())
-        return promise
-      },
-      isAllowedInReadOnly: !1,
-      isAllowedInWidgetRender: !1,
-      hasEditScope: !0,
-    })
+    if (this.options.enableNativeJsx) {
+      this.defineVmFunction({
+        handle: y,
+        key: 'reconcileNodeFromJSXAsync',
+        metricsKey: 'figma.reconcileNodeFromJSXAsync',
+        cb: (t, i, n) => {
+          let r = e.deepUnwrap(t, !0)
+          let a = U(i, e, this.options)
+          let s = U(n, e, this.options)
+          let {
+            runtimeBridge,
+            shutdownCallback,
+          } = PluginRuntime.createRuntimeBridgeForWidgetReconciler(this.options.pluginID, this.vm)
+          shutdownCallback && this.options.addShutdownAction(shutdownCallback)
+          let d = qg(() => ({
+            rootNode: a,
+            syncedState: {},
+          }), runtimeBridge, this.options.allowedDomains)
+          let c = qg(() => ({
+            rootNode: s,
+            syncedState: {},
+          }), runtimeBridge, this.options.allowedDomains)
+          let {
+            promise,
+            resolve,
+            reject,
+          } = e.newPromise()
+          e.registerPromise((async () => {
+            try {
+              let [e, t] = await Promise.all([d, c])
+              let i = this.privateSceneGraph.getCurrentPage()
+              let n = _b({
+                vNode: t.vRoot.rootNode,
+                oldVNode: e.vRoot.rootNode,
+                imgInfoMap: t.imgInfoMap,
+                runtime: runtimeBridge,
+                parentId: i.guid,
+                currentNodeId: r.id,
+                editScopeLabel: 'reconcile-node-from-jsx',
+              })
+              let a = this.nodeFactory.createNode(n.getID(), 'figma.reconcileNodeFromJSXAsync')
+              resolve(a)
+            }
+            catch (t) {
+              reject(e.newString(t.message))
+            }
+          })())
+          return promise
+        },
+        isAllowedInReadOnly: !1,
+        isAllowedInWidgetRender: !1,
+        hasEditScope: !0,
+      })
+    }
     this.defineVmFunction({
       handle: y,
       key: 'createNodeFromJSXAsync',
@@ -28725,116 +27253,172 @@ return t.$$null
       isAllowedInWidgetRender: !1,
       hasEditScope: !1,
     })
-    R && (this.defineVmFunction({
-      handle: y,
-      key: 'getSlideGrid',
-      metricsKey: 'figma.getSlideGrid',
-      cb: () => {
-        let t = e.newArray()
-        this.privateSceneGraph.getSlideGrid().forEach((i, n) => {
-          let r = e.newArray()
-          i.forEach((t, i) => {
-            e.setProp(r, i.toString(), this.nodeFactory.createNode(t.guid, 'figma.getSlideGrid'))
+    // ============================================================================
+    // REFACTORED: Slide Grid and Canvas Grid API Methods for Slides and Buzz Editors
+    // ============================================================================
+
+    // --- Slide Grid API (Slides Editor Only) ---
+    if (R) {
+      /**
+       * getSlideGrid - Returns a 2D array of slide nodes representing the slide grid.
+       * Each element is a row array of node handles.
+       */
+      this.defineVmFunction({
+        handle: y,
+        key: 'getSlideGrid',
+        metricsKey: 'figma.getSlideGrid',
+        cb: () => {
+          const vm = e
+          const slideGrid = this.privateSceneGraph.getSlideGrid()
+          const gridArray = vm.newArray()
+          slideGrid.forEach((row, rowIndex) => {
+            const rowArray = vm.newArray()
+            row.forEach((node, colIndex) => {
+              vm.setProp(rowArray, colIndex.toString(), this.nodeFactory.createNode(node.guid, 'figma.getSlideGrid'))
+            })
+            vm.setProp(gridArray, rowIndex.toString(), rowArray)
           })
-          e.setProp(t, n.toString(), r)
-        })
-        e.shallowFreezeObject(t)
-        return t
-      },
-      isAllowedInReadOnly: !0,
-      isAllowedInWidgetRender: !1,
-      hasEditScope: !1,
-    }), this.defineVmFunction({
-      handle: y,
-      key: 'setSlideGrid',
-      metricsKey: 'figma.setSlideGrid',
-      cb: (t) => {
-        let i = _$$u({
-          vm: this.vm,
-          handle: t,
-          zSchema: _$$z.array(_$$z.array(_$$z.object({
-            id: _$$z.string(),
-          }))),
-          property: 'nextSlideGrid',
-        })
-        this.privateSceneGraph.setSlideGrid(i.map(e => e.map(e => ({
-          guid: e.id,
-        }))))
-        return e.$$null
-      },
-      isAllowedInReadOnly: !1,
-      isAllowedInWidgetRender: !1,
-      hasEditScope: !0,
-    }));
-    (D || R) && (this.defineVmFunction({
-      handle: y,
-      key: 'getCanvasGrid',
-      metricsKey: 'figma.getCanvasGrid',
-      cb: () => {
-        let t = e.newArray()
-        this.privateSceneGraph.getSlideGrid().forEach((i, n) => {
-          let r = e.newArray()
-          i.forEach((t, i) => {
-            e.setProp(r, i.toString(), this.nodeFactory.createNode(t.guid, 'figma.getCanvasGrid'))
+          vm.shallowFreezeObject(gridArray)
+          return gridArray
+        },
+        isAllowedInReadOnly: true,
+        isAllowedInWidgetRender: false,
+        hasEditScope: false,
+      })
+
+      /**
+       * setSlideGrid - Sets the slide grid using a 2D array of node objects with id properties.
+       * @param nextSlideGrid - 2D array of objects with 'id' property
+       */
+      this.defineVmFunction({
+        handle: y,
+        key: 'setSlideGrid',
+        metricsKey: 'figma.setSlideGrid',
+        cb: (nextSlideGridHandle) => {
+          const nextSlideGrid = _$$u({
+            vm: this.vm,
+            handle: nextSlideGridHandle,
+            zSchema: _$$z.array(_$$z.array(_$$z.object({
+              id: _$$z.string(),
+            }))),
+            property: 'nextSlideGrid',
           })
-          e.setProp(t, n.toString(), r)
-        })
-        e.shallowFreezeObject(t)
-        return t
-      },
-      isAllowedInReadOnly: !0,
-      isAllowedInWidgetRender: !1,
-      hasEditScope: !1,
-    }), this.defineVmFunction({
-      handle: y,
-      key: 'setCanvasGrid',
-      metricsKey: 'figma.setCanvasGrid',
-      cb: (t) => {
-        let i = _$$u({
-          vm: this.vm,
-          handle: t,
-          zSchema: _$$N.CanvasGrid,
-          property: 'nextCanvasGrid',
-        })
-        this.privateSceneGraph.setSlideGrid(i.map(e => e.map(e => ({
-          guid: e.id,
-        }))))
-        return e.$$null
-      },
-      isAllowedInReadOnly: !1,
-      isAllowedInWidgetRender: !1,
-      hasEditScope: !0,
-    }), this.defineVmFunction({
-      handle: y,
-      key: 'createCanvasRow',
-      metricsKey: 'figma.createCanvasRow',
-      cb: (t) => {
-        let i = _$$u({
-          vm: e,
-          handle: t,
-          zSchema: _$$N.PositiveInteger.optional(),
-          property: 'canvasGridRowIndex',
-        })
-        let n = Ez5?.canvasGrid()
-        if (!n)
-          throw new Error('Could not find canvas grid')
-        let r = i ?? n.canvasGridArray.getCopy().length
-        let a = n.createRow(r)
-        return this.nodeFactory.createNode(a, 'figma.createCanvasRow')
-      },
-      isAllowedInReadOnly: !1,
-      isAllowedInWidgetRender: !1,
-      hasEditScope: !0,
-    }))
+          this.privateSceneGraph.setSlideGrid(nextSlideGrid.map(row => row.map(cell => ({
+            guid: cell.id,
+          }))))
+          return e.$$null
+        },
+        isAllowedInReadOnly: false,
+        isAllowedInWidgetRender: false,
+        hasEditScope: true,
+      })
+    }
+
+    // --- Canvas Grid API (Buzz and Slides Editors) ---
+    if (D || R) {
+      /**
+       * getCanvasGrid - Returns a 2D array of canvas grid nodes.
+       * Each element is a row array of node handles.
+       */
+      this.defineVmFunction({
+        handle: y,
+        key: 'getCanvasGrid',
+        metricsKey: 'figma.getCanvasGrid',
+        cb: () => {
+          const vm = e
+          const canvasGrid = this.privateSceneGraph.getSlideGrid()
+          const gridArray = vm.newArray()
+          canvasGrid.forEach((row, rowIndex) => {
+            const rowArray = vm.newArray()
+            row.forEach((node, colIndex) => {
+              vm.setProp(rowArray, colIndex.toString(), this.nodeFactory.createNode(node.guid, 'figma.getCanvasGrid'))
+            })
+            vm.setProp(gridArray, rowIndex.toString(), rowArray)
+          })
+          vm.shallowFreezeObject(gridArray)
+          return gridArray
+        },
+        isAllowedInReadOnly: true,
+        isAllowedInWidgetRender: false,
+        hasEditScope: false,
+      })
+
+      /**
+       * setCanvasGrid - Sets the canvas grid using a 2D array of node objects with id properties.
+       * @param nextCanvasGrid - 2D array of objects with 'id' property
+       */
+      this.defineVmFunction({
+        handle: y,
+        key: 'setCanvasGrid',
+        metricsKey: 'figma.setCanvasGrid',
+        cb: (nextCanvasGridHandle) => {
+          const nextCanvasGrid = _$$u({
+            vm: this.vm,
+            handle: nextCanvasGridHandle,
+            zSchema: _$$N.CanvasGrid,
+            property: 'nextCanvasGrid',
+          })
+          this.privateSceneGraph.setSlideGrid(nextCanvasGrid.map(row => row.map(cell => ({
+            guid: cell.id,
+          }))))
+          return e.$$null
+        },
+        isAllowedInReadOnly: false,
+        isAllowedInWidgetRender: false,
+        hasEditScope: true,
+      })
+
+      /**
+       * createCanvasRow - Creates a new row in the canvas grid at the specified index.
+       * @param canvasGridRowIndex - Optional row index to insert at
+       */
+      this.defineVmFunction({
+        handle: y,
+        key: 'createCanvasRow',
+        metricsKey: 'figma.createCanvasRow',
+        cb: (canvasGridRowIndexHandle) => {
+          const rowIndex = _$$u({
+            vm: e,
+            handle: canvasGridRowIndexHandle,
+            zSchema: _$$N.PositiveInteger.optional(),
+            property: 'canvasGridRowIndex',
+          })
+          const canvasGridManager = Ez5?.canvasGrid()
+          if (!canvasGridManager) {
+            throw new Error('Could not find canvas grid')
+          }
+          const insertIndex = rowIndex ?? canvasGridManager.canvasGridArray.getCopy().length
+          const newRowGuid = canvasGridManager.createRow(insertIndex)
+          return this.nodeFactory.createNode(newRowGuid, 'figma.createCanvasRow')
+        },
+        isAllowedInReadOnly: false,
+        isAllowedInWidgetRender: false,
+        hasEditScope: true,
+      })
+    }
     e.shallowFreezeObject(y)
     return y
   }
 
   /**
-   * closePlugin - Close the plugin asynchronously
+   * closePlugin - Asynchronously closes the plugin and handles cleanup.
+   *
+   * Ensures that the plugin is not already in the process of closing, then
+   * invokes the configured closePlugin handler. Handles special case for
+   * codegen-triggered plugins by scheduling a codegen refresh.
+   *
+   * @param closeOptions - Optional object containing close message or error flag.
    */
-  async closePlugin(e) {
-    this.runningSyncEvent === 'close' || this.runningCloseEventHandler || (await this.options.closePlugin(e), this.options.triggeredFrom === 'codegen' && setTimeout(() => _$$c(), 0))
+  async closePlugin(closeOptions) {
+    // Prevent duplicate close events
+    if (this.runningSyncEvent === 'close' || this.runningCloseEventHandler) {
+      return
+    }
+    await this.options.closePlugin(closeOptions)
+    // Special handling for codegen-triggered plugins: schedule codegen refresh
+    if (this.options.triggeredFrom === 'codegen') {
+      setTimeout(() => _$$c(), 0)
+    }
   }
 
   /**
@@ -28872,7 +27456,7 @@ return t.$$null
     const fieldName = _$$u({
       vm: this.vm,
       handle: fieldHandle,
-      zSchema: n.VariableBindableShadowEffectField,
+      zSchema: variableDefinitions.VariableBindableShadowEffectField,
       property: 'field',
     })
 
@@ -28914,7 +27498,7 @@ return t.$$null
     const fieldName = _$$u({
       vm: this.vm,
       handle: fieldHandle,
-      zSchema: n.VariableBindableBlurEffectField,
+      zSchema: variableDefinitions.VariableBindableBlurEffectField,
       property: 'field',
     })
 
@@ -29095,7 +27679,7 @@ async function a_(_componentKey, styleKey, permissions) {
   if (Oo(publishedStyle, permissions)) {
     return {
       key: _$$n(publishedStyle.key),
-      version: IA(publishedStyle.content_hash) ?? IA.INVALID ?? 'INVALID',
+      version: IA(publishedStyle.content_hash) ?? 'INVALID',
     }
   }
 
@@ -29103,12 +27687,12 @@ async function a_(_componentKey, styleKey, permissions) {
   try {
     downloadedStyle = await _$$e2(debugStateInstance.dispatch, publishedStyle, publishedStyle.library_key, jE.PLUGIN_INSERT_STYLE, currentState.userFlags, currentState.fonts)
   }
- catch {
+  catch {
     throw new Error(`Failed to download the style with the key "${styleKey}"`)
   }
 
   // Upsert the style in the current scene
-  const upsertResult = l7.system('upsert-shared-style-plugin', () => BXd.getOrCreateSubscribedStyleNodeId(publishedStyle.key, publishedStyle.content_hash ?? IA.INVALID ?? 'INVALID', publishedStyle.library_key, downloadedStyle, ZiZ.ACTIVE_SCENE))
+  const upsertResult = l7.system('upsert-shared-style-plugin', () => BXd.getOrCreateSubscribedStyleNodeId(publishedStyle.key, publishedStyle.content_hash ?? 'INVALID', publishedStyle.library_key, downloadedStyle, ZiZ.ACTIVE_SCENE))
   if (upsertResult?.fileUpdateRequired) {
     throw new Error('Can\'t insert style of a different file version')
   }
@@ -29137,12 +27721,12 @@ async function aA(componentData, permissions) {
     try {
       downloadedComponent = await _$$e2(debugStateInstance.dispatch, componentData, componentData.library_key, jE.PLUGIN_INSERT_COMPONENT, currentState.userFlags, currentState.fonts)
     }
- catch {
+    catch {
       throw new Error(`Failed to download the component with the key "${componentData.component_key}"`)
     }
 
     // Upsert the component in the current scene
-    const upsertResult = l7.system('upsert-shared-symbol-plugin', () => BXd.upsertSharedSymbol(componentData.component_key ?? _$$ii.INVALID ?? 'INVALID', componentData.content_hash ?? F7.INVALID ?? 'INVALID', componentData.library_key, zol.NO, downloadedComponent, ZiZ.ACTIVE_SCENE))
+    const upsertResult = l7.system('upsert-shared-symbol-plugin', () => BXd.upsertSharedSymbol(componentData.component_key ?? 'INVALID', componentData.content_hash ?? 'INVALID', componentData.library_key, zol.NO, downloadedComponent, ZiZ.ACTIVE_SCENE))
     if (!upsertResult) {
       throw new Error('Couldn\'t insert component')
     }
@@ -29168,7 +27752,7 @@ async function ay(stateGroupData, permissions) {
     try {
       downloadedStateGroup = await _$$e2(debugStateInstance.dispatch, stateGroupData, stateGroupData.library_key, jE.PLUGIN_INSERT_STATE_GROUP, currentState.userFlags, currentState.fonts)
     }
- catch {
+    catch {
       throw new Error(`Failed to download the component set with the key "${stateGroupData.key}"`)
     }
 
@@ -29192,7 +27776,7 @@ async function ay(stateGroupData, permissions) {
  * @returns Promise resolving to the imported component GUID
  * @throws Error if component cannot be found or imported
  */
-export async function $$ab4(componentKey, sceneGraphInstance: any = getSceneGraphInstance()) {
+export async function $$ab4(componentKey, sceneGraphInstance = getSceneGraphInstance()) {
   const debugStateInstance = debugState
   const currentState = debugStateInstance.getState()
   const currentFile = d1(currentState)

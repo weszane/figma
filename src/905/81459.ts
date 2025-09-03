@@ -4,7 +4,7 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import { getFeatureFlags } from "../905/601108";
 import { NC } from "../905/17179";
 import { sx } from "../905/449184";
-import { Ek } from "../905/553831";
+import { subscribeAndAwaitData } from "../905/553831";
 import { $D } from "../905/11";
 import { xi } from "../905/714362";
 import { g as _$$g } from "../905/880308";
@@ -45,7 +45,7 @@ let $$C6 = nF(async e => {
   let I = dv(o.name).toLowerCase();
   let C = t.user?.drafts_folder_id;
   let T = o.folderId ?? ("folder" === t.selectedView.view ? t.selectedView.folderId : C);
-  let k = T && (await Ek(cQi, {
+  let k = T && (await subscribeAndAwaitData(cQi, {
     projectId: T
   }, {
     retainMs: 3e4

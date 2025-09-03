@@ -1,4 +1,4 @@
-import { z } from "../905/490038";
+import { atomStoreManager } from "../905/490038";
 import { atom } from "jotai";
 export function $$a0(e, t) {
   let i = null;
@@ -17,9 +17,9 @@ export function $$a0(e, t) {
       console.error(e);
       return e;
     }
-    i?.(z.get(e));
-    let s = z.sub(e, () => {
-      i?.(z.get(e));
+    i?.(atomStoreManager.get(e));
+    let s = atomStoreManager.sub(e, () => {
+      i?.(atomStoreManager.get(e));
     });
     return () => {
       a?.();

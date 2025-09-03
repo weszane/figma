@@ -5,7 +5,7 @@ import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, nB } from "../figma_app/272243";
 import { k as _$$k } from "../905/443820";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { eU, fp } from "../figma_app/27355";
 import { H9 } from "../figma_app/930338";
 import { t } from "../905/303541";
@@ -25,7 +25,7 @@ async function y(e) {
 let _ = () => {
   let [e, t] = fp(f);
   return useCallback(async n => {
-    let r = UN();
+    let r = getSingletonSceneGraph();
     if (e[n]) return e[n];
     let i = r.get(n);
     if (!i) return;

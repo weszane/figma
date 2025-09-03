@@ -8,7 +8,7 @@ import { QP } from "../vendor/202832";
 import { Xo, Ls, W7, jJ, wv, _A, Fj, O5 } from "../905/998346";
 import { Hd, Qe, qM, tr, vE, Wo, xe } from "../905/791403";
 import { J } from "../905/223510";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { B as _$$B2 } from "../905/94678";
 import { b as _$$b } from "../905/690073";
 import { z } from "../vendor/835909";
@@ -86,7 +86,7 @@ async function u(e) {
           i = !1;
           continue;
         }
-        for (let [t, r] of Object.entries(d.props)) if (id(r) && id(s.props[t])) e([s.props[t]], [r], n) || (i = !1); else if (Array.isArray(r) && Array.isArray(s.props[t])) {
+        for (let [t, r] of Object.entries(d.props)) if (id(r) && id(s.props[t])) e([s.props[t]], [r], n) || (i = !1);else if (Array.isArray(r) && Array.isArray(s.props[t])) {
           let a = s.props[t];
           for (let t = 0; t < r.length; t++) if (t >= a.length && (i = !1), id(r[t]) && id(a[t])) {
             let s = r[t];
@@ -465,7 +465,7 @@ export async function $$M7(e, t, r, n) {
       if (a.useShareJSX) p && (props.sharedPluginData = {
         ...props.sharedPluginData,
         type
-      }, n.getComponentInfoByJSXName(type)); else {
+      }, n.getComponentInfoByJSXName(type));else {
         let e = n.customJSXElementToInstanceElement({
           type,
           props,
@@ -519,7 +519,7 @@ export function $$V6({
   } = {}
 }) {
   let i = [];
-  let a = UN();
+  let a = getSingletonSceneGraph();
   if (t?.type === "1P_LIBRARY" || t?.type === "USER_LIBRARY") {
     let e = a.getInternalCanvas();
     e && i.push(e);

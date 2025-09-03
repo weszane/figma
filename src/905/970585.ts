@@ -29,7 +29,7 @@ import { $n } from "../905/521428";
 import { fn, sH } from "../905/871411";
 import { eD } from "../figma_app/876459";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { XHR } from "../905/910117";
 import { z as _$$z } from "../905/239603";
 import { qK, Ju } from "../905/102752";
@@ -80,7 +80,7 @@ async function j(e, t) {
     }) => e);
     if (!r) throw Error("Empty file buffer");
     if (!glU.loadFigFileForFallback(r)) throw Error("Failed to load file buffer");
-    await UN().setCurrentPageFromNodeAsync(t);
+    await getSingletonSceneGraph().setCurrentPageFromNodeAsync(t);
   } catch (e) {
     i = JSON.stringify(e);
     r = !1;
@@ -243,7 +243,7 @@ export class $$eu0 {
   constructor(e) {
     this.store = e;
     this.hasShownMultiplayerDecodeError = !1;
-    this.dispatch = () => { };
+    this.dispatch = () => {};
     this.hasUnsavedChanges = () => {
       let e = this.store.getState();
       return !!(e.saveStatus && e.saveStatus.hasUnsavedChanges);
@@ -301,7 +301,7 @@ export class $$eu0 {
     AW();
   }
   handleMultiplayerSignal(e, t, i) {
-    if ("force-refresh" === e) Ay.reload("Multiplayer got force-refresh signal"); else if ("too-many-connections" === e) {
+    if ("force-refresh" === e) Ay.reload("Multiplayer got force-refresh signal");else if ("too-many-connections" === e) {
       if (this.hasUnsavedChanges()) {
         let e = _$$t("unsaved_changes.syncing.changes_cannot_be_saved");
         let t = _$$t("unsaved_changes.syncing.too_many_people_in_file");
@@ -321,7 +321,7 @@ export class $$eu0 {
       }));
     } else if ("message-decode-failure" === e) this.hasShownMultiplayerDecodeError || (this.hasShownMultiplayerDecodeError = !0, this.dispatch(_$$F.enqueue({
       message: _$$t("unsaved_changes.syncing.experiencing_server_issues")
-    }))); else if ("invalid-permissions" === e) {
+    })));else if ("invalid-permissions" === e) {
       let e;
       let t;
       this.hasUnsavedChanges() ? (t = _$$t("unsaved_changes.syncing.changes_cannot_be_saved"), e = _$$t("unsaved_changes.syncing.unsaved_revoked_access")) : (t = _$$t("unsaved_changes.syncing.access_revoked"), e = _$$t("unsaved_changes.syncing.someone_revoked_access_to_the_file_you_had_open_ask_the_owner_for_access_to_open_it_again"), this.dispatch(eH({
@@ -439,7 +439,7 @@ export class $$eu0 {
           }));
         }
       },
-      onDismiss: () => { }
+      onDismiss: () => {}
     }));
   }
   isWindowActive() {
@@ -466,7 +466,7 @@ export class $$eu0 {
           }));
         }
       },
-      onDismiss: () => { }
+      onDismiss: () => {}
     }));
   }
   prettyPrintMessage(e) {

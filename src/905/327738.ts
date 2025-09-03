@@ -1,7 +1,7 @@
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 export function $$r0(e, t) {
   if (!e) return [];
-  let i = UN();
+  let i = getSingletonSceneGraph();
   let r = i.get(e);
   if (!r) return [];
   let a = r.findAllWithCriteriaGUIDs(t);
@@ -13,7 +13,7 @@ export function $$r0(e, t) {
   return s;
 }
 export function $$a5(e) {
-  let t = UN().get(e);
+  let t = getSingletonSceneGraph().get(e);
   return t ? $$r0(t.guid, {
     types: ["INSTANCE"],
     recurseIfMatch: !1
@@ -21,7 +21,7 @@ export function $$a5(e) {
 }
 export function $$s7(e) {
   if (!e.symbolId) return null;
-  let t = UN().get(e.symbolId);
+  let t = getSingletonSceneGraph().get(e.symbolId);
   return t ? t.isState ? t.parentGuid : t.guid : null;
 }
 export function $$o4(e) {
@@ -54,7 +54,7 @@ export function $$c6(e) {
 }
 export function $$u2(e) {
   if (!e) return [];
-  let t = UN();
+  let t = getSingletonSceneGraph();
   let i = t.get(e);
   if (!i) return [];
   let a = $$r0(i.guid, {

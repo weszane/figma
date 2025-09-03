@@ -1,12 +1,12 @@
 import { ServiceCategories as _$$e } from "../905/165054";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { $D } from "../905/11";
 import { Aq } from "../figma_app/274571";
 export let $$n0;
 class l {
   getSummaryAsClipboardText(e) {
     let t;
-    let r = UN().get(e);
+    let r = getSingletonSceneGraph().get(e);
     let n = r?.getWidgetSyncedState()["syncedState:ai-summary-items"];
     let l = r?.getWidgetSyncedState()["syncedState:summarized-at"];
     try {

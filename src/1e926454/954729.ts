@@ -31,7 +31,7 @@ import { JT, tI } from "../figma_app/599327";
 import { I as _$$I } from "../905/343211";
 import { h as _$$h2, d as _$$d } from "../figma_app/603561";
 import { vr } from "../figma_app/514043";
-import { Qw } from "../905/989992";
+import { resourceUtils } from "../905/989992";
 import { un } from "../figma_app/457899";
 import { IX } from "../905/712921";
 import { bL as _$$bL, DZ, mc, c$ } from "../905/493196";
@@ -92,7 +92,7 @@ function W(e) {
       currentSeatBillingInterval: e.type === FOrganizationLevelType.ORG ? IX.YEAR : IX.MONTH,
       enabled: n && !a
     });
-    return "loading" === t.status ? Qw.loadingSuspendable(t.suspense) : r;
+    return "loading" === t.status ? resourceUtils.loadingSuspendable(t.suspense) : r;
   }(e));
   return n.data;
 }

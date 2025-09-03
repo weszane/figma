@@ -1,6 +1,6 @@
 import { throwTypeError } from "../figma_app/465776";
 import { Cb, wP, yu, Sn, k4, Au } from "../905/327738";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 export let $$s0 = "Component";
 export function $$o18(e) {
   e = g(e = function (e) {
@@ -211,7 +211,7 @@ export function $$S16(e) {
       }
       let o = {};
       for (let e of Object.keys(s)) {
-        let t = UN().get(e);
+        let t = getSingletonSceneGraph().get(e);
         let i = t?.parentNode;
         for (; i && "NONE" !== i.stackMode && (o[i.guid] = o[i.guid] || [], o[i.guid].push(e), i?.type !== "SYMBOL");) i = i.parentNode;
       }

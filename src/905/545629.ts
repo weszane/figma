@@ -2,7 +2,7 @@ import { IPu, Z64, Ez5, GP2, zbP } from "../figma_app/763686";
 import { R0 } from "../figma_app/273493";
 import { M } from "../905/512402";
 import { fn, sH } from "../905/871411";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { zl } from "../figma_app/27355";
 import { t as _$$t } from "../905/303541";
@@ -17,7 +17,7 @@ export class $$_0 extends C {
     return new M(1080, 1080);
   }
   addBlankChildAtCoord(e, t, i, r, l) {
-    if (!UN()) {
+    if (!getSingletonSceneGraph()) {
       console.error("buzz grid add behavior", "No active document");
       return null;
     }

@@ -1,4 +1,4 @@
-import { Qw } from "../905/989992";
+import { resourceUtils } from "../905/989992";
 import { Rs } from "../figma_app/288654";
 import { t } from "../905/303541";
 import { HH } from "../figma_app/828186";
@@ -50,7 +50,7 @@ export function $$y6(e) {
   }, {
     enabled: !!e
   });
-  return Qw.useTransform(t, e => e.project);
+  return resourceUtils.useTransform(t, e => e.project);
 }
 export function $$b7() {
   return Az(No()).transform(e => e ? t("file_browser.creation_buttons.disabled_by_organization") : t("file_browser.creation_buttons.disabled_by_team"));

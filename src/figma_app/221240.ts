@@ -4,7 +4,7 @@ import { d4 } from "../vendor/514228";
 import { sg } from "../905/859698";
 import { glU, w3z, juq } from "../figma_app/763686";
 import { AD } from "../905/871411";
-import { qo } from "../905/700578";
+import { ReduxSceneGraph } from "../905/700578";
 import { IT } from "../figma_app/566371";
 import { Eo } from "../figma_app/80990";
 import { eY } from "../figma_app/722362";
@@ -180,7 +180,7 @@ export function $$x0(e, t) {
   };
 }
 export function $$N5(e) {
-  return new qo(juq.DETACHED_COMPONENTS).get(e);
+  return new ReduxSceneGraph(juq.DETACHED_COMPONENTS).get(e);
 }
 export function $$C2(e, t) {
   let r = $$A4();

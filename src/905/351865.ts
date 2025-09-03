@@ -1,7 +1,7 @@
 import { htN, ZEs, Ez5 } from "../figma_app/763686";
 import { r as _$$r } from "../905/249071";
 import { M } from "../905/512402";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { zl } from "../figma_app/27355";
 import { C } from "../905/217042";
 import { j } from "../905/881708";
@@ -12,9 +12,9 @@ export class $$c0 extends j {
   render(e, t) {
     if (!zl.get(C)) return;
     let i = htN?.getSelectedNodesToConvertIntoRepeatersGUIDs(ZEs.HAS_IDENTICAL_CHILDREN) ?? [];
-    let d = new Set(UN().getDirectlySelectedNodes().map(e => e.id));
+    let d = new Set(getSingletonSceneGraph().getDirectlySelectedNodes().map(e => e.id));
     for (let o = 0; o < i.length; o++) for (let l of i[o] ?? []) if (!d.has(l)) {
-      let i = UN().get(l);
+      let i = getSingletonSceneGraph().get(l);
       if (i) {
         let s = i.absoluteBoundingBox;
         let l = new M(s.x, s.y);

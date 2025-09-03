@@ -2,7 +2,7 @@ import { qmM, _0v } from "../figma_app/763686";
 import { QR } from "../figma_app/273493";
 import { r as _$$r } from "../905/249071";
 import { M } from "../905/512402";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { j } from "../905/881708";
 import { Dv, Ro, fl, dw } from "../905/962457";
 export class $$c0 extends j {
@@ -68,7 +68,7 @@ export class $$c0 extends j {
     });
   }
   _singleSelectedEmbedNode() {
-    let e = UN().getDirectlySelectedNodes();
+    let e = getSingletonSceneGraph().getDirectlySelectedNodes();
     if (1 !== e.length) return null;
     let t = e[0];
     return t && "INTERACTIVE_SLIDE_ELEMENT" === t.type && "EMBED" === t.interactiveSlideElementType ? t : null;

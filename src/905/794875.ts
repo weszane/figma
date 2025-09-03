@@ -5,7 +5,7 @@ import { debounce } from "../905/915765";
 import { W } from "../905/187396";
 import { iw } from "../905/163832";
 import { r as _$$r } from "../905/571562";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { cZ } from "../figma_app/272902";
 import m from "classnames";
@@ -379,7 +379,7 @@ class et extends o6 {
     };
     this.updatePreview = debounce(e => {
       if (!this.props.enablePreview || !this.isDropdownShown(this.props)) return;
-      let t = UN().getCurrentPage();
+      let t = getSingletonSceneGraph().getCurrentPage();
       let i = 0;
       if (t && (i = t.directlySelectedNodes.length ?? 0), i > 250 || null === e) {
         this.clearPreview();

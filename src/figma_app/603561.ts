@@ -1,4 +1,4 @@
-import { Qw } from "../905/989992";
+import { resourceUtils } from "../905/989992";
 import { IT, mI } from "../figma_app/566371";
 import { $D } from "../905/11";
 import { FOrganizationLevelType } from "../figma_app/191312";
@@ -21,13 +21,13 @@ export function $$$$d1({
   } = r;
   switch (status) {
     case "loading":
-      return Qw.loadingSuspendable(suspense);
+      return resourceUtils.loadingSuspendable(suspense);
     case "loaded":
-      return Qw.loadedSuspendable(data?.org?.activeOrgBillingPeriod?.isEla ?? !1, errors, suspense);
+      return resourceUtils.loadedSuspendable(data?.org?.activeOrgBillingPeriod?.isEla ?? !1, errors, suspense);
     case "disabled":
-      return Qw.loadedSuspendable(!1, [], suspense);
+      return resourceUtils.loadedSuspendable(!1, [], suspense);
     case "errors":
-      return Qw.errorSuspendable(errors, suspense);
+      return resourceUtils.errorSuspendable(errors, suspense);
   }
 }
 export function $$c0({

@@ -12,7 +12,7 @@ import { s as _$$s } from "../905/551945";
 import { T as _$$T } from "../905/632137";
 import { a as _$$a } from "../905/964520";
 import { ruz } from "../figma_app/763686";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { xk } from "@stylexjs/stylex";
 import { getFeatureFlags } from "../905/601108";
 import { E3, fp, zl } from "../figma_app/27355";
@@ -65,7 +65,7 @@ function eo(e) {
 }
 export async function $$el1(e) {
   let t = e.map(async e => {
-    let t = UN().get(e.nodeGuid);
+    let t = getSingletonSceneGraph().get(e.nodeGuid);
     if (!t) return null;
     try {
       let r = xJ(e.imageHash);
@@ -219,7 +219,7 @@ function eu({
   }) : null;
 }
 function ep(e) {
-  let t = UN().get(e.guid);
+  let t = getSingletonSceneGraph().get(e.guid);
   if (!t) return;
   let r = t.fills[e.fillIndex];
   if (r) return {
@@ -353,7 +353,7 @@ function eg({
     eE();
     let t = en ?? eQ();
     if (t && !ui(t) && (t = eQ()), t && "componentPropDefId" in t) {
-      if (!(e = UN().get(t.guid))) return;
+      if (!(e = getSingletonSceneGraph().get(t.guid))) return;
     } else (e = qq({
       create: !0,
       canvasGrid: J
@@ -403,7 +403,7 @@ function eg({
       eE();
       return;
     }
-    let n = UN().get(en.guid);
+    let n = getSingletonSceneGraph().get(en.guid);
     if (!n) {
       eE();
       return;

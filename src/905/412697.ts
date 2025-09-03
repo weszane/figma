@@ -1,6 +1,6 @@
 import { useState, useCallback, useMemo } from "react";
 import { debounce } from "../905/915765";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { sx } from "../905/449184";
 import { Y5 } from "../figma_app/455680";
@@ -23,7 +23,7 @@ export function $$c0({
       g();
       return;
     }
-    let r = UN().getCurrentPage();
+    let r = getSingletonSceneGraph().getCurrentPage();
     let l = 0;
     if (r && (l = r.directlySelectedNodes.length ?? 0), l > 250) {
       g();

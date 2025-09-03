@@ -22,7 +22,7 @@ import { Y4 } from "../9410/40486";
 import { eb, Kf, BW, JF } from "../figma_app/257655";
 import { Z as _$$Z } from "../905/279476";
 import { e as _$$e } from "../905/149844";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { zl, md } from "../figma_app/27355";
 import { debugState } from "../905/407919";
 import { n as _$$n } from "../draftjs_composer/589474";
@@ -52,7 +52,7 @@ function W(e) {
   return "SYMBOL" === e.type ? {
     symbolId: Egt.getAssetKeyForPublish(e.guid),
     version: e.sharedSymbolVersion
-  } : "INSTANCE" === e.type && e.symbolId ? W(UN().get(e.symbolId)) : {
+  } : "INSTANCE" === e.type && e.symbolId ? W(getSingletonSceneGraph().get(e.symbolId)) : {
     symbolId: "",
     version: null
   };
@@ -64,12 +64,12 @@ function H(e, t, a) {
         symbolId,
         version
       } = W(e.node);
-      !function(e, t, a) {
+      !function (e, t, a) {
         if (!e) return;
         let l = zl.get(ze);
         if (!l) return;
         let i = e.data?.file?.comments.find(e => e.clientMeta?.nodeId === t.guid && e.clientMeta?.nodeOffset?.x === 0 && e.clientMeta?.nodeOffset?.y === 0);
-        let n = UN().getCurrentPage().guid;
+        let n = getSingletonSceneGraph().getCurrentPage().guid;
         let s = _$$g();
         i ? e.api.writeAPI?.reply({
           messageMeta: [{
@@ -120,8 +120,8 @@ async function Q(e, t, a) {
 }
 function Z(e, t, a) {
   l7.user("Create sticky note with IP Conflict eval results", () => {
-    let l = UN().createNode("FRAME");
-    let i = UN().createNode("TEXT");
+    let l = getSingletonSceneGraph().createNode("FRAME");
+    let i = getSingletonSceneGraph().createNode("TEXT");
     l.appendChild(i);
     i.name = e;
     l.x = a.x + a.size.x + 10;
@@ -135,13 +135,13 @@ function Z(e, t, a) {
       y: l.size.y
     };
     biQ.setTextContentOnTextNode(i.guid, t);
-    UN().getCurrentPage().appendChild(l);
+    getSingletonSceneGraph().getCurrentPage().appendChild(l);
   });
 }
 let ee = ["Mobile App Kit", "Website Kit"];
 function et(e, t, a) {
   return async () => {
-    let l = UN().getCurrentPage();
+    let l = getSingletonSceneGraph().getCurrentPage();
     if (!ee.includes(l.name)) {
       t(_$$F.enqueue({
         message: "Can only run this action on a kit page",
@@ -267,7 +267,7 @@ function ei() {
   }, {
     label: "Eval selected nodes",
     function: async () => {
-      let a = UN().getCurrentPage().directlySelectedNodes;
+      let a = getSingletonSceneGraph().getCurrentPage().directlySelectedNodes;
       if (!a.length) {
         e(_$$F.enqueue({
           message: "Please select some nodes",
@@ -283,7 +283,7 @@ function ei() {
   }, {
     label: "Eval selected generations",
     function: async () => {
-      let a = UN().getCurrentPage().directlySelectedNodes;
+      let a = getSingletonSceneGraph().getCurrentPage().directlySelectedNodes;
       if (!a.length || "FRAME" !== a[0].type) {
         e(_$$F.enqueue({
           message: "Please select a single parent node of all the generation outputs",
@@ -377,7 +377,7 @@ async function eo({
         });
         let i = l.data.meta.status;
         "success" === i ? (clearInterval(a), e(l.data.meta)) : ("failed" === i || t >= 9) && (clearInterval(a), e(null));
-      } catch { }
+      } catch {}
     }, 2e4);
   });
 }
@@ -389,7 +389,7 @@ function ec({
   let {
     evalSetsQueryStatus,
     evalSets
-  } = function() {
+  } = function () {
     let [e] = IT(ed(null));
     return {
       evalSetsQueryStatus: e.status,
@@ -466,7 +466,7 @@ function ec({
         clientLifecycleId: t
       });
       if (s && I) {
-        let e = UN().get(s);
+        let e = getSingletonSceneGraph().get(s);
         e && (await Q(e, a, B));
       }
     } catch (e) {
@@ -666,7 +666,7 @@ async function ep({
           }
           if (e && i) {
             let t = i[0];
-            t && (e = function(e, t, a) {
+            t && (e = function (e, t, a) {
               let l = e => {
                 if (e) return "Placeholder" === e.type && e.props.name === t ? a : {
                   ...e,
@@ -791,7 +791,7 @@ async function ep({
       timeoutOverride: 1 / 0,
       message: "Populating icons & images..."
     }));
-    let y = UN().get(m);
+    let y = getSingletonSceneGraph().get(m);
     let g = (y?.childrenGuids || []).map((e, t) => ({
       id: e,
       ...s[t]
@@ -1258,4 +1258,4 @@ function ew(e) {
 }
 export let $$eK1 = $$eb0;
 export const FirstDraftDebugViewInner = $$eb0;
-export const _$$default = $$eK1; 
+export const _$$default = $$eK1;

@@ -1,6 +1,6 @@
 import { Ez5 } from "../figma_app/763686";
 import { AD } from "../905/871411";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { zl } from "../figma_app/27355";
 import { BT } from "../905/618447";
@@ -25,7 +25,7 @@ export function $$h4() {
   for (let e = 0; e < c.length; e++) {
     let t = Ez5?.canvasGrid().isRowSelected(e);
     let r = Ez5?.canvasGrid().getRowGUID(e) ?? AD;
-    if (t && UN().get(r)?.isCanvasGridStateGroupRow && getFeatureFlags().buzz_template_sets) return !0;
+    if (t && getSingletonSceneGraph().get(r)?.isCanvasGridStateGroupRow && getFeatureFlags().buzz_template_sets) return !0;
   }
   return !1;
 }

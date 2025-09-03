@@ -4,7 +4,7 @@ import { flushSync } from "../vendor/944059";
 import { d4 } from "../vendor/514228";
 import { glU, Egt } from "../figma_app/763686";
 import { x7, AD } from "../905/871411";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { xx } from "../figma_app/815945";
 import { sx } from "../905/449184";
 import { parsePxNumber } from "../figma_app/783094";
@@ -135,10 +135,10 @@ function P(e) {
         return;
       }
       let t = glU.getCommentAnchorDataAtPosition(e.x, e.y).stablePath;
-      let r = t ? UN().getFromStablePath(R(t)) : null;
+      let r = t ? getSingletonSceneGraph().getFromStablePath(R(t)) : null;
       r && !v.has(r.type) ? Uc(r.guid) : Uc(AD);
     },
-    setCurrentPageIdAsync: async e => await UN().setCurrentPageFromNodeAsync(e),
+    setCurrentPageIdAsync: async e => await getSingletonSceneGraph().setCurrentPageFromNodeAsync(e),
     pageIdForNodeId: e => glU.getPageIdFromNode(e),
     getCommentDestinationForCanvasPosition: L,
     getValidCommentsRect: () => null

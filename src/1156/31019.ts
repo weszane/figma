@@ -6,7 +6,7 @@ import { V, Yg, F$ } from "../figma_app/304955";
 import { assert } from "../figma_app/465776";
 import { glU } from "../figma_app/763686";
 import { Hq } from "../905/189185";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { fp, zl } from "../figma_app/27355";
 import { az } from "../905/449184";
@@ -62,7 +62,7 @@ export function $$L0({
             message: _$$t("figmake.chat.a11y_restoring_a_previous_version"),
             role: "status"
           }));
-          let r = UN().get(t);
+          let r = getSingletonSceneGraph().get(t);
           if (!r) throw Error(`Chat messages node not found: ${t}`);
           await z({
             fileKey: d,

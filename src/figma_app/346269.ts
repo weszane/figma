@@ -1,7 +1,7 @@
 import { c2 } from "../905/382883";
 import { _7 } from "../figma_app/562352";
 import { AD } from "../905/871411";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { eU, zl, md } from "../figma_app/27355";
 import { x1 } from "../905/714362";
 import { oV } from "../905/216495";
@@ -48,7 +48,7 @@ export class $$f1 {
     }));
   }
   createSceneGraphNodesForDirectManipulation(e, t, r) {
-    let n = UN();
+    let n = getSingletonSceneGraph();
     let i = n.get(t);
     if (!i) return;
     let a = (e, t) => "REACT_FIBER" === e.type && e.name === t;
@@ -102,7 +102,7 @@ export class $$f1 {
     for (let n of (this._bundledSourceCode.set(t, r), zl.set(this._codeInstanceGuidToSnapshotInfoAtom, r => ({
       ...r,
       [t]: e
-    })), this.hasSubscribedToSceneGraphChanges || (this.hasSubscribedToSceneGraphChanges = !0, this._unsubscribes.push(UN().onChange(this.onSceneGraphChange.bind(this), {
+    })), this.hasSubscribedToSceneGraphChanges || (this.hasSubscribedToSceneGraphChanges = !0, this._unsubscribes.push(getSingletonSceneGraph().onChange(this.onSceneGraphChange.bind(this), {
       allowDeferral: !0
     }))), e.classToStyles)) this.selectedElementsClassToStyles.set(n.className, n);
   }
@@ -119,11 +119,11 @@ export class $$f1 {
     }));
   }
   removeDirectManipulationSceneGraphNodes(e) {
-    let t = UN().get(e);
+    let t = getSingletonSceneGraph().get(e);
     t && t.childrenNodes.forEach(e => e.removeSelfAndChildren());
   }
   onSceneGraphChange() {
-    let e = UN().getDirectlySelectedNodes().map(e => {
+    let e = getSingletonSceneGraph().getDirectlySelectedNodes().map(e => {
       let t = e.reactFiberId;
       if (!t) return null;
       {

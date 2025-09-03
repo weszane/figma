@@ -3,7 +3,7 @@ import { lV, lr, U1 } from "../figma_app/617606";
 import { V, Yg, Hg, o9, F$ } from "../figma_app/304955";
 import { K$p } from "../figma_app/763686";
 import { l7 } from "../905/189185";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { fp, zl } from "../figma_app/27355";
 import { Pp } from "../vendor/330821";
@@ -206,7 +206,7 @@ export function $$N1({
   return {
     restoreFile: useCallback(r => {
       if (e && n.codeSnapshotKey && n.files[r] && a) return () => {
-        let a = UN().get(e);
+        let a = getSingletonSceneGraph().get(e);
         if (!a) return;
         let u = n.files[r];
         if (!u) {

@@ -1,6 +1,6 @@
 import { ruz } from "../figma_app/763686";
 import { l7 } from "../905/189185";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { zl, eU, Xr, md } from "../figma_app/27355";
 import { Vs } from "../figma_app/930338";
 import { Ay } from "../figma_app/432652";
@@ -65,7 +65,7 @@ let _ = eU(null, (e, t) => {
   let r = e(p).currentOperation;
   r && ("success" === r.status && l7.ai("make video", () => {
     if (!ruz) return;
-    let e = UN();
+    let e = getSingletonSceneGraph();
     let t = Y5.getViewportInfo();
     let i = e.createNode("RECTANGLE");
     i.size = {

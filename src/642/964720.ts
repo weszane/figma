@@ -11,7 +11,7 @@ import { d as _$$d } from "../905/976845";
 import { a as _$$a } from "../905/5627";
 import { J as _$$J2 } from "../905/125993";
 import { B as _$$B } from "../905/107177";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { oy, gZ, Go, LZ } from "../figma_app/964367";
 import { Pt } from "../figma_app/806412";
 import { MM, wv } from "../figma_app/236327";
@@ -68,7 +68,7 @@ export function $$A0({
     },
     ...M
   });
-  let es = useMemo(() => V ? UN().get(V) : null, [V]);
+  let es = useMemo(() => V ? getSingletonSceneGraph().get(V) : null, [V]);
   let er = useCallback(async e => {
     if (ee) try {
       let t = await oy(e, {
@@ -84,7 +84,7 @@ export function $$A0({
       E(t.assetsByName);
       L(t.variablesObjDefinition ?? "");
       O(t.styleInfoByName);
-      let s = e.isInstance ? UN().get(e.symbolId) : e;
+      let s = e.isInstance ? getSingletonSceneGraph().get(e.symbolId) : e;
       if (!ee.ignoreFetchingComponentData && s && (_$$B(e) || e.isStateGroup || e.isInstance)) {
         let e = await gZ(s, {
           serializeAllVariants: !0
@@ -103,7 +103,7 @@ export function $$A0({
   }, [m, J, G, ee, es, z]);
   let en = useCallback(async () => {
     if (!t || !Q) return;
-    let e = UN().get(Q);
+    let e = getSingletonSceneGraph().get(Q);
     e && (await er(e), Y5.triggerAction("commit"));
   }, [t, Q, er]);
   async function ei(e) {
@@ -118,7 +118,7 @@ export function $$A0({
     q(void 0);
     try {
       if (Q) {
-        let s = UN().get(Q);
+        let s = getSingletonSceneGraph().get(Q);
         if (!s) throw Error("Node not found");
         await Go({
           jsxStr: e,
@@ -132,7 +132,7 @@ export function $$A0({
     }
   }
   useEffect(() => {
-    if (B) return UN().onChange(() => {
+    if (B) return getSingletonSceneGraph().onChange(() => {
       en();
     }, {
       allowDeferral: !1

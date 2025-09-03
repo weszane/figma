@@ -17,7 +17,7 @@ import { z8 } from "../figma_app/862289";
 import { nM, NJ } from "../figma_app/570630";
 import { B } from "../905/107177";
 import { hV } from "../figma_app/387100";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { MH, dM, cM } from "../figma_app/803787";
 import { MH as _$$MH } from "../figma_app/141508";
 import { PW } from "../figma_app/633080";
@@ -58,7 +58,7 @@ async function O(e, t, i) {
     let e = debugState.getState();
     let t = Object.values(MH(e));
     let i = Object.values(dM(e)).map(e => e.default_state_key);
-    let n = UN();
+    let n = getSingletonSceneGraph();
     let r = {};
     t.forEach(e => {
       try {
@@ -140,7 +140,7 @@ async function O(e, t, i) {
 }
 async function D(e) {
   let t = function () {
-    let e = UN();
+    let e = getSingletonSceneGraph();
     let t = e.getRoot();
     let i = [];
     hV(t, t => {
@@ -262,7 +262,7 @@ async function z(e) {
   try {
     if (!x) {
       let e = function () {
-        let e = UN();
+        let e = getSingletonSceneGraph();
         let t = debugState.getState();
         let i = [...(CWU?.getSubscribedVariablesInfo() || []), ...(CWU?.getLocalVariablesInfo() || [])];
         let n = {};
@@ -307,7 +307,7 @@ async function z(e) {
       });
       N(y, "create_raw_variables");
       let n = function () {
-        let e = UN();
+        let e = getSingletonSceneGraph();
         let t = debugState.getState();
         let i = cM(t);
         let n = [];

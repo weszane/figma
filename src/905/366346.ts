@@ -1,7 +1,7 @@
 import { Nfd } from "../figma_app/763686";
 import { SceneGraphUnavailableError } from "../figma_app/518682";
 import { fn, sH } from "../905/871411";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { Ay } from "../905/612521";
 import { serializeQuery } from "../905/634134";
@@ -43,7 +43,7 @@ export function $$y10(e, t) {
 }
 export function $$b0(e, t) {
   if (t && fn(sH(t))) try {
-    let i = UN().get(t)?.type;
+    let i = getSingletonSceneGraph().get(t)?.type;
     i && ["CANVAS", "DOCUMENT"].includes(i || "") && (e.p = "f");
   } catch (e) {
     if (!(e instanceof SceneGraphUnavailableError)) throw e;

@@ -1,4 +1,4 @@
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { CK } from "../figma_app/97020";
 export function $$s2(e) {
@@ -11,7 +11,7 @@ export function $$o0(e) {
 }
 export async function $$l1(e) {
   if (!e || !getFeatureFlags().dakota_preview) return await Promise.resolve({});
-  let t = $$s2(UN().get(e));
+  let t = $$s2(getSingletonSceneGraph().get(e));
   return await CK(t);
 }
 export const JZ = $$o0;

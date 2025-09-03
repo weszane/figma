@@ -6,7 +6,7 @@ import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
 import { AWq, juq } from "../figma_app/763686";
-import { qo } from "../905/700578";
+import { ReduxSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { zl, eU, fp } from "../figma_app/27355";
 import { ei, E1 } from "../figma_app/9054";
@@ -113,7 +113,7 @@ export function $$K1(e) {
   }, [n, a, e, o]);
 }
 export function $$Y0(e) {
-  let t = new qo(juq.LIVE_FILE);
+  let t = new ReduxSceneGraph(juq.LIVE_FILE);
   let r = ei(e, !1, t);
   let n = r?.createdAt || null;
   let s = n ? new Date(n).toISOString() : void 0;

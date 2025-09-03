@@ -9,7 +9,7 @@ import { cN } from "../905/409381";
 import { z as _$$z } from "../905/239603";
 import { BR, L3, Bb, L1, r8, QK, gJ, MQ, yL } from "../905/828428";
 import { c8, ZW, _u, hH } from "../905/285398";
-import { o9 } from "../905/845428";
+import { InternalError } from "../905/845428";
 var a = r;
 function d(e) {
   return (t, i, n, r) => {
@@ -846,7 +846,7 @@ let $$eb0 = {
   Line: ep,
   Fragment: ef,
   Span: () => {
-    throw new o9("Span is not valid outside of a Text component");
+    throw new InternalError("Span is not valid outside of a Text component");
   }
 };
 let $$ev1 = {
@@ -862,10 +862,10 @@ export function $$eE2(e, t) {
       if (null == t || !1 === t) return t;
       if (Array.isArray(t)) return t.map(t => e(t, i));
       let n = typeof t;
-      if ("string" == typeof t || "number" == typeof t) throw new o9(`Invalid node child of type "${n}": ${JSON.stringify(t)}`);
+      if ("string" == typeof t || "number" == typeof t) throw new InternalError(`Invalid node child of type "${n}": ${JSON.stringify(t)}`);
       if (!eI(t.type)) {
         let e = ex(t.type, i);
-        if (!e) throw new o9(`${t.type} is not a built in component`);
+        if (!e) throw new InternalError(`${t.type} is not a built in component`);
         return e({
           ...t.props,
           children: t.children

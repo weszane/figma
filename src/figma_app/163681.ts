@@ -30,7 +30,7 @@ import { FP } from "../figma_app/91703";
 import { wr } from "../figma_app/741237";
 import { F_, EL } from "../905/858282";
 import { en as _$$en, aD, wy, eN, zU, nt, l7, d4 as _$$d } from "../figma_app/202626";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { Vr } from "../figma_app/151869";
 import { Z as _$$Z } from "../figma_app/731770";
 import { iF } from "../figma_app/511910";
@@ -293,7 +293,7 @@ function K({
   let v = hasAnyUiKit && !g;
   let x = [hasAnyUiKit].reduce((e, t) => t ? e + 1 : e, 4);
   let N = Vr();
-  let O = () => eN(UN(), "TEXT", N);
+  let O = () => eN(getSingletonSceneGraph(), "TEXT", N);
   let L = (e, r = _$$en.FORWARD) => {
     d(r);
     t(_$$b({

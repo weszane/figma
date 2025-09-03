@@ -1,5 +1,5 @@
 import { Qa7 } from "../figma_app/763686";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { eU, zl } from "../figma_app/27355";
 import { sx } from "../905/449184";
@@ -141,7 +141,7 @@ class N {
             }(n, t, !0, "recursivelyMergeBackgroundFillToTLF");
           }
         }(r, n);
-        let e = UN().get(r.id);
+        let e = getSingletonSceneGraph().get(r.id);
         !e || e.isTopLevelFrame() || e.isState || (r.name = "Frame");
         return {
           rootNode: r,

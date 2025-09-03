@@ -1,6 +1,6 @@
 import { CNR, Ez5 } from "../figma_app/763686";
 import { M } from "../905/512402";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { zl } from "../figma_app/27355";
 import { C } from "../905/407781";
@@ -20,7 +20,7 @@ export class $$h0 extends C {
     return zl.get(v2) || !!zl.get(Ei);
   }
   shouldRenderEmptyCanvasPlaceholder() {
-    return !UN().getRoot().slideThemeId.endsWith("-1:-1");
+    return !getSingletonSceneGraph().getRoot().slideThemeId.endsWith("-1:-1");
   }
   renderEmptyCanvasPlaceholder(e, t) {
     if (!(Ez5 && CNR)) return;

@@ -4,7 +4,7 @@ import { throwTypeError } from "../figma_app/465776";
 import { c2 } from "../905/382883";
 import { lQ } from "../905/934246";
 import { AD } from "../905/871411";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { sx } from "../905/449184";
 import { sn } from "../905/542194";
 import { h as _$$h } from "../905/207101";
@@ -49,7 +49,7 @@ export function $$E0({
   let [N, P] = useState(!1);
   let O = _$$R();
   let D = d4(e => e.versionHistory.activeId);
-  let L = UN();
+  let L = getSingletonSceneGraph();
   let F = zL();
   let M = px(c);
   let j = JG({

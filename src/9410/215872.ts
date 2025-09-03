@@ -2,7 +2,7 @@ import { COMPONENT_PREFIX, getComponentJSXName } from "../figma_app/664063";
 import { id } from "../905/648693";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { XJn, NfO } from "../figma_app/763686";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { debugState } from "../905/407919";
 import { $D } from "../905/11";
 import { getRequest, XHRError, XHR } from "../905/910117";
@@ -88,7 +88,7 @@ async function f(e, t, i) {
     });
     let i = new Uint8Array(t.response);
     let n = NfO.deserializeProductComponentFromBuffer(key, i);
-    let a = UN().get(n);
+    let a = getSingletonSceneGraph().get(n);
     if (!a) throw Error("Deserialized component not found in scene graph");
     return {
       status: "success",

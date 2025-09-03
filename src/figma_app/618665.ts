@@ -1,6 +1,6 @@
 import { assert } from "../figma_app/465776";
 import { Ez5, dBj } from "../figma_app/763686";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { zl, eU } from "../figma_app/27355";
 import { debugState } from "../905/407919";
@@ -50,7 +50,7 @@ let $$x6 = eU(e => e(f), (e, t, r) => {
       mode: e
     });
   }(r.mode), r) {
-    let e = UN().get(r.startingNodeId);
+    let e = getSingletonSceneGraph().get(r.startingNodeId);
     assert(!!e, `Node with id ${r.startingNodeId} not found`);
     let t = lB(e);
     let i = $$if(e) && t ? t : e.name;

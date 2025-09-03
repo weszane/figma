@@ -1,5 +1,5 @@
 import { isNotNullish } from "../figma_app/95419";
-import { Ek } from "../905/553831";
+import { subscribeAndAwaitData } from "../905/553831";
 import { sD } from "../905/937198";
 import { UQe } from "../figma_app/43951";
 import { YR } from "../905/622391";
@@ -20,7 +20,7 @@ export async function $$c0(e) {
     });
     return null;
   }
-  let l = await Ek(UQe, {
+  let l = await subscribeAndAwaitData(UQe, {
     fileKey: t,
     collectionId: i
   });

@@ -3,7 +3,7 @@ import { useMemo } from "react";
 import { wA, d4 } from "../vendor/514228";
 import { sortByWithOptions } from "../figma_app/656233";
 import { xx } from "../figma_app/815945";
-import { Qw } from "../905/989992";
+import { resourceUtils } from "../905/989992";
 import { Rs } from "../figma_app/288654";
 import { P } from "../905/347284";
 import { t as _$$t, tx } from "../905/303541";
@@ -110,7 +110,7 @@ export function $$N0(e) {
     editableResources: []
   }), [r]);
   let j = d4(t => t.teams[e.teamId]);
-  let T = Qw.all([r, o, y]);
+  let T = resourceUtils.all([r, o, y]);
   if ("loaded" !== T.status) return null;
   let [N, C, k] = T.data;
   if (!N) {

@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { assertNotNullish } from "../figma_app/465776";
 import { xOL } from "../figma_app/763686";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import o from "classnames";
 import { hY } from "../figma_app/349969";
 import { is, Ho } from "../figma_app/170018";
@@ -16,7 +16,7 @@ export function $$f1({
   isDeviceFrameShown: i
 }) {
   let n;
-  i && (n = UN().getCurrentPage()?.prototypeDevice);
+  i && (n = getSingletonSceneGraph().getCurrentPage()?.prototypeDevice);
   return jsx($$g0, {
     initialViewerSize: t,
     isDeviceFrameShown: i,

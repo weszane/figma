@@ -1,11 +1,11 @@
-import { debounce } from "../905/915765";
-import { eU, yu, Iz, zl } from "../figma_app/27355";
-import { Qw } from "../905/989992";
-import { lw } from "../905/663269";
-import { A } from "../905/417830";
-import { WB } from "../905/761735";
-import { QEv, cmY, Lom, u6n, bsh, o9k, jXq } from "../figma_app/43951";
-import { Xm } from "../905/723791";
+import { SubscriptionManager } from '../905/417830';
+import { lw } from '../905/663269';
+import { Xm } from '../905/723791';
+import { WB } from '../905/761735';
+import { debounce } from '../905/915765';
+import { resourceUtils } from '../905/989992';
+import { eU, Iz, yu, zl } from '../figma_app/27355';
+import { bsh, cmY, jXq, Lom, o9k, QEv, u6n } from '../figma_app/43951';
 function u(e, t) {
   return lw(e, t);
 }
@@ -13,31 +13,31 @@ function p(e, t) {
   let i = eU(Xm());
   return void 0 === t ? yu(i, ({
     setSelf: t
-  }) => WB().subscribe(e, {}, (e) => {
+  }) => WB().subscribe(e, {}, e => {
     t(e);
   })) : yu(i, ({
     setSelf: i
-  }) => WB().subscribe(e, t, (e) => {
+  }) => WB().subscribe(e, t, e => {
     i(e);
   }));
 }
 function m(e) {
-  return Iz((t) => p(e, t), u);
+  return Iz(t => p(e, t), u);
 }
 let h = (e, t) => e.length === t.length && e.every((e, i) => u(e, t[i]));
 function g(e) {
-  return Iz((t) => function (e, t) {
-    let i = eU(t.map((e) => ({
+  return Iz(t => function (e, t) {
+    let i = eU(t.map(e => ({
       args: e,
-      result: Qw.loading()
+      result: resourceUtils.loading()
     })));
     return yu(i, ({
       setSelf: i
     }) => {
-      let r = new A(WB(), debounce(() => {
-        i(t.map((e) => ({
+      let r = new SubscriptionManager(WB(), debounce(() => {
+        i(t.map(e => ({
           args: e,
-          result: Qw.from(r.currentResult(e))
+          result: resourceUtils.from(r.currentResult(e))
         })));
       }, 100));
       r.update(e, t);
@@ -52,21 +52,21 @@ let $$y8 = m(u6n);
 let $$b1 = g(bsh);
 let $$v5 = g(Lom);
 function I(e, t) {
-  let i = Iz((t) => p(e, t), u);
+  let i = Iz(t => p(e, t), u);
   let n = t(i);
   let a = eU((e, t) => n(e, t));
-  let s = eU((e) => e(a), () => {});
+  let s = eU(e => e(a), () => {});
   s.onMount = () => () => i.removeAll();
   return s;
 }
 export function $$E2(e, t) {
   return new Promise((i, n) => {
     let a = !0;
-    let s = (e) => {
+    let s = e => {
       a = !1;
       i(e);
     };
-    let o = (e) => {
+    let o = e => {
       a = !1;
       n(e);
     };
@@ -78,8 +78,8 @@ export function $$E2(e, t) {
     a && l();
   });
 }
-let $$x0 = (e) => I(o9k, e);
-let $$S7 = (e) => I(jXq, e);
+let $$x0 = e => I(o9k, e);
+let $$S7 = e => I(jXq, e);
 export const BV = $$x0;
 export const Ew = $$b1;
 export const QO = $$E2;

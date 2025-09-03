@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { d4 } from "../vendor/514228";
 import { sortByWithOptions } from "../figma_app/656233";
 import { rXF, glU } from "../figma_app/763686";
-import { Qw } from "../905/989992";
+import { resourceUtils } from "../905/989992";
 import l from "../vendor/239910";
 import { Ez } from "../figma_app/766708";
 import { $ } from "../905/383708";
@@ -87,10 +87,10 @@ export function $$I1(e) {
     libraryKey: $(e)
   } : null, [i, e]);
   let p = Bh(l);
-  let y = useMemo(() => Qw.from(p).transform(e => oz(e, "FILL")), [p]);
+  let y = useMemo(() => resourceUtils.from(p).transform(e => oz(e, "FILL")), [p]);
   return useMemo(() => {
-    if (!i || !t) return Qw.loaded([]);
-    let e = Qw.all([r, a]).transform(([e, t]) => {
+    if (!i || !t) return resourceUtils.loaded([]);
+    let e = resourceUtils.all([r, a]).transform(([e, t]) => {
       let i = d()(t, e => e.node_id);
       return [...e].filter(e => e.resolvedType === rXF.COLOR).sort((e, t) => Ez(e.sortPosition, t.sortPosition)).map(e => ({
         type: "variable",
@@ -106,7 +106,7 @@ export function $$I1(e) {
         style: e
       }));
     });
-    return Qw.all([e, n]).transform(([e, t]) => [...e, ...t]);
+    return resourceUtils.all([e, n]).transform(([e, t]) => [...e, ...t]);
   }, [i, t, r, a, y]);
 }
 export const UV = $$b0;

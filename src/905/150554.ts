@@ -1,6 +1,6 @@
 import { Ed } from "../figma_app/562352";
 import { glU } from "../figma_app/763686";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import s from "../vendor/116389";
 import { x1, Lo } from "../905/714362";
 import { Av } from "../figma_app/646357";
@@ -48,7 +48,7 @@ export async function $$_0(e) {
   if (!glU) return Promise.resolve({
     suggestions: []
   });
-  let s = UN();
+  let s = getSingletonSceneGraph();
   let o = topLevelNode;
   if (o || (o = s.get(targetNode.findContainingFragmentOrSelf()) ?? void 0), !o) return Promise.resolve({
     suggestions: []

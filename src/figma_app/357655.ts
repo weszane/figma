@@ -1,4 +1,4 @@
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { debugState } from "../905/407919";
 import { getInitialOptions } from "../figma_app/169182";
 import { Iv, sO } from "../figma_app/97020";
@@ -22,7 +22,7 @@ export function $$d2(e, t) {
   };
   let a = Iv(e);
   e = sO(e);
-  let l = UN().getCurrentPage();
+  let l = getSingletonSceneGraph().getCurrentPage();
   if (!l) throw Error("No current page. Unable to resolve URL.");
   return {
     id: l.childrenNodes.find(t => t.isResponsiveSet && t.name === e)?.guid,

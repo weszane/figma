@@ -46,7 +46,7 @@ import { j as _$$j } from "../905/834956";
 import { o as _$$o } from "../905/89370";
 import { W as _$$W } from "../905/592530";
 import { l7, nc as _$$nc } from "../905/189185";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { v4 } from "../figma_app/655139";
 import { qM, Fm } from "../figma_app/120227";
 import { Y5 } from "../figma_app/455680";
@@ -1880,10 +1880,10 @@ function tO() {
   let n = !!hA();
   return useCallback((a, i) => {
     l7.user("clear-annotations", () => {
-      let o = UN().get(a);
+      let o = getSingletonSceneGraph().get(a);
       if (!o) return;
       o.removeAnnotation(i);
-      let l = kh(UN(), a);
+      let l = kh(getSingletonSceneGraph(), a);
       e("delete_annotation", {
         nodeId: a,
         nodeType: o.type,
@@ -2291,7 +2291,7 @@ let nA = Ju(function (e) {
   });
   let M = useCallback(() => {
     let e = {
-      id: fO(UN()),
+      id: fO(getSingletonSceneGraph()),
       preset: Bll.NONE,
       custom: {
         label: "",
@@ -2915,7 +2915,7 @@ function n2({
     return useCallback((i, s, r, d) => {
       l7.user(r ? "edit-annotation" : "create-annotation", () => {
         r ? i.updateAnnotation(d, s) : i.addAnnotation(s);
-        let c = kh(UN(), i.guid);
+        let c = kh(getSingletonSceneGraph(), i.guid);
         let u = s.categoryId ? l.find(e => e.id === s.categoryId) : null;
         let p = {
           nodeType: i.type,
@@ -2960,7 +2960,7 @@ function n2({
     let n = !!N && ("" !== N.label || N.properties.length > 0 || null !== T);
     let a = 0 === ("lexical" === j_(k) ? El(k) : At(k)).length;
     if (a && 0 === I.length && null === T) N && y(e, r);else {
-      let i = UN().get(e);
+      let i = getSingletonSceneGraph().get(e);
       i && (v(i, {
         label: a ? "" : k,
         properties: I,
@@ -3080,13 +3080,13 @@ function n5({
     Q();
   }
   let Z = useCallback(t => {
-    let a = UN().get(e);
+    let a = getSingletonSceneGraph().get(e);
     let i = u ? M.find(e => e.id === u) : null;
     let l = i ? uA(i) : null;
     let s = t ? M.find(e => e.id === t) : null;
     let r = s ? uA(s) : null;
     if (a) {
-      let e = kh(UN(), a.guid);
+      let e = kh(getSingletonSceneGraph(), a.guid);
       y("select_annotation_category", {
         nodeId: a.guid,
         nodeType: a.type,
@@ -3135,9 +3135,9 @@ function n5({
   }, [ea]);
   let el = useCallback(t => {
     if (t.stopPropagation(), t.preventDefault(), !isDropdownShown) {
-      let t = UN().get(e);
+      let t = getSingletonSceneGraph().get(e);
       if (t) {
-        let e = kh(UN(), t.guid);
+        let e = kh(getSingletonSceneGraph(), t.guid);
         y("click_annotation_category_picker", {
           nodeId: t.guid,
           nodeType: t.type,

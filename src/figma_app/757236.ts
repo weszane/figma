@@ -5,7 +5,7 @@ import { assertNotNullish, throwTypeError } from "../figma_app/465776";
 import { lQ } from "../905/934246";
 import { c as _$$c } from "../905/752260";
 import { biQ } from "../figma_app/763686";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { tx } from "../905/303541";
 import { Ay } from "../figma_app/432652";
@@ -85,7 +85,7 @@ function k({
     promptHistory,
     addPromptToHistory
   } = _$$a(_$$i, e => e);
-  let I = UN().getCurrentPage()?.directlySelectedNodes;
+  let I = getSingletonSceneGraph().getCurrentPage()?.directlySelectedNodes;
   let [N, C] = useState(zw.UNSPLASH);
   let L = RL(JT.IMAGE_FILL, F1);
   let D = useMemo(() => {

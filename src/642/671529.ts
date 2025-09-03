@@ -52,7 +52,7 @@ import { VF } from "../figma_app/679183";
 import { $n } from "../905/521428";
 import { bL } from "../905/911410";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { AutoLayout } from "../figma_app/947482";
 import { $$ } from "../figma_app/637027";
 import { XE, Uv } from "../figma_app/91703";
@@ -109,7 +109,7 @@ function ef({
   let p = d4(e => e.mirror.selectedStyleProperties);
   let h = d4(e => e.mirror.sceneGraphSelection);
   let m = 1 === Object.keys(h).length ? Object.keys(h)[0] : null;
-  let g = m ? UN().get(m)?.type === "CMS_RICH_TEXT" : null;
+  let g = m ? getSingletonSceneGraph().get(m)?.type === "CMS_RICH_TEXT" : null;
   let f = useRef(!g && Object.keys(h).length > 0);
   let [x, y] = useState(!f.current && void 0);
   let _ = sO();

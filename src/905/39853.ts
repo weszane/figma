@@ -19,7 +19,7 @@ import { MZ } from "../905/470594";
 import { OL, lZ, pl, Yw } from "../905/615657";
 import { Lg, Ij } from "../905/902099";
 import { l7 } from "../905/189185";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { Y5 } from "../figma_app/455680";
 import w from "../vendor/7508";
 import { VS } from "../905/696699";
@@ -86,7 +86,7 @@ class j {
       if ("string" == typeof e[i] && "" === e[i].trim()) return null;
       t.type = "text";
       t.text = e[i];
-    } else if (":@" === i) for (let n in t.attributes = {}, e[i]) t.attributes[n.replace(/^@/, "")] = e[i][n]; else Array.isArray(e[i]) ? (t.name = i, t.elements = this.convertToElementTree(e[i])) : "object" == typeof e[i] && (t.name = i, t.elements = this.convertToElementTree([e[i]]));
+    } else if (":@" === i) for (let n in t.attributes = {}, e[i]) t.attributes[n.replace(/^@/, "")] = e[i][n];else Array.isArray(e[i]) ? (t.name = i, t.elements = this.convertToElementTree(e[i])) : "object" == typeof e[i] && (t.name = i, t.elements = this.convertToElementTree([e[i]]));
     t.elements && 0 === t.elements.length && delete t.elements;
     0 === Object.keys(t.attributes || {}).length && delete t.attributes;
     return t;
@@ -226,7 +226,7 @@ function Q(e, t, i) {
         scaleMode: V(e, [K("blipFill"), "a:tile"]) ? "TILE" : V(e, [K("blipFill"), "a:stretch"]) ? "CROP" : V(e, [K("blipFill"), "a:srcRect"]) ? "FILL" : "FIT",
         opacity: a
       };
-      let i = function(e) {
+      let i = function (e) {
         let t = V(e, [K("blipFill"), "a:srcRect"]);
         if (!t) return null;
         let i = parseFloat(G(t, ["l"]) ?? "0") / 1e3 / 100;
@@ -274,7 +274,7 @@ function ee({
   if (a) return a;
   let s = Q(e, t, i);
   if (s) return s;
-  let o = function(e, t, i) {
+  let o = function (e, t, i) {
     let n = U(e, ["a:gradFill", "a:gsLst"]);
     let r = G(e, ["a:gradFill", "a:path", "path"]);
     let a = [];
@@ -395,7 +395,7 @@ let ec = ({
   relationships: a,
   parentScope: s
 }) => {
-  let o = function(e, t) {
+  let o = function (e, t) {
     let i = t?.size?.x ?? 0;
     let n = t?.size?.y ?? 0;
     if (0 === i || 0 === n) return null;
@@ -422,7 +422,7 @@ let ec = ({
             });
             break;
           case "a:cubicBezTo":
-            let l = function(e) {
+            let l = function (e) {
               let t = [];
               let i = e.elements?.filter(e => "a:pt" === e.name) ?? [];
               if (3 !== i.length) throw Error("Invalid number of points for cubic bezier");
@@ -457,7 +457,7 @@ let ec = ({
     };
   }(U(e, ["p:spPr", "a:custGeom", "a:pathLst"]), t);
   if (!o) return;
-  let l = function({
+  let l = function ({
     node: e,
     relationships: t,
     imageHashes: i,
@@ -611,11 +611,11 @@ let ef = ({
   return p;
 };
 function eA(e) {
-  !function(e, t) {
+  !function (e, t) {
     if (!t.includes(e.name ?? "")) throw Error(`pptx-import - assertElementOneOf expected one of ${t} but got ${e.name}`);
   }(e, ["a:defPPr", "a:pPr", "a:lvl1pPr", "a:lvl2pPr", "a:lvl3pPr", "a:lvl4pPr", "a:lvl5pPr", "a:lvl6pPr", "a:lvl7pPr", "a:lvl8pPr", "a:lvl9pPr"]);
   let t = V(e, ["a:buNone"]);
-  let i = function(e) {
+  let i = function (e) {
     if (!e || !e.name) return 0;
     if (/a:lvl\d+pPr/.test(e.name)) {
       let t = e.name.indexOf("lvl");
@@ -673,18 +673,18 @@ let ev = ({
   metadata: a,
   parentScope: s
 }) => {
-  let o = function(e, t, i) {
+  let o = function (e, t, i) {
     Y(e, "p:sp");
     let n = V(e, ["p:txBody"]);
     return n ? (n.elements ?? []).filter(e => "a:p" === e.name).map(e => ({
-      runs: function(e, t, i) {
+      runs: function (e, t, i) {
         let n;
         Y(e, "a:p");
         let r = (e.elements ?? []).filter(e => "a:r" === e.name);
         let a = V(e, ["a:pPr"]);
         a && (n = ey(a, t, i));
         return r.map(e => {
-          let r = function(e, t, i) {
+          let r = function (e, t, i) {
             let n = {
               fontSize: void 0,
               textAlignHorizontal: void 0,
@@ -716,7 +716,7 @@ let ev = ({
           };
         });
       }(e, t, i),
-      properties: function(e) {
+      properties: function (e) {
         var t;
         let i = V(e, ["a:pPr"]);
         if (!i) return;
@@ -736,7 +736,7 @@ let ev = ({
     text,
     characterStyleOverrides,
     styleOverrideTable
-  } = function(e, t) {
+  } = function (e, t) {
     let i = [];
     let n = [];
     let r = {};
@@ -779,7 +779,7 @@ let ev = ({
   let {
     lineTypes,
     lineIndentations
-  } = function(e, t, i) {
+  } = function (e, t, i) {
     let n;
     e && e.key && i && (n = el(i, e));
     let r = [];
@@ -1047,7 +1047,7 @@ let eC = class e {
     this.relParser = new eS(this.files);
   }
   async parsePPTX(e) {
-    for (let t of function(e) {
+    for (let t of function (e) {
       let t = new (C())();
       t.load(e);
       let i = [];
@@ -1093,7 +1093,7 @@ let eC = class e {
     for (let t of U(i, ["a:themeElements", "a:clrScheme"])) {
       let i = t.name?.slice(2);
       let r = G(t, ["a:srgbClr", "val"]) ?? G(t, ["a:sysClr", "lastClr"]);
-      if (null != i) n.colors[i] = r; else throw Error(`Error parsing color ${i} in ${e}`);
+      if (null != i) n.colors[i] = r;else throw Error(`Error parsing color ${i} in ${e}`);
     }
     return e ? (this.themes.set(e, n), n) : {};
   }
@@ -1370,7 +1370,7 @@ let eC = class e {
   mapNodeTransforms(e, t, i, n, r) {
     let a = ea(e, this.metadata.scalingFactor);
     let s = es(e, this.metadata.scalingFactor);
-    let o = function(e) {
+    let o = function (e) {
       let t = G(e, ["p:spPr", "a:xfrm", "rot"]) ?? G(e, ["p:grpSpPr", "a:xfrm", "rot"]);
       return t ? parseInt(t) / 6e4 * (Math.PI / 180) : 0;
     }(e);
@@ -1383,7 +1383,7 @@ let eC = class e {
     if (!a && !s) return null;
     let d = {};
     if (a && s) {
-      let e = function(e, t, i, n, r) {
+      let e = function (e, t, i, n, r) {
         let a = n ? -1 : 1;
         let s = r ? -1 : 1;
         let [o, l] = t;
@@ -1407,12 +1407,12 @@ let eC = class e {
   mapGrpSp(e, t, i, n, r, a, s, o) {
     let l = [];
     let d = e.elements ?? [];
-    let c = function(e, t) {
+    let c = function (e, t) {
       let i = G(e, ["p:grpSpPr", "a:xfrm", "a:chOff", "x"]);
       let n = G(e, ["p:grpSpPr", "a:xfrm", "a:chOff", "y"]);
       if (i && n) return [N(parseInt(i), t), N(parseInt(n), t)];
     }(e, this.metadata.scalingFactor);
-    let u = function(e, t) {
+    let u = function (e, t) {
       let i = G(e, ["p:grpSpPr", "a:xfrm", "a:chExt", "cx"]);
       let n = G(e, ["p:grpSpPr", "a:xfrm", "a:chExt", "cy"]);
       if (i && n) return [N(parseInt(i), t), N(parseInt(n), t)];
@@ -1420,7 +1420,7 @@ let eC = class e {
     let p = t?.size && u ? [t.size.x / u[0], t.size.y / u[1]] : [1, 1];
     for (let e of d) {
       let t = this.mapNode(e, i, n, r, a, s, o);
-      t && (c && u ? l.push(function(e, t, i = [1, 1]) {
+      t && (c && u ? l.push(function (e, t, i = [1, 1]) {
         if (!e.relativeTransform) return e;
         let [n, r] = t;
         let [a, s] = i;
@@ -1462,10 +1462,10 @@ async function eP(e, t, i) {
         nodeUpdates
       } = n.parseSlideContentXml(e);
       iLo?.insertContentIntoSlide(t, addedNodes, nodeUpdates);
-      (function(e, t, i) {
+      (function (e, t, i) {
         if (e) try {
           let i = _$$F2(e);
-          let n = UN().get(t);
+          let n = getSingletonSceneGraph().get(t);
           n && i && (n.slideSpeakerNotes = i);
         } catch (e) {
           console.error("pptx-import", `Failed to set slide speaker notes for slide #${i}`, {
@@ -1537,10 +1537,10 @@ async function eV(e, t, i, n, a, s, o, l, d) {
       return a;
     }
     if (t.hasCanceled()) throw new OL.Canceled();
-    let f = await function(e, t, i, n, a, s, o) {
+    let f = await function (e, t, i, n, a, s, o) {
       if (e.hasCanceled()) return Promise.reject(new OL.Canceled());
       let l = new lZ.ServiceUnavailable();
-      let d = function(e, t, i, n, r, a) {
+      let d = function (e, t, i, n, r, a) {
         let s = new FormData();
         s.append("manifest", JSON.stringify({
           canvas_count: 1,
@@ -1640,7 +1640,7 @@ async function eG(e, t, i) {
         let o = t[u];
         if (e.hasCanceled()) throw new OL.Canceled();
         let p = "application/octet-stream";
-        if (e.isProbablyPNGFile(o.bytes)) p = "image/png"; else if (e.isProbablyJPEGFile(o.bytes)) p = "image/jpeg"; else if (e.isProbablyGIFFile(o.bytes)) p = "image/gif"; else {
+        if (e.isProbablyPNGFile(o.bytes)) p = "image/png";else if (e.isProbablyJPEGFile(o.bytes)) p = "image/jpeg";else if (e.isProbablyGIFFile(o.bytes)) p = "image/gif";else {
           console.warn("warning: ignoring image with unknown type (" + Array.prototype.slice.call(o.bytes, 0, 10).map(e => (256 | e).toString(16).slice(-2)) + "...)");
           continue;
         }
@@ -1651,7 +1651,7 @@ async function eG(e, t, i) {
             let u = !1;
             c.onloadend = () => {
               let i = pl.indexOf(c);
-              if (i > -1 && pl.slice(i, 1), 4 === c.readyState && 200 === c.status) e(); else if (u) t(new OL.Canceled()); else if (413 === c.status) {
+              if (i > -1 && pl.slice(i, 1), 4 === c.readyState && 200 === c.status) e();else if (u) t(new OL.Canceled());else if (413 === c.status) {
                 a++;
                 e();
               } else if (400 === c.status) {
@@ -1713,10 +1713,10 @@ async function eG(e, t, i) {
 function ez(e) {
   let t = yF([jXp.LOCAL, jXp.GOOGLE, jXp.SHARED]);
   return {
-    getFont: async function(i) {
+    getFont: async function (i) {
       let n = await t;
       for (let t of [n.localFontsList, n.indexFontsList, n.sharedFontsList]) if (void 0 !== t) for (let n of t) {
-        let t = function(e, t) {
+        let t = function (e, t) {
           if (e === t) return !0;
           let i = e.toLowerCase().trim();
           let n = t.toLowerCase().trim();
@@ -1824,7 +1824,7 @@ export async function $$eK0(e, t, i, n, r, a, s, o) {
     if (!file) throw new lZ.UnknownConversionError();
     if (n.hasCanceled()) throw new OL.Canceled();
     let f = await eW(e, t, n, a, o, file, images, videos);
-    ".pptx" === t.extension && function(e, t, i) {
+    ".pptx" === t.extension && function (e, t, i) {
       let n = i.file?.fileKey;
       Vy.toFigment(n, zT.IMPORT, t.blob.size / 1024, e.bytes.length / 1024);
       Vy.reset();
@@ -1841,7 +1841,7 @@ export async function $$eK0(e, t, i, n, r, a, s, o) {
       warnings: f.warnings.concat(warnings)
     };
   } catch (e) {
-    if (".pdf" === t.extension) !function(e, t, i) {
+    if (".pdf" === t.extension) !function (e, t, i) {
       if (e instanceof OL.Canceled) return;
       "string" == typeof e && (e = Error(e));
       let n = e instanceof Yw ? e : new lZ.UnknownConversionError();
@@ -1849,7 +1849,7 @@ export async function $$eK0(e, t, i, n, r, a, s, o) {
         type: "failed",
         error: n
       }, t.entrypoint, t.fileLength, i);
-    }(e, u, s); else if (".pptx" === t.extension && ((c = e) instanceof OL.Canceled || ("string" == typeof c && (c = Error(c)), Vy.toFigment(r.fileKey, zT.IMPORT, r.blob.size / 1024, 0, c), Vy.reset()), !(e instanceof OL.Canceled))) throw new OL.GenericPptxError();
+    }(e, u, s);else if (".pptx" === t.extension && ((c = e) instanceof OL.Canceled || ("string" == typeof c && (c = Error(c)), Vy.toFigment(r.fileKey, zT.IMPORT, r.blob.size / 1024, 0, c), Vy.reset()), !(e instanceof OL.Canceled))) throw new OL.GenericPptxError();
     throw e;
   }
 }
@@ -1866,4 +1866,4 @@ export async function $$eY1(e, t, i, n) {
   return a.file;
 }
 export const W = $$eK0;
-export const _ = $$eY1; 
+export const _ = $$eY1;

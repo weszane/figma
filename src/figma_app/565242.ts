@@ -8,7 +8,7 @@ import { _ as _$$_ } from "../905/144222";
 import { p as _$$p } from "../figma_app/304289";
 import { Egt, Z_n, rXF } from "../figma_app/763686";
 import { l7 } from "../905/189185";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { Xr } from "../figma_app/27355";
 import { tT, oA } from "../905/663269";
 import { Nz } from "../905/417232";
@@ -39,7 +39,7 @@ export function $$R3(e) {
     return useMemo(() => "loaded" !== status ? null : null == collection ? (sD("collection is null", {
       collectionId: e,
       fieldName: t
-    }), null) : collection.fieldSchemas.find((e) => e.name === t) ?? null, [collection, e, t, status]);
+    }), null) : collection.fieldSchemas.find(e => e.name === t) ?? null, [collection, e, t, status]);
   }(e, rU.Slug);
 }
 function L(e, t) {
@@ -50,7 +50,7 @@ function L(e, t) {
   });
   return useMemo(() => {
     if (collection?.fieldSchemas) {
-      let e = collection.fieldSchemas.find((e) => e.name === t);
+      let e = collection.fieldSchemas.find(e => e.name === t);
       return e?.id ?? null;
     }
     return null;
@@ -66,7 +66,7 @@ export function $$k7(e) {
   let t = _$$G({
     collectionStableId: e
   });
-  return t.status === tT.Loaded ? O((oA(t.collection)?.fieldSchemas ?? []).map((e) => ({
+  return t.status === tT.Loaded ? O((oA(t.collection)?.fieldSchemas ?? []).map(e => ({
     ...e,
     action: "noop"
   }))) : [];
@@ -165,7 +165,7 @@ export function $$F0(e) {
           stableId: t,
           databaseId: t
         }];
-      }().map((e) => ({
+      }().map(e => ({
         ...e,
         action: "create"
       })));
@@ -173,8 +173,8 @@ export function $$F0(e) {
     }
     X({
       collectionStableId: t
-    }).then((e) => {
-      e ? e.fieldSchemas && n(O(e.fieldSchemas.map((e) => ({
+    }).then(e => {
+      e ? e.fieldSchemas && n(O(e.fieldSchemas.map(e => ({
         ...e,
         action: "noop"
       })))) : $D(_$$e.CMS, Error("useCollectionFields hook could not get the collection from livegraph"), {
@@ -187,11 +187,11 @@ export function $$F0(e) {
   let c = r.some((e, t) => r.some((r, n) => t !== n && r.name === e.name));
   return {
     collectionFields: r,
-    createField: (e) => {
+    createField: e => {
       let t = r[r.length - 1].position;
-      let i = r.filter((t) => !(t.fieldType === _j.PLAIN_TEXT && [rU.Slug, rU.Title].includes(t.name)) && t.fieldType === e).length;
+      let i = r.filter(t => !(t.fieldType === _j.PLAIN_TEXT && [rU.Slug, rU.Title].includes(t.name)) && t.fieldType === e).length;
       let a = M(e, t || null, i + 1);
-      n((e) => [...e, a]);
+      n(e => [...e, a]);
       s(a.id);
       o(a.id);
     },
@@ -199,7 +199,7 @@ export function $$F0(e) {
       if (e && i && s) {
         let e = s.trim();
         if (e !== o && e.length > 0) {
-          if (!r.find((e) => e.id === i)) {
+          if (!r.find(e => e.id === i)) {
             $D(_$$e.CMS, Error("Renaming field failed: field not found in collection"), {
               extra: {
                 fieldId: i,
@@ -208,9 +208,9 @@ export function $$F0(e) {
             });
             return;
           }
-          let s = r.filter((t) => t.id !== i && (t.name === e || t.name.startsWith(e))).length;
+          let s = r.filter(t => t.id !== i && (t.name === e || t.name.startsWith(e))).length;
           s > 0 && (e = `${e} ${s + 1}`);
-          n(r.map((t) => t.id !== i ? t : "noop" === t.action ? {
+          n(r.map(t => t.id !== i ? t : "noop" === t.action ? {
             ...t,
             name: e,
             action: "update"
@@ -222,9 +222,9 @@ export function $$F0(e) {
       }
     },
     reorderField: (e, t, r) => {
-      n((n) => {
+      n(n => {
         let i;
-        let a = n.findIndex((e) => e.id === t);
+        let a = n.findIndex(e => e.id === t);
         if (-1 === a) return n;
         let s = n[a];
         if (r === Nz.BEFORE) {
@@ -240,16 +240,16 @@ export function $$F0(e) {
             i = kI(s.position, e.position);
           }
         }
-        return O(n.map((t) => t.id === e ? {
+        return O(n.map(t => t.id === e ? {
           ...t,
           position: i ?? t.position,
           action: "create" === t.action ? "create" : "update"
         } : t));
       });
     },
-    deleteField: (e) => {
-      d((t) => [...t, e]);
-      n((t) => t.filter((t) => t.stableId !== e.stableId));
+    deleteField: e => {
+      d(t => [...t, e]);
+      n(t => t.filter(t => t.stableId !== e.stableId));
       s(null);
     },
     submitFieldChanges: () => {
@@ -280,26 +280,26 @@ export function $$F0(e) {
         });
       }
     },
-    canEditField: (e) => {
-      let t = r.find((t) => t.id === e);
+    canEditField: e => {
+      let t = r.find(t => t.id === e);
       return t && !Object.values(rU).includes(t.name);
     },
-    duplicateField: (e) => {
-      let t = r.find((t) => t.id === e);
+    duplicateField: e => {
+      let t = r.find(t => t.id === e);
       let i = r[r.length - 1]?.position;
       if (!t || !i) return;
-      let a = r.filter((e) => e.name === t.name || e.name.startsWith(t.name)).length;
+      let a = r.filter(e => e.name === t.name || e.name.startsWith(t.name)).length;
       let o = M(t.fieldType, i || null, a + 1, {
         name: t.name,
         required: t.required,
         properties: t.properties
       });
-      n((e) => [...e, o]);
+      n(e => [...e, o]);
       s(o.id);
     },
     canSubmit: !c,
     updateFieldProperties: (e, t) => {
-      n((r) => r.map((r) => r.id === e ? {
+      n(r => r.map(r => r.id === e ? {
         ...r,
         properties: {
           ...r.properties,
@@ -326,7 +326,7 @@ export function $$j5(e) {
   }
 }
 export function $$U1(e, t) {
-  let r = UN();
+  let r = getSingletonSceneGraph();
   let n = oj(r.getDirectlySelectedNodes());
   let i = {
     type: "IMAGE",
@@ -351,21 +351,21 @@ export function $$U1(e, t) {
     }
   };
   let a = n[0].fills;
-  let s = a.findIndex((t) => "IMAGE" === t.type && t.imageVar?.value?.cmsAliasValue?.collectionId === e);
+  let s = a.findIndex(t => "IMAGE" === t.type && t.imageVar?.value?.cmsAliasValue?.collectionId === e);
   -1 !== s ? a[s] = i : a.push(i);
   l7.user("dakota-set-image-binding", () => {
     Egt?.clearSelection();
-    Egt?.addToSelection([...new Set((n || []).flatMap((t) => t.getNodesForCmsBinding(e).map((e) => e.guid)))]);
+    Egt?.addToSelection([...new Set((n || []).flatMap(t => t.getNodesForCmsBinding(e).map(e => e.guid)))]);
     Y5.updateSelectionProperties({
       fillPaints: a
     }, {
       shouldCommit: zk.YES
     });
-    Egt?.replaceSelection(n?.map((e) => e.guid) ?? [], !1);
+    Egt?.replaceSelection(n?.map(e => e.guid) ?? [], !1);
   });
 }
 export function $$B2(e, t) {
-  let r = UN();
+  let r = getSingletonSceneGraph();
   let n = oj(r.getDirectlySelectedNodes());
   let i = {
     type: Z_n.CMS_ALIAS,
@@ -378,7 +378,7 @@ export function $$B2(e, t) {
     }
   };
   l7.user("dakota-set-date-binding", () => {
-    for (let t of (n || []).flatMap((t) => t.getNodesForCmsBinding(e).filter((e) => "TEXT" === e.type))) t.updateVariableConsumption("TEXT_DATA", i);
+    for (let t of (n || []).flatMap(t => t.getNodesForCmsBinding(e).filter(e => "TEXT" === e.type))) t.updateVariableConsumption("TEXT_DATA", i);
   });
 }
 export const $h = $$F0;

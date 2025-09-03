@@ -25,7 +25,7 @@ import { zR, r2 } from "../figma_app/80990";
 import { fV } from "../figma_app/236178";
 import { KP } from "../figma_app/12491";
 import { V as _$$V, q as _$$q } from "../figma_app/473391";
-import { Qw } from "../905/989992";
+import { resourceUtils } from "../905/989992";
 import { Rs } from "../figma_app/288654";
 import { RR } from "../figma_app/307841";
 import { _X, Pw, DQ } from "../figma_app/121751";
@@ -122,12 +122,12 @@ function H(e) {
   });
   let p = !!(a && hasActiveEduTeam(r, a));
   let h = MF({
-    oldValue: Qw.loaded(p),
+    oldValue: resourceUtils.loaded(p),
     newValue: c.transform(e => e?.currentUser.inStudentPlan),
     label: A5.CanViewPlayground.hasActiveEduTeam,
     enableFullRead: DQ(Pw.GROUP_7)
   });
-  return useMemo(() => Qw.transformAll([s, h], (s, r) => {
+  return useMemo(() => resourceUtils.transformAll([s, h], (s, r) => {
     if (!l || !a) return !1;
     let n = s.key.type === FUserTypeClassification.ORG_USER;
     if (HZ({

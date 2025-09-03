@@ -1,6 +1,6 @@
 import { isPartOfGroup } from "../figma_app/664063";
 import { XJn } from "../figma_app/763686";
-import { UN, qo } from "../905/700578";
+import { getSingletonSceneGraph, ReduxSceneGraph } from "../905/700578";
 import { zl } from "../figma_app/27355";
 import { xi } from "../905/714362";
 import { fF } from "../905/471229";
@@ -10,7 +10,7 @@ import { kS } from "../figma_app/864723";
 import { As, ze } from "../figma_app/516028";
 export function $$_0(e, t, r, n) {
   if (!e) return [];
-  let i = n ?? UN();
+  let i = n ?? getSingletonSceneGraph();
   let s = i.get(e);
   if (!s) return [];
   let o = s.findAllWithCriteriaGUIDs({
@@ -25,7 +25,7 @@ export function $$_0(e, t, r, n) {
   return l;
 }
 export function $$h9(e) {
-  let t = UN().get(e);
+  let t = getSingletonSceneGraph().get(e);
   return t ? (t.update(), $$_0(t.guid, ["INSTANCE"])) : [];
 }
 export function $$m11(e, t) {
@@ -51,7 +51,7 @@ export function $$T14(e) {
   return $$b10(e.componentGroupPath);
 }
 export function $$I2(e) {
-  let t = new qo(e);
+  let t = new ReduxSceneGraph(e);
   return XJn.getSubscribedVariableCollectionsInScene(t.scene);
 }
 export function $$S12({
@@ -71,7 +71,7 @@ export function $$v7(e) {
   return (e.isStateGroup ? e.sharedStateGroupVersion : e.sharedSymbolVersion) ?? "";
 }
 export function $$A6(e, t) {
-  let r = UN().get(e);
+  let r = getSingletonSceneGraph().get(e);
   if (!r || r.type !== t) throw Error(`Unexpected node type for id=${e}. Expected ${t} got: ${r?.type}`);
   return r;
 }
@@ -90,7 +90,7 @@ export function $$x8(e, t, r, n) {
   return i;
 }
 export function $$N13(e, t) {
-  let r = UN().get(t);
+  let r = getSingletonSceneGraph().get(t);
   return r ? r.getSublayerIdForInstanceOfSymbol(e) : (xi("first-draft", "No component sublayer found for", {
     symbolSublayer: r
   }), null);

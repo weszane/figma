@@ -59,7 +59,7 @@ import { jN } from "../905/612685";
 import { EO, Ml } from "../905/691205";
 import { lD, qI } from "../figma_app/831696";
 import { Hz as _$$Hz } from "../905/366346";
-import { wD, assertNotNullish, mu, $Y, $S, h1 } from "../905/918620";
+import { wD, B1, mu, $Y, $S, h1 } from "../905/918620";
 import { wN as _$$wN, XR, aL as _$$aL, Xh, SV, G2, Ke, Ah, By, py, W2, Em } from "../905/959395";
 import { c as _$$c } from "../905/144429";
 import { X3B, bOM, Qej, Ez5, Egt } from "../figma_app/763686";
@@ -506,7 +506,7 @@ function eM({
     repo: t
   })();
   let o = _$$L();
-  let l = assertNotNullish();
+  let l = B1();
   let d = getFeatureFlags().fpl_textarea_migration;
   let c = useCallback(e => {
     e.target.select();

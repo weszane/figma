@@ -4,7 +4,7 @@ import { l as _$$l } from "../905/716947";
 import { getFeatureFlags } from "../905/601108";
 import { eU, zl, md } from "../figma_app/27355";
 import { unwrap } from "../vendor/812047";
-import { Ek } from "../905/553831";
+import { subscribeAndAwaitData } from "../905/553831";
 import { En } from "../figma_app/566371";
 import { w0 } from "../figma_app/594947";
 import { ZJ } from "../3973/697935";
@@ -65,9 +65,9 @@ export async function $$w1() {
   let r = getFeatureFlags().ds_enable_code_presets_sidecar_table;
   let n = await Promise.all(libraryConfigs.map(async ({
     libraryKey: e
-  }) => r ? await Ek(IUX, {
+  }) => r ? await subscribeAndAwaitData(IUX, {
     libraryKey: e
-  }) : await Ek(Bu2, {
+  }) : await subscribeAndAwaitData(Bu2, {
     libraryKey: e,
     assetType: FComponentType.CODE_COMPONENT
   })));

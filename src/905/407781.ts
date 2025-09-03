@@ -1,7 +1,7 @@
 import { Ez5, qmM, Egt, IPu, glU } from "../figma_app/763686";
 import { M } from "../905/512402";
 import { AD } from "../905/871411";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { zl } from "../figma_app/27355";
 import { PN } from "../figma_app/257275";
 import { BT } from "../905/618447";
@@ -126,7 +126,7 @@ export class $$f0 extends j {
   _renderActiveAddAssetState(e, t, i, r, o, l, d, c) {
     if (Ez5 && (zw(t, l, d, i ? Ez5?.getBgAssistiveTertiary() : this._getDashedPlaceholderBgColor(), i ? Ez5?.getBgFSAssistive() : this._getDashedPlaceholderOutlineColor(), e.row, i, r, c), c && _$$M(o, l, d), $r(o, l, d, i ? 4 : 0, i), i)) {
       let t = Ez5.canvasGrid().getRowGUID(e.row) ?? AD;
-      let o = UN().get(t)?.name || "";
+      let o = getSingletonSceneGraph().get(t)?.name || "";
       let c = IPu?.getBuzzVariantText(t) || "";
       let p = glU?.getStateGroupError(t) || null;
       let m = Ds(l, e.row, i);
@@ -163,7 +163,7 @@ export class $$f0 extends j {
   }
   shouldRenderAsStateGroupRow(e) {
     let t = Ez5?.canvasGrid().getRowGUID(e) ?? AD;
-    return !!UN().get(t)?.isCanvasGridStateGroupRow && this.isStateGroupRowAllowed();
+    return !!getSingletonSceneGraph().get(t)?.isCanvasGridStateGroupRow && this.isStateGroupRowAllowed();
   }
   clearHoveredRowNodeDuringQuickAdd() {
     qmM?.setHoveredCanvasGridRowNodeDuringQuickAdd(AD);

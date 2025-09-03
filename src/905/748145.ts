@@ -16,7 +16,7 @@ import { g as _$$g2 } from "../905/880308";
 import { nw } from "../figma_app/194671";
 import { l7 } from "../905/189185";
 import { rO } from "../figma_app/409807";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { c_ } from "../905/695660";
 import { qN } from "../figma_app/273493";
 import { xv, f3 } from "../905/936278";
@@ -445,7 +445,7 @@ let O = {
     if ("SYMBOL" === e.type || "INSTANCE" === e.type || e.isStateGroup) {
       let t = function (e, t, i) {
         let r = e.symbolId;
-        let a = UN().get(r ?? "");
+        let a = getSingletonSceneGraph().get(r ?? "");
         let s = a?.sourceLibraryKey ?? "";
         a?.type === "SYMBOL" && a?.parentNode?.isStateGroup && (r = a.parentNode.guid, s = a.parentNode.sourceLibraryKey ?? "");
         let o = Egt?.getAssetKey(r ?? "");

@@ -20,7 +20,7 @@ import { K as _$$K2 } from "../figma_app/291291";
 import { yG } from "../905/859698";
 import { RR, Jr } from "../figma_app/338442";
 import { l7 } from "../905/189185";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { WI } from "../905/929949";
 import { getFeatureFlags } from "../905/601108";
 import C from "classnames";
@@ -245,7 +245,7 @@ function eU(e) {
     requestedTypes: void 0,
     variableScope: void 0
   };
-  let Y = useMemo(() => Bq(guids.map(e => glU?.getInstanceSublayersControlledByDirectPropAssignment(e, typedPropDef.explicitDefID, RR.OVERRIDDEN_SYMBOL_ID).map(e => UN().guidFromDeveloperFriendlyId(e))).filter(e => void 0 !== e)), [guids, typedPropDef.explicitDefID]);
+  let Y = useMemo(() => Bq(guids.map(e => glU?.getInstanceSublayersControlledByDirectPropAssignment(e, typedPropDef.explicitDefID, RR.OVERRIDDEN_SYMBOL_ID).map(e => getSingletonSceneGraph().guidFromDeveloperFriendlyId(e))).filter(e => void 0 !== e)), [guids, typedPropDef.explicitDefID]);
   let $ = !!getFeatureFlags().sts_code && !!parameterConfig;
   let X = !hideBindingButton && !!(typedPropDef.type !== J0O.INSTANCE_SWAP && void 0 !== variableType && void 0 !== requestedTypes);
   let J = value && "object" == typeof value && "type" in value && value.type === Z_n.ALIAS;
@@ -936,7 +936,7 @@ function eq({
       defID: ""
     });
   }, [y, c, r, b, u, preferredValues, s, E]);
-  Bq(r.map(e => glU?.getInstanceSublayersControlledByDirectPropAssignment(e, s.explicitDefID, RR.OVERRIDDEN_SYMBOL_ID).map(e => UN().guidFromDeveloperFriendlyId(e))).filter(e => void 0 !== e));
+  Bq(r.map(e => glU?.getInstanceSublayersControlledByDirectPropAssignment(e, s.explicitDefID, RR.OVERRIDDEN_SYMBOL_ID).map(e => getSingletonSceneGraph().guidFromDeveloperFriendlyId(e))).filter(e => void 0 !== e));
   let {
     modalWidth
   } = TQ(Zl.INSTANCE_SWAP_PICKER);

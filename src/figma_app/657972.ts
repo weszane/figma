@@ -1,6 +1,6 @@
 import { debug } from "../figma_app/465776";
 import { Ez5, glU, zMY } from "../figma_app/763686";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { zl, md, fp, Ut } from "../figma_app/27355";
 import { debugState } from "../905/407919";
 import { R } from "../905/165069";
@@ -47,7 +47,7 @@ export function $$x2(e, t, r = !1) {
       o();
       return;
     }
-    let l = UN();
+    let l = getSingletonSceneGraph();
     let c = l.getDirectlySelectedNodes();
     let u = [];
     if (r && c.length) u = l.getDirectlySelectedNodes().filter(e => _$$o(e)).map(e => e.guid);else {

@@ -3,7 +3,7 @@ import { filterNotNullish } from "../figma_app/656233";
 import { throwTypeError } from "../figma_app/465776";
 import { getFeatureFlags } from "../905/601108";
 import { xx } from "../figma_app/815945";
-import { Ek } from "../905/553831";
+import { subscribeAndAwaitData } from "../905/553831";
 import { Wk, oA } from "../905/723791";
 import { t as _$$t } from "../905/303541";
 import { DQ, Pw } from "../figma_app/121751";
@@ -28,7 +28,7 @@ export async function $$x10(e) {
     let n = await M4.fetchFile(e);
     if (!n?.trashed_at || !n?.team_id) return;
     t.push(n);
-    let i = (await Ek(Aqu, {
+    let i = (await subscribeAndAwaitData(Aqu, {
       teamId: n.team_id
     })).team;
     i?.id && (r[i.id] = i);
@@ -51,7 +51,7 @@ export async function $$C19(e) {
       folder_id: e.folderId
     };
     if (n && t.push(n), !e.folderId) return;
-    let i = await Ek(yU5, {
+    let i = await subscribeAndAwaitData(yU5, {
       projectId: e.folderId
     });
     let a = i.project?.team;

@@ -8,7 +8,7 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import { glU, KjJ, m1T, JA, Egt, Ez5 } from "../figma_app/763686";
 import { l7 } from "../905/189185";
 import { GI } from "../figma_app/387100";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { eU as _$$eU, Iz, fp, zl } from "../figma_app/27355";
 import g from "classnames";
@@ -421,7 +421,7 @@ class ez extends o6 {
       });
     };
     this.rangeSelectAnchorNodeId = null;
-    this.getScene = () => this.props.sceneGraph || UN();
+    this.getScene = () => this.props.sceneGraph || getSingletonSceneGraph();
     this.initializeRows = e => {
       let t = this.getScene();
       let s = e.customRowBuilder ? e.customRowBuilder() : Sk({
@@ -1271,7 +1271,7 @@ function eW(e) {
   let j = m0();
   let v = _I();
   let S = _$$E();
-  let k = UN();
+  let k = getSingletonSceneGraph();
   let w = _$$wA((e, t) => {
     let s = e.get(t);
     return s ? {
@@ -1375,7 +1375,7 @@ export function $$e$0(e) {
   });
 }
 function eY(e, t, s) {
-  if (s(e), t) for (let t of e.uiOrderedChildren) eY(UN().get(t), !0, s);
+  if (s(e), t) for (let t of e.uiOrderedChildren) eY(getSingletonSceneGraph().get(t), !0, s);
 }
 ez.displayName = "ObjectsPanelView";
 ez.contextType = $V;

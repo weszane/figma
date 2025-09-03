@@ -6,7 +6,7 @@ import { w as _$$w } from "../905/847865";
 import { glU, X3B } from "../figma_app/763686";
 import { nc } from "../905/189185";
 import { sH, Hr } from "../905/871411";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { zl } from "../figma_app/27355";
 import { sx } from "../905/449184";
 import { d as _$$d } from "../figma_app/429226";
@@ -143,7 +143,7 @@ let P = nc.ai("link-new-interaction", e => {
     });
     return;
   }
-  let i = UN().get(r);
+  let i = getSingletonSceneGraph().get(r);
   if (null == i) {
     sx("prototype_interaction_added", {
       magicLinkGenerated: !0,
@@ -190,7 +190,7 @@ let P = nc.ai("link-new-interaction", e => {
       });
       return;
     }
-    let e = UN().get(s);
+    let e = getSingletonSceneGraph().get(s);
     if (!e) {
       sx("prototype_interaction_added", {
         magicLinkGenerated: !0,

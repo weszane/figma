@@ -1,11 +1,11 @@
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 export let $$n1;
 class a {
   triggerChange() {
-    UN().triggerChange();
+    getSingletonSceneGraph().triggerChange();
   }
   triggerDelete(e) {
-    UN().triggerDeleteCallbacks(e);
+    getSingletonSceneGraph().triggerDeleteCallbacks(e);
   }
 }
 export function $$s0() {

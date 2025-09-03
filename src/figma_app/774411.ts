@@ -1,9 +1,8 @@
-import n from "../905/389786";
 import { QP } from "../vendor/202832";
 import { v4, W1, t1, IT, Fm, vW, B9, bP, Pw, Fg, Hg, km, k$, BM, Eu, gW, Cv, vQ } from "../figma_app/17669";
 import { AD, Zx } from "../figma_app/197743";
 import { mKm } from "../figma_app/763686";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { hN } from "../905/532366";
 import { Lo, QW } from "../figma_app/941074";
 import { O } from "../3383/83383";
@@ -49,7 +48,7 @@ function _(e, t) {
   }
 }
 export function $$h0(e, t, r) {
-  let n = UN().get(e);
+  let n = getSingletonSceneGraph().get(e);
   if (!n) {
     console.warn("applyToNode", "Node not found", {
       guid: e

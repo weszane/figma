@@ -1,6 +1,6 @@
 import { glU } from "../figma_app/763686";
 import { Hq } from "../905/189185";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { i as _$$i } from "../905/970229";
 import { Rw } from "../figma_app/930338";
 import { UD } from "../figma_app/624361";
@@ -13,7 +13,7 @@ export async function $$c0(e, t) {
   let p = _$$i(u) ?? "image/png";
   let m = await UD(u, p, e.name);
   Hq.system("process-image-file", () => {
-    let e = UN();
+    let e = getSingletonSceneGraph();
     let i = e.getInternalCanvas();
     if (!i) return;
     let r = e.createNode("RECTANGLE");

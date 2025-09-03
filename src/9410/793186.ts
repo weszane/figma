@@ -45,7 +45,7 @@ import { Dm } from "../figma_app/8833";
 import { f7 } from "../figma_app/896988";
 import { _X, Z0 } from "../figma_app/62612";
 import { l7 as _$$l2, nc } from "../905/189185";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { U as _$$U } from "../figma_app/901889";
 import { YQ } from "../905/502364";
 import { Kv } from "../figma_app/544649";
@@ -564,7 +564,7 @@ function eg() {
   return o ? d ? (glU?.hideOnCanvasNameEditor(), null) : jsx(Q, {
     name: initMeasurementText,
     setName: e => {
-      let i = UN().get(o.fromNode);
+      let i = getSingletonSceneGraph().get(o.fromNode);
       if (i) {
         if (l && e === initMeasurementText) return;
         _$$l2.user("free-text-annotation-measurement", () => {
@@ -582,7 +582,7 @@ function e_() {
     varWidthIndex
   } = d4(e => e.mirror.appModel.onCanvasNameEditorInfo);
   let i = _$$U();
-  let n = UN().get(varWidthNodeId);
+  let n = getSingletonSceneGraph().get(varWidthNodeId);
   if (!n) return null;
   let s = n.variableWidthPoints;
   let o = n.strokeWeight;

@@ -5,7 +5,7 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import { lyf, kul } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { md } from "../figma_app/27355";
-import { Qw } from "../905/989992";
+import { resourceUtils } from "../905/989992";
 import { Rs } from "../figma_app/288654";
 import { $D } from "../905/11";
 import { Lo } from "../905/714362";
@@ -322,13 +322,13 @@ export function $$C0() {
   }, {
     enabled: _
   });
-  let b = useMemo(() => _ ? Qw.from(y).transform(e => T({
+  let b = useMemo(() => _ ? resourceUtils.from(y).transform(e => T({
     file: e.file,
     isRecovery: s,
     isUserInLimitedSpace: i,
     plan: e.file?.plan,
     planUser: e.file?.currentPlanUser
-  })) : Qw.loaded({
+  })) : resourceUtils.loaded({
     status: "hidden",
     reason: "Not enabled"
   }), [s, i, y, _]);
@@ -398,13 +398,13 @@ export function $$R1(e) {
     enabled: !!i
   });
   let a = TY();
-  return useMemo(() => e ? Qw.from(r).transform(e => T({
+  return useMemo(() => e ? resourceUtils.from(r).transform(e => T({
     file: e.file,
     isRecovery: a,
     isUserInLimitedSpace: t,
     plan: e.file?.plan,
     planUser: e.file?.currentPlanUser
-  })) : Qw.loaded({
+  })) : resourceUtils.loaded({
     status: "hidden",
     reason: "No file"
   }), [e, a, t, r]);

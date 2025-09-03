@@ -2,7 +2,7 @@ import { useState, useRef, useEffect, createElement } from "react";
 import { Tq } from "../figma_app/243058";
 import { xae, Lxv, FDn } from "../figma_app/763686";
 import { l7 } from "../905/189185";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { eU, zl } from "../figma_app/27355";
 import p from "lodash-es/camelCase";
@@ -208,9 +208,9 @@ export let $$eu0 = new class {
     let r = 0;
     let n = 0;
     for (let i of e) {
-      let e = UN().get(i);
+      let e = getSingletonSceneGraph().get(i);
       if (!e) continue;
-      let a = e.isCodeInstance && e.parentGuid && e.parentGuid !== UN().getInternalCanvas()?.guid;
+      let a = e.isCodeInstance && e.parentGuid && e.parentGuid !== getSingletonSceneGraph().getInternalCanvas()?.guid;
       let s = this._dirtyCodeInstanceSnapshots.has(i);
       this._dirtyCodeInstanceSnapshots.add(i);
       let o = this._codeNodeDebounceTimeouts.get(i);
@@ -429,14 +429,14 @@ export let $$eu0 = new class {
         for (let i of n.importedCodeFiles ?? []) switch (i.type) {
           case "RELATIVE_CODE_FILE":
             {
-              let t = function(e, t) {
-                let r = function(e, t) {
+              let t = function (e, t) {
+                let r = function (e, t) {
                   let r = e.codeFilePath;
                   let n = ed(t);
                   return (t.startsWith("../") ? n = `${t.substring(3)}` : t.startsWith("./") && (n = `${t.substring(2)}`), r) ? `/${r}/${n}` : `/${n}`;
                 }(e, t);
                 if (!r) return null;
-                let n = UN().getInternalCanvas()?.childrenNodes.find(e => e.isCodeFile && !e.isSubscribedAsset && iD(ed(e.codeFileFullPathWithoutScheme), r));
+                let n = getSingletonSceneGraph().getInternalCanvas()?.childrenNodes.find(e => e.isCodeFile && !e.isSubscribedAsset && iD(ed(e.codeFileFullPathWithoutScheme), r));
                 return n ? Tq.fromLocalNodeIdStr(n.guid) : null;
               }(e, i.path);
               t && r.push(t);
@@ -467,7 +467,7 @@ export let $$eu0 = new class {
     for (let t of e) this._codeNodeGUIDsWithSourceCodeToSync.add(t);
     this._sourceCodeSyncTimeout || (this._sourceCodeSyncTimeout = setTimeout(() => {
       this._sourceCodeSyncTimeout = null;
-      let e = UN();
+      let e = getSingletonSceneGraph();
       let t = [];
       this._codeNodeGUIDsWithSourceCodeToSync.forEach(r => {
         let n = e.get(r);
@@ -489,7 +489,7 @@ export let $$eu0 = new class {
     return !!zl.get(me);
   }
   getAutomaticCodeFileNameForNodeName(e, t, r = !1) {
-    let n = UN();
+    let n = getSingletonSceneGraph();
     let i = m()(_()(e)) + ".tsx";
     let a = new Set(n.getInternalCanvas()?.findAllWithCriteriaGUIDs({
       types: ["CODE_FILE"]
@@ -518,11 +518,11 @@ export let $$eu0 = new class {
         type: t
       }));
     };
-    if (a) l(M.SOFT_DELETED); else if (t === Lxv.SNAPSHOT_ERROR) l(M.ERROR); else if (t === Lxv.LLM_IN_PROGRESS) {
+    if (a) l(M.SOFT_DELETED);else if (t === Lxv.SNAPSHOT_ERROR) l(M.ERROR);else if (t === Lxv.LLM_IN_PROGRESS) {
       Vm(e, createElement(O, {}));
       this._codeSnapshotOverlays.add(e);
     } else if (t === Lxv.SNAPSHOTTING || t === Lxv.INITIAL) {
-      if (this.isCodeSnapshotStale(t, i)) l(M.STALE); else if (Vm(e, createElement(_$$A, {})), this._codeSnapshotOverlays.add(e), i) {
+      if (this.isCodeSnapshotStale(t, i)) l(M.STALE);else if (Vm(e, createElement(_$$A, {})), this._codeSnapshotOverlays.add(e), i) {
         let t = setTimeout(() => {
           this._staleSnapshotTimers.$$delete(e);
           ks(e);
@@ -554,7 +554,7 @@ export let $$eu0 = new class {
     this.isCodeSnapshotStale(t, r) && this.markCodeNodesDirty(new Set([e]));
   }
   pushAttachmentSourceCode(e, t) {
-    let r = UN();
+    let r = getSingletonSceneGraph();
     let n = t.map(e => {
       let t = r.get(e);
       return t ? {
@@ -593,7 +593,7 @@ export let $$eu0 = new class {
   regenerateDerivedCodeFileDebounced(e) {
     let t;
     let r;
-    let n = UN().getCodeFileNode(e);
+    let n = getSingletonSceneGraph().getCodeFileNode(e);
     if (!n) throw Error("CodeFile not found");
     let i = this._derivedCodeFilesPendingRegeneration.get(e);
     if (i) {
@@ -628,4 +628,4 @@ export let $$eu0 = new class {
     wn();
   }
 }();
-export const u = $$eu0; 
+export const u = $$eu0;

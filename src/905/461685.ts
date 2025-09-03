@@ -1,5 +1,5 @@
 import { eU, md } from "../figma_app/27355";
-import { Qw } from "../905/989992";
+import { resourceUtils } from "../905/989992";
 import { zCd } from "../figma_app/43951";
 import { gq } from "../905/276025";
 let o = eU(e => {
@@ -11,7 +11,7 @@ let o = eU(e => {
       retriable: !1,
       error: Error("No draft folder id")
     };
-    return Qw.error([e]);
+    return resourceUtils.error([e]);
   }
   return e(zCd.Query({
     projectId: t

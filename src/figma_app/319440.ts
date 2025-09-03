@@ -20,7 +20,7 @@ import { T as _$$T } from "../figma_app/962636";
 import { i as _$$i } from "../figma_app/472709";
 import { U as _$$U } from "../905/708285";
 import { l7 } from "../905/189185";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { F as _$$F } from "../905/302958";
 import { c$ } from "../figma_app/618433";
 import { kk, OU } from "../figma_app/986594";
@@ -96,7 +96,7 @@ import { bh, X9, VE } from "../figma_app/730706";
 var p = u;
 let M = "cmsCollectionSubmenu";
 function F() {
-  let e = UN().getDirectlySelectedNodes();
+  let e = getSingletonSceneGraph().getDirectlySelectedNodes();
   let t = kk(e);
   let r = !1;
   let s = htN?.getSelectedNodesToConvertIntoRepeatersGUIDs(ZEs.HAS_IDENTICAL_CHILDREN) ?? [];
@@ -167,7 +167,7 @@ function F() {
   };
 }
 function j() {
-  let e = UN().getDirectlySelectedNodes();
+  let e = getSingletonSceneGraph().getDirectlySelectedNodes();
   let t = kk(e);
   let r = t?.getDakotaSelector()?.collectionId;
   if (t && r) return {
@@ -241,7 +241,7 @@ function ey() {
 }
 function ek() {
   let e = function () {
-    let e = UN().getDirectlySelectedNodes();
+    let e = getSingletonSceneGraph().getDirectlySelectedNodes();
     let t = kk(e);
     let r = Fk(e => e.getDirectlySelectedNodes().every(e => U(e)));
     let a = tS();

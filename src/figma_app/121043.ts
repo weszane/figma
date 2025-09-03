@@ -57,7 +57,7 @@ import { Yh, TY, G as _$$G, pi, IS } from "../figma_app/357047";
 import { x as _$$x } from "../905/749159";
 import { e as _$$e } from "../figma_app/320600";
 import { F2 } from "../905/826900";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { j as _$$j } from "../905/834956";
 import { PH } from "../figma_app/701580";
 import { tO as _$$tO } from "../figma_app/598952";
@@ -94,7 +94,7 @@ function ep(e) {
   let i = wA();
   if (!t || t.length <= 1) return null;
   let s = async e => {
-    await UN().setCurrentPageFromNodeAsync(e.nodeId);
+    await getSingletonSceneGraph().setCurrentPageFromNodeAsync(e.nodeId);
   };
   let o = t.map(e => ({
     displayText: e.name,

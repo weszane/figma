@@ -25,7 +25,7 @@ import { jk } from '../905/609396';
 import { G as _$$G2 } from '../905/630430';
 import { F as _$$F } from '../905/642505';
 import { i as _$$i, P as _$$P } from '../905/647955';
-import { qo, UN } from '../905/700578';
+import { ReduxSceneGraph, getSingletonSceneGraph } from '../905/700578';
 import { G as _$$G3 } from '../905/702115';
 import { u as _$$u, qW, Ss, xY } from '../905/720292';
 import { H1, q1 } from '../905/822030';
@@ -363,7 +363,7 @@ export function $$em3({
 }) {
   let a;
   a = r === HISTORY_DOCUMENT_INDEX ? juq.HISTORY : t ? juq.DETACHED_COMPONENTS : n ? juq.LINTER : _$$G;
-  let s = new qo(a);
+  let s = new ReduxSceneGraph(a);
   let o = s.get(e)?.absoluteRenderBounds || {
     x: 0,
     y: 0,
@@ -474,7 +474,7 @@ export function $$eE2(e) {
   let ev = fp(w1)[1];
   let eA = t$(selectedVersion || null, nodeId) || !!discreteDiffingInput;
   let ex = skipCorrectHistoryCanvasCheck || eA;
-  let eN = useMemo(() => discreteDiffingInput?.sceneGraph ? discreteDiffingInput.sceneGraph : new qo(juq.HISTORY), [discreteDiffingInput?.sceneGraph]);
+  let eN = useMemo(() => discreteDiffingInput?.sceneGraph ? discreteDiffingInput.sceneGraph : new ReduxSceneGraph(juq.HISTORY), [discreteDiffingInput?.sceneGraph]);
   let eC = _$$G2();
   useEffect(() => {
     eh && eh.id !== nodeId && sx('Diff Modal New Layer Selected', {
@@ -623,7 +623,7 @@ export function $$eE2(e) {
     return useMemo(() => {
       if (!frameId || !historyFrameId) return {};
       let e = function (e, t, r, n) {
-        let i = UN();
+        let i = getSingletonSceneGraph();
         let a = el(t, r, !0);
         let s = el(i, e, !0);
         return X$(n, e => {
@@ -733,7 +733,7 @@ export function $$eE2(e) {
       baseAfterBox,
       resultBoxes
     } = function (e, t, r, n, i) {
-      let a = UN();
+      let a = getSingletonSceneGraph();
       let s = el(t, r, !0);
       let o = el(a, e, !0);
       let l = [];
@@ -1294,7 +1294,7 @@ let $$eI4 = Ju(e => {
   let R = tx('inspect_panel.node_type.main_component');
   let L = {
     nodeId: N?.dataComponentId ?? AD,
-    sceneGraph: new qo(N?.dataLocation === 'temp-scene' ? juq.DETACHED_COMPONENTS : _$$G)
+    sceneGraph: new ReduxSceneGraph(N?.dataLocation === 'temp-scene' ? juq.DETACHED_COMPONENTS : _$$G)
   };
   return jsx($$eE2, {
     nodeId,
@@ -1367,7 +1367,7 @@ let $$eS5 = Ju(e => {
   let A = _$$t('collaboration.feedback.compare_changes_modal.header');
   let N = {
     nodeId: basisNodeId,
-    sceneGraph: new qo(_$$G)
+    sceneGraph: new ReduxSceneGraph(_$$G)
   };
   return c.node && p.node ? jsx($$eE2, {
     currentHeader: e_(c.node, c.backingSymbolData),

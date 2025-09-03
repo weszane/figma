@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { UP } from "../figma_app/387100";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { _ } from "../905/793009";
 class o {
   constructor() {
@@ -12,7 +12,7 @@ class o {
     o.instance = void 0;
   }
   trackNodesAsTemplate(e, t, r, n) {
-    let i = UN();
+    let i = getSingletonSceneGraph();
     if (Array.from(t).forEach(e => {
       l(i.get(e)) || t.$$delete(e);
     }), 0 === t.size) return;
@@ -67,7 +67,7 @@ export async function $$d0(e, t, r, n, {
 export function $$c1() {
   useEffect(() => {
     let e = new o();
-    let t = UN().onDelete(t => e.checkForTemplateNodesDeletion(t));
+    let t = getSingletonSceneGraph().onDelete(t => e.checkForTemplateNodesDeletion(t));
     return () => {
       t();
       o.removeInstance();

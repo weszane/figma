@@ -3,7 +3,7 @@ import { wA, d4, Pj } from "../vendor/514228";
 import { glU } from "../figma_app/763686";
 import { AD } from "../905/871411";
 import { dA } from "../figma_app/387100";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { xx } from "../figma_app/815945";
 import u from "../vendor/223926";
@@ -264,7 +264,7 @@ export function $$M2(e) {
       return !n.get(t);
     case "non_slide_anchors":
       if (0 === e.comments.length || !(t = e.comments[0].client_meta?.node_id)) return !0;
-      let i = UN().get(t);
+      let i = getSingletonSceneGraph().get(t);
       if (!i) return !0;
       return i.containingSlideId === AD;
     default:

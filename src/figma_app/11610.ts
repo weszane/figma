@@ -2,7 +2,7 @@ import { debug, assert } from "../figma_app/465776";
 import { xN, qE } from "../figma_app/492908";
 import { mKm } from "../figma_app/763686";
 import { l7 } from "../905/189185";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { X } from "../905/797503";
 export async function $$d1(e, t, r, n) {
   let i = l7.testSetup("sites-compare-layout", () => {
@@ -23,7 +23,7 @@ export async function $$d1(e, t, r, n) {
 export async function $$c3(e, t, r, i = {}) {
   let a;
   await document.fonts.ready;
-  let l = e ? UN().get(e.id) : void 0;
+  let l = e ? getSingletonSceneGraph().get(e.id) : void 0;
   if (!l) throw Error("node not found");
   i = {
     ...i,
@@ -150,7 +150,7 @@ export function $$m6(e, t, r) {
   };
 }
 function g(e) {
-  "INSTANCE" === e.type && (e = UN().get(e.detachInstance()));
+  "INSTANCE" === e.type && (e = getSingletonSceneGraph().get(e.detachInstance()));
   e.childrenNodes?.map(g);
   return e;
 }

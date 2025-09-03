@@ -1,5 +1,5 @@
 import { qmM, Ez5 } from "../figma_app/763686";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { eU, zl, md } from "../figma_app/27355";
 import { az } from "../905/449184";
@@ -35,7 +35,7 @@ export function $$k6() {
   if (!e) throw Error("Session ID is missing when opening a module in Quick Actions V2.");
   return {
     sessionId: e,
-    canvasSelection: UN().getCurrentPage()?.directlySelectedNodes,
+    canvasSelection: getSingletonSceneGraph().getCurrentPage()?.directlySelectedNodes,
     searchQuery: zl.get(Q8)
   };
 }

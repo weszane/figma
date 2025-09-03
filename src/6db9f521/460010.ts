@@ -69,8 +69,8 @@ import { Ay as _$$Ay2 } from "../figma_app/948389";
 import { debugState } from "../905/407919";
 import { zX, Rw } from "../905/576487";
 import { l7 as _$$l3, nc as _$$nc } from "../905/189185";
-import { UN } from "../905/700578";
-import { H as _$$H2 } from "../905/989992";
+import { getSingletonSceneGraph } from "../905/700578";
+import { LOADING_STATUS } from "../905/989992";
 import { oy as _$$oy } from "../figma_app/964367";
 import { k9 as _$$k4 } from "../905/182598";
 import { Q as _$$Q } from "../figma_app/550678";
@@ -999,7 +999,7 @@ async function e7(e, t) {
   try {
     let i;
     let n = (await Hm(e)).localGUID;
-    let r = UN();
+    let r = getSingletonSceneGraph();
     if (!r) return null;
     let l = r.get(n);
     if (!l || 1 !== l.childrenNodes.length) return null;
@@ -1175,7 +1175,7 @@ let tt = async ({
         moduleWithSlideContent: _,
         subscribeToLibrary
       });
-      let b = UN().get(g.guid);
+      let b = getSingletonSceneGraph().get(g.guid);
       b && (_$$l3.system("outline-to-deck-lock-node", () => {
         b.locked = !0;
       }), m.push(b.guid));
@@ -1218,7 +1218,7 @@ let tt = async ({
     eF(t.message);
   } finally {
     for (let e of m) {
-      let t = UN().get(e);
+      let t = getSingletonSceneGraph().get(e);
       t && _$$l3.system("outline-to-deck-unlock-node", () => {
         t.locked = !1;
       });
@@ -1265,7 +1265,7 @@ async function tl({
   abortSignal: r,
   outline: s
 }) {
-  let a = UN().get(e);
+  let a = getSingletonSceneGraph().get(e);
   if (!a) return;
   _$$l3.system("outline-to-deck-write-outline-to-speaker-notes", () => {
     let e = _$$F2(t);
@@ -1314,7 +1314,7 @@ async function tl({
       if (id) {
         let i = (a.get(id) || "") + delta;
         a.set(id, i);
-        let n = UN().get(id);
+        let n = getSingletonSceneGraph().get(id);
         n && _$$l3.system("outline-to-deck-replace-slide-content", () => {
           n.textContent = i;
         });
@@ -2398,9 +2398,9 @@ function ip() {
   } = function () {
     let e = _$$sH();
     let t = NG(e);
-    let i = useMemo(() => t.status === _$$H2.LOADED ? t.data : [], [t]);
+    let i = useMemo(() => t.status === LOADING_STATUS.LOADED ? t.data : [], [t]);
     return {
-      isTemplateLoaded: t.status === _$$H2.LOADED,
+      isTemplateLoaded: t.status === LOADING_STATUS.LOADED,
       modules: i
     };
   }();
@@ -4013,7 +4013,7 @@ function rh({
     className: "xy3p2pi",
     children: jsx($n, {
       onClick: _$$nc.user("slides-ungroup", () => {
-        let t = UN().get(e);
+        let t = getSingletonSceneGraph().get(e);
         t && function (e) {
           let t = S2l?.openIgnoreSelectionUIHidingScope();
           try {
@@ -4212,7 +4212,7 @@ function rB() {
     let i = (Ez5?.canvasGrid()?.canvasGridArray.getCopy() ?? [])[0]?.[0];
     if (t.nodeId && t.nodeId !== e) {
       let n = t.nodeId;
-      let r = UN().get(n);
+      let r = getSingletonSceneGraph().get(n);
       r?.type === "SLIDE" && r?.containingCanvas === e && (i = n);
     }
     i && _$$Lk(i);
@@ -4585,7 +4585,7 @@ function lC({
 }) {
   let n = _$$tS() || "";
   function l(e) {
-    let t = UN().get(e);
+    let t = getSingletonSceneGraph().get(e);
     return t?.slideSpeakerNotes || "";
   }
   return jsxs(lE, {
@@ -4593,7 +4593,7 @@ function lC({
     namespace: "SpeakerNotesEditor",
     initialSpeakerNotesData: l(e),
     onEdit: function (t) {
-      let i = JSON.parse(UN().get(e)?.slideSpeakerNotes || lj);
+      let i = JSON.parse(getSingletonSceneGraph().get(e)?.slideSpeakerNotes || lj);
       rQ()(i, t) || (_$$l3.user("set-slide-speaker-notes", () => {
         _$$lq(e, JSON.stringify(t));
       }), _$$az.trackDefinedEvent("slides.presentation_mode.speaker_notes_inserted", {
@@ -4667,7 +4667,7 @@ function lO() {
 }
 let lF = new Map();
 function lU(e) {
-  let t = UN().get(Ez5?.canvasGrid().gridGUID() || "-1:-1");
+  let t = getSingletonSceneGraph().get(Ez5?.canvasGrid().gridGUID() || "-1:-1");
   t && _$$r2(() => {
     _$$l3.system("slides-autorename", () => {
       t.autoRename = e;
@@ -7039,7 +7039,7 @@ function o1({
   useEffect(() => {
     h(null);
   }, [_]);
-  let g = useMemo(() => Object.keys(_).every(e => UN().get(e)?.isSlideNumber), [_]);
+  let g = useMemo(() => Object.keys(_).every(e => getSingletonSceneGraph().get(e)?.isSlideNumber), [_]);
   return jsx(_$$k7, {
     name: "slides_type_panel",
     children: jsxs(_$$tR, {
@@ -7929,7 +7929,7 @@ function dF() {
   }(i), [i]);
   let a = useCallback(e => {
     _$$l3.user("set_slides_embeddable_prototype_show_device_frame", () => {
-      let i = UN();
+      let i = getSingletonSceneGraph();
       if (!t) return;
       let n = i.get(t);
       n && n.setInteractiveSlideConfigData("deviceFrameShownOverride", e.toString());
@@ -7967,7 +7967,7 @@ function dU({
   let o = useMemo(() => new d$(t), [t]);
   let d = useCallback(t => {
     _$$l3.user("set_slides_embeddable_prototype_starting_point", () => {
-      let i = UN().get(e);
+      let i = getSingletonSceneGraph().get(e);
       i && i.setInteractiveSlideConfigData("activeStartingPointNodeId", t);
     });
   }, [e]);
@@ -8543,19 +8543,19 @@ function cf({
   }(e.get(t)), i);
   let s = useCallback(() => {
     _$$l3.user("reset_slides_interactive_widget_participant_data", () => {
-      let e = UN();
+      let e = getSingletonSceneGraph();
       e.get(i)?.resetInteractiveSlideParticipantData();
     });
   }, [i]);
   let a = useCallback(e => {
     _$$l3.user("set_interactive_widget_theme", () => {
-      let t = UN();
+      let t = getSingletonSceneGraph();
       t.get(i)?.setInteractiveSlideConfigData("theme", e);
     });
   }, [i]);
   let o = useCallback(e => {
     _$$l3.user("set_interactive_widget_hide_background", () => {
-      let t = UN();
+      let t = getSingletonSceneGraph();
       t.get(i)?.setInteractiveSlideConfigData("hideBackground", (!e).toString());
     });
   }, [i]);
@@ -9188,7 +9188,7 @@ function cB() {
     useEffect(() => {
       let [i, n, r] = n3(t);
       Array.from(e).forEach(e => {
-        let l = UN().get(e);
+        let l = getSingletonSceneGraph().get(e);
         if (!l || !l.isSlideNumber) return;
         let s = n8(l.containingSlideId, l.slideNumber, l.slideNumberSeparator || "/", t, i, n, r);
         _$$l3.system("update-slide-numbers", () => {

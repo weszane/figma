@@ -1,11 +1,11 @@
 import { assert } from "../figma_app/465776";
 import { HzA } from "../figma_app/763686";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 let s = null;
 let o = "CompareCloneParent";
 export function $$l0(e) {
   let t = function () {
-    let e = UN();
+    let e = getSingletonSceneGraph();
     let t = null;
     if (null !== s) {
       let i = e.get(s);
@@ -26,7 +26,7 @@ export function $$l0(e) {
   t.appendChild({
     guid: i
   });
-  let l = UN().get(i);
+  let l = getSingletonSceneGraph().get(i);
   assert(null !== l);
   return l;
 }

@@ -16,7 +16,7 @@ import { O as _$$O } from "../905/666679";
 import { o as _$$o } from "../905/89370";
 import { G as _$$G } from "../905/289770";
 import { J as _$$J } from "../905/614223";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { $w } from "../figma_app/935144";
 import { nP } from "../figma_app/484865";
@@ -300,7 +300,7 @@ function H({
         t(null);
         return;
       }
-      let o = UN().get(e);
+      let o = getSingletonSceneGraph().get(e);
       if (!o) {
         t(null);
         return;

@@ -1,6 +1,6 @@
 import { Z6A, DV9, glU } from "../figma_app/763686";
 import { AD } from "../905/871411";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { t as _$$t } from "../905/303541";
 var o = (e => (e.HEART = "heart", e.STAR = "star", e.PLUS_ONE = "+1", e.THUMBS_UP = "thumbs up", e.THUMBS_DOWN = "thumbs down", e.QUESTION = "question", e.PROFILE = "profile", e.DOT = "dot", e.OTHER = "other", e))(o || {});
 let l = {
@@ -189,7 +189,7 @@ let T = (e, t, r) => {
 export function $$I4() {
   if (!glU) return [];
   let e = b(glU.searchForNodesInSelection([Z6A.STICKY]));
-  let t = UN();
+  let t = getSingletonSceneGraph();
   let r = [];
   for (let n of e) {
     let e = n.stickyThreadGuids.flatMap(e => e.split("|"));

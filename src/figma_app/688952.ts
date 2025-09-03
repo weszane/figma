@@ -7,7 +7,7 @@ import { vo, Y9, hE, nB } from "../figma_app/272243";
 import { S as _$$S } from "../905/274480";
 import { J } from "../905/270045";
 import { $n } from "../905/521428";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { zl } from "../figma_app/27355";
 import { FJ } from "../905/508367";
 import { F as _$$F } from "../905/422355";
@@ -32,7 +32,7 @@ export let $$y0 = Ju(function (e) {
       y(!0);
       A(null);
       N(null);
-      let e = UN().getInternalCanvas();
+      let e = getSingletonSceneGraph().getInternalCanvas();
       if (!e) {
         A("No internal canvas found");
         return;
@@ -107,7 +107,7 @@ export let $$y0 = Ju(function (e) {
       S(!0);
       A(null);
       N(null);
-      let e = UN().getInternalCanvas();
+      let e = getSingletonSceneGraph().getInternalCanvas();
       if (!zl.get(ze)) {
         A("No open file key found");
         return;

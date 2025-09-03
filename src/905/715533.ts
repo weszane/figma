@@ -1,5 +1,5 @@
 import { yT } from "../figma_app/492908";
-import { J } from "../905/251556";
+import { serializeJSON } from "../905/251556";
 import { Lg } from "../figma_app/257275";
 export class $$s0 {
   constructor(e) {
@@ -21,7 +21,7 @@ export class $$s0 {
     };
     if (!this.config.shouldHandle(e) || !this.config.darkReadEnabled(s)) return;
     let o = this.config.parseChannelArgs(e);
-    let l = J(o);
+    let l = serializeJSON(o);
     if (this.subscriptionMap.has(l)) return;
     let d = null;
     let c = () => {
@@ -70,7 +70,7 @@ export class $$s0 {
   handleUnsubscription(e) {
     if (!this.config.shouldHandle(e)) return;
     let t = this.config.parseChannelArgs(e);
-    let i = J(t);
+    let i = serializeJSON(t);
     let n = this.subscriptionMap.get(i);
     n && (n(), this.subscriptionMap.$$delete(i));
   }

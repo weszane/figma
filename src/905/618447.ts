@@ -1,7 +1,7 @@
 import { vv } from "../905/508457";
 import { isNotNullish } from "../figma_app/95419";
 import { Ez5 } from "../figma_app/763686";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { eU } from "../figma_app/27355";
 let $$o0 = vv(() => Ez5?.canvasGrid().canvasGridArray, []);
 let l = eU(e => {
@@ -9,7 +9,7 @@ let l = eU(e => {
   let i = [];
   t.forEach((e, t) => {
     e.forEach((e, n) => {
-      let r = UN().get(e);
+      let r = getSingletonSceneGraph().get(e);
       r && i.push({
         id: e,
         coord: {

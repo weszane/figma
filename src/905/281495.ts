@@ -3,7 +3,7 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import { uQ6 } from "../figma_app/763686";
 import { l7 } from "../905/189185";
 import { a as _$$a, v as _$$v } from "../figma_app/163822";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { zl } from "../figma_app/27355";
 import { debugState } from "../905/407919";
 import { M4 } from "../905/609396";
@@ -125,7 +125,7 @@ function P(e, t = !1) {
     if (e.name.match(i)) return !0;
   }
   if ("INSTANCE" === e.type && e.symbolId) {
-    let t = UN().get(e.symbolId);
+    let t = getSingletonSceneGraph().get(e.symbolId);
     if (t && e.name === t.name) return !0;
   }
   return "TEXT" === e.type && !!e.autoRename;
@@ -142,7 +142,7 @@ function L(e) {
       name: i,
       autoRename: n
     }] of e) {
-      let e = UN().get(t);
+      let e = getSingletonSceneGraph().get(t);
       e && (e.name = i, e.autoRename = n);
     }
   });
@@ -166,11 +166,11 @@ export let $$F4 = async ({
   let B = U.openFile?.key;
   let V = source === uQ6.CREATE_COMPONENT;
   let G = $$E6(source);
-  let z = UN().getCurrentPage()?.directlySelectedNodes;
+  let z = getSingletonSceneGraph().getCurrentPage()?.directlySelectedNodes;
   if (customNodeSelection) {
     let e = [];
     customNodeSelection.forEach(t => {
-      let i = UN().get(t);
+      let i = getSingletonSceneGraph().get(t);
       i && e.push(i);
     });
     z = e;
@@ -207,7 +207,7 @@ export let $$F4 = async ({
     };
     a(e);
     return n;
-  }(UN().getCurrentPage(), z);
+  }(getSingletonSceneGraph().getCurrentPage(), z);
   let Z = new Map();
   let X = (await asyncMap(z, async e => {
     let t = function e({
@@ -229,7 +229,7 @@ export let $$F4 = async ({
       let u = t.type;
       let p = !1;
       if (c) u = "IMAGE";else if ("INSTANCE" === t.type && t.symbolId) {
-        let e = UN().get(t.symbolId);
+        let e = getSingletonSceneGraph().get(t.symbolId);
         e && !P(e, n) && (u = e.name, p = !0);
       } else "SYMBOL" === t.type && n && (u = "COMPONENT");
       let m = !d && !p;
@@ -335,7 +335,7 @@ export let $$F4 = async ({
             Y++;
             break;
           }
-          let r = UN().get(t);
+          let r = getSingletonSceneGraph().get(t);
           if (r && $$O5(r, overwriteNames, V) && (!ignoreDescendants || H?.includes(r.guid))) {
             r.parentNode && function e(t, i) {
               "isExpanded" in t && (t.isExpanded || (t.isExpanded = !0, i.add(t.guid)), t.parentNode && e(t.parentNode, i));

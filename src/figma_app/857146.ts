@@ -1,5 +1,5 @@
 import { l7 } from "../905/189185";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { DA } from "../figma_app/191804";
 import { Ne, jF } from "../figma_app/702372";
 function o(e, t) {
@@ -11,7 +11,7 @@ export function $$l2(e, t, r, n) {
   return o(Math.max(0, Math.min(r < n ? i / n * r : (a - i) / (Ne - n) * r + a - Ne * ((22 - i) / (Ne - n)), a)), 2);
 }
 export function $$d7(e, t, r) {
-  let a = UN();
+  let a = getSingletonSceneGraph();
   for (let i in e) {
     let s = a.get(i);
     s && function (e, t, r, i) {
@@ -88,7 +88,7 @@ export function $$p4(e, t, r) {
   return l ? (n = t < r ? (value - l.min) / r * t + l.min : (l.max - value) / (Ne - r) * t + l.max - Ne * ((l.max - value) / (Ne - r)), o(n = Math.max(l.min, Math.min(n, l.max)), 2)) : value;
 }
 export function $$_1(e, t, r) {
-  let a = UN();
+  let a = getSingletonSceneGraph();
   for (let [i, s] of e) {
     let e = a.get(i);
     e && function (e, t, r, i) {

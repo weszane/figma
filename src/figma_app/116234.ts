@@ -3,7 +3,7 @@ import { debug } from "../figma_app/465776";
 import { k } from "../905/749197";
 import { KjJ } from "../figma_app/763686";
 import { F0, rV, PA, nO } from "../figma_app/387100";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { fp } from "../figma_app/27355";
 import { xx } from "../figma_app/815945";
 import { Fj, GY } from "../figma_app/76123";
@@ -342,7 +342,7 @@ export function $$U7() {
   let {
     rowWidthsCache
   } = gz();
-  useEffect(() => UN().onDelete(t => {
+  useEffect(() => getSingletonSceneGraph().onDelete(t => {
     t.forEach(t => {
       delete rowWidthsCache[t];
     });

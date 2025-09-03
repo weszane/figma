@@ -25,7 +25,7 @@ import { useState, useContext, useRef, useMemo, useCallback, useEffect, useLayou
 import { throwTypeError } from "../figma_app/465776";
 import { ServiceCategories as _$$e2 } from "../905/165054";
 import { wm } from "../905/19536";
-import { Qw } from "../905/989992";
+import { resourceUtils } from "../905/989992";
 import G from "../vendor/575087";
 import { sn } from "../905/542194";
 import { y as _$$y2 } from "../figma_app/608914";
@@ -152,7 +152,7 @@ let Q = /__[0-9A-Za-z\-]+$/;
 var ee = (e => (e.Deactivated = "deactivated", e.Unmounted = "unmounted", e.GlobalRequestClose = "global_request_close", e))(ee || {});
 let et = eU(!1);
 function ei(e) {
-  return "hasData" === e.state ? Qw.loaded(e.data) : "hasError" === e.state ? Qw.error(e.error) : Qw.loading();
+  return "hasData" === e.state ? resourceUtils.loaded(e.data) : "hasError" === e.state ? resourceUtils.error(e.error) : resourceUtils.loading();
 }
 function en(e) {
   return "loading" === e.status;
@@ -195,7 +195,7 @@ export function $$es0({
     let n = wm(() => [t, ...e], [e, t]);
     let r = useMemo(() => function (e) {
       let t = e.map(e => "state" in e ? ei(e) : e);
-      return Qw.all(t);
+      return resourceUtils.all(t);
     }(n), [n]);
     !function (e, t) {
       function i(e) {
@@ -583,7 +583,7 @@ export function $$es0({
     uniqueId: a
   }), [eu, ep, v, T, a]);
 }
-let eo = Qw.error([ea]);
+let eo = resourceUtils.error([ea]);
 let el = "curator_deps_loaded";
 function ed(e) {
   let [t, ...i] = e;

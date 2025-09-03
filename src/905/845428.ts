@@ -1,21 +1,52 @@
-export class $$n2 extends Error {
-  constructor(e) {
-    super(typeof e == 'string' ? e : e.message)
-    this.internalError = e
+/**
+ * Represents an internal error with additional context.
+ * (Original: $$n2)
+ */
+export class InternalError extends Error {
+  internalError: unknown;
+
+  /**
+   * @param error The original error or error message.
+   */
+  constructor(error: unknown) {
+    super(typeof error === 'string' ? error : (error as Error).message);
+    this.internalError = error;
   }
 }
-export class $$r0 extends Error {
-  constructor(e) {
-    super(typeof e == 'string' ? e : e.message)
-    this.internalError = e
+
+/**
+ * Represents a request error with additional context.
+ * (Original: $$r0)
+ */
+export class RequestError extends Error {
+  internalError: unknown;
+
+  /**
+   * @param error The original error or error message.
+   */
+  constructor(error: unknown) {
+    super(typeof error === 'string' ? error : (error as Error).message);
+    this.internalError = error;
   }
 }
-export class $$a1 extends Error {
-  constructor(e) {
-    super(typeof e == 'string' ? e : e.message)
-    this.internalError = e
+
+/**
+ * Represents an authentication error with additional context.
+ * (Original: $$a1)
+ */
+export class AuthError extends Error {
+  internalError: unknown;
+
+  /**
+   * @param error The original error or error message.
+   */
+  constructor(error: unknown) {
+    super(typeof error === 'string' ? error : (error as Error).message);
+    this.internalError = error;
   }
 }
-export const $f = $$r0
-export const AR = $$a1
-export const o9 = $$n2
+
+// Export aliases for backward compatibility (Original: $f, AR, o9)
+export const $f = RequestError;
+export const AR = AuthError;
+export const o9 = InternalError;

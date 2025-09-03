@@ -1,10 +1,10 @@
 import { VH } from "../figma_app/178419";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { Vb, wj } from "../905/759470";
 import { Se } from "../905/889062";
 export async function $$o0() {
   try {
-    let e = VH(UN());
+    let e = VH(getSingletonSceneGraph());
     if (!e) return;
     let t = await Se(e.guid, {
       fixedWidth: Vb,

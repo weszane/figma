@@ -3,7 +3,7 @@ import { throwTypeError } from "../figma_app/465776";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { l as _$$l } from "../905/716947";
 import { eU, Xr, zl } from "../figma_app/27355";
-import { Qw } from "../905/989992";
+import { resourceUtils } from "../905/989992";
 import { A as _$$A } from "../vendor/90566";
 import { sx, az } from "../905/449184";
 import { debugState } from "../905/407919";
@@ -85,7 +85,7 @@ export async function $$H1(e, t) {
     currentSearch: {
       queryId: U,
       input: e,
-      result: Qw.loading()
+      result: resourceUtils.loading()
     }
   }));
   try {
@@ -198,7 +198,7 @@ export async function $$H1(e, t) {
       currentSearch: {
         queryId: U,
         input: e,
-        result: Qw.loaded(a)
+        result: resourceUtils.loaded(a)
       }
     }));
     t && t();
@@ -208,7 +208,7 @@ export async function $$H1(e, t) {
       currentSearch: {
         queryId: U,
         input: e,
-        result: Qw.error(t)
+        result: resourceUtils.error(t)
       }
     }));
   }

@@ -3,7 +3,7 @@ import { d4 } from "../vendor/514228";
 import { Ez5 } from "../figma_app/763686";
 import { Y } from "../905/912236";
 import { fn, sH } from "../905/871411";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { k9 } from "../905/19536";
 import { KH } from "../figma_app/722362";
 import { ut } from "../figma_app/84367";
@@ -13,7 +13,7 @@ export function $$_0() {
   return useMemo(() => {
     let t = new Set();
     Object.keys(e).forEach(e => {
-      let r = UN().get(e);
+      let r = getSingletonSceneGraph().get(e);
       let n = r?.containingSlideId;
       n && fn(sH(n)) && t.add(n);
     });
@@ -24,14 +24,14 @@ export function $$_0() {
 export function $$h1() {
   let e = KH();
   return k9(() => {
-    let t = UN();
+    let t = getSingletonSceneGraph();
     return e && t ? Object.keys(e).filter(e => t.get(e)?.isSlideOrTemplate() ?? !1) : [];
   }, [e]);
 }
 export function $$m5() {
   let e = KH();
   return k9(() => {
-    let t = UN();
+    let t = getSingletonSceneGraph();
     let r = new Set();
     Object.keys(e).forEach(e => {
       let n = t.get(e)?.containingSlideId;
@@ -43,7 +43,7 @@ export function $$m5() {
 export function $$g4() {
   let e = KH();
   return k9(() => {
-    let t = UN();
+    let t = getSingletonSceneGraph();
     let r = new Set();
     Object.keys(e).forEach(e => {
       let n = t.get(e);

@@ -1,7 +1,7 @@
 import _require from "../2824/40443";
 import { sj, Ep, _0, s8, n2, pD, k9, NB, Zw, fJ } from "../figma_app/728005";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { zl } from "../figma_app/27355";
 import l from "lodash-es/camelCase";
@@ -139,7 +139,7 @@ export async function $$A0(e, t, l, c, p) {
       if (!t) return null;
       let r = xg(t);
       if (!r) return null;
-      let n = UN().getFromDeveloperFriendlyId(r);
+      let n = getSingletonSceneGraph().getFromDeveloperFriendlyId(r);
       if (!n || !N(n)) return null;
       let i = j[n.guid];
       if (i) {

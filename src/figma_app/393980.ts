@@ -5,7 +5,7 @@ import { wA } from "../vendor/514228";
 import { glU } from "../figma_app/763686";
 import { l7 } from "../905/189185";
 import { dI } from "../905/871411";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { md } from "../figma_app/27355";
 import _ from "classnames";
@@ -205,7 +205,7 @@ function X({
   });
   let G = () => {
     l7.user("set-style-description", () => {
-      let e = UN().get(dI(w));
+      let e = getSingletonSceneGraph().get(dI(w));
       e && (e.description = S);
     });
     sx("Style Description Changed", {

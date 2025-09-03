@@ -9,7 +9,7 @@ import { q as _$$q } from "../905/820062";
 import { f as _$$f } from "../905/54715";
 import { T as _$$T } from "../905/256551";
 import { A as _$$A } from "../905/800065";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { md, fp, Xr, zl } from "../figma_app/27355";
 import { generateRecordingKey } from "../figma_app/878298";
@@ -749,12 +749,12 @@ export function $$ek2({
   let d = useRef(null);
   let c = useCallback(() => {
     e === G4.FIGMAKE ? (sx("Visual search in search bar clicked", {
-      has_selection: UN().getCurrentPage()?.directlySelectedNodes?.length === 1,
+      has_selection: getSingletonSceneGraph().getCurrentPage()?.directlySelectedNodes?.length === 1,
       session_id: zl.get(dd),
       entry_point: e
     }), d.current?.click()) : function (e) {
       sx("Visual search in search bar clicked", {
-        has_selection: UN().getCurrentPage()?.directlySelectedNodes?.length === 1,
+        has_selection: getSingletonSceneGraph().getCurrentPage()?.directlySelectedNodes?.length === 1,
         session_id: zl.get(dd)
       });
       XG({

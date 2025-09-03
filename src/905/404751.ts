@@ -1,7 +1,7 @@
 import { ServiceCategories as _$$e } from "../905/165054";
 import { getFeatureFlags } from "../905/601108";
 import { oA } from "../905/663269";
-import { S8 } from "../905/553831";
+import { subscribeMultipleAndAwaitAll } from "../905/553831";
 import { $D } from "../905/11";
 import { s as _$$s } from "../905/573154";
 import { tx, t as _$$t } from "../905/303541";
@@ -245,10 +245,10 @@ let $$K0 = nF(async (e, t) => {
     T || (T = t);
   }
   if (repos && repos.length > 0) {
-    let t = await S8(sdp, repos.map(e => ({
+    let t = await subscribeMultipleAndAwaitAll(sdp, repos.map(e => ({
       id: e.id
     })));
-    let i = await S8(vnC, repos.map(e => ({
+    let i = await subscribeMultipleAndAwaitAll(vnC, repos.map(e => ({
       id: e.id
     })));
     for (let t = 0; t < repos.length; t++) {
@@ -271,7 +271,7 @@ let $$K0 = nF(async (e, t) => {
     }
   }
   if (files.length > 0) {
-    let t = await S8(n8_, files.map(e => ({
+    let t = await subscribeMultipleAndAwaitAll(n8_, files.map(e => ({
       key: e.key
     })));
     for (let n = 0; n < files.length; n++) {

@@ -105,7 +105,7 @@ import { Z as _$$Z } from "../905/279476";
 import { e as _$$e2 } from "../905/916195";
 import { cd } from "../figma_app/243058";
 import { l7 } from "../905/189185";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { generateRecordingKey } from "../figma_app/878298";
 import td from "classnames";
 import { parsePxInt } from "../figma_app/783094";
@@ -792,7 +792,7 @@ function tF({
   }, [U, x, m]);
   let G = useCallback(async () => {
     wr();
-    await UN().setCurrentPageFromNodeAsync(e.node_id);
+    await getSingletonSceneGraph().setCurrentPageFromNodeAsync(e.node_id);
     Dh([e.node_id]);
     glU.triggerActionInUserEditScope("zoom-to-selection", void 0);
     x(Ce());

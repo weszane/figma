@@ -4,7 +4,7 @@ import { eB } from "../figma_app/178419";
 import { assert } from "../figma_app/465776";
 import { g as _$$g } from "../905/687265";
 import { K$p } from "../figma_app/763686";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { Ay } from "@stylexjs/stylex";
 import { md } from "../figma_app/27355";
 import { B } from "../905/714743";
@@ -260,7 +260,7 @@ export function $$z3({
     error,
     hasBaseline
   } = n;
-  let f = UN().get(e);
+  let f = getSingletonSceneGraph().get(e);
   let y = _$$E2(f);
   let _ = md(yV);
   if (error || !hasBaseline || 0 === changedFiles.length) return null;

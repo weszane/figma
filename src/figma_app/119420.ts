@@ -3,7 +3,7 @@ import { throwTypeError } from "../figma_app/465776";
 import { debounce } from "../905/915765";
 import { FDn, glU, tvY } from "../figma_app/763686";
 import { l7, Hq } from "../905/189185";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { eU, zl, fp } from "../figma_app/27355";
 import { az } from "../905/449184";
 import { debugState } from "../905/407919";
@@ -111,7 +111,7 @@ export function $$M10() {
   return useCallback(r => {
     t(e.filter(e => e.uniqueId !== r.uniqueId));
     $$P7(r) && r.nodeGuid && l7.ai("clean-up-attachments", () => {
-      let e = UN().get(r.nodeGuid);
+      let e = getSingletonSceneGraph().get(r.nodeGuid);
       e && e.removeSelfAndChildren();
       "success" === r.status && "FIGMA_NODE" === r.type && r.codeFiles?.forEach(e => {
         glU?.deleteCodeFile(e.codeFileGuid);
@@ -203,7 +203,7 @@ export function $$U6(e) {
   let b = useCallback(e => {
     r(t.filter(t => !$$D8(t, e.nodeGuid)));
     Hq.system("clean-up-attachments", () => {
-      let t = UN().get(e.nodeGuid);
+      let t = getSingletonSceneGraph().get(e.nodeGuid);
       t && t.removeSelfAndChildren();
       "FIGMA_NODE" === e.type && e.codeFiles?.forEach(e => {
         glU?.deleteCodeFile(e.codeFileGuid);

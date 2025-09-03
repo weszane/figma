@@ -1,6 +1,6 @@
 import { Ez5 } from "../figma_app/763686";
 import { M } from "../905/512402";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { zl } from "../figma_app/27355";
 import { BT } from "../905/618447";
@@ -16,7 +16,7 @@ export class $$u0 extends _$$k {
     if (!e.length) return !0;
     if (1 === e.length) {
       let e = Ez5?.canvasGrid().getRowGUID(0) ?? null;
-      return !UN().get(e)?.isCanvasGridStateGroupRow;
+      return !getSingletonSceneGraph().get(e)?.isCanvasGridStateGroupRow;
     }
     return !1;
   }

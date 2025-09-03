@@ -1,5 +1,5 @@
 import { By } from "../905/816730";
-import { o9 } from "../905/845428";
+import { InternalError } from "../905/845428";
 function a(e, t) {
   let i = {
     ...t
@@ -432,14 +432,14 @@ export function $$ek6(e, t) {
     let n = `usePropertyMenu.args[0][${t}]`;
     eR(e.options, e.selectedOption, t);
     let a = e => e.match("^#(?:[0-9a-fA-F]{3}){1,2}$");
-    if (0 !== i.filter(e => !a(e)).length) throw new o9(`${n}.options do not have valid hexcode strings.`);
+    if (0 !== i.filter(e => !a(e)).length) throw new InternalError(`${n}.options do not have valid hexcode strings.`);
   }(e, t) : "dropdown" === e.itemType && eR(e.options, e.selectedOption, t);
 }
 function eR(e, t, i) {
   let n = `usePropertyMenu.args[0][${i}]`;
   let a = e.map(e => e.option);
-  if (0 === a.length) throw new o9(`${n}.options is empty.`);
-  if (new Set(a).size !== a.length) throw new o9(`${n}.options has duplicate values.`);
+  if (0 === a.length) throw new InternalError(`${n}.options is empty.`);
+  if (new Set(a).size !== a.length) throw new InternalError(`${n}.options has duplicate values.`);
   a.includes(t) || console.warn(`${n}.selectedOption is not included in ${n}.options.`);
 }
 export const BR = $$el0;

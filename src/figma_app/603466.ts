@@ -2,7 +2,7 @@ import { debounce } from "../905/915765";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { iIc, NfO } from "../figma_app/763686";
 import { nM } from "../figma_app/276332";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { $D } from "../905/11";
 import { w } from "../905/83498";
 export let $$n31;
@@ -56,9 +56,9 @@ let v = new class {
     };
     if (!t) return;
     "NONE" === t.nodeType && (t.nodeType = this.publicNodeTypeFromEvent(e));
-    let r = t.events.find((t) => t.type === e.type && t.origin === e.origin);
+    let r = t.events.find(t => t.type === e.type && t.origin === e.origin);
     if (r) for (let t of e.properties) r.properties.add(t);else {
-      let r = UN().get(e.id);
+      let r = getSingletonSceneGraph().get(e.id);
       r && (e.type === iIc.STYLE_PROPERTY_CHANGE || e.type === iIc.STYLE_CREATE || e.type === iIc.STYLE_DELETE ? r.styleKeyForPublish && t.events.push({
         id: e.id,
         origin: e.origin,
@@ -73,21 +73,21 @@ let v = new class {
         origin: e.origin,
         type: e.type,
         properties: new Set(e.properties),
-        devFriendlyId: UN().developerFriendlyIdFromGuid(e.id),
+        devFriendlyId: getSingletonSceneGraph().developerFriendlyIdFromGuid(e.id),
         oldContainingCanvas: e.oldContainingCanvas
       }));
     }
     this.eventByGuid.set(e.id, t);
-    let n = UN().get(e.id);
+    let n = getSingletonSceneGraph().get(e.id);
     if (n) {
       if (n.styleKeyForPublish) {
-        let r = t.events.filter((e) => e.type === iIc.STYLE_DELETE || e.type === iIc.STYLE_CREATE || e.type === iIc.STYLE_PROPERTY_CHANGE);
+        let r = t.events.filter(e => e.type === iIc.STYLE_DELETE || e.type === iIc.STYLE_CREATE || e.type === iIc.STYLE_PROPERTY_CHANGE);
         this.styleEventByGuid.set(e.id, {
           nodeType: this.publicNodeTypeFromEvent(e),
           events: r
         });
       } else {
-        let r = t.events.filter((e) => e.type === iIc.CREATE || e.type === iIc.PROPERTY_CHANGE || e.type === iIc.DELETE).map((e) => {
+        let r = t.events.filter(e => e.type === iIc.CREATE || e.type === iIc.PROPERTY_CHANGE || e.type === iIc.DELETE).map(e => {
           let t = "";
           e.type === iIc.CREATE || e.type === iIc.PROPERTY_CHANGE ? t = n.containingCanvas || "" : e.type === iIc.DELETE && (t = e.oldContainingCanvas?.toString() || "");
           "" === t && $D(_$$e.EXTENSIBILITY, Error("Containing canvas for nodechange event is empty"));
@@ -104,7 +104,7 @@ let v = new class {
     }
   }
   publicNodeTypeFromEvent(e) {
-    let t = UN().get(e.id);
+    let t = getSingletonSceneGraph().get(e.id);
     return t && t?.type !== "NONE" ? w(t) : "NONE";
   }
   injectTypeIntoEvent(e, t) {
@@ -147,12 +147,12 @@ export function $$A55() {
     },
     pluginAccessibleNodeIds() {
       let e = new Set();
-      for (let t of T) t().forEach((t) => e.add(t));
+      for (let t of T) t().forEach(t => e.add(t));
       return Array.from(e);
     },
     pluginAccessiblePages() {
       let e = new Set();
-      for (let t of I) t().forEach((t) => e.add(t));
+      for (let t of I) t().forEach(t => e.add(t));
       return Array.from(e);
     }
   };
@@ -164,25 +164,25 @@ export function $$x12(e) {
   });
 }
 export function $$N53(e) {
-  u = u.filter((t) => t.normal !== e || (t.boxSelection.cancel(), !1));
+  u = u.filter(t => t.normal !== e || (t.boxSelection.cancel(), !1));
 }
 export function $$C27(e) {
   p.push(e);
 }
 export function $$w30(e) {
-  p = p.filter((t) => t !== e);
+  p = p.filter(t => t !== e);
 }
 export function $$O20(e) {
   _.push(e);
 }
 export function $$R47(e) {
-  _ = _.filter((t) => t !== e);
+  _ = _.filter(t => t !== e);
 }
 export function $$L11(e) {
   h.push(e);
 }
 export function $$P22(e) {
-  h = h.filter((t) => t !== e);
+  h = h.filter(t => t !== e);
 }
 export function $$D7(e) {
   for (let t of h) if (!1 === t(e)) return !1;
@@ -192,19 +192,19 @@ export function $$k26(e) {
   b.push(e);
 }
 export function $$M19(e) {
-  b = b.filter((t) => t !== e);
+  b = b.filter(t => t !== e);
 }
 export function $$F16(e) {
   T.push(e);
 }
 export function $$j24(e) {
-  T = T.filter((t) => t !== e);
+  T = T.filter(t => t !== e);
 }
 export function $$U17(e) {
   I.push(e);
 }
 export function $$B42(e) {
-  I = I.filter((t) => t !== e);
+  I = I.filter(t => t !== e);
 }
 function G() {
   m.length || g.length || f.length ? NfO.setIsDocumentChangeCallbackRegistered(!0) : NfO.setIsDocumentChangeCallbackRegistered(!1);
@@ -214,7 +214,7 @@ export function $$V14(e) {
   G();
 }
 export function $$H29(e) {
-  m = m.filter((t) => t !== e);
+  m = m.filter(t => t !== e);
   G();
 }
 export function $$z40(e) {
@@ -222,7 +222,7 @@ export function $$z40(e) {
   G();
 }
 export function $$W37(e) {
-  g = g.filter((t) => t !== e);
+  g = g.filter(t => t !== e);
   G();
 }
 export function $$K1(e) {
@@ -230,21 +230,21 @@ export function $$K1(e) {
   G();
 }
 export function $$Y48(e) {
-  f = f.filter((t) => t !== e);
+  f = f.filter(t => t !== e);
   G();
 }
 export function $$$39(e) {
   E.push(e);
 }
 export function $$X0(e) {
-  E = E.filter((t) => t !== e);
+  E = E.filter(t => t !== e);
 }
 export function $$q28(e) {
   y.push(e);
   G();
 }
 export function $$J44(e) {
-  y = y.filter((t) => t !== e);
+  y = y.filter(t => t !== e);
   G();
 }
 let {
@@ -308,12 +308,12 @@ export function $$eP49(e) {
 }
 function eD() {
   let e;
-  let t = new Promise((t) => {
+  let t = new Promise(t => {
     e = t;
   });
   let r = null;
   let n = () => {
-    t = new Promise((t) => {
+    t = new Promise(t => {
       e = t;
     });
     r = null;
@@ -323,18 +323,18 @@ function eD() {
     return await r(...e);
   };
   return {
-    set: (t) => {
+    set: t => {
       r = t;
       e(t);
     },
-    remove: (e) => {
+    remove: e => {
       e === r && n();
     },
     has: () => !!r,
     run: i,
     runOrTimeout: async (e, ...t) => {
       let r = !1;
-      let n = new Promise((t) => {
+      let n = new Promise(t => {
         setTimeout(() => {
           r = !0;
           t();

@@ -3,7 +3,7 @@ import { QjO } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { Iz, eU, md } from "../figma_app/27355";
 import { wm } from "../905/19536";
-import { Qw } from "../905/989992";
+import { resourceUtils } from "../905/989992";
 import { ResourceStatus } from "../905/957591";
 import { Lo } from "../905/714362";
 import { tS } from "../figma_app/516028";
@@ -34,8 +34,8 @@ export function $$b1(e, t) {
   let r = E(e);
   let n = md(r);
   return wm(() => {
-    let e = Qw.all(Object.values(n));
-    return "loaded" !== e.status ? e.transform(() => ({})) : Qw.loaded(Object.fromEntries(Object.entries(n).map(([e, r]) => [e, function (e, t = y) {
+    let e = resourceUtils.all(Object.values(n));
+    return "loaded" !== e.status ? e.transform(() => ({})) : resourceUtils.loaded(Object.fromEntries(Object.entries(n).map(([e, r]) => [e, function (e, t = y) {
       if (e?.status !== "loaded") {
         Lo("Modules", `Library atom value status not loaded: ${e?.status}`);
         return [];
@@ -83,7 +83,7 @@ export function $$T2() {
       type: "team",
       file: r
     })), t) : [];
-  }(null != r ? Qw.from(r) : void 0), [r]);
+  }(null != r ? resourceUtils.from(r) : void 0), [r]);
 }
 export function $$I0(e) {
   if (!getFeatureFlags().dse_module_publish) return !1;

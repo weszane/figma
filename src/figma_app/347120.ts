@@ -3,7 +3,7 @@ import { XJn } from "../figma_app/763686";
 import { l7 } from "../905/189185";
 import { r as _$$r } from "../905/249071";
 import { M } from "../905/512402";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { C } from "../figma_app/193952";
 import { Y5 } from "../figma_app/455680";
 import { vh } from "../905/296461";
@@ -12,7 +12,7 @@ let $$_1 = 20;
 export function $$h4(e, t = !1) {
   let r = e[0];
   if (!r || "FRAME" !== r.type || r.isInstanceSublayer) return;
-  let n = UN();
+  let n = getSingletonSceneGraph();
   if (t) {
     let t = E("icons");
     for (let r of e) $$y2(r, t);
@@ -74,12 +74,12 @@ function E(e) {
         throwTypeError(e);
     }
   }(e);
-  let r = UN().getCurrentPage()?.childrenNodes.find(e => "SECTION" === e.type && e.name === t);
+  let r = getSingletonSceneGraph().getCurrentPage()?.childrenNodes.find(e => "SECTION" === e.type && e.name === t);
   if (r) return r;
   {
-    let e = $$b3(UN().getCurrentPage());
+    let e = $$b3(getSingletonSceneGraph().getCurrentPage());
     return l7.user("create-section", () => {
-      let r = UN().createNode("SECTION");
+      let r = getSingletonSceneGraph().createNode("SECTION");
       r.name = t;
       r.relativeTransform = {
         ...r.relativeTransform,
@@ -92,7 +92,7 @@ function E(e) {
 }
 export function $$y2(e, t) {
   let r = XJn.findIcons(e.guid);
-  let n = UN();
+  let n = getSingletonSceneGraph();
   let a = r.map(e => n.get(e));
   let s = {
     x: $$b3(t).right() + $$p0,

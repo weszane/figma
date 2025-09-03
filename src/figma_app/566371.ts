@@ -1,7 +1,7 @@
 import { useMemo, useLayoutEffect, useEffect, useRef } from "react";
 import { fp, eU, md, zl } from "../figma_app/27355";
 import { wm } from "../905/19536";
-import { Qw } from "../905/989992";
+import { resourceUtils } from "../905/989992";
 import { WE } from "../905/607410";
 import { bu } from "../905/663269";
 import { k } from "../905/745286";
@@ -14,7 +14,7 @@ export function $$_2(e, t = {}) {
     let a;
     let o = k(t) ? e : h;
     [r, a] = fp(o);
-    k(t) || (r = Qw.Paginated.disabled(), a = void 0);
+    k(t) || (r = resourceUtils.Paginated.disabled(), a = void 0);
     let l = useMemo(() => GC(a), [a]);
     return useMemo(() => [r, l], [r, l]);
   }(e, t) : Kh(e) ? function (e, t) {
@@ -22,7 +22,7 @@ export function $$_2(e, t = {}) {
     let a;
     let o = k(t) ? e : h;
     [r, a] = fp(o);
-    k(t) || (r = Qw.disabledSuspendable({
+    k(t) || (r = resourceUtils.disabledSuspendable({
       release: () => {}
     }), a = void 0);
     let l = useMemo(() => ff(a), [a]);
@@ -34,14 +34,14 @@ export function $$_2(e, t = {}) {
 }
 let h = eU([null, null]);
 function m(e, t) {
-  return k(t) ? [md(e), void 0] : (md(h), [Qw.disabledSuspendable({
+  return k(t) ? [md(e), void 0] : (md(h), [resourceUtils.disabledSuspendable({
     release: () => {}
   }), void 0]);
 }
 export function $$g1(e, t = {}) {
   let r = k(t);
   let o = wm(() => e, [e]);
-  let l = useMemo(() => r ? eU(e => o.map(t => e(t))) : eU(() => o.map(() => Qw.disabled())), [o, r]);
+  let l = useMemo(() => r ? eU(e => o.map(t => e(t))) : eU(() => o.map(() => resourceUtils.disabled())), [o, r]);
   useEffect(() => {
     let e = zl.sub(l, () => {});
     return () => {

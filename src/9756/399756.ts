@@ -4,7 +4,7 @@ import { useState, useRef, useCallback } from "react";
 import { wA } from "../vendor/514228";
 import { S as _$$S, V } from "../905/802325";
 import { zk, l7 } from "../905/189185";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { j as _$$j } from "../figma_app/602140";
 import { Uz, xH } from "../905/63728";
@@ -131,7 +131,7 @@ export function $$y0() {
         abortController: new AbortController()
       });
       d({
-        node: UN().getRoot(),
+        node: getSingletonSceneGraph().getRoot(),
         jsx: r.jsx,
         clientLifecycleId: l,
         nodeHandlerManager: t,

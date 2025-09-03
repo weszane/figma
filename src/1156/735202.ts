@@ -1,5 +1,5 @@
 import { glU } from "../figma_app/763686";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { lV, Li, Us, VH } from "../figma_app/617606";
 import { RM, Hg, o9, mJ, F$ } from "../figma_app/304955";
 import { Hq } from "../905/189185";
@@ -44,7 +44,7 @@ export function $$u0(e, t, n, u, x, m, h) {
   }
   if (x === lV.FIGMAKE) {
     h.regenerateAttributions(_);
-    let e = UN();
+    let e = getSingletonSceneGraph();
     let t = VH(e);
     J(t);
   }

@@ -10,7 +10,7 @@ import { l7 } from "../905/189185";
 import { VC } from "../905/426868";
 import { AD } from "../905/871411";
 import { l as _$$l } from "../905/716947";
-import { UN, qo } from "../905/700578";
+import { getSingletonSceneGraph, ReduxSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { zl, eU as _$$eU, Xr } from "../figma_app/27355";
 import E from "../vendor/223926";
@@ -219,7 +219,7 @@ function eK(e) {
     icon: zX.SPINNER,
     delay: 1e3
   }));
-  return function() {
+  return function () {
     e(_$$F.dequeue({
       matchType: "insert_instance"
     }));
@@ -244,7 +244,7 @@ let $$e$8 = nF((e, t) => {
     selectAfterInsert,
     sourceForTracking
   } = t;
-  let T = t.insertAsChildOfCanvas ? UN().getCurrentPage()?.guid : t.insertAsChildOfGuid;
+  let T = t.insertAsChildOfCanvas ? getSingletonSceneGraph().getCurrentPage()?.guid : t.insertAsChildOfGuid;
   let I = e.getState();
   let S = zl.get(TG).has(item.library_key);
   let v = async () => {
@@ -278,7 +278,7 @@ let $$e$8 = nF((e, t) => {
         });
       }
       if (insertionCallback?.([s], canvasPosition, isClick), qr(e.dispatch), s !== AD) {
-        let r = C$(UN().get(t));
+        let r = C$(getSingletonSceneGraph().get(t));
         let n = I.mirror.sceneGraph.get(s);
         let i = Object.keys(n && "INSTANCE" === n.type && n.componentProperties() || {}).length > 0;
         r && i ? (e.dispatch(_$$E({
@@ -407,7 +407,7 @@ let $$eq32 = nF(async (e, t) => {
     isClick,
     sourceForTracking
   } = t;
-  let T = t.insertAsChildOfCanvas ? UN().getCurrentPage()?.guid : t.insertAsChildOfGuid;
+  let T = t.insertAsChildOfCanvas ? getSingletonSceneGraph().getCurrentPage()?.guid : t.insertAsChildOfGuid;
   let I = e.getState();
   let S = zl.get(TG).has(item.library_key);
   let v = async () => {
@@ -572,15 +572,15 @@ let $$eJ4 = nF(async (e, t) => {
     b(item.node_id, insertLogArgsOverride);
     e.dispatch(tX());
   } else {
-    let t = () => { };
-    shouldShowVisualBell && (t = function(e) {
+    let t = () => {};
+    shouldShowVisualBell && (t = function (e) {
       e(_$$F.enqueue({
         type: "insert_template",
         message: _$$t2("design_systems.subscriptions.inserting_template"),
         icon: zX.SPINNER,
         delay: 1e3
       }));
-      return function() {
+      return function () {
         e(_$$F.dequeue({
           matchType: "insert_template"
         }));
@@ -664,7 +664,7 @@ let $$eQ39 = nF(async (e, t) => {
     Y5.triggerAction("set-tool-default");
     return s;
   };
-  if ("LIBRARY" !== item.subscriptionStatus) m(item.assetId, insertLogArgsOverride); else try {
+  if ("LIBRARY" !== item.subscriptionStatus) m(item.assetId, insertLogArgsOverride);else try {
     let e = await _$$e3(item);
     m(e, insertLogArgsOverride);
   } catch (t) {
@@ -864,7 +864,7 @@ let $$e841 = nF((e, t) => {
         let s = !1;
         if ("TEXT" === style.style_type && a && a.localGUID) {
           let t;
-          let r = (t = targetUpsertScene === ZiZ.LINTER_SCENE ? new qo(juq.LINTER).get(a.localGUID) : e.getState().mirror.sceneGraph.get(a.localGUID)) && t.fontName;
+          let r = (t = targetUpsertScene === ZiZ.LINTER_SCENE ? new ReduxSceneGraph(juq.LINTER).get(a.localGUID) : e.getState().mirror.sceneGraph.get(a.localGUID)) && t.fontName;
           r && (await VC(r.family, r.style).catch(() => {
             console.error(`Text style font did not load: ${r.family} ${r.style}`);
             s = !0;
@@ -973,7 +973,7 @@ let $$te35 = nF((e, t) => {
     let i = t[r];
     if (i) l7.user("update-shared-library-asset", () => {
       BXd.updateSharedLibraryAsset(Hk(e.type), e.assetId, e.sourceLibraryKey, i, updateStartTime);
-    }); else throw Error("Missing buffer in updateSharedLibraryAssets");
+    });else throw Error("Missing buffer in updateSharedLibraryAssets");
   })).then(() => {
     Y5.triggerAction("commit");
   }).catch(t => {
@@ -994,7 +994,7 @@ let $$tt53 = nF((e, t) => {
       l7.system("auto-update-shared-library-asset", () => {
         BXd.updateSharedLibraryAsset(Hk(t.type), t.assetId, t.sourceLibraryKey, i, updateStartTime);
       });
-    }); else throw Error("Missing buffer in autoUpdateSharedLibraryAssets");
+    });else throw Error("Missing buffer in autoUpdateSharedLibraryAssets");
   }, {
     batchSize: 5
   })).catch(e => {
@@ -1362,7 +1362,7 @@ let tC = async (e, t) => {
     orgId: t,
     fv: Ob
   });
-  let n = function(e) {
+  let n = function (e) {
     return `LIBRARY${e ? "_" + e : ""}'_STATS'`;
   }(t);
   _$$N(r, {
@@ -1505,7 +1505,7 @@ function tD(e, t, r) {
 export function $$tk34(e, t, r) {
   tD(e, t?.map(tF), r?.map(tF));
 }
-let $$tM9 = function(e) {
+let $$tM9 = function (e) {
   let t = Pj();
   let r = Rs(u2o, {
     fileKey: e
@@ -1523,7 +1523,7 @@ let $$tM9 = function(e) {
 let tF = e => ({
   ...e
 });
-let $$tj42 = function() {
+let $$tj42 = function () {
   let e = Pj();
   let t = n1();
   let r = LH();
@@ -1581,7 +1581,7 @@ let $$tU26 = nF(async e => {
   let n = Promise.resolve(null);
   try {
     await Promise.all([t, n, r]);
-  } catch (e) { }
+  } catch (e) {}
 });
 export async function $$tB15(e) {
   if (!e) return 0;
@@ -1589,7 +1589,7 @@ export async function $$tB15(e) {
     return (await PT.getNumTeams({
       orgId: e
     })).data.meta.num_teams;
-  } catch (e) { }
+  } catch (e) {}
   return 0;
 }
 let $$tG17 = NC("ADD_ASSET_TO_RECENTS");
@@ -1747,4 +1747,4 @@ export const x = $$t$51;
 export const xZ = $$tA52;
 export const yA = $$tt53;
 export const yy = $$eZ54;
-export const zn = $$tI55; 
+export const zn = $$tI55;

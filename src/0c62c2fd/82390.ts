@@ -260,7 +260,6 @@ import { Y as _$$Y7 } from '../905/830372';
 import { O as _$$O2 } from '../905/833838';
 import { u as _$$u0 } from '../905/834238';
 import { $ as _$$$3 } from '../905/834575';
-import { noop } from '../905/834956';
 import { Cy } from '../905/844322';
 import { dq as _$$dq, sZ as _$$sZ } from '../905/845253';
 import { BK, Um } from '../905/848862';
@@ -306,7 +305,7 @@ import { i as _$$i3 } from '../905/977961';
 import { E as _$$E } from '../905/984674';
 import { b as _$$b } from '../905/985254';
 import { h1 as _$$h6 } from '../905/986103';
-import { Qw } from '../905/989992';
+import { resourceUtils } from '../905/989992';
 import { p as _$$p3 } from '../905/991924';
 import { h as _$$h8 } from '../905/994594';
 import { a as _$$a7 } from '../905/999566';
@@ -3712,7 +3711,7 @@ function sj() {
       } : null));
       return t.currentTeamId ? r.transform(({
         team: r
-      }) => _$$hF(t, e, r)) : Qw.loaded(_$$hF(t, e, null));
+      }) => _$$hF(t, e, r)) : resourceUtils.loaded(_$$hF(t, e, null));
     }();
     let r = _$$j2(e);
     return t.transform(e => e === _$$VY.NONE || r ? null : {
@@ -4652,7 +4651,7 @@ function iD({
     isLoading: !0
   });
 }
-let iM = _$$eU(() => Qw.loaded([]));
+let iM = _$$eU(() => resourceUtils.loaded([]));
 function iB({
   workspaceId: e,
   onlyJoinedTeams: t
@@ -5861,7 +5860,7 @@ let n2 = Ju(({
     searchQuery: e,
     workspaceId: t
   }) {
-    let r = Qw.useTransformShallowEqual(Rs(z07, {}), e => {
+    let r = resourceUtils.useTransformShallowEqual(Rs(z07, {}), e => {
       if (!e.currentUser.recentFiles2) return [];
       let t = [];
       for (let {
@@ -5884,7 +5883,7 @@ let n2 = Ju(({
       }, {
         enabled: !!e
       });
-      return Qw.useTransformShallowEqual(a, e => {
+      return resourceUtils.useTransformShallowEqual(a, e => {
         let t = [];
         for (let r of e.searchWorkspaceFiles) r.file && t.push(r.file);
         return t;
@@ -5899,7 +5898,7 @@ let n2 = Ju(({
     searchQuery: c,
     workspaceId: e
   });
-  let g = Qw.useTransformShallowEqual(f, e => e.map(e => e.key));
+  let g = resourceUtils.useTransformShallowEqual(f, e => e.map(e => e.key));
   let h = H6(g.unwrapOr([]));
   let x = useCallback(e => {
     t(ES(n2));
@@ -6121,7 +6120,7 @@ function oo({
 }) {
   let t;
   let r = function (e) {
-    let t = Qw.useTransform(Rs(m28, {}), e => {
+    let t = resourceUtils.useTransform(Rs(m28, {}), e => {
       if (!e.currentUser.recentFiles2) return [];
       let t = [];
       for (let {
@@ -11780,7 +11779,7 @@ function me({
   }) => !!e?.canEdit), [P]);
   let D = MF({
     label: A5.TilesView.canEditTeam,
-    oldValue: Qw.useMemoizedLoaded(canEditTeam(T?.team_id || O?.id || '', A)),
+    oldValue: resourceUtils.useMemoizedLoaded(canEditTeam(T?.team_id || O?.id || '', A)),
     newValue: L,
     enableFullRead: DQ(Pw.GROUP_7),
     contextArgs: {
@@ -13174,12 +13173,12 @@ function m3(e, t, r) {
   let n = _$$px();
   let o = j_(n);
   let l = Kd(n);
-  let d = useMemo(() => Qw.transformAll([o, l], (e, t) => ({
+  let d = useMemo(() => resourceUtils.transformAll([o, l], (e, t) => ({
     canAdmin: e,
     canMember: t
   })), [o, l]);
   let c = MF({
-    oldValue: Qw.useMemoizedLoaded(i),
+    oldValue: resourceUtils.useMemoizedLoaded(i),
     newValue: d,
     label: r,
     enableFullRead: DQ(Pw.GROUP_7),
@@ -13249,12 +13248,12 @@ function m9(e, t, r, i, n, l) {
     hasEditRoleOnTeam: !!r && hasMinRole(getRolesForUserAndTeam(r, i), _$$e16.EDITOR)
   }), [r, i]);
   let c = MF({
-    oldValue: Qw.useMemoizedLoaded(d),
+    oldValue: resourceUtils.useMemoizedLoaded(d),
     newValue: function (e) {
       let t = Rs(yQw(_$$_X(Pw.GROUP_7) && e ? {
         teamId: e
       } : null));
-      return useMemo(() => t.status === 'disabled' ? Qw.loaded({
+      return useMemo(() => t.status === 'disabled' ? resourceUtils.loaded({
         canOwn: !1,
         canAdmin: !1,
         canEdit: !1,
@@ -13278,7 +13277,7 @@ function m9(e, t, r, i, n, l) {
     }
   });
   let m = m3(i, n, l);
-  return useMemo(() => Qw.transformAll([m, c], (s, l) => s || function (e, t, r, s, i, n) {
+  return useMemo(() => resourceUtils.transformAll([m, c], (s, l) => s || function (e, t, r, s, i, n) {
     let l = r ? s.teams[r] : null;
     if (r && !l || e === 'file') return null;
     let d = s.currentTeamId;
@@ -14967,7 +14966,7 @@ function _q({
     let r = !!t && !!t.disconnectedAt;
     let a = !!t && !t.assetTransferRequestId;
     let s = e.canTransferCopy;
-    return Qw.loaded(r && a && s);
+    return resourceUtils.loaded(r && a && s);
   }, [e]);
   let {
     show,
@@ -18959,7 +18958,7 @@ function g2({
     let e = Rp();
     return useMemo(() => Object.values(e).map(_$$gB), [e]);
   }();
-  let _ = useMemo(() => Qw.merge([d, c], u, m), [m, d, c, u]);
+  let _ = useMemo(() => resourceUtils.merge([d, c], u, m), [m, d, c, u]);
   let p = useMemo(() => ({
     tileSortFilterConfig: t,
     sortKeys: [C0.NAME, C0.CREATED_AT, C0.ACCESSED_AT]
@@ -19622,7 +19621,7 @@ function hL({
   let s = _$$d(t => t.teamRoleRequests[e.id]);
   let n = _$$D('TeamNonMemberJoinView');
   let o = MF({
-    oldValue: Qw.loaded(canAdminOrg(t, r)),
+    oldValue: resourceUtils.loaded(canAdminOrg(t, r)),
     newValue: j_(n),
     enableFullRead: DQ(Pw.GROUP_7),
     label: A5.TeamNonMemberJoinView.canAdminOrg

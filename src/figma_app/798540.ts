@@ -4,7 +4,7 @@ import { n3, IA } from "../905/859698";
 import { glU } from "../figma_app/763686";
 import { l7 } from "../905/189185";
 import { AD } from "../905/871411";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { $D } from "../905/11";
 import { HH } from "../figma_app/3776";
 import { Gc } from "../figma_app/456871";
@@ -13,14 +13,14 @@ import { wj, qy } from "../figma_app/862289";
 import { F7 } from "../figma_app/784857";
 import { o2 } from "../figma_app/667212";
 export function $$f1(e, t, r) {
-  let i = useCallback((r) => {
+  let i = useCallback(r => {
     e(r);
     t();
   }, [e, t]);
-  let a = useCallback((e) => {
+  let a = useCallback(e => {
     r(e);
   }, [r]);
-  return useCallback((e) => {
+  return useCallback(e => {
     let {
       eventType,
       node
@@ -42,7 +42,7 @@ export function $$E0(e, t) {
     p !== qy.RUNNING && r.current.size > 0 && (r.current = new Map());
   }, [p]);
   return {
-    slidesTextResizeCallback: useCallback((e) => {
+    slidesTextResizeCallback: useCallback(e => {
       if (!e.isInSlide) return;
       let n = r.current;
       let p = n.get(e.guid);
@@ -51,7 +51,7 @@ export function $$E0(e, t) {
         l7.ai(t, () => {
           (function (e) {
             let t = e.containingSlideId;
-            let r = UN().get(t);
+            let r = getSingletonSceneGraph().get(t);
             if (!r || "WIDTH_AND_HEIGHT" !== e.textAutoResize) return;
             let n = r.size.x;
             let i = r.absoluteTransform.m02;
@@ -73,7 +73,7 @@ export function $$E0(e, t) {
           })(e);
           (function (e) {
             let t = e.containingSlideId;
-            let r = UN().get(t);
+            let r = getSingletonSceneGraph().get(t);
             if (!r || "HEIGHT" !== e.textAutoResize && "WIDTH_AND_HEIGHT" !== e.textAutoResize) return;
             let n = r.absoluteTransform.m12;
             let o = r.absoluteTransform.m12 + r.size.y;
@@ -114,13 +114,13 @@ export function $$y2(e) {
   let s = useCallback(() => {
     l7.ai(e, () => {
       for (let [e, t] of i.current) {
-        let r = UN().get(e);
+        let r = getSingletonSceneGraph().get(e);
         r && HH(r, t.x, t.y);
       }
       i.current.clear();
     });
   }, [e]);
-  let l = useCallback((e) => {
+  let l = useCallback(e => {
     i.current.has(e.guid) || i.current.set(e.guid, {
       x: e.relativeTransform.m02,
       y: e.relativeTransform.m12
@@ -128,10 +128,10 @@ export function $$y2(e) {
   }, []);
   return {
     shiftAllNodesOutOfSlideMargins: useCallback(() => {
-      r.forEach((e) => {
+      r.forEach(e => {
         l7.ai(o2, () => {
           let t = e.containingSlideId;
-          let r = UN().get(t);
+          let r = getSingletonSceneGraph().get(t);
           if (!r) return;
           let n = e.absoluteTransform.m12;
           let i = e.size.y;

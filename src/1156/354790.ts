@@ -6,7 +6,7 @@ import { t as _$$t } from '../905/303541';
 import { noop, throwIf } from '../905/419236';
 import { getFeatureFlags } from '../905/601108';
 import { X$ } from '../905/612685';
-import { UN } from '../905/700578';
+import { getSingletonSceneGraph } from '../905/700578';
 import { M4 } from '../905/713695';
 import { g as _$$g } from '../905/880308';
 import { ei, Ur, zK } from '../1156/71049';
@@ -87,7 +87,7 @@ class Z {
       return e;
     }
     let i = r.length > 0 ? r[r.length - 1] : 0;
-    let s = function(e, t, n, r = 0.01) {
+    let s = function (e, t, n, r = 0.01) {
       if (t === n) return t;
       let i = e(t);
       for (; i < -r;) {
@@ -238,7 +238,7 @@ async function et({
       },
       getRootPath: () => S,
       initSupabase: () => ea(),
-      getCodeLibraryComponents: () => function() {
+      getCodeLibraryComponents: () => function () {
         if (!getFeatureFlags().bake_ds_import_l3a) return;
         let e = Hg(nc);
         if (e) {
@@ -292,7 +292,7 @@ async function et({
     return U && U.signal.aborted ? (E = 'user_cancelled', !0) : es() !== K ? (E = 'user_left', !0) : (!t || !t.isAlive) && (E = 'missing_node', !0);
   }
   try {
-    let n = function(e) {
+    let n = function (e) {
       let t = null;
       switch (e) {
         case lV.FIGMAKE:
@@ -345,7 +345,7 @@ async function et({
     let c = ei(e, t);
     let d = Hg(nc, c);
     let u = n => {
-      n.type === 'code' ? function({
+      n.type === 'code' ? function ({
         response: e,
         fileUpdates: t,
         codeFiles: n,
@@ -363,7 +363,7 @@ async function et({
           type: 'code',
           fullFilePath: l
         });
-        (s === lV.FIGMAKE || s === lV.FIGMAKE_IN_DESIGN || c) && function({
+        (s === lV.FIGMAKE || s === lV.FIGMAKE_IN_DESIGN || c) && function ({
           codeFiles: e,
           rootPath: t,
           currentWorkingFilePath: n,
@@ -394,7 +394,7 @@ async function et({
         chatMessagesNode: t
       }) : n.type === 'chat-compression' ? yZ(t, n) : n.type === 'plan' && n.title && zl.set(_$$n, n.title);
       q.processResponseDelta(n);
-      (function(e, t, n, r) {
+      (function (e, t, n, r) {
         let i = t.guid;
         let s = _$$l(i);
         if (e.type === 'code') {
@@ -428,7 +428,7 @@ async function et({
       });
       C || (C = performance.now());
     };
-    for (B?.onRender(u); ;) {
+    for (B?.onRender(u);;) {
       let e = await Promise.race([o.read(), G]);
       if (X()) {
         await W(o);
@@ -525,7 +525,7 @@ export async function $$en0({
   zl.set(o0(n.guid), !1);
 }
 export function $$er2(e) {
-  let t = UN();
+  let t = getSingletonSceneGraph();
   if (!t.getInternalCanvas()) return;
   let n = e.map(e => {
     if (e.type !== K$p.USER_MESSAGE) return null;
@@ -576,7 +576,7 @@ export async function $$ei1({
     let j = glU.generateUniqueID();
     d && (j = d);
     let v = Pd(c, n?.guid || '', j);
-    c && !d && y && y.length > 0 && getFeatureFlags().bake_manual_edits && function({
+    c && !d && y && y.length > 0 && getFeatureFlags().bake_manual_edits && function ({
       user: e,
       changedFiles: t,
       chatMessagesNode: n,
@@ -585,7 +585,7 @@ export async function $$ei1({
     }) {
       let o = n.chatMessages || [];
       if (o.length === 0) return;
-      let c = eB(o) || function() {
+      let c = eB(o) || function () {
         let e = zl.get(yV);
         return e?.name;
       }();
@@ -680,8 +680,8 @@ async function ea() {
     isConnectedNonOwner: !!isConnectedNonOwner,
     secrets: r
   };
-  i?.projectId && i?.publicAnonKey && i?.makeNamespace && function(e, t, n) {
-    let r = UN();
+  i?.projectId && i?.publicAnonKey && i?.makeNamespace && function (e, t, n) {
+    let r = getSingletonSceneGraph();
     if (!r.getInternalCanvas()) return;
     let i = zl.get(nM);
     let a = _$$W(i, NJ, `/${o3}`);
@@ -721,4 +721,4 @@ async function ea() {
 }
 export const yc = $$en0;
 export const Oz = $$ei1;
-export const z9 = $$er2; 
+export const z9 = $$er2;

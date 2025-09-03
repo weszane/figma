@@ -338,7 +338,6 @@ import { b as _$$b6 } from "../figma_app/300024";
 import { I as _$$I2 } from "../5430/750114";
 import { I as _$$I3 } from "../5430/292815";
 import { C as _$$C4 } from "../1291/839924";
-import { noop } from "../905/813868";
 import { K as _$$K3 } from "../figma_app/358450";
 import { t as _$$t5 } from "../2b17fec9/172012";
 import { u as _$$u2 } from "../441/357009";
@@ -394,10 +393,8 @@ import { nG as _$$nG, tT as _$$tT } from "../9410/584673";
 import { A as _$$A16 } from "../svg/16929";
 import { A as _$$A17 } from "../6828/70690";
 import { A as _$$A18 } from "../svg/888006";
-import { noop } from "../figma_app/602140";
 import { zX } from "../905/576487";
 import { um as _$$um2, ez as _$$ez2 } from "../figma_app/835718";
-import { noop } from "../2b17fec9/703025";
 import { m as _$$m6 } from "../905/99004";
 import { JT } from "../figma_app/632248";
 import { RL, B3, qy, Ag as _$$Ag } from "../figma_app/862289";
@@ -426,7 +423,7 @@ import { z as _$$z4 } from "../905/788559";
 import { is as _$$is } from "../905/904596";
 import { F as _$$F4 } from "../905/382217";
 import { ZC } from "../figma_app/39751";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { Ay as _$$Ay4 } from "../figma_app/432652";
 import { Ay as _$$Ay5 } from "../figma_app/948389";
 import { UD } from "../figma_app/624361";
@@ -505,11 +502,9 @@ import { F as _$$F5 } from "../905/258517";
 import { Q7 } from "../905/203369";
 import { D9, oO as _$$oO, ZS, hF as _$$hF, jZ as _$$jZ, kL as _$$kL, FY, ai as _$$ai, z4, Hp, QR } from "../figma_app/639798";
 import { n as _$$n9 } from "../9410/774045";
-import { noop } from "../figma_app/628249";
 import { H as _$$H5 } from "../905/762413";
 import { N as _$$N5 } from "../905/720559";
 import { a as _$$a9 } from "../905/996627";
-import { noop } from "../905/519202";
 import { D8 as _$$D4, oj as _$$oj } from "../905/511649";
 import { b as _$$b9, c as _$$c8 } from "../figma_app/166989";
 import { wv as _$$wv5, uM as _$$uM } from "../905/888175";
@@ -9059,7 +9054,7 @@ let ud = async ({
   abortController: t,
   clientLifecycleId: i
 }) => !function (e) {
-  let t = UN();
+  let t = getSingletonSceneGraph();
   return e.some(e => {
     let i = t.get(e);
     return i?.isImage && c8(t, e);
@@ -9204,7 +9199,7 @@ function uT(e, t) {
   };
 }
 function uE(e, t) {
-  let i = uT(t, UN());
+  let i = uT(t, getSingletonSceneGraph());
   _$$l.user("figjam ai canvas positioning", () => {
     e.x = i.x + i.width + 32;
     e.y = i.y;
@@ -9216,7 +9211,7 @@ function uS() {
   });
   let t = _$$Z4();
   return useCallback(i => {
-    let n = uT(i, UN());
+    let n = uT(i, getSingletonSceneGraph());
     let r = {
       x: e.offsetX - e.width / 2 / e.zoomScale,
       y: e.offsetY - e.height / 2 / e.zoomScale,
@@ -10108,7 +10103,7 @@ function uX() {
     useEffect(() => {
       if (e?.generationType !== uu.IMAGE) return;
       let t = e.generatedNodeIds;
-      let i = 1 === t.length ? UN().get(t[0] || null) : null;
+      let i = 1 === t.length ? getSingletonSceneGraph().get(t[0] || null) : null;
       i && "SUCCESS" === e.imageResult.state && Xo({
         node: i,
         image: e.imageResult.image,
@@ -14762,7 +14757,7 @@ function x_({
 }
 let xg = e => {
   if (!e) return null;
-  let t = UN().get(e);
+  let t = getSingletonSceneGraph().get(e);
   if (!t) return null;
   let i = t?.findContainingPlatformShape();
   if (t.guid === i) return {

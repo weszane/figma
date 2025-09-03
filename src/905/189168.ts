@@ -1,5 +1,5 @@
 import { assert } from "../figma_app/465776";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 let a = e => {
   for (let t of e.directlySelectedNodes) for (; t;) {
     if (t.isBreakpointFrame || t.isDerivedWebpageBreakpoint || t.isResponsiveSetOrWebpage) return t;
@@ -10,9 +10,9 @@ let a = e => {
 export function $$s0(e) {
   let t;
   let i;
-  let s = UN().getCurrentPage();
+  let s = getSingletonSceneGraph().getCurrentPage();
   assert(null !== s);
-  let o = (e ? UN().get(e) : null) || a(s);
+  let o = (e ? getSingletonSceneGraph().get(e) : null) || a(s);
   if (!o) return null;
   if (o.parentNode?.isResponsiveSetOrWebpage) {
     t = o.parentNode.guid;

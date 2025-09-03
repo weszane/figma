@@ -4,7 +4,7 @@ import { G1 } from "../figma_app/691470";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { glU, zvt } from "../figma_app/763686";
 import { l7 } from "../905/189185";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { zl, fp } from "../figma_app/27355";
 import { oy } from "../figma_app/964367";
@@ -56,7 +56,7 @@ export class $$P2 extends Error {
   }
 }
 export async function $$D6(e, t = 100) {
-  let r = UN().get(e.findContainingTopLevelFrameOrSelf());
+  let r = getSingletonSceneGraph().get(e.findContainingTopLevelFrameOrSelf());
   return r ? (await oy(r, {
     includeIDs: !0,
     excludeImageData: !0,
@@ -211,9 +211,9 @@ export async function $$M0({
     setLoadingStateMatchingNode,
     clearLoadingStateMatchingNode,
     clearAllLoadingStates
-  } = Xu(Z.map(e => UN().get(e.taskId)).filter(e => !!e));
+  } = Xu(Z.map(e => getSingletonSceneGraph().get(e.taskId)).filter(e => !!e));
   for (let e of Z) {
-    let t = UN().get(e.taskId);
+    let t = getSingletonSceneGraph().get(e.taskId);
     t && setLoadingStateMatchingNode(t.guid);
   }
   let ei = null;
@@ -232,7 +232,7 @@ export async function $$M0({
       jsonMode: !0,
       targetMap: Q,
       surroundingContext: n
-    }), i.stop(), X.timeOfCortexRequest = i.getElapsedTime(), t.signal.aborted || !UN().getCurrentPage()) return;
+    }), i.stop(), X.timeOfCortexRequest = i.getElapsedTime(), t.signal.aborted || !getSingletonSceneGraph().getCurrentPage()) return;
     let u = new c6(ei);
     let _ = new Map();
     let g = !0;
@@ -288,7 +288,7 @@ export async function $$M0({
           }
           _.set(a, h + delta.length);
           X.numLayersAdjusted = _.size;
-          a.selectionRange ? UN().getCurrentPage()?.setSelectedTextRange(a.node.guid, a.selectionRange.start, h + delta.length) : 1 === targets.length && 1 === selection.length && $$U8(u.guid);
+          a.selectionRange ? getSingletonSceneGraph().getCurrentPage()?.setSelectedTextRange(a.node.guid, a.selectionRange.start, h + delta.length) : 1 === targets.length && 1 === selection.length && $$U8(u.guid);
           A && (g ? (glU?.requestNextCommitMergeWithPrevious(zvt.AI_TEXT_MANIPULATION_START), g = !1) : glU?.requestNextCommitMergeWithPrevious(zvt.AI_TEXT_MANIPULATION_DELTA), e = Y5.commit());
         }
       });
@@ -350,7 +350,7 @@ export function $$F1({
   function T() {
     l7.ai(c, () => {
       if (g) {
-        let e = UN().getCurrentPage();
+        let e = getSingletonSceneGraph().getCurrentPage();
         for (let {
           node,
           nodeText,
@@ -372,7 +372,7 @@ export function $$F1({
   return {
     resetText: T,
     restoreSelection: function () {
-      let e = UN().getCurrentPage();
+      let e = getSingletonSceneGraph().getCurrentPage();
       e && g && g.selection.length > 1 && (e.directlySelectedNodes = g.selection);
     },
     lastParameters: y,
@@ -386,7 +386,7 @@ export function $$F1({
           excludeStickyAuthor: !0
         }),
         parameters: l,
-        selection: UN().getCurrentPage()?.directlySelectedNodes ?? [],
+        selection: getSingletonSceneGraph().getCurrentPage()?.directlySelectedNodes ?? [],
         activeNodes: u
       };
       m("");
@@ -417,7 +417,7 @@ export function $$j5(e, t) {
     allowEmptyText
   } = t;
   let a = i2();
-  let s = UN().getCurrentPage()?.directlySelectedNodes;
+  let s = getSingletonSceneGraph().getCurrentPage()?.directlySelectedNodes;
   let o = t.instruction ?? tx("ai_text_tools.selection_instruction");
   if (onlyAllowSingular && a && (0 === a.length || a.length > 1 || "TEXT" !== a[0].type)) return o;
   if (a?.length === 0 && s && s?.length > 0) return tx("fullscreen_actions.ai_content_fill.select_items_in_one_breakpoint");
@@ -445,7 +445,7 @@ export function $$j5(e, t) {
   return o;
 }
 export function $$U8(e) {
-  let t = UN().getCurrentPage();
+  let t = getSingletonSceneGraph().getCurrentPage();
   let r = t?.directlySelectedNodes[0]?.guid;
   t && r === e && t.setSelectionToSingleNode(e);
 }

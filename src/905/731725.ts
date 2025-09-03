@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { getFeatureFlags } from "../905/601108";
-import { Qw } from "../905/989992";
+import { resourceUtils } from "../905/989992";
 import { az } from "../905/449184";
 import { IT } from "../figma_app/566371";
 import { I } from "../905/485103";
@@ -17,7 +17,7 @@ export let $$c0 = getFeatureFlags().folder_preview_file_pagination ? function ({
     shouldShowOnlyTrashedFiles: t,
     skipFetchingRepoBranches: !0
   }));
-  let s = Qw.useTransform(i, e => e.files);
+  let s = resourceUtils.useTransform(i, e => e.files);
   let l = "loaded" === s.status && s.data.length < 8 && i.hasNextPage && !i.isFetchingNextPage;
   let c = r.fetchNextPage;
   useEffect(() => {
@@ -33,7 +33,7 @@ export let $$c0 = getFeatureFlags().folder_preview_file_pagination ? function ({
   folderId: e,
   shouldShowOnlyTrashedFiles: t
 }) {
-  let i = Qw.useTransform(LK(e, !0, t), e => e.previewFiles);
+  let i = resourceUtils.useTransform(LK(e, !0, t), e => e.previewFiles);
   u({
     folderId: e,
     isReady: "loaded" === i.status,

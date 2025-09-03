@@ -1,5 +1,5 @@
 import { zl, eU } from "../figma_app/27355";
-import { Qw } from "../905/989992";
+import { resourceUtils } from "../905/989992";
 import { QB } from "../905/143890";
 import { Bu } from "../figma_app/604494";
 var $$n1;
@@ -12,7 +12,7 @@ export function $$l0(e, t = !1) {
     zl.set(s ? e.currentCommunitySearchAtom : e.currentSearchAtom, {
       searchId: t,
       input: i,
-      result: Qw.loading(),
+      result: resourceUtils.loading(),
       sortBy: n,
       overrideParams: o
     });
@@ -20,13 +20,13 @@ export function $$l0(e, t = !1) {
   e.setFragmentSearchError = function (t, i, n) {
     zl.set(n ? e.currentCommunitySearchAtom : e.currentSearchAtom, e => null === e || e.searchId !== t ? e : {
       ...e,
-      result: Qw.error(i)
+      result: resourceUtils.error(i)
     });
   };
   e.setFragmentSearchResults = function (t, i, n, s) {
     zl.set(s ? e.currentCommunitySearchAtom : e.currentSearchAtom, e => null === e || e.searchId !== t ? e : {
       ...e,
-      result: Qw.loaded(i)
+      result: resourceUtils.loaded(i)
     });
     zl.set(e.fragmentSearchEntryPointAtom, n);
   };

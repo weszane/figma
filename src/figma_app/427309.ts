@@ -8,7 +8,7 @@ import { d as _$$d } from "../figma_app/844319";
 import { T as _$$T } from "../figma_app/300269";
 import { q } from "../905/820062";
 import { AD } from "../905/871411";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { Xr } from "../figma_app/27355";
 import { generateRecordingKey } from "../figma_app/878298";
 import g from "classnames";
@@ -37,7 +37,7 @@ export function $$k2() {
 function M() {
   let [e, t] = useState({});
   let r = uQ();
-  let s = UN().get(r);
+  let s = getSingletonSceneGraph().get(r);
   let l = function (e) {
     let t = useRef(e);
     t.current && t.current.length === e.length && t.current.every((t, r) => t === e[r]) || (t.current = e);
@@ -48,7 +48,7 @@ function M() {
     let {
       currentNodePosition
     } = EE("sitesBreakpoints", l ?? [], e => {
-      let r = UN().get(e.nodeId);
+      let r = getSingletonSceneGraph().get(e.nodeId);
       !r || !e.position || "FRAME" !== r.type || r.isGroup || r.isStateGroup || r.isResponsiveSet || flushSync(() => {
         t(t => {
           let n = {
@@ -69,7 +69,7 @@ function M() {
             maxWidth: _maxWidth
           } = r.breakpointFrameRange ?? {};
           if ((minWidth !== _minWidth || maxWidth !== _maxWidth) && r.parentGuid) {
-            let e = UN().get(r.parentGuid);
+            let e = getSingletonSceneGraph().get(r.parentGuid);
             if (e && e.isResponsiveSet) {
               for (let t of e.childrenNodes) if (t.isBreakpointFrame && t.guid && n[t.guid]) {
                 let e = n[t.guid];
@@ -83,7 +83,7 @@ function M() {
     });
     let r = {};
     for (let t in currentNodePosition) {
-      let n = UN().get(t);
+      let n = getSingletonSceneGraph().get(t);
       n && (r[t] = {
         guid: t,
         parentGuid: n.parentGuid,
@@ -112,7 +112,7 @@ function F({
   });
   let g = useMemo(() => {
     let e = function (e, t) {
-      let r = UN().get(e);
+      let r = getSingletonSceneGraph().get(e);
       if (!r) return {
         top: 0,
         bottom: 0,
@@ -145,10 +145,10 @@ function F({
     return e;
   }, [r, m]);
   if (!r || !e) return null;
-  let y = UN().get(r);
+  let y = getSingletonSceneGraph().get(r);
   let I = AD;
   let v = null;
-  y && y.childrenGuids && y.childCount > 0 && y.childrenGuids[0] && (I = y.childrenGuids[0], v = UN().get(I));
+  y && y.childrenGuids && y.childCount > 0 && y.childrenGuids[0] && (I = y.childrenGuids[0], v = getSingletonSceneGraph().get(I));
   let O = e => {
     let {
       name,

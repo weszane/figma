@@ -29,7 +29,7 @@ import { xT, Yh, g_, Ye } from "../figma_app/32128";
 import { t as _$$t, c as _$$c } from "../905/722657";
 import { k as _$$k2 } from "../905/443820";
 import { J as _$$J } from "../905/614223";
-import { UN, qo } from "../905/700578";
+import { getSingletonSceneGraph, ReduxSceneGraph } from "../905/700578";
 import { HD, YU } from "../figma_app/191804";
 import { Rs } from "../figma_app/288654";
 import { oA as _$$oA } from "../905/723791";
@@ -708,7 +708,7 @@ function em() {
   });
 }
 function e_() {
-  !function() {
+  !function () {
     let [e, t] = _$$fp(_$$t);
     let n = _$$J3();
     let a = _$$tS() ?? "";
@@ -740,7 +740,7 @@ function e_() {
     getIsUpgradeHandlerLoading
   } = wH();
   let p = hasPendingRequest(FProductAccessType.DEV_MODE) && getUpgradePathway(FProductAccessType.DEV_MODE) !== _$$J4.AUTO_PATHWAY;
-  let h = function(e) {
+  let h = function (e) {
     let t = _$$oA(e.data?.file);
     let n = t?.currentPlanUser?.type === FOrganizationLevelType.ORG;
     let a = t?.currentPlanUser;
@@ -768,7 +768,7 @@ function e_() {
   return n && e === _$$c.REQUESTED && p ? jsx(Y, {}) : n && e === _$$c.DEFAULT && p ? jsx(Q, {}) : e === _$$c.DEFAULT ? jsx(_$$R2, {}) : jsx(ey, {});
 }
 function ev() {
-  let e = UN().getCurrentPage();
+  let e = getSingletonSceneGraph().getCurrentPage();
   let t = HD(e?.backgroundColor ?? "");
   return jsx(_$$J, {
     mode: t ? "dark" : "light",
@@ -790,7 +790,7 @@ function ey() {
   });
 }
 function eb() {
-  let e = UN().getCurrentPage();
+  let e = getSingletonSceneGraph().getCurrentPage();
   let t = e?.backgroundColor ? YU({
     ...e.backgroundColor,
     a: 0.9
@@ -854,7 +854,7 @@ function eO() {
     })
   });
 }
-let eF = memo(function(e) {
+let eF = memo(function (e) {
   return _$$O() ? jsxs("svg", {
     width: "16",
     height: "16",
@@ -1156,7 +1156,7 @@ function tm({
     })]
   });
   if (!_$$u2(i)) return jsx(tN, {});
-  let s = function(e, t, n) {
+  let s = function (e, t, n) {
     if (n && t) switch (t) {
       case "distance":
         switch (e) {
@@ -2333,7 +2333,7 @@ function nY({
   } = n$(e);
   let {
     manager
-  } = function({
+  } = function ({
     items: e,
     rowHeightEstimate: t,
     columns: n,
@@ -2441,7 +2441,7 @@ function nY({
           collapseManager: h,
           activeIndex: g,
           selectedRows: c,
-          selectIndex: function(e, t = !1, n = !1) {
+          selectIndex: function (e, t = !1, n = !1) {
             let i = p.current;
             if (!t && !n || !a) {
               1 === c.length && c[0] === e ? u([]) : u([e]);
@@ -2465,13 +2465,13 @@ function nY({
             p.current = e;
           },
           entries,
-          deselectIndex: function(e) {
+          deselectIndex: function (e) {
             p.current = null;
             u(t => t.filter(t => t !== e));
           },
           setIndex: x,
           visibleEntries: m,
-          collapseRows: function(e) {
+          collapseRows: function (e) {
             let t = entries.reduce((t, {
               id: n,
               children: a
@@ -2489,7 +2489,7 @@ function nY({
             }));
           },
           listRef: d,
-          handleKeyDown: function(t) {
+          handleKeyDown: function (t) {
             let a = h[m[g.row].id];
             switch (t.code) {
               case "Home":
@@ -2557,7 +2557,7 @@ function nY({
                 Ju(t);
             }
           },
-          collapseAll: function() {
+          collapseAll: function () {
             f(entries.reduce((e, {
               id: t,
               depth: n
@@ -2567,7 +2567,7 @@ function nY({
             }, e), {}));
           },
           collapseIndex: e,
-          expandAll: function() {
+          expandAll: function () {
             f(entries.reduce((e, {
               id: t
             }) => (e[t] = {
@@ -2811,7 +2811,7 @@ function a_() {
   }, [e]);
   let u = useCallback(() => {
     !n && t && show({
-      canShow: e => function(e) {
+      canShow: e => function (e) {
         let t = Date.now();
         return e.getTime() <= t - 12096e5;
       }(e)
@@ -3251,7 +3251,7 @@ function iA(e) {
   return {
     type: "published-plugin",
     id: e.id,
-    pluginLanguage: function(e) {
+    pluginLanguage: function (e) {
       let t = e?.versions?.[e?.current_plugin_version_id ?? ""];
       return _$$m(t)?.[0]?.value ?? "";
     }(e)
@@ -3405,7 +3405,7 @@ function iO() {
     })]
   });
 }
-function iM({ }) {
+function iM({}) {
   let e = wA();
   let t = "install-messaging-dropdown";
   let n = Um();
@@ -4563,7 +4563,7 @@ function iZ({
     children: [jsx("div", {
       className: "configuration_wizard--closeButton--pv-0K",
       children: jsx(_$$K2, {
-        onClick: function() {
+        onClick: function () {
           c();
           t("dev_handoff.config_wizard.closed", {
             step: n,
@@ -4613,7 +4613,7 @@ function iZ({
             children: _$$tx("general.back")
           }), jsx($n, {
             variant: "primary",
-            onClick: function() {
+            onClick: function () {
               c();
               t("dev_handoff.config_wizard.done", {
                 step: n,
@@ -4671,7 +4671,7 @@ function i$({
     }, e))
   });
 }
-let i1 = memo(function(e) {
+let i1 = memo(function (e) {
   return jsx("svg", {
     width: "16",
     height: "16",
@@ -4816,7 +4816,7 @@ let oZ = class {
       if (n?.type === "PLAIN_TEXT") _$$n6({
         link: t,
         linkPreviewJson: n
-      }); else if (n?.type === "AUTH_REQUIRED") {
+      });else if (n?.type === "AUTH_REQUIRED") {
         let n = zl.get(ok);
         let a = n[e.plugin_id]?.links ?? [];
         zl.set(ok, n => ({
@@ -4894,7 +4894,7 @@ function o1(e) {
 }
 var o2 = (e => (e.OPEN = "open", e.PREVIEW = "preview", e))(o2 || {});
 function o5(e) {
-  let t = function(e) {
+  let t = function (e) {
     let t = $1();
     let n = _$$cW();
     let a = _$$d(e => e.mirror.appModel.useLocalRelatedLinkPlugin);
@@ -4967,7 +4967,7 @@ function o8({
     dropdownTargetRef,
     isDropdownShown
   } = _$$B3(t.id);
-  let k = function(e) {
+  let k = function (e) {
     let t = o5(e);
     let n = _$$tS();
     let a = v4();
@@ -5213,7 +5213,7 @@ function o6({
     })]
   });
 }
-let ll = memo(function(e) {
+let ll = memo(function (e) {
   return jsx("svg", {
     width: "24",
     height: "24",
@@ -5300,7 +5300,7 @@ let lD = memo(({
       t.onClose();
     }
   });
-  let _ = useMemo(() => new qo(f ? juq.DETACHED_COMPONENTS : juq.PLAYGROUND), [f]);
+  let _ = useMemo(() => new ReduxSceneGraph(f ? juq.DETACHED_COMPONENTS : juq.PLAYGROUND), [f]);
   let v = _$$eY();
   let y = useMemo(() => {
     if (!g) return "";
@@ -5313,7 +5313,7 @@ let lD = memo(({
     theme,
     invertTheme,
     callbackCount
-  } = function(e) {
+  } = function (e) {
     let t = IO(e, !0);
     let n = useRef(t());
     let [a, o] = useState(n.current);
@@ -5553,7 +5553,7 @@ function lW({
   let n = _$$rL();
   let o = _$$ro();
   let s = n - 64;
-  let r = function(e, t = lH) {
+  let r = function (e, t = lH) {
     let n = wS();
     let a = _$$lA();
     let o = "loaded" === n.status && n.result.dataComponentId ? n.result.dataComponentId : a?.guid;
@@ -5718,7 +5718,7 @@ function lQ() {
   let {
     consumedVariable
   } = _$$u3(["VARIANT_PROPERTIES"]);
-  let s = function(e) {
+  let s = function (e) {
     if (!e || gl(e) || e.type !== Z_n.EXPRESSION || e.value.expressionFunction !== JTp.RESOLVE_VARIANT) return null;
     let t = e.value.expressionArguments[0];
     return t?.type !== Z_n.MAP ? null : t;
@@ -5988,7 +5988,7 @@ function ss(e, t) {
     linkPreview: so(e.linkPreviewJson)
   })), "loaded"] : [[], n.status], [n]);
 }
-let sd = _$$Ju(function(e) {
+let sd = _$$Ju(function (e) {
   let t = e.linkId;
   let n = Nf() ?? "";
   let i = _$$tS();
@@ -6027,7 +6027,7 @@ let sd = _$$Ju(function(e) {
 }, "DeveloperRelatedLinksDeleteModal");
 let sp = "developer_related_links_edit_modal--fieldContainer--Twtv-";
 let sh = "developer_related_links_edit_modal--label--cxfFD";
-let sf = _$$Ju(function({
+let sf = _$$Ju(function ({
   initialLink: e,
   ...t
 }) {
@@ -6308,7 +6308,7 @@ function sy({
   let f = u.get(p ?? h);
   let g = wS();
   let x = LS();
-  let m = function() {
+  let m = function () {
     let e = oA();
     let t = q5();
     let n = t?.repo;
@@ -6317,7 +6317,7 @@ function sy({
     return !e && a && !i;
   }();
   let _ = oA();
-  let [v, y] = function(e) {
+  let [v, y] = function (e) {
     let t = Rs(jJU, {
       fileKey: e
     });
@@ -6358,7 +6358,7 @@ function sy({
     Q && (J(), q(!1));
   }, [Q, J, q]);
   let Y = m && j.length < 10;
-  let Z = useMemo(() => v && function(e, t, n) {
+  let Z = useMemo(() => v && function (e, t, n) {
     let a = new Map();
     let i = new Map();
     e.forEach(e => {
@@ -6383,7 +6383,7 @@ function sy({
     return a;
   }(v, u, h), [v, s, h]);
   if (0 === j.length && _) return null;
-  let $ = f?.type === "SECTION" && Z && function(e, t) {
+  let $ = f?.type === "SECTION" && Z && function (e, t) {
     let n = new Map();
     for (let a of t.childrenNodes) {
       let t = "FRAME" === a.type && e.get(a.guid);
@@ -6536,7 +6536,7 @@ function sO() {
   let n = wS();
   let s = _$$d(_$$sS);
   let r = _$$uQ();
-  let d = function() {
+  let d = function () {
     let e = RI();
     let t = Fk((e, t, n) => {
       if (!t || n) return null;
@@ -6620,7 +6620,7 @@ function sH(e, t) {
   return sW.indexOf(e) - sW.indexOf(t);
 }
 let sW = ["color", "border", "text", "effect", "layout", "shape", "style"];
-let sU = _$$Ju(function() {
+let sU = _$$Ju(function () {
   return jsx(yX, {
     destructive: !0,
     confirmationTitle: _$$tx("inspect_panel.detached_component.remove_attachment"),
@@ -6832,7 +6832,7 @@ function s3() {
       children: jsx(_$$J5, {})
     }), jsxs(mc, {
       children: [jsx(q7, {
-        onClick: function() {
+        onClick: function () {
           e && t && (window.location.href = `vscode://figma.figma-vscode-extension/open/${e.key}/${e.name}/${t}`);
         },
         disabled: r,
@@ -6908,7 +6908,7 @@ function s6() {
   } = DS(e ?? void 0);
   let l = !versionsQueryLoaded || 0 === versions.length || !n;
   let s = _$$i2();
-  let r = function() {
+  let r = function () {
     let e;
     let t = kl("overrides");
     if (!t || gl(t)) return null;
@@ -7018,7 +7018,7 @@ function s9({
   let t = _$$uQ();
   let n = s5();
   let o = wS();
-  let l = function() {
+  let l = function () {
     let e = _$$uQ();
     let t = s5();
     let {
@@ -7039,7 +7039,7 @@ function s9({
         resizeToFit: n.resizeToFit
       } : {};
     }, e);
-    let d = function() {
+    let d = function () {
       let e = Yj();
       let t = e?.data?.libraryKeyToFile;
       let n = kt();
@@ -7355,7 +7355,7 @@ function rf({
   }, [c, m]);
   let b = useCallback((e, t) => m(n => n.includes(t) ? n.filter(e => e !== t) : e.altKey ? [...n, t, ...ru(c, t, rp)] : [...n, t]), [c, m]);
   let j = useCallback(e => x.includes(e), [x]);
-  let w = function(e, t) {
+  let w = function (e, t) {
     let n = _$$eY();
     return useMemo(() => {
       let a = [];
@@ -7592,7 +7592,7 @@ function rN(e) {
     })]
   });
 }
-let rk = memo(function(e) {
+let rk = memo(function (e) {
   let {
     guid,
     isSelected,
@@ -7600,7 +7600,7 @@ let rk = memo(function(e) {
   } = e;
   let d = J2(UK().showGuids);
   let [c, u] = useState(!1);
-  let p = function(e) {
+  let p = function (e) {
     _$$uQ();
     let t = _$$R(e => !_$$M3(e));
     return n => Uc(n && t ? e : "");
@@ -7754,7 +7754,7 @@ function rI({
   let l = useRef(null);
   let s = e.length > 0;
   let [d, c] = _$$fp(rw);
-  let u = function() {
+  let u = function () {
     let {
       currentPage
     } = _$$R(e => ({
@@ -8051,7 +8051,7 @@ function rX() {
   let {
     setCurrentView,
     currentPluginView
-  } = function() {
+  } = function () {
     let e = Xr(_$$hO);
     let [t, n] = _$$fp(HT);
     let a = AY(HT);
@@ -8089,8 +8089,8 @@ function rX() {
     },
     setCurrentViewOrTab: setCurrentView,
     currentView: currentPluginView,
-    closeModal: () => { },
-    pinModal: () => { }
+    closeModal: () => {},
+    pinModal: () => {}
   }), [n, setCurrentView, currentPluginView]);
   return jsx(_$$Y2, {
     direction: "vertical",
@@ -8140,7 +8140,7 @@ function rJ() {
     })
   });
 }
-let rQ = memo(function(e) {
+let rQ = memo(function (e) {
   return jsx(_$$t5.TabPanel, {
     ...e.tabProps,
     forceMount: !0,
@@ -8240,7 +8240,7 @@ function r4({
       }), jsx(_$$K2, {
         "aria-label": _$$t2("dev_handoff.plugin_panel.close_plugin"),
         onClick: () => {
-          (function(e) {
+          (function (e) {
             switch (e) {
               case "related-link-click":
               case "related-link-auth":
@@ -8607,7 +8607,7 @@ function dN({
     _$$px().rebuildNodeCache();
     _$$c8();
   }, []);
-  let L = function(e, t) {
+  let L = function (e, t) {
     let [n, a] = useState(e);
     useEffect(() => {
       let t = null;
@@ -8980,7 +8980,7 @@ function d9({
     isAllowedToChangeVersion: () => !s,
     label: "latest-change-row",
     last: !1,
-    onClick: s && d ? function() {
+    onClick: s && d ? function () {
       p("Dev Mode Activity Compare Changes", {
         source: "compare_previous"
       });
@@ -9007,7 +9007,7 @@ function ct() {
   if (!t || 0 === t.length || !e) return jsx("div", {
     "data-onboarding-key": dz
   });
-  let d = new qo(juq.LIVE_FILE).get(e ?? "");
+  let d = new ReduxSceneGraph(juq.LIVE_FILE).get(e ?? "");
   let c = t[0];
   let u = !!d?.editInfo?.lastEditedAt && c.timestamp.getTime() < 1e3 * d.editInfo.lastEditedAt;
   return jsx(VZ, {
@@ -9073,7 +9073,7 @@ function ca({
   let x = md(wg);
   let m = _$$U2();
   let _ = g && s || f === h.activeId;
-  let v = function(e, t, n) {
+  let v = function (e, t, n) {
     let a = _$$hA();
     let s = wA();
     let r = _6();
@@ -9215,7 +9215,7 @@ function cr() {
     title: _$$t2("dev_handoff.plugin_panel.title")
   }, "plugin");
 }
-let cc = _$$Ju(function(e) {
+let cc = _$$Ju(function (e) {
   let t = lazy(() => _require);
   return jsx(Suspense, {
     fallback: jsx(_$$k2, {}),
@@ -9224,7 +9224,7 @@ let cc = _$$Ju(function(e) {
     })
   });
 });
-let cu = memo(function(e) {
+let cu = memo(function (e) {
   return jsx("svg", {
     width: "24",
     height: "24",
@@ -9392,7 +9392,7 @@ let c9 = memo(({
   let k = _$$e6(e.sourceLibraryKey ?? _$$l6(""), {
     enabled: !!e.sourceLibraryKey
   });
-  let I = function(e, t) {
+  let I = function (e, t) {
     let n = md(c4);
     let a = t & ~PW.ASSET_COMPONENT;
     let i = [c8(a & (PW.ASSET_ICON | PW.ASSET_ILLUSTRATION) ? "SVG" : "PNG")];
@@ -9992,7 +9992,7 @@ function uc({
     }
     MU(n, e, () => _(t.concat([n])));
   }, [m, _]);
-  let b = function(e) {
+  let b = function (e) {
     switch (e) {
       case PW.ASSET_ICON:
         return _$$t2("dev_handoff.assets.icons_settings");
@@ -10092,7 +10092,7 @@ function up({
     mediaByGuid: n
   });
   let x = !ua() || d || isLocalExporting;
-  let m = function(e) {
+  let m = function (e) {
     switch (e) {
       case PW.ASSET_ICON:
         return _$$t2("dev_handoff.assets.icons_download_menu");
@@ -10179,7 +10179,7 @@ function uf({
   if (0 === totalItems || !e) return null;
   let u = n !== PW.ASSET_VIDEO;
   return jsxs(VZ, {
-    title: function(e) {
+    title: function (e) {
       switch (e) {
         case PW.ASSET_ICON:
           return _$$t2("dev_handoff.assets.icons");
@@ -10244,7 +10244,7 @@ function ug({
 }
 function ux() {
   let e = Gt("assets");
-  let t = function() {
+  let t = function () {
     let e = _$$tS() ?? "";
     let t = md(_$$O6);
     let [n, a] = _$$fp(Qm);
@@ -10413,7 +10413,7 @@ function uP() {
     noSelection
   } = AR();
   let s = new Set(assetKeys);
-  let d = function(e, t) {
+  let d = function (e, t) {
     if (!t || 0 === Object.keys(t.status).length) return {
       connected: 0,
       ignored: 0,
@@ -10445,7 +10445,7 @@ function uP() {
     ignoredPercentage,
     notConnectedPercentage,
     totalConnected
-  } = function(e) {
+  } = function (e) {
     let t = Math.round(e.connected / e.all * 100);
     let n = Math.round(e.ignored / e.all * 100);
     return {
@@ -10457,7 +10457,7 @@ function uP() {
     };
   }(d);
   let g = useRef(null);
-  let x = function() {
+  let x = function () {
     let e = _$$uQ();
     return Fk((e, t) => {
       let n = e?.get(t ?? "");
@@ -10575,7 +10575,7 @@ function uH({
   numberOfFonts: n = 1,
   localCodeLanguage: o
 }) {
-  let s = function(e) {
+  let s = function (e) {
     let t = _$$DP();
     let n = _$$rL() - 32;
     let [a, o] = useState({
@@ -10879,7 +10879,7 @@ let uJ = {
 function uQ({
   fillContainer: e = !1
 }) {
-  return !function() {
+  return !function () {
     let e = _$$uQ();
     return Fk((e, t) => e?.get(t ?? "")?.type === "TEXT", e);
   }() ? jsx(tr, {
@@ -11422,7 +11422,7 @@ function pk({
 }) {
   let t = wA();
   let n = _$$hA();
-  let i = function(e, t) {
+  let i = function (e, t) {
     if (!t.dev_mode_activity || 0 === t.dev_mode_activity.length) return;
     let n = e ? t.dev_mode_activity.find(t => t.node_id === e) : t.dev_mode_activity[0];
     if (n) return {
@@ -11479,7 +11479,7 @@ function pA({
   let c = d6();
   let u = d4();
   let p = t ? e[0] : e.find(e => e.id === activeId);
-  let h = new qo(juq.LIVE_FILE).get(d ?? "");
+  let h = new ReduxSceneGraph(juq.LIVE_FILE).get(d ?? "");
   let f = h?.editInfo?.lastEditedAt;
   return p ? jsxs("div", {
     className: _$$s.flex.flexColumn.borderBox.bSolid.bb1.colorBorder.$,
@@ -11529,7 +11529,7 @@ function pP(e) {
     })
   });
 }
-let pL = memo(function() {
+let pL = memo(function () {
   let {
     commentsActive,
     isNodeSelected,
@@ -11632,7 +11632,7 @@ function pz({
     let t = e.parentNode;
     return t?.childrenNodes ?? [e];
   })(e).map(t => {
-    let n = t ? function({
+    let n = t ? function ({
       children: e
     }) {
       return e.map(e => ({
@@ -11689,7 +11689,7 @@ function pV({
       targetRect: i
     }), jsxs("button", {
       className: "dev_handoff_breadcrumbs--pathElementSelected--w9aeS dev_handoff_breadcrumbs--pathElement--AKgt0",
-      onClick: function() {
+      onClick: function () {
         l();
         d || t(j7({
           type: pO,
@@ -11752,7 +11752,7 @@ function pW({
     }), jsx("button", {
       ref: n,
       className: "dev_handoff_breadcrumbs--pathElementCollapsed--uY2eU dev_handoff_breadcrumbs--pathElement--AKgt0",
-      onClick: function() {
+      onClick: function () {
         l();
         r || t(j7({
           type: pM,
@@ -11777,7 +11777,7 @@ let pG = memo(() => {
   let t = J2(Ez5.devHandoffState().currentNodeId);
   let n = Gj((e, t, n) => {
     let a = e.get(t);
-    return a ? function(e) {
+    return a ? function (e) {
       return e.length <= 4 ? e : [e[0], e.slice(1, -2), e[e.length - 2], e[e.length - 1]];
     }([...function e(t, n) {
       if (n.guid === t) return [];
@@ -11785,7 +11785,7 @@ let pG = memo(() => {
       return a ? [...e(t, a), a] : [];
     }(n, a), a]) : [];
   }, selectedNodeID, t);
-  let o = UN().get(selectedNodeID);
+  let o = getSingletonSceneGraph().get(selectedNodeID);
   return 0 !== n.length && o ? jsx("div", {
     className: "dev_handoff_breadcrumbs--container--BoCAA",
     children: n.map((e, t) => {
@@ -11933,8 +11933,8 @@ function p4({
     children: [jsx("button", {
       className: "frame_picker--trigger--ZPMqZ",
       ref: o,
-      onClick: function() {
-        if (t) n(!1); else {
+      onClick: function () {
+        if (t) n(!1);else {
           let e = o.current?.getBoundingClientRect();
           e && (c(e), n(!0));
         }
@@ -11979,7 +11979,7 @@ function hc({
   let d = useCallback(() => {
     r(Ce());
   }, [r]);
-  !function(e = _$$lQ) {
+  !function (e = _$$lQ) {
     let t = _$$uQ();
     let n = ZC(t);
     useEffect(() => {
@@ -12279,7 +12279,7 @@ function h_({
     })
   });
 }
-_$$Ju(function() {
+_$$Ju(function () {
   let e = _$$d(e => e.modalShown);
   return e && e.type === _$$vl && e.data.styleNodeId ? jsx(hc, {
     ...e
@@ -12357,7 +12357,7 @@ function hD({
   children: t,
   containerClassName: n
 }) {
-  let l = function() {
+  let l = function () {
     let [e, t] = useState(() => window.matchMedia(hR).matches);
     useEffect(() => {
       let e = window.matchMedia(hR);
@@ -12374,7 +12374,7 @@ function hD({
   let {
     renderVariableDetails,
     variableIdForDetailsPanel
-  } = function() {
+  } = function () {
     let e = _$$d(e => e.selectedView.variableIdForDetailsPanel);
     return {
       renderVariableDetails: _$$u5({
@@ -12526,7 +12526,7 @@ function hV({
     children: [jsx("div", {
       ref: s,
       children: jsx(_$$d3, {
-        onClick: function() {
+        onClick: function () {
           g ? t(_$$oB()) : t(j7({
             type: hC
           }));
@@ -12577,7 +12577,7 @@ function hH() {
   let n = NM();
   let s = _$$ro();
   let d = md(be);
-  !function(e) {
+  !function (e) {
     let t = wA();
     useEffect(() => {
       let e = debugState.getState().selectedView;
@@ -12728,7 +12728,7 @@ function hJ() {
       }), jsxs("div", {
         className: ek()("extension_bottom_panel--headerRightButtons--qVDj-", _$$s.pt4.$),
         children: [jsx(_$$pm, {}), jsx("button", {
-          onClick: function() {
+          onClick: function () {
             t(!e);
           },
           style: {
@@ -12817,14 +12817,14 @@ function fl(e, t, n) {
   s.m12 += l;
   e.relativeTransform = s;
 }
-let fs = memo(function(e) {
+let fs = memo(function (e) {
   let {
     value,
     setValue,
     hasHug,
     isSection,
     isComponentSet
-  } = function(e, t) {
+  } = function (e, t) {
     let {
       Sprig
     } = useSprigWithSampling();
@@ -12909,7 +12909,7 @@ let fs = memo(function(e) {
 let fc = "focus_canvas_ui--withInsetEditorEnabled--Acy9S";
 let fu = "focus_canvas_ui--sideSection--s-sMs";
 function fp() {
-  !function() {
+  !function () {
     let {
       Sprig
     } = useSprigWithSampling();
@@ -12927,7 +12927,7 @@ function fp() {
   let {
     selectFocusNodeForInteractiveInspection,
     doneChangingFocusNodeForInteractiveInspection
-  } = function() {
+  } = function () {
     let e = Tv();
     let t = _$$d(e => e.mirror.appModel.hoveredNode);
     let [n, a] = _$$fp(_$$hn);
@@ -12938,7 +12938,7 @@ function fp() {
       a(_$$xX.STOPPED);
     }, [a]);
     useEffect(() => {
-      a(function(e, t) {
+      a(function (e, t) {
         let n = "-1:-1" !== t;
         return e !== _$$xX.STOPPED || n ? e === _$$xX.HOVERED_NOTHING_AFTER_STOPPED && n ? _$$xX.IDLE : e : _$$xX.HOVERED_NOTHING_AFTER_STOPPED;
       }(n, t));
@@ -13015,7 +13015,7 @@ function fh() {
   let x = [{
     displayText: _$$t2("dev_handoff.workflows.focus_view.show_canvas"),
     recordingKey: "dev_handoff.focus.show_on_page",
-    callback: function() {
+    callback: function () {
       "editorType" in h && h.editorType === _$$nT.Design && f("design");
       t.activeId && t.activeId !== V_ && e(Eg());
       g("Dev Mode Focus View Go To Canvas Clicked", c);
@@ -13124,7 +13124,7 @@ function ff() {
         children: [jsx(_$$lt, {
           className: "focus_canvas_ui--backLink--oBW-6",
           "data-onboarding-key": dV,
-          onClick: function(t) {
+          onClick: function (t) {
             t.preventDefault();
             let n = "editorType" in N && N.editorType === _$$nT.Design;
             !("showOverview" in N && N.showOverview) && n && x("design");
@@ -13249,7 +13249,7 @@ export function $$fm1() {
     })]
   });
 }
-let f_ = memo(function() {
+let f_ = memo(function () {
   useEffect(() => _$$K5, []);
   let e = useMemo(() => z4.getIsExtension(), []);
   let t = _$$l2();
@@ -13262,7 +13262,7 @@ let f_ = memo(function() {
     _$$px().prepareVmIfNeeded();
   }, []);
   _$$W4(1700);
-  !function() {
+  !function () {
     let e = _$$D();
     let t = _$$f2("dev_mode_notified_of_approved_org_request");
     let n = wA();
@@ -13301,4 +13301,4 @@ function fy() {
   return jsx(rL, {});
 }
 export const w = $$fg0;
-export const O = $$fm1; 
+export const O = $$fm1;

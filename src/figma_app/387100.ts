@@ -1,6 +1,6 @@
 import { F } from "../905/266460";
 import { getFeatureFlags } from "../905/601108";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 export function $$s20(e, t) {
   let r = t(e);
   if ("stop" === r || "skip" === r) return r;
@@ -49,7 +49,7 @@ export function $$p2(e, t) {
 export function $$_18(e, t) {
   return [...new Set(t)].reduce((t, r) => {
     let n = m(e, r, "CANVAS");
-    n && UN().get(n)?.isInternalOnlyNode && (n = null);
+    n && getSingletonSceneGraph().get(n)?.isInternalOnlyNode && (n = null);
     t[r] = n;
     return t;
   }, {});
@@ -207,7 +207,7 @@ export function $$O13(e, t) {
   }
 }
 export function $$R12() {
-  let e = UN();
+  let e = getSingletonSceneGraph();
   let t = [];
   $$s20(e.getRoot(), e => {
     t.push(e.guid);

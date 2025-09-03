@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { Qw } from "../905/989992";
+import { resourceUtils } from "../905/989992";
 import { oA } from "../905/663269";
 import { p } from "../figma_app/288654";
 import { _R } from "../figma_app/765689";
@@ -23,7 +23,7 @@ export function $$A1(e, t = !0) {
   let c = p(XRI, i, {
     enabled: t
   });
-  return useMemo(() => Qw.all(c.map(e => e.result)).transform(e => {
+  return useMemo(() => resourceUtils.all(c.map(e => e.result)).transform(e => {
     let t = {};
     for (let i of e) {
       let e = i.file;

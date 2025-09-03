@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { d4 } from "../vendor/514228";
 import { sH } from "../905/871411";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { am } from "../figma_app/901889";
 import { Y5 } from "../figma_app/455680";
@@ -139,7 +139,7 @@ export function $$x2(e, t, i) {
   return n;
 }
 export function $$S8(e, t) {
-  let i = UN();
+  let i = getSingletonSceneGraph();
   for (let n in e) {
     let e = i.get(n);
     if (!e || "TEXT" !== e.type) continue;

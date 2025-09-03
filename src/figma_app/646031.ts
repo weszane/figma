@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { md, Xr } from "../figma_app/27355";
 import s from "../vendor/805353";
 import { TW } from "../905/958097";
@@ -29,7 +29,7 @@ export function $$g0({
     type: s,
     scopes: o
   }));
-  let E = useMemo(() => r ? UN().get(r) : null, [r]);
+  let E = useMemo(() => r ? getSingletonSceneGraph().get(r) : null, [r]);
   let y = useMemo(() => function ({
     cachedFixes: e,
     variableMap: t,

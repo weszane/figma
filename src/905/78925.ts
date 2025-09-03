@@ -8,7 +8,7 @@ import { t as _$$t } from "../905/303541";
 import { Jo, If } from "../figma_app/565242";
 import { _j } from "../figma_app/843119";
 import { oj, Hb } from "../figma_app/986594";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { gL } from "../figma_app/618433";
 import { dx } from "../figma_app/649254";
 import { U } from "../905/492359";
@@ -27,7 +27,7 @@ export function $$b0({
     currentView,
     selectedNodes
   } = function () {
-    let e = UN();
+    let e = getSingletonSceneGraph();
     let t = oj(e.getDirectlySelectedNodes());
     let i = t[0]?.getNearestDakotaCollectionId();
     let n = gL(i ?? "");

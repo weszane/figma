@@ -8,7 +8,7 @@ import { i6g, NUh, W2B, Bko, uXP, h3O } from "../figma_app/763686";
 import { l7 } from "../905/189185";
 import { getFeatureFlags } from "../905/601108";
 import { zl, eU, md } from "../figma_app/27355";
-import { Qw } from "../905/989992";
+import { resourceUtils } from "../905/989992";
 import { MR } from "../vendor/390973";
 import { sx } from "../905/449184";
 import { l as _$$l } from "../905/728491";
@@ -186,7 +186,7 @@ async function Z(e) {
 let Q = null;
 export async function $$ee5(e) {
   async function t() {
-    for (let e of ["figma-autosave-v2", "figma-autosave-darklaunch-v2"]) MR(e).catch(() => { });
+    for (let e of ["figma-autosave-v2", "figma-autosave-darklaunch-v2"]) MR(e).catch(() => {});
     try {
       let t = await $$ed14(cu(e), e => Date.now() - e.lastUpdatedAt < $$Y11());
       if (t.length > 0) {
@@ -910,7 +910,7 @@ class ey {
     this.restoreAnalytics.fileKey = this.manager.fileKey;
     this.restoreAnalytics.isLocalFile = isLocalFileKey(this.manager.fileKey);
     this.restoring = !0;
-    let e = function() {
+    let e = function () {
       if (!_$$Ay.chrome || !navigator.storage?.persist) return Promise.resolve(!1);
       let e = new Promise(e => setTimeout(() => e(!1), 200));
       return Promise.race([navigator.storage.persist(), e]);
@@ -1268,7 +1268,7 @@ export function $$eF7() {
 export function $$ej4(e) {
   let t = d4(t => !!t.autosave.unclaimedFilesWithChangesInIDB.find(t => t.fileKey === e));
   let r = _$$l(dDF, t ? e : "");
-  return t ? r : Qw.loaded(!1);
+  return t ? r : resourceUtils.loaded(!1);
 }
 export function $$eU3() {
   let e = d4(e => e.autosave.unclaimedFilesWithChangesInIDB);
@@ -1321,4 +1321,4 @@ export const oE = $$eN19;
 export const t = $$eS20;
 export const wI = $$el21;
 export const yn = $$ev22;
-export const z$ = $$ei23; 
+export const z$ = $$ei23;

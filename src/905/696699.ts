@@ -4,7 +4,7 @@ import { TF, vf, kz } from "../905/18922";
 import { sH } from "../905/871411";
 import { yX, bW, iZ } from "../905/642476";
 import { dC, wv } from "../905/850029";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 function c(e, t, i) {
   t in e ? Object.defineProperty(e, t, {
     value: i,
@@ -173,7 +173,7 @@ function m(e) {
   });
   return t;
 }
-export function $$h3(e, t, i = UN()) {
+export function $$h3(e, t, i = getSingletonSceneGraph()) {
   let n = $$u1(e);
   if (n.regions.length > 0) {
     let t = n.regions[0];

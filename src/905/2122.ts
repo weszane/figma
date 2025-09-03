@@ -1,334 +1,654 @@
-import { assert } from "../figma_app/465776";
-import { c2 } from "../905/382883";
-import { ServiceCategories as _$$e } from "../905/165054";
-import { l7 } from "../905/189185";
-import { getSceneGraphInstance } from "../905/830071";
-import { isDevEnvironment } from "../figma_app/169182";
-import { $D } from "../905/11";
-import { Vi } from "../figma_app/364284";
-import { z } from "../905/223332";
-import { Gc } from "../figma_app/300692";
-import { gH } from "../figma_app/985200";
-import { BK, By } from "../905/816730";
-import { o9, AR, $f } from "../905/845428";
-import { P5 } from "../905/531105";
-import { Lb } from "../905/835985";
-import { qg } from "../905/866640";
-import { Ed, OV } from "../905/828428";
-class g {
-  constructor(e) {
-    this.vm = e;
-    this.effects = [];
-    this.cleanups = [];
-    this.hasRunEffects = !1;
+import { $D } from '../905/11'
+import { ServiceCategories } from '../905/165054'
+import { l7 } from '../905/189185'
+import { z } from '../905/223332'
+import { c2 } from '../905/382883'
+import { P5 } from '../905/531105'
+import { BK, By } from '../905/816730'
+import { Ed, OV } from '../905/828428'
+import { getSceneGraphInstance } from '../905/830071'
+import { Lb } from '../905/835985'
+import { AuthError, InternalError, RequestError } from '../905/845428'
+import { qg } from '../905/866640'
+import { isDevEnvironment } from '../figma_app/169182'
+import { Gc } from '../figma_app/300692'
+import { Vi } from '../figma_app/364284'
+import { assert } from '../figma_app/465776'
+import { gH } from '../figma_app/985200'
+
+/**
+ * Manages widget effects (class g)
+ */
+class WidgetEffectManager {
+  private vm: any
+  private effects: any[]
+  private cleanups: any[]
+  public hasRunEffects: boolean
+
+  constructor(vm: any) {
+    this.vm = vm
+    this.effects = []
+    this.cleanups = []
+    this.hasRunEffects = false
   }
-  addEffect(e) {
-    if (this.vm.isFunction(e)) {
-      this.vm.retainHandle(e);
-      this.effects.push(e);
-    } else throw Error("useEffect must be passed a function");
+
+  /**
+   * Add an effect function to the manager (addEffect)
+   */
+  addEffect(effect: any): void {
+    if (this.vm.isFunction(effect)) {
+      this.vm.retainHandle(effect)
+      this.effects.push(effect)
+    }
+    else {
+      throw new TypeError('useEffect must be passed a function')
+    }
   }
+
+  /**
+   * Cleanup all registered cleanup functions (cleanup)
+   */
   cleanup() {
-    let {
-      vm
-    } = this;
-    for (let t of this.cleanups) vm.isFunction(t) && (vm.callFunction(t, vm.undefined), vm.releaseHandle(t));
-    this.cleanups = [];
-  }
-  runEffects() {
-    this.hasRunEffects = !0;
-    this.cleanup();
-    let {
-      vm
-    } = this;
-    for (let t of this.effects) {
-      if (!vm.isFunction(t)) continue;
-      let i = l7.plugin("widget-effect", () => vm.callFunction(t, vm.undefined));
-      if ("FAILURE" === i.type) throw i.error;
-      vm.isFunction(i.handle) && (this.cleanups.push(i.handle), vm.retainHandle(i.handle));
-    }
-  }
-  clear() {
-    for (let e of (this.cleanup(), this.effects)) this.vm.releaseHandle(e);
-    this.effects = [];
-  }
-}
-class A {
-  constructor() {
-    this.promises = new Set();
-    this.currentPromise = null;
-    this.currentResolve = null;
-  }
-  async manage(e) {
-    try {
-      this.track(e);
-      await e;
-    } finally {
-      this.untrack(e);
-    }
-  }
-  get numPromises() {
-    return this.promises.size;
-  }
-  async waitForFinish() {
-    return !!this.currentPromise && (await this.currentPromise, !0);
-  }
-  track(e) {
-    this.promises.add(e);
-    this.currentPromise || (this.currentPromise = new Promise(e => {
-      this.currentResolve = e;
-    }));
-  }
-  untrack(e) {
-    this.promises.$$delete(e);
-    0 === this.promises.size && (this.currentResolve?.(), this.currentPromise = null);
-  }
-}
-function b() {
-  return new Promise(e => {
-    requestAnimationFrame(() => e());
-  });
-}
-class v {
-  constructor(e, t = b) {
-    this.renderFn = e;
-    this.wait = t;
-    this.currentTask = null;
-    this.isRendering = !1;
-    this.needsReschedule = !0;
-    this.shouldReschedule = !0;
-  }
-  schedule() {
-    z.renderWasScheduled();
-    this.isRendering && (this.needsReschedule = !0);
-    this.currentTask || (this.needsReschedule = !1, this.currentTask = (async () => {
-      await this.wait();
-      this.shouldReschedule && (this.isRendering = !0, await this.renderFn(), this.isRendering = !1, this.currentTask = null, this.needsReschedule && this.shouldReschedule && this.schedule());
-    })());
-  }
-  async waitForFinish() {
-    if (!this.currentTask) return !1;
-    for (; this.currentTask;) await this.currentTask;
-    return !0;
-  }
-  getCurrentTask() {
-    return this.currentTask;
-  }
-  clear() {
-    this.shouldReschedule = !1;
-  }
-}
-let x = new Set();
-let S = new Set();
-function w(e, t) {
-  t ? S.add(e) : S.$$delete(e);
-}
-export function $$C1(e) {
-  return S.has(e);
-}
-export class $$T0 {
-  constructor(e, t, i) {
-    this.vm = e;
-    this.pluginId = t;
-    this.runtimeBridge = i;
-    this.widgetFunction = void 0;
-    this.currentWidgetId = null;
-    this.renderingStateById = new Map();
-    this.promiseManager = new A();
-    this.lifecycleCommand = null;
-    this.isCanceled = !1;
-    this.isCleared = !1;
-    this.shutdownActions = [];
-    x.add(this);
-  }
-  get numTrackedPromises() {
-    return this.promiseManager.numPromises;
-  }
-  trackPromise(e) {
-    return this.promiseManager.manage(e);
-  }
-  isRunningWidgetFunction() {
-    return !!this.currentWidgetId;
-  }
-  runSyncedStateDefaultValueFunction(e) {
-    let t = this.currentWidgetId;
-    this.currentWidgetId = null;
-    this.reenableUnsafeGlobals();
-    e();
-    this.currentWidgetId = t;
-    this.disableUnsafeGlobalsForRender();
-  }
-  getCurrentWidgetNodeId() {
-    if (!this.currentWidgetId) throw Error("Not actively rendering widget");
-    return this.currentWidgetId;
-  }
-  getPluginRuntimeBridge() {
-    return this.runtimeBridge;
-  }
-  getRenderingState(e) {
-    let t = this.renderingStateById.get(e);
-    if (!t) throw Error("Widget rendering state not found");
-    return t;
-  }
-  registerWidgetFunction(e) {
-    this.vm.retainHandle(e);
-    this.widgetFunction = e;
-  }
-  addEffect(e) {
-    if (this.lifecycleCommand?.name === "rerender") return;
-    let t = this.getCurrentWidgetNodeId();
-    this.getRenderingState(t).effectManager.addEffect(e);
-  }
-  runEffects(e) {
-    this.getRenderingState(e).effectManager.runEffects();
-  }
-  scheduleRender(e, t = !1) {
-    if (!this.widgetFunction) throw Error("Widget has not been registered");
-    this.initializeRenderingState(e);
-    this.getRenderingState(e).renderScheduler.schedule();
-  }
-  maybeRunEffects(e) {
-    let t = this.getRenderingState(e).effectManager;
-    t.hasRunEffects || t.runEffects();
-  }
-  setPropertyMenu({
-    propertyMenuDefinitionHandle: e,
-    propertyMenuCallbackHandle: t
-  }) {
-    let i = this.getCurrentWidgetNodeId();
-    let n = this.getRenderingState(i);
-    if (n.propertyMenuHookCalled) throw new o9("usePropertyMenu called multiple times");
-    n.propertyMenuHookCalled = !0;
-    let r = BK({
-      vm: this.vm,
-      handle: e,
-      schema: Ed,
-      property: "usePropertyMenu.args[0]"
-    }).map(e => {
-      if ("dropdown" === e.itemType) {
-        let t = e.options.map(e => ({
-          option: e.option,
-          tooltip: e.label
-        }));
-        return {
-          ...e,
-          options: t
-        };
+    for (const cleanupFn of this.cleanups) {
+      if (this.vm.isFunction(cleanupFn)) {
+        this.vm.callFunction(cleanupFn, this.vm.undefined)
+        this.vm.releaseHandle(cleanupFn)
       }
-      return e;
-    });
-    if (r.forEach((e, t) => OV(e, t)), n.propertyMenuDefinition = r, !this.vm.isFunction(t)) throw new o9("usePropertyMenu.args[1] must be a function");
-    this.vm.retainHandle(t);
-    n.propertyMenuCallbackHandle = t;
+    }
+    this.cleanups = []
   }
-  setIsStickable(e) {
-    let t = this.getCurrentWidgetNodeId();
-    let i = this.getRenderingState(t);
-    if (null !== i.stickableState.isStickable) throw new o9("useStickable or useStickableHost called multiple times. You can only call one of them once per widget.");
-    i.stickableState.isStickable = !0;
-    this.vm.isFunction(e) && (i.stickableState.stuckStatusChangedHandle = e, this.vm.retainHandle(e));
+
+  /**
+   * Run all registered effects (runEffects)
+   */
+  runEffects() {
+    this.hasRunEffects = true
+    this.cleanup()
+    for (const effect of this.effects) {
+      if (!this.vm.isFunction(effect))
+        continue
+      const result = l7.plugin('widget-effect', () => this.vm.callFunction(effect, this.vm.undefined))
+      if (result.type === 'FAILURE')
+        throw result.error
+      if (this.vm.isFunction(result.handle)) {
+        this.cleanups.push(result.handle)
+        this.vm.retainHandle(result.handle)
+      }
+    }
   }
-  setIsStickableHost(e) {
-    let t = this.getCurrentWidgetNodeId();
-    let i = this.getRenderingState(t);
-    if (null !== i.stickableState.isStickable) throw new o9("useStickable or useStickableHost called multiple times. You can only call one of them once per widget.");
-    i.stickableState.isStickable = !1;
-    this.vm.isFunction(e) && (i.stickableState.attachedStickablesChangedHandle = e, this.vm.retainHandle(e));
+
+  /**
+   * Clear all effects and cleanups (clear)
+   */
+  clear() {
+    this.cleanup()
+    for (const effect of this.effects) {
+      this.vm.releaseHandle(effect)
+    }
+    this.effects = []
   }
-  setShouldHideCursors(e) {
-    let t = this.getCurrentWidgetNodeId();
-    let i = this.getRenderingState(t);
-    if (null !== i.shouldHideCursors) throw new o9("useHideCursors called multiple times. You can only call it once per widget.");
-    let n = BK({
+}
+
+/**
+ * Manages promises for widget rendering (class A)
+ */
+class WidgetPromiseManager {
+  private promises: Set<Promise<any>>
+  private currentPromise: Promise<void> | null
+  private currentResolve: (() => void) | null
+
+  constructor() {
+    this.promises = new Set()
+    this.currentPromise = null
+    this.currentResolve = null
+  }
+
+  /**
+   * Track and await a promise (manage)
+   */
+  async manage(promise: Promise<any>): Promise<void> {
+    try {
+      this.track(promise)
+      await promise
+    }
+    finally {
+      this.untrack(promise)
+    }
+  }
+
+  /**
+   * Number of tracked promises (numPromises)
+   */
+  get numPromises() {
+    return this.promises.size
+  }
+
+  /**
+   * Wait for all tracked promises to finish (waitForFinish)
+   */
+  async waitForFinish(): Promise<boolean> {
+    if (!this.currentPromise)
+      return false
+    await this.currentPromise
+    return true
+  }
+
+  /**
+   * Track a new promise (track)
+   */
+  track(promise: Promise<any>): void {
+    this.promises.add(promise)
+    if (!this.currentPromise) {
+      this.currentPromise = new Promise((resolve) => {
+        this.currentResolve = resolve
+      })
+    }
+  }
+
+  /**
+   * Untrack a finished promise (untrack)
+   */
+  untrack(promise: Promise<any>): void {
+    this.promises.delete(promise)
+    if (this.promises.size === 0) {
+      this.currentResolve?.()
+      this.currentPromise = null
+    }
+  }
+}
+
+/**
+ * Wait for next animation frame (b)
+ */
+function waitForNextFrame(): Promise<void> {
+  return new Promise((resolve) => {
+    requestAnimationFrame(() => resolve())
+  })
+}
+
+/**
+ * Schedules and manages widget renders (class v)
+ */
+class WidgetRenderScheduler {
+  private renderFn: () => Promise<void>
+  private wait: () => Promise<void>
+  private currentTask: Promise<void> | null
+  private isRendering: boolean
+  private needsReschedule: boolean
+  private shouldReschedule: boolean
+
+  constructor(renderFn: () => Promise<void>, wait: () => Promise<void> = waitForNextFrame) {
+    this.renderFn = renderFn
+    this.wait = wait
+    this.currentTask = null
+    this.isRendering = false
+    this.needsReschedule = true
+    this.shouldReschedule = true
+  }
+
+  /**
+   * Schedule a render (schedule)
+   */
+  schedule(): void {
+    z.renderWasScheduled()
+    if (this.isRendering) {
+      this.needsReschedule = true
+    }
+    if (!this.currentTask) {
+      this.needsReschedule = false
+      this.currentTask = (async () => {
+        await this.wait()
+        if (this.shouldReschedule) {
+          this.isRendering = true
+          await this.renderFn()
+          this.isRendering = false
+          this.currentTask = null
+          if (this.needsReschedule && this.shouldReschedule) {
+            this.schedule()
+          }
+        }
+      })()
+    }
+  }
+
+  /**
+   * Wait for the current render to finish (waitForFinish)
+   */
+  async waitForFinish(): Promise<boolean> {
+    if (!this.currentTask)
+      return false
+    while (this.currentTask) await this.currentTask
+    return true
+  }
+
+  /**
+   * Get the current render task (getCurrentTask)
+   */
+  getCurrentTask(): Promise<void> | null {
+    return this.currentTask
+  }
+
+  /**
+   * Prevent further rescheduling (clear)
+   */
+  clear(): void {
+    this.shouldReschedule = false
+  }
+}
+
+// Widget render state tracking sets (x, S)
+const widgetManagers = new Set<WidgetManager>()
+const renderingWidgets = new Set<string>()
+
+/**
+ * Track widget rendering state (w)
+ */
+function setWidgetRendering(widgetId: string, isRendering: boolean): void {
+  if (isRendering) {
+    renderingWidgets.add(widgetId)
+  }
+  else {
+    renderingWidgets.delete(widgetId)
+  }
+}
+
+/**
+ * Check if a widget is rendering ($$C1)
+ */
+export function isWidgetRendering(widgetId: string): boolean {
+  return renderingWidgets.has(widgetId)
+}
+
+interface WidgetRenderingState {
+  renderMode: 'current' | 'previous'
+  propertyMenuHookCalled: boolean
+  propertyMenuCallbackHandle: any
+  propertyMenuDefinition: any[]
+  effectManager: WidgetEffectManager
+  oldVRoot: any
+  stickableState: {
+    isStickable: boolean | null
+    stuckStatusChangedHandle: any
+    attachedStickablesChangedHandle: any
+  }
+  shouldHideCursors: boolean | null
+  renderScheduler: WidgetRenderScheduler
+}
+
+interface LifecycleCommand {
+  name: string
+  isInsert?: boolean
+}
+
+interface WaitForFinishOptions {
+  fromClosePlugin?: boolean
+}
+
+/**
+ * WidgetManager manages the lifecycle and rendering of a widget (class $$T0)
+ */
+export class WidgetManager {
+  private vm: any
+  private pluginId: string
+  private runtimeBridge: any
+  private widgetFunction: any
+  private currentWidgetId: string | null
+  private renderingStateById: Map<string, WidgetRenderingState>
+  private promiseManager: WidgetPromiseManager
+  private lifecycleCommand: LifecycleCommand | null
+  private isCanceled: boolean
+  private isCleared: boolean
+  private shutdownActions: (() => void)[]
+  private reenableUnsafeGlobalsHandle?: any
+
+  constructor(vm: any, pluginId: string, runtimeBridge: any) {
+    this.vm = vm
+    this.pluginId = pluginId
+    this.runtimeBridge = runtimeBridge
+    this.widgetFunction = undefined
+    this.currentWidgetId = null
+    this.renderingStateById = new Map()
+    this.promiseManager = new WidgetPromiseManager()
+    this.lifecycleCommand = null
+    this.isCanceled = false
+    this.isCleared = false
+    this.shutdownActions = []
+    widgetManagers.add(this)
+  }
+
+  /**
+   * Number of tracked promises (numTrackedPromises)
+   */
+  get numTrackedPromises() {
+    return this.promiseManager.numPromises
+  }
+
+  /**
+   * Track a promise (trackPromise)
+   */
+  trackPromise(promise: Promise<any>): Promise<void> {
+    return this.promiseManager.manage(promise)
+  }
+
+  /**
+   * Is a widget function currently running? (isRunningWidgetFunction)
+   */
+  isRunningWidgetFunction(): boolean {
+    return !!this.currentWidgetId
+  }
+
+  /**
+   * Run a function with synced state context (runSyncedStateDefaultValueFunction)
+   */
+  runSyncedStateDefaultValueFunction(fn: () => void): void {
+    const prevId = this.currentWidgetId
+    this.currentWidgetId = null
+    this.reenableUnsafeGlobals()
+    fn()
+    this.currentWidgetId = prevId
+    this.disableUnsafeGlobalsForRender()
+  }
+
+  /**
+   * Get the current widget node id (getCurrentWidgetNodeId)
+   */
+  getCurrentWidgetNodeId(): string {
+    if (!this.currentWidgetId)
+      throw new Error('Not actively rendering widget')
+    return this.currentWidgetId
+  }
+
+  /**
+   * Get the plugin runtime bridge (getPluginRuntimeBridge)
+   */
+  getPluginRuntimeBridge(): any {
+    return this.runtimeBridge
+  }
+
+  /**
+   * Get rendering state for a widget (getRenderingState)
+   */
+  getRenderingState(widgetId: string): WidgetRenderingState {
+    const state = this.renderingStateById.get(widgetId)
+    if (!state)
+      throw new Error('Widget rendering state not found')
+    return state
+  }
+
+  /**
+   * Register the widget function (registerWidgetFunction)
+   */
+  registerWidgetFunction(fn: any): void {
+    this.vm.retainHandle(fn)
+    this.widgetFunction = fn
+  }
+
+  /**
+   * Add an effect for the current widget (addEffect)
+   */
+  addEffect(effect: any): void {
+    if (this.lifecycleCommand?.name === 'rerender')
+      return
+    const widgetId = this.getCurrentWidgetNodeId()
+    this.getRenderingState(widgetId).effectManager.addEffect(effect)
+  }
+
+  /**
+   * Run effects for a widget (runEffects)
+   */
+  runEffects(widgetId: string): void {
+    this.getRenderingState(widgetId).effectManager.runEffects()
+  }
+
+  /**
+   * Schedule a render for a widget (scheduleRender)
+   */
+  scheduleRender(widgetId: string, _force: boolean = false): void {
+    if (!this.widgetFunction)
+      throw new Error('Widget has not been registered')
+    this.initializeRenderingState(widgetId)
+    this.getRenderingState(widgetId).renderScheduler.schedule()
+  }
+
+  /**
+   * Maybe run effects for a widget (maybeRunEffects)
+   */
+  maybeRunEffects(widgetId: string): void {
+    const effectManager = this.getRenderingState(widgetId).effectManager
+    if (!effectManager.hasRunEffects)
+      effectManager.runEffects()
+  }
+
+  /**
+   * Set the property menu for the current widget (setPropertyMenu)
+   */
+  setPropertyMenu({
+    propertyMenuDefinitionHandle,
+    propertyMenuCallbackHandle,
+  }: {
+    propertyMenuDefinitionHandle: any
+    propertyMenuCallbackHandle: any
+  }): void {
+    const widgetId = this.getCurrentWidgetNodeId()
+    const state = this.getRenderingState(widgetId)
+    if (state.propertyMenuHookCalled)
+      throw new InternalError('usePropertyMenu called multiple times')
+    state.propertyMenuHookCalled = true
+    const definition = BK({
       vm: this.vm,
-      handle: e,
+      handle: propertyMenuDefinitionHandle,
+      schema: Ed,
+      property: 'usePropertyMenu.args[0]',
+    }).map((item) => {
+      if (item.itemType === 'dropdown') {
+        const options = item.options.map(opt => ({
+          option: opt.option,
+          tooltip: opt.label,
+        }))
+        return {
+          ...item,
+          options,
+        }
+      }
+      return item
+    })
+    definition.forEach((item, idx) => OV(item, idx))
+    state.propertyMenuDefinition = definition
+    if (!this.vm.isFunction(propertyMenuCallbackHandle))
+      throw new InternalError('usePropertyMenu.args[1] must be a function')
+    this.vm.retainHandle(propertyMenuCallbackHandle)
+    state.propertyMenuCallbackHandle = propertyMenuCallbackHandle
+  }
+
+  /**
+   * Set stickable state for the current widget (setIsStickable)
+   */
+  setIsStickable(callback?: any): void {
+    const widgetId = this.getCurrentWidgetNodeId()
+    const state = this.getRenderingState(widgetId)
+    if (state.stickableState.isStickable !== null) {
+      throw new InternalError('useStickable or useStickableHost called multiple times. You can only call one of them once per widget.')
+    }
+    state.stickableState.isStickable = true
+    if (this.vm.isFunction(callback)) {
+      state.stickableState.stuckStatusChangedHandle = callback
+      this.vm.retainHandle(callback)
+    }
+  }
+
+  /**
+   * Set stickable host state for the current widget (setIsStickableHost)
+   */
+  setIsStickableHost(callback?: any): void {
+    const widgetId = this.getCurrentWidgetNodeId()
+    const state = this.getRenderingState(widgetId)
+    if (state.stickableState.isStickable !== null) {
+      throw new InternalError('useStickable or useStickableHost called multiple times. You can only call one of them once per widget.')
+    }
+    state.stickableState.isStickable = false
+    if (this.vm.isFunction(callback)) {
+      state.stickableState.attachedStickablesChangedHandle = callback
+      this.vm.retainHandle(callback)
+    }
+  }
+
+  /**
+   * Set whether to hide cursors for the current widget (setShouldHideCursors)
+   */
+  setShouldHideCursors(handle: any): void {
+    const widgetId = this.getCurrentWidgetNodeId()
+    const state = this.getRenderingState(widgetId)
+    if (state.shouldHideCursors !== null) {
+      throw new InternalError('useHideCursors called multiple times. You can only call it once per widget.')
+    }
+    const result = BK({
+      vm: this.vm,
+      handle,
       schema: By.bool,
-      property: "useHideCursors.args[0]"
-    });
-    i.shouldHideCursors = n;
+      property: 'useHideCursors.args[0]',
+    })
+    state.shouldHideCursors = result
   }
-  getPropertyMenuDefinition(e) {
-    return this.getRenderingState(e).propertyMenuDefinition || [];
+
+  /**
+   * Get property menu definition for a widget (getPropertyMenuDefinition)
+   */
+  getPropertyMenuDefinition(widgetId: string): any[] {
+    return this.getRenderingState(widgetId).propertyMenuDefinition || []
   }
-  getPropertyMenuCallbackHandle(e) {
-    return this.getRenderingState(e).propertyMenuCallbackHandle || null;
+
+  /**
+   * Get property menu callback handle for a widget (getPropertyMenuCallbackHandle)
+   */
+  getPropertyMenuCallbackHandle(widgetId: string): any {
+    return this.getRenderingState(widgetId).propertyMenuCallbackHandle || null
   }
-  getRenderMode(e) {
-    return this.getRenderingState(e).renderMode;
+
+  /**
+   * Get render mode for a widget (getRenderMode)
+   */
+  getRenderMode(widgetId: string): 'current' | 'previous' {
+    return this.getRenderingState(widgetId).renderMode
   }
-  initializeRenderingState(e) {
-    if (!this.renderingStateById.get(e)) {
-      let t = {
-        renderMode: "current",
-        propertyMenuHookCalled: !1,
+
+  /**
+   * Initialize rendering state for a widget (initializeRenderingState)
+   */
+  initializeRenderingState(widgetId: string): void {
+    if (!this.renderingStateById.get(widgetId)) {
+      const state = {
+        renderMode: 'current' as const,
+        propertyMenuHookCalled: false,
         propertyMenuCallbackHandle: null,
         propertyMenuDefinition: [],
-        effectManager: new g(this.vm),
-        oldVRoot: null,
+        effectManager: new WidgetEffectManager(this.vm),
+        oldVRoot: null as { rootNode: any, syncedState: any } | null,
         stickableState: {
           isStickable: null,
           stuckStatusChangedHandle: null,
-          attachedStickablesChangedHandle: null
+          attachedStickablesChangedHandle: null,
         },
         shouldHideCursors: null,
-        renderScheduler: new v(async () => {
+        renderScheduler: new WidgetRenderScheduler(async () => {
           try {
-            let i = getSceneGraphInstance().get(e);
-            if (!i) return;
-            let n = null;
-            let a = Gc(i);
-            let l = a?.manifest.networkAccess?.allowedDomains ?? gH;
-            let {
+            const node = getSceneGraphInstance().get(widgetId)
+            if (!node)
+              return
+            let renderResult: { rootNode: any, syncedState: any } | null = null
+            const pluginManifest = Gc(node)
+            const allowedDomains = pluginManifest?.manifest.networkAccess?.allowedDomains ?? gH
+            const {
               imgInfoMap,
-              vRoot
+              vRoot,
             } = await qg(() => {
-              if (!getSceneGraphInstance().get(e)) throw new AR("Could not find widget node in renderWidgetTree");
-              n && c2(n.syncedState, i.getWidgetSyncedState()) || (n = this.renderWidgetTree(e, "current"));
-              return n;
-            }, this.getPluginRuntimeBridge(), l);
-            l7.plugin("widget-rerender", () => {
-              t.oldVRoot && !c2(t.oldVRoot.syncedState, i.renderedSyncedState) && (t.oldVRoot = this.renderWidgetTree(e, "previous"));
-              let a = window.performance.now();
-              w(e, !0);
+              if (!getSceneGraphInstance().get(widgetId))
+                throw new AuthError('Could not find widget node in renderWidgetTree')
+              if (!renderResult || !c2(renderResult.syncedState, node.getWidgetSyncedState())) {
+                renderResult = this.renderWidgetTree(widgetId, 'current') as { rootNode: any, syncedState: any }
+              }
+              return renderResult
+            }, this.getPluginRuntimeBridge(), allowedDomains)
+            l7.plugin('widget-rerender', () => {
+              if (state.oldVRoot && !c2(state.oldVRoot.syncedState, node.renderedSyncedState)) {
+                const renderTreeResult = this.renderWidgetTree(widgetId, 'previous')
+                if (!(renderTreeResult instanceof RequestError)) {
+                  state.oldVRoot = renderTreeResult
+                }
+              }
+              const start = window.performance.now()
+              setWidgetRendering(widgetId, true)
               Lb({
-                widgetNodeID: e,
+                widgetNodeID: widgetId,
                 newVRoot: vRoot,
-                oldVRoot: t.oldVRoot,
-                propertyMenuDefinition: this.getPropertyMenuDefinition(e),
+                oldVRoot: state.oldVRoot,
+                propertyMenuDefinition: this.getPropertyMenuDefinition(widgetId),
                 runtime: this.getPluginRuntimeBridge(),
                 imgInfoMap,
-                stickableState: t.stickableState,
-                shouldHideCursors: t.shouldHideCursors
-              });
-              i.renderedSyncedState = i.getWidgetSyncedState();
-              let s = window.performance.now() - a;
-              t.oldVRoot = n;
-              z.didReconciliation(s);
-            });
-            this.runEffects(e);
-          } catch (i) {
-            if (i instanceof AR) return;
-            let t = "";
-            if (i instanceof o9 || isDevEnvironment() ? (console.error(i), t = i.message) : i instanceof $f || ("string" == typeof i && (i = Error(i)), $D(_$$e.EXTENSIBILITY, i)), this.isFirstPartyWidget() ? $D(_$$e.EXTENSIBILITY, i) : this.vm.evalTrustedCode(`throw "An error occurred while running this widget ${t ? `- '${t}'` : ""}"`), this.lifecycleCommand?.name === "mount" && this.lifecycleCommand?.isInsert) {
-              let t = getSceneGraphInstance().get(e);
-              t && l7.plugin("remove-widget-after-first-render", () => t.removeWidgetWithoutSafetyChecks());
-            }
-          } finally {
-            requestAnimationFrame(() => {
-              w(e, !1);
-            });
+                stickableState: state.stickableState,
+                shouldHideCursors: state.shouldHideCursors,
+              })
+              node.renderedSyncedState = node.getWidgetSyncedState()
+              const duration = window.performance.now() - start
+              state.oldVRoot = renderResult
+              z.didReconciliation(duration)
+            })
+            this.runEffects(widgetId)
           }
-        })
-      };
-      this.renderingStateById.set(e, t);
+          catch (err: any) {
+            if (err instanceof AuthError)
+              return
+            let msg = ''
+            if (err instanceof InternalError || isDevEnvironment()) {
+              console.error(err)
+              msg = err.message
+            }
+            else if (!(err instanceof RequestError)) {
+              if (typeof err === 'string') {
+                const errorObj = new Error(err)
+                $D(ServiceCategories.EXTENSIBILITY, errorObj)
+              }
+              else {
+                $D(ServiceCategories.EXTENSIBILITY, err)
+              }
+            }
+            if (this.isFirstPartyWidget()) {
+              $D(ServiceCategories.EXTENSIBILITY, err)
+            }
+            else {
+              this.vm.evalTrustedCode(`throw "An error occurred while running this widget ${msg ? `- '${msg}'` : ''}"`)
+            }
+            if (this.lifecycleCommand?.name === 'mount' && this.lifecycleCommand?.isInsert) {
+              const node = getSceneGraphInstance().get(widgetId)
+              if (node) {
+                l7.plugin('remove-widget-after-first-render', () => node.removeWidgetWithoutSafetyChecks())
+              }
+            }
+          }
+          finally {
+            requestAnimationFrame(() => {
+              setWidgetRendering(widgetId, false)
+            })
+          }
+        }),
+      }
+      this.renderingStateById.set(widgetId, state)
     }
   }
-  isFirstPartyWidget() {
-    return Vi(this.pluginId);
+
+  /**
+   * Is this a first-party widget? (isFirstPartyWidget)
+   */
+  isFirstPartyWidget(): boolean {
+    return Vi(this.pluginId)
   }
-  disableUnsafeGlobalsForRender() {
-    if (this.isFirstPartyWidget()) return;
-    let e = this.vm.evalTrustedCode(`
+
+  /**
+   * Disable unsafe globals for widget render (disableUnsafeGlobalsForRender)
+   */
+  disableUnsafeGlobalsForRender(): void {
+    if (this.isFirstPartyWidget())
+      return
+    const result = this.vm.evalTrustedCode(`
       (() => {
         let originalRand = Math.random
         Math.random = () => {
@@ -336,133 +656,214 @@ export class $$T0 {
         }
         return () => {Math.random = originalRand}
       })()
-      `);
-    assert("SUCCESS" === e.type);
-    this.vm.retainHandle(e.handle);
-    this.reenableUnsafeGlobalsHandle = e.handle;
+    `)
+    assert(result.type === 'SUCCESS')
+    this.vm.retainHandle(result.handle)
+    this.reenableUnsafeGlobalsHandle = result.handle
   }
-  reenableUnsafeGlobals() {
-    this.isValidFunctionHandle(this.reenableUnsafeGlobalsHandle) && (this.vm.callFunction(this.reenableUnsafeGlobalsHandle, this.vm.undefined), this.vm.releaseHandle(this.reenableUnsafeGlobalsHandle), this.reenableUnsafeGlobalsHandle = void 0);
+
+  /**
+   * Re-enable unsafe globals after render (reenableUnsafeGlobals)
+   */
+  reenableUnsafeGlobals(): void {
+    if (this.isValidFunctionHandle(this.reenableUnsafeGlobalsHandle)) {
+      this.vm.callFunction(this.reenableUnsafeGlobalsHandle, this.vm.undefined)
+      this.vm.releaseHandle(this.reenableUnsafeGlobalsHandle)
+      this.reenableUnsafeGlobalsHandle = undefined
+    }
   }
-  renderWidgetTree(e, t) {
-    if (!this.widgetFunction) throw Error("Widget has not been registered");
+
+  /**
+   * Render the widget tree (renderWidgetTree)
+   */
+  renderWidgetTree(widgetId: string, renderMode: 'current' | 'previous'): { rootNode: any, syncedState: any } | RequestError {
+    if (!this.widgetFunction)
+      throw new Error('Widget has not been registered')
     try {
-      this.initializeRenderingState(e);
-      let i = this.getRenderingState(e);
-      this.releaseRenderingStateHandles(i);
-      i.effectManager.clear();
-      i.propertyMenuHookCalled = !1;
-      i.propertyMenuDefinition = [];
-      i.propertyMenuCallbackHandle = null;
-      i.renderMode = t;
-      i.shouldHideCursors = null;
-      i.stickableState = {
+      this.initializeRenderingState(widgetId)
+      const state = this.getRenderingState(widgetId)
+      this.releaseRenderingStateHandles(state)
+      state.effectManager.clear()
+      state.propertyMenuHookCalled = false
+      state.propertyMenuDefinition = []
+      state.propertyMenuCallbackHandle = null
+      state.renderMode = renderMode
+      state.shouldHideCursors = null
+      state.stickableState = {
         isStickable: null,
         attachedStickablesChangedHandle: null,
-        stuckStatusChangedHandle: null
-      };
-      let n = window.performance.now();
-      this.currentWidgetId = e;
-      let r = getSceneGraphInstance().get(e);
-      let a = "current" === t ? r.getWidgetSyncedState() : r.renderedSyncedState;
-      let l = !r.widgetVersionId;
-      this.disableUnsafeGlobalsForRender();
-      let d = this.vm.callFunction(this.widgetFunction, this.vm.undefined);
-      if (this.reenableUnsafeGlobals(), this.currentWidgetId = null, "FAILURE" === d.type) {
-        this.vm.releaseHandle(this.widgetFunction);
-        return new $f(d.error);
+        stuckStatusChangedHandle: null,
       }
-      let c = d.handle;
-      let m = window.performance.now();
-      let h = this.vm.deepUnwrap(c, !0);
-      let g = Gc(r);
-      let A = g?.manifest?.widgetApi ?? "1.0.0";
-      let y = P5(h, {
-        isLocalWidget: l,
-        widgetNodeID: e,
-        pluginID: r.widgetId,
-        widgetVersionID: r.widgetVersionId,
-        widgetName: r.name,
-        widgetApiVersion: A,
-        enableFullJsx: !1
-      });
-      let b = window.performance.now();
-      z.didRender(b - n, b - m);
-      g && g.name && l7.plugin("set-widget-name", () => {
-        r.widgetName = g.name;
-      });
+      const start = window.performance.now()
+      this.currentWidgetId = widgetId
+      const node = getSceneGraphInstance().get(widgetId)
+      if (!node) {
+        throw new Error(`Widget node not found for ID: ${widgetId}`)
+      }
+      const syncedState = renderMode === 'current' ? node.getWidgetSyncedState() : node.renderedSyncedState
+      const isLocalWidget = !node.widgetVersionId
+      this.disableUnsafeGlobalsForRender()
+      const result = this.vm.callFunction(this.widgetFunction, this.vm.undefined)
+      this.reenableUnsafeGlobals()
+      this.currentWidgetId = null
+      if (result.type === 'FAILURE') {
+        this.vm.releaseHandle(this.widgetFunction)
+        return new RequestError(result.error)
+      }
+      const handle = result.handle
+      const afterCall = window.performance.now()
+      const unwrapped = this.vm.deepUnwrap(handle, true)
+      const pluginManifest = Gc(node)
+      const widgetApiVersion = pluginManifest?.manifest?.widgetApi ?? '1.0.0'
+      const rootNode = P5(unwrapped, {
+        isLocalWidget,
+        widgetNodeID: widgetId,
+        pluginID: node.widgetId,
+        widgetVersionID: node.widgetVersionId,
+        widgetName: node.name,
+        widgetApiVersion,
+        enableFullJsx: false,
+      })
+      const afterRender = window.performance.now()
+      z.didRender(afterRender - start, afterRender - afterCall)
+      if (pluginManifest && pluginManifest.name) {
+        l7.plugin('set-widget-name', () => {
+          node.widgetName = pluginManifest.name
+        })
+      }
       return {
-        rootNode: y,
-        syncedState: a
-      };
-    } finally {
-      this.currentWidgetId = null;
-      this.getRenderingState(e).renderMode = "current";
-    }
-  }
-  async waitForFinish(e = {
-    fromClosePlugin: !1
-  }) {
-    if (this.isCanceled) return;
-    let t = !0;
-    for (; t;) {
-      for (let [, {
-        renderScheduler: e
-      }] of (t = !1, this.renderingStateById)) t = (await e.waitForFinish()) || t;
-      e?.fromClosePlugin || (t = (await this.promiseManager.waitForFinish()) || t);
-    }
-  }
-  clear() {
-    if (!this.isCleared) {
-      for (let [, e] of (this.isCleared = !0, this.isValidFunctionHandle(this.widgetFunction) && this.vm.releaseHandle(this.widgetFunction), this.renderingStateById)) {
-        e.renderScheduler.clear();
-        e.effectManager.clear();
-        this.releaseRenderingStateHandles(e);
+        rootNode,
+        syncedState,
       }
-      this.isValidFunctionHandle(this.reenableUnsafeGlobalsHandle) && this.vm.releaseHandle(this.reenableUnsafeGlobalsHandle);
-      this.renderingStateById = new Map();
-      this.currentWidgetId = null;
-      this.widgetFunction = void 0;
-      x.$$delete(this);
-      this.runShutdownActions();
+    }
+    finally {
+      this.currentWidgetId = null
+      this.getRenderingState(widgetId).renderMode = 'current'
     }
   }
-  runShutdownActions() {
-    let e = null;
-    for (let t of this.shutdownActions) try {
-      t();
-    } catch (t) {
-      e || (e = t);
-      console.error(`runShutdownActions error: ${t}`);
+
+  /**
+   * Wait for all renders and promises to finish (waitForFinish)
+   */
+  async waitForFinish(options: WaitForFinishOptions = {
+    fromClosePlugin: false,
+  }): Promise<void> {
+    if (this.isCanceled)
+      return
+    let pending = true
+    while (pending) {
+      pending = false
+      for (const [, {
+        renderScheduler,
+      }] of this.renderingStateById) {
+        pending = (await renderScheduler.waitForFinish()) || pending
+      }
+      if (!options?.fromClosePlugin) {
+        pending = (await this.promiseManager.waitForFinish()) || pending
+      }
     }
-    if (this.shutdownActions = [], e) throw e;
   }
-  setOldVRoot(e, t) {
-    this.getRenderingState(e).oldVRoot = t;
+
+  /**
+   * Clear all widget state and shutdown (clear)
+   */
+  clear(): void {
+    if (!this.isCleared) {
+      this.isCleared = true
+      if (this.isValidFunctionHandle(this.widgetFunction)) {
+        this.vm.releaseHandle(this.widgetFunction)
+      }
+      for (const [, state] of this.renderingStateById) {
+        state.renderScheduler.clear()
+        state.effectManager.clear()
+        this.releaseRenderingStateHandles(state)
+      }
+      if (this.isValidFunctionHandle(this.reenableUnsafeGlobalsHandle)) {
+        this.vm.releaseHandle(this.reenableUnsafeGlobalsHandle)
+      }
+      this.renderingStateById = new Map()
+      this.currentWidgetId = null
+      this.widgetFunction = undefined
+      widgetManagers.delete(this)
+      this.runShutdownActions()
+    }
   }
-  getLifecycleCommand() {
-    return this.lifecycleCommand;
+
+  /**
+   * Run all registered shutdown actions (runShutdownActions)
+   */
+  runShutdownActions(): void {
+    let firstError: any = null
+    for (const action of this.shutdownActions) {
+      try {
+        action()
+      }
+      catch (err) {
+        if (!firstError)
+          firstError = err
+        console.error(`runShutdownActions error: ${err}`)
+      }
+    }
+    this.shutdownActions = []
+    if (firstError)
+      throw firstError
   }
-  setLifecycleCommand(e) {
-    this.lifecycleCommand = e;
+
+  /**
+   * Set the old vRoot for a widget (setOldVRoot)
+   */
+  setOldVRoot(widgetId: string, vRoot: any): void {
+    this.getRenderingState(widgetId).oldVRoot = vRoot
   }
-  addShutdownAction(e) {
-    if (this.isCleared) throw Error("Cannot add shutdown action after widget manager has been cleared");
-    this.shutdownActions.push(e);
+
+  /**
+   * Get the current lifecycle command (getLifecycleCommand)
+   */
+  getLifecycleCommand(): LifecycleCommand | null {
+    return this.lifecycleCommand
   }
-  isValidFunctionHandle(e) {
-    return !!(e && !this.vm.isDestroyed() && this.vm.isFunction(e));
+
+  /**
+   * Set the lifecycle command (setLifecycleCommand)
+   */
+  setLifecycleCommand(cmd: LifecycleCommand | null): void {
+    this.lifecycleCommand = cmd
   }
-  releaseRenderingStateHandles(e) {
-    let t = e.propertyMenuCallbackHandle;
-    this.isValidFunctionHandle(t) && this.vm.releaseHandle(t);
-    let {
+
+  /**
+   * Add a shutdown action (addShutdownAction)
+   */
+  addShutdownAction(action: () => void): void {
+    if (this.isCleared)
+      throw new Error('Cannot add shutdown action after widget manager has been cleared')
+    this.shutdownActions.push(action)
+  }
+
+  /**
+   * Check if a function handle is valid (isValidFunctionHandle)
+   */
+  isValidFunctionHandle(handle: any): boolean {
+    return !!(handle && !this.vm.isDestroyed() && this.vm.isFunction(handle))
+  }
+
+  /**
+   * Release handles for a rendering state (releaseRenderingStateHandles)
+   */
+  releaseRenderingStateHandles(state: WidgetRenderingState): void {
+    const t = state.propertyMenuCallbackHandle
+    if (this.isValidFunctionHandle(t))
+      this.vm.releaseHandle(t)
+    const {
       attachedStickablesChangedHandle,
-      stuckStatusChangedHandle
-    } = e.stickableState;
-    this.isValidFunctionHandle(attachedStickablesChangedHandle) && this.vm.releaseHandle(attachedStickablesChangedHandle);
-    this.isValidFunctionHandle(stuckStatusChangedHandle) && this.vm.releaseHandle(stuckStatusChangedHandle);
+      stuckStatusChangedHandle,
+    } = state.stickableState
+    if (this.isValidFunctionHandle(attachedStickablesChangedHandle))
+      this.vm.releaseHandle(attachedStickablesChangedHandle)
+    if (this.isValidFunctionHandle(stuckStatusChangedHandle))
+      this.vm.releaseHandle(stuckStatusChangedHandle)
   }
 }
-export const SS = $$T0;
-export const Dc = $$C1;
+
+// Exported names for compatibility
+export const SS = WidgetManager
+export const Dc = isWidgetRendering

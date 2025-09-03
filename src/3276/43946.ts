@@ -43,7 +43,7 @@ import { f6 } from "../figma_app/915202";
 import { $A } from "../905/782918";
 import { U as _$$U } from "../figma_app/65327";
 import { A as _$$A3 } from "../905/251970";
-import { Qw } from "../905/989992";
+import { resourceUtils } from "../905/989992";
 import Q from "classnames";
 import { k as _$$k3 } from "../905/582200";
 import { oW as _$$oW } from "../905/675859";
@@ -105,7 +105,7 @@ function ed(e) {
       muted: !0
     });
   };
-  let l = Qw.useTransform(n, e => t?.id === e?.creatorId ? "owner" : e?.canEdit ? "editor" : "viewer");
+  let l = resourceUtils.useTransform(n, e => t?.id === e?.creatorId ? "owner" : e?.canEdit ? "editor" : "viewer");
   return jsx(fu, {
     name: e.trackingContextName,
     properties: {

@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { getFeatureFlags } from "../905/601108";
 import { Iz, eU, md } from "../figma_app/27355";
-import { Qw } from "../905/989992";
+import { resourceUtils } from "../905/989992";
 import { Xf } from "../figma_app/153916";
 import { A } from "../905/920142";
 import { oA, Xm, gB } from "../905/723791";
@@ -24,7 +24,7 @@ let m = Iz(({
     noTosAcceptanceKey: oA(e?.plan?.termsOfServiceAcceptanceByTermsKey)?.termsKey !== FBillingModelType.SEATS_MODEL_BILLING_2025,
     shouldNotAutoRenew: i
   };
-}) : Qw.disabled()));
+}) : resourceUtils.disabled()));
 export function $$f0(e) {
   let l = e?.id ?? null;
   let i = !CT();

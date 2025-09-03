@@ -34,7 +34,7 @@ import { ss as _$$ss } from "../figma_app/402783";
 import { v as _$$v2, Cw } from "../9410/295369";
 import { nG as _$$nG } from "../9410/584673";
 import { Cb } from "../9410/659371";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { cF } from "../figma_app/761984";
 import { b7 } from "../figma_app/101849";
 import { A as _$$A2 } from "../vendor/90566";
@@ -161,7 +161,7 @@ import { v as _$$v3 } from "../905/596134";
 import { nk as _$$nk, Ch } from "../figma_app/2023";
 import { g_ } from "../905/646788";
 import { aA as _$$aA, pb as _$$pb, Ij } from "../figma_app/877449";
-import { Qw } from "../905/989992";
+import { resourceUtils } from "../905/989992";
 import { Rs } from "../figma_app/288654";
 import { lg, m0, Em } from "../figma_app/976749";
 import { FFileType } from "../figma_app/191312";
@@ -313,7 +313,7 @@ function V(e) {
     if (!e) return !0;
     let {
       data
-    } = b7(UN());
+    } = b7(getSingletonSceneGraph());
     return JSON.stringify(data.map(e => ({
       t: e.t,
       id: e.id,
@@ -363,7 +363,7 @@ function q({
     let s = d4(e => e.mirror.sceneGraphSelection);
     let o = useMemo(() => Object.entries(s).filter(([e, t]) => t).map(([e, t]) => e), [s]);
     let [l, d] = useState([]);
-    let c = UN();
+    let c = getSingletonSceneGraph();
     let u = 0 === o.length && l.length > 0 && !K(l, c).length;
     useEffect(() => {
       switch (function ({
@@ -1940,7 +1940,7 @@ function ra({
   let o = Rs(KMT, {
     currentOrgId: r?.parentOrgId || null
   });
-  return useMemo(() => Qw.all([a, o]).transform(r => {
+  return useMemo(() => resourceUtils.all([a, o]).transform(r => {
     let [n, a] = r;
     let s = function (e) {
       let t = Date.now();
@@ -5709,7 +5709,7 @@ function ac(e) {
 function au(e) {
   useEffect(() => {
     !function () {
-      let e = UN().getCurrentPage();
+      let e = getSingletonSceneGraph().getCurrentPage();
       if (e && e.childCount >= 1) {
         var t;
         var i;
@@ -6082,7 +6082,7 @@ function aw(e) {
       var e;
       var t;
       var i;
-      let r = UN().getCurrentPage();
+      let r = getSingletonSceneGraph().getCurrentPage();
       if (r) {
         if (r.childCount >= 1) {
           let t = r.childrenNodes[0];
@@ -6458,7 +6458,7 @@ function aB(e) {
       var i;
       var r;
       var n;
-      let a = UN().getCurrentPage();
+      let a = getSingletonSceneGraph().getCurrentPage();
       if (a) {
         if (a.childCount >= 1) {
           let t = a.childrenNodes[0];
@@ -7176,7 +7176,7 @@ function s_({
   let n = _X({
     subscribeToUpdates_expensive: !0
   });
-  let a = UN().get(e);
+  let a = getSingletonSceneGraph().get(e);
   if (!a) return null;
   let s = a.sectionPresetPickerCalloutPosition;
   if (isNaN(s.x) || isNaN(s.y)) return null;

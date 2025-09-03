@@ -4,11 +4,11 @@ import { gr } from "../figma_app/243058";
 import { ey as _$$ey } from "../905/859698";
 import { CWU, w3z } from "../figma_app/763686";
 import { l7 } from "../905/189185";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { md, eU, fp, Pj } from "../figma_app/27355";
 import { wm, k9 } from "../905/19536";
-import { Qw } from "../905/989992";
+import { resourceUtils } from "../905/989992";
 import h from "../vendor/656470";
 import g from "../vendor/990460";
 import { x1 } from "../905/714362";
@@ -169,7 +169,7 @@ export function $$ei1() {
   let t = useMemo(() => e ? cp(e) : eU(null), [e]);
   let r = md(t);
   return useMemo(() => {
-    let e = r && Qw.from(r);
+    let e = r && resourceUtils.from(r);
     return cM({
       type: "team",
       value: e
@@ -194,9 +194,9 @@ export function $$es21(e) {
   let o = je();
   let l = !!o.data?.find(t => t.fileKey === e);
   return wm(() => {
-    if (!l || !a && !s) return Qw.loaded([]);
-    if (a?.status === "loading" || a?.status === "disabled" || s?.status === "loading") return Qw.loading();
-    let e = a && Qw.from(a);
+    if (!l || !a && !s) return resourceUtils.loaded([]);
+    if (a?.status === "loading" || a?.status === "disabled" || s?.status === "loading") return resourceUtils.loading();
+    let e = a && resourceUtils.from(a);
     let t = e ? {
       type: "team",
       value: e
@@ -204,7 +204,7 @@ export function $$es21(e) {
       type: "community",
       value: s
     };
-    return Qw.loaded(cM(t, !1));
+    return resourceUtils.loaded(cM(t, !1));
   }, [l, a, s]);
 }
 export function $$eo17() {
@@ -212,7 +212,7 @@ export function $$eo17() {
   let t = useMemo(() => e ? cp(e) : eU(null), [e]);
   let r = md(t);
   return useMemo(() => {
-    let e = r && Qw.from(r);
+    let e = r && resourceUtils.from(r);
     return kX({
       type: "team",
       value: e
@@ -228,9 +228,9 @@ export function $$el36(e) {
   let o = je();
   let l = o.data?.find(t => t.fileKey === e);
   return wm(() => {
-    if (!l || !a && !s) return Qw.loaded([]);
-    if (a?.status === "loading" || s?.status === "loading") return Qw.loading();
-    let e = a && Qw.from(a);
+    if (!l || !a && !s) return resourceUtils.loaded([]);
+    if (a?.status === "loading" || s?.status === "loading") return resourceUtils.loading();
+    let e = a && resourceUtils.from(a);
     let t = e ? {
       type: "team",
       value: e
@@ -238,7 +238,7 @@ export function $$el36(e) {
       type: "community",
       value: s
     };
-    return Qw.loaded(kX(t, !1));
+    return resourceUtils.loaded(kX(t, !1));
   }, [l, a, s]);
 }
 export function $$ed20(e = {}) {
@@ -259,8 +259,8 @@ let ec = _$$n((e = {}) => {
   let a = useMemo(() => t ? Jo(i) : H2(i), [t, i]);
   let s = md(a);
   return wm(() => {
-    let e = Qw.all(Object.values(s));
-    return "loaded" !== e.status ? e : Qw.loaded({
+    let e = resourceUtils.all(Object.values(s));
+    return "loaded" !== e.status ? e : resourceUtils.loaded({
       items: m()(Object.values(s).map(e => kX({
         type: "team",
         value: e
@@ -275,8 +275,8 @@ let eu = _$$n((e = {}) => {
   let a = useMemo(() => t ? Jo(i) : wh(i), [t, i]);
   let s = md(a);
   return wm(() => {
-    let e = Qw.all(Object.values(s));
-    return "loaded" !== e.status ? e : Qw.loaded({
+    let e = resourceUtils.all(Object.values(s));
+    return "loaded" !== e.status ? e : resourceUtils.loaded({
       items: Object.values(s).flatMap(e => C$(e, !1))
     });
   }, [s]);
@@ -314,7 +314,7 @@ let em = _$$n(e => {
     if (a) {
       let e = {};
       r.forEach(t => {
-        e[t] = Qw.disabled();
+        e[t] = resourceUtils.disabled();
       });
       return eU(e);
     }
@@ -325,7 +325,7 @@ let em = _$$n(e => {
     if (a) {
       let e = {};
       i.forEach(t => {
-        e[t] = Qw.disabled();
+        e[t] = resourceUtils.disabled();
       });
       return eU(e);
     }
@@ -333,14 +333,14 @@ let em = _$$n(e => {
   }, [a, i]);
   let d = md(l);
   return wm(() => {
-    let e = Qw.all(Object.values({
+    let e = resourceUtils.all(Object.values({
       ...o,
       ...d
     }));
     return "loaded" !== e.status ? e.transform(() => ({
       libraryVariableSets: [],
       libraryVariables: []
-    })) : Qw.loaded({
+    })) : resourceUtils.loaded({
       libraryVariableSets: [...m()(Object.values(o).map(e => kX({
         type: "team",
         value: e
@@ -365,11 +365,11 @@ let eg = _$$n(e => {
   let a = useMemo(() => t ? Jo(i) : Ho(i), [t, i]);
   let s = md(a);
   return wm(() => {
-    let e = Qw.all(Object.values(s));
+    let e = resourceUtils.all(Object.values(s));
     return "loaded" !== e.status ? e.transform(() => ({
       libraryVariableSets: [],
       libraryVariables: []
-    })) : Qw.loaded({
+    })) : resourceUtils.loaded({
       libraryVariableSets: Object.values(s).flatMap(e => C$(e, !1)),
       libraryVariables: Object.values(s).flatMap(e => q0(e, !1))
     });
@@ -387,7 +387,7 @@ function eE(e) {
 function ey(e) {
   let t = $$B9();
   let r = $$eh29(e);
-  return useMemo(() => r?.status !== "loaded" ? r.transform(() => []) : Qw.loaded([...(r.data?.libraryVariables ?? []), ...(t ?? [])]), [t, r]);
+  return useMemo(() => r?.status !== "loaded" ? r.transform(() => []) : resourceUtils.loaded([...(r.data?.libraryVariables ?? []), ...(t ?? [])]), [t, r]);
 }
 export function $$eb10(e, t) {
   let r = iG(e);
@@ -400,7 +400,7 @@ export function $$eb10(e, t) {
       let e = Io[r];
       e && i && (n = n.concat(t.filter(t => e.includes(t.resolvedType))));
     }
-    return Qw.loaded([...n]);
+    return resourceUtils.loaded([...n]);
   }, [e, i, r]);
 }
 export function $$eT2(e) {
@@ -433,7 +433,7 @@ export function $$ev24() {
       });
       return;
     }
-    let u = UN().getVariableCollectionNode(c);
+    let u = getSingletonSceneGraph().getVariableCollectionNode(c);
     if (!u) {
       x1("variables", "Failed to set variable override. Variable collection node not found.", {
         variableCollectionId: c

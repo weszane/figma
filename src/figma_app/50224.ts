@@ -2,7 +2,7 @@ import { getComponentInfoById, cleanComponentPropNameForUsage, groupByCommonPref
 import { Ed } from "../figma_app/774411";
 import { throwTypeError } from "../figma_app/465776";
 import { c as _$$c } from "../905/94678";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { LW } from "../figma_app/846140";
 import { vR, So, Kp, PJ, Au, uN, g5 } from "../figma_app/193952";
@@ -24,7 +24,7 @@ function g(e) {
 }
 function f(e, t) {
   let r = {};
-  if (!t.skipNodeIds && (!t.skipNodeIdsWithoutType || g(e)) && (r.id = UN().developerFriendlyIdFromGuid(e.guid)), t.includeName && (r.name = e.name), t.includeType && !("INSTANCE" === e.type && !t.detachInstances)) {
+  if (!t.skipNodeIds && (!t.skipNodeIdsWithoutType || g(e)) && (r.id = getSingletonSceneGraph().developerFriendlyIdFromGuid(e.guid)), t.includeName && (r.name = e.name), t.includeType && !("INSTANCE" === e.type && !t.detachInstances)) {
     let t = g(e);
     t && (r.type = t);
   }
@@ -87,7 +87,7 @@ export function $$T1(e, t) {
       enableTsArrays: a
     });
     if (!o) throw Error(`Could not find mainComponent for node ${t.guid}`);
-    if (!UN().get(t.symbolId)) throw Error(`Could not find symbol ${t.symbolId} for node ${t.guid}`);
+    if (!getSingletonSceneGraph().get(t.symbolId)) throw Error(`Could not find symbol ${t.symbolId} for node ${t.guid}`);
     let c = Au(t.guid, ["INSTANCE"]);
     let p = {};
     c.forEach(e => {
@@ -126,7 +126,7 @@ export function $$T1(e, t) {
         if ("GROUPED_INSTANCE_SWAP" === e.def.type && i) {
           let t = _[n].value;
           if (r || e.def.defaultValue !== t) {
-            let r = UN().get(t);
+            let r = getSingletonSceneGraph().get(t);
             if (!r) throw Error(`Could not find icon symbol ${t}`);
             if (!p[e.rawProp]) continue;
             let i = {
@@ -147,7 +147,7 @@ export function $$T1(e, t) {
         if (r) {
           let e = uN(t.guid, r);
           if (e) {
-            let t = UN().get(e);
+            let t = getSingletonSceneGraph().get(e);
             let r = t ? x(t) : null;
             r && (m[n] = {
               description: r
@@ -156,10 +156,10 @@ export function $$T1(e, t) {
         }
       } else if ("NESTED_INSTANCE" === e.def.type) for (let t of Object.values(e.def.guidByParentComponentId)) h[t] = e;
     }
-    let g = UN().developerFriendlyIdFromGuid(t.guid);
+    let g = getSingletonSceneGraph().developerFriendlyIdFromGuid(t.guid);
     let f = g.startsWith("I") ? `${g};` : `I${g};`;
     for (let s of g5(t.guid)) {
-      let t = UN().developerFriendlyIdFromGuid(s.guid).replace(f, "").split(";");
+      let t = getSingletonSceneGraph().developerFriendlyIdFromGuid(s.guid).replace(f, "").split(";");
       let o = t[0];
       if (o && 1 === t.length && s.isBubbled && s.symbolId) {
         let t = e(s, r, i);
@@ -393,7 +393,7 @@ export function $$A2({
   nodeIds: e,
   options: t
 }) {
-  let r = UN();
+  let r = getSingletonSceneGraph();
   let n = e.map(e => r.get(e)).filter(e => e && "DOCUMENT" !== e.type && "CANVAS" !== e.type);
   if (0 === n.length) return {};
   let i = n.map(e => $$v0(e, t));

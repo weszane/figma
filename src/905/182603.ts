@@ -1,5 +1,5 @@
 import { mHF } from "../figma_app/763686";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { zl } from "../figma_app/27355";
 import { g } from "../905/871474";
@@ -438,7 +438,7 @@ export class $$m0 {
       this._groupState.currentViolatingNodeIds = new Set(this._currentViolatingNodeIdsPayload);
       let t = new Map();
       let i = new Map();
-      let n = UN();
+      let n = getSingletonSceneGraph();
       let a = new Set();
       let s = e => {
         e && a.add(e);
@@ -504,7 +504,7 @@ export class $$m0 {
     guid: i,
     similarityGroupIds: n
   }) {
-    let a = UN();
+    let a = getSingletonSceneGraph();
     for (let r of e) {
       let e = a.get(r);
       if (!e) continue;
@@ -529,7 +529,7 @@ export class $$m0 {
     guid: i,
     similarityGroupIds: n
   }) {
-    let a = UN();
+    let a = getSingletonSceneGraph();
     let s = 0;
     let o = e.length - 1;
     let l = -1;

@@ -1,7 +1,7 @@
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { filterNotNullish } from "../figma_app/656233";
 export function $$a1(e) {
-  let t = UN().get(e);
+  let t = getSingletonSceneGraph().get(e);
   return t?.type === "SYMBOL" || t?.isStateGroup ? t : null;
 }
 function s(e, t) {

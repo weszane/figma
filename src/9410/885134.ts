@@ -2,7 +2,7 @@ import { _1, JF, RP } from "../figma_app/257655";
 import { XJn, zuo } from "../figma_app/763686";
 import { l7 } from "../905/189185";
 import { hV } from "../figma_app/387100";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { tK } from "../figma_app/191804";
 import { m as _$$m } from "../figma_app/964367";
@@ -65,7 +65,7 @@ async function L(e, t, i) {
     O(e);
     return;
   }
-  let s = UN().get(r);
+  let s = getSingletonSceneGraph().get(r);
   if (!s || !i || !i.variableMaps?.fontVariableMap) {
     O(e);
     return;
@@ -235,7 +235,7 @@ async function B(e, t, i) {
     enableNativeJsx: !0
   });
   n.skipInvisibleInstanceChildren = !0;
-  let a = UN();
+  let a = getSingletonSceneGraph();
   let s = null;
   if (getFeatureFlags().first_draft_share_jsx) {
     let n = await _1(e, i, {
@@ -301,7 +301,7 @@ export async function $$K0({
   customJsxElementRegistry: d,
   options: p
 }, g) {
-  let _ = UN();
+  let _ = getSingletonSceneGraph();
   let x = _$$D({
     enableNativeJsx: !0
   });

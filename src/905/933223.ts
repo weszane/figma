@@ -3,7 +3,7 @@ import { Ez5, nzw, glU, qmM, IPu, OR7, GP2, zbP, zd5, PVe, Egt } from "../figma_
 import { r as _$$r } from "../905/249071";
 import { M } from "../905/512402";
 import o, { AD } from "../905/871411";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { zl } from "../figma_app/27355";
 import { nl } from "../figma_app/257275";
 import { BT } from "../905/618447";
@@ -139,7 +139,7 @@ let g = class e extends j {
     }
     if ("INACTIVE" === this._state.mouse) return;
     let a = Ez5?.canvasGrid().getRowGUID(this._state.currentRowIndex) ?? AD;
-    let s = !!UN().get(a)?.isCanvasGridStateGroupRow && this.isStateGroupRowAllowed();
+    let s = !!getSingletonSceneGraph().get(a)?.isCanvasGridStateGroupRow && this.isStateGroupRowAllowed();
     if ("HANDLE_HOVERED" === this._state.mouse || "HANDLE_SELECTED" === this._state.mouse || "HANDLE_DRAGGED" === this._state.mouse || "HEADER_SELECTED" === this._state.mouse || "HEADER_DRAGGED" === this._state.mouse) {
       let i = this._getViewportSpaceReorderHandle(e, this._state.currentRowIndex);
       this._renderActiveHandle(t, i.activeRect, s);
@@ -191,8 +191,8 @@ let g = class e extends j {
     }
   }
   _renderActiveRowHeader(e, t, i, n, a) {
-    let s = UN().get(e)?.name;
-    let o = !!UN().get(e)?.isCanvasGridStateGroupRow && this.isStateGroupRowAllowed();
+    let s = getSingletonSceneGraph().get(e)?.name;
+    let o = !!getSingletonSceneGraph().get(e)?.isCanvasGridStateGroupRow && this.isStateGroupRowAllowed();
     let d = this._getViewportSpaceRowHeaderBounds(t, n, o);
     let c = this._getViewportSpaceRowDimensions(t, n);
     let u = glU?.getStateGroupError(e) || null;

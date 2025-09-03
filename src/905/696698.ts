@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { XJn, CWU } from "../figma_app/763686";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { zN } from "../905/19536";
 import { l7 } from "../905/189185";
@@ -27,7 +27,7 @@ let p = {
   supportedKitTypes: [v2.FIRST_PARTY, v2.FROM_MAKE_KIT],
   detect: e => {
     let t = new Set();
-    let i = UN();
+    let i = getSingletonSceneGraph();
     let n = [e];
     for (; n.length > 0;) {
       let e = n.pop();
@@ -52,7 +52,7 @@ let p = {
   },
   fix: (e, t) => {
     if (!t) return !1;
-    let i = UN();
+    let i = getSingletonSceneGraph();
     let n = t.map(e => i.get(e));
     l7.user("first-draft-clean-numerical-suffixes", () => {
       for (let e of n) {
@@ -159,7 +159,7 @@ let E = {
     let n = XJn.getLocalInvalidExamplesForLinting(i, t);
     let s = n.map(e => e.nodeId);
     let o = n.reduce((e, t) => [...e, ...t.invalidPrimaryInstanceGuids], []);
-    let l = UN();
+    let l = getSingletonSceneGraph();
     return Promise.resolve({
       guids: s,
       meta: {
@@ -217,7 +217,7 @@ let w = {
   },
   fix: (e, t) => {
     if (!t) return !1;
-    let i = UN();
+    let i = getSingletonSceneGraph();
     let n = t.map(e => i.get(e));
     l7.user("first-draft-fix-nested-instances-exposed", () => {
       for (let e of n) e && "INSTANCE" === e.type && !e.isBubbled && e.setPropsAreBubbled(!0);
@@ -257,7 +257,7 @@ let $$C = {
   },
   fix: (e, t) => {
     if (!t) return !1;
-    let i = UN().get(e.guid);
+    let i = getSingletonSceneGraph().get(e.guid);
     return !!i && (l7.user("first-draft-fix-optional-non-instance-props-have-visible-props", () => {
       for (let [e, {
         visiblePropName: n,
@@ -297,7 +297,7 @@ let T = {
   },
   fix: (e, t) => {
     if (!t) return !1;
-    let i = UN();
+    let i = getSingletonSceneGraph();
     let n = t.map(e => i.get(e));
     l7.user("first-draft-fix-instance-swap-with-exposed-props", () => {
       for (let e of n) e && "INSTANCE" === e.type && e.isBubbled && e.setPropsAreBubbled(!1);
@@ -346,7 +346,7 @@ let N = {
     let t = new Set();
     let i = {};
     let n = Au(e.guid, ["TEXT"]);
-    let s = UN();
+    let s = getSingletonSceneGraph();
     for (let e of n) {
       let n = XJn.inheritedTextStyleGuid(e.guid);
       if (!n) {
@@ -451,7 +451,7 @@ let D = {
   },
   fix: (e, t) => !!t && !!t.guids && (l7.user("first-draft-detach-nested-instances-with-images-without-props", () => {
     t.guids.forEach(e => {
-      let t = UN().get(e);
+      let t = getSingletonSceneGraph().get(e);
       if (!t) return !1;
       t.detachInstance();
     });
@@ -639,7 +639,7 @@ let V = {
   },
   fix: (e, t) => {
     if (!t) return !1;
-    let i = UN();
+    let i = getSingletonSceneGraph();
     l7.user("first-draft-fix-block-name-collisions", () => {
       for (let [e, n] of Object.entries(t)) for (let t of n.slice(1)) {
         let r = i.get(t);
@@ -682,7 +682,7 @@ export function $$q0(e, t = Y) {
   let i = e?.pageId;
   e = zN(e);
   t = zN(t);
-  let l = UN();
+  let l = getSingletonSceneGraph();
   let [d, c] = useState(null);
   let [u, p] = useState(null);
   useEffect(() => {

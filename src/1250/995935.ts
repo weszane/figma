@@ -15,7 +15,7 @@ import { Z as _$$Z } from "../905/279476";
 import { s as _$$s } from "../905/403855";
 import { IPu, kul, h3O } from "../figma_app/763686";
 import { bV } from "../figma_app/387100";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { zl, md } from "../figma_app/27355";
 import { oA } from "../905/663269";
 import { sx, az } from "../905/449184";
@@ -381,7 +381,7 @@ let tB = {
     let t = _$$to2();
     if (!useMemo(() => {
       if (!t || !HH()) return !1;
-      let e = UN();
+      let e = getSingletonSceneGraph();
       if (!e || !e.isValidScene) return [];
       let n = bV(e, "0:1");
       if (n.find(e => "cooper_root" === e.name)) return !0;

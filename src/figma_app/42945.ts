@@ -3,7 +3,7 @@ import { createContext, useState, useMemo, useCallback, useEffect } from "react"
 import { wA, d4 } from "../vendor/514228";
 import { Ez5 } from "../figma_app/763686";
 import { AD } from "../905/871411";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import d from "../vendor/128080";
 import { Py, H3 } from "../905/403166";
 import { t } from "../905/303541";
@@ -124,20 +124,20 @@ export function $$V5(e) {
     },
     currentSlide: e => {
       let t = e.comments[0].client_meta?.node_id;
-      let r = t ? UN().get(t) : void 0;
+      let r = t ? getSingletonSceneGraph().get(t) : void 0;
       let n = r ? r.containingSlideId : AD;
       return R === AD || n === AD || n === R;
     },
     currentDevModeFocus: e => {
-      let t = j ? UN().get(j) : null;
+      let t = j ? getSingletonSceneGraph().get(j) : null;
       if (!t) return !0;
       let r = e.comments[0]?.client_meta?.node_id;
-      let n = r ? UN().get(r) : null;
+      let n = r ? getSingletonSceneGraph().get(r) : null;
       return WJ(t, n);
     },
     currentAsset: e => {
       let t = e.comments[0].client_meta?.node_id;
-      let r = t ? UN().get(t) : void 0;
+      let r = t ? getSingletonSceneGraph().get(t) : void 0;
       let n = r ? r.containingCooperFrameId() : AD;
       return P === AD || n === AD || n === P;
     },

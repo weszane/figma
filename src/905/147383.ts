@@ -1,6 +1,6 @@
 import { assert } from "../figma_app/465776";
 import { Iz, E2, eU, zl } from "../figma_app/27355";
-import { Qw } from "../905/989992";
+import { resourceUtils } from "../905/989992";
 import { TQ, x4 } from "../905/657224";
 import { z } from "../905/239603";
 import { getInitialOptions } from "../figma_app/169182";
@@ -33,7 +33,7 @@ export class $$f0 {
   getLifecycleAtom() {
     return eU(e => {
       let t = e(this.baseAtom);
-      return Qw.loaded({
+      return resourceUtils.loaded({
         lifecycleState: t,
         lifecycleConfig: this.lifecycle
       });

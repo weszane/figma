@@ -7,7 +7,7 @@ import { YQ } from '../905/502364';
 import { M as _$$M } from '../905/512402';
 import { j as _$$j } from '../905/521149';
 import { oA } from '../905/663269';
-import { UN } from '../905/700578';
+import { getSingletonSceneGraph } from '../905/700578';
 import { l as _$$l } from '../905/716947';
 import { fn, sH } from '../905/871411';
 import { qA } from '../1250/182479';
@@ -290,7 +290,7 @@ export function $$ea12({
       if (!e || e.length === 0) return;
       a = e;
     }
-    let d = a.map(e => UN().get(e)).filter(isNotNullish);
+    let d = a.map(e => getSingletonSceneGraph().get(e)).filter(isNotNullish);
     let c = a[0];
     let u = IPu?.getNodeToReplace();
     if (u) {
@@ -307,7 +307,7 @@ export function $$ea12({
       a?.insertChildAtCoord(c, row, col, 'cooper-add-template-panel');
     }
     if (n) {
-      let e = UN().get(c);
+      let e = getSingletonSceneGraph().get(c);
       e && Egt?.replaceSelection([e.guid], !0);
       d.length === 1 && d[0] ? (d[0].isInstance && YQ({
         id: qA

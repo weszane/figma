@@ -1,41 +1,97 @@
-import { createStore } from "jotai";
-class r {
-  jotaiAtomStore = createStore();
-  unsubscribeCallbacks = new Set();
-  rerenderAtomsProviders = new Set();
-  get(e) {
-    return this.jotaiAtomStore.get(e);
+import type { Atom, WritableAtom } from 'jotai'
+import type { Store } from 'jotai/vanilla/store'
+import type { Unsubscribe } from 'redux'
+import { createStore } from 'jotai'
+
+/**
+ * AtomStoreManager manages atom state, subscriptions, and test resets.
+ */
+class AtomStoreManager {
+  public jotaiAtomStore: Store
+  public unsubscribeCallbacks: Set<Unsubscribe>
+  public rerenderAtomsProviders: Set<() => void>
+
+  constructor() {
+    this.jotaiAtomStore = createStore()
+    this.unsubscribeCallbacks = new Set()
+    this.rerenderAtomsProviders = new Set()
   }
-  set(e, ...t) {
-    return this.jotaiAtomStore.set(e, ...t);
+
+  /**
+   * Gets the value of an atom.
+   * @param atom The atom to get.
+   */
+  get<T>(atom: Atom<T>): T {
+    return this.jotaiAtomStore.get(atom)
   }
-  sub(e, t, i = {}) {
-    let n = !1;
-    let r = () => {
-      n || (n = !0, Promise.resolve().then(() => {
-        n = !1;
-        t();
-      }));
-    };
-    let a = this.jotaiAtomStore.sub(e, () => {
-      try {
-        i.batchMicrotask ? r() : t();
-      } catch (e) {
-        console.error(e);
-        return e;
+
+  /**
+   * Sets the value of a writable atom.
+   * @param atom The writable atom to set.
+   * @param args Additional arguments for setting.
+   */
+  set(atom: WritableAtom<unknown, unknown[], unknown>, ...args: unknown[]): void {
+    this.jotaiAtomStore.set(atom, ...args)
+  }
+
+  /**
+   * Subscribes to changes of an atom.
+   * @param atom The atom to subscribe to.
+   * @param callback The callback to invoke on change.
+   * @param options Optional subscription options.
+   * @param options.batchMicrotask If true, batches multiple rapid updates into a single callback invocation.
+   * @returns Unsubscribe function.
+   */
+  sub(
+    atom: Atom<unknown>,
+    callback: () => void,
+    options: { batchMicrotask?: boolean } = {},
+  ): Unsubscribe {
+    let isPending = false
+
+    const batchedCallback = () => {
+      if (!isPending) {
+        isPending = true
+        Promise.resolve().then(() => {
+          isPending = false
+          callback()
+        })
       }
-    });
-    this.unsubscribeCallbacks.add(a);
+    }
+
+    const unsubscribe = this.jotaiAtomStore.sub(atom, () => {
+      try {
+        options.batchMicrotask ? batchedCallback() : callback()
+      }
+      catch (error) {
+        console.error(error)
+        return error
+      }
+    })
+
+    this.unsubscribeCallbacks.add(unsubscribe)
     return () => {
-      a();
-      this.unsubscribeCallbacks.$$delete(a);
-    };
+      unsubscribe()
+      this.unsubscribeCallbacks.delete(unsubscribe)
+    }
   }
-  resetForTests() {
-    for (let e of this.unsubscribeCallbacks) e();
-    for (let e of (this.jotaiAtomStore = createStore(), this.unsubscribeCallbacks = new Set(), this.rerenderAtomsProviders)) e();
-    this.rerenderAtomsProviders = new Set();
+
+  /**
+   * Resets the store and all subscriptions for testing.
+   */
+  resetForTests(): void {
+    for (const unsubscribe of this.unsubscribeCallbacks) {
+      unsubscribe()
+    }
+    this.jotaiAtomStore = createStore()
+    this.unsubscribeCallbacks = new Set()
+    for (const rerender of this.rerenderAtomsProviders) {
+      rerender()
+    }
+    this.rerenderAtomsProviders = new Set()
   }
 }
-export let $$a0 = new r();
-export const z = $$a0;
+
+export const atomStoreManager = new AtomStoreManager()
+
+export const z = atomStoreManager

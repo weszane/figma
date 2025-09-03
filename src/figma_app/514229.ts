@@ -1,8 +1,7 @@
 import { useMemo } from "react";
 import { ruz, Egt, Ez5, HV5, glU } from "../figma_app/763686";
 import { l7 } from "../905/189185";
-
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { Y5 } from "../figma_app/455680";
 import { i2 } from "../905/913055";
 import { KH } from "../figma_app/722362";
@@ -23,7 +22,7 @@ export function $$h0({
 }) {
   let c;
   let _;
-  let h = UN();
+  let h = getSingletonSceneGraph();
   let m = h.getCurrentPage();
   if (!m) throw Error("Something went wrong");
   let g = i2();

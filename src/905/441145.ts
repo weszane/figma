@@ -1,18 +1,19 @@
-export let $$n0 = function () {
-  let e = null;
-  let t = new Set();
+export let observableState = (function () {
+  let value: any = null
+  let listeners = new Set<(value: any) => void>()
+
   return {
-    get: () => e,
-    set: i => {
-      e = i;
-      t.forEach(t => t(e));
+    get: () => value,
+    set: (newValue: any) => {
+      value = newValue
+      listeners.forEach(listener => listener(value))
     },
-    addListener: e => {
-      t.add(e);
+    addListener: (listener: (value: any) => void) => {
+      listeners.add(listener)
     },
-    removeListener: e => {
-      t.$$delete(e);
-    }
-  };
-}();
-export const Z = $$n0;
+    removeListener: (listener: (value: any) => void) => {
+      listeners.delete(listener)
+    },
+  }
+}())
+export const Z = observableState

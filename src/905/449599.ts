@@ -1,4 +1,4 @@
-import n, { UN } from "../905/700578";
+import n, { getSingletonSceneGraph } from "../905/700578";
 import { debugState } from "../905/407919";
 import a, { t as _$$t } from "../905/303541";
 import { F } from "../905/302958";
@@ -331,7 +331,7 @@ export function $$w0({
       let [S] = useSyncedState("loading", !1);
       let [w] = useSyncedState("summarized-at", "");
       let [C, T] = useSyncedState("loadingText", `${ZG()}...`);
-      let k = UN();
+      let k = getSingletonSceneGraph();
       useEffect(() => {
         S && widget.waitForTask(new Promise(e => {
           setTimeout(() => {

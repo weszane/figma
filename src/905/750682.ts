@@ -1,7 +1,7 @@
 import { QR } from "../figma_app/273493";
 import { Ez5, Roq, qmM, NLJ, glU, btW } from "../figma_app/763686";
 import { M } from "../905/512402";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { GJ, kP, Bm, ZR } from "../905/430950";
 import { j } from "../905/881708";
 let d = "-1:-1";
@@ -104,9 +104,9 @@ export class $$$$_0 extends j {
     this._previousCurrentTool = n;
     let l = this._getActiveFrameGuidOrNull();
     if (l) {
-      let i = UN().get(l);
+      let i = getSingletonSceneGraph().get(l);
       if (!i || (t !== l && (this._seriesMeasurementsFromActiveFrame = function (e) {
-        let t = UN().get(e);
+        let t = getSingletonSceneGraph().get(e);
         if (!qmM || !t) return null;
         let i = t.absoluteBoundingBox;
         let {
@@ -196,7 +196,7 @@ export class $$$$_0 extends j {
   render(e, t) {
     let i = this._getActiveFrameGuidOrNull();
     if (!i || !this._seriesMeasurementsFromActiveFrame || !qmM) return;
-    let n = UN().get(i);
+    let n = getSingletonSceneGraph().get(i);
     if (!n) return;
     let a = qmM.getMinimumAllowedGapWidthForFrameQuickAdd();
     let o = n.absoluteBoundingBox;

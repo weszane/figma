@@ -1,6 +1,6 @@
 import { glU } from "../figma_app/763686";
 import { l7 } from "../905/189185";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import s from "../vendor/128080";
 import $$l from "../vendor/241899";
 import { zk } from "../figma_app/198712";
@@ -34,7 +34,7 @@ export class $$p1 {
   }
   getValue() {
     let e = new Map();
-    UN().getDirectlySelectedNodes().forEach(t => {
+    getSingletonSceneGraph().getDirectlySelectedNodes().forEach(t => {
       e.set(t.guid, t[this.isDisaggregated] ? d()(t, this.disagreggatedValues) : t[this.aggregatedValue]);
     });
     return e;
@@ -43,7 +43,7 @@ export class $$p1 {
     let r = {
       current: !1
     };
-    UN().getDirectlySelectedNodes().forEach(i => {
+    getSingletonSceneGraph().getDirectlySelectedNodes().forEach(i => {
       let n = e.get(i.guid);
       if (null == n) return;
       if ("number" == typeof n) {
@@ -76,7 +76,7 @@ export class $$m0 {
   }
   getValue() {
     let e = new Map();
-    UN().getDirectlySelectedNodes().forEach(t => {
+    getSingletonSceneGraph().getDirectlySelectedNodes().forEach(t => {
       let i = t[this.isDisaggregated] ? t[this.key] : t[this.aggregatedValue];
       e.set(t.guid, i);
     });
@@ -86,7 +86,7 @@ export class $$m0 {
     let r = {
       current: !1
     };
-    UN().getDirectlySelectedNodes().forEach(i => {
+    getSingletonSceneGraph().getDirectlySelectedNodes().forEach(i => {
       let n = e.get(i.guid);
       if (null == n) return;
       let a = t(n);

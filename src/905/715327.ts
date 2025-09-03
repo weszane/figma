@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useMemo, useCallback, useEffect, useState, Fragment as _$$Fragment, useRef, useContext } from "react";
 import { d4, wA } from "../vendor/514228";
 import { getFeatureFlags } from "../905/601108";
-import { Qw } from "../905/989992";
+import { resourceUtils } from "../905/989992";
 import l from "../vendor/239910";
 import { sx } from "../905/449184";
 import { R as _$$R } from "../905/103090";
@@ -1357,7 +1357,7 @@ export function $$tM0({
     return !!(t && hasAdminRoleAccessOnTeam(t.id, F));
   }, [e, teams, F]);
   let el = MF({
-    oldValue: Qw.loaded(eo),
+    oldValue: resourceUtils.loaded(eo),
     newValue: es.transform(e => !!e.team?.hasPermission),
     label: A5.LibrarySubscriptions.canEditSubscriptionsForTeamLibraryModal,
     enableFullRead: getFeatureFlags().dse_library_subscriptions_for_team,

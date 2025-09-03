@@ -3,7 +3,7 @@ import { createContext, useCallback, useRef, useState, useMemo, useLayoutEffect,
 import { d4, wA } from "../vendor/514228";
 import { YEY, Lov, Ez5, h3O, _em, dNx, Z6A } from "../figma_app/763686";
 import { Xy, AD } from "../905/871411";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { md, Xr, eU, fp } from "../figma_app/27355";
 import { A as _$$A } from "../vendor/90566";
 import { sn } from "../905/542194";
@@ -309,7 +309,7 @@ export function $$z9() {
     let n = [];
     t.forEach(e => {
       let t = e.results.map(e => {
-        let t = UN().get(e.guid);
+        let t = getSingletonSceneGraph().get(e.guid);
         return t ? {
           ...e,
           textContent: t.textContent,
@@ -339,7 +339,7 @@ export function $$W4() {
     let n = YEY.getActiveResult();
     let a = n.type === Z6A.CANVAS;
     let o = r || a && n.guid;
-    return !!o && (UN().setCurrentPageAsync(o).then(() => {
+    return !!o && (getSingletonSceneGraph().setCurrentPageAsync(o).then(() => {
       scope === Lov.ACTIVE_PAGE ? i(query, !1, o) : YEY.setActiveResultAndGetViewportSettings(o, 0);
     }), !0);
   }, [query, scope, i]);

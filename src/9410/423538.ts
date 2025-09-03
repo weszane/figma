@@ -4,7 +4,7 @@ import { isNotNullish } from "../figma_app/95419";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { glU, XJn } from "../figma_app/763686";
 import { l7 } from "../905/189185";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { $D } from "../905/11";
 import { xi } from "../905/714362";
 import { p4 } from "../figma_app/412398";
@@ -87,7 +87,7 @@ export function $$j2({
   } = Vh({
     onAfterInsertPartialJsx: e => {
       if (O && e) {
-        let t = UN().get(e);
+        let t = getSingletonSceneGraph().get(e);
         t?.isBreakpointFrame && (t?.parentNode?.childrenNodes ?? []).length > 1 && (l7.ai("first-draft-sites-page-remove", () => {
           t.parentNode?.childrenNodes.filter(e => e.guid !== t.guid).forEach(e => e.removeSelfAndChildren());
         }), setTimeout(() => {
@@ -387,7 +387,7 @@ export function $$j2({
     }(n, designSystem);
     let m = null;
     if (t.selectedNodeIds && t.selectedNodeThumbnailsCache && t.selectedNodeIds.length > 0) {
-      let i = t.selectedNodeIds.map(e => UN().get(e)).filter(isNotNullish);
+      let i = t.selectedNodeIds.map(e => getSingletonSceneGraph().get(e)).filter(isNotNullish);
       i.length !== t.selectedNodeIds.length && xi("first-draft", "Some selected nodes were not found", {
         selectedNodeIds: t.selectedNodeIds,
         selectedNodes: i
@@ -397,14 +397,14 @@ export function $$j2({
     }
     let _ = {};
     if (O) {
-      let e = UN().getCurrentPage();
+      let e = getSingletonSceneGraph().getCurrentPage();
       if (e) {
         let t = 1 === e.childCount && e.childrenNodes[0].isResponsiveSet && 1 === e.childrenNodes[0].childCount && e.childrenNodes[0].childrenNodes[0].isBreakpointFrame && 0 === e.childrenNodes[0].childrenNodes[0].childCount;
         let i = null;
         t ? (wr(), S("panel"), Dh([e.childrenGuids[0]])) : l7.ai("first-draft-sites-page-create", () => {
           glU.createResponsiveSet(null);
         });
-        i = UN().get(glU.getFirstSelectedNodeIdForCurrentPage());
+        i = getSingletonSceneGraph().get(glU.getFirstSelectedNodeIdForCurrentPage());
         _.parentNodeId = i?.guid;
         _.createNewSitesWebpage = !0;
         _.frameName = "Primary";
@@ -443,7 +443,7 @@ export function $$j2({
       r = e;
     }
     let b = nodeIdRef.current;
-    if (await resetAsync(), b && !UN().get(b)) throw Error("Failed to insert node");
+    if (await resetAsync(), b && !getSingletonSceneGraph().get(b)) throw Error("Failed to insert node");
     Y5.commit();
     return {
       nodeId: b,

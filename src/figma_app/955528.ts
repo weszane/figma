@@ -6,7 +6,7 @@ import { ch, DE } from "../figma_app/571325";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { cus, QOV } from "../figma_app/763686";
 import { l7 } from "../905/189185";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { zl } from "../figma_app/27355";
 import h from "../vendor/128080";
@@ -170,7 +170,7 @@ export function $$Z14(e) {
     let i = _$$wA(e => e.getCurrentPage()?.originalNodeInfos ?? []);
     let a = useMemo(() => new Map(i.map(e => [e.nodeId, e])), [i]);
     let s = useCallback(e => {
-      let t = UN().getCurrentPage();
+      let t = getSingletonSceneGraph().getCurrentPage();
       t && (t.originalNodeInfos = [...e.values()]);
     }, []);
     return getFeatureFlags().slides_tone_dial_undo && e === o2 ? {
@@ -258,7 +258,7 @@ export function $$Z14(e) {
   }, [originalNodeInfos, e]);
   let o = useCallback(() => {
     for (let e of originalNodeInfos.values()) {
-      let t = UN().get(e.nodeId);
+      let t = getSingletonSceneGraph().get(e.nodeId);
       t && s(t);
     }
   }, [originalNodeInfos, s]);
@@ -416,7 +416,7 @@ export function $$en7(e, t) {
       nodeId,
       nodeText
     } of e.values()) {
-      let e = UN().get(nodeId);
+      let e = getSingletonSceneGraph().get(nodeId);
       e?.isAlive && l7.ai(o2, () => {
         e.characters = nodeText;
         t(e);
@@ -435,7 +435,7 @@ export function $$en7(e, t) {
     i.spliceCharacters(a, s, o, "BEFORE");
     t(i);
   });
-  let l = UN().getCurrentPage();
+  let l = getSingletonSceneGraph().getCurrentPage();
   r.selectionRange ? l?.setSelectedTextRange(i.guid, a, a + o.length) : y_(i.guid);
 }
 export function $$ei16(e) {
@@ -527,7 +527,7 @@ export function $$ec17() {
     return t ? [es(t.x), es(t.y)] : [0, 0];
   });
   let i = useCallback(e => {
-    UN().getCurrentPage()?.setTonePosition({
+    getSingletonSceneGraph().getCurrentPage()?.setTonePosition({
       x: e[0],
       y: e[1]
     });

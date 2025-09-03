@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { sortByPropertyWithOptions } from "../figma_app/656233";
-import { Qw } from "../905/989992";
+import { resourceUtils } from "../905/989992";
 import { Rs } from "../figma_app/288654";
 import { gB } from "../905/723791";
 import { FUserRoleType } from "../figma_app/191312";
@@ -29,7 +29,7 @@ export function $$h0(e) {
   let t = Rs(TKM, {
     orgId: e
   });
-  return Qw.useTransform(t, e => $$_6(e.currentUser));
+  return resourceUtils.useTransform(t, e => $$_6(e.currentUser));
 }
 export function $$m3(e, t) {
   let r = Rs(aON, {
@@ -47,7 +47,7 @@ export function $$f5(e) {
   let t = Rs(s5h, {
     orgId: e
   });
-  return Qw.useTransform(t, e => $$g4(e.org));
+  return resourceUtils.useTransform(t, e => $$g4(e.org));
 }
 export var $$E7 = (e => (e[e.IS_GUEST = 1] = "IS_GUEST", e[e.WRONG_WORKSPACE = 2] = "WRONG_WORKSPACE", e[e.TEAM_CREATION_CONTROL = 3] = "TEAM_CREATION_CONTROL", e[e.LG_LOADING = 4] = "LG_LOADING", e))($$E7 || {});
 export function $$y1(e, t) {

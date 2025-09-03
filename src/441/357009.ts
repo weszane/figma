@@ -4,7 +4,7 @@ import { createPortal } from "../vendor/944059";
 import { lQ } from "../905/934246";
 import { lyf, Ez5 } from "../figma_app/763686";
 import { l7 } from "../905/189185";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { k9 } from "../905/19536";
 import m from "../vendor/674128";
@@ -45,7 +45,7 @@ function T({
   isReadOnly: i
 }) {
   let a = useCallback((e, t) => {
-    let i = UN().get(e.nodeId);
+    let i = getSingletonSceneGraph().get(e.nodeId);
     let n = i?.containingSlideId;
     let r = i?.containingCanvas;
     if (i && e.position && n) return {
@@ -84,7 +84,7 @@ let R = memo(({
   let m = useCallback(() => c(e => e + 1), []);
   let [p, f] = useState(null);
   if (!e || !e.position || !t) return jsx(Fragment, {});
-  let E = UN().get(e.guid);
+  let E = getSingletonSceneGraph().get(e.guid);
   if (!E) return null;
   let g = Yb(t, e.position);
   let y = "ALIGNMENT" === e.type || "POLL" === e.type || "FACEPILE" === e.type || "EMBED" === e.type && !getFeatureFlags().slides_iframe_embedded_prototypes_thumbnail;
@@ -148,11 +148,11 @@ function D({
   useEffect(() => {
     var t;
     if (s) return;
-    let i = UN().get(e);
+    let i = getSingletonSceneGraph().get(e);
     if (!i || "INTERACTIVE_SLIDE_ELEMENT" !== i.type) return;
     let n = lQ;
     t = () => {
-      n = function(e, t, i) {
+      n = function (e, t, i) {
         let n = t.interactiveSlideElementType;
         let r = t.guid;
         let a = !1;
@@ -185,4 +185,4 @@ function D({
   }, [s, e, u, c, a, m]);
   return jsx(Fragment, {});
 }
-export const u = $$w0; 
+export const u = $$w0;

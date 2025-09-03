@@ -1,6 +1,6 @@
 import { ii } from "../905/859698";
 import { glU } from "../figma_app/763686";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { Av } from "../figma_app/646357";
 import { PW } from "../figma_app/633080";
 export function $$l4(e, t) {
@@ -32,7 +32,7 @@ export function $$l4(e, t) {
 function d(e, t, r) {
   let n = Av(t);
   if (!n) return;
-  let i = UN().developerFriendlyIdFromGuid(e.instanceGUID);
+  let i = getSingletonSceneGraph().developerFriendlyIdFromGuid(e.instanceGUID);
   r[n] ? r[n].instanceIdsToUpdate.push(i) : r[n] = {
     updateAsset: t,
     instanceIdsToUpdate: [i]

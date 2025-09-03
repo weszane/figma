@@ -1,4 +1,4 @@
-import { Ek } from "../905/553831";
+import { subscribeAndAwaitData } from "../905/553831";
 import { sD } from "../905/937198";
 import { YsX } from "../figma_app/43951";
 import { YR } from "../905/622391";
@@ -19,7 +19,7 @@ export async function $$d0(e) {
     });
     return null;
   }
-  let o = await Ek(YsX, {
+  let o = await subscribeAndAwaitData(YsX, {
     fileKey: t,
     collectionId: i
   });

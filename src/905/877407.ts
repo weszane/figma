@@ -3,7 +3,7 @@ import { R0 } from "../figma_app/273493";
 import { r as _$$r } from "../905/249071";
 import { M as _$$M } from "../905/512402";
 import { AD } from "../905/871411";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { zl } from "../figma_app/27355";
 import { BT } from "../905/618447";
 import { Bm, Z5, GJ, ZR } from "../905/430950";
@@ -99,7 +99,7 @@ export function $$h4(e, t) {
   let i = Ez5.canvasGrid().rowContentBoundsInCanvas(e.length - 1, !1);
   let r = $$x8(e, e.length, t);
   let a = Ez5.canvasGrid().getRowGUID(e.length - 1) ?? AD;
-  let d = !!UN().get(a)?.isCanvasGridStateGroupRow;
+  let d = !!getSingletonSceneGraph().get(a)?.isCanvasGridStateGroupRow;
   return new _$$M(i.origin.x + r.x / 2 + (d ? Ez5.canvasGrid().gridPadding() : 0), i.origin.y + i.size.y + Ez5.canvasGrid().gridRowSpacing() / 2 - (d ? Ez5.canvasGrid().gridPadding() / 2 : 0));
 }
 function g(e, t, i) {

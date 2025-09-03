@@ -4,7 +4,7 @@ import { zl } from "../figma_app/27355";
 import { oA } from "../905/663269";
 import { k as _$$k } from "../905/651849";
 import { isProdCluster } from "../figma_app/169182";
-import { Ek } from "../905/553831";
+import { subscribeAndAwaitData } from "../905/553831";
 import { Rs } from "../figma_app/288654";
 import { Z } from "../905/939602";
 import { yV, q5 } from "../figma_app/516028";
@@ -12,7 +12,7 @@ import { nkF } from "../figma_app/43951";
 export async function $$h1() {
   let e = zl.get(yV);
   if (!e) return;
-  let t = await Ek(nkF, {
+  let t = await subscribeAndAwaitData(nkF, {
     fileKey: e.sourceFileKey ?? e.key
   });
   oA(t.file?.slotsFileEnablement)?.slotsEnabled || (await Z.postEnableSlotsForFile({

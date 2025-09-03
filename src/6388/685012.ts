@@ -5,7 +5,7 @@ import { IK } from "../905/521428";
 import { k as _$$k } from "../905/443820";
 import { Ez5, uv } from "../figma_app/763686";
 import { l7 } from "../905/189185";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { Xr, md } from "../figma_app/27355";
 import { Vs } from "../figma_app/930338";
 import { t as _$$t } from "../905/303541";
@@ -24,7 +24,7 @@ let I = "Buzz bulk create update";
 export function $$T1(e) {
   let t = new Map();
   for (let [l, o] of Object.entries(e)) for (let e of o) {
-    let o = UN().get(e);
+    let o = getSingletonSceneGraph().get(e);
     let n = o?.containingCooperFrameId();
     if (n) {
       let o = t.get(n);

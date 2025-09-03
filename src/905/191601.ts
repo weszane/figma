@@ -3,7 +3,7 @@ import { getFeatureFlags } from "../905/601108";
 import { sx } from "../905/449184";
 import { n as _$$n, G4 } from "../905/864644";
 import { zj, Sk } from "../figma_app/448654";
-import { S8 } from "../905/553831";
+import { subscribeMultipleAndAwaitAll } from "../905/553831";
 import { tT } from "../905/723791";
 import { $D } from "../905/11";
 import { Ce, to } from "../905/156213";
@@ -268,7 +268,7 @@ let R = Ju(function ({
 async function L(e) {
   for (let {
     result
-  } of await S8(Vny, e.map(e => ({
+  } of await subscribeMultipleAndAwaitAll(Vny, e.map(e => ({
     fileKey: e
   })))) if (result.transform(e => e.siteMount.status === tT.Loaded && e.siteMount.data && "published" === e.siteMount.data.status).unwrapOr(!1)) return !0;
   return !1;
@@ -329,7 +329,7 @@ let $$M2 = nF(async (e, t, {
     try {
       for (let {
         result
-      } of await S8(YOu, e.map(e => ({
+      } of await subscribeMultipleAndAwaitAll(YOu, e.map(e => ({
         fileKey: e.key
       })))) if (result.transform(e => !!e.file?.lastPublishedAt).unwrapOr(!1)) {
         sx("Show File Delete Unpublish Warning");

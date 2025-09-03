@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { d4 } from "../vendor/514228";
 import { Ez5, nQ7 } from "../figma_app/763686";
-import { Qw } from "../905/989992";
+import { resourceUtils } from "../905/989992";
 import { Rs } from "../figma_app/288654";
 import { oA } from "../905/723791";
 import { PN } from "../figma_app/257275";
@@ -23,7 +23,7 @@ export function $$m2() {
     }, {
       enabled: !!t
     });
-    let n = Qw.useTransform(r, e => !!oA(e.file)?.hasPermission);
+    let n = resourceUtils.useTransform(r, e => !!oA(e.file)?.hasPermission);
     return !!PN() || n.unwrapOr(!1);
   }();
   useEffect(() => {

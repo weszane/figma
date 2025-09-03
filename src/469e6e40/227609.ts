@@ -35,7 +35,7 @@ import { ER } from "../figma_app/102449";
 import { ps } from "../figma_app/845611";
 import { F as _$$F } from "../469e6e40/308608";
 import { Te } from "../figma_app/765689";
-import { Qw } from "../905/989992";
+import { resourceUtils } from "../905/989992";
 import z from "../vendor/529640";
 import { A as _$$A } from "../905/920142";
 import { F as _$$F2 } from "../905/302958";
@@ -925,7 +925,7 @@ function e8(e) {
   let d = TG(e.team.id);
   let c = If("migrate_team_data_to_livegraph", wv.GROUP_1);
   let _ = MF({
-    oldValue: Qw.useMemoizedLoaded(e.membersList),
+    oldValue: resourceUtils.useMemoizedLoaded(e.membersList),
     newValue: d,
     label: _$$A2.TeamMembersTable.teamMembersByTeamId,
     enableFullRead: c,
@@ -1876,7 +1876,7 @@ function aA(e) {
       t.total += e.year[a]?.total ?? 0;
     });
     return t;
-  }) : Qw.loaded(null), [u, p]);
+  }) : resourceUtils.loaded(null), [u, p]);
   let x = useCallback(() => {
     e.setActiveTab(pu.INVOICES);
   }, [e.setActiveTab]);

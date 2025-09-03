@@ -6,7 +6,7 @@ import { t } from "../905/150656";
 import { T as _$$T } from "../905/336775";
 import { s as _$$s } from "../905/551945";
 import { Egt } from "../figma_app/763686";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { md, fp, zl, Xr } from "../figma_app/27355";
 import { SV } from "../figma_app/272902";
@@ -461,7 +461,7 @@ export function $$eg3(e) {
 }
 export function $$ef5(e) {
   let t = zl.get(ze);
-  let i = UN().getCurrentPage()?.directlySelectedNodes;
+  let i = getSingletonSceneGraph().getCurrentPage()?.directlySelectedNodes;
   if (!(!t || i?.length !== 1 || i[0]?.isSlide) && (C7() && Hl({
     type: "input-selection",
     node: i[0],

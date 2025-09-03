@@ -2,7 +2,7 @@ import { useMemo, useEffect } from "react";
 import { lQ } from "../905/934246";
 import { plo, Vzr, rrT, glU } from "../figma_app/763686";
 import { AD, dI, Hr, sH } from "../905/871411";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { eU, Iz, md, zl, fp, Xr } from "../figma_app/27355";
 import c from "../vendor/805353";
@@ -124,7 +124,7 @@ export function $$U10(e) {
   let n = t.find(e => e.guid && e.guid === dI(r.strokeBrushGuid));
   return n ? n.type : null;
 }
-let B = getFeatureFlags().ce_il_pencil_stroke_presets ? function() {
+let B = getFeatureFlags().ce_il_pencil_stroke_presets ? function () {
   let [e, t] = fp($$O5);
   let r = e[x]?.config;
   let i = md(GI)?.dynamicStrokeSettings;
@@ -138,7 +138,7 @@ let B = getFeatureFlags().ce_il_pencil_stroke_presets ? function() {
       let {
         guid
       } = t;
-      let n = UN().get(guid);
+      let n = getSingletonSceneGraph().get(guid);
       if (!n) return e;
       let i = 16 / n.size.y;
       let a = $$D0({
@@ -213,9 +213,9 @@ export function $$H2() {
       r([...e, ...t]);
     });
   }, [_, r, p, e, c]);
-  (function() {
+  (function () {
     let e = $$F1();
-    let t = UN();
+    let t = getSingletonSceneGraph();
     B();
     let r = useMemo(() => e.filter(e => !e.isSoftDeleted), [e]);
     let [i] = iM(Vi, "strokeBrushGuid");
@@ -230,7 +230,7 @@ export function $$H2() {
         n.forEach((e, r) => {
           let n = t.get(e);
           if (!n) return;
-          let o = function(e) {
+          let o = function (e) {
             let t = /(brush|pencil)_preview_(.+)/.exec(e.name);
             return t ? t[2] : null;
           }(n);
@@ -272,4 +272,4 @@ export const UH = $$z7;
 export const W = $$L8;
 export const d3 = $$V9;
 export const eh = $$U10;
-export const vE = $$N11; 
+export const vE = $$N11;

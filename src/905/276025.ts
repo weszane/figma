@@ -1,6 +1,6 @@
 import { bN } from "../vendor/514228";
 import { Iz, eU } from "../figma_app/27355";
-import { Qw } from "../905/989992";
+import { resourceUtils } from "../905/989992";
 import { oA } from "../905/663269";
 import { az } from "../905/449184";
 import { Z } from "../905/515860";
@@ -20,7 +20,7 @@ let A = e => [{
   retriable: !1
 }];
 function y(e) {
-  return Qw.errorSuspendable(A(e), {
+  return resourceUtils.errorSuspendable(A(e), {
     release: () => {}
   });
 }
@@ -204,7 +204,7 @@ function E(e) {
   return Iz(t => eU(i => {
     let n;
     let r;
-    return t ? (e ? (n = i(_), r = i(f)) : (n = i(h), r = i(g)), v(i, r, n)) : Qw.disabledSuspendable({
+    return t ? (e ? (n = i(_), r = i(f)) : (n = i(h), r = i(g)), v(i, r, n)) : resourceUtils.disabledSuspendable({
       release: () => {}
     });
   }));
@@ -213,7 +213,7 @@ function x(e) {
   return Iz(t => eU(i => {
     let n;
     let r;
-    return t ? (e ? (n = i(_), r = i(f)) : (n = i(h), r = i(g)), b(i, r, n)) : Qw.disabledSuspendable({
+    return t ? (e ? (n = i(_), r = i(f)) : (n = i(h), r = i(g)), b(i, r, n)) : resourceUtils.disabledSuspendable({
       release: () => {}
     });
   }));
@@ -222,7 +222,7 @@ function S(e) {
   return Iz(t => eU(i => {
     let n;
     let r;
-    return t ? (e ? (n = i(_), r = i(f)) : (n = i(h), r = i(g)), I(i, r, n)) : Qw.disabledSuspendable({
+    return t ? (e ? (n = i(_), r = i(f)) : (n = i(h), r = i(g)), I(i, r, n)) : resourceUtils.disabledSuspendable({
       release: () => {}
     });
   }));
@@ -236,7 +236,7 @@ let $$N2 = E(!0);
 let $$P6 = f;
 let $$O4 = _;
 Iz(e => eU(t => {
-  if (!e) return Qw.disabledSuspendable({
+  if (!e) return resourceUtils.disabledSuspendable({
     release: () => {}
   });
   let i = null;
@@ -245,7 +245,7 @@ Iz(e => eU(t => {
   return b(t, i, n);
 }), bN);
 Iz(e => eU(t => {
-  if (!e) return Qw.disabledSuspendable({
+  if (!e) return resourceUtils.disabledSuspendable({
     release: () => {}
   });
   let i = null;
@@ -254,7 +254,7 @@ Iz(e => eU(t => {
   return v(t, i, n);
 }), bN);
 Iz(e => eU(t => {
-  if (!e) return Qw.disabledSuspendable({
+  if (!e) return resourceUtils.disabledSuspendable({
     release: () => {}
   });
   let i = null;

@@ -2,7 +2,7 @@ import { A$ } from "../figma_app/728005";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { zl } from "../figma_app/27355";
 import { debugState } from "../905/407919";
-import { Ek } from "../905/553831";
+import { subscribeAndAwaitData } from "../905/553831";
 import { IT } from "../figma_app/566371";
 import { $D } from "../905/11";
 import { A } from "../905/963262";
@@ -98,8 +98,8 @@ async function x(e) {
   for (let [e, t] of nodesByLibraryKey) for (let i = 0; i < t.length; i += 20) {
     let a = t.slice(i, i + 20);
     try {
-      let t = await Ek(Opb, {
-        nodes: Array.from(new Set(a.map((t) => `${e},${t.backingNodeId}`).concat(a.map((e) => e.instanceList).flat()))),
+      let t = await subscribeAndAwaitData(Opb, {
+        nodes: Array.from(new Set(a.map(t => `${e},${t.backingNodeId}`).concat(a.map(e => e.instanceList).flat()))),
         openFileKey: fileKey
       });
       await O({
@@ -169,11 +169,11 @@ async function N(e, t) {
       Object.entries(e.data.meta.results ?? {}).forEach(([e, t]) => {
         let r = c.get(e);
         if (!r) return;
-        let i = t.map((e) => ({
+        let i = t.map(e => ({
           componentName: e.name,
           source: e.src_path ?? ""
         }));
-        r.nodes.forEach((e) => {
+        r.nodes.forEach(e => {
           n[e.guid] = i;
         });
       });
@@ -192,7 +192,7 @@ export function $$C0() {
   return "loaded" === t.status && "loaded" === t.data.file.status && t.data.file.data?.hasPermission === !0;
 }
 export async function $$w1(e) {
-  let t = await Ek(J_J, {
+  let t = await subscribeAndAwaitData(J_J, {
     key: e
   });
   return "loaded" === t.file.status && t.file.data?.hasPermission === !0;
@@ -221,7 +221,7 @@ async function O({
     let h = function (e, t) {
       let r = "unknown";
       if (Array.isArray(e) && t) {
-        let n = e.find((e) => e.label === t);
+        let n = e.find(e => e.label === t);
         r = n?.type || r;
       }
       return r;

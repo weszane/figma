@@ -4,7 +4,7 @@ import { isNotNullish } from "../figma_app/95419";
 import { h3O, dPJ, CeL, Ez5, glU, Egt } from "../figma_app/763686";
 import { l7 } from "../905/189185";
 import { AD } from "../905/871411";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { F } from "../905/302958";
 import { _$ } from "../figma_app/379850";
 import { to } from "../905/156213";
@@ -103,7 +103,7 @@ export async function $$U2({
   oldName: n,
   trackRenamePage: i
 }) {
-  let a = UN().get(t);
+  let a = getSingletonSceneGraph().get(t);
   let s = await $$M11({
     openFile: e,
     pageNode: a,
@@ -136,7 +136,7 @@ export async function $$G0(e, t, r, n, i, a, o, p, h, g) {
   Ez5.currentPageState().requestedPageChange.set(e);
   requestAnimationFrame(() => {
     J(async () => {
-      if (await UN().setCurrentPageFromNodeAsync(e), t !== e) {
+      if (await getSingletonSceneGraph().setCurrentPageFromNodeAsync(e), t !== e) {
         let i = vw(r);
         let a = P3() >= 75;
         let d = a ? new Set() : r.fetchedPageIds || new Set();

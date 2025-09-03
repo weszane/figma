@@ -1,10 +1,10 @@
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { kv, iD } from "../figma_app/735943";
 export function $$a3(e) {
-  return $$m7(UN().getInternalCanvas(), t => u(e, t.codeFileFullPathWithoutScheme) && kv(t));
+  return $$m7(getSingletonSceneGraph().getInternalCanvas(), t => u(e, t.codeFileFullPathWithoutScheme) && kv(t));
 }
 export function $$s1(e, t) {
-  let r = $$m7(UN().getInternalCanvas(), e => u(t, e.codeFileFullPathWithoutScheme) && kv(e));
+  let r = $$m7(getSingletonSceneGraph().getInternalCanvas(), e => u(t, e.codeFileFullPathWithoutScheme) && kv(e));
   let a = {};
   for (let e of r) a[e.codeFileFullPathWithoutScheme] = e;
   e(r);
@@ -45,7 +45,7 @@ export function $$p4(e, t, r) {
       let t = e(n, r);
       if (t) return t;
     }
-  }(UN().getInternalCanvas(), e => e.isCodeFile && iD(e.codeFileFullPathWithoutScheme, r));
+  }(getSingletonSceneGraph().getInternalCanvas(), e => e.isCodeFile && iD(e.codeFileFullPathWithoutScheme, r));
   a && t(a);
   return a;
 }

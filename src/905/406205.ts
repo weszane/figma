@@ -4,7 +4,7 @@ import { useCallback, useMemo } from "react";
 import { wA, d4 } from "../vendor/514228";
 import { lQ } from "../905/934246";
 import { _ as _$$_ } from "../figma_app/496441";
-import { Qw } from "../905/989992";
+import { resourceUtils } from "../905/989992";
 import d from "classnames";
 import { sx } from "../905/449184";
 import { N7, QV } from "../905/508367";
@@ -107,7 +107,7 @@ function em(e) {
     orgId: f,
     teamId: f ? null : y
   });
-  let E = Qw.useTransform(v, e => void 0 !== eU(e, FEntityType.FOLDER)).unwrapOr(!!e.folder.is_favorited);
+  let E = resourceUtils.useTransform(v, e => void 0 !== eU(e, FEntityType.FOLDER)).unwrapOr(!!e.folder.is_favorited);
   let x = YO(e.folder.id);
   let S = _$$E2();
   let w = n => {
@@ -150,8 +150,8 @@ function em(e) {
     }));
   }, [d, u, t, i.user, o]);
   let R = "loaded" === x.status && !!x.data?.canCreateDesignFileWithReasons.result;
-  let N = Qw.useTransform(e.folderFilesResult, useCallback(e => e.sort((e, t) => e.touched_at === t.touched_at ? 0 : e.touched_at < t.touched_at ? 1 : -1).slice(0, 15), []));
-  let O = Qw.useTransform(N, useCallback(t => {
+  let N = resourceUtils.useTransform(e.folderFilesResult, useCallback(e => e.sort((e, t) => e.touched_at === t.touched_at ? 0 : e.touched_at < t.touched_at ? 1 : -1).slice(0, 15), []));
+  let O = resourceUtils.useTransform(N, useCallback(t => {
     let i = t.slice(0, 4).map(t => jsx(ey, {
       file: t,
       teamId: e.folder.team_id,

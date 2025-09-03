@@ -27,7 +27,7 @@ import { bL } from "../905/911410";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
 import { glU, plo } from "../figma_app/763686";
 import { l7 } from "../905/189185";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { A as _$$A } from "../vendor/90566";
 import { parsePxNumber } from "../figma_app/783094";
 import { P as _$$P } from "../905/347284";
@@ -258,7 +258,7 @@ function ee(e) {
   }, [x, y, I]);
   let w = useCallback(e => {
     l7.user("delete-brush", () => {
-      let t = UN().get(e.guid);
+      let t = getSingletonSceneGraph().get(e.guid);
       t && (x(), t.guid === g.guid ? S(Lk) : t.guid === selectedBrush.guid && I(g, zk.NO), t.removeSelfAndChildren(), Y5.commit());
     });
   }, [g, x, I, selectedBrush, S]);

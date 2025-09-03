@@ -1,7 +1,7 @@
 import { c2 } from "../905/382883";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { dI, sH, fn } from "../905/871411";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { $D } from "../905/11";
 import { t as _$$t } from "../905/303541";
@@ -10,7 +10,7 @@ import { E7 } from "../905/216495";
 import { xT } from "../figma_app/841415";
 export function $$_7(e, t, r) {
   let n;
-  let i = UN();
+  let i = getSingletonSceneGraph();
   switch (e?.type) {
     case "internal":
       return (n = t.find(t => t.guid === e.id)?.name || (e.id ? i?.get(e.id)?.name : void 0)) ? "/" === n ? _$$t("sites.panel.home") : n : "";

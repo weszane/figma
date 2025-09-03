@@ -8,7 +8,7 @@ import { ClipboardContentType, ChatRole } from "../figma_app/175377";
 import { l7 } from "../905/189185";
 import { Ns } from "../figma_app/686647";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { eU, zl, Xr, md } from "../figma_app/27355";
 import { g as _$$g } from "../905/871474";
@@ -578,7 +578,7 @@ export function $$X0() {
       return u;
     }
     {
-      let e = UN().getCurrentPage();
+      let e = getSingletonSceneGraph().getCurrentPage();
       return y.current ?? [e.guid];
     }
   }, [c, u]);
@@ -606,7 +606,7 @@ export function $$X0() {
         s.appendChild(n);
         return n;
       }));
-    }(UN(), n?.id ?? ""));
+    }(getSingletonSceneGraph(), n?.id ?? ""));
     let i = useMemo(() => r?.rawMessages ?? [], [r?.rawMessages]);
     let o = useCallback(t => {
       if (e) s(e => [...e, ...t]);else for (let e of t) r?.appendMessage(e);

@@ -10,7 +10,7 @@ import { C as _$$C } from "../905/520159";
 import { O as _$$O } from "../905/969533";
 import { k as _$$k } from "../905/44647";
 import { Egt, glU } from "../figma_app/763686";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { Y1 } from "../905/143116";
 import { h as _$$h } from "../905/207101";
 import { Uz, xH } from "../905/63728";
@@ -38,7 +38,7 @@ export function $$U0() {
   let e = tS();
   let [t, r] = useState(e ? rZ(e) : []);
   let [a, l] = useState(t[0] || null);
-  let d = useMemo(() => t.map((e) => ({
+  let d = useMemo(() => t.map(e => ({
     type: "option",
     text: e.name
   })), [t]);
@@ -63,9 +63,9 @@ export function $$U0() {
       justify: "space-between",
       children: [jsx(_$$m, {
         selected: a,
-        onSelectedChange: (e) => l(e),
+        onSelectedChange: e => l(e),
         placeholder: "No local kits",
-        labelForSelectedItem: (e) => e.name,
+        labelForSelectedItem: e => e.name,
         displayAboveTarget: !0,
         lean: "right",
         items: d,
@@ -92,7 +92,7 @@ export function $$U0() {
             if (e) {
               let t = rZ(e);
               r(t);
-              l(t.find((e) => e.dsKitKey.pageId === a?.dsKitKey.pageId) || t[0] || null);
+              l(t.find(e => e.dsKitKey.pageId === a?.dsKitKey.pageId) || t[0] || null);
               validate();
             }
           },
@@ -155,7 +155,7 @@ function G(e) {
   let a = tS();
   let [s] = useState(a ? rZ(a) : []);
   let l = dh();
-  let d = useMemo(() => s.find((e) => e.dsKitKey.pageId === l) || null, [s, l]);
+  let d = useMemo(() => s.find(e => e.dsKitKey.pageId === l) || null, [s, l]);
   let {
     result
   } = _$$C2(d?.dsKitKey || null);
@@ -163,8 +163,8 @@ function G(e) {
   t = i6.STRUCTURE;
   r = v2.FROM_MAKE_KIT;
   let _ = result ? {
-    system: result.system.filter((e) => e.output.guids.length > 0).filter((e) => e.rule.category === t).filter((e) => !r || e.rule.supportedKitTypes.includes(r)),
-    component: result.component.filter((e) => Object.values(e.output).flatMap((e) => e.guids).length > 0).filter((e) => e.rule.category === t).filter((e) => !r || e.rule.supportedKitTypes.includes(r))
+    system: result.system.filter(e => e.output.guids.length > 0).filter(e => e.rule.category === t).filter(e => !r || e.rule.supportedKitTypes.includes(r)),
+    component: result.component.filter(e => Object.values(e.output).flatMap(e => e.guids).length > 0).filter(e => e.rule.category === t).filter(e => !r || e.rule.supportedKitTypes.includes(r))
   } : null;
   let h = _ && (_?.component.length > 0 || _?.system.length > 0);
   return jsx(_$$n, {
@@ -241,12 +241,12 @@ export function $$V1({
   shouldAutoFix: a
 }) {
   return jsx(Fragment, {
-    children: [...e.system.filter((e) => e.rule.category === t).filter((e) => !r || e.rule.supportedKitTypes.includes(r)).map((e) => jsx(z, {
+    children: [...e.system.filter(e => e.rule.category === t).filter(e => !r || e.rule.supportedKitTypes.includes(r)).map(e => jsx(z, {
       rule: e.rule,
       output: e.output,
       dsKitKey: i.dsKitKey,
       shouldAutoFix: a
-    }, e.rule.key)), ...e.component.filter((e) => e.rule.category === t).map((e) => jsx(H, {
+    }, e.rule.key)), ...e.component.filter(e => e.rule.category === t).map(e => jsx(H, {
       rule: e.rule,
       output: e.output,
       shouldAutoFix: a
@@ -258,11 +258,11 @@ function H({
   output: t,
   shouldAutoFix: r
 }) {
-  let a = useCallback((r) => {
+  let a = useCallback(r => {
     if (r?.stopPropagation(), !e.fix) return !1;
     {
       let r = !0;
-      let n = UN();
+      let n = getSingletonSceneGraph();
       for (let i in t) {
         let a = n.get(i);
         a && !e.fix(a, t[a.guid]?.meta) && (r = !1);
@@ -271,7 +271,7 @@ function H({
       return r;
     }
   }, [e, t]);
-  let s = useMemo(() => Object.values(t).flatMap((e) => e.guids), [t]);
+  let s = useMemo(() => Object.values(t).flatMap(e => e.guids), [t]);
   return 0 === Object.keys(t).length ? null : jsx(W, {
     rule: e,
     guids: s,
@@ -286,7 +286,7 @@ function z({
   output: r,
   shouldAutoFix: a
 }) {
-  let s = useCallback((n) => (n?.stopPropagation(), !!t.fix && t.fix(e, r.meta)), [t, e, r]);
+  let s = useCallback(n => (n?.stopPropagation(), !!t.fix && t.fix(e, r.meta)), [t, e, r]);
   return 0 === r.guids.length ? null : jsx(W, {
     rule: t,
     guids: r.guids,
@@ -305,14 +305,14 @@ function W({
   let [o, d] = useState(!1);
   let [c, u] = useState(!1);
   let [E, y] = useState(!1);
-  let b = (e) => {
+  let b = e => {
     y(a(e));
   };
-  let T = useCallback((e) => {
+  let T = useCallback(e => {
     Egt.clearSelection();
     Egt.addToSelection(e);
   }, []);
-  let S = useMemo(() => t.map((e) => UN().get(e)).filter(Boolean), [t]);
+  let S = useMemo(() => t.map(e => getSingletonSceneGraph().get(e)).filter(Boolean), [t]);
   return (_$$h(() => {
     s && b();
   }), 0 === t.length) ? null : jsxs(Fragment, {
@@ -366,7 +366,7 @@ function W({
           children: JSON.stringify(r)
         }) : jsx("div", {
           className: _$$s.wFull.flex.flexWrap.gap4.$,
-          children: S.map((e) => jsx(K, {
+          children: S.map(e => jsx(K, {
             node: e
           }, e.guid))
         })
@@ -386,7 +386,7 @@ function K({
     className: _$$s.borderBox.h24.flex.px8.gap4.itemsCenter.b1.radiusMedium.maxW150.font11.colorBorder.$,
     onClick: () => {
       glU.panToNode(e.guid, !1);
-      let t = UN().getCurrentPage();
+      let t = getSingletonSceneGraph().getCurrentPage();
       t && (t.directlySelectedNodes = [e]);
     },
     recordingKey: "nodeButton",

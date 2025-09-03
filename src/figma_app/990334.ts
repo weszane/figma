@@ -1,6 +1,6 @@
 import { useRef, useEffect } from "react";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { eU, md } from "../figma_app/27355";
 import { az } from "../905/449184";
@@ -23,7 +23,7 @@ export function $$S1() {
   let t = md($$I0);
   let r = useRef(new Map());
   let S = useRef(0);
-  let v = UN();
+  let v = getSingletonSceneGraph();
   let A = useRef(3e5);
   let x = useRef(0);
   !async function () {

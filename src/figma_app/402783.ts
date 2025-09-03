@@ -1,7 +1,7 @@
 import { useState, useCallback } from "react";
 import { glU, cfv } from "../figma_app/763686";
 import { l7 } from "../905/189185";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { zl } from "../figma_app/27355";
 import { sx } from "../905/449184";
 import { am } from "../figma_app/901889";
@@ -131,7 +131,7 @@ async function R({
   v && P && glU.triggerAction("commit", {});
 }
 export function $$L0(e, t = !0, r) {
-  let [o] = useState(UN());
+  let [o] = useState(getSingletonSceneGraph());
   let [l, p] = useState(!1);
   let _ = Z("figjam_summary_navigate");
   let h = um();
@@ -169,7 +169,7 @@ export function $$L0(e, t = !0, r) {
       let {
         v,
         data
-      } = b7(UN());
+      } = b7(getSingletonSceneGraph());
       let u = l7.user("insert-ai-summary-loading-node", () => glU.insertLoadingSummaryInCanvas(e === cfv.BELOW, t));
       let E = o.get(u);
       if (!E) return;

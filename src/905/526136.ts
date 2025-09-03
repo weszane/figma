@@ -1,5 +1,5 @@
 import { L5V } from "../figma_app/763686";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 export function $$a0(e, t, i) {
   switch (t) {
     case L5V.HEIGHT:
@@ -47,7 +47,7 @@ export function $$a0(e, t, i) {
       return e.opacity < 1;
     case L5V.COMPONENT:
       if ("INSTANCE" !== e.type || !e.symbolId) return !1;
-      return !!UN().get(e.symbolId);
+      return !!getSingletonSceneGraph().get(e.symbolId);
     case L5V.GRID_ROW_GAP:
     case L5V.GRID_COLUMN_GAP:
     case L5V.GRID_ROW_COUNT:

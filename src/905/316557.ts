@@ -34,7 +34,7 @@ import { W as _$$W } from "../905/798224";
 import { A as _$$A } from "../905/891805";
 import { e as _$$e } from "../905/149844";
 import { Ad } from "../figma_app/273493";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { A as _$$A2 } from "../vendor/850789";
 import { sx } from "../905/449184";
 import { UE, J1 } from "../figma_app/191804";
@@ -216,7 +216,7 @@ function e_({
     if (!glU || !Ez5) return;
     let t = glU.createStyleWithoutSelection("inheritTextStyleKey", `Text style ${i.length + 1}`, "", !1);
     if (!t) return;
-    let n = UN().getStyleNodeByRef(t);
+    let n = getSingletonSceneGraph().getStyleNodeByRef(t);
     n && (Ez5?.slideThemeLibBindings().addStyleToLocalTheme(n.guid, e), u(n.guid));
   });
   return jsxs(Fragment, {
@@ -329,7 +329,7 @@ function ey({
     T(n);
   }, t.node_id);
   useEffect(() => {
-    let e = UN().get(t.node_id);
+    let e = getSingletonSceneGraph().get(t.node_id);
     e && !fontsAreLoading && T(e.hasMissingFont);
   }, [t.node_id, T, fontsAreLoading]);
   let [R, N] = _$$A2(C, 200);

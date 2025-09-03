@@ -1,5 +1,5 @@
 import { GUn, f2e, Ez5 } from "../figma_app/763686";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { zl } from "../figma_app/27355";
 import { debugState } from "../905/407919";
 import { c as _$$c } from "../905/370443";
@@ -15,7 +15,7 @@ export class $$p0 extends j {
   handleMouseDown(e) {
     if (!zl.get(w)) return;
     let t = e.findHoveredNodeId();
-    let i = UN().get(t);
+    let i = getSingletonSceneGraph().get(t);
     if (i && i.isSection && GUn.eventHitTestNameUIBounds(e, t, f2e.SECTION_PRESET_PICKER)) {
       this.sectionId = t;
       e.accept(this);
@@ -28,10 +28,10 @@ export class $$p0 extends j {
       return;
     }
     let t = GUn.eventHitTestNameUIBounds(e, this.sectionId, f2e.SECTION_PRESET_PICKER);
-    let i = UN().get(e.canvasGUID());
+    let i = getSingletonSceneGraph().get(e.canvasGUID());
     if (t && i) {
       let t = debugState.dispatch;
-      let n = UN().get(this.sectionId);
+      let n = getSingletonSceneGraph().get(this.sectionId);
       BQ(n, t) && (e.accept(this), Cu({
         nodeId: this.sectionId,
         trackingDescriptor: _$$c.SECTION_PRESET_PICKER_CLICKED
@@ -42,7 +42,7 @@ export class $$p0 extends j {
   }
   handleMouseMove(e) {
     let t = e.findHoveredNodeId();
-    let i = UN().get(t);
+    let i = getSingletonSceneGraph().get(t);
     if (!i || !i.isSection) {
       Ez5.clearHoveredSectionPresetPickerNode();
       return;

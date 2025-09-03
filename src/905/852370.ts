@@ -2,7 +2,7 @@ import { useState, useCallback, useMemo, useRef, useEffect, useContext } from "r
 import { wA, d4 } from "../vendor/514228";
 import { Ez5 } from "../figma_app/763686";
 import { AD } from "../905/871411";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { sx } from "../905/449184";
 import { sn } from "../905/542194";
 import { g as _$$g } from "../905/880308";
@@ -90,7 +90,7 @@ export function $$R1(e, t, i, l, d) {
         t = e => e.filter(e => {
           if (e.anchored && e.comments.length > 0 && e.comments[0].client_meta?.node_id) {
             let t = e.comments[0].client_meta.node_id;
-            let i = t ? UN().get(t) : void 0;
+            let i = t ? getSingletonSceneGraph().get(t) : void 0;
             let n = i ? i.containingSlideId : AD;
             return _ ? n === f : n !== AD;
           }
@@ -100,10 +100,10 @@ export function $$R1(e, t, i, l, d) {
       case "non_dev_mode_focus":
         t = e => e.filter(e => {
           if (e.anchored && e.comments.length > 0 && e.comments[0].client_meta?.node_id) {
-            let t = A ? UN().get(A) : null;
+            let t = A ? getSingletonSceneGraph().get(A) : null;
             if (!t) return !0;
             let i = e.comments[0].client_meta.node_id;
-            let n = i ? UN().get(i) : null;
+            let n = i ? getSingletonSceneGraph().get(i) : null;
             return WJ(t, n);
           }
           return !0;

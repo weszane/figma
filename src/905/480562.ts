@@ -28,7 +28,7 @@ import { Ph } from "../905/160095";
 import { Ib } from "../905/129884";
 import { PT } from "../905/669853";
 import { A as _$$A2 } from "../1617/380980";
-import { Qw } from "../905/989992";
+import { resourceUtils } from "../905/989992";
 import { IT } from "../figma_app/566371";
 import { fX, Im } from "../905/627262";
 import { bu, k9, DQ, y$ } from "../905/712714";
@@ -621,7 +621,7 @@ function eE({
   }), {
     enabled: !!e && getFeatureFlags().dsa_styles_variables_ui && i === _$$n.VARIABLES
   });
-  let l = Qw.all([n, a]);
+  let l = resourceUtils.all([n, a]);
   let c = useMemo(() => {
     if (!getFeatureFlags().dsa_styles_variables_ui) return n.data;
     switch (i) {

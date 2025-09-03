@@ -1,4 +1,4 @@
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { t as _$$t } from "../905/303541";
 import { x } from "../905/239551";
 let $$s9 = [];
@@ -120,7 +120,7 @@ export function $$O2(e, t, r) {
   let i = t.length > 0;
   let a = r && r.length > 0;
   if (!i || a) return !1;
-  let s = UN().get(e);
+  let s = getSingletonSceneGraph().get(e);
   return !!s && ($$S14(s, function (e) {
     let t = JSON.parse(e);
     let r = [{

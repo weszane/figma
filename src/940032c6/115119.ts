@@ -20,7 +20,6 @@ import { qh } from '../642/435480';
 import { J as _$$J2 } from '../642/485582';
 import { A as _$$A19 } from '../642/502017';
 import { noop, u as _$$u9 } from '../642/638075';
-import { noop } from '../642/671529';
 import { c as _$$c0 } from '../642/688711';
 import { B as _$$B8 } from '../642/707257';
 import { X2 } from '../642/755347';
@@ -119,7 +118,6 @@ import { Y as _$$Y3 } from '../905/246212';
 import { g as _$$g4 } from '../905/248178';
 import { A as _$$A7 } from '../905/251970';
 import { z as _$$z6 } from '../905/252950';
-import { noop } from '../905/253683';
 import { R as _$$R4 } from '../905/256203';
 import { T as _$$T2 } from '../905/256551';
 import { F as _$$F8 } from '../905/258517';
@@ -162,7 +160,6 @@ import { L as _$$L4 } from '../905/408237';
 import { A as _$$A0 } from '../905/408320';
 import { _ as _$$_0 } from '../905/410717';
 import { h4 as _$$h1, Nz as _$$Nz } from '../905/417232';
-import { noop } from '../905/419236';
 import { rq as _$$rq } from '../905/425180';
 import { e as _$$e10 } from '../905/428849';
 import { N as _$$N8 } from '../905/430294';
@@ -197,7 +194,6 @@ import { FJ } from '../905/508367';
 import { l as _$$l9 } from '../905/509505';
 import { D8 } from '../905/511649';
 import { h as _$$h9 } from '../905/513745';
-import { noop } from '../905/519202';
 import { C as _$$C6 } from '../905/520159';
 import { Z as _$$Z3 } from '../905/521211';
 import { $n, WW as _$$WW, IK } from '../905/521428';
@@ -241,7 +237,7 @@ import { g as _$$g } from '../905/687265';
 import { Qr as _$$Qr } from '../905/690539';
 import { a as _$$a7 } from '../905/693578';
 import { e0 as _$$e4 } from '../905/696396';
-import { UN } from '../905/700578';
+import { getSingletonSceneGraph } from '../905/700578';
 import { s as _$$s6 } from '../905/702260';
 import { L as _$$L2 } from '../905/704296';
 import { G as _$$G6 } from '../905/707993';
@@ -278,7 +274,6 @@ import { o as _$$o5 } from '../905/821217';
 import { z as _$$z12 } from '../905/821223';
 import { z as _$$z4 } from '../905/825185';
 import { vL as _$$vL } from '../905/826900';
-import { noop } from '../905/834956';
 import { dY as _$$dY, sU as _$$sU, Wh as _$$Wh, WM as _$$WM } from '../905/838765';
 import { q as _$$q } from '../905/838985';
 import { sZ as _$$sZ } from '../905/845253';
@@ -304,7 +299,6 @@ import { _L as _$$_L, bL as _$$bL2 } from '../905/911410';
 import { F as _$$F5 } from '../905/911981';
 import { e as _$$e12 } from '../905/916195';
 import { $S, $Y } from '../905/918620';
-import { noop } from '../905/918929';
 import { A as _$$A21 } from '../905/920165';
 import { X as _$$X4 } from '../905/924044';
 import { A as _$$A16 } from '../905/925160';
@@ -334,7 +328,7 @@ import { J as _$$J12 } from '../905/980942';
 import { E as _$$E1 } from '../905/984674';
 import { b as _$$b10 } from '../905/985254';
 import { h1 as _$$h5 } from '../905/986103';
-import { Qw as _$$Qw } from '../905/989992';
+import { resourceUtils } from '../905/989992';
 import { H4 as _$$H5 } from '../905/992467';
 import { h as _$$h12 } from '../905/994594';
 import { X as _$$X3 } from '../905/999307';
@@ -420,7 +414,6 @@ import { I as _$$I6 } from '../5421/927984';
 import { S as _$$S } from '../5421/959002';
 import { d as _$$d7 } from '../5421/986644';
 import { a as _$$a13 } from '../5430/14230';
-import { noop } from '../5430/262192';
 import { T as _$$T4 } from '../5430/528285';
 import { Q as _$$Q3 } from '../5430/662041';
 import { k as _$$k3 } from '../5430/846627';
@@ -508,7 +501,6 @@ import { nT as _$$nT, wN as _$$wN } from '../figma_app/53721';
 import { $y, Cs as _$$Cs, cV as _$$cV } from '../figma_app/59509';
 import { cF as _$$cF2, Az } from '../figma_app/61758';
 import { $g, _X as _$$_X, QZ } from '../figma_app/62612';
-import { noop } from '../figma_app/64343';
 import { Q as _$$Q13 } from '../figma_app/67145';
 import { p7 as _$$p8, Ut as _$$Ut } from '../figma_app/72338';
 import { Nw } from '../figma_app/78808';
@@ -917,7 +909,7 @@ function E({
     selectedNodeParentResponsiveSetId
   } = useContext(S);
   let x = useCallback(() => {
-    let e = UN().get(n);
+    let e = getSingletonSceneGraph().get(n);
     e && _$$l.user('dakota-set-collection-binding', () => {
       e.setDakotaSelectorCollection('', TsU.CMS_CONNECT_MODE);
     });
@@ -1066,7 +1058,7 @@ let K = memo(({
   });
 });
 function H() {
-  let e = UN();
+  let e = getSingletonSceneGraph();
   let t = J2(Ez5.dakotaBindings().nodeIdToSelectorMap);
   let i = J2(Ez5.dakotaBindings().nodeIdToAliasMap);
   let n = [];
@@ -1124,7 +1116,7 @@ function Y() {
   let r = VC(e.data?.dakotaCollectionId);
   if (!(e.showing && t && s.data.length > 0)) return null;
   let o = function (e, t, i) {
-    let n = UN().get(e);
+    let n = getSingletonSceneGraph().get(e);
     if (!n) {
       return {
         top: 0,
@@ -1303,7 +1295,7 @@ function en({
   let l = _$$uE(t);
   let a = n.data;
   let s = VC(t);
-  let r = UN().get(i);
+  let r = getSingletonSceneGraph().get(i);
   r == null ? _$$sD('No node found', {
     nodeId: i
   }) : n.status === 'loaded' && a && _$$l.system('dakota-set-item-ids', () => {
@@ -1346,7 +1338,7 @@ function el({
     return ei(t, i);
   }) : [];
   e.limit > 0 && s.length > e.limit && s.splice(e.limit);
-  let r = UN().get(t);
+  let r = getSingletonSceneGraph().get(t);
   r == null ? _$$sD('No node found', {
     nodeId: t
   }) : _$$l.system('dakota-set-item-ids', () => {
@@ -1901,7 +1893,7 @@ function iL() {
   let t = Fk((e, t) => t.flatMap(t => e.get(t)?.guid ?? []), e);
   let i = useMemo(() => {
     if (!getFeatureFlags().sts_code_authoring && !getFeatureFlags().sts_code_authoring_by_plan) return new Map();
-    let e = UN();
+    let e = getSingletonSceneGraph();
     return new Map(t.map(t => [t, e.get(t)]).filter(e => e[1] != null));
   }, [t]);
   if (!LS) {
@@ -2029,9 +2021,9 @@ function iF({
     x && triggerSelfHeal(x, i, n);
   }, [triggerSelfHeal, x]);
   let S = _$$md(Jl);
-  let C = UN().get(S);
+  let C = getSingletonSceneGraph().get(S);
   let T = _$$md(_$$T_);
-  let I = UN().get(T);
+  let I = getSingletonSceneGraph().get(T);
   let E = (_$$md(_$$s3) === Nfd.CODE ? I : C) ?? x;
   let N = useMemo(() => {
     let e = x?.codeFilePath || void 0;
@@ -2221,7 +2213,7 @@ function iD({
     };
   }();
   let [x, m] = useState(p.initialWidth);
-  let g = UN();
+  let g = getSingletonSceneGraph();
   let f = _$$cu();
   let _ = f[0] ? g.get(f[0]) : null;
   let b = _$$wE(_);
@@ -4345,7 +4337,7 @@ function sp({
     figFileKey: e
   });
   let J = useCallback(async () => {
-    let t = UN();
+    let t = getSingletonSceneGraph();
     let n = t.getCurrentPage();
     n && su(e, t, n);
     U ? (await doSetup()) && (_$$sx(_$$mv, {
@@ -4592,7 +4584,7 @@ function sv(e) {
       let i = Rs(x9E, {
         fileKey: e.key
       });
-      return _$$Qw.useTransform(i, i => {
+      return resourceUtils.useTransform(i, i => {
         let n = i.file?.canPublishSiteWithReasons;
         if (!n || n.status !== _$$tT.Loaded) {
           return {
@@ -6997,8 +6989,8 @@ let oC = memo(e => {
   });
 });
 function oI() {
-  let e = UN().getCurrentPage();
-  let t = UN().getDirectlySelectedNodes();
+  let e = getSingletonSceneGraph().getCurrentPage();
+  let t = getSingletonSceneGraph().getDirectlySelectedNodes();
   let i = t.length === 1 ? t[0] : void 0;
   let n = Xr(_$$j4);
   let l = _$$b2();
@@ -7006,7 +6998,7 @@ function oI() {
     currentPage: e,
     setWebpage: useCallback(e => {
       if (!l) {
-        let t = UN().getCurrentPage();
+        let t = getSingletonSceneGraph().getCurrentPage();
         t && i?.guid !== e && t.setSelectionToSingleNode(e);
       }
       n(e);
@@ -9325,7 +9317,7 @@ function d8({
   recordingKey: m
 }) {
   let g = _$$c4(m);
-  let f = r ? UN().get(r) : void 0;
+  let f = r ? getSingletonSceneGraph().get(r) : void 0;
   useEffect(() => {
     r && !f && t('');
   }, [f, r, t]);
@@ -9933,7 +9925,7 @@ function cm({
       }));
     };
     if (s.faviconID) {
-      let t = UN();
+      let t = getSingletonSceneGraph();
       let i = t.get(s.faviconID)?.editInfo;
       if (!s.faviconID || !i) return;
       let n = t.onChange(() => {
@@ -10008,7 +10000,7 @@ function ch({
       }));
     };
     if (s.socialImageID) {
-      let t = UN();
+      let t = getSingletonSceneGraph();
       let i = t.get(s.socialImageID)?.editInfo;
       if (!s.socialImageID || !i) return;
       let n = t.onChange(() => {
@@ -10218,7 +10210,7 @@ function cj({
       }), {
         enabled: !!e
       });
-      return _$$Qw.useTransform(t, e => {
+      return resourceUtils.useTransform(t, e => {
         let t = e.file?.canPublishSiteWithReasons;
         return t != null && t.status === _$$tT.Loaded && t.data.result;
       }).data ?? !1;
@@ -10585,7 +10577,7 @@ async function cO(e, t, i) {
       assetFiles: {}
     };
   }
-  let s = UN();
+  let s = getSingletonSceneGraph();
   let o = _$$is(s.getInternalCanvas(), e => e && e.isCodeFile);
   await Jr().loadAllImagesUnder(o.map(e => e.id), MoD.ALL, 'sites.assetGeneration');
   let d = {};
@@ -12218,7 +12210,7 @@ async function u5({
   glU?.applyNodesFromBuffer(n, e, i, !1);
 }
 function u2(e) {
-  let t = UN();
+  let t = getSingletonSceneGraph();
   let i = t.getCurrentPage();
   debug(!!i, 'currentPage invalid.');
   let n = i.defaultResponsiveSetId;
@@ -12932,7 +12924,7 @@ function xm(e) {
     value
   } = e;
   let i = value ? _$$o6(value) : null;
-  let n = UN().getCurrentPage();
+  let n = getSingletonSceneGraph().getCurrentPage();
   let a = (n?.childrenNodes.filter(e => e.isResponsiveSet && !e.getNearestDakotaCollectionId()) ?? []).sort((e, t) => e.name.localeCompare(t.name));
   let s = (n?.childrenNodes.filter(e => e.isResponsiveSet && e.getNearestDakotaCollectionId()) ?? []).sort((e, t) => e.name.localeCompare(t.name));
   let r = pL(_$$u6(i, a, s), x_(e));
@@ -17152,7 +17144,7 @@ function h0(e) {
       let l = [];
       let a = {};
       for (let e of t) {
-        let t = UN().get(e.localGuid);
+        let t = getSingletonSceneGraph().get(e.localGuid);
         if (!t || t.codeFilePath && !t.isEntrypointCodeFile) continue;
         a[t.codeFileFullPathWithoutScheme] = (a[t.codeFileFullPathWithoutScheme] || 0) + 1;
         let s = _$$nt(t, e.assetId);
@@ -17190,7 +17182,7 @@ function h0(e) {
       topLevelObjectRowHeight: _topLevelObjectRowHeight
     } = useContext(_$$y0);
     let b = _$$ut(Ez5?.codeSelection().fullscreenCodeNodeIds, []);
-    let y = useMemo(() => b[0] ? UN().get(b[0])?.exportedFromCodeFile?.guid ?? b[0] : null, [b]);
+    let y = useMemo(() => b[0] ? getSingletonSceneGraph().get(b[0])?.exportedFromCodeFile?.guid ?? b[0] : null, [b]);
     let v = useCallback(e => {
       let t = {
         rowData: [],
@@ -17243,11 +17235,11 @@ function h0(e) {
   }();
   let P = Xr(_$$s3);
   let O = e => {
-    let t = UN().get(e);
+    let t = getSingletonSceneGraph().get(e);
     t && _$$xB(t);
   };
   let F = (e, t) => {
-    let i = UN().get(e);
+    let i = getSingletonSceneGraph().get(e);
     if (!i) return;
     let {
       clientX,
@@ -17262,7 +17254,7 @@ function h0(e) {
         isInteraction: i.isCodeBehavior,
         deleteItem: () => {
           _$$l.user('delete-code-component', () => {
-            let t = UN().get(e);
+            let t = getSingletonSceneGraph().get(e);
             if (t?.isCodeFile) glU.deleteCodeFile(e);else if (t?.isCodeComponent && t.exportedFromCodeFile) glU.deleteCodeFile(t.exportedFromCodeFile.guid);else if (t?.isCodeInstance && t.backingCodeComponent && t.backingCodeComponent.exportedFromCodeFile) glU.deleteCodeFile(t.backingCodeComponent.exportedFromCodeFile.guid);else throw new Error(`Invalid node type for deletion: ${t?.type}`);
             Y5.triggerAction('commit');
           });
@@ -17330,7 +17322,7 @@ function h0(e) {
           isReadOnly: !0,
           onRowContextMenu: F,
           onSelectionUpdated: e => {
-            let t = UN().get(e);
+            let t = getSingletonSceneGraph().get(e);
             t && _$$iI(t, {
               targetNodeId: null,
               exampleObject: PMF.SIMPLE_SQUARE
@@ -17442,7 +17434,7 @@ function h5(e) {
             let t = glU?.createNewCodeFile(e, null, 'layers_panel', !0);
             if (t) {
               Y5.triggerAction('commit');
-              let e = UN().get(t);
+              let e = getSingletonSceneGraph().get(t);
               e && (_$$xB(e), a(!0));
             }
           });
@@ -17474,7 +17466,7 @@ function h2({
             let e = glU?.createNewCodeInteraction('layers_panel');
             if (e) {
               Y5.triggerAction('commit');
-              let t = UN().get(e);
+              let t = getSingletonSceneGraph().get(e);
               t && _$$iI(t, {
                 targetNodeId: null,
                 exampleObject: PMF.SIMPLE_SQUARE
@@ -17547,7 +17539,7 @@ function h8() {
       let t = glU?.createNewCodeFile(e, null, 'empty_state', !0);
       if (t) {
         Y5.triggerAction('commit');
-        let e = UN().get(t);
+        let e = getSingletonSceneGraph().get(t);
         e && _$$xB(e);
       }
     });
@@ -17628,7 +17620,7 @@ function h9() {
     let e = _$$md(Y3);
     let t = Fk((e, t) => t.flatMap(t => e.get(t)?.guid ?? []), e);
     return useMemo(() => {
-      let e = UN();
+      let e = getSingletonSceneGraph();
       return new Map(t.flatMap(t => {
         let i = e.get(t);
         return i ? [[t, i]] : [];
@@ -18406,7 +18398,7 @@ function gL(e) {
   let y = useRef(null);
   let v = useRef(null);
   let j = _$$O6();
-  let S = UN();
+  let S = getSingletonSceneGraph();
   let C = S.get(j);
   let T = !f;
   let [I, E] = _$$fp(_$$h10);
@@ -18425,7 +18417,7 @@ function gL(e) {
     let n = _$$d(e => e.mirror.appModel.currentPage);
     let l = _$$d(e => e.versionHistory);
     let a = _$$U5();
-    let o = UN();
+    let o = getSingletonSceneGraph();
     let d = _$$d(e => e.mirror.appModel.pagesList);
     return s => {
       s.stopPropagation();
@@ -18515,7 +18507,7 @@ function gL(e) {
   }, [n]);
   let Y = e => {
     _$$S9('panel');
-    UN().setCurrentPageFromNodeAsync(e);
+    getSingletonSceneGraph().setCurrentPageFromNodeAsync(e);
     _$$tJ([e]);
     Y5.commit();
     M(e);
@@ -18660,7 +18652,7 @@ function gO() {
     stopRenamingNode
   } = _$$TU();
   let _ = c && (e => {
-    let t = UN().get(e || '');
+    let t = getSingletonSceneGraph().get(e || '');
     return !!t?.isResponsiveSetOrWebpage;
   })(renamingNodeGuid) ? null : renamingNodeGuid;
   let {
@@ -18668,7 +18660,7 @@ function gO() {
     showAllLayers,
     customRowBuilder
   } = function () {
-    let e = UN();
+    let e = getSingletonSceneGraph();
     let t = Ez5.sitesState();
     let i = J2(t.focusedLayoutSetNodes);
     let n = _$$O6();
@@ -18713,7 +18705,7 @@ function gO() {
         isLayersOpen,
         isReadOnly: t,
         onSelectionUpdated: e => {
-          UN().setCurrentPageFromNodeAsync(e);
+          getSingletonSceneGraph().setCurrentPageFromNodeAsync(e);
           _$$S9('panel');
           _$$tJ([e]);
           Y5.commit();
@@ -20143,7 +20135,7 @@ function fY() {
 function fJ(e) {
   let t = _$$md(e.currentAtom);
   return useMemo(() => {
-    let e = UN().getCurrentPage();
+    let e = getSingletonSceneGraph().getCurrentPage();
     let i = _$$sO(t.url);
     if (!e) return null;
     for (let n of e.childrenNodes) {
@@ -20900,7 +20892,7 @@ function _S() {
   assert(!!getFeatureFlags().sts_runtime_debug_tools, 'runtime debug tools not enabled');
 }
 function _C() {
-  let e = UN();
+  let e = getSingletonSceneGraph();
   let t = e.getDirectlySelectedNodes();
   let i = t.length ? t : e.getCurrentPage()?.childrenNodes;
   assert(void 0 !== i);
@@ -20948,7 +20940,7 @@ async function _I({
           for (let i of s) t.push(e.size.x + i);
         }
       }
-      let i = await _b(a.name, UN(), a, {
+      let i = await _b(a.name, getSingletonSceneGraph(), a, {
         windowWidths: t
       });
       n.push(i);
@@ -20982,7 +20974,7 @@ class _A {
   constructor(e = {
     dryRun: !0
   }) {
-    this.sceneGraph = UN();
+    this.sceneGraph = getSingletonSceneGraph();
     this.imageCache = new Map();
     this.nodeFillsToFlatten = [];
     this.stats = {
@@ -21074,7 +21066,7 @@ class _A {
     return t;
   }
   async generateNewImageFill(e, t, i) {
-    let n = UN();
+    let n = getSingletonSceneGraph();
     let l = n.getInternalCanvas();
     console.warn('Generating new image fill for node', {
       nodeId: e,
@@ -21454,7 +21446,7 @@ function _X({
   let [I, E] = useState(!1);
   useEffect(() => {
     if (!T || getFeatureFlags().sts_disable_preview_selection) return;
-    let e = UN().getCurrentPage();
+    let e = getSingletonSceneGraph().getCurrentPage();
     assert(e !== null);
     let t = _q(e);
     if (!t) return;
@@ -22365,7 +22357,7 @@ function b0() {
   });
 }
 function b1() {
-  let e = _$$kk(UN().getDirectlySelectedNodes());
+  let e = _$$kk(getSingletonSceneGraph().getDirectlySelectedNodes());
   let t = e?.type === 'CMS_RICH_TEXT';
   let i = useRef(null);
   return _$$U() && e && t ? jsx(_$$k10, {
@@ -22448,7 +22440,7 @@ function yl(e) {
   let n = null;
   let a = null;
   if (i && PK.isValid(i)) {
-    let e = UN().getStyleNode(i);
+    let e = getSingletonSceneGraph().getStyleNode(i);
     e && !e.isSoftDeleted && (n = PK.toKiwi(i), a = e.styleKeyForPublish);
   }
   let s = () => {
@@ -22553,7 +22545,7 @@ function ya({
   });
 }
 function ys() {
-  let e = _$$kk(UN().getDirectlySelectedNodes());
+  let e = _$$kk(getSingletonSceneGraph().getDirectlySelectedNodes());
   let t = e?.type === 'CMS_RICH_TEXT';
   let i = e?.getCmsRichTextStyleMap();
   let n = useRef(null);
@@ -22632,7 +22624,7 @@ function yb(e) {
 function yy(e) {
   let t = e => {
     _$$l.user('dakota-set-text-binding', () => {
-      UN().getDirectlySelectedNodes().forEach(t => t?.setDakotaSelectorCollection(e ?? '', TsU.CMS_PROPERTIES_PANEL));
+      getSingletonSceneGraph().getDirectlySelectedNodes().forEach(t => t?.setDakotaSelectorCollection(e ?? '', TsU.CMS_PROPERTIES_PANEL));
     });
   };
   let i = jsx(yb, {
@@ -22726,7 +22718,7 @@ function yj({
     value: n,
     onChange: e => {
       e && _$$l.user('cms-update-item-page-item', () => {
-        UN().getDirectlySelectedNodes().forEach(t => t.setDakotaSelectorSingleItemFilter(e));
+        getSingletonSceneGraph().getDirectlySelectedNodes().forEach(t => t.setDakotaSelectorSingleItemFilter(e));
       });
     },
     children: [jsx(_$$l7, {
@@ -22748,7 +22740,7 @@ function yj({
 function yk({
   recordingKey: e
 }) {
-  let t = _$$kk(UN().getDirectlySelectedNodes());
+  let t = _$$kk(getSingletonSceneGraph().getDirectlySelectedNodes());
   if (!t) return null;
   let i = t.childrenNodes[0]?.mainComponent?.name;
   let n = jsx('div', {
@@ -22815,7 +22807,7 @@ function yw({
     value: a ? a.toString() : '0',
     onChange: e => {
       _$$l.user('dakota-update-selector-limit', () => {
-        UN().getDirectlySelectedNodes().forEach(t => t.updateDakotaSelectorLimit(Number(e)));
+        getSingletonSceneGraph().getDirectlySelectedNodes().forEach(t => t.updateDakotaSelectorLimit(Number(e)));
       });
     },
     children: [jsx(_$$l7, {
@@ -24455,10 +24447,10 @@ function jv({
 }
 let jj = memo(e => {
   let t = _$$md(Xq);
-  let i = t.length > 0 && t[0] ? UN().get(t[0]) : null;
+  let i = t.length > 0 && t[0] ? getSingletonSceneGraph().get(t[0]) : null;
   let n = i?.backingCodeComponent;
   let a = i?.backingCodeComponent?.exportedFromCodeFile?.guid;
-  let s = a ? UN().get(a) : null;
+  let s = a ? getSingletonSceneGraph().get(a) : null;
   let r = Fk((e, t, i) => i?.isSoftDeleted || t?.isSoftDeleted, n, s);
   let d = Wn(a);
   let c = (s === null || r) && !d;
@@ -25326,9 +25318,9 @@ function kc(e) {
   let y = useMemo(() => {
     if (!_) return !1;
     for (let e of _) {
-      let t = UN().get(e);
+      let t = getSingletonSceneGraph().get(e);
       if (t && t.parentGuid) {
-        let e = UN().get(t.parentGuid);
+        let e = getSingletonSceneGraph().get(t.parentGuid);
         if (e && e.parentGuid) {
           let t = e.parentNode;
           if (!t?.isResponsiveSet) return !0;
@@ -25338,7 +25330,7 @@ function kc(e) {
     return !1;
   }, [_]);
   let v = useMemo(() => _?.some(e => {
-    let t = UN().get(e);
+    let t = getSingletonSceneGraph().get(e);
     return t?.isInDakotaRepeater;
   }), [_]);
   let j = useCallback(e => {
@@ -25449,7 +25441,7 @@ function ku({
   let w = zp();
   let S = _$$s2('currentPage', 'currentSelectedProperty');
   let C = _$$d(e => e.saveAsState);
-  let T = _$$kk(UN().getDirectlySelectedNodes());
+  let T = _$$kk(getSingletonSceneGraph().getDirectlySelectedNodes());
   let I = _$$U() && (T?.type === 'REPEATER' || T?.isResponsiveSet);
   let E = _$$U() && T?.type === 'CMS_RICH_TEXT';
   let N = qh();
@@ -25920,7 +25912,7 @@ function k6(e, t) {
   useEffect(() => {
     let n = Object.keys(i);
     for (let i of n) {
-      let n = UN().get(i);
+      let n = getSingletonSceneGraph().get(i);
       if (!(!n || _$$gl(t) || _$$gl(e)) && (n.behaviorStatePreviewEnabled = !0, e != null && (n.localOpacity = e), t != null)) {
         let e = function (e) {
           let t = _$$s13.fromFigMatrix(e.relativeTransform);
@@ -25938,7 +25930,7 @@ function k6(e, t) {
       }
     }
     let l = i => {
-      let n = UN().get(i);
+      let n = getSingletonSceneGraph().get(i);
       n && (n.behaviorStatePreviewEnabled = !1, e != null && n.removeLocalOpacity(), t != null && (n.overlayTransform = _$$s13.identity().toFigMatrix()));
     };
     return () => {
@@ -27198,7 +27190,7 @@ function Sv(e) {
   let m = useCallback(() => {
     if (d === 0 && p === 0) return 'top-left';
     if (r && _$$hS2(r)) {
-      let e = UN().get(r);
+      let e = getSingletonSceneGraph().get(r);
       if (e && d === e.size.x / 2 && p === e.size.y / 2) return 'center';
     }
     return 'manual';
@@ -27209,7 +27201,7 @@ function Sv(e) {
       c(0);
       x(0);
     } else if (e === 'center' && r && _$$hS2(r)) {
-      let e = UN().get(r);
+      let e = getSingletonSceneGraph().get(r);
       e && (c(e.size.x / 2), x(e.size.y / 2));
     }
   }, [f, c, x, r]);
@@ -28907,10 +28899,10 @@ function Td({
   let m = x.toString();
   if (nodeIds.length === 0) return null;
   let g = nodeIds[0];
-  if (!g || !UN().get(g)) return null;
+  if (!g || !getSingletonSceneGraph().get(g)) return null;
   let f = [];
   for (let e of nodeIds) {
-    let t = UN().get(e);
+    let t = getSingletonSceneGraph().get(e);
     let i = t?.getCombinedCodeBehaviorPropAssignments(m);
     i && f.push(i);
   }
@@ -28918,7 +28910,7 @@ function Td({
   let _ = function (e) {
     let t = {};
     for (let i of e) {
-      let e = UN();
+      let e = getSingletonSceneGraph();
       let n = {
         ...i.assignments
       };
@@ -28991,7 +28983,7 @@ function Td({
           hideIcon: !0,
           minHack: 0,
           pickerWidth: 240,
-          sceneGraph: UN(),
+          sceneGraph: getSingletonSceneGraph(),
           submitBehaviorAssignment: (e, t) => {
             _$$l.user('set-text-prop-assignment-on-preset', () => {
               for (let i of nodeIds) glU?.setCodeBehaviorPropAssignment(i, m, e, t);
@@ -29350,7 +29342,7 @@ function Tx({
               e?.stopPropagation();
               d();
               (function (e, t, i) {
-                let n = UN();
+                let n = getSingletonSceneGraph();
                 let l = Object.keys(t);
                 let a = Array.from(new Set(Object.values(HL(n, l)).filter(e => e !== null)));
                 _$$sx('sites_remove_interaction', {
@@ -29495,7 +29487,7 @@ let Tb = memo(({
   }) : null;
 });
 let Ty = (e, t) => {
-  let i = UN();
+  let i = getSingletonSceneGraph();
   Object.keys(e).forEach(e => {
     let n = i.get(e);
     if (!n) return;
@@ -29705,7 +29697,7 @@ function TA(e) {
     }
   }, [er, ex]);
   let eh = (e, t) => function (e, t, i) {
-    let n = UN();
+    let n = getSingletonSceneGraph();
     let l = Object.keys(t);
     let a = Array.from(new Set(Object.values(HL(n, l)).filter(e => e !== null)));
     _$$sx('sites_add_interaction', {
@@ -30038,7 +30030,7 @@ function TA(e) {
           let e = glU?.createNewCodeInteraction('interactions_panel');
           if (e) {
             Y5.triggerAction('commit');
-            let t = UN().get(e);
+            let t = getSingletonSceneGraph().get(e);
             if (t) {
               Tv({
                 codeComponentId: _$$_H.fromLocalNodeIdStr(e),
@@ -30233,7 +30225,7 @@ function TA(e) {
     let e = [];
     if (!ec || ec.length === 0) return [];
     for (let t of Object.keys(ee)) {
-      let i = UN().get(t);
+      let i = getSingletonSceneGraph().get(t);
       i?.behaviors?.[Xc.Code] && i.behaviors[Xc.Code].forEach(i => {
         i.codeComponentId && e.push({
           nodeId: t,
@@ -30582,7 +30574,7 @@ let TX = kL({
   get: e => {
     let t = _$$t('sites.panel.interactions_panel.none');
     if (!e || !e.cursorGuid) return t;
-    let i = UN().get(_$$dI(e.cursorGuid));
+    let i = getSingletonSceneGraph().get(_$$dI(e.cursorGuid));
     return i ? i.name : t;
   }
 });

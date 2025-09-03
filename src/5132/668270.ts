@@ -1,4 +1,4 @@
-import { Ek } from "../905/553831";
+import { subscribeAndAwaitData } from "../905/553831";
 import { oA } from "../905/723791";
 import { x1 } from "../905/714362";
 import { XHR } from "../905/910117";
@@ -16,7 +16,7 @@ let $$f0 = nF(async (e, l, {
 }) => {
   let s = !1;
   try {
-    s = !!oA((await Ek(jmg, {
+    s = !!oA((await subscribeAndAwaitData(jmg, {
       fileKey: l.file_key
     })).deviceTryFile);
   } catch (e) {

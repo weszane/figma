@@ -2,7 +2,7 @@ import { useMemo, useRef } from "react";
 import { isNotNullish } from "../figma_app/95419";
 import { l as _$$l } from "../905/716947";
 import { getFeatureFlags } from "../905/601108";
-import { Qw } from "../905/989992";
+import { resourceUtils } from "../905/989992";
 import l from "../vendor/239910";
 import { Rs, p as _$$p } from "../figma_app/288654";
 import { x1 } from "../905/714362";
@@ -28,7 +28,7 @@ export function $$h0(e, {
     enabled: t
   });
   let s = useRef(new Set([]));
-  return useMemo(() => Qw.all(a.map(e => e.result)).transform(e => {
+  return useMemo(() => resourceUtils.all(a.map(e => e.result)).transform(e => {
     let t = e.map(e => g(e, s.current)).filter(isNotNullish);
     return d()(t, e => e.libraryKey);
   }), [a]);

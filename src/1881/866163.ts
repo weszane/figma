@@ -1,5 +1,5 @@
 import { Iz, eU, md } from "../figma_app/27355";
-import { Qw } from "../905/989992";
+import { resourceUtils } from "../905/989992";
 import { getInitialOptions } from "../figma_app/169182";
 import { zE } from "../figma_app/919079";
 import { t } from "../905/303541";
@@ -184,7 +184,7 @@ let w = Iz(e => eU(i => {
       } : o[e] = i);
     }
     return o;
-  }) : Qw.disabled();
+  }) : resourceUtils.disabled();
 }));
 export function $$h2(e) {
   return md(w(e));

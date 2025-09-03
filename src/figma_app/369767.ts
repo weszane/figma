@@ -4,7 +4,7 @@ import { I as _$$I } from "../905/932503";
 import { memo } from "react";
 import { O as _$$O } from "../905/587457";
 import { Nfd } from "../figma_app/763686";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { fp, Xr } from "../figma_app/27355";
 import { Pt } from "../figma_app/806412";
@@ -71,8 +71,8 @@ export function $$P2(e) {
     r(Nfd.SETTINGS);
     n(f0.SETTINGS);
     closeOverlay();
-    let t = UN().getCurrentPage();
-    e ? e !== t?.guid && (UN().setCurrentPageFromNodeAsync(e), tJ([e])) : t && t.setSelectionToSingleNode("-1:-1");
+    let t = getSingletonSceneGraph().getCurrentPage();
+    e ? e !== t?.guid && (getSingletonSceneGraph().setCurrentPageFromNodeAsync(e), tJ([e])) : t && t.setSelectionToSingleNode("-1:-1");
   };
 }
 export function $$D1({

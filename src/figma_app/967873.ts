@@ -1,5 +1,5 @@
 import { Z6A } from "../figma_app/763686";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { eU, zl } from "../figma_app/27355";
 import { WB } from "../905/761735";
 import { t as _$$t } from "../905/303541";
@@ -112,7 +112,7 @@ export function $$I9() {
   if (!e) return;
   let t = e.base;
   if (!t) return;
-  let r = UN().getDirectlySelectedNodes().filter(e => "STICKY" === e.type || "SHAPE_WITH_TEXT" === e.type || "SECTION" === e.type || "CONNECTOR" === e.type || "VECTOR" === e.type || "HIGHLIGHT" === e.type);
+  let r = getSingletonSceneGraph().getDirectlySelectedNodes().filter(e => "STICKY" === e.type || "SHAPE_WITH_TEXT" === e.type || "SECTION" === e.type || "CONNECTOR" === e.type || "VECTOR" === e.type || "HIGHLIGHT" === e.type);
   let n = new Map();
   r.forEach(e => {
     e.immutableFrameShape && (e = e.immutableFrameShape);
@@ -160,4 +160,4 @@ export const cl = $$g8;
 export const db = $$I9;
 export const dq = $$E10;
 export const rN = $$u11;
-export const zd = $$b12; 
+export const zd = $$b12;

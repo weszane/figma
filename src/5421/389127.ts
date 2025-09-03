@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { d4 } from "../vendor/514228";
 import { jXp, t8O } from "../figma_app/763686";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { a as _$$a } from "../905/714538";
 export function $$s3() {
   let e = d4(e => e.fonts);
@@ -24,7 +24,7 @@ export function $$d1(e, t) {
   if (n) {
     for (let t of n) if (t.family === e.fontFamily && t.style === e.styleName) return;
   }
-  let o = UN().createStyle("TEXT");
+  let o = getSingletonSceneGraph().createStyle("TEXT");
   o.fontName = {
     family: e.fontFamily,
     style: e.styleName,

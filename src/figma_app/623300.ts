@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { d4 } from "../vendor/514228";
 import { Ez5, xal } from "../figma_app/763686";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { eU, md } from "../figma_app/27355";
 import { F } from "../905/989956";
 import { DP } from "../905/640017";
@@ -23,7 +23,7 @@ export function $$g5({
   theme: r
 }) {
   let i = e?.view === "prototype";
-  let d = i ? null : UN().getCurrentPage();
+  let d = i ? null : getSingletonSceneGraph().getCurrentPage();
   let h = useMemo(() => d?.backgroundColor, [d]);
   let g = !!ut(Ez5?.currentPageState().requestedPageChange, "");
   let f = md(s6);

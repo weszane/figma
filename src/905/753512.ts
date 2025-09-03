@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { createContext, useState, useRef, useEffect, useCallback, useMemo, useContext } from "react";
 import { isNotNullish, assertNotNullish } from "../figma_app/95419";
 import { t as _$$t } from "../905/150656";
-import { Qw, H as _$$H } from "../905/989992";
+import { resourceUtils, LOADING_STATUS } from "../905/989992";
 import { A as _$$A } from "../vendor/850789";
 import { ZC } from "../figma_app/39751";
 import { Rs } from "../figma_app/288654";
@@ -22,8 +22,8 @@ import { Q_ } from "../905/570707";
 import { ol } from "../figma_app/598018";
 import { mG, Qj, ry } from "../905/825399";
 import { S as _$$S } from "../905/612212";
-let w = Qw.loading();
-let C = Qw.disabled();
+let w = resourceUtils.loading();
+let C = resourceUtils.disabled();
 let k = createContext(null);
 export function $$R1(e) {
   switch (e) {
@@ -131,7 +131,7 @@ export function $$N0({
             }
           }
           d.sort((e, t) => t.score - e.score);
-          return Qw.loaded(d.map(e => e.library));
+          return resourceUtils.loaded(d.map(e => e.library));
         }, [i, t]);
       }(e);
       let s = function (e) {
@@ -144,10 +144,10 @@ export function $$N0({
         });
         return useMemo(() => {
           if ("disabled" === n.status) return C;
-          if ("disabled" === t.status || "errors" === t.status || "errors" === n.status) return Qw.loaded([]);
-          if ("loaded" !== n.status || "loaded" !== t.status) return Qw.loading();
+          if ("disabled" === t.status || "errors" === t.status || "errors" === n.status) return resourceUtils.loaded([]);
+          if ("loaded" !== n.status || "loaded" !== t.status) return resourceUtils.loading();
           let e = n.data.libraries.map(e => t.result.find(t => t.hub_file_id === e.id)).filter(isNotNullish);
-          return Qw.loaded(e);
+          return resourceUtils.loaded(e);
         }, [t, n]);
       }(e);
       let l = useMemo(() => {
@@ -155,7 +155,7 @@ export function $$N0({
         if ("loading" === n.status || "loading" === s.status) return w;
         let e = "loaded" === n.status ? n.data : [];
         let t = "loaded" === s.status ? s.data : [];
-        return Qw.loaded([...e, ...t]);
+        return resourceUtils.loaded([...e, ...t]);
       }, [n.status, n.data, s.status, s.data]);
       let d = function (e, t, i, n) {
         let [a, s] = useState(void 0);
@@ -202,7 +202,7 @@ export function $$N0({
     }, {
       enabled: hasEntAccess
     });
-    return useMemo(() => i.status === _$$H.LOADING ? Xm() : gB(i.data?.org?.workspaces ?? []), [i.data?.org?.workspaces, i.status]);
+    return useMemo(() => i.status === LOADING_STATUS.LOADING ? Xm() : gB(i.data?.org?.workspaces ?? []), [i.data?.org?.workspaces, i.status]);
   }();
   let Q = useMemo(() => ({
     sessionId: M,

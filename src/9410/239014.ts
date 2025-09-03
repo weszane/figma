@@ -3,7 +3,7 @@ import { ServiceCategories as _$$e } from "../905/165054";
 import { E as _$$E } from "../905/632989";
 import { o as _$$o } from "../905/530496";
 import { Xr } from "../figma_app/27355";
-import { Qw } from "../905/989992";
+import { resourceUtils } from "../905/989992";
 import { z } from "../905/239603";
 import c from "classnames";
 import { hC } from "../figma_app/901889";
@@ -98,7 +98,7 @@ export function $$w0({
 }
 let S = z.record(z.object({
   thumbnail_url: z.string(),
-  thumbnail_meta: z.object({}).passthrough().transform((e) => JSON.stringify(e)),
+  thumbnail_meta: z.object({}).passthrough().transform(e => JSON.stringify(e)),
   created_at: z.string().optional()
 }));
 export function $$j1(e) {
@@ -108,7 +108,7 @@ export function $$j1(e) {
   }, {
     enabled: !!(t?.key && e)
   });
-  return Qw.useTransform(i, (e) => {
+  return resourceUtils.useTransform(i, e => {
     if (e?.file?.pagesSignedThumbnailData.status !== tT.Loaded) return null;
     try {
       if (!e?.file?.pagesSignedThumbnailData.data) return null;

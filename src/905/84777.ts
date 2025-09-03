@@ -1,6 +1,6 @@
 import { isNullish } from "../figma_app/95419";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { Qw } from "../905/989992";
+import { resourceUtils } from "../905/989992";
 import s from "lodash-es/mapValues";
 import { $D } from "../905/11";
 import { y as _$$y } from "../figma_app/681090";
@@ -144,8 +144,8 @@ function v(e, t) {
     return e.transform(e => o()(t, t => _$$y(e, t)));
   } catch (e) {
     $D(_$$e.BILLING, e);
-    return Qw.errorSuspendable(e, {
-      release: () => { }
+    return resourceUtils.errorSuspendable(e, {
+      release: () => {}
     });
   }
 }
@@ -159,7 +159,7 @@ export function $$E5(e, t, i = {}) {
   return v(r, e);
 }
 export function $$x8(e, t = {}) {
-  !function(e) {
+  !function (e) {
     let {
       planParentId,
       planType
@@ -240,7 +240,7 @@ M4.Query({
   }) => null !== e.parentId,
   key: "billing_prices_admin_team_at_next_invoice"
 });
-class w extends Error { }
+class w extends Error {}
 function C(e, t) {
   let i = e[0]?.[t];
   if (i && e.every(e => e[t] === i)) return i;
@@ -277,8 +277,8 @@ function k(e, t, i, s) {
     });
   } catch (e) {
     $D(_$$e.BILLING, e);
-    return Qw.errorSuspendable(e, {
-      release: () => { }
+    return resourceUtils.errorSuspendable(e, {
+      release: () => {}
     });
   }
 }
@@ -326,4 +326,4 @@ export const vK = $$x8;
 export const Ln = $$N9;
 export const vu = $$O10;
 export const yF = $$I11;
-export const jv = $$R12; 
+export const jv = $$R12;

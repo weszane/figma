@@ -6,7 +6,7 @@ import { DefaultEventPriority } from "../vendor/846192";
 import { l7 } from "../905/189185";
 import { HzA, mSn } from "../figma_app/763686";
 import { VS } from "../905/696699";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { ZC } from "../figma_app/922077";
 import { A as _$$A } from "../vendor/850789";
 import { ut } from "../figma_app/84367";
@@ -24,7 +24,7 @@ let p = new ReconciliationRuntime({
     loadedFonts: {},
     fontFallbacks: {}
   },
-  scene: UN()
+  scene: getSingletonSceneGraph()
 });
 let f = i({
   supportsMutation: !0,
@@ -255,10 +255,10 @@ function x(e, t, r) {
     spreadAttributes: void 0
   }, {
     flavor: "default",
-    scene: UN()
+    scene: getSingletonSceneGraph()
   }, createSerializerContext({}, {
     flavor: "default",
-    scene: UN()
+    scene: getSingletonSceneGraph()
   }), 0);
   return n;
 }
@@ -453,7 +453,7 @@ function D({
 }
 let U = new Set();
 export function $$K0() {
-  let e = ut(mSn?.jsxNodeIds(UN().scene), U);
+  let e = ut(mSn?.jsxNodeIds(getSingletonSceneGraph().scene), U);
   return jsx(Fragment, {
     children: Array.from(e).map(e => jsx(L, {
       jsxNodeId: e
@@ -465,7 +465,7 @@ function L({
 }) {
   let [t, r] = useState(null);
   useEffect(() => {
-    let t = UN().get(e);
+    let t = getSingletonSceneGraph().get(e);
     t && r(function (e) {
       let t = new SceneNodeShim({
         guid: e.guid,

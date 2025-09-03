@@ -4,11 +4,11 @@ import { l as _$$l } from "../905/716947";
 import { Z } from "../vendor/39153";
 import { getFeatureFlags } from "../905/601108";
 import { eU, mg, md } from "../figma_app/27355";
-import { Qw } from "../905/989992";
+import { resourceUtils } from "../905/989992";
 import { sx } from "../905/449184";
 import { qd } from "../figma_app/39751";
 import { R } from "../905/103090";
-import { Ek } from "../905/553831";
+import { subscribeAndAwaitData } from "../905/553831";
 import { Rs, Bh } from "../figma_app/288654";
 import { IT, QV } from "../figma_app/566371";
 import { i as _$$i } from "../905/651613";
@@ -21,7 +21,7 @@ import { iZ } from "../905/372672";
 export async function $$S2(e) {
   let t = e.getState().selectedView;
   let r = "fullscreen" === t.view && t.fileKey;
-  return r && (await Ek(ehp, {
+  return r && (await subscribeAndAwaitData(ehp, {
     fileKey: r
   })).file || null;
 }
@@ -51,7 +51,7 @@ export function $$v6() {
   }, {
     enabled: !!e
   });
-  return Qw.useTransform(t, ({
+  return resourceUtils.useTransform(t, ({
     file: e
   }) => e);
 }
@@ -93,7 +93,7 @@ export function $$F13() {
     let t = Bh(ehp(e ? {
       fileKey: e
     } : null));
-    return Qw.useTransform(t, ({
+    return resourceUtils.useTransform(t, ({
       file: e
     }) => e);
   }();

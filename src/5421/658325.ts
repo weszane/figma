@@ -9,7 +9,7 @@ import { V as _$$V } from "../1577/311426";
 import { Z_n, rcl, glU, rXF } from "../figma_app/763686";
 import { l7 } from "../905/189185";
 import { Hr, dI, sH } from "../905/871411";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { U as _$$U } from "../figma_app/901889";
 import { Pt } from "../figma_app/806412";
@@ -38,13 +38,13 @@ import { cn, NW, Yt } from "../figma_app/85384";
 import { RZ, Tl, qe, Nw, l4, Ve, eF } from "../5421/85401";
 import { FD, nh, MO } from "../9410/228031";
 function E(e) {
-  let t = UN().get(e);
+  let t = getSingletonSceneGraph().get(e);
   if (!t) return null;
   let n = t?.getVariableConsumptionMap()?.HYPERLINK;
   return !n || n.isMixed || n.type !== Z_n.CMS_ALIAS ? null : n.value.fieldSchemaId;
 }
 function j(e) {
-  let t = UN().get(e);
+  let t = getSingletonSceneGraph().get(e);
   if (!t) return null;
   let n = t.prototypeInteractions.find(e => e.event?.interactionType === "ON_CLICK");
   return n && n.actions && 1 === n.actions.length ? n.actions[0]?.linkParam?.value?.cmsAliasValue?.fieldId ?? null : null;
@@ -436,7 +436,7 @@ function Z({
             }
           };
           let n = [];
-          let o = UN();
+          let o = getSingletonSceneGraph();
           for (let t of Object.keys(j)) {
             let i = o.get(t);
             i && n.push(...i.getNodesForCmsBinding(e.collectionId));

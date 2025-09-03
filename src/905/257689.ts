@@ -1,4 +1,4 @@
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { Ez } from "../figma_app/766708";
 import { X } from "../905/145028";
 import { J } from "../905/539754";
@@ -105,7 +105,7 @@ async function c(e) {
   return r;
 }
 async function u(e, t) {
-  let i = UN().get(e);
+  let i = getSingletonSceneGraph().get(e);
   if (!i || !$$if(i)) return null;
   let r = i.getDakotaSelector()?.collectionId;
   if (!r) {

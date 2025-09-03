@@ -7,7 +7,7 @@ import { getSceneGraphInstance } from "../905/830071";
 import { sx } from "../905/449184";
 import { widgetErrorTracker } from "../905/250412";
 import { T } from "../figma_app/300692";
-import { o9 } from "../905/845428";
+import { InternalError } from "../905/845428";
 import { MI, _L, BM, $T } from "../905/757052";
 import { $U } from "../905/285398";
 let c = new class {
@@ -133,7 +133,7 @@ export function $$v0({
   if (f) {
     i = null;
     let t = "Scene has diverged from the expected state. " + ("figma" === T() ? "This is either because you have manually edited widget sublayers in Figma, or because of a bug in the widget. If the latter, your render function is likely non-deterministic. " : "This is likely a bug in the widget. Your render function is likely non-deterministic.") + "Here is more info: \n\n";
-    let r = new o9(t + function (e) {
+    let r = new InternalError(t + function (e) {
       switch (e.type) {
         case "more_than_one_root":
           return "Widget on canvas has more children at the root than expected";
@@ -383,7 +383,7 @@ function S({
     let n = !i.widgetVersionId;
     if (n && 0 !== e.length) {
       let t = "\n\n * ";
-      throw new o9(`Got the following errors when rendering the widget: ${t}${e.join(t)}`);
+      throw new InternalError(`Got the following errors when rendering the widget: ${t}${e.join(t)}`);
     }
     widgetErrorTracker.trackValidationErrors(e, {
       isLocalWidget: n,

@@ -4,7 +4,7 @@ import { zIx, w3z, SES, h3O } from "../figma_app/763686";
 import { l7, zk } from "../905/189185";
 import { zl } from "../figma_app/27355";
 import { debugState } from "../905/407919";
-import { S8 } from "../905/553831";
+import { subscribeMultipleAndAwaitAll } from "../905/553831";
 import { $D } from "../905/11";
 import { YQ } from "../905/502364";
 import { t as _$$t } from "../905/303541";
@@ -112,7 +112,7 @@ async function $$L(e, t) {
     nodeId: e
   } : null).filter(isNotNullish);
   if (0 === r.length) return {};
-  let i = await S8(WND, r);
+  let i = await subscribeMultipleAndAwaitAll(WND, r);
   let a = {};
   i.forEach(({
     result: e
@@ -303,7 +303,7 @@ export async function $$P0({
       isEdited: P.get(id) ?? !1
     });
   }
-  !function(e) {
+  !function (e) {
     let t = zl.get(_$$d);
     let r = zl.get(cR);
     let n = zl.get(hv)?.data;
@@ -314,4 +314,4 @@ export function $$D1(e, t) {
   return new Date(1e3 * e.lastUpdateUnixTimestamp) > t.createdAt;
 }
 export const L = $$P0;
-export const y = $$D1; 
+export const y = $$D1;

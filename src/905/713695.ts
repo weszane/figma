@@ -1,6 +1,6 @@
 import { eU, yu, Iz, zl, LJ, md } from "../figma_app/27355";
 import { debugState } from "../905/407919";
-import { Z as _$$Z } from "../905/441145";
+import { observableState } from "../905/441145";
 import { E as _$$E } from "../vendor/386379";
 import { atom } from "jotai";
 import { j as _$$j } from "../905/745286";
@@ -11,7 +11,7 @@ import { _ as _$$_ } from "../vendor/413384";
 import { wm } from "../vendor/284502";
 import { atomWithObservable } from "../vendor/812047";
 import { throwTypeError } from "../figma_app/465776";
-import { Qw } from "../905/989992";
+import { resourceUtils } from "../905/989992";
 import { jM, ht, Ay } from "../vendor/159563";
 import { g as _$$g } from "../905/880308";
 import { p as _$$p } from "../905/621429";
@@ -595,16 +595,16 @@ class z {
         });
         let w = LJ(S, e => function (e, t, i, n) {
           let r = e(i);
-          if (!n.enabled) return Qw.disabledSuspendable(n.suspenseContext);
+          if (!n.enabled) return resourceUtils.disabledSuspendable(n.suspenseContext);
           let a = e(t);
           switch (r.status) {
             case "loading":
-              return Qw.loadingSuspendable(n.suspenseContext);
+              return resourceUtils.loadingSuspendable(n.suspenseContext);
             case "error":
-              return Qw.errorSuspendable(r.error, n.suspenseContext);
+              return resourceUtils.errorSuspendable(r.error, n.suspenseContext);
             case "success":
-              if (void 0 === a) return Qw.loadingSuspendable(n.suspenseContext);
-              return Qw.loadedSuspendable(a, r.error || [], n.suspenseContext);
+              if (void 0 === a) return resourceUtils.loadingSuspendable(n.suspenseContext);
+              return resourceUtils.loadedSuspendable(a, r.error || [], n.suspenseContext);
             default:
               throwTypeError(r);
           }
@@ -751,17 +751,17 @@ class z {
         });
         return Object.assign(LJ(A, e => function (e, t, i, n) {
           let r = e(i);
-          if (!n.enabled) return Qw.Paginated.disabled();
+          if (!n.enabled) return resourceUtils.Paginated.disabled();
           let a = e(t);
           switch (r.status) {
             case "loading":
             default:
-              return Qw.Paginated.loading();
+              return resourceUtils.Paginated.loading();
             case "error":
-              return Qw.Paginated.error(r.error);
+              return resourceUtils.Paginated.error(r.error);
             case "success":
-              if (void 0 === a) return Qw.Paginated.loading();
-              return Qw.Paginated.loaded(a, {
+              if (void 0 === a) return resourceUtils.Paginated.loading();
+              return resourceUtils.Paginated.loaded(a, {
                 hasNextPage: r.hasNextPage,
                 hasPreviousPage: r.hasPreviousPage,
                 isFetchingNextPage: r.isFetchingNextPage,
@@ -807,7 +807,7 @@ class z {
       };
     }(this.extrasProvider, this.getQueryContext);
     this.ObjectQuery = (d = this.getQueryContext, e => Iz(t => {
-      if (!t) return eU(Qw.disabled(), () => {});
+      if (!t) return eU(resourceUtils.disabled(), () => {});
       let i = yu(e.atom(t), () => {
         let i = d();
         i.atomStore.get(e.atom(t)) === F5 && h(i.atomStore, e, t, {
@@ -817,13 +817,13 @@ class z {
       return eU(n => function (e, t, i) {
         switch (t) {
           case F5:
-            return Qw.loading();
+            return resourceUtils.loading();
           case ET:
-            return Qw.error(Error(`Encountered a tombstoned object: ${e} ${i.objectDef.description}}`));
+            return resourceUtils.error(Error(`Encountered a tombstoned object: ${e} ${i.objectDef.description}}`));
           case null:
-            return Qw.loading();
+            return resourceUtils.loading();
           default:
-            return Qw.loaded(t);
+            return resourceUtils.loaded(t);
         }
       }(t, n(i), e), (i, n, r) => {
         let a = d();
@@ -1015,7 +1015,7 @@ let ed = function (e, t = () => ({}), i) {
     atomStore: zl,
     xr: XHR,
     realtimeClient: V$,
-    livegraphClient: _$$Z.get(),
+    livegraphClient: observableState.get(),
     reduxStore: debugState
   };
 }, el).extend((e => t => {
@@ -1044,7 +1044,7 @@ export let $$ec0 = Object.assign(ed, {
     }, [i, e, t]);
     return useMemo(() => {
       let e = ub(i);
-      return e ? Qw.loaded(e) : Qw.loading();
+      return e ? resourceUtils.loaded(e) : resourceUtils.loading();
     }, [i]);
   }(e, ed)
 });

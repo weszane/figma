@@ -1,4 +1,4 @@
-import { Qw } from "../905/989992";
+import { resourceUtils } from "../905/989992";
 import { Rs } from "../figma_app/288654";
 import { X39, Fvs } from "../figma_app/43951";
 export function $$o1(e) {
@@ -14,7 +14,7 @@ export function $$o1(e) {
       retriable: !1,
       error: Error("No PlanUser found for file, key: " + e)
     };
-    return Qw.error([t]);
+    return resourceUtils.error([t]);
   }
   return t.transform(e => e.file?.currentPlanUser);
 }
@@ -31,7 +31,7 @@ export function $$s0(e) {
       retriable: !1,
       error: Error("No Plan found for team, id: " + e)
     };
-    return Qw.error([t]);
+    return resourceUtils.error([t]);
   }
   return t.transform(e => e.team?.plan);
 }

@@ -1,6 +1,6 @@
 import { useRef, useMemo } from "react";
 import { ServiceCategories as _$$e } from "../905/165054";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { zl, md } from "../figma_app/27355";
 import { sx } from "../905/449184";
 import { debugState } from "../905/407919";
@@ -16,7 +16,7 @@ let _ = _$$n((e, t, i) => {
   sx(e, t, i);
 });
 let A = (e, t, i) => {
-  let n = ["action", "clientLifecycleId", "file_key", "product_type", "quick_actions_session_id"].filter((e) => !i[e] || "invalid" === i[e]);
+  let n = ["action", "clientLifecycleId", "file_key", "product_type", "quick_actions_session_id"].filter(e => !i[e] || "invalid" === i[e]);
   n.length > 0 && (e += ` | Invalid or empty fields: ${n.join(", ")}`);
   $D(_$$e.AI_FOR_PRODUCTION, Error(e), {
     extra: {
@@ -25,7 +25,7 @@ let A = (e, t, i) => {
     }
   });
 };
-let y = (e) => ["action", "clientLifecycleId", "file_key", "product_type", "quick_actions_session_id"].every((t) => {
+let y = e => ["action", "clientLifecycleId", "file_key", "product_type", "quick_actions_session_id"].every(t => {
   let i = e[t];
   return "invalid" === i || null == i;
 });
@@ -66,7 +66,7 @@ export function $$C12(e) {
   });
 }
 function T(e) {
-  let t = UN().get(e);
+  let t = getSingletonSceneGraph().get(e);
   return t?.depthFromTopLevelFrame;
 }
 export function $$k5(e, t) {

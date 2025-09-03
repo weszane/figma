@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { wA } from "../vendor/514228";
 import { Mpt, glU, Ez5 } from "../figma_app/763686";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { zl, md, Xr, Ut } from "../figma_app/27355";
 import { debugState } from "../905/407919";
 import { H } from "../905/620380";
@@ -49,7 +49,7 @@ export function $$I1({
     });
     return Error(i);
   }
-  let i = UN().getDirectlySelectedNodes().length > 0 ? Mpt?.getSelectedNodesToSend() ?? [] : Mpt?.getTopLevelFramesToSend() ?? [];
+  let i = getSingletonSceneGraph().getDirectlySelectedNodes().length > 0 ? Mpt?.getSelectedNodesToSend() ?? [] : Mpt?.getTopLevelFramesToSend() ?? [];
   if (0 === i.length) {
     let e = "Empty target node ids";
     x1("storeFigmaContentForCooperCreation", e, {}, {

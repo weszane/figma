@@ -1,6 +1,6 @@
 import { sYL, lyf, kul } from "../figma_app/763686";
 import { az, sx } from "../905/449184";
-import { Ek } from "../905/553831";
+import { subscribeAndAwaitData } from "../905/553831";
 import { tx, t as _$$t } from "../905/303541";
 import { F as _$$F } from "../905/302958";
 import { zX } from "../905/576487";
@@ -65,7 +65,7 @@ function q(e) {
     })
   });
 }
-let $ = Ju(function(e) {
+let $ = Ju(function (e) {
   let {
     branchKey,
     sourceKey
@@ -256,7 +256,7 @@ let $ = Ju(function(e) {
   }) : null;
 }, "BranchForceMergeModal", ZU.YES);
 var ee = J;
-let el = Ju(function({
+let el = Ju(function ({
   sourceKey: e,
   currentFileKey: t,
   onCheckpointSelected: i
@@ -424,9 +424,9 @@ let $$eu2 = nF(async (e, t) => {
     return;
   }
   await wY();
-  let [c, u] = await Promise.all([Ek(dDF, {
+  let [c, u] = await Promise.all([subscribeAndAwaitData(dDF, {
     key: t.branchKey
-  }), Ek(dDF, {
+  }), subscribeAndAwaitData(dDF, {
     key: t.sourceKey
   })]);
   let p = [];
@@ -552,4 +552,4 @@ export const Cp = $$eu2;
 export const hx = $$ep3;
 export const oz = $$eh4;
 export const kq = $$ec5;
-export const o5 = $$eg6; 
+export const o5 = $$eg6;

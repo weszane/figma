@@ -1,6 +1,6 @@
 import { ServiceCategories as _$$e } from "../905/165054";
 import { Ez5, CNR } from "../figma_app/763686";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { zl } from "../figma_app/27355";
 import { debugState } from "../905/407919";
@@ -19,7 +19,7 @@ import { x as _$$x, f as _$$f } from "../9410/391621";
 import { O as _$$O, ud, gH, Yu, hp } from "../9410/548825";
 let v = e => {
   let t = mz();
-  let i = UN().get(e);
+  let i = getSingletonSceneGraph().get(e);
   if (!i) return t;
   let r = i.absoluteTransform.m12;
   let n = i.absoluteBoundingBox.h;

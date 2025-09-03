@@ -1,6 +1,6 @@
 import { ServiceCategories as _$$e } from "../905/165054";
 import { cgc, h3O } from "../figma_app/763686";
-import { qo, UN } from "../905/700578";
+import { ReduxSceneGraph, getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { sx } from "../905/449184";
 import { debugState } from "../905/407919";
@@ -90,7 +90,7 @@ export let $$A0 = {
         url: e,
         urlLength: e.length,
         connectAttemptId: m,
-        isReconnect: !!qo && -1 !== UN().scene,
+        isReconnect: !!ReduxSceneGraph && -1 !== getSingletonSceneGraph().scene,
         isIncremental: h3O?.isIncrementalSession()
       }), null !== t) {
         if (!b(t.url, e) && (xi("multiplayer", "Preconnect URL doesn't match URL", {

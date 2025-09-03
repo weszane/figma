@@ -3,7 +3,7 @@ import { Hg } from "../figma_app/304955";
 import { t8O } from "../figma_app/763686";
 import { l7 } from "../905/189185";
 import { l as _$$l } from "../905/716947";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { eU, fp } from "../figma_app/27355";
 import { az } from "../905/449184";
 import { tS } from "../figma_app/516028";
@@ -66,10 +66,10 @@ export function $$j1() {
       let t = JSON.parse(e.raw_text_styles || "[]");
       l7.ai("figmake custom fonts", () => {
         t.forEach(e => {
-          e.fontFamily && e.fontWeight && function(e) {
+          e.fontFamily && e.fontWeight && function (e) {
             let t = t8O?.getLocalTextStyleFontInfo();
             if (t && t.find(t => t.family === e.fontFamily && t.style === e.styleName)) return;
-            let n = UN().createStyle("TEXT");
+            let n = getSingletonSceneGraph().createStyle("TEXT");
             n.fontName = {
               family: e.fontFamily,
               style: e.styleName,
@@ -133,4 +133,4 @@ export function $$v0() {
 }
 export const Bo = $$v0;
 export const S1 = $$j1;
-export const pF = $$b2; 
+export const pF = $$b2;

@@ -3,7 +3,7 @@ import { G1, Iu } from "../figma_app/691470";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { XJn, NfO, mKm, AZ4, Egt, oVz, juq } from "../figma_app/763686";
 import { l7 } from "../905/189185";
-import { UN, qo } from "../905/700578";
+import { getSingletonSceneGraph, ReduxSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { zl } from "../figma_app/27355";
 import { debugState } from "../905/407919";
@@ -40,7 +40,7 @@ async function N({
   }
 }
 export async function $$C12(e, t) {
-  let r = UN();
+  let r = getSingletonSceneGraph();
   let n = t.createNewSitesWebpage ? {
     x: 0,
     y: 0
@@ -78,7 +78,7 @@ export async function $$C12(e, t) {
   }
 }
 export function $$w11(e) {
-  let t = UN().get(e);
+  let t = getSingletonSceneGraph().get(e);
   if (t && ("FRAME" === t.type && "VStack" !== t.getSharedPluginData("jsx", "type") && 1 === t.childCount && "VStack" === t.childrenNodes[0].getSharedPluginData("jsx", "type") && (t = t.childrenNodes[0]), "FRAME" === t.type && "VStack" === t.getSharedPluginData("jsx", "type") && t.stackVerticalLayoutSize === mKm.HUG_CONTENT)) {
     let e = t.childrenNodes.find(e => "true" === e.getSharedPluginData("jsx", "fillContainerHeight"));
     if (!e) return;
@@ -135,7 +135,7 @@ export function $$k7(e) {
 }
 function M(e) {
   let t = new Set();
-  let r = UN().get(e);
+  let r = getSingletonSceneGraph().get(e);
   if (r) {
     for (let e of _F(r, ["FRAME"], {
       sharedPluginData: {
@@ -163,7 +163,7 @@ async function j({
   containingNodeId: c,
   instrumentationRef: u
 }) {
-  let _ = UN().get(e);
+  let _ = getSingletonSceneGraph().get(e);
   if (_?.type === "INSTANCE") await U({
     node: _,
     shouldContinueStream: t,
@@ -214,7 +214,7 @@ async function U({
   instrumentationRef: h
 }) {
   if (!e || !e.symbolId) return;
-  let m = UN();
+  let m = getSingletonSceneGraph();
   let f = m.get(e.symbolId ?? "");
   if (!f) return;
   let E = getComponentInfoById(f.guid, {
@@ -293,7 +293,7 @@ async function U({
   });
 }
 function B(e) {
-  let t = UN();
+  let t = getSingletonSceneGraph();
   let r = M(e);
   let i = [];
   for (let e of r) {
@@ -330,7 +330,7 @@ async function G(e) {
     });
     return;
   }
-  let t = UN();
+  let t = getSingletonSceneGraph();
   let r = zl.get(_S);
   for (let n of e.nodeIds) {
     let i = t.get(n);
@@ -379,7 +379,7 @@ let V = _$$n(async function ({
 }) {
   let i;
   if (!t.symbolId) return;
-  let d = UN();
+  let d = getSingletonSceneGraph();
   let c = d.get(t.symbolId);
   if (!c) return;
   let {
@@ -452,7 +452,7 @@ async function H({
     }
   });
   if (_) {
-    let r = UN().get(_.defaultNodeId);
+    let r = getSingletonSceneGraph().get(_.defaultNodeId);
     r && "SYMBOL" === r.type && l7.ai("first-draft-swap-grouped-component", () => {
       t.swapComponent(r);
       $$L14(t, e, i);
@@ -512,7 +512,7 @@ export async function $$W1({
   }
 }
 export function $$K4(e, t, r) {
-  if (!UN().get(e)) {
+  if (!getSingletonSceneGraph().get(e)) {
     $D(_$$e.AI_GENERATION, Error("first-draft: Icons: Could not find containing node with id=containingNodeId"), {
       extra: {
         containingNodeId: e,
@@ -539,7 +539,7 @@ export function $$Y0({
   clientLifecycleId: o,
   instrumentationRef: d
 }) {
-  if (!UN().get(e)) {
+  if (!getSingletonSceneGraph().get(e)) {
     $D(_$$e.AI_GENERATION, Error("First Draft: Add Images: Could not find containing node with id=containingNodeId"), {
       extra: {
         containingNodeId: e
@@ -562,7 +562,7 @@ export function $$Y0({
 export function $$$6({
   containingNodeId: e
 }) {
-  let t = UN();
+  let t = getSingletonSceneGraph();
   if (!t.get(e)) {
     $D(_$$e.AI_GENERATION, Error("First Draft: Hide Empty Grid Rows: Could not find containing node with id=containingNodeId"), {
       extra: {
@@ -597,7 +597,7 @@ let X = _$$n(async function (e, t) {
 });
 export async function $$q10(e, t, r, n) {
   if ("LOCAL" === e.type || "USER_LIBRARY" === e.type || !t) return;
-  let i = r === oVz.CURRENT ? UN() : new qo(juq.FIRST_DRAFT);
+  let i = r === oVz.CURRENT ? getSingletonSceneGraph() : new ReduxSceneGraph(juq.FIRST_DRAFT);
   let c = i.get(t);
   if (c) {
     if (getFeatureFlags().first_draft_partial_detach) {
@@ -639,14 +639,14 @@ export async function $$q10(e, t, r, n) {
   }
 }
 export function $$J8(e) {
-  let t = UN().get(e);
+  let t = getSingletonSceneGraph().get(e);
   t && l7.ai("first-draft-lock-node", () => {
     t.locked = !0;
   });
 }
 export function $$Z15(e) {
   if (!e) return;
-  let t = UN().get(e);
+  let t = getSingletonSceneGraph().get(e);
   t && l7.ai("first-draft-unlock-node", () => {
     t.locked = !1;
   });
@@ -686,7 +686,7 @@ export const WY = function e(t) {
             t.push(n.symbolId);
             continue;
           }
-          let e = UN().get(n.symbolId);
+          let e = getSingletonSceneGraph().get(n.symbolId);
           if (0 === t.length) {
             t.push(n.symbolId);
             e?.isState && (r = e.parentGuid);
@@ -770,7 +770,7 @@ export const tG = function e(t, r) {
     if ("VStack" === t.getSharedPluginData("jsx", "type")) {
       t.stackReverseZIndex = !0;
       let e = t.childrenNodes[0];
-      let r = e?.type === "INSTANCE" && e.symbolId ? UN().get(e.symbolId) : null;
+      let r = e?.type === "INSTANCE" && e.symbolId ? getSingletonSceneGraph().get(e.symbolId) : null;
       let n = r?.size.x || null;
       if (n) try {
         if (e) for (let e of (t.stackHorizontalLayoutSize === mKm.HUG_CONTENT && (t.minWidth = n), t.childrenNodes)) try {
@@ -790,7 +790,7 @@ export const tG = function e(t, r) {
     if ("HStack" === t.getSharedPluginData("jsx", "type")) {
       t.stackReverseZIndex = !0;
       let e = t.childrenNodes[0];
-      let r = e?.type === "INSTANCE" && e.symbolId ? UN().get(e.symbolId) : null;
+      let r = e?.type === "INSTANCE" && e.symbolId ? getSingletonSceneGraph().get(e.symbolId) : null;
       let n = r?.size.y || null;
       if (n) try {
         if (e) for (let e of (t.stackVerticalLayoutSize === mKm.HUG_CONTENT && (t.minHeight = n), t.childrenNodes)) try {

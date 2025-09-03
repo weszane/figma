@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { Qw } from "../905/989992";
+import { resourceUtils } from "../905/989992";
 import { oA } from "../905/663269";
 import { p } from "../figma_app/288654";
 import { _R } from "../figma_app/765689";
@@ -69,7 +69,7 @@ export function $$y5(e, t = !0) {
   let a = p(rwE, r, {
     enabled: t
   });
-  return useMemo(() => Qw.all(a.map(e => e.result)).transform(e => {
+  return useMemo(() => resourceUtils.all(a.map(e => e.result)).transform(e => {
     let t = {};
     for (let r of e) {
       let e = r.repo;

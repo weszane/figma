@@ -1,4 +1,4 @@
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { x1 } from "../905/714362";
 import { $v } from "../figma_app/259678";
 export function $$s0(e, t, i) {
@@ -12,7 +12,7 @@ export function $$s0(e, t, i) {
     componentEndIndex
   } = jsxSnippet ?? {};
   if (fileName && void 0 !== folderPath && void 0 !== componentStartIndex) try {
-    let e = UN();
+    let e = getSingletonSceneGraph();
     let r = $v(e, folderPath, fileName);
     if (!r) return;
     t(r);

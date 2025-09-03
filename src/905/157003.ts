@@ -1,10 +1,10 @@
 import { c2 } from "../905/382883";
 import { getFeatureFlags } from "../905/601108";
 import { Iz, eU, zl, yu, t_ } from "../figma_app/27355";
-import { Qw } from "../905/989992";
+import { resourceUtils } from "../905/989992";
 import { W } from "../905/491061";
-import { J } from "../905/251556";
-import { Z } from "../905/441145";
+import { serializeJSON } from "../905/251556";
+import { observableState } from "../905/441145";
 import { Xm } from "../905/723791";
 import { lQ } from "../905/934246";
 class u {
@@ -58,8 +58,8 @@ export let $$f0 = function (e, t, i = new u(m, t)) {
   return t => function (e, t, i) {
     let d = Iz(n => {
       let u = new W(() => zl.sub(_, () => {}));
-      if (null === n) return eU(Qw.disabledSuspendable(u));
-      let m = J(n);
+      if (null === n) return eU(resourceUtils.disabledSuspendable(u));
+      let m = serializeJSON(n);
       let h = `${e._name}:${m}`;
       let g = null;
       let f = yu(t_(() => i.get(h) || Xm()), ({
@@ -99,7 +99,7 @@ export let $$f0 = function (e, t, i = new u(m, t)) {
           s();
         };
       });
-      let _ = eU(i => Qw.suspendableFrom(i(f), () => {
+      let _ = eU(i => resourceUtils.suspendableFrom(i(f), () => {
         var i;
         i = t();
         return new Promise((t, r) => {
@@ -115,6 +115,6 @@ export let $$f0 = function (e, t, i = new u(m, t)) {
       _atomFamily: d
     });
   }(t, e, i);
-}(() => Z.get(), 3e5);
+}(() => observableState.get(), 3e5);
 export const he = $$f0;
 export const gc = $$g1;

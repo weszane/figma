@@ -14,7 +14,7 @@ import { wA } from "../figma_app/167249";
 import { MT } from "../905/321380";
 import { mc, DD, ZU } from "../9410/640042";
 import { Ez5 } from "../figma_app/763686";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { tG } from "../figma_app/723183";
 import { J } from "../905/633914";
 import { oe, H as _$$H } from "../figma_app/376315";
@@ -126,7 +126,7 @@ function k({
         p(null);
       }
       function t() {
-        let t = UN().get(e);
+        let t = getSingletonSceneGraph().get(e);
         t && null != i && (Ez5?.markContainingIndependentLayerNodesDirty(t.guid) || Ez5?.invalidateCanvas(), Ez5?.moveFromIndependentRenderLayer(t.guid), t.invalidateCanvasSpaceBoundsForSelfAndParents());
       }
       x.current && x.current.parentNode && x.current.remove();
@@ -144,13 +144,13 @@ function k({
       useEffect(() => {
         i && n && n.parentNode && null != t && (i.on("playing", () => {
           l("playing");
-          let i = UN().get(e);
+          let i = getSingletonSceneGraph().get(e);
           if (i) {
             i.initializeVideoTextureInFillPaint(t, n.videoWidth, n.videoHeight);
             i.setVideoElementInFillPaint(t, n);
             Ez5?.moveToIndependentRenderLayer(i.guid);
             let r = () => {
-              if (!a.current && (i = UN().get(e))) {
+              if (!a.current && (i = getSingletonSceneGraph().get(e))) {
                 let e = Math.floor(1e3 * n.currentTime);
                 i.setVideoCurrentTimeInFillPaint(t, e);
                 i.setVideoIsPlayingInFillPaint(t, !n.paused);
@@ -172,7 +172,7 @@ function k({
               e();
             }
           }
-        }), UN().get(e)?.videoPlayback?.muted && (i.muted(!0), i.volume(0)), i.play());
+        }), getSingletonSceneGraph().get(e)?.videoPlayback?.muted && (i.muted(!0), i.volume(0)), i.play());
       }, [e, t, i, n, l]);
     })(e, i, u, h, d, s);
     useEffect(() => () => {

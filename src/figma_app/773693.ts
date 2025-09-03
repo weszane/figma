@@ -2,7 +2,7 @@ import { useCallback } from "react";
 import { wA } from "../vendor/514228";
 import { glU, $mk, wzW } from "../figma_app/763686";
 import { l7 } from "../905/189185";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { md } from "../figma_app/27355";
 import { am } from "../figma_app/901889";
 import { jk } from "../905/609396";
@@ -45,7 +45,7 @@ export function $$v0() {
     });
   };
   let R = (e, t, r) => {
-    let n = ep(UN(), e);
+    let n = ep(getSingletonSceneGraph(), e);
     if (!n) {
       w();
       x(I, {
@@ -117,7 +117,7 @@ export function $$v0() {
       let e = new jk(I, {});
       e.start();
       let t = wzW?.getSingleSelectedDiagramNodeId() ?? "";
-      let r = function(e, t) {
+      let r = function (e, t) {
         let r = e.get(t);
         if (r) {
           if (SU(r)) return t;
@@ -127,7 +127,7 @@ export function $$v0() {
             return SU(t) ? r.diagramParentId : void 0;
           }
         }
-      }(UN(), t);
+      }(getSingletonSceneGraph(), t);
       if (!r) {
         w();
         x(I, {
@@ -140,4 +140,4 @@ export function $$v0() {
     }
   };
 }
-export const S = $$v0; 
+export const S = $$v0;

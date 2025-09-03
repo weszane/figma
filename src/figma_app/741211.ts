@@ -1,13 +1,13 @@
 import { useState, useRef, useCallback, useEffect, useMemo } from "react";
 import { d4, wA } from "../vendor/514228";
-import { Qw } from "../905/989992";
+import { resourceUtils } from "../905/989992";
 import s from "../vendor/128080";
 import { sx } from "../905/449184";
 import { xj, ok } from "../figma_app/851625";
 import { k } from "../905/651849";
 import { ZC } from "../figma_app/39751";
 import { J } from "../905/931050";
-import { Ek } from "../905/553831";
+import { subscribeAndAwaitData } from "../905/553831";
 import { Rs } from "../figma_app/288654";
 import { Xm, gB, e1, tT } from "../905/723791";
 import { r as _$$r } from "../905/520829";
@@ -205,11 +205,11 @@ export function $$B6(e) {
   let d = Rs(w2r, l);
   let [u, p] = useState(null);
   let m = useCallback(() => {
-    Ek(w2r, {
+    subscribeAndAwaitData(w2r, {
       ...l,
       refetchToken: _$$g()
     }).then(e => {
-      p(Qw.loaded(e));
+      p(resourceUtils.loaded(e));
     }, e => {
       throw e;
     });

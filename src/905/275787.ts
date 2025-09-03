@@ -4,7 +4,7 @@ import { createPortal } from "../vendor/944059";
 import { d4 } from "../vendor/514228";
 import { isNotNullish, isNullish } from "../figma_app/95419";
 import { l7 } from "../905/189185";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { ms, c$ } from "../figma_app/236327";
 import { tx } from "../905/303541";
 import { sx } from "../905/941192";
@@ -82,7 +82,7 @@ function x({
     return i ? i.isStateGroup ? i.isPublishable : i.isSymbolPublishable : null;
   }, e);
   let i = useCallback(() => {
-    let i = UN().get(e);
+    let i = getSingletonSceneGraph().get(e);
     if (!i) return null;
     l7.user("toggle-publishability", () => {
       i.isStateGroup ? i.isPublishable = !t : i.isLooseComponent && (i.isSymbolPublishable = !t);

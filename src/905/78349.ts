@@ -3,7 +3,7 @@ import { SpR, MoP, oHs, PoC, IcQ, _q7, qmM, OR7, JA } from "../figma_app/763686"
 import { l7, nc } from "../905/189185";
 import { M } from "../905/512402";
 import { AD } from "../905/871411";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { H } from "../figma_app/147959";
 import { x1 } from "../905/714362";
 import { Y5 } from "../figma_app/455680";
@@ -24,7 +24,7 @@ class f {
     s.clearSnappingVisualizations();
     let u = c.getHoveredNodeForConnector(e, Array.from(d));
     let p = u.hoveredNodeID;
-    let m = p ? UN().get(p) : null;
+    let m = p ? getSingletonSceneGraph().get(p) : null;
     let h = t?.parentNode;
     let g = h && m && h.guid === m.guid;
     let f = h?.isGroup;
@@ -285,10 +285,10 @@ class f {
   }
   static ensureSlidesInvariant(e, t, i) {
     if (i && E(i) && i.connectorStart) {
-      let n = UN().get(i.connectorStart.endpointNodeID);
+      let n = getSingletonSceneGraph().get(i.connectorStart.endpointNodeID);
       let a = n?.containingSlideId;
       if (n && a !== AD) {
-        let i = UN().get(e.endpointNodeID);
+        let i = getSingletonSceneGraph().get(e.endpointNodeID);
         let n = i?.containingSlideId;
         if (n !== AD && a !== n) return {
           endpointNodeID: t.canvasGUID(),
@@ -367,16 +367,16 @@ export class $$_0 extends j {
       this.resetState();
       return;
     }
-    let t = this._connectorGUID !== AD ? UN().get(this._connectorGUID) : null;
-    t && (this.handleMouseDrag(e), this._didDragPastThreshold || this._didSetConnectorStartWithClick ? (this.possiblyDeleteConnectorIfNotVisible(t), UN().get(this._connectorGUID) ? qmM?.logConnectorInsertion(this._connectorGUID) : qmM?.trySwitchToSelectToolCpp(e), this.resetState()) : (this._didSetConnectorStartWithClick = !0, this._didDragPastThreshold = !1), e.invalidateViewport());
+    let t = this._connectorGUID !== AD ? getSingletonSceneGraph().get(this._connectorGUID) : null;
+    t && (this.handleMouseDrag(e), this._didDragPastThreshold || this._didSetConnectorStartWithClick ? (this.possiblyDeleteConnectorIfNotVisible(t), getSingletonSceneGraph().get(this._connectorGUID) ? qmM?.logConnectorInsertion(this._connectorGUID) : qmM?.trySwitchToSelectToolCpp(e), this.resetState()) : (this._didSetConnectorStartWithClick = !0, this._didDragPastThreshold = !1), e.invalidateViewport());
   }
   handleContextMenuOpen() {}
   handleBeforeFrame() {}
   render(e, t) {
     if (!e.isMouseOverCanvas() || !qmM || .35 > e.canvasScale()) return;
     qmM.renderStraightConnectorGuidelines(this._connectorGUID, e, t);
-    let i = UN().get(this._hoveredEndpoint?.endpointNodeID || "");
-    let n = this._connectorGUID !== AD ? UN().get(this._connectorGUID) : null;
+    let i = getSingletonSceneGraph().get(this._hoveredEndpoint?.endpointNodeID || "");
+    let n = this._connectorGUID !== AD ? getSingletonSceneGraph().get(this._connectorGUID) : null;
     i && "CANVAS" !== i.type && qmM.renderEndpointNodeHoverIndicators(i.guid, this._hoveredEndpoint, this._endpointHoverzone, n ? n.connectorLineStyle : qmM.getToolLineStyle(), e, t);
     qmM.renderSnappingVisualizations(this._getSnapper({
       interactionCpp: qmM
@@ -394,7 +394,7 @@ export class $$_0 extends j {
   }
   updateHoverState(e) {
     if (!qmM) return;
-    let t = UN().get(this._connectorGUID);
+    let t = getSingletonSceneGraph().get(this._connectorGUID);
     let i = this._hoveredEndpoint;
     let n = this._endpointHoverzone;
     let a = t ? M.fromVectorD(t.connectorStartCanvasPosition) : M.invalid();
@@ -418,10 +418,10 @@ export class $$_0 extends j {
   createConnector(e) {
     if (!qmM) return !1;
     this._connectorGUID = qmM.createNewConnector(e);
-    let t = this._connectorGUID !== AD ? UN().get(this._connectorGUID) : null;
+    let t = this._connectorGUID !== AD ? getSingletonSceneGraph().get(this._connectorGUID) : null;
     if (t) {
       t.connectorStart = t.connectorEnd = this._hoveredEndpoint;
-      let i = t.connectorStart.endpointNodeID ? UN().get(t.connectorStart.endpointNodeID) : null;
+      let i = t.connectorStart.endpointNodeID ? getSingletonSceneGraph().get(t.connectorStart.endpointNodeID) : null;
       let n = i?.type === "SHAPE_WITH_TEXT" || i?.type === "INSTANCE";
       this._createdFromCenter = this._endpointHoverzone === oHs.CENTER;
       let o = this._getToolLineStyle({
@@ -444,7 +444,7 @@ export class $$_0 extends j {
   }
   updateConnector(e) {
     if (!qmM) return;
-    let t = this._connectorGUID !== AD ? UN().get(this._connectorGUID) : null;
+    let t = this._connectorGUID !== AD ? getSingletonSceneGraph().get(this._connectorGUID) : null;
     if (t) {
       let i = t.connectorLineStyle = e.isShiftPressed() ? PoC.STRAIGHT : this._getToolLineStyle({
         interactionCpp: qmM
@@ -453,18 +453,18 @@ export class $$_0 extends j {
       t.immutableFrameShape && (t.immutableFrameShape.cornerRadius = qmM.getDefaultCornerRadius(i));
       e.isShiftPressed() && !this._keyboardShortcutTracked && (this._keyboardShortcutTracked = !0, Y5.usedKeyboardShortcut("straight-connector"));
       this._createdFromCenter && this._startEndpointWithAuto.endpointNodeID !== AD && (t.connectorStart = this._startEndpointWithAuto);
-      let n = t.connectorEnd.endpointNodeID ? UN().get(t.connectorEnd.endpointNodeID) : null;
+      let n = t.connectorEnd.endpointNodeID ? getSingletonSceneGraph().get(t.connectorEnd.endpointNodeID) : null;
       let s = n?.type === "SHAPE_WITH_TEXT" || n?.type === "INSTANCE";
       if ((this._toolLineStyle === PoC.ELBOWED || this._toolLineStyle === PoC.CURVED) && s && this._endpointHoverzone === oHs.CENTER && (this._hoveredEndpoint.magnet = SpR.AUTO), t.connectorEnd = this._hoveredEndpoint, t.connectorStart?.endpointNodeID && t.connectorEnd?.endpointNodeID) {
-        let e = UN().get(t.connectorStart.endpointNodeID);
-        let i = UN().get(t.connectorEnd.endpointNodeID);
+        let e = getSingletonSceneGraph().get(t.connectorStart.endpointNodeID);
+        let i = getSingletonSceneGraph().get(t.connectorEnd.endpointNodeID);
         e?.type === "SHAPE_WITH_TEXT" && i?.type === "SHAPE_WITH_TEXT" && H0();
       }
       if (!this._shouldIgnoreMagnets) {
         let e = nc.user("connector-tool-hover-ignore-magnets-timer", () => {
           if (!f.isEdgeOrCardinalHoverzone(this._endpointHoverzone)) {
             this._shouldIgnoreMagnets = !0;
-            let e = UN().get(this._connectorGUID);
+            let e = getSingletonSceneGraph().get(this._connectorGUID);
             e && (this._hoveredEndpoint = this._hoveredEndpointIgnoringMagnets, e.connectorEnd = this._hoveredEndpoint);
           }
         });
@@ -474,7 +474,7 @@ export class $$_0 extends j {
     }
   }
   resetState() {
-    let e = this._connectorGUID !== AD ? UN().get(this._connectorGUID) : null;
+    let e = this._connectorGUID !== AD ? getSingletonSceneGraph().get(this._connectorGUID) : null;
     e && l7.system("connector-tool-reset-state", () => {
       this.possiblyDeleteConnectorIfNotVisible(e);
     });

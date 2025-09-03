@@ -33,7 +33,7 @@ import { Xs, Df } from "../figma_app/98483";
 import { BP, hF, QK, sC, BG, Kw, X8 } from "../figma_app/100987";
 import { l as _$$l } from "../figma_app/603241";
 import { R as _$$R2 } from "../905/726507";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { fp, md, Xr } from "../figma_app/27355";
 import X from "../vendor/415955";
 import $ from "../vendor/128080";
@@ -576,7 +576,7 @@ function es(e) {
         }),
         onMouseLeave: () => d("minmax", null),
         onScrubBegin: () => {
-          gl(c) ? UN().getDirectlySelectedNodes().forEach(e => {
+          gl(c) ? getSingletonSceneGraph().getDirectlySelectedNodes().forEach(e => {
             h.current.set(e.guid, e.size[S === _0v.X ? "x" : "y"]);
           }) : "number" == typeof s ? u.current = s : u.current = 0;
         },
@@ -1187,7 +1187,7 @@ function td({
   } = function () {
     let e = cJ();
     let t = d4(F4);
-    let n = UN();
+    let n = getSingletonSceneGraph();
     let l = {
       isNoLayoutControlReadOnly: !1,
       isStackControlReadOnly: !1,

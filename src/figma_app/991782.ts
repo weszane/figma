@@ -14,7 +14,7 @@ import { y7 } from "../figma_app/343967";
 import { r as _$$r } from "../905/571562";
 import { A as _$$A } from "../905/24328";
 import { glU } from "../figma_app/763686";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { eU, md } from "../figma_app/27355";
 import { generateRecordingKey } from "../figma_app/878298";
 import { g as _$$g } from "../905/880308";
@@ -197,7 +197,7 @@ export function $$K1({
   lintingResults: t,
   onlyShowResponsiveSetGuids: r
 }) {
-  let a = UN();
+  let a = getSingletonSceneGraph();
   let s = md(_b)?.mode !== "fullscreen";
   let o = useMemo(uU, []);
   let [c, u] = useState("all");

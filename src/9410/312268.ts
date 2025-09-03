@@ -4,7 +4,7 @@ import { E as _$$E } from "../905/632989";
 import { O } from "../905/969533";
 import { e as _$$e } from "../905/149844";
 import { nc } from "../905/189185";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { Ay } from "@stylexjs/stylex";
 import { md } from "../figma_app/27355";
 import { generateRecordingKey } from "../figma_app/878298";
@@ -26,7 +26,7 @@ let $$C1 = forwardRef(function ({
   let C = md(Ei);
   let E = nc.user("ssv-carousel", () => {
     closeTemplatePicker();
-    let e = UN();
+    let e = getSingletonSceneGraph();
     oY(e, "carousel_add_slide_button");
   });
   return jsxs("div", {

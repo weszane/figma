@@ -6,7 +6,7 @@ import { E as _$$E } from "../905/658074";
 import { W as _$$W } from "../figma_app/462192";
 import { Egt, HV5, CXS, sAE, _0v, RN9, rXF } from "../figma_app/763686";
 import { l7 } from "../905/189185";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { Pt } from "../figma_app/806412";
 import { B as _$$B } from "../905/714743";
@@ -575,7 +575,7 @@ function ec({
   }, []);
   let o = useCallback((e, n) => {
     null !== t && l7.user("grid-panel", () => {
-      let l = UN();
+      let l = getSingletonSceneGraph();
       let i = l.get(t);
       let r = i && i.parentGuid && l.get(i.parentGuid);
       i && r && n >= 1 && (e === CXS.ROW ? i.gridRowAnchorIndex + n <= r.gridRowCount && (i.gridRowSpan = n) : i.gridColumnAnchorIndex + n <= r.gridColumnCount && (i.gridColumnSpan = n));
@@ -677,7 +677,7 @@ function ed({
   });
   let a = useCallback((e, n, l) => {
     null !== t && null !== t.gridChildId && l7.user("grid-panel", () => {
-      let i = UN().get(t.gridChildId);
+      let i = getSingletonSceneGraph().get(t.gridChildId);
       let r = i && i.parentNode;
       i && r && (i.setSpanAndUpdateChildPositions(e, n), l && Y5.triggerAction("commit"));
     });

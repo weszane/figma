@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { t } from "../5132/435788";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { zl } from "../figma_app/27355";
 import { debugState } from "../905/407919";
 import { x1 } from "../905/714362";
@@ -102,7 +102,7 @@ let S = (e, t) => ({
     if (w) return;
     w = !0;
     let l = debugState.getState();
-    let d = UN();
+    let d = getSingletonSceneGraph();
     let c = l.openFile?.key;
     let p = l.user?.id;
     let m = l.fileVersion;

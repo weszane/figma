@@ -61,7 +61,7 @@ import { d9 } from "../905/579068";
 import { Ao } from "../905/748636";
 import { DV } from "../905/739964";
 import { O as _$$O, A as _$$A } from "../905/536006";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { A as _$$A2 } from "../vendor/90566";
 import { Uh as _$$Uh, K1, YQ } from "../905/956994";
 import { R4, y8, jX, Z7, kh, oh } from "../905/188169";
@@ -223,7 +223,7 @@ function eL({
     }, [e, n]);
     let o = _$$A2(useCallback(e => {
       if (i) return;
-      let r = UN().getCurrentPage();
+      let r = getSingletonSceneGraph().getCurrentPage();
       !((r?.directlySelectedNodes?.length ?? 0) > 50) && e && (n.current || (n.current = !0), t(void 0, {
         fontFamily: e
       }, zk.NO));

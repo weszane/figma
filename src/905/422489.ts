@@ -2,7 +2,7 @@ import { U } from "../905/807535";
 import { miS, qmM, gSS, QOV } from "../figma_app/763686";
 import { r as _$$r } from "../905/249071";
 import { M } from "../905/512402";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { Ay } from "../figma_app/778880";
 import { j } from "../905/881708";
 import { HF } from "../figma_app/682945";
@@ -452,7 +452,7 @@ let m = class e extends j {
                   addToExistingSelection: e.isMetaPressed(),
                   interactionCpp: qmM
                 });
-                let t = UN().get(e.canvasGUID());
+                let t = getSingletonSceneGraph().get(e.canvasGUID());
                 0 === (t?.directlySelectedNodes.length ?? 0) && (this.state = {
                   element: xT.NONE,
                   mouse: Dv.INACTIVE

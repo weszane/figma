@@ -35,7 +35,7 @@ import { Fk } from "../figma_app/167249";
 import { zk } from "../figma_app/198712";
 import { fn, DE, sY } from "../figma_app/811257";
 import { R as _$$R } from "../905/103090";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { A as _$$A } from "../svg/33649";
 import { A as _$$A2 } from "../svg/541014";
 import { LI, QK, xe, sC, BP, hF, wO, Kw, oH, T1, HO, DL, BG, Xq, fm, t5 as _$$t2, PK, eC as _$$eC, r as _$$r, GC, jC, i6 } from "../figma_app/100987";
@@ -258,7 +258,7 @@ function q(e, t, r) {
   }
 }
 function J(e, t, r, n, i) {
-  let a = UN();
+  let a = getSingletonSceneGraph();
   let s = q(t, r, n);
   l7.user(`set-sites-position-${t.toLowerCase()}`, () => {
     switch (t) {
@@ -345,7 +345,7 @@ function Q(e) {
     let i = "horizontal" === t ? S : v;
     let a = "horizontal" === t ? ["LEFT", "RIGHT"] : ["TOP", "BOTTOM"];
     i && void 0 !== e[0] ? function (e, t, r, n, i) {
-      let a = UN();
+      let a = getSingletonSceneGraph();
       let s = "horizontal" === t ? "centerHorizontal" : "centerVertical";
       l7.user(`set-sites-position-center-${t}`, () => {
         a.getDirectlySelectedNodes().forEach(t => {
@@ -2156,14 +2156,14 @@ function t6(e, t, r) {
   return !!(r === mKm.FILL_CONTAINER && t === _0v.Y && e && function (e) {
     let t = new Set([]);
     for (let r of e) {
-      let n = UN().get(r);
+      let n = getSingletonSceneGraph().get(r);
       if (n && n.parentGuid && !t.has(n.parentGuid) && (t.add(n.parentGuid), function (e, t) {
         let r = e.parentNode;
         let n = !1;
         let i = !0;
         if (e && r && "WRAP" === r.stackWrap) for (let a of r.childrenGuids) {
           t.find(e => e === a) || (i = !1);
-          let r = UN().get(a);
+          let r = getSingletonSceneGraph().get(a);
           a !== e.guid && r && "AUTO" === r.stackChildAlignSelf && (n = !0);
         }
         return n && !i;

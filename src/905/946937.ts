@@ -5,7 +5,7 @@ import { lQ } from "../905/934246";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, nB, Y9, hE, wi, jk } from "../figma_app/272243";
-import { Qw } from "../905/989992";
+import { resourceUtils } from "../905/989992";
 import { Rs } from "../figma_app/288654";
 import { qc } from "../figma_app/858013";
 import { $z } from "../figma_app/617427";
@@ -50,13 +50,13 @@ export let $$V0 = Ju(function (e) {
   let m = Rs(pTp(team ? {
     teamId: team.id
   } : null));
-  let h = Qw.useTransform(m, e => e?.team?.canEdit ?? !1);
-  let g = Qw.useTransform(m, e => {
+  let h = resourceUtils.useTransform(m, e => e?.team?.canEdit ?? !1);
+  let g = resourceUtils.useTransform(m, e => {
     let t = e?.team?.plan.tier;
     return !!t && [FPlanNameType.STUDENT, FPlanNameType.PRO].includes(t);
   });
   let f = MF({
-    oldValue: Qw.useMemoizedLoaded(d),
+    oldValue: resourceUtils.useMemoizedLoaded(d),
     newValue: h,
     label: A5.UpsellModal.canEditTeam,
     enableFullRead: DQ(Pw.GROUP_7),
@@ -66,7 +66,7 @@ export let $$V0 = Ju(function (e) {
     }
   });
   let _ = MF({
-    oldValue: Qw.useMemoizedLoaded(p),
+    oldValue: resourceUtils.useMemoizedLoaded(p),
     newValue: g,
     label: A5.UpsellModal.isFileInTeamWithProFeatures,
     enableFullRead: DQ(Pw.GROUP_7),

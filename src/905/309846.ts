@@ -8,7 +8,7 @@ import { eD as _$$eD } from "../figma_app/876459";
 import { jW } from "../figma_app/640683";
 import { Ay } from "../905/612521";
 import { getInitialOptions, isLocalDevOnCluster } from "../figma_app/169182";
-import { Ek } from "../905/553831";
+import { subscribeAndAwaitData } from "../905/553831";
 import { Ay as _$$Ay2 } from "../figma_app/778880";
 import { parseQuery } from "../905/634134";
 import { $D, du, xZ, DZ } from "../905/11";
@@ -111,7 +111,7 @@ async function ea(e, t, i) {
     latestFullscreenVersion: s.script,
     currentFullscreenVersion: Fig.fullscreenScriptHash
   })), c && (l.reload_when_feature_flags_change || c.reload_when_feature_flags_change)) {
-    let e = function(e, t) {
+    let e = function (e, t) {
       for (let i of [t, e]) for (let n in i) if (!!e[n] != !!t[n]) return `${n} changed to ${!!t[n]}`;
       return null;
     }(l, c);
@@ -353,7 +353,7 @@ let $$ej0 = nF(async (e, {
 }) => {
   let n = t.fileKey;
   if (!n) return;
-  let a = function(e, t) {
+  let a = function (e, t) {
     if (!Hy(e.editorType) || e.mode && "auto" !== e.mode) return e;
     let i = b1();
     let n = t.getState();
@@ -400,7 +400,7 @@ let $$ej0 = nF(async (e, {
     }));
   }
   let d = l.openFile?.key;
-  Ek(ehp, {
+  subscribeAndAwaitData(ehp, {
     fileKey: n
   });
   let c = e.getState();
@@ -660,4 +660,4 @@ export async function $$eW1(e, t, i, n, r) {
   }
 }
 export const sR = $$ej0;
-export const Lp = $$eW1; 
+export const Lp = $$eW1;

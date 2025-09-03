@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { _YF } from "../figma_app/822011";
 import { uQ6 } from "../figma_app/763686";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { zl } from "../figma_app/27355";
 import { yV } from "../figma_app/516028";
@@ -15,10 +15,10 @@ import { NB, jX, Ay } from "../905/281495";
 export function $$f2(e, t = !1) {
   let r = [];
   t ? e.map(e => {
-    let t = UN().get(e);
+    let t = getSingletonSceneGraph().get(e);
     t && t.visible && 0 !== t.opacity && r.push(t);
   }) : e.forEach(e => {
-    let t = UN().get(e);
+    let t = getSingletonSceneGraph().get(e);
     t && t.visible && 0 !== t.opacity && function e(t, r) {
       if (t.visible && 0 !== t.opacity) for (let n of (r.push(t), t.childrenNodes ?? [])) e(n, r);
     }(t, r);

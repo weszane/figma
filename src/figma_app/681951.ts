@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { df } from "../figma_app/728005";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { eU, Xr, zl } from "../figma_app/27355";
 import { eD } from "../figma_app/876459";
 import { Tv } from "../figma_app/311375";
@@ -47,7 +47,7 @@ export function $$f3() {
   return null;
 }
 function E(e, t, r) {
-  let n = UN().get(e ?? null);
+  let n = getSingletonSceneGraph().get(e ?? null);
   if (n) {
     if ("xml" === zl.get(Kx)) {
       t(df({

@@ -1,7 +1,7 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useContext, useMemo } from "react";
 import { d4 } from "../vendor/514228";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import l from "classnames";
 import { parsePxNumber } from "../figma_app/783094";
@@ -26,7 +26,7 @@ export function $$E0() {
   s && (e = s);
   let r = d4(e => e.mirror.appModel.hoveredNode);
   if (r && getFeatureFlags().ce_offscreen_indicators_for_hovered_nodes) {
-    let t = UN().get(r);
+    let t = getSingletonSceneGraph().get(r);
     if (t) {
       let s = t.absoluteBoundingBox;
       e = [...e, {

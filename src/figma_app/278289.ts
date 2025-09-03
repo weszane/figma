@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { useEffect } from "react";
 import { d4 } from "../vendor/514228";
 import { glU } from "../figma_app/763686";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { h } from "../905/207101";
 import { tx } from "../905/303541";
 import { VF, uY } from "../figma_app/989514";
@@ -10,7 +10,7 @@ import { b } from "../figma_app/5657";
 import { eN } from "../figma_app/202626";
 export function $$_0(e) {
   h(() => {
-    let t = eN(UN(), "FRAME");
+    let t = eN(getSingletonSceneGraph(), "FRAME");
     if (e.hasUiKits && null != t) {
       e.skip && e.skip();
       return;

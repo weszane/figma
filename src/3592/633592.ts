@@ -32,7 +32,7 @@ import { Ib } from "../905/129884";
 import { wV } from "../figma_app/779965";
 import { d as _$$d } from "../905/977713";
 import { uQ as _$$uQ, Vr } from "../figma_app/151869";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { B as _$$B } from "../figma_app/821179";
 import { P as _$$P } from "../3592/617429";
 import { hB } from "../figma_app/609511";
@@ -262,7 +262,7 @@ export function $$el0(e) {
             message: "Generating code..."
           };
           i === x.current && d(s);
-          let l = UN().get(a);
+          let l = getSingletonSceneGraph().get(a);
           n && (r = await o(l));
           let {
             files

@@ -1,4 +1,4 @@
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { zl } from "../figma_app/27355";
 import { g } from "../905/880308";
 import { hf } from "../figma_app/210234";
@@ -198,7 +198,7 @@ export class $$u0 {
     } = e;
     let o = this._ruleManager.getRuleById(ruleId);
     if (!o) throw Error("Rule not found for violation");
-    let l = UN().get(guid);
+    let l = getSingletonSceneGraph().get(guid);
     if (!l) throw Error("Node not found for violation");
     let d = zl.get(VG).get(groupKey);
     if (d?.status === "loaded" && d?.fix) return d.fix;

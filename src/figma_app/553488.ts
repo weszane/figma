@@ -1,7 +1,7 @@
 import { ServiceCategories as _$$e } from "../905/165054";
 import { Ez5, Egt, Zdr } from "../figma_app/763686";
 import { l7, nc } from "../905/189185";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { x1 } from "../905/714362";
 import { Point } from "../905/736624";
 import { f as _$$f } from "../905/412913";
@@ -62,7 +62,7 @@ export function $$S0({
     let g = d[0];
     if (!g || !Egt || !Ez5) return;
     Ez5.canvasGrid()?.insertChildAtCoord(g, row, col, y(t, e.isHubFile));
-    let f = UN().get(g);
+    let f = getSingletonSceneGraph().get(g);
     f && (Egt.replaceSelection([f.guid], !0), f.isExpanded = !0);
     $$I1({
       libraryKey: e.library_key,

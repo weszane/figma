@@ -4,7 +4,7 @@ import { vlL } from "../figma_app/763686";
 import { l7 } from "../905/189185";
 import { getFeatureFlags } from "../905/601108";
 import { zl } from "../figma_app/27355";
-import { Ek } from "../905/553831";
+import { subscribeAndAwaitData } from "../905/553831";
 import { Lo } from "../905/714362";
 import { Ay } from "../figma_app/432652";
 import { Y5 } from "../figma_app/455680";
@@ -85,7 +85,7 @@ export async function $$_0({
           if (e.node.pluginId) {
             let t;
             try {
-              t = await Ek(k_1, {
+              t = await subscribeAndAwaitData(k_1, {
                 pluginId: e.node.pluginId,
                 orgId: _
               });

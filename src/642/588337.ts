@@ -9,7 +9,7 @@ import { _L } from "../905/911410";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
 import { Ez5 } from "../figma_app/763686";
 import { l7 } from "../905/189185";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { Ay } from "@stylexjs/stylex";
 import { buildUploadUrl } from "../figma_app/169182";
 import { s_, H4 } from "../905/992467";
@@ -140,7 +140,7 @@ export function $$I0({
     } = (await importFile(t)) || {};
     if (csv) {
       if (K) {
-        if (UN().get(K)) {
+        if (getSingletonSceneGraph().get(K)) {
           let e = G?.chartType || I;
           e && l7.user("chart-updateExistingChart", () => {
             $H(K, {
@@ -150,7 +150,7 @@ export function $$I0({
           });
         }
       } else {
-        let e = UN();
+        let e = getSingletonSceneGraph();
         let t = U(e, R[0]);
         t && I && V(e, t, csv, I);
       }
@@ -172,7 +172,7 @@ export function $$I0({
         variant: "secondary",
         onClick: () => {
           if (!I) return;
-          let e = UN();
+          let e = getSingletonSceneGraph();
           let t = U(e, R[0]);
           t && V(e, t, "City,2011-10-01,2011-10-02,2011-10-03,2011-10-04,2011-10-05,2011-10-06,2011-10-07,2011-10-08,2011-10-09,2011-10-10,2011-10-11,2011-10-12\nNew York,63.4,58.0,53.3,55.7,64.2,58.8,57.9,61.8,69.3,71.2,68.7,61.8\nSan Francisco,53.4,48.0,43.3,45.7,54.2,48.8,47.9,51.8,59.3,61.2,58.7,51.8", I);
         },

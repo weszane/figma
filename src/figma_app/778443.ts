@@ -1,5 +1,5 @@
 import { l7 } from "../905/189185";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { UD } from "../figma_app/624361";
 export let $$s0 = "embedded-prototype-";
 export function $$o1(e, t, r, s, o) {
@@ -19,7 +19,7 @@ export function $$o1(e, t, r, s, o) {
     });
     return;
   }
-  let l = UN().get(s);
+  let l = getSingletonSceneGraph().get(s);
   if (!l) {
     console.error("Cannot process embed thumbnail: node not found", s);
     return;
@@ -57,4 +57,4 @@ export function $$o1(e, t, r, s, o) {
   }
 }
 export const xu = $$s0;
-export const yx = $$o1; 
+export const yx = $$o1;

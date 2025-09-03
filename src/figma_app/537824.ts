@@ -1,6 +1,6 @@
 import { ServiceCategories as _$$e } from "../905/165054";
 import { Ez5, mHF, juq } from "../figma_app/763686";
-import { UN, qo } from "../905/700578";
+import { getSingletonSceneGraph, ReduxSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { zl } from "../figma_app/27355";
 import { fY, Og, jq, v4, VG, qL, m7, qZ } from "../figma_app/761118";
@@ -54,7 +54,7 @@ class L {
     return this.designLinterRuleManager.getRuleById(e);
   }
   getDirectlySelectedNodes() {
-    let e = UN();
+    let e = getSingletonSceneGraph();
     return e.getCurrentPage()?.directlySelectedNodes ?? [];
   }
   extractLintableNodes(e) {
@@ -69,7 +69,7 @@ class L {
   getLintingTargetNodes() {
     let e = zl.get(fY);
     if (!e) return null;
-    let t = UN();
+    let t = getSingletonSceneGraph();
     let r = [];
     for (let n of e.guids) {
       let e = t.get(n);
@@ -130,7 +130,7 @@ class L {
       if (this.designLinterStateManager.getStatus() !== td.GROUPING_COMPLETE) return;
       this.designLinterStateManager.setStatus(td.RESPONDING_TO_CANVAS_CHANGE);
       let r = e.filter(e => !t.includes(e));
-      let n = UN();
+      let n = getSingletonSceneGraph();
       let i = r.reduce((e, t) => {
         let r = n.get(t);
         r && e.push(r);
@@ -450,7 +450,7 @@ class L {
     let n = [];
     let i = [];
     try {
-      let s = UN();
+      let s = getSingletonSceneGraph();
       let o = hf();
       for (let {
         violations,
@@ -526,7 +526,7 @@ class L {
     return new Promise(async (u, p) => {
       try {
         if (c.aborted) throw Error("Signal aborted");
-        let p = new qo(juq.LINTER);
+        let p = new ReduxSceneGraph(juq.LINTER);
         let _ = s.get(n);
         if (!_) throw Error("Guid for node to fix not found in map");
         let h = p.get(_);

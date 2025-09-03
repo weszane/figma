@@ -1,9 +1,9 @@
 import { useContext, useState, useEffect, useMemo, useCallback, useRef, useLayoutEffect } from "react";
 import { zN } from "../905/19536";
-import { Qw } from "../905/989992";
+import { resourceUtils } from "../905/989992";
 import { W } from "../905/491061";
 import { lw, bu } from "../905/663269";
-import { A as _$$A } from "../905/417830";
+import { SubscriptionManager } from "../905/417830";
 import { Dj } from "../figma_app/28817";
 import { F4 } from "../905/795642";
 import { M } from "../905/609813";
@@ -49,7 +49,7 @@ export function $$b2(...e) {
       e?.();
     };
   }, [s, _, u.client, u.mock, t, m]);
-  return useMemo(() => Qw.from(g), [g]);
+  return useMemo(() => resourceUtils.from(g), [g]);
 }
 function T(e) {
   return Array.isArray(e) && (1 === e.length || 2 === e.length) && bu(e[0]);
@@ -84,7 +84,7 @@ export function $$I0(...e) {
   let A = useMemo(() => new W(() => () => {}), []);
   return useMemo(() => {
     let e = g.client;
-    return null == e ? Qw.disabled() : Qw.suspendableFrom(v, () => new Promise((r, n) => {
+    return null == e ? resourceUtils.disabled() : resourceUtils.suspendableFrom(v, () => new Promise((r, n) => {
       let i = e.subscribe(t, d, e => {
         "loaded" === e.status ? (r(), setTimeout(() => i?.())) : e.errors && (n(e.errors), setTimeout(() => i?.()));
       });
@@ -95,14 +95,14 @@ export function $$S7(e, t, r = {}) {
   let i = f();
   let s = y(r);
   let [o, d] = useState({});
-  let [c] = useState(() => new _$$A(i.client, () => d({})));
+  let [c] = useState(() => new SubscriptionManager(i.client, () => d({})));
   useLayoutEffect(() => {
     c.update(e, s ? t : []);
   }, [c, e, t, s]);
   useLayoutEffect(() => () => c.clear(), [c]);
   return useMemo(() => t.map(e => ({
     args: e,
-    result: s ? Qw.from(c.currentResult(e)) : Qw.disabled()
+    result: s ? resourceUtils.from(c.currentResult(e)) : resourceUtils.disabled()
   })), [c, t, s, o]);
 }
 export function $$v3() {

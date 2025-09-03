@@ -14,7 +14,7 @@ import { Q as _$$Q } from "../905/363675";
 import { S as _$$S } from "../905/794163";
 import { Ay } from "@stylexjs/stylex";
 import { getFeatureFlags } from "../905/601108";
-import { Qw } from "../905/989992";
+import { resourceUtils } from "../905/989992";
 import b from "../vendor/523035";
 import { a as _$$a } from "../905/361543";
 import { C as _$$C } from "../905/641057";
@@ -118,8 +118,8 @@ function X(e) {
   let ei = _$$t("billing_modals.add_seats.header");
   let en = v()(Object.values(X));
   let er = 0 === en || ee;
-  let ea = function(e) {
-    let [t, i] = useState(Qw.loading());
+  let ea = function (e) {
+    let [t, i] = useState(resourceUtils.loading());
     let n = !e;
     useEffect(() => {
       if (n) return;
@@ -129,16 +129,16 @@ function X(e) {
       }).then(e => {
         if (t) {
           let t = e.data.meta.estimate_context_by_billable_product;
-          i(Qw.loaded(t));
+          i(resourceUtils.loaded(t));
         }
       }).catch(e => {
-        t && i(Qw.error(e));
+        t && i(resourceUtils.error(e));
       });
       return () => {
         t = !1;
       };
     }, [e?.teamId, n]);
-    return useMemo(() => n ? Qw.disabled() : t, [n, t]);
+    return useMemo(() => n ? resourceUtils.disabled() : t, [n, t]);
   }(W ? {
     teamId: b
   } : null);
@@ -348,4 +348,4 @@ function Q(e) {
     children: tx("billing_modals.team_add_seats.disclaimer_banner.add_annual_seats")
   });
 }
-export const T = $$Z0; 
+export const T = $$Z0;

@@ -1,4 +1,4 @@
-import { o9 } from "../905/845428";
+import { InternalError } from "../905/845428";
 export let $$r3 = e => "frame" === e.type || "inputframe" === e.type || "autolayout" === e.type;
 export function $$a1(e, t, i) {
   if (!e) return;
@@ -53,7 +53,7 @@ export function $$s0(e, t, i, r = !1) {
       break;
     case "horizontal-scale":
       if ("number" == typeof xConstraint.leftOffsetPercent && "number" == typeof xConstraint.rightOffsetPercent) {
-        if (!(0 <= xConstraint.leftOffsetPercent && xConstraint.leftOffsetPercent <= 100 && 0 <= xConstraint.rightOffsetPercent && xConstraint.rightOffsetPercent <= 100 && xConstraint.leftOffsetPercent + xConstraint.rightOffsetPercent <= 100)) throw new o9(`Invalid percentages left=${xConstraint.leftOffsetPercent}, right=${xConstraint.rightOffsetPercent}`);
+        if (!(0 <= xConstraint.leftOffsetPercent && xConstraint.leftOffsetPercent <= 100 && 0 <= xConstraint.rightOffsetPercent && xConstraint.rightOffsetPercent <= 100 && xConstraint.leftOffsetPercent + xConstraint.rightOffsetPercent <= 100)) throw new InternalError(`Invalid percentages left=${xConstraint.leftOffsetPercent}, right=${xConstraint.rightOffsetPercent}`);
         h.horizontal = "SCALE";
         let e = xConstraint.leftOffsetPercent + xConstraint.rightOffsetPercent;
         l = f().width * ((100 - e) / 100);
@@ -75,7 +75,7 @@ export function $$s0(e, t, i, r = !1) {
       break;
     case "vertical-scale":
       if ("number" == typeof yConstraint.topOffsetPercent && "number" == typeof yConstraint.bottomOffsetPercent) {
-        if (!(0 <= yConstraint.topOffsetPercent && yConstraint.topOffsetPercent <= 100 && 0 <= yConstraint.bottomOffsetPercent && yConstraint.bottomOffsetPercent <= 100 && yConstraint.topOffsetPercent + yConstraint.bottomOffsetPercent <= 100)) throw new o9(`Invalid percentages top=${yConstraint.topOffsetPercent}, bottom=${yConstraint.bottomOffsetPercent}`);
+        if (!(0 <= yConstraint.topOffsetPercent && yConstraint.topOffsetPercent <= 100 && 0 <= yConstraint.bottomOffsetPercent && yConstraint.bottomOffsetPercent <= 100 && yConstraint.topOffsetPercent + yConstraint.bottomOffsetPercent <= 100)) throw new InternalError(`Invalid percentages top=${yConstraint.topOffsetPercent}, bottom=${yConstraint.bottomOffsetPercent}`);
         h.vertical = "SCALE";
         let e = yConstraint.topOffsetPercent + yConstraint.bottomOffsetPercent;
         d = f().height * ((100 - e) / 100);

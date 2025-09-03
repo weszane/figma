@@ -3,7 +3,7 @@ import { l as _$$l } from "../905/716947";
 import { md, zl, eU } from "../figma_app/27355";
 import { oA } from "../905/663269";
 import { az } from "../905/449184";
-import { S8 } from "../905/553831";
+import { subscribeMultipleAndAwaitAll } from "../905/553831";
 import { w0 } from "../figma_app/594947";
 import { N as _$$N } from "../905/972754";
 import { Lom, bsh, yFE, vsj } from "../figma_app/43951";
@@ -65,7 +65,7 @@ let C = e => N.some(t => t._name === e);
 let w = e => C(e) ? e : void 0;
 let O = e => M4.Query({
   fetch: async t => {
-    let r = S8(e, t.$$arguments);
+    let r = subscribeMultipleAndAwaitAll(e, t.$$arguments);
     let n = w(e._name);
     if (n) {
       let r = x[n];

@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { d4 } from "../vendor/514228";
 import { getFeatureFlags } from "../905/601108";
-import { Qw } from "../905/989992";
+import { resourceUtils } from "../905/989992";
 import { nt, d6 } from "../figma_app/687776";
 import { nF } from "../905/350402";
 import { le } from "../905/904854";
@@ -30,7 +30,7 @@ export function $$b0() {
   let r = nt(t);
   let a = d4(e => e.selectedView.view);
   let l = FC();
-  return useMemo(() => "recentsAndSharing" === a ? Qw.loaded(!0) : "folder" === a ? !e || ZZ(e, l) ? Qw.loaded(!1) : r.transform(e => !!e && $$I4(e)) : Qw.loaded(!1), [r, l, e, a]);
+  return useMemo(() => "recentsAndSharing" === a ? resourceUtils.loaded(!0) : "folder" === a ? !e || ZZ(e, l) ? resourceUtils.loaded(!1) : r.transform(e => !!e && $$I4(e)) : resourceUtils.loaded(!1), [r, l, e, a]);
 }
 export function $$T3(e, t, r) {
   e.dispatch(GR());

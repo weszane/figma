@@ -1,5 +1,5 @@
 import { xLh, zuo } from "../figma_app/763686";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 var $$n1;
 (e => {
   function t(e, t, i) {
@@ -64,7 +64,7 @@ var $$n1;
 })($$n1 || ($$n1 = {}));
 let s = 0;
 export function $$o2(e) {
-  UN().getDirectlySelectedNodes().forEach(t => {
+  getSingletonSceneGraph().getDirectlySelectedNodes().forEach(t => {
     s = t.setRelativeTransformWithAnimation({
       m00: 1,
       m01: 0,
@@ -76,7 +76,7 @@ export function $$o2(e) {
   });
 }
 export function $$l0() {
-  UN().getDirectlySelectedNodes().forEach(e => {
+  getSingletonSceneGraph().getDirectlySelectedNodes().forEach(e => {
     let t = {
       ...e.relativeTransform,
       m02: e.relativeTransform.m02 + 100,
@@ -91,7 +91,7 @@ export function $$l0() {
   });
 }
 export function $$d3(e) {
-  UN().getDirectlySelectedNodes().forEach(t => {
+  getSingletonSceneGraph().getDirectlySelectedNodes().forEach(t => {
     s = t.setOpacityWithAnimation(.25, e, "opacity-debug-menu");
   });
 }

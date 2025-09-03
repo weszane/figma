@@ -6,7 +6,7 @@ import { O as _$$O } from "../905/969533";
 import { k as _$$k } from "../905/44647";
 import { Ez5, xae, nQ7, CNR } from "../figma_app/763686";
 import { l7 } from "../905/189185";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { xk } from "@stylexjs/stylex";
 import h from "classnames";
 import { l } from "../6388/697965";
@@ -71,7 +71,7 @@ function Z() {
   let l = n0();
   let r = X();
   let i = GQ(200, 306);
-  let a = d4((e) => t ? xae.LAYERS : e.leftPanel.activeTab);
+  let a = d4(e => t ? xae.LAYERS : e.leftPanel.activeTab);
   let c = _$$g2({
     pagesList: l
   });
@@ -123,7 +123,7 @@ function Z() {
 function ep() {
   let e = ut(Ez5?.singleSlideView().isInFocusedNodeView, !0);
   let t = tS();
-  let l = useCallback((e) => {
+  let l = useCallback(e => {
     "GRID" === e ? (Y5.triggerAction("exit-focus-view"), Cu({
       trackingContext: "grid_view_toggle",
       productType: "slides",
@@ -190,7 +190,7 @@ let eb = "slides_left_panel_island--rightSection--XFjHm";
 function ej() {
   let e = Ye();
   let t = aV();
-  let l = d4((e) => e.mirror.appModel.showUi);
+  let l = d4(e => e.mirror.appModel.showUi);
   return !t && l ? jsxs(_$$_, {
     isCollapsed: e,
     minWidth: 200,
@@ -199,7 +199,7 @@ function ej() {
 }
 function ey() {
   let e = q5();
-  return d4((e) => e.isRenaming) ? jsx("div", {
+  return d4(e => e.isRenaming) ? jsx("div", {
     className: p()(eb, "slides_left_panel_island--renaming--PguET"),
     children: jsx("div", {
       className: ev,
@@ -228,7 +228,7 @@ function eE({
   ref: e
 }) {
   useEffect(() => {
-    let t = (t) => {
+    let t = t => {
       let l = !!e.current && t.target instanceof Node && e.current.contains(t.target);
       Ez5?.singleSlideView().isCarouselFocused.set(l);
     };
@@ -298,7 +298,7 @@ export let $$eI2 = memo(function () {
       }), S && jsx(Z, {}), m && jsx(wV, {
         size: k - B - a,
         side: "bottom",
-        onResize: (e) => {
+        onResize: e => {
           c(qE(k - B - e, 40, k - B));
         },
         disableResizing: !y,
@@ -310,7 +310,7 @@ export let $$eI2 = memo(function () {
         })
       }), b && jsx($$eN1, {
         isLayersPanelExpanded: u,
-        onToggleExpanded: () => h((e) => !e),
+        onToggleExpanded: () => h(e => !e),
         constrainedSidebarWidth: i,
         guid: C
       })]
@@ -353,7 +353,7 @@ export function $$eT3() {
       }), p && jsx(wV, {
         size: i - a - (b ? g : 0),
         side: "bottom",
-        onResize: (e) => {
+        onResize: e => {
           m(qE(i - a - e, 40, i - a));
         },
         disableResizing: !1,
@@ -436,7 +436,7 @@ function eR({
   let l = p8("isReadOnly");
   let r = p8("currentPage");
   let [i, a] = useState(null);
-  let d = d4((e) => e.versionHistory);
+  let d = d4(e => e.versionHistory);
   let u = Fk((e, t) => {
     let l = e.get(t);
     return l ? {
@@ -444,7 +444,7 @@ function eR({
       children: l.uiOrderedChildren
     } : null;
   }, t);
-  let x = useCallback((e) => {
+  let x = useCallback(e => {
     l || (a(e), hq(e));
   }, [l]);
   useEffect(() => {
@@ -478,7 +478,7 @@ export function $$eA0({
   let t = Ye();
   let l = aV();
   let r = ut(Ez5?.interopToolMode(), nQ7.SELF);
-  let i = d4((e) => e.mirror.appModel.showUi);
+  let i = d4(e => e.mirror.appModel.showUi);
   let [a, c] = useState(230);
   return t && !l && r === nQ7.DESIGN && i ? jsx(_$$P, {
     onSizeChange: c,
@@ -515,20 +515,20 @@ function eB({
   let l = p8("isReadOnly");
   let r = p8("currentPage");
   let [i, a] = useState(null);
-  let x = d4((e) => e.versionHistory);
+  let x = d4(e => e.versionHistory);
   let h = ut(Ez5?.canvasGrid().canvasGridArray, [[]]);
   let p = rY(h);
   let g = Fk((e, t) => {
     let l = e.get(t);
-    return l?.childrenGuids.filter((t) => e.get(t)?.type !== "SLIDE_GRID") ?? [];
+    return l?.childrenGuids.filter(t => e.get(t)?.type !== "SLIDE_GRID") ?? [];
   }, r);
   let m = useMemo(() => ({
     guid: r,
     children: [...p, ...g]
   }), [r, p, g]);
-  let v = useCallback((e) => {
+  let v = useCallback(e => {
     if (l) return;
-    let t = UN().get(e);
+    let t = getSingletonSceneGraph().get(e);
     t && "SLIDE" !== t.type && (a(e), hq(e));
   }, [l]);
   useEffect(() => {

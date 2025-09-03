@@ -1,7 +1,7 @@
 import { ServiceCategories as _$$e } from "../905/165054";
 import { _YF, glU, kul, dPJ, lyf } from "../figma_app/763686";
 import { l7 } from "../905/189185";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { zl } from "../figma_app/27355";
 import { parseAndNormalizeQuery } from "../905/634134";
 import { $D } from "../905/11";
@@ -139,7 +139,7 @@ let $$H = nF((e, t, {
       await Y5.onReady();
       await oJ(kul.JOINED);
       await IL($, dPJ.PAGE_INITIAL_LOAD);
-      UN().setCurrentPageFromNodeAsync($);
+      getSingletonSceneGraph().setCurrentPageFromNodeAsync($);
       let e = $ ? f.mirror.sceneGraph.get($) : null;
       e && q(e);
     })(), F) {

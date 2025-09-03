@@ -3,7 +3,7 @@ import { d4, wA } from "../vendor/514228";
 import { o5, IA } from "../905/859698";
 import { glU, Vzr, BXd, ZiZ } from "../figma_app/763686";
 import { v as _$$v } from "../905/439972";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { q } from "../905/196201";
 import { useHandleInputEvent } from "../figma_app/878298";
 import { Ok, ux, NY, uW, xj } from "../figma_app/851625";
@@ -102,8 +102,8 @@ export function $$F1(e) {
     let n = u[Av(i)];
     t.push(n);
     "INSTANCE_PANEL" === e.source && n.instanceIdsToUpdate.sort((t, i) => {
-      let n = e.instanceAndSublayerGUIDs.indexOf(UN().guidFromDeveloperFriendlyId(t));
-      let r = e.instanceAndSublayerGUIDs.indexOf(UN().guidFromDeveloperFriendlyId(i));
+      let n = e.instanceAndSublayerGUIDs.indexOf(getSingletonSceneGraph().guidFromDeveloperFriendlyId(t));
+      let r = e.instanceAndSublayerGUIDs.indexOf(getSingletonSceneGraph().guidFromDeveloperFriendlyId(i));
       return n === r ? 0 : -1 === n ? 1 : -1 === r ? -1 : n - r;
     });
     return Object.entries(u).reduce((e, [t, n]) => (t === Av(i) || e.push(n), e), t);
@@ -121,17 +121,17 @@ export function $$F1(e) {
   let w = useMemo(() => D(outerArrayIndex, innerArrayIndex - 1, p), [p, outerArrayIndex, innerArrayIndex]);
   let C = useCallback(() => {
     v && t(QZ({
-      nodeId: UN().guidFromDeveloperFriendlyId(v.instanceId),
+      nodeId: getSingletonSceneGraph().guidFromDeveloperFriendlyId(v.instanceId),
       alwaysPan: !1,
       minSizePx: 32,
       noPanViewportMultiplier: 1,
       panJustEnoughViewportMultiplier: 1.5
     }))?.then(() => {
-      glU.selectInstances(UN().guidFromDeveloperFriendlyId(v.instanceId), !1);
+      glU.selectInstances(getSingletonSceneGraph().guidFromDeveloperFriendlyId(v.instanceId), !1);
     });
   }, [v, t]);
   let k = d4(e => {
-    let t = UN().guidFromDeveloperFriendlyId(v?.instanceId ?? _$$v.INVALID);
+    let t = getSingletonSceneGraph().guidFromDeveloperFriendlyId(v?.instanceId ?? _$$v.INVALID);
     return f5(e, t);
   });
   let N = p[outerArrayIndex]?.updateAsset ?? null;

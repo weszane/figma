@@ -1,11 +1,11 @@
 import { useMemo } from "react";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { Tv } from "../figma_app/311375";
 export function $$s0(e = !0) {
   let t = Tv();
   return useMemo(() => {
     if (!t?.length) return [];
-    let i = UN();
+    let i = getSingletonSceneGraph();
     return t?.reduce((t, n) => {
       let r = i.get(n);
       r && $$$$o1(r, e) && t.push(r);

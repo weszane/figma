@@ -1,5 +1,5 @@
 import { juq, glU } from "../figma_app/763686";
-import { qo } from "../905/700578";
+import { ReduxSceneGraph } from "../905/700578";
 import { g } from "../905/566160";
 let s = class e extends Error {
   constructor() {
@@ -10,7 +10,7 @@ let s = class e extends Error {
 s.label = "InvalidSessionError";
 s.message = "Auto-suggest session is not available";
 export let $$o1 = s;
-class l extends (qo ?? class {}) {
+class l extends (ReduxSceneGraph ?? class {}) {
   constructor(e, t) {
     super(juq.AUTO_SUGGEST);
     this.sceneGUID = e;

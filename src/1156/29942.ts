@@ -177,7 +177,7 @@ import { a as _$$a2 } from "../905/964520";
 import { lQ } from "../905/934246";
 import { V as _$$V2, ct, Re, pr, M_, a_ } from "../1156/90859";
 import { D as _$$D2 } from "../1156/189378";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { ci, zM } from "../figma_app/259678";
 import { S1, pF } from "../1156/867089";
 import { p as _$$p3 } from "../1156/298326";
@@ -4942,7 +4942,7 @@ export function $$iC0({
     if (!V && !eE && (e || n)) try {
       clearChatError();
       let i = function (e, t, n) {
-        let r = UN();
+        let r = getSingletonSceneGraph();
         let i = [];
         let s = e.filter(e => "success" === e.status && "FIGMA_NODE" === e.type).map(e => {
           let i = e.codeFiles.map(e => {

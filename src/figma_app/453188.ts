@@ -6,7 +6,7 @@ import { X$ } from "../905/612685";
 import { Ib } from "../905/129884";
 import { e as _$$e } from "../905/579635";
 import { eH } from "../figma_app/318590";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { uQ } from "../figma_app/311375";
 import { u as _$$u } from "../figma_app/398802";
 import { Ad } from "../figma_app/811257";
@@ -17,7 +17,7 @@ export function $$m0({
   let r = function () {
     let e = uQ();
     if (!e) return null;
-    let t = UN().get(e);
+    let t = getSingletonSceneGraph().get(e);
     if (!t) return null;
     let r = t.hubFileAttribution;
     return r?.hubFileId && r?.hubFileName ? r : null;

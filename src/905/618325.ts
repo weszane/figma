@@ -1,4 +1,4 @@
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { xi } from "../905/714362";
 export class $$a0 {
   constructor() {
@@ -65,7 +65,7 @@ export class $$a0 {
     return p;
   }
   getCharacterOffsetInCurrentCodeFile(e, t, i) {
-    let r = UN();
+    let r = getSingletonSceneGraph();
     let a = r.get(t)?.collaborativeSourceCode;
     return a && a.adjustWidecharPositionFromPreviousVersion(i, e) || null;
   }

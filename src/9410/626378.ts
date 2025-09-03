@@ -2,7 +2,7 @@ import { jsx } from "react/jsx-runtime";
 import { useMemo, useCallback } from "react";
 import { Ez5, CNR } from "../figma_app/763686";
 import { AD } from "../905/871411";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { eU } from "../figma_app/27355";
 import { parsePxNumber } from "../figma_app/783094";
 import { po } from "../9410/486658";
@@ -31,10 +31,10 @@ export function $$E0({
   } = iT();
   let E = qw();
   E = isPropertiesPanelCollapsed ? 0 : E;
-  let T = useCallback((e) => {
+  let T = useCallback(e => {
     let t = e.comments[0]?.client_meta?.node_id;
     if (!t) return AD;
-    let i = UN().get(t);
+    let i = getSingletonSceneGraph().get(t);
     return i ? i.containingSlideId : AD;
   }, []);
   let w = _$$R();
@@ -45,7 +45,7 @@ export function $$E0({
   }, [t]);
   let j = useMemo(() => [qN.CREATION_DATE, qN.UNREAD, qN.SLIDE], []);
   let I = po();
-  let k = useCallback((e) => {
+  let k = useCallback(e => {
     let t = T(e);
     let i = d.get(t);
     return void 0 !== i && t !== AD ? _$$t("comments.slide_number", {
@@ -53,7 +53,7 @@ export function $$E0({
     }) : e.pageName;
   }, [T, d]);
   let N = useMemo(() => !!t, [t]);
-  let A = useCallback((e) => {
+  let A = useCallback(e => {
     if (!t) return () => {};
     let i = T(e);
     return i !== AD ? () => {

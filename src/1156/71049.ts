@@ -3,14 +3,14 @@ import { kv } from "../figma_app/735943";
 import { mJ, RM } from "../figma_app/304955";
 import { glU, mSn } from "../figma_app/763686";
 import { l7 } from "../905/189185";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { Y5 } from "../figma_app/455680";
 import { O } from "../905/273186";
 export function $$x0(e, t, n, r) {
   return l7.ai("code-chat", () => {
     let l = mJ(t, n);
-    let c = UN();
+    let c = getSingletonSceneGraph();
     let d = e[l];
     let x = !1;
     if (!kv(d)) {
@@ -37,7 +37,7 @@ export function $$m3(e) {
   });
 }
 export function $$h2(e, t) {
-  let n = UN();
+  let n = getSingletonSceneGraph();
   if (e.isLayerLikeCodeNode) {
     let e = mSn?.getPrimaryCodeInstanceFromLayerLikeCodeFile(n.scene, t);
     if (e) {

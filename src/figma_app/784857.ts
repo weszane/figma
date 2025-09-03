@@ -1,6 +1,6 @@
 import { AlE, glU, eLE, Ez5, Egt } from "../figma_app/763686";
 import { fn, sH } from "../905/871411";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { zl } from "../figma_app/27355";
 import { BT } from "../905/618447";
 import { Y5 } from "../figma_app/455680";
@@ -31,7 +31,7 @@ export function $$c0(e) {
   return e;
 }
 export function $$u1() {
-  let e = UN().getCurrentPage();
+  let e = getSingletonSceneGraph().getCurrentPage();
   return !e || 0 === e.directlySelectedNodes.length || e.directlySelectedNodes.every(e => e.isSlide);
 }
 export function $$p3(e) {

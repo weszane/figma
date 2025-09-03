@@ -1,4 +1,4 @@
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { glU } from "../figma_app/763686";
 import { l7 } from "../905/189185";
 function s(e) {
@@ -18,7 +18,7 @@ let $$d0 = "Attributions.md";
 let $$c2 = `/${$$d0}`;
 export function $$u1(e, t, r, s) {
   return l7.ai("code-chat", () => {
-    let a = UN();
+    let a = getSingletonSceneGraph();
     let o = e[t];
     let d = !1;
     if (!$$l4(o)) {

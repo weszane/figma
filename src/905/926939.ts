@@ -1,4 +1,4 @@
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { Sn, K } from "../905/327738";
 let $$a1 = "Icons";
 let s = [$$a1];
@@ -19,7 +19,7 @@ export function $$p5(e) {
   return null;
 }
 export function $$m8(e) {
-  let t = UN().get(e);
+  let t = getSingletonSceneGraph().get(e);
   if (!t) return "";
   let i = [];
   let r = t.parentNode;

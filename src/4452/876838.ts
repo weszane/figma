@@ -3,7 +3,7 @@ import { wA } from "../vendor/514228";
 import { K } from "../905/807535";
 import { getFeatureFlags } from "../905/601108";
 import { oA } from "../905/663269";
-import { Ek } from "../905/553831";
+import { subscribeAndAwaitData } from "../905/553831";
 import { t as _$$t } from "../905/303541";
 import { F } from "../905/302958";
 import { ps, Xv } from "../figma_app/845611";
@@ -17,7 +17,7 @@ let h = {
 };
 export async function $$x0(e, t) {
   try {
-    let a = await Ek(s7T, {
+    let a = await subscribeAndAwaitData(s7T, {
       requestId: e
     });
     let s = oA(a.accountTypeRequest);

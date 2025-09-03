@@ -173,7 +173,7 @@ import { IM } from '../905/687477';
 import { $ as _$$$3 } from '../905/692618';
 import { E as _$$E3 } from '../905/694285';
 import { e0 as _$$e9, qo } from '../905/696396';
-import { UN } from '../905/700578';
+import { getSingletonSceneGraph } from '../905/700578';
 import { IT as _$$IT, M4 } from '../905/713695';
 import { z5 as _$$z, Nv } from '../905/713722';
 import { XA } from '../905/714160';
@@ -256,7 +256,7 @@ import { h1 } from '../905/986103';
 import { Q as _$$Q } from '../905/986450';
 import { rn as _$$rn2 } from '../905/988099';
 import { F as _$$F3 } from '../905/989956';
-import { Qw as _$$Qw } from '../905/989992';
+import { resourceUtils } from '../905/989992';
 import { H4 } from '../905/992467';
 import { M as _$$M } from '../905/994901';
 import { LineBreakProcessor } from '../905/994917';
@@ -795,7 +795,7 @@ let ew = new class {
     zl.set(YA, !0);
   }
   getTextFields(e) {
-    let t = UN();
+    let t = getSingletonSceneGraph();
     let r = t.get(e);
     if (!r) return [];
     let n = r.containingCooperFrame();
@@ -1660,7 +1660,7 @@ let rW = new class {
     return function (e) {
       let t = [];
       for (let r of e) {
-        let e = UN().get(r);
+        let e = getSingletonSceneGraph().get(r);
         e && t.push(q4(e));
       }
       return rz(t);
@@ -7371,7 +7371,7 @@ function uj() {
     let n = _$$R5({
       preferOpenFilePlan: !0
     });
-    return _$$Qw.useTransform(r, t => {
+    return resourceUtils.useTransform(r, t => {
       let r = t?.canEdit && (n ? t?.currentPlanUser?.seatTypeLicenseTypes?.includes(FProductAccessType.DESIGN) : t?.currentPartialOrgUser?.accountType === FPlanFeatureType.FULL);
       let i = t?.currentPartialOrgUser?.designAccountTypeRequest;
       let a = t?.currentPartialOrgUser?.devModeAccountTypeRequest;
@@ -7772,7 +7772,7 @@ function pN() {
   if (!e) return !1;
   if (t == null) return r !== -1;
   {
-    let e = UN();
+    let e = getSingletonSceneGraph();
     return e.get(t ?? '')?.isSection ?? !1;
   }
 }

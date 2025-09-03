@@ -6,7 +6,7 @@ import { lQ } from "../905/934246";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { biQ } from "../figma_app/763686";
 import { l7 } from "../905/189185";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { eU, zl } from "../figma_app/27355";
 import { debugState } from "../905/407919";
 import { M4 } from "../905/609396";
@@ -27,7 +27,7 @@ import { Jd } from "../figma_app/878113";
 import { A as _$$A } from "../905/929620";
 import { Vm, ks } from "../figma_app/838407";
 import { xS } from "../figma_app/757114";
-var S = ((e) => (e[e.IN_PROGRESS = 0] = "IN_PROGRESS", e[e.CANCELLED = 1] = "CANCELLED", e))(S || {});
+var S = (e => (e[e.IN_PROGRESS = 0] = "IN_PROGRESS", e[e.CANCELLED = 1] = "CANCELLED", e))(S || {});
 let w = eU(new Map());
 let C = eU(null, (e, t, i, n, r) => {
   let a = new Map(e(w));
@@ -81,7 +81,7 @@ async function R(e, t, i, n, a, s, o, d, c, u) {
           commitId,
           status
         } = $7(t, i.result, o);
-        t.textNodes.forEach((e) => {
+        t.textNodes.forEach(e => {
           e.node && e.node.isAlive && c(e.node.guid);
         });
         commitId && (m = commitId);
@@ -127,9 +127,9 @@ async function N(e, t, i, n, a, s, o, d = !1) {
     setLoadingStateMatchingNode,
     clearLoadingStateMatchingNode,
     clearAllLoadingStates
-  } = Xu(t.flatMap((e) => e.textNodes.map((e) => e.node)));
-  t.forEach((e) => {
-    e.textNodes.forEach((e) => {
+  } = Xu(t.flatMap(e => e.textNodes.map(e => e.node)));
+  t.forEach(e => {
+    e.textNodes.forEach(e => {
       setLoadingStateMatchingNode(e.node.guid);
     });
   });
@@ -255,9 +255,9 @@ export let $$B0 = async ({
   let v = zl.get(dd);
   if (numExampleRows < 0) throw new SA("numExampleRows must be zero or higher");
   if ("DUPLICATE_SESSION_TOAST" === source && guids.length <= 1) throw new Aq("No additional duplicate nodes found");
-  let I = (biQ?.getActiveNodeIds() ?? []).map((e) => UN().get(e)).filter((e) => !!e);
+  let I = (biQ?.getActiveNodeIds() ?? []).map(e => getSingletonSceneGraph().get(e)).filter(e => !!e);
   if (biQ?.imageFillAvailable()) {
-    await Promise.all(I.map(async (t) => (Vm(t.guid, jsx(_$$A, {
+    await Promise.all(I.map(async t => (Vm(t.guid, jsx(_$$A, {
       borderRadiusStyle: _$$b(t)
     })), await xS({
       node: t,
@@ -268,7 +268,7 @@ export let $$B0 = async ({
     return {
       iterationParams: {
         ...t,
-        guids: I.map((e) => e.guid)
+        guids: I.map(e => e.guid)
       },
       reset: lQ
     };
@@ -281,7 +281,7 @@ export let $$B0 = async ({
   let {
     clearAllLoadingStates
   } = Xu(autoContentNodes);
-  let T = I.map((e) => e.guid);
+  let T = I.map(e => e.guid);
   let k = 1;
   let R = function (e) {
     let t = {
@@ -293,7 +293,7 @@ export let $$B0 = async ({
     let i = e[0]?.parentNode;
     return i?.size ?? t;
   }(I);
-  let N = zA().map((e) => e?.content);
+  let N = zA().map(e => e?.content);
   let {
     numTextLayers,
     totalNumCharacters
@@ -353,14 +353,14 @@ export let $$B0 = async ({
     reset: () => {
       (function (e) {
         for (let [t, i] of e.entries()) {
-          let e = UN().get(t);
+          let e = getSingletonSceneGraph().get(t);
           if (e) for (let t of Mo(e, "text-data")) t && t.isAlive && t.visible && !t.locked && l7.ai("content_fill", () => {
             biQ?.setTextContentOnTextNode(t.guid, i);
           });
         }
       })(E);
       t.nodesFromMagicHandle && function (e) {
-        let t = UN();
+        let t = getSingletonSceneGraph();
         for (let i of e) {
           let e = t.get(i);
           if (e) for (let t of Mo(e, "text-data")) t && t.isAlive && l7.ai("content_fill", () => {

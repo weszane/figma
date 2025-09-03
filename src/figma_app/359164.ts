@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { Ez5, yTM, WXh } from "../figma_app/763686";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { vx } from "../figma_app/175258";
 import { Y5 } from "../figma_app/455680";
 import { _W, oV, gl } from "../905/216495";
@@ -112,7 +112,7 @@ export function $$S3() {
     let n = new Set(["RECTANGLE", "ROUNDED_RECTANGLE", "SYMBOL", "INSTANCE"]);
     for (let i of t) if (n.has(i.type) || "FRAME" === i.type && !i.resizeToFit || "FRAME" === i.type && r < 2 && e(i.childrenNodes, r + 1)) return !0;
     return !1;
-  }(Object.keys(t).map(UN().get).filter(e => !!e), 0));
+  }(Object.keys(t).map(getSingletonSceneGraph().get).filter(e => !!e), 0));
 }
 export function $$v7(e) {
   let t = e === om.ALL;

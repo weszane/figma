@@ -1,6 +1,6 @@
 import { Ez5, m1T, TsU, KgA, Egt, Z_n, rXF, rcl } from "../figma_app/763686";
 import { l7 } from "../905/189185";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { R } from "../905/103090";
 import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import { wA, d4 } from "../vendor/514228";
@@ -47,7 +47,7 @@ export function $$b0() {
   let C = data?.fieldSchemas ?? [];
   let S = OU(TsU.CMS_CONNECT_MODE);
   !function () {
-    let e = UN();
+    let e = getSingletonSceneGraph();
     let t = wA();
     let n = Ez5.cmsState();
     let l = f();
@@ -390,7 +390,7 @@ export function $$b0() {
   }();
   f4(() => {
     if (!Egt || !t || !i) return;
-    let e = UN();
+    let e = getSingletonSceneGraph();
     let s = oj(e.getDirectlySelectedNodes());
     if (0 !== s.length) switch (x) {
       case KgA.COLLECTION_SELECTED:

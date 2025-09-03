@@ -4,7 +4,7 @@ import { Ac, bc } from "../905/499389";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { X3B } from "../figma_app/763686";
 import { kh } from "../figma_app/387100";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { debugState } from "../905/407919";
 import { $D } from "../905/11";
@@ -50,7 +50,7 @@ export let $$C1 = async ({
     }));
   });
   bA();
-  let i = UN();
+  let i = getSingletonSceneGraph();
   if (!i) throw Error("No scene found");
   let f = i.getCurrentPage();
   if (!f) throw Error("No page found");

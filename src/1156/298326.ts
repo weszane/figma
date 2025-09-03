@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { MoD, FDn, glU, Ez5 } from "../figma_app/763686";
 import { l7, Hq } from "../905/189185";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { zl } from "../figma_app/27355";
 import { az } from "../905/449184";
 import { ZC } from "../figma_app/39751";
@@ -22,7 +22,7 @@ async function f(e, t) {
     let n = zl.get(Ah).find(t => ak(t, e.guid));
     t(t => t.filter(t => !ak(t, e.guid)));
     Hq.system("figmake", () => {
-      let t = UN().get(e.guid);
+      let t = getSingletonSceneGraph().get(e.guid);
       t && t.removeSelfAndChildren();
     });
     let r = n?.designToCodeErrors;

@@ -4,7 +4,7 @@ import { createElement, PureComponent, useCallback, useEffect, useMemo, useRef, 
 import { H as _$$H2 } from 'react-dom';
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
 import { $D, kF, xO } from '../905/11';
-import { Dc as _$$Dc2 } from '../905/2122';
+import { isWidgetRendering } from '../905/2122';
 import { Q7 } from '../905/15667';
 import { iM as _$$iM, DB, h5, jP, JR, Sp, SW, Z4, Zt } from '../905/25189';
 import { FU, v6 } from '../905/26824';
@@ -120,7 +120,7 @@ import { xK } from '../905/543466';
 import { g as _$$g5 } from '../905/544669';
 import { P as _$$P3 } from '../905/545265';
 import { y8 as _$$y6 } from '../905/551193';
-import { Ek } from '../905/553831';
+import { subscribeAndAwaitData } from '../905/553831';
 import { $e } from '../905/554703';
 import { H as _$$H3 } from '../905/561433';
 import { oz as _$$oz } from '../905/561485';
@@ -156,7 +156,7 @@ import { gG } from '../905/684180';
 import { IM } from '../905/687477';
 import { b as _$$b4 } from '../905/690073';
 import { EO, F4 } from '../905/691205';
-import { qo, UN } from '../905/700578';
+import { ReduxSceneGraph, getSingletonSceneGraph } from '../905/700578';
 import { createPluginContext as _$$e8 } from '../905/700654';
 import { X as _$$X } from '../905/701807';
 import { y as _$$y } from '../905/705736';
@@ -864,7 +864,7 @@ class t4 {
   }
   isZombieStyle(e) {
     let t = this.store.getState().library;
-    let i = UN();
+    let i = getSingletonSceneGraph();
     let n = i.get(e);
     if (!n) return !1;
     let r = n.styleId.ref;
@@ -1201,7 +1201,7 @@ let nf = _$$nc.testSetup('sticky-typing-scenario', (e, t, i = {}) => {
     localID: Math.floor(1e3 * e())
   };
   let u = [];
-  let p = UN();
+  let p = getSingletonSceneGraph();
   let m = p.createNode('STICKY');
   let h = i.canvasGuid || nP();
   p.get(m.containingCanvas).setSelectionToSingleNode(m.guid);
@@ -1400,7 +1400,7 @@ _$$nc.testSetup('table-typing-scenario', (e, t, i = {}) => {
   let d = t - o;
   let c = nI(e, nh);
   let u = [];
-  let p = UN();
+  let p = getSingletonSceneGraph();
   let m = i.nodeId;
   let h = p.get(m);
   let g = h.tableNumRows;
@@ -1506,7 +1506,7 @@ function nN() {
   return _$$w.decodeMessage(msz.dumpSelectedNode()).blobs;
 }
 function nP() {
-  let e = UN().getCurrentPage();
+  let e = getSingletonSceneGraph().getCurrentPage();
   return _$$sH(e?.guid) || {
     sessionID: 0,
     localID: 1
@@ -2066,7 +2066,7 @@ function rL() {
   let o = useMemo(() => {
     let e = [];
     for (let t of r) {
-      let i = UN().get(t);
+      let i = getSingletonSceneGraph().get(t);
       i && i.type === 'FRAME' && !i.isStateGroup && e.push(i);
     }
     return e;
@@ -2098,7 +2098,7 @@ function rL() {
             if (e && 'parameters' in e && e.parameters) {
               if (e.parameters.choice.data === 'existing-component') {
                 n(o.map(e => e.guid));
-                let e = UN().getCurrentPage();
+                let e = getSingletonSceneGraph().getCurrentPage();
                 e && (e.directlySelectedNodes = []);
                 t('select-existing-component');
               } else {
@@ -2117,12 +2117,12 @@ function rL() {
         actionLabel: _$$tx('first_draft.link_component.link_button'),
         onPerform: () => {
           if (i.length === 0) return;
-          let e = UN().getCurrentPage();
+          let e = getSingletonSceneGraph().getCurrentPage();
           if (!e) return;
           let t = e.directlySelectedNodes;
           if (t.length === 0) return;
           let n = t[0];
-          let r = i.map(e => UN().get(e));
+          let r = i.map(e => getSingletonSceneGraph().get(e));
           l7.user('link-frames-to-component', () => {
             v$(r, n);
           });
@@ -2697,7 +2697,7 @@ async function aI({
 }
 async function aE(e, t, i) {
   let n = Ez5?.canvasGrid().canvasGridArray.getCopy() ?? [];
-  let r = UN();
+  let r = getSingletonSceneGraph();
   let a = AlE?.getMutableActiveDocument();
   if (!a) {
     console.error('pptx-export', 'No active document');
@@ -3511,7 +3511,7 @@ async function sq(e, t, i) {
     timeoutOverride: 1 / 0
   }));
   try {
-    let o = UN().getCurrentPage();
+    let o = getSingletonSceneGraph().getCurrentPage();
     let l = o?.directlySelectedNodes;
     if (!l) {
       i(_$$F.enqueue({
@@ -3544,7 +3544,7 @@ async function sq(e, t, i) {
     let g = d.parentNode;
     if (!g) return;
     let f = g.stackMode !== 'NONE';
-    let _ = UN();
+    let _ = getSingletonSceneGraph();
     l7.user('smart-paste', () => {
       function o(e, t) {
         let i = function (e, t) {
@@ -5119,7 +5119,7 @@ class lV {
     return i === lT.REQUIRES_PAYMENT || !i;
   }
   isRenderingWidget(e) {
-    return _$$Dc2(e);
+    return isWidgetRendering(e);
   }
 }
 async function lG(e) {
@@ -5647,7 +5647,7 @@ let lX = class e extends sP(sN(sR)) {
     }));
   }
   getPageThumbnailMenuItemName() {
-    let e = UN().getCurrentPage();
+    let e = getSingletonSceneGraph().getCurrentPage();
     let t = e?.thumbnailInfo;
     let i = this._state.mirror.sceneGraph.getDirectlySelectedNodes()[0];
     return t?.nodeID === i?.guid || i == null ? 'reset-page-thumbnail' : 'set-page-thumbnail';
@@ -5658,7 +5658,7 @@ let lX = class e extends sP(sN(sR)) {
   handlePageThumbnailMenuItem() {
     let e = this._state.mirror.sceneGraph.getDirectlySelectedNodes()[0];
     if (!e) return;
-    let t = UN().getCurrentPage();
+    let t = getSingletonSceneGraph().getCurrentPage();
     let i = t?.thumbnailInfo;
     i?.nodeID === e?.guid ? t?.clearThumbnailInfo() : t?.setThumbnailInfo({
       nodeID: e?.guid,
@@ -6303,7 +6303,7 @@ let lX = class e extends sP(sN(sR)) {
   }
   showAiContentFillSuggestedVisualBell(e, t) {
     if (this._state.user == null || this._state.openFile == null || (this.dismissEphemeralVisualBells(), !this._state.openFile.canEdit)) return;
-    let i = UN();
+    let i = getSingletonSceneGraph();
     let n = i.getCurrentPage();
     let r = (n?.directlySelectedNodes || []).map(e => e.guid);
     e.length > 0 && (r = e);
@@ -6348,10 +6348,10 @@ let lX = class e extends sP(sN(sR)) {
   }
   showMagicLinkSuggestedVisualBell(e) {
     if (this._state.user == null || this._state.openFile == null) return;
-    let t = UN().getCurrentPage();
+    let t = getSingletonSceneGraph().getCurrentPage();
     if (!t) return;
     this.dismissEphemeralVisualBells();
-    let i = UN();
+    let i = getSingletonSceneGraph();
     if ((Ez5?.propertiesPanelState()?.propertiesPanelTab?.getCopy() ?? FAf.DESIGN) !== FAf.PROTOTYPE || zl.get(_$$xP) && zl.get(d_)) return;
     let n = t?.directlySelectedNodes || [];
     let r = n.map(e => e.guid);
@@ -6929,7 +6929,7 @@ let lX = class e extends sP(sN(sR)) {
           _$$u(() => e(t));
         }, window.DebuggingHelpers.fakeNodeError = () => {
           _$$u(() => t());
-        }, window.TSSceneGraph = qo, window.getActiveTSSceneGraph = UN, window.DesignSystemsHelpers = s_);
+        }, window.TSSceneGraph = ReduxSceneGraph, window.getActiveTSSceneGraph = getSingletonSceneGraph, window.DesignSystemsHelpers = s_);
         delete window.DebuggingHelpers.reportError;
         delete window.DebuggingHelpers.simulateNullNodeAccess;
       })();
@@ -7917,7 +7917,7 @@ let lX = class e extends sP(sN(sR)) {
     return f8();
   }
   getDefaultStateKeyForStateGroup(e) {
-    let t = UN().get(e);
+    let t = getSingletonSceneGraph().get(e);
     if (!t) return '';
     let i = t.assetKeyForPublish;
     if (!i) return '';
@@ -8005,7 +8005,7 @@ let lX = class e extends sP(sN(sR)) {
     });
   }
   inspectFragment() {
-    let e = UN().getCurrentPage()?.directlySelectedNodes;
+    let e = getSingletonSceneGraph().getCurrentPage()?.directlySelectedNodes;
     let t = debugState.getState().openFile?.key;
     if (!e || e.length !== 1 || !t) return;
     let i = e[0];
@@ -8048,7 +8048,7 @@ let lX = class e extends sP(sN(sR)) {
     }));
   }
   async requestOpenExternalSourceFileLibraryKey(e, t, i, n) {
-    let r = await Ek(iAs, {
+    let r = await subscribeAndAwaitData(iAs, {
       libraryKey: _$$l(e)
     });
     let a = _$$c2({
@@ -8167,7 +8167,7 @@ let lX = class e extends sP(sN(sR)) {
     }));
   }
   createSlideAfterFocusedSlide(e) {
-    let t = UN();
+    let t = getSingletonSceneGraph();
     return _$$oY(t, e);
   }
   isAiDisabled() {
@@ -8289,7 +8289,7 @@ let lX = class e extends sP(sN(sR)) {
         files: []
       });
     }
-    let a = UN();
+    let a = getSingletonSceneGraph();
     let s = a.get(e);
     let o = [];
     let l = null;

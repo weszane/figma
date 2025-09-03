@@ -4,7 +4,7 @@ import { __ } from "../figma_app/257655";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { B } from "../905/94678";
 import { CWU } from "../figma_app/763686";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { gZ, oy } from "../figma_app/964367";
 import { $D } from "../905/11";
@@ -13,7 +13,7 @@ import { VN, vh, i2 } from "../905/296461";
 import { gZ as _$$gZ, Py, RI } from "../figma_app/50224";
 import { C, n6 } from "../figma_app/193952";
 let f = e => {
-  let t = UN().get(e);
+  let t = getSingletonSceneGraph().get(e);
   return !!t && (t.isStateGroup ? t.childrenNodes.every(e => e.isIconLikeContainer) : t.isIconLikeContainer);
 };
 export async function $$E6(e) {
@@ -123,7 +123,7 @@ export async function $$A3(e) {
   });
 }
 export async function $$x5(e) {
-  let t = UN().get(e);
+  let t = getSingletonSceneGraph().get(e);
   if (!t || "FRAME" !== t.type) return null;
   let r = await $$A3(t);
   return r ? {
@@ -172,7 +172,7 @@ export async function $$C2(e, t) {
       return t.includes("mobile") || t.includes("app") ? "mobile" : t.includes("site") ? "website" : "vstack-only";
     }(e);
     if ("vstack-only" === s) return null;
-    let o = UN().get(t);
+    let o = getSingletonSceneGraph().get(t);
     if (!o || "FRAME" !== o.type) return null;
     for (let e of function e(t) {
       if (t.isPrimaryInstance) return [t];

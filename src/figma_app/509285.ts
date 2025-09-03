@@ -1,6 +1,6 @@
 import { d4 } from "../vendor/514228";
 import { AD } from "../905/871411";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { R } from "../905/103090";
 import { vx } from "../figma_app/175258";
 import { hS } from "../905/216495";
@@ -35,7 +35,7 @@ export function $$f2() {
   return e && e !== AD ? e : t.length > 0 ? t[0] : AD;
 }
 export function $$E3(e, t, r) {
-  let n = UN().get(e);
+  let n = getSingletonSceneGraph().get(e);
   if (!n || !n.isSlide) return !1;
   let i = n.absoluteTransform.m12;
   let s = i + n.size.y;
@@ -47,7 +47,7 @@ export function $$E3(e, t, r) {
   return u && p;
 }
 export function $$y5(e) {
-  let t = UN().get(e);
+  let t = getSingletonSceneGraph().get(e);
   return !!t && "SLIDE" === t.type && function e(t) {
     if (!t || "INTERACTIVE_SLIDE_ELEMENT" === t.type) return !1;
     if (t.hasEnabledAnimatedPaint || t.hasEnabledVideoPaint || t.hasEnabledStaticImagePaint) return !0;

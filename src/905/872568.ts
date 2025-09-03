@@ -1,4 +1,4 @@
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { A } from "../905/970762";
 import { Ye } from "../905/75000";
 import { j3, hM } from "../905/581923";
@@ -20,7 +20,7 @@ export function $$c0(e, t, i, n = {}) {
 }
 export const R = $$c0;
 export const Y = function e(t, i) {
-  let r = UN();
+  let r = getSingletonSceneGraph();
   if ("INSTANCE" !== t.type || !t.symbolId) throw Error(`Expected INSTANCE, got ${t.type} for node ${t.guid}`);
   let c = Ye(t.symbolId, {
     enableTsArrays: i.enableTsArrays,

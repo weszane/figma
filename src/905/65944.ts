@@ -128,7 +128,7 @@ import { W as _$$W } from "../905/592530";
 import { l as _$$l2 } from "../905/556594";
 import { b as _$$b2 } from "../905/946806";
 import { dI as _$$dI, fn } from "../905/871411";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { useSprigWithSampling } from "../905/99656";
 import { EV } from "../figma_app/975811";
 import { wr, Dh } from "../figma_app/741237";
@@ -516,7 +516,7 @@ function eJ({
     variable: e,
     variableCollection: t
   });
-  !function({
+  !function ({
     itemId: e,
     isLoading: t
   }) {
@@ -645,7 +645,7 @@ function e7({
     } else Eo.getCanvas(t).then(t => {
       let i = Pdb.getColorForSharedFillStyle(t);
       i && e(i);
-    }).catch(() => {}) ;
+    }).catch(() => {});
   }, [e, o]);
   let g = useCallback(t => {
     null != t.color && null != t.opacity && e({
@@ -683,7 +683,7 @@ function e8({
   let a = PC(e);
   let s = useContext(eK);
   let o = "loading" === a.status || s.isLoading;
-  let l = function() {
+  let l = function () {
     switch (e) {
       case EU:
         return i;
@@ -749,7 +749,7 @@ function e9({
           onPaintChitClick: d,
           onStyleChitClick: c
         })
-      }, r ? function(e, t) {
+      }, r ? function (e, t) {
         switch (e.type) {
           case "paint":
             return `${t}`;
@@ -817,7 +817,7 @@ function ty(e) {
     }, i))
   });
 }
-let tk = memo(function({
+let tk = memo(function ({
   onColorPickerToggle: e,
   onDeleteStop: t,
   onSelectedStopIndexChange: i,
@@ -1293,7 +1293,7 @@ function tz(e) {
             children: _$$tx("properties_panel.noise.noise_type")
           }),
           value: e.paint.noiseType,
-          onChange: function(t) {
+          onChange: function (t) {
             e.onChange({
               ...e.paint,
               noiseType: t
@@ -1365,7 +1365,7 @@ function tz(e) {
           "data-tooltip": _$$t2("properties_panel.noise.opacity"),
           "data-tooltip-type": Ib.TEXT,
           dispatch: e.dispatch,
-          onValueChange: function(t) {
+          onValueChange: function (t) {
             e.onChange({
               ...e.paint,
               opacity: t
@@ -1381,7 +1381,7 @@ function tz(e) {
           "data-tooltip": _$$t2("properties_panel.noise.noise_size"),
           "data-tooltip-type": Ib.TEXT,
           dispatch: e.dispatch,
-          onValueChange: function(t) {
+          onValueChange: function (t) {
             e.onChange({
               ...e.paint,
               noiseSize: {
@@ -1402,7 +1402,7 @@ function tz(e) {
           "data-tooltip": _$$t2("properties_panel.noise.density"),
           "data-tooltip-type": Ib.TEXT,
           dispatch: e.dispatch,
-          onValueChange: function(t) {
+          onValueChange: function (t) {
             e.onChange({
               ...e.paint,
               density: t
@@ -1429,7 +1429,7 @@ function tz(e) {
     })]
   });
 }
-let tY = memo(function(e) {
+let tY = memo(function (e) {
   return jsx("svg", {
     width: "24",
     height: "24",
@@ -1444,7 +1444,7 @@ let tY = memo(function(e) {
     })
   });
 });
-let tq = memo(function(e) {
+let tq = memo(function (e) {
   return jsx("svg", {
     width: "24",
     height: "24",
@@ -1459,7 +1459,7 @@ let tq = memo(function(e) {
     })
   });
 });
-let t$ = memo(function(e) {
+let t$ = memo(function (e) {
   return jsx("svg", {
     width: "24",
     height: "24",
@@ -1507,7 +1507,7 @@ function t9(e) {
     u && aT(u) ? A(!0) : A(!1);
   }, [u]);
   let y = useCallback(async () => {
-    u && (wr(), await UN().setCurrentPageFromNodeAsync(u.guid), Dh([u.guid]), Y5.triggerActionInUserEditScope("zoom-to-selection", void 0), s === NLJ.PATTERN_SOURCE_SELECTOR && Y5.triggerAction("set-tool-default", null));
+    u && (wr(), await getSingletonSceneGraph().setCurrentPageFromNodeAsync(u.guid), Dh([u.guid]), Y5.triggerActionInUserEditScope("zoom-to-selection", void 0), s === NLJ.PATTERN_SOURCE_SELECTOR && Y5.triggerAction("set-tool-default", null));
   }, [u, s]);
   return jsxs(Id, {
     children: [jsxs("div", {
@@ -1565,7 +1565,7 @@ function t9(e) {
           children: _$$tx("properties_panel.pattern.tile_type")
         }),
         value: "RECTANGULAR" === e.paint.patternTileType ? "RECTANGULAR" : "HEXAGONAL",
-        onChange: function(t) {
+        onChange: function (t) {
           e.onChange({
             ...e.paint,
             patternTileType: "RECTANGULAR" === t ? "RECTANGULAR" : "HORIZONTAL_HEXAGONAL"
@@ -1588,7 +1588,7 @@ function t9(e) {
           children: _$$tx("properties_panel.pattern.tile_type")
         }),
         value: "VERTICAL_HEXAGONAL" === e.paint.patternTileType ? "VERTICAL" : "HORIZONTAL",
-        onChange: function(t) {
+        onChange: function (t) {
           e.onChange({
             ...e.paint,
             patternTileType: "VERTICAL" === t ? "VERTICAL_HEXAGONAL" : "HORIZONTAL_HEXAGONAL"
@@ -1614,7 +1614,7 @@ function t9(e) {
         inputClassName: WC,
         max: 20,
         min: .01,
-        onValueChange: function(t) {
+        onValueChange: function (t) {
           e.onChange({
             ...e.paint,
             scale: t
@@ -1638,7 +1638,7 @@ function t9(e) {
         inputClassName: WC,
         max: 20,
         min: -.5,
-        onValueChange: function(t) {
+        onValueChange: function (t) {
           e.onChange({
             ...e.paint,
             patternSpacing: {
@@ -1667,7 +1667,7 @@ function t9(e) {
         inputClassName: WC,
         max: 20,
         min: -.5,
-        onBlur: function(t) {
+        onBlur: function (t) {
           "" === t.target.value && (a(!0), e.onChange({
             ...e.paint,
             patternSpacing: {
@@ -1677,7 +1677,7 @@ function t9(e) {
             spacing: 0
           }));
         },
-        onValueChange: function(t) {
+        onValueChange: function (t) {
           a(!1);
           e.onChange({
             ...e.paint,
@@ -1701,7 +1701,7 @@ function t9(e) {
       label: _$$tx("properties_panel.pattern.alignment"),
       input: jsx(_$$V, {
         anchorPoint: JX(e.paint),
-        onAnchorPointChange: function(t) {
+        onAnchorPointChange: function (t) {
           e.onChange({
             ...e.paint,
             ...OO(t)
@@ -1766,7 +1766,7 @@ function it({
     })]
   });
 }
-export let $$ii1 = forwardRef(function({
+export let $$ii1 = forwardRef(function ({
   paint: e,
   paintId: t,
   selectedStyle: i,
@@ -2115,7 +2115,7 @@ function ia({
       id: eo,
       recordingKey: d,
       onColorChange: f
-    }), X && function(e) {
+    }), X && function (e) {
       let t = iC(e, s);
       return jsxs(Fragment, {
         children: [jsx(vL, {
@@ -2275,7 +2275,7 @@ export function $$io0({
       children: jsxs(vo, {
         allowOverflow: !0,
         children: [jsx(it, {
-          rightButtons: function() {
+          rightButtons: function () {
             if (b) return jsx(_$$K, {
               "aria-label": _$$t2("variables.binding_ui.create_variable_button_tooltip"),
               recordingKey: Pt(h, "createVariable"),
@@ -2328,7 +2328,7 @@ export function $$io0({
       initialWidth: _$$i,
       resolvedType: rXF.COLOR,
       onCreateVariable: f,
-      onClose: function() {
+      onClose: function () {
         V(!1);
       }
     }) : null)]
@@ -2344,4 +2344,4 @@ function il({
   return (r = e || (t ? "library" : i ? "cms" : "custom_color"), n && !n.includes(r)) ? n[0] : r;
 }
 export const h = $$io0;
-export const q = $$ii1; 
+export const q = $$ii1;

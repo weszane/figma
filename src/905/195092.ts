@@ -1,13 +1,13 @@
 import _require from "../5973/625973";
 import { COMPONENT_PREFIX } from "../figma_app/664063";
 import { AD } from "../905/871411";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { az } from "../905/449184";
 import { Ay } from "../figma_app/432652";
 import { Ay as _$$Ay } from "../figma_app/948389";
 var n;
 async function o(e, t = 1) {
-  let n = UN();
+  let n = getSingletonSceneGraph();
   let r = e.findContainingTopLevelNodeWithWidthConstraint(2e3);
   r === AD && (r = e.findContainingTopLevelFrameOrSelf());
   let c = e && n.get(r);
@@ -79,7 +79,7 @@ let m = ["## CONTEXT", "## TASK", "## OUTPUT", "## GUIDELINES", "{CURSOR}"];
 let h = ["seasoned UX writer", "assisting a UX designer", "JSX representation", "suggest copy", "single suggestion", "multiple suggestions", "target node", "contextual clues", "final design iteration", "generate text", "visual hierarchy", "textual consistency", "completing their unfinished designs"];
 export async function $$g0(e, t, i, r) {
   var a;
-  let l = UN().get(e);
+  let l = getSingletonSceneGraph().get(e);
   if (!l) return;
   let d = Date.now();
   let u = await o(l, i);

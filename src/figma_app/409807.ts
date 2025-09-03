@@ -11,7 +11,7 @@ import { z as _$$z2 } from "../905/335547";
 import { Qa7, mKm, _0v, QeU, Egt } from "../figma_app/763686";
 import { l7 } from "../905/189185";
 import { M as _$$M2 } from "../905/512402";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { M2, eU, fp, Xr } from "../figma_app/27355";
 import { zN } from "../905/19536";
@@ -307,7 +307,7 @@ export function $$ec25(e, t, r, n) {
   return _$$o(a.x, i.x, .1) && _$$o(a.y, i.y, .1) ? t : r;
 }
 function eu(e, t, r) {
-  UN().getDirectlySelectedNodes().forEach(n => {
+  getSingletonSceneGraph().getDirectlySelectedNodes().forEach(n => {
     let i = $$ec25(n, e, t, r);
     i !== ("width" === r ? n.size.x : n.size.y) && l7.system("dimension-change-during-min-max-scrub", () => Egt.setNodeTransformProperties(n.guid, {
       [r]: i,

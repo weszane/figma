@@ -1,5 +1,5 @@
 import { AD } from "../905/871411";
-import { UN } from "../905/700578";
+import { getSingletonSceneGraph } from "../905/700578";
 import { zl } from "../figma_app/27355";
 import { ed } from "../figma_app/164260";
 export function $$o2(e) {
@@ -9,14 +9,14 @@ export function $$o2(e) {
 export function $$l4(e) {
   var t;
   t = e;
-  let r = $$u0(UN().getCurrentPage()?.directlySelectedNodes, t);
+  let r = $$u0(getSingletonSceneGraph().getCurrentPage()?.directlySelectedNodes, t);
   return 1 === r.length ? r[0] : void 0;
 }
 export function $$d5(e, t) {
   return $$u0(e, t).map(c);
 }
 function c(e) {
-  let t = UN().getCurrentPage();
+  let t = getSingletonSceneGraph().getCurrentPage();
   let r = t?.getSelectedTextRange();
   let n = {
     node: e,
@@ -49,7 +49,7 @@ export function $$u0(e, t) {
 export function $$p1(e) {
   let t = zl.get(ed);
   if (!t || t === AD) return [];
-  let r = UN().get(t);
+  let r = getSingletonSceneGraph().get(t);
   return r ? $$u0(r, e) : [];
 }
 export function $$_3() {

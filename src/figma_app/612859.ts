@@ -3,7 +3,7 @@ import { sD } from "../figma_app/243058";
 import { juq, Z_n, XJn, mSn, PWo, Vzr, oVz } from "../figma_app/763686";
 import { l7 } from "../905/189185";
 import { uW } from "../905/426868";
-import { qo, UN } from "../905/700578";
+import { ReduxSceneGraph, getSingletonSceneGraph } from "../905/700578";
 import { az } from "../905/449184";
 import { $D } from "../905/11";
 import { Point } from "../905/736624";
@@ -51,7 +51,7 @@ function S(e, t, r, n, i) {
   return null;
 }
 async function v(e, t, r, n) {
-  let i = new qo(juq.FIRST_DRAFT);
+  let i = new ReduxSceneGraph(juq.FIRST_DRAFT);
   let s = i.createNode("FRAME");
   if (s.resizeWithoutConstraints(56, 56), r.bgColor) {
     let i = S(r.bgColor, e, t, Z_n.COLOR, n);
@@ -141,11 +141,11 @@ function A() {
   }
 }
 export async function $$x5(e, t, r, s, o = $$y4) {
-  let d = UN().get(t);
+  let d = getSingletonSceneGraph().get(t);
   if (!d) return [];
   XJn.clearFDScene();
   let p = XJn.updateFDSceneFromNode(t, o);
-  let h = new qo(juq.FIRST_DRAFT);
+  let h = new ReduxSceneGraph(juq.FIRST_DRAFT);
   let m = p.map(e => h.get(e));
   if (m.some(e => !e)) {
     $D(_$$e.AI_GENERATION, Error("Copied node not found"));
@@ -155,7 +155,7 @@ export async function $$x5(e, t, r, s, o = $$y4) {
   let S = A();
   if (!S || 0 === S.modes.length) return [];
   let N = function (e, t) {
-    let r = new qo(juq.FIRST_DRAFT);
+    let r = new ReduxSceneGraph(juq.FIRST_DRAFT);
     let n = r.getVariableCollectionNode(e.id);
     if (!n) return null;
     let s = {
@@ -181,8 +181,8 @@ export async function $$x5(e, t, r, s, o = $$y4) {
   }(S, BY(d));
   if (!N) return [];
   let C = function (e, t) {
-    let r = UN();
-    let n = new qo(juq.FIRST_DRAFT);
+    let r = getSingletonSceneGraph();
+    let n = new ReduxSceneGraph(juq.FIRST_DRAFT);
     let s = n.getVariableCollectionNode(t.id);
     if (!s) return {};
     let o = {};
@@ -247,10 +247,10 @@ export async function $$x5(e, t, r, s, o = $$y4) {
   return f;
 }
 export function $$N1(e, t, r) {
-  if (!new qo(juq.FIRST_DRAFT).get(e.attachedNodeId)) throw Error("Attached node not found");
+  if (!new ReduxSceneGraph(juq.FIRST_DRAFT).get(e.attachedNodeId)) throw Error("Attached node not found");
   if (e.modeId && !A()) throw Error("Preset collection not found");
   let n = l7.ai("first-draft-apply-theme-preset", () => XJn.insertFromFDScene(e.attachedNodeId));
-  let i = UN();
+  let i = getSingletonSceneGraph();
   let o = i.get(n);
   if (!o) throw Error("Inserted preset node not found");
   l7.ai("first-draft-apply-theme-preset", () => {
