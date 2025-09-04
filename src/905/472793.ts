@@ -1,4 +1,3 @@
-import type { ActionGroup, AnnotationCategoryFactoryOptions, ComponentInfo, ComponentProps, ConditionalAction, EasingData, GradientPaint, GridLayoutConfig, NavigationAction, PatternPaint, ProcessedRegion, SolidPaint, TransitionData, VariableResult, VideoPaint } from './types/index'
 import { keyBy } from 'lodash-es'
 import { useState } from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
@@ -77,9 +76,9 @@ import { ZY } from '../905/764747'
 import { d1 } from '../905/766303'
 import { k as getFeatureFlags4 } from '../905/783825'
 import { fn as _$$fn, sH as _$$sH, dI as debugStateI, w1 } from '../905/805904'
-import { av, u1 as DocumentAccess, fs, Ux, vf, xc } from '../905/816197'
+import { checkIncrementalUnsafeMember, DocumentAccessState, ensurePluginPageLoaded, loadAllPluginPages, loadInternalCanvasMemoized, markPageLoaded } from '../905/816197'
 import { u as _$$u, c0, fp, Kb } from '../905/816730'
-import { getSceneGraphInstance, NT } from '../905/830071'
+import { getSceneGraphInstance } from '../905/830071'
 import { Y as _$$Y } from '../905/830372'
 import { _b } from '../905/835985'
 import { P as _$$P3, V as _$$V } from '../905/837980'
@@ -176,7 +175,7 @@ import { _x, gH, IN } from '../figma_app/985200'
 import { In } from './309735'
 import { MT } from './321380'
 import {
-  // Navigation and action processing
+// Navigation and action processing
   AdvancedNavigationProcessor,
   arrayToTransformMatrix,
   convertInternalPaintToExternal,
@@ -194,7 +193,7 @@ import {
   transformMatrixToArray,
 } from './modules'
 import {
-  // Phase 26: Advanced Core Utilities and Data Processing Systems
+// Phase 26: Advanced Core Utilities and Data Processing Systems
   AdvancedDataStructureManager,
   AdvancedNodeCreationManager,
   AdvancedTransformationManager,
@@ -202,20 +201,21 @@ import {
   AdvancedValidationManager as Phase26ValidationManager,
 } from './modules/core-utilities-data-processing'
 import {
-  // Phase 23: Advanced Image Processing and Effects Management Systems
+// Phase 23: Advanced Image Processing and Effects Management Systems
   createImageEffectsProcessingNew,
 } from './modules/image-effects-processing'
 import { createUtilityFunctionsNew } from './modules/node-factory-management'
 import { processImageFilters } from './modules/paint-management'
 import {
-  // Phase 24: Advanced Validation and Layout Processing Systems
+// Phase 24: Advanced Validation and Layout Processing Systems
   createValidationLayoutProcessingNew,
 } from './modules/validation-layout-processing'
 import {
-  // Phase 21: Advanced Variable and Expression Processing Systems
+// Phase 21: Advanced Variable and Expression Processing Systems
   createAdvancedVariableExpressionProcessor,
   createAdvancedVariableParser,
 } from './modules/variable-expression-processing'
+import type { AnnotationCategoryData, ComponentInfo, ExportSetting, GridLayoutConfig, InteractionReaction, LibraryResult, NavigationAction, ProcessedRegion, TriggerEvent } from './types'
 // Refactored layer renaming functions - now use the extracted module
 // Original functions en and er have been moved to ./modules/layer-renaming.ts
 // These are now just simple wrappers that maintain the original API
@@ -271,10 +271,10 @@ async function renameLayersForNode(node) {
  * @param node - The root node to start traversal from
  * @returns Object containing arrays of GUIDs for locking and renaming
  */
-function collectGuidsForRenaming(node: any) {
+function collectGuidsForRenaming(node) {
   const result = {
-    lockGuids: [] as string[],
-    renameGuids: [] as string[],
+    lockGuids: [],
+    renameGuids: [],
   }
   const queue = [node.guid]
   while (queue.length > 0) {
@@ -495,9 +495,9 @@ function extractSolidColorFromPaints(paints) {
     value: paint,
   }
 }
-function processValidPaintValues(imageStore: any, videoStore: any, config: any, blobs: any[]) {
+function processValidPaintValues(imageStore, videoStore, config, blobs) {
   // e4 - Process paint value configuration, filtering out AUTO values and processing valid paints
-  const validPaintValues: any[] = []
+  const validPaintValues = []
 
   // Only process non-AUTO paint values
   if (config.value !== 'AUTO') {
@@ -554,8 +554,8 @@ function processPaint(imageStore, videoStore, config, blobs) {
  * @param commonProps - Common paint properties
  * @returns Processed solid paint object
  */
-function processSolidPaint(config: any, visible: boolean, opacity: number, blendMode: string): SolidPaint {
-  const solidPaint: any = {
+function processSolidPaint(config, visible, opacity, blendMode) {
+  const solidPaint = {
     type: 'SOLID',
     color: {
       ...config.color,
@@ -577,7 +577,7 @@ function processSolidPaint(config: any, visible: boolean, opacity: number, blend
       },
     }
   }
-  return solidPaint as SolidPaint
+  return solidPaint
 }
 
 /**
@@ -588,29 +588,26 @@ function processSolidPaint(config: any, visible: boolean, opacity: number, blend
  * @param blendMode - Blend mode
  * @returns Processed gradient paint object
  */
-function processGradientPaint(config: any, visible: boolean, opacity: number, blendMode: string): GradientPaint {
-  const gradientPaint: GradientPaint = {
+function processGradientPaint(config, visible, opacity, blendMode) {
+  const gradientPaint = {
     type: config.type,
     transform: arrayToTransformMatrix(config.gradientTransform),
-    stopsVar: config.gradientStops.map((e: any) => e.boundVariables?.color?.id && e.boundVariables.color?.type === 'VARIABLE_ALIAS' && _$$fn(e.boundVariables.color.id)
+    stopsVar: config.gradientStops.map(e => e.boundVariables?.color?.id && e.boundVariables.color?.type === 'VARIABLE_ALIAS' && _$$fn(e.boundVariables.color.id)
       ? {
-        color: e.color,
-        position: e.position,
-        colorVar: {
-          dataType: 'ALIAS',
-          resolvedDataType: 'COLOR',
-          value: {
-            alias: _$$sH(e.boundVariables.color.id),
+          color: e.color,
+          position: e.position,
+          colorVar: {
+            dataType: 'ALIAS',
+            resolvedDataType: 'COLOR',
+            value: {
+              alias: _$$sH(e.boundVariables.color.id),
+            },
           },
-        },
-      }
+        }
       : Ug(e)),
     stops: config.gradientStops.map(({
       color,
       position,
-    }: {
-      color: any
-      position: number
     }) => ({
       color,
       position,
@@ -630,7 +627,7 @@ function processGradientPaint(config: any, visible: boolean, opacity: number, bl
  * @param blendMode - Blend mode
  * @returns Processed pattern paint object
  */
-function processPatternPaint(config: any, visible: boolean, opacity: number, blendMode: string): PatternPaint {
+function processPatternPaint(config, visible, opacity, blendMode) {
   let {
     scalingFactor,
   } = config
@@ -690,7 +687,7 @@ function processPatternPaint(config: any, visible: boolean, opacity: number, ble
     visible,
     opacity,
     blendMode,
-  } as PatternPaint
+  }
 }
 
 /**
@@ -706,15 +703,7 @@ function processVideoPaint({
   blendMode,
   thumbnailManager,
   blobs,
-}: {
-  imageManager: any
-  config: any
-  visible: boolean
-  opacity: number
-  blendMode: string
-  thumbnailManager: any
-  blobs: any[]
-}): VideoPaint {
+}) {
   const {
     scalingFactor,
     rotation,
@@ -732,7 +721,7 @@ function processVideoPaint({
   const hash = type === 'IMAGE' ? config.imageHash : thumbnailManager.generateThumbnailImageForVideo(config.videoHash)
   const transform = type === 'IMAGE' ? config.imageTransform : config.videoTransform
   const scaleMode = config.scaleMode === 'CROP' ? 'STRETCH' : config.scaleMode
-  const currentPaint: any = {
+  const currentPaint = {
     type: config.type,
     imageScaleMode: scaleMode,
     transform: arrayToTransformMatrix(transform),
@@ -787,21 +776,18 @@ function processVideoPaint({
       }
     }
   }
-  return currentPaint as VideoPaint
+  return currentPaint
 }
 
 // Refactored plugin runtime - now uses the extracted node management module
 // Original class e9 has been moved to ./modules/node-management.ts
 export class PluginRuntimeBridge {
-  pluginID: string
-  vm: any
-
-  constructor(pluginID: string, vm: any) {
+  constructor(pluginID, vm) {
     this.pluginID = pluginID
     this.vm = vm
   }
 
-  getMultiplayerSelection(): Set<any> {
+  getMultiplayerSelection() {
     let e = new Set()
     for (let {
       selection,
@@ -811,16 +797,16 @@ export class PluginRuntimeBridge {
     return e
   }
 
-  figma(): any {
+  figma() {
     return this.vm.scope.figma
   }
 
-  logWarning(...e: any[]): void {
-    (_$$nl() || this.pluginID.startsWith('TEST') || Object.values(debugState.getState().localPlugins).some((item: any) => item.plugin_id === this.pluginID)) && console.warn(...e)
+  logWarning(...e) {
+    (_$$nl() || this.pluginID.startsWith('TEST') || Object.values(debugState.getState().localPlugins).some(item => item.plugin_id === this.pluginID)) && console.warn(...e)
   }
 
-  createPluginNode(e: any, t: any, i: any, n: boolean = false): any {
-    let r: any
+  createPluginNode(e, t, i, n = false) {
+    let r
     if (!e || typeof e != 'object')
       throw new Error('invalid node passed to createPluginNode')
     let a = e.type
@@ -845,7 +831,7 @@ export class PluginRuntimeBridge {
          * @param node - The root node to start assignment from.
          * @param ancestor - The widget ancestor to assign.
          */
-        function assignWidgetCachedAncestor(node: any, ancestor: any) {
+        function assignWidgetCachedAncestor(node, ancestor) {
           for (const childGuid of node.reversedChildrenGuids) {
             const childNode = e8New(childGuid)
             if (childNode) {
@@ -871,13 +857,13 @@ export class PluginRuntimeBridge {
           throw new InternalError(`Unsupported root node type: ${a}`)
         throw new Error(`Attempting to create a ${a} node`)
       case 'instance':
-        {
-          let instanceNode = this.figma().getNodeById(e.props.componentId)
-          if (instanceNode?.type !== 'COMPONENT')
-            throw new Error(`Invalid component Id: ${e.props.componentId}`)
-          r = e8New(instanceNode.createInstance().id)
-          break
-        }
+      {
+        let instanceNode = this.figma().getNodeById(e.props.componentId)
+        if (instanceNode?.type !== 'COMPONENT')
+          throw new Error(`Invalid component Id: ${e.props.componentId}`)
+        r = e8New(instanceNode.createInstance().id)
+        break
+      }
       default:
         throwTypeError(a)
     }
@@ -885,19 +871,19 @@ export class PluginRuntimeBridge {
     return this.figma().getNodeById(r.guid)
   }
 
-  loadFontAsync(e: any): Promise<void> {
+  loadFontAsync(e) {
     return this.figma().loadFontAsync(e)
   }
 
-  createImage(e: any) {
+  createImage(e) {
     return this.figma().createImage(e)
   }
 
-  getNodeById(e: string) {
+  getNodeById(e) {
     return this.figma().getNodeById(e)
   }
 
-  getSceneNodeAdapter(e: string, t: any = null) {
+  getSceneNodeAdapter(e, t = null) {
     return new PluginSceneNodeAdapter(e, t, this)
   }
 }
@@ -912,18 +898,13 @@ export class PluginRuntimeBridge {
  * Refactored for clarity, maintainability, and type safety.
  */
 class PluginSceneNodeAdapter {
-  id: string
-  pluginNode: any
-  runtime: any
-  shimNode: any
-
   /**
    * Constructs a new PluginSceneNodeAdapter.
    * @param id - The node's unique identifier.
    * @param pluginNode - The plugin node instance.
    * @param runtime - The plugin runtime bridge.
    */
-  constructor(id: string, pluginNode: any, runtime: any) {
+  constructor(id, pluginNode, runtime) {
     this.id = id
     this.pluginNode = pluginNode
     this.runtime = runtime
@@ -989,7 +970,7 @@ class PluginSceneNodeAdapter {
    * @param node - The node to apply properties to.
    * @param props - The properties to apply.
    */
-  applyComponentProps(node, props: ComponentProps) {
+  applyComponentProps(node, props) {
     if (node.type !== 'INSTANCE')
       return
     if (props.componentId) {
@@ -1254,13 +1235,11 @@ class PluginSceneNodeAdapter {
  * Manages style creation, modification, and testing within isolated plugin context
  */
 export class StyleManager {
-  sceneGraph: any
-
-  constructor(sceneGraph: any) {
-    this.sceneGraph = sceneGraph ?? NT()
+  constructor(sceneGraph) {
+    this.sceneGraph = sceneGraph ?? getSceneGraphInstance()
   }
 
-  fullscreenStyleDataToLocalStyle(e: any) {
+  fullscreenStyleDataToLocalStyle(e) {
     return w8(null, null, e, '', '')
   }
 
@@ -1272,7 +1251,7 @@ export class StyleManager {
    * @param styleType - The style type (string or enum)
    * @returns An empty string on success, or an error message
    */
-  moveStyle(styleNode: any, referenceNode: any, styleType: any) {
+  moveStyle(styleNode, referenceNode, styleType) {
     // Resolve style type enum value
     const styleTypeEnum = _$$w2.StyleType[styleNode.styleType]
     if (typeof styleTypeEnum !== 'number')
@@ -1285,12 +1264,12 @@ export class StyleManager {
     const folderName = In(styleNode.name)
 
     // Initialize variables for tracking nodes and folders
-    let targetStyle: any = null
-    let referenceStyle: any = null
-    let targetFolder: any = null
-    let referenceFolder: any = null
-    let firstStyleInTargetFolder: any = null
-    let moveAfterStyle: any = null
+    let targetStyle = null
+    let referenceStyle = null
+    let targetFolder = null
+    let referenceFolder = null
+    let firstStyleInTargetFolder = null
+    let moveAfterStyle = null
 
     // Find target style, reference style, and their folders in the hierarchy
     for (let i = 0; i < styleHierarchy.length; i++) {
@@ -1317,8 +1296,8 @@ export class StyleManager {
       return `No local target node found with style key: ${styleNode.styleKeyForPublish}`
 
     // Determine move destination and reference
-    let destinationFolder: any = null
-    let destinationReference: any = null
+    let destinationFolder = null
+    let destinationReference = null
     if (referenceNode === null) {
       destinationFolder = targetFolder
       destinationReference = firstStyleInTargetFolder
@@ -1344,14 +1323,14 @@ export class StyleManager {
    * @param styleType - The style type (string or enum)
    * @returns Array of StyleKey objects
    */
-  getAllLocalStyles(styleType: any) {
+  getAllLocalStyles(styleType) {
     const styleTypeEnum = _$$w2.StyleType[styleType]
     if (typeof styleTypeEnum !== 'number')
       return []
     const allLocalStyles = glU.getAllLocalStyles(this.sceneGraph.scene, styleTypeEnum).map(this.fullscreenStyleDataToLocalStyle)
     const mappedStyles = lM(allLocalStyles, styleType)
     const styleHierarchy = l0(mappedStyles)
-    const styleKeys: any[] = []
+    const styleKeys = []
     for (const node of styleHierarchy) {
       if (node.type !== 'STYLE_FOLDER') {
         const key = this.localStyleToStyleKey(node)
@@ -1369,10 +1348,10 @@ export class StyleManager {
    * @param styleType - The style type (string or enum)
    * @returns An empty string on success, or an error message
    */
-  moveFolder(targetFolderName: string, referenceFolderName: string, styleType: any) {
-    let targetFolder: any = null
-    let referenceFolder: any = null
-    let parentFolder: any = null
+  moveFolder(targetFolderName, referenceFolderName, styleType) {
+    let targetFolder = null
+    let referenceFolder = null
+    let parentFolder = null
     const styleTypeEnum = _$$w2.StyleType[styleType]
     if (typeof styleTypeEnum !== 'number')
       return `Unable to parse style type: ${styleType}`
@@ -1383,9 +1362,9 @@ export class StyleManager {
     const styleHierarchy = l0(mappedStyles)
 
     // Recursive function to find target and reference folders
-    const findFolders = (folder: any) => {
+    const findFolders = (folder) => {
       if (folder.subfolders) {
-        folder.subfolders.forEach((subfolder: any) => {
+        folder.subfolders.forEach((subfolder) => {
           if (subfolder.name === targetFolderName) {
             targetFolder = subfolder
             parentFolder = folder
@@ -1408,10 +1387,10 @@ export class StyleManager {
 
     // Find the reference node for moving
     const parentHierarchy = l0(parentFolder)
-    let afterFolder: any = null
-    let lastStyleInParent: any = (parentFolder.styles && parentFolder.styles.length) ? parentFolder.styles[parentFolder.styles.length - 1] : parentFolder
-    let firstSubfolder: any = (parentFolder.subfolders && parentFolder.subfolders[0]) ? parentFolder.subfolders[0] : null
-    let previousFolder: any = null
+    let afterFolder = null
+    let lastStyleInParent = parentFolder.styles && parentFolder.styles.length ? parentFolder.styles[parentFolder.styles.length - 1] : parentFolder
+    let firstSubfolder = parentFolder.subfolders && parentFolder.subfolders[0] ? parentFolder.subfolders[0] : null
+    let previousFolder = null
     for (const node of parentHierarchy) {
       if (node.type === 'STYLE_FOLDER') {
         if (previousFolder === referenceFolder) {
@@ -1421,7 +1400,7 @@ export class StyleManager {
         previousFolder = node
       }
     }
-    const referenceStyle = referenceFolder ? (referenceFolder.styles && referenceFolder.styles[referenceFolder.styles.length - 1]) : lastStyleInParent
+    const referenceStyle = referenceFolder ? referenceFolder.styles && referenceFolder.styles[referenceFolder.styles.length - 1] : lastStyleInParent
     const afterReference = referenceFolder ? afterFolder : firstSubfolder
 
     // Move the folder if possible
@@ -1430,20 +1409,20 @@ export class StyleManager {
     return ''
   }
 
-  softDeleteStyle(e: any) {
+  softDeleteStyle(e) {
     if (e && e.removeSelfAndChildren) {
       e.removeSelfAndChildren()
     }
   }
 
-  localStyleToStyleKey(localStyle: any) {
+  localStyleToStyleKey(localStyle) {
     return {
       key: localStyle.key,
       version: 'INVALID',
     }
   }
 
-  get(styleId: string) {
+  get(styleId) {
     let t = _$$eX(styleId)
     if (!t)
       return null
@@ -1451,20 +1430,8 @@ export class StyleManager {
     return i && !i.isSoftDeleted ? i : null
   }
 
-  create(style: any) {
-    // Implementation based on the interface
-    return ''
-  }
-
-  delete(styleId: string) {
-    // Implementation based on the interface
-  }
-
-  createStyle(styleData: any) {
-    if (this.sceneGraph && this.sceneGraph.createStyle) {
-      return this.sceneGraph.createStyle(styleData).idForPluginApi
-    }
-    return ''
+  createStyle(styleData) {
+    return this.sceneGraph.createStyle(styleData).idForPluginApi
   }
 }
 
@@ -1508,7 +1475,7 @@ function tQNewVariableData(e) {
   return navigationProcessor.processVariableData(e)
 }
 function denormalizeTransition(transitionConfig) {
-  const transitionData = {} as TransitionData
+  const transitionData = {}
   let isValidTransition = true
   const transitionType = String(transitionConfig.transitionType || 'INSTANT_TRANSITION')
   switch (transitionType) {
@@ -1565,7 +1532,7 @@ function denormalizeTransition(transitionConfig) {
   }
 
   // Process easing
-  const easingData = {} as EasingData
+  const easingData = {}
   switch (transitionConfig.easingType || 'OUT_CUBIC') {
     case 'IN_CUBIC':
       easingData.type = 'EASE_IN'
@@ -1643,199 +1610,199 @@ function tZ(connectionConfig) {
         type: 'CLOSE',
       }
     case 'URL':
-      {
-        const urlConnection = {
-          type: 'URL',
-          url: connectionConfig.connectionURL || '',
-          openInNewTab: connectionConfig.openUrlInNewTab ?? true,
-        }
-        return urlConnection
+    {
+      const urlConnection = {
+        type: 'URL',
+        url: connectionConfig.connectionURL || '',
+        openInNewTab: connectionConfig.openUrlInNewTab ?? true,
       }
+      return urlConnection
+    }
     case 'SET_VARIABLE':
-      {
-        const targetVariableId = connectionConfig.targetVariable?.id
-        let resolvedVariableId = null
-        if (targetVariableId) {
-          resolvedVariableId = debugStateI(targetVariableId)
-        }
-        return {
-          type: 'SET_VARIABLE',
-          variableId: resolvedVariableId,
-          variableValue: tQNewVariableData(connectionConfig.targetVariableData),
-        }
+    {
+      const targetVariableId = connectionConfig.targetVariable?.id
+      let resolvedVariableId = null
+      if (targetVariableId) {
+        resolvedVariableId = debugStateI(targetVariableId)
       }
+      return {
+        type: 'SET_VARIABLE',
+        variableId: resolvedVariableId,
+        variableValue: tQNewVariableData(connectionConfig.targetVariableData),
+      }
+    }
     case 'SET_VARIABLE_MODE':
-      {
-        if (!getFeatureFlags().prototype_set_mode_action) {
-          return null
-        }
-        const targetVariableSetId = connectionConfig.targetVariableSetID
-        let resolvedCollectionId = null
-        if (targetVariableSetId) {
-          resolvedCollectionId = gr.fromKiwi(targetVariableSetId)
-        }
-        return {
-          type: 'SET_VARIABLE_MODE',
-          variableCollectionId: resolvedCollectionId,
-          variableModeId: dI(connectionConfig.targetVariableModeID),
-        }
+    {
+      if (!getFeatureFlags().prototype_set_mode_action) {
+        return null
       }
+      const targetVariableSetId = connectionConfig.targetVariableSetID
+      let resolvedCollectionId = null
+      if (targetVariableSetId) {
+        resolvedCollectionId = gr.fromKiwi(targetVariableSetId)
+      }
+      return {
+        type: 'SET_VARIABLE_MODE',
+        variableCollectionId: resolvedCollectionId,
+        variableModeId: dI(connectionConfig.targetVariableModeID),
+      }
+    }
     case 'CONDITIONAL':
-      {
-        const conditionalActions: ConditionalAction[] = []
-        if (connectionConfig.conditionalActions) {
-          for (const conditionalAction of connectionConfig.conditionalActions) {
-            /**
-             * Processes a conditional action configuration into a structured action group.
-             * @param conditionalActionConfig - The configuration object for the conditional action.
-             * @returns An object containing the processed actions and optional condition.
-             */
-            function processConditionalAction(conditionalActionConfig) {
-              const actionGroup: ActionGroup = {
-                actions: [],
-              }
+    {
+      const conditionalActions = []
+      if (connectionConfig.conditionalActions) {
+        for (const conditionalAction of connectionConfig.conditionalActions) {
+          /**
+           * Processes a conditional action configuration into a structured action group.
+           * @param conditionalActionConfig - The configuration object for the conditional action.
+           * @returns An object containing the processed actions and optional condition.
+           */
+          function processConditionalAction(conditionalActionConfig) {
+            const actionGroup = {
+              actions: [],
+            }
 
-              // Early return if config is undefined
-              if (conditionalActionConfig === undefined) {
-                return actionGroup
-              }
-
-              // Process condition if present
-              if (conditionalActionConfig.condition !== undefined) {
-                actionGroup.condition = tQNewExpressionParser(conditionalActionConfig.condition)
-              }
-
-              // Process actions if present
-              if (conditionalActionConfig.actions !== undefined && Array.isArray(conditionalActionConfig.actions)) {
-                const processedActions: NavigationAction[] = []
-                for (const action of conditionalActionConfig.actions) {
-                  const processedAction = tZNew(action)
-                  if (processedAction !== null) {
-                    processedActions.push(processedAction)
-                  }
-                }
-                actionGroup.actions = processedActions
-              }
+            // Early return if config is undefined
+            if (conditionalActionConfig === undefined) {
               return actionGroup
             }
-            const processedAction = processConditionalAction(conditionalAction)
-            conditionalActions.push(processedAction)
+
+            // Process condition if present
+            if (conditionalActionConfig.condition !== undefined) {
+              actionGroup.condition = tQNewExpressionParser(conditionalActionConfig.condition)
+            }
+
+            // Process actions if present
+            if (conditionalActionConfig.actions !== undefined && Array.isArray(conditionalActionConfig.actions)) {
+              const processedActions = []
+              for (const action of conditionalActionConfig.actions) {
+                const processedAction = tZNew(action)
+                if (processedAction !== null) {
+                  processedActions.push(processedAction)
+                }
+              }
+              actionGroup.actions = processedActions
+            }
+            return actionGroup
           }
-        }
-        return {
-          type: 'CONDITIONAL',
-          conditionalBlocks: conditionalActions,
+          const processedAction = processConditionalAction(conditionalAction)
+          conditionalActions.push(processedAction)
         }
       }
+      return {
+        type: 'CONDITIONAL',
+        conditionalBlocks: conditionalActions,
+      }
+    }
     case 'UPDATE_MEDIA_RUNTIME':
-      {
-        if (connectionConfig.mediaAction === undefined) {
-          return null
-        }
-        switch (connectionConfig.mediaAction) {
-          case 'PLAY':
-          case 'PAUSE':
-          case 'TOGGLE_PLAY_PAUSE':
-          case 'MUTE':
-          case 'UNMUTE':
-          case 'TOGGLE_MUTE_UNMUTE':
-            {
-              const transitionNodeId = dI(connectionConfig.transitionNodeID)
-              const targetNode = transitionNodeId ? tY.get(transitionNodeId) : null
-              return {
-                type: 'UPDATE_MEDIA_RUNTIME',
-                destinationId: targetNode ? tY.guidFromDeveloperFriendlyId(targetNode.guid) : null,
-                mediaAction: connectionConfig.mediaAction,
-              }
-            }
-          case 'SKIP_FORWARD':
-          case 'SKIP_BACKWARD':
-            {
-              const transitionNodeId = dI(connectionConfig.transitionNodeID)
-              const targetNode = transitionNodeId ? tY.get(transitionNodeId) : null
-              const targetNodeGuid = targetNode ? tY.guidFromDeveloperFriendlyId(targetNode.guid) : null
-              const skipAmount = connectionConfig.mediaSkipByAmount || 5
-              return {
-                type: 'UPDATE_MEDIA_RUNTIME',
-                destinationId: targetNodeGuid,
-                mediaAction: connectionConfig.mediaAction,
-                skipAmount,
-              }
-            }
-          case 'SKIP_TO':
-            {
-              const transitionNodeId = dI(connectionConfig.transitionNodeID)
-              const targetNode = transitionNodeId ? tY.get(transitionNodeId) : null
-              const targetNodeGuid = targetNode ? tY.guidFromDeveloperFriendlyId(targetNode.guid) : null
-              const skipToTime = connectionConfig.mediaSkipToTime || 0
-              return {
-                type: 'UPDATE_MEDIA_RUNTIME',
-                destinationId: targetNodeGuid,
-                mediaAction: connectionConfig.mediaAction,
-                newTimestamp: skipToTime,
-              }
-            }
-          default:
-            _$$k2.warn('Prototype action contains a Connection Type that the plugin API does not support')
-            return null
-        }
+    {
+      if (connectionConfig.mediaAction === undefined) {
+        return null
       }
-    case 'INTERNAL_NODE':
-      {
-        const navigationData: NavigationAction = {
-          type: 'NODE',
-        }
-        const transitionNodeId = dI(connectionConfig.transitionNodeID)
-        const targetNode = transitionNodeId ? tY.get(transitionNodeId) : null
-        const navigationType = connectionConfig.navigationType || 'NAVIGATE'
-
-        // Set destination ID and overlay position
-        if (targetNode) {
-          navigationData.destinationId = tY.guidFromDeveloperFriendlyId(targetNode.guid)
-          if (navigationType === 'OVERLAY' && targetNode.overlayPositionType === 'MANUAL') {
-            navigationData.overlayRelativePosition = {
-              x: connectionConfig.overlayRelativePosition?.x || 0,
-              y: connectionConfig.overlayRelativePosition?.y || 0,
-            }
+      switch (connectionConfig.mediaAction) {
+        case 'PLAY':
+        case 'PAUSE':
+        case 'TOGGLE_PLAY_PAUSE':
+        case 'MUTE':
+        case 'UNMUTE':
+        case 'TOGGLE_MUTE_UNMUTE':
+        {
+          const transitionNodeId = dI(connectionConfig.transitionNodeID)
+          const targetNode = transitionNodeId ? tY.get(transitionNodeId) : null
+          return {
+            type: 'UPDATE_MEDIA_RUNTIME',
+            destinationId: targetNode ? tY.guidFromDeveloperFriendlyId(targetNode.guid) : null,
+            mediaAction: connectionConfig.mediaAction,
           }
         }
-        else {
-          navigationData.destinationId = null
+        case 'SKIP_FORWARD':
+        case 'SKIP_BACKWARD':
+        {
+          const transitionNodeId = dI(connectionConfig.transitionNodeID)
+          const targetNode = transitionNodeId ? tY.get(transitionNodeId) : null
+          const targetNodeGuid = targetNode ? tY.guidFromDeveloperFriendlyId(targetNode.guid) : null
+          const skipAmount = connectionConfig.mediaSkipByAmount || 5
+          return {
+            type: 'UPDATE_MEDIA_RUNTIME',
+            destinationId: targetNodeGuid,
+            mediaAction: connectionConfig.mediaAction,
+            skipAmount,
+          }
         }
-
-        // Set navigation type
-        switch (navigationType) {
-          case 'NAVIGATE':
-          case 'SWAP':
-          case 'OVERLAY':
-          case 'SCROLL_TO':
-            navigationData.navigation = navigationType
-            break
-          case 'SWAP_STATE':
-            navigationData.navigation = 'CHANGE_TO'
-            break
-          default:
-            _$$k2.warn('Prototype action contains a Navigation Type that the plugin API does not support')
-            navigationData.navigation = null
+        case 'SKIP_TO':
+        {
+          const transitionNodeId = dI(connectionConfig.transitionNodeID)
+          const targetNode = transitionNodeId ? tY.get(transitionNodeId) : null
+          const targetNodeGuid = targetNode ? tY.guidFromDeveloperFriendlyId(targetNode.guid) : null
+          const skipToTime = connectionConfig.mediaSkipToTime || 0
+          return {
+            type: 'UPDATE_MEDIA_RUNTIME',
+            destinationId: targetNodeGuid,
+            mediaAction: connectionConfig.mediaAction,
+            newTimestamp: skipToTime,
+          }
         }
-
-        // Process transition
-        navigationData.transition = denormalizeTransition(connectionConfig)
-        navigationData.resetVideoPosition = !!connectionConfig.transitionResetVideoPosition
-
-        // Handle scroll position settings
-        const hasPreserveScrollSetting = connectionConfig.transitionPreserveScroll !== undefined
-        if (connectionConfig.transitionResetScrollPosition !== undefined) {
-          navigationData.resetScrollPosition = connectionConfig.transitionResetScrollPosition
-        }
-        else if (hasPreserveScrollSetting) {
-          navigationData.preserveScrollPosition = connectionConfig.transitionPreserveScroll
-        }
-        if (connectionConfig.transitionResetInteractiveComponents !== undefined) {
-          navigationData.resetInteractiveComponents = connectionConfig.transitionResetInteractiveComponents
-        }
-        return navigationData
+        default:
+          _$$k2.warn('Prototype action contains a Connection Type that the plugin API does not support')
+          return null
       }
+    }
+    case 'INTERNAL_NODE':
+    {
+      const navigationData: NavigationAction = {
+        type: 'NODE',
+      }
+      const transitionNodeId = dI(connectionConfig.transitionNodeID)
+      const targetNode = transitionNodeId ? tY.get(transitionNodeId) : null
+      const navigationType = connectionConfig.navigationType || 'NAVIGATE'
+
+      // Set destination ID and overlay position
+      if (targetNode) {
+        navigationData.destinationId = tY.guidFromDeveloperFriendlyId(targetNode.guid)
+        if (navigationType === 'OVERLAY' && targetNode.overlayPositionType === 'MANUAL') {
+          navigationData.overlayRelativePosition = {
+            x: connectionConfig.overlayRelativePosition?.x || 0,
+            y: connectionConfig.overlayRelativePosition?.y || 0,
+          }
+        }
+      }
+      else {
+        navigationData.destinationId = null
+      }
+
+      // Set navigation type
+      switch (navigationType) {
+        case 'NAVIGATE':
+        case 'SWAP':
+        case 'OVERLAY':
+        case 'SCROLL_TO':
+          navigationData.navigation = navigationType
+          break
+        case 'SWAP_STATE':
+          navigationData.navigation = 'CHANGE_TO'
+          break
+        default:
+          _$$k2.warn('Prototype action contains a Navigation Type that the plugin API does not support')
+          navigationData.navigation = null
+      }
+
+      // Process transition
+      navigationData.transition = denormalizeTransition(connectionConfig)
+      navigationData.resetVideoPosition = !!connectionConfig.transitionResetVideoPosition
+
+      // Handle scroll position settings
+      const hasPreserveScrollSetting = connectionConfig.transitionPreserveScroll !== undefined
+      if (connectionConfig.transitionResetScrollPosition !== undefined) {
+        navigationData.resetScrollPosition = connectionConfig.transitionResetScrollPosition
+      }
+      else if (hasPreserveScrollSetting) {
+        navigationData.preserveScrollPosition = connectionConfig.transitionPreserveScroll
+      }
+      if (connectionConfig.transitionResetInteractiveComponents !== undefined) {
+        navigationData.resetInteractiveComponents = connectionConfig.transitionResetInteractiveComponents
+      }
+      return navigationData
+    }
     case 'OBJECT_ANIMATION':
       return {
         type: 'OBJECT_ANIMATION',
@@ -1848,7 +1815,7 @@ function tQNewExpressionParser(e) {
   // Use extracted Phase 21 Advanced Variable Parser
   // Original tQ function logic moved to ./modules/variable-expression-processing.ts
   const variableProcessor = createAdvancedVariableExpressionProcessor(undefined,
-    // config
+  // config
     {
       w1,
       Hr,
@@ -1865,10 +1832,10 @@ function tQNewExpressionParser(e) {
 const animationTransitionStyles = ['DISSOLVE', 'SLIDE_FROM_LEFT', 'SLIDE_FROM_RIGHT', 'SLIDE_FROM_BOTTOM', 'SLIDE_FROM_TOP', 'PUSH_FROM_LEFT', 'PUSH_FROM_RIGHT', 'PUSH_FROM_BOTTOM', 'PUSH_FROM_TOP', 'MOVE_FROM_LEFT', 'MOVE_FROM_RIGHT', 'MOVE_FROM_TOP', 'MOVE_FROM_BOTTOM', 'SLIDE_OUT_TO_LEFT', 'SLIDE_OUT_TO_RIGHT', 'SLIDE_OUT_TO_TOP', 'SLIDE_OUT_TO_BOTTOM', 'MOVE_OUT_TO_LEFT', 'MOVE_OUT_TO_RIGHT', 'MOVE_OUT_TO_TOP', 'MOVE_OUT_TO_BOTTOM', 'SMART_ANIMATE', 'NONE'] as const
 
 // Animation Trigger Types - defines when animations should start (click events or timed delays)
-const animationTriggerTypes = ['ON_CLICK', 'AFTER_DELAY'] as const
+const animationTriggerTypes = ['ON_CLICK', 'AFTER_DELAY']as const
 
 // Animation Easing Curves - defines the mathematical curves for animation timing and smoothness
-const animationEasingCurves = ['EASE_IN', 'EASE_OUT', 'EASE_IN_AND_OUT', 'LINEAR', 'GENTLE', 'QUICK', 'BOUNCY', 'SLOW'] as const
+const animationEasingCurves = ['EASE_IN', 'EASE_OUT', 'EASE_IN_AND_OUT', 'LINEAR', 'GENTLE', 'QUICK', 'BOUNCY', 'SLOW']as const
 
 // Variable Data Types - supported data types for variable binding and resolution
 const primitiveTypes = ['BOOLEAN', 'COLOR', 'FLOAT', 'STRING'] as const
@@ -1932,19 +1899,19 @@ function processWidgetSyncData(vm, state, i) {
     syncedState: vm.isUndefined(state)
       ? void 0
       : _$$u({
-        vm,
-        handle: state,
-        zSchema: _$$z.record(_$$z.any()).optional(),
-        property: 'cloneWidget',
-      }),
+          vm,
+          handle: state,
+          zSchema: _$$z.record(_$$z.any()).optional(),
+          property: 'cloneWidget',
+        }),
     syncedMap: vm.isUndefined(i)
       ? void 0
       : _$$u({
-        vm,
-        handle: i,
-        zSchema: _$$z.record(_$$z.record(_$$z.any())).optional(),
-        property: 'cloneWidget',
-      }),
+          vm,
+          handle: i,
+          zSchema: _$$z.record(_$$z.record(_$$z.any())).optional(),
+          property: 'cloneWidget',
+        }),
   }
 }
 function isInImmutableContext(e, t) {
@@ -2011,8 +1978,7 @@ function handlePaintProperty({
     hasEditScope: true,
   })
 }
-
-function createNodeHash(vm: NoOpVm, targetData: any) {
+function createNodeHash(vm, targetData) {
   // Data Processor Function - handles input and target data processing (i_ function)
   let i = vm.newObject()
   vm.defineProp(i, 'hash', {
@@ -2022,8 +1988,7 @@ function createNodeHash(vm: NoOpVm, targetData: any) {
   })
   return i
 }
-
-function createImageProcessor(vm: NoOpVm, imageData: any) {
+function createImageProcessor(vm, imageData) {
   const processor = vm.newObject()
 
   // Define hash property
@@ -2041,10 +2006,10 @@ function createImageProcessor(vm: NoOpVm, imageData: any) {
       reject,
     } = vm.newPromise()
     const asyncOperation = vm.registerPromise(imageData.getBytesAsync())
-    asyncOperation.then((result: any) => {
+    asyncOperation.then((result) => {
       resolve(vm.deepWrap(result))
     })
-    asyncOperation.catch((error: any) => {
+    asyncOperation.catch((error) => {
       reject(vm.deepWrap(error))
     })
     return promise
@@ -2059,13 +2024,13 @@ function createImageProcessor(vm: NoOpVm, imageData: any) {
     } = vm.newPromise()
     const processImageSize = () => {
       if (imageData.bytes) {
-        vX(imageData.bytes).then((size: any) => resolve(vm.deepWrap(size))).catch((error: any) => reject(vm.deepWrap(error)))
+        vX(imageData.bytes).then(size => resolve(vm.deepWrap(size))).catch(error => reject(vm.deepWrap(error)))
       }
       else {
-        imageData.getBytesAsync().then((bytes: any) => {
+        imageData.getBytesAsync().then((bytes) => {
           imageData.bytes = bytes
           return vX(bytes)
-        }).then((size: any) => resolve(vm.deepWrap(size))).catch(() => {
+        }).then(size => resolve(vm.deepWrap(size))).catch(() => {
           reject(vm.newString('Image dimensions not available'))
         })
       }
@@ -2075,8 +2040,7 @@ function createImageProcessor(vm: NoOpVm, imageData: any) {
   })
   return processor
 }
-
-function setupPrototypeFromArgs(context: any, target: string, ...additionalInputs: Array<(context: any, prototype: any) => void>) {
+function setupPrototypeFromArgs(context, target, ...additionalInputs) {
   const prototype = context.vm.newPrototype(target)
   for (const additionalInput of additionalInputs) {
     additionalInput(context, prototype)
@@ -2084,8 +2048,7 @@ function setupPrototypeFromArgs(context: any, target: string, ...additionalInput
   context.vm.retainHandle(prototype)
   return prototype
 }
-
-function convertEffectType(effectType: string): string {
+function convertEffectType(effectType) {
   switch (effectType) {
     case 'FOREGROUND_BLUR':
       return 'LAYER_BLUR'
@@ -2098,21 +2061,20 @@ function convertEffectType(effectType: string): string {
       return effectType
   }
 }
-
-function processEffect(effect: any) {
+function processEffect(effect) {
   // Iteration Processor Function - handles iteration input processing (iI function)
   const type = convertEffectType(effect.type)
   const baseEffect = effect.type === 'NOISE'
     ? {
-      type,
-      visible: effect.visible,
-    }
+        type,
+        visible: effect.visible,
+      }
     : {
-      type,
-      visible: effect.visible,
-      radius: effect.radius,
-    }
-  const boundVariables: any = {}
+        type,
+        visible: effect.visible,
+        radius: effect.radius,
+      }
+  const boundVariables:any = {}
   if (effect.colorVar?.value?.alias) {
     boundVariables.color = createVariableAlias(effect.colorVar.value.alias)
   }
@@ -2216,7 +2178,7 @@ function processEffect(effect: any) {
  * @param max - The maximum allowed value.
  * @returns The clamped value.
  */
-function clampValue(value: number, min: number, max: number): number {
+function clampValue(value, min, max) {
   return Math.min(Math.max(value, min), max)
 }
 
@@ -2229,7 +2191,7 @@ function clampValue(value: number, min: number, max: number): number {
  * @param propertyName - The property name for logging.
  * @returns The clamped value.
  */
-function validateGlassEffectValue(value: number, min: number, max: number, propertyName: string): number {
+function validateGlassEffectValue(value, min, max, propertyName) {
   if (value > max) {
     _$$k2.warn(`Glass effect ${propertyName} of ${value} is too large and will be clamped to ${max}`)
   }
@@ -2238,8 +2200,7 @@ function validateGlassEffectValue(value: number, min: number, max: number, prope
   }
   return clampValue(value, min, max)
 }
-
-function handleFrameSpread(i: any) {
+function handleFrameSpread(i) {
   if (i.fills.length === 0 || i.fills.every(e => !(e.visible && e.opacity))) {
     _$$k2.warn('The \'spread\' parameter is not supported when frames or components have no visible fills')
   }
@@ -2248,8 +2209,7 @@ function handleFrameSpread(i: any) {
   }
   return 0
 }
-
-function handleOtherSpread(i: any) {
+function handleOtherSpread(i) {
   _$$k2.warn(`Spread is not supported for node type ${i.type}`)
   return 1
 }
@@ -2261,7 +2221,7 @@ function handleOtherSpread(i: any) {
  * @param node - The node to which the effect is applied (optional).
  * @returns The processed effect configuration.
  */
-function processEffectWithValidation(effect: any, node: any) {
+function processEffectWithValidation(effect, node) {
   let processed = {
     ...effect,
   }
@@ -2505,14 +2465,14 @@ function convertListOption(listOption) {
   }
 }
 function processGridLayout(gridLayoutConfig) {
-  const config: any = {
+  const config: GridLayoutConfig = {
     pattern: gridLayoutConfig.pattern === 'GRID' ? 'GRID' : gridLayoutConfig.axis === 'X' ? 'COLUMNS' : 'ROWS',
     visible: gridLayoutConfig.visible,
     color: gridLayoutConfig.color,
   }
 
   // Process bound variables for layout configuration
-  const boundVariables: any = {}
+  const boundVariables:any = {}
 
   // Extract and process offset variable if present
   if (gridLayoutConfig.offsetVar?.value?.alias) {
@@ -2957,8 +2917,8 @@ function defineMinMaxProperty(propName, boundType) {
           }
           getFeatureFlags().dse_min_max_plugin_behavior
             ? Egt?.setNodeTransformProperties(node.guid, {
-              [propName]: parsed,
-            })
+                [propName]: parsed,
+              })
             : node[propName] = parsed
           return vm.undefined
         },
@@ -3098,7 +3058,7 @@ function processOpenTypeFeatures({
   if (features === 'mixed' || disables === 'mixed' || numberCase === 'mixed' || numberSpacing === 'mixed' || fraction === 'mixed' || script === 'mixed') {
     return mixedSentinel
   }
-  const result: any = {}
+  const result:any = {}
 
   // Enable features
   for (const feature of features) {
@@ -3190,7 +3150,7 @@ function fetchRelatedLinks({
       const sceneType = new ReduxSceneGraph(sceneGraph.getSceneType())
       const nodeGuids = result.map(e => sceneGraph.guidFromDeveloperFriendlyId(e.nodeId) || e.nodeId)
       const subtreeNodes = new Set(node.filterSubtreeNodes(nodeGuids))
-      const relatedLinks: any[] = []
+      const relatedLinks = []
       const mainComponentId1 = k4([nodeId], sceneType)
       const mainComponentId2 = _$$Yi([nodeId], sceneType)
       result.forEach((item) => {
@@ -3529,9 +3489,7 @@ function it(e) {
       return y0x.iOS
   }
 }
-
 let onode5 = false
-
 export const NodeAPI = {
   /**
    * Returns a string representation of the node.
@@ -3589,7 +3547,7 @@ export const NodeAPI = {
           throw new Error('Cannot clone a webpage')
         const cloned = node.clone()
         if (nodeType === 'CANVAS') {
-          av(cloned, documentAccessState, {
+          markPageLoaded(cloned, documentAccessState, {
             ignoreReduxState: true,
           })
         }
@@ -4620,7 +4578,7 @@ export const NodeAPI = {
           resolve,
           reject,
         } = vm.newPromise()
-        vm.registerPromise(vf(node.guid, documentAccessState)).then(() => {
+        vm.registerPromise(ensurePluginPageLoaded(node.guid, documentAccessState)).then(() => {
           resolve(vm.$$null)
         }).catch((err) => {
           reject(vm.newString(err.message))
@@ -6542,7 +6500,7 @@ export const NodeAPI = {
       parseThis: e => getNode(e),
       resolveValue: t => vm.newString(_$$nM(t.inheritedEffectStyle)),
       prepareDocument: async () => {
-        await Ux(documentAccessState)
+        await loadInternalCanvasMemoized(documentAccessState)
       },
       setValue: (node, value) => {
         const styleId = _$$eX(_$$u({
@@ -6640,60 +6598,84 @@ export const NodeAPI = {
       hasEditScope: !0,
     })
   },
+  /**
+   * Handles getting and setting the widget hover style for a node.
+   * Refactored for clarity, type safety, and maintainability.
+   * Original: widgetHoverStyle
+   * @param param0 - Context object containing vm, defineVmProp, imageStore, videoStore, getNode
+   * @param handle - The handle for the VM property
+   */
   widgetHoverStyle({
-    vm: e,
-    defineVmProp: t,
-    imageStore: i,
-    videoStore: n,
-    getNode: r,
-  }, a) {
-    e instanceof ScopedNoOpVm && t({
-      handle: a,
+    vm,
+    defineVmProp,
+    imageStore,
+    videoStore,
+    getNode,
+  }, handle) {
+    // Only allow in ScopedNoOpVm context
+    if (!(vm instanceof ScopedNoOpVm))
+      return
+    defineVmProp({
+      handle,
       key: 'widgetHoverStyle',
       options: {
-        enumerable: !0,
+        enumerable: true,
         metricsKey: 'node.widgetHoverStyle',
+        /**
+         * Getter for widgetHoverStyle property.
+         * Returns a deeply wrapped object containing fill, stroke, and opacity if present.
+         */
         get() {
-          let t = r(this).widgetHoverStyle
-          return e.deepWrap(function (e) {
-            let t = {}
-            e.fill && (t.fill = convertPaintArrayData(e.fill.data))
-            e.stroke && (t.stroke = convertPaintArrayData(e.stroke.data))
-            void 0 !== e.opacity && (t.opacity = e.opacity)
-            return t
-          }(t))
+          const node = getNode(this)
+          const hoverStyle = node.widgetHoverStyle || {}
+          const result:any = {}
+          if (hoverStyle.fill) {
+            result.fill = convertPaintArrayData(hoverStyle.fill.data)
+          }
+          if (hoverStyle.stroke) {
+            result.stroke = convertPaintArrayData(hoverStyle.stroke.data)
+          }
+          if (hoverStyle.opacity !== undefined) {
+            result.opacity = hoverStyle.opacity
+          }
+          return vm.deepWrap(result)
         },
-        set(t) {
-          let a = e.deepUnwrap(t)
-          r(this).widgetHoverStyle = (function (e, t, i) {
-            let n = {}
-            if (i.fill) {
-              let r = []
-              n.fill = {
-                data: mapPaintConfigurations(e, t, i.fill, r),
-                blobs: r,
-              }
+        /**
+         * Setter for widgetHoverStyle property.
+         * Accepts an object with fill, stroke, and opacity, processes paints, and assigns to node.
+         */
+        set(value) {
+          const node = getNode(this)
+          const unwrapped = vm.deepUnwrap(value)
+          const processed: any = {}
+          if (unwrapped.fill) {
+            const fillBlobs = []
+            processed.fill = {
+              data: mapPaintConfigurations(imageStore, videoStore, unwrapped.fill, fillBlobs),
+              blobs: fillBlobs,
             }
-            if (i.stroke) {
-              let r = []
-              n.stroke = {
-                data: mapPaintConfigurations(e, t, i.stroke, r),
-                blobs: r,
-              }
+          }
+          if (unwrapped.stroke) {
+            const strokeBlobs = []
+            processed.stroke = {
+              data: mapPaintConfigurations(imageStore, videoStore, unwrapped.stroke, strokeBlobs),
+              blobs: strokeBlobs,
             }
-            void 0 !== i.opacity && (n.opacity = i.opacity)
-            return n
-          }(i, n, a))
-          return e.undefined
+          }
+          if (unwrapped.opacity !== undefined) {
+            processed.opacity = unwrapped.opacity
+          }
+          node.widgetHoverStyle = processed
+          return vm.undefined
         },
       },
-      canWriteInReadOnly: !1,
-      hasEditScope: !0,
+      canWriteInReadOnly: false,
+      hasEditScope: true,
     })
   },
   fills(e, t) {
     handlePaintProperty(e, t, 'fills')
-    let {
+    const {
       vm,
       defineVmFunction,
       getNode,
@@ -6705,42 +6687,46 @@ export const NodeAPI = {
       handle: t,
       key: 'setFillsAsync',
       metricsKey: 'node.setFillsAsync',
-      cb(e) {
-        let t = getNode(this)
-        let n = []
-        let l = _$$u({
+      cb(paintsHandle) {
+        const node = getNode(this)
+        const paints = _$$u({
           vm,
-          handle: e,
+          handle: paintsHandle,
           zSchema: _$$N.PaintsWithPattern,
           property: 'fills',
         })
-        let d = []
-        for (let e of l) e.type === 'PATTERN' && d.push(e.sourceNodeId)
-        let {
+        const patternSourceIds:string[] = []
+        for (const paint of paints) {
+          if (paint.type === 'PATTERN') {
+            patternSourceIds.push(paint.sourceNodeId)
+          }
+        }
+        const {
           promise,
           resolve,
           reject,
         } = vm.newPromise()
-        vm.registerPromise(fs(d, documentAccessState)).then((_e) => {
-          for (let e of d) {
-            if (!mQ(e)) {
-              reject(vm.newString(`Pattern source node ${e} not found`))
+        vm.registerPromise(loadAllPluginPages(patternSourceIds, documentAccessState)).then(() => {
+          for (const id of patternSourceIds) {
+            if (!mQ(id)) {
+              reject(vm.newString(`Pattern source node ${id} not found`))
               return
             }
           }
-          let r = mapPaintConfigurations(imageStore, videoStore, l, n)
-          l7.plugin('plugin-set-fills-async', () => t.fillPaintsForPluginOnly = {
-            data: r,
-            blobs: n,
+          const blobs = []
+          const mappedPaints = mapPaintConfigurations(imageStore, videoStore, paints, blobs)
+          l7.plugin('plugin-set-fills-async', () => node.fillPaintsForPluginOnly = {
+            data: mappedPaints,
+            blobs,
           })
           resolve(vm.undefined)
-        }, (e) => {
-          reject(vm.newString(e))
+        }).catch((error) => {
+          reject(vm.newString(error))
         })
         return promise
       },
-      isAllowedInReadOnly: !1,
-      hasEditScope: !0,
+      isAllowedInReadOnly: false,
+      hasEditScope: true,
     })
   },
   fillStyleId({
@@ -6758,35 +6744,35 @@ export const NodeAPI = {
       metricsKey: 'node.fillStyleId',
       incrementalSafeApiSetKey: 'setFillStyleIdAsync',
       incrementalSafeApiSetMetricsKey: 'node.setFillStyleIdAsync',
-      retainGetter: !0,
-      enumerable: !0,
-      parseThis: e => r(e),
-      resolveValue: (t) => {
-        let n = t.inheritedFillStyleOrMixed
-        return n === 'mixed' ? i : e.newString(_$$nM(n))
+      retainGetter: true,
+      enumerable: true,
+      parseThis: handle => r(handle),
+      resolveValue: (node) => {
+        const styleId = node.inheritedFillStyleOrMixed
+        return styleId === 'mixed' ? i : e.newString(_$$nM(styleId))
       },
-      prepareDocument: async (_e) => {
-        await Ux(a)
+      prepareDocument: async () => {
+        await loadInternalCanvasMemoized(a)
       },
-      setValue: (t, i) => {
-        let n = _$$eX(_$$u({
+      setValue: (node, valueHandle) => {
+        const styleId = _$$eX(_$$u({
           vm: e,
-          handle: i,
+          handle: valueHandle,
           zSchema: _$$z.string(),
           property: 'fillStyleId',
         }))
-        t.inheritedFillStyle = n
+        node.inheritedFillStyle = styleId
         return e.undefined
       },
       incrementalSafeApi: n,
-      parseIncrementalValueArg: t => e.toString(t),
-      setValueIncremental: (t, i) => {
-        t.inheritedFillStyle = _$$eX(i)
+      parseIncrementalValueArg: valueHandle => e.toString(valueHandle),
+      setValueIncremental: (node, styleIdString) => {
+        node.inheritedFillStyle = _$$eX(styleIdString)
         return e.undefined
       },
       allowIncrementalUnsafeApiCalls: s,
-      canWriteInReadOnly: !1,
-      hasEditScope: !0,
+      canWriteInReadOnly: false,
+      hasEditScope: true,
     })
   },
   strokes({
@@ -6802,72 +6788,77 @@ export const NodeAPI = {
       handle: o,
       key: 'setStrokesAsync',
       metricsKey: 'node.setStrokesAsync',
-      cb(t) {
-        let i = a(this)
-        let o = []
-        let l = _$$u({
+      cb(paintsHandle) {
+        const node = a(this)
+        const paints = _$$u({
           vm: e,
-          handle: t,
+          handle: paintsHandle,
           zSchema: _$$N.PaintsWithPattern,
           property: 'strokes',
         })
-        let d = []
-        for (let e of l) e.type === 'PATTERN' && d.push(e.sourceNodeId)
-        let {
+        const patternSourceIds:string[] = []
+        for (const paint of paints) {
+          if (paint.type === 'PATTERN') {
+            patternSourceIds.push(paint.sourceNodeId)
+          }
+        }
+        const {
           promise,
           resolve,
           reject,
         } = e.newPromise()
-        e.registerPromise(fs(d, s)).then((_t) => {
-          for (let t of d) {
-            if (!mQ(t)) {
-              reject(e.newString(`Pattern source node ${t} not found`))
+        e.registerPromise(loadAllPluginPages(patternSourceIds, s)).then(() => {
+          for (const id of patternSourceIds) {
+            if (!mQ(id)) {
+              reject(e.newString(`Pattern source node ${id} not found`))
               return
             }
           }
-          let a = mapPaintConfigurations(n, r, l, o)
-          l7.plugin('plugin-set-strokes-async', () => i.strokePaints = {
-            data: a,
-            blobs: o,
+          const blobs = []
+          const mappedPaints = mapPaintConfigurations(n, r, paints, blobs)
+          l7.plugin('plugin-set-strokes-async', () => node.strokePaints = {
+            data: mappedPaints,
+            blobs,
           })
           resolve(e.undefined)
-        }, (t) => {
-          reject(e.newString(t))
+        }).catch((error) => {
+          reject(e.newString(error))
         })
         return promise
       },
-      isAllowedInReadOnly: !1,
-      hasEditScope: !0,
+      isAllowedInReadOnly: false,
+      hasEditScope: true,
     })
     t({
       handle: o,
       key: 'strokes',
       options: {
-        enumerable: !0,
+        enumerable: true,
         metricsKey: 'node.strokes',
         get() {
-          let t = a(this)
-          let i = e.deepWrap(convertPaintArrayData(t.strokePaints.data))
-          e.deepFreezeObject(i)
-          return i
+          const node = a(this)
+          const strokes = e.deepWrap(convertPaintArrayData(node.strokePaints.data))
+          e.deepFreezeObject(strokes)
+          return strokes
         },
-        set(t) {
-          let i = a(this)
-          let s = []
-          i.strokePaints = {
-            data: mapPaintConfigurations(n, r, _$$u({
-              vm: e,
-              handle: t,
-              zSchema: _$$N.Paints,
-              property: 'strokes',
-            }), s),
-            blobs: s,
+        set(valueHandle) {
+          const node = a(this)
+          const paints = _$$u({
+            vm: e,
+            handle: valueHandle,
+            zSchema: _$$N.Paints,
+            property: 'strokes',
+          })
+          const blobs = []
+          node.strokePaints = {
+            data: mapPaintConfigurations(n, r, paints, blobs),
+            blobs,
           }
           return e.undefined
         },
       },
-      canWriteInReadOnly: !1,
-      hasEditScope: !0,
+      canWriteInReadOnly: false,
+      hasEditScope: true,
     })
   },
   fillGeometry({
@@ -6933,7 +6924,7 @@ export const NodeAPI = {
       parseThis: e => getNode(e),
       resolveValue: node => vm.newString(_$$nM(node.inheritedFillStyleForStroke)),
       prepareDocument: async () => {
-        await Ux(documentAccessState)
+        await loadInternalCanvasMemoized(documentAccessState)
       },
       setValue: (node, value) => {
         const styleId = _$$eX(_$$u({
@@ -7319,7 +7310,7 @@ export const NodeAPI = {
           return e.newString(n)
         },
         set(t) {
-          n && xc(r, 'node.backgroundStyleId =', 'node.setFillStyleIdAsync')
+          n && checkIncrementalUnsafeMember(r, 'node.backgroundStyleId =', 'node.setFillStyleIdAsync')
           let a = i(this)
           let s = _$$eX(_$$u({
             vm: e,
@@ -7385,7 +7376,7 @@ export const NodeAPI = {
       parseThis: e => getNode(e),
       resolveValue: node => vm.newString(_$$nM(node.inheritedGridStyle)),
       prepareDocument: async () => {
-        await Ux(documentAccessState)
+        await loadInternalCanvasMemoized(documentAccessState)
       },
       setValue: (node, value) => {
         node.inheritedGridStyle = _$$eX(_$$u({
@@ -7576,13 +7567,11 @@ export const NodeAPI = {
           const linksArray = vm.newArray()
           const node = getNode(this)
           const uris = node.symbolLinks?.filter(link => link.uri).map(link => link.uri) || []
-
           for (let i = 0; i < uris.length; i++) {
             const linkObject = vm.newObject()
             vm.setProp(linkObject, 'uri', vm.newString(uris[i]))
             vm.setProp(linksArray, i.toString(), linkObject)
           }
-
           return linksArray
         },
         set(value) {
@@ -7595,15 +7584,24 @@ export const NodeAPI = {
             })),
             property: 'documentationLinks',
           })
-
+          node.symbolLinks = []
           if (links.length > 1) {
             throw new Error('Documentation links API takes a list of size 0 or 1')
-            return vm.undefined
           }
+          if (links.length === 1) {
+            let uri = links[0].uri
+            if (!uri.mathc(/^\w+:/)) {
+              throw new Error('Documentation link URI must be an absolute URL with a scheme (e.g., https://example.com)')
+            }
+            node.symbolLinks = [{
+              uri,
+            }]
+          }
+          return vm.undefined
         },
         canWriteInReadOnly: false,
         hasEditScope: true,
-      }
+      },
     })
   },
   /**
@@ -7643,9 +7641,8 @@ export const NodeAPI = {
     vm,
     getNode,
   }, handle) {
-    const self = this
-    vm.defineFunction(handle, 'getPublishStatusAsync', 'node.getPublishStatusAsync', function () {
-      const node = getNode(self)
+    vm.defineFunction(handle, 'getPublishStatusAsync', 'node.getPublishStatusAsync', () => {
+      const node = getNode(this)
       const {
         promise,
         resolve,
@@ -7775,7 +7772,7 @@ export const NodeAPI = {
         NfO.replaceSymbolBackingInstance(e.guid, i.guid)
       },
       prepareDocument: async (e) => {
-        e.symbolId && (await vf(e.symbolId, o))
+        e.symbolId && (await ensurePluginPageLoaded(e.symbolId, o))
       },
       parseThis(e) {
         return a(e)
@@ -7789,7 +7786,7 @@ export const NodeAPI = {
       options: {
         enumerable: !0,
         get() {
-          r && xc(l, 'node.masterComponent', 'node.getMainComponentAsync')
+          r && checkIncrementalUnsafeMember(l, 'node.masterComponent', 'node.getMainComponentAsync')
           let t = a(this).symbolId
           return t && void 0 !== s.get(t) ? n().createNode(t, 'node.mainComponent') : e.$$null
         },
@@ -8310,7 +8307,7 @@ export const NodeAPI = {
         return val === 'mixed' ? mixedSentinel : vm.newString(_$$nM(val))
       },
       prepareDocument: async () => {
-        await Ux(documentAccessState)
+        await loadInternalCanvasMemoized(documentAccessState)
       },
       setValue: (node, value) => {
         const styleId = _$$eX(_$$u({
@@ -9454,7 +9451,7 @@ export const NodeAPI = {
      * @returns Processed region object with validated fills and styles
      */
     function processVectorRegion(region) {
-      const processedRegion = {
+      const processedRegion: ProcessedRegion = {
         windingRule: region.windingRule,
         loops: region.loops,
       }
@@ -9512,7 +9509,7 @@ export const NodeAPI = {
        * Required for incremental safe API operations.
        */
       async prepareDocument() {
-        await Ux(documentAccessState)
+        await loadInternalCanvasMemoized(documentAccessState)
       },
       /**
        * setValue - Set vector network data synchronously
@@ -9580,7 +9577,7 @@ export const NodeAPI = {
         return n
       },
       async prepareDocument() {
-        await Ux(r)
+        await loadInternalCanvasMemoized(r)
       },
       allowIncrementalUnsafeApiCalls: a,
     })
@@ -9814,13 +9811,13 @@ export const NodeAPI = {
       parseThis: e => getNode(e),
       resolveValue(node) {
         const mapReactions = (interactions) => {
-          const result = []
+          const result: InteractionReaction[] = []
           for (const interaction of interactions) {
             const action = interaction.actions && interaction.actions.length > 0 ? tZ(interaction.actions[0]) : null
             const actions = interaction.actions ? interaction.actions.map(tZ).filter(tq) : []
             const event = interaction.event || {}
-            let trigger:any = {}
             let type = event?.interactionType || 'ON_CLICK'
+            let trigger: TriggerEvent | null = {} as TriggerEvent
             switch (type) {
               case 'NONE':
                 trigger = null
@@ -9893,7 +9890,7 @@ export const NodeAPI = {
         return wrapped
       },
       async prepareDocument() {
-        await Ux(documentAccessState)
+        await loadInternalCanvasMemoized(documentAccessState)
       },
       setValue(node, value) {
         node.prototypeInteractions = t$(parseReactions(value))
@@ -9996,7 +9993,7 @@ export const NodeAPI = {
           if (!vm.isArray(val))
             throw new Error('The selection must be an array')
           const len = vm.getNumberProp(val, 'length')
-          const nodes = []
+          const nodes: any[] = []
           for (let i = 0; i < len; i++) {
             const n = getNode(vm.getProp(val, i.toString()))
             Egt.expandUpToRoot(n.guid)
@@ -10300,7 +10297,7 @@ export const NodeAPI = {
           const settings = node.exportSettings ?? []
           const wrapped = vm.deepWrap(settings.map((setting) => {
             const format = setting.imageType === 'JPEG' ? 'JPG' : setting.imageType
-            const result:any = {
+            const result: ExportSetting = {
               format,
               suffix: setting.suffix || '',
               contentsOnly: !!setting.contentsOnly,
@@ -11412,7 +11409,7 @@ export const NodeAPI = {
         }
       },
       prepareDocument: async () => {
-        await Ux(documentAccessState)
+        await loadInternalCanvasMemoized(documentAccessState)
       },
       resolveValue: (node, {
         start,
@@ -11461,7 +11458,7 @@ export const NodeAPI = {
         }
       },
       prepareDocument: async () => {
-        await Ux(documentAccessState)
+        await loadInternalCanvasMemoized(documentAccessState)
       },
       resolveValue: (node, {
         start,
@@ -12067,23 +12064,23 @@ export const NodeAPI = {
         s = d === 'VARIANT'
           ? o.addVariantComponentPropertyDefinition(l, u)
           : o.addComponentPropertyDefinition(l, (function (e) {
-            switch (e) {
-              case 'BOOLEAN':
-                return 'BOOL'
-              case 'TEXT':
-                return 'TEXT'
-              case 'INSTANCE_SWAP':
-                return 'INSTANCE_SWAP'
-              case 'NUMBER':
-                return 'NUMBER'
-              case 'IMAGE':
-                return 'IMAGE'
-              case 'SLOT':
-                return 'SLOT'
-              default:
-                return ''
-            }
-          }(d)), u, m)
+              switch (e) {
+                case 'BOOLEAN':
+                  return 'BOOL'
+                case 'TEXT':
+                  return 'TEXT'
+                case 'INSTANCE_SWAP':
+                  return 'INSTANCE_SWAP'
+                case 'NUMBER':
+                  return 'NUMBER'
+                case 'IMAGE':
+                  return 'IMAGE'
+                case 'SLOT':
+                  return 'SLOT'
+                default:
+                  return ''
+              }
+            }(d)), u, m)
         return e.newString(s)
       },
       isAllowedInReadOnly: !1,
@@ -12317,7 +12314,7 @@ export const NodeAPI = {
       },
       prepareDocument: async (node) => {
         const guids = node.instances.map(x => x.guid)
-        await fs(guids, documentAccessState)
+        await loadAllPluginPages(guids, documentAccessState)
       },
       parseThis: getNode,
       incrementalSafeApi,
@@ -12368,125 +12365,156 @@ export const NodeAPI = {
       hasEditScope: !1,
     })
   },
+  /**
+   * Connector Endpoints API - manages connector start and end endpoints.
+   * Provides getter/setter for connectorStart and connectorEnd properties.
+   * Original: connectorEndpoints
+   */
   connectorEndpoints({
-    vm: e,
-    defineVmProp: t,
-    getNode: i,
-    pluginVersionID: n,
-  }, r) {
-    for (let a of ['connectorStart', 'connectorEnd']) {
-      t({
-        handle: r,
-        key: a,
+    vm,
+    defineVmProp,
+    getNode,
+    pluginVersionID,
+  }, handle) {
+    /**
+     * Defines a connector endpoint property (start or end).
+     * @param endpointKey - 'connectorStart' or 'connectorEnd'
+     */
+    const defineEndpointProp = (endpointKey) => {
+      defineVmProp({
+        handle,
+        key: endpointKey,
         options: {
-          enumerable: !0,
-          metricsKey: `node.${a}`,
+          enumerable: true,
+          metricsKey: `node.${endpointKey}`,
           get() {
-            let t = i(this)[a]
-            let n = {
-              endpointNodeId: t.endpointNodeID,
+            const endpoint = getNode(this)[endpointKey]
+            const result = {
+              endpointNodeId: endpoint.endpointNodeID,
             }
-            t.magnet === SpR.NONE ? n.position = t.position : n.magnet = _$$w3.ConnectorMagnet[t.magnet]
-            let r = e.deepWrap(n)
-            e.deepFreezeObject(r)
-            return r
+            if (endpoint.magnet === SpR.NONE) {
+              result.position = endpoint.position
+            }
+            else {
+              result.magnet = _$$w3.ConnectorMagnet[endpoint.magnet]
+            }
+            const wrapped = vm.deepWrap(result)
+            vm.deepFreezeObject(wrapped)
+            return wrapped
           },
-          set(t) {
-            let r = i(this)
-            let s = Kb(_$$u({
-              vm: e,
-              handle: t,
+          set(value) {
+            const node = getNode(this)
+            const endpointValue = Kb(_$$u({
+              vm,
+              handle: value,
               zSchema: _$$N.ConnectorEndpoint,
-              property: a,
+              property: endpointKey,
             }), {
-              endpointNodeId: r.containingCanvas,
+              endpointNodeId: node.containingCanvas,
               magnet: 'NONE',
               position: {
                 x: 0,
                 y: 0,
               },
             })
-            if (!sH(s.endpointNodeId))
+            if (!sH(endpointValue.endpointNodeId))
               throw new Error('Invalid endpointNodeId')
-            if (!n && r.connectorLineType === 'STRAIGHT' && s.magnet !== 'CENTER' && s.magnet !== 'NONE') {
+            if (!pluginVersionID && node.connectorLineType === 'STRAIGHT' && endpointValue.magnet !== 'CENTER' && endpointValue.magnet !== 'NONE') {
               throw new Error('Straight connector endpoints may only use the CENTER or NONE magnets.\n\nThis error only shows up in development code for now. This restriction will be enforced for published plugins in 2024. Please update your code to ensure that your plugin/widget continues to work.')
             }
-            if (r.connectorLineType === 'ELBOWED' && s.magnet === 'CENTER') {
+            if (node.connectorLineType === 'ELBOWED' && endpointValue.magnet === 'CENTER') {
               throw new Error('Elbowed connector endpoints may not use the CENTER magnet')
             }
-            if (r.connectorLineType === 'CURVED' && s.magnet === 'CENTER') {
+            if (node.connectorLineType === 'CURVED' && endpointValue.magnet === 'CENTER') {
               throw new Error('Curved connector endpoints may not use the CENTER magnet')
             }
-            r[a] = {
-              endpointNodeID: s.endpointNodeId,
-              magnet: _$$w3.ConnectorMagnet[s.magnet],
-              position: s.position,
+            node[endpointKey] = {
+              endpointNodeID: endpointValue.endpointNodeId,
+              magnet: _$$w3.ConnectorMagnet[endpointValue.magnet],
+              position: endpointValue.position,
             }
           },
         },
-        canWriteInReadOnly: !1,
-        hasEditScope: !0,
+        canWriteInReadOnly: false,
+        hasEditScope: true,
       })
     }
+    defineEndpointProp('connectorStart')
+    defineEndpointProp('connectorEnd')
   },
+  /**
+   * Connector Stroke Cap API - manages connector stroke cap properties.
+   * Provides getter/setter for connectorStartStrokeCap and connectorEndStrokeCap.
+   * Original: connectorStrokeCap
+   */
   connectorStrokeCap({
-    vm: e,
-    defineVmProp: t,
-    getNode: i,
-  }, n) {
-    let r = (r, a) => {
-      t({
-        handle: n,
-        key: r,
+    vm,
+    defineVmProp,
+    getNode,
+  }, handle) {
+    /**
+     * Defines a connector stroke cap property.
+     * @param propKey - API property key
+     * @param nodeField - Node field key
+     */
+    const defineStrokeCapProp = (propKey, nodeField) => {
+      defineVmProp({
+        handle,
+        key: propKey,
         options: {
-          enumerable: !0,
-          metricsKey: `node.${r}`,
+          enumerable: true,
+          metricsKey: `node.${propKey}`,
           get() {
-            let t = i(this)[a]
-            return t ? e.deepWrap(t) : e.undefined
+            const value = getNode(this)[nodeField]
+            return value ? vm.deepWrap(value) : vm.undefined
           },
-          set(t) {
-            i(this)[a] = _$$u({
-              vm: e,
-              handle: t,
+          set(value) {
+            getNode(this)[nodeField] = _$$u({
+              vm,
+              handle: value,
               zSchema: _$$N.ConnectorStrokeCap,
-              property: r,
+              property: propKey,
             })
           },
         },
-        canWriteInReadOnly: !1,
-        hasEditScope: !0,
+        canWriteInReadOnly: false,
+        hasEditScope: true,
       })
     }
-    r('connectorStartStrokeCap', 'connectorStartCap')
-    r('connectorEndStrokeCap', 'connectorEndCap')
+    defineStrokeCapProp('connectorStartStrokeCap', 'connectorStartCap')
+    defineStrokeCapProp('connectorEndStrokeCap', 'connectorEndCap')
   },
+  /**
+   * Connector Line Type API - manages connector line type property.
+   * Provides getter/setter for connectorLineType.
+   * Original: connectorLineType
+   */
   connectorLineType({
-    vm: e,
-    defineVmProp: t,
-    getNode: i,
-  }, n) {
-    t({
-      handle: n,
+    vm,
+    defineVmProp,
+    getNode,
+  }, handle) {
+    defineVmProp({
+      handle,
       key: 'connectorLineType',
       options: {
-        enumerable: !0,
+        enumerable: true,
         metricsKey: 'node.connectorLineType',
         get() {
-          return e.newString(i(this).connectorLineType)
+          return vm.newString(getNode(this).connectorLineType)
         },
-        set(t) {
-          i(this).connectorLineType = _$$u({
-            vm: e,
-            handle: t,
+        set(value) {
+          getNode(this).connectorLineType = _$$u({
+            vm,
+            handle: value,
             zSchema: _$$N.ConnectorLineType,
             property: 'connectorLineType',
           })
-          return e.undefined
+          return vm.undefined
         },
       },
-      canWriteInReadOnly: !1,
-      hasEditScope: !0,
+      canWriteInReadOnly: false,
+      hasEditScope: true,
     })
   },
   setProperties({
@@ -12725,7 +12753,7 @@ export const NodeAPI = {
             node.setAnnotations([])
             return vm.undefined
           }
-          const result = []
+          const result: AnnotationCategoryData[] = []
           for (const ann of annotations) {
             const {
               label,
@@ -12809,26 +12837,26 @@ export const NodeAPI = {
       const toSide = measurement.toSameSide
         ? fromSide
         : (() => {
-          switch (fromSide) {
-            case 'TOP':
-              return 'BOTTOM'
-            case 'BOTTOM':
-              return 'TOP'
-            case 'LEFT':
-              return 'RIGHT'
-            case 'RIGHT':
-              return 'LEFT'
-          }
-        })()
+            switch (fromSide) {
+              case 'TOP':
+                return 'BOTTOM'
+              case 'BOTTOM':
+                return 'TOP'
+              case 'LEFT':
+                return 'RIGHT'
+              case 'RIGHT':
+                return 'LEFT'
+            }
+          })()
       offsetValue = measurement.outerOffsetFixed === 0
         ? {
-          type: 'INNER',
-          relative: measurement.innerOffsetRelative,
-        }
+            type: 'INNER',
+            relative: measurement.innerOffsetRelative,
+          }
         : {
-          type: 'OUTER',
-          fixed: measurement.outerOffsetFixed,
-        }
+            type: 'OUTER',
+            fixed: measurement.outerOffsetFixed,
+          }
       const startObj = vm.newObject()
       vm.setProp(startObj, 'node', startNode)
       vm.setProp(startObj, 'side', vm.newString(fromSide))
@@ -13679,12 +13707,12 @@ export const NodeAPI = {
             })(),
             timing: transition.trigger.type === tbx.AFTER_DELAY
               ? {
-                type: 'AFTER_DELAY',
-                delay: transition.trigger.delay,
-              }
+                  type: 'AFTER_DELAY',
+                  delay: transition.trigger.delay,
+                }
               : {
-                type: 'ON_CLICK',
-              },
+                  type: 'ON_CLICK',
+                },
           })
         }
         return vm.$$null
@@ -13795,13 +13823,13 @@ export const NodeAPI = {
             })(),
             trigger: transition.timing.type === 'AFTER_DELAY'
               ? {
-                type: tbx.AFTER_DELAY,
-                delay: transition.timing.delay ?? 0,
-              }
+                  type: tbx.AFTER_DELAY,
+                  delay: transition.timing.delay ?? 0,
+                }
               : {
-                type: tbx.ON_CLICK,
-                delay: 0,
-              },
+                  type: tbx.ON_CLICK,
+                  delay: 0,
+                },
           })
           return vm.undefined
         }
@@ -13909,7 +13937,7 @@ function validateAndExtractCollectionId({
   // Invalid handle type
   throw new Error(`Cannot call ${callerName} without a collection node parameter.`)
 }
-let colors = ['yellow', 'orange', 'red', 'pink', 'violet', 'blue', 'teal', 'green']
+let colors = ['yellow', 'orange', 'red', 'pink', 'violet', 'blue', 'teal', 'green'] as const
 
 /**
  * Validates a collection ID
@@ -14107,12 +14135,12 @@ export const AnnotationCategoryAPI = {
             return cat.custom === null
               ? cat
               : {
-                ...cat,
-                custom: {
-                  ...cat.custom,
-                  color: mapColorName(colorValue),
-                },
-              }
+                  ...cat,
+                  custom: {
+                    ...cat.custom,
+                    color: mapColorName(colorValue),
+                  },
+                }
           }
           return e
         })
@@ -14159,12 +14187,12 @@ export const AnnotationCategoryAPI = {
             return cat.custom === null
               ? cat
               : {
-                ...cat,
-                custom: {
-                  ...cat.custom,
-                  label: labelValue,
-                },
-              }
+                  ...cat,
+                  custom: {
+                    ...cat.custom,
+                    label: labelValue,
+                  },
+                }
           }
           return e
         })
@@ -14183,18 +14211,14 @@ export const AnnotationCategoryAPI = {
 }
 let annotationCategoryApiMethods = [AnnotationCategoryAPI.label, AnnotationCategoryAPI.color, AnnotationCategoryAPI.isPreset, AnnotationCategoryAPI.remove, AnnotationCategoryAPI.setColor, AnnotationCategoryAPI.setLabel]
 class AnnotationCategoryFactory {
-  vm: NoOpVm
-  annotationCategoryPrototype: any
-  sceneGraph: any
-
-  constructor(e: AnnotationCategoryFactoryOptions) {
+  constructor(e) {
     // Set properties with proper types
     this.vm = e.vm
     this.annotationCategoryPrototype = setupPrototypeFromArgs(e, 'AnnotationCategory', ...annotationCategoryApiMethods)
     this.sceneGraph = e.sceneGraph
   }
 
-  createAnnotationCategoryHandle(e: string) {
+  createAnnotationCategoryHandle(e) {
     let t = this.vm
     if (!fn(sH(e)))
       return t.$$null
@@ -14217,23 +14241,23 @@ class AnnotationCategoryFactory {
     getFeatureFlags().plugins_annotations_seat_check && !fb()
       ? reject(e.newString('A Full or Dev seat is required to get annotation categories'))
       : e.registerPromise(iJ(this.sceneGraph)).then((t) => {
-        let r = e.newArray()
-        for (let [i, a] of t.entries()) {
-          let t = this.createAnnotationCategoryHandle(a.id)
-          if (e.isNull(t)) {
-            reject(e.newString('Failed to create annotation category'))
-            return
+          let r = e.newArray()
+          for (let [i, a] of t.entries()) {
+            let t = this.createAnnotationCategoryHandle(a.id)
+            if (e.isNull(t)) {
+              reject(e.newString('Failed to create annotation category'))
+              return
+            }
+            e.setProp(r, i.toString(), t)
           }
-          e.setProp(r, i.toString(), t)
-        }
-        resolve(r)
-      }).catch((t) => {
-        reject(e.newString(t.message))
-      })
+          resolve(r)
+        }).catch((t) => {
+          reject(e.newString(t.message))
+        })
     return promise
   }
 
-  getLocalAnnotationCategoryByIdAsync(e: string) {
+  getLocalAnnotationCategoryByIdAsync(e) {
     let t = this.vm
     let {
       promise,
@@ -14243,19 +14267,19 @@ class AnnotationCategoryFactory {
     getFeatureFlags().plugins_annotations_seat_check && !fb()
       ? reject(t.newString('A Full or Dev seat is required to get annotation categories'))
       : t.registerPromise(iJ(this.sceneGraph)).then((i) => {
-        let r = i.find(t => t.id === e)
-        if (void 0 === r) {
-          resolve(t.$$null)
-          return
-        }
-        resolve(this.createAnnotationCategoryHandle(r.id))
-      }).catch((e) => {
-        reject(t.newString(e.message))
-      })
+          let r = i.find(t => t.id === e)
+          if (void 0 === r) {
+            resolve(t.$$null)
+            return
+          }
+          resolve(this.createAnnotationCategoryHandle(r.id))
+        }).catch((e) => {
+          reject(t.newString(e.message))
+        })
     return promise
   }
 
-  createAnnotationCategoryAsync(e: string, t: string) {
+  createAnnotationCategoryAsync(e, t) {
     let i = this.vm
     let {
       promise,
@@ -14265,31 +14289,31 @@ class AnnotationCategoryFactory {
     getFeatureFlags().plugins_annotations_seat_check && !fb()
       ? reject(i.newString('A Full seat is required to create annotation categories'))
       : i.registerPromise(iJ(this.sceneGraph)).then((n) => {
-        let s = fO(this.sceneGraph)
-        let o = {
-          id: s,
-          preset: Bll.NONE,
-          custom: {
-            label: e,
-            color: mapColorName(t),
-          },
-        }
-        let l = this.sceneGraph.getRoot()
-        let d = [...n, o]
-        _$$r(() => l7.plugin('update-annotation-categories', () => {
-          let e = l.setAnnotationCategories(d)
-          if (e !== '') {
-            reject(i.newString(e))
-            return
+          let s = fO(this.sceneGraph)
+          let o = {
+            id: s,
+            preset: Bll.NONE,
+            custom: {
+              label: e,
+              color: mapColorName(t),
+            },
           }
-          let t = this.createAnnotationCategoryHandle(s)
-          if (i.isNull(t)) {
-            reject(i.newString('Failed to create annotation category'))
-            return
-          }
-          resolve(t)
-        }))
-      })
+          let l = this.sceneGraph.getRoot()
+          let d = [...n, o]
+          _$$r(() => l7.plugin('update-annotation-categories', () => {
+            let e = l.setAnnotationCategories(d)
+            if (e !== '') {
+              reject(i.newString(e))
+              return
+            }
+            let t = this.createAnnotationCategoryHandle(s)
+            if (i.isNull(t)) {
+              reject(i.newString('Failed to create annotation category'))
+              return
+            }
+            resolve(t)
+          }))
+        })
     return promise
   }
 }
@@ -14501,8 +14525,6 @@ let timerAndStateEvents = _$$z.union([_$$z.enum(['close', 'selectionchange', 'cu
  * Handles image bytes loading, animated image info, and SHA1-based image management
  */
 export class ImageStore {
-  hashToPrivateImage: Map<string, any>
-
   constructor() {
     this.hashToPrivateImage = new Map()
   }
@@ -14517,14 +14539,14 @@ export class ImageStore {
   /**
    * Get internal bytes for an image synchronously
    */
-  internalBytesForImage(hash: string) {
+  internalBytesForImage(hash) {
     return this.getPrivateImageOrThrow(hash).bytes
   }
 
   /**
    * Get image bytes asynchronously, loading if necessary
    */
-  async bytesFromImage(hash: string) {
+  async bytesFromImage(hash) {
     const privateImage = this.getPrivateImageOrThrow(hash)
     if (privateImage.bytes == null) {
       try {
@@ -14541,7 +14563,7 @@ export class ImageStore {
   /**
    * Get private image or throw error if not found
    */
-  getPrivateImageOrThrow(hash: string) {
+  getPrivateImageOrThrow(hash) {
     const privateImage = this.hashToPrivateImage.get(hash)
     if (privateImage === undefined) {
       throw new Error('SHA1 hash does not correspond to an existing image')
@@ -14552,7 +14574,7 @@ export class ImageStore {
   /**
    * Get or create a private image entry
    */
-  getOrCreatePrivateImage(hash: string, animatedInfo: any) {
+  getOrCreatePrivateImage(hash, animatedInfo) {
     let privateImage = this.hashToPrivateImage.get(hash)
     if (privateImage === undefined) {
       privateImage = {
@@ -14570,7 +14592,7 @@ export class ImageStore {
   /**
    * Get image from SHA1 hash
    */
-  getImageFromSHA1(hash: string) {
+  getImageFromSHA1(hash) {
     const existingImage = this.hashToPrivateImage.get(hash)
     if (existingImage !== undefined) {
       return existingImage
@@ -14582,7 +14604,7 @@ export class ImageStore {
   /**
    * Create image from bytes and handle animated image processing
    */
-  createImage(imageBytes: any) {
+  createImage(imageBytes) {
     const uint8Array = new Uint8Array(imageBytes)
     NfO.isImageValid(uint8Array)
     const hash = Et(uint8Array)
@@ -14610,7 +14632,7 @@ export class ImageStore {
   /**
    * Extract cover frame from animated image
    */
-  extractAnimatedImageCover(imageBytes: any) {
+  extractAnimatedImageCover(imageBytes) {
     const animatedImage = _$$J2(imageBytes)
     if (!animatedImage) {
       return null
@@ -14971,7 +14993,7 @@ function processVectorData(e) {
     vertices: e.vertices,
     segments: e.segments,
     regions: e.regions.map((region) => {
-      let processedRegion: ProcessedRegion = {
+      let processedRegion = {
         windingRule: region.windingRule,
         loops: region.loops,
       }
@@ -15055,57 +15077,7 @@ function tqNew(e) {
  * This class serves as the central factory for all node types in the plugin system
  */
 class NodeFactory {
-  cache: Map<string, any>
-  incLoadingErrorLogger: any
-  sceneGraph: any
-  vm: NoOpVm
-  fullscreenEditorType: any
-  documentNodePrototype: any
-  pageNodePrototype: any
-  sliceNodePrototype: any
-  frameNodePrototype: any
-  groupNodePrototype: any
-  componentNodePrototype: any
-  componentSetNodePrototype: any
-  instanceNodePrototype: any
-  booleanOperationNodePrototype: any
-  vectorNodePrototype: any
-  starNodePrototype: any
-  lineNodePrototype: any
-  ellipseNodePrototype: any
-  polygonNodePrototype: any
-  rectangleNodePrototype: any
-  textNodePrototype: any
-  textPathNodePrototype: any
-  transformNodePrototype: any
-  stickyNodePrototype: any
-  highlightNodePrototype: any
-  codeBlockNodePrototype: any
-  shapeWithTextNodePrototype: any
-  connectorNodePrototype: any
-  stampNodePrototype: any
-  textSublayerNodePrototype: any
-  alignableTextSublayerNodePrototype: any
-  labelSublayerNodePrototype: any
-  widgetNodePrototype: any
-  embedPrototype: any
-  linkUnfurlPrototype: any
-  mediaPrototype: any
-  sectionPrototype: any
-  washiTapeNodePrototype: any
-  tableNodePrototype: any
-  tableCellNodePrototype: any
-  slideNodePrototype: any
-  slideGridNodePrototype: any
-  slideRowNodePrototype: any
-  flappNodePrototype: any
-  moduleNodePrototype: any
-  webpageNodePrototype: any
-  codeLayerNodePrototype: any
-  repeaterNodePrototype: any
-  cmsRichTextNodePrototype: any
-
-  constructor(e: NoOpVm, t: NodeFactoryOptions) {
+  constructor(e, t) {
     this.cache = new Map()
     let i = {
       vm: e,
@@ -15560,7 +15532,7 @@ export const StyleAPI = {
         return resultArray
       },
       prepareDocument: async (styleNode) => {
-        await fs(styleNode.consumers.map(c => c.id), documentAccessState)
+        await loadAllPluginPages(styleNode.consumers.map(c => c.id), documentAccessState)
       },
       incrementalSafeApi,
       allowIncrementalUnsafeApiCalls,
@@ -15574,7 +15546,7 @@ export const StyleAPI = {
     vm,
     getNode,
   }, handle) {
-    vm.defineFunction(handle, 'getPublishStatusAsync', 'style.getPublishStatusAsync', function () {
+    vm.defineFunction(handle, 'getPublishStatusAsync', 'style.getPublishStatusAsync', () => {
       const node = getNode(this)
       const {
         promise,
@@ -15596,9 +15568,10 @@ export const StyleAPI = {
     getNode,
     styleManager,
   }, handle) {
-    vm.defineFunction(handle, 'remove', 'style.remove', function () {
+    vm.defineFunction(handle, 'remove', 'style.remove', () => {
+      const node = getNode(this)
       l7.plugin('plugin-remove-style', () => {
-        styleManager.softDeleteStyle(getNode(this))
+        styleManager.softDeleteStyle(node)
       })
       return vm.undefined
     })
@@ -15683,16 +15656,7 @@ let re = [...n6, NodeAPI.layoutGrids, StyleAPI.boundVariables]
  * This class handles the creation of various style types including paint, text, effect, and grid styles
  */
 class StyleFactory {
-  cache: Map<string, any>
-  vm: NoOpVm
-  pluginId: string
-  styleManager: StyleManager
-  paintStylePrototype: any
-  textStylePrototype: any
-  effectStylePrototype: any
-  gridStylePrototype: any
-
-  constructor(e: StyleFactoryOptions) {
+  constructor(e) {
     this.cache = new Map()
     let t = {
       ...e,
@@ -15722,7 +15686,7 @@ class StyleFactory {
    * @param styleId - The unique identifier for the style
    * @returns VM-wrapped style object or null if style doesn't exist
    */
-  createStyle(styleId: string) {
+  createStyle(styleId) {
     const vm = this.vm
     const cachedStyle = this.cache.get(styleId)
     const styleData = this.styleManager.get(styleId)
@@ -15758,7 +15722,7 @@ class StyleFactory {
    * @param styleType - The type of style to create (FILL, TEXT, EFFECT, GRID)
    * @returns VM object with appropriate prototype
    */
-  createStyleObjectByType(styleType: string) {
+  createStyleObjectByType(styleType) {
     const vm = this.vm
     const stylePrototypes = {
       FILL: this.paintStylePrototype,
@@ -15783,7 +15747,7 @@ class StyleFactory {
    * @param styleObject - The VM style object to configure
    * @param styleId - The style identifier for property and cache setup
    */
-  configureStyleObject(styleObject: any, styleId: string) {
+  configureStyleObject(styleObject, styleId) {
     const vm = this.vm
 
     // Define ID property
@@ -15796,36 +15760,6 @@ class StyleFactory {
     vm.shallowFreezeObject(styleObject)
     this.cache.set(styleId, styleObject)
     vm.retainHandle(styleObject)
-  }
-
-  /**
-   * Retrieves a style by its ID.
-   * @param styleId - The ID of the style to retrieve
-   * @returns The style object or null if not found
-   */
-  getStyleById(styleId: string) {
-    return this.createStyle(styleId)
-  }
-
-  /**
-   * Asynchronously imports a style by its key.
-   * @param styleKey - The key of the style to import
-   * @returns Promise resolving to the imported style
-   */
-  importStyleByKeyAsync(styleKey: string) {
-    const {
-      promise,
-      resolve,
-      reject,
-    } = this.vm.newPromise()
-    this.vm.registerPromise(fetchAndSubscribeStyle(styleKey)).then(styleInfo => resolve(l7.plugin('plugin-create-style', () => this.createStyle(styleInfo)))).catch((error) => {
-      let errorMessage = `unable to import style with key ${styleKey}`
-      if (typeof error === 'string')
-        errorMessage = error; else if (error instanceof Error)
-        errorMessage = error.message
-      reject(this.vm.newString(errorMessage))
-    })
-    return promise
   }
 }
 let rp = Ju(({
@@ -15849,14 +15783,14 @@ let rp = Ju(({
       children: i.length > 50
         ? _$$tx('textreview.use_plugin_name_title_default', {})
         : _$$tx('textreview.use_plugin_name_title', {
-          pluginName: i,
-        }),
+            pluginName: i,
+          }),
     }),
     confirmText: i.length > 20
       ? _$$t('textreview.use_plugin_name_confirm_default', {})
       : _$$t('textreview.use_plugin_name_confirm', {
-        pluginName: i,
-      }),
+          pluginName: i,
+        }),
     onCancel: o,
     onClose: o,
     onConfirm: () => {
@@ -15923,20 +15857,20 @@ export const VariableCollectionAPI = {
             }
             return vm.deepWrap(isExtension
               ? modes.map((mode) => {
-                let parentModeId = ''
-                if (mode.parentModeID && backingCollection) {
-                  parentModeId = CUU?.isVariableSetExtension(backingCollection.id) ? `${backingCollection.id}/${mode.parentModeID}` : mode.parentModeID
-                }
-                return {
-                  name: mode.name,
-                  modeId: `${collectionId}/${mode.modeID}`,
-                  parentModeId,
-                }
-              })
+                  let parentModeId = ''
+                  if (mode.parentModeID && backingCollection) {
+                    parentModeId = CUU?.isVariableSetExtension(backingCollection.id) ? `${backingCollection.id}/${mode.parentModeID}` : mode.parentModeID
+                  }
+                  return {
+                    name: mode.name,
+                    modeId: `${collectionId}/${mode.modeID}`,
+                    parentModeId,
+                  }
+                })
               : modes.map(mode => ({
-                name: mode.name,
-                modeId: mode.modeID,
-              })))
+                  name: mode.name,
+                  modeId: mode.modeID,
+                })))
           }
           return vm.newArray()
         },
@@ -16389,78 +16323,139 @@ export const ExtendedVariableCollectionAPI = {
 let rC = [NodeAPI.name, NodeAPI.hiddenFromPublishing, NodeAPI.pluginData, VariableCollectionAPI.key, VariableCollectionAPI.defaultModeId, VariableCollectionAPI.modes, VariableCollectionAPI.remote, VariableCollectionAPI.variableIds, ...processFeatureFlagFunctions('ds_extended_collections', [VariableCollectionAPI.isExtension]), VariableCollectionAPI.remove, VariableCollectionAPI.getPublishStatus, ...processFeatureFlagFunctions('ds_extended_collections', [VariableCollectionAPI.extend])]
 let rT = [...rC, VariableCollectionAPI.addMode, VariableCollectionAPI.removeMode, VariableCollectionAPI.renameMode, VariableCollectionAPI.setDefaultMode]
 let rk = [...rC, ExtendedVariableCollectionAPI.parentVariableCollectionId, ExtendedVariableCollectionAPI.variableOverrides, ...processFeatureFlagFunctions('ds_extended_collections_modes_creation', [VariableCollectionAPI.addMode]), ...processFeatureFlagFunctions('ds_extended_collections_vars_creation', [ExtendedVariableCollectionAPI.localVariableIds, ExtendedVariableCollectionAPI.inheritedVariableIds]), ExtendedVariableCollectionAPI.removeOverridesForVariable]
+/**
+ * VariableCollectionFactory - Factory class for creating and managing variable collection handles.
+ * Handles both standard and extended variable collections, including creation, retrieval,
+ * and asynchronous operations for library collections.
+ */
 class VariableCollectionFactory {
-  constructor(e) {
-    this.vm = e.vm
-    this.variableCollectionPrototype = setupPrototypeFromArgs(e, 'VariableCollection', ...rT)
-    this.extendedVariableCollectionPrototype = setupPrototypeFromArgs(e, 'ExtendedVariableCollection', ...rk)
-    this.sceneGraph = e.sceneGraph
+  vm: NoOpVm
+  variableCollectionPrototype: any
+  extendedVariableCollectionPrototype: any
+  sceneGraph: any
+
+  /**
+   * Constructs a new VariableCollectionFactory.
+   * @param params - Factory initialization parameters.
+   */
+  constructor(params: {
+    vm: NoOpVm
+    sceneGraph: any
+    [key: string]: any
+  }) {
+    this.vm = params.vm
+    this.variableCollectionPrototype = setupPrototypeFromArgs(params, 'VariableCollection', ...rT)
+    this.extendedVariableCollectionPrototype = setupPrototypeFromArgs(params, 'ExtendedVariableCollection', ...rk)
+    this.sceneGraph = params.sceneGraph
   }
 
-  createVariableCollectionHandle(e, t) {
-    let i = this.vm
-    let n = gr.fromString(e)
-    if (!n || !t.getVariableCollectionNode(n))
-      return i.$$null
-    let r = CUU.isVariableSetExtension(e) ? this.extendedVariableCollectionPrototype : this.variableCollectionPrototype
-    let a = i.newObject(r)
-    i.defineProp(a, 'id', {
-      enumerable: !0,
-      writable: !1,
-      value: i.newString(e),
+  /**
+   * Creates a handle for a variable collection or extended variable collection.
+   * @param id - The variable collection id.
+   * @param sceneGraph - The scene graph instance.
+   * @returns The VM handle for the variable collection, or null if not found.
+   */
+  createVariableCollectionHandle(id: string, sceneGraph: any): any {
+    const { vm } = this
+    const collectionId = gr.fromString(id)
+    if (!collectionId || !sceneGraph.getVariableCollectionNode(collectionId)) {
+      return vm.$$null
+    }
+    const prototype = CUU.isVariableSetExtension(id)
+      ? this.extendedVariableCollectionPrototype
+      : this.variableCollectionPrototype
+    const handle = vm.newObject(prototype)
+    vm.defineProp(handle, 'id', {
+      enumerable: true,
+      writable: false,
+      value: vm.newString(id),
     })
-    return a
+    return handle
   }
 
-  createNewVariableCollection(e) {
-    return this.sceneGraph.createVariableCollection(e).id
+  /**
+   * Creates a new variable collection and returns its id.
+   * @param name - The name for the new variable collection.
+   * @returns The id of the created variable collection.
+   */
+  createNewVariableCollection(name: string): string {
+    return this.sceneGraph.createVariableCollection(name).id
   }
 
-  getLocalVariableCollections() {
-    let e = this.vm
-    let t = e.newArray()
-    for (let [i, n] of this.sceneGraph.getLocalVariableCollectionNodes().entries()) {
-      if (!getFeatureFlags().ds_extended_collections && CUU?.isVariableSetExtension(n.id)) {
+  /**
+   * Retrieves all local variable collections as a VM array.
+   * @returns VM array of variable collection handles.
+   */
+  getLocalVariableCollections(): any {
+    const { vm } = this
+    const arr = vm.newArray()
+    const collections = this.sceneGraph.getLocalVariableCollectionNodes()
+    let index = 0
+    for (const collection of collections) {
+      if (!getFeatureFlags().ds_extended_collections && CUU?.isVariableSetExtension(collection.id)) {
         continue
       }
-      let r = this.createVariableCollectionHandle(n.id, this.sceneGraph)
-      e.setProp(t, i.toString(), r)
+      const handle = this.createVariableCollectionHandle(collection.id, this.sceneGraph)
+      vm.setProp(arr, index.toString(), handle)
+      index++
     }
-    return t
+    return arr
   }
 
-  getLibraryVariableCollectionsAsync() {
-    let {
-      promise,
-      resolve,
-      reject,
-    } = this.vm.newPromise()
-    this.vm.registerPromise(rL()).then(async (e) => {
-      let i = await rO(e)
-      resolve(this.vm.deepWrap(i))
-    }).catch(reject)
+  /**
+   * Asynchronously retrieves all library variable collections.
+   * @returns Promise resolving to a VM-wrapped array of library variable collections.
+   */
+  getLibraryVariableCollectionsAsync(): Promise<any> {
+    const { vm } = this
+    const { promise, resolve, reject } = vm.newPromise()
+    vm.registerPromise(rL())
+      .then(async (libraries: any) => {
+        const collections = await rO(libraries)
+        resolve(vm.deepWrap(collections))
+      })
+      .catch(reject)
     return promise
   }
 
-  createNewExtendedVariableCollection(e, t) {
-    return l7.system('upsert-shared-collection-plugin', () => CUU.createVariableSetExtension(e, t))
+  /**
+   * Creates a new extended variable collection.
+   * @param collectionId - The base collection id.
+   * @param name - The name for the extension.
+   * @returns The id of the created extended variable collection.
+   */
+  createNewExtendedVariableCollection(collectionId: string, name: string): string {
+    return l7.system('upsert-shared-collection-plugin', () =>
+      CUU.createVariableSetExtension(collectionId, name)
+    )
   }
 
-  createExtendedVariableCollectionHandle(e) {
-    let t = this.vm
-    if (!gr.fromString(e))
-      return t.$$null
-    let i = t.newObject(this.extendedVariableCollectionPrototype)
-    t.defineProp(i, 'id', {
-      enumerable: !0,
-      writable: !1,
-      value: t.newString(e),
+  /**
+   * Creates a handle for an extended variable collection.
+   * @param id - The extended variable collection id.
+   * @returns The VM handle for the extended variable collection, or null if invalid.
+   */
+  createExtendedVariableCollectionHandle(id: string): any {
+    const { vm } = this
+    if (!gr.fromString(id)) {
+      return vm.$$null
+    }
+    const handle = vm.newObject(this.extendedVariableCollectionPrototype)
+    vm.defineProp(handle, 'id', {
+      enumerable: true,
+      writable: false,
+      value: vm.newString(id),
     })
-    return i
+    return handle
   }
 
-  async getOrUpsertVariableCollectionAsync(e) {
-    return await rN(yG(e))
+  /**
+   * Asynchronously gets or upserts a variable collection by key.
+   * @param key - The variable collection key.
+   * @returns Promise resolving to the node id.
+   */
+  async getOrUpsertVariableCollectionAsync(key: string): Promise<any> {
+    return await rN(yG(key))
   }
 }
 /**
@@ -17005,51 +17000,89 @@ export const d = {
     })
   },
 }
+/**
+ * VariableFactory - Factory class for creating and managing variable handles.
+ * Handles creation, retrieval, and import of variables, including support for
+ * local, subscribed, and library variables. Provides type-safe APIs and
+ * integrates with the scene graph and VM.
+ */
 class VariableFactory {
   vm: NoOpVm
   variablePrototype: any
   sceneGraph: any
 
-  constructor(e: any) {
-    this.vm = e.vm
-    this.variablePrototype = setupPrototypeFromArgs(e, 'Variable', ...rB)
-    this.sceneGraph = e.sceneGraph
+  /**
+   * Constructs a new VariableFactory.
+   * @param params - Factory initialization parameters.
+   */
+  constructor(params: {
+    vm: NoOpVm
+    sceneGraph: any
+    [key: string]: any
+  }) {
+    this.vm = params.vm
+    this.variablePrototype = setupPrototypeFromArgs(params, 'Variable', ...rB)
+    this.sceneGraph = params.sceneGraph
   }
 
-  createVariableHandle(e: string, t: any) {
-    let i = this.vm
-    let n = sD.fromString(e)
-    if (!n || !t.getVariableNode(n))
-      return i.$$null
-    let r = i.newObject(this.variablePrototype)
-    i.defineProp(r, 'id', {
+  /**
+   * Creates a handle for a variable.
+   * @param id - The variable id.
+   * @param sceneGraph - The scene graph instance.
+   * @returns The VM handle for the variable, or null if not found.
+   */
+  createVariableHandle(id: string, sceneGraph: any): any {
+    const { vm } = this
+    const variableId = sD.fromString(id)
+    if (!variableId || !sceneGraph.getVariableNode(variableId)) {
+      return vm.$$null
+    }
+    const handle = vm.newObject(this.variablePrototype)
+    vm.defineProp(handle, 'id', {
       enumerable: true,
       writable: false,
-      value: i.newString(e),
+      value: vm.newString(id),
     })
-    return r
+    return handle
   }
 
-  createNewVariable(e: string, t: string, i: string) {
-    isPrivateVariableType(i) && logInternalVariableExposure(i)
-    if (!getFeatureFlags().ds_extended_collections_vars_creation && CUU?.isVariableSetExtension(t)) {
+  /**
+   * Creates a new variable in the specified collection.
+   * @param name - The variable name.
+   * @param collectionId - The collection id.
+   * @param variableType - The variable type string.
+   * @returns The id of the created variable.
+   */
+  createNewVariable(name: string, collectionId: string, variableType: string): string {
+    if (isPrivateVariableType(variableType)) {
+      logInternalVariableExposure(variableType)
+    }
+    if (!getFeatureFlags().ds_extended_collections_vars_creation && CUU?.isVariableSetExtension(collectionId)) {
       throw new Error('Cannot create variables in extended variable collections')
     }
-    return this.sceneGraph.createVariable(e, t, rV(i)).id
+    return this.sceneGraph.createVariable(name, collectionId, rV(variableType)).id
   }
 
-  getLocalVariables(e?: string) {
-    let t = this.vm
-    let i = t.newArray()
-    let n = e ? rV(e) : null
-    let r = this.sceneGraph.getLocalVariableNodes({
-      resolvedDataType: n ?? undefined,
+  /**
+   * Retrieves all local variables, optionally filtered by variable type.
+   * @param variableType - Optional variable type string to filter by.
+   * @returns VM array of variable handles.
+   */
+  getLocalVariables(variableType?: string): any {
+    const { vm } = this
+    const arr = vm.newArray()
+    const resolvedType = variableType ? rV(variableType) : undefined
+    const variables = this.sceneGraph.getLocalVariableNodes({
+      resolvedDataType: resolvedType,
     })
-    for (let [n, a] of (r.length > 0 && isPrivateVariableType(e) && logInternalVariableExposure(e), r.entries())) {
-      let e = this.createVariableHandle(a.id, this.sceneGraph)
-      t.setProp(i, n.toString(), e)
+    if (variables.length > 0 && variableType && isPrivateVariableType(variableType)) {
+      logInternalVariableExposure(variableType)
     }
-    return i
+    variables.forEach((variable: any, idx: number) => {
+      const handle = this.createVariableHandle(variable.id, this.sceneGraph)
+      vm.setProp(arr, idx.toString(), handle)
+    })
+    return arr
   }
 
   /**
@@ -17057,20 +17090,18 @@ class VariableFactory {
    * @param variableType - Optional variable type string to filter by.
    * @returns VM array of variable handles.
    */
-  getSubscribedVariables(variableType?: string) {
-    const vm = this.vm
-    const resultArray = vm.newArray()
+  getSubscribedVariables(variableType?: string): any {
+    const { vm } = this
+    const arr = vm.newArray()
     const resolvedType = variableType ? rV(variableType) : null
-
-    // Filter subscribed variables by type if provided
-    const subscribedVariables = CWU.getSubscribedVariablesInfo().filter(info => resolvedType === null || info.resolvedType === resolvedType)
-
-    // Map variable IDs to handles and populate result array
-    subscribedVariables.forEach((info, index) => {
-      const variableHandle = this.createVariableHandle(info.id, this.sceneGraph)
-      vm.setProp(resultArray, index.toString(), variableHandle)
+    const subscribedVariables = CWU.getSubscribedVariablesInfo().filter(
+      info => resolvedType === null || info.resolvedType === resolvedType
+    )
+    subscribedVariables.forEach((info: any, idx: number) => {
+      const handle = this.createVariableHandle(info.id, this.sceneGraph)
+      vm.setProp(arr, idx.toString(), handle)
     })
-    return resultArray
+    return arr
   }
 
   /**
@@ -17078,15 +17109,12 @@ class VariableFactory {
    * @param collectionKey - The key of the variable collection.
    * @returns Promise resolving to a VM-wrapped array of variables.
    */
-  getVariablesInLibraryCollectionAsync(collectionKey: string) {
-    const {
-      promise,
-      resolve,
-      reject,
-    } = this.vm.newPromise()
-    this.vm.registerPromise(rU(collectionKey)).then((variables) => {
-      resolve(this.vm.deepWrap(variables))
-    }).catch(reject)
+  getVariablesInLibraryCollectionAsync(collectionKey: string): Promise<any> {
+    const { vm } = this
+    const { promise, resolve, reject } = vm.newPromise()
+    vm.registerPromise(rU(collectionKey))
+      .then((variables: any) => resolve(vm.deepWrap(variables)))
+      .catch(reject)
     return promise
   }
 
@@ -17095,19 +17123,23 @@ class VariableFactory {
    * @param variableKey - The key of the variable to import.
    * @returns Promise resolving to the created variable handle.
    */
-  importByKeyAsync(variableKey: string) {
-    const {
-      promise,
-      resolve,
-      reject,
-    } = this.vm.newPromise()
-    this.vm.registerPromise(fetchAndSubscribeVariable(_$$ey(variableKey))).then(variableInfo => resolve(l7.plugin('plugin-create-variable', () => this.createVariableHandle(variableInfo, this.sceneGraph)))).catch((error) => {
-      let errorMessage = `unable to import variable with key ${variableKey}`
-      if (typeof error === 'string')
-        errorMessage = error; else if (error instanceof Error)
-        errorMessage = error.message
-      reject(this.vm.newString(errorMessage))
-    })
+  importByKeyAsync(variableKey: string): Promise<any> {
+    const { vm } = this
+    const { promise, resolve, reject } = vm.newPromise()
+    vm.registerPromise(fetchAndSubscribeVariable(_$$ey(variableKey)))
+      .then(variableInfo =>
+        resolve(
+          l7.plugin('plugin-create-variable', () =>
+            this.createVariableHandle(variableInfo, this.sceneGraph)
+          )
+        )
+      )
+      .catch((error: any) => {
+        let errorMessage = `unable to import variable with key ${variableKey}`
+        if (typeof error === 'string') errorMessage = error
+        else if (error instanceof Error) errorMessage = error.message
+        reject(vm.newString(errorMessage))
+      })
     return promise
   }
 }
@@ -17118,14 +17150,14 @@ async function rU(variableCollectionKey) {
     variableCollectionKey,
   })
   const collectionResult = await QO(queryParams, (resolve, reject) => {
-    const cachedCollection = zl.get<VariableResult>(queryParams)
+    const cachedCollection = zl.get(queryParams)
     if (cachedCollection.status === 'loaded') {
       resolve(cachedCollection)
     }
     else if (cachedCollection.status === 'errors') {
       reject(`error fetching variables in collection with id "${variableCollectionKey}"`)
     }
-  }) as VariableResult
+  })
 
   // Transform variables from the collection
   const variables = collectionResult.data?.variableCollection?.variables.map((variable) => {
@@ -17240,14 +17272,14 @@ async function fetchAndProcessVariableData(variableKey) {
     key: variableKey,
   })
   const variableResult = await QO(queryParams, (resolve, reject) => {
-    const cachedVariable = zl.get<VariableResult>(queryParams)
+    const cachedVariable = zl.get<LibraryResult>(queryParams)
     if (cachedVariable.status === 'loaded') {
       resolve(cachedVariable)
     }
     else if (cachedVariable.status === 'errors') {
       reject(cachedVariable.errors)
     }
-  }) as VariableResult
+  }) as any
   const fileInfo = variableResult.data?.variable?.file
   const hubFileInfo = variableResult.data?.variable?.hubFile && oA(variableResult.data.variable.hubFile, null)
   const processedFile = Zt(fileInfo, hubFileInfo)
@@ -17289,11 +17321,15 @@ function logInternalVariableExposure(variableType) {
   // rY - Log warning when internal variable type is exposed to user
   x1('variables-plugin', `Internal only variable type exposed to user: ${variableType}`)
 }
+/**
+ * VideoStore - Manages private video cache, thumbnail generation, and SHA1-based video management.
+ * Handles video bytes loading, thumbnail extraction, and resource cleanup.
+ */
 export class VideoStore {
-  thumbnailGenerator: any
-  hashToPrivateVideo: Map<string, any>
-  hashToCoverImageHash: Map<string, string>
-  hashToCoverThumbnailImageHash: Map<string, string>
+  private thumbnailGenerator: typeof _$$t2
+  private hashToPrivateVideo: Map<string, { sha1: string }>
+  private hashToCoverImageHash: Map<string, string>
+  private hashToCoverThumbnailImageHash: Map<string, string>
 
   constructor() {
     this.thumbnailGenerator = _$$t2
@@ -17303,48 +17339,56 @@ export class VideoStore {
   }
 
   /**
-   * Create video from bytes asynchronously
+   * Asynchronously creates a video from bytes, validates, generates thumbnail, and stores hashes.
+   * @param videoBytes - The video data as an ArrayBuffer or TypedArray.
+   * @returns Promise resolving to the private video object.
    */
-  async createVideoAsync(videoBytes: any) {
+  async createVideoAsync(videoBytes: ArrayBuffer | Uint8Array): Promise<{ sha1: string }> {
     const uint8Array = new Uint8Array(videoBytes)
     NfO.isVideoValid(uint8Array)
-    let i = Et(uint8Array)
-    let n = this.thumbnailGenerator.createVideo()
-    return this.thumbnailGenerator.loadVideo(uint8Array, n).then(() => {
-      let e = NfO.uploadVideo(uint8Array, n)
-      this.hashToCoverImageHash.set(i, e.coverHash)
-      this.hashToCoverThumbnailImageHash.set(i, e.coverThumbnailHash)
-      return this.getOrCreatePrivateVideo(i)
-    }).catch(() => {
-      throw new Error(`Unable to generate a thumbnail for video`)
-    })
+    const hash = Et(uint8Array)
+    const videoObj = this.thumbnailGenerator.createVideo()
+    try {
+      await this.thumbnailGenerator.loadVideo(uint8Array, videoObj)
+      const { coverHash, coverThumbnailHash } = NfO.uploadVideo(uint8Array, videoObj)
+      this.hashToCoverImageHash.set(hash, coverHash)
+      this.hashToCoverThumbnailImageHash.set(hash, coverThumbnailHash)
+      return this.getOrCreatePrivateVideo(hash)
+    } catch {
+      throw new Error('Unable to generate a thumbnail for video')
+    }
   }
 
   /**
-   * Get or create private video by hash
+   * Retrieves or creates a private video entry by SHA1 hash.
+   * @param hash - The SHA1 hash of the video.
+   * @returns The private video object.
    */
-  getOrCreatePrivateVideo(hash: string) {
+  getOrCreatePrivateVideo(hash: string): { sha1: string } {
     let video = this.hashToPrivateVideo.get(hash)
     if (!video) {
-      video = {
-        sha1: hash,
-      }
+      video = { sha1: hash }
       this.hashToPrivateVideo.set(hash, video)
     }
     return video
   }
 
   /**
-   * Get thumbnail image for video
+   * Gets the cover image hash for a video.
+   * @param hash - The SHA1 hash of the video.
+   * @returns The cover image hash string, or empty string if not found.
    */
-  getThumbnailImageForVideo(hash: string) {
+  getThumbnailImageForVideo(hash: string): string {
     return this.hashToCoverImageHash.get(hash) || ''
   }
 
   /**
-   * Get private video or throw error
+   * Retrieves a private video by hash or throws if not found.
+   * @param hash - The SHA1 hash of the video.
+   * @returns The private video object.
+   * @throws Error if the video does not exist.
    */
-  getPrivateVideoOrThrow(hash: string) {
+  getPrivateVideoOrThrow(hash: string): { sha1: string } {
     const video = this.hashToPrivateVideo.get(hash)
     if (!video) {
       throw new Error('SHA1 hash does not correspond to an existing video')
@@ -17353,24 +17397,43 @@ export class VideoStore {
   }
 
   /**
-   * Clean up video resources
+   * Cleans up all video resources and resets internal maps.
    */
-  tearDown() {
+  tearDown(): void {
     this.hashToPrivateVideo = new Map()
     this.hashToCoverImageHash = new Map()
     this.hashToCoverThumbnailImageHash = new Map()
   }
 }
+/**
+ * IncLoadingErrorLogger - Handles logging and telemetry for incremental loading errors.
+ * Provides methods to log errors and conditionally log errors based on API call tracking.
+ * Original: IncLoadingErrorLogger
+ */
 class IncLoadingErrorLogger {
-  options: IncLoadingErrorLoggerOptions
+  options: any
   loggedApiCalls: Set<string>
 
-  constructor(e: IncLoadingErrorLoggerOptions) {
-    this.options = e
+  /**
+   * Constructs a new IncLoadingErrorLogger.
+   * @param options - Configuration options for the logger.
+   */
+  constructor(options: any) {
+    this.options = options
     this.loggedApiCalls = new Set()
   }
 
+  /**
+   * Logs an error using the NodeAPISetupUtils telemetry system.
+   * @param args - Arguments to pass to the telemetry logError function.
+   */
   logError = NodeAPISetupUtils.setupTelemetryLogError
+
+  /**
+   * Conditionally logs an error if it hasn't been logged for the given API call.
+   * Uses the NodeAPISetupUtils telemetry system.
+   * @param args - Arguments to pass to the telemetry maybeLogError function.
+   */
   maybeLogError = NodeAPISetupUtils.setupTelemetryMaybeLogError
 }
 function isPromiseLike(vmUtils, targetObject) {
@@ -17799,7 +17862,6 @@ let al = ['message']
 let ad = ['input']
 let ac = [_$$nT.Design, _$$nT.Whiteboard, _$$nT.DevHandoff, _$$nT.Slides, _$$nT.Sites, _$$nT.Illustration, _$$nT.Cooper]
 class PluginRuntime {
-  // Core properties
   vm: NoOpVm
   options: PluginRuntimeOptions
   visualBellCounter: number
@@ -17839,7 +17901,7 @@ class PluginRuntime {
   annotationCategoryFactory: any
   uiHandle: UIHandle
 
-  getNode = (e: any) => {
+   getNode = (e) => {
     let t = this.vm
     let i = this.privateSceneGraph
     if (!t.isObject(e)) {
@@ -17889,7 +17951,7 @@ class PluginRuntime {
     }
   }
 
-  getVariableNode = (e: any) => {
+  getVariableNode = (e) => {
     let t = this.vm
     let i = this.privateSceneGraph
     if (!t.isObject(e)) {
@@ -17909,7 +17971,7 @@ class PluginRuntime {
     return s
   }
 
-  getVariableCollectionNode = (e: any) => {
+  getVariableCollectionNode = (e) => {
     let t = this.vm
     let i = this.privateSceneGraph
     if (!t.isObject(e)) {
@@ -17930,7 +17992,7 @@ class PluginRuntime {
     return s
   }
 
-  getAnnotationCategory = (e: any) => {
+  getAnnotationCategory = (e) => {
     let t = this.vm
     let i = this.privateSceneGraph
     if (!t.isObject(e)) {
@@ -17953,7 +18015,7 @@ class PluginRuntime {
     return s
   }
 
-  constructor(vm: NoOpVm, options: PluginRuntimeOptions) {
+  constructor(vm, options) {
     this.vm = vm
     this.options = options
     this.visualBellCounter = 0
@@ -18030,11 +18092,11 @@ class PluginRuntime {
     this.textReviewRequestRejects = 0
     this.isTextReviewRequestModalOpen = false
     this.isWidget = this.options.apiMode?.type === 'WIDGET'
-    this.privateSceneGraph = options.sceneGraph ?? NT()
+    this.privateSceneGraph = options.sceneGraph ?? getSceneGraphInstance()
     this.styleManager = new StyleManager(this.privateSceneGraph)
     this.imageStore = new ImageStore()
     this.videoStore = new VideoStore()
-    this.documentAccessState = new DocumentAccess({
+    this.documentAccessState = new DocumentAccessState({
       incrementalMode: this.options.incrementalSafeApi,
       stats: options.stats,
       allowIncrementalUnsafeApiCalls: !!options.allowIncrementalUnsafeApiCalls,
@@ -18065,19 +18127,19 @@ class PluginRuntime {
     vm.retainHandle(this.mixedSentinel)
     this.runtimeOptions = getInitialOptions().ext_lego_plugins_runmode
       ? {
-        allowVisibleIframe: !RESTRICTED_TRIGGERS.NO_CHECKOUT.has(this.getRunMode()),
-        iframeId: _$$E3({
-          runMode: this.getRunMode(),
-        }),
-        allowInitiateCheckout: !RESTRICTED_TRIGGERS.NO_CHECKOUT.has(this.getRunMode()),
-      }
+          allowVisibleIframe: !RESTRICTED_TRIGGERS.NO_CHECKOUT.has(this.getRunMode()),
+          iframeId: _$$E3({
+            runMode: this.getRunMode(),
+          }),
+          allowInitiateCheckout: !RESTRICTED_TRIGGERS.NO_CHECKOUT.has(this.getRunMode()),
+        }
       : {
-        allowVisibleIframe: !RESTRICTED_TRIGGERS.NO_CHECKOUT.has(options.triggeredFrom),
-        iframeId: _$$E3({
-          triggeredFrom: options.triggeredFrom,
-        }),
-        allowInitiateCheckout: !options.triggeredFrom || !RESTRICTED_TRIGGERS.NO_UI.has(options.triggeredFrom),
-      }
+          allowVisibleIframe: !RESTRICTED_TRIGGERS.NO_CHECKOUT.has(options.triggeredFrom),
+          iframeId: _$$E3({
+            triggeredFrom: options.triggeredFrom,
+          }),
+          allowInitiateCheckout: !options.triggeredFrom || !RESTRICTED_TRIGGERS.NO_UI.has(options.triggeredFrom),
+        }
     vm.retainHandle(this.mixedSentinel)
     this.nodeFactory = new NodeFactory(vm, {
       pluginID: options.pluginID,
@@ -18429,14 +18491,14 @@ class PluginRuntime {
         enumerable,
         get() {
           if (incrementalSafeApi && incrementalSafeApiMetricsKey && !retainGetter) {
-            xc(allowIncrementalUnsafeApiCalls, metricsKey, incrementalSafeApiMetricsKey)
+            checkIncrementalUnsafeMember(allowIncrementalUnsafeApiCalls, metricsKey, incrementalSafeApiMetricsKey)
           }
           return resolveValue(parseThis(this))
         },
         set: setValue
           ? function (value) {
             if (incrementalSafeApi && setValueIncremental) {
-              xc(allowIncrementalUnsafeApiCalls, `${metricsKey} =`, incrementalSafeApiSetMetricsKey)
+              checkIncrementalUnsafeMember(allowIncrementalUnsafeApiCalls, `${metricsKey} =`, incrementalSafeApiSetMetricsKey)
             }
             return setValue(parseThis(self), value)
           }
@@ -18621,7 +18683,7 @@ class PluginRuntime {
       metricsKey,
       cb: (arg) => {
         if (incrementalSafeApi && incrementalSafeApiMetricsKey) {
-          xc(allowIncrementalUnsafeApiCalls, metricsKey, incrementalSafeApiMetricsKey)
+          checkIncrementalUnsafeMember(allowIncrementalUnsafeApiCalls, metricsKey, incrementalSafeApiMetricsKey)
         }
         return resolveValue(parseArg(arg))
       },
@@ -18701,7 +18763,7 @@ class PluginRuntime {
       metricsKey,
       cb(...args) {
         if (incrementalSafeApi) {
-          xc(allowIncrementalUnsafeApiCalls, metricsKey, incrementalSafeApiMetricsKey)
+          checkIncrementalUnsafeMember(allowIncrementalUnsafeApiCalls, metricsKey, incrementalSafeApiMetricsKey)
         }
         const thisContext = parseThis(this)
         const parsedArgs = parseArg(thisContext, ...args)
@@ -18892,7 +18954,7 @@ class PluginRuntime {
    * @returns undefined (no page-specific GUID)
    */
   setupStyleChangeEvent() {
-    this.vm.registerPromise(Ux(this.documentAccessState)).then(() => {
+    this.vm.registerPromise(loadInternalCanvasMemoized(this.documentAccessState)).then(() => {
       _$$iP(this.styleChangeCallback)
     }).catch((error) => {
       throw new Error(`Cannot register stylechange handler: ${error.message}`)
@@ -19143,10 +19205,10 @@ class PluginRuntime {
       return n.type === 'SUCCESS'
         ? isVMPromiseLike(e, n.handle)
           ? wrapVmPromise({
-            vm: e,
-            promiseHandle: n.handle,
-            shouldRetainResult: !0,
-          })
+              vm: e,
+              promiseHandle: n.handle,
+              shouldRetainResult: !0,
+            })
           : (e.retainHandle(n.handle), Promise.resolve(n.handle))
         : Promise.reject(new Error('Handler did not return success'))
     }))
@@ -19442,9 +19504,9 @@ class PluginRuntime {
     })
     return rawSuggestions.map(suggestion => typeof suggestion === 'string'
       ? {
-        name: suggestion,
-        data: undefined,
-      }
+          name: suggestion,
+          data: undefined,
+        }
       : suggestion)
   }
 
@@ -20567,8 +20629,8 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
     let n = this.eventHandlers.get(e)
     for (let r of (n
       ? this.eventHandlers.set(e, n.filter(({
-        once: e,
-      }) => !e))
+          once: e,
+        }) => !e))
       : n = [], n)) {
       let e = i.callFunction(r.handler, this.vm.undefined, ...t)
       if (e.type === 'SUCCESS' && !1 === i.deepUnwrap(e.handle))
@@ -20749,10 +20811,10 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
         if (result.type === 'SUCCESS') {
           const promise = isVMPromiseLike(vm, result.handle)
             ? wrapVmPromise({
-              vm,
-              promiseHandle: result.handle,
-              shouldRetainResult: true,
-            })
+                vm,
+                promiseHandle: result.handle,
+                shouldRetainResult: true,
+              })
             : (vm.retainHandle(result.handle), Promise.resolve(result.handle))
           return vm.registerPromise(promise).then((handle) => {
             const validatedResult = _$$u({
@@ -21530,27 +21592,27 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
           })
           switch (this.fullscreenEditorType) {
             case _$$nT.Cooper:
-              {
-                const isInFocusedNodeView = Ez5?.cooperFocusView().isInFocusedNodeView.getCopy() ?? false
-                if (viewType === 'grid' && isInFocusedNodeView) {
-                  Ez5?.cooperFocusView().exitFocusedNodeViewAndLeavePanelsOpen()
-                }
-                else if (viewType === 'single-asset' && !isInFocusedNodeView) {
-                  Ez5?.cooperFocusView().enterFocusedNodeView()
-                }
-                break
+            {
+              const isInFocusedNodeView = Ez5?.cooperFocusView().isInFocusedNodeView.getCopy() ?? false
+              if (viewType === 'grid' && isInFocusedNodeView) {
+                Ez5?.cooperFocusView().exitFocusedNodeViewAndLeavePanelsOpen()
               }
+              else if (viewType === 'single-asset' && !isInFocusedNodeView) {
+                Ez5?.cooperFocusView().enterFocusedNodeView()
+              }
+              break
+            }
             case _$$nT.Slides:
-              {
-                const isInFocusedNodeView = Ez5?.singleSlideView().isInFocusedNodeView.getCopy() ?? false
-                if (viewType === 'grid' && isInFocusedNodeView) {
-                  Ez5?.singleSlideView().exitFocusedNodeView()
-                }
-                else if (viewType === 'single-asset' && !isInFocusedNodeView) {
-                  Ez5?.singleSlideView().enterFocusedNodeView()
-                }
-                break
+            {
+              const isInFocusedNodeView = Ez5?.singleSlideView().isInFocusedNodeView.getCopy() ?? false
+              if (viewType === 'grid' && isInFocusedNodeView) {
+                Ez5?.singleSlideView().exitFocusedNodeView()
               }
+              else if (viewType === 'single-asset' && !isInFocusedNodeView) {
+                Ez5?.singleSlideView().enterFocusedNodeView()
+              }
+              break
+            }
           }
         },
       },
@@ -21791,13 +21853,13 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
     if (plugin) {
       const pluginConfig = ZQ(plugin)
         ? {
-          type: 'local',
-          localFileId: plugin.localFileId,
-        }
+            type: 'local',
+            localFileId: plugin.localFileId,
+          }
         : {
-          type: 'published',
-          pluginId: plugin.plugin_id,
-        }
+            type: 'published',
+            pluginId: plugin.plugin_id,
+          }
       Br(pluginConfig)
     }
     requestAnimationFrame(() => resolve(vm.undefined))
@@ -22247,8 +22309,8 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
           value,
           ...(stats
             ? {
-              stats,
-            }
+                stats,
+              }
             : {}),
         }
         vm.registerPromise(setStorageEntry(requestParams)).then(() => resolve(vm.undefined), error => this.handleStorageError(reject, vm, 'set', key, error))
@@ -22287,7 +22349,7 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
           // remove: true, // Commented out: not supported in StorageEntry type
           // delete: true, // Alternative property for removal - also not supported
         })).then(
-          // Type assertion to bypass interface restrictions
+        // Type assertion to bypass interface restrictions
           () => resolve(vm.undefined),
           (error) => {
             const keyStr = JSON.stringify(key)
@@ -24369,7 +24431,7 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
                 const guid = IPu?.createBlankChildAtCoord(r, c, size, 'plugin_buzz_create_frame', true, assetType)
                 if (!guid)
                   throw new Error('Failed to create frame')
-                av(guid, buzzApiConfig.documentAccessState)
+                markPageLoaded(guid, buzzApiConfig.documentAccessState)
                 Ez5?.canvasGrid().recomputeGrid()
                 return buzzApiConfig.nodeFactory.createNode(guid, 'figma.buzz.createFrame')
               },
@@ -24409,7 +24471,7 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
                   row: r,
                   col: c,
                 })
-                av(instanceGuid, buzzApiConfig.documentAccessState)
+                markPageLoaded(instanceGuid, buzzApiConfig.documentAccessState)
                 Ez5?.canvasGrid().recomputeGrid()
                 return nodeObj
               },
@@ -24652,28 +24714,28 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
                   throw new Error('Mixed media paint not supported')
                 switch (mediaPaint.type) {
                   case 'IMAGE':
-                    {
-                      const hash = mediaPaint.image?.hash
-                      if (hash === undefined)
-                        throw new Error('Invalid Image paint - no hash found')
-                      const img = imageStore.getImageFromSHA1(B9(hash))
-                      if (img === null)
-                        throw new Error('Could not retrieve image')
-                      return createImageProcessor(vm, img)
-                    }
+                  {
+                    const hash = mediaPaint.image?.hash
+                    if (hash === undefined)
+                      throw new Error('Invalid Image paint - no hash found')
+                    const img = imageStore.getImageFromSHA1(B9(hash))
+                    if (img === null)
+                      throw new Error('Could not retrieve image')
+                    return createImageProcessor(vm, img)
+                  }
                   case 'VIDEO':
-                    {
-                      const hash = mediaPaint.video?.hash
-                      if (hash === undefined)
-                        throw new Error('Invalid Video paint - no hash found')
-                      try {
-                        const vid = videoStore.getPrivateVideoOrThrow(B9(hash))
-                        return createNodeHash(vm, vid)
-                      }
-                      catch {
-                        throw new Error('getMedia is not currently supported for videos not directly created through plugins')
-                      }
+                  {
+                    const hash = mediaPaint.video?.hash
+                    if (hash === undefined)
+                      throw new Error('Invalid Video paint - no hash found')
+                    try {
+                      const vid = videoStore.getPrivateVideoOrThrow(B9(hash))
+                      return createNodeHash(vm, vid)
                     }
+                    catch {
+                      throw new Error('getMedia is not currently supported for videos not directly created through plugins')
+                    }
+                  }
                   default:
                     throwTypeError(mediaPaint.type, 'Unknown media type')
                 }
@@ -24694,15 +24756,15 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
                 })
                 const paint = type === 'IMAGE'
                   ? processPaint(imageStore, videoStore, {
-                    type: 'IMAGE',
-                    imageHash: hash,
-                    scaleMode: 'FILL',
-                  }, [])
+                      type: 'IMAGE',
+                      imageHash: hash,
+                      scaleMode: 'FILL',
+                    }, [])
                   : processPaint(imageStore, videoStore, {
-                    type: 'VIDEO',
-                    videoHash: hash,
-                    scaleMode: 'FILL',
-                  }, [])
+                      type: 'VIDEO',
+                      videoHash: hash,
+                      scaleMode: 'FILL',
+                    }, [])
                 const {
                   promise,
                   resolve,
@@ -24770,7 +24832,7 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
           incrementalSafeApiMetricsKey: 'figma.getStyleByIdAsync',
           parseArg: t => styleApiConfig.vm.toString(t),
           prepareDocument: async () => {
-            await Ux(styleApiConfig.documentAccessState)
+            await loadInternalCanvasMemoized(styleApiConfig.documentAccessState)
           },
           resolveValue: id => styleApiConfig.styleFactory.createStyle(id),
           incrementalSafeApi: styleApiConfig.incrementalSafeApi,
@@ -24843,8 +24905,8 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
           metricsKey: `figma.${getMethod}`,
           incrementalSafeApiKey: getMethodAsync,
           incrementalSafeApiMetricsKey: `figma.${getMethodAsync}`,
-          parseArg: () => { },
-          prepareDocument: async () => { },
+          parseArg: () => {},
+          prepareDocument: async () => {},
           resolveValue: () => {
             const styles = styleApiConfig.styleManager.getAllLocalStyles(styleType).map(_$$nM)
             const arr = styleApiConfig.vm.newArray()
@@ -24910,7 +24972,7 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
               incrementalSafeApiMetricsKey: 'figma.variables.getVariableByIdAsync',
               parseArg: t => variableApiConfig.vm.toString(t),
               prepareDocument: async () => {
-                await Ux(variableApiConfig.documentAccessState)
+                await loadInternalCanvasMemoized(variableApiConfig.documentAccessState)
               },
               resolveValue: id => variableApiConfig.variableFactory.createVariableHandle(id, variableApiConfig.sceneGraph),
               isAllowedInReadOnly: true,
@@ -24931,7 +24993,7 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
                 zSchema: variableDefinitions.PublicVariableResolvedType.optional(),
                 property: 'resolvedType',
               }) ?? null,
-              prepareDocument: async () => { },
+              prepareDocument: async () => {},
               resolveValue: resolvedType => variableApiConfig.variableFactory.getLocalVariables(resolvedType),
               isAllowedInReadOnly: true,
               incrementalSafeApi: variableApiConfig.incrementalSafeApi,
@@ -24964,7 +25026,7 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
               incrementalSafeApiMetricsKey: 'figma.variables.getVariableCollectionByIdAsync',
               parseArg: t => variableApiConfig.vm.toString(t),
               prepareDocument: async () => {
-                await Ux(variableApiConfig.documentAccessState)
+                await loadInternalCanvasMemoized(variableApiConfig.documentAccessState)
               },
               resolveValue: id => variableApiConfig.variableCollectionFactory.createVariableCollectionHandle(id, variableApiConfig.sceneGraph),
               incrementalSafeApi: variableApiConfig.incrementalSafeApi,
@@ -24979,8 +25041,8 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
               metricsKey: 'figma.variables.getLocalVariableCollections',
               incrementalSafeApiKey: 'getLocalVariableCollectionsAsync',
               incrementalSafeApiMetricsKey: 'figma.variables.getLocalVariableCollectionsAsync',
-              parseArg: () => { },
-              prepareDocument: async () => { },
+              parseArg: () => {},
+              prepareDocument: async () => {},
               resolveValue: () => variableApiConfig.variableCollectionFactory.getLocalVariableCollections(),
               isAllowedInReadOnly: true,
               incrementalSafeApi: variableApiConfig.incrementalSafeApi,
@@ -25075,7 +25137,7 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
                   resolve,
                   reject,
                 } = variableApiConfig.vm.newPromise()
-                variableApiConfig.vm.registerPromise(Ux(variableApiConfig.documentAccessState)).then(() => {
+                variableApiConfig.vm.registerPromise(loadInternalCanvasMemoized(variableApiConfig.documentAccessState)).then(() => {
                   resolve(variableApiConfig.vm.deepWrap({
                     type: 'VARIABLE_ALIAS',
                     id,
@@ -25551,10 +25613,10 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
         metricsKey: 'figma.currentPage',
         get: () => {
           let t = v.privateSceneGraph.getCurrentPage()
-          return t === null ? e.$$null : (av(t.guid, this.documentAccessState), this.nodeFactory.createNode(t.guid, 'currentPage'))
+          return t === null ? e.$$null : (markPageLoaded(t.guid, this.documentAccessState), this.nodeFactory.createNode(t.guid, 'currentPage'))
         },
         set(t) {
-          incrementalSafeApi && xc(!!allowIncrementalUnsafeApiCalls, 'figma.currentPage =', 'figma.setCurrentPageAsync')
+          incrementalSafeApi && checkIncrementalUnsafeMember(!!allowIncrementalUnsafeApiCalls, 'figma.currentPage =', 'figma.setCurrentPageAsync')
           let i = v.getNode(t)
           if (i.type !== 'CANVAS')
             throw new Error('figma.currentPage expects a PageNode')
@@ -25578,7 +25640,7 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
           reject,
         } = e.newPromise()
         zl.set(_$$rp, !0)
-        e.registerPromise(vf(i.guid, this.documentAccessState)).then(() => {
+        e.registerPromise(ensurePluginPageLoaded(i.guid, this.documentAccessState)).then(() => {
           if (i.type !== 'CANVAS')
             throw new Error('figma.setCurrentPageAsync expects a PageNode')
           return this.privateSceneGraph.setCurrentPageAsync(i.guid)
@@ -25631,29 +25693,29 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
     })
     this.isWidget
       ? this.defineVmProp({
-        handle: y,
-        key: 'widgetId',
-        options: {
-          enumerable: !1,
-          metricsKey: 'figma.widgetId',
-          get: () => e.newString(this.options.pluginID),
-        },
-        canWriteInReadOnly: !1,
-        isAllowedInWidgetRender: !1,
-        hasEditScope: !1,
-      })
+          handle: y,
+          key: 'widgetId',
+          options: {
+            enumerable: !1,
+            metricsKey: 'figma.widgetId',
+            get: () => e.newString(this.options.pluginID),
+          },
+          canWriteInReadOnly: !1,
+          isAllowedInWidgetRender: !1,
+          hasEditScope: !1,
+        })
       : this.defineVmProp({
-        handle: y,
-        key: 'pluginId',
-        options: {
-          enumerable: !1,
-          metricsKey: 'figma.pluginId',
-          get: () => e.newString(this.options.pluginID),
-        },
-        canWriteInReadOnly: !1,
-        isAllowedInWidgetRender: !1,
-        hasEditScope: !1,
-      })
+          handle: y,
+          key: 'pluginId',
+          options: {
+            enumerable: !1,
+            metricsKey: 'figma.pluginId',
+            get: () => e.newString(this.options.pluginID),
+          },
+          canWriteInReadOnly: !1,
+          isAllowedInWidgetRender: !1,
+          hasEditScope: !1,
+        })
     this.defineVmProp({
       handle: y,
       key: 'command',
@@ -25785,7 +25847,7 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
               }),
             }
             const node = this.privateSceneGraph.createNode(nodeType, options)
-            av(node.guid, this.documentAccessState)
+            markPageLoaded(node.guid, this.documentAccessState)
             return this.nodeFactory.createNode(node.guid, `figma.${createMethod}`)
           },
           isAllowedInReadOnly: false,
@@ -25829,7 +25891,7 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
               }),
             }
             const node = this.privateSceneGraph.createNode(nodeType, options)
-            av(node.guid, this.documentAccessState)
+            markPageLoaded(node.guid, this.documentAccessState)
             return this.nodeFactory.createNode(node.guid, `figma.${createMethod}`)
           },
           isAllowedInReadOnly: false,
@@ -25863,7 +25925,7 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
               }),
             }
             const node = this.privateSceneGraph.createNode(nodeType, options)
-            av(node.guid, this.documentAccessState)
+            markPageLoaded(node.guid, this.documentAccessState)
             return this.nodeFactory.createNode(node.guid, `figma.${createMethod}`)
           },
           isAllowedInReadOnly: false,
@@ -25887,7 +25949,7 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
             throw new Error('The Starter plan only comes with 3 pages. Upgrade to Professional for unlimited pages.')
           }
           const node = this.privateSceneGraph.createNode(nodeType)
-          av(node.guid, this.documentAccessState, {
+          markPageLoaded(node.guid, this.documentAccessState, {
             ignoreReduxState: nodeType === 'CANVAS',
           })
           return this.nodeFactory.createNode(node.guid, `figma.${createMethod}`)
@@ -25935,7 +25997,7 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
         let e = this.privateSceneGraph.createNode('CANVAS')
         e.name = '---'
         e.isPageDivider = !0
-        av(e.guid, this.documentAccessState, {
+        markPageLoaded(e.guid, this.documentAccessState, {
           ignoreReduxState: !0,
         })
         return this.nodeFactory.createNode(e.guid, 'figma.createPageDivider')
@@ -26246,7 +26308,7 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
       incrementalSafeApiMetricsKey: 'figma.getNodeByIdAsync',
       parseArg: t => e.toString(t),
       prepareDocument: async (e) => {
-        await vf(e, this.documentAccessState)
+        await ensurePluginPageLoaded(e, this.documentAccessState)
       },
       resolveValue: t => (function ({
         nodeID: e,
@@ -26302,9 +26364,9 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
           let a = n?.styleKeyForPublish
           return r && a
             ? this.styleFactory.createStyle(_$$nM({
-              key: a,
-              version: r,
-            }))
+                key: a,
+                version: r,
+              }))
             : null
         }).filter(e => e != null)
         let a = e.newArray()
@@ -26436,9 +26498,9 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
         u > 0 && _$$k2.warn('There are still font loads in progress. Please ensure `closePlugin` is not called until after the font loading has resolved.')
         i
           ? this.closePlugin({
-            message: i,
-            isError: !1,
-          })
+              message: i,
+              isError: !1,
+            })
           : this.closePlugin(undefined)
         return e.undefined
       },
@@ -26684,11 +26746,11 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
         let r = e.isObject(t) && e.getBooleanProp(t, '__html__') && this.options.html
           ? this.options.html
           : _$$u({
-            vm: e,
-            handle: t,
-            zSchema: _$$z.string(),
-            property: 'showUI',
-          })
+              vm: e,
+              handle: t,
+              zSchema: _$$z.string(),
+              property: 'showUI',
+            })
         let a = _$$u({
           vm: e,
           handle: i,
@@ -26801,7 +26863,7 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
       incrementalSafeApiKey: 'getFileThumbnailNodeAsync',
       incrementalSafeApiMetricsKey: 'figma.getFileThumbnailNodeAsync',
       prepareDocument: async (e) => {
-        e && (await vf(e, this.documentAccessState))
+        e && (await ensurePluginPageLoaded(e, this.documentAccessState))
       },
       parseArg: (_e) => {
         let t = debugState.getState()
@@ -26993,7 +27055,7 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
             reject,
           } = e.newPromise()
           e.registerPromise(ag(this.privateSceneGraph, r)).then((e) => {
-            av(e, this.documentAccessState)
+            markPageLoaded(e, this.documentAccessState)
             i.editScope(t, () => resolve(this.nodeFactory.createNode(e, 'figma.createLinkPreviewAsync')))
           }, t => reject(e.newString(`Failed to create an embed. Error: ${t.message}`)))
           return promise
@@ -27042,7 +27104,7 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
         if (s == null)
           throw new Error('Failed to create GIF')
         s.fillPaintsForPluginOnly = a
-        av(n, this.documentAccessState)
+        markPageLoaded(n, this.documentAccessState)
         return this.nodeFactory.createNode(n, 'figma.createGif')
       },
       isAllowedInReadOnly: !1,

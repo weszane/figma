@@ -670,7 +670,7 @@ export interface NodeFactoryOptions {
   defineVmProp: any
   defineVmIncrementalProp: any
   addEventHandlersTo: any
-  incLoadingErrorLogger: IncLoadingErrorLogger
+  incLoadingErrorLogger: any
   openFileKey: string
   apiMode: any
   sceneGraph: any
@@ -686,7 +686,7 @@ export interface NodeFactoryOptions {
 }
 
 export interface StyleFactoryOptions {
-  vm: VMInstance
+  vm: any
   stats: any
   pluginID: string
   pluginVersionID: string
@@ -758,9 +758,8 @@ export interface CallbackInfo {
 }
 
 export interface AnnotationCategoryFactoryOptions {
-  vm: VMInstance
+  vm: any
   sceneGraph: any
-  // Add other properties as needed
 }
 
 // === Error and Logging Interfaces ===
@@ -864,11 +863,6 @@ export interface VideoStoreData {
   url?: string
 }
 
-export interface DocumentAccessState {
-  getIsIncrementalMode: () => boolean
-  addLoadedPageIds: (pageIds: string[]) => void
-  getLoadedPages: () => string[]
-}
 
 // === Style and Variable Management ===
 
@@ -1053,9 +1047,6 @@ export interface VariableCollectionFactory {
   getOrUpsertVariableCollectionAsync: (key: string) => Promise<string>
 }
 
-export interface AnnotationCategoryFactoryClass {
-  new(options: AnnotationCategoryFactoryOptions): AnnotationCategoryFactory
-}
 export interface AnnotationCategoryData {
   label: string
   properties: {type: string}[]
