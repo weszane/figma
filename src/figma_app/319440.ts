@@ -88,7 +88,7 @@ import { Ig } from "../905/805224";
 import { T as _$$T2 } from "../figma_app/453188";
 import { W as _$$W2 } from "../figma_app/691750";
 import { K as _$$K2 } from "../905/799615";
-import { f as _$$f } from "../905/26360";
+import { findContainingResponsiveSet } from "../905/26360";
 import { d as _$$d2 } from "../905/49800";
 import { J as _$$J3 } from "../905/270045";
 import { W as _$$W3 } from "../figma_app/110892";
@@ -821,7 +821,7 @@ export function $$ti7(e, t) {
   let h = function () {
     let e = Fk(e => {
       let t = e.getDirectlySelectedNodes();
-      return t.length > 0 && t.every(e => _$$f(e) && ("FRAME" === e.type || e.isCodeInstance && e.isLayerLikeCodeNode) && !e.isBreakpointFrame);
+      return t.length > 0 && t.every(e => findContainingResponsiveSet(e) && ("FRAME" === e.type || e.isCodeInstance && e.isLayerLikeCodeNode) && !e.isBreakpointFrame);
     });
     if (cJ() && e) return {
       type: ZU.CUSTOM_ACTION,

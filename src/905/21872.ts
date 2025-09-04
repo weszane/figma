@@ -1,25 +1,23 @@
+import type { TSSceneGraph } from '../figma_app/518682'
 import { parseInteger } from '../905/833686'
 
-interface SceneGraph {
-  scene: any
-  nodeContext: any
-}
-
-interface Bindings {
+export interface Bindings {
   NodeTsApi: {
     setGlobalUnstableNodeByID: (scene: any, sessionID: number, localID: number, nodeContext: any) => void
     [key: string]: any
   }
+  ConstraintsFacetTsApiGenerated: any
+  [key: string]: any
 }
 
 export class NodeReference {
   public guid: string
-  public sceneGraph: SceneGraph
+  public sceneGraph: TSSceneGraph
   public bindings: Bindings
   public sessionID: number
   public localID: number
 
-  constructor(guid: string, sceneGraph: SceneGraph, bindings: Bindings) {
+  constructor(guid: string, sceneGraph: TSSceneGraph, bindings: Bindings) {
     this.guid = guid
     this.sceneGraph = sceneGraph
     this.bindings = bindings

@@ -1,6 +1,6 @@
 import { SceneNodeCpp } from '../figma_app/13528'
 
-interface InsertChildOptions {
+export interface InsertChildOptions {
   skipValidation?: boolean
 }
 

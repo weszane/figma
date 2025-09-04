@@ -1,5 +1,5 @@
 import { m1T, GUn, f2e, Ez5, dBj, glU, nzw, qmM } from "../figma_app/763686";
-import { f } from "../905/26360";
+import { findContainingResponsiveSet } from "../905/26360";
 import { AD } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
 import { debugState } from "../905/407919";
@@ -28,7 +28,7 @@ export class $$m0 extends j {
       if (this.webpageId = t, this.breakpointFrameId = null, 1 === a.length) {
         let e = getSingletonSceneGraph().get(a[0]);
         let i = e?.isWebpage ? e.containingDerivedBreakpoint : e?.containingBreakpointFrame;
-        let n = i ? e?.isWebpage ? e.containingWebpage : f(i) : null;
+        let n = i ? e?.isWebpage ? e.containingWebpage : findContainingResponsiveSet(i) : null;
         e && i && n?.guid === t && (this.breakpointFrameId = i.guid);
       }
       let i = getSingletonSceneGraph().get(e.canvasGUID());

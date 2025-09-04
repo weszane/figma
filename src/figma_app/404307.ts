@@ -2,7 +2,11 @@ import { NodeReference } from '../905/21872'
 import { createTypeMixin } from '../905/112832'
 import { createNodeMixin } from '../905/155492'
 
-export class SceneGraphNode extends createNodeMixin(createTypeMixin(NodeReference)) {
+const TypeNode = createTypeMixin(NodeReference) 
+const NodeMixin = createNodeMixin(TypeNode)
+
+// ensure this is imported
+export class SceneGraphNode extends NodeMixin {
   get isAlive(): boolean {
     this.setGlobalNodeID()
     return this.bindings.NodeTsApi.exists(this.sceneGraph.nodeContext)

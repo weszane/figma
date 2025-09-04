@@ -59,7 +59,7 @@ import { o as _$$o } from "../905/949628";
 import { s as _$$s2 } from "../905/172385";
 import { I as _$$I2 } from "../905/706464";
 import { glU, m1T } from "../figma_app/763686";
-import { D as _$$D2 } from "../905/499575";
+import { SceneNode } from "../905/499575";
 import { GI, oY } from "../figma_app/387100";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
@@ -384,7 +384,7 @@ export function $$tI2(e) {
           src: _$$A14,
           tooltip: _$$t3("layer_icon.tooltip.component")
         };
-        if (e instanceof _$$D2) {
+        if (e instanceof SceneNode) {
           if (e.isMainComponentLikeCodeNode) return {
             src: jsx(_$$R2, {}),
             tooltip: _$$t3("layer_icon.tooltip.code_component")
@@ -438,7 +438,7 @@ export function $$tI2(e) {
           src: _$$A14,
           tooltip: _$$t3("layer_icon.tooltip.component")
         };
-        if (!(e instanceof _$$D2)) return {
+        if (!(e instanceof SceneNode)) return {
           src: jsx(_$$R2, {}),
           tooltip: _$$t3("layer_icon.tooltip.code_component")
         };

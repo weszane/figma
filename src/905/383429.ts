@@ -2,109 +2,195 @@ import { createEmptyMixin } from '../905/112832';
 import { SceneNodeCpp } from '../figma_app/13528';
 import { gr, sD } from '../figma_app/243058';
 
-export function $$s0(e) {
-  return class extends createEmptyMixin(e) {
-    get variableID() {
+/**
+ * Mixin for variable-related node functionality.
+ * @param Base - The base class to extend.
+ * @returns A class with variable-related methods and properties.
+ * (Original: $$s0)
+ */
+export function setupVariableMixin<T extends new (...args: any[]) => any>(Base: T) {
+  /**
+   * VariableMixin class extends the provided base class with variable-related logic.
+   */
+  class VariableMixin extends createEmptyMixin(Base) {
+    /**
+     * Gets the variable ID.
+     * @throws Error if variable ID is invalid.
+     */
+    get variableID(): ReturnType<typeof sD.fromString> {
       this.setGlobalNodeID();
-      let e = sD.fromString(this.bindings.NodeTsApi.getVariableID(this.sceneGraph.nodeContext));
-      if (!e)
-      throw new Error('Invalid variable id');
-      return e;
+      const id = sD.fromString(this.bindings.NodeTsApi.getVariableID(this.sceneGraph.nodeContext));
+      if (!id) throw new Error('Invalid variable id');
+      return id;
     }
 
-    get variableCodeSyntax() {
+    /**
+     * Gets the variable code syntax.
+     */
+    get variableCodeSyntax(): any {
       this.setGlobalNodeID();
       return this.bindings.NodeTsApi.getVariableCodeSyntax(this.sceneGraph.nodeContext);
     }
 
-    get variableCollectionId() {
+    /**
+     * Gets the variable collection ID.
+     * @throws Error if variable collection ID is invalid.
+     */
+    get variableCollectionId(): ReturnType<typeof gr.fromString> {
       this.setGlobalNodeID();
-      let e = gr.fromString(this.bindings.NodeTsApi.getVariableSetID(this.sceneGraph.nodeContext));
-      if (!e)
-      throw new Error('Invalid variable collection id');
-      return e;
+      const id = gr.fromString(this.bindings.NodeTsApi.getVariableSetID(this.sceneGraph.nodeContext));
+      if (!id) throw new Error('Invalid variable collection id');
+      return id;
     }
 
-    setVariableKeyForTest(e) {
-      this.setAssetKeyForTest(e);
+    /**
+     * Sets the variable key for testing.
+     * @param key - The key to set.
+     * (Original: setVariableKeyForTest)
+     */
+    setVariableKeyForTest(key: any): void {
+      this.setAssetKeyForTest(key);
     }
 
-    get variableResolvedType() {
+    /**
+     * Gets the resolved type of the variable.
+     */
+    get variableResolvedType(): any {
       this.setGlobalNodeID();
       return this.bindings.NodeTsApi.getVariableResolvedType(this.sceneGraph.nodeContext);
     }
 
-    set variableScopes(e) {
+    /**
+     * Sets the variable scopes.
+     * @param scopes - The scopes to set.
+     */
+    set variableScopes(scopes: any) {
       this.setGlobalNodeID();
-      this.bindings.NodeTsApi.setVariableScopes(e, this.sceneGraph.nodeContext);
+      this.bindings.NodeTsApi.setVariableScopes(scopes, this.sceneGraph.nodeContext);
     }
 
-    get variableScopes() {
+    /**
+     * Gets the variable scopes.
+     */
+    get variableScopes(): any {
       this.setGlobalNodeID();
       return this.bindings.NodeTsApi.getVariableScopes(this.sceneGraph.nodeContext);
     }
 
-    setVariableCodeSyntax(e, t) {
+    /**
+     * Sets the variable code syntax.
+     * @param syntax - The code syntax.
+     * @param options - Additional options.
+     * (Original: setVariableCodeSyntax)
+     */
+    setVariableCodeSyntax(syntax: any, options: any): void {
       this.setGlobalNodeID();
-      this.bindings.NodeTsApi.setVariableCodeSyntax(e, t, this.sceneGraph.nodeContext);
+      this.bindings.NodeTsApi.setVariableCodeSyntax(syntax, options, this.sceneGraph.nodeContext);
     }
 
-    removeVariableCodeSyntax(e) {
+    /**
+     * Removes the variable code syntax.
+     * @param syntax - The code syntax to remove.
+     * (Original: removeVariableCodeSyntax)
+     */
+    removeVariableCodeSyntax(syntax: any): void {
       this.setGlobalNodeID();
-      this.bindings.NodeTsApi.removeVariableCodeSyntax(e, this.sceneGraph.nodeContext);
+      this.bindings.NodeTsApi.removeVariableCodeSyntax(syntax, this.sceneGraph.nodeContext);
     }
 
-    get boundVariables() {
+    /**
+     * Gets the bound variables.
+     */
+    get boundVariables(): any {
       this.setGlobalNodeID();
       return this.bindings.NodeTsApi.getBoundVariables(this.sceneGraph.nodeContext);
     }
 
-    get inferredVariables() {
+    /**
+     * Gets the inferred variables.
+     */
+    get inferredVariables(): any {
       this.setGlobalNodeID();
       return this.bindings.NodeTsApi.getInferredVariables(this.sceneGraph.nodeContext);
     }
 
-    get availableInferredVariables() {
+    /**
+     * Gets the available inferred variables.
+     */
+    get availableInferredVariables(): any {
       this.setGlobalNodeID();
       return this.bindings.NodeTsApi.getAvailableInferredVariables(this.sceneGraph.nodeContext);
     }
 
-    setBoundVariable(e, t) {
+    /**
+     * Sets a bound variable.
+     * @param variable - The variable to bind.
+     * @param value - The value to bind.
+     * @throws Error if there is an error message.
+     * (Original: setBoundVariable)
+     */
+    setBoundVariable(variable: any, value: any): void {
       this.setGlobalNodeID();
-      let {
-        errorMsg
-      } = this.bindings.NodeTsApi.setBoundVariable(e, t, this.sceneGraph.nodeContext);
-      if (errorMsg)
-      throw new Error(errorMsg);
+      const { errorMsg } = this.bindings.NodeTsApi.setBoundVariable(variable, value, this.sceneGraph.nodeContext);
+      if (errorMsg) throw new Error(errorMsg);
     }
 
-    get boundVariablesForStyle() {
+    /**
+     * Gets the bound variables for style.
+     */
+    get boundVariablesForStyle(): any {
       this.setGlobalNodeID();
       return this.bindings.NodeTsApi.getBoundVariablesForStyle(this.sceneGraph.nodeContext);
     }
 
-    resolveVariable(e) {
+    /**
+     * Resolves a variable.
+     * @param variable - The variable to resolve.
+     * (Original: resolveVariable)
+     */
+    resolveVariable(variable: any): any {
       this.setGlobalNodeID();
-      return SceneNodeCpp.resolveVariable(e);
+      return SceneNodeCpp.resolveVariable(variable);
     }
 
-    getRangeBoundVariable(e, t, i) {
+    /**
+     * Gets the range bound variable.
+     * @param a - First parameter.
+     * @param b - Second parameter.
+     * @param c - Third parameter.
+     * (Original: getRangeBoundVariable)
+     */
+    getRangeBoundVariable(a: any, b: any, c: any): any {
       this.setGlobalNodeID();
-      return SceneNodeCpp.getRangeBoundVariable(e, t, i, this.sceneGraph.nodeContext);
+      return SceneNodeCpp.getRangeBoundVariable(a, b, c, this.sceneGraph.nodeContext);
     }
 
-    setRangeBoundVariable(e, t, i, n) {
+    /**
+     * Sets the range bound variable.
+     * @param a - First parameter.
+     * @param b - Second parameter.
+     * @param c - Third parameter.
+     * @param d - Fourth parameter.
+     * @throws Error if there is an error message.
+     * (Original: setRangeBoundVariable)
+     */
+    setRangeBoundVariable(a: any, b: any, c: any, d: any): void {
       this.setGlobalNodeID();
-      let {
-        errorMsg
-      } = SceneNodeCpp.setRangeBoundVariable(e, t, i, n, this.sceneGraph.nodeContext);
-      if (errorMsg)
-      throw new Error(errorMsg);
+      const { errorMsg } = SceneNodeCpp.setRangeBoundVariable(a, b, c, d, this.sceneGraph.nodeContext);
+      if (errorMsg) throw new Error(errorMsg);
     }
-  };
+  }
+  return VariableMixin;
 }
-export function $$o1(e) {
-  return e.type === 'VARIABLE';
-}
-export const B = $$s0;
-export const v = $$o1;
+
+/**
+ * Checks if the node type is 'VARIABLE'.
+ * @param node - The node to check.
+ * @returns True if node type is 'VARIABLE', else false.
+ * (Original: $$o1)
+ */
+export const isVariableNode = (node: { type: string }): boolean => node.type === 'VARIABLE';
+
+// Export refactored names
+export const B = setupVariableMixin;
+export const v = isVariableNode;

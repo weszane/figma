@@ -9,7 +9,7 @@ import { x1 } from "../905/714362";
 import { Y5 } from "../figma_app/455680";
 import { j } from "../905/881708";
 import { H0 } from "../figma_app/682945";
-import { E } from "../905/739338";
+import { isConnector } from "../905/739338";
 import { s as _$$s } from "../905/583953";
 class f {
   static getHoveredEndpoint(e, t, i, n, r, a, s, o) {
@@ -284,7 +284,7 @@ class f {
     return e === oHs.EDGE || e === oHs.TOP || e === oHs.BOTTOM || e === oHs.LEFT || e === oHs.RIGHT;
   }
   static ensureSlidesInvariant(e, t, i) {
-    if (i && E(i) && i.connectorStart) {
+    if (i && isConnector(i) && i.connectorStart) {
       let n = getSingletonSceneGraph().get(i.connectorStart.endpointNodeID);
       let a = n?.containingSlideId;
       if (n && a !== AD) {

@@ -11,7 +11,7 @@ import { c2 } from '../905/382883';
 import { DI, JQ } from '../905/389786';
 import { cN, gJ, NN } from '../905/409381';
 import { $2, EV, FP, ye } from '../905/426868';
-import { D as _$$D } from '../905/499575';
+import { SceneNode } from '../905/499575';
 import { Cv, fx, pu, sJ, u0, x_, y$ } from '../905/532366';
 import { yX } from '../905/642476';
 import { id as _$$id, Bj, fW } from '../905/648693';
@@ -9283,7 +9283,7 @@ class rK {
   recordFunctionCall(e, t, i) {
     t === 'insertChild' && i[1] === e.childrenNodes.length && (t = 'appendChild', i = [i[0], i[2]]);
     for (let e = 0; e < i.length; e++) {
-      i[e] instanceof _$$D && (i[e] = {
+      i[e] instanceof SceneNode && (i[e] = {
         guid: i[e].guid
       });
     }

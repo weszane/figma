@@ -141,10 +141,10 @@ export interface NavigationAction {
   skipAmount?: number
   newTimestamp?: number
   conditionalBlocks?: ActionGroup[]
-  variableId?: string
+  variableId?: string | null
   variableValue?: any
-  variableCollectionId?: string
-  variableModeId?: string
+  variableCollectionId?: string | null
+  variableModeId?: string | null
   openInNewTab?: boolean
   resetInteractiveComponents?: any
 }
@@ -650,7 +650,7 @@ export interface AnnotationCategoryFactoryOptions {
 }
 
 export interface NodeFactoryOptions {
-  vm: VMInstance
+
   pluginID: string
   pluginVersionID: string
   imageStore: any
@@ -1056,6 +1056,11 @@ export interface VariableCollectionFactory {
 export interface AnnotationCategoryFactoryClass {
   new(options: AnnotationCategoryFactoryOptions): AnnotationCategoryFactory
 }
+export interface AnnotationCategoryData {
+  label: string
+  properties: {type: string}[]
+  categoryId: string | null
+}
 
 export interface AnnotationCategoryFactory {
   readonly vm: VMInstance
@@ -1348,10 +1353,11 @@ export interface VariableResult {
 export interface ProcessedRegion {
   windingRule: any
   loops: any
-  fillStyleRef?: string
+  fillStyleRef?: string | {version: string, key: string}
   fillStyleId?: string
   fillPaints?: {
     data: any[]
+    blobs: any[]
   }
   fills?: any[]
 }

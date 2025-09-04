@@ -45,7 +45,7 @@ import { D as _$$D6 } from '../905/12032';
 import { tc as _$$tc } from '../905/15667';
 import { u as _$$u4 } from '../905/16237';
 import { k9 as _$$k } from '../905/19536';
-import { f as _$$f } from '../905/26360';
+import { findContainingResponsiveSet } from '../905/26360';
 import { a as _$$a5 } from '../905/29104';
 import { a as _$$a1 } from '../905/38236';
 import { bL as _$$bL4, Rq } from '../905/38914';
@@ -1032,7 +1032,7 @@ let K = memo(({
 }) => {
   let t = Mw();
   let i = t?.guid ?? null;
-  let n = t ? _$$f(t)?.guid ?? null : null;
+  let n = t ? findContainingResponsiveSet(t)?.guid ?? null : null;
   let r = _$$d(e => e.mirror.appModel.hoveredNode);
   let o = U();
   let d = useMemo(() => ({
@@ -18457,7 +18457,7 @@ function gL(e) {
     let i = {};
     t.forEach(t => {
       let n = e.get(t);
-      i[t] = n ? n.isOrInResponsiveSet ? _$$f(n)?.guid : n.containingWebpage?.guid : void 0;
+      i[t] = n ? n.isOrInResponsiveSet ? findContainingResponsiveSet(n)?.guid : n.containingWebpage?.guid : void 0;
     });
     return i;
   }, Object.keys(_));

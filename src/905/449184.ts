@@ -1947,80 +1947,167 @@ function er(e, t, i) {
   });
 }
 let $$ea2 = () => b();
-let $$es1 = new class {
-  trackDefinedEvent(arg0: string, arg1: { apiMethod: string; pluginId: any; editorType: any; fileKey: any; userId: any; }) {
-    throw new Error('Method not implemented.');
-  }
-  constructor() {
-    this.resetEventDetails = () => {
-      this.sentEventDetails = {};
-    };
-    this.shouldSendDefinedEvent = (e, t) => {
-      if (t.featureFlag && !getFeatureFlags()[t.featureFlag]) return !1;
-      if (!t.throttle) return !0;
-      let i = t.throttle;
-      let r = this.sentEventDetails[e];
-      switch (i.type) {
-        case 'RATE':
-          if (Math.random() < i.sampleRate) return !0;
-          return !1;
-        case 'DOCUMENT':
-          if (!r) return !0;
-          let a = i.throttlePerDocument != null ? i.throttlePerDocument : 1;
-          if (r.timesSentThisDocument < a) return !0;
-          return !1;
-        case 'MS':
-          if (!r) return !0;
-          let s = i.throttleMS != null ? i.throttleMS : 1e3;
-          return Date.now() - r.lastSent > s;
-        default:
-          throw new Error('Invalid throttle type provided!');
-      }
-    };
-    this.trackDefinedEvent = _$$n((e, t) => {
-      let i = X(e);
-      this.shouldSendDefinedEvent(e, i) && (en(this.getCorrectEventName(e, i), t, this.getEventOptions(i)), this.recordEventSent(e, i));
-    });
-    this.trackDefinedMetric = _$$n((e, t) => {
-      let i = X(e);
-      this.shouldSendDefinedEvent(e, i) && (en(this.getCorrectEventName(e, i), t, this.getEventOptions(i)), this.recordEventSent(e, i));
-    });
-    this.trackDefinedFullscreenEvent = (e, t) => {
-      let i = X(e);
-      this.shouldSendDefinedEvent(e, i) && (er(this.getCorrectEventName(e, i), t, this.getEventOptions(i)), this.recordEventSent(e, i));
-    };
-    this.recordEventSent = (e, t) => {
-      let i = this.sentEventDetails[e];
-      i ? this.sentEventDetails[e] = {
-        lastSent: Date.now(),
-        timesSentThisDocument: i.timesSentThisDocument + 1
-      } : this.sentEventDetails[e] = {
-        lastSent: Date.now(),
-        timesSentThisDocument: 1
-      };
-      t.throttle?.type === 'DOCUMENT' && this.sentDocumentEvents.add(e);
-    };
-    this.getCorrectEventName = (e, t) => t.legacyName ? t.legacyName : e;
+/**
+ * AnalyticsEventManager - manages defined analytics events, throttling, and options.
+ * Original variable: $$es1
+ */
+interface ThrottleConfig {
+  type: 'RATE' | 'DOCUMENT' | 'MS';
+  sampleRate?: number;
+  throttlePerDocument?: number;
+  throttleMS?: number;
+}
+
+interface EventDefinition {
+  featureFlag?: string;
+  throttle?: ThrottleConfig;
+  forwardToDatadog?: boolean;
+  sendAsBeacon?: boolean;
+  mlEvent?: boolean;
+  legacyName?: string;
+}
+
+interface SentEventDetail {
+  lastSent: number;
+  timesSentThisDocument: number;
+}
+
+type SentEventDetails = Record<string, SentEventDetail>;
+
+/**
+ * Manages sending, throttling, and tracking analytics events.
+ */
+class AnalyticsEventManager {
+  private sentEventDetails: SentEventDetails = {};
+  private sentDocumentEvents: Set<string> = new Set();
+
+  /**
+   * Tracks a defined event if allowed by throttling and feature flags.
+   * @param eventName The event name.
+   * @param properties Event properties.
+   */
+  trackDefinedEvent = (eventName: string, properties: Record<string, any>) => {
+    const def = X(eventName);
+    if (this.shouldSendDefinedEvent(eventName, def)) {
+      en(this.getCorrectEventName(eventName, def), properties, this.getEventOptions(def));
+      this.recordEventSent(eventName, def);
+    }
+  };
+
+  /**
+   * Tracks a defined metric event.
+   * @param eventName The event name.
+   * @param properties Event properties.
+   */
+  trackDefinedMetric = _$$n((eventName: string, properties: Record<string, any>) => {
+    const def = X(eventName);
+    if (this.shouldSendDefinedEvent(eventName, def)) {
+      en(this.getCorrectEventName(eventName, def), properties, this.getEventOptions(def));
+      this.recordEventSent(eventName, def);
+    }
+  });
+
+  /**
+   * Tracks a defined fullscreen event.
+   * @param eventName The event name.
+   * @param properties Event properties.
+   */
+  trackDefinedFullscreenEvent = (eventName: string, properties: Record<string, any>) => {
+    const def = X(eventName);
+    if (this.shouldSendDefinedEvent(eventName, def)) {
+      er(this.getCorrectEventName(eventName, def), properties, this.getEventOptions(def));
+      this.recordEventSent(eventName, def);
+    }
+  };
+
+  /**
+   * Resets all sent event details.
+   */
+  resetEventDetails = () => {
     this.sentEventDetails = {};
-    this.sentDocumentEvents = new Set();
-  }
-  getEventOptions(e) {
+  };
+
+  /**
+   * Determines if a defined event should be sent based on throttling and feature flags.
+   * @param eventName The event name.
+   * @param def The event definition.
+   */
+  shouldSendDefinedEvent = (eventName: string, def: EventDefinition): boolean => {
+    if (def.featureFlag && !getFeatureFlags()[def.featureFlag]) return false;
+    if (!def.throttle) return true;
+    const throttle = def.throttle;
+    const sent = this.sentEventDetails[eventName];
+    switch (throttle.type) {
+      case 'RATE':
+        return Math.random() < (throttle.sampleRate ?? 1);
+      case 'DOCUMENT':
+        if (!sent) return true;
+        const perDoc = throttle.throttlePerDocument ?? 1;
+        return sent.timesSentThisDocument < perDoc;
+      case 'MS':
+        if (!sent) return true;
+        const ms = throttle.throttleMS ?? 1000;
+        return Date.now() - sent.lastSent > ms;
+      default:
+        throw new Error('Invalid throttle type provided!');
+    }
+  };
+
+  /**
+   * Records that an event was sent, updating throttling state.
+   * @param eventName The event name.
+   * @param def The event definition.
+   */
+  recordEventSent = (eventName: string, def: EventDefinition) => {
+    const prev = this.sentEventDetails[eventName];
+    this.sentEventDetails[eventName] = {
+      lastSent: Date.now(),
+      timesSentThisDocument: prev ? prev.timesSentThisDocument + 1 : 1,
+    };
+    if (def.throttle?.type === 'DOCUMENT') {
+      this.sentDocumentEvents.add(eventName);
+    }
+  };
+
+  /**
+   * Gets the correct event name, using legacyName if present.
+   * @param eventName The event name.
+   * @param def The event definition.
+   */
+  getCorrectEventName = (eventName: string, def: EventDefinition): string => {
+    return def.legacyName ? def.legacyName : eventName;
+  };
+
+  /**
+   * Gets event options for tracking.
+   * @param def The event definition.
+   */
+  getEventOptions(def: EventDefinition) {
     return {
-      forwardToDatadog: !!e.forwardToDatadog,
-      sendAsBeacon: !!e.sendAsBeacon,
-      mlEvent: !!e.mlEvent
+      forwardToDatadog: !!def.forwardToDatadog,
+      sendAsBeacon: !!def.sendAsBeacon,
+      mlEvent: !!def.mlEvent,
     };
   }
+
+  /**
+   * Resets throttling for document-level events.
+   */
   resetDefinedAnalyticsForDocument() {
-    for (let e of this.sentDocumentEvents) delete this.sentEventDetails[e];
+    for (const eventName of this.sentDocumentEvents) {
+      delete this.sentEventDetails[eventName];
+    }
     this.sentDocumentEvents.clear();
   }
-}();
+}
+
+// Exported as az (original: $$es1)
+const analyticsEventManager = new AnalyticsEventManager();
 export function $$eo3() {
   return q();
 }
 export const Pg = $$J0;
-export const az = $$es1;
+export const az = analyticsEventManager;
 export const pp = $$ea2;
 export const Rz = $$eo3;
 export const sx = $$ee4;

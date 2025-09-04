@@ -12,7 +12,7 @@ import { q } from "../905/807667";
 import { Ru } from "../figma_app/300692";
 import { k0, ZQ } from "../figma_app/155287";
 import { s6, nc } from "../figma_app/474636";
-import { Jp } from "../905/816197";
+import { getPluginConnectionState } from "../905/816197";
 import { $A } from "../905/782918";
 import { n as _$$n } from "../905/347702";
 import { hw, iu, fD } from "../905/753206";
@@ -110,7 +110,7 @@ export let $$S0 = _$$n(async (e, t, i) => {
     }
   }));
   let I = q(i);
-  Jp() ? h3O.resolveSceneGraphQueryForTest("0:0", DPQ.DEFAULT) : (await Promise.race([I, b]), d(), zl.set(s6, !1));
+  getPluginConnectionState() ? h3O.resolveSceneGraphQueryForTest("0:0", DPQ.DEFAULT) : (await Promise.race([I, b]), d(), zl.set(s6, !1));
   return {
     isCancelled: g
   };

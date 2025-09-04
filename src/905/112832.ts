@@ -7,8 +7,9 @@
  * Original function names are preserved as comments for traceability.
  */
 
+import type { TSSceneGraph } from '../figma_app/518682'
 // Core types and enums
-import { kiwiParserCodec } from '../905/294864';
+import { kiwiParserCodec } from '../905/294864'
 
 // Scene graph functionality modules
 import {
@@ -39,25 +40,26 @@ import {
   vSx, // Cooper frame functionality
   x4V, // Slide functionality
   x7E, // Connector functionality
-  xMT // Slot functionality
-} from '../figma_app/763686';
+  xMT, // Slot functionality
+} from '../figma_app/763686'
 
 // ============================================================================
 // TYPE DEFINITIONS
 // ============================================================================
 
 /** Base class type for all mixin factories */
-type BaseClass<T = object> = new (...args: any[]) => T;
+export type BaseClass<T = any> = new (...args: any[]) => T
 
 /** Scene graph context interface */
-interface SceneGraphContext {
-  nodeContext: any;
+export interface SceneGraphContext {
+  nodeContext: any
+  scene: any
 }
 
 /** Base node interface with common functionality */
-interface BaseNode {
-  setGlobalNodeID: () => void;
-  sceneGraph: SceneGraphContext;
+export interface BaseNode {
+  setGlobalNodeID: () => void
+  sceneGraph: TSSceneGraph
 }
 
 // ============================================================================
@@ -71,19 +73,19 @@ interface BaseNode {
  * @param propertyName - Name of the property for error messages
  */
 function createEnumGetter<T extends Record<string, any>>(
-getValue: (context: any) => any,
-enumType: T,
-propertyName: string)
-{
+  getValue: (context: any) => any,
+  enumType: T,
+  propertyName: string,
+) {
   return function (this: BaseNode) {
-    this.setGlobalNodeID();
-    const rawValue = getValue(this.sceneGraph.nodeContext);
-    const enumValue = enumType[rawValue];
+    this.setGlobalNodeID()
+    const rawValue = getValue(this.sceneGraph.nodeContext)
+    const enumValue = enumType[rawValue]
     if (enumValue != null) {
-      return enumValue;
+      return enumValue
     }
-    throw new Error(`Invalid value for ${propertyName}: ${rawValue}`);
-  };
+    throw new Error(`Invalid value for ${propertyName}: ${rawValue}`)
+  }
 }
 
 /**
@@ -93,23 +95,23 @@ propertyName: string)
  * @param propertyName - Name of the property for error messages
  */
 function createEnumSetter<T extends Record<string, any>>(
-setValue: (value: any, context: any) => string | null,
-enumType: T,
-propertyName: string)
-{
+  setValue: (value: any, context: any) => string | null,
+  enumType: T,
+  propertyName: string,
+) {
   return function (this: BaseNode, value: keyof T) {
-    const enumValue = enumType[value];
+    const enumValue = enumType[value]
     if (typeof enumValue === 'number') {
-      this.setGlobalNodeID();
-      const error = setValue(enumValue, this.sceneGraph.nodeContext);
+      this.setGlobalNodeID()
+      const error = setValue(enumValue, this.sceneGraph.nodeContext)
       if (error) {
-        throw new Error(error);
+        throw new Error(error)
       }
-    } else
-    {
-      throw new TypeError(`Invalid value for ${propertyName}: ${String(value)}`);
     }
-  };
+    else {
+      throw new TypeError(`Invalid value for ${propertyName}: ${String(value)}`)
+    }
+  }
 }
 
 /**
@@ -117,12 +119,12 @@ propertyName: string)
  * @param getValue - Function to get the value from scene graph
  */
 function createSimpleGetter<T>(
-getValue: (context: any) => T)
-{
+  getValue: (context: any) => T,
+) {
   return function (this: BaseNode): T {
-    this.setGlobalNodeID();
-    return getValue(this.sceneGraph.nodeContext);
-  };
+    this.setGlobalNodeID()
+    return getValue(this.sceneGraph.nodeContext)
+  }
 }
 
 /**
@@ -130,15 +132,15 @@ getValue: (context: any) => T)
  * @param setValue - Function to set the value in scene graph
  */
 function createSimpleSetter<T>(
-setValue: (value: T, context: any) => string | null)
-{
+  setValue: (value: T, context: any) => string | null,
+) {
   return function (this: BaseNode, value: T): void {
-    this.setGlobalNodeID();
-    const error = setValue(value, this.sceneGraph.nodeContext);
+    this.setGlobalNodeID()
+    const error = setValue(value, this.sceneGraph.nodeContext)
     if (error) {
-      throw new Error(error);
+      throw new Error(error)
     }
-  };
+  }
 }
 
 /**
@@ -146,21 +148,21 @@ setValue: (value: T, context: any) => string | null)
  * Handles conversion of raw values to enum arrays with validation
  */
 function createEnumArrayGetter<T extends Record<string, any>>(
-getValue: (context: any) => any[],
-enumType: T,
-propertyName: string)
-{
+  getValue: (context: any) => any[],
+  enumType: T,
+  propertyName: string,
+) {
   return function (this: BaseNode): string[] {
-    this.setGlobalNodeID();
-    const rawValues = getValue(this.sceneGraph.nodeContext);
+    this.setGlobalNodeID()
+    const rawValues = getValue(this.sceneGraph.nodeContext)
     return rawValues.map((value) => {
-      const enumValue = enumType[value];
+      const enumValue = enumType[value]
       if (enumValue != null) {
-        return enumValue;
+        return enumValue
       }
-      throw new Error(`Invalid value for ${propertyName}: ${value}`);
-    });
-  };
+      throw new Error(`Invalid value for ${propertyName}: ${value}`)
+    })
+  }
 }
 
 /**
@@ -168,24 +170,24 @@ propertyName: string)
  * Validates enum values and converts them for storage
  */
 function createEnumArraySetter<T extends Record<string, any>>(
-setValue: (values: any[], context: any) => string | null,
-enumType: T,
-propertyName: string)
-{
+  setValue: (values: any[], context: any) => string | null,
+  enumType: T,
+  propertyName: string,
+) {
   return function (this: BaseNode, value: string[]): void {
-    this.setGlobalNodeID();
+    this.setGlobalNodeID()
     const mappedValues = value.map((val) => {
-      const enumValue = enumType[val];
+      const enumValue = enumType[val]
       if (enumValue != null) {
-        return enumValue;
+        return enumValue
       }
-      throw new Error(`Invalid value for ${propertyName}: ${val}`);
-    });
-    const error = setValue(mappedValues, this.sceneGraph.nodeContext);
+      throw new Error(`Invalid value for ${propertyName}: ${val}`)
+    })
+    const error = setValue(mappedValues, this.sceneGraph.nodeContext)
     if (error) {
-      throw new Error(error);
+      throw new Error(error)
     }
-  };
+  }
 }
 
 // ============================================================================
@@ -204,7 +206,7 @@ export function createDecorativeImageMixin<T extends BaseClass<BaseNode>>(baseCl
      * Decorative images are ignored by screen readers for accessibility
      */
     get isDecorativeImage(): boolean {
-      return createSimpleGetter(m33.getIsDecorativeImage).call(this);
+      return createSimpleGetter<boolean>(m33.getIsDecorativeImage).call(this)
     }
 
     /**
@@ -212,9 +214,9 @@ export function createDecorativeImageMixin<T extends BaseClass<BaseNode>>(baseCl
      * @param value - True if the image is decorative (accessibility)
      */
     set isDecorativeImage(value: boolean) {
-      createSimpleSetter(m33.setIsDecorativeImage).call(this, value);
+      createSimpleSetter(m33.setIsDecorativeImage).call(this, value)
     }
-  };
+  }
 }
 
 /**
@@ -229,9 +231,9 @@ export function createAnnotationsMixin<T extends BaseClass<BaseNode>>(baseClass:
      * Annotations provide metadata and documentation for design elements
      */
     get annotations(): any[] {
-      return createSimpleGetter(fQ3.getAnnotations).call(this);
+      return createSimpleGetter<any[]>(fQ3.getAnnotations).call(this)
     }
-  };
+  }
 }
 
 // ============================================================================
@@ -243,7 +245,7 @@ export function createAnnotationsMixin<T extends BaseClass<BaseNode>>(baseClass:
  * Original function: $$o10
  */
 export function createEmptyMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
-  return class EmptyMixin1 extends baseClass {};
+  return class EmptyMixin1 extends baseClass {}
 }
 
 /**
@@ -251,7 +253,7 @@ export function createEmptyMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
  * Original function: $$l63
  */
 export function createEmptyMixin2<T extends BaseClass<BaseNode>>(baseClass: T) {
-  return class EmptyMixin2 extends baseClass {};
+  return class EmptyMixin2 extends baseClass {}
 }
 
 /**
@@ -259,7 +261,7 @@ export function createEmptyMixin2<T extends BaseClass<BaseNode>>(baseClass: T) {
  * Original function: $$d22
  */
 export function createEmptyMixin3<T extends BaseClass<BaseNode>>(baseClass: T) {
-  return class EmptyMixin3 extends baseClass {};
+  return class EmptyMixin3 extends baseClass {}
 }
 
 // ============================================================================
@@ -277,26 +279,26 @@ export function createCooperFrameMixin<T extends BaseClass<BaseNode>>(baseClass:
      * Checks if this node is within or is a Cooper Frame
      * Cooper Frames are used for collaborative editing sessions
      */
-    get isOrInCooperFrame(): boolean {
-      return createSimpleGetter(vSx.getIsOrInCooperFrame).call(this);
+    get isOrInCooperFrame() {
+      return createSimpleGetter(vSx.getIsOrInCooperFrame).call(this)
     }
 
     /**
      * Checks if this node is specifically a Cooper Frame
      * Cooper Frames enable real-time collaboration features
      */
-    get isCooperFrame(): boolean {
-      return createSimpleGetter(vSx.getIsCooperFrame).call(this);
+    get isCooperFrame() {
+      return createSimpleGetter(vSx.getIsCooperFrame).call(this)
     }
 
     /**
      * Checks if this node is a sublayer within a Cooper Frame
      * Sublayers are child elements within collaborative editing contexts
      */
-    get isCooperFrameSublayer(): boolean {
-      return createSimpleGetter(vSx.getIsCooperFrameSublayer).call(this);
+    get isCooperFrameSublayer() {
+      return createSimpleGetter(vSx.getIsCooperFrameSublayer).call(this)
     }
-  };
+  }
 }
 
 // ============================================================================
@@ -315,15 +317,15 @@ export function createPageMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
      * Determines what kind of editor interface should be used
      */
     get pageType(): string {
-      return createEnumGetter(OGQ.getPageType, kiwiParserCodec.EditorType, 'pageType').call(this);
+      return createEnumGetter(OGQ.getPageType, kiwiParserCodec.EditorType, 'pageType').call(this)
     }
 
     /**
      * Checks if this node is marked as internal-only
      * Internal nodes are typically hidden from normal user interface
      */
-    get isInternalOnlyNode(): boolean {
-      return createSimpleGetter(OGQ.getIsInternalOnly).call(this);
+    get isInternalOnlyNode() {
+      return createSimpleGetter<boolean>(OGQ.getIsInternalOnly).call(this)
     }
 
     /**
@@ -331,7 +333,7 @@ export function createPageMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
      * @param value - True to mark as internal-only (hidden from UI)
      */
     set isInternalOnlyNode(value: boolean) {
-      createSimpleSetter(OGQ.setIsInternalOnly).call(this, value);
+      createSimpleSetter(OGQ.setIsInternalOnly).call(this, value)
     }
 
     /**
@@ -339,9 +341,9 @@ export function createPageMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
      * Tracks which elements are currently selected by the user
      */
     get selection(): any {
-      return createSimpleGetter(OGQ.getSelection).call(this);
+      return createSimpleGetter(OGQ.getSelection).call(this)
     }
-  };
+  }
 }
 
 // ============================================================================
@@ -360,7 +362,7 @@ export function createCanvasGridMixin<T extends BaseClass<BaseNode>>(baseClass: 
      * Canvas grids organize content in structured row/column layouts
      */
     get isCanvasGridChild(): boolean {
-      return createSimpleGetter(gz6.getIsCanvasGridChild).call(this);
+      return createSimpleGetter<boolean>(gz6.getIsCanvasGridChild).call(this)
     }
 
     /**
@@ -368,7 +370,7 @@ export function createCanvasGridMixin<T extends BaseClass<BaseNode>>(baseClass: 
      * Returns the row that contains this grid child element
      */
     get containingCanvasGridRowId(): string {
-      return createSimpleGetter(gz6.getContainingCanvasGridRowId).call(this);
+      return createSimpleGetter<string>(gz6.getContainingCanvasGridRowId).call(this)
     }
 
     /**
@@ -376,7 +378,7 @@ export function createCanvasGridMixin<T extends BaseClass<BaseNode>>(baseClass: 
      * Row nodes define horizontal sections within grid layouts
      */
     get isCanvasGridRowNodeType(): boolean {
-      return createSimpleGetter(gz6.getIsCanvasGridRowNodeType).call(this);
+      return createSimpleGetter<boolean>(gz6.getIsCanvasGridRowNodeType).call(this)
     }
 
     /**
@@ -384,7 +386,7 @@ export function createCanvasGridMixin<T extends BaseClass<BaseNode>>(baseClass: 
      * State group rows manage different states within grid layouts
      */
     get isCanvasGridStateGroupRow(): boolean {
-      return createSimpleGetter(gz6.getIsCanvasGridStateGroupRow).call(this);
+      return createSimpleGetter<boolean>(gz6.getIsCanvasGridStateGroupRow).call(this)
     }
 
     /**
@@ -392,9 +394,9 @@ export function createCanvasGridMixin<T extends BaseClass<BaseNode>>(baseClass: 
      * Grid rows organize content horizontally within canvas layouts
      */
     get isCanvasGridRow(): boolean {
-      return createSimpleGetter(gz6.getIsCanvasGridRow).call(this);
+      return createSimpleGetter<boolean>(gz6.getIsCanvasGridRow).call(this)
     }
-  };
+  }
 }
 
 /**
@@ -402,7 +404,7 @@ export function createCanvasGridMixin<T extends BaseClass<BaseNode>>(baseClass: 
  * Original function: $$m39
  */
 export function createEmptyMixin4<T extends BaseClass<BaseNode>>(baseClass: T) {
-  return class EmptyMixin4 extends baseClass {};
+  return class EmptyMixin4 extends baseClass {}
 }
 
 // ============================================================================
@@ -421,7 +423,7 @@ export function createSourceCodeMixin<T extends BaseClass<BaseNode>>(baseClass: 
      * Entrypoint files serve as main entry points for code generation
      */
     get isEntrypointCodeFile(): boolean {
-      return createSimpleGetter(Fzw.getIsEntrypointCodeFile).call(this);
+      return createSimpleGetter<boolean>(Fzw.getIsEntrypointCodeFile).call(this)
     }
 
     /**
@@ -429,7 +431,7 @@ export function createSourceCodeMixin<T extends BaseClass<BaseNode>>(baseClass: 
      * @param value - True to mark as entrypoint code file
      */
     set isEntrypointCodeFile(value: boolean) {
-      createSimpleSetter(Fzw.setIsEntrypointCodeFile).call(this, value);
+      createSimpleSetter(Fzw.setIsEntrypointCodeFile).call(this, value)
     }
 
     /**
@@ -437,7 +439,7 @@ export function createSourceCodeMixin<T extends BaseClass<BaseNode>>(baseClass: 
      * Links design elements to their corresponding code components
      */
     get sourceCodeComponentOrStateGroupKey(): string {
-      return createSimpleGetter(Fzw.getSourceCodeComponentOrStateGroupKey).call(this);
+      return createSimpleGetter<string>(Fzw.getSourceCodeComponentOrStateGroupKey).call(this)
     }
 
     /**
@@ -445,7 +447,7 @@ export function createSourceCodeMixin<T extends BaseClass<BaseNode>>(baseClass: 
      * @param value - Key linking to source code component
      */
     set sourceCodeComponentOrStateGroupKey(value: string) {
-      createSimpleSetter(Fzw.setSourceCodeComponentOrStateGroupKey).call(this, value);
+      createSimpleSetter(Fzw.setSourceCodeComponentOrStateGroupKey).call(this, value)
     }
 
     /**
@@ -453,7 +455,7 @@ export function createSourceCodeMixin<T extends BaseClass<BaseNode>>(baseClass: 
      * Connects design elements to React component tree
      */
     get reactFiberId(): string {
-      return createSimpleGetter(Fzw.getReactFiberId).call(this);
+      return createSimpleGetter<string>(Fzw.getReactFiberId).call(this)
     }
 
     /**
@@ -461,7 +463,7 @@ export function createSourceCodeMixin<T extends BaseClass<BaseNode>>(baseClass: 
      * @param value - React Fiber identifier
      */
     set reactFiberId(value: string) {
-      createSimpleSetter(Fzw.setReactFiberId).call(this, value);
+      createSimpleSetter(Fzw.setReactFiberId).call(this, value)
     }
 
     /**
@@ -469,7 +471,7 @@ export function createSourceCodeMixin<T extends BaseClass<BaseNode>>(baseClass: 
      * Tracks component versions for synchronization
      */
     get sourceCodeComponentOrStateGroupVersion(): number {
-      return createSimpleGetter(Fzw.getSourceCodeComponentOrStateGroupVersion).call(this);
+      return createSimpleGetter<number>(Fzw.getSourceCodeComponentOrStateGroupVersion).call(this)
     }
 
     /**
@@ -477,7 +479,7 @@ export function createSourceCodeMixin<T extends BaseClass<BaseNode>>(baseClass: 
      * @param value - Version number for tracking changes
      */
     set sourceCodeComponentOrStateGroupVersion(value: number) {
-      createSimpleSetter(Fzw.setSourceCodeComponentOrStateGroupVersion).call(this, value);
+      createSimpleSetter(Fzw.setSourceCodeComponentOrStateGroupVersion).call(this, value)
     }
 
     /**
@@ -485,9 +487,9 @@ export function createSourceCodeMixin<T extends BaseClass<BaseNode>>(baseClass: 
      * Identifies the parent code context for this element
      */
     get containingCodeInstanceId(): string {
-      return createSimpleGetter(Fzw.getContainingCodeInstanceId).call(this);
+      return createSimpleGetter<string>(Fzw.getContainingCodeInstanceId).call(this)
     }
-  };
+  }
 }
 
 // ============================================================================
@@ -499,7 +501,7 @@ export function createSourceCodeMixin<T extends BaseClass<BaseNode>>(baseClass: 
  * Original function: $$g12
  */
 export function createEmptyMixin5<T extends BaseClass<BaseNode>>(baseClass: T) {
-  return class EmptyMixin5 extends baseClass {};
+  return class EmptyMixin5 extends baseClass {}
 }
 
 /**
@@ -507,7 +509,7 @@ export function createEmptyMixin5<T extends BaseClass<BaseNode>>(baseClass: T) {
  * Original function: $$f26
  */
 export function createEmptyMixin6<T extends BaseClass<BaseNode>>(baseClass: T) {
-  return class EmptyMixin6 extends baseClass {};
+  return class EmptyMixin6 extends baseClass {}
 }
 
 /**
@@ -515,7 +517,7 @@ export function createEmptyMixin6<T extends BaseClass<BaseNode>>(baseClass: T) {
  * Original function: $$_53
  */
 export function createEmptyMixin7<T extends BaseClass<BaseNode>>(baseClass: T) {
-  return class EmptyMixin7 extends baseClass {};
+  return class EmptyMixin7 extends baseClass {}
 }
 
 /**
@@ -523,7 +525,7 @@ export function createEmptyMixin7<T extends BaseClass<BaseNode>>(baseClass: T) {
  * Original function: $$A47
  */
 export function createEmptyMixin8<T extends BaseClass<BaseNode>>(baseClass: T) {
-  return class EmptyMixin8 extends baseClass {};
+  return class EmptyMixin8 extends baseClass {}
 }
 
 // ============================================================================
@@ -542,7 +544,7 @@ export function createStateGroupMixin<T extends BaseClass<BaseNode>>(baseClass: 
      * State groups organize different states of a component
      */
     get isStateGroup(): boolean {
-      return createSimpleGetter(hR8.getIsStateGroup).call(this);
+      return createSimpleGetter<boolean>(hR8.getIsStateGroup).call(this)
     }
 
     /**
@@ -550,7 +552,7 @@ export function createStateGroupMixin<T extends BaseClass<BaseNode>>(baseClass: 
      * @param value - True to mark as state group
      */
     set isStateGroup(value: boolean) {
-      createSimpleSetter(hR8.setIsStateGroup).call(this, value);
+      createSimpleSetter(hR8.setIsStateGroup).call(this, value)
     }
 
     /**
@@ -558,9 +560,9 @@ export function createStateGroupMixin<T extends BaseClass<BaseNode>>(baseClass: 
      * Symbol sublayers are child elements within symbol instances
      */
     get isSymbolSublayer(): boolean {
-      return createSimpleGetter(hR8.getIsSymbolSublayer).call(this);
+      return createSimpleGetter<boolean>(hR8.getIsSymbolSublayer).call(this)
     }
-  };
+  }
 }
 
 /**
@@ -568,7 +570,7 @@ export function createStateGroupMixin<T extends BaseClass<BaseNode>>(baseClass: 
  * Original function: $$b28
  */
 export function createEmptyMixin9<T extends BaseClass<BaseNode>>(baseClass: T) {
-  return class EmptyMixin9 extends baseClass {};
+  return class EmptyMixin9 extends baseClass {}
 }
 
 // ============================================================================
@@ -587,7 +589,7 @@ export function createConnectorMixin<T extends BaseClass<BaseNode>>(baseClass: T
      * Defines where connector lines begin
      */
     get connectorStart(): any {
-      return createSimpleGetter(x7E.getConnectorStart).call(this);
+      return createSimpleGetter(x7E.getConnectorStart).call(this)
     }
 
     /**
@@ -595,7 +597,7 @@ export function createConnectorMixin<T extends BaseClass<BaseNode>>(baseClass: T
      * @param value - Start point configuration object
      */
     set connectorStart(value: any) {
-      createSimpleSetter(x7E.setConnectorStart).call(this, value);
+      createSimpleSetter(x7E.setConnectorStart).call(this, value)
     }
 
     /**
@@ -603,7 +605,7 @@ export function createConnectorMixin<T extends BaseClass<BaseNode>>(baseClass: T
      * Defines where connector lines terminate
      */
     get connectorEnd(): any {
-      return createSimpleGetter(x7E.getConnectorEnd).call(this);
+      return createSimpleGetter(x7E.getConnectorEnd).call(this)
     }
 
     /**
@@ -611,9 +613,9 @@ export function createConnectorMixin<T extends BaseClass<BaseNode>>(baseClass: T
      * @param value - End point configuration object
      */
     set connectorEnd(value: any) {
-      createSimpleSetter(x7E.setConnectorEnd).call(this, value);
+      createSimpleSetter(x7E.setConnectorEnd).call(this, value)
     }
-  };
+  }
 }
 
 // ============================================================================
@@ -632,7 +634,7 @@ export function createConstraintMixin<T extends BaseClass<BaseNode>>(baseClass: 
      * Determines how the element behaves when parent width changes
      */
     get horizontalConstraint(): string {
-      return createEnumGetter(iZB.getHorizontalConstraint, kiwiParserCodec.ConstraintType, 'horizontalConstraint').call(this);
+      return createEnumGetter(iZB.getHorizontalConstraint, kiwiParserCodec.ConstraintType, 'horizontalConstraint').call(this)
     }
 
     /**
@@ -640,7 +642,7 @@ export function createConstraintMixin<T extends BaseClass<BaseNode>>(baseClass: 
      * @param value - Constraint type (LEFT, RIGHT, CENTER, LEFT_RIGHT, SCALE)
      */
     set horizontalConstraint(value: string) {
-      createEnumSetter(iZB.setHorizontalConstraint, kiwiParserCodec.ConstraintType, 'horizontalConstraint').call(this, value);
+      createEnumSetter(iZB.setHorizontalConstraint, kiwiParserCodec.ConstraintType, 'horizontalConstraint').call(this, value)
     }
 
     /**
@@ -648,7 +650,7 @@ export function createConstraintMixin<T extends BaseClass<BaseNode>>(baseClass: 
      * Determines how the element behaves when parent height changes
      */
     get verticalConstraint(): string {
-      return createEnumGetter(iZB.getVerticalConstraint, kiwiParserCodec.ConstraintType, 'verticalConstraint').call(this);
+      return createEnumGetter(iZB.getVerticalConstraint, kiwiParserCodec.ConstraintType, 'verticalConstraint').call(this)
     }
 
     /**
@@ -656,9 +658,9 @@ export function createConstraintMixin<T extends BaseClass<BaseNode>>(baseClass: 
      * @param value - Constraint type (TOP, BOTTOM, CENTER, TOP_BOTTOM, SCALE)
      */
     set verticalConstraint(value: string) {
-      createEnumSetter(iZB.setVerticalConstraint, kiwiParserCodec.ConstraintType, 'verticalConstraint').call(this, value);
+      createEnumSetter(iZB.setVerticalConstraint, kiwiParserCodec.ConstraintType, 'verticalConstraint').call(this, value)
     }
-  };
+  }
 }
 
 // ============================================================================
@@ -670,7 +672,7 @@ export function createConstraintMixin<T extends BaseClass<BaseNode>>(baseClass: 
  * Original function: $$E35
  */
 export function createEmptyMixin10<T extends BaseClass<BaseNode>>(baseClass: T) {
-  return class EmptyMixin10 extends baseClass {};
+  return class EmptyMixin10 extends baseClass {}
 }
 
 /**
@@ -678,7 +680,7 @@ export function createEmptyMixin10<T extends BaseClass<BaseNode>>(baseClass: T) 
  * Original function: $$x32
  */
 export function createEmptyMixin11<T extends BaseClass<BaseNode>>(baseClass: T) {
-  return class EmptyMixin11 extends baseClass {};
+  return class EmptyMixin11 extends baseClass {}
 }
 
 /**
@@ -686,7 +688,7 @@ export function createEmptyMixin11<T extends BaseClass<BaseNode>>(baseClass: T) 
  * Original function: $$S9
  */
 export function createEmptyMixin12<T extends BaseClass<BaseNode>>(baseClass: T) {
-  return class EmptyMixin12 extends baseClass {};
+  return class EmptyMixin12 extends baseClass {}
 }
 
 // ============================================================================
@@ -705,9 +707,9 @@ export function createDraftMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
      * Used to track design iteration and version history
      */
     get isFirstDraft(): boolean {
-      return createSimpleGetter(rO6.getIsFirstDraft).call(this);
+      return createSimpleGetter<boolean>(rO6.getIsFirstDraft).call(this)
     }
-  };
+  }
 }
 
 /**
@@ -722,7 +724,7 @@ export function createFrameMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
      * Temporary frames are usually created during editing operations
      */
     get isTemporaryFrame(): boolean {
-      return createSimpleGetter(jDJ.getIsTemporaryFrame).call(this);
+      return createSimpleGetter<boolean>(jDJ.getIsTemporaryFrame).call(this)
     }
 
     /**
@@ -730,7 +732,7 @@ export function createFrameMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
      * @param value - True to mark as temporary frame
      */
     set isTemporaryFrame(value: boolean) {
-      createSimpleSetter(jDJ.setIsTemporaryFrame).call(this, value);
+      createSimpleSetter(jDJ.setIsTemporaryFrame).call(this, value)
     }
 
     /**
@@ -738,7 +740,7 @@ export function createFrameMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
      * Controls automatic frame sizing based on content
      */
     get resizeToFit(): boolean {
-      return createSimpleGetter(jDJ.getResizeToFit).call(this);
+      return createSimpleGetter<boolean>(jDJ.getResizeToFit).call(this)
     }
 
     /**
@@ -746,9 +748,9 @@ export function createFrameMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
      * @param value - True to enable automatic content-based sizing
      */
     set resizeToFit(value: boolean) {
-      createSimpleSetter(jDJ.setResizeToFit).call(this, value);
+      createSimpleSetter(jDJ.setResizeToFit).call(this, value)
     }
-  };
+  }
 }
 
 // ============================================================================
@@ -760,7 +762,7 @@ export function createFrameMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
  * Original function: $$T8
  */
 export function createEmptyMixin13<T extends BaseClass<BaseNode>>(baseClass: T) {
-  return class EmptyMixin13 extends baseClass {};
+  return class EmptyMixin13 extends baseClass {}
 }
 
 /**
@@ -768,7 +770,7 @@ export function createEmptyMixin13<T extends BaseClass<BaseNode>>(baseClass: T) 
  * Original function: $$k34
  */
 export function createEmptyMixin14<T extends BaseClass<BaseNode>>(baseClass: T) {
-  return class EmptyMixin14 extends baseClass {};
+  return class EmptyMixin14 extends baseClass {}
 }
 
 /**
@@ -776,7 +778,7 @@ export function createEmptyMixin14<T extends BaseClass<BaseNode>>(baseClass: T) 
  * Original function: $$R44
  */
 export function createEmptyMixin15<T extends BaseClass<BaseNode>>(baseClass: T) {
-  return class EmptyMixin15 extends baseClass {};
+  return class EmptyMixin15 extends baseClass {}
 }
 
 /**
@@ -784,7 +786,7 @@ export function createEmptyMixin15<T extends BaseClass<BaseNode>>(baseClass: T) 
  * Original function: $$N46
  */
 export function createEmptyMixin16<T extends BaseClass<BaseNode>>(baseClass: T) {
-  return class EmptyMixin16 extends baseClass {};
+  return class EmptyMixin16 extends baseClass {}
 }
 
 // ============================================================================
@@ -803,9 +805,9 @@ export function createSlotMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
      * Slots are used for component composition and content projection
      */
     get isAssignedSlot(): boolean {
-      return createSimpleGetter(xMT.getIsAssignedSlot).call(this);
+      return createSimpleGetter<boolean>(xMT.getIsAssignedSlot).call(this)
     }
-  };
+  }
 }
 
 /**
@@ -813,7 +815,7 @@ export function createSlotMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
  * Original function: $$O41
  */
 export function createEmptyMixin17<T extends BaseClass<BaseNode>>(baseClass: T) {
-  return class EmptyMixin17 extends baseClass {};
+  return class EmptyMixin17 extends baseClass {}
 }
 
 // ============================================================================
@@ -832,7 +834,7 @@ export function createJSXMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
      * Used for consistent React key generation
      */
     get jsxStableKeyPart(): string {
-      return createSimpleGetter(hyM.getJsxStableKeyPart).call(this);
+      return createSimpleGetter<string>(hyM.getJsxStableKeyPart).call(this)
     }
 
     /**
@@ -840,7 +842,7 @@ export function createJSXMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
      * @param value - Stable key part for React consistency
      */
     set jsxStableKeyPart(value: string) {
-      createSimpleSetter(hyM.setJsxStableKeyPart).call(this, value);
+      createSimpleSetter(hyM.setJsxStableKeyPart).call(this, value)
     }
 
     /**
@@ -848,7 +850,7 @@ export function createJSXMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
      * Allows manual override of automatic key generation
      */
     get jsxStableKeyOverride(): string {
-      return createSimpleGetter(hyM.getJsxStableKeyOverride).call(this);
+      return createSimpleGetter<string>(hyM.getJsxStableKeyOverride).call(this)
     }
 
     /**
@@ -856,7 +858,7 @@ export function createJSXMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
      * @param value - Override key for manual JSX key control
      */
     set jsxStableKeyOverride(value: string) {
-      createSimpleSetter(hyM.setJsxStableKeyOverride).call(this, value);
+      createSimpleSetter(hyM.setJsxStableKeyOverride).call(this, value)
     }
 
     /**
@@ -864,7 +866,7 @@ export function createJSXMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
      * Used for deep component hierarchy navigation
      */
     get jsxDrillDownKey(): string {
-      return createSimpleGetter(hyM.getJsxDrillDownKey).call(this);
+      return createSimpleGetter<string>(hyM.getJsxDrillDownKey).call(this)
     }
 
     /**
@@ -872,7 +874,7 @@ export function createJSXMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
      * @param value - Key for navigating nested component structures
      */
     set jsxDrillDownKey(value: string) {
-      createSimpleSetter(hyM.setJsxDrillDownKey).call(this, value);
+      createSimpleSetter(hyM.setJsxDrillDownKey).call(this, value)
     }
 
     /**
@@ -880,7 +882,7 @@ export function createJSXMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
      * Final computed key used for React element identification
      */
     get jsxStableKey(): string {
-      return createSimpleGetter(hyM.getJsxStableKey).call(this);
+      return createSimpleGetter<string>(hyM.getJsxStableKey).call(this)
     }
 
     /**
@@ -888,7 +890,7 @@ export function createJSXMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
      * JSX sublayers are child elements within JSX components
      */
     get isJsxSublayer(): boolean {
-      return createSimpleGetter(hyM.getIsJsxSublayer).call(this);
+      return createSimpleGetter<boolean>(hyM.getIsJsxSublayer).call(this)
     }
 
     /**
@@ -896,7 +898,7 @@ export function createJSXMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
      * Identifies the parent JSX component context
      */
     get containingJSXGuid(): string {
-      return createSimpleGetter(hyM.getContainingJSXGuid).call(this);
+      return createSimpleGetter<string>(hyM.getContainingJSXGuid).call(this)
     }
 
     /**
@@ -904,7 +906,7 @@ export function createJSXMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
      * JSX components are elements that map to React components
      */
     get isJSX(): boolean {
-      return createSimpleGetter(hyM.getIsJSX).call(this);
+      return createSimpleGetter<boolean>(hyM.getIsJSX).call(this)
     }
 
     /**
@@ -912,9 +914,9 @@ export function createJSXMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
      * Includes both JSX components and their children
      */
     get isOrInJSX(): boolean {
-      return createSimpleGetter(hyM.getIsOrInJSX).call(this);
+      return createSimpleGetter<boolean>(hyM.getIsOrInJSX).call(this)
     }
-  };
+  }
 }
 
 // ============================================================================
@@ -933,7 +935,7 @@ export function createVisibilityMixin<T extends BaseClass<BaseNode>>(baseClass: 
      * Locked nodes cannot be edited in dev mode
      */
     get isLockedInDevMode(): boolean {
-      return createSimpleGetter(fRZ.getIsLockedInDevMode).call(this);
+      return createSimpleGetter<boolean>(fRZ.getIsLockedInDevMode).call(this)
     }
 
     /**
@@ -941,7 +943,7 @@ export function createVisibilityMixin<T extends BaseClass<BaseNode>>(baseClass: 
      * @param value - True to lock node in dev mode
      */
     set isLockedInDevMode(value: boolean) {
-      createSimpleSetter(fRZ.setIsLockedInDevMode).call(this, value);
+      createSimpleSetter(fRZ.setIsLockedInDevMode).call(this, value)
     }
 
     /**
@@ -949,7 +951,7 @@ export function createVisibilityMixin<T extends BaseClass<BaseNode>>(baseClass: 
      * Controls whether the node is visible in the design
      */
     get visible(): boolean {
-      return createSimpleGetter(fRZ.getVisible).call(this);
+      return createSimpleGetter<boolean>(fRZ.getVisible).call(this)
     }
 
     /**
@@ -957,7 +959,7 @@ export function createVisibilityMixin<T extends BaseClass<BaseNode>>(baseClass: 
      * @param value - True to make node visible
      */
     set visible(value: boolean) {
-      createSimpleSetter(fRZ.setVisible).call(this, value);
+      createSimpleSetter(fRZ.setVisible).call(this, value)
     }
 
     /**
@@ -965,7 +967,7 @@ export function createVisibilityMixin<T extends BaseClass<BaseNode>>(baseClass: 
      * Controls automatic name updates based on content
      */
     get autoRename(): boolean {
-      return createSimpleGetter(fRZ.getAutoRename).call(this);
+      return createSimpleGetter<boolean>(fRZ.getAutoRename).call(this)
     }
 
     /**
@@ -973,7 +975,7 @@ export function createVisibilityMixin<T extends BaseClass<BaseNode>>(baseClass: 
      * @param value - True to enable automatic renaming
      */
     set autoRename(value: boolean) {
-      createSimpleSetter(fRZ.setAutoRename).call(this, value);
+      createSimpleSetter(fRZ.setAutoRename).call(this, value)
     }
 
     /**
@@ -981,9 +983,9 @@ export function createVisibilityMixin<T extends BaseClass<BaseNode>>(baseClass: 
      * Computed visibility including parent hierarchy
      */
     get isVisibleAndAncestorsVisible(): boolean {
-      return createSimpleGetter(fRZ.getIsVisibleAndAncestorsVisible).call(this);
+      return createSimpleGetter<boolean>(fRZ.getIsVisibleAndAncestorsVisible).call(this)
     }
-  };
+  }
 }
 
 // ============================================================================
@@ -995,7 +997,7 @@ export function createVisibilityMixin<T extends BaseClass<BaseNode>>(baseClass: 
  * Original function: $$F13
  */
 export function createEmptyMixin18<T extends BaseClass<BaseNode>>(baseClass: T) {
-  return class EmptyMixin18 extends baseClass {};
+  return class EmptyMixin18 extends baseClass {}
 }
 
 /**
@@ -1003,7 +1005,7 @@ export function createEmptyMixin18<T extends BaseClass<BaseNode>>(baseClass: T) 
  * Original function: $$M62
  */
 export function createEmptyMixin19<T extends BaseClass<BaseNode>>(baseClass: T) {
-  return class EmptyMixin19 extends baseClass {};
+  return class EmptyMixin19 extends baseClass {}
 }
 
 // ============================================================================
@@ -1022,9 +1024,9 @@ export function createModuleMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
      * Modules are reusable design system components
      */
     get isModule(): boolean {
-      return createSimpleGetter(sVn.getIsModule).call(this);
+      return createSimpleGetter<boolean>(sVn.getIsModule).call(this)
     }
-  };
+  }
 }
 
 // ============================================================================
@@ -1036,7 +1038,7 @@ export function createModuleMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
  * Original function: $$U4
  */
 export function createEmptyMixin20<T extends BaseClass<BaseNode>>(baseClass: T) {
-  return class EmptyMixin20 extends baseClass {};
+  return class EmptyMixin20 extends baseClass {}
 }
 
 /**
@@ -1044,7 +1046,7 @@ export function createEmptyMixin20<T extends BaseClass<BaseNode>>(baseClass: T) 
  * Original function: $$B38
  */
 export function createEmptyMixin21<T extends BaseClass<BaseNode>>(baseClass: T) {
-  return class EmptyMixin21 extends baseClass {};
+  return class EmptyMixin21 extends baseClass {}
 }
 
 /**
@@ -1052,7 +1054,7 @@ export function createEmptyMixin21<T extends BaseClass<BaseNode>>(baseClass: T) 
  * Original function: $$V55
  */
 export function createEmptyMixin22<T extends BaseClass<BaseNode>>(baseClass: T) {
-  return class EmptyMixin22 extends baseClass {};
+  return class EmptyMixin22 extends baseClass {}
 }
 
 // ============================================================================
@@ -1071,7 +1073,7 @@ export function createCountMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
      * Used for numbered elements or quantity tracking
      */
     get count(): number {
-      return createSimpleGetter(qOu.getCount).call(this);
+      return createSimpleGetter<number>(qOu.getCount).call(this)
     }
 
     /**
@@ -1079,9 +1081,9 @@ export function createCountMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
      * @param value - Numerical count value
      */
     set count(value: number) {
-      createSimpleSetter(qOu.setCount).call(this, value);
+      createSimpleSetter(qOu.setCount).call(this, value)
     }
-  };
+  }
 }
 
 // ============================================================================
@@ -1100,7 +1102,7 @@ export function createOverlayMixin<T extends BaseClass<BaseNode>>(baseClass: T) 
      * Determines how overlays are positioned relative to their triggers
      */
     get overlayPositionType(): string {
-      return createEnumGetter($DY.getOverlayPositionType, kiwiParserCodec.OverlayPositionType, 'overlayPositionType').call(this);
+      return createEnumGetter($DY.getOverlayPositionType, kiwiParserCodec.OverlayPositionType, 'overlayPositionType').call(this)
     }
 
     /**
@@ -1108,7 +1110,7 @@ export function createOverlayMixin<T extends BaseClass<BaseNode>>(baseClass: T) 
      * Controls how content scrolls when it exceeds container bounds
      */
     get scrollDirection(): string {
-      return createEnumGetter($DY.getOverflowDirection, kiwiParserCodec.ScrollDirection, 'scrollDirection').call(this);
+      return createEnumGetter($DY.getOverflowDirection, kiwiParserCodec.ScrollDirection, 'scrollDirection').call(this)
     }
 
     /**
@@ -1116,7 +1118,7 @@ export function createOverlayMixin<T extends BaseClass<BaseNode>>(baseClass: T) 
      * @param value - Scroll direction (HORIZONTAL, VERTICAL, BOTH, NONE)
      */
     set scrollDirection(value: string) {
-      createEnumSetter($DY.setOverflowDirection, kiwiParserCodec.ScrollDirection, 'scrollDirection').call(this, value);
+      createEnumSetter($DY.setOverflowDirection, kiwiParserCodec.ScrollDirection, 'scrollDirection').call(this, value)
     }
 
     /**
@@ -1124,7 +1126,7 @@ export function createOverlayMixin<T extends BaseClass<BaseNode>>(baseClass: T) 
      * Controls scrolling animation and interaction behavior
      */
     get scrollBehavior(): string {
-      return createEnumGetter($DY.getScrollBehavior, kiwiParserCodec.ScrollBehavior, 'scrollBehavior').call(this);
+      return createEnumGetter($DY.getScrollBehavior, kiwiParserCodec.ScrollBehavior, 'scrollBehavior').call(this)
     }
 
     /**
@@ -1132,7 +1134,7 @@ export function createOverlayMixin<T extends BaseClass<BaseNode>>(baseClass: T) 
      * Controls how users can interact with content behind overlays
      */
     get overlayBackgroundInteraction(): string {
-      return createEnumGetter($DY.getOverlayBackgroundInteraction, kiwiParserCodec.OverlayBackgroundInteraction, 'overlayBackgroundInteraction').call(this);
+      return createEnumGetter($DY.getOverlayBackgroundInteraction, kiwiParserCodec.OverlayBackgroundInteraction, 'overlayBackgroundInteraction').call(this)
     }
 
     /**
@@ -1140,7 +1142,7 @@ export function createOverlayMixin<T extends BaseClass<BaseNode>>(baseClass: T) 
      * @param value - Interaction mode (NONE, CLOSE_ON_CLICK_OUTSIDE, etc.)
      */
     set overlayBackgroundInteraction(value: string) {
-      createEnumSetter($DY.setOverlayBackgroundInteraction, kiwiParserCodec.OverlayBackgroundInteraction, 'overlayBackgroundInteraction').call(this, value);
+      createEnumSetter($DY.setOverlayBackgroundInteraction, kiwiParserCodec.OverlayBackgroundInteraction, 'overlayBackgroundInteraction').call(this, value)
     }
 
     /**
@@ -1148,7 +1150,7 @@ export function createOverlayMixin<T extends BaseClass<BaseNode>>(baseClass: T) 
      * Specifies target device for prototype previews
      */
     get prototypeDevice(): any {
-      return createSimpleGetter($DY.getPrototypeDevice).call(this);
+      return createSimpleGetter($DY.getPrototypeDevice).call(this)
     }
 
     /**
@@ -1156,9 +1158,9 @@ export function createOverlayMixin<T extends BaseClass<BaseNode>>(baseClass: T) 
      * @param value - Device configuration object
      */
     set prototypeDevice(value: any) {
-      createSimpleSetter($DY.setPrototypeDevice).call(this, value);
+      createSimpleSetter($DY.setPrototypeDevice).call(this, value)
     }
-  };
+  }
 }
 // ============================================================================
 // RESPONSIVE DESIGN MIXINS
@@ -1176,7 +1178,7 @@ export function createResponsiveMixin<T extends BaseClass<BaseNode>>(baseClass: 
      * Responsive node sets manage different breakpoint variations
      */
     get isInResponsiveNodeSet(): boolean {
-      return createSimpleGetter(cTp.getIsInResponsiveNodeSet).call(this);
+      return createSimpleGetter<boolean>(cTp.getIsInResponsiveNodeSet).call(this)
     }
 
     /**
@@ -1184,7 +1186,7 @@ export function createResponsiveMixin<T extends BaseClass<BaseNode>>(baseClass: 
      * Webpages are responsive design containers
      */
     get isInWebpage(): boolean {
-      return createSimpleGetter(cTp.getIsInWebpage).call(this);
+      return createSimpleGetter<boolean>(cTp.getIsInWebpage).call(this)
     }
 
     /**
@@ -1192,7 +1194,7 @@ export function createResponsiveMixin<T extends BaseClass<BaseNode>>(baseClass: 
      * Includes both webpage nodes and their children
      */
     get isOrInWebpage(): boolean {
-      return createSimpleGetter(cTp.getIsOrInWebpage).call(this);
+      return createSimpleGetter<boolean>(cTp.getIsOrInWebpage).call(this)
     }
 
     /**
@@ -1200,7 +1202,7 @@ export function createResponsiveMixin<T extends BaseClass<BaseNode>>(baseClass: 
      * Covers all responsive design contexts
      */
     get isOrInResponsiveSetOrWebpage(): boolean {
-      return createSimpleGetter(cTp.getIsOrInResponsiveSetOrWebpage).call(this);
+      return createSimpleGetter<boolean>(cTp.getIsOrInResponsiveSetOrWebpage).call(this)
     }
 
     /**
@@ -1208,7 +1210,7 @@ export function createResponsiveMixin<T extends BaseClass<BaseNode>>(baseClass: 
      * Derived breakpoints are automatically generated variations
      */
     get isDerivedBreakpoint(): boolean {
-      return createSimpleGetter(cTp.getIsDerivedBreakpoint).call(this);
+      return createSimpleGetter<boolean>(cTp.getIsDerivedBreakpoint).call(this)
     }
 
     /**
@@ -1216,7 +1218,7 @@ export function createResponsiveMixin<T extends BaseClass<BaseNode>>(baseClass: 
      * Includes derived breakpoint nodes and their children
      */
     get isOrInDerivedBreakpoint(): boolean {
-      return createSimpleGetter(cTp.getIsOrInDerivedBreakpoint).call(this);
+      return createSimpleGetter<boolean>(cTp.getIsOrInDerivedBreakpoint).call(this)
     }
 
     /**
@@ -1224,7 +1226,7 @@ export function createResponsiveMixin<T extends BaseClass<BaseNode>>(baseClass: 
      * Specific type of derived breakpoint for webpage contexts
      */
     get isDerivedWebpageBreakpoint(): boolean {
-      return createSimpleGetter(cTp.getIsDerivedWebpageBreakpoint).call(this);
+      return createSimpleGetter<boolean>(cTp.getIsDerivedWebpageBreakpoint).call(this)
     }
 
     /**
@@ -1232,7 +1234,7 @@ export function createResponsiveMixin<T extends BaseClass<BaseNode>>(baseClass: 
      * Includes derived webpage breakpoint nodes and their children
      */
     get isOrInDerivedWebpageBreakpoint(): boolean {
-      return createSimpleGetter(cTp.getIsOrInDerivedWebpageBreakpoint).call(this);
+      return createSimpleGetter<boolean>(cTp.getIsOrInDerivedWebpageBreakpoint).call(this)
     }
 
     /**
@@ -1240,7 +1242,7 @@ export function createResponsiveMixin<T extends BaseClass<BaseNode>>(baseClass: 
      * Responsive node sets organize multiple breakpoint variations
      */
     get isResponsiveNodeSet(): boolean {
-      return createSimpleGetter(cTp.getIsResponsiveNodeSet).call(this);
+      return createSimpleGetter<boolean>(cTp.getIsResponsiveNodeSet).call(this)
     }
 
     /**
@@ -1248,9 +1250,9 @@ export function createResponsiveMixin<T extends BaseClass<BaseNode>>(baseClass: 
      * Webpages are top-level responsive design containers
      */
     get isWebpage(): boolean {
-      return createSimpleGetter(cTp.getIsWebpage).call(this);
+      return createSimpleGetter<boolean>(cTp.getIsWebpage).call(this)
     }
-  };
+  }
 }
 
 /**
@@ -1265,7 +1267,7 @@ export function createSiteMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
      * Social images are used for social media sharing previews
      */
     get socialImageGuidsOnPage(): string[] {
-      return createSimpleGetter(EBZ.getSocialImageGuidsOnPage).call(this);
+      return createSimpleGetter<string[]>(EBZ.getSocialImageGuidsOnPage).call(this)
     }
 
     /**
@@ -1273,7 +1275,7 @@ export function createSiteMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
      * Responsive sets manage multiple screen size variations
      */
     get isOrInResponsiveSet(): boolean {
-      return createSimpleGetter(EBZ.getIsOrInResponsiveSet).call(this);
+      return createSimpleGetter<boolean>(EBZ.getIsOrInResponsiveSet).call(this)
     }
 
     /**
@@ -1281,7 +1283,7 @@ export function createSiteMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
      * Breakpoint frames define specific responsive breakpoints
      */
     get isBreakpointFrame(): boolean {
-      return createSimpleGetter(EBZ.getIsBreakpointFrame).call(this);
+      return createSimpleGetter<boolean>(EBZ.getIsBreakpointFrame).call(this)
     }
 
     /**
@@ -1289,7 +1291,7 @@ export function createSiteMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
      * Controls how site content is flattened for export
      */
     get sitesFlattenFormats(): any {
-      return createSimpleGetter(EBZ.getSitesFlattenFormats).call(this);
+      return createSimpleGetter(EBZ.getSitesFlattenFormats).call(this)
     }
 
     /**
@@ -1297,7 +1299,7 @@ export function createSiteMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
      * Responsive sets organize content across multiple breakpoints
      */
     get isResponsiveSet(): boolean {
-      return createSimpleGetter(EBZ.getIsResponsiveSet).call(this);
+      return createSimpleGetter<boolean>(EBZ.getIsResponsiveSet).call(this)
     }
 
     /**
@@ -1305,9 +1307,9 @@ export function createSiteMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
      * Covers both responsive set and webpage contexts
      */
     get isResponsiveSetOrWebpage(): boolean {
-      return createSimpleGetter(EBZ.getIsResponsiveSetOrWebpage).call(this);
+      return createSimpleGetter<boolean>(EBZ.getIsResponsiveSetOrWebpage).call(this)
     }
-  };
+  }
 }
 
 /**
@@ -1315,7 +1317,7 @@ export function createSiteMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
  * Original function: $$K5
  */
 export function createEmptyMixin23<T extends BaseClass<BaseNode>>(baseClass: T) {
-  return class EmptyMixin23 extends baseClass {};
+  return class EmptyMixin23 extends baseClass {}
 }
 
 /**
@@ -1330,7 +1332,7 @@ export function createVisualStylingMixin<T extends BaseClass<BaseNode>>(baseClas
      * Controls the thickness of border strokes
      */
     get strokeWeight(): number {
-      return createSimpleGetter(ppO.getStrokeWeight).call(this);
+      return createSimpleGetter<number>(ppO.getStrokeWeight).call(this)
     }
 
     /**
@@ -1338,7 +1340,7 @@ export function createVisualStylingMixin<T extends BaseClass<BaseNode>>(baseClas
      * @param value - Stroke thickness in pixels
      */
     set strokeWeight(value: number) {
-      createSimpleSetter(ppO.setStrokeWeight).call(this, value);
+      createSimpleSetter(ppO.setStrokeWeight).call(this, value)
     }
 
     /**
@@ -1346,7 +1348,7 @@ export function createVisualStylingMixin<T extends BaseClass<BaseNode>>(baseClas
      * Controls how masking is applied to child elements
      */
     get maskType(): string {
-      return createEnumGetter(ppO.getMaskType, kiwiParserCodec.MaskType, 'maskType').call(this);
+      return createEnumGetter(ppO.getMaskType, kiwiParserCodec.MaskType, 'maskType').call(this)
     }
 
     /**
@@ -1354,7 +1356,7 @@ export function createVisualStylingMixin<T extends BaseClass<BaseNode>>(baseClas
      * @param value - Mask type (ALPHA, OUTLINE, etc.)
      */
     set maskType(value: string) {
-      createEnumSetter(ppO.setMaskType, kiwiParserCodec.MaskType, 'maskType').call(this, value);
+      createEnumSetter(ppO.setMaskType, kiwiParserCodec.MaskType, 'maskType').call(this, value)
     }
 
     /**
@@ -1362,7 +1364,7 @@ export function createVisualStylingMixin<T extends BaseClass<BaseNode>>(baseClas
      * Controls where strokes are positioned relative to element bounds
      */
     get strokeAlign(): string {
-      return createEnumGetter(ppO.getStrokeAlign, kiwiParserCodec.StrokeAlign, 'strokeAlign').call(this);
+      return createEnumGetter(ppO.getStrokeAlign, kiwiParserCodec.StrokeAlign, 'strokeAlign').call(this)
     }
 
     /**
@@ -1370,7 +1372,7 @@ export function createVisualStylingMixin<T extends BaseClass<BaseNode>>(baseClas
      * @param value - Stroke alignment (INSIDE, OUTSIDE, CENTER)
      */
     set strokeAlign(value: string) {
-      createEnumSetter(ppO.setStrokeAlign, kiwiParserCodec.StrokeAlign, 'strokeAlign').call(this, value);
+      createEnumSetter(ppO.setStrokeAlign, kiwiParserCodec.StrokeAlign, 'strokeAlign').call(this, value)
     }
 
     /**
@@ -1378,7 +1380,7 @@ export function createVisualStylingMixin<T extends BaseClass<BaseNode>>(baseClas
      * When true, content can overflow the frame boundaries
      */
     get frameMaskDisabled(): boolean {
-      return createSimpleGetter(ppO.getIsFrameClippingDisabled).call(this);
+      return createSimpleGetter<boolean>(ppO.getIsFrameClippingDisabled).call(this)
     }
 
     /**
@@ -1386,7 +1388,7 @@ export function createVisualStylingMixin<T extends BaseClass<BaseNode>>(baseClas
      * @param value - True to disable frame clipping (allow overflow)
      */
     set frameMaskDisabled(value: boolean) {
-      createSimpleSetter(ppO.setIsFrameClippingDisabled).call(this, value);
+      createSimpleSetter(ppO.setIsFrameClippingDisabled).call(this, value)
     }
 
     /**
@@ -1394,7 +1396,7 @@ export function createVisualStylingMixin<T extends BaseClass<BaseNode>>(baseClas
      * Controls the transparency of the element
      */
     get opacity(): number {
-      return createSimpleGetter(ppO.getOpacity).call(this);
+      return createSimpleGetter<number>(ppO.getOpacity).call(this)
     }
 
     /**
@@ -1402,7 +1404,7 @@ export function createVisualStylingMixin<T extends BaseClass<BaseNode>>(baseClas
      * @param value - Opacity value between 0 (transparent) and 1 (opaque)
      */
     set opacity(value: number) {
-      createSimpleSetter(ppO.setOpacity).call(this, value);
+      createSimpleSetter(ppO.setOpacity).call(this, value)
     }
 
     /**
@@ -1410,7 +1412,7 @@ export function createVisualStylingMixin<T extends BaseClass<BaseNode>>(baseClas
      * Controls how this element blends with elements behind it
      */
     get blendMode(): string {
-      return createEnumGetter(ppO.getBlendMode, kiwiParserCodec.BlendMode, 'blendMode').call(this);
+      return createEnumGetter(ppO.getBlendMode, kiwiParserCodec.BlendMode, 'blendMode').call(this)
     }
 
     /**
@@ -1418,9 +1420,9 @@ export function createVisualStylingMixin<T extends BaseClass<BaseNode>>(baseClas
      * @param value - Blend mode (NORMAL, MULTIPLY, SCREEN, etc.)
      */
     set blendMode(value: string) {
-      createEnumSetter(ppO.setBlendMode, kiwiParserCodec.BlendMode, 'blendMode').call(this, value);
+      createEnumSetter(ppO.setBlendMode, kiwiParserCodec.BlendMode, 'blendMode').call(this, value)
     }
-  };
+  }
 }
 
 /**
@@ -1435,7 +1437,7 @@ export function createBorderCornerMixin<T extends BaseClass<BaseNode>>(baseClass
      * Controls the rounding of the top-left corner
      */
     get rectangleTopLeftCornerRadius(): number {
-      return createSimpleGetter(tEb.getRectangleTopLeftCornerRadius).call(this);
+      return createSimpleGetter<number>(tEb.getRectangleTopLeftCornerRadius).call(this)
     }
 
     /**
@@ -1443,7 +1445,7 @@ export function createBorderCornerMixin<T extends BaseClass<BaseNode>>(baseClass
      * @param value - Corner radius in pixels
      */
     set rectangleTopLeftCornerRadius(value: number) {
-      createSimpleSetter(tEb.setRectangleTopLeftCornerRadius).call(this, value);
+      createSimpleSetter(tEb.setRectangleTopLeftCornerRadius).call(this, value)
     }
 
     /**
@@ -1451,7 +1453,7 @@ export function createBorderCornerMixin<T extends BaseClass<BaseNode>>(baseClass
      * Controls the rounding of the top-right corner
      */
     get rectangleTopRightCornerRadius(): number {
-      return createSimpleGetter(tEb.getRectangleTopRightCornerRadius).call(this);
+      return createSimpleGetter<number>(tEb.getRectangleTopRightCornerRadius).call(this)
     }
 
     /**
@@ -1459,7 +1461,7 @@ export function createBorderCornerMixin<T extends BaseClass<BaseNode>>(baseClass
      * @param value - Corner radius in pixels
      */
     set rectangleTopRightCornerRadius(value: number) {
-      createSimpleSetter(tEb.setRectangleTopRightCornerRadius).call(this, value);
+      createSimpleSetter(tEb.setRectangleTopRightCornerRadius).call(this, value)
     }
 
     /**
@@ -1467,7 +1469,7 @@ export function createBorderCornerMixin<T extends BaseClass<BaseNode>>(baseClass
      * Controls the rounding of the bottom-left corner
      */
     get rectangleBottomLeftCornerRadius(): number {
-      return createSimpleGetter(tEb.getRectangleBottomLeftCornerRadius).call(this);
+      return createSimpleGetter<number>(tEb.getRectangleBottomLeftCornerRadius).call(this)
     }
 
     /**
@@ -1475,7 +1477,7 @@ export function createBorderCornerMixin<T extends BaseClass<BaseNode>>(baseClass
      * @param value - Corner radius in pixels
      */
     set rectangleBottomLeftCornerRadius(value: number) {
-      createSimpleSetter(tEb.setRectangleBottomLeftCornerRadius).call(this, value);
+      createSimpleSetter(tEb.setRectangleBottomLeftCornerRadius).call(this, value)
     }
 
     /**
@@ -1483,7 +1485,7 @@ export function createBorderCornerMixin<T extends BaseClass<BaseNode>>(baseClass
      * Controls the rounding of the bottom-right corner
      */
     get rectangleBottomRightCornerRadius(): number {
-      return createSimpleGetter(tEb.getRectangleBottomRightCornerRadius).call(this);
+      return createSimpleGetter<number>(tEb.getRectangleBottomRightCornerRadius).call(this)
     }
 
     /**
@@ -1491,7 +1493,7 @@ export function createBorderCornerMixin<T extends BaseClass<BaseNode>>(baseClass
      * @param value - Corner radius in pixels
      */
     set rectangleBottomRightCornerRadius(value: number) {
-      createSimpleSetter(tEb.setRectangleBottomRightCornerRadius).call(this, value);
+      createSimpleSetter(tEb.setRectangleBottomRightCornerRadius).call(this, value)
     }
 
     /**
@@ -1499,7 +1501,7 @@ export function createBorderCornerMixin<T extends BaseClass<BaseNode>>(baseClass
      * When true, each corner can have different radius values
      */
     get rectangleCornerRadiiIndependent(): boolean {
-      return createSimpleGetter(tEb.getRectangleCornerRadiiIndependent).call(this);
+      return createSimpleGetter<boolean>(tEb.getRectangleCornerRadiiIndependent).call(this)
     }
 
     /**
@@ -1507,7 +1509,7 @@ export function createBorderCornerMixin<T extends BaseClass<BaseNode>>(baseClass
      * @param value - True to allow independent corner radii
      */
     set rectangleCornerRadiiIndependent(value: boolean) {
-      createSimpleSetter(tEb.setRectangleCornerRadiiIndependent).call(this, value);
+      createSimpleSetter(tEb.setRectangleCornerRadiiIndependent).call(this, value)
     }
 
     /**
@@ -1515,7 +1517,7 @@ export function createBorderCornerMixin<T extends BaseClass<BaseNode>>(baseClass
      * Controls corner editing tool behavior
      */
     get rectangleCornerToolIndependent(): boolean {
-      return createSimpleGetter(tEb.getRectangleCornerToolIndependent).call(this);
+      return createSimpleGetter<boolean>(tEb.getRectangleCornerToolIndependent).call(this)
     }
 
     /**
@@ -1523,7 +1525,7 @@ export function createBorderCornerMixin<T extends BaseClass<BaseNode>>(baseClass
      * @param value - True for independent corner tool settings
      */
     set rectangleCornerToolIndependent(value: boolean) {
-      createSimpleSetter(tEb.setRectangleCornerToolIndependent).call(this, value);
+      createSimpleSetter(tEb.setRectangleCornerToolIndependent).call(this, value)
     }
 
     /**
@@ -1531,7 +1533,7 @@ export function createBorderCornerMixin<T extends BaseClass<BaseNode>>(baseClass
      * When true, each side can have different stroke weights
      */
     get borderStrokeWeightsIndependent(): boolean {
-      return createSimpleGetter(tEb.getBorderStrokeWeightsIndependent).call(this);
+      return createSimpleGetter<boolean>(tEb.getBorderStrokeWeightsIndependent).call(this)
     }
 
     /**
@@ -1539,7 +1541,7 @@ export function createBorderCornerMixin<T extends BaseClass<BaseNode>>(baseClass
      * @param value - True to allow independent border weights
      */
     set borderStrokeWeightsIndependent(value: boolean) {
-      createSimpleSetter(tEb.setBorderStrokeWeightsIndependent).call(this, value);
+      createSimpleSetter(tEb.setBorderStrokeWeightsIndependent).call(this, value)
     }
 
     /**
@@ -1547,7 +1549,7 @@ export function createBorderCornerMixin<T extends BaseClass<BaseNode>>(baseClass
      * Controls the thickness of the top border
      */
     get borderTopWeight(): number {
-      return createSimpleGetter(tEb.getBorderTopWeight).call(this);
+      return createSimpleGetter<number>(tEb.getBorderTopWeight).call(this)
     }
 
     /**
@@ -1555,7 +1557,7 @@ export function createBorderCornerMixin<T extends BaseClass<BaseNode>>(baseClass
      * @param value - Border thickness in pixels
      */
     set borderTopWeight(value: number) {
-      createSimpleSetter(tEb.setBorderTopWeight).call(this, value);
+      createSimpleSetter(tEb.setBorderTopWeight).call(this, value)
     }
 
     /**
@@ -1563,7 +1565,7 @@ export function createBorderCornerMixin<T extends BaseClass<BaseNode>>(baseClass
      * Controls the thickness of the bottom border
      */
     get borderBottomWeight(): number {
-      return createSimpleGetter(tEb.getBorderBottomWeight).call(this);
+      return createSimpleGetter<number>(tEb.getBorderBottomWeight).call(this)
     }
 
     /**
@@ -1571,7 +1573,7 @@ export function createBorderCornerMixin<T extends BaseClass<BaseNode>>(baseClass
      * @param value - Border thickness in pixels
      */
     set borderBottomWeight(value: number) {
-      createSimpleSetter(tEb.setBorderBottomWeight).call(this, value);
+      createSimpleSetter(tEb.setBorderBottomWeight).call(this, value)
     }
 
     /**
@@ -1579,7 +1581,7 @@ export function createBorderCornerMixin<T extends BaseClass<BaseNode>>(baseClass
      * Controls the thickness of the left border
      */
     get borderLeftWeight(): number {
-      return createSimpleGetter(tEb.getBorderLeftWeight).call(this);
+      return createSimpleGetter<number>(tEb.getBorderLeftWeight).call(this)
     }
 
     /**
@@ -1587,7 +1589,7 @@ export function createBorderCornerMixin<T extends BaseClass<BaseNode>>(baseClass
      * @param value - Border thickness in pixels
      */
     set borderLeftWeight(value: number) {
-      createSimpleSetter(tEb.setBorderLeftWeight).call(this, value);
+      createSimpleSetter(tEb.setBorderLeftWeight).call(this, value)
     }
 
     /**
@@ -1595,7 +1597,7 @@ export function createBorderCornerMixin<T extends BaseClass<BaseNode>>(baseClass
      * Controls the thickness of the right border
      */
     get borderRightWeight(): number {
-      return createSimpleGetter(tEb.getBorderRightWeight).call(this);
+      return createSimpleGetter<number>(tEb.getBorderRightWeight).call(this)
     }
 
     /**
@@ -1603,7 +1605,7 @@ export function createBorderCornerMixin<T extends BaseClass<BaseNode>>(baseClass
      * @param value - Border thickness in pixels
      */
     set borderRightWeight(value: number) {
-      createSimpleSetter(tEb.setBorderRightWeight).call(this, value);
+      createSimpleSetter(tEb.setBorderRightWeight).call(this, value)
     }
 
     /**
@@ -1611,7 +1613,7 @@ export function createBorderCornerMixin<T extends BaseClass<BaseNode>>(baseClass
      * When corners are not independent, this controls all corners
      */
     get cornerRadius(): number {
-      return createSimpleGetter(tEb.getCornerRadius).call(this);
+      return createSimpleGetter<number>(tEb.getCornerRadius).call(this)
     }
 
     /**
@@ -1619,7 +1621,7 @@ export function createBorderCornerMixin<T extends BaseClass<BaseNode>>(baseClass
      * @param value - Corner radius in pixels for all corners
      */
     set cornerRadius(value: number) {
-      createSimpleSetter(tEb.setCornerRadius).call(this, value);
+      createSimpleSetter(tEb.setCornerRadius).call(this, value)
     }
 
     /**
@@ -1627,7 +1629,7 @@ export function createBorderCornerMixin<T extends BaseClass<BaseNode>>(baseClass
      * Controls how smooth corner transitions appear
      */
     get cornerSmoothing(): number {
-      return createSimpleGetter(tEb.getCornerSmoothing).call(this);
+      return createSimpleGetter<number>(tEb.getCornerSmoothing).call(this)
     }
 
     /**
@@ -1635,9 +1637,9 @@ export function createBorderCornerMixin<T extends BaseClass<BaseNode>>(baseClass
      * @param value - Smoothing factor between 0 and 1
      */
     set cornerSmoothing(value: number) {
-      createSimpleSetter(tEb.setCornerSmoothing).call(this, value);
+      createSimpleSetter(tEb.setCornerSmoothing).call(this, value)
     }
-  };
+  }
 }
 
 /**
@@ -1645,7 +1647,7 @@ export function createBorderCornerMixin<T extends BaseClass<BaseNode>>(baseClass
  * Original function: $$$33
  */
 export function createEmptyMixin24<T extends BaseClass<BaseNode>>(baseClass: T) {
-  return class EmptyMixin24 extends baseClass {};
+  return class EmptyMixin24 extends baseClass {}
 }
 
 // ============================================================================
@@ -1664,7 +1666,7 @@ export function createLayoutMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
      * Controls how much a child element grows in the primary axis
      */
     get stackChildPrimaryGrow(): number {
-      return createSimpleGetter(KtY.getStackChildPrimaryGrow).call(this);
+      return createSimpleGetter<number>(KtY.getStackChildPrimaryGrow).call(this)
     }
 
     /**
@@ -1672,7 +1674,7 @@ export function createLayoutMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
      * @param value - Grow factor (0 = no grow, 1+ = proportional growth)
      */
     set stackChildPrimaryGrow(value: number) {
-      createSimpleSetter(KtY.setStackChildPrimaryGrow).call(this, value);
+      createSimpleSetter(KtY.setStackChildPrimaryGrow).call(this, value)
     }
 
     /**
@@ -1680,7 +1682,7 @@ export function createLayoutMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
      * Controls the gap between elements in stack layouts
      */
     get stackSpacing(): number {
-      return createSimpleGetter(KtY.getStackSpacing).call(this);
+      return createSimpleGetter<number>(KtY.getStackSpacing).call(this)
     }
 
     /**
@@ -1688,7 +1690,7 @@ export function createLayoutMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
      * @param value - Spacing value in pixels
      */
     set stackSpacing(value: number) {
-      createSimpleSetter(KtY.setStackSpacing).call(this, value);
+      createSimpleSetter(KtY.setStackSpacing).call(this, value)
     }
 
     /**
@@ -1696,7 +1698,7 @@ export function createLayoutMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
      * Controls vertical span in grid layouts
      */
     get gridRowSpan(): number {
-      return createSimpleGetter(KtY.getGridRowSpan).call(this);
+      return createSimpleGetter<number>(KtY.getGridRowSpan).call(this)
     }
 
     /**
@@ -1704,7 +1706,7 @@ export function createLayoutMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
      * @param value - Number of rows to span
      */
     set gridRowSpan(value: number) {
-      createSimpleSetter(KtY.setGridRowSpan).call(this, value);
+      createSimpleSetter(KtY.setGridRowSpan).call(this, value)
     }
 
     /**
@@ -1712,7 +1714,7 @@ export function createLayoutMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
      * Controls horizontal span in grid layouts
      */
     get gridColumnSpan(): number {
-      return createSimpleGetter(KtY.getGridColumnSpan).call(this);
+      return createSimpleGetter<number>(KtY.getGridColumnSpan).call(this)
     }
 
     /**
@@ -1720,7 +1722,7 @@ export function createLayoutMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
      * @param value - Number of columns to span
      */
     set gridColumnSpan(value: number) {
-      createSimpleSetter(KtY.setGridColumnSpan).call(this, value);
+      createSimpleSetter(KtY.setGridColumnSpan).call(this, value)
     }
 
     /**
@@ -1728,7 +1730,7 @@ export function createLayoutMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
      * Overrides parent alignment for individual items
      */
     get stackChildAlignSelf(): string {
-      return createEnumGetter(KtY.getStackChildAlignSelf, kiwiParserCodec.StackCounterAlign, 'stackChildAlignSelf').call(this);
+      return createEnumGetter(KtY.getStackChildAlignSelf, kiwiParserCodec.StackCounterAlign, 'stackChildAlignSelf').call(this)
     }
 
     /**
@@ -1736,7 +1738,7 @@ export function createLayoutMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
      * @param value - Alignment type (AUTO, START, CENTER, END, STRETCH)
      */
     set stackChildAlignSelf(value: string) {
-      createEnumSetter(KtY.setStackChildAlignSelf, kiwiParserCodec.StackCounterAlign, 'stackChildAlignSelf').call(this, value);
+      createEnumSetter(KtY.setStackChildAlignSelf, kiwiParserCodec.StackCounterAlign, 'stackChildAlignSelf').call(this, value)
     }
 
     /**
@@ -1744,7 +1746,7 @@ export function createLayoutMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
      * Controls how grid items align horizontally within their cells
      */
     get gridChildHorizontalAlign(): string {
-      return createEnumGetter(KtY.getGridChildHorizontalAlign, kiwiParserCodec.GridChildAlign, 'gridChildHorizontalAlign').call(this);
+      return createEnumGetter(KtY.getGridChildHorizontalAlign, kiwiParserCodec.GridChildAlign, 'gridChildHorizontalAlign').call(this)
     }
 
     /**
@@ -1752,7 +1754,7 @@ export function createLayoutMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
      * @param value - Alignment type (START, CENTER, END, STRETCH)
      */
     set gridChildHorizontalAlign(value: string) {
-      createEnumSetter(KtY.setGridChildHorizontalAlign, kiwiParserCodec.GridChildAlign, 'gridChildHorizontalAlign').call(this, value);
+      createEnumSetter(KtY.setGridChildHorizontalAlign, kiwiParserCodec.GridChildAlign, 'gridChildHorizontalAlign').call(this, value)
     }
 
     /**
@@ -1760,7 +1762,7 @@ export function createLayoutMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
      * Controls how grid items align vertically within their cells
      */
     get gridChildVerticalAlign(): string {
-      return createEnumGetter(KtY.getGridChildVerticalAlign, kiwiParserCodec.GridChildAlign, 'gridChildVerticalAlign').call(this);
+      return createEnumGetter(KtY.getGridChildVerticalAlign, kiwiParserCodec.GridChildAlign, 'gridChildVerticalAlign').call(this)
     }
 
     /**
@@ -1768,7 +1770,7 @@ export function createLayoutMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
      * @param value - Alignment type (START, CENTER, END, STRETCH)
      */
     set gridChildVerticalAlign(value: string) {
-      createEnumSetter(KtY.setGridChildVerticalAlign, kiwiParserCodec.GridChildAlign, 'gridChildVerticalAlign').call(this, value);
+      createEnumSetter(KtY.setGridChildVerticalAlign, kiwiParserCodec.GridChildAlign, 'gridChildVerticalAlign').call(this, value)
     }
 
     /**
@@ -1776,7 +1778,7 @@ export function createLayoutMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
      * Controls alignment perpendicular to the main stack direction
      */
     get stackCounterAlignItems(): string {
-      return createEnumGetter(KtY.getStackCounterAlignItems, kiwiParserCodec.StackAlign, 'stackCounterAlignItems').call(this);
+      return createEnumGetter(KtY.getStackCounterAlignItems, kiwiParserCodec.StackAlign, 'stackCounterAlignItems').call(this)
     }
 
     /**
@@ -1784,7 +1786,7 @@ export function createLayoutMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
      * @param value - Alignment type (START, CENTER, END, STRETCH)
      */
     set stackCounterAlignItems(value: string) {
-      createEnumSetter(KtY.setStackCounterAlignItems, kiwiParserCodec.StackAlign, 'stackCounterAlignItems').call(this, value);
+      createEnumSetter(KtY.setStackCounterAlignItems, kiwiParserCodec.StackAlign, 'stackCounterAlignItems').call(this, value)
     }
 
     /**
@@ -1792,7 +1794,7 @@ export function createLayoutMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
      * Controls how stack containers size in the perpendicular direction
      */
     get stackCounterSizing(): string {
-      return createEnumGetter(KtY.getStackCounterSizing, kiwiParserCodec.StackSize, 'stackCounterSizing').call(this);
+      return createEnumGetter(KtY.getStackCounterSizing, kiwiParserCodec.StackSize, 'stackCounterSizing').call(this)
     }
 
     /**
@@ -1800,7 +1802,7 @@ export function createLayoutMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
      * @param value - Sizing type (FIXED, HUG, FILL)
      */
     set stackCounterSizing(value: string) {
-      createEnumSetter(KtY.setStackCounterSizing, kiwiParserCodec.StackSize, 'stackCounterSizing').call(this, value);
+      createEnumSetter(KtY.setStackCounterSizing, kiwiParserCodec.StackSize, 'stackCounterSizing').call(this, value)
     }
 
     /**
@@ -1808,7 +1810,7 @@ export function createLayoutMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
      * Controls how stack containers size in the main direction
      */
     get stackPrimarySizing(): string {
-      return createEnumGetter(KtY.getStackPrimarySizing, kiwiParserCodec.StackSize, 'stackPrimarySizing').call(this);
+      return createEnumGetter(KtY.getStackPrimarySizing, kiwiParserCodec.StackSize, 'stackPrimarySizing').call(this)
     }
 
     /**
@@ -1816,7 +1818,7 @@ export function createLayoutMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
      * @param value - Sizing type (FIXED, HUG, FILL)
      */
     set stackPrimarySizing(value: string) {
-      createEnumSetter(KtY.setStackPrimarySizing, kiwiParserCodec.StackSize, 'stackPrimarySizing').call(this, value);
+      createEnumSetter(KtY.setStackPrimarySizing, kiwiParserCodec.StackSize, 'stackPrimarySizing').call(this, value)
     }
 
     /**
@@ -1824,7 +1826,7 @@ export function createLayoutMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
      * Controls how content is distributed in the perpendicular direction
      */
     get stackCounterAlignContent(): string {
-      return createEnumGetter(KtY.getStackCounterAlignContent, kiwiParserCodec.StackCounterAlignContent, 'stackCounterAlignContent').call(this);
+      return createEnumGetter(KtY.getStackCounterAlignContent, kiwiParserCodec.StackCounterAlignContent, 'stackCounterAlignContent').call(this)
     }
 
     /**
@@ -1832,7 +1834,7 @@ export function createLayoutMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
      * @param value - Content alignment type
      */
     set stackCounterAlignContent(value: string) {
-      createEnumSetter(KtY.setStackCounterAlignContent, kiwiParserCodec.StackCounterAlignContent, 'stackCounterAlignContent').call(this, value);
+      createEnumSetter(KtY.setStackCounterAlignContent, kiwiParserCodec.StackCounterAlignContent, 'stackCounterAlignContent').call(this, value)
     }
 
     /**
@@ -1840,7 +1842,7 @@ export function createLayoutMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
      * Controls how stack items are positioned relative to each other
      */
     get stackPositioning(): string {
-      return createEnumGetter(KtY.getStackPositioning, kiwiParserCodec.StackPositioning, 'stackPositioning').call(this);
+      return createEnumGetter(KtY.getStackPositioning, kiwiParserCodec.StackPositioning, 'stackPositioning').call(this)
     }
 
     /**
@@ -1848,7 +1850,7 @@ export function createLayoutMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
      * @param value - Positioning type (AUTO, ABSOLUTE)
      */
     set stackPositioning(value: string) {
-      createEnumSetter(KtY.setStackPositioning, kiwiParserCodec.StackPositioning, 'stackPositioning').call(this, value);
+      createEnumSetter(KtY.setStackPositioning, kiwiParserCodec.StackPositioning, 'stackPositioning').call(this, value)
     }
 
     /**
@@ -1856,7 +1858,7 @@ export function createLayoutMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
      * When true, border thickness affects element sizing
      */
     get bordersTakeSpace(): boolean {
-      return createSimpleGetter(KtY.getBordersTakeSpace).call(this);
+      return createSimpleGetter<boolean>(KtY.getBordersTakeSpace).call(this)
     }
 
     /**
@@ -1864,7 +1866,7 @@ export function createLayoutMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
      * @param value - True if borders should affect sizing
      */
     set bordersTakeSpace(value: boolean) {
-      createSimpleSetter(KtY.setBordersTakeSpace).call(this, value);
+      createSimpleSetter(KtY.setBordersTakeSpace).call(this, value)
     }
 
     /**
@@ -1872,7 +1874,7 @@ export function createLayoutMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
      * Used for drag and drop operations within layouts
      */
     get sortedMovingChildIndices(): number[] {
-      return createSimpleGetter(KtY.getSortedMovingChildIndices).call(this);
+      return createSimpleGetter<number[]>(KtY.getSortedMovingChildIndices).call(this)
     }
 
     /**
@@ -1880,7 +1882,7 @@ export function createLayoutMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
      * Controls vertical spacing in grid layouts
      */
     get gridRowGap(): number {
-      return createSimpleGetter(KtY.getGridRowGap).call(this);
+      return createSimpleGetter<number>(KtY.getGridRowGap).call(this)
     }
 
     /**
@@ -1888,7 +1890,7 @@ export function createLayoutMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
      * @param value - Gap size in pixels
      */
     set gridRowGap(value: number) {
-      createSimpleSetter(KtY.setGridRowGap).call(this, value);
+      createSimpleSetter(KtY.setGridRowGap).call(this, value)
     }
 
     /**
@@ -1896,7 +1898,7 @@ export function createLayoutMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
      * Controls horizontal spacing in grid layouts
      */
     get gridColumnGap(): number {
-      return createSimpleGetter(KtY.getGridColumnGap).call(this);
+      return createSimpleGetter<number>(KtY.getGridColumnGap).call(this)
     }
 
     /**
@@ -1904,7 +1906,7 @@ export function createLayoutMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
      * @param value - Gap size in pixels
      */
     set gridColumnGap(value: number) {
-      createSimpleSetter(KtY.setGridColumnGap).call(this, value);
+      createSimpleSetter(KtY.setGridColumnGap).call(this, value)
     }
 
     /**
@@ -1912,9 +1914,9 @@ export function createLayoutMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
      * Stack layouts arrange children in a single direction
      */
     get isStack(): boolean {
-      return createSimpleGetter(KtY.getIsStack).call(this);
+      return createSimpleGetter<boolean>(KtY.getIsStack).call(this)
     }
-  };
+  }
 }
 
 /**
@@ -1929,7 +1931,7 @@ export function createSlideMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
      * Controls how slide numbers are displayed and formatted
      */
     get slideNumber(): string {
-      return createEnumGetter(x4V.getSlideNumber, kiwiParserCodec.SlideNumber, 'slideNumber').call(this);
+      return createEnumGetter(x4V.getSlideNumber, kiwiParserCodec.SlideNumber, 'slideNumber').call(this)
     }
 
     /**
@@ -1937,7 +1939,7 @@ export function createSlideMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
      * @param value - Slide number type (NONE, SIMPLE, CUSTOM)
      */
     set slideNumber(value: string) {
-      createEnumSetter(x4V.setSlideNumber, kiwiParserCodec.SlideNumber, 'slideNumber').call(this, value);
+      createEnumSetter(x4V.setSlideNumber, kiwiParserCodec.SlideNumber, 'slideNumber').call(this, value)
     }
 
     /**
@@ -1945,7 +1947,7 @@ export function createSlideMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
      * Controls slide hierarchy and indentation in presentation mode
      */
     get areSlidesManuallyIndented(): boolean {
-      return createSimpleGetter(x4V.getAreSlidesManuallyIndented).call(this);
+      return createSimpleGetter<boolean>(x4V.getAreSlidesManuallyIndented).call(this)
     }
 
     /**
@@ -1953,7 +1955,7 @@ export function createSlideMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
      * Skipped slides are not shown in presentation mode
      */
     get isSkippedSlide(): boolean {
-      return createSimpleGetter(x4V.getIsSkippedSlide).call(this);
+      return createSimpleGetter<boolean>(x4V.getIsSkippedSlide).call(this)
     }
 
     /**
@@ -1961,7 +1963,7 @@ export function createSlideMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
      * @param value - True to skip this slide in presentations
      */
     set isSkippedSlide(value: boolean) {
-      createSimpleSetter(x4V.setIsSkippedSlide).call(this, value);
+      createSimpleSetter(x4V.setIsSkippedSlide).call(this, value)
     }
 
     /**
@@ -1969,7 +1971,7 @@ export function createSlideMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
      * Contains metadata about the slide's original state
      */
     get originalNodeInfos(): any {
-      return createSimpleGetter(x4V.getOriginalNodeInfos).call(this);
+      return createSimpleGetter(x4V.getOriginalNodeInfos).call(this)
     }
 
     /**
@@ -1977,7 +1979,7 @@ export function createSlideMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
      * @param value - Node information object
      */
     set originalNodeInfos(value: any) {
-      createSimpleSetter(x4V.setOriginalNodeInfos).call(this, value);
+      createSimpleSetter(x4V.setOriginalNodeInfos).call(this, value)
     }
 
     /**
@@ -1985,7 +1987,7 @@ export function createSlideMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
      * Controls formatting of hierarchical slide numbers
      */
     get slideNumberSeparator(): string {
-      return createSimpleGetter(x4V.getSlideNumberSeparator).call(this);
+      return createSimpleGetter<string>(x4V.getSlideNumberSeparator).call(this)
     }
 
     /**
@@ -1993,7 +1995,7 @@ export function createSlideMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
      * @param value - Separator string (e.g., ".", "-", "/")
      */
     set slideNumberSeparator(value: string) {
-      createSimpleSetter(x4V.setSlideNumberSeparator).call(this, value);
+      createSimpleSetter(x4V.setSlideNumberSeparator).call(this, value)
     }
 
     /**
@@ -2001,7 +2003,7 @@ export function createSlideMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
      * Used for generating and caching slide preview images
      */
     get slideThumbnailHash(): string {
-      return createSimpleGetter(x4V.getSlideThumbnailHash).call(this);
+      return createSimpleGetter<string>(x4V.getSlideThumbnailHash).call(this)
     }
 
     /**
@@ -2009,7 +2011,7 @@ export function createSlideMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
      * @param value - Hash string for thumbnail identification
      */
     set slideThumbnailHash(value: string) {
-      createSimpleSetter(x4V.setSlideThumbnailHash).call(this, value);
+      createSimpleSetter(x4V.setSlideThumbnailHash).call(this, value)
     }
 
     /**
@@ -2017,7 +2019,7 @@ export function createSlideMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
      * Notes that are shown to the presenter but not the audience
      */
     get slideSpeakerNotes(): string {
-      return createSimpleGetter(x4V.getSlideSpeakerNotes).call(this);
+      return createSimpleGetter<string>(x4V.getSlideSpeakerNotes).call(this)
     }
 
     /**
@@ -2025,7 +2027,7 @@ export function createSlideMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
      * @param value - Speaker notes text
      */
     set slideSpeakerNotes(value: string) {
-      createSimpleSetter(x4V.setSlideSpeakerNotes).call(this, value);
+      createSimpleSetter(x4V.setSlideSpeakerNotes).call(this, value)
     }
 
     /**
@@ -2033,7 +2035,7 @@ export function createSlideMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
      * Identifies the parent slide for nested elements
      */
     get containingSlideId(): string {
-      return createSimpleGetter(x4V.getContainingSlideId).call(this);
+      return createSimpleGetter<string>(x4V.getContainingSlideId).call(this)
     }
 
     /**
@@ -2041,7 +2043,7 @@ export function createSlideMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
      * Slides are top-level presentation elements
      */
     get isSlide(): boolean {
-      return createSimpleGetter(x4V.getIsSlide).call(this);
+      return createSimpleGetter<boolean>(x4V.getIsSlide).call(this)
     }
 
     /**
@@ -2049,7 +2051,7 @@ export function createSlideMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
      * Includes both slide elements and their children
      */
     get isOrInSlide(): boolean {
-      return createSimpleGetter(x4V.getIsOrInSlide).call(this);
+      return createSimpleGetter<boolean>(x4V.getIsOrInSlide).call(this)
     }
 
     /**
@@ -2057,7 +2059,7 @@ export function createSlideMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
      * Slide number indicators show the current slide position
      */
     get isSlideNumber(): boolean {
-      return createSimpleGetter(x4V.getIsSlideNumber).call(this);
+      return createSimpleGetter<boolean>(x4V.getIsSlideNumber).call(this)
     }
 
     /**
@@ -2065,9 +2067,9 @@ export function createSlideMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
      * True for child elements of slide containers
      */
     get isInSlide(): boolean {
-      return createSimpleGetter(x4V.getIsInSlide).call(this);
+      return createSimpleGetter<boolean>(x4V.getIsInSlide).call(this)
     }
-  };
+  }
 }
 
 // ============================================================================
@@ -2079,7 +2081,7 @@ export function createSlideMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
  * Original function: $$Q15
  */
 export function createEmptyMixin25<T extends BaseClass<BaseNode>>(baseClass: T) {
-  return class EmptyMixin25 extends baseClass {};
+  return class EmptyMixin25 extends baseClass {}
 }
 
 /**
@@ -2087,7 +2089,7 @@ export function createEmptyMixin25<T extends BaseClass<BaseNode>>(baseClass: T) 
  * Original function: $$J36
  */
 export function createEmptyMixin26<T extends BaseClass<BaseNode>>(baseClass: T) {
-  return class EmptyMixin26 extends baseClass {};
+  return class EmptyMixin26 extends baseClass {}
 }
 
 /**
@@ -2095,7 +2097,7 @@ export function createEmptyMixin26<T extends BaseClass<BaseNode>>(baseClass: T) 
  * Original function: $$ee20
  */
 export function createEmptyMixin27<T extends BaseClass<BaseNode>>(baseClass: T) {
-  return class EmptyMixin27 extends baseClass {};
+  return class EmptyMixin27 extends baseClass {}
 }
 
 /**
@@ -2103,7 +2105,7 @@ export function createEmptyMixin27<T extends BaseClass<BaseNode>>(baseClass: T) 
  * Original function: $$et54
  */
 export function createEmptyMixin28<T extends BaseClass<BaseNode>>(baseClass: T) {
-  return class EmptyMixin28 extends baseClass {};
+  return class EmptyMixin28 extends baseClass {}
 }
 
 // ============================================================================
@@ -2122,7 +2124,7 @@ export function createStyleTypeMixin<T extends BaseClass<BaseNode>>(baseClass: T
      * Determines what kind of style properties are applicable
      */
     get styleType(): string {
-      return createEnumGetter(RsU.getStyleType, kiwiParserCodec.StyleType, 'styleType').call(this);
+      return createEnumGetter(RsU.getStyleType, kiwiParserCodec.StyleType, 'styleType').call(this)
     }
 
     /**
@@ -2130,9 +2132,9 @@ export function createStyleTypeMixin<T extends BaseClass<BaseNode>>(baseClass: T
      * @param value - Style type (FILL, STROKE, TEXT, EFFECT)
      */
     set styleType(value: string) {
-      createEnumSetter(RsU.setStyleType, kiwiParserCodec.StyleType, 'styleType').call(this, value);
+      createEnumSetter(RsU.setStyleType, kiwiParserCodec.StyleType, 'styleType').call(this, value)
     }
-  };
+  }
 }
 
 /**
@@ -2140,7 +2142,7 @@ export function createStyleTypeMixin<T extends BaseClass<BaseNode>>(baseClass: T
  * Original function: $$en21
  */
 export function createEmptyMixin29<T extends BaseClass<BaseNode>>(baseClass: T) {
-  return class EmptyMixin29 extends baseClass {};
+  return class EmptyMixin29 extends baseClass {}
 }
 
 /**
@@ -2148,7 +2150,7 @@ export function createEmptyMixin29<T extends BaseClass<BaseNode>>(baseClass: T) 
  * Original function: $$er18
  */
 export function createEmptyMixin30<T extends BaseClass<BaseNode>>(baseClass: T) {
-  return class EmptyMixin30 extends baseClass {};
+  return class EmptyMixin30 extends baseClass {}
 }
 
 // ============================================================================
@@ -2167,7 +2169,7 @@ export function createTextMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
      * Controls how text is aligned within its container horizontally
      */
     get textAlignHorizontal(): string {
-      return createEnumGetter(H9y.getTextAlignHorizontal, kiwiParserCodec.TextAlignHorizontal, 'textAlignHorizontal').call(this);
+      return createEnumGetter(H9y.getTextAlignHorizontal, kiwiParserCodec.TextAlignHorizontal, 'textAlignHorizontal').call(this)
     }
 
     /**
@@ -2175,7 +2177,7 @@ export function createTextMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
      * @param value - Alignment type (LEFT, RIGHT, CENTER, JUSTIFIED)
      */
     set textAlignHorizontal(value: string) {
-      createEnumSetter(H9y.setTextAlignHorizontal, kiwiParserCodec.TextAlignHorizontal, 'textAlignHorizontal').call(this, value);
+      createEnumSetter(H9y.setTextAlignHorizontal, kiwiParserCodec.TextAlignHorizontal, 'textAlignHorizontal').call(this, value)
     }
 
     /**
@@ -2183,7 +2185,7 @@ export function createTextMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
      * Controls how text is aligned within its container vertically
      */
     get textAlignVertical(): string {
-      return createEnumGetter(H9y.getTextAlignVertical, kiwiParserCodec.TextAlignVertical, 'textAlignVertical').call(this);
+      return createEnumGetter(H9y.getTextAlignVertical, kiwiParserCodec.TextAlignVertical, 'textAlignVertical').call(this)
     }
 
     /**
@@ -2191,7 +2193,7 @@ export function createTextMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
      * @param value - Alignment type (TOP, BOTTOM, CENTER)
      */
     set textAlignVertical(value: string) {
-      createEnumSetter(H9y.setTextAlignVertical, kiwiParserCodec.TextAlignVertical, 'textAlignVertical').call(this, value);
+      createEnumSetter(H9y.setTextAlignVertical, kiwiParserCodec.TextAlignVertical, 'textAlignVertical').call(this, value)
     }
 
     /**
@@ -2199,7 +2201,7 @@ export function createTextMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
      * Controls how text containers resize based on content
      */
     get textAutoResize(): string {
-      return createEnumGetter(H9y.getTextAutoResize, kiwiParserCodec.TextAutoResize, 'textAutoResize').call(this);
+      return createEnumGetter(H9y.getTextAutoResize, kiwiParserCodec.TextAutoResize, 'textAutoResize').call(this)
     }
 
     /**
@@ -2207,7 +2209,7 @@ export function createTextMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
      * @param value - Resize type (NONE, WIDTH_AND_HEIGHT, HEIGHT)
      */
     set textAutoResize(value: string) {
-      createEnumSetter(H9y.setTextAutoResize, kiwiParserCodec.TextAutoResize, 'textAutoResize').call(this, value);
+      createEnumSetter(H9y.setTextAutoResize, kiwiParserCodec.TextAutoResize, 'textAutoResize').call(this, value)
     }
 
     /**
@@ -2215,7 +2217,7 @@ export function createTextMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
      * Controls how text is truncated when it exceeds container bounds
      */
     get textTruncation(): string {
-      return createEnumGetter(H9y.getTextTruncation, kiwiParserCodec.TextTruncation, 'textTruncation').call(this);
+      return createEnumGetter(H9y.getTextTruncation, kiwiParserCodec.TextTruncation, 'textTruncation').call(this)
     }
 
     /**
@@ -2223,7 +2225,7 @@ export function createTextMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
      * @param value - Truncation type (DISABLED, ENDING)
      */
     set textTruncation(value: string) {
-      createEnumSetter(H9y.setTextTruncation, kiwiParserCodec.TextTruncation, 'textTruncation').call(this, value);
+      createEnumSetter(H9y.setTextTruncation, kiwiParserCodec.TextTruncation, 'textTruncation').call(this, value)
     }
 
     /**
@@ -2231,7 +2233,7 @@ export function createTextMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
      * Controls if underlines skip descenders for better readability
      */
     get textDecorationSkipInk(): boolean {
-      return createSimpleGetter(H9y.getTextDecorationSkipInk).call(this);
+      return createSimpleGetter<boolean>(H9y.getTextDecorationSkipInk).call(this)
     }
 
     /**
@@ -2239,30 +2241,30 @@ export function createTextMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
      * @param value - True to skip ink for better underline appearance
      */
     set textDecorationSkipInk(value: boolean) {
-      createSimpleSetter(H9y.setTextDecorationSkipInk).call(this, value);
+      createSimpleSetter(H9y.setTextDecorationSkipInk).call(this, value)
     }
-  };
+  }
 }
 export function $$es17(e) {
-  return class extends e {};
+  return class extends e {}
 }
 export function $$eo49(e) {
-  return class extends e {};
+  return class extends e {}
 }
 export function $$el50(e) {
-  return class extends e {};
+  return class extends e {}
 }
 export function $$ed64(e) {
-  return class extends e {};
+  return class extends e {}
 }
 export function $$ec24(e) {
-  return class extends e {};
+  return class extends e {}
 }
 export function $$eu52(e) {
-  return class extends e {};
+  return class extends e {}
 }
 export function $$ep48(e) {
-  return class extends e {};
+  return class extends e {}
 }
 /**
  * Creates a mixin that adds arc data functionality to a base class
@@ -2276,7 +2278,7 @@ export function createArcDataMixin<T extends BaseClass<BaseNode>>(baseClass: T) 
      * Arc data defines the geometry of curved paths and vector shapes
      */
     get arcData(): any {
-      return createSimpleGetter(ByZ.getArcData).call(this);
+      return createSimpleGetter(ByZ.getArcData).call(this)
     }
 
     /**
@@ -2284,15 +2286,15 @@ export function createArcDataMixin<T extends BaseClass<BaseNode>>(baseClass: T) 
      * @param value - Arc data object containing curve geometry information
      */
     set arcData(value: any) {
-      createSimpleSetter(ByZ.setArcData).call(this, value);
+      createSimpleSetter(ByZ.setArcData).call(this, value)
     }
-  };
+  }
 }
 export function $$eh56(e) {
-  return class extends e {};
+  return class extends e {}
 }
 export function $$eg11(e) {
-  return class extends e {};
+  return class extends e {}
 }
 /**
  * Creates a mixin that adds widget functionality to a base class
@@ -2306,7 +2308,7 @@ export function createWidgetMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
      * Returns an array of widget event types that this element responds to
      */
     get widgetEvents(): string[] {
-      return createEnumArrayGetter(KG_.getWidgetEvents, kiwiParserCodec.WidgetEvent, 'widgetEvents').call(this);
+      return createEnumArrayGetter(KG_.getWidgetEvents, kiwiParserCodec.WidgetEvent, 'widgetEvents').call(this)
     }
 
     /**
@@ -2314,7 +2316,7 @@ export function createWidgetMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
      * @param value - Array of widget event type strings
      */
     set widgetEvents(value: string[]) {
-      createEnumArraySetter(KG_.setWidgetEvents, kiwiParserCodec.WidgetEvent, 'widgetEvents').call(this, value);
+      createEnumArraySetter(KG_.setWidgetEvents, kiwiParserCodec.WidgetEvent, 'widgetEvents').call(this, value)
     }
 
     /**
@@ -2322,7 +2324,7 @@ export function createWidgetMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
      * Returns the tooltip text displayed when hovering over the widget
      */
     get widgetTooltip(): string {
-      return createSimpleGetter(KG_.getWidgetTooltip).call(this);
+      return createSimpleGetter<string>(KG_.getWidgetTooltip).call(this)
     }
 
     /**
@@ -2330,48 +2332,48 @@ export function createWidgetMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
      * @param value - Tooltip text string
      */
     set widgetTooltip(value: string) {
-      createSimpleSetter(KG_.setWidgetTooltip).call(this, value);
+      createSimpleSetter(KG_.setWidgetTooltip).call(this, value)
     }
-  };
+  }
 }
 
 export function $$ef37(e) {
   return class extends e {
     get widgetEvents() {
-      this.setGlobalNodeID();
+      this.setGlobalNodeID()
       return KG_.getWidgetEvents(this.sceneGraph.nodeContext).map((e) => {
-        let t = kiwiParserCodec.WidgetEvent[e];
+        let t = kiwiParserCodec.WidgetEvent[e]
         if (t != null)
-        return t;
-        throw new Error(`Invalid value for Fig.WidgetEvent: ${e}`);
-      });
+          return t
+        throw new Error(`Invalid value for Fig.WidgetEvent: ${e}`)
+      })
     }
 
     set widgetEvents(e) {
-      this.setGlobalNodeID();
+      this.setGlobalNodeID()
       let t = e.map((e) => {
-        let t = kiwiParserCodec.WidgetEvent[e];
+        let t = kiwiParserCodec.WidgetEvent[e]
         if (t != null)
-        return t;
-        throw new Error(`Invalid value for Fig.WidgetEvent: ${e}`);
-      });
-      let i = KG_.setWidgetEvents(t, this.sceneGraph.nodeContext);
+          return t
+        throw new Error(`Invalid value for Fig.WidgetEvent: ${e}`)
+      })
+      let i = KG_.setWidgetEvents(t, this.sceneGraph.nodeContext)
       if (i)
-      throw new Error(i);
+        throw new Error(i)
     }
 
     get widgetTooltip() {
-      this.setGlobalNodeID();
-      return KG_.getWidgetTooltip(this.sceneGraph.nodeContext);
+      this.setGlobalNodeID()
+      return KG_.getWidgetTooltip(this.sceneGraph.nodeContext)
     }
 
     set widgetTooltip(e) {
-      this.setGlobalNodeID();
-      let t = KG_.setWidgetTooltip(e, this.sceneGraph.nodeContext);
+      this.setGlobalNodeID()
+      let t = KG_.setWidgetTooltip(e, this.sceneGraph.nodeContext)
       if (t)
-      throw new Error(t);
+        throw new Error(t)
     }
-  };
+  }
 }
 /**
  * Creates a mixin that adds type functionality to a base class
@@ -2385,22 +2387,22 @@ export function createTypeMixin<T extends BaseClass<BaseNode>>(baseClass: T) {
      * Returns the type of this node as defined in the NodeType enum
      */
     get type(): string {
-      return createEnumGetter(sbT.getType, kiwiParserCodec.NodeType, 'type').call(this);
+      return createEnumGetter(sbT.getType, kiwiParserCodec.NodeType, 'type').call(this)
     }
-  };
+  }
 }
 
 export function $$e_29(e) {
   return class extends e {
     get type() {
-      this.setGlobalNodeID();
-      let e = sbT.getType(this.sceneGraph.nodeContext);
-      let t = kiwiParserCodec.NodeType[e];
+      this.setGlobalNodeID()
+      let e = sbT.getType(this.sceneGraph.nodeContext)
+      let t = kiwiParserCodec.NodeType[e]
       if (t != null)
-      return t;
-      throw new Error(`Invalid value for type: ${e}`);
+        return t
+      throw new Error(`Invalid value for type: ${e}`)
     }
-  };
+  }
 }
 
 // ============================================================================
@@ -2472,70 +2474,70 @@ export function $$e_29(e) {
  * Original function names are preserved as comments for traceability.
  */
 
-export const $I = createArcDataMixin;
-export const Ak = createCountMixin;
-export const B6 = createSlideMixin;
-export const BX = createTextMixin;
-export const C9 = createEmptyMixin20;
-export const CS = createEmptyMixin23;
-export const Ci = createPageMixin;
-export const EZ = createLayoutMixin;
-export const Ex = createEmptyMixin13;
-export const Fk = createEmptyMixin12;
-export const GW = createEmptyMixin;
-export const H4 = createEmptyMixin;
-export const HK = createEmptyMixin5;
-export const IQ = createEmptyMixin18;
-export const KA = createModuleMixin;
-export const KG = createEmptyMixin25;
-export const Nk = createStateGroupMixin;
-export const OG = createEmptyMixin;
-export const OI = createEmptyMixin30;
-export const OU = createCanvasGridMixin;
-export const Pn = createEmptyMixin27;
-export const Ql = createEmptyMixin29;
-export const Qx = createEmptyMixin3;
-export const RJ = createConnectorMixin;
-export const S3 = createEmptyMixin;
-export const TV = createDraftMixin;
-export const Ul = createEmptyMixin6;
-export const V8 = createBorderCornerMixin;
-export const VH = createEmptyMixin7;
-export const WZ = createTypeMixin;
-export const Y6 = createSiteMixin;
-export const YN = createEmptyMixin9;
-export const ZM = createEmptyMixin10;
-export const _U = createEmptyMixin24;
-export const _f = createEmptyMixin11;
-export const _p = createEmptyMixin8;
-export const _s = createEmptyMixin;
-export const a_ = createWidgetMixin;
-export const ak = createEmptyMixin2;
-export const bD = createEmptyMixin3;
-export const bF = createCooperFrameMixin;
-export const bM = createEmptyMixin4;
-export const dd = createEmptyMixin14;
-export const fB = createEmptyMixin15;
-export const fP = createEmptyMixin16;
-export const fV = createEmptyMixin17;
-export const fr = createEmptyMixin18;
-export const gF = createEmptyMixin19;
-export const gJ = createEmptyMixin;
-export const gP = createEmptyMixin;
-export const iC = createEmptyMixin;
-export const jb = createEmptyMixin21;
-export const mY = createEmptyMixin;
-export const nO = createEmptyMixin22;
-export const oT = createEmptyMixin4;
-export const pn = createEmptyMixin22;
-export const qY = createEmptyMixin;
-export const r1 = createEmptyMixin2;
-export const rT = createAnnotationsMixin;
-export const sb = createDecorativeImageMixin;
-export const tU = createEmptyMixin26;
-export const tq = createOverlayMixin;
-export const u0 = createEmptyMixin28;
-export const wB = createEmptyMixin2;
-export const wZ = createEmptyMixin;
-export const yZ = createResponsiveMixin;
-export const zT = createVisualStylingMixin;
+export const $I = createArcDataMixin
+export const Ak = createCountMixin
+export const B6 = createSlideMixin
+export const BX = createTextMixin
+export const C9 = createEmptyMixin20
+export const CS = createEmptyMixin23
+export const Ci = createPageMixin
+export const EZ = createLayoutMixin
+export const Ex = createEmptyMixin13
+export const Fk = createEmptyMixin12
+export const GW = createEmptyMixin
+export const H4 = createEmptyMixin
+export const HK = createEmptyMixin5
+export const IQ = createEmptyMixin18
+export const KA = createModuleMixin
+export const KG = createEmptyMixin25
+export const Nk = createStateGroupMixin
+export const OG = createEmptyMixin
+export const OI = createEmptyMixin30
+export const OU = createCanvasGridMixin
+export const Pn = createEmptyMixin27
+export const Ql = createEmptyMixin29
+export const Qx = createEmptyMixin3
+export const RJ = createConnectorMixin
+export const S3 = createEmptyMixin
+export const TV = createDraftMixin
+export const Ul = createEmptyMixin6
+export const V8 = createBorderCornerMixin
+export const VH = createEmptyMixin7
+export const WZ = createTypeMixin
+export const Y6 = createSiteMixin
+export const YN = createEmptyMixin9
+export const ZM = createEmptyMixin10
+export const _U = createEmptyMixin24
+export const _f = createEmptyMixin11
+export const _p = createEmptyMixin8
+export const _s = createEmptyMixin
+export const a_ = createWidgetMixin
+export const ak = createEmptyMixin2
+export const bD = createEmptyMixin3
+export const bF = createCooperFrameMixin
+export const bM = createEmptyMixin4
+export const dd = createEmptyMixin14
+export const fB = createEmptyMixin15
+export const fP = createEmptyMixin16
+export const fV = createEmptyMixin17
+export const fr = createEmptyMixin18
+export const gF = createEmptyMixin19
+export const gJ = createEmptyMixin
+export const gP = createEmptyMixin
+export const iC = createEmptyMixin
+export const jb = createEmptyMixin21
+export const mY = createEmptyMixin
+export const nO = createEmptyMixin22
+export const oT = createEmptyMixin4
+export const pn = createEmptyMixin22
+export const qY = createEmptyMixin
+export const r1 = createEmptyMixin2
+export const rT = createAnnotationsMixin
+export const sb = createDecorativeImageMixin
+export const tU = createEmptyMixin26
+export const tq = createOverlayMixin
+export const u0 = createEmptyMixin28
+export const wB = createEmptyMixin2
+export const wZ = createEmptyMixin
+export const yZ = createResponsiveMixin
+export const zT = createVisualStylingMixin

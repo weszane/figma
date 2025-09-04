@@ -20,7 +20,7 @@
     "skipLibCheck": true
   },
   "include": [
-    "src/905",
+    "src",
     "types"
   ],
   "exclude": [

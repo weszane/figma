@@ -4,7 +4,7 @@ import { _7 } from "../figma_app/562352";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { IA } from "../905/859698";
 import { Z_n, MoD } from "../figma_app/763686";
-import { G } from "../905/311324";
+import { hasStyleType } from "../905/311324";
 import { sH, dI } from "../905/537777";
 import { getFeatureFlags } from "../905/601108";
 import { i$ } from "../905/236856";
@@ -203,7 +203,7 @@ let $$N4 = nF(async (e, t) => {
     if (i) return;
     if (getFeatureFlags().ds_zombie_styles_fixes) {
       let n = e.getState().mirror.sceneGraph.get(t.styleNodeId);
-      let r = n && G(n) ? sb(n) : null;
+      let r = n && hasStyleType(n) ? sb(n) : null;
       if (r) {
         let t = C(r, i);
         let n = await t;

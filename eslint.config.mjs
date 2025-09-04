@@ -16,7 +16,4 @@ export default antfu({
     "prefer-promise-reject-errors": "off",
     "no-async-promise-executor": "off",
   },
-  typescript: {
-    typecheck: false
-  },
 })

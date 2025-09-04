@@ -1,122 +1,330 @@
-import { ServiceCategories as _$$e } from "../905/165054";
-import { dPJ, DPQ, h3O, kul, xal } from "../figma_app/763686";
-import { getSceneGraphInstance } from "../905/830071";
-import { getSingletonSceneGraph } from "../905/700578";
-import { debugState } from "../905/407919";
-import { $D } from "../905/11";
-import { IL } from "../figma_app/582924";
-import { oJ } from "../905/346794";
-import { n as _$$n } from "../905/347702";
-let p = getSceneGraphInstance();
-let m = _$$n(() => 10);
-let h = {
-  invalidIncremental: e => `Cannot call with documentAccess: dynamic-page. Use ${e} instead.`,
-  incrementalUnsafeMemberWarning: (e, t) => `\`${e}\` is deprecated. Please use \`${t}\` to ensure consistent results.`,
-  invalidPageIncremental: e => `Cannot access ${e} on a page that has not been explicitly loaded. Remember to call \`await page.loadAsync()\` or \`await figma.loadAllPagesAsync()' first.`,
-  invalidPageRelaxedWarning: e => `You are accessing ${e} on a page that has not been explicitly loaded. This is not recommended and may lead to unexpected behavior. Remember to call \`await page.loadAsync()\` or \`await figma.loadAllPagesAsync()' first.`
-};
-export class $$g4 {
-  constructor(e) {
-    this.loadedPages = new Set();
-    this.incrementalMode = e.incrementalMode;
-    this.stats = e.stats;
-    this.allowIncrementalUnsafeApiCalls = e.allowIncrementalUnsafeApiCalls;
+import { $D } from '../905/11'
+import { ServiceCategories as ServiceCategoriesExtensibility } from '../905/165054'
+import { oJ } from '../905/346794'
+import { n as createMemoized } from '../905/347702'
+import { debugState } from '../905/407919'
+import { getSingletonSceneGraph } from '../905/700578'
+import { getSceneGraphInstance } from '../905/830071'
+import { IL } from '../figma_app/582924'
+import { dPJ, DPQ, h3O, kul, xal } from '../figma_app/763686'
+
+/**
+ * Utility messages for incremental and page loading warnings/errors.
+ * (variable: h)
+ */
+const pageMessages = {
+  invalidIncremental: (apiName: string) =>
+    `Cannot call with documentAccess: dynamic-page. Use ${apiName} instead.`,
+  incrementalUnsafeMemberWarning: (oldApi: string, newApi: string) =>
+    `\`${oldApi}\` is deprecated. Please use \`${newApi}\` to ensure consistent results.`,
+  invalidPageIncremental: (apiName: string) =>
+    `Cannot access ${apiName} on a page that has not been explicitly loaded. Remember to call \`await page.loadAsync()\` or \`await figma.loadAllPagesAsync()' first.`,
+  invalidPageRelaxedWarning: (apiName: string) =>
+    `You are accessing ${apiName} on a page that has not been explicitly loaded. This is not recommended and may lead to unexpected behavior. Remember to call \`await page.loadAsync()\` or \`await figma.loadAllPagesAsync()' first.`,
+}
+
+/**
+ * Memoized function to get the timeout duration for connection attempts.
+ * (variable: m)
+ */
+const getTimeoutSeconds = createMemoized(() => 10)
+
+/**
+ * Memoized function to check if the session state is JOINED.
+ * (variable: S)
+ */
+const isSessionJoined = createMemoized(() => h3O.getSessionState() === kul.JOINED)
+
+/**
+ * Memoized function to get the plugin connection state.
+ * (variable: $$v0)
+ */
+export const getPluginConnectionState = createMemoized(() => false)
+
+/**
+ * SceneGraph instance singleton.
+ * (variable: p)
+ */
+const sceneGraphInstance = getSceneGraphInstance()
+
+/**
+ * Tracks loaded pages and manages incremental mode state.
+ * (class: $$g4)
+ */
+export class DocumentAccessState {
+  loadedPages: Set<string>
+  incrementalMode: boolean
+  stats: any
+  allowIncrementalUnsafeApiCalls: boolean
+
+  constructor(options: {
+    incrementalMode: boolean
+    stats: any
+    allowIncrementalUnsafeApiCalls: boolean
+  }) {
+    this.loadedPages = new Set()
+    this.incrementalMode = options.incrementalMode
+    this.stats = options.stats
+    this.allowIncrementalUnsafeApiCalls = options.allowIncrementalUnsafeApiCalls
   }
-  getIsIncrementalMode() {
-    return this.incrementalMode;
+
+  /** Returns whether incremental mode is enabled. (method: getIsIncrementalMode) */
+  getIsIncrementalMode(): boolean {
+    return this.incrementalMode
   }
-  loadedAllPages() {
-    this.incrementalMode = !1;
+
+  /** Disables incremental mode. (method: loadedAllPages) */
+  loadedAllPages(): void {
+    this.incrementalMode = false
   }
-  getLoadedPages() {
-    return Array.from(this.loadedPages);
+
+  /** Returns an array of loaded page IDs. (method: getLoadedPages) */
+  getLoadedPages(): string[] {
+    return Array.from(this.loadedPages)
   }
-  addLoadedPageIds(e) {
-    e.forEach(e => {
-      this.loadedPages.has(e) || this.stats.incrementNumPagesLoaded();
-      this.loadedPages.add(e);
-    });
+
+  /**
+   * Adds page IDs to the loaded set and increments stats if not already loaded.
+   * (method: addLoadedPageIds)
+   */
+  addLoadedPageIds(pageIds: string[]): void {
+    pageIds.forEach((pageId) => {
+      if (!this.loadedPages.has(pageId)) {
+        this.stats.incrementNumPagesLoaded()
+      }
+      this.loadedPages.add(pageId)
+    })
   }
-  hasLoadedPageId(e) {
-    return this.loadedPages.has(e) || !this.incrementalMode;
+
+  /**
+   * Checks if a page ID is loaded or if incremental mode is off.
+   * (method: hasLoadedPageId)
+   */
+  hasLoadedPageId(pageId: string): boolean {
+    return this.loadedPages.has(pageId) || !this.incrementalMode
   }
-  checkAllowedPage(e, t) {
-    if ("CANVAS" !== e.type || this.hasLoadedPageId(e.guid)) return;
-    let i = "method" in t ? `method \`${t.method}()\`` : `property \`${t.property}\``;
+
+  /**
+   * Throws or warns if accessing a page that is not allowed in incremental mode.
+   * (method: checkAllowedPage)
+   */
+  checkAllowedPage(page: { type: string, guid: string }, access: { method?: string, property?: string }): void {
+    if (page.type !== 'CANVAS' || this.hasLoadedPageId(page.guid))
+      return
+    const accessName
+      = 'method' in access
+        ? `method \`${access.method}()\``
+        : `property \`${access.property}\``
     if (this.allowIncrementalUnsafeApiCalls) {
-      console.warn(h.invalidPageRelaxedWarning(i));
-      return;
+      console.warn(pageMessages.invalidPageRelaxedWarning(accessName))
+      return
     }
-    throw Error(h.invalidPageIncremental(i));
+    throw new Error(pageMessages.invalidPageIncremental(accessName))
   }
-  checkAllowedMethodIncremental(e) {
-    if ("DOCUMENT" === e.type && this.getIsIncrementalMode()) {
-      if (this.allowIncrementalUnsafeApiCalls) console.warn("To ensure consistent behavior, call `await figma.loadAllPagesAsync()` first.");else throw Error("Cannot call with documentAccess: dynamic-page without calling figma.loadAllPagesAsync() first.");
-    }
-  }
-  checkAllowedMethodDocumentOrPage(e, t) {
-    "DOCUMENT" === e.type ? this.checkAllowedMethodIncremental(e) : "CANVAS" === e.type && this.checkAllowedPage(e, t);
-  }
-}
-export function $$f6(e, t, i) {
-  if (e) console.warn(h.incrementalUnsafeMemberWarning(t, i));else throw Error(h.invalidIncremental(i));
-}
-function _(e) {
-  let t = IL(e, dPJ.PLUGIN, DPQ.PLUGIN);
-  S() && $$v0() && h3O.resolveSceneGraphQueryForTest(e, DPQ.PLUGIN);
-  return t;
-}
-async function A(e, t) {
-  if ((!S() || !$$v0()) && (await Promise.race([(async () => (await oJ(kul.JOINED), !1))(), (async () => (await new Promise(e => setTimeout(e, 1e3 * m())), !0))()]))) throw Error(`Unable to establish connection to Figma after ${m()} seconds. Please check your internet connection.`);
-  await t.stats.markAndAggregateDuration("totalLoadPagesDuration", async () => {
-    await _(e);
-  });
-}
-export function $$y2(e, t, i = {}) {
-  let a = p.get(e);
-  let s = a?.containingCanvas;
-  if (s) {
-    if (t.hasLoadedPageId(s)) return;
-    if (i.ignoreReduxState) t.addLoadedPageIds([s]);else {
-      let e = debugState.getState().mirror.appModel.pagesList.find(e => e.nodeId === s);
-      e && e.status === xal.LOADED ? t.addLoadedPageIds([s]) : $D(_$$e.EXTENSIBILITY, Error("Cannot call markPageLoaded without having loaded the page first."));
+
+  /**
+   * Throws or warns if accessing a document in incremental mode without loading all pages.
+   * (method: checkAllowedMethodIncremental)
+   */
+  checkAllowedMethodIncremental(node: { type: string }): void {
+    if (node.type === 'DOCUMENT' && this.getIsIncrementalMode()) {
+      if (this.allowIncrementalUnsafeApiCalls) {
+        console.warn(
+          'To ensure consistent behavior, call `await figma.loadAllPagesAsync()` first.',
+        )
+      }
+      else {
+        throw new Error(
+          'Cannot call with documentAccess: dynamic-page without calling figma.loadAllPagesAsync() first.',
+        )
+      }
     }
   }
-  _(s ?? e);
-}
-export async function $$b5(e, t) {
-  let i = p.get(e);
-  let n = i?.containingCanvas;
-  if (n) {
-    if (t.hasLoadedPageId(n)) return;
-    let e = debugState.getState().mirror.appModel.pagesList.find(e => e.nodeId === n);
-    if (e && e.loadedForPlugins) {
-      t.addLoadedPageIds([n]);
-      return;
+
+  /**
+   * Checks if a method is allowed on a document or page.
+   * (method: checkAllowedMethodDocumentOrPage)
+   */
+  checkAllowedMethodDocumentOrPage(
+    node: { type: string, guid: string },
+    access: { method?: string, property?: string },
+  ): void {
+    if (node.type === 'DOCUMENT') {
+      this.checkAllowedMethodIncremental(node)
+    }
+    else if (node.type === 'CANVAS') {
+      this.checkAllowedPage(node, access)
     }
   }
-  await A(n ?? e, t);
-  let r = p.get(e)?.containingCanvas;
-  r && t.addLoadedPageIds([r]);
 }
-export let $$v0 = _$$n(() => !1);
-export async function $$I3(e, t) {
-  await Promise.all(e.map(e => $$b5(e, t)));
-}
-async function E(e) {
-  let t = getSingletonSceneGraph().getInternalCanvas();
-  if (!t) {
-    $D(_$$e.EXTENSIBILITY, Error("loadInternalCanvas: internalCanvas does not exist"));
-    return;
+
+/**
+ * Throws or warns if using an unsafe incremental API member.
+ * (function: $$f6)
+ */
+export function checkIncrementalUnsafeMember(
+  allowUnsafe: boolean,
+  oldApi: string,
+  newApi: string,
+): void {
+  if (allowUnsafe) {
+    console.warn(pageMessages.incrementalUnsafeMemberWarning(oldApi, newApi))
   }
-  await $$b5(t.guid, e);
+  else {
+    throw new Error(pageMessages.invalidIncremental(newApi))
+  }
 }
-let $$x1 = _$$n(async e => await E(e));
-let S = _$$n(() => h3O.getSessionState() === kul.JOINED);
-export const Jp = $$v0;
-export const Ux = $$x1;
-export const av = $$y2;
-export const fs = $$I3;
-export const u1 = $$g4;
-export const vf = $$b5;
-export const xc = $$f6;
+
+/**
+ * Loads the scene graph for a given node.
+ * (function: _)
+ */
+function loadSceneGraph(nodeId: string): any {
+  const result = IL(nodeId, dPJ.PLUGIN, DPQ.PLUGIN)
+  if (isSessionJoined() && getPluginConnectionState()) {
+    h3O.resolveSceneGraphQueryForTest(nodeId, DPQ.PLUGIN)
+  }
+  return result
+}
+
+/**
+ * Attempts to load a page, waiting for connection if necessary.
+ * (function: A)
+ */
+async function ensurePageLoaded(nodeId: string, tracker: DocumentAccessState): Promise<void> {
+  if (
+    (!isSessionJoined() || !getPluginConnectionState())
+    && (await Promise.race([
+      (async () => {
+        await oJ(kul.JOINED)
+        return false
+      })(),
+      (async () => {
+        await new Promise(resolve => setTimeout(resolve, 1000 * getTimeoutSeconds()))
+        return true
+      })(),
+    ]))
+  ) {
+    throw new Error(
+      `Unable to establish connection to Figma after ${getTimeoutSeconds()} seconds. Please check your internet connection.`,
+    )
+  }
+  await tracker.stats.markAndAggregateDuration('totalLoadPagesDuration', async () => {
+    await loadSceneGraph(nodeId)
+  })
+}
+
+/**
+ * Marks a page as loaded if possible, or throws if not loaded.
+ * (function: $$y2)
+ */
+export function markPageLoaded(
+  nodeId: string,
+  tracker: DocumentAccessState,
+  options: { ignoreReduxState?: boolean } = {},
+): void {
+  const node = sceneGraphInstance.get(nodeId)
+  const containingCanvas = node?.containingCanvas
+  if (containingCanvas) {
+    if (tracker.hasLoadedPageId(containingCanvas))
+      return
+    if (options.ignoreReduxState) {
+      tracker.addLoadedPageIds([containingCanvas])
+    }
+    else {
+      const page = debugState
+        .getState()
+        .mirror
+        .appModel
+        .pagesList
+        .find(p => p.nodeId === containingCanvas)
+      if (page && page.status === xal.LOADED) {
+        tracker.addLoadedPageIds([containingCanvas])
+      }
+      else {
+        $D(
+          ServiceCategoriesExtensibility.EXTENSIBILITY,
+          new Error(
+            'Cannot call markPageLoaded without having loaded the page first.',
+          ),
+        )
+      }
+    }
+  }
+  loadSceneGraph(containingCanvas ?? nodeId)
+}
+
+/**
+ * Ensures a page is loaded for plugins, loading if necessary.
+ * (function: $$b5)
+ */
+export async function ensurePluginPageLoaded(
+  nodeId: string,
+  tracker: DocumentAccessState,
+): Promise<void> {
+  const node = sceneGraphInstance.get(nodeId)
+  const containingCanvas = node?.containingCanvas
+  if (containingCanvas) {
+    if (tracker.hasLoadedPageId(containingCanvas))
+      return
+    const page = debugState
+      .getState()
+      .mirror
+      .appModel
+      .pagesList
+      .find(p => p.nodeId === containingCanvas)
+    if (page && page.loadedForPlugins) {
+      tracker.addLoadedPageIds([containingCanvas])
+      return
+    }
+  }
+  await ensurePageLoaded(containingCanvas ?? nodeId, tracker)
+  const refreshedCanvas = sceneGraphInstance.get(nodeId)?.containingCanvas
+  if (refreshedCanvas) {
+    tracker.addLoadedPageIds([refreshedCanvas])
+  }
+}
+
+/**
+ * Loads all given pages for plugins.
+ * (function: $$I3)
+ */
+export async function loadAllPluginPages(
+  nodeIds: string[],
+  tracker: DocumentAccessState,
+): Promise<void> {
+  await Promise.all(nodeIds.map(id => ensurePluginPageLoaded(id, tracker)))
+}
+
+/**
+ * Loads the internal canvas for the singleton scene graph.
+ * (function: E)
+ */
+async function loadInternalCanvas(tracker: DocumentAccessState): Promise<void> {
+  const internalCanvas = getSingletonSceneGraph().getInternalCanvas()
+  if (!internalCanvas) {
+    $D(
+      ServiceCategoriesExtensibility.EXTENSIBILITY,
+      new Error('loadInternalCanvas: internalCanvas does not exist'),
+    )
+    return
+  }
+  await ensurePluginPageLoaded(internalCanvas.guid, tracker)
+}
+
+/**
+ * Memoized function to load the internal canvas.
+ * (variable: $$x1)
+ */
+export const loadInternalCanvasMemoized = createMemoized(
+  async (tracker: DocumentAccessState) => await loadInternalCanvas(tracker),
+)
+
+// Exported aliases for refactored names
+export const Jp = getPluginConnectionState
+export const Ux = loadInternalCanvasMemoized
+export const av = markPageLoaded
+export const fs = loadAllPluginPages
+export const u1 = DocumentAccessState
+export const vf = ensurePluginPageLoaded
+export const xc = checkIncrementalUnsafeMember

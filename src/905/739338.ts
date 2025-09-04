@@ -1,66 +1,140 @@
-import { kiwiParserCodec } from "../905/294864";
-import { createConnectorMixin } from "../905/112832";
-export function $$a1(e) {
-  return class extends createConnectorMixin(e) {
+import { createConnectorMixin } from '../905/112832'
+import { kiwiParserCodec } from '../905/294864'
+
+
+
+/**
+ * ConnectorMixin - Mixin class to add connector-related properties and methods.
+ * @param Base - The base class to extend.
+ * @returns A new class with connector properties and methods.
+ */
+export function ConnectorMixin<TBase extends new (...args: any[]) => any>(Base: TBase) {
+  // $$a1
+  return class extends createConnectorMixin(Base) {
+    /**
+     * Gets the connector line style.
+     */
     get connectorLineStyle() {
-      this.setGlobalNodeID();
-      return this.bindings.NodeTsApi.getConnectorLineStyle(this.sceneGraph.nodeContext);
+      this.setGlobalNodeID()
+      return this.bindings.NodeTsApi.getConnectorLineStyle(this.sceneGraph.nodeContext)
     }
-    set connectorLineStyle(e) {
-      this.setGlobalNodeID();
-      let t = this.bindings.NodeTsApi.setConnectorLineStyle(e, this.sceneGraph.nodeContext);
-      if (t) throw Error(t);
+
+    /**
+     * Sets the connector line style.
+     */
+    set connectorLineStyle(style: any) {
+      this.setGlobalNodeID()
+      const error = this.bindings.NodeTsApi.setConnectorLineStyle(style, this.sceneGraph.nodeContext)
+      if (error)
+        throw new Error(error)
     }
+
+    /**
+     * Gets the connector line type.
+     */
     get connectorLineType() {
-      this.setGlobalNodeID();
-      return kiwiParserCodec.ConnectorLineStyle[this.bindings.NodeTsApi.getConnectorLineType(this.sceneGraph.nodeContext)] || null;
+      this.setGlobalNodeID()
+      return kiwiParserCodec.ConnectorLineStyle[
+        this.bindings.NodeTsApi.getConnectorLineType(this.sceneGraph.nodeContext)
+      ] ?? null
     }
-    set connectorLineType(e) {
-      let t = kiwiParserCodec.ConnectorLineStyle[e];
-      if ("number" == typeof t) {
-        this.setGlobalNodeID();
-        let e = this.bindings.NodeTsApi.setConnectorLineType(t, this.sceneGraph.nodeContext);
-        if (e) throw Error(e);
-      } else throw Error("Invalid value for connectorLineStyle");
+
+    /**
+     * Sets the connector line type.
+     */
+    set connectorLineType(type: keyof typeof kiwiParserCodec.ConnectorLineStyle) {
+      const typeValue = kiwiParserCodec.ConnectorLineStyle[type]
+      if (typeof typeValue === 'number') {
+        this.setGlobalNodeID()
+        const error = this.bindings.NodeTsApi.setConnectorLineType(typeValue, this.sceneGraph.nodeContext)
+        if (error)
+          throw new Error(error)
+      }
+      else {
+        throw new TypeError('Invalid value for connectorLineStyle')
+      }
     }
+
+    /**
+     * Gets the connector start canvas position.
+     */
     get connectorStartCanvasPosition() {
-      this.setGlobalNodeID();
-      return this.bindings.NodeTsApi.connectorStartCanvasPosition(this.sceneGraph.nodeContext);
+      this.setGlobalNodeID()
+      return this.bindings.NodeTsApi.connectorStartCanvasPosition(this.sceneGraph.nodeContext)
     }
+
+    /**
+     * Gets the connector end canvas position.
+     */
     get connectorEndCanvasPosition() {
-      this.setGlobalNodeID();
-      return this.bindings.NodeTsApi.connectorEndCanvasPosition(this.sceneGraph.nodeContext);
+      this.setGlobalNodeID()
+      return this.bindings.NodeTsApi.connectorEndCanvasPosition(this.sceneGraph.nodeContext)
     }
+
+    /**
+     * Gets the connector start cap.
+     */
     get connectorStartCap() {
-      this.setGlobalNodeID();
-      return this.bindings.NodeTsApi.getConnectorStartCap(this.sceneGraph.nodeContext);
+      this.setGlobalNodeID()
+      return this.bindings.NodeTsApi.getConnectorStartCap(this.sceneGraph.nodeContext)
     }
-    set connectorStartCap(e) {
-      this.setGlobalNodeID();
-      let t = this.bindings.NodeTsApi.setConnectorStartCap(e, this.sceneGraph.nodeContext);
-      if (t) throw Error(t);
+
+    /**
+     * Sets the connector start cap.
+     */
+    set connectorStartCap(cap: any) {
+      this.setGlobalNodeID()
+      const error = this.bindings.NodeTsApi.setConnectorStartCap(cap, this.sceneGraph.nodeContext)
+      if (error)
+        throw new Error(error)
     }
+
+    /**
+     * Gets the connector end cap.
+     */
     get connectorEndCap() {
-      this.setGlobalNodeID();
-      return this.bindings.NodeTsApi.getConnectorEndCap(this.sceneGraph.nodeContext);
+      this.setGlobalNodeID()
+      return this.bindings.NodeTsApi.getConnectorEndCap(this.sceneGraph.nodeContext)
     }
-    set connectorEndCap(e) {
-      this.setGlobalNodeID();
-      let t = this.bindings.NodeTsApi.setConnectorEndCap(e, this.sceneGraph.nodeContext);
-      if (t) throw Error(t);
+
+    /**
+     * Sets the connector end cap.
+     */
+    set connectorEndCap(cap: any) {
+      this.setGlobalNodeID()
+      const error = this.bindings.NodeTsApi.setConnectorEndCap(cap, this.sceneGraph.nodeContext)
+      if (error)
+        throw new Error(error)
     }
-    isConnectorUnattached() {
-      this.setGlobalNodeID();
-      return this.bindings.NodeTsApi.isConnectorUnattached(this.sceneGraph.nodeContext);
+
+    /**
+     * Checks if the connector is unattached.
+     */
+    isConnectorUnattached(): boolean {
+      this.setGlobalNodeID()
+      return this.bindings.NodeTsApi.isConnectorUnattached(this.sceneGraph.nodeContext)
     }
+
+    /**
+     * Gets the IDs of attached connectors.
+     */
     get attachedConnectorIDs() {
-      this.setGlobalNodeID();
-      return this.bindings.SceneGraphTsApi.getAttachedConnectorIDs();
+      this.setGlobalNodeID()
+      return this.bindings.SceneGraphTsApi.getAttachedConnectorIDs()
     }
-  };
+  }
 }
-export function $$s0(e) {
-  return "CONNECTOR" === e.type;
+
+/**
+ * Checks if the given object is a connector.
+ * @param obj - The object to check.
+ * @returns True if the object is a connector, false otherwise.
+ */
+export function isConnector(obj: { type: string }): boolean {
+  // $$s0
+  return obj.type === 'CONNECTOR'
 }
-export const E = $$s0;
-export const w = $$a1;
+
+// Exported names refactored as per instruction
+export const w = ConnectorMixin
+export const E = isConnector
