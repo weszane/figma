@@ -6,7 +6,7 @@ import { C } from "../905/991119";
 import { S } from "../figma_app/787550";
 import { Y5 } from "../figma_app/455680";
 import { xY } from "../figma_app/624361";
-import { t } from "../905/435722";
+import { thumbnailGenerator } from "../905/435722";
 var p = (e => (e.FILE_KEY = "fileKey", e.LIBRARY_KEY = "libraryKey", e))(p || {});
 class _ {
   constructor() {
@@ -150,7 +150,7 @@ class _ {
 export let $$h0 = new class {
   constructor() {
     this.videoManager = new _();
-    this.thumbnailGenerator = t;
+    this.thumbnailGenerator = thumbnailGenerator;
   }
   copyVideoPermissions(e, t) {
     return this.videoManager.recordVideos(e, t);

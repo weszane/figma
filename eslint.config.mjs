@@ -13,7 +13,7 @@ export default antfu({
     'no-restricted-globals': 'off',
     'no-use-before-define': 'off',
     'jsdoc/check-param-names': 'off',
-    "prefer-promise-reject-errors": "off",
-    "no-async-promise-executor": "off",
+    'prefer-promise-reject-errors': 'off',
+    'no-async-promise-executor': 'off',
   },
 })

@@ -6,10 +6,10 @@ const fs = require('node:fs')
 const path = require('node:path')
 const parser = require('@babel/parser')
 const traverse = require('@babel/traverse').default
-// const generate = require('@babel/generator').default
-const { transformSync } = require('@babel/core')
+const generate = require('@babel/generator').default
+// const { transformSync } = require('@babel/core')
 const t = require('@babel/types')
-const transformImport = require('./transform-import').default
+// const transformImport = require('./transform-import').default
 
 const PROJECT_ROOT = path.resolve('.')
 const targetFileArg = process.argv[2]
@@ -78,70 +78,70 @@ function updateImportFiles(lines, renameMap, candidateFiles) {
     let content
     try {
       content = fs.readFileSync(file, 'utf-8')
-      const res = transformSync(content, {
-        presets: ['@babel/preset-typescript'],
-        sourceType: 'module',
-        filename: (file),
-        plugins: [
-          [transformImport, { lines, renameMap }],
-        ],
-        compact: false,
-      })
-      if (res && res.code) {
-        fs.writeFileSync(file, res.code, 'utf-8')
-        console.log(`🔄 更新导入: ${getRelativePath(file)}`)
-        updatedCount++
-      }
+      // const res = transformSync(content, {
+      //   presets: ['@babel/preset-typescript'],
+      //   sourceType: 'module',
+      //   filename: (file),
+      //   plugins: [
+      //     [transformImport, { lines, renameMap }],
+      //   ],
+      //   compact: false,
+      // })
+      // if (res && res.code) {
+      //   fs.writeFileSync(file, res.code, 'utf-8')
+      //   console.log(`🔄 更新导入: ${getRelativePath(file)}`)
+      //   updatedCount++
+      // }
     }
     catch (e) {
       console.log('读取文件失败:', e)
     }
 
-    // const ast = parser.parse(content, {
-    //   sourceType: 'module',
-    //   plugins: ['typescript', 'jsx'],
-    // })
+    const ast = parser.parse(content, {
+      sourceType: 'module',
+      plugins: ['typescript', 'jsx'],
+    })
 
-    // let modified = false
+    let modified = false
 
-    // console.log(file, '检查中...')
-    // traverse(ast, {
-    //   ImportDeclaration(p) {
-    //     const sourceValue = p.node.source.value
-    //     // 快速路径匹配
-    //     if (!lines.some(line => line.includes(sourceValue))) {
-    //       return
-    //     }
+    console.log(file, '检查中...')
+    traverse(ast, {
+      ImportDeclaration(p) {
+        const sourceValue = p.node.source.value
+        // 快速路径匹配
+        if (!lines.some(line => line.includes(sourceValue))) {
+          return
+        }
 
-    //     p.node.specifiers.forEach((spec) => {
-    //       if (t.isImportSpecifier(spec)) {
-    //         const importedName = spec.imported.name
-    //         for (const [oldName, newName] of renameMap) {
-    //           if (importedName === oldName) {
-    //             spec.imported = t.identifier(newName)
+        p.node.specifiers.forEach((spec) => {
+          if (t.isImportSpecifier(spec)) {
+            const importedName = spec.imported.name
+            for (const [oldName, newName] of renameMap) {
+              if (importedName === oldName) {
+                spec.imported = t.identifier(newName)
 
-    //             if (t.isIdentifier(spec.local) && spec.local.name !== spec.imported.name) {
-    //               p.scope.rename(spec.local.name, newName)
-    //             }
-    //             if (spec.local.name === oldName) {
-    //               p.scope.rename(oldName, newName)
-    //             }
-    //             modified = true
-    //             fileSet.add(file)
-    //           }
-    //         }
-    //       }
-    //     })
-    //   },
-    // })
+                if (t.isIdentifier(spec.local) && spec.local.name !== spec.imported.name) {
+                  p.scope.rename(spec.local.name, newName)
+                }
+                if (spec.local.name === oldName) {
+                  p.scope.rename(oldName, newName)
+                }
+                modified = true
+                // fileSet.add(file)
+              }
+            }
+          }
+        })
+      },
+    })
 
-    // console.log('modified', modified, file)
-    // if (modified) {
-    //   const output = generate(ast).code
-    //   fs.writeFileSync(file, output, 'utf-8')
-    //   console.log(`🔄 更新导入: ${getRelativePath(file)}`)
-    //   updatedCount++
-    // }
+    console.log('modified', modified, file)
+    if (modified) {
+      const output = generate(ast).code
+      fs.writeFileSync(file, output, 'utf-8')
+      console.log(`🔄 更新导入: ${getRelativePath(file)}`)
+      updatedCount++
+    }
   }
 
   console.log(`✅ 完成：修改 ${updatedCount} 个引用文件`)

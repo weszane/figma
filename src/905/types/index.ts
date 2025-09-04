@@ -1,6 +1,8 @@
 // Type definitions for NodeFactory and related classes
 // This file contains all type definitions extracted from 472793.ts
 
+import type { Fn } from "../../../types/global"
+
 // === Core Type Interfaces ===
 
 export interface ComponentProps {
@@ -280,7 +282,7 @@ export interface GridLayoutConfig {
   offsetVar?: any
   gutterSizeVar?: any
   boundVariables?: VariableAlias
-  alignment?: string  
+  alignment?: string
   count?: number
 }
 export interface TransitionData {
@@ -726,6 +728,24 @@ export interface IncLoadingErrorLoggerOptions {
 }
 
 export interface PluginRuntimeOptions {
+  queryMode: string
+  userID: string
+  apiVersion: string
+  enablePrivatePluginApi: boolean
+  titleIconURL: any
+  name: any
+  command: string
+  allowedDomains: any
+  capabilities: any
+  code: boolean
+  html: string
+  editorType: any
+  parameterValues: any
+  deferRunEvent: any
+  enableNativeJsx: any
+  closePlugin: Fn
+  isLocal: boolean
+  addShutdownAction: Fn
   pluginID: string
   pluginVersionID: string
   sceneGraph: any
@@ -1049,7 +1069,7 @@ export interface VariableCollectionFactory {
 
 export interface AnnotationCategoryData {
   label: string
-  properties: {type: string}[]
+  properties: { type: string }[]
   categoryId: string | null
 }
 
@@ -1344,7 +1364,7 @@ export interface VariableResult {
 export interface ProcessedRegion {
   windingRule: any
   loops: any
-  fillStyleRef?: string | {version: string, key: string}
+  fillStyleRef?: string | { version: string, key: string }
   fillStyleId?: string
   fillPaints?: {
     data: any[]

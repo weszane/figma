@@ -1,73 +1,144 @@
-export let $$n0 = new class {
+/**
+ * VideoManager handles creation, deletion, and manipulation of video elements.
+ */
+export interface VideoMap {
+  [id: number]: HTMLVideoElement;
+}
+
+/**
+ * VideoManager class manages video elements and provides utility methods.
+ */
+export class ThumbnailGenerator {
+  private videos: VideoMap;
+  private nextVideoID: number;
+
   constructor() {
     this.videos = {};
     this.nextVideoID = 0;
   }
-  createVideo() {
-    var e = this.nextVideoID++;
-    var t = document.createElement("video");
-    t.preload = "auto";
-    this.videos[e] = t;
-    return e;
+
+  /**
+   * Creates a new video element and returns its unique ID.
+   * @returns {number} Video ID
+   */
+  createVideo(): number {
+    const id = this.nextVideoID++;
+    const video = document.createElement("video");
+    video.preload = "auto";
+    this.videos[id] = video;
+    return id;
   }
-  deleteVideo(e) {
-    var t = this.videos[e];
-    t.remove();
-    URL.revokeObjectURL(t.src);
-    delete this.videos[e];
+
+  /**
+   * Deletes a video element by its ID.
+   * @param {number} id - Video ID
+   */
+  deleteVideo(id: number): void {
+    const video = this.videos[id];
+    if (video) {
+      video.remove();
+      URL.revokeObjectURL(video.src);
+      delete this.videos[id];
+    }
   }
-  getWidth(e) {
-    return this.videos[e] ? this.videos[e].videoWidth : 0;
+
+  /**
+   * Gets the width of the video element.
+   * @param {number} id - Video ID
+   * @returns {number} Video width
+   */
+  getWidth(id: number): number {
+    return this.videos[id]?.videoWidth ?? 0;
   }
-  getHeight(e) {
-    return this.videos[e] ? this.videos[e].videoHeight : 0;
+
+  /**
+   * Gets the height of the video element.
+   * @param {number} id - Video ID
+   * @returns {number} Video height
+   */
+  getHeight(id: number): number {
+    return this.videos[id]?.videoHeight ?? 0;
   }
-  getCoverImage(e) {
-    if (!this.videos[e]) return new Uint8Array();
-    var t = this.videos[e];
-    var i = document.createElement("canvas").getContext("2d");
-    if (null == i) return new Uint8Array();
-    var n = i.canvas;
-    n.width = this.getWidth(e);
-    n.height = this.getHeight(e);
-    i.drawImage(t, 0, 0, n.width, n.height);
-    return new Uint8Array(i.getImageData(0, 0, n.width, n.height).data.buffer);
+
+  /**
+   * Generates a cover image (as Uint8Array) from the video element.
+   * @param {number} id - Video ID
+   * @returns {Uint8Array} Cover image data
+   */
+  getCoverImage(id: number): Uint8Array {
+    const video = this.videos[id];
+    if (!video) return new Uint8Array();
+
+    const ctx = document.createElement("canvas").getContext("2d");
+    if (!ctx) return new Uint8Array();
+
+    const canvas = ctx.canvas;
+    canvas.width = this.getWidth(id);
+    canvas.height = this.getHeight(id);
+
+    ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+    return new Uint8Array(ctx.getImageData(0, 0, canvas.width, canvas.height).data.buffer);
   }
-  loadVideo(e, t, i) {
-    return new Promise((n, r) => {
-      var a = this.videos[t];
-      var s = i ? new Blob([e], {
-        type: i
-      }) : new Blob([e]);
-      let o = {
-        error: e => {
-          r(e.message);
-          l();
+
+  /**
+   * Loads video data into the video element and resolves when loaded.
+   * @param {ArrayBuffer | ArrayBufferView} data - Video data
+   * @param {number} id - Video ID
+   * @param {string} [mimeType] - Optional MIME type
+   * @returns {Promise<number>} Resolves with video height or rejects with error message
+   */
+  loadVideo(
+    data: Uint8Array<ArrayBuffer>,
+    id: number,
+    mimeType?: string
+  ): Promise<number> {
+    return new Promise((resolve, reject) => {
+      const video = this.videos[id];
+      if (!video) {
+        reject("Video element not found");
+        return;
+      }
+      const blob = mimeType ? new Blob([data], { type: mimeType }) : new Blob([data]);
+
+      const listeners: Record<string, EventListener> = {
+        error: (e: Event) => {
+          reject((e as ErrorEvent).message);
+          cleanup();
         },
-        loadeddata: e => {
+        loadeddata: () => {
           window.requestAnimationFrame(() => {
             window.requestAnimationFrame(() => {
-              0 === a.videoWidth || 0 === a.videoHeight ? r("Video load failed during thumbnail generation: video has no dimensions") : n(a.videoHeight);
-              l();
+              if (video.videoWidth === 0 || video.videoHeight === 0) {
+                reject("Video load failed during thumbnail generation: video has no dimensions");
+              } else {
+                resolve(video.videoHeight);
+              }
+              cleanup();
             });
           });
         }
       };
-      let l = () => {
-        Object.keys(o).forEach(e => {
-          a.removeEventListener(e, o[e]);
+      function cleanup() {
+        Object.entries(listeners).forEach(([event, handler]) => {
+          video.removeEventListener(event, handler as EventListener);
         });
       };
-      Object.keys(o).forEach(e => {
-        a.addEventListener(e, o[e]);
+      Object.entries(listeners).forEach(([event, handler]) => {
+        video.addEventListener(event, handler);
       });
-      a.src = URL.createObjectURL(s);
-      a.currentTime = 0;
-      a.load();
+      video.src = URL.createObjectURL(blob);
+      video.currentTime = 0;
+      video.load();
       setTimeout(() => {
-        r("Video load timeout during thumbnail generation");
-      }, 1e4);
+        reject("Video load timeout during thumbnail generation");
+        cleanup();
+      }, 10000);
     });
   }
-}();
-export const t = $$n0;
+}
+
+// Exported instance for compatibility with original $$n0
+export const thumbnailGenerator = new ThumbnailGenerator(); // $$n0
+
+// Exported alias for compatibility with original 't'
+export const t = thumbnailGenerator;
