@@ -1,5 +1,5 @@
 import { jsx } from "react/jsx-runtime";
-import { Ng } from "../vendor/514228";
+import { connect } from "../vendor/514228";
 import { IK } from "../905/521428";
 import { md } from "../figma_app/27355";
 import { o6, cZ } from "../figma_app/806412";
@@ -79,7 +79,7 @@ class f extends o6 {
   }
 }
 f.displayName = "PublishButton";
-export let $$_0 = Ng(e => ({
+export let $$_0 = connect(e => ({
   library: e.library,
   teams: e.teams,
   canPublishComponents: fA(e),

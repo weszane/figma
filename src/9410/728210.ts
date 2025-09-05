@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useMemo, useContext, useRef, useEffect, useState, useCallback } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
 import { h3O } from "../figma_app/763686";
 import { md, fp } from "../figma_app/27355";
@@ -628,7 +628,7 @@ export function $$ee0({
   isTabAccessible: t = !1,
   hideOthersOverlayOverride: i = !1
 }) {
-  let n = d4(({
+  let n = useSelector(({
     multiplayer: e
   }) => e);
   let s = HG();
@@ -655,7 +655,7 @@ function et(e) {
   } = e;
   let s = $0();
   let o = q5();
-  let l = d4(e => e.multiplayer.allUsers.length);
+  let l = useSelector(e => e.multiplayer.allUsers.length);
   let d = useRef(l);
   d.current = l;
   Q("none", "following", o, d);

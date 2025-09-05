@@ -1,10 +1,10 @@
 import { useEffect } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { I7 } from "../figma_app/594947";
 import { q5 } from "../figma_app/516028";
 import { wA } from "../figma_app/336853";
 function l() {
-  let e = d4(e => wA(e));
+  let e = useSelector(e => wA(e));
   let t = q5();
   return {
     currentOrg: e,

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { K } from "../905/807535";
 import { getFeatureFlags } from "../905/601108";
 import { oA } from "../905/663269";
@@ -38,7 +38,7 @@ export async function $$x0(e, t) {
   }
 }
 export function $$f1() {
-  let e = wA();
+  let e = useDispatch();
   let [t, a] = useState(!1);
   let [l, o] = useState();
   let d = getFeatureFlags().one_click_approve_on_recents;

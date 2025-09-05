@@ -1,5 +1,5 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi } from "../figma_app/272243";
@@ -55,7 +55,7 @@ import { Bi } from "../905/652992";
 import { Ib } from "../905/129884";
 import { DV } from "../905/739964";
 var p = u;
-let Y = Ju(function(e) {
+let Y = Ju(function (e) {
   let t = S2().unwrapOr(null);
   let i = e.hasOwnProperty("resourceConnectionInvite");
   let d = i ? e.resourceConnectionInvite.hostPlan : e.resourceConnection.hostPlan;
@@ -63,7 +63,7 @@ let Y = Ju(function(e) {
   let u = i ? e.resourceConnectionInvite.projectName : e.resourceConnection.projectName;
   let p = i ? e.resourceConnectionInvite.isHostPlanAdmin : e.resourceConnection.isHostPlanAdmin;
   if (null == d || null == c) throw Error("hostPlan or connectingPlan not found");
-  let m = wA();
+  let m = useDispatch();
   let h = hS({
     ...e,
     onClose: () => {
@@ -336,7 +336,7 @@ let eo = (e, t) => {
   let n = Rs(SWF, {
     projectId: e
   });
-  let a = wA();
+  let a = useDispatch();
   let s = gY(Ct);
   let o = n.data?.project;
   let l = _$$b(o?.plan?.tier);
@@ -568,7 +568,7 @@ let eo = (e, t) => {
   });
   return N;
 };
-let $$el0 = Ju(function(e) {
+let $$el0 = Ju(function (e) {
   let t;
   let i = hS(e);
   let {
@@ -653,4 +653,4 @@ let $$el0 = Ju(function(e) {
     })
   });
 }, "FolderSettingsModal");
-export const l = $$el0; 
+export const l = $$el0;

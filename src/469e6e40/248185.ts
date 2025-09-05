@@ -1,6 +1,6 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useCallback } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { Y, M } from "../905/830372";
 import { sf } from "../905/929976";
 import { _6 } from "../figma_app/386952";
@@ -12,7 +12,7 @@ export function $$$$m0({
   selectedSecondaryTab: e,
   rightActions: t
 }) {
-  let a = wA();
+  let a = useDispatch();
   let m = _6();
   let p = "workspace" === m.view && m.subView === V0.ADMIN ? m.workspaceId : null;
   let g = "workspace" === m.view && m.subView === V0.ADMIN ? m.orgAdminOriginTab : void 0;

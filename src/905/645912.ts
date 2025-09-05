@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { CNR, glU, qmM } from "../figma_app/763686";
@@ -51,7 +51,7 @@ let D = _$$n((e, t, i, n) => {
   });
 });
 export function $$L0(e, t) {
-  let i = wA();
+  let i = useDispatch();
   let d = md(hO.currentSearchAtom);
   let x = md(hO.currentCommunitySearchAtom);
   let P = md(CZ);

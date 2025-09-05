@@ -1,5 +1,5 @@
 import { useRef, useEffect } from "react";
-import { Pj } from "../vendor/514228";
+import { useStore } from "../vendor/514228";
 import { Egt, lyf } from "../figma_app/763686";
 import { Ql } from "../figma_app/387100";
 import { R } from "../905/103090";
@@ -40,7 +40,7 @@ export function $$h1(e) {
   });
   let S = _I();
   let v = !!hA();
-  let A = Pj();
+  let A = useStore();
   let x = useRef("");
   let N = useRef(0);
   let C = useRef(!0);

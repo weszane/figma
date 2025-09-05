@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { memo, useState } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import r from "classnames";
 import { WB } from "../905/761735";
 import { ks, tM, vd } from "../figma_app/637027";
@@ -17,7 +17,7 @@ import { OJ } from "../905/519092";
 import { v0, hF, pL } from "../905/289198";
 var l = r;
 let j = memo(function (e) {
-  let t = wA();
+  let t = useDispatch();
   let {
     displayName,
     legalName

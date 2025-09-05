@@ -1,6 +1,6 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useState, useMemo, useEffect, useCallback } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { c2 } from "../905/382883";
 import { md, fp } from "../figma_app/27355";
 import { B } from "../905/714743";
@@ -32,7 +32,7 @@ export function $$R0({
 }) {
   let [s, l] = useState("");
   let d = _$$F(s, WY.SPACE);
-  let u = wA();
+  let u = useDispatch();
   let g = md(q$);
   let E = useMemo(() => {
     let {

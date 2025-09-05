@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
 import { getFeatureFlags } from "../905/601108";
 import { md } from "../figma_app/27355";
@@ -59,7 +59,7 @@ function I(e) {
   return `${e.type}::${e.parentId}`;
 }
 let S = (e, t, r, a, s = .1) => {
-  let o = d4(e => e.selectedView?.view === "folder");
+  let o = useSelector(e => e.selectedView?.view === "folder");
   let d = R(e => ({
     currentUserOrgId: e.currentUserOrgId,
     currentTeamId: e.currentTeamId,

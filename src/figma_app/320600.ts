@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useCallback, useState, useEffect, useMemo, Component } from "react";
 import { createPortal } from "../vendor/944059";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { m7W } from "../figma_app/763686";
 import { l7 } from "../905/189185";
 import { xx } from "../figma_app/815945";
@@ -55,7 +55,7 @@ import { D as _$$D } from "../figma_app/32557";
 import { O as _$$O } from "../figma_app/688952";
 import { jv } from "../905/525678";
 let U = Ju(function () {
-  let e = wA();
+  let e = useDispatch();
   let t = useCallback(() => {
     e(AS());
   }, [e]);
@@ -108,7 +108,7 @@ function q(e) {
   let a = useCallback(e => {
     gl(e) || r(e.valueOf());
   }, [r]);
-  let o = wA();
+  let o = useDispatch();
   useEffect(() => {
     uw({
       [e.configPropertyName]: t
@@ -132,7 +132,7 @@ function q(e) {
   });
 }
 let J = Ju(function () {
-  let e = wA();
+  let e = useDispatch();
   let t = useCallback(() => {
     e(AS());
   }, [e]);
@@ -230,7 +230,7 @@ async function es({
   }
 }
 let eo = Ju(function () {
-  let e = wA();
+  let e = useDispatch();
   let t = useCallback(() => {
     e(AS());
   }, [e]);
@@ -264,7 +264,7 @@ let eo = Ju(function () {
   });
 }, "MLExportModal");
 let ec = () => {
-  let e = wA();
+  let e = useDispatch();
   let t = Cq({
     useSinatraType: !0
   });
@@ -413,11 +413,11 @@ class e_ extends o6 {
 }
 export function $$eh0(e) {
   _$$n2();
-  let t = wA();
-  let r = d4(e => e.mirror.appModel);
-  let i = d4(e => e.selectedView);
-  let a = d4(e => e.dropdownShown?.data?.selectionToUpdate);
-  let o = d4(e => $A(e.selectedView) && !tn(e));
+  let t = useDispatch();
+  let r = useSelector(e => e.mirror.appModel);
+  let i = useSelector(e => e.selectedView);
+  let a = useSelector(e => e.dropdownShown?.data?.selectionToUpdate);
+  let o = useSelector(e => $A(e.selectedView) && !tn(e));
   let l = ec();
   let d = d$({
     debugMenuItems: l

@@ -1,5 +1,5 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
 import { az } from "../905/449184";
 import { clearPaymentFlowData } from "../figma_app/169182";
@@ -108,10 +108,10 @@ export function $$b1(e) {
     paymentStep,
     teamFlowType
   } = t;
-  let _ = wA();
-  let u = d4(e => e.payment.billingPeriod);
+  let _ = useDispatch();
+  let u = useSelector(e => e.payment.billingPeriod);
   let S = iZ()?.id;
-  let N = T(teamFlowType, u, d4(e => e.payment.promo), e.selectedView.planType || Sc.UNDETERMINED);
+  let N = T(teamFlowType, u, useSelector(e => e.payment.promo), e.selectedView.planType || Sc.UNDETERMINED);
   let b = N.findIndex(e => e.step === paymentStep);
   return jsxs("div", {
     className: N6,

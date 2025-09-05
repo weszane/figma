@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { gw5, T4N } from "../figma_app/763686";
 import { md, Rq } from "../figma_app/27355";
 import { buildUploadUrl } from "../figma_app/169182";
@@ -31,7 +31,7 @@ let O = "seen_figjam_section_presets_announcement";
 let $$L0 = Fu(O);
 export function $$R2() {
   let e = md(_$$P) === iH.TRUE;
-  let t = d4(e => e.mirror.appModel.currentPage);
+  let t = useSelector(e => e.mirror.appModel.currentPage);
   let i = Fk((t, i) => zC(t, i) || e && re(t, i), t);
   let m = q();
   let R = md(Rq(Sb));
@@ -41,7 +41,7 @@ export function $$R2() {
   let F = Td();
   let B = function () {
     let [e, t] = useState(!1);
-    let i = d4(e => e.isMakeSomethingV2Active);
+    let i = useSelector(e => e.isMakeSomethingV2Active);
     let r = md(rM);
     useEffect(() => {
       (i || r) && t(!0);

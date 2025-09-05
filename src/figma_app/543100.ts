@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { throwTypeError, debug } from "../figma_app/465776";
 import { eU, md, Iz } from "../figma_app/27355";
 import { resourceUtils } from "../905/989992";
@@ -55,7 +55,7 @@ export function $$S11(e) {
 }
 export let $$v2 = eU(null);
 export function $$A9(e) {
-  let t = d4(e => e.tileSelect);
+  let t = useSelector(e => e.tileSelect);
   return useMemo(() => e.filter(e => {
     let r = $$x1.getId(e);
     switch (e.type) {

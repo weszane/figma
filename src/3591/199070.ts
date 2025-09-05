@@ -1,5 +1,5 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { R } from "../3591/975641";
 import { s as _$$s } from "../cssbuilder/589278";
 import { tx } from "../905/303541";
@@ -61,7 +61,7 @@ function g({
 function h({
   resource: e
 }) {
-  let i = wA();
+  let i = useDispatch();
   return jsx("div", {
     className: cV,
     children: jsx(g, {

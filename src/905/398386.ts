@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { ServiceCategories as _$$e } from "../905/165054";
 import o from "classnames";
 import { sx } from "../905/449184";
@@ -39,7 +39,7 @@ export function $$_0(e) {
     metaContainerStyle: "file_browser_page_view--metaContainer--0kBjx"
   };
   let u = _6();
-  let _ = wA();
+  let _ = useDispatch();
   let [A, y] = useState(!1);
   let b = window.performance.getEntriesByType("navigation")[0];
   useEffect(() => {

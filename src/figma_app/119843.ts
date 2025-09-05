@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useRef, useLayoutEffect } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { dP } from "../figma_app/119475";
 import { P } from "../905/347284";
 import { a3, Vm } from "../905/703676";
@@ -11,7 +11,7 @@ export function $$c0({
   containerRefRight: r,
   limitHeight: c
 }) {
-  let u = d4(e => e.dropdownShown);
+  let u = useSelector(e => e.dropdownShown);
   let p = !!u && u.type === e;
   let _ = useRef(null);
   return (useLayoutEffect(() => {

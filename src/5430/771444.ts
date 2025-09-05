@@ -1,5 +1,5 @@
 import { jsx } from "react/jsx-runtime";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { tx } from "../905/303541";
 import { W } from "../5430/573261";
 import { _ as _$$_ } from "../905/456042";
@@ -15,10 +15,10 @@ export function $$x0({
   resource: e,
   viewContext: t
 }) {
-  let r = wA();
+  let r = useDispatch();
   let x = iZ();
   let f = I();
-  let y = Object.values(d4(e => Tm(e))).filter(t => I0(e) && t.plugins_whitelist_enforced || xQ(e) && t.widgets_whitelist_enforced);
+  let y = Object.values(useSelector(e => Tm(e))).filter(t => I0(e) && t.plugins_whitelist_enforced || xQ(e) && t.widgets_whitelist_enforced);
   let g = (e, t) => {
     r(to({
       type: W(),

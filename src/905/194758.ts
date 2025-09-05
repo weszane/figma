@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useMemo, useRef } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { d as _$$d } from "../905/976845";
 import { $ } from "../905/411599";
@@ -25,7 +25,7 @@ var m = p;
 export function $$C0({
   paint: e
 }) {
-  let t = wA();
+  let t = useDispatch();
   let i = BK("AI_IMAGE_TOOLS_DROPDOWN");
   let p = useMemo(() => !!(e && ruz?.canEditSelectedImage()), [e]);
   let m = useMemo(() => [{
@@ -105,7 +105,7 @@ export function $$C0({
     }), i.showing && jsx(j, {
       dispatch: t,
       parentRect: k,
-      onSelectItem: (e) => {
+      onSelectItem: e => {
         e.callback && e.callback();
       },
       showPoint: !1,

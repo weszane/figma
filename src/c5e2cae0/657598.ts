@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { $n } from "../905/521428";
 import { wQ } from "../905/437088";
 import { bL } from "../905/38914";
@@ -28,9 +28,9 @@ export function $$j0(e) {
     currency,
     canSeeBillingAddressExp
   } = e;
-  let w = wA();
+  let w = useDispatch();
   let E = _6();
-  let A = d4(e => Np(e, E));
+  let A = useSelector(e => Np(e, E));
   let [I, k] = useState(!1);
   let {
     saveWithPaymentMethod,

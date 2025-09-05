@@ -1,5 +1,5 @@
 import { jsx } from "react/jsx-runtime";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { T1 } from "../figma_app/153916";
 import { A } from "../905/920142";
 import { h as _$$h } from "../905/207101";
@@ -34,7 +34,7 @@ let S = "seen_seat_billing_terms_modal";
 export function $$$$k0({
   org: e
 }) {
-  let t = wA();
+  let t = useDispatch();
   let a = gY($$C1);
   let n = _$$T(e);
   let y = !!n?.data?.isEligible;

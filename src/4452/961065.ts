@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useEffect, useMemo } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { fp } from "../figma_app/27355";
 import { tT } from "../905/663269";
 import { Xf } from "../figma_app/153916";
@@ -190,7 +190,7 @@ export function $$D1(e) {
   });
 }
 function F(e) {
-  let t = wA();
+  let t = useDispatch();
   let a = MX();
   let i = e.invoices && hX(e.invoices);
   let l = e.org.bigma_enabled && e.orgUser.license_admin && e.orgUser.permission !== FUserRoleType.ADMIN;
@@ -240,7 +240,7 @@ function F(e) {
   });
 }
 function B(e) {
-  let t = wA();
+  let t = useDispatch();
   let a = e.orgUser.permission === FUserRoleType.ADMIN;
   let i = RG();
   let l = MX();

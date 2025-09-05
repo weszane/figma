@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useContext, useRef } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { d as _$$d } from "../905/976845";
 import { J as _$$J } from "../905/125993";
 import { rrT, NLJ, yTM } from "../figma_app/763686";
@@ -37,7 +37,7 @@ function B(e) {
   let t = "stroke-settings";
   let [n, u] = fp(GI);
   let v = (n.encodedPaints ? ri(n.encodedPaints) : n.paints) ?? [];
-  let w = wA();
+  let w = useDispatch();
   let B = useContext(zK);
   let F = () => null != B;
   let z = useRef(null);

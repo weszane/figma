@@ -1,17 +1,17 @@
 import { useMemo } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { o as _$$o } from "../905/808775";
 import { q5 } from "../figma_app/516028";
 import { zg } from "../figma_app/193867";
 import { $A } from "../905/862883";
 export function $$d1() {
   let e = !!q5()?.org;
-  let t = d4(e => zg(e.selectedView) && !e.user);
+  let t = useSelector(e => zg(e.selectedView) && !e.user);
   return !!(e && !t);
 }
 export function $$c0(e, t = 20) {
   let i = $$p2(e);
-  let a = d4(e => e.faceStamps);
+  let a = useSelector(e => e.faceStamps);
   return useMemo(() => {
     let e = new Map();
     i.forEach(t => {
@@ -25,11 +25,11 @@ export function $$c0(e, t = 20) {
 }
 let u = (e, t) => (e.name || "").toLowerCase().includes(t.toLowerCase()) || (e.handle || "").toLowerCase().includes(t.toLowerCase()) || (e.email || "").toLowerCase().split("@")[0].includes(t.toLowerCase());
 export function $$p2(e) {
-  let t = d4(e => e.recentlyUsed.faceStamps[$A.FigJam]);
+  let t = useSelector(e => e.recentlyUsed.faceStamps[$A.FigJam]);
   return useMemo(() => t.map(e => e.user).filter(t => !e || u(t, e)), [t, e]);
 }
 export function $$h3() {
-  let e = d4(e => e.recentlyUsed.faceStamps);
+  let e = useSelector(e => e.recentlyUsed.faceStamps);
   let t = $$d1();
   let i = _$$o();
   return useMemo(() => i && t ? e.figjam.map(e => e.user) : [], [i, e, t]);

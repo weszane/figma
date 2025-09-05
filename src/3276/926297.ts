@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { md } from "../figma_app/27355";
 import { Rs } from "../figma_app/288654";
 import { VA } from "../figma_app/528509";
@@ -17,8 +17,8 @@ export function $$u1() {
   return useMemo(() => t.data?.file?.fileRoleRequests ?? [], [t.data?.file?.fileRoleRequests]);
 }
 export function $$p0() {
-  let e = d4(e => e.currentUserOrgId);
-  let t = d4(vu);
+  let e = useSelector(e => e.currentUserOrgId);
+  let t = useSelector(vu);
   let n = md(_$$t).data ?? !0;
   let u = Rs(L1I, {
     fileKey: t?.key ?? "",

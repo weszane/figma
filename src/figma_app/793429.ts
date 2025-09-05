@@ -1,5 +1,5 @@
 import { useMemo, useCallback } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { md } from "../figma_app/27355";
 import { R } from "../905/103090";
 import { gq } from "../905/125333";
@@ -17,8 +17,8 @@ import { uQ } from "../figma_app/151869";
 import { Ig, dc, rP } from "../figma_app/155647";
 import { QT } from "../figma_app/152690";
 export function $$T0(e = "") {
-  let t = d4(cM);
-  let r = d4(wi);
+  let t = useSelector(cM);
+  let r = useSelector(wi);
   let a = useMemo(() => Object.values(t).find(t => t.key === e), [t, e]);
   let s = useMemo(() => Object.values(r).find(t => t.key === e), [r, e]);
   return a ?? s;
@@ -87,7 +87,7 @@ export function $$v2(e) {
   let {
     styles
   } = md(gq);
-  let r = d4(e => e.library);
+  let r = useSelector(e => e.library);
   let n = styles.map(e => {
     let t = Gp(e.key, e.guids, r);
     return t && t.kind !== AT.SUBSCRIBED_WITHOUT_LIBRARY ? {

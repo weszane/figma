@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useContext } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { N as _$$N } from "../905/438674";
 import { $n } from "../905/521428";
 import { kul } from "../figma_app/763686";
@@ -130,7 +130,7 @@ let F = (e, t, i) => {
         title: tx(`collaboration.branching.merge_error.could_not_start_${s}`),
         description: n = tx("collaboration.branching.merge_error.branch_archived_description"),
         primaryButtonText: tx("base_notifications.dismiss"),
-        primaryAction: () => { }
+        primaryAction: () => {}
       };
     case 3:
       return {
@@ -165,7 +165,7 @@ function M(e) {
     secondaryButtonText,
     secondaryAction
   } = i;
-  let h = wA();
+  let h = useDispatch();
   _$$h(() => {
     sx("Merge Error Modal Shown", {
       view: $$P1[e.view],
@@ -239,4 +239,4 @@ function M(e) {
 M.displayName = "MergeErrorModal";
 export let $$j0 = Ju(M, "MergeErrorModal", ZU.YES);
 export const my = $$j0;
-export const RK = $$P1; 
+export const RK = $$P1;

@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useId, useRef, useState, useEffect, Fragment as _$$Fragment, useCallback, forwardRef, useLayoutEffect } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
 import { lQ } from "../905/934246";
 import { ServiceCategories as _$$e } from "../905/165054";
@@ -226,7 +226,7 @@ let eT = "member_flyout--middleColumn--jallv";
 let eA = "member_flyout--sideColumn--1AIc2";
 function eO(e) {
   let t = !!(e.avatarEntity.handle ?? e.avatarEntity.name);
-  let a = wA();
+  let a = useDispatch();
   return jsx("div", {
     className: _$$s2.py24.pl24.pr4.overflowHidden.$,
     "data-testid": "member-flyout-header",
@@ -258,8 +258,8 @@ function eO(e) {
 function eL(e) {
   let t;
   let a = `member-flyout-${e.id}`;
-  let l = wA();
-  let o = d4(e => e.dropdownShown);
+  let l = useDispatch();
+  let o = useSelector(e => e.dropdownShown);
   let d = useId();
   let c = useId();
   let _ = useRef(null);
@@ -489,7 +489,7 @@ function eF(e) {
 function eq(e) {
   let t = eU(e);
   let a = e.planType === FOrganizationLevelType.TEAM ? !e.member.upgrade_method : !e.orgUser.active_seat_upgrade_method?.upgrade_method;
-  let s = wA();
+  let s = useDispatch();
   let r = t.eccUpgradingLocked || t.scimLocked;
   let l = r ? {
     "data-tooltip": t.eccUpgradingLocked ? _$$t2("external_collaboration_restricted.members.tooltip.v2", {
@@ -584,7 +584,7 @@ let eB = {
   }
 };
 function eG(e) {
-  let t = wA();
+  let t = useDispatch();
   if (eU(e).currentSeatType === Gu.VIEW) return null;
   let a = [];
   let r = null;
@@ -780,7 +780,7 @@ function eV(e) {
   });
 }
 function eW(e) {
-  let t = wA();
+  let t = useDispatch();
   let {
     allAdminableLicenseGroups
   } = _$$x();
@@ -845,7 +845,7 @@ function eY(e) {
   }) : null;
 }
 function eJ(e) {
-  let t = wA();
+  let t = useDispatch();
   let a = _$$o(e.orgUser, e.workspacesCanMoveTo);
   let s = Ad(e.orgUser);
   let {
@@ -870,9 +870,9 @@ function eK(e) {
   let t;
   let a;
   let o;
-  let d = wA();
+  let d = useDispatch();
   let c = function (e) {
-    let t = wA();
+    let t = useDispatch();
     let a = !!e;
     return useCallback(n => {
       if (!a) return lQ;
@@ -932,7 +932,7 @@ function eK(e) {
 function eX(e) {
   let t;
   let a;
-  let s = wA();
+  let s = useDispatch();
   switch (e.planType) {
     case FOrganizationLevelType.ORG:
       t = e.org.name;
@@ -962,7 +962,7 @@ function eX(e) {
 }
 function eQ(e) {
   let t;
-  let a = d4(e => e.selectedView.view);
+  let a = useSelector(e => e.selectedView.view);
   let l = !e.isMe;
   if (e.planType === FOrganizationLevelType.ORG) {
     l = !e.isMe && (e.isCurrentUserOrgAdmin || e.orgUser.permission !== FUserRoleType.ADMIN);
@@ -1006,8 +1006,8 @@ function eQ(e) {
   });
 }
 function eZ(e) {
-  let t = d4(e => e.selectedView.view);
-  let a = d4(e => e.teamBilling);
+  let t = useSelector(e => e.selectedView.view);
+  let a = useSelector(e => e.teamBilling);
   let r = C3();
   let l = !1;
   useEffect(() => {
@@ -1051,8 +1051,8 @@ function eZ(e) {
   });
 }
 function e0(e) {
-  let t = wA();
-  let a = d4(e => e.selectedView.view);
+  let t = useDispatch();
+  let a = useSelector(e => e.selectedView.view);
   let [r, l] = useState(!0);
   let [o, d] = useState(null);
   let [c, u] = useState(!1);
@@ -1207,7 +1207,7 @@ export let $$e50 = {
   Contents: function (e) {
     let t;
     let a;
-    let l = d4(e => !!e.modalShown);
+    let l = useSelector(e => !!e.modalShown);
     let o = function (e) {
       let t;
       let a = _$$m.useClose();

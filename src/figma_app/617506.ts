@@ -1,5 +1,5 @@
 import { useMemo, useCallback, useEffect, useState } from "react";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { E3, eU, fp } from "../figma_app/27355";
 import { ZC } from "../figma_app/39751";
 import { uQ } from "../figma_app/311375";
@@ -12,7 +12,7 @@ let _ = E3("last-used-dev-mode-variable-set", null);
 let $$h5 = "ALL_VARIABLES";
 let $$m3 = eU($$h5);
 export function $$g0() {
-  let e = d4(e => "devModeVariablesTableSelectedVariable" in e.selectedView ? e.selectedView.devModeVariablesTableSelectedVariable : void 0);
+  let e = useSelector(e => "devModeVariablesTableSelectedVariable" in e.selectedView ? e.selectedView.devModeVariablesTableSelectedVariable : void 0);
   let t = _$$u(e);
   let r = Rb();
   let a = !!t;
@@ -26,7 +26,7 @@ export function $$f1() {
 }
 export function $$E6() {
   let e = _6();
-  let t = wA();
+  let t = useDispatch();
   return useCallback(r => {
     t(sf({
       ...e,
@@ -49,7 +49,7 @@ export function $$y2(e) {
 export function $$b4() {
   let e = uQ();
   let t = ZC(e);
-  let r = wA();
+  let r = useDispatch();
   useEffect(() => {
     t && e !== t && r(AS());
   }, [r, t, e]);

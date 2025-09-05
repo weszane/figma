@@ -1,6 +1,6 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useRef } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { J } from "../905/614223";
 import { sx } from "../905/449184";
 import { Ay } from "../figma_app/778880";
@@ -36,7 +36,7 @@ export function $$M0({
   context: r
 }) {
   let j;
-  let S = wA();
+  let S = useDispatch();
   let R = TA();
   let M = T5("PluginTryButton").unwrapOr(null);
   let B = M?.widgetsWhitelistEnforced || null;

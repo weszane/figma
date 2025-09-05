@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useState, useEffect, useRef, useContext } from "react";
 import { flushSync } from "../vendor/944059";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { glU } from "../figma_app/763686";
 import { l7 } from "../905/189185";
 import { dI } from "../905/871411";
@@ -71,7 +71,7 @@ function w({
   useEffect(() => {
     w(O(t, r));
   }, [t, r, w]);
-  let R = wA();
+  let R = useDispatch();
   let L = e.guid;
   let P = e.styleType;
   let D = useRef(null);
@@ -92,7 +92,7 @@ function w({
       isRenaming: !1
     }));
   };
-  let j = v_(h, "keydown", (e) => {
+  let j = v_(h, "keydown", e => {
     if (e.keyCode === Uz.TAB) M();else if (e.keyCode === Uz.ENTER) {
       M();
       k === zM.EDIT_STYLE && "" === C || N?.();
@@ -125,7 +125,7 @@ function w({
       innerRef: D,
       name: "styleName",
       onBlur: M,
-      onChange: (e) => {
+      onChange: e => {
         w(e.target.value);
       },
       onFocus: () => (R(ay({

@@ -1,5 +1,5 @@
 import { jsx } from "react/jsx-runtime";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { $n } from "../905/521428";
 import { Rs } from "../figma_app/288654";
 import { _, S } from "../figma_app/490799";
@@ -37,7 +37,7 @@ export function $$f0({
   onRedirect: t,
   padding: i
 }) {
-  let s = wA();
+  let s = useDispatch();
   let u = S2().unwrapOr(null);
   let g = e => {
     u && (u.key.type === FOrganizationLevelType.ORG ? s(sf({

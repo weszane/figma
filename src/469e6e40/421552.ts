@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useId, useState, useMemo, useCallback, useEffect } from "react";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { sortByPropertyWithOptions, sortBySelectors } from "../figma_app/656233";
 import { k as _$$k } from "../905/443820";
 import { getFeatureFlags } from "../905/601108";
@@ -276,7 +276,7 @@ let ey = function ({
   libraryData: e,
   orgData: t
 }) {
-  let a = d4(e => e.user?.id);
+  let a = useSelector(e => e.user?.id);
   let r = e.updatedAt;
   let l = "file" === e.type ? e.repoOwner : void 0;
   let o = "file" === e.type ? e.owner ?? l : void 0;
@@ -472,7 +472,7 @@ function eY({
   library: e,
   org: t
 }) {
-  let a = wA();
+  let a = useDispatch();
   let r = gY(eW);
   let l = gY(eH);
   let [o, d] = useState(!1);
@@ -561,7 +561,7 @@ function eX({
   workspaceId: t,
   workspaceName: a
 }) {
-  let r = wA();
+  let r = useDispatch();
   let l = dq();
   let o = T5("WorkspaceApprovedLibrarySetting").unwrapOr(null);
   let d = o?.tier === FPlanNameType.ENTERPRISE;
@@ -701,7 +701,7 @@ function e9({
   orgData: t,
   selectedWorkspaceId: a
 }) {
-  let r = wA();
+  let r = useDispatch();
   let l = "community" !== e.type;
   let o = useMemo(() => {
     if (!a) return {
@@ -1155,9 +1155,9 @@ let tr = function ({
 let td = Ju(function ({
   libraryResourceId: e
 }) {
-  let t = wA();
+  let t = useDispatch();
   let a = iZ();
-  let r = d4(e => e.currentUserOrgId);
+  let r = useSelector(e => e.currentUserOrgId);
   let l = _$$l();
   let o = wJ(e);
   let d = Rs(R1$, {
@@ -1352,7 +1352,7 @@ export function $$tx1(e) {
   let z = libraryStats ?? th;
   let V = useMemo(() => (communityLibraryStats ?? []).map(e => _$$E3(e)), [communityLibraryStats]);
   let W = useMemo(() => (z?.files ?? []).map(e => _$$E3(e)), [z]);
-  let H = wA();
+  let H = useDispatch();
   let [Y, J] = useState(new Set(workspaceId ? [workspaceId] : []));
   let [K, Q] = useState("");
   let Z = md(TG);

@@ -1,5 +1,5 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { t, tx } from "../905/303541";
 import { E } from "../905/984674";
 import { Ce } from "../905/156213";
@@ -47,9 +47,9 @@ export let $$b0 = Ju(function ({
   teamId: e
 }) {
   let t = iZ();
-  let i = d4(t => t.teams[e]);
-  let m = wA();
-  let u = d4(e => e.userTeamFlags);
+  let i = useSelector(t => t.teams[e]);
+  let m = useDispatch();
+  let u = useSelector(e => e.userTeamFlags);
   if (!t || u[e]?.[h]) return null;
   let g = () => {
     m(bE({

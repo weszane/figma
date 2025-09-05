@@ -34,7 +34,7 @@ import { Y as _$$Y } from "../a88a4c5a/211633";
 import { pq } from "../8826/642528";
 import { q as _$$q } from "../8826/33573";
 import { SQ, tV, M0, Br, U4, So, Ws, SJ, d6, GG, ww, P1, iP, NR, Dj } from "../figma_app/803054";
-import { d4, wA as _$$wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { HH } from "../figma_app/828186";
 import { k as _$$k2 } from "../905/582200";
 import { k as _$$k3 } from "../8618/427799";
@@ -306,7 +306,7 @@ function L({
   }, e);
 }
 function q() {
-  let e = d4(e => {
+  let e = useSelector(e => {
     if (gl(e.mirror.selectionProperties.cooperTemplateData)) return oV;
     if (!e.mirror.selectionProperties.cooperTemplateData) return Z64.CUSTOM;
     let t = e.mirror.selectionProperties.cooperTemplateData?.type || "CUSTOM";
@@ -553,7 +553,7 @@ function th({
   });
 }
 function ty() {
-  let e = _$$wA();
+  let e = useDispatch();
   let t = Um();
   let n = q5();
   let r = GV();
@@ -611,7 +611,7 @@ function tS() {
     node: e[0] ?? null
   } : null, []);
   let t = function () {
-    let e = d4(e => e.mirror.appModel.activeCanvasEditModeType);
+    let e = useSelector(e => e.mirror.appModel.activeCanvasEditModeType);
     return useCallback(t => e === m1T.VECTOR && t ? _$$t("fullscreen.properties_panel.layer_header.node_type_vector") : getFeatureFlags().dse_slots && t && t.isSlotReactive ? _$$t("fullscreen.properties_panel.layer_header.slot") : null, [e]);
   }();
   let {
@@ -692,7 +692,7 @@ function tb({
   stylePickerListLayout: T,
   stylePickerShown: f
 }) {
-  let I = _$$wA();
+  let I = useDispatch();
   let E = md(_$$b);
   let P = qh();
   let w = SQ();
@@ -963,7 +963,7 @@ function tw({
   stylePickerListLayout: b,
   stylePickerShown: T
 }) {
-  let f = _$$wA();
+  let f = useDispatch();
   let [I, E] = fp(_$$b);
   let P = s6("currentPage", "currentSelectedProperty");
   let w = qh();

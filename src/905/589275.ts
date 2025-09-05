@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useCallback, useMemo, useRef } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { $n } from "../905/521428";
 import { J0O } from "../figma_app/763686";
 import { l7 } from "../905/189185";
@@ -80,7 +80,7 @@ function M({
   recordingKey: i,
   unpublished: s
 }) {
-  let o = wA();
+  let o = useDispatch();
   let [l, c] = useState(!1);
   let u = useMemo(() => l ? J0(e) : void 0, [e, l]);
   return jsxs(D8, {
@@ -124,8 +124,8 @@ function Y(e) {
     overrideDefaultItem,
     hasValues
   } = e;
-  let h = d4(e => e.instanceSwapPickerShown);
-  let f = wA();
+  let h = useSelector(e => e.instanceSwapPickerShown);
+  let f = useDispatch();
   let _ = useRef(null);
   let A = useCallback(() => _.current ? TS({
     el: _.current
@@ -215,8 +215,8 @@ function J({
   onRemove: e,
   recordingKeys: t
 }) {
-  let i = d4(e => e.dropdownShown);
-  let r = wA();
+  let i = useSelector(e => e.dropdownShown);
+  let r = useDispatch();
   return i && i.type === Q ? jsx(q, {
     className: contextMenu,
     style: i.data.position,
@@ -235,7 +235,7 @@ function ee({
   guids: e,
   recordingKey: t
 }) {
-  let i = wA();
+  let i = useDispatch();
   let o = useCallback(() => {
     i(to({
       type: dD,
@@ -294,8 +294,8 @@ export function $$ei0({
   propDefDefaultValue: x,
   entrypointForLogging: S
 }) {
-  let C = d4(e => e.preferredValuesPickerListLayout);
-  let k = wA();
+  let C = useSelector(e => e.preferredValuesPickerListLayout);
+  let k = useDispatch();
   let R = useCallback((e, t) => {
     e.preventDefault();
     e.stopPropagation();
@@ -319,12 +319,12 @@ export function $$ei0({
   let O = useCallback(e => {
     l7.user("toggle-preferred-prop-value", () => h(e));
   }, [h]);
-  let D = d4(FZ);
-  let L = d4(c5);
-  let M = d4(dK);
+  let D = useSelector(FZ);
+  let L = useSelector(c5);
+  let M = useSelector(dK);
   let j = wS(s);
   let U = 0 === s.length && E === J0O.INSTANCE_SWAP && x ? NY(x, M, D, L) : void 0;
-  let B = d4(e => VP(e.loadingState, _A(e.openFile?.key)));
+  let B = useSelector(e => VP(e.loadingState, _A(e.openFile?.key)));
   return jsxs(Fragment, {
     children: [jsxs("div", {
       className: e ? outerContainerBorderBottom : outerContainer,

@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { Ay } from "../905/612521";
 import { Uz, xH } from "../905/63728";
 import { t as _$$t } from "../905/303541";
@@ -25,7 +25,7 @@ export function $$f0({
   let b = q5();
   let v = _$$A();
   let I = Oc();
-  let E = wA();
+  let E = useDispatch();
   let x = useMemo(() => {
     let n = {
       text: _$$t("design_systems.assets_panel.insert"),

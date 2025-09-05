@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useRef } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { b as _$$b, q7, bL, mc } from "../figma_app/860955";
 import { K } from "../905/443068";
 import { nK } from "../905/691059";
@@ -31,7 +31,7 @@ export function $$R1(e) {
     currentPlanFilter,
     onPlanFilterUpdate
   } = e;
-  let R = wA();
+  let R = useDispatch();
   let E = q5();
   let D = useRef(null);
   let F = !!getFeatureFlags().limited_plan_spaces;
@@ -40,9 +40,9 @@ export function $$R1(e) {
     manager
   } = _$$b();
   let B = iZ();
-  let S = d4(e => F ? e.plans : B ? e.authedUsers.byId[B.id]?.plans : null);
-  let O = d4(_$$P);
-  let q = d4(e => e.orgById);
+  let S = useSelector(e => F ? e.plans : B ? e.authedUsers.byId[B.id]?.plans : null);
+  let O = useSelector(_$$P);
+  let q = useSelector(e => e.orgById);
   let U = () => {
     R(oB());
     Cu({

@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useMemo, useRef, useState, useEffect, useCallback } from "react";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { Et } from "../figma_app/397267";
 import { bL } from "../905/911410";
 import { vo, Y9, nB } from "../figma_app/272243";
@@ -110,9 +110,9 @@ import { LdP, wkK } from "../figma_app/27776";
 function H(e) {
   let t = RR();
   let s = D6("useCanViewPlaygroundQuery");
-  let r = d4(getPermissionsState);
+  let r = useSelector(getPermissionsState);
   let l = q5();
-  let a = d4(_$$x)?.id;
+  let a = useSelector(_$$x)?.id;
   let {
     currentUserOrgId
   } = r;
@@ -179,7 +179,7 @@ function e_({
       libraryKey: e,
       nodeId: t
     });
-    let r = d4(tB);
+    let r = useSelector(tB);
     return useMemo(() => {
       if (r?.libraryKey === e) return null;
       let t = s.data;
@@ -616,7 +616,7 @@ function ti({
     thumbnailOptions: tn
   });
   let x = _$$H();
-  let y = d4(e => e.fileVersion);
+  let y = useSelector(e => e.fileVersion);
   let _ = ZC(y);
   if (useEffect(() => {
     f?.state === "LOADED" && f?.currentAssetData?.nodeData?.playgroundGUID && null != _ && _ !== y && (x(), glU.clearPlaygroundScene());
@@ -675,15 +675,15 @@ export function $$tu1({
   } = JA();
   let ec = fV(e.library_key);
   let eu = q5();
-  let ep = wA();
-  let eh = d4(e => _$$e_(e).local.thumbnails);
+  let ep = useDispatch();
+  let eh = useSelector(e => _$$e_(e).local.thumbnails);
   let em = _$$H();
   let eg = useCallback(({
     source: e
   }) => {
     "outside" !== e && closeFlyout();
   }, [closeFlyout]);
-  let ef = d4(e => e.instanceSwapPickerShown);
+  let ef = useSelector(e => e.instanceSwapPickerShown);
   let ex = _$$k2();
   let ey = tM(O ?? "assets-panel");
   _$$h(() => {

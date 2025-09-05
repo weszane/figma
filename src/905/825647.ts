@@ -1,4 +1,4 @@
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { kD, J3, kN, JU } from "../figma_app/622574";
 import { q5 } from "../figma_app/516028";
 import { x } from "../905/619833";
@@ -8,7 +8,7 @@ export function $$d0() {
   let e = !!kD();
   let t = J3();
   let i = q5();
-  let d = wA();
+  let d = useDispatch();
   return {
     openCooperPublishFlow: async n => {
       if (i) {

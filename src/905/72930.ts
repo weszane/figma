@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { O } from "../905/969533";
 import { Ay } from "@stylexjs/stylex";
 import { Pt } from "../figma_app/806412";
@@ -29,7 +29,7 @@ export function $$b1(e, t, i, n) {
 export function $$v0({
   ariaLabelledBy: e
 }) {
-  let t = wA();
+  let t = useDispatch();
   let i = Um();
   let l = eY();
   let u = null;

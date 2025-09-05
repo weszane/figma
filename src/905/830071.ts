@@ -1,12 +1,12 @@
 import { sceneDocumentType } from '../905/582379'
 import { StateSourceType } from '../figma_app/175377'
-import { TSSceneGraph as SceneGraphBase } from '../figma_app/518682'
+import { TSSceneGraph } from '../figma_app/518682'
 
 /**
  * SceneGraph extends the base TSSceneGraph for plugin state source.
  * (Original: $$s1)
  */
-export class SceneGraph extends SceneGraphBase {
+export class SceneGraph extends TSSceneGraph {
   /**
    * @param e - Initialization parameter for the scene graph.
    */

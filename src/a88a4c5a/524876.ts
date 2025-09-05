@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { memo, useState, useRef, useCallback, useEffect } from "react";
-import { wA, d4, Pj } from "../vendor/514228";
+import { useDispatch, useSelector, useStore } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
 import { K as _$$K } from "../905/443068";
 import { $n } from "../905/521428";
@@ -69,7 +69,7 @@ let c = memo(function (e) {
 });
 var m = g;
 function J(e) {
-  let t = wA();
+  let t = useDispatch();
   let {
     attachments
   } = e;
@@ -155,18 +155,18 @@ export function $$ed1(e) {
   } = e;
   let eh = q5();
   let eg = eh?.key || null;
-  let em = d4(e => e.currentUserOrgId);
+  let em = useSelector(e => e.currentUserOrgId);
   let ef = eh?.teamId;
-  let ey = d4(e => e.orgUsersByOrgId);
+  let ey = useSelector(e => e.orgUsersByOrgId);
   let e_ = _$$i();
-  let eb = d4(e => e.comments.editingComment);
+  let eb = useSelector(e => e.comments.editingComment);
   let ej = !!_$$f("has_mentioned_pending_user_invite");
   let ev = !!_$$f("has_mentioned_pending_user_invite_twice");
   let eC = Xr(_$$H);
   let [ek, eE] = useState(!1);
   let eS = lg();
   let ew = HW();
-  let eR = d4(e => e.comments.activeDragTarget);
+  let eR = useSelector(e => e.comments.activeDragTarget);
   let eL = _$$y();
   let eT = md(_$$H);
   let eI = _$$eR(e.threadId) && eL({
@@ -189,7 +189,7 @@ export function $$ed1(e) {
       setHyperlinkEditorRef(editorRef);
     }
   }, [setHyperlinkLocation, setHyperlinkEditorRef, editorRef]);
-  let eA = Pj();
+  let eA = useStore();
   useEffect(() => {
     let t = !_$$eR(e.threadId);
     uE("Comment composer opened", eA.getState(), {
@@ -199,7 +199,7 @@ export function $$ed1(e) {
       has_opened_comments_modal: !0
     }));
   }, [eA, e.threadId, Z]);
-  let eM = d4(e => e.comments.emojiPicker);
+  let eM = useSelector(e => e.comments.emojiPicker);
   let eO = useCallback(() => eM?.visible ? (eM.onCancel?.(), dispatch(RI({
     visible: !1
   })), !0) : (e.editorRef.current && e.editorRef.current.handleEscape(), !1), [e.editorRef, eM, dispatch]);

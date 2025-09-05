@@ -1,5 +1,5 @@
 import { useState, useCallback, useEffect } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { n7 } from "../905/926523";
 import { GH, VP } from "../905/18797";
 import { aP } from "../figma_app/10554";
@@ -16,9 +16,9 @@ var $$n0;
     e[e.INFO = 6] = "INFO";
   })(e.Step || (e.Step = {}));
   e.usePublishModalStateMachine = function (e) {
-    let t = wA();
-    let i = d4(e => e.authedProfilesById);
-    let n = d4(e => e.loadingState);
+    let t = useDispatch();
+    let i = useSelector(e => e.authedProfilesById);
+    let n = useSelector(e => e.loadingState);
     let c = iZ();
     let [u, p] = useState(() => 0 === e.initialStep ? Object.values(i).some(e => e.associated_users?.every(e => e.user_id !== c?.id)) ? 3 : 2 : 1 === e.initialStep ? e.publisher?.profile_created ? 4 : 6 : e.initialStep);
     let [m, h] = useState();

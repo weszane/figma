@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { rcl, NLJ } from "../figma_app/763686";
 import { sx } from "../905/449184";
 import { Ay } from "../905/612521";
@@ -61,7 +61,7 @@ export function $$u0(e) {
   });
 }
 export function $$p1() {
-  let e = wA();
+  let e = useDispatch();
   return useCallback(t => {
     $$u0(t);
     e(Ts({

@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { H as _$$H } from "../905/507464";
 import { j as _$$j } from "../905/206476";
 import { P } from "../905/697522";
@@ -24,7 +24,7 @@ import { vr } from "../figma_app/514043";
 import { Ju } from "../905/102752";
 import { OJ } from "../905/519092";
 function N(e) {
-  let t = wA();
+  let t = useDispatch();
   let [a, r] = useState(!1);
   let l = () => {
     t(AS());
@@ -99,7 +99,7 @@ function T({
   });
 }
 export let $$A0 = Ju(function (e) {
-  let t = wA();
+  let t = useDispatch();
   let a = o0(e.invoice);
   let s = new vr(e.invoice.currency);
   let _ = _k(e.invoice);

@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { PureComponent } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { bL, c$ } from "../905/867927";
 import { q } from "../905/932270";
 import { t as _$$t } from "../905/947268";
@@ -70,8 +70,8 @@ export class $$m0 extends PureComponent {
   }
 }
 export function $$g1(e) {
-  let t = wA();
-  let r = d4(t => t.viewBarViewModeOptionByView[e.viewId]) ?? e.defaultOptions.viewMode;
+  let t = useDispatch();
+  let r = useSelector(t => t.viewBarViewModeOptionByView[e.viewId]) ?? e.defaultOptions.viewMode;
   return jsx(h, {
     viewMode: r,
     onViewModeChange: r => {

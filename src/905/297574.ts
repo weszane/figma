@@ -1,5 +1,5 @@
 import { useMemo, useContext } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { zl } from "../figma_app/27355";
 import { qp } from "../905/977779";
 import { aV } from "../905/405710";
@@ -25,12 +25,12 @@ export function $$A2({
   let h = function ({
     libraryKey: e
   }) {
-    let t = wA();
-    let i = d4(dK);
-    let a = d4(e_);
-    let s = d4(vx);
-    let o = d4(C9);
-    let l = d4(jf);
+    let t = useDispatch();
+    let i = useSelector(dK);
+    let a = useSelector(e_);
+    let s = useSelector(vx);
+    let o = useSelector(C9);
+    let l = useSelector(jf);
     return useMemo(() => e ? (TE(i, o, l, a.publishedByLibraryKey, s, t)[e] ?? []).map(e => e.type === PW.COMPONENT ? {
       ...e,
       num_existing_instances: 0,
@@ -49,9 +49,9 @@ export function $$A2({
   return o ? l : h;
 }
 export function $$y0(e) {
-  let t = d4(dK);
-  let i = d4(C9);
-  let a = d4(jf);
+  let t = useSelector(dK);
+  let i = useSelector(C9);
+  let a = useSelector(jf);
   return useMemo(() => i.filter(i => {
     let n = t.get(i);
     return n?.isLooseComponent && n.sourceLibraryKey === e;

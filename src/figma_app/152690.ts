@@ -1,5 +1,5 @@
 import { useCallback, useMemo } from "react";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { c2 } from "../905/382883";
 import { UU } from "../figma_app/397267";
 import { Z_n, VD3, e0R, CWU, rXF, j0r, w3z } from "../figma_app/763686";
@@ -79,7 +79,7 @@ export function $$et7() {
   };
 }
 export function $$er24(e) {
-  let t = d4(dK);
+  let t = useSelector(dK);
   let [r] = lJ("variableConsumptionInfo");
   let a = useCallback(r => {
     for (let n of e) {
@@ -213,7 +213,7 @@ export function $$ed15(e = 0) {
   return k9(() => E7(t)?.variableSetKeyToPageLevelPresetMode || {}, [t]);
 }
 export function $$ec17(e = 0) {
-  let t = wA();
+  let t = useDispatch();
   let r = lJ("numSelectedByType")[0];
   let s = function () {
     let e = hA();
@@ -319,7 +319,7 @@ export function $$ef23(e, t) {
 export function $$eE13() {
   let e = eR();
   let t = md(I7);
-  let r = d4(e => $u(e));
+  let r = useSelector(e => $u(e));
   return r && e ? 1 : !r && t ? 1 : 0;
 }
 export function $$ey28(e, t, r) {
@@ -539,7 +539,7 @@ export function $$ew21(e) {
   return _$$u(r);
 }
 export function $$eO0(e) {
-  return d4(t => {
+  return useSelector(t => {
     let r = E7(t.mirror.selectionProperties.variableConsumptionInfo)?.variableNotMatchingSetValue || {};
     let n = e.map(e => {
       let t = r[e] ?? void 0;

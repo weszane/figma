@@ -1,5 +1,5 @@
 import { useState, useCallback, useMemo, useRef, useEffect, useContext } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { Ez5 } from "../figma_app/763686";
 import { AD } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
@@ -59,7 +59,7 @@ export function $$k3(e, t, i) {
 }
 export function $$R1(e, t, i, l, d) {
   let c = _$$s();
-  let h = wA();
+  let h = useDispatch();
   let g = eY();
   let f = ut(Ez5?.singleSlideView().focusedNodeId, null);
   let _ = f && f !== AD;
@@ -140,7 +140,7 @@ export function $$N6(e, t) {
 export function $$P5(e, t) {
   let i = useContext(hh);
   let a = useMemo(() => $$k3(i.threads, []), [i.threads]);
-  let s = d4(e => e.comments.newComment);
+  let s = useSelector(e => e.comments.newComment);
   return useMemo(() => e === hm ? JG(e, s, t) : a.find(t => t.id === e) || null, [s, e, a, t]);
 }
 export function $$O4(e, t, i, a, s, o) {
@@ -148,7 +148,7 @@ export function $$O4(e, t, i, a, s, o) {
   useEffect(() => {
     e && d(e === i);
   }, [e, i]);
-  let c = wA();
+  let c = useDispatch();
   let u = I_();
   let p = _$$s();
   let g = Z("comments-navigate");
@@ -182,8 +182,8 @@ export function $$O4(e, t, i, a, s, o) {
   return l;
 }
 export function $$D0(e, t) {
-  let i = d4(e => e.comments.newComment);
-  let a = wA();
+  let i = useSelector(e => e.comments.newComment);
+  let a = useDispatch();
   let s = I_().writeAPI;
   let o = _$$s();
   return useCallback(() => {

@@ -5,7 +5,7 @@ import { FContainerType, FFileType, FAccessLevelType } from "../figma_app/191312
 import { A5 } from "../figma_app/707808";
 import { n as _$$n, a as _$$a } from "../905/114254";
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { hS } from "../905/437088";
 import { bL, Rq } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
@@ -112,7 +112,7 @@ import { A as _$$A1 } from "../svg/619883";
 let y = Ju(function ({
   open: e
 }) {
-  let t = wA();
+  let t = useDispatch();
   let i = ol();
   let n = i?.student_team ? _$$tx("templates.limit_modal.student") : _$$tx("templates.limit_modal.professional");
   let a = () => {
@@ -567,7 +567,7 @@ function tr({
   let {
     publishableComponentNodeIds,
     localComponents
-  } = d4(Pn, c2);
+  } = useSelector(Pn, c2);
   return "loading" !== status && data && s ? jsx(fu, {
     name: _$$e.TEAM_TEMPLATE_PUBLISH_MODAL_V2,
     properties: {
@@ -595,7 +595,7 @@ function ta({
 }) {
   let a;
   let s;
-  let o = wA();
+  let o = useDispatch();
   let l = q5();
   let u = lg();
   let {
@@ -899,7 +899,7 @@ function tI({
   let s = t.find(t => t.scope === e);
   let o = useRef(null);
   let l = Um()?.type === tA;
-  let u = wA();
+  let u = useDispatch();
   return getFeatureFlags().figjam_fpl_template_publish_scope ? jsxs(_$$bL, {
     value: e,
     onChange: i,
@@ -1072,7 +1072,7 @@ function tO({
   let h = cD();
   let g = e.name;
   let A = e.team;
-  let y = wA();
+  let y = useDispatch();
   let E = useRef(null);
   let [x, C] = useState();
   let [k, R] = useState(!1);
@@ -1115,7 +1115,7 @@ function tO({
     initiateTemplatePublish: _initiateTemplatePublish2,
     publishInProgress: _publishInProgress2
   } = function () {
-    let e = wA();
+    let e = useDispatch();
     let t = md(J);
     let i = Xr(ee);
     let n = "PUBLISH_TEMPLATE_INITIATED" === t.state || "UNPUBLISH_TEMPLATE_INITIATED" === t.state;

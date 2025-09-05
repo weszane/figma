@@ -1,5 +1,5 @@
 import { useContext, useMemo, useCallback } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { glU } from "../figma_app/763686";
 import { sx } from "../905/449184";
 import { Rs } from "../figma_app/288654";
@@ -16,12 +16,12 @@ import { r as _$$r } from "../905/336143";
 import { VJ, Kw } from "../905/610995";
 import { MV, px, q, VV, $l, RJ } from "../905/131786";
 export function $$b3() {
-  let e = wA();
-  let t = d4(e => e.mirror.sceneGraph);
-  let i = d4(C9);
-  let a = d4(jf);
-  let s = d4(e => e.library);
-  let o = d4(e => e.fileVersion);
+  let e = useDispatch();
+  let t = useSelector(e => e.mirror.sceneGraph);
+  let i = useSelector(C9);
+  let a = useSelector(jf);
+  let s = useSelector(e => e.library);
+  let o = useSelector(e => e.fileVersion);
   let l = useContext(_$$r);
   return useMemo(() => MV(t, i, a, s.publishedByLibraryKey, o, l?.allUsedStylesByLibraryKey || {}, e), [t, i, a, s.publishedByLibraryKey, o, l, e]);
 }
@@ -29,7 +29,7 @@ export function $$v1({
   fromLibraryKey: e,
   toLibraryKey: t
 }) {
-  let i = function(e) {
+  let i = function (e) {
     let t = $$b3()[e];
     return px(t);
   }(e);
@@ -54,7 +54,7 @@ export function $$E4(e) {
   }).status;
 }
 function x(e) {
-  let t = function(e) {
+  let t = function (e) {
     let t = Rs(H6B, {
       libraryKey: e || ""
     }, {
@@ -83,7 +83,7 @@ function x(e) {
 export function $$S0(e) {
   let t = tS();
   let i = VJ(e);
-  let o = wA();
+  let o = useDispatch();
   let l = Kw(e);
   let {
     styles,
@@ -154,4 +154,4 @@ export const GK = $$S0;
 export const LM = $$v1;
 export const TK = $$I2;
 export const lh = $$b3;
-export const nX = $$E4; 
+export const nX = $$E4;

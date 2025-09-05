@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useMemo, useCallback, useEffect } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk, Wk } from "../figma_app/272243";
@@ -88,7 +88,7 @@ function X() {
 }
 let et = "folder_creation_modal--sectionHeader--EcWYc text--fontPos11--2LvXf text--_fontBase--QdLsd";
 export function $$er0(e) {
-  let t = wA();
+  let t = useDispatch();
   let [r, U] = useState("");
   let [W, $] = useState(!1);
   let [G, V] = useState(0);
@@ -96,9 +96,9 @@ export function $$er0(e) {
   let H = _$$h.useTrackingContext({
     trigger: _$$b3.FOLDER_CREATION_MODAL
   });
-  let K = d4(e => e.contacts);
-  let Y = d4(e => e.dropdownShown);
-  let J = d4(e => e.autocomplete);
+  let K = useSelector(e => e.contacts);
+  let Y = useSelector(e => e.dropdownShown);
+  let J = useSelector(e => e.autocomplete);
   let er = iZ();
   let ea = Rs(mCn, {
     teamId: e.teamId

@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useMemo } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { isNotNullish } from "../figma_app/95419";
 import { j0r } from "../figma_app/763686";
 import { R as _$$R } from "../905/103090";
@@ -23,26 +23,26 @@ import { X } from "../905/839893";
 import { VZ, x0 } from "../figma_app/727192";
 import { nd, _p } from "../figma_app/826998";
 export function $$$$N1() {
-  let e = d4(e => e.mirror.selectionProperties.strokePaints);
+  let e = useSelector(e => e.mirror.selectionProperties.strokePaints);
   let t = !e || gl(e) ? [] : e.filter(e => e.visible);
   let r = uQ();
   let n = Q();
   let c = v4();
   let b = m0();
   let v = pF(e => _$$b(e.mirror.selectionProperties, "inheritFillStyleKeyForStroke"));
-  let A = d4(e => e.mirror.selectionProperties.styleIdForStrokeFill);
+  let A = useSelector(e => e.mirror.selectionProperties.styleIdForStrokeFill);
   let x = Fk((e, t) => t ? e.getStyleNodeByRef(t)?.guid : void 0, A?.assetRef);
-  let N = d4(e_);
+  let N = useSelector(e_);
   let w = kl("inheritFillStyleKeyForStroke");
   let L = w && hS(w) ? Gp(w, x ? [x] : [], N) : void 0;
-  let P = d4(e => e.mirror.selectionProperties.borderSharedWeight || e.mirror.selectionProperties.strokeWeight) || 1;
+  let P = useSelector(e => e.mirror.selectionProperties.borderSharedWeight || e.mirror.selectionProperties.strokeWeight) || 1;
   let D = _$$R(e => ({
     borderTopWeight: e.mirror.selectionProperties.borderTopWeight,
     borderRightWeight: e.mirror.selectionProperties.borderRightWeight,
     borderBottomWeight: e.mirror.selectionProperties.borderBottomWeight,
     borderLeftWeight: e.mirror.selectionProperties.borderLeftWeight
   }));
-  let k = d4(e => e.mirror.selectionProperties.strokeAlign) || "OUTSIDE";
+  let k = useSelector(e => e.mirror.selectionProperties.strokeAlign) || "OUTSIDE";
   let M = uQ();
   let F = Ig();
   let j = t.filter(bm).map(e => dc(e, F, j0r.STROKE));
@@ -50,7 +50,7 @@ export function $$$$N1() {
     let e = L && v ? [rP(v, L, j)] : j;
     return QT(e, r, n.inspectionMode, c, b);
   }, [L, v, j, r, n.inspectionMode, c, b]);
-  let B = d4(C);
+  let B = useSelector(C);
   return useMemo(() => {
     if (!M || U.length < 1 || !P) return [];
     let e = O(P, [D.borderTopWeight, D.borderRightWeight, D.borderBottomWeight, D.borderLeftWeight].filter(isNotNullish));
@@ -140,7 +140,7 @@ export function $$P0({
   isSubsection: r
 }) {
   let i = m0();
-  let s = d4(e => e.mirror.selectionProperties.numSelected) || 0;
+  let s = useSelector(e => e.mirror.selectionProperties.numSelected) || 0;
   let o = $$$$N1();
   let l = T4.useCopyAllStrokes(o);
   return 1 !== s || o.length < 1 ? null : jsx(VZ, {

@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { U } from "../figma_app/901889";
 import { nF } from "../905/350402";
 import { gU } from "../figma_app/147952";
@@ -39,7 +39,7 @@ export let $$A0 = nF((e, t) => {
 export function $$y1() {
   let e = U();
   let t = cW();
-  let i = wA();
+  let i = useDispatch();
   let s = TA() ?? void 0;
   return useCallback(n => {
     let r = _(n);

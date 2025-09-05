@@ -1,5 +1,5 @@
 import { jsx } from "react/jsx-runtime";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { nR } from "../figma_app/637027";
 import { s as _$$s } from "../cssbuilder/589278";
 import { tx } from "../905/303541";
@@ -12,7 +12,7 @@ import { wN } from "../figma_app/53721";
 import { S } from "../905/404161";
 var $$f1 = (e => (e.FigJamPluginTile = "figjam_plugin_tile", e))($$f1 || {});
 export function $$_0(e) {
-  let t = wA();
+  let t = useDispatch();
   let {
     version,
     isPlugin,

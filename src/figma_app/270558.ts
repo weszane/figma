@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useCallback } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, nB } from "../figma_app/272243";
@@ -13,7 +13,7 @@ import { Ju } from "../905/102752";
 import { b } from "../905/791493";
 import { planPickerModalBody, workspaceSelectorModalInner } from "../figma_app/727769";
 export let $$f0 = Ju(function (e) {
-  let t = wA();
+  let t = useDispatch();
   let r = useCallback(() => {
     t(Ce());
   }, [t]);

@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useMemo, forwardRef, useRef, useState, useCallback } from "react";
-import { Pj } from "../vendor/514228";
+import { useStore } from "../vendor/514228";
 import { K as _$$K } from "../905/443068";
 import { $n } from "../905/521428";
 import { A as _$$A } from "../905/593436";
@@ -184,7 +184,7 @@ export function $$H3({
   let et = !(t.length > 0 || k);
   let er = et && u.length > 0;
   let en = getFeatureFlags().first_draft_prompt_history && _.length > 0 && et;
-  let ei = Pj().getState();
+  let ei = useStore().getState();
   let ea = qI();
   let es = document.activeElement?.tagName === "TEXTAREA";
   kz(Uz.TAB, e => {

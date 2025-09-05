@@ -1,5 +1,5 @@
 import { useCallback, useMemo } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { l7 } from "../905/189185";
 import { t as _$$t } from "../905/303541";
 import { mG } from "../figma_app/15924";
@@ -36,7 +36,7 @@ export function $$O0({
     canRun,
     canRequest
   } = e;
-  let D = wA();
+  let D = useDispatch();
   let {
     close
   } = cq();
@@ -46,7 +46,7 @@ export function $$O0({
   let U = Kp(e);
   let B = function (e) {
     let t = TA();
-    let r = d4(e => e.authedActiveCommunityProfile);
+    let r = useSelector(e => e.authedActiveCommunityProfile);
     let a = ej(e);
     return useCallback(() => {
       if (!e) return;

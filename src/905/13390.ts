@@ -74,7 +74,7 @@ import { eD } from '../figma_app/876459';
 import { Fb, iN, qP, X7 } from '../figma_app/909778';
 import { ai } from '../figma_app/915202';
 import { g4 as _$$g, b4, n_ } from '../figma_app/937413';
-import { wA } from '../vendor/514228';
+import { useDispatch } from '../vendor/514228';
 function v({
   children: e,
   portalTarget: t,
@@ -122,7 +122,7 @@ export function $$eT1() {
 }
 export function $$ek0(e) {
   let t = FC();
-  let i = wA();
+  let i = useDispatch();
   let {
     user,
     currentUserOrgId

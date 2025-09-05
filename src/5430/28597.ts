@@ -69,7 +69,7 @@ import { A as _$$A4 } from "../svg/638213";
 import { z as _$$z } from "../5430/158228";
 import { UH, G as _$$G2, Ev, tx as _$$tx2, Rc, D9, OC, $h, tJ, hV } from "../5430/920085";
 import { A as _$$A5 } from "../5724/663128";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { C as _$$C } from "../905/222694";
 import { sx } from "../905/449184";
 import { o as _$$o2 } from "../figma_app/70618";
@@ -845,7 +845,7 @@ function e6({
   rdpImpressionId: t,
   openLightboxRDP: r
 }) {
-  let i = wA();
+  let i = useDispatch();
   let n = qD(e);
   let o = e.thumbnail_url;
   let l = !!e.thumbnail_is_set;
@@ -885,7 +885,7 @@ function te({
   rdpImpressionId: t,
   openLightboxRDP: r
 }) {
-  let i = wA();
+  let i = useDispatch();
   let n = qD(e);
   let o = n.redirect_icon_url;
   let a = _t({
@@ -918,7 +918,7 @@ function tt({
   rdpImpressionId: t,
   openLightboxRDP: r
 }) {
-  let i = wA();
+  let i = useDispatch();
   let n = qD(e);
   let o = n.redirect_snapshot_url;
   let a = _t({

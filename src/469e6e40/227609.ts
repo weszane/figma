@@ -2,7 +2,7 @@ import _require2 from "../0c62c2fd/586544";
 import _require from "../0c62c2fd/322783";
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useMemo, useCallback, useRef, useState, useEffect } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { N as _$$N } from "../905/438674";
@@ -189,8 +189,8 @@ function $({
 function B({
   team: e
 }) {
-  let t = wA();
-  let a = d4(e => e.avatarEditorState);
+  let t = useDispatch();
+  let a = useSelector(e => e.avatarEditorState);
   let n = S2().unwrapOr(null);
   let s = Rs(sMZ, {
     name: "seen_connected_project_in_admin_dashboard_banner"
@@ -1139,7 +1139,7 @@ function tG(e) {
     settingsData
   } = e;
   let s = _$$R();
-  let r = wA();
+  let r = useDispatch();
   let d = e.billing.summary.annual_subscription;
   let c = e.billing.summary.monthly_subscription;
   let _ = e.billing.summary.shipping_address;
@@ -1841,7 +1841,7 @@ function ak(e) {
   });
 }
 function aA(e) {
-  let t = wA();
+  let t = useDispatch();
   let a = bQ({
     planType: FOrganizationLevelType.TEAM,
     planId: e.team.id
@@ -1985,7 +1985,7 @@ function aR(e) {
   });
 }
 function aO(e) {
-  let t = wA();
+  let t = useDispatch();
   let a = _$$R3();
   let n = useCallback((a, n) => {
     t(sf({
@@ -2079,7 +2079,7 @@ function aO(e) {
   });
 }
 function aP(e) {
-  let t = wA();
+  let t = useDispatch();
   let a = No();
   let n = a?.data?.tier === FPlanNameType.STUDENT;
   let [s, o, d] = _$$t2.useManagedTabs({
@@ -2146,9 +2146,9 @@ let a$ = M4.Query({
   })).data
 });
 export function $$aB1(e, t) {
-  let a = d4(t => t.teams[e]);
+  let a = useSelector(t => t.teams[e]);
   let n = iZ();
-  let s = d4(t => t.teamMembersByTeamId[e]);
+  let s = useSelector(t => t.teamMembersByTeamId[e]);
   return useMemo(() => t.transform(e => {
     if (!n || !a || !s) return {};
     let t = e.team?.isOwner;
@@ -2169,8 +2169,8 @@ export function $$aB1(e, t) {
 }
 export function $$aG0(e) {
   let t;
-  let a = wA();
-  let n = d4(e => e.teams);
+  let a = useDispatch();
+  let n = useSelector(e => e.teams);
   let s = n[e.teamId];
   let k = px();
   let E = W8(k);
@@ -2198,13 +2198,13 @@ export function $$aG0(e) {
     canEdit: !!e.team?.canEdit,
     canRead: !!e.team?.canRead
   })), [T]);
-  let D = d4(e => e.loadingState);
-  let P = d4(e => e.teamBilling);
-  let U = d4(e => e.dropdownShown);
+  let D = useSelector(e => e.loadingState);
+  let P = useSelector(e => e.teamBilling);
+  let U = useSelector(e => e.dropdownShown);
   let F = $$aB1(e.teamId, T);
   let q = function (e, t) {
-    let a = wA();
-    let n = d4(t => e && t.userTeamFlags?.[e]?.[aq]);
+    let a = useDispatch();
+    let n = useSelector(t => e && t.userTeamFlags?.[e]?.[aq]);
     let [s] = IT(a$({
       teamId: e
     }), {

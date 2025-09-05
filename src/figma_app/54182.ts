@@ -1,5 +1,5 @@
 import { jsx } from "react/jsx-runtime";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { EJ } from "../figma_app/930338";
 import { t as _$$t } from "../905/303541";
 import { $D } from "../figma_app/789";
@@ -33,7 +33,7 @@ function g(e, t, r) {
 }
 export function $$f0(e) {
   let t = iZ();
-  let r = d4(e => e.multiplayer);
+  let r = useSelector(e => e.multiplayer);
   let a = q();
   let s = cJ();
   let u = "user" in e ? `user-${e.user.id}` : `role-${e.role.id}`;
@@ -63,7 +63,7 @@ export function $$f0(e) {
     }({
       localUser: t,
       tooltipUser: e,
-      multiplayer: d4(e => e.multiplayer),
+      multiplayer: useSelector(e => e.multiplayer),
       isInWorkshop: $D(),
       selectedView: _6()
     });

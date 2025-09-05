@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback, useState } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
@@ -21,7 +21,7 @@ import { _9, J4, Kd, Iz, YU } from "../figma_app/907616";
 import { w } from "../905/733703";
 import { DA, Lq, $2, VA, bV, E_ } from "../figma_app/538002";
 export let $$S0 = Ju(function (e) {
-  let t = wA();
+  let t = useDispatch();
   let a = dr(e.team.id).data;
   let n = a && a.workspace ? {
     id: a.workspace.id,
@@ -75,7 +75,7 @@ export let $$S0 = Ju(function (e) {
 }, "TeamAccessModal");
 export function $$T1(e) {
   let t = getFeatureFlags().sc_workspace_audience;
-  let a = wA();
+  let a = useDispatch();
   let i = useCallback(() => {
     let t = e.teamSharingSettings && e.teamSharingSettings.sharingAudienceControl;
     return t === FPermissionLevelType.ORG_EDIT || t === FPermissionLevelType.ORG_VIEW ? _9.ORG : t === FPermissionLevelType.WORKSPACE_EDIT || t === FPermissionLevelType.WORKSPACE_VIEW ? _9.WORKSPACE : _9.INVITE_ONLY;

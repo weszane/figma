@@ -1,5 +1,5 @@
 import { useMemo, useRef } from "react";
-import { bN } from "../vendor/514228";
+import { shallowEqual } from "../vendor/514228";
 import { isNotNullish } from "../figma_app/95419";
 import { Iz, eU, md, zl } from "../figma_app/27355";
 import { Bq } from "../905/760682";
@@ -9,7 +9,7 @@ import { LH } from "../905/872904";
 import { IT, M4 } from "../905/713695";
 var $$n0;
 let m = Iz(() => eU(null));
-let h = Iz(e => eU(t => e.map(e => t(m(e)))), bN);
+let h = Iz(e => eU(t => e.map(e => t(m(e)))), shallowEqual);
 let $$g3 = eU(null, (e, t, i) => {
   i.filter(isNotNullish).forEach(e => {
     t(m(e.library_key), e);

@@ -13,7 +13,7 @@ import { DP } from "../905/640017";
 import { Z as _$$Z } from "../905/823863";
 import { o as _$$o } from "../905/237202";
 import { p as _$$p } from "../figma_app/378458";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { r as _$$r } from "../figma_app/67145";
 import { Dm } from "../figma_app/8833";
 import { Um, BK } from "../905/848862";
@@ -97,7 +97,7 @@ function M({
 function j(e) {
   let [t, i] = useState(void 0);
   let [a, s] = useState(void 0);
-  let o = wA();
+  let o = useDispatch();
   let l = Um();
   let d = useMemo(() => ({
     inputClassName: "edit_preview_toolbar--input--FPZy0 text--fontNeg11--StdFq text--_fontBase--QdLsd text--_negText--j9g-L",

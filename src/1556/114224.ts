@@ -1,4 +1,4 @@
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { K } from "../905/498709";
 import { j7, oB } from "../905/929976";
 import { q } from "../1556/198651";
@@ -9,7 +9,7 @@ let {
   useRegisterMenu
 } = K();
 export function $$u1() {
-  let e = wA();
+  let e = useDispatch();
   return {
     open: () => {
       q() ? open() : e(j7({

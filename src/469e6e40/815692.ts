@@ -186,7 +186,7 @@ import { A as _$$A8 } from '../svg/619883';
 import { A as _$$A3 } from '../svg/678521';
 import { A as _$$A2 } from '../svg/783138';
 import t4 from '../vendor/128080';
-import { d4, wA } from '../vendor/514228';
+import { useSelector, useDispatch } from '../vendor/514228';
 import nJ from '../vendor/523035';
 import { _ as _$$_ } from '../vendor/853977';
 function B(e) {
@@ -266,9 +266,9 @@ function B(e) {
   });
 }
 let G = Ju(() => {
-  let e = wA();
-  let t = d4(e => e.orgById[e.currentUserOrgId]);
-  let a = d4(e => e.orgSamlConfig);
+  let e = useDispatch();
+  let t = useSelector(e => e.orgById[e.currentUserOrgId]);
+  let a = useSelector(e => e.orgSamlConfig);
   let s = !a.config;
   let r = () => e(Lo());
   return jsx(OJ, {
@@ -341,7 +341,7 @@ function ec() {
   });
 }
 function e_(e) {
-  let t = wA();
+  let t = useDispatch();
   let [a, r] = useState(!1);
   let l = ZC(e.mfaRequiredSetting);
   let o = l === CT.GUESTS || l === CT.ALL_USERS;
@@ -408,9 +408,9 @@ function e_(e) {
   });
 }
 let eu = Ju(() => {
-  let e = wA();
-  let t = d4(e => e.orgById[e.currentUserOrgId]);
-  let a = d4(e => e.orgSamlConfig);
+  let e = useDispatch();
+  let t = useSelector(e => e.orgById[e.currentUserOrgId]);
+  let a = useSelector(e => e.orgSamlConfig);
   let r = _g(t);
   let [l, o] = useState(r);
   let d = function (e) {
@@ -502,7 +502,7 @@ let ej = 'billing_emails_modal--icon--KUryt';
 let ey = 'billing_emails_modal--description_section--3-x5B';
 let ew = 'billing_emails_modal--subtitle--AtE9I';
 let eC = Ju(e => {
-  let t = wA();
+  let t = useDispatch();
   let s = () => t(Lo());
   _$$A.extend(r);
   _$$A(e.subscriptionStart).format('Do');
@@ -587,8 +587,8 @@ function eA() {
   return md(eT);
 }
 let te = Ju(e => {
-  let t = wA();
-  let a = d4(e => e.orgById[e.currentUserOrgId]);
+  let t = useDispatch();
+  let a = useSelector(e => e.orgById[e.currentUserOrgId]);
   let s = hS(e);
   return jsx(bL, {
     manager: s,
@@ -626,7 +626,7 @@ let te = Ju(e => {
   });
 }, 'DELETE_ORG_MODAL');
 let tt = Ju(e => {
-  let t = wA();
+  let t = useDispatch();
   let a = sZ();
   let r = hS(e);
   let [l, o] = useState(_$$Rs());
@@ -683,8 +683,8 @@ let tt = Ju(e => {
   });
 }, 'DELETE_ORG_USER_MODAL');
 let ta = Ju(e => {
-  let t = wA();
-  let a = d4(e => e.orgById[e.currentUserOrgId]);
+  let t = useDispatch();
+  let a = useSelector(e => e.orgById[e.currentUserOrgId]);
   let s = hS(e);
   return jsx(bL, {
     manager: s,
@@ -1060,7 +1060,7 @@ let tS = Ju(e => {
     onClose
   } = e;
   let r = hS(e);
-  let l = wA();
+  let l = useDispatch();
   let [o, d] = useState(!org.ai_features_disabled);
   let c = eA();
   let _ = [...(c?.data?.org?.workspaces ?? [])];
@@ -1135,7 +1135,7 @@ let tN = Ju(({
   onClose: t,
   workspace: a
 }) => {
-  let r = wA();
+  let r = useDispatch();
   let l = _$$t('org_settings.ai_controls.workspace_success');
   let [o, d] = useState(tR(a));
   let c = useCallback(() => {
@@ -1204,7 +1204,7 @@ let tI = Ju(({
   goBack: e,
   workspace: t
 }) => {
-  let a = wA();
+  let a = useDispatch();
   let s = _$$t('org_settings.ai_controls.workspace_success');
   let r = hS({
     open: !0,
@@ -1300,9 +1300,9 @@ function tR(e) {
 let tD = 'autogen_password_controls_modal--radioLabel--tmcmf';
 let tP = e => e ? 'autogen' : 'custom';
 let tU = Ju(() => {
-  let e = wA();
+  let e = useDispatch();
   let t = _$$t('org_settings.autogen_password_controls.success');
-  let a = d4(e => e.orgById[e.currentUserOrgId]);
+  let a = useSelector(e => e.orgById[e.currentUserOrgId]);
   let r = Rs(RcX, {
     orgId: a.id
   });
@@ -1384,8 +1384,8 @@ let tU = Ju(() => {
   });
 }, 'AutogenPasswordControlsModal');
 let tF = Ju(() => {
-  let e = wA();
-  let t = d4(e => e.orgById[e.currentUserOrgId]);
+  let e = useDispatch();
+  let t = useSelector(e => e.orgById[e.currentUserOrgId]);
   let a = () => e(Lo());
   return jsx(OJ, {
     title: _$$t('settings_tab.scim_metadata_modal.member_metadata'),
@@ -1699,7 +1699,7 @@ function tX(e) {
   }, e.token.name);
 }
 let tQ = Ju(e => {
-  let t = wA();
+  let t = useDispatch();
   let a = () => t(Lo());
   return jsx(OJ, {
     title: _$$t('settings_tab.connected_apps.revoke_app', {
@@ -1747,7 +1747,7 @@ let tQ = Ju(e => {
   });
 }, 'REVOKE_APP_MODAL');
 let tZ = Ju(e => {
-  let t = wA();
+  let t = useDispatch();
   let [a, r] = useState([]);
   let [l, o] = useState(!0);
   useEffect(() => {
@@ -1804,7 +1804,7 @@ let tZ = Ju(e => {
   });
 }, 'ConnectedAppsModal');
 let t0 = Ju(e => {
-  let t = wA();
+  let t = useDispatch();
   return jsx(OJ, {
     title: e.token.name,
     onClose: () => t(Lo()),
@@ -1881,7 +1881,7 @@ function aj({
   let l = S2().unwrapOr(null);
   let o = H3(l);
   let d = l?.name;
-  let c = wA();
+  let c = useDispatch();
   let _ = jsx(CY, {
     onClick: () => {
       if (_$$eD) {
@@ -2065,7 +2065,7 @@ function aU({
   preferences: e
 }) {
   let t = sZ() || null;
-  let a = d4(e => e.whitelistedPlugins);
+  let a = useSelector(e => e.whitelistedPlugins);
   let [r, l] = useState(!1);
   let [o, d] = fp(aE);
   let [_, u] = fp(aA);
@@ -2303,7 +2303,7 @@ function az({
   preferences: e
 }) {
   let t = sZ() || null;
-  let a = wA();
+  let a = useDispatch();
   let [r, l] = fp(aS);
   let [o, d] = useState(null);
   let [c, _] = useState(!1);
@@ -2324,7 +2324,7 @@ function az({
       storeInRecentsKey: $A.Handoff
     }));
   }, [a]);
-  let b = d4(e => e.whitelistedPlugins);
+  let b = useSelector(e => e.whitelistedPlugins);
   return jsxs('div', {
     'className': _$$s.m16.$$if(!kA(t), _$$s.opacity0_5).$,
     'id': 'org-admin-codegen-settings',
@@ -2427,7 +2427,7 @@ function aV({
 function aW() {
   let e = sZ() || null;
   let t = JA();
-  let a = d4(e => e.whitelistedPlugins);
+  let a = useSelector(e => e.whitelistedPlugins);
   let [r, l] = fp(aC);
   let [o, d] = fp(aN);
   let [c, u] = fp(aI);
@@ -2505,7 +2505,7 @@ function aW() {
 }
 let aH = Ju(() => {
   let e = sZ() || null;
-  let t = wA();
+  let t = useDispatch();
   let a = IE();
   let [r, l] = fp(aC);
   let [o, d] = fp(aE);
@@ -2651,7 +2651,7 @@ function a2(e) {
 function a4({
   org: e
 }) {
-  let t = wA();
+  let t = useDispatch();
   let a = eA();
   let r = [...(a?.data?.org?.workspaces ?? [])];
   sortByPropertyWithOptions(r, 'name');
@@ -2730,9 +2730,9 @@ function a5({
   });
 }
 let a3 = Ju(e => {
-  let t = wA();
+  let t = useDispatch();
   let a = _$$t('org_settings.export_controls.success');
-  let r = d4(e => e.orgById[e.currentUserOrgId]);
+  let r = useSelector(e => e.orgById[e.currentUserOrgId]);
   let [l, o] = useState(r.shared_container_setting?.file_export_setting ?? 'allowed');
   let d = hS(e);
   let c = r.tier === FPlanNameType.ENTERPRISE;
@@ -2802,9 +2802,9 @@ let a8 = Ju(({
   onClose: t,
   workspace: a
 }) => {
-  let r = wA();
+  let r = useDispatch();
   let l = _$$t('org_settings.export_controls.workspace_success');
-  let o = d4(e => e.orgById[e.currentUserOrgId]);
+  let o = useSelector(e => e.orgById[e.currentUserOrgId]);
   let [d, c] = useState(a.workspaceSharedSetting?.fileExportSetting ?? o.shared_container_setting?.file_export_setting ?? 'allowed');
   let _ = useCallback(() => {
     r(_$$to({
@@ -2889,9 +2889,9 @@ let a6 = Ju(({
   onClose: t,
   workspace: a
 }) => {
-  let s = wA();
+  let s = useDispatch();
   let r = _$$t('org_settings.export_controls.workspace_success');
-  let l = d4(e => e.orgById[e.currentUserOrgId]);
+  let l = useSelector(e => e.orgById[e.currentUserOrgId]);
   let o = hS({
     open: e,
     onClose: t
@@ -2956,8 +2956,8 @@ let na = 'external_collaboration_controls_modal--listItem--g50IJ';
 let nn = 'external_collaboration_controls_modal--confirmButton---8ryZ';
 let ns = 'external_collaboration_controls_modal--bold--WoY4e';
 let nr = Ju(() => {
-  let e = wA();
-  let t = d4(e => e.orgById[e.currentUserOrgId]);
+  let e = useDispatch();
+  let t = useSelector(e => e.orgById[e.currentUserOrgId]);
   let a = () => e(Lo());
   let [r, l] = useState(t.shared_container_setting?.external_collaboration_controls);
   let o = !!t.shared_container_setting?.external_collaboration_controls;
@@ -3069,7 +3069,7 @@ let nr = Ju(() => {
 let nd = 'guest_invite_settings_modal--sectionInstruction---T3SG';
 let nc = 'guest_invite_settings_modal--radioLabel--Yuqzr';
 function n_(e) {
-  let t = wA();
+  let t = useDispatch();
   let [a, r] = useState(!1);
   let l = ZC(e.mfaRequiredSetting);
   let o = l === CT.MEMBERS || l === CT.ALL_USERS;
@@ -3136,7 +3136,7 @@ function n_(e) {
   });
 }
 let nu = Ju(e => {
-  let t = wA();
+  let t = useDispatch();
   return jsx(yX, {
     confirmationTitle: _$$t('org_settings.guest_control.confirm_title'),
     confirmText: _$$t('org_settings.guest_control.confirm_button'),
@@ -3154,8 +3154,8 @@ let nu = Ju(e => {
   });
 }, 'CONFIRM_BAN_GUEST_INVITE_MODAL');
 let nm = Ju(() => {
-  let e = wA();
-  let t = d4(e => e.orgById[e.currentUserOrgId]);
+  let e = useDispatch();
+  let t = useSelector(e => e.orgById[e.currentUserOrgId]);
   let a = _$$M2(t);
   let r = Rs(Is$, {
     orgId: t.id
@@ -3168,7 +3168,7 @@ let nm = Ju(() => {
   };
   let _ = Number(c.totalGuestCount);
   let u = Number(c.nonMfaGuestCount);
-  let m = d4(e => e.orgDomains.domains);
+  let m = useSelector(e => e.orgDomains.domains);
   let p = () => e(Lo());
   let [g, h] = useState(t.invite_whitelist_guest_invite_setting);
   return jsxs(OJ, {
@@ -3342,7 +3342,7 @@ function nv(e) {
   return isGovCluster() || e;
 }
 function nw(e) {
-  let t = wA();
+  let t = useDispatch();
   let a = Um();
   let s = a?.type === e.id;
   return jsxs(_$$V3, {
@@ -3388,7 +3388,7 @@ function nE(e) {
   });
 }
 let nC = Ju(e => {
-  let t = wA();
+  let t = useDispatch();
   let a = sZ();
   let r = !!a?.security_add_on_enabled_at;
   let l = nh(r);
@@ -3586,7 +3586,7 @@ function nI(e) {
   return e.split(',').map(e => e.trim()).filter(e => e.length > 0);
 }
 let nT = Ju(e => {
-  let t = wA();
+  let t = useDispatch();
   let a = useCallback(() => t(Lo()), [t]);
   let [r, l] = useState(e.ipAllowlistEnabled);
   let o = e.ipAllowlistRanges.map(e => e.ipRange);
@@ -3688,7 +3688,7 @@ let nL = Ju(({
   org: t,
   workspace: a
 }) => {
-  let l = wA();
+  let l = useDispatch();
   let {
     formState,
     formActions
@@ -3780,7 +3780,7 @@ let nD = Ju(({
   workspace: e,
   goBack: t
 }) => {
-  let a = wA();
+  let a = useDispatch();
   let s = hS({
     open: !0,
     onClose: t
@@ -3833,7 +3833,7 @@ function nM({
   org: e
 }) {
   let t = eA();
-  let a = wA();
+  let a = useDispatch();
   let r = [...(t?.data?.org?.workspaces ?? [])];
   sortByPropertyWithOptions(r, 'name');
   let l = useCallback(t => {
@@ -3862,8 +3862,8 @@ function nP(e) {
   return !!e.workspaceSharedSetting?.publicLinkControlsSetting;
 }
 let nU = Ju(() => {
-  let e = wA();
-  let t = d4(e => e.orgById[e.currentUserOrgId]);
+  let e = useDispatch();
+  let t = useSelector(e => e.orgById[e.currentUserOrgId]);
   let {
     formState,
     formActions
@@ -3986,7 +3986,7 @@ let nF = Ju(e => {
   let t;
   let a;
   let s;
-  let r = wA();
+  let r = useDispatch();
   let l = () => r(Lo());
   e.isOpenSessionsEnabled ? (t = _$$t('settings_tab.public_sharing.confirmation_modal.disable_public_links_title'), a = _$$t('settings_tab.public_sharing.confirmation_modal.disable_public_links_submit'), s = _$$tx('settings_tab.public_sharing.confirmation_modal.disable_public_links_description')) : (t = _$$t('settings_tab.public_sharing.confirmation_modal.disable_public_sharing_title'), a = _$$t('settings_tab.public_sharing.confirmation_modal.disable_public_sharing_submit'), s = jsxs(Fragment, {
     children: [_$$tx('settings_tab.public_sharing.confirmation_modal.disable_public_sharing_description.main'), jsxs('ul', {
@@ -4087,7 +4087,7 @@ function n3(e) {
     orgId: e.orgId,
     tier: nY[t = e.planTier] ?? t
   });
-  let d = wA();
+  let d = useDispatch();
   let [c, _] = useState(EB(e.defaultCountry));
   let [u, m] = useState(null);
   let [p, g] = useState(!1);
@@ -4217,7 +4217,7 @@ function n6({
   billableSeats: t,
   canSeeBillingAddressExp: a
 }) {
-  let s = wA();
+  let s = useDispatch();
   let r = async (t, n) => {
     let i = {
       source_token: t.token?.id,
@@ -4258,7 +4258,7 @@ function n6({
   }, 'change-payment-method');
 }
 let n9 = Ju(e => {
-  let t = wA();
+  let t = useDispatch();
   let a = sZ();
   let r = Rs(G7P, {
     orgId: a.id
@@ -4342,7 +4342,7 @@ let n9 = Ju(e => {
   });
 }, 'SitesPublishingToggleModal');
 let se = Ju(e => {
-  let t = wA();
+  let t = useDispatch();
   let a = sZ();
   let r = Rs(G7P, {
     orgId: a.id
@@ -4436,8 +4436,8 @@ let st = 'team_creation_controls_modal--settingLabel--KGHr-';
 let sa = 'team_creation_controls_modal--description--tsaEB';
 let sn = 'team_creation_controls_modal--radioLabel--7XJIQ';
 let ss = Ju(() => {
-  let e = wA();
-  let t = d4(e => e.orgById[e.currentUserOrgId]);
+  let e = useDispatch();
+  let t = useSelector(e => e.orgById[e.currentUserOrgId]);
   let a = c4(t.id).data;
   let r = () => e(Ce());
   let [l, o] = useState(t.shared_container_setting?.team_creation_controls ? t.shared_container_setting.team_creation_controls : null);
@@ -4529,7 +4529,7 @@ export function $$sr0(e) {
   eA();
   let F = _$$s4();
   let q = _$$r2();
-  let $ = wA();
+  let $ = useDispatch();
   let B = Pc();
   t = S2();
   let z = _$$N_2.reduce((e, a) => {

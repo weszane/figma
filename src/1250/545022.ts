@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useEffect } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { languageCodes } from "../905/816253";
 import { getFeatureFlags } from "../905/601108";
 import { md } from "../figma_app/27355";
@@ -31,7 +31,7 @@ let C = (e, t) => {
   return r && i;
 };
 function I(e) {
-  let t = wA();
+  let t = useDispatch();
   let n = DP();
   return jsx(_l, {
     isShowing: e.isShowing,
@@ -62,7 +62,7 @@ function I(e) {
 }
 let $$A = r1("has_tried_ko_kr");
 export function $$S0() {
-  let e = wA();
+  let e = useDispatch();
   let t = md($$A);
   let n = md(mp);
   let _ = "loaded" === t.status && "loaded" === n.status;

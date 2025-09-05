@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { bN } from "../vendor/514228";
+import { shallowEqual } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
 import { lQ } from "../905/934246";
 import { ServiceCategories as _$$e } from "../905/165054";
@@ -19,7 +19,7 @@ export function $$_0(e) {
     let l = wm(() => i, [i]);
     let [c, g] = ID({
       status: "idle"
-    }, bN);
+    }, shallowEqual);
     useEffect(() => {
       g({
         status: "idle"

@@ -1,5 +1,5 @@
 import { useMemo, useEffect } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { AD } from "../905/871411";
 import { R } from "../905/103090";
 import { Rs } from "../figma_app/288654";
@@ -58,7 +58,7 @@ export function $$f3({
   return ("loaded" === t.status ? oA(t.data?.file?.resourceConnectionSharingGroupUsers) : void 0) ?? void 0;
 }
 export function $$_2() {
-  return d4(e => {
+  return useSelector(e => {
     if (e.mirror?.appModel?.pagesList?.length > 1) {
       let t = e.mirror.sceneGraph.get(Nf(e.mirror.appModel));
       if (t) return t.name;
@@ -79,7 +79,7 @@ export function $$A5() {
   });
 }
 export function $$y4(e, t) {
-  return d4(i => {
+  return useSelector(i => {
     if (!e || !t) return null;
     let n = L8(e, i.repos);
     let r = n ? n.team_id : e.team_id;

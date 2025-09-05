@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useRef, useCallback, useMemo, useEffect } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { ServiceCategories as _$$e } from "../905/165054";
 import o from "classnames";
 import { Rs } from "../figma_app/288654";
@@ -38,7 +38,7 @@ import { KQ } from "../figma_app/475472";
 import { A as _$$A } from "../6828/7452";
 import { A as _$$A2 } from "../1617/567223";
 var l = o;
-let M = Ju(function(e) {
+let M = Ju(function (e) {
   let {
     teamName,
     userHasAdminLevelPermissions,
@@ -106,14 +106,14 @@ let q = "draft_move_modal--hoverableFolderRow--hUAas";
 let $ = "draft_move_modal--selectedFolderRow--XmVi7";
 let Z = "draft_move_modal--iconContainer--YfzDe";
 let X = "draft_move_modal--learnMoreLink--b5crD";
-let Q = Ju(function(e) {
+let Q = Ju(function (e) {
   let {
     setNewlyCreatedTeamName,
     setHasCreatedTeam,
     onClose
   } = e;
   let [o, l] = useState("");
-  let d = wA();
+  let d = useDispatch();
   let c = !o.trim().length;
   return jsx(fu, {
     name: "Plan Spaces Pro Draft Move Confirmation Modal",
@@ -171,7 +171,7 @@ let Q = Ju(function(e) {
 }, "DRAFT_MOVE_TEAM_CREATION_MODAL");
 let et = "https://help.figma.com/hc/articles/18409526530967";
 var ei = (e => (e.FREE = "Free", e.LOCKED = "Locked", e.EDU = "Edu", e.PRO = "Pro", e.ORG = "Org", e.ENT = "Enterprise", e.GUEST = "Guest", e))(ei || {});
-export let $$en0 = Ju(function(e) {
+export let $$en0 = Ju(function (e) {
   let {
     onClose,
     draftsToMove,
@@ -186,14 +186,14 @@ export let $$en0 = Ju(function(e) {
   let [X, et] = useState("");
   let [ei, en] = useState(!1);
   let [es, eo] = useState([]);
-  let el = d4(e => e.teamCreation.loading);
+  let el = useSelector(e => e.teamCreation.loading);
   let ed = useRef(null);
   let ec = useRef(null);
-  let eu = d4(e => getPermissionsStateMemoized(e));
+  let eu = useSelector(e => getPermissionsStateMemoized(e));
   let ep = Rs(G0Y, {
     orgId: null
   });
-  let em = wA();
+  let em = useDispatch();
   let eh = _$$z();
   let eg = useCallback(() => {
     onClose();
@@ -361,7 +361,7 @@ export let $$en0 = Ju(function(e) {
           ref: ec,
           children: jsxs("div", {
             className: _$$s.pl8.pr8.$,
-            children: [jsx(function(e) {
+            children: [jsx(function (e) {
               return jsxs("button", {
                 "data-testid": "drafts-move-new-starter-team-button",
                 className: l()(Y, e.checked ? $ : "", e.isHoverableRow ? q : ""),
@@ -466,7 +466,7 @@ function er(e) {
     className: "draft_move_modal--chooseTeamOrOrgRow--OPBwF",
     "data-testid": "org-restriction-text",
     children: tx("file_browser.draft_move_modal.drafts_cannot_be_moved_to_organizations", {
-      userOrgNames: function(e) {
+      userOrgNames: function (e) {
         let t = e.map(e => e.name);
         let i = e => jsx("span", {
           className: _$$s.fontSemiBold.$,
@@ -590,4 +590,4 @@ function ea(e) {
     })]
   });
 }
-export const K = $$en0; 
+export const K = $$en0;

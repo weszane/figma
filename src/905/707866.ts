@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useEffect, useRef, useCallback, useMemo, useState } from "react";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { N as _$$N } from "../905/438674";
 import { _ as _$$_ } from "../figma_app/496441";
 import { getFeatureFlags } from "../905/601108";
@@ -166,7 +166,7 @@ export function $$L0(e) {
   } = e;
   let o = useRef(null);
   !function (e, t) {
-    let i = d4(e => e.comments.editingComment);
+    let i = useSelector(e => e.comments.editingComment);
     let n = ZC(i);
     useEffect(() => {
       i || n?.id !== t.id || e.current?.focus();
@@ -204,13 +204,13 @@ export function $$L0(e) {
     dispatch(pD());
   }, [dispatch]);
   let h = function (e) {
-    let t = wA();
+    let t = useDispatch();
     let i = useMemo(() => e ? {
       view: "communityHub",
       subView: "handle",
       handle: e
     } : void 0, [e]);
-    let n = d4(e => i ? Np(e, i) : void 0);
+    let n = useSelector(e => i ? Np(e, i) : void 0);
     let s = useMemo(() => i ? Gc(e => {
       e.preventDefault();
       t(sf(i));
@@ -279,7 +279,7 @@ export function $$L0(e) {
   }
 }
 function F(e) {
-  let t = wA();
+  let t = useDispatch();
   let [i, s] = useState(!1);
   let {
     reactionsApi
@@ -313,11 +313,11 @@ function F(e) {
   });
 }
 function M(e) {
-  let t = wA();
+  let t = useDispatch();
   let {
     reactionsApi
   } = I_();
-  let s = d4(e => e.comments.emojiPicker);
+  let s = useSelector(e => e.comments.emojiPicker);
   let o = useMemo(() => !!s?.visible && s.commentsId === e.comment.id, [e.comment.id, s]);
   if (e.isPendingComment || !reactionsApi) return null;
   let l = n => {

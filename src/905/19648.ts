@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { forwardRef, useMemo, useRef, useImperativeHandle } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { E } from "../905/632989";
 import o from "classnames";
 import { V } from "../figma_app/312987";
@@ -38,7 +38,7 @@ export let $$v0 = forwardRef(function ({
   touched: t,
   onTouched: i
 }, o) {
-  let v = wA();
+  let v = useDispatch();
   let {
     setValue,
     validCategories
@@ -47,8 +47,8 @@ export let $$v0 = forwardRef(function ({
   let S = _$$w(e, !t);
   let w = U(S, _);
   let C = Lz(e, void 0);
-  let T = d4(e => e.dropdownShown?.type === A);
-  let k = d4(e => e.dropdownShown?.data.targetRect);
+  let T = useSelector(e => e.dropdownShown?.type === A);
+  let k = useSelector(e => e.dropdownShown?.data.targetRect);
   let R = useMemo(() => validCategories.filter(e => null === e.parent_category_id).sort(b).map(e => {
     let t = y(e, C);
     let i = validCategories.filter(t => t.parent_category_id === e.id).sort(b).map(e => y(e, C));

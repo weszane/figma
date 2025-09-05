@@ -1,5 +1,5 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { xk } from "@stylexjs/stylex";
 import { Xf } from "../figma_app/153916";
 import { kt } from "../figma_app/858013";
@@ -18,7 +18,7 @@ import { J7 } from "../figma_app/650409";
 if (443 == require.j) {}
 if (443 == require.j) {}
 export function $$b2() {
-  let e = wA();
+  let e = useDispatch();
   let t = z3();
   return "orgAdminSettings" !== t && "seatRequests" !== t ? jsx(Fragment, {}) : jsx($z, {
     variant: "secondary",
@@ -49,8 +49,8 @@ export function $$y0({
   });
 }
 function j() {
-  let e = wA();
-  let t = d4(e => e.teamBilling);
+  let e = useDispatch();
+  let t = useSelector(e => e.teamBilling);
   let a = t.summary.currency;
   let r = t.summary.monthly_subscription ? IX.MONTH : IX.YEAR;
   let i = _$$u();
@@ -76,7 +76,7 @@ function I({
   orgId: e,
   configuredUpgradeRequestSetting: t
 }) {
-  let a = wA();
+  let a = useDispatch();
   let r = Xf(e);
   let l = r.data?.currency;
   let _ = t === FVisibilityType.ALL_USERS ? _$$d({

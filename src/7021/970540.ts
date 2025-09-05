@@ -1,4 +1,4 @@
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { md } from "../figma_app/27355";
 import { OC } from "../figma_app/386952";
 import { iZ } from "../905/372672";
@@ -11,7 +11,7 @@ export function $$u1() {
   let t = M4.File.useValue(e.fileKey);
   let a = M4.Team.useValue(e.teamId);
   let o = M4.Folder.useValue(e.folderId);
-  let r = d4(e => e.roles);
+  let r = useSelector(e => e.roles);
   switch (e.view) {
     case "fullscreen":
       if (!t.data) return;

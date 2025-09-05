@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { memo, useRef } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { nj } from "../905/125019";
 import { A as _$$A } from "../905/920165";
 import { K } from "../905/443068";
@@ -27,7 +27,7 @@ let d = memo(function (e) {
   });
 });
 export function $$_0(e) {
-  let t = wA();
+  let t = useDispatch();
   let i = useRef(!1);
   let l = X7();
   function d(i) {

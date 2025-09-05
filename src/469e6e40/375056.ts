@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useMemo, useState, useCallback, createElement, Fragment, useEffect } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { Yy } from "../figma_app/59509";
 import { Q as _$$Q } from "../905/363675";
 import { $ as _$$$ } from "../905/692618";
@@ -212,7 +212,7 @@ function G(e) {
   let [r, l] = useState(a[0]);
   let o = D();
   let d = P8();
-  let c = wA();
+  let c = useDispatch();
   let [_, u, m] = _$$t.useManagedTabs(useMemo(() => ({
     [FBillingPeriodType.YEAR]: !0,
     [FBillingPeriodType.MONTH]: !0
@@ -276,7 +276,7 @@ function X() {
     let t = S2().unwrapOr(null);
     let a = t?.key?.type === FOrganizationLevelType.ORG;
     let n = Xf(t?.key.parentId, a);
-    let s = d4(e => e.teamBilling);
+    let s = useSelector(e => e.teamBilling);
     if (a && n.data) return {
       amount: n.data.account_credit,
       currency: n.data.currency
@@ -383,7 +383,7 @@ function eu(e) {
   });
 }
 function em(e) {
-  let t = wA();
+  let t = useDispatch();
   let {
     isAnnualProPlan,
     adjustAnnualSeatsAction,
@@ -1083,7 +1083,7 @@ function e3(e) {
   let a = _$$R();
   let d = RG();
   let c = function (e) {
-    let t = wA();
+    let t = useDispatch();
     let a = RG();
     return useMemo(() => e.trueUpState === fx.LOCKED ? [] : e.trueUpState === fx.REVIEW && TV(e.invoice, !!e.orgHasAutomaticUpcomingInvoice) ? a ? [{
       key: "true_up_review_billing_groups",
@@ -1195,7 +1195,7 @@ function e3(e) {
 export function $$e80(e) {
   let t = vt();
   let a = useCallback(() => getFeatureFlags().admin_ai_addon, []);
-  let d = wA();
+  let d = useDispatch();
   let c = useMemo(() => gl(e.invoices, {
     allowLegacyOrgAnnual: !t(),
     allowProratedOrgAnnual: !t()

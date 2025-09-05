@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { memo, useMemo, useEffect } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { tS } from "../figma_app/516028";
 import { qr } from "../figma_app/637336";
 import { W5, Eo } from "../figma_app/120294";
@@ -9,7 +9,7 @@ export let $$c0 = memo(function ({
   sessionId: e
 }) {
   let t = tS();
-  return d4(e => t && !!e.voice.activeCall[t]) ? jsx(u, {
+  return useSelector(e => t && !!e.voice.activeCall[t]) ? jsx(u, {
     sessionId: e
   }) : null;
 });

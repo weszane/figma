@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useCallback, useEffect, useState, memo, useRef, useMemo } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { qE } from "../figma_app/492908";
 import { O as _$$O } from "../905/969533";
 import { k as _$$k } from "../905/44647";
@@ -71,7 +71,7 @@ function Z() {
   let l = n0();
   let r = X();
   let i = GQ(200, 306);
-  let a = d4(e => t ? xae.LAYERS : e.leftPanel.activeTab);
+  let a = useSelector(e => t ? xae.LAYERS : e.leftPanel.activeTab);
   let c = _$$g2({
     pagesList: l
   });
@@ -190,7 +190,7 @@ let eb = "slides_left_panel_island--rightSection--XFjHm";
 function ej() {
   let e = Ye();
   let t = aV();
-  let l = d4(e => e.mirror.appModel.showUi);
+  let l = useSelector(e => e.mirror.appModel.showUi);
   return !t && l ? jsxs(_$$_, {
     isCollapsed: e,
     minWidth: 200,
@@ -199,7 +199,7 @@ function ej() {
 }
 function ey() {
   let e = q5();
-  return d4(e => e.isRenaming) ? jsx("div", {
+  return useSelector(e => e.isRenaming) ? jsx("div", {
     className: p()(eb, "slides_left_panel_island--renaming--PguET"),
     children: jsx("div", {
       className: ev,
@@ -436,7 +436,7 @@ function eR({
   let l = p8("isReadOnly");
   let r = p8("currentPage");
   let [i, a] = useState(null);
-  let d = d4(e => e.versionHistory);
+  let d = useSelector(e => e.versionHistory);
   let u = Fk((e, t) => {
     let l = e.get(t);
     return l ? {
@@ -478,7 +478,7 @@ export function $$eA0({
   let t = Ye();
   let l = aV();
   let r = ut(Ez5?.interopToolMode(), nQ7.SELF);
-  let i = d4(e => e.mirror.appModel.showUi);
+  let i = useSelector(e => e.mirror.appModel.showUi);
   let [a, c] = useState(230);
   return t && !l && r === nQ7.DESIGN && i ? jsx(_$$P, {
     onSizeChange: c,
@@ -515,7 +515,7 @@ function eB({
   let l = p8("isReadOnly");
   let r = p8("currentPage");
   let [i, a] = useState(null);
-  let x = d4(e => e.versionHistory);
+  let x = useSelector(e => e.versionHistory);
   let h = ut(Ez5?.canvasGrid().canvasGridArray, [[]]);
   let p = rY(h);
   let g = Fk((e, t) => {

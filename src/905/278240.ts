@@ -1,7 +1,7 @@
 import _require from "../svg/764361";
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useCallback, useContext, useRef } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { glU, rXF, j0r } from "../figma_app/763686";
 import { l7 } from "../905/189185";
 import { dI } from "../905/871411";
@@ -44,7 +44,7 @@ export function $$M0({
   hideVariableOptions: m,
   responsiveTextStyleVariantIndex: g
 }) {
-  let f = wA();
+  let f = useDispatch();
   let {
     consumedVariable,
     updateVariableConsumption,
@@ -97,7 +97,7 @@ function j({
 }) {
   let B = useContext(_$$p);
   let V = useRef(null);
-  let G = wA();
+  let G = useDispatch();
   let z = Um();
   let {
     smallNudgeAmount,

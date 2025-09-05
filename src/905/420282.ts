@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { Suspense, useState, useEffect } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { isNotNullish, isNullish } from "../figma_app/95419";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { hS } from "../905/437088";
@@ -75,13 +75,13 @@ export function $$Q0(e) {
   });
 }
 function J(e) {
-  let t = wA();
+  let t = useDispatch();
   let i = hS(e);
   let p = XP({
     reportErrorsToTeam: _$$e.SCALE
   });
   let m = _$$k();
-  let h = d4(e => e.teamBilling);
+  let h = useSelector(e => e.teamBilling);
   let g = p.key.parentId;
   let v = _$$g(h.summary.total_upgraded_user_counts, {
     throwOnError: !0
@@ -92,7 +92,7 @@ function J(e) {
   }, e.renewalDate);
   let C = I?.total;
   let [D, M] = function (e, t, i) {
-    let n = d4(e => e.teamBilling);
+    let n = useSelector(e => e.teamBilling);
     let r = _$$g(n.summary.annual_seats, {
       throwOnError: !1
     });
@@ -314,8 +314,8 @@ function J(e) {
   });
 }
 function ee(e) {
-  let t = wA();
-  let i = d4(e => e.selectedView);
+  let t = useDispatch();
+  let i = useSelector(e => e.selectedView);
   return jsx(_$$z, {
     variant: e.noAnnualSeat ? "warning" : "brand",
     orientation: "vertical",

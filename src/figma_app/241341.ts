@@ -52,7 +52,7 @@ import { egF, Egt, glU, juq, Oin } from '../figma_app/763686';
 import { _t, Ht, Nb, tP, V_, w_ } from '../figma_app/841351';
 import { lF } from '../figma_app/915202';
 import { Ib } from '../figma_app/955484';
-import { d4, wA } from '../vendor/514228';
+import { useSelector, useDispatch } from '../vendor/514228';
 let y = E;
 let ea = [2, 3, 6, 13, 25, 50, 75, 100, 200, 300, 1e3];
 function es(e, t, r) {
@@ -1048,9 +1048,9 @@ let $$eT0 = Ju(e => {
     nodeId,
     layerName
   } = e;
-  let s = wA();
-  let o = d4(e => e.selectedView.view === 'fullscreen' ? e.selectedView.editorType : null);
-  let d = d4(e => e.versionHistory.activeId);
+  let s = useDispatch();
+  let o = useSelector(e => e.selectedView.view === 'fullscreen' ? e.selectedView.editorType : null);
+  let d = useSelector(e => e.versionHistory.activeId);
   let {
     Sprig
   } = useSprigWithSampling();
@@ -1061,8 +1061,8 @@ let $$eT0 = Ju(e => {
     versions,
     versionsQueryLoaded
   } = DS(nodeId);
-  let y = d4(e => e.selectedView.compareChangesVersionId ?? null);
-  let v = d4(e => e.selectedView.compareChangesActivityId ?? null);
+  let y = useSelector(e => e.selectedView.compareChangesVersionId ?? null);
+  let v = useSelector(e => e.selectedView.compareChangesActivityId ?? null);
   let N = useMemo(() => y ? versions.find(e => e.id === y) ?? null : v ? versions.find(e => e.dev_mode_activity?.some(e => e.id === v)) ?? null : null, [versions, y, v]);
   let C = useCallback(e => {
     !e && (z(void 0), $$ep1(e, s, !1, null), d && d !== V_ && (s(Y6({
@@ -1227,7 +1227,7 @@ let $$eI4 = Ju(e => {
     detachedInfoStatus,
     origin
   } = e;
-  let o = wA();
+  let o = useDispatch();
   let {
     Sprig
   } = useSprigWithSampling();
@@ -1315,7 +1315,7 @@ let $$eS5 = Ju(e => {
     initialSelectedNodeId,
     isComparingOverrides = !1
   } = e;
-  let l = wA();
+  let l = useDispatch();
   let {
     Sprig
   } = useSprigWithSampling();

@@ -1,5 +1,5 @@
 import { useMemo, useCallback } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
 import { J0O, glU, fOf, YIb } from "../figma_app/763686";
 import { l7 } from "../905/189185";
@@ -58,7 +58,7 @@ export function $$C0({
   preferredProductComponents: i
 }) {
   let l = function () {
-    let e = wA();
+    let e = useDispatch();
     return useCallback(() => {
       e(Ce());
       e(vq());

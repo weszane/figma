@@ -7,7 +7,7 @@ import { nl } from "../figma_app/257275";
 import { t as _$$t } from "../905/303541";
 import { DP } from "../905/640017";
 import { tS } from "../figma_app/516028";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { K as _$$K } from "../905/443068";
 import { v as _$$v } from "../905/213481";
 import { $n } from "../905/521428";
@@ -54,7 +54,7 @@ function R({
   let [u, R] = useState(!1);
   let [N, P] = fp(k);
   let O = useRef(null);
-  let D = wA();
+  let D = useDispatch();
   let L = BK("search-options-dropdown");
   let [F, M] = useState(0);
   let [j, U] = useState(0);

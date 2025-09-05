@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useMemo, useRef, memo, forwardRef, useContext } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { o as _$$o } from "../905/821217";
 import { E as _$$E } from "../905/632989";
 import { E as _$$E2 } from "../905/172252";
@@ -450,7 +450,7 @@ function ea({
 let es = memo(function ({
   variableSetID: e
 }) {
-  let t = d4(e => a3(e));
+  let t = useSelector(e => a3(e));
   let r = useMemo(() => {
     let r = new Set();
     for (let n of Object.values(t)) if (n.variableSetId === e && (r.add(n.resolvedType), r.size >= 3)) break;

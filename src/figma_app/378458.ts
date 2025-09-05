@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useEffect, useCallback, useMemo, memo, useRef, useState } from "react";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { o as _$$o } from "../905/821217";
 import { y as _$$y } from "../905/661502";
 import { O as _$$O } from "../905/969533";
@@ -54,9 +54,9 @@ function z({
   let _ = J2(UK().activeCanvasPixelPreview);
   let g = J2(_$$d().activeCanvasRetinaMode);
   let f = _$$R(e => e.mirror.appModel.keyboardShortcuts);
-  let E = d4(e => !e.mirror.appModel.isReadOnly);
-  let y = d4(e => !!e.user);
-  let b = d4(e => $A(e.selectedView));
+  let E = useSelector(e => !e.mirror.appModel.isReadOnly);
+  let y = useSelector(e => !!e.user);
+  let b = useSelector(e => $A(e.selectedView));
   let I = _I();
   let v = XR();
   let R = J2(Ez5.uiState().filterAnnotationCategoryId);
@@ -67,7 +67,7 @@ function z({
   let H = u === nT.Illustration;
   let z = "design" === oD(u);
   let K = "whiteboard" === oD(u);
-  let Y = d4(e => e.mirror.appModel.prototypeCanvasUiVisible);
+  let Y = useSelector(e => e.mirror.appModel.prototypeCanvasUiVisible);
   let $ = J2(Ez5.editorPreferences().showPropertyLabels);
   let X = J2(Ez5.editorPreferences().showFrameGrids);
   let q = J2(_$$d().showFrameGridsViewOnly);
@@ -198,7 +198,7 @@ function z({
     type: "COMMENTS",
     shortcut: c1(f, "toggle-show-comments"),
     recordingKey: "showComments",
-    isChecked: d4(e => !!e.mirror.appModel.showComments),
+    isChecked: useSelector(e => !!e.mirror.appModel.showComments),
     disabled: Zr("showComments")
   }, {
     type: "SHOW_ANNOTATIONS",
@@ -415,8 +415,8 @@ export function $$W1({
   onSelectDropdownItem: u,
   onSubmitCustomZoom: p
 }) {
-  let _ = wA();
-  let h = d4(e => $A(e.selectedView));
+  let _ = useDispatch();
+  let h = useSelector(e => $A(e.selectedView));
   let m = XR();
   let y = useMemo(() => ({
     ZOOM_IN: _$$t("fullscreen_actions.zoom-in"),

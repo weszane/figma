@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useCallback } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { fp } from "../figma_app/27355";
 import { R } from "../905/103090";
 import { m0 } from "../figma_app/976749";
@@ -30,7 +30,7 @@ export function $$p0() {
   }));
   let E = hD();
   let y = UX();
-  let b = wA();
+  let b = useDispatch();
   let {
     collapsedInspectionPanelAtom,
     collapseEnabled

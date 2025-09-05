@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { eU, zl } from "../figma_app/27355";
 import { Rs } from "../figma_app/288654";
 import { a8q } from "../figma_app/43951";
@@ -26,7 +26,7 @@ let $$c1 = D((e, t = !1) => {
   }, [r, t]);
 });
 export function $$u4(e = !1) {
-  let t = d4(e => e.openFile);
+  let t = useSelector(e => e.openFile);
   return $$c1(t?.key || "", e);
 }
 export function $$p0(e = !1) {

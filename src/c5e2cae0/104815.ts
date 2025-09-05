@@ -1,5 +1,5 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { _H } from "../figma_app/598111";
 import { o as _$$o } from "../c5e2cae0/371580";
 import { x as _$$x } from "../905/211326";
@@ -16,7 +16,7 @@ export function $$g0(e) {
     selectedView,
     promo
   } = e;
-  let g = wA();
+  let g = useDispatch();
   let x = Ud({
     teamId: selectedView.teamId
   });

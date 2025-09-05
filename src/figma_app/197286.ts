@@ -1,5 +1,5 @@
 import { useRef, useEffect, useCallback } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { A } from "../905/920142";
 import { XHR } from "../905/910117";
 import { YQ } from "../905/502364";
@@ -27,7 +27,7 @@ let m = (e, t) => {
 };
 export function $$g1(e) {
   let t = iZ();
-  let r = wA();
+  let r = useDispatch();
   let {
     file,
     onCanvasExpired

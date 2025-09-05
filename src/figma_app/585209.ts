@@ -1,7 +1,7 @@
 import { ss } from "../figma_app/479760";
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useMemo, useState, useEffect, useCallback } from "react";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { RI, We } from "../figma_app/770088";
 import { mz } from "../figma_app/12220";
 import { _X } from "../figma_app/62612";
@@ -13,7 +13,7 @@ import { E as _$$E } from "../905/486517";
 import { ri } from "../905/337179";
 let m = ss;
 export function $$g0(e) {
-  let t = d4(e => e.comments.typeahead);
+  let t = useSelector(e => e.comments.typeahead);
   return e.mentionsDisabled && t?.type === "mentions" ? null : jsx($$E1, {
     onInsert: e.onInsert,
     onClear: e.onClear,
@@ -27,7 +27,7 @@ export function $$g0(e) {
   });
 }
 export function $$f2(e) {
-  let t = d4(e => e.comments.typeaheadPositionOffset);
+  let t = useSelector(e => e.comments.typeaheadPositionOffset);
   let r = useMemo(() => {
     let r = e.position || {
       x: 0,
@@ -55,13 +55,13 @@ export function $$f2(e) {
 }
 export function $$E1(e) {
   let t;
-  let r = d4(e => e.comments.emojiPicker);
-  let o = d4(e => e.comments.typeahead);
+  let r = useSelector(e => e.comments.emojiPicker);
+  let o = useSelector(e => e.comments.typeahead);
   let [g, f] = useState(null);
   useEffect(() => {
     o?.type === "suggestions" && f(NS);
   }, [o?.type]);
-  let E = wA();
+  let E = useDispatch();
   let y = useCallback(() => {
     E(RI({
       visible: !1

@@ -1,12 +1,12 @@
 import { useCallback, useMemo } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { xae } from "../figma_app/763686";
 import { sx } from "../905/449184";
 import { FP } from "../figma_app/91703";
 import { q5 } from "../figma_app/516028";
 import { lV } from "../figma_app/914674";
 export function $$c0() {
-  let e = wA();
+  let e = useDispatch();
   let t = q5();
   let r = lV();
   let c = useCallback((n = !0) => {

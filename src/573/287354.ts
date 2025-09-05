@@ -1,6 +1,6 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useContext, useMemo } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import l from "classnames";
@@ -24,7 +24,7 @@ export function $$E0() {
   let t = kl("selectionRegions");
   let s = E7(t);
   s && (e = s);
-  let r = d4(e => e.mirror.appModel.hoveredNode);
+  let r = useSelector(e => e.mirror.appModel.hoveredNode);
   if (r && getFeatureFlags().ce_offscreen_indicators_for_hovered_nodes) {
     let t = getSingletonSceneGraph().get(r);
     if (t) {
@@ -60,7 +60,7 @@ function S({
   let d = {
     transform: `translate(${o}px, ${l}px)`
   };
-  let c = d4(e => e.mirror?.appModel.showUi);
+  let c = useSelector(e => e.mirror?.appModel.showUi);
   let u = J2(UK().renderRulers) && c ? k : 0;
   let p = {
     x: -3.5 + u,
@@ -156,7 +156,7 @@ function w({
   });
   l.x -= r / 2;
   l.y -= i / 2;
-  let c = d4(e => e.mirror?.appModel.showUi);
+  let c = useSelector(e => e.mirror?.appModel.showUi);
   let p = J2(UK().renderRulers) && c ? k : 0;
   let g = 1 + p;
   let y = Math.max(g, t.width - 1 - r);

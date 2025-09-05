@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useMemo, useId } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { Ay } from "../905/612521";
 import { t } from "../905/303541";
 import { s as _$$s } from "../905/328136";
@@ -35,7 +35,7 @@ export function $$C1(e) {
     publishedResource,
     targetRect
   } = e.dropdownData;
-  let r = wA();
+  let r = useDispatch();
   let h = TA();
   let g = $$S2();
   let _ = _$$s();

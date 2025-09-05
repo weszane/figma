@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { Component, useMemo, useCallback, useRef, useEffect } from "react";
-import { Ng, d4, wA } from "../vendor/514228";
+import { connect, useSelector, useDispatch } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
 import { c2 } from "../905/382883";
 import { Ay } from "../figma_app/778880";
@@ -184,7 +184,7 @@ class U extends Component {
   }
 }
 U.displayName = "SearchResultView";
-let B = Ng((e, t) => ({
+let B = connect((e, t) => ({
   viewMode: zQ[t.searchModelType](e.search.parameters, e.viewBarViewModeOptionByView).viewMode,
   isLoggedIn: !!e.user,
   search: e.search,
@@ -215,7 +215,7 @@ export function $$G6(e) {
     query,
     resourceTypeDisplayString
   } = e;
-  let s = d4(e => e.currentUserOrgId);
+  let s = useSelector(e => e.currentUserOrgId);
   let o = "NON_ORG_TEAMS" !== e.activePlan && e.activePlan || s;
   let l = Rs(N63, {
     orgId: o ?? null
@@ -364,7 +364,7 @@ class V extends Component {
 }
 V.displayName = "SearchPageView";
 let H = [];
-let z = Ng((e, t) => {
+let z = connect((e, t) => {
   let r = e.search.parameters;
   let n = e.search.responses[t.searchModelType];
   return {
@@ -389,7 +389,7 @@ let z = Ng((e, t) => {
   }
 }))(V);
 export function $$W5() {
-  let e = d4(e => e.search.parameters);
+  let e = useSelector(e => e.search.parameters);
   let t = e.facetFilters?.searchModelType ? e.facetFilters.searchModelType : uH.FILES;
   return jsx(z, {
     searchModelType: t
@@ -400,29 +400,29 @@ let el = "search_bar--selectedSearchResult---VS1W";
 let ed = "search_bar--searchResultsSeparator--gxrj-";
 let ep = [uQ];
 export function $$e_0() {
-  let e = wA();
-  let t = d4(e => e.desktopNewTab.isSearchBarFocused);
-  let r = d4(e => e.desktopNewTab.searchQuery);
-  let s = d4(e => e.search.completedQueries[uH.FILES]);
-  let o = d4(e => "" !== e.desktopNewTab.searchQuery && e.desktopNewTab.isSearchBarFocused);
+  let e = useDispatch();
+  let t = useSelector(e => e.desktopNewTab.isSearchBarFocused);
+  let r = useSelector(e => e.desktopNewTab.searchQuery);
+  let s = useSelector(e => e.search.completedQueries[uH.FILES]);
+  let o = useSelector(e => "" !== e.desktopNewTab.searchQuery && e.desktopNewTab.isSearchBarFocused);
   let {
     isLoading,
     searchResults
   } = function () {
-    let e = d4(e => e.search);
-    let t = d4(e => e.search.parameters);
+    let e = useSelector(e => e.search);
+    let t = useSelector(e => e.search.parameters);
     let r = $P.loadingKeyForPayload({
       parameters: t
     });
-    let n = d4(e => e.loadingState[r]);
-    let i = d4(e => e.desktopNewTab.searchQuery);
+    let n = useSelector(e => e.loadingState[r]);
+    let i = useSelector(e => e.desktopNewTab.searchQuery);
     let s = e.completedQueries[uH.FILES];
     return {
       isLoading: n === _$$r.LOADING || i !== s,
       searchResults: (e.responses.files?.results ?? []).slice(0, 5)
     };
   }();
-  let u = d4(e => gt(e));
+  let u = useSelector(e => gt(e));
   let _ = useCallback(t => {
     "" === r && "" !== t && e(Dy({
       entryPoint: "desktop_new_tab"
@@ -557,9 +557,9 @@ function eh(e) {
   });
 }
 function em(e) {
-  let t = wA();
-  let r = d4(e => e.search);
-  let i = d4(e => e.selectedView);
+  let t = useDispatch();
+  let r = useSelector(e => e.search);
+  let i = useSelector(e => e.selectedView);
   e.hasLoaded && e.completedQuery && r.queryId !== r.lastAckedQueryId && (t(_$$ej({
     lastAckedQueryId: r.queryId
   })), t(w2({
@@ -601,8 +601,8 @@ function em(e) {
   });
 }
 function eg(e) {
-  let t = wA();
-  let r = d4(e => e.folders);
+  let t = useDispatch();
+  let r = useSelector(e => e.folders);
   let {
     result,
     index
@@ -682,9 +682,9 @@ function eg(e) {
   });
 }
 function ef(e) {
-  let t = wA();
-  let r = d4(e => e.desktopNewTab.searchQuery);
-  let s = d4(e => e.currentUserOrgId);
+  let t = useDispatch();
+  let r = useSelector(e => e.desktopNewTab.searchQuery);
+  let s = useSelector(e => e.currentUserOrgId);
   let o = XW(r, s, uH.FILES);
   let l = useMemo(() => [J1, e.numSearchResults], [e.numSearchResults]);
   let {
@@ -746,9 +746,9 @@ function ey() {
 let ez = parsePxNumber(RAo);
 let eW = parsePxNumber(aIx);
 let eK = Ju(function () {
-  let e = wA();
-  let t = d4(e => e.modalShown);
-  let r = d4(e => e.search.sessionId);
+  let e = useDispatch();
+  let t = useSelector(e => e.modalShown);
+  let r = useSelector(e => e.search.sessionId);
   let s = md(_$$Q);
   let [o, l] = fp(z5);
   let d = md(L8);
@@ -816,13 +816,13 @@ export function $$e53({
   hideSearchPreview: e,
   searchBarFullWidth: t
 }) {
-  let r = wA();
-  let s = d4(e => e.modalShown);
+  let r = useDispatch();
+  let s = useSelector(e => e.modalShown);
   let o = _6();
   let l = function () {
-    let e = wA();
+    let e = useDispatch();
     let t = UP();
-    let r = d4(e => getPermissionsStateMemoized(e));
+    let r = useSelector(e => getPermissionsStateMemoized(e));
     let n = X$("useUpdateSearchScope");
     let s = useRef(!1);
     r.currentTeamId && n.data?.key.type === FOrganizationLevelType.ORG && !s.current && (s.current = !0, $D(_$$e.FRONTEND_PLATFORM, Error("Redux vs. plan-hook inconsistency"), {

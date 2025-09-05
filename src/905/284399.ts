@@ -1,5 +1,5 @@
 import { jsx } from "react/jsx-runtime";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { wm } from "../905/19536";
 import { t } from "../905/303541";
 import { q3 } from "../figma_app/450829";
@@ -34,7 +34,7 @@ export function $$c0(e) {
     }
     return e;
   }(g), [g]);
-  let _ = wA();
+  let _ = useDispatch();
   return jsx(M, {
     userFlagOnShow,
     isShowing,

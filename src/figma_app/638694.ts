@@ -1,5 +1,5 @@
 import { jsxs, jsx } from "react/jsx-runtime";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { K } from "../905/443068";
 import { A as _$$A } from "../905/251970";
 import { H } from "../905/222445";
@@ -206,8 +206,8 @@ function k(e) {
   });
 }
 function M() {
-  let e = wA();
-  let t = d4(({
+  let e = useDispatch();
+  let t = useSelector(({
     mobileNavShown: e
   }) => e);
   return jsx("div", {
@@ -222,7 +222,7 @@ function M() {
   });
 }
 export function $$F0() {
-  let e = wA();
+  let e = useDispatch();
   let t = _6();
   let r = px();
   let a = j_(r).unwrapOr(!1);

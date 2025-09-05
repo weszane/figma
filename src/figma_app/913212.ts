@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useCallback } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
@@ -10,7 +10,7 @@ import { Ce } from "../905/156213";
 import { Ju } from "../905/102752";
 import { P } from "../905/932818";
 export let $$h0 = Ju(function () {
-  let e = wA();
+  let e = useDispatch();
   let t = P();
   let r = useCallback(() => e(Ce()), [e]);
   let p = useCallback(() => {

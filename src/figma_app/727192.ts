@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useCallback, useMemo, createContext, useContext, useRef } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { lQ } from "../905/934246";
 import { X as _$$X } from "../905/736922";
 import { Ql } from "../figma_app/387100";
@@ -193,7 +193,7 @@ export function $$U1(e) {
     headerRef
   } = e;
   let I = $$j2("inspection_panel_copy_all_click", useContext(F));
-  let A = wA();
+  let A = useDispatch();
   let x = m0();
   let N = useHandleMouseEvent(recordingKey, "click", useCallback(() => {
     if (!copyAllValue) return;
@@ -342,7 +342,7 @@ export function $$z3(e) {
     recordingKey,
     collapsiblePanelKey
   } = e;
-  let p = d4(sS);
+  let p = useSelector(sS);
   let _ = useMemo(() => `inspect:${recordingKey.toLowerCase()}`, [recordingKey]);
   let h = useMemo(() => ({
     recordingKey: `inspect:${recordingKey}`

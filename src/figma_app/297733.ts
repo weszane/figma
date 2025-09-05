@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { isNotNullish } from "../figma_app/95419";
 import { m1T } from "../figma_app/763686";
 import { R } from "../905/103090";
@@ -35,14 +35,14 @@ export function $$b3(e) {
     };
   }, [e]);
   let t = R(e => Object.keys(e.mirror.sceneGraphSelection).length);
-  let r = d4(e => e.mirror.appModel.activeCanvasEditModeType === m1T.DESIGN_LAYOUT || e.mirror.appModel.activeCanvasEditModeType === m1T.WHITEBOARD_LAYOUT || e.mirror.appModel.activeCanvasEditModeType === m1T.SITES_LAYOUT || e.mirror.appModel.activeCanvasEditModeType === m1T.COMMENTS || e.mirror.appModel.activeCanvasEditModeType === m1T.SLIDE_LAYOUT);
+  let r = useSelector(e => e.mirror.appModel.activeCanvasEditModeType === m1T.DESIGN_LAYOUT || e.mirror.appModel.activeCanvasEditModeType === m1T.WHITEBOARD_LAYOUT || e.mirror.appModel.activeCanvasEditModeType === m1T.SITES_LAYOUT || e.mirror.appModel.activeCanvasEditModeType === m1T.COMMENTS || e.mirror.appModel.activeCanvasEditModeType === m1T.SLIDE_LAYOUT);
   let h = _$$e();
   let [b, I] = R(e => {
     let t;
     null != e.mirror.appModel.currentStampToolName && "" !== e.mirror.appModel.currentStampToolName && (t = TI(e.mirror.appModel.currentStampToolName)());
     return [e.mirror.appModel.currentTool, t];
   });
-  let v = wA();
+  let v = useDispatch();
   let A = useRef(!1);
   useEffect(() => {
     if (!r) return;

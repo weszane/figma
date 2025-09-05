@@ -28,7 +28,7 @@ import { ic } from "../figma_app/688398";
 import { x as _$$x } from "../9410/705473";
 import { Fk } from "../figma_app/167249";
 import { Ib } from "../905/129884";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { md } from "../figma_app/27355";
 import { B as _$$B } from "../905/714743";
 import { Y5 } from "../figma_app/455680";
@@ -79,7 +79,7 @@ function U(e) {
   } = e;
   let n = md(Z7);
   let r = n.get(carouselSlide.guid);
-  let i = d4(e => e.mirror.appModel.showComments);
+  let i = useSelector(e => e.mirror.appModel.showComments);
   let s = Vi();
   let o = useCallback(() => {
     i || Y5.triggerAction("toggle-show-comments", {
@@ -224,7 +224,7 @@ function et({
         Fo(e) && f7(e);
     }
   });
-  let R = d4(e => e.mirror.selectionProperties.name);
+  let R = useSelector(e => e.mirror.selectionProperties.name);
   let O = e => {
     R && l7.user("rename-row", () => _$$i(o, e));
   };

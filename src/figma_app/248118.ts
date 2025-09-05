@@ -1,5 +1,5 @@
 import { useMemo, useCallback } from "react";
-import { Pj } from "../vendor/514228";
+import { useStore } from "../vendor/514228";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { _gJ } from "../figma_app/763686";
 import { R } from "../905/103090";
@@ -31,7 +31,7 @@ function v() {
     activeTextReviewPlugin,
     publishedPlugins,
     publishedWidgets
-  } = R((e) => ({
+  } = R(e => ({
     orgEntity: EL(e),
     org: e.currentUserOrgId ? e.orgById[e.currentUserOrgId] : null,
     openFile: e.openFile,
@@ -78,8 +78,8 @@ export function $$N1(e, t) {
   let o = v();
   let u = _$$b();
   let p = gB();
-  let _ = Pj();
-  return useCallback((e) => {
+  let _ = useStore();
+  return useCallback(e => {
     if (!r) {
       console.error("Plugin version not found");
       $D(_$$e.EXTENSIBILITY, Error("Plugin version not found"));
@@ -129,11 +129,11 @@ export function $$R7(e) {
 }
 export function $$L5(e, t) {
   let r = v();
-  let a = Object.values($1()).find((t) => t.plugin_id === e);
+  let a = Object.values($1()).find(t => t.plugin_id === e);
   let o = _$$b();
   let l = gB();
-  let u = Pj();
-  return useCallback((e) => {
+  let u = useStore();
+  return useCallback(e => {
     if (!a) {
       console.error("Plugin not found");
       return;

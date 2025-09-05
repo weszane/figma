@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { forwardRef, useMemo, useRef, useCallback, memo } from "react";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { IK } from "../905/521428";
 import { l7 } from "../905/189185";
 import { getFeatureFlags } from "../905/601108";
@@ -80,7 +80,7 @@ let G = forwardRef(function ({
   });
 });
 export function $$W1(e) {
-  let t = d4(Lg);
+  let t = useSelector(Lg);
   let {
     nestedInstances
   } = _$$p(e);
@@ -88,12 +88,12 @@ export function $$W1(e) {
 }
 export let $$K0 = memo(function (e) {
   let t = E7(kl("resettableInstanceOverrides"));
-  let r = d4(e => e.pickerShown);
-  let s = d4(cv);
-  let o = d4(Sh);
-  let d = d4(dT);
-  let u = d4(Z3);
-  let _ = wA();
+  let r = useSelector(e => e.pickerShown);
+  let s = useSelector(cv);
+  let o = useSelector(Sh);
+  let d = useSelector(dT);
+  let u = useSelector(Z3);
+  let _ = useDispatch();
   let {
     backingSymbolGUID,
     singleBackingStateGroup
@@ -188,16 +188,16 @@ function Y({
     sceneGraphSelection: e.mirror.sceneGraphSelection,
     library: e.library
   }));
-  let i = d4(dT);
+  let i = useSelector(dT);
   let {
     affiliatedStateGroup,
     singleBackingSymbol,
     restoreType,
     stateResetType
   } = $(i);
-  let m = d4(lm);
-  let f = d4(sS);
-  let E = wA();
+  let m = useSelector(lm);
+  let f = useSelector(sS);
+  let E = useDispatch();
   let S = _$$S.useOpenFileProperties();
   if ("STATE_GROUP" === restoreType || "SYMBOL_AS_NON_STATE" === restoreType) {
     let t = jsx(_$$z, {

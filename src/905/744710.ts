@@ -11,7 +11,7 @@ import { t as _$$t2, tx as _$$tx } from "../905/303541";
 import { iZ as _$$iZ, pS, TA } from "../905/372672";
 import { po } from "../figma_app/45218";
 import { Ju, ZU, qK } from "../905/102752";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { $n } from "../905/521428";
 import I from "classnames";
 import { h as _$$h } from "../905/207101";
@@ -203,7 +203,7 @@ require.d(n, {
   md: () => nP,
   row: () => nN
 });
-let u = memo(function(e) {
+let u = memo(function (e) {
   return jsx("svg", {
     width: "16",
     height: "16",
@@ -224,11 +224,11 @@ let y = createContext({
     activeSubView: null,
     properties: {}
   },
-  setAccountModalSubViewData: () => { }
+  setAccountModalSubViewData: () => {}
 });
 var E = I;
-let z = Ju(function(e) {
-  let t = wA();
+let z = Ju(function (e) {
+  let t = useDispatch();
   let [i, n] = useState(e.vatGstId);
   let [s, o] = useState(e.shippingAddress);
   let [l, d] = useState(!1);
@@ -290,7 +290,7 @@ let z = Ju(function(e) {
   });
 }, "ChangeAddressModal");
 function H(e) {
-  let t = wA();
+  let t = useDispatch();
   let [i, n] = useState(e.vatGstId);
   let [s, o] = useState(e.shippingAddress);
   let l = e.taxIdVerificationStatus === FDomainVerificationStatusType.UNVERIFIED;
@@ -371,8 +371,8 @@ let ei = "account_settings_modal--scrollContainer--Yf5uK";
 function en(e) {
   var t;
   let i = _$$iZ();
-  let n = d4(e => e.avatarEditorState);
-  let a = wA();
+  let n = useSelector(e => e.avatarEditorState);
+  let a = useDispatch();
   switch (e.avatarType) {
     case 0:
       if (!i) return null;
@@ -457,7 +457,7 @@ function e_(e) {
 }
 function eA(e) {
   let t = "primary-email-dropdown";
-  let i = wA();
+  let i = useDispatch();
   let n = e.profile.associated_users || [];
   let a = Um();
   let s = (t, n) => {
@@ -469,7 +469,7 @@ function eA(e) {
     i(oB());
   };
   let o = jsx(ms, {
-    children: n.map(function(t) {
+    children: n.map(function (t) {
       return jsx(MM, {
         onClick: () => t.email && s(t.email, t.user_id),
         checked: t.email === e.primaryUserEmail,
@@ -502,7 +502,7 @@ function eA(e) {
 }
 function ey(e) {
   let t = e.profile?.associated_users || [];
-  let i = wA();
+  let i = useDispatch();
   let n = (t, n) => {
     e.user.community_profile_id && i(G0({
       email: t,
@@ -559,7 +559,7 @@ function ey(e) {
   });
 }
 e_.displayName = "ProfileUserEmailRow";
-let eC = function(e) {
+let eC = function (e) {
   let {
     resourceId,
     title,
@@ -570,7 +570,7 @@ let eC = function(e) {
     isError = !1,
     children
   } = e;
-  let c = wA();
+  let c = useDispatch();
   let u = E()("community_resource_row--resourceRow--Lw3vr text--fontPos11--2LvXf text--_fontBase--QdLsd", {
     "community_resource_row--interactiveRow--rqlr-": !isBlocked
   });
@@ -626,7 +626,7 @@ let ek = e => {
     subscription_data,
     monetized_resource_id
   } = e;
-  let o = function(e, t) {
+  let o = function (e, t) {
     let i;
     if (e?.subscription_expires_at && e?.trial_length_in_days) {
       let n = new Date(e.subscription_expires_at);
@@ -707,7 +707,7 @@ let eR = (e, t, i, n) => {
       return "";
   }
 };
-let eN = function(e) {
+let eN = function (e) {
   let {
     purchase
   } = e;
@@ -724,7 +724,7 @@ let eN = function(e) {
   } = ek(purchase);
   return jsx(eC, {
     resourceId: purchase.resource_id,
-    title: function(e, t) {
+    title: function (e, t) {
       let i = _$$t2("community.purchase_home.resource_title", {
         resource_name: e,
         resource_publisher: t
@@ -787,11 +787,11 @@ function eG(e) {
   let {
     support_contact
   } = t;
-  let n = wA();
+  let n = useDispatch();
   let [s, o] = useState(!1);
   let l = useRef(null);
   let d = l.current?.getBoundingClientRect();
-  let c = function(e, t) {
+  let c = function (e, t) {
     if (t) return "subscription";
     let i = new Date(e);
     let n = new Date();
@@ -1034,7 +1034,7 @@ let eX = (e, t) => {
   }));
 };
 function eQ(e) {
-  let t = wA();
+  let t = useDispatch();
   let i = e.activePurchases.length || e.inactivePurchases.length;
   let n = e0(e.activePurchases, e.inactivePurchases);
   let a = e1(e.vatGstId, e.shippingAddress);
@@ -1122,9 +1122,9 @@ function eJ(e) {
       e.meta.vat_gst_id && g(e.meta.vat_gst_id);
       e.meta.shipping_address && A(e.meta.shipping_address);
       e.meta.tax_id_verification_status && E(e.meta.tax_id_verification_status);
-    }).catch(() => {}) ;
+    }).catch(() => {});
   });
-  let O = wA();
+  let O = useDispatch();
   let L = e.profile?.public_at ? e.profile?.profile_handle : null;
   let {
     purchasePageType
@@ -1321,7 +1321,7 @@ let t_ = M4.Mutation(({
   return r;
 });
 function tA() {
-  let e = d4(e => e.currentUserOrgId);
+  let e = useSelector(e => e.currentUserOrgId);
   if (!e) throw Error("FeedSettings rendered with null currentUserOrgId");
   let [t] = IT(tf({
     orgId: e
@@ -1612,7 +1612,7 @@ let tR = {
   }
 };
 function tN() {
-  let e = wA();
+  let e = useDispatch();
   let t = !!_$$f("opted_in_email");
   let i = useCallback(t => {
     e(_$$b({
@@ -1727,8 +1727,8 @@ function tD() {
   });
 }
 var tq = (e => (e[e.Unknown = 0] = "Unknown", e[e.Mobile = 1] = "Mobile", e[e.Desktop = 2] = "Desktop", e))(tq || {});
-let tJ = Ju(function(e) {
-  let t = wA();
+let tJ = Ju(function (e) {
+  let t = useDispatch();
   let i = hS(e);
   let n = _$$X3();
   return jsx(bL, {
@@ -1785,10 +1785,10 @@ let tJ = Ju(function(e) {
     })
   });
 }, "CHANGE_PASSWORD_MODAL", ZU.YES);
-let t4 = Ju(function(e) {
+let t4 = Ju(function (e) {
   let t = _$$iZ();
   let i = _$$Z();
-  let n = wA();
+  let n = useDispatch();
   let a = hS(e);
   return t ? pS(t) ? jsx(_$$R2, {
     title: jsx(zd, {}),
@@ -1890,7 +1890,7 @@ function ib({
     })]
   });
 }
-let iv = Ju(function(e) {
+let iv = Ju(function (e) {
   let [t, i] = useState("");
   let [n, o] = useState(30);
   let [d, u] = useState({
@@ -1913,7 +1913,7 @@ let iv = Ju(function(e) {
   let {
     org
   } = e;
-  let _ = wA();
+  let _ = useDispatch();
   let A = e => _$$t2("tokens.settings.dev_token_modal.expiration_option", {
     numDays: e
   });
@@ -2081,7 +2081,7 @@ function iw(e) {
     user,
     nonExpPatRevocationStage
   } = e;
-  let s = wA();
+  let s = useDispatch();
   let [o, l] = useState(null);
   let d = useCallback(() => (l(token.id), XHR.del(`/api/user/dev_tokens/${token.id}`).then(e => {
     l(null);
@@ -2095,7 +2095,7 @@ function iw(e) {
   }).catch(() => {
     l(null);
     s(_$$s2.error("Could not revoke token, please try again"));
-  }), () => { }), [s, token, user.id]);
+  }), () => {}), [s, token, user.id]);
   let c = token.scopes ?? [sy.FILES_READ_DEPRECATING, sy.FILE_COMMENTS_WRITE, sy.FILE_DEV_RESOURCES_WRITE, sy.WEBHOOKS_WRITE];
   let u = Object.entries(av(c)).filter(([, e]) => e !== _$$eK.NO_ACCESS).map(([e, t]) => {
     let i = qq(e).name;
@@ -2172,7 +2172,7 @@ function iw(e) {
 }
 function iC(e) {
   let t = e.token;
-  let i = wA();
+  let i = useDispatch();
   return jsxs(_$$Y, {
     padding: 12,
     backgroundColor: "warning-tertiary",
@@ -2219,7 +2219,7 @@ function iT(e) {
   let t = e.user.dev_tokens || [];
   t && t.sort((e, t) => Number(t.id) - Number(e.id));
   let i = md(_$$Z2);
-  let n = wA();
+  let n = useDispatch();
   let a = e => {
     n(iu({
       id: e
@@ -2253,7 +2253,7 @@ function iT(e) {
     }, t.id) : jsx(iw, {
       user: e.user,
       token: t,
-      nonExpPatRevocationStage: function() {
+      nonExpPatRevocationStage: function () {
         let e = getFeatureFlags();
         return e.non_exp_pat_enable_revocation ? "revoked" : e.non_exp_pat_enable_revocation_advance_notice ? "grace_period" : "none";
       }()
@@ -2284,7 +2284,7 @@ function iR({
   token: t
 }) {
   let [i, n] = useState(!1);
-  let s = wA();
+  let s = useDispatch();
   let o = useCallback(t => {
     n(!0);
     XHR.del(`/api/oauth/token/${t.client_id}`).then(t => {
@@ -2354,7 +2354,7 @@ function iF({
   onSessionRevoked: t
 }) {
   let [i, n] = useState(!1);
-  let s = wA();
+  let s = useDispatch();
   let o = useCallback(e => {
     s(_$$F.clearAll());
     n(!0);
@@ -2438,7 +2438,7 @@ function iF({
 function iM({
   user: e
 }) {
-  let t = wA();
+  let t = useDispatch();
   let i = Rs(Yh6({}));
   let n = oA(i.data?.currentUser?.isMfaRequiredByMembershipOrg);
   let a = e.two_factor_app_enabled;
@@ -2620,7 +2620,7 @@ function iH({
   onSessionRevoked: t
 }) {
   let [i, n] = useState(!1);
-  let s = wA();
+  let s = useDispatch();
   let o = useCallback(e => {
     s(_$$F.clearAll());
     n(!0);
@@ -2720,8 +2720,8 @@ let nt = _$$nF((e, t) => {
   }));
   return n;
 });
-let ni = Ju(function(e) {
-  let t = wA();
+let ni = Ju(function (e) {
+  let t = useDispatch();
   return jsx(nr, {
     ...e,
     onSubmitChangeEmail: e => {
@@ -2909,7 +2909,7 @@ function nG({
   }), [i, n]);
   let {
     onSubmit
-  } = function({
+  } = function ({
     onSubmit: e,
     recordingKey: t,
     ...i
@@ -3089,7 +3089,7 @@ let nq = forwardRef(({
   let {
     error
   } = l;
-  let p = function(e) {
+  let p = function (e) {
     let t = ny(e);
     return useMemo(() => t ? function e(t) {
       if (!t) return;
@@ -3123,7 +3123,7 @@ let n$ = Object.assign(nz, {
   Helper: nW,
   Row: nq,
   Label: nY,
-  useForm: function({
+  useForm: function ({
     schema: e,
     size: t = "md",
     recordingKey: i,
@@ -3163,7 +3163,7 @@ let n$ = Object.assign(nz, {
       defaultValues: r,
       mode: "onSubmit",
       reValidateMode: "onSubmit",
-      resolver: function(e, t, i = {}) {
+      resolver: function (e, t, i = {}) {
         if (nE(e)) return async (t, n, r) => {
           try {
             let n = await e["sync" === i.mode ? "parse" : "parseAsync"](t, void 0);
@@ -3177,7 +3177,7 @@ let n$ = Object.assign(nz, {
           } catch (e) {
             if (nI(e)) return {
               values: {},
-              errors: nw(function(e, t) {
+              errors: nw(function (e, t) {
                 let i = {};
                 for (; e.length;) {
                   let n = e[0];
@@ -3226,7 +3226,7 @@ let n$ = Object.assign(nz, {
           } catch (e) {
             if (nx(e)) return {
               values: {},
-              errors: nw(function(e, t) {
+              errors: nw(function (e, t) {
                 let i = {};
                 for (; e.length;) {
                   let n = e[0];
@@ -3331,11 +3331,11 @@ nQ.displayName = "Input";
 let nJ = Object.assign(nQ, {
   Root: _$$p3.Root
 });
-let n1 = Ju(function(e) {
+let n1 = Ju(function (e) {
   let t = hS(e);
-  let i = wA();
+  let i = useDispatch();
   let n = getFeatureFlags().fpl_username_form_migration;
-  let o = d4(e => e.user);
+  let o = useSelector(e => e.user);
   let [d, u] = useState(o.name);
   let [m, g] = useState(!1);
   let f = _$$X3();
@@ -3565,7 +3565,7 @@ class n8 extends PureComponent {
   }
 }
 n8.displayName = "DeleteUserAccountModal";
-let rt = Ju(function(e) {
+let rt = Ju(function (e) {
   let t = hS(e);
   let i = TA();
   let [n, o] = useState(e.fileViewHistoryDisabled.toString());
@@ -3686,7 +3686,7 @@ function rs({
   });
 }
 function ro() {
-  let e = wA();
+  let e = useDispatch();
   let [t, i] = useState("init");
   if (useEffect(() => {
     let e = !1;
@@ -3791,8 +3791,8 @@ function rh() {
   });
 }
 function rg() {
-  let e = wA();
-  let t = d4(e => e.voice.showCaptions);
+  let e = useDispatch();
+  let t = useSelector(e => e.voice.showCaptions);
   return jsx("div", {
     className: "account_settings_modal--newFeaturesRow--buhmC",
     children: jsx(_$$d2, {
@@ -3811,9 +3811,9 @@ function rg() {
   });
 }
 function rf() {
-  let e = d4(e => e.voice.showCaptions);
-  let t = d4(e => e.voice.captionsInstallProgress);
-  let i = wA();
+  let e = useSelector(e => e.voice.showCaptions);
+  let t = useSelector(e => e.voice.captionsInstallProgress);
+  let i = useDispatch();
   return (useEffect(() => {
     e && _$$nN(t) && (HJ(i, !1), sx("voice_caption_download_error", {
       error_code: t,
@@ -3860,7 +3860,7 @@ function rA() {
 let rR = "leave_org_confirm--important--F-mUY modal--important--qfd6R";
 let rN = "LEAVE_ORG_CONFIRMATION_MODAL";
 function rP(e) {
-  let t = wA();
+  let t = useDispatch();
   return jsx(yX, {
     confirmationTitle: _$$t2("org_settings.leave_org.confirm_modal_title", {
       orgName: e.orgName
@@ -3968,7 +3968,7 @@ function rO(e) {
   });
 }
 function rD(e) {
-  let t = wA();
+  let t = useDispatch();
   let {
     plan,
     planUser,
@@ -3978,7 +3978,7 @@ function rD(e) {
     pendingAccountTypeRequest,
     hasProvisionalAccess
   } = n;
-  let l = N_.toArray().filter(e => function(e, t) {
+  let l = N_.toArray().filter(e => function (e, t) {
     switch (e) {
       case ud.COLLABORATOR:
         return t.canUpgradeCollaborator;
@@ -4041,7 +4041,7 @@ function rD(e) {
             fontSize: 11,
             color: "secondary",
             truncate: !0,
-            children: function(e) {
+            children: function (e) {
               switch (e) {
                 case FMemberRoleType.GUEST:
                   return _$$t2("general.guest");
@@ -4176,7 +4176,7 @@ function rL(e) {
 function rF({
   user: e
 }) {
-  let t = wA();
+  let t = useDispatch();
   let i = am();
   let {
     enhancedContrast
@@ -4575,7 +4575,7 @@ qK(rN, e => jsx(rP, {
 }));
 export var $$rM1 = (e => (e.ACCOUNT = "ACCOUNT", e.COMMUNITY = "COMMUNITY", e.NOTIFICATIONS = "NOTIFICATIONS", e.SESSIONS = "SESSIONS", e.SECURITY = "SECURITY", e))($$rM1 || {});
 let rj = {
-  ACCOUNT: function() {
+  ACCOUNT: function () {
     let e = _$$iZ();
     return jsx(eo, {
       avatarType: es.ACCOUNT,
@@ -4584,18 +4584,18 @@ let rj = {
       }) : null
     });
   },
-  COMMUNITY: function() {
+  COMMUNITY: function () {
     let e = _$$iZ();
-    let t = d4(e => e.user && sD(e.user, e.authedProfilesById));
+    let t = useSelector(e => e.user && sD(e.user, e.authedProfilesById));
     return e ? jsx(eJ, {
       user: e,
       profile: t
     }) : null;
   },
-  NOTIFICATIONS: function() {
+  NOTIFICATIONS: function () {
     return _$$iZ() ? jsx(tD, {}) : null;
   },
-  SESSIONS: function() {
+  SESSIONS: function () {
     let e = _$$iZ();
     let [t, i] = useState([]);
     let [n, s] = useState(!0);
@@ -4664,7 +4664,7 @@ let rj = {
       })
     });
   },
-  SECURITY: function() {
+  SECURITY: function () {
     let e = _$$iZ();
     let t = _$$R(e => ({
       orgById: e.orgById,
@@ -4712,7 +4712,7 @@ let rU = {
   SESSIONS: () => _$$t2("settings.account_setting.sessions"),
   SECURITY: () => _$$t2("settings.account_setting.security")
 };
-let $$rB0 = Ju(function(e) {
+let $$rB0 = Ju(function (e) {
   let t = hS(e);
   let i = getFeatureFlags().user_settings_tab;
   let {
@@ -4752,7 +4752,7 @@ let $$rB0 = Ju(function(e) {
             onClick: v,
             children: jsx(u, {})
           })
-        }), function(e) {
+        }), function (e) {
           if (e.activeSubView === A.PURCHASES) return e.properties.purchasePageType === po.ACTIVE ? _$$t2("settings.account_setting.purchases") : _$$t2("settings.account_setting.inactive");
         }(g)]
       })
@@ -4786,4 +4786,4 @@ let $$rB0 = Ju(function(e) {
   });
 }, "ACCOUNT_SETTINGS_MODAL", ZU.YES);
 export const s = $$rB0;
-export const c = $$rM1; 
+export const c = $$rM1;

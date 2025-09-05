@@ -1,7 +1,9 @@
 // Type definitions for NodeFactory and related classes
 // This file contains all type definitions extracted from 472793.ts
 
-import type { Fn } from "../../../types/global"
+import type { DocumentAccessState } from '../816197'
+import type { SceneGraph } from '../830071'
+import type { Fn } from '../../../types/global'
 
 // === Core Type Interfaces ===
 
@@ -262,9 +264,9 @@ export interface GridLayoutGrid extends BaseLayoutGrid {
 
 export type LayoutGrid
   = | StripLayoutGridMinMax
-  | StripLayoutGridStretch
-  | StripLayoutGridCenter
-  | GridLayoutGrid
+    | StripLayoutGridStretch
+    | StripLayoutGridCenter
+    | GridLayoutGrid
 
 export type LayoutGrids = LayoutGrid[]
 export interface GridLayoutConfig {
@@ -728,39 +730,52 @@ export interface IncLoadingErrorLoggerOptions {
 }
 
 export interface PluginRuntimeOptions {
-  queryMode: string
-  userID: string
-  apiVersion: string
-  enablePrivatePluginApi: boolean
-  titleIconURL: any
-  name: any
-  command: string
-  allowedDomains: any
-  capabilities: any
-  code: boolean
-  html: string
-  editorType: any
-  parameterValues: any
-  deferRunEvent: any
-  enableNativeJsx: any
-  closePlugin: Fn
-  isLocal: boolean
-  addShutdownAction: Fn
-  pluginID: string
-  pluginVersionID: string
-  sceneGraph: any
-  stats: any
-  enableProposedApi: boolean
-  incrementalSafeApi: boolean
-  allowIncrementalUnsafeApiCalls: boolean
-  validatedPermissions: any
-  apiMode: any
-  triggeredFrom: string
-  openFileKey: string
-  isPluginExemptFromPluginDataLimits: boolean
-  enableResponsiveSetHierarchyMutations: boolean
+  allowVisibleIframe: boolean
+  iframeId: string
+  allowInitiateCheckout: boolean
+
+  activePromiseCallback?: string
+  activePromiseTimeoutId?: any
+  defaultIframePosition?: string
 }
 
+export interface PluginOptions {
+  apiMode: {
+    type: string
+    uiHandle: any
+    noOpUI: any
+  }
+  incrementalSafeApi: boolean
+  sceneGraph: SceneGraph
+  stats: any
+  allowIncrementalUnsafeApiCalls: boolean
+  pluginID: string
+  pluginVersionID: string
+  userID: string
+  editorType: any
+  openFileKey: string
+  validatedPermissions: any
+  enableProposedApi: boolean
+  enableResponsiveSetHierarchyMutations: boolean
+  isPluginExemptFromPluginDataLimits: boolean
+  triggeredFrom: string
+  addShutdownAction: Fn
+  html: string
+  titleIconURL: string
+  name: string
+  command: string
+  allowedDomains: string[]
+  code: string
+  isLocal: boolean
+  parameterValues?: Record<string, string>
+  capabilities: string[]
+  deferRunEvent?: boolean
+  queryMode?: boolean
+  apiVersion: string
+  enablePrivatePluginApi?: boolean
+  enableNativeJsx?: boolean
+  closePlugin: Fn
+}
 export interface EventHandler {
   handler: (...args: any[]) => any
   once?: boolean
@@ -775,11 +790,6 @@ export interface ScheduledEvent {
 
 export interface CallbackInfo {
   createPromiseCallback: (options: any) => any
-}
-
-export interface AnnotationCategoryFactoryOptions {
-  vm: any
-  sceneGraph: any
 }
 
 // === Error and Logging Interfaces ===
@@ -883,7 +893,6 @@ export interface VideoStoreData {
   url?: string
 }
 
-
 // === Style and Variable Management ===
 
 export interface StyleManager {
@@ -966,81 +975,81 @@ export interface APIMethodCollection {
 
 export type NodeType
   = | 'DOCUMENT'
-  | 'PAGE'
-  | 'FRAME'
-  | 'GROUP'
-  | 'COMPONENT'
-  | 'COMPONENT_SET'
-  | 'INSTANCE'
-  | 'BOOLEAN_OPERATION'
-  | 'VECTOR'
-  | 'STAR'
-  | 'LINE'
-  | 'ELLIPSE'
-  | 'POLYGON'
-  | 'RECTANGLE'
-  | 'TEXT'
-  | 'TEXT_PATH'
-  | 'SLICE'
-  | 'STICKY'
-  | 'HIGHLIGHT'
-  | 'CODE_BLOCK'
-  | 'SHAPE_WITH_TEXT'
-  | 'CONNECTOR'
-  | 'STAMP'
-  | 'WIDGET'
-  | 'EMBED'
-  | 'LINK_UNFURL'
-  | 'MEDIA'
-  | 'SECTION'
-  | 'WASHI_TAPE'
-  | 'TABLE'
-  | 'TABLE_CELL'
-  | 'SLIDE'
-  | 'SLIDE_GRID'
-  | 'SLIDE_ROW'
-  | 'INTERACTIVE_SLIDE_ELEMENT'
-  | 'MODULE'
-  | 'WEBPAGE'
-  | 'CODE_INSTANCE'
-  | 'REPEATER'
-  | 'TRANSFORM_GROUP'
-  | 'CMS_RICH_TEXT'
+    | 'PAGE'
+    | 'FRAME'
+    | 'GROUP'
+    | 'COMPONENT'
+    | 'COMPONENT_SET'
+    | 'INSTANCE'
+    | 'BOOLEAN_OPERATION'
+    | 'VECTOR'
+    | 'STAR'
+    | 'LINE'
+    | 'ELLIPSE'
+    | 'POLYGON'
+    | 'RECTANGLE'
+    | 'TEXT'
+    | 'TEXT_PATH'
+    | 'SLICE'
+    | 'STICKY'
+    | 'HIGHLIGHT'
+    | 'CODE_BLOCK'
+    | 'SHAPE_WITH_TEXT'
+    | 'CONNECTOR'
+    | 'STAMP'
+    | 'WIDGET'
+    | 'EMBED'
+    | 'LINK_UNFURL'
+    | 'MEDIA'
+    | 'SECTION'
+    | 'WASHI_TAPE'
+    | 'TABLE'
+    | 'TABLE_CELL'
+    | 'SLIDE'
+    | 'SLIDE_GRID'
+    | 'SLIDE_ROW'
+    | 'INTERACTIVE_SLIDE_ELEMENT'
+    | 'MODULE'
+    | 'WEBPAGE'
+    | 'CODE_INSTANCE'
+    | 'REPEATER'
+    | 'TRANSFORM_GROUP'
+    | 'CMS_RICH_TEXT'
 
 export type StyleType = 'FILL' | 'TEXT' | 'EFFECT' | 'GRID'
 
 export type BlendMode
   = | 'NORMAL'
-  | 'DARKEN'
-  | 'MULTIPLY'
-  | 'LINEAR_BURN'
-  | 'COLOR_BURN'
-  | 'LIGHTEN'
-  | 'SCREEN'
-  | 'LINEAR_DODGE'
-  | 'COLOR_DODGE'
-  | 'OVERLAY'
-  | 'SOFT_LIGHT'
-  | 'HARD_LIGHT'
-  | 'DIFFERENCE'
-  | 'EXCLUSION'
-  | 'HUE'
-  | 'SATURATION'
-  | 'COLOR'
-  | 'LUMINOSITY'
+    | 'DARKEN'
+    | 'MULTIPLY'
+    | 'LINEAR_BURN'
+    | 'COLOR_BURN'
+    | 'LIGHTEN'
+    | 'SCREEN'
+    | 'LINEAR_DODGE'
+    | 'COLOR_DODGE'
+    | 'OVERLAY'
+    | 'SOFT_LIGHT'
+    | 'HARD_LIGHT'
+    | 'DIFFERENCE'
+    | 'EXCLUSION'
+    | 'HUE'
+    | 'SATURATION'
+    | 'COLOR'
+    | 'LUMINOSITY'
 
 export type EventType
   = | 'selectionchange'
-  | 'currentpagechange'
-  | 'close'
-  | 'run'
-  | 'textreview'
-  | 'documentchange'
-  | 'stylechange'
-  | 'nodechange'
-  | 'open'
-  | 'drop'
-  | 'message'
+    | 'currentpagechange'
+    | 'close'
+    | 'run'
+    | 'textreview'
+    | 'documentchange'
+    | 'stylechange'
+    | 'nodechange'
+    | 'open'
+    | 'drop'
+    | 'message'
 
 // === Class Type Definitions ===
 

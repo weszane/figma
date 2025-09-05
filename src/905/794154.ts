@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { fp, zl } from "../figma_app/27355";
 import { Um } from "../905/848862";
 import { jD } from "../figma_app/322845";
@@ -8,7 +8,7 @@ export function $$d0() {
   let [e, t] = fp(YH);
   let i = hw();
   let d = jh();
-  let c = wA();
+  let c = useDispatch();
   let u = Um();
   return useMemo(() => {
     function n(e) {

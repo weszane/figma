@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback, useState, useEffect, PureComponent, createRef, useMemo, useRef } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
 import { getFeatureFlags } from "../905/601108";
 import l from "../vendor/805353";
@@ -76,7 +76,7 @@ import { A as _$$A8 } from "../svg/391205";
 import { A as _$$A9 } from "../1617/763016";
 var d = l;
 function R(e) {
-  let t = wA();
+  let t = useDispatch();
   let r = useCallback(r => {
     r.stopPropagation();
     e.team.canEdit && (sx("New Folder", {
@@ -421,7 +421,7 @@ let e$ = "file_move--folderRowWrapper--R5vx1";
 let eG = "file_move--folderRow--ZBYjx";
 let eV = "file_move--horizontalDivider--g43mL";
 function eH(e) {
-  let t = d4(e => e.user);
+  let t = useSelector(e => e.user);
   let [r, n] = useState("");
   let o = e.dispatch;
   let [l, d] = useState(!0);
@@ -511,12 +511,12 @@ export function $$e57(e) {
 export function $$e83(e) {
   let t = null;
   e.type === _$$A.FILE ? t = e.file.parent_org_id || null : e.type === _$$A.REPO ? t = e.repo.parent_org_id || null : e.type === _$$A.FILE_IMPORT && (t = e.orgId);
-  let r = d4(e => e.orgById);
+  let r = useSelector(e => e.orgById);
   let n = t ? r[t] : null;
-  let o = d4(e => e.fileMove);
-  let l = d4(e => !!e.creatingNewFolder);
-  let d = d4(e => e.dropdownShown);
-  let u = d4(e => e.selectedView);
+  let o = useSelector(e => e.fileMove);
+  let l = useSelector(e => !!e.creatingNewFolder);
+  let d = useSelector(e => e.dropdownShown);
+  let u = useSelector(e => e.selectedView);
   let m = $$e57(e);
   let f = _$$R();
   let h = Rs(Y9I, {
@@ -682,7 +682,7 @@ export function $$e83(e) {
   };
   let y = null == m || null === b ? null : b.transformed.folders[m];
   let w = y ? y.teamId : null;
-  let j = wA();
+  let j = useDispatch();
   useEffect(() => {
     v.loaded && j(eA({
       modalData: e,
@@ -1364,7 +1364,7 @@ export function $$e95(e) {
 function te(e) {
   let t = useRef(null);
   let [r, n] = useState(!1);
-  let o = wA();
+  let o = useDispatch();
   useEffect(() => {
     !r && e.isTeamNew && t.current && e.hasFolderSection && (o(Dp({
       indexAt: e.firstFolderFocusedIndex
@@ -1438,7 +1438,7 @@ export function $$tt6(e) {
   });
 }
 function tr(e) {
-  let t = wA();
+  let t = useDispatch();
   let r = gY(mq);
   let s = (a, s) => {
     sx("Rename Folder", {

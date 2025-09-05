@@ -1,6 +1,6 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useRef, useState, useCallback, cloneElement, Children } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { E as _$$E } from "../905/465157";
 import { rXF, j0r } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
@@ -38,9 +38,9 @@ export function $$L3(e) {
     bigNudgeAmount,
     smallNudgeAmount
   } = sT();
-  let s = wA();
+  let s = useDispatch();
   let o = useRef(null);
-  let d = d4(e => {
+  let d = useSelector(e => {
     let {
       borderTopWeight,
       borderBottomWeight,
@@ -194,7 +194,7 @@ function M({
   isNotPencilTool: l,
   recordingKey: d
 }) {
-  let c = wA();
+  let c = useDispatch();
   let u = SG([r]).data ?? [];
   let {
     updateVariableConsumption,

@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { wA, d4, Pj } from "../vendor/514228";
+import { useDispatch, useSelector, useStore } from "../vendor/514228";
 import { _gJ, Oin, FAf } from "../figma_app/763686";
 import { fp, md } from "../figma_app/27355";
 import { sn } from "../905/542194";
@@ -31,7 +31,7 @@ import { s as _$$s } from "../figma_app/504088";
 import { R as _$$R } from "../905/300969";
 import { c as _$$c2 } from "../905/580030";
 export function $$k0(e, t) {
-  let r = wA();
+  let r = useDispatch();
   let [k, M] = fp(_$$R);
   let [F, j] = fp(_$$c2);
   let U = tS() ?? "";
@@ -42,14 +42,14 @@ export function $$k0(e, t) {
   let V = U4();
   let H = md(_$$d)?.data;
   let [z, W] = fp(_$$t);
-  let K = d4(e => e.selectedView);
-  let Y = d4(e => e.mirror.appModel.prototypeCanvasUiVisible);
+  let K = useSelector(e => e.selectedView);
+  let Y = useSelector(e => e.mirror.appModel.prototypeCanvasUiVisible);
   let $ = !iZ();
   let X = E3();
   let q = X === nT.DevHandoff;
   let J = X === nT.Illustration;
   let Z = q ? "handoff" : J ? "illustration" : "design";
-  let Q = Pj();
+  let Q = useStore();
   let ee = _$$W();
   let {
     close

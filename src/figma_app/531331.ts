@@ -1,5 +1,5 @@
 import { useEffect, useMemo } from "react";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { getFeatureFlags } from "../905/601108";
 import { Rs } from "../figma_app/288654";
 import { d6 } from "../figma_app/687776";
@@ -30,7 +30,7 @@ import { W as _$$W } from "../905/442612";
 import { i as _$$i } from "../figma_app/43065";
 import { M as _$$M } from "../figma_app/854365";
 export function $$D0() {
-  let e = d4(e => e.plans);
+  let e = useSelector(e => e.plans);
   let t = iZ();
   let r = t?.external_restricted_org_id;
   return e.filter(e => e.has_drafts).map(e => ({
@@ -50,9 +50,9 @@ export function $$D0() {
 }
 export function $$k1() {
   let e = q5();
-  let t = wA();
-  let r = d4(e => getPermissionsStateMemoized(e));
-  let y = d4(F9);
+  let t = useDispatch();
+  let r = useSelector(e => getPermissionsStateMemoized(e));
+  let y = useSelector(F9);
   let N = Rs(iY3, {
     branchFileKey: e?.key || ""
   }, {
@@ -60,9 +60,9 @@ export function $$k1() {
   });
   let k = c$(e?.key || "");
   let M = k.data?.map(e => e.id) ?? [];
-  let F = d4(e => e.selectedView);
-  let j = d4(e => e.plans);
-  let U = d4(e => e.teams);
+  let F = useSelector(e => e.selectedView);
+  let j = useSelector(e => e.plans);
+  let U = useSelector(e => e.teams);
   useEffect(() => {
     t(hr({
       loadedPlans: j

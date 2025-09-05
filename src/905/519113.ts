@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useRef, useId, useMemo, forwardRef, useCallback, useState, useEffect, useContext } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { isNotNullish } from "../figma_app/95419";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
@@ -298,7 +298,7 @@ function eW(e) {
     hasWorkspace,
     workspaceName
   } = e;
-  let c = wA();
+  let c = useDispatch();
   let {
     teams,
     currentOrgId,
@@ -451,7 +451,7 @@ function eq({
   publishScope: i
 }) {
   let r = M4.File.useValue(t.key).data?.team_id;
-  let s = d4(e => {
+  let s = useSelector(e => {
     if (r) return e.teams[r];
   });
   let o = nn(i);
@@ -707,15 +707,15 @@ function tF({
 }) {
   let _;
   let A = Um();
-  let b = d4(e => e.library);
-  let v = d4(e => e.fileByKey);
+  let b = useSelector(e => e.library);
+  let v = useSelector(e => e.fileByKey);
   let I = md(qp);
-  let E = d4(Wz);
-  let x = wA();
+  let E = useSelector(Wz);
+  let x = useDispatch();
   let S = useMemo(MW, []);
-  let w = d4(t => S(t, e.node_id));
+  let w = useSelector(t => S(t, e.node_id));
   let C = useMemo(ju, []);
-  let T = d4(t => C(t, e.node_id));
+  let T = useSelector(t => C(t, e.node_id));
   let k = e.type === PW.VARIABLE_SET && w.length > 0;
   let R = useCallback(() => {
     i || s(e.node_id);
@@ -1171,7 +1171,7 @@ function tZ({
       CWU.setVariableIsPublishable(e.node_id, !e.isPublishable);
     });
   }, [e.node_id, e.isPublishable]);
-  let d = wA();
+  let d = useDispatch();
   let c = useCallback(e => {
     e.preventDefault();
     e.stopPropagation();
@@ -1212,8 +1212,8 @@ function tX({
   let [s, o] = useState(!1);
   let l = useMemo(MW, []);
   let d = useMemo(ju, []);
-  let c = d4(e => l(e, t.node_id));
-  let u = d4(e => d(e, t.node_id));
+  let c = useSelector(e => l(e, t.node_id));
+  let u = useSelector(e => d(e, t.node_id));
   function p(e) {
     return [...e].sort((e, t) => "sortPosition" in e && null !== e.sortPosition ? "sortPosition" in t && null !== t.sortPosition ? -Ez(e.sortPosition, t.sortPosition) : -1 : 1);
   }
@@ -1286,7 +1286,7 @@ function tJ(e) {
     initiallyCheckedItemIDs,
     libraryModalSessionId
   } = e;
-  let h = wA();
+  let h = useDispatch();
   let g = hS(e);
   let _ = useRef(null);
   let [b, I] = fp(pz);
@@ -1298,20 +1298,20 @@ function tJ(e) {
   let W = useCallback(() => {
     F(void 0);
   }, []);
-  let Y = d4(e => e.savedPublishDescription);
+  let Y = useSelector(e => e.savedPublishDescription);
   let [en, ea] = useState(Y || "");
   let [el, ed] = useState(!1);
   let [ec, eu] = useState(null);
   let ep = q5();
-  let em = d4(d1);
-  let eh = d4(e => e.library);
+  let em = useSelector(d1);
+  let eh = useSelector(e => e.library);
   let eg = Cq({
     useSinatraType: !0
   });
   let ef = em?.key;
-  let e_ = d4(cM);
-  let eA = d4(MH);
-  let ey = d4(dM);
+  let e_ = useSelector(cM);
+  let eA = useSelector(MH);
+  let ey = useSelector(dM);
   let ev = md(_$$t2);
   let eI = nN();
   let eE = useMemo(() => Jl(eA), [eA]);
@@ -1320,10 +1320,10 @@ function tJ(e) {
     canShowCTA,
     showCTA
   } = _$$z2("publishing");
-  let eR = d4(fA);
+  let eR = useSelector(fA);
   let eN = X$("PublishingModalInner").unwrapOr(null);
   let eP = H3(eN);
-  let eO = d4(e => e.orgById);
+  let eO = useSelector(e => e.orgById);
   let eD = _$$Y(eg || null);
   let eL = !!em?.starter_library_src_file_key;
   let eF = useMemo(() => {
@@ -1378,9 +1378,9 @@ function tJ(e) {
   useEffect(() => {
     e2?.status === _$$r.LOADING && eY.status === _$$r.SUCCESS && (initiallyCheckedItemIDs || tt(new Set(e1)));
   }, [e1, eY, initiallyCheckedItemIDs, e2?.status]);
-  let e5 = d4(e => _$$oB(e, eQ));
-  let e4 = d4(e => JI(e, eQ));
-  let e6 = d4(e => Dc(e, eQ));
+  let e5 = useSelector(e => _$$oB(e, eQ));
+  let e4 = useSelector(e => JI(e, eQ));
+  let e6 = useSelector(e => Dc(e, eQ));
   let [te, tt] = useState(() => new Set(initiallyCheckedItemIDs && initiallyCheckedItemIDs.size > 0 ? e1.filter(e => initiallyCheckedItemIDs?.has(e)) : e1));
   useEffect(() => {
     let e = e => {
@@ -1513,8 +1513,8 @@ function tJ(e) {
     }));
   }, [h, tu, t_, tg]);
   let tE = JT();
-  let tx = d4(Mh);
-  let tS = d4(Pd);
+  let tx = useSelector(Mh);
+  let tS = useSelector(Pd);
   let {
     getAssetInvalidReason,
     itemsToPublishInvalidReason
@@ -1738,9 +1738,9 @@ function t0({
   isCurrentFilePublished: t
 }) {
   let i = _G();
-  let r = wA();
-  let s = Object.values(d4(MH));
-  let o = Object.values(d4(dM));
+  let r = useDispatch();
+  let s = Object.values(useSelector(MH));
+  let o = Object.values(useSelector(dM));
   let l = !s.length && !o.length;
   let c = !1 === t ? {
     "data-tooltip-type": Ib.TEXT,
@@ -1832,7 +1832,7 @@ function t1(e) {
   let [f, _, b, v, I, E, x, S, w, C, T, N, O, D, L, F, M, j, U, B, V, G] = useMemo(() => [g.libraryAssets[PW.RESPONSIVE_SET].modified.wellFormed, g.libraryAssets[PW.RESPONSIVE_SET].modified.erroneous, g.libraryAssets[PW.RESPONSIVE_SET].unmodified.published, g.libraryAssets[PW.RESPONSIVE_SET].unmodified.unpublished, g.libraryAssets[PW.CODE_COMPONENT].modified.wellFormed, g.libraryAssets[PW.CODE_COMPONENT].modified.erroneous, g.libraryAssets[PW.CODE_COMPONENT].unmodified.published, g.libraryAssets[PW.CODE_COMPONENT].unmodified.unpublished, g.variableSets.modified.wellFormed, g.variableSets.modified.erroneous, g.variableSets.unmodified.published, g.variableSets.unmodified.unpublished, g.variableSetsWithHiddenVariables.modified.wellFormed, g.styles.modified.wellFormed, g.styles.unmodified.published, g.styles.unmodified.unpublished, g.productComponents.modified.wellFormed, g.productComponents.modified.erroneous, g.productComponents.unmodified.published, g.productComponents.unmodified.unpublished, g.pageThumbnails.modified, g.pageThumbnails.unmodified].map(t => e.assetQuery ? t.filter(t => t.name.toLocaleLowerCase().trim().includes(e.assetQuery.toLocaleLowerCase())) : t), [g.libraryAssets, g.variableSets.modified.wellFormed, g.variableSets.modified.erroneous, g.variableSets.unmodified.published, g.variableSets.unmodified.unpublished, g.variableSetsWithHiddenVariables.modified.wellFormed, g.styles.modified.wellFormed, g.styles.unmodified.published, g.styles.unmodified.unpublished, g.productComponents.modified.wellFormed, g.productComponents.modified.erroneous, g.productComponents.unmodified.published, g.productComponents.unmodified.unpublished, g.pageThumbnails.modified, g.pageThumbnails.unmodified, e.assetQuery]);
   let z = useMemo(() => new Set(D.concat(w).concat(M).concat(_$$O3(PW.RESPONSIVE_SET) ? f : []).concat(_$$O3(PW.CODE_COMPONENT) ? I : []).map(e => e.node_id).concat(V.map(e => e.node_id))), [D, w, M, f, I, V]);
   let H = w.length > 0 || N.length > 0 || O.length > 0;
-  let W = d4(Wz);
+  let W = useSelector(Wz);
   let K = (t, i, r, a) => {
     for (let s of t = BT(t)) {
       let t = m?.[s.node_id];

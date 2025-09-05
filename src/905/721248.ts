@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useMemo, memo, useState, useEffect, Component, useRef, useCallback, cloneElement, createContext, Suspense, useLayoutEffect, Fragment as _$$Fragment, useContext, createRef } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { c2 } from "../905/382883";
 import o, { lQ } from "../905/934246";
 import { hS } from "../905/437088";
@@ -2264,7 +2264,7 @@ var iH = (e => (e.APPROVED = "approve", e.CHANGES_REQUESTED = "suggest_changes",
 let iW = Ju(function (e) {
   var t;
   var i;
-  let s = wA();
+  let s = useDispatch();
   let [o, u] = useState(e.mergeRequestReviewer.notes || "");
   let [p, m] = useState(e.mergeRequestReviewer.approved_at ? "approve" : e.mergeRequestReviewer.changes_requested_at ? "suggest_changes" : "");
   let {
@@ -2564,7 +2564,7 @@ function nf(e) {
   let s = e.editingNotes;
   let o = e.isReviewRequestor ? e.mergeRequest?.requested_at : e.reviewer?.changes_requested_at || e.reviewer?.approved_at;
   let [l, d] = useState(i);
-  let c = wA();
+  let c = useDispatch();
   useEffect(() => {
     s || d(i);
   }, [i, s]);
@@ -2690,7 +2690,7 @@ function nA(e) {
   let [d, c] = useState();
   let [u, p] = useState(-1);
   let [m, h] = useState(!1);
-  let g = wA();
+  let g = useDispatch();
   let f = (e, t) => {
     t.includes(e) && (c(e), p(t.indexOf(e)));
   };
@@ -3032,7 +3032,7 @@ function nx(e) {
   return e.view === tN.SUMMARY ? void 0 : e.view === tN.AFFECTED_DETAIL || e.view === tN.VARIANT_DETAIL ? e.detailDisplayGroup : e.displayGroup;
 }
 function nS(e) {
-  let t = wA();
+  let t = useDispatch();
   let i = jsx("span", {
     className: nI,
     children: e.sourceFile.name
@@ -3160,7 +3160,7 @@ function nS(e) {
   });
 }
 let nw = memo(function (e) {
-  let t = wA();
+  let t = useDispatch();
   let [i, s] = useState({
     view: tN.SUMMARY
   });
@@ -3883,7 +3883,7 @@ let nF = memo(function (e) {
     identicalChunkGUIDs
   } = o;
   let [w, C] = useState([]);
-  let T = d4(e => e.mirror.appModel.branchingSceneState);
+  let T = useSelector(e => e.mirror.appModel.branchingSceneState);
   let k = useContext(ss);
   let {
     otherChanges,
@@ -5041,7 +5041,7 @@ let rR = memo(function (e) {
   } = t;
   let y = ud();
   let b = md(qp);
-  let I = d4(e => e.mirror.appModel.pagesList);
+  let I = useSelector(e => e.mirror.appModel.pagesList);
   let x = useMemo(() => function (e, t, i, n, r, a) {
     let s = {};
     let o = {};
@@ -5428,8 +5428,8 @@ let rN = memo(function (e) {
   });
   let x = _$$$n();
   let S = md(_$$eE);
-  let w = d4(e => e.mirror.appModel.topLevelMode);
-  let C = d4(e => e.mirror.appModel.multiplayerSessionState);
+  let w = useSelector(e => e.mirror.appModel.topLevelMode);
+  let C = useSelector(e => e.mirror.appModel.multiplayerSessionState);
   useEffect(() => {
     if (!y) return;
     let e = "BranchPermissionsDebugger";
@@ -5665,9 +5665,9 @@ function rD(e) {
 }
 let rL = 0;
 function rF(e) {
-  let t = d4(e => e.fileVersion);
-  let i = d4(e => e.currentUserOrgId);
-  let s = wA();
+  let t = useSelector(e => e.fileVersion);
+  let i = useSelector(e => e.currentUserOrgId);
+  let s = useDispatch();
   let o = useContext(ss);
   let [l, d] = useState(null);
   let [c, u] = useState(!1);
@@ -5736,17 +5736,17 @@ function rF(e) {
 }
 function rM(e) {
   let t;
-  let i = wA();
+  let i = useDispatch();
   let [s, o] = fp(_$$nX);
   let l = s ?? e.direction;
   _$$h(() => (o(e.direction), () => o(null)));
   let d = e.direction;
   let [c, u] = useState(null);
   let [g, f] = useState(!1);
-  let A = d4(_$$tB);
+  let A = useSelector(_$$tB);
   let I = A?.key || null;
   let S = _$$iZ();
-  let D = d4(e => e.roles);
+  let D = useSelector(e => e.roles);
   let L = Rs(_iU, {
     branchFileKey: e.branchKey
   });
@@ -5757,7 +5757,7 @@ function rM(e) {
   let q = S?.id;
   let X = q && Y && D.byRepoId[Y]?.[q];
   let Q = !!(X && X.level > _$$e.VIEWER);
-  let J = d4(e => e.mirror.appModel.topLevelMode);
+  let J = useSelector(e => e.mirror.appModel.topLevelMode);
   let ee = _$$$n();
   let et = useRef(!0);
   useEffect(() => {
@@ -5865,7 +5865,7 @@ function rM(e) {
     });
   }, [c]);
   let eh = M4.useFile(e.branchKey).data;
-  let eg = d4(e => {
+  let eg = useSelector(e => {
     let t = eh?.file_repo_id;
     if (t) return t in e.repos ? e.repos[t] : void 0;
   });

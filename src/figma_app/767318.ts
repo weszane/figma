@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useCallback, useMemo } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { c2 } from "../905/382883";
 import { l as _$$l } from "../905/716947";
 import { getFeatureFlags } from "../905/601108";
@@ -42,12 +42,12 @@ export function $$G0(e) {
     recordingKey,
     consumptionTarget
   } = e;
-  let d = wA();
+  let d = useDispatch();
   let {
     Sprig
   } = useSprigWithSampling();
   let _ = function (e, t, r) {
-    let o = wA();
+    let o = useDispatch();
     let d = J2(UK().showGuids);
     let u = t === Jo.FOCUS_NODE;
     let _ = hZ(t);

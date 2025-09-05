@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { Component, PureComponent } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { sortByPropertyWithOptions } from "../figma_app/656233";
 import { getSingletonSceneGraph } from "../905/700578";
 import { parsePxInt, parsePxNumber } from "../figma_app/783094";
@@ -153,7 +153,7 @@ let O = (e, t, i, n) => {
 };
 export function $$D1(e) {
   let t = e.showLibraryModalUiRefresh ?? !1;
-  let i = wA();
+  let i = useDispatch();
   let r = er();
   let s = O(e.width, 64, 8, S);
   let l = async (t, n) => {

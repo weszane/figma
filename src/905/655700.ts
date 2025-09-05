@@ -1,4 +1,4 @@
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { Z } from "../905/515860";
 import { tB } from "../figma_app/516028";
 import { td } from "../905/845253";
@@ -7,7 +7,7 @@ import { kA } from "../figma_app/336853";
 import { w5 } from "../figma_app/345997";
 import { UQ } from "../figma_app/598018";
 export function $$u0() {
-  return d4(p);
+  return useSelector(p);
 }
 function p(e) {
   let t = tB(e);

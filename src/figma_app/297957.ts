@@ -1,5 +1,5 @@
 import { useCallback, useRef, useEffect } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
 import { getFeatureFlags } from "../905/601108";
 import { tT } from "../905/663269";
@@ -162,7 +162,7 @@ export function $$q36() {
 }
 export function $$J35() {
   let e = L();
-  let t = d4(e => e.currentTeamId);
+  let t = useSelector(e => e.currentTeamId);
   let r = !e;
   let a = !!_$$f("has_marked_ready_for_dev");
   let {
@@ -407,7 +407,7 @@ export function $$eu34() {
   let t = function () {
     let e = Em();
     let t = _$$y().transform(e => e?.canCreateFigmakeFileWithReasons.result ?? !1).unwrapOr(!1);
-    let r = d4(vD);
+    let r = useSelector(vD);
     let n = Fk((e, t) => e.get(t)?.isTopLevelFrame() ?? !1, r);
     let a = No().unwrapOr(null);
     return !!e && !!n && !!a && (a.tier !== FPlanNameType.STARTER || !!getFeatureFlags().bake_starter_limit) && t;

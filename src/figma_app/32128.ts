@@ -23,7 +23,7 @@ import { parseMsNumber } from '../figma_app/783094';
 import { d as _$$d, W as _$$W } from '../figma_app/833988';
 import { R } from '../figma_app/941983';
 import { U } from '../figma_app/964810';
-import { d4, wA } from '../vendor/514228';
+import { useSelector, useDispatch } from '../vendor/514228';
 let $$w4 = 240;
 let $$O10 = 500;
 let $$R14 = 240;
@@ -80,10 +80,10 @@ export function $$G7() {
         source: 'spotlight-following'
       }));
     }, [e, r, t]);
-  }(d4(e => L3(e.multiplayer)));
+  }(useSelector(e => L3(e.multiplayer)));
 }
 export function $$V8() {
-  return d4(e => e.mirror.appModel.isReadOnly || e.mirror.appModel.topLevelMode === lyf.HISTORY);
+  return useSelector(e => e.mirror.appModel.isReadOnly || e.mirror.appModel.topLevelMode === lyf.HISTORY);
 }
 export function $$H12() {
   return p8('pagesList');
@@ -93,9 +93,9 @@ export function $$z2() {
   let r = _$$F(e);
   let l = U();
   let d = $$V8();
-  let c = d4(e => e.openFile ? e.leftPanel.activeTab : xae.LAYERS);
+  let c = useSelector(e => e.openFile ? e.leftPanel.activeTab : xae.LAYERS);
   let p = _$$F(c);
-  let _ = wA();
+  let _ = useDispatch();
   let {
     setIsLayersOpen
   } = $$K15();

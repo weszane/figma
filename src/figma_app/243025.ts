@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, useCallback } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { lQ } from "../905/934246";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
@@ -39,7 +39,7 @@ export function $$N1({
   inputClassName: s,
   autoFocus: o
 }) {
-  let l = wA();
+  let l = useDispatch();
   let d = Um();
   return jsx(l6, {
     ariaLabel: _$$t("dev_handoff.alternative_units.scale_factor.select_label"),

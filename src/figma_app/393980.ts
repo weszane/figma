@@ -1,7 +1,7 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState, useMemo, useRef, useContext, useId, useEffect } from "react";
 import { flushSync } from "../vendor/944059";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { glU } from "../figma_app/763686";
 import { l7 } from "../905/189185";
 import { dI } from "../905/871411";
@@ -167,7 +167,7 @@ function X({
 }) {
   let [g, y] = useState((r ?? "") + (t ? kH(t) : ""));
   let [S, v] = useState(_W(u, ""));
-  let C = wA();
+  let C = useDispatch();
   let w = e.guid;
   let L = e.styleType;
   let P = useRef(null);
@@ -331,7 +331,7 @@ function Z({
   recordingKey: a
 }) {
   let o = sO();
-  let l = wA();
+  let l = useDispatch();
   let d = Um();
   let c = md(TN);
   let u = md(Dq)[e] || "";

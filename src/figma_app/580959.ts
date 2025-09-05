@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { memo, useCallback, PureComponent, createRef, useContext, useMemo, forwardRef, useEffect, Fragment as _$$Fragment, useState, useRef } from "react";
-import { d4, wA, Ng } from "../vendor/514228";
+import { useSelector, useDispatch, connect } from "../vendor/514228";
 import { debounce } from "../905/915765";
 import { xN } from "../figma_app/492908";
 import { S as _$$S } from "../905/274480";
@@ -135,7 +135,7 @@ let $$ti6 = memo(function (e) {
     dispatch
   } = e;
   let r = cJ();
-  let n = d4(e => {
+  let n = useSelector(e => {
     let t = e.mirror.selectionProperties.fillPaints;
     return !t || hS(t) && 0 === t.length;
   });
@@ -459,7 +459,7 @@ let $$tc5 = memo(function ({
   selectedStyleGuid: L,
   entrypointMenu: D
 }) {
-  let k = wA();
+  let k = useDispatch();
   let M = Xo();
   let F = Um();
   let j = !!useContext(zK);
@@ -572,12 +572,12 @@ let $$tc5 = memo(function ({
 });
 export function $$tu7(e) {
   let t = useContext(zK);
-  let r = wA();
+  let r = useDispatch();
   let n = null != t;
   let o = useCallback(() => n, [n]);
   let l = ER();
   let d = E7(_$$b("guid"));
-  let c = d4(t => {
+  let c = useSelector(t => {
     let r = e.selectedPropertyType === rrT.STROKE ? "strokePaints" : "fillPaints";
     return e.shouldUseSelectedStyleProperties ? t.mirror.selectedStyleProperties[r] : t.mirror.selectionProperties[r];
   });
@@ -1216,7 +1216,7 @@ export function $$th8(e) {
   let n = w()({
     [EC]: !e.paint.visible || e.disableOpacity
   });
-  let o = wA();
+  let o = useDispatch();
   let d = e.chitOverride ? e.chitOverride : {
     paint: e.paint
   };
@@ -1339,14 +1339,14 @@ function tf({
     stateStylePickerShown: e.stylePickerShown,
     stylePreviewShown: e.stylePreviewShown
   }));
-  let v = wA();
+  let v = useDispatch();
   let A = `${yJ}-${o}`;
   let x = m?.id === A ? m : null;
   let N = stateStylePickerShown.isShown && stateStylePickerShown.id === A ? stateStylePickerShown : null;
   let C = _$$M(c);
   let k = R2(e, n);
   let M = sy(e, n);
-  let F = d4(t => _$$b2(t, e, null));
+  let F = useSelector(t => _$$b2(t, e, null));
   let j = useCallback(() => {
     v(XE());
     glU.selectStyleByGuid("");
@@ -1820,7 +1820,7 @@ $$t_2.displayName = "Paint";
   }
   t.displayName = "SelectionPaintItem";
   e.SelectionPaintItem = t;
-  e.ConnectedSelectionPaintItem = Ng((e, t) => ({
+  e.ConnectedSelectionPaintItem = connect((e, t) => ({
     pickerShown: e.pickerShown,
     stylePickerShown: e.stylePickerShown,
     paintValueFromEyeDropper: e.currentSelectionPaintInPicker.paintId === t.id ? e.currentSelectionPaintInPicker.updatedPaintFromDropper : void 0,
@@ -1856,7 +1856,7 @@ export function $$tb4(e) {
   let o = p8("activeCanvasEditModeType");
   let l = useMemo(() => _$$eU(!0), []);
   let [d, c] = fp(l);
-  let u = d4(e => e.mirror.selectionPaints);
+  let u = useSelector(e => e.mirror.selectionPaints);
   let [p, h] = useState(void 0);
   let g = useCallback(e => {
     c(!1);
@@ -1882,7 +1882,7 @@ export function $$tb4(e) {
     for (let r in e) if (e[r] !== t[r]) return !1;
     return !0;
   }), []);
-  let G = wA();
+  let G = useDispatch();
   let {
     forceUpdateForUndo
   } = u;

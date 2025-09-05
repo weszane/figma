@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback, memo, useState, useMemo, useEffect, useRef, forwardRef } from "react";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { hS, bL } from "../905/437088";
 import { glU, Ez5, h3O } from "../figma_app/763686";
 import { AD } from "../905/871411";
@@ -57,7 +57,7 @@ function A(e) {
   return e.mirror.sceneGraph.get(e.mirror.appModel.hoveredNode);
 }
 let $$O1 = memo(function () {
-  let e = d4(A);
+  let e = useSelector(A);
   let t = e?.guid;
   let [i, s] = useState(null);
   let d = useMemo(() => t && t !== AD ? glU.getEmbedTypeOfTooltipIcon(t) : null, [t]);
@@ -103,8 +103,8 @@ let $$O1 = memo(function () {
 });
 let $$L0 = memo(function () {
   let e = J2(Ez5.embedUiState().activeEmbedData);
-  let t = d4(e => e.mirror.appModel.currentPage ? e.mirror.appModel.currentPage : void 0);
-  let i = d4(N);
+  let t = useSelector(e => e.mirror.appModel.currentPage ? e.mirror.appModel.currentPage : void 0);
+  let i = useSelector(N);
   let n = md(_$$n);
   let s = !!e && i?.guid === e.embedNodeId;
   return e && e.embedNodeId && e.embedThumbnailNodeId && e.srcUrl && e.containingCanvasId && e.containingCanvasId === t ? getFeatureFlags().figjam_embeds_allowlist && !Cy(e.srcUrl) ? (console.error("Could not play embed; domain not on allow-list:", e.srcUrl), null) : jsx(R, {
@@ -230,7 +230,7 @@ function D(e) {
   });
 }
 let M = forwardRef(function (e, t) {
-  let i = wA();
+  let i = useDispatch();
   let [s, l] = useState(!1);
   let d = useRef(null);
   let {

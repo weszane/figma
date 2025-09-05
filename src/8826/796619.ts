@@ -1,6 +1,6 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useRef, useEffect, useState, useId } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { languageCodes } from "../905/816253";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
 import { bL, DZ, mc, c$, wv } from "../905/493196";
@@ -37,7 +37,7 @@ function T({
   onClose: t,
   ...n
 }) {
-  let a = wA();
+  let a = useDispatch();
   let o = kG(e);
   let s = ZC(o.showing);
   let c = p1();
@@ -436,11 +436,11 @@ function J({
   updatePreview: e,
   recordingKey: t
 }) {
-  let n = wA();
+  let n = useDispatch();
   let o = Um();
   let [c, k] = lJ("stackReverseZIndex");
   let y = am();
-  let S = d4(Sh);
+  let S = useSelector(Sh);
   let j = Gq()?.getPrimaryLocale(!0) === languageCodes.EN ? 120 : 180;
   let b = gl(c);
   let N = !0 === c;
@@ -566,11 +566,11 @@ function et({
   updatePreview: e,
   recordingKey: t
 }) {
-  let n = wA();
+  let n = useDispatch();
   let a = Um();
   let [o, c] = lJ("bordersTakeSpace");
   let m = am();
-  let k = d4(Sh);
+  let k = useSelector(Sh);
   let y = gl(o);
   let S = !0 === o;
   let j = useId();

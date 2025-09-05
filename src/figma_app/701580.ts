@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useEffect, useMemo, useRef, useState, useCallback } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
 import { Im } from "../figma_app/493477";
 import { Y9, Wk } from "../figma_app/272243";
@@ -63,7 +63,7 @@ function B({
   makeSomethingCategoryId: l,
   subcategories: d
 }) {
-  let c = wA();
+  let c = useDispatch();
   let u = _$$tS();
   let p = Gi();
   let _ = _$$f("figjam_editor_onboarded");
@@ -143,7 +143,7 @@ B.displayName = "BrowseTemplatesModalSidebar";
 G.displayName = "TemplatesPickerSidebarItem";
 function z(e) {
   let t = tS();
-  let r = d4(e => e.hubFiles);
+  let r = useSelector(e => e.hubFiles);
   let n = _$$tS();
   let o = useMemo(() => $(e.templates), [e.templates]);
   let l = useRef(null);
@@ -324,8 +324,8 @@ let $ = (e, t = 3) => {
   };
 })(n || (n = {}));
 function en(e) {
-  let t = wA();
-  let r = d4(e => e.hubFiles);
+  let t = useDispatch();
+  let r = useSelector(e => e.hubFiles);
   let a = r[e.templateId];
   let o = a6(a);
   if (!a) return null;
@@ -531,7 +531,7 @@ function em(e) {
     insertTemplate,
     isInsertingTemplate
   } = Fz();
-  let $ = d4(e => M ? e.hubFiles[M] : null);
+  let $ = useSelector(e => M ? e.hubFiles[M] : null);
   let X = useCallback(() => {
     onTemplateInsertedCurrentFile ? onTemplateInsertedCurrentFile() : onClose();
   }, [onTemplateInsertedCurrentFile, onClose]);

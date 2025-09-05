@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { G1 } from "../figma_app/691470";
 import { CortexErrorV2, ClientContentLengthLimitExceededError, ProviderContentLengthLimitExceededError, OutOfDateFeatureVersionError, ProviderRateLimitExceededError, ProviderOverloadedError, CortexRateLimitExceededError, ProviderServiceIssueError, ProviderServiceBusyError, OfflineError, UnsafeOrHarmfulPromptError, ProviderUnsafeOrHarmfulContentError, UnauthorizedError, NotImplementedError, FigjamVisualParsingError } from "../figma_app/316567";
 import { getFeatureFlags } from "../905/601108";
@@ -16,7 +16,7 @@ export let $$h4 = {
 };
 export var $$m2 = (e => (e.Reload = "reload", e.Trace = "trace", e))($$m2 || {});
 export function $$g3() {
-  let e = wA();
+  let e = useDispatch();
   return useCallback((t, r, n) => {
     let i;
     if (n) switch (n.type) {

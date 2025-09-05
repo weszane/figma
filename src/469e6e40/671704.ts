@@ -1,5 +1,5 @@
 import { useCallback, createElement } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { t as _$$t } from "../905/303541";
 import { F } from "../905/302958";
 import { e as _$$e } from "../905/58247";
@@ -9,7 +9,7 @@ export function $$c0({
   isWidget: e,
   id: t
 }) {
-  let a = wA();
+  let a = useDispatch();
   let c = useCallback(() => {
     _$$e({
       id: t,

@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useCallback } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { O as _$$O } from "../905/501876";
 import { md, fp } from "../figma_app/27355";
 import l from "classnames";
@@ -32,7 +32,7 @@ function w({
   devFocusedOnboarding: e
 }) {
   let t = l7();
-  let i = wA();
+  let i = useDispatch();
   let n = md(_$$d);
   let s = md(cR);
   let l = md(hv)?.data;
@@ -92,9 +92,9 @@ export function $$M1({
 }) {
   let t = X0();
   let i = !U4();
-  let l = wA();
+  let l = useDispatch();
   let u = U0();
-  let p = d4(e => i ? void 0 : Np(e, u));
+  let p = useSelector(e => i ? void 0 : Np(e, u));
   let g = l7();
   let x = ZI();
   let y = md(hv)?.data;

@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { memo, useCallback, useState, useEffect, useRef } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { NLJ, W8Y } from "../figma_app/763686";
 import o from "classnames";
 import { buildUploadUrl } from "../figma_app/169182";
@@ -32,14 +32,14 @@ let N = {
 let A = 100 * N.padBottom / N.height;
 let O = `calc(${A}% + ${-_$$H}px)`;
 let k = `translateY(${O})`;
-let $$R0 = memo(function() {
-  let e = wA();
+let $$R0 = memo(function () {
+  let e = useDispatch();
   let t = iT();
-  let i = d4(e => e?.mirror?.appModel?.currentTool === NLJ.STAMP) || t;
+  let i = useSelector(e => e?.mirror?.appModel?.currentTool === NLJ.STAMP) || t;
   let o = XM();
   let d = hr();
   let c = d > 0;
-  let u = d4(e => e.universalInsertModal.showing);
+  let u = useSelector(e => e.universalInsertModal.showing);
   let h = bu();
   let L = useCallback(() => {
     o && e(H1({
@@ -192,9 +192,9 @@ function P({
       easing: "cubic-bezier(0.37, 0, 0.48, 1.33)"
     }));
     n.play();
-    n.finished.then(() => r.play()).catch(() => {}) ;
-    r.finished.then(() => a.play()).catch(() => {}) ;
-    a.finished.then(() => s.play()).catch(() => {}) ;
+    n.finished.then(() => r.play()).catch(() => {});
+    r.finished.then(() => a.play()).catch(() => {});
+    a.finished.then(() => s.play()).catch(() => {});
     return () => {
       n.cancel();
       a.cancel();
@@ -222,4 +222,4 @@ function P({
     })
   });
 }
-export const s = $$R0; 
+export const s = $$R0;

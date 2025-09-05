@@ -1,5 +1,5 @@
 import { useMemo, useRef, useEffect, createContext, useContext } from "react";
-import { Pj, d4 } from "../vendor/514228";
+import { useStore, useSelector } from "../vendor/514228";
 import { c2 } from "../905/382883";
 import { Im } from "../figma_app/493477";
 import { juq } from "../figma_app/763686";
@@ -7,16 +7,16 @@ import { ReduxSceneGraph } from "../905/700578";
 import { R } from "../905/103090";
 import { T } from "../905/868547";
 let u = e => e?.mirror?.sceneGraph;
-let p = () => Pj();
+let p = () => useStore();
 export function $$_7() {
-  return d4(u);
+  return useSelector(u);
 }
 export function $$h3() {
   return useMemo(() => new ReduxSceneGraph(juq.PLAYGROUND), []);
 }
-export let $$m1 = () => d4(e => e.mirror.sceneGraphSelection);
+export let $$m1 = () => useSelector(e => e.mirror.sceneGraphSelection);
 export function $$g5() {
-  return !d4(e => Im(e.mirror.sceneGraphSelection));
+  return !useSelector(e => Im(e.mirror.sceneGraphSelection));
 }
 export function $$f9() {
   let e = $$m1();
@@ -42,13 +42,13 @@ export function $$y8(e) {
   }, [r]);
 }
 export function $$b6() {
-  return d4(e => e?.mirror?.appModel?.currentTool);
+  return useSelector(e => e?.mirror?.appModel?.currentTool);
 }
 export function $$T4() {
-  return d4(e => T(e?.progressBarState?.mode));
+  return useSelector(e => T(e?.progressBarState?.mode));
 }
 export function $$I10(e) {
-  return d4(t => t.mirror.appModel[e]);
+  return useSelector(t => t.mirror.appModel[e]);
 }
 export function $$S12(...e) {
   return R(t => {
@@ -60,7 +60,7 @@ export function $$S12(...e) {
 }
 export let $$v11 = createContext(null);
 export function $$A0() {
-  let e = d4(e => e.mirror.sceneGraph);
+  let e = useSelector(e => e.mirror.sceneGraph);
   return useContext($$v11) || e;
 }
 export const B9 = $$A0;

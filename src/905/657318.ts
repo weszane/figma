@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { createRef, memo } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { K as _$$K } from "../905/443068";
 import { d as _$$d } from "../905/976845";
 import { E as _$$E } from "../905/632989";
@@ -519,7 +519,7 @@ export let $$ey0 = memo(e => {
     })),
     styleUpdates: md(j_)
   };
-  let s = wA();
+  let s = useDispatch();
   let o = E7(_$$b("guid"));
   let l = WH(e.inheritStyleKey, e.inheritStyleID, e.styleType);
   let d = sO();

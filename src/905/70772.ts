@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useRef, useCallback } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { getFeatureFlags } from "../905/601108";
 import { H0 } from "../figma_app/191804";
 import { Point } from "../905/736624";
@@ -77,8 +77,8 @@ let C = {
   crossOrigin: "use-credentials"
 };
 var T = (e => (e[e.LEFT = -1] = "LEFT", e[e.RIGHT = 1] = "RIGHT", e))(T || {});
-export let $$k0 = Ju(function(e) {
-  let t = wA();
+export let $$k0 = Ju(function (e) {
+  let t = useDispatch();
   let [i, b] = useState(e.selectedIdx);
   let T = useRef(null);
   let [k, R] = useState(null);
@@ -113,7 +113,7 @@ export let $$k0 = Ju(function(e) {
     });
   };
   let V = e => {
-    if ("ArrowLeft" === e.key) 0 !== i && U(-1); else if ("ArrowRight" === e.key) {
+    if ("ArrowLeft" === e.key) 0 !== i && U(-1);else if ("ArrowRight" === e.key) {
       if (i === O.length - 1) return;
       U(1);
     }
@@ -234,4 +234,4 @@ export let $$k0 = Ju(function(e) {
     })
   });
 }, "AttachmentDetailModal", ZU.NO);
-export const q = $$k0; 
+export const q = $$k0;

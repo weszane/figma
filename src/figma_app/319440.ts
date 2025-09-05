@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback, memo, useMemo, useRef, useEffect, useContext } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { d as _$$d } from "../905/976845";
 import { K as _$$K } from "../905/443068";
 import { htN, ZEs, TsU, rcl, qmM, Ez5, ibQ, m1T, lyf } from "../figma_app/763686";
@@ -101,7 +101,7 @@ function F() {
   let r = !1;
   let s = htN?.getSelectedNodesToConvertIntoRepeatersGUIDs(ZEs.HAS_IDENTICAL_CHILDREN) ?? [];
   0 === s.length && (s = htN?.getSelectedNodesToConvertIntoRepeatersGUIDs(ZEs.HAS_CHILDREN) ?? [], r = !0);
-  let o = wA();
+  let o = useDispatch();
   let u = tS();
   let p = c$(u).data;
   let _ = getFeatureFlags().dakota_repeaters && s.length > 0 || U(t);
@@ -341,7 +341,7 @@ let ez = memo(function ({
     shouldShowComponentPropertiesPanel: s,
     shouldShowSlotPanel: o
   });
-  if (d4(e => e.mirror.appModel.activeCanvasEditModeType) === m1T.VECTOR && t) return jsx(eK, {
+  if (useSelector(e => e.mirror.appModel.activeCanvasEditModeType) === m1T.VECTOR && t) return jsx(eK, {
     node: t,
     panelTitleRef: c,
     nodeTypeStringToDisplay: _$$t("fullscreen.properties_panel.layer_header.node_type_vector")
@@ -682,7 +682,7 @@ function tr({
     topLevelMode: e.mirror.appModel.topLevelMode,
     editMode: e.mirror.appModel.activeCanvasEditModeType
   }));
-  let q = d4(e => {
+  let q = useSelector(e => {
     let t = e.modalShown;
     return t?.type === _$$e;
   });
@@ -705,8 +705,8 @@ function tr({
   let eA = ed && node?.hasEnabledVideoPaint && getFeatureFlags().sts_video;
   let ex = (eo || ed || el) && "INSTANCE" === F;
   let eN = function () {
-    let e = d4(Jp);
-    let t = d4(Z3);
+    let e = useSelector(Jp);
+    let t = useSelector(Z3);
     return e || t.length > 0;
   }();
   let eC = useContext(_$$Q);

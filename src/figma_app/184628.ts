@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useCallback, useMemo, useEffect } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { w4, Z9 } from "../figma_app/770359";
 import { lV, lr } from "../figma_app/617606";
 import { lQ } from "../905/934246";
@@ -161,7 +161,7 @@ export function $$X1({
       e.sourceCode = t;
     }), G());
   }, [e, x, W, G]);
-  let Q = wA();
+  let Q = useDispatch();
   pO();
   let ee = h3(_);
   let et = useMemo(() => new Mq(), []);

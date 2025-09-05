@@ -18,7 +18,7 @@ import { A as _$$A } from "../vendor/850789";
 import { getFeatureFlagRulesExport, buildUploadUrl, getInitialOptions } from "../figma_app/169182";
 import { ks } from "../figma_app/637027";
 import { s as _$$s } from "../cssbuilder/589278";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { d as _$$d } from "../905/49800";
 import { J } from "../905/270045";
 import { k as _$$k2 } from "../905/443820";
@@ -30,8 +30,8 @@ import { F as _$$F } from "../905/422355";
 import { F as _$$F2 } from "../905/302958";
 import { Ib } from "../905/129884";
 import { Ay as _$$Ay } from "../905/612521";
-let D = memo(function(e) {
-  let t = wA();
+let D = memo(function (e) {
+  let t = useDispatch();
   let i = getFeatureFlags()[e.flagName] ?? !1;
   let r = _$$F(e.flagName);
   let a = void 0 !== getFeatureFlagRulesExport()[r];
@@ -308,7 +308,7 @@ let z = M4.Query({
 let H = M4.Query({
   fetch: async () => (await _$$m.getStatsigFlagDescriptions()).data.meta ?? {}
 });
-let $$W0 = Ju(function(e) {
+let $$W0 = Ju(function (e) {
   let t = hS(e);
   let [i, c] = IT(z(null));
   let u = useMemo(() => i?.data ?? {}, [i]);
@@ -356,4 +356,4 @@ let $$W0 = Ju(function(e) {
     })
   });
 }, "ChangeFeatureFlagsModal");
-export const qf = $$W0; 
+export const qf = $$W0;

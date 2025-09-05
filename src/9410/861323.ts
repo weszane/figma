@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, useRef, useEffect, memo } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { md } from "../figma_app/27355";
 import o from "classnames";
 import { buildUploadUrl } from "../figma_app/169182";
@@ -208,12 +208,12 @@ function H({
 }) {
   let t = TA();
   let [i, o] = useState(!1);
-  let l = wA();
+  let l = useDispatch();
   let d = NT();
   let c = md(c5);
   let u = XM();
   let b = sZ();
-  let S = d4(e => e.universalInsertModal.showing);
+  let S = useSelector(e => e.universalInsertModal.showing);
   let I = fG();
   let A = _$$r(S, c?.stage !== "FULL" ? _$$p.MORE : void 0);
   useEffect(() => {

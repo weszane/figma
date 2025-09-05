@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { lQ } from "../905/934246";
 import l from "../vendor/805353";
 import { xj, Cz } from "../figma_app/851625";
@@ -46,7 +46,7 @@ let f = {
   permissionFilter: "true_member"
 };
 export function $$j0(e) {
-  let t = wA();
+  let t = useDispatch();
   let a = No().unwrapOr(null);
   let l = H3(a);
   let [m, g] = useState([]);

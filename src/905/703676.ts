@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { createContext, useContext, useCallback } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { assertNotNullish } from "../figma_app/95419";
 import { o as _$$o } from "../905/821217";
 import { N as _$$N } from "../905/438674";
@@ -38,9 +38,9 @@ export function $$E0({
   elementBesideName: P
 }) {
   let O = assertNotNullish(useContext($$b3), "Must use `FacetedSearchPreviewRowBase` inside `<SearchRowContext.Provider>");
-  let D = wA();
+  let D = useDispatch();
   let L = md(Q8);
-  let F = d4(e => e.currentUserOrgId);
+  let F = useSelector(e => e.currentUserOrgId);
   let M = _$$S(F)?.searches;
   let {
     setKeyboardNavigationElement,

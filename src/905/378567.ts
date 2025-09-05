@@ -2,7 +2,7 @@ import { kf } from "../905/992467";
 import _require from "../5430/337035";
 import { jsx, jsxs } from "react/jsx-runtime";
 import { Component, PureComponent, createElement } from "react";
-import { Ng } from "../vendor/514228";
+import { connect } from "../vendor/514228";
 import { _ as _$$_ } from "../figma_app/496441";
 import { Gc } from "../905/63728";
 import { Ay } from "../figma_app/778880";
@@ -174,7 +174,7 @@ export function $$F1(e, t) {
     }
   }
   t.displayName = "PluginListRow";
-  e.ConnectedPluginListRow = Ng(null, (e, t) => ({
+  e.ConnectedPluginListRow = connect(null, (e, t) => ({
     onPluginListRowClick: () => {
       e(sf({
         view: "communityHub",
@@ -221,8 +221,8 @@ class j extends PureComponent {
     publishedPlugin: e.publishedPlugins[t.searchResult.model.id] || null
   });
   e.SearchResult = _$$h({
-    [XU.GRID]: Ng(r)(n),
-    [XU.LIST]: Ng(r)(i)
+    [XU.GRID]: connect(r)(n),
+    [XU.LIST]: connect(r)(i)
   });
 })($$r0 || ($$r0 = {}));
 export const g8 = $$r0;

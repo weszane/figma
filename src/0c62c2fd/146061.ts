@@ -1,6 +1,6 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useState, useCallback, Fragment as _$$Fragment } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import n from "classnames";
 import { Ay } from "../905/612521";
 import { Rs } from "../figma_app/288654";
@@ -36,16 +36,16 @@ let O = "folder_move--warningContainer--MXpOB";
 export function $$M0(e) {
   let t;
   let r;
-  let n = wA();
+  let n = useDispatch();
   let o = _$$s();
-  let g = d4(e => e.currentUserOrgId);
-  let A = d4(e => null != g ? e.orgById[g] : null);
+  let g = useSelector(e => e.currentUserOrgId);
+  let A = useSelector(e => null != g ? e.orgById[g] : null);
   let P = Rs(AbW, {
     currentOrgId: g,
     currentTeamId: null,
     folderId: e.folderId
   });
-  let D = d4(t => t.folders[e.folderId]);
+  let D = useSelector(t => t.folders[e.folderId]);
   let [M, W] = useState(void 0);
   let [$, G] = useState(void 0);
   let V = "loaded" === P.status ? {

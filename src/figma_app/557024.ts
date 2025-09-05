@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useMemo, useCallback, useState } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
 import { hS } from "../905/437088";
 import { t as _$$t } from "../905/150656";
@@ -101,7 +101,7 @@ export function $$M0(e) {
   }, [t, l, d, o, n]);
 }
 function F() {
-  let e = wA();
+  let e = useDispatch();
   let t = useCallback(() => {
     e(Ce());
   }, [e]);
@@ -115,8 +115,8 @@ function F() {
     yours: !0,
     archived: !0
   });
-  let L = d4(sS);
-  let k = d4(tB);
+  let L = useSelector(sS);
+  let k = useSelector(tB);
   let F = iZ();
   let j = $n();
   let U = $$M0(k?.fileRepoId || "");

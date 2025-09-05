@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useMemo, createContext, useContext } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { assertNotNullish } from "../figma_app/95419";
 import { K } from "../905/443068";
 import { A } from "../905/251970";
@@ -37,7 +37,7 @@ export function $$M8(e) {
     return useMemo(() => new Point(e.x + C, e.y + C), [e.x, e.y]);
   }();
   let r = m0();
-  let n = d4(e => e.universalInsertModal.pinned);
+  let n = useSelector(e => e.universalInsertModal.pinned);
   let s = md(_$$g);
   if (z4.getIsExtension()) return s - C - e;
   if (r) return window.innerHeight - C - e;

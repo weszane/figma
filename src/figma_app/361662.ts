@@ -1,5 +1,5 @@
 import { useContext, useMemo } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
 import { pi } from "../figma_app/314264";
 import { q5, _G } from "../figma_app/516028";
@@ -107,14 +107,14 @@ export function $$f3(e) {
 }
 export function $$E2() {
   let e = oA();
-  let t = d4(t => e ? t.search.lastLoadedQuery?.sessionId ?? t.search.sessionId : null);
+  let t = useSelector(t => e ? t.search.lastLoadedQuery?.sessionId ?? t.search.sessionId : null);
   return {
     query: e,
     searchSessionId: t
   };
 }
 export function $$y4(e) {
-  let t = d4(e => e.search.queryId);
+  let t = useSelector(e => e.search.queryId);
   return Rn(e) ?? t;
 }
 export const Ew = $$m0;

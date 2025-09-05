@@ -6,7 +6,7 @@ import { i } from "../af221b13/853561";
 import { i as _$$i } from "../af221b13/100282";
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useEffect, memo, useRef, useState, useCallback, useLayoutEffect, useMemo, forwardRef } from "react";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { Ay } from "../905/612521";
 import { h as _$$h } from "../905/207101";
@@ -457,10 +457,10 @@ function M(e) {
     })
   });
 }
-let $ = Ju(function(e) {
-  let t = d4(e => e.user?.email);
-  let i = wA();
-  let n = d4(t => t.hubFiles[e.hubFileId]);
+let $ = Ju(function (e) {
+  let t = useSelector(e => e.user?.email);
+  let i = useDispatch();
+  let n = useSelector(t => t.hubFiles[e.hubFileId]);
   let o = mC(_$$ts.loadingKeyForPayload({
     hubFileId: e.hubFileId
   }));
@@ -525,7 +525,7 @@ let $ = Ju(function(e) {
     onOpenFileClick: h
   }) : (d(), null) : null;
 }, "ContinueAfterVerificationModal");
-let V = memo(function(e) {
+let V = memo(function (e) {
   let t;
   let i;
   "implicit" === e.consentRegion ? (t = Ml, i = _$$e2) : "explicit" === e.consentRegion && (t = _$$aJ(), i = Sz());
@@ -548,7 +548,7 @@ let V = memo(function(e) {
     })]
   });
 });
-let K = memo(function() {
+let K = memo(function () {
   return "implicit" === getInitialOptions().consent_region ? jsx(C$, {
     variant: _$$a.COMMUNITY,
     dismissIcon: _$$A2,
@@ -697,7 +697,7 @@ function eS({
   page: e
 }) {
   let t = useRef(null);
-  let i = function(e, t = 4, i = 540) {
+  let i = function (e, t = 4, i = 540) {
     let [n, a] = useState(t);
     let r = useCallback(() => {
       if (window.innerWidth <= i) {
@@ -715,14 +715,14 @@ function eS({
     _$$h(() => (r(), window.addEventListener("resize", r), () => window.removeEventListener("resize", r)));
     return n;
   }(t);
-  let n = function(e) {
+  let n = function (e) {
     let {
       resources
     } = e.sections.reduce(({
       resources: e,
       resourceIds: t
     }, i) => {
-      if ("bundle_section" === i.section_type) for (let n of i.resources) n?.id && !t.has(n.id) && (t.add(n.id), e.push(n)); else if ("hero_section" === i.section_type) {
+      if ("bundle_section" === i.section_type) for (let n of i.resources) n?.id && !t.has(n.id) && (t.add(n.id), e.push(n));else if ("hero_section" === i.section_type) {
         let n = i.resource;
         n && !t.has(n.id) && (e.push(n), t.add(n.id));
       }
@@ -928,7 +928,7 @@ function eZ({
   collectionPages: t
 }) {
   if (!t.length && e) return null;
-  let i = t.filter(e => !function(e) {
+  let i = t.filter(e => !function (e) {
     for (let t of e.sections) if ("bundle_section" === t.section_type && t.meta.hasOwnProperty("figjam_ai")) return !0;
     return !1;
   }(e));
@@ -984,7 +984,7 @@ function e1(e) {
     }) => {
       onSetShelf && onSetShelf(e.meta[0]);
       r(e.meta[0]);
-    }).catch(() => { });
+    }).catch(() => {});
   };
   if (useEffect(() => {
     o();
@@ -1512,7 +1512,7 @@ function tN() {
     status: i
   }] = IT(eP({
     urlSlug,
-    isTemplateUrl: function(e) {
+    isTemplateUrl: function (e) {
       try {
         return /^\/community\/templates\/.+$/.test(new URL(e).pathname);
       } catch {
@@ -1596,7 +1596,7 @@ function tR() {
   return null;
 }
 var tB = (e => (e.COLLECTIONS = "collections", e.TEMPLATES = "templates", e))(tB || {});
-let tz = class extends _$$nS { };
+let tz = class extends _$$nS {};
 Ac(tz);
 tz.displayName = "CollectionRoute";
 tz.path = "/community/:collectionType(collections|templates)/:urlSlug";
@@ -1606,7 +1606,7 @@ tz.deserializeParams = e => ({
 });
 tz.serializeParams = e => e;
 let tF = Wk(tz);
-let tM = class extends _$$nS { };
+let tM = class extends _$$nS {};
 Ac(tM);
 tM.displayName = "CollectionShelvesRoute";
 tM.path = "/community/collections";
@@ -1616,7 +1616,7 @@ let tJ = {
   plugins: _$$vt.PLUGIN,
   make: _$$vt.FIGMAKE_TEMPLATE
 };
-let tG = class extends _$$nS { };
+let tG = class extends _$$nS {};
 Ac(tG);
 tG.displayName = "ResourceLandingPageRoute";
 tG.path = "/community/:landingPageType(plugins|make)";
@@ -1766,7 +1766,7 @@ function t6({
   showNewIcon: e
 }) {
   let [t, i] = useState(!1);
-  let n = function() {
+  let n = function () {
     let e = l$();
     return [{
       text: _$$t("community.view_bar.home"),
@@ -2263,7 +2263,7 @@ function ij() {
           className: iv,
           children: jsx(y, {})
         })]
-      }), jsx(function() {
+      }), jsx(function () {
         return jsxs(Fragment, {
           children: [jsx(i_, {
             links: [{
@@ -2318,7 +2318,7 @@ function ij() {
     })]
   });
 }
-let iw = class extends _$$nS { };
+let iw = class extends _$$nS {};
 Ac(iw);
 iw.displayName = "PluginsRoute";
 iw.path = "/community/plugins";
@@ -2929,7 +2929,7 @@ function iB({
   route: u
 }) {
   let m = useRef(null);
-  let g = wA();
+  let g = useDispatch();
   let p = md(iR);
   let _ = md(iP);
   let y = !(("design_template" !== t || p?.status !== "loaded" || p?.data) && ("websites" !== t || _?.status !== "loaded" || _?.data));
@@ -3051,7 +3051,7 @@ function iW({
   });
 }
 function iQ() {
-  let e = wA();
+  let e = useDispatch();
   let t = kc();
   return t?.primary_user_id ? jsx(Fragment, {}) : jsxs("div", {
     className: "admin_profile_banner--root--HDfDA",
@@ -3166,7 +3166,7 @@ function iX({
 }
 let iV = i;
 let iK = Xg;
-function iZ({ }) {
+function iZ({}) {
   let e = _$$M();
   let t = !!_$$eD || ce();
   let i = _$$N(`(max-width: ${_C6})`);
@@ -3176,8 +3176,8 @@ function iZ({ }) {
   let l = OE(wl(location.pathname));
   let c = !1;
   let d = null;
-  l = d4(e => e?.selectedView?.view === "search");
-  c = d4(e => !!e?.communityHub?.showingCommunityAdminBanner);
+  l = useSelector(e => e?.selectedView?.view === "search");
+  c = useSelector(e => !!e?.communityHub?.showingCommunityAdminBanner);
   d = kc();
   return jsxs(Fragment, {
     children: [jsxs("div", {
@@ -3354,7 +3354,7 @@ function no({
   }] = IT(_$$a3.ResourcesPaginatedQuery(vb(filterState)));
   let h = "loading" === d;
   let x = useRef(null);
-  let _ = d4(e => !!(e.authedActiveCommunityProfile?.team_id || e.authedActiveCommunityProfile?.org_id));
+  let _ = useSelector(e => !!(e.authedActiveCommunityProfile?.team_id || e.authedActiveCommunityProfile?.org_id));
   let y = filterState.resourceType === _$$L2.BrowseResourceTypes.PLUGINS && (c ?? []).every(e => e.resource_type === _$$vt.PLUGIN);
   let f = [];
   y && (f = (c ?? []).map(e => e.content?.plugin).filter(e => void 0 !== e));
@@ -5146,7 +5146,7 @@ function ab(e) {
     hasNextPage,
     isFetchingNextPage,
     fetchNextPage
-  } = function(e, t) {
+  } = function (e, t) {
     let {
       trackResourceImpression: _trackResourceImpression
     } = GS({
@@ -5503,7 +5503,7 @@ function aE({
 function aL({
   resourceType: e
 }) {
-  let t = function(e) {
+  let t = function (e) {
     if (e === _$$vt.PLUGIN) return aj();
   }(e);
   return t ? jsxs("div", {
@@ -5561,7 +5561,7 @@ function aA(e) {
     isFetchingNextPage,
     fetchNextPage,
     prevActiveTab
-  } = function(e) {
+  } = function (e) {
     let t = useMemo(() => ({
       [_$$vt.PLUGIN]: aT(),
       [_$$vt.FIGMAKE_TEMPLATE]: {
@@ -5972,7 +5972,7 @@ let se = r1(Xt);
 function st() {
   let e = md(se);
   let t = _$$iZ();
-  let i = d4(e => e.authedActiveCommunityProfile);
+  let i = useSelector(e => e.authedActiveCommunityProfile);
   let n = _$$N(`(max-width: ${YW - 1}px)`);
   let {
     show,
@@ -6104,7 +6104,7 @@ function so() {
     apiResourceType: _$$eD2()[0],
     resourceId: _$$eD2()[1]
   });
-  let n = wA();
+  let n = useDispatch();
   let o = _$$N(`(max-width: ${YW - 1}px)`);
   useEffect(() => {
     let e = Ay.listen(() => {
@@ -6211,7 +6211,7 @@ function sl() {
       name: "Community Hub"
     });
   }, []);
-  (function() {
+  (function () {
     let e = null === TA();
     let {
       getDynamicConfig
@@ -6271,10 +6271,10 @@ function sc() {
   return null;
 }
 export function $$sd0() {
-  let e = wA();
+  let e = useDispatch();
   let t = _$$iZ();
-  let i = d4(e => e.userFlags);
-  return (_$$h(() => (function(e, t) {
+  let i = useSelector(e => e.userFlags);
+  return (_$$h(() => (function (e, t) {
     let i = t.figjam_editor_onboarded || _q(t) || t.editor_community_duplicate_onboarded || t.orgs_onboarded || t.welcome_onboarded;
     let n = QL("after-auth-duplicate-file-id");
     let a = QL("show_eula");
@@ -6311,4 +6311,4 @@ export function $$sd0() {
   }) : (Ay.reload("Logged-out Community Hub"), null);
 }
 _$$X2.domContentLoadedMs = Math.round(window.performance.now());
-export const CommunityLoggedInView = $$sd0; 
+export const CommunityLoggedInView = $$sd0;

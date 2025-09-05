@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useMemo } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
@@ -40,7 +40,7 @@ export let $$O0 = Ju(function ({
   entryPoint: M,
   planDataForSocialProof: j
 }) {
-  let U = wA();
+  let U = useDispatch();
   let B = _$$u();
   let V = RR({
     preferOpenFilePlan: !0

@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, useEffect, useMemo, useRef } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { sx } from "../905/449184";
 import { B } from "../905/714743";
 import { t as _$$t } from "../905/303541";
@@ -55,7 +55,7 @@ export function $$g0({
   };
 }
 export function $$f1(e) {
-  let t = wA();
+  let t = useDispatch();
   let i = useMemo(() => {
     let t = new Set();
     e.autocomplete.tokens.forEach(e => t.add(e.content.id));

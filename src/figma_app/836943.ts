@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { PK } from "../figma_app/243058";
 import { n3 } from "../905/859698";
 import { Pt4 } from "../figma_app/763686";
@@ -20,7 +20,7 @@ export function $$f8(e) {
 export function $$E3(e) {
   return $$f8({
     inheritStyleKeyField: e,
-    stylePickerShown: d4(e => e.stylePickerShown)
+    stylePickerShown: useSelector(e => e.stylePickerShown)
   });
 }
 export function $$y5(e) {
@@ -46,7 +46,7 @@ export function $$T4({
   return a?.status === "loaded" ? a.data : null;
 }
 export function $$I2(e, t, r) {
-  let s = d4(e => e.library);
+  let s = useSelector(e => e.library);
   let o = eY();
   let g = bO();
   let f = tS();

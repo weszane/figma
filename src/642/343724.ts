@@ -1,5 +1,5 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { bL, Y9, JU, X0, UC } from "../figma_app/57171";
 import { E as _$$E } from "../905/632989";
 import { K } from "../905/443068";
@@ -104,7 +104,7 @@ export function $$M0({
   });
 }
 function A(e) {
-  let t = d4(e => e.mirror.appModel.keyboardShortcuts);
+  let t = useSelector(e => e.mirror.appModel.keyboardShortcuts);
   let s = md(X);
   let i = "collapse-layers";
   let l = () => {

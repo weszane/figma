@@ -1,5 +1,5 @@
 import { useMemo, useCallback, useEffect } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { W, Hg } from "../figma_app/304955";
 import { VH, Ac } from "../figma_app/178419";
 import { j } from "../figma_app/171378";
@@ -64,7 +64,7 @@ export function $$C2() {
       }, [r]);
     }(),
     exitFigmakeFullscreenView: function () {
-      let e = wA();
+      let e = useDispatch();
       let t = _6();
       let r = Oc();
       return useCallback(() => {
@@ -88,7 +88,7 @@ export function $$O5() {
 }
 export function $$R0() {
   let e = _6();
-  let t = wA();
+  let t = useDispatch();
   let r = Oc();
   return n => {
     if ("fullscreen" !== e.view || !r) return;

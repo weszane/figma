@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useRef, useState, useEffect } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { U1 } from "../figma_app/343967";
 import { Xr } from "../figma_app/27355";
 import { G as _$$G } from "../figma_app/318030";
@@ -73,7 +73,7 @@ function O({
     id: $$C0,
     onDragEnd: w,
     onDragStart: T,
-    onResize: (e) => xT(e, p, u),
+    onResize: e => xT(e, p, u),
     recordingKey: "leftPanelContainer.resizablePanel",
     side: "right",
     size: t,
@@ -100,17 +100,17 @@ function O({
     id: $$C0,
     maxSize: u,
     minSize: p,
-    onDragEnd: (e) => {
+    onDragEnd: e => {
       O && (xT(e, p, u), setRulerVisibilityOnDragEnd());
       B(e);
       w?.();
     },
     onDragStart: T,
-    onInitialSizeChange: (e) => {
+    onInitialSizeChange: e => {
       O && (xT(p, p, u), setRulerVisibilityOnInitialSizeChange());
       k(e);
     },
-    onSizeChange__SLOW: O ? k : (e) => xT(e, p, u),
+    onSizeChange__SLOW: O ? k : e => xT(e, p, u),
     recordingKey: "leftPanelContainer.resizablePanel",
     shouldDeferCanvasUpdateOnPanelResize: O,
     side: "right",
@@ -194,7 +194,7 @@ export function $$L1({
   shouldDeferCanvasUpdateOnPanelResize: g
 }) {
   let E = !p8("showUi");
-  let y = d4((e) => e.mirror.appModel?.currentPage);
+  let y = useSelector(e => e.mirror.appModel?.currentPage);
   let b = aV();
   let T = GQ(o, s);
   let I = t ?? T;

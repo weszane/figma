@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { memo, useState, useRef, useEffect, useMemo, Suspense, useCallback, createRef } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { isNullish } from "../figma_app/95419";
 import { b as _$$b, bL, mc, N_, q7, wv } from "../figma_app/860955";
 import { E as _$$E } from "../905/632989";
@@ -253,14 +253,14 @@ function q({
 let eO = "seen_bug_reporter_modal";
 let eR = r1(eO);
 function eL() {
-  let e = wA();
+  let e = useDispatch();
   let t = md(eR);
   let r = _$$e({
     overlay: lk2,
     priority: _$$N.SECONDARY_MODAL
   }, [t]);
-  let s = d4(e => e.user?.created_at);
-  let o = d4(e => e.user?.email);
+  let s = useSelector(e => e.user?.created_at);
+  let o = useSelector(e => e.user?.email);
   let l = !!s && _$$A().diff(_$$A(s), "days") >= 14;
   let d = !!o && o.includes("@figma.com");
   let c = md(jH);
@@ -289,7 +289,7 @@ function eM({
   flagName: e,
   userFlag: t
 }) {
-  let r = wA();
+  let r = useDispatch();
   let i = e => {
     r({
       type: "USER_FLAG_POST",
@@ -487,7 +487,7 @@ let eU = {
 };
 let eB = Ju(function (e) {
   let t = hS(e);
-  let r = d4(e => e.userFlags);
+  let r = useSelector(e => e.userFlags);
   return jsx(_$$bL, {
     manager: t,
     width: "lg",
@@ -506,8 +506,8 @@ let eB = Ju(function (e) {
   });
 }, "ResetUserFlagsModal");
 function eH(...e) {
-  let t = wA();
-  let r = d4(e => e.userFlags);
+  let t = useDispatch();
+  let r = useSelector(e => e.userFlags);
   let n = e.reduceRight((e, t) => (e << 1) + (r[t] ? 1 : 0), 0);
   let i = r => {
     let n = r;
@@ -541,7 +541,7 @@ let e4 = Ju(function ({
   maxSeenCount: r = 1 / 0
 }) {
   let s = useMemo(() => hK(), []);
-  let o = wA();
+  let o = useDispatch();
   let {
     flagNumberVal,
     incrementFlag
@@ -667,7 +667,7 @@ function tr({
     flagNumberVal,
     incrementFlag
   } = eH(...WB);
-  let c = wA();
+  let c = useDispatch();
   let [u, p] = useState(e || flagNumberVal > r);
   return (_$$h(() => {
     !u && r !== 1 / 0 && flagNumberVal <= r && incrementFlag();
@@ -740,7 +740,7 @@ function tc({
   let [t, r] = useState(!1);
   let s = md(tl);
   let o = md(td);
-  let l = wA();
+  let l = useDispatch();
   let d = q5();
   let c = md(_$$P2);
   let {
@@ -2703,11 +2703,11 @@ export function $$t60(e) {
     getConfig
   } = I7("exp_in_product_help");
   let u = function () {
-    let e = d4(e => getPermissionsStateMemoized(e));
+    let e = useSelector(e => getPermissionsStateMemoized(e));
     let t = q5();
     let r = t?.teamId;
     let n = e.user?.id;
-    let s = !d4(e => !!(t && e.figFileDuplicatedFromHubFile[t.key]));
+    let s = !useSelector(e => !!(t && e.figFileDuplicatedFromHubFile[t.key]));
     let o = Rs(cBX, {});
     let l = function () {
       let e = _$$f("dismissed_move_drafts_nudge");
@@ -2717,7 +2717,7 @@ export function $$t60(e) {
     let d = function (e) {
       let t = "collective_upsell_first_file_created";
       let r = useRef(_$$f(t));
-      let n = wA();
+      let n = useDispatch();
       _$$h(() => {
         !r.current && e && n(_$$b2({
           [t]: !0
@@ -2742,7 +2742,7 @@ export function $$t60(e) {
   let h = u && _;
   let m = Xr(aG);
   let g = Fn();
-  let f = d4(e => e.userFlags);
+  let f = useSelector(e => e.userFlags);
   let y = q5();
   let I = useRef(null);
   let v = Xr(_$$H2);
@@ -3423,7 +3423,7 @@ function rr({
     getTriggerProps,
     manager
   } = _$$b();
-  let g = wA();
+  let g = useDispatch();
   return jsxs(Fragment, {
     children: [e && jsxs(bL, {
       manager,

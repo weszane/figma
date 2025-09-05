@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { sx } from "../905/449184";
 import { jk } from "../905/609396";
 import { t as _$$t } from "../905/303541";
@@ -156,14 +156,14 @@ export function $$A0(e) {
   let [o, a] = useState(!0);
   let [c, d] = useState(!0);
   let u = Jm() ?? "unattributed";
-  let _ = wA();
+  let _ = useDispatch();
   useEffect(() => {
     "unattributed" === u && _(Dy({
       entryPoint: "community"
     }));
   }, [u, _]);
-  let p = d4(e => e.search.queryId);
-  let y = d4(e => e.search.lastLoadedQuery);
+  let p = useSelector(e => e.search.queryId);
+  let y = useSelector(e => e.search.lastLoadedQuery);
   let b = useRef(null);
   useEffect(() => {
     (async () => {
@@ -244,15 +244,15 @@ export function $$A0(e) {
 export function $$P2(e, t) {
   let [r, o] = useState(w());
   let [a, c] = useState(b());
-  let u = wA();
-  let _ = d4(e => e.search.sessionId) || "unattributed";
+  let u = useDispatch();
+  let _ = useSelector(e => e.search.sessionId) || "unattributed";
   useEffect(() => {
     "unattributed" === _ && u(Dy({
       entryPoint: "resource_hub"
     }));
   }, [_, u]);
-  let p = d4(e => e.search.queryId);
-  let y = d4(e => e.search.lastLoadedQuery);
+  let p = useSelector(e => e.search.queryId);
+  let y = useSelector(e => e.search.lastLoadedQuery);
   let g = useRef(null);
   let v = !!(e.org_id || e.team_id);
   useEffect(() => {

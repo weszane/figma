@@ -1,11 +1,11 @@
 import { useState, useEffect } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { QOV } from "../figma_app/763686";
 import { gl } from "../905/216495";
 import { kl } from "../905/275640";
 export function $$l0() {
   let e = kl("aspectRatioLockToggled");
-  let t = d4(e => e.mirror.appModel.activeUserAction);
+  let t = useSelector(e => e.mirror.appModel.activeUserAction);
   let [r, l] = useState(!1);
   useEffect(() => {
     let e = e => {

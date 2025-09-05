@@ -1,4 +1,4 @@
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { B6, zy } from "../vendor/130505";
 import { Ay } from "../905/612521";
 import { sT } from "../figma_app/640564";
@@ -19,13 +19,13 @@ export function $$u3(e, t = !1) {
 export function $$p1(e = !1) {
   let t = d(zy().state);
   let r = !!UX();
-  let a = d4(t => c(t, r, e));
+  let a = useSelector(t => c(t, r, e));
   return t || a;
 }
 export function $$_0() {
   let e = !!UX();
   let t = !!sT();
-  return d4(r => {
+  return useSelector(r => {
     if ("search" in r && r.search.queryId) return t || e ? r.search.queryId : void 0;
   }) ?? void 0;
 }

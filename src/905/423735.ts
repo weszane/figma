@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useMemo, useCallback } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { i as _$$i } from "../905/718764";
 import { l as _$$l } from "../905/716947";
 import l from "../vendor/523035";
@@ -53,10 +53,10 @@ export function $$F0({
     let e = G.data.libraryKeyToFile?.hubFile?.communityLibrary;
     return e ? e.variableCollections : [];
   }, [G]);
-  let H = wA();
-  let W = d4(e => e.dropdownShown);
-  let K = d4(e => e.selectedView);
-  let Y = d4(e => d1(e));
+  let H = useDispatch();
+  let W = useSelector(e => e.dropdownShown);
+  let K = useSelector(e => e.selectedView);
+  let Y = useSelector(e => d1(e));
   let q = _$$W2();
   let $ = ol();
   let Z = !l && !F;
@@ -68,7 +68,7 @@ export function $$F0({
   let ee = rf("communityLibraryFileView.backCaret", "mousedown", t);
   let et = Go(e ?? _$$l(""));
   let ei = jN(e);
-  let en = d4(e => !!$?.org_id && e.orgById[$.org_id]?.bigma_enabled);
+  let en = useSelector(e => !!$?.org_id && e.orgById[$.org_id]?.bigma_enabled);
   let er = ZO(l, F);
   let ea = useMemo(() => er(e), [e, er]);
   let es = !!(ea?.design || ea?.figjam);

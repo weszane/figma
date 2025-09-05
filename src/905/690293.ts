@@ -1,5 +1,5 @@
 import { jsx } from "react/jsx-runtime";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { c1 } from "../figma_app/806412";
 import { t as _$$t, tx } from "../905/303541";
 import { gl, oV } from "../905/216495";
@@ -32,7 +32,7 @@ function f({
   onKeyDown: b
 }) {
   let v = "width" === u ? Yq.Width : Yq.Height;
-  let I = wA();
+  let I = useDispatch();
   let E = Xs();
   let x = gl(t) ? g : {};
   let S = c1(A);

@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useCallback, useEffect, useId } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { b as _$$b, bL, mc, r1, Q$, Ov, rm } from "../figma_app/860955";
 import { z6, CU } from "../905/963340";
 import { K as _$$K } from "../905/443068";
@@ -99,7 +99,7 @@ export function $$B1(e) {
     let r = e.actionOnFlyoutItemClick ?? e.action;
     VU.get(r, "toolbar")(t);
   };
-  let b = d4(e => item.children.find(t => {
+  let b = useSelector(e => item.children.find(t => {
     if (Zk(t)) {
       let r = t.property && e.mirror.appModel[t.property] === t.propertyValue;
       let n = t.isActive && t.isActive(e);
@@ -107,11 +107,11 @@ export function $$B1(e) {
     }
     return !1;
   }), U);
-  let I = d4(e => {
+  let I = useSelector(e => {
     let r = item.children.find(t => Zk(t) && Yh(e.mirror.appModel, t.action));
     return "symbol-flyout" === item.name ? r : b || (c && Yh(e.mirror.appModel, c.action) ? c : r);
   }, U);
-  let v = d4(e => !!I && Yh(e.mirror.appModel, I.action));
+  let v = useSelector(e => !!I && Yh(e.mirror.appModel, I.action));
   if (!I) return null;
   v || x1("FlyoutView", `Expected defaultItem with action ${I.action} to be enabled`);
   let A = _?.type === M(item.name);
@@ -283,7 +283,7 @@ function V(e) {
   }));
 }
 function H(e) {
-  let t = d4(e => e.dropdownShown);
+  let t = useSelector(e => e.dropdownShown);
   let r = md(oO);
   if (!t || !t.data?.targetRect) return jsx(Fragment, {});
   let i = e.item.flyoutShowItemIcons || void 0 === e.item.flyoutShowItemIcons;
@@ -318,8 +318,8 @@ function H(e) {
   });
 }
 function z(e, t) {
-  let r = d4(nj);
-  let n = !!d4(t => Zk(e) && e.isActive && e.isActive(t));
+  let r = useSelector(nj);
+  let n = !!useSelector(t => Zk(e) && e.isActive && e.isActive(t));
   let {
     action,
     property,

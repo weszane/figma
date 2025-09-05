@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { forwardRef, useMemo, useId, useState, useCallback } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { c2 } from "../905/382883";
 import { K as _$$K } from "../905/443068";
 import { f as _$$f } from "../905/335032";
@@ -134,12 +134,12 @@ export function $$$0({
   showInheritedModeOption: n,
   recordingKey: i
 }) {
-  let s = wA();
+  let s = useDispatch();
   let o = kN();
   let d = iR();
   let c = d2();
   let u = J2(UK().showGuids);
-  let p = d4(Sh);
+  let p = useSelector(Sh);
   let m = useMemo(() => JSON.stringify(p), [p]);
   let _ = hZ();
   let E = Object.entries(o);
@@ -187,8 +187,8 @@ export function $$W1(e) {
     hideRemoveButton,
     onChange
   } = e;
-  let W = wA();
-  let Y = d4(e => e.dropdownShown);
+  let W = useDispatch();
+  let Y = useSelector(e => e.dropdownShown);
   let X = ZP();
   let q = explicitModeID && explicitModeID !== Mo && modeOptions.every(e => !c2(e.modeId, explicitModeID));
   let Z = Ws;

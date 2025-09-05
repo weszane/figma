@@ -1,5 +1,5 @@
 import { jsxs, jsx } from "react/jsx-runtime";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { zE } from "../figma_app/919079";
 import { s as _$$s } from "../cssbuilder/589278";
 import { l as _$$l } from "../905/152724";
@@ -17,7 +17,7 @@ export function $$h0(e) {
     className,
     avatarSize
   } = e;
-  let h = wA();
+  let h = useDispatch();
   return jsxs("div", {
     className: className || "profile_tile--profileRowTile---yDD9",
     ref: tileRef,
@@ -70,7 +70,7 @@ export function $$g1(e) {
     hideFollowButton
   } = e;
   let p = iZ();
-  let g = wA();
+  let g = useDispatch();
   return jsx("div", {
     className,
     onClick: e => {

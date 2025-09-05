@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useCallback } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { md, Xr } from "../figma_app/27355";
 import { hO } from "../figma_app/545293";
 import { l4 } from "../905/124270";
@@ -16,10 +16,10 @@ export function $$g0({
   id: t,
   path: r
 }) {
-  let g = wA();
+  let g = useDispatch();
   let f = md(Q8);
   let E = md(sC);
-  let y = d4(e => "search" === e.selectedView.view);
+  let y = useSelector(e => "search" === e.selectedView.view);
   let b = Xr(l4(e));
   let T = Xr(R9);
   let I = md(hO.isFragmentSearchAtom);

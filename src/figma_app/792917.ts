@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { lQ } from "../905/934246";
 import { b as _$$b, c as _$$c } from "../905/308099";
 import { q } from "../905/932270";
@@ -22,7 +22,7 @@ import { Ju } from "../905/102752";
 import { v as _$$v } from "../905/318279";
 import { yX, ey } from "../figma_app/918700";
 import { v0 } from "../figma_app/639088";
-let $$N0 = Ju(function(e) {
+let $$N0 = Ju(function (e) {
   let {
     name,
     user,
@@ -31,7 +31,7 @@ let $$N0 = Ju(function(e) {
   let [c, h] = useState(!1);
   let [f, b] = useState(null);
   let [S, x] = useState("");
-  let N = wA();
+  let N = useDispatch();
   let O = () => {
     N(to({
       type: C,
@@ -135,11 +135,11 @@ let $$N0 = Ju(function(e) {
     size: "small"
   });
 }, "CommunityRequestRefundModal");
-let C = Ju(function(e) {
+let C = Ju(function (e) {
   let {
     user
   } = e;
-  let r = wA();
+  let r = useDispatch();
   return jsxs(ey, {
     size: "small",
     hide: lQ,
@@ -164,7 +164,7 @@ let C = Ju(function(e) {
     })]
   });
 }, "CommunityRefundRequestedSuccessModal");
-let w = Ju(function(e) {
+let w = Ju(function (e) {
   let {
     user
   } = e;
@@ -181,4 +181,4 @@ let w = Ju(function(e) {
     autoFocusCta: !1
   });
 }, "CommunityErrorRequestingRefundModal");
-export const bX = $$N0; 
+export const bX = $$N0;

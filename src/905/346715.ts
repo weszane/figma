@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useCallback, useMemo, useEffect } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { debounce } from "../905/915765";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
@@ -31,9 +31,9 @@ import { CE, XK, C2, Xu, QL, T as _$$T, Pv, Gu, Kk, Qu, Cr, iU, g2 } from "../fi
 import { A as _$$A } from "../6828/7452";
 var $$D1 = (e => (e.PROJECT_SETTINGS = "project_settings", e.CONNECTED_PROJECT_ADMIN_UI = "connected_project_admin_ui", e.CONNECTED_PROJECT_ORG_PAGE = "connected_project_org_page", e.PROJECT_SETTINGS_ONBOARDING_CTA = "project_settings_onboarding_cta", e))($$D1 || {});
 var L = (e => (e.URL_FORMAT = "url_format", e.URL_SAME_PLAN = "url_same_plan", e.EMAIL_FORMAT = "email_format", e.EMAIL_USER_NOT_FOUND = "email_user_not_found", e.EMAIL_NOT_MATCH_PLAN = "email_not_match_plan", e.EMAIL_SAME_DOMAIN = "email_same_domain", e.EMAIL_USER_ALREADY_EXISTS = "email_user_already_exists", e.NON_GOV_URL = "non_gov_url", e))(L || {});
-let $$F0 = Ju(function(e) {
+let $$F0 = Ju(function (e) {
   let t;
-  let i = wA();
+  let i = useDispatch();
   let u = () => {
     i(Ce());
   };
@@ -327,8 +327,8 @@ let $$F0 = Ju(function(e) {
     })
   });
 }, "ResourceConnectRequestModal");
-let M = Ju(function(e) {
-  let t = wA();
+let M = Ju(function (e) {
+  let t = useDispatch();
   let i = () => {
     t(Ce());
   };
@@ -431,4 +431,4 @@ let M = Ju(function(e) {
   });
 }, "InviteToCreateATeamModal");
 export const C = $$F0;
-export const wR = $$D1; 
+export const wR = $$D1;

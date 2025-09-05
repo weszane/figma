@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useCallback } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import a from "classnames";
 import { N } from "../905/551536";
 import { h1 } from "../905/986103";
@@ -35,7 +35,7 @@ export function $$_1(e) {
   });
 }
 export function $$h0(e) {
-  let t = wA();
+  let t = useDispatch();
   let n = useCallback(n => {
     n.stopPropagation();
     e.user.id && t(sf({

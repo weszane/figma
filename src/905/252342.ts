@@ -1,13 +1,13 @@
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { md } from "../figma_app/27355";
 import { sx } from "../905/449184";
 import { OM } from "../905/124270";
 import { li } from "../905/182534";
 export function $$l0() {
   let e = md(OM);
-  let t = d4(e => e.search.sessionId);
-  let i = d4(e => e.search.queryId);
-  let l = d4(e => e.search.parameters.query);
+  let t = useSelector(e => e.search.sessionId);
+  let i = useSelector(e => e.search.queryId);
+  let l = useSelector(e => e.search.parameters.query);
   let d = li();
   return (n, r, s) => {
     let o = {

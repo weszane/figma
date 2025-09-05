@@ -7,7 +7,7 @@ import { h as _$$h } from "../figma_app/334471";
 import { FPermissionDenialReason } from "../figma_app/191312";
 import { wH } from "../figma_app/680166";
 import { q, J } from "../905/202542";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { p as _$$p, u as _$$u } from "../1250/964548";
 import { V } from "../0c62c2fd/421640";
 import { ud } from "../figma_app/681697";
@@ -112,12 +112,12 @@ export function $$R0({
     lgFolder: t,
     fileCreationOptions: r
   }) {
-    let a = wA();
+    let a = useDispatch();
     let s = function ({
       lgFolder: e,
       newFileFrom: t
     }) {
-      let r = wA();
+      let r = useDispatch();
       let a = _$$E({
         isDraftsFolder: T9(e),
         newFileFrom: t,

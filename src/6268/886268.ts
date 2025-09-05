@@ -51,7 +51,7 @@ import { W as _$$W } from "../905/569454";
 import { M as _$$M } from "../1250/358700";
 import { N as _$$N } from "../905/865305";
 import { hC } from "../figma_app/901889";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { mc as _$$mc, fP } from "../905/691059";
 import { N as _$$N2 } from "../905/438674";
 import { e as _$$e2 } from "../905/295932";
@@ -1197,7 +1197,7 @@ let nm = "confirm_deletion_modal--bodyText--OTH-f";
 let np = Ju(function (e) {
   let n = hS(e);
   let o = D6("ConfirmDeletionModal");
-  let c = wA();
+  let c = useDispatch();
   let r = "loaded" === o.status;
   let [a, l] = useState(!1);
   let d = o.data?.planKey;
@@ -1339,7 +1339,7 @@ function nw({
   });
 }
 function nj() {
-  let e = wA();
+  let e = useDispatch();
   let {
     getTriggerProps,
     manager

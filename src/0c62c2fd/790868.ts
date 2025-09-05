@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { glU, xal } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import { fp, Xr } from "../figma_app/27355";
@@ -17,9 +17,9 @@ export function $$h0(e) {
   let [r, h] = fp(l7);
   let [x, b] = fp(oZ);
   let v = q5();
-  let y = wA();
+  let y = useDispatch();
   let w = rE();
-  let j = d4(e => e.versionHistory);
+  let j = useSelector(e => e.versionHistory);
   let T = am();
   let E = W();
   let I = Xr(Yh);

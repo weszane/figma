@@ -1,4 +1,4 @@
-import { vA } from "../vendor/514228";
+import { unstable_batchedUpdates } from "../vendor/514228";
 import { lQ } from "../905/934246";
 import { isNotNullish } from "../figma_app/95419";
 import { getFeatureFlags } from "../905/601108";
@@ -46,7 +46,7 @@ let Y = nF((e, {
   folderId: t,
   folderData: r
 }) => {
-  vA(() => {
+  unstable_batchedUpdates(() => {
     e.getState().folders[t] ? e.dispatch(yJ({
       folder: r.folder
     })) : e.dispatch(bE(r.folder));
@@ -156,7 +156,7 @@ let $$J0 = M4.PaginatedQuery({
     reduxStore: r
   }) => {
     let n;
-    if (t) n = t; else {
+    if (t) n = t;else {
       let {
         folderId,
         shouldShowOnlyTrashedFiles = !1,
@@ -616,7 +616,7 @@ let $$ec6 = nF((e, t) => {
         upsellPlan: _$$F2.Plan.PRO,
         editorType: null
       }
-    })); else {
+    }));else {
       let t = s ? _$$t("file_browser.api_folder.no_create_permissions_team_name", {
         teamName: s.name
       }) : _$$t("file_browser.api_folder.no_create_permissions_this_team");
@@ -637,4 +637,4 @@ export const iT = $$ea9;
 export const jl = $$Z10;
 export const k4 = $$er11;
 export const mq = $$ei12;
-export const xT = $$eo13; 
+export const xT = $$eo13;

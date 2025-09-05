@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useCallback, useState } from "react";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { dr } from "../figma_app/643789";
 import { Ay } from "../905/612521";
 import { oJ } from "../905/63728";
@@ -29,10 +29,10 @@ import { H as _$$H } from "../905/154301";
 import { p as _$$p } from "../905/195198";
 export function $$P0(e) {
   let t = dq();
-  let i = d4(e => e.teams);
+  let i = useSelector(e => e.teams);
   let P = _6();
   let O = e.orgTeams;
-  let D = wA();
+  let D = useDispatch();
   let {
     showing,
     show,
@@ -179,4 +179,4 @@ export function $$P0(e) {
     })]
   });
 }
-export const w = $$P0; 
+export const w = $$P0;

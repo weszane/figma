@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useMemo, useRef, useState, useCallback, forwardRef, useId } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { rXF } from "../figma_app/763686";
 import { Pt } from "../figma_app/806412";
 import { Yi } from "../figma_app/933328";
@@ -180,7 +180,7 @@ let T = forwardRef(({
   hideVariableIcon: p,
   mixedMathHandler: g
 }, f) => {
-  let x = wA();
+  let x = useDispatch();
   let {
     smallNudgeAmount,
     bigNudgeAmount,
@@ -253,7 +253,7 @@ function I({
   variableFields: a,
   onClose: d
 }) {
-  let c = wA();
+  let c = useDispatch();
   let {
     updateVariableConsumption,
     clearVariableConsumption

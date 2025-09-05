@@ -1,5 +1,5 @@
 import { useCallback, useMemo, useState, useRef, useEffect, createContext, useContext } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { Ez5, zMY, zkO, QjO } from "../figma_app/763686";
 import { l7, nc } from "../905/189185";
 import { l as _$$l } from "../905/716947";
@@ -114,7 +114,7 @@ export function $$J7() {
   return $$X5(_$$l(e));
 }
 export function $$W17(e) {
-  let t = wA();
+  let t = useDispatch();
   let r = Xr(Ei);
   let l = Xr(VZ);
   let [c, i] = useState(!1);

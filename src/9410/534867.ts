@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { createRef } from "react";
-import { Ng } from "../vendor/514228";
+import { connect } from "../vendor/514228";
 import { filterNotNullish } from "../figma_app/656233";
 import { assert, debug } from "../figma_app/465776";
 import { encodeStringToBase64, encodeBase64 } from "../905/561685";
@@ -644,7 +644,7 @@ class K extends o6 {
   }
 }
 K.displayName = "PluginParameterEntry";
-export let $$H2 = Ng(function (e) {
+export let $$H2 = connect(function (e) {
   let t = e.selectedView.editorType;
   return {
     openFile: e.openFile,

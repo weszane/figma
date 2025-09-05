@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useCallback } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { O } from "../905/969533";
 import { $D } from "../905/11";
@@ -33,7 +33,7 @@ export function $$I2({
   } = cq();
   let d = w0();
   if (!i || !extension || !extension.manifest || !extension.manifest.menu) return null;
-  let c = z(extension.manifest.menu, extension).map((e) => aS(e, (e) => () => {
+  let c = z(extension.manifest.menu, extension).map(e => aS(e, e => () => {
     var t;
     Im(a, "quick-actions", e.menuAction);
     d(e, !0);
@@ -56,8 +56,8 @@ export function $$v0({
   extension: t,
   displayAboveTarget: r
 }) {
-  let n = wA();
-  return useCallback((i) => {
+  let n = useDispatch();
+  return useCallback(i => {
     if (e) n(oB());else if (i) {
       let e = i.getBoundingClientRect();
       n(j7({

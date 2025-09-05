@@ -56,7 +56,7 @@ import { hK, xU, cG, X3 } from "../figma_app/211706";
 import { Te } from "../vendor/813803";
 import { md, eU as _$$eU, fp, Iz, zl as _$$zl, Xr } from "../figma_app/27355";
 import { V as _$$V3 } from "../figma_app/473391";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { E as _$$E2 } from "../905/172252";
 import { e as _$$e2 } from "../905/916195";
 import { ZC, qd } from "../figma_app/39751";
@@ -547,7 +547,7 @@ function e3({
   });
   let et = _$$F(e, _$$K2.ASSETS_PANEL, p, u);
   let es = function (e, t) {
-    let s = d4(dK);
+    let s = useSelector(dK);
     let r = e.isLocal && PN() ? _$$eT(e.node_id, s).join("-") : e.node_id;
     return _$$rf(`componentThumb.${r}`, "contextmenu", e => {
       t(e);
@@ -605,10 +605,10 @@ function e2({
   isVisualAsset: m,
   onSuccessfulAssetInsert: g
 }) {
-  let f = wA();
+  let f = useDispatch();
   let x = _$$I(Cn.AssetsPanel);
-  let y = d4(dK);
-  let _ = d4(F9);
+  let y = useSelector(dK);
+  let _ = useSelector(F9);
   let b = md(_$$T2);
   let C = x.searchOption?.type === _$$I2.ALL;
   let j = fV(e.library_key);
@@ -753,7 +753,7 @@ function e7({
   children: t
 }) {
   let s = function (e) {
-    let t = wA();
+    let t = useDispatch();
     let {
       query,
       searchSessionId
@@ -761,7 +761,7 @@ function e7({
     let i = ht();
     let l = q_();
     let a = LR();
-    let o = d4(e => e.universalInsertModal.showing);
+    let o = useSelector(e => e.universalInsertModal.showing);
     let d = useCallback(() => {
       o && a();
     }, [a, o]);
@@ -1561,7 +1561,7 @@ function t1({
     sourceForTracking: i,
     isList: l
   }) {
-    let a = wA();
+    let a = useDispatch();
     let {
       logInsert: _logInsert,
       logKeyboardInsert
@@ -2663,8 +2663,8 @@ let s7 = memo(({
   return t ? createPortal(c, document.body) : c;
 });
 function s9() {
-  let e = d4(e => e.dropdownShown);
-  let t = d4(_$$h4);
+  let e = useSelector(e => e.dropdownShown);
+  let t = useSelector(_$$h4);
   let s = e?.type === _$$K2.ASSETS_PANEL && !!e?.data?.component;
   let i = e?.type === s4 && !!e?.data?.pageId;
   let l = e?.type === sZ && !!e?.data;
@@ -3143,11 +3143,11 @@ function r4() {
     subscribedFileDataByLibraryKey,
     hubFilesByLibraryKey
   } = _$$N4();
-  let s = d4(_$$tB);
-  let r = d4(_$$e_);
-  let i = d4(MH);
-  let l = d4(dM);
-  let a = d4(_$$P4);
+  let s = useSelector(_$$tB);
+  let r = useSelector(_$$e_);
+  let i = useSelector(MH);
+  let l = useSelector(dM);
+  let a = useSelector(_$$P4);
   let o = _$$n4();
   let d = Fl();
   let c = md(_$$lj);
@@ -3498,7 +3498,7 @@ let ns = forwardRef(({
   let a = _$$sN();
   let o = Um();
   let d = o?.type === nt;
-  let c = wA();
+  let c = useDispatch();
   let u = useCallback(() => c(oB()), [c]);
   let h = useCallback(() => c(j7({
     type: nt,
@@ -4333,15 +4333,15 @@ function nV({
   }, [e.libraryKey, y?.libraryKey]);
   let O = function (e, t = !1) {
     let s = q5();
-    let r = wA();
+    let r = useDispatch();
     let i = e.libraryKey === s?.libraryKey;
     let l = _9(e.libraryKey, "assets_panel_library_context_menu");
     let o = useCallback(() => l(!1), [l]);
     let d = function () {
-      let e = wA();
+      let e = useDispatch();
       let t = q5();
-      let s = d4(e => e.teams);
-      let r = d4(fA);
+      let s = useSelector(e => e.teams);
+      let r = useSelector(fA);
       let i = useCallback(() => {
         e(_$$to({
           type: dD,
@@ -6077,7 +6077,7 @@ function ii({
   });
   let _ = function (e, t) {
     let s = q5();
-    let r = wA();
+    let r = useDispatch();
     let i = e === s?.libraryKey;
     let l = e && !!t;
     let o = _$$b2({
@@ -6866,8 +6866,8 @@ let i4 = ({
   let p = _$$tM4("assets-panel");
   let h = ZC(p);
   let m = je();
-  let x = d4(e => e.fileVersion);
-  let y = d4(e => e.loadingState);
+  let x = useSelector(e => e.fileVersion);
+  let y = useSelector(e => e.loadingState);
   let _ = q5();
   let b = _?.key;
   let C = oh(_$$fi);
@@ -7274,7 +7274,7 @@ let la = () => {
 function lb({
   libraryName: e
 }) {
-  let t = wA();
+  let t = useDispatch();
   let {
     currentView,
     startSearch,
@@ -7290,7 +7290,7 @@ function lb({
     focusSearchBar
   } = _$$rl();
   let y = _$$b();
-  let _ = d4(e => e.leftPanel.shouldFocusSearchBar) || y;
+  let _ = useSelector(e => e.leftPanel.shouldFocusSearchBar) || y;
   let {
     query,
     setQuery,
@@ -7332,7 +7332,7 @@ function lb({
     focusSearchBar();
     S();
   }, [w, focusSearchBar, S]);
-  let A = d4(e => e.mirror.appModel.activeCanvasEditModeType);
+  let A = useSelector(e => e.mirror.appModel.activeCanvasEditModeType);
   useEffect(() => {
     let e = e => {
       (_$$Ay3.chromeos ? e.altKey && e.shiftKey && e.keyCode === Uz.KEY_2 : e.altKey && e.keyCode === Uz.KEY_2) && A !== m1T.TEXT && (focusSearchBar(), e.preventDefault());
@@ -7445,7 +7445,7 @@ function lL({
   let i = _$$tS();
   let l = Um();
   let o = l?.type === lP;
-  let d = wA();
+  let d = useDispatch();
   let c = useCallback(() => {
     o ? d(oB()) : (d(j7({
       type: lP,
@@ -7489,7 +7489,7 @@ function lR({
   includeFolderSetting: t,
   buttonRef: s
 }) {
-  let i = wA();
+  let i = useDispatch();
   let o = useCallback(() => {
     i(oB());
   }, [i]);
@@ -7720,7 +7720,7 @@ function lQ({
     width
   } = e8();
   let l = Math.min(.7 * width, 240);
-  let a = d4(vD);
+  let a = useSelector(vD);
   let o = Fk((e, t) => {
     let s = e.get(t);
     return s?.name;
@@ -8144,8 +8144,8 @@ function an({
     let s = q5();
     let r = jO();
     let i = _$$f("has_dismissed_component_sidebar_library_upsell_banner");
-    let l = d4(e => e.isFreeUser);
-    let a = d4(_$$P4);
+    let l = useSelector(e => e.isFreeUser);
+    let a = useSelector(_$$P4);
     let o = s?.teamId ? a[s.teamId] : null;
     let d = _$$Rs(kQI, {
       id: s?.teamId ?? ""

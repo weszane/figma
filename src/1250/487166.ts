@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useEffect } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { languageCodes } from "../905/816253";
 import { N as _$$N } from "../905/438674";
 import { getFeatureFlags } from "../905/601108";
@@ -44,7 +44,7 @@ let N = e => {
   return a && r ? "spain" : a && i ? "non_spain" : void 0;
 };
 function O(e) {
-  let t = wA();
+  let t = useDispatch();
   let n = DP();
   let r = e.isSpainVariant ? tx("es_es_announcement.spain.description") : tx("es_es_announcement.nonspain.description");
   return jsx(_l, {
@@ -83,7 +83,7 @@ function O(e) {
 }
 let R = r1("has_tried_es_es");
 export function $$M0() {
-  let e = wA();
+  let e = useDispatch();
   let t = md(R);
   let n = md(mp);
   let s = "loaded" === n.status;

@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useCallback, useEffect, useRef, useMemo, useContext } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { noop, debug } from "../figma_app/465776";
 import { debounce } from "../905/915765";
 import { y1 } from "../figma_app/492908";
@@ -273,7 +273,7 @@ function en({
   temporarilyExpandFolder: _,
   toggleFolder: T
 }) {
-  let R = wA();
+  let R = useDispatch();
   let [I, N] = useState(!1);
   let D = useRef(null);
   let B = useRef(null);
@@ -379,7 +379,7 @@ function eu({
 }) {
   let [N, D] = useState(!1);
   let [B, A] = useState(!1);
-  let M = wA();
+  let M = useDispatch();
   let K = useRef(null);
   let F = useRef(null);
   let O = useCallback(() => {
@@ -512,7 +512,7 @@ function em({
   recordingKey: l
 }) {
   let [r, a] = useState(!1);
-  let i = wA();
+  let i = useDispatch();
   let d = useRef(null);
   let c = useCallback(() => {
     t && Y5.triggerAction("set-tool-default");
@@ -575,7 +575,7 @@ function ek({
   styleType: y
 }) {
   let m = Um();
-  let p = d4(e => e.library.localStyleSelection);
+  let p = useSelector(e => e.library.localStyleSelection);
   let x = useMemo(() => p && p.type === y && m?.type === eS ? QA(p, m.data.uiList) : [], [p, m, y]);
   let f = useMemo(() => Ug(x).map(e => e.node_id), [x]);
   let g = f.length;
@@ -608,11 +608,11 @@ function eC({
   onDuplicateItems: p,
   onPasteItems: x
 }) {
-  let f = wA();
+  let f = useDispatch();
   useEffect(() => (glU.computePastableStyleCount(), () => {
     glU.clearPastableStyleCount();
   }), []);
-  let g = d4(e => e.mirror.appModel.pastableStyleCount);
+  let g = useSelector(e => e.mirror.appModel.pastableStyleCount);
   let h = !!q5()?.canEdit;
   let w = useCallback(() => {
     if (!t.length || t[0].type !== PW.STYLE) return;
@@ -705,7 +705,7 @@ function eM({
 function eP({
   setDefaultToolOnCreateStyle: e
 }) {
-  let t = wA();
+  let t = useDispatch();
   let l = useContext(lk);
   let r = !p8("isReadOnly");
   let a = useRef(null);
@@ -716,7 +716,7 @@ function eP({
   let y = c?.data?.targetRect;
   let m = "localStyleHeader";
   let x = 0 === Bs().length;
-  let g = d4(e => e.stylePreviewShown.isShown && e.stylePreviewShown.isCreating);
+  let g = useSelector(e => e.stylePreviewShown.isShown && e.stylePreviewShown.isCreating);
   let h = useMemo(() => y || (u && d ? d.getBoundingClientRect() : null), [y, d, u]);
   let w = () => {
     t(oB());
@@ -833,7 +833,7 @@ function eF({
   } = getTriggerProps();
   let c = !p8("isReadOnly");
   let u = 0 === Bs().length;
-  let y = d4(e => e.stylePreviewShown.isShown && e.stylePreviewShown.isCreating);
+  let y = useSelector(e => e.stylePreviewShown.isShown && e.stylePreviewShown.isCreating);
   let m = u && !manager.isOpen && !y;
   let x = useCallback(() => {
     m && (manager.setOpen(!0), sx("editor-local-styles-dropdown-show"));
@@ -926,13 +926,13 @@ function eY({
   setDefaultToolOnCreateStyle: t,
   recordingKey: l
 }) {
-  let a = wA();
-  let i = d4(e => e.stylePreviewShown);
-  let y = d4(e => e.mirror.appModel.activeCanvasEditModeType);
-  let m = d4(e => e.mirror.appModel.currentTool);
+  let a = useDispatch();
+  let i = useSelector(e => e.stylePreviewShown);
+  let y = useSelector(e => e.mirror.appModel.activeCanvasEditModeType);
+  let m = useSelector(e => e.mirror.appModel.currentTool);
   let x = useRef(null);
   let g = Bs();
-  let h = d4(e => e.library.localStyleSelection);
+  let h = useSelector(e => e.library.localStyleSelection);
   let [w, S] = useState(null);
   let [k, E] = useState(null);
   let T = useRef(null);
@@ -1113,10 +1113,10 @@ function ez({
 }) {
   let U = q5();
   let Y = !p8("isReadOnly");
-  let z = wA();
-  let W = d4(e => e.stylePreviewShown);
-  let q = d4(t => i4(t, e));
-  let H = d4(t => A7(t, e, l));
+  let z = useDispatch();
+  let W = useSelector(e => e.stylePreviewShown);
+  let q = useSelector(t => i4(t, e));
+  let H = useSelector(t => A7(t, e, l));
   let [X, V] = useState(() => {
     if (x4 && U) {
       let t = JSON.parse(x4.getItem(e$) || "{}");

@@ -1,6 +1,6 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useMemo } from "react";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { k as _$$k } from "../905/443820";
 import { getFeatureFlags } from "../905/601108";
 import { Rs } from "../figma_app/288654";
@@ -29,8 +29,8 @@ let x = (e, t, i) => e ? t === FAccessLevelType.PUBLIC ? tx("file_browser.team.y
   }), tx("file_browser.team.move_files_out_of_team")]
 });
 let $$S0 = Ju(function (e) {
-  let t = d4(e => getPermissionsState(e));
-  let i = wA();
+  let t = useSelector(e => getPermissionsState(e));
+  let i = useDispatch();
   let o = t.teams[e.teamId];
   let y = t.user?.id || "";
   let b = Rs(yQw, {

@@ -19,7 +19,7 @@ let s = () => {
 };
 let c = s;
 let h = (e, n) => e === n;
-let $$p5 = function (e = l) {
+let useSelector = function (e = l) {
   let n = e === l ? d : () => useContext(e);
   return function (e, i = h) {
     let {
@@ -150,7 +150,7 @@ let P = "undefined" != typeof window && void 0 !== window.document && void 0 !==
 function L(e, n) {
   return e === n ? 0 !== e || 0 !== n || 1 / e == 1 / n : e != e && n != n;
 }
-export function $$N3(e, n) {
+export function shallowEqual(e, n) {
   if (L(e, n)) return !0;
   if ("object" != typeof e || null === e || "object" != typeof n || null === n) return !1;
   let i = Object.keys(e);
@@ -165,12 +165,12 @@ let M = [null, null];
 function R(e, n) {
   return e === n;
 }
-let $$j2 = function (e, n, i, {
+let connect = function (e, n, i, {
   pure: t,
   areStatesEqual: f = R,
-  areOwnPropsEqual: r = $$N3,
-  areStatePropsEqual: a = $$N3,
-  areMergedPropsEqual: o = $$N3,
+  areOwnPropsEqual: r = shallowEqual,
+  areStatePropsEqual: a = shallowEqual,
+  areMergedPropsEqual: o = shallowEqual,
   forwardRef: d = !1,
   context: s = l
 } = {}) {
@@ -351,7 +351,7 @@ ${j.current.stack}
     return b()(w, e);
   };
 };
-let $$I0 = function ({
+let Provider = function ({
   store: e,
   context: n,
   children: i,
@@ -392,9 +392,9 @@ function z(e = l) {
     return store;
   };
 }
-let $$B6 = z();
-let $$H4 = function (e = l) {
-  let n = e === l ? $$B6 : z(e);
+let useStore = z();
+let useDispatch = function (e = l) {
+  let n = e === l ? useStore : z(e);
   return function () {
     return n().dispatch;
   };
@@ -402,10 +402,10 @@ let $$H4 = function (e = l) {
 c = useSyncExternalStoreWithSelector;
 A = useSyncExternalStore;
 a = unstable_batchedUpdates;
-export const Kq = $$I0;
+export const Kq = Provider;
 export const vA = unstable_batchedUpdates;
-export const Ng = $$j2;
-export const bN = $$N3;
-export const wA = $$H4;
-export const d4 = $$p5;
-export const Pj = $$B6;
+export const Ng = connect;
+export const bN = shallowEqual;
+export const wA = useDispatch;
+export const d4 = useSelector;
+export const Pj = useStore;

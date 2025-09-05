@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useRef, useMemo } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { md } from "../figma_app/27355";
 import { B } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -39,7 +39,7 @@ export function $$I0({
   hasQuickActionsStyling: I,
   contentTargetRef: S
 }) {
-  let v = wA();
+  let v = useDispatch();
   let A = useRef(null);
   let x = S || A;
   let N = Um();

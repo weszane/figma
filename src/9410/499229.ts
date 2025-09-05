@@ -1,6 +1,6 @@
 import { jsx, Fragment } from "react/jsx-runtime";
 import { createContext, useCallback, useRef, useState, useMemo, useLayoutEffect, useEffect } from "react";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { YEY, Lov, Ez5, h3O, _em, dNx, Z6A } from "../figma_app/763686";
 import { Xy, AD } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
@@ -89,7 +89,7 @@ export function $$U1() {
   let [t, i] = useState(!0);
   let {
     query
-  } = d4(e => e.canvasSearch);
+  } = useSelector(e => e.canvasSearch);
   let {
     total
   } = md(Fk);
@@ -104,7 +104,7 @@ export function $$U1() {
 }
 export function $$G5() {
   let e = Z("canvas_search_navigate");
-  let t = d4(e => e.canvasSearch.scope);
+  let t = useSelector(e => e.canvasSearch.scope);
   return useCallback((i, r) => {
     e(YEY.setActiveResultAndGetViewportSettings(i, r), {
       additionalTrackEventParams: {
@@ -120,8 +120,8 @@ export function $$K7() {
     scope,
     filters,
     mode
-  } = d4(e => e.canvasSearch);
-  let p = wA();
+  } = useSelector(e => e.canvasSearch);
+  let p = useDispatch();
   let m = useRef(!1);
   let _ = p8("currentPage");
   let x = L3();
@@ -209,11 +209,11 @@ function H() {
     scope,
     filters,
     mode
-  } = d4(e => e.canvasSearch);
+  } = useSelector(e => e.canvasSearch);
   let r = p8("currentPage");
   let l = am();
   let d = lg();
-  let c = d4(e => e.mirror.appModel.pagesList);
+  let c = useSelector(e => e.mirror.appModel.pagesList);
   let u = iW();
   return useCallback(async (n, a = !0, p) => {
     let h = p ?? r;
@@ -333,7 +333,7 @@ export function $$W4() {
   let {
     query,
     scope
-  } = d4(e => e.canvasSearch);
+  } = useSelector(e => e.canvasSearch);
   let i = H();
   return useCallback(r => {
     let n = YEY.getActiveResult();

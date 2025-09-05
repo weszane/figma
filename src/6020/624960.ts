@@ -1,6 +1,6 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { memo, useState, useRef, useEffect, useCallback } from "react";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { K as _$$K } from "../905/443068";
 import { E as _$$E } from "../905/632989";
 import { o as _$$o } from "../905/821217";
@@ -126,8 +126,8 @@ export function $$F1(t) {
   });
   let Y = !!X;
   let G = X?.prototype_url;
-  let Q = d4(t => t.mirror.appModel.urlNodeId);
-  let q = wA();
+  let Q = useSelector(t => t.mirror.appModel.urlNodeId);
+  let q = useDispatch();
   let J = useCallback(() => {
     F(!1);
   }, []);

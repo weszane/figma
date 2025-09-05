@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from "react";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { A as _$$A } from "../vendor/850789";
 import { sx } from "../905/449184";
 import { R as _$$R } from "../905/103090";
@@ -77,7 +77,7 @@ let R = e => [{
 let M = "";
 export function $$F1() {
   let [e, t] = useState(M);
-  let s = d4(e => e.universalInsertModal);
+  let s = useSelector(e => e.universalInsertModal);
   let [r, o] = useState(s.previewResource);
   useEffect(() => {
     i?.type === Rt.ORG_FACE_STAMPS && o({
@@ -106,7 +106,7 @@ export function $$z0() {
   let {
     setQuery
   } = _$$I(Cn.FigJam);
-  let j = wA();
+  let j = useDispatch();
   let S = _$$tS();
   let {
     shelves,

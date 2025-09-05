@@ -1,4 +1,4 @@
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { lQ } from "../905/934246";
 import { l as _$$l } from "../905/716947";
 import { Z } from "../vendor/39153";
@@ -26,7 +26,7 @@ export async function $$S2(e) {
   })).file || null;
 }
 export function $$v6() {
-  let e = d4(e => {
+  let e = useSelector(e => {
     if (e.selectedView?.view === "fullscreen") return e.selectedView.fileKey;
   });
   (function (e) {
@@ -84,12 +84,12 @@ export function $$k19(e) {
   return e.openFile?.key && e.fileByKey[e.openFile.key] || null;
 }
 function M() {
-  return d4($$A16);
+  return useSelector($$A16);
 }
 export function $$F13() {
-  let e = d4(e => e.selectedView?.view === "prototype");
+  let e = useSelector(e => e.selectedView?.view === "prototype");
   let t = function () {
-    let e = d4(e => e.selectedView?.view === "fullscreen" ? e.selectedView.fileKey : null);
+    let e = useSelector(e => e.selectedView?.view === "fullscreen" ? e.selectedView.fileKey : null);
     let t = Bh(ehp(e ? {
       fileKey: e
     } : null));

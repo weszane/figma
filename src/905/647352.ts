@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useMemo, useCallback, useRef } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { $n } from "../905/521428";
 import o from "classnames";
 import { R as _$$R } from "../905/103090";
@@ -45,7 +45,7 @@ let F = "confirm_unpublish_modal--modalContent--gX17Y modal--modalContent--P643j
 let M = Ju(function ({
   libraryModalSessionId: e
 }) {
-  let t = wA();
+  let t = useDispatch();
   let i = q5();
   let r = md(pz);
   let s = md(_$$t2);
@@ -102,12 +102,12 @@ export function $$W0(e) {
     localComponents: MH(e),
     localStateGroups: dM(e)
   }));
-  let E = d4(e => e.mirror.appModel.isReadOnly);
+  let E = useSelector(e => e.mirror.appModel.isReadOnly);
   let x = !!e.editingFile && e.editingFile.library_key === e.libraryKey;
   let S = useMemo(() => ND(localStyles), [localStyles]);
   let w = useMemo(() => ND(Jl(localComponents)), [localComponents]);
   let C = useMemo(() => ND(localStateGroups), [localStateGroups]);
-  let T = wA();
+  let T = useDispatch();
   let k = useCallback(() => {
     T(to({
       type: M,

@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useRef, useState, useCallback, useEffect, useLayoutEffect } from "react";
-import { bN } from "../vendor/514228";
+import { shallowEqual } from "../vendor/514228";
 import { qE } from "../figma_app/492908";
 import { lQ } from "../905/934246";
 import { xk } from "@stylexjs/stylex";
@@ -217,7 +217,7 @@ export function $$I0(e) {
           numItemsPerRow: m,
           scrollOffset: t.getBoundingClientRect().y + (h?.scrollTop ?? 0)
         };
-        n(e => bN(e, g) ? e : g);
+        n(e => shallowEqual(e, g) ? e : g);
       };
       i();
       let r = new ResizeObserver(i);

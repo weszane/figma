@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useCallback } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { eT } from "../figma_app/703138";
 import { CommentComposer } from "../draftjs_composer/577988";
 export function $$l0(e) {
@@ -12,7 +12,7 @@ export function $$l0(e) {
     onComplete,
     parentId
   } = e;
-  let u = wA();
+  let u = useDispatch();
   let p = useCallback(e => {
     let {
       message,

@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { _G } from "../figma_app/516028";
 import { Mb, El } from "../figma_app/646357";
 import { D2 } from "../905/18797";
@@ -9,14 +9,14 @@ import { Yl } from "../figma_app/10098";
 import { ce } from "../figma_app/177636";
 export function $$p0() {
   let e = je();
-  let t = d4(e => e.loadingState);
+  let t = useSelector(e => e.loadingState);
   return !!D() && (!e.data || e.data.some(e => {
     let r = Mb(e.libraryKey);
     return !D2(t, r);
   }));
 }
 export function $$_1() {
-  let e = d4(e => e.loadingState);
+  let e = useSelector(e => e.loadingState);
   let t = _G();
   let r = ce();
   let l = r.data?.assetsByLibraryKey;

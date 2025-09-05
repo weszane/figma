@@ -1,6 +1,6 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useState, useCallback, useMemo, useRef, useEffect } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { nj } from "../905/125019";
 import { tHB } from "../figma_app/763686";
 import { k as _$$k } from "../905/651849";
@@ -54,7 +54,7 @@ export function $$$$A0(e) {
   }, [openFileKey]);
   let O = useMemo(() => imagePaint.video?.hash, [imagePaint]);
   let D = ZC(O);
-  let L = wA();
+  let L = useDispatch();
   let F = useCallback((e, t, i, n) => {
     L(_P({
       name: "video_load",

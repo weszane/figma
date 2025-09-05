@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { md } from "../figma_app/27355";
 import { D } from "../905/273829";
 import { t as _$$t } from "../905/303541";
@@ -81,8 +81,8 @@ export function $$f6(e, t) {
 }
 export function $$E5() {
   let e = md(D);
-  let t = d4(e => e.mirror.appModel.devHandoffCodeLanguage);
-  let r = d4(e => e.selectedView);
+  let t = useSelector(e => e.mirror.appModel.devHandoffCodeLanguage);
+  let r = useSelector(e => e.selectedView);
   let o = t;
   "orgAdminSettings" === r.view && e && (o = e);
   return useMemo(() => $$p4(o), [o]);

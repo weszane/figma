@@ -1,6 +1,6 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useRef, useState, useCallback } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { lQ } from "../905/934246";
 import { T as _$$T } from "../905/256551";
 import { x as _$$x } from "../905/587214";
@@ -101,7 +101,7 @@ function D({
   resourceType: U,
   resourceId: B
 }) {
-  let V = wA();
+  let V = useDispatch();
   let G = useRef(null);
   let z = useRef(null);
   let H = async t => {
@@ -354,7 +354,7 @@ function B({
   resourceType: S,
   resourceId: T
 }) {
-  let k = wA();
+  let k = useDispatch();
   let R = useRef(null);
   let N = useRef(null);
   let [P, D] = useState(!1);

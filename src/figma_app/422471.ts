@@ -1,5 +1,5 @@
 import { useRef, useEffect } from "react";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { eU, md, Xr } from "../figma_app/27355";
 import { b } from "../905/985254";
 import { Fu } from "../figma_app/545877";
@@ -10,10 +10,10 @@ let $$u2 = eU(!1);
 let $$p5 = Fu("dev_handoff_has_seen_dev_mode_paywall");
 export function $$_4() {
   (function () {
-    let e = d4(e => e.currentUserOrgId);
-    let t = d4(e => e.currentTeamId);
+    let e = useSelector(e => e.currentUserOrgId);
+    let t = useSelector(e => e.currentTeamId);
     let r = q5()?.teamId || null;
-    let o = wA();
+    let o = useDispatch();
     let c = md($$d1);
     let u = useRef(!1);
     useEffect(() => {
@@ -27,7 +27,7 @@ export function $$_4() {
 }
 export function $$h0() {
   (function () {
-    let e = wA();
+    let e = useDispatch();
     let t = md($$p5);
     let r = Xr($$u2);
     let o = useRef(!1);

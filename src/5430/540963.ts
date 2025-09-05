@@ -1,6 +1,6 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useState, useEffect, useRef, useCallback, useMemo, PureComponent, createRef, Component } from "react";
-import { wA, d4, Ng } from "../vendor/514228";
+import { useDispatch, useSelector, connect } from "../vendor/514228";
 import a from "../vendor/241899";
 import { y3 } from "../figma_app/876459";
 import { Ay } from "../905/612521";
@@ -203,13 +203,13 @@ let Y = [{
   img: buildUploadUrl("37f4db88a8104a239f3d761763f8d7e0826d7765"),
   color: fr
 }];
-let X = function({
+let X = function ({
   profile: e,
   onImageUploaded: t
 }) {
   let r = useRef(null);
-  let s = wA();
-  let a = d4(e => e.loadingState);
+  let s = useDispatch();
+  let a = useSelector(e => e.loadingState);
   let l = Ai.loadingKeyForPayload({
     profileId: e.id
   });
@@ -278,7 +278,7 @@ function J({
     backgroundImage: `url(${e.redirect_cover_image_url}?${a})`,
     borderRadius: d
   } : {
-    ...function(e, t) {
+    ...function (e, t) {
       if (null == e || !e.id) return;
       let r = e.id.length >= 4 ? e.id.slice(e.id.length - 4) : "0";
       if (t) {
@@ -362,7 +362,7 @@ function e_({
   return jsxs("div", {
     className: "x78zum5 x1q0g3np x6s0dn4 x1v2ro7d",
     children: [e.website && jsx(eu, {
-      href: function(e) {
+      href: function (e) {
         try {
           return new URL(e).href;
         } catch (t) {
@@ -392,7 +392,7 @@ function ep({
 function eh({
   profile: e
 }) {
-  let t = d4(e => e.authedActiveCommunityProfile);
+  let t = useSelector(e => e.authedActiveCommunityProfile);
   let r = t?.id === e?.id;
   let s = e.website || e.twitter;
   return jsxs("div", {
@@ -464,7 +464,7 @@ function eI({
   isActiveProfile: e
 }) {
   let t = buildUploadUrl("8b7a937ff662171bfc1bb88ac6c2803aa6434608");
-  let r = function() {
+  let r = function () {
     let e = AG();
     let t = Om();
     let r = _$$tv() ?? void 0;
@@ -589,7 +589,7 @@ let ek = {
 function eA({
   profile: e
 }) {
-  let t = d4(e => e.authedActiveCommunityProfile);
+  let t = useSelector(e => e.authedActiveCommunityProfile);
   let r = t?.id === e?.id;
   let s = _$$X();
   let {
@@ -665,7 +665,7 @@ class e0 extends PureComponent {
     });
   }
 }
-let e1 = Ng(e => ({
+let e1 = connect(e => ({
   user: e.user || null
 }))(e0);
 class e4 extends PureComponent {
@@ -747,8 +747,8 @@ let tg = nF(async (e, t, {
     t?.callback(!1);
   }
 });
-let tE = Ju(function() {
-  let e = wA();
+let tE = Ju(function () {
+  let e = useDispatch();
   let t = iZ();
   let [r, s] = useState([]);
   let [a, l] = useState(!0);
@@ -1081,7 +1081,7 @@ function rf({
 function ry({
   resource: e
 }) {
-  let t = wA();
+  let t = useDispatch();
   let {
     id,
     is_subscription
@@ -1200,7 +1200,7 @@ function rj({
   primaryUserId: e,
   profileId: t
 }) {
-  let r = wA();
+  let r = useDispatch();
   let s = iZ();
   let [a, l] = useState(!1);
   let [{
@@ -1382,10 +1382,10 @@ let rk = e => {
   }
 };
 function rA() {
-  let e = wA();
+  let e = useDispatch();
   let t = iZ();
-  let r = d4(e => e.dropdownShown?.data?.profile);
-  let s = d4(e => e.dropdownShown?.data?.targetRect);
+  let r = useSelector(e => e.dropdownShown?.data?.profile);
+  let s = useSelector(e => e.dropdownShown?.data?.targetRect);
   if (!r) return jsx(Fragment, {});
   let n = r.is_restricted_by_current_user;
   let a = () => {
@@ -1494,7 +1494,7 @@ function rP(e) {
   let t = Um();
   let r = useRef(null);
   let s = !!(t && t.type === N9);
-  let a = wA();
+  let a = useDispatch();
   let l = useCallback(() => {
     a(oB());
   }, [a]);
@@ -1535,7 +1535,7 @@ function rO({
     filterState,
     handleFilterUpdate
   } = _$$m();
-  let l = d4(e => "authedActiveCommunityProfile" in e ? e.authedActiveCommunityProfile?.id ?? null : null) === e.id;
+  let l = useSelector(e => "authedActiveCommunityProfile" in e ? e.authedActiveCommunityProfile?.id ?? null : null) === e.id;
   let {
     shouldShowFilterControls,
     queryResult
@@ -1946,9 +1946,9 @@ function r7({
   profile: e,
   tab: t
 }) {
-  let r = d4(e => "authedActiveCommunityProfile" in e ? e.authedActiveCommunityProfile?.id : null);
-  let s = d4(e => "selectedView" in e ? e.selectedView : null);
-  let a = wA();
+  let r = useSelector(e => "authedActiveCommunityProfile" in e ? e.authedActiveCommunityProfile?.id : null);
+  let s = useSelector(e => "selectedView" in e ? e.selectedView : null);
+  let a = useDispatch();
   let l = r === e.id;
   return (useEffect(() => {
     t !== g3.SAVES || l || Ay.push(bL(e.profile_handle, g3.RESOURCES));
@@ -1969,11 +1969,11 @@ function r6({
     tabView
   } = RA(xn);
   let r = iZ();
-  let n = wA();
-  let a = d4(t => E1(e, t));
-  let l = d4(t => kJ(t, e));
-  let c = d4(e => "authedActiveCommunityProfile" in e ? e.authedActiveCommunityProfile?.id ?? null : null);
-  let d = d4(e => "selectedView" in e ? e.selectedView : null);
+  let n = useDispatch();
+  let a = useSelector(t => E1(e, t));
+  let l = useSelector(t => kJ(t, e));
+  let c = useSelector(e => "authedActiveCommunityProfile" in e ? e.authedActiveCommunityProfile?.id ?? null : null);
+  let d = useSelector(e => "selectedView" in e ? e.selectedView : null);
   let u = tabView && a ? tabView : g3.RESOURCES;
   return jsx(s.Inner, {
     profileId: e.id,
@@ -2215,7 +2215,7 @@ function se({
   e.Inner = t;
 })(s || (s = {}));
 se.displayName = "CommunityHubProfile";
-let st = Ng(e => ({
+let st = connect(e => ({
   currentUser: "user" in e ? e.user : null,
   currentSelectedView: "selectedView" in e ? e.selectedView : null,
   authedActiveCommunityProfileId: "authedActiveCommunityProfile" in e ? e.authedActiveCommunityProfile?.id ?? null : null
@@ -2232,7 +2232,7 @@ export function $$si0({
   let t = _$$ed(xn);
   let r = _$$ed(qL);
   let s = AG();
-  let a = wA();
+  let a = useDispatch();
   let l = t?.params.profileHandle ?? r?.params.profileHandle ?? null;
   let [c] = IT(ss(l ?? ""));
   useEffect(() => {
@@ -2245,4 +2245,4 @@ export function $$si0({
     currentProfile: u
   });
 }
-export const P = $$si0; 
+export const P = $$si0;

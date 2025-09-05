@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useRef, useEffect, useCallback, useState, useMemo } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { o as _$$o } from "../905/821217";
 import { d as _$$d } from "../905/976845";
 import { rXF } from "../figma_app/763686";
@@ -32,7 +32,7 @@ export function $$N0({
   setBorderOption: i,
   recordingKey: o
 }) {
-  let l = wA();
+  let l = useDispatch();
   let c = U();
   let u = Um();
   let p = useRef(null);
@@ -222,7 +222,7 @@ function L({
     smallNudgeAmount,
     bigNudgeAmount
   } = sT();
-  let _ = wA();
+  let _ = useDispatch();
   let A = Ww(t);
   let E = useMemo(() => [function (e) {
     switch (e) {

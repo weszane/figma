@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { createContext, useContext, useRef, useMemo, useEffect, PureComponent, forwardRef, Children, Component } from "react";
-import { bN } from "../vendor/514228";
+import { shallowEqual } from "../vendor/514228";
 import { N_ } from "../vendor/956898";
 import { sx } from "../905/449184";
 import { ED } from "../905/714362";
@@ -33,7 +33,7 @@ export function $$f4({
   } = useContext($$g2);
   let b = useRef({});
   let T = useRef(null);
-  b.current && bN(b.current, t) || (b.current = t);
+  b.current && shallowEqual(b.current, t) || (b.current = t);
   t = b.current;
   let I = useMemo(() => {
     let r = name && !c ? `${name} > ${e}` : e;
@@ -55,7 +55,7 @@ export function $$f4({
     if (!s || r === K.NONE) return;
     let e = I.name;
     let t = I.properties;
-    if (T.current && T.current.name === e && (u || bN(T.current.properties, t))) return;
+    if (T.current && T.current.name === e && (u || shallowEqual(T.current.properties, t))) return;
     if (r === K.RCS) {
       let r = {};
       for (let e of Object.keys(t)) null !== t[e] && void 0 !== t[e] && (r[e] = t[e]);

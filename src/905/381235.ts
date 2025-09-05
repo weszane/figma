@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { sx } from "../905/449184";
 import { am } from "../figma_app/430563";
 import { q5 } from "../figma_app/516028";
@@ -10,7 +10,7 @@ import { M } from "../905/540025";
 export function $$p0(e, t) {
   let i = e?.library_key;
   let p = M();
-  let m = wA();
+  let m = useDispatch();
   let h = q5();
   let g = t$(e?.library_key);
   let f = T();

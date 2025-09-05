@@ -1,6 +1,6 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useMemo } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { lQ } from "../905/934246";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
@@ -42,7 +42,7 @@ export let $$V0 = Ju(function (e) {
     team,
     afterFileMove
   } = e;
-  let s = wA();
+  let s = useDispatch();
   let o = FC();
   let l = iZ();
   let d = !!team && canEditTeam(team?.id, o);
@@ -110,7 +110,7 @@ function G(e) {
     open: !0,
     preventUserClose: !0
   });
-  let c = d4(e => e.currentUserOrgId);
+  let c = useSelector(e => e.currentUserOrgId);
   let {
     onStylesClick
   } = e;
@@ -160,7 +160,7 @@ function G(e) {
   }) : jsx(Fragment, {});
 }
 function z(e) {
-  let t = wA();
+  let t = useDispatch();
   let i = () => {
     t(Ce());
   };
@@ -169,7 +169,7 @@ function z(e) {
     open: !0
   });
   let s = q5();
-  let c = d4(e => s ? up(s, e.repos) : null);
+  let c = useSelector(e => s ? up(s, e.repos) : null);
   if (!s) return jsx(Fragment, {});
   let u = tx("upsell.move_file_publish.move_file_to_team_to_publish");
   let p = tx("upsell.move_file_publish.move_file_to_pro_team_to_publish");

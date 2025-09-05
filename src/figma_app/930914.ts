@@ -1,6 +1,6 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useMemo, useCallback, useRef } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { V } from "../905/735518";
 import { RR } from "../figma_app/338442";
 import { R } from "../905/103090";
@@ -40,7 +40,7 @@ export function $$S1(e, t) {
   return !useMemo(() => !!containingProductComponent?.guid && !nodesHaveInstanceSublayer && (!selectionHasProductComponent || e !== RR.VISIBLE), [containingProductComponent, nodesHaveInstanceSublayer, selectionHasProductComponent, e]) || !!defReferencedBySelection;
 }
 export function $$v3(e, t, r, n) {
-  let s = wA();
+  let s = useDispatch();
   let o = useMemo(() => eM(e).defaultType, [e]);
   let d = useMemo(p1, []);
   let {

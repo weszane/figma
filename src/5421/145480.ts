@@ -1,5 +1,5 @@
 import { useRef, useCallback, useState, useEffect } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { MO, hq, UQ } from "../2824/40443";
 import { glU } from "../figma_app/763686";
 import { l7, zk } from "../905/189185";
@@ -46,7 +46,7 @@ let E = {
 };
 let j = "html-to-design-processing";
 let N = () => {
-  let e = wA();
+  let e = useDispatch();
   let t = useRef(null);
   let n = useCallback(n => {
     t.current = window.setTimeout(() => {

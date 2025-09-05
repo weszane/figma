@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { memo, useMemo, useContext, useState, useEffect, useRef } from "react";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { fp } from "../figma_app/27355";
 import s from "classnames";
 import { h4, Nz } from "../905/417232";
@@ -95,10 +95,10 @@ function w(e) {
   let n = e.dropdownShown && e.dropdownShown.type === t;
   let i = E7(e.action);
   let a = av(i);
-  let l = d4(ZM);
+  let l = useSelector(ZM);
   let s = new js(!0, l);
   let d = new Z6(!0, l);
-  let c = !d4(e => e.mirror.selectionProperties.isValidPrototypingSourceSelected ?? !0);
+  let c = !useSelector(e => e.mirror.selectionProperties.isValidPrototypingSourceSelected ?? !0);
   return jsx("div", {
     id: t,
     children: jsxs(bL, {
@@ -223,7 +223,7 @@ let z = "prototype_action_verbose_title--actionNameInsertion--aF4kI";
 let W = "prototype_action_verbose_title--actionName--qWJL3";
 let Z = "prototype_action_verbose_title--actionNameUI3--JAYsG";
 let G = () => {
-  let e = d4(e => e.mirror.sceneGraph);
+  let e = useSelector(e => e.mirror.sceneGraph);
   return useMemo(() => new cP(e), [e]);
 };
 function Y({
@@ -464,7 +464,7 @@ export function $$en0({
   setAutoOpenExpressionBuilder: v,
   ...I
 }) {
-  let C = wA();
+  let C = useDispatch();
   let {
     shouldShowAdvancedPrototypingPaywall,
     showAdvancedPrototypingVariablesModal,

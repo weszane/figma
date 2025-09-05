@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { h3O } from "../figma_app/763686";
 import { t as _$$t } from "../905/303541";
 import { F } from "../905/302958";
@@ -41,21 +41,21 @@ export function $$h1() {
 }
 export function $$m9() {
   let e = HW();
-  let t = wA();
+  let t = useDispatch();
   return useCallback((r, n) => {
     e ? y(r, n, hk(), t) : y(r, n, null, t);
   }, [e, t]);
 }
 export function $$g8() {
   let e = HW();
-  let t = wA();
+  let t = useDispatch();
   return useCallback((r, n) => {
     e ? T(r, n, hk(), t) : T(r, n, null, t);
   }, [e, t]);
 }
 export function $$f0() {
   let e = HW();
-  let t = wA();
+  let t = useDispatch();
   return useCallback(r => {
     e ? v(r, hk()) : v(r, null);
     t(F.enqueue({

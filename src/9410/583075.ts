@@ -1,4 +1,4 @@
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { nQ7, FAf, NLJ, glU } from "../figma_app/763686";
 import { Xr, zl } from "../figma_app/27355";
 import { useSprigWithSampling } from "../905/99656";
@@ -15,7 +15,7 @@ export function $$g0({
   logToggle: e
 } = {}) {
   let t = function () {
-    let e = wA();
+    let e = useDispatch();
     let t = Xr(FT);
     let i = Xr(bs);
     return () => {

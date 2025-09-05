@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { N_ } from "../vendor/956898";
 import { sx } from "../905/449184";
 import { XHR } from "../905/910117";
@@ -65,7 +65,7 @@ export function $$T0({
       throw Error("Could not get following status.");
     });
   }, [e]);
-  let l = d4(e => "authedActiveCommunityProfile" in e ? e.authedActiveCommunityProfile : null);
+  let l = useSelector(e => "authedActiveCommunityProfile" in e ? e.authedActiveCommunityProfile : null);
   let h = y(e.profile_handle);
   let T = Dm(e.id, l);
   let I = e.description ? e.description.trim().replace(/\s+/g, " ") : "";
@@ -190,4 +190,4 @@ function S({
 }
 export const Z = $$T0;
 export const r5 = $$I1;
-export const Wc = $$y2; 
+export const Wc = $$y2;

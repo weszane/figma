@@ -1,6 +1,6 @@
 import { rw } from "../905/54367";
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { K } from "../905/443068";
 import { f } from "../905/54715";
 import { H } from "../905/222445";
@@ -9,8 +9,8 @@ import { t as _$$t } from "../905/303541";
 import { _I, PY } from "../905/34809";
 import { Ib } from "../905/129884";
 export function $$p0(e) {
-  let t = wA();
-  let i = d4(({
+  let t = useDispatch();
+  let i = useSelector(({
     mobileNavShown: e
   }) => e);
   let p = e.tabs && e.tabs.length || 0;

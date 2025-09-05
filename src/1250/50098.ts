@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useCallback, useState } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { Wk } from "../figma_app/272243";
@@ -80,7 +80,7 @@ function B({
   dismissModal: t,
   overlaySource: n
 }) {
-  let u = wA();
+  let u = useDispatch();
   let m = Pc();
   let y = m.id;
   let T = m.profile.job_title;

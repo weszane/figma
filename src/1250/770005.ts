@@ -1,6 +1,6 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useEffect } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { getFeatureFlags } from "../905/601108";
 import { md } from "../figma_app/27355";
 import { buildUploadUrl } from "../figma_app/169182";
@@ -67,7 +67,7 @@ function C() {
 export function $$I0() {
   let e = jl();
   let t = getFeatureFlags().marketing_promo_modal_figmake_launch;
-  let n = d4(e => e.user?.drafts_folder_id);
+  let n = useSelector(e => e.user?.drafts_folder_id);
   let {
     data,
     status

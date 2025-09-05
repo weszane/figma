@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useCallback, createRef, useState, useEffect } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { N as _$$N } from "../figma_app/469468";
 import { tx, t as _$$t } from "../905/303541";
 import { lQ } from "../905/934246";
@@ -44,7 +44,7 @@ let E = Ju(function ({
   hubFile: e,
   inResourceHub: t
 }) {
-  let r = wA();
+  let r = useDispatch();
   let o = iZ();
   let j = _$$A(e, !1, !1, t);
   _$$h(() => {
@@ -174,11 +174,11 @@ export function $$Q0({
   enableWideButtonForStickyFooter: r
 }) {
   let l = createRef();
-  let c = wA();
+  let c = useDispatch();
   let [d, u] = useState(!1);
-  let m = d4(e => cs(e.authedActiveCommunityProfile));
-  let _ = d4(e => e.userFlags).apple_eula_accepted;
-  let p = d4(e => !!e.modalShown);
+  let m = useSelector(e => cs(e.authedActiveCommunityProfile));
+  let _ = useSelector(e => e.userFlags).apple_eula_accepted;
+  let p = useSelector(e => !!e.modalShown);
   useEffect(() => {
     p && u(!1);
   }, [p]);

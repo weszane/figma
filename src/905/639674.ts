@@ -1,6 +1,6 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useRef, useState } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { $n } from "../905/521428";
 import { getFeatureFlags } from "../905/601108";
 import { e2 } from "../figma_app/637027";
@@ -8,7 +8,7 @@ import { tx } from "../905/303541";
 import { F } from "../905/302958";
 import { _l } from "../905/105972";
 export function $$p0(e) {
-  let t = wA();
+  let t = useDispatch();
   let i = useRef(null);
   let [p, m] = useState(!1);
   let h = async () => {

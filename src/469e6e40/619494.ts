@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { N } from "../905/438674";
 import { $n } from "../905/521428";
 import { k } from "../905/443820";
@@ -17,7 +17,7 @@ import { Ju } from "../905/102752";
 import { OJ } from "../905/519092";
 import { wz, Vq, tp, FK, jE, Yy } from "../469e6e40/442006";
 function j(e) {
-  let t = wA();
+  let t = useDispatch();
   let a = useCallback(() => {
     t(to({
       type: mW,
@@ -154,7 +154,7 @@ function j(e) {
   });
 }
 export let $$y0 = Ju(function (e) {
-  let t = wA();
+  let t = useDispatch();
   let a = e.org;
   let s = e.orgSamlConfig;
   let r = e.orgDomains;

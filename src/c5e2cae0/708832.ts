@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useCallback, Component } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { throwError } from "../figma_app/465776";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { az, sx } from "../905/449184";
@@ -1099,11 +1099,11 @@ export class $$eM2 extends Component {
   }
 }
 export function $$eR1(e) {
-  let t = wA();
-  let a = d4(e => e.user);
-  let r = d4(e => x9(e.orgUsersByOrgId, e.user.id).some(e => e.permission === FUserRoleType.ADMIN));
+  let t = useDispatch();
+  let a = useSelector(e => e.user);
+  let r = useSelector(e => x9(e.orgUsersByOrgId, e.user.id).some(e => e.permission === FUserRoleType.ADMIN));
   let l = Mh();
-  let d = d4(e => e.payment).currency || LN();
+  let d = useSelector(e => e.payment).currency || LN();
   _$$h(() => {
     let e = document.createElement("div");
     e.style.position = "fixed";

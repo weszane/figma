@@ -1,5 +1,5 @@
 import { jsxs, jsx } from "react/jsx-runtime";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { $n } from "../905/521428";
 import { K } from "../905/443068";
 import { A as _$$A } from "../905/251970";
@@ -14,7 +14,7 @@ import { r6 } from "../905/542608";
 import { se } from "../figma_app/435826";
 import { A as _$$A2 } from "../5724/965092";
 export function $$A0(e) {
-  let t = wA();
+  let t = useDispatch();
   let i = md(cb);
   let A = md(WE);
   let y = eS(aD.ALL);

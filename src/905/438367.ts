@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { sortByWithOptions } from "../figma_app/656233";
 import { rXF, glU } from "../figma_app/763686";
 import { resourceUtils } from "../905/989992";
@@ -17,7 +17,7 @@ var d = l;
 export function $$y2({
   subscribedLibraries: e
 }) {
-  let t = d4(e => e.library);
+  let t = useSelector(e => e.library);
   let i = tS();
   let o = Rb().filter(e => e.resolvedType === rXF.COLOR).length > 0;
   let l = ti(t.local.styles, "FILL").length > 0;
@@ -31,7 +31,7 @@ export function $$y2({
   }, [o, l, i, e]);
 }
 export function $$b0() {
-  let e = d4(e => e.mirror.appModel.currentPage);
+  let e = useSelector(e => e.mirror.appModel.currentPage);
   let [t, i] = useMemo(() => {
     let t = function () {
       let e = glU.getColorsUsedOnCurrentPage();
@@ -57,7 +57,7 @@ export function $$b0() {
   return i;
 }
 export function $$v3() {
-  let e = d4(e => e.library);
+  let e = useSelector(e => e.library);
   let t = Rb();
   let i = useMemo(() => [...t].sort((e, t) => e.sortPosition < t.sortPosition ? -1 : 1), [t]);
   let a = yp();

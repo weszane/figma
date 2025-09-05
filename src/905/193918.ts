@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState, useCallback, useRef, useEffect } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { getFeatureFlags } from "../905/601108";
 import { A as _$$A } from "../vendor/90566";
 import { parsePxNumber } from "../figma_app/783094";
@@ -309,7 +309,7 @@ function J(e) {
       subheader: t,
       price: I
     }), jsx(ee, {
-      header: function(e) {
+      header: function (e) {
         switch (e) {
           case CO:
             return tx("community.buyer.sales_tax");
@@ -545,7 +545,7 @@ function ef({
   return jsx("form", {
     children: jsx(_$$b, {
       value: t,
-      onChange: function(e) {
+      onChange: function (e) {
         i(e);
       },
       legend: jsx(_$$s2, {
@@ -695,7 +695,7 @@ function eR(e) {
     resource,
     mobileScrollContainerRef
   } = e;
-  let s = wA();
+  let s = useDispatch();
   let o = useRef(null);
   let l = useCallback(() => {
     o.current && (mobileScrollContainerRef?.current?.scrollTop ? o.current.classList.add(HC) : o.current.classList.remove(HC));
@@ -712,7 +712,7 @@ function eR(e) {
     })]
   });
 }
-export let $$eN0 = Ju(function(e) {
+export let $$eN0 = Ju(function (e) {
   let t;
   let {
     userId,
@@ -724,7 +724,7 @@ export let $$eN0 = Ju(function(e) {
   let L = e.noInteractionMode && !!(e.localResource || D);
   let F = resource?.monetized_resource_metadata;
   let U = F?.id;
-  let B = wA();
+  let B = useDispatch();
   _$$G();
   let [V, G] = useState();
   let [z, H] = useState(!1);
@@ -797,7 +797,7 @@ export let $$eN0 = Ju(function(e) {
       eS(!1);
     }));
   }, [L, B, eL, eD, userId]);
-  let eF = d4(e => e.selectedView);
+  let eF = useSelector(e => e.selectedView);
   let eM = ei / 100 * t;
   let ej = resource?.community_resource_payment && resource.community_resource_payment.subscription_expires_at ? void 0 : F?.trial_length_in_days;
   let eU = null === er || null === ew ? null : er / 100 * (t * (1 - ew.percent_off / 100));
@@ -966,7 +966,7 @@ export let $$eN0 = Ju(function(e) {
     onAddressChange: K,
     onCardChange: e => H(e.complete),
     onCardReady: G,
-    onRemoveCard: function(e) {
+    onRemoveCard: function (e) {
       eb(!0);
       XHR.del(`/api/community/buyer/payment_method/${e}`).then(() => {
         let t = em.filter(t => t.payment_method_id !== e);
@@ -1031,7 +1031,7 @@ export let $$eN0 = Ju(function(e) {
       query: `(min-width: ${parsePxNumber(tgj)}px)`,
       children: jsx(OJ, {
         title: jsxs("div", {
-          children: [function(e, t) {
+          children: [function (e, t) {
             let i = e ? qD(e)?.name : t ? t.manifest.name : void 0;
             return "undefined" !== i && e && F && F.is_subscription ? tx("community.buyer.subscribe_to_resource_name", {
               resourceName: i
@@ -1106,4 +1106,4 @@ export let $$eN0 = Ju(function(e) {
     })]
   });
 }, "CommunityCheckoutModal");
-export const h = $$eN0; 
+export const h = $$eN0;

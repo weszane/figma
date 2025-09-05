@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useRef, useEffect } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { zl } from "../figma_app/27355";
 import { R } from "../905/103090";
 import { Ay } from "../figma_app/778880";
@@ -93,7 +93,7 @@ export function $$x0({
   children: t,
   containerRef: i
 }) {
-  let s = wA();
+  let s = useDispatch();
   let l = R(e => ({
     tooltip: e.tooltip,
     dropdownShown: e.dropdownShown,

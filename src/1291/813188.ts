@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
 import { g as _$$g } from "../905/687265";
 import { Ay } from "@stylexjs/stylex";
@@ -76,7 +76,7 @@ export function $$I0(e) {
   let $ = ow();
   let I = to();
   let L = t === rp.THIN_2_COL || t === rp.THIN_3_COL ? 4 : 8;
-  let A = wA();
+  let A = useDispatch();
   let R = f ? Du : Vq(h.activeTab);
   let [M, F] = useState(!1);
   let [z, O] = useState(width);
@@ -195,7 +195,7 @@ export function $$P1() {
   let e = Um();
   let t = M4.File.useValue(e?.data?.fileKey).data;
   let s = cX().setSelectedCategory;
-  let a = wA();
+  let a = useDispatch();
   if (e?.type !== B || !t) return null;
   let r = t.library_key;
   return r ? jsx(L, {

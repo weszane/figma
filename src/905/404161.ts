@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { N } from "../905/438674";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
@@ -37,7 +37,7 @@ function w(e) {
   let {
     numWorkspacesApproved,
     workspaceNames
-  } = function(e, t, i, n) {
+  } = function (e, t, i, n) {
     let r = 0;
     let a = [];
     for (let s of e) {
@@ -128,7 +128,7 @@ function T({
     })
   });
 }
-export let $$k0 = Ju(function({
+export let $$k0 = Ju(function ({
   extension: e,
   isWidget: t,
   orgId: i,
@@ -156,7 +156,7 @@ export let $$k0 = Ju(function({
   } = e;
   let [D, L] = useState(void 0);
   let F = s?.workspaceId;
-  let M = wA();
+  let M = useDispatch();
   let j = t ? _$$t("extension_request_modal.request_widget_approval") : _$$t("extension_request_modal.request_plugin_approval");
   S = R ? t ? _$$t("extension_request_modal.leave_widget_rerequest_note") : _$$t("extension_request_modal.leave_plugin_rerequest_note") : t ? _$$t("extension_request_modal.leave_widget_note") : _$$t("extension_request_modal.leave_plugin_note");
   let U = hS({
@@ -253,4 +253,4 @@ export let $$k0 = Ju(function({
     })
   });
 }, "ExtensionRequestModal");
-export const S = $$k0; 
+export const S = $$k0;

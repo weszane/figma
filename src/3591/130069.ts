@@ -1,5 +1,5 @@
 import { jsxs, jsx } from "react/jsx-runtime";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { $n } from "../905/521428";
 import { N } from "../905/438674";
 import { tx } from "../905/303541";
@@ -20,12 +20,12 @@ function c(e) {
   };
 }
 export function $$g2(e) {
-  let i = wA();
+  let i = useDispatch();
   let t = c(e);
   return () => i(dx(t));
 }
 export function $$h0(e) {
-  let i = wA();
+  let i = useDispatch();
   let t = c(e);
   return () => i(MZ(t));
 }

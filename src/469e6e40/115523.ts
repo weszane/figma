@@ -19,7 +19,7 @@ import { J7, SN } from "../figma_app/650409";
 import { e0 } from "../905/696396";
 import { K as _$$K2 } from "../4452/401058";
 import { A as _$$A } from "../4452/239888";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { lQ } from "../905/934246";
 import { $n } from "../905/521428";
 import { d as _$$d } from "../c5e2cae0/368426";
@@ -131,7 +131,7 @@ function ey(e) {
     projectDescription,
     assetTransferRequest
   } = e.resourceConnection;
-  let h = wA();
+  let h = useDispatch();
   if ("loading" === e.numLibrariesEnabledResult.status || "loading" === e.resourceConnectedUsersResult.status) return null;
   let {
     resourceConnectedUsersWithPlan,
@@ -463,7 +463,7 @@ function eO(e) {
     resourceName,
     isHostPlanAdmin
   } = e.resourceConnection;
-  let o = wA();
+  let o = useDispatch();
   let d = Pc();
   let [c, _] = useState("ALL");
   let [u, m] = useState("");
@@ -671,7 +671,7 @@ let eM = {
       resourceId,
       status
     } = e.resourceConnection;
-    let l = wA();
+    let l = useDispatch();
     let o = S2().unwrapOr(null);
     let [d, c] = useState("overview");
     let [_, u, m] = _$$t3.useManagedTabs({
@@ -777,7 +777,7 @@ function eU(e) {
   let r = _$$B();
   let l = useRef(null);
   let d = useRef(null);
-  let c = wA();
+  let c = useDispatch();
   let [_, u] = useState(!1);
   let p = useMemo(() => {
     let e = resourceConnectionsLgResult?.plan;

@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useMemo } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import o from "classnames";
 import { xf } from "../figma_app/416935";
 import { Rs } from "../figma_app/288654";
@@ -37,10 +37,10 @@ export function $$U3({
   configs: o
 }) {
   var l;
-  let p = wA();
+  let p = useDispatch();
   let E = sZ();
-  let T = d4(e => e.orgDomains.domains);
-  let R = d4(({
+  let T = useSelector(e => e.orgDomains.domains);
+  let R = useSelector(({
     licenseGroups: i
   }) => e ? i[e] : void 0);
   let N = Rs(s5A, {
@@ -49,8 +49,8 @@ export function $$U3({
     enabled: !!i
   });
   let A = N.data?.workspace;
-  let O = d4(e => e.selectedView);
-  let j = d4(e => e.idpUserById.isCreatingOrgInvite);
+  let O = useSelector(e => e.selectedView);
+  let j = useSelector(e => e.idpUserById.isCreatingOrgInvite);
   let [I, U] = useState(!1);
   let M = useMemo(() => o?.groupNameClassName ? e => jsx("span", {
     className: o.groupNameClassName,
@@ -157,7 +157,7 @@ export function $$M2({
   modalWrapperClassName: d,
   descriptionClassName: s
 }) {
-  let _ = d4(e => e.autocomplete);
+  let _ = useSelector(e => e.autocomplete);
   let {
     isSubmitting,
     onValidateToken,
@@ -196,8 +196,8 @@ let $$y1 = Ju(function ({
   workspaceId: i
 }) {
   let t = sZ();
-  let a = wA();
-  let o = d4(e => e.selectedView);
+  let a = useDispatch();
+  let o = useSelector(e => e.selectedView);
   if (!t) return jsx(Fragment, {});
   let l = S(t, o.view);
   let d = L(t, l);

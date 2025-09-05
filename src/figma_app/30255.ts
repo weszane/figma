@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { memo, useContext, useState, useRef, useEffect } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { debug } from "../figma_app/465776";
 import { oB } from "../figma_app/273493";
 import { glU, KWd, xbm } from "../figma_app/763686";
@@ -44,7 +44,7 @@ export let $$x0 = memo(function ({
     state,
     dispatch
   } = useContext(nS);
-  let G = wA();
+  let G = useDispatch();
   let V = state.draggedTool === e;
   let H = state.draggedToolCanCancel;
   let [z, W] = useState(!1);

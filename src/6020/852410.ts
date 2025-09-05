@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { memo, useState, useCallback, useEffect } from "react";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { lQ } from "../905/934246";
 import { K as _$$K } from "../905/443068";
 import { o as _$$o } from "../905/821217";
@@ -169,18 +169,18 @@ function F({
 }
 export let $$L0 = function (t) {
   let e = kl("prototypeStartingPointsInfo");
-  let o = d4(sS) || "";
+  let o = useSelector(sS) || "";
   let l = q5();
   let s = Cq({
     useSinatraType: !0
   });
-  let p = d4(t => t.mirror.appModel.currentSelectedProperty);
+  let p = useSelector(t => t.mirror.appModel.currentSelectedProperty);
   let d = eY();
   let c = m0();
   let [m, f] = useState(null);
-  let w = wA();
+  let w = useDispatch();
   let v = c || t.viewOnly;
-  let P = d4(t => t.mirror.appModel.prototypeCanvasUiVisible && v);
+  let P = useSelector(t => t.mirror.appModel.prototypeCanvasUiVisible && v);
   let R = _W(e, []);
   let {
     collapsedInspectionPanelAtom,

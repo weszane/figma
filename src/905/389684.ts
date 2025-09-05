@@ -1,5 +1,5 @@
 import { useMemo, useCallback } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { sx } from "../905/449184";
 import { g as _$$g } from "../905/880308";
 import { Zn } from "../figma_app/933328";
@@ -17,8 +17,8 @@ export function $$_0({
   modalType: t,
   initialTab: i
 }) {
-  let _ = wA();
-  let A = d4(e => e.modalShown);
+  let _ = useDispatch();
+  let A = useSelector(e => e.modalShown);
   let y = q5();
   let b = LH();
   let v = "editor" === t;

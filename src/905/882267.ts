@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useId, useRef, useCallback, useMemo, useState, useEffect, memo, forwardRef, useContext } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { z as _$$z } from "../vendor/999105";
 import { isNullish } from "../figma_app/95419";
 import { IK } from "../905/521428";
@@ -109,7 +109,7 @@ export function $$eD0({
     x.current?.focus();
   }, []);
   let w = useMemo(() => d ? new Point(d.initialX, d.initialY) : new Point(0, 0), [d]);
-  let C = d4(e => e.variablePickerShown);
+  let C = useSelector(e => e.variablePickerShown);
   let T = useCallback(() => {
     i(XE());
     i(_$$B2());
@@ -369,7 +369,7 @@ function eL({
     eD();
     e9.current = !0;
   }, [eD, eq]);
-  let ti = d4(e => e.userFlags);
+  let ti = useSelector(e => e.userFlags);
   let tn = useCallback(async (e, i = !0, n = !0) => {
     if (getFeatureFlags().dse_sf_pro_font && !(await Cj(e, ti, h, t, "font_picker"))) return;
     sn.start("update_text_node_font");

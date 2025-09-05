@@ -15,7 +15,7 @@ import { Xr, md } from "../figma_app/27355";
 import { j6, fu } from "../figma_app/831799";
 import { P as _$$P } from "../905/347284";
 import { s as _$$s2 } from "../cssbuilder/589278";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import C from "classnames";
 import { sx } from "../905/449184";
 import { FJ } from "../905/508367";
@@ -62,7 +62,7 @@ import { v2 } from "../1528/88743";
 import { KF } from "../figma_app/957070";
 var j = C;
 function P() {
-  let e = wA();
+  let e = useDispatch();
   let t = iZ();
   let {
     isEditingFile,
@@ -407,7 +407,7 @@ function el({
   });
 }
 function ea() {
-  let e = wA();
+  let e = useDispatch();
   let t = [{
     label: _$$t("help_widget.menu.change_keyboard_layout"),
     onClick: function () {

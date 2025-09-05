@@ -1,10 +1,10 @@
 import { useEffect } from "react";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { hr } from "../905/352022";
 import { FPlanNameType } from "../figma_app/191312";
 export function $$o1() {
-  let e = d4(e => e.plans);
-  let t = wA();
+  let e = useSelector(e => e.plans);
+  let t = useDispatch();
   useEffect(() => {
     t(hr({
       loadedPlans: e

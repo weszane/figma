@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { Suspense, useState, useEffect, useMemo } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { isNullish } from "../figma_app/95419";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { N as _$$N } from "../905/438674";
@@ -96,12 +96,12 @@ export function $$Z0(e) {
 function X(e) {
   var t;
   var i;
-  let l = wA();
+  let l = useDispatch();
   let h = hS(e);
   let g = XP({
     reportErrorsToTeam: _$$e.SCALE
   });
-  let f = d4(e => e.teamBilling);
+  let f = useSelector(e => e.teamBilling);
   let b = g.key.parentId;
   let S = f.summary.currency;
   let w = new vr(S);

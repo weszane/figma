@@ -1,7 +1,7 @@
 import { n as _$$n } from "../905/121869";
 import { jsx } from "react/jsx-runtime";
 import { Component } from "react";
-import { Ng } from "../vendor/514228";
+import { connect } from "../vendor/514228";
 import { x1 } from "../905/714362";
 import { tH, H4 } from "../905/751457";
 import { Lo } from "../905/156213";
@@ -128,6 +128,6 @@ class f extends Component {
   }
 }
 f.displayName = "AppModal";
-let $$_0 = Ng(l$)(f);
+let $$_0 = connect(l$)(f);
 let A = new Set();
 export const V = $$_0;

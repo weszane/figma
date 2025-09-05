@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useCallback, useMemo, useEffect, useRef } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { h as _$$h } from "../905/207101";
 import { r as _$$r } from "../905/520829";
 import { xj, ok } from "../figma_app/851625";
@@ -257,7 +257,7 @@ let eV = Ju(function ({
   workspaceId: e,
   onSubmit: t
 }) {
-  let a = wA();
+  let a = useDispatch();
   let r = dq();
   let [o, d] = useState({
     columnName: Kq.NAME,
@@ -547,7 +547,7 @@ let eV = Ju(function ({
   });
 }, "ADD_UNASSIGNED_TEAMS_MODAL");
 function e7(e, t, a, n) {
-  let s = wA();
+  let s = useDispatch();
   let r = _$$q(R4, !0);
   let l = _$$q(uU, !0);
   let o = _$$q(gx, !0);
@@ -655,8 +655,8 @@ function ta({
   onViewerLeaveTeam: c
 }) {
   let _;
-  let u = wA();
-  let m = d4(e => getPermissionsState(e));
+  let u = useDispatch();
+  let m = useSelector(e => getPermissionsState(e));
   let p = px();
   let g = j_(p).unwrapOr(!1);
   let {
@@ -882,12 +882,12 @@ function tc({
   onViewerJoinTeam: _,
   onViewerLeaveTeam: u
 }) {
-  let m = wA();
+  let m = useDispatch();
   let p = _$$q(gx, !0);
   let g = _$$q(uU, !0);
-  let h = d4(e => getPermissionsState(e));
-  let x = d4(e => e.teamBilling);
-  let b = d4(e => e.teams[r.id]);
+  let h = useSelector(e => getPermissionsState(e));
+  let x = useSelector(e => e.teamBilling);
+  let b = useSelector(e => e.teams[r.id]);
   let v = _6();
   let f = px();
   let j = j_(f).unwrapOr(!1);
@@ -1129,7 +1129,7 @@ let tN = Ju(function (e) {
   let {
     workspaceId
   } = e;
-  let a = wA();
+  let a = useDispatch();
   let r = dq();
   let l = md(EK);
   let o = useMemo(() => "loaded" !== l.status ? l : {
@@ -1302,9 +1302,9 @@ function tL(e) {
   } = e;
   let [Q, Z] = useState(!1);
   let [et, ea] = useState(null);
-  let en = wA();
+  let en = useDispatch();
   let es = _$$q(b4, !0);
-  let er = d4(({
+  let er = useSelector(({
     selectedView: e
   }) => e.view);
   let [el, eo] = useState(new Map());
@@ -1339,12 +1339,12 @@ function tL(e) {
     onRemoveFromWorkspace
   } = e7(teamRoleRequests, el, ed, ec);
   let e$ = useMemo(() => "loaded" === e.orgTeamCountsViewResult.status ? e.orgTeamCountsViewResult.data : xZ(), [e.orgTeamCountsViewResult]);
-  let eB = d4(({
+  let eB = useSelector(({
     selectedView: e
   }) => e);
   let eG = "orgAdminSettings" === eB.view;
   let eH = "workspace" === eB.view && eB.subView === V0.ADMIN;
-  let eY = d4(({
+  let eY = useSelector(({
     selectedView: e
   }) => "workspace" === e.view && e.subView === V0.ADMIN ? e.workspaceId : null);
   let eJ = !eH;
@@ -1895,7 +1895,7 @@ export function $$tP0(e) {
     selectedWorkspaceId,
     onRightActionsChange
   } = e;
-  let b = wA();
+  let b = useDispatch();
   let [v, f] = useState({
     workspaceFilter: selectedWorkspaceId ?? null,
     orgAccessFilter: null,

@@ -27,7 +27,7 @@ import { A as _$$A } from "../svg/741686";
 import { A as _$$A2 } from "../svg/776856";
 import { A as _$$A3 } from "../svg/488178";
 import { s as _$$s } from "../figma_app/30255";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { E as _$$E } from "../905/632989";
 import { getFeatureFlags } from "../905/601108";
 import { d as _$$d } from "../vendor/456530";
@@ -338,7 +338,7 @@ function ep({
   isTopRight: c,
   onboardingKey: p
 }) {
-  let h = wA();
+  let h = useDispatch();
   let {
     onDragStart,
     onDrag,

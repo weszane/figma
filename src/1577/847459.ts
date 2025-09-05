@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { forwardRef, useMemo, useEffect, useCallback, useRef, useState } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import r, { C as _$$C } from "../905/222694";
 import { lQ } from "../905/934246";
 import { C as _$$C2 } from "../905/520159";
@@ -126,7 +126,7 @@ function z(e) {
     },
     subscription: result
   });
-  let f = wA();
+  let f = useDispatch();
   let {
     file
   } = result.data;
@@ -144,8 +144,8 @@ function z(e) {
   } = p;
   let N = mobileCommentThread.find(e => e.id === threadId);
   let A = useMemo(() => mobileCommentThread.reduce((e, t) => t.createdAt.getTime() > e.createdAt.getTime() ? t : e).thumbnailUrl, [mobileCommentThread]);
-  let I = d4(e => e.comments.savingCommentUuids);
-  let R = d4(e => e.comments.lgPendingUuidToServerIdMap);
+  let I = useSelector(e => e.comments.savingCommentUuids);
+  let R = useSelector(e => e.comments.lgPendingUuidToServerIdMap);
   if (!N) return jsx("div", {
     children: _$$t("quick_reply.unable_to_load_thread")
   });
@@ -241,16 +241,16 @@ function V(e) {
     fileKey,
     threadId
   } = r;
-  let _ = wA();
+  let _ = useDispatch();
   useEffect(() => {
     _(Fm({
       threadId
     }));
   }, [_, threadId]);
-  let m = d4(e => e.comments.typeahead);
-  let f = d4(e => e.comments.editingComment);
-  let h = d4(e => e.comments.activeThread?.id);
-  let b = d4(e => e.comments.threads);
+  let m = useSelector(e => e.comments.typeahead);
+  let f = useSelector(e => e.comments.editingComment);
+  let h = useSelector(e => e.comments.activeThread?.id);
+  let b = useSelector(e => e.comments.threads);
   let k = h && b[h] || null;
   let y = k?.reply.messageMeta || [];
   let {
@@ -258,7 +258,7 @@ function V(e) {
     updateMessage,
     submitEdit
   } = function (e) {
-    let t = wA();
+    let t = useDispatch();
     let i = I_().writeAPI;
     let a = GH()?.threads;
     return {

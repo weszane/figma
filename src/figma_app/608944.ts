@@ -1,13 +1,13 @@
 import { useCallback, useMemo } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { eU, fp, zl } from "../figma_app/27355";
 import { ES } from "../905/156213";
 let $$o2 = "ComponentFlyoutModal";
 let $$l0 = "ComponentFlyoutModalContent";
 let d = eU(null);
 export function $$c1() {
-  let e = wA();
-  let t = d4(e => e.modalShown);
+  let e = useDispatch();
+  let t = useSelector(e => e.modalShown);
   let [r, l] = fp(d);
   let c = useCallback(e => {
     null === e && l(null);

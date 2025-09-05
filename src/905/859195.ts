@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { md, Xr } from "../figma_app/27355";
 import { XHR } from "../905/910117";
 import { t as _$$t } from "../905/303541";
@@ -12,12 +12,12 @@ import { V } from "../905/186961";
 import { UV, _9, Md, VW } from "../figma_app/755939";
 import { Bj, _I, sG, Ao } from "../905/686934";
 export function $$f0() {
-  let e = wA();
+  let e = useDispatch();
   let t = md(UV);
   let i = Xr(_9);
   let f = Md(t);
-  let _ = d4(vQ);
-  let A = Object.values(d4(p6));
+  let _ = useSelector(vQ);
+  let A = Object.values(useSelector(p6));
   return {
     initiateTemplatePublish: useCallback(t => {
       if (f) return;
@@ -70,4 +70,4 @@ export function $$f0() {
     publishInProgress: f
   };
 }
-export const X = $$f0; 
+export const X = $$f0;

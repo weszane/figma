@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useEffect } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { glU } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import { h } from "../905/207101";
@@ -16,7 +16,7 @@ export function $$_0(e) {
       return;
     }
   });
-  let t = d4(e => e.isFullscreenDocumentLoaded);
+  let t = useSelector(e => e.isFullscreenDocumentLoaded);
   useEffect(() => {
     t && glU.triggerAction("set-tool-frame", null);
   }, [t]);

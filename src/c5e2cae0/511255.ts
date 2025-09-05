@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useMemo, Suspense } from "react";
-import { wA, Ng } from "../vendor/514228";
+import { useDispatch, connect } from "../vendor/514228";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { s as _$$s } from "../905/403855";
 import { buildUploadUrl } from "../figma_app/169182";
@@ -50,7 +50,7 @@ function X({
   TeamIllustration: r,
   upsellSource: l
 }) {
-  let n = wA();
+  let n = useDispatch();
   return jsxs("div", {
     className: _$$s2.flex.flexColumn.gap8.$,
     style: sx.add({
@@ -206,7 +206,7 @@ function et(e) {
   });
 }
 function ea(e) {
-  let t = wA();
+  let t = useDispatch();
   let a = () => {
     t(Ce());
   };
@@ -478,7 +478,7 @@ function es() {
     })]
   });
 }
-export let $$er0 = Ng(e => {
+export let $$er0 = connect(e => {
   let {
     teams
   } = e;

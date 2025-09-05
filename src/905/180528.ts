@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useRef, useState, useCallback, useMemo } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { N as _$$N } from "../905/438674";
 import { K as _$$K } from "../905/443068";
 import { C as _$$C } from "../905/520159";
@@ -68,8 +68,8 @@ export function $$O1({
   sharingGroupData: T
 }) {
   let N = _$$B(i);
-  let P = d4(e => d1(e));
-  let O = d4(e => e.user);
+  let P = useSelector(e => d1(e));
+  let O = useSelector(e => e.user);
   let [L, F] = useState(!1);
   let M = P?.library_key === i;
   let j = t?.library_file_name ?? N?.data ?? "";

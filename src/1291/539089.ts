@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState, useEffect, useMemo } from "react";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { sortByPropertyWithOptions, MAX_LENGTH } from "../figma_app/656233";
 import { E as _$$E } from "../905/632989";
 import { g as _$$g } from "../905/687265";
@@ -316,7 +316,7 @@ export function $$eo1({
     modalType: G
   });
   let ex = useMemo(() => Ow(V.results.normalizedSearchResults), [V.results.normalizedSearchResults]);
-  let eh = d4(MH);
+  let eh = useSelector(MH);
   let ef = k9(() => Object.values(eh), [eh]);
   return V.query && e ? V.isLoading ? jsx(ZA, {}) : jsx(fu, {
     name: "stickers",
@@ -428,7 +428,7 @@ export function $$eo1({
   });
 }
 function el() {
-  let e = d4(MH);
+  let e = useSelector(MH);
   let t = q5();
   return jsx(fu, {
     name: "detail",
@@ -478,7 +478,7 @@ export function $$ed2({
   }) : null;
 }
 export function $$ec0() {
-  let e = wA();
+  let e = useDispatch();
   let t = q5();
   let {
     fileVersion,

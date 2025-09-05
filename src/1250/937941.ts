@@ -1,4 +1,4 @@
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { K } from "../905/807535";
 import { getFeatureFlags } from "../905/601108";
 import { az } from "../905/449184";
@@ -18,7 +18,7 @@ import { wR } from "../figma_app/765689";
 if (443 == require.j) {}
 export function $$y0() {
   let e;
-  let t = wA();
+  let t = useDispatch();
   let {
     nudgeUpgradeRequest
   } = q0();

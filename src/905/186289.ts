@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { Component } from "react";
-import { Ng } from "../vendor/514228";
+import { connect } from "../vendor/514228";
 import { S } from "../905/539306";
 import { jr, vj } from "../905/574958";
 let $$l1 = "search_file_browser_full_results";
@@ -48,7 +48,7 @@ let u = e => {
     result: e.searchResult
   };
 };
-let $$p0 = Ng((e, t) => {
+let $$p0 = connect((e, t) => {
   let i = new vj.Analytics(e.search, u(t), {
     plan: S(e)
   });

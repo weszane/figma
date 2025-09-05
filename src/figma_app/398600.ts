@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useCallback } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { E } from "../905/632989";
 import { K } from "../905/851274";
 import { Dk } from "../figma_app/623293";
@@ -16,7 +16,7 @@ export function $$p1(e) {
 function _({
   file: e
 }) {
-  let t = wA();
+  let t = useDispatch();
   let r = $$p1(e);
   let i = async () => {
     try {

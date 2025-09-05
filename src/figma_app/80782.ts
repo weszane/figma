@@ -1,5 +1,5 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
 import { y1 } from "../figma_app/492908";
 import { lQ } from "../905/934246";
@@ -50,7 +50,7 @@ function k({
   template: e,
   position: t
 }) {
-  let r = wA();
+  let r = useDispatch();
   let {
     viewSourceFileUrl,
     duplicateLink,
@@ -148,7 +148,7 @@ export function $$M0(e) {
   });
 }
 export function $$F4(e) {
-  let t = d4(t => t.hubFiles[e.hubFileId]);
+  let t = useSelector(t => t.hubFiles[e.hubFileId]);
   return jsx($$M0, {
     template: {
       template: t,

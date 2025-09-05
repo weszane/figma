@@ -1,6 +1,6 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useContext, useEffect, useRef, useMemo, useState, useCallback } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { allEqual } from "../figma_app/656233";
 import { glU, hJs, rXF } from "../figma_app/763686";
 import o from "classnames";
@@ -40,7 +40,7 @@ export function $$j0({
   setShowSinglePaddingControl: x,
   ...y
 }) {
-  let j = wA();
+  let j = useDispatch();
   let [v, k] = HF(e);
   let {
     smallNudgeAmount,

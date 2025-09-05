@@ -1,4 +1,4 @@
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { c2 } from "../905/382883";
 import { xx } from "../figma_app/815945";
 import { sx } from "../905/449184";
@@ -73,8 +73,8 @@ export function $$C5(e) {
   return N(e.currentUserOrgId, e.orgById, e.user, e.orgUsersByOrgId);
 }
 export function $$w61() {
-  let e = d4(e => e.currentUserOrgId);
-  return N(e, d4(e => "orgById" in e ? e.orgById : {}), d4(e => e.user), d4(e => "orgUsersByOrgId" in e ? e.orgUsersByOrgId : {}));
+  let e = useSelector(e => e.currentUserOrgId);
+  return N(e, useSelector(e => "orgById" in e ? e.orgById : {}), useSelector(e => e.user), useSelector(e => "orgUsersByOrgId" in e ? e.orgUsersByOrgId : {}));
 }
 export let $$O37 = xx((e, t, r) => {
   let n;
@@ -199,13 +199,13 @@ export function $$ea31(e) {
 }
 export let $$es33 = _$$c;
 export function $$eo41() {
-  return d4(e => e.authedActiveCommunityProfile);
+  return useSelector(e => e.authedActiveCommunityProfile);
 }
 export function $$el50() {
-  let e = d4(e => e.authedActiveCommunityProfile);
-  let t = d4(e => e.authedProfilesById);
-  let r = d4(e => e.authedUsers.byId);
-  let i = d4(e => "orgById" in e ? e.orgById : {});
+  let e = useSelector(e => e.authedActiveCommunityProfile);
+  let t = useSelector(e => e.authedProfilesById);
+  let r = useSelector(e => e.authedUsers.byId);
+  let i = useSelector(e => "orgById" in e ? e.orgById : {});
   if (!e) return null;
   if (!e.public_at) {
     if (e.primary_user_id) return r[e.primary_user_id];
@@ -215,9 +215,9 @@ export function $$el50() {
 }
 export function $$ed51(e) {
   let t = iZ();
-  let r = d4(e => $$eu39(e), c2);
-  let a = d4(e => $$ec20(e));
-  let s = d4(e => "authedProfilesById" in e ? e.authedProfilesById : {});
+  let r = useSelector(e => $$eu39(e), c2);
+  let a = useSelector(e => $$ec20(e));
+  let s = useSelector(e => "authedProfilesById" in e ? e.authedProfilesById : {});
   if (!e) return !1;
   let o = s[e.id];
   return !!o && (t?.community_profile_id === o.id || !!o.team_id && !!r[o.team_id] || !!(o.org_id && a[o.org_id]));
@@ -254,7 +254,7 @@ export function $$e_49(e, t) {
   return e && Object.values(t).find(t => t.associated_users?.find(r => r.user_id === e.id && t.public_at)) || null;
 }
 export function $$eh21() {
-  return d4(e => $$em34(e.selectedView));
+  return useSelector(e => $$em34(e.selectedView));
 }
 export function $$em34(e) {
   return "communityHub" === e.view || $$eg59(e) || !1;

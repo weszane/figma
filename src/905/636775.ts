@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useRef, useCallback } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { B } from "../905/714743";
 import { tx } from "../905/303541";
 import { r as _$$r } from "../905/534055";
@@ -28,7 +28,7 @@ import { z } from "../905/255946";
 import { m_, hz } from "../905/540198";
 import { A as _$$A2 } from "../1617/579393";
 function T(e) {
-  let t = wA();
+  let t = useDispatch();
   let i = iZ();
   let {
     dropdownIsShown,
@@ -124,8 +124,8 @@ export function $$L1({
   viewContext: i
 }) {
   let r = !!t.org_id;
-  let d = d4(e => e.orgById);
-  let c = "search" === d4(({
+  let d = useSelector(e => e.orgById);
+  let c = "search" === useSelector(({
     selectedView: e
   }) => e).view;
   let u = t.org_id && d[t.org_id];

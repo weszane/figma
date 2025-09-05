@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useMemo } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { Egt, glU } from "../figma_app/763686";
 import { l7 } from "../905/189185";
 import { dI } from "../905/871411";
@@ -37,7 +37,7 @@ export function $$k0({
       canGoBackToReviewFlow: !0
     });
   }));
-  let R = wA();
+  let R = useDispatch();
   let N = eY();
   let {
     close

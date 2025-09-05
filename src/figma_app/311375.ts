@@ -1,14 +1,14 @@
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { vD, Sh, a$ } from "../figma_app/889655";
 import { jY } from "../figma_app/151869";
 export function $$s5() {
-  return d4(vD);
+  return useSelector(vD);
 }
 export function $$o2() {
-  return d4(Sh);
+  return useSelector(Sh);
 }
 export function $$l0() {
-  return d4(a$);
+  return useSelector(a$);
 }
 export function $$d1() {
   let e = $$o2();

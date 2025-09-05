@@ -1,6 +1,6 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useRef, useEffect, useMemo, useState, useCallback } from "react";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { Ez5, lyf, xal } from "../figma_app/763686";
 import { fp } from "../figma_app/27355";
 import l from "classnames";
@@ -50,7 +50,7 @@ export function $$P2({
   let A = l7();
   let M = useRef(null);
   let P = Ht();
-  let F = d4(e => e.versionHistory);
+  let F = useSelector(e => e.versionHistory);
   let B = J2(UK().showGuids);
   let {
     selectedPageIds,
@@ -210,7 +210,7 @@ function D({
 }) {
   let b = useRef(null);
   let [x, y] = useState(!1);
-  let v = d4(e => e.mirror.appModel.topLevelMode === lyf.HISTORY);
+  let v = useSelector(e => e.mirror.appModel.topLevelMode === lyf.HISTORY);
   let w = g && g.dragOverPageId === e ? "before" === g.insertPosition ? l ? iZ : pf : _ ? Vi : IK : null;
   let T = q5();
   let [k, C] = fp(qp);
@@ -257,10 +257,10 @@ export function $$L1({
   let n = Z("page_change_navigator_navigate");
   let a = _$$E();
   let s = U();
-  let l = wA();
+  let l = useDispatch();
   let d = _6();
   let _ = dh();
-  let u = d4(e => e.versionHistory);
+  let u = useSelector(e => e.versionHistory);
   return useCallback(r => $P(r, _, u, l, Fy(e, r) === xal.LOADED, s, n, a, t, d), [e, n, a, s, l, d, _, u, t]);
 }
 export function $$F0({
@@ -271,10 +271,10 @@ export function $$F0({
   let a = Z("page_change_navigator_navigate");
   let s = _$$E();
   let l = U();
-  let d = wA();
+  let d = useDispatch();
   let _ = _6();
   let u = dh(n);
-  let m = d4(e => e.versionHistory);
+  let m = useSelector(e => e.versionHistory);
   return useCallback(async r => {
     n && (await $P(r, u, m, d, Fy(e, r) === xal.LOADED, l, a, s, t, _));
   }, [e, a, s, l, d, _, u, m, t, n]);

@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useContext, useMemo } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { $n } from "../905/521428";
 import { f as _$$f } from "../905/809171";
 import { J as _$$J } from "../905/614223";
@@ -80,7 +80,7 @@ function el(e) {
 function ed(e) {
   let t = iZ();
   let n = MY();
-  let a = wA();
+  let a = useDispatch();
   let s = _$$w();
   let r = () => {
     let t = e.asset.bg ? {
@@ -194,7 +194,7 @@ let eg = [{
   AnnouncementComponent: function ({
     userFlagName: e
   }) {
-    let t = wA();
+    let t = useDispatch();
     let n = q5();
     let a = "dark" === DP();
     let {
@@ -249,7 +249,7 @@ let eg = [{
 }, {
   userFlagName: "seen_mobile_proto_announcement",
   AnnouncementComponent: function () {
-    let e = wA();
+    let e = useDispatch();
     return md(NE) ? jsx(ed, {
       asset: {
         type: "image",
@@ -286,7 +286,7 @@ let eg = [{
 }, {
   userFlagName: "seen_mobile_comment_announcement",
   AnnouncementComponent: function () {
-    let e = wA();
+    let e = useDispatch();
     return jsx(ed, {
       asset: {
         type: "image",
@@ -326,7 +326,7 @@ let eg = [{
     userFlagName: e,
     lifecycle: t
   }) {
-    let n = wA();
+    let n = useDispatch();
     let a = _$$U("announcement");
     let s = "dark" === DP();
     let r = () => {
@@ -435,7 +435,7 @@ let eg = [{
 }, {
   userFlagName: "dev_mode_demo_file_props_panel_upsell_dismissed",
   AnnouncementComponent: function () {
-    let e = wA();
+    let e = useDispatch();
     let t = getInitialOptions().dev_mode_demo_file_key;
     return t ? jsx(ed, {
       asset: {
@@ -488,11 +488,11 @@ export function $$ex0(e) {
   let n = t?.editorType;
   let l = S2().unwrapOr(null);
   let h = l?.figjamDisabledAt || null;
-  let f = d4(e => e.userFlags);
+  let f = useSelector(e => e.userFlags);
   let g = md(ev);
   let x = iZ();
-  let y = d4(e => e.userAnalyticsData);
-  let C = d4(e => e.selectedView);
+  let y = useSelector(e => e.userAnalyticsData);
+  let C = useSelector(e => e.selectedView);
   let w = x?.created_at;
   let j = _$$A(w).add(14, "day").isSameOrAfter(_$$A());
   let k = _$$k2();

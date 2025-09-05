@@ -1,7 +1,7 @@
 import { ex as _$$ex } from "../905/524523";
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { createContext, memo, useMemo, useCallback, useRef, useContext, useState, useEffect } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { lQ } from "../905/934246";
 import { J as _$$J } from "../905/270045";
 import { d as _$$d } from "../905/976845";
@@ -88,8 +88,8 @@ let X = memo(function ({
   });
 });
 function eu() {
-  let e = wA();
-  let t = d4(e => Yh(e.mirror.appModel, JT.MAGIC_LINK));
+  let e = useDispatch();
+  let t = useSelector(e => Yh(e.mirror.appModel, JT.MAGIC_LINK));
   let n = _$$a();
   if (!PE()) return null;
   let i = n ? _$$t("fullscreen.toolbar.prototyping-add-interactions-tooltip-v2") : _$$t("fullscreen.toolbar.prototyping-add-interactions-tooltip-ga");
@@ -152,22 +152,22 @@ let eN = new sX();
 let $$eT0 = memo(function ({
   filterInteractionCategory: e
 }) {
-  let t = wA();
-  let n = d4(Cy);
-  let a = d4(n9);
-  let l = d4(DV);
-  let s = d4(ek);
-  let d = d4(dK);
-  let c = d4(Xt);
+  let t = useDispatch();
+  let n = useSelector(Cy);
+  let a = useSelector(n9);
+  let l = useSelector(DV);
+  let s = useSelector(ek);
+  let d = useSelector(dK);
+  let c = useSelector(Xt);
   let p = a2();
   let u = _$$R();
-  let y = d4(eO);
-  let f = d4(ew);
+  let y = useSelector(eO);
+  let f = useSelector(ew);
   let _ = Object.keys(c).length > 1;
   let b = eL();
   let C = function () {
     let e = eL();
-    let t = d4(eP);
+    let t = useSelector(eP);
     return !!e && !!t && t.selectionOverrides[YnC.PROTOTYPE_INTERACTIONS];
   }();
   let j = q5();
@@ -409,11 +409,11 @@ function eA({
   let {
     getNodeName
   } = useContext(q);
-  let G = d4(DV);
+  let G = useSelector(DV);
   let Y = a2();
-  let X = d4(ew);
+  let X = useSelector(ew);
   let Q = X?.id === o$ ? X : null;
-  let et = d4(dK);
+  let et = useSelector(dK);
   let [en, eo] = useState(!1);
   let ei = md(NE) ? ej : eE;
   let er = useContext(qd);
@@ -491,7 +491,7 @@ function eA({
       } else e || eh();
     } else eg();
   };
-  let eN = d4(ZM);
+  let eN = useSelector(ZM);
   let eT = !1;
   let eS = null;
   let eA = null;
@@ -726,8 +726,8 @@ function eO(e) {
   return e.mirror.selectionProperties.isValidPrototypingSourceSelected ?? !0;
 }
 function eL() {
-  let e = d4(Xt);
-  let t = d4(dK);
+  let e = useSelector(Xt);
+  let t = useSelector(dK);
   for (let n of Object.keys(e)) {
     let e = t.get(n);
     if (e && ("INSTANCE" === e.type || e.isInstanceSublayer)) return !0;

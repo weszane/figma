@@ -1,5 +1,5 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { CY } from "../figma_app/637027";
 import { T } from "../figma_app/257703";
 import { t, tx } from "../905/303541";
@@ -7,7 +7,7 @@ import { sf } from "../905/929976";
 import { g } from "../905/817247";
 import { GN, RM } from "../905/441038";
 function _(e) {
-  let t = wA();
+  let t = useDispatch();
   return jsx(CY, {
     onClick: () => {
       t(sf({

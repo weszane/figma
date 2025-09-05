@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useRef, useState, useLayoutEffect, useMemo, useEffect, useCallback } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
 import { sx } from "../905/449184";
 import { Ay } from "../905/612521";
@@ -217,7 +217,7 @@ function eC() {
   });
 }
 export let $$eb0 = Ju(function (e) {
-  let t = wA();
+  let t = useDispatch();
   let n = dq();
   let u = _6();
   useEffect(() => {
@@ -344,7 +344,7 @@ export let $$eb0 = Ju(function (e) {
   });
 }, _$$E, ZU.YES);
 function eT(e) {
-  let t = wA();
+  let t = useDispatch();
   let n = iZ();
   let a = dq();
   let d = useCallback(() => {
@@ -457,7 +457,7 @@ function eT(e) {
   });
 }
 function eI(e) {
-  let t = wA();
+  let t = useDispatch();
   let n = useRef(null);
   let a = useRef(null);
   let [d, r] = useState(!1);
@@ -479,7 +479,7 @@ function eI(e) {
     t && n.user.id === e.currentUser.id && c();
   }, [p, e.comments, e.currentUser, c]);
   let [g, v] = useState([]);
-  let T = d4(e => e.comments.newComment);
+  let T = useSelector(e => e.comments.newComment);
   let I = useCallback(() => {
     t(gX({
       postUuid: e.postUuid,

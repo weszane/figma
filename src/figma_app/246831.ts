@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { memo, useRef, useEffect, useContext, useCallback, useMemo, useState, useId } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { _m } from "../vendor/891888";
 import { debug, throwTypeError } from "../figma_app/465776";
 import { assertNotNullish, isNullish } from "../figma_app/95419";
@@ -96,7 +96,7 @@ let eD = memo(function ({
   isEditable: g = !0
 }) {
   let f = Um();
-  let E = wA();
+  let E = useDispatch();
   let {
     setKeyboardNavigationElement,
     keyboardNavigationItem,
@@ -143,7 +143,7 @@ let eD = memo(function ({
     let r = v.current?.getBoundingClientRect();
     r && showStyleDetails(e, r, "styleListClick");
   }, [e, showStyleDetails]);
-  let U = d4(Sh);
+  let U = useSelector(Sh);
   let B = useCallback(t => {
     t.stopPropagation();
     debug(null != e.content_hash, "style does not have a hash");
@@ -376,8 +376,8 @@ export function $$eF1({
   hideLocalStyles: y = !1,
   customPickerTitle: b = ""
 }) {
-  let T = wA();
-  let I = d4(e => e.modalShown);
+  let T = useDispatch();
+  let I = useSelector(e => e.modalShown);
   let S = GC(u);
   let v = useMemo(() => !!I && I.type === cX, [I]);
   let A = useRef(null);
@@ -628,7 +628,7 @@ function eG({
   customPickerTitle: H,
   children: W
 }) {
-  let Y = wA();
+  let Y = useDispatch();
   let X = tS();
   let Z = useMemo(() => D || (t ? new Point(t.initialX, t.initialY) : new Point(0, 0)), [D, t]);
   let [Q, ee] = useState(!1);

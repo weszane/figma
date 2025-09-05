@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useEffect } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { languageCodes } from "../905/816253";
 import { getFeatureFlags } from "../905/601108";
 import { md } from "../figma_app/27355";
@@ -34,7 +34,7 @@ let I = e => {
   if (a && o) return t && EK.includes(t) || navigator.languages.some(e => B1.includes(e)) ? "brazilian" : "non_brazilian";
 };
 function $$A(e) {
-  let t = wA();
+  let t = useDispatch();
   let n = DP();
   let r = e.isBrazilianVariant ? tx("pt_br_announcement.description") : tx("pt_br_announcement.non_brazilian.description");
   return jsx(_l, {
@@ -66,7 +66,7 @@ function $$A(e) {
 }
 let S = r1("has_tried_pt_br");
 export function $$N0() {
-  let e = wA();
+  let e = useDispatch();
   let t = md(S);
   let n = md(mp);
   let _ = "loaded" === t.status && "loaded" === n.status;

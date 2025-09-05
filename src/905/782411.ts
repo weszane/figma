@@ -2,7 +2,7 @@ import { useEffect, useCallback } from "react";
 import { eU, fp, Xr, md } from "../figma_app/27355";
 import { N } from "../905/972754";
 import { ku, Os, qA, fn } from "../figma_app/255679";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { l as _$$l } from "../905/716947";
 import { ZC } from "../figma_app/39751";
 import { uo, yH } from "../905/879323";
@@ -20,11 +20,11 @@ export function $$f0() {
   let [e, t] = fp(qA);
   let i = Xr(fn);
   !function () {
-    let e = wA();
+    let e = useDispatch();
     let {
       components,
       stateGroups
-    } = d4(e => e.library.publishedByLibraryKey);
+    } = useSelector(e => e.library.publishedByLibraryKey);
     let a = md(g);
     let s = ZC(a);
     let h = n1();

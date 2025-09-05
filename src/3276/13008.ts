@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { oA } from "../905/663269";
 import { h as _$$h } from "../905/142086";
 import { to } from "../905/156213";
@@ -15,7 +15,7 @@ import { RC, Yx } from "../3276/926297";
 let g = "edit_request";
 let v = "move_to_project";
 export function $$x0(e) {
-  let t = wA();
+  let t = useDispatch();
   let n = RC();
   let x = Yx();
   let b = e.editorType === FFileType.WHITEBOARD && !!e.org?.figjamDisabledAt;

@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useEffect, useState } from "react";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { Xf } from "../figma_app/153916";
 import { tx } from "../905/303541";
@@ -27,27 +27,27 @@ export function $$C0(e) {
     selectedTab,
     licenseGroupId
   } = e;
-  let C = d4(({
+  let C = useSelector(({
     dropdownShown: e
   }) => e);
-  let S = d4(({
+  let S = useSelector(({
     loadingState: e
   }) => e);
-  let N = d4(({
+  let N = useSelector(({
     orgById: e,
     currentUserOrgId: t
   }) => e[t]);
-  let I = d4(({
+  let I = useSelector(({
     selectedView: e
   }) => e);
   let T = MX();
-  let A = wA();
+  let A = useDispatch();
   let R = Xf(N?.id);
   let O = R?.data?.invoices;
   let L = EO(N?.id ?? "");
   let D = px();
   let M = j_(D);
-  let P = d4((e) => getPermissionsStateMemoized(e));
+  let P = useSelector(e => getPermissionsStateMemoized(e));
   let U = "loaded" === M.status && $N({
     isAdminOrg: !!M.data,
     permissions: P,
@@ -67,7 +67,7 @@ export function $$C0(e) {
   }, [A, N?.id]);
   let q = Date.now();
   let [$, B] = useState("");
-  let G = T.find((e) => e.id === licenseGroupId);
+  let G = T.find(e => e.id === licenseGroupId);
   let z = VP(S, EO(N?.id ?? ""));
   let V = !G && mn(S, L) && D2(S, L);
   if (useEffect(() => {

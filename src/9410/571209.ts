@@ -1,5 +1,5 @@
 import { useMemo, useState, useCallback, useLayoutEffect } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { PU } from "../figma_app/343967";
 import { r as _$$r } from "../905/249071";
 import { md } from "../figma_app/27355";
@@ -13,7 +13,7 @@ import { ui3RulerMargin } from "../figma_app/786175";
 var r;
 function h(e, t, i, r) {
   let n = [m(e, t, i), m(e, t, r), m(i, r, e), m(i, r, t)];
-  return n[0] !== n[1] && n[2] !== n[3] || n.every((e) => "COLLINEAR" === e) && f(e.x, t.x, i.x, r.x) && f(e.y, t.y, i.y, r.y);
+  return n[0] !== n[1] && n[2] !== n[3] || n.every(e => "COLLINEAR" === e) && f(e.x, t.x, i.x, r.x) && f(e.y, t.y, i.y, r.y);
 }
 function m(e, t, i) {
   let r = (t.y - e.y) * (i.x - t.x) - (i.y - t.y) * (t.x - e.x);
@@ -30,13 +30,13 @@ function f(e, t, i, r) {
   e.COUNTERCLOCKWISE = "COUNTERCLOCKWISE";
   e.COLLINEAR = "COLLINEAR";
 }(r || (r = {}));
-var _ = ((e) => (e.TOP = "TOP", e.RIGHT = "RIGHT", e.BOTTOM = "BOTTOM", e.LEFT = "LEFT", e.UNKNOWN = "UNKNONWN", e))(_ || {});
-var x = ((e) => (e.TOP_LEFT = "TOP_LEFT", e.TOP = "TOP", e.TOP_RIGHT = "TOP_RIGHT", e.RIGHT = "RIGHT", e.BOTTOM_RIGHT = "BOTTOM_RIGHT", e.BOTTOM = "BOTTOM", e.BOTTOM_LEFT = "BOTTOM_LEFT", e.LEFT = "LEFT", e.OVERLAP = "OVERLAP", e))(x || {});
+var _ = (e => (e.TOP = "TOP", e.RIGHT = "RIGHT", e.BOTTOM = "BOTTOM", e.LEFT = "LEFT", e.UNKNOWN = "UNKNONWN", e))(_ || {});
+var x = (e => (e.TOP_LEFT = "TOP_LEFT", e.TOP = "TOP", e.TOP_RIGHT = "TOP_RIGHT", e.RIGHT = "RIGHT", e.BOTTOM_RIGHT = "BOTTOM_RIGHT", e.BOTTOM = "BOTTOM", e.BOTTOM_LEFT = "BOTTOM_LEFT", e.LEFT = "LEFT", e.OVERLAP = "OVERLAP", e))(x || {});
 export function $$C2() {
   return md(uc);
 }
 export function $$v1() {
-  let e = d4(({
+  let e = useSelector(({
     mirror: {
       appModel: e
     }
@@ -52,9 +52,9 @@ export function $$E0(e, t = 20) {
   let i = function (e, t) {
     let [i, r] = useState([]);
     let a = PU();
-    let l = wm(() => t ? a.filter((e) => e !== t && !e.contains(t) && !t.contains(e)) : a, [a, t]);
-    let c = useCallback((t) => {
-      r(t.map((t) => {
+    let l = wm(() => t ? a.filter(e => e !== t && !e.contains(t) && !t.contains(e)) : a, [a, t]);
+    let c = useCallback(t => {
+      r(t.map(t => {
         let {
           x,
           y,
@@ -74,9 +74,9 @@ export function $$E0(e, t = 20) {
       window.addEventListener("resize", e);
       return () => window.removeEventListener("resize", e);
     }, [c, l]);
-    let u = useCallback((t) => {
-      let i = t.map((t) => {
-        let i = l.findIndex((e) => e === t.target);
+    let u = useCallback(t => {
+      let i = t.map(t => {
+        let i = l.findIndex(e => e === t.target);
         if (-1 !== i) {
           let {
             x,
@@ -86,8 +86,8 @@ export function $$E0(e, t = 20) {
           } = t.target.getBoundingClientRect();
           return [i, 0 === width || 0 === height ? _$$r.fromOriginAndSize(x, y, width, height) : T(x, y, width, height, e)];
         }
-      }).filter((e) => !!e);
-      r((e) => {
+      }).filter(e => !!e);
+      r(e => {
         let t = [...e];
         i.forEach(([e, i]) => {
           t[e] = i;
@@ -97,26 +97,26 @@ export function $$E0(e, t = 20) {
     }, [l, e]);
     useLayoutEffect(() => {
       let e = new ResizeObserver(u);
-      l.forEach((t) => {
+      l.forEach(t => {
         e.observe(t);
       });
       return () => e.disconnect();
     }, [l, u]);
     useLayoutEffect(() => {
       if (!("IntersectionObserver" in window)) return () => {};
-      let e = new IntersectionObserver((e) => {
+      let e = new IntersectionObserver(e => {
         u(e);
       }, {
         root: null,
         rootMargin: "0px",
         threshold: 1
       });
-      l.forEach((t) => {
+      l.forEach(t => {
         e.observe(t);
       });
       return () => e.disconnect();
     }, [l, u]);
-    return useMemo(() => i.filter((e) => !e.isEmpty()), [i]);
+    return useMemo(() => i.filter(e => !e.isEmpty()), [i]);
   }(t, e.current ?? void 0);
   return useCallback((e, r, n) => function (e, t, i, r) {
     let n = function (e, t) {

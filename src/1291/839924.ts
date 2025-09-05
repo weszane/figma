@@ -1,5 +1,5 @@
 import { useState, useLayoutEffect, useCallback, useEffect } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { debounce } from "../905/915765";
 import { ZC } from "../figma_app/39751";
 import { jy } from "../905/116101";
@@ -20,7 +20,7 @@ export function $$u0(e, t, s, u, m, _) {
       window.removeEventListener("resize", t);
     };
   }, [e, s]);
-  let y = wA();
+  let y = useDispatch();
   let j = useCallback(() => {
     y(jy({
       initialX: u.x,
@@ -38,7 +38,7 @@ export function $$u0(e, t, s, u, m, _) {
       pinned: _$$t.NOT_PINNED
     })), b(!0), t(m));
   }, [y, t, s, m, _]);
-  let S = d4((e) => e.mirror?.appModel.showUi);
+  let S = useSelector(e => e.mirror?.appModel.showUi);
   let v = ZC(S);
   let w = LR();
   useEffect(() => {

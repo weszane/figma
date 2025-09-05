@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { memo, createContext, useState, useRef, useMemo, useContext, useCallback, useEffect, useLayoutEffect, Fragment as _$$Fragment } from "react";
 import { createPortal } from "../vendor/944059";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
 import { r as _$$r } from "../905/840133";
 import { r as _$$r2 } from "../905/216849";
@@ -289,7 +289,7 @@ function eg({
   openedViaHover: l
 }) {
   let d = K();
-  let p = wA();
+  let p = useDispatch();
   let [_, h] = useState(null);
   let [g, f] = useState(!1);
   let y = useCallback(() => {
@@ -781,8 +781,8 @@ function eb(e) {
 }
 function eT() {
   let e = function () {
-    let e = d4(e => e.multiplayer.allUsers.find(t => t.sessionID === e.multiplayer.sessionID));
-    let t = d4(t => {
+    let e = useSelector(e => e.multiplayer.allUsers.find(t => t.sessionID === e.multiplayer.sessionID));
+    let t = useSelector(t => {
       if (e && e.imageURL) return `${e.imageURL}?c=1`;
       let r = t.user?.profile?.images;
       return r && r["500_500"] ? `${r["500_500"]}?c=1` : null;
@@ -837,7 +837,7 @@ export function $$eI1() {
 }
 export function $$eS0(e) {
   let t = XM();
-  let r = wA();
+  let r = useDispatch();
   let a = p8("isReadOnly");
   let o = function ({
     multiplayerWheelType: e,

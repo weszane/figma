@@ -1,6 +1,6 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useState, useRef, useLayoutEffect, useMemo, useEffect } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { debounce } from "../905/915765";
 import { lQ } from "../905/934246";
 import { md, fp } from "../figma_app/27355";
@@ -130,12 +130,12 @@ function Z(e) {
     })
   });
 }
-let ev = Ju(function({
+let ev = Ju(function ({
   onConfirm: e,
   totalRequestCount: t,
   filteredRequestCount: a
 }) {
-  let s = wA();
+  let s = useDispatch();
   let r = () => {
     s(Ce());
   };
@@ -276,7 +276,7 @@ function eN({
     })
   });
 }
-let eI = Ju(function({
+let eI = Ju(function ({
   request: e,
   planId: t,
   planType: a,
@@ -286,7 +286,7 @@ let eI = Ju(function({
   onDeny: d,
   entryPoint: c
 }) {
-  let _ = wA();
+  let _ = useDispatch();
   let [u, m] = useState(null);
   let [p, g] = useState(!0);
   useMemo(() => {
@@ -440,7 +440,7 @@ export function $$eD0({
   defaultAdminEntryPoint: B
 }) {
   let G;
-  let z = wA();
+  let z = useDispatch();
   let V = Um();
   let [W, H] = useState(!1);
   let [Y, J] = useState("");
@@ -450,7 +450,7 @@ export function $$eD0({
   let ej = useRef(0);
   let [ey, ew] = useState(0);
   let [ek, eE] = useState(window.innerHeight);
-  let eC = d4(({
+  let eC = useSelector(({
     selectedView: e
   }) => e);
   let eS = B ?? uH;
@@ -1368,4 +1368,4 @@ export function $$eD0({
     })
   });
 }
-export const F = $$eD0; 
+export const F = $$eD0;

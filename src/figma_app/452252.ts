@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { createRef, useEffect, useMemo } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { E as _$$E } from "../905/632989";
 import { _ as _$$_ } from "../figma_app/496441";
@@ -131,10 +131,10 @@ export function $$K5(e) {
   });
 }
 export function $$Y3(e) {
-  let t = wA();
+  let t = useDispatch();
   let r = iZ();
   let n = q5();
-  let a = d4(e => e.isRenaming);
+  let a = useSelector(e => e.isRenaming);
   let o = md(lu);
   let l = !!n && DF(n, r);
   let d = null == n && null != o ? {
@@ -197,9 +197,9 @@ export function $$q4({
   }(e, t);
   let n = r.length > 25 ? r : void 0;
   let o = function () {
-    let e = d4(tB);
+    let e = useSelector(tB);
     let t = FC();
-    let r = d4(e => e.isOpenFileLoadedFromLiveGraph);
+    let r = useSelector(e => e.isOpenFileLoadedFromLiveGraph);
     return useMemo(() => {
       let n = !!e?.project;
       if (e && e.folderId && n) return cU(e.folderId, e.parentOrgId, e.teamId, t, !!e.project?.team?.canView, "toolbar_workspace_button.useProjectUrl", r);

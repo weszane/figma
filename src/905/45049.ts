@@ -1,5 +1,5 @@
 import { useCallback, useRef, useEffect, useState } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
 import { md } from "../figma_app/27355";
 import { sx } from "../905/449184";
@@ -326,7 +326,7 @@ export function $$$0(e, t, i, y, b) {
   let I = B(i);
   let E = md(hO.sortByAtom);
   let x = md(CZ);
-  let S = wA();
+  let S = useDispatch();
   let w = X();
   let C = md(dd);
   let {

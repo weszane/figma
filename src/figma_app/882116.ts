@@ -1,5 +1,5 @@
 import { useMemo, useCallback } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { Rs } from "../figma_app/288654";
 import { Be } from "../figma_app/844435";
 import { xp, aQ } from "../figma_app/86989";
@@ -9,7 +9,7 @@ import { vt } from "../figma_app/45218";
 export function $$u2({
   extensionId: e
 }) {
-  let t = d4(e => e.currentUserOrgId);
+  let t = useSelector(e => e.currentUserOrgId);
   let r = Rs(BB3, {
     orgId: t
   });
@@ -20,7 +20,7 @@ export function $$p1(e, t) {
   let n = t === vt.PLUGIN ? r.plugins[e] : r.widgets[e];
   let a = xp(e);
   let d = aQ(e);
-  let p = d4(t => t.publishedPlugins[e] ? a : d);
+  let p = useSelector(t => t.publishedPlugins[e] ? a : d);
   let _ = $$u2({
     extensionId: e
   });

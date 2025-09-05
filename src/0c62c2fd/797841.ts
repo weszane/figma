@@ -1,5 +1,5 @@
 import { jsxs, jsx } from "react/jsx-runtime";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { sx } from "../905/449184";
 import { N_ } from "../figma_app/637027";
 import { P } from "../905/347284";
@@ -64,7 +64,7 @@ function f(e) {
   });
 }
 export function $$g0(e) {
-  let t = wA();
+  let t = useDispatch();
   let r = r => {
     sx("restore_version_from_modal", {
       fileKey: e.fig.key,

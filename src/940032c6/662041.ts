@@ -1,5 +1,5 @@
 import { jsx } from "react/jsx-runtime";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { t } from "../905/303541";
 import { b as _$$b } from "../5430/872214";
 import { W, B } from "../905/841666";
@@ -13,7 +13,7 @@ export function $$p0(e) {
     viewContext,
     removeButtonBorder
   } = e;
-  let x = d4(e => e.authedActiveCommunityProfile);
+  let x = useSelector(e => e.authedActiveCommunityProfile);
   let m = cs(x);
   let h = W(resource.id, Vm(resource), !XW(resource));
   let g = B(resource.id, XW(resource));

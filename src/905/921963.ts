@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useCallback } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { Xr } from "../figma_app/27355";
 import { getInitialOptions } from "../figma_app/169182";
 import { t as _$$t, tx } from "../905/303541";
@@ -27,10 +27,10 @@ import { G as _$$G } from "../905/595923";
 import { nu, R9, E4 } from "../905/144598";
 import { to as _$$to, vQ, UU } from "../905/372455";
 export function $$N0(e) {
-  let t = wA();
+  let t = useDispatch();
   let i = Um();
   let N = _$$P();
-  let P = d4(e => e.userFlags);
+  let P = useSelector(e => e.userFlags);
   let O = Xr(_$$G);
   let D = e.resource && e.resource.type === FResourceCategoryType.FILE ? e.resource.file : null;
   let L = e.role.pending && e.role.invite ? e.role.invite.inviteeUserId : e.role.user_id;

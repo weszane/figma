@@ -1,5 +1,5 @@
 import { useMemo, useCallback, createElement } from "react";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
 import { b as _$$b } from "../figma_app/124186";
 import { n as _$$n } from "../5132/715664";
@@ -54,13 +54,13 @@ export function $$J1({
     branchingActionsStatus: t,
     shouldShowSlideConversionEntrypoint: !1
   });
-  let a = d4(e => e.userStateLoaded);
+  let a = useSelector(e => e.userStateLoaded);
   let s = useMemo(() => ({
     shouldShowBackToFiles: (!ck() || MP() && !!getFeatureFlags().integ_zoom_allow_file_switching) && !eD && !ce(),
     isDisabled: !a
   }), [a]);
   let o = c4();
-  let l = d4(e => e.theme.themePreference);
+  let l = useSelector(e => e.theme.themePreference);
   let d = ee();
   let c = et();
   let u = er();
@@ -87,8 +87,8 @@ export function $$Z2() {
     let a = q5();
     let s = FC();
     let o = E3();
-    let l = d4(e => e.mirror.appModel.topLevelMode);
-    let d = d4(e => e.mirror.appModel.multiplayerSessionState);
+    let l = useSelector(e => e.mirror.appModel.topLevelMode);
+    let d = useSelector(e => e.mirror.appModel.multiplayerSessionState);
     let c = cD() || null;
     let u = useMemo(() => gW(a, s, o, e, l, d, t, c, r, null), [a, s, o, e, l, d, t, c, r]);
     let p = $n();
@@ -104,7 +104,7 @@ export function $$Z2() {
     shouldShowBackToFiles: !1
   }), []);
   let s = c4();
-  let o = d4(e => e.theme.themePreference);
+  let o = useSelector(e => e.theme.themePreference);
   let l = ee();
   let d = et();
   let c = er();
@@ -131,7 +131,7 @@ function Q({
     from: e
   }) {
     let t = lg();
-    let r = wA();
+    let r = useDispatch();
     let h = q5();
     let g = h?.currentPlanUser?.draftsFolderId ?? void 0;
     let f = h?.team;
@@ -295,8 +295,8 @@ function Q({
   }({
     from: e
   });
-  let g = d4(e => e.saveAsState);
-  let f = d4(e => e.mirror.appModel.topLevelMode);
+  let g = useSelector(e => e.saveAsState);
+  let f = useSelector(e => e.mirror.appModel.topLevelMode);
   let S = n6();
   let A = q5();
   let w = function () {

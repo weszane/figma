@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useMemo, useRef } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { N as _$$N } from "../905/120979";
 import { $ } from "../905/953280";
 import { y as _$$y } from "../905/582657";
@@ -62,7 +62,7 @@ let P = () => {
 };
 var D = (e => (e[e.NO_SELECTIONS_ARE_INSTANCES = 0] = "NO_SELECTIONS_ARE_INSTANCES", e[e.SOME_SELECTIONS_ARE_INSTANCES = 1] = "SOME_SELECTIONS_ARE_INSTANCES", e[e.ALL_SELECTIONS_ARE_TOPLEVEL_INSTANCES = 2] = "ALL_SELECTIONS_ARE_TOPLEVEL_INSTANCES", e))(D || {});
 export function $$k0() {
-  let e = d4(dT);
+  let e = useSelector(dT);
   let {
     restoreType
   } = _$$$(e);
@@ -82,9 +82,9 @@ function M(e) {
 export function $$F1(e) {
   let t = useRef(null);
   let r = md(_$$c);
-  let s = d4(dT);
+  let s = useSelector(dT);
   let o = function (e) {
-    let t = d4(dT);
+    let t = useSelector(dT);
     let {
       needsUpdate
     } = vr(t);
@@ -121,7 +121,7 @@ export function $$F1(e) {
 export function $$j3(e) {
   let t = useRef(null);
   let r = md(_$$c);
-  let s = d4(dT);
+  let s = useSelector(dT);
   let o = _B(s);
   let l = Yc(RR.OVERRIDDEN_SYMBOL_ID, s);
   let d = _$$m(RR.OVERRIDDEN_SYMBOL_ID);

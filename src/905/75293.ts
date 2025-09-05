@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, createRef, memo, useContext, useRef, useCallback, useId, cloneElement } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { languageCodes } from "../905/816253";
 import { assertNotNullish } from "../figma_app/465776";
 import { M9 } from "../figma_app/492908";
@@ -83,7 +83,7 @@ export function $$el2({
   positionRef: p
 }) {
   let m = new Point(i, s);
-  let h = wA();
+  let h = useDispatch();
   let [f, A] = useState(!1);
   let [y, E] = useState(m);
   let S = qP(o, "close", () => {
@@ -274,7 +274,7 @@ let ec = memo(function ({
   onChange: i,
   recordingKey: r
 }) {
-  let s = wA();
+  let s = useDispatch();
   let o = new $$ed3({
     min: 0
   });
@@ -352,7 +352,7 @@ let ep = memo(function ({
   bigNudgeAmount: s,
   smallNudgeAmount: o
 }) {
-  let l = wA();
+  let l = useDispatch();
   let d = "GRID" !== t.pattern && "STRETCH" === t.type;
   let c = e => {
     i({
@@ -403,7 +403,7 @@ let em = memo(function ({
   bigNudgeAmount: s,
   smallNudgeAmount: o
 }) {
-  let l = wA();
+  let l = useDispatch();
   return jsx(_$$E, {
     name: "grid_settings_gutter_size_input",
     children: jsx(eb, {
@@ -442,7 +442,7 @@ let eh = memo(function ({
   onChange: i,
   recordingKey: r
 }) {
-  let o = wA();
+  let o = useDispatch();
   let l = Um();
   let d = Gq()?.getPrimaryLocale(!0);
   let c = {
@@ -530,7 +530,7 @@ let eg = memo(function ({
   bigNudgeAmount: s,
   smallNudgeAmount: o
 }) {
-  let l = wA();
+  let l = useDispatch();
   let d = "CENTER" === t.type;
   let c = e => {
     i({
@@ -601,7 +601,7 @@ function e_({
   onValueChange: t,
   recordingKey: i
 }) {
-  let r = wA();
+  let r = useDispatch();
   return jsx(_$$E, {
     name: "grid_settings_opacity_input",
     children: jsx(Pd, {
@@ -616,7 +616,7 @@ function e_({
 }
 let eA = new $$ea0();
 export function $$ey1(e) {
-  let t = wA();
+  let t = useDispatch();
   let {
     layoutGrid,
     onChange
@@ -698,7 +698,7 @@ function eb({
   recordingKey: c
 }) {
   let u = MH(s[t]) ?? void 0;
-  let p = wA();
+  let p = useDispatch();
   let g = useCallback(async e => {
     if (e) {
       let i = await p(Oe(e));

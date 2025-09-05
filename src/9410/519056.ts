@@ -1,6 +1,6 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useState, useCallback, useEffect } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { I as _$$I } from "../3276/969941";
 import o from "classnames";
 import { parsePxNumber } from "../figma_app/783094";
@@ -74,7 +74,7 @@ export function $$et0({
   let es = !!e.org || XX(e.team);
   let eo = e.isTryFile;
   let el = aV();
-  let ed = wA();
+  let ed = useDispatch();
   let ec = Cq({
     useSinatraType: !0
   })?.url;

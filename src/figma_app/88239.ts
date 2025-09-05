@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useCallback } from "react";
-import { d4, Pj, wA } from "../vendor/514228";
+import { useSelector, useStore, useDispatch } from "../vendor/514228";
 import { Ez5, w3z, dPJ } from "../figma_app/763686";
 import { fp } from "../figma_app/27355";
 import o from "../vendor/523035";
@@ -19,30 +19,30 @@ import { gk } from "../figma_app/715641";
 import { _o } from "../figma_app/879363";
 var l = o;
 export function $$S12() {
-  return d4(e => $$C4(e.selectedView));
+  return useSelector(e => $$C4(e.selectedView));
 }
 export function $$v8() {
-  return d4(e => {
+  return useSelector(e => {
     var t;
     return !!(t = e.selectedView) && t?.view === "fullscreen" && t?.showDevModeComponentBrowser === !0;
   });
 }
 export function $$A1() {
-  return d4(e => function (e) {
+  return useSelector(e => function (e) {
     if (e) return e?.view === "fullscreen" ? e?.componentKey : void 0;
   }(e.selectedView));
 }
 export function $$x14() {
-  return d4(e => e.selectedView?.view === "fullscreen" && e.selectedView?.showDevModeComponentBrowser === !0 && e.selectedView?.githubRepositorySelectorMode !== void 0 && e.selectedView?.githubRepositorySelectorMode !== e6.NONE);
+  return useSelector(e => e.selectedView?.view === "fullscreen" && e.selectedView?.showDevModeComponentBrowser === !0 && e.selectedView?.githubRepositorySelectorMode !== void 0 && e.selectedView?.githubRepositorySelectorMode !== e6.NONE);
 }
 export function $$N11() {
-  return d4(e => e.selectedView?.view === "fullscreen" && e.selectedView?.showDevModeComponentBrowser === !0 ? e.selectedView?.githubRepositorySelectorMode ?? e6.NONE : e6.NONE);
+  return useSelector(e => e.selectedView?.view === "fullscreen" && e.selectedView?.showDevModeComponentBrowser === !0 ? e.selectedView?.githubRepositorySelectorMode ?? e6.NONE : e6.NONE);
 }
 export function $$C4(e) {
   return !!e && e?.view === "fullscreen" && e?.showOverview === !0;
 }
 export function $$w9() {
-  return d4(e => $$O13(e.selectedView) ?? null);
+  return useSelector(e => $$O13(e.selectedView) ?? null);
 }
 export function $$O13(e) {
   if (e) return $A(e) ? e.devModeFocusId : void 0;
@@ -76,7 +76,7 @@ export function $$P5() {
   return e && t > 0;
 }
 export function $$D2() {
-  let e = d4(e => e.mirror.appModel.currentPage);
+  let e = useSelector(e => e.mirror.appModel.currentPage);
   return R(t => "fullscreen" === t.selectedView.view ? {
     ...t.selectedView,
     showOverview: !0,
@@ -84,11 +84,11 @@ export function $$D2() {
   } : t.selectedView);
 }
 export function $$k6() {
-  let e = Pj();
+  let e = useStore();
   let t = U();
   let r = !U4();
   let [, a] = fp(_o);
-  let o = wA();
+  let o = useDispatch();
   let [l, c] = fp(gk);
   let p = $$D2();
   return useCallback(() => {
@@ -102,9 +102,9 @@ export function $$k6() {
   }, [r, o, p, c, a, e, t]);
 }
 export function $$M10(e) {
-  let t = wA();
+  let t = useDispatch();
   let r = function (e) {
-    let t = d4(e => e.mirror.appModel.currentPage);
+    let t = useSelector(e => e.mirror.appModel.currentPage);
     return R(r => "fullscreen" === r.selectedView.view ? {
       ...r.selectedView,
       showDevModeComponentBrowser: !0,
@@ -117,8 +117,8 @@ export function $$M10(e) {
   }, [t, r]);
 }
 export function $$F0() {
-  let e = wA();
-  let t = d4(e => e.selectedView);
+  let e = useDispatch();
+  let t = useSelector(e => e.selectedView);
   return useCallback(r => {
     "fullscreen" === t.view && e(sf({
       ...t,

@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useRef, useEffect, useState, useLayoutEffect, useCallback, useMemo, useContext } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { K as _$$K } from "../905/443068";
 import { $n, WW } from "../905/521428";
 import { K as _$$K2 } from "../905/851274";
@@ -373,7 +373,7 @@ function ec({
   frameConfigs: t,
   updateFrameConfig: n
 }) {
-  let l = wA();
+  let l = useDispatch();
   let i = Um();
   let s = e ? t[e] : null;
   let o = e && s?.type === "MP4";
@@ -689,7 +689,7 @@ function eu({
 }
 let ep = Ju(function (e) {
   let t = hS(e);
-  let n = wA();
+  let n = useDispatch();
   let i = eY();
   let o = function () {
     let [{
@@ -798,7 +798,7 @@ let ep = Ju(function (e) {
   });
 });
 function em() {
-  let e = wA();
+  let e = useDispatch();
   let t = q5();
   let n = md(_$$o);
   let i = !!t && Pe(t);
@@ -820,13 +820,13 @@ function eF(e) {
   let {
     isRightPanelCollapsed
   } = useContext(_$$t2);
-  let n = wA();
+  let n = useDispatch();
   let f = sO();
   let v = cJ();
   let I = to() && HH();
   let N = HW();
   let y = dR();
-  let b = d4(e => e.multiplayer);
+  let b = useSelector(e => e.multiplayer);
   let C = useMemo(() => b.allUsers.find(e => e.sessionID === b.sessionID) || null, [b.allUsers, b.sessionID]);
   let S = B4();
   let T = N ? null : e.openFile;
@@ -918,8 +918,8 @@ export function $$eM0({
   recordingKey: e
 }) {
   let t = q5();
-  let n = d4(e => e.user);
-  let l = d4(e => e.dropdownShown);
+  let n = useSelector(e => e.user);
+  let l = useSelector(e => e.dropdownShown);
   return jsx(eF, {
     recordingKey: e,
     openFile: t,

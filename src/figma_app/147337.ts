@@ -1,5 +1,5 @@
 import { useMemo, useCallback } from "react";
-import { d4, bN, wA } from "../vendor/514228";
+import { useSelector, shallowEqual, useDispatch } from "../vendor/514228";
 import { resourceUtils } from "../905/989992";
 import { p as _$$p, Rs } from "../figma_app/288654";
 import { s as _$$s } from "../905/573154";
@@ -13,7 +13,7 @@ import { PG0, rSB } from "../figma_app/43951";
 export let $$m0 = "workspace";
 export function $$g3(e, t = {}) {
   let r = TA();
-  let o = d4(e => e.currentUserOrgId);
+  let o = useSelector(e => e.currentUserOrgId);
   let l = useMemo(() => e.map(e => ({
     fileKey: e,
     orgId: o
@@ -76,7 +76,7 @@ export function $$g3(e, t = {}) {
 function f(e, t) {
   let r = Array.from(e.keys());
   let n = Array.from(t.keys());
-  return r.length === n.length && r.every(r => bN(e.get(r), t.get(r)));
+  return r.length === n.length && r.every(r => shallowEqual(e.get(r), t.get(r)));
 }
 export function $$E5(e, t = {}) {
   let r = $$g3(useMemo(() => e ? [e] : [], [e]), t);
@@ -108,7 +108,7 @@ export function $$y6(e, t) {
   });
 }
 export function $$b2(e) {
-  let t = wA();
+  let t = useDispatch();
   return useCallback((r, n) => {
     if (n) {
       t(_$$s.error(_$$t("file_browser.pinning.add_pin_error_max_pins", {

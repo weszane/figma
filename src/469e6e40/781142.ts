@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import r from "../vendor/523035";
 import { Ay } from "../905/612521";
 import { B } from "../905/714743";
@@ -82,7 +82,7 @@ function S(e) {
   });
 }
 function N(e) {
-  let t = wA();
+  let t = useDispatch();
   let a = k();
   let r = useCallback(() => {
     switch (e.planType) {

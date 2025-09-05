@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useRef, useEffect, useCallback, useMemo } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { Et } from "../figma_app/397267";
 import { E as _$$E } from "../905/658074";
 import { W as _$$W } from "../figma_app/462192";
@@ -55,7 +55,7 @@ export function $$M0({
   onCanvasUI: r,
   ...u
 }) {
-  let M = wA();
+  let M = useDispatch();
   let {
     smallNudgeAmount,
     bigNudgeAmount

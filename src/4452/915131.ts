@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useEffect, useMemo, useCallback, useId } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { sortByPropertyWithOptions } from "../figma_app/656233";
 import { T as _$$T } from "../905/909590";
 import { bL, l9, mc, c$ } from "../905/493196";
@@ -44,12 +44,12 @@ import { A as _$$A } from "../svg/38542";
 let W = "team_creation_modal--sectionHeader--WhxZn text--fontPos11--2LvXf text--_fontBase--QdLsd";
 let z = "team_creation_modal--flexRow---ZX7J";
 function Q(e) {
-  let t = wA();
-  let a = d4(e => e.contacts);
-  let n = d4(e => e.orgDomains);
-  let i = d4(e => e.orgById);
-  let l = d4(e => e.dropdownShown);
-  let o = d4(e => e.autocomplete);
+  let t = useDispatch();
+  let a = useSelector(e => e.contacts);
+  let n = useSelector(e => e.orgDomains);
+  let i = useSelector(e => e.orgById);
+  let l = useSelector(e => e.dropdownShown);
+  let o = useSelector(e => e.autocomplete);
   let d = iZ();
   let c = t => {
     let a = e.currentOrgId ? i[e.currentOrgId] : null;
@@ -103,11 +103,11 @@ export function $$Y1(e, t) {
   return e === _9.ORG ? t === J4.EDIT ? FPermissionLevelType.ORG_EDIT : FPermissionLevelType.ORG_VIEW : e === _9.WORKSPACE ? t === J4.EDIT ? FPermissionLevelType.WORKSPACE_EDIT : FPermissionLevelType.WORKSPACE_VIEW : FPermissionLevelType.INVITE_ONLY;
 }
 export let $$K0 = Ju(function (e) {
-  let t = wA();
-  let a = d4(e => e.currentUserOrgId) ?? "";
-  let N = d4(e => e.orgById)[a];
+  let t = useDispatch();
+  let a = useSelector(e => e.currentUserOrgId) ?? "";
+  let N = useSelector(e => e.orgById)[a];
   let R = iZ();
-  let k = d4(e => e.orgDomains);
+  let k = useSelector(e => e.orgDomains);
   let [P, D] = useState(!0);
   useEffect(() => {
     sx("team_creation_started", {
@@ -165,7 +165,7 @@ export let $$K0 = Ju(function (e) {
     e_(e => e ?? Z);
     ex(eg(em));
   }, [Z, em, eg]);
-  let ef = d4(e => e.autocomplete);
+  let ef = useSelector(e => e.autocomplete);
   let ev = !!ef.errorMessage;
   let [eb, ey] = useState(J4.VIEW);
   let [ej, eI] = useState(Fb.ORG_BROWSABLE);

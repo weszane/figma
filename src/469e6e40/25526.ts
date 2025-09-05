@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useEffect, PureComponent, Fragment as _$$Fragment, useCallback, useMemo, Suspense } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { K as _$$K } from "../905/807535";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { getFeatureFlags } from "../905/601108";
@@ -597,7 +597,7 @@ function tv() {
     overlay: Q16,
     priority: _$$N2.DEFAULT_MODAL
   }, [e]);
-  let a = wA();
+  let a = useDispatch();
   let n = zl(tx);
   _$$h(() => {
     "reset" === n.currentState ? t.show() : t.show({
@@ -1805,7 +1805,7 @@ function aa() {
   });
 }
 let aw = Ju(function (e) {
-  let t = wA();
+  let t = useDispatch();
   let a = MX();
   let n = hS(e);
   let l = X$("LicenseGroupDeleteModal").unwrapOr(null);
@@ -2004,7 +2004,7 @@ function aC({
   });
 }
 let aS = Ju(function (e) {
-  let t = wA();
+  let t = useDispatch();
   let [a, n] = useState(null);
   let l = dq();
   let o = sZ();
@@ -2102,7 +2102,7 @@ let aS = Ju(function (e) {
 function aN({
   selectedLicenseGroups: e
 }) {
-  let t = wA();
+  let t = useDispatch();
   return 0 === e.length ? null : jsxs(Fragment, {
     children: [1 === e.length && !!e[0].id && jsxs(Fragment, {
       children: [jsx(IU, {
@@ -2142,7 +2142,7 @@ let aA = "license_groups_table--overflowWrapper--FJgye";
 function aR({
   item: e
 }) {
-  let t = wA();
+  let t = useDispatch();
   return e.id ? jsxs(zx, {
     dataOnboardingKey: Pz,
     children: [jsx(_$$p3, {
@@ -2210,7 +2210,7 @@ let aD = parsePxInt(YEj);
 let aM = e => e.id ?? aP;
 let aP = "unassigned";
 function aU(e) {
-  let t = wA();
+  let t = useDispatch();
   let a = T();
   let [n, l] = useState("");
   let [o, d] = useState(!1);
@@ -2401,7 +2401,7 @@ function a$(e) {
   let {
     "data-onboarding-key": t
   } = e;
-  let a = wA();
+  let a = useDispatch();
   return jsx(fu, {
     name: "New billing group",
     children: jsx(_$$V2, {
@@ -2538,7 +2538,7 @@ function a5(e) {
   });
 }
 function a3(e) {
-  let t = wA();
+  let t = useDispatch();
   let a = RR();
   let n = Xf(e.org.id);
   let l = bQ({
@@ -2853,7 +2853,7 @@ let nx = e => {
 let nb = Ju(function ({
   onConfirm: e
 }) {
-  let t = wA();
+  let t = useDispatch();
   return jsx(fu, {
     name: "Create License Group Confirmation modal",
     children: jsxs(yX, {
@@ -2891,7 +2891,7 @@ let nf = "workspace_edit_modal--inputLabel--azeeV";
 let nj = "workspace_edit_modal--adminField--JKgPu";
 let nw = "First Workspace Created";
 let nk = Ju(function (e) {
-  let t = wA();
+  let t = useDispatch();
   let [a, n] = useState(null);
   let l = X$("WorkspaceEditModal").unwrapOr(null);
   let o = H3(l);
@@ -3123,8 +3123,8 @@ function nS() {
   });
 }
 let nL = Ju(function (e) {
-  let t = wA();
-  let a = d4(e => e.currentUserOrgId);
+  let t = useDispatch();
+  let a = useSelector(e => e.currentUserOrgId);
   let n = _$$q(OK, !0);
   let l = e.workspaces.map(e => e.id);
   let o = e.workspaces.map(e => e.name);
@@ -3214,7 +3214,7 @@ function nD({
   workspacesData: e,
   selectedWorkspaces: t
 }) {
-  let a = wA();
+  let a = useDispatch();
   if (0 === t.length) return null;
   let n = t[0];
   return n ? jsxs(Fragment, {
@@ -3257,7 +3257,7 @@ function nM({
   workspaceId: e,
   workspacesData: t
 }) {
-  let a = wA();
+  let a = useDispatch();
   let n = t.find(t => t.id === e);
   let l = useCallback(() => {
     a(_$$to({
@@ -3390,7 +3390,7 @@ function nq({
   });
 }
 function n$() {
-  let e = wA();
+  let e = useDispatch();
   let t = useCallback(() => {
     e(_$$to({
       type: nk,
@@ -3487,7 +3487,7 @@ let nG = new Ef([], {
   }]
 });
 function nz(e) {
-  let t = wA();
+  let t = useDispatch();
   let [a, n] = useState("");
   let l = Rs(gLw, {
     orgId: e.org.id
@@ -3824,7 +3824,7 @@ function nX() {
   });
 }
 function n4(e) {
-  let t = wA();
+  let t = useDispatch();
   let a = Z5();
   let n = e.activeTab === M7.ALL_MEMBERS ? jsx($n, {
     variant: "primary",
@@ -4025,7 +4025,7 @@ function su({
     name: e => e.name ?? "",
     approved: e => e.approvedAt.getTime()
   }), []);
-  let u = wA();
+  let u = useDispatch();
   let m = function (e, t) {
     let a = new Map();
     for (let n of e) {
@@ -4377,7 +4377,7 @@ let sy = Ju(function ({
     iconUrl
   } = e;
   let [c, _] = useState(void 0);
-  let u = wA();
+  let u = useDispatch();
   let m = t ? _$$t("extension_decline_modal.decline_widget_request") : _$$t("extension_decline_modal.decline_plugin_request");
   let p = e => {
     let t = {
@@ -4650,7 +4650,7 @@ function sI() {
   });
 }
 function sT(e) {
-  let t = wA();
+  let t = useDispatch();
   let {
     entry,
     orgId,
@@ -4792,7 +4792,7 @@ function sR({
   selectedExtensionId: a,
   onRightActionsChange: n
 }) {
-  let l = wA();
+  let l = useDispatch();
   let o = No().unwrapOr(null);
   let c = o?.tier === FPlanNameType.ENTERPRISE;
   let _ = o?.key.type === FOrganizationLevelType.ORG;
@@ -4892,10 +4892,10 @@ let sD = M4.Query({
   fetch: async e => await n8.getExtensionAnalyticsForOrg(e)
 });
 function sP(e) {
-  let t = wA();
+  let t = useDispatch();
   let a = Um();
   let n = FC();
-  let l = d4(({
+  let l = useSelector(({
     sharedFonts: e
   }) => e);
   let o = g7();
@@ -4962,7 +4962,7 @@ function sP(e) {
   });
 }
 export function $$s$0(e) {
-  let t = wA();
+  let t = useDispatch();
   let a = FC();
   let n = px();
   let l = j_(n);
@@ -4988,31 +4988,31 @@ export function $$s$0(e) {
 }
 function sB(e) {
   var t;
-  let a = wA();
+  let a = useDispatch();
   let n = sZ();
-  let v = d4(({
+  let v = useSelector(({
     orgDomains: e
   }) => e);
-  let f = d4(({
+  let f = useSelector(({
     orgSamlConfig: e
   }) => e);
   let j = MX();
-  let y = d4(({
+  let y = useSelector(({
     loadingState: e
   }) => e);
   let w = Um();
   let k = FC();
-  let E = d4(({
+  let E = useSelector(({
     sharedFonts: e
   }) => e);
-  let C = d4(({
+  let C = useSelector(({
     activityLogs: e
   }) => e);
   let S = iZ();
-  let N = d4(({
+  let N = useSelector(({
     teamRoleRequests: e
   }) => e);
-  let I = d4(({
+  let I = useSelector(({
     selectedView: e
   }) => e);
   let T = px().unwrapOr(null);

@@ -1,5 +1,5 @@
 import n, { useMemo, useEffect } from "react";
-import { wA, Pj } from "../vendor/514228";
+import { useDispatch, useStore } from "../vendor/514228";
 import { Im } from "../figma_app/493477";
 import { ServiceCategories as _$$e } from "../905/165054";
 import o, { gr } from "../figma_app/243058";
@@ -1414,7 +1414,7 @@ let $$tO50 = M4.Query({
 });
 export function $$tR19(e, t = {}) {
   let r = IT($$tw23(e), t);
-  let n = wA();
+  let n = useDispatch();
   let [a] = r;
   let s = Xr(qU);
   DC(a, e => {
@@ -1506,7 +1506,7 @@ export function $$tk34(e, t, r) {
   tD(e, t?.map(tF), r?.map(tF));
 }
 let $$tM9 = function (e) {
-  let t = Pj();
+  let t = useStore();
   let r = Rs(u2o, {
     fileKey: e
   }, {
@@ -1524,7 +1524,7 @@ let tF = e => ({
   ...e
 });
 let $$tj42 = function () {
-  let e = Pj();
+  let e = useStore();
   let t = n1();
   let r = LH();
   let {

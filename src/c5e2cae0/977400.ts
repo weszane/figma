@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { eD } from "../figma_app/876459";
 import { h as _$$h } from "../905/207101";
 import { Jn } from "../905/17223";
@@ -73,10 +73,10 @@ let L = nF((e, {
   });
 });
 function V(e) {
-  let t = wA();
+  let t = useDispatch();
   let a = TA();
-  let l = d4(_$$P);
-  let n = d4(e => e.roles.byTeamId);
+  let l = useSelector(_$$P);
+  let n = useSelector(e => e.roles.byTeamId);
   let [d, m] = useState(!1);
   let [_, u] = useState(!1);
   let [h, g] = useState("");
@@ -144,11 +144,11 @@ function V(e) {
 }
 export function $$z0(e) {
   let [t, a] = useState("selectTeam");
-  let N = wA();
+  let N = useDispatch();
   let b = _6();
   let C = FC();
-  let w = d4(e => e.payment.promo);
-  let E = d4(e => e.payment.billingPeriod);
+  let w = useSelector(e => e.payment.promo);
+  let E = useSelector(e => e.payment.billingPeriod);
   let A = () => {
     N(Lo());
   };
@@ -214,4 +214,4 @@ export function $$z0(e) {
     });
   })() : jsx(Fragment, {});
 }
-export const UniversalUpgradeSequence = $$z0; 
+export const UniversalUpgradeSequence = $$z0;

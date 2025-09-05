@@ -1,5 +1,5 @@
 import { useMemo, useRef, useCallback, useEffect, useState } from "react";
-import { wA, d4, Pj } from "../vendor/514228";
+import { useDispatch, useSelector, useStore } from "../vendor/514228";
 import { glU } from "../figma_app/763686";
 import { AD } from "../905/871411";
 import { dA } from "../figma_app/387100";
@@ -66,7 +66,7 @@ export function $$R1(e, t) {
   let r = useMemo(() => p()(e, e => e.clientMeta?.nodeId), [e]);
   let s = useMemo(() => Object.keys(r), [r]);
   let o = useRef({});
-  let l = wA();
+  let l = useDispatch();
   let d = _$$g();
   let c = useCallback(e => {
     let {
@@ -198,8 +198,8 @@ export function $$L0() {
 }
 export function $$P4(e, t, r, a, s, o) {
   let l = w(t, a);
-  let d = d4(e => e.comments.savingCommentUuids);
-  let c = d4(e => e.comments.lgPendingUuidToServerIdMap);
+  let d = useSelector(e => e.comments.savingCommentUuids);
+  let c = useSelector(e => e.comments.lgPendingUuidToServerIdMap);
   useEffect(() => {
     if ("errors" === t.status) {
       let e = JSON.stringify(t.errors.map(e => ({
@@ -233,7 +233,7 @@ export function $$P4(e, t, r, a, s, o) {
   return p;
 }
 export function $$D3() {
-  return !!d4(e => e.comments).activeThread;
+  return !!useSelector(e => e.comments).activeThread;
 }
 export function $$k6(e, t, r) {
   useEffect(() => {
@@ -272,7 +272,7 @@ export function $$M2(e) {
   }
 }
 export function $$F5() {
-  let e = Pj();
+  let e = useStore();
   return useCallback(t => {
     let r = e.getState().mirror.sceneGraph;
     return dA(r, t);

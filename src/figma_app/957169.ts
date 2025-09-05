@@ -1,5 +1,5 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import a from "classnames";
 import { buildUploadUrl } from "../figma_app/169182";
 import { n as _$$n } from "../figma_app/3731";
@@ -22,7 +22,7 @@ export function $$I1({
   useCurrentFileAsThumbnail: t = !1
 }) {
   let r = dq();
-  let a = d4(e => e.user);
+  let a = useSelector(e => e.user);
   let o = tS();
   let d = ud();
   let c = {

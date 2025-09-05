@@ -1,6 +1,6 @@
 import { jsx, Fragment } from "react/jsx-runtime";
 import { Component, createElement } from "react";
-import { Ng } from "../vendor/514228";
+import { connect } from "../vendor/514228";
 import { Ay } from "../figma_app/778880";
 import { tx } from "../905/303541";
 import { _M, W_ } from "../figma_app/162807";
@@ -90,7 +90,7 @@ let g = "widgets--list--mS7Fg search_results_view--list--ptCB2";
     }
   };
   e.SearchResult = _$$h({
-    [XU.GRID]: Ng((e, t) => ({
+    [XU.GRID]: connect((e, t) => ({
       publishedWidget: e.publishedWidgets[t.searchResult.model.id] || null
     }))(i),
     [XU.LIST]: () => jsx(Fragment, {})

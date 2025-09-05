@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useRef, useEffect } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { NLJ } from "../figma_app/763686";
 import o from "classnames";
 import { R } from "../905/103090";
@@ -29,7 +29,7 @@ export function $$f1({
   currentTool: g,
   dropdownShown: f
 }) {
-  let E = wA();
+  let E = useDispatch();
   return jsx("div", {
     className: l()(n1, {
       [z]: "light" === r,

@@ -1,5 +1,5 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { K } from "../905/443068";
 import { A as _$$A } from "../905/251970";
 import { J } from "../905/614223";
@@ -237,7 +237,7 @@ function A({
   requests: e,
   editRequestPermissionsData: t
 }) {
-  let n = wA();
+  let n = useDispatch();
   let i = tS();
   let s = t.file?.key ?? i;
   let r = e[0];
@@ -279,7 +279,7 @@ function L(e) {
     userHandle,
     editRequestPermissionsData
   } = e;
-  let l = wA();
+  let l = useDispatch();
   let d = tS();
   let {
     handleApprove,

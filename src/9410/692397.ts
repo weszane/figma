@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, useEffect, useContext } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { E as _$$E } from "../905/632989";
 import o from "classnames";
 import { b as _$$b } from "../figma_app/556971";
@@ -89,7 +89,7 @@ export function $$k4() {
   let t = e?.repo;
   let i = !!(t && Ns(e, t));
   let n = !!(e && Kz(e));
-  let s = wA();
+  let s = useDispatch();
   return n && t ? jsx("div", {
     className: l()(T, w),
     children: jsx(C, {
@@ -117,7 +117,7 @@ export function $$N1({
   });
 }
 function A() {
-  let e = wA();
+  let e = useDispatch();
   let t = useContext(X);
   return null === t || t < 1 ? null : jsx(_$$E, {
     className: "left_panel_header_components--button--zghbk",

@@ -1,5 +1,5 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { getFeatureFlags } from "../905/601108";
 import { md } from "../figma_app/27355";
 import { az } from "../905/449184";
@@ -119,7 +119,7 @@ export function $$F0({
     overlay: hib,
     priority: _$$N.URGENT_ALERT
   }, [i, I]);
-  let w = wA();
+  let w = useDispatch();
   let C = _$$f("tos_accepted");
   let T = !!getInitialOptions().tos_agreement_required && !C;
   let k = getFeatureFlags().tos_blocking_fallback_modal;

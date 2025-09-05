@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useMemo } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { A } from "../905/891805";
 import { Ez5, iCO, ibQ } from "../figma_app/763686";
 import { md } from "../figma_app/27355";
@@ -61,7 +61,7 @@ function v() {
 }
 export function $$A0() {
   return !function () {
-    let e = d4(e => _7(e));
+    let e = useSelector(e => _7(e));
     let {
       stateGroupSelectionMode,
       containingProductComponent

@@ -6,7 +6,7 @@ import { Hz, RF, p2, H9, aI } from "../905/714062";
 import { gl, jN, yA, FR, C8, M2, q1, gh, oM, nX } from "../905/171315";
 import { WY, uH, uR } from "../figma_app/162807";
 import { P } from "../905/16832";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { sx } from "../905/449184";
 import { A as _$$A } from "../905/484713";
 import { hO } from "../figma_app/545293";
@@ -152,9 +152,9 @@ export function $$k0({
     let g = md(H9);
     let f = g?.valueToQuery ?? "";
     let _ = function () {
-      let e = d4(e => e.search.sessionId);
-      let t = d4(e => e.search.queryId);
-      let i = d4(e => e.search.parameters.query);
+      let e = useSelector(e => e.search.sessionId);
+      let t = useSelector(e => e.search.queryId);
+      let i = useSelector(e => e.search.parameters.query);
       return n => {
         let r = {
           sessionId: e,

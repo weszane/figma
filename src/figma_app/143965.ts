@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useMemo, useRef, useCallback, useEffect } from "react";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { K } from "../905/443068";
 import { A as _$$A } from "../905/24328";
 import { V } from "../1577/311426";
@@ -117,13 +117,13 @@ class C {
   }
 }
 let L = "animation_panel--animationSection--ecznm";
-let P = () => (d4(e => e.mirror.selectionProperties.prototypeInteractions) || []).filter(e => {
+let P = () => (useSelector(e => e.mirror.selectionProperties.prototypeInteractions) || []).filter(e => {
   if (!e.actions || e.actions.length < 1 || !e.actions[0]) return !1;
   let t = e.actions[0].connectionType;
   return t && "NONE" != t;
 });
 let D = () => {
-  let e = d4(e => e.mirror.sceneGraph);
+  let e = useSelector(e => e.mirror.sceneGraph);
   return useMemo(() => new cP(e), [e]);
 };
 let k = () => {
@@ -131,10 +131,10 @@ let k = () => {
   return useMemo(() => new C(e), [e]);
 };
 let M = e => {
-  let t = d4(e => e.mirror.sceneGraphSelection);
+  let t = useSelector(e => e.mirror.sceneGraphSelection);
   let r = useRef(null);
   let n = D();
-  let s = wA();
+  let s = useDispatch();
   let o = useCallback(e => {
     e && (glU.panToNode(e, !1), wr(), Dh([e]));
   }, []);
@@ -173,7 +173,7 @@ function F(e) {
     onClick
   } = e;
   let c = m0();
-  let u = wA();
+  let u = useDispatch();
   let p = useCallback(e => {
     e.stopPropagation();
     action && onClick && onClick(action);
@@ -280,10 +280,10 @@ export function $$U0({
   isSubsection: e
 }) {
   let t = P();
-  let r = d4(e => e.mirror.selectionProperties.numSelected) || 0;
-  let s = d4(e => e.mirror.appModel.hoveredInteractions) || [];
-  let o = d4(e => e.mirror.selectionProperties.scrollDirection);
-  let l = d4(e => e.mirror.selectionProperties.scrollBehavior);
+  let r = useSelector(e => e.mirror.selectionProperties.numSelected) || 0;
+  let s = useSelector(e => e.mirror.appModel.hoveredInteractions) || [];
+  let o = useSelector(e => e.mirror.selectionProperties.scrollDirection);
+  let l = useSelector(e => e.mirror.selectionProperties.scrollBehavior);
   let d = k();
   let u = t.map(e => d.format(e));
   let p = T4.useCopyAllInteractions(u);

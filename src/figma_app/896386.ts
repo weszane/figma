@@ -1,5 +1,5 @@
 import { jsx } from "react/jsx-runtime";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { r as _$$r } from "../905/571562";
 import s from "classnames";
 import { dT } from "../figma_app/889655";
@@ -10,7 +10,7 @@ export function $$u0({
   panelTitleRef: e,
   isInSelectionActionsPanel: t
 }) {
-  let r = d4(dT);
+  let r = useSelector(dT);
   let s = Q(r);
   return jsx("div", {
     ref: e,

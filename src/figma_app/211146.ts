@@ -1,4 +1,4 @@
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { getPermissionsStateMemoized } from "../figma_app/642025";
 import { uU, ng } from "../figma_app/205827";
 import { q } from "../905/236878";
@@ -7,20 +7,20 @@ export function $$o0(e) {
     teamId: e,
     flag: uU
   });
-  let r = d4(t => t.teams[e]);
-  let o = d4(e => getPermissionsStateMemoized(e));
+  let r = useSelector(t => t.teams[e]);
+  let o = useSelector(e => getPermissionsStateMemoized(e));
   return ng.getProTrial(r, t, o);
 }
 export function $$l1() {
-  let e = d4(e => e.userTeamFlags);
-  let t = d4(e => getPermissionsStateMemoized(e));
+  let e = useSelector(e => e.userTeamFlags);
+  let t = useSelector(e => getPermissionsStateMemoized(e));
   return ng.getUpgradableProTrials(e, t);
 }
 export function $$d2() {
-  let e = d4(e => e.user);
-  let t = d4(e => e.isFreeUser);
-  let r = d4(e => getPermissionsStateMemoized(e));
-  let s = d4(e => e.userTeamFlags);
+  let e = useSelector(e => e.user);
+  let t = useSelector(e => e.isFreeUser);
+  let r = useSelector(e => getPermissionsStateMemoized(e));
+  let s = useSelector(e => e.userTeamFlags);
   return ng.getEligibleProTrialTeams(e, t, r, s);
 }
 export const TN = $$o0;

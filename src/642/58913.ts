@@ -1,5 +1,5 @@
 import { jsx } from "react/jsx-runtime";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { K } from "../905/443068";
 import { f as _$$f } from "../905/335032";
 import { sx } from "../905/449184";
@@ -17,7 +17,7 @@ export function $$f0({
   recordingKey: s,
   showDefault: f
 }) {
-  let x = wA();
+  let x = useDispatch();
   let [y, _] = sL();
   let b = R(e => e.dropdownShown);
   let C = !f && qg(y, "PASS_THROUGH");

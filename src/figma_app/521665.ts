@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useMemo, useRef } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { parsePxNumber } from "../figma_app/783094";
 import { kl } from "../905/275640";
 import { h as _$$h } from "../figma_app/648675";
@@ -8,7 +8,7 @@ let d = parsePxNumber("24px");
 let c = parsePxNumber("8px");
 let u = parsePxNumber("5px");
 let p = parsePxNumber("6px");
-let _ = (e) => (.01 > Math.abs(e) ? 0 : +e.toPrecision(4)).toString();
+let _ = e => (.01 > Math.abs(e) ? 0 : +e.toPrecision(4)).toString();
 let h = {
   inputHeight: d,
   borderRadius: u,
@@ -131,7 +131,7 @@ x.inverse = function (e) {
   return 1 === e ? 1 : -(Math.log(1 - e) / Math.log(2) * 1) / 10;
 };
 let N = {
-  path: (e) => f({
+  path: e => f({
     ...h,
     t: e
   }),
@@ -142,7 +142,7 @@ let N = {
   }
 };
 let C = {
-  path: (e) => f({
+  path: e => f({
     ...h,
     t: 1 - e
   }),
@@ -150,7 +150,7 @@ let C = {
   ease: A
 };
 let w = {
-  path: (e) => v({
+  path: e => v({
     ...h,
     t: e
   }),
@@ -172,7 +172,7 @@ let w = {
   }]
 };
 let O = {
-  path: (e) => v({
+  path: e => v({
     ...h,
     t: 1 - e
   }),
@@ -207,7 +207,7 @@ function R(e) {
     let e = [];
     let r = [];
     let n = 0;
-    animations.forEach((t) => {
+    animations.forEach(t => {
       let {
         ease,
         duration,
@@ -220,7 +220,7 @@ function R(e) {
         return t;
       }(0);
       ease.inverse && (l = l.map(ease.inverse));
-      l.forEach((t) => {
+      l.forEach(t => {
         for (; extraFrames?.length && extraFrames[0].time < t;) {
           let t = extraFrames.shift();
           e.push(t.time * duration + n);
@@ -251,7 +251,7 @@ function R(e) {
         attributeName: "d",
         values: keyFrames.join(";"),
         dur: `${currentTime}s`,
-        keyTimes: keyTimes.map((e) => f(e / currentTime)).join(";"),
+        keyTimes: keyTimes.map(e => f(e / currentTime)).join(";"),
         fill: "freeze"
       })
     })
@@ -280,7 +280,7 @@ export function $$D0({
 }) {
   let t = _$$h();
   let r = kl("aspectRatioLockToggled");
-  let i = d4((e) => e.mirror.sceneGraphSelection);
+  let i = useSelector(e => e.mirror.sceneGraphSelection);
   let s = k(i);
   let d = k(r);
   let c = !!(e && d !== r && s === i);

@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState, useContext, useRef, useEffect, forwardRef, useMemo } from "react";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { xN } from "../figma_app/492908";
 import { d as _$$d } from "../905/976845";
 import { G as _$$G } from "../905/117393";
@@ -43,9 +43,9 @@ var p = u;
 let $$W8 = parsePxNumber(uj0);
 let $$K1 = parsePxNumber(jzw);
 function Y(e, t) {
-  return Object.keys(e).every((r) => e[r] === t[r]);
+  return Object.keys(e).every(r => e[r] === t[r]);
 }
-export var $$$9 = ((e) => (e.FULL = "full", e.WHITEBOARD = "whiteboard", e))($$$9 || {});
+export var $$$9 = (e => (e.FULL = "full", e.WHITEBOARD = "whiteboard", e))($$$9 || {});
 export function $$X0(e, t, r) {
   ("l" in t && (0 === t.l || 1 === t.l) || "v" in t && 0 === t.v) && (t = {
     ...t,
@@ -63,7 +63,7 @@ let q = (e, t) => ({
   hslva: t === NVY.HSL ? oB(e) : qN(e),
   rgba: e
 });
-let J = (e) => {
+let J = e => {
   let t = "";
   let r = "";
   switch (e) {
@@ -118,7 +118,7 @@ export function $$Q2({
   let W = hC();
   let K = dq();
   let $ = ol()?.id;
-  let Q = d4((e) => !!e.eyedropper) || t.preventAutoFocus;
+  let Q = useSelector(e => !!e.eyedropper) || t.preventAutoFocus;
   let et = {
     ...t,
     preventAutoFocus: Q
@@ -180,7 +180,7 @@ export function $$Q2({
       ...t.analytics.properties
     });
   };
-  let ed = (e) => {
+  let ed = e => {
     V && $z();
     e.stopPropagation();
     let {
@@ -253,7 +253,7 @@ export function $$Q2({
       dispatch: t.dispatch,
       dropdownShown: t.dropdownShown,
       colorFormat: t.colorFormat,
-      onColorFormatChange: (e) => {
+      onColorFormatChange: e => {
         UK().colorFormat.set(e);
       },
       containerRef: t.containerRef,
@@ -377,7 +377,7 @@ let et = forwardRef((e, t) => {
   });
 });
 export function $$er4(e) {
-  let t = wA();
+  let t = useDispatch();
   let r = useRef(null);
   let s = "whiteboard" === e.displayType;
   useEffect(() => {
@@ -427,15 +427,15 @@ export class $$en3 extends o6 {
       min: 0,
       max: 1
     });
-    this.onRChange = (e) => this.props.onColorChange({
+    this.onRChange = e => this.props.onColorChange({
       ...this.props.color,
       r: e
     });
-    this.onGChange = (e) => this.props.onColorChange({
+    this.onGChange = e => this.props.onColorChange({
       ...this.props.color,
       g: e
     });
-    this.onBChange = (e) => this.props.onColorChange({
+    this.onBChange = e => this.props.onColorChange({
       ...this.props.color,
       b: e
     });
@@ -536,19 +536,19 @@ export class $$ea5 extends o6 {
       min: 0,
       max: 1
     });
-    this.onHChange = (e) => this.props.changeCallback({
+    this.onHChange = e => this.props.changeCallback({
       ...this.props.value,
       h: e
     }, !0);
-    this.onSChange = (e) => this.props.changeCallback({
+    this.onSChange = e => this.props.changeCallback({
       ...this.props.value,
       s: e
     }, !0);
-    this.onLChange = (e) => this.props.changeCallback({
+    this.onLChange = e => this.props.changeCallback({
       ...this.props.value,
       l: e
     }, !0);
-    this.onVChange = (e) => this.props.changeCallback({
+    this.onVChange = e => this.props.changeCallback({
       ...this.props.value,
       v: e
     }, !0);
@@ -616,7 +616,7 @@ export class $$ea5 extends o6 {
   }
 }
 export function $$es7(e) {
-  let t = wA();
+  let t = useDispatch();
   let r = useRef(null);
   let s = X7();
   useEffect(() => {

@@ -1,12 +1,12 @@
 import { jsx } from "react/jsx-runtime";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { t as _$$t } from "../905/303541";
 import { ub } from "../figma_app/598926";
 import { c } from "../4452/815584";
 export function $$l0({
   folder: e
 }) {
-  let t = wA();
+  let t = useDispatch();
   return jsx(c, {
     initialName: e.description ?? "",
     title: _$$t("resource_rename_modal.edit_description"),

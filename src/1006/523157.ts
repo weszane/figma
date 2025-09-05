@@ -1,7 +1,7 @@
 import { ex } from "../905/524523";
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { memo, useRef } from "react";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { WW } from "../905/521428";
 import { generateRecordingKey } from "../figma_app/878298";
 import p from "../vendor/223926";
@@ -197,14 +197,14 @@ function E(e) {
 }
 export function $$F0() {
   let e = R(e => e.mirror.selectionProperties.pluginRelaunchData);
-  let t = d4(e => e.mirror.selectionProperties.numSelected);
+  let t = useSelector(e => e.mirror.selectionProperties.numSelected);
   let n = R(e => e.publishedPlugins);
   let r = R(e => e.localPlugins);
   let a = Yo();
   let p = tS();
   let C = useRef(new _$$O(_$$A.duration(1, "day")));
   let T = V2();
-  let I = wA();
+  let I = useDispatch();
   let D = e => I(af({
     id: e,
     resourceType: n[e]?.is_widget ? bD.WIDGET : bD.PLUGIN

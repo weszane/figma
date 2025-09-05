@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { PureComponent } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { eD } from "../figma_app/876459";
 import { Jn } from "../905/17223";
 import { tM, rb, Us, vd } from "../figma_app/637027";
@@ -24,7 +24,7 @@ let $$S0 = "UPSELL_ADD_EDITOR_MODAL";
 let $$w1 = "UPSELL_INVITE_ONLY_MODAL";
 let $$C2 = "UPSELL_VIEW_ONLY_MODAL";
 function T(e) {
-  let t = wA();
+  let t = useDispatch();
   let i = e.modalShown.data.team;
   let r = () => {
     t(Ce());
@@ -178,7 +178,7 @@ let R = k;
 Ju(function (e) {
   let t;
   let i;
-  let r = wA();
+  let r = useDispatch();
   let c = () => {
     r(Lo());
   };

@@ -1,5 +1,5 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { $n } from "../905/521428";
 import { Pt } from "../figma_app/806412";
 import { B } from "../905/714743";
@@ -12,7 +12,7 @@ export function $$_0({
   onRetry: e,
   recordingKey: t
 }) {
-  let r = d4(e => VP(e.loadingState, _A(e.openFile?.key)));
+  let r = useSelector(e => VP(e.loadingState, _A(e.openFile?.key)));
   return jsx("div", {
     className: warningOfflineContainer,
     children: jsxs("div", {

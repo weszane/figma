@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useMemo, useRef } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { Ez5, Egt, glU, lyf } from "../figma_app/763686";
 import { l7 } from "../905/189185";
 import { AD } from "../905/871411";
@@ -46,7 +46,7 @@ export function $$w2({
     let [f, x] = useState(l);
     let C = e.indexOf(f);
     let w = J2(Ez5.singleSlideView().isCarouselFocused);
-    let j = d4(e => e.isRenaming);
+    let j = useSelector(e => e.isRenaming);
     useEffect(() => {
       1 === Object.keys(m).length && (u ? x(l) : x(Object.keys(m)[0]));
     }, [l, w, u, m]);
@@ -323,7 +323,7 @@ export function $$A3(e, t, i, d) {
       t && (t.isExpanded = !0);
     });
   }, []);
-  let _ = d4(e => e.mirror.appModel.topLevelMode === lyf.HISTORY);
+  let _ = useSelector(e => e.mirror.appModel.topLevelMode === lyf.HISTORY);
   let {
     collapsedCarouselItemIds,
     skippedCarouselItemIds

@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import a from "../vendor/77708";
 import { R } from "../905/103090";
 import { uQ } from "../figma_app/311375";
@@ -24,7 +24,7 @@ export function $$y4(e, t) {
   return f(e) || !!t && f(t.stackMode);
 }
 export function $$b14(e) {
-  return d4(t => {
+  return useSelector(t => {
     let r = t.mirror.selectionProperties;
     return $$E16(t.mirror.selectionProperties.stackMode, t.mirror.selectionProperties.inferredAutoLayoutResult) ? "NONE" !== r.stackMode ? r[function (e) {
       switch (e) {
@@ -137,7 +137,7 @@ export function $$T0(e) {
   }, t);
 }
 export function $$I8(e) {
-  return d4(t => {
+  return useSelector(t => {
     let r = t.mirror.selectionProperties;
     let {
       borderStrokeWeightsIndependent,
@@ -168,7 +168,7 @@ export function $$A17() {
   let t = $$b14("right");
   let r = $$I8("left");
   let n = $$I8("right");
-  let a = d4(e => {
+  let a = useSelector(e => {
     let {
       bordersTakeSpace,
       stackMode,
@@ -176,14 +176,14 @@ export function $$A17() {
     } = e.mirror.selectionProperties;
     return $$E16(stackMode, inferredAutoLayoutResult) && bordersTakeSpace;
   });
-  return d4(e => g(e.mirror.selectionProperties.width)) - (e + t + (a ? r + n : 0));
+  return useSelector(e => g(e.mirror.selectionProperties.width)) - (e + t + (a ? r + n : 0));
 }
 export function $$x12() {
   let e = $$b14("top");
   let t = $$b14("bottom");
   let r = $$I8("top");
   let n = $$I8("bottom");
-  let a = d4(e => {
+  let a = useSelector(e => {
     let {
       bordersTakeSpace,
       stackMode,
@@ -191,7 +191,7 @@ export function $$x12() {
     } = e.mirror.selectionProperties;
     return $$E16(stackMode, inferredAutoLayoutResult) && bordersTakeSpace;
   });
-  return d4(e => g(e.mirror.selectionProperties.height)) - (e + t + (a ? r + n : 0));
+  return useSelector(e => g(e.mirror.selectionProperties.height)) - (e + t + (a ? r + n : 0));
 }
 export let $$N9 = 12;
 function C(e) {
@@ -235,8 +235,8 @@ export function $$P1(e = 0) {
   return 0 === r ? "-" : `${r}`;
 }
 export function $$D13() {
-  let e = d4(sS);
-  let t = d4(e => e.mirror.selectionProperties.fillPaints) || null;
+  let e = useSelector(sS);
+  let t = useSelector(e => e.mirror.selectionProperties.fillPaints) || null;
   let r = useMemo(() => N9(t)?.filter(e => e.opacity > 0 && e.visible && e.image), [t]);
   if (r?.length !== 1 || !r[0]?.image) return null;
   let a = qg(r[0].image);

@@ -1,5 +1,5 @@
 import { useState, useCallback, useEffect } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { eU } from "../figma_app/27355";
 import { O5 } from "../figma_app/632319";
 import { mt } from "../figma_app/102712";
@@ -48,7 +48,7 @@ export function $$m6(e, t = !1) {
   };
 }
 export function $$g4(e, t) {
-  let r = wA();
+  let r = useDispatch();
   return {
     navigateForward: useCallback(n => {
       t && _(e, t, r);

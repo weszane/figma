@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { getFeatureFlags } from "../905/601108";
 import s from "../vendor/223926";
 import l from "../vendor/239910";
@@ -42,12 +42,12 @@ export function $$D1() {
     let i = qr();
     let s = qK();
     let l = function () {
-      let e = d4(e => e.recentlyUsed.whiteboardTools);
+      let e = useSelector(e => e.recentlyUsed.whiteboardTools);
       let t = _$$o();
       return useMemo(() => t ? e.figjam.map(e => e.id) : [], [t, e]);
     }();
-    let c = d4(_$$s);
-    let u = d4(e => e.recentlyUsed);
+    let c = useSelector(_$$s);
+    let u = useSelector(e => e.recentlyUsed);
     return useMemo(() => function (e, t, n, o, a, i, s, l) {
       let c = t.templates.figjam.reduce((e, t) => (e[X2(t)] = t, e), {});
       let u = {
@@ -115,7 +115,7 @@ export function $$D1() {
   }();
   let t = function () {
     let e = q8();
-    let t = d4(e => e.currentUserOrgId);
+    let t = useSelector(e => e.currentUserOrgId);
     let [n] = IT(E(t));
     return useMemo(() => "loaded" !== n.status ? [] : function (e) {
       let t = [];

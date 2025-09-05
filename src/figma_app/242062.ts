@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useRef, useMemo, useCallback, useEffect, useReducer, useLayoutEffect, Fragment as _$$Fragment, memo, useContext } from "react";
-import { wA, d4, Pj } from "../vendor/514228";
+import { useDispatch, useSelector, useStore } from "../vendor/514228";
 import { G as _$$G } from "../905/289770";
 import { h3O, z7E, JA, Ez5, NLJ, m1T, glU } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
@@ -748,7 +748,7 @@ function eG(e) {
   let o = "whiteboard" === lg();
   let d = useRef(null);
   let c = useRef(null);
-  let u = wA();
+  let u = useDispatch();
   let p = am();
   let [{
     currentUserInput: h,
@@ -913,7 +913,7 @@ function eG(e) {
 function ez() {
   let e = _$$G();
   let t = _$$K();
-  let r = d4(({
+  let r = useSelector(({
     multiplayer: {
       allUsers: e
     }
@@ -947,7 +947,7 @@ function eQ({
   cursorEntities: t
 }) {
   let r = KP();
-  let n = d4(({
+  let n = useSelector(({
     multiplayer: {
       allUsers: e
     }
@@ -1246,7 +1246,7 @@ function tc({
   let n = useRef(0);
   let [o, d] = useState(to);
   let [c, u] = useState(!1);
-  let p = wA();
+  let p = useDispatch();
   let _ = useCallback(() => {
     p(mu());
   }, [p]);
@@ -1572,7 +1572,7 @@ function t_() {
   let n = useMemo(() => r.getCommentsWrapperOffset(t), [r, t]);
   let o = KP();
   let d = XM();
-  let c = d4(e => e.multiplayerEmoji);
+  let c = useSelector(e => e.multiplayerEmoji);
   let u = !ut(Ez5?.uiState().hideMultiplayerCursors, !1);
   let p = p8("currentTool");
   let _ = ed();
@@ -1583,12 +1583,12 @@ function t_() {
       let [r, n] = fp(q);
       let i = ed();
       let o = function () {
-        let e = d4(e => {
+        let e = useSelector(e => {
           let t = e.mirror.appModel.currentTool;
           return t === NLJ.SELECT || t === NLJ.HAND;
         });
-        let t = d4(e => e.multiplayerEmoji?.type === "WHEEL" || e.multiplayerEmoji?.type === "REACTING_OR_CHATTING");
-        let r = d4(e => e.mirror.appModel.activeCanvasEditModeType);
+        let t = useSelector(e => e.multiplayerEmoji?.type === "WHEEL" || e.multiplayerEmoji?.type === "REACTING_OR_CHATTING");
+        let r = useSelector(e => e.mirror.appModel.activeCanvasEditModeType);
         return e && !t && r !== m1T.TEXT;
       }();
       let d = J2(UK().cursorHighFiveWiggle);
@@ -1623,7 +1623,7 @@ function t_() {
         }, 250);
       }, [e]);
       useEffect(() => () => clearTimeout(u.current), []);
-      let _ = Pj();
+      let _ = useStore();
       let h = useCallback(t => {
         let r = t.metaKey || t.ctrlKey || t.altKey || t.shiftKey;
         if ("h" !== t.key || r) " " !== t.key && "/" !== t.key && !r && e.getWiggleMode() && (e.setHighFiveKeyPressed(!1), c.current = null, e.stopWigglingNow());else {
@@ -1862,7 +1862,7 @@ function tm({
   cursorHandsOnRight: n,
   isHighFivingSupported: a
 }) {
-  let o = d4(({
+  let o = useSelector(({
     multiplayer: {
       allUsers: t
     }
@@ -1872,7 +1872,7 @@ function tm({
   let u = lg();
   let p = J2(_$$d().showOutlines);
   let _ = _$$S();
-  let m = d4(({
+  let m = useSelector(({
     multiplayer: {
       observingSessionID: e
     }

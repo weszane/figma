@@ -1,6 +1,6 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useRef, useId, useState, useCallback, useMemo } from "react";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { $n } from "../905/521428";
 import { Z_n, rXF, J0O, CWU } from "../figma_app/763686";
 import { WI } from "../905/929949";
@@ -40,7 +40,7 @@ function D({
   _$$h(() => {
     s.current?.select();
   });
-  let l = (e) => {
+  let l = e => {
     e.type === Z_n.ALIAS && e.resolvedType === rXF.STRING && (e.resolvedType = rXF.TEXT_DATA);
     t({
       propName: i.propName,
@@ -61,7 +61,7 @@ function D({
         delay: 50,
         id: "create-component-prop-name-input",
         name: "propName",
-        onChange: (e) => {
+        onChange: e => {
           t({
             propName: e.target.value,
             varValue: i.varValue
@@ -103,7 +103,7 @@ function D({
   });
 }
 let F = 2 * parsePxNumber(dGl);
-var M = ((e) => (e.COMPONENT_PROP = "Property", e.VARIABLE = "Variable", e))(M || {});
+var M = (e => (e.COMPONENT_PROP = "Property", e.VARIABLE = "Variable", e))(M || {});
 export function $$j0({
   initialPosition: e,
   initialVariableValue: t,
@@ -140,7 +140,7 @@ export function $$j0({
         refField: i
       });
       return {
-        onCreateComponentPropSubmit: (t) => {
+        onCreateComponentPropSubmit: t => {
           r({
             propName: t.propName,
             defaultValue: t.varValue.value,
@@ -189,10 +189,10 @@ function U({
   let [N, P] = useState("Property");
   let M = useCallback(() => "Property" === N, [N]);
   let j = WB(i);
-  let U = _$$R((e) => vS(e, j, g));
+  let U = _$$R(e => vS(e, j, g));
   let V = function (e) {
-    let t = d4(Sh);
-    let i = d4((e) => {
+    let t = useSelector(Sh);
+    let i = useSelector(e => {
       let i = t.length ? t[0] : null;
       let n = i ? e.mirror.sceneGraph.get(i) : null;
       return n?.textContent ?? "";
@@ -212,7 +212,7 @@ function U({
     varSetID: null
   });
   let Y = useMemo(() => M() && G ? G.propName.length > 0 : !!W.varName && CWU.isValidVariableName(W.varName, W.varSetID ?? null), [G, M, W.varName, W.varSetID]);
-  let q = of(A, "submit", (e) => {
+  let q = of(A, "submit", e => {
     e?.preventDefault();
     M() && G ? (b(G), G.varValue.type === Z_n.ALIAS && oz("component_prop_def", {
       type: Z_n.ALIAS,
@@ -294,20 +294,20 @@ function B({
   onChange: t,
   ariaLabelledBy: i
 }) {
-  let r = wA();
+  let r = useDispatch();
   let s = Um();
   return jsxs(l6, {
     ariaLabelledBy: i,
     id: "variable-and-component-prop-create-modal-select",
     property: e,
     formatter: {
-      format: (e) => e
+      format: e => e
     },
     dispatch: r,
     chevronClassName: mL,
     inputClassName: NI,
     dropdownShown: s,
-    onChange: (e) => t(e),
+    onChange: e => t(e),
     children: [jsx(c$, {
       value: "Property"
     }), jsx(c$, {

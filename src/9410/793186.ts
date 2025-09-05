@@ -1,7 +1,7 @@
 import { Ju } from "../905/102752";
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState, useRef, useCallback, useLayoutEffect, useEffect, useMemo } from "react";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { nzw, qmM, glU, Ez5, sAE, _0v, w3z, m1T, Oin, NLJ, lyf } from "../figma_app/763686";
 import { xx } from "../figma_app/815945";
 import { xo } from "../figma_app/473493";
@@ -76,7 +76,7 @@ function X(e, t, i) {
     padding,
     margin,
     ...h
-  } = d4(e => e.mirror.appModel.onCanvasNameEditorInfo);
+  } = useSelector(e => e.mirror.appModel.onCanvasNameEditorInfo);
   let m = _X({
     subscribeToUpdates_expensive: !0
   });
@@ -490,8 +490,8 @@ function en(e) {
   }
 }
 function eh() {
-  let e = d4(e => e.mirror.selectionProperties.name);
-  let t = d4(e => e.mirror.selectionProperties.width);
+  let e = useSelector(e => e.mirror.selectionProperties.name);
+  let t = useSelector(e => e.mirror.selectionProperties.width);
   let i = xv();
   let n = _$$W();
   if (!e || !t || !i) return null;
@@ -539,8 +539,8 @@ function eg() {
   let {
     measurementId,
     initMeasurementText
-  } = d4(e => e.mirror.appModel.onCanvasNameEditorInfo);
-  let i = d4(e => e.mirror.appModel.currentPage);
+  } = useSelector(e => e.mirror.appModel.onCanvasNameEditorInfo);
+  let i = useSelector(e => e.mirror.appModel.currentPage);
   let o = useMemo(() => w3z.findMeasurement(measurementId, i), [measurementId, i]);
   let l = useRef(!o?.freeText);
   let d = Kv();
@@ -580,7 +580,7 @@ function e_() {
   let {
     varWidthNodeId,
     varWidthIndex
-  } = d4(e => e.mirror.appModel.onCanvasNameEditorInfo);
+  } = useSelector(e => e.mirror.appModel.onCanvasNameEditorInfo);
   let i = _$$U();
   let n = getSingletonSceneGraph().get(varWidthNodeId);
   if (!n) return null;
@@ -609,8 +609,8 @@ function e_() {
   });
 }
 function ex() {
-  let e = d4(e => e.mirror.selectionProperties.name);
-  let t = d4(e => e.mirror.selectionProperties.width);
+  let e = useSelector(e => e.mirror.selectionProperties.name);
+  let t = useSelector(e => e.mirror.selectionProperties.width);
   let i = _$$W();
   return null != e && t ? jsx(ey, {
     name: e,
@@ -636,7 +636,7 @@ function ey(e) {
   }, {
     maxWidth
   });
-  let d = d4(e => {
+  let d = useSelector(e => {
     let t = e.mirror.appModel.activeCanvasEditModeType;
     return t === m1T.DESIGN_LAYOUT || t === m1T.SITES_LAYOUT;
   });
@@ -654,7 +654,7 @@ function ey(e) {
       padding,
       margin,
       cornerRadius
-    } = d4(e => e.mirror.appModel.onCanvasNameEditorInfo);
+    } = useSelector(e => e.mirror.appModel.onCanvasNameEditorInfo);
     let l = qmM.editorTypeConfig().showBigSectionNamePills();
     let d = padding.x;
     let c = padding.y;
@@ -672,7 +672,7 @@ function ey(e) {
       verticalPadding: c,
       borderRadius: cornerRadius
     };
-  }(d4(e => {
+  }(useSelector(e => {
     if (null === o) return !1;
     let t = e.mirror.sceneGraph.get(o);
     let i = e.mirror.appModel.currentPage;
@@ -797,7 +797,7 @@ let eA = Ju(function (e) {
   });
 }, "FileMigrationWarningModal");
 function eO() {
-  return d4(e => e.progressBarState);
+  return useSelector(e => e.progressBarState);
 }
 export let $$eL4 = xx((e, t, i) => {
   e(gI());
@@ -829,8 +829,8 @@ export function $$eR2() {
 }
 export function $$eD3() {
   let e = eO();
-  let t = d4(e => e.showingOpenDesktopAppModal);
-  let i = wA();
+  let t = useSelector(e => e.showingOpenDesktopAppModal);
+  let i = useDispatch();
   if (e.mode !== Oin.OFF) return jsx(Fragment, {});
   switch (t) {
     case kF.FOR_OPEN:
@@ -855,8 +855,8 @@ export function $$eP7() {
   let e = useRef(null);
   let t = useRef(!1);
   let i = eO();
-  let r = wA();
-  let o = d4(e => e.needsUpgrade);
+  let r = useDispatch();
+  let o = useSelector(e => e.needsUpgrade);
   let l = useCallback(() => {
     null !== e.current && (clearTimeout(e.current), e.current = null);
   }, [e]);
@@ -913,9 +913,9 @@ export function $$eU1({
 }) {
   let t = p8("topLevelMode") === lyf.HISTORY;
   let i = q5();
-  let n = d4(e => e.user);
+  let n = useSelector(e => e.user);
   let o = p8("currentPage");
-  let u = d4(e => e.comments);
+  let u = useSelector(e => e.comments);
   let p = l7();
   let h = _$$e();
   let f = ZO();

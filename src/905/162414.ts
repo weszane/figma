@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { FUserRoleType } from "../figma_app/191312";
 import { G } from "../figma_app/66216";
 import { sS, q5 } from "../figma_app/516028";
@@ -26,7 +26,7 @@ export function $$p0() {
   c = null;
 }
 export function $$m1(e) {
-  let t = d4(sS);
+  let t = useSelector(sS);
   let [i, a] = useState(null);
   useEffect(() => {
     if (!t || !e) {
@@ -57,8 +57,8 @@ export function $$h2({
   let m = u?.key;
   let g = u?.parentOrgId || null;
   let f = iZ();
-  let _ = d4(e => e.orgUsersByOrgId);
-  let A = d4(e => e.contacts.users);
+  let _ = useSelector(e => e.orgUsersByOrgId);
+  let A = useSelector(e => e.contacts.users);
   let y = !1;
   if (g && f) {
     let e = _[g];
@@ -84,4 +84,4 @@ export function $$h2({
 }
 export const C0 = $$p0;
 export const Qt = $$m1;
-export const zW = $$h2; 
+export const zW = $$h2;

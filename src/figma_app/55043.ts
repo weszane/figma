@@ -1,5 +1,5 @@
 import { useState, useCallback } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { lQ } from "../905/934246";
 import { az } from "../905/449184";
 import { Rs } from "../figma_app/288654";
@@ -15,7 +15,7 @@ import { Bi } from "../905/652992";
 import { DV } from "../905/739964";
 export function $$E1(e, t) {
   let [r, a] = useState(!1);
-  let o = wA();
+  let o = useDispatch();
   let l = T5("useConnectedProjectsStarterTeamPaywall").unwrapOr(null);
   return useCallback(() => {
     if (!l || r) return null;
@@ -41,7 +41,7 @@ export function $$E1(e, t) {
   }, [l, e, o, t, r, a]);
 }
 export function $$y0(e, t, r) {
-  let u = wA();
+  let u = useDispatch();
   let h = Rs(VTr, {
     planParentId: e?.parentId || "",
     planType: e?.type || FOrganizationLevelType.TEAM

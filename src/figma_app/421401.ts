@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { createRef } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { parsePxInt } from "../figma_app/783094";
 import { gw, rr, wv, ru } from "../figma_app/236327";
 import { V } from "../figma_app/312987";
@@ -93,7 +93,7 @@ export function $$C2(e) {
 }
 export var $$w5 = (e => (e.NONE = "NONE", e.UNASSIGNED = "UNASSIGNED", e.WORKSPACE = "WORKSPACE", e))($$w5 || {});
 function O(e) {
-  let t = wA();
+  let t = useDispatch();
   let r = Um();
   let s = createRef();
   let l = 0;
@@ -129,7 +129,7 @@ function O(e) {
   });
 }
 export function $$R0(e) {
-  let t = wA();
+  let t = useDispatch();
   let r = Um();
   if (!RG() || 0 === e.licenseGroups.length) return null;
   let i = r?.type === A;
@@ -151,7 +151,7 @@ export function $$R0(e) {
   });
 }
 export function $$L1(e) {
-  let t = wA();
+  let t = useDispatch();
   let r = Um();
   if (0 === e.workspaces.length) return null;
   let i = r?.type === x;

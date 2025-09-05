@@ -3,7 +3,7 @@ import { pb } from "../figma_app/469876";
 import { Hm } from "../figma_app/658673";
 import { jsx } from "react/jsx-runtime";
 import { memo, useCallback } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { NLJ, glU } from "../figma_app/763686";
 import { LR } from "../figma_app/120210";
 import { Ib } from "../905/129884";
@@ -23,7 +23,7 @@ import { V } from "../9410/365876";
 import { iT } from "../figma_app/765161";
 import { U } from "../9410/630757";
 let j = memo(function () {
-  let e = d4(e => e?.mirror?.appModel?.currentTool === NLJ.SECTION);
+  let e = useSelector(e => e?.mirror?.appModel?.currentTool === NLJ.SECTION);
   let t = LR();
   let i = useCallback(() => {
     t(!1);
@@ -52,7 +52,7 @@ let j = memo(function () {
   });
 });
 let y = memo(function () {
-  let e = d4(e => e?.mirror?.appModel?.currentTool === NLJ.TYPE);
+  let e = useSelector(e => e?.mirror?.appModel?.currentTool === NLJ.TYPE);
   let t = LR();
   let i = useCallback(() => {
     t(!1);
@@ -80,7 +80,7 @@ let y = memo(function () {
   });
 });
 let v = memo(function () {
-  let e = d4(e => e?.mirror?.appModel?.currentTool === NLJ.COMMENTS);
+  let e = useSelector(e => e?.mirror?.appModel?.currentTool === NLJ.COMMENTS);
   let t = useCallback(() => {
     glU?.triggerActionInUserEditScope(e ? "set-tool-default" : "set-tool-comments", {
       source: fK
@@ -138,7 +138,7 @@ let N = memo(function () {
   });
 });
 let A = memo(function () {
-  let e = d4(e => e?.mirror?.appModel?.currentTool === NLJ.TABLE);
+  let e = useSelector(e => e?.mirror?.appModel?.currentTool === NLJ.TABLE);
   let t = LR();
   let i = useCallback(() => {
     t(!1);

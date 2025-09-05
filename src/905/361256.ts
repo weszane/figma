@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { memo, PureComponent, useContext, useCallback, forwardRef, useState, useMemo, useRef, useEffect, useId, createRef } from "react";
-import { Ng, wA, d4 } from "../vendor/514228";
+import { connect, useDispatch, useSelector } from "../vendor/514228";
 import { debug } from "../figma_app/465776";
 import { t as _$$t } from "../905/150656";
 import { d as _$$d } from "../905/976845";
@@ -807,7 +807,7 @@ let tN = memo(function (e) {
     })]
   });
 });
-(n || (n = {})).ConnectedTextDecorationFillPanel = Ng(e => ({
+(n || (n = {})).ConnectedTextDecorationFillPanel = connect(e => ({
   library: e.library,
   currentSelectedProperty: e.mirror.appModel.currentSelectedProperty,
   currentSelectedGradientStop: e.mirror.appModel.currentSelectedGradientStop,
@@ -1037,7 +1037,7 @@ function tQ({
   variationAxisTickValues: c,
   formatter: u
 }) {
-  let p = wA();
+  let p = useDispatch();
   let m = kl("detachOpticalSizeFromFontSize");
   let h = !gl(m) && !m;
   let g = e.$$default ?? 0;
@@ -1225,7 +1225,7 @@ function t2({
   });
 }
 function t3(e) {
-  let t = wA();
+  let t = useDispatch();
   let i = useRef();
   f4(() => {
     i.current = void 0;
@@ -1309,7 +1309,7 @@ function t3(e) {
   });
 }
 function t6(e) {
-  let t = wA();
+  let t = useDispatch();
   let {
     smallNudgeAmount,
     bigNudgeAmount
@@ -1321,9 +1321,9 @@ function t6(e) {
   let [_, A] = useState(!1);
   let b = kl("selectedTextContainsUnderline") ?? !1;
   let v = "UNDERLINE" === e.textDecoration || b;
-  let I = d4(e => e.mirror.selectedStyleProperties.toggledOnOTFeatures);
-  let x = d4(e => e.mirror.selectedStyleProperties.toggledOffOTFeatures);
-  let S = d4(e => e.mirror.selectedStyleProperties.guid);
+  let I = useSelector(e => e.mirror.selectedStyleProperties.toggledOnOTFeatures);
+  let x = useSelector(e => e.mirror.selectedStyleProperties.toggledOffOTFeatures);
+  let S = useSelector(e => e.mirror.selectedStyleProperties.guid);
   let w = B9(e.shouldUseSelectedStyleProperties);
   let T = void 0 !== S;
   let k = !!_W(e.missingFont, !1);
@@ -2781,7 +2781,7 @@ let t7 = forwardRef(function (e, t) {
   });
 });
 let t8 = forwardRef(function (e, t) {
-  let i = wA();
+  let i = useDispatch();
   let {
     smallNudgeAmount,
     bigNudgeAmount
@@ -2878,7 +2878,7 @@ class ip extends PureComponent {
 }
 let iE = "font-agent-update-dismissed";
 export function $$ix0(e) {
-  let t = d4(e => e.mirror.appModel.currentPage);
+  let t = useSelector(e => e.mirror.appModel.currentPage);
   let i = _$$R(e => Cy(e.mirror));
   let n = "text-panel" === md($i);
   let a = vK();

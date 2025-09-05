@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { memo, useMemo, useRef } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { i } from "../905/969773";
 import { Z as _$$Z } from "../905/124614";
 import { Z as _$$Z2 } from "../905/279476";
@@ -331,7 +331,7 @@ export function $$ea1({
   itemIndex: d = 0,
   anyNonFrameLikesSelected: c
 }) {
-  let u = d4(t => Kb(e.style_type) && (QH(e) || e.node_id && t.library.local.thumbnails[e.node_id]?.css) || null);
+  let u = useSelector(t => Kb(e.style_type) && (QH(e) || e.node_id && t.library.local.thumbnails[e.node_id]?.css) || null);
   let p = $$er3(u, !!c);
   let m = useMemo(() => {
     if (u) {
@@ -498,7 +498,7 @@ function ec({
   dsStyle: e,
   disableOutline: t
 }) {
-  let i = d4(t => {
+  let i = useSelector(t => {
     let i = e.node_id;
     return i && t.library.local.thumbnails[i]?.url;
   });

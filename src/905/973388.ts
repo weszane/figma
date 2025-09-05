@@ -1,6 +1,6 @@
 import { Ju } from "../905/102752";
 import { jsx, jsxs } from "react/jsx-runtime";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
@@ -11,8 +11,8 @@ import { F } from "../905/302958";
 import { Ce, Lo } from "../905/156213";
 import { fu } from "../figma_app/831799";
 import { c as _$$c } from "../905/32166";
-export let $$g0 = Ju(function(e) {
-  let t = wA();
+export let $$g0 = Ju(function (e) {
+  let t = useDispatch();
   let i = hS(e);
   let g = () => {
     t(Ce());
@@ -76,4 +76,4 @@ export let $$g0 = Ju(function(e) {
     })
   });
 }, "ResourceConnectRevokeModal");
-export const h = $$g0; 
+export const h = $$g0;

@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { getFeatureFlags } from "../905/601108";
 import { resourceUtils } from "../905/989992";
@@ -75,7 +75,7 @@ export function $$M6(e) {
   });
 }
 export function $$F15() {
-  let e = d4(e => e.teamBilling);
+  let e = useSelector(e => e.teamBilling);
   let t = e.summary.monthly_subscription?.current_period_end;
   return useMemo(() => t ? _$$A(t).toDate() : null, [t]);
 }
@@ -90,7 +90,7 @@ export function $$U4(e) {
   });
 }
 export function $$B3(e) {
-  let t = d4(e => e.teamBilling);
+  let t = useSelector(e => e.teamBilling);
   let r = {
     ...t.summary.annual_seats
   };
@@ -232,11 +232,11 @@ export function $$Y10(e) {
 }
 export function $$$1(e) {
   let t = function () {
-    let e = d4(e => e.teamBilling.summary);
+    let e = useSelector(e => e.teamBilling.summary);
     return useMemo(() => $$M6(e), [e]);
   }();
   let r = function () {
-    let e = d4(e => e.teamBilling.summary);
+    let e = useSelector(e => e.teamBilling.summary);
     return useMemo(() => $$j14(e), [e]);
   }();
   let a = r ? 32 : 30;

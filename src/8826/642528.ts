@@ -1,6 +1,6 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useState, useRef, memo, useCallback } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { lQ } from "../905/934246";
 import { E as _$$E } from "../905/658074";
 import { W as _$$W } from "../figma_app/462192";
@@ -547,7 +547,7 @@ let et = memo(function ({
   });
 });
 export function $$es1(e) {
-  let t = d4(Sh);
+  let t = useSelector(Sh);
   let n = 1 === t.length && t[0] ? t[0] : "";
   return Fk((t, n) => {
     let l = t.get(n);

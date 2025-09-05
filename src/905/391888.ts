@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { wA, Pj } from "../vendor/514228";
+import { useDispatch, useStore } from "../vendor/514228";
 import { aw } from "../figma_app/876459";
 import { Ay } from "../905/612521";
 import { Fo } from "../905/63728";
@@ -7,8 +7,8 @@ import { gN } from "../figma_app/976345";
 import { oB } from "../905/929976";
 import { xS } from "../figma_app/193867";
 export function $$u0() {
-  let e = wA();
-  let t = Pj();
+  let e = useDispatch();
+  let t = useStore();
   return useCallback(async (i, n) => {
     e(oB());
     let r = Fo(n);

@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useCallback, useRef } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { c$ } from "../figma_app/236327";
 import { B } from "../905/714743";
 import { oB, j7 } from "../905/929976";
@@ -16,7 +16,7 @@ export function $$h2({
   scalingDropdownFormatter: s,
   ariaLabelledBy: c
 }) {
-  let m = wA();
+  let m = useDispatch();
   let h = Um();
   let f = h?.type === e;
   let _ = useCallback(() => {

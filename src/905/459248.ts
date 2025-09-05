@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState, useMemo, useEffect, useCallback, useRef } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { E as _$$E } from "../905/632989";
 import { S as _$$S } from "../905/274480";
@@ -138,7 +138,7 @@ function eS(e) {
   });
 }
 function ej(e) {
-  let t = wA();
+  let t = useDispatch();
   let i = e.canAdminCurrentTeam ? tx("fullscreen.toolbar.missing_fonts_modal.org_upsell_banner.admin.text", {
     upgradeLink: jsx(Us, {
       onClick: () => {
@@ -226,15 +226,15 @@ export let $$eZ0 = Ju(function (e) {
     missingFonts
   } = e;
   let h = "missingFontsModal";
-  let g = wA();
+  let g = useDispatch();
   let f = Um();
-  let v = d4(e => e.fonts);
+  let v = useSelector(e => e.fonts);
   let E = _$$U();
   let [S, C] = useState();
   let T = sO();
   let k = cJ();
-  let Z = d4(e => e.userFlags);
-  let ee = d4(e => e.selectedView);
+  let Z = useSelector(e => e.userFlags);
+  let ee = useSelector(e => e.selectedView);
   let en = _$$XE(ee);
   _$$h(() => {
     E("missing_fonts_modal_opened", {
@@ -478,12 +478,12 @@ export let $$eZ0 = Ju(function (e) {
       canAdminCurrentTeam: "loaded" === s.status && !!s.data.team?.hasPermission
     };
   }();
-  let eU = d4(e => e.mirror.appModel.pagesList);
+  let eU = useSelector(e => e.mirror.appModel.pagesList);
   let ez = useCallback(function () {
     g(oB());
     g(XE());
   }, [g]);
-  let e$ = d4(e => e.mirror.sceneGraphSelection);
+  let e$ = useSelector(e => e.mirror.sceneGraphSelection);
   let [eZ, eJ] = useState();
   useEffect(() => {
     eE && eJ(e => {
@@ -649,8 +649,8 @@ function eX({
 }) {
   let x = e[0];
   let S = [...new Set(e.map(e => i[eY(e)]?.newName.family))];
-  let w = d4(e => e.userFlags);
-  let C = d4(e => e.selectedView);
+  let w = useSelector(e => e.userFlags);
+  let C = useSelector(e => e.selectedView);
   let k = _$$XE(C);
   let R = jb(x.family, d, w) && !_D(x.family, k);
   let N = _$$t("fullscreen.toolbar.missing_fonts_modal.select_items_count_using_this_font", {

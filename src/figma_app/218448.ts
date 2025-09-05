@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useRef, useCallback, useId, memo, useState, useEffect } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { d as _$$d } from "../905/49800";
 import { J } from "../905/270045";
 import { R } from "../905/103090";
@@ -133,7 +133,7 @@ export let $$I2 = memo(function (e) {
     shouldIndent,
     extended
   } = e;
-  let m = wA();
+  let m = useDispatch();
   let {
     dropdownShown,
     sceneGraphSelection

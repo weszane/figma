@@ -1,6 +1,6 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useRef, useCallback, useEffect } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { c2 } from "../905/382883";
 import { md, Xr } from "../figma_app/27355";
 import { L8, rG } from "../905/124270";
@@ -26,7 +26,7 @@ function g({
   isActive: i
 }) {
   let s = useRef(null);
-  let h = d4(e => e.modalShown?.type === _$$r);
+  let h = useSelector(e => e.modalShown?.type === _$$r);
   let g = md(L8);
   let f = Xr(rG);
   let _ = _$$v(e);

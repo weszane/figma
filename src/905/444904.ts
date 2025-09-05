@@ -1,5 +1,5 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { Pw } from "../905/521428";
 import { N as _$$N } from "../905/438674";
 import { az, sx } from "../905/449184";
@@ -24,7 +24,7 @@ export function $$I0({
   fileKey: I
 }) {
   let E = TA();
-  let x = wA();
+  let x = useDispatch();
   let S = Rs(M9q, {
     orgId: t.id
   });

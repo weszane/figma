@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useCallback } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { X } from "../905/128376";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
@@ -31,8 +31,8 @@ export let $$C0 = Ju(function ({
   let [C, w] = fp(Fj);
   let O = Xr(jI);
   let R = X();
-  let L = wA();
-  let P = d4(e => e.screenreader.errorType);
+  let L = useDispatch();
+  let P = useSelector(e => e.screenreader.errorType);
   let D = lg();
   let {
     enhancedContrast,

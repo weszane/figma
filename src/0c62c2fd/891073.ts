@@ -1,5 +1,5 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
@@ -16,7 +16,7 @@ export function $$f0(e) {
     canRevokeProjectTransfer,
     isTransferTeam = !1
   } = e;
-  let g = wA();
+  let g = useDispatch();
   let h = hS(e);
   let x = pending.id;
   let b = pending.source_user_email;

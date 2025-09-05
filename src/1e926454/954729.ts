@@ -11,7 +11,7 @@ import { j6, fu } from "../figma_app/831799";
 import { FOrganizationLevelType, FPlanNameType, FResourceCategoryType } from "../figma_app/191312";
 import { S2 } from "../figma_app/465071";
 import { N as _$$N } from "../905/809096";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { g as _$$g } from "../905/687265";
 import { xk } from "@stylexjs/stylex";
 import { $z } from "../figma_app/617427";
@@ -353,8 +353,8 @@ function er({
   licenseGroupId: t,
   workspaceId: r
 }) {
-  let s = wA();
-  let l = d4(e => e.autocomplete);
+  let s = useDispatch();
+  let l = useSelector(e => e.autocomplete);
   let [d, c] = useState(Gu.VIEW);
   let {
     title,
@@ -427,11 +427,11 @@ function eb({
   prepopulatedEmail: t,
   onClose: s
 }) {
-  let l = wA();
+  let l = useDispatch();
   let p = Pc();
-  let u = d4(e => e.autocomplete);
-  let m = d4(e => e.contacts);
-  let h = d4(e => e.dropdownShown);
+  let u = useSelector(e => e.autocomplete);
+  let m = useSelector(e => e.contacts);
+  let h = useSelector(e => e.dropdownShown);
   let [b, S] = useState(Gu.VIEW);
   let I = e.key.parentId;
   let L = dr(I);

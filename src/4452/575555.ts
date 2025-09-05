@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useMemo, useRef, useState, useEffect, Suspense } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { filterNotNullish } from "../figma_app/656233";
 import { rr } from "../figma_app/778880";
 import { s_ } from "../905/17223";
@@ -130,7 +130,7 @@ let K = "members_list_row--dropdownIcon--mJelI";
 let X = "members_list_row--avatarWithHandle--yirlt";
 let et = "team-member-list-row-dropdown";
 function ea(e) {
-  let t = wA();
+  let t = useDispatch();
   let a = Pc();
   let i = _$$P();
   let l = Um();
@@ -311,15 +311,15 @@ function ea(e) {
 }
 let er = "team-pending-member-role-request-dropdown";
 let ei = () => {
-  let e = d4(e => e.dropdownShown);
+  let e = useSelector(e => e.dropdownShown);
   return e && e?.type === er ? e : null;
 };
 function el(e) {
-  let t = wA();
+  let t = useDispatch();
   let a = ei();
   let i = useRef(null);
   let [l, o] = useState(e.request.level);
-  let d = d4(t => e.request.teamId && t.roles.byTeamId[e.request.teamId] ? t.roles.byTeamId[e.request.teamId][e.request.user.id] : null);
+  let d = useSelector(t => e.request.teamId && t.roles.byTeamId[e.request.teamId] ? t.roles.byTeamId[e.request.teamId][e.request.user.id] : null);
   let u = useMemo(() => d ? [_$$e.EDITOR] : [_$$e.VIEWER, _$$e.EDITOR], [d]);
   let m = {
     id: e.request.user.id,
@@ -537,7 +537,7 @@ function ed(e) {
       lgDataLoaded: "loaded" === t.status
     };
   }(e.teamId);
-  let i = d4(t => t.teamMembersByTeamId[e.teamId] || {});
+  let i = useSelector(t => t.teamMembersByTeamId[e.teamId] || {});
   let l = Rs(yQw, {
     teamId: e.teamId
   });
@@ -629,7 +629,7 @@ function eI(e) {
   });
 }
 function eN(e) {
-  let t = d4(e => e.roles || {});
+  let t = useSelector(e => e.roles || {});
   return n0(e.team) && e.canAdmin ? jsx("div", {
     className: _$$s.font12.lh16.pt8.pr32.pb16.pl4.colorText.$,
     children: _$$tx("file_browser.team_settings_modal.paid_status_explanation_no_link")
@@ -651,7 +651,7 @@ let tn = {
   aiEnabledButton: "ai-settings-ai-enabled-button"
 };
 let tr = Ju(function () {
-  let e = wA();
+  let e = useDispatch();
   let t = cD();
   let a = Rs(ZY7, {
     teamId: t
@@ -809,10 +809,10 @@ let tm = "settings_view--upgradeBannerBody--n82sx";
 let t_ = "settings_view--blueLinkForBanner--b0V8l settings_view--blueLink--F3vR6 blue_link--blueLink--9rlnd";
 let tp = "settings_view--accessIcon--7RIy3";
 function tf(e) {
-  let t = wA();
+  let t = useDispatch();
   let a = DP();
   let i = e.team;
-  let l = d4(e => getPermissionsState(e));
+  let l = useSelector(e => getPermissionsState(e));
   let o = i.org_id ? l.orgById[i.org_id] : null;
   let d = useMemo(() => ({
     teamId: i.id,
@@ -860,7 +860,7 @@ function tf(e) {
   }, [m]);
   let b = !v?.isOrgGuest;
   let y = v?.canAdminOrg || f?.canAdmin && !f?.orgId;
-  let j = !!d4(e => _$$p(e));
+  let j = !!useSelector(e => _$$p(e));
   let A = X8(!!m.data?.team?.canEdit, zQ(m.data?.team?.plan ?? null));
   let w = e.billing.summary.annual_subscription;
   let N = e.billing.summary.monthly_subscription;
@@ -1355,7 +1355,7 @@ let tS = (e, t, a) => {
   e(sf(a));
 };
 let $$tT0 = Ju(function (e) {
-  let t = wA();
+  let t = useDispatch();
   let a = useRef(null);
   let [i, o] = useState(-1);
   let c = _$$h.useTrackingContext({
@@ -1368,8 +1368,8 @@ let $$tT0 = Ju(function (e) {
     entryView
   } = e;
   let h = e.teamSettingsProps;
-  let x = d4(e => e.teams[h.team.id]);
-  let f = d4(e => e.avatarEditorState);
+  let x = useSelector(e => e.teams[h.team.id]);
+  let f = useSelector(e => e.avatarEditorState);
   if (useEffect(() => {
     t(um());
   }, [t]), useEffect(() => {

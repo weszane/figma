@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useEffect, useRef } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { b as _$$b, bL, mc, YJ, hE, Q$, Ov, q7 } from "../figma_app/860955";
 import { E as _$$E } from "../905/632989";
 import { z6, CU } from "../905/963340";
@@ -37,11 +37,11 @@ var g = p;
 let L = "plan_switcher--planSwitcherRow--pzSwY";
 export let $$$$U0 = "PLAN_SWITCHER_ONBOARDING_KEY";
 export function $$G1() {
-  let e = wA();
-  let t = d4(e => getPermissionsStateMemoized(e));
+  let e = useDispatch();
+  let t = useSelector(e => getPermissionsStateMemoized(e));
   let n = _$$R(e => vp(e.user, e.currentUserOrgId, e.currentTeamId));
-  let o = d4(e => e.user);
-  let s = d4(e => e.plans);
+  let o = useSelector(e => e.user);
+  let s = useSelector(e => e.plans);
   let l = S2();
   if (useEffect(() => {
     e(hr({
@@ -86,7 +86,7 @@ function W({
   currentUser: n,
   planResult: r
 }) {
-  let p = wA();
+  let p = useDispatch();
   let {
     manager,
     getTriggerProps
@@ -183,12 +183,12 @@ function z({
   currentUser: n,
   planResult: o
 }) {
-  let s = wA();
+  let s = useDispatch();
   let l = useRef(null);
   let {
     open
   } = OC();
-  let _ = d4(_$$E3(Fw));
+  let _ = useSelector(_$$E3(Fw));
   let {
     menuGroups,
     onChange,

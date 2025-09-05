@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { memo, useMemo, useRef, useEffect, useState, useCallback, useContext, useLayoutEffect, Fragment as _$$Fragment, PureComponent, createRef, forwardRef } from "react";
-import { wA, d4, Pj } from "../vendor/514228";
+import { useDispatch, useSelector, useStore } from "../vendor/514228";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { getFeatureFlags } from "../905/601108";
 import { md, Xr } from "../figma_app/27355";
@@ -903,16 +903,16 @@ let eU = memo(function (e) {
   let n = iZ();
   let s = _$$s();
   let r = _$$Z();
-  let m = wA();
+  let m = useDispatch();
   let u = useContext(viewportNavigatorContext);
-  let p = d4(e => e.mirror.appModel.currentTool);
+  let p = useSelector(e => e.mirror.appModel.currentTool);
   let f = ut(Ez5?.editorState().handToolTemporarilyEnabled, !1);
   let _ = md(_$$R);
   let g = BI();
-  let v = d4(e => ![m1T.DESIGN_LAYOUT, m1T.WHITEBOARD_LAYOUT, m1T.HISTORY, m1T.PREVIEW, m1T.COMMENTS, m1T.DEV_HANDOFF, m1T.SITES_LAYOUT].includes(e.mirror.appModel.activeCanvasEditModeType) || e.mirror.appModel.activeUserAction !== QOV.DEFAULT) && (!g || g?.shouldOptimizeForIpadApp && g?.shouldFadeCommentsDuringEdit);
+  let v = useSelector(e => ![m1T.DESIGN_LAYOUT, m1T.WHITEBOARD_LAYOUT, m1T.HISTORY, m1T.PREVIEW, m1T.COMMENTS, m1T.DEV_HANDOFF, m1T.SITES_LAYOUT].includes(e.mirror.appModel.activeCanvasEditModeType) || e.mirror.appModel.activeUserAction !== QOV.DEFAULT) && (!g || g?.shouldOptimizeForIpadApp && g?.shouldFadeCommentsDuringEdit);
   let x = e.activeThread?.id === hm;
   let y = x ? null : e.activeThread?.id || null;
-  let C = d4(e => e.comments.emphasizedPinIds);
+  let C = useSelector(e => e.comments.emphasizedPinIds);
   let {
     zoomScale,
     deltaOffsetX,
@@ -934,7 +934,7 @@ let eU = memo(function (e) {
     Q.current = e.threads;
   }, [e.threads]);
   let X = useCallback(e => Q.current?.find(t => t.id === e) || null, [Q]);
-  let Y = d4(e => e.mirror.appModel.activeUserAction);
+  let Y = useSelector(e => e.mirror.appModel.activeUserAction);
   let J = e.dragDisabledOverride || !eO.includes(p);
   let ee = BK(X, e.pageId, e.setClientMeta, J, e.requestToSelectCommentPin, _);
   let et = x5(J);
@@ -1161,12 +1161,12 @@ let tB = parsePxNumber(qoo);
 let tU = parsePxNumber(u24);
 let tH = parsePxNumber(IuL);
 function tV(e) {
-  let t = d4(e => e.comments.activeThread?.source);
-  let n = d4(e => e.comments.activeThread?.id);
-  let s = d4(e => e.comments.threads);
+  let t = useSelector(e => e.comments.activeThread?.source);
+  let n = useSelector(e => e.comments.activeThread?.id);
+  let s = useSelector(e => e.comments.threads);
   let r = n && s[n] || null;
   let l = r?.reply.messageMeta || [];
-  let d = d4(e => e.comments.editingComment);
+  let d = useSelector(e => e.comments.editingComment);
   let c = sZ();
   let {
     dispatch
@@ -1181,7 +1181,7 @@ function tV(e) {
     commentReactions: {}
   }, [f, e.feedPost.feedPostPublicUuid]);
   let [x, ...b] = p;
-  let y = d4(e => "fullscreen" === e.selectedView.view && e.selectedView.editorType === _$$nT.Whiteboard);
+  let y = useSelector(e => "fullscreen" === e.selectedView.view && e.selectedView.editorType === _$$nT.Whiteboard);
   let [C, w] = _$$R2();
   let {
     feedPost
@@ -1410,7 +1410,7 @@ function t6(e) {
   let {
     pinApi
   } = I_();
-  let a = wA();
+  let a = useDispatch();
   let s = !!e.commentPin;
   let r = e.numPinnedCommentThreads >= 10;
   async function d() {
@@ -1455,7 +1455,7 @@ function t6(e) {
 function t8(e) {
   let t = useRef(null);
   let n = useRef(null);
-  let s = d4(e => e.comments.activeThread?.source);
+  let s = useSelector(e => e.comments.activeThread?.source);
   useEffect(() => {
     if (s && !e.mountUnfocused) switch (s) {
       case Eq.prevButton:
@@ -1534,7 +1534,7 @@ let na = [];
 let ni = [];
 let ns = memo(e => {
   let t = useContext(viewportNavigatorContext);
-  let n = d4(e => e.comments.threads)[e.threadId];
+  let n = useSelector(e => e.comments.threads)[e.threadId];
   let s = n?.discardAttempts || 0;
   let [r, l] = useState(0);
   let {
@@ -1571,15 +1571,15 @@ let ns = memo(e => {
 });
 function nr(e) {
   let t = z3();
-  let n = d4(e => e.comments.activeThread?.source);
-  let s = d4(e => e.comments.activeThread?.id);
-  let r = d4(e => e.comments.threads);
+  let n = useSelector(e => e.comments.activeThread?.source);
+  let s = useSelector(e => e.comments.activeThread?.id);
+  let r = useSelector(e => e.comments.threads);
   let d = Kq(e.thread);
   let m = s && r[s] || null;
   let u = m?.discardAttempts || 0;
   let p = m?.reply.messageMeta || na;
   let f = m?.reply.attachments ? Object.values(m?.reply.attachments) : ni;
-  let _ = d4(e => e.comments.editingComment);
+  let _ = useSelector(e => e.comments.editingComment);
   let [v, x] = useState(!1);
   let b = md(_$$R);
   let [y, C] = useState(_$$t$());
@@ -1738,7 +1738,7 @@ function nr(e) {
     });
   }, [updateCommentContent]);
   let eg = o3(_$$nt.commentsA11y);
-  let eb = d4(e => e.mirror.appModel.activeCanvasEditModeType === m1T.COMMENTS);
+  let eb = useSelector(e => e.mirror.appModel.activeCanvasEditModeType === m1T.COMMENTS);
   let ey = eg && eb;
   let ew = useCallback(() => {
     ey ? _$$iZ?.focusPinById(ei) : document.getElementById(`accessibility-comment-pin-${ei}`)?.focus();
@@ -1760,7 +1760,7 @@ function nr(e) {
     }));
     ew();
   }, [dispatch, setIsPinned, ew]);
-  let eP = d4(e => e.universalInsertModal?.pinned === _$$t4.PINNED_AND_DOCKED_LEFT);
+  let eP = useSelector(e => e.universalInsertModal?.pinned === _$$t4.PINNED_AND_DOCKED_LEFT);
   let eI = ZC(R);
   let eT = eI && eI !== R;
   let eM = eI && V.equals(eI);
@@ -2065,11 +2065,11 @@ let nm = {
   y: 0
 };
 function nu(e) {
-  let t = d4(e => e.selectedView);
+  let t = useSelector(e => e.selectedView);
   let n = iZ();
   let s = useContext(viewportNavigatorContext);
   let r = "communityHub" !== t.view || e.thread.comments[0]?.user_id === n?.id;
-  let l = wA();
+  let l = useDispatch();
   let [d, m] = useState(null);
   let [u, p] = function () {
     let e = useRef(null);
@@ -2227,7 +2227,7 @@ function np(e) {
   }, [s, t]);
   let d = iZ();
   let m = kc();
-  let u = "communityHub" === d4(e => e.selectedView).view ? m : d;
+  let u = "communityHub" === useSelector(e => e.selectedView).view ? m : d;
   return jsx(nu, {
     active: !0,
     computeDropLocation: r,
@@ -2391,7 +2391,7 @@ function ny(e) {
       }), [l, d, m]);
     }(t);
   }(t);
-  let s = d4(e => e.selectedView);
+  let s = useSelector(e => e.selectedView);
   return jsx(nx, {
     children: e.children,
     ref: t,
@@ -2415,7 +2415,7 @@ function nP(e) {
     discardAttempts,
     allowAttachments = !0
   } = e;
-  let d = wA();
+  let d = useDispatch();
   let m = useRef(null);
   let u = useCallback(() => {
     m.current && m.current.scrollIntoView({
@@ -2431,7 +2431,7 @@ function nP(e) {
     y: 0
   });
   let b = Point.add(anchorPosition, v, f);
-  let y = d4(e => e.comments.activeDragTarget);
+  let y = useSelector(e => e.comments.activeDragTarget);
   let w = _$$_(m, b, viewportBounds, nk, _$$hx, e.pinOffset);
   useEffect(() => {
     u();
@@ -2454,7 +2454,7 @@ function nP(e) {
     }));
   }, [d]);
   let N = _$$tS();
-  let S = Pj();
+  let S = useStore();
   let D = useCallback((t, n) => {
     N && (d(_$$nb({
       attachmentId: t,
@@ -2475,7 +2475,7 @@ function nP(e) {
       messageMeta: []
     })), R());
   }, [S, discardAttempts, e.editorRef, d, R]);
-  let F = d4(e => e.comments.threads);
+  let F = useSelector(e => e.comments.threads);
   let B = F[e.thread.id]?.state === EB.BUSY;
   if (!w) return null;
   let {
@@ -2566,7 +2566,7 @@ function nP(e) {
   });
 }
 function nI(e) {
-  let t = d4(e => e.comments.newComment.discardAttempt);
+  let t = useSelector(e => e.comments.newComment.discardAttempt);
   let n = useRef(null);
   let s = useCallback(() => {
     n.current?.selectAll();
@@ -2714,8 +2714,8 @@ function nD(e, t, n, o, a) {
 }
 function nL(e) {
   let t = Pc();
-  let n = wA();
-  let a = d4(e => e.comments.typeahead);
+  let n = useDispatch();
+  let a = useSelector(e => e.comments.typeahead);
   return jsx(nI, {
     dispatch: n,
     editorOnClear: e.editorOnClear,
@@ -2760,7 +2760,7 @@ function nR({
   });
 }
 function nO(e) {
-  let t = wA();
+  let t = useDispatch();
   let n = _X({
     subscribeToUpdates_expensive: !0
   });
@@ -2787,8 +2787,8 @@ function nO(e) {
     submitNewComment();
     onClear();
   }, [submitNewComment, onClear]);
-  let C = d4(e => e.comments.editingComment);
-  let w = d4(e => e.comments.activeDragTarget);
+  let C = useSelector(e => e.comments.editingComment);
+  let w = useSelector(e => e.comments.activeDragTarget);
   let P = _$$i3();
   let T = useCallback(() => p.current?.visible ? (p.current.clearDecorators(), !0) : P ? (Dp(), !0) : !!C || (t(UU()), !0), [t, C, P]);
   O1(T, KD.MODAL);
@@ -2816,7 +2816,7 @@ function nO(e) {
     let o = Point.subtract(n, t);
     return Point.add(e.canvasPosition, o);
   }, []);
-  let A = d4(e => e.comments.newComment);
+  let A = useSelector(e => e.comments.newComment);
   let L = useCallback(e => {
     if (u) t(a$({
       selectionBoxAnchor: e
@@ -2839,7 +2839,7 @@ function nO(e) {
   let R = "communityHub" === d.view;
   let F = TA();
   let B = Pc();
-  let U = d4(e => e.comments);
+  let U = useSelector(e => e.comments);
   let H = "communityHub" === d.view;
   let V = useMemo(() => "communityHub" === d.view && "hubFile" === d.subView && _$$t3(d.fullscreenState), [d]);
   let q = null;
@@ -3029,8 +3029,8 @@ function nK(e) {
   let n = pC();
   let s = gu();
   let r = fG();
-  let l = wA();
-  let d = d4(e => e.selectedView.view);
+  let l = useDispatch();
+  let d = useSelector(e => e.selectedView.view);
   let {
     dragEventHandler
   } = e;
@@ -3110,17 +3110,17 @@ function nG(e) {
     requestToAddDraftCommentPin
   } = e;
   let s = _$$ni();
-  let r = d4(e => e.selectedView.view);
+  let r = useSelector(e => e.selectedView.view);
   let d = md(_$$R);
   let c = void 0 !== e.isActiveCommentPinned ? e.isActiveCommentPinned : d;
-  let m = d4(e => e.comments.editingComment);
-  let u = d4(e => e.comments.emojiPicker);
-  let p = wA();
+  let m = useSelector(e => e.comments.editingComment);
+  let u = useSelector(e => e.comments.emojiPicker);
+  let p = useDispatch();
   let {
     activeId,
     commentCreationDisabled
   } = e;
-  let v = d4(e => e.mirror.appModel.currentTool) === NLJ.COMMENTS && "fullscreen" !== r;
+  let v = useSelector(e => e.mirror.appModel.currentTool) === NLJ.COMMENTS && "fullscreen" !== r;
   let x = function (e, t, n, o, s) {
     let {
       requestToDeselectCommentPin: _requestToDeselectCommentPin,
@@ -3131,7 +3131,7 @@ function nG(e) {
     let m = useContext(viewportNavigatorContext);
     let u = pC();
     let p = gu();
-    let f = wA();
+    let f = useDispatch();
     let _ = ut(Ez5?.singleSlideView().focusedNodeId, null);
     let v = useRef(_);
     useEffect(() => {
@@ -3304,11 +3304,11 @@ function n0(e) {
     activeId
   } = e;
   let s = useContext(viewportNavigatorContext);
-  let l = d4(e => "communityHub" === e.selectedView.view);
+  let l = useSelector(e => "communityHub" === e.selectedView.view);
   let d = iZ();
   let m = q5();
-  let u = d4(e => e.selectedView.commentThreadId);
-  let p = wA();
+  let u = useSelector(e => e.selectedView.commentThreadId);
+  let p = useDispatch();
   let h = useContext(hh);
   let g = h.filteredThreads;
   let v = WM(g, e.pageId, activeId, e.showOnlyParticipatingComments, e.hideInactiveComments);
@@ -3425,10 +3425,10 @@ export function $$n10(e) {
 function n2(e) {
   let t = wq();
   let n = _$$s();
-  let s = wA();
+  let s = useDispatch();
   let r = function () {
     let e = Vi();
-    let t = d4(e => e.mirror.appModel.showComments);
+    let t = useSelector(e => e.mirror.appModel.showComments);
     return e ? "details" : !1 === t ? null : "pins";
   }();
   let {
@@ -3459,9 +3459,9 @@ function n2(e) {
     e.onCommentValidationFailure = (e, t, n, o) => _$$C(s, e, t, n, o);
     s(_v(e));
   }, [s, f]);
-  let w = d4(e => e.selectedView);
+  let w = useSelector(e => e.selectedView);
   let j = Yi(w);
-  let k = d4(e => "fullscreen" === e.selectedView.view);
+  let k = useSelector(e => "fullscreen" === e.selectedView.view);
   let I = aV();
   let {
     isLoading

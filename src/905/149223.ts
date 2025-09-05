@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { createRef, useContext, useMemo } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { NLJ, t2E, VD3, e0R, m1T, glU } from "../figma_app/763686";
 import { l7 } from "../905/189185";
 import { sH } from "../905/805904";
@@ -246,7 +246,7 @@ export function $$j1({
   paintNodeIds: B,
   positioningProps: V
 }) {
-  let G = wA();
+  let G = useDispatch();
   let z = Ku();
   let H = q5();
   let {

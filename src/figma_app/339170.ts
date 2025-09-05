@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useRef, useEffect, useMemo, useCallback } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { d as _$$d } from "../905/976845";
 import { x as _$$x } from "../905/697290";
 import l from "classnames";
@@ -102,7 +102,7 @@ export function $$T1() {
   } : null, [a, r, !1, s]);
 }
 function I(e) {
-  let t = wA();
+  let t = useDispatch();
   return useCallback(() => {
     e.current && t(j7({
       type: R,

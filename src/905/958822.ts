@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useMemo, useRef, useState, useCallback } from "react";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { throwTypeError, debug } from "../figma_app/465776";
 import { xk } from "@stylexjs/stylex";
 import { md, Xr } from "../figma_app/27355";
@@ -79,7 +79,7 @@ function N(e) {
   });
 }
 function H(e) {
-  let t = d4(e => e.orgById);
+  let t = useSelector(e => e.orgById);
   let i = Tf.getOrgId(e.tile);
   if (!i) return jsx(Fragment, {});
   let r = t[i];
@@ -204,7 +204,7 @@ function eg(e) {
     showPoint,
     propogateOnClick
   } = e;
-  let l = wA();
+  let l = useDispatch();
   let d = e => {
     e.callback && e.callback("", null, l);
   };
@@ -223,9 +223,9 @@ function eg(e) {
   });
 }
 function ef(e) {
-  let t = wA();
+  let t = useDispatch();
   let i = useMemo(() => e.dropdownId || _$$g(), [e.dropdownId]);
-  let s = d4(e => e.dropdownShown?.type === i);
+  let s = useSelector(e => e.dropdownShown?.type === i);
   let o = () => {
     s ? t(oB()) : t(j7({
       type: i
@@ -301,11 +301,11 @@ let e_ = (e, t, i, n, r, a) => {
 };
 function eA(e) {
   let t = M4.useFile(e.fileKey).data;
-  let i = d4(e => e.repos);
+  let i = useSelector(e => e.repos);
   let r = t ? L8(t, i) : null;
   let s = M4.File.useValue(r?.default_file_key).data;
   let o = ac(s ? fileEntityDataMapper.toLiveGraph(s) : null);
-  let l = wA();
+  let l = useDispatch();
   if ("loaded" !== o.status) return null;
   {
     let t = `branch-indicator-${e.fileKey}`;
@@ -346,10 +346,10 @@ function eb({
   repoTile: e,
   buttonThemeVersion: t
 }) {
-  let i = wA();
-  let s = d4(e => e.roles.byFileKey);
+  let i = useDispatch();
+  let s = useSelector(e => e.roles.byFileKey);
   let o = Pc();
-  let l = d4(e => e.selectedBranchKeyByRepoId);
+  let l = useSelector(e => e.selectedBranchKeyByRepoId);
   let d = e.branches.filter(e => !e.trashed_at);
   let c = mr(e.repo, e.branches, l);
   let u = useMemo(() => gx(e.repo, d, s, o.id), [e, d, s, o]);
@@ -543,7 +543,7 @@ export function $$eT0({
   viewType: D,
   sortBy: L
 }) {
-  let F = wA();
+  let F = useDispatch();
   let M = _6();
   let j = dq();
   let U = Xr(yH);

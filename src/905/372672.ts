@@ -1,4 +1,4 @@
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 export function $$r0() {
   return $$o3()?.created_at || null;
 }
@@ -6,10 +6,10 @@ export function $$a2() {
   return $$o3()?.id || null;
 }
 export function $$s1() {
-  return d4(e => e.user);
+  return useSelector(e => e.user);
 }
 export function $$o3() {
-  return d4(e => e.user);
+  return useSelector(e => e.user);
 }
 export function $$l4(e) {
   return !!e.password_token || e.google_sso_only || e.saml_sso_only;

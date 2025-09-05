@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useCallback } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { V } from "../1577/311426";
 import { getFeatureFlags } from "../905/601108";
 import { md } from "../figma_app/27355";
@@ -18,7 +18,7 @@ let x = () => {
   return decodeURIComponent(E7(e)?.url || E7(e)?.srcUrl || "");
 };
 export function $$y1() {
-  let e = wA();
+  let e = useDispatch();
   let t = x();
   let i = kl("embedData");
   let r = tq(i);

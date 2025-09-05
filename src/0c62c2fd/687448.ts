@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState, useRef, useCallback } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
@@ -74,7 +74,7 @@ function B({
   onSubmit: o,
   textAreaClassName: l
 }) {
-  let d = wA();
+  let d = useDispatch();
   let c = zl.get(ph);
   let [u, m] = useState(!1);
   let p = useRef(null);
@@ -246,7 +246,7 @@ export function $$U0({
   });
 }
 export function $$W1(e, t) {
-  let r = wA();
+  let r = useDispatch();
   let a = _6();
   return useCallback(s => {
     let i;

@@ -1,5 +1,5 @@
 import { useCallback, useMemo } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
 import { glU, Pt4, IPu } from "../figma_app/763686";
 import { l as _$$l } from "../905/716947";
@@ -37,8 +37,8 @@ export function $$$$j0(e) {
   let {
     Sprig
   } = useSprigWithSampling();
-  let i = wA();
-  let j = d4(e => e.library);
+  let i = useDispatch();
+  let j = useSelector(e => e.library);
   let U = Nv(!0);
   let B = md(TG);
   let V = e.resource;

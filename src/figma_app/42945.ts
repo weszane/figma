@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { createContext, useState, useMemo, useCallback, useEffect } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { Ez5 } from "../figma_app/763686";
 import { AD } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
@@ -90,14 +90,14 @@ async function B(e, t) {
 export let $$G3 = createContext({});
 export function $$V5(e) {
   let t = wq();
-  let r = wA();
+  let r = useDispatch();
   let d = UP();
-  let u = d4(e => e.comments.showResolved);
-  let p = d4(e => e.comments.showOnlyParticipating);
-  let v = d4(e => e.mirror.appModel.currentPage);
+  let u = useSelector(e => e.comments.showResolved);
+  let p = useSelector(e => e.comments.showOnlyParticipating);
+  let v = useSelector(e => e.mirror.appModel.currentPage);
   let C = e.currentNode || v;
   let w = TA() || void 0;
-  let O = d4(e => e.selectedView.commentThreadId);
+  let O = useSelector(e => e.selectedView.commentThreadId);
   let R = ut(Ez5?.singleSlideView().focusedNodeId, AD);
   let P = ut(Ez5?.cooperFocusView().focusedNodeId, AD);
   let j = hA();

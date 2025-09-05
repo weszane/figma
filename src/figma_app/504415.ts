@@ -1,5 +1,5 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { nB, wi, jk, vo, Y9, hE } from "../figma_app/272243";
 import { J } from "../905/270045";
 import { p as _$$p } from "../905/185998";
@@ -188,8 +188,8 @@ x.savedDescriptionInput = "";
 let $$C1 = Ju(function (e) {
   let t = hS(e);
   let r = q5();
-  let s = wA();
-  let o = d4(e => e.mirror.appModel.topLevelMode === lyf.HISTORY);
+  let s = useDispatch();
+  let o = useSelector(e => e.mirror.appModel.topLevelMode === lyf.HISTORY);
   let l = e.description || "";
   let d = e.label || "";
   let c = e.savepointID;
@@ -226,7 +226,7 @@ let $$C1 = Ju(function (e) {
 });
 let $$w0 = Ju(function (e) {
   let t = q5();
-  let r = wA();
+  let r = useDispatch();
   let s = hS(e);
   let o = N(e.savepointID, !1);
   return t ? jsx(bL, {

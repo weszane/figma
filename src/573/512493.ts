@@ -1,11 +1,11 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { Fk } from "../figma_app/167249";
 import { MO, Tq } from "../3682/618608";
 import { nM, dK } from "../3682/933480";
 export function $$l0() {
   let e = function () {
-    let e = d4(e => e.mirror.appModel.onCanvasPillInfo);
+    let e = useSelector(e => e.mirror.appModel.onCanvasPillInfo);
     return Fk((e, t) => t && 0 !== t.length ? t.map(t => {
       let s = e.get(t.guid);
       if (!s || "-1:-1" === s.guid) return null;

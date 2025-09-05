@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useEffect, useMemo } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { assertNotNullish } from "../figma_app/95419";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { getFeatureFlags } from "../905/601108";
@@ -48,11 +48,11 @@ var c = d;
 let $ = "move_drafts_nudge_rcs_steps--bodyWithoutTitle--H7oik";
 let X = "move_drafts_nudge_rcs_steps--infoText--dIEdg";
 export function $$Z1(e) {
-  let t = wA();
+  let t = useDispatch();
   let r = Um();
   let s = q5();
-  let o = d4(e => e.repos);
-  let l = d4(e => e.userFlags.seen_move_drafts_nudge);
+  let o = useSelector(e => e.repos);
+  let l = useSelector(e => e.userFlags.seen_move_drafts_nudge);
   let [d, c] = useState(!1);
   let {
     dismissModal
@@ -93,7 +93,7 @@ export function $$Z1(e) {
   }) : null;
 }
 export function $$Q0(e) {
-  let t = wA();
+  let t = useDispatch();
   let r = Um();
   let {
     dismissModal
@@ -146,7 +146,7 @@ export function $$ee2({
   onClickPrimaryCta: t
 }) {
   var r;
-  let d = wA();
+  let d = useDispatch();
   let u = Um();
   let p = lg();
   let h = q5();
@@ -383,7 +383,7 @@ let et = getFeatureFlags().move_drafts_nudge_v2_recent_files_slim ? function () 
   }))), [t]);
 };
 let er = Ju(function () {
-  let e = wA();
+  let e = useDispatch();
   return jsx(OA, {
     targetKey: v4,
     title: "",

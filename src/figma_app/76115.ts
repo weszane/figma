@@ -1,5 +1,5 @@
 import { useMemo, useCallback } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { sortByPropertyWithOptions, sortByWithOptions } from "../figma_app/656233";
 import { af } from "../905/934246";
 import { l as _$$l } from "../905/716947";
@@ -243,7 +243,7 @@ function L({
 export var $$P1 = (e => (e[e.Grid = 0] = "Grid", e[e.List = 1] = "List", e))($$P1 || {});
 export let $$D4 = e => 0 === e ? "grid" : "list";
 export function $$k7(e, t) {
-  let r = wA();
+  let r = useDispatch();
   let a = q5();
   let s = M();
   let o = t$(e);

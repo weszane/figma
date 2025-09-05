@@ -1,5 +1,5 @@
 import { useCallback, useEffect } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { sx } from "../905/449184";
 import { zq, We } from "../figma_app/782261";
 import { q5 } from "../figma_app/516028";
@@ -59,8 +59,8 @@ export function $$h0(e) {
   }, [e]));
 }
 function m(e) {
-  let t = d4(e => e.loadingState);
-  let s = d4(e => e.fileVersion);
+  let t = useSelector(e => e.loadingState);
+  let s = useSelector(e => e.fileVersion);
   let l = q5();
   let d = k();
   let p = l && null != s && yD(l.key) || null;

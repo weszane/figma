@@ -1,8 +1,8 @@
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { R } from "../905/103090";
 import { Yh } from "../figma_app/357047";
 export function $$s1(e) {
-  return d4(t => Yh(t.mirror.appModel, e));
+  return useSelector(t => Yh(t.mirror.appModel, e));
 }
 export function $$o0(e) {
   return R(t => {
@@ -12,10 +12,10 @@ export function $$o0(e) {
   });
 }
 export function $$l2(e) {
-  return d4(t => e.every(e => Yh(t.mirror.appModel, e)));
+  return useSelector(t => e.every(e => Yh(t.mirror.appModel, e)));
 }
 export function $$d3(e) {
-  return d4(t => e.some(e => Yh(t.mirror.appModel, e)));
+  return useSelector(t => e.some(e => Yh(t.mirror.appModel, e)));
 }
 export const Ku = $$o0;
 export const Zr = $$s1;

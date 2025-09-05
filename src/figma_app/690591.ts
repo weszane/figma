@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState, useEffect, useMemo, useCallback } from "react";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { sx } from "../905/449184";
 import { oU, Sr, B3 } from "../905/535224";
 import { eD } from "../figma_app/876459";
@@ -175,9 +175,9 @@ function $(e) {
 }
 function X(e) {
   let t;
-  let r = d4(e => e.user.email);
-  let i = d4(e => e.orgById);
-  if (d4(e => Yj(e))) {
+  let r = useSelector(e => e.user.email);
+  let i = useSelector(e => e.orgById);
+  if (useSelector(e => Yj(e))) {
     let a = e.currentOrgId && i[e.currentOrgId] ? i[e.currentOrgId].name : null;
     t = jsxs("div", {
       className: Js,
@@ -210,7 +210,7 @@ function X(e) {
   });
 }
 function q(e) {
-  let t = wA();
+  let t = useDispatch();
   let r = Pc();
   let i = [];
   let o = {
@@ -255,9 +255,9 @@ var J = (e => (e[e.Fetched = 0] = "Fetched", e[e.Fetching = 1] = "Fetching", e[e
 let Z = [FFileType.DESIGN, FFileType.WHITEBOARD];
 let $$Q0 = Ju(function (e) {
   let t = Pc();
-  let r = wA();
-  let o = d4(e => !!e.user);
-  let l = d4(e => e.currentUserOrgId);
+  let r = useDispatch();
+  let o = useSelector(e => !!e.user);
+  let l = useSelector(e => e.currentUserOrgId);
   let d = function () {
     let [e] = IT(igD({}));
     return useMemo(() => e.transform(e => {

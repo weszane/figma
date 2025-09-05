@@ -1,6 +1,6 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useRef, useCallback } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { e as _$$e } from "../905/149844";
 import l from "classnames";
 import { Pt } from "../figma_app/806412";
@@ -48,7 +48,7 @@ export function $$v1(e) {
     showPresetActions: !!e.presetInteractions,
     isLayoutNodeSelected
   });
-  let L = wA();
+  let L = useDispatch();
   let D = useCallback(e => {
     addButtonPressed(Bs(e));
     hide();

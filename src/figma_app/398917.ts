@@ -1,7 +1,7 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useRef, useState, createRef } from "react";
 import { flushSync } from "../vendor/944059";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { d as _$$d } from "../905/976845";
 import { bL } from "../905/911410";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
@@ -56,7 +56,7 @@ export function $$Z0() {
   let d = glU?.getSortedBreakpointFramesNameAndRange();
   let c = new Set();
   let u = kG("responsive-text-style-create-custom-breakpoint");
-  let _ = d4(e => e.mirror.selectedStyleProperties);
+  let _ = useSelector(e => e.mirror.selectedStyleProperties);
   if (!_.responsiveTextStyleVariants) return null;
   let h = function (e) {
     let t = new Set();
@@ -239,7 +239,7 @@ function ee({
   position: r,
   onCreateCustomBreakpoint: a
 }) {
-  let o = wA();
+  let o = useDispatch();
   let u = sT();
   let [p, _] = useState("");
   let [h, m] = useState(1);
@@ -379,7 +379,7 @@ function er({
   onClose: c,
   position: u
 }) {
-  let p = wA();
+  let p = useDispatch();
   let _ = sT();
   let [h, m] = useState(e.name ?? "");
   let [g, y] = useState(e.minWidth ?? 1);
@@ -482,7 +482,7 @@ function en({
   index: t,
   textStyleGuid: r
 }) {
-  let a = wA();
+  let a = useDispatch();
   let o = _$$B();
   let l = createRef();
   let d = createRef();

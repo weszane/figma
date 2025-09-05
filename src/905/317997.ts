@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useMemo, useContext } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import s from "classnames";
 import { Rs } from "../figma_app/288654";
 import { IT } from "../figma_app/566371";
@@ -34,11 +34,11 @@ export function $$w1(e) {
     canEditSubscriptions,
     orgId
   } = e;
-  let N = wA();
-  let P = d4(e => e.dropdownShown);
-  let O = d4(e => e.selectedView);
-  let D = d4(e => d1(e));
-  let L = d4(e => {
+  let N = useDispatch();
+  let P = useSelector(e => e.dropdownShown);
+  let O = useSelector(e => e.selectedView);
+  let D = useSelector(e => d1(e));
+  let L = useSelector(e => {
     if (orgId) return e.orgById[orgId]?.bigma_enabled;
     if (!teamId) return !1;
     let t = e.teams[teamId];

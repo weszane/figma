@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
@@ -19,7 +19,7 @@ import { az } from "../figma_app/805373";
 import { lM } from "../figma_app/392626";
 let s;
 function I(e) {
-  let t = wA();
+  let t = useDispatch();
   let a = hS(e);
   let s = lM(e.entryPoint);
   let [b, I] = useState();

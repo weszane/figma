@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { IK } from "../905/521428";
 import { QOV } from "../figma_app/763686";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -16,16 +16,16 @@ import { fx, PF } from "../figma_app/657972";
 import { Ad } from "../figma_app/811257";
 export function $$y0() {
   let [e, t] = useState(!1);
-  let r = wA();
+  let r = useDispatch();
   let y = q5();
-  let b = d4(e => e.fileVersion);
+  let b = useSelector(e => e.fileVersion);
   let T = _$$d();
   let I = Fk(e => e.getDirectlySelectedNodes().some(e => "SYMBOL" === e.type));
   let S = A();
   f4(() => {
     t(!1);
   });
-  let v = d4(e => e.mirror.appModel.activeUserAction);
+  let v = useSelector(e => e.mirror.appModel.activeUserAction);
   return (useEffect(() => {
     v === QOV.RESIZING && t(!0);
   }, [v]), !T || !S.length || I || e) ? null : jsx(fu, {

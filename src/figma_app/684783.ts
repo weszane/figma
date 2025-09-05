@@ -12,7 +12,7 @@ import { m3 } from "../figma_app/45218";
 import { G4 } from "../figma_app/707808";
 import { Ho } from "../figma_app/878651";
 import { Dy } from "../figma_app/165422";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { sx, az } from "../905/449184";
 import { Point } from "../905/736624";
 import { I as _$$I } from "../figma_app/4253";
@@ -219,8 +219,8 @@ let ef = "hub_file_viewer--caret--LG-MD";
     };
   }
   e.PagesButton = function (e) {
-    let t = wA();
-    let n = d4(e => e.dropdownShown);
+    let t = useDispatch();
+    let n = useSelector(e => e.dropdownShown);
     let s = n?.type === r;
     let o = e.pages && e.pages.length > 1;
     if (useEffect(() => {
@@ -271,8 +271,8 @@ let ef = "hub_file_viewer--caret--LG-MD";
     });
   };
   e.PagesDropdown = function (e) {
-    let t = wA();
-    let n = d4(e => e.dropdownShown?.type === r);
+    let t = useDispatch();
+    let n = useSelector(e => e.dropdownShown?.type === r);
     let a = {
       maxHeight: `${e.viewerHeight - 120}px`
     };
@@ -300,8 +300,8 @@ let ef = "hub_file_viewer--caret--LG-MD";
     }) : null;
   };
   e.HubFileZoomButton = function (t) {
-    let r = wA();
-    let a = d4(e => e.dropdownShown?.type === s);
+    let r = useDispatch();
+    let a = useSelector(e => e.dropdownShown?.type === s);
     let {
       adjustZoomInFactory,
       adjustZoomOutFactory
@@ -370,7 +370,7 @@ let ef = "hub_file_viewer--caret--LG-MD";
     setZoom: o,
     resetZoomToFitCanvasContent: l
   }) {
-    let d = wA();
+    let d = useDispatch();
     let {
       adjustZoomInFactory,
       adjustZoomOutFactory,
@@ -380,7 +380,7 @@ let ef = "hub_file_viewer--caret--LG-MD";
     let h = useCallback(e => {
       document.activeElement instanceof HTMLInputElement || ("+" === e.key ? adjustZoomInFactory("keyboardShortcut")() : "-" === e.key ? adjustZoomOutFactory("keyboardShortcut")() : "0" === e.key ? setZoomFactory(1, "keyboardShortcut")() : "1" === e.key && resetZoomToFitCanvasContentFactory("keyboardShortcut")());
     }, [adjustZoomInFactory, adjustZoomOutFactory, resetZoomToFitCanvasContentFactory, setZoomFactory]);
-    if (U3("keydown", h), !d4(e => e.dropdownShown?.type === s)) return null;
+    if (U3("keydown", h), !useSelector(e => e.dropdownShown?.type === s)) return null;
     let m = t => {
       t.endsWith("%") && (t = t.substr(0, t.length - 1));
       let r = -1;
@@ -447,8 +447,8 @@ let ef = "hub_file_viewer--caret--LG-MD";
     });
   };
   e.PrototypeZoomButton = function (e) {
-    let t = wA();
-    let r = d4(e => e.dropdownShown?.type === ec);
+    let t = useDispatch();
+    let r = useSelector(e => e.dropdownShown?.type === ec);
     let n = 1;
     e.viewer && (n = e.getCurrentZoomScale());
     return jsx(_$$E, {
@@ -480,8 +480,8 @@ let ef = "hub_file_viewer--caret--LG-MD";
     });
   };
   e.PrototypeZoomDropdown = function (e) {
-    let t = wA();
-    let r = d4(e => e.dropdownShown?.type === ec);
+    let t = useDispatch();
+    let r = useSelector(e => e.dropdownShown?.type === ec);
     let n = e.viewer.getPrototypeDeviceType();
     let s = _Q(n);
     let [o, l] = useState(() => e.initialScalingMode ?? {
@@ -722,7 +722,7 @@ function ex(e) {
     showFullscreenComments,
     fixedSize
   } = e;
-  let c = wA();
+  let c = useDispatch();
   let [u, p] = useState(!1);
   let [g, f] = useState(!1);
   let x = useRef(null);

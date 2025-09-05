@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useEffect } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { md } from "../figma_app/27355";
 import { buildUploadUrl } from "../figma_app/169182";
 import { tx } from "../905/303541";
@@ -22,7 +22,7 @@ let v = r1("seen_ui3_layers_horizontal_scroll_overlay");
 export function $$S0() {
   let e = aV();
   let t = md(Fy);
-  let s = d4(e => e.mirror.appModel.currentPage);
+  let s = useSelector(e => e.mirror.appModel.currentPage);
   let p = Fk((e, t) => !zC(e, t), s);
   let j = md(v);
   let {

@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback, useMemo, memo, useState, useRef } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { WW } from "../905/521428";
 import { K as _$$K } from "../905/443068";
@@ -43,7 +43,7 @@ function H({
   backButtonRef: e,
   children: t
 }) {
-  let i = wA();
+  let i = useDispatch();
   let s = useCallback(t => {
     t.event.keyCode === Uz.TAB && null != e.current && (e.current.focus(), t.accept());
   }, [e]);
@@ -260,7 +260,7 @@ function q({
   isHidden: r,
   updatesModalScope: s
 }) {
-  let o = wA();
+  let o = useDispatch();
   let d = t === PW.COMPONENT || t === PW.STATE_GROUP;
   return jsxs("div", {
     className: "review_updates_modal--headerContainer--jSwdB",

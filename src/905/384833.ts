@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { Suspense, useState, useMemo, useEffect } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { lQ } from "../905/934246";
 import { isNullish } from "../figma_app/95419";
 import { ServiceCategories as _$$e } from "../905/165054";
@@ -81,7 +81,7 @@ function ea(e) {
   let h = A()(m, Gu.VIEW);
   let g = f()(h, e => e?.assigned ?? 0);
   let _ = f()(h, e => e?.available ?? 0);
-  let [y, S] = function(e, t, i) {
+  let [y, S] = function (e, t, i) {
     let n = YL({
       parentId: e,
       type: FOrganizationLevelType.ORG
@@ -93,8 +93,8 @@ function ea(e) {
   }(p, e.renewalDate, _);
   let [C, O] = useState(!1);
   let V = useMemo(() => N_.dict(e => (g[e] ?? 0) + (y[e] || 0)), [g, y]);
-  let Q = function(e, t, i) {
-    let n = wA();
+  let Q = function (e, t, i) {
+    let n = useDispatch();
     return r => {
       Eh.updateOrgRenewalCounts({
         orgId: e,
@@ -128,7 +128,7 @@ function ea(e) {
   });
   let [et, {
     errorMessage: ei
-  }] = function(e, t) {
+  }] = function (e, t) {
     let {
       prices,
       localizeCurrency
@@ -333,8 +333,8 @@ function ea(e) {
   });
 }
 function es(e) {
-  let t = wA();
-  let i = d4(e => e.selectedView);
+  let t = useDispatch();
+  let i = useSelector(e => e.selectedView);
   return jsx(_$$z, {
     variant: "brand",
     orientation: "vertical",
@@ -346,7 +346,7 @@ function es(e) {
         style: _$$sx.add({
           backgroundColor: "unset"
         }).$,
-        onClick: function() {
+        onClick: function () {
           ("orgAdminSettings" !== i.view || i.orgAdminSettingsViewTab !== J7.MEMBERS) && t(sf({
             view: "orgAdminSettings",
             orgAdminSettingsViewTab: J7.MEMBERS
@@ -358,4 +358,4 @@ function es(e) {
     })
   });
 }
-export const Y = $$er0; 
+export const Y = $$er0;

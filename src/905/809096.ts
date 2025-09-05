@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useCallback } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { Z } from "../905/815905";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
@@ -42,7 +42,7 @@ function p(e) {
   });
 }
 export function $$h0(e) {
-  let t = wA();
+  let t = useDispatch();
   let i = Z(100);
   let o = useCallback(() => {
     t(Lo());

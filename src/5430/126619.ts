@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useCallback, useState } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { lQ } from "../905/934246";
 import { bL, mc, q7, YJ, b as _$$b } from "../figma_app/860955";
 import { A as _$$A } from "../905/351112";
@@ -182,7 +182,7 @@ function M({
   manager: e,
   menuData: t
 }) {
-  let r = wA();
+  let r = useDispatch();
   let {
     resource,
     sharedRouteParams
@@ -270,7 +270,7 @@ export function $$F0({
   loadingTileCount: r = 10,
   resourceImpressionTracking: h = lQ
 }) {
-  let x = wA();
+  let x = useDispatch();
   let f = Om();
   let y = T5("ResourceHubItemsView").unwrapOr(null);
   let g = D6("ResourceHubItemsView").unwrapOr(null);

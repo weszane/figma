@@ -1,5 +1,5 @@
 import { jsx } from "react/jsx-runtime";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { Gu } from "../figma_app/262240";
 import { bL, mc, q7 } from "../figma_app/860955";
 import { luZ } from "../figma_app/763686";
@@ -17,7 +17,7 @@ export function $$_0({
   selectedView: t,
   targetObjectAnimation: i
 }) {
-  let a = wA();
+  let a = useDispatch();
   let {
     appModel,
     sceneGraph,

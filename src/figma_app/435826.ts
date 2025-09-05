@@ -1,5 +1,5 @@
 import { useCallback, useEffect } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { ServiceCategories } from "../905/165054";
 import { ey } from "../905/859698";
 import { BXd, CWU, glU } from "../figma_app/763686";
@@ -119,7 +119,7 @@ export async function $$B0(e, t) {
   }));
 }
 export function $$G6(e, t = aD.ALL, r) {
-  let a = wA();
+  let a = useDispatch();
   let u = bA(t);
   let p = md(yV);
   let {
@@ -129,7 +129,7 @@ export function $$G6(e, t = aD.ALL, r) {
     scopedVariableSetUpdates,
     scopedLibraryAssetUpdates
   } = md(u);
-  let B = d4(_$$c);
+  let B = useSelector(_$$c);
   let V = B.file_key;
   let H = p?.parentOrgId?.toString();
   let z = B.file_team_id?.toString();
@@ -137,7 +137,7 @@ export function $$G6(e, t = aD.ALL, r) {
   let {
     sessionId
   } = sz() ?? {};
-  let Y = wM(scopedVariableSetUpdates.map((e) => e.key));
+  let Y = wM(scopedVariableSetUpdates.map(e => e.key));
   let $ = useCallback((e, r) => {
     if (Object.values(AX).includes(e)) {
       let t = e === AX.REVIEW_INSTANCE_UPDATES_MODAL_UPDATE_INSTANCE || e === AX.DROPDOWN_UPDATE_SELECTED_INSTANCE;
@@ -171,7 +171,7 @@ export function $$G6(e, t = aD.ALL, r) {
       fileSubscribedLibraryKeys: q
     }));
   }, [a, e, X, q]);
-  let Q = useCallback(async (e) => {
+  let Q = useCallback(async e => {
     let t = BXd.getTimestampForLibraryUpdateStart();
     Ff() && (await $$j3(e));
     await a(t5({
@@ -181,12 +181,12 @@ export function $$G6(e, t = aD.ALL, r) {
       fileSubscribedLibraryKeys: q
     }));
   }, [a, X, q]);
-  let ee = useCallback(async (e) => {
+  let ee = useCallback(async e => {
     let t = BXd.getTimestampForLibraryUpdateStart();
     if (Ff()) {
       let t = Ak();
       let r = Ki(t);
-      BXd.downloadAllSubscribedVariableSetConsumersForUpdate(e.map((e) => e.key), t);
+      BXd.downloadAllSubscribedVariableSetConsumersForUpdate(e.map(e => e.key), t);
       try {
         await r;
       } catch (e) {
@@ -204,7 +204,7 @@ export function $$G6(e, t = aD.ALL, r) {
       }
     }
     let r = CWU?.getSubscribedVariableSetsInfo();
-    let n = new Map(r?.map((e) => [e.id.toString().split("/")[0], e.defaultModeID]));
+    let n = new Map(r?.map(e => [e.id.toString().split("/")[0], e.defaultModeID]));
     await a(_K({
       variableSets: e,
       updateStartTime: t
@@ -218,7 +218,7 @@ export function $$G6(e, t = aD.ALL, r) {
     }
     return l;
   }, [a, Y]);
-  let et = useCallback(async (e) => {
+  let et = useCallback(async e => {
     let t = BXd.getTimestampForLibraryUpdateStart();
     Ff() && (await U(e));
     await a(f$({
@@ -226,7 +226,7 @@ export function $$G6(e, t = aD.ALL, r) {
       updateStartTime: t
     }));
   }, [a]);
-  let er = useCallback(async (e) => {
+  let er = useCallback(async e => {
     await et([e]);
   }, [et]);
   let en = useCallback((e, t) => {
@@ -253,7 +253,7 @@ export function $$G6(e, t = aD.ALL, r) {
       entrypoint: $(r, !1)
     });
   }, [r, V, H, z, $, W, Z, sessionId]);
-  let ea = useCallback((e) => {
+  let ea = useCallback(e => {
     Q([e]);
     az.trackDefinedEvent("design_systems_analytics.ds_asset_updated", {
       fileKey: V,
@@ -265,7 +265,7 @@ export function $$G6(e, t = aD.ALL, r) {
       entrypoint: $(r, !1)
     });
   }, [r, V, H, z, $, W, Q, sessionId]);
-  let es = useCallback(async (e) => {
+  let es = useCallback(async e => {
     let t = await ee([e]);
     az.trackDefinedEvent("design_systems_analytics.ds_asset_updated", {
       fileKey: V,
@@ -306,10 +306,10 @@ export function $$G6(e, t = aD.ALL, r) {
           fileTeamId: z,
           productType: W,
           libraryModalSessionId: sessionId,
-          components: scopedComponentUpdates.map((e) => e.component_key).toString(),
-          stateGroups: scopedStateGroupUpdates.map((e) => e.key).toString(),
-          styles: scopedStyleUpdates.map((e) => e.key).toString(),
-          variableSets: scopedVariableSetUpdates.map((e) => e.key).toString(),
+          components: scopedComponentUpdates.map(e => e.component_key).toString(),
+          stateGroups: scopedStateGroupUpdates.map(e => e.key).toString(),
+          styles: scopedStyleUpdates.map(e => e.key).toString(),
+          variableSets: scopedVariableSetUpdates.map(e => e.key).toString(),
           entrypoint: $(r, !0)
         });
         await J(scopedComponentUpdates, void 0);
@@ -345,7 +345,7 @@ export function $$V4(e, t) {
     updateComponent,
     updateStateGroup
   } = $$G6(e, void 0, t);
-  let s = wA();
+  let s = useDispatch();
   let l = useCallback((e, t) => {
     let r = glU.getOutdatedStyleConsumers(t);
     s(Qn({
@@ -372,7 +372,7 @@ export function $$z2({
   let a = q5();
   let [s, o] = fp(H);
   let c = ZC(e);
-  let _ = useCallback((e) => {
+  let _ = useCallback(e => {
     az.trackDefinedEvent("design_systems_analytics.update_notification_displayed", {
       userId: i,
       fileKey: a?.key,

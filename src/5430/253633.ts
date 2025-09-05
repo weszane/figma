@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, useRef, useCallback } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { h as _$$h } from "../905/994594";
 import { sx } from "../905/449184";
 import { Ay } from "../905/612521";
@@ -31,7 +31,7 @@ export function $$b0({
   closeIconClassName: T,
   dropdownSelector: I
 }) {
-  let N = wA();
+  let N = useDispatch();
   let E = Jm(!0);
   let S = AG();
   let [R, k] = useState(!1);

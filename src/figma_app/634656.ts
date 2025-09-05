@@ -1,5 +1,5 @@
 import { useRef, useMemo, useEffect, useCallback } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { oU } from "../figma_app/273493";
 import { daH, DV9 } from "../figma_app/763686";
 import { Xr } from "../figma_app/27355";
@@ -24,7 +24,7 @@ import { zS, Ku, BV, Qe } from "../figma_app/153399";
 import { Qv, $R, zd, Ze } from "../figma_app/967873";
 export function $$N2() {
   let e = tS();
-  let t = wA();
+  let t = useDispatch();
   let r = Xr(Qv);
   return (n, i, a) => {
     e && (r(i), WB().optimisticallyUpdate({}, _$$v.setUserColorPaletteOverrideForFile(e, n)).catch(e => {
@@ -57,12 +57,12 @@ export let $$w7 = D(() => {
   let {
     loadedPaletteVariations,
     loadedColorPalette
-  } = function(e) {
+  } = function (e) {
     let t = useRef();
     let {
       uuid,
       palette
-    } = function(e) {
+    } = function (e) {
       let t = {
         uuid: fJ,
         palette: void 0
@@ -124,8 +124,8 @@ export function $$P6(e, t) {
 }
 export function $$D3() {
   let e = cD();
-  let t = d4(t => _$$_(e, t));
-  let r = d4(t => e && canViewTeam(e, t));
+  let t = useSelector(t => _$$_(e, t));
+  let r = useSelector(t => e && canViewTeam(e, t));
   return !!(t?.org_id && r);
 }
 export function $$k5(e, t) {
@@ -146,10 +146,10 @@ export function $$M9() {
       paints: XQ
     }), l({
       paints: Dq
-    }), d(n6), u(ns), p(T7), h(function() {
+    }), d(n6), u(ns), p(T7), h(function () {
       let e = Math.floor(Math.random() * Ku().length);
       return BV(Ku()[e], "sticky") || E$();
-    }()), DV9.setSectionToolColor(oU(function() {
+    }()), DV9.setSectionToolColor(oU(function () {
       let e = Math.floor(Math.random() * Qe().length);
       return BV(Qe()[e], "baseLight") || BV(daH.BLUE_LIGHT, "baseLight");
     }()))) : r && (i({
@@ -185,4 +185,4 @@ export const WR = $$k5;
 export const X8 = $$P6;
 export const Z9 = $$w7;
 export const iN = $$L8;
-export const qv = $$M9; 
+export const qv = $$M9;

@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { J0O, Egt } from "../figma_app/763686";
 import { AD } from "../905/871411";
 import { getFeatureFlags } from "../905/601108";
@@ -12,10 +12,10 @@ import { C1 } from "../figma_app/505098";
 import { vf, Jm } from "../figma_app/583247";
 export function $$m1(e, t, r) {
   let a = useMemo(vf, []);
-  let o = d4(dK);
-  let d = d4(C1);
+  let o = useSelector(dK);
+  let d = useSelector(C1);
   let p = Yg(e, o);
-  let m = d4(t => a(t, e));
+  let m = useSelector(t => a(t, e));
   let g = r ? p : d;
   let I = $$f0(e, t);
   let S = k9(() => g && I ? E(I, e, g) : [], [g, e, I]);
@@ -64,7 +64,7 @@ export function $$g2(e, t, r, i) {
   }), [s, o, d, c, a, u]);
 }
 export function $$f0(e, t) {
-  let r = d4(dK);
+  let r = useSelector(dK);
   if (t !== OE.DEFINITION) return Yi(e, r) || k4(e, r) || "";
   {
     let t = wd(e, r);

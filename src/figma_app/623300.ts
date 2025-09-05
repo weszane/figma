@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { Ez5, xal } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import { eU, md } from "../figma_app/27355";
@@ -11,8 +11,8 @@ import { i_ } from "../905/187165";
 import { s6, rp, nc } from "../figma_app/474636";
 export function $$h3() {
   return $$g5({
-    selectedView: d4(e => e.selectedView),
-    isLoadingVersionHistory: d4(e => e.versionHistory)?.isLoadingPage,
+    selectedView: useSelector(e => e.selectedView),
+    isLoadingVersionHistory: useSelector(e => e.versionHistory)?.isLoadingPage,
     theme: DP()
   });
 }

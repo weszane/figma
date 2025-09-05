@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useEffect } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { filterNotNullish } from "../figma_app/656233";
 import { getFeatureFlags } from "../905/601108";
 import { eU, zl } from "../figma_app/27355";
@@ -36,8 +36,8 @@ export function $$A0({
   selectedView: A,
   shouldShowDuplicateOption: O
 }) {
-  let F = wA();
-  let P = d4(e => e.mirror.appModel);
+  let F = useDispatch();
+  let P = useSelector(e => e.mirror.appModel);
   let L = q5();
   let D = p8("pagesList");
   let M = HZ();

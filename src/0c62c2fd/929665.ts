@@ -1,5 +1,5 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import i from "classnames";
 import { Jn } from "../905/17223";
 import { tM, vd } from "../figma_app/637027";
@@ -13,7 +13,7 @@ import { wN, KP, v0, hF, pL } from "../905/289198";
 import { J_, BQ } from "../905/871493";
 var n = i;
 export function $$h0(e) {
-  let t = wA();
+  let t = useDispatch();
   let r = () => {
     t(b({
       dismissed_move_draft_to_project_interstitial_modal: !0

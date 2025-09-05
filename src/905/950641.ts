@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useState, useLayoutEffect } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { isNullish } from "../figma_app/95419";
 import { g as _$$g } from "../905/125190";
 import { getFeatureFlags } from "../905/601108";
@@ -26,7 +26,7 @@ import { hK } from "../figma_app/211706";
 import { qC, Wb, pr, Qu, j_ } from "../905/948828";
 import { Y } from "../905/26051";
 function R() {
-  let e = wA();
+  let e = useDispatch();
   return jsxs("div", {
     className: _$$s.p8.bRadius8.colorBgSecondary.flex.justifyBetween.itemsCenter.$,
     children: [jsxs("div", {
@@ -90,8 +90,8 @@ export function $$P0({
   withUpgradeExistingTeamOption: _
 }) {
   let [y, b] = useState(tY.ANNUAL);
-  let v = d4(e => e.dropdownShown);
-  let w = d4(e => e.user);
+  let v = useSelector(e => e.dropdownShown);
+  let w = useSelector(e => e.user);
   let k = !!getFeatureFlags().edu_plan_comparison;
   let N = w && cn(w) && k;
   useLayoutEffect(() => {
@@ -212,7 +212,7 @@ function O({
   highlightBadge: l,
   withUpgradeExistingTeamOption: d
 }) {
-  let u = wA();
+  let u = useDispatch();
   let {
     planTier,
     name,

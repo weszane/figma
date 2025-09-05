@@ -1,5 +1,5 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { tM } from "../figma_app/637027";
 import { Q9 } from "../905/773401";
 import { tx } from "../905/303541";
@@ -129,9 +129,9 @@ Ju(function ({
   onFinish: t,
   variations: r
 }) {
-  let h = d4(e => e.user);
+  let h = useSelector(e => e.user);
   e = e || h?.id;
-  let m = wA();
+  let m = useDispatch();
   let E = () => {
     m(Ce());
   };

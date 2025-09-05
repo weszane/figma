@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { G } from "../905/289770";
@@ -116,7 +116,7 @@ let $$L0 = Ju(function (e) {
   let {
     color
   } = G();
-  let c = wA();
+  let c = useDispatch();
   let u = U("nux_seat_request_confirmation_modal");
   let A = q5();
   _$$h(() => {

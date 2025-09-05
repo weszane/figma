@@ -17,7 +17,7 @@ import { N as _$$N } from "../905/427996";
 import { l as _$$l } from "../905/490996";
 import { C as _$$C } from "../905/294086";
 import { Ib } from "../905/129884";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { t as _$$t } from "../905/303541";
 import { F as _$$F } from "../905/302958";
 let p = "data-alt-scrub-target";
@@ -27,10 +27,10 @@ let g = {
   current: null
 };
 let f = null;
-let _ = () => { };
+let _ = () => {};
 function A() {
-  m && (m.setAttribute(p, ""), g.current && (_ = function(e, t) {
-    let i = function(e) {
+  m && (m.setAttribute(p, ""), g.current && (_ = function (e, t) {
+    let i = function (e) {
       switch (e.singleAxis || !1) {
         case "x":
           return e => {
@@ -57,7 +57,7 @@ function A() {
     let n = null;
     let r = f2;
     return ch(e, "wheel", a => {
-      let s = i(function(e) {
+      let s = i(function (e) {
         let t = -e.deltaX;
         let i = e.deltaY;
         switch (e.deltaMode) {
@@ -114,9 +114,9 @@ function A() {
   }(m, g)));
 }
 function y() {
-  m && (m.removeAttribute(p), _(), _ = () => { });
+  m && (m.removeAttribute(p), _(), _ = () => {});
 }
-let b = () => { };
+let b = () => {};
 let x = _$$A && !!document.documentElement.requestPointerLock && !VM;
 async function S(e) {
   let t = e.requestPointerLock();
@@ -242,7 +242,7 @@ let H = forwardRef(({
 }, i) => {
   let a = useContext(j);
   let p = _$$N(t);
-  let _ = function({
+  let _ = function ({
     value: e,
     getStringValue: t,
     formatter: i,
@@ -267,14 +267,14 @@ let H = forwardRef(({
       scrubbing,
       getScrubProps,
       Cursor
-    } = function(e) {
-      let [t, i, a] = function(e) {
+    } = function (e) {
+      let [t, i, a] = function (e) {
         let t = useRef();
         let i = useRef(f2);
         let a = useRef(f2);
         let s = useRef();
         let [o, l] = useState(1);
-        let [c, p] = function({
+        let [c, p] = function ({
           onPointerLockPermissionChange: e,
           ...t
         }) {
@@ -411,7 +411,7 @@ let H = forwardRef(({
           className: c ? C : void 0
         }, ...e), h];
       }(e);
-      let [s, o] = function(e) {
+      let [s, o] = function (e) {
         let [t, i] = useState(!1);
         let n = _$$v(e, {
           onScrubStart() {
@@ -421,7 +421,7 @@ let H = forwardRef(({
             i(!1);
           }
         });
-        let a = function(e) {
+        let a = function (e) {
           let t = useRef();
           useEffect(() => {
             t.current = e;
@@ -431,7 +431,7 @@ let H = forwardRef(({
         useEffect(() => {
           f === a && (g.current = n, f = e);
         }, [e]);
-        useEffect(() => (0 === h && function() {
+        useEffect(() => (0 === h && function () {
           let e = z_(ch(document, "keydown", e => {
             "Alt" === e.key && A();
           }), ch(document, "keyup", e => {
@@ -439,7 +439,7 @@ let H = forwardRef(({
           }), ch(window, "blur", y));
           b = () => {
             e();
-            b = () => { };
+            b = () => {};
           };
         }(), ++h, () => {
           0 == --h && b();
@@ -481,10 +481,10 @@ let H = forwardRef(({
         F.current = !1;
       },
       onScrub(t) {
-        let [n, r] = function(e) {
+        let [n, r] = function (e) {
           var t;
           if ("wheel" === e.source) return [1, 1];
-          let i = (t = function(e) {
+          let i = (t = function (e) {
             let t = window.innerHeight;
             return qE(e / t, -1, 1);
           }(e.delta.y)) < -.5 ? 8 : t < -.25 ? 4 : t < -.125 ? 2 : t > .5 ? -8 : t > .25 ? -4 : t > .125 ? -2 : 1;
@@ -495,7 +495,7 @@ let H = forwardRef(({
         let d = e => P(i, e, o, O, t.shiftKey);
         if (j.current) j.current(e => d(e).value, {
           commit: !1
-        }); else {
+        });else {
           let n = d(N.current);
           Fi(i, n.value, e) || (l(n.value, Object.assign(t, {
             commit: !1
@@ -510,11 +510,11 @@ let H = forwardRef(({
         if (j.current = null, t.cancelled) n ? n(e => e, {
           commit: !0,
           cancelled: !0
-        }) : _(N.current, t); else {
+        }) : _(N.current, t);else {
           let r = e => P(i, e, 0, O, t.shiftKey).value;
           if (n) n(r, {
             commit: !0
-          }); else {
+          });else {
             let n = r(N.current);
             (F.current || !Fi(i, n, e)) && l(n, Object.assign(t, {
               commit: !0
@@ -618,8 +618,8 @@ export function $$X0({
   formatter: t,
   ...i
 }) {
-  let a = function() {
-    let e = wA();
+  let a = function () {
+    let e = useDispatch();
     return useCallback((t, i) => {
       let n = i <= -8 ? "1/8" : i <= -4 ? "1/4" : i <= -2 ? "1/2" : i >= 8 ? "8x" : i >= 4 ? "4x" : i >= 2 ? "2x" : "1x";
       e(_$$F.enqueue({
@@ -642,4 +642,4 @@ export function $$X0({
     })]
   });
 }
-export const N = $$X0; 
+export const N = $$X0;

@@ -1,13 +1,13 @@
 import { jsx } from "react/jsx-runtime";
 import { memo, useCallback, useRef } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { NLJ, glU } from "../figma_app/763686";
 import { CB } from "../figma_app/442259";
 import { UM, zW } from "../figma_app/391056";
 let $$d3 = "dlt-banner-chat-shortcut";
 let $$c0 = "dlt-banner-emote-shortcut";
 let $$u4 = memo(function (e) {
-  let t = d4(e => e.mirror.appModel.currentTool === NLJ.COMMENTS);
+  let t = useSelector(e => e.mirror.appModel.currentTool === NLJ.COMMENTS);
   let r = useCallback(() => {
     t ? glU?.triggerActionInUserEditScope("set-tool-default", {
       source: UM
@@ -24,7 +24,7 @@ let $$u4 = memo(function (e) {
   });
 });
 let $$p2 = memo(function (e) {
-  let t = d4(e => "REACTING_OR_CHATTING" === e.multiplayerEmoji.type && e.multiplayerEmoji.isChatting);
+  let t = useSelector(e => "REACTING_OR_CHATTING" === e.multiplayerEmoji.type && e.multiplayerEmoji.isChatting);
   let r = useCallback(e => {
     if (t) {
       CB.closeWheel();
@@ -43,7 +43,7 @@ let $$p2 = memo(function (e) {
 });
 let $$_1 = memo(function (e) {
   let t = useRef(null);
-  let r = d4(e => {
+  let r = useSelector(e => {
     let t = "WHEEL" === e.multiplayerEmoji.type;
     let r = "REACTING_OR_CHATTING" === e.multiplayerEmoji.type && !!e.multiplayerEmoji.imageUrl;
     return t || r;

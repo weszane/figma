@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { memo, useState, useRef, useCallback, useMemo } from "react";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { o as _$$o } from "../905/821217";
 import { m1T } from "../figma_app/763686";
 import { dI } from "../905/805904";
@@ -125,15 +125,15 @@ export function $$F0({
   hideCustomColorPickerFillTypeToggle: p,
   recordingKey: h
 }) {
-  let m = d4(e => e.pickerShown && e.pickerShown.id === d ? e.pickerShown : null);
+  let m = useSelector(e => e.pickerShown && e.pickerShown.id === d ? e.pickerShown : null);
   let g = useRef(null);
   let x = !!e && hS(e) && bn(e.type);
   let {
     openColorPicker,
     closeColorPicker
   } = function (e, t, s, r, l) {
-    let a = wA();
-    let d = d4(e => e.mirror.appModel.activeCanvasEditModeType);
+    let a = useDispatch();
+    let d = useSelector(e => e.mirror.appModel.activeCanvasEditModeType);
     let c = jj(e);
     return {
       openColorPicker: useCallback(() => {

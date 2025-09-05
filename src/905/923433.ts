@@ -1,6 +1,6 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useMemo, useCallback, Fragment as _$$Fragment, useRef, useState, useContext } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
 import { lQ } from "../905/934246";
 import { d as _$$d } from "../905/49800";
@@ -81,7 +81,7 @@ export function $$G1(e) {
   }) : null;
 }
 export function $$z2(e) {
-  let t = wA();
+  let t = useDispatch();
   let i = e.contextType ?? $.CELL;
   let u = RU();
   let p = EU();
@@ -259,7 +259,7 @@ function H({
   recordingKey: d,
   innerContainerClassName: c
 }) {
-  let u = wA();
+  let u = useDispatch();
   let p = useRef(null);
   let m = useRef(null);
   let [g, A] = useState(!1);

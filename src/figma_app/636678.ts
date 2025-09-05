@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useRef, useMemo, useCallback } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { u as _$$u } from "../905/911813";
 import { A as _$$A } from "../905/891805";
 import { _ as _$$_ } from "../905/607842";
@@ -74,7 +74,7 @@ export function $$w0(e) {
       slotPropertyDefinition: e,
       includesInstanceSublayer: t
     }, r) {
-      let s = wA();
+      let s = useDispatch();
       let l = Xo();
       let d = l?.id === aR;
       let c = md(_$$A2);

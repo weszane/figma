@@ -1,5 +1,5 @@
 import { useMemo, useCallback, useEffect } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { tKW } from "../figma_app/763686";
 import s from "../vendor/3757";
 import { debugState } from "../905/407919";
@@ -16,7 +16,7 @@ import { ip, kn, Uh } from "../905/762943";
 var o = s;
 export function $$y13(e) {
   let t = v4().id;
-  let r = d4((e) => e.mirror.appModel.devHandoffPreferences);
+  let r = useSelector(e => e.mirror.appModel.devHandoffPreferences);
   let a = e ?? t;
   return useMemo(() => r.codeExtensionPreferences?.[a] ?? {}, [r, a]);
 }
@@ -26,7 +26,7 @@ export function $$b15() {
   return e?.devHandoffPreferences?.codeExtensionPreferences?.[t] ?? {};
 }
 export function $$T2() {
-  let e = d4((e) => e.mirror.appModel.devHandoffPreferences);
+  let e = useSelector(e => e.mirror.appModel.devHandoffPreferences);
   let t = U();
   return useCallback((r, n, i) => {
     let {
@@ -60,7 +60,7 @@ let v = ({
   preferences: e,
   options: t = {}
 }) => e.customSettings?.onlyText === "true" && !t?.isTextProperty;
-function A(e, t, r = (e) => e, n) {
+function A(e, t, r = e => e, n) {
   let i = v4();
   let a = e ?? i;
   let s = $$S12(a);
@@ -68,9 +68,9 @@ function A(e, t, r = (e) => e, n) {
   return 1 === s || 0 === s || v({
     preferences: o,
     options: n
-  }) ? t.map((e) => void 0 === e ? void 0 : r(e)) : t.map((e) => void 0 === e ? void 0 : r(e / s));
+  }) ? t.map(e => void 0 === e ? void 0 : r(e)) : t.map(e => void 0 === e ? void 0 : r(e / s));
 }
-export function $$x6(e, t, r = (e) => e, n) {
+export function $$x6(e, t, r = e => e, n) {
   return A(e, [t], r, n)[0];
 }
 export function $$N0(e, t) {
@@ -78,7 +78,7 @@ export function $$N0(e, t) {
   let i = e ?? r;
   let a = $$S12(i);
   let s = $$y13(i.id);
-  return useCallback((e) => 1 === a || 0 === a || void 0 === e || v({
+  return useCallback(e => 1 === a || 0 === a || void 0 === e || v({
     preferences: s,
     options: t
   }) ? void 0 === e ? void 0 : e : e * a, [t, s, a]);
@@ -91,7 +91,7 @@ export function $$C4(e, t, r, n) {
   return v({
     preferences: $$y13(a.id),
     options: n
-  }) ? s.map((e) => `${e}${kn.pixel}`) : s.map((e) => `${e}${o}`);
+  }) ? s.map(e => `${e}${kn.pixel}`) : s.map(e => `${e}${o}`);
 }
 export function $$w16(e, t, r, n) {
   let i = $$C4(e, [t], r, n);

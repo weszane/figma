@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useCallback } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { d as _$$d } from "../905/976845";
 import { A } from "../905/891805";
 import { generateRecordingKey } from "../figma_app/878298";
@@ -23,7 +23,7 @@ export function $$_0() {
   let t = useCallback(() => {
     e();
   }, [e]);
-  let n = d4(f);
+  let n = useSelector(f);
   let _ = 0 === Rb().length && !n;
   return jsx(k, {
     name: "local_variables_panel",

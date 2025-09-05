@@ -1,6 +1,6 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useState } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { $n } from "../905/521428";
 import { o as _$$o } from "../905/89370";
 import { YEY, rpt, Lov } from "../figma_app/763686";
@@ -31,10 +31,10 @@ export function $$I0({
   recordingKey: I,
   hasMultipleSelections: k
 }) {
-  let N = wA();
+  let N = useDispatch();
   let A = aq();
   let O = Z("canvas_search_navigate");
-  let L = d4(e => e.canvasSearch.scope);
+  let L = useSelector(e => e.canvasSearch.scope);
   let {
     total
   } = md(Fk);

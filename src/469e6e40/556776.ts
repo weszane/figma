@@ -4,7 +4,7 @@ import { i as _$$i } from "../vendor/218335";
 import { H as _$$H } from "../vendor/373976";
 import { u as _$$u } from "../vendor/363976";
 import { createPortal } from "../vendor/944059";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { d as _$$d } from "../905/976845";
 import { J as _$$J } from "../905/125993";
 import { _gJ } from "../figma_app/763686";
@@ -105,7 +105,7 @@ function z(e) {
   let l = md(be);
   let [o, c] = useState(!1);
   let _ = K();
-  let u = wA();
+  let u = useDispatch();
   let {
     shownPlugins,
     overflowPlugins
@@ -189,7 +189,7 @@ function V({
   let h = useRef(null);
   let x = _I();
   let b = m0() && !x;
-  let f = wA();
+  let f = useDispatch();
   let w = Um();
   let C = _$$p(e.plugin_id, o);
   let I = C.length > 0;

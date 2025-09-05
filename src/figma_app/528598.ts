@@ -2,7 +2,7 @@ import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useMemo, useState, useRef, useEffect, useCallback, useContext } from "react";
 import { Z_n, CWU, Ez5, ibQ, glU, J0O, rrT, rXF, ZiZ, VQu } from "../figma_app/763686";
 import { q as _$$q } from "../figma_app/905311";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { Bq } from "../figma_app/656233";
 import { assertNotNullish } from "../figma_app/465776";
 import { lQ } from "../905/934246";
@@ -224,8 +224,8 @@ function eU(e) {
   } = e;
   let C = ut(Ez5?.propertiesPanelState().shownPropertiesPanels, void 0);
   let O = C?.[ibQ.INSTANCE_ITEM] ?? !1;
-  let R = wA();
-  let L = d4(e => e.selectedComponentPropDefId);
+  let R = useDispatch();
+  let L = useSelector(e => e.selectedComponentPropDefId);
   let [D, M] = useState(!1);
   let F = useRef(null);
   let B = useRef(null);
@@ -523,8 +523,8 @@ function eV({
   submitBehaviorAssignment: c,
   onChange: u
 }) {
-  let p = wA();
-  let _ = d4(e => e.instanceSwapPickerShown);
+  let p = useDispatch();
+  let _ = useSelector(e => e.instanceSwapPickerShown);
   let g = useCallback(e => {
     let t = WI(rXF.BOOLEAN, e);
     c ? c(s.explicitDefID, t) : l7.user("toggle-bool-prop-assignment", () => {
@@ -806,7 +806,7 @@ function e$({
   onChange: m
 }) {
   let g = gl(e) ? 0 : Number(e);
-  let f = wA();
+  let f = useDispatch();
   let [E, y] = useState(null);
   let b = useMemo(() => new eY(p), [p]);
   let T = e => {
@@ -907,8 +907,8 @@ function eq({
   instanceSwapPickerIdPrefix: f = "instance-swap-prop-assignment-picker-",
   submitBehaviorAssignment: E
 }) {
-  let y = wA();
-  let b = d4(sS);
+  let y = useDispatch();
+  let b = useSelector(sS);
   let {
     preferredValues,
     preferredValuesFetchError,

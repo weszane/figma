@@ -1,6 +1,6 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useMemo } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { N as _$$N } from "../905/438674";
 import { Cs } from "../figma_app/59509";
 import { Q } from "../905/363675";
@@ -24,7 +24,7 @@ import { b as _$$b2, A as _$$A } from "../905/723768";
 var _ = m;
 let $$A = "connected_projects_tab_header--headerContainer--Rz5m6";
 export function $$w0() {
-  let e = wA();
+  let e = useDispatch();
   let t = px();
   let a = S2().unwrapOr(null);
   let m = Um(t).unwrapOr(!1);

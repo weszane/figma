@@ -1,5 +1,5 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { hS } from "../905/437088";
 import { N as _$$N } from "../905/438674";
 import { bL } from "../905/38914";
@@ -36,11 +36,11 @@ export function $$C2(e) {
     preventUserClose: !0,
     onClose: () => {}
   });
-  let r = d4(e => e.mirror.appModel.isReadOnly);
-  let u = d4(e => e.selectedView);
+  let r = useSelector(e => e.mirror.appModel.isReadOnly);
+  let u = useSelector(e => e.selectedView);
   let T = XE(u) === nT.Design;
   let x = tS() || getInitialOptions().editing_file?.source_file?.key || "";
-  let N = wA();
+  let N = useDispatch();
   let C = {
     view: "fullscreen",
     editorType: T ? nT.Design : nT.Whiteboard,

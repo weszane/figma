@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback, useEffect } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { md } from "../figma_app/27355";
 import { buildUploadUrl } from "../figma_app/169182";
 import { oW } from "../905/675859";
@@ -25,7 +25,7 @@ export function $$E2() {
   return md(k);
 }
 export function $$C3(e) {
-  let t = wA();
+  let t = useDispatch();
   let n = useCallback(e => {
     t(_$$b({
       [j]: e

@@ -1,5 +1,5 @@
 import { useState, useMemo, useCallback } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
 import { Rs } from "../figma_app/288654";
 import { oA } from "../905/723791";
@@ -29,7 +29,7 @@ let g = e => {
 export function $$h0(e) {
   var t;
   let [a, r] = useState((t = e || "", /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(t)) ? e : void 0);
-  let o = wA();
+  let o = useDispatch();
   let h = T5("useOpenResourceConnectionReviewModal").unwrapOr(null);
   let x = Rs(XPZ, {
     resourceConnectionInviteId: a

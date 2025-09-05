@@ -27,7 +27,7 @@ import { O as _$$O } from "../905/587457";
 import { buildUploadUrl } from "../figma_app/169182";
 import { oW } from "../905/675859";
 import { r as _$$r2 } from "../905/571838";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { E as _$$E2 } from "../905/53857";
 import { k as _$$k } from "../905/443820";
 import { V as _$$V } from "../905/291719";
@@ -207,7 +207,7 @@ function K({
   setSkippedExamples: e
 }) {
   let t = RL(JT.PUBLISH_LIBRARY_FOR_AI, Iq);
-  let i = wA();
+  let i = useDispatch();
   return jsxs("div", {
     className: "x78zum5 x193iq5w xdt5ytf x1cy8zhl x167g77z x1vcdrz3 xkh2ocl",
     children: [jsx("span", {

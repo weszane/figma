@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useId, useEffect } from "react";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { wv, hE, g8, ZP, Q$, MJ, q7, b as _$$b, bL, mc } from "../figma_app/860955";
 import { q7 as _$$q } from "../905/465888";
 import { h as _$$h } from "../905/270045";
@@ -30,7 +30,7 @@ export function $$I1({
   let d = AC(e);
   let c = _$$Pt(d);
   let u = sZ();
-  let p = d4(e => e.whitelistedPlugins);
+  let p = useSelector(e => e.whitelistedPlugins);
   let _ = ow(d, p, u) ? e : {
     type: "first-party",
     id: "WEB"
@@ -158,7 +158,7 @@ export function $$x2({
     getTriggerProps
   } = _$$b();
   let g = useId();
-  let E = wA();
+  let E = useDispatch();
   useEffect(() => E(aq()), [E]);
   let y = _?.format(c) ?? o?.[0];
   let b = y ? _$$t("dev_handoff.code.language_named", {
@@ -199,7 +199,7 @@ export function $$N4({
     getTriggerProps
   } = _$$b();
   let m = useId();
-  let g = wA();
+  let g = useDispatch();
   useEffect(() => g(aq()), [g]);
   let E = d?.format(o) ?? r?.[0];
   let y = E ? _$$t("dev_handoff.code.settings.language_dropdown_with_unit", {

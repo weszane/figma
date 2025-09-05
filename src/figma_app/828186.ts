@@ -1,4 +1,4 @@
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { Ez5, nQ7 } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { ut } from "../figma_app/84367";
@@ -10,7 +10,7 @@ export function $$d3(e) {
   return $$l2(e.selectedView);
 }
 export function $$c4() {
-  return d4($$d3);
+  return useSelector($$d3);
 }
 export function $$u0() {
   return !!getFeatureFlags().cooper;

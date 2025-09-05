@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { lQ } from "../905/934246";
 import { getFeatureFlags } from "../905/601108";
 import { A } from "../vendor/850789";
@@ -8,7 +8,7 @@ import { F } from "../905/302958";
 import { zX } from "../905/576487";
 let u = "cms-connection-error-visual-bell";
 export function $$p0(e) {
-  let t = wA();
+  let t = useDispatch();
   let [i] = A(e.status, 3e3);
   useEffect(() => {
     if (getFeatureFlags().dakota_connection_error_toast) {

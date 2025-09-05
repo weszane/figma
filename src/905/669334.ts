@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { memo, useCallback, useMemo } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { t as _$$t } from "../905/150656";
 import { E as _$$E } from "../905/632989";
 import { r as _$$r } from "../905/571562";
@@ -47,8 +47,8 @@ let $$k0 = memo(({
   tabManager: N,
   libraryFile: P
 }) => {
-  let O = wA();
-  let D = d4(e => e.dropdownShown);
+  let O = useDispatch();
+  let D = useSelector(e => e.dropdownShown);
   let L = iZ();
   let F = X();
   let M = D?.type === v;

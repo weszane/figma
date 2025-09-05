@@ -1,5 +1,5 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { h as _$$h } from "../905/270045";
 import { bL } from "../905/911410";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
@@ -22,7 +22,7 @@ import { h as _$$h2, b as _$$b } from "../905/916167";
 let $$v0 = "nudge-amount";
 let A = parsePxInt(md8);
 export function $$x1(e) {
-  let t = wA();
+  let t = useDispatch();
   let r = EU();
   let c = RU();
   let I = _$$S({

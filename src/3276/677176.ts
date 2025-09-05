@@ -1,5 +1,5 @@
 import { useCallback, useContext, useMemo } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { pV } from "../figma_app/819288";
 import { Point } from "../905/736624";
 import { WN } from "../figma_app/638601";
@@ -42,7 +42,7 @@ function k() {
 }
 export function $$P0(e, t, n, s, m, u) {
   let f = useContext(viewportNavigatorContext);
-  let _ = wA();
+  let _ = useDispatch();
   let v = f.getCommentDestinationForCanvasPosition;
   let w = fG();
   let P = k();
@@ -68,7 +68,7 @@ export function $$P0(e, t, n, s, m, u) {
   }, [t, w, v, _, P]));
   let E = j(e, I(t, n));
   let N = function (e, t, n) {
-    let i = wA();
+    let i = useDispatch();
     let s = useContext(viewportNavigatorContext);
     let m = I_();
     let u = _$$s();
@@ -114,7 +114,7 @@ export function $$P0(e, t, n, s, m, u) {
 }
 function I(e, t) {
   let n = useContext(viewportNavigatorContext);
-  let r = wA();
+  let r = useDispatch();
   let d = n.getCommentDestinationForCanvasPosition;
   let c = fG();
   let u = pC();

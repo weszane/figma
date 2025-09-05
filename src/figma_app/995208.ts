@@ -14,20 +14,20 @@ import { Cu } from "../figma_app/314264";
 import { Ju } from "../905/102752";
 import { F as _$$F } from "../905/759613";
 import { useEffect } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { J } from "../905/341359";
 import { ZC } from "../figma_app/39751";
 import { Lo, $O } from "../905/156213";
 import { M as _$$M } from "../905/152487";
 function v(e) {
-  let t = wA();
+  let t = useDispatch();
   let {
     isShowing,
     onClose,
     modalType
   } = e;
   let s = ZC(isShowing);
-  let o = d4(e => e.modalShown?.type) === modalType;
+  let o = useSelector(e => e.modalShown?.type) === modalType;
   let l = ZC(o);
   useEffect(() => {
     isShowing && l && !o && onClose("different_modal_shown");

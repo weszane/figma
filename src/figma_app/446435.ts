@@ -1,5 +1,5 @@
 import { useState, useMemo, useCallback, useEffect } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { debounce } from "../905/915765";
 import { getInitialOptions } from "../figma_app/169182";
 import { oJ } from "../905/63728";
@@ -25,7 +25,7 @@ export function $$A3(e) {
     templatesShelfType,
     source
   } = e;
-  let o = wA();
+  let o = useDispatch();
   let [u] = useState(() => new Ef([], {
     keys: ["name"]
   }));
@@ -35,8 +35,8 @@ export function $$A3(e) {
   });
   let f = oh(h);
   let b = mC(h);
-  let I = d4(e => e.hubFiles);
-  let S = d4(e => e.communityHub.shelves[p]);
+  let I = useSelector(e => e.hubFiles);
+  let S = useSelector(e => e.communityHub.shelves[p]);
   let v = tS();
   let A = getInitialOptions().user_data?.id;
   let [x, N] = useState("");
@@ -124,7 +124,7 @@ export function $$A3(e) {
 }
 export let $$x0 = "templates_context_menu";
 export function $$N2(e) {
-  let t = wA();
+  let t = useDispatch();
   let {
     primaryKey
   } = fG()(e);
@@ -152,7 +152,7 @@ export function $$C1(e) {
     isDrawMode,
     enabled = !0
   } = e;
-  let u = wA();
+  let u = useDispatch();
   let [h] = useState(() => enabled ? new Promise(e => function (e, t) {
     if (v[e]) {
       t(v[e]);

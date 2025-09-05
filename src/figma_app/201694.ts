@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { memo, useRef, useState, useCallback, useEffect, useLayoutEffect, forwardRef } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { K as _$$K } from "../905/443068";
 import { wY } from "../figma_app/708845";
 import { Pt } from "../figma_app/806412";
@@ -208,7 +208,7 @@ function $(e) {
     action
   } = e;
   let r = Zr(action);
-  let i = d4(e => e.mirror.appModel.keyboardShortcuts);
+  let i = useSelector(e => e.mirror.appModel.keyboardShortcuts);
   return jsx(a1, {
     text: _$$A(action),
     isEnabled: r,

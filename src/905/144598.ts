@@ -1,5 +1,5 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { N } from "../905/7587";
 import { A as _$$A } from "../905/410311";
 import o from "classnames";
@@ -22,7 +22,7 @@ var l = o;
 export function $$x2(e) {
   let t;
   let i = "level-change-dropdown";
-  let s = wA();
+  let s = useDispatch();
   let o = _$$o();
   let p = lx()({
     rolePending: e.pending,

@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, nB } from "../figma_app/272243";
@@ -66,7 +66,7 @@ export function $$D0({
   planComparisonChartOverride: U,
   seatComparisonChartOverride: B
 }) {
-  let G = wA();
+  let G = useDispatch();
   let [V, H] = useState(LN());
   let z = _$$R(e => vp(e.user, e.currentUserOrgId, e.currentTeamId));
   let W = X$("PlanComparisonModalContent");

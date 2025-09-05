@@ -1,6 +1,6 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { K } from "../905/443068";
 import { A as _$$A } from "../905/251970";
 import l from "classnames";
@@ -45,7 +45,7 @@ export function $$L0({
     }, 1300);
   }, [p, u, c]);
   let _ = q();
-  let h = d4(e => e.mirror.sceneGraph);
+  let h = useSelector(e => e.mirror.sceneGraph);
   let m = _ && Qf(h);
   let g = !!m && m.childCount > 0;
   if (useEffect(() => {
@@ -90,7 +90,7 @@ function P() {
 }
 var D = (e => (e.MOUSE = "mouse", e.TRACKPAD = "trackpad", e))(D || {});
 function k() {
-  let e = wA();
+  let e = useDispatch();
   let [t, r] = useState("mouse");
   return jsx(fu, {
     name: "Panning and Zooming Instructions Modal",

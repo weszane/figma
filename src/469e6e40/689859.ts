@@ -1,6 +1,6 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useEffect, useState } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { Ex, zE, vj } from "../figma_app/919079";
 import { V } from "../figma_app/312987";
 import { $$ } from "../figma_app/637027";
@@ -68,7 +68,7 @@ let E = M4.Mutation(async (e, {
   });
 });
 let $$C0 = Ju(function (e) {
-  let t = wA();
+  let t = useDispatch();
   let {
     planId,
     planType
@@ -84,7 +84,7 @@ let $$C0 = Ju(function (e) {
   let [T, A] = useState(JO.VIEWER);
   let [R, O] = useState(!1);
   let L = gY(E);
-  let D = d4(({
+  let D = useSelector(({
     dropdownShown: e
   }) => e);
   let M = (e, a) => {

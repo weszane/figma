@@ -1,5 +1,5 @@
 import { useCallback, useMemo } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { w3z } from "../figma_app/763686";
 import { sx } from "../905/449184";
 import { sn } from "../905/542194";
@@ -13,8 +13,8 @@ import { jY } from "../figma_app/151869";
 export function $$m1(e, t) {
   let r = function (e) {
     let t = jY();
-    let r = d4(FZ);
-    let n = d4(c5);
+    let r = useSelector(FZ);
+    let n = useSelector(c5);
     return NY(e, t, r, n);
   }(e);
   let m = DP();

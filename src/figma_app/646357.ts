@@ -1,5 +1,5 @@
 import { createContext, useMemo, useCallback, useEffect } from "react";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { filterNotNullish } from "../figma_app/656233";
 import { throwTypeError, debug } from "../figma_app/465776";
 import { debounce } from "../905/915765";
@@ -374,7 +374,7 @@ export function $$eD4(e) {
 let ek = (e, t) => _$$$(e.key) === t || !!e.source_file_key && _$$$(e.source_file_key) === t;
 export function $$$$eM69() {
   let e = q5();
-  let t = d4(e => e.library);
+  let t = useSelector(e => e.library);
   let r = He();
   return useCallback(n => !!e && eF(t.defaultPublished, {
     key: e.key,
@@ -916,7 +916,7 @@ export function $$tl9(e, t) {
 }
 let $$td = (e, t, r, n, i, a) => $$to85(e, t, r, n, i, a, !0).reduce((e, t) => (t.type === PW.COMPONENT ? t.component_key && (e[t.component_key] = t) : e[t.key] = t, e), Object.create(null));
 export function $$tc66(e) {
-  let t = wA();
+  let t = useDispatch();
   let {
     library,
     sceneGraph,
@@ -970,7 +970,7 @@ export function $$t_17(e, t, r) {
   } : void 0;
 }
 export function $$th42(e, t) {
-  return $$t_17(e, t, d4(e => e.library));
+  return $$t_17(e, t, useSelector(e => e.library));
 }
 export function $$tm97(e, t) {
   if (!e) return "";
@@ -981,7 +981,7 @@ export function $$tm97(e, t) {
   }
 }
 export function $$tg92(e, t) {
-  let r = d4(e => e.mirror.sceneGraph);
+  let r = useSelector(e => e.mirror.sceneGraph);
   return $$tm97($$th42(e, t), r);
 }
 export function $$tf49(e) {
@@ -1248,7 +1248,7 @@ export function $$t559(e) {
   return t;
 }
 export function $$t3102(e) {
-  let t = wA();
+  let t = useDispatch();
   let r = useMemo(() => debounce(() => {
     e && e.value.node_id && t(rb({
       styleNodeId: e.value.node_id,
@@ -1271,7 +1271,7 @@ export function $$t864(e) {
 }
 export function $$t691() {
   let e = LH();
-  let t = d4(e => e.orgById);
+  let t = useSelector(e => e.orgById);
   return _$$td(e, t);
 }
 export function $$t793(e) {

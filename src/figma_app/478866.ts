@@ -1,5 +1,5 @@
 import { useEffect, useMemo } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { c2 } from "../905/382883";
 import { lQ } from "../905/934246";
 import { ZC } from "../figma_app/39751";
@@ -15,7 +15,7 @@ import { s as _$$s } from "../905/518538";
 import { h4, sc } from "../figma_app/546509";
 export function $$E1(e, t, r, a, o) {
   let h = h4();
-  let m = wA();
+  let m = useDispatch();
   let E = I_();
   let y = _$$s();
   let b = Z();
@@ -82,7 +82,7 @@ export function $$y0(e, t, r, s, l) {
   useEffect(() => {
     d?.updateCommentVisibility && !s && d.updateCommentVisibility(null !== l);
   }, [d, s, l]);
-  let c = d4(e => e.comments.newComment);
+  let c = useSelector(e => e.comments.newComment);
   let u = useMemo(() => {
     if (e === hm) {
       if (!c.anchorPosition) return null;

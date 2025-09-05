@@ -1,5 +1,5 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { tx } from "../905/303541";
 import { Q_ } from "../905/570707";
 import { IT } from "../905/713695";
@@ -71,10 +71,10 @@ export function $$y0(e) {
     maxShownItems = 8,
     showLibraryModalUiRefresh = !1
   } = e;
-  let _ = d4(_$$h);
-  let y = d4(e => e.dropdownShown);
+  let _ = useSelector(_$$h);
+  let y = useSelector(e => e.dropdownShown);
   let [b] = IT(Q_(searchQuery));
-  let E = wA();
+  let E = useDispatch();
   if (!searchQuery || "loaded" !== b.status) return null;
   let x = I(b.data?.components.filteredByTeamId, maxShownItems, publishedLibrary);
   let S = x.length > 0;
@@ -133,11 +133,11 @@ export function $$b1({
   inTeamLibrarySettingsModal: i,
   maxShownItems: a = 8
 }) {
-  let s = wA();
+  let s = useDispatch();
   let o = e.components;
   let d = e.stateGroups;
-  let u = d4(_$$h);
-  let p = d4(e => e.dropdownShown);
+  let u = useSelector(_$$h);
+  let p = useSelector(e => e.dropdownShown);
   let m = [...o, ...d].sort((e, t) => e.score < t.score ? 1 : -1).slice(0, a);
   return m.length ? jsxs(Fragment, {
     children: [jsx(v, {

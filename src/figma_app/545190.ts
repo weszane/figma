@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useMemo, createContext, useState, useContext, useCallback, useRef, useEffect, useLayoutEffect, useId, createRef } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { k as _$$k } from "../905/44647";
 import { O as _$$O } from "../905/969533";
 import { uN } from "../figma_app/338442";
@@ -164,7 +164,7 @@ function eb({
   text: e,
   ...t
 }) {
-  let r = wA();
+  let r = useDispatch();
   let {
     state,
     targetRect,
@@ -250,8 +250,8 @@ function ew(e) {
       propertySortOrder: OC(e) ?? []
     };
   });
-  let w = d4(Nw);
-  let O = wA();
+  let w = useSelector(Nw);
+  let O = useDispatch();
   let R = useCallback(e => {
     V(e.currentTarget.value);
   }, []);
@@ -670,7 +670,7 @@ function eP({
   recordingKey: o
 }) {
   let l = useMemo(() => getFeatureFlags().ds_image_props_sites ? e.filter(e => e.type !== J0O.IMAGE) : e, [e]);
-  let c = d4(e => e.dropdownShown);
+  let c = useSelector(e => e.dropdownShown);
   let u = c?.type === eA;
   let _ = e => (e?.key === "Backspace" || e?.key === "Delete") && (f(), !0);
   let m = v_(o, "keydown", e => {
@@ -767,8 +767,8 @@ function $$e6(e) {
     sceneGraph,
     updateHistory
   } = e;
-  let I = wA();
-  let v = d4(e => e.instanceSwapPickerShown);
+  let I = useDispatch();
+  let v = useSelector(e => e.instanceSwapPickerShown);
   let A = hg();
   let x = D5(variantPropDef.name, variantPropDef.values);
   let N = k9(() => _$$D(guids, sceneGraph), [guids, sceneGraph]);
@@ -782,7 +782,7 @@ function $$e6(e) {
     onExpressionSubmitted,
     variableConsumptionMapValue
   } = function (e, t) {
-    let r = wA();
+    let r = useDispatch();
     let {
       consumedVariable,
       variantProperties,
@@ -815,7 +815,7 @@ function $$e6(e) {
         variantProperties: variableConsumptionMap.VARIANT_PROPERTIES
       };
     }(t);
-    let l = d4(e => e.fileVersion);
+    let l = useSelector(e => e.fileVersion);
     let c = useCallback(t => {
       let i = consumedVariable && hS(consumedVariable) && !("isMixed" in consumedVariable && consumedVariable.isMixed) && consumedVariable.type === Z_n.EXPRESSION ? consumedVariable.value.expressionArguments[0] : {
         type: Z_n.MAP,
@@ -1069,8 +1069,8 @@ function e9({
   guids: d,
   ariaLabelledBy: c
 }) {
-  let _ = wA();
-  let m = d4(e => e.dropdownShown);
+  let _ = useDispatch();
+  let m = useSelector(e => e.dropdownShown);
   return jsx("div", {
     className: u()(tP, {
       [g1]: o === O2.WIDE,
@@ -1191,7 +1191,7 @@ function td({
     selectedStates: _f(e),
     selectedStatesPropertyValues: D1(e)
   }));
-  let m = wA();
+  let m = useDispatch();
   let {
     useGrid
   } = useContext(dD);
@@ -1365,10 +1365,10 @@ function tp({
   isInStateAuthoringView: o,
   recordingKey: l
 }) {
-  let d = d4(e => ow(e) ?? []);
-  let c = d4(Nw);
-  let u = d4(e => OC(e) ?? []);
-  let _ = d4(e => e.dropdownShown);
+  let d = useSelector(e => ow(e) ?? []);
+  let c = useSelector(Nw);
+  let u = useSelector(e => OC(e) ?? []);
+  let _ = useSelector(e => e.dropdownShown);
   let m = _?.type === ex;
   let g = r.length === e.length;
   let f = e => !g && (e?.key === "Backspace" || e?.key === "Delete") && (T(), !0);
@@ -1587,7 +1587,7 @@ export function $$tE2({
   let [l, c] = useState(void 0);
   let [u, p] = useState([]);
   let [_, m] = useState(!1);
-  let g = d4(i$) === iCO.STATE && r === OE.DEFINITION;
+  let g = useSelector(i$) === iCO.STATE && r === OE.DEFINITION;
   useEffect(() => {
     c(void 0);
     p([]);

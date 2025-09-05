@@ -1,5 +1,5 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import i from "classnames";
 import { Rs } from "../figma_app/288654";
 import { x$, cn } from "../figma_app/141320";
@@ -22,7 +22,7 @@ import { A as _$$A } from "../svg/619883";
 var o = i;
 export let $$k0 = Ju(function (e) {
   let t = iZ();
-  let n = wA();
+  let n = useDispatch();
   let i = _6();
   let w = Rs(UpR, {});
   let k = Rs(FA_, {

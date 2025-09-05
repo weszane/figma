@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { PureComponent } from "react";
-import { Ng } from "../vendor/514228";
+import { connect } from "../vendor/514228";
 import { t as _$$t, tx } from "../905/303541";
 import { eE } from "../figma_app/336853";
 class l extends PureComponent {
@@ -22,7 +22,7 @@ class l extends PureComponent {
   }
 }
 l.displayName = "OrgGuestIdentifier";
-export let $$d0 = Ng((e, t) => ({
+export let $$d0 = connect((e, t) => ({
   orgDomains: "orgDomains" in t && t.orgDomains ? t.orgDomains : e.orgDomains,
   org: "org" in t ? t.org || null : e.currentUserOrgId ? e.orgById[e.currentUserOrgId] : null
 }))(l);

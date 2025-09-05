@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { createElement, useMemo, useState } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { isNullish } from "../figma_app/95419";
 import { hS } from "../905/437088";
 import { r as _$$r } from "../905/571838";
@@ -258,7 +258,7 @@ export function $$B0({
   open: _,
   ...p
 }) {
-  let h = wA();
+  let h = useDispatch();
   let [g, x] = useState(1);
   let b = Hl({
     visibility: YT.SEAT_DESCRIPTION

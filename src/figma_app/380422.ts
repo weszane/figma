@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useEffect, useRef, useState } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { W as _$$W } from "../905/933320";
 import { r as _$$r } from "../905/571838";
 import { md, zl } from "../figma_app/27355";
@@ -55,7 +55,7 @@ export function $$W0({
   let {
     currentSearch
   } = md(WP);
-  let G = d4(tB);
+  let G = useSelector(tB);
   let V = g5($A.Design).productComponents;
   let H = k9(() => V.map(e => e.library_key), [V]);
   let z = _$$U(H);

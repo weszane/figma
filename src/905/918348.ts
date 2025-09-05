@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
 import { c2 } from "../905/382883";
 import { lQ } from "../905/934246";
@@ -48,14 +48,14 @@ export function $$E0({
   let [k, R] = useState(!1);
   let [N, P] = useState(!1);
   let O = _$$R();
-  let D = d4(e => e.versionHistory.activeId);
+  let D = useSelector(e => e.versionHistory.activeId);
   let L = getSingletonSceneGraph();
   let F = zL();
   let M = px(c);
   let j = JG({
     enabled: "first-party" === t.type
   });
-  let U = d4(_$$S, c2);
+  let U = useSelector(_$$S, c2);
   useEffect(() => {
     M.rebuildNodeCache();
   }, [M, D, E, j]);

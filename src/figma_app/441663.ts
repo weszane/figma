@@ -1,5 +1,5 @@
 import { jsx } from "react/jsx-runtime";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { t as _$$t } from "../905/303541";
 import { AC } from "../figma_app/777551";
 import { et, zn } from "../figma_app/559491";
@@ -13,7 +13,7 @@ export let $$u0 = Ju(function ({
   let r;
   let d;
   let u;
-  let p = wA();
+  let p = useDispatch();
   let _ = e.is_widget ? _$$t("community.plugins.widget") : _$$t("community.plugins.plugin");
   let h = () => {
     p(et({

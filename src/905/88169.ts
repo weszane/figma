@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useMemo, useLayoutEffect } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { E } from "../905/632989";
 import o from "classnames";
 import { zq } from "../905/193529";
@@ -22,8 +22,8 @@ export function $$m0({
     setPos: m,
     setSize: h
   }), [m, h]);
-  let b = wA();
-  let v = d4(e => e.screenreader.lastCreatedCommentId);
+  let b = useDispatch();
+  let v = useSelector(e => e.screenreader.lastCreatedCommentId);
   useLayoutEffect(() => {
     v && i === v && (A?.current?.focus(), b(zq({
       lastCreatedCommentId: null

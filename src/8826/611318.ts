@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { memo, useRef, useMemo, useEffect, useCallback, useId, useState } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { $n, IK } from "../905/521428";
 import { _0v, glU, rXF, Egt, Qa7, RN9, hJs, AlE, Ez5 } from "../figma_app/763686";
 import { l7 } from "../905/189185";
@@ -149,7 +149,7 @@ let E = memo(function (e) {
   });
 });
 function B(e) {
-  let t = wA();
+  let t = useDispatch();
   let n = Xs();
   let a = kl("detectedList");
   let s = kl("detectableListAxis");
@@ -910,7 +910,7 @@ function ez({
   let f = sR();
   let w = uV();
   let C = am();
-  let S = d4(Sh);
+  let S = useSelector(Sh);
   let j = Vj(_6());
   let b = rO(s);
   let N = "BASELINE" === u;
@@ -1169,9 +1169,9 @@ function td({
   isSelectionStackOrGrid: t
 }) {
   let n = kl("stackMode");
-  let i = d4(Sh);
+  let i = useSelector(Sh);
   let a = b7();
-  let o = d4(e => aW(void 0, e.mirror.selectionProperties, void 0));
+  let o = useSelector(e => aW(void 0, e.mirror.selectionProperties, void 0));
   let s = kl("isInstanceSelected");
   let c = kl("isSlotSelected");
   let d = kl("nodesAllAcceptLayoutChanges");
@@ -1186,7 +1186,7 @@ function td({
     isGridControlReadOnly
   } = function () {
     let e = cJ();
-    let t = d4(F4);
+    let t = useSelector(F4);
     let n = getSingletonSceneGraph();
     let l = {
       isNoLayoutControlReadOnly: !1,
@@ -1279,8 +1279,8 @@ function tu(e) {
   let t = kl("stackMode");
   let n = kl("stackWrap");
   let i = am();
-  let a = d4(Sh);
-  let c = d4(e => aW(void 0, e.mirror.selectionProperties, void 0));
+  let a = useSelector(Sh);
+  let c = useSelector(e => aW(void 0, e.mirror.selectionProperties, void 0));
   return "HORIZONTAL" !== t ? null : jsx(_$$f, {
     variant: "highlighted",
     "aria-label": _$$t("fullscreen.properties_panel.stack_panel.wrap"),
@@ -1339,7 +1339,7 @@ function t_({
     n(gl(a) || gl(o) || c);
   });
   let u = am();
-  let g = d4(Sh);
+  let g = useSelector(Sh);
   let m = jsx(_$$d, {
     onClick: () => {
       n(!t);
@@ -1524,7 +1524,7 @@ function tN({
   let o = e ? _$$tx("fullscreen.properties_panel.stack_panel.auto_layout") : _$$tx("fullscreen.properties_panel.stack_panel.layout");
   let s = kl("numSelectedByType");
   let c = !!s && Kl(s, ["CODE_INSTANCE", "CODE_LAYER", "CODE_COMPONENT", "CODE_FILE", "CODE_LIBRARY"]);
-  let d = d4(e => aW(void 0, e.mirror.selectionProperties, void 0));
+  let d = useSelector(e => aW(void 0, e.mirror.selectionProperties, void 0));
   let u = kl("stackMode");
   let h = Zr("resize-to-fit") && "NONE" === u;
   return jsxs(Zk, {
@@ -1566,7 +1566,7 @@ let tI = memo(function ({
     textAutoResize
   } = SA();
   let y = getFeatureFlags().ce_tv_grid_min_max ? m : e || g;
-  let C = d4(e => aW(void 0, e.mirror.selectionProperties, void 0));
+  let C = useSelector(e => aW(void 0, e.mirror.selectionProperties, void 0));
   let S = "transformPanel";
   let b = jsxs(Fragment, {
     children: [jsx(Ws, {

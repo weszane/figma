@@ -1,4 +1,4 @@
-import { bN } from "../vendor/514228";
+import { shallowEqual } from "../vendor/514228";
 import { isNotNullish } from "../figma_app/95419";
 import { l as _$$l } from "../905/716947";
 import { Iz, eU, zl } from "../figma_app/27355";
@@ -10,7 +10,7 @@ var $$r2;
 var $$a1;
 var u = c;
 (e => {
-  let t = Iz(() => eU(void 0), bN);
+  let t = Iz(() => eU(void 0), shallowEqual);
   e.UnpublishedStylesQuery = M4.Query({
     fetch: async ({
       styleKeys: e,

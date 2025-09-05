@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useRef, useCallback, useEffect } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { debug } from "../figma_app/465776";
 import { getFeatureFlags } from "../905/601108";
 import { jM } from "../905/508367";
@@ -26,7 +26,7 @@ function T({
     window.origin === window.parent.origin && (n = window.parent || window);
   } catch {}
   let o = J(() => _$$o(n), [n]);
-  let h = wA();
+  let h = useDispatch();
   let y = !!S$();
   let T = r ?? y;
   let I = useRef(!1);

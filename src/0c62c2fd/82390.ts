@@ -667,7 +667,7 @@ import { A as _$$A12 } from '../vendor/90566';
 import { dO as _$$dO, rd as _$$rd, qh } from '../vendor/130505';
 import gr from '../vendor/223926';
 import { eJ as _$$eJ } from '../vendor/352483';
-import { d4 as _$$d, Ng, Pj, wA } from '../vendor/514228';
+import { useSelector, connect, useStore, useDispatch } from '../vendor/514228';
 import { A as _$$A1 } from '../vendor/850789';
 import oc from '../vendor/879378';
 import { createPortal } from '../vendor/944059';
@@ -686,7 +686,7 @@ function ej() {
     overlay: _$$rv,
     priority: _$$N.DEFAULT_MODAL
   }, [e]);
-  let n = _$$d(e => _$$xw(e));
+  let n = useSelector(e => _$$xw(e));
   let o = n?.created_at;
   let l = !!o && _$$A3(o).isSameOrAfter(ey);
   _$$h(() => {
@@ -724,7 +724,7 @@ function eN({
 }) {
   let t = _$$iZ();
   let r = _$$dq();
-  let a = _$$d(e => e.currentTeamId);
+  let a = useSelector(e => e.currentTeamId);
   let s = e === 'drafts' ? r : e.team?.org?.id;
   let n = e === 'drafts' ? a : e.team?.id;
   let o = vt(n);
@@ -732,7 +732,7 @@ function eN({
   return !R$(t, s) && !_$$nW && !(o || l);
 }
 function eO() {
-  let e = wA();
+  let e = useDispatch();
   let t = z3();
   return jsx(SidebarRow, {
     onClick: () => {
@@ -794,7 +794,7 @@ function e0(e) {
 }
 let e1 = 'go_to_admin_row--goToAdminRow--OPVDe';
 function e4(e) {
-  let t = wA();
+  let t = useDispatch();
   let r = _$$T('GoToAdminRow').unwrapOr(null);
   let n = Rs(sMZ, {
     name: 'initiated_first_resource_connection'
@@ -861,7 +861,7 @@ function e2(e) {
   });
 }
 function tt(e) {
-  let t = wA();
+  let t = useDispatch();
   let r = e.orgUser.permission === FUserRoleType.ADMIN;
   let n = RG();
   let o = MX();
@@ -945,8 +945,8 @@ function tt(e) {
   });
 }
 function ta(e) {
-  let t = _$$d(e => e.currentTeamId);
-  let r = wA();
+  let t = useSelector(e => e.currentTeamId);
+  let r = useDispatch();
   return t ? jsx(SidebarRow, {
     'isSelected': e.selectedView && e.selectedView.view === 'team',
     'onClick': () => {
@@ -1124,7 +1124,7 @@ function tv(e) {
   }) : f;
 }
 let tN = Ju(e => {
-  let t = wA();
+  let t = useDispatch();
   let r = jsx('span', {
     className: _$$s.fontBold.$,
     children: e.sectionName
@@ -1153,11 +1153,11 @@ let tN = Ju(e => {
 }, 'CONFIRM_SECTION_DELETE_MODAL', ZU.YES);
 let tk = 'custom-section-header-context-menu';
 function tR() {
-  let e = _$$d(e => e.dropdownShown);
+  let e = useSelector(e => e.dropdownShown);
   return e && e?.type === tk ? e : null;
 }
 function tA(e) {
-  let t = wA();
+  let t = useDispatch();
   let r = tR();
   if (r == null) return jsx(Fragment, {});
   let s = () => {
@@ -1210,8 +1210,8 @@ let tG = 'favorited_section--title--bWf4x ellipsis--ellipsis--Tjyfa';
 let tV = 'favorited_section--fileIconContainer--u8cZj';
 let tz = 'favorited_section--dialogTriggerButtonContainer--m7yPm';
 function tH(e) {
-  let t = wA();
-  let r = _$$d(_$$wA);
+  let t = useDispatch();
+  let r = useSelector(_$$wA);
   if (!r) return null;
   let s = jsx('span', {
     role: 'link',
@@ -1284,13 +1284,13 @@ let rg = [{
   separator: !0
 }];
 function rh(e) {
-  let t = wA();
-  let r = _$$d(e => e.selectedView);
+  let t = useDispatch();
+  let r = useSelector(e => e.selectedView);
   let s = _$$p4();
   let n = e.favoritedFile.file;
   let o = M4.useFile(n?.key).data;
   let d = n?.project?.canView;
-  let u = _$$d(e => e.dropdownShown);
+  let u = useSelector(e => e.dropdownShown);
   let m = _$$e5();
   if (u == null || n == null) return null;
   let _ = n.editorType === FFileType.FIGMAKE && !m;
@@ -1364,8 +1364,8 @@ function rh(e) {
   });
 }
 function rx(e) {
-  let t = wA();
-  let r = _$$d(e => e.dropdownShown);
+  let t = useDispatch();
+  let r = useSelector(e => e.dropdownShown);
   if (r == null) return null;
   let s = [...e.organizeFavoriteOptions, ...rg, ...rf(!0, () => _$$t('file_browser.copy_link_to_team'), () => {
     let r = bL(e.teamId, e.orgId);
@@ -1387,8 +1387,8 @@ function rx(e) {
   });
 }
 function rb(e) {
-  let t = wA();
-  let r = _$$d(e => e.dropdownShown);
+  let t = useDispatch();
+  let r = useSelector(e => e.dropdownShown);
   if (r == null) return null;
   let s = [...e.organizeFavoriteOptions, ...rg, ...rf(e.orgId !== null, () => _$$t('file_browser.copy_link_to_workspace'), () => {
     if (e.orgId !== null) {
@@ -1412,8 +1412,8 @@ function rb(e) {
   });
 }
 function rv(e) {
-  let t = wA();
-  let r = _$$d(e => e.dropdownShown);
+  let t = useDispatch();
+  let r = useSelector(e => e.dropdownShown);
   if (r == null) return null;
   let s = [...e.organizeFavoriteOptions, ...rg, ...rf(!0, () => _$$t('file_browser.copy_link_to_project'), () => {
     let r = EE(e.projectId, e.orgId);
@@ -1435,8 +1435,8 @@ function rv(e) {
   });
 }
 function ry(e) {
-  let t = wA();
-  let r = _$$d(e => e.dropdownShown);
+  let t = useDispatch();
+  let r = useSelector(e => e.dropdownShown);
   if (r == null) return null;
   let s = [...e.organizeFavoriteOptions, ...rg, ...rf(!0, () => _$$t('file_browser.copy_link'), () => {
     let r = _$$_2(e.prototype.fileKey, e.prototype.file?.name, e.prototype.pageId);
@@ -1458,11 +1458,11 @@ function ry(e) {
   });
 }
 function rj(e) {
-  let t = wA();
+  let t = useDispatch();
   let r = e.orgId;
-  let n = _$$d(e => e.currentTeamId);
+  let n = useSelector(e => e.currentTeamId);
   let o = e.favorite.team;
-  let l = _$$d(e => e.dropdownShown);
+  let l = useSelector(e => e.dropdownShown);
   let d = useMemo(() => l && l.type === rm.FAVORITED_TEAM_CONTEXT_MENU && l.data.teamId === o.id, [l, o.id]);
   let c = useCallback((e, r) => {
     LP(r.team?.id, FEntityType.TEAM, r.sidebarSectionId ?? void 0, _$$vg);
@@ -1557,10 +1557,10 @@ let rk = e => jsx('div', {
   children: e
 });
 function rR(e) {
-  let t = wA();
-  let r = _$$d(e => e.currentUserOrgId);
-  let n = _$$d(e => e.currentTeamId);
-  let l = _$$d(e => e.dropdownShown);
+  let t = useDispatch();
+  let r = useSelector(e => e.currentUserOrgId);
+  let n = useSelector(e => e.currentTeamId);
+  let l = useSelector(e => e.dropdownShown);
   let d = e.favorite.file;
   let c = M4.useFile(d.key).data;
   let m = NN();
@@ -1728,11 +1728,11 @@ let rP = e => jsx('div', {
   children: e
 });
 function rL(e) {
-  let t = wA();
+  let t = useDispatch();
   let r = e.favorite.project;
-  let n = _$$d(e => e.currentTeamId);
-  let o = _$$d(e => e.currentUserOrgId);
-  let l = _$$d(e => e.dropdownShown);
+  let n = useSelector(e => e.currentTeamId);
+  let o = useSelector(e => e.currentUserOrgId);
+  let l = useSelector(e => e.dropdownShown);
   let d = useMemo(() => l && l.type === rm.FAVORITED_PROJECT_CONTEXT_MENU && l.data.projectId === r.id, [l, r.id]);
   let c = useCallback(e => {
     e.stopPropagation();
@@ -1829,10 +1829,10 @@ function rW({
   });
 }
 function r$(e) {
-  let t = wA();
-  let r = _$$d(e => e.currentTeamId);
-  let n = _$$d(e => e.currentUserOrgId);
-  let l = _$$d(e => e.dropdownShown);
+  let t = useDispatch();
+  let r = useSelector(e => e.currentTeamId);
+  let n = useSelector(e => e.currentUserOrgId);
+  let l = useSelector(e => e.dropdownShown);
   let d = useMemo(() => l && l.type === rm.FAVORITED_PROTOTYPE_CONTEXT_MENU && l.data.resource.prototype.id === e.favorite.prototype.id, [l, e.favorite.prototype.id]);
   let c = useMemo(() => l && l.type === tk, [l]);
   let m = _$$_2(e.favorite.prototype.fileKey, e.favorite.prototype.file?.name, e.favorite.prototype.pageId);
@@ -1936,10 +1936,10 @@ function r$(e) {
   });
 }
 function rV(e) {
-  let t = wA();
+  let t = useDispatch();
   let r = e.orgId;
-  let n = _$$d(e => e.currentTeamId);
-  let o = _$$d(e => e.dropdownShown);
+  let n = useSelector(e => e.currentTeamId);
+  let o = useSelector(e => e.dropdownShown);
   let l = e.favorite.workspace;
   let d = useMemo(() => o && o.type === rm.FAVORITED_WORKSPACE_CONTEXT_MENU && o.data.workspaceId === l.id, [o, l.id]);
   let c = useCallback((e, r) => {
@@ -2047,9 +2047,9 @@ let rz = (e, t) => {
   return a;
 };
 function rH(e) {
-  let t = wA();
-  let r = _$$d(e => e.dragState);
-  let n = _$$d(e => e.currentUserOrgId);
+  let t = useDispatch();
+  let r = useSelector(e => e.dragState);
+  let n = useSelector(e => e.currentUserOrgId);
   let {
     hasPendingRequest,
     getUpgradePathway,
@@ -2283,19 +2283,19 @@ function rH(e) {
   });
 }
 function rq(e) {
-  let t = wA();
-  let r = _$$d(e => e.currentTeamId);
+  let t = useDispatch();
+  let r = useSelector(e => e.currentTeamId);
   let n = _$$dq() ?? null;
   let o = _$$sb(e.favorites, e.order);
   let l = _$$_();
   let [d, c] = useState(!1);
-  let u = _$$d(e => e.favorites.movingResource);
-  let m = _$$d(e => e.favorites.collapsedCustomSections);
+  let u = useSelector(e => e.favorites.movingResource);
+  let m = useSelector(e => e.favorites.collapsedCustomSections);
   let p = e.section ? !m.has(e.section?.id) : !m.has('favorited');
   let [f, g] = useState(!1);
   let [h, x] = useState();
   let [b, v] = useState();
-  let y = _$$d(e => e.dragState);
+  let y = useSelector(e => e.dragState);
   let w = ZC(y);
   useEffect(() => {
     y.type === _$$R4.None && w && w.type !== _$$R4.None && v(void 0);
@@ -2606,10 +2606,10 @@ function rQ(e) {
   });
 }
 function rZ(e) {
-  let t = wA();
-  let r = _$$d(e => e.dragState);
-  let n = _$$d(e => e.favorites.newCustomSectionIndex);
-  let o = _$$d(e => e.favorites.favoritesCount);
+  let t = useDispatch();
+  let r = useSelector(e => e.dragState);
+  let n = useSelector(e => e.favorites.newCustomSectionIndex);
+  let o = useSelector(e => e.favorites.favoritesCount);
   let l = _$$ds(e.favoritedFiles, e.favoritedPrototypes, e.favoritedProjects, e.favoritedTeams, e.favoritedWorkspaces);
   let [d, c] = useState();
   let [u, m] = useState();
@@ -2725,11 +2725,11 @@ function rZ(e) {
 }
 let at = Ju(e => {
   let [t, r] = useState(null);
-  let n = wA();
+  let n = useDispatch();
   let o = Gs();
   let l = TA();
-  let d = _$$d(e => e.teamUserByTeamId);
-  let c = _$$d(e => l ? e.authedUsers.byId[l]?.plans?.filter(e => !e.is_org) : null);
+  let d = useSelector(e => e.teamUserByTeamId);
+  let c = useSelector(e => l ? e.authedUsers.byId[l]?.plans?.filter(e => !e.is_org) : null);
   let u = _$$t('file_browser.planless_favorites.add_favorites_to_modal_title');
   let m = () => n(Ce());
   let _ = {};
@@ -2829,10 +2829,10 @@ function ar(e) {
 }
 let as = 'favorited_drafts_to_move';
 function ai(e) {
-  let t = wA();
+  let t = useDispatch();
   let [r, o] = useState(!0);
   let l = TA();
-  let d = _$$d(e => e.favorites.collapsedCustomSections);
+  let d = useSelector(e => e.favorites.collapsedCustomSections);
   let c = e.teamUser?.planlessFavoritedFiles?.filter(t => !e.dataDriftCorrectedTeamResources?.favoritedFilesKeySet.has(t.resourceId));
   let u = e.teamUser?.planlessFavoritedPrototypes?.filter(t => !e.dataDriftCorrectedTeamResources?.favoritedPrototypesIdSet.has(t.resourceId));
   let m = e.teamUser?.planlessFavoritedProjects?.filter(t => !e.dataDriftCorrectedTeamResources?.favoritedFoldersIdSet.has(t.resourceId));
@@ -2927,8 +2927,8 @@ function ai(e) {
   });
 }
 function an(e) {
-  let t = _$$d(e => e.currentTeamId);
-  let r = wA();
+  let t = useSelector(e => e.currentTeamId);
+  let r = useDispatch();
   return t ? jsx(SidebarRow, {
     isSelected: e.selectedView && e.selectedView.view === 'limitedTeamSharedProjects',
     onClick: () => {
@@ -2949,8 +2949,8 @@ function ao(e) {
   return e ? _$$t('sidebar.browse.all_workspaces') : _$$t('sidebar.browse.all_teams');
 }
 function al() {
-  let e = _$$d(e => e.currentUserOrgId);
-  let t = _$$d(t => e ? t.orgById[e] : null);
+  let e = useSelector(e => e.currentUserOrgId);
+  let t = useSelector(t => e ? t.orgById[e] : null);
   let r = _$$c(e).data ?? !1;
   return t && e ? jsx(Fragment, {
     children: ao(r)
@@ -2959,10 +2959,10 @@ function al() {
 function ad({
   hasWorkspaces: e
 }) {
-  let t = wA();
-  let r = _$$d(e => e.currentUserOrgId);
-  let s = _$$d(e => e.selectedView);
-  let n = _$$d(e => r ? e.orgById[r] : null);
+  let t = useDispatch();
+  let r = useSelector(e => e.currentUserOrgId);
+  let s = useSelector(e => e.selectedView);
+  let n = useSelector(e => r ? e.orgById[r] : null);
   let o = s.view === 'org' && s.orgId === r;
   let l = ao(e);
   return n && r && l ? jsx(SidebarRow, {
@@ -3032,8 +3032,8 @@ function ap() {
 }
 let af = 'PRO_ADMIN_SETTINGS_LINK_ONBOARING_KEY';
 function ag(e) {
-  let t = wA();
-  let r = _$$d(e => e.currentTeamId);
+  let t = useDispatch();
+  let r = useSelector(e => e.currentTeamId);
   let n = _$$px();
   let o = W8(n).unwrapOr(!1);
   let l = No();
@@ -3191,7 +3191,7 @@ function a$(e) {
 let aG = 'upgrade_section--upgradeTextEmphasized--aQCr9';
 var aV = (e => (e[e.UPGRADE = 0] = 'UPGRADE', e[e.CREATE = 1] = 'CREATE', e))(aV || {});
 function az(e) {
-  let t = wA();
+  let t = useDispatch();
   let r = e.type;
   let s = jsx('span', {
     className: aG,
@@ -3224,7 +3224,7 @@ function az(e) {
 function aH({
   daysLeft: e
 }) {
-  let t = wA();
+  let t = useDispatch();
   let r = !!_$$f('edu_hide_verification');
   if (e < 0) return null;
   let s = () => {
@@ -3263,7 +3263,7 @@ function aH({
 }
 let aq = 'dismissed_limited_team_space_uub';
 function aX(e) {
-  let t = wA();
+  let t = useDispatch();
   let [r, n] = useState(!1);
   let o = Rs(qOl, {
     teamId: e.team.id
@@ -3326,8 +3326,8 @@ function aX(e) {
 function a1({
   orgUpsellEligibility: e
 }) {
-  let t = wA();
-  let r = _$$d(e => e.userFlags);
+  let t = useDispatch();
+  let r = useSelector(e => e.userFlags);
   let s = e === _$$VY.SINGLE_TEAM ? _$$tx('upgrade.access_cross_team_design_libraries_sso_and_more') : _$$tx('upgrade.centralize_your_teams_and_share_design_libraries');
   let n = `${e === _$$VY.SINGLE_TEAM ? 'Single-Team' : 'Multi-Team'} Dismissible Org Upgrade Section`;
   return jsx(a$, {
@@ -3355,7 +3355,7 @@ function a1({
 }
 let a5 = 'dismissed_paid_free_space_uub';
 function a8(e) {
-  let t = wA();
+  let t = useDispatch();
   let r = _$$h3.useTrackingContext({
     trigger: _$$b4.UNIVERSAL_UPGRADE_SECTION
   });
@@ -3430,9 +3430,9 @@ function si({
   loading: e,
   data: t
 }) {
-  let r = wA();
+  let r = useDispatch();
   let s = Mh();
-  let n = _$$d(e => e.teamBilling.summary);
+  let n = useSelector(e => e.teamBilling.summary);
   let {
     currency,
     annual_seats,
@@ -3515,7 +3515,7 @@ function sd({
   onTeam: e,
   hitFileLimit: t
 }) {
-  let r = wA();
+  let r = useDispatch();
   let s = _$$h3.useTrackingContext({
     trigger: _$$b4.UNIVERSAL_UPGRADE_SECTION
   });
@@ -3607,9 +3607,9 @@ function sw(e) {
 function sj() {
   let e = function () {
     let e = _$$ol();
-    let t = wA();
-    let r = _$$d(e => e.teamBilling.summary);
-    let a = _$$d(e => e.loadingState);
+    let t = useDispatch();
+    let r = useSelector(e => e.teamBilling.summary);
+    let a = useSelector(e => e.loadingState);
     let s = Be.loadingKeyForPayload({
       teamId: e?.id ?? ''
     });
@@ -3648,7 +3648,7 @@ function sj() {
     let r = FC();
     let a = Rs(UpR, {});
     let s = a.data?.currentUser?.eduPeriodEnd;
-    let n = _$$d(e => e.userFlags);
+    let n = useSelector(e => e.userFlags);
     let o = _$$D('useEduUpgradeSectionProps');
     let l = _$$fh(o).unwrapOr(!1);
     if (!e || a.status !== 'loaded') return null;
@@ -3676,7 +3676,7 @@ function sj() {
   }();
   let r = function () {
     let e = _$$iZ();
-    let t = _$$d(e => e.teams);
+    let t = useSelector(e => e.teams);
     let r = _$$ol();
     let a = _$$md(sb);
     let s = _$$md(_$$Lm);
@@ -3696,7 +3696,7 @@ function sj() {
     } : null;
   }();
   let a = function () {
-    let e = _$$d(e => e.userFlags);
+    let e = useSelector(e => e.userFlags);
     let t = function () {
       let e = FC();
       let t = _$$R6(e => ({
@@ -3724,10 +3724,10 @@ function sj() {
   }();
   let s = function () {
     let e = _$$iZ();
-    let t = _$$d(e => e.teams);
+    let t = useSelector(e => e.teams);
     let r = _$$ol();
     let a = _$$md(_$$Lm);
-    let s = _$$d(e => e.userTeamFlags);
+    let s = useSelector(e => e.userTeamFlags);
     let n = Rs(kQI, {
       id: r?.id ?? ''
     }, {
@@ -3746,7 +3746,7 @@ function sj() {
     let e = _$$iZ();
     let t = _$$ol();
     let r = _$$d2();
-    let a = _$$d(e => e.userTeamFlags);
+    let a = useSelector(e => e.userTeamFlags);
     return e && t && r ? _$$gY2(a, aq, t.id, 7776e6) ? null : {
       type: so.LIMITED_TEAM_SPACE,
       props: {
@@ -3824,8 +3824,8 @@ let sC = {
   }
 };
 function sL() {
-  let e = wA();
-  let t = _$$d(e => e.userFlags);
+  let e = useDispatch();
+  let t = useSelector(e => e.userFlags);
   let r = Om();
   let s = _$$tv();
   return t[w3] ? null : jsx(_$$fu, {
@@ -3872,7 +3872,7 @@ let sD = {
   }
 };
 function sU() {
-  let e = wA();
+  let e = useDispatch();
   let t = () => {
     _$$sx('community_browser_sidebar_action_clicked');
     e(_$$sf({
@@ -3930,10 +3930,10 @@ function sV(e) {
   });
 }
 function sH(e) {
-  let t = wA();
+  let t = useDispatch();
   let r = _$$_();
-  let s = _$$d(e => e.currentUserOrgId);
-  let n = _$$d(e => e.teamFeedBellStates);
+  let s = useSelector(e => e.currentUserOrgId);
+  let n = useSelector(e => e.teamFeedBellStates);
   let o = !!(s && n[s]);
   let l = r.view === 'teamFeed';
   return jsx(SidebarRow, {
@@ -3964,7 +3964,7 @@ function sK({
   teamFolderId: t,
   teamFolderName: r
 }) {
-  let s = wA();
+  let s = useDispatch();
   return t && r ? jsx(SidebarRow, {
     'isSelected': e && e.view === 'folder' && e.folderId === t,
     'onClick': () => {
@@ -3984,8 +3984,8 @@ function sK({
   }) : null;
 }
 function sJ() {
-  let e = wA();
-  let t = _$$d(e => e.selectedView).view === 'deletedFiles';
+  let e = useDispatch();
+  let t = useSelector(e => e.selectedView).view === 'deletedFiles';
   return jsx(Fragment, {
     children: jsx(SidebarRow, {
       isSelected: t,
@@ -4012,14 +4012,14 @@ let sq = 'sidebar--section--COZVK';
 let sX = 'sidebar--loading--AITp2';
 let sQ = 'sidebar--divider--sHsz4';
 function sZ(e) {
-  let t = wA();
+  let t = useDispatch();
   let r = _$$dq();
-  let n = _$$d(e => e.currentTeamId);
-  let l = _$$d(e => e.userFlags);
+  let n = useSelector(e => e.currentTeamId);
+  let l = useSelector(e => e.userFlags);
   let d = FC();
-  let c = _$$d(e => e.userStateLoaded);
+  let c = useSelector(e => e.userStateLoaded);
   let u = _$$_();
-  let m = _$$d(e => e.dragState);
+  let m = useSelector(e => e.dragState);
   let _ = eN({
     project: 'drafts'
   });
@@ -4272,8 +4272,8 @@ function s0(e) {
   let t = _$$iZ();
   let r = _$$dq();
   let n = _$$d2();
-  let o = _$$d(e => e.currentTeamId);
-  let l = wA();
+  let o = useSelector(e => e.currentTeamId);
+  let l = useDispatch();
   let d = _$$v({
     currentOrgId: r,
     currentTeamId: o || null
@@ -4285,7 +4285,7 @@ function s0(e) {
     isLoaded: !u
   });
   let m = TA();
-  let _ = _$$d(e => m ? e.authedUsers.byId[m]?.plans : null);
+  let _ = useSelector(e => m ? e.authedUsers.byId[m]?.plans : null);
   let [{
     status: p,
     data: h
@@ -4346,7 +4346,7 @@ let s4 = {
   AdminSettingsSidebar: _$$e.SCALE
 };
 function s2(e) {
-  let t = _$$d(e => e.mobileNavShown);
+  let t = useSelector(e => e.mobileNavShown);
   let r = _$$n() ? 'AdminSettingsSidebar' : 'FileBrowserSidebar';
   return jsx('nav', {
     className: U()('sidebar--navDefault--pYuzm', {
@@ -4399,7 +4399,7 @@ function iy(e) {
 }
 function iw(e) {
   let t = _$$dq();
-  let r = _$$P(t, _$$d(_$$o6));
+  let r = _$$P(t, useSelector(_$$o6));
   let s = ih(r.data === 'Unassigned' ? null : r.data);
   return jsxs('div', {
     ..._$$xk(ij.desktopHeader, e.showNavigationChevrons && ij.desktopHeaderWithChevrons, !!e.pageHeaderContent && !e.pageHeaderDividerHidden && ij.desktopHeaderBorder),
@@ -4473,7 +4473,7 @@ function iI(e) {
 }
 function iN(e) {
   let t = useRef(null);
-  let r = _$$d(({
+  let r = useSelector(({
     selectedView: e
   }) => e);
   let n = _$$E7();
@@ -4481,7 +4481,7 @@ function iN(e) {
   let u = _$$sZ();
   let m = d && u && !_$$T3.includes(r.view);
   !function () {
-    let e = Pj();
+    let e = useStore();
     useEffect(() => {
       let t = e.getState();
       let r = getPermissionsState(t);
@@ -4584,7 +4584,7 @@ function iD({
   orgTeamsQuery: e,
   workspaceId: t
 }) {
-  let r = wA();
+  let r = useDispatch();
   let {
     currentOrgUser,
     teams,
@@ -4759,7 +4759,7 @@ function iJ({
   backgroundColor: e
 }) {
   let t = NV(WL);
-  let r = _$$d(e => e.selectedView.view);
+  let r = useSelector(e => e.selectedView.view);
   let s = _$$t('license_group_view.toolbar.new_team_button');
   let n = () => {
     t(jd, {
@@ -4787,8 +4787,8 @@ function iJ({
 }
 var iq = (e => (e.NEW_FILE = 'NEW_FILE', e.NEW_RESOURCE = 'NEW_RESOURCE', e.PROJECT_OVERFLOW_MENU = 'PROJECT_OVERFLOW_MENU', e.NEW_TEAM = 'NEW_TEAM', e.NEW_PROJECT = 'NEW_PROJECT', e.IMPORT = 'IMPORT', e.INVITE = 'INVITE', e.SHARE = 'SHARE', e.FAVORITE = 'FAVORITE', e.LOG_OUT = 'LOG_OUT', e.CLAIM = 'CLAIM', e.NEW_WHITEBOARD_FILE = 'NEW_WHITEBOARD_FILE', e.VIEW_COMMUNITY_PROFILE = 'VIEW_COMMUNITY_PROFILE', e.REQUEST_TO_EDIT = 'REQUEST_TO_EDIT', e.JOIN_TEAM = 'JOIN_TEAM', e.UPGRADE_TO_TEAM_ADMIN = 'UPGRADE_TO_TEAM_ADMIN', e.DROPDOWN = 'DROPDOWN', e.VIEW_MEMBERS = 'VIEW_MEMBERS', e.TEAM_OVERFLOW_MENU = 'TEAM_OVERFLOW_MENU', e.VIEW_LIBRARIES = 'VIEW_LIBRARIES', e.NEW_SITE_FILE = 'NEW_SITE_FILE', e.NEW_SLIDES_FILE = 'NEW_SLIDES_FILE', e.NEW_FIGMAKE_FILE = 'NEW_FIGMAKE_FILE', e.GET_DESKTOP_APP = 'GET_DESKTOP_APP', e.ADD_TO_CHROMEBOOK = 'ADD_TO_CHROMEBOOK', e.REQUEST_SENT_DESIGN = 'REQUEST_SENT_DESIGN', e.REQUEST_SENT_WHITEBOARD = 'REQUEST_SENT_WHITEBOARD', e.REQUEST_SENT_ALL = 'REQUEST_SENT_ALL', e.SETTINGS = 'SETTINGS', e))(iq || {});
 function iX(e) {
-  let t = wA();
-  let r = _$$d(e => e.currentUserOrgId);
+  let t = useDispatch();
+  let r = useSelector(e => e.currentUserOrgId);
   let a = _$$_();
   return () => {
     r ? t(_$$to2({
@@ -4917,9 +4917,9 @@ function ni({
   });
 }
 function nn(e) {
-  let t = wA();
+  let t = useDispatch();
   let r = useRef(null);
-  let n = _$$d(({
+  let n = useSelector(({
     dropdownShown: e
   }) => e);
   let o = _$$o7(e.menuGroups);
@@ -4970,7 +4970,7 @@ let n_ = M4.Mutation(async e => {
 let np = Ju(({
   workspace: e
 }) => {
-  let t = wA();
+  let t = useDispatch();
   let r = _$$gY(n_);
   return jsx(_$$c4, {
     title: _$$t('workspace_view.description_modal.title'),
@@ -5002,7 +5002,7 @@ let np = Ju(({
   });
 }, 'UpdateWorkspaceDescriptionModal');
 function nf() {
-  let e = wA();
+  let e = useDispatch();
   let t = TA();
   return useCallback(r => {
     let a = r.workspace.admins.some(e => e.baseOrgUser?.user.id === t);
@@ -5093,7 +5093,7 @@ function nT({
   workspace: e,
   onClose: t
 }) {
-  let r = wA();
+  let r = useDispatch();
   let n = _$$gY(nj);
   let o = [{
     option: ig
@@ -5208,7 +5208,7 @@ function nT({
     })]
   });
 }
-let nR = Ng(e => ({
+let nR = connect(e => ({
   currentUserId: e.user?.id
 }))(e => {
   let t = t => {
@@ -5365,7 +5365,7 @@ function nM({
   query: t,
   users: r
 }) {
-  let n = wA();
+  let n = useDispatch();
   let o = useCallback((e, t) => {
     n(_$$sf({
       view: 'user',
@@ -5407,9 +5407,9 @@ function nB(e) {
     workspace,
     org
   } = e;
-  let n = wA();
-  let o = _$$d(e => e.currentUserOrgId);
-  let l = _$$d(e => e.avatarEditorState);
+  let n = useDispatch();
+  let o = useSelector(e => e.currentUserOrgId);
+  let l = useSelector(e => e.avatarEditorState);
   let d = workspace.canAdmin;
   let [c, u] = _$$fp(ip);
   let {
@@ -5478,7 +5478,7 @@ function nB(e) {
   }), [p, v, o, f]);
   let j = function () {
     let e = nf();
-    let t = wA();
+    let t = useDispatch();
     let [r, a] = _$$fp(ip);
     return useCallback(r => {
       let s = e(r);
@@ -5582,7 +5582,7 @@ function nB(e) {
   });
 }
 function nU(e) {
-  let t = wA();
+  let t = useDispatch();
   let r = e.workspace.members;
   let n = useMemo(() => r ? r.sort((e, t) => {
     let r = e.permission === FOrganizationRoleType.ADMIN;
@@ -5842,7 +5842,7 @@ let n4 = {
 let n2 = Ju(({
   workspaceId: e
 }) => {
-  let t = wA();
+  let t = useDispatch();
   let r = _$$T('ChooseFileToPinModal').unwrapOr(null);
   let o = r?.name ?? null;
   let [l, d] = useState('');
@@ -5978,7 +5978,7 @@ function os({
 }) {
   let t = e.slice(0, 8);
   let r = _$$_();
-  let n = wA();
+  let n = useDispatch();
   let {
     showing,
     show,
@@ -6067,7 +6067,7 @@ function oi({
   isHovered: t,
   isSelected: r
 }) {
-  let n = wA();
+  let n = useDispatch();
   let o = useCallback(t => {
     n(_$$to2({
       type: _$$a7(),
@@ -6347,7 +6347,7 @@ let oT = [];
 function oE({
   workspace: e
 }) {
-  let t = wA();
+  let t = useDispatch();
   let r = _$$_();
   let n = TA();
   let {
@@ -6513,7 +6513,7 @@ function ok({
 }) {
   let [r, n] = _$$fp(oS(e.id));
   let o = useCallback(() => n(e => !e), [n]);
-  let l = wA();
+  let l = useDispatch();
   let d = e.pinnedFiles?.length ?? 0;
   let c = t || e.canAdmin;
   let u = d >= D1;
@@ -8438,7 +8438,7 @@ function dn({
   contextClicked: t,
   forceOpenNewTab: r
 }) {
-  let a = _$$d(e => e.user?.drafts_folder_id);
+  let a = useSelector(e => e.user?.drafts_folder_id);
   let {
     data,
     status
@@ -8630,7 +8630,7 @@ let dm = {
 function dp({
   teamId: e
 }) {
-  let t = wA();
+  let t = useDispatch();
   let r = Om();
   let s = _$$tv();
   let {
@@ -9654,9 +9654,9 @@ function d8({
   orgOrTeamName: t,
   isCommunityTabDisabledForOrg: r
 }) {
-  let s = wA();
+  let s = useDispatch();
   let n = _$$a8(_$$au);
-  let o = _$$d(e => e.userFlags);
+  let o = useSelector(e => e.userFlags);
   let l = e => {
     e !== N$.COMMUNITY || o[w3] || s(_$$b({
       [w3]: !0
@@ -9809,7 +9809,7 @@ function cn({
   let d = UX();
   let c = !!d;
   let u = d?.search.query;
-  let m = wA();
+  let m = useDispatch();
   let [_, p] = useState('');
   let f = _$$A12(e, 400);
   let [g, h] = useState(!1);
@@ -9923,7 +9923,7 @@ let cd = {
   }
 };
 function ch() {
-  let e = wA();
+  let e = useDispatch();
   let t = RA(_$$jT);
   let r = t.apiResourceType;
   let n = t.resourceId;
@@ -10391,7 +10391,7 @@ function cL({
   });
 }
 function cD() {
-  let e = wA();
+  let e = useDispatch();
   let t = Om();
   let r = _$$tv();
   let n = _$$T('ResourceHubApp');
@@ -10715,7 +10715,7 @@ let c1 = new class {
 let ue = 'feed_tile--commentPillText--goQ26';
 let ut = 'feed_tile--feedPostHoverContainerSelectable--rhPI9';
 function ua(e) {
-  let t = wA();
+  let t = useDispatch();
   let r = useRef(null);
   let [n, o] = _$$M();
   let [l, d] = _$$M();
@@ -11031,10 +11031,10 @@ function ui(e) {
   });
 }
 function un(e) {
-  let t = wA();
+  let t = useDispatch();
   let r = useRef(null);
   let n = _$$iZ();
-  let o = _$$d(e => e.teamFeedRefreshNonce);
+  let o = useSelector(e => e.teamFeedRefreshNonce);
   let [l, d] = useState(null);
   let c = _$$_();
   let u = c.view === 'teamFeed';
@@ -11183,8 +11183,8 @@ function un(e) {
   });
 }
 function uo(e) {
-  let t = wA();
-  let r = _$$d(e => e.teamFeedRefreshNonce);
+  let t = useDispatch();
+  let r = useSelector(e => e.teamFeedRefreshNonce);
   useEffect(() => {
     t(yu({
       orgId: e.currentOrgId,
@@ -11221,7 +11221,7 @@ function uu(e) {
   });
 }
 function um(e) {
-  let t = wA();
+  let t = useDispatch();
   useEffect(() => (_$$sx('Team Feed Posts List View Visited'), t(yu({
     orgId: e.currentOrgId,
     bellActive: !1
@@ -11232,7 +11232,7 @@ function um(e) {
   let n = useCallback(() => {
     r();
   }, [r]);
-  let o = _$$d(t => t.teamFeedBellStates[e.currentOrgId]);
+  let o = useSelector(t => t.teamFeedBellStates[e.currentOrgId]);
   let [l, d] = useState(!1);
   let c = ZC(o);
   useEffect(() => {
@@ -11256,7 +11256,7 @@ function um(e) {
   });
 }
 function u_(e) {
-  let t = _$$d(e => e.currentUserOrgId);
+  let t = useSelector(e => e.currentUserOrgId);
   let r = useRef(new _$$M4());
   return (useEffect(() => {
     r.current.start();
@@ -11351,8 +11351,8 @@ let uv = (e, t, r) => {
 function uy({
   currView: e
 }) {
-  let t = wA();
-  let r = _$$d(e => e.tileSortFilterStateByView);
+  let t = useDispatch();
+  let r = useSelector(e => e.tileSortFilterStateByView);
   let n = ub(t, r, e);
   let o = uv(t, r, e);
   let [l, d, c] = _$$t5.useManagedTabs({
@@ -11492,7 +11492,7 @@ function uA({
   canEditTeam: e,
   isDraftsFolder: t
 }) {
-  let r = wA();
+  let r = useDispatch();
   let s = _$$ol();
   let n = _$$_();
   return t || !s || w5(s) || n.view !== 'folder' ? null : jsx(uO, {
@@ -11628,7 +11628,7 @@ function uF({
 }
 let uY = 'open_invoice_reminder_card--icon--gcN35';
 function uJ(e) {
-  let t = wA();
+  let t = useDispatch();
   let r = e.team.restrictions_list?.includes(FPlanLimitationType.LOCKED);
   let s = e.canAdminTeam ? r ? _$$t('billing.open_invoice_reminder.title') : _$$t('billing.open_invoice_reminder.grace_period_title') : _$$t('billing.open_invoice_reminder.title_viewer');
   let n = e.canAdminTeam ? r ? _$$t('billing.open_invoice_reminder.locked_admin_description') : _$$t('billing.open_invoice_reminder.grace_period_admin_description') : _$$t('billing.open_invoice_reminder.locked_viewer_description');
@@ -11813,7 +11813,7 @@ function me({
     userExternallyRestricted: isOrgUserExternallyRestrictedFromState(A),
     selectedBranchKeyByRepoId: e.selectedBranchKeyByRepoId
   }));
-  let $ = wA();
+  let $ = useDispatch();
   let G = vt(O?.id);
   let V = !!O && G;
   let z = !!O && !!m;
@@ -12174,7 +12174,7 @@ function me({
   });
   if (Cm(eo), !function (e) {
     let t = _$$_();
-    let r = wA();
+    let r = useDispatch();
     let a = k9(() => {
       if (t.view === 'deletedFiles') return [];
       let r = [];
@@ -12366,8 +12366,8 @@ function me({
 }
 function ma() {
   let e = _$$d2();
-  let t = _$$d(e => e.currentTeamId);
-  let r = _$$d(e => e.tileSortFilterStateByView);
+  let t = useSelector(e => e.currentTeamId);
+  let r = useSelector(e => e.tileSortFilterStateByView);
   let n = vt();
   let o = _$$R3(t);
   let l = _$$xx(e => ({
@@ -12472,7 +12472,7 @@ function ma() {
         return e;
       }, []) : [];
     }), [t]);
-    let o = wA();
+    let o = useDispatch();
     useEffect(() => {
       if (n.data) {
         let e = n.data?.filter(e => e.type === _$$nb.FILE).map(e => fileEntityDataMapper.toSinatra(e.file)) || [];
@@ -12561,7 +12561,7 @@ function mc({
   canEditTeam: e
 }) {
   let t;
-  let r = wA();
+  let r = useDispatch();
   let s = _$$ol();
   let n = z3();
   let o = I7('exp_fbg_project_limit_upsell');
@@ -12660,7 +12660,7 @@ function mu() {
 function mm({
   canEditTeam: e
 }) {
-  let t = wA();
+  let t = useDispatch();
   let r = _$$ol();
   let s = z3();
   let n = _$$h3.useTrackingContext({
@@ -12778,9 +12778,9 @@ function mm({
 }
 let mh = 'folder_list_view--emptyState--8vmgw tiles_view--emptyState--jfzsE text--fontPos11--2LvXf text--_fontBase--QdLsd text--fontPos11--2LvXf text--_fontBase--QdLsd';
 function mx(e) {
-  let t = _$$d(e => e.dropdownShown);
-  let r = _$$d(e => e.currentUserOrgId);
-  let s = _$$d(e => e.user);
+  let t = useSelector(e => e.dropdownShown);
+  let r = useSelector(e => e.currentUserOrgId);
+  let s = useSelector(e => e.user);
   let {
     folderList
   } = e;
@@ -12873,13 +12873,13 @@ function mv(e) {
     folderList,
     ...r
   } = e;
-  let n = wA();
+  let n = useDispatch();
   let o = e.selectedView.view === 'trashedFolders';
   let l = e.selectedView.view === 'team';
   let d = e.selectedView.view === 'recentsAndSharing';
-  let c = _$$d(e => e.teams);
-  let u = _$$d(e => e.roles);
-  let m = _$$d(e => e.tileSortFilterStateByView);
+  let c = useSelector(e => e.teams);
+  let u = useSelector(e => e.roles);
+  let m = useSelector(e => e.tileSortFilterStateByView);
   let _ = useMemo(() => {
     if (l) {
       let e = m.team;
@@ -12996,7 +12996,7 @@ function mv(e) {
   });
 }
 function my() {
-  let e = _$$d(e => e.currentUserOrgId);
+  let e = useSelector(e => e.currentUserOrgId);
   let t = _$$ol();
   let r = Rs(kQI, {
     id: t ? t.id : ''
@@ -13008,7 +13008,7 @@ function my() {
   }, {
     enabled: !!t?.id
   });
-  let n = _$$d(e => e.tileSortFilterStateByView);
+  let n = useSelector(e => e.tileSortFilterStateByView);
   let o = _$$_();
   let l = _$$R3(t?.id);
   let d = n.trashedFolders;
@@ -13074,7 +13074,7 @@ function mC({
   folderId: e,
   enabled: t = !0
 }) {
-  let r = _$$d(t => t.tileSortFilterStateByView.folders.byId[e] ?? t.tileSortFilterStateByView.folders.$$default);
+  let r = useSelector(t => t.tileSortFilterStateByView.folders.byId[e] ?? t.tileSortFilterStateByView.folders.$$default);
   let a = useMemo(() => ({
     file_type: mS(r.filters.fileType),
     sort_order: r.sort.dir === _$$ue.ASC ? 'asc' : 'desc',
@@ -13123,8 +13123,8 @@ let mk = e => {
   }
 };
 let mW = Ju(e => {
-  let t = wA();
-  let r = _$$d(e => e.teams)[e.teamId].subscription;
+  let t = useDispatch();
+  let r = useSelector(e => e.teams)[e.teamId].subscription;
   let n = e.paymentRequiresAction;
   useEffect(() => {
     _$$T6.getHostedInvoicesPage({
@@ -13683,13 +13683,13 @@ function m9(e, t, r, i, n, l) {
 }
 function _e(e) {
   let t = FC();
-  let r = _$$d(e => e.userEduGracePeriods);
-  let a = _$$d(e => e.userFlags);
-  let n = _$$d(e => e.userTeamFlags);
-  let o = _$$d(e => e.selectedView);
-  let l = _$$d(e => e.isFreeUser);
-  let d = _$$d(e => e.userAnalyticsData);
-  let c = _$$d(e => e.fileKeysByFolderId);
+  let r = useSelector(e => e.userEduGracePeriods);
+  let a = useSelector(e => e.userFlags);
+  let n = useSelector(e => e.userTeamFlags);
+  let o = useSelector(e => e.selectedView);
+  let l = useSelector(e => e.isFreeUser);
+  let d = useSelector(e => e.userAnalyticsData);
+  let c = useSelector(e => e.fileKeysByFolderId);
   let u = useMemo(() => ({
     ...t,
     checks: e.checks,
@@ -13884,7 +13884,7 @@ function _s(e) {
     })
   });
 }
-let _i = Ng(e => ({
+let _i = connect(e => ({
   userFlags: e.userFlags,
   userTeamFlags: e.userTeamFlags,
   currentOrgId: e.currentUserOrgId,
@@ -13915,7 +13915,7 @@ let _i = Ng(e => ({
       teamId: o
     }));
   }, [l, o, c, u, _]);
-  let f = _$$d(e => e.teamBilling?.summary);
+  let f = useSelector(e => e.teamBilling?.summary);
   let g = m9(FResourceCategoryType.FOLDER, n ?? null, o, {
     eduPeriodEnd: r.data?.currentUser?.eduPeriodEnd,
     billingSummary: f,
@@ -13941,8 +13941,8 @@ let _i = Ng(e => ({
   });
 });
 let _n = () => {
-  let e = _$$d(e => e.currentUserOrgId);
-  let t = _$$d(e => e.currentTeamId);
+  let e = useSelector(e => e.currentUserOrgId);
+  let t = useSelector(e => e.currentTeamId);
   let r = Rs(_aE({
     currentOrgId: e,
     currentTeamId: t
@@ -13951,12 +13951,12 @@ let _n = () => {
 };
 function _o() {
   let e;
-  let t = wA();
-  let r = _$$d(e => e.currentUserOrgId);
-  let s = _$$d(e => e.currentTeamId);
+  let t = useDispatch();
+  let r = useSelector(e => e.currentUserOrgId);
+  let s = useSelector(e => e.currentTeamId);
   let n = _n();
   r ? e = n?.currentUser.baseOrgUser?.draftsProject : s && (e = n?.currentUser.currentTeamUser?.draftsProject);
-  let o = _$$d(e => e.tileSortFilterStateByView);
+  let o = useSelector(e => e.tileSortFilterStateByView);
   let l = _$$_();
   if (!n || !e) {
     return jsx(uf, {
@@ -14011,7 +14011,7 @@ function _c(e) {
     selectedBranchKeyByRepoId: t.selectedBranchKeyByRepoId
   }));
   let n = Rp();
-  let o = _$$d(({
+  let o = useSelector(({
     currentUserOrgId: e
   }) => e);
   let l = I7('exp_aa_test_org_drafts');
@@ -14084,10 +14084,10 @@ function _c(e) {
 let _b = Ju(e => {
   let t;
   let r;
-  let n = wA();
+  let n = useDispatch();
   let [l, d] = useState('');
-  let c = _$$d(e => e.deletedReposById);
-  let u = _$$d(e => e.fileByKey);
+  let c = useSelector(e => e.deletedReposById);
+  let u = useSelector(e => e.fileByKey);
   let {
     reposToDelete,
     draftsToDelete,
@@ -14330,8 +14330,8 @@ function _P(e) {
   });
 }
 function _L(e) {
-  let t = wA();
-  let r = _$$d(e => e.selectedView);
+  let t = useDispatch();
+  let r = useSelector(e => e.selectedView);
   let s = _$$v4();
   let {
     item
@@ -14441,23 +14441,23 @@ function _D({
   });
 }
 function _M() {
-  let e = wA();
-  let t = _$$d(e => e.user?.personal_drafts_folder_id);
-  let r = _$$d(e => e.fileKeysByFolderId);
-  let n = _$$d(e => e.fileKeysByRepoId);
-  let l = _$$d(e => e.repoIdsByFolderId);
-  let d = _$$d(e => e.repos);
-  let c = _$$d(e => e.fileByKey);
-  let u = _$$d(e => e.selectedView);
-  let m = _$$d(e => e.selectedBranchKeyByRepoId);
-  let _ = _$$d(e => e.userFlags);
+  let e = useDispatch();
+  let t = useSelector(e => e.user?.personal_drafts_folder_id);
+  let r = useSelector(e => e.fileKeysByFolderId);
+  let n = useSelector(e => e.fileKeysByRepoId);
+  let l = useSelector(e => e.repoIdsByFolderId);
+  let d = useSelector(e => e.repos);
+  let c = useSelector(e => e.fileByKey);
+  let u = useSelector(e => e.selectedView);
+  let m = useSelector(e => e.selectedBranchKeyByRepoId);
+  let _ = useSelector(e => e.userFlags);
   let f = _.personal_draft_migration_scheduled;
   let g = _.personal_draft_migration_completed;
   let h = _.personal_draft_deletion_scheduled;
   let b = _.personal_draft_deletion_completed;
-  let v = _$$d(e => e.loadedFolders);
-  let y = _$$d(e => e.deletedFilesByKey);
-  let w = _$$d(e => e.deletedReposById);
+  let v = useSelector(e => e.loadedFolders);
+  let y = useSelector(e => e.deletedFilesByKey);
+  let w = useSelector(e => e.deletedReposById);
   let {
     windowInnerWidth
   } = _$$l4();
@@ -14834,7 +14834,7 @@ function _B({
   currentResourceId: t,
   hasTrailingDivider: r
 }) {
-  let s = wA();
+  let s = useDispatch();
   return jsx(J5, {
     text: e.name,
     onClick: r => {
@@ -14875,7 +14875,7 @@ function _$({
   orgId: r,
   hasTrailingDivider: s
 }) {
-  let n = wA();
+  let n = useDispatch();
   return jsx(J5, {
     text: e.name,
     onClick: a => {
@@ -15026,7 +15026,7 @@ function _X(e) {
     userAnalyticsData: e.userAnalyticsData,
     ...getPermissionsState(e)
   }));
-  let u = wA();
+  let u = useDispatch();
   let m = Rs(UpR, {});
   let {
     teamId,
@@ -15041,7 +15041,7 @@ function _X(e) {
   let v = useMemo(() => b.transform(({
     team: e
   }) => !!e?.canAdmin), [b]).unwrapOr(!1);
-  let y = _$$d(e => e.loadingState);
+  let y = useSelector(e => e.loadingState);
   let w = Be.loadingKeyForPayload({
     teamId
   });
@@ -15051,7 +15051,7 @@ function _X(e) {
       teamId
     }));
   }, [u, teamId, h, x, v, j]);
-  let T = _$$d(e => e.teamBilling?.summary);
+  let T = useSelector(e => e.teamBilling?.summary);
   let E = m9(FResourceCategoryType.TEAM, g, teamId, {
     selectedView,
     userFlags,
@@ -15084,7 +15084,7 @@ function _Z({
   pinnedFiles: t,
   tileActions: r
 }) {
-  let n = wA();
+  let n = useDispatch();
   let o = _$$_();
   let l = TA();
   let {
@@ -15255,7 +15255,7 @@ let pa = _$$n4(e => function (e) {
 let pl = [FFileType.WHITEBOARD, FFileType.SLIDES];
 let pd = _$$eU(!1);
 function pc(e) {
-  let t = wA();
+  let t = useDispatch();
   let r = pa(_$$iZ());
   let n = pr(!1, r);
   let o = _$$oh(n);
@@ -15271,7 +15271,7 @@ function pc(e) {
       }));
     }
   }, [o, l, t, r, d]);
-  let u = _$$d(e => e.communityHub.shelves[_$$cS.FILE_BROWSER_TEMPLATES_BAR] || []);
+  let u = useSelector(e => e.communityHub.shelves[_$$cS.FILE_BROWSER_TEMPLATES_BAR] || []);
   let m = useMemo(() => {
     let e = new Map();
     u.forEach(t => {
@@ -15419,7 +15419,7 @@ function pm() {
 }
 let p_ = e => e === FTemplateCategoryType.WHITEBOARD ? 'whiteboard' : e === FTemplateCategoryType.SLIDE_TEMPLATE ? 'piper' : 'design';
 function pp(e) {
-  let t = wA();
+  let t = useDispatch();
   let r = e.hubFile;
   let s = r.id;
   let n = e.duplicatingHubId !== null;
@@ -15538,7 +15538,7 @@ function pI(e) {
     hostPlanName,
     user
   } = e;
-  let o = wA();
+  let o = useDispatch();
   let {
     properties
   } = j6();
@@ -15679,7 +15679,7 @@ let pC = {
   pinToWorkspace: !0
 };
 function pS(e) {
-  let t = wA();
+  let t = useDispatch();
   let r = Rs(CH9, {
     folderId: e.folderId
   });
@@ -15724,8 +15724,8 @@ function pk({
   let _ = Pc();
   let p = _$$R3(c?.id);
   let f = jn();
-  let g = _$$d(e => pR(r, e.tileSortFilterStateByView));
-  let x = _$$d(e => e.selectedBranchKeyByRepoId);
+  let g = useSelector(e => pR(r, e.tileSortFilterStateByView));
+  let x = useSelector(e => e.selectedBranchKeyByRepoId);
   let b = vt(c?.id);
   let v = !!l && _$$f4(l);
   let y = v && !o;
@@ -15739,14 +15739,14 @@ function pk({
     isShowingLockedRedesign: r,
     additionalVisibilityRequirements: a = !0
   }) {
-    let n = wA();
+    let n = useDispatch();
     let o = TA();
     let {
       data
     } = _$$nt(e);
     let d = !!data && pl.every(e => _$$d6(data, e));
-    let c = _$$d(yK);
-    let u = _$$d(e => e.userFlags[t]);
+    let c = useSelector(yK);
+    let u = useSelector(e => e.userFlags[t]);
     let m = _$$X$('useTemplatesBarVisibility').unwrapOr(null);
     let _ = m?.tier === FPlanNameType.PRO || m?.tier === FPlanNameType.STUDENT;
     return {
@@ -15831,12 +15831,12 @@ function pL({
   });
 }
 function p$(e) {
-  let t = wA();
+  let t = useDispatch();
   let r = useRef(null);
-  let n = _$$d(({
+  let n = useSelector(({
     dropdownShown: e
   }) => e);
-  let o = _$$d(t => _$$oq(e.folder.id, t)) ?? null;
+  let o = useSelector(t => _$$oq(e.folder.id, t)) ?? null;
   let l = _$$Q({
     currentOrgId: o,
     currentTeamId: null
@@ -15924,15 +15924,15 @@ function p5({
   lgFolder: t,
   team: r
 }) {
-  let n = wA();
-  let o = _$$d(e => e.selectedView.view === 'folder' && e.selectedView.shouldShowRenameModal || !1);
+  let n = useDispatch();
+  let o = useSelector(e => e.selectedView.view === 'folder' && e.selectedView.shouldShowRenameModal || !1);
   let l = function () {
     let e = vt();
     let t = jn();
     return e || t;
   }();
   let d = function () {
-    let e = Pj();
+    let e = useStore();
     return useCallback(async t => {
       try {
         await XHR.post(`/api/folders/${t}/claim`);
@@ -15950,7 +15950,7 @@ function p5({
   }();
   let c = useCallback(() => d(t.id), [d, t.id]);
   let u = function (e) {
-    let t = wA();
+    let t = useDispatch();
     let r = e.canEdit;
     return useCallback(() => {
       e.name && r && t(_$$to2({
@@ -15965,8 +15965,8 @@ function p5({
     o && u();
   });
   let _ = _$$fn() === _$$ih.CONTROL;
-  let p = _$$d(e => e.currentUserOrgId);
-  let f = _$$d(e => e.teamRoleRequests);
+  let p = useSelector(e => e.currentUserOrgId);
+  let f = useSelector(e => e.teamRoleRequests);
   let g = t.team?.org?.id;
   let h = t.team?.id;
   let x = p0({
@@ -15980,7 +15980,7 @@ function p5({
       project: e
     });
     let r = _$$R0();
-    let a = _$$d(e => e.currentUserOrgId);
+    let a = useSelector(e => e.currentUserOrgId);
     return e.canEdit && !e.isEditingLockedForUser && t && (!r || !p0({
       lgFolder: e,
       currentOrgId: a
@@ -16213,7 +16213,7 @@ function p8({
   }(e);
   let d = n.data?.folder;
   let c = t.data?.project || null;
-  let u = wA();
+  let u = useDispatch();
   let m = Rs(Udv, {
     id: e
   });
@@ -16263,7 +16263,7 @@ function p8({
   }).unwrapOr(!1) && w;
   let T = _$$dq();
   let E = _$$xx(_$$ZN);
-  let N = _$$d(t => E(e, t.tileSortFilterStateByView));
+  let N = useSelector(t => E(e, t.tileSortFilterStateByView));
   let C = !d || !c || n.status !== 'loaded' || t.status !== 'loaded';
   if (kF('Folder'), WX({
     markName: 'MainBodyContent',
@@ -16350,7 +16350,7 @@ function p8({
 }
 function p6() {
   let e;
-  let t = _$$d(e => e.currentTeamId);
+  let t = useSelector(e => e.currentTeamId);
   let r = _$$_();
   let s = Rs(RRC, {
     teamId: t ?? ''
@@ -16412,7 +16412,7 @@ function p6() {
 function p3({
   orgId: e
 }) {
-  let t = wA();
+  let t = useDispatch();
   let r = _$$D('ViewLibrariesAction');
   return Kd(r).data ? jsx(_$$K3, {
     action: {
@@ -16433,7 +16433,7 @@ function p7({
   canCreateTeam: e,
   isEnterpriseOrgDirectoryEnabled: t
 }) {
-  let r = wA();
+  let r = useDispatch();
   return t || !e ? null : jsx(_$$K3, {
     action: {
       kind: _$$A9.CUSTOM,
@@ -16473,7 +16473,7 @@ function p9({
   });
 }
 function fr() {
-  let e = wA();
+  let e = useDispatch();
   let t = _$$dq();
   let r = m3(_$$R6(e => ({
     ...getPermissionsState(e),
@@ -16559,7 +16559,7 @@ function fc({
 function fu({
   handle: e
 }) {
-  let t = wA();
+  let t = useDispatch();
   return jsx('a', {
     href: new _$$xn({
       profileHandle: e
@@ -16581,8 +16581,8 @@ function fu({
 function fm({
   orgId: e
 }) {
-  let t = _$$d(t => Xy(t.orgUsersByOrgId[e]).map(e => e.user));
-  let r = wA();
+  let t = useSelector(t => Xy(t.orgUsersByOrgId[e]).map(e => e.user));
+  let r = useDispatch();
   return jsx(nR, {
     label: _$$t('org_home_view_meta.admins'),
     members: t,
@@ -16704,7 +16704,7 @@ let fb = e => {
   }
 };
 function fv(e) {
-  let t = wA();
+  let t = useDispatch();
   let r = _$$X$('OrgPageViewBar').unwrapOr(null);
   let n = H3(r);
   let o = {
@@ -16748,7 +16748,7 @@ function fw({
 }) {
   let s = nf();
   let n = _$$sZ();
-  let o = wA();
+  let o = useDispatch();
   if (!n || !r || !t) return null;
   let l = s({
     workspace: e,
@@ -16835,7 +16835,7 @@ function fk(e) {
     onChildFocusChange
   } = e;
   let [c, u] = useState(!1);
-  let m = _$$d(e => e.currentUserOrgId);
+  let m = useSelector(e => e.currentUserOrgId);
   let _ = _$$aq();
   let p = workspace.colorConfig?.colors ?? [];
   let f = e.isMainWorkspace ? p[0] : void 0;
@@ -16858,7 +16858,7 @@ function fk(e) {
     }
     return t;
   }(workspace.id, f, _()));
-  let b = wA();
+  let b = useDispatch();
   let v = useCallback((e, t, r) => {
     if (workspace) {
       let a = {
@@ -16938,7 +16938,7 @@ function fk(e) {
   });
 }
 function fR() {
-  let e = wA();
+  let e = useDispatch();
   let t = FC();
   let r = _$$dq();
   let n = Au(r);
@@ -17148,8 +17148,8 @@ let fO = {
   }
 };
 function fF(e) {
-  let t = _$$d(t => t.orgById[e.orgId]);
-  let r = wA();
+  let t = useSelector(t => t.orgById[e.orgId]);
+  let r = useDispatch();
   let n = _$$LM(e.orgId);
   let o = _$$D('OrgPageView');
   let l = Kd(o);
@@ -17226,7 +17226,7 @@ function fL() {
   });
 }
 function fD() {
-  let e = wA();
+  let e = useDispatch();
   let t = Pc();
   return jsx(_$$K3, {
     action: {
@@ -17492,7 +17492,7 @@ function f1(e) {
 function f4({
   isLoading: e
 }) {
-  let t = wA();
+  let t = useDispatch();
   return jsx(f1, {
     dataTestId: 'file-import-button',
     icon: jsx(_$$R1, {}),
@@ -17552,7 +17552,7 @@ function f6({
 function f3({
   newFileFrom: e
 }) {
-  let t = _$$d(e => e.user?.drafts_folder_id);
+  let t = useSelector(e => e.user?.drafts_folder_id);
   let {
     data,
     status
@@ -17669,7 +17669,7 @@ let gt = _$$eU(!1);
 let ga = gr;
 let gs = [_$$vt2.FIGMAKE_TEMPLATE, _$$vt2.SITE_TEMPLATE, _$$vt2.COOPER_TEMPLATE_FILE, _$$vt2.DESIGN_TEMPLATE, _$$vt2.SLIDE_TEMPLATE, _$$vt2.FIGJAM_TEMPLATE];
 function gi() {
-  let e = _$$d(e => e.user?.drafts_folder_id) ?? null;
+  let e = useSelector(e => e.user?.drafts_folder_id) ?? null;
   let {
     data
   } = _$$nt(e);
@@ -17723,7 +17723,7 @@ function gf({
   isSelected: t,
   onFocus: r
 }) {
-  let n = wA();
+  let n = useDispatch();
   let o = Lj(e);
   let l = useCallback(() => {
     FM(n, e, {
@@ -17841,7 +17841,7 @@ let gv = {
   }
 };
 function gy() {
-  let e = wA();
+  let e = useDispatch();
   let [t, r] = useState([]);
   let [{
     data: n,
@@ -18052,7 +18052,7 @@ function gj({
   });
 }
 function gT() {
-  let e = wA();
+  let e = useDispatch();
   return jsx(_$$tH, {
     team: _$$e.COMMUNITY,
     boundaryKey: 'RecommendedResourcesShelf',
@@ -18245,19 +18245,19 @@ var gI = (e => (e.SHOW_NOTHING = 'SHOW_NOTHING', e.SHOW_HOME_SHELF = 'SHOW_HOME_
 function gN() {
   let e = Xr(gt);
   let t = function () {
-    let e = !!_$$d(e => e.userFlags).dismissed_community_home_shelf_v2_recommendations;
-    let t = _$$d(({
+    let e = !!useSelector(e => e.userFlags).dismissed_community_home_shelf_v2_recommendations;
+    let t = useSelector(({
       currentUserOrgId: e
     }) => e);
     let r = _$$aH();
-    let a = _$$d(({
+    let a = useSelector(({
       orgById: e
     }) => e);
     let s = yK({
       orgById: a,
       currentUserOrgId: t
     });
-    let n = _$$d(e => e.user?.drafts_folder_id) ?? null;
+    let n = useSelector(e => e.user?.drafts_folder_id) ?? null;
     let o = gi();
     let l = vt();
     let d = jn();
@@ -18269,7 +18269,7 @@ function gN() {
 }
 let gR = {
   Banner(e) {
-    let t = wA();
+    let t = useDispatch();
     let r = e => {
       t(_$$b({
         [e]: !0
@@ -18467,7 +18467,7 @@ function gU() {
     newFileFrom: _$$f3.FIGMAKE_LAUNCH_BANNER,
     contextClicked: 'figmake_launch_banner_created'
   });
-  let t = _$$d(e => e.user?.drafts_folder_id);
+  let t = useSelector(e => e.user?.drafts_folder_id);
   let {
     data
   } = _$$nt(t);
@@ -18535,7 +18535,7 @@ function gV(e) {
 }
 function gz(e) {
   let t = _$$_();
-  let r = _$$d(e => e.tileSortFilterStateByView);
+  let r = useSelector(e => e.tileSortFilterStateByView);
   let n = t.view === 'recentsAndSharing' ? r.recentsAndSharing.sharedFiles : r.sharedWithYou;
   let o = {
     tileSortFilterConfig: n,
@@ -18732,7 +18732,7 @@ function gH(e) {
   }, {
     enabled: !!r
   });
-  let l = _$$d(e => e.tileSortFilterStateByView);
+  let l = useSelector(e => e.tileSortFilterStateByView);
   let d = t.view === 'recentsAndSharing' ? l.recentsAndSharing.sharedProjects : l.sharedWithYou;
   let {
     subscription,
@@ -18847,7 +18847,7 @@ let gZ = e => jsx('span', {
   children: e
 });
 let g0 = Ju(e => {
-  let t = wA();
+  let t = useDispatch();
   let r = _$$iZ();
   return r ? jsxs(_$$u9, {
     tintedModalBackground: !0,
@@ -18911,7 +18911,7 @@ let g4 = {
 function g2({
   isEligbileForProTeamLockedRevampUI: e
 }) {
-  let t = _$$d(e => e.tileSortFilterStateByView.recentsAndSharing.recents);
+  let t = useSelector(e => e.tileSortFilterStateByView.recentsAndSharing.recents);
   !function ({
     sort: e,
     viewMode: t
@@ -18950,8 +18950,8 @@ function g2({
   let d = useMemo(() => n.transform(e => e.map(e => _$$fA(e))), [n]);
   let c = useMemo(() => l.transform(e => e.map(Nu)), [l]);
   let u = function () {
-    let e = _$$d(e => e.recentRepos);
-    let t = _$$d(e => e.selectedBranchKeyByRepoId);
+    let e = useSelector(e => e.recentRepos);
+    let t = useSelector(e => e.selectedBranchKeyByRepoId);
     return useMemo(() => e.map(e => _$$uy(e, t)), [e, t]);
   }();
   let m = function () {
@@ -19076,9 +19076,9 @@ function hr(e) {
 }
 function ha(e) {
   let t = e.selectedTab;
-  let r = wA();
+  let r = useDispatch();
   let n = _$$_();
-  let l = _$$d(e => e.tileSortFilterStateByView);
+  let l = useSelector(e => e.tileSortFilterStateByView);
   let d = t === _$$G4.SHARED_PROJECTS ? ['folder'] : ['file', 'file_repo', 'prototype'];
   let c = function (e) {
     let [t, r] = useState(g9());
@@ -19104,10 +19104,10 @@ function ha(e) {
   }(d);
   let u = function () {
     let e = TA();
-    let t = _$$d(e => e.authedUsers);
-    let r = _$$d(e => e.plans);
-    let a = _$$d(e => e.orgById);
-    let s = _$$d(_$$P6);
+    let t = useSelector(e => e.authedUsers);
+    let r = useSelector(e => e.plans);
+    let a = useSelector(e => e.orgById);
+    let s = useSelector(_$$P6);
     let n = getFeatureFlags().limited_plan_spaces;
     let l = e ? t.byId[e] : null;
     return (n ? r.map(e => {
@@ -19252,7 +19252,7 @@ function hs(e) {
   }
 }
 function hi(e) {
-  let t = wA();
+  let t = useDispatch();
   let r = _$$R3();
   let n = _e({
     checks: {
@@ -19383,7 +19383,7 @@ function h_() {
 function hp({
   team: e
 }) {
-  let t = wA();
+  let t = useDispatch();
   let r = Rs(kQI, {
     id: e.id
   });
@@ -19435,9 +19435,9 @@ function hp({
   });
 }
 function hf(e) {
-  let t = wA();
+  let t = useDispatch();
   let r = useRef(null);
-  let n = _$$d(({
+  let n = useSelector(({
     dropdownShown: e
   }) => e);
   let o = e.team.org_id ?? null;
@@ -19525,7 +19525,7 @@ let hk = Ju(({
   hasSecondaryBtn: r = !0
 }) => {
   let n = useMemo(() => To(), []);
-  let o = wA();
+  let o = useDispatch();
   let l = () => {
     o(Ce());
   };
@@ -19576,9 +19576,9 @@ let hO = (e, t, r) => {
   }, 1)];
 };
 function hF() {
-  let e = wA();
+  let e = useDispatch();
   let t = _$$_();
-  let r = hO(e, _$$d(e => e.tileSortFilterStateByView), t);
+  let r = hO(e, useSelector(e => e.tileSortFilterStateByView), t);
   return jsx(_$$g4, {
     leftSide: null,
     rightSide: r
@@ -19616,9 +19616,9 @@ function hP(e) {
 function hL({
   team: e
 }) {
-  let t = _$$d(e => e.currentUserOrgId);
-  let r = _$$d(e => getPermissionsStateMemoized(e));
-  let s = _$$d(t => t.teamRoleRequests[e.id]);
+  let t = useSelector(e => e.currentUserOrgId);
+  let r = useSelector(e => getPermissionsStateMemoized(e));
+  let s = useSelector(t => t.teamRoleRequests[e.id]);
   let n = _$$D('TeamNonMemberJoinView');
   let o = MF({
     oldValue: resourceUtils.loaded(canAdminOrg(t, r)),
@@ -19627,7 +19627,7 @@ function hL({
     label: A5.TeamNonMemberJoinView.canAdminOrg
   }).unwrapOr(!1);
   let l = YP(e, s, r, o);
-  let d = wA();
+  let d = useDispatch();
   let c = jsxs('div', {
     'className': 'team_page_view--nonMemberViewContainer--uleTt',
     'data-testid': 'non-member-join-content',
@@ -19675,10 +19675,10 @@ function hD({
   showResourceConnectionInviteModal: o
 }) {
   let l = _$$R6(t => t.teams[e]);
-  let d = _$$d(e => e.currentUserOrgId);
-  let c = _$$d(e => l && l.org_id && e.orgById[l.org_id] || null);
-  let u = _$$d(e => e.loadingState);
-  let _ = wA();
+  let d = useSelector(e => e.currentUserOrgId);
+  let c = useSelector(e => l && l.org_id && e.orgById[l.org_id] || null);
+  let u = useSelector(e => e.loadingState);
+  let _ = useDispatch();
   let f = _$$_();
   let [g, h] = useState(!1);
   _$$r0(e);
@@ -19847,8 +19847,8 @@ function hM({
   let w = vt(y);
   let j = _$$R3(y);
   let T = jn();
-  let E = _$$d(e => e.teamBilling);
-  let C = wA();
+  let E = useSelector(e => e.teamBilling);
+  let C = useDispatch();
   let S = _$$_();
   let k = useCallback(t => {
     let r = {
@@ -19858,8 +19858,8 @@ function hM({
     };
     C(_$$sf(r));
   }, [C, e]);
-  let R = _$$d(e => e.avatarEditorState);
-  let A = _$$d(e => e.teamRoleRequests);
+  let R = useSelector(e => e.avatarEditorState);
+  let A = useSelector(e => e.teamRoleRequests);
   let O = useMemo(() => {
     if (e && canReadTeam) {
       switch (e.org_access) {
@@ -20191,8 +20191,8 @@ let hJ = {
   ctrlKey: 'metaKey'
 };
 function hq(e, t = {}) {
-  let r = wA();
-  let a = Pj();
+  let r = useDispatch();
+  let a = useStore();
   let n = useMemo(() => ({
     metaKey: e => {
       let t = _$$xS(a.getState(), e);
@@ -20218,10 +20218,10 @@ function hq(e, t = {}) {
 }
 let h0 = 'org_user_meta_content--teamsHeader--1p4jT org_user_meta_content--sectionHeader--snmkw text--fontPos13--xW8hS text--_fontBase--QdLsd';
 function h1(e) {
-  let t = wA();
+  let t = useDispatch();
   let r = _$$iZ();
   let s = _$$w7(e.user);
-  let n = _$$d(t => t.currentUserOrgId === e.orgId);
+  let n = useSelector(t => t.currentUserOrgId === e.orgId);
   let o = () => {
     t(_$$to2({
       type: _$$u0
@@ -20288,7 +20288,7 @@ function h1(e) {
 }
 function h4(e) {
   let t = _$$iZ();
-  let r = wA();
+  let r = useDispatch();
   return jsx(h1, {
     submitDescription: t => {
       r(_$$yJ3({
@@ -20310,7 +20310,7 @@ function h4(e) {
   });
 }
 function h2(e) {
-  let t = wA();
+  let t = useDispatch();
   let r = _$$iZ();
   return jsx(h1, {
     isLoading: !e.user || !e.orgUser || !e.org,
@@ -20406,7 +20406,7 @@ function h6(e) {
   let {
     profile
   } = e.user;
-  let r = wA();
+  let r = useDispatch();
   return jsx(Fragment, {
     children: profile?.images ? null : jsx(h8, {
       title: _$$t('internal_profile.profile_image_nudge.title'),
@@ -20431,7 +20431,7 @@ function h6(e) {
     })
   });
 }
-let h3 = Ng((e, t) => ({
+let h3 = connect((e, t) => ({
   permissionState: e
 }))(e => {
   let [t, r] = useState(null);
@@ -20509,7 +20509,7 @@ function xe(e) {
   let {
     org
   } = e;
-  let r = _$$d(r => (org && org.id && r.orgUsersByOrgId[org.id] || {})[e.user.id]);
+  let r = useSelector(r => (org && org.id && r.orgUsersByOrgId[org.id] || {})[e.user.id]);
   return org ? jsx(h2, {
     orgId: org.id,
     recents: e.recents,
@@ -20542,12 +20542,12 @@ let xt = {
 };
 let xr = e => {
   let t = e.user.id;
-  let r = wA();
-  let l = _$$d(e => e.selectedView);
+  let r = useDispatch();
+  let l = useSelector(e => e.selectedView);
   let d = e.orgUser && e.orgUser.org_id;
-  let c = _$$d(e => e.currentUserOrgId);
+  let c = useSelector(e => e.currentUserOrgId);
   let u = void 0 === d ? c : d;
-  let m = _$$d(e => u && e.orgById[u] || null);
+  let m = useSelector(e => u && e.orgById[u] || null);
   let _ = getFeatureFlags().xr_debounce_threshold && m;
   let f = l.view === 'user' ? l.userViewTab : void 0;
   useEffect(() => {
@@ -20555,13 +20555,13 @@ let xr = e => {
       type: _$$E1
     }));
   }, [r, f]);
-  let g = _$$d(e => e.userFlags);
+  let g = useSelector(e => e.userFlags);
   useEffect(() => {
     g.seen_profile || r(_$$b({
       seen_profile: !0
     }));
   }, [r, g.seen_profile]);
-  let h = _$$d(e => e.tileSortFilterStateByView.user);
+  let h = useSelector(e => e.tileSortFilterStateByView.user);
   let x = useMemo(() => ({
     srcTileSortFilterConfig: {
       filters: {
@@ -20900,10 +20900,10 @@ function xl(e) {
   });
 }
 function xd(e) {
-  let t = wA();
+  let t = useDispatch();
   let r = _$$iZ();
   let s = e.orgId;
-  let o = _$$d(e => e.currentUserOrgId);
+  let o = useSelector(e => e.currentUserOrgId);
   let l = void 0 === s ? o : s;
   let d = _$$T('UserPageView').unwrapOr(null);
   let c = _$$J8(() => Promise.all([xi(r, t, e.userId), xn(t, e.userId, l)]).then(([r, a]) => (l && !a && t(_$$F.enqueue({
@@ -20987,7 +20987,7 @@ function xm({
   workspaceId: t,
   parentBackgroundColor: r
 }) {
-  let s = wA();
+  let s = useDispatch();
   return jsx(jT, {
     text: e.name,
     parentBackgroundColor: r,
@@ -21014,13 +21014,13 @@ function x_({
     _$$o(t);
   }, [t]);
   let r = function () {
-    let e = wA();
+    let e = useDispatch();
     let t = Pc();
     let r = _$$dq();
     let n = _$$_();
     let o = _$$cD();
     let l = _$$sZ();
-    let d = _$$d(e => e.search);
+    let d = useSelector(e => e.search);
     let c = function () {
       let e = eN({
         project: 'drafts'
@@ -21444,10 +21444,10 @@ function xT({
   selectedView: e
 }) {
   let [t, r] = useState(['', '', '']);
-  let n = _$$d(t => t.teams[e.teamId]);
-  let o = _$$d(e => e.teamCreation);
-  let l = _$$d(e => e.payment);
-  let d = wA();
+  let n = useSelector(t => t.teams[e.teamId]);
+  let o = useSelector(e => e.teamCreation);
+  let l = useSelector(e => e.payment);
+  let d = useDispatch();
   let c = useCallback(() => {
     n && d(_$$sf({
       view: 'team',
@@ -21562,7 +21562,7 @@ function xT({
 }
 let xA = ['folder', 'team', 'search', 'recentsAndSharing'];
 function xO() {
-  let e = _$$d(e => e.autosave);
+  let e = useSelector(e => e.autosave);
   let t = _$$_();
   let r = yZ();
   let {
@@ -21576,7 +21576,7 @@ function xO() {
 }
 let xF = !1;
 function xP(e) {
-  let t = wA();
+  let t = useDispatch();
   useEffect(() => {
     let e = () => {
       t(Jw());
@@ -21654,7 +21654,7 @@ function xP(e) {
 }
 let xD = 'team-org-access-dropdown';
 function xM(e) {
-  let t = wA();
+  let t = useDispatch();
   let r = e.dropdownShown && e.dropdownShown.type === xD;
   return jsxs('div', {
     className: 'team_org_access_dropdown--orgAccess--JAIwP',
@@ -21709,7 +21709,7 @@ function xU({
   orgById: d
 }) {
   let c;
-  let m = wA();
+  let m = useDispatch();
   let [_, p] = useState(null);
   let [f, g] = useState(FAccessLevelType.PUBLIC);
   let h = n.ignoreCurrentPlan;
@@ -21834,13 +21834,13 @@ function xU({
 function xW({
   selectedView: e
 }) {
-  let t = wA();
+  let t = useDispatch();
   let r = _$$dq();
-  let s = _$$d(e => e.orgById);
+  let s = useSelector(e => e.orgById);
   let n = _$$iZ();
-  let o = _$$d(e => e.currentTeamId);
+  let o = useSelector(e => e.currentTeamId);
   let l = Um();
-  let d = _$$d(e => e.teamCreation);
+  let d = useSelector(e => e.teamCreation);
   return R$(n, r) ? (Ay.redirect('/'), t(_$$s2.error(_$$t('team_creation.missing_team_creation_controls'))), null) : jsx(xU, {
     currentTeamId: o,
     currentUserOrgId: r,
@@ -21859,10 +21859,10 @@ function xz({
 }) {
   let t;
   let r;
-  let n = wA();
+  let n = useDispatch();
   let [o, l] = useState(!1);
   let d = e.teamId;
-  let c = _$$d(e => e.teams[d]);
+  let c = useSelector(e => e.teams[d]);
   useEffect(() => {
     l(!0);
     _$$$3.getDeleted({
@@ -21965,7 +21965,7 @@ function xq(e) {
   let t = _$$iZ();
   let [r, n] = useState(() => _$$LN());
   let o = _$$b4.UPGRADE_NEW_TEAM;
-  let l = wA();
+  let l = useDispatch();
   let d = _$$sx3();
   let c = (t, a) => {
     let s = e.selectedView;
@@ -22237,8 +22237,8 @@ function x9() {
   });
 }
 function bt(e) {
-  let t = wA();
-  let r = _$$d(e => e.fileImport.step);
+  let t = useDispatch();
+  let r = useSelector(e => e.fileImport.step);
   let n = B2().unwrapOr(!1);
   let [o, l] = useState(!1);
   let d = useCallback(() => l(!0), []);
@@ -22293,19 +22293,19 @@ let bs = 'file_browser_view--filebrowserHtml--v2BLN';
 let bi = 'file_browser_view--filebrowserBody--6MX2i';
 let bn = 'file_browser_view--desktop--5VrC1';
 export function $$bo0() {
-  let e = wA();
+  let e = useDispatch();
   let t = _$$dq();
   let r = Um();
   let E = _$$iZ();
   let I = _$$_();
   let C = q_.useIsLoading();
-  let S = _$$d(e => e.payment);
-  let k = _$$d(e => e.currentTeamId);
+  let S = useSelector(e => e.payment);
+  let k = useSelector(e => e.currentTeamId);
   let R = _$$d2();
-  let A = _$$d(e => e.downtime);
-  let O = _$$d(e => e.notifications);
+  let A = useSelector(e => e.downtime);
+  let O = useSelector(e => e.notifications);
   !function () {
-    let e = Pj();
+    let e = useStore();
     let t = useMemo(() => _$$g6(), []);
     let r = Rs(__y, {
       cacheNonce: t
@@ -22406,7 +22406,7 @@ export function $$bo0() {
   let W = _$$uG;
   if (!function () {
     let e = _$$_();
-    let t = wA();
+    let t = useDispatch();
     let r = TA();
     let a = null;
     (e.view === 'teamUpgrade' || e.view === 'promoReview' || e.view === 'eduReview') && (a = e.teamId);

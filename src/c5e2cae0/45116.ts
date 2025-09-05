@@ -15,7 +15,7 @@ import { Dj } from "../figma_app/297957";
 import { fu } from "../figma_app/831799";
 import { Ju } from "../905/712921";
 import { e0 } from "../905/696396";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { isNullish } from "../figma_app/95419";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
@@ -134,7 +134,7 @@ function O({
   setAdditionalSeats: a,
   tier: r
 }) {
-  let i = wA();
+  let i = useDispatch();
   let l = _$$u();
   return jsx($z, {
     "aria-label": _$$t("checkout.additional_seats.add_seats_to_assign_later"),
@@ -234,7 +234,7 @@ function Z({
   tier: i,
   teamId: l
 }) {
-  let n = wA();
+  let n = useDispatch();
   let d = TA();
   let o = e.id === d;
   let c = Dj();

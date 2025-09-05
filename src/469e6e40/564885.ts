@@ -1,7 +1,7 @@
 import { Ju } from "../905/102752";
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, useEffect, useMemo } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { $n } from "../905/521428";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
@@ -21,12 +21,12 @@ import { E as _$$E } from "../figma_app/126651";
 import { Ib } from "../905/129884";
 import { J as _$$J } from "../905/298764";
 import { $ } from "../905/834575";
-export let $$E0 = Ju(function(e) {
+export let $$E0 = Ju(function (e) {
   let t = hS(e);
-  let a = wA();
+  let a = useDispatch();
   let [r, u] = useState({});
   let [g, h] = useState(!0);
-  let x = function(e, t) {
+  let x = function (e, t) {
     switch (e) {
       case "edit":
         return t ? _$$t("members_tab.last_edit_modal.title_with_name", {
@@ -133,7 +133,7 @@ function C() {
   });
 }
 function S(e) {
-  let t = wA();
+  let t = useDispatch();
   return jsxs("tr", {
     className: "x1n5zjp5 x17akokd xdpxx8g",
     children: [jsx("td", {
@@ -181,4 +181,4 @@ function S(e) {
     })]
   });
 }
-export const J = $$E0; 
+export const J = $$E0;

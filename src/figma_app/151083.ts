@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useMemo, useRef, useCallback } from "react";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { glU, YnC } from "../figma_app/763686";
 import { l7 } from "../905/189185";
 import { md } from "../figma_app/27355";
@@ -54,7 +54,7 @@ export function $$H1(e) {
     detachInstanceShortcut: c1(e.mirror.appModel.keyboardShortcuts, "detach-instance")
   }));
   let u = useMemo($H, []);
-  let p = d4(e => u(e, instanceAndSublayerGUIDs));
+  let p = useSelector(e => u(e, instanceAndSublayerGUIDs));
   let {
     isBackingSymbolSoftDeleted,
     restoreType
@@ -227,7 +227,7 @@ function W() {
   let {
     file_key,
     file_team_id
-  } = d4(_$$c);
+  } = useSelector(_$$c);
   let r = md(yV);
   let n = md(p9);
   return useMemo(() => ({
@@ -241,9 +241,9 @@ export function $$K4(e) {
   let {
     componentUpdatesForAllPages,
     stateGroupUpdatesForAllPages
-  } = d4(ij);
+  } = useSelector(ij);
   let n = useMemo(bd, []);
-  let s = d4(t => n(t, e));
+  let s = useSelector(t => n(t, e));
   let {
     componentInstanceUpdateInfo,
     stateInstanceUpdateInfo
@@ -268,7 +268,7 @@ export function $$Y3(e) {
   let {
     updateIndividualInstances
   } = TM(o, AX.DROPDOWN_UPDATE_SELECTED_INSTANCE);
-  let d = wA();
+  let d = useDispatch();
   let c = useMemo(() => ({
     source: "INSTANCE_PANEL",
     instanceAndSublayerGUIDs: e
@@ -303,8 +303,8 @@ export function $$Y3(e) {
   }, [componentInstanceUpdateInfo, needsUpdate, numSelectedInstancesToUpdate, u, stateInstanceUpdateInfo, _, h, updateIndividualInstances]);
 }
 export function $$$2(e) {
-  let t = wA();
-  let r = d4(t => t.dropdownShown?.type === G && u()(t.dropdownShown.data?.guids, e));
+  let t = useDispatch();
+  let r = useSelector(t => t.dropdownShown?.type === G && u()(t.dropdownShown.data?.guids, e));
   let n = W();
   let s = useCallback(i => {
     i.stopPropagation();

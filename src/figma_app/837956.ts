@@ -1,5 +1,5 @@
 import { jsx } from "react/jsx-runtime";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { sx } from "../905/449184";
 import { parsePxInt } from "../figma_app/783094";
 import { YO } from "../figma_app/672951";
@@ -25,14 +25,14 @@ import { DV } from "../905/739964";
 import { W } from "../905/25249";
 import { tgj } from "../figma_app/27776";
 export function $$w1(e) {
-  let t = d4((e) => e.currentUserOrgId);
-  let r = d4((e) => e.currentTeamId);
-  let n = d4((e) => e.loadedFolders);
+  let t = useSelector(e => e.currentUserOrgId);
+  let r = useSelector(e => e.currentTeamId);
+  let n = useSelector(e => e.loadedFolders);
   let u = gY(k4);
   let f = t || r;
-  let E = d4((e) => e.teams);
+  let E = useSelector(e => e.teams);
   let A = YO(e);
-  let w = wA();
+  let w = useDispatch();
   return ({
     folder: e,
     shouldShowJoinButton: r
@@ -162,8 +162,8 @@ export function $$O0({
   folder: t,
   useLGPerms: r
 }) {
-  let a = d4((e) => e.dropdownShown);
-  let s = wA();
+  let a = useSelector(e => e.dropdownShown);
+  let s = useDispatch();
   let o = j6();
   let l = $$w1(t.id);
   let d = a?.data?.targetRect;
@@ -195,4 +195,4 @@ export function $$O0({
   });
 }
 export const p = $$O0;
-export const u = $$w1; 
+export const u = $$w1;

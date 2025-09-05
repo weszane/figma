@@ -1,5 +1,5 @@
 import { useState, useLayoutEffect, useCallback } from "react";
-import { bN } from "../vendor/514228";
+import { shallowEqual } from "../vendor/514228";
 import { TQ } from "../905/657224";
 import { tS } from "../figma_app/516028";
 export function $$o0({
@@ -20,7 +20,7 @@ export function $$o0({
           let i = TQ();
           if (i) {
             let r = JSON.parse(i.getItem("pages-panel") || "{}");
-            if (bN(r[e], t)) return;
+            if (shallowEqual(r[e], t)) return;
             r[e] = t;
             i.setItem("pages-panel", JSON.stringify(r));
           }

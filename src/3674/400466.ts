@@ -7,7 +7,7 @@ import { eY as _$$eY, dH } from "../figma_app/722362";
 import { J2 } from "../figma_app/84367";
 import { p as _$$p } from "../figma_app/372802";
 import { m as _$$m, f as _$$f } from "../905/70820";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { hD, kh, qT } from "../figma_app/387100";
 import { t as _$$t } from "../905/241707";
 import { hA } from "../figma_app/88239";
@@ -146,7 +146,7 @@ import { _content } from "../figma_app/227510";
 import { N as _$$N2 } from "../figma_app/240854";
 import { Nz as _$$Nz4 } from "../figma_app/755571";
 function v(e) {
-  let t = d4(e => e.mirror.appModel.currentPage);
+  let t = useSelector(e => e.mirror.appModel.currentPage);
   let n = hA();
   return _$$wA((e, t, n, a) => t.flatMap(t => {
     let i = e.get(t);
@@ -511,7 +511,7 @@ function eK({
   });
 }
 function eZ(e, t) {
-  let n = d4(e => e.library);
+  let n = useSelector(e => e.library);
   let a = f$(e);
   let i = mJ(a);
   if (!e || !a || !i) return null;
@@ -627,7 +627,7 @@ function e3({
 }) {
   let i = eZ(e, t);
   return (!function (e) {
-    let t = d4(e => e.library);
+    let t = useSelector(e => e.library);
     let n = f$(e);
     let a = n ? Gp(e.key, [n], t) : void 0;
     w$(a);
@@ -1903,7 +1903,7 @@ function tB(e) {
     parentRect
   } = e;
   let s = q5();
-  let r = wA();
+  let r = useDispatch();
   let c = tO();
   let u = useMemo(() => w3z.isReadOnly(SES.ANNOTATIONS), []);
   let h = _$$R(e => e.mirror.appModel.keyboardShortcuts);
@@ -2596,7 +2596,7 @@ let nU = Iz(e => mg(_$$eU(t => {
 let nK = {
   type: nE.MANAGED_STRING,
   useSharedHooksContext() {
-    let e = d4(e => e.mirror.appModel.currentPage);
+    let e = useSelector(e => e.mirror.appModel.currentPage);
     let t = m0();
     return _$$wA((e, t, n) => getFeatureFlags().cheddar && getFeatureFlags().cheddar_annotations && n ? (e.get(t) ? qT(e, t) : []).reduce((e, t) => {
       let n = function e(t) {
@@ -2658,7 +2658,7 @@ function nX({
   nodeId: n,
   stringKey: i
 }) {
-  let l = wA();
+  let l = useDispatch();
   let s = hC();
   let r = e => {
     e && (wr(), _$$S3("annotations"), Dh([e]), _$$tw()?.getCopy() !== _gJ.STRING_MANAGEMENT && _$$ax(_gJ.STRING_MANAGEMENT));
@@ -3015,7 +3015,7 @@ function n5({
   setInputCategoryId: f,
   annotationIndex: x
 }) {
-  let m = wA();
+  let m = useDispatch();
   let {
     Sprig
   } = useSprigWithSampling();
@@ -3628,7 +3628,7 @@ let aa = memo(function ({
   let T = s9();
   let L = E_();
   let R = !!hA();
-  let D = wA();
+  let D = useDispatch();
   let M = (e, t) => {
     e && (wr(), _$$S3("annotations"), t ? (w3z.setEnableZoomToSelection(!1), Dh([e]), w3z.setEnableZoomToSelection(!0)) : Dh([e]));
   };
@@ -3887,8 +3887,8 @@ function ab(e) {
   let [o, l] = useState(null);
   let s = useRef(null);
   let r = function () {
-    let e = d4(e => e.selectedView);
-    let t = d4(e => e.versionHistory)?.isLoadingPage;
+    let e = useSelector(e => e.selectedView);
+    let t = useSelector(e => e.versionHistory)?.isLoadingPage;
     let n = DP();
     let {
       isLoading
@@ -3939,14 +3939,14 @@ z-index: 100;
   });
 }
 function aj() {
-  let e = wA();
+  let e = useDispatch();
   let t = uQ();
-  let n = d4(e => e.isFullscreenDocumentLoaded);
+  let n = useSelector(e => e.isFullscreenDocumentLoaded);
   let c = dH();
   let f = _X({
     subscribeToUpdates_expensive: !0
   });
-  let g = d4(e => e.dropdownShown);
+  let g = useSelector(e => e.dropdownShown);
   let x = g?.type === tM;
   let m = Xr(_$$f);
   let [y, b] = fp(_$$m);

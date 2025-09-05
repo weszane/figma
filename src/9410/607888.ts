@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { Mpt, glU, Ez5 } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import { zl, md, Xr, Ut } from "../figma_app/27355";
@@ -64,7 +64,7 @@ export function $$I1({
   });
 }
 export function $$k0() {
-  let e = wA();
+  let e = useDispatch();
   let t = md(Uf);
   let i = tS();
   let s = EI();

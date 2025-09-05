@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { memo, useMemo } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import s from "classnames";
 import { sx } from "../905/449184";
 import { x6 } from "../905/403166";
@@ -29,7 +29,7 @@ let $$S2 = memo(e => {
   } = e;
   let s = useMemo(() => x6(text), [text]);
   let o = z3();
-  let l = wA();
+  let l = useDispatch();
   return jsx(CY, {
     "data-tooltip": MW.HYPERLINK_POPUP,
     "data-tooltip-editor-type": o,
@@ -163,7 +163,7 @@ let N = memo(e => {
 });
 let $$C1 = memo(e => {
   let t = q();
-  let r = d4(t => e.mentionedProfiles || t.communityHub?.comments?.mentionedProfiles);
+  let r = useSelector(t => e.mentionedProfiles || t.communityHub?.comments?.mentionedProfiles);
   let i = (e, t, r, a, s) => e.map((e, o) => {
     let l = "";
     if (e.styles?.includes("ul") ? l = ty : e.styles?.includes("ol") && (l = A9), e.children?.length) {

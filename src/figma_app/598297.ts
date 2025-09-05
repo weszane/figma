@@ -1,5 +1,5 @@
 import { useRef, useEffect } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { zK } from "../figma_app/913823";
 import { q5 } from "../figma_app/516028";
 import { Sc, mC } from "../905/18797";
@@ -7,10 +7,10 @@ import { yD } from "../905/92359";
 export function $$d1({
   disabled: e = !1
 } = {}) {
-  let t = wA();
+  let t = useDispatch();
   let r = q5();
-  let c = d4(e => e.fileVersion);
-  let u = d4(e => e.loadingState);
+  let c = useSelector(e => e.fileVersion);
+  let u = useSelector(e => e.loadingState);
   let p = useRef(0);
   let _ = null != r && null != c ? yD(r.key) : void 0;
   useEffect(() => {

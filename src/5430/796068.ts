@@ -1,6 +1,6 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useCallback } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { I } from "../figma_app/4253";
 import { QQ, C } from "../figma_app/808294";
 import { K2 } from "../figma_app/777551";
@@ -13,9 +13,9 @@ import { d as _$$d, NY, EV } from "../5430/309696";
 export function $$h0({
   resource: e
 }) {
-  let t = wA();
-  let r = d4(e => e.authedActiveCommunityProfile);
-  let h = d4(t => MK(t, e));
+  let t = useDispatch();
+  let r = useSelector(e => e.authedActiveCommunityProfile);
+  let h = useSelector(t => MK(t, e));
   let x = XW(e) ? qY(e) : e;
   let f = Gl.includes(h) && (e.community_publishers?.accepted || []).length > 1 && r?.primary_user_id;
   let y = useCallback(() => {

@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useCallback } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { debounce } from "../905/915765";
 import { E } from "../905/632989";
 import { O } from "../905/969533";
@@ -29,7 +29,7 @@ export function $$E0(e) {
     onScroll,
     ...s
   } = e;
-  let o = d4(x);
+  let o = useSelector(x);
   let l = q5();
   let d = useCallback((e, t) => {
     onScroll?.(e, t);

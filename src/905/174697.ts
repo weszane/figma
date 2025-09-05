@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { nb, Tf } from "../figma_app/543100";
 import { F } from "../905/915030";
 import { IT } from "../905/864644";
@@ -31,7 +31,7 @@ let u = [];
 export function $$p1({
   enabled: e = !0
 } = {}) {
-  let t = d4(e => e.tileSelect);
+  let t = useSelector(e => e.tileSelect);
   let i = useMemo(() => [...Object.keys(t[F.FILES]), ...Object.keys(t[F.PINNED_FILES])], [t]);
   let a = useMemo(() => Object.keys(t[F.REPOS]), [t]);
   let c = useMemo(() => Object.keys(t[F.PROTOTYPES]).map(e => {

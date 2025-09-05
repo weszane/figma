@@ -1,7 +1,7 @@
 import { ex as _$$ex } from "../905/524523";
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useMemo, useCallback, PureComponent, useState, useId, useRef } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { K as _$$K } from "../905/443068";
 import { B as _$$B } from "../905/950875";
 import { L as _$$L } from "../905/704296";
@@ -103,8 +103,8 @@ function R({
   onResetComparison: l,
   onSelectComparison: c
 }) {
-  let u = wA();
-  let m = d4(e => e.dropdownShown);
+  let u = useDispatch();
+  let m = useSelector(e => e.dropdownShown);
   let h = useMemo(() => {
     if (!t) return N;
     let e = [...i.files];
@@ -1373,7 +1373,7 @@ export function $$eJ0({
 let e0 = "dsa_dismissed_feb_2025_missing_data_banner";
 function e1() {
   let e = _$$f(e0);
-  let t = wA();
+  let t = useDispatch();
   let i = useCallback(() => {
     t(_$$b({
       [e0]: !0

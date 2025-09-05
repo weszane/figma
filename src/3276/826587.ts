@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useState, useCallback, useRef } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { CV, KJ } from "../figma_app/916560";
 import { Cg } from "../905/195479";
 import { buildUploadUrl } from "../figma_app/169182";
@@ -57,7 +57,7 @@ export function $$g0(e) {
   } = e;
   let [n, l] = useState("");
   let [_, g] = useState(!1);
-  let x = wA();
+  let x = useDispatch();
   let b = useCallback(e => {
     e.preventDefault();
     e.stopPropagation();

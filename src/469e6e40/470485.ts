@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useCallback } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { T } from "../7021/675372";
 import l from "classnames";
 import { Wi } from "../figma_app/162641";
@@ -18,11 +18,11 @@ import { b as _$$b } from "../905/165519";
 var o = l;
 export function $$j0(e) {
   let t;
-  let a = wA();
+  let a = useDispatch();
   let l = S2().unwrapOr(null);
   let j = px().unwrapOr(null);
   let y = vt();
-  let w = d4(e => e.teamBilling.summary.annual_subscription ? FBillingPeriodType.YEAR : e.teamBilling.summary.monthly_subscription ? FBillingPeriodType.MONTH : null);
+  let w = useSelector(e => e.teamBilling.summary.annual_subscription ? FBillingPeriodType.YEAR : e.teamBilling.summary.monthly_subscription ? FBillingPeriodType.MONTH : null);
   let k = useCallback(() => {
     a(Bq({
       openInNewTab: !0,

@@ -1,5 +1,5 @@
 import { useMemo, useState, useEffect, useCallback } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { glU } from "../figma_app/763686";
 import { sx } from "../905/449184";
 import { A as _$$A } from "../905/920142";
@@ -19,13 +19,13 @@ let b = Ju(function (e) {
   let {
     nodeId
   } = e;
-  let i = wA();
+  let i = useDispatch();
   let {
     versions,
     versionsQueryLoaded
   } = DS(nodeId);
-  let o = d4((e) => e.versionHistory.compareId);
-  let l = useMemo(() => o ? versions.find((e) => e.id === o) ?? null : null, [versions, o]);
+  let o = useSelector(e => e.versionHistory.compareId);
+  let l = useMemo(() => o ? versions.find(e => e.id === o) ?? null : null, [versions, o]);
   let [c, u] = useState(!0);
   let [_, b] = useState(!1);
   let v = {
@@ -40,7 +40,7 @@ let b = Ju(function (e) {
   useEffect(() => {
     c && x && C && versionsQueryLoaded && u(!1);
   }, [c, x, C, versionsQueryLoaded]);
-  let T = useCallback((e) => {
+  let T = useCallback(e => {
     e.id !== o && (E(void 0), i(vF({
       fromVersionId: e.id
     })));
@@ -95,11 +95,11 @@ let b = Ju(function (e) {
   });
 }, "CompareChangesModal", ZU.YES);
 export function $$v1() {
-  let e = wA();
-  let t = d4((e) => e.versionHistory.compareId);
-  let i = d4((e) => HF(t, e.versionHistory));
-  let a = d4((e) => e.modalShown);
-  return useCallback((t) => {
+  let e = useDispatch();
+  let t = useSelector(e => e.versionHistory.compareId);
+  let i = useSelector(e => HF(t, e.versionHistory));
+  let a = useSelector(e => e.modalShown);
+  return useCallback(t => {
     $$I0(t, e, i, a);
   }, [e, i, a]);
 }

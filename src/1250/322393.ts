@@ -37,7 +37,7 @@ import { Egt, Ez5, fZl, glU, IPu, Z64 } from '../figma_app/763686';
 import { U as _$$U } from '../figma_app/901889';
 import { ky } from '../figma_app/925970';
 import { FU } from '../figma_app/933328';
-import { d4, wA } from '../vendor/514228';
+import { useSelector, useDispatch } from '../vendor/514228';
 import { A as _$$A } from '../vendor/850789';
 function $(e) {
   let t = new Map();
@@ -107,7 +107,7 @@ export function $$X7() {
 }
 export function $$J18() {
   let e = _$$U();
-  let t = d4(e => e.search.sessionId);
+  let t = useSelector(e => e.search.sessionId);
   let [n, i] = _$$fp(ce);
   let [o, s] = _$$fp(EC);
   let [l, d] = _$$fp(xB);
@@ -178,8 +178,8 @@ export function $$J18() {
 export function $$ee13(e) {
   let t = Xr(Tw);
   let n = Z('cooper_template_picker_dismissed');
-  let i = d4(e => e.search.sessionId);
-  let l = wA();
+  let i = useSelector(e => e.search.sessionId);
+  let l = useDispatch();
   return useCallback(() => {
     n({
       source: e
@@ -211,7 +211,7 @@ export function $$en6({
 }) {
   let t = Xr(Tw);
   let n = tS();
-  let i = wA();
+  let i = useDispatch();
   let s = function (e) {
     let [t] = IT(_$$u(e), {
       enabled: !0
@@ -391,7 +391,7 @@ export function $$eo8() {
     let n = t.type || 'CUSTOM';
     return Z64[n];
   }, []);
-  return d4(e);
+  return useSelector(e);
 }
 export function $$es2() {
   let e = $$eo8();
@@ -489,7 +489,7 @@ export function $$eg17(e) {
   return t;
 }
 function ef() {
-  return d4(e => e.mirror.selectionProperties.numSelected || 0) === 1;
+  return useSelector(e => e.mirror.selectionProperties.numSelected || 0) === 1;
 }
 let eh = () => ({
   [Z64.BANNER_STANDARD]: t('cooper.templates.banner_standard_pretty'),

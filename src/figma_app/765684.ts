@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useContext, useCallback, useEffect, cloneElement } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { md } from "../figma_app/27355";
 import o from "classnames";
 import { Uz } from "../905/63728";
@@ -57,7 +57,7 @@ function R({
   shouldRefocusAfterKeyboardInsert: l
 }) {
   let d = useContext(U);
-  let _ = d4(sS);
+  let _ = useSelector(sS);
   let h = J(o.item, o.sectionPosition, o.sectionNameForTracking);
   let m = _$$n(o.item);
   let {

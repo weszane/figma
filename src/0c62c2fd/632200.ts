@@ -1,6 +1,6 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { memo } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import n from "classnames";
 import { tM, qM } from "../figma_app/637027";
 import { tx, t as _$$t } from "../905/303541";
@@ -11,7 +11,7 @@ import { OJ } from "../905/519092";
 import { Dy, v0, hF, pL } from "../905/289198";
 var o = n;
 let f = memo(function (e) {
-  let t = wA();
+  let t = useDispatch();
   let {
     teamId,
     billingEndDate

@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback, createContext, useState, useMemo, useContext, useEffect, useRef, memo, createRef, forwardRef, useId } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { Y9, r1, qj, jk, vo, nB } from "../figma_app/272243";
 import { t as _$$t } from "../905/150656";
@@ -561,7 +561,7 @@ function e6({
   recordingKey: s,
   onChange: o
 }) {
-  let l = wA();
+  let l = useDispatch();
   let d = Um();
   let c = getFeatureFlags().eu_fpl_migration_styles_picker_selects;
   let u = useMemo(() => ({
@@ -795,7 +795,7 @@ function e9({
 let t_ = l6;
 let tA = _$$c$2;
 function ty(e) {
-  let t = wA();
+  let t = useDispatch();
   let i = new ZB(() => e.paint);
   return jsx(t_, {
     ariaLabel: _$$t2("fullscreen.properties_panel.color_picker.paint_type.aria_label"),
@@ -916,7 +916,7 @@ function tR({
   handleTabNextRow: v,
   handleTabPrevRow: I
 }) {
-  let x = wA();
+  let x = useDispatch();
   let S = useRef(null);
   let C = X7();
   let T = useCallback(() => {
@@ -1021,7 +1021,7 @@ function tN({
 }) {
   let g = Um();
   let f = _$$C();
-  let A = wA();
+  let A = useDispatch();
   let [b, v] = useState(null);
   let I = useRef(-1);
   let x = useRef(null);
@@ -2059,7 +2059,7 @@ function ia({
   minimalUI: O,
   onClose: L
 }) {
-  let F = wA();
+  let F = useDispatch();
   let U = Ep();
   let B = X7();
   let H = _$$C();
@@ -2214,7 +2214,7 @@ export function $$io0({
   variableScopes: y,
   isVariableCreationEnabled: b = !1
 }) {
-  let v = wA();
+  let v = useDispatch();
   let I = Um();
   let S = Ku();
   let C = dH();

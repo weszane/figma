@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback, useMemo, useEffect, useState } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { c2 } from "../905/382883";
 import { t as _$$t } from "../905/150656";
 import { $n } from "../905/521428";
@@ -69,7 +69,7 @@ function ep({
   let {
     existingHubFile
   } = e.deps;
-  let p = wA();
+  let p = useDispatch();
   let {
     trackEvent
   } = j6();
@@ -463,11 +463,11 @@ export function $$em0(e) {
   } = e;
   let o = Pc();
   let l = _$$h2(figFile);
-  let d = d4(e => xw(e) ?? void 0, c2);
+  let d = useSelector(e => xw(e) ?? void 0, c2);
   let c = sZ();
-  let u = d4(e => Rv(figFile?.team_id ?? null, e, existingHubFile ?? null, figFile?.parent_org_id ?? null), c2);
-  let p = d4(e => e.authedProfilesById);
-  let m = d4(e => e.authedActiveCommunityProfile ?? void 0);
+  let u = useSelector(e => Rv(figFile?.team_id ?? null, e, existingHubFile ?? null, figFile?.parent_org_id ?? null), c2);
+  let p = useSelector(e => e.authedProfilesById);
+  let m = useSelector(e => e.authedActiveCommunityProfile ?? void 0);
   let h = useMemo(async () => figFile ? (await mN(figFile)) ?? [] : [], [figFile]);
   let g = eY();
   let f = AC({

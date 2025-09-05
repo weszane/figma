@@ -1,5 +1,5 @@
 import { useMemo, useEffect } from "react";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { sortByProperty } from "../figma_app/656233";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { l as _$$l } from "../905/716947";
@@ -33,7 +33,7 @@ export function $$k0({
   hideLibrariesNotAddedToConnectedProject: o,
   mapFromLibraryKeyToSharingGroupData: l
 }) {
-  let d = d4(({
+  let d = useSelector(({
     teams: e
   }) => Object.keys(e));
   let c = $$P6({
@@ -224,7 +224,7 @@ function D({
 }
 export function $$L3(e, t = !1) {
   let i = [];
-  let a = wA();
+  let a = useDispatch();
   let o = sZ();
   let c = D6("useLibrariesViewFilterStates");
   let p = Kd(c).unwrapOr(!1);
@@ -244,7 +244,7 @@ export function $$L3(e, t = !1) {
   let _ = Rs(Sq1, {
     orgId: o?.id ?? null
   });
-  let y = d4(({
+  let y = useSelector(({
     openFile: e
   }) => e);
   let v = M4.Team.useValue(e).data;

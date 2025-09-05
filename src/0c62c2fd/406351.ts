@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useState } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { assertNotNullish } from "../figma_app/465776";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { _Z } from "../figma_app/819288";
@@ -22,7 +22,7 @@ export function $$y0({
   open: r,
   onClose: n
 }) {
-  let _ = wA();
+  let _ = useDispatch();
   let y = _$$p2(_$$t("file_browser.pinning.pin_modal.confirmation_bell"), "file-browser-workspace-add-pin");
   let j = Rs(wtK, {
     fileKey: e
@@ -91,7 +91,7 @@ function w({
 }) {
   let r = e.parentOrgId;
   assertNotNullish(r);
-  let s = d4(({
+  let s = useSelector(({
     orgById: e
   }) => e[r].name);
   return jsx(E, {

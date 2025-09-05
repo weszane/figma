@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { PureComponent } from "react";
-import { Ng } from "../vendor/514228";
+import { connect } from "../vendor/514228";
 import { cd, _H } from "../figma_app/243058";
 import { glU, Pt4 } from "../figma_app/763686";
 import { NQ } from "../905/508367";
@@ -108,7 +108,7 @@ var n;
     }
   }
   t.displayName = "ComponentImage";
-  e.ConnectedLibraryItemImage = Ng((e, t) => ({
+  e.ConnectedLibraryItemImage = connect((e, t) => ({
     thumbnails: e.library.local.thumbnails,
     user: e.user,
     publishedProductComponent: t.item?.type === PW.COMPONENT ? e.library.openFilePublished__LIVEGRAPH.components[t.item.node_id] : t.item?.type === PW.STATE_GROUP ? e.library.openFilePublished__LIVEGRAPH.stateGroups[t.item.node_id] : null

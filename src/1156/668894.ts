@@ -18,7 +18,7 @@ import { Kj } from "../1156/201513";
 import { h5 } from "../1156/717481";
 import { ZH, AW, oT } from "../1156/250784";
 import { useState } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
@@ -165,7 +165,7 @@ let G = Ju(function (e) {
   let {
     activeProjects
   } = YY();
-  let s = wA();
+  let s = useDispatch();
   let a = !!e.toolCallId && !!e.toolName;
   let [l, o] = useState(void 0);
   return jsx(bL, {
@@ -229,7 +229,7 @@ function H({
   trackingContext: r,
   source: i
 }) {
-  let s = wA();
+  let s = useDispatch();
   return () => s(to({
     type: G,
     data: {
@@ -334,7 +334,7 @@ export function $$X0({
       trackingContext: n,
       source: r
     }) {
-      let i = wA();
+      let i = useDispatch();
       return () => i(to({
         type: V,
         data: {

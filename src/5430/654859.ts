@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useCallback, useEffect } from "react";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { N_ } from "../vendor/956898";
 import { getFeatureFlags } from "../905/601108";
 import l from "classnames";
@@ -115,7 +115,7 @@ function q({
   onResourceHover: r,
   selectedIdx: i
 }) {
-  let o = d4(e => "authedActiveCommunityProfile" in e ? e.authedActiveCommunityProfile : null);
+  let o = useSelector(e => "authedActiveCommunityProfile" in e ? e.authedActiveCommunityProfile : null);
   return e && 0 !== e.length ? jsxs("div", {
     className: B,
     children: [jsx("div", {
@@ -176,7 +176,7 @@ function Y({
   onResourceHover: r,
   selectedIdx: i
 }) {
-  let o = d4(e => "authedActiveCommunityProfile" in e ? e.authedActiveCommunityProfile : null);
+  let o = useSelector(e => "authedActiveCommunityProfile" in e ? e.authedActiveCommunityProfile : null);
   return e && 0 !== e.length ? jsxs("div", {
     className: B,
     children: [jsx("div", {
@@ -237,7 +237,7 @@ function X({
   onResourceHover: r,
   selectedIdx: i
 }) {
-  let o = d4(e => "authedActiveCommunityProfile" in e ? e.authedActiveCommunityProfile : null);
+  let o = useSelector(e => "authedActiveCommunityProfile" in e ? e.authedActiveCommunityProfile : null);
   if (!e || 0 === e.length) return null;
   let l = getFeatureFlags().cmty_thumbnail_16x9_ar;
   return jsxs("div", {
@@ -294,7 +294,7 @@ function X({
     })]
   });
 }
-let J = function(e, t) {
+let J = function (e, t) {
   let r;
   return (...t) => new Promise(s => {
     clearTimeout(r);
@@ -302,13 +302,13 @@ let J = function(e, t) {
       s(e.apply(e, t));
     }, 250);
   });
-}((e, t) => t(function(e) {
+}((e, t) => t(function (e) {
   return (t, r) => {
     let s = new jk(L, {});
     s.start();
     let i = r().search?.sessionId || "unattributed";
     let n = MZ();
-    return Promise.all([function(e, t, r) {
+    return Promise.all([function (e, t, r) {
       let s = {
         session_id: e,
         query_id: t,
@@ -323,7 +323,7 @@ let J = function(e, t) {
       limit && !isNaN(limit) && (s.max_num_results = limit);
       isPreview && (s.limit_associations = !0);
       return $W.getCommunityLegacyResources(s);
-    }(i, n, e), function(e, t, r) {
+    }(i, n, e), function (e, t, r) {
       let {
         profileLimit
       } = r;
@@ -375,7 +375,7 @@ export function $$K0(e) {
     selectedIdx,
     setSelectedIdx
   } = _$$W(context);
-  let v = wA();
+  let v = useDispatch();
   let j = Jm(!0);
   let w = AG();
   let C = useCallback(() => {
@@ -428,7 +428,7 @@ export function $$K0(e) {
         widgets: l.length,
         profiles: i.data.meta.results.length
       });
-    }).catch(() => {}) ;
+    }).catch(() => {});
   }, [query, v, j, context, setResources, setSelectedIdx, w]);
   let L = useCallback(e => {
     sx("search_result_clicked", {
@@ -494,4 +494,4 @@ export function $$K0(e) {
     }) : null]
   });
 }
-export const G = $$K0; 
+export const G = $$K0;

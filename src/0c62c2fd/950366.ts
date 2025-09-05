@@ -1,5 +1,5 @@
 import { jsxs, jsx } from "react/jsx-runtime";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { WX } from "../figma_app/515363";
 import { Q } from "../1250/227834";
 import { b as _$$b, bL } from "../figma_app/860955";
@@ -105,7 +105,7 @@ export function $$y1({
   forceOpenNewTab: t,
   dataOnboardingKey: r
 }) {
-  let i = d4(e => e.user?.drafts_folder_id);
+  let i = useSelector(e => e.user?.drafts_folder_id);
   let o = Q({
     newFileFrom: e,
     forceOpenNewTab: t,

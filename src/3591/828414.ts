@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { PureComponent, createRef, useRef, useCallback } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { d as _$$d } from "../905/976845";
 import { J as _$$J } from "../905/125993";
 import u from "classnames";
@@ -79,8 +79,8 @@ function ea(e) {
 }
 export let $$ep3 = "CREATE_PLUGIN_DROPDOWN";
 export function $$ed0(e) {
-  let i = wA();
-  let t = d4(e => e.dropdownShown);
+  let i = useDispatch();
+  let t = useSelector(e => e.dropdownShown);
   let n = V2();
   let s = e.resourceType === bD.WIDGET;
   return t?.data?.targetRect ? jsxs(Cf, {
@@ -336,7 +336,7 @@ function eg(e) {
 ($$n2 || ($$n2 = {})).Tile = function (e) {
   let i = Um();
   let t = i?.type === lD && i.data.localFileId === e.plugin.localFileId;
-  let n = wA();
+  let n = useDispatch();
   let s = useRef(null);
   return jsxs(Fragment, {
     children: [jsx(eg, {
@@ -407,7 +407,7 @@ function eg(e) {
   e.Tile = function (e) {
     let t = Um();
     let n = t?.type === lD && t.data.pluginId === e.plugin.id && t.data.targetRect;
-    let s = wA();
+    let s = useDispatch();
     let l = useRef(null);
     let p = uF(e.plugin);
     let d = WK(e.plugin.id);
@@ -490,7 +490,7 @@ tf(function ({
   onClick: t
 }) {
   let n = uF(e);
-  let s = wA();
+  let s = useDispatch();
   return jsxs("a", {
     className: i || m6,
     "data-plugin-id": e.id,

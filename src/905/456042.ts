@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useCallback } from "react";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import s, { B } from "../905/714743";
 import { tx } from "../905/303541";
 import { e as _$$e } from "../905/579755";
@@ -12,8 +12,8 @@ import { A } from "../figma_app/122760";
 import { genericSelectorExternalTeamsIcon, workspaceSelectorModal, workspaceSelectorModalInner, genericSelectorModalCancel } from "../figma_app/727769";
 import { A as _$$A } from "../6041/915738";
 export function $$f0(e) {
-  let t = d4(e => e.orgById);
-  let i = d4(e => e.authedUsers);
+  let t = useSelector(e => e.orgById);
+  let i = useSelector(e => e.authedUsers);
   return "external teams" === e.name.toLowerCase() ? jsx(B, {
     className: genericSelectorExternalTeamsIcon,
     svg: _$$A
@@ -24,7 +24,7 @@ export function $$f0(e) {
   });
 }
 export let $$$$_1 = Ju(function (e) {
-  let t = wA();
+  let t = useDispatch();
   let i = useCallback(() => {
     t(Ce());
   }, [t]);

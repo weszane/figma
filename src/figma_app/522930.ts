@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useCallback, useEffect } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { x4 } from "../905/657224";
 import { s as _$$s } from "../cssbuilder/589278";
 import { pW } from "../905/160095";
@@ -48,7 +48,7 @@ export function $$y1({
   applyNarrowStyling: t
 }) {
   let r = _$$f("dismissed_team_template_announcement_card");
-  let o = wA();
+  let o = useDispatch();
   let l = tS();
   let d = useCallback(() => {
     o(_$$b({

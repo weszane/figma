@@ -1,5 +1,5 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { Rs } from "../figma_app/288654";
 import { oA } from "../905/723791";
 import { Us, M7 } from "../figma_app/637027";
@@ -21,9 +21,9 @@ export let $$w0 = Ju(function (e) {
   let {
     teamId
   } = e;
-  let n = wA();
+  let n = useDispatch();
   let b = _6();
-  let w = d4(e => e.folders);
+  let w = useSelector(e => e.folders);
   let T = Rs(bel, {
     teamId
   });
@@ -31,7 +31,7 @@ export let $$w0 = Ju(function (e) {
   let k = oA(T.data?.team?.teamFileCounts?.totalFileCount) ?? 0;
   let E = T.data?.team?.teamFileCounts?.designFileCount ?? 0;
   let C = T.data?.team?.teamFileCounts?.whiteboardFileCount ?? 0;
-  let I = d4(e => e.teams[teamId]);
+  let I = useSelector(e => e.teams[teamId]);
   let A = e => {
     e.preventDefault();
     n(Lo());

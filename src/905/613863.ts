@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { lQ } from "../905/934246";
 import { t as _$$t } from "../905/303541";
 import { jU } from "../figma_app/544879";
@@ -11,8 +11,8 @@ export function $$c0({
   resourceId: i,
   setFavorite: c
 }) {
-  let u = wA();
-  let p = d4(e => e.dropdownShown);
+  let u = useDispatch();
+  let p = useSelector(e => e.dropdownShown);
   let m = useRef(null);
   let h = !!m.current && p?.data?.targetRef === m.current;
   if ("loaded" !== e.status) return {

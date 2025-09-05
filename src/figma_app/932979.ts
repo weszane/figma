@@ -1,6 +1,6 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useState, useRef } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { E as _$$E } from "../905/632989";
 import { bL } from "../905/911410";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
@@ -100,7 +100,7 @@ function C() {
 }
 export function $$w0(e) {
   let t = md($$N1);
-  let r = wA();
+  let r = useDispatch();
   if (_$$f("dev_mode_mcp_sse_deprecation_banner_dismissed") || !y3() || !t) return null;
   let i = {
     bannerType: x1.WARN_SOFT,

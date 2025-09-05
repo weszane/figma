@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { memo, useRef, useContext } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { K } from "../905/443068";
 import { r as _$$r } from "../905/784543";
 import { iCO } from "../figma_app/763686";
@@ -35,8 +35,8 @@ export let $$M0 = memo(function (e) {
   let a = useRef(null);
   Od(a);
   h$(a);
-  let d = d4(Dr);
-  let u = d4(Ct);
+  let d = useSelector(Dr);
+  let u = useSelector(Ct);
   let {
     allowLibraryPublish
   } = useContext(s);

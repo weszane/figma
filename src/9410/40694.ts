@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback } from "react";
 import { createPortal } from "../vendor/944059";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { E as _$$E } from "../905/632989";
 import { zkO } from "../figma_app/763686";
 import d from "classnames";
@@ -52,7 +52,7 @@ export function $$j0({
   let m = LL(c, e.name || e.handle || "", p);
   let b = TA();
   let T = _$$b();
-  let j = wA();
+  let j = useDispatch();
   let O = useCallback(() => {
     j(F9({
       currentUserId: b ?? void 0,

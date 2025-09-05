@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState, useRef, useEffect, useCallback, useMemo, useId, memo } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { lQ } from "../905/934246";
 import { K as _$$K } from "../905/443068";
 import { i as _$$i } from "../905/97346";
@@ -181,7 +181,7 @@ let eI = new EX();
 let eC = new JV();
 let eE = new Eq();
 function ej(e) {
-  let t = wA();
+  let t = useDispatch();
   let n = Um();
   let o = cJ();
   let {
@@ -290,7 +290,7 @@ function ew(e) {
   let b = 1 === detailPropsMultipleActions.interactionActions.length && "BACK" === detailPropsMultipleActions.interactionActions[0].connectionType;
   let I = void 0 !== detailPropsMultipleActions.interactionActions.find(e => y(e, "CONDITIONAL"));
   return function (e) {
-    let t = wA();
+    let t = useDispatch();
     let n = e.updateSelectionProperties;
     let o = RU();
     let [l, s] = useState(!1);
@@ -579,7 +579,7 @@ function e$({
   stateManagementVersion: o,
   selectedInteractions: r
 }) {
-  let l = wA();
+  let l = useDispatch();
   let s = YT() === Oz.SINGLE_COL;
   let d = s ? IK : $n;
   let c = 1 === o ? jsx(d, {
@@ -786,7 +786,7 @@ function e8(e) {
 let $$e90 = memo(function ({
   filterOutNoneActions: e
 }) {
-  let t = d4(tn);
+  let t = useSelector(tn);
   let n = HS();
   let {
     selectedInteractions
@@ -822,7 +822,7 @@ let e7 = memo(function ({
   filterOutNoneActions: N
 }) {
   let A;
-  let V = wA();
+  let V = useDispatch();
   let [B, H] = useState(!1);
   let [, F] = fp(_$$x);
   let K = useRef(null);
@@ -1447,7 +1447,7 @@ function te({
   createActionTrigger: n,
   titleId: o
 }) {
-  let r = wA();
+  let r = useDispatch();
   let {
     selectedInteractions
   } = Ay(e);

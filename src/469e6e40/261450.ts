@@ -1,5 +1,5 @@
 import { jsx } from "react/jsx-runtime";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { bv } from "../figma_app/421401";
 import { t as _$$t } from "../905/303541";
 import { Um } from "../905/848862";
@@ -11,13 +11,13 @@ export function $$c0({
   onFilterUpdate: t,
   getCount: a
 }) {
-  let c = wA();
+  let c = useDispatch();
   let _ = Um();
-  let u = d4(e => e.currentUserOrgId);
+  let u = useSelector(e => e.currentUserOrgId);
   let m = NJ(u);
   let p = "loading" === m.status ? [] : m.data ?? [];
   let g = {};
-  if (p.forEach(e => g[e.id] = e), !d4(({
+  if (p.forEach(e => g[e.id] = e), !useSelector(({
     selectedView: e
   }) => "orgAdminSettings" === e.view) || !p.length) return null;
   let h = p.map(e => e.id).concat(O);

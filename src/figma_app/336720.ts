@@ -8,7 +8,7 @@ import d from "classnames";
 import { BK } from "../905/848862";
 import { Ib } from "../905/129884";
 import { J5, FM } from "../figma_app/835688";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { r as _$$r } from "../905/857502";
 import { getInitialOptions } from "../figma_app/169182";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -47,7 +47,7 @@ let $$A0 = {
     "data-onboarding-key": FM,
     children: jsx(function () {
       let e = tS();
-      let t = wA();
+      let t = useDispatch();
       let r = useCallback(() => {
         let r = `${getInitialOptions().figma_url}/deck/${e}`;
         navigator.clipboard.writeText(r);

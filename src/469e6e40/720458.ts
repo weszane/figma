@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { vd, tM } from "../figma_app/637027";
 import { z as _$$z, Z } from "../905/306088";
 import { qc } from "../figma_app/858013";
@@ -25,9 +25,9 @@ let E = "handle_asset_transfer_request_modal--radioText--WU7za";
 let C = "handle_asset_transfer_request_modal--radioSubtitle--aF3ij";
 var N = (e => (e.REMOVE_COLLABORATORS = "remove_collaborators", e.KEEP_COLLABORATORS = "keep_collaborators", e))(N || {});
 export function $$I0(e) {
-  let t = wA();
-  let a = d4(e => e.currentUserOrgId);
-  let N = d4(e => a && e.orgById[a]);
+  let t = useDispatch();
+  let a = useSelector(e => e.currentUserOrgId);
+  let N = useSelector(e => a && e.orgById[a]);
   let I = N && N.bigma_enabled;
   let [T, A] = useState();
   let [R, O] = useState(!1);

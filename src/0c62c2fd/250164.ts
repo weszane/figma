@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { memo, useState, useEffect } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import n from "classnames";
 import { Rs } from "../figma_app/288654";
 import { vd } from "../figma_app/637027";
@@ -17,7 +17,7 @@ function x(e, t) {
   return e && "loaded" === t.status ? t.data.org : e || "loaded" !== t.status ? null : t.data.team;
 }
 export let $$b0 = memo(function (e) {
-  let t = wA();
+  let t = useDispatch();
   let {
     updateVatGstId
   } = e;

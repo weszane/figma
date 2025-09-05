@@ -1,6 +1,6 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { createElement, memo, useEffect, useLayoutEffect } from "react";
-import { d4, bN, Pj } from "../vendor/514228";
+import { useSelector, shallowEqual, useStore } from "../vendor/514228";
 import { c2 } from "../905/382883";
 import { qE } from "../figma_app/492908";
 import { m1T, glU, Egt, VDs } from "../figma_app/763686";
@@ -55,7 +55,7 @@ export function $$D3({
   suppressIds: s
 }) {
   let o = W(e, t);
-  let l = d4(e => e.mirror.appModel.showComments);
+  let l = useSelector(e => e.mirror.appModel.showComments);
   if (!o) return null;
   let d = o.childIds.length;
   let c = o.childIds.map((e, a) => jsx(M, {
@@ -179,7 +179,7 @@ let F = memo(({
   parent: I,
   ...S
 }) {
-  return bN(p, S) && bN(c, T) && bN(d, b) && bN(n, g) && bN(o, E) && bN(l, y) && bN(i, f) && bN(u?.absoluteTransform, I?.absoluteTransform) && bN(u?.dimensions, I?.dimensions) && bN(u?.transformProperties, I?.transformProperties) && c2(e, _) && c2(t, h) && c2(r, m);
+  return shallowEqual(p, S) && shallowEqual(c, T) && shallowEqual(d, b) && shallowEqual(n, g) && shallowEqual(o, E) && shallowEqual(l, y) && shallowEqual(i, f) && shallowEqual(u?.absoluteTransform, I?.absoluteTransform) && shallowEqual(u?.dimensions, I?.dimensions) && shallowEqual(u?.transformProperties, I?.transformProperties) && c2(e, _) && c2(t, h) && c2(r, m);
 });
 export function $$j2({
   children: e,
@@ -210,9 +210,9 @@ export function $$j2({
   parent: J
 }) {
   let Z;
-  let Q = Pj();
+  let Q = useStore();
   let ee = Q.getState().comments.showResolved;
-  let et = d4(e => e.mirror.appModel.showComments);
+  let et = useSelector(e => e.mirror.appModel.showComments);
   let er = Q.getState().mirror.sceneGraph;
   let en = iT(H) ? s + 1 : s;
   let ei = E3();
@@ -244,7 +244,7 @@ export function $$j2({
     label: D,
     headerId: `sectionHeaderFor-${k}`
   } : null;
-  let eu = d4(e => {
+  let eu = useSelector(e => {
     let t = Object.keys(e.mirror.sceneGraphSelection);
     return (e.mirror.appModel.activeCanvasEditModeType !== m1T.TEXT && 1 === t.length ? t[0] : "") === k;
   });

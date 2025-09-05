@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useEffect } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { NLJ } from "../figma_app/763686";
 import { parsePxInt } from "../figma_app/783094";
 import { buildUploadUrl } from "../figma_app/169182";
@@ -28,7 +28,7 @@ export function $$b1(e) {
     children
   } = e;
   $$y4(!e.hidden);
-  let s = d4(e => e.downtime.status === A.Ongoing || e.downtime.status === A.Imminent || e.showingDowntimeBanner) ? E : 0;
+  let s = useSelector(e => e.downtime.status === A.Ongoing || e.downtime.status === A.Imminent || e.showingDowntimeBanner) ? E : 0;
   let o = position.x;
   let l = position.y - s;
   let d = {

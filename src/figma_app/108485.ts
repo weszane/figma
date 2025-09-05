@@ -1,5 +1,5 @@
 import { jsxs, jsx } from "react/jsx-runtime";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { eU, md, Xr } from "../figma_app/27355";
 import { h as _$$h } from "../905/207101";
 import { b as _$$b } from "../905/985254";
@@ -48,7 +48,7 @@ export function $$O1() {
     numSteps: 2,
     onComplete: j.complete
   });
-  let G = wA();
+  let G = useDispatch();
   _$$h(() => {
     null != e && e.canEdit && e.createdAt > N() && j.show({
       canShow: (t, r, n, i, a, s, l) => {

@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useCallback, useState } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import a from "../vendor/128080";
 import { sx } from "../905/449184";
 import { gB } from "../905/723791";
@@ -45,7 +45,7 @@ export function $$k2({
   return `${location.origin}/proto/${t}?${a}`;
 }
 export function $$R6(e, t, i) {
-  let a = wA();
+  let a = useDispatch();
   let s = t.find(e => e.type === cM.NODE || e.type === cM.PROTOTYPE);
   let l = (s ? s.fileKey : void 0) || i;
   useEffect(() => {
@@ -94,7 +94,7 @@ export function $$R6(e, t, i) {
 }
 export var $$N4 = (e => (e.TILE = "tile", e.DETAIL = "detail", e))($$N4 || {});
 export function $$P0(e, t) {
-  let i = wA();
+  let i = useDispatch();
   return useCallback(() => {
     sx("Team Feed Copy Link Clicked", {
       postUuid: e,

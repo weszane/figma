@@ -1,5 +1,5 @@
 import { useMemo, useCallback } from "react";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { phr } from "../figma_app/763686";
 import { dI } from "../905/805904";
 import { md } from "../figma_app/27355";
@@ -23,20 +23,20 @@ import { q } from "../905/296913";
 import { NX } from "../figma_app/394327";
 var $$n3;
 export function $$N11() {
-  let e = d4(e => e.mirror.selectionProperties?.numSelected === 1);
-  let t = d4(e => e.mirror.sceneGraphSelection);
+  let e = useSelector(e => e.mirror.selectionProperties?.numSelected === 1);
+  let t = useSelector(e => e.mirror.sceneGraphSelection);
   return e && Object.keys(t).find(e => e) || null;
 }
 export function $$C4() {
-  let e = d4(e => e.mirror.sceneGraphSelection);
+  let e = useSelector(e => e.mirror.sceneGraphSelection);
   return useMemo(() => {
     let t = Object.keys(e);
     return 0 === t.length ? null : t;
   }, [e]);
 }
 export function $$w13() {
-  let e = d4(e => e.mirror.selectionProperties?.numSelected === 1);
-  let t = d4(e => e.mirror.sceneGraphSelection);
+  let e = useSelector(e => e.mirror.selectionProperties?.numSelected === 1);
+  let t = useSelector(e => e.mirror.sceneGraphSelection);
   let r = kl("primaryBreakpointFrameGuid") ?? null;
   return e ? Object.keys(t).find(e => e) || null : r && hS(r) ? r : null;
 }
@@ -61,17 +61,17 @@ export function $$P2() {
   if (e) return t;
 }
 export function $$D7() {
-  let e = d4(e => e.mirror.objectsPanelRowRebuildCounter);
+  let e = useSelector(e => e.mirror.objectsPanelRowRebuildCounter);
   return hr((e, t) => e, e);
 }
 export function $$k9(e) {
-  return d4(t => {
+  return useSelector(t => {
     let r = e(t);
     if (null != r && hS(r)) return r;
   });
 }
 export function $$M1(e, t) {
-  let r = wA();
+  let r = useDispatch();
   let n = useCallback(() => {
     if (!e) return null;
     r(lW({
@@ -188,7 +188,7 @@ export function $$j12(e) {
   let _ = (e = []) => e.flatMap(e => e.type === q.STYLE ? e.paints : e);
   let h = "background";
   e.useCopyAllColors = function (e, t) {
-    let n = d4(e => e.mirror.selectionProperties.numSelected) || 0;
+    let n = useSelector(e => e.mirror.selectionProperties.numSelected) || 0;
     let s = _(e);
     let o = useCallback(() => {
       if (1 === n && s) {

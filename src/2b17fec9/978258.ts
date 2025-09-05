@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useState, useRef, useEffect, useMemo, useCallback } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
 import { QOV, Ez5, cfv, glU } from "../figma_app/763686";
 import { r as _$$r } from "../905/249071";
@@ -33,12 +33,12 @@ export function $$j0({
     markPositionChanged,
     markSelectionChanged
   } = LP(C);
-  let S = d4(({
+  let S = useSelector(({
     mirror: {
       appModel: e
     }
   }) => [QOV.DEFAULT, QOV.SELECTING_TEXT, QOV.CLICKING_TO_CHANGE_SELECTION].includes(e.activeUserAction));
-  let w = d4(({
+  let w = useSelector(({
     mirror: {
       appModel: e
     }
@@ -50,7 +50,7 @@ export function $$j0({
   let N = J2(Ez5.canvasViewState().inlineMenuTarget);
   let A = s || N?.boundingBox || L;
   let O = JI();
-  let k = d4(e => e.mirror.sceneGraphSelection);
+  let k = useSelector(e => e.mirror.sceneGraphSelection);
   let R = kl("isTableSublayerSelected");
   _ = cfv.ABOVE;
   N?.preferredPosition ? _ = N.preferredPosition : R && (_ = cfv.BELOW);

@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useEffect, useCallback, useMemo, createRef } from "react";
-import { Ng, wA } from "../vendor/514228";
+import { connect, useDispatch } from "../vendor/514228";
 import { debounce } from "../905/915765";
 import { $n } from "../905/521428";
 import { o as _$$o } from "../905/821217";
@@ -34,7 +34,7 @@ let P = debounce((e, t, r) => e($$do({
   teamId: t,
   level: r
 })));
-let $$L0 = Ng(e => ({
+let $$L0 = connect(e => ({
   teamJoinLinks: e.teamJoinLinks
 }), null, (e, t, r) => ({
   ...e,
@@ -128,7 +128,7 @@ let $$L0 = Ng(e => ({
   });
 });
 function D(e) {
-  let t = wA();
+  let t = useDispatch();
   let r = "team-link-settings-dropdown";
   let n = createRef();
   let o = () => e.dropdownShown?.type === r;
@@ -172,7 +172,7 @@ function D(e) {
   });
 }
 function M(e) {
-  let t = wA();
+  let t = useDispatch();
   let r = "join-link-permission-level-dropdown";
   let s = e.currentLevel === e6.VIEWER ? "-32px" : "-61px";
   let n = jsxs("div", {
@@ -250,7 +250,7 @@ function B(e) {
 }
 let U = "RESET_LINKS_CONFIRMATION_MODAL";
 Ju(function (e) {
-  let t = wA();
+  let t = useDispatch();
   let r = hS(e);
   return jsx(bL, {
     width: "md",

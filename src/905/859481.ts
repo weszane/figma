@@ -18,7 +18,7 @@ import { Kt } from "../figma_app/156285";
 import { _2 } from "../905/185121";
 import { CL } from "../figma_app/722913";
 import { dL } from "../figma_app/473914";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { K } from "../905/443068";
 import { F as _$$F } from "../905/427107";
 import { glU } from "../figma_app/763686";
@@ -36,7 +36,7 @@ import { R8, V0, kW, e6, Jt } from "../figma_app/359164";
 let F = new OH();
 let M = new EN();
 function j(e) {
-  let t = wA();
+  let t = useDispatch();
   let i = bC();
   let r = e.leftEndCap === e.rightEndCap && hS(e.leftEndCap) && -1 !== Gp.indexOf(e.leftEndCap);
   let a = !!e.leftEndCap && !!e.rightEndCap && hS(e.leftEndCap) && hS(e.rightEndCap) && e.leftEndCap !== e.rightEndCap;

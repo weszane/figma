@@ -8,7 +8,7 @@ import { Fj } from "../figma_app/594947";
 import { sZ } from "../905/845253";
 import { T32 } from "../figma_app/43951";
 import { z as _$$z } from "../469e6e40/221397";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { $n } from "../905/521428";
 import { J as _$$J } from "../905/129695";
 import { xk } from "@stylexjs/stylex";
@@ -52,11 +52,11 @@ import { Yy } from "../figma_app/59509";
 import { Q as _$$Q } from "../905/363675";
 var $$r = i;
 function E(e) {
-  let t = wA();
+  let t = useDispatch();
   let a = useCallback(() => {
     _$$a.postOrgSamlConfig({
       org_id: e.org.id
-    }).then((a) => {
+    }).then(a => {
       let {
         data: {
           meta
@@ -70,7 +70,7 @@ function E(e) {
           orgDomains: e.orgDomains
         }
       }));
-    }).catch((e) => {
+    }).catch(e => {
       t(_$$F.enqueue({
         message: e.message
       }));
@@ -101,7 +101,7 @@ function E(e) {
   });
 }
 function C(e) {
-  return e.map((e) => ({
+  return e.map(e => ({
     id: e.id,
     domain: e.domain,
     verified_at: e.verifiedAt,
@@ -109,7 +109,7 @@ function C(e) {
   }));
 }
 function F(e) {
-  let t = wA();
+  let t = useDispatch();
   let [a, i] = useState(!1);
   let [r, l] = useState(!1);
   let o = useRef(null);
@@ -144,7 +144,7 @@ function F(e) {
     onMouseLeave: () => l(!1),
     className: "xh8yej3",
     children: jsxs(_$$E2, {
-      onClick: (t) => {
+      onClick: t => {
         e.stopPropagation && t.stopPropagation();
         d();
       },
@@ -219,7 +219,7 @@ function es() {
     children: "\u2014"
   });
 }
-let ei = (e) => !!e.idpEntityId && !!e.idpName && !!e.ssoUrl;
+let ei = e => !!e.idpEntityId && !!e.idpName && !!e.ssoUrl;
 function er({
   isConfigured: e
 }) {
@@ -234,7 +234,7 @@ function er({
   });
 }
 function el(e) {
-  let t = wA();
+  let t = useDispatch();
   let {
     idpData,
     k12GoogleOrg,
@@ -406,7 +406,7 @@ function eo(e) {
     openEditConfigurationModal
   } = e;
   let [i, r] = useState("");
-  let l = useMemo(() => idpData.domains.filter((e) => e.domain.toLowerCase().includes(i.toLowerCase())), [idpData.domains, i]);
+  let l = useMemo(() => idpData.domains.filter(e => e.domain.toLowerCase().includes(i.toLowerCase())), [idpData.domains, i]);
   return 0 === idpData.domains.length ? jsx(Fragment, {
     children: jsxs(_$$Y, {
       height: 720,
@@ -433,12 +433,12 @@ function eo(e) {
           placeholder: _$$t("idp_management.flyout.search_domains"),
           "aria-label": _$$t("idp_management.flyout.search_domains"),
           value: i,
-          onChange: (e) => r(e)
+          onChange: e => r(e)
         })]
       })
     }), jsx("div", {
       className: "x78zum5 xdt5ytf x127mb9d xf67zum",
-      children: l.map((e) => jsx(ed, {
+      children: l.map(e => jsx(ed, {
         domain: e
       }, e.domain))
     })]
@@ -624,9 +624,9 @@ function eu() {
 }
 let em = {
   Root: ec,
-  Contents: function(e) {
+  Contents: function (e) {
     var t;
-    let a = wA();
+    let a = useDispatch();
     let [s, i, r] = _$$t2.useTabs({
       idp_details: !0,
       domain_mapping: !0
@@ -751,7 +751,7 @@ let em = {
                   a(_$$F.enqueue({
                     message: _$$t("idp_management.flyout.idp_removed")
                   }));
-                }).catch((e) => {
+                }).catch(e => {
                   a(_$$F.enqueue({
                     message: e.message
                   }));
@@ -783,7 +783,7 @@ function eg({
   let a = e.length - 2;
   return jsxs("div", {
     className: "x78zum5 xozqiw3 x1nfngrj xb3r6kr xlyipyv xuxw1ft",
-    children: [t.map((e) => jsx(G, {
+    children: [t.map(e => jsx(G, {
       domain: e.domain,
       verified: null !== e.verified_at
     }, e.domain)), a > 0 && jsx("span", {
@@ -856,7 +856,7 @@ function eh(e) {
 }
 function ex(e) {
   let t = ev();
-  let a = (e) => {
+  let a = e => {
     let a = 0;
     e < 2 ? a = 1 : e < 10 && (a = 1 - (e - 2 + 1) / 9);
     return jsx("div", {
@@ -953,7 +953,7 @@ function ex(e) {
         className: "x1n2onr6",
         children: e.isLoading ? Array.from({
           length: 10
-        }).map((e, t) => a(t)) : e.items.map((t) => jsx(eh, {
+        }).map((e, t) => a(t)) : e.items.map(t => jsx(eh, {
           item: t,
           isHighlighted: t.id === e.highlightedItemKey,
           onHighlight: e.onHighlight
@@ -966,10 +966,10 @@ function eb(e) {
   let t = _$$B();
   let a = useRef(null);
   let i = useRef(null);
-  let r = useMemo(() => "loaded" === e.loadingStatus ? (e.orgSamlConfigs || []).sort((e, t) => e.id > t.id ? -1 : 1).map((t) => {
+  let r = useMemo(() => "loaded" === e.loadingStatus ? (e.orgSamlConfigs || []).sort((e, t) => e.id > t.id ? -1 : 1).map(t => {
     var a;
-    let n = C(t.orgDomains).map((t) => {
-      let a = e.orgDomains.find((e) => e.domain === t.domain)?.memberCount || 0;
+    let n = C(t.orgDomains).map(t => {
+      let a = e.orgDomains.find(e => e.domain === t.domain)?.memberCount || 0;
       return {
         ...t,
         memberCount: a
@@ -999,7 +999,7 @@ function eb(e) {
     highlightedItem,
     setHighlightedItemId,
     clearHighlightedItemId
-  } = _$$v(useCallback((e) => r.find((t) => t.id === e), [r]), {
+  } = _$$v(useCallback(e => r.find(t => t.id === e), [r]), {
     interactionConfig: [{
       ref: t,
       shouldClearHighlight: !0
@@ -1019,7 +1019,7 @@ function eb(e) {
     children: [jsx(ex, {
       highlightedItemKey: highlightedItem?.id ?? null,
       items: r,
-      onHighlight: (e) => {
+      onHighlight: e => {
         null === e ? clearHighlightedItemId() : setHighlightedItemId(e);
       },
       isLoading: "loading" === e.loadingStatus,
@@ -1122,7 +1122,7 @@ let ef = {
     $$css: !0
   }
 };
-let ew = (e) => jsx("span", {
+let ew = e => jsx("span", {
   className: "x1g2dr8m xiqqdae xkezfkh x14kxzw3 x1giz659",
   children: e
 });
@@ -1167,10 +1167,10 @@ export function $$eE0() {
   let {
     orgDomains
   } = i;
-  let p = orgDomains.filter((e) => !e.org_saml_config_id);
+  let p = orgDomains.filter(e => !e.org_saml_config_id);
   let g = useMemo(() => {
     let e = a.data?.org;
-    return !!e && !!e.samlSsoOnlyAt && orgDomains.some((e) => !e.org_saml_config_id);
+    return !!e && !!e.samlSsoOnlyAt && orgDomains.some(e => !e.org_saml_config_id);
   }, [a, orgDomains]);
   let [h, x] = useState([]);
   let b = $$eS1();
@@ -1178,9 +1178,9 @@ export function $$eE0() {
   useEffect(() => {
     $$r()(v || [], orgDomains) || _$$z.getOrgDomainMemberCounts({
       org_id: t.id
-    }).then((e) => {
+    }).then(e => {
       let t = e.data.meta.member_counts || {};
-      x(orgDomains.map((e) => ({
+      x(orgDomains.map(e => ({
         ...e,
         memberCount: t[e.id] || 0
       })));
@@ -1214,4 +1214,4 @@ export function $$eS1() {
   return getDynamicConfig().get("enabled", !1);
 }
 export const a = $$eE0;
-export const r = $$eS1; 
+export const r = $$eS1;

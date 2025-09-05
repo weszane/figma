@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useMemo, useState, useEffect, useCallback, useRef } from "react";
 import { createPortal } from "../vendor/944059";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { filterNotNullish } from "../figma_app/656233";
 import { K } from "../905/443068";
 import { E as _$$E } from "../905/172252";
@@ -139,10 +139,10 @@ export function $$G4(e) {
     ...section,
     collapseAfterIndex: 15
   });
-  let M = d4(e => Object.keys(e.mirror.sceneGraphSelection)[0]);
-  let F = wA();
+  let M = useSelector(e => Object.keys(e.mirror.sceneGraphSelection)[0]);
+  let F = useDispatch();
   let U = function (e, t) {
-    let r = wA();
+    let r = useDispatch();
     return IG(e.lines, e.language, e.pills, r, t);
   }(section, onInstancePillClick);
   let [G, Y] = useState(collapseLongSections);

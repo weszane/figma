@@ -1,5 +1,5 @@
 import { useCallback, useMemo } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { zRx } from "../figma_app/822011";
 import { throwTypeError } from "../figma_app/465776";
 import { ServiceCategories as _$$e } from "../905/165054";
@@ -37,7 +37,7 @@ import { u as _$$u } from "../905/14084";
 var _ = p;
 export function $$B5(e) {
   let t = q5();
-  let r = wA();
+  let r = useDispatch();
   let a = iZ();
   let c = null;
   let p = null;
@@ -870,7 +870,7 @@ export function $$q0(e) {
   return e === FMemberRoleType.ADMIN;
 }
 export function $$J4(e) {
-  let t = wA();
+  let t = useDispatch();
   let r = q5();
   let {
     getPlanAndPlanUser,

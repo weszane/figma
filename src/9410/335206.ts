@@ -1,5 +1,5 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { glU, NLJ } from "../figma_app/763686";
 import { l7 as _$$l, nc } from "../905/189185";
 import { Pt } from "../figma_app/806412";
@@ -32,8 +32,8 @@ import { X } from "../figma_app/765161";
 let N = "delightful-toolbar-media-button";
 let A = "InsertMediaModal";
 let O = Ju(function () {
-  let e = wA();
-  let t = d4(e => !!e.modalShown?.data?.shouldMountCenter);
+  let e = useDispatch();
+  let t = useSelector(e => !!e.modalShown?.data?.shouldMountCenter);
   let i = useRef(null);
   let s = t ? {
     kind: "mountCenter"
@@ -128,8 +128,8 @@ export function $$F11(e) {
 function B(e) {
   let t;
   let i = _$$b();
-  let a = wA();
-  let d = d4(e => e.user?.id);
+  let a = useDispatch();
+  let d = useSelector(e => e.user?.id);
   let {
     tabManager,
     searchQuery
@@ -295,7 +295,7 @@ export function $$J10() {
   });
 }
 export function $$q2() {
-  let e = wA();
+  let e = useDispatch();
   let t = BI()?.shouldOptimizeForIpadApp;
   return jsx(B, {
     resourceType: "Image",
@@ -316,7 +316,7 @@ export function $$q2() {
   });
 }
 export function $$X3() {
-  let e = wA();
+  let e = useDispatch();
   return jsx(B, {
     resourceType: "Link",
     text: _$$t("whiteboard.inserts.links_title"),

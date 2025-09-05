@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useCallback, useState, useEffect } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, nB } from "../figma_app/272243";
@@ -46,7 +46,7 @@ let b = Ju(function (e) {
   let [y, b] = useState(null);
   let [j] = fp(f);
   let v = _();
-  let k = wA();
+  let k = useDispatch();
   let C = useCallback(async () => {
     g(!1);
     j[importNodeGuid] || d(!0);
@@ -112,7 +112,7 @@ let b = Ju(function (e) {
   });
 }, "FigmakeImportModal", ZU.NO);
 export function $$j0() {
-  let e = wA();
+  let e = useDispatch();
   return t => e(to({
     type: b,
     data: {

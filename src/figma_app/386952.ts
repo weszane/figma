@@ -1,4 +1,4 @@
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { eU } from "../figma_app/27355";
 import a from "../vendor/128080";
 import { bt } from "../905/270322";
@@ -6,10 +6,10 @@ var s = a;
 let l = e => e.selectedView;
 let d = e => e.selectedView.view;
 export function $$c4() {
-  return d4(l);
+  return useSelector(l);
 }
 export function $$u6() {
-  return d4(l, s());
+  return useSelector(l, s());
 }
 export function $$p5() {
   let e = $$c4();
@@ -21,10 +21,10 @@ let $$h3 = bt(e => e.modalShown);
 let $$m7 = eU(e => e($$h3)?.type || null);
 let $$g0 = bt(e => e.notifications?.[0]?.type ?? null);
 export function $$f8() {
-  return d4(d);
+  return useSelector(d);
 }
 export function $$E2() {
-  return d4(e => "fullscreen" === e.selectedView.view && e.selectedView.fileKey ? e.selectedView.fileKey : null);
+  return useSelector(e => "fullscreen" === e.selectedView.view && e.selectedView.fileKey ? e.selectedView.fileKey : null);
 }
 export const AN = $$g0;
 export const OC = $$_1;

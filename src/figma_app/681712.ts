@@ -1,5 +1,5 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import a from "classnames";
 import { Ex, zE, vj } from "../figma_app/919079";
 import { G } from "../figma_app/361869";
@@ -145,8 +145,8 @@ function S({
   currency: r,
   numEditors: a
 }) {
-  let s = d4(e => e.payment.billingPeriod);
-  let o = d4(e => e.payment.numWhiteboardEditors);
+  let s = useSelector(e => e.payment.billingPeriod);
+  let o = useSelector(e => e.payment.numWhiteboardEditors);
   return s === tY.STUDENT ? null : jsx(T, {
     currentBillingPeriod: s,
     numEditors: a || o,

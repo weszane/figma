@@ -1,5 +1,5 @@
 import { useState, useCallback, useLayoutEffect, useMemo } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { lQ } from "../905/934246";
 import { tKW } from "../figma_app/763686";
 import { sx } from "../905/449184";
@@ -28,7 +28,7 @@ export function $$g0() {
   useLayoutEffect(() => {
     "first-party" !== f.type && (_(S8[uz]), "properties" !== t && i("properties"));
   }, [f, t]);
-  let v = d4(e => e.mirror.appModel.devHandoffPreferences);
+  let v = useSelector(e => e.mirror.appModel.devHandoffPreferences);
   let [I, E] = useState({
     ...v
   });

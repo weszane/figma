@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useEffect, memo, useCallback, useRef, useMemo, useState } from "react";
-import { d4, wA, Pj } from "../vendor/514228";
+import { useSelector, useDispatch, useStore } from "../vendor/514228";
 import { NLJ, glU, kul } from "../figma_app/763686";
 import { md, fp } from "../figma_app/27355";
 import { uM } from "../905/738636";
@@ -161,7 +161,7 @@ function F(e, t) {
   };
 }
 function z(e) {
-  let t = d4(e => e.isFullscreenDocumentLoaded);
+  let t = useSelector(e => e.isFullscreenDocumentLoaded);
   useEffect(() => {
     t && glU.triggerAction("set-tool-type", null);
   }, [t]);
@@ -516,16 +516,16 @@ export function $$eo1() {
     overlay: SyB,
     priority: _$$N.OVERRIDING_MODAL
   });
-  let O = wA();
-  let L = Pj();
-  let R = d4(e => e.isFullscreenDocumentLoaded);
-  let D = d4(e => e.mirror.appModel.multiplayerSessionState === kul.JOINED);
+  let O = useDispatch();
+  let L = useStore();
+  let R = useSelector(e => e.isFullscreenDocumentLoaded);
+  let D = useSelector(e => e.mirror.appModel.multiplayerSessionState === kul.JOINED);
   let M = _$$b2();
   let P = md(a8);
   let B = _$$f("has_cursor_bot_onboarding_v2");
   !function (e, t, i) {
     let r = iZ();
-    let n = wA();
+    let n = useDispatch();
     let s = _$$f("has_cursor_bot_onboarding_v2");
     let o = Cq({
       useSinatraType: !0
@@ -576,7 +576,7 @@ export function $$eo1() {
       let s = !!_$$f(Of(wn.FORMAT_TEXT, e).tutorialPlayedUserFlag);
       return useMemo(() => e ? [F(i, e), V(a, e, t), _$$Z(s, e), _$$p(r, e)] : [F(i, e), _$$p(r, e), V(a, e, t), _$$Z(s, e)], [e, t, i, a, s, r]);
     }(i);
-    let o = d4(e => J(e, s));
+    let o = useSelector(e => J(e, s));
     if (!e || r || !i && t) return null;
     let l = 0;
     if (s.forEach(e => {

@@ -1,4 +1,4 @@
-import { bN } from "../vendor/514228";
+import { shallowEqual } from "../vendor/514228";
 import { throwTypeError, assert, assertNotNullish } from "../figma_app/465776";
 import { XQq, xOL } from "../figma_app/763686";
 import { t as _$$t } from "../905/303541";
@@ -153,7 +153,7 @@ export function $$N5(e, t, r, a, s) {
   let o = s.get(a);
   assert(!!o, "expected node to exist");
   let c = $$I2(s, o);
-  if (e && bN(e.breakpoint, c) && !t) return e;
+  if (e && shallowEqual(e.breakpoint, c) && !t) return e;
   let h = Y5.getViewportInfo();
   let m = h.height - uF - 2 * $$_11;
   let f = Math.max(.5 * h.width, $$g1);

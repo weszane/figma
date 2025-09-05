@@ -1,6 +1,6 @@
 import { Ju } from "../905/102752";
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
@@ -15,9 +15,9 @@ import { e0 } from "../905/696396";
 export let $$h0 = Ju(function (e) {
   let t;
   let a = hS(e);
-  let h = wA();
+  let h = useDispatch();
   let x = Xf(e.plan.key.parentId, e.plan.key.type !== OL.TEAM);
-  let f = d4(e => e.teamBilling);
+  let f = useSelector(e => e.teamBilling);
   let v = e.plan.key.type === OL.TEAM ? f.summary.currency : x.data?.currency;
   let b = () => h(Ce());
   t = !v || e.isELA ? e.filteredRowCount !== e.numRequestsToApprove ? jsx("p", {

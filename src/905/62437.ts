@@ -1,6 +1,6 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useState, useMemo } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { q7 } from "../figma_app/860955";
 import { getFeatureFlags } from "../905/601108";
 import { sx } from "../905/449184";
@@ -33,7 +33,7 @@ import { DV } from "../905/739964";
 import { y as _$$y } from "../figma_app/504415";
 import { S as _$$S } from "../905/262176";
 function $$D(e) {
-  let t = wA();
+  let t = useDispatch();
   let i = hS(e);
   let [s, d] = useState(!1);
   let u = q5();
@@ -137,9 +137,9 @@ let F = Ju(function (e) {
 export function $$B0(e) {
   let t = q5();
   let i = t?.canEdit || !1;
-  let C = d4(t => t.versionHistory.versions.find(t => t.id === e));
+  let C = useSelector(t => t.versionHistory.versions.find(t => t.id === e));
   let T = _6();
-  let k = wA();
+  let k = useDispatch();
   let R = fk(t?.key);
   let N = FC();
   return useMemo(() => {

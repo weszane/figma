@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { sH } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
@@ -109,7 +109,7 @@ export function $$I6(e, t) {
   "SMALL_CAPS" === e ? i("ORIGINAL", "SMALL") : "SMALL_CAPS_FORCED" === e ? i("ORIGINAL", "ALL_SMALL") : i(e, "NORMAL");
 }
 export function $$E0(e) {
-  return d4(t => {
+  return useSelector(t => {
     let {
       availableOTFeaturesForSelection,
       availableOTFeaturesForFonts,
@@ -159,7 +159,7 @@ export function $$S8(e, t) {
   return !0;
 }
 export function $$w9() {
-  return d4(e => {
+  return useSelector(e => {
     let t = e.mirror.selectionProperties.numSelectedByType;
     let i = e.mirror.selectionProperties.numSelected;
     return t?.TEXT_PATH === i;

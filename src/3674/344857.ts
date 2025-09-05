@@ -1,7 +1,7 @@
 import _require from "../3592/633592";
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useEffect, useCallback, useRef, memo, createContext, useContext, useMemo, forwardRef, useState, useLayoutEffect, lazy, Suspense, Fragment as _$$Fragment } from "react";
-import { wA, d4 as _$$d } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { w3z, NLJ, NVY, m1T, _gJ, Egt, glU, juq, Vzr, J0O, Z_n, JTp, Ez5, mKm, zIx, Oin, rrT, vXe, i1K, FAf, lyf } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { fp as _$$fp, md, eU as _$$eU, zl, Xr, AY, E3 } from "../figma_app/27355";
@@ -334,7 +334,7 @@ import { aq as _$$aq } from "../figma_app/399472";
 import { h as _$$h2, AF as _$$AF } from "../figma_app/212807";
 import { d4 as _$$d8, be, vT, GR } from "../figma_app/474636";
 import { jv, Wh } from "../figma_app/985200";
-import { mN } from "../905/261467";
+import { PluginUIManager } from "../905/261467";
 import { IN } from "../905/116101";
 import { z as _$$z5 } from "../3271/42512";
 import { B0 } from "../figma_app/201703";
@@ -595,7 +595,7 @@ function eu({
   upgradeRequestId: e
 }) {
   let t = _$$U("blocking_modal");
-  let n = wA();
+  let n = useDispatch();
   let l = jsxs(Fragment, {
     children: [jsx("div", {
       className: DD,
@@ -730,7 +730,7 @@ function e_() {
   let e = md(_$$t);
   let t = _$$tS() ?? "";
   let n = _$$J3();
-  let l = _$$d(e => _$$oc(H7(e)?.id ?? "", e));
+  let l = useSelector(e => _$$oc(H7(e)?.id ?? "", e));
   let s = Rs(XGw, {
     key: t
   });
@@ -3356,7 +3356,7 @@ function iT({
   });
 }
 function iO() {
-  let e = wA();
+  let e = useDispatch();
   let t = _$$am2();
   return jsxs("div", {
     className: a$,
@@ -3406,7 +3406,7 @@ function iO() {
   });
 }
 function iM({}) {
-  let e = wA();
+  let e = useDispatch();
   let t = "install-messaging-dropdown";
   let n = Um();
   let l = useRef(null);
@@ -3457,7 +3457,7 @@ function iM({}) {
   });
 }
 function iF() {
-  let e = wA();
+  let e = useDispatch();
   let t = _$$am();
   let n = [{
     theme: "system",
@@ -4481,7 +4481,7 @@ let iJ = {
 let iQ = isGovCluster() ? [1, 2] : [1, 2, 3, 4];
 function iq() {
   let e = md(aR);
-  let t = wA();
+  let t = useDispatch();
   let {
     isShowing,
     uniqueId,
@@ -4536,7 +4536,7 @@ function iZ({
 }) {
   let t = _$$U2();
   let [n, l] = useState(0);
-  let s = wA();
+  let s = useDispatch();
   let r = iY();
   let d = useRef(null);
   let c = useCallback(() => {
@@ -4750,7 +4750,7 @@ function oe(e) {
 }
 let ok = _$$eU({});
 function oA() {
-  return !!_$$d(e => e.mirror.appModel.activeCanvasEditModeType === m1T.DEV_HANDOFF_HISTORY && e.versionHistory.activeId && "current_version" !== e.versionHistory.activeId);
+  return !!useSelector(e => e.mirror.appModel.activeCanvasEditModeType === m1T.DEV_HANDOFF_HISTORY && e.versionHistory.activeId && "current_version" !== e.versionHistory.activeId);
 }
 function oR({
   description: e,
@@ -4897,7 +4897,7 @@ function o5(e) {
   let t = function (e) {
     let t = $1();
     let n = _$$cW();
-    let a = _$$d(e => e.mirror.appModel.useLocalRelatedLinkPlugin);
+    let a = useSelector(e => e.mirror.appModel.useLocalRelatedLinkPlugin);
     let l = useMemo(() => 0 === o$.size ? null : Object.values(t).find(t => !!o0(e, t)), [e, t]);
     let s = useMemo(() => 0 === o$.size ? null : Object.values(n).map(e => _$$uF(e)).find(t => !!o0(e, t)), [e, n]);
     let r = useMemo(() => Array.from(o$), []);
@@ -4939,7 +4939,7 @@ function o8({
   appendLabel: r,
   hintInMenu: d
 }) {
-  let c = wA();
+  let c = useDispatch();
   let u = !_$$G(t.linkUrl);
   let p = _$$eY();
   let h = Nf() ?? "";
@@ -5237,7 +5237,7 @@ function lN() {
 function lk({
   backingSymbol: e
 }) {
-  let t = wA();
+  let t = useDispatch();
   let n = _G();
   let s = _$$b5({
     libraryKey: e?.sourceLibraryKey,
@@ -5284,8 +5284,8 @@ let lD = memo(({
   useEffect(() => {
     e && zl.set(_$$J6, [e]);
   }, [e]);
-  let s = wA();
-  let d = _$$d(AF);
+  let s = useDispatch();
+  let d = useSelector(AF);
   let u = wS();
   let f = "loaded" === u.status && "temp-scene" === u.result.dataLocation ? u.result : void 0;
   let g = _$$oD();
@@ -5342,7 +5342,7 @@ let lD = memo(({
       callbackCount: l
     };
   }(e ?? y);
-  let A = _$$d(e => e.userFlags.dismissed_playground_banner);
+  let A = useSelector(e => e.userFlags.dismissed_playground_banner);
   let I = useCallback(() => {
     s(_$$b({
       dismissed_playground_banner: !0
@@ -5679,7 +5679,7 @@ function lK(e) {
   });
 }
 function lX() {
-  let e = wA();
+  let e = useDispatch();
   let t = M4();
   let n = useCallback(() => {
     e(_$$to({
@@ -5713,7 +5713,7 @@ function lJ(e) {
   });
 }
 function lQ() {
-  let e = _$$d(Sh);
+  let e = useSelector(Sh);
   let t = useMemo(_$$z3, []);
   let {
     consumedVariable
@@ -5723,7 +5723,7 @@ function lQ() {
     let t = e.value.expressionArguments[0];
     return t?.type !== Z_n.MAP ? null : t;
   }(consumedVariable);
-  let r = _$$d(n => t(n, e));
+  let r = useSelector(n => t(n, e));
   let d = Object.entries(kN()).filter(([e, t]) => t.modeOptions.length > 1);
   let {
     visibleItems,
@@ -5818,7 +5818,7 @@ function l8({
   onFocus: l,
   onUnfocus: s
 }) {
-  let r = wA();
+  let r = useDispatch();
   let [d, c] = useState("");
   let [u, p] = useState(!1);
   let h = useCallback(e => c(e.target.value), []);
@@ -5993,7 +5993,7 @@ let sd = _$$Ju(function (e) {
   let n = Nf() ?? "";
   let i = _$$tS();
   let l = _$$eY().get(n);
-  let s = wA();
+  let s = useDispatch();
   let r = async () => {
     if (!i || !n) return;
     let e = Tz({
@@ -6044,7 +6044,7 @@ let sf = _$$Ju(function ({
   let x = Nf() ?? "";
   let m = _$$tS();
   let _ = _$$eY().get(x);
-  let v = wA();
+  let v = useDispatch();
   let y = useCallback(e => h(e.target.value), []);
   let b = useCallback(e => c(e.target.value), []);
   let {
@@ -6224,7 +6224,7 @@ function s_() {
   let e = Nf() ?? "";
   let t = _$$eY();
   let n = _$$lU();
-  let a = _$$d(e => e.mirror.appModel.currentPage);
+  let a = useSelector(e => e.mirror.appModel.currentPage);
   let l = t.get(n ?? a);
   let [s, d] = _$$fp(sm);
   let c = _$$U2();
@@ -6299,12 +6299,12 @@ function sy({
   noBorder: e = !1,
   gapBetweenRows: t = !1
 }) {
-  let n = wA();
+  let n = useDispatch();
   let s = Nf() ?? "";
   let d = _$$uL2() ?? "";
   let u = _$$eY();
   let p = _$$lU();
-  let h = _$$d(e => e.mirror.appModel.currentPage);
+  let h = useSelector(e => e.mirror.appModel.currentPage);
   let f = u.get(p ?? h);
   let g = wS();
   let x = LS();
@@ -6534,7 +6534,7 @@ function sO() {
   let e;
   let t = _$$lA();
   let n = wS();
-  let s = _$$d(_$$sS);
+  let s = useSelector(_$$sS);
   let r = _$$uQ();
   let d = function () {
     let e = RI();
@@ -6759,7 +6759,7 @@ function s2() {
   let t = _$$iZ()?.id;
   let n = _$$Tv();
   let i = _$$tS();
-  let l = wA();
+  let l = useDispatch();
   if (n?.length !== 2) return null;
   let s = n[1];
   let r = n[0];
@@ -6811,7 +6811,7 @@ function s3() {
   let s = s_();
   let r = xo();
   let d = Td();
-  let c = wA();
+  let c = useDispatch();
   let {
     getTriggerProps,
     manager
@@ -7337,7 +7337,7 @@ function rf({
   didSelectRow: n,
   hideHeader: s = !1
 }) {
-  let d = wA();
+  let d = useDispatch();
   let c = _$$eY();
   let u = _$$uQ();
   let p = NM();
@@ -7545,7 +7545,7 @@ function rN(e) {
     e.stopPropagation();
     toggleExpand?.();
   });
-  let b = wA();
+  let b = useDispatch();
   let j = useCallback(e => {
     e.stopPropagation();
     e.preventDefault();
@@ -7646,7 +7646,7 @@ let rk = memo(function (e) {
     e?.currentTarget?.blur();
     onClick?.(e);
   });
-  let S = wA();
+  let S = useDispatch();
   let P = useCallback(e => {
     e.stopPropagation();
     e.preventDefault();
@@ -8020,7 +8020,7 @@ let rL = memo(() => {
     inspectableRootNodeId,
     didSelectRow
   } = rT(e, _$$uQ());
-  let r = _$$d(e => Object.keys(e.mirror.sceneGraphSelection).length > 0);
+  let r = useSelector(e => Object.keys(e.mirror.sceneGraphSelection).length > 0);
   _$$h(() => {
     let e = _$$sn.tryStop("switch_to_inspect_mode.left_panel_tti");
     e && _$$sx("switch_to_inspect_mode.left_panel_tti", {
@@ -8074,7 +8074,7 @@ function rX() {
       setCurrentView: l
     }), [t, l]);
   }();
-  let n = wA();
+  let n = useDispatch();
   let l = useMemo(() => ({
     activeTab: _$$s5.PLUGIN,
     viewResource: e => {
@@ -8103,17 +8103,17 @@ function rX() {
   });
 }
 function rJ() {
-  let e = _$$d(e => e.mirror.appModel.currentTool === _$$ec.tool);
+  let e = useSelector(e => e.mirror.appModel.currentTool === _$$ec.tool);
   let t = _$$h2();
   let n = UX();
   let s = md(_$$d8);
   let d = "LOADING" === s;
   let c = "RUNNING" === s;
   let u = _$$ut(_$$tw(), _gJ.PRIMARY) === _gJ.PLUGIN && !e;
-  let p = wA();
+  let p = useDispatch();
   useEffect(() => p(_$$aq()), [p]);
   useEffect(() => {
-    let e = mN.getInstance();
+    let e = PluginUIManager.getInstance();
     c && e && (u ? e.hideProgress() : e.showProgress({
       isBackground: !0
     }));
@@ -8351,7 +8351,7 @@ function r9(e) {
   });
 }
 function de(e) {
-  let t = _$$d(e => e.mirror.appModel.showUi);
+  let t = useSelector(e => e.mirror.appModel.showUi);
   let n = _$$lz();
   let [l, d] = _$$fp(XI);
   let c = J2(UK().renderRulers);
@@ -8556,7 +8556,7 @@ function dN({
 }) {
   let h = _$$ie();
   let f = fb();
-  let g = _$$d(e => Object.keys(e.mirror.sceneGraphSelection)[0]);
+  let g = useSelector(e => Object.keys(e.mirror.sceneGraphSelection)[0]);
   let x = _$$U2();
   let [m, _] = useState(!1);
   let v = n ?? g;
@@ -8709,7 +8709,7 @@ let dP = {
   disableHighlight: !0
 };
 function dL(e) {
-  let t = wA();
+  let t = useDispatch();
   return useCallback(() => {
     t(_$$b({
       dev_mode_has_seen_interactive_inspection_onboarding: !0
@@ -8912,13 +8912,13 @@ function d3({
   }
 }
 function d4() {
-  let e = wA();
+  let e = useDispatch();
   return () => {
     e(Eg());
   };
 }
 function d7() {
-  return _$$d(e => e.versionHistory.activeId === V_);
+  return useSelector(e => e.versionHistory.activeId === V_);
 }
 function d8(e, t) {
   return e.metadata?.status !== FBuildStatusType.NONE ? n => jsx(d3, {
@@ -8928,7 +8928,7 @@ function d8(e, t) {
   }) : void 0;
 }
 function d6() {
-  let e = wA();
+  let e = useDispatch();
   return t => {
     e(Eg());
     w3z.focusOnNode(t, !1);
@@ -8944,7 +8944,7 @@ function d9({
   showCompareChanges: d,
   focusNodeId: c
 }) {
-  let u = wA();
+  let u = useDispatch();
   let p = _$$U2();
   let h = Ak((t ?? 0) * 1e3);
   let f = _$$hA();
@@ -9065,9 +9065,9 @@ function ca({
   versions: d,
   focusNodeId: c
 }) {
-  let u = wA();
+  let u = useDispatch();
   let p = _6();
-  let h = _$$d(e => e.versionHistory);
+  let h = useSelector(e => e.versionHistory);
   let f = e.version?.id ?? void 0;
   let g = d7();
   let x = md(wg);
@@ -9075,7 +9075,7 @@ function ca({
   let _ = g && s || f === h.activeId;
   let v = function (e, t, n) {
     let a = _$$hA();
-    let s = wA();
+    let s = useDispatch();
     let r = _6();
     let d = d4();
     let c = _$$U2();
@@ -9197,7 +9197,7 @@ function cr() {
   let n = _$$cW();
   let i = _$$Be();
   let l = Yo();
-  let s = wA();
+  let s = useDispatch();
   let r = _$$tS();
   return jsx(_$$Q3, {
     allSavedPlugins: i.plugins,
@@ -9368,9 +9368,9 @@ let c9 = memo(({
   let c = _$$tS();
   let [u, p] = _$$fp(g6);
   let f = !ua() || u;
-  let g = _$$d(e => e.saveAsState);
+  let g = useSelector(e => e.saveAsState);
   let x = J2(UK().showGuids);
-  let _ = _$$d(e => e.mirror.sceneGraphSelection);
+  let _ = useSelector(e => e.mirror.sceneGraphSelection);
   let v = useMemo(() => {
     let t = Object.keys(_);
     let n = e.instancesGUIDs || [];
@@ -9406,7 +9406,7 @@ let c9 = memo(({
   }) : _$$t2("dev_handoff.assets.files", {
     count: I.length
   }) : C, [I, T, C]);
-  let P = wA();
+  let P = useDispatch();
   let {
     getTriggerProps,
     manager
@@ -9634,7 +9634,7 @@ function ue({
   onClose: t
 }) {
   let n = _$$tS() ?? "";
-  let l = wA();
+  let l = useDispatch();
   let {
     ref,
     ...d
@@ -9753,7 +9753,7 @@ function ui({
   });
 }
 function uo() {
-  let e = _$$d(e => e.mirror.selectionProperties.assetsDeprecated);
+  let e = useSelector(e => e.mirror.selectionProperties.assetsDeprecated);
   let t = Object.values(md(_$$O6));
   let n = useMemo(() => {
     let e = {};
@@ -9828,8 +9828,8 @@ function us({
   let [d, c] = useState(!1);
   let p = !ua() || a || d;
   let f = q5();
-  let g = _$$d(e => e.saveAsState);
-  let x = wA();
+  let g = useSelector(e => e.saveAsState);
+  let x = useDispatch();
   let m = md(c4)[e];
   let _ = md(c7);
   let v = _$$uQ();
@@ -9966,7 +9966,7 @@ function uc({
 }) {
   let [s, d] = _$$fp(c4);
   let [c, u] = _$$fp(c7);
-  let p = wA();
+  let p = useDispatch();
   let h = Um();
   let f = Xo();
   let g = q5();
@@ -10556,7 +10556,7 @@ function uV({
   fillContainer: e = !1
 }) {
   let t = _$$uQ();
-  let n = _$$d(e => e.mirror.selectionProperties.selectedFonts);
+  let n = useSelector(e => e.mirror.selectionProperties.selectedFonts);
   return !t || !n || n?.fonts.length < 1 ? null : jsx(VZ, {
     hideHeader: !0,
     noPadding: !0,
@@ -11117,7 +11117,7 @@ function pc() {
 function pu() {
   let e = _$$f2("dev_mode_mcp_has_dismissed_client_setup_banner");
   let t = _$$f2("dev_mode_mcp_has_used_a_tool");
-  let n = wA();
+  let n = useDispatch();
   return e || t ? null : jsx("div", {
     className: pt,
     children: jsx(_$$cV, {
@@ -11310,7 +11310,7 @@ function pv({
   });
 }
 function py() {
-  let e = wA();
+  let e = useDispatch();
   let t = _$$AF();
   return getFeatureFlags().dt_multi_node && t ? jsx(IK, {
     onClick: () => e(_$$to({
@@ -11420,7 +11420,7 @@ let pN = () => {
 function pk({
   version: e
 }) {
-  let t = wA();
+  let t = useDispatch();
   let n = _$$hA();
   let i = function (e, t) {
     if (!t.dev_mode_activity || 0 === t.dev_mode_activity.length) return;
@@ -11471,10 +11471,10 @@ function pA({
   let t = d7();
   let {
     activeId
-  } = _$$d(e => e.versionHistory);
+  } = useSelector(e => e.versionHistory);
   let i = q5();
   let s = i?.canEdit;
-  let r = wA();
+  let r = useDispatch();
   let d = _$$hA();
   let c = d6();
   let u = d4();
@@ -11543,7 +11543,7 @@ let pL = memo(function () {
     comment: !0
   });
   let r = _$$hA();
-  let d = wA();
+  let d = useDispatch();
   let c = _$$ut(_$$tw(), _gJ.PRIMARY);
   let p = new Set(NI().map(e => r5[e]).filter(e => null != e));
   let h = {};
@@ -11627,7 +11627,7 @@ function pz({
   selectedNode: e,
   targetRect: t
 }) {
-  let n = wA();
+  let n = useDispatch();
   let i = (e => {
     let t = e.parentNode;
     return t?.childrenNodes ?? [e];
@@ -11676,7 +11676,7 @@ function pz({
 function pV({
   nodeID: e
 }) {
-  let t = wA();
+  let t = useDispatch();
   let [n, i, l] = pF();
   let s = Um();
   let r = _$$eY().get(e);
@@ -11723,7 +11723,7 @@ function pH({
 function pW({
   nodeIDs: e
 }) {
-  let t = wA();
+  let t = useDispatch();
   let [n, i, l] = pF();
   let s = Um();
   let r = s?.type === pM;
@@ -11975,7 +11975,7 @@ function hc({
     styleNodeId,
     styleType
   } = e;
-  let r = wA();
+  let r = useDispatch();
   let d = useCallback(() => {
     r(Ce());
   }, [r]);
@@ -12053,7 +12053,7 @@ function hu({
       isDeleted: n.isSoftDeleted
     } : {};
   }, t);
-  let f = _$$d(e => e.mirror.selectedStyleProperties);
+  let f = useSelector(e => e.mirror.selectedStyleProperties);
   let g = useMemo(() => "FILL" === n || "STROKE" === n ? hx : "TEXT" === n ? h_ : hm, [n]);
   useEffect(() => () => glU?.selectStyleByGuid(AD), []);
   let x = "TEXT" === n ? jsx(uH, {
@@ -12280,7 +12280,7 @@ function h_({
   });
 }
 _$$Ju(function () {
-  let e = _$$d(e => e.modalShown);
+  let e = useSelector(e => e.modalShown);
   return e && e.type === _$$vl && e.data.styleNodeId ? jsx(hc, {
     ...e
   }) : null;
@@ -12313,7 +12313,7 @@ function hT(e) {
 }
 function hS() {
   let e = _6();
-  let t = wA();
+  let t = useDispatch();
   return useCallback(() => {
     "fullscreen" === e.view && t(_$$sf({
       ...e,
@@ -12375,7 +12375,7 @@ function hD({
     renderVariableDetails,
     variableIdForDetailsPanel
   } = function () {
-    let e = _$$d(e => e.selectedView.variableIdForDetailsPanel);
+    let e = useSelector(e => e.selectedView.variableIdForDetailsPanel);
     return {
       renderVariableDetails: _$$u5({
         variableId: e,
@@ -12388,7 +12388,7 @@ function hD({
     styleId,
     styleNodeId,
     styleType
-  } = _$$d(e => e.selectedView?.styleForDetailsPanel) ?? {};
+  } = useSelector(e => e.selectedView?.styleForDetailsPanel) ?? {};
   if (e !== l) return jsx("div", {
     className: n,
     children: t
@@ -12513,7 +12513,7 @@ function hz() {
 function hV({
   setActiveTabId: e
 }) {
-  let t = wA();
+  let t = useDispatch();
   let n = Um();
   let s = useRef(null);
   let [d, c] = _$$fp(sg);
@@ -12578,7 +12578,7 @@ function hH() {
   let s = _$$ro();
   let d = md(be);
   !function (e) {
-    let t = wA();
+    let t = useDispatch();
     useEffect(() => {
       let e = debugState.getState().selectedView;
       e.variableIdForDetailsPanel && t(_$$sf({
@@ -12763,7 +12763,7 @@ function h9() {
     inspectableRootNodeId,
     didSelectRow
   } = rT(J2(Ez5.devHandoffState().currentNodeId), t[0] || null);
-  let p = _$$d(e => e.mirror.appModel.currentPage);
+  let p = useSelector(e => e.mirror.appModel.currentPage);
   let h = inspectableRootNodeId || p;
   let f = Xr(rh);
   let g = [{
@@ -12929,7 +12929,7 @@ function fp() {
     doneChangingFocusNodeForInteractiveInspection
   } = function () {
     let e = Tv();
-    let t = _$$d(e => e.mirror.appModel.hoveredNode);
+    let t = useSelector(e => e.mirror.appModel.hoveredNode);
     let [n, a] = _$$fp(_$$hn);
     let l = useCallback(() => {
       a(_$$xX.STARTED);
@@ -12996,8 +12996,8 @@ function fp() {
   }) : null;
 }
 function fh() {
-  let e = wA();
-  let t = _$$d(e => e.versionHistory);
+  let e = useDispatch();
+  let t = useSelector(e => e.versionHistory);
   let {
     Dropdown,
     toggleDropdown,
@@ -13058,7 +13058,7 @@ function fh() {
   });
 }
 function ff() {
-  let e = wA();
+  let e = useDispatch();
   let t = UX();
   let n = _$$hA();
   let {
@@ -13073,7 +13073,7 @@ function ff() {
   }, n);
   let c = Fk(e => e.getCurrentPage()?.name);
   let u = _$$tS();
-  let p = _$$d(e => e.versionHistory);
+  let p = useSelector(e => e.versionHistory);
   let h = QV();
   let f = _$$U2();
   let x = _$$U("focus_view_back");
@@ -13081,14 +13081,14 @@ function ff() {
   let [, y] = _$$fp(_o);
   let [b] = _$$fp(wz);
   let j = xo();
-  let N = _$$d(e => $A(e.selectedView) ? {
+  let N = useSelector(e => $A(e.selectedView) ? {
     ...e.selectedView,
     editorType: e.selectedView.focusViewBackNavigation?.toEditorType ?? e.selectedView.editorType,
     showOverview: e.selectedView.focusViewBackNavigation?.toOverview ?? !0,
     focusViewBackNavigation: void 0,
     devModeFocusId: void 0
   } : e.selectedView);
-  let k = _$$d(e => Np(e, N));
+  let k = useSelector(e => Np(e, N));
   let I = N.showOverview ? _$$t2("dev_handoff.workflows.focus_view.back_to_rfd_tooltip") : _$$t2("dev_handoff.workflows.focus_view.back_to_page_tooltip");
   if (_$$h(() => {
     n && w3z.focusOnNode(n, !1);
@@ -13182,9 +13182,9 @@ function ff() {
 export function $$fg0() {
   let e = _I();
   let t = _$$aV();
-  let n = _$$d(e => e.mirror.appModel.showUi);
+  let n = useSelector(e => e.mirror.appModel.showUi);
   let s = _$$iZ();
-  let d = wA();
+  let d = useDispatch();
   let c = _$$I2();
   X_();
   _$$z({
@@ -13265,7 +13265,7 @@ let f_ = memo(function () {
   !function () {
     let e = _$$D();
     let t = _$$f2("dev_mode_notified_of_approved_org_request");
-    let n = wA();
+    let n = useDispatch();
     useEffect(() => {
       e && !t && n(_$$b({
         dev_mode_notified_of_approved_org_request: !0

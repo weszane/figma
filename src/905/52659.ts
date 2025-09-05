@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, useCallback } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { Ay } from "@stylexjs/stylex";
 import { sx } from "../905/449184";
 import { MD } from "../figma_app/672951";
@@ -238,12 +238,12 @@ let er = (e, t, i, n) => {
 };
 export function $$ea0(e) {
   let [t, i] = useState([]);
-  let s = wA();
-  let x = d4(k);
+  let s = useDispatch();
+  let x = useSelector(k);
   let S = _6();
   let w = gY(Ct);
   let C = MD(t);
-  let T = d4(e => e.teams);
+  let T = useSelector(e => e.teams);
   let {
     columns,
     gutterColumn
@@ -369,4 +369,4 @@ let es = {
     $$css: !0
   }
 };
-export const m = $$ea0; 
+export const m = $$ea0;

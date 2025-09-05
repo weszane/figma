@@ -8,7 +8,7 @@ import { IT } from "../905/713695";
 import { h as _$$h } from "../905/207101";
 import { ks } from "../figma_app/637027";
 import { tZ, xe, DK, I$, w, gP, Kz, K_, UW } from "../905/599844";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import g from "classnames";
 import { B } from "../905/714743";
 import { oB, j7 } from "../905/929976";
@@ -46,7 +46,7 @@ function I({
   dropdownType: s,
   disabled: o
 }) {
-  let l = wA();
+  let l = useDispatch();
   let d = Um();
   let c = d?.type === s;
   let u = useCallback(() => {
@@ -104,7 +104,7 @@ function E({
   value: a
 }) {
   let s = i.current?.getBoundingClientRect();
-  let o = wA();
+  let o = useDispatch();
   let [l, d] = useState(null);
   if (useEffect(() => {
     if (a && e.length && null === l) {

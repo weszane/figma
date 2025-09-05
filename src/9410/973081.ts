@@ -3,7 +3,7 @@ import _require2 from "../f2246930/661721";
 import _require from "../f2246930/661721";
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useEffect, useState, useRef, useCallback, memo, useMemo, useContext, useId, PureComponent, Component, useLayoutEffect, createRef, Children, createElement } from "react";
-import { d4, wA, Ng, Pj } from "../vendor/514228";
+import { useSelector, useDispatch, connect, useStore } from "../vendor/514228";
 import { lQ } from "../905/934246";
 import { RYP, H4l, ywP, NUh, Ez5, oeV, uQ6, glU, Z_n, rXF, OmW, NLJ, CWU, rrT, NVY, _4o, Z6A, iCO, Qej, NfO, _0v, bQY, FAf, w3z, SES, VDs, aTn, XpX, nQ7, h3O, kul, Oin, W8Y, Pt4 } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
@@ -738,7 +738,7 @@ function ej({
 function eO({
   children: e
 }) {
-  let t = d4(e => e.universalInsertModal?.pinned === _$$t3.PINNED_AND_DOCKED_LEFT);
+  let t = useSelector(e => e.universalInsertModal?.pinned === _$$t3.PINNED_AND_DOCKED_LEFT);
   let i = _$$a2();
   let {
     isPropertiesPanelCollapsed
@@ -798,7 +798,7 @@ function eM({
 }) {
   let t = _$$a2();
   let i = hA();
-  let s = d4(e => e.mirror.appModel.currentPage);
+  let s = useSelector(e => e.mirror.appModel.currentPage);
   let o = useContext(viewportNavigatorContext);
   let {
     isPropertiesPanelCollapsed
@@ -912,7 +912,7 @@ function eK({
 function ez({
   children: e
 }) {
-  let t = d4(e => e.selectedView.editorType);
+  let t = useSelector(e => e.selectedView.editorType);
   let i = useMemo(() => {
     if (window.FigmaMobile) return t === _$$nT.Whiteboard ? function ({
       children: e
@@ -1052,13 +1052,13 @@ let tE = "export_picker--labelWithoutCheckbox--3zcNc export_picker--label--43URE
 let tw = parsePxInt(zK5);
 function tS() {
   let e = q5();
-  let t = d4(e => e.exportableItems);
-  let i = d4(e => e.dropdownShown);
+  let t = useSelector(e => e.exportableItems);
+  let i = useSelector(e => e.dropdownShown);
   let s = !!e && Pe(e);
   let o = Av();
-  let d = d4(e => e.saveAsState);
-  let c = d4(e => e.mirror.appModel.currentPage);
-  let u = wA();
+  let d = useSelector(e => e.saveAsState);
+  let c = useSelector(e => e.mirror.appModel.currentPage);
+  let u = useDispatch();
   let p = () => {
     u(XE());
   };
@@ -1541,8 +1541,8 @@ function tW({
   let {
     VariableAndStyleCreateModalRoot
   } = useContext(_$$l2) ?? {};
-  let c = d4(e => e.pickerShown);
-  let u = wA();
+  let c = useSelector(e => e.pickerShown);
+  let u = useDispatch();
   function p() {
     (Ty(c?.id ?? null) || kU(c?.id ?? null)) && u(XE());
   }
@@ -1850,10 +1850,10 @@ function ib({
   let i;
   let s;
   let c = function () {
-    let e = d4(e => e.eyedropper);
-    let t = d4(e => e.library.local.styles);
+    let e = useSelector(e => e.eyedropper);
+    let t = useSelector(e => e.library.local.styles);
     let i = md(Cg);
-    let r = d4(e => e.library.used__LIVEGRAPH.styles);
+    let r = useSelector(e => e.library.used__LIVEGRAPH.styles);
     if (!e) return null;
     let n = e.assetId;
     let s = {};
@@ -1900,13 +1900,13 @@ function ib({
     }
     return c && c in s ? s[c] : null;
   }();
-  let u = wA();
+  let u = useDispatch();
   let p = function () {
     let e = Ez5?.uiState().backgroundPickerOpen.getCopy();
-    let t = d4(e => e.mirror.appModel.prototypeBackgroundPickerOpen);
-    let i = d4(e => e.variablePickerShown.isShown);
-    let r = d4(e => e.mirror.appModel.currentSelectedProperty);
-    let n = d4(e => e.mirror.selectionProperties.numSelected);
+    let t = useSelector(e => e.mirror.appModel.prototypeBackgroundPickerOpen);
+    let i = useSelector(e => e.variablePickerShown.isShown);
+    let r = useSelector(e => e.mirror.appModel.currentSelectedProperty);
+    let n = useSelector(e => e.mirror.selectionProperties.numSelected);
     return e || t || i || r.type !== rrT.NONE || 0 !== n;
   }();
   let h = E3();
@@ -2199,7 +2199,7 @@ function iC({
   });
 }
 function iv() {
-  let e = d4(e => e.eyedropper);
+  let e = useSelector(e => e.eyedropper);
   let t = useRef();
   let i = tG({
     subscribeToUpdates__EXPENSIVE: !!e
@@ -2242,7 +2242,7 @@ function iw({
   deleteCollection: n,
   collectionId: s
 }) {
-  let o = wA();
+  let o = useDispatch();
   let d = ZX();
   let {
     appModel,
@@ -2303,7 +2303,7 @@ function iS({
   deleteField: n,
   duplicateField: s
 }) {
-  let o = wA();
+  let o = useDispatch();
   let {
     appModel,
     sceneGraph,
@@ -2352,7 +2352,7 @@ function ij({
   selectedView: i,
   deleteItemOrItems: n
 }) {
-  let s = wA();
+  let s = useDispatch();
   let {
     appModel,
     sceneGraph,
@@ -2404,8 +2404,8 @@ function iA(e) {
   };
 }
 function iO(e) {
-  let t = wA();
-  let i = d4(e => e.mirror.appModel);
+  let t = useDispatch();
+  let i = useSelector(e => e.mirror.appModel);
   let n = e.clientX;
   let s = e.clientY;
   let o = async t => {
@@ -2570,9 +2570,9 @@ function iV({
   selectedView: i
 }) {
   var n;
-  let s = wA();
-  let o = d4(e => e.mirror.appModel);
-  let l = d4(e => e.mirror.sceneGraph);
+  let s = useDispatch();
+  let o = useSelector(e => e.mirror.appModel);
+  let l = useSelector(e => e.mirror.sceneGraph);
   let d = _$$U3("annotations_button");
   let c = _$$ni();
   let u = _I();
@@ -2639,10 +2639,10 @@ function iV({
   });
 }
 function iq(e) {
-  let t = wA();
+  let t = useDispatch();
   let i = I_();
-  let n = d4(e => e.mirror.appModel);
-  if (!d4(e => U2(e.selectedView))) return null;
+  let n = useSelector(e => e.mirror.appModel);
+  if (!useSelector(e => U2(e.selectedView))) return null;
   let {
     thread
   } = e;
@@ -2953,7 +2953,7 @@ class ni extends PureComponent {
   }
 }
 ni.displayName = "CanvasContextMenu";
-let nr = Ng((e, t) => ({
+let nr = connect((e, t) => ({
   ...t,
   appModel: e.mirror.appModel,
   openFile: e.openFile,
@@ -2988,7 +2988,7 @@ function nn(e) {
   let y = JU(x);
   let b = x === kN.FILE_IN_DRAFTS;
   let C = !!kD();
-  let v = d4(e => e.mirror.appModel.activeTextReviewPlugin);
+  let v = useSelector(e => e.mirror.appModel.activeTextReviewPlugin);
   let E = ng();
   let T = Ne();
   let w = Jb();
@@ -4189,7 +4189,7 @@ function no(e) {
   return e.library.publishableSymbols.some(e => e.containingFrame.pageId === t) || e.library.publishableStateGroups.some(e => e.containingFrame.pageId === t);
 }
 function nl(e) {
-  let t = d4(_$$tB);
+  let t = useSelector(_$$tB);
   let i = Tg();
   let n = _X({
     subscribeToUpdates_expensive: !0
@@ -4197,9 +4197,9 @@ function nl(e) {
   let s = ud();
   let o = _I();
   let l = U4();
-  let d = d4(e => e.mirror.appModel.activeTextReviewPlugin);
+  let d = useSelector(e => e.mirror.appModel.activeTextReviewPlugin);
   let u = ng();
-  let p = wA();
+  let p = useDispatch();
   let h = Be();
   let m = h.orgPlugins;
   let f = _$$h2("plugin");
@@ -4283,7 +4283,7 @@ ns.displayName = "SelectionContextMenu";
 ns.refreshCache = new _$$O2(_$$A6.duration(1, "day"));
 var nd = (e => (e.SINGLE_SLIDE_VIEW = "single_slide_view", e.COOPER_CAROUSEL = "cooper_carousel", e))(nd || {});
 function nc(e) {
-  let t = d4(_$$tB);
+  let t = useSelector(_$$tB);
   let i = Tg();
   let n = _X({
     subscribeToUpdates_expensive: !0
@@ -4291,9 +4291,9 @@ function nc(e) {
   let s = ud();
   let o = _I();
   let l = U4();
-  let d = d4(e => e.mirror.appModel.activeTextReviewPlugin);
+  let d = useSelector(e => e.mirror.appModel.activeTextReviewPlugin);
   let u = ng();
-  let p = wA();
+  let p = useDispatch();
   let h = Be();
   let m = h.orgPlugins;
   let f = _$$h2("plugin");
@@ -4377,18 +4377,18 @@ function nu({
   guid: t,
   ...i
 }) {
-  let n = d4(e => e.mirror.sceneGraphSelection);
-  let s = d4(e => e.mirror.appModel);
-  let o = d4(e => e.mirror.sceneGraph);
+  let n = useSelector(e => e.mirror.sceneGraphSelection);
+  let s = useSelector(e => e.mirror.appModel);
+  let o = useSelector(e => e.mirror.sceneGraph);
   let l = hA() ?? void 0;
   let d = q5();
-  let c = d4(e => e.mirror.selectionProperties.canCopyLinkToSelection);
+  let c = useSelector(e => e.mirror.selectionProperties.canCopyLinkToSelection);
   let u = Fk((e, t) => {
     let i = e.get(t);
     return i ? i.canHaveAnnotation : null;
   }, t);
   let p = _$$s4();
-  let h = wA();
+  let h = useDispatch();
   let m = Ay.windows ? "Ctrl+" : "\u2318";
   let g = [e ? {
     name: "expand-element",
@@ -4465,10 +4465,10 @@ function nu({
 function np({
   ...e
 }) {
-  let t = d4(e => e.mirror.sceneGraphSelection);
-  let i = d4(e => e.mirror.appModel);
-  let n = d4(e => e.mirror.sceneGraph);
-  let s = wA();
+  let t = useSelector(e => e.mirror.sceneGraphSelection);
+  let i = useSelector(e => e.mirror.appModel);
+  let n = useSelector(e => e.mirror.sceneGraph);
+  let s = useDispatch();
   let o = Ay.windows ? "Ctrl+" : "\u2318";
   let l = [];
   navigator.clipboard && navigator.clipboard.write && l.push({
@@ -4625,8 +4625,8 @@ function ny({
   clientY: t,
   selectedView: i
 }) {
-  let s = wA();
-  let o = d4(e => e.mirror.appModel);
+  let s = useDispatch();
+  let o = useSelector(e => e.mirror.appModel);
   let l = q5();
   let d = useCallback(() => {
     s(lW({
@@ -4673,8 +4673,8 @@ function nb({
   clientY: i,
   selectedView: n
 }) {
-  let s = wA();
-  let o = d4(e => e.mirror.appModel);
+  let s = useDispatch();
+  let o = useSelector(e => e.mirror.appModel);
   let l = Fk((e, t) => e.get(t)?.isPageDivider, e);
   let d = [{
     action: "page-copy-link",
@@ -4705,8 +4705,8 @@ function nb({
   });
 }
 function nC(e) {
-  let t = wA();
-  let i = d4(e => e.mirror.appModel);
+  let t = useDispatch();
+  let i = useSelector(e => e.mirror.appModel);
   let n = e.clientX;
   let s = e.clientY;
   let o = [{
@@ -4763,8 +4763,8 @@ function nk({
   targetInViewport: e,
   selectedView: t
 }) {
-  let i = wA();
-  let s = d4(e => e.mirror.appModel);
+  let i = useDispatch();
+  let s = useSelector(e => e.mirror.appModel);
   let l = getSingletonSceneGraph();
   let d = _$$ni();
   let c = xo();
@@ -4852,7 +4852,7 @@ let nN = {
 };
 function nM() {
   let e = Um();
-  let t = wA();
+  let t = useDispatch();
   let i = Gt(e?.data.pluginId, e?.data.triggeredFrom);
   let n = dR(e?.data.pluginId, e?.data.triggeredFrom);
   let s = _$$t5(e?.data.pluginId, i, n);
@@ -4879,7 +4879,7 @@ function nV({
   let c = useCallback(e => {
     i(e.target.value);
   }, [i]);
-  let u = d4(e => $A(e.selectedView));
+  let u = useSelector(e => $A(e.selectedView));
   let p = useCallback(() => {
     e(t);
     i("");
@@ -4937,8 +4937,8 @@ function nY({
   nodeId: t,
   selectedView: i
 }) {
-  let s = wA();
-  let u = d4(e => e.mirror.appModel);
+  let s = useDispatch();
+  let u = useSelector(e => e.mirror.appModel);
   let p = getSingletonSceneGraph();
   let h = mJ(t);
   let m = !!h?.hasReadyStatus;
@@ -5144,7 +5144,7 @@ function nY({
   });
 }
 function nq(e) {
-  let t = wA();
+  let t = useDispatch();
   let i = _$$R(e => ({
     appModel: e.mirror.appModel,
     sceneGraph: e.mirror.sceneGraph,
@@ -5246,7 +5246,7 @@ function nZ({
   deleteItem: l,
   selectOnCanvas: d
 }) {
-  let u = wA();
+  let u = useDispatch();
   let {
     sceneGraph,
     sceneGraphSelection
@@ -5254,7 +5254,7 @@ function nZ({
     sceneGraph: e.mirror.sceneGraph,
     sceneGraphSelection: e.mirror.sceneGraphSelection
   }));
-  let m = d4(e => e.mirror.appModel);
+  let m = useSelector(e => e.mirror.appModel);
   let f = [];
   f.push({
     name: "rename-selection",
@@ -5303,7 +5303,7 @@ function n1({
   paint: s,
   onPaintChange: l
 }) {
-  let d = wA();
+  let d = useDispatch();
   let {
     appModel,
     sceneGraph,
@@ -5503,7 +5503,7 @@ function ab({
 }) {
   let c;
   let u;
-  let p = wA();
+  let p = useDispatch();
   let h = _$$tS();
   let m = md(_$$g3);
   let f = "hasData" === m.state ? m.data : [];
@@ -5780,9 +5780,9 @@ function ab({
   });
 }
 function aC(e) {
-  let t = d4(e => !e.mirror.appModel.isReadOnly);
+  let t = useSelector(e => !e.mirror.appModel.isReadOnly);
   let i = q5();
-  d4(e => i?.team || null);
+  useSelector(e => i?.team || null);
   let n = _$$x();
   let s = QZ();
   let o = V2();
@@ -6206,7 +6206,7 @@ function aX(e) {
   });
 }
 function aZ(e) {
-  let t = d4(e => e.mirror.appModel.keyboardShortcuts);
+  let t = useSelector(e => e.mirror.appModel.keyboardShortcuts);
   return jsx("div", {
     style: _$$sx2.colorText.px14.$,
     className: e.isSelected ? "action_autocomplete_input--rowSelected--62Uvp autocomplete_permissions--contactRowSelected--xYJKX autocomplete_permissions--contactRow--DRMiv" : "action_autocomplete_input--row--HRsbZ autocomplete_permissions--contactRow--DRMiv",
@@ -6224,9 +6224,9 @@ function aQ({
 }) {
   let t = FX();
   let i = c4();
-  let o = d4(e => e.mirror.appModel);
-  let l = d4(e => e.selectedView);
-  let d = d4(e => e.user?.locale);
+  let o = useSelector(e => e.mirror.appModel);
+  let l = useSelector(e => e.selectedView);
+  let d = useSelector(e => e.user?.locale);
   let c = _$$M2({
     isReadOnly: o.isReadOnly,
     extensionMenuProps: i,
@@ -6596,8 +6596,8 @@ function sn() {
   });
   let i = lg();
   let s = _$$Zj();
-  let l = d4(e => e.usedKeyboardShortcuts);
-  let d = d4(e => e.mirror.appModel.keyboardShortcuts);
+  let l = useSelector(e => e.usedKeyboardShortcuts);
+  let d = useSelector(e => e.mirror.appModel.keyboardShortcuts);
   let c = "ADDING_WAITING_FOR_KEY_REGISTRATION" === e.step && e.menuItem;
   let u = createRef();
   let p = useCallback(i => {
@@ -7904,7 +7904,7 @@ function sH({
   let c = sJ();
   let u = ZC(c);
   let p = ZC(e);
-  let h = wA();
+  let h = useDispatch();
   let m = function (e, t, i) {
     let r = sd(t);
     let n = [];
@@ -8153,8 +8153,8 @@ function sY({
   shortcutKey: n,
   ...s
 }) {
-  let o = d4(e => e.usedKeyboardShortcuts);
-  let l = d4(e => e.mirror.appModel.keyboardShortcuts);
+  let o = useSelector(e => e.usedKeyboardShortcuts);
+  let l = useSelector(e => e.mirror.appModel.keyboardShortcuts);
   let d = _$$Zj();
   let c = sJ();
   return (i(n, e), sc(c, s.includeInEditorType, s.hideInEditorType) && su(s.featureFlags)) ? jsx(sr, {
@@ -8168,17 +8168,17 @@ function sY({
   }, `shortcut-${t}-${e}`) : null;
 }
 function sJ() {
-  let e = d4(e => "fullscreen" === e.selectedView.view ? e.selectedView.editorType : _$$nT.Design);
+  let e = useSelector(e => "fullscreen" === e.selectedView.view ? e.selectedView.editorType : _$$nT.Design);
   let t = ut(Ez5?.interopToolMode(), nQ7.SELF);
   return e === _$$nT.Slides && t === nQ7.DESIGN || e === _$$nT.Cooper && t === nQ7.DESIGN ? _$$nT.Design : e;
 }
 function sq(e) {
   let t = je();
   let i = "loaded" === t.status && t.data.length > 0;
-  let n = d4(e => e.usedKeyboardShortcuts);
-  let s = d4(e => e.keyboardShortcutPanel.tab);
-  let o = d4(e => e.mirror.appModel.keyboardShortcuts);
-  let l = d4(e => "fullscreen" === e.selectedView.view ? e.selectedView.editorType : _$$nT.Design);
+  let n = useSelector(e => e.usedKeyboardShortcuts);
+  let s = useSelector(e => e.keyboardShortcutPanel.tab);
+  let o = useSelector(e => e.mirror.appModel.keyboardShortcuts);
+  let l = useSelector(e => "fullscreen" === e.selectedView.view ? e.selectedView.editorType : _$$nT.Design);
   let d = _$$Zj();
   return jsx(sH, {
     recordingKey: e.recordingKey,
@@ -8242,8 +8242,8 @@ function s6({
 }
 function s7() {
   let e = _$$U2();
-  let t = d4(e => e.selectedView);
-  let i = d4(e => e.versionHistory)?.isLoadingPage;
+  let t = useSelector(e => e.selectedView);
+  let i = useSelector(e => e.versionHistory)?.isLoadingPage;
   let s = DP();
   let {
     isLoading
@@ -8252,10 +8252,10 @@ function s7() {
     isLoadingVersionHistory: i,
     theme: s
   });
-  let c = d4(e => e.mirror.appModel.multiplayerSessionState);
+  let c = useSelector(e => e.mirror.appModel.multiplayerSessionState);
   let u = yZ();
-  let p = d4(e => e.mirror.appModel.currentPage);
-  let h = wA();
+  let p = useSelector(e => e.mirror.appModel.currentPage);
+  let h = useDispatch();
   let [m, f] = useState(null);
   let g = ZC(isLoading);
   let _ = useCallback(t => {
@@ -8649,7 +8649,7 @@ class ow extends _$$o {
   }
 }
 ow.displayName = "QuickActions";
-let oS = Ng(function (e, t) {
+let oS = connect(function (e, t) {
   return {
     pluginAndWidgetMenuArgs: t.pluginAndWidgetMenuArgs,
     fullscreenMenuItems: t.fullscreenMenuItems,
@@ -8677,7 +8677,7 @@ function oj(e) {
   let {
     addFrecencyUsage
   } = fJ();
-  let o = d4(_$$l4);
+  let o = useSelector(_$$l4);
   let l = Ev();
   let c = md(dd);
   let u = md(Rt);
@@ -8870,8 +8870,8 @@ function oU({
   onSubmit: s,
   shouldUseEyedropperStyleCreationFlow: o
 }) {
-  let l = d4(e => e.mirror.selectedStyleProperties);
-  let d = d4(e => e.mirror.sceneGraphSelection);
+  let l = useSelector(e => e.mirror.selectedStyleProperties);
+  let d = useSelector(e => e.mirror.sceneGraphSelection);
   let c = useRef(Object.keys(d).length > 0);
   let u = _$$sg(e);
   let {
@@ -9013,8 +9013,8 @@ function o0(e) {
   return e.startsWith("mailto:") ? -1 !== e.indexOf("?") ? e : e.substring(7) : e;
 }
 function o1(e) {
-  let t = wA();
-  let i = Pj().getState();
+  let t = useDispatch();
+  let i = useStore().getState();
   let [l, d] = useState(o0(e.hyperlinkLocation.url));
   let c = useRef(!0);
   let u = useRef(l);
@@ -9129,9 +9129,9 @@ function o9(e) {
 function le({
   fileKey: e
 }) {
-  let t = wA();
-  let i = Pj();
-  let r = d4(e => e.isFullscreenDocumentLoaded);
+  let t = useDispatch();
+  let i = useStore();
+  let r = useSelector(e => e.isFullscreenDocumentLoaded);
   let s = _$$jz();
   let l = _$$e_() === $_.ELIGIBLE;
   let d = Fk(e => e.getCurrentPage()?.guid);
@@ -9161,7 +9161,7 @@ function le({
   return null;
 }
 function lt() {
-  let e = d4(e => e.isFullscreenDocumentLoaded);
+  let e = useSelector(e => e.isFullscreenDocumentLoaded);
   let t = useRef(!1);
   useEffect(() => {
     e && !t.current && (Z1(), t.current = !0);
@@ -9201,7 +9201,7 @@ let li = {
         onClose: i
       });
       let n = _$$_G();
-      let s = d4(e => e.mirror.sceneGraph);
+      let s = useSelector(e => e.mirror.sceneGraph);
       return {
         onCreateVariableSubmit: _onCreateVariableSubmit,
         onCreateStyleSubmit: function (e) {
@@ -9289,7 +9289,7 @@ export function $$lr0({
   children: e
 }) {
   let t = _$$R(o9);
-  let i = wA();
+  let i = useDispatch();
   let m = TA();
   let T = t.openFile ? t.openFile.key : null;
   let j = ut(Ez5?.uiState().shouldShowAutoLayoutHintsIfExist, !1);

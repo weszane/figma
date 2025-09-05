@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useContext, useMemo, useState, useRef, useCallback } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { K } from "../905/443068";
 import { e as _$$e } from "../905/149844";
 import { Z_n, rXF, CWU } from "../figma_app/763686";
@@ -144,11 +144,11 @@ export function $$D4({
   });
 }
 export function $$k6() {
-  let e = wA();
+  let e = useDispatch();
   let t = useCallback(() => {
     e(B());
   }, [e]);
-  let r = d4(e => e.variablePickerShown);
+  let r = useSelector(e => e.variablePickerShown);
   return r.isShown && "variable-picker-fields" === r.type ? jsx($$D4, {
     ...r,
     onClose: t
@@ -165,7 +165,7 @@ function M({
   onComponentPropSelected: c,
   cmsFieldTypes: u
 }) {
-  let g = wA();
+  let g = useDispatch();
   let f = useCallback(() => {
     g(B());
   }, [g]);
@@ -230,7 +230,7 @@ function M({
 export function $$F0({
   cmsFieldTypes: e
 }) {
-  let t = d4(e => e.variablePickerShown);
+  let t = useSelector(e => e.variablePickerShown);
   return t.isShown && "variable-picker-fields" === t.type ? jsx(M, {
     ...t,
     cmsFieldTypes: e
@@ -245,7 +245,7 @@ function j({
   onVariableSelected: c,
   variableFilters: _
 }) {
-  let h = wA();
+  let h = useDispatch();
   let y = bL(e, t);
   let b = _$$u(y?.type === Z_n.ALIAS ? y?.value : void 0);
   let T = useCallback(() => {
@@ -300,7 +300,7 @@ function j({
   });
 }
 export function $$U2() {
-  let e = d4(e => e.variablePickerShown);
+  let e = useSelector(e => e.variablePickerShown);
   return e.isShown && "variable-picker-alias" === e.type ? jsx(j, {
     ...e
   }) : null;
@@ -357,11 +357,11 @@ export function $$B1({
 export function $$G5({
   variableScope: e
 }) {
-  let t = wA();
+  let t = useDispatch();
   let r = useCallback(() => {
     t(B());
   }, [t]);
-  let s = d4(e => e.variablePickerShown);
+  let s = useSelector(e => e.variablePickerShown);
   return s.isShown && "variable-picker-controlled" === s.type ? jsx($$B1, {
     ...s,
     onClose: r,

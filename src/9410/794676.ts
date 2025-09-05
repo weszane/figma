@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useEffect, useState, useMemo, useRef, useCallback, memo, useLayoutEffect } from "react";
-import { wA, d4, Pj } from "../vendor/514228";
+import { useDispatch, useSelector, useStore } from "../vendor/514228";
 import { y as _$$y } from "../905/725962";
 import { DP } from "../905/158740";
 import { getFeatureFlags } from "../905/601108";
@@ -296,8 +296,8 @@ let eB = _$$eU(null, (e, t, i) => {
 let eU = ["mousemove", "mousedown", "keydown", "touchstart", "touchmove", "wheel"];
 var eJ = eY;
 function e4(e) {
-  let t = wA();
-  let i = d4(e => e.auth);
+  let t = useDispatch();
+  let i = useSelector(e => e.auth);
   useEffect(() => {
     t(Ts({
       origin: "request_permissions_entry",
@@ -329,7 +329,7 @@ function e4(e) {
   });
 }
 function e6(e) {
-  let t = (d4(e => e.authedUsers) ?? {}).byId ?? {};
+  let t = (useSelector(e => e.authedUsers) ?? {}).byId ?? {};
   let i = e.authedUsers ?? Object.values(t);
   let [s, o] = useState(!1);
   return jsx(_$$w, {
@@ -397,14 +397,14 @@ function tm(e) {
     onWorkshopExpired
   } = e;
   !function () {
-    let e = wA();
+    let e = useDispatch();
     let t = iZ();
     let i = !t;
     let r = nF();
     let s = r.enabled;
     let o = r.enabled ? r.id : null;
-    let l = d4(e => e.mirror.appModel.multiplayerSessionState === kul.JOINED);
-    let c = d4(e => e.progressBarState.mode);
+    let l = useSelector(e => e.mirror.appModel.multiplayerSessionState === kul.JOINED);
+    let c = useSelector(e => e.progressBarState.mode);
     let u = q5()?.isTryFile;
     let p = QL("name");
     useEffect(() => {
@@ -455,7 +455,7 @@ function tm(e) {
     dismissEditFileFooter
   } = function (e) {
     let [t, i] = useState(!1);
-    let r = wA();
+    let r = useDispatch();
     let s = iZ();
     let o = q5();
     let l = o?.name;
@@ -528,13 +528,13 @@ function tm(e) {
 let t5 = memo(({
   children: e
 }) => {
-  let t = d4(e => e.openFile);
+  let t = useSelector(e => e.openFile);
   let i = t ? t.key : "";
   let s = t?.parentOrgId || "";
   let o = useRef(null);
-  let d = wA();
+  let d = useDispatch();
   let c = md(_$$h2);
-  let u = d4(e => e.openFile?.canEdit ?? !1);
+  let u = useSelector(e => e.openFile?.canEdit ?? !1);
   let p = p8("isReadOnly");
   let h = dq();
   let f = E3();
@@ -653,11 +653,11 @@ export function $$t80({
       allowResourceTracking: !xK.isColdBoot
     }) : Tf.disableEventSendingUnlessDebugEnabled();
   }, []);
-  let i = wA();
+  let i = useDispatch();
   let d = q5();
   lF(d?.key ?? "");
   M4.Folder.useValue(d?.folderId);
-  let h = d4(e => e.selectedView.editorType);
+  let h = useSelector(e => e.selectedView.editorType);
   let [f, g] = useState(!1);
   let x = DP();
   let C = sO();
@@ -669,7 +669,7 @@ export function $$t80({
   let R = function ({
     onCanvasExpired: e
   }) {
-    let t = d4(e => U2(e.selectedView));
+    let t = useSelector(e => U2(e.selectedView));
     let i = TA();
     let r = dq();
     let [s, o] = useState(!1);
@@ -695,7 +695,7 @@ export function $$t80({
   }({
     onCanvasExpired: j
   });
-  let B = d4(e => e.mergingStatus);
+  let B = useSelector(e => e.mergingStatus);
   useEffect(() => {
     if (getFeatureFlags().ce_suppress_browser_keys) {
       document.addEventListener("keydown", _, !0);
@@ -705,12 +705,12 @@ export function $$t80({
   (function () {
     let e = useRef();
     let t = useRef();
-    let i = wA();
-    let r = d4(e => e.userFlags);
-    let s = d4(e => !!e.user);
+    let i = useDispatch();
+    let r = useSelector(e => e.userFlags);
+    let s = useSelector(e => !!e.user);
     let o = function (e, t) {
-      let i = d4(e => e.mirror.appModel.showKeyboardShortcuts);
-      let r = d4(e => e.user?.created_at);
+      let i = useSelector(e => e.mirror.appModel.showKeyboardShortcuts);
+      let r = useSelector(e => e.user?.created_at);
       let s = useMemo(() => {
         let e = new Date("2022-11-14").getTime();
         return null != r && new Date(r).getTime() >= e;
@@ -750,22 +750,22 @@ export function $$t80({
   })();
   XS();
   (function () {
-    let e = Pj();
-    let t = d4(d1);
-    let i = d4(m0);
-    let r = d4(No);
-    let s = d4(e => e.library.publishedByLibraryKey);
+    let e = useStore();
+    let t = useSelector(d1);
+    let i = useSelector(m0);
+    let r = useSelector(No);
+    let s = useSelector(e => e.library.publishedByLibraryKey);
     let o = q5();
-    let l = d4(e => e.fileVersion);
-    let d = d4(e => e.loadingState);
-    let c = d4(e => e.library.local);
-    let u = d4(e => e.library.assetsPanelSearch.shouldSearchDefaultLibraries);
+    let l = useSelector(e => e.fileVersion);
+    let d = useSelector(e => e.loadingState);
+    let c = useSelector(e => e.library.local);
+    let u = useSelector(e => e.library.assetsPanelSearch.shouldSearchDefaultLibraries);
     let p = ud();
-    let h = d4(e => e.folders);
+    let h = useSelector(e => e.folders);
     let m = l6();
     let f = He();
-    let g = d4(e => e.library.assetsPanelSearch.query);
-    let _ = d4(e => e.library.assetsPanelSearch.searchOptions);
+    let g = useSelector(e => e.library.assetsPanelSearch.query);
+    let _ = useSelector(e => e.library.assetsPanelSearch.searchOptions);
     let x = D2(d, yD(o?.key || ""));
     let y = _$$M();
     useEffect(() => {
@@ -793,16 +793,16 @@ export function $$t80({
     let e = _$$x();
     let t = V2();
     let i = QZ();
-    let r = d4(e => e.mirror.appModel.isReadOnly);
-    let s = d4(e => e.openFile);
-    let o = d4(e => e.localPlugins);
+    let r = useSelector(e => e.mirror.appModel.isReadOnly);
+    let s = useSelector(e => e.openFile);
+    let o = useSelector(e => e.localPlugins);
     let l = E3();
     let d = op();
-    let c = d4(e => e.installedPluginVersions.plugins);
-    let u = d4(e => e.mirror.selectedStyleProperties?.selectedWidgetInfo);
-    let p = d4(e => e.mirror.appModel.activeTextReviewPlugin);
-    let h = d4(e => e.publishedPlugins);
-    let m = d4(e => e.currentUserOrgId ? e.orgById[e.currentUserOrgId] : null);
+    let c = useSelector(e => e.installedPluginVersions.plugins);
+    let u = useSelector(e => e.mirror.selectedStyleProperties?.selectedWidgetInfo);
+    let p = useSelector(e => e.mirror.appModel.activeTextReviewPlugin);
+    let h = useSelector(e => e.publishedPlugins);
+    let m = useSelector(e => e.currentUserOrgId ? e.orgById[e.currentUserOrgId] : null);
     let f = Be();
     let g = f.orgPlugins;
     let _ = f.orgWidgets;
@@ -852,7 +852,7 @@ export function $$t80({
       leading: !0,
       trailing: !1
     });
-    let r = d4(e => e.usedKeyboardShortcuts["measure-to-selection"] || 0);
+    let r = useSelector(e => e.usedKeyboardShortcuts["measure-to-selection"] || 0);
     let s = useRef(r);
     useEffect(() => {
       s.current !== r && (s.current = r, i());
@@ -870,18 +870,18 @@ export function $$t80({
   })();
   I7("exp_aa_test_fullscreen_view").getConfig();
   (function () {
-    let e = wA();
+    let e = useDispatch();
     let t = _$$_();
     let i = BI();
     let [r, s] = useState(!1);
-    let o = d4(e => e.multiplayer);
-    let l = d4(e => e.mirror.appModel.multiplayerSessionState === kul.JOINED);
+    let o = useSelector(e => e.multiplayer);
+    let l = useSelector(e => e.mirror.appModel.multiplayerSessionState === kul.JOINED);
     !function () {
       let e = q5();
       let t = window.FigmaMobile;
       let i = rE();
       let r = C3();
-      let s = wA();
+      let s = useDispatch();
       let o = am();
       let l = r ? getResourceDataOrFallback(r.pageNodeId) : void 0;
       useEffect(() => {
@@ -929,7 +929,7 @@ export function $$t80({
     useEffect(() => {
       t && !r && i?.shouldOptimizeForIpadApp && l && !Ez5?.defaultToolIsHandSelect() && (s(!0), Y5.triggerAction("set-tool-hand", null));
     }, [t, i, r, s, l]);
-    let c = d4(({
+    let c = useSelector(({
       mirror: {
         appModel: e
       }
@@ -951,8 +951,8 @@ export function $$t80({
     useEffect(() => {
       i?.updateSaveStatus && (p ? l ? i.updateSaveStatus(_$$a.SAVING) : i.updateSaveStatus(_$$a.PAUSED) : i.updateSaveStatus(_$$a.SAVED));
     }, [i, p, l]);
-    let h = d4(e => Yh(e.mirror.appModel, "undo"));
-    let m = d4(e => Yh(e.mirror.appModel, "redo"));
+    let h = useSelector(e => Yh(e.mirror.appModel, "undo"));
+    let m = useSelector(e => Yh(e.mirror.appModel, "redo"));
     useEffect(() => {
       if (i?.updateUndoEnabled && i.updateUndoEnabled(h), i?.updateRedoEnabled && i.updateRedoEnabled(m), u) {
         let t = t => {
@@ -986,7 +986,7 @@ export function $$t80({
     let _ = dH();
     let x = pK(_);
     let y = Ef();
-    let b = d4(e => e.mirror?.appModel.isReadOnly);
+    let b = useSelector(e => e.mirror?.appModel.isReadOnly);
     useEffect(() => {
       x && !b && (y?.nativeToolbarUpdateActiveTool?.(x), y?.nativeToolbarUpdateMultiselectActive?.("MULTISELECT" === x));
     }, [y, x, b]);
@@ -1092,7 +1092,7 @@ export function $$t80({
   a4();
   fp();
   (function () {
-    let e = wA();
+    let e = useDispatch();
     let [t, i] = Wz("nux_seat_selection_show_confirmation", null);
     useEffect(() => {
       t && ("autoApproved" in t && "seatType" in t && e(_$$to({
@@ -1266,8 +1266,8 @@ function t9({
   loadedCommentsProvider: i,
   onCanvasExpired: n
 }) {
-  let s = d4(e => e.userStateLoaded);
-  let o = d4(e => e.mirror.appModel.isInitialized);
+  let s = useSelector(e => e.userStateLoaded);
+  let o = useSelector(e => e.mirror.appModel.isInitialized);
   let l = _$$R(e => e.comments);
   let {
     anchorPositions,
@@ -1316,7 +1316,7 @@ function ie({
   file: e
 }) {
   let t = sZ();
-  return d4(e => e.modalShown?.type === _$$M2) || !t ? null : jsx(e6, {
+  return useSelector(e => e.modalShown?.type === _$$M2) || !t ? null : jsx(e6, {
     org: t,
     fileKey: e?.key
   });

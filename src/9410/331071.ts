@@ -5,7 +5,7 @@ import _require2 from "../9756/399756";
 import _require from "../905/802325";
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { memo, useState, useCallback, useEffect, useRef, useMemo, createContext, useContext, useLayoutEffect, useReducer, lazy, Suspense, useDeferredValue, forwardRef, createRef, useId } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { i as _$$i } from "../905/718764";
 import { Ez5, NVY, NLJ, XJn, AZ4, glU, biQ, Egt, bbV, ruz, uQ6, Mpt, m1T, CT8 } from "../figma_app/763686";
@@ -1065,7 +1065,7 @@ function t2({
 let t3 = Ju(function ({
   messages: e
 }) {
-  let t = wA();
+  let t = useDispatch();
   return jsx(Ao, {
     onClose: () => {
       t(AS());
@@ -1097,8 +1097,8 @@ let t3 = Ju(function ({
 function t5() {
   let [e, t] = useState("");
   let [i, r] = fp(ta);
-  let o = wA();
-  let l = d4(e => e.modalShown);
+  let o = useDispatch();
+  let l = useSelector(e => e.modalShown);
   _$$b();
   let d = useCallback(() => {
     if (l && l.type === t3.type) {
@@ -1272,7 +1272,7 @@ function t8({
 }
 function t9(e) {
   let t = useRef(null);
-  let i = d4(_$$tB);
+  let i = useSelector(_$$tB);
   try {
     let r = e.content;
     let a = "string" == typeof r ? JSON.parse(r) : r;
@@ -1392,7 +1392,7 @@ let ic = memo(function (e) {
 var ip = iu;
 var im = ih;
 function ig() {
-  let e = d4(e => e.mirror?.appModel);
+  let e = useSelector(e => e.mirror?.appModel);
   return (t, i, r = !1) => {
     let n = t[i];
     if (n && (r || !n.disabled && (!n.action || Yh(e, i)))) return n;
@@ -1444,11 +1444,11 @@ var iL = (e => (e.DESIGN_EDITOR_AI = "DESIGN_EDITOR_AI", e.DESIGN_EDITOR_NO_AI =
 function iR() {
   let e = Ez5?.singleSlideView().isFocusedNodeViewFocused();
   let t = Vr();
-  let i = d4(Sh);
+  let i = useSelector(Sh);
   return (!t || !t.isSlide || !e) && i.length > 0;
 }
 function iD(e, t) {
-  let i = d4(e => e.selectedView);
+  let i = useSelector(e => e.selectedView);
   return useMemo(() => new xm(e, i, t, {
     includeDisabled: !0,
     acceptsUnicode: !0
@@ -2043,7 +2043,7 @@ function n7({
   onChangeColor: i,
   onHide: r
 }) {
-  let o = wA();
+  let o = useDispatch();
   let l = Um();
   let c = useRef(document.getElementById(t || "fullscreen-root"));
   kz(Uz.ESCAPE, r);
@@ -2810,7 +2810,7 @@ function af(e) {
     A.current = r;
   }, [r]);
   let [L, R] = useState(Date.now());
-  let D = wA();
+  let D = useDispatch();
   let P = useRef(I);
   useEffect(() => {
     I !== P.current && f && (I ? Vm(f.guid, jsx(nh, {})) : ks(f.guid), P.current = I);
@@ -5380,7 +5380,7 @@ function sw({
   } = _$$a3(sb, e => e);
   let K = WX(selectedKit);
   let [H, z] = useState(!1);
-  let V = wA();
+  let V = useDispatch();
   let W = WX(selectedKit);
   let Y = qi({
     enabled: W
@@ -6680,7 +6680,7 @@ let oi = [{
   quickAction: {
     module: {
       module: jsx(function () {
-        let e = wA();
+        let e = useDispatch();
         let {
           close
         } = cq();
@@ -7623,7 +7623,7 @@ function ov() {
       };
     }, [e, t]);
   }();
-  let r = wA();
+  let r = useDispatch();
   let o = yy();
   let l = md(Hu);
   let d = _$$t("qa.no_ai.title");
@@ -7754,8 +7754,8 @@ function oF({
     addFrecencyUsage
   } = fJ();
   let d = Dz(e);
-  let c = d4(e => e.mirror.appModel);
-  let u = wA();
+  let c = useSelector(e => e.mirror.appModel);
+  let u = useDispatch();
   let {
     close
   } = cq();
@@ -8046,7 +8046,7 @@ function oB({
   let t = Ev();
   let i = md(Lk);
   let r = md(_$$dd);
-  let o = d4(_$$l);
+  let o = useSelector(_$$l);
   let l = md(Rt);
   let u = useRef(l);
   let p = md(Q8);
@@ -8058,7 +8058,7 @@ function oB({
     let e = _$$FX();
     let t = or();
     let i = function () {
-      let e = d4(e => e.mirror.appModel.isReadOnly);
+      let e = useSelector(e => e.mirror.appModel.isReadOnly);
       let t = c4();
       let i = function () {
         let e = wo();
@@ -8149,8 +8149,8 @@ function oB({
     }();
     let l = function () {
       let e = Zr("send-to-buzz-from-design");
-      let t = d4(_$$tB);
-      let i = d4(vx);
+      let t = useSelector(_$$tB);
+      let i = useSelector(vx);
       let r = _$$eY();
       let o = r.getDirectlySelectedNodes();
       let l = useMemo(() => ({
@@ -8231,7 +8231,7 @@ function oB({
         }();
         let l = function (e, t) {
           let i = function () {
-            let e = d4(e => e.mirror?.appModel);
+            let e = useSelector(e => e.mirror?.appModel);
             let t = ig();
             let {
               frecencyByAction,
@@ -8428,7 +8428,7 @@ function oB({
       let l = _$$s4();
       let d = !!getFeatureFlags().prt_legacy_v3;
       let [u, p] = fp(ta);
-      let h = d4(Eh);
+      let h = useSelector(Eh);
       let m = _$$eH();
       let f = T5("useSearchFallbacks").unwrapOr(null);
       let g = f?.name || r?.name;
@@ -8866,7 +8866,7 @@ function lx(e) {
   return ZQ(e) ? t?.type === l_ && t?.data.extensionId === e.plugin_id && t?.data.localFileId === e.localFileId : t?.type === l_ && t?.data.extensionId === e.plugin_id && t?.data.localFileId === null;
 }
 function ly(e) {
-  let t = wA();
+  let t = useDispatch();
   let i = lx(e);
   return useCallback(r => {
     if (i) t(_$$oB2());else {
@@ -9094,7 +9094,7 @@ function lj({
   let {
     extension
   } = e;
-  let r = wA();
+  let r = useDispatch();
   let [o, l] = useState(!1);
   let d = lx(extension);
   let c = _$$Pt2(extension.error?.type, extension);
@@ -9211,7 +9211,7 @@ function lI({
     canRun,
     canRequest
   } = e;
-  let l = wA();
+  let l = useDispatch();
   let [d, c] = useState(!1);
   let u = lx(extension);
   let {
@@ -9276,7 +9276,7 @@ function lI({
   });
 }
 function lk(e) {
-  let t = wA();
+  let t = useDispatch();
   let i = QZ();
   return y3() && [BY.DEVELOPMENT, BY.ALL].includes(e) ? [{
     itemKey: "newPlugin",
@@ -9713,7 +9713,7 @@ function ds({
   let o = md(_$$dd);
   let l = md(Rt);
   let d = md(Q8);
-  let u = d4(_$$l);
+  let u = useSelector(_$$l);
   let p = f6();
   let h = wW();
   let {
@@ -9725,7 +9725,7 @@ function ds({
       loaded: _loaded,
       extensions: _extensions
     } = function () {
-      let e = wA();
+      let e = useDispatch();
       let t = _$$lg();
       let [i, r] = useState([]);
       let [n, o] = useState(!1);
@@ -9962,8 +9962,8 @@ function dv({
   let [u] = _$$A17(d, 300);
   let p = u.trim();
   let h = md(Rt);
-  let m = d4(_$$l);
-  let f = wA();
+  let m = useSelector(_$$l);
+  let f = useDispatch();
   let {
     loading,
     publicExtensions,
@@ -10281,7 +10281,7 @@ function dI() {
     loaded,
     extensions
   } = md(P_);
-  let g = wA();
+  let g = useDispatch();
   useEffect(() => g(_$$aq()), [g]);
   let _ = q5();
   let x = !!(defaultViewTabsAvailable && _?.canEdit);
@@ -10334,7 +10334,7 @@ function dI() {
   }, [i, el, b, v, y]);
   let ec = useRef(null);
   let eu = _$$U3(b);
-  let ep = d4(Eh);
+  let ep = useSelector(Eh);
   let eh = QZ();
   useEffect(() => {
     eh || l !== BY.ALL && l !== BY.WIDGETS || d(BY.PLUGINS);
@@ -10773,7 +10773,7 @@ let dU = {
   }
 };
 export function $$dG0(e) {
-  let t = wA();
+  let t = useDispatch();
   let i = _$$I();
   let r = PE();
   return (useEffect(() => {

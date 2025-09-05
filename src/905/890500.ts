@@ -1,5 +1,5 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
 import { b, q7, bL, mc } from "../figma_app/860955";
 import { d as _$$d } from "../905/976845";
@@ -16,7 +16,7 @@ import { VX } from "../905/50151";
 var A = (e => (e.EDIT = "edit", e.DELETE = "delete", e.COPY_LINK = "copy_link", e.TOGGLE_UNREAD = "toggle_unread", e))(A || {});
 export function $$y0(e) {
   let t = I_();
-  let i = wA();
+  let i = useDispatch();
   let A = iZ();
   let y = v();
   let {

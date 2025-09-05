@@ -1,6 +1,6 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useMemo } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { t as _$$t } from "../905/303541";
 import { uQ } from "../figma_app/311375";
 import { M } from "../469e6e40/302359";
@@ -95,7 +95,7 @@ export function $$C2() {
     selectionStyles,
     selectionValues
   } = M();
-  let d = d4(e => e.mirror.selectionPaints.emptyDueToLimitExceeded);
+  let d = useSelector(e => e.mirror.selectionPaints.emptyDueToLimitExceeded);
   return useMemo(() => {
     if (!e.length && !t.length && !a?.strokeColors.length && !selectionVariables.length && !selectionStyles.length && !selectionValues.length) return {
       total: 0,

@@ -1,4 +1,4 @@
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { ibQ, Ez5, nQ7, iCO } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { parsePxNumber } from "../figma_app/783094";
@@ -35,7 +35,7 @@ export function $$b13() {
 }
 export function $$T6() {
   let e = GV();
-  return d4(t => {
+  return useSelector(t => {
     let r = t.mirror.selectionPaints;
     return !!(!$$I4(e) && e[ibQ.SELECTION_COLORS] && (r.styles.length > 0 || r.paints.length > 0 || r.emptyDueToLimitExceeded));
   });

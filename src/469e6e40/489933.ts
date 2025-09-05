@@ -1,4 +1,4 @@
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { R } from "../905/103090";
 import { to } from "../905/156213";
 import { b as _$$b } from "../905/985254";
@@ -17,7 +17,7 @@ export function $$$$p1(e, t, a) {
     appModel: e.mirror.appModel,
     selectedView: e.selectedView
   }));
-  let h = wA();
+  let h = useDispatch();
   let x = cW()[e];
   let b = uF(x);
   let v = Be();
@@ -82,8 +82,8 @@ export function $$$$p1(e, t, a) {
   return C;
 }
 export function $$g0(e, t) {
-  let a = d4(e => e.mirror.appModel);
-  let s = d4(e => e.selectedView);
+  let a = useSelector(e => e.mirror.appModel);
+  let s = useSelector(e => e.selectedView);
   let i = cW()[e];
   let r = uF(i);
   let d = r.manifest.menu && r.manifest.menu.length > 0 ? z(r.manifest.menu, r) : [];

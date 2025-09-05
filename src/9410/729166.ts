@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState, useRef, useCallback, useEffect, forwardRef, useMemo, memo, useLayoutEffect } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { c2 } from "../905/382883";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { Z_n, rXF, zIx, Ez5, glU, w3z, xOL, XQq, X3B, Oin, nQ7, h3O, PcT, CeL } from "../figma_app/763686";
@@ -584,7 +584,7 @@ function ea() {
 }
 let ep = "mcp-unmapped-components";
 function eh({}) {
-  let e = wA();
+  let e = useDispatch();
   let t = hC();
   let i = ox();
   let [s, o] = useState(!1);
@@ -1274,12 +1274,12 @@ function th({
 }) {
   let t = Ww();
   let i = Um();
-  let s = d4(e => e.multiplayer);
+  let s = useSelector(e => e.multiplayer);
   let o = q5();
   let l = _$$iZ();
   let d = _6();
-  let c = wA();
-  let u = d4(e => "devModeVariablesTableBackFocusId" in e.selectedView ? e.selectedView.devModeVariablesTableBackFocusId : void 0);
+  let c = useDispatch();
+  let u = useSelector(e => "devModeVariablesTableBackFocusId" in e.selectedView ? e.selectedView.devModeVariablesTableBackFocusId : void 0);
   let p = Xr(_$$$);
   let m = useCallback(() => {
     p(null);
@@ -1331,7 +1331,7 @@ function tm(e) {
   return !0 === e.isDividerRow && "string" == typeof e.content;
 }
 function t9() {
-  let e = wA();
+  let e = useDispatch();
   return _$$f4("dismissed_dev_mode_overview_banner") || _$$T() ? null : jsx(fu, {
     name: "Dev Mode Overview Banner",
     properties: {
@@ -1550,7 +1550,7 @@ function ij({
   nodeId: e,
   isEdited: t
 }) {
-  let i = wA();
+  let i = useDispatch();
   let n = q5()?.key;
   let s = _$$U();
   let l = async () => {
@@ -1628,10 +1628,10 @@ let iW = Wh(() => _$$eU(!1), {
 });
 function iY() {
   let e = q5();
-  let t = wA();
+  let t = useDispatch();
   let i = _$$iZ();
   let s = Um();
-  let o = d4(e => e.multiplayer);
+  let o = useSelector(e => e.multiplayer);
   let l = useMemo(() => o.allUsers.find(e => e.sessionID === o.sessionID) || null, [o.allUsers, o.sessionID]);
   let d = dR();
   let c = B4();
@@ -1659,10 +1659,10 @@ let iq = Wh(() => _$$eU({}), {
 });
 let iX = E2("workflows_overview_sorted_by", _$$_2.RECENT, _$$z.nativeEnum(_$$_2));
 function iZ() {
-  let e = d4(e => e.selectedView.overviewBackButtonTargetNodeId);
-  let t = d4(e => e.mirror.appModel.pagesList[0]);
+  let e = useSelector(e => e.selectedView.overviewBackButtonTargetNodeId);
+  let t = useSelector(e => e.mirror.appModel.pagesList[0]);
   let i = function () {
-    let e = d4(e => e.mirror.appModel.pagesList);
+    let e = useSelector(e => e.mirror.appModel.pagesList);
     let t = J2(Ez5.currentSceneState().numReadyNodesByPage);
     let i = J2(Ez5.currentSceneState().numCompletedNodesByPage);
     return useMemo(() => e.filter(e => {
@@ -1675,7 +1675,7 @@ function iZ() {
   let s = e || i?.nodeId || t?.nodeId;
   let o = ZJ();
   let d = TP(void 0, s);
-  let c = d4(e => Np(e, d));
+  let c = useSelector(e => Np(e, d));
   let u = n0();
   let p = VS({
     pagesList: u,
@@ -1713,7 +1713,7 @@ function iQ() {
     }, [e, t]);
   }();
   let c = _6();
-  let u = wA();
+  let u = useDispatch();
   _$$O3();
   let p = J2(Ez5.currentSceneState().nodesWithStatusForFile);
   let f = useRef(null);
@@ -2155,8 +2155,8 @@ function i2({
     pageId
   } = e;
   let f = VW(nodeId, pageId);
-  let g = d4(e => Np(e, f));
-  let _ = d4(e => xS(e, f));
+  let g = useSelector(e => Np(e, f));
+  let _ = useSelector(e => xS(e, f));
   let y = Cj(_);
   let b = TQ();
   let C = function (e, t) {
@@ -2242,7 +2242,7 @@ function i3({
     hasBeenEditedSinceLastStatusChange
   } = e;
   let l = VW(e.nodeId);
-  let d = d4(e => Np(e, l));
+  let d = useSelector(e => Np(e, l));
   return jsx(Fragment, {
     children: jsx("div", {
       className: "overview--overviewAvatarRowMediaQueryHeader--nigbr",
@@ -2275,7 +2275,7 @@ function i5({
   users: n,
   nodeCount: s
 }) {
-  let o = wA();
+  let o = useDispatch();
   let l = _$$U();
   let {
     nodeId,
@@ -2283,7 +2283,7 @@ function i5({
     updatedAt
   } = e;
   let p = VW(nodeId);
-  let h = d4(e => Np(e, p));
+  let h = useSelector(e => Np(e, p));
   let [m] = fp(iX);
   let f = m === _$$_2.RECENT && updatedAt > 1;
   let [, g] = fp(wz);
@@ -2674,7 +2674,7 @@ let r0 = memo(function ({
     showDeviceFrameEnabled: f,
     scalingInfo: g
   }, _] = fp(t.stateAtom);
-  let x = wA();
+  let x = useDispatch();
   let y = _$$eY();
   let C = useMemo(() => h === bi.OPEN, [h]);
   let v = m?.initialViewerSize ?? rX;
@@ -3028,7 +3028,7 @@ function r1({
   isPreviewFittedToAspectRatio: v,
   viewerControl: T
 }) {
-  let w = wA();
+  let w = useDispatch();
   let S = useRef(null);
   let [{
     currentPresentedNode: j,
@@ -3216,7 +3216,7 @@ function r2({
   onBack: s,
   onForward: o
 }) {
-  let l = wA();
+  let l = useDispatch();
   return jsxs("div", {
     className: KW,
     children: [n <= Ah ? null : jsxs(Fragment, {
@@ -3261,10 +3261,10 @@ function r2({
   });
 }
 function r5() {
-  let e = d4(e => e.selectedView);
+  let e = useSelector(e => e.selectedView);
   let t = _$$tS();
-  let i = d4(e => e.progressBarState.mode);
-  let r = d4(e => pi({
+  let i = useSelector(e => e.progressBarState.mode);
+  let r = useSelector(e => pi({
     editorType: d1(e)?.editor_type
   }));
   let o = i !== Oin.HIDE_UI && i !== Oin.ON_AND_LOCKED;
@@ -3319,24 +3319,24 @@ function r5() {
       });
     });
   }, [o, t, r, m]);
-  let _ = d4(e => e.isFullscreenDocumentLoaded);
+  let _ = useSelector(e => e.isFullscreenDocumentLoaded);
   useEffect(() => {
     f?.handleCompleteInitialLoad && _ && f.handleCompleteInitialLoad();
   }, [f, _]);
   let [x, y] = useState(!1);
-  let C = d4(e => e.mirror.appModel.isReadOnly);
+  let C = useSelector(e => e.mirror.appModel.isReadOnly);
   useEffect(() => {
     f?.updateReadOnly && _ && !x && (y(!0), f.updateReadOnly(C));
   }, [f, _, x, y, C]);
   let v = ZC(p);
-  let E = d4(e => e.mirror.appModel.pagesList);
+  let E = useSelector(e => e.mirror.appModel.pagesList);
   let T = useMemo(() => E.map(e => ({
     id: e.nodeId,
     name: e.name,
     divider: e.isDivider
   })), [E]);
   let w = ZC(T);
-  let S = d4(e => e.mirror.appModel.currentPage);
+  let S = useSelector(e => e.mirror.appModel.currentPage);
   let j = ZC(S);
   useEffect(() => {
     f?.updatePages && p && (!v || p.key !== v.key || p.name !== v.name || p.editorType !== v.editorType || p.isTryFile !== v.isTryFile || !c2(T, w) || S !== j) && f.updatePages({
@@ -3360,11 +3360,11 @@ function r5() {
   useEffect(() => {
     getFeatureFlags().ce_custom_keyboard_shortcuts && glU?.reloadKeyboardShortcuts();
   }, [k]);
-  let N = d4(e => e.multiplayer.allUsers);
-  let A = d4(e => e.multiplayer.observingSessionID);
-  let O = d4(e => e.multiplayer.presenterSessionID);
-  let L = d4(e => e.multiplayer.deviceNameFilter);
-  let R = d4(e => e.multiplayer.sessionID);
+  let N = useSelector(e => e.multiplayer.allUsers);
+  let A = useSelector(e => e.multiplayer.observingSessionID);
+  let O = useSelector(e => e.multiplayer.presenterSessionID);
+  let L = useSelector(e => e.multiplayer.deviceNameFilter);
+  let R = useSelector(e => e.multiplayer.sessionID);
   let D = useMemo(() => {
     let {
       users
@@ -3406,14 +3406,14 @@ function r5() {
 export function $$r40({
   children: e
 }) {
-  let t = d4(xY);
-  let i = d4(e => e.mirror.appModel.currentPage);
+  let t = useSelector(xY);
+  let i = useSelector(e => e.mirror.appModel.currentPage);
   let n = l7();
   let s = _$$e3();
   let l = ZO();
   let d = Em();
   let c = m0();
-  let u = d4(e => e.isFullscreenDocumentLoaded);
+  let u = useSelector(e => e.isFullscreenDocumentLoaded);
   return jsxs(Fragment, {
     children: [e ?? null, jsx(r5, {}), t && jsx(r$, {
       viewerControl: _$$e7,

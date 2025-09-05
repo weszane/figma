@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { Component } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { generateRecordingKey } from "../figma_app/878298";
 import o from "classnames";
 import { Uz } from "../905/63728";
@@ -107,7 +107,7 @@ export class $$b1 extends Component {
   }
 }
 export function $$v0(e) {
-  let t = wA();
+  let t = useDispatch();
   let i = e.destructive ? qM : vd;
   let r = () => {
     if (e.onCancel) {

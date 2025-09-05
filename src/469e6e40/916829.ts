@@ -1,5 +1,5 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { c2 } from "../905/382883";
 import { N } from "../905/438674";
 import { Yx } from "../figma_app/930338";
@@ -20,7 +20,7 @@ import { GN, RM } from "../905/441038";
 import { Ju } from "../905/102752";
 import { l as _$$l } from "../figma_app/121794";
 function k(e) {
-  let t = wA();
+  let t = useDispatch();
   let a = e.licenseGroupsEnabled && e.groupsToReview.length > 0;
   return jsx(fu, {
     name: "Freeze Invoice Modal",
@@ -90,7 +90,7 @@ export let $$E0 = Ju(function (e) {
   let l = new vr(e.invoice.currency);
   let u = tB(e.invoice);
   let m = t.filter(e => !cI(e, u));
-  let p = d4(e => {
+  let p = useSelector(e => {
     let t = {};
     m.forEach(({
       id: a

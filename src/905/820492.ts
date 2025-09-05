@@ -1,6 +1,6 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useState, useId, Component } from "react";
-import { Ng, d4, wA } from "../vendor/514228";
+import { connect, useSelector, useDispatch } from "../vendor/514228";
 import { debounce } from "../905/915765";
 import { Et } from "../905/125019";
 import { ServiceCategories as _$$e } from "../905/165054";
@@ -1270,7 +1270,7 @@ class ts extends Component {
   }
 }
 ts.displayName = "HubFilePublishModal";
-let to = Ng((e, t) => {
+let to = connect((e, t) => {
   let {
     fileKey,
     isEditHubFilePageMode,
@@ -1360,7 +1360,7 @@ let $$tl0 = Ju(function (e) {
     Sprig
   } = useSprigWithSampling();
   let i = M4.useFile(e.fileKey).data;
-  let n = d4(e => {
+  let n = useSelector(e => {
     if (!i) return null;
     let t = e.figFilePublishedAsHubFile[i.key];
     return t ? e.hubFiles[t] ?? null : null;
@@ -1382,9 +1382,9 @@ let $$tl0 = Ju(function (e) {
   }) : null;
 }, "HubFilePublishModal", ZU.YES);
 (n || (n = {})).PublishModalSuccessScreen = function (e) {
-  let t = wA();
+  let t = useDispatch();
   let i = UP();
-  let n = d4(t => e.hubFile && Np(t, {
+  let n = useSelector(t => e.hubFile && Np(t, {
     view: "communityHub",
     subView: "hubFile",
     hubFileId: e.hubFile.id

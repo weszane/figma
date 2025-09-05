@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useRef, useEffect } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
 import { B } from "../905/872019";
 import { _ as _$$_ } from "../905/862468";
@@ -40,7 +40,7 @@ function F(e) {
   return X3B.getMagicLinkSelectionInfo().selectedDisplayAmount;
 }
 function j() {
-  let e = wA();
+  let e = useDispatch();
   let t = RL(JT.MAGIC_LINK, _$$e);
   let {
     start,

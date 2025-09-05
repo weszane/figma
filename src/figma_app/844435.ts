@@ -1,5 +1,5 @@
 import { useMemo, useEffect, useState, useCallback } from "react";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { c2 } from "../905/382883";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { getFeatureFlags } from "../905/601108";
@@ -38,7 +38,7 @@ import { xy, Ol } from "../figma_app/279454";
 import { o as _$$o2 } from "../905/808775";
 var d = l;
 export function $$V0(e) {
-  let t = d4(e => e.localPlugins);
+  let t = useSelector(e => e.localPlugins);
   return xy(t, e);
 }
 export function $$H41(e) {
@@ -78,15 +78,15 @@ export function $$K10() {
   }, [e]);
 }
 export function $$Y37() {
-  return d4(e => e.publishingPlugins);
+  return useSelector(e => e.publishingPlugins);
 }
 export function $$$32() {
-  let e = d4(e => e.publishedPlugins);
+  let e = useSelector(e => e.publishedPlugins);
   let t = my();
   return useMemo(() => xC(t, e), [e, t]);
 }
 export function $$X27() {
-  let e = d4(e => e.publishedWidgets);
+  let e = useSelector(e => e.publishedWidgets);
   let t = $$eq15();
   let r = useMemo(() => ({}), []);
   return t ? e : r;
@@ -479,8 +479,8 @@ let eg = d()(e => {
   })), em.clear());
 }, 300);
 export function $$ef4() {
-  let e = wA();
-  let t = d4(e => e.currentUserOrgId);
+  let e = useDispatch();
+  let t = useSelector(e => e.currentUserOrgId);
   let r = Rs(BB3, {
     orgId: t
   });
@@ -504,7 +504,7 @@ export function $$ef4() {
       userPlugins,
       userWidgets
     } = e_(r, t, a);
-    !function(e, t, r) {
+    !function (e, t, r) {
       let n = Object.keys(t);
       let i = Object.keys(r);
       n.forEach(e => eh.add(e));
@@ -524,7 +524,7 @@ export function $$ef4() {
 }
 export function $$eE44() {
   let e = E3();
-  return function(e) {
+  return function (e) {
     let t = $$ef4();
     let {
       plugins,
@@ -553,7 +553,7 @@ export function $$eE44() {
 }
 export function $$ey43(e) {
   let t = E3();
-  return useMemo(() => function(e, {
+  return useMemo(() => function (e, {
     editorType: t
   }) {
     let {
@@ -636,8 +636,8 @@ let eS = {
   plugins: {}
 };
 export function $$ev50() {
-  let e = d4(e => e.selectedView);
-  let t = d4(e => e.installedPluginVersions);
+  let e = useSelector(e => e.selectedView);
+  let t = useSelector(e => e.installedPluginVersions);
   if ("fullscreen" !== e.view) return eS;
   let r = GX(e.editorType);
   if (!t.loaded) return t;
@@ -653,12 +653,12 @@ export function $$eA14() {
   let {
     widgets
   } = $$ef4();
-  let t = d4(e => "fullscreen" === e.selectedView.view);
+  let t = useSelector(e => "fullscreen" === e.selectedView.view);
   let r = xy(widgets);
   return useMemo(() => t ? r : {}, [t, r]);
 }
 export function $$ex1() {
-  let e = d4(e => e.recentlyUsed.widgets);
+  let e = useSelector(e => e.recentlyUsed.widgets);
   let t = $$z53();
   let r = _$$o2();
   let a = TA();
@@ -684,7 +684,7 @@ export function $$eN46() {
   return eO($$ex1());
 }
 export function $$eC8() {
-  let e = d4(e => e.recentlyUsed.plugins);
+  let e = useSelector(e => e.recentlyUsed.plugins);
   let t = $$H41();
   let r = _$$o2();
   let a = TA();
@@ -730,8 +730,8 @@ export function $$eL24() {
   }, [e]);
 }
 export function $$eP48() {
-  let e = d4(e => e.recentlyUsed.plugins);
-  let t = d4(e => e.recentlyUsed.widgets);
+  let e = useSelector(e => e.recentlyUsed.plugins);
+  let t = useSelector(e => e.recentlyUsed.widgets);
   let r = TA();
   let a = _$$o2();
   return useMemo(() => {
@@ -760,10 +760,10 @@ function eD(e, t, r) {
 }
 function ek(e) {
   let t = sZ()?.id ?? "";
-  let r = wA();
-  let n = d4(t => "plugin" === e ? t.whitelistedPlugins : t.whitelistedWidgets);
+  let r = useDispatch();
+  let n = useSelector(t => "plugin" === e ? t.whitelistedPlugins : t.whitelistedWidgets);
   let s = !!t;
-  let o = function(e, t = !0) {
+  let o = function (e, t = !0) {
     let r = sZ()?.id ?? "";
     let n = tS();
     let i = CR(e, t && !!n);
@@ -786,10 +786,10 @@ export function $$eM39() {
   let r = $$$32();
   let a = !!(t && t.plugins_whitelist_enforced);
   let s = ek("plugin");
-  let o = wA();
+  let o = useDispatch();
   let l = tS();
   let d = Gb(t?.id ?? "", l);
-  let c = d4(e => !!t && mn(e.loadingState, d));
+  let c = useSelector(e => !!t && mn(e.loadingState, d));
   useEffect(() => {
     a && !c && o(Vl({}));
   }, [a, o, c]);
@@ -801,10 +801,10 @@ export function $$eF19() {
   let r = $$X27();
   let a = !!(t && t.widgets_whitelist_enforced);
   let s = ek("widget");
-  let o = wA();
+  let o = useDispatch();
   let l = tS();
   let d = n_(t?.id ?? "", l);
-  let c = d4(e => !!t && mn(e.loadingState, d));
+  let c = useSelector(e => !!t && mn(e.loadingState, d));
   useEffect(() => {
     a && !c && o(mV({}));
   }, [a, o, c]);
@@ -824,10 +824,10 @@ export function $$eG9(e) {
   let [t, r] = useState(!1);
   let [a, s] = useState(!1);
   let [l, d] = useState(null);
-  let c = d4(e => e.currentUserOrgId && e.orgById[e.currentUserOrgId]);
+  let c = useSelector(e => e.currentUserOrgId && e.orgById[e.currentUserOrgId]);
   let u = c && c.id;
-  let p = d4(e => !!(u && e.user && e.orgUsersByOrgId[u][e.user.id]?.permission !== FUserRoleType.GUEST));
-  let h = wA();
+  let p = useSelector(e => !!(u && e.user && e.orgUsersByOrgId[u][e.user.id]?.permission !== FUserRoleType.GUEST));
+  let h = useDispatch();
   let f = $$ev50().plugins;
   let y = BI();
   let T = y?.shouldOptimizeForIpadApp || getFeatureFlags().cmty_m10n_test_apple_os ? "free" : "all";
@@ -894,11 +894,11 @@ export function $$eV17(e) {
   let [t, r] = useState(!1);
   let [a, s] = useState(!1);
   let [l, d] = useState(null);
-  let c = d4(e => e.currentUserOrgId && e.orgById[e.currentUserOrgId]);
+  let c = useSelector(e => e.currentUserOrgId && e.orgById[e.currentUserOrgId]);
   let u = c && c.id;
-  let p = d4(e => !!(u && e.user && e.orgUsersByOrgId[u][e.user.id]?.permission !== FUserRoleType.GUEST));
+  let p = useSelector(e => !!(u && e.user && e.orgUsersByOrgId[u][e.user.id]?.permission !== FUserRoleType.GUEST));
   let h = $$eA14();
-  let f = wA();
+  let f = useDispatch();
   let y = BI();
   let T = y?.shouldOptimizeForIpadApp || getFeatureFlags().cmty_m10n_test_apple_os ? "free" : "all";
   return {
@@ -1036,10 +1036,10 @@ export function $$eY23() {
   }, [e, i, t, r, a]);
 }
 export function $$e$52() {
-  return d4(Eh);
+  return useSelector(Eh);
 }
 export function $$eX21() {
-  return d4(cb);
+  return useSelector(cb);
 }
 export function $$eq15() {
   let e = E3();
@@ -1052,23 +1052,23 @@ export function $$eJ3(e) {
 export function $$eZ26(e) {
   let t = sZ();
   let r = !!(t && t.widgets_whitelist_enforced);
-  let a = d4(e => e.whitelistedWidgets)[e];
+  let a = useSelector(e => e.whitelistedWidgets)[e];
   let s = $$z53();
   let o = useMemo(() => Object.values(s).find(t => t.plugin_id === e), [s, e]);
-  let l = d4(t => t.publishedWidgets[e]);
+  let l = useSelector(t => t.publishedWidgets[e]);
   let d = !r || o || l?.org_id;
   return {
     isWidgetBlockedByAllowlist: !a && !d
   };
 }
 export function $$eQ34(e) {
-  let t = wA();
+  let t = useDispatch();
   let r = sZ();
   let a = !!(r && r.plugins_whitelist_enforced);
-  let s = d4(e => e.whitelistedPlugins)[e];
+  let s = useSelector(e => e.whitelistedPlugins)[e];
   let o = $$V0();
   let l = useMemo(() => Object.values(o).find(t => t.plugin_id === e), [o, e]);
-  let d = d4(t => t.publishedPlugins[e]);
+  let d = useSelector(t => t.publishedPlugins[e]);
   let c = !a || l || d?.org_id;
   let u = !s && !c;
   return {
@@ -1164,4 +1164,4 @@ export const uf = $$eT49;
 export const wH = $$ev50;
 export const wW = $$eo51;
 export const x = $$e$52;
-export const yQ = $$z53; 
+export const yQ = $$z53;

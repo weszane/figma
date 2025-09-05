@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useCallback } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { $n } from "../905/521428";
 import { md } from "../figma_app/27355";
 import { $z } from "../figma_app/617427";
@@ -21,7 +21,7 @@ export function $$y0() {
   let {
     canMoveFileToProPlus
   } = R();
-  let i = wA();
+  let i = useDispatch();
   let y = !md(Hu);
   let b = useCallback(() => {
     i(to({

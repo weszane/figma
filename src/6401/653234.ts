@@ -30,7 +30,7 @@ import { A as _$$A2 } from "../b2835def/363895";
 import { WW } from "../905/521428";
 import { _ as _$$_ } from "../905/410717";
 import { j as _$$j } from "../905/519202";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { g as _$$g } from "../905/125190";
 import { e as _$$e } from "../905/149844";
 import { s as _$$s2 } from "../905/573154";
@@ -766,7 +766,7 @@ function ek({
   let {
     setParticipantData
   } = d();
-  let c = wA();
+  let c = useDispatch();
   let u = iZ();
   let m = nc.system("slides-update-poll-votes", e => {
     if (!u) {

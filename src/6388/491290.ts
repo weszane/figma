@@ -1,6 +1,6 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useState, useCallback, useRef } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { debug } from "../figma_app/465776";
 import { Pt } from "../figma_app/806412";
 import { E as _$$E } from "../905/277716";
@@ -90,7 +90,7 @@ export function $$C0({
 function N({
   recordingKey: e
 }) {
-  let t = wA();
+  let t = useDispatch();
   let {
     canAddOverlay,
     overlayPaint,

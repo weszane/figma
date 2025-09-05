@@ -1,7 +1,7 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useState, useRef, useEffect, useMemo } from "react";
 import { flushSync } from "../vendor/944059";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { isNullish } from "../figma_app/95419";
 import { J } from "../figma_app/63663";
 import { d as _$$d } from "../figma_app/844319";
@@ -31,7 +31,7 @@ let $$L1 = 375;
 let $$P0 = 800;
 let $$D4 = 1280;
 export function $$k2() {
-  let e = d4(e => e.mirror.appModel.currentPage);
+  let e = useSelector(e => e.mirror.appModel.currentPage);
   return jsx(M, {}, e);
 }
 function M() {

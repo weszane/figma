@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, useCallback, useEffect, useMemo, Fragment } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { lQ } from "../905/934246";
 import { q as _$$q } from "../905/932270";
 import { glU } from "../figma_app/763686";
@@ -35,7 +35,7 @@ import { A as _$$A4 } from "../svg/415614";
 import { A as _$$A5 } from "../svg/684050";
 import { A as _$$A6 } from "../svg/680110";
 export function $$U1(e) {
-  return d4(t => {
+  return useSelector(t => {
     let r = t.mirror.selectionProperties.whiteboardNumSelectedByType;
     return !!(r && r[e]);
   });
@@ -51,7 +51,7 @@ export function $$H4() {
   let e = !$$U1("VECTOR");
   let t = !$$U1("HIGHLIGHT");
   let r = !function () {
-    for (let e of d4(Sh)) {
+    for (let e of useSelector(Sh)) {
       let t = glU?.isPlatformShape(e);
       let r = glU?.platformShapeHasStrokeControl(e);
       if (t && !r) return !0;

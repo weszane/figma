@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useCallback, useRef } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { Ay } from "../figma_app/272902";
 import { az } from "../905/449184";
 import { h as _$$h } from "../905/207101";
@@ -41,9 +41,9 @@ export function $$y1(e) {
     forwardedRef,
     recordingKey
   } = e;
-  let R = wA();
+  let R = useDispatch();
   let L = q5();
-  let P = d4(e => e.search.sessionId);
+  let P = useSelector(e => e.search.sessionId);
   let D = _$$k();
   let k = useRef(null);
   let M = $$E2({

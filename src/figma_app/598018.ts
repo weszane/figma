@@ -1,4 +1,4 @@
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { filterNotNullish } from "../figma_app/656233";
 import { throwTypeError } from "../figma_app/465776";
 import { getFeatureFlags } from "../905/601108";
@@ -312,10 +312,10 @@ export function $$Y4(e) {
   return t ? t[1] : null;
 }
 export function $$$15() {
-  return d4(e => Z(e)) || "";
+  return useSelector(e => Z(e)) || "";
 }
 export function $$X21() {
-  return d4(e => {
+  return useSelector(e => {
     let t = Z(e);
     return "" === t || null == e.teams ? null : e.teams[t];
   }) || null;

@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { memo, useRef, useCallback, PureComponent, useId, useMemo, useEffect } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { assertNotNullish, debug } from "../figma_app/465776";
 import { n4 } from "../905/955878";
 import { fn } from "../905/871411";
@@ -811,7 +811,7 @@ function ez({
   disabled: e,
   recordingKey: t
 }) {
-  let n = wA();
+  let n = useDispatch();
   let [a] = lJ("showWontScrollWarning");
   let [l] = lJ("scrollDirection");
   let s = eq();
@@ -870,7 +870,7 @@ function eG({
   disabled: e,
   recordingKey: t
 }) {
-  let n = wA();
+  let n = useDispatch();
   let a = kl("scrollBehavior") || "SCROLLS";
   let l = useCallback(e => {
     let t;
@@ -933,7 +933,7 @@ function eG({
   }), [d, l, a, t, e, fixedScrollingDisabled]);
 }
 function eY(e) {
-  let t = wA();
+  let t = useDispatch();
   let n = kl("scrollBehavior");
   let {
     fixedScrollingDisabled
@@ -1088,7 +1088,7 @@ export let $$e70 = kp(function (e) {
   }(!!numVideosSelected);
   let H = E7(numSelected);
   let U = null !== H && H > 0;
-  let F = wA();
+  let F = useDispatch();
   let K = useCallback(() => {
     F(_P({
       name: "Show Prototype Settings Clicked"

@@ -1,7 +1,7 @@
 import { Ju } from "../905/102752";
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useRef, useState, useMemo, useEffect, useCallback } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { debounce } from "../905/915765";
 import { lQ } from "../905/934246";
 import { ServiceCategories as _$$e } from "../905/165054";
@@ -87,12 +87,12 @@ import { Um } from "../905/848862";
 import { x1, U0, cp, Mc, eF as _$$eF, jR, P_, M2, $h, KY, h4 } from "../4452/710166";
 import { oi } from "../figma_app/527041";
 var u = c;
-let ee = Ju(function(e) {
+let ee = Ju(function (e) {
   let t;
   let a = hS(e);
-  let n = wA();
+  let n = useDispatch();
   let i = Xf(e.plan.key.parentId, e.plan.key.type !== _$$OL.TEAM);
-  let l = d4(e => e.teamBilling);
+  let l = useSelector(e => e.teamBilling);
   let o = e.plan.key.type === _$$OL.TEAM ? l.summary.currency : i.data?.currency;
   let d = () => n(Ce());
   t = !o || e.isELA ? _$$tx("admin_dashboard.seat_requests.approve_all_modal.body.no_cost", {
@@ -243,7 +243,7 @@ function eL({
   });
 }
 function eB(e) {
-  let t = wA();
+  let t = useDispatch();
   let a = Um();
   let n = a?.type === e.type;
   return jsxs(_$$V2, {
@@ -278,7 +278,7 @@ export function $$e$0({
   let J = _$$k();
   let eI = RR();
   let eE = _$$u2();
-  let eS = wA();
+  let eS = useDispatch();
   let {
     seatAvailability
   } = _$$k2(e);
@@ -292,7 +292,7 @@ export function $$e$0({
   let [e$, eW] = fp(aN);
   let ez = useRef(0);
   let [eH, eQ] = useState(0);
-  let eY = d4(({
+  let eY = useSelector(({
     selectedView: e
   }) => e);
   let eK = a ?? kl;
@@ -1171,4 +1171,4 @@ export function $$e$0({
     }), requestFlyout]
   });
 }
-export const l = $$e$0; 
+export const l = $$e$0;

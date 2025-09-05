@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { memo, useState } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
 import { lQ } from "../905/934246";
 import { getFeatureFlags } from "../905/601108";
@@ -127,7 +127,7 @@ export function $$B0(e) {
   });
 }
 function G(e) {
-  let t = wA();
+  let t = useDispatch();
   let {
     files,
     resource,
@@ -212,7 +212,7 @@ function V({
   primaryFullscreenEditorType: r,
   resource: i
 }) {
-  let s = wA();
+  let s = useDispatch();
   let o = uF(i);
   let l = Jm();
   let d = AG();
@@ -240,7 +240,7 @@ function V({
   });
 }
 export function $$H1(e, t, r) {
-  let p = wA();
+  let p = useDispatch();
   let g = Um();
   let f = g?.type === z && g.data.resourceId === e.id && g.data.viewContext === r;
   let y = AG();

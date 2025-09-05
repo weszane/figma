@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { forwardRef, useRef, useState, useCallback, useEffect, useMemo, useImperativeHandle, createElement, memo, useLayoutEffect, createRef, useContext, useId } from "react";
-import { wA, d4 as _$$d } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { Ez5, rcl, luZ, J6N, QOV, AlE, YdF, S2l, CNR, mgy, v$l, tbx, ibQ, qYO, zMY, glU, zkO, nQ7, iCO, ruz, Sqb, rrT, FAf, lyf, Oin } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { tH as _$$tH, H4 } from "../905/751457";
@@ -893,10 +893,10 @@ function eb() {
   });
 }
 function eE() {
-  let e = wA();
+  let e = useDispatch();
   let t = q5();
-  let i = _$$d(e => e.multiplayer);
-  let n = _$$d(e => e.user);
+  let i = useSelector(e => e.multiplayer);
+  let n = useSelector(e => e.user);
   let o = useMemo(() => i.allUsers.find(e => e.sessionID === i.sessionID) || null, [i.allUsers, i.sessionID]);
   let d = Um();
   let c = _$$dR();
@@ -2408,7 +2408,7 @@ function ip() {
   let n = function ({
     modules: e
   }) {
-    let t = wA();
+    let t = useDispatch();
     let i = md(ze);
     let n = m4();
     let {
@@ -2964,9 +2964,9 @@ function nj({
     value: 0.6,
     label: _$$t("slides.properties_panel.object_animations.duration.600ms")
   }];
-  let i = wA();
+  let i = useDispatch();
   let n = Um();
-  let l = _$$d(e => {
+  let l = useSelector(e => {
     let t = e.mirror.selectionProperties.objectAnimationDuration;
     return hS(t) && void 0 !== t ? Math.round(1e3 * t) / 1e3 : t;
   });
@@ -3105,7 +3105,7 @@ let nD = new class {
 function nR({
   recordingKey: e
 }) {
-  let t = _$$d(AF);
+  let t = useSelector(AF);
   let [i, n] = _$$lJ("objectAnimationType");
   let l = _$$tx2();
   if (!i) return null;
@@ -3216,8 +3216,8 @@ function n$({
   let b = !n && f || i;
   let E = Gu(e.action.transitionNodeID) || "";
   let v = Fk((e, t) => e.get(t)?.name, E);
-  let T = _$$d(e => e.mirror.appModel.hoveredNode === E);
-  let S = _$$d(e => e.mirror.sceneGraphSelection);
+  let T = useSelector(e => e.mirror.appModel.hoveredNode === E);
+  let S = useSelector(e => e.mirror.sceneGraphSelection);
   let I = void 0 !== S[E];
   let N = ut(Ez5?.slidesObjectAnimationPreviewManager()?.animationPreviewTargetNodeId, AD);
   let k = fn(_$$sH2(N)) && N === E;
@@ -3320,8 +3320,8 @@ function nB({
   let v = !n && g || i;
   let T = Gu(e.action.transitionNodeID) || "";
   let S = Fk((e, t) => e.get(t)?.name, T);
-  let I = _$$d(e => e.mirror.appModel.hoveredNode === T);
-  let N = _$$d(e => e.mirror.sceneGraphSelection);
+  let I = useSelector(e => e.mirror.appModel.hoveredNode === T);
+  let N = useSelector(e => e.mirror.sceneGraphSelection);
   let k = void 0 !== N[T];
   let C = useCallback(() => {
     j ? E({
@@ -3579,7 +3579,7 @@ function nW({
   recordingKey: e
 }) {
   let t = _$$eY();
-  let i = _$$d(e => e.mirror.sceneGraphSelection);
+  let i = useSelector(e => e.mirror.sceneGraphSelection);
   let n = useRef(null);
   let o = Xr(iV);
   let d = Jb() ?? null;
@@ -3610,7 +3610,7 @@ function nW({
       return i;
     }
   }(_);
-  let y = _$$d(e => e.mirror.appModel.activeUserAction === QOV.DEFAULT || e.mirror.appModel.activeUserAction === QOV.CLICKING_TO_CHANGE_SELECTION);
+  let y = useSelector(e => e.mirror.appModel.activeUserAction === QOV.DEFAULT || e.mirror.appModel.activeUserAction === QOV.CLICKING_TO_CHANGE_SELECTION);
   useEffect(() => {
     if (y) {
       if (0 === x.length) {
@@ -3866,10 +3866,10 @@ function nZ({
   let t;
   let i = kl("objectAnimationType");
   let n = hS(i) && void 0 !== i && "NONE" !== i;
-  let l = _$$d(e => e.mirror.sceneGraphSelection);
+  let l = useSelector(e => e.mirror.sceneGraphSelection);
   let a = _$$l5();
   let o = Object.keys(l).filter(e => !a.includes(e)).length;
-  let d = _$$d(e => Yh(e.mirror.appModel, "add-slide-object-animation"));
+  let d = useSelector(e => Yh(e.mirror.appModel, "add-slide-object-animation"));
   t = d ? _$$t("slides.properties_panel.object_animations.plus_button.tooltip_valid_selection") : n ? _$$t("slides.properties_panel.object_animations.plus_button.tooltip_already_animated") : o > 0 ? 1 === o ? _$$t("slides.properties_panel.object_animations.plus_button.tooltip_animation_unsupported_singular") : _$$t("slides.properties_panel.object_animations.plus_button.tooltip_animation_unsupported_multiple") : _$$t("slides.properties_panel.object_animations.plus_button.tooltip_invalid_selection");
   return jsx(_$$K3, {
     "aria-label": _$$t("slides.properties_panel.object_animations.plus_button.aria_label"),
@@ -4055,7 +4055,7 @@ function rm({
   }) : null : null;
 }
 let r_ = memo(function () {
-  let e = _$$d(e => e.mirror.sceneGraphSelection);
+  let e = useSelector(e => e.mirror.sceneGraphSelection);
   let t = useMemo(() => Object.keys(e), [e]);
   let i = ut(Ez5?.canvasGrid().isDraggingChildren, !1) || !t.length;
   return jsx(_$$k5, {
@@ -4071,7 +4071,7 @@ let r_ = memo(function () {
   });
 });
 function rR() {
-  let e = wA();
+  let e = useDispatch();
   let t = J3();
   let i = _$$JU(t);
   let n = _$$r3(uM);
@@ -4123,7 +4123,7 @@ function rM({
   isShowing: n,
   totalSteps: l
 }) {
-  let a = wA();
+  let a = useDispatch();
   let o = hX(`[data-onboarding-key="${O0}"]`);
   return jsx(_$$rq, {
     arrowPosition: F_.RIGHT_BODY,
@@ -4658,7 +4658,7 @@ function lw({
 function lO() {
   let e = _$$ie();
   let t = ut(Ez5?.singleSlideView().isInFocusedNodeView, !0);
-  let i = _$$d(e => e.mirror?.appModel.isReadOnly);
+  let i = useSelector(e => e.mirror?.appModel.isReadOnly);
   gv(e, t);
   return useMemo(() => t ? jsx(lk, {
     slideId: e,
@@ -5006,7 +5006,7 @@ function sg({
   delay: e,
   onChange: t
 }) {
-  let i = wA();
+  let i = useDispatch();
   let n = Um();
   return jsx(_$$E5, {
     name: "slides_delay_dropdown",
@@ -5049,7 +5049,7 @@ function sb({
   easingType: t,
   onChange: i
 }) {
-  let n = wA();
+  let n = useDispatch();
   let l = Um();
   return jsx(_$$E5, {
     name: "slides_duration_dropdown",
@@ -5371,7 +5371,7 @@ function sU({
   recordingKey: i
 }) {
   var n;
-  let l = wA();
+  let l = useDispatch();
   let o = so("behavior", e, t);
   let d = so("direction", e, t);
   let p = so("duration", e, t);
@@ -5477,7 +5477,7 @@ function sK({
   shownPanels: e
 }) {
   let t = e[ibQ.SLIDES_ANIMATION] || e[ibQ.SLIDES_OBJECT_ANIMATION];
-  _$$d(e => e.mirror.selectionProperties);
+  useSelector(e => e.mirror.selectionProperties);
   return jsxs(_$$i3, {
     children: [jsx(VF, {
       isVisible: t,
@@ -5495,7 +5495,7 @@ function sK({
 function as({
   recordingKey: e
 }) {
-  let t = wA();
+  let t = useDispatch();
   let [i] = _$$lJ("slideNumber");
   let n = "SLIDE" === i || "SECTION" === i || "SUBSECTION" === i || "TOTAL_WITHIN_DECK" === i || "TOTAL_WITHIN_SECTION" === i;
   let l = gl(i);
@@ -5528,7 +5528,7 @@ function as({
 function aa({
   recordingKey: e
 }) {
-  let t = wA();
+  let t = useDispatch();
   let i = Um();
   let [n, l] = _$$lJ("slideNumber");
   return jsx(No, {
@@ -5594,7 +5594,7 @@ function ad({
 function ac({
   recordingKey: e
 }) {
-  let t = wA();
+  let t = useDispatch();
   let i = Um();
   let [n] = _$$lJ("slideNumber");
   let [o, d] = _$$lJ("slideNumberSeparator");
@@ -5666,7 +5666,7 @@ function ac({
 function ap({
   recordingKey: e
 }) {
-  let t = wA();
+  let t = useDispatch();
   let i = Um();
   let [n, l] = _$$lJ("codeBlockLanguage");
   let [a, o] = _$$lJ("codeBlockTheme");
@@ -5717,7 +5717,7 @@ function ap({
 function am({
   recordingKey: e
 }) {
-  let t = wA();
+  let t = useDispatch();
   let i = _$$sW();
   let n = _$$s6();
   let {
@@ -5786,7 +5786,7 @@ function a_({
   stylePickerListLayout: f,
   stylePickerShown: b
 }) {
-  let E = wA();
+  let E = useDispatch();
   let v = md(_$$b4);
   let T = qh();
   let S = hD();
@@ -6025,7 +6025,7 @@ function ay({
   stylePickerListLayout: f,
   stylePickerShown: b
 }) {
-  let E = wA();
+  let E = useDispatch();
   let [v, T] = fp(_$$b4);
   let S = _$$s("currentPage", "currentSelectedProperty");
   let I = qh();
@@ -6269,9 +6269,9 @@ function af(e) {
 let a0 = memo(function ({
   recordingKey: e
 }) {
-  let t = _$$d(Sh);
-  let i = _$$d(_$$dT);
-  let n = _$$d(Z3);
+  let t = useSelector(Sh);
+  let i = useSelector(_$$dT);
+  let n = useSelector(Z3);
   let l = E7(kl("resettableInstanceOverrides"));
   let {
     onlyInstances,
@@ -6319,10 +6319,10 @@ function oN({
   recordingKey: t
 }) {
   let i = _$$s6();
-  let n = _$$d(e => e.stylePreviewShown);
-  let o = wA();
-  let d = _$$d(e => e.mirror.selectedStyleProperties);
-  let u = _$$d(e => e.mirror.sceneGraphSelection);
+  let n = useSelector(e => e.stylePreviewShown);
+  let o = useDispatch();
+  let d = useSelector(e => e.mirror.selectedStyleProperties);
+  let u = useSelector(e => e.mirror.sceneGraphSelection);
   let p = useRef(Object.keys(u).length > 0);
   let [x, h] = useState(!p.current && void 0);
   let {
@@ -6427,7 +6427,7 @@ function oU({
 }) {
   let a = "inheritTextStyleKey";
   let d = _S(a);
-  let u = wA();
+  let u = useDispatch();
   return jsxs(Fragment, {
     children: [jsx(MM, {
       inheritStyleKey: t,
@@ -6486,7 +6486,7 @@ function o$({
   closePicker: n,
   recordingKey: o
 }) {
-  let d = wA();
+  let d = useDispatch();
   let u = _$$s6();
   let p = _$$Xo(u);
   let x = useMemo(() => e?.node_id && p.some(t => t.node_id === e.node_id), [e?.node_id, p]);
@@ -6496,7 +6496,7 @@ function o$({
   let g = gl(h) || gl(m);
   let y = !_ && !g;
   let f = createRef();
-  let j = _$$d(e => e.stylePreviewShown);
+  let j = useSelector(e => e.stylePreviewShown);
   let b = j.isShown && j.isCreating;
   let E = j.isShown && !j.isCreating;
   let v = useContext(_$$lk);
@@ -6615,7 +6615,7 @@ function oz({
   onMouseUp: x,
   recordingKey: h
 }) {
-  let m = wA();
+  let m = useDispatch();
   let [_, g] = useState(!1);
   let y = Fk((e, t) => e.get(t || "")?.fontSize, e.node_id);
   let f = Fk((e, t) => e.get(t || "")?.hasMissingFont || !1, e.node_id);
@@ -6755,7 +6755,7 @@ function oq({
   previouslyAppliedStyle: n,
   recordingKey: a
 }) {
-  let o = wA();
+  let o = useDispatch();
   let d = createRef();
   let [c, u] = useState(!1);
   let p = _$$it();
@@ -6968,7 +6968,7 @@ function o0({
   themeStyleToUpdate: e,
   recordingKey: t
 }) {
-  let i = wA();
+  let i = useDispatch();
   let {
     fontFamily,
     fontStyle,
@@ -7024,7 +7024,7 @@ function o1({
     styleIdForText: e.mirror.selectionProperties.styleIdForText || null
   }));
   let n = WH(inheritTextStyleKey, styleIdForText, "TEXT");
-  let a = _$$d(e => e.fonts);
+  let a = useSelector(e => e.fonts);
   let o = useMemo(() => pn(a), [a]);
   let d = Um();
   let [u, p] = useState(null === n);
@@ -7035,7 +7035,7 @@ function o1({
   let m = useCallback(() => {
     n && h(n);
   }, [n]);
-  let _ = _$$d(e => e.mirror.sceneGraphSelection);
+  let _ = useSelector(e => e.mirror.sceneGraphSelection);
   useEffect(() => {
     h(null);
   }, [_]);
@@ -7079,7 +7079,7 @@ function o5({
   savePreviouslyAppliedStyleOnFontChange: i,
   recordingKey: n
 }) {
-  let a = wA();
+  let a = useDispatch();
   let o = _W(kl("missingFont"), !1);
   let d = !!Y5?.isFontListLoaded();
   let u = o || !d;
@@ -7092,7 +7092,7 @@ function o5({
     bigNudgeAmount,
     smallNudgeAmount
   } = _$$sT();
-  let f = _$$d(e => e.mirror.selectionProperties.fontVariations);
+  let f = useSelector(e => e.mirror.selectionProperties.fontVariations);
   let j = p ? LM({
     fontFamily: p,
     fontStyle: x,
@@ -7347,7 +7347,7 @@ function o3({
   let t = GV();
   let i = "INSTANCE" === e;
   let n = ut(Ez5?.interopToolMode(), nQ7.SELF);
-  let l = _$$d(_$$i$);
+  let l = useSelector(_$$i$);
   let o = "FRAME" === e && l === iCO.STATE_GROUP;
   let d = ("SYMBOL" === e || o) && n === nQ7.SELF;
   let c = i || d;
@@ -7439,7 +7439,7 @@ let dt = memo(() => {
   let u = _$$lD();
   let p = function () {
     let e = _$$sO();
-    let t = _$$d(e => Yh(e.mirror.appModel, JT.REMOVE_BACKGROUND));
+    let t = useSelector(e => Yh(e.mirror.appModel, JT.REMOVE_BACKGROUND));
     let i = PE();
     if (e && t && i) return {
       type: ZU.CUSTOM_ACTION,
@@ -7478,7 +7478,7 @@ let dt = memo(() => {
   }();
   let x = function () {
     let e = _$$sO();
-    let t = _$$d(e => Yh(e.mirror.appModel, JT.UPSCALE_IMAGE));
+    let t = useSelector(e => Yh(e.mirror.appModel, JT.UPSCALE_IMAGE));
     let i = PE();
     if (e && t && i) return {
       type: ZU.CUSTOM_ACTION,
@@ -7778,7 +7778,7 @@ function dv({
   onChange: a,
   recordingKey: o
 }) {
-  let d = wA();
+  let d = useDispatch();
   let u = Um();
   let {
     smallNudgeAmount,
@@ -7856,7 +7856,7 @@ function dO({
   recordingKey: t,
   targetDomNode: i
 }) {
-  let n = wA();
+  let n = useDispatch();
   let a = Um();
   let {
     smallNudgeAmount,
@@ -7913,7 +7913,7 @@ function dO({
 }
 let dM = "slides_flapp_prop_panel--panelSelectorRow--8JJYh";
 function dF() {
-  let e = _$$d(AF);
+  let e = useSelector(AF);
   let t = e?.guid;
   let i = Fk((e, t) => {
     let i = e.get(t);
@@ -7962,7 +7962,7 @@ function dU({
   startingPointsData: t,
   activeStartingPointId: i
 }) {
-  let n = wA();
+  let n = useDispatch();
   let a = Um();
   let o = useMemo(() => new d$(t), [t]);
   let d = useCallback(t => {
@@ -8116,7 +8116,7 @@ function cr({
 function cl({
   recordingKey: e
 }) {
-  let t = wA();
+  let t = useDispatch();
   let [i, n] = _$$lJ("blur");
   let a = useCallback(e => n(100 * e), [n]);
   return jsx(_$$k7, {
@@ -8415,11 +8415,11 @@ let cx = {
 function ch({
   recordingKey: e
 }) {
-  let t = _$$d(e => e.mirror.selectionProperties.numSelectedByType);
+  let t = useSelector(e => e.mirror.selectionProperties.numSelectedByType);
   let i = !!t && OU(t, ["SLIDE"]);
   let n = t && Kl(t, ["SLIDE", "TEXT"]);
   let [o] = _$$lJ("fillsType");
-  let d = _$$d(e => {
+  let d = useSelector(e => {
     let t = e.mirror.selectionProperties.fillPaints;
     return gl(t) ? _$$oV : t?.[0];
   });
@@ -8630,7 +8630,7 @@ function cv({
   currentTheme: e,
   onThemeSelected: t
 }) {
-  let i = wA();
+  let i = useDispatch();
   let n = Um();
   let a = useId();
   return jsxs("div", {
@@ -8697,7 +8697,7 @@ let ck = /^\w+:/;
 function cC({
   recordingKey: e
 }) {
-  let t = wA();
+  let t = useDispatch();
   let i = Um();
   let n = kl("hyperlink");
   let o = E7(n);
@@ -8807,7 +8807,7 @@ let cA = [0.1, 0.3, 0.5, 0.8, 1];
 function cL({
   recordingKey: e
 }) {
-  let t = wA();
+  let t = useDispatch();
   let i = Um();
   let [n, l] = _$$lJ("opacity");
   let a = new cO();
@@ -8870,7 +8870,7 @@ function cM({
   shownPanels: d,
   stylePickerListLayout: c
 }) {
-  let u = wA();
+  let u = useDispatch();
   let p = q5();
   let {
     numSelectedByType
@@ -9038,16 +9038,16 @@ let cU = memo(function () {
   useEffect(() => {
     o || setPropertiesPanelCollapsed(!0);
   }, [setPropertiesPanelCollapsed, o]);
-  let c = _$$d(e => e.installedPluginVersions);
-  let u = _$$d(e => e.library);
-  let p = _$$d(e => e.localPlugins);
-  let x = _$$d(e => e.modalShown);
-  let h = _$$d(e => e.publishedPlugins);
-  let m = _$$d(e => e.saveAsState);
-  let g = _$$d(e => e.stylePickerListLayout);
-  let y = _$$d(e => e.stylePickerShown);
-  let f = _$$d(e => e.pickerInStyleCreationShown);
-  let j = _$$d(e => e.mirror.sceneGraphSelection);
+  let c = useSelector(e => e.installedPluginVersions);
+  let u = useSelector(e => e.library);
+  let p = useSelector(e => e.localPlugins);
+  let x = useSelector(e => e.modalShown);
+  let h = useSelector(e => e.publishedPlugins);
+  let m = useSelector(e => e.saveAsState);
+  let g = useSelector(e => e.stylePickerListLayout);
+  let y = useSelector(e => e.stylePickerShown);
+  let f = useSelector(e => e.pickerInStyleCreationShown);
+  let j = useSelector(e => e.mirror.sceneGraphSelection);
   return jsxs(_$$o3, {
     boundaryKey: "SlidesPropertiesPanel",
     children: [jsx(cF, {
@@ -9073,7 +9073,7 @@ let cU = memo(function () {
 let cK = memo(({
   shouldShowDragAndDropBorder: e
 }) => {
-  let t = _$$d(e => e.progressBarState);
+  let t = useSelector(e => e.progressBarState);
   let i = p8("loadingEmbeds");
   let n = ut(Ez5?.uiState().showCanvasSearch, !1);
   let k = Lk();
@@ -9081,8 +9081,8 @@ let cK = memo(({
   let A = q5();
   let L = A ? A.key : "";
   let G = p8("showUi");
-  let H = _$$d(e => e.universalInsertModal);
-  let Y = wA();
+  let H = useSelector(e => e.universalInsertModal);
+  let Y = useDispatch();
   let q = wd();
   Gb(L);
   _$$W();
@@ -9208,7 +9208,7 @@ function cz() {
     (function (e, t) {
       let i = e?.name || t?.name;
       let n = !!i && i !== _$$t("fullscreen.filename_view.title_placeholder");
-      let r = _$$d(e => e.isRenaming);
+      let r = useSelector(e => e.isRenaming);
       let o = useRef(n);
       let d = Fk(e => !!e.get(Ez5?.canvasGrid().gridGUID() || "-1:-1"));
       let u = !p8("isReadOnly");
@@ -9226,7 +9226,7 @@ function cz() {
       i.current = e;
       let n = useRef(t);
       n.current = t;
-      let r = wA();
+      let r = useDispatch();
       let a = gY(b_);
       let o = _$$iZ();
       let d = yZ();

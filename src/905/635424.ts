@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { A as _$$A } from "../905/410311";
 import { sx } from "../905/449184";
 import { B } from "../905/714743";
@@ -138,7 +138,7 @@ function T(e) {
   });
 }
 function k(e) {
-  let t = wA();
+  let t = useDispatch();
   let [i, s] = useState(!1);
   let l = e.teamRoleRequests.filter(t => t.level === e.requestType);
   let d = e.teamId;

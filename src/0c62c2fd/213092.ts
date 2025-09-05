@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback, useMemo, useLayoutEffect } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { Ph } from "../figma_app/637027";
 import { tx, t as _$$t } from "../905/303541";
 import { I } from "../c5e2cae0/718426";
@@ -15,7 +15,7 @@ import { OJ } from "../905/519092";
 function h({
   handleClose: e
 }) {
-  let t = wA();
+  let t = useDispatch();
   let r = useCallback(() => {
     e();
     t(Dw({
@@ -31,7 +31,7 @@ function h({
 }
 export function $$x0() {
   let e = FC();
-  let t = wA();
+  let t = useDispatch();
   let r = sx();
   let x = useCallback(() => {
     t(Ce());

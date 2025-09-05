@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { memo, useMemo, useCallback } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { v as _$$v } from "../figma_app/306727";
 import { q as _$$q } from "../905/838985";
 import { G as _$$G } from "../905/117393";
@@ -547,7 +547,7 @@ export function $$e00(e) {
   let y = L4();
   let b = md(wg);
   let T = md(Bu);
-  let I = d4(e => e.leftPanel);
+  let I = useSelector(e => e.leftPanel);
   let {
     showPublish
   } = _$$U();

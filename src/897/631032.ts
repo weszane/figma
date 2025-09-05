@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { memo, useRef, useState, useLayoutEffect, useEffect, useCallback } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { rf, Pt } from "../figma_app/806412";
 import { t as _$$t } from "../905/303541";
 import { n as _$$n } from "../897/929006";
@@ -410,7 +410,7 @@ function $(e) {
   let _ = P.invert(p);
   let d = u.transformDirection(1);
   let [h, m] = useState(null);
-  let S = wA();
+  let S = useDispatch();
   let I = useCallback(e => {
     let t = l.current.getBoundingClientRect();
     return {
@@ -621,7 +621,7 @@ function X(e) {
   return e;
 }
 export let $$Y0 = memo(function (e) {
-  let t = wA();
+  let t = useDispatch();
   let n = cJ();
   let r = t => {
     e.updateSelectionProperties({

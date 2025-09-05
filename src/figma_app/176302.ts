@@ -1,5 +1,5 @@
 import { useRef, useCallback, useEffect, useState } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { debug } from "../figma_app/465776";
 import { glU, Ez5 } from "../figma_app/763686";
 import { eU, md, fp, Xr, Ut } from "../figma_app/27355";
@@ -77,7 +77,7 @@ export function $$O0({
   attachmentsReady: t,
   chatError: r
 }) {
-  let a = wA();
+  let a = useDispatch();
   let s = Xr(T);
   let c = md(v);
   let [u, p] = fp(N);
@@ -147,7 +147,7 @@ export function $$O0({
   });
 }
 export function $$R4() {
-  let e = wA();
+  let e = useDispatch();
   let t = EI();
   let r = tS();
   let y = md(DM);

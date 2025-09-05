@@ -1,5 +1,5 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { glU, iCO, Egt } from "../figma_app/763686";
 import { c1, Pt } from "../figma_app/806412";
 import { tx, t as _$$t } from "../905/303541";
@@ -205,7 +205,7 @@ function k({
   });
 }
 function B() {
-  let e = d4(e => {
+  let e = useSelector(e => {
     let t = Lg(e) ?? "";
     return e.mirror.sceneGraph.get(t)?.simplifyInstancePanels ?? !1;
   });
@@ -240,9 +240,9 @@ function G(e) {
     links,
     pickerShown
   } = e;
-  let p = d4(i$);
+  let p = useSelector(i$);
   let _ = pickerShown.id === uA;
-  let h = d4(e => "state-group" === menuType ? [od(e)].filter(e => null != e) : F4(e));
+  let h = useSelector(e => "state-group" === menuType ? [od(e)].filter(e => null != e) : F4(e));
   let g = useCallback((e, t) => {
     l7.user("set-description", () => {
       for (let r of h) r.setDescriptionRich(e, t);
@@ -298,9 +298,9 @@ function V(e) {
 function X({
   children: e
 }) {
-  let t = wA();
-  let r = d4(e => e.pickerShown);
-  let s = d4(e => e.mirror.sceneGraph);
+  let t = useDispatch();
+  let r = useSelector(e => e.pickerShown);
+  let s = useSelector(e => e.mirror.sceneGraph);
   let d = Tv();
   let c = Tg();
   let u = c?.find(e => e);
@@ -360,7 +360,7 @@ function er({
     recordingKey: l ?? "variantDocumentationMenu"
   });
   let p = !o || (e || t?.length) && (r || a?.length);
-  let _ = d4(e => e.pickerShown);
+  let _ = useSelector(e => e.pickerShown);
   return kL(_) ? jsxs(Fragment, {
     children: [!!p && jsx("div", {
       className: "variant_documentation_menu--ui3TabContainer--P2Vqv",
@@ -386,8 +386,8 @@ export function $$en0(e) {
     containingStateGroupDescription,
     containingStateGroupLinks
   } = e;
-  let u = d4(i$);
-  let p = d4(e => e.pickerShown);
+  let u = useSelector(i$);
+  let p = useSelector(e => e.pickerShown);
   let _ = Tg();
   return kL(p) ? jsx(X, {
     children: u === iCO.STATE || u === iCO.STATE_INSTANCE ? jsx(er, {

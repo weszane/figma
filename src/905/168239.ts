@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useMemo, useCallback, Fragment } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { t as _$$t } from "../905/150656";
 import { getFeatureFlags } from "../905/601108";
 import l from "../vendor/116389";
@@ -63,7 +63,7 @@ export function $$O0({
   selectedSecondaryTab: t,
   rightActions: i
 }) {
-  let s = wA();
+  let s = useDispatch();
   let l = X$("OrgAdminSettingsSecondaryTabs").unwrapOr(null);
   let m = l?.tier === FPlanNameType.ENTERPRISE;
   let h = _$$b(l?.tier);

@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import r, { createContext, useState, useEffect, useContext, useMemo, useReducer } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
 import { c2 } from "../905/382883";
 import l from "classnames";
@@ -431,7 +431,7 @@ function G({
     extensionType
   } = k();
   let x = qu(i);
-  let w = wA();
+  let w = useDispatch();
   return jsxs("div", {
     className: d()(_$$s.flex.gap8.p16.justifyBetween.alignCenter.absolute.bottom0.left0.right0.bSolid.bt1.colorBorder.colorBg.$, "extension_security_form--bottomBarUI3--cXlx-"),
     children: [!x && jsx("button", {

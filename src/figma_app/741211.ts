@@ -1,5 +1,5 @@
 import { useState, useRef, useCallback, useEffect, useMemo } from "react";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { resourceUtils } from "../905/989992";
 import s from "../vendor/128080";
 import { sx } from "../905/449184";
@@ -29,7 +29,7 @@ import { t as _$$t2 } from "../figma_app/157238";
 var o = s;
 let L = 1e4;
 export function $$P3() {
-  return d4(e => xw(e));
+  return useSelector(e => xw(e));
 }
 export function $$D7(e, t, r) {
   let [i, a] = useState(Xm());
@@ -73,7 +73,7 @@ export function $$k2({
   let [s, o] = useState(!1);
   let [l, d] = useState(!1);
   let [c, u] = useState([]);
-  let p = wA();
+  let p = useDispatch();
   useEffect(() => {
     (async () => {
       if (!r && !s && !l) {
@@ -194,8 +194,8 @@ let U = (e, t, r) => {
   a && t(hZ(a));
 };
 export function $$B6(e) {
-  let t = wA();
-  let r = d4(({
+  let t = useDispatch();
+  let r = useSelector(({
     currentUserOrgId: e
   }) => e);
   let s = T5("useGetOrgUsers").unwrapOr(null);
@@ -222,11 +222,11 @@ export function $$B6(e) {
   useEffect(() => {
     "loaded" === g.status && U(r, t, f);
   }, [t, f, g.status, r]);
-  let T = d4(e => {
+  let T = useSelector(e => {
     let t = e.currentUserOrgId;
     return e.orgUsersByOrgId[t];
   });
-  let I = d4(e => e.idpUserById);
+  let I = useSelector(e => e.idpUserById);
   let S = useMemo(() => function (e, t, r) {
     let n = [];
     let i = new Set();
@@ -260,7 +260,7 @@ export function $$G0({
   filter: t,
   selectedAll: r
 }) {
-  let a = d4(({
+  let a = useSelector(({
     currentUserOrgId: e
   }) => e);
   let [s, l] = useState({});

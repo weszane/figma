@@ -1,5 +1,5 @@
 import { useRef, useEffect, useCallback } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { Ez5, NLJ, QOV } from "../figma_app/763686";
 import { ZC } from "../figma_app/39751";
 import { L3 } from "../figma_app/385215";
@@ -35,7 +35,7 @@ export function $$h1() {
         } else h.current && isPropertiesPanelCollapsed && togglePropertiesPanelCollapsed();
       }
     }, [e, u, isPropertiesPanelCollapsed, togglePropertiesPanelCollapsed, setPropertiesPanelCollapsed, t, r, _]);
-  }(d4(e => L3(e.multiplayer)));
+  }(useSelector(e => L3(e.multiplayer)));
 }
 export function $$m0() {
   let e = !ut(Ez5?.uiState()?.showPropertiesPanel, !0);
@@ -60,7 +60,7 @@ export function $$g2() {
   let n = ax();
   let s = dH();
   let o = s === NLJ.FRAME || s === NLJ.COMMENTS || s === NLJ.VECTOR_PENCIL;
-  return !!d4(e => e.mirror.appModel.activeUserAction === QOV.DEFAULT) && !!t && !r && !e && !n && !o;
+  return !!useSelector(e => e.mirror.appModel.activeUserAction === QOV.DEFAULT) && !!t && !r && !e && !n && !o;
 }
 export const iT = $$m0;
 export const tt = $$h1;

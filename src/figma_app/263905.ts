@@ -29,7 +29,7 @@ import { Ct, BG } from "../figma_app/205280";
 import { c3, LE } from "../figma_app/427737";
 import { U5 } from "../905/414242";
 import { w as _$$w } from "../figma_app/331365";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { hS } from "../905/437088";
 import { WW, $n } from "../905/521428";
 import { bL } from "../905/38914";
@@ -55,7 +55,7 @@ function z() {
       setErrors: t
     };
   }();
-  let t = wA();
+  let t = useDispatch();
   let [r, a] = useState(!1);
   let s = hS({
     open: r,

@@ -1,6 +1,6 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useMemo } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import o from "classnames";
 import { m as _$$m } from "../5430/656485";
 import { qD } from "../figma_app/471982";
@@ -33,7 +33,7 @@ export function $$f0({
   viewContext: y = "feedResourceGrid",
   TileWrapper: g = _
 }) {
-  let v = d4(e => "authedActiveCommunityProfile" in e ? e.authedActiveCommunityProfile : null);
+  let v = useSelector(e => "authedActiveCommunityProfile" in e ? e.authedActiveCommunityProfile : null);
   let b = useMemo(() => x(e), [e]);
   return jsxs(fu, {
     name: y,

@@ -23,13 +23,13 @@ import { A as _$$A2 } from "../905/296182";
 import { F } from "../905/382217";
 import { l3, DX } from "../figma_app/798540";
 import { Tm, mD, cR, Ne } from "../figma_app/955528";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { $n } from "../905/521428";
 import { jD } from "../figma_app/322845";
 import { qM, qU } from "../figma_app/913518";
 import { Hd, bu, Vz, Jd } from "../figma_app/878113";
 function L() {
-  let e = wA();
+  let e = useDispatch();
   let t = md(Tm);
   let [r, a] = fp(qM);
   let s = qU();

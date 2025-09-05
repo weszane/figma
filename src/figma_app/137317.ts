@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useMemo } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { lQ } from "../905/934246";
 import { t as _$$t } from "../905/150656";
 import { bL, RT } from "../905/867927";
@@ -35,7 +35,7 @@ export function $$N0({
   preferencesApi: r,
   hidePreferencesForList: o
 }) {
-  let l = wA();
+  let l = useDispatch();
   let d = _I();
   let {
     inspectionMode,

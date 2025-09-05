@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { getFeatureFlags } from "../905/601108";
 import { Uz } from "../905/63728";
 import { nR, qM } from "../figma_app/637027";
@@ -18,10 +18,10 @@ import { Ju } from "../905/102752";
 import { Dd, OJ } from "../905/519092";
 import { v as _$$v } from "../905/621749";
 import { kL, Vq, _Z, v0, pL } from "../figma_app/639088";
-export let $$E0 = Ju(function(e) {
+export let $$E0 = Ju(function (e) {
   let [t, i] = useState("");
-  let y = wA();
-  let E = d4(e => e.teams);
+  let y = useDispatch();
+  let E = useSelector(e => e.teams);
   let x = e.team.id;
   let S = 1 === Object.values(E).length;
   let w = !e.team.org_id;
@@ -31,11 +31,11 @@ export let $$E0 = Ju(function(e) {
     teamProjectCount,
     teamProjectFileCount,
     hasPublishedSite
-  } = function({
+  } = function ({
     teamId: e,
     fileCountsEnabled: t
   }) {
-    let i = wA();
+    let i = useDispatch();
     let [n, o] = useState(!1);
     let [l, d] = useState(0);
     let [c, p] = useState(0);
@@ -263,4 +263,4 @@ export let $$E0 = Ju(function(e) {
     })
   });
 }, "TeamConfirmDeleteModal");
-export const H = $$E0; 
+export const H = $$E0;

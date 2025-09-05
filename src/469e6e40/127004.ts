@@ -1,5 +1,5 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { R } from "../905/307199";
 import { P } from "../905/347284";
 import { t as _$$t, tx } from "../905/303541";
@@ -10,8 +10,8 @@ import { yX } from "../figma_app/918700";
 let u = "shared_fonts_upload_error_modal--errorColumnFile--h0Its";
 let m = "shared_fonts_upload_error_modal--errorColumnMessage--ObLuS";
 export function $$p0() {
-  let e = wA();
-  let t = d4(e => e.sharedFonts.unsuccessfulUploads);
+  let e = useDispatch();
+  let t = useSelector(e => e.sharedFonts.unsuccessfulUploads);
   return jsx(yX, {
     confirmationTitle: _$$t("shared_fonts.upload_error_modal.title", {
       unsuccessfulUploads: t.length

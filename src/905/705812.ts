@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useId } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { bL, c$ } from "../905/867927";
 import { q } from "../905/932270";
 import { Q } from "../905/730680";
@@ -43,7 +43,7 @@ export function $$E0(e) {
   });
 }
 export function $$$$x1(e) {
-  let t = wA();
+  let t = useDispatch();
   let i = e.strokePanelMode === yTM.ENDPOINT;
   let s = 1 === e.strokePanelTerminalPointCount || i;
   let o = bC();

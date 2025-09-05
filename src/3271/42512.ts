@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useRef, useEffect, useState, useCallback, useMemo } from "react";
-import { wA, Pj, d4 } from "../vendor/514228";
+import { useDispatch, useStore, useSelector } from "../vendor/514228";
 import { d as _$$d } from "../905/976845";
 import { S as _$$S } from "../905/989967";
 import { S as _$$S2 } from "../905/711470";
@@ -128,10 +128,10 @@ import { Ef } from "../905/81982";
 let r;
 var _ = u;
 function $(e) {
-  let t = wA();
-  let s = Pj();
-  let r = d4(_$$m);
-  let l = d4(e => CX(e));
+  let t = useDispatch();
+  let s = useStore();
+  let r = useSelector(_$$m);
+  let l = useSelector(e => CX(e));
   let o = useRef(null);
   let d = NF(gC + Kr + Ix);
   useEffect(() => {
@@ -181,7 +181,7 @@ function $(e) {
 function ec({
   resource: e
 }) {
-  let t = d4(e => e.authedActiveCommunityProfile);
+  let t = useSelector(e => e.authedActiveCommunityProfile);
   let s = iZ();
   let r = _$$ej(e);
   return jsxs("div", {
@@ -368,7 +368,7 @@ function eH({
 }
 let eU = "detail_view--ratingSelectorContainer--zbvCM";
 function eQ(e) {
-  let t = wA();
+  let t = useDispatch();
   let {
     activeTab
   } = IT();
@@ -399,18 +399,18 @@ function eG(e) {
     activeTab
   } = IT();
   let r = activeTab === _$$s2.PLUGIN;
-  let l = wA();
+  let l = useDispatch();
   let o = m0();
   let d = _$$to();
   let c = _$$x();
   let u = Um();
   let m = NF(_$$T() ? gC + 64 : gC);
-  let x = d4(e => e.authedUsers);
+  let x = useSelector(e => e.authedUsers);
   let p = EO(resource);
   let g = lt(resource);
   let v = gn(resource);
   let j = QQ(g);
-  let w = d4(e => e.authedActiveCommunityProfile);
+  let w = useSelector(e => e.authedActiveCommunityProfile);
   let b = _$$b();
   let E = sZ();
   let P = ll();
@@ -582,7 +582,7 @@ function eG(e) {
               children: canRate && Ul(resource) && jsx("div", {
                 className: eU,
                 children: jsx(eC, {
-                  openRatingModal: e => { },
+                  openRatingModal: e => {},
                   isInsertsModal: !0
                 })
               })
@@ -688,7 +688,7 @@ function e5({
   });
 }
 function e8() {
-  let e = wA();
+  let e = useDispatch();
   let t = Um();
   let s = t?.type === _$$kt;
   let r = useCallback(t => {
@@ -725,7 +725,7 @@ function e7() {
   let {
     activeTab
   } = IT();
-  let t = $A(d4(e => e.selectedView));
+  let t = $A(useSelector(e => e.selectedView));
   let s = nl({
     allowNonVsCodePluginsInVsCode: !0
   });
@@ -913,7 +913,7 @@ function tM(e) {
   let I = pR(L);
   let E = I.orgWidgets;
   let P = I.orgPlugins;
-  let k = d4(e => e.orgUsersByOrgId[currentOrgId][e.user.id]?.permission === FUserRoleType.GUEST);
+  let k = useSelector(e => e.orgUsersByOrgId[currentOrgId][e.user.id]?.permission === FUserRoleType.GUEST);
   let R = _$$R2(e => k ? {} : Qt(i8(Object.values(e.publishedPlugins)), currentOrgId));
   let M = useMemo(() => {
     let e = Object.values(P).filter(e => !R[e.plugin_id]);
@@ -1113,7 +1113,7 @@ function tJ({
   let [w, L] = useState(null);
   let [E, P] = useState(!1);
   let [k, R] = useState(!1);
-  let M = wA();
+  let M = useDispatch();
   useEffect(() => {
     let e = u !== d;
     hasPluginAllowList || publicExtensionsDisallowed || !e && null !== j || E || (P(!0), tY(o, d).then(e => {
@@ -1416,10 +1416,10 @@ function st(e) {
     isLoading: pluginSearchIsLoading,
     hasResolved: pluginSearchHasResolved
   } : {
-      serverSideSearch: widgetServerSideSearch,
-      isLoading: widgetSearchIsLoading,
-      hasResolved: widgetSearchHasResolved
-    };
+    serverSideSearch: widgetServerSideSearch,
+    isLoading: widgetSearchIsLoading,
+    hasResolved: widgetSearchHasResolved
+  };
   useEffect(() => {
     "" !== o && (_hasQueryResultsCached2(o) && _hasQueryResultsCached(o) && hasQueryResultsCached(o) || serverSideSearch(o, e => _setResultsForQuery5(o, e), e => _setResultsForQuery3(o, e), e => _setResultsForQuery2(o, e)), setResultsForQuery(o, t6.search(o).map(e => e.plugin_id)), _setResultsForQuery(o, t7.search(o).map(e => e.localFileId.toString())), _setResultsForQuery4(o, se.search(o).map(e => e.plugin_id)));
   }, [o, _hasQueryResultsCached2, hasQueryResultsCached, _hasQueryResultsCached, serverSideSearch, _setResultsForQuery4, _setResultsForQuery5, _setResultsForQuery2, _setResultsForQuery, _setResultsForQuery3, setResultsForQuery]);
@@ -1458,7 +1458,7 @@ function st(e) {
     }) : _$$tx("universal_insert.no_plugins_matching_query", {
       query: o
     })
-  }); else {
+  });else {
     t = [];
     let e = B6;
     ew && (t.push(jsx(sa, {
@@ -1590,7 +1590,7 @@ export function $$so0() {
   let {
     fdPreviewResource,
     initialFdView
-  } = d4(e => e.universalInsertModal);
+  } = useSelector(e => e.universalInsertModal);
   let l = fdPreviewResource?.id;
   let {
     activeTab,
@@ -1685,7 +1685,7 @@ function sd({
   setSearchQuery: t,
   placeholder: s
 }) {
-  let r = wA();
+  let r = useDispatch();
   let {
     setKeyboardNavigationElement
   } = M3({
@@ -1802,7 +1802,7 @@ function sc(e) {
   } = IT();
   let c = NF(l);
   let u = useRef(null);
-  let m = wA();
+  let m = useDispatch();
   let x = useCallback(e => {
     t.current && (e > 0 ? t.current.className = _()("fd_browse_resource_modal--mainViewHeaderScrolled--RPI7X fd_browse_resource_modal--mainViewHeader--AZpur", tm) : t.current.className = _()(t_, r ? tx : tm), m(oB()));
   }, [t, m, r]);
@@ -1863,11 +1863,11 @@ function su({
   });
 }
 function s_(e) {
-  let t = wA();
+  let t = useDispatch();
   let s = Um();
   let r = sZ();
   let l = _$$M();
-  let o = useCallback(e => function(e, t) {
+  let o = useCallback(e => function (e, t) {
     switch (e) {
       case "recents_and_saved":
         return _$$t("universal_insert.recents_and_saved");
@@ -1907,4 +1907,4 @@ function s_(e) {
     })
   });
 }
-export const z = $$so0; 
+export const z = $$so0;

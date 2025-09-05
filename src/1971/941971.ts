@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useState, useEffect, useMemo, useCallback, useRef } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { S as _$$S } from "../905/274480";
 import { J as _$$J } from "../905/270045";
 import { $n } from "../905/521428";
@@ -256,7 +256,7 @@ async function el(e, t) {
   return a;
 }
 function ei() {
-  let e = wA();
+  let e = useDispatch();
   let t = GH();
   let a = [{
     label: "Eval kit Examples",
@@ -385,7 +385,7 @@ function ec({
   selectedKitOption: e,
   clientLifecycleId: t
 }) {
-  let a = wA();
+  let a = useDispatch();
   let {
     evalSetsQueryStatus,
     evalSets
@@ -945,7 +945,7 @@ async function ex({
 function eS({
   selectedKit: e
 }) {
-  let t = wA();
+  let t = useDispatch();
   let a = tS();
   let [s, r] = useState("");
   let [c, d] = useState([]);
@@ -1088,7 +1088,7 @@ function eI({
   selectedKitOption: e,
   clientLifecycleId: t
 }) {
-  let a = wA();
+  let a = useDispatch();
   let c = I9();
   let [d, p] = useState(!1);
   let [m, I] = useState("");

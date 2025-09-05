@@ -1,5 +1,5 @@
 import { jsxs, jsx } from "react/jsx-runtime";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { $n } from "../905/521428";
 import { Osy } from "../figma_app/763686";
 import { sx } from "../905/449184";
@@ -25,8 +25,8 @@ export function $$y0({
     selectionStyles,
     selectionValues
   } = M();
-  let g = d4(sS);
-  let y = d4(e => e.mirror.selectionPaints.emptyDueToLimitExceeded);
+  let g = useSelector(sS);
+  let y = useSelector(e => e.mirror.selectionPaints.emptyDueToLimitExceeded);
   let {
     visibleItems,
     showMoreButton

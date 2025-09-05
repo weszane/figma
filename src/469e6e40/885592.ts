@@ -49,7 +49,7 @@ import { NW as _$$NW } from '../figma_app/831101';
 import { _8, $b, _k, fA, fx, gL, gl, Jv, ly, nm, qH, TQ, Z4, z7, zz } from '../figma_app/934005';
 import { J0 } from '../figma_app/967319';
 import * as N from '../vendor/116389';
-import { Pj, wA } from '../vendor/514228';
+import { useStore, useDispatch } from '../vendor/514228';
 import * as T from '../vendor/923386';
 let I = N;
 let A = T;
@@ -436,7 +436,7 @@ function er(e) {
   });
 }
 function el(e) {
-  let t = wA();
+  let t = useDispatch();
   let a = _$$k2();
   let r = S2().unwrapOr(null);
   let l = r?.key?.type;
@@ -527,7 +527,7 @@ function el(e) {
     content: e
   }) => e);
   let g = function (e) {
-    let t = wA();
+    let t = useDispatch();
     let a = e.adjustAnnualSeatsAction;
     let s = P8();
     let r = e.invoice.billing_interval === FBillingPeriodType.MONTH && e5(e.invoice) > 0;
@@ -946,8 +946,8 @@ export function $$eI0(e) {
   let a = _$$B();
   let r = useRef(null);
   let l = useRef(null);
-  let o = Pj();
-  let c = wA();
+  let o = useStore();
+  let c = useDispatch();
   let _ = useMemo(() => function (e, t) {
     let a = gl(e, {
       allowLegacyOrgAnnual: !0,

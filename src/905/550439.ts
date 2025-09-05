@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { md } from "../figma_app/27355";
 import { sx } from "../905/449184";
 import { x1 } from "../905/714362";
@@ -31,7 +31,7 @@ export function $$v1(e) {
   let t = md(fm);
   let i = $A(t);
   let s = function (e, t) {
-    let i = wA();
+    let i = useDispatch();
     let s = md(Hu);
     return useCallback(() => {
       if (e === V_.ENTERPRISE) {
@@ -58,7 +58,7 @@ export function $$v1(e) {
     }, [i, s, e, t]);
   }(t, e);
   let c = function () {
-    let e = wA();
+    let e = useDispatch();
     return useCallback(() => {
       e(to({
         type: Y,
@@ -81,7 +81,7 @@ export function $$I0() {
   let e = md(fm);
   let t = md(_$$t2).data ?? !1;
   let i = function () {
-    let e = wA();
+    let e = useDispatch();
     return useCallback(() => {
       e(to({
         type: Y,

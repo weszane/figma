@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useMemo } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { debug } from "../figma_app/465776";
 import { Pt4, glU } from "../figma_app/763686";
 import { l7 } from "../905/189185";
@@ -18,14 +18,14 @@ import { Um } from "../905/848862";
 import { tS, q5 } from "../figma_app/516028";
 export let $$v0 = "variable-picker-style-context-menu";
 export function $$I1() {
-  let e = wA();
+  let e = useDispatch();
   let t = tS();
-  let i = d4(e => e.stylePreviewShown);
+  let i = useSelector(e => e.stylePreviewShown);
   let {
     showStyleContextMenu,
     hideStyleContextMenu
   } = function () {
-    let e = wA();
+    let e = useDispatch();
     let t = Um();
     return useMemo(() => ({
       showStyleContextMenu: function ({

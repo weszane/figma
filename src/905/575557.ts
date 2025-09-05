@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useRef, useCallback, useMemo, useContext } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { YE } from "../figma_app/492908";
 import { assertNotNullish } from "../figma_app/95419";
 import { e as _$$e } from "../905/478588";
@@ -37,7 +37,7 @@ export function $$N0({
   onChange: x,
   responsiveTextStyleVariantIndex: T
 }) {
-  let N = wA();
+  let N = useDispatch();
   let {
     smallNudgeAmount,
     bigNudgeAmount

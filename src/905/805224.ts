@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useCallback, useMemo } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { assertNotNullish } from "../figma_app/465776";
 import { rXF, glU, Z_n, JTp, j0r } from "../figma_app/763686";
 import { sH } from "../905/805904";
@@ -25,7 +25,7 @@ export function $$I3({
     onExpressionSubmitted,
     onComponentPropSelected
   } = function () {
-    let e = wA();
+    let e = useDispatch();
     let {
       consumedVariable,
       updateVariableConsumption,
@@ -90,7 +90,7 @@ export function $$E0({
   onChange: t,
   children: i
 }) {
-  let u = wA();
+  let u = useDispatch();
   let g = useMemo(() => ["FONT_FAMILY"], []);
   let {
     updateVariableConsumption,
@@ -115,7 +115,7 @@ export function $$E0({
   });
 }
 function x() {
-  let e = wA();
+  let e = useDispatch();
   let t = useMemo(() => ["FONT_STYLE"], []);
   let {
     consumedVariable,

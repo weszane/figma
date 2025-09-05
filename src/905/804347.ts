@@ -1,6 +1,6 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useMemo, createElement, useState, Component, memo, useCallback, useId, useEffect } from "react";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { az } from "../905/449184";
 import { getInitialOptions } from "../figma_app/169182";
 import { Rs, p as _$$p } from "../figma_app/288654";
@@ -93,7 +93,7 @@ function y(e) {
   } = e;
   let i = e.searchResult.model.team_id;
   let n = _$$x();
-  let s = d4(e => (i && (e.teams[i]?.name || n[i]?.name)) ?? null);
+  let s = useSelector(e => (i && (e.teams[i]?.name || n[i]?.name)) ?? null);
   let o = searchResult.files_last_touched_at ? new Date(searchResult.files_last_touched_at) : null;
   let l = useMemo(() => resourceUtils.loaded(searchResult.recent_files), [searchResult.recent_files]);
   return createElement(_$$L, {
@@ -129,7 +129,7 @@ let b = _$$h({
   [XU.LIST]: () => jsx(Fragment, {})
 });
 function z(e, t) {
-  let i = wA();
+  let i = useDispatch();
   return useMemo(() => ({
     onClick: () => {
       i(UN({
@@ -262,7 +262,7 @@ class W extends Component {
 }
 function K(e) {
   let t = e.searchResult.model;
-  let i = d4(e => e.orgById);
+  let i = useSelector(e => e.orgById);
   let r = _$$x();
   let s = t.parent_org_id && i[t.parent_org_id] || t.team_id && r[t.team_id];
   let o = jsx(Fragment, {
@@ -368,7 +368,7 @@ let ep = memo(function (e) {
   });
 });
 function em(e, t) {
-  let i = wA();
+  let i = useDispatch();
   return useMemo(() => ({
     onClick: t ? () => {
       i(dm(e));
@@ -393,7 +393,7 @@ let eh = _$$h({
       isLoading
     } = function (e) {
       let t = e.id;
-      let i = d4(e => e.loadingState);
+      let i = useSelector(e => e.loadingState);
       let n = useMemo(() => VP(i, p9(t)), [i, t]);
       let s = FC();
       let o = hasViewerRoleAccessOnTeam(e.id, s);
@@ -403,7 +403,7 @@ let eh = _$$h({
         isLoading: n
       };
     }(e.searchResult.model);
-    let l = d4(e => e.currentUserOrgId);
+    let l = useSelector(e => e.currentUserOrgId);
     let d = t.org_id === l ? h2 : $b;
     let {
       onJoin,
@@ -449,7 +449,7 @@ let eh = _$$h({
 function eg(e) {
   let t = e.searchResult.model;
   let i = function (e, t) {
-    let i = wA();
+    let i = useDispatch();
     return Gc(n => {
       n.preventDefault();
       i(sf({
@@ -529,8 +529,8 @@ let eF = e => {
   }
 };
 function eM(e) {
-  let t = wA();
-  let i = d4(e => e.search.parameters.sortState);
+  let t = useDispatch();
+  let i = useSelector(e => e.search.parameters.sortState);
   let s = _$$d();
   let [o, l] = useState([]);
   Cm(o);
@@ -620,7 +620,7 @@ function eM(e) {
   });
 }
 function eU(e) {
-  let t = d4(e => e.publishedPlugins);
+  let t = useSelector(e => e.publishedPlugins);
   let i = useMemo(() => e.results.map(e => t[e.model.id] ?? e.model), [e.results, t]);
   return jsx(_$$y2, {
     plugins: i
@@ -649,8 +649,8 @@ let ez = e => {
   }
 };
 function eH(e) {
-  let t = wA();
-  let i = d4(e => e.search.parameters.sortState);
+  let t = useDispatch();
+  let i = useSelector(e => e.search.parameters.sortState);
   let r = e => {
     let n = eG(e.sortKey);
     if (!n) return;
@@ -701,7 +701,7 @@ function eK(e) {
 }
 var e$ = eq;
 function e0() {
-  let e = wA();
+  let e = useDispatch();
   let t = TA();
   let i = TA();
   return useCallback((n, r) => {
@@ -731,7 +731,7 @@ function e6(e) {
     user,
     targetRect
   } = e.dropdownData;
-  let r = wA();
+  let r = useDispatch();
   let s = e0();
   let o = ef(user.id);
   if (!targetRect) return null;
@@ -770,7 +770,7 @@ function e7(e) {
     last_active_at: e.last_active_at
   })), [e.results]);
   let i = _$$Ay.mobile || _$$Ay.tablet;
-  let s = d4(e => e.orgById);
+  let s = useSelector(e => e.orgById);
   let o = e0();
   let {
     showing,
@@ -940,7 +940,7 @@ export function $$tt0(e) {
   let m = _$$p(H5I, p, {
     enabled: e.searchModelType === uH.TEAMS
   });
-  let h = wA();
+  let h = useDispatch();
   useEffect(() => {
     if (e.searchModelType === uH.TEAMS) {
       let e = {};

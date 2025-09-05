@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Pj } from "../vendor/514228";
+import { useStore } from "../vendor/514228";
 import { debounce } from "../905/915765";
 import { isNullish } from "../figma_app/95419";
 import { eU, zl, md } from "../figma_app/27355";
@@ -23,7 +23,7 @@ let $$c0 = debounce(e => {
   t && zl.set(t, e => !e);
 }, 200, !0);
 export function $$u1(e, t) {
-  let r = Pj();
+  let r = useStore();
   let a = d[e];
   let c = md(a);
   useEffect(() => {

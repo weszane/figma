@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { Ez5, nQ7 } from "../figma_app/763686";
 import { resourceUtils } from "../905/989992";
 import { Rs } from "../figma_app/288654";
@@ -16,7 +16,7 @@ export function $$h0() {
 }
 export function $$m2() {
   let e = function () {
-    let e = d4(vu);
+    let e = useSelector(vu);
     let t = e?.key ?? null;
     let r = Rs(a$M, {
       key: t ?? ""

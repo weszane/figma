@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useEffect, useRef, useId, useCallback } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { N as _$$N } from "../905/438674";
 import { J as _$$J } from "../905/270045";
 import { S as _$$S } from "../905/274480";
@@ -88,7 +88,7 @@ let ed = eU(!1);
 function ec(e) {
   let [t, r] = useState([]);
   let [o, l] = useState(new Map());
-  let d = wA();
+  let d = useDispatch();
   useEffect(() => {
     (async () => {
       try {
@@ -150,10 +150,10 @@ function eu({
   onError: S,
   successMessage: v
 }) {
-  let x = d4(e => e.multiplayer.allUsers.length);
-  let N = d4(e => e.user?.id);
+  let x = useSelector(e => e.multiplayer.allUsers.length);
+  let N = useSelector(e => e.user?.id);
   let R = _6();
-  let D = wA();
+  let D = useDispatch();
   let {
     windowInnerHeight
   } = _$$l();
@@ -406,7 +406,7 @@ function ep(e) {
   let t = e.recordingKey;
   let r = e.isPerformanceIssue ?? !1;
   let s = Um();
-  let p = wA();
+  let p = useDispatch();
   let h = Av();
   let {
     windowInnerHeight
@@ -472,7 +472,7 @@ function ep(e) {
   let eS = useCallback(e => {
     let t = [];
     let r = [];
-    for (let n of e) if (n.size > 0x3200000) r.push(n.name); else {
+    for (let n of e) if (n.size > 0x3200000) r.push(n.name);else {
       let e = URL.createObjectURL(n);
       t.push({
         fileContent: n,
@@ -559,7 +559,7 @@ function ep(e) {
               try {
                 Q(t);
                 eg(t);
-              } catch { }
+              } catch {}
             },
             onKeyDown: ew,
             maxLength: 150
@@ -793,8 +793,8 @@ function e_(e) {
   });
 }
 function eh(e) {
-  let t = wA();
-  let r = rf(Pt(e.recordingKey, "asana-link"), "click", () => { });
+  let t = useDispatch();
+  let r = rf(Pt(e.recordingKey, "asana-link"), "click", () => {});
   return jsxs("div", {
     className: yl,
     children: [jsx("div", {
@@ -869,4 +869,4 @@ let $$eg1 = Ju(e => jsx(eu, {
 }), "PerfReporterModal");
 export const bb = $$em0;
 export const cl = $$eg1;
-export const jH = $$J2; 
+export const jH = $$J2;

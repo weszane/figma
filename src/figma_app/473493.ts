@@ -1,4 +1,4 @@
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { getFeatureFlags } from "../905/601108";
 import { getInitialOptions } from "../figma_app/169182";
 import { Rs } from "../figma_app/288654";
@@ -19,10 +19,10 @@ let $$p0 = _$$n(e => {
   return t?.canAccessDevModeEntryPoint ?? !0;
 });
 export function $$_2() {
-  return d4($$u5);
+  return useSelector($$u5);
 }
 export function $$h1() {
-  return d4($$p0);
+  return useSelector($$p0);
 }
 export function $$m3() {
   let e = iZ();

@@ -1,5 +1,5 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { isNotNullish } from "../figma_app/95419";
 import s, { k as _$$k } from "../905/443820";
 import { eU, md } from "../figma_app/27355";
@@ -59,7 +59,7 @@ export function $$K1(e) {
     planParentId: d.parentId
   });
   let p = Xf(d.parentId, s);
-  let m = d4(e => e.teamBilling);
+  let m = useSelector(e => e.teamBilling);
   let h = s ? p?.data?.currency : m.summary.currency;
   let g = h ? new vr(h) : void 0;
   return e.editorType && a && d.parentId && t ? t.pending ? jsx(Y, {
@@ -105,7 +105,7 @@ function Y(e) {
   let p = localizeCurrency && u.data && isNotNullish(u.data[neededSeatType]) ? localizeCurrency.formatMoney(u.data[neededSeatType].amount, {
     showCents: !1
   }) : void 0;
-  let m = wA();
+  let m = useDispatch();
   let h = async () => {
     if (pendingRole.invite?.id) try {
       await _$$j.updateInviteBillableProductKey({
@@ -157,7 +157,7 @@ function q(e) {
     currentSeatBillingInterval: _,
     enabled: isProrationEnabled && !isElaResult.data && !!e.localizeCurrency
   });
-  let I = wA();
+  let I = useDispatch();
   let E = _$$N({
     planId: planKey.parentId,
     ...Ef(planKey.type, {

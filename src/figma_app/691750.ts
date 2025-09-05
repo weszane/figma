@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useRef, useMemo } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { E as _$$E } from "../905/632989";
 import { y as _$$y } from "../905/582657";
 import { U } from "../905/103637";
@@ -21,7 +21,7 @@ import { u as _$$u } from "../figma_app/398802";
 var h = _;
 let v = "ui3_instance_attribution_button--iconDefault--0g0Lj";
 export function $$A0(e) {
-  let t = d4(dT);
+  let t = useSelector(dT);
   let {
     backingSymbolGUID,
     backingStateGroupGUID

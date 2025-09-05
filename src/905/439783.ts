@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useRef, useCallback, useContext } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { isNullish } from "../figma_app/95419";
 import { y as _$$y } from "../905/292472";
 import { glU, rXF } from "../figma_app/763686";
@@ -38,7 +38,7 @@ export function $$N0({
   recordingKey: N,
   responsiveTextStyleVariantIndex: D
 }) {
-  let L = wA();
+  let L = useDispatch();
   let F = useRef(null);
   let {
     consumedVariable

@@ -1,5 +1,5 @@
 import { useMemo, useCallback } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { sD } from "../figma_app/243058";
 import { Z_n, CWU, rXF, Ez5, m1T } from "../figma_app/763686";
 import { l7 } from "../905/189185";
@@ -81,7 +81,7 @@ export function $$C6(e, t, r) {
   });
 }
 export function $$w5(e) {
-  let t = wA();
+  let t = useDispatch();
   let r = md(E_);
   return useCallback(async n => {
     let i = await t(Oe(n));
@@ -97,7 +97,7 @@ export function $$O3(e, t, r) {
   return useMemo(() => i?.isLocal ? i : a?.status === "loaded" ? a.data : null, [i, a]);
 }
 export function $$R9(e, t) {
-  let r = wA();
+  let r = useDispatch();
   let a = md(E_);
   let s = eY();
   return useCallback((n, i) => {
@@ -116,7 +116,7 @@ export function $$R9(e, t) {
   }, [r, a, e, s, t]);
 }
 export function $$L2() {
-  let e = d4(e => {
+  let e = useSelector(e => {
     let t = e.mirror.selectionProperties.fillPaints;
     return gl(t) ? oV : t?.length;
   });
@@ -126,7 +126,7 @@ export function $$L2() {
 }
 export function $$P8(e) {
   let t = hS(e) && bn(e?.type);
-  let r = d4(e => e.mirror.appModel.activeCanvasEditModeType);
+  let r = useSelector(e => e.mirror.appModel.activeCanvasEditModeType);
   return useCallback(() => {
     t && r !== m1T.GRADIENT && Y5.triggerAction("toggle-gradient-edit-mode");
   }, [t, r]);

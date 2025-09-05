@@ -1,7 +1,7 @@
 import { ex as _$$ex } from "../905/524523";
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useEffect, useState, useRef, useCallback, PureComponent, useId, useMemo, Fragment as _$$Fragment, memo, useContext } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { Ez5, X3B, rXF, baT, iCO, CWU } from "../figma_app/763686";
 import { dI, AD, sH, Hr } from "../905/871411";
 import s from "classnames";
@@ -118,7 +118,7 @@ function K({
 }) {
   let [d, p] = useState(!1);
   let [h, x] = useState(new Point());
-  let g = wA();
+  let g = useDispatch();
   let y = "{ " + n.join(", ") + " }";
   let {
     destinationOverlayBackgroundColor,
@@ -309,7 +309,7 @@ function Z({
   onOverlayPositionTypeChange: t,
   recordingKey: n
 }) {
-  let a = wA();
+  let a = useDispatch();
   let l = Um();
   let s = useId();
   let d = jsx(W, {
@@ -489,7 +489,7 @@ function eh({
   onNewActionAdded: _,
   handleMouseDownUI3: v
 }) {
-  let I = wA();
+  let I = useDispatch();
   let C = p8("currentPage");
   let E = YT() === Oz.TWO_COL;
   let j = E ? x.equals(h) : void 0;
@@ -766,12 +766,12 @@ function ew(e) {
 let ek = memo(function (e) {
   let t = tS();
   let n = _G();
-  let l = d4(eP);
-  let s = d4(Sh);
-  let d = d4(dK);
+  let l = useSelector(eP);
+  let s = useSelector(Sh);
+  let d = useSelector(dK);
   let c = _$$to();
   let p = _$$D(s, d);
-  let u = d4(eO);
+  let u = useSelector(eO);
   let h = useMemo(() => _$$cP(u, t, n, c, e.actionIndexPath), [u, t, n, e.actionIndexPath, c]);
   let m = useMemo(() => _$$cP(l, t, n, c), [l, t, n, c]);
   let x = h || m;
@@ -821,8 +821,8 @@ function eX({
   ...c
 }) {
   let p = useRef(null);
-  let x = wA();
-  let g = d4(e => e.variablePickerShown);
+  let x = useDispatch();
+  let g = useSelector(e => e.variablePickerShown);
   let y = tZ(hS(t) && "id" in t ? t.id : void 0);
   let _ = _$$u(hS(t) && "id" in t ? t.id : void 0);
   let [v, I] = useState("");
@@ -933,7 +933,7 @@ function eX({
     "prototype_set_variable_controls--targetVariableDropdownUI3--Pz71q": !0,
     [eq]: !(y || O)
   });
-  let B = d4(ZM) ? _$$t("proto.select_variable_unified") : _$$t("proto.select_variable.short");
+  let B = useSelector(ZM) ? _$$t("proto.select_variable_unified") : _$$t("proto.select_variable.short");
   let H = jsx(D8, {
     recordingKey: Pt(c.recordingKey, "selectTargetVariable"),
     onClick: E,
@@ -1062,7 +1062,7 @@ function te({
   stateManagementVersion: c,
   selectedInteractions: p
 }) {
-  let h = wA();
+  let h = useDispatch();
   let x = Em();
   let y = useContext(_$$c);
   let _ = YT() === Oz.TWO_COL && y === _$$P2.LEFT;
@@ -1259,7 +1259,7 @@ function tr(e) {
     isVideoSelected,
     onChange
   } = e;
-  let h = wA();
+  let h = useDispatch();
   let [g, y] = useState(() => isVideoSelected ? new ti(scene) : new cP(scene));
   viableSameFrameVideoIds.sort((e, t) => {
     let n = g.format(e);
@@ -1347,7 +1347,7 @@ function tc({
     smallNudgeAmount,
     bigNudgeAmount
   } = sT();
-  let c = wA();
+  let c = useDispatch();
   let p = (t, n) => (o, i) => {
     if (t) {
       if (l) {
@@ -1439,7 +1439,7 @@ function tf({
   let h = "SKIP_FORWARD" === d || "SKIP_BACKWARD" === d;
   let g = "PLAY" === d || "PAUSE" === d || "TOGGLE_PLAY_PAUSE" === d;
   let y = "MUTE" === d || "UNMUTE" === d || "TOGGLE_MUTE_UNMUTE" === d;
-  let _ = wA();
+  let _ = useDispatch();
   let v = RU();
   let I = useCallback(e => {
     n({
@@ -1605,7 +1605,7 @@ function tf({
 let tb = ({
   onUpdateTransitionNodeID: e
 }) => {
-  let t = wA();
+  let t = useDispatch();
   return useCallback((n, o) => {
     let i = sH(n);
     i && e(i);
@@ -1632,7 +1632,7 @@ export function $$tv0({
   setAutoOpenExpressionBuilder: N,
   ...T
 }) {
-  let S = wA();
+  let S = useDispatch();
   let A = Um();
   let {
     scene
@@ -1653,7 +1653,7 @@ export function $$tv0({
   let F = "URL" === E7(e.connectionType);
   let K = H || "BACK" === E7(e.connectionType) || "CLOSE" === E7(e.connectionType);
   let $ = "UPDATE_MEDIA_RUNTIME" === E7(e.connectionType);
-  let z = d4(e => {
+  let z = useSelector(e => {
     let t = e.mirror.selectionProperties.numSelected;
     let n = e.mirror.selectionProperties.numVideosSelected;
     return 1 === t && !!n;
@@ -1854,7 +1854,7 @@ export function $$tI1({
   recordingKey: s,
   setPropertiesForAnchorLink: d
 }) {
-  let h = wA();
+  let h = useDispatch();
   let g = Um();
   let {
     scene

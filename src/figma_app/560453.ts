@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useCallback, useMemo, useState, useEffect, useRef } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
 import { lQ } from "../905/934246";
 import { t as _$$t } from "../905/150656";
@@ -122,7 +122,7 @@ export function $$ef1({
   } = _$$g2();
   let et = tS();
   let er = md(Rt);
-  let ei = d4(_$$l);
+  let ei = useSelector(_$$l);
   let ea = md(Sh);
   let ep = md(Lk);
   let e_ = !ea && 0 === libraries.length && 0 === presets.length && 0 === librariesForConnectedProject.length;
@@ -449,7 +449,7 @@ export function $$eE0({
   }) {
     let n = md(dd);
     let s = md(Rt);
-    let o = d4(_$$l);
+    let o = useSelector(_$$l);
     let {
       query,
       queryId,

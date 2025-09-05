@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { isNotNullish } from "../figma_app/95419";
 import { getFeatureFlags } from "../905/601108";
 import { ZC } from "../figma_app/39751";
@@ -80,10 +80,10 @@ export function $$y4(e, t, r, n, i) {
   };
 }
 export function $$b7(e, t, r, s, l) {
-  let d = d4(e => e.multiplayer.sessionID);
-  let c = d4(e => e.multiplayer.observingSessionID);
-  let u = d4(e => e.multiplayer.presenterSessionID);
-  let _ = d4(e => e.multiplayer.deviceNameFilter);
+  let d = useSelector(e => e.multiplayer.sessionID);
+  let c = useSelector(e => e.multiplayer.observingSessionID);
+  let u = useSelector(e => e.multiplayer.presenterSessionID);
+  let _ = useSelector(e => e.multiplayer.deviceNameFilter);
   let h = q5();
   let [m, g] = useState(null);
   let f = ZC(c);

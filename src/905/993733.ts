@@ -25,7 +25,7 @@ import { s as _$$s } from "../905/583953";
 import { dI as _$$dI } from "../905/805904";
 import { TI } from "../905/713722";
 import { LN, wf } from "../figma_app/975811";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { $n } from "../905/521428";
 import { R as _$$R2 } from "../figma_app/313269";
 import { p as _$$p } from "../905/241044";
@@ -224,7 +224,7 @@ function e_(e) {
     header,
     RenderTable
   } = e;
-  let s = wA();
+  let s = useDispatch();
   let o = {};
   let l = {};
   oldValues.forEach(e => {

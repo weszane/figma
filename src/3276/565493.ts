@@ -1,5 +1,5 @@
 import { useState, useEffect, useLayoutEffect, useMemo, useCallback } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { $D } from "../905/11";
 import { Yx } from "../3276/926297";
@@ -79,7 +79,7 @@ export function $$k3() {
     let s = oA(i.data?.accountTypeRequestsFromPlan);
     return s?.filter(e => e.request?.status === "pending") ?? [];
   }();
-  let s = d4(e => e.modalShown?.type === jS);
+  let s = useSelector(e => e.modalShown?.type === jS);
   let l = w(n, x, e => e.requesterUserId, e);
   let d = w(i, b, e => e.userId, e);
   let v = useCallback(e => {

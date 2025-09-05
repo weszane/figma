@@ -1,6 +1,6 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useState } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { s_ } from "../905/17223";
 import { ks, nR, $$ } from "../figma_app/637027";
 import { P } from "../905/347284";
@@ -146,7 +146,7 @@ let $$y0 = Ju(function ({
   org: e,
   extensionType: t
 }) {
-  let a = wA();
+  let a = useDispatch();
   return jsx(yX, {
     confirmationTitle: _$$t("allowlist_plugins_modals.msa_amendment_modal.title"),
     confirmText: _$$t("allowlist_plugins_modals.msa_amendment_modal.accept_button"),
@@ -181,7 +181,7 @@ let $$y0 = Ju(function ({
   });
 }, "AllowListPluginsMSAAmendmentModal");
 let $$w1 = Ju(function (e) {
-  let t = wA();
+  let t = useDispatch();
   let [a, o] = useState("");
   let m = () => {
     t(Ce());
@@ -242,7 +242,7 @@ let $$w1 = Ju(function (e) {
   });
 }, "AllowlistPluginsInputModal");
 let $$k2 = Ju(function (e) {
-  let t = wA();
+  let t = useDispatch();
   let [a, o] = useState("");
   let m = () => {
     t(Ce());

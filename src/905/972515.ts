@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { createContext, useState, useCallback, forwardRef, useEffect, useContext, useMemo, memo, useId, useRef } from "react";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
 import { c2 } from "../905/382883";
 import { lQ } from "../905/934246";
@@ -110,8 +110,8 @@ let q = createContext(Y);
   }) {
     let g = useState(o);
     let f = g[1];
-    let _ = d4(e => e.instanceSwapPickerShown);
-    let A = wA();
+    let _ = useSelector(e => e.instanceSwapPickerShown);
+    let A = useDispatch();
     let y = useCallback(e => {
       let t = i?.current?.searchInput === document.activeElement;
       if ("I" === e.key && e.shiftKey && !t) {
@@ -672,9 +672,9 @@ function eI(e) {
   } = useContext(q);
   let [eD, eL] = useState([]);
   let eF = Nv(!0);
-  let eM = d4(tB);
+  let eM = useSelector(tB);
   let ej = _$$S2.useOpenFileProperties();
-  let eU = d4(e => "fullscreen" === e.selectedView.view ? e.selectedView.fileKey : void 0);
+  let eU = useSelector(e => "fullscreen" === e.selectedView.view ? e.selectedView.fileKey : void 0);
   let eB = X$("_DrilldownPicker").unwrapOr(null)?.tier;
   let eV = CK();
   useEffect(() => {

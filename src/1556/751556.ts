@@ -3,7 +3,7 @@ import { Ay, nW } from "../figma_app/778880";
 import { s as _$$s } from "../cssbuilder/589278";
 import { UP, kc, s_, cs, gc, Tm, cJ } from "../figma_app/740025";
 import { useState, useRef, useEffect } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { q7, Q$, ME, g8, MJ, ZP, r1, hE, YJ, b as _$$b, bL, mc } from "../figma_app/860955";
 import { E as _$$E } from "../905/632989";
 import { O as _$$O } from "../905/969533";
@@ -109,7 +109,7 @@ export function $$R2(e) {
 }
 var S = E;
 let ed = Ju(function () {
-  let e = wA();
+  let e = useDispatch();
   let t = () => {
     e(Lo());
   };
@@ -203,7 +203,7 @@ function eT({
   let u = s_();
   let h = d && c.public_at;
   let x = _$$K(t) && !h;
-  let p = d4(e => _$$m(e, e.authedActiveCommunityProfile));
+  let p = useSelector(e => _$$m(e, e.authedActiveCommunityProfile));
   let f = d ? p : t.email;
   let [g, _] = useState(null);
   let w = g?.subText ?? f;
@@ -542,13 +542,13 @@ function eQ(e) {
 }
 function eX() {
   let e = function () {
-    let e = wA();
-    let t = d4(e => e.authedUsers);
+    let e = useDispatch();
+    let t = useSelector(e => e.authedUsers);
     let n = Pc();
     let o = am();
-    let a = d4(e => e.authedProfilesById);
-    let d = d4(e => gc(e), c2);
-    let u = d4(e => Tm(e));
+    let a = useSelector(e => e.authedProfilesById);
+    let d = useSelector(e => gc(e), c2);
+    let u = useSelector(e => Tm(e));
     let h = S()(Object.values(d).map(e => e.community_profile_id && a[e.community_profile_id]));
     let m = S()(Object.values(u).map(e => e.community_profile_id && a[e.community_profile_id]));
     let x = UP();
@@ -997,8 +997,8 @@ function eY({
   groups: n
 }) {
   let l = useRef(null);
-  let o = d4(_$$E3(B$));
-  let s = wA();
+  let o = useSelector(_$$E3(B$));
+  let s = useDispatch();
   let {
     open
   } = SO();
@@ -1049,7 +1049,7 @@ function ta(e) {
   });
 }
 function tr(e) {
-  let t = wA();
+  let t = useDispatch();
   let n = Rs(fju, {});
   useEffect(() => {
     if ("loaded" === n.status && n.data.currentUser.communityProfileNotificationBell.status === tT.Loaded) {
@@ -1079,9 +1079,9 @@ let td = {
 let tu = "sidebar-user-notifications-dropdown";
 export function $$th1() {
   let e;
-  let t = wA();
+  let t = useDispatch();
   let n = UP();
-  let l = d4(_$$E3(tu));
+  let l = useSelector(_$$E3(tu));
   let o = useRef(null);
   let c = _$$N2();
   let d = q5();
@@ -1116,7 +1116,7 @@ export function $$th1() {
     } : td;
   }();
   let p = Pc();
-  let f = d4(e => e.userNotifications);
+  let f = useSelector(e => e.userNotifications);
   let g = "Web";
   if (_$$eD ? g = "Desktop" : u && (g = "Web Editor"), n) e = !!h && !!f.communityProfileBellStates[h.id];else if (d) {
     let t = !d || d.key !== x?.fileKeyWithoutBadge;

@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { memo, useMemo, useState, useCallback, useRef } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { z as _$$z } from "../vendor/999105";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
@@ -139,11 +139,11 @@ export function $$ee0(e) {
     prepopulateEmail,
     initialView
   } = e;
-  let $ = wA();
+  let $ = useDispatch();
   let G = Pc();
-  let V = d4(e => e.autocomplete);
-  let z = d4(e => e.contacts);
-  let H = d4(e => e.dropdownShown);
+  let V = useSelector(e => e.autocomplete);
+  let z = useSelector(e => e.contacts);
+  let H = useSelector(e => e.dropdownShown);
   let K = M4.Team.useValue(teamId).data;
   let q = dr(teamId);
   let ee = _$$eb(teamId);

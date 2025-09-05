@@ -3,7 +3,7 @@ import { jsx, Fragment } from "react/jsx-runtime";
 import { Ex, zE, _Y } from "../figma_app/919079";
 import { s as _$$s } from "../cssbuilder/589278";
 import { t as _$$t, tx } from "../905/303541";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { DQ, Pw, _X } from "../figma_app/121751";
 import { u8, A5, MF } from "../figma_app/391338";
 import { FUserRoleType, FPlanNameType } from "../figma_app/191312";
@@ -28,7 +28,7 @@ import { b as _$$b } from "../905/165519";
 import { e6 } from "../905/557142";
 import { Ib } from "../905/129884";
 function p(e) {
-  let t = d4(e => getPermissionsStateMemoized(e));
+  let t = useSelector(e => getPermissionsStateMemoized(e));
   let n = u8({
     oldValue: H(t, e.orgId)?.permission === FUserRoleType.GUEST,
     newValue: e.isGuest,
@@ -69,10 +69,10 @@ let O = ex("pro_trial", function (e) {
   daysLeft: Number(e.getAttribute("data-tooltip-pro-trials-days-left") || 0)
 }));
 function R(e) {
-  let t = wA();
-  let n = d4(e => e.user);
-  let _ = d4(e => e.teams)[e.teamId];
-  let u = d4(e => getPermissionsStateMemoized(e));
+  let t = useDispatch();
+  let n = useSelector(e => e.user);
+  let _ = useSelector(e => e.teams)[e.teamId];
+  let u = useSelector(e => getPermissionsStateMemoized(e));
   let p = u8({
     oldValue: w5(_),
     newValue: e.planTier === FPlanNameType.PRO || e.planTier === FPlanNameType.STUDENT,
@@ -96,7 +96,7 @@ function R(e) {
     }
   }).data;
   let P = TN(e.teamId);
-  let D = d4(e => e.plans);
+  let D = useSelector(e => e.plans);
   let L = getFeatureFlags().limited_plan_spaces;
   let F = !1;
   if (L) {

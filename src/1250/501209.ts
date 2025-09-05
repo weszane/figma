@@ -1,5 +1,5 @@
 import { jsx } from "react/jsx-runtime";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { e as _$$e } from "../5132/291975";
 import { Ay } from "../905/612521";
 import { tx } from "../905/303541";
@@ -16,9 +16,9 @@ if (443 == require.j) {}
 if (443 == require.j) {}
 export let $$h0 = "resource_hub_link";
 export function $$b1() {
-  let e = wA();
+  let e = useDispatch();
   let t = z3();
-  let n = d4(e => e.userFlags);
+  let n = useSelector(e => e.userFlags);
   let b = Om();
   let x = tv();
   let y = P();

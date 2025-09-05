@@ -1,5 +1,5 @@
 import { jsx } from "react/jsx-runtime";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { Rs } from "../figma_app/288654";
 import { $D } from "../905/11";
@@ -16,7 +16,7 @@ export function $$g0({
   open: t,
   onClose: r
 }) {
-  let g = wA();
+  let g = useDispatch();
   let h = _$$p2(_$$t("file_browser.pinning.pin_modal.edit.confirmation_bell"), "file-browser-workspace-edit-pin");
   let x = Rs(vgO, {
     pinnedFileId: e

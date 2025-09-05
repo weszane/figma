@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import s from "classnames";
 import { dR } from "../905/508367";
 import { Ay } from "../905/612521";
@@ -27,10 +27,10 @@ function I({
   onRequestClose: t,
   alreadyCopied: n
 }) {
-  let s = wA();
+  let s = useDispatch();
   let x = M4.File.useValue(e).data;
   let y = x?.url || "";
-  let C = d4(e => !e.user);
+  let C = useSelector(e => !e.user);
   let [I, T] = useState(!!n);
   let M = () => {
     I || (T(!0), s(S({
@@ -113,7 +113,7 @@ export let $$T0 = Ju(function ({
   fileKey: e,
   alreadyCopied: t
 }) {
-  let n = wA();
+  let n = useDispatch();
   let a = () => {
     n(Ce());
   };

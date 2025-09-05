@@ -1,5 +1,5 @@
 import { useCallback, useState, useEffect } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { Ez5 } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { eU, md } from "../figma_app/27355";
@@ -27,7 +27,7 @@ import { xEX, yNw, ea4, M$q, j4N, F6W, IuL, jl4, P4e } from "../figma_app/27776"
 let w = parsePxInt(xEX);
 let O = eU(0);
 export function $$R4() {
-  let e = d4(e => e.downtime.status === _$$A.Ongoing || e.downtime.status === _$$A.Imminent || e.showingDowntimeBanner);
+  let e = useSelector(e => e.downtime.status === _$$A.Ongoing || e.downtime.status === _$$A.Imminent || e.showingDowntimeBanner);
   let t = TZ({
     subscribeToUpdates_expensive: !0
   });
@@ -44,7 +44,7 @@ export function $$P0() {
   let r = md(O);
   let n = ut(Ez5?.editorPreferences()?.showFigmaScope, !1);
   let d = UX();
-  let u = d4(e => e.mirror.appModel.showKeyboardShortcuts);
+  let u = useSelector(e => e.mirror.appModel.showKeyboardShortcuts);
   let p = lq();
   let g = md(_$$O);
   let E = !!hA();
@@ -60,9 +60,9 @@ export function $$D3() {
   let e = _$$N();
   let t = _$$e();
   let r = m0();
-  let n = d4(e => !!e.prototype?.isFooterVisible);
+  let n = useSelector(e => !!e.prototype?.isFooterVisible);
   let a = zm() && !r ? parsePxNumber(F6W) : 0;
-  let s = d4(e => e.mirror?.appModel.showUi);
+  let s = useSelector(e => e.mirror?.appModel.showUi);
   let c = 64 + e + a;
   let _ = ow();
   let m = L();

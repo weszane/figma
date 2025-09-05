@@ -18,7 +18,7 @@ import { tx } from "../905/303541";
 import { E as _$$E } from "../905/984674";
 import { Ju } from "../905/102752";
 import { useEffect } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { $y } from "../figma_app/59509";
 import { Q } from "../905/363675";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -207,7 +207,7 @@ let R = Ju(function ({
   onClose: p,
   allDrafts: m = !1
 }) {
-  let h = wA();
+  let h = useDispatch();
   let g = [];
   s && g.push("published_assets");
   o && g.push("published_sites");

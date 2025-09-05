@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useState } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { h } from "../905/207101";
 import { tx } from "../905/303541";
 import { b as _$$b } from "../905/985254";
@@ -13,7 +13,7 @@ export let $$h0 = "text-panel-container";
 export function $$m1(e) {
   let [t, r] = useState(!1);
   let m = Z();
-  let g = wA();
+  let g = useDispatch();
   if (h(() => {
     queueMicrotask(async function () {
       let t = e.getNodeForViewportFocus?.();

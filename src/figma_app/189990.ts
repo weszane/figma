@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { PQ } from "../figma_app/91703";
 import { NG, UK } from "../figma_app/506549";
 import { c4 } from "../figma_app/805925";
@@ -7,8 +7,8 @@ import { p8 } from "../figma_app/722362";
 import { EG } from "../figma_app/995580";
 import { s as _$$s } from "../905/73603";
 export function $$u1() {
-  let e = d4(e => e.recentlyUsedQuickCommands);
-  let t = wA();
+  let e = useSelector(e => e.recentlyUsedQuickCommands);
+  let t = useDispatch();
   return useCallback(r => {
     let n = EG(r);
     let i = r.runPluginArgs;

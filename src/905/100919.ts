@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { g as _$$g } from "../905/687265";
 import { Ay } from "@stylexjs/stylex";
 import { Xr } from "../figma_app/27355";
@@ -22,7 +22,7 @@ import { Cu, ol } from "../figma_app/603826";
 import { A as _$$A } from "../5724/663128";
 export function $$S0(e) {
   let [t, i] = useState(null);
-  let m = wA();
+  let m = useDispatch();
   let x = gY(b_);
   let S = Xr(Y6);
   let C = Rs(dDF, {
@@ -96,7 +96,7 @@ export function $$S0(e) {
 function w({
   tile: e
 }) {
-  return C(e, d4(e => e.currentTeamId), d4(e => e.currentUserOrgId)) ? jsx(B, {
+  return C(e, useSelector(e => e.currentTeamId), useSelector(e => e.currentUserOrgId)) ? jsx(B, {
     className: _$$s.colorIconBrand.$,
     svg: _$$A,
     "data-tooltip-type": Ib.TEXT,

@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useRef, useCallback, useMemo, useId } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { isNotNullish } from "../figma_app/95419";
 import { Q } from "../figma_app/447352";
 import { a as _$$a } from "../905/558168";
@@ -102,7 +102,7 @@ export function $$R1(e) {
     bigNudgeAmount,
     wheelMultiplier
   } = Xs();
-  let u = wA();
+  let u = useDispatch();
   let [_, m] = lJ("cornerRadius");
   let E = e.disabled ? 0 : void 0;
   let T = P(_$$t("fullscreen.properties_panel.transform_panel.corner_radius"));

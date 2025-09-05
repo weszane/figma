@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useRef, useState, useMemo, Children, useEffect, useCallback, useContext } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { SupportedLocales } from "../905/631683";
 import { qE } from "../figma_app/492908";
 import { Ez5, FAf, lyf, glU, nQ7, NLJ, rcl } from "../figma_app/763686";
@@ -105,9 +105,9 @@ function ef({
   onCreate: a,
   recordingKey: d
 }) {
-  let c = wA();
-  let p = d4(e => e.mirror.selectedStyleProperties);
-  let h = d4(e => e.mirror.sceneGraphSelection);
+  let c = useDispatch();
+  let p = useSelector(e => e.mirror.selectedStyleProperties);
+  let h = useSelector(e => e.mirror.sceneGraphSelection);
   let m = 1 === Object.keys(h).length ? Object.keys(h)[0] : null;
   let g = m ? getSingletonSceneGraph().get(m)?.type === "CMS_RICH_TEXT" : null;
   let f = useRef(!g && Object.keys(h).length > 0);
@@ -134,7 +134,7 @@ function ef({
     c(sw());
     a && a(e || "");
   });
-  let T = d4(e => {
+  let T = useSelector(e => {
     let t = e.mirror.selectedStyleProperties;
     switch (s) {
       case "FILL":
@@ -249,8 +249,8 @@ function e_({
   recordingKey: n,
   stylePreviewShown: l
 }) {
-  let a = wA();
-  let o = d4(e => e.mirror.selectedStyleProperties);
+  let a = useDispatch();
+  let o = useSelector(e => e.mirror.selectedStyleProperties);
   let d = IW(l);
   let u = dI(o.guid);
   let p = p8("isReadOnly");
@@ -312,8 +312,8 @@ function eS({
   let s = q5();
   let n = ut(aY(), FAf.DESIGN);
   let l = p8("topLevelMode");
-  let a = d4(e => e.library);
-  let d = d4(e => e.stylePreviewShown);
+  let a = useSelector(e => e.library);
+  let d = useSelector(e => e.stylePreviewShown);
   let u = _$$b("guid");
   let p = _$$b("styleType");
   if (!d.isShown || ![FAf.DESIGN, FAf.SITE, FAf.INSPECT, FAf.ILLUSTRATION].includes(n)) return null;
@@ -435,7 +435,7 @@ function eK({
   refMainScrollContainer: a
 }) {
   var d;
-  let c = wA();
+  let c = useDispatch();
   let u = p8("isReadOnly");
   let h = p8("topLevelMode");
   let m = Um();
@@ -581,7 +581,7 @@ function eJ({
 }) {
   let s = _$$e();
   let l = G$();
-  let a = d4(e => e.mirror.appModel.topLevelMode);
+  let a = useSelector(e => e.mirror.appModel.topLevelMode);
   let d = dH();
   let c = p8("isReadOnly");
   let u = m0();
@@ -590,7 +590,7 @@ function eJ({
   let m = cJ();
   let g = to();
   let f = _$$U();
-  let x = d4(e => {
+  let x = useSelector(e => {
     var t;
     t = e.selectedView;
     return !!_$$m().ce_il_root && "fullscreen" === t.view && t.editorType === nT.Illustration;
@@ -676,7 +676,7 @@ function eZ({
   });
   let u = cJ();
   let p = dH();
-  let h = d4(e => e.mirror.appModel.topLevelMode);
+  let h = useSelector(e => e.mirror.appModel.topLevelMode);
   return jsxs("div", {
     className: A7,
     children: [jsx("div", {
@@ -708,14 +708,14 @@ export function $$e20({
   trackingAlwaysEnabled: p = !1,
   shouldDeferCanvasUpdateOnPanelResize: h
 }) {
-  let m = wA();
+  let m = useDispatch();
   let g = aV();
   let f = _$$b("guid");
   let _ = fn(E7(f));
   let b = useCallback(e => {
     _ && (e.event.keyCode === Uz.ESCAPE ? (e.accept(), glU?.selectStyle(n3.INVALID, IA.INVALID)) : e.event.keyCode === Uz.F && glU?.selectStyle(n3.INVALID, IA.INVALID));
   }, [_]);
-  let C = d4(e => e.loadingState);
+  let C = useSelector(e => e.loadingState);
   let j = VP(C, "edit_button_upgrading_to_edit");
   let v = g || j;
   let S = useCallback(() => {

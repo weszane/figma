@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useCallback, memo, useMemo } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { E as _$$E } from "../905/632989";
 import { AD, dI } from "../905/871411";
 import l from "classnames";
@@ -34,7 +34,7 @@ export function $$P1(e) {
     oldValueMap,
     newValueMap
   } = e;
-  let o = wA();
+  let o = useDispatch();
   let l = new _r();
   let d = e => e && "Variables" === header ? l.format(e) : e;
   return jsxs("div", {
@@ -126,7 +126,7 @@ function D({
   layerChangeNodeId: t,
   layerBasisNodeId: i
 }) {
-  let r = wA();
+  let r = useDispatch();
   let s = lE(e, e => dI(e.basis.guid) === i || dI(e.change.guid) === t)?.changesToDisplay;
   if (!s) return null;
   let l = s.filter(e => "textData" !== e.identifier);

@@ -1,5 +1,5 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { tx, t as _$$t } from "../905/303541";
 import { fM, Uj, mG } from "../figma_app/15924";
 import { hS } from "../905/437088";
@@ -30,7 +30,7 @@ let w = {
   "lemonsqueezy.com/": "Lemon Squeezy"
 };
 let v = Ju(function (e) {
-  let t = wA();
+  let t = useDispatch();
   let n = () => {
     t(AS());
   };
@@ -93,12 +93,12 @@ export function $$P0({
   thirdPartyM10nUrl: c
 }) {
   let u;
-  let _ = d4(e => e.authedActiveCommunityProfile);
+  let _ = useSelector(e => e.authedActiveCommunityProfile);
   let d = TA();
-  let m = d4(e => e.authedUsers);
+  let m = useSelector(e => e.authedUsers);
   let y = ej(e);
   let b = _$$A(e, !0);
-  let x = wA();
+  let x = useDispatch();
   if (!m3(e) && !zF(e)) return null;
   let f = !1;
   if (cs(_) && !zF(e)) {

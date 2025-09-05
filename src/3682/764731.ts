@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useEffect, useState, useRef, useMemo, Component, memo, useCallback, useId } from "react";
-import { d4, wA, Ng, Pj } from "../vendor/514228";
+import { useSelector, useDispatch, connect, useStore } from "../vendor/514228";
 import { yF, oI, rO, cb, Pp, Zq, a6 } from "../905/989765";
 import { q5, tS } from "../figma_app/516028";
 import { iZ } from "../905/372672";
@@ -178,8 +178,8 @@ function es({
   let [m, h] = useState(!1);
   let N = q5();
   if (!N) throw Error("Open file required");
-  let g = d4(e => e.voice.activeCall[N.key]);
-  let f = wA();
+  let g = useSelector(e => e.voice.activeCall[N.key]);
+  let f = useDispatch();
   let [O, w] = useState(null);
   let x = Um();
   let b = useRef(null);
@@ -323,8 +323,8 @@ function ep(e) {
   let p = useRef();
   let v = useRef(callEvent);
   let [m, h] = useState();
-  let N = d4(e => e.multiplayer.allUsers);
-  let I = d4(e => e.voice.voiceUsersById);
+  let N = useSelector(e => e.multiplayer.allUsers);
+  let I = useSelector(e => e.voice.voiceUsersById);
   let g = useMemo(() => {
     if (notificationUserId) {
       if (notificationUserId in I) return I[notificationUserId].name;
@@ -524,7 +524,7 @@ let eD = (e, t) => {
     active: i
   };
 };
-let eR = Ng((e, t) => ({
+let eR = connect((e, t) => ({
   ...t,
   observingSessionID: e.multiplayer.observingSessionID,
   presenterSessionID: e.multiplayer.presenterSessionID ?? null
@@ -704,14 +704,14 @@ function eL(e) {
     })]
   });
 }
-let eP = Ng(e => ({
+let eP = connect(e => ({
   showWidgetParticipantList: e.voice.showWidgetParticipantList
 }))(function (e) {
   let {
     showWidgetParticipantList
   } = e;
   let a = iZ();
-  let l = wA();
+  let l = useDispatch();
   let {
     userIdsInCall
   } = W5(e.fileKey);
@@ -776,10 +776,10 @@ let e4 = "MICROPHONE_CONTROL_DROPDOWN";
 let e3 = "PLAYBACK_DEVICE_CONTROL_DROPDOWN";
 let e7 = parsePxNumber(aHA);
 function e9(e, t, a, o, n, l, r) {
-  let c = wA();
+  let c = useDispatch();
   let [d, _] = useState(null);
   let [u, p] = useState([]);
-  let m = d4(e => e.dropdownShown?.type === o);
+  let m = useSelector(e => e.dropdownShown?.type === o);
   let h = wm(() => u.map(e => e.deviceId), [u]);
   let N = useCallback(async () => {
     try {
@@ -847,7 +847,7 @@ function e6(e) {
     playbackDevices,
     setPlaybackDevice
   } = e;
-  let _ = wA();
+  let _ = useDispatch();
   let u = useId();
   let p = useId();
   let [m, h] = useState({
@@ -965,9 +965,9 @@ function e6(e) {
   });
 }
 function te() {
-  let e = d4(e => e.voice.captionsInstallProgress);
-  let t = d4(e => e.voice.showCaptions);
-  let a = wA();
+  let e = useSelector(e => e.voice.captionsInstallProgress);
+  let t = useSelector(e => e.voice.showCaptions);
+  let a = useDispatch();
   let n = useId();
   let l = jsx(eB, {});
   let r = tx("collaboration.voice.closed_captioning");
@@ -1037,14 +1037,14 @@ function tr(e) {
     notificationUserId,
     callEventCallback
   } = e;
-  let v = Pj();
+  let v = useStore();
   let [m, h] = useState(null);
   let [O, w] = useState();
   let [x, j] = useState(!1);
   let [k, B] = useState(!1);
   let [V, F] = useState(!1);
   let [z, X] = useState(!1);
-  let J = d4(e => e.voice.snapWidget);
+  let J = useSelector(e => e.voice.snapWidget);
   let [K, Y] = useState(!1);
   let [q, Q] = useState(!1);
   let [Z, ee] = useState({});
@@ -1052,13 +1052,13 @@ function tr(e) {
     userIdsInCall
   } = W5(fileKey);
   _$$W();
-  let ea = d4(e => e.voice.showCaptions);
-  let eo = d4(e => e.voice.captionsInstallProgress);
-  let en = d4(e => e.dropdownShown?.type === ts);
-  let el = d4(e => e.voice.activeCall[fileKey] || !1);
-  let er = d4(e => e.voice.showWidgetParticipantList);
+  let ea = useSelector(e => e.voice.showCaptions);
+  let eo = useSelector(e => e.voice.captionsInstallProgress);
+  let en = useSelector(e => e.dropdownShown?.type === ts);
+  let el = useSelector(e => e.voice.activeCall[fileKey] || !1);
+  let er = useSelector(e => e.voice.showWidgetParticipantList);
   let ec = useRef(null);
-  let ed = wA();
+  let ed = useDispatch();
   let ev = {
     in: () => {
       F(!0);
@@ -1365,18 +1365,18 @@ function td({
   });
 }
 export function $$t_0() {
-  let e = d4(e => e.mirror.appModel.showUi);
+  let e = useSelector(e => e.mirror.appModel.showUi);
   let t = tS();
   let a = iZ();
-  let u = d4(e => e.voice.showWidget);
-  let p = d4(e => t && t in e.voice.activeCall);
-  let v = d4(e => t && !!e.voice.activeCall[t]);
+  let u = useSelector(e => e.voice.showWidget);
+  let p = useSelector(e => t && t in e.voice.activeCall);
+  let v = useSelector(e => t && !!e.voice.activeCall[t]);
   let {
     userIdsInCall
   } = W5(t, !0);
   let m = bF(userIdsInCall, t).length;
   let h = qr();
-  let N = wA();
+  let N = useDispatch();
   let [I, g] = useState();
   let [f, O] = useState();
   let w = useCallback((e, t) => {
@@ -1384,8 +1384,8 @@ export function $$t_0() {
     t && O(t);
     g(e);
   }, [N]);
-  let x = d4(e => e.voice.captionsInstallProgress);
-  let b = d4(e => e.voice.showCaptions);
+  let x = useSelector(e => e.voice.captionsInstallProgress);
+  let b = useSelector(e => e.voice.showCaptions);
   return (useEffect(() => {
     h && (h.captionsToggleEnabled = b, h.streamAudioForCaptions(b && 100 === x));
   }, [b, x, h]), useEffect(() => {

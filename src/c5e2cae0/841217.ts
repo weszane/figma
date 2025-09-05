@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { Ay } from "../905/612521";
 import { Ph, Kz, vd } from "../figma_app/637027";
 import { kt } from "../figma_app/858013";
@@ -65,8 +65,8 @@ function y(e) {
   });
 }
 function j(e) {
-  let t = wA();
-  let a = d4(e => e.selectedView);
+  let t = useDispatch();
+  let a = useSelector(e => e.selectedView);
   let r = e.canSeeBillingAddressExp && e.billingAddress;
   let l = e.canSeeBillingAddressExp && e.shippingAddress && !$V(e.shippingAddress);
   return jsxs("div", {
@@ -140,9 +140,9 @@ export function $$E0(e) {
   let [t, a] = useState(!1);
   let p = new vr(e.currency);
   let [h, g] = useState(!1);
-  let x = d4(e => e.payment);
-  let y = d4(e => e.payment, (e, t) => h || e === t);
-  let j = d4(t => e.selectedView.teamId ? t.teams[e.selectedView.teamId].name : e.teamName) ?? "";
+  let x = useSelector(e => e.payment);
+  let y = useSelector(e => e.payment, (e, t) => h || e === t);
+  let j = useSelector(t => e.selectedView.teamId ? t.teams[e.selectedView.teamId].name : e.teamName) ?? "";
   let S = Ik();
   let T = x.displayName || j;
   let N = x.legalName || j;

@@ -1,4 +1,4 @@
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { l } from "../905/716947";
 import { getFeatureFlags } from "../905/601108";
 import { FPlanNameType } from "../figma_app/191312";
@@ -11,7 +11,7 @@ export function $$o1(e, t) {
 }
 export function $$l0(e) {
   let t = function (e) {
-    let t = d4(e => e.library.publishedByLibraryKey);
+    let t = useSelector(e => e.library.publishedByLibraryKey);
     if (!e) return !1;
     let r = e.teamId;
     let a = e.libraryKey;

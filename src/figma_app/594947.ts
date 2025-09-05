@@ -1,5 +1,5 @@
 import { useContext, useRef, useCallback, useMemo } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { getFeatureFlags } from "../905/601108";
 import { zl, md, Iz, eU } from "../figma_app/27355";
 import { ZC } from "../figma_app/39751";
@@ -8,9 +8,7 @@ import { r1 } from "../figma_app/545877";
 import { Tq } from "../3973/663243";
 import { B } from "../905/749933";
 import { ZJ, u_, gR } from "../3973/697935";
-import _ from "../3973/473379";
 import { EvaluationReason, DynamicConfig } from "../vendor/625526";
-import m from "../3973/389215";
 import { w } from "../905/669698";
 import { B as _$$B } from "../3973/298076";
 export async function $$E7(e, t, r, n = !1) {
@@ -41,7 +39,7 @@ export function $$I3(e, t, r) {
   let {
     getConfig
   } = $$T2(t, r, md(a).data || !1);
-  let c = wA();
+  let c = useDispatch();
   return {
     getConfig: useCallback(() => (c(_$$b({
       [e]: !0

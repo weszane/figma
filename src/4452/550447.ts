@@ -10,9 +10,9 @@ import { vr } from '../figma_app/514043';
 import { Fj } from '../figma_app/594947';
 import { k } from '../figma_app/618031';
 import { I1 } from '../figma_app/990058';
-import { d4, wA } from '../vendor/514228';
+import { useSelector, useDispatch } from '../vendor/514228';
 export function $$h0(e, t) {
-  let a = wA();
+  let a = useDispatch();
   let {
     getDynamicConfig
   } = Fj('disable_cost_messaging_config');
@@ -23,7 +23,7 @@ export function $$h0(e, t) {
   let [v, b] = useState();
   let y = e.key.type === OL.ORG;
   let j = Xf(e.key.parentId, y);
-  let I = d4(e => e.teamBilling);
+  let I = useSelector(e => e.teamBilling);
   let E = y ? j.data?.currency : I.summary.currency;
   useEffect(() => {
     async function s() {

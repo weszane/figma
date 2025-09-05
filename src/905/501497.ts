@@ -1,5 +1,5 @@
 import { jsxs, jsx } from "react/jsx-runtime";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { IK } from "../905/521428";
 import { T } from "../905/632137";
 import o from "classnames";
@@ -27,7 +27,7 @@ export function $$b0({
     close
   } = cq();
   let E = sO();
-  let x = wA();
+  let x = useDispatch();
   let S = GM();
   return jsxs("div", {
     className: l()(sn, {

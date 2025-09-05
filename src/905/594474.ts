@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { forwardRef, useRef, useImperativeHandle, useState, createContext, useContext, Fragment as _$$Fragment, useCallback, useMemo, useId, useEffect } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { throwTypeError, assertNotNullish } from "../figma_app/465776";
 import { c2 } from "../905/382883";
 import { ServiceCategories as _$$e } from "../905/165054";
@@ -364,7 +364,7 @@ function e_({
 function eA({
   localExtension: e
 }) {
-  let t = wA();
+  let t = useDispatch();
   let i = _$$tx("community.publishing.failed_to_read_file", {
     filename: "manifest.json"
   });
@@ -390,7 +390,7 @@ function ey({
   isWidget: r,
   localExtension: s
 }) {
-  let o = wA();
+  let o = useDispatch();
   let l = async () => {
     if (!s) return;
     let e = r ? bD.WIDGET : bD.PLUGIN;
@@ -970,7 +970,7 @@ let tu = forwardRef(function ({
       u.current ? u.current.focus(e) : p.current?.focus(e);
     }
   }), []);
-  let m = wA();
+  let m = useDispatch();
   let h = _$$w(e, !1);
   let g = _$$U(h, tc);
   if (!Zc(e)) return null;
@@ -2560,7 +2560,7 @@ function iM({
   var i;
   let s;
   let o;
-  let l = wA();
+  let l = useDispatch();
   let {
     trackEvent
   } = j6();
@@ -2698,7 +2698,7 @@ function iM({
     };
   }(e.fieldStates.snapshot, e.deps.widgetSnapshotPromise);
   let F = function (e, t, i) {
-    let n = wA();
+    let n = useDispatch();
     let {
       trackEvent: _trackEvent2
     } = j6();
@@ -3391,15 +3391,15 @@ function ij(e) {
     securityForm: await _$$is.getBlankSecurityForm()
   }, [existingSecurityFormResponse]);
   let m = Pc();
-  let h = d4(e => xw(e) ?? void 0, c2);
+  let h = useSelector(e => xw(e) ?? void 0, c2);
   let g = sZ();
   let f = D6("ExtensionPublishingModal");
   let A = Kd(f).unwrapOr(!1);
-  let y = d4(e => UU(e, existingExtension), c2);
-  let b = d4(e => e.authedProfilesById);
-  let v = d4(e => e.authedActiveCommunityProfile ?? void 0);
+  let y = useSelector(e => UU(e, existingExtension), c2);
+  let b = useSelector(e => e.authedProfilesById);
+  let v = useSelector(e => e.authedActiveCommunityProfile ?? void 0);
   let I = useMemo(() => Promise.resolve([]), []);
-  let E = d4(e => existingExtension ? of(e, existingExtension) : void 0, c2);
+  let E = useSelector(e => existingExtension ? of(e, existingExtension) : void 0, c2);
   let x = iu({
     ...e,
     localExtension,
@@ -3445,8 +3445,8 @@ let $$iU0 = Ju(function (e) {
     localFileId,
     validExtensionId
   } = e;
-  let r = d4(e => localFileId ? e.localPlugins[localFileId] : void 0);
-  let s = d4(e => Gl(e.publishedPlugins, e.publishedWidgets, r, r?.manifest?.id || validExtensionId));
+  let r = useSelector(e => localFileId ? e.localPlugins[localFileId] : void 0);
+  let s = useSelector(e => Gl(e.publishedPlugins, e.publishedWidgets, r, r?.manifest?.id || validExtensionId));
   let o = !!validExtensionId;
   let d = _$$A11(validExtensionId ?? "", o);
   let c = !!r?.manifest?.id && !s;

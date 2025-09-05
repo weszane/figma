@@ -1,6 +1,6 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useEffect, useRef, useLayoutEffect } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { glU, Ez5 } from "../figma_app/763686";
 import o from "classnames";
 import { Y } from "../905/506207";
@@ -37,10 +37,10 @@ function O() {
 function L(e) {
   let t = _6();
   let i = "fullscreen" === t.view ? t.fileKey : null;
-  let o = wA();
-  let l = d4(e => e.fileByKey);
-  let d = d4(e => e.userAnalyticsData);
-  let c = d4(e => e.user);
+  let o = useDispatch();
+  let l = useSelector(e => e.fileByKey);
+  let d = useSelector(e => e.userAnalyticsData);
+  let c = useSelector(e => e.user);
   let u = q5();
   let p = u?.canEdit;
   let {
@@ -166,7 +166,7 @@ export function $$F0({
   onPointerDown: i = j6,
   isDragTarget: o = !1
 }) {
-  let c = d4(e => e.modalShown);
+  let c = useSelector(e => e.modalShown);
   let f = _$$T();
   let g = ut(Ez5?.devHandoffState()?.focusMode, !1);
   let _ = dq();

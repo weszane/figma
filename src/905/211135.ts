@@ -1,5 +1,5 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { hS } from "../905/437088";
 import { vo, Y9, hE, nB, wi } from "../figma_app/272243";
 import { $n } from "../905/521428";
@@ -21,7 +21,7 @@ export let $$y0 = Ju(function (e) {
   } = e;
   let f = iZ();
   let y = Z();
-  let b = wA();
+  let b = useDispatch();
   let v = hS({
     open,
     onClose

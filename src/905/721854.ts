@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useCallback } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { y as _$$y } from "../905/175043";
 import { h as _$$h } from "../905/207101";
 import { e as _$$e } from "../905/280005";
@@ -27,7 +27,7 @@ function E({
   let {
     close
   } = cq();
-  let h = wA();
+  let h = useDispatch();
   let g = useCallback(t => {
     e && ID({
       ...e,
@@ -90,7 +90,7 @@ export function $$x0({
   customActionPrefix: R
 }) {
   let N = JT();
-  let P = d4(t => Yh(t.mirror.appModel, e));
+  let P = useSelector(t => Yh(t.mirror.appModel, e));
   let {
     close
   } = cq();

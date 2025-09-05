@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, useMemo, useEffect, useCallback, memo } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { E as _$$E } from "../905/632989";
 import { l as _$$l } from "../6401/369764";
 import { Ez5, xOL, oHM, XQq } from "../figma_app/763686";
@@ -39,7 +39,7 @@ export function $$L0(e) {
     setActiveEmbed
   } = _$$_2(nodeId);
   let f = !isReadOnly;
-  let E = wA();
+  let E = useDispatch();
   let g = ut(Ez5?.flappData().embeddablePrototypeIdPendingInsertion, "");
   let [v, b] = useState();
   let N = useMemo(() => {

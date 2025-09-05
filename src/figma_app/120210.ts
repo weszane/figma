@@ -1,5 +1,5 @@
 import { useState, useLayoutEffect, useCallback, useEffect } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { debounce } from "../905/915765";
 import { glU, NLJ } from "../figma_app/763686";
 import { parsePxInt } from "../figma_app/783094";
@@ -62,16 +62,16 @@ export function $$b5(e, t = 552, r = 320) {
   };
 }
 export function $$T1() {
-  let e = wA();
+  let e = useDispatch();
   return useCallback((t = !0) => {
     glU && t && glU.triggerAction("set-tool-default", null);
     e(KE());
   }, [e]);
 }
 export function $$I0(e, t, r) {
-  let a = d4(e => e.mirror.appModel.currentTool === NLJ.CODE_BLOCK);
-  let o = d4(e => e.modalShown);
-  let d = d4(e => e.mirror.appModel.showUi);
+  let a = useSelector(e => e.mirror.appModel.currentTool === NLJ.CODE_BLOCK);
+  let o = useSelector(e => e.modalShown);
+  let d = useSelector(e => e.mirror.appModel.showUi);
   let c = $$T1();
   let u = useCallback(() => {
     !a && (o || c());
@@ -101,8 +101,8 @@ export function $$S4(e) {
   return e.mirror.appModel.currentTool === NLJ.NONE && e.universalInsertModal.showing && e.universalInsertModal.pinned === t.NOT_PINNED;
 }
 export function $$v2(e, t, r, a) {
-  let s = wA();
-  let o = d4(e => T9({
+  let s = useDispatch();
+  let o = useSelector(e => T9({
     authedProfilesById: e.authedProfilesById,
     userId: e.user?.id
   }));

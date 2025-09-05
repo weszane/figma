@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from "react";
-import { d4, wA, bN } from "../vendor/514228";
+import { useSelector, useDispatch, shallowEqual } from "../vendor/514228";
 import { c2 } from "../905/382883";
 import { Op } from "../905/19536";
 import { ZC } from "../figma_app/39751";
@@ -10,7 +10,7 @@ import { iZ } from "../905/372672";
 import { h as _$$h } from "../figma_app/275739";
 import { Lk } from "../figma_app/122682";
 function h() {
-  let e = d4(e => e.multiplayer).allUsers;
+  let e = useSelector(e => e.multiplayer).allUsers;
   let t = R9.useVoiceMetadataBySessionId();
   function r(e, t) {
     return e.sessionID === t.sessionID && e.sawMouse === t.sawMouse && e.deviceName === t.deviceName && e.name === t.name && e.imageURL === t.imageURL;
@@ -22,13 +22,13 @@ function h() {
 }
 export function $$m1(e, t) {
   let r = iZ();
-  let a = d4(e => e.multiplayer.deviceNameFilter);
-  let s = d4(t => e && t.voice.activeCall[e]);
+  let a = useSelector(e => e.multiplayer.deviceNameFilter);
+  let s = useSelector(t => e && t.voice.activeCall[e]);
   let {
     multiplayerUsersInVoiceCall,
     multiplayerUsersNotInVoiceCall
   } = h();
-  let p = d4(e => e.voice.userIdsInCallFromProvider);
+  let p = useSelector(e => e.voice.userIdsInCallFromProvider);
   let [_, m] = useState(new Set());
   let [g, f] = useState([]);
   let [E, y] = useState();
@@ -58,7 +58,7 @@ export function $$m1(e, t) {
   };
 }
 export function $$g0(e, t) {
-  let r = wA();
+  let r = useDispatch();
   let {
     multiplayerUsersInVoiceCall,
     multiplayerUsersNotInVoiceCall
@@ -71,8 +71,8 @@ export function $$g0(e, t) {
     ...e,
     [t.userID]: t.userID in e ? e[t.userID].add(t) : new Set([t])
   }), {}), [multiplayerUsersNotInVoiceCall]);
-  let u = d4(e => t && t in e.activeFileUsers ? e.activeFileUsers[t] : void 0, bN);
-  let p = d4(e => e.voice.voiceUsersById);
+  let u = useSelector(e => t && t in e.activeFileUsers ? e.activeFileUsers[t] : void 0, shallowEqual);
+  let p = useSelector(e => e.voice.voiceUsersById);
   let [_, m] = useState([]);
   let [g, f] = useState([]);
   let [E, y] = useState([]);
@@ -90,7 +90,7 @@ export function $$g0(e, t) {
     } else i in p ? t.push(p[i]) : n.push(i);
     c2(E, r) || y(r);
     c2(g, t) || f(t);
-    bN(_, n) || m(n);
+    shallowEqual(_, n) || m(n);
   }, [u, e, d, c, p, _, E, g]);
   useEffect(() => {
     t && _.length > 0 && r(NS({
@@ -111,9 +111,9 @@ export function $$f2(e, t) {
   return useMemo(() => [...voiceUsersInMultiplayer, ...voiceUsersNotInMultiplayer], [voiceUsersInMultiplayer, voiceUsersNotInMultiplayer]);
 }
 export function $$E3(e) {
-  let t = wA();
+  let t = useDispatch();
   let r = Lk();
-  let a = d4(t => e && e in t.voice.activeCall);
+  let a = useSelector(t => e && e in t.voice.activeCall);
   useEffect(() => () => {
     r && a && (t(Pp(!1)), _$$h.leave(), e && t(a6({
       fileKey: e

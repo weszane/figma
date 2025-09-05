@@ -1,4 +1,4 @@
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { lQ } from "../905/934246";
 import { t as _$$t } from "../905/303541";
 import { PY } from "../905/34809";
@@ -16,9 +16,9 @@ export function $$c0({
   sections: g,
   userHasMaxFavorites: f
 }) {
-  let _ = wA();
-  let A = d4(e => e.mobileNavShown);
-  let y = d4(e => e.favorites.collapsedCustomSections);
+  let _ = useDispatch();
+  let A = useSelector(e => e.mobileNavShown);
+  let y = useSelector(e => e.favorites.collapsedCustomSections);
   let b = (t, n) => {
     _(oB());
     (!f || !t) && (i(t, n), t && n && (y.$$delete(n), _(U6({

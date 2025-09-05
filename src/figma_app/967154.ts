@@ -1,5 +1,5 @@
 import { useMemo, useCallback } from "react";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { iCO } from "../figma_app/763686";
 import { R } from "../905/103090";
 import { oB } from "../905/929976";
@@ -12,9 +12,9 @@ import { Vr } from "../figma_app/151869";
 import { i$ } from "../figma_app/150804";
 import { Wv, Im } from "../figma_app/454622";
 export function $$g1() {
-  let e = d4(e => e.mirror.sceneGraph);
+  let e = useSelector(e => e.mirror.sceneGraph);
   let t = Vr();
-  let r = d4(e => e.mirror.selectionProperties.masterSymbolGUID);
+  let r = useSelector(e => e.mirror.selectionProperties.masterSymbolGUID);
   if (!t || !t.isAlive) return [null, null];
   if (t?.isStateGroup) return [null, t ?? null];
   if (t?.type === "SYMBOL" || t?.type === "INSTANCE") {
@@ -64,7 +64,7 @@ export function $$b6() {
   });
 }
 export function $$T5(e) {
-  let t = wA();
+  let t = useDispatch();
   let {
     dropdownShown,
     pickerShown
@@ -78,7 +78,7 @@ export function $$T5(e) {
   }, [d, s, t, c]);
 }
 export function $$I2(e) {
-  let t = wA();
+  let t = useDispatch();
   return useCallback((r, n, i = qo) => {
     if (!e || !e.current) return;
     let a = e.current;

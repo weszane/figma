@@ -1,6 +1,6 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { createContext, useContext, useRef, useCallback, useEffect, useMemo, memo, useState } from "react";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { lQ } from "../905/934246";
 import { assertNotNullish } from "../figma_app/95419";
 import { K as _$$K } from "../905/443068";
@@ -71,7 +71,7 @@ if (443 == require.j) {}
 if (443 == require.j) {}
 export var $$eI2 = (e => (e.COMMUNITY = "community", e.RECENT = "recent", e.DEVELOPMENT = "development", e.DEVELOPMENT_MISSING_LOCAL = "development_missing_local", e.ORG_PRIVATE = "org_private", e.SAVED = "saved", e.INVITED = "invited", e))($$eI2 || {});
 function em(e) {
-  let i = d4(e => e.orgById);
+  let i = useSelector(e => e.orgById);
   if (e.resource.is_private) {
     let t = e.resource?.org_id && i[e.resource.org_id]?.name;
     return jsx(_$$s, {
@@ -304,7 +304,7 @@ export function $$eT0({
 }
 function eC(e) {
   let i = cW()[e.pluginId];
-  let t = wA();
+  let t = useDispatch();
   let r = useCallback(() => {
     t(oB());
   }, [t]);
@@ -362,7 +362,7 @@ let eF = memo(function (e) {
     dropdownIsShown,
     version
   } = e;
-  let r = wA();
+  let r = useDispatch();
   let {
     viewPluginDetails
   } = ew();
@@ -447,7 +447,7 @@ let eF = memo(function (e) {
   });
 });
 function eN(e) {
-  let i = wA();
+  let i = useDispatch();
   let t = nl({
     allowNonVsCodePluginsInVsCode: !0
   });
@@ -752,7 +752,7 @@ function eE(e) {
   }) : null;
 }
 function eA(e) {
-  let i = wA();
+  let i = useDispatch();
   let {
     viewWidgetDetails
   } = ej();
@@ -859,7 +859,7 @@ function eD(e) {
   }) : null;
 }
 function eS(e) {
-  let i = wA();
+  let i = useDispatch();
   let t = yQ();
   let r = useMemo(() => e.localFileId ? t[e.localFileId] : void 0, [t, e.localFileId]);
   let d = jg();
@@ -983,7 +983,7 @@ function eL({
   keyboardNavigationButtonRef: o
 }) {
   let u = useMemo(() => e ? [op.PRICE] : [op.PURCHASED, op.OFF_PLATFORM, op.FREEMIUM, op.PRICE], [e]);
-  let c = d4(e => e.authedActiveCommunityProfile);
+  let c = useSelector(e => e.authedActiveCommunityProfile);
   return jsxs("div", {
     className: e ? Zv : Cq,
     onClick: i,
@@ -1131,7 +1131,7 @@ let eM = memo(function (e) {
   });
 });
 export function $$ez5(e) {
-  let i = wA();
+  let i = useDispatch();
   let t = useRef(null);
   let r = Um();
   let d = _$$x();
@@ -1218,7 +1218,7 @@ export function $$eG6(e, i) {
   return t?.type === eW && t.data.pluginId === e && i === t.data.tileType;
 }
 export function $$eH1(e) {
-  let i = wA();
+  let i = useDispatch();
   let t = ZT()[e.widgetId];
   let r = WK(e.widgetId);
   let d = Ud(e.widgetId);

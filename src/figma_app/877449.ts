@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useRef, useEffect, useState } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { $n } from "../905/521428";
 import { b as _$$b, c as _$$c } from "../905/308099";
 import { s as _$$s } from "../905/932270";
@@ -30,7 +30,7 @@ let $$w4 = "share-to-google-classroom-row";
 let $$O0 = eU(null);
 let R = tf(sR);
 function L(e) {
-  let t = wA();
+  let t = useDispatch();
   let r = Xr($$O0);
   let s = useRef(null);
   useEffect(() => (r(s), () => {

@@ -1,4 +1,4 @@
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { oA } from "../905/663269";
 import { Ay } from "../905/612521";
 import { t as _$$t } from "../905/303541";
@@ -18,7 +18,7 @@ export function $$d1(e) {
   };
 }
 export function $$c0() {
-  let e = wA();
+  let e = useDispatch();
   let t = () => {
     e(F.enqueue({
       message: _$$t("admin_dashboard.requests.error_generic"),
@@ -51,4 +51,4 @@ export function $$c0() {
   };
 }
 export const q0 = $$c0;
-export const qm = $$d1; 
+export const qm = $$d1;

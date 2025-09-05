@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useEffect, createElement, useCallback, useMemo, useRef, useState, Component } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
 import { E as _$$E } from "../905/632989";
 import { O as _$$O } from "../905/969533";
@@ -90,7 +90,7 @@ function M({
   valuesToDisplayText: l,
   onChange: d
 }) {
-  let u = wA();
+  let u = useDispatch();
   let p = md(R9);
   let m = useCallback((t, i, n) => {
     t.stopPropagation();
@@ -143,7 +143,7 @@ let Q = "SEARCH_WORKSPACE_ONBOARDING_KEY";
 let J = r1("file_browser_onboarded");
 let ee = r1(X);
 function et() {
-  let e = d4(e => e.currentUserOrgId);
+  let e = useSelector(e => e.currentUserOrgId);
   let t = UC(e);
   let i = md(t);
   let n = md(J);
@@ -179,7 +179,7 @@ function er({
   onResetFilter: n,
   onChange: o
 }) {
-  let l = wA();
+  let l = useDispatch();
   let d = useCallback(e => {
     e.stopPropagation();
     l(oB());
@@ -227,7 +227,7 @@ let ep = (e, t) => {
   return i < n ? -1 : i > n ? 1 : 0;
 };
 function em(e) {
-  let t = d4(e => e.currentUserOrgId);
+  let t = useSelector(e => e.currentUserOrgId);
   let i = "NON_ORG_TEAMS" !== e.planId && e.planId || t;
   let n = Rs(N63, {
     orgId: i
@@ -250,7 +250,7 @@ function em(e) {
       viewableWorkspaces: []
     };
   }, [n]);
-  let d = d4(e => e.orgById[i]);
+  let d = useSelector(e => e.orgById[i]);
   eu.ALL = _$$t("search.search_filter.all_org_results", {
     orgName: d?.name
   });
@@ -275,9 +275,9 @@ function em(e) {
   })) : jsx(Fragment, {});
 }
 function eh(e) {
-  let t = wA();
+  let t = useDispatch();
   let i = useRef(null);
-  let n = d4(e => e.dropdownShown);
+  let n = useSelector(e => e.dropdownShown);
   let o = n?.type === e.dropdownId;
   let l = e => {
     e.stopPropagation();
@@ -320,7 +320,7 @@ let eS = "NON_ORG_TEAMS";
 let ew = {};
 function eC(e) {
   let t = iZ();
-  let i = d4(e => t ? e.authedUsers.byId[t.id]?.plans : null);
+  let i = useSelector(e => t ? e.authedUsers.byId[t.id]?.plans : null);
   if (i && 0 === i.length) return jsx(Fragment, {});
   let n = [];
   ew.ALL = _$$t("search.search_filter.all_organizations_results");
@@ -340,9 +340,9 @@ function eC(e) {
   });
 }
 function eT(e) {
-  let t = wA();
+  let t = useDispatch();
   let i = useRef(null);
-  let n = d4(e => e.dropdownShown);
+  let n = useSelector(e => e.dropdownShown);
   let o = n?.type === e.dropdownId;
   let [l, d] = useState(window.innerHeight - 175);
   useEffect(() => {
@@ -561,9 +561,9 @@ export let $$eO1 = {
   [uH.PRIVATE_WIDGETS]: uB.getValidOptions
 };
 export function $$eD0(e) {
-  let t = wA();
-  let i = d4(e => e.search.parameters);
-  let n = d4(e => e.viewBarViewModeOptionByView);
+  let t = useDispatch();
+  let i = useSelector(e => e.search.parameters);
+  let n = useSelector(e => e.viewBarViewModeOptionByView);
   let [o, l] = fp(R9);
   let d = md(P_);
   let p = md(_$$J);
@@ -674,7 +674,7 @@ export function $$eD0(e) {
   });
 }
 function eL(e) {
-  let t = wA();
+  let t = useDispatch();
   let i = useRef(null);
   let n = Um();
   let o = n?.type === e.dropdownId;

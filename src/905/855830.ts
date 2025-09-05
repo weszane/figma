@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState, useRef, useCallback, useEffect } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { J as _$$J } from "../905/614223";
 import { getFeatureFlags } from "../905/601108";
@@ -154,7 +154,7 @@ function eh(e) {
     isEligibleForProvisionalAccess,
     entryPoint
   } = e;
-  let f = wA();
+  let f = useDispatch();
   let _ = licenseType === FProductAccessType.DEV_MODE;
   let A = iS(licenseType);
   let y = tS();
@@ -303,7 +303,7 @@ function ey({
   });
 }
 export function $$eb0(e) {
-  let t = wA();
+  let t = useDispatch();
   let {
     planType,
     planParentId,

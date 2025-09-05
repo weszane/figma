@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useMemo, useRef, useState } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { $n } from "../905/521428";
 import { d as _$$d } from "../905/976845";
 import { J } from "../905/125993";
@@ -151,11 +151,11 @@ function B(e) {
   });
 }
 export function $$V0(e) {
-  let t = wA();
+  let t = useDispatch();
   let i = `branch-row-${e.branch.key}`;
-  let m = d4(e => e.dropdownShown?.type === i);
-  let h = d4(e => !!e.dropdownShown?.data?.contextClick);
-  let _ = d4(e => e.dropdownShown?.data?.targetRect);
+  let m = useSelector(e => e.dropdownShown?.type === i);
+  let h = useSelector(e => !!e.dropdownShown?.data?.contextClick);
+  let _ = useSelector(e => e.dropdownShown?.data?.targetRect);
   let A = useRef(null);
   let [y, b] = useState(!1);
   let {
@@ -217,7 +217,7 @@ export function $$V0(e) {
   return jsxs("li", {
     className: `branch_row--container--MD7zC ${e.isSelected ? "branch_row--selected--qBm47" : ""}`,
     onContextMenu: e => {
-      if (e.preventDefault(), e.stopPropagation(), m) t(oB()); else {
+      if (e.preventDefault(), e.stopPropagation(), m) t(oB());else {
         let n = {
           top: e.clientY,
           right: e.clientX,
@@ -266,7 +266,7 @@ export function $$V0(e) {
         })]
       }), e.isLoadingActivity ? jsx("div", {
         className: "branch_row--activityLoading--OM839"
-      }) : e.user && jsx(function(e) {
+      }) : e.user && jsx(function (e) {
         return jsxs("div", {
           className: "branch_row--subtitleRow--VZQWb",
           children: [jsx(Ro, {
@@ -313,7 +313,7 @@ export function $$V0(e) {
       className: "branch_row--menuColumn--XSWVZ",
       children: jsx(_$$d, {
         onClick: e => {
-          if (e.stopPropagation(), e.preventDefault(), m) t(oB()); else {
+          if (e.stopPropagation(), e.preventDefault(), m) t(oB());else {
             let e = A.current;
             t(j7({
               type: i,
@@ -346,4 +346,4 @@ export function $$V0(e) {
     })]
   });
 }
-export const v = $$V0; 
+export const v = $$V0;

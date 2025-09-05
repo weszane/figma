@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useCallback } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { lQ } from "../905/934246";
 import { $n } from "../905/521428";
 import { E as _$$E } from "../905/632989";
@@ -54,7 +54,7 @@ function P(e) {
   });
 }
 function O(e) {
-  let t = wA();
+  let t = useDispatch();
   let {
     buttonCallback,
     linkCallback,
@@ -99,7 +99,7 @@ function D(e) {
 }
 let L = {
   "edit-name": function (e) {
-    let t = wA();
+    let t = useDispatch();
     return jsx(P, {
       actionText: tx("avatar.tooltip.edit_name"),
       actionCallback: e => {
@@ -113,7 +113,7 @@ let L = {
     });
   },
   "start-observe": function (e) {
-    let t = wA();
+    let t = useDispatch();
     let i = HG();
     if (Oc()) return jsx(D, {
       ...e
@@ -187,7 +187,7 @@ let L = {
     });
   },
   "follow-presenter": function (e) {
-    let t = wA();
+    let t = useDispatch();
     return jsx(P, {
       actionText: tx("collaboration.spotlight.tooltip.click_to_follow"),
       actionCallback: i => {
@@ -202,7 +202,7 @@ let L = {
     });
   },
   "nominate-presenter": function (e) {
-    let t = d4(e => e.multiplayer);
+    let t = useSelector(e => e.multiplayer);
     let i = cJ();
     let s = t && t.sessionNominatedByCurrentUser === e.userSessionID;
     let o = tu();

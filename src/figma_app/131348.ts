@@ -5,7 +5,7 @@ import { Jo, rN } from "../905/872033";
 import { h as _$$h } from "../905/207101";
 import { PD } from "../figma_app/39751";
 import { Pt, y6, nS } from "../figma_app/806412";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { E as _$$E } from "../905/632989";
 import { z6, CU } from "../905/963340";
 import { r } from "../905/571562";
@@ -28,7 +28,7 @@ function $$I(e) {
     "data-testid": p,
     recordingKey
   } = e;
-  let b = wA();
+  let b = useDispatch();
   let {
     ref,
     ...S

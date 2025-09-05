@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { luZ } from "../figma_app/763686";
 import { az } from "../905/449184";
 import { gl } from "../905/216495";
@@ -9,7 +9,7 @@ import { Jb } from "../figma_app/224338";
 function u() {
   let e = tS() ?? "";
   let t = Jb() ?? "";
-  let i = d4(AF);
+  let i = useSelector(AF);
   return {
     fileKey: e,
     slideId: t,

@@ -1,5 +1,5 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { Yy } from "../figma_app/59509";
 import { Q } from "../905/363675";
 import { N } from "../905/572042";
@@ -29,7 +29,7 @@ let _ = Ju(function (e) {
   });
 }, "EnableAiFeaturesModal");
 export function $$$$p0(e) {
-  let t = wA();
+  let t = useDispatch();
   return jsxs(Yy, {
     variant: "brand",
     "data-testid": e.testId,

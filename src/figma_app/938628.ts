@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { memo, useState, useMemo, createRef, useLayoutEffect, useRef, useCallback, createContext, useEffect, useContext } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { d as _$$d } from "../905/976845";
 import { bL, c$ } from "../905/867927";
 import { q as _$$q } from "../905/932270";
@@ -294,7 +294,7 @@ function J(e, t, r, n, i) {
   i(s);
 }
 function Q(e) {
-  let t = wA();
+  let t = useDispatch();
   let {
     smallNudgeAmount,
     bigNudgeAmount
@@ -1087,7 +1087,7 @@ let eI = "expanded_constraint_control--tbrlInnerInput--zEvmT";
 let eS = "expanded_constraint_control--scrubbableInputEnabled--pOHsZ";
 let ev = "expanded_constraint_control--scrubbableInputSoftDisabled--1qsfu";
 function eA(e) {
-  let t = wA();
+  let t = useDispatch();
   let {
     smallNudgeAmount,
     bigNudgeAmount
@@ -1343,7 +1343,7 @@ function eH(e) {
     canBecomeGroup,
     triggerClassName
   } = e;
-  let b = wA();
+  let b = useDispatch();
   let {
     manager,
     getTriggerProps
@@ -1526,7 +1526,7 @@ function td({
   }, [t, r]);
   !function (e) {
     let t = kl("aspectRatioLockToggled");
-    let r = d4(e => e.mirror.selectionProperties.fillPaints);
+    let r = useSelector(e => e.mirror.selectionProperties.fillPaints);
     let n = md(Vk);
     let s = useRef(null);
     let o = useCallback(() => {
@@ -1961,7 +1961,7 @@ function t5({
       }), 1 === i.size ? mKm[Array.from(i)[0]] : null) : null;
     }, [r, e, t]);
   }(function () {
-    let e = d4(e => e.mirror.selectionProperties.stackLayoutSizeOptions);
+    let e = useSelector(e => e.mirror.selectionProperties.stackLayoutSizeOptions);
     return useMemo(() => new Set((e ?? t7).map(e => e.size)), [e]);
   }());
   let _ = useMemo(() => null == stackSize || gl(stackSize) || stackSize === mKm.FIXED ? null : mKm[stackSize], [stackSize]);
@@ -2073,7 +2073,7 @@ function t4(e) {
   let {
     hideVariableEntrypoints
   } = useContext(_$$Q);
-  let E = d4(e => {
+  let E = useSelector(e => {
     if (gl(e.mirror.selectionProperties.cooperTemplateData)) return oV;
     if (!e.mirror.selectionProperties.cooperTemplateData) return Z64.CUSTOM;
     let t = e.mirror.selectionProperties.cooperTemplateData?.type || "CUSTOM";
@@ -2175,8 +2175,8 @@ function t6(e, t, r) {
 let t7 = [];
 function t9() {
   let e = am();
-  let t = d4(Sh);
-  let r = d4(dK);
+  let t = useSelector(Sh);
+  let r = useSelector(dK);
   let n = kl("stackMode");
   let s = t.map(e => {
     let t = r.get(e);
@@ -2214,7 +2214,7 @@ function re(e) {
   } = tK();
   let S = t3();
   let v = function (e) {
-    let t = d4(e => e.mirror.selectionProperties.stackLayoutSizeOptions) ?? t7;
+    let t = useSelector(e => e.mirror.selectionProperties.stackLayoutSizeOptions) ?? t7;
     let r = wV();
     let s = SC();
     let o = !r && !s || getFeatureFlags().ce_tv_grid_min_max;
@@ -2413,15 +2413,15 @@ function re(e) {
   });
 }
 function rd(e) {
-  let t = wA();
+  let t = useDispatch();
   let r = Um();
-  let s = d4(e => e.mirror.selectionProperties.stackLayoutSizeOptions);
+  let s = useSelector(e => e.mirror.selectionProperties.stackLayoutSizeOptions);
   let [o, l] = useState(!1);
   let d = t6(Tv(), e.axis, mKm.FILL_CONTAINER);
-  let c = d4(e => !!e.mirror.selectionProperties.isNonEditableInstanceSublayerSelected);
+  let c = useSelector(e => !!e.mirror.selectionProperties.isNonEditableInstanceSublayerSelected);
   let u = am();
-  let h = d4(Sh);
-  let m = d4(dK);
+  let h = useSelector(Sh);
+  let m = useSelector(dK);
   let g = kl("stackMode");
   let E = h.map(e => {
     let t = m.get(e);
@@ -2893,8 +2893,8 @@ function rF(e) {
   let [i, s] = lJ("stackPositioning");
   let o = am();
   let l = kl("isNonEditableInstanceSublayerSelected");
-  let d = d4(Sh);
-  let c = d4(dK);
+  let d = useSelector(Sh);
+  let c = useSelector(dK);
   let u = d.map(e => {
     let t = c.get(e);
     return t?.parentGuid;
@@ -3084,7 +3084,7 @@ export let $$r24 = memo(function (e) {
   let _ = t.framePresetsItem && r.transform;
   let h = c[ibQ.SITES_POSITION_ITEM];
   let m = useRef(null);
-  let g = d4(Sh);
+  let g = useSelector(Sh);
   let [f, E] = Xw();
   let y = jsx($$r48, {
     transformDisabled: !r.transform,
@@ -3151,8 +3151,8 @@ export function $$r51(e) {
   let g = kl("stackMode");
   let E = I9();
   let y = null != E && E.some(e => e.type !== E[0].type);
-  let b = d4(e => e.dropdownShown);
-  let T = wA();
+  let b = useSelector(e => e.dropdownShown);
+  let T = useDispatch();
   return getFeatureFlags().eu_fpl_frame_preset_menu ? jsx(eH, {
     canBecomeFrame: !!l,
     canBecomeGroup: !!d,
@@ -3197,11 +3197,11 @@ function r3() {
 export function $$r48(e) {
   let t = kl("nodesAreAllInsideStacks");
   let r = kl("stackPositioning");
-  let o = wA();
+  let o = useDispatch();
   let l = cJ();
   let d = rE() && e.canEditConstraints;
   let c = useRef(null);
-  let u = d4(e => e.dropdownShown);
+  let u = useSelector(e => e.dropdownShown);
   let p = !!t && "AUTO" === r || e.transformDisabled;
   let _ = W();
   let h = function (e) {
@@ -3404,7 +3404,7 @@ export function $$r62(e) {
     wheelMultiplier,
     scrubMultiplier
   } = Xs();
-  let u = wA();
+  let u = useDispatch();
   let p = I9();
   let _ = () => {
     p && (p.every(e => "STAR" === e.type) ? az.trackDefinedEvent("illustration.web_star_count", {}) : p.every(e => "REGULAR_POLYGON" === e.type) && az.trackDefinedEvent("illustration.web_polygon_count", {}));
@@ -3491,7 +3491,7 @@ export let $$r70 = memo(function (e) {
     wheelMultiplier,
     scrubMultiplier
   } = Xs();
-  let _ = wA();
+  let _ = useDispatch();
   return jsx(DE, {
     label: _$$tx("properties.label.arc"),
     icon: null,
@@ -3770,7 +3770,7 @@ let na = {
   }
 };
 export function $$ns3(e) {
-  let t = wA();
+  let t = useDispatch();
   let r = Um();
   let i = e => {
     Y5.updateSelectionProperties({

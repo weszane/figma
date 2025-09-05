@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback, useRef, useEffect, useState } from "react";
-import { d4, wA, Pj } from "../vendor/514228";
+import { useSelector, useDispatch, useStore } from "../vendor/514228";
 import { K } from "../905/443068";
 import { m1T, CeL, Ez5, hMR } from "../figma_app/763686";
 import { eU, md, fp } from "../figma_app/27355";
@@ -33,9 +33,9 @@ function O(e) {
   let r;
   let o;
   let l;
-  let d = d4(e => !e.openFile?.canEdit);
+  let d = useSelector(e => !e.openFile?.canEdit);
   let c = TY();
-  let _ = d4(e => e.mirror.appModel.activeCanvasEditModeType === m1T.HISTORY && e.versionHistory.activeId && "current_version" !== e.versionHistory.activeId);
+  let _ = useSelector(e => e.mirror.appModel.activeCanvasEditModeType === m1T.HISTORY && e.versionHistory.activeId && "current_version" !== e.versionHistory.activeId);
   let m = e.warningLevel;
   m === Wy.WARNING ? (l = tx("fullscreen.pages_panel.memory_usage_try_removing_unneeded_content"), c ? l = tx("fullscreen.pages_panel.memory_usage_recovery_mode_high_content") : d && !_ ? l = tx("fullscreen.pages_panel.memory_usage_warning_edit_access_needed") : d && _ ? l = tx("fullscreen.pages_panel.memory_usage_read_only_view_version_history") : !d && _ && (l = tx("fullscreen.pages_panel.memory_usage_warning_edit_view_version_history"))) : m === Wy.ERROR ? (l = tx("fullscreen.pages_panel.memory_usage_to_avoid_losing_file_access"), c ? l = tx("fullscreen.pages_panel.memory_usage_recovery_mode_high_content") : d && !_ ? l = tx("fullscreen.pages_panel.memory_usage_error_contact_file_owner") : d && _ ? l = tx("fullscreen.pages_panel.memory_usage_read_only_view_version_history") : !d && _ && (l = tx("fullscreen.pages_panel.memory_usage_error_edit_view_version_history"))) : m === Wy.SAFE && e.hasHadUnsafeWarningLevel && (l = tx("fullscreen.pages_panel.memory_usage_this_file_has_enough_memory"), c && (l = tx("fullscreen.pages_panel.memory_usage_recovery_mode_low_content")));
   let f = l;
@@ -114,13 +114,13 @@ export function $$R0(e) {
 }
 let M = Wh(() => eU(Wy.SAFE));
 export function $$P1(e) {
-  let t = wA();
+  let t = useDispatch();
   let {
     toggleManageMemoryModal,
     closeManageMemoryModal
   } = function () {
-    let e = d4(e => e.modalShown?.type === gG.type);
-    let t = wA();
+    let e = useSelector(e => e.modalShown?.type === gG.type);
+    let t = useDispatch();
     let n = useCallback(() => {
       let n = P3();
       sx("toggle_manage_memory_modal", {
@@ -173,7 +173,7 @@ export function $$P1(e) {
     fileKey: a
   }) {
     let [o, s] = fp(M);
-    let d = Pj();
+    let d = useStore();
     let c = F(() => {
       var t;
       var r;

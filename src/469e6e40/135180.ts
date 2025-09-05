@@ -1,6 +1,6 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useCallback, useState, useMemo, useEffect } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { g as _$$g } from "../figma_app/638694";
 import { pO } from "../figma_app/422062";
@@ -96,7 +96,7 @@ function z(e) {
 }
 function V(e) {
   let t = e.abandonedDraftFile;
-  let a = wA();
+  let a = useDispatch();
   let r = G(t);
   let l = t.repo;
   let o = l ? z(l) : null;
@@ -158,10 +158,10 @@ function V(e) {
 function H({
   files: e
 }) {
-  let t = wA();
+  let t = useDispatch();
   if (0 === e.length) return null;
-  let a = e.some((e) => !!e.trashedAt);
-  let s = e.every((e) => !!e.trashedAt);
+  let a = e.some(e => !!e.trashedAt);
+  let s = e.every(e => !!e.trashedAt);
   return jsxs(Fragment, {
     children: [jsx(IU, {
       onClick: () => {
@@ -173,8 +173,8 @@ function H({
       label: _$$t("abandoned_drafts_table.open")
     }), jsx(IU, {
       onClick: () => {
-        let a = e.filter((e) => !e.repo).map((e) => G(e));
-        let n = e.filter((e) => !!e.repo).map((e) => z(e.repo));
+        let a = e.filter(e => !e.repo).map(e => G(e));
+        let n = e.filter(e => !!e.repo).map(e => z(e.repo));
         _$$O2(a, n, t);
       },
       disabled: a,
@@ -190,8 +190,8 @@ function H({
         label: _$$t("abandoned_drafts_table.copy_to_drafts")
       }), jsx(IU, {
         onClick: () => {
-          let a = e.filter((e) => !e.repo).map((e) => e.key);
-          let n = e.filter((e) => !!e.repo).map((e) => e.repo.id);
+          let a = e.filter(e => !e.repo).map(e => e.key);
+          let n = e.filter(e => !!e.repo).map(e => e.repo.id);
           t(b4({
             fileKeys: a,
             repoIds: n
@@ -202,8 +202,8 @@ function H({
       })]
     }), jsx(IU, {
       onClick: () => {
-        let a = e.filter((e) => !e.repo).map((e) => e.key);
-        let n = e.filter((e) => !!e.repo).map((e) => e.repo.id);
+        let a = e.filter(e => !e.repo).map(e => e.key);
+        let n = e.filter(e => !!e.repo).map(e => e.repo.id);
         t(Fh({
           fileKeys: a,
           repoIds: n
@@ -218,7 +218,7 @@ let X = "fig_file_checkpoints.updated_at";
 let Q = "created_at";
 let Z = [X, Q];
 function ee(e) {
-  let t = wA();
+  let t = useDispatch();
   let [a, r] = useState({
     columnName: K,
     isReversed: !1
@@ -226,8 +226,8 @@ function ee(e) {
   let [l, o] = useState("");
   let [d, _] = useState(!1);
   let u = (e, t) => e.columnName === t ? !e.isReversed : Z.includes(t);
-  let m = useCallback((e) => {
-    r((t) => ({
+  let m = useCallback(e => {
+    r(t => ({
       columnName: e,
       isReversed: u(t, e)
     }));
@@ -254,10 +254,10 @@ function ee(e) {
   })));
   let F = useMemo(() => U.data?.project, [U]);
   let q = "loaded" === U.status ? _$$b(F) : "";
-  let $ = useMemo(() => Array.from(new Set(p.data?.abandonedDraftFiles.filter((t) => !!t.file && t.file.folderId === e.abandonedDraftFolderId && (d || !t.file.trashedAt) && !t.file.deletedAt && !t.file.sourceFileKey).map((e) => e.file))) ?? [], [p, e.abandonedDraftFolderId, d]);
+  let $ = useMemo(() => Array.from(new Set(p.data?.abandonedDraftFiles.filter(t => !!t.file && t.file.folderId === e.abandonedDraftFolderId && (d || !t.file.trashedAt) && !t.file.deletedAt && !t.file.sourceFileKey).map(e => e.file))) ?? [], [p, e.abandonedDraftFolderId, d]);
   let B = "loaded" === p.status && p.data.abandonedDraftFiles.hasNextPage() ? () => p.data?.abandonedDraftFiles.loadNext(20) : void 0;
-  let G = useCallback((e) => !e.trashedAt, []);
-  let z = useCallback((e) => {
+  let G = useCallback(e => !e.trashedAt, []);
+  let z = useCallback(e => {
     t(V3({
       url: e.url
     }));
@@ -272,15 +272,15 @@ function ee(e) {
     children: [jsx(_$$K, {
       title: q
     }), jsx(Cj, {
-      actionBar: (e) => jsx(H, {
+      actionBar: e => jsx(H, {
         files: e
       }),
       columns: [{
         name: _$$t("abandoned_drafts_table.file_name"),
         className: "abandoned_draft_files_table--fileNameColumn--wRvXv abandoned_draft_files_table--column--DMRf- table--column--974RA",
         sorting_key: K,
-        getSortValue: (e) => e.name,
-        cellComponent: (e) => jsxs("div", {
+        getSortValue: e => e.name,
+        cellComponent: e => jsxs("div", {
           className: _$$s.flex.itemsCenter.gap12.overflowHidden.h48.wFull.$,
           children: [jsx("div", {
             className: _$$s.relative.flexShrink0.hFull.$,
@@ -301,16 +301,16 @@ function ee(e) {
         name: _$$t("abandoned_drafts_table.modified_at"),
         className: "abandoned_draft_files_table--modifiedAtColumn--GOXML abandoned_draft_files_table--column--DMRf- table--column--974RA",
         sorting_key: X,
-        getSortValue: (e) => e.touchedAt,
-        cellComponent: (e) => jsx(h1, {
+        getSortValue: e => e.touchedAt,
+        cellComponent: e => jsx(h1, {
           date: e.touchedAt
         })
       }, {
         name: _$$t("abandoned_drafts_table.created_at"),
         className: "abandoned_draft_files_table--createdAtColumn--z6vBs abandoned_draft_files_table--column--DMRf- table--column--974RA",
         sorting_key: Q,
-        getSortValue: (e) => e.createdAt.toDateString(),
-        cellComponent: (e) => jsx(h1, {
+        getSortValue: e => e.createdAt.toDateString(),
+        cellComponent: e => jsx(h1, {
           date: e.createdAt
         })
       }],
@@ -325,14 +325,14 @@ function ee(e) {
           })
         })
       }),
-      getItemKey: (e) => e.key || "",
+      getItemKey: e => e.key || "",
       hasNewScrollContext: !0,
       isBannerHeightDynamic: !0,
       isLoading: "loaded" !== p.status,
       isRowClickable: G,
       itemTypeContext: {
         itemType: "file",
-        getSelectedCountString: (e) => _$$t("multi_select_list.selected_count_file", {
+        getSelectedCountString: e => _$$t("multi_select_list.selected_count_file", {
           numSelected: e
         })
       },
@@ -343,7 +343,7 @@ function ee(e) {
       rightActionColumns: [{
         name: "menu-cell",
         className: oi,
-        cellComponent: (e) => jsx(V, {
+        cellComponent: e => jsx(V, {
           abandonedDraftFile: e
         })
       }, VU],
@@ -380,10 +380,10 @@ function ee(e) {
   });
 }
 export function $$et0(e) {
-  let t = wA();
+  let t = useDispatch();
   let a = _6();
-  let g = d4((e) => getPermissionsStateMemoized(e));
-  let h = d4((e) => e.teams);
+  let g = useSelector(e => getPermissionsStateMemoized(e));
+  let h = useSelector(e => e.teams);
   let x = px();
   let b = j_(x);
   let v = "loaded" === b.status && pO({

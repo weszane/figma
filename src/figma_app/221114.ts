@@ -1,6 +1,6 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useMemo, useEffect, createRef, useRef, useCallback, useState } from "react";
-import { Ng, wA } from "../vendor/514228";
+import { connect, useDispatch } from "../vendor/514228";
 import { debug } from "../figma_app/465776";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { E as _$$E } from "../905/632989";
@@ -1186,7 +1186,7 @@ class eM extends uA {
   }
 }
 eM.displayName = "VersionHistoryView";
-export let $$eF7 = Ng(l$)(eM);
+export let $$eF7 = connect(l$)(eM);
 export function $$ej5(e) {
   let {
     onClose,
@@ -1290,7 +1290,7 @@ function eB({
   idx: s,
   isSection: o
 }) {
-  let l = wA();
+  let l = useDispatch();
   let d = ud();
   return jsx(Fragment, {
     children: e.map((a, c) => jsx($$eR4, {

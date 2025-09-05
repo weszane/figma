@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useMemo, createElement, useEffect } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { Ez5, nQ7 } from "../figma_app/763686";
 import { Xr, md, zl } from "../figma_app/27355";
 import { debugState } from "../905/407919";
@@ -105,7 +105,7 @@ export function $$H1({
     } = getPlanAndPlanUser(FProductAccessType.SLIDES);
     return plan?.tier !== FPlanNameType.STARTER && plan?.tier !== FPlanNameType.STUDENT && (planUser?.seatTypeLicenseTypes?.includes(FProductAccessType.SLIDES) ?? !1);
   }();
-  let v = wA();
+  let v = useDispatch();
   let T = x.data === qo.ORG;
   let S = zl.get(Z);
   let j = zl.get(Me);

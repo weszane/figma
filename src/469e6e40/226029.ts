@@ -10,7 +10,7 @@ import { T5, S2, D6, A8, X$ } from "../figma_app/465071";
 import { WZ } from "../905/893645";
 import { F_, EL } from "../905/858282";
 import { rRT, LPt } from "../figma_app/6204";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { E as _$$E } from "../905/632989";
 import { bL, Y9, JU, UC } from "../figma_app/57171";
 import { O as _$$O } from "../905/487602";
@@ -214,7 +214,7 @@ function ev(e) {
   });
 }
 function ef(e) {
-  let t = wA();
+  let t = useDispatch();
   let a = "orgAdminSettings" === e.selectedView.view && e.selectedView.orgAdminSettingsViewTab === J7.DASHBOARD;
   let s = "billingGroupDashboard" === e.selectedView.view && e.selectedView.selectedTab === _$$D.REQUESTS;
   let i = a || s;
@@ -301,7 +301,7 @@ function ey(e) {
     text,
     webEventId
   } = e;
-  let d = wA();
+  let d = useDispatch();
   let c = _6();
   let _ = "workspace" !== c.view && "licenseGroup" !== c.view && c.view === e.selectViewArgs.view && ("orgAdminSettings" === c.view && "orgAdminSettings" === e.selectViewArgs.view ? c.orgAdminSettingsViewTab === e.selectViewArgs.orgAdminSettingsViewTab : "teamAdminConsole" === c.view && "teamAdminConsole" === e.selectViewArgs.view ? c.teamAdminConsoleViewTab === e.selectViewArgs.teamAdminConsoleViewTab : void 0);
   let u = useCallback(() => {
@@ -331,7 +331,7 @@ function ey(e) {
   });
 }
 function eC() {
-  let e = wA();
+  let e = useDispatch();
   let t = useCallback(() => {
     e(sf({
       view: "recentsAndSharing"
@@ -419,7 +419,7 @@ function eI(e) {
   }) : d;
 }
 function eT(e) {
-  let t = wA();
+  let t = useDispatch();
   let a = _6();
   let s = useCallback(e => {
     t(sf({
@@ -452,7 +452,7 @@ function eT(e) {
   });
 }
 function eA(e) {
-  let t = wA();
+  let t = useDispatch();
   let a = _6();
   let s = useCallback(e => {
     t(sf({
@@ -580,8 +580,8 @@ function eL() {
   });
 }
 function eD(e) {
-  let t = wA();
-  let a = d4(t => t.teams[e.id]);
+  let t = useDispatch();
+  let a = useSelector(t => t.teams[e.id]);
   let s = !!(!a?.student_team && a?.pro_team);
   let r = useMemo(() => function (e, t, a) {
     let s = "teamAdminConsole";
@@ -693,7 +693,7 @@ function eM() {
   }) : null;
 }
 function eU() {
-  let e = d4(({
+  let e = useSelector(({
     mobileNavShown: e
   }) => e);
   return jsx("div", {

@@ -1,5 +1,5 @@
 import { useMemo, useCallback, useState } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { isNotNullish } from "../figma_app/95419";
 import { l as _$$l } from "../905/716947";
 import { getFeatureFlags } from "../905/601108";
@@ -46,7 +46,7 @@ let $$N5 = _$$n(({
 } = {}) => {
   let i = LH();
   let a = q5();
-  let s = wA();
+  let s = useDispatch();
   let [d] = IT(R({
     currentOrgId: i,
     subscriptionFileKey: a?.key,

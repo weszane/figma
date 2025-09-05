@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback, useMemo, useState } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { defaultLanguage, languageCodes, subsetLanguages, allLanguages } from "../905/816253";
 import { Pu, Xo } from "../905/528121";
 import { throwError } from "../figma_app/465776";
@@ -32,7 +32,7 @@ export let $$P0 = Ju(function ({
   onClose: t,
   source: i
 }) {
-  let l = wA();
+  let l = useDispatch();
   let T = Gq()?.getPrimaryLocale(!0) ?? defaultLanguage;
   let P = hS({
     open: e,
@@ -206,7 +206,7 @@ export let $$P0 = Ju(function ({
   });
 }, "LanguageSelectorModal", ZU.YES);
 export function $$O2() {
-  let e = d4(e => e.user.locale);
+  let e = useSelector(e => e.user.locale);
   return jsx(Fragment, {
     children: L(e)
   });

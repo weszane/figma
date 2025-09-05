@@ -1,4 +1,4 @@
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { Xr, md } from "../figma_app/27355";
 import { sx } from "../905/449184";
 import { MZ } from "../figma_app/925970";
@@ -8,9 +8,9 @@ import { dd } from "../figma_app/604494";
 export function $$c0() {
   let e = Xr(OM);
   let t = md(dd);
-  let r = d4(e => e.search.sessionId);
-  let c = d4(e => e.search.queryId);
-  let u = d4(e => e.search.parameters.query);
+  let r = useSelector(e => e.search.sessionId);
+  let c = useSelector(e => e.search.queryId);
+  let u = useSelector(e => e.search.parameters.query);
   let p = li();
   return (n, i) => {
     let o = MZ();

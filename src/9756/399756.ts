@@ -1,7 +1,7 @@
 import _require from "../5973/625973";
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState, useRef, useCallback } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { S as _$$S, V } from "../905/802325";
 import { zk, l7 } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
@@ -103,7 +103,7 @@ let k = async ({
   clientLifecycleId: r
 }));
 export function $$y0() {
-  let e = wA();
+  let e = useDispatch();
   let {
     start,
     stop,

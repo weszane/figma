@@ -1,5 +1,5 @@
 import { useState, useMemo, useRef, useCallback, useEffect } from "react";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { o5, IA } from "../905/859698";
 import { glU, Vzr, BXd, ZiZ } from "../figma_app/763686";
 import { v as _$$v } from "../905/439972";
@@ -87,8 +87,8 @@ export function $$F1(e) {
   let {
     componentUpdatesForAllPages,
     stateGroupUpdatesForAllPages
-  } = d4(ij);
-  let c = d4(e => e.mirror.appModel.currentPage);
+  } = useSelector(ij);
+  let c = useSelector(e => e.mirror.appModel.currentPage);
   let u = useMemo(() => [...componentUpdatesForAllPages, ...stateGroupUpdatesForAllPages].reduce((e, t) => (t.type === PW.STATE_GROUP ? e[t.key] = {
     updateAsset: t,
     instanceIdsToUpdate: jO(t, c)
@@ -130,7 +130,7 @@ export function $$F1(e) {
       glU.selectInstances(getSingletonSceneGraph().guidFromDeveloperFriendlyId(v.instanceId), !1);
     });
   }, [v, t]);
-  let k = d4(e => {
+  let k = useSelector(e => {
     let t = getSingletonSceneGraph().guidFromDeveloperFriendlyId(v?.instanceId ?? _$$v.INVALID);
     return f5(e, t);
   });
@@ -158,7 +158,7 @@ export function $$M8(e, t, i, a, o) {
   let p = useMemo(() => !!o && o.instanceIdsToUpdate.map(glU.getBackingAssetRef).every(e => V(a, e)), [a, o, l]);
   let m = useRef(new q(100));
   let h = function (e) {
-    let t = wA();
+    let t = useDispatch();
     let [i, a] = useState(Ok());
     let s = useRef(null);
     let o = `${Av(e)}/${Dg(e)}`;
@@ -191,7 +191,7 @@ export function $$j2(e) {
     updateStyle,
     selectedOutdatedStyleGUID
   } = e;
-  let o = d4(_Q);
+  let o = useSelector(_Q);
   let l = T7(updateStyle, o);
   let d = useRef(V9(l, updateStyle, selectedOutdatedStyleGUID)).current;
   let {
@@ -203,20 +203,20 @@ export function $$j2(e) {
   } = L(useMemo(() => d ? [d.styleGUIDs] : [], [d]));
   let E = d ? d.styleGUIDs[innerArrayIndex] : "";
   let x = useMemo(t, []);
-  let w = d4(e => E ? x(e, E) : null);
+  let w = useSelector(e => E ? x(e, E) : null);
   let T = useMemo($4, []);
-  let k = d4(e => d ? T(e, d.styleGUIDs) : new Map());
+  let k = useSelector(e => d ? T(e, d.styleGUIDs) : new Map());
   let N = !!d && !!Object.keys(d).length && !!E;
-  let P = d4(kc);
-  let O = d4(O1);
+  let P = useSelector(kc);
+  let O = useSelector(O1);
   let D = useMemo(() => !!E && G(updateStyle, P, O, E, w?.version ?? null, w?.key ?? null), [P, O, updateStyle, E, w]);
   let F = useMemo(() => !!d && d.styleGUIDs.every(e => G(d.updateAsset, P, O, e, k?.get(e)?.version ?? null, k?.get(e)?.key ?? null)), [k, d, P, O]);
   let {
     beforeImage,
     afterImage
   } = function (e, t, i, o) {
-    let l = wA();
-    let d = d4(e => e.theme.visibleTheme);
+    let l = useDispatch();
+    let d = useSelector(e => e.theme.visibleTheme);
     let c = Bx(d);
     let g = _$$R(e => sS(e) || "");
     let y = Oo(e, g);
@@ -285,7 +285,7 @@ export function $$j2(e) {
   } : null;
 }
 function U(e, t, i, a) {
-  let o = d4(e => e.theme.visibleTheme);
+  let o = useSelector(e => e.theme.visibleTheme);
   let l = Bx(o);
   let [d, c] = useState([Ok(), Ok()]);
   let m = useRef(null);
@@ -367,11 +367,11 @@ export function $$z3(e, t) {
 }
 export function $$H4(e) {
   let t = useMemo(bd, []);
-  let i = d4(i => t(i, "INSTANCE_PANEL" === e.source ? e.instanceAndSublayerGUIDs : []));
+  let i = useSelector(i => t(i, "INSTANCE_PANEL" === e.source ? e.instanceAndSublayerGUIDs : []));
   let {
     componentUpdatesForAllPages,
     stateGroupUpdatesForAllPages
-  } = d4(ij);
+  } = useSelector(ij);
   let {
     componentInstanceUpdateInfo,
     stateInstanceUpdateInfo

@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
@@ -18,7 +18,7 @@ import { Ju } from "../905/102752";
 import { e as _$$e } from "../905/393279";
 let $$j0 = Ju(function (e) {
   let t = hS(e);
-  let a = wA();
+  let a = useDispatch();
   let [v, j] = useState({
     inputValue: "",
     tokens: (e.orgSamlConfig.domains || []).map(e => ({

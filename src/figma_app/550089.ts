@@ -1,7 +1,7 @@
 import { jsx, Fragment } from "react/jsx-runtime";
 import { useRef, useState, useEffect, useCallback, useMemo } from "react";
 import { flushSync } from "../vendor/944059";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { glU, Egt } from "../figma_app/763686";
 import { x7, AD } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
@@ -96,12 +96,12 @@ function L(e, t, r) {
 }
 function P(e) {
   let t = J2(UK().renderRulers);
-  let r = d4(e => e.mirror.appModel.showUi);
+  let r = useSelector(e => e.mirror.appModel.showUi);
   let c = lg();
   let u = useRef(Y5.getViewportInfo());
   let [p, _] = useState(Y5.getViewportInfo());
   !function (e) {
-    let t = d4(e => "prototype" === e.selectedView.view || "communityHub" === e.selectedView.view);
+    let t = useSelector(e => "prototype" === e.selectedView.view || "communityHub" === e.selectedView.view);
     useEffect(() => {
       !t && Y5.isReady() && (e(Y5.getViewportInfo()), H());
     }, [e, t]);

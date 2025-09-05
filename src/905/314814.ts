@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { Suspense, useState } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { isNullish } from "../figma_app/95419";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { N as _$$N } from "../905/438674";
@@ -87,13 +87,13 @@ function z(e) {
   });
 }
 function H(e) {
-  let t = wA();
+  let t = useDispatch();
   let i = hS(e);
   let d = XP({
     reportErrorsToTeam: _$$e.SCALE
   });
   let c = xQ();
-  let f = d4(e => e.teamBilling);
+  let f = useSelector(e => e.teamBilling);
   let A = d.key.parentId;
   let E = _$$g(f.summary.total_upgraded_user_counts, {
     throwOnError: !0

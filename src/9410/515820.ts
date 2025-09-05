@@ -21,7 +21,7 @@ import { Uc } from "../figma_app/741237";
 import { _Z } from "../figma_app/623300";
 import { o3, nt } from "../905/226610";
 import { wV } from "../figma_app/779965";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { F as _$$F } from "../905/680873";
 import { Us } from "../figma_app/637027";
 import { V as _$$V2 } from "../905/223767";
@@ -114,7 +114,7 @@ function C({
 function W({
   onHeightChange: e
 }) {
-  let t = wA();
+  let t = useDispatch();
   let i = q5();
   let a = FC();
   let s = p8("pagesList").length;
@@ -127,7 +127,7 @@ function W({
   let h = useCallback(e => {
     p.current?.(e?.getBoundingClientRect().height || 0);
   }, [s]);
-  let m = d4(e => e.isOpenFileLoadedFromLiveGraph);
+  let m = useSelector(e => e.isOpenFileLoadedFromLiveGraph);
   let f = i?.team;
   let _ = i?.plan;
   let x = f && canEditTeam(f.id, a) && !XX(f);

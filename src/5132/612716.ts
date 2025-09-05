@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { Suspense, useState } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { ServiceCategories as _$$e } from "../905/165054";
 import c from "classnames";
 import { P as _$$P } from "../vendor/348225";
@@ -23,7 +23,7 @@ import { Ju, IX } from "../905/712921";
 import { N as _$$N } from "../905/809096";
 import { ey } from "../figma_app/918700";
 var $$n = c;
-var $$$$I1 = ((e) => (e[e.SMALL = 0] = "SMALL", e[e.LARGE = 1] = "LARGE", e))($$$$I1 || {});
+var $$$$I1 = (e => (e[e.SMALL = 0] = "SMALL", e[e.LARGE = 1] = "LARGE", e))($$$$I1 || {});
 function z({
   headerText: e,
   descriptionText: l,
@@ -91,7 +91,7 @@ function C({
 }
 function E() {
   let e = LN();
-  let l = Oq.exclude([ud.DEV_MODE]).dict((l) => ({
+  let l = Oq.exclude([ud.DEV_MODE]).dict(l => ({
     currency: e,
     billableProductKey: l,
     billableProductVariantKey: null,
@@ -165,7 +165,7 @@ export function $$N0({
   cardsClickable: I
 }) {
   let [z, N] = useState(e[0].id);
-  let M = wA();
+  let M = useDispatch();
   let W = 1 === T ? jsx("div", {
     className: _$$s.p16.pt14.pb36.$,
     children: jsx(_$$E, {
@@ -181,7 +181,7 @@ export function $$N0({
       children: l
     })
   });
-  let F = e.map((e) => jsx(jm, {
+  let F = e.map(e => jsx(jm, {
     role: "button",
     tabIndex: 0,
     className: $$n()("fullscreen_help_upsells_modal_base--panelTabs--WjAUp", z === e.id && "fullscreen_help_upsells_modal_base--panelTabsActive--cM4NL"),

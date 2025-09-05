@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { NLJ } from "../figma_app/763686";
 import { eU } from "../figma_app/27355";
 import { VU } from "../905/625959";
@@ -184,7 +184,7 @@ export function $$u3(e) {
   }
 }
 export function $$p1() {
-  let e = d4(e => e.mirror.appModel.keyboardShortcuts);
+  let e = useSelector(e => e.mirror.appModel.keyboardShortcuts);
   return useCallback(t => c1(e, t), [e]);
 }
 export function $$_7(e) {

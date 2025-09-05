@@ -4,7 +4,7 @@ import { tH as _$$tH } from "../905/751457";
 import { sv, Jc, aD, Av, Dg, VJ, eS as _$$eS } from "../figma_app/646357";
 import { s as _$$s } from "../905/587936";
 import { fA, m9 } from "../905/542608";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { getFeatureFlags } from "../905/601108";
 import { fp, md, eU as _$$eU, Iz, Xr } from "../figma_app/27355";
 import { az, sx } from "../905/449184";
@@ -166,7 +166,7 @@ import { M3 } from "../figma_app/119475";
 let _ = new jk("performance.ds_eco.load_time", {});
 let A = rt(!1);
 function y(e) {
-  let t = d4(e => e.openFile);
+  let t = useSelector(e => e.openFile);
   let [i, n] = fp(A);
   let {
     hasSwitchedTabs,
@@ -190,8 +190,8 @@ function y(e) {
   }, [i, t?.key, t?.parentOrgId, t?.teamId, n, e, hasSwitchedTabs, tabManager.activeTab]);
 }
 function x() {
-  let e = wA();
-  let t = d4(e => e.modalShown);
+  let e = useDispatch();
+  let t = useSelector(e => e.modalShown);
   let i = useCallback(() => {
     t && (e(AS()), setTimeout(() => {
       e(_$$to({
@@ -237,7 +237,7 @@ function ea({
   } = zm();
   let u = function () {
     let e = Um();
-    let t = wA();
+    let t = useDispatch();
     return useCallback(() => {
       e && e.type === _$$K.LIBRARY_MODAL && t(oB());
     }, [t, e]);
@@ -1637,7 +1637,7 @@ function td({
   });
 }
 function tc() {
-  let e = wA();
+  let e = useDispatch();
   let t = ol();
   let i = q5();
   let {
@@ -1885,7 +1885,7 @@ function tC() {
 function tO({
   kbPath: e
 }) {
-  let t = wA();
+  let t = useDispatch();
   let i = useCallback(() => {
     t(_$$to({
       type: _$$i
@@ -1932,7 +1932,7 @@ function tM({
 function tB() {
   let e = md(p9);
   return {
-    publishProgress: d4(e => e.library.publishProgress),
+    publishProgress: useSelector(e => e.library.publishProgress),
     isPublished: md(qN),
     isPublishingModalEnabled: e
   };
@@ -1975,8 +1975,8 @@ function tz({
   });
 }
 let tH = () => {
-  let e = wA();
-  let t = d4(_$$fA);
+  let e = useDispatch();
+  let t = useSelector(_$$fA);
   let {
     sessionId
   } = sz() ?? {};
@@ -2336,7 +2336,7 @@ function il({
 function id() {
   let e = function () {
     let e = ol();
-    let t = wA();
+    let t = useDispatch();
     let {
       sessionId
     } = zm();
@@ -2403,7 +2403,7 @@ function id() {
 }
 function ic() {
   let e = function () {
-    let e = wA();
+    let e = useDispatch();
     let t = q5();
     let {
       sessionId
@@ -2747,7 +2747,7 @@ function np({
     numOutdatedInstances,
     toggleReviewUpdatesModal
   } = function (e) {
-    let t = wA();
+    let t = useDispatch();
     let i = no(e);
     let n = e.type === PW.STYLE;
     let r = e.type === PW.VARIABLE_SET;
@@ -2985,7 +2985,7 @@ function ny({
   let c = _$$er();
   let h = function () {
     let [e, t] = fp(iz);
-    let i = wA();
+    let i = useDispatch();
     let {
       componentUpdateKeys,
       stateGroupUpdateKeys,
@@ -3061,7 +3061,7 @@ function ny({
     return e?.metadata;
   }();
   let g = Xr(wy);
-  let _ = d4(_$$c2);
+  let _ = useSelector(_$$c2);
   let A = md(yV);
   let y = A?.parentOrgId?.toString();
   let b = _.file_team_id?.toString();
@@ -3078,7 +3078,7 @@ function ny({
     updateAll
   } = se(w, E, o);
   let [F, M] = useState(!1);
-  let j = d4(e => !!e.openFile && VP(e.loadingState, `GET_USED_COMPONENTS_STATE_GROUPS_FOR_${e.openFile.key}`));
+  let j = useSelector(e => !!e.openFile && VP(e.loadingState, `GET_USED_COMPONENTS_STATE_GROUPS_FOR_${e.openFile.key}`));
   let U = _$$tS() || void 0;
   let V = E === aD.ALL;
   let [G, z] = useState(!1);

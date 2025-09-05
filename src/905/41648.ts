@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
@@ -19,7 +19,7 @@ let _ = new class {
     return XHR.put(`/api/resource_connection/${e}/disconnect`);
   }
 }();
-let b = Ju(function(e) {
+let b = Ju(function (e) {
   let t = () => {
     r(Ce());
   };
@@ -27,7 +27,7 @@ let b = Ju(function(e) {
     ...e,
     onClose: t
   });
-  let r = wA();
+  let r = useDispatch();
   return jsx(fu, {
     name: "Project Disconnect Modal",
     properties: {
@@ -74,8 +74,8 @@ let b = Ju(function(e) {
     })
   });
 }, "ResourceDisconnectSuccessModal");
-let $$v0 = Ju(function(e) {
-  let t = wA();
+let $$v0 = Ju(function (e) {
+  let t = useDispatch();
   let i = hS(e);
   let [f, A] = useState(!1);
   let y = () => {
@@ -169,4 +169,4 @@ let $$v0 = Ju(function(e) {
     })
   });
 }, "ResourceDisconnectModal");
-export const K = $$v0; 
+export const K = $$v0;

@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { w3z, glU } from "../figma_app/763686";
 import { U } from "../figma_app/901889";
 import { sf } from "../905/929976";
@@ -39,14 +39,14 @@ export function $$p2(e, t) {
   } : n;
 }
 export function $$g3() {
-  let e = wA();
+  let e = useDispatch();
   let t = _6();
   return useCallback(n => {
     _$(e, t, n);
   }, [e, t]);
 }
 export function $$f4() {
-  let e = wA();
+  let e = useDispatch();
   let t = _6();
   return useCallback(() => {
     Ep(e, t);
@@ -54,7 +54,7 @@ export function $$f4() {
 }
 export function $$h1(e) {
   let t = $$m0(e);
-  let n = wA();
+  let n = useDispatch();
   let a = U();
   let l = n0();
   let u = VS({

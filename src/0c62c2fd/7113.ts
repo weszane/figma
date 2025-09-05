@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { Ay } from "../905/612521";
 import { Fo } from "../905/63728";
 import { kg } from "../figma_app/976345";
@@ -11,7 +11,7 @@ if (443 == require.j) {}
 if (443 == require.j) {}
 export function $$m0() {
   let e = dq();
-  let t = wA();
+  let t = useDispatch();
   return useCallback((r, a) => {
     if (t(kg({
       clickedResourceType: "workspace",

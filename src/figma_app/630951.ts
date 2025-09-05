@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { l as _$$l } from "../905/716947";
 import { md } from "../figma_app/27355";
 import { n1 } from "../figma_app/657017";
@@ -105,7 +105,7 @@ export function $$y2() {
 }
 export function $$b6() {
   let e = je();
-  let t = d4(e => Object.keys(e.library.local.components).length);
+  let t = useSelector(e => Object.keys(e.library.local.components).length);
   let r = md(TG);
   if (e.data && "loaded" === e.status) {
     var n;

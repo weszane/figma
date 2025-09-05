@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState } from "react";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { sx } from "../905/449184";
 import { l as _$$l } from "../905/296640";
 import { debugState } from "../905/407919";
@@ -34,7 +34,7 @@ import { n0, we, pv, YJ, Ow, lg, lJ, Lk, x6, aP, $O, Qp, IO, re, gn, Bb, fY, GT,
 import { A as _$$A2 } from "../6828/645333";
 import { A as _$$A3 } from "../6828/696513";
 let j = _$$M();
-var U = ((e) => (e.CHOOSE_EDITOR_TYPE = "choose_editor_type_step", e.CHOOSE_TEMPLATE = "choose_template_step", e.SUCCESS_SCREEN = "success_screen_step", e.HIDDEN = "hidden", e))(U || {});
+var U = (e => (e.CHOOSE_EDITOR_TYPE = "choose_editor_type_step", e.CHOOSE_TEMPLATE = "choose_template_step", e.SUCCESS_SCREEN = "success_screen_step", e.HIDDEN = "hidden", e))(U || {});
 function B({
   children: e,
   onClick: t
@@ -92,7 +92,7 @@ function V({
   selectedTemplate: e,
   setSelectedTemplate: t
 }) {
-  let r = d4((e) => $A(e.selectedView));
+  let r = useSelector(e => $A(e.selectedView));
   return jsx(Fragment, {
     children: r ? jsxs(Fragment, {
       children: [jsx(z, {
@@ -196,8 +196,8 @@ function z({
 export let $$W0 = Ju(function ({
   resourceType: e
 }) {
-  let t = wA();
-  let r = d4((e) => $A(e.selectedView));
+  let t = useDispatch();
+  let r = useSelector(e => $A(e.selectedView));
   let [b, C] = useState("");
   let [F, U] = useState(-1);
   let [z, W] = _$$l(r ? "choose_template_step" : "choose_editor_type_step", `${e}_create_flow_change_step`, {
@@ -288,7 +288,7 @@ export let $$W0 = Ju(function ({
   let ei = () => {
     j.openExtensionDirectory(F);
   };
-  let ea = d4((e) => "fullscreen" === e.selectedView.view);
+  let ea = useSelector(e => "fullscreen" === e.selectedView.view);
   let es = E3();
   let eo = es === nT.Design || es === nT.DevHandoff;
   let el = es === nT.Whiteboard;
@@ -296,7 +296,7 @@ export let $$W0 = Ju(function ({
   let ec = !ea || eo;
   let eu = !ea || el;
   let ep = !ea || ed;
-  let e_ = (e) => {
+  let e_ = e => {
     "Enter" === e.key || e.keyCode === Uz.ENTER ? "choose_editor_type_step" === z ? W("choose_template_step") : "choose_template_step" === z ? er() : "success_screen_step" === z && en() : ("Escape" === e.key || e.keyCode === Uz.ESCAPE) && en();
   };
   let eh = jsx(Fragment, {
@@ -323,7 +323,7 @@ export let $$W0 = Ju(function ({
       "data-tooltip-key": "plugin-new-development-modal",
       "data-tooltip-show-immediately": !0,
       "data-tooltip-type": Ib.TEXT,
-      onChange: (e) => {
+      onChange: e => {
         e.currentTarget.value && Z && Q(!1);
         C(e.currentTarget.value);
       },
@@ -342,7 +342,7 @@ export let $$W0 = Ju(function ({
         className: re,
         onKeyDown: e_,
         disableClickOutsideToHide: !0,
-        onModalClick: (e) => e.stopPropagation(),
+        onModalClick: e => e.stopPropagation(),
         children: [jsx(s_, {
           dispatch: t
         }), jsx("div", {

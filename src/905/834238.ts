@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { X } from "../905/128376";
 import { az } from "../905/449184";
 import { HB, VA, ZS } from "../3973/538504";
@@ -24,8 +24,8 @@ function v(e) {
   return "other" === e || "something_else" === e;
 }
 function I(e) {
-  let t = wA();
-  let i = d4(e => e.user);
+  let t = useDispatch();
+  let i = useSelector(e => e.user);
   let _ = Um();
   let b = i.profile?.job_title ?? "";
   let I = "student" === b || "educator" === b ? b : HB(b);

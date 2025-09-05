@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback, useMemo, useEffect, useRef, useState } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { c2 } from "../905/382883";
 import { t as _$$t } from "../905/150656";
 import { N as _$$N } from "../905/438674";
@@ -151,7 +151,7 @@ function eO({
   let {
     existingHubFile
   } = e.deps;
-  let Y = wA();
+  let Y = useDispatch();
   let {
     trackEvent
   } = j6();
@@ -538,11 +538,11 @@ function eR(e) {
     existingHubFile
   } = e;
   let n = Pc();
-  let o = d4(e => xw(e) ?? void 0, c2);
+  let o = useSelector(e => xw(e) ?? void 0, c2);
   let l = sZ();
-  let d = d4(e => Rv(figFile?.team_id ?? null, e, existingHubFile ?? null, figFile?.parent_org_id ?? null), c2);
-  let c = d4(e => e.authedProfilesById);
-  let u = d4(e => e.authedActiveCommunityProfile ?? void 0);
+  let d = useSelector(e => Rv(figFile?.team_id ?? null, e, existingHubFile ?? null, figFile?.parent_org_id ?? null), c2);
+  let c = useSelector(e => e.authedProfilesById);
+  let u = useSelector(e => e.authedActiveCommunityProfile ?? void 0);
   let p = useMemo(async () => figFile ? (await mN(figFile)) ?? [] : [], [figFile]);
   let _ = eY();
   let h = _$$t3();
@@ -589,7 +589,7 @@ function eP({
   cannotPublishAsHubFileReason: s,
   onPublishFailure: o
 }) {
-  let l = wA();
+  let l = useDispatch();
   let d = _$$H(o);
   let {
     trackEvent

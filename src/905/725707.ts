@@ -1,5 +1,5 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { N } from "../905/720559";
 import { xk } from "@stylexjs/stylex";
 import { t as _$$t } from "../905/303541";
@@ -16,7 +16,7 @@ let m = {
   }
 };
 export function $$h0(e) {
-  let t = wA();
+  let t = useDispatch();
   return jsx(Q.Consumer, {
     children: i => i.useLargePreviewRows ? jsx("div", {
       className: "x1aawmmo xdyg6lv xzi3mdb x18d9i69",

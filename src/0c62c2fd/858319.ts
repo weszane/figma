@@ -1,5 +1,5 @@
 import { useEffect, useCallback } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { hZ, cL } from "../905/748726";
 import { um } from "../905/14223";
 import { Pc } from "../905/372672";
@@ -10,8 +10,8 @@ export function $$c0({
   parentOrg: t,
   orgDomains: r
 }) {
-  let c = wA();
-  let u = d4(e => e.contacts);
+  let c = useDispatch();
+  let u = useSelector(e => e.contacts);
   let m = Pc();
   useEffect(() => {
     c(um());

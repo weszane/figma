@@ -2,7 +2,7 @@ import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { Pt } from "../figma_app/806412";
 import { Bu, d3 } from "../figma_app/156285";
 import { useMemo, useState, useRef, useEffect, useCallback } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { j0r, rrT, glU, plo } from "../figma_app/763686";
 import { l7 } from "../905/189185";
 import { AD, sH, Hr } from "../905/871411";
@@ -52,7 +52,7 @@ function R({
   } = md(t);
   let [a, _] = w1(t, "paints");
   let R = rrT.STROKE_PRESET;
-  let L = wA();
+  let L = useDispatch();
   let P = Tm.getId(0, rrT.STROKE_PRESET, "paint");
   let D = function (e) {
     let t = WH(e ?? null, null, s4.STROKE);

@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback, useMemo, useEffect, useState, useLayoutEffect } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
 import { t as _$$t, tx } from "../905/303541";
 import { Jj, bY } from "../figma_app/2023";
@@ -483,7 +483,7 @@ function eM({
   let {
     existingHubFile
   } = e.deps;
-  let l = wA();
+  let l = useDispatch();
   let {
     trackEvent
   } = j6();
@@ -788,16 +788,16 @@ function ej(e) {
     existingHubFile
   } = e;
   let s = Pc();
-  let o = d4(e => xw(e) ?? void 0, c2);
+  let o = useSelector(e => xw(e) ?? void 0, c2);
   let l = sZ();
-  let d = d4(e => Rv(figFile?.team_id ?? null, e, existingHubFile ?? null, figFile?.parent_org_id ?? null), c2);
-  let c = d4(e => e.authedProfilesById);
-  let u = d4(e => e.authedActiveCommunityProfile ?? void 0);
+  let d = useSelector(e => Rv(figFile?.team_id ?? null, e, existingHubFile ?? null, figFile?.parent_org_id ?? null), c2);
+  let c = useSelector(e => e.authedProfilesById);
+  let u = useSelector(e => e.authedActiveCommunityProfile ?? void 0);
   let p = useMemo(async () => figFile ? (await mN(figFile)) ?? [] : [], [figFile]);
   let {
     publishableComponentNodeIds,
     localComponents
-  } = d4(e => {
+  } = useSelector(e => {
     try {
       return Pn(e);
     } catch (e) {
@@ -1349,7 +1349,7 @@ function td({
     canvasThumbnailPromise,
     existingHubFile
   } = e.deps;
-  let c = wA();
+  let c = useDispatch();
   let {
     trackEvent
   } = j6();
@@ -1360,7 +1360,7 @@ function td({
       step: WX.CLOSED
     });
   }, [c, p]);
-  let y = d4(e => "mirror" in e ? e.mirror.appModel.pagesList : []);
+  let y = useSelector(e => "mirror" in e ? e.mirror.appModel.pagesList : []);
   let b = _$$D(e.fieldStates);
   _$$W(e.fieldStates.viewerMode);
   t = e.fieldStates.scalingMode;
@@ -1772,11 +1772,11 @@ function tc(e) {
   } = e;
   let s = Pc();
   let o = _$$h4(figFile);
-  let l = d4(e => xw(e) ?? void 0, c2);
+  let l = useSelector(e => xw(e) ?? void 0, c2);
   let d = sZ();
-  let c = d4(e => Rv(figFile?.team_id ?? null, e, existingHubFile ?? null, figFile?.parent_org_id ?? null), c2);
-  let u = d4(e => e.authedProfilesById);
-  let p = d4(e => e.authedActiveCommunityProfile ?? void 0);
+  let c = useSelector(e => Rv(figFile?.team_id ?? null, e, existingHubFile ?? null, figFile?.parent_org_id ?? null), c2);
+  let u = useSelector(e => e.authedProfilesById);
+  let p = useSelector(e => e.authedActiveCommunityProfile ?? void 0);
   let h = useMemo(async () => figFile ? (await mN(figFile)) ?? [] : [], [figFile]);
   let g = ti({
     ...e,
@@ -1823,7 +1823,7 @@ export function $$th0({
     file: data ?? null
   });
   let g = useMemo(() => data ? "loaded" === h.status && h.data.file ? Jj(h.data.file) : bY(data) : void 0, [data, h]);
-  let f = d4(e => {
+  let f = useSelector(e => {
     let i = e.figFilePublishedAsHubFile[t];
     return i ? e.hubFiles[i] : void 0;
   });

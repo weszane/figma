@@ -1,7 +1,7 @@
 import { Ju } from "../905/102752";
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useCallback, useMemo, useState, useRef, useEffect, createElement, createRef, forwardRef, memo, useLayoutEffect, createContext, useContext, useTransition } from "react";
-import s, { wA, d4 as _$$d } from "../vendor/514228";
+import s, { useDispatch, useSelector } from "../vendor/514228";
 import { Ez5, glU, nQ7, lyf, NLJ, m1T, FAf, kul, fZl, Z64, Egt, ruz, ibQ, t2E, rrT, nzw, IPu, rXF, Oin } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { tH as _$$tH, H4 } from "../905/751457";
@@ -145,7 +145,6 @@ import { q as _$$q3 } from "../905/524117";
 import { j as _$$j3 } from "../905/523935";
 import { bj } from "../905/420347";
 import { ZA, Wv } from "../figma_app/633080";
-import { noop } from "../5430/262192";
 import { oW as _$$oW } from "../905/675859";
 import { x as _$$x2 } from "../905/587214";
 import { fG, NH } from "../figma_app/973927";
@@ -204,7 +203,6 @@ import { R as _$$R5 } from "../9410/46722";
 import { i as _$$i2 } from "../905/433860";
 import { $ as _$$$3 } from "../905/411599";
 import { X as _$$X3 } from "../905/647103";
-import { noop } from "../905/253683";
 import { s as _$$s2 } from "../905/702260";
 import { W as _$$W2 } from "../905/378870";
 import { y as _$$y } from "../905/292472";
@@ -387,7 +385,7 @@ import { hO, zM, FP } from "../figma_app/580736";
 import { IN } from "../905/116101";
 import { d4 as _$$d4, be } from "../figma_app/474636";
 import { Wh as _$$Wh, jv as _$$jv } from "../figma_app/985200";
-import { mN as _$$mN } from "../905/261467";
+import { PluginUIManager } from "../905/261467";
 import { EA, SQ } from "../9410/499229";
 import { $ as _$$$7 } from "../figma_app/644304";
 import { d as _$$d5 } from "../3682/659785";
@@ -977,7 +975,7 @@ let et = e => {
   };
 };
 let en = (e, t, n, l, r, i, o) => {
-  let d = wA();
+  let d = useDispatch();
   let c = _$$U();
   useEffect(() => {
     if (!e) return;
@@ -1284,8 +1282,8 @@ function td({
   searchQuery: e,
   setSearchQuery: t
 }) {
-  let n = _$$d(e => e.search.sessionId);
-  let l = wA();
+  let n = useSelector(e => e.search.sessionId);
+  let l = useDispatch();
   let r = g5("import_from_design_search_bar");
   let i = Xr(Lm);
   let d = useCallback(e => {
@@ -1342,8 +1340,8 @@ function tx({
   setSearchQuery: t,
   customPlaceholder: n
 }) {
-  let l = _$$d(e => e.search.sessionId);
-  let r = wA();
+  let l = useSelector(e => e.search.sessionId);
+  let r = useDispatch();
   let i = v3();
   let d = Xr(Tw);
   let c = g5("search_bar");
@@ -1585,7 +1583,7 @@ function t$({
   let {
     onShowSeparatorScroll
   } = gH();
-  let c = _$$d(e => e.mirror.appModel.multiplayerSessionState === kul.JOINED);
+  let c = useSelector(e => e.mirror.appModel.multiplayerSessionState === kul.JOINED);
   let u = null === _$$tS();
   return e === J_.LOADING || !c || u ? jsx(yx, {}) : e !== J_.SUCCESS ? jsx("div", {
     className: _$$s.flex.itemsCenter.justifyCenter.hFull.wFull.colorText.textBodyLarge.pre.$,
@@ -1613,11 +1611,11 @@ function tV({
   file: e
 }) {
   let t = _$$iZ();
-  let n = wA();
+  let n = useDispatch();
   let l = _$$aZ();
-  let r = _$$d(e => e.currentUserOrgId);
-  let i = _$$d(e => e.currentTeamId);
-  let a = _$$d(e => e.selectedView);
+  let r = useSelector(e => e.currentUserOrgId);
+  let i = useSelector(e => e.currentTeamId);
+  let a = useSelector(e => e.selectedView);
   return jsx("div", {
     className: em()(_$$s.pt8.px8.$, _$$Fj),
     children: jsx(GQ, {
@@ -2466,7 +2464,7 @@ let nS = {
 };
 let nF = Fu(RG);
 function nB() {
-  let e = wA();
+  let e = useDispatch();
   let t = VU();
   let n = _$$md(nF);
   return n?.status !== "loaded" || n?.status === "loaded" && n?.data ? null : jsx("div", {
@@ -2639,7 +2637,7 @@ function nX({
 }) {
   let [t, n] = fp(Lm);
   let l = VU();
-  let r = wA();
+  let r = useDispatch();
   let i = bj([_$$l(e)]);
   let d = i.data;
   let u = "loading" === i.status;
@@ -2647,7 +2645,7 @@ function nX({
   let h = x.data.templates;
   let g = x.data.template_name;
   let f = x.data.description;
-  let j = _$$d(e => e.search.sessionId);
+  let j = useSelector(e => e.search.sessionId);
   let y = _$$md(_$$ce);
   let E = useMemo(() => [...h].sort(go), [h]);
   if (!getFeatureFlags().buzz_video_export) {
@@ -2777,7 +2775,7 @@ function nQ({
   let g = jw();
   let f = v3();
   let b = _$$tS();
-  let j = _$$d(e => e.search.sessionId);
+  let j = useSelector(e => e.search.sessionId);
   let y = _$$nc.user(x, (e, l, r) => {
     _$$fp({
       getGridCoord: Ez5?.getInsertGridCoord || (() => ({
@@ -3034,7 +3032,7 @@ function n8({
   isLoading: t,
   dismissible: n = !0
 }) {
-  let l = wA();
+  let l = useDispatch();
   let r = _$$md(n6);
   return (r?.status !== "loaded" || r?.status === "loaded" && r?.data) && n ? null : t ? jsx("div", {
     className: "x2iayur",
@@ -4173,7 +4171,7 @@ function lY({
 }) {
   let t = Xr(_$$d2);
   let n = VU();
-  let l = wA();
+  let l = useDispatch();
   let r = bj([_$$l(e)]);
   let i = r.data;
   let d = "loading" === r.status;
@@ -4670,7 +4668,7 @@ function rO({
 function rM({
   recordingKey: e
 }) {
-  let t = wA();
+  let t = useDispatch();
   let [n, l] = _$$lJ2("cornerRadius");
   let {
     smallNudgeAmount,
@@ -4812,7 +4810,7 @@ function r7({
   disabled: i,
   tooltip: a
 }) {
-  let d = _$$d(e => e.mirror.appModel.keyboardShortcuts);
+  let d = useSelector(e => e.mirror.appModel.keyboardShortcuts);
   let c = _$$c5(d, n ?? "");
   return jsxs(_$$E, {
     onClick: l,
@@ -4840,7 +4838,7 @@ function r7({
   });
 }
 function ii() {
-  let e = wA();
+  let e = useDispatch();
   let {
     close
   } = _$$cq();
@@ -5035,7 +5033,7 @@ function iV({
 function iG({
   letterSpacing: e
 }) {
-  let t = wA();
+  let t = useDispatch();
   let {
     bigNudgeAmount,
     smallNudgeAmount
@@ -5252,7 +5250,7 @@ let oO = memo(function ({
     estimateSize: useCallback(() => parsePxNumber(Ep1), []),
     overscan: 10
   });
-  let J = _$$d(e => e.mirror.appModel.currentPage);
+  let J = useSelector(e => e.mirror.appModel.currentPage);
   useEffect(() => {
     v("");
   }, [d]);
@@ -5324,7 +5322,7 @@ let oO = memo(function ({
     D();
     es.current = !0;
   }, [D, Y]);
-  let ec = _$$d(e => e.userFlags);
+  let ec = useSelector(e => e.userFlags);
   let eu = useCallback(async (t, n = !0, i = !0) => {
     if (getFeatureFlags().dse_sf_pro_font && !(await Cj(t, ec, r, e, "font_picker"))) return;
     _$$sn.start("update_text_node_font");
@@ -5968,8 +5966,8 @@ function al({
     inheritTextStyleKey: e.mirror.selectionProperties.inheritTextStyleKey || null,
     styleIdForText: e.mirror.selectionProperties.styleIdForText || null
   }));
-  let u = wA();
-  let x = _$$d(e => e.pickerShown && e.pickerShown.id === o2 ? e.pickerShown : null);
+  let u = useDispatch();
+  let x = useSelector(e => e.pickerShown && e.pickerShown.id === o2 ? e.pickerShown : null);
   let m = useCallback((e, t) => {
     if (t.current) {
       let {
@@ -5991,14 +5989,14 @@ function al({
   let g = useCallback((e, t) => {
     x && x.id === e ? h() : m(e, t);
   }, [x, h, m]);
-  let f = _$$d(e => e.fonts);
-  let b = _$$d(e => e.selectedView);
+  let f = useSelector(e => e.fonts);
+  let b = useSelector(e => e.selectedView);
   let _ = useMemo(() => _$$pn(f), [f]);
-  let j = _$$d(e => e.mirror.selectionProperties.fontVariations);
+  let j = useSelector(e => e.mirror.selectionProperties.fontVariations);
   let y = _$$B2();
   let E = Um();
   let v = Wc();
-  let T = _$$d(e => e.localFontAgentVersion);
+  let T = useSelector(e => e.localFontAgentVersion);
   let I = UG();
   let S = useCallback(() => {
     h();
@@ -6110,7 +6108,7 @@ function ar({
 function ai({
   inheritTextStyleKey: e
 }) {
-  let t = _$$d(e => e.fonts);
+  let t = useSelector(e => e.fonts);
   let n = useMemo(() => _$$pn(t), [t]);
   let l = kl("fontFamily");
   let r = kl("fontStyle");
@@ -6121,7 +6119,7 @@ function ai({
     versionsForStyles: n
   }) : void 0;
   let d = _$$B2();
-  let c = _$$d(e => e.mirror.selectionProperties.fontVariations);
+  let c = useSelector(e => e.mirror.selectionProperties.fontVariations);
   let u = createRef();
   return e ? null : jsx(_$$R4, {
     ref: u,
@@ -6439,7 +6437,7 @@ function aE() {
   }) : null;
 }
 function av() {
-  let e = _$$d(e => e.fonts);
+  let e = useSelector(e => e.fonts);
   let t = kl("fontFamily");
   let n = iv(useMemo(() => _$$pn(e), [e]), t);
   return jsxs(Fragment, {
@@ -6674,7 +6672,7 @@ function aN({
     let r = function () {
       let e = kl("inheritTextStyleKey");
       let t = aI();
-      let n = _$$d(e => e.fonts);
+      let n = useSelector(e => e.fonts);
       let l = kl("fontFamily");
       let r = iv(useMemo(() => _$$pn(n), [n]), l);
       let i = [];
@@ -7083,7 +7081,7 @@ function aV({
   padding: e,
   recordingKey: t
 }) {
-  let n = wA();
+  let n = useDispatch();
   let [l, r] = _$$lJ2("blur");
   let {
     smallNudgeAmount,
@@ -7169,7 +7167,7 @@ function aH({
   padding: e = "normal",
   recordingKey: t
 }) {
-  let n = wA();
+  let n = useDispatch();
   let [l, r] = _$$lJ2("opacity");
   let i = gl(l) ? _$$oV : _W(l, 1);
   return jsx(aD, {
@@ -7266,7 +7264,7 @@ function aZ({
   toggleOverlayColorPicker: t,
   recordingKey: n
 }) {
-  let l = wA();
+  let l = useDispatch();
   let {
     opacity,
     paint,
@@ -7328,7 +7326,7 @@ function a5({
   padding: e,
   recordingKey: t
 }) {
-  let n = wA();
+  let n = useDispatch();
   let {
     selectedShadowStyle,
     shadowOpacity,
@@ -8431,7 +8429,7 @@ function sY({
   let u = MK(JT.GENERATE_IMAGE);
   let x = Xr(Lk);
   let m = function () {
-    let e = wA();
+    let e = useDispatch();
     let {
       close
     } = _$$cq();
@@ -8677,9 +8675,9 @@ let s2 = {
   blendMode: "NORMAL"
 };
 function s4() {
-  let e = _$$d(e => e.mirror.appModel.activeCanvasEditModeType);
+  let e = useSelector(e => e.mirror.appModel.activeCanvasEditModeType);
   let t = function () {
-    let e = _$$d(e => e.mirror.appModel.activeCanvasEditModeType);
+    let e = useSelector(e => e.mirror.appModel.activeCanvasEditModeType);
     let {
       activePanel
     } = ew();
@@ -8702,7 +8700,7 @@ function s4() {
       anyCooperFrames
     } = Cl();
     let t = su();
-    let n = _$$d(e => e.mirror.selectionProperties.numSelectedByType);
+    let n = useSelector(e => e.mirror.selectionProperties.numSelectedByType);
     let l = !!n && Kl(n, ["TEXT"]);
     return _$$t5.useTabs({
       [sd.NONE]: !l && !anyCooperFrames,
@@ -8776,7 +8774,7 @@ function s6({
   !function (e, t, n) {
     let l = ij();
     let r = function () {
-      let e = _$$d(e => e.mirror.appModel.activeCanvasEditModeType);
+      let e = useSelector(e => e.mirror.appModel.activeCanvasEditModeType);
       return useCallback(t => {
         hS(t) && bn(t?.type) && e !== m1T.GRADIENT && Y5.triggerAction("toggle-gradient-edit-mode");
       }, [e]);
@@ -8915,7 +8913,7 @@ function dt({
   paint: e,
   onChange: t
 }) {
-  let n = _$$d(e => e.mirror.appModel.activeCanvasEditModeType);
+  let n = useSelector(e => e.mirror.appModel.activeCanvasEditModeType);
   let {
     isPopoverOpen,
     togglePopover,
@@ -9202,7 +9200,7 @@ let dh = Ju(function (e) {
   let {
     onClose
   } = e;
-  let l = _$$d(qr);
+  let l = useSelector(qr);
   let r = useCallback(() => {
     _$$l2.user("detach-instances", () => glU?.detachInstances(l, !0));
     onClose();
@@ -9291,7 +9289,7 @@ function dy() {
   });
 }
 function dE() {
-  let e = wA();
+  let e = useDispatch();
   let [t, n] = useState(!1);
   return jsx(_$$R4, {
     children: jsx(_$$E2, {
@@ -9323,7 +9321,7 @@ function dv() {
     let t = GV();
     let n = dg(_$$x.FIELDS);
     let l = function () {
-      let e = _$$d(Sh);
+      let e = useSelector(Sh);
       let t = _$$eY();
       return e.every(e => {
         let n = t.get(e);
@@ -9365,7 +9363,7 @@ function dv() {
   });
 }
 function dI() {
-  let e = _$$d(e => e.mirror.selectionProperties.stateGroupSelectionInfo);
+  let e = useSelector(e => e.mirror.selectionProperties.stateGroupSelectionInfo);
   let {
     onlyCooperFrames
   } = Cl();
@@ -9547,7 +9545,7 @@ function dO({
   strokeWeight: l,
   onStrokeWeightChange: r
 }) {
-  let i = wA();
+  let i = useDispatch();
   let d = useRef(new KD({
     min: 0
   }));
@@ -9744,12 +9742,12 @@ let dU = memo(function () {
   let i = _$$dS();
   let c = iS();
   let u = _$$uM();
-  let x = _$$d(Sh);
+  let x = useSelector(Sh);
   let p = kG();
   let m = W5();
-  let h = _$$d(e => e.mirror.appModel.showUi);
+  let h = useSelector(e => e.mirror.appModel.showUi);
   let g = KH();
-  let f = _$$d(e => {
+  let f = useSelector(e => {
     let t = e.mirror.appModel.onCanvasNameEditorInfo.mode;
     return t === nzw.FRAME_NAME || t === nzw.CANVAS_GRID_ROW_NAME;
   });
@@ -10794,14 +10792,14 @@ function uu({
   let t = _$$GQ();
   let [n, l] = fp(Lk);
   let r = _$$ut(Ez5?.interopToolMode(), nQ7.SELF);
-  let i = _$$d(e => e.mirror.sceneGraphSelection);
+  let i = useSelector(e => e.mirror.sceneGraphSelection);
   let c = r === nQ7.DESIGN && Object.keys(i).length > 0;
   let u = bd();
   let [x, m] = useState(340);
   let [h, g] = useState(!0);
   let f = h && c;
   let b = e.current?.clientHeight || window.innerHeight;
-  let j = _$$d(e => !e.mirror.appModel.isReadOnly);
+  let j = useSelector(e => !e.mirror.appModel.isReadOnly);
   let y = Xr(U_);
   let E = Xr(Lm);
   let v = Pn();
@@ -10961,7 +10959,7 @@ function uI({
   let d = function ({
     onImportFailure: e
   }) {
-    let t = wA();
+    let t = useDispatch();
     return useCallback(n => {
       e(n);
       t(_$$F.enqueue({
@@ -11442,7 +11440,7 @@ function uK() {
       setCurrentView: i
     }), [t, i]);
   }();
-  let n = wA();
+  let n = useDispatch();
   let l = useMemo(() => ({
     activeTab: _$$s8.PLUGIN,
     viewResource: e => {
@@ -11480,12 +11478,12 @@ function uH({
 }) {
   let t = "LOADING" === _$$md(_$$d4);
   let n = uW();
-  let l = wA();
+  let l = useDispatch();
   useEffect(() => {
     l(_$$aq());
   }, [l]);
   useEffect(() => {
-    let e = _$$mN.getInstance();
+    let e = PluginUIManager.getInstance();
     n && e && e.hideProgress();
   }, [n]);
   return jsxs("div", {
@@ -11838,7 +11836,7 @@ function xn({
   });
 }
 function xl() {
-  let e = wA();
+  let e = useDispatch();
   let t = gI();
   let n = kG();
   let l = LU();
@@ -12604,8 +12602,8 @@ function xK({
   searchQuery: e,
   setSearchQuery: t
 }) {
-  let n = _$$d(e => e.search.sessionId);
-  let l = wA();
+  let n = useSelector(e => e.search.sessionId);
+  let l = useDispatch();
   let r = useCallback(e => {
     "" === e && n ? l(ky()) : "" === e || n || l(Dy({
       entryPoint: xU
@@ -12690,7 +12688,7 @@ function xH() {
     }, [b, m, g, i]);
     (function (e, t, n, l) {
       let r = _$$U();
-      let i = _$$d(e => e.search.sessionId);
+      let i = useSelector(e => e.search.sessionId);
       let o = function () {
         let e = useContext(ch);
         if (!e) throw Error("useBuzzStockPhotosViewType must be used within a BuzzStockPhotosViewTypeContext");
@@ -12764,7 +12762,7 @@ function xH() {
   });
 }
 function xX() {
-  let e = wA();
+  let e = useDispatch();
   let t = useCallback(() => {
     B3(JT.GENERATE_IMAGE);
     scheduler.postTask(() => {
@@ -13125,7 +13123,7 @@ function x4() {
   useEffect(() => {
     I$(c);
   }, [c]);
-  let u = _$$d(e => !e.mirror.appModel.isReadOnly);
+  let u = useSelector(e => !e.mirror.appModel.isReadOnly);
   let x = Xr(U_);
   let m = bd();
   let h = useRef(null);
@@ -13138,8 +13136,8 @@ function x4() {
     let o = uW();
     let {
       fdPreviewResource
-    } = _$$d(e => e.universalInsertModal);
-    let c = wA();
+    } = useSelector(e => e.universalInsertModal);
+    let c = useDispatch();
     switch (e) {
       case _$$x.BULK_CREATE:
         if (0 === t) {
@@ -13153,7 +13151,7 @@ function x4() {
         return null;
       case _$$x.PLUGINS:
         if (o) return () => {
-          let e = _$$mN.getInstance();
+          let e = PluginUIManager.getInstance();
           e?.tearDown();
           zl.set(_$$d4, null);
         };
@@ -13371,7 +13369,7 @@ function x3({
   let t = uW();
   return e === _$$x.PLUGINS && t ? jsx(_$$K, {
     onClick: () => {
-      let e = _$$mN.getInstance();
+      let e = PluginUIManager.getInstance();
       e?.switchContainer(_$$Wh.MODAL);
       zl.set(FP, _$$Wh.MODAL);
     },
@@ -13485,7 +13483,7 @@ function px() {
   let i = _$$U();
   let c = Xr(_$$az);
   let u = jw();
-  let x = _$$d(e => !e.mirror.appModel.isReadOnly);
+  let x = useSelector(e => !e.mirror.appModel.isReadOnly);
   let m = cg();
   let h = !u;
   useEffect(() => {
@@ -13737,18 +13735,18 @@ function pI() {
     let e = GV();
     let t = _$$Ku();
     let n = Um();
-    let l = _$$d(e => e.library);
-    let r = _$$d(e => e.mirror.sceneGraphSelection);
+    let l = useSelector(e => e.library);
+    let r = useSelector(e => e.mirror.sceneGraphSelection);
     let i = Xo();
-    let o = _$$d(e => e.openFile);
-    let d = _$$d(e => e.saveAsState);
-    let c = _$$d(e => e.installedPluginVersions);
-    let u = _$$d(e => e.localPlugins);
-    let x = _$$d(e => e.publishedPlugins);
-    let p = _$$d(e => e.stylePickerListLayout);
-    let m = _$$d(e => e.pickerInStyleCreationShown);
-    let h = _$$d(e => e.stylePickerShown);
-    let g = _$$d(e => e.modalShown);
+    let o = useSelector(e => e.openFile);
+    let d = useSelector(e => e.saveAsState);
+    let c = useSelector(e => e.installedPluginVersions);
+    let u = useSelector(e => e.localPlugins);
+    let x = useSelector(e => e.publishedPlugins);
+    let p = useSelector(e => e.stylePickerListLayout);
+    let m = useSelector(e => e.pickerInStyleCreationShown);
+    let h = useSelector(e => e.stylePickerShown);
+    let g = useSelector(e => e.modalShown);
     return useMemo(() => ({
       shownPanels: e,
       dropdownShown: n,
@@ -13823,7 +13821,7 @@ function pR({
     currentTool: e.mirror.appModel.currentTool,
     dropdownShown: e.dropdownShown
   }));
-  let p = wA();
+  let p = useDispatch();
   return jsx(S7, {
     dispatch: p,
     color: d,
@@ -13877,7 +13875,7 @@ function pB({
   let r = U1();
   let i = kl("numSelectedByType");
   let c = function (e) {
-    let t = wA();
+    let t = useDispatch();
     return useCallback(async n => {
       let l = await t(Oe(n));
       let r = _$$sD.fromString(l);
@@ -13897,7 +13895,7 @@ function pB({
     }, [t, e]);
   }(l);
   let u = function (e) {
-    let t = wA();
+    let t = useDispatch();
     return useCallback((n, l) => {
       t(AV({
         style: n,
@@ -13961,8 +13959,8 @@ function pK({
 }) {
   let n = eP();
   let l = useRef(null);
-  let r = _$$d(e => e.pickerShown && (e.pickerShown.id === pw || e.pickerShown.id === pF) ? e.pickerShown : null);
-  let i = wA();
+  let r = useSelector(e => e.pickerShown && (e.pickerShown.id === pw || e.pickerShown.id === pF) ? e.pickerShown : null);
+  let i = useDispatch();
   let d = useCallback((e, t, n) => {
     if (t.current) {
       let {
@@ -14051,10 +14049,10 @@ function pH({
   onPaintChange: n,
   onCustomColorClick: l
 }) {
-  let r = _$$d(e => e.mirror.appModel.activeCanvasEditModeType);
+  let r = useSelector(e => e.mirror.appModel.activeCanvasEditModeType);
   let i = Ep();
   let c = useRef(null);
-  let u = wA();
+  let u = useDispatch();
   let x = _$$C3();
   let p = _$$p("currentSelectedGradientStop");
   let m = !t || gl(t);
@@ -14207,8 +14205,8 @@ function pQ({
   });
 }
 function p5() {
-  let e = _$$d(e => e.mirror.selectionProperties.stateGroupSelectionInfo);
-  let t = _$$d(Sh);
+  let e = useSelector(e => e.mirror.selectionProperties.stateGroupSelectionInfo);
+  let t = useSelector(Sh);
   let n = mJ();
   let l = _H();
   let {
@@ -14277,7 +14275,7 @@ let p7 = {
           return e?.panel === eC.COLOR_PICKER ? e.args?.type ?? "FILL" : "FILL";
         }();
         let t = function () {
-          let e = _$$d(e => e.mirror.selectionProperties?.fillPaints);
+          let e = useSelector(e => e.mirror.selectionProperties?.fillPaints);
           return {
             paint: gl(e) ? _$$oV : e?.[0],
             onPaintChange: ij()
@@ -14547,7 +14545,7 @@ let mk = "xekv6nw-B";
 let mw = memo(({
   shouldShowDragAndDropBorder: e
 }) => {
-  let t = _$$d(e => e.progressBarState);
+  let t = useSelector(e => e.progressBarState);
   let n = Pc();
   let [l, r] = useState(!1);
   let i = _$$dh();
@@ -14560,11 +14558,11 @@ let mw = memo(({
   let g = _$$Lk();
   _$$rE();
   let f = useRef(null);
-  let b = _$$d(e => e.openFile);
+  let b = useSelector(e => e.openFile);
   let _ = b ? b.key : "";
   let j = _$$p("showUi");
-  let y = _$$d(e => e.universalInsertModal);
-  let E = wA();
+  let y = useSelector(e => e.universalInsertModal);
+  let E = useDispatch();
   Gb(_);
   !function () {
     let {

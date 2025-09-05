@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { PureComponent } from "react";
-import { wA, Ng } from "../vendor/514228";
+import { useDispatch, connect } from "../vendor/514228";
 import { parsePxInt } from "../figma_app/783094";
 import { nR, $$, N_, Ph } from "../figma_app/637027";
 import { tx, t as _$$t } from "../905/303541";
@@ -89,7 +89,7 @@ export function $$w0(e) {
     name,
     monetizedResource
   } = e;
-  let o = wA();
+  let o = useDispatch();
   return jsx(Ph, {
     className: _1,
     trackingEventName: "Detail View - Request Refund",
@@ -120,12 +120,12 @@ export function $$C1(e) {
     children: i
   });
 }
-Ng((e) => ({
+connect(e => ({
   hasOrgs: Yj(e),
-  teams: Object.keys(e.teams).map((t) => e.teams[t]),
+  teams: Object.keys(e.teams).map(t => e.teams[t]),
   user: e.user
 }))(b);
-var L = ((e) => (e[e.PROMO = 0] = "PROMO", e[e.PAID = 1] = "PAID", e))(L || {});
+var L = (e => (e[e.PROMO = 0] = "PROMO", e[e.PAID = 1] = "PAID", e))(L || {});
 export function $$T2(e) {
   return jsx(N_, {
     className: e.className,

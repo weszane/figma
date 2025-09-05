@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { memo, useState, useRef, useCallback } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { $n } from "../905/521428";
 import { K } from "../905/443068";
 import { y as _$$y } from "../905/37128";
@@ -128,7 +128,7 @@ export function $$L0({
     let t = e(D);
     I && E ? E(t) : C(e);
   }, [D, E, I, C]);
-  let F = wA();
+  let F = useDispatch();
   let M = useRef(null);
   let j = t => {
     M && M.current?.focus();
@@ -153,7 +153,7 @@ export function $$L0({
     }));
   };
   let U = D.selectedFeedback ? _$$s.flex1.textBodyMedium.$ : _$$s.colorTextSecondary.textBodyMedium.flex1.$;
-  let B = d4(e => !!e.modalShown && e.modalShown.type === T.type);
+  let B = useSelector(e => !!e.modalShown && e.modalShown.type === T.type);
   let V = D.selectedFeedback || !v;
   return jsx("div", {
     className: _$$s.pl4.flex.$,

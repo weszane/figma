@@ -1,5 +1,5 @@
 import { jsx } from "react/jsx-runtime";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import a from "classnames";
 import { Pt } from "../figma_app/806412";
 import { Un } from "../figma_app/591738";
@@ -42,7 +42,7 @@ export function $$E7({
   });
 }
 export function $$y6() {
-  let e = d4(e => e.isMakeSomethingV2Active);
+  let e = useSelector(e => e.isMakeSomethingV2Active);
   let t = Un();
   return e && !t;
 }

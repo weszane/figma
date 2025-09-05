@@ -1,5 +1,5 @@
 import { useMemo, useEffect } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { l as _$$l } from "../905/716947";
 import { getFeatureFlags } from "../905/601108";
 import { md, zl } from "../figma_app/27355";
@@ -66,11 +66,11 @@ function A(e, t, r) {
 function x(e, t) {
   let r = md(_S);
   let a = eY();
-  let l = d4(aD);
-  let d = d4(BA);
+  let l = useSelector(aD);
+  let d = useSelector(BA);
   let c = function (e) {
-    let t = d4(MH);
-    let r = d4(e => e.mirror.appModel.currentPage);
+    let t = useSelector(MH);
+    let r = useSelector(e => e.mirror.appModel.currentPage);
     let a = md(_S);
     return useMemo(() => {
       let n = new Set();
@@ -106,11 +106,11 @@ function x(e, t) {
 export function $$N3() {
   let e = md(_S);
   let t = eY();
-  let r = d4(e => e.mirror.appModel.currentPage);
-  let l = d4(aD);
-  let d = d4(Th);
-  let c = d4(WH);
-  let h = d4(BA);
+  let r = useSelector(e => e.mirror.appModel.currentPage);
+  let l = useSelector(aD);
+  let d = useSelector(Th);
+  let c = useSelector(WH);
+  let h = useSelector(BA);
   let m = useMemo(() => {
     let r = new Set();
     let n = new Map();
@@ -167,7 +167,7 @@ export function $$N3() {
   }, [b, c, d, r]);
 }
 export function $$C4() {
-  let e = d4(e => e.mirror.appModel.currentPage);
+  let e = useSelector(e => e.mirror.appModel.currentPage);
   let t = tS();
   let r = x(t, !1);
   useEffect(() => {
@@ -222,7 +222,7 @@ let R = M4.Query({
   stalenessPolicy: "never"
 });
 export function $$L5() {
-  let e = d4(e => e.mirror.appModel.currentPage);
+  let e = useSelector(e => e.mirror.appModel.currentPage);
   useEffect(() => {
     zl.set(Af, null);
   }, [e]);
@@ -245,7 +245,7 @@ let P = M4.Query({
   stalenessPolicy: "never"
 });
 export function $$D1() {
-  let e = d4(e => e.mirror.appModel.currentPage);
+  let e = useSelector(e => e.mirror.appModel.currentPage);
   useEffect(() => {
     zl.set(mO, null);
   }, [e]);

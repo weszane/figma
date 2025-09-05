@@ -1,5 +1,5 @@
 import { useCallback, useState, useEffect } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
 import { isNotNullish, isNullish } from "../figma_app/95419";
 import { h3O } from "../figma_app/763686";
@@ -46,8 +46,8 @@ let w = (e, t, r, n) => {
 };
 function O() {
   let e = z3();
-  let t = wA();
-  let r = d4(e => e.multiplayer);
+  let t = useDispatch();
+  let r = useSelector(e => e.multiplayer);
   let a = useCallback(e => {
     t(J4({
       ...r,
@@ -67,7 +67,7 @@ export function $$R12(e) {
       sessionID
     }
   } = e;
-  let c = wA();
+  let c = useDispatch();
   let _ = z3();
   let h = md(Dv);
   let [m, g] = useState("initial");
@@ -143,29 +143,29 @@ export function $$R12(e) {
   };
 }
 export function $$L4() {
-  return d4(({
+  return useSelector(({
     multiplayer: {
       sessionID: e
     }
   }) => e);
 }
 export function $$P9() {
-  return d4(({
+  return useSelector(({
     multiplayer: {
       observingSessionID: e
     }
   }) => e);
 }
 export function $$D8() {
-  let e = d4(e => e.multiplayer);
+  let e = useSelector(e => e.multiplayer);
   return e.allUsers.find(t => t.sessionID === e.sessionID) ?? null;
 }
 export function $$k0() {
-  let e = d4(e => e.multiplayer);
+  let e = useSelector(e => e.multiplayer);
   return e.allUsers.find(t => t.sessionID === e.observingSessionID) ?? null;
 }
 export function $$M11() {
-  let e = d4(e => e.multiplayer);
+  let e = useSelector(e => e.multiplayer);
   return e.allUsers.find(t => t.sessionID === e.presenterSessionID) ?? null;
 }
 export function $$F7({
@@ -213,7 +213,7 @@ export function $$B1() {
   return !!t || !!r || !!n || !!i || !!e;
 }
 export function $$G13() {
-  let e = d4(e => e.multiplayer);
+  let e = useSelector(e => e.multiplayer);
   let t = e.sessionsNominatingCurrentUser[0];
   return t ? e.allUsers.find(e => e.sessionID === t) ?? null : null;
 }

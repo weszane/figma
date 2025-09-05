@@ -1,5 +1,5 @@
 import { useState, useEffect, useMemo } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { lyf } from "../figma_app/763686";
 import { H } from "../905/620380";
 import { I } from "../figma_app/583780";
@@ -35,9 +35,9 @@ function _() {
 var $$T1 = (e => (e[e.TRUE = 0] = "TRUE", e[e.FALSE = 1] = "FALSE", e[e.LOADING = 2] = "LOADING", e))($$T1 || {});
 export function $$I5() {
   let e = _$$g();
-  let t = d4(e => e.mirror.appModel.showUi);
-  let r = d4(e => e.mirror.appModel.topLevelMode === lyf.LAYOUT);
-  let o = d4(e => i1(e.selectedView));
+  let t = useSelector(e => e.mirror.appModel.showUi);
+  let r = useSelector(e => e.mirror.appModel.topLevelMode === lyf.LAYOUT);
+  let o = useSelector(e => i1(e.selectedView));
   let l = useMemo(() => new Date(), []);
   let {
     createdAt,
@@ -47,7 +47,7 @@ export function $$I5() {
     key: null
   };
   let p = useMemo(() => createdAt && 3e5 >= Math.abs(createdAt.getTime() - l.getTime()), [createdAt, l]);
-  let _ = d4(e => {
+  let _ = useSelector(e => {
     let t = e?.mirror?.appModel?.currentPage;
     let r = e?.mirror?.sceneGraph;
     let n = r?.get(t);

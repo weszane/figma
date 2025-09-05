@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useMemo } from "react";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { getFeatureFlags } from "../905/601108";
 import o from "classnames";
 import { mc, vk, N7, QV } from "../905/508367";
@@ -120,11 +120,11 @@ function N(e) {
 }
 export function $$P0(e) {
   let t = I4(e.file.key).unwrapOr(!1);
-  let i = d4(e => e.currentUserOrgId);
-  let r = d4(e => e.currentTeamId);
-  let s = d4(e => e.user);
-  let o = d4(e => e.selectedView);
-  let p = wA();
+  let i = useSelector(e => e.currentUserOrgId);
+  let r = useSelector(e => e.currentTeamId);
+  let s = useSelector(e => e.user);
+  let o = useSelector(e => e.selectedView);
+  let p = useDispatch();
   return jsx("div", {
     className: CK,
     children: jsx("div", {

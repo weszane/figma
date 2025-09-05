@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { forwardRef, useMemo } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { oW } from "../905/675859";
 import { B } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -25,7 +25,7 @@ export let $$m0 = forwardRef(({
   plugin: e,
   ...t
 }, i) => {
-  let o = d4(e => e.theme?.visibleTheme);
+  let o = useSelector(e => e.theme?.visibleTheme);
   let l = useMemo(() => {
     let r = sA(e.plugin_id);
     return r ? jsx(oW, {

@@ -1,7 +1,7 @@
 import { R1 } from "../figma_app/479760";
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useEffect, useCallback, useMemo, useRef, useId, forwardRef, useLayoutEffect, memo, Fragment as _$$Fragment, createRef, useContext } from "react";
-import { wA, Pj, d4 as _$$d } from "../vendor/514228";
+import { useDispatch, useStore, useSelector } from "../vendor/514228";
 import { fp8, glU, rcl, VTL, qq, xae, NLJ, hKj, $mk, VIy, OhE, AP3, Ez5, QOV, m1T, gEE, qmM, lMj, Oin, A$i, nzw, rrT, zkO, Tcr, daH, DV9, PoC, ruz, YEY, dNx, EW4, W8Y, lyf, $6Y, wzW, KWd, gw5, KpW } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { fp as _$$fp, md as _$$md, eU as _$$eU, E3, Xr, um as _$$um } from "../figma_app/27355";
@@ -815,7 +815,7 @@ async function Y(e, t, i, n, r, a) {
   }
 }
 function X() {
-  let e = wA();
+  let e = useDispatch();
   let t = _$$iZ();
   let [i, n] = _$$fp(LQ);
   let r = _$$md(MX);
@@ -823,7 +823,7 @@ function X() {
     onInsert,
     onClear
   } = function (e) {
-    let t = wA();
+    let t = useDispatch();
     let [i, n] = _$$fp(LQ);
     let [r, a] = _$$fp(_$$h);
     let [s, o] = _$$fp(wm);
@@ -834,8 +834,8 @@ function X() {
     let m = _$$U();
     let f = !!i?.mentions;
     let _ = "" === s;
-    let x = Pj();
-    let g = _$$d(e => function (e) {
+    let x = useStore();
+    let g = useSelector(e => function (e) {
       let t = Object.keys(e);
       return 0 === t.length ? null : t[0];
     }(e.mirror.sceneGraphSelection));
@@ -2479,7 +2479,7 @@ function ig({
   id: r,
   triggerID: a
 }) {
-  let s = wA();
+  let s = useDispatch();
   let c = {
     top: e.y + e.height + 16,
     left: e.x,
@@ -2574,10 +2574,10 @@ function iN({
   containerRef: e
 }) {
   let t = _$$Z();
-  let i = wA();
+  let i = useDispatch();
   let n = Um();
   let r = n?.type === _$$eg;
-  let a = _$$d(e => e.isRenaming);
+  let a = useSelector(e => e.isRenaming);
   let s = q5();
   let c = _$$iZ();
   let u = !!s && DF(s, c);
@@ -3452,7 +3452,7 @@ function nF({
   });
 }
 let nH = memo(function () {
-  let e = _$$d(nM);
+  let e = useSelector(nM);
   return jsx(Fragment, {
     children: e && jsx(nF, {
       stamp: e,
@@ -3462,11 +3462,11 @@ let nH = memo(function () {
   });
 });
 let nB = memo(function () {
-  let e = _$$d(nD);
+  let e = useSelector(nD);
   let [t, i] = useState(null);
   let [n, r] = useState(!0);
-  let a = _$$d(e => t ? e.mirror.sceneGraph.get(t) : null);
-  let s = _$$d(nM);
+  let a = useSelector(e => t ? e.mirror.sceneGraph.get(t) : null);
+  let s = useSelector(nM);
   let c = _$$d4();
   return (useEffect(() => {
     let n = !!t;
@@ -3514,12 +3514,12 @@ function n3() {
   }, [i]), e && "loaded" === t.status && !1 === t.data && !1 === Ay.isInNativeApp && n) ? jsx(n5, {}) : null;
 }
 function n5() {
-  let e = _$$d(e => e.userFlags);
+  let e = useSelector(e => e.userFlags);
   let t = q5();
   let i = t?.teamId;
   let n = t?.key;
-  let r = _$$d(e => e.multiplayer.sessionID);
-  let a = _$$d(e => e.userAnalyticsData?.first_figjam_at);
+  let r = useSelector(e => e.multiplayer.sessionID);
+  let a = useSelector(e => e.userAnalyticsData?.first_figjam_at);
   let s = _$$md(Zk);
   if (!_$$mW(e, "figjam_editor_onboarded")) return null;
   if (i) return jsx(n6, {
@@ -3576,7 +3576,7 @@ function n4(e) {
     teamId
   } = e;
   let c = Xr(_$$xw);
-  let u = wA();
+  let u = useDispatch();
   let h = _$$md(Zk);
   useEffect(() => {
     c({
@@ -3734,7 +3734,7 @@ function re(e) {
   });
 }
 function ad(e) {
-  let t = wA();
+  let t = useDispatch();
   let i = useRef(null);
   let n = Um();
   let r = "whiteboard" === _$$lg();
@@ -3784,7 +3784,7 @@ function ad(e) {
     buttonCta,
     isNotInHeader
   } = e;
-  let T = _$$d(e => zg(e.selectedView) && !e.user);
+  let T = useSelector(e => zg(e.selectedView) && !e.user);
   let [E, S] = useState(T);
   useEffect(() => {
     S(T);
@@ -3813,7 +3813,7 @@ let ax = "browse_plugins_universal_modal_tiles--savedPluginTileLeftSide--nqHJe b
 let ag = "browse_plugins_universal_modal_tiles--pluginTileDescription--gno7V text--fontPos11--2LvXf text--_fontBase--QdLsd ellipsis--ellipsis--Tjyfa";
 let ay = _$$M2();
 let av = forwardRef((e, t) => {
-  let i = wA();
+  let i = useDispatch();
   let {
     localFileId,
     view
@@ -4104,7 +4104,7 @@ function aH(e) {
     publishedWidget
   } = e;
   let i = _$$cX().setPreviewResource;
-  let n = wA();
+  let n = useDispatch();
   let r = publishedWidget.id;
   let a = publishedWidget?.versions[publishedWidget.current_plugin_version_id];
   let s = !!a;
@@ -4181,7 +4181,7 @@ let aV = forwardRef((e, t) => {
   let {
     localFileId
   } = e;
-  let r = wA();
+  let r = useDispatch();
   let a = i[localFileId];
   let s = _$$bh();
   let l = _$$jg();
@@ -4274,7 +4274,7 @@ let aG = memo(function (e) {
     tabManager,
     setPreviewResource
   } = _$$cX();
-  let n = wA();
+  let n = useDispatch();
   let r = e.widgetId;
   let a = _$$aQ(e.widgetId);
   let s = useMemo(() => e.widgetVersion || _$$uF(a), [e.widgetVersion, a]);
@@ -4298,7 +4298,7 @@ let aG = memo(function (e) {
     }));
   }, [r, n, a]);
   let j = BI();
-  let y = _$$d(e => e.authedActiveCommunityProfile);
+  let y = useSelector(e => e.authedActiveCommunityProfile);
   let {
     isSavedForUser
   } = QK(e.widgetId, _$$vt.WIDGET);
@@ -4509,7 +4509,7 @@ function aQ() {
   } = _$$I(Cn.FigJam);
   let i = useMemo(() => Ow(results.normalizedSearchResults), [results.normalizedSearchResults]);
   let n = Math.max(i.length - 12, 0);
-  let r = wA();
+  let r = useDispatch();
   let a = q5();
   let {
     fileVersion,
@@ -4547,7 +4547,7 @@ function aQ() {
 }
 function a0(e) {
   let t = _$$cX().tabManager;
-  let i = _$$d(e => e.hubFiles);
+  let i = useSelector(e => e.hubFiles);
   let n = (e.templateSearchResults[_$$e7] || []).map(e => i[e]);
   let r = [...e.teamTemplatesFromSearch.map(e => ({
     type: _$$n4.TeamTemplate,
@@ -4626,7 +4626,7 @@ function sh({
   }, t);
 }
 function sm() {
-  let e = _$$d(e => e.figjamDefaultInserts.useCases);
+  let e = useSelector(e => e.figjamDefaultInserts.useCases);
   let t = e => "Brainstorm together" === e ? _$$t("whiteboard.inserts.use_cases_brainstorm_together") : "Run a meeting" === e ? _$$t("whiteboard.inserts.use_cases_run_a_meeting") : "Diagram anything" === e ? _$$t("whiteboard.inserts.use_cases_diagram_anything") : "Lead a workshop" === e ? _$$t("whiteboard.inserts.use_cases_lead_a_workshop") : "Break the ice" === e ? _$$t("whiteboard.inserts.use_cases_break_the_ice") : void 0;
   let i = e => "Brainstorm together" === e ? _$$t("whiteboard.inserts.use_cases_brainstorm_together_description") : "Run a meeting" === e ? _$$t("whiteboard.inserts.use_cases_run_a_meeting_description") : "Diagram anything" === e ? _$$t("whiteboard.inserts.use_cases_diagram_anything_description") : "Lead a workshop" === e ? _$$t("whiteboard.inserts.use_cases_lead_a_workshop_description") : "Break the ice" === e ? _$$t("whiteboard.inserts.use_cases_break_the_ice_description") : void 0;
   let n = e.filter(e => !e.name.includes("Whats New"));
@@ -4651,7 +4651,7 @@ function sm() {
   });
 }
 function sf(e) {
-  let t = _$$d(e => e.figjamDefaultInserts.useCases).find(t => t.name === e.useCaseName);
+  let t = useSelector(e => e.figjamDefaultInserts.useCases).find(t => t.name === e.useCaseName);
   if (!t) return null;
   let i = t.resources.filter(e => "viewer_mode" in e && !!e.viewer_mode);
   let n = t.resources.filter(e => "is_widget" in e && !!e.is_widget);
@@ -4795,7 +4795,7 @@ function s_({
 }
 function sx(e) {
   let t = e.widgetId;
-  let i = _$$d(e => e.publishedWidgets[t]);
+  let i = useSelector(e => e.publishedWidgets[t]);
   let n = i ? Ar(i) : null;
   return i && n ? jsx(sg, {
     widgetVersion: n
@@ -5098,7 +5098,7 @@ function sW() {
   let a = _$$oh(_$$cd.fetchTemplatesMetadata.loadingKeyForPayload({
     key: $A.FigJam
   }));
-  let s = _$$d(e => e.figjamDefaultInserts.useCases);
+  let s = useSelector(e => e.figjamDefaultInserts.useCases);
   let l = !!e && 0 === s.length;
   return i || e && l || !e && (n || r || a) ? jsx(Wd, {}) : jsx(_$$fu, {
     name: "all",
@@ -5229,7 +5229,7 @@ function sQ({
   disableDragging: g,
   setPinned: j
 }) {
-  let y = wA();
+  let y = useDispatch();
   let {
     tabManager
   } = _$$cX();
@@ -5358,7 +5358,7 @@ function s8(e) {
     developmentSearchResultIds,
     lastPluginSearchQuery
   } = e;
-  let u = _$$d(e => e.currentUserOrgId && e.orgById[e.currentUserOrgId]);
+  let u = useSelector(e => e.currentUserOrgId && e.orgById[e.currentUserOrgId]);
   let p = savedSearchResultIds && savedSearchResultIds.length > 0;
   let h = communitySearchResultIds && communitySearchResultIds.length > 0;
   let m = developmentSearchResultIds && developmentSearchResultIds.length > 0;
@@ -5477,7 +5477,7 @@ function ol(e) {
 var oh = (e => (e.RECENT_AND_SAVED = "recent_and_saved", e.DEVELOPMENT = "development", e.ORG = "org", e))(oh || {});
 let om = "browse_main_view_selector--mainViewHeader--1tbfQ";
 function of(e) {
-  let t = wA();
+  let t = useDispatch();
   let i = _$$sZ();
   let n = useCallback(e => function (e, t) {
     switch (e) {
@@ -5492,7 +5492,7 @@ function of(e) {
     }
   }(e, i), [i]);
   let r = [oh.RECENT_AND_SAVED];
-  let a = _$$d(e => e.universalInsertModal.scrollDevelopmentSectionIntoView);
+  let a = useSelector(e => e.universalInsertModal.scrollDevelopmentSectionIntoView);
   let s = useRef(null);
   if (s.current && a) {
     t(SI({}));
@@ -5596,7 +5596,7 @@ function oE() {
 }
 let oS = "browse_plugins_recents_list--loadingSpinner--ydkCW";
 function ow() {
-  let e = _$$d(e => e.currentUserOrgId ? e.orgById[e.currentUserOrgId] : void 0);
+  let e = useSelector(e => e.currentUserOrgId ? e.orgById[e.currentUserOrgId] : void 0);
   return e ? jsx(oI, {
     org: e
   }) : jsx("span", {
@@ -5608,7 +5608,7 @@ function ow() {
 function oI({
   org: e
 }) {
-  let t = _$$d(t => {
+  let t = useSelector(t => {
     let {
       orgUsersByOrgId
     } = t;
@@ -5633,7 +5633,7 @@ function oI({
   let _ = Ol(f);
   let x = !e.public_plugins_allowed || e.plugins_whitelist_enforced && u && 0 === Object.keys(n).length;
   let g = t || h && 0 === Object.keys(r).length;
-  let j = wA();
+  let j = useDispatch();
   return (useEffect(() => {
     e && !t && j(Xt());
   }, [j, e, t]), (!i || u) && h) ? x && g ? jsx(oE, {}) : jsxs(_$$fu, {
@@ -5771,7 +5771,7 @@ function oF() {
       window.removeEventListener("storage", e, !1);
     };
   }, []);
-  let e = _$$d(e => e.currentUserOrgId ? e.orgById[e.currentUserOrgId] : void 0);
+  let e = useSelector(e => e.currentUserOrgId ? e.orgById[e.currentUserOrgId] : void 0);
   let t = e ? e.id : "";
   let i = _$$oh(_$$sz2.loadingKeyForPayload({
     shelfType: _$$cS.BROWSE_PLUGINS_MODAL
@@ -5785,10 +5785,10 @@ function oF() {
   });
 }
 function oQ(e) {
-  let t = _$$d(e => e.universalInsertModal);
-  let i = wA();
+  let t = useSelector(e => e.universalInsertModal);
+  let i = useDispatch();
   let n = $1();
-  let r = _$$d(t => _$$my(e.pluginId, t.publishedPlugins));
+  let r = useSelector(t => _$$my(e.pluginId, t.publishedPlugins));
   let a = _$$gn(r);
   let s = Object.values(n).find(e => e.plugin_id === r.id);
   let c = !!s;
@@ -6033,9 +6033,9 @@ function o1(e) {
   }) : null;
 }
 function o8(e) {
-  let t = wA();
-  let i = _$$d(e => e.universalInsertModal);
-  let n = _$$d(e => e.hubFiles)[e.id];
+  let t = useDispatch();
+  let i = useSelector(e => e.universalInsertModal);
+  let n = useSelector(e => e.hubFiles)[e.id];
   let r = _$$a4(n);
   let a = Kx();
   let s = a?.shouldOptimizeForIpadApp || getFeatureFlags().cmty_m10n_test_apple_os;
@@ -6092,7 +6092,7 @@ function ln(e) {
     goBack,
     buttonCta
   } = e;
-  let r = _$$d(e => e.hubFiles)[resourceId];
+  let r = useSelector(e => e.hubFiles)[resourceId];
   let a = _$$a4(r);
   let {
     insertTemplate,
@@ -6183,7 +6183,7 @@ function ln(e) {
   });
 }
 function la(e) {
-  let t = _$$d(e => e.hubFiles);
+  let t = useSelector(e => e.hubFiles);
   let i = e.templates[_$$e7].map(e => t[e]);
   let n = _$$tS2();
   let [r, a] = useState(!n);
@@ -6252,7 +6252,7 @@ function lc(e) {
     developmentSearchResultIds,
     lastWidgetSearchQuery
   } = e;
-  let u = _$$d(e => e.currentUserOrgId && e.orgById[e.currentUserOrgId]);
+  let u = useSelector(e => e.currentUserOrgId && e.orgById[e.currentUserOrgId]);
   let p = NU();
   let h = savedSearchResultIds && savedSearchResultIds.length > 0;
   let m = communitySearchResultIds && communitySearchResultIds.length > 0;
@@ -6465,7 +6465,7 @@ function lg() {
   });
 }
 function lj() {
-  let e = _$$d(e => e.currentUserOrgId ? e.orgById[e.currentUserOrgId] : void 0);
+  let e = useSelector(e => e.currentUserOrgId ? e.orgById[e.currentUserOrgId] : void 0);
   return e ? jsx(lb, {
     org: e
   }) : jsx(_$$L3, {});
@@ -6577,7 +6577,7 @@ function lT() {
       window.removeEventListener("storage", e, !1);
     };
   }, []);
-  let e = _$$d(e => e.currentUserOrgId ? e.orgById[e.currentUserOrgId] : void 0);
+  let e = useSelector(e => e.currentUserOrgId ? e.orgById[e.currentUserOrgId] : void 0);
   let t = e ? e.id : "";
   let i = _$$oh(_$$sz2.loadingKeyForPayload({
     shelfType: _$$cS.BROWSE_WIDGETS_MODAL
@@ -6631,13 +6631,13 @@ function lk(e) {
     resourceId,
     goBack
   } = e;
-  let n = _$$d(e => e.authedActiveCommunityProfile);
+  let n = useSelector(e => e.authedActiveCommunityProfile);
   let r = _$$xp(resourceId);
   let a = !!r.id;
   let s = Be().plugins[resourceId] || _$$uF(r);
-  let c = _$$d(e => zg(e.selectedView) && !e.user);
+  let c = useSelector(e => zg(e.selectedView) && !e.user);
   let p = r.community_publishers?.accepted || [];
-  let m = wA();
+  let m = useDispatch();
   let f = LR();
   useEffect(() => {
     a || m(_$$af({
@@ -6743,10 +6743,10 @@ function lD(e) {
   } = e;
   let n = _$$aQ(e.resourceId);
   let r = n?.community_publishers.accepted || [];
-  let a = wA();
+  let a = useDispatch();
   let s = LR();
   let c = Object.values(_$$yQ()).find(e => e.plugin_id === resourceId);
-  let p = _$$d(e => e.authedActiveCommunityProfile);
+  let p = useSelector(e => e.authedActiveCommunityProfile);
   let m = _$$bh().find(e => e.id === resourceId);
   let f = _$$eD && !!m && !c;
   let _ = !!c || f;
@@ -6996,7 +6996,7 @@ function lF({
   let {
     isInsertingTemplate
   } = Fz();
-  let $ = wA();
+  let $ = useDispatch();
   let Y = _$$W5();
   let X = universalInsertModal.sourceRect;
   let [q, J] = useMemo(() => {
@@ -7823,7 +7823,7 @@ function d1({
   updatePillSuggestions: i,
   maxHeight: n
 }) {
-  let r = wA();
+  let r = useDispatch();
   let [a] = _$$DF();
   let s = _$$md(_$$dO);
   let [l, c] = _$$fp(JV);
@@ -8338,7 +8338,7 @@ function cr() {
   return !!e && !t;
 }
 function ca() {
-  let e = _$$d(e => e.mirror.appModel.showUi);
+  let e = useSelector(e => e.mirror.appModel.showUi);
   let t = _$$md(_$$zS);
   let i = Xr(_$$H4);
   let n = useRef(null);
@@ -8451,7 +8451,7 @@ function cc({
 }
 function cu() {
   let e = _$$tS();
-  let t = wA();
+  let t = useDispatch();
   let i = {
     rest: {
       scale: .9
@@ -8576,7 +8576,7 @@ function c_() {
 }
 function cx() {
   let e = _$$md(_$$dO);
-  let t = wA();
+  let t = useDispatch();
   let i = _$$um2();
   useEffect(() => {
     e.status === _$$c6.LOADING ? t(_$$F.enqueue({
@@ -9283,7 +9283,7 @@ function uD({
   let g = t.length <= 0;
   let j = g && r.length > 0;
   let b = a.length > 0 && g;
-  let y = Pj().getState();
+  let y = useStore().getState();
   let v = qI();
   let C = document.activeElement?.tagName === "TEXTAREA";
   kz(Uz.TAB, e => {
@@ -10045,7 +10045,7 @@ function u$() {
 }
 function uY() {
   let e = function () {
-    let e = _$$d(({
+    let e = useSelector(({
       mirror: {
         appModel: e
       }
@@ -10065,12 +10065,12 @@ function uY() {
         return n.length > 0 && i.length > 0 && i.some(e => n.includes(e));
       }, e, t);
     }(t);
-    let a = _$$d(({
+    let a = useSelector(({
       mirror: {
         appModel: e
       }
     }) => [QOV.DEFAULT, QOV.SELECTING_TEXT, QOV.CLICKING_TO_CHANGE_SELECTION].includes(e.activeUserAction));
-    let s = _$$d(({
+    let s = useSelector(({
       mirror: {
         appModel: e
       }
@@ -10113,7 +10113,7 @@ function uX() {
   }();
   let e = Object.keys(KH());
   let t = function () {
-    let e = _$$d(({
+    let e = useSelector(({
       mirror: {
         appModel: e
       }
@@ -10235,8 +10235,8 @@ function u6(e) {
     setIsEditorOpen
   } = e;
   let s = useId();
-  let c = wA();
-  let p = _$$d(e => e.userFlags.seen_alt_text_explanation);
+  let c = useDispatch();
+  let p = useSelector(e => e.userFlags.seen_alt_text_explanation);
   let h = useCallback(() => {
     !p && n && c(_$$b({
       seen_alt_text_explanation: !0
@@ -10737,7 +10737,7 @@ function hy({
     })
   });
 }
-let hC = () => !!_$$d(hT);
+let hC = () => !!useSelector(hT);
 function hT(e) {
   let t = e.mirror.sceneGraph;
   let i = Object.keys(e.mirror.sceneGraphSelection);
@@ -10769,21 +10769,21 @@ function hS(e) {
   }
 }
 function hw() {
-  let e = _$$d(e => e.mirror.appModel.hyperlinkLocation);
+  let e = useSelector(e => e.mirror.appModel.hyperlinkLocation);
   let t = Um();
   let i = _$$md(_$$n9);
   let n = t && t.type === K9;
-  let r = _$$d(e => e.progressBarState.mode === Oin.HIDE_UI);
-  let a = _$$d(e => e.mirror.selectionProperties.name && -1 !== e.mirror.selectionProperties.name.indexOf("FigJam Stamp Icon") && e.mirror.selectionProperties.numSelectedByType?.ROUNDED_RECTANGLE === 1 && 1 === e.mirror.selectionProperties.numSelected);
-  let s = _$$d(e => a || e.mirror.selectionProperties.numSelectedByType?.STAMP === 1 && 1 === e.mirror.selectionProperties.numSelected);
-  let o = _$$d(e => {
+  let r = useSelector(e => e.progressBarState.mode === Oin.HIDE_UI);
+  let a = useSelector(e => e.mirror.selectionProperties.name && -1 !== e.mirror.selectionProperties.name.indexOf("FigJam Stamp Icon") && e.mirror.selectionProperties.numSelectedByType?.ROUNDED_RECTANGLE === 1 && 1 === e.mirror.selectionProperties.numSelected);
+  let s = useSelector(e => a || e.mirror.selectionProperties.numSelectedByType?.STAMP === 1 && 1 === e.mirror.selectionProperties.numSelected);
+  let o = useSelector(e => {
     let t = e.mirror.selectionProperties.numSelectedByType?.TABLE;
     let i = e.mirror.selectionProperties.numSelectedByType?.TABLE_CELL;
     return t && t > 0 || i && i > 0;
   });
-  let l = _$$d(e => !e.mirror.selectionProperties.numSelected || 0 === e.mirror.selectionProperties.numSelected);
+  let l = useSelector(e => !e.mirror.selectionProperties.numSelected || 0 === e.mirror.selectionProperties.numSelected);
   let u = _$$ut(Ez5?.figjamState().isInCanvasAiMode, !1);
-  let m = _$$d(hT);
+  let m = useSelector(hT);
   let f = _$$d4();
   return !l && !e && !r && (!o || !n) && !m && (s && !XN ? f : !i && !u);
 }
@@ -10809,9 +10809,9 @@ function hB(e, t, i, n, r) {
   4 & t && r(e);
 }
 function hV() {
-  let e = _$$d(e => e.mirror.selectionProperties.whiteboardNumSelected);
-  let t = _$$d(e => e.mirror.selectionProperties.whiteboardNumSelectedByType);
-  let i = _$$d(e => e.mirror.selectionProperties.whiteboardNumSelectedPlatformShape ?? 0);
+  let e = useSelector(e => e.mirror.selectionProperties.whiteboardNumSelected);
+  let t = useSelector(e => e.mirror.selectionProperties.whiteboardNumSelectedByType);
+  let i = useSelector(e => e.mirror.selectionProperties.whiteboardNumSelectedPlatformShape ?? 0);
   let n = 0;
   if (e && e > 0 && t) {
     let r = t.SHAPE_WITH_TEXT ?? 0;
@@ -11009,15 +11009,15 @@ function hq() {
 }
 let hJ = new Map([["MOVE_ROW_UP", "move-table-row-up"], ["MOVE_ROW_DOWN", "move-table-row-down"], ["MOVE_COLUMN_LEFT", "move-table-column-left"], ["MOVE_COLUMN_RIGHT", "move-table-column-right"], ["ADD_COLUMN_LEFT", "add-table-column-before"], ["ADD_COLUMN_RIGHT", "add-table-column-after"], ["ADD_ROW_ABOVE", "add-table-row-above"], ["ADD_ROW_BELOW", "add-table-row-below"], ["DELETE_CONTENT", "delete-table-contents"], ["DELETE_COLUMN", "delete-current-table-column"], ["DELETE_ROW", "delete-current-table-row"], ["CUT", "cut"], ["COPY", "copy"], ["PASTE_HERE", "paste-here"], ["PASTE_TO_REPLACE", "paste-to-replace"], ["EXPORT_SELECTION", "export-selection-or-current-page"], ["BRING_TO_FRONT", "bring-to-front"], ["SEND_TO_BACK", "send-to-back"], ["LOCK_UNLOCK", "toggle-locked-for-selected-nodes"], ["MULTISELECT_MODE", "set-tool-multiselect"]]);
 let hQ = () => {
-  let e = _$$d(e => e.selectedView);
-  let t = _$$d(e => e.mirror.appModel);
-  let i = _$$d(e => !e.mirror.selectionProperties.numSelected || 0 === e.mirror.selectionProperties.numSelected);
+  let e = useSelector(e => e.selectedView);
+  let t = useSelector(e => e.mirror.appModel);
+  let i = useSelector(e => !e.mirror.selectionProperties.numSelected || 0 === e.mirror.selectionProperties.numSelected);
   let n = t.showComments && !!e.commentsEnabled;
   let r = new Set();
   let a = (e, i) => {
     _$$Yh(t, i) && r.add(e);
   };
-  let s = _$$d(e => e.mirror.appModel.activeCanvasEditModeType);
+  let s = useSelector(e => e.mirror.appModel.activeCanvasEditModeType);
   for (let [e, o] of (n && r.add("ADD_COMMENT"), hJ.entries())) switch (e) {
     case "PASTE_TO_REPLACE":
     case "EXPORT_SELECTION":
@@ -11053,10 +11053,10 @@ function h1(e, t) {
   };
 }
 function h4() {
-  return _$$d(e => "UNORDERED_LIST" === e.mirror.selectionProperties.textLineType);
+  return useSelector(e => "UNORDERED_LIST" === e.mirror.selectionProperties.textLineType);
 }
 function h9() {
-  return _$$d(e => "ORDERED_LIST" === e.mirror.selectionProperties.textLineType);
+  return useSelector(e => "ORDERED_LIST" === e.mirror.selectionProperties.textLineType);
 }
 let mt = memo(function (e) {
   return jsx("svg", {
@@ -11072,7 +11072,7 @@ let mt = memo(function (e) {
   });
 });
 function mr() {
-  return _$$d(e => e.mirror.appModel.onCanvasNameEditorInfo.mode === nzw.SECTION_NAME);
+  return useSelector(e => e.mirror.appModel.onCanvasNameEditorInfo.mode === nzw.SECTION_NAME);
 }
 function ma() {
   let e = mr();
@@ -11087,10 +11087,10 @@ function mc() {
 }
 function mu() {
   let e = _$$R(e => e.mirror.selectionProperties.whiteboardNumSelectedByType);
-  let t = _$$d(e => e.mirror.selectionProperties.whiteboardNumSelectedPlatformShape ?? 0);
-  let i = _$$d(e => e.mirror.selectionProperties.whiteboardNumSelected);
+  let t = useSelector(e => e.mirror.selectionProperties.whiteboardNumSelectedPlatformShape ?? 0);
+  let i = useSelector(e => e.mirror.selectionProperties.whiteboardNumSelected);
   let n = _$$R(e => e.mirror.appModel.activeCanvasEditModeType);
-  let r = _$$d(e => Object.keys(e.mirror.sceneGraphSelection).some(t => {
+  let r = useSelector(e => Object.keys(e.mirror.sceneGraphSelection).some(t => {
     let i = e.mirror.sceneGraph.get(t);
     return !!i?.textSublayer?.textContent.length;
   }));
@@ -12087,7 +12087,7 @@ function fl() {
   });
 }
 function fd() {
-  return _$$d(e => {
+  return useSelector(e => {
     let t = e.mirror.selectionProperties.numSelectedByType;
     return _$$Yh(e.mirror.appModel, "ungroup-selection") && t && OU(t, ["FRAME", "GROUP"]);
   });
@@ -12437,16 +12437,16 @@ let fS = (e, t) => {
   let n = function () {
     let e = q8();
     let t = _$$V5();
-    let i = _$$d(e => e.mirror.appModel.activeCanvasEditModeType);
+    let i = useSelector(e => e.mirror.appModel.activeCanvasEditModeType);
     return new Map([["TIDY_UP", Zr("tidy-up")], ["GROUP_SELECTION", Zr("group-selection")], ["UNGROUP_SELECTION", fd() ?? !1], ["CREATE_SECTION", Zr("create-section-from-selection")], ["ALIGNMENT", Zr("align-top") && i !== m1T.RASTER], ["AI_QUICK_ACTIONS", !e && t]]);
   }();
   let r = function () {
     let e = kl("imageHasNoStroke");
     let t = kl("sectionContentsHidden");
-    let i = _$$d(e => e.mirror.appModel.onCanvasNameEditorInfo.mode === nzw.SECTION_NAME);
+    let i = useSelector(e => e.mirror.appModel.onCanvasNameEditorInfo.mode === nzw.SECTION_NAME);
     let n = _$$ut(Ez5?.editorState().selectionIsHyperlink, !1);
     let r = kl("authorVisibility");
-    return new Map([["TEXT_DECORATION_BOLD", _$$d(e => _$$N6(e.mirror.selectionProperties.fontStyle?.toString() || ""))], ["TEXT_DECORATION_STRIKETHROUGH", _$$d(e => "STRIKETHROUGH" === e.mirror.selectionProperties.whiteboardTextDecoration)], ["ORDERED_LIST", h9()], ["UNORDERED_LIST", h4()], ["IMAGE_BORDER", !1 === e], ["SECTION_SHOW_HIDE", !0 === t], ["SECTION_RENAME", i], ["HYPERLINK", !0 === n], ["AUTHOR_VISIBILITY", !0 === r]]);
+    return new Map([["TEXT_DECORATION_BOLD", useSelector(e => _$$N6(e.mirror.selectionProperties.fontStyle?.toString() || ""))], ["TEXT_DECORATION_STRIKETHROUGH", useSelector(e => "STRIKETHROUGH" === e.mirror.selectionProperties.whiteboardTextDecoration)], ["ORDERED_LIST", h9()], ["UNORDERED_LIST", h4()], ["IMAGE_BORDER", !1 === e], ["SECTION_SHOW_HIDE", !0 === t], ["SECTION_RENAME", i], ["HYPERLINK", !0 === n], ["AUTHOR_VISIBILITY", !0 === r]]);
   }();
   let a = function () {
     let e = kl("sectionContentsHidden");
@@ -12656,7 +12656,7 @@ let fS = (e, t) => {
     return g;
   }();
   let g = h1("MENU", h0.CONTEXTUAL_TOOLBAR);
-  let j = _$$d(e => e.mirror.appModel.activeCanvasEditModeType);
+  let j = useSelector(e => e.mirror.appModel.activeCanvasEditModeType);
   let b = kl("connectorStartCapDirection");
   let y = kl("connectorEndCapDirection");
   let v = mY();
@@ -12815,28 +12815,28 @@ let fI = (e, t) => {
     subscribeToUpdates_expensive: e
   });
   let u = Yb(o, a);
-  let h = _$$d(({
+  let h = useSelector(({
     mirror: {
       appModel: e
     }
   }) => [QOV.DEFAULT, QOV.SELECTING_TEXT].includes(e.activeUserAction));
   let m = WC();
   let f = T$();
-  let _ = _$$d(e => e.universalInsertModal);
+  let _ = useSelector(e => e.universalInsertModal);
   let x = _$$wi();
-  let g = _$$d(e => "NOT_PINNED" !== e.universalInsertModal.pinned);
+  let g = useSelector(e => "NOT_PINNED" !== e.universalInsertModal.pinned);
   let j = !!_$$md(_$$ph);
   let b = !!_$$md(LQ);
-  let y = _$$d(({
+  let y = useSelector(({
     mirror: {
       appModel: e
     }
   }) => e.showUi);
   let v = _$$_o();
   let T = useRef({});
-  let E = _$$d(e => e.mirror.sceneGraphSelection);
+  let E = useSelector(e => e.mirror.sceneGraphSelection);
   let S = useRef(null);
-  let w = _$$d(e => e.mirror.appModel.activeCanvasEditModeType);
+  let w = useSelector(e => e.mirror.appModel.activeCanvasEditModeType);
   let I = w === m1T.RASTER;
   let L = S.current === m1T.RASTER;
   let A = Object.keys(E);
@@ -13202,7 +13202,7 @@ function fR() {
       w(!0);
     });
   }, [e, O, M]);
-  let D = _$$d(({
+  let D = useSelector(({
     mirror: {
       appModel: e
     }
@@ -13220,7 +13220,7 @@ function fR() {
   }, [e, D]);
   let P = useRef(null);
   let U = useRef(null);
-  let F = _$$d(e => e.mirror.appModel.isReadOnly);
+  let F = useSelector(e => e.mirror.appModel.isReadOnly);
   return jsxs(Fragment, {
     children: [F ? null : jsx(fw, {
       displayStateRef: P,
@@ -13525,7 +13525,7 @@ function f1({
   tooltip: t,
   ...i
 }) {
-  let n = wA();
+  let n = useDispatch();
   let r = Um();
   return jsx("div", {
     "data-tooltip-show-above": !0,
@@ -15022,9 +15022,9 @@ let xI = new Map([[Tcr.WHITEBOARD_COLOR, function () {
   let i = mc();
   let [n, r] = useState(!1);
   let a = _$$R(e => e.mirror.selectionProperties.whiteboardNumSelectedByType);
-  let s = _$$d(e => e.mirror.selectionProperties.whiteboardNumSelectedPlatformShape ?? 0);
-  let u = _$$d(e => e.mirror.selectionProperties.whiteboardNumSelected);
-  let p = _$$d(e => {
+  let s = useSelector(e => e.mirror.selectionProperties.whiteboardNumSelectedPlatformShape ?? 0);
+  let u = useSelector(e => e.mirror.selectionProperties.whiteboardNumSelected);
+  let p = useSelector(e => {
     let t = Object.keys(e.mirror.sceneGraphSelection);
     return 0 !== t.length && t.every(t => {
       let i = e.mirror.sceneGraph.get(t);
@@ -15184,7 +15184,7 @@ let xI = new Map([[Tcr.WHITEBOARD_COLOR, function () {
     return i?.mainComponent?.name;
   }, t);
   let r = useMemo(() => t ? [t] : [], [t]);
-  let a = wA();
+  let a = useDispatch();
   let s = useCallback(e => {
     _$$l.user("swap-instance", () => {
       a(_$$uO({
@@ -15484,7 +15484,7 @@ let xI = new Map([[Tcr.WHITEBOARD_COLOR, function () {
     min: 1,
     max: 2e3
   });
-  let t = wA();
+  let t = useDispatch();
   let i = Um();
   let [n, r] = useState(void 0);
   let [a, s] = useState(void 0);
@@ -16595,8 +16595,8 @@ let x3 = "state_swap_library_items--header--9Mr9Y text--fontPos11--2LvXf text--_
 let x5 = memo(function ({
   onClose: e
 }) {
-  let t = _$$d(e => e.mirror.selectionProperties.stateGroupSelectionInfo);
-  let i = _$$d(e => e.mirror.sceneGraphSelection);
+  let t = useSelector(e => e.mirror.selectionProperties.stateGroupSelectionInfo);
+  let i = useSelector(e => e.mirror.sceneGraphSelection);
   let n = _$$mJ();
   let r = _$$_H();
   let {
@@ -16679,7 +16679,7 @@ let x4 = memo(function () {
     getTriggerProps,
     manager
   } = _$$b7();
-  let a = _$$d(e => e.mirror.selectionProperties.stateGroupSelectionInfo);
+  let a = useSelector(e => e.mirror.selectionProperties.stateGroupSelectionInfo);
   return a?.allStates && a?.selectedStates ? getFeatureFlags().figjam_a11y_inline_toolbar ? jsx(_$$a0, {
     mode: "match",
     children: jsxs(_$$bL3, {
@@ -16861,10 +16861,10 @@ let gm = memo(function ({
 }) {
   let i = createRef();
   let n = _$$md(_$$f7);
-  let r = _$$d(e => e.mirror.selectionProperties.whiteboardNumSelected);
-  let a = _$$d(e => e.mirror.selectionProperties.whiteboardNumSelectedPlatformShape ?? 0);
-  let s = _$$d(e => e.mirror.selectionProperties.stateGroupSelectionInfo?.stateGroup);
-  let f = _$$d(e => e.mirror.sceneGraphSelection);
+  let r = useSelector(e => e.mirror.selectionProperties.whiteboardNumSelected);
+  let a = useSelector(e => e.mirror.selectionProperties.whiteboardNumSelectedPlatformShape ?? 0);
+  let s = useSelector(e => e.mirror.selectionProperties.stateGroupSelectionInfo?.stateGroup);
+  let f = useSelector(e => e.mirror.sceneGraphSelection);
   let _ = _$$R(e => e.mirror.selectionProperties.whiteboardControls);
   let x = !!_?.includes(Tcr.DESCRIPTION);
   let g = !!kl("locked");
@@ -16881,7 +16881,7 @@ let gm = memo(function ({
     setShouldSectionShowUnlockWithFriction: v
   });
   C_(i);
-  let E = _$$d(e => {
+  let E = useSelector(e => {
     let t = Object.keys(e.mirror.sceneGraphSelection);
     return 1 === t.length && n.currentlySelectedNode.nodeId === t[0] ? n.currentlySelectedNode.ariaLabel : null;
   });
@@ -16994,7 +16994,7 @@ let g_ = memo(function ({
   let n;
   let r = createRef();
   let a = _$$md(_$$f7);
-  let s = _$$d(e => e.mirror.sceneGraphSelection);
+  let s = useSelector(e => e.mirror.sceneGraphSelection);
   let u = _$$R(e => e.mirror.selectionProperties.whiteboardControls);
   let f = !!u?.includes(Tcr.DESCRIPTION);
   let _ = !!kl("locked");
@@ -17011,7 +17011,7 @@ let g_ = memo(function ({
     setShouldSectionShowUnlockWithFriction: b
   });
   C_(r);
-  let C = _$$d(e => {
+  let C = useSelector(e => {
     let t = Object.keys(e.mirror.sceneGraphSelection);
     return 1 === t.length && a.currentlySelectedNode.nodeId === t[0] ? a.currentlySelectedNode.ariaLabel : null;
   });
@@ -17093,9 +17093,9 @@ let gg = memo(function ({
   figjamAiQuickActionShown: n,
   onMenuMarginBottomChange: r
 }) {
-  let a = _$$d(e => e.mirror.selectionProperties.whiteboardNumSelected);
-  let s = _$$d(e => e.mirror.selectionProperties.whiteboardNumSelectedPlatformShape ?? 0);
-  let c = _$$d(e => e.mirror.selectionProperties.stateGroupSelectionInfo?.stateGroup);
+  let a = useSelector(e => e.mirror.selectionProperties.whiteboardNumSelected);
+  let s = useSelector(e => e.mirror.selectionProperties.whiteboardNumSelectedPlatformShape ?? 0);
+  let c = useSelector(e => e.mirror.selectionProperties.stateGroupSelectionInfo?.stateGroup);
   let u = _$$Cb();
   let p = Zr("align-top");
   let h = Zr("tidy-up");
@@ -17202,19 +17202,19 @@ function gv({
 }
 let gC = memo(function () {
   let e = function () {
-    let e = _$$d(e => e.mirror.appModel.hyperlinkLocation);
+    let e = useSelector(e => e.mirror.appModel.hyperlinkLocation);
     let t = Um();
     let i = t && t.type === K9;
-    let n = _$$d(e => e.progressBarState.mode === Oin.HIDE_UI);
+    let n = useSelector(e => e.progressBarState.mode === Oin.HIDE_UI);
     let r = hC();
-    let a = _$$d(e => e.mirror.selectionProperties.numSelectedByType?.SHAPE_WITH_TEXT === 1 && 1 === e.mirror.selectionProperties.numSelected);
-    return !_$$d(e => !e.mirror.selectionProperties.numSelected || 0 === e.mirror.selectionProperties.numSelected) && !e && !n && !i && a && r;
+    let a = useSelector(e => e.mirror.selectionProperties.numSelectedByType?.SHAPE_WITH_TEXT === 1 && 1 === e.mirror.selectionProperties.numSelected);
+    return !useSelector(e => !e.mirror.selectionProperties.numSelected || 0 === e.mirror.selectionProperties.numSelected) && !e && !n && !i && a && r;
   }();
-  let t = _$$d(hE);
+  let t = useSelector(hE);
   let i = Pl({
     subscribeToUpdates_expensive: !1
   });
-  let n = _$$d(hS);
+  let n = useSelector(hS);
   if (!n) return null;
   let r = function (e, t, i) {
     let n = kE(168, i);
@@ -17676,18 +17676,18 @@ class gY {
     this.lastPlayedTimestamp = null;
   }
 }
-let gq = e => _$$d(t => {
+let gq = e => useSelector(t => {
   let i = t.music.activeSongs.filter(t => e === t.song_id);
   return i.length ? i[0] : void 0;
 }, _$$eB);
 function gJ() {
-  let e = _$$d(e => e.music.music);
+  let e = useSelector(e => e.music.music);
   return !e?.isPaused && !e?.isStopped;
 }
 let gQ = buildUploadUrl("f4e48159672101a168b296a94e39ef02f032e171");
 let g0 = () => {
   let [e, t] = useState({});
-  let i = _$$d(e => e.music.music);
+  let i = useSelector(e => e.music.music);
   useEffect(() => {
     if (!i || i?.isPaused || i?.isStopped) return;
     let e = setTimeout(() => t({}), 500);
@@ -17716,11 +17716,11 @@ function g9({
   withBorder: n,
   withHeavyFont: r
 }) {
-  let a = _$$d(e => e.dropdownShown?.type === "song-dropdown" ? e.dropdownShown : null);
+  let a = useSelector(e => e.dropdownShown?.type === "song-dropdown" ? e.dropdownShown : null);
   let [s, c] = useState(void 0);
-  let u = Pj();
-  let p = wA();
-  let h = _$$d(e => e.music.playerInstance);
+  let u = useStore();
+  let p = useDispatch();
+  let h = useSelector(e => e.music.playerInstance);
   let m = e || g4;
   let f = _$$$();
   let x = [jsx(_$$c$3, {
@@ -19511,7 +19511,7 @@ function ji(e) {
   let [n, r] = useState(null);
   let a = useRef(0);
   let s = useRef(0);
-  let c = _$$d(e => e.music?.music?.isPaused);
+  let c = useSelector(e => e.music?.music?.isPaused);
   let u = F4();
   let p = u?.shouldOptimizeForIpadApp || Ay.isIpad;
   let m = useCallback(e => {
@@ -19599,7 +19599,7 @@ function jl(e) {
     useLightShadow
   } = e;
   let s = function () {
-    let e = _$$d(e => e.music.music);
+    let e = useSelector(e => e.music.music);
     let t = gq(e?.selectedSongID || "");
     let i = gJ();
     let n = t && t.album_art;
@@ -19621,7 +19621,7 @@ function jl(e) {
   });
 }
 function jd(e) {
-  let t = _$$d(e => e.music.music);
+  let t = useSelector(e => e.music.music);
   let i = gq(t?.selectedSongID || "");
   let n = gJ();
   let r = i && i.album_art;
@@ -19653,10 +19653,10 @@ function jd(e) {
 function ju() {
   let e = _$$nF(!0);
   let t = !_$$N7() && e.enabled;
-  let i = _$$d(e => e.userFlags.dismissed_figjam_music_volume_hint);
-  let n = _$$d(e => e.music.music?.selectedSongID && e.music.music?.selectedSongID !== "");
-  let r = _$$d(e => e.music.music?.isPaused === !1 && e.music.music?.isStopped === !1);
-  let a = wA();
+  let i = useSelector(e => e.userFlags.dismissed_figjam_music_volume_hint);
+  let n = useSelector(e => e.music.music?.selectedSongID && e.music.music?.selectedSongID !== "");
+  let r = useSelector(e => e.music.music?.isPaused === !1 && e.music.music?.isStopped === !1);
+  let a = useDispatch();
   return t || i || !r || !n ? null : jsxs("div", {
     className: ex()("volume_hint--hintContainer--A9gj2", Dm),
     "data-testid": "volume-hint",
@@ -19805,20 +19805,20 @@ function jv(e) {
 }
 function jC() {
   let [e, t] = useState(!1);
-  let i = _$$d(e => e.music.music);
-  let n = _$$d(e => e.music.playerInstance);
+  let i = useSelector(e => e.music.music);
+  let n = useSelector(e => e.music.playerInstance);
   let r = i?.selectedSongID || "";
   let a = gq(r);
   let s = a?.start_at_ms;
-  let c = _$$d(e => e.multiplayer.allUsers.length);
+  let c = useSelector(e => e.multiplayer.allUsers.length);
   let [u, p] = useState(!1);
-  let h = _$$d(e => e.music.activeSongs, _$$b0);
+  let h = useSelector(e => e.music.activeSongs, _$$b0);
   let m = gJ();
-  let f = wA();
+  let f = useDispatch();
   useEffect(() => {
     h.length && p(!1);
   }, [h.length]);
-  let _ = Pj();
+  let _ = useStore();
   let x = useCallback(() => {
     r && _$$xf(_.getState(), r);
     f(_$$mF({
@@ -19878,11 +19878,11 @@ function jC() {
 let jk = null;
 let jR = null;
 let jM = null;
-let jD = () => _$$d(e => e.music.playerInstance);
+let jD = () => useSelector(e => e.music.playerInstance);
 let jP = () => 1e3;
 function jU() {
   let [e, t] = useState({});
-  let i = _$$d(e => e.timer);
+  let i = useSelector(e => e.timer);
   useEffect(() => {
     if (!i || !i.time || i?.time?.isPaused) return;
     let e = setTimeout(() => t({}), jP());
@@ -19892,9 +19892,9 @@ function jU() {
   }, [e, i, i.time?.isPaused]);
 }
 function jF() {
-  let e = _$$d(e => e.timer);
-  let t = _$$d(e => _$$d9(e));
-  let i = _$$d(e => t ? L8(t, e.repos) : null);
+  let e = useSelector(e => e.timer);
+  let t = useSelector(e => _$$d9(e));
+  let i = useSelector(e => t ? L8(t, e.repos) : null);
   let n = Math.ceil(P$(e.time) / 1e3);
   n > 0 ? _$$rF(t, i, n) : _$$rF(t, i);
 }
@@ -19937,24 +19937,24 @@ let jW = () => {
 };
 let jz = e => {
   let t = _$$F8(e);
-  let i = wA();
-  let n = _$$d(e => e.timer);
+  let i = useDispatch();
+  let n = useSelector(e => e.timer);
   let r = _$$F8(n);
-  let a = _$$F8(_$$d(e => e.timer.volume));
-  let s = _$$F8(_$$d(e => e.timer.isMuted));
+  let a = _$$F8(useSelector(e => e.timer.volume));
+  let s = _$$F8(useSelector(e => e.timer.isMuted));
   let o = _$$F8(jD());
   useEffect(() => {
     jB(e, i, r, a, s, o);
   }, [t, i, s, o, r, e, a]);
 };
 let jZ = () => {
-  let e = wA();
-  let t = _$$F8(_$$d(e => e.timer.volume));
-  let i = _$$F8(_$$d(e => e.timer.setBy));
+  let e = useDispatch();
+  let t = _$$F8(useSelector(e => e.timer.volume));
+  let i = _$$F8(useSelector(e => e.timer.setBy));
   let n = _$$F8(_$$iZ());
-  let r = _$$F8(_$$d(e => e.timer.isMuted));
+  let r = _$$F8(useSelector(e => e.timer.isMuted));
   let a = _$$F8(jD());
-  let s = _$$d(e => e.music.music);
+  let s = useSelector(e => e.music.music);
   return {
     callbackToRunAtFiveSecondsLeft: useCallback((i, n) => {
       i.current && jk?.paused && !r.current && (a.current && a.current.fadeOut({
@@ -20002,15 +20002,15 @@ let jZ = () => {
   };
 };
 let j$ = e => {
-  let t = wA();
-  let i = _$$d(e => e.timer.time);
-  let n = _$$F8(_$$d(e => e.timer.audioEnabled));
-  let r = _$$F8(_$$d(e => e.timer && "open" === e.timer.modalState));
-  let a = _$$F8(_$$d(e => e.timer.volume));
+  let t = useDispatch();
+  let i = useSelector(e => e.timer.time);
+  let n = _$$F8(useSelector(e => e.timer.audioEnabled));
+  let r = _$$F8(useSelector(e => e.timer && "open" === e.timer.modalState));
+  let a = _$$F8(useSelector(e => e.timer.volume));
   let s = _$$F8(jD());
-  let o = _$$d(e => e.timer.isMuted);
+  let o = useSelector(e => e.timer.isMuted);
   let c = !i || i.isPaused;
-  let u = _$$d(e => e.music.music?.isPaused);
+  let u = useSelector(e => e.music.music?.isPaused);
   let {
     callbackToRunAtFiveSecondsLeft,
     callbackToRunWhenTimerFinishes,
@@ -20051,9 +20051,9 @@ let jX = e => useCallback(() => {
 }, [e]);
 function jq() {
   let [e, t] = _$$fp(_$$$5);
-  let i = _$$d(e => e.timer.volume);
-  let n = _$$F8(_$$d(e => e.timer.volume));
-  let r = _$$F8(_$$d(e => e.timer.isMuted));
+  let i = useSelector(e => e.timer.volume);
+  let n = _$$F8(useSelector(e => e.timer.volume));
+  let r = _$$F8(useSelector(e => e.timer.isMuted));
   let a = useRef(e.lastUsedTime);
   let s = jX(t);
   return [e, useMemo(() => ({
@@ -20124,7 +20124,7 @@ function j9({
     } = e;
     let o = useRef(null);
     let c = useRef(null);
-    let u = wA();
+    let u = useDispatch();
     let p = useCallback(e => {
       if (!e.currentTarget.value.match(/^[0-9]?[0-9]?$/)) {
         e.preventDefault();
@@ -20460,7 +20460,7 @@ function bn() {
     resumeTimer
   } = t;
   let c = _$$md(_$$jo);
-  let u = _$$d(e => e.multiplayer.allUsers.length);
+  let u = useSelector(e => e.multiplayer.allUsers.length);
   let [h, m] = useState(!1);
   let f = c.time;
   let _ = RE(e);
@@ -20555,7 +20555,7 @@ function bs({
   onCancel: e
 }) {
   let t = C3();
-  let i = wA();
+  let i = useDispatch();
   let n = _$$tS();
   let r = _$$oh(wQ(n || ""));
   let a = useCallback(() => {
@@ -20718,9 +20718,9 @@ function by({
   }), e), {}), [e.votedNodes]);
 }
 let bv = e => {
-  let t = wA();
+  let t = useDispatch();
   return {
-    isDropdownOpen: _$$d(e => e.dropdownShown?.type === bT),
+    isDropdownOpen: useSelector(e => e.dropdownShown?.type === bT),
     handleTargetClick: () => {
       t(_$$gR2({
         type: bT
@@ -20836,7 +20836,7 @@ function bw({
   recordingKey: i
 }) {
   let n = C3();
-  let r = _$$d(e => !e.user);
+  let r = useSelector(e => !e.user);
   let a = _$$tS();
   return n ? jsxs("div", {
     className: "joined_vote_view--joinedVoteViewContainer--2w8-v",
@@ -21403,7 +21403,7 @@ function bk() {
 function bR({
   recordingKey: e
 }) {
-  let t = wA();
+  let t = useDispatch();
   let i = Pd(useCallback(() => {
     t(H1({
       votingStage: W8Y.JOINED
@@ -21433,13 +21433,13 @@ let bU = e => {
   return t;
 };
 function bF() {
-  let e = wA();
+  let e = useDispatch();
   let t = _$$tS();
   let {
     title,
     userVoteLimit
-  } = _$$d(e => e.voting.votingParams);
-  let r = _$$d(e => !e.user);
+  } = useSelector(e => e.voting.votingParams);
+  let r = useSelector(e => !e.user);
   let a = _$$oh($c(t || ""));
   let [s, c] = useState(userVoteLimit.toString());
   useEffect(() => {
@@ -21462,11 +21462,11 @@ function bF() {
 }
 function bH(e) {
   let t = useRef(null);
-  let i = wA();
+  let i = useDispatch();
   let n = _$$tS();
-  let r = _$$d(e => !e.user);
+  let r = useSelector(e => !e.user);
   let a = _$$oh($c(n || ""));
-  let s = _$$d(e => e.multiplayer.allUsers.length);
+  let s = useSelector(e => e.multiplayer.allUsers.length);
   let c = _$$Fk(e => e.getCurrentPage()?.guid);
   let u = NE()?.id;
   let p = r || a || !c;
@@ -21651,8 +21651,8 @@ function bG({
   });
 }
 function bK() {
-  let e = _$$d(e => e.mirror.appModel.votingSessionInfo);
-  let t = _$$d(e => e.mirror.appModel.votingSessionInfo);
+  let e = useSelector(e => e.mirror.appModel.votingSessionInfo);
+  let t = useSelector(e => e.mirror.appModel.votingSessionInfo);
   let i = "meetingsPanel";
   switch (t.votingStage) {
     case W8Y.JOINED:
@@ -21675,7 +21675,7 @@ let bZ = "meetings_panel";
 let b$ = Ju(function ({
   votingSessionId: e
 }) {
-  let t = wA();
+  let t = useDispatch();
   let i = _$$tS();
   let n = () => {
     _$$sx("cancel_delete_voting_session", {
@@ -21763,7 +21763,7 @@ function bq({
   recordingKey: l,
   onClick: u
 }) {
-  let p = wA();
+  let p = useDispatch();
   let h = _$$tS();
   return jsx("li", {
     children: jsxs(_$$E2, {
@@ -21887,11 +21887,11 @@ function b7({
   let n = e.guid;
   let r = _$$g5(n);
   let a = _$$Z4("figjam_voting");
-  let s = wA();
-  let c = _$$d(e => e.voting.selectedVotePinId === n);
-  let u = _$$d(e => !!t && e.voting.selectedVotePinId === t);
-  let p = _$$d(e => e.voting.hoveredInModalVotePinId === n);
-  let m = _$$d(e => !!t && e.voting.hoveredInModalVotePinId === t);
+  let s = useDispatch();
+  let c = useSelector(e => e.voting.selectedVotePinId === n);
+  let u = useSelector(e => !!t && e.voting.selectedVotePinId === t);
+  let p = useSelector(e => e.voting.hoveredInModalVotePinId === n);
+  let m = useSelector(e => !!t && e.voting.hoveredInModalVotePinId === t);
   let f = useContext(kw);
   useEffect(() => {
     if (p) return () => {
@@ -22159,12 +22159,12 @@ let yr = memo(e => {
 });
 let ya = "meetings_panel";
 function ys() {
-  let e = _$$d(e => e.mirror.appModel.votingSessionInfo);
+  let e = useSelector(e => e.mirror.appModel.votingSessionInfo);
   let t = useMemo(() => e && e.sessionId.length > 0, [e]);
-  let i = wA();
+  let i = useDispatch();
   let n = Xr(Qs);
   let r = qU();
-  let a = Pj();
+  let a = useStore();
   let s = _$$am();
   let u = "pastVotingSessions";
   let m = useRef(null);
@@ -22252,9 +22252,9 @@ function yu({
   fullWidth: i,
   isMinimized: n
 }) {
-  let r = _$$d(e => e.music.isMuted);
-  let a = _$$d(e => r ? 0 : e.music.volume);
-  let s = wA();
+  let r = useSelector(e => e.music.isMuted);
+  let a = useSelector(e => r ? 0 : e.music.volume);
+  let s = useDispatch();
   let l = e => {
     e.preventDefault();
     e.stopPropagation();
@@ -22335,9 +22335,9 @@ function yj(e) {
     blockTooltip,
     size
   } = e;
-  let u = _$$d(e => e.music.volume);
-  let p = _$$d(e => e.music.isMuted);
-  let h = wA();
+  let u = useSelector(e => e.music.volume);
+  let p = useSelector(e => e.music.isMuted);
+  let h = useDispatch();
   let m = useCallback(() => {
     h(_$$tk({
       isMuted: !p,
@@ -22401,7 +22401,7 @@ function yy({
   }, [x]);
   Xq(g, "touchend", j);
   let b = useRef(null);
-  let y = _$$d(e => e.timer);
+  let y = useSelector(e => e.timer);
   let v = IQ(y.time);
   useEffect(() => {
     v && f(!1);
@@ -22463,17 +22463,17 @@ function yv() {
 }
 function yT() {
   let [e, t] = jq();
-  let i = _$$d(e => e.mirror.appModel.showUi);
+  let i = useSelector(e => e.mirror.appModel.showUi);
   return (!function (e) {
-    let t = wA();
-    let i = _$$d(e => e.timer);
+    let t = useDispatch();
+    let i = useSelector(e => e.timer);
     useEffect(() => {
       !1 !== i.startChimePlayed || IQ(i.time) || CM(i.time) || _$$G5(i.time) || (e(), t(k1(!0)));
     }, [t, e, i.startChimePlayed, i.time]);
   }(t.playStartChime), !function () {
     jW();
     let [e, t] = _$$fp(_$$$5);
-    let i = _$$d(e => e.timer.volume);
+    let i = useSelector(e => e.timer.volume);
     j$(t);
     jz(e);
     jY([jk, jM, jR], i);
@@ -22481,8 +22481,8 @@ function yT() {
     g0();
     let e = function (e) {
       let [t] = useState(() => e?.previousPlayerInstance || new gY(e));
-      let i = _$$d(t => "StandaloneMusic" === e.musicSource ? t.music.volume : t.timer.volume);
-      let n = _$$d(t => "StandaloneMusic" === e.musicSource ? t.music.isMuted : t.timer.isMuted);
+      let i = useSelector(t => "StandaloneMusic" === e.musicSource ? t.music.volume : t.timer.volume);
+      let n = useSelector(t => "StandaloneMusic" === e.musicSource ? t.music.isMuted : t.timer.isMuted);
       useEffect(() => {
         t.setVolume(i / 100);
       }, [i, t]);
@@ -22493,14 +22493,14 @@ function yT() {
     }({
       musicSource: "StandaloneMusic",
       loadingPlaybackUrl: gQ,
-      previousPlayerInstance: _$$d(e => e.music.playerInstance) || void 0
+      previousPlayerInstance: useSelector(e => e.music.playerInstance) || void 0
     });
-    let t = _$$d(e => e.music.music);
+    let t = useSelector(e => e.music.music);
     let i = t?.selectedSongID;
     let n = gq(i || "")?.playback_url;
-    let r = _$$d(e => e.music.volume);
-    let a = _$$d(e => e.music.isMuted);
-    let s = wA();
+    let r = useSelector(e => e.music.volume);
+    let a = useSelector(e => e.music.isMuted);
+    let s = useDispatch();
     useEffect(() => {
       s(qV());
     }, [s]);
@@ -22608,8 +22608,8 @@ function yF() {
   let e = Pt("toolbarView", _$$ec2.recordingKey);
   let t = useRef(null);
   let i = q5();
-  let n = _$$d(e => _$$Yh(e.mirror.appModel, _$$ec2.action) && i);
-  let r = _$$d(e => e.mirror.appModel.currentTool === _$$ec2.tool);
+  let n = useSelector(e => _$$Yh(e.mirror.appModel, _$$ec2.action) && i);
+  let r = useSelector(e => e.mirror.appModel.currentTool === _$$ec2.tool);
   let a = _$$n0();
   let s = _$$z7.getIsExtension();
   useEffect(() => {
@@ -22666,7 +22666,7 @@ function yW() {
   }, [e, i, t]);
   let r = getFeatureFlags().figjam_generate_handbrake;
   let a = r ? _$$t("whiteboard.ai_modal.generate_handbrake") : _$$t("whiteboard.ai_modal.make");
-  let s = _$$d(e => e.mirror.appModel.topLevelMode === lyf.LAYOUT);
+  let s = useSelector(e => e.mirror.appModel.topLevelMode === lyf.LAYOUT);
   useEffect(() => {
     s || i();
   }, [s, i]);
@@ -22813,9 +22813,9 @@ function y0() {
     renderGleam
   } = function (e) {
     let [t, i] = useState(!1);
-    let n = _$$d(yZ);
+    let n = useSelector(yZ);
     let r = _$$f0(y$);
-    let a = wA();
+    let a = useDispatch();
     let s = n > 1 && !r;
     useEffect(() => {
       if (!s) return;
@@ -22855,7 +22855,7 @@ function y0() {
   let _ = function () {
     let e = II();
     let t = C3();
-    let i = _$$d(e => e.music.music);
+    let i = useSelector(e => e.music.music);
     let n = gq(i?.selectedSongID || "");
     return e.includes(_$$sx3.VOTING) && t ? _$$DG(t) : e.includes(_$$sx3.MUSIC) && 1 === e.length ? n ? g8.format(n) : "" : void 0;
   }();
@@ -23065,16 +23065,16 @@ let y6 = "figjam_right_panel--controls--1DAKo";
 let y4 = "figjam_right_panel--leftSection--wZTVw";
 let y9 = "figjam_right_panel--middleSection--xMAsd";
 function y8() {
-  let e = wA();
+  let e = useDispatch();
   let t = q5();
   let i = Um();
-  let n = _$$d(e => e.multiplayer);
+  let n = useSelector(e => e.multiplayer);
   let r = _$$dR2();
   let a = _$$iZ();
   let s = useMemo(() => n.allUsers.find(e => e.sessionID === n.sessionID) || null, [n.allUsers, n.sessionID]);
   let u = B4();
   let p = _$$aV();
-  let f = _$$d(e => e.mirror.appModel.topLevelMode === lyf.HISTORY);
+  let f = useSelector(e => e.mirror.appModel.topLevelMode === lyf.HISTORY);
   let _ = !q8() && Uy() && !Cd();
   let x = Ay.isMeetDevice;
   let g = _$$L2();
@@ -23180,16 +23180,16 @@ let vr = "whiteboard_ui--stackedContainer--2mtV9";
 let va = "whiteboard_ui--rightSidebar--CJHYf";
 let vs = memo(function () {
   let e = Vi();
-  let t = _$$d(e => e.mirror.appModel.topLevelMode === lyf.HISTORY);
+  let t = useSelector(e => e.mirror.appModel.topLevelMode === lyf.HISTORY);
   let i = _$$p("showUi");
   (function () {
     let e = Kx();
-    let t = _$$d(e => e.timer.modalState);
+    let t = useSelector(e => e.timer.modalState);
     let i = _$$md(Qs);
     useEffect(() => {
       e?.updateTimerModalState && e.updateTimerModalState(i.isOpen ? "open" : "closed");
     }, [e, t, i.isOpen]);
-    let n = _$$d(e => e.timer.time);
+    let n = useSelector(e => e.timer.time);
     useEffect(() => {
       e?.updateTimerTime && n && e.updateTimerTime(n);
     }, [e, n]);
@@ -23289,7 +23289,7 @@ function vd({
   isCommentsPanelOpen: e
 }) {
   let [t, i] = _$$fp(qM);
-  let n = _$$d(e => _$$Yh(e.mirror.appModel, JT.SLIDES_REWRITE_TEXT));
+  let n = useSelector(e => _$$Yh(e.mirror.appModel, JT.SLIDES_REWRITE_TEXT));
   useEffect(() => {
     t && !n && i(!1);
   }, [t, n, i]);
@@ -23312,10 +23312,10 @@ function vf({
   initiatorHandle: t,
   votingSessionId: i
 }) {
-  let n = wA();
+  let n = useDispatch();
   let r = Ii();
   let a = function (e) {
-    let t = _$$d(e => e.multiplayer).allUsers.find(t => t.userID === e) ?? null;
+    let t = useSelector(e => e.multiplayer).allUsers.find(t => t.userID === e) ?? null;
     return t ? t.color : null;
   }(e);
   let s = _$$tS();
@@ -23392,10 +23392,10 @@ function v_() {
   }) : null;
 }
 let vg = memo(function () {
-  let e = wA();
+  let e = useDispatch();
   let t = TA();
-  let i = _$$d(e => e.mirror.appModel.votingSessionInfo);
-  let n = _$$d(e => e.voting.selectedVotePinId);
+  let i = useSelector(e => e.mirror.appModel.votingSessionInfo);
+  let n = useSelector(e => e.voting.selectedVotePinId);
   let r = [W8Y.ENDED, W8Y.JOINED].includes(i.votingStage);
   let {
     pageIdForNodeId
@@ -23535,7 +23535,7 @@ function vC() {
   let r = function (e, t) {
     let i = kl("isSingleDiagramNodeSelected");
     let n = kl("locked");
-    let r = _$$d(e => e.mirror.appModel.activeUserAction);
+    let r = useSelector(e => e.mirror.appModel.activeUserAction);
     return !!(i && !n && (e || t) && r !== QOV.DRAGGING && r !== QOV.RESIZING && r !== QOV.ROTATING);
   }(e, t);
   let a = _$$_X({
@@ -24092,7 +24092,7 @@ function vB({
   let t = _$$md(_$$P6);
   let i = _$$dH();
   let n = _$$tS() || void 0;
-  let r = wA();
+  let r = useDispatch();
   let [a, s] = useState(!1);
   let u = useRef(!1);
   let h = e ? "newFile" : "recurring";
@@ -24251,7 +24251,7 @@ function vV() {
   });
 }
 function vK() {
-  let e = _$$d(e => e.multiplayerEmoji);
+  let e = useSelector(e => e.multiplayerEmoji);
   let t = _$$p("showUi");
   let i = _$$p("topLevelMode");
   let n = _$$p("currentTool") === NLJ.COMMENTS;
@@ -24272,16 +24272,16 @@ let vW = memo(({
   shouldShowDragAndDropBorder: e
 }) => {
   let t = _$$p("isReadOnly");
-  let i = _$$d(e => e.progressBarState);
+  let i = useSelector(e => e.progressBarState);
   let n = _$$p("loadingEmbeds");
   let r = _$$ut(Ez5?.uiState().showCanvasSearch, !1);
   let a = _$$aV();
   let s = useRef(null);
-  let p = _$$d(e => e.openFile);
+  let p = useSelector(e => e.openFile);
   let m = p ? p.key : "";
-  let y = _$$d(e => e.universalInsertModal);
-  let w = _$$d(e => _$$h5(e));
-  let I = wA();
+  let y = useSelector(e => e.universalInsertModal);
+  let w = useSelector(e => _$$h5(e));
+  let I = useDispatch();
   Gb(m);
   _$$W(!0);
   let L = BI();

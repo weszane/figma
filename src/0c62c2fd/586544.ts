@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useMemo } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { sortByWithOptions } from "../figma_app/656233";
 import { xx } from "../figma_app/815945";
 import { resourceUtils } from "../905/989992";
@@ -50,7 +50,7 @@ let I = e => ({
   editableResources: []
 });
 export function $$N0(e) {
-  let t = wA();
+  let t = useDispatch();
   let r = function (e, t) {
     let r = Rs(DLq, {
       teamId: e,
@@ -103,13 +103,13 @@ export function $$N0(e) {
       };
     }), [r]);
   }(e.teamId, e.userId);
-  let n = d4(e => e.folders);
+  let n = useSelector(e => e.folders);
   let o = useMemo(() => r.transform(e => E(e?.edit_roles?.folders, n)), [n, r]);
   let y = useMemo(() => r.transform(e => e ? I(e) : {
     privateResourceCount: 0,
     editableResources: []
   }), [r]);
-  let j = d4(t => t.teams[e.teamId]);
+  let j = useSelector(t => t.teams[e.teamId]);
   let T = resourceUtils.all([r, o, y]);
   if ("loaded" !== T.status) return null;
   let [N, C, k] = T.data;

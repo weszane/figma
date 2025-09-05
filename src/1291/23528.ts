@@ -1,5 +1,5 @@
 import { useState, useCallback, useMemo } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { o2 } from "../figma_app/968813";
 import { fG } from "../905/772425";
 import { zW } from "../905/162414";
@@ -12,7 +12,7 @@ let c = {
 export function $$u0({
   maxResults: e
 }) {
-  let t = wA();
+  let t = useDispatch();
   let s = zW({
     maxResultsCount: e,
     api: c,

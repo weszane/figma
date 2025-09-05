@@ -1,5 +1,5 @@
 import { useState, useCallback, useEffect, useMemo } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { glU, MoD } from "../figma_app/763686";
 import { eU, fp } from "../figma_app/27355";
@@ -227,7 +227,7 @@ export function $$T1({
   }, [L, n, hasThumbnailErrors, R, playgroundNodeData, thumbnailData, l, hasChangesToReset, j, u]);
 }
 export function $$L3() {
-  let e = d4(AF);
+  let e = useSelector(AF);
   let t = e?.guid;
   let n = wS();
   let r = "loaded" === n.status ? n.result : void 0;

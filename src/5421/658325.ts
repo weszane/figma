@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback } from "react";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { K as _$$K } from "../905/443068";
 import { S as _$$S } from "../905/274480";
 import { J } from "../905/270045";
@@ -61,7 +61,7 @@ export function $$z0({
   isInteractionModal: e = !1,
   recordingKey: t
 }) {
-  let n = d4(Cy);
+  let n = useSelector(Cy);
   let a = KH();
   let l = eY();
   let s = function () {
@@ -72,7 +72,7 @@ export function $$z0({
       });
     }, [e]);
   }();
-  let d = d4(Y);
+  let d = useSelector(Y);
   let c = Object.keys(a).every(e => {
     let t = l.get(e);
     return t?.type === "TEXT" && !ol(n);
@@ -268,7 +268,7 @@ function W({
   recordingKey: y
 }) {
   var f;
-  f = d4(Cy).find(e => e.event?.interactionType === "ON_CLICK") ?? null;
+  f = useSelector(Cy).find(e => e.event?.interactionType === "ON_CLICK") ?? null;
   let v = f?.actions?.find(e => "URL" === e.connectionType || "NAVIGATE" === e.navigationType || cn(e)) ?? null;
   let I = function (e) {
     let t = e?.linkParam ?? null;
@@ -494,7 +494,7 @@ function G({
   isInteractionModal: v,
   recordingKey: C
 }) {
-  let E = wA();
+  let E = useDispatch();
   let j = e && !gl(e) && ("url" === e.type || "cms_link_field_alias" === e.type);
   let N = e && !gl(e) && e?.type === "url" && (e?.url.startsWith("mailto:") || e?.url.startsWith("tel:"));
   let A = useCallback(t => {

@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useId, useCallback, memo, useState } from "react";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { hS } from "../905/437088";
 import { bL, Rq } from "../905/38914";
 import { Y9, hE, nB, wi, jk } from "../figma_app/272243";
@@ -118,7 +118,7 @@ function j(e) {
     onChangeAreaType,
     recordingKey
   } = e;
-  let o = d4(e => !!e.mirror.selectionProperties.numSelected);
+  let o = useSelector(e => !!e.mirror.selectionProperties.numSelected);
   let l = useId();
   return jsxs("div", {
     className: o ? O : "figjam_export_pickers--exportAreaPlaceholderRow--G7H-m figjam_export_pickers--selectRow--aTA0S figjam_export_pickers--row--iT7Hm",
@@ -348,7 +348,7 @@ let J = memo(function (e) {
     ...i
   } = e;
   let A = hS(i);
-  let b = wA();
+  let b = useDispatch();
   let v = pickerInfo.nodeCounts.selectionStickyCount > 0 || pickerInfo.nodeCounts.canvasStickyCount > 0;
   let I = pickerInfo.nodeCounts.selectionTableCount > 0 || pickerInfo.nodeCounts.canvasTableCount > 0;
   let E = [];
@@ -361,7 +361,7 @@ let J = memo(function (e) {
   let [T, N] = useState(S.contentType);
   let [P, O] = useState(S.backgroundType);
   let [D, L] = useState(() => 0 === S.quality ? R(S.fileType) : S.quality);
-  let F = d4(e => !!e.mirror.selectionProperties.numSelected);
+  let F = useSelector(e => !!e.mirror.selectionProperties.numSelected);
   let [M, U] = useState(F ? "selection" : "file");
   let [B, V] = useState(!1);
   let G = of(Q, "submit", () => {

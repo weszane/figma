@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { tHB, oXo, X3B, glU } from "../figma_app/763686";
 import { Hr, dI } from "../905/871411";
 import { getFeatureFlags } from "../905/601108";
@@ -229,7 +229,7 @@ export function $$ei1(e) {
 }
 function ea(e, t) {
   let r;
-  let a = wA();
+  let a = useDispatch();
   switch (e) {
     case Bi.PROTOTYPING_MULTIPLE_ACTIONS:
       r = _$$b.PROTOTYPING_MULTIPLE_ACTIONS;
@@ -271,7 +271,7 @@ export function $$es23() {
   } = _$$R();
   let n = getFeatureFlags().prototype_multi_path_paywall && !canUseAdvancedPrototyping;
   let a = q5();
-  let s = d4(e => a && a.teamId ? e.teams[a.teamId] : null);
+  let s = useSelector(e => a && a.teamId ? e.teams[a.teamId] : null);
   let d = md(Hu);
   let c = sO();
   let p = ow();

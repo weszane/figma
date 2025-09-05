@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { E as _$$E } from "../905/632989";
 import { glU } from "../figma_app/763686";
 import l from "classnames";
@@ -35,7 +35,7 @@ function M(e) {
   let t;
   let r;
   let i;
-  let o = wA();
+  let o = useDispatch();
   let l = t => {
     o(RK({
       rawInput: e.urlString,
@@ -360,8 +360,8 @@ export function $$U1(e) {
   let {
     getLinkMetadata
   } = e;
-  let r = d4(e => e.hyperlinkPopup);
-  let s = d4(e => e.mirror.appModel.isReadOnly);
+  let r = useSelector(e => e.hyperlinkPopup);
+  let s = useSelector(e => e.mirror.appModel.isReadOnly);
   let l = lg();
   let d = useCallback(() => {
     r && glU.showHyperlinkEditor(r.position.x, r.position.y + r.size.y / 2, r.guid);

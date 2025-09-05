@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useEffect, useRef, useMemo } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { y3 } from "../figma_app/876459";
 import { Ay } from "../905/612521";
 import { N as _$$N } from "../figma_app/469468";
@@ -85,7 +85,7 @@ function y({
 function v({
   profiles: e
 }) {
-  let t = d4(e => e.authedActiveCommunityProfile);
+  let t = useSelector(e => e.authedActiveCommunityProfile);
   return jsx("div", {
     className: "search_profile_list--profilesList--unQSY",
     children: e.map((e, r) => jsx(Yw, {
@@ -118,7 +118,7 @@ export function $$U1({
   numTilesPerRow: a = 5
 }) {
   let u = AG();
-  let m = !u && d4(e => !!(e.authedActiveCommunityProfile?.team_id || e.authedActiveCommunityProfile?.org_id));
+  let m = !u && useSelector(e => !!(e.authedActiveCommunityProfile?.team_id || e.authedActiveCommunityProfile?.org_id));
   let _ = _$$N(`(max-width: ${ial})`);
   let p = _$$N(`(max-width: ${cVr})`);
   let h = 4;

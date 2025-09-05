@@ -19,7 +19,7 @@ import { tH as _$$tH, mp, Ot, d2, Vm, Fy, Qm, zN } from "../figma_app/579169";
 import { f as _$$f } from "../1250/46310";
 import { xZ } from "../1250/927871";
 import { useEffect, useState, useCallback, useMemo, createElement, useRef, memo } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { lQ } from "../905/934246";
 import { DN } from "../905/657224";
 import { ZC } from "../figma_app/39751";
@@ -291,8 +291,8 @@ function ea(e) {
   });
 }
 function es(e) {
-  let t = wA();
-  let n = d4(e => e.user?.drafts_folder_id);
+  let t = useDispatch();
+  let n = useSelector(e => e.user?.drafts_folder_id);
   useEffect(() => (pP(), () => void _$$nz()), [t, n]);
   return jsx(_$$o, {
     eventListeners: ["onMouseDown"],
@@ -484,7 +484,7 @@ function eE(e) {
   });
 }
 function eI() {
-  let e = d4(e => e.currentUserOrgId);
+  let e = useSelector(e => e.currentUserOrgId);
   let t = c4(e).data ?? !1;
   let n = _$$tx("rcs.org_welcome.click_the_all_teams_button_on_the_left_to_find_teams_to_join");
   t && (n = _$$tx("rcs.bigma_org_welcome.click_the_all_workspaces_button_on_the_left_to_find_teams_to_join"));
@@ -569,7 +569,7 @@ function eP(e) {
   });
 }
 function eD(e) {
-  let t = d4(e => e.user?.name);
+  let t = useSelector(e => e.user?.name);
   let n = t ? _$$t("rcs.welcome_step.welcome_user_name", {
     userFirstName: t
   }) : _$$t("rcs.welcome_step.welcome");
@@ -600,12 +600,12 @@ let eU = () => {
   return !1;
 };
 function eG() {
-  let e = wA();
+  let e = useDispatch();
   let t = md(qG);
   let n = md(eL);
   let r = ZC(n);
   let s = md(d2);
-  let l = d4(e => e.currentUserOrgId);
+  let l = useSelector(e => e.currentUserOrgId);
   let d = UC(l);
   let c = md(d);
   let _ = md(Ot);
@@ -685,7 +685,7 @@ function eW(e) {
   });
 }
 function eK() {
-  let e = d4(e => e.currentUserOrgId);
+  let e = useSelector(e => e.currentUserOrgId);
   let t = md(_$$Z);
   let n = RG();
   let r = _$$tx("rcs.org_welcome.click_on_the_organization_button_on_the_left_to_find_teams_to_join");
@@ -744,8 +744,8 @@ function ti({
   onModalClose: t
 }) {
   let [n, r] = useState(null);
-  let i = wA();
-  let o = d4(({
+  let i = useDispatch();
+  let o = useSelector(({
     selectedView: e
   }) => e);
   let s = sZ();
@@ -1020,11 +1020,11 @@ function tA() {
   return jsx(tS, {});
 }
 function tS() {
-  let e = d4(e => e.plans);
-  let t = d4(e => e.teams);
-  let n = d4(e => e.userFlags.personal_draft_migration_scheduled);
+  let e = useSelector(e => e.plans);
+  let t = useSelector(e => e.teams);
+  let n = useSelector(e => e.userFlags.personal_draft_migration_scheduled);
   let r = e.filter(e => e.plan_type === _$$O.TEAM).map(e => t[e.plan_id]).filter(e => !!e);
-  let s = wA();
+  let s = useDispatch();
   let l = DP();
   let d = md(mp);
   let _ = e.some(e => e.plan_type === _$$O.ORG);
@@ -1375,7 +1375,7 @@ function t0() {
 let t1 = Ju(function ({
   teamId: e
 }) {
-  let t = wA();
+  let t = useDispatch();
   let n = useCallback(() => {
     t(Ce());
   }, [t]);
@@ -1679,7 +1679,7 @@ let na = Ju(function () {
   let [d, _] = useState(TB);
   let [u, m] = useState(PG);
   let p = xX();
-  let g = wA();
+  let g = useDispatch();
   let f = useCallback(() => p.find(e => e.id === n)?.name ?? _$$t("pro_trials_v3.pro_trial_initiation_modal.your_team"), [p, n]);
   let h = useCallback(() => g(Ce()), [g]);
   let b = _$$t("payments.pro_trial.start_pro_trial_error");
@@ -1745,7 +1745,7 @@ function no(e) {
   let {
     hideModal
   } = e;
-  let n = wA();
+  let n = useDispatch();
   let r = jsxs(Fragment, {
     children: [jsx(_$$E2, {
       fontSize: 13,
@@ -1781,7 +1781,7 @@ function ns(e) {
     teamId,
     hideModal
   } = e;
-  let r = wA();
+  let r = useDispatch();
   let i = jsxs(Fragment, {
     children: [jsx(_$$E2, {
       fontSize: 13,
@@ -1818,7 +1818,7 @@ function nl(e) {
     hideModal,
     teamId
   } = e;
-  let r = wA();
+  let r = useDispatch();
   let i = {
     view: "team",
     teamId
@@ -1910,7 +1910,7 @@ function n_() {
     overlay: MwQ,
     priority: _$$N.DEFAULT_MODAL
   });
-  let t = wA();
+  let t = useDispatch();
   _$$h(() => {
     e.show();
   });
@@ -1945,7 +1945,7 @@ function nu(e) {
     proTrial
   } = e;
   let r = proTrial.teamId;
-  let i = wA();
+  let i = useDispatch();
   _$$h(() => {
     t.show();
   });
@@ -1987,7 +1987,7 @@ function nm(e) {
     proTrial
   } = e;
   let r = proTrial.teamId;
-  let i = wA();
+  let i = useDispatch();
   _$$h(() => {
     t.show();
   });
@@ -2022,8 +2022,8 @@ function nm(e) {
 }
 function np() {
   let e = _6();
-  let t = d4(e => e.userTeamFlags);
-  let n = d4(e => !!e.modalShown);
+  let t = useSelector(e => e.userTeamFlags);
+  let n = useSelector(e => !!e.modalShown);
   let r = _$$f2(Jy);
   let i = xX();
   let {
@@ -2068,7 +2068,7 @@ let ny = Z1(Vm, e => (e ?? []).some(e => null != e && !w5({
 function nw({
   dismissModal: e
 }) {
-  let t = d4(({
+  let t = useSelector(({
     payment: e
   }) => e.promo);
   return (_$$h(() => {
@@ -2115,7 +2115,7 @@ function nT() {
   });
 }
 function nI(e) {
-  let t = wA();
+  let t = useDispatch();
   let n = e.promo;
   let r = "";
   let i = parseInt(n.promo_value);
@@ -2165,13 +2165,13 @@ function nI(e) {
 function nA({
   dismissModal: e
 }) {
-  let t = d4(({
+  let t = useSelector(({
     payment: e
   }) => e.promo);
-  let n = d4(({
+  let n = useSelector(({
     selectedView: e
   }) => e);
-  let r = d4(e => e.teams);
+  let r = useSelector(e => e.teams);
   let i = FC();
   let o = useMemo(() => Object.values(r).filter(e => !w5(e) && canEditTeam(e.id, i)), [r, i]);
   let s = [];
@@ -2370,7 +2370,7 @@ function n6() {
   let t = md(Qm);
   let n = md(zN);
   let a = ol();
-  let r = wA();
+  let r = useDispatch();
   let o = _$$e({
     overlay: Ult,
     priority: _$$N.HIGH_PRIORITY_MODAL
@@ -2407,7 +2407,7 @@ function an() {
     overlay: kmq,
     priority: _$$N.HIGH_PRIORITY_MODAL
   });
-  let t = wA();
+  let t = useDispatch();
   _$$h(() => {
     let n = QL(n7.key);
     let a = QL(ae.key);
@@ -2433,7 +2433,7 @@ let aa = Fu("seen_plan_spaces_launch_modal");
 let ar = Fu("seen_limited_spaces_onboarding");
 let ai = new Date("2024-10-30T20:00:00.000Z").getTime();
 function ao() {
-  let e = d4(e => e.plans);
+  let e = useSelector(e => e.plans);
   let t = md(mp);
   let n = md(aa);
   let r = md(ar);
@@ -2471,7 +2471,7 @@ function ao() {
   }) : null;
 }
 function a_() {
-  let e = wA();
+  let e = useDispatch();
   let t = md(d2);
   let n = _$$e({
     overlay: Wb3,

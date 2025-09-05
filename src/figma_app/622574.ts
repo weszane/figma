@@ -1,5 +1,5 @@
 import { useMemo, useState, useCallback, useEffect, useRef } from "react";
-import { d4, Pj } from "../vendor/514228";
+import { useSelector, useStore } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
 import { lQ } from "../905/934246";
 import { getFeatureFlags } from "../905/601108";
@@ -62,7 +62,7 @@ export function $$M3() {
   let t = function () {
     let e = $$P2();
     let t = q5();
-    return d4(r => !!t && !!t.folderId && (e?.type === "team" ? ye(r.folders[t.folderId]) : e?.type === "org" && _$$Gi(r.folders[t.folderId])));
+    return useSelector(r => !!t && !!t.folderId && (e?.type === "team" ? ye(r.folders[t.folderId]) : e?.type === "org" && _$$Gi(r.folders[t.folderId])));
   }();
   let r = X$("usePublishTemplateStatus").unwrapOr(null);
   let n = r?.key.type;
@@ -572,7 +572,7 @@ export function $$Z19(e, t = 2, r = !0) {
 export let $$Q10 = eU(null);
 export function $$ee9() {
   let e = $$U12()?.fileVersionId ?? "";
-  let t = Pj();
+  let t = useStore();
   let [r, a] = fp($$Q10);
   let s = lg();
   let o = R(e => s === FFileType.SLIDES ? AC(e) : []);

@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useState, useEffect, useMemo, useCallback } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { t as _$$t } from "../905/303541";
 import { tf } from "../figma_app/831799";
 import { d as _$$d } from "../905/86829";
@@ -21,7 +21,7 @@ export function $$d0({
     trackingProperties: o,
     showAll: d
   }) {
-    let u = d4(e => e.mirror.sceneGraphSelection);
+    let u = useSelector(e => e.mirror.sceneGraphSelection);
     let p = Math.min(t, e.length);
     let [_, h] = useState(p);
     let m = d ? e.length : _;

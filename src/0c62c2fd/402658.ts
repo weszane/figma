@@ -1,5 +1,5 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
 import { hS } from "../905/437088";
 import { nB, vo, Y9, hE, wi, jk } from "../figma_app/272243";
@@ -54,7 +54,7 @@ export function $$T0(e) {
   });
 }
 function E(e) {
-  let t = wA();
+  let t = useDispatch();
   let r = X();
   let {
     folder,

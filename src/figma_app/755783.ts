@@ -1,5 +1,5 @@
 import { useCallback, useMemo } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { RR } from "../figma_app/338442";
 import { rXF, glU, Z_n, m1T, Ez5 } from "../figma_app/763686";
 import { l7 } from "../905/189185";
@@ -61,7 +61,7 @@ export function $$I1() {
   return e;
 }
 export function $$S2() {
-  return d4(e => e.mirror.appModel.activeCanvasEditModeType === m1T.VECTOR);
+  return useSelector(e => e.mirror.appModel.activeCanvasEditModeType === m1T.VECTOR);
 }
 export function $$v3() {
   let e = J2(Ez5.propertiesPanelState().enabledTransformControls);

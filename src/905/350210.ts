@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useCallback, useRef, PureComponent } from "react";
-import { wA, Ng } from "../vendor/514228";
+import { useDispatch, connect } from "../vendor/514228";
 import { s as _$$s } from "../905/601732";
 import { j4, o1, f7, Rv, UU, mH } from "../figma_app/599979";
 import { getPermissionsState } from "../figma_app/642025";
@@ -25,7 +25,7 @@ function A({
   renderCreatorWithIcon: u,
   ariaLabelledBy: g
 }) {
-  let f = wA();
+  let f = useDispatch();
   let A = Um();
   let b = A?.type === o;
   let v = useCallback(() => {
@@ -169,7 +169,7 @@ class b extends PureComponent {
   }
 }
 b.displayName = "PublishingMetadataAuthorSelect";
-export let $$v0 = Ng(e => {
+export let $$v0 = connect(e => {
   let t = getPermissionsState(e);
   let i = e.openFile?.key || null;
   let n = i ? e.figFilePublishedAsHubFile?.[i] : void 0;

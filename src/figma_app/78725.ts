@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
 import { Xr, fp } from "../figma_app/27355";
 import { Rs } from "../figma_app/288654";
@@ -32,7 +32,7 @@ let w = Ju(function ({
 }) {
   let s;
   let o;
-  let d = wA();
+  let d = useDispatch();
   let c = () => {
     _$$s.updateUserAutoRunPluginId(e.pluginID, FInheritanceType.NONE);
     d(Lo());
@@ -223,7 +223,7 @@ export function $$O3(e) {
   let p = u && o.plugin?.plugin_id === t;
   let h = Xr(Lx);
   let m = P();
-  let g = wA();
+  let g = useDispatch();
   return {
     isPluginSetToAutoRun: p,
     callback: useCallback(() => {

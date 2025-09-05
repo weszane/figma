@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { isLocalFileKey } from "../905/657242";
 import { filterNotNullish } from "../figma_app/656233";
 import { isNotNullish } from "../figma_app/95419";
@@ -1266,13 +1266,13 @@ export function $$eF7() {
   return md(eM);
 }
 export function $$ej4(e) {
-  let t = d4(t => !!t.autosave.unclaimedFilesWithChangesInIDB.find(t => t.fileKey === e));
+  let t = useSelector(t => !!t.autosave.unclaimedFilesWithChangesInIDB.find(t => t.fileKey === e));
   let r = _$$l(dDF, t ? e : "");
   return t ? r : resourceUtils.loaded(!1);
 }
 export function $$eU3() {
-  let e = d4(e => e.autosave.unclaimedFilesWithChangesInIDB);
-  let t = d4(e => e.autosave.unclaimedFilesCreatedOffline);
+  let e = useSelector(e => e.autosave.unclaimedFilesWithChangesInIDB);
+  let t = useSelector(e => e.autosave.unclaimedFilesCreatedOffline);
   let r = _$$p(dDF, useMemo(() => e.map(({
     fileKey: e
   }) => ({
@@ -1281,7 +1281,7 @@ export function $$eU3() {
   let a = useMemo(() => r.map(({
     result: e
   }) => e.transform(e => !!e.file?.hasPermission)), [r]);
-  let o = d4(e => e.fileByKey);
+  let o = useSelector(e => e.fileByKey);
   return useMemo(() => ({
     unsyncedFiles: filterNotNullish(e.map(({
       fileKey: e,

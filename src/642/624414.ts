@@ -1,5 +1,5 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { l as _$$l } from "../905/509505";
 import { sx } from "../905/449184";
@@ -15,9 +15,9 @@ import { fu } from "../figma_app/831799";
 import { q5 } from "../figma_app/516028";
 import { b as _$$b2 } from "../905/165519";
 export function $$_0() {
-  let e = wA();
+  let e = useDispatch();
   let t = q5();
-  let s = d4((e) => e.user?.id);
+  let s = useSelector(e => e.user?.id);
   if (!t) return null;
   let _ = t.teamId;
   let b = jsx(Us, {

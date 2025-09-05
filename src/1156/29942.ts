@@ -2,7 +2,7 @@ import _require2 from "../7099/87099";
 import _require from "../6256/886256";
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { memo, useState, useCallback, lazy, forwardRef, useMemo, useRef, useEffect, Suspense, createElement } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { lV, U1, MK } from "../figma_app/617606";
 import l, { Hg, W as _$$W } from "../figma_app/304955";
 import { ServiceCategories as _$$e } from "../905/165054";
@@ -630,7 +630,7 @@ let tl = (e, t) => {
 let th = "dismissed_chat_soft_limit_banner";
 function tN() {
   let e = Y9(_$$t("auth.welcome-to-figma"));
-  let t = wA();
+  let t = useDispatch();
   return jsx(fu, {
     name: "Logged Out File Chatbox Banner",
     children: jsxs("div", {
@@ -1553,7 +1553,7 @@ let tQ = forwardRef((e, t) => {
     showChatSoftLimitBanner,
     onCloseChatSoftLimitBanner
   } = function (e) {
-    let t = wA();
+    let t = useDispatch();
     let n = _$$f3(th);
     let r = No();
     let i = r.unwrapOr(null)?.tier;
@@ -2175,7 +2175,7 @@ function nw({
   let {
     organization
   } = mS();
-  let l = wA();
+  let l = useDispatch();
   return jsxs("div", {
     className: "x78zum5 xdt5ytf x167g77z xkh2ocl",
     children: [jsx(nb, {
@@ -2268,7 +2268,7 @@ function nL({
   let {
     organization
   } = mS();
-  let l = wA();
+  let l = useDispatch();
   return jsxs("div", {
     className: "x78zum5 xdt5ytf x167g77z xkh2ocl",
     children: [jsx(nb, {
@@ -4442,7 +4442,7 @@ function iy({
     libraryImport
   } = S1();
   let E = Xr(jx);
-  let N = wA();
+  let N = useDispatch();
   useEffect(() => {
     libraryImport && !zl.get(FX) && show({
       canShow: e => !e
@@ -4671,7 +4671,7 @@ function ik({
   hasMessages: b,
   libraryImports: j
 }) {
-  let k = wA();
+  let k = useDispatch();
   let E = md(f3);
   let N = useRef(null);
   let [A, T] = fp(mC(u));

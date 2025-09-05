@@ -20,7 +20,7 @@ import { e0 } from "../905/696396";
 import { S as _$$S } from "../figma_app/787550";
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, useContext, useEffect } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { K as _$$K } from "../905/807535";
 import { b as _$$b, c as _$$c } from "../905/308099";
 import { s as _$$s } from "../905/932270";
@@ -70,13 +70,13 @@ let $ = Ju(function (e) {
     branchKey,
     sourceKey
   } = e;
-  let r = wA();
+  let r = useDispatch();
   let [a, l] = useState(Wo.MAIN);
   let [d, c] = fp(nX);
   let u = d ?? e.direction;
   _$$h(() => (c(e.direction), () => c(null)));
-  let p = d4(e => e.fileVersion);
-  let m = d4(e => e.currentUserOrgId);
+  let p = useSelector(e => e.fileVersion);
+  let m = useSelector(e => e.currentUserOrgId);
   let h = Pc();
   let g = useContext(ss);
   let {
@@ -261,7 +261,7 @@ let el = Ju(function ({
   currentFileKey: t,
   onCheckpointSelected: i
 }) {
-  let n = wA();
+  let n = useDispatch();
   let r = Rs(Stx, {
     fileKey: e
   });

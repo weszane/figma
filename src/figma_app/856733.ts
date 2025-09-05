@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useCallback } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
@@ -23,7 +23,7 @@ export function $$b1({
   eulaShown: b,
   ...T
 }) {
-  let I = wA();
+  let I = useDispatch();
   let S = iZ();
   let v = q5();
   !function () {

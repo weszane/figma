@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useCallback } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { sx } from "../905/449184";
 import { XHR } from "../905/910117";
 import { c$ } from "../figma_app/236327";
@@ -43,7 +43,7 @@ let x = e => {
   };
 };
 export function $$y1(e) {
-  let t = wA();
+  let t = useDispatch();
   let n = useCallback(() => t(Y9()), [t]);
   let {
     feedPost

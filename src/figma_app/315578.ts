@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useCallback, useMemo } from "react";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { E as _$$E } from "../905/632989";
 import { J } from "../905/125993";
@@ -106,7 +106,7 @@ function C({
   });
 }
 export function $$w2(e) {
-  let t = d4((e) => e.modalShown);
+  let t = useSelector(e => e.modalShown);
   let r = !!t && t.type === WP && t.data?.rowRef && t.data.rowRef.current === e?.current;
   let n = !!t && t.type === W8 && t.data?.rowRef && t.data.rowRef.current === e?.current;
   return r || n;
@@ -148,13 +148,13 @@ export function $$L1({
     isDetailModalShownForRow,
     toggleDetailModal
   } = function (e, t, r) {
-    let n = wA();
-    let s = d4((e) => e.modalShown);
+    let n = useDispatch();
+    let s = useSelector(e => e.modalShown);
     let o = _6();
     let l = !!s && s.type === WP;
     let d = l && s.data.variableId === t && s.data.rowRef.current === (r?.current ?? e?.current) || !!o.variableIdForDetailsPanel && o.variableIdForDetailsPanel === t;
     return {
-      toggleDetailModal: useCallback((i) => {
+      toggleDetailModal: useCallback(i => {
         if (i.stopPropagation(), e?.current && t && "fullscreen" === o.view) {
           if (d) {
             _$$T() ? n(sf({
@@ -189,12 +189,12 @@ export function $$L1({
     isMatchingVarsModalShownForRow,
     toggleMatchingVarsModal
   } = function (e, t, r) {
-    let n = wA();
-    let s = d4((e) => e.modalShown);
+    let n = useDispatch();
+    let s = useSelector(e => e.modalShown);
     let o = !!s && s.type === W8;
     let l = o && s.data?.rowRef && s.data.rowRef.current === (r?.current ?? e?.current);
     return {
-      toggleMatchingVarsModal: useCallback((i) => {
+      toggleMatchingVarsModal: useCallback(i => {
         if (i.stopPropagation(), !e?.current || !t) return;
         if (l) {
           n(AS());
@@ -220,8 +220,8 @@ export function $$L1({
     isStyleDetailModalShownForRow,
     toggleStyleDetailModal
   } = function (e, t, r, n, s) {
-    let o = wA();
-    let l = d4((e) => e.modalShown);
+    let o = useDispatch();
+    let l = useSelector(e => e.modalShown);
     let d = _6();
     let u = !!l && l.type === vl;
     let p = u && l.data?.rowRef && l.data.rowRef.current === (s?.current ?? e?.current) || d.styleForDetailsPanel?.styleId === t;
@@ -236,7 +236,7 @@ export function $$L1({
     } : void 0, [key, content_hash]);
     let A = Fk((e, t) => t ? e?.getStyleNodeByRef(t)?.guid : void 0, S) ?? r;
     return {
-      toggleStyleDetailModal: useCallback((r) => {
+      toggleStyleDetailModal: useCallback(r => {
         if (r.stopPropagation(), e?.current && t && A && n) {
           if (p) {
             _$$T() ? o(sf({

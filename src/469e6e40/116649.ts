@@ -1,6 +1,6 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useEffect } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { s as _$$s } from "../cssbuilder/589278";
 import { Y } from "../905/830372";
@@ -36,7 +36,7 @@ function O({
   let a = Rs(RcX, {
     orgId: e.id
   });
-  let r = wA();
+  let r = useDispatch();
   useEffect(() => {
     r(Jt({
       forceRefetch: !0
@@ -54,12 +54,12 @@ function O({
 export function $$D0({
   selectedTab: e
 }) {
-  let t = wA();
+  let t = useDispatch();
   let a = sZ();
-  d4(({
+  useSelector(({
     selectedView: e
   }) => e);
-  let S = d4((e) => e.avatarEditorState);
+  let S = useSelector(e => e.avatarEditorState);
   let N = px();
   let I = S2();
   let T = j_(N).unwrapOr(!1);

@@ -1,12 +1,12 @@
 import { jsx } from "react/jsx-runtime";
 import { useCallback, forwardRef } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { m1T } from "../figma_app/763686";
 import { t as _$$t } from "../905/303541";
 import { VU } from "../905/625959";
 import { o3, nt } from "../905/226610";
 export function $$c0() {
-  let e = d4(e => e.mirror.appModel.activeCanvasEditModeType === m1T.COMMENTS);
+  let e = useSelector(e => e.mirror.appModel.activeCanvasEditModeType === m1T.COMMENTS);
   let t = o3(nt.commentsA11y) && e;
   return useCallback(() => {
     if (!t) return;

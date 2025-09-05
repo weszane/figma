@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useEffect, useId } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
@@ -35,7 +35,7 @@ import { eD } from "../905/257620";
 export let $$M0 = Ju(function (e) {
   let [t, i] = useState(!1);
   let u = hS(e);
-  let p = wA();
+  let p = useDispatch();
   let m = eY();
   let h = Pc();
   let g = gI();

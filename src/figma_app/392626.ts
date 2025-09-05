@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
-import { wA, Pj, d4 } from "../vendor/514228";
+import { useDispatch, useStore, useSelector } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
 import { hS } from "../905/437088";
 import { $n } from "../905/521428";
@@ -51,10 +51,10 @@ export function $$U2(e) {
 function B(e) {
   var t;
   let r;
-  let n = wA();
-  let o = Pj();
-  let P = d4(e => e.currentUserOrgId);
-  let j = d4(e => P && e.orgById[P]);
+  let n = useDispatch();
+  let o = useStore();
+  let P = useSelector(e => e.currentUserOrgId);
+  let j = useSelector(e => P && e.orgById[P]);
   let B = j && j.shared_container_setting?.external_collaboration_controls;
   let [G, V] = useState(1);
   let [H, z] = useState("");

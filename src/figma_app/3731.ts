@@ -1,5 +1,5 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { t as _$$t } from "../905/331623";
 import { lg } from "../figma_app/976749";
 import { Ro } from "../figma_app/805373";
@@ -9,10 +9,10 @@ import { A as _$$A } from "../6041/980297";
 import { A as _$$A2 } from "../5724/83071";
 export function $$p0(e) {
   let t;
-  let r = d4(t => t.authedUsers.byId[e.userId]);
-  let p = d4(t => e.profileId ? t.authedProfilesById[e.profileId] : null);
-  let _ = d4(t => e.orgId ? t.orgById[e.orgId] : null);
-  let h = d4(t => e.teamId ? t.teams[e.teamId] : null);
+  let r = useSelector(t => t.authedUsers.byId[e.userId]);
+  let p = useSelector(t => e.profileId ? t.authedProfilesById[e.profileId] : null);
+  let _ = useSelector(t => e.orgId ? t.orgById[e.orgId] : null);
+  let h = useSelector(t => e.teamId ? t.teams[e.teamId] : null);
   let m = "whiteboard" === lg();
   let g = !e.forceAvatar;
   let f = 16 === e.size ? oi : 32 === e.size ? YV : D8;

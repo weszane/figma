@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { forwardRef, useMemo } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { E } from "../905/632989";
 import o from "classnames";
 import { tx } from "../905/303541";
@@ -12,7 +12,7 @@ import { M_, TN, hh, kv, VZ, kh, bd } from "../905/522134";
 var l = o;
 let m = e => e && Array.isArray(e.selection);
 let $$g1 = forwardRef((e, t) => {
-  let r = d4(dT);
+  let r = useSelector(dT);
   let i = m(e) ? void 0 : e.selection?.name || e.title;
   let o = Cj(i);
   let g = e.className || M_;
@@ -68,7 +68,7 @@ let $$g1 = forwardRef((e, t) => {
 });
 let f = () => {
   jY();
-  let e = d4(e => e.mirror.sceneGraphSelection);
+  let e = useSelector(e => e.mirror.sceneGraphSelection);
   let t = Vr();
   let r = useMemo(() => Object.keys(e), [e]);
   if (t && t.isAlive) {

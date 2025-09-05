@@ -1,5 +1,5 @@
 import { jsxs, jsx } from "react/jsx-runtime";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { s as _$$s } from "../905/403855";
 import { U } from "../905/275247";
 import { Rs } from "../figma_app/288654";
@@ -22,7 +22,7 @@ import { d_ } from "../figma_app/918700";
 import { $Y } from "../905/918620";
 import { K } from "../905/376298";
 function x(e) {
-  let t = wA();
+  let t = useDispatch();
   let r = $Y(e.teamId);
   let m = void 0 === e.canEditTeam ? r : e.canEditTeam;
   let y = Rs(Aqu({
@@ -158,7 +158,7 @@ export function $$N0(e) {
   });
 }
 export let $$C1 = Ju(function (e) {
-  let t = wA();
+  let t = useDispatch();
   return jsx(d_, {
     size: 500,
     children: jsx(fu, {

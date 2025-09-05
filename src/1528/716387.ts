@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { memo, useCallback, useMemo, useContext, useState, useRef, useLayoutEffect, useEffect } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { z as _$$z } from "../vendor/999105";
 import { lQ } from "../905/934246";
 import { i as _$$i } from "../905/718764";
@@ -77,9 +77,9 @@ var en = (e => (e[e.NONE = 0] = "NONE", e[e.SINGLE = 1] = "SINGLE", e[e.MULTI = 
 let el = _$$eU(!1);
 let er = memo(function (e) {
   let t = Xr(el);
-  let n = wA();
-  let l = d4(e => e.canvasSearch.scope);
-  let i = d4(e => e.mirror.appModel.pagesList);
+  let n = useDispatch();
+  let l = useSelector(e => e.canvasSearch.scope);
+  let i = useSelector(e => e.mirror.appModel.pagesList);
   let {
     allInstancesExpanded
   } = e;
@@ -151,8 +151,8 @@ function eh({
   options: t,
   recordingKey: n
 }) {
-  let i = wA();
-  let s = d4(e => e.canvasSearch.filters);
+  let i = useDispatch();
+  let s = useSelector(e => e.canvasSearch.filters);
   let o = _$$b();
   let d = useCallback(e => {
     i(DI(e));
@@ -212,8 +212,8 @@ function ex({
   mode: t,
   recordingKey: n
 }) {
-  let l = wA();
-  let i = d4(e => e.canvasSearch.filters);
+  let l = useDispatch();
+  let i = useSelector(e => e.canvasSearch.filters);
   let s = t === EW4.FIND ? D4 : IM;
   let o = _$$b();
   let d = mapFilter(s, e => i[e] ? jsx(eg, {
@@ -260,7 +260,7 @@ function eR(e, t, n, a) {
   let i = II();
   let o = function () {
     let e = _$$Z("canvas_search_navigate");
-    let t = d4(e => e.canvasSearch.scope);
+    let t = useSelector(e => e.canvasSearch.scope);
     let n = am();
     let a = useContext(EA);
     let i = useCallback(() => {
@@ -277,7 +277,7 @@ function eR(e, t, n, a) {
   }();
   let d = function () {
     let e = _$$Z("canvas_search_navigate");
-    let t = d4(e => e.canvasSearch.scope);
+    let t = useSelector(e => e.canvasSearch.scope);
     let n = am();
     let a = useContext(EA);
     let i = useCallback(() => {
@@ -544,12 +544,12 @@ function eM({
   setHoveredResult: T,
   allInstancesExpanded: R
 }) {
-  let D = wA();
+  let D = useDispatch();
   let j = WB();
   let k = II();
   let P = p8("currentPage");
   let M = useRef(null);
-  let B = d4(e => e.canvasSearch.scope);
+  let B = useSelector(e => e.canvasSearch.scope);
   let U = YEY.hasDirtyPrimaryInstances();
   let K = md(Fk);
   let V = md(Ch);
@@ -562,7 +562,7 @@ function eM({
   let ee = L4();
   let el = function (e, t) {
     let n = _$$Z("canvas_search_navigate");
-    let a = d4(e => e.canvasSearch.scope);
+    let a = useSelector(e => e.canvasSearch.scope);
     let i = am();
     let o = useContext(EA);
     let d = useCallback(l => {
@@ -588,7 +588,7 @@ function eM({
   }(J, Q);
   let er = function () {
     let e = _$$Z("canvas_search_navigate");
-    let t = d4(e => e.canvasSearch.scope);
+    let t = useSelector(e => e.canvasSearch.scope);
     let n = useContext(EA);
     let a = useCallback((n, a, l) => {
       YEY && e(YEY.removeActiveResultAndGetViewportSettings(n, a, l), {
@@ -773,7 +773,7 @@ function eM({
   let eC = function (e, t, n, a, i, o, d) {
     let c = function (e, t) {
       let n = _$$Z("canvas_search_navigate");
-      let a = d4(e => e.canvasSearch.scope);
+      let a = useSelector(e => e.canvasSearch.scope);
       let i = am();
       let o = useContext(EA);
       let d = useCallback(() => {
@@ -970,7 +970,7 @@ function eB({
   let l = sO();
   let i = cJ();
   let s = to();
-  let o = d4(e => e.mirror.appModel.pagesList);
+  let o = useSelector(e => e.mirror.appModel.pagesList);
   let d = "";
   d = 0 === e ? lH(o) || !n ? l ? _$$t("canvas_search.no_results_in_this_deck") : i ? _$$t("canvas_search.no_results_on_site") : s ? _$$t("canvas_search.no_results_in_buzz_file") : _$$t("canvas_search.no_results_on_page") : t ? _$$t("canvas_search.no_results") : _$$t("canvas_search.no_results_in_file") : _$$t("canvas_search.results_count", {
     total: e
@@ -1036,9 +1036,9 @@ function eG({
   let v = e.textMatch.matchType === Ifi.TEXT_MATCH;
   let I = null != t && v && (E.get(e.guid)?.hasMissingFont || !1);
   let y = !yZ();
-  let b = d4(e => e.mirror.appModel.pagesList);
+  let b = useSelector(e => e.mirror.appModel.pagesList);
   let R = y && e.textMatch.matchType === Ifi.PAGE_MATCH && h3O.isIncrementalSession() && Fy(b, e.resultGuid) !== xal.LOADED;
-  let D = wA();
+  let D = useDispatch();
   let O = N()(V3, {
     [HR]: e.isPurple,
     [wH]: i,
@@ -1129,7 +1129,7 @@ function eU({
 }) {
   let {
     query
-  } = d4(e => e.canvasSearch);
+  } = useSelector(e => e.canvasSearch);
   let n = e.name && e.stateGroupName ? _$$w(e.name) : e.name;
   if (!n) return null;
   let l = e.stateGroupName || e.containerName;

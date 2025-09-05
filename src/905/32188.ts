@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useState, useMemo, useCallback, useEffect } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { Im, mf } from "../figma_app/493477";
 import { AlE, t8O } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
@@ -31,7 +31,7 @@ export function $$N4(e) {
   let [i, y] = useState([]);
   let [v, N] = useState({});
   let [P, D] = useState({});
-  let L = wA();
+  let L = useDispatch();
   let F = Um();
   let M = M6();
   let j = !!e.fontVariationAxes;

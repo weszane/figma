@@ -1,5 +1,5 @@
 import { useCallback, useMemo } from "react";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { getFeatureFlags } from "../905/601108";
 import { zl } from "../figma_app/27355";
 import { I7 } from "../figma_app/594947";
@@ -15,8 +15,8 @@ export async function $$f1(e, t, i, n = {}) {
   return (await Z()) ? await tq(e, t, i, n) : await YG.computeResultsReduxSearchTypeHelper(e, t, zl.get(yV)?.editorType === FFileType.DESIGN, zl.get(qp), n.sessionId ?? null, g_[i], n.queryId, n.preferLocal, n.libraryKeyBackingSelectedItems, n.selectedItems);
 }
 export function $$_0(e) {
-  let t = d4(UQ);
-  let i = wA();
+  let t = useSelector(UQ);
+  let i = useDispatch();
   let s = g_[e];
   let d = useCallback((e, t) => i(ku({
     query: e,

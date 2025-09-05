@@ -1,5 +1,5 @@
 import { useCallback, useMemo } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { getFeatureFlags } from "../905/601108";
 import { DN } from "../905/657224";
 import { sx } from "../905/449184";
@@ -104,9 +104,9 @@ export let $$D12 = _$$n((e, t, r, n, i, s) => {
   });
 });
 export function $$k10(e) {
-  let t = wA();
-  let r = d4(e => e.authedActiveCommunityProfile);
-  let a = d4(e => e.authedUsers);
+  let t = useDispatch();
+  let r = useSelector(e => e.authedActiveCommunityProfile);
+  let a = useSelector(e => e.authedUsers);
   let s = _$$I(e);
   return useCallback(() => {
     if (!e) return;
@@ -165,7 +165,7 @@ export function $$M8(e, t, r) {
   return (0 !== usersCanPurchase.length || 0 !== publishers.length) && (0 !== usersCanPurchase.length || 0 === publishers.length);
 }
 export function $$F5(e) {
-  let t = wA();
+  let t = useDispatch();
   let r = _$$I(e);
   return useCallback(() => {
     e && QQ(r) && (t(_$$s.flash(_$$t("community.buyer.redirecting_to_stripe"))), t(_$$v({})));
@@ -188,7 +188,7 @@ function B(e, t, r) {
   }(e, t));
 }
 export function $$G1() {
-  return d4(e => e.communityPayments);
+  return useSelector(e => e.communityPayments);
 }
 export function $$V0(e) {
   return B(e, $$G1(), iZ() || void 0);
@@ -215,7 +215,7 @@ export function $$q13(e) {
   return X($$G1(), e);
 }
 export function $$J18(e) {
-  let t = d4(t => my(e, t.publishedPlugins));
+  let t = useSelector(t => my(e, t.publishedPlugins));
   let r = $$q13(t);
   return useMemo(() => t ? {
     ...t,
@@ -245,7 +245,7 @@ export function $$Q15(e) {
   } : t, [r, t]);
 }
 export function $$ee9(e) {
-  let t = d4(t => t.publishedWidgets[e]);
+  let t = useSelector(t => t.publishedWidgets[e]);
   let r = $$q13(t);
   return useMemo(() => t ? {
     ...t,

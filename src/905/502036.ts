@@ -1,6 +1,6 @@
 import { jsx, Fragment } from "react/jsx-runtime";
 import { useCallback } from "react";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { H } from "../905/474029";
 import { Mv, jv } from "../figma_app/909778";
 import { fn, ih } from "../figma_app/297957";
@@ -12,8 +12,8 @@ export function $$p0(e) {
     folder
   } = e;
   let i = _6();
-  let p = d4(e => e.currentUserOrgId);
-  let m = wA();
+  let p = useSelector(e => e.currentUserOrgId);
+  let m = useDispatch();
   let h = "recentsAndSharing" === i.view && "shared-projects" === i.tab ? e.folder.parent_org?.id ?? null : p;
   let g = e.folder.team_id;
   let f = jm(h, g);

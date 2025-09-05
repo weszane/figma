@@ -1,5 +1,5 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
 import { sx } from "../905/449184";
 import { B } from "../905/714743";
@@ -58,7 +58,7 @@ let w = Ju(function ({
   securityFormResponse: e,
   isWidget: t
 }) {
-  let a = wA();
+  let a = useDispatch();
   let i = jsx(Us, {
     href: "https://help.figma.com/hc/articles/16354660649495",
     target: "_blank",
@@ -222,7 +222,7 @@ export function $$L1({
   isWidget: a,
   is24x24: _
 }) {
-  let u = wA();
+  let u = useDispatch();
   if (!e) return null;
   let m = function (e, t) {
     let {

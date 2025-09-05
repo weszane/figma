@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useMemo, useRef, useState, useEffect, useCallback, Suspense } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { k as _$$k } from "../905/443820";
 import { getFeatureFlags } from "../905/601108";
@@ -123,8 +123,8 @@ function U({
   isLoading: e,
   plan: t
 }) {
-  let a = wA();
-  let s = d4(e => e.avatarEditorState);
+  let a = useDispatch();
+  let s = useSelector(e => e.avatarEditorState);
   return e ? jsx(Wi, {
     className: _$$s.h32.w400.$
   }) : jsxs(_$$Y, {
@@ -148,7 +148,7 @@ function U({
   });
 }
 function J(e) {
-  let t = wA();
+  let t = useDispatch();
   return jsx(_$$$, {
     onClick: () => {
       t(sf({
@@ -162,7 +162,7 @@ function J(e) {
   });
 }
 function K() {
-  let e = wA();
+  let e = useDispatch();
   return jsx(_$$$, {
     onClick: () => {
       e(sf({
@@ -694,7 +694,7 @@ function t_({
   numOfBillingGroupsManaged: a,
   isOrgAdmin: s
 }) {
-  let r = wA();
+  let r = useDispatch();
   let l = _$$u();
   return jsxs(Fragment, {
     children: [jsx($z, {
@@ -734,13 +734,13 @@ function tu({
     seatAvailability,
     status
   } = _$$k5(e);
-  let p = wA();
+  let p = useDispatch();
   let {
     Sprig
   } = useSprigWithSampling();
   let [f, j] = useState(!1);
   let [y, E] = fp(aN);
-  let S = d4(({
+  let S = useSelector(({
     selectedView: e
   }) => e);
   let N = uH;
@@ -1387,7 +1387,7 @@ export function $$tg0({
   isOrgAdmin: e,
   teamBilling: t
 }) {
-  let a = wA();
+  let a = useDispatch();
   let l = _$$u();
   let d = useRef(null);
   let [A, O] = useState(0);
@@ -1501,4 +1501,4 @@ export function $$tg0({
     })
   });
 }
-export const i = $$tg0; 
+export const i = $$tg0;

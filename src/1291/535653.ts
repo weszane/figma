@@ -1,12 +1,12 @@
 import { useEffect } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { Rs } from "../figma_app/288654";
 import { sz } from "../figma_app/216696";
 import { U2Y } from "../figma_app/43951";
 import { oh, mC } from "../905/18797";
 export function $$$$d0(e) {
-  let t = wA();
-  let s = d4(t => t.communityHub.shelves[e] || []);
+  let t = useDispatch();
+  let s = useSelector(t => t.communityHub.shelves[e] || []);
   let n = sz.loadingKeyForPayload({
     shelfType: e
   });

@@ -1,7 +1,7 @@
 import { Ju } from "../905/102752";
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, useRef, Suspense } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { R as _$$R } from "../905/103090";
 import { Jn } from "../905/17223";
@@ -29,10 +29,10 @@ import { ey } from "../figma_app/918700";
 import { O as _$$O } from "../905/6519";
 import { I as _$$I } from "../905/641938";
 function O(e) {
-  let t = wA();
+  let t = useDispatch();
   let i = TN(e.teamId ?? "");
   let [n, h] = useState(LN());
-  let g = _$$R((e) => vp(e.user, e.currentUserOrgId, e.currentTeamId));
+  let g = _$$R(e => vp(e.user, e.currentUserOrgId, e.currentTeamId));
   let O = useRef(null);
   let D = PS(FC());
   let L = _$$h.useTrackingContext({
@@ -94,7 +94,7 @@ function O(e) {
                 }));
                 e.onDone?.();
               },
-              chooseProPlan: (i) => {
+              chooseProPlan: i => {
                 let r = 1 === D.length ? D[0] : null;
                 let a = e.teamId || g?.teamId || r?.id;
                 a ? (t(Ce()), t(WX({
@@ -121,7 +121,7 @@ function O(e) {
               overrideHighlightedBadgeText: e.overrideHighlightedBadgeText,
               overrideHighlightedPlan: e.overrideHighlightedPlan,
               parentRef: O,
-              updateCurrency: (e) => {
+              updateCurrency: e => {
                 h(e);
                 t(oB());
               },

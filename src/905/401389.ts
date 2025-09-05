@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { memo, useCallback, useMemo, useRef } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { arraysEqual } from "../figma_app/656233";
 import { K as _$$K } from "../905/443068";
 import { d as _$$d } from "../905/976845";
@@ -236,7 +236,7 @@ let ei = (e, t, i) => {
     return r.selectedPropertyType === r.currentSelectedProperty?.type ? r.currentSelectedProperty.indices.filter(e => e >= 0 && e < a.length) : [];
   }, [i, e, t]);
   let o = useCallback(() => new Set(n()), [n]);
-  let l = wA();
+  let l = useDispatch();
   let d = useCallback(t => {
     arraysEqual(t, n()) || (0 === t.length ? Y5.deselectProperty() : Y5.updateAppModel({
       currentSelectedProperty: {

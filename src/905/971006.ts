@@ -1,10 +1,10 @@
 import { useCallback, useEffect } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { zN } from "../905/19536";
 import { YK } from "../905/156213";
 export function $$o1(e) {
   let t = zN(e);
-  let i = wA();
+  let i = useDispatch();
   return useCallback(() => {
     i(YK(t));
   }, [i, t]);

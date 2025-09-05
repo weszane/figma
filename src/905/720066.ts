@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { S } from "../905/539306";
 import { mv, AR } from "../905/182534";
 import { ky } from "../905/977218";
@@ -24,23 +24,23 @@ function m(e, t, i, n, r, a, o) {
   });
 }
 export function $$h0(e, t, i) {
-  let s = wA();
-  let l = d4(e => e.search);
+  let s = useDispatch();
+  let l = useSelector(e => e.search);
   let c = _6();
-  let u = d4(e => S(e));
+  let u = useSelector(e => S(e));
   return useCallback(n => {
     s(ky());
     i && m(i, t, e, n, l, c, u);
   }, [s, e, t, i, l, c, u]);
 }
 export function $$g1() {
-  let e = wA();
+  let e = useDispatch();
   let t = iZ();
   let i = dq();
   let p = ol()?.id;
-  let h = d4(e => e.search);
+  let h = useSelector(e => e.search);
   let g = _6();
-  let f = d4(e => S(e));
+  let f = useSelector(e => S(e));
   return useCallback((n, r, a) => {
     if (e(ky()), !a) return;
     let l = a.model;

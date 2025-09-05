@@ -3,7 +3,7 @@ import _require3 from "../draftjs_composer/144893";
 import _require2 from "../draftjs_composer/577988";
 import _require from "../draftjs_composer/577988";
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
-import { wA, d4, Ng } from "../vendor/514228";
+import { useDispatch, useSelector, connect } from "../vendor/514228";
 import { cs, e5, cV, LI } from "../figma_app/740025";
 import { PR, MK, Cw } from "../figma_app/599979";
 import { nI, ej as _$$ej, Ng as _$$Ng, Ni } from "../figma_app/188152";
@@ -95,10 +95,10 @@ let M = function ({
   includeShowResolved: t,
   isLoggedIn: r
 }) {
-  let n = wA();
+  let n = useDispatch();
   let o = Um();
-  let a = d4(e => e.communityHub.comments.activeFeedType);
-  let l = d4(e => e.communityHub.comments.showResolved);
+  let a = useSelector(e => e.communityHub.comments.activeFeedType);
+  let l = useSelector(e => e.communityHub.comments.showResolved);
   let d = useRef(null);
   let [m, _] = useState(null);
   let p = o?.type === A;
@@ -280,7 +280,7 @@ function ex(e) {
   };
 }
 function ef(e) {
-  let t = wA();
+  let t = useDispatch();
   let r = iZ();
   let n = Zl[e.resourceType];
   let o = e.resourceId;
@@ -464,9 +464,9 @@ function ev(e) {
 function eb(e) {
   var t;
   let r = iZ();
-  let o = d4(e => e.authedActiveCommunityProfile);
-  let c = d4(t => t.communityHub.comments.commentsById[e.comment.id]);
-  let d = d4(e => e.communityHub.comments.authorsById[c.author.id]);
+  let o = useSelector(e => e.authedActiveCommunityProfile);
+  let c = useSelector(t => t.communityHub.comments.commentsById[e.comment.id]);
+  let d = useSelector(e => e.communityHub.comments.authorsById[c.author.id]);
   t = _$$ej.COMMUNITY;
   let u = !!r && t === _$$ej.COMMUNITY && !cs(o) && c.author.profile_handle === r.community_profile_handle;
   let m = o?.id === e.profileIdToAdminResourceAs;
@@ -534,8 +534,8 @@ function eI(e) {
   } = e;
   let [m, _] = useState(!1);
   let p = useRef(null);
-  let h = d4(e => e.dropdownShown);
-  let x = wA();
+  let h = useSelector(e => e.dropdownShown);
+  let x = useDispatch();
   let [f, v] = useState(!1);
   let [b, j] = useState(null);
   let w = useCallback(() => {
@@ -695,7 +695,7 @@ function eI(e) {
     })]
   });
 }
-let eN = Ng((e, t) => {
+let eN = connect((e, t) => {
   let {
     comments
   } = e.communityHub;
@@ -783,9 +783,9 @@ function eE() {
   });
 }
 function eS(e) {
-  let t = d4(e => e.communityHub.comments.commentsById);
-  let r = d4(e => e.communityHub.comments.showResolved);
-  let l = d4(e => cs(e.authedActiveCommunityProfile));
+  let t = useSelector(e => e.communityHub.comments.commentsById);
+  let r = useSelector(e => e.communityHub.comments.showResolved);
+  let l = useSelector(e => cs(e.authedActiveCommunityProfile));
   let {
     parentCommentIds,
     replies
@@ -878,25 +878,25 @@ eN.displayName = "CommentTile";
 let ek = !1;
 function eA(e) {
   let t;
-  let r = wA();
+  let r = useDispatch();
   let o = iZ();
   let [a, _] = useState(!1);
   let [p, I] = useState(!1);
   let N = _$$T();
   let [E, S] = useState(!0);
   let R = useRef(null);
-  let A = d4(e => "communityHub" === e.selectedView.view && "hubFile" === e.selectedView.subView && e.selectedView.fullscreenState && t0(e.selectedView.fullscreenState));
-  let P = d4(e => e.communityHub.comments.activeFeedType);
-  let B = d4(e => e.communityHub.comments.feeds);
+  let A = useSelector(e => "communityHub" === e.selectedView.view && "hubFile" === e.selectedView.subView && e.selectedView.fullscreenState && t0(e.selectedView.fullscreenState));
+  let P = useSelector(e => e.communityHub.comments.activeFeedType);
+  let B = useSelector(e => e.communityHub.comments.feeds);
   let {
     feed,
     pagination
   } = useMemo(() => B[P] || {
     feed: []
   }, [B, P]);
-  let H = d4(e => e.communityHub.comments.selectedCommentId);
-  let U = d4(e => e.selectedView.commentThreadId);
-  let V = d4(e => !!e.user?.community_profile_id);
+  let H = useSelector(e => e.communityHub.comments.selectedCommentId);
+  let U = useSelector(e => e.selectedView.commentThreadId);
+  let V = useSelector(e => !!e.user?.community_profile_id);
   let W = H || U;
   let G = P === Qv.ALL ? e.numCommentsForResource : B[P]?.totalNumberOfComments;
   let {
@@ -1046,8 +1046,8 @@ export function $$eP0({
   resource: e
 }) {
   let t = iZ();
-  let r = d4(t => MK(t, e)) >= Cw.ADMIN && (cV(e)?.id || t?.community_profile_id) || null;
-  let c = d4(e => e.authedActiveCommunityProfile);
+  let r = useSelector(t => MK(t, e)) >= Cw.ADMIN && (cV(e)?.id || t?.community_profile_id) || null;
+  let c = useSelector(e => e.authedActiveCommunityProfile);
   return jsx(eA, {
     commentType: _$$ej.COMMUNITY,
     resource: e,

@@ -167,7 +167,7 @@ import { uo } from '../figma_app/990058';
 import { Fb, MB } from '../figma_app/996356';
 import eT from '../vendor/128080';
 import { Ay as _$$Ay } from '../vendor/159563';
-import { d4, wA } from '../vendor/514228';
+import { useSelector, useDispatch } from '../vendor/514228';
 let F = U;
 let eg = new class {
   constructor() {
@@ -192,7 +192,7 @@ let eb = Ju(({
   licenseGroupName: t,
   orgId: a
 }) => {
-  let s = wA();
+  let s = useDispatch();
   return jsx(Dd, {
     headerClassName: 'complete_license_group_review_modal--header--ee93k',
     maxWidth: 360,
@@ -679,7 +679,7 @@ function tv({
   });
   let q = status !== 'loaded' || !!fetchMore;
   let B = _$$a();
-  let G = wA();
+  let G = useDispatch();
   let z = _$$R();
   let V = useMemo(() => sortedUsers.map(t => ({
     org: e,
@@ -890,10 +890,10 @@ let tf = Ju(({
   invoices: r,
   addPendingOrgUserIds: l
 }) => {
-  let o = wA();
+  let o = useDispatch();
   let d = sZ();
   let [c, _] = useState(eN.ADD_MEMBERS);
-  let m = d4(({
+  let m = useSelector(({
     licenseGroups: t
   }) => e ? t[e] : void 0);
   let g = Rs(s5A, {
@@ -966,7 +966,7 @@ function tj(e) {
   });
 }
 function ty(e) {
-  let t = wA();
+  let t = useDispatch();
   return e.requiresReview ? jsxs(Fragment, {
     children: [jsx(_$$$2, {
       onClick: () => {
@@ -1066,7 +1066,7 @@ function tk(e) {
   });
 }
 function tE(e) {
-  let t = d4(e => e.selectedView.view !== 'licenseGroup' ? null : e.licenseGroups[e.selectedView.licenseGroupId]);
+  let t = useSelector(e => e.selectedView.view !== 'licenseGroup' ? null : e.licenseGroups[e.selectedView.licenseGroupId]);
   let a = No().unwrapOr(null);
   let s = a?.key;
   return s?.parentId && s?.type === FOrganizationLevelType.ORG && t ? jsx(tk, {
@@ -1077,7 +1077,7 @@ function tE(e) {
   }) : null;
 }
 function tT(e) {
-  let t = wA();
+  let t = useDispatch();
   let a = [ps.ORG, e.org.id].toString();
   let [s] = fp(_$$Y3);
   let r = s[a] ?? 0;
@@ -1147,7 +1147,7 @@ function tT(e) {
   });
 }
 function tL() {
-  let e = d4(e => e.currentUserOrgId);
+  let e = useSelector(e => e.currentUserOrgId);
   let t = Rs(TBj, {
     orgId: e
   });
@@ -1171,7 +1171,7 @@ function tD({
     idpGroupIds,
     idpGroupsById
   } = tL();
-  let l = wA();
+  let l = useDispatch();
   let o = Um();
   return idpGroupIds.length ? jsx(bv, {
     'data-testid': 'idp-group-menubar-filter',
@@ -1188,13 +1188,13 @@ function tD({
 }
 function tM() {
   let e = MX();
-  let t = d4(({
+  let t = useSelector(({
     user: e
   }) => e?.id);
   let a = px().unwrapOr(null);
   let n = a?.key.type === FUserTypeClassification.ORG_USER && a?.permission === FMemberRoleType.ADMIN;
   let r = RG();
-  let l = d4(({
+  let l = useSelector(({
     selectedView: e
   }) => e.view === 'orgAdminSettings');
   return useMemo(() => {
@@ -1212,9 +1212,9 @@ function tP({
   onFilterUpdate: t,
   getCount: a
 }) {
-  let s = wA();
+  let s = useDispatch();
   let r = Um();
-  let l = d4(({
+  let l = useSelector(({
     licenseGroups: e
   }) => e);
   let o = tM();
@@ -1697,7 +1697,7 @@ function al(e) {
       enabled: t?.tier === FPlanNameType.ENTERPRISE
     });
     let n = tM();
-    let r = d4(({
+    let r = useSelector(({
       licenseGroups: e
     }) => e);
     let l = Xf(t?.key?.parentId, t?.type === FOrganizationLevelType.ORG);
@@ -1910,7 +1910,7 @@ function aq({
   orgUserIds: r,
   queueFilterCountsRefetch: l
 }) {
-  let o = wA();
+  let o = useDispatch();
   let d = useCallback(e => {
     o(_$$to({
       type: a$,
@@ -1963,7 +1963,7 @@ let a$ = Ju(e => {
   let c = JT(seatType);
   let _ = orgUserIds.length;
   let u = hS(e);
-  let m = wA();
+  let m = useDispatch();
   let [p, g] = useState(!1);
   let h = useCallback(() => {
     g(!0);
@@ -2043,7 +2043,7 @@ let a$ = Ju(e => {
   });
 });
 function aV(e) {
-  let t = wA();
+  let t = useDispatch();
   let a = _$$t2(e.orgUser);
   return jsx(_$$r2, {
     defaultText: '',
@@ -2056,7 +2056,7 @@ function aV(e) {
 }
 let aJ = 'guest_resources--disclaimer--2MOEQ';
 function aK(e) {
-  let t = wA();
+  let t = useDispatch();
   return jsxs('tr', {
     className: 'x17akokd xdpxx8g xjp7ctv',
     children: [jsx('td', {
@@ -2108,7 +2108,7 @@ function aK(e) {
 }
 function aX(e) {
   let t = e.resource.folder;
-  let a = wA();
+  let a = useDispatch();
   let s = e.hasCheckedAccess && !!e.resource.can_view;
   let r = s || !e.hasCheckedAccess ? void 0 : _$$t('members_tab.member_modal.not_project_member_tooltip');
   let l = `folder_tooltip_${e.resource.folder.id}`;
@@ -2153,7 +2153,7 @@ function aQ(e) {
   let t = e.resource.team;
   let a = e.hasCheckedAccess && !!e.resource.can_view;
   let s = a || !e.hasCheckedAccess;
-  let r = wA();
+  let r = useDispatch();
   let l = a ? () => {
     r(sf({
       view: 'team',
@@ -2296,7 +2296,7 @@ let a1 = Ju(e => {
     });
   }, [e.orgUser.id]);
   let l = TA();
-  let o = d4(e => e.selectedView);
+  let o = useSelector(e => e.selectedView);
   return T8(jsx(bL, {
     width: 'lg',
     height: 'dynamic',
@@ -2339,7 +2339,7 @@ function a2({
   setHighlightedItemKey: t,
   isCurrentUserOrgAdmin: a
 }) {
-  let s = wA();
+  let s = useDispatch();
   return e9(e) ? jsxs(zx, {
     children: [jsx(_$$p3, {
       onClick: () => t(e.orgUser.id),
@@ -2389,7 +2389,7 @@ function a2({
   });
 }
 function a4(e) {
-  let t = wA();
+  let t = useDispatch();
   return jsx(_$$p3, {
     onClick: () => {
       t(_$$to({
@@ -2409,7 +2409,7 @@ function a4(e) {
   });
 }
 function a5(e) {
-  let t = d4(e => e.selectedView);
+  let t = useSelector(e => e.selectedView);
   let a = e.orgUser.scim_is_admin != null;
   switch (k_(e.orgUser, e.isMe, t.view)) {
     case 'revoke':
@@ -3153,9 +3153,9 @@ export function $$nc0(e) {
     startTime,
     isLoading
   } = e;
-  let M = wA();
-  let P = d4(e => e.selectedView);
-  let U = d4(e => {
+  let M = useDispatch();
+  let P = useSelector(e => e.selectedView);
+  let U = useSelector(e => {
     let t = e.currentUserOrgId;
     return e.orgUsersByOrgId[t];
   });
@@ -3212,7 +3212,7 @@ export function $$nc0(e) {
   let [X, Q] = useState(a7.FILTER);
   let Z = _$$a();
   let ee = !!(Z && Z.permission === FUserRoleType.ADMIN);
-  let et = d4(e => e.licenseGroups);
+  let et = useSelector(e => e.licenseGroups);
   let ea = _$$d({
     reportErrorsToTeam: _$$e.SCALE
   });

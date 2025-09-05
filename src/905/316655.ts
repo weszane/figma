@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { k as _$$k } from "../905/443820";
 import { rr } from "../figma_app/778880";
 import { Ts } from "../905/194276";
@@ -22,11 +22,11 @@ export function $$v0({
   onClick: i,
   onError: v
 }) {
-  let I = wA();
-  let E = d4(e => "user" in e ? e.user : null);
-  let x = d4(e => "authedActiveCommunityProfile" in e ? e.authedActiveCommunityProfile : null);
-  let S = d4(e => "user" in e ? e.user?.community_profile_id ?? null : null);
-  let w = d4(e => "loadingState" in e ? e.loadingState : {});
+  let I = useDispatch();
+  let E = useSelector(e => "user" in e ? e.user : null);
+  let x = useSelector(e => "authedActiveCommunityProfile" in e ? e.authedActiveCommunityProfile : null);
+  let S = useSelector(e => "user" in e ? e.user?.community_profile_id ?? null : null);
+  let w = useSelector(e => "loadingState" in e ? e.loadingState : {});
   let [C, T] = useState(!1);
   let [k, R] = useState(!1);
   let [N, P] = useState(!0);

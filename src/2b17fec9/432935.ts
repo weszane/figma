@@ -1,15 +1,15 @@
 import { useMemo } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { F7 } from "../905/859698";
 import { Egt } from "../figma_app/763686";
 import { At } from "../905/973142";
 import { PW } from "../figma_app/633080";
 function d() {
-  let e = d4(e => e.mirror.selectionProperties.stateGroupSelectionInfo);
+  let e = useSelector(e => e.mirror.selectionProperties.stateGroupSelectionInfo);
   return useMemo(() => e?.allStates ? e.allStates.sort((t, i) => p(t, e.stateGroupModel.propertySortOrder, e.stateGroupModel.propertyValues) - p(i, e.stateGroupModel.propertySortOrder, e.stateGroupModel.propertyValues)).map(e => e.symbol.nodeId) : [], [e]);
 }
 export function $$c1() {
-  let e = d4(e => e.mirror.sceneGraph);
+  let e = useSelector(e => e.mirror.sceneGraph);
   let t = d();
   return useMemo(() => {
     let i = t => {

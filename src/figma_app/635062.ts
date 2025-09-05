@@ -1,12 +1,12 @@
 import { useMemo, useEffect } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { debounce } from "../905/915765";
 import { GT } from "../905/711212";
 import { EF } from "../905/709171";
 import { Um } from "../905/848862";
 import { vG } from "../905/213527";
 export function $$c3(e, t) {
-  let r = wA();
+  let r = useDispatch();
   let o = useMemo(() => debounce(r, 200), [r]);
   useEffect(() => {
     t?.skip || o(GT({
@@ -15,7 +15,7 @@ export function $$c3(e, t) {
   });
 }
 export function $$u1(e) {
-  let t = wA();
+  let t = useDispatch();
   let r = useMemo(() => debounce(t, 200), [t]);
   useEffect(() => {
     r(GT({
@@ -28,7 +28,7 @@ export function $$p0(e) {
   return useMemo(() => t && t.type === vG && t.data.style.style_type === e ? t : null, [t, e]);
 }
 export function $$_2(e) {
-  let t = d4((e) => e.stylePreviewShown);
+  let t = useSelector(e => e.stylePreviewShown);
   return useMemo(() => t.isShown && !t.isCreating && t.style.node_id === e.node_id && EF(t.style, e), [t, e]);
 }
 export const GC = $$p0;

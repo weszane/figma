@@ -6,7 +6,7 @@ import { t as _$$t } from "../905/303541";
 import { tS } from "../figma_app/516028";
 import { jN } from "../905/612685";
 import { Qn } from "../figma_app/415217";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { O } from "../905/501876";
 import { L } from "../1250/681431";
 import { o as _$$o } from "../9410/925362";
@@ -30,8 +30,8 @@ function C({
 }) {
   let [l, d] = useState(!1);
   let c = useRef(null);
-  let m = d4(e => e.mirror.appModel.pagesList);
-  let C = d4(e => e.mirror.appModel.currentPage);
+  let m = useSelector(e => e.mirror.appModel.pagesList);
+  let C = useSelector(e => e.mirror.appModel.currentPage);
   let v = m.find(e => e.nodeId === C);
   return (L(c, () => {
     l && d(!1);

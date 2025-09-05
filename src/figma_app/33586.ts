@@ -1,4 +1,4 @@
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
 import { t as _$$t } from "../905/303541";
 import { AC, Pg } from "../figma_app/777551";
@@ -19,7 +19,7 @@ import { cq } from "../905/794154";
 import { K } from "../figma_app/364226";
 export function $$I1(e) {
   let t;
-  let r = wA();
+  let r = useDispatch();
   let i = TA();
   if (!e || i !== e.creator.id) return null;
   if (AC(e)) t = _$$t("community.plugins.cancel_review");else if (m3(e)) {
@@ -40,7 +40,7 @@ export function $$I1(e) {
   };
 }
 export function $$S0(e, t) {
-  let r = wA();
+  let r = useDispatch();
   let i = LR();
   let {
     close
@@ -60,7 +60,7 @@ export function $$S0(e, t) {
   } : null;
 }
 export function $$v2(e, t) {
-  let r = wA();
+  let r = useDispatch();
   if (!e || !t) return null;
   switch (e) {
     case ho.LOAD:
@@ -96,7 +96,7 @@ export function $$v2(e, t) {
   }
 }
 export function $$A5(e, t, r, i = k2.EDITOR) {
-  let s = wA();
+  let s = useDispatch();
   let {
     close
   } = cq();
@@ -136,7 +136,7 @@ export function $$C6(e) {
     publishedExtension,
     localPublishedExtension
   } = e;
-  let s = wA();
+  let s = useDispatch();
   return !publishedExtension || localPublishedExtension ? null : {
     displayText: _$$t("qa.extensions.locate_local_version"),
     callback: () => {

@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { Rs } from "../figma_app/288654";
 import { tB } from "../figma_app/516028";
 import { NSA } from "../figma_app/43951";
 export function $$l0() {
-  let e = d4(tB);
+  let e = useSelector(tB);
   let t = Rs(NSA, {
     fileKey: e?.key ?? ""
   }, {

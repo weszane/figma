@@ -1,6 +1,6 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { Suspense } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { ServiceCategories as _$$e } from "../905/165054";
 import n from "classnames";
 import { mI } from "../figma_app/566371";
@@ -163,7 +163,7 @@ function U(e) {
   if (null === I.data) throw Error("Sticker price data was null");
   let P = C.data;
   let M = I.data;
-  let O = wA();
+  let O = useDispatch();
   let B = () => {
     O(Ce());
   };

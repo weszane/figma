@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { Ez5 } from "../figma_app/763686";
 import { l as _$$l } from "../905/716947";
 import { md, Xr } from "../figma_app/27355";
@@ -31,13 +31,13 @@ export function $$v0(e) {
   }));
 }
 export function $$I2() {
-  let e = wA();
+  let e = useDispatch();
   let t = md(_g);
   let i = Xr(UM);
   let d = Md(t);
-  let c = d4(e => AC(e));
-  let u = Object.values(d4(e => jO(e, _$$o.LIBRARY)));
-  let I = d4(e => FZ(e));
+  let c = useSelector(e => AC(e));
+  let u = Object.values(useSelector(e => jO(e, _$$o.LIBRARY)));
+  let I = useSelector(e => FZ(e));
   let E = lg() === FFileType.SLIDES;
   return {
     initiateTemplatePublish: useCallback(t => {
@@ -88,4 +88,4 @@ export function $$I2() {
 }
 export const U7 = $$v0;
 export const br = $$b1;
-export const r = $$I2; 
+export const r = $$I2;

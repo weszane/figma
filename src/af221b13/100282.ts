@@ -1,5 +1,5 @@
 import { jsxs, jsx } from "react/jsx-runtime";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { o4 } from "../figma_app/778880";
 import { $D } from "../905/11";
@@ -102,7 +102,7 @@ export function $$I0({
   prompt: c,
   promptCategory: d
 }) {
-  let u = wA();
+  let u = useDispatch();
   let g = B();
   let p = o4();
   let w = q8();

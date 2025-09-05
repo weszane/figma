@@ -1,6 +1,6 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useState, useContext, useRef, useEffect, useMemo } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { getFeatureFlags } from "../905/601108";
 import { Rs } from "../figma_app/288654";
 import { oA } from "../905/723791";
@@ -73,7 +73,7 @@ function R({
   recordingKey: r,
   isDevMode: s
 }) {
-  let l = wA();
+  let l = useDispatch();
   let [d, p] = useState(!1);
   let _ = iZ();
   let h = Rs(ehp, {
@@ -300,7 +300,7 @@ export function $$et3(e) {
   let t = e.file;
   let r = iZ();
   let n = useMemo(() => !!t && Pe(t), [t]);
-  let d = d4(({
+  let d = useSelector(({
     openFile: e
   }) => e?.org?.name);
   let u = t.canEdit;

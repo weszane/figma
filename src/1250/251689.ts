@@ -16,7 +16,7 @@ import { _ as _$$_ } from "../figma_app/496441";
 import { B as _$$B } from "../1250/314515";
 import { T as _$$T } from "../7021/675372";
 import { wo } from "../figma_app/753501";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { CH, g4 } from "../figma_app/770359";
 import { K } from "../905/443068";
 import { X } from "../905/736922";
@@ -131,7 +131,7 @@ function M({
   code: e
 }) {
   let t = DP();
-  let n = wA();
+  let n = useDispatch();
   let {
     onAction
   } = x();
@@ -176,7 +176,7 @@ function U({
   let {
     onAction
   } = x();
-  let m = wA();
+  let m = useDispatch();
   let p = () => (d(!0), _$$k2.createDevToken({
     desc: "Code Connect",
     expiration: 7776e3,

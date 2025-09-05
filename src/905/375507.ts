@@ -1,6 +1,6 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useMemo, createRef, PureComponent, useState, useCallback } from "react";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
@@ -1175,8 +1175,8 @@ let eU = Ju(function (e) {
   let b = useCallback(() => {
     A(e => !e);
   }, [A]);
-  let v = d4(e => e.sharedFonts);
-  let I = wA();
+  let v = useSelector(e => e.sharedFonts);
+  let I = useDispatch();
   let E = useCallback(() => {
     (_ ? v.collisions : [v.collisions[0]]).forEach(() => {
       sx("shared_fonts_skip_collision");
@@ -1249,10 +1249,10 @@ let eB = Ju(function (e) {
     onWarningDismissed
   } = e;
   let i = hS(e);
-  let d = d4(e => e.sharedFonts);
+  let d = useSelector(e => e.sharedFonts);
   let c = FC();
   let p = d.warnings[0];
-  let m = wA();
+  let m = useDispatch();
   let h = useCallback(() => {
     m(_$$X.dismissFontWarning());
     onWarningDismissed();
@@ -1296,8 +1296,8 @@ let eB = Ju(function (e) {
 });
 let eV = Ju(function (e) {
   let t = hS(e);
-  let i = wA();
-  let d = Object.keys(d4(e => e.sharedFonts).fontsToDelete).length;
+  let i = useDispatch();
+  let d = Object.keys(useSelector(e => e.sharedFonts).fontsToDelete).length;
   let c = useCallback(() => {
     i(_$$X.deleteFonts());
     i(Lo());
@@ -1348,8 +1348,8 @@ let eG = Ju(function (e) {
   let v = useCallback(() => {
     b(e => !e);
   }, [b]);
-  let I = d4(e => e.sharedFonts);
-  let E = wA();
+  let I = useSelector(e => e.sharedFonts);
+  let E = useDispatch();
   let x = useCallback(() => {
     (A ? I.collisions : [I.collisions[0]]).forEach(() => {
       sx("shared_fonts_skip_collision");

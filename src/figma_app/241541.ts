@@ -1,5 +1,5 @@
 import { useCallback, useEffect } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { md, fp } from "../figma_app/27355";
 import { F } from "../905/302958";
 import { oB, j7 } from "../905/929976";
@@ -39,7 +39,7 @@ export function $$l1({
   };
 }
 export function $$d0() {
-  let e = wA();
+  let e = useDispatch();
   return useCallback(t => {
     var r;
     if (!t?.overlayId) {

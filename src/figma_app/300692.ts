@@ -1,4 +1,4 @@
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { sortByCreatedAt } from "../figma_app/656233";
 import { throwTypeError } from "../figma_app/465776";
 import { ServiceCategories as _$$e } from "../905/165054";
@@ -141,7 +141,7 @@ export function $$en36(e) {
   }
 }
 export function $$ei15() {
-  return d4(e => "fullscreen" === e.selectedView.view ? Z[e.selectedView.editorType] : void 0);
+  return useSelector(e => "fullscreen" === e.selectedView.view ? Z[e.selectedView.editorType] : void 0);
 }
 export function $$ea37() {
   let e = debugState.getState().selectedView;

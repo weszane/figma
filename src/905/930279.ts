@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { Agb } from "../figma_app/822011";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { lyf, kul } from "../figma_app/763686";
@@ -309,11 +309,11 @@ export function $$C0() {
   let e = FC();
   let t = q5();
   let i = _$$d();
-  let a = d4(e => e.selectedView.editorType);
+  let a = useSelector(e => e.selectedView.editorType);
   let s = TY();
   let o = md(eE);
-  let l = d4(e => e.mirror.appModel.topLevelMode);
-  let p = d4(e => e.mirror.appModel.multiplayerSessionState);
+  let l = useSelector(e => e.mirror.appModel.topLevelMode);
+  let p = useSelector(e => e.mirror.appModel.multiplayerSessionState);
   let m = t?.teamId ?? null;
   let h = t?.sourceFile ?? t;
   let _ = !!(h && h.key);

@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { Hg } from "../figma_app/304955";
 import { y1 } from "../figma_app/492908";
 import { bL } from "../905/911410";
@@ -42,7 +42,7 @@ let B = Ju(function (e) {
     library,
     onClose
   } = e;
-  let l = wA();
+  let l = useDispatch();
   let {
     createLibraryImport
   } = S1();
@@ -140,7 +140,7 @@ function G({
   let {
     createLibraryImport
   } = S1();
-  let o = wA();
+  let o = useDispatch();
   let c = tS();
   if ("loading" === allDsImportReadyLibrariesRequestStatus) return jsx(Fragment, {
     children: y1(3).map(e => jsx(Q, {}, e))
@@ -252,7 +252,7 @@ export let $$W0 = Ju(function (e) {
     onCloseCallback,
     hasExistingChatMessages
   } = e;
-  let l = wA();
+  let l = useDispatch();
   let d = useCallback(() => {
     onCloseCallback();
     l(AS());

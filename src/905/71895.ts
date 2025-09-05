@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useState } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { g as _$$g } from "../905/749786";
 import { vo, Y9, hE, nB, wi } from "../figma_app/272243";
 import { $n } from "../905/521428";
@@ -34,7 +34,7 @@ function R({
   setConfirm: e,
   user: t
 }) {
-  let i = wA();
+  let i = useDispatch();
   let r = k();
   let s = Rs(Yh6, {});
   let d = oA(s.data?.currentUser?.isMfaRequiredByMembershipOrg) && !t.two_factor_app_enabled;
@@ -83,7 +83,7 @@ function N({
   addPhone: i
 }) {
   let r = Z();
-  let s = wA();
+  let s = useDispatch();
   let u = k();
   let p = X();
   return jsxs(Rq, {
@@ -139,7 +139,7 @@ function P({
 }) {
   let i = X();
   let r = Z();
-  let s = wA();
+  let s = useDispatch();
   let u = k();
   return jsxs(Rq, {
     onSubmit: e,
@@ -198,7 +198,7 @@ function O({
 }) {
   let [o, l] = useState(!1);
   let [d, u] = useState(!1);
-  let p = wA();
+  let p = useDispatch();
   let m = Z();
   let f = t => {
     let i = t.target.elements;

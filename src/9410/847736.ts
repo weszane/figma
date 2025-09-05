@@ -24,7 +24,7 @@ import { V as _$$V } from "../9410/526350";
 import { vN, Iv, fK, gH, r$, d$, $N, NG, S7, m4, BX, _8 as _$$_, J_ } from "../7222/396421";
 import { mp } from "../figma_app/29287";
 import { Ji, Zx, h0, qm } from "../figma_app/553488";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { $n } from "../905/521428";
 import { Xr as _$$Xr } from "../vendor/525001";
 import { IT } from "../figma_app/566371";
@@ -304,7 +304,7 @@ function et() {
   let e = _$$eE($A.Slides);
   let t = TI($A.Slides);
   let i = fK();
-  let r = wA();
+  let r = useDispatch();
   let a = q5();
   let s = J3();
   let l = JU(s);
@@ -798,7 +798,7 @@ function e2() {
     showPlaceholderOverlay,
     removeAllPlaceholderOverlays
   } = Wb();
-  let p = wA();
+  let p = useDispatch();
   let h = md(ze);
   let m = t?.source ?? _$$E.SLIDES_TEMPLATE;
   Xr(zF)(m);
@@ -902,7 +902,7 @@ let e3 = async ({
   }
 };
 function e8() {
-  let e = wA();
+  let e = useDispatch();
   let t = Um();
   let i = md(oQ);
   let [r, o] = useState([]);
@@ -1132,7 +1132,7 @@ function tl({
   let {
     showSeparator
   } = gH();
-  let h = wA();
+  let h = useDispatch();
   let g = m4();
   let _ = t && t.length > 0;
   let y = _$$e4();
@@ -1503,7 +1503,7 @@ function tT({
   let {
     onShowSeparatorScroll
   } = gH();
-  let d = d4(e => e.mirror.appModel.multiplayerSessionState === kul.JOINED);
+  let d = useSelector(e => e.mirror.appModel.multiplayerSessionState === kul.JOINED);
   let u = null === _$$tS();
   return e === J_.LOADING || !d || u ? jsx(yx, {}) : e !== J_.SUCCESS ? jsx("div", {
     className: _$$s.flex.itemsCenter.justifyCenter.hFull.wFull.colorText.textBodyLarge.pre.$,
@@ -1606,7 +1606,7 @@ function tj({
   } = $N();
   let [r, a] = fp(bY);
   let o = !!(r.type === Vf.TEMPLATE_PICKER && r.figjamEntryPointData);
-  let d = d4(e => e.mirror.appModel.multiplayerSessionState === kul.JOINED) || nl();
+  let d = useSelector(e => e.mirror.appModel.multiplayerSessionState === kul.JOINED) || nl();
   return jsxs(x, {
     dataTestId: "template-picker-view",
     children: [o ? jsx(tJ, {

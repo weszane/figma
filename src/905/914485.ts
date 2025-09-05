@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback, useMemo, useEffect } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { Wn } from "../figma_app/88484";
 import { IT } from "../figma_app/566371";
 import { tx } from "../905/303541";
@@ -29,13 +29,13 @@ function T({
   position: i,
   recentSearch: s
 }) {
-  let o = wA();
+  let o = useDispatch();
   let l = _6();
   let c = Xr(Q8);
   let u = md(sC);
   let p = md(R9);
-  let h = d4(e => e.currentUserOrgId || null);
-  let g = d4(e => e.search.sessionId);
+  let h = useSelector(e => e.currentUserOrgId || null);
+  let g = useSelector(e => e.search.sessionId);
   let T = _$$S(h)?.searches;
   let k = useCallback(e => {
     if (e.preventDefault(), e.metaKey) {
@@ -88,7 +88,7 @@ export function $$k0({
   id: e,
   path: t
 }) {
-  let i = d4(e => e.currentUserOrgId);
+  let i = useSelector(e => e.currentUserOrgId);
   let f = _$$S(i);
   let _ = f.searches.slice(0, Or);
   let A = MU - _.length;

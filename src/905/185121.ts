@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { memo, useContext, useCallback, useId, useState, useEffect, useRef, createRef } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { bL, c$, RT } from "../905/867927";
 import { q as _$$q } from "../905/932270";
 import { bL as _$$bL } from "../905/911410";
@@ -513,7 +513,7 @@ function eB(e) {
   }
 }
 function eV(e) {
-  let t = wA();
+  let t = useDispatch();
   let i = ax();
   let l = new eU();
   let d = useId();
@@ -564,7 +564,7 @@ function eV(e) {
   }, [dashPattern, b, j, F]);
   let z = Hd(e.dashCap);
   let W = strokePanelMode === yTM.VERTEX || strokePanelMode === yTM.ENDPOINT;
-  let K = d4(e => e.mirror.selectionProperties.numSelectedByType);
+  let K = useSelector(e => e.mirror.selectionProperties.numSelectedByType);
   let Z = vx(K, "CONNECTOR");
   let X = S ?? b;
   let Q = jsxs(bL, {
@@ -777,7 +777,7 @@ function eV(e) {
   });
 }
 function eG(e) {
-  let t = wA();
+  let t = useDispatch();
   return jsxs(Fragment, {
     children: [jsx(cS, {
       label: tx("fullscreen.properties_panel.stroke_settings.join"),
@@ -818,7 +818,7 @@ function eG(e) {
   });
 }
 export function $$ez0(e) {
-  let t = wA();
+  let t = useDispatch();
   Gx();
   let {
     Sprig

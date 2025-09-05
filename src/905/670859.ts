@@ -1,5 +1,5 @@
 import { jsx } from "react/jsx-runtime";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { Ay } from "../figma_app/778880";
 import { $z } from "../figma_app/617427";
 import { Ph } from "../905/160095";
@@ -9,7 +9,7 @@ export function $$c0({
   url: e,
   title: t
 }) {
-  let i = wA();
+  let i = useDispatch();
   return Ay.isMeetDevice ? jsx($z, {
     variant: "link",
     onClick: () => i(to({

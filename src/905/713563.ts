@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { md, Xr } from "../figma_app/27355";
 import { hO, Hl, G4 } from "../figma_app/545293";
 import { CZ, l4 } from "../905/124270";
@@ -21,12 +21,12 @@ export function $$_1(e, t, i) {
   }, [l, s, r]);
 }
 export function $$A0(e, t, i) {
-  let d = wA();
-  let _ = d4(e => e.currentUserOrgId);
+  let d = useDispatch();
+  let _ = useSelector(e => e.currentUserOrgId);
   let A = S(_)?.searches;
   let y = Xr(l4(WY.RESOURCE));
-  let b = d4(e => e.search.sessionId);
-  let v = d4(e => e.selectedView);
+  let b = useSelector(e => e.search.sessionId);
+  let v = useSelector(e => e.selectedView);
   let I = md(hO.currentSearchAtom);
   let E = md(hO.sortByAtom);
   return useCallback((n, r, a, o, f, _, x = !1) => {

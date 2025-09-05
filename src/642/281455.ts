@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { PureComponent, useRef, useMemo } from "react";
-import { wA, bN } from "../vendor/514228";
+import { useDispatch, shallowEqual } from "../vendor/514228";
 import { lQ } from "../905/934246";
 import { S as _$$S } from "../905/274480";
 import { J } from "../905/270045";
@@ -133,7 +133,7 @@ E.displayName = "Checkbox";
 export function $$G0(e) {
   let t = useRef(null);
   let s = DP();
-  let k = wA();
+  let k = useDispatch();
   let w = cJ();
   let {
     backgroundColor,
@@ -327,7 +327,7 @@ function H(e) {
       },
       paint: o,
       onChange: (t, s) => {
-        let r = !bN(t.color, e.backgroundColor);
+        let r = !shallowEqual(t.color, e.backgroundColor);
         let n = t.opacity !== e.backgroundOpacity;
         Y5.updateSelectionProperties({
           backgroundColor: r && t?.color ? {

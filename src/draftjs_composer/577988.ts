@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState, useRef, useCallback, useEffect, useMemo } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { lQ } from "../905/934246";
 import { $n } from "../905/521428";
 import l from "classnames";
@@ -88,15 +88,15 @@ function S({
 }
 export function $$D1(e) {
   let t = iZ();
-  let n = wA();
+  let n = useDispatch();
   let r = _B();
   let l = mz();
   let [m, d] = useState(!0);
-  let p = d4(e => e.comments.typeahead);
+  let p = useSelector(e => e.comments.typeahead);
   let h = tS();
-  let C = d4(e => e.currentUserOrgId);
+  let C = useSelector(e => e.currentUserOrgId);
   let T = q5()?.teamId;
-  let j = d4(e => e.orgUsersByOrgId);
+  let j = useSelector(e => e.orgUsersByOrgId);
   let w = useRef(null);
   let {
     onCancel,
@@ -274,9 +274,9 @@ export function $$L2(e) {
     resourceType,
     onSuccessCallback
   } = e;
-  let l = wA();
-  let m = d4(e => e.communityHub.comments.activeFeedType);
-  let c = d4(e => e.communityHub.comments.feeds)[m];
+  let l = useDispatch();
+  let m = useSelector(e => e.communityHub.comments.activeFeedType);
+  let c = useSelector(e => e.communityHub.comments.feeds)[m];
   let d = useCallback(e => {
     let {
       message,

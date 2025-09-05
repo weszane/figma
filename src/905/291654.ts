@@ -6,7 +6,7 @@ import { nT } from "../figma_app/53721";
 import { If } from "../905/714538";
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useCallback } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
@@ -157,7 +157,7 @@ let T = {
   }
 };
 let k = Ju(function (e) {
-  let t = wA();
+  let t = useDispatch();
   let i = iZ();
   let n = q5();
   let {

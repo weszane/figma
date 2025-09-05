@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useContext, Component } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, r1, nB } from "../figma_app/272243";
@@ -20,9 +20,9 @@ import { Ju, ZU } from "../905/102752";
 import { Rv } from "../figma_app/728075";
 import { pL } from "../figma_app/639088";
 let $$x0 = Ju(function (e) {
-  let t = wA();
+  let t = useDispatch();
   let i = useContext(uW);
-  let o = d4(e => e.avatarEditorState);
+  let o = useSelector(e => e.avatarEditorState);
   let l = hS(e);
   return jsx(x, {
     isLoading: o.status !== hv.POSITIONING,

@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useCallback } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { aq } from "../figma_app/59509";
 import { Q } from "../905/363675";
 import { $ } from "../905/692618";
@@ -17,7 +17,7 @@ let E = buildUploadUrl("ae3807b6d650b52da20879078b85a0df23ee056a");
 let $$y0 = "dev_handoff_dismissed_inspect_panel_plugins_hint";
 export function $$b1() {
   let e = LS();
-  let t = wA();
+  let t = useDispatch();
   let r = useCallback(() => {
     t(b({
       [$$y0]: !0

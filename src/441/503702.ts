@@ -1,12 +1,12 @@
 import { useMemo, useEffect } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { Rs } from "../figma_app/288654";
 import { oA } from "../905/723791";
 import { g } from "../905/880308";
 import { hU, ZI, EJ } from "../figma_app/934707";
 import { gvX } from "../figma_app/43951";
 export function $$u0(e = !1) {
-  let t = wA();
+  let t = useDispatch();
   let i = useMemo(() => g(), []);
   let c = Rs(gvX({
     cacheNonce: i

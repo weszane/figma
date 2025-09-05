@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useCallback } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { Pw } from "../905/521428";
 import { Pt } from "../figma_app/806412";
 import { GG } from "../905/511649";
@@ -363,7 +363,7 @@ export let $$E0 = Ju(function (e) {
     onClose,
     onContinue
   } = e;
-  let h = wA();
+  let h = useDispatch();
   let f = useCallback(() => {
     onClose?.();
     h(Ce());

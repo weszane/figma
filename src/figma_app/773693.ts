@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { glU, $mk, wzW } from "../figma_app/763686";
 import { l7 } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
@@ -27,7 +27,7 @@ export function $$v0() {
   let v = md(J);
   let A = um();
   let x = am();
-  let N = wA();
+  let N = useDispatch();
   let C = {
     orgId: e,
     teamId: t || null,

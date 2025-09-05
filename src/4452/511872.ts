@@ -1,11 +1,11 @@
 import { useCallback } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { T } from "../905/880327";
 import { am, ut } from "../4452/575555";
 import { to } from "../905/156213";
 if (443 == require.j) {}
 export function $$o0(e, t, a, o, d, c) {
-  let u = wA();
+  let u = useDispatch();
   return useCallback(() => {
     void 0 !== t && (e === am.MEMBERS && t.team.org_id ? u(to({
       type: T(),

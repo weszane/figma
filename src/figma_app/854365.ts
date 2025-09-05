@@ -1,5 +1,5 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { Wk } from "../figma_app/272243";
@@ -17,7 +17,7 @@ import { J as _$$J } from "../905/273120";
 let $$y0 = Ju($$T1);
 let b = buildUploadUrl("6d9d43af72441d7be4344d8d679d852139ebfaf7");
 export function $$T1(e) {
-  let t = wA();
+  let t = useDispatch();
   let r = hS(e);
   let {
     hideCTA,

@@ -1,5 +1,5 @@
 import { useCallback, useState, useEffect } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { h3O } from "../figma_app/763686";
 import { b } from "../905/985254";
 import { h } from "../figma_app/275739";
@@ -10,9 +10,9 @@ export let $$l0 = {
   FEEDBACK_FORM: "https://form.asana.com?k=FPQgFCXUINQN6CmMtWiabQ&d=10497086658021"
 };
 export function $$d1() {
-  let e = wA();
-  let t = d4(e => e.multiplayer.observingSessionID);
-  let r = d4(e => e.multiplayer.sessionID);
+  let e = useDispatch();
+  let t = useSelector(e => e.multiplayer.observingSessionID);
+  let r = useSelector(e => e.multiplayer.sessionID);
   return useCallback(function (n) {
     if (n && n.sessionID) {
       try {
@@ -28,7 +28,7 @@ export function $$d1() {
 }
 export function $$c2() {
   let [e, t] = useState(null);
-  let r = d4(e => e.voice.showWidget);
+  let r = useSelector(e => e.voice.showWidget);
   useEffect(() => {
     r && !e && t(h.getInstance());
   }, [r, e]);

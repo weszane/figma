@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { bN } from "../vendor/514228";
+import { shallowEqual } from "../vendor/514228";
 import { noop } from "../figma_app/465776";
 import { D2E } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
@@ -161,7 +161,7 @@ function v(e, t) {
     errors: _errors,
     ...s
   } = t;
-  return bN(errors, _errors) && bN(n, s);
+  return shallowEqual(errors, _errors) && shallowEqual(n, s);
 }
 export function $$A3({
   oldValue: e,

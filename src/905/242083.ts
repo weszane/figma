@@ -456,7 +456,7 @@ import { Ay as _$$Ay } from '../vendor/159563';
 import { hp } from '../vendor/162266';
 import ah from '../vendor/223926';
 import { deflateRaw } from '../vendor/323834';
-import { d4, wA } from '../vendor/514228';
+import { useSelector, useDispatch } from '../vendor/514228';
 import oA from '../vendor/805353';
 import { A as _$$A5 } from '../vendor/850789';
 import { unmountComponentAtNode } from '../vendor/944059';
@@ -1011,14 +1011,14 @@ function ik(e) {
       let t = e.getDirectlySelectedNodes()[0];
       return t ? t.guid : null;
     });
-    let n = wA();
+    let n = useDispatch();
     useEffect(() => {
       i !== e && n(ES({
         type: t
       }));
     }, [n, e, i, t]);
   }(e.slotNodeId, iN.type);
-  let t = wA();
+  let t = useDispatch();
   let i = pN(e.slotNodeId);
   let {
     preferredValues
@@ -1148,7 +1148,7 @@ let iG = {
   clearFrecencyData: Zk
 };
 let i0 = _$$Ju(e => {
-  let t = wA();
+  let t = useDispatch();
   let i = hS(e);
   return jsx(_$$bL, {
     manager: i,
@@ -2202,7 +2202,7 @@ let r7 = _$$Ju(({
   open: t,
   onClose: i
 }) => {
-  let n = wA();
+  let n = useDispatch();
   let r = q5();
   let [o, l] = Vc('preferred-document-color-profile-change-option', 'convert');
   let d = Av();
@@ -2770,7 +2770,7 @@ let aO = _$$Ju(e => {
   let h = c.length;
   let [g, f] = useState('all');
   let _ = Um();
-  let A = wA();
+  let A = useDispatch();
   let [y, b] = useState(JI);
   let [v, I] = useState('DOCUMENT');
   let E = async () => {
@@ -3240,8 +3240,8 @@ let aX = _$$Ju(e => {
   let t = hS(e);
   let i = useRef(null);
   let n = _$$X3(i);
-  let r = d4(e => (xO(_$$e.UNOWNED, e.mirror.appModel), e.mirror.appModel.currentPage));
-  let s = d4(e => e.mirror.sceneGraph.get);
+  let r = useSelector(e => (xO(_$$e.UNOWNED, e.mirror.appModel), e.mirror.appModel.currentPage));
+  let s = useSelector(e => e.mirror.sceneGraph.get);
   return jsx(aZ, {
     ...e,
     manager: t,

@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { createContext, useState, useContext, useMemo } from "react";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { glU } from "../figma_app/763686";
 import { h as _$$h } from "../905/207101";
 import { r as _$$r } from "../905/520829";
@@ -27,9 +27,9 @@ let h = (e, t) => {
 export function $$g2({
   children: e
 }) {
-  let t = d4(e => e.library);
+  let t = useSelector(e => e.library);
   let i = tS();
-  let p = wA();
+  let p = useDispatch();
   let [g, f] = useState({
     status: _$$r.SUCCESS,
     nodeIdToValidatedMoveInfo: Object.create(null)
@@ -78,9 +78,9 @@ export function $$f1() {
 }
 export function $$_0() {
   let e = $$f1();
-  return d4(t => e ? dU(t, e) : GS(t));
+  return useSelector(t => e ? dU(t, e) : GS(t));
 }
 export const UJ = $$_0;
 export const Xm = $$f1;
 export const fo = $$g2;
-export const og = $$m3; 
+export const og = $$m3;

@@ -16,7 +16,7 @@ import { e6 } from "../905/557142";
 import { t as _$$t2 } from "../figma_app/32680";
 import { oE } from "../905/249410";
 import { jsx, jsxs } from "react/jsx-runtime";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { T as _$$T } from "../figma_app/257703";
 import { fu } from "../figma_app/831799";
 import { v as _$$v } from "../905/124421";
@@ -27,7 +27,7 @@ import { DQ, Pw } from "../figma_app/121751";
 import { HZ, A5 } from "../figma_app/391338";
 import { b as _$$b } from "../905/165519";
 let T = Ju(function (e) {
-  let t = wA();
+  let t = useDispatch();
   return jsx(fu, {
     name: "Sharing with external users is disabled modal",
     properties: {
@@ -67,7 +67,7 @@ function k(e) {
   });
 }
 let R = Ju(function (e) {
-  let t = wA();
+  let t = useDispatch();
   return jsx(fu, {
     name: "Admin approval needed modal",
     properties: {
@@ -103,7 +103,7 @@ let R = Ju(function (e) {
   });
 }, "REQUEST_ACCESS_WARNING_MODAL");
 let N = Ju(function (e) {
-  let t = wA();
+  let t = useDispatch();
   return jsx(fu, {
     name: "Invite whitelist error modal",
     properties: {
@@ -136,7 +136,7 @@ let N = Ju(function (e) {
   });
 }, "INVITE_WHITELIST_ERROR_MODAL");
 let P = Ju(function (e) {
-  let t = wA();
+  let t = useDispatch();
   return jsx(fu, {
     name: "Deprovisioned user invite error modal",
     properties: {
@@ -169,7 +169,7 @@ let P = Ju(function (e) {
   });
 }, "DEPROVISIONED_USER_MODAL");
 let O = Ju(function (e) {
-  let t = wA();
+  let t = useDispatch();
   return jsx(fu, {
     name: "Deprovisioned user invite error modal",
     properties: {

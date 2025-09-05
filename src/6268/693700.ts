@@ -12,7 +12,7 @@ import { oW } from "../905/675859";
 import { t as _$$t } from "../905/303541";
 import { a as _$$a2 } from "../6658/303587";
 import { k1 } from "../1250/428971";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { F as _$$F } from "../905/302958";
 import { I as _$$I } from "../6658/358099";
 import { s as _$$s } from "../6658/286262";
@@ -36,7 +36,7 @@ function w({
   onBulkIgnoreComponents: o,
   onDismiss: t
 }) {
-  let c = wA();
+  let c = useDispatch();
   useEffect(() => {
     if (0 === e) {
       c(_$$F.dequeue({

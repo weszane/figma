@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useCallback } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { md } from "../figma_app/27355";
 import { Ay } from "../905/612521";
 import { Rs } from "../figma_app/288654";
@@ -23,11 +23,11 @@ export function $$v0({
   position: l,
   onContextMenuCallback: d
 }) {
-  let u = wA();
-  let _ = d4(e => e.currentUserOrgId || void 0);
-  let b = d4(e => e.currentTeamId);
-  let v = d4(e => e.user);
-  let E = d4(e => e.search.sessionId);
+  let u = useDispatch();
+  let _ = useSelector(e => e.currentUserOrgId || void 0);
+  let b = useSelector(e => e.currentTeamId);
+  let v = useSelector(e => e.user);
+  let E = useSelector(e => e.search.sessionId);
   let x = md(Q);
   let S = $E();
   let w = _6();

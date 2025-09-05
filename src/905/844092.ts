@@ -1,5 +1,5 @@
 import { jsx } from "react/jsx-runtime";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { t as _$$t } from "../905/303541";
 import { j7 } from "../905/929976";
 import { to } from "../905/156213";
@@ -10,7 +10,7 @@ import { M } from "../905/981847";
 import { KK } from "../905/649567";
 import { Kn } from "../905/958668";
 export function $$h0(e) {
-  let t = wA();
+  let t = useDispatch();
   let {
     attachments
   } = e;

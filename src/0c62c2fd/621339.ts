@@ -1,5 +1,5 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { us } from "../905/11";
 import { tx, t as _$$t } from "../905/303541";
 import { yH } from "../figma_app/240735";
@@ -253,7 +253,7 @@ function O({
     } = e.currentTarget;
     t.includes(id) ? r(t.filter(e => e !== id)) : r([...t, id]);
   };
-  let o = wA();
+  let o = useDispatch();
   let f = _6().teamId;
   return jsx(OJ, {
     title: _$$t("downgrade_survey.header"),
@@ -334,9 +334,9 @@ function O({
 export function $$F0({
   context: e
 }) {
-  let t = wA();
-  let r = d4(e => e.modalShown?.data.teamId);
-  let l = d4(e => e.teams[r]);
+  let t = useDispatch();
+  let r = useSelector(e => e.modalShown?.data.teamId);
+  let l = useSelector(e => e.teams[r]);
   let d = "admin" === e ? _$$t("downgrade_survey.go_back") : _$$t("downgrade_survey.do_not_leave_team");
   let c = "leave-team" === e ? () => {
     us("User entered leave team survey");

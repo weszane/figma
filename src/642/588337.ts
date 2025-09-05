@@ -1,7 +1,7 @@
 import _require from "../5609/415609";
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useRef, useState, useCallback, useEffect } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { $n } from "../905/521428";
 import { E as _$$E } from "../905/632989";
 import { k as _$$k } from "../905/443820";
@@ -47,7 +47,7 @@ export function $$I0({
   let v = useRef(null);
   let [I, A] = useState(null);
   let [P, L] = useState(null);
-  let R = d4(Sh);
+  let R = useSelector(Sh);
   let {
     importFile,
     isLoading

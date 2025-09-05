@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState, useEffect, useRef, useId, useCallback, useMemo, forwardRef, Component, createRef } from "react";
-import { wA, Ng } from "../vendor/514228";
+import { useDispatch, connect } from "../vendor/514228";
 import { debounce } from "../905/915765";
 import { c2 } from "../905/382883";
 import { lQ } from "../905/934246";
@@ -320,7 +320,7 @@ let eF = Ju(function (e) {
 let eq = "playground_file_row--playgroundFileSelect--AKzzs";
 let e$ = "playground_file_row--ui3--61px6";
 function eZ(e) {
-  let t = wA();
+  let t = useDispatch();
   let {
     resourceId
   } = e;
@@ -478,7 +478,7 @@ function e5({
   revertVersionCallback: l,
   removeFileCallback: d
 }) {
-  let c = wA();
+  let c = useDispatch();
   let u = t ? uF(t) : lT;
   let p = n === _$$J2.Actions.NOOP && i && i.id !== u.playground_file_version_id;
   let m = t && n === _$$J2.Actions.SET && a?.key === u.playground_fig_file?.key;
@@ -543,7 +543,7 @@ let e9 = function ({
   isWidget: n,
   error: o
 }) {
-  let l = wA();
+  let l = useDispatch();
   let d = useRef(null);
   let c = useRef(null);
   let [u, p] = useState(!c.current?.value);
@@ -926,7 +926,7 @@ function tO({
   publishedPlugin: l,
   closePluginPublishModal: d
 }) {
-  let c = wA();
+  let c = useDispatch();
   let u = Um();
   let p = t === kM.OWNER ? [tR(kM.OWNER)] : [tR(kM.PUBLISHER)];
   t !== kM.OWNER && (!i && a && p.unshift(tR(kM.OWNER)), p.push({
@@ -1059,7 +1059,7 @@ function tM({
     errorMessage: ""
   });
   let [f, _] = useState(!1);
-  let A = wA();
+  let A = useDispatch();
   function y(t) {
     return tx({
       email: t,
@@ -3422,7 +3422,7 @@ function iK({
   });
 }
 iW.displayName = "PluginPublishModal";
-let iY = Ng((e, t) => {
+let iY = connect((e, t) => {
   let {
     localFileId,
     publishedPluginId,
@@ -3494,7 +3494,7 @@ let $$iq0 = Ju(function (e) {
   }) : jsx(kt, {});
 }, "PluginPublishModal", ZU.YES);
 (n || (n = {})).PublishModalPostFormFlow = function (e) {
-  let t = wA();
+  let t = useDispatch();
   let i = Pc();
   let {
     addCommunityProfileUser,

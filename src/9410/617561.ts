@@ -1,5 +1,5 @@
 import { jsx } from "react/jsx-runtime";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { z } from "../9410/836234";
 import { Ez5, glU } from "../figma_app/763686";
 import { U } from "../figma_app/901889";
@@ -10,11 +10,11 @@ import { ut } from "../figma_app/84367";
 import { Ib } from "../905/129884";
 import { CM } from "../905/459248";
 export function $$m1() {
-  let e = d4(e => e.modalShown);
+  let e = useSelector(e => e.modalShown);
   let t = e?.type === CM.type;
   let i = ut(Ez5?.uiState().showMissingFontsButton, !1);
   let r = U();
-  let l = wA();
+  let l = useDispatch();
   return {
     expanded: t,
     icon: z,

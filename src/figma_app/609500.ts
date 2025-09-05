@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useEffect, useMemo, useCallback } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { tx } from "../905/303541";
 import { s as _$$s } from "../905/328136";
 import { A as _$$A } from "../905/351112";
@@ -15,9 +15,9 @@ import { j_, Di, ii } from "../905/217142";
 import { S as _$$S } from "../figma_app/783597";
 import { p as _$$p } from "../figma_app/93911";
 export function $$y1() {
-  let e = wA();
-  let t = d4(e => EL(e));
-  let r = d4(e => e.publishedWidgets);
+  let e = useDispatch();
+  let t = useSelector(e => EL(e));
+  let r = useSelector(e => e.publishedWidgets);
   useEffect(() => {
     e(gI());
   }, [e]);
@@ -32,7 +32,7 @@ export function $$y1() {
 export function $$b0({
   widgets: e
 }) {
-  let t = wA();
+  let t = useDispatch();
   let r = j_();
   useEffect(() => {
     t(gI());

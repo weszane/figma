@@ -1,5 +1,5 @@
-import { d4, bN } from "../vendor/514228";
+import { useSelector, shallowEqual } from "../vendor/514228";
 export function $$r0(e) {
-  return d4(e, bN);
+  return useSelector(e, shallowEqual);
 }
 export const R = $$r0;

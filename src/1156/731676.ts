@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { memo } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { k as _$$k } from "../642/978258";
 import { jk } from "../1006/969977";
 import { x as _$$x } from "../1006/523157";
@@ -121,7 +121,7 @@ function L(e) {
   }));
 }
 export let $$z0 = memo(function () {
-  return d4(e => e.mirror.appModel.isReadOnly) ? null : jsx(M, {});
+  return useSelector(e => e.mirror.appModel.isReadOnly) ? null : jsx(M, {});
 });
 function M() {
   return jsx(_$$k, {
@@ -136,11 +136,11 @@ function M() {
 function R({
   testID: e
 }) {
-  let t = d4(e => {
+  let t = useSelector(e => {
     let t = e.mirror.selectionProperties.stackMode;
     return 1 === e.mirror.selectionProperties.numSelected && ("HORIZONTAL" === t || "VERTICAL" === t || "GRID" === t);
   });
-  return d4(e => {
+  return useSelector(e => {
     let t = e.mirror.selectionProperties.selectedWidgetInfo;
     return !!(1 === e.mirror.selectionProperties.numSelected && t?.propertyMenu.length);
   }) ? jsxs(W1, {

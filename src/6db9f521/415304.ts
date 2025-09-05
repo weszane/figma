@@ -1,6 +1,6 @@
 import { jsx, Fragment } from "react/jsx-runtime";
 import { useMemo, useCallback, useState, useRef, useEffect } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { lQ } from "../905/934246";
 import { nj } from "../905/125019";
 import { fp } from "../figma_app/27355";
@@ -29,7 +29,7 @@ function S(e) {
 export function $$I0() {
   let e = function () {
     let e = Mw();
-    let t = d4(S);
+    let t = useSelector(S);
     return useMemo(() => {
       let i = [...t];
       let n = T(e);
@@ -73,7 +73,7 @@ function k({
   let S = sO();
   let I = KH();
   let N = useMemo(() => Object.keys(I), [I]);
-  let k = d4(e => e.mirror.sceneGraph);
+  let k = useSelector(e => e.mirror.sceneGraph);
   let C = useMemo(() => Yb(i, t), [i, t]);
   let w = wA((e, t) => {
     let i = e.get(t);

@@ -1,4 +1,4 @@
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { RYP, ywP } from "../figma_app/763686";
 import { nT } from "../figma_app/53721";
 import { tK, Av } from "../figma_app/622881";
@@ -15,7 +15,7 @@ let d = ({
 export function $$c0(e) {
   let t = Av();
   let i = jK();
-  let l = d4(e => e.selectedView?.editorType);
+  let l = useSelector(e => e.selectedView?.editorType);
   switch (e) {
     case ywP.LEGACY:
       return d({

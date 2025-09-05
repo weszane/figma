@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useCallback, useEffect } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { g as _$$g } from "../1250/701065";
 import { Ay } from "../905/612521";
 import { Ex, zE } from "../figma_app/919079";
@@ -21,7 +21,7 @@ let y = 443 == require.j ? 3e5 : null;
 let v = new Date("2024-06-03");
 export function $$w1(e) {
   let t = e.dispatch;
-  let n = d4(e => e.userFlags);
+  let n = useSelector(e => e.userFlags);
   let w = j0();
   let T = "draftsToMove" === e.selectedView.view;
   !function (e) {
@@ -30,7 +30,7 @@ export function $$w1(e) {
       personal_draft_migration_completed,
       long_running_draft_migration_toast_shown,
       draft_migration_completed_toast_shown
-    } = d4(e => e.userFlags);
+    } = useSelector(e => e.userFlags);
     let l = useCallback(() => {
       e(F.enqueue({
         message: _$$t("file_browser.drafts_to_move.long_running_draft_migration"),

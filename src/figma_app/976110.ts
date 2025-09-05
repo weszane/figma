@@ -1,4 +1,4 @@
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { arraysEqual } from "../figma_app/656233";
 import { c2 } from "../905/382883";
 import { Egt } from "../figma_app/763686";
@@ -58,16 +58,16 @@ function f(e, t) {
   }(t);
 }
 export function $$E5() {
-  let e = d4($$C1);
-  return f(d4(Xt), e);
+  let e = useSelector($$C1);
+  return f(useSelector(Xt), e);
 }
 export function $$y4() {
-  let e = d4($$w6);
-  return f(d4(Xt), e);
+  let e = useSelector($$w6);
+  return f(useSelector(Xt), e);
 }
 export function $$b3() {
-  let e = d4($$C1);
-  let t = new Set(d4($$O2));
+  let e = useSelector($$C1);
+  let t = new Set(useSelector($$O2));
   return e.some(e => {
     let r = e.id && e.sourceNodeID ? _$$d({
       nodeID: e.sourceNodeID,
@@ -77,10 +77,10 @@ export function $$b3() {
   }) ? J.NORMAL : J.INHERITED_INTERNAL;
 }
 export function $$T0(e, t) {
-  let r = d4($$C1);
-  let i = d4($$w6);
+  let r = useSelector($$C1);
+  let i = useSelector($$w6);
   let a = e === J.INHERITED_INTERNAL ? i : r;
-  let s = d4($$O2);
+  let s = useSelector($$O2);
   let _ = new Set(s);
   let g = new Set();
   let f = [];

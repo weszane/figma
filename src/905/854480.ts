@@ -1,5 +1,5 @@
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 export function $$r0() {
-  return d4(e => e.twoFactorAuth);
+  return useSelector(e => e.twoFactorAuth);
 }
 export const Z = $$r0;

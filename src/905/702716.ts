@@ -1,5 +1,5 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { CY } from "../figma_app/637027";
 import { z } from "../905/284530";
 import { B } from "../905/714743";
@@ -132,7 +132,7 @@ export function $$D3(e) {
 function L({
   localPlugin: e
 }) {
-  let t = wA();
+  let t = useDispatch();
   return jsx(z, {
     variant: "danger",
     iconSrc: _$$A9,
@@ -160,7 +160,7 @@ function F({
   updatePluginPublishingMetadata: a,
   localPlugin: o
 }) {
-  let l = wA();
+  let l = useDispatch();
   let c = async () => {
     if (!o) return;
     let e = await ou(i);

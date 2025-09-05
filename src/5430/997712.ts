@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { Component } from "react";
-import { Ng } from "../vendor/514228";
+import { connect } from "../vendor/514228";
 import { N_ } from "../figma_app/637027";
 import { B } from "../905/714743";
 import { t as _$$t, tx } from "../905/303541";
@@ -93,7 +93,7 @@ class _ extends Component {
   }
 }
 _.displayName = "CommunityBetaPromoBannerInner";
-export let $$p0 = Ng((e, t) => ({
+export let $$p0 = connect((e, t) => ({
   selectedView: e.selectedView,
   user: e.user
 }))(_);

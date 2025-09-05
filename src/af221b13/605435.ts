@@ -1,6 +1,6 @@
 import { H as _$$H } from "../af221b13/713104";
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { getFeatureFlags } from "../905/601108";
 import { S as _$$S } from "../5430/465757";
 import { lQ } from "../905/934246";
@@ -133,10 +133,10 @@ function V(e) {
     resource,
     fileKey
   } = e;
-  let r = wA();
+  let r = useDispatch();
   let c = useRef(null);
-  let d = d4(_$$E(Y));
-  let p = d4(e => e.currentUserOrgId);
+  let d = useSelector(_$$E(Y));
+  let p = useSelector(e => e.currentUserOrgId);
   let h = Jm();
   let y = U0(resource);
   let f = _$$U(e.resource) ? e0.COMMUNITY_HUB_FILE : xQ(resource) ? e0.COMMUNITY_HUB_WIDGET : e0.COMMUNITY_HUB_PLUGIN;
@@ -302,8 +302,8 @@ export function $$K0(e) {
   let {
     resource
   } = e;
-  let i = d4(e => MK(e, resource));
-  let o = d4(e => _$$U(resource) ? cN(i) : Wd(e, resource));
+  let i = useSelector(e => MK(e, resource));
+  let o = useSelector(e => _$$U(resource) ? cN(i) : Wd(e, resource));
   let l = RB(resource);
   let c = Uz(resource) ? resource.fig_file_metadata?.key : void 0;
   return getFeatureFlags().community_hub_admin && lT(resource) ? jsx(E, {

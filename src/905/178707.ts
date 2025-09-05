@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { forwardRef, useState } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { E as _$$E } from "../905/632989";
 import { Q_ } from "../905/657224";
 import l from "classnames";
@@ -76,11 +76,11 @@ export function $$S2(e) {
 }
 export function $$w0(e) {
   let [t, i] = useState(null);
-  let l = wA();
-  let d = d4(e => e.auth.formState);
-  let p = d4(e => e.auth.clickedSAMLSignIn);
-  let f = d4(e => e.auth.email);
-  let _ = d4(e => e.auth.invalidInput);
+  let l = useDispatch();
+  let d = useSelector(e => e.auth.formState);
+  let p = useSelector(e => e.auth.clickedSAMLSignIn);
+  let f = useSelector(e => e.auth.email);
+  let _ = useSelector(e => e.auth.invalidInput);
   let {
     trackEvent
   } = j6();
@@ -168,8 +168,8 @@ export function $$w0(e) {
 }
 export function $$C3(e) {
   let [t, i] = useState("");
-  let s = wA();
-  let o = d4(e => e.auth.invalidInput);
+  let s = useDispatch();
+  let o = useSelector(e => e.auth.invalidInput);
   let l = e.placeholder ?? _$$t("auth.password-input-placeholder");
   let d = e.isSignUp ? "new-password" : "current-password";
   return jsx($$S2, {

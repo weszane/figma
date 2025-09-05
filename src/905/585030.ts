@@ -1,5 +1,5 @@
 import { useState, useRef, useContext, useEffect } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { sYL, egF, Xts, BtE, xSx, i0e, _em, dPJ } from "../figma_app/763686";
@@ -263,7 +263,7 @@ export async function $$B10(e, t, i) {
   });
 }
 export function $$V8(e, t, i, a, s, l, d, c) {
-  let u = wA();
+  let u = useDispatch();
   let [p, m] = useState(null);
   let [g, f] = useState(null);
   let [_, A] = useState(null);
@@ -318,7 +318,7 @@ export function $$V8(e, t, i, a, s, l, d, c) {
   };
 }
 export function $$G9(e, t, i, a, s, l, d) {
-  let c = wA();
+  let c = useDispatch();
   let [u, p] = useState(null);
   let [m, g] = useState(null);
   let [f, _] = useState(null);

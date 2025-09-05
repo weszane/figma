@@ -1,6 +1,6 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useState, useContext, useEffect, useRef, useMemo, useCallback, Fragment as _$$Fragment } from "react";
-import { wA, d4, Pj } from "../vendor/514228";
+import { useDispatch, useSelector, useStore } from "../vendor/514228";
 import { debounce } from "../905/915765";
 import { t as _$$t } from "../905/150656";
 import { k as _$$k } from "../905/443820";
@@ -200,7 +200,7 @@ function em(e) {
   });
 }
 function ef(e) {
-  let t = wA();
+  let t = useDispatch();
   let {
     block,
     callbacks,
@@ -529,9 +529,9 @@ function eM(e) {
 function eL(e) {
   var t;
   let i;
-  let a = wA();
+  let a = useDispatch();
   let [l, s] = useState(!1);
-  let c = d4(e => e.selectedView.view);
+  let c = useSelector(e => e.selectedView.view);
   let {
     onClick,
     toggleQuickReply,
@@ -835,13 +835,13 @@ ez.THROTTLE_DURATION_MS = ez.DESIRED_DURATION_MS / ez.BUFFER_CAPACITY;
 let eQ = "user_notifications_dropdown--dateHeader---l8oH";
 let e$ = "user_notifications_dropdown--markAllReadButton--TwhKK text--fontPos11--2LvXf text--_fontBase--QdLsd";
 export function $$eY4(e, t) {
-  let i = wA();
-  let a = d4(e => e.user.id);
-  let n = d4(e => e.user.community_profile_id);
-  let s = d4(e => e.authedUsers.byId[a]?.plans);
+  let i = useDispatch();
+  let a = useSelector(e => e.user.id);
+  let n = useSelector(e => e.user.community_profile_id);
+  let s = useSelector(e => e.authedUsers.byId[a]?.plans);
   let c = useMemo(() => void 0 !== s && (new Map(s.map(e => [e.plan_id, e.is_org])).get(t) || !1), [s, t]);
-  let d = d4(e => e.userNotifications.communityProfileBellStates);
-  let u = d4(e => e.selectedView.view);
+  let d = useSelector(e => e.userNotifications.communityProfileBellStates);
+  let u = useSelector(e => e.selectedView.view);
   let [_, m] = useState(new Map());
   let [p, h] = useState(!0);
   let x = _$$F(d);
@@ -1031,9 +1031,9 @@ function eW(e, t) {
   }
   e.Feed = function (e) {
     let a = Pc();
-    let l = d4(e => a ? e.authedUsers.byId[a.id]?.plans : null);
-    let s = Pj();
-    let d = wA();
+    let l = useSelector(e => a ? e.authedUsers.byId[a.id]?.plans : null);
+    let s = useStore();
+    let d = useDispatch();
     let u = FC();
     let _ = q5();
     let m = sZ();

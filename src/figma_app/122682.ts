@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { eD } from "../figma_app/876459";
 import { ZC } from "../figma_app/39751";
 import { wg, o4 } from "../figma_app/778880";
@@ -11,10 +11,10 @@ import { MK } from "../figma_app/120529";
 let _ = () => !(wg() || o4());
 export function $$h1() {
   let e = q5();
-  let t = d4(e => e.orgById);
-  let r = d4(e => e.teams);
+  let t = useSelector(e => e.orgById);
+  let r = useSelector(e => e.teams);
   let a = e?.key;
-  let o = d4(e => a && !!e.voice.activeCall[a]);
+  let o = useSelector(e => a && !!e.voice.activeCall[a]);
   let [l, d] = useState(!1);
   let u = ZC(l);
   useEffect(() => {

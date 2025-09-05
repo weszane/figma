@@ -17,7 +17,7 @@ import { languageCodes, defaultLanguage } from "../905/816253";
 import { buildUploadUrl } from "../figma_app/169182";
 import { oW } from "../905/675859";
 import { Gq } from "../figma_app/363242";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { B as _$$B } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
 import { Pf } from "../905/590952";
@@ -844,7 +844,7 @@ function ei() {
 function es({
   team: e
 }) {
-  let r = d4(r => r.roles.byTeamId[e.id]) ?? {};
+  let r = useSelector(r => r.roles.byTeamId[e.id]) ?? {};
   return jsxs("div", {
     className: n()(Y, "whiteboard--teamHeader--L87B-"),
     children: [jsxs("div", {

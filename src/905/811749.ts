@@ -7,7 +7,7 @@ import { E as _$$E } from "../905/984674";
 import { V as _$$V } from "../905/453937";
 import { e as _$$e } from "../905/311297";
 import { M as _$$M } from "../905/269719";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { sf } from "../905/929976";
 import { Tf } from "../figma_app/543100";
 import { o as _$$o } from "../905/895626";
@@ -24,7 +24,7 @@ import { y as _$$y } from "../905/171275";
 import { C as _$$C } from "../905/226458";
 import { A as _$$A } from "../905/100919";
 function _(e) {
-  let t = wA();
+  let t = useDispatch();
   let i = Tf.getOwner(e.tile);
   if (!i) return jsx(_$$E, {
     fontSize: 13,

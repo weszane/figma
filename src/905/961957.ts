@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useEffect } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { dm } from "../905/535224";
 import { nR, $$ } from "../figma_app/637027";
 import { B } from "../905/714743";
@@ -13,7 +13,7 @@ import { sx } from "../figma_app/957070";
 import { yl, DD, jE, v0, Lu, pL } from "../figma_app/639088";
 import { A } from "../4711/667326";
 export let $$_0 = Ju(function () {
-  let e = wA();
+  let e = useDispatch();
   useEffect(() => {
     e(b({
       completed_font_installer_modal: !0

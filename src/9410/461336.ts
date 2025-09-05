@@ -1,5 +1,5 @@
 import { useMemo, useCallback } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { md, zl } from "../figma_app/27355";
 import { BJ } from "../figma_app/9054";
 import { sx } from "../905/449184";
@@ -22,7 +22,7 @@ export function $$C0(e) {
     backingSymbolGUID
   } = $([e ?? ""]);
   let a = useMemo(() => null === backingSymbolGUID || gl(backingSymbolGUID) ? null : backingSymbolGUID, [backingSymbolGUID]);
-  let s = wA();
+  let s = useDispatch();
   return useCallback(() => {
     e && a && (sn.reset("dev_handoff.view_history", e), sn.start("dev_handoff.view_history", {
       key: e
@@ -44,7 +44,7 @@ export function $$C0(e) {
 export function $$v2(e) {
   let t = wS();
   let i = uQ();
-  let a = wA();
+  let a = useDispatch();
   let s = U();
   return useCallback(() => {
     i && "loaded" === t.status && (s("Diff Modal Compare Changes Clicked", {
@@ -67,7 +67,7 @@ export function $$E1(e, t) {
   let d = uQ();
   let c = Fk((e, t) => e?.get(t ?? "")?.name.trim(), d);
   let m = tS();
-  let b = wA();
+  let b = useDispatch();
   let C = md(_$$d);
   let v = eY();
   return useCallback(() => {

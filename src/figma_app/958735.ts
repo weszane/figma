@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Pj } from "../vendor/514228";
+import { useStore } from "../vendor/514228";
 import { throttle } from "../905/915765";
 import { QOV, kul, Ez5 } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
@@ -69,7 +69,7 @@ let {
 } = B5("SYNC_LOCAL_STYLES_THAT_HAVE_USAGES_ON_CURRENT_PAGE", []);
 export function $$V11() {
   let e = getFeatureFlags().dse_module_publish;
-  let t = Pj();
+  let t = useStore();
   useEffect(() => function (e) {
     let t = () => KQ(e);
     let r = throttle(t);

@@ -1,5 +1,5 @@
 import { useCallback, useEffect } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { c2, he } from "../905/382883";
 import { TQ } from "../905/657224";
 import { ZC } from "../figma_app/39751";
@@ -26,11 +26,11 @@ export function $$E5({
   setCollaborators: u
 }) {
   let m = iZ();
-  let E = d4(e => (r ? e.teamUserByTeamId[r] : {}) || {});
-  let T = d4(e => e.payment.numDesignEditors);
-  let y = d4(e => e.payment.numWhiteboardEditors);
-  let h = d4(e => e.payment.editorStatusChanges);
-  let f = d4(e => e.payment.cartSelections);
+  let E = useSelector(e => (r ? e.teamUserByTeamId[r] : {}) || {});
+  let T = useSelector(e => e.payment.numDesignEditors);
+  let y = useSelector(e => e.payment.numWhiteboardEditors);
+  let h = useSelector(e => e.payment.editorStatusChanges);
+  let f = useSelector(e => e.payment.cartSelections);
   let S = ZC(e);
   let R = BR(E, m);
   let D = O1(T, Ky(R, h, FFileType.DESIGN));

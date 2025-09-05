@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useCallback } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { Q } from "../1250/220026";
 import { KWd } from "../figma_app/763686";
 import { t as _$$t } from "../905/303541";
@@ -13,8 +13,8 @@ import { PH } from "../figma_app/701580";
 import { Z } from "../9410/200844";
 export let $$g0 = "templates_toolbar";
 export function $$_1() {
-  let e = wA();
-  let t = d4(e => e.modalShown?.type === PH.type);
+  let e = useDispatch();
+  let t = useSelector(e => e.modalShown?.type === PH.type);
   let i = useCallback(() => {
     t ? e(Ce()) : (oW.trigger("action", KWd.CLEAR), e($O({
       type: PH.type,

@@ -1,6 +1,6 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useMemo, useRef, useCallback } from "react";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { E as _$$E } from "../905/632989";
 import { y as _$$y } from "../905/582657";
 import { r as _$$r } from "../905/571562";
@@ -44,16 +44,16 @@ export function $$k1(e) {
   } = e;
   let U = instanceSwapNode && hS(instanceSwapNode) ? instanceSwapNode.guid : "";
   let B = useMemo(_$$g, []);
-  let V = d4((e) => B(e, U, sceneGraph));
-  let G = d4((e) => e.instanceSwapPickerShown);
-  let z = wA();
+  let V = useSelector(e => B(e, U, sceneGraph));
+  let G = useSelector(e => e.instanceSwapPickerShown);
+  let z = useDispatch();
   let H = useRef(null);
   let W = useCallback(() => H.current ? getInstanceSwapPickerPosition ? getInstanceSwapPickerPosition(H.current, pickerWidth, initialPosition, instanceSwapPickerInitialHeight) : "bottom" === initialPosition ? VZ(H.current, pickerWidth, !1) : TS({
     el: H.current,
     initialHeight: instanceSwapPickerInitialHeight ? instanceSwapPickerInitialHeight + C + T : instanceSwapPickerInitialHeight,
     verticalAlign: "right-center" === initialPosition
   }) : void 0, [initialPosition, instanceSwapPickerInitialHeight, pickerWidth, getInstanceSwapPickerPosition]);
-  let K = useCallback((e) => {
+  let K = useCallback(e => {
     disableToggle || (z(zE({
       initialPosition: W(),
       id: pickerID,

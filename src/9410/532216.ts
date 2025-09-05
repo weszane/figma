@@ -1,6 +1,6 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useState, useEffect, memo, useMemo, useCallback, Fragment as _$$Fragment } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { YJ, hE, Ov, rm, g8, MJ, r1, mc, b as _$$b, bL } from "../figma_app/860955";
 import { K as _$$K } from "../905/443068";
 import { O as _$$O } from "../905/969533";
@@ -228,7 +228,7 @@ let eI = memo(function () {
 });
 var e1 = (e => (e.DISABLED = "disabled", e.PUBLISH = "publish", e.SHOW_UPSELL_MODAL = "show_upsell_modal", e))(e1 || {});
 function e2() {
-  let e = wA();
+  let e = useDispatch();
   return () => {
     e(_$$to2({
       type: dD,
@@ -261,17 +261,17 @@ function e3() {
   }, [t, e]);
 }
 let e6 = memo(function () {
-  let e = d4(e => e.currentUserOrgId);
-  let t = d4(e => e.currentTeamId);
+  let e = useSelector(e => e.currentUserOrgId);
+  let t = useSelector(e => e.currentTeamId);
   let i = _$$Q({
     currentOrgId: e,
     currentTeamId: t
   });
   let o = !!iZ();
   let l = function () {
-    let e = d4(vu);
-    let t = d4(e => e.currentUserOrgId);
-    let i = d4(e => e.currentTeamId);
+    let e = useSelector(vu);
+    let t = useSelector(e => e.currentUserOrgId);
+    let i = useSelector(e => e.currentTeamId);
     let r = _$$Q({
       currentOrgId: t,
       currentTeamId: i
@@ -310,10 +310,10 @@ let e7 = memo(function ({
   sections: i
 }) {
   let o = function () {
-    let e = wA();
-    let t = d4(vu);
-    let i = d4(e => e.currentUserOrgId);
-    let r = d4(e => e.currentTeamId);
+    let e = useDispatch();
+    let t = useSelector(vu);
+    let i = useSelector(e => e.currentUserOrgId);
+    let r = useSelector(e => e.currentTeamId);
     let s = _$$Q({
       currentOrgId: i,
       currentTeamId: r
@@ -368,7 +368,7 @@ let e7 = memo(function ({
 let e8 = memo(function () {
   let e = q5();
   let t = function () {
-    let e = wA();
+    let e = useDispatch();
     return t => {
       e(_$$to2({
         type: _$$l(),
@@ -379,7 +379,7 @@ let e8 = memo(function () {
     };
   }();
   let i = function () {
-    let e = wA();
+    let e = useDispatch();
     return t => {
       e(_$$to2({
         type: _$$I(),
@@ -417,22 +417,22 @@ let e8 = memo(function () {
 let e9 = ck();
 let te = () => {
   let e = q5();
-  let t = d4(e => e.plans);
+  let t = useSelector(e => e.plans);
   return useMemo(() => !!t.find(t => e?.plan?.tier === FPlanNameType.ORG || e?.plan?.tier === FPlanNameType.ENTERPRISE ? `organization::${t.plan_id}` === e?.plan?.id : `team::${t.plan_id}` === e?.plan?.id), [t, e?.plan?.tier, e?.plan?.id]);
 };
 let tt = ck();
 let ti = memo(function ({
   recordingKey: e = ""
 }) {
-  let t = d4(e => e.mirror.appModel);
-  let i = d4(e => e.selectedView);
-  let o = d4(e => getPermissionsStateMemoized(e));
-  let l = d4(e => e.userStateLoaded);
+  let t = useSelector(e => e.mirror.appModel);
+  let i = useSelector(e => e.selectedView);
+  let o = useSelector(e => getPermissionsStateMemoized(e));
+  let l = useSelector(e => e.userStateLoaded);
   let c = q5();
-  let u = d4(e => e.fileVersion);
-  let m = d4(e => e.repos);
+  let u = useSelector(e => e.fileVersion);
+  let m = useSelector(e => e.repos);
   let g = !!iZ();
-  let _ = wA();
+  let _ = useDispatch();
   SR();
   let {
     archiveBranch,
@@ -449,7 +449,7 @@ let ti = memo(function ({
   } = {
     deleteBranch: function () {
       let e = q5();
-      let t = wA();
+      let t = useDispatch();
       return () => {
         e && t(_$$to2({
           type: _$$e3,
@@ -466,7 +466,7 @@ let ti = memo(function ({
       };
     }(),
     rename: function () {
-      let e = wA();
+      let e = useDispatch();
       return useCallback(() => {
         e(vg());
       }, [e]);
@@ -474,11 +474,11 @@ let ti = memo(function ({
     deleteFile: function () {
       let e = q5();
       let t = e?.canDelete;
-      let i = d4(vu);
+      let i = useSelector(vu);
       let r = JT();
       let n = r && r.profile.entityType === o1.TEAM;
-      let s = wA();
-      let o = d4(e => e.repos);
+      let s = useDispatch();
+      let o = useSelector(e => e.repos);
       return () => {
         if (!e || !i) return;
         let r = up(e, o);
@@ -499,8 +499,8 @@ let ti = memo(function ({
       };
     }(),
     archiveBranch: function () {
-      let e = d4(vu);
-      let t = wA();
+      let e = useSelector(vu);
+      let t = useDispatch();
       return () => {
         e && (t(VK({
           fileKeys: {
@@ -514,8 +514,8 @@ let ti = memo(function ({
       };
     }(),
     restoreBranch: function () {
-      let e = d4(vu);
-      let t = wA();
+      let e = useSelector(vu);
+      let t = useDispatch();
       return () => {
         e && t(Rh({
           fileKeys: {
@@ -527,7 +527,7 @@ let ti = memo(function ({
     }(),
     openFileAnalytics: function () {
       let e = q5();
-      let t = wA();
+      let t = useDispatch();
       return useCallback(() => {
         e && t(_$$to2({
           type: _$$e4,
@@ -541,7 +541,7 @@ let ti = memo(function ({
     projectUrl: function () {
       let e = q5();
       let t = FC();
-      let i = d4(e => e.isOpenFileLoadedFromLiveGraph);
+      let i = useSelector(e => e.isOpenFileLoadedFromLiveGraph);
       return useMemo(() => {
         if (!e) return;
         let r = e.project;
@@ -550,13 +550,13 @@ let ti = memo(function ({
     }(),
     publish: function () {
       let e = md(p9);
-      let t = d4(fA);
+      let t = useSelector(fA);
       let i = q5();
       let r = e2();
       let s = function () {
         let e = q5();
-        let t = d4(e => e.teams);
-        let i = wA();
+        let t = useSelector(e => e.teams);
+        let i = useDispatch();
         return () => {
           if (!e) return;
           let r = e.teamId && t[e.teamId];
@@ -575,8 +575,8 @@ let ti = memo(function ({
       };
     }(),
     toggleVersionHistory: function () {
-      let e = wA();
-      let t = d4(e => e.mirror.appModel.activeCanvasEditModeType);
+      let e = useDispatch();
+      let t = useSelector(e => e.mirror.appModel.activeCanvasEditModeType);
       return () => {
         Ah(t) ? e(Eg()) : e(_b({
           source: _$$e.EDITOR_TOOLBAR
@@ -584,7 +584,7 @@ let ti = memo(function ({
       };
     }(),
     resetFileThumbnail: function () {
-      let e = wA();
+      let e = useDispatch();
       let t = q5();
       return () => {
         t && e($m({
@@ -612,7 +612,7 @@ let ti = memo(function ({
   let eK = o.user;
   let eV = Dl(c);
   let eW = ju("filename_menu");
-  let eq = d4(F9);
+  let eq = useSelector(F9);
   let eQ = jT(c, eq).unwrapOr(!1);
   let e$ = Rs(iY3, {
     branchFileKey: c?.key || ""
@@ -673,7 +673,7 @@ let ti = memo(function ({
   let td = !!ts && Px(ti, to);
   let tc = ta || td || tl;
   let tu = $n();
-  let tp = d4(e => e.mirror.appModel.topLevelMode);
+  let tp = useSelector(e => e.mirror.appModel.topLevelMode);
   let th = _$$F();
   let tm = n6();
   let tf = kD();
@@ -866,10 +866,10 @@ let ti = memo(function ({
   });
 });
 export function $$tr0(e) {
-  let t = wA();
+  let t = useDispatch();
   let i = Um();
   let c = i?.type === _$$eg;
-  let v = d4(e => e.isRenaming);
+  let v = useSelector(e => e.isRenaming);
   let E = _$$k2();
   let T = WN();
   let w = useCallback(() => !E || (T("LEFT_PANEL_FILE_NAME_CHEVRON"), !1), [E, T]);

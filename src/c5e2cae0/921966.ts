@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useEffect } from "react";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { r as _$$r } from "../905/520829";
 import { Kz } from "../figma_app/637027";
 import { X } from "../9420/381913";
@@ -20,14 +20,14 @@ import { fu } from "../figma_app/831799";
 import { LN } from "../figma_app/514043";
 import { A } from "../svg/821527";
 let N = e => {
-  let t = d4(t => {
+  let t = useSelector(t => {
     let a = Xw.loadingKeyForPayload({
       teamId: e
     });
     return t.loadingState[a];
   });
-  let a = d4(t => t.teamUserByTeamId[e] || {});
-  let s = wA();
+  let a = useSelector(t => t.teamUserByTeamId[e] || {});
+  let s = useDispatch();
   useEffect(() => {
     s(Xw({
       teamId: e
@@ -54,7 +54,7 @@ export function $$b0({
     teamId
   } = e;
   let a = N(teamId);
-  let r = wA();
+  let r = useDispatch();
   let l = () => {
     r(Nj({
       teamId,

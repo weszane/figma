@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useState } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { glU } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import { h as _$$h } from "../905/207101";
@@ -29,7 +29,7 @@ export function $$E0({
   fromCursorBot: N,
   isFollowUp: C
 }) {
-  let w = wA();
+  let w = useDispatch();
   let O = Vr();
   let R = x?.(getSingletonSceneGraph()) || eN(getSingletonSceneGraph(), "FRAME", O);
   let L = _$$Z();

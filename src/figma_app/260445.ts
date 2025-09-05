@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useCallback, useMemo, useRef, useState, useId, useContext } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { c2 } from "../905/382883";
 import { Z_n, rXF, JTp, CWU } from "../figma_app/763686";
 import { l7 } from "../905/189185";
@@ -31,8 +31,8 @@ export function $$S2(e, t, r, n, o, l, d, p) {
   let {
     mapVariableIdToTypedValue
   } = n ?? {};
-  let h = wA();
-  let g = d4(e => e.variablePickerShown);
+  let h = useDispatch();
+  let g = useSelector(e => e.variablePickerShown);
   let {
     updateVariableConsumption,
     clearVariableConsumption
@@ -71,8 +71,8 @@ export function $$v1(e, t, r, n) {
   let {
     setVariableValueOrOverrideForMode
   } = mm();
-  let m = wA();
-  let g = d4(e => e.variablePickerShown);
+  let m = useDispatch();
+  let g = useSelector(e => e.variablePickerShown);
   let f = useCallback(i => {
     i ? m(Yi({
       item: i,
@@ -256,8 +256,8 @@ export function $$w6({
     onComponentPropSelected: o
   }) {
     let l = useId();
-    let c = wA();
-    let p = d4(e => e.variablePickerShown);
+    let c = useDispatch();
+    let p = useSelector(e => e.variablePickerShown);
     return [p.isShown && "variable-picker-controlled" === p.type && p.key === l, useCallback((i, a) => {
       let p = i.getBoundingClientRect();
       c(C({
@@ -298,14 +298,14 @@ export function $$O3({
   variableScope: e,
   onPickerClose: t
 }) {
-  let r = wA();
+  let r = useDispatch();
   let s = useCallback(() => {
     t?.();
     r(B());
   }, [r, t]);
   let o = useContext(_$$p)?.isShowingBindingUI;
   let l = useContext(_$$p)?.variableBindingContextKey;
-  let d = d4(e => e.variablePickerShown);
+  let d = useSelector(e => e.variablePickerShown);
   return o && d.isShown && "variable-picker-controlled" === d.type && d.key === l ? jsx(ND, {
     ...d,
     onClose: s,

@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback, useRef, useState, useMemo } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { Fo, Uz } from "../905/63728";
 import { t as _$$t, tx } from "../905/303541";
 import { k as _$$k } from "../figma_app/564183";
@@ -91,7 +91,7 @@ function G({
   noPadding: t,
   isSubsection: r
 }) {
-  let s = d4((e) => e.mirror.selectionProperties.numSelected) || 0;
+  let s = useSelector(e => e.mirror.selectionProperties.numSelected) || 0;
   let l = _$$G();
   let d = l[0];
   let c = d7(d?.effects ?? [], d?.styleName, d?.styleKey);
@@ -256,9 +256,9 @@ function z(e) {
 }
 let J = "images_panel--imagePropertyRow--QtoWZ inspection_property--propertyRow--TSFLG inspection_property--basePropertyRow--nwW7c inspection_property--_basePropertyRow--nfWzH";
 let Z = () => {
-  let e = d4((e) => e.mirror.selectionProperties.fillPaints) || null;
+  let e = useSelector(e => e.mirror.selectionProperties.fillPaints) || null;
   let t = useMemo(() => N9(e), [e]);
-  return t && t.filter((e) => e.opacity > 0 && e.visible && e.image) || [];
+  return t && t.filter(e => e.opacity > 0 && e.visible && e.image) || [];
 };
 function Q(e) {
   let t = useMemo(() => new _$$D(), []);
@@ -289,7 +289,7 @@ function Q(e) {
       redact: 1,
       value: e.opacity
     }), jsx(aj, {
-      onError: (t) => {
+      onError: t => {
         let r = TypeError(`Expected string | undefined, got ${typeof t}`);
         console.error(r);
         $D(_$$e.FIGJAM, r, {
@@ -308,11 +308,11 @@ function Q(e) {
 }
 function ee() {
   let e = Z();
-  let t = useCallback((e) => jsx(Q, {
+  let t = useCallback(e => jsx(Q, {
     ...e
   }, qg(e.image)), []);
   let r = useMemo(() => {
-    let t = e.every((e) => "VIDEO" === e.type);
+    let t = e.every(e => "VIDEO" === e.type);
     return e.length > 1 ? t ? _$$t("inspect_panel.videos.title_plural") : _$$t("inspect_panel.images.title_plural") : 1 === e.length ? t ? _$$t("inspect_panel.videos.title_singular") : _$$t("inspect_panel.images.title_singular") : void 0;
   }, [e]);
   return !e || e.length < 1 ? null : jsx(VZ, {
@@ -361,7 +361,7 @@ let eu = {
   "atlassian.com": "Jira",
   "asana.com": "Asana"
 };
-let ep = (e) => {
+let ep = e => {
   if (e.displayName || e.displayText) return e;
   let t = e.uri.match(ec);
   let r = t && t[1] ? eu[t[1]] : void 0;
@@ -370,7 +370,7 @@ let ep = (e) => {
     displayName: r
   };
 };
-let e_ = (e, t) => useMemo(() => e ? e.map((e) => ep(e)) : t ? I6(t).filter((e) => "url" === e.type).map((e) => ep({
+let e_ = (e, t) => useMemo(() => e ? e.map(e => ep(e)) : t ? I6(t).filter(e => "url" === e.type).map(e => ep({
   uri: e.href
 })) : [], [t, e]);
 let eh = () => {
@@ -411,7 +411,7 @@ function em() {
         children: tx("inspect_panel.components.no_description")
       }), links.length > 0 && jsx("div", {
         className: "inspect_component_panel--documentationLinks--pi-YI",
-        children: links.map((e) => jsx(ed, {
+        children: links.map(e => jsx(ed, {
           uri: e.uri,
           displayName: e.displayName,
           displayText: e.displayText
@@ -425,7 +425,7 @@ function ef({
   title: t
 }) {
   let r = useMemo(z4, []);
-  let s = d4((t) => r(t, e));
+  let s = useSelector(t => r(t, e));
   let l = useCallback(() => {
     let e = T4.unquoteEnumerableValues(s.map(({
       name: e,
@@ -453,7 +453,7 @@ function ef({
     })
   });
 }
-let ev = (e) => {
+let ev = e => {
   let t = e?.parentNode;
   return t ? "SYMBOL" === t.type || "INSTANCE" === t.type ? t : ev(t) : null;
 };
@@ -470,11 +470,11 @@ let eA = () => {
     } : null;
   }, [e]);
 };
-let ex = (e) => useCallback(() => {
+let ex = e => useCallback(() => {
   wr();
   Dh([e]);
 }, [e]);
-let eN = (e) => {
+let eN = e => {
   let t = useCallback(() => {
     Uc(e);
   }, [e]);
@@ -513,9 +513,9 @@ function ew() {
   }) : null;
 }
 function eL() {
-  let e = d4((e) => e.mirror.selectionProperties.nodeText);
-  let t = d4((e) => e.mirror.selectionProperties.numSelectedByType) || {};
-  return 1 !== (d4((e) => e.mirror.selectionProperties.numSelected) || 0) || 1 !== t.TEXT ? null : jsx(VZ, {
+  let e = useSelector(e => e.mirror.selectionProperties.nodeText);
+  let t = useSelector(e => e.mirror.selectionProperties.numSelectedByType) || {};
+  return 1 !== (useSelector(e => e.mirror.selectionProperties.numSelected) || 0) || 1 !== t.TEXT ? null : jsx(VZ, {
     title: _$$t("inspect_panel.property.content"),
     copyAllValue: e,
     recordingKey: "content",
@@ -533,17 +533,17 @@ function eL() {
 }
 function eP() {
   let e = q5();
-  let t = d4(Sh);
-  let r = d4(Ae);
-  let i = d4(dK);
-  let s = d4(a$);
+  let t = useSelector(Sh);
+  let r = useSelector(Ae);
+  let i = useSelector(dK);
+  let s = useSelector(a$);
   return jsx(Fragment, {
     children: !!e && jsxs(Fragment, {
       children: [jsx(_$$a, {
         className: "view_only_design_properties_panel--headerSelectionWithBorder--8nqjd inspect_selection_header--headerSelection--05a4w"
       }), jsx(ew, {}), jsx(em, {}), jsx(A, {}), jsx(ef, {
         guids: t
-      }), r.map((e) => {
+      }), r.map(e => {
         let t = i.get(e[0])?.name;
         return t ? jsx(ef, {
           title: t,
@@ -572,7 +572,7 @@ export function $$eD0(e) {
   let o = e.localStylesPanel ?? null;
   return r ? null : jsxs("div", {
     ref: t,
-    onKeyDown: (e) => {
+    onKeyDown: e => {
       if (Fo(e) && e.keyCode === Uz.A) {
         let t = window.getSelection();
         if (t) {

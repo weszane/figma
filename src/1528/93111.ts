@@ -3,7 +3,7 @@ import { l7 } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
 import { R } from "../905/103090";
 import { useState, useEffect, useRef, useCallback, useMemo } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { isNullish } from "../figma_app/95419";
 import { t as _$$t } from "../905/303541";
 import { F } from "../905/302958";
@@ -48,12 +48,12 @@ export function $$b0() {
   let S = OU(TsU.CMS_CONNECT_MODE);
   !function () {
     let e = getSingletonSceneGraph();
-    let t = wA();
+    let t = useDispatch();
     let n = Ez5.cmsState();
     let l = f();
     let i = J2(n.bindingCollectionId);
     let x = J2(n.bindingFieldSchema);
-    let v = d4(e => e.mirror.appModel.hoveredNode);
+    let v = useSelector(e => e.mirror.appModel.hoveredNode);
     let I = v ? e.get(v) : null;
     let N = Mw();
     let {

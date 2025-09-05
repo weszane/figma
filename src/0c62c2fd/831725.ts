@@ -3,7 +3,7 @@ import { useState } from "react";
 import { sortByPropertyWithOptions } from "../figma_app/656233";
 import { tx } from "../905/303541";
 import { X } from "../0c62c2fd/409644";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { kg } from "../figma_app/976345";
 import { m3 } from "../905/315794";
 import { a as _$$a } from "../905/332662";
@@ -15,8 +15,8 @@ import { Ro } from "../figma_app/805373";
 import { rP } from "../figma_app/697906";
 function x(e) {
   let [t, r] = useState(!1);
-  let i = wA();
-  let n = d4(e => e.selectedView);
+  let i = useDispatch();
+  let n = useSelector(e => e.selectedView);
   let o = FC();
   let x = e.team;
   let b = () => {

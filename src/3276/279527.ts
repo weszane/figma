@@ -1,6 +1,6 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useCallback, useMemo } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { lQ } from "../905/934246";
 import { getFeatureFlags } from "../905/601108";
 import { md } from "../figma_app/27355";
@@ -53,7 +53,7 @@ let M = r1($$T);
 let $$E1 = "commentSubmitted";
 export function $$N0() {
   let e = md(M);
-  let t = d4(e => e.userAnalyticsData?.is_active_mobile_user);
+  let t = useSelector(e => e.userAnalyticsData?.is_active_mobile_user);
   let n = _$$e({
     overlay: $T1,
     priority: N.DEFAULT_MODAL

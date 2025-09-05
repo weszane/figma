@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useCallback, useEffect } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { s as _$$s } from "../figma_app/478542";
 import { getFeatureFlags } from "../905/601108";
 import { md } from "../figma_app/27355";
@@ -30,9 +30,9 @@ export function $$y0() {
 function b() {
   let e = I();
   let t = Ne();
-  let r = wA();
+  let r = useDispatch();
   if (function () {
-    let e = wA();
+    let e = useDispatch();
     let t = I();
     let r = Ne();
     let n = useCallback(() => o$(e), [e]);
@@ -59,7 +59,7 @@ function b() {
   };
 }
 export function $$T2() {
-  let e = wA();
+  let e = useDispatch();
   let t = I();
   let r = useCallback(() => {
     o$(e);

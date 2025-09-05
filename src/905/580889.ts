@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { fp } from "../figma_app/27355";
 import { sx } from "../905/449184";
 import { h as _$$h } from "../905/207101";
@@ -13,7 +13,7 @@ let h = new jk(m, {});
 let g = rt(!1);
 export function $$f0(e) {
   let t = q5();
-  let i = d4(e => e.loadingState);
+  let i = useSelector(e => e.loadingState);
   let [l, u] = fp(g);
   let f = e || VP(i, fi);
   _$$h(() => {

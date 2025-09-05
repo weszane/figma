@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { Ay } from "../figma_app/778880";
 import { Tc } from "../905/797478";
 import { CB } from "../figma_app/442259";
@@ -60,10 +60,10 @@ export function $$_5({
   return e || r;
 }
 export function $$h4() {
-  return d4(e => "WHEEL" === e.multiplayerEmoji.type && ["STAMP1", "STAMP2"].includes(e.multiplayerEmoji.wheelType));
+  return useSelector(e => "WHEEL" === e.multiplayerEmoji.type && ["STAMP1", "STAMP2"].includes(e.multiplayerEmoji.wheelType));
 }
 export function $$m2() {
-  return d4(e => "WHEEL" === e.multiplayerEmoji.type && ["REACTION1", "REACTION2", "STAMP1", "STAMP2"].includes(e.multiplayerEmoji.wheelType));
+  return useSelector(e => "WHEEL" === e.multiplayerEmoji.type && ["REACTION1", "REACTION2", "STAMP1", "STAMP2"].includes(e.multiplayerEmoji.wheelType));
 }
 export function $$g6() {
   return !Ay.isIpad;

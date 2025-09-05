@@ -1,5 +1,5 @@
 import { useEffect, useMemo } from "react";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { ResourceStatus } from "../905/957591";
 import { R } from "../905/103090";
 import { Rs } from "../figma_app/288654";
@@ -15,7 +15,7 @@ export function $$p2(e, t) {
 }
 export function $$g1() {
   let e = iZ();
-  let t = d4(e => e.userFlags);
+  let t = useSelector(e => e.userFlags);
   let n = e?.personal_drafts_folder_id ?? "";
   let a = !!n;
   let o = Rs(xO7, {
@@ -46,8 +46,8 @@ export function $$f0() {
     loadedFolders: e.loadedFolders
   }));
   let s = iZ();
-  let _ = wA();
-  let u = d4(e => e.userFlags);
+  let _ = useDispatch();
+  let u = useSelector(e => e.userFlags);
   let m = s?.personal_drafts_folder_id;
   useEffect(() => {
     m && _(jl({

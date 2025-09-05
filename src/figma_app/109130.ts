@@ -1,4 +1,4 @@
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { eU, Xr, md, zl } from "../figma_app/27355";
 import { z } from "../905/239603";
@@ -25,7 +25,7 @@ export function $$S1() {
   let o = ZT();
   let l = tS();
   let S = Xr($$I2);
-  let v = wA();
+  let v = useDispatch();
   let A = [];
   let x = [];
   let N = _$$A(() => {
@@ -46,7 +46,7 @@ export function $$S1() {
     $D(_$$e.AI_FOR_PRODUCTION, Error("Fetched invalid schema for QuickActionsRecentCommandSelectedArgs from actions history"), {});
     return [];
   }
-  w.data.forEach((e) => {
+  w.data.forEach(e => {
     if (!e.extensionInfo || e.extensionInfo.localFileId) return;
     let {
       extensionType,
@@ -62,7 +62,7 @@ export function $$S1() {
     openFileKey: n,
     extensionIdsCalledToFetch: a
   }) {
-    return e.map((e) => function (e, t, r, n, a) {
+    return e.map(e => function (e, t, r, n, a) {
       let {
         displayName,
         selectedRunPluginArgs,
@@ -150,7 +150,7 @@ export function $$S1() {
         runPluginArgs: d,
         extensionInfo: e.extensionInfo
       } : null;
-    }(e, t, r, n, a)).filter((e) => null !== e);
+    }(e, t, r, n, a)).filter(e => null !== e);
   }({
     recentlyUsed: w.data,
     localExtensions: t,

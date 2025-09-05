@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useEffect, useCallback, useState, createRef, useRef, useMemo, memo, Fragment as _$$Fragment, forwardRef } from "react";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { gZ, hE, HG, bL } from "../905/598775";
 import { IK } from "../905/521428";
 import { Ez5, glU, Z_n } from "../figma_app/763686";
@@ -209,7 +209,7 @@ function e_({
 }) {
   let i = Xo(e).filter(e => !e.is_soft_deleted);
   let s = it();
-  let o = d4(e => e.stylePickerShown);
+  let o = useSelector(e => e.stylePickerShown);
   let [c, u] = useState(void 0);
   if (!i.length) return null;
   let p = nc.user("slides-add-text-style", () => {
@@ -312,7 +312,7 @@ function ey({
   onMouseUp: A,
   onMouseMove: y
 }) {
-  let b = wA();
+  let b = useDispatch();
   let I = createRef();
   let E = bf(t);
   let {
@@ -492,12 +492,12 @@ function ex({
     if (o && m) return NQ(m.value);
   }, [o, m]);
   let g = useRef(null);
-  let _ = d4(e => e.pickerShown && e.pickerShown.id === eE ? e.pickerShown : null);
+  let _ = useSelector(e => e.pickerShown && e.pickerShown.id === eE ? e.pickerShown : null);
   let {
     openColorPicker,
     closeColorPicker
   } = function (e, t) {
-    let i = wA();
+    let i = useDispatch();
     return {
       openColorPicker: useCallback(() => {
         if (e) return !1;
@@ -971,7 +971,7 @@ let eW = memo(function ({
     }
     return n;
   }, I);
-  let k = d4(e => e?.selectedView);
+  let k = useSelector(e => e?.selectedView);
   let R = useMemo(() => pn(T), [T]);
   let N = y8(T, R, !0, s, k);
   let P = {};
@@ -1114,7 +1114,7 @@ export function $$eX0({
   let V = useCallback((e, t) => {
     N && h === e ? U() : B(e, t);
   }, [h, N, B, U]);
-  let G = !d4(e => e.eyedropper);
+  let G = !useSelector(e => e.eyedropper);
   let z = useCallback(() => {
     (_ || N) && (U(), v(!1));
   }, [U, _, N]);
@@ -1168,7 +1168,7 @@ export function $$eX0({
       }, e);
       return k9(() => t, [t]);
     }();
-    let _ = d4(e => e.fonts);
+    let _ = useSelector(e => e.fonts);
     let A = UG();
     return useMemo(() => u.map(r => jsx(e0, {
       id: r,
@@ -1266,7 +1266,7 @@ let eQ = forwardRef((e, t) => {
     shuffleCallback,
     recordingKey
   } = e;
-  let h = d4(e => e.fonts);
+  let h = useSelector(e => e.fonts);
   let f = UG();
   let A = function (e) {
     let t = md(Dq);

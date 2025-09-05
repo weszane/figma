@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
 import { md, zl, eU, E2 } from "../figma_app/27355";
 import { z } from "../905/239603";
@@ -20,7 +20,7 @@ export function $$y10() {
 }
 export function $$b0() {
   let e = md(ze) || "";
-  let t = d4(e => e.selectedView);
+  let t = useSelector(e => e.selectedView);
   let r = md(rE);
   let a = r?.source || "";
   let o = $$L14();

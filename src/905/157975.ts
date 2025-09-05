@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useCallback, useMemo } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { hS } from "../905/437088";
 import { k as _$$k } from "../905/443820";
 import { bL } from "../905/38914";
@@ -76,8 +76,8 @@ function D({
     z();
     U(t);
   }, [G, V, z]);
-  let q = d4(e => e.currentUserOrgId);
-  let $ = d4(vx);
+  let q = useSelector(e => e.currentUserOrgId);
+  let $ = useSelector(vx);
   let [Z] = Tn({
     currentOrgId: q
   });
@@ -200,12 +200,12 @@ let $$B0 = Ju(function (e) {
   } = e;
   let c = hS(e);
   _$$T();
-  let g = d4(e => e.currentUserOrgId);
-  let f = d4(e => g ? e.orgById[g] : void 0);
+  let g = useSelector(e => e.currentUserOrgId);
+  let f = useSelector(e => g ? e.orgById[g] : void 0);
   let _ = M4.useFile(fileKey).data;
-  let A = d4(e => Object.values(MH(e)).length);
-  let y = d4(e => Object.values(cM(e)).length);
-  let b = d4(e => Object.values(tK(e)).length);
+  let A = useSelector(e => Object.values(MH(e)).length);
+  let y = useSelector(e => Object.values(cM(e)).length);
+  let b = useSelector(e => Object.values(tK(e)).length);
   let v = useMemo(() => Gk(A, y, b), [A, y, b]);
   let [I] = IT(fv(g));
   return f ? jsx(bL, {

@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useEffect, useMemo } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
@@ -43,10 +43,10 @@ let $$U6 = 300;
 let $$B11 = .5;
 let $$G12 = 4;
 export function $$V13(e, t) {
-  let r = d4(e => e.openFile?.key);
-  let n = d4(e => e.mirror.appModel.currentPage);
+  let r = useSelector(e => e.openFile?.key);
+  let n = useSelector(e => e.mirror.appModel.currentPage);
   let i = t ?? n;
-  let s = d4(e => e.fileVersion);
+  let s = useSelector(e => e.fileVersion);
   return !!r && !!i && !!e && cn(r, i, e, NK(s)) === zl.get(tP);
 }
 export function $$H7(e) {
@@ -120,7 +120,7 @@ export function $$Y0(e) {
   let o = r?.lastEditedAt || null;
   let l = o ? new Date(o && o % 6e4 == 0 && o < 17061264e5 ? o + 6e4 : o).toISOString() : void 0;
   let d = E1()?.toISOString();
-  let p = d4(e => "fullscreen" === e.selectedView.view && e.selectedView.filterStatusVersions);
+  let p = useSelector(e => "fullscreen" === e.selectedView.view && e.selectedView.filterStatusVersions);
   let _ = $$z8(p ? e : void 0);
   let m = useMemo(() => p ? _.versions : function (e, t, r, n) {
     let i = [];

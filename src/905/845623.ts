@@ -1,7 +1,7 @@
 import { useMemo } from "react";
 import { gB, Xm, e1 } from "../905/723791";
 import { D, n as _$$n } from "../905/347702";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { isNotNullish } from "../figma_app/95419";
 import { IT } from "../figma_app/566371";
 import { j } from "../905/918929";
@@ -18,9 +18,9 @@ import { LH } from "../905/872904";
 import { yFE } from "../figma_app/43951";
 let g = e => useMemo(() => "loaded" === e.status ? new Set(e.data) : new Set(), [e]);
 let f = D(() => {
-  let e = d4(dK);
-  let t = d4(C9);
-  let i = d4(jf);
+  let e = useSelector(dK);
+  let t = useSelector(C9);
+  let i = useSelector(jf);
   return useMemo(() => {
     let n = new Set();
     for (let r of [...t, ...i].map(e.get).filter(isNotNullish)) r.isState || n.add(r.sourceLibraryKey);
@@ -28,8 +28,8 @@ let f = D(() => {
   }, [e, t, i]);
 });
 let E = D(() => {
-  let e = d4(dK);
-  let t = d4(MH);
+  let e = useSelector(dK);
+  let t = useSelector(MH);
   return useMemo(() => {
     let i = new Set();
     t.forEach(t => {

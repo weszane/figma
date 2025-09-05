@@ -1,5 +1,5 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { L as _$$L } from "../905/477111";
 import { getFeatureFlags } from "../905/601108";
 import o from "classnames";
@@ -223,7 +223,7 @@ function H({
         return i?.fileMerges.find(t => t.userId === e && !K(t));
     }
   }(i, o.state, o.mergeFile);
-  let u = wA();
+  let u = useDispatch();
   let m = useContext(ss);
   let [f, _] = useState(!0);
   useEffect(() => {
@@ -327,13 +327,13 @@ export function $$X0(e) {
   let d = !!(i && o && Ns(i, o));
   let c = !!(i && Kz(i));
   let u = !!i && DF(i, t);
-  let p = d4(e => e.isRenaming);
+  let p = useSelector(e => e.isRenaming);
   let h = Um()?.type === eg;
-  let m = d4(e => e.mergingStatus);
-  let f = d4(e => e.openFileMerge);
-  let g = d4(e => e.mirror.appModel.topLevelMode);
-  let _ = d4(e => e.modalShown);
-  let x = wA();
+  let m = useSelector(e => e.mergingStatus);
+  let f = useSelector(e => e.openFileMerge);
+  let g = useSelector(e => e.mirror.appModel.topLevelMode);
+  let _ = useSelector(e => e.modalShown);
+  let x = useDispatch();
   let y = l3();
   let b = y?.ownerRole?.userId === t?.id;
   let v = i?.project?.activeProjectResourceConnections?.[0];

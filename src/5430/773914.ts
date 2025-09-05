@@ -5,7 +5,7 @@ import { Ay } from "../905/612521";
 import { $D } from "../905/11";
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState, useRef, useEffect } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { fP, mc, i3 } from "../905/691059";
 import { K as _$$K } from "../905/443068";
 import { hS } from "../905/437088";
@@ -138,7 +138,7 @@ function Q({
 let Z = Ju(function (e) {
   let t;
   let r;
-  let s = wA();
+  let s = useDispatch();
   let i = y3();
   let [a, u] = fp(_$$Q);
   let m = useRef(!1);

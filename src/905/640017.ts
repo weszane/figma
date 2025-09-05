@@ -1,13 +1,13 @@
 import { useState, useEffect, useContext } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { n4, uW } from "../905/187165";
 import { C_ } from "../905/345933";
 export function $$o1() {
-  let e = d4(e => e.theme.themePreference);
+  let e = useSelector(e => e.theme.themePreference);
   return C_.includes(e) ? e : "light";
 }
 export function $$l0() {
-  return d4(e => e.theme?.visibleTheme);
+  return useSelector(e => e.theme?.visibleTheme);
 }
 export function $$d2() {
   let e = $$l0();

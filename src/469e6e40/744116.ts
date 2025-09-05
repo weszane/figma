@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { Suspense } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { h as _$$h } from "../905/207101";
 import { tx } from "../905/303541";
@@ -26,7 +26,7 @@ function k({
   org: t,
   team: a
 }) {
-  let s = wA();
+  let s = useDispatch();
   let r = y3(t?.created_at || a?.created_at, a?.last_upgraded_at);
   let h = _$$f(y);
   let {
@@ -38,7 +38,7 @@ function k({
     overlay: d8X,
     priority: _$$N.DEFAULT_MODAL
   });
-  let S = (e) => s(_$$b({
+  let S = e => s(_$$b({
     [y]: e
   }));
   let N = () => {

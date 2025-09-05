@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useEffect, useCallback, useLayoutEffect } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { L as _$$L } from "../905/704296";
 import { AWq, Liw } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
@@ -45,10 +45,10 @@ export function $$S0({
   compareId: e,
   versions: t
 }) {
-  let r = wA();
+  let r = useDispatch();
   let [c, g] = useState(null);
   let [S, v] = useState({});
-  let A = d4(e => !!e.modalShown);
+  let A = useSelector(e => !!e.modalShown);
   let x = I(Liw.EDITED);
   let N = x + I(Liw.CREATED) + (I(Liw.LIBRARY_UPDATES) + I(Liw.AFFECTED)) + I(Liw.REMOVED);
   let C = [];

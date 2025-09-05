@@ -1,6 +1,6 @@
 import { jsx, Fragment } from "react/jsx-runtime";
 import { useState, useMemo } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { lQ } from "../905/934246";
 import { nc } from "../905/189185";
 import { getFeatureFlags } from "../905/601108";
@@ -167,7 +167,7 @@ function R({
   widgetInfo: t
 }) {
   let n = E3();
-  let i = wA();
+  let i = useDispatch();
   let r = Um();
   let a = e.options.find(t => t.option === e.selectedOption);
   let c = generateRecordingKey("widgetControl", e.propertyName);

@@ -1,5 +1,5 @@
 import { useMemo, useCallback } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { Ez5, Egt, CNR } from "../figma_app/763686";
 import { Y } from "../905/912236";
 import { AD } from "../905/871411";
@@ -99,7 +99,7 @@ export function $$A3() {
   }), e);
 }
 export function $$x0() {
-  let e = wA();
+  let e = useDispatch();
   let {
     numSkippedSlides,
     numTotalSlides

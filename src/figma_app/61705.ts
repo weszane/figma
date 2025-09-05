@@ -1,5 +1,5 @@
 import { useCallback, useMemo } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { Xr } from "../figma_app/27355";
 import { oJ } from "../905/63728";
 import { Cu } from "../figma_app/314264";
@@ -17,15 +17,15 @@ export function $$h1({
   newFileDataLocalStorageKey: m
 }) {
   let g = B();
-  let f = wA();
+  let f = useDispatch();
   let E = TA();
   let y = Xr(P4);
-  let b = d4(e => {
+  let b = useSelector(e => {
     let t = r ?? e.user?.drafts_folder_id;
     let n = t ? e.folders[t] : void 0;
     return n && n.team_id ? e.teams[n.team_id] : void 0;
   });
-  let T = d4(e => e.currentTeamId ? e.teams[e.currentTeamId] : void 0);
+  let T = useSelector(e => e.currentTeamId ? e.teams[e.currentTeamId] : void 0);
   return useCallback(({
     editorType: n,
     contextClicked: i,

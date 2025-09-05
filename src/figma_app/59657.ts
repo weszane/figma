@@ -1,6 +1,6 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useState, useEffect, useCallback } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { hS } from "../905/437088";
 import { Y9, hE, nB, wi, jk, vo } from "../figma_app/272243";
 import { $n } from "../905/521428";
@@ -12,9 +12,9 @@ import { Ju } from "../905/102752";
 import { section, sectionTitle, description, jsonInput, error, complementNote, currentState, flagList, flagItem, history, historyHeader, historyItem, historySubset, historyResult, culpritFlag } from "../905/912407";
 let m = "figma_ff_bisector_state";
 let $$g1 = "FeatureFlagBisectorModal";
-let $$f0 = Ju(function(e) {
+let $$f0 = Ju(function (e) {
   let t = hS(e);
-  let r = wA();
+  let r = useDispatch();
   let [_, g] = useState("");
   let [f, E] = useState("");
   let [y, b] = useState(null);
@@ -52,7 +52,7 @@ let $$f0 = Ju(function(e) {
           t[r] = n;
           continue;
         }
-        if ("object" == typeof n && n && "value" in n && "boolean" == typeof n.value) t[r] = n.value; else {
+        if ("object" == typeof n && n && "value" in n && "boolean" == typeof n.value) t[r] = n.value;else {
           E(`Value for "${r}" must be a boolean`);
           continue;
         }
@@ -471,4 +471,4 @@ let $$f0 = Ju(function(e) {
   }) : null;
 }, $$g1);
 export const sF = $$f0;
-export const zJ = $$g1; 
+export const zJ = $$g1;

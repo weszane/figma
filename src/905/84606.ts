@@ -1,10 +1,10 @@
 import { useCallback } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { j7 } from "../905/929976";
 import { Gq } from "../figma_app/361662";
 import { K } from "../905/770444";
 export function $$l0(e, t, i, l) {
-  let d = wA();
+  let d = useDispatch();
   let {
     query,
     searchSessionId

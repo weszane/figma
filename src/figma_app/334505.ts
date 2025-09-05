@@ -1,5 +1,5 @@
 import { useMemo, useEffect } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { m1T } from "../figma_app/763686";
 import { l as _$$l } from "../905/716947";
 import { getSingletonSceneGraph } from "../905/700578";
@@ -41,7 +41,7 @@ var C = (e => (e.INSTANCE = "INSTANCE", e.DETACHED = "DETACHED", e.MIXED = "MIXE
 export function $$w1() {
   let e = getSingletonSceneGraph();
   let t = gI();
-  let r = d4(Sh);
+  let r = useSelector(Sh);
   let a = null;
   let s = !1;
   for (let r of t) {
@@ -150,7 +150,7 @@ export function $$U7() {
     return !!r && !!r.isInstance;
   }), e) && !!e.length;
   let [s, l] = fp(Lk);
-  let c = d4(e => e.mirror.sceneGraphSelection);
+  let c = useSelector(e => e.mirror.sceneGraphSelection);
   let u = ZC(c);
   let m = e => e.some(e => {
     let t = getSingletonSceneGraph().get(e);
@@ -166,7 +166,7 @@ export function $$U7() {
   }, [t, a, g, f, l, E, r]);
 }
 export function $$B17() {
-  return d4(e => e.mirror.appModel.activeCanvasEditModeType === m1T.COOPER_BULK_CREATE);
+  return useSelector(e => e.mirror.appModel.activeCanvasEditModeType === m1T.COOPER_BULK_CREATE);
 }
 export function $$G5(e) {
   return Fk((e, t) => {
@@ -175,7 +175,7 @@ export function $$G5(e) {
   }, e);
 }
 export function $$V15() {
-  let e = d4(Sh);
+  let e = useSelector(Sh);
   let t = eY();
   return useMemo(() => e.length > 0 && e.every(e => {
     let r = t.get(e);

@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { lQ } from "../905/934246";
 import { Ay } from "../905/612521";
 import { t as _$$t } from "../905/303541";
@@ -8,7 +8,7 @@ import { zX } from "../905/576487";
 import { Jt } from "../figma_app/28323";
 if (443 == require.j) {}
 export function $$u0() {
-  let e = wA();
+  let e = useDispatch();
   return {
     dispatchSuccess: ({
       approve: t,
@@ -77,7 +77,7 @@ export function $$u0() {
   };
 }
 export function $$m1(e, t) {
-  let a = wA();
+  let a = useDispatch();
   useEffect(() => {
     e && !t && a(Jt({
       forceRefetch: !0

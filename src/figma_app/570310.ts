@@ -2,7 +2,7 @@ import { A as _$$A } from "../905/801769";
 import { then } from "../181e8476/626372";
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import i, { useState, useCallback, useMemo, useEffect, useRef } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { lQ } from "../905/934246";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { N as _$$N } from "../905/438674";
@@ -98,7 +98,7 @@ function eS({
   }
 }
 function ev() {
-  let e = wA();
+  let e = useDispatch();
   return jsxs("ol", {
     role: "list",
     className: Gg,
@@ -211,7 +211,7 @@ function ev() {
   });
 }
 function eA() {
-  let e = wA();
+  let e = useDispatch();
   return jsxs("ol", {
     role: "list",
     className: Gg,
@@ -361,7 +361,7 @@ function eA() {
   });
 }
 function ex() {
-  let e = wA();
+  let e = useDispatch();
   return jsxs("ol", {
     role: "list",
     className: Gg,
@@ -516,7 +516,7 @@ dependencies {
   });
 }
 function eN() {
-  let e = wA();
+  let e = useDispatch();
   return jsxs("ol", {
     role: "list",
     className: Gg,
@@ -631,7 +631,7 @@ function eN() {
 let eC = Ju(function (e) {
   let [t, r] = useState("React");
   let s = hC();
-  let o = wA();
+  let o = useDispatch();
   let l = useCallback(e => {
     "HTML" !== e && s("code_connect.connect_to_codebase.language_selected", {
       language: e.toLowerCase()
@@ -877,7 +877,7 @@ function eG({
   });
 }
 function eV() {
-  let e = wA();
+  let e = useDispatch();
   return jsxs("div", {
     className: "figmadocs--emptyCodeConnectCard--UrWur",
     children: [jsx("div", {
@@ -1164,14 +1164,14 @@ function eJ({
 }) {
   let t = !!getFeatureFlags().dt_ccv2;
   let r = function () {
-    let e = wA();
+    let e = useDispatch();
     return useCallback(() => {
       e(to({
         type: eC
       }));
     }, [e]);
   }();
-  let s = wA();
+  let s = useDispatch();
   let o = _$$f2(eq);
   let l = useCallback(() => {
     s(_$$b({
@@ -1242,7 +1242,7 @@ export function $$eQ0({
     willHaveCodeConnect,
     isComponentBrowserMapping
   } = _3(c, o, selectedLabel, e ? _ : void 0);
-  let x = wA();
+  let x = useDispatch();
   let N = Um();
   let C = md($$e$2);
   useEffect(() => {
@@ -1264,7 +1264,7 @@ export function $$eQ0({
   }) {
     let l = tS();
     let d = M4.File.useValue(l).data;
-    let c = d4(e => e.userFlags.dev_mode_has_dismissed_code_connect_instance_entrypoint);
+    let c = useSelector(e => e.userFlags.dev_mode_has_dismissed_code_connect_instance_entrypoint);
     let u = {
       view: "none"
     };

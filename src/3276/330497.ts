@@ -1,5 +1,5 @@
 import { jsx } from "react/jsx-runtime";
-import { wA, Pj, d4 } from "../vendor/514228";
+import { useDispatch, useStore, useSelector } from "../vendor/514228";
 import { $n } from "../905/521428";
 import { E } from "../905/632989";
 import { t as _$$t } from "../905/303541";
@@ -8,11 +8,11 @@ import { ds } from "../figma_app/314264";
 import { q5 } from "../figma_app/516028";
 import { h as _$$h } from "../figma_app/275739";
 export function $$u0(e) {
-  let t = wA();
-  let n = Pj();
-  let u = d4(e => e.voice.showWidget);
+  let t = useDispatch();
+  let n = useStore();
+  let u = useSelector(e => e.voice.showWidget);
   let p = q5();
-  let h = d4(t => !!t.voice.activeCall[e.fileKey]);
+  let h = useSelector(t => !!t.voice.activeCall[e.fileKey]);
   let f = !!p && !!h;
   let _ = {
     onClick: async () => {

@@ -1,10 +1,10 @@
 import { useMemo } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { jXp, t8O } from "../figma_app/763686";
 import { getSingletonSceneGraph } from "../905/700578";
 import { a as _$$a } from "../905/714538";
 export function $$s3() {
-  let e = d4(e => e.fonts);
+  let e = useSelector(e => e.fonts);
   return useMemo(() => {
     let t = {};
     for (let [n, o] of Object.entries(e)) {

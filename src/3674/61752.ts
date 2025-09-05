@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { fp, md } from "../figma_app/27355";
 import { Ay } from "../905/612521";
 import { U as _$$U } from "../figma_app/901889";
@@ -49,7 +49,7 @@ export function $$z0({
     let g = ol();
     let x = w5(g) && !g?.org_id;
     let y = _$$U();
-    let C = wA();
+    let C = useDispatch();
     let L = _$$J2();
     let [R, O] = fp(_$$t);
     let B = useCallback(() => {
@@ -117,7 +117,7 @@ export function $$z0({
   } = wH();
   let W = [_$$J.AUTO_PATHWAY, _$$J.ADMIN_AUTO_PATHWAY].includes(getUpgradePathway(FProductAccessType.DEV_MODE));
   let G = _$$n();
-  let U = d4(e => oc(H7(e)?.id ?? "", e));
+  let U = useSelector(e => oc(H7(e)?.id ?? "", e));
   let K = _$$J2();
   let X = useCallback(() => {
     t?.();
@@ -127,7 +127,7 @@ export function $$z0({
     let t = !!hA();
     let n = md(_$$R2);
     let l = _$$U2("blocking_modal");
-    let s = wA();
+    let s = useDispatch();
     let d = _$$R(e => ({
       ...e.selectedView,
       editorType: nT.Design,

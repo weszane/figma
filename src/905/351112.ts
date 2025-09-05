@@ -1,7 +1,7 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useRef, useLayoutEffect, useState, useCallback, useEffect } from "react";
 import { H } from "react-dom";
-import { bN, Pj, Kq } from "../vendor/514228";
+import { shallowEqual, useStore, Provider } from "../vendor/514228";
 import { An } from "../figma_app/27355";
 import { getInitialOptions } from "../figma_app/169182";
 import { oD } from "../905/436043";
@@ -221,7 +221,7 @@ function N(e) {
           scrollOffset: t.getBoundingClientRect().y + (l?.scrollTop || 0) + o,
           tableHeadHeight: o
         };
-        n(e => bN(e, d) ? e : d);
+        n(e => shallowEqual(e, d) ? e : d);
       };
       u();
       let p = new ResizeObserver(u);
@@ -460,7 +460,7 @@ let P = {
 };
 export function $$O0(e) {
   let [t, i] = useState(null);
-  let h = Pj();
+  let h = useStore();
   let g = r => (p, m) => {
     if (m.stopPropagation(), e.canSelectedItemsBeDragged && !e.canSelectedItemsBeDragged(p)) {
       m.preventDefault();
@@ -474,7 +474,7 @@ export function $$O0(e) {
     H(g).render(jsx(oD, {
       userId: getInitialOptions().user_data?.id || null,
       children: jsx(An, {
-        children: jsx(Kq, {
+        children: jsx(Provider, {
           store: h,
           children: jsx($$A, {
             multiselectDisabled: !!e.multiselectDisabled,

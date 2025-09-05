@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { memo, useState, useEffect, useMemo, useRef } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { A as _$$A } from "../vendor/850789";
 import { R as _$$R } from "../905/103090";
 import { zK } from "../figma_app/913823";
@@ -47,7 +47,7 @@ function C({
   entryPointId: g,
   setPinned: f
 }) {
-  let m = wA();
+  let m = useDispatch();
   let {
     tabManager
   } = cX();
@@ -112,7 +112,7 @@ let L = memo(function (e) {
   });
 });
 function P() {
-  let e = wA();
+  let e = useDispatch();
   let {
     activateTool
   } = rM(lW);
@@ -204,7 +204,7 @@ export function $$F0() {
   useEffect(() => {
     universalInsertModal.initialSearch && setSearchQuery(universalInsertModal.initialSearch);
   }, [universalInsertModal.initialSearch, setSearchQuery]);
-  let R = wA();
+  let R = useDispatch();
   let A = gt(_$$b2);
   let L = useMemo(() => ({
     kind: "buttonTarget",

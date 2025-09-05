@@ -2,7 +2,7 @@ import { lQ } from "../905/934246";
 import { getFeatureFlags } from "../905/601108";
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback, useMemo, useState, useRef, useEffect } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { filterNotNullish } from "../figma_app/656233";
 import { i as _$$i } from "../905/718764";
 import { $y } from "../figma_app/59509";
@@ -360,7 +360,7 @@ function ev(e) {
   });
 }
 function eC(e) {
-  let t = wA();
+  let t = useDispatch();
   let {
     onTeamCreate
   } = e;
@@ -382,7 +382,7 @@ function eC(e) {
   });
 }
 let eT = Ju(function (e) {
-  let t = wA();
+  let t = useDispatch();
   let [i, n] = useState("");
   let r = useCallback(() => {
     t(Lo());
@@ -471,7 +471,7 @@ let ek = (e, t) => {
   }
 };
 let eR = Ju(function (e) {
-  let t = wA();
+  let t = useDispatch();
   let i = _$$s2();
   let n = _$$k2();
   let {
@@ -1110,7 +1110,7 @@ let eR = Ju(function (e) {
   });
 }, "FileMoveModalV2");
 let eU = Ju(function (e) {
-  let t = wA();
+  let t = useDispatch();
   let i = useCallback(() => {
     t(Ce());
   }, [t]);

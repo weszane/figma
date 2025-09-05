@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { createContext, useMemo, useContext } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { sg } from "../905/859698";
 import { glU, w3z, juq } from "../figma_app/763686";
 import { AD } from "../905/871411";
@@ -67,7 +67,7 @@ export function $$v3({
   children: e
 }) {
   let t = function (e) {
-    let t = d4(sS);
+    let t = useSelector(sS);
     let r = _G();
     let n = Fk((e, t) => {
       let r = e?.get(t ?? "");

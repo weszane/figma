@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, useEffect, useMemo, useRef } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { getFeatureFlags } from "../905/601108";
 import a from "classnames";
 import { a as _$$a } from "../905/925868";
@@ -212,7 +212,7 @@ function en({
   version: r
 }) {
   let i = AG();
-  let o = wA();
+  let o = useDispatch();
   let a = Om();
   let l = _t({
     resource: e
@@ -297,7 +297,7 @@ export function $$ea0({
   let A = !k && "twoColumn" === T;
   let P = AG();
   let O = CS();
-  let B = wA();
+  let B = useDispatch();
   let D = Jm();
   let F = Om();
   let U = tv() ?? void 0;

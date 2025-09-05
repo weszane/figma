@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { memo } from "react";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { lQ } from "../905/934246";
 import { U1 } from "../figma_app/343967";
 import { Ez5 } from "../figma_app/763686";
@@ -62,7 +62,7 @@ let O = memo(function ({
 }) {
   let t = Zr("zoom-out");
   let r = Zr("zoom-in");
-  let i = d4(e => !1 === e.mirror.appModel.showUi);
+  let i = useSelector(e => !1 === e.mirror.appModel.showUi);
   let s = aV();
   return !Y5.isReady() || i ? null : jsx(_$$o, {
     eventListeners: ["onClick"],
@@ -143,7 +143,7 @@ function L(e) {
 }
 function B() {
   let e = aV();
-  let t = d4(e => e.mirror.appModel.showUi);
+  let t = useSelector(e => e.mirror.appModel.showUi);
   return !e && t ? jsxs(_$$E, {
     className: "x78zum5 x153ncpu x1q0g3np xl56j7k x6s0dn4 x1jnr06f xgqmno8 xsqpjig",
     onClick: () => {
@@ -181,7 +181,7 @@ function es() {
 }
 let e_ = parsePxNumber(if6);
 let $$eh0 = memo(function () {
-  let e = wA();
+  let e = useDispatch();
   let t = cJ();
   let r = xo();
   let i = _$$C()?.setBottomRightToolsNode || lQ;
@@ -203,7 +203,7 @@ let $$eh0 = memo(function () {
   let x = _$$U();
   let N = sO();
   let C = to();
-  let w = !d4(e => e.mirror.appModel.showUi) || v;
+  let w = !useSelector(e => e.mirror.appModel.showUi) || v;
   let R = "dark" === DP();
   let L = _6();
   let F = B5(L);

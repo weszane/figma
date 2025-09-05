@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useRef, useState, useMemo, Component } from "react";
-import { d4, Ng } from "../vendor/514228";
+import { useSelector, connect } from "../vendor/514228";
 import { s_ } from "../905/17223";
 import { nR, $$, CY } from "../figma_app/637027";
 import { B } from "../905/714743";
@@ -88,8 +88,8 @@ function P(e) {
   });
 }
 export function $$O1(e) {
-  let t = d4(e => e.authedUsers);
-  let i = d4(e => e.authedProfilesById);
+  let t = useSelector(e => e.authedUsers);
+  let i = useSelector(e => e.authedProfilesById);
   let s = kc();
   let [c, u] = useState(null);
   let {
@@ -360,7 +360,7 @@ class L extends Component {
 }
 L.displayName = "MergeProfilesModal";
 L.id = "profile-merge";
-let F = Ng(e => ({
+let F = connect(e => ({
   loadingState: e.loadingState,
   authedProfilesById: e.authedProfilesById,
   currentUser: e.user

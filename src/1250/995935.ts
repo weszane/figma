@@ -1,4 +1,4 @@
-import { wA, d4, Pj } from "../vendor/514228";
+import { useDispatch, useSelector, useStore } from "../vendor/514228";
 import { getFeatureFlags } from "../905/601108";
 import { getSupportEmail, isProdCluster, isDevEnvironment } from "../figma_app/169182";
 import { m0, ow, lg } from "../figma_app/976749";
@@ -154,7 +154,7 @@ function ek({
   team: e,
   openInvoiceUrls: t
 }) {
-  let n = wA();
+  let n = useDispatch();
   if (0 === t.length) return null;
   let r = {
     "data-tooltip-type": Ib.TEXT,
@@ -481,9 +481,9 @@ let tW = {
 let tz = {
   bannerId: om.ProTeamPastDue,
   Banner: function (e) {
-    let t = wA();
+    let t = useDispatch();
     let n = cD();
-    let r = d4(e => n ? e.teams[n] : null);
+    let r = useSelector(e => n ? e.teams[n] : null);
     let i = FC();
     let o = n && canAdminTeam(n, i);
     let l = q5();
@@ -530,12 +530,12 @@ let tz = {
 let t$ = {
   bannerId: om.ExternalContentControlBanner,
   Banner: function (e) {
-    let t = wA();
+    let t = useDispatch();
     let n = q5();
     let r = iZ();
     let i = dq();
     let o = R$(r, i);
-    let d = d4(e => {
+    let d = useSelector(e => {
       if (!o) return null;
       let t = e.orgById[r.external_restricted_org_id];
       return t ? t.name : null;
@@ -587,9 +587,9 @@ let t$ = {
 let tq = {
   bannerId: om.ProTeamChargeFailed,
   Banner: function (e) {
-    let t = wA();
+    let t = useDispatch();
     let n = cD();
-    let r = d4(e => n ? e.teams[n] : null);
+    let r = useSelector(e => n ? e.teams[n] : null);
     let i = FC();
     let o = n && canAdminTeam(n, i);
     let s = r && r.subscription === FPaymentHealthStatusType.GRACE_PERIOD;
@@ -634,9 +634,9 @@ let tq = {
 let tV = {
   bannerId: om.ProTeamNoMonthlySubEditorCountExceeded,
   Banner: function (e) {
-    let t = wA();
+    let t = useDispatch();
     let n = cD();
-    let r = d4(e => n ? e.teams[n] : null);
+    let r = useSelector(e => n ? e.teams[n] : null);
     let o = FC();
     let s = n && canAdminTeam(n, o);
     if (r && r.subscription === FPaymentHealthStatusType.NO_MONTHLY_SUB_EDITOR_COUNT_EXCEEDED) {
@@ -680,13 +680,13 @@ let tV = {
 let tH = {
   bannerId: om.ProTrialsExpiryBanner,
   Banner: function (e) {
-    let t = wA();
+    let t = useDispatch();
     let n = q5();
     let r = cD();
-    let i = d4(e => r ? e.teams[r] : null);
+    let i = useSelector(e => r ? e.teams[r] : null);
     let o = FC();
-    let l = d4(e => e.userTeamFlags);
-    let d = Pj();
+    let l = useSelector(e => e.userTeamFlags);
+    let d = useStore();
     let _ = _$$q({
       teamId: r,
       flag: _$$lg
@@ -776,13 +776,13 @@ let tH = {
 let tK = {
   bannerId: om.StarterTeamOverFreeLimitAndLocked,
   Banner: function (e) {
-    let t = wA();
+    let t = useDispatch();
     let n = cD();
-    let r = d4(e => n ? e.teams[n] : null);
+    let r = useSelector(e => n ? e.teams[n] : null);
     let i = FC();
     let l = m0();
     let d = ow();
-    let _ = Pj();
+    let _ = useStore();
     let u = q5()?.canEdit;
     let m = n && canEditTeam(n, i);
     let p = r && !n0(r) && !r.student_team && oc(r.id, i);
@@ -904,7 +904,7 @@ let tY = {
   Banner: function (e) {
     let t = q5();
     let n = dq();
-    let r = d4(_$$wA);
+    let r = useSelector(_$$wA);
     let i = null;
     let o = null;
     if (i = n && oA(t?.isAbandonedDraftFile), o = oA(t?.canMove) ? jsxs(Fragment, {
@@ -974,9 +974,9 @@ let tZ = {
   Banner: function (e) {
     let t = q5();
     let n = cD();
-    let r = d4(e => n ? e.teams[n] : null);
+    let r = useSelector(e => n ? e.teams[n] : null);
     let i = dq();
-    let o = wA();
+    let o = useDispatch();
     let d = FC();
     if (!(i && t?.project && n3(t.project)) && !r && t && f4(t.folderId, t.teamId, d)) {
       let t = {
@@ -1012,10 +1012,10 @@ let tX = {
   Banner: function (e) {
     let t = q5();
     let n = cD();
-    let r = d4(e => n ? e.teams[n] : null);
+    let r = useSelector(e => n ? e.teams[n] : null);
     let i = iZ();
     let o = nF();
-    let l = d4(e => e.userEduGracePeriods);
+    let l = useSelector(e => e.userEduGracePeriods);
     if (!n || !i) return null;
     if (r && !o?.enabled && t?.canEditIgnoreEduGracePeriod && r && GU(l, cn(i), n, !!r.student_team).showAccessRestricted) {
       let t = {
@@ -1044,10 +1044,10 @@ let tJ = {
   Banner: function (e) {
     let t = q5();
     let n = cD();
-    let r = d4(e => n ? e.teams[n] : null);
+    let r = useSelector(e => n ? e.teams[n] : null);
     let i = iZ();
     let o = nF();
-    let l = d4(e => e.userEduGracePeriods);
+    let l = useSelector(e => e.userEduGracePeriods);
     if (n && i) {
       let a = r && !o?.enabled && t?.canEditIgnoreEduGracePeriod && r && GU(l, cn(i), n, !!r.student_team).showReminder;
       let s = zR(l, n);
@@ -1110,7 +1110,7 @@ let t1 = {
   Banner: function (e) {
     let t = p8("multiplayerSessionState") !== kul.UNJOINED;
     let n = !p8("isReadOnly");
-    let i = d4(e => e.showingUpgradeBanner);
+    let i = useSelector(e => e.showingUpgradeBanner);
     let o = q5()?.editorType;
     let [l, d] = useState(!1);
     let u = hS({
@@ -1154,7 +1154,7 @@ let t5 = {
     let [t, n] = useState(!1);
     let [i, o] = useState(!1);
     let l = md(_$$T2);
-    let d = d4(e => !!e.saveStatus?.hasUnsavedChanges);
+    let d = useSelector(e => !!e.saveStatus?.hasUnsavedChanges);
     let u = q5()?.editorType;
     if (useEffect(() => {
       l && !i && (az.trackDefinedEvent("scenegraph_and_sync.force_client_reload_banner.shown", {}), o(!0));
@@ -1188,7 +1188,7 @@ let t5 = {
 let t4 = {
   bannerId: om.FigJamTryDraftsBanner,
   Banner: function (e) {
-    let t = wA();
+    let t = useDispatch();
     let n = q5();
     let r = nF();
     let i = iZ();
@@ -1233,13 +1233,13 @@ let t4 = {
 let t2 = {
   bannerId: om.FigJamTryClaimBanner,
   Banner: function (e) {
-    let t = wA();
+    let t = useDispatch();
     let {
       onClaim
     } = function () {
       let e = q5();
-      let t = wA();
-      let n = d4(e => e.plans);
+      let t = useDispatch();
+      let n = useSelector(e => e.plans);
       useEffect(() => {
         t(hr({
           loadedPlans: n
@@ -1308,11 +1308,11 @@ let t2 = {
 let t3 = {
   bannerId: om.DowntimeBanner,
   Banner: function (e) {
-    let t = d4(e => e.showingDowntimeBanner);
+    let t = useSelector(e => e.showingDowntimeBanner);
     let {
       payload,
       status
-    } = d4(e => e.downtime);
+    } = useSelector(e => e.downtime);
     if (!payload || !getFeatureFlags().display_downtime_banner) return null;
     let o = _$$tx("downtime_banner.warning.description", {
       minLengthMinutes: payload.minLengthMinutes,
@@ -1401,8 +1401,8 @@ let t7 = {
   bannerId: om.FreemiumPreviewBanner,
   Banner: function (e) {
     let t = _$$tS();
-    let n = d4(e => t ? e.figFileDuplicatedFromHubFile[t] : null);
-    let r = d4(e => n ? e.hubFiles[n.hubFileId] : null);
+    let n = useSelector(e => t ? e.figFileDuplicatedFromHubFile[t] : null);
+    let r = useSelector(e => n ? e.hubFiles[n.hubFileId] : null);
     return n && n.isPreview && r && r.monetized_resource_metadata ? jsx(_$$f2, {
       ...e,
       bannerContent: {
@@ -1429,7 +1429,7 @@ let t7 = {
 let ne = {
   bannerId: om.FileCreationFailureBanner,
   Banner: function (e) {
-    if (d4(e => e.showingFileCreationFailureBanner)) {
+    if (useSelector(e => e.showingFileCreationFailureBanner)) {
       let t = {
         bannerType: x1.WARN,
         dismissible: !1,
@@ -1448,7 +1448,7 @@ let ne = {
 let nt = {
   bannerId: om.FileIsTeamTemplate,
   Banner: function (e) {
-    let t = wA();
+    let t = useDispatch();
     let n = aV();
     let r = kD();
     let i = b4();
@@ -1651,7 +1651,7 @@ let na = {
 let nr = {
   bannerId: om.SeatBillingTermsReminder,
   Banner: function () {
-    let e = wA();
+    let e = useDispatch();
     let t = iZ();
     let n = sZ();
     let i = !!n?.id;
@@ -1767,7 +1767,7 @@ let no = {
     let r = TA();
     let i = function () {
       let e = xo();
-      let t = wA();
+      let t = useDispatch();
       let n = iZ();
       let r = q5();
       return e && r && n ? async () => {
@@ -1835,7 +1835,7 @@ let no = {
 let ns = {
   bannerId: om.OrderFormBillingTermsBanner,
   Banner: function () {
-    let e = wA();
+    let e = useDispatch();
     let t = iZ();
     let n = sZ();
     let r = Az(n);
@@ -2055,7 +2055,7 @@ let nc = {
   Banner: function (e) {
     let [t, n] = useState(!1);
     let r = _$$N();
-    let i = d4(e => !!e.saveStatus?.hasUnsavedChanges);
+    let i = useSelector(e => !!e.saveStatus?.hasUnsavedChanges);
     if (useEffect(() => {
       t && !i && Ay.reload("slots enablement reload banner", {
         isSlotsEnablementReloadBanner: !0
@@ -2101,7 +2101,7 @@ export function $$nb0() {
   let e = q5();
   let t = m0();
   let n = e?.teamId;
-  let r = d4(e => n ? e.teams[n] : null);
+  let r = useSelector(e => n ? e.teams[n] : null);
   return e ? n && !r ? np : t ? nu : n_ : nm;
 }
 export function $$nx1() {

@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useEffect } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
@@ -10,7 +10,7 @@ import { s as _$$s } from "../cssbuilder/589278";
 import { tx } from "../905/303541";
 import { Ce } from "../905/156213";
 export function $$v0(e) {
-  let a = wA();
+  let a = useDispatch();
   useEffect(() => sx("New Autosave File Already Open Modal Shown"));
   let s = () => a(Ce());
   let v = hS({

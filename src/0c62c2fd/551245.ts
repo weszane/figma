@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useState } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { _Z } from "../figma_app/819288";
 import { Rs } from "../figma_app/288654";
@@ -20,7 +20,7 @@ export function $$b0({
   onClose: r
 }) {
   let b = TA();
-  let v = wA();
+  let v = useDispatch();
   let y = _$$p2(_$$t("file_browser.pinning.delete_pin_modal.confirmation_bell"), "file-browser-workspace-delete-pin");
   let [w, j] = useState(!1);
   let T = Rs(qBf, {

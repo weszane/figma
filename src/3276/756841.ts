@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useRef, memo, useMemo, useCallback, useState, useContext, useEffect, forwardRef } from "react";
-import { wA, d4, Pj } from "../vendor/514228";
+import { useDispatch, useSelector, useStore } from "../vendor/514228";
 import { throwTypeError, assertNotNullish } from "../figma_app/465776";
 import { T as _$$T } from "../905/745591";
 import { U1 } from "../figma_app/343967";
@@ -292,7 +292,7 @@ function ex(e) {
     commentReceipts
   } = I_();
   let m = fr();
-  let h = wA();
+  let h = useDispatch();
   let f = tS();
   let _ = TA();
   let g = useCallback(() => {
@@ -409,7 +409,7 @@ let eS = memo(function (e) {
     userCanResolveThread,
     openPostDetailModal
   } = e;
-  let b = d4(e => e.comments.hoveredPinIds);
+  let b = useSelector(e => e.comments.hoveredPinIds);
   let y = getFeatureFlags().fpl_card_primitive_migration;
   let C = e.thread.replyCount || e.thread.comments.length - 1;
   let w = e.thread.attachments?.length || e.thread.comments.map(e => e.attachments?.length || 0).reduce((e, t) => e + t, 0) || 0;
@@ -563,7 +563,7 @@ let eS = memo(function (e) {
   });
 });
 function eJ(e) {
-  let t = d4(e => e.mirror.appModel.pagesList);
+  let t = useSelector(e => e.mirror.appModel.pagesList);
   return null === e.page || Fy(t, e.page) === xal.LOADED;
 }
 let e0 = memo(function (e) {
@@ -625,7 +625,7 @@ let e0 = memo(function (e) {
     onCanvasMentionCopyLink,
     openPostDetailModal
   } = function (e, t, n) {
-    let o = wA();
+    let o = useDispatch();
     let {
       comments: _comments
     } = e;
@@ -634,7 +634,7 @@ let e0 = memo(function (e) {
     let [d, c] = useState(!1);
     let m = e.id;
     let h = !q5()?.canEdit;
-    let f = d4(e => e.mirror.appModel.showComments);
+    let f = useSelector(e => e.mirror.appModel.showComments);
     let _ = yZ();
     let v = eJ(e);
     let x = useContext(viewportNavigatorContext);
@@ -644,7 +644,7 @@ let e0 = memo(function (e) {
     let k = !!e.isPendingFromSinatra;
     let P = I_();
     let I = fr();
-    let T = Pj();
+    let T = useStore();
     let M = n0();
     let E = VS({
       pagesList: M,
@@ -1081,15 +1081,15 @@ let tl = nF((e, t) => {
 });
 var tc = (e => (e.ALL = "all", e.PARTICIPATING = "participating", e.NONE = "none", e))(tc || {});
 function tp() {
-  let e = d4(sS);
+  let e = useSelector(sS);
   let t = iZ();
   let n = jp();
   let s = I_();
   let r = fr();
   let l = n6();
   let d = m0();
-  let c = wA();
-  let m = d4(e => e.mirror.appModel.showComments);
+  let c = useDispatch();
+  let m = useSelector(e => e.mirror.appModel.showComments);
   let h = useCallback(() => {
     Y5.triggerAction("toggle-show-comments", {
       source: "comments_sidebar_setting"
@@ -1208,7 +1208,7 @@ function tp() {
 let tf = "comments_sidebar_header--headerIconButton--JiHD6";
 let t_ = "comments_sidebar_header--headerIconButtonSel--3-zXH";
 function tg(e) {
-  let t = wA();
+  let t = useDispatch();
   let {
     getTriggerProps,
     manager
@@ -1237,7 +1237,7 @@ function tb({
   activeFilters: e,
   ...t
 }) {
-  let n = wA();
+  let n = useDispatch();
   let {
     getTriggerProps,
     manager
@@ -1311,7 +1311,7 @@ function tb({
   });
 }
 function ty(e) {
-  let t = wA();
+  let t = useDispatch();
   let n = useCallback(() => {
     t(UU());
     e.threadManager.setQuery("");
@@ -1417,7 +1417,7 @@ function tk({
 let tP = e => e.stopPropagation();
 let tI = [hJ.COMMENTS_ONLY, hJ.POSTS_ONLY];
 export function $$tT0(e) {
-  let t = wA();
+  let t = useDispatch();
   let {
     activeQuery,
     activeSort,

@@ -1,5 +1,5 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import a from "classnames";
 import { B } from "../905/714743";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -183,7 +183,7 @@ export function $$S1(e) {
     extension,
     rowIcon
   } = e;
-  let l = wA();
+  let l = useDispatch();
   let d = _$$a(workspace.orgId, extension?.id);
   let c = e => {
     if (!extension) return;

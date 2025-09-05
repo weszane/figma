@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { l as _$$l } from "../905/716947";
 import { Mz } from "../vendor/925040";
 import { az } from "../905/449184";
@@ -8,7 +8,7 @@ import { iN, Zl, Z4 } from "../905/211621";
 var $$n0;
 (e => {
   function t() {
-    return d4(e.selectOpenFileProperties);
+    return useSelector(e.selectOpenFileProperties);
   }
   (e => {
     e.SELECTED_INSTANCE_SWAP = "Instance Panel > Selected Instance Swap";
@@ -38,7 +38,7 @@ var $$n0;
     entrypoint: r
   }) {
     let o = t();
-    let u = d4(e => e.instanceSwapPickerListLayout);
+    let u = useSelector(e => e.instanceSwapPickerListLayout);
     let p = n.type === iN.FILE ? n.libraryKey : void 0;
     h(() => {
       (e === Zl.INSTANCE_SWAP_PICKER || e === Zl.PREFERRED_VALUES_PICKER) && az.trackDefinedEvent("instance_swap_picker.launched", {

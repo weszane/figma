@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useMemo, useCallback, useEffect, useState, Fragment as _$$Fragment, useRef, useContext } from "react";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { getFeatureFlags } from "../905/601108";
 import { resourceUtils } from "../905/989992";
 import l from "../vendor/239910";
@@ -167,8 +167,8 @@ function ew({
   let o = s?.key.type === FOrganizationLevelType.ORG ? s?.key.parentId : void 0;
   let l = s?.name;
   let d = cD();
-  let u = d4(e => e.dropdownShown);
-  let p = wA();
+  let u = useSelector(e => e.dropdownShown);
+  let p = useDispatch();
   let m = useCallback(e => {
     i(e);
     sx("CTA Clicked", {
@@ -207,7 +207,7 @@ let ek = r1("file_browser_onboarded");
 let eR = r1(eT);
 function eN() {
   let e = md(ek);
-  let t = d4(e => e.currentUserOrgId);
+  let t = useSelector(e => e.currentUserOrgId);
   let i = UC(t);
   let s = md(i);
   let o = md(eR);
@@ -265,7 +265,7 @@ function e4({
   let h = L8(e, m.repos);
   let g = Xm(e);
   let f = _$$l2(e);
-  let _ = d4(Pg);
+  let _ = useSelector(Pg);
   let y = _$$b2(t, i, r, o) || g;
   let v = getFeatureFlags().cmty_lib_admin_publish ? y && !_ : y;
   let {
@@ -1067,7 +1067,7 @@ function tT({
     useSinatraType: !0
   })?.thumbnail_url || "";
   SR();
-  let s = wA();
+  let s = useDispatch();
   return jsx(fu, {
     name: _$$e.LIBRARY_MODAL_UPSELL,
     children: jsx("div", {
@@ -1153,7 +1153,7 @@ function tk({
   viewMissingFiles: u
 }) {
   let p = useContext(_$$r);
-  let m = d4(d1);
+  let m = useSelector(d1);
   let [h, g] = useState(new Set());
   let f = Fl();
   let _ = md(qq);
@@ -1285,7 +1285,7 @@ export function $$tM0({
   includeThumbnails: C = !1
 }) {
   let T;
-  let k = wA();
+  let k = useDispatch();
   let {
     user,
     teams,

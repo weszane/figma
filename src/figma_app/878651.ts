@@ -1,6 +1,6 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useState, memo, useCallback, useRef, useMemo, PureComponent, Component } from "react";
-import { d4, wA, Ng } from "../vendor/514228";
+import { useSelector, useDispatch, connect } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
 import p from "classnames";
 import { Ay } from "../905/612521";
@@ -102,8 +102,8 @@ export function $$eu2(e) {
   });
 }
 function ep(e) {
-  let t = d4(e => e.orgById);
-  let r = "search" === d4(({
+  let t = useSelector(e => e.orgById);
+  let r = "search" === useSelector(({
     selectedView: e
   }) => e).view;
   let n = e.plugin.org_id && t?.[e.plugin.org_id];
@@ -346,12 +346,12 @@ export function $$eb5({
   } = n.useCreatorsHoverOverlay({
     resource: e
   });
-  let u = d4(e => e.authedActiveCommunityProfile);
+  let u = useSelector(e => e.authedActiveCommunityProfile);
   let p = cs(u);
   let _ = eT(e, s);
   let h = s ?? !!e.roles.is_public;
   let m = iZ();
-  let f = wA();
+  let f = useDispatch();
   let y = e.publisher || e.creator;
   let T = jsx("div", {
     className: gx,
@@ -444,7 +444,7 @@ export function $$eb5({
   });
 }
 function eT(e, t) {
-  let r = d4(e => e.authedActiveCommunityProfile);
+  let r = useSelector(e => e.authedActiveCommunityProfile);
   let n = zp();
   return (void 0 === t || t) && e.roles.is_public ? r ? _$$a(r, e) : e.profile_install_status === u8.PLUGIN_INSTALLED_FOR_USER : e.install_status === u8.PLUGIN_INSTALLED_FOR_USER || !!n && e.install_status === u8.PLUGIN_INSTALLED_FOR_ORG;
 }
@@ -663,7 +663,7 @@ function eT(e, t) {
       });
     }
   }
-  e.ConnectedPluginTile = Ng(null, (e, t) => ({
+  e.ConnectedPluginTile = connect(null, (e, t) => ({
     onClick: () => {
       t.onClick?.();
       e(sf({
@@ -687,7 +687,7 @@ function eT(e, t) {
     }
   }))(t);
   e.PluginTile = function (t) {
-    let r = d4(e => e.publishedPlugins);
+    let r = useSelector(e => e.publishedPlugins);
     let n = t.plugin || my(t.pluginId, r);
     return jsx(e.ConnectedPluginTile, {
       ...t,
@@ -751,7 +751,7 @@ $$ev7.defaultProps = {
     }
   }
   t.displayName = "PublicProfileHubFileTile";
-  e.PublicProfileHubFileTile = Ng(null, (e, t) => ({
+  e.PublicProfileHubFileTile = connect(null, (e, t) => ({
     onHubFileClick: () => {
       e(sf({
         view: "communityHub",
@@ -797,7 +797,7 @@ $$ev7.defaultProps = {
     }
   }
   t.displayName = "PublicProfilePluginTile";
-  e.PublicProfileBasePluginTile = Ng(null, (e, t) => ({
+  e.PublicProfileBasePluginTile = connect(null, (e, t) => ({
     onResourceClick: () => {
       xQ(t.resource) ? e(sf({
         view: "communityHub",
@@ -934,8 +934,8 @@ $$ev7.defaultProps = {
       }));
     }
   });
-  e.ConnectedPublicProfileTile = Ng(r, n)(t);
-  e.ConnectedPublicProfileTileTracked = Ng(r, n)(tf(t));
+  e.ConnectedPublicProfileTile = connect(r, n)(t);
+  e.ConnectedPublicProfileTileTracked = connect(r, n)(tf(t));
 })(o || (o = {}));
 export let $$eA4 = o.ConnectedPublicProfileTile;
 export function $$ex8({

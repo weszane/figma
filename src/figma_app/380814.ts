@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useEffect, useCallback, useRef, useState, useMemo, useId } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { assertNotNullish } from "../figma_app/465776";
 import { isNotNullish } from "../figma_app/95419";
 import { bL } from "../905/911410";
@@ -161,7 +161,7 @@ export function $$X6(e) {
   }, [e]);
 }
 export function $$q5(e, t, r) {
-  let n = wA();
+  let n = useDispatch();
   return useCallback(async i => {
     if (i) {
       let e = await n(Oe(i));
@@ -349,7 +349,7 @@ function ee({
   onChange: r,
   ariaLabelledBy: s
 }) {
-  let o = wA();
+  let o = useDispatch();
   let l = Um();
   let d = useMemo(() => b()(t, e => e.node_id), [t]);
   return jsx(l6, {

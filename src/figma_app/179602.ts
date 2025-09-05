@@ -1,6 +1,6 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { $n } from "../905/521428";
 import { Us } from "../figma_app/637027";
 import { kt } from "../figma_app/858013";
@@ -18,7 +18,7 @@ export function $$f1(e) {
     profileHandle,
     emptyStateText
   } = e;
-  let m = wA();
+  let m = useDispatch();
   let [f, E] = useState([]);
   let [y, b] = useState(!1);
   useEffect(() => {

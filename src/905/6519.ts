@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState, useMemo, useCallback, useEffect, useRef } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import s from "classnames";
 import { sx } from "../905/449184";
 import { tM, $$, vd, Us } from "../figma_app/637027";
@@ -135,7 +135,7 @@ let F = e => {
   };
 };
 function G() {
-  let e = wA();
+  let e = useDispatch();
   return jsxs("div", {
     className: "enterprise_plan_banner--bannerContainer--33XIO",
     "data-testid": "enterprise_plan_banner",
@@ -199,7 +199,7 @@ function er({
     highlightBadgeText
   } = SO[e];
   let d = _$$s.ml8.fontMedium.font11.colorTextBrand.$;
-  let c = d4(e => e.isFreeUser);
+  let c = useSelector(e => e.isFreeUser);
   if (e === FPlanNameType.STARTER) {
     if (o === _$$b.CREATE_NEW_PAID_TEAM && c) return jsx("strong", {
       className: _$$s.ml8.fontMedium.font11.colorTextSecondary.$,
@@ -362,8 +362,8 @@ function eo({
   isCurrentPlan: s,
   upsellSource: o
 }) {
-  let l = wA();
-  let c = d4(e => e.teamCreation.loading);
+  let l = useDispatch();
+  let c = useSelector(e => e.teamCreation.loading);
   if (s && !t) {
     let t = o === _$$b.CREATE_NEW_PAID_TEAM;
     return jsx($$, {
@@ -421,7 +421,7 @@ function el({
   planTier: e,
   withUpgradeExistingTeamOption: t
 }) {
-  let i = wA();
+  let i = useDispatch();
   let {
     canContactSales,
     additionalMessage
@@ -476,9 +476,9 @@ export function $$em0({
   parentRef: E,
   withUpgradeExistingTeamOption: R
 }) {
-  let N = d4(e => e.dropdownShown);
-  let P = d4(e => e.user);
-  let O = d4(e => e.payment);
+  let N = useSelector(e => e.dropdownShown);
+  let P = useSelector(e => e.user);
+  let O = useSelector(e => e.payment);
   let [D, L] = useState(O.billingPeriod ? k[O.billingPeriod] : R$.ANNUAL);
   let {
     highlightedPlan,
@@ -494,8 +494,8 @@ export function $$em0({
     subscriptionPlan: n
   }) {
     let s = m0();
-    let o = d4(e => !!e.user && cn(e.user));
-    let l = d4(e => e.payment);
+    let o = useSelector(e => !!e.user && cn(e.user));
+    let l = useSelector(e => e.payment);
     return useMemo(() => F({
       isProCurrent: i,
       isStudentUser: o,

@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useMemo, useCallback, useEffect } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { Ez5, ywP, RYP, glU } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { md } from "../figma_app/27355";
@@ -88,22 +88,22 @@ export function $$eO1({
   activatePathOnMount: eO,
   leanPadding: eR
 }) {
-  let eL = d4(e => e.mirror.appModel);
-  let eP = d4(e => e.selectedView);
-  let eD = d4(e => getPermissionsStateMemoized(e));
-  let ek = d4(e => e.userStateLoaded);
+  let eL = useSelector(e => e.mirror.appModel);
+  let eP = useSelector(e => e.selectedView);
+  let eD = useSelector(e => getPermissionsStateMemoized(e));
+  let ek = useSelector(e => e.userStateLoaded);
   let eM = q5();
-  let eF = d4(e => e.isOpenFileLoadedFromLiveGraph);
-  let ej = d4(e => e.fileVersion);
+  let eF = useSelector(e => e.isOpenFileLoadedFromLiveGraph);
+  let ej = useSelector(e => e.fileVersion);
   let eU = Cq({
     useSinatraType: !0
   });
-  let eB = d4(e => e.repos);
-  let eG = d4(e => e.teams);
-  let eV = d4(e => e.currentUserOrgId);
-  let eH = d4(e => e.currentTeamId);
+  let eB = useSelector(e => e.repos);
+  let eG = useSelector(e => e.teams);
+  let eV = useSelector(e => e.currentUserOrgId);
+  let eH = useSelector(e => e.currentTeamId);
   let ez = !!iZ();
-  let eW = d4(e => e.plans);
+  let eW = useSelector(e => e.plans);
   let eK = _$$Q({
     currentOrgId: eV,
     currentTeamId: eH
@@ -124,7 +124,7 @@ export function $$eO1({
   }), {
     enabled: !!eM?.key
   });
-  let e4 = d4(fA);
+  let e4 = useSelector(fA);
   let e8 = md(p9);
   SR();
   let e6 = Rs(iY3({
@@ -136,8 +136,8 @@ export function $$eO1({
   let e9 = useMemo(() => {
     if (eM && "loaded" === eK.status) return T0(eK.data, eM.key);
   }, [eM, eK]);
-  let te = d4(F9);
-  let tt = d4(e => e.mirror.appModel.topLevelMode);
+  let te = useSelector(F9);
+  let tt = useSelector(e => e.mirror.appModel.topLevelMode);
   let tr = jT(eM, te).unwrapOr(!1);
   let tn = $n();
   let ti = n6();

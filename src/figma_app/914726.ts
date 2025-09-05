@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useMemo } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import s from "classnames";
 import { t as _$$t, tx } from "../905/303541";
 import { m0 } from "../figma_app/976749";
@@ -544,9 +544,9 @@ export function $$z0({
   noPadding: t,
   isSubsection: r
 }) {
-  let s = d4(e => e.mirror.selectionProperties.numSelected) || 0;
+  let s = useSelector(e => e.mirror.selectionProperties.numSelected) || 0;
   let d = function () {
-    let e = d4(e => e.mirror.selectionProperties.selectedFonts);
+    let e = useSelector(e => e.mirror.selectionProperties.selectedFonts);
     let t = useMemo(() => {
       if (!e || !e.fonts) return;
       let t = new Set();

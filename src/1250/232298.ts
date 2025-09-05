@@ -1,5 +1,5 @@
 import { jsx } from "react/jsx-runtime";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { md } from "../figma_app/27355";
 import { h as _$$h } from "../905/207101";
 import { getInitialOptions, buildUploadUrl } from "../figma_app/169182";
@@ -19,7 +19,7 @@ let y = () => Date.now() - x;
 let v = "seen_japanese_launch_announcement";
 let w = r1(v);
 export function $$T0() {
-  let e = wA();
+  let e = useDispatch();
   let t = TA();
   let n = md(mp);
   let m = md(w);

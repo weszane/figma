@@ -1,4 +1,4 @@
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { WB } from "../905/761735";
 import { gY } from "../figma_app/566371";
 import { t as _$$t } from "../905/303541";
@@ -19,8 +19,8 @@ import { U, xQ, vt } from "../figma_app/45218";
 import { a as _$$a } from "../figma_app/601188";
 import { G$, FF } from "../figma_app/588092";
 export function $$k0(e, t, i, p) {
-  let b = function(e, t, i, l) {
-    let a = wA();
+  let b = function (e, t, i, l) {
+    let a = useDispatch();
     let s = iZ();
     let r = Jm();
     let o = () => {
@@ -75,12 +75,12 @@ export function $$k0(e, t, i, p) {
       viewContext: l,
       searchSessionId: r
     });
-    return function() {
+    return function () {
       return t ? e => b(e) : e => p(e);
     };
   }(e, t, i, p);
-  let v = function(e, t, i, p) {
-    let x = wA();
+  let v = function (e, t, i, p) {
+    let x = useDispatch();
     let m = iZ();
     let b = Jm();
     let y = gY($$w);
@@ -169,7 +169,7 @@ export function $$k0(e, t, i, p) {
       viewContext: p,
       searchSessionId: b
     });
-    return function() {
+    return function () {
       return t ? e => T(e) : e => C(e);
     };
   }(e, t, i, p);
@@ -203,4 +203,4 @@ let S = M4.Mutation(({
 }), _$$a.unlikeResource({
   resourceId: e
 })));
-export const w = $$k0; 
+export const w = $$k0;

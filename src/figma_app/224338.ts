@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { Ez5 } from "../figma_app/763686";
 import { Y } from "../905/912236";
 import { fn, sH } from "../905/871411";
@@ -9,7 +9,7 @@ import { KH } from "../figma_app/722362";
 import { ut } from "../figma_app/84367";
 import { Fk } from "../figma_app/167249";
 export function $$_0() {
-  let e = d4(e => e.mirror.sceneGraphSelection);
+  let e = useSelector(e => e.mirror.sceneGraphSelection);
   return useMemo(() => {
     let t = new Set();
     Object.keys(e).forEach(e => {

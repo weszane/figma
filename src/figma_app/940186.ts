@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useRef, useContext } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { u as _$$u } from "../905/911813";
 import { md } from "../figma_app/27355";
 import { t as _$$t } from "../905/303541";
@@ -27,7 +27,7 @@ export function $$g0() {
     }
     return !1;
   }, f);
-  let y = d4(e => UT(e) ?? "");
+  let y = useSelector(e => UT(e) ?? "");
   let b = gl(y) ? _$$t("fullscreen.mixed") : y;
   if (E) return {
     type: ZU.CUSTOM_ACTION,

@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useMemo, useState, useCallback, useRef, useLayoutEffect } from "react";
-import { d4, wA, Pj } from "../vendor/514228";
+import { useSelector, useDispatch, useStore } from "../vendor/514228";
 import { debounce } from "../905/915765";
 import { isNotNullish } from "../figma_app/95419";
 import { Et } from "../figma_app/397267";
@@ -188,10 +188,10 @@ function eW(e) {
     loadingState: e.loadingState
   }));
   let e2 = md(qp);
-  let e5 = d4(e => e.universalInsertModal.showing);
+  let e5 = useSelector(e => e.universalInsertModal.showing);
   let e3 = openFile.key;
   let e4 = _G();
-  let e8 = wA();
+  let e8 = useDispatch();
   let e6 = multiselect ? null : selectedItems[0] ?? null;
   let e7 = useMemo(() => overrideDefaultItem ? overrideDefaultItem.library_key : null, [overrideDefaultItem]);
   let e9 = useMemo(() => e7 ?? uj(selectedItems) ?? selectedLibraryKey, [e7, selectedItems, selectedLibraryKey]);
@@ -238,7 +238,7 @@ function eW(e) {
     entrypoint: entrypointForLogging
   });
   let [tp, t_] = useState(null);
-  let th = Pj();
+  let th = useStore();
   let tm = Nv(!0);
   let tg = _$$S.useOpenFileProperties();
   let tf = useCallback(e => tc.type === iN.FILE ? tc.libraryKey === e4 ? e.filter(e => "LEAF" === e.type && e.item.isLocal) : e.filter(e => "LEAF" === e.type && Ui(e.item, tc.libraryKey) && Av(e.item)) : tc.type === iN.PREFERRED ? e.filter(e => "LEAF" === e.type && preferredItems && !!preferredItems.find(t => t.node_id === e.item.node_id)) : e, [tc, e4, preferredItems]);
@@ -880,7 +880,7 @@ export function $$eK1(e) {
     instanceSwapPickerShown: e.instanceSwapPickerShown,
     loadingState: e.loadingState
   }));
-  let x = d4(tB);
+  let x = useSelector(tB);
   let N = _G();
   let C = useMemo(() => !!preferredItems && ez(preferredItems), [preferredItems]);
   let w = x?.key || null;
@@ -946,7 +946,7 @@ export function $$eY2(e) {
     instanceSwapPickerShown: e.instanceSwapPickerShown,
     dropdownShown: e.dropdownShown
   }));
-  let _ = wA();
+  let _ = useDispatch();
   let h = useRef(null);
   let [m, g] = useState(_$$g());
   let f = instanceSwapPickerShown.isShown ? new Point(instanceSwapPickerShown.initialX, instanceSwapPickerShown.initialY) : new Point(0, 0);
@@ -1046,13 +1046,13 @@ export function $$e$0({
   sessionId: s,
   queryId: o
 }) {
-  let l = wA();
+  let l = useDispatch();
   let d = _$$S.useTrackViewToggle({
     sessionId: s,
     queryId: o,
     isPreferredValues: !!t
   });
-  let c = d4(e => t ? e.preferredValuesPickerListLayout : e.instanceSwapPickerListLayout);
+  let c = useSelector(e => t ? e.preferredValuesPickerListLayout : e.instanceSwapPickerListLayout);
   let p = t ? U8 : fG;
   let m = useCallback(n => {
     n.stopPropagation();

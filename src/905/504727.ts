@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { PureComponent, Children, cloneElement, Component } from "react";
-import { Ng } from "../vendor/514228";
+import { connect } from "../vendor/514228";
 import { a as _$$a } from "../905/339331";
 import { r as _$$r } from "../905/571562";
 import { cZ } from "../figma_app/272902";
@@ -220,7 +220,7 @@ b.displayName = "PointingDropdownInner";
 b.defaultProps = {
   showPoint: !0
 };
-export let $$v1 = Ng()(b);
+export let $$v1 = connect()(b);
 export function $$I3(e) {
   let {
     childrenComponents,

@@ -1,8 +1,8 @@
 import { useCallback } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { Ce } from "../905/156213";
 export function $$s0() {
-  let e = wA();
+  let e = useDispatch();
   return useCallback(() => {
     e(Ce());
   }, [e]);

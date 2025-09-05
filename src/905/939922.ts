@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { debug, throwTypeError } from "../figma_app/465776";
 import { N7, QV } from "../905/508367";
 import { aw, eD } from "../figma_app/876459";
@@ -25,8 +25,8 @@ export function $$S0() {
   let t = dq();
   let i = cD();
   let a = _6();
-  let s = wA();
-  let l = d4(e => e.selectedBranchKeyByRepoId);
+  let s = useDispatch();
+  let l = useSelector(e => e.selectedBranchKeyByRepoId);
   return useCallback(async (n, r) => {
     s(oB());
     let u = _$$Ay.mac ? r.metaKey : r.ctrlKey;

@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useRef, Component } from "react";
-import { Ng } from "../vendor/514228";
+import { connect } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
 import o from "classnames";
 import { F2 } from "../905/826900";
@@ -86,7 +86,7 @@ _.defaultProps = {
   displayAs: "contents"
 };
 _.displayName = "CachedSubtreeComponent";
-Ng(void 0, e => ({
+connect(void 0, e => ({
   dispatch: e
 }));
 export const H4 = $$u0;

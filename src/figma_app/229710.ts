@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useRef, useState, useCallback, useMemo, useEffect, useLayoutEffect, memo, useContext } from "react";
-import { wA, d4, Ng } from "../vendor/514228";
+import { useDispatch, useSelector, connect } from "../vendor/514228";
 import { debug } from "../figma_app/465776";
 import { RR } from "../figma_app/338442";
 import { Ez5, NLJ, QOV, glU, ibQ, yFm, mrc } from "../figma_app/763686";
@@ -93,7 +93,7 @@ function ec(e) {
     onKeyDown
   } = e;
   let p = "width" === property ? Yq.Width : Yq.Height;
-  let _ = wA();
+  let _ = useDispatch();
   let h = c1(recordingKey);
   let m = function () {
     if (selectionRegionsBounds && selectionRegionsBounds.length) {
@@ -187,7 +187,7 @@ let eE = () => {
   Y5.triggerAction("set-tool-default");
 };
 function ey(e) {
-  let t = d4(e => e.mirror.sceneGraphSelection);
+  let t = useSelector(e => e.mirror.sceneGraphSelection);
   let r = kl("selectionRegions");
   let n = E7(r);
   let i = ZC(n);
@@ -488,7 +488,7 @@ let eI = memo(function ({
     scaleInputRef,
     widthInputRef
   } = function () {
-    let e = d4(e => e.mirror.sceneGraphSelection);
+    let e = useSelector(e => e.mirror.sceneGraphSelection);
     let [t, r] = useState(!1);
     let n = useRef(null);
     let i = useRef(null);
@@ -590,13 +590,13 @@ let eI = memo(function ({
 });
 export let $$ex7 = "properties-panel-scroll-container";
 export function $$eN9() {
-  let e = d4(cM);
+  let e = useSelector(cM);
   return useMemo(() => Object.values(e).filter(e => !e.deletedFromSceneGraph), [e]);
 }
 let $$eC6 = parsePxInt(wQn);
 let ew = (e, t) => e ? Pt(e, t) : t;
 export var $$eO8 = (e => (e[e.DEFAULT_EXPANDED = 0] = "DEFAULT_EXPANDED", e[e.DEFAULT_SIMPLIFIED = 1] = "DEFAULT_SIMPLIFIED", e[e.OVERRIDDEN_EXPANDED = 2] = "OVERRIDDEN_EXPANDED", e))($$eO8 || {});
-(n || (n = {})).ConnectedFillPanel = Ng(e => ({
+(n || (n = {})).ConnectedFillPanel = connect(e => ({
   library: e.library,
   currentTool: e.mirror.appModel.currentTool,
   currentSelectedProperty: e.mirror.appModel.currentSelectedProperty,
@@ -649,7 +649,7 @@ export var $$eO8 = (e => (e[e.DEFAULT_EXPANDED = 0] = "DEFAULT_EXPANDED", e[e.DE
   }, e.key);
 });
 export let $$eR2 = n.ConnectedFillPanel;
-(i || (i = {})).ConnectedEffectsPanel = Ng(e => ({
+(i || (i = {})).ConnectedEffectsPanel = connect(e => ({
   library: e.library,
   currentSelectedProperty: e.mirror.appModel.currentSelectedProperty,
   sceneGraphSelection: e.mirror.sceneGraphSelection,
@@ -701,7 +701,7 @@ export let $$eR2 = n.ConnectedFillPanel;
   }, "effects");
 });
 export let $$eL1 = i.ConnectedEffectsPanel;
-(a || (a = {})).ConnectedTransformModifiersPanel = Ng(e => ({
+(a || (a = {})).ConnectedTransformModifiersPanel = connect(e => ({
   currentSelectedProperty: e.mirror.appModel.currentSelectedProperty,
   sceneGraphSelection: e.mirror.sceneGraphSelection,
   dropdownShown: e.dropdownShown,
@@ -732,7 +732,7 @@ export let $$eL1 = i.ConnectedEffectsPanel;
   }, "transformModifiers");
 });
 export let $$eP4 = a.ConnectedTransformModifiersPanel;
-(s || (s = {})).ConnectedGridsPanel = Ng(e => ({
+(s || (s = {})).ConnectedGridsPanel = connect(e => ({
   library: e.library,
   currentTool: e.mirror.appModel.currentTool,
   currentSelectedProperty: e.mirror.appModel.currentSelectedProperty,
@@ -783,7 +783,7 @@ export let $$eP4 = a.ConnectedTransformModifiersPanel;
 export let $$eD3 = s.ConnectedGridsPanel;
 (e => {
   let t = Tn();
-  e.ConnectedTypePanel = Ng(e => ({
+  e.ConnectedTypePanel = connect(e => ({
     library: e.library,
     activeCanvasEditModeType: e.mirror.appModel.activeCanvasEditModeType,
     sceneGraph: e.mirror.sceneGraph,

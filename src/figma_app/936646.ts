@@ -1,6 +1,6 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { createContext, useContext, useEffect, useState, useCallback, useMemo, useLayoutEffect, memo } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { assertNotNullish } from "../figma_app/95419";
 import { l as _$$l } from "../905/716947";
 import { getFeatureFlags } from "../905/601108";
@@ -120,7 +120,7 @@ export function $$M4({
     let _ = useMemo(() => h()(p, e => e.node_id), [p]);
     let m = Ns();
     let g = useMemo(() => getFeatureFlags().dse_module_publish ? h()(m, e => e.node_id) : {}, [m]);
-    let f = wA();
+    let f = useDispatch();
     useLayoutEffect(() => {
       f(B2({
         components: s,

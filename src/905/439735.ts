@@ -1,5 +1,5 @@
 import { jsxs, jsx } from "react/jsx-runtime";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import a from "classnames";
 import { VZ } from "../figma_app/930338";
 import { Kz } from "../figma_app/637027";
@@ -48,7 +48,7 @@ function h({
 export function $$g0({
   tooltipKey: e
 }) {
-  let t = d4(e => e.mirror.appModel.keyboardShortcuts);
+  let t = useSelector(e => e.mirror.appModel.keyboardShortcuts);
   let i = VZ(e);
   let a = A(i);
   let g = c1(t, i);

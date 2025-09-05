@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useLayoutEffect, useCallback } from "react";
-import { Pj, wA } from "../vendor/514228";
+import { useStore, useDispatch } from "../vendor/514228";
 import { glU } from "../figma_app/763686";
 import { debugState } from "../905/407919";
 import { F } from "../905/680873";
@@ -42,7 +42,7 @@ export function $$j0() {
   useLayoutEffect(() => {
     e && setIsOpen(!0);
   }, [e, setIsOpen]);
-  let M = Pj();
+  let M = useStore();
   let P = useCallback(() => {
     if (t.current) return;
     let e = !D.current;
@@ -67,7 +67,7 @@ export function $$j0() {
       pagesToDisplay: e
     };
     let o = !1;
-    let l = e.filter((e) => {
+    let l = e.filter(e => {
       let t = glU.nodeStatusesOnPage(e.nodeId).length > 0;
       t && (o = !0);
       return t || e.nodeId === a;
@@ -95,7 +95,7 @@ export function $$j0() {
   let U = !_$$T();
   let G = uF + 72 + 32;
   let K = _4();
-  let H = wA();
+  let H = useDispatch();
   let z = useCallback(() => {
     _$(H, debugState.getState().selectedView, "overview_search_clicked");
     K();

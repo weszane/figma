@@ -1,5 +1,5 @@
 import { useCallback, useMemo, useEffect } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { debug } from "../figma_app/465776";
 import { z as _$$z } from "../905/639107";
 import { M as _$$M } from "../905/702374";
@@ -139,7 +139,7 @@ export function $$Z18() {
 }
 export function $$Q4(e) {
   let t = function () {
-    let e = d4(Sh);
+    let e = useSelector(Sh);
     let {
       stackPaddingBottom,
       stackVerticalPadding,
@@ -158,7 +158,7 @@ export function $$Q4(e) {
       });
     }, [stackVerticalPadding, stackPaddingBottom, stackHorizontalPadding, stackPaddingRight, e]);
   }();
-  let r = d4(t => {
+  let r = useSelector(t => {
     let r = function (e, t) {
       switch (e) {
         case 0:
@@ -508,7 +508,7 @@ export function $$eb35() {
 export function $$eT8() {
   let e = $$eh40();
   let t = $$eb35();
-  return d4(r => {
+  return useSelector(r => {
     let {
       stackMode,
       nodesAreAllInsideStacks,

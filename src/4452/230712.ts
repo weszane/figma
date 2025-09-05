@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
@@ -22,8 +22,8 @@ import { Ib } from "../905/129884";
 import { c as _$$c } from "../905/32166";
 import { Ju } from "../905/102752";
 import { fF, yF, Kg, F5, QU, j1, xQ } from "../figma_app/397283";
-export let $$A0 = Ju(function(e) {
-  let t = wA();
+export let $$A0 = Ju(function (e) {
+  let t = useDispatch();
   let a = () => {
     t(Ce());
   };
@@ -204,4 +204,4 @@ export let $$A0 = Ju(function(e) {
     })
   }) : jsx(Fragment, {});
 }, "ResourceConnectConfirmModal");
-export const d = $$A0; 
+export const d = $$A0;

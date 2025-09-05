@@ -7,7 +7,7 @@ import { tx, t as _$$t } from "../905/303541";
 import { jM, CZ, L8 } from "../905/124270";
 import { GX } from "../905/171315";
 import { y as _$$y } from "../905/713563";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { $P, ej, w2 } from "../905/977218";
 import { vj } from "../905/574958";
 import { Q8, Q, ih, Yj, ic, sC } from "../905/61477";
@@ -38,7 +38,7 @@ function N({
   position: a,
   onContextMenuCallback: o
 }) {
-  let l = wA();
+  let l = useDispatch();
   let d = md(Q8);
   let c = uF(e.model);
   let u = _$$G(c, a, e);
@@ -105,7 +105,7 @@ function D({
   position: a,
   onContextMenuCallback: o
 }) {
-  let l = wA();
+  let l = useDispatch();
   let d = md(Q);
   let c = Xx(e.model);
   let u = _$$G(c, a, e);
@@ -145,7 +145,7 @@ function D({
 function L({
   teamResult: e
 }) {
-  let t = d4(t => t.teams[e.model.id]);
+  let t = useSelector(t => t.teams[e.model.id]);
   let i = tx("search.preview_item.num_members_in_team", {
     memberCount: e.member_count
   });
@@ -164,10 +164,10 @@ function $$j({
   userResult: a,
   onContextMenuCallback: o
 }) {
-  let d = wA();
+  let d = useDispatch();
   let c = md(Q);
-  let u = d4(e => e.currentUserOrgId || void 0);
-  let m = d4(e => e.orgById);
+  let u = useSelector(e => e.currentUserOrgId || void 0);
+  let m = useSelector(e => e.orgById);
   let h = hl(a.model, u);
   let f = _$$G(h, i, a);
   let _ = useCallback(e => {
@@ -303,14 +303,14 @@ export function $$z0({
   let x = md(Q);
   let S = Xr(i);
   let w = function () {
-    let e = wA();
-    let t = d4(e => e.search);
-    let i = d4(e => e.selectedView);
-    let n = d4(e => e.search.parameters);
+    let e = useDispatch();
+    let t = useSelector(e => e.search);
+    let i = useSelector(e => e.selectedView);
+    let n = useSelector(e => e.search.parameters);
     let r = $P.loadingKeyForPayload({
       parameters: n
     });
-    let a = d4(e => e.loadingState[r]);
+    let a = useSelector(e => e.loadingState[r]);
     let l = md(L8);
     a === _$$r.SUCCESS && t.queryId !== t.lastAckedQueryId && (t.parameters.query.length > 0 || l.length > 0) && (e(ej({
       lastAckedQueryId: t.queryId

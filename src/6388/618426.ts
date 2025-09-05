@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { memo, useMemo, useState } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { c$ } from "../905/867927";
 import { f as _$$f } from "../905/335032";
 import { Pt } from "../figma_app/806412";
@@ -80,7 +80,7 @@ let S = ["NONE", "LIGHT", "MEDIUM", "STRONG"];
 export function $$I0({
   recordingKey: e
 }) {
-  let t = wA();
+  let t = useDispatch();
   let {
     shadowStylePresetOptions,
     selectedShadowStyle,

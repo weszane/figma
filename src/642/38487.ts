@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { PureComponent, memo, useRef, useCallback, useMemo, useState, useContext, useEffect } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { R as _$$R } from "../905/256203";
 import { uQ6, Egt } from "../figma_app/763686";
@@ -799,7 +799,7 @@ let eA = memo(function (e) {
 });
 eA.displayName = "ObjectRow";
 export let $$eP1 = memo(function (e) {
-  let t = d4(t => t.mirror.appModel.hoveredNode === e.guid);
+  let t = useSelector(t => t.mirror.appModel.hoveredNode === e.guid);
   let s = e.hasRefToHoveredDef || t || e.isTemporarilyHovered;
   let l = _$$Z("prototype_sections_zoom");
   let a = useCallback(e => {

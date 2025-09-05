@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { A } from "../905/920142";
 import { Ay } from "../905/612521";
 import { Ts } from "../905/194276";
@@ -11,7 +11,7 @@ import { x } from "../905/749159";
 export function $$_1(e) {
   let t = q5()?.name;
   let r = _6();
-  let n = wA();
+  let n = useDispatch();
   return ({
     origin: i,
     formState: a

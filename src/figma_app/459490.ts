@@ -1,5 +1,5 @@
 import { n as _$$n } from "../905/347702";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { getFeatureFlags } from "../905/601108";
 import { zl } from "../figma_app/27355";
 import { debugState } from "../905/407919";
@@ -32,7 +32,7 @@ export function $$m3() {
     currentTeam: ol(),
     isViewer: Td()
   });
-  return !!d4(e => zg(e.selectedView) || !e.user) || !e;
+  return !!useSelector(e => zg(e.selectedView) || !e.user) || !e;
 }
 export function $$g0(e) {
   return gP("ai_org_use_llama").get(e, void 0);

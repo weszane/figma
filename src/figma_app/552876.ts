@@ -1,5 +1,5 @@
 import { useMemo, useCallback } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { glU } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
 import { debugState } from "../905/407919";
@@ -17,7 +17,7 @@ export function $$_3() {
   return !!e && $$p1(e);
 }
 export function $$h2() {
-  return d4(e => $$p1(e.selectedView));
+  return useSelector(e => $$p1(e.selectedView));
 }
 export function $$m0(e) {
   let t = $$h2();

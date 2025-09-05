@@ -1,10 +1,10 @@
 import { useCallback } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { V } from "../figma_app/304955";
 import { t as _$$t } from "../905/303541";
 import { F } from "../905/302958";
 export function $$l0() {
-  let e = wA();
+  let e = useDispatch();
   return useCallback((t, i, n) => {
     if (n) {
       if (i === n) return !1;

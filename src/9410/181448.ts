@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useRef, useEffect, useState, useMemo, useCallback, useLayoutEffect } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { isNullish } from "../figma_app/95419";
 import { E as _$$E } from "../905/632989";
 import { k as _$$k } from "../905/381239";
@@ -141,7 +141,7 @@ export function $$U1({
   activePageShouldUseBrandColor: $,
   shouldUseButtonRow: ee
 }) {
-  let et = wA();
+  let et = useDispatch();
   let ei = "whiteboard" === lg();
   let [er, en] = useState(!1);
   let ea = md(_$$l2);

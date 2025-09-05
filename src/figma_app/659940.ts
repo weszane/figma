@@ -1,4 +1,4 @@
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { dR } from "../905/508367";
 import { Ay } from "../905/612521";
 import { Ts } from "../905/194276";
@@ -7,7 +7,7 @@ import { to } from "../905/156213";
 import { x } from "../905/749159";
 import { ao } from "../figma_app/598952";
 export function $$u0() {
-  let e = wA();
+  let e = useDispatch();
   return ({
     origin: t,
     formState: r
@@ -28,6 +28,6 @@ export function $$u0() {
     }));
   };
 }
-export let $$p1 = () => d4(e => !!e.openFile?.isTryFile);
+export let $$p1 = () => useSelector(e => !!e.openFile?.isTryFile);
 export const B = $$u0;
 export const N = $$p1;

@@ -1,7 +1,7 @@
 import { ex } from "../905/524523";
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useCallback, useMemo } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { lQ } from "../905/934246";
 import { _ as _$$_ } from "../figma_app/496441";
 import { resourceUtils } from "../905/989992";
@@ -92,11 +92,11 @@ function ec() {
   });
 }
 function em(e) {
-  let t = wA();
+  let t = useDispatch();
   let i = FC();
   let o = _6();
-  let d = d4(e => e.currentUserOrgId);
-  let u = d4(e => e.currentTeamId);
+  let d = useSelector(e => e.currentUserOrgId);
+  let u = useSelector(e => e.currentTeamId);
   let g = TA();
   let f = "recentsAndSharing" === o.view && "shared-projects" === o.tab ? e.folder.parent_org?.id ?? null : d;
   let y = "recentsAndSharing" === o.view && "shared-projects" === o.tab ? e.folder.parent_team?.id ?? null : u;
@@ -251,7 +251,7 @@ export function $$eh1(e) {
   });
 }
 export function $$eg0(e) {
-  let t = d4(t => _$$Z(t, e.folder));
+  let t = useSelector(t => _$$Z(t, e.folder));
   let i = _6();
   let r = _$$R({
     folderId: e.folder.id,
@@ -355,7 +355,7 @@ function eA({
   });
 }
 function ey(e) {
-  let t = wA();
+  let t = useDispatch();
   let i = _6();
   let {
     showing,
@@ -426,9 +426,9 @@ function ey(e) {
   });
 }
 function eb(e) {
-  let t = wA();
+  let t = useDispatch();
   let i = _$$B3();
-  let r = d4(t => e.folder.team_id ? t.teams[e.folder.team_id] : void 0);
+  let r = useSelector(t => e.folder.team_id ? t.teams[e.folder.team_id] : void 0);
   return jsx(_$$_, {
     href: "#",
     htmlAttributes: {

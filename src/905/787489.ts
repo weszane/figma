@@ -1,9 +1,9 @@
 import { useEffect } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { ZC } from "../figma_app/39751";
 import { s as _$$s } from "../905/573154";
 export function $$o0(e, t, i = 5e3) {
-  let l = wA();
+  let l = useDispatch();
   let d = ZC(e.status);
   let {
     status,

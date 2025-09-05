@@ -1,4 +1,4 @@
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { NLJ } from "../figma_app/763686";
 import { zl } from "../figma_app/27355";
 import { parseAndNormalizeQuery } from "../905/634134";
@@ -18,7 +18,7 @@ export function $$y0(e) {
   return e?.view === "fullscreen" && e?.editorType === nT.DevHandoff;
 }
 export function $$b1() {
-  return d4(e => $$y0(e.selectedView) && M(e) && (e.mirror.appModel.currentTool === NLJ.SELECT || e.mirror.appModel.currentTool === NLJ.DROPPER_COLOR || e.mirror.appModel.currentTool === NLJ.ANNOTATE || e.mirror.appModel.currentTool === NLJ.MEASURE));
+  return useSelector(e => $$y0(e.selectedView) && M(e) && (e.mirror.appModel.currentTool === NLJ.SELECT || e.mirror.appModel.currentTool === NLJ.DROPPER_COLOR || e.mirror.appModel.currentTool === NLJ.ANNOTATE || e.mirror.appModel.currentTool === NLJ.MEASURE));
 }
 export class $$v2 {
   pathToSelectedView(e, t, i, n) {

@@ -1,6 +1,6 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useState, useCallback, useMemo, useEffect } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { fP, mc } from "../905/691059";
 import { u as _$$u } from "../905/65923";
 import { E as _$$E } from "../905/632989";
@@ -112,7 +112,7 @@ function Q({
   isPaletteEyedropperActive: m,
   theme: f
 }) {
-  let x = wA();
+  let x = useDispatch();
   let [k, A] = useState(i?.name || "");
   let [P, F] = fp(Jq);
   let M = useCallback(() => -1 !== P && (F(-1), !0), [P, F]);
@@ -127,7 +127,7 @@ function Q({
     Y(O);
     J(cxo.SELECTION);
   }), [F, Y, J, O]);
-  let G = d4(e => {
+  let G = useSelector(e => {
     let t = e.selectedView;
     return "fullscreen" !== t.view || t.editorType !== nT.Whiteboard;
   });
@@ -295,7 +295,7 @@ export let $$$0 = Ju(function ({
   enableSubmitWithNoChanges: i,
   ...r
 }) {
-  let l = wA();
+  let l = useDispatch();
   let s = TA();
   let c = cD();
   let d = hS(r);

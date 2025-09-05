@@ -1,5 +1,5 @@
 import { useMemo, useCallback } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { glU } from "../figma_app/763686";
 import { V3 } from "../figma_app/976345";
 import { K } from "../905/621769";
@@ -29,7 +29,7 @@ export function $$f1({
   let E = wS();
   let y = M4();
   let b = _G();
-  let T = wA();
+  let T = useDispatch();
   let I = "loaded" === E.status ? E.result : void 0;
   let S = useMemo(() => I && I.isExternal ? I.libraryKey : backingSymbol?.sourceLibraryKey ? backingSymbol?.sourceLibraryKey : b, [I, backingSymbol?.sourceLibraryKey, b]);
   let v = y?.guid;
@@ -63,7 +63,7 @@ export function $$E2() {
   }, [t, e]);
 }
 export function $$y0() {
-  let e = wA();
+  let e = useDispatch();
   let t = _6();
   let r = eY();
   let n = $$E2();

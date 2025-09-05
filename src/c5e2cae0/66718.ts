@@ -1,6 +1,6 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useState } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { debounce } from "../905/915765";
 import { xf } from "../figma_app/416935";
 import { XHR } from "../905/910117";
@@ -72,7 +72,7 @@ let C = () => jsxs(Fragment, {
     children: e.name
   }, e.value))]
 });
-let w = Ju(function({
+let w = Ju(function ({
   hideModal: e
 }) {
   return jsx(fu, {
@@ -101,8 +101,8 @@ let w = Ju(function({
   });
 }, "ContactSalesSuccessModal");
 export function $$E0(e) {
-  let t = wA();
-  let a = d4(e => e.user);
+  let t = useDispatch();
+  let a = useSelector(e => e.user);
   let [g, S] = useState({
     email: a?.email ?? "",
     name: a?.handle ?? "",
@@ -274,4 +274,4 @@ export function $$E0(e) {
     })
   });
 }
-export const UpgradeContactSalesModal = $$E0; 
+export const UpgradeContactSalesModal = $$E0;

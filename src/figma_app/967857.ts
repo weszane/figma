@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useCallback } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { lQ } from "../905/934246";
 import { b as _$$b, bL, mc, YJ, hE, q7, Q$, N_ } from "../figma_app/860955";
 import { E as _$$E } from "../905/53857";
@@ -283,7 +283,7 @@ export function $$ea0() {
 }
 function es(e) {
   var t;
-  let r = wA();
+  let r = useDispatch();
   t = ["generate_ideas"];
   let n = !!e.find(e => e && t.includes(e.type));
   return {

@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { createContext, useMemo, createRef, useState, useRef, useCallback, useLayoutEffect, useEffect } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { J } from "../905/614223";
 import o from "classnames";
 import { parsePxNumber } from "../figma_app/783094";
@@ -28,8 +28,8 @@ export function $$E2({
 let y = .5 * Vn;
 let b = .3 * Vn;
 export function $$T1(e) {
-  let t = wA();
-  let r = useMemo(() => e.rows.map((e) => createRef()), [e.rows]);
+  let t = useDispatch();
+  let r = useMemo(() => e.rows.map(e => createRef()), [e.rows]);
   let s = r[e.activeRowIndex];
   let [o, d] = useState();
   let [p, m] = useState(!1);

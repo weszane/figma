@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { fp } from "../figma_app/27355";
 import { az } from "../905/449184";
 import { debugState } from "../905/407919";
@@ -17,7 +17,7 @@ export function $$_0(e) {
 }
 export function $$h2(e, t) {
   let [r, i] = fp(e);
-  return [r[t], useCallback((e) => {
+  return [r[t], useCallback(e => {
     i({
       [t]: e
     });
@@ -25,7 +25,7 @@ export function $$h2(e, t) {
 }
 function m(e) {
   return {
-    get: (t) => t.scatterStrokeSettings?.[e],
+    get: t => t.scatterStrokeSettings?.[e],
     set: (t, r) => ({
       scatterStrokeSettings: {
         ...(t.scatterStrokeSettings ?? F2),
@@ -36,7 +36,7 @@ function m(e) {
 }
 function g(e) {
   return {
-    get: (t) => t.dynamicStrokeSettings?.[e],
+    get: t => t.dynamicStrokeSettings?.[e],
     set: (t, r) => {
       var n;
       return {
@@ -54,7 +54,7 @@ function g(e) {
 }
 function f(e) {
   return {
-    get: (t) => t[e],
+    get: t => t[e],
     set: (t, r) => ({
       [e]: r
     })
@@ -82,14 +82,14 @@ export function $$y1(e, t) {
   let o = Xd();
   let [l, p] = fp(e);
   let _ = get(l);
-  let h = d4((e) => e.mirror.selectionProperties.numSelected);
+  let h = useSelector(e => e.mirror.selectionProperties.numSelected);
   let m = kl(t);
   let g = AP();
   let f = !!h || g;
-  return [f ? m : _, useCallback((e) => {
+  return [f ? m : _, useCallback(e => {
     f ? o({
       [t]: e
-    }) : p((t) => set(t, e));
+    }) : p(t => set(t, e));
   }, [set, f, o, t, p])];
 }
 export const SA = $$_0;

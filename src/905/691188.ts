@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback, useMemo, useState } from "react";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { c2 } from "../905/382883";
 import { g as _$$g } from "../905/125190";
 import { xae } from "../figma_app/763686";
@@ -33,7 +33,7 @@ let D = "subscription_toggle--subscriptionToggleAddToFileButtonSecondary_v2--PZU
 export var $$L0 = (e => (e.CLASSIC = "CLASSIC", e.PRIMARY = "PRIMARY", e.SECONDARY = "SECONDARY", e))($$L0 || {});
 function F() {
   return {
-    searchSessionId: d4(e => e.search.sessionId || void 0)
+    searchSessionId: useSelector(e => e.search.sessionId || void 0)
   };
 }
 export function $$M3(e, t) {
@@ -191,7 +191,7 @@ export function $$U2({
   showingDefaultSubscriptionsForUser: s,
   buttonStyleType: l = "CLASSIC"
 }) {
-  let d = wA();
+  let d = useDispatch();
   let {
     library,
     openFile
@@ -323,7 +323,7 @@ export function $$V1({
   setConfirmCalloutShowing: u
 }) {
   let m;
-  let h = wA();
+  let h = useDispatch();
   let [f, _] = useState(null);
   let {
     library,

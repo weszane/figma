@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useMemo, Fragment as _$$Fragment, useState } from "react";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { lQ } from "../905/934246";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
@@ -123,7 +123,7 @@ function z() {
   });
 }
 function H() {
-  let e = d4(e => e.selectedView);
+  let e = useSelector(e => e.selectedView);
   let t = useMemo(() => {
     if ("fullscreen" === e.view) return Bu(e.editorType);
   }, [e]);
@@ -139,7 +139,7 @@ let W = M4.Query({
   key: "figjamDefaultLibraries"
 });
 function K(e) {
-  let t = wA();
+  let t = useDispatch();
   let i = _$$l(e.publishedLibrary?.library_key ?? "");
   let {
     dropdownShown,
@@ -211,10 +211,10 @@ let ea = "figjam_subscriptions_list_view--teamSectionHeaderSticky--6-qao figjam_
 function es(e) {
   let t = ud();
   let i = md(qp);
-  let s = d4(e => e.openFile);
-  let o = d4(e => e.folders);
-  let l = d4(e => e.library);
-  let d = d4(e => e.teams);
+  let s = useSelector(e => e.openFile);
+  let o = useSelector(e => e.folders);
+  let l = useSelector(e => e.library);
+  let d = useSelector(e => e.teams);
   let {
     searchQuery,
     debouncedSearchQuery,
@@ -415,7 +415,7 @@ let el = "figjam_library_modal--slidingPane--Ex7gt sliding_pane--slidingPane--6O
 let ed = "figjam_library_modal--slidingPaneLeft--uAaog sliding_pane--slidingPaneLeft--Wrfdy sliding_pane--slidingPane--6OmDU";
 let $$ec1 = "FIGJAM_LIBRARY_MODAL";
 let $$eu0 = Ju(function (e) {
-  let t = d4(e => e.library);
+  let t = useSelector(e => e.library);
   let i = _$$H();
   let f = hS({
     ...e,

@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useCallback } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import s from "classnames";
 import { nR } from "../figma_app/637027";
 import { B } from "../905/714743";
@@ -12,7 +12,7 @@ import { A } from "../5724/267849";
 var o = s;
 var m = (e => (e.AUTO = "auto", e.CONSTRAINED = "constrained", e))(m || {});
 export function $$g0(e) {
-  let t = wA();
+  let t = useDispatch();
   let r = useCallback(() => {
     t(v({}));
   }, [t]);
@@ -30,7 +30,7 @@ export function $$g0(e) {
   });
 }
 export function $$f2() {
-  let e = wA();
+  let e = useDispatch();
   let t = useCallback(t => {
     t.stopPropagation();
     e(v({}));

@@ -1,6 +1,6 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { PureComponent } from "react";
-import { Ng, wA, d4 } from "../vendor/514228";
+import { connect, useDispatch, useSelector } from "../vendor/514228";
 import { Ay } from "../905/612521";
 import { oJ } from "../905/63728";
 import { xn } from "../905/934145";
@@ -62,7 +62,7 @@ let m = e => ({
   subView: "handle",
   handle: e.publisher.profile_handle
 });
-let $$g0 = Ng((e, t) => {
+let $$g0 = connect((e, t) => {
   let r = m(t);
   return {
     hrefPath: Np(e, r),
@@ -70,13 +70,13 @@ let $$g0 = Ng((e, t) => {
   };
 })(h);
 export function $$f1(e) {
-  let t = wA();
+  let t = useDispatch();
   let r = {
     view: "communityHub",
     subView: "handle",
     handle: e.profile.profile_handle
   };
-  let i = d4(e => Np(e, r));
+  let i = useSelector(e => Np(e, r));
   return jsx("a", {
     href: new xn({
       profileHandle: e.profile.profile_handle
@@ -92,7 +92,7 @@ export function $$f1(e) {
     children: e.children
   });
 }
-Ng((e, t) => ({
+connect((e, t) => ({
   hrefView: m(t),
   hrefPath: Np(e, m(t)),
   authorLinkStyle: _.underline

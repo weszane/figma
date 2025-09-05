@@ -1,5 +1,5 @@
 import { useRef, useEffect } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { jm } from "../figma_app/416935";
 import { debugState } from "../905/407919";
 import { Rs } from "../figma_app/288654";
@@ -17,7 +17,7 @@ export function $$E0(e, t) {
   return !!(e?.is_ipad_user || jm(t));
 }
 export function $$y1() {
-  let e = wA();
+  let e = useDispatch();
   let t = useRef("");
   let r = "whiteboard" === lg();
   let a = aq();

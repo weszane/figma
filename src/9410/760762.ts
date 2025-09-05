@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useMemo, useState } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { md, Xr } from "../figma_app/27355";
 import { I7 } from "../figma_app/594947";
 import { _Y } from "../figma_app/919079";
@@ -100,11 +100,11 @@ function T({
 function w({
   trackingProperties: e
 }) {
-  let t = wA();
+  let t = useDispatch();
   let i = md(QY);
   let n = Xr(xw);
   let o = md(Zk);
-  let h = d4(e => e.multiplayer.sessionID);
+  let h = useSelector(e => e.multiplayer.sessionID);
   let m = tS();
   return jsx(E, {
     name: _Y.FREE,
@@ -132,7 +132,7 @@ function w({
 function S({
   trackingProperties: e
 }) {
-  let t = wA();
+  let t = useDispatch();
   return jsx(E, {
     name: _Y.FREE,
     onBadgeClick: () => {
@@ -271,7 +271,7 @@ function ei({
   dismissModal: e,
   teamId: t
 }) {
-  let i = wA();
+  let i = useDispatch();
   let n = TN(t);
   return jsx(fu, {
     name: "Pro trial upsell modal",
@@ -330,7 +330,7 @@ function ea({
   let i = FC();
   let n = TN(t.id);
   let s = t.restrictionsList?.includes(FPlanLimitationType.LOCKED);
-  let o = d4(e => e.isOpenFileLoadedFromLiveGraph);
+  let o = useSelector(e => e.isOpenFileLoadedFromLiveGraph);
   let l = MY().errors;
   let d = !XX(t) && canEditTeam(t.id, i);
   let c = t.canEdit && e.plan?.tier === FPlanNameType.STARTER;
@@ -404,7 +404,7 @@ function el({
   canEditTeam: n,
   isProOrOnceEdu: s
 }) {
-  let o = wA();
+  let o = useDispatch();
   let p = jn();
   let h = ng.canSeeProTrialExpiryUx(t);
   let m = h ? _Y.PRO_TRIAL_EXPIRED : _Y.LOCKED;
@@ -496,7 +496,7 @@ function eh({
   teamId: t
 }) {
   let i = _$$y(t, _$$b2.STARTER_TEAM_FILE_BADGE);
-  let n = wA();
+  let n = useDispatch();
   let o = md(QY);
   let c = Xr(xw);
   return jsx(E, {

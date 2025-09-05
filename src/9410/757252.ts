@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo } from "react";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { Ez5, NLJ, glU, rcl } from "../figma_app/763686";
 import { fp, Xr, md } from "../figma_app/27355";
 import { yE } from "../905/125333";
@@ -89,7 +89,7 @@ export function $$D4(e, t) {
 }
 export function $$M2(e) {
   let t = md(yE);
-  if (!d4(e => e?.mirror?.appModel?.currentTool === NLJ.SHAPE_WHITEBOARD_PLATFORM) || !t) return !1;
+  if (!useSelector(e => e?.mirror?.appModel?.currentTool === NLJ.SHAPE_WHITEBOARD_PLATFORM) || !t) return !1;
   let i = e.type === PW.COMPONENT ? e.component_key : e.key;
   let r = e.type;
   let l = e.userFacingVersion.toString();
@@ -127,7 +127,7 @@ export function $$B8() {
 }
 export function $$U10() {
   let e = q5();
-  let t = wA();
+  let t = useDispatch();
   return useCallback(() => {
     e && t(to({
       type: V,
@@ -141,7 +141,7 @@ export function $$U10() {
 }
 export function $$G11() {
   let e = q5();
-  let t = wA();
+  let t = useDispatch();
   let i = F.useShouldHideStarterCtaForOpenFile();
   return useCallback(() => {
     e && t(to({

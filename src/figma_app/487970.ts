@@ -1,5 +1,5 @@
 import { jsx } from "react/jsx-runtime";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { E } from "../905/53857";
 import { tx } from "../905/303541";
 import { I } from "../figma_app/4253";
@@ -17,7 +17,7 @@ function p(e) {
 export function $$_3({
   resource: e
 }) {
-  let t = d4(e => e.authedActiveCommunityProfile);
+  let t = useSelector(e => e.authedActiveCommunityProfile);
   let r = I(e);
   let c = QQ(r);
   return !cs(t) && c ? jsx(E, {
@@ -65,7 +65,7 @@ export function $$y1({
   return $$b0({
     resource: e,
     validBadges: t,
-    authedActiveCommunityProfile: d4(e => "authedActiveCommunityProfile" in e ? e.authedActiveCommunityProfile : null)
+    authedActiveCommunityProfile: useSelector(e => "authedActiveCommunityProfile" in e ? e.authedActiveCommunityProfile : null)
   });
 }
 export function $$b0({

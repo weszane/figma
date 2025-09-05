@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, useEffect, useMemo, useCallback } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
@@ -53,11 +53,11 @@ function q(e) {
     onCancel
   } = e;
   let m = hS(e);
-  let _ = wA();
+  let _ = useDispatch();
   let p = $$es3(fileImport);
   let f = 0 === p.remainingFiles;
   let g = $$ea7();
-  let h = d4(e => "folder" === e.selectedView.view ? e.selectedView.folderId : null);
+  let h = useSelector(e => "folder" === e.selectedView.view ? e.selectedView.folderId : null);
   let x = M4.Folder.useValue(h).data;
   let [v, T] = useState(uf.IMPORTING_FILES);
   $$el6(v === uf.IMPORTING_FILES || v === uf.ATTACHING_BRANCH);
@@ -191,7 +191,7 @@ function q(e) {
 }
 let Q = "import_progress_modal";
 export function $$Z0() {
-  let e = wA();
+  let e = useDispatch();
   let {
     fileImport
   } = _$$R2(e => ({
@@ -255,14 +255,14 @@ export function $$ee2({
   onCancel: r,
   onMoveToProject: n
 }) {
-  let c = wA();
+  let c = useDispatch();
   let u = $$ea7();
   let m = $$es3(e);
-  let _ = d4(e => e.selectedView);
+  let _ = useSelector(e => e.selectedView);
   let p = X$("ImportModal").unwrapOr(null);
   let f = p?.tier !== FPlanNameType.STARTER;
   let g = 0 === m.remainingFiles;
-  let h = d4(e => "folder" === e.selectedView.view ? e.folders[e.selectedView.folderId] : null);
+  let h = useSelector(e => "folder" === e.selectedView.view ? e.folders[e.selectedView.folderId] : null);
   let b = Gi(h);
   let v = _$$K(_);
   $$el6(!g);
@@ -486,7 +486,7 @@ export function $$er5(e, t, r) {
   };
 }
 export function $$ea7() {
-  return d4(e => {
+  return useSelector(e => {
     if ("folder" === e.selectedView.view) {
       let t = e.selectedView.folderId && e.folders[e.selectedView.folderId]?.team_id;
       if (null != t) return e.teams[t];

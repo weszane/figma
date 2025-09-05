@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useMemo } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { _gJ } from "../figma_app/763686";
 import { zl } from "../figma_app/27355";
 import l from "../vendor/128080";
@@ -77,7 +77,7 @@ export function $$x0({
     codegenPlugins
   } = _$$n();
   let w = _P(g?.id || "", !!g);
-  let C = d4(e => e.whitelistedPlugins);
+  let C = useSelector(e => e.whitelistedPlugins);
   let T = sZ() || null;
   return useMemo(() => {
     let r = Object.values(I).filter(pk);

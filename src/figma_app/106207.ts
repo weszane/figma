@@ -1,5 +1,5 @@
 import { useMemo, useCallback, useState, useRef, useEffect } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
 import { hKj, zkO, glU } from "../figma_app/763686";
 import { l7 } from "../905/189185";
@@ -186,10 +186,10 @@ function V(e, t) {
   return `INSERT_FIGJAM_TEMPLATE_${e}_${t}`;
 }
 export function $$H4() {
-  let e = wA();
+  let e = useDispatch();
   let t = tS();
-  let r = d4(e => e.fileVersion);
-  let n = d4(e => e.loadingState);
+  let r = useSelector(e => e.fileVersion);
+  let n = useSelector(e => e.loadingState);
   return {
     insertTemplate: async ({
       onSuccess: i,
@@ -225,9 +225,9 @@ export function $$H4() {
   };
 }
 export function $$z6(e) {
-  let t = d4(e => e.recentlyUsed.templates);
-  let r = d4(e => e.hubFiles);
-  let s = d4(e => e.recentCustomTemplates);
+  let t = useSelector(e => e.recentlyUsed.templates);
+  let r = useSelector(e => e.hubFiles);
+  let s = useSelector(e => e.recentCustomTemplates);
   return useMemo(() => t[e].map(e => {
     let {
       type
@@ -317,11 +317,11 @@ export let $$Y0 = nF((e, t) => {
   }));
 });
 export function $$$3() {
-  let e = wA();
+  let e = useDispatch();
   return useCallback(t => e($$Y0(t)), [e]);
 }
 export function $$X5() {
-  let e = d4(e => e.loadingState);
+  let e = useSelector(e => e.loadingState);
   return t => {
     let r = K(t);
     return VP(e, r);

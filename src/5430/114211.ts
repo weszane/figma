@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useState, useCallback } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { Pw } from "../905/521428";
 import { s_ } from "../905/17223";
 import { Lf } from "../figma_app/637027";
@@ -19,7 +19,7 @@ import { d_ } from "../figma_app/918700";
 import { X } from "../905/33014";
 import { A as _$$A } from "../905/289352";
 export let $$w0 = Ju(function (e) {
-  let t = wA();
+  let t = useDispatch();
   let r = iZ();
   let g = _6();
   let w = H();

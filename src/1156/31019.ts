@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { lV } from "../figma_app/617606";
 import { J } from "../figma_app/710077";
 import { V, Yg, F$ } from "../figma_app/304955";
@@ -44,7 +44,7 @@ export function $$L0({
   let o = iZ();
   let c = q5();
   let d = c?.key || null;
-  let x = wA();
+  let x = useDispatch();
   let [f, b] = fp(I(t));
   let j = _$$A();
   return {

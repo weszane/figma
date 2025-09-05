@@ -1,5 +1,5 @@
 import { jsxs, jsx } from "react/jsx-runtime";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { $n } from "../905/521428";
 import { tx } from "../905/303541";
 import { oB } from "../905/929976";
@@ -32,7 +32,7 @@ export function $$u3(e) {
   });
 }
 export function $$h1(e) {
-  let t = wA();
+  let t = useDispatch();
   return jsxs(NJ, {
     dismissModal: e.dismissModal,
     width: 247,

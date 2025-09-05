@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, useEffect, useId } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { J } from "../905/270045";
 import { K } from "../905/443068";
 import { v as _$$v } from "../905/442517";
@@ -23,7 +23,7 @@ import { Ju } from "../905/102752";
 import { GQ } from "../figma_app/32128";
 import { Ao } from "../905/748636";
 function C(e) {
-  let t = wA();
+  let t = useDispatch();
   let i = GQ();
   let s = md(Tm);
   let [o, l] = useState(() => Zz());

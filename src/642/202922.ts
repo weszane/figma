@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState, useEffect, useContext, useRef, useCallback } from "react";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { d as _$$d } from "../905/976845";
 import { m as _$$m } from "../905/367152";
 import { M as _$$M } from "../1528/793871";
@@ -63,7 +63,7 @@ function ee(e) {
     wideContainer,
     scrollableContainer
   } = e;
-  let o = d4(K4);
+  let o = useSelector(K4);
   let [d, p] = useState(!1);
   let h = uQ();
   let f = showUnbubbledPrimaryInstances ? o : o?.filter(e => e.isBubbled);
@@ -259,8 +259,8 @@ function en({
 }
 function eo() {
   let e = "bubbledPropsPicker";
-  let t = d4(e => e.pickerShown);
-  let s = wA();
+  let t = useSelector(e => e.pickerShown);
+  let s = useDispatch();
   let n = new Point(t?.initialX, t?.initialY);
   return t?.id !== Dd ? null : jsx(Ao, {
     title: _$$t("design_systems.component_properties.expose_nested_instances"),
@@ -289,22 +289,22 @@ export function $$eg0({
   recordingKey: e,
   isInSelectionActionsPanel: t
 }) {
-  let s = wA();
-  let l = d4(i$);
-  let d = d4(od);
-  let h = !d4(Jp);
-  let m = d4(e => !!e.dropdownShown && e.dropdownShown.type === C4);
-  let w = d4(e => !!e.modalShown && e.modalShown.type === _$$n2.type);
+  let s = useDispatch();
+  let l = useSelector(i$);
+  let d = useSelector(od);
+  let h = !useSelector(Jp);
+  let m = useSelector(e => !!e.dropdownShown && e.dropdownShown.type === C4);
+  let w = useSelector(e => !!e.modalShown && e.modalShown.type === _$$n2.type);
   let {
     componentDescription
   } = z6();
-  let F = d4(e => e.pickerShown);
+  let F = useSelector(e => e.pickerShown);
   let B = m || w || F?.id === Dd;
-  let K = !!d4(Z3).length;
-  let G = d4(K4);
+  let K = !!useSelector(Z3).length;
+  let G = useSelector(K4);
   let H = !!G?.length;
-  let V = d4(Dr);
-  let U = d4(Ct);
+  let V = useSelector(Dr);
+  let U = useSelector(Ct);
   let {
     allowLibraryPublish
   } = useContext(_$$s);

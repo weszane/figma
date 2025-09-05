@@ -1,4 +1,4 @@
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { nt } from "../figma_app/687776";
 import { h } from "../figma_app/334471";
 import { p as _$$p, u as _$$u } from "../1250/964548";
@@ -9,7 +9,7 @@ export function $$l0({
   contextClicked: n,
   forceOpenNewTab: l
 }) {
-  let d = wA();
+  let d = useDispatch();
   let {
     data,
     status

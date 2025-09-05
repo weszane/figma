@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { W8Y } from "../figma_app/763686";
 import { Xr } from "../figma_app/27355";
 import { wg, o4 } from "../figma_app/778880";
@@ -46,15 +46,15 @@ export function $$S1() {
 export var $$j0 = (e => (e.FEATURE_DISABLED = "featureDisabled", e.ELIGIBLE_WITH_MOVE_FILE_TO_PAID_TEAM = "eligibleWithMoveFileToPaidTeam", e.ELIGIBLE_WITH_UPGRADE = "eligibleWithUpgrade", e.ELIGIBLE = "eligible", e))($$j0 || {});
 export function $$I7() {
   let e = q5();
-  let t = d4(t => e && e.teamId ? t.teams[e.teamId] : null);
-  let i = d4(e => e.isFreeUser);
+  let t = useSelector(t => e && e.teamId ? t.teams[e.teamId] : null);
+  let i = useSelector(e => e.isFreeUser);
   let r = _$$DG(e?.key || "").enabled;
   let a = e?.isTryFile;
   let s = !!e && (e.canEdit || r);
   return a || !s ? "featureDisabled" : e.parentOrgId ? "eligible" : t ? PS(t) ? "eligible" : "eligibleWithUpgrade" : i ? "eligibleWithUpgrade" : "eligibleWithMoveFileToPaidTeam";
 }
 export function $$k8() {
-  let e = d4(e => e.mirror.appModel.votingSessionInfo);
+  let e = useSelector(e => e.mirror.appModel.votingSessionInfo);
   let t = BI.getUserId();
   let i = t && e.userIdToVoteStampIds[t]?.length || 0;
   return e.userVoteLimit - i;
@@ -84,7 +84,7 @@ export function $$O11(e) {
   };
 }
 export function $$L3() {
-  let e = d4(e => e.mirror.appModel.votingSessionInfo.votingStage);
+  let e = useSelector(e => e.mirror.appModel.votingSessionInfo.votingStage);
   let t = Xr(Qs);
   useEffect(() => {
     (e === W8Y.JOINED || e === W8Y.NOT_JOINED) && t({
@@ -94,7 +94,7 @@ export function $$L3() {
   }, [e, t]);
 }
 export function $$R6() {
-  let e = d4(e => e.mirror.appModel.votingSessionInfo.votingStage);
+  let e = useSelector(e => e.mirror.appModel.votingSessionInfo.votingStage);
   let t = Xr(Qs);
   let i = $();
   let o = qU();
@@ -107,8 +107,8 @@ export function $$R6() {
 export function $$D5(e) {
   let t = $$I7();
   let i = q5();
-  let a = d4(e => i && i.teamId ? e.teams[i.teamId] ?? null : null);
-  let s = wA();
+  let a = useSelector(e => i && i.teamId ? e.teams[i.teamId] ?? null : null);
+  let s = useDispatch();
   return useCallback(() => {
     if ("eligibleWithUpgrade" === t) s(to({
       type: DV,

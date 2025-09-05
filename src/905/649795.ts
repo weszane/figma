@@ -1,12 +1,12 @@
 import { jsx } from "react/jsx-runtime";
 import { memo } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { A } from "../vendor/737188";
 import { s as _$$s } from "../cssbuilder/589278";
 import { RK } from "../figma_app/815170";
 import { Vt } from "../905/780715";
 export let $$c0 = memo(e => {
-  let t = wA();
+  let t = useDispatch();
   let i = {
     attributes: {
       rel: "noopener nofollow noreferrer ugc",

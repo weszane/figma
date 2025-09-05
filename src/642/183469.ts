@@ -1,7 +1,7 @@
 import { Wh } from "../figma_app/615482";
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useMemo, useState, useEffect, useCallback, useContext, useRef, createRef } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { debug } from "../figma_app/465776";
 import { IL, Im } from "../figma_app/493477";
 import { ServiceCategories as _$$e } from "../905/165054";
@@ -1255,7 +1255,7 @@ class ez extends o6 {
   }
 }
 function eW(e) {
-  let t = wA();
+  let t = useDispatch();
   let s = J2(UK().showImmutableFrameSublayers);
   let l = ut(Ez5?.uiState().reparentIntoStackInfo, null);
   let a = NF();
@@ -1264,10 +1264,10 @@ function eW(e) {
   let u = no();
   let g = J2(Ez5.canvasViewState().temporarilyHoveredNodes);
   let f = TA();
-  let x = d4(e => e.mirror.sceneGraphSelection);
-  let y = d4(e => e.mirror.objectsPanelRowRebuildCounter);
-  let b = d4(e => e.mirror.appModel.temporarilyExpandedInstanceLayers);
-  let C = d4(e => e.mirror.appModel.activeCanvasEditModeType);
+  let x = useSelector(e => e.mirror.sceneGraphSelection);
+  let y = useSelector(e => e.mirror.objectsPanelRowRebuildCounter);
+  let b = useSelector(e => e.mirror.appModel.temporarilyExpandedInstanceLayers);
+  let C = useSelector(e => e.mirror.appModel.activeCanvasEditModeType);
   let j = m0();
   let v = _I();
   let S = _$$E();

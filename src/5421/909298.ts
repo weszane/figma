@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useMemo, useCallback, useEffect, useId } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { gr } from "../figma_app/243058";
 import { yG } from "../905/859698";
 import { mSn } from "../figma_app/763686";
@@ -95,7 +95,7 @@ export function $$M1() {
   let I = b?.setKey;
   let j = b?.modeData.collectionID;
   let N = useMemo(() => I && f(I), [I, f]);
-  let T = wA();
+  let T = useDispatch();
   return {
     localVariableSets: h,
     allVariableSets: a,
@@ -209,7 +209,7 @@ function U({
   actionIndexPath: n,
   ariaLabelledBy: i
 }) {
-  let a = wA();
+  let a = useDispatch();
   let l = Um();
   let s = "set-variable-mode--select-variable-set-" + n;
   let {
@@ -249,7 +249,7 @@ function $({
   actionIndexPath: a,
   ariaLabelledBy: l
 }) {
-  let s = wA();
+  let s = useDispatch();
   let d = Um();
   let c = "set-variable-mode--select-variable-mode-" + a;
   let {

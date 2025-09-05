@@ -48,7 +48,7 @@ import { D8 } from "../905/511649";
 import { A as _$$A } from "../905/482208";
 import { J as _$$J } from "../figma_app/900567";
 import { Zh, $y, yG, dR, vu, ll, bz, ke, zO, bj, Bx, z6, ac, cq, UJ } from "../figma_app/731560";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { debug, throwTypeError } from "../figma_app/465776";
 import { oB } from "../figma_app/273493";
 import { d as _$$d } from "../vendor/456530";
@@ -360,7 +360,7 @@ let ef = memo(function ({
   disabled: j
 }) {
   let [b, y] = fp(Q);
-  let v = wA();
+  let v = useDispatch();
   let [C, T] = useState(!1);
   let [E, S] = useState(!1);
   let [I, L] = useState(0);
@@ -3798,7 +3798,7 @@ function io({
   disabled: e
 }) {
   let t = v0();
-  let i = d4(e => e.universalInsertModal.showing);
+  let i = useSelector(e => e.universalInsertModal.showing);
   let r = _$$r(i);
   return jsx(_$$Q, {
     disabled: e,
@@ -3992,7 +3992,7 @@ function iL({
     hasRemainingVotes,
     leaveVotingSessionAndCloseWheel
   } = function () {
-    let e = wA();
+    let e = useDispatch();
     let t = XM();
     let i = hr();
     return {

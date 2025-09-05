@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useEffect, createContext, useMemo, useRef, useContext, useCallback, memo, useSyncExternalStore, useLayoutEffect, useId, Children } from "react";
-import { d4, Pj, wA, bN } from "../vendor/514228";
+import { useSelector, useStore, useDispatch, shallowEqual } from "../vendor/514228";
 import { getFeatureFlags } from "../905/601108";
 import o from "classnames";
 import { mergeRefs } from "../figma_app/706870";
@@ -73,8 +73,8 @@ function O({
   });
 }
 function R() {
-  let e = d4(e => e.mirror.appModel.keyboardShortcuts);
-  if (d4(e => e.screenreader.enabled)) return null;
+  let e = useSelector(e => e.mirror.appModel.keyboardShortcuts);
+  if (useSelector(e => e.screenreader.enabled)) return null;
   let t = c1(e, "open-shortcuts").replace("?", _$$t("general.question_mark"));
   let r = c1(e, "toggle-menu");
   return jsx(O, {
@@ -96,9 +96,9 @@ function z({
   children: r
 }) {
   let s = useMemo(() => new _$$b("AccessibleNodeChangeContext.initialized"), []);
-  let o = Pj();
-  let l = d4(dK);
-  let d = d4(Xt);
+  let o = useStore();
+  let l = useSelector(dK);
+  let d = useSelector(Xt);
   let c = Fk(e => e.getCurrentPage()?.guid);
   let u = c ? AlE.getActiveDocument() : void 0;
   let p = useRef({});
@@ -195,7 +195,7 @@ function J({
   logAction: e,
   extractorCtor: t
 }) {
-  let r = Pj();
+  let r = useStore();
   let n = useMemo(() => new t(r), [r, t]);
   let s = _$$_(n, e);
   !function (e) {
@@ -273,7 +273,7 @@ let Z = memo(function ({
   }(function () {
     let e = Ez5?.accessibilityState().pickCursorFocusedNode;
     let t = ut(e, null);
-    let r = d4(e => {
+    let r = useSelector(e => {
       let t = e.mirror.appModel.currentPage;
       return Object.keys(e.mirror.sceneGraphSelection)[0] || t;
     });
@@ -438,7 +438,7 @@ function eE({
     return isPickCursorActive ? isPickCursorFocusedOnNode : t;
   }(e);
   let n = conditionalFeatureFlag("fpl_canvas_keyboard_controls", r, t);
-  let s = wA();
+  let s = useDispatch();
   let o = Y();
   let l = _$$Z(o);
   let d = useRef(null);
@@ -779,7 +779,7 @@ class ew extends ee {
     return e.guid;
   }
   comparePayloads(e, t) {
-    if (eR(e) && eR(t)) return bN(e.inclusion, t.inclusion);
+    if (eR(e) && eR(t)) return shallowEqual(e.inclusion, t.inclusion);
     if (eR(e) || eR(t)) return !1;
     {
       let {
@@ -802,7 +802,7 @@ class ew extends ee {
         absoluteTransform: _absoluteTransform,
         ...E
       } = t;
-      return bN(c, E) && bN(dimensions, _dimensions) && bN(absoluteTransform, _absoluteTransform) && bN(transformProperties, _transformProperties) && bN(stampFrequencies, _stampFrequencies) && bN(accessibleLabel, _accessibleLabel) && c2(directTextContent, _directTextContent) && c2(innerTextContent, _innerTextContent);
+      return shallowEqual(c, E) && shallowEqual(dimensions, _dimensions) && shallowEqual(absoluteTransform, _absoluteTransform) && shallowEqual(transformProperties, _transformProperties) && shallowEqual(stampFrequencies, _stampFrequencies) && shallowEqual(accessibleLabel, _accessibleLabel) && c2(directTextContent, _directTextContent) && c2(innerTextContent, _innerTextContent);
     }
   }
 }
@@ -1031,7 +1031,7 @@ function eU({
   parentId: e,
   nodeId: t
 }) {
-  let r = Pj();
+  let r = useStore();
   let i = eE({
     nodeId: t
   });
@@ -1165,7 +1165,7 @@ function eX({
 }) {
   let r = _$$Z("figjam_navigate");
   let i = J2(UK().accessibilityDomDebug);
-  let s = d4(e => e.mirror.appModel.showComments);
+  let s = useSelector(e => e.mirror.appModel.showComments);
   return jsx(Z3, {
     nodeId: e,
     isDebugMode: i,
@@ -1240,7 +1240,7 @@ let $$e40 = memo(function () {
   });
 });
 function e8() {
-  let e = d4(e => e.selectedView.editorType);
+  let e = useSelector(e => e.selectedView.editorType);
   let {
     loggerEventName
   } = useContext($$eQ1);
@@ -1251,7 +1251,7 @@ function e8() {
     let {
       getLastEventWasTab
     } = useContext(eD);
-    let n = d4(e => 1 === Object.keys(e.mirror.sceneGraphSelection).length ? Object.keys(e.mirror.sceneGraphSelection)[0] : null);
+    let n = useSelector(e => 1 === Object.keys(e.mirror.sceneGraphSelection).length ? Object.keys(e.mirror.sceneGraphSelection)[0] : null);
     let s = useMemo(() => CUU && UNF?.exists(Sie.REDUX) ? CUU.getSelectedTextRange(Sie.REDUX)?.textNodeId : null, []);
     let o = n || s;
     useEffect(() => {
@@ -1265,8 +1265,8 @@ function e8() {
   });
   let r = _$$e();
   of(e);
-  let s = wA();
-  let o = d4(e => !!e.modalShown);
+  let s = useDispatch();
+  let o = useSelector(e => !!e.modalShown);
   useEffect(() => {
     r && Xb && (o || s(_$$F.enqueue({
       message: _$$t("fullscreen.accessibility.platform_error"),
@@ -1409,7 +1409,7 @@ function e6({
   let _ = J2(UK().accessibilityDomDebug);
   let m = Td();
   gf();
-  let f = wA();
+  let f = useDispatch();
   useEffect(() => {
     f(mC({
       errorType: null

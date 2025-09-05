@@ -1,4 +1,4 @@
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { fp } from "../figma_app/27355";
 import { sx } from "../905/449184";
 import { OM } from "../905/124270";
@@ -6,9 +6,9 @@ import { _6 } from "../figma_app/386952";
 import { L0 } from "../figma_app/162807";
 export function $$d0() {
   let [e, t] = fp(OM);
-  let i = d4(e => e.search.sessionId);
-  let d = d4(e => e.search.queryId);
-  let c = d4(e => e.search.parameters.query);
+  let i = useSelector(e => e.search.sessionId);
+  let d = useSelector(e => e.search.queryId);
+  let c = useSelector(e => e.search.parameters.query);
   let u = "search" === _6().view ? L0.FULL_PAGE : L0.PREVIEW;
   return (n, r) => {
     e && (sx("facet_type_unselected", {

@@ -1,4 +1,4 @@
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { Pt } from "../figma_app/806412";
 import { j7 } from "../905/929976";
 import { LO } from "../figma_app/8833";
@@ -24,7 +24,7 @@ export function $$y0(e) {
   let w = "whiteboard" === lg();
   let j = F5();
   let k = _$$t(e.resource.plugin_id, y, C);
-  let P = wA();
+  let P = useDispatch();
   let I = k.length > 0;
   let T = cW();
   let M = EO(T[e.resource.plugin_id]);

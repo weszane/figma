@@ -1,5 +1,5 @@
 import { useEffect, useMemo } from "react";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { md } from "../figma_app/27355";
 import { r as _$$r } from "../905/520829";
 import { x1 } from "../905/714362";
@@ -57,7 +57,7 @@ export function $$f1(e) {
 }
 export function $$y2(e) {
   let t = iZ();
-  let r = d4(e => e.searchResults?.data?.org);
+  let r = useSelector(e => e.searchResults?.data?.org);
   let {
     teams,
     orgs
@@ -65,8 +65,8 @@ export function $$y2(e) {
   return useMemo(() => !!t && (teams.length || orgs.length ? teams.length > 0 || orgs.some(e => !e.is_slides_disabled) : !r?.is_slides_disabled), [t, teams, orgs, r]);
 }
 export function $$g0(e) {
-  let t = wA();
-  let r = function(e) {
+  let t = useDispatch();
+  let r = function (e) {
     let t = md(g);
     let r = iZ();
     useEffect(() => {
@@ -84,7 +84,7 @@ export function $$g0(e) {
   let {
     isDisabled,
     disabledReason
-  } = function(e, t, r) {
+  } = function (e, t, r) {
     if (e !== vt.SITE_TEMPLATE) return {
       isDisabled: !1
     };
@@ -118,8 +118,8 @@ export function $$g0(e) {
     isDisabled: !0,
     disabledReason: "cooper_disabled_for_org"
   } : {
-      isDisabled: !0
-    };
+    isDisabled: !0
+  };
   let {
     isDisabled: _isDisabled2,
     disabledReason: _disabledReason2
@@ -131,8 +131,8 @@ export function $$g0(e) {
     isDisabled: !0,
     disabledReason: "figmake_disabled_for_org"
   } : {
-      isDisabled: !0
-    };
+    isDisabled: !0
+  };
   return e === vt.SITE_TEMPLATE && isDisabled ? {
     isDisabled: !0,
     disabledReason
@@ -149,4 +149,4 @@ export function $$g0(e) {
 export const Cc = $$g0;
 export const Rr = $$f1;
 export const vQ = $$y2;
-export const vb = $$h3; 
+export const vb = $$h3;

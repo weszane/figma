@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useState, useRef, useCallback, useEffect } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { bL } from "../905/911410";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
 import { K as _$$K } from "../905/443068";
@@ -48,7 +48,7 @@ export function $$W0({
   hideCustomColorPickerFillTypeToggle: d,
   inheritStyleKeyField: c
 }) {
-  let u = wA();
+  let u = useDispatch();
   let p = "slidesColorPicker";
   let _ = s1();
   let h = UZ(_);

@@ -1,5 +1,5 @@
 import { jsx } from "react/jsx-runtime";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { sx } from "../905/449184";
 import { gE } from "../5132/642384";
 import { _ as _$$_ } from "../905/456042";
@@ -17,7 +17,7 @@ export let $$p0 = Ju(function ({
 }) {
   let p = HI(e);
   let h = Jm();
-  let x = wA();
+  let x = useDispatch();
   let f = iZ();
   return p ? jsx(_$$x, {
     onAgree: () => {

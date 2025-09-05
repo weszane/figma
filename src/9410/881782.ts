@@ -1,5 +1,5 @@
 import { useContext, useRef, useEffect } from "react";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { Ez5, qmM, zkO, hKj, z7E, NfO, glU, Egt, NLJ, m1T, FAf } from "../figma_app/763686";
 import { fp, Xr } from "../figma_app/27355";
 import { Fz } from "../figma_app/106207";
@@ -723,14 +723,14 @@ export function $$R0() {
   let T = !!_$$f("cursor_bot_v2_has_greeted_with_wave");
   let w = useContext(viewportNavigatorContext);
   let S = Z();
-  let j = d4(e => e.mirror.sceneGraph);
-  let I = wA();
+  let j = useSelector(e => e.mirror.sceneGraph);
+  let I = useDispatch();
   let {
     insertTemplate
   } = Fz();
   let N = ut(aY(), FAf.DESIGN);
-  let A = d4(e => e.mirror.appModel.showUi);
-  let O = d4(e => e.mirror.appModel);
+  let A = useSelector(e => e.mirror.appModel.showUi);
+  let O = useSelector(e => e.mirror.appModel);
   let R = useRef();
   R.current || (R.current = new L(t, m, g, _, y, b, f, C, x, v, E, T, e, i, () => w.getViewportInfo(), S, j, {
     isUiShown: A,

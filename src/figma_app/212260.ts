@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useEffect } from "react";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { _ as _$$_ } from "../figma_app/496441";
 import { getFeatureFlags } from "../905/601108";
 import l from "classnames";
@@ -37,14 +37,14 @@ import { tJ, VM, Mp, oQ, h_, P0, JX } from "../figma_app/269100";
 import { A as _$$A } from "../svg/55550";
 var d = l;
 export function $$G2(e) {
-  let t = d4(e => e.universalInsertModal);
+  let t = useSelector(e => e.universalInsertModal);
   let r = e.id;
-  let l = d4(e => e.publishedWidgets[r]);
+  let l = useSelector(e => e.publishedWidgets[r]);
   let m = gn(l);
-  let w = wA();
+  let w = useDispatch();
   let j = Object.values(yQ()).find(t => t.plugin_id === e.id);
   let G = !!bh().find(t => t.id === e.id) && !j;
-  let z = d4(e => e.dropdownShown?.data?.targetRect);
+  let z = useSelector(e => e.dropdownShown?.data?.targetRect);
   let W = Um();
   let K = W?.type === $$H1 && W.data.widgetId === r;
   let Y = cX().tabManager;

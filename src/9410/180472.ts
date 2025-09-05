@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useMemo, useState, useEffect, useCallback, memo, useRef, useLayoutEffect } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { K as _$$K } from "../905/443068";
 import { A } from "../905/251970";
 import { ofk, W8Y } from "../figma_app/763686";
@@ -573,8 +573,8 @@ export function $$V1({
   selectedNodeId: i,
   currentUserId: s
 }) {
-  let o = wA();
-  let d = d4(e => e.voting.hoveredInModalVotePinId);
+  let o = useDispatch();
+  let d = useSelector(e => e.voting.hoveredInModalVotePinId);
   let c = useMemo(() => yn(e), [e]);
   let u = useCallback(e => o(w9({
     votePinId: e

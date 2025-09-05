@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState, useCallback, useRef, useLayoutEffect, useMemo, useEffect, useContext } from "react";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { throwTypeError, assertNotNullish } from "../figma_app/465776";
 import { c2 } from "../905/382883";
 import { qE } from "../figma_app/492908";
@@ -55,7 +55,7 @@ import { P as _$$P2 } from "../figma_app/120873";
 import { oz } from "../figma_app/406976";
 import { gJ } from "../905/923433";
 import { Ao } from "../905/748636";
-import { Pf, throwTypeError, wh, w1, dl, X9, Rq, T1, lg, ui, Xp, wd } from "../figma_app/164212";
+import { Pf, wh, w1, dl, X9, Rq, T1, lg, ui, Xp, wd } from "../figma_app/164212";
 import { xP, Zu, Kn } from "../figma_app/65182";
 import { u as _$$u3 } from "../figma_app/940920";
 import { D as _$$D } from "../905/589275";
@@ -71,10 +71,10 @@ export function $$eE1({
   componentPropDef: e
 }) {
   let t = Xo();
-  let r = d4(e => ow(e) ?? []);
-  let s = d4(e => OC(e) ?? []);
-  let o = d4(e => e.instanceSwapPickerShown.isShown);
-  let l = wA();
+  let r = useSelector(e => ow(e) ?? []);
+  let s = useSelector(e => OC(e) ?? []);
+  let o = useSelector(e => e.instanceSwapPickerShown.isShown);
+  let l = useDispatch();
   let [d, c] = useState(null);
   let u = useCallback(e => c(e.currentTarget.value), []);
   let {
@@ -198,9 +198,9 @@ export function $$eE1({
 function ey({
   def: e
 }) {
-  let t = d4(e => ow(e));
-  let r = d4(e => NA(e));
-  let s = d4(e => OC(e));
+  let t = useSelector(e => ow(e));
+  let r = useSelector(e => NA(e));
+  let s = useSelector(e => OC(e));
   let [d, c] = useState([]);
   let [u, p] = useState(null);
   let [_, g] = useState(null);
@@ -455,7 +455,7 @@ function eI({
   shouldShowVariableBinding: r,
   boundVariable: s
 }) {
-  let o = wA();
+  let o = useDispatch();
   let l = useCallback(t => {
     e.type === J0O.BOOL && t !== dl(J0O.BOOL, e.defaultValue) && l7.user("edit-prop-default-value", () => glU.editBoolComponentPropDefDefaultValue(e.explicitDefID, t));
   }, [e]);
@@ -562,7 +562,7 @@ function eA({
   openFileKey: s
 }) {
   let o = eY();
-  let l = wA();
+  let l = useDispatch();
   let {
     preferredValues,
     preferredValuesFetchError,
@@ -648,7 +648,7 @@ function eN({
 function eC({
   def: e
 }) {
-  let t = wA();
+  let t = useDispatch();
   let {
     variableType,
     requestedTypes,
@@ -697,7 +697,7 @@ function ew({
   } = TQ(Zl.INSTANCE_SWAP_PICKER);
   let o = tS();
   let l = Um();
-  let d = d4(t => e?.type === J0O.INSTANCE_SWAP ? wd([e.defaultValue], t.mirror.sceneGraph) : null);
+  let d = useSelector(t => e?.type === J0O.INSTANCE_SWAP ? wd([e.defaultValue], t.mirror.sceneGraph) : null);
   let c = useMemo(() => e.type === J0O.BOOL || e.type === J0O.NUMBER || e.type === J0O.TEXT, [e.type]);
   let u = useMemo(() => c && e.varValue.type === Z_n.ALIAS, [c, e]);
   let p = useMemo(() => u ? e.varValue : void 0, [u, e]);

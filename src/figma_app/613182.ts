@@ -1,5 +1,5 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { debug } from "../figma_app/465776";
 import { debounce } from "../905/915765";
 import { glU, vmp } from "../figma_app/763686";
@@ -346,8 +346,8 @@ function W(e) {
   });
 }
 export function $$K5(e) {
-  let t = d4(e => e.mirror.appModel.keyboardShortcuts);
-  let r = d4(e => e.tooltip);
+  let t = useSelector(e => e.mirror.appModel.keyboardShortcuts);
+  let r = useSelector(e => e.tooltip);
   return jsx(W, {
     keyboardShortcuts: t,
     tooltip: r,

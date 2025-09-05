@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useState, useRef, useCallback, useLayoutEffect, useEffect } from "react";
-import { bN } from "../vendor/514228";
+import { shallowEqual } from "../vendor/514228";
 import s from "classnames";
 import { wY } from "../figma_app/708845";
 import { Ay } from "../figma_app/778880";
@@ -25,7 +25,7 @@ let u = (e, t) => {
     let t = i.trackWidth - i.scrollbarWidth;
     i.scrollbarLeft = t * (i.scrollLeft / e);
   }
-  return bN(e, i) ? e : i;
+  return shallowEqual(e, i) ? e : i;
 };
 var p = (e => (e[e.DOM_DELTA_PIXEL = 0] = "DOM_DELTA_PIXEL", e[e.DOM_DELTA_LINE = 1] = "DOM_DELTA_LINE", e[e.DOM_DELTA_PAGE = 2] = "DOM_DELTA_PAGE", e))(p || {});
 let m = e => {

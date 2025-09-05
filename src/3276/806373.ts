@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useEffect, useCallback } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import s from "classnames";
 import { NQ } from "../905/508367";
 import { parsePxNumber } from "../figma_app/783094";
@@ -275,8 +275,8 @@ function G({
   onInsertableResourcePointerDown: t,
   disableTooltips: n
 }) {
-  let s = wA();
-  let r = d4(e => e.user?.id);
+  let s = useDispatch();
+  let r = useSelector(e => e.user?.id);
   let l = useCallback(() => {
     s(ay({
       currentUserId: r,

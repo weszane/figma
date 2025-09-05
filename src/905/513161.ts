@@ -1,7 +1,7 @@
 import { Ju } from "../905/102752";
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useCallback } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { hE } from "../figma_app/272243";
@@ -22,8 +22,8 @@ export let $$b0 = Ju(function ({
   ...i
 }) {
   let b = hS(i);
-  let v = wA();
-  let I = d4(e => e.repos);
+  let v = useDispatch();
+  let I = useSelector(e => e.repos);
   let E = q5();
   let x = useCallback(e => {
     v(F.enqueue({

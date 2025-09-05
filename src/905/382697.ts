@@ -1,10 +1,10 @@
 import { useCallback } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { sx } from "../905/449184";
 import { M3 } from "../figma_app/91703";
 import { A5 } from "../figma_app/707808";
 export function $$l0() {
-  let e = wA();
+  let e = useDispatch();
   return useCallback(t => {
     e(M3({
       view: t

@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useEffect, useMemo, useCallback } from "react";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { h as _$$h } from "../905/207101";
 import { tx } from "../905/303541";
 import { B } from "../905/759157";
@@ -20,10 +20,10 @@ import { S as _$$S } from "../figma_app/783597";
 import { i1 } from "../905/417669";
 import { p as _$$p } from "../figma_app/93911";
 export function $$v0() {
-  let e = d4(e => e.publishedPlugins);
+  let e = useSelector(e => e.publishedPlugins);
   let t = Yo();
   let r = _$$S(e, t?.id);
-  let i = wA();
+  let i = useDispatch();
   return (_$$h(() => {
     i(Xt());
   }), t && 0 !== r.length) ? jsx($$A1, {
@@ -51,7 +51,7 @@ function x({
   trackingContext: t,
   renderPluginDropdownButton: r
 }) {
-  let s = wA();
+  let s = useDispatch();
   let o = j_();
   let p = B();
   let {

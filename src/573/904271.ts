@@ -19,7 +19,7 @@ import { n as _$$n } from "../1528/289390";
 import { Q as _$$Q } from "../9410/629866";
 import { cT, n0, GQ, vr, TU, _4, bi, Ye } from "../figma_app/32128";
 import { G as _$$G, N as _$$N } from "../b2835def/560769";
-import { wA, d4, Pj } from "../vendor/514228";
+import { useDispatch, useSelector, useStore } from "../vendor/514228";
 import { t as _$$t } from "../905/150656";
 import { $ as _$$$2 } from "../905/455748";
 import { F as _$$F } from "../905/680873";
@@ -158,9 +158,9 @@ import { g as _$$g2 } from "../9410/153133";
 import { d as _$$d3 } from "../9410/162990";
 import { b as _$$b2, W as _$$W } from "../b2835def/91751";
 function V() {
-  let e = wA();
-  let t = d4(e => !!e.modalShown);
-  let s = d4(e => e.versionHistory.compareId);
+  let e = useDispatch();
+  let t = useSelector(e => !!e.modalShown);
+  let s = useSelector(e => e.versionHistory.compareId);
   let i = AWq.getChunkChangeCount();
   let o = _$$Z("chunk_change_navigator_navigate");
   let l = _$$E();
@@ -230,10 +230,10 @@ function eL({
   let {
     activeTab,
     shouldFocusSearchBar
-  } = d4(e => e.leftPanel);
+  } = useSelector(e => e.leftPanel);
   let d = activeTab === xae.ASSETS;
   let c = useRef(null);
-  let u = d4(e => e.mirror.appModel.activeCanvasEditModeType);
+  let u = useSelector(e => e.mirror.appModel.activeCanvasEditModeType);
   let h = vb({
     isVisible: d,
     autofocus: !0,
@@ -295,9 +295,9 @@ function eW(e) {
     onSetKeyboardNavigationElement,
     validAssetTypeOptions
   } = e;
-  let d = wA();
-  let c = d4(e => e.dropdownShown);
-  let u = d4(_$$tB);
+  let d = useDispatch();
+  let c = useSelector(e => e.dropdownShown);
+  let u = useSelector(_$$tB);
   let {
     closeFlyout
   } = JA();
@@ -458,14 +458,14 @@ function tS({
   preventDrag: y,
   disableContextMenu: m
 }) {
-  let f = wA();
-  let b = d4(e => e.dropdownShown);
+  let f = useDispatch();
+  let b = useSelector(e => e.dropdownShown);
   let {
     query,
     searchOption
   } = _$$I(Cn.AssetsPanel);
-  let _ = d4(dK);
-  let T = d4(F9);
+  let _ = useSelector(dK);
+  let T = useSelector(F9);
   let k = md(_$$T2);
   let S = searchOption?.type === _$$I2.ALL;
   let w = fV(e.library_key);
@@ -1105,16 +1105,16 @@ function t9({
   containerSizingOptions: l,
   recordingKey: d
 }) {
-  let c = wA();
-  let u = d4(e => e.dropdownShown);
-  let p = d4(_$$e_);
-  let y = d4(_$$h2);
-  let m = d4(dK);
-  let f = d4(Xt);
-  let b = d4(_$$P);
-  let x = d4(e => e.userFlags.has_dismissed_component_sidebar_library_upsell_banner);
-  let v = d4(e => e.isFreeUser);
-  let _ = d4(e => e.user);
+  let c = useDispatch();
+  let u = useSelector(e => e.dropdownShown);
+  let p = useSelector(_$$e_);
+  let y = useSelector(_$$h2);
+  let m = useSelector(dK);
+  let f = useSelector(Xt);
+  let b = useSelector(_$$P);
+  let x = useSelector(e => e.userFlags.has_dismissed_component_sidebar_library_upsell_banner);
+  let v = useSelector(e => e.isFreeUser);
+  let _ = useSelector(e => e.user);
   let T = Av();
   let k = q5();
   let S = _$$D();
@@ -1143,12 +1143,12 @@ function t9({
   }) {
     var s;
     let a = function () {
-      let e = d4(_$$e_);
-      let t = d4(_$$tB);
+      let e = useSelector(_$$e_);
+      let t = useSelector(_$$tB);
       let s = md(_$$O2);
-      let n = d4(MH);
-      let a = d4(dM);
-      let i = d4(_$$P);
+      let n = useSelector(MH);
+      let a = useSelector(dM);
+      let i = useSelector(_$$P);
       let l = n1();
       let d = md(qp);
       let c = Fl();
@@ -1209,8 +1209,8 @@ function t9({
       let [a, i] = useState({
         type: _$$I2.ALL
       });
-      let o = wA();
-      let l = d4(_$$q);
+      let o = useDispatch();
+      let l = useSelector(_$$q);
       let d = q5();
       useEffect(() => {
         s || "loading" === e || (i(e5(function () {
@@ -1436,7 +1436,7 @@ function t9({
     }), R(null));
   }, [O, onSetAssetType, R]);
   let K = LR();
-  let H = d4(e => e.universalInsertModal.showing);
+  let H = useSelector(e => e.universalInsertModal.showing);
   let U = useCallback(() => {
     H && K();
   }, [K, H]);
@@ -1637,8 +1637,8 @@ function sS() {
     isComparingChanges
   } = function () {
     let e = n0();
-    let t = d4(e => !!getFeatureFlags().version_diffing && e.mirror.appModel.activeCanvasEditModeType === m1T.COMPARE_CHANGES);
-    let s = d4(e => e.versionHistory.compareId);
+    let t = useSelector(e => !!getFeatureFlags().version_diffing && e.mirror.appModel.activeCanvasEditModeType === m1T.COMPARE_CHANGES);
+    let s = useSelector(e => e.versionHistory.compareId);
     return useMemo(() => {
       if (!t || !s) return {
         pagesList: e,
@@ -1678,8 +1678,8 @@ function sw({
 }) {
   let g = _$$M();
   let y = q5();
-  let m = d4(e => t || !y ? xae.LAYERS : e.leftPanel.activeTab);
-  let f = d4(e => e.versionHistory);
+  let m = useSelector(e => t || !y ? xae.LAYERS : e.leftPanel.activeTab);
+  let f = useSelector(e => e.versionHistory);
   let b = dh();
   nn();
   let x = md(l7);
@@ -1705,7 +1705,7 @@ function sw({
   });
   let B = m === xae.LAYERS;
   let q = AWq.getChunkChangeCount();
-  let Y = Pj();
+  let Y = useStore();
   let J = useCallback(e => {
     v.showLayersPanel();
     ds("pages_panel_open_toggle", y?.key, Y.getState(), {

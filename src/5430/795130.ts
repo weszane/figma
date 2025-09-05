@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useCallback } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { sx } from "../905/449184";
 import { N as _$$N } from "../figma_app/469468";
 import { t as _$$t } from "../905/303541";
@@ -26,7 +26,7 @@ export function $$T0({
   enableWideButtonForStickyFooter: t
 }) {
   let r = IE(e);
-  let T = wA();
+  let T = useDispatch();
   let I = _$$N(`(max-width: ${YW}px)`);
   let N = _$$T();
   let E = iZ();

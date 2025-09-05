@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useEffect, memo, useRef, useCallback, useState } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { rXF, plo, WXh, rrT, ibQ, FAf, lyf, Ez5, NLJ, Oin } from "../figma_app/763686";
 import { tx as _$$tx, t as _$$t } from "../905/303541";
 import { AV, Gb } from "../figma_app/933328";
@@ -539,7 +539,7 @@ function tM(e) {
   let t = o3(nt.useGrid);
   let i = useRef(null);
   let a = _$$W2();
-  let d = wA();
+  let d = useDispatch();
   let u = Ku();
   let h = Um();
   let f = Xo();
@@ -551,10 +551,10 @@ function tM(e) {
   } = s6("currentSelectedGradientStop", "currentTool", "activeCanvasEditModeType", "currentSelectedProperty");
   let x = q5();
   let v = KH();
-  let y = d4(e => e.library);
-  let b = d4(e => e.pickerInStyleCreationShown);
-  let w = d4(e => e.modalShown);
-  let j = d4(e => e.stylePickerShown);
+  let y = useSelector(e => e.library);
+  let b = useSelector(e => e.pickerInStyleCreationShown);
+  let w = useSelector(e => e.modalShown);
+  let j = useSelector(e => e.stylePickerShown);
   let S = zr();
   let k = CL();
   let E = kl("strokePaints");
@@ -638,7 +638,7 @@ function tM(e) {
 function tP({
   scrollContainer: e
 }) {
-  let t = wA();
+  let t = useDispatch();
   let i = iZ();
   let n = Dj(i);
   let a = md(_$$b2);
@@ -648,15 +648,15 @@ function tP({
   let h = Um();
   let f = Xo();
   let p = GV();
-  let g = d4(e => e.mirror.sceneGraphSelection);
-  let _ = d4(e => e.library);
-  let x = d4(e => e.stylePickerListLayout);
-  let v = d4(e => e.installedPluginVersions);
-  let y = d4(e => e.localPlugins);
-  let b = d4(e => e.modalShown);
-  let w = d4(e => e.openFile);
-  let j = d4(e => e.publishedPlugins);
-  let S = d4(e => e.saveAsState);
+  let g = useSelector(e => e.mirror.sceneGraphSelection);
+  let _ = useSelector(e => e.library);
+  let x = useSelector(e => e.stylePickerListLayout);
+  let v = useSelector(e => e.installedPluginVersions);
+  let y = useSelector(e => e.localPlugins);
+  let b = useSelector(e => e.modalShown);
+  let w = useSelector(e => e.openFile);
+  let j = useSelector(e => e.publishedPlugins);
+  let S = useSelector(e => e.saveAsState);
   let k = zp();
   let E = hD();
   let C = kl("exportSettings");
@@ -898,12 +898,12 @@ let tV = memo(function () {
 let tz = memo(({
   shouldShowDragAndDropBorder: e
 }) => {
-  let t = d4(e => e.progressBarState);
+  let t = useSelector(e => e.progressBarState);
   let i = p8("loadingEmbeds");
   let k = ut(Ez5?.uiState().showCanvasSearch, !1);
   let A = Lk();
   let U = useRef(null);
-  let q = d4(e => e.openFile);
+  let q = useSelector(e => e.openFile);
   let G = q ? q.key : "";
   Gb(G);
   _$$W();
@@ -915,7 +915,7 @@ let tz = memo(({
       Sprig,
       sprigTrackWithSampling
     } = useSprigWithSampling();
-    let i = d4(e => {
+    let i = useSelector(e => {
       if ("fullscreen" === e.selectedView.view) return e.selectedView.editorType;
     });
     useEffect(() => {

@@ -1,6 +1,6 @@
 import { jsx, Fragment } from "react/jsx-runtime";
 import { useState } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import s from "classnames";
 import { s6, nR } from "../figma_app/637027";
 import { t as _$$t } from "../905/303541";
@@ -18,10 +18,10 @@ var o = s;
 let b = "org_team_action--showBlueBorder--W-9zt";
 export function $$v0(e) {
   let [t, i] = useState(!1);
-  let s = wA();
-  let u = d4(e => e.teamRoleRequests);
-  let p = d4(e => e.currentUserOrgId);
-  let m = d4(e => getPermissionsState(e));
+  let s = useDispatch();
+  let u = useSelector(e => e.teamRoleRequests);
+  let p = useSelector(e => e.currentUserOrgId);
+  let m = useSelector(e => getPermissionsState(e));
   let A = _6();
   let y = px();
   let v = j_(y).unwrapOr(!1);

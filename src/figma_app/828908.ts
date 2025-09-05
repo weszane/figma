@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { eD } from "../figma_app/876459";
 import { b } from "../905/985254";
 import { f } from "../905/940356";
@@ -49,7 +49,7 @@ export function $$p0() {
   let t = !!f(l("unmanaged"));
   let r = !!f(l("managed"));
   let a = !!f(l("srgb"));
-  let s = wA();
+  let s = useDispatch();
   let d = useCallback(n => {
     c(s, {
       isDefault: e,

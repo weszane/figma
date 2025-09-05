@@ -1,5 +1,5 @@
 import { useRef, useEffect, useMemo, useState, useCallback } from "react";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
 import { Ez5 } from "../figma_app/763686";
 import { Rs } from "../figma_app/288654";
@@ -24,10 +24,10 @@ import { $6 } from "../figma_app/791586";
 import { rY } from "../figma_app/524655";
 export function $$C2(e) {
   let t;
-  let i = d4(e => e.mirror.appModel.pagesList || []);
+  let i = useSelector(e => e.mirror.appModel.pagesList || []);
   let a = i.length > 0 ? i[0].nodeId : "";
   let o = ut(Ez5?.canvasGrid().canvasGridArray, []);
-  let l = d4(p6);
+  let l = useSelector(p6);
   switch (e?.editorType) {
     case "slides":
       t = rY(o)[0];
@@ -51,8 +51,8 @@ export function $$C2(e) {
 }
 export function $$T1(e) {
   let t = FC();
-  let i = d4(e => e.authedProfilesById);
-  let a = d4(e => e.figFileDuplicatedFromHubFile);
+  let i = useSelector(e => e.authedProfilesById);
+  let a = useSelector(e => e.figFileDuplicatedFromHubFile);
   let s = Rs(FBc({
     fileKey: e?.key ?? ""
   }), {
@@ -106,7 +106,7 @@ export function $$R5(e) {
 export function $$N0({
   figFileKey: e
 }) {
-  let t = wA();
+  let t = useDispatch();
   let {
     data
   } = M4.useFile(e);

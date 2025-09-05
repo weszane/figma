@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useMemo } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { jU } from "../figma_app/544879";
 import { x } from "../905/796251";
 import { t$ } from "../figma_app/863319";
@@ -16,8 +16,8 @@ export function $$c0({
   userHasMaxFavorites: h,
   orgId: g
 }) {
-  let f = wA();
-  let _ = d4(e => e.currentTeamId);
+  let f = useDispatch();
+  let _ = useSelector(e => e.currentTeamId);
   let A = useMemo(() => t$(t, i), [t, i]);
   let y = x({
     currentOrgId: g,
@@ -31,7 +31,7 @@ export function $$c0({
     userHasMaxFavorites: h
   });
   let b = function () {
-    let e = d4(e => e.dropdownShown);
+    let e = useSelector(e => e.dropdownShown);
     return e && e?.type === jU ? e : null;
   }();
   return null == b ? null : jsx(j, {

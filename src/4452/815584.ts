@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
@@ -11,7 +11,7 @@ import { t, tx } from "../905/303541";
 import { E as _$$E } from "../905/984674";
 import { Lo } from "../905/156213";
 export function $$g0(e) {
-  let t = wA();
+  let t = useDispatch();
   return jsx(h, {
     ...e,
     open: !0,
@@ -29,7 +29,7 @@ function h(e) {
     submitText,
     allowEmptyString
   } = e;
-  let y = wA();
+  let y = useDispatch();
   let [j, I] = useState(initialName);
   let E = title ?? t("resource_rename_modal.title", {
     initialName

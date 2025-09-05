@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useRef, useMemo, useCallback } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { U1 } from "../figma_app/343967";
 import { cZ } from "../figma_app/272902";
 import o from "classnames";
@@ -22,7 +22,7 @@ export function $$h0({
     minWidth: a,
     maxWidth: i
   }) {
-    let s = d4(e => e.isRenaming);
+    let s = useSelector(e => e.isRenaming);
     let o = _$$E(n, t && !s && e);
     return useMemo(() => t ? s && "number" == typeof o ? {
       width: Math.max(a, o)

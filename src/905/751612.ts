@@ -1,7 +1,7 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useMemo, useRef, useState, useCallback, useEffect, useLayoutEffect } from "react";
 import { createPortal } from "../vendor/944059";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { yW, FJ } from "../vendor/491721";
 import { DF } from "../vendor/463802";
 import { Sd, Bt } from "../vendor/425002";
@@ -214,7 +214,7 @@ export function $$S0({
 }) {
   let [m] = DF();
   return function (e, t, i, l, p) {
-    let m = wA();
+    let m = useDispatch();
     let [h, f] = useState(!1);
     useEffect(() => Sd(e.registerCommand(Mv, () => {
       let e = vJ();

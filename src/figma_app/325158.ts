@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { memo, useState, useEffect } from "react";
-import { d4 as _$$d, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { A as _$$A } from "../905/920165";
 import { b as _$$b, bL, mc, r1, Ov, ME, wv } from "../figma_app/860955";
 import { z6, CU } from "../905/963340";
@@ -103,7 +103,7 @@ function U({
 }
 export function $$B2() {
   let e = _$$j();
-  let t = _$$d(e => e.mirror.appModel.activeCanvasEditModeType);
+  let t = useSelector(e => e.mirror.appModel.activeCanvasEditModeType);
   if (!e) return null;
   let {
     paint,
@@ -233,7 +233,7 @@ function Y({
 }) {
   let [r, o] = useState(1);
   let [l, d] = useState(3);
-  let c = wA();
+  let c = useDispatch();
   let u = $$z6(e);
   useEffect(() => {
     u && (u < r && o(u), u > l && d(u));
@@ -364,8 +364,8 @@ export function $$J9() {
   }(!!r && !gl(r) && n === i && r >= n / 2, t, e);
 }
 export function $$Z8() {
-  let e = _$$d(e => e.mirror.selectionProperties.whiteboardNumSelectedByType);
-  return !!(1 === _$$d(e => e.mirror.selectionProperties.whiteboardNumSelected) && e && (1 === e.FRAME || 1 === e.RECTANGLE || 1 === e.ROUNDED_RECTANGLE));
+  let e = useSelector(e => e.mirror.selectionProperties.whiteboardNumSelectedByType);
+  return !!(1 === useSelector(e => e.mirror.selectionProperties.whiteboardNumSelected) && e && (1 === e.FRAME || 1 === e.RECTANGLE || 1 === e.ROUNDED_RECTANGLE));
 }
 export function $$Q11() {
   let e = $$J9();

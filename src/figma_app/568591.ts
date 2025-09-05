@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useMemo, useCallback, useEffect, useState, useRef } from "react";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { c2 } from "../905/382883";
 import { getFeatureFlags } from "../905/601108";
 import { xx } from "../figma_app/815945";
@@ -125,7 +125,7 @@ class j {
           let r = null;
           let i = null;
           let a = null;
-          for (let n of e) if ("VIEW_QUERY_NODE.REMOVE_RESULT" === n.type || "STORE.ADD_INSTANCE" === n.type || "STORE.REMOVE_INSTANCE" === n.type || "SESSION.APPLY_MUTATIONS" === n.type || "SESSION.APPLY_SHADOW_MUTATIONS" === n.type || "SESSION.REMOVE_SHADOW_MUTATIONS" === n.type || "REQUEST_MESSAGE" === n.type && "sync" === n.message.messageType || "RESPONSE_MESSAGE" === n.type && "synced" === n.message.messageType || "RESPONSE_MESSAGE" === n.type && "pendingMutations" === n.message.messageType) Lo(t, JSON.stringify(n)); else if ("VIEW_QUERY_NODE.ADD_RESULT" === n.type || "VIEW_QUERY_NODE.UPDATE_RESULT" === n.type) {
+          for (let n of e) if ("VIEW_QUERY_NODE.REMOVE_RESULT" === n.type || "STORE.ADD_INSTANCE" === n.type || "STORE.REMOVE_INSTANCE" === n.type || "SESSION.APPLY_MUTATIONS" === n.type || "SESSION.APPLY_SHADOW_MUTATIONS" === n.type || "SESSION.REMOVE_SHADOW_MUTATIONS" === n.type || "REQUEST_MESSAGE" === n.type && "sync" === n.message.messageType || "RESPONSE_MESSAGE" === n.type && "synced" === n.message.messageType || "RESPONSE_MESSAGE" === n.type && "pendingMutations" === n.message.messageType) Lo(t, JSON.stringify(n));else if ("VIEW_QUERY_NODE.ADD_RESULT" === n.type || "VIEW_QUERY_NODE.UPDATE_RESULT" === n.type) {
             if (n.type === r && n.queryId === i && n.instance === a) continue;
             Lo(t, JSON.stringify(n));
             r = n.type;
@@ -263,7 +263,7 @@ class j {
         this.trackMissingCommentData("New Comment", uuid, n, r, {
           isLoadedComments: m
         }, t);
-      } catch { }
+      } catch {}
       return e;
     }), uuid];
   }
@@ -489,7 +489,7 @@ class U {
 }
 let B = xx(e => {
   let t = e => (e.hasOwnProperty("transform") || Object.defineProperty(e, "transform", {
-    get: function() {
+    get: function () {
       return {
         filter: r => t(e.filter(r)),
         map: r => t(e.map(r)),
@@ -578,8 +578,8 @@ export function $$H0(e) {
   let j = Rs(gkf, N, {
     enabled: f && v
   });
-  let U = d4(e => e.comments.lgPendingUuidToServerIdMap);
-  let H = wA();
+  let U = useSelector(e => e.comments.lgPendingUuidToServerIdMap);
+  let H = useDispatch();
   let z = useMemo(() => {
     if ("loaded" !== D.status || !D.data.file) return D;
     let e = B(D.data.file.comments).transform.filter(e => null === e.resolvedAt);
@@ -606,7 +606,7 @@ export function $$H0(e) {
       })), delete g.current[e.uuid]);
     });
   }, [H, z, U]);
-  let W = d4(e => e.mirror.appModel.pagesList);
+  let W = useSelector(e => e.mirror.appModel.pagesList);
   let {
     commentsAttachedToNodes,
     commentThreadNodeIds,
@@ -699,4 +699,4 @@ export function $$H0(e) {
   });
 }
 export const NX = $$H0;
-export const dr = $$V1; 
+export const dr = $$V1;

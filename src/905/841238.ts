@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useRef, useState, useMemo, useCallback } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { lQ } from "../905/934246";
 import { i } from "../905/718764";
 import { $n } from "../905/521428";
@@ -193,7 +193,7 @@ let $$X0 = Ju(function (e) {
     initialX,
     initialY
   } = e;
-  let U = wA();
+  let U = useDispatch();
   let {
     singleSelectedNode,
     openFileKey,

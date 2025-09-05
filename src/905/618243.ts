@@ -6,7 +6,7 @@ import { Z as _$$Z } from "../905/515860";
 import { canAdminTeam } from "../figma_app/642025";
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { hS } from "../905/437088";
 import { X as _$$X } from "../905/128376";
 import { bL } from "../905/38914";
@@ -41,10 +41,10 @@ import { fu } from "../figma_app/831799";
 import { yX } from "../figma_app/918700";
 import { A as _$$A } from "../5724/768410";
 function N(e) {
-  let t = wA();
+  let t = useDispatch();
   let [i, r] = useState("");
   let [s, o] = useState(!1);
-  let l = d4(e => "fullscreen" === e.selectedView.view ? e.selectedView.nodeId : void 0);
+  let l = useSelector(e => "fullscreen" === e.selectedView.view ? e.selectedView.nodeId : void 0);
   let R = Rs(dDF, {
     key: e.sourceFileKey
   });
@@ -419,12 +419,12 @@ let Z = [{
   key: 3,
   elem: tx("oss_exposure_branching_upsell_modal.feature3")
 }];
-let X = Ju(function({
+let X = Ju(function ({
   currentTeam: e,
   canAdminCurrentTeam: t,
   trackingContextName: i
 }) {
-  let n = wA();
+  let n = useDispatch();
   let r = _$$b.OSS_EXPOSURE_BRANCHING_UPSELL_MODAL;
   let s = t ? tx("oss_exposure_branching_upsell_modal.body1") : tx("oss_exposure_branching_upsell_modal.nonadmin.body1", {
     learnMoreLink: jsx(Us, {
@@ -541,4 +541,4 @@ let $$J0 = nF(async (e, t, {
   });
 });
 export const l = $$J0;
-export const j = $$Q1; 
+export const j = $$Q1;

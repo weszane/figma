@@ -1,4 +1,4 @@
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { sx } from "../905/449184";
 import { gE } from "../5132/642384";
 import { _ as _$$_ } from "../905/456042";
@@ -8,7 +8,7 @@ import { U } from "../figma_app/45218";
 import { T } from "../5132/203178";
 import { Jm } from "../figma_app/387599";
 export function $$u0(e, l = !1, i = !1, _ = !1) {
-  let h = wA();
+  let h = useDispatch();
   let m = Jm();
   let f = T();
   let g = iZ();

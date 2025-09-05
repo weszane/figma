@@ -1,5 +1,5 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, nB } from "../figma_app/272243";
@@ -12,7 +12,7 @@ import { fu } from "../figma_app/831799";
 import { Ju } from "../905/102752";
 import { Dg, Sl, FS, DX, Kc } from "../905/989426";
 export let $$f0 = Ju(function (e) {
-  let t = wA();
+  let t = useDispatch();
   let i = hS({
     ...e,
     preventUserClose: !0

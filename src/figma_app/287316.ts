@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useEffect, useState, useMemo, useCallback } from "react";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { arraysEqual } from "../figma_app/656233";
 import { throwTypeError } from "../figma_app/465776";
 import { nj } from "../905/125019";
@@ -1470,7 +1470,7 @@ let e_ = () => {
   useEffect(() => {
     Qc(_$$B);
   }, []);
-  let e = d4(e => e.mirror?.appModel.isReadOnly);
+  let e = useSelector(e => e.mirror?.appModel.isReadOnly);
   let {
     washiTapePaint
   } = md(SK);
@@ -1683,7 +1683,7 @@ export function $$eE0() {
       return h()(t, e => "action" === e.itemStringType ? e.identifier : []);
     }(e) : [];
   }, [d]);
-  let _ = d4(e => {
+  let _ = useSelector(e => {
     let t = e.mirror.appModel;
     return u.filter(e => Yh(t, e));
   });
@@ -1789,7 +1789,7 @@ export function $$eE0() {
     e?.nativeToolbarUpdateSelectedSubmenuItems?.(z);
   }, [e, z]);
   let q = T$();
-  let J = d4(e => {
+  let J = useSelector(e => {
     let t = e.multiplayerEmoji;
     return "REACTING_OR_CHATTING" === t.type && !!t.imageUrl;
   });
@@ -1819,8 +1819,8 @@ export function $$eE0() {
     }
   }, [q]);
   let ee = wi();
-  let et = d4(e => e.universalInsertModal.pinned === _$$t.NOT_PINNED);
-  let en = wA();
+  let et = useSelector(e => e.universalInsertModal.pinned === _$$t.NOT_PINNED);
+  let en = useDispatch();
   let eu = useCallback(e => {
     ee ? (et && $$el4("set-tool-default"), en(KE())) : ($$el4("clear-tool"), en(En({
       initialX: 0,
@@ -1828,7 +1828,7 @@ export function $$eE0() {
       sourceRect: e
     })));
   }, [en, ee, et]);
-  let eh = d4(e => !!e.universalInsertModal.sourceRect);
+  let eh = useSelector(e => !!e.universalInsertModal.sourceRect);
   let em = useCallback(e => {
     eh && en(jx({
       sourceRect: e

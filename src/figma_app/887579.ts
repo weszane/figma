@@ -1,6 +1,6 @@
 import { jsx, Fragment } from "react/jsx-runtime";
 import { useState, useCallback } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { K } from "../905/443068";
 import { $n } from "../905/521428";
@@ -23,7 +23,7 @@ export function $$T6(e) {
   let r = e.animatedImage || e.image;
   "VIDEO" === e.type && e.video ? t = e.video.hash : r && r.hash && (t = r.hash);
   let n = "";
-  t && (n = Array.from(t).map((e) => (e < 16 ? "0" : "") + e.toString(16)).join(""));
+  t && (n = Array.from(t).map(e => (e < 16 ? "0" : "") + e.toString(16)).join(""));
   return n ?? null;
 }
 export async function $$I3({
@@ -99,11 +99,11 @@ function N({
     u && (m(!0), S.getVideosDownload({
       hexHash: u,
       fileKey: c
-    }).then((t) => {
-      fetch(t.data.meta.signed_url).then((e) => e.blob()).then((t) => {
+    }).then(t => {
+      fetch(t.data.meta.signed_url).then(e => e.blob()).then(t => {
         $$S2(t, `${$$A5(e)}.${$$v4(e)}`);
         setTimeout(() => m(!1), 1e3);
-      }).catch((e) => {
+      }).catch(e => {
         $D(_$$e.DEVELOPER_TOOLS, e, {
           extra: {
             fileKey: c,
@@ -156,7 +156,7 @@ function C({
   children: t,
   variant: r = "text"
 }) {
-  let s = function({
+  let s = function ({
     paint: e,
     fileKey: t
   }) {
@@ -167,7 +167,7 @@ function C({
     paint: e,
     fileKey: tS() ?? ""
   });
-  let o = wA();
+  let o = useDispatch();
   let l = useCallback(() => {
     o(aK());
   }, [o]);
@@ -235,4 +235,4 @@ export const w6 = $$I3;
 export const x$ = $$v4;
 export const Rh = $$A5;
 export const W3 = $$T6;
-export const Me = $$b7; 
+export const Me = $$b7;

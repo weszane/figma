@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useCallback } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { t as _$$t } from "../905/303541";
 import { F } from "../905/302958";
 import { z8, bb } from "../figma_app/399472";
@@ -15,10 +15,10 @@ export function $$h0({
   resourceType: t,
   containerClassName: r
 }) {
-  let h = wA();
-  let x = d4(r => t === vt.HUB_FILE ? M3(e, r.hubFiles) : my(e, r.publishedPlugins));
-  let f = d4(e => e.authedActiveCommunityProfile);
-  let y = d4(e => MK(e, x));
+  let h = useDispatch();
+  let x = useSelector(r => t === vt.HUB_FILE ? M3(e, r.hubFiles) : my(e, r.publishedPlugins));
+  let f = useSelector(e => e.authedActiveCommunityProfile);
+  let y = useSelector(e => MK(e, x));
   let g = useCallback(() => {
     h(z8({
       hub_file_id: U(x) ? x.id : void 0,

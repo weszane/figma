@@ -1,6 +1,6 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useState } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { J } from "../905/614223";
 import { Oin } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
@@ -72,7 +72,7 @@ export function $$L2(e) {
   }
 }
 function P(e) {
-  let t = d4(e => $A(e.selectedView) ? 0 : parsePxNumber(uj0));
+  let t = useSelector(e => $A(e.selectedView) ? 0 : parsePxNumber(uj0));
   return jsxs("div", {
     className: A7,
     children: [jsx("div", {

@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { h3O } from "../figma_app/763686";
 import { eU, zl, md, fp } from "../figma_app/27355";
 import { R9 } from "../905/977824";
@@ -44,7 +44,7 @@ export function $$y6(e) {
     updateSynchronously: !1
   });
   let n = iZ();
-  let a = d4(({
+  let a = useSelector(({
     multiplayer: {
       allUsers: e
     }
@@ -68,7 +68,7 @@ export function $$T0(e) {
     updateSynchronously: !1
   });
   let u = iZ();
-  let p = d4(({
+  let p = useSelector(({
     multiplayer: {
       allUsers: e
     }

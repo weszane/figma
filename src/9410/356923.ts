@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useMemo } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { lQ } from "../905/934246";
 import { E as _$$E } from "../905/632989";
 import { Ez5, CNR } from "../figma_app/763686";
@@ -41,7 +41,7 @@ export function $$P2({
   let o = Xr(Ei);
   let c = md(v2);
   let u = tS();
-  let h = wA();
+  let h = useDispatch();
   let g = "insert-slide-module";
   let _ = _$$D(e.library_key);
   let y = nc.user(g, (t, r, n) => {

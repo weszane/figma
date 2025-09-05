@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { assert } from "../figma_app/465776";
 import { P } from "../figma_app/529847";
 import { uo } from "../figma_app/990058";
@@ -11,7 +11,7 @@ import { FPlanAccessType } from "../figma_app/191312";
 import { OL } from "../figma_app/421473";
 import { RB } from "../figma_app/428858";
 export function $$m0(e) {
-  let t = wA();
+  let t = useDispatch();
   let r = Hl({
     visibility: YT.ALL
   });

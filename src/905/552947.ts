@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useState } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import s from "classnames";
 import { s as _$$s } from "../cssbuilder/589278";
 import { tx } from "../905/303541";
@@ -14,7 +14,7 @@ export function $$h0({
   instruction: t,
   dataTestId: i
 }) {
-  let s = wA();
+  let s = useDispatch();
   let [h, g] = useState(!1);
   return jsxs(Y, {
     direction: "vertical",

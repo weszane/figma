@@ -66,7 +66,7 @@ import { H as _$$H2 } from '../905/250770';
 import { A as _$$A9 } from '../905/251970';
 import { $7, o8 as _$$o4, B_, QB } from '../905/258397';
 import { F as _$$F2 } from '../905/258517';
-import { mN } from '../905/261467';
+import { PluginUIManager } from '../905/261467';
 import { F as _$$F } from '../905/268366';
 import { J as _$$J4 } from '../905/270045';
 import { Zm } from '../905/270781';
@@ -575,7 +575,7 @@ import db from '../vendor/128080';
 import { rH as _$$rH, Ck, fK, IN, zB } from '../vendor/167083';
 import av from '../vendor/260986';
 import { P as _$$P } from '../vendor/348225';
-import { d4 as _$$d, Ng, Pj, wA } from '../vendor/514228';
+import { useSelector, connect, useStore, useDispatch } from '../vendor/514228';
 import { md as _$$md } from '../vendor/525001';
 import { N as _$$N7 } from '../vendor/930821';
 import { flushSync } from '../vendor/944059';
@@ -595,7 +595,7 @@ function ec(e) {
     updateNotification
   } = ql(!1, e.selectedPlan);
   let [a, s] = useState([]);
-  let o = wA();
+  let o = useDispatch();
   let d = he([...notificationFeedMap.values()], a);
   let c = _$$e2(d);
   let u = Ow(c);
@@ -669,9 +669,9 @@ function ec(e) {
   });
 }
 function eu() {
-  let e = wA();
+  let e = useDispatch();
   !function () {
-    let e = Pj();
+    let e = useStore();
     let t = useMemo(() => _$$g(), []);
     let r = md(_$$d2);
     let n = Rs(fjN, {
@@ -1831,7 +1831,7 @@ let nG = memo(e => {
   let o = Ye();
   let d = DP();
   let c = yM().colorBg;
-  let u = _$$d(e => {
+  let u = useSelector(e => {
     if (i || s) {
       let t = e.mirror.selectionProperties.backgroundColor;
       return _$$F3.format(t);
@@ -1872,7 +1872,7 @@ let nG = memo(e => {
   });
 });
 let nV = memo(() => {
-  let e = _$$d(e => e.mirror.appModel.isInitialized);
+  let e = useSelector(e => e.mirror.appModel.isInitialized);
   let t = TA();
   return !e || t ? null : getInitialOptions().consent_region === 'implicit' ? jsx(C$, {
     variant: _$$a3.FILE_VIEWER,
@@ -2138,7 +2138,7 @@ function iD() {
   let t = XE(e);
   return iP.includes(t) ? jsx(_$$K2, {
     'onClick': () => {
-      let e = mN.getInstance();
+      let e = PluginUIManager.getInstance();
       t === _$$nT.Cooper && (e?.switchContainer(Wh.BUZZ_LEFT_PANEL), zl.set(FP, Wh.BUZZ_LEFT_PANEL), zl.set(Lk, _$$x3.PLUGINS));
     },
     'aria-label': _$$t('cooper.plugins.dock'),
@@ -2209,7 +2209,7 @@ function iW() {
 }
 function iq() {
   let e = _$$aq();
-  let t = wA();
+  let t = useDispatch();
   let r = QL('locale');
   let n = QL('hub_file_id');
   let i = QL('name');
@@ -3420,7 +3420,7 @@ async function a7(e, t) {
 }
 function si() {
   let e = _6();
-  let t = wA();
+  let t = useDispatch();
   let r = useCallback(e => {
     t(_$$sf({
       view: 'figmascope',
@@ -3835,7 +3835,7 @@ class sx extends PureComponent {
   }
 }
 sx.displayName = 'HubFileDetailView';
-let sN = Ng((e, t) => ({
+let sN = connect((e, t) => ({
   hubFile: {
     ...M3(t.hubFileId, e.hubFiles),
     comments_setting: null
@@ -4307,7 +4307,7 @@ let s6 = [{
 function s7({
   dismissModal: e
 }) {
-  let t = _$$d(e => e.currentUserOrgId);
+  let t = useSelector(e => e.currentUserOrgId);
   let r = useRef(null);
   let {
     state,
@@ -4600,7 +4600,7 @@ function oO({
   });
 }
 function oR() {
-  let e = _$$d(e => e.currentUserOrgId);
+  let e = useSelector(e => e.currentUserOrgId);
   return e ? jsx(oL, {
     currentOrgId: e
   }) : null;
@@ -4640,7 +4640,7 @@ function oj(e) {
     orgTrial
   } = e;
   let [r, n] = useState(!1);
-  let i = wA();
+  let i = useDispatch();
   let a = _$$gY(_$$A7.validateOrgTrialMutation);
   let s = D6('OrgTrialPendingModal');
   let o = j_(s);
@@ -4773,7 +4773,7 @@ function oU(e) {
   });
 }
 function oB() {
-  let e = _$$d(e => e.currentUserOrgId);
+  let e = useSelector(e => e.currentUserOrgId);
   return e ? jsx(oG, {
     currentOrgId: e
   }) : null;
@@ -4821,7 +4821,7 @@ function oZ({
   productTrial: e
 }) {
   let [t, r] = useState(!1);
-  let n = wA();
+  let n = useDispatch();
   let i = _$$gY(oz);
   let a = hS({
     preventUserClose: !0,
@@ -4957,7 +4957,7 @@ function oQ(e) {
   });
 }
 function o0() {
-  let e = _$$d(e => e.currentUserOrgId);
+  let e = useSelector(e => e.currentUserOrgId);
   return e ? jsx(o1, {
     currentOrgId: e
   }) : null;
@@ -5144,7 +5144,7 @@ function lF({
 }) {
   let a;
   let s;
-  let o = wA();
+  let o = useDispatch();
   switch (_$$dB(), e) {
     case FFileType.DESIGN:
       a = _$$t('desktop_new_tab.file_type.design');
@@ -5302,9 +5302,9 @@ function l2(e) {
 function l5({
   recentItems: e
 }) {
-  let t = wA();
+  let t = useDispatch();
   let r = _$$iZ();
-  let n = _$$d(e => e.activeFileUsers);
+  let n = useSelector(e => e.activeFileUsers);
   let i = lJ().status === 'loaded';
   let a = DD(() => filterNotNullish(e.map(e => e.type === _$$nb.FILE || e.type === _$$nb.REPO ? l1(e).key : null)), [e], (e, t) => {
     let r = new Set(e);
@@ -5375,7 +5375,7 @@ function l3({
   user: n
 }) {
   let i;
-  let a = wA();
+  let a = useDispatch();
   let s = Tf.getName(e);
   let o = useRef(null);
   let [d, c] = useState(null);
@@ -5521,8 +5521,8 @@ function l4({
   });
 }
 function l8() {
-  let e = wA();
-  let t = _$$d(e => Np(e, {
+  let e = useDispatch();
+  let t = useSelector(e => Np(e, {
     view: 'recentsAndSharing'
   }));
   let {
@@ -5591,10 +5591,10 @@ function dr() {
   let e;
   let t = lJ().data;
   let r = O8().data;
-  let n = _$$d(e => e.recentRepos);
-  let i = _$$d(e => e.selectedBranchKeyByRepoId);
-  let a = _$$d(e => e.desktopNewTab.isCreatingFile);
-  let s = _$$d(e => e.desktopNewTab.loadingBackgroundColor);
+  let n = useSelector(e => e.recentRepos);
+  let i = useSelector(e => e.selectedBranchKeyByRepoId);
+  let a = useSelector(e => e.desktopNewTab.isCreatingFile);
+  let s = useSelector(e => e.desktopNewTab.loadingBackgroundColor);
   let o = useRef(null);
   let [d, c] = useState(0);
   let u = md(_$$d9);
@@ -5629,7 +5629,7 @@ function dr() {
       project: r[0]
     } : h);
   }
-  let E = _$$d(e => e.user?.drafts_folder_id);
+  let E = useSelector(e => e.user?.drafts_folder_id);
   let y = e ? g : null;
   let b = _$$nt2(E);
   let T = y ? y.project : b.data;
@@ -5814,10 +5814,10 @@ let dO = e => {
 };
 function dR() {
   (function () {
-    let e = wA();
+    let e = useDispatch();
     !function () {
       let e = !!getFeatureFlags().ds_componentbykey_shadow_read;
-      let t = _$$d(OQ);
+      let t = useSelector(OQ);
       let r = useMemo(() => t.map(e => ({
         key: e
       })), [t]);
@@ -5831,7 +5831,7 @@ function dR() {
       let r = md(TG);
       let [n, i] = fp(dP);
       let a = md(dD);
-      let s = _$$d(qC);
+      let s = useSelector(qC);
       let o = useMemo(() => s.filter(e => !n.has(e)), [s, n]);
       let l = useMemo(() => o.map(t => ({
         key: t,
@@ -5870,8 +5870,8 @@ function dR() {
       let t = K5();
       let r = _$$eY();
       let n = Bh(t);
-      let i = _$$d(RW);
-      let a = _$$d(O1);
+      let i = useSelector(RW);
+      let a = useSelector(O1);
       let s = useMemo(() => {
         if (!r || n.status !== 'loaded') return {};
         let e = new Set(_$$z3(n).map(e => e.node_id));
@@ -5990,7 +5990,7 @@ function dB({
   maxSubscriptionsBeforeCleanup: t
 }) {
   !function () {
-    let e = wA();
+    let e = useDispatch();
     let t = _$$tS();
     let r = Rs(ozA, {
       fileKey: t ?? ''
@@ -6018,7 +6018,7 @@ function dG({
   let r = q5()?.canEdit;
   !function () {
     let e = useRef(new Set());
-    let t = wA();
+    let t = useDispatch();
     let r = md(dU);
     let n = _$$ud();
     let i = k9(() => {
@@ -6049,9 +6049,9 @@ function dV() {
 }
 function dH() {
   !function () {
-    let e = wA();
+    let e = useDispatch();
     let t = _$$lg();
-    let r = _$$d(e => e.library.publishProgress);
+    let r = useSelector(e => e.library.publishProgress);
     let [n, i] = useState(0);
     let [a, s] = useState(void 0);
     let [o, l] = useState(null);
@@ -6425,7 +6425,7 @@ function ci({
   let o = useCallback(e => {
     i && s(i, e);
   }, [i, s]);
-  let d = wA();
+  let d = useDispatch();
   return jsxs(Fragment, {
     children: [e.map(e => jsx(cr, {
       tile: e,
@@ -6538,7 +6538,7 @@ function cu() {
     type: _$$nb.PINNED_FILE,
     file: e.file
   })), [n]);
-  let a = wA();
+  let a = useDispatch();
   return (useEffect(() => {
     a(MR({
       folderId: e,
@@ -6606,7 +6606,7 @@ function cg() {
   }));
   let [r] = mI(t);
   let n = r.unwrapOr(void 0)?.project;
-  let i = wA();
+  let i = useDispatch();
   assert(!!n, 'Project is null');
   return jsxs(Fragment, {
     children: [jsxs('div', {
@@ -6685,12 +6685,12 @@ function cE() {
   }) : null;
 }
 function cX() {
-  let e = wA();
+  let e = useDispatch();
   let t = !_$$iZ();
   let r = _$$e11();
   let n = _$$xo();
   let i = _$$l5();
-  let a = _$$d(e => e.selectedView);
+  let a = useSelector(e => e.selectedView);
   let s = my();
   let o = s === _$$nT.Design;
   let l = s === _$$nT.DevHandoff;
@@ -6723,7 +6723,7 @@ function cX() {
 let c0 = _$$eU(new Set());
 let c1 = 'true';
 function c2() {
-  let e = wA();
+  let e = useDispatch();
   let t = q5();
   let r = _$$tS();
   let n = _$$iZ();
@@ -6746,7 +6746,7 @@ function c2() {
   let s = Em();
   let o = m0();
   let l = vn();
-  let d = _$$d(e => e.selectedView);
+  let d = useSelector(e => e.selectedView);
   let [, c] = fp(c0);
   let u = !!t && !!r;
   let _ = u && !!n && n.id !== t.creatorId;
@@ -6916,7 +6916,7 @@ function ut({
   let o = _$$iZ();
   let d = !!hA() && a;
   !function () {
-    let e = wA();
+    let e = useDispatch();
     let t = _$$tS();
     let r = _$$xo();
     let n = _$$m().ce_il_root;
@@ -7175,7 +7175,7 @@ function uv(e) {
     activeMode,
     prevActiveMode
   } = e;
-  let n = wA();
+  let n = useDispatch();
   let i = _$$f2('has_toggled_from_draw');
   let {
     show,
@@ -7315,7 +7315,7 @@ function uO() {
 let uM = Fu('dev_mode_notified_of_approved_org_request');
 function uF() {
   let e = md(uM);
-  let t = wA();
+  let t = useDispatch();
   let {
     show,
     isShowing,
@@ -7389,7 +7389,7 @@ function uj() {
 function uY() {
   let e = _$$Y4(_$$t('auth.sign_up_for_figma'));
   let [t, r] = useState(!1);
-  let n = wA();
+  let n = useDispatch();
   useEffect(() => {
     let e = setTimeout(() => {
       r(!0);
@@ -7834,7 +7834,7 @@ function pP({
     }, [n, e, i, t, r]));
     return a;
   }();
-  let r = _$$d(e => e.mirror.appModel.keyboardShortcuts);
+  let r = useSelector(e => e.mirror.appModel.keyboardShortcuts);
   let n = _$$_I();
   let i = !!hA();
   let a = pN();
@@ -8207,7 +8207,7 @@ function p0(e) {
 }
 function p3(e) {
   let [t, r] = useState(!1);
-  let n = _$$d(e => e.modalShown);
+  let n = useSelector(e => e.modalShown);
   _$$h9(() => {
     e.showModal();
     document.body.style.backgroundColor = 'transparent';
@@ -8226,7 +8226,7 @@ function p3(e) {
 }
 (e => {
   function t(e) {
-    let t = wA();
+    let t = useDispatch();
     return jsx(p3, {
       showModal: () => t(_$$to({
         type: _$$s7,
@@ -8246,7 +8246,7 @@ function p3(e) {
 let p4 = {
   [_$$ou.ACCOUNT_SETTINGS]: o.AccountSettingsModalInIframe,
   [_$$ou.UNIVERSAL_PUBLISHING]() {
-    let e = wA();
+    let e = useDispatch();
     return jsx(p3, {
       showModal: () => e(_$$to({
         type: _$$R7,
@@ -8486,10 +8486,10 @@ class _p extends _a {
 }
 _p.displayName = 'NotificationsView';
 function _m(e) {
-  let t = _$$d(e => e.notifications);
+  let t = useSelector(e => e.notifications);
   let r = _$$D4();
   let n = W6();
-  let i = wA();
+  let i = useDispatch();
   let a = md(_$$D7);
   let s = t[0]?.type ?? null;
   return (useEffect(() => {
@@ -8507,11 +8507,11 @@ function _m(e) {
 }
 let _b = 'locked_account_view--addAccountButton--M2CKK';
 function _I() {
-  let e = wA();
-  let t = _$$d(e => e.user);
-  let r = _$$d(e => e.authedUsers);
-  let n = _$$d(e => e.orgById);
-  let i = _$$d(e => e.currentUserOrgId);
+  let e = useDispatch();
+  let t = useSelector(e => e.user);
+  let r = useSelector(e => e.authedUsers);
+  let n = useSelector(e => e.orgById);
+  let i = useSelector(e => e.currentUserOrgId);
   let a = i ? n[i] : null;
   let s = r.orderedIds.filter(e => t?.id !== e).map(e => r.byId[e]);
   useEffect(() => {
@@ -8758,12 +8758,12 @@ function _N(e) {
   });
 }
 let _C = memo(() => {
-  let e = wA();
-  let t = _$$d(e => e.flashes);
+  let e = useDispatch();
+  let t = useSelector(e => e.flashes);
   let r = _6();
-  let n = _$$d(e => e.interactionTestDialogShown);
-  let i = _$$d(e => e.blockedUILoadingIndicator);
-  let a = _$$d(e => e.mirror.appModel.showUi);
+  let n = useSelector(e => e.interactionTestDialogShown);
+  let i = useSelector(e => e.blockedUILoadingIndicator);
+  let a = useSelector(e => e.mirror.appModel.showUi);
   useLayoutEffect(() => {
     let e = () => {
       setTimeout(() => F2.focusIfUnfocused());
@@ -8774,7 +8774,7 @@ let _C = memo(() => {
     };
   }, []);
   (function () {
-    let e = wA();
+    let e = useDispatch();
     let t = function () {
       let e = useMemo(() => _$$g(), []);
       let t = Rs(oMw, {

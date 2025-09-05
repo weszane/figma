@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useRef } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import s from "classnames";
 import { c$ } from "../figma_app/236327";
 import { B } from "../905/714743";
@@ -51,8 +51,8 @@ let f = {
 let _ = Object.keys(f);
 export function $$A0(e) {
   let t = useRef(null);
-  let i = wA();
-  let s = d4(e => e.dropdownShown);
+  let i = useDispatch();
+  let s = useSelector(e => e.dropdownShown);
   let l = s?.type === g;
   let c = _.filter(t => e.supportedCurrencies.includes(t));
   let p = f[e.currency];

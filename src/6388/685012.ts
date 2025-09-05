@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useMemo, useState, useCallback } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { IK } from "../905/521428";
 import { k as _$$k } from "../905/443820";
 import { Ez5, uv } from "../figma_app/763686";
@@ -45,7 +45,7 @@ export function $$C0({
   importData: t,
   onCreateFinished: l
 }) {
-  let c = wA();
+  let c = useDispatch();
   let C = Object.values(t)[0]?.length || 0;
   let N = useMemo(() => $$T1(e), [e]);
   let w = C * N.size;
@@ -95,7 +95,7 @@ export function $$C0({
           return i?.get(t);
         }, [e]);
       }();
-      let t = wA();
+      let t = useDispatch();
       let l = md(_$$v);
       return useCallback((o, n, s, r, i, a, c, u, x, g) => {
         l7.user("buzz-add-asset-progressive-loading", () => {

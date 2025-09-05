@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { Egt } from "../figma_app/763686";
 import { md } from "../figma_app/27355";
 import { k9 } from "../905/19536";
@@ -11,7 +11,7 @@ import { Rn } from "../figma_app/357047";
 import { nD } from "../905/92359";
 export function $$h0(e) {
   let t = Rn("restore-symbol-or-state-group");
-  let i = d4(e => e.mirror.appModel[t]);
+  let i = useSelector(e => e.mirror.appModel[t]);
   let h = B9();
   let g = md(_S);
   let f = k9(() => {
@@ -44,7 +44,7 @@ export function $$h0(e) {
     }
     return null;
   }, [y, b, E, h]);
-  let w = d4(lm);
+  let w = useSelector(lm);
   let C = useMemo(() => b && x ? b : y && E ? y : null, [y, E, x, b]);
   let T = useMemo(() => {
     let e;

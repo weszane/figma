@@ -1,5 +1,5 @@
 import { jsx } from "react/jsx-runtime";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
 import { getFeatureFlags } from "../905/601108";
 import { eD } from "../figma_app/876459";
@@ -26,7 +26,7 @@ import { b as _$$b } from "../905/165519";
 var $$n0;
 (e => {
   e.useModalControls = function (e) {
-    let t = wA();
+    let t = useDispatch();
     let i = () => {
       t(Lo());
     };

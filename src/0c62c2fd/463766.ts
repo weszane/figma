@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useEffect } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { Wi } from "../figma_app/162641";
 import { s as _$$s } from "../cssbuilder/589278";
@@ -21,13 +21,13 @@ import { l as _$$l } from "../4452/447644";
 import { nF, lF } from "../4452/710166";
 if (443 == require.j) {}
 export function $$T0() {
-  let e = wA();
+  let e = useDispatch();
   let t = S2();
   let r = px();
   let T = RR();
   let E = _6();
-  let I = d4(e => getPermissionsStateMemoized(e));
-  let N = d4(e => e.teams);
+  let I = useSelector(e => getPermissionsStateMemoized(e));
+  let N = useSelector(e => e.teams);
   let C = j_(r);
   let S = "loaded" === C.status && pO({
     isAdminOrg: C.data,

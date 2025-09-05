@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useMemo } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { getFeatureFlags } from "../905/601108";
 import { oA } from "../905/663269";
@@ -28,9 +28,9 @@ export let $$I0 = "PLAN_SPACES_ONBOARDING_KEY";
 export function $$A1({
   currentUser: e
 }) {
-  let t = wA();
-  let n = d4(e => e.plans);
-  let a = d4(e => getPermissionsStateMemoized(e));
+  let t = useDispatch();
+  let n = useSelector(e => e.plans);
+  let a = useSelector(e => getPermissionsStateMemoized(e));
   let d = z();
   let g = Rs(InN, {}, {
     enabled: getFeatureFlags().dtm_deprecation_post_migration_onboarding

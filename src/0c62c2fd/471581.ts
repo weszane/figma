@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState } from "react";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import n from "classnames";
 import { P as _$$P } from "../5430/455826";
 import { tM, vd } from "../figma_app/637027";
@@ -26,7 +26,7 @@ function w({
   canSeeBillingAddressExp: j
 }) {
   let T = w ? _$$t("change_payment.success.successfully_reactivated_subscription") : _$$t("change_payment.success.successfully_updated_your_payment_method");
-  let E = d4(e => Np(e, {
+  let E = useSelector(e => Np(e, {
     view: "teamAdminConsole",
     teamId: t.teamId,
     teamAdminConsoleViewTab: Iv.SETTINGS
@@ -58,7 +58,7 @@ function w({
   let [P, L] = useState(!1);
   let [D, M] = useState(!1);
   let [B, U] = useState(window.innerHeight);
-  let W = wA();
+  let W = useDispatch();
   let $ = error?.code === dl.UNINITIALIZED_STRIPE_ELEMENTS_ERROR;
   let G = () => W(Ce());
   _$$P(({

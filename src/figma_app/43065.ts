@@ -1,5 +1,5 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { Wk } from "../figma_app/272243";
@@ -21,7 +21,7 @@ let $$I1 = Ju($$A0);
 let S = buildUploadUrl("a2151b55cc069625817d2ed13b404e0dd2417f1c");
 let v = "https://help.figma.com/hc/articles/31722591905559-Figma-Make-FAQs";
 export function $$A0(e) {
-  let t = wA();
+  let t = useDispatch();
   let r = hS(e);
   let {
     hideCTA,

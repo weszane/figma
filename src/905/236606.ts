@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback, useMemo, createContext, useContext, useRef } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { E as _$$E } from "../905/632989";
 import { glU } from "../figma_app/763686";
@@ -43,7 +43,7 @@ function P({
   let t = ON();
   let i = Cj(e.name);
   let a = t8(e.node_id);
-  let s = useCallback((e) => {
+  let s = useCallback(e => {
     i && (t("row_copied", {
       type: "name"
     }), i());
@@ -73,7 +73,7 @@ function O({
   let s = i?.name;
   let o = function (e) {
     let t = je();
-    return useMemo(() => "loaded" === t.status && e ? t.data.find((t) => e === t.libraryKey) : null, [e, t.status, t.data]);
+    return useMemo(() => "loaded" === t.status && e ? t.data.find(t => e === t.libraryKey) : null, [e, t.status, t.data]);
   }(a?.subscriptionStatus === "SUBSCRIBED" ? a?.library_key : void 0);
   let l = o ? o.name : _$$t("dev_handoff.variables.suggested_variables.library_not_found");
   let d = i?.subscriptionStatus === "SUBSCRIBED" ? l : _$$t("dev_handoff.variables.details_local");
@@ -91,7 +91,7 @@ function O({
         className: "matching_vars_modal--collectionName--rvWb2 ellipsis--ellipsis--Tjyfa",
         children: s
       })]
-    }), e.variables.map((e) => jsx(P, {
+    }), e.variables.map(e => jsx(P, {
       variable: e,
       rawValue: t
     }, e.node_id))]
@@ -112,7 +112,7 @@ function D({
     variables: t
   })).sort((e, t) => e.variables[0]?.subscriptionStatus === "LOCAL" ? -1 : t.variables[0]?.subscriptionStatus === "LOCAL" ? 1 : 0);
   return jsx(Fragment, {
-    children: i.map((e) => jsx(O, {
+    children: i.map(e => jsx(O, {
       variableGroup: e,
       rawValue: t
     }, e.variableSetId))
@@ -120,7 +120,7 @@ function D({
 }
 let L = Ju(function (e) {
   eT();
-  let t = wA();
+  let t = useDispatch();
   let i = useCallback(() => {
     t(AS());
   }, [t]);
@@ -171,7 +171,7 @@ let U = parsePxNumber(ZGX);
 let B = Ju(function (e) {
   eT();
   let t = je();
-  let i = wA();
+  let i = useDispatch();
   let o = useCallback(() => {
     i(AS());
   }, [i]);
@@ -330,7 +330,7 @@ function ee({
   let {
     ref
   } = useContext($$J0);
-  let d = wA();
+  let d = useDispatch();
   let u = _$$P();
   let m = _6();
   let h = useRef(null);
@@ -354,7 +354,7 @@ function ee({
       }
     }
   }, [d, ref, t, m]);
-  let f = d4((e) => e.modalShown);
+  let f = useSelector(e => e.modalShown);
   if (u) return jsx(Fragment, {
     children: e
   });
@@ -391,8 +391,8 @@ function et({
   let u = _$$P();
   let m = useRef(null);
   let h = _6();
-  let f = wA();
-  let _ = d4((e) => e.modalShown);
+  let f = useDispatch();
+  let _ = useSelector(e => e.modalShown);
   let A = !!_ && _.type === vl;
   let y = _$$T() ? t === h.styleForDetailsPanel?.styleId : A && _.data?.rowRef && _.data.rowRef.current === m?.current;
   let {
@@ -405,7 +405,7 @@ function et({
     version: content_hash
   }), [key, content_hash]);
   let S = Fk((e, t) => e.getStyleNodeByRef(t)?.guid, E);
-  let w = useCallback((e) => {
+  let w = useCallback(e => {
     if (e.stopPropagation(), m?.current && t && S && ref?.current) {
       if (y) {
         _$$T() ? f(sf({
@@ -485,7 +485,7 @@ function ei({
       optOutOfPrevModal: !0
     }));
   }, [i, ref, t]);
-  let h = d4((e) => e.modalShown);
+  let h = useSelector(e => e.modalShown);
   let g = _$$P();
   let f = t.ids.length;
   if (_$$T() || g || f < 1) return jsx(Fragment, {
@@ -538,15 +538,15 @@ export function $$en1(e, t, i = {}, a, s) {
     let r = function (e) {
       switch (e) {
         case "kotlin":
-          return (e) => e.replace(/0x([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})/, "#$2$3$4$1");
+          return e => e.replace(/0x([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})([0-9a-fA-F]{2})/, "#$2$3$4$1");
         case "swift":
-          let t = (e) => Math.round(255 * e).toString(16).padStart(2, "0");
-          return (e) => e.replace($, (e, ...i) => {
+          let t = e => Math.round(255 * e).toString(16).padStart(2, "0");
+          return e => e.replace($, (e, ...i) => {
             let [n, r, a, s, o, l = 1] = i;
             return `#${t(r)}${t(a)}${t(s)}${t(l)}`;
           });
         default:
-          return (e) => e;
+          return e => e;
       }
     }(t);
     let a = 0;
@@ -572,7 +572,7 @@ export function $$en1(e, t, i = {}, a, s) {
       let i = {
         tokens: []
       };
-      e.forEach((e) => {
+      e.forEach(e => {
         if (e.types.includes("comment") && e.content.match(Z4)) {
           let n = Z4.exec(e.content)[1];
           t.push(i);

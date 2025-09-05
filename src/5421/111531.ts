@@ -39,7 +39,7 @@ import { SourceMapConsumer } from "../vendor/956116";
 import { createPortal } from "../vendor/944059";
 import { sH, gn } from "../5421/58503";
 import { XH, zV, fl, pn } from "../1156/993639";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import Y from "classnames";
 import { wY } from "../figma_app/708845";
 import { F as _$$F } from "../905/302958";
@@ -387,7 +387,7 @@ function eS() {
     classNameEditingController,
     directManipulationEditor
   } = ef();
-  let d = wA();
+  let d = useDispatch();
   let c = md(directManipulationEditor.selectedElementComputedStylesWithLocalEdits);
   let p = parseInt(c["border-top-left-radius"] ?? "0", 10);
   let u = parseInt(c["border-top-right-radius"] ?? "0", 10);
@@ -707,7 +707,7 @@ function eF({
     currentTool: e.mirror.appModel.currentTool,
     dropdownShown: e.dropdownShown
   }));
-  let d = wA();
+  let d = useDispatch();
   let c = useRef(null);
   return r ? jsx("div", {
     className: n1,
@@ -820,7 +820,7 @@ function e9() {
   let d = createRef();
   let c = xF();
   let p = useMemo(() => _$$pn(c), [c]);
-  let u = wA();
+  let u = useDispatch();
   let h = Xo();
   let m = "sans-serif";
   let x = a["font-family"];
@@ -1169,7 +1169,7 @@ function ty() {
       ...t
     }, o);
   }, [U]);
-  let K = wA();
+  let K = useDispatch();
   return jsx(eg, {
     children: jsxs("div", {
       className: "x78zum5 xdt5ytf xc7ga6q xy13l1i x167g77z xafpxmx x9f619",
@@ -2542,7 +2542,7 @@ function nT({
     deferToFrame: !0
   }).snippet;
   let v = useRef(!1);
-  let I = wA();
+  let I = useDispatch();
   let C = useCallback(e => {
     if (v.current) return;
     v.current = !0;

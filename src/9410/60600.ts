@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useEffect } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { N as _$$N } from "../905/438674";
 import { E as _$$E } from "../905/53857";
 import { Xr, md } from "../figma_app/27355";
@@ -36,7 +36,7 @@ export function $$N2() {
     priority: _$$N2.DEFAULT_MODAL
   });
   let m = Xr(Tw);
-  let y = wA();
+  let y = useDispatch();
   let E = EI();
   let w = md(LZ);
   let S = () => {

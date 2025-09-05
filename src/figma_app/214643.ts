@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useMemo, useState, useCallback, useId } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { qc } from "../figma_app/858013";
 import { B } from "../905/714743";
 import { t as _$$t, tx } from "../905/303541";
@@ -18,7 +18,7 @@ export function $$h1({
   libraryKey: p,
   ariaLabelledBy: _
 }) {
-  let h = wA();
+  let h = useDispatch();
   let g = Um();
   let f = "auto_inherit_mode_string";
   let E = e.modes ? e.modes[0].name : "";
@@ -154,4 +154,4 @@ export function $$g0({
   });
 }
 export const RV = $$g0;
-export const fM = $$h1; 
+export const fM = $$h1;

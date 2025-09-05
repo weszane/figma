@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useRef, useCallback, useEffect } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { K as _$$K } from "../905/443068";
 import { C as _$$C } from "../905/520159";
@@ -136,7 +136,7 @@ function ee({
   let s = r ? _$$t("qa.extensions.widget") : _$$t("qa.extensions.plugin");
   let u = e.plugin_id;
   let _ = function (e) {
-    let t = wA();
+    let t = useDispatch();
     let r = k0(e) ? ox(e.plugin_id) : ab(e.plugin_id);
     return useCallback(() => {
       _$$e2(r) || t(RK({
@@ -144,7 +144,7 @@ function ee({
       }));
     }, [t, r]);
   }(e);
-  let h = wA();
+  let h = useDispatch();
   let m = useCallback(() => {
     h(_$$S({
       url: r ? ox(u) : ab(u),

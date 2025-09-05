@@ -1,4 +1,4 @@
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { Rs } from "../figma_app/288654";
 import { lZ } from "../figma_app/257275";
 import { FPublicationStatusType } from "../figma_app/191312";
@@ -11,8 +11,8 @@ export function $$d0(e) {
   return "loaded" !== t.status ? null : t.data.hubFile;
 }
 export function $$c1() {
-  let e = d4(e => e.openFile?.key);
-  if (lZ()) return d4(t => {
+  let e = useSelector(e => e.openFile?.key);
+  if (lZ()) return useSelector(t => {
     let {
       hubFiles,
       figFilePublishedAsHubFile

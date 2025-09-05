@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { memo, useEffect, useCallback } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
 import { b as _$$b, bL, mc, YJ, hE } from "../figma_app/860955";
 import { E as _$$E } from "../905/632989";
@@ -28,7 +28,7 @@ var _ = p;
 let O = memo(function ({
   item: e
 }) {
-  let t = d4(t => _$$A(e.label));
+  let t = useSelector(t => _$$A(e.label));
   return jsx("div", {
     className: Pf,
     children: t
@@ -38,8 +38,8 @@ let R = memo(function ({
   item: e,
   recordingKey: t
 }) {
-  let r = d4(t => Yh(t.mirror.appModel, e.action));
-  let i = d4(t => _$$A(e.action));
+  let r = useSelector(t => Yh(t.mirror.appModel, e.action));
+  let i = useSelector(t => _$$A(e.action));
   return jsx(FK, {
     action: e.action,
     isEnabled: r,
@@ -54,7 +54,7 @@ let L = memo(function ({
 }) {
   let i = e.children.filter(e => !Zk(e) || !e.featureFlags || e.featureFlags.every(e => getFeatureFlags()[e]));
   let s = _$$R(e => i.filter(t => Zk(t) && Yh(e.mirror.appModel, t.action)));
-  let o = d4(e => s.length > 0 && P(s[0], e));
+  let o = useSelector(e => s.length > 0 && P(s[0], e));
   if (0 === s.length) return null;
   if (e.flyoutHideOptionsIfSingleEnabledAction && 1 === s.length) {
     var l;
@@ -86,7 +86,7 @@ let D = memo(function ({
   recordingKey: t
 }) {
   let r = ut(e.isActiveObservable ? e.isActiveObservable() : null, !1);
-  let i = d4(t => P(e, t)) || r;
+  let i = useSelector(t => P(e, t)) || r;
   let s = $$G0();
   return jsx(rA, {
     item: e,
@@ -103,10 +103,10 @@ let k = memo(function ({
   recordingKey: r,
   canEdit: i
 }) {
-  let s = d4(t => Yh(t.mirror.appModel, e.action));
+  let s = useSelector(t => Yh(t.mirror.appModel, e.action));
   let o = Um();
-  let l = d4(t => e.tool !== NLJ.NONE && e.tool === t.mirror.appModel.currentTool && !TY(o));
-  let d = d4(e => e.mirror.appModel.topLevelMode);
+  let l = useSelector(t => e.tool !== NLJ.NONE && e.tool === t.mirror.appModel.currentTool && !TY(o));
+  let d = useSelector(e => e.mirror.appModel.topLevelMode);
   return e.featureFlags && !e.featureFlags.every(e => getFeatureFlags()[e]) ? null : jsx(T0, {
     dropdownShown: o,
     isEnabled: s,
@@ -171,7 +171,7 @@ export let $$j1 = memo(function ({
   recordingKey: r
 }) {
   let i = $$U3();
-  let o = d4(e => e.progressBarState.mode);
+  let o = useSelector(e => e.progressBarState.mode);
   let l = q5();
   let d = _$$T(o);
   if (!i(e)) return null;
@@ -214,14 +214,14 @@ export let $$j1 = memo(function ({
   }
 });
 export function $$U3() {
-  let e = d4(e => e.mirror.appModel.activeCanvasEditModeType);
-  let t = d4(e => e.mirror.appModel.currentTool);
+  let e = useSelector(e => e.mirror.appModel.activeCanvasEditModeType);
+  let t = useSelector(e => e.mirror.appModel.currentTool);
   let r = q5();
-  let n = d4(e => e.progressBarState.mode);
+  let n = useSelector(e => e.progressBarState.mode);
   let s = _$$T(n);
-  let o = d4(e => s ? !r?.canEdit : e.mirror.appModel.isReadOnly);
-  let l = d4(e => e.mirror.appModel.isSceneReadOnly);
-  let d = d4(e => !!e.user);
+  let o = useSelector(e => s ? !r?.canEdit : e.mirror.appModel.isReadOnly);
+  let l = useSelector(e => e.mirror.appModel.isSceneReadOnly);
+  let d = useSelector(e => !!e.user);
   return useCallback(i => !(!i || l && !i.nonEditorsAllowed || i.onlyShowInReadOnly && !(o && n !== Oin.HIDE_UI) || i.hideInExtension && z4.getIsExtension()) && (!!r || !i.newFileDisabled) && (!!d || !!i.loggedOutAllowed) && (!i.editModes || -1 !== i.editModes.indexOf(e)) && (!i.showForTools || -1 !== i.showForTools.indexOf(t)), [l, o, n, r, d, e, t]);
 }
 export function $$B2() {

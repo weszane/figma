@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useEffect, Component, PureComponent, useId, useCallback } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { K as _$$K } from "../905/443068";
 import { $n, IK } from "../905/521428";
@@ -84,7 +84,7 @@ export function $$eT3(e) {
   let s = Os();
   let o = X7();
   let l = q5();
-  let d = d4(e => e.isOpenFileLoadedFromLiveGraph);
+  let d = useSelector(e => e.isOpenFileLoadedFromLiveGraph);
   return jsx(fu, {
     name: "Image Settings Modal",
     children: jsx(eI, {
@@ -372,7 +372,7 @@ class eI extends Component {
       setPlaying: this.setGIFPlaying,
       playing: null != this.state.animatedImage && this.state.playing,
       setGIFCoverFrame: this.setGIFCoverFrame
-    }); else return jsxs(Fragment, {
+    });else return jsxs(Fragment, {
       children: [this.props.isAiEnabled && jsx(eC, {
         onClose: this.props.onClose
       }), jsx(fu, {
@@ -617,7 +617,7 @@ export function $$eN5({
     children: [jsx("div", {
       id: s,
       className: _$$tx,
-      children: function(e) {
+      children: function (e) {
         switch (e) {
           case "exposure":
             return _$$t("fullscreen.properties_panel.exposure");
@@ -707,4 +707,4 @@ export const GA = $$eS1;
 export const II = $$ey2;
 export const SY = $$eT3;
 export const Vk = $$eg4;
-export const ih = $$eN5; 
+export const ih = $$eN5;

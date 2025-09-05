@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useMemo, useEffect } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { o as _$$o } from "../905/821217";
 import { J } from "../905/614223";
 import { md } from "../figma_app/27355";
@@ -15,8 +15,8 @@ export function $$g0(e) {
     isShowing,
     testId
   } = e;
-  let g = wA();
-  let f = d4(e => e?.selectedView?.view === "fullscreen" && !e.mirror.appModel.showUi);
+  let g = useDispatch();
+  let f = useSelector(e => e?.selectedView?.view === "fullscreen" && !e.mirror.appModel.showUi);
   let _ = md(ze);
   let A = md(As);
   let y = useMemo(() => _ ? {

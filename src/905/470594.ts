@@ -1,5 +1,5 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { decodeBase64 } from "../905/561685";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { hS } from "../905/437088";
@@ -44,8 +44,8 @@ let C = new class {
   }
 }();
 let R = decodeBase64("iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAEhQGAhKmMIQAAAABJRU5ErkJggg==");
-let N = Ju(function(e) {
-  let t = wA();
+let N = Ju(function (e) {
+  let t = useDispatch();
   let i = hS(e);
   let a = jsxs(Fragment, {
     children: [jsx("span", {
@@ -236,4 +236,4 @@ export function $$D0(e) {
   });
 }
 export const x9 = $$D0;
-export const MZ = $$O1; 
+export const MZ = $$O1;

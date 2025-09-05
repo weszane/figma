@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useId, PureComponent } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { S as _$$S } from "../905/274480";
 import { J as _$$J } from "../905/270045";
 import { bL, c$ } from "../905/867927";
@@ -253,7 +253,7 @@ export function $$q2({
   stateManagementVersion: u,
   updateSelectionProperties: _
 }) {
-  let d = wA();
+  let d = useDispatch();
   let h = _$$Um();
   let T = EU();
   let w = md(_$$x);

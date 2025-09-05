@@ -1,5 +1,5 @@
 import { useCallback, useState } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { t as _$$t } from "../905/303541";
 import { S } from "../figma_app/11182";
 import { q5 } from "../figma_app/516028";
@@ -8,7 +8,7 @@ import { jN } from "../905/612685";
 import { FFileType } from "../figma_app/191312";
 import { sn } from "../905/301347";
 export function $$p1() {
-  let e = wA();
+  let e = useDispatch();
   let t = sn();
   let i = _6();
   let a = "prototype" === i.view;

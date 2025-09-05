@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { Xr } from "../figma_app/27355";
 import { B4 } from "../figma_app/385215";
 import { $ } from "../905/532878";
@@ -15,7 +15,7 @@ export function $$m0({
 }) {
   let m = _6();
   let h = B4();
-  let g = wA();
+  let g = useDispatch();
   let f = hA();
   let _ = Xr($);
   let A = KP("full_table", t);

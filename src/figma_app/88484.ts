@@ -1,5 +1,5 @@
 import { useEffect, useMemo } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { resourceUtils } from "../905/989992";
 import { debugState } from "../905/407919";
 import { WB } from "../905/761735";
@@ -54,7 +54,7 @@ export async function $$I1(e) {
   await a;
 }
 export let $$S3 = function () {
-  let e = wA();
+  let e = useDispatch();
   useEffect(() => function (e) {
     b.getRecentPrototypes({
       isGlobal: !0,
@@ -75,7 +75,7 @@ export let $$S3 = function () {
       }));
     }).catch(e => {});
   }(e), [e]);
-  let t = d4(e => e.recentPrototypes);
+  let t = useSelector(e => e.recentPrototypes);
   return useMemo(() => {
     let e = t.filter(e => !e.trashed);
     return resourceUtils.from({

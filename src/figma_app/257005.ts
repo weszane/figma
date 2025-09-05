@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useEffect, useMemo, useCallback, useRef } from "react";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { resourceUtils } from "../905/989992";
 import { Wn } from "../figma_app/88484";
 import { Uz } from "../905/63728";
@@ -52,7 +52,7 @@ export function $$L1(e) {
   var r;
   var o;
   var l;
-  let d = d4(e => e.currentUserOrgId);
+  let d = useSelector(e => e.currentUserOrgId);
   r = $$R5();
   o = useMemo(() => {
     let e = r.data || [];
@@ -102,8 +102,8 @@ export function $$P2({
   editorTypes: l
 }) {
   let c = FC();
-  let p = d4(e => e.authedProfilesById);
-  let _ = d4(e => e.figFileDuplicatedFromHubFile);
+  let p = useSelector(e => e.authedProfilesById);
+  let _ = useSelector(e => e.figFileDuplicatedFromHubFile);
   let g = useMemo(() => (o || []).map(({
     model: {
       key: e
@@ -159,7 +159,7 @@ export function $$D0(e) {
     setSearchResults,
     hasCloseButton = !0
   } = e;
-  let d = wA();
+  let d = useDispatch();
   let u = useCallback(() => {
     query && (d(Dy({
       entryPoint: "community:universal_posting"

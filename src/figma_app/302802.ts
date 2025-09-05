@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState, useCallback, useRef } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { lV, MK } from "../figma_app/617606";
 import { J } from "../figma_app/710077";
 import { RM, F$, es } from "../figma_app/304955";
@@ -61,7 +61,7 @@ export function $$V19() {
     if (!e || !r || !n) return !1;
     for (let r of t) if (r.userID !== e.id && r.activeCodeComponentId === n.guid) return !0;
     return !1;
-  }(r, d4(({
+  }(r, useSelector(({
     multiplayer: {
       allUsers: e
     }

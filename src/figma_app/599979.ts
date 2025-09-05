@@ -1,4 +1,4 @@
-import { d4, bN } from "../vendor/514228";
+import { useSelector, shallowEqual } from "../vendor/514228";
 import { encodeBase64 } from "../905/561685";
 import { Et, aD } from "../905/125019";
 import { ServiceCategories as _$$e } from "../905/165054";
@@ -47,9 +47,9 @@ export function $$B25(e, t) {
   return n;
 }
 export function $$G19(e) {
-  let t = d4(t => $$V13(t, e));
-  let r = d4(r => U(e) ? $$U29(t) : $$B25(r, e));
-  let i = d4(t => I0(e) || xQ(e) ? _$$A(t, e) : null);
+  let t = useSelector(t => $$V13(t, e));
+  let r = useSelector(r => U(e) ? $$U29(t) : $$B25(r, e));
+  let i = useSelector(t => I0(e) || xQ(e) ? _$$A(t, e) : null);
   let a = Uz(e) ? e.fig_file_metadata?.key : null;
   let s = M4.File.useValue(a);
   let o = !!a && !!s;
@@ -101,7 +101,7 @@ export function $$X6(e, t) {
   return Z(e, r, t.authedProfilesById, t.user?.id);
 }
 export function $$q22(e, t, r) {
-  return e?.id && Object.keys(e.versions).length > 0 ? function(e, t, r) {
+  return e?.id && Object.keys(e.versions).length > 0 ? function (e, t, r) {
     if ((e.community_publishers?.accepted || []).length > 0) {
       let n = cV(e);
       let i = n && t[n.id];
@@ -136,7 +136,7 @@ function Z(e, t, r, i, a) {
   if (0 === t.length) throw Error("Called getDefaultPublishingMetadataAuthor when no valid author exists");
   let s = $$q22(e, r, i);
   if (s && t.some(e => $$Q30(e, s))) return s;
-  if (a && t.find(e => bN(e, a))) return a;
+  if (a && t.find(e => shallowEqual(e, a))) return a;
   let o = t.find($$er33);
   if (o) return o;
   let l = t.find($$ee14);
@@ -333,7 +333,7 @@ export async function $$eg1(e, t) {
 export async function $$ef9(e, t, r = en) {
   let n = [];
   for (let i of Array.from(e).slice(0, r)) if (t && i.type.startsWith("video/")) {
-    !function(e) {
+    !function (e) {
       let t = e.name;
       if (!e) throw Error(_$$t("community.publishing.error_thumbnail_image_not_found", {
         filename: t
@@ -735,4 +735,4 @@ export const oB = $$W41;
 export const of = $$ea42;
 export const ot = $$F43;
 export const vC = $$ey44;
-export const xw = $$ew45; 
+export const xw = $$ew45;

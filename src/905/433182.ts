@@ -1,5 +1,5 @@
 import { jsxs, jsx } from "react/jsx-runtime";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { s as _$$s } from "../cssbuilder/589278";
 import { t as _$$t } from "../905/303541";
 import { In } from "../905/672640";
@@ -8,7 +8,7 @@ import { Ah } from "../905/316062";
 import { Ib } from "../905/129884";
 import { rm } from "../905/989969";
 export function $$p0(e) {
-  let t = wA();
+  let t = useDispatch();
   let {
     setSelectedFolder
   } = e;

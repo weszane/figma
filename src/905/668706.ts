@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useEffect, useMemo, useCallback, Component } from "react";
-import { Ng, wA } from "../vendor/514228";
+import { connect, useDispatch } from "../vendor/514228";
 import { rr, Ay } from "../figma_app/778880";
 import { t as _$$t } from "../905/303541";
 import { d9 } from "../figma_app/740025";
@@ -18,7 +18,7 @@ import { R } from "../905/186289";
 import { BA } from "../905/61477";
 import { G1 } from "../905/956371";
 let I = (e, t) => "search" === e.view ? t.parameters.query : "";
-let E = Ng((e, t) => ({
+let E = connect((e, t) => ({
   isLoggedIn: !!e.user,
   searchQuery: I(e.selectedView, e.search),
   searchModelType: e.search.parameters.searchModelType,
@@ -33,7 +33,7 @@ let E = Ng((e, t) => ({
     });
   }, []);
   let t = useMemo(() => e.query ?? e.searchQuery, [e.query, e.searchQuery]);
-  let i = wA();
+  let i = useDispatch();
   let {
     onFocusOverride,
     onBlurOverride,
@@ -177,7 +177,7 @@ class x extends Component {
     });
   }
 }
-export let $$S0 = Ng(e => ({
+export let $$S0 = connect(e => ({
   searchScope: e.search.parameters.searchScope,
   isCommunity: d9(e.selectedView)
 }))(x);

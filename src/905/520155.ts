@@ -1,5 +1,5 @@
 import { useContext, useCallback } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { At } from "../figma_app/770088";
 import { viewportNavigatorContext } from "../figma_app/298911";
 import { Eq } from "../905/380385";
@@ -7,7 +7,7 @@ import { s as _$$s } from "../905/518538";
 export function $$d0(e) {
   let t = _$$s();
   let i = useContext(viewportNavigatorContext);
-  let d = wA();
+  let d = useDispatch();
   return useCallback(n => {
     d(At({
       thread: n,

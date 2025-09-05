@@ -1,5 +1,5 @@
 import { useMemo, useCallback } from "react";
-import { d4, bN } from "../vendor/514228";
+import { useSelector, shallowEqual } from "../vendor/514228";
 import { l as _$$l } from "../905/716947";
 import { md } from "../figma_app/27355";
 import { zN } from "../905/19536";
@@ -26,18 +26,18 @@ import { b as _$$b2 } from "../905/857767";
 import { HU0, Lbn } from "../figma_app/27776";
 import { stylePickerMaxHeight } from "../figma_app/786175";
 export function $$R1(e) {
-  let t = d4((e) => e.library.local.styles);
+  let t = useSelector(e => e.library.local.styles);
   return useMemo(() => ti(t, e), [t, e]);
 }
 export function $$N0(e, t) {
-  let i = d4((i) => _$$b(i, e, t));
+  let i = useSelector(i => _$$b(i, e, t));
   let n = q5();
   let a = n && (Kz(n) ? n.sourceFileKey : n.key);
   return a && Oo(i?.data, a) ? null : i;
 }
 export function $$P2() {
   let e = je();
-  return useMemo(() => "loaded" === e.status && e.data.some((e) => e.numStyles > 0), [e]);
+  return useMemo(() => "loaded" === e.status && e.data.some(e => e.numStyles > 0), [e]);
 }
 function O() {
   function e(e) {
@@ -51,13 +51,13 @@ function O() {
     useExtendedSearch: !0
   });
   return (i, n) => {
-    let r = n.map((t) => ({
+    let r = n.map(t => ({
       ...t,
       searchName: e(t.name)
     }));
     t.set(r);
     let a = e(i);
-    return t.search(a).map((e) => e.item);
+    return t.search(a).map(e => e.item);
   };
 }
 export function $$D5(e, t, i) {
@@ -78,7 +78,7 @@ export function $$F6(e, t) {
   let s = sZ();
   let l = Fl();
   let d = Oe(s) && NX(l);
-  let f = useCallback((t) => !(0 === Sp(t, e) || t.fileKey === i?.key || dp({
+  let f = useCallback(t => !(0 === Sp(t, e) || t.fileKey === i?.key || dp({
     file_repo_id: i?.fileRepoId ?? null,
     source_file_key: i?.sourceFileKey ?? null
   }, t.fileKey)), [i?.fileRepoId, i?.key, i?.sourceFileKey, e]);
@@ -97,7 +97,7 @@ export function $$F6(e, t) {
   return zN({
     status: "loading" === a.status || "disabled" === a.status ? "loading" : "loaded",
     libraries: y
-  }, bN);
+  }, shallowEqual);
 }
 let M = _$$f();
 export function $$j4({
@@ -140,7 +140,7 @@ export function $$j4({
   return zN({
     status: u ? "loading" : "loaded",
     stylesByFileKey
-  }, bN);
+  }, shallowEqual);
 }
 let U = _$$f();
 export function $$B3(e, t, i, d, c, u) {
@@ -212,7 +212,7 @@ export function $$B3(e, t, i, d, c, u) {
     let i = 0;
     for (let n = 0; n < M.length; n++) {
       let r = M[n];
-      if (i += kj(M, n), r.type === _$$b2.StylesRow && r.styles.some((e) => e.key === t) && (e = i - parsePxInt(Lbn) / 2), i >= parsePxInt(stylePickerMaxHeight) && null != e) break;
+      if (i += kj(M, n), r.type === _$$b2.StylesRow && r.styles.some(e => e.key === t) && (e = i - parsePxInt(Lbn) / 2), i >= parsePxInt(stylePickerMaxHeight) && null != e) break;
     }
     return [Math.min(i, parsePxInt(stylePickerMaxHeight)), e];
   }, [M, t]);
@@ -221,7 +221,7 @@ export function $$B3(e, t, i, d, c, u) {
     items: M,
     height: B,
     initialOffset: V
-  }, bN);
+  }, shallowEqual);
 }
 export const AH = $$N0;
 export const Je = $$R1;

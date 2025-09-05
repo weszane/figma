@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useEffect, memo, useMemo } from "react";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { K } from "../905/443068";
 import { C as _$$C } from "../905/520159";
 import { Ay } from "../905/612521";
@@ -28,10 +28,10 @@ import { Z } from "../905/582804";
 import { c as _$$c } from "../905/300572";
 import { b as _$$b } from "../905/359141";
 function L(e) {
-  let t = d4(e => e.selectedView);
+  let t = useSelector(e => e.selectedView);
   let r = ZC(t);
-  let n = d4(e => e.modalShown?.type);
-  let s = wA();
+  let n = useSelector(e => e.modalShown?.type);
+  let s = useDispatch();
   let o = "fullscreen" !== t.view && r?.view === t.view;
   let l = !("fullscreen" === t.view && r?.view === "fullscreen" && t.fileKey === r.fileKey) && !o;
   useEffect(() => {
@@ -47,8 +47,8 @@ let P = memo(function ({
   resourceConnection: o
 }) {
   L(cX);
-  let c = d4(e => e.selectedView);
-  let u = d4(e => IE(e));
+  let c = useSelector(e => e.selectedView);
+  let u = useSelector(e => IE(e));
   let p = q5();
   let _ = X$("LibraryPreferencesModal").unwrapOr(null);
   let f = H3(_);
@@ -91,7 +91,7 @@ let $$k1 = Ju(function ({
   entrypoint: e
 }) {
   L(EJ);
-  let t = wA();
+  let t = useDispatch();
   useEffect(() => {
     _$$y.loadSharedFonts(t);
   }, [t]);
@@ -121,9 +121,9 @@ function F({
   initialTab: e,
   teamId: t
 }) {
-  let r = wA();
-  let s = d4(e => e.sharedFonts);
-  let o = d4(e => _$$p(e));
+  let r = useDispatch();
+  let s = useSelector(e => e.sharedFonts);
+  let o = useSelector(e => _$$p(e));
   let l = D6("TeamLibraryPreferencesModal").unwrapOr(null);
   let d = !!(l && A8(l, FMemberRoleType.ADMIN));
   let c = FC();
@@ -167,7 +167,7 @@ function j({
   teamId: e,
   resourceConnection: t
 }) {
-  let r = wA();
+  let r = useDispatch();
   let i = _K(!0);
   let l = t.hostPlanType === FOrganizationLevelType.TEAM;
   return jsx(_$$s3, {

@@ -1,5 +1,5 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { j } from "../905/253683";
 import { N as _$$N } from "../905/430294";
 import { getFeatureFlags } from "../905/601108";
@@ -15,8 +15,8 @@ export function $$_1(e) {
   return f.some(t => e.toLowerCase().startsWith(t));
 }
 export function $$x0() {
-  let e = d4(e => $$_1(e.mirror.selectionProperties.fontStyle?.toString() || ""));
-  let t = d4(e => "STRIKETHROUGH" === e.mirror.selectionProperties.whiteboardTextDecoration);
+  let e = useSelector(e => $$_1(e.mirror.selectionProperties.fontStyle?.toString() || ""));
+  let t = useSelector(e => "STRIKETHROUGH" === e.mirror.selectionProperties.whiteboardTextDecoration);
   return getFeatureFlags().figjam_a11y_inline_toolbar ? jsxs(Fragment, {
     children: [jsx(V, {
       variant: "toggle",

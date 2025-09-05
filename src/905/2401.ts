@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useRef, useCallback, useContext } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { o as _$$o } from "../905/347208";
 import { glU, rXF } from "../figma_app/763686";
 import { l7 } from "../905/189185";
@@ -29,7 +29,7 @@ export function $$I0({
   disableVariables: S,
   responsiveTextStyleVariantIndex: w
 }) {
-  let C = wA();
+  let C = useDispatch();
   let T = useRef(null);
   let k = useCallback(async e => {
     if (void 0 !== w) {

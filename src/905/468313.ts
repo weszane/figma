@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { memo, useContext, useRef, useCallback, useState, forwardRef, useImperativeHandle } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { E as _$$E } from "../905/632989";
 import { K } from "../905/443068";
 import { U as _$$U } from "../905/708285";
@@ -254,13 +254,13 @@ function $({
   recordingKey: e,
   label: t
 }) {
-  let i = d4(e => UT(e) ?? "");
-  let r = d4(e => Sh(e));
-  let s = d4(e => {
+  let i = useSelector(e => UT(e) ?? "");
+  let r = useSelector(e => Sh(e));
+  let s = useSelector(e => {
     let t = Lg(e);
     return t ? e.mirror.sceneGraph.get(t) : null;
   });
-  let o = d4(e => r.every(t => {
+  let o = useSelector(e => r.every(t => {
     let i = e.mirror.sceneGraph.get(t);
     return (i?.type === "TEXT" || i?.type === "CMS_RICH_TEXT") && null !== i.getNearestDakotaCollectionId();
   }));
@@ -338,7 +338,7 @@ export function $$X4({
   recordingKey: i
 }) {
   let s = useContext(_$$p);
-  let o = d4(e => UT(e) ?? "");
+  let o = useSelector(e => UT(e) ?? "");
   let l = gl(o) ? _$$t("fullscreen.mixed") : o;
   return jsx(YW, {
     className: gb,

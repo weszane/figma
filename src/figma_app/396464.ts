@@ -1,5 +1,5 @@
 import { useMemo } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { fn, sH } from "../905/871411";
 import { bV } from "../figma_app/387100";
 import { getSingletonSceneGraph } from "../905/700578";
@@ -39,7 +39,7 @@ export function $$_0() {
   return k9(() => e, [e]);
 }
 export function $$h4() {
-  let e = d4(e => e.mirror.sceneGraphSelection);
+  let e = useSelector(e => e.mirror.sceneGraphSelection);
   return useMemo(() => {
     let t = new Set();
     Object.keys(e).forEach(e => {
@@ -52,7 +52,7 @@ export function $$h4() {
   }, [e]);
 }
 export function $$m6() {
-  let e = d4(e => e.mirror.sceneGraphSelection);
+  let e = useSelector(e => e.mirror.sceneGraphSelection);
   return k9(() => {
     let t = new Set();
     Object.keys(e).forEach(e => {
@@ -64,7 +64,7 @@ export function $$m6() {
   }, [e]);
 }
 export function $$g5() {
-  let e = d4(e => e.mirror.sceneGraphSelection);
+  let e = useSelector(e => e.mirror.sceneGraphSelection);
   return k9(() => {
     let t = new Set();
     Object.keys(e).forEach(e => {

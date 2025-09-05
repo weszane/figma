@@ -1,9 +1,9 @@
 import { useCallback } from "react";
-import { Pj } from "../vendor/514228";
+import { useStore } from "../vendor/514228";
 import { ds } from "../figma_app/314264";
 var $$s0 = (e => (e.START = "start", e.STOP = "stop", e.IGNORE = "ignore", e))($$s0 || {});
 export function $$o1() {
-  let e = Pj();
+  let e = useStore();
   return useCallback(t => {
     let i = e.getState();
     let n = i.openFile?.key;

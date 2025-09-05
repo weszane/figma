@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useCallback, useRef, useEffect } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { useHandleMouseEvent, useSetupPlayback } from "../figma_app/878298";
 import o from "classnames";
 import { sx } from "../905/449184";
@@ -136,7 +136,7 @@ export function $$v1(e) {
   });
 }
 export function $$A0(e) {
-  let t = wA();
+  let t = useDispatch();
   let {
     onHide,
     popStack
@@ -171,7 +171,7 @@ export function $$N2(e) {
   let t = e.recordingKey ?? "";
   let r = e.destructive ?? !1;
   let o = e.autoFocusCta ?? !0;
-  let l = wA();
+  let l = useDispatch();
   let {
     dontClose,
     popStack

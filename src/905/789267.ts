@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
@@ -37,7 +37,7 @@ export let $$N0 = Ju(function ({
   entryPoint: D,
   planDataForSocialProof: L
 }) {
-  let F = wA();
+  let F = useDispatch();
   let [M, j] = useState(!1);
   let U = _$$u();
   let B = () => {

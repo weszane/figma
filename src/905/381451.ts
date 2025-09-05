@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef, useMemo, useCallback } from "react";
-import { bN } from "../vendor/514228";
+import { shallowEqual } from "../vendor/514228";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { wm, ID } from "../905/19536";
 import { $D } from "../905/11";
@@ -9,7 +9,7 @@ export function $$c0(e, t, i = _$$A) {
   let u = wm(() => t, [t]);
   let [p, m] = ID({
     status: "idle"
-  }, bN);
+  }, shallowEqual);
   useEffect(() => {
     m({
       status: "idle"
@@ -66,7 +66,7 @@ export function $$c0(e, t, i = _$$A) {
       (async () => {
         let t = [];
         try {
-          t.push(...((await e.validate(u, h)) ?? []).map((e) => ({
+          t.push(...((await e.validate(u, h)) ?? []).map(e => ({
             type: "validation",
             ...e
           })));
@@ -103,7 +103,7 @@ export function $$c0(e, t, i = _$$A) {
     });
   }, [h, m]);
   let _ = useMemo(() => h !== _$$A && h !== $$d && e.canSet(u, h), [e, u, h]);
-  let A = useMemo(() => _ ? (t) => {
+  let A = useMemo(() => _ ? t => {
     t === h || h !== _$$A && h !== $$d && e.isEqual?.(t, h) || (g(t), m({
       status: "idle"
     }));

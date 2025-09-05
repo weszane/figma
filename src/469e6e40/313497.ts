@@ -2,7 +2,7 @@ import { getFeatureFlags } from "../905/601108";
 import { to } from "../905/156213";
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useCallback, useState, useMemo } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
@@ -544,7 +544,7 @@ function z(e) {
     ...e,
     preventUserClose: t
   });
-  let s = wA();
+  let s = useDispatch();
   let i = useCallback(() => {
     a(!0);
     (async () => {
@@ -661,7 +661,7 @@ function W(e) {
   let {
     onClose
   } = e;
-  let a = wA();
+  let a = useDispatch();
   let [n, s] = useState(!1);
   let i = hS({
     ...e,

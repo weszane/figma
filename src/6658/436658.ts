@@ -1,5 +1,5 @@
 import { useState, useRef, useCallback, useEffect, useMemo } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { vF } from "../vendor/150583";
 import { getFeatureFlags } from "../905/601108";
 import { Xr, md } from "../figma_app/27355";
@@ -45,13 +45,13 @@ export function $$E2({
     x.current = x.current.slice(0, o.length);
   }, [o.length]);
   let N = _6();
-  let A = wA();
+  let A = useDispatch();
   let O = gY(RL);
   let B = gY(S6);
   let D = gY(K5);
   let R = gY(LO);
   let T = gY(_E);
-  let H = function() {
+  let H = function () {
     let e = _G();
     let n = OG(e);
     let o = n?.selectedRepositories?.[0];
@@ -1146,7 +1146,7 @@ export function $$S3({
     let {
       components
     } = n;
-    d(function(e) {
+    d(function (e) {
       let n = [];
       e.forEach((e, o) => {
         let t = e.code_connect_info.v1.figmadoc;
@@ -1224,7 +1224,7 @@ export function $$K4({
   defaultFilter: o,
   entrypoint: c
 }) {
-  let r = function({
+  let r = function ({
     libraryKey: e,
     componentKey: n,
     defaultFilter: o
@@ -1314,4 +1314,4 @@ export const rI = $$x0;
 export const Wq = $$q1;
 export const IN = $$E2;
 export const Hf = $$S3;
-export const dx = $$K4; 
+export const dx = $$K4;

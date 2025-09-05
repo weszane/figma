@@ -1,7 +1,7 @@
 import { Ju } from "../905/102752";
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useState, useMemo, useCallback } from "react";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { lQ } from "../905/934246";
 import { sx } from "../905/449184";
 import { h as _$$h } from "../905/207101";
@@ -71,15 +71,15 @@ function E(e) {
   });
 }
 function w(e) {
-  let t = d4(e => e.authedActiveCommunityProfile);
-  let i = d4(e => e.authedUsers);
+  let t = useSelector(e => e.authedActiveCommunityProfile);
+  let i = useSelector(e => e.authedUsers);
   let [o, p] = useState({});
   _$$h(() => {
     _$$C.getBuyerAssociatedPurchases({
       id: e.resource.monetized_resource_metadata.id
     }).then(e => {
       p(e.data.meta);
-    }).catch(() => {}) ;
+    }).catch(() => {});
   });
   let A = useMemo(() => G({
     authedActiveCommunityProfile: t,
@@ -134,12 +134,12 @@ function w(e) {
     options: v
   });
 }
-export let $$T0 = Ju(function(e) {
-  let t = wA();
+export let $$T0 = Ju(function (e) {
+  let t = useDispatch();
   let i = useCallback(() => {
     t(Ce());
   }, [t]);
-  let s = useMemo(() => function(e) {
+  let s = useMemo(() => function (e) {
     _$$h(() => {
       sx("Pre Purchase User Selector Modal - Opened", {
         resourceType: Dl(e.resource),
@@ -167,4 +167,4 @@ export let $$T0 = Ju(function(e) {
     resource: e.resource
   });
 }, "PrePurchaseUserSelectorModal");
-export const I = $$T0; 
+export const I = $$T0;

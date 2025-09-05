@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback, useMemo, useRef, useState, useEffect } from "react";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { lQ } from "../905/934246";
 import { K as _$$K } from "../905/443068";
 import { Y9, hE, jk, vo, nB } from "../figma_app/272243";
@@ -122,7 +122,7 @@ export function $$J0({
   }, {
     defaultActive: () => "custom_color"
   });
-  let C = d4(e => e.mirror.appModel.activeCanvasEditModeType);
+  let C = useSelector(e => e.mirror.appModel.activeCanvasEditModeType);
   let w = kl("numSelectedByType");
   let O = useMemo(() => {
     if (w) return aZ(rrT.FILL, w);
@@ -203,13 +203,13 @@ function Z({
   recordingKey: s,
   hideCustomColorPickerFillTypeToggle: o
 }) {
-  let l = wA();
+  let l = useDispatch();
   let d = Um();
   let c = dH();
   let u = Ep();
   let p = _$$C();
   let _ = Ku();
-  let m = d4(e => e.mirror.appModel.activeCanvasEditModeType);
+  let m = useSelector(e => e.mirror.appModel.activeCanvasEditModeType);
   let g = useRef(null);
   let [E, y] = useState(bn(e.type) ? 1 : 0);
   let b = Ou(e);

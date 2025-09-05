@@ -39,7 +39,7 @@ import { cS, Zo } from "../figma_app/334459";
 import { Ad, Y9, Oe } from "../figma_app/811257";
 import { rf } from "../figma_app/960196";
 import { yw, li, ir, iQ, I6 } from "../905/159279";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { assertNotNullish } from "../figma_app/465776";
 import { sH, dI } from "../905/805904";
 import $ from "classnames";
@@ -135,7 +135,7 @@ function ed({
   recordingKey: o
 }) {
   let l = (t && MH(a[t])) ?? void 0;
-  let c = wA();
+  let c = useDispatch();
   let u = useCallback(async e => {
     if (t && e) {
       let i = await c(_$$Oe(e));
@@ -1107,7 +1107,7 @@ let te = memo(function (e) {
   });
 });
 function ta(e) {
-  let t = wA();
+  let t = useDispatch();
   let i = t => {
     t.stopPropagation();
     e.togglePicker();

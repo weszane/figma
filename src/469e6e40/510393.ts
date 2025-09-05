@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
@@ -25,7 +25,7 @@ let y = e => ({
   state: xf(e.trim()) ? _$$d.OK : _$$d.ERROR,
   content: e
 });
-let $$w0 = Ju(function(e) {
+let $$w0 = Ju(function (e) {
   let t = hS({
     onClose: e.onClose,
     open: e.open
@@ -36,7 +36,7 @@ let $$w0 = Ju(function(e) {
     tokens: e.currentContacts.split(",").map(e => y(e)),
     errorMessage: ""
   });
-  let k = wA();
+  let k = useDispatch();
   let E = () => v.tokens.filter(e => e.state === _$$d.OK).map(e => e.content).join(",");
   let C = () => v.tokens.filter(e => e.state === _$$d.ERROR).length > 0;
   return jsx(fu, {
@@ -100,4 +100,4 @@ let $$w0 = Ju(function(e) {
     })
   });
 }, "ChangeBillingContact");
-export const E = $$w0; 
+export const E = $$w0;

@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useMemo, useState, useCallback } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { nj } from "../905/125019";
 import { K } from "../905/443068";
 import { A as _$$A } from "../905/920165";
@@ -31,7 +31,7 @@ export function $$E0(e) {
     setUserClickedControls
   } = e;
   let k = RU();
-  let R = wA();
+  let R = useDispatch();
   let N = useMemo(() => new f0(duration), [duration]);
   let P = X7();
   let O = paint.video?.hash ? nj(paint.video?.hash).toLowerCase() : null;

@@ -1,9 +1,9 @@
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { getFeatureFlags } from "../905/601108";
 import { eD } from "../figma_app/876459";
 export function $$s0() {
-  let e = d4(e => e.plans);
-  let t = d4(e => e.openFile);
+  let e = useSelector(e => e.plans);
+  let t = useSelector(e => e.openFile);
   let r = e.find(e => e.plan_id === t?.parentOrgId);
   return r?.is_dev_mode_mcp_disabled === !0;
 }

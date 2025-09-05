@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { memo, useEffect, useState } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { lQ } from "../905/934246";
 import { b as _$$b, bL, mc, YJ, q7, Q$, Ov, N_, g8, ZP, MJ } from "../figma_app/860955";
 import { E as _$$E } from "../905/53857";
@@ -115,7 +115,7 @@ export function $$Y1() {
     getTriggerProps,
     manager
   } = _$$b();
-  let A = wA();
+  let A = useDispatch();
   let L = CI();
   let M = md(V).data;
   return getFeatureFlags().figjam_a11y_inline_toolbar ? jsx(fu, {
@@ -261,7 +261,7 @@ let J = tf(function ({
   disabled: l,
   dropdownContainsAiOption: d
 }) {
-  let c = wA();
+  let c = useDispatch();
   let u = md(V).data;
   let p = CI();
   let [m, g] = useState(0);

@@ -1,7 +1,7 @@
 import { jsx } from "react/jsx-runtime";
 import { memo, useMemo, useCallback } from "react";
 import { createPortal } from "../vendor/944059";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { isNotNullish, isNullish } from "../figma_app/95419";
 import { l7 } from "../905/189185";
 import { getSingletonSceneGraph } from "../905/700578";
@@ -30,7 +30,7 @@ let $$E1 = memo(({
   let {
     isFlyoutOpen
   } = JA();
-  let E = d4(e => e.library.defaultPublished.libraryKeys);
+  let E = useSelector(e => e.library.defaultPublished.libraryKeys);
   let S = ud();
   let w = useMemo(() => d1({
     fileByKey: S,

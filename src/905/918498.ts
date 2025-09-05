@@ -1,6 +1,6 @@
 import { Ju } from "../905/102752";
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { hS } from "../905/437088";
 import { N } from "../905/438674";
 import { bL } from "../905/38914";
@@ -21,7 +21,7 @@ export let $$v0 = Ju(function (e) {
   let {
     plan
   } = e;
-  let i = wA();
+  let i = useDispatch();
   let v = () => {
     i(Ce());
   };

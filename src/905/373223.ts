@@ -1,4 +1,4 @@
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { Dw } from "../figma_app/976345";
 import { Lo, Ce, to } from "../905/156213";
 import { e5 } from "../figma_app/297957";
@@ -119,7 +119,7 @@ function O({
   });
 }
 let D = Ju(function (e) {
-  let t = wA();
+  let t = useDispatch();
   let i = useRef(null);
   let [r, s] = useState(550);
   let o = _$$h.useTrackingContext({
@@ -231,11 +231,11 @@ let D = Ju(function (e) {
 }, "TeamCreationSpeedBump");
 export function $$L0() {
   let e = TA();
-  let t = wA();
+  let t = useDispatch();
   let i = _$$f("team_creation_speed_bump_dismissed");
-  let c = d4(e => e.teams);
-  let u = d4(e => e.roles.byTeamId);
-  let p = d4(e => e.user);
+  let c = useSelector(e => e.teams);
+  let u = useSelector(e => e.roles.byTeamId);
+  let p = useSelector(e => e.user);
   let m = () => {
     e && t(Dw({
       ignoreCurrentPlan: !0

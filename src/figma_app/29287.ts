@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { getSingletonSceneGraph } from "../905/700578";
 import { md, zl } from "../figma_app/27355";
 import { debugState } from "../905/407919";
@@ -17,7 +17,7 @@ import { S, E as _$$E } from "../figma_app/999099";
 import { V } from "../figma_app/761984";
 export function $$b3() {
   let e = md(ze);
-  let t = wA();
+  let t = useDispatch();
   let r = debugState.getState();
   let l = Kl(r);
   let d = dh();

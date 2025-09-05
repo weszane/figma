@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useRef, useCallback, useEffect, useState, createElement } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { lQ } from "../905/934246";
 import { m7W, glU } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
@@ -37,7 +37,7 @@ function M({
   dismissModal: e,
   targetKey: t = oi.ZOOM
 }) {
-  let i = wA();
+  let i = useDispatch();
   let s = _$$R(({
     mirror: {
       appModel: e
@@ -474,7 +474,7 @@ function Y(e) {
     onNext,
     onManualDismiss
   } = e;
-  let s = wA();
+  let s = useDispatch();
   let l = useCallback(() => {
     s(_$$b({
       [V.NEW_USER_ZOOM]: !0
@@ -525,7 +525,7 @@ function J(e) {
     onManualDismiss
   } = e;
   let [i, s] = useState(!1);
-  let l = wA();
+  let l = useDispatch();
   _$$h(() => {
     setTimeout(() => {
       s(!0);
@@ -589,7 +589,7 @@ function q({
 export function $$$$X0() {
   let e = aV();
   let t = Td();
-  let i = d4(e => e.isMakeSomethingV2Active);
+  let i = useSelector(e => e.isMakeSomethingV2Active);
   return t || e || i ? null : jsx(et, {});
 }
 let Z = r1(V.NEW_USER_PAN);

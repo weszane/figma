@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useLayoutEffect, forwardRef, useRef, useImperativeHandle, useMemo, useCallback } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { d as _$$d } from "../905/976845";
@@ -571,7 +571,7 @@ export function $$eh0({
     });
   }, [_, e]);
   let k = useRef();
-  let M = d4(t => _$$e2(t, e));
+  let M = useSelector(t => _$$e2(t, e));
   let F = useCallback(() => {
     let t = k.current?.getBoundingClientRect();
     t && showStyleDetails({

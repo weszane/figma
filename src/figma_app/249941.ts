@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { PureComponent } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
 import { d as _$$d } from "../905/75621";
 import { B as _$$B } from "../905/853081";
@@ -593,7 +593,7 @@ export function $$tI2(e) {
   n.displayName = "LayerIcon";
   let em = e => e.mirror.sceneGraph;
   e.ConnectedLayerIcon = function (e) {
-    let t = d4(em);
+    let t = useSelector(em);
     return jsx(n, {
       ...e,
       node: t.get(e.guid) || null

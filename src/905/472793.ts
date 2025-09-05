@@ -1,5 +1,6 @@
 import type { Fn } from '../../types/global'
-import type { FontInfo, PluginRuntimeOptions } from './types'
+import type { TSSceneGraph } from '../figma_app/518682'
+import type { FontInfo, PluginOptions, PluginRuntimeOptions } from './types'
 // Import type definitions
 import { useState } from 'react'
 import { jsx, jsxs } from 'react/jsx-runtime'
@@ -17,7 +18,7 @@ import { h as _$$h } from '../905/193918'
 import { gl, hS } from '../905/216495'
 import { isPluginConfigMatching } from '../905/240440'
 import { widgetErrorTracker } from '../905/250412'
-import { mN } from '../905/261467'
+import { DummyUIManager, PluginUIManager } from '../905/261467'
 import { k as getFeatureFlags3 } from '../905/263346'
 import { J as _$$J3 } from '../905/270045'
 import { S as _$$S } from '../905/274480'
@@ -55,13 +56,7 @@ import { Mi } from '../905/736624'
 import { MI } from '../905/757052'
 import { ZY } from '../905/764747'
 import { d1 } from '../905/766303'
-import {
-  checkIncrementalUnsafeMember,
-  DocumentAccessState,
-  ensurePluginPageLoaded,
-  loadInternalCanvasMemoized,
-  markPageLoaded,
-} from '../905/816197'
+import { checkIncrementalUnsafeMember, DocumentAccessState, ensurePluginPageLoaded, loadInternalCanvasMemoized, markPageLoaded } from '../905/816197'
 import { u as _$$u, c0, Kb } from '../905/816730'
 import { getSceneGraphInstance } from '../905/830071'
 import { Y as _$$Y } from '../905/830372'
@@ -106,128 +101,31 @@ import { Y5 } from '../figma_app/455680'
 import { assert, throwTypeError } from '../figma_app/465776'
 import { $f as _$$$f, rp as _$$rp } from '../figma_app/474636'
 import { tB as _$$tB } from '../figma_app/516028'
-import {
-  $y,
-  i1 as _$$i,
-  iP as _$$iP,
-  nf as _$$nf,
-  po as _$$po,
-  _C,
-  B_,
-  b_,
-  Bs,
-  BT,
-  cI,
-  dG,
-  dM,
-  f2,
-  fd,
-  G1,
-  H4,
-  jG,
-  jS,
-  KB,
-  LL,
-  ME,
-  Mw,
-  OD,
-  oZ,
-  Q4,
-  q$,
-  Ql,
-  Rp,
-  sd,
-  Sf,
-  Sx,
-  Ty,
-  Vb,
-  VM,
-  W5,
-  wk,
-  Xx,
-} from '../figma_app/603466'
+import { $y, i1 as _$$i, iP as _$$iP, nf as _$$nf, po as _$$po, _C, B_, b_, Bs, BT, cI, dG, dM, f2, fd, G1, H4, jG, jS, KB, LL, ME, Mw, OD, oZ, Q4, q$, Ql, Rp, sd, Sf, Sx, Ty, Vb, VM, W5, wk, Xx } from '../figma_app/603466'
 import { Qb, yh } from '../figma_app/646357'
-
 import { lu } from '../figma_app/656233'
 import * as _require from '../figma_app/664063'
 import { WJ } from '../figma_app/671547'
 import { UK } from '../figma_app/740163'
 import { Br } from '../figma_app/741237'
 import { OU } from '../figma_app/757723'
-import {
-  _em,
-  BXd,
-  Egt,
-  Ez5,
-  fHP,
-  fZl,
-  glU,
-  HzA,
-  iIc,
-  IPu,
-  IQ2,
-  NfO,
-  Osy,
-  oVz,
-  rXF,
-  tKW,
-  UcW,
-  XJn,
-  Z64,
-  ZiZ,
-  zol,
-} from '../figma_app/763686'
+import { _em, BXd, Egt, Ez5, fHP, fZl, glU, HzA, iIc, IPu, IQ2, NfO, Osy, oVz, rXF, tKW, UcW, XJn, Z64, ZiZ, zol } from '../figma_app/763686'
 import { AC } from '../figma_app/777551'
 import { eD as _$$eD } from '../figma_app/876459'
 // Import UI Components and Controls Library - Phase 14
 import { KJ } from '../figma_app/916560'
 import { Ky, u7, zn } from '../figma_app/933328'
-import { _x, gH, IN } from '../figma_app/985200'
+import { gH, IN } from '../figma_app/985200'
 import { AnnotationCategoryFactory } from './core/annotation'
-import {
-  an,
-  convertGridLayoutConfig,
-  createImageProcessor,
-  createNodeHash,
-  eG,
-  ez,
-  generateJsxFromNode,
-  getAllStorageKeysWithPrefix,
-  getNodeById,
-  getNodeGuid,
-  getRowColumn,
-  getStorageValueByKey,
-  i5,
-  isInImmutableContext,
-  isVMPromiseLike,
-  loadFontsForTextNode,
-  parseColorInput,
-  processEffect,
-  processEffectWithValidation,
-  processGridLayout,
-  renameSelectedLayers,
-  setStorageEntry,
-  timerAndStateEvents,
-  variableDefinitions,
-  wrapVmPromise,
-} from './core/helper'
+import { an, convertGridLayoutConfig, createImageProcessor, createNodeHash, eG, ez, generateJsxFromNode, getAllStorageKeysWithPrefix, getNodeById, getNodeGuid, getRowColumn, getStorageValueByKey, i5, isInImmutableContext, isVMPromiseLike, loadFontsForTextNode, parseColorInput, processEffect, processEffectWithValidation, processGridLayout, renameSelectedLayers, setStorageEntry, timerAndStateEvents, variableDefinitions, wrapVmPromise } from './core/helper'
 import { ImageStore } from './core/image-store'
 import { IncLoadingErrorLogger } from './core/incLoadingErrorLogger'
-import {
-  ApplicationError,
-  convertPaintArrayData,
-  mapPaintConfigurations,
-  NodeAPI,
-  processPaint,
-  tB,
-  validateAndExtractCollectionId,
-} from './core/node-api'
+import { ApplicationError, convertPaintArrayData, mapPaintConfigurations, NodeAPI, processPaint, tB, validateAndExtractCollectionId } from './core/node-api'
 import { NodeFactory } from './core/node-factory'
 import { PluginRuntimeBridge } from './core/plugin-runtime-bridge'
 import { StyleFactory } from './core/style-factory'
 import { StyleManager } from './core/style-manager'
 import { VariableFactory } from './core/variable-api'
-
 import { VariableCollectionFactory } from './core/variable-collection-factory'
 import { VideoStore } from './core/video-store'
 import { convertInternalPaintToExternal } from './modules'
@@ -293,7 +191,6 @@ let rp = Ju(({
     }),
   })
 }, 'TEXT_REVIEW_REQUEST_MODAL', ZU.NO)
-
 export function isPromiseLike(vm: NoOpVm, obj: Record<string, any>) {
   // r1 - Check if an object is a promise-like object with then/catch methods
   if (!vm.isObject(obj)) {
@@ -706,7 +603,6 @@ export const RESTRICTED_TRIGGERS = {
   NO_UI: new Set(['codegen', 'related-link-preview', 'textreview']),
   NO_CHECKOUT: new Set(['codegen', 'linkpreview', 'textreview']),
 }
-
 let ar = new Set(['codegen', 'linkpreview', 'textreview'])
 let as = ['close', 'selectionchange', 'currentpagechange', 'drop', 'run', 'documentchange', 'textreview', 'slidesviewchange'].concat(['timerstart', 'timerstop', 'timerpause', 'timerresume', 'timerdone', 'timeradjust'])
 let ao = []
@@ -715,7 +611,7 @@ let ad = ['input']
 let ac = [_$$nT.Design, _$$nT.Whiteboard, _$$nT.DevHandoff, _$$nT.Slides, _$$nT.Sites, _$$nT.Illustration, _$$nT.Cooper]
 class PluginRuntime {
   vm: NoOpVm
-  options: PluginRuntimeOptions
+  options: PluginOptions
   visualBellCounter: number
   eventHandlers: Map<string, any[]>
   eventHandlerTimeouts: Map<string, any>
@@ -724,20 +620,15 @@ class PluginRuntime {
   runningCloseEventHandler: boolean
   previousSelection: string[]
   previousSelectedTextRangeJson: string
-  onMessageCallback: any
+  onMessageCallback?: Fn
   queryMode: boolean
   checkoutRequested: boolean
-  widgetManager: any
+  widgetManager: WidgetManager | undefined
   skipInvisibleInstanceChildren: boolean
-  spellCheckCallback: any
-  legacyCodegenCallback: any
-  codegenCallback: any
-  linkPreviewCallback: any
-  authCallback: any
   textReviewRequestRejects: number
   isTextReviewRequestModalOpen: boolean
   isWidget: boolean
-  privateSceneGraph: any
+  privateSceneGraph: TSSceneGraph
   styleManager: StyleManager
   imageStore: ImageStore
   videoStore: VideoStore
@@ -745,13 +636,26 @@ class PluginRuntime {
   _hasRegisteredWidgetFunction: boolean
   fullscreenEditorType: any
   mixedSentinel: any
-  runtimeOptions: any
+  runtimeOptions: PluginRuntimeOptions
   nodeFactory: NodeFactory
   styleFactory: StyleFactory
   variableFactory: VariableFactory
   variableCollectionFactory: any
   annotationCategoryFactory: any
-  uiHandle: any
+  uiHandle: PluginUIManager | DummyUIManager
+
+  authCallback = this.createPromiseCallback({
+    makeInputEvent: (e) => {
+      let t = this.vm.newObject()
+      this.vm.setProp(t, 'links', this.vm.deepWrap(e))
+      return t
+    },
+    eventName: 'auth',
+    zResultSchema: _$$N.AuthResultSchema,
+    rejectMessage: 'Promise returned from \'auth\' event rejected. Unable to authenticate.',
+    defaultResult: null,
+  })
+
   getNode = (e) => {
     let t = this.vm
     let i = this.privateSceneGraph
@@ -866,7 +770,58 @@ class PluginRuntime {
     return s
   }
 
-  constructor(vm, options) {
+  spellCheckCallback = this.createPromiseCallback({
+    makeInputEvent: (e) => {
+      let t = this.vm.newObject()
+      this.vm.setProp(t, 'text', this.vm.newString(e))
+      return t
+    },
+    eventName: 'textreview',
+    zResultSchema: _$$N.TextReviewResultSchema,
+    defaultResult: [],
+    rejectMessage: 'Promise returned from \'textreview\' event rejected. Unable to show text review suggestions.',
+  })
+
+  legacyCodegenCallback = this.createPromiseCallback({
+    makeInputEvent: (e) => {
+      let t = this.vm.newObject()
+      let i = this.nodeFactory.createNode(e, 'codegen')
+      this.vm.setProp(t, 'node', i)
+      return t
+    },
+    eventName: 'codegen',
+    zResultSchema: _$$N.CodegenResultSchema,
+    defaultResult: [],
+    rejectMessage: 'Promise returned from codegen event rejected. Unable to generate code.',
+  })
+
+  codegenCallback = this.createPromiseCallback({
+    makeInputEvent: (e) => {
+      let t = this.vm.newObject()
+      let i = this.nodeFactory.createNode(e, 'generate')
+      this.vm.setProp(t, 'node', i)
+      this.vm.setProp(t, 'language', this.vm.newString(this.getCodegenLanguage()))
+      return t
+    },
+    eventName: 'generate',
+    zResultSchema: _$$N.CodegenResultSchema,
+    defaultResult: [],
+    rejectMessage: 'Promise returned from codegen \'generate\' event rejected. Unable to generate code.',
+  })
+
+  linkPreviewCallback = this.createPromiseCallback({
+    makeInputEvent: (e) => {
+      let t = this.vm.newObject()
+      this.vm.setProp(t, 'link', this.vm.deepWrap(e))
+      return t
+    },
+    eventName: 'linkpreview',
+    zResultSchema: _$$N.LinkPreviewResultSchema,
+    defaultResult: null,
+    rejectMessage: 'Promise returned from \'linkpreview\' event rejected. Unable to generate preview.',
+  })
+
+  constructor(vm: NoOpVm, options: PluginOptions) {
     this.vm = vm
     this.options = options
     this.visualBellCounter = 0
@@ -882,64 +837,7 @@ class PluginRuntime {
     this.checkoutRequested = false
     this.widgetManager = undefined
     this.skipInvisibleInstanceChildren = false
-    this.spellCheckCallback = this.createPromiseCallback({
-      makeInputEvent: (e) => {
-        let t = this.vm.newObject()
-        this.vm.setProp(t, 'text', this.vm.newString(e))
-        return t
-      },
-      eventName: 'textreview',
-      zResultSchema: _$$N.TextReviewResultSchema,
-      defaultResult: [],
-      rejectMessage: 'Promise returned from \'textreview\' event rejected. Unable to show text review suggestions.',
-    })
-    this.legacyCodegenCallback = this.createPromiseCallback({
-      makeInputEvent: (e) => {
-        let t = this.vm.newObject()
-        let i = this.nodeFactory.createNode(e, 'codegen')
-        this.vm.setProp(t, 'node', i)
-        return t
-      },
-      eventName: 'codegen',
-      zResultSchema: _$$N.CodegenResultSchema,
-      defaultResult: [],
-      rejectMessage: 'Promise returned from codegen event rejected. Unable to generate code.',
-    })
-    this.codegenCallback = this.createPromiseCallback({
-      makeInputEvent: (e) => {
-        let t = this.vm.newObject()
-        let i = this.nodeFactory.createNode(e, 'generate')
-        this.vm.setProp(t, 'node', i)
-        this.vm.setProp(t, 'language', this.vm.newString(this.getCodegenLanguage()))
-        return t
-      },
-      eventName: 'generate',
-      zResultSchema: _$$N.CodegenResultSchema,
-      defaultResult: [],
-      rejectMessage: 'Promise returned from codegen \'generate\' event rejected. Unable to generate code.',
-    })
-    this.linkPreviewCallback = this.createPromiseCallback({
-      makeInputEvent: (e) => {
-        let t = this.vm.newObject()
-        this.vm.setProp(t, 'link', this.vm.deepWrap(e))
-        return t
-      },
-      eventName: 'linkpreview',
-      zResultSchema: _$$N.LinkPreviewResultSchema,
-      defaultResult: null,
-      rejectMessage: 'Promise returned from \'linkpreview\' event rejected. Unable to generate preview.',
-    })
-    this.authCallback = this.createPromiseCallback({
-      makeInputEvent: (e) => {
-        let t = this.vm.newObject()
-        this.vm.setProp(t, 'links', this.vm.deepWrap(e))
-        return t
-      },
-      eventName: 'auth',
-      zResultSchema: _$$N.AuthResultSchema,
-      rejectMessage: 'Promise returned from \'auth\' event rejected. Unable to authenticate.',
-      defaultResult: null,
-    })
+
     this.textReviewRequestRejects = 0
     this.isTextReviewRequestModalOpen = false
     this.isWidget = this.options.apiMode?.type === 'WIDGET'
@@ -948,7 +846,7 @@ class PluginRuntime {
     this.imageStore = new ImageStore()
     this.videoStore = new VideoStore()
     this.documentAccessState = new DocumentAccessState({
-      incrementalMode: this.options.incrementalSafeApi,
+      incrementalMode: this.options.incrementalSafeApi || false,
       stats: options.stats,
       allowIncrementalUnsafeApiCalls: !!options.allowIncrementalUnsafeApiCalls,
     })
@@ -1170,10 +1068,7 @@ class PluginRuntime {
       enableResponsiveSetHierarchyMutations: options.enableResponsiveSetHierarchyMutations,
     })
     let n = this.options.apiMode
-    if (n.type === 'CONSOLE_SHIM') {
-      this.uiHandle = n.uiHandle
-    }
-    else if (function (e) {
+    const getUI = function (e: PluginOptions['apiMode']) {
       switch (e.type) {
         case 'GLOBAL_API':
         case 'CONSOLE_SHIM':
@@ -1185,14 +1080,18 @@ class PluginRuntime {
         case 'PLUGIN':
           return e.noOpUI
       }
-    }(n)) {
-      this.uiHandle = new _x()
+    }
+    if (n.type === 'CONSOLE_SHIM') {
+      this.uiHandle = n.uiHandle
+    }
+    else if (getUI(n)) {
+      this.uiHandle = new DummyUIManager()
     }
     else {
       let t = n.type !== 'GLOBAL_API' && n.type !== 'SECURITY_CHECK'
-      this.uiHandle = new mN(vm.vmType, this.options.pluginID, this.options.titleIconURL, this.options.name, this.options.validatedPermissions.permissions, this.isWidget, this.isWidget ? JSON.parse(this.options.command || '{}') : {}, t, this.uiCancelCallback, this.iframeMessageHandler, this.options.allowedDomains, this.options.isLocal, this.options.triggeredFrom, this.options.capabilities)
+      this.uiHandle = new PluginUIManager(vm.vmType, this.options.pluginID, this.options.titleIconURL, this.options.name, this.options.validatedPermissions.permissions, this.isWidget, this.isWidget ? JSON.parse(this.options.command || '{}') : {}, t, this.uiCancelCallback, this.iframeMessageHandler, this.options.allowedDomains, this.options.isLocal, this.options.triggeredFrom, this.options.capabilities)
     }
-    if (this.vm instanceof NoOpVm || this.vm instanceof ScopedNoOpVm) {
+    if (this.vm instanceof NoOpVm || (this.vm as any) instanceof ScopedNoOpVm) {
       // No additional event callbacks needed for NoOp VMs
     }
     else {
@@ -5274,7 +5173,7 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
     let {
       localPlugins,
     } = debugState.getState()
-    return Object.values(localPlugins).find(t => t.plugin_id === e)
+    return Object.values(localPlugins).find((t:any) => t.plugin_id === e)
   }
 
   getPlugin() {
@@ -6141,13 +6040,13 @@ Move figma.showUI outside the callback and use figma.ui.postMessage within the c
     })
 
     // Widget ID hook functions
-    const getWidgetId = () => vm.newString(widgetManager.getCurrentWidgetNodeId())
+    const getWidgetId = () => vm.newString(widgetManager!.getCurrentWidgetNodeId())
     this.defineWidgetHookFunction(widgetApiObject, vm, widgetManager, 'useWidgetId', getWidgetId)
     this.defineWidgetHookFunction(widgetApiObject, vm, widgetManager, 'useWidgetNodeId', getWidgetId)
 
     // Effect hook
     this.defineWidgetHookFunction(widgetApiObject, vm, widgetManager, 'useEffect', (effectCallback) => {
-      widgetManager.addEffect(effectCallback)
+      widgetManager!.addEffect(effectCallback)
       return vm.undefined
     })
 
@@ -10019,7 +9918,7 @@ if (typeof globalThis !== "undefined" && !("ReadableStream" in globalThis)) {
               let a = this.nodeFactory.createNode(n.getID(), 'figma.reconcileNodeFromJSXAsync')
               resolve(a)
             }
-            catch (t) {
+            catch (t:any) {
               reject(e.newString(t.message))
             }
           })())

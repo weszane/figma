@@ -1,4 +1,4 @@
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { fileEntityDataMapper } from "../905/943101";
 import { FPermissionLevelType, FViewPermissionType } from "../figma_app/191312";
 import { PS } from "../figma_app/598018";
@@ -35,7 +35,7 @@ export function $$f5(e) {
   return !!e.has_proto_link_password && e.proto_link_access === FViewPermissionType.VIEW;
 }
 export function $$_8() {
-  return d4(e => e.fileByKey);
+  return useSelector(e => e.fileByKey);
 }
 export const Cn = C;
 export const Oi = $$p1;

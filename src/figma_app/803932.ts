@@ -1,6 +1,6 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useCallback, useMemo, useEffect } from "react";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { debounce } from "../905/915765";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { E as _$$E } from "../905/632989";
@@ -44,7 +44,7 @@ import { _p, Cm, d1 } from "../figma_app/826998";
 import { As, Om, mL, LK, bE, DQ, ab, $f, zz, Bx, vQ, it, n as _$$n, UU, y4, Gz as _$$Gz, Ul, VB, yW, K5, cZ, fz, lF, $ as _$$$, ZM } from "../figma_app/651425";
 import { q as _$$q2, x as _$$x } from "../figma_app/777660";
 var h = _;
-let $ = (e) => Number(e).toLocaleString("en", {
+let $ = e => Number(e).toLocaleString("en", {
   style: "percent",
   maximumFractionDigits: 2
 });
@@ -170,7 +170,7 @@ function et({
     }), !l && jsx($$Q0, {
       className: eS(),
       blendMode: e.blendMode,
-      onError: (t) => {
+      onError: t => {
         let r = TypeError(`Expected string | undefined, got ${typeof t}`);
         console.error(r);
         $D(_$$e.DEVELOPER_TOOLS, r, {
@@ -263,7 +263,7 @@ function ei({
     }), !l && jsx($$Q0, {
       className: eS(),
       blendMode: a.blendMode,
-      onError: (e) => {
+      onError: e => {
         let r = TypeError(`Expected string | undefined, got ${typeof e}`);
         console.error(r);
         $D(_$$e.DEVELOPER_TOOLS, r, {
@@ -311,7 +311,7 @@ function ea(e) {
       }),
       indent: !0,
       blendMode: e.paint.blendMode,
-      onError: (t) => {
+      onError: t => {
         let r = TypeError(`Expected string | undefined, got ${typeof t}`);
         console.error(r);
         $D(_$$e.DEVELOPER_TOOLS, r, {
@@ -510,26 +510,26 @@ export function $$ec9(e) {
   return e.visible && e.type && J.has(e.type);
 }
 export function $$eu10() {
-  let e = d4((e) => e.mirror.selectionProperties.fillPaints);
+  let e = useSelector(e => e.mirror.selectionProperties.fillPaints);
   let t = _$$rb();
   let r = useMemo(() => !e || gl(e) ? [] : e, [e]);
-  let n = pF((e) => _$$b(e.mirror.selectionProperties, "inheritFillStyleKey"));
-  let s = d4(_$$e_);
-  let o = d4((e) => e.mirror.selectionProperties.inheritFillStyleKey);
-  let l = d4((e) => e.mirror.selectionProperties.styleIdForFill);
+  let n = pF(e => _$$b(e.mirror.selectionProperties, "inheritFillStyleKey"));
+  let s = useSelector(_$$e_);
+  let o = useSelector(e => e.mirror.selectionProperties.inheritFillStyleKey);
+  let l = useSelector(e => e.mirror.selectionProperties.styleIdForFill);
   let d = Fk((e, t) => t ? e.getStyleNodeByRef(t)?.guid : void 0, l?.assetRef);
   let c = t && _$$Ku(t);
   let u = Ig();
   let _ = o ? Gp(o, d ? [d] : [], s) : void 0;
-  let h = r.filter($$ec9).map((e) => dc(e, u, c || j0r.ALL_FILLS));
+  let h = r.filter($$ec9).map(e => dc(e, u, c || j0r.ALL_FILLS));
   return _ && n ? [rP(n, _, h)] : h;
 }
 export function $$ep11() {
-  let e = d4((e) => e.mirror.selectionProperties.textDecorationFillPaints);
-  let t = d4((e) => e.mirror.selectionProperties.textDecoration);
+  let e = useSelector(e => e.mirror.selectionProperties.textDecorationFillPaints);
+  let t = useSelector(e => e.mirror.selectionProperties.textDecoration);
   let r = useMemo(() => "UNDERLINE" !== t || !e || gl(e) ? [] : e, [t, e]);
   let n = Ig();
-  return r.filter($$ec9).map((e) => dc(e, n, j0r.TEXT_FILL));
+  return r.filter($$ec9).map(e => dc(e, n, j0r.TEXT_FILL));
 }
 let e_ = () => {
   let e = jY();
@@ -537,13 +537,13 @@ let e_ = () => {
   let r = Q();
   let n = v4();
   let s = m0();
-  let o = d4((e) => $u(e) > 1 ? e.mirror.selectionPaints.paints : e.mirror.selectionPaints.paintsDirectlyOnSingleNode);
+  let o = useSelector(e => $u(e) > 1 ? e.mirror.selectionPaints.paints : e.mirror.selectionPaints.paintsDirectlyOnSingleNode);
   let l = Ig();
-  let d = useMemo(() => o.filter((e) => $$ec9(e.paint)).map((e) => dc(e.paint, l)), [o, l]);
-  let c = d4((e) => $u(e) > 1 ? e.mirror.selectionPaints.styles : e.mirror.selectionPaints.stylesDirectlyOnSingleNode);
-  let u = d4(_$$e_);
+  let d = useMemo(() => o.filter(e => $$ec9(e.paint)).map(e => dc(e.paint, l)), [o, l]);
+  let c = useSelector(e => $u(e) > 1 ? e.mirror.selectionPaints.styles : e.mirror.selectionPaints.stylesDirectlyOnSingleNode);
+  let u = useSelector(_$$e_);
   let p = useMemo(() => {
-    let t = c.map((e) => ({
+    let t = c.map(e => ({
       ds: Gp(e.styleKey, e.styleGUIDs, u),
       name: e.styleName
     }));
@@ -557,7 +557,7 @@ let e_ = () => {
         ...t.value,
         style_type: "FILL"
       } : t.value;
-      let a = (e) => e.filter($$ec9).map((e) => dc(e, l));
+      let a = e => e.filter($$ec9).map(e => dc(e, l));
       let s = QH(i);
       if (s && "FILL" === s.type) r.push(rP(n, t, a(s.fillPaints)));else {
         let i = e.get(t.value.node_id);
@@ -586,7 +586,7 @@ function em(e) {
   });
 }
 export function $$eg7(e) {
-  let t = wA();
+  let t = useDispatch();
   let r = m0();
   let o = Fj(e.color.dsStyle.value.key);
   let l = e.color.dsStyle.kind;
@@ -636,7 +636,7 @@ export function $$eg7(e) {
         className: yW,
         value: e.color.name
       })]
-    }), !r && e.color.paints.map((t) => jsx("div", {
+    }), !r && e.color.paints.map(t => jsx("div", {
       "data-testid": "stylePaintRow",
       children: jsx($$ed2, {
         format: e.format,
@@ -710,7 +710,7 @@ export function $$eI1() {
   let e = Ku();
   let t = m0();
   let r = SV("inspection_panel_color_format_change");
-  let a = useCallback((e) => {
+  let a = useCallback(e => {
     UK().colorFormat.set(+e);
     r({
       value: _$$F.format(+e)
@@ -725,7 +725,7 @@ export function $$eI1() {
         children: _$$F.format(e)
       })
     }), jsx(mc, {
-      children: (t ? eb : eT).map((e) => jsx(c$, {
+      children: (t ? eb : eT).map(e => jsx(c$, {
         value: e.toString(),
         children: _$$F.format(e)
       }, e))

@@ -1,7 +1,7 @@
 import { Ju } from "../905/102752";
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useState, useCallback } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
@@ -22,7 +22,7 @@ export let $$b0 = Ju(function (e) {
     source,
     requesterCurrentLevel
   } = e;
-  let u = wA();
+  let u = useDispatch();
   let g = () => {
     u(Lo());
   };

@@ -2,7 +2,7 @@ import { useMemo, useCallback, useSyncExternalStore } from "react";
 import { f } from "../905/693155";
 import { M4 } from "../905/609396";
 import { vF, J4 } from "../figma_app/290870";
-import { bN } from "../vendor/514228";
+import { shallowEqual } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
 function d(e, t, i, n) {
   let r = new Set(t);
@@ -129,8 +129,8 @@ function u({
   inclusion: n,
   childIds: r,
   ...a
-}, s = bN) {
-  return e === n && bN(t, r) && s(i, a);
+}, s = shallowEqual) {
+  return e === n && shallowEqual(t, r) && s(i, a);
 }
 export function $$p0(e, t) {
   return useMemo(() => {

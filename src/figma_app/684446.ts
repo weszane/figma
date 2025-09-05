@@ -1,5 +1,5 @@
 import { useMemo, useState, useEffect } from "react";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { sortByPropertyWithOptions } from "../figma_app/656233";
 import { A } from "../905/920142";
 import { s as _$$s } from "../905/573154";
@@ -10,7 +10,7 @@ import { dq } from "../905/845253";
 import { C5, D1, hX } from "../figma_app/614170";
 export let $$_1 = e => `LICENSE_GROUP_GET_${e}`;
 export function $$h3(e) {
-  let t = d4(({
+  let t = useSelector(({
     licenseGroups: e
   }) => e);
   let r = dq();
@@ -25,7 +25,7 @@ export function $$m8(e, t = !0) {
   let [s, d] = useState(!1);
   let [u, p] = useState(!1);
   let [_, h] = useState({});
-  let g = wA();
+  let g = useDispatch();
   useEffect(() => {
     (async () => {
       if (!r && !s && !u && t) {
@@ -53,7 +53,7 @@ export function $$m8(e, t = !0) {
   };
 }
 export function $$g5() {
-  return d4(e => !!e.currentUserOrgId && $$f6(e.orgById[e.currentUserOrgId], e.licenseGroups));
+  return useSelector(e => !!e.currentUserOrgId && $$f6(e.orgById[e.currentUserOrgId], e.licenseGroups));
 }
 export function $$f6(e, t) {
   return !!e?.bigma_enabled && (!!e?.license_groups_count || !!Object.keys(t).length);

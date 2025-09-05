@@ -6,7 +6,7 @@ import { Pt } from "../figma_app/806412";
 import { tx } from "../905/303541";
 import { B } from "../905/969273";
 import { _0, PI, sZ } from "../figma_app/948389";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { getFeatureFlags } from "../905/601108";
 import { e as _$$e } from "../905/280005";
 import { RK } from "../figma_app/815170";
@@ -146,7 +146,7 @@ export function $$R1({
     buttons: t
   }) {
     let i = function () {
-      let e = wA();
+      let e = useDispatch();
       return useCallback(() => {
         let t = getFeatureFlags().ai_ga ? _t : d7;
         _$$e(t) || e(RK({

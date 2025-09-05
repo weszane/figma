@@ -1,23 +1,23 @@
 import { useCallback } from "react";
-import { Pj } from "../vendor/514228";
+import { useStore } from "../vendor/514228";
 import { A } from "../vendor/90566";
 import { ds, GS, Fr } from "../figma_app/314264";
 export function $$o2() {
-  let e = Pj();
+  let e = useStore();
   return useCallback((t, r, n) => {
     let i = e.getState();
     ds(t, i.openFile?.key, i, r, n);
   }, [e]);
 }
 export function $$l4() {
-  let e = Pj();
+  let e = useStore();
   return useCallback((t, r) => {
     let n = e.getState();
     GS(t, n.openFile?.key ?? "", n, r ?? {});
   }, [e]);
 }
 export function $$d3() {
-  let e = Pj();
+  let e = useStore();
   return useCallback((t, r, n) => {
     let i = e.getState();
     let a = i.openFile?.key;
@@ -29,7 +29,7 @@ export function $$d3() {
   }, [e]);
 }
 export function $$c0() {
-  let e = Pj();
+  let e = useStore();
   return useCallback((t, r, n) => {
     let i = e.getState();
     let a = i.openFile?.key;
@@ -41,7 +41,7 @@ export function $$c0() {
   }, [e]);
 }
 export function $$u5() {
-  let e = Pj();
+  let e = useStore();
   return useCallback((t, r, n) => {
     let i = e.getState();
     let a = i.currentUserOrgId ?? "";

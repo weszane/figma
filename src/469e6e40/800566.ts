@@ -1,6 +1,6 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useState } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { b as _$$b, c as _$$c } from "../905/308099";
 import { s as _$$s } from "../905/932270";
 import { J } from "../905/270045";
@@ -136,7 +136,7 @@ export let $$I0 = Ju(function (e) {
   let d = o.data?.org;
   let c = new C(extensionType);
   let g = c.getSettingsText();
-  let x = wA();
+  let x = useDispatch();
   let v = () => {
     hasBackButton && x(Lo());
     x(Lo());

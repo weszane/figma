@@ -1,5 +1,5 @@
 import { useCallback, useEffect } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
 import { getFeatureFlags } from "../905/601108";
 import { eU, Xr, md } from "../figma_app/27355";
@@ -46,7 +46,7 @@ export function $$I2({
   fileKey: e
 }) {
   let t = Xr($$b3);
-  let r = wA();
+  let r = useDispatch();
   let a = iZ()?.id;
   let s = Oc();
   return {
@@ -122,7 +122,7 @@ export function $$v0({
   let a = JW(e);
   let s = md($$b3);
   let l = Xr($$b3);
-  let u = wA();
+  let u = useDispatch();
   let p = useCallback(() => {
     l({
       inProgress: !1,

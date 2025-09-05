@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useMemo, useRef, useCallback, memo } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { N as _$$N } from "../905/720559";
 import { RR } from "../figma_app/338442";
 import { rXF } from "../figma_app/763686";
@@ -132,7 +132,7 @@ function ec({
   recordingKey: s
 }) {
   let [n, l] = sL();
-  let a = wA();
+  let a = useDispatch();
   let o = Um();
   let d = cJ();
   let p = !qg(n, "PASS_THROUGH");
@@ -315,7 +315,7 @@ let $$e_0 = memo(function (e) {
     recordingKey: e.recordingKey,
     rowRef: t
   });
-  let W = wA();
+  let W = useDispatch();
   let $ = handleMirroring && isVectorEditMode && jsx(Cs, {
     handleMirroring,
     recordingKey: Pt(e, "mirroring")

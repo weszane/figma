@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useRef } from "react";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { b as _$$b, q7, mc, bL } from "../figma_app/860955";
 import { u as _$$u } from "../905/65923";
 import { bL as _$$bL, O6, HG } from "../905/598775";
@@ -36,7 +36,7 @@ var u = m;
 let F = parsePxNumber(m52);
 let B = parsePxNumber(Ko3);
 function U(e) {
-  let t = d4(e => e.multiplayer);
+  let t = useSelector(e => e.multiplayer);
   return "sessionID" in e && t.observingSessionID === e.sessionID;
 }
 var H = (e => (e.CURRENT_USER = "current_user", e.FILE_CREATOR = "file_creator", e))(H || {});
@@ -50,7 +50,7 @@ function V(e) {
     disableSpotlightAnimation
   } = e;
   let C = q5();
-  let E = d4(e => e.multiplayer);
+  let E = useSelector(e => e.multiplayer);
   let A = iZ();
   let L = U(user);
   let {
@@ -61,8 +61,8 @@ function V(e) {
   let V = A?.id === user.userID;
   let [q, z] = useState(!1);
   let Z = useRef(null);
-  let $ = wA();
-  let K = "prototype" === d4(e => e.selectedView).view;
+  let $ = useDispatch();
+  let K = "prototype" === useSelector(e => e.selectedView).view;
   let W = jsx(Ro, {
     entity: {
       ...user,
@@ -287,8 +287,8 @@ function V(e) {
   }, user.userID);
 }
 function q(e) {
-  let t = d4(e => e.multiplayer);
-  let n = d4(e => "prototype" === e.selectedView.view ? e.prototype.showProgressBar : _$$T(e?.progressBarState?.mode));
+  let t = useSelector(e => e.multiplayer);
+  let n = useSelector(e => "prototype" === e.selectedView.view ? e.prototype.showProgressBar : _$$T(e?.progressBarState?.mode));
   let a = t.allUsers.length > 1;
   Av();
   let {
@@ -358,7 +358,7 @@ export function $$z0(e) {
     hasBorder,
     hidePopover
   } = e;
-  let h = wA();
+  let h = useDispatch();
   let f = callMetadata && jsx(_$$i, {
     userId: user.userID,
     userName: user.name,

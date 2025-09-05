@@ -1,5 +1,5 @@
 import { useCallback, useRef } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { getFeatureFlags } from "../905/601108";
 import { am } from "../figma_app/901889";
 import { $ } from "../905/455748";
@@ -16,7 +16,7 @@ import { rO } from "../figma_app/409807";
 export function $$E0() {
   let [e, t] = lJ("stackCounterAlignItems");
   let r = am();
-  let a = d4(Sh);
+  let a = useSelector(Sh);
   let o = T(e, "CENTER", e => !e || gl(e) || "BASELINE" === e);
   return useCallback((e, n) => {
     t(e ? "BASELINE" : o);

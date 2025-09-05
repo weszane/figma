@@ -49,7 +49,7 @@ import { k as _$$k } from '../figma_app/618031';
 import { Ro } from '../figma_app/805373';
 import { zRx } from '../figma_app/822011';
 import { fu } from '../figma_app/831799';
-import { wA } from '../vendor/514228';
+import { useDispatch } from '../vendor/514228';
 FPlanNameType.STUDENT;
 FPlanNameType.STARTER;
 let M = N_.dict(() => '-');
@@ -193,7 +193,7 @@ function es({
 }
 let en = zRx.INSTANT_APPROVAL_IF_AVAILABLE_SEATS;
 function er(e) {
-  let t = wA();
+  let t = useDispatch();
   let {
     currency,
     renewalTerm

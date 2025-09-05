@@ -1,4 +1,4 @@
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { getFeatureFlags } from "../905/601108";
 import { sx } from "../905/449184";
 import { ce } from "../figma_app/347146";
@@ -199,7 +199,7 @@ export function $$G5(e, t) {
 export function $$z7(e, t) {
   let i = TA();
   let n = e || t;
-  let s = d4(e => getFeatureFlags().limited_plan_spaces ? e.plans : i ? e.authedUsers.byId[i]?.plans : null);
+  let s = useSelector(e => getFeatureFlags().limited_plan_spaces ? e.plans : i ? e.authedUsers.byId[i]?.plans : null);
   return !!s?.find(e => e.plan_id === n);
 }
 export const D4 = $$V0;

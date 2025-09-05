@@ -12,7 +12,7 @@ import { v$ } from "../figma_app/455722";
 import { Fm } from "../figma_app/275462";
 import { PF } from "../figma_app/930386";
 import { G } from "../5430/654859";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { B } from "../905/714743";
 import { ky, Dy, Je } from "../figma_app/925970";
 import { A as _$$A } from "../1617/586892";
@@ -25,7 +25,7 @@ function b({
   inputPlaceholder: o
 }) {
   let a = useRef(null);
-  let c = wA();
+  let c = useDispatch();
   let [d, u] = useState(!1);
   return jsxs("div", {
     className: "search_input_mobile--mobileSearchContainer--VsAJK text--fontPos13--xW8hS text--_fontBase--QdLsd",
@@ -49,12 +49,12 @@ function b({
         spellCheck: !1,
         ref: a,
         placeholder: o ?? _$$t("community.search.search_community"),
-        onChange: (e) => {
+        onChange: e => {
           let s = e.currentTarget.value;
           r(s);
           t && s && n(s);
         },
-        onKeyDown: (e) => {
+        onKeyDown: e => {
           let r = e.currentTarget.value.trim();
           "Enter" === e.key ? (e.preventDefault(), n(r), a.current?.blur(), t && !r ? c(ky()) : !t && r && c(Je({
             entryPoint: "community"
@@ -63,7 +63,7 @@ function b({
         required: !0
       }), jsx("button", {
         className: "search_input_mobile--clearInputButton--cjPyc",
-        onClick: (e) => {
+        onClick: e => {
           r("");
           e.preventDefault();
           a.current?.blur();

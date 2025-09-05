@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback, useState, memo, useEffect, useMemo, useRef, PureComponent, useLayoutEffect, Component, useId, createContext, useContext } from "react";
-import { d4, wA, Ng } from "../vendor/514228";
+import { useSelector, useDispatch, connect } from "../vendor/514228";
 import { lQ } from "../905/934246";
 import { assertNotNullish } from "../figma_app/95419";
 import { M3 } from "../figma_app/91703";
@@ -303,7 +303,7 @@ function T(e) {
   });
 }
 function X() {
-  return d4(e => {
+  return useSelector(e => {
     var t;
     t = e.selectedView;
     return Wl(t) || $A(t);
@@ -313,7 +313,7 @@ function Q(e) {
   return "filePermissionsModalTab" in e && e.filePermissionsModalTab || A5.INVITE;
 }
 function J() {
-  return d4(e => Q(e.selectedView));
+  return useSelector(e => Q(e.selectedView));
 }
 function ee(e) {
   let t = HW();
@@ -346,12 +346,12 @@ function eA({
   file: e,
   repo: t
 }) {
-  let i = d4(e => e.sharingAttributionContextKey);
-  let n = d4(e => {
+  let i = useSelector(e => e.sharingAttributionContextKey);
+  let n = useSelector(e => {
     let t = e.selectedView;
     return t?.codeNodeId;
   });
-  let s = d4(e => {
+  let s = useSelector(e => {
     let t = e.selectedView;
     return t?.sitesView;
   });
@@ -404,7 +404,7 @@ function ey({
   file: e,
   repo: t
 }) {
-  let i = wA();
+  let i = useDispatch();
   let n = eA({
     file: e,
     repo: t
@@ -500,7 +500,7 @@ function eM({
   file: e,
   repo: t
 }) {
-  let i = wA();
+  let i = useDispatch();
   let s = eA({
     file: e,
     repo: t
@@ -614,7 +614,7 @@ let eX = Ju(function (e) {
     fileKey,
     hasPasswordSet
   } = e;
-  let s = wA();
+  let s = useDispatch();
   let o = () => s(Lo());
   let l = hS({
     ...e,
@@ -669,7 +669,7 @@ let eQ = Ju(function (e) {
   let {
     fileKey
   } = e;
-  let i = wA();
+  let i = useDispatch();
   let s = () => i(Lo());
   let o = hS({
     ...e,
@@ -702,7 +702,7 @@ function eJ({
   file: t
 }) {
   let i;
-  let r = wA();
+  let r = useDispatch();
   let s = _$$iZ();
   let o = s?.id;
   let l = t.key;
@@ -832,7 +832,7 @@ let to = Ju(function (e) {
       remainingMinutes: i - 60 * n
     };
   }(e.fileKey);
-  let s = wA();
+  let s = useDispatch();
   let [o, l] = useState(600);
   let [d, u] = useState(0);
   let p = () => s(Lo());
@@ -1123,7 +1123,7 @@ function tV(e) {
     overlay: GCV,
     priority: _$$N.DEFAULT_MODAL
   }, [t]);
-  let l = wA();
+  let l = useDispatch();
   let d = _$$zl(tB);
   _$$h2(() => {
     "reset" === d.currentState ? show() : show({
@@ -1171,7 +1171,7 @@ function tV(e) {
 }
 let tW = Ju(function (e) {
   let t = hS(e);
-  let i = wA();
+  let i = useDispatch();
   let [s, o] = useState(!1);
   let [l, d] = useState(!1);
   return jsx(bL, {
@@ -1234,7 +1234,7 @@ let tW = Ju(function (e) {
 });
 function tK(e) {
   let [t, i] = useState(!1);
-  let s = wA();
+  let s = useDispatch();
   let o = !!_$$f("prototype_share_warning_dismissed");
   let l = tv(e.planTier === FPlanNameType.STARTER && !o);
   let d = jsx(_$$K, {});
@@ -1297,7 +1297,7 @@ function tY(e) {
 function tX({
   fileKey: e
 }) {
-  let t = wA();
+  let t = useDispatch();
   let i = jsx(_$$x, {});
   let s = useCallback(() => {
     $t({
@@ -1384,7 +1384,7 @@ function ir() {
     let e = !!kD();
     let t = J3();
     let i = q5();
-    let n = wA();
+    let n = useDispatch();
     return {
       openMakePublishFlow: async r => {
         if (i) {
@@ -1635,7 +1635,7 @@ function is({
   }) {
     let o = e.key;
     let l = e.editor_type;
-    let d = wA();
+    let d = useDispatch();
     let c = _$$iq();
     let u = _$$o();
     let p = tn(o);
@@ -1703,7 +1703,7 @@ function is({
     let i = e.file.canEdit;
     let s = qZ();
     let o = t && i && s && getFeatureFlags().aip_flower_garden_share;
-    let l = wA();
+    let l = useDispatch();
     let d = useCallback(() => {
       l(Ce());
       _$$u({
@@ -1719,7 +1719,7 @@ function is({
     file: e
   });
   let et = function (e) {
-    let t = wA();
+    let t = useDispatch();
     let i = cD();
     return e.file.isDraftFileLG && e.file.canMove && (e.org || i && w5(e.team)) ? jsx(tf, {
       onClick: () => {
@@ -1811,7 +1811,7 @@ function io({
   planTier: d
 }) {
   var c;
-  return (c = A5.INVITE, d4(e => Q(e.selectedView) === c)) ? jsx(is, {
+  return (c = A5.INVITE, useSelector(e => Q(e.selectedView) === c)) ? jsx(is, {
     file: e,
     repo: t,
     org: r,
@@ -2066,7 +2066,7 @@ function iG({
   }), [e, i, n]);
 }
 function i$(e) {
-  let t = wA();
+  let t = useDispatch();
   return jsxs(Fragment, {
     children: [jsx(_$$L3, {
       disabled: e.sharedContainerSetting?.autogen_password_controls,
@@ -2373,7 +2373,7 @@ let ne = (e, t) => e === FPermissionLevelType.ORG_EDIT && t ? _$$t("permissions_
   containerName: t.name
 }) : _$$t("permissions_modal.file_share_settings.only_invited_people");
 function nt(e) {
-  let t = wA();
+  let t = useDispatch();
   let i = Um();
   let [s, o] = useState(null);
   let l = e.orgMaxExpirationInHrs ? e.currentTimestamp.clone().add(e.orgMaxExpirationInHrs, "hours") : null;
@@ -2513,7 +2513,7 @@ function na({
   fileRoles: c,
   currentUser: u
 }) {
-  let p = wA();
+  let p = useDispatch();
   let g = _$$U();
   let _ = _$$L();
   let b = _$$o();
@@ -2558,7 +2558,7 @@ function na({
     org: i,
     currentUser: n
   }) {
-    let s = wA();
+    let s = useDispatch();
     let o = e.editor_type !== FFileType.WHITEBOARD && i && i.bigma_enabled ? e.mainFileLinkExpirationConfig?.id ?? "optimistic" : null;
     return useCallback((i, r, a) => {
       t && e.key === t.default_file_key ? s(_$$og({
@@ -3009,7 +3009,7 @@ function ns(e) {
   return null;
 }
 function nc(e) {
-  let t = wA();
+  let t = useDispatch();
   let i = Xr(ti);
   return jsx(fu, {
     name: "google_device_screenshare_disclaimer_modal",
@@ -3105,9 +3105,9 @@ function nk({
   });
 }
 let nR = Ju(function () {
-  let e = wA();
+  let e = useDispatch();
   let t = useCallback(() => e(Ce()), [e]);
-  let i = d4(e => e.currentUserOrgId);
+  let i = useSelector(e => e.currentUserOrgId);
   let [s] = IT(Eh.OrgAdminsQuery({
     orgId: i
   }), {
@@ -3146,7 +3146,7 @@ let nR = Ju(function () {
   });
 }, "AccessNeededToPublishInOrgModal");
 let nN = Ju(function () {
-  let e = wA();
+  let e = useDispatch();
   let t = q5();
   let i = useCallback(() => e(Ce()), [e]);
   let s = useCallback(() => {
@@ -3198,7 +3198,7 @@ let n2 = Ju(function ({
   onSuccess: l,
   onError: d
 }) {
-  let u = wA();
+  let u = useDispatch();
   let p = Xr(pz);
   let [m, g] = useState(!1);
   let {
@@ -3948,7 +3948,7 @@ class rt extends Component {
   }
 }
 rt.displayName = "FilePermissionsFilePublishTag";
-let ri = Ng((e, t) => {
+let ri = connect((e, t) => {
   let i = e.openFile;
   let n = t.editingHubFile;
   let r = e.mirror?.appModel?.pagesList || [];
@@ -3987,12 +3987,12 @@ let ri = Ng((e, t) => {
   };
 })(rt);
 function rn(e) {
-  let t = wA();
+  let t = useDispatch();
   let i = Pc();
-  let s = d4(e => e.modalShown?.type === jS);
+  let s = useSelector(e => e.modalShown?.type === jS);
   let o = q5();
   let l = o?.trackTags?.isTemplate || !1;
-  let d = d4(e => o ? e.figFilePublishedAsHubFile[o.key] : void 0);
+  let d = useSelector(e => o ? e.figFilePublishedAsHubFile[o.key] : void 0);
   let {
     canPublishAsHubFile,
     reason
@@ -4006,7 +4006,7 @@ function rn(e) {
   let {
     publishableComponentNodeIds,
     localComponents
-  } = d4(qG(Pn, _$$o2.HUBFILE), c2);
+  } = useSelector(qG(Pn, _$$o2.HUBFILE), c2);
   let _ = (() => {
     if (o?.editorType === _YF.COOPER) {
       let e = PP({
@@ -4100,7 +4100,7 @@ function rg({
 }) {
   let i = yy();
   let s = lg();
-  let o = wA();
+  let o = useDispatch();
   let l = {
     name: t.publishedByUser?.name || i?.name,
     imgUrl: t.publishedByUser?.imgUrl || i?.img_url
@@ -4162,11 +4162,11 @@ function rb() {
   let p = !!u;
   let g = e?.publishedHubFile?.publishingStatus === FPublicationStatusType.APPROVED_PUBLIC && e.publishedHubFile || null;
   let f = e?.trackTags?.isTemplate || !1;
-  let _ = d4(t => !!(e && t.figFileDuplicatedFromHubFile[e.key]));
-  let A = d4(t => e?.parentOrgId && t.orgById[e.parentOrgId] || void 0);
+  let _ = useSelector(t => !!(e && t.figFileDuplicatedFromHubFile[e.key]));
+  let A = useSelector(t => e?.parentOrgId && t.orgById[e.parentOrgId] || void 0);
   let b = e?.key;
   let v = Pb(e);
-  let I = wA();
+  let I = useDispatch();
   let E = J3();
   let x = JU(E);
   let S = !!Of(e).canPublishAsHubFile;
@@ -4508,7 +4508,7 @@ function rM({
   editorType: t,
   licenseType: i
 }) {
-  let r = wA();
+  let r = useDispatch();
   let {
     getShouldShowCurf,
     getIsEligibleForProvisionalAccess,
@@ -4562,8 +4562,8 @@ function rM({
   });
 }
 function rG(e) {
-  let t = wA();
-  let i = !!d4(e => e.userFlags).dismissed_move_draft_to_project_interstitial_modal;
+  let t = useDispatch();
+  let i = !!useSelector(e => e.userFlags).dismissed_move_draft_to_project_interstitial_modal;
   let r = jsx("p", {
     children: _$$tx("drafts_move_banner.to_add_editors_first_move_this_file_from_drafts_into_a_project.seat_rename")
   });
@@ -4630,7 +4630,7 @@ function rZ(e) {
   });
 }
 let r1 = Ju(function (e) {
-  let t = wA();
+  let t = useDispatch();
   let i = () => {
     t(Lo());
   };
@@ -4683,7 +4683,7 @@ let r1 = Ju(function (e) {
   });
 }, "ConfirmEnableFolderAccessModal");
 let r2 = Ju(function (e) {
-  let t = wA();
+  let t = useDispatch();
   let i = () => {
     t(Lo());
   };
@@ -4723,7 +4723,7 @@ let r2 = Ju(function (e) {
   });
 }, "ConfirmDisableFolderAccessModal");
 function r5(e) {
-  let t = wA();
+  let t = useDispatch();
   let i = _$$o();
   let r = e.folderAccessEnabled && e.canViewFolder;
   let s = () => {
@@ -5041,7 +5041,7 @@ function au({
 function aA(e) {
   let t = Um();
   let i = _$$P();
-  let r = wA();
+  let r = useDispatch();
   let s = mu(e.fileRowResource.file, e.seenState.user_id);
   let o = !!(e.fileRowResource.file.key && e.seenState.user_id);
   let {
@@ -5323,9 +5323,9 @@ function aD({
   fileRoles: t,
   searchResultToken: i
 }) {
-  let r = d4(e => e.autocomplete);
+  let r = useSelector(e => e.autocomplete);
   let s = Pc();
-  let o = d4(e => e.contacts.usersByEmail);
+  let o = useSelector(e => e.contacts.usersByEmail);
   let {
     sharingSuggestions,
     sharingSuggestionIdsToExclude,
@@ -5351,9 +5351,9 @@ function aD({
 function aB({
   isPrototypeInvite: e
 }) {
-  let t = d4(e => e.mirror?.appModel.currentPage);
+  let t = useSelector(e => e.mirror?.appModel.currentPage);
   let i = HW();
-  let n = d4(e => e.prototype);
+  let n = useSelector(e => e.prototype);
   return e ? i ? n?.currentPageId || void 0 : t : void 0;
 }
 function aV({
@@ -5398,7 +5398,7 @@ function aq({
     repo: t,
     org: i
   }) {
-    let n = wA();
+    let n = useDispatch();
     let s = aB({
       isPrototypeInvite: HW()
     });
@@ -5486,7 +5486,7 @@ function a$({
     fileRoles: d,
     inviteLevel: c
   }) {
-    let u = wA();
+    let u = useDispatch();
     let p = HW();
     let g = $Y(e);
     let f = _$$X$("useHandleSendInvitesSubmit");
@@ -5502,7 +5502,7 @@ function a$({
     }) {
       let o = HW();
       let l = X();
-      let d = wA();
+      let d = useDispatch();
       let [c, u] = fp(_$$H2);
       let p = _$$P().usersByEmail;
       let g = Pc();
@@ -5663,10 +5663,10 @@ function aZ({
   dropdownProps: u,
   planRecordId: p
 }) {
-  let h = wA();
+  let h = useDispatch();
   let g = Pc();
-  let f = d4(e => e.autocomplete);
-  let _ = d4(e => e.contacts);
+  let f = useSelector(e => e.autocomplete);
+  let _ = useSelector(e => e.contacts);
   let A = !Um();
   let y = useCallback(e => {
     let i = t?.org_domains || aP;
@@ -5681,7 +5681,7 @@ function aZ({
     return _$$t2(e, t, i);
   }, [t]);
   let v = function (e) {
-    let t = d4(e => e.contacts);
+    let t = useSelector(e => e.contacts);
     let i = Pc().email;
     return useCallback(n => {
       let r = e?.org_domains || aP;
@@ -5759,7 +5759,7 @@ function a0({
 }) {
   let x = _$$X$("InviteTabLoaded");
   let S = YY(x).unwrapOr(!1);
-  let w = wA();
+  let w = useDispatch();
   let C = Pc();
   let {
     hasEditRole,
@@ -5843,7 +5843,7 @@ function a2({
   file: e,
   team: t
 }) {
-  let i = wA();
+  let i = useDispatch();
   return jsx(Cs, {
     variant: "warn",
     children: jsxs(_$$Q, {
@@ -5893,7 +5893,7 @@ function a5({
   planRecordId: w
 }) {
   let C = J();
-  let T = wA();
+  let T = useDispatch();
   let k = HW();
   let R = tv(S === FPlanNameType.STARTER && k);
   switch (C) {
@@ -6148,7 +6148,7 @@ function se({
   folder: t,
   goBack: i
 }) {
-  let r = wA();
+  let r = useDispatch();
   if (!t || !(e.hasEditRole && s5())) return null;
   let s = () => {
     _$$L5.updateFolderAccessEnabled({
@@ -6359,10 +6359,10 @@ function sp({
     planTier,
     planRecordId
   } = useMemo(() => m1(t, e), [e, t]);
-  let W = wA();
+  let W = useDispatch();
   let K = mu(file, i.id);
   let Y = function (e) {
-    let t = wA();
+    let t = useDispatch();
     let i = function (e) {
       let {
         Sprig
@@ -6384,7 +6384,7 @@ function sp({
     }, [t, i]);
   }(t);
   let q = function (e) {
-    let t = d4(e => e.contacts);
+    let t = useSelector(e => e.contacts);
     return useMemo(() => function ({
       rolesByUserId: e,
       contacts: t
@@ -6526,14 +6526,14 @@ export let $$sm0 = Ju(function ({
   });
   return (!function () {
     let e = HW();
-    let t = wA();
+    let t = useDispatch();
     useEffect(() => {
       e && t(_P({
         name: "Prototype Share Opened"
       }));
     }, [t, e]);
   }(), !function (e) {
-    let t = wA();
+    let t = useDispatch();
     useEffect(() => {
       "loaded" === e.status && null === e.data.file && t(Ce());
     }, [e, t]);

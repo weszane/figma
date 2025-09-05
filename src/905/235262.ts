@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useRef, useEffect, createContext, useCallback, useMemo } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { xP, eU, md, fp } from "../figma_app/27355";
 import { k9 } from "../905/19536";
 import { sf } from "../905/929976";
@@ -39,7 +39,7 @@ export function $$I7({
   });
 }
 function E() {
-  let e = wA();
+  let e = useDispatch();
   let t = _6();
   let [i, n] = fp(valueAtom);
   let o = useRef(!0);

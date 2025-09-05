@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { Component } from "react";
-import { Ng } from "../vendor/514228";
+import { connect } from "../vendor/514228";
 import { XHR } from "../905/910117";
 import { nR, $$, vd } from "../figma_app/637027";
 import { v as _$$v } from "../905/755077";
@@ -1644,7 +1644,7 @@ export function $$C1(e) {
 }
 w.displayName = "ChangeProfileHandle";
 w.id = "profile-change-handle";
-let T = Ng((e, t) => ({
+let T = connect((e, t) => ({
   loadingState: e.loadingState,
   emailValidatedAt: !!e.user?.email_validated_at,
   communityBlockedAt: !!e.user && !!e.authedUsers.byId[e.user.id].community_blocked_at,

@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { W8Y } from "../figma_app/763686";
 import { eU, Xr, fp, md } from "../figma_app/27355";
 import { am } from "../figma_app/901889";
@@ -40,8 +40,8 @@ export function $$y2() {
 export function $$b5() {
   let e = Xr(Qs);
   let t = E();
-  let r = wA();
-  let o = d4(e => e.mirror.appModel.votingSessionInfo);
+  let r = useDispatch();
+  let o = useSelector(e => e.mirror.appModel.votingSessionInfo);
   return useCallback(n => {
     n && t("meetings_panel_close", n.source);
     e({
@@ -54,7 +54,7 @@ export function $$b5() {
 }
 export function $$T1() {
   let e = md(jo);
-  let t = d4(e => e.music);
+  let t = useSelector(e => e.music);
   let r = C3();
   let n = XM();
   let a = null != e.time && 0 !== e.time.totalTimeMs;

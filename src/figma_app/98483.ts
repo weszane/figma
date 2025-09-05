@@ -1,5 +1,5 @@
 import { useCallback, useMemo } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { isNullish } from "../figma_app/95419";
 import { m1T, Egt, _0v, nzw, glU, mKm, Ez5 } from "../figma_app/763686";
 import { l7, nc } from "../905/189185";
@@ -18,7 +18,7 @@ import { Ui, Zj } from "../905/129884";
 import { a2 } from "../figma_app/762558";
 import { Z } from "../figma_app/221818";
 export function $$I3(e) {
-  let t = wA();
+  let t = useDispatch();
   let r = sT();
   let {
     bigNudgeAmount,
@@ -42,7 +42,7 @@ export function $$I3(e) {
     }));
   }, [t, bigNudgeAmount, smallNudgeAmount]);
   let m = function (e) {
-    let t = d4(e => e.mirror.appModel.activeCanvasEditModeType === m1T.VECTOR);
+    let t = useSelector(e => e.mirror.appModel.activeCanvasEditModeType === m1T.VECTOR);
     let r = useMemo(() => {
       class t extends M {
         getValueForNode(t) {
@@ -78,7 +78,7 @@ export function $$I3(e) {
     key: e,
     setValue: t
   }) {
-    let r = d4(e => e.mirror.appModel.onCanvasNameEditorInfo.mode);
+    let r = useSelector(e => e.mirror.appModel.onCanvasNameEditorInfo.mode);
     return useCallback((n, i) => {
       $$x7(e);
       r !== nzw.NONE && glU.hideOnCanvasNameEditor();
@@ -111,7 +111,7 @@ export function $$v4() {
   let t = kl("stackVerticalSize");
   let r = kl("textAutoResize");
   let n = $$A0();
-  let a = d4(e => {
+  let a = useSelector(e => {
     let t = e.mirror.selectionProperties.numSelectedByType;
     return t && vx(t, "TEXT");
   });
@@ -126,7 +126,7 @@ export function $$v4() {
   };
 }
 export function $$A0() {
-  return d4(e => {
+  return useSelector(e => {
     let t = e.mirror.selectionProperties.numSelectedByType;
     return OU(t, ["LINE", "WASHI_TAPE"]);
   });

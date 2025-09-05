@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useRef, useCallback, forwardRef, useImperativeHandle } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
 import { nzw, qmM, miS, cfv } from "../figma_app/763686";
 import { parsePxInt } from "../figma_app/783094";
@@ -11,20 +11,20 @@ import { Ty8 } from "../figma_app/27776";
 let h = parsePxInt(Ty8);
 export function $$m4() {
   let e = jw();
-  let t = d4(({
+  let t = useSelector(({
     mirror: {
       selectionProperties: e,
       sceneGraphSelection: t,
       appModel: i
     }
   }) => 1 === Object.keys(t).length && e.whiteboardNumSelectedByType && 1 === e.whiteboardNumSelectedByType.SECTION && (e.name || i.onCanvasNameEditorInfo.mode === nzw.SECTION_NAME));
-  let i = d4(({
+  let i = useSelector(({
     mirror: {
       selectionProperties: e,
       sceneGraphSelection: t
     }
   }) => 1 === Object.keys(t).length && e.whiteboardNumSelectedByType && 1 === e.whiteboardNumSelectedByType.STAMP);
-  let r = d4(({
+  let r = useSelector(({
     mirror: {
       selectionProperties: e
     }
@@ -33,7 +33,7 @@ export function $$m4() {
   return "whiteboard" === n ? t ? 40 : i && XN ? 40 : r ? 20 + h / 2 : qmM?.shouldRenderTableUiForSelection() !== miS.HIDE ? 20 + h / 2 : 16 : "cooper" === n ? e ? 40 : 30 : 8;
 }
 export function $$f3() {
-  return d4(e => e.mirror.appModel.hyperlinkLocation);
+  return useSelector(e => e.mirror.appModel.hyperlinkLocation);
 }
 export function $$g1(e, t, i, r) {
   switch (r) {

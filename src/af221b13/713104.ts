@@ -1,6 +1,6 @@
 import { jsx, Fragment } from "react/jsx-runtime";
 import { useState } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { getFeatureFlags } from "../905/601108";
 import { tx, t as _$$t } from "../905/303541";
 import { A } from "../5132/237216";
@@ -16,7 +16,7 @@ import { o as _$$o } from "../5430/992445";
 import { A as _$$A } from "../5724/965092";
 export function $$f0(e) {
   let t = iZ();
-  let i = wA();
+  let i = useDispatch();
   let [f, b] = useState(!0);
   let v = e.resource;
   let j = uF(v);

@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState, useEffect, useCallback, useMemo } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { hS } from "../905/437088";
 import { S as _$$S } from "../905/274480";
 import { J as _$$J } from "../905/270045";
@@ -60,7 +60,7 @@ function F(e) {
   });
 }
 function $$q(e) {
-  let t = wA();
+  let t = useDispatch();
   let {
     planId,
     planType,
@@ -201,7 +201,7 @@ let $$z0 = Ju(function ({
   ...a
 }) {
   let C = hS(a);
-  let N = wA();
+  let N = useDispatch();
   let I = function (e) {
     switch (e) {
       case fm.TEAM:

@@ -22,7 +22,7 @@ import { EX } from "../figma_app/709323";
 import { eN } from "../905/331848";
 import { bL, c$ } from "../905/867927";
 import { q } from "../905/932270";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { Ez5, yTM } from "../figma_app/763686";
 import { XE, u1, Uv } from "../figma_app/91703";
 import { sw } from "../figma_app/914957";
@@ -149,7 +149,7 @@ function $(e) {
 }
 function X(e) {
   let t = function (e) {
-    let t = wA();
+    let t = useDispatch();
     let r = U();
     return useCallback(() => {
       if (r) t(XE());else {

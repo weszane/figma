@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useRef, useState, useCallback, useEffect } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { S } from "../905/274480";
 import { J } from "../905/270045";
 import { J as _$$J } from "../905/614223";
@@ -100,7 +100,7 @@ function v() {
 let w = buildUploadUrl("d67cccad0bd5d4d8f50d8cac15b5ed848027e0a8");
 let T = buildUploadUrl("f9217dd1dac2a765d218e1de9eb6fcbb32a454ec");
 export function $$j0(e) {
-  let t = wA();
+  let t = useDispatch();
   let n = B();
   let o = _$$w({
     rolesToDefaultToOther: ["education"]

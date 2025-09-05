@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { Oin } from "../figma_app/763686";
 import { ty, Rm, Y2, DT } from "../figma_app/320164";
 import { Ay } from "../figma_app/778880";
@@ -112,10 +112,10 @@ function D(e) {
   });
 }
 function k() {
-  let e = wA();
-  let t = d4(tB);
+  let e = useDispatch();
+  let t = useSelector(tB);
   let r = M4.useFile(t?.key || "").data;
-  let i = d4(e => getPermissionsState(e));
+  let i = useSelector(e => getPermissionsState(e));
   let s = Rs(_iU, {
     branchFileKey: t && t?.key || ""
   }, {
@@ -159,11 +159,11 @@ function k() {
 k.displayName = "ArchivedBranchFooter";
 var ea = ei;
 let eE = Ju(function (e) {
-  let t = wA();
+  let t = useDispatch();
   let [r, s] = useState("");
   let [o, d] = useState(!1);
   let c = tS();
-  let u = d4(e => c ? e.loadingState[_$$f.loadingKeyForPayload({
+  let u = useSelector(e => c ? e.loadingState[_$$f.loadingKeyForPayload({
     fileKey: c,
     emailAddress: r
   })] === _$$r.LOADING : null);
@@ -262,7 +262,7 @@ let eb = Ju(function (e) {
     email,
     onChangeEmail
   } = e;
-  let i = wA();
+  let i = useDispatch();
   let s = tS();
   let o = hS({
     ...e,
@@ -411,7 +411,7 @@ function ex({
   });
 }
 function eN() {
-  let e = wA();
+  let e = useDispatch();
   let t = t => {
     e(to({
       type: eb,
@@ -485,7 +485,7 @@ function eC({
   let r = _$$B();
   let i = Y9();
   let s = e ? r : i;
-  let l = wA();
+  let l = useDispatch();
   let c = {
     [ao.key]: ao.value
   };
@@ -541,7 +541,7 @@ function eD({
   let r = _$$B();
   let i = Y9();
   let s = e ? r : i;
-  let l = wA();
+  let l = useDispatch();
   let u = {
     [ao.key]: ao.value
   };
@@ -657,7 +657,7 @@ export function $$ek0() {
   let e = q5();
   let t = iZ();
   let r = nF(!0);
-  let E = d4(e => e.progressBarState.mode);
+  let E = useSelector(e => e.progressBarState.mode);
   let y = ck();
   let b = _$$N();
   let T = !e;

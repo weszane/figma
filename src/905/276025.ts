@@ -1,4 +1,4 @@
-import { bN } from "../vendor/514228";
+import { shallowEqual } from "../vendor/514228";
 import { Iz, eU } from "../figma_app/27355";
 import { resourceUtils } from "../905/989992";
 import { oA } from "../905/663269";
@@ -243,7 +243,7 @@ Iz(e => eU(t => {
   let n = null;
   e.type === FOrganizationLevelType.ORG ? i = e.parentId : e.type === FOrganizationLevelType.TEAM && (n = e.parentId);
   return b(t, i, n);
-}), bN);
+}), shallowEqual);
 Iz(e => eU(t => {
   if (!e) return resourceUtils.disabledSuspendable({
     release: () => {}
@@ -252,7 +252,7 @@ Iz(e => eU(t => {
   let n = null;
   e.type === FOrganizationLevelType.ORG ? i = e.parentId : e.type === FOrganizationLevelType.TEAM && (n = e.parentId);
   return v(t, i, n);
-}), bN);
+}), shallowEqual);
 Iz(e => eU(t => {
   if (!e) return resourceUtils.disabledSuspendable({
     release: () => {}
@@ -261,7 +261,7 @@ Iz(e => eU(t => {
   let n = null;
   e.type === FOrganizationLevelType.ORG ? i = e.parentId : e.type === FOrganizationLevelType.TEAM && (n = e.parentId);
   return I(t, i, n);
-}), bN);
+}), shallowEqual);
 export const Ji = $$R0;
 export const KK = $$T1;
 export const T_ = $$N2;

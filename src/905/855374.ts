@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useRef, useState, useCallback, useMemo, useEffect, forwardRef, memo } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { lQ } from "../905/934246";
 import { isNotNullish, isNullish } from "../figma_app/95419";
 import { getFeatureFlags } from "../905/601108";
@@ -1073,7 +1073,7 @@ function ez(e, t, i, n) {
 }
 let eH = [];
 function eZ(e) {
-  let t = wA();
+  let t = useDispatch();
   let i = e.contextMenuData.selectedVariableRows.map(e => e.variable);
   let s = _$$rN(useCallback(() => {
     if (!N3(i)) {
@@ -1589,7 +1589,7 @@ function tP({
   onChangeVariableSet: i,
   recordingKey: s
 }) {
-  let o = wA();
+  let o = useDispatch();
   let l = Um();
   let d = yp();
   let c = G6(GI(e) ? e.backingVariableSetId : void 0);
@@ -1807,7 +1807,7 @@ let t$ = forwardRef(function ({
   let z = _$$iQ(e, "focus", () => {
     t || d(A.index);
   });
-  let H = d4(e => e.modalShown);
+  let H = useSelector(e => e.modalShown);
   let W = useRef(null);
   let K = H?.type === ec && H?.data.modalID === g.node_id;
   let Y = () => {
@@ -2281,7 +2281,7 @@ function ie({
   setIsDragging: j,
   isDraggable: U
 }) {
-  let B = wA();
+  let B = useDispatch();
   let {
     isResizing
   } = md(_$$X);
@@ -2559,7 +2559,7 @@ function it({
     e.target.closest(".modeSelectable") || $(null);
   }, []);
   let X = useRef(w);
-  let Q = wA();
+  let Q = useDispatch();
   useEffect(() => {
     X.current.node_id === w.node_id && X.current.defaultModeID !== w.defaultModeID && (Q(_$$F.enqueue({
       type: "default-mode-changed",
@@ -3468,7 +3468,7 @@ function i2({
   let [b, v] = useState(!1);
   let [I, E] = Vc("variables-modal-maximized", !1);
   !function (e) {
-    let t = d4(_$$c);
+    let t = useSelector(_$$c);
     let [i, n] = useState(!1);
     useEffect(() => {
       i || (n(!0), sx("ds_variables_modal_opened", {
@@ -3701,7 +3701,7 @@ function i2({
 }
 export let $$i50 = Ju(function () {
   let e = J2(UK().showGuids);
-  let t = d4(e => e.modalShown?.type === eu.type);
+  let t = useSelector(e => e.modalShown?.type === eu.type);
   let {
     state: {
       currentVariableSet,
@@ -3716,8 +3716,8 @@ export let $$i50 = Ju(function () {
     },
     actions
   } = function (e) {
-    let t = wA();
-    let i = d4(e => e.modalShown);
+    let t = useDispatch();
+    let i = useSelector(e => e.modalShown);
     let n = yp();
     let s = Object.values(lO());
     let d = pN();

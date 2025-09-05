@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useRef, useEffect, useCallback, forwardRef } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { g as _$$g } from "../figma_app/638694";
 import { r as _$$r } from "../905/398386";
@@ -76,9 +76,9 @@ function D() {
     })
   });
 }
-let F = Ju(function(e) {
+let F = Ju(function (e) {
   let t = hS(e);
-  let a = wA();
+  let a = useDispatch();
   let [r, l] = useState(!1);
   let [o, d] = useState(!1);
   let c = T5("DomainCaptureModal").unwrapOr(null);
@@ -179,7 +179,7 @@ let F = Ju(function(e) {
 let q = "org_domain_management_page_view--domainList--RqkFA";
 function $(e) {
   let t = !e.enabled && !e.allDomainsVerified;
-  let a = wA();
+  let a = useDispatch();
   let s = Pc();
   let r = !e.enabled && e.allDomainsVerified ? "button" : "div";
   return jsx(r, {
@@ -288,7 +288,7 @@ function $(e) {
   });
 }
 function V(e) {
-  let t = wA();
+  let t = useDispatch();
   let a = useRef(null);
   let [r, l] = useState(!1);
   useEffect(() => () => {
@@ -351,7 +351,7 @@ function H(e) {
     }, e))
   });
 }
-let Y = Ju(function(e) {
+let Y = Ju(function (e) {
   let t = hS(e);
   return jsx(bL, {
     manager: t,
@@ -415,8 +415,8 @@ let Y = Ju(function(e) {
   });
 }, "DOMAIN_ERRORS_MODAL");
 function J(e, t, a, n) {
-  let s = wA();
-  return function() {
+  let s = useDispatch();
+  return function () {
     let i = a ? "VERIFY" : "ADD";
     let r = t.length;
     let l = t.join(",");
@@ -492,12 +492,12 @@ function J(e, t, a, n) {
     }));
   };
 }
-let Q = Ju(function(e) {
+let Q = Ju(function (e) {
   var t;
   var a;
   var r;
   let l = hS(e);
-  let o = wA();
+  let o = useDispatch();
   let [d, _] = useState({
     inputValue: "",
     tokens: [],
@@ -627,7 +627,7 @@ function et(e) {
   });
 }
 function ea(e) {
-  let t = wA();
+  let t = useDispatch();
   let a = useCallback(() => {
     t(to({
       type: Q,
@@ -672,7 +672,7 @@ function ek({
 }) {
   let [r, l] = useState("");
   let [o, d] = useState(new Set());
-  let c = wA();
+  let c = useDispatch();
   let _ = Rs(lOi, {
     domainId: e,
     orgId: t,
@@ -682,7 +682,7 @@ function ek({
   let u = "loaded" === _.status;
   let p = u && _.data?.unclaimedDomainUsers?.status === tT.Loaded && !!_.data?.unclaimedDomainUsers?.data?.isLoadingNextPage;
   let b = u && _.data?.unclaimedDomainUsers?.status === tT.Loaded && !!_.data?.unclaimedDomainUsers?.data?.hasNextPage();
-  let v = a ? [] : function(e, t) {
+  let v = a ? [] : function (e, t) {
     if (!e) return [];
     let a = [];
     e.forEach(e => {
@@ -744,7 +744,7 @@ function ek({
       className: _$$s.p16.pb8.flex.flexColumn.$,
       children: y
     }), jsx(Cj, {
-      actionBar: function(e) {
+      actionBar: function (e) {
         let a = e.map(e => e.id);
         let s = () => {
           d(new Set([...o, ...a]));
@@ -766,7 +766,7 @@ function ek({
                 userIds: a
               }).then(() => {
                 s();
-              }).catch(() => {}) ;
+              }).catch(() => {});
             }
           })
         });
@@ -812,7 +812,7 @@ function eE({
   orgId: e,
   orgName: t
 }) {
-  let a = wA();
+  let a = useDispatch();
   return jsx("button", {
     onClick: () => {
       a(to({
@@ -907,7 +907,7 @@ let eS = {
       })
     })
   })),
-  Contents: function(e) {
+  Contents: function (e) {
     return jsxs(_$$m.Contents, {
       children: [jsx(_$$m.Header, {
         children: jsx(_$$m.Title, {
@@ -926,8 +926,8 @@ let eS = {
     });
   }
 };
-let eO = Ju(function(e) {
-  let t = wA();
+let eO = Ju(function (e) {
+  let t = useDispatch();
   let [a, r] = useState(!1);
   let l = hS(e);
   let o = async () => {
@@ -1036,9 +1036,9 @@ let eO = Ju(function(e) {
     })
   });
 }, "REMOVE_DOMAIN_MODAL");
-let eL = Ju(function(e) {
+let eL = Ju(function (e) {
   let t = hS(e);
-  let a = function(e, t) {
+  let a = function (e, t) {
     let a = _$$z.verifyOrgDomains;
     return J(e, t.map(({
       domain: e
@@ -1109,7 +1109,7 @@ let eL = Ju(function(e) {
 let eM = "DomainFlyout";
 function eP(e) {
   let t = Um();
-  let a = wA();
+  let a = useDispatch();
   let r = _$$B();
   let l = useRef(null);
   let o = useRef(null);
@@ -1137,7 +1137,7 @@ function eP(e) {
     children: [jsx(_$$Y, {
       verticalAlignItems: "center",
       horizontalAlignItems: "center",
-      children: function(e) {
+      children: function (e) {
         switch (e.loadingStatus) {
           case "loading":
           case "loaded":
@@ -1206,7 +1206,7 @@ function eF({
   dnsToken: a,
   onVerify: s
 }) {
-  let r = wA();
+  let r = useDispatch();
   return jsx(cd, {
     children: !t.verifiedAt && jsx($n, {
       onClick: n => {
@@ -1235,7 +1235,7 @@ function eq({
   mfaRequired: a,
   setHighlightedItemId: r
 }) {
-  let l = wA();
+  let l = useDispatch();
   let o = useCallback(() => {
     l(to({
       type: eO,
@@ -1289,7 +1289,7 @@ function e$(e) {
   }, {
     name: _$$t("domain_management.column_header.status"),
     className: _$$s.flex1.$,
-    cellComponent: t => function(e, t, a, s, i) {
+    cellComponent: t => function (e, t, a, s, i) {
       let r = e.verifiedAt ? jsx(_$$x, {
         style: {
           "--color-icon": "var(--color-icon-handoff)"
@@ -1330,7 +1330,7 @@ function e$(e) {
     getSortValue: e => e.verifiedAt ? "Verified" : "Unverified"
   }, {
     name: _$$t("domain_management.column_header.unclaimed_users"),
-    nameElement: function() {
+    nameElement: function () {
       let e = jsx(_$$E, {
         color: "default",
         children: _$$t("domain_management.column_header.unclaimed_users")
@@ -1397,7 +1397,7 @@ function e$(e) {
     s = e.dispatch;
     i = e.mfaRequired;
     r = e.onVerify;
-    return function(e) {
+    return function (e) {
       let l = e.filter(({
         verifiedAt: e
       }) => !e);
@@ -1577,7 +1577,7 @@ let eG = {
   domainsRequireVerification: !1
 };
 export function $$ez0() {
-  let e = wA();
+  let e = useDispatch();
   let t = px();
   let a = j_(t).unwrapOr(!1);
   let m = S2().unwrapOr(null);
@@ -1600,4 +1600,4 @@ export function $$ez0() {
     }
   }) : null;
 }
-export const OrgDomainManagementPageView = $$ez0; 
+export const OrgDomainManagementPageView = $$ez0;

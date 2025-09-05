@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { memo, useState, useEffect, useMemo, useRef, useCallback } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { n as _$$n } from "../figma_app/630671";
 import { m as _$$m } from "../905/118468";
 import { o as _$$o } from "../figma_app/628776";
@@ -649,7 +649,7 @@ export function $$e20() {
   });
 }
 function e8() {
-  let e = d4(e => e.universalInsertModal.showing);
+  let e = useSelector(e => e.universalInsertModal.showing);
   let t = AE();
   return jsx(_$$Q, {
     children: jsx(_$$y3, {

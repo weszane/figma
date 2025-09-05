@@ -1,5 +1,5 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { G as _$$G } from "../905/865520";
 import { generateRecordingKey } from "../figma_app/878298";
 import o from "classnames";
@@ -44,7 +44,7 @@ function H({
   paletteType: r
 }) {
   let a = cD();
-  let s = d4(e => _$$_(a, e));
+  let s = useSelector(e => _$$_(a, e));
   let [o, d] = fp(Ze);
   let [u, p] = useState(!1);
   let _ = Z9();
@@ -141,7 +141,7 @@ function z({
   });
 }
 function W(e) {
-  let t = wA();
+  let t = useDispatch();
   let r = q5();
   let a = X8(!!r?.team?.canEdit, zQ(r?.plan ?? null));
   return jsxs("div", {
@@ -198,12 +198,12 @@ function W(e) {
 }
 export function $$K0(e) {
   let t = cD();
-  let r = d4(e => !!e.user);
+  let r = useSelector(e => !!e.user);
   let a = VR();
   let s = q5();
   let o = US();
   let l = WR(!!s?.team?.canView, zQ(s?.plan ?? null));
-  let c = d4(e => e.isOpenFileLoadedFromLiveGraph);
+  let c = useSelector(e => e.isOpenFileLoadedFromLiveGraph);
   let u = u8({
     oldValue: o,
     newValue: l,
@@ -220,7 +220,7 @@ export function $$K0(e) {
     enabled: !!t
   });
   let b = u ? y.data?.colorPalettesForTeam || [] : a ? [a] : [];
-  let I = d4(e => !!(s && !t && s.canManage && e.currentUserOrgId));
+  let I = useSelector(e => !!(s && !t && s.canManage && e.currentUserOrgId));
   let v = r && c && (I || u || t && !!a);
   let A = e.renderAsToolbeltButton ? 7 : e.isInDltSubmenu ? 2 : 16;
   let {
@@ -258,7 +258,7 @@ function Y({
   disabled: a,
   recordingKey: o
 }) {
-  let d = wA();
+  let d = useDispatch();
   return jsx("div", {
     className: l()("color_palettes_submenu_picker--submenuPickerContainer--GTTBT", {
       "color_palettes_submenu_picker--submenuPickerContainerNested--wuRz-": !r,

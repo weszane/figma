@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { hS } from "../905/437088";
 import { bL, Rq } from "../905/38914";
 import { Y9, hE, nB, wi, jk } from "../figma_app/272243";
@@ -127,7 +127,7 @@ function R({
   selectedRegion: e,
   setSelectedRegion: t
 }) {
-  let n = wA();
+  let n = useDispatch();
   let i = Um();
   let a = e => {
     switch (e) {
@@ -224,7 +224,7 @@ let F = {
     $$css: !0
   }
 };
-let $$O0 = Ju(function(e) {
+let $$O0 = Ju(function (e) {
   let [t, n] = useState(!1);
   let s = hS({
     ...e,
@@ -378,7 +378,7 @@ export function $$D1({
   trackingContext: n,
   source: r
 }) {
-  let i = wA();
+  let i = useDispatch();
   return () => i(to({
     type: $$O0,
     data: {
@@ -391,4 +391,4 @@ export function $$D1({
   }));
 }
 export const AP = $$O0;
-export const h5 = $$D1; 
+export const h5 = $$D1;

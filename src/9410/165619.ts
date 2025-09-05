@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { memo, useState, useEffect, useRef, useCallback, Suspense } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { k as _$$k } from "../905/443820";
 import { tHB } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
@@ -166,7 +166,7 @@ let L = memo(({
   });
 });
 let $$R0 = memo(function () {
-  let e = d4(g);
+  let e = useSelector(g);
   return e && e.richMediaInfo && (!getFeatureFlags().video_in_canvas_figjam || "VIDEO" !== e.richMediaInfo.richMediaType) ? jsx(D, {
     nodeGuid: e.guid,
     mediaHash: e.richMediaInfo.mediaHash,

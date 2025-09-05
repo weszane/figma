@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useMemo, useRef, useEffect, useCallback, useState } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { QB, y_, bL, Rz, rA, y$, ke } from "../905/174266";
 import { E as _$$E } from "../905/172252";
 import { g as _$$g } from "../905/125190";
@@ -80,7 +80,7 @@ export function $$B0(e) {
   let {
     positioner = U
   } = e;
-  let r = wA();
+  let r = useDispatch();
   let {
     bell,
     queueDepth
@@ -117,7 +117,7 @@ export function $$B0(e) {
     }(e)));
     r(_$$F.dequeue({}));
   }, [r, _, h]);
-  let f = d4(e => bell?.progressKey ? e.progress[bell.progressKey] : void 0);
+  let f = useSelector(e => bell?.progressKey ? e.progress[bell.progressKey] : void 0);
   let E = bell ? zC(bell, f) : null;
   let y = bell && "nonVisualMessage" in bell ? bell.nonVisualMessage : void 0;
   let b = bell?.count ? jsx(y_, {

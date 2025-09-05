@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { l7 } from "../905/189185";
 import { Point } from "../905/736624";
 import { FU, b$, Bs } from "../figma_app/933328";
@@ -21,8 +21,8 @@ export function $$g0({
   insertLogArgsOverride: y,
   insertionCallback: b
 }) {
-  let v = wA();
-  let I = d4(e => e.mirror.sceneGraphSelection);
+  let v = useDispatch();
+  let I = useSelector(e => e.mirror.sceneGraphSelection);
   let E = _$$A();
   let x = S.useOpenFileProperties();
   return useCallback((n, r, m) => {

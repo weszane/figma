@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useCallback, useState } from "react";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { h as _$$h } from "../905/207101";
 import { B } from "../905/714743";
 import { Rw } from "../figma_app/91703";
@@ -30,11 +30,11 @@ export function $$E0({
   recentlyUsedCommandName: w
 }) {
   let C = cW();
-  let T = d4(e => e.installedPluginVersions.plugins);
+  let T = useSelector(e => e.installedPluginVersions.plugins);
   let k = $1();
   let R = E3();
   let N = q5();
-  let P = wA();
+  let P = useDispatch();
   let O = useCallback(async () => {
     let n = null;
     if (e ? T[e] ? n = T[e] : C[e] && (n = uF(C[e])) : t && (n = k[t]), !n) throw Error("Plugin not runnable");

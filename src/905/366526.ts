@@ -538,7 +538,7 @@ import uW from '../vendor/223926';
 import { n_ as _$$n_ } from '../vendor/235095';
 import ag from '../vendor/239910';
 import uy from '../vendor/241899';
-import { d4 as _$$d, Kq, wA } from '../vendor/514228';
+import { useSelector, Provider, useDispatch } from '../vendor/514228';
 import eW from '../vendor/625526';
 import mI from '../vendor/643300';
 import { A as _$$A4 } from '../vendor/718327';
@@ -3085,7 +3085,7 @@ function r0({
     onSearchQueryChange
   } = TW(t.files);
   let _ = _$$sZ();
-  let A = wA();
+  let A = useDispatch();
   useEffect(() => {
     (async () => {
       _ && l(await NW(_.id));
@@ -3259,11 +3259,11 @@ function r7({
   org: e,
   width: t
 }) {
-  let i = wA();
+  let i = useDispatch();
   _$$T2();
-  let r = _$$d(e => e.currentUserOrgId);
-  let a = _$$d(vx);
-  let o = _$$d(e => e.modalShown);
+  let r = useSelector(e => e.currentUserOrgId);
+  let a = useSelector(vx);
+  let o = useSelector(e => e.modalShown);
   let [l, c] = useState(o?.type === _$$cX && o.data?.fileKey && {
     fileKey: o.data?.fileKey,
     libraryKey: _$$$3(o.data?.fileKey)
@@ -3413,11 +3413,11 @@ let ar = () => ({
 });
 class aa extends _$$o5 {}
 let as = Ju(e => {
-  let t = wA();
+  let t = useDispatch();
   let i = _6();
   let r = _$$sZ();
-  let a = _$$d(e => e.sharedFonts);
-  let o = _$$d(e => getPermissionsStateMemoized(e));
+  let a = useSelector(e => e.sharedFonts);
+  let o = useSelector(e => getPermissionsStateMemoized(e));
   let l = _$$D3('OrgViewModal');
   let c = j_(l).unwrapOr(!1);
   let u = _$$Kd(l);
@@ -13504,8 +13504,8 @@ class mS {
 }
 let mw = mE()(() => new mS());
 function mR(e) {
-  let t = _$$d(e => _$$Z5(e));
-  let i = _$$d(e => e.currentUserOrgId);
+  let t = useSelector(e => _$$Z5(e));
+  let i = useSelector(e => e.currentUserOrgId);
   Rs(IiJ, {
     orgId: i ?? ''
   }, {
@@ -13581,7 +13581,7 @@ function mB() {
   let o = _$$D3('TrackEnterDevHandoffModeWithSprig').unwrapOr(null);
   let l = o?.devModePaidStatus === FPlanAccessType.FULL;
   (n ? r.data?.seatTypeLicenseTypes?.includes(FProductAccessType.DEV_MODE) : l) && a && (e = i?.bigma_enabled ? 'dev_mode_ent_full' : 'dev_mode_org_full');
-  let c = _$$d(e => {
+  let c = useSelector(e => {
     if (e.selectedView.view === 'fullscreen') return e.selectedView.editorType;
   });
   useEffect(() => {
@@ -13671,7 +13671,7 @@ function mz() {
   let {
     sprigTrackWithSampling
   } = useSprigWithSampling();
-  let t = _$$d(e => {
+  let t = useSelector(e => {
     if (e.selectedView.view === 'fullscreen') return e.selectedView.editorType;
   });
   useEffect(() => {
@@ -13700,7 +13700,7 @@ function mH() {
   let {
     Sprig
   } = useSprigWithSampling();
-  let t = _$$d(e => QB(e.selectedView));
+  let t = useSelector(e => QB(e.selectedView));
   useEffect(() => {
     t && getFeatureFlags().perf_sentiment_survey && Sprig('track', 'enter_file_browser');
   }, [Sprig, t]);
@@ -13823,7 +13823,7 @@ let hx = _$$ex('frontend_commit_preview_indicator', ({
   desiredCommitSha: e,
   blockedReason: t
 }) => {
-  let i = wA();
+  let i = useDispatch();
   let r = function () {
     let e = UG().get(H_);
     return e != null && typeof e == 'object' && e.feature_flags && e.sha ? e : null;
@@ -14057,10 +14057,10 @@ function hM(e) {
 let hj = Ju(e => {
   let t = _$$hS2(e);
   let i = Gq()?.getPrimaryLocale(!1);
-  let r = wA();
+  let r = useDispatch();
   let a = i && hD[i];
   let o = i && hL[i];
-  let l = _$$d(e => a && !!e.userFlags[a]);
+  let l = useSelector(e => a && !!e.userFlags[a]);
   if (a == null || o == null || l || !_$$eD) return null;
   let d = () => {
     r(_$$b({
@@ -15260,7 +15260,7 @@ export async function $$hz0(e, t, d = {
             return e;
           }
         }(() => {
-          let t = jsx(Kq, {
+          let t = jsx(Provider, {
             store: b,
             children: jsx(_$$oD, {
               userId: getInitialOptions().user_data?.id || null,

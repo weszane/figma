@@ -7,7 +7,7 @@ import { nl as _$$nl } from "../figma_app/257275";
 import { q8 } from "../figma_app/459490";
 import { QI } from "../9410/60600";
 import { xo } from "../figma_app/473493";
-import { d4, wA, Pj } from "../vendor/514228";
+import { useSelector, useDispatch, useStore } from "../vendor/514228";
 import { b as _$$b } from "../905/985254";
 import { tf as _$$tf, fu, j6 } from "../figma_app/831799";
 import { e as _$$e } from "../905/621515";
@@ -323,7 +323,7 @@ function V(e) {
   }, [e]);
 }
 function Y(e = 2e3) {
-  let t = d4(e => e.mirror.selectionProperties.whiteboardNumSelected);
+  let t = useSelector(e => e.mirror.selectionProperties.whiteboardNumSelected);
   let [i, r] = useState({
     hasDebounceSettled: !1,
     numNodesSelected: void 0
@@ -360,7 +360,7 @@ function q({
   }) {
     let i = cF();
     let [r, a] = useState(0);
-    let s = d4(e => e.mirror.sceneGraphSelection);
+    let s = useSelector(e => e.mirror.sceneGraphSelection);
     let o = useMemo(() => Object.entries(s).filter(([e, t]) => t).map(([e, t]) => e), [s]);
     let [l, d] = useState([]);
     let c = getSingletonSceneGraph();
@@ -566,13 +566,13 @@ function Z({
   });
 }
 function Q() {
-  let e = d4(e => e.mirror.selectionProperties.whiteboardSelectionCanShowAiSummaryNudge);
+  let e = useSelector(e => e.mirror.selectionProperties.whiteboardSelectionCanShowAiSummaryNudge);
   let t = Y();
   let i = V(t);
   return t && e && !i;
 }
 function et() {
-  let e = wA();
+  let e = useDispatch();
   let {
     isShowing,
     complete
@@ -610,7 +610,7 @@ function et() {
       priority: _$$N.SECONDARY_MODAL
     }, [e]);
     let a = Q();
-    let o = d4(e => e.mirror.selectionProperties.numSelectedByType);
+    let o = useSelector(e => e.mirror.selectionProperties.numSelectedByType);
     useEffect(() => {
       show({
         canShow: e => e.shouldShowNudge
@@ -652,7 +652,7 @@ let eu = _$$eU(!1);
 let e_ = "slides_visual_bell_entrypoint_dismissed_user_flag";
 function ex() {
   !function () {
-    let e = wA();
+    let e = useDispatch();
     let t = _$$d();
     let i = _$$f(e_);
     let r = _$$$();
@@ -696,7 +696,7 @@ function eD() {
   let t = _$$md(_$$t2);
   let i = _$$md(eR);
   let n = _$$md(yV);
-  let a = wA();
+  let a = useDispatch();
   let {
     uniqueId,
     isShowing,
@@ -996,8 +996,8 @@ function th() {
     overlay: qnr,
     priority: _$$N.DEFAULT_MODAL
   });
-  let t = wA();
-  let i = Pj();
+  let t = useDispatch();
+  let i = useStore();
   let a = Fk((e, t) => zC(e, t), i.getState().mirror.appModel.currentPage);
   let s = JU(J3());
   let o = !!q5()?.template;
@@ -1098,7 +1098,7 @@ function tR(e) {
     viewedSidebar,
     setViewedSidebar
   } = e;
-  let a = wA();
+  let a = useDispatch();
   let s = _$$w2({
     rolesToDefaultToOther: ["education"]
   });
@@ -1116,9 +1116,9 @@ function tR(e) {
 function tD() {
   let e = TA();
   let t = q5();
-  let i = d4(e => e.mirror.appModel.currentPage);
+  let i = useSelector(e => e.mirror.appModel.currentPage);
   let a = Fk((e, t) => zC(e, t), i);
-  let o = d4(e => !zP(e.mirror.appModel.currentTool));
+  let o = useSelector(e => !zP(e.mirror.appModel.currentTool));
   let l = Uj(t, e || "");
   let d = Fu("interacted_figjam_whats_new_v2_cta");
   let c = md(d);
@@ -1156,13 +1156,13 @@ let tz = "figjam_try_confirm_save_steps--descriptionBold--ou7xj";
 function tV({
   dismissModal: e
 }) {
-  let t = wA();
+  let t = useDispatch();
   let i = _$$tS();
-  let a = d4(e => e.user?.email_validated_at);
-  let s = d4(e => i ? e.loadingState[_$$Q2.loadingKeyForPayload({
+  let a = useSelector(e => e.user?.email_validated_at);
+  let s = useSelector(e => i ? e.loadingState[_$$Q2.loadingKeyForPayload({
     file_key: i
   })] : null);
-  let o = d4(e => i ? e.loadingState[_$$D2.loadingKeyForPayload({
+  let o = useSelector(e => i ? e.loadingState[_$$D2.loadingKeyForPayload({
     fileKey: i
   })] : null);
   let l = _$$s3();
@@ -1355,7 +1355,7 @@ function t7() {
   });
 }
 function ir() {
-  let e = wA();
+  let e = useDispatch();
   let {
     show,
     isShowing,
@@ -1437,9 +1437,9 @@ function ir() {
   });
 }
 function ic() {
-  let e = wA();
-  let t = d4(e => e.currentTeamId);
-  let i = Pj();
+  let e = useDispatch();
+  let t = useSelector(e => e.currentTeamId);
+  let i = useStore();
   let a = md(_$$t2);
   let o = md(NZ);
   let l = jO();
@@ -1519,7 +1519,7 @@ function ic() {
 let im = "seen_link_shortcut_overlay";
 let ig = _$$r2(im);
 function i_() {
-  let e = wA();
+  let e = useDispatch();
   let t = _$$md(ig);
   let {
     show,
@@ -1587,7 +1587,7 @@ var iy = ix;
 let iE = "dismissed_local_component_asset_panel_pointer";
 let iT = _$$r2(iE);
 function iw() {
-  let e = wA();
+  let e = useDispatch();
   let t = TA();
   let i = md(wg);
   let a = md(iT);
@@ -1651,10 +1651,10 @@ function iw() {
 }
 let iI = _$$r2("seen_mobile_comment_download_modal_prompt");
 function ik() {
-  let e = wA();
+  let e = useDispatch();
   let t = md(iI);
-  let i = d4(e => e.userAnalyticsData?.is_active_mobile_user);
-  let o = d4(e => e.user?.created_at);
+  let i = useSelector(e => e.userAnalyticsData?.is_active_mobile_user);
+  let o = useSelector(e => e.user?.created_at);
   let l = _$$A3(o).add(14, "day").isSameOrAfter(_$$A3());
   let {
     isShowing,
@@ -2008,7 +2008,7 @@ let rh = _$$r2("has_shared_to_google_classroom");
 let rm = _$$r2("figjam_editor_onboarded");
 let rf = "start_share_to_classroom_new_user_onboarding";
 function rg() {
-  let e = wA();
+  let e = useDispatch();
   let t = ra({
     skipAccountCreationDateCheck: !0
   });
@@ -2050,7 +2050,7 @@ function rg() {
     next: t,
     complete: i
   }) {
-    let n = wA();
+    let n = useDispatch();
     let a = q5();
     return [jsx(ro, {
       isShowing: e,
@@ -2088,7 +2088,7 @@ function rg() {
   });
 }
 function r_(e) {
-  let t = wA();
+  let t = useDispatch();
   return () => {
     t(_$$b({
       figjam_editor_onboarded: !0
@@ -2100,7 +2100,7 @@ function rx({
   overlayUniqueId: e,
   afterReset: t
 }) {
-  let i = wA();
+  let i = useDispatch();
   _$$E2(e, "Reset Onboarding", () => {
     i(_$$b({
       figjam_editor_onboarded: !1,
@@ -2144,7 +2144,7 @@ function rH({
   useCase: t
 }) {
   let i = q5();
-  let r = wA();
+  let r = useDispatch();
   let a = _$$O2();
   return {
     onNext: useCallback(() => {
@@ -4142,7 +4142,7 @@ let ni = e => {
   let {
     name
   } = j6();
-  let a = wA();
+  let a = useDispatch();
   let [o, l] = useState(fD.NONE);
   let d = useCallback(e => {
     a(Ji({
@@ -4289,10 +4289,10 @@ let nn = _$$n2(({
   onSuccess: e
 } = {}) => {
   let t = Xr(_$$w5);
-  let i = wA();
+  let i = useDispatch();
   let r = _$$aV();
   let a = _$$g();
-  let o = d4(e => e.mirror.appModel.multiplayerSessionState === kul.JOINED);
+  let o = useSelector(e => e.mirror.appModel.multiplayerSessionState === kul.JOINED);
   let {
     hubFiles,
     templates,
@@ -4356,7 +4356,7 @@ let nn = _$$n2(({
   };
 });
 function na(e) {
-  let t = d4(e => {
+  let t = useSelector(e => {
     let t = e?.mirror?.appModel?.currentPage;
     let i = e?.mirror?.sceneGraph;
     let r = i?.get(t);
@@ -4603,7 +4603,7 @@ function no(e) {
       shiftPopupUp: i
     };
   }();
-  let l = wA();
+  let l = useDispatch();
   let d = _$$B2();
   let {
     hoveredUseCase,
@@ -4878,7 +4878,7 @@ let nL = _$$D3((e, t) => {
   }));
 });
 function nR(e) {
-  let t = wA();
+  let t = useDispatch();
   return jsx("div", {
     className: "onboard_figjam_viewer--openTutorialModalContainer--O1ld1",
     children: jsx("div", {
@@ -4989,7 +4989,7 @@ function nF(e) {
   });
 }
 function nB() {
-  let e = wA();
+  let e = useDispatch();
   let t = MY();
   let {
     show,
@@ -5121,7 +5121,7 @@ let nV = (e, t) => {
 function nW({
   openFile: e
 }) {
-  let t = d4(e => e.mirror.appModel.currentPage);
+  let t = useSelector(e => e.mirror.appModel.currentPage);
   let i = Fk((e, t) => zC(e, t), t);
   let a = md(zo);
   let o = Fu("interacted_figjam_whats_new_v2_cta");
@@ -5206,7 +5206,7 @@ function nW({
 function nY({
   openFile: e
 }) {
-  let t = d4(e => e.mirror.appModel.currentPage);
+  let t = useSelector(e => e.mirror.appModel.currentPage);
   let i = Fk((e, t) => zC(e, t), t);
   let a = md(zo);
   let o = Fu("interacted_figjam_whats_new_v2_cta");
@@ -5501,7 +5501,7 @@ function at(e) {
   });
 }
 function ai(e) {
-  let t = wA();
+  let t = useDispatch();
   let i = MR();
   let a = qU();
   let [s, o] = useState("invalid");
@@ -6843,7 +6843,7 @@ function a$(e) {
 function a0({
   onClickPrimaryCta: e
 }) {
-  let t = d4(e => e.modalShown);
+  let t = useSelector(e => e.modalShown);
   let i = useRef(t);
   useEffect(() => {
     !t && i.current && (e(), YQ({
@@ -7038,7 +7038,7 @@ let sr = Ju(function ({
   onDismiss: e
 }) {
   let t = md(yV);
-  let i = wA();
+  let i = useDispatch();
   return jsxs(yX, {
     autoFocusCta: !1,
     cancelText: _$$tx("oss_sales_upsell_overlay.secondary_cta"),
@@ -7120,7 +7120,7 @@ function sa({
   teamId: e,
   fileKey: t
 }) {
-  let i = wA();
+  let i = useDispatch();
   let a = md(M$);
   let o = Rs(TNJ, {
     id: e
@@ -7163,7 +7163,7 @@ function sa({
 }
 let sm = "seen_figjam_section_preset_picker_callout";
 let sf = Fu(sm);
-let sg = e => d4(t => {
+let sg = e => useSelector(t => {
   if (!e) return !1;
   let i = Object.keys(t.mirror.sceneGraphSelection);
   return 1 === i.length && i[0] === e;
@@ -7273,7 +7273,7 @@ function sb({
   });
 }
 function sC() {
-  let e = wA();
+  let e = useDispatch();
   let t = ra({});
   let i = md(rc);
   let a = md(rp);
@@ -7313,7 +7313,7 @@ function sC() {
     next: t,
     complete: i
   }) {
-    let n = wA();
+    let n = useDispatch();
     let a = q5();
     return [jsx(sb, {
       onPrimaryCtaClick: () => {
@@ -7370,7 +7370,7 @@ function sM({
   isShowing: t,
   onTargetLost: i
 }) {
-  let n = wA();
+  let n = useDispatch();
   sR(n, jx);
   sR(n, sN);
   return jsx(_$$rq, {
@@ -7411,7 +7411,7 @@ function sF({
   isShowing: t,
   onTargetLost: i
 }) {
-  sR(wA(), _$$af);
+  sR(useDispatch(), _$$af);
   return jsx(_$$rq, {
     arrowPosition: F_.BOTTOM,
     description: getFeatureFlags().hub_file_fragments ? _$$tx("ui3_and_ai_callouts.community_fragment_search.description") : _$$tx("ui3_and_ai_callouts.fragment_search.description"),
@@ -7658,7 +7658,7 @@ function sJ({
 }
 function sq(e) {
   let [t, i] = useState(!0);
-  let a = wA();
+  let a = useDispatch();
   let o = md(yV);
   useEffect(() => {
     setTimeout(() => i(!1), 1e3);
@@ -7751,7 +7751,7 @@ let s2 = _$$rn("paste_deselected_machine", s1);
 let s3 = _$$r2("explicitly_dismissed_create_component_pointer");
 let s5 = _$$tH("first_component_created_date");
 function s4() {
-  let e = wA();
+  let e = useDispatch();
   let t = md(_$$t2);
   let i = md(NZ);
   let n = md(pQ);
@@ -7845,7 +7845,7 @@ function oo() {
     let {
       insertTemplate
     } = Fz();
-    let t = wA();
+    let t = useDispatch();
     _$$h2(() => {
       let i = QL("templateId");
       null != i && (EM("templateId"), t(_$$ts({
@@ -7870,7 +7870,7 @@ function oo() {
     priority: _$$N.OVERRIDING_MODAL
   }, [e]);
   let i = function (e) {
-    let t = wA();
+    let t = useDispatch();
     return useMemo(() => [{
       title: _$$tx("rcs.figjam_diagram_onboarding.connectors_title"),
       trackingContextName: or.connectors,
@@ -7978,7 +7978,7 @@ function op(e) {
   });
 }
 function o_(e, t, i, r) {
-  let a = wA();
+  let a = useDispatch();
   let s = _$$f(i);
   let o = useRef(!!s);
   _$$E2(e, t, useCallback(() => {
@@ -7997,7 +7997,7 @@ function ow() {
     overlay: a9B,
     priority: _$$N.OVERRIDING_MODAL
   });
-  let o = wA();
+  let o = useDispatch();
   let l = _$$f("cursor_bot_v2__no_basics_file__played_frame_formatting");
   let d = _$$f("design_panel_step_shown");
   let c = _$$f("cursor_bot_v2__basics_file__started_flow");
@@ -8040,7 +8040,7 @@ function oS() {
     overlay: ENg,
     priority: _$$N.OVERRIDING_MODAL
   });
-  let o = wA();
+  let o = useDispatch();
   let l = _$$f("cursor_bot_v2__no_basics_file__played_text_formatting");
   let d = _$$f("format_text_step_shown");
   let c = _$$f("cursor_bot_v2__basics_file__started_flow");
@@ -8048,7 +8048,7 @@ function oS() {
   let m = Ai(["exp_cursor_bot_onboarding"]);
   let [_, x] = useState(!1);
   let b = Vr();
-  let C = d4(e => e.mirror.appModel.activeCanvasEditModeType);
+  let C = useSelector(e => e.mirror.appModel.activeCanvasEditModeType);
   _$$E2(uniqueId, "create_text", () => {
     x(!0);
   });
@@ -8087,7 +8087,7 @@ function ok() {
   let t = _$$f("no_figma_basics_tooltips_design_panel_step");
   let i = _$$f("design_panel_step_shown");
   let a = _$$f("started_figma_basics_onboarding");
-  let s = wA();
+  let s = useDispatch();
   let o = t && !i && !a;
   if (_$$E2(e.uniqueId, "create_frame", useCallback(() => {
     o && !e.isShowing && e.show();
@@ -8119,7 +8119,7 @@ function oN() {
   let t = _$$f("no_figma_basics_tooltips_format_text_step");
   let i = _$$f("format_text_step_shown");
   let a = _$$f("started_figma_basics_onboarding");
-  let s = wA();
+  let s = useDispatch();
   let o = !i && t && !a;
   if (_$$E2(e.uniqueId, "create_text", useCallback(() => {
     o && !e.isShowing && e.show();
@@ -8207,7 +8207,7 @@ function oH(e) {
   }) : null;
 }
 function oX() {
-  let e = wA();
+  let e = useDispatch();
   let t = PE();
   let i = _$$r2(Kt);
   let r = md(i);
@@ -8254,7 +8254,7 @@ function o1({
 function o2({
   teamId: e
 }) {
-  let t = wA();
+  let t = useDispatch();
   let i = _$$r2(Kt);
   let a = md(i);
   let o = _$$r2(uM);
@@ -8391,7 +8391,7 @@ export let $$le0 = memo(function ({
   }, [isDesignEditor]);
   (function (e) {
     let t = md(_$$a3);
-    let i = d4(e => e.user?.created_at);
+    let i = useSelector(e => e.user?.created_at);
     let r = !!i && _$$A3("2023-05-01").isBefore(i);
     useEffect(() => {
       if (!r) {
@@ -8424,7 +8424,7 @@ export let $$le0 = memo(function ({
     e.current;
   })(l);
   (function (e) {
-    let t = wA();
+    let t = useDispatch();
     let i = md(mp);
     let r = null != i && _$$A3("2023-10-31").isBefore(i);
     let a = !!_$$f("has_opened_design_editor");

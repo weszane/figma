@@ -1,5 +1,5 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
@@ -147,7 +147,7 @@ function G({
   });
 }
 let z = Ju(function (e) {
-  let t = wA();
+  let t = useDispatch();
   let i = useCallback(() => {
     t(Ce());
   }, [t]);
@@ -354,7 +354,7 @@ let z = Ju(function (e) {
 export let $$W0 = Ju(function (e) {
   var t;
   let i = hS(e);
-  let _ = wA();
+  let _ = useDispatch();
   let A = e.entryPoint === wR.PROJECT_SETTINGS && e.assetTransferRequestWarning;
   return jsx(fu, {
     name: "Connected Project Intro Modal",

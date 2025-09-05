@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { getFeatureFlags } from "../905/601108";
 import { sx } from "../905/449184";
 import { s as _$$s } from "../905/573154";
@@ -47,8 +47,8 @@ function I({
 export function $$E0(e) {
   let [t, r] = useState(!1);
   let [v, w] = useState(!1);
-  let E = wA();
-  let S = d4(e => e.userFlags);
+  let E = useDispatch();
+  let S = useSelector(e => e.userFlags);
   let R = iZ();
   let k = _6();
   let [A, P] = useState(!1);

@@ -1,6 +1,6 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useState } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { g as _$$g } from "../905/749786";
 import { hS } from "../905/437088";
 import { bL, Rq } from "../905/38914";
@@ -27,7 +27,7 @@ let $$C0 = Ju(function (e) {
     open,
     onClose
   } = e;
-  let r = wA();
+  let r = useDispatch();
   let s = iZ();
   let d = Z();
   let c = () => {
@@ -75,7 +75,7 @@ let T = () => {
   });
 };
 function k() {
-  let e = wA();
+  let e = useDispatch();
   let t = T();
   return jsxs(vo, {
     children: [jsx(Y9, {
@@ -106,7 +106,7 @@ function k() {
   });
 }
 function R() {
-  let e = wA();
+  let e = useDispatch();
   let t = iZ();
   let i = Z();
   let r = T();
@@ -171,7 +171,7 @@ function R() {
   }) : null;
 }
 function N() {
-  let e = wA();
+  let e = useDispatch();
   let t = Z();
   let i = X();
   let s = T();

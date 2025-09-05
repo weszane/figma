@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { createElement, createContext, useContext, useRef, useEffect, useState, useCallback, useMemo } from "react";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { $n } from "../905/521428";
 import { K as _$$K } from "../905/443068";
 import { A as _$$A } from "../905/251970";
@@ -119,8 +119,8 @@ function O({
   let [x, w] = useState(0);
   let N = useRef(null);
   let T = useRef(null);
-  let C = d4(e => e.universalInsertModal);
-  let $ = wA();
+  let C = useSelector(e => e.universalInsertModal);
+  let $ = useDispatch();
   let E = LR();
   let I = useCallback(e => {
     e && w(zo - e.getBoundingClientRect().height - 1);
@@ -270,7 +270,7 @@ function D({
     shouldOptimizeForIpadApp,
     searchBarRef
   } = M();
-  let _ = d4(e => e.universalInsertModal);
+  let _ = useSelector(e => e.universalInsertModal);
   let g = z("main");
   let p = z("category");
   let x = z("detail");

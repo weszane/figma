@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useMemo, useContext, useCallback, useRef } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { R as _$$R } from "../905/57445";
 import { o as _$$o } from "../905/821217";
 import { K as _$$K } from "../905/443068";
@@ -37,7 +37,7 @@ var m = h;
 let U = ms;
 let B = c$;
 let G = "component-prop-pill-dropdown";
-let V = (e) => {
+let V = e => {
   e.preventDefault();
   e.stopPropagation();
 };
@@ -56,7 +56,7 @@ export function $$H0(e) {
     def,
     selectionHasInstanceSublayer,
     dropdownShown
-  } = _$$R2((e) => {
+  } = _$$R2(e => {
     let t = Sh(e);
     return {
       containingProductComponentGUID: Lg(e),
@@ -66,8 +66,8 @@ export function $$H0(e) {
       dropdownShown: e.dropdownShown
     };
   });
-  let V = wA();
-  let H = useCallback((e) => {
+  let V = useDispatch();
+  let H = useCallback(e => {
     containingProductComponentGUID && def && V(j7({
       type: G,
       data: {
@@ -186,7 +186,7 @@ export function $$z1(e) {
     containingProductComponentGUID,
     propDefId
   } = e;
-  let o = wA();
+  let o = useDispatch();
   let c = containingInstanceGUID || containingProductComponentGUID;
   let u = useCallback(() => {
     c && propDefId && (wr(), Dh([c]), o(n0({

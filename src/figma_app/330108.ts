@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import a from "../vendor/879378";
 import { A } from "../vendor/21595";
 import { NC } from "../905/17179";
@@ -197,7 +197,7 @@ export function $$R1(e, t, r) {
   });
 }
 export function $$L9(e, t, r) {
-  let a = wA();
+  let a = useDispatch();
   let s = A(() => {
     a(v({
       teamId: e,
@@ -220,4 +220,4 @@ export const ZT = $$S6;
 export const c5 = $$T7;
 export const hZ = $$O8;
 export const lH = $$L9;
-export const xM = $$I10; 
+export const xM = $$I10;

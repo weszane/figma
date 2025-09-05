@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useMemo, useEffect } from "react";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { Rs } from "../figma_app/288654";
 import { qc } from "../figma_app/858013";
@@ -101,7 +101,7 @@ function $({
   let t = Rs(fPW, {
     workspaceId: e
   });
-  let a = d4(e => e.orgById[e.currentUserOrgId]);
+  let a = useSelector(e => e.orgById[e.currentUserOrgId]);
   return jsxs(Fragment, {
     children: [jsx(_$$m, {
       selectedSecondaryTab: m2.SETTINGS
@@ -123,20 +123,20 @@ function G({
   workspaceId: e,
   selectedTab: t
 }) {
-  let a = d4(({
+  let a = useSelector(({
     orgById: e,
     currentUserOrgId: t
   }) => e[t]);
-  let g = d4(({
+  let g = useSelector(({
     dropdownShown: e
   }) => e);
-  let x = d4(({
+  let x = useSelector(({
     teamRoleRequests: e
   }) => e);
-  let j = d4(({
+  let j = useSelector(({
     user: e
   }) => e);
-  let E = d4(({
+  let E = useSelector(({
     selectedView: e
   }) => e);
   let C = Rs(TKc, {
@@ -222,8 +222,8 @@ export function $$z0({
   workspaceId: e,
   selectedTab: t
 }) {
-  let a = wA();
-  let r = d4(({
+  let a = useDispatch();
+  let r = useSelector(({
     orgById: e,
     currentUserOrgId: t
   }) => e[t]);

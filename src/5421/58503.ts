@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useCallback, useEffect } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { A as _$$A } from "../905/251970";
 import { J } from "../905/614223";
 import { getFeatureFlags } from "../905/601108";
@@ -69,7 +69,7 @@ let $$N4 = 320;
 let $$T1 = 3e3;
 let $$S7 = 3e3;
 export function $$A3() {
-  let e = wA();
+  let e = useDispatch();
   let [t, n] = fp($$_8);
   let [h, g] = fp($$v5);
   let [C, E] = fp($$I10);

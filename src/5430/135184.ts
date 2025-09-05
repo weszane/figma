@@ -1,5 +1,5 @@
 import { jsx } from "react/jsx-runtime";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { t as _$$t } from "../905/303541";
 import { F } from "../905/302958";
 import { dx, Nn, MZ } from "../figma_app/399472";
@@ -11,9 +11,9 @@ export function $$m0({
   pluginId: e,
   containerClassName: t
 }) {
-  let r = wA();
-  let m = d4(t => my(e, t.publishedPlugins));
-  let _ = d4(e => A(e, m));
+  let r = useDispatch();
+  let m = useSelector(t => my(e, t.publishedPlugins));
+  let _ = useSelector(e => A(e, m));
   return void 0 !== _ && jT(_) ? jsx("div", {
     className: t,
     children: jsx(vR, {

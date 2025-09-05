@@ -1,5 +1,5 @@
 import { useMemo, useLayoutEffect } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { DP } from "../905/158740";
 import { aH, R0 } from "../figma_app/273493";
 import { DV9, Ez5 } from "../figma_app/763686";
@@ -12,7 +12,7 @@ import { DP as _$$DP } from "../905/640017";
 export function $$h0() {
   let e = ow();
   let t = sO();
-  let r = d4(e => e.mirror.appModel.currentPage);
+  let r = useSelector(e => e.mirror.appModel.currentPage);
   let a = R(e => e.mirror.sceneGraph?.get(r)?.backgroundColor);
   let h = _$$DP();
   let m = useMemo(() => F.format(a), [a]);

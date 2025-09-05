@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useCallback, useState, useMemo } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { Yy } from "../figma_app/59509";
 import { Q } from "../905/363675";
 import { N as _$$N } from "../905/572042";
@@ -32,7 +32,7 @@ import { b as _$$b2 } from "../469e6e40/978552";
 import { oi } from "../figma_app/527041";
 function R(e) {
   let t = e.abandonedDraftFolder;
-  let a = wA();
+  let a = useDispatch();
   let r = useCallback(() => {
     a(sf({
       view: "abandonedDraftFiles",
@@ -75,7 +75,7 @@ function L({
   planType: t,
   planId: a
 }) {
-  let s = wA();
+  let s = useDispatch();
   return 0 === e.length ? null : jsxs(Fragment, {
     children: [jsx(IU, {
       onClick: () => {
@@ -114,7 +114,7 @@ function L({
 }
 let P = "abandoned_draft_user_removed_at";
 export function $$U0(e) {
-  let t = wA();
+  let t = useDispatch();
   let [a, N] = useState({
     columnName: P,
     isReversed: !0

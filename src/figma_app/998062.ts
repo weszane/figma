@@ -1,5 +1,5 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { E as _$$E } from "../905/701278";
 import { K } from "../905/799615";
 import { A as _$$A } from "../905/251970";
@@ -27,9 +27,9 @@ function N({
   rowRef: e,
   recordingKey: t
 }) {
-  let r = wA();
+  let r = useDispatch();
   let a = useRef(null);
-  let s = d4(e => e.dropdownShown?.type === x);
+  let s = useSelector(e => e.dropdownShown?.type === x);
   let o = _$$r();
   let l = _$$_(e);
   let u = useMemo(() => [o, l], [o, l]);
@@ -87,7 +87,7 @@ export function $$O0({
   });
 }
 export function $$R1() {
-  let e = wA();
+  let e = useDispatch();
   let t = sO();
   let r = ut(Ez5?.interopToolMode(), nQ7.SELF);
   let a = t && r === nQ7.SELF;

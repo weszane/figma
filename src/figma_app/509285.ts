@@ -1,4 +1,4 @@
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { AD } from "../905/871411";
 import { getSingletonSceneGraph } from "../905/700578";
 import { R } from "../905/103090";
@@ -11,7 +11,7 @@ import { WH } from "../figma_app/836943";
 import { l5 } from "../figma_app/224338";
 import { ie } from "../figma_app/524655";
 export function $$m0() {
-  return d4(e => {
+  return useSelector(e => {
     let {
       numSelectedByType
     } = e.mirror.selectionProperties;
@@ -19,7 +19,7 @@ export function $$m0() {
   });
 }
 export function $$g1() {
-  let e = d4(e => Sh(e));
+  let e = useSelector(e => Sh(e));
   return Fk((e, t) => {
     for (let r of t) {
       if (!r) return !1;

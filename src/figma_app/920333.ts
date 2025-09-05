@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useRef, useEffect, useMemo, createContext, useContext, useCallback } from "react";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { isNotNullish, assertNotNullish } from "../figma_app/95419";
 import { t as _$$t } from "../905/150656";
 import { md } from "../figma_app/27355";
@@ -29,7 +29,7 @@ import { Yr1, Eg1 } from "../figma_app/27776";
 let $$R9 = parsePxInt(Yr1) + parsePxInt(Eg1) + 5;
 let $$L10 = new Point(wR, wR + E0);
 export function $$P5(e, t, r, n) {
-  let i = d4(e => e.figjamDefaultInserts)[t];
+  let i = useSelector(e => e.figjamDefaultInserts)[t];
   let s = [];
   for (let n of i) r(n, e) && ("templates" === t ? s.push({
     type: _$$n.HubFile,
@@ -45,7 +45,7 @@ export function $$D7(e, t) {
   return null !== r.current ? r.current : e;
 }
 export function $$k4() {
-  let e = wA();
+  let e = useDispatch();
   let t = q5();
   let {
     fileVersion,
@@ -170,10 +170,10 @@ export function $$B0(e) {
   return e.filter(e => e.editor_type === HK.UNIVERSAL || e.editor_type === HK.FIGJAM);
 }
 export function $$G2() {
-  return H(ZT(), d4(e => e.communityPayments));
+  return H(ZT(), useSelector(e => e.communityPayments));
 }
 export function $$V1() {
-  return H(cW(), d4(e => e.communityPayments));
+  return H(cW(), useSelector(e => e.communityPayments));
 }
 function H(e, t) {
   return function (r) {

@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, memo, useCallback, useEffect, useMemo, useContext, useRef, useReducer } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { lQ } from "../905/934246";
 import { U1 } from "../figma_app/343967";
 import { NLJ, glU, lyf, cxo, V5h, VTL, m1T } from "../figma_app/763686";
@@ -120,7 +120,7 @@ import { Yh } from "../figma_app/357047";
 import { ejp, nnJ } from "../figma_app/27776";
 var u = c;
 function Q(e) {
-  let t = wA();
+  let t = useDispatch();
   let [i, s] = useState(!0);
   let o = _$$tS();
   let l = FL();
@@ -229,7 +229,7 @@ let ej = {
   offsetY: 0
 };
 function eb() {
-  let e = d4(e => e.mirror.appModel.currentTool === NLJ.SELECT);
+  let e = useSelector(e => e.mirror.appModel.currentTool === NLJ.SELECT);
   let t = LR();
   let i = useCallback(() => {
     t(!1);
@@ -254,7 +254,7 @@ function eb() {
   });
 }
 function ey() {
-  let e = d4(e => e.mirror.appModel.currentTool === NLJ.HAND);
+  let e = useSelector(e => e.mirror.appModel.currentTool === NLJ.HAND);
   let t = LR();
   let i = useCallback(() => {
     t(!1);
@@ -913,7 +913,7 @@ function tb({
   });
 }
 function tC() {
-  let e = d4(e => Yh(e.mirror.appModel, "undo"));
+  let e = useSelector(e => Yh(e.mirror.appModel, "undo"));
   return jsx(_$$I, {
     ButtonLayout: _$$Z,
     className: tN,
@@ -935,7 +935,7 @@ function tC() {
   });
 }
 function tT() {
-  let e = d4(e => Yh(e.mirror.appModel, "redo"));
+  let e = useSelector(e => Yh(e.mirror.appModel, "redo"));
   return jsx(_$$I, {
     ButtonLayout: _$$Z,
     className: ZS,
@@ -963,7 +963,7 @@ function tE() {
   });
 }
 let tw = memo(function () {
-  let e = d4(e => e.universalInsertModal.pinned);
+  let e = useSelector(e => e.universalInsertModal.pinned);
   let t = q5();
   let i = t?.votingSessions;
   let [c, x] = useState("PRE");
@@ -1021,13 +1021,13 @@ let tw = memo(function () {
   C_(I);
   let J = 414 >= (L?.width || 0);
   let Q = dH();
-  let ee = d4(e => e.multiplayerEmoji.type);
+  let ee = useSelector(e => e.multiplayerEmoji.type);
   let et = AE();
   let ei = "closed" === W.state ? void 0 : W.tool;
   let en = useRef(ei);
   en.current = ei;
   let er = Yg();
-  let ea = d4(e => e.mirror.appModel.activeCanvasEditModeType);
+  let ea = useSelector(e => e.mirror.appModel.activeCanvasEditModeType);
   useEffect(() => {
     Q === NLJ.SELECT || Q === NLJ.DROPPER_COLOR || _$$L(Q) && "pencil" === en.current || qW(Q) && "shape" === en.current || (Q === NLJ.CONNECTOR_ELBOWED || Q === NLJ.CONNECTOR_STRAIGHT || Q === NLJ.CONNECTOR_CURVED) && "shape" === en.current || Q === NLJ.STICKY && "sticky" === en.current || z({
       type: "close",
@@ -1070,7 +1070,7 @@ let tw = memo(function () {
       document.removeEventListener("pointerdown", e);
     };
   }, [Q, z]);
-  let es = d4(e => {
+  let es = useSelector(e => {
     let t = e.mirror.appModel.currentTool;
     return t !== NLJ.VECTOR_PENCIL && t !== NLJ.HIGHLIGHTER;
   });
@@ -1150,7 +1150,7 @@ let tw = memo(function () {
       children: ef
     }), jsx(eX, {})]
   });
-  let eg = d4(e => e.showingFileFooter);
+  let eg = useSelector(e => e.showingFileFooter);
   return jsx(fu, {
     name: RZ,
     children: jsxs(nS.Provider, {

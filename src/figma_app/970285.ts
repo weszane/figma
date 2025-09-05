@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { PureComponent, useRef, useCallback, memo, forwardRef } from "react";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { debounce } from "../905/915765";
 import { lQ } from "../905/934246";
 import { o as _$$o } from "../figma_app/493477";
@@ -95,7 +95,7 @@ export function $$eS5(e) {
   return i;
 }
 export function $$ev4() {
-  return d4(e => {
+  return useSelector(e => {
     let t = e.mirror.selectionProperties.numSelected;
     let r = e.mirror.selectionProperties.exportSettings;
     let n = e.mirror.selectionProperties.name;
@@ -103,7 +103,7 @@ export function $$ev4() {
   });
 }
 export function $$eA2() {
-  return d4(e => {
+  return useSelector(e => {
     let t = e.mirror.selectedStyleProperties;
     let r = e.mirror.selectionProperties;
     let n = !!e.mirror.selectedStyleProperties?.guid;
@@ -377,7 +377,7 @@ function eC(e) {
   });
 }
 export function $$ew3(e) {
-  let t = wA();
+  let t = useDispatch();
   let {
     selectedPropertyType,
     dropdownShown,
@@ -515,7 +515,7 @@ let eF = forwardRef(function ({
   singletonRow: w
 }, O) {
   let L = c1(S);
-  let P = wA();
+  let P = useDispatch();
   let D = getFeatureFlags().fpl_select_migration;
   let k = Qu();
   let M = eD.map((e, t) => jsx(eR, {

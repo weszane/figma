@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { $n } from "../905/521428";
 import { N } from "../905/438674";
 import { E as _$$E } from "../905/632989";
@@ -18,7 +18,7 @@ import { H } from "../905/548668";
 export function $$b3({
   publishedResourceContent: e
 }) {
-  let t = wA();
+  let t = useDispatch();
   let i = $$S4(e);
   let [o, l] = useState(!1);
   useEffect(() => {
@@ -72,7 +72,7 @@ export function $$E5({
   let f = "primary" === o;
   let A = "banner" === o;
   let b = "borderless" === o;
-  let v = wA();
+  let v = useDispatch();
   let [I, E] = useState(!1);
   let x = new URL(H(e, t), document.baseURI).href;
   useEffect(() => {

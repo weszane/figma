@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useContext } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { rW } from "../figma_app/591738";
 import { Zr } from "../figma_app/678782";
 import { aV } from "../figma_app/722362";
@@ -167,7 +167,7 @@ export function $$G0() {
     isLeftPanelCollapsed
   } = useContext(_$$t);
   let t = aV();
-  let n = d4(e => e.mirror.appModel.showUi);
+  let n = useSelector(e => e.mirror.appModel.showUi);
   let l = o3(nt.designNavBar);
   return t || !n ? null : jsxs(_$$_2, {
     isCollapsed: isLeftPanelCollapsed,

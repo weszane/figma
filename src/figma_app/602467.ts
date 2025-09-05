@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useCallback, useEffect, useContext, useRef, useMemo, memo, useState } from "react";
-import { d4, wA, bN } from "../vendor/514228";
+import { useSelector, useDispatch, shallowEqual } from "../vendor/514228";
 import { U1 } from "../figma_app/343967";
 import { K as _$$K } from "../905/443068";
 import { bL } from "../905/911410";
@@ -283,8 +283,8 @@ function er() {
 }
 let $$ei0 = memo(function () {
   let e = Xr(qM);
-  let t = d4(e => e.mirror.appModel.showUi);
-  let r = d4(e => Yh(e.mirror.appModel, JT.SLIDES_REWRITE_TEXT));
+  let t = useSelector(e => e.mirror.appModel.showUi);
+  let r = useSelector(e => Yh(e.mirror.appModel, JT.SLIDES_REWRITE_TEXT));
   let l = U1();
   return (useEffect(() => (B3(JT.SLIDES_REWRITE_TEXT), () => {
     B3(JT.SLIDES_REWRITE_TEXT);
@@ -461,7 +461,7 @@ function eo({
     setPositionAndRun
   } = useContext(_$$u);
   let s = md(iV(Sn.REWRITE));
-  let l = wA();
+  let l = useDispatch();
   let d = useRef(null);
   x(d, {
     numCols: 2
@@ -474,7 +474,7 @@ function eo({
       trackingText
     } = fG[i];
     let d = cx(position);
-    let c = bN(tonePosition, d);
+    let c = shallowEqual(tonePosition, d);
     return jsx(W, {
       toggled: c,
       onClick: () => setPositionAndRun(d, {

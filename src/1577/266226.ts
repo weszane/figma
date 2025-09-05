@@ -1,5 +1,5 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB } from "../figma_app/272243";
@@ -32,7 +32,7 @@ import { dV } from "../1577/337708";
 let I = Ju(function ({
   paletteUuid: e
 }) {
-  let t = wA();
+  let t = useDispatch();
   return jsx(yX, {
     size: 300,
     confirmText: _$$t("whiteboard.color_palettes.modal.delete_color_palette_button"),
@@ -52,9 +52,9 @@ let M = Ju(function ({
   paletteName: e,
   paletteUuid: t
 }) {
-  let i = wA();
+  let i = useDispatch();
   let o = cD();
-  let r = d4(e => e.teams[o]?.name);
+  let r = useSelector(e => e.teams[o]?.name);
   r || console.error("No team name found for team id", o);
   return jsx(yX, {
     size: 360,
@@ -75,7 +75,7 @@ function L({
   theme: t,
   showMakeDefaultButton: i
 }) {
-  let o = wA();
+  let o = useDispatch();
   let r = e.uuid === fJ;
   let l = e.name || _$$t("whiteboard.color_palettes.unnamed_palette");
   return jsxs(Y, {
@@ -190,7 +190,7 @@ export let $$B0 = Ju(function ({
   let d = TA();
   let u = cD();
   let _ = hS(c);
-  let h = wA();
+  let h = useDispatch();
   let [y] = IT(iP2({
     teamId: u
   }), {

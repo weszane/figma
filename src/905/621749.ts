@@ -1,7 +1,7 @@
 import _require from "../0c62c2fd/632200";
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState } from "react";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { p as _$$p } from "../905/636263";
 import { e as _$$e } from "../905/295932";
 import { a as _$$a } from "../905/676930";
@@ -334,11 +334,11 @@ export let $$z0 = Ju(function ({
     teamId: e
   });
   let i = E9();
-  let y = d4(e => {
+  let y = useSelector(e => {
     let t = e.teamBilling.summary.annual_subscription?.current_period_end || e.teamBilling.summary.monthly_subscription?.current_period_end;
     return t ? _$$A(t).format("LL") : void 0;
   });
-  let b = wA();
+  let b = useDispatch();
   let [I, N] = useState(!1);
   let P = () => {
     b(Ce());

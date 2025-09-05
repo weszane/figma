@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState, useCallback } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { isNotNullish } from "../figma_app/95419";
 import { fp, md } from "../figma_app/27355";
 import { U, iT } from "../figma_app/901889";
@@ -349,7 +349,7 @@ export function $$F0() {
     codegenEnabled,
     pinnedPluginsEnabled
   } = G();
-  let u = wA();
+  let u = useDispatch();
   let h = U();
   let m = m0();
   let y = _I();
@@ -517,7 +517,7 @@ export function $$U2() {
   } = function () {
     let e = tS();
     let t = md(_$$x);
-    let r = d4(e => e.figFileDuplicatedFromHubFile);
+    let r = useSelector(e => e.figFileDuplicatedFromHubFile);
     let a = useMemo(() => {
       if (!e) return null;
       let t = r[e];

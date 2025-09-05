@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { isNotNullish } from "../figma_app/95419";
 import { h3O, dPJ, CeL, Ez5, glU, Egt } from "../figma_app/763686";
 import { l7 } from "../905/189185";
@@ -60,7 +60,7 @@ export function $$F7() {
       pageCount: t
     })));
   }();
-  let r = wA();
+  let r = useDispatch();
   let s = _$$F.useShouldHideStarterCtaForOpenFile();
   return useCallback(n => {
     if (t && e) {

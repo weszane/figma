@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { xae } from "../figma_app/763686";
 import { md } from "../figma_app/27355";
 import { x4 } from "../905/657224";
@@ -35,7 +35,7 @@ let b = D(() => {
   return null;
 });
 export function $$T2() {
-  let e = wA();
+  let e = useDispatch();
   let t = Ai([d4]);
   let r = jO();
   let {

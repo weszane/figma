@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { forwardRef, useRef, useCallback, useMemo } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { o as _$$o } from "../905/821217";
 import { d as _$$d } from "../905/976845";
 import { A as _$$A } from "../905/891805";
@@ -37,7 +37,7 @@ let $$k2 = forwardRef(function ({
   let h = T(e);
   let g = Um();
   let _ = g?.type === h;
-  let y = wA();
+  let y = useDispatch();
   let v = useCallback(() => {
     _ ? y(oB()) : y(j7({
       type: h,
@@ -91,12 +91,12 @@ function R({
   isPreferredValues: p
 }) {
   let m = _$$S.useOpenFileProperties();
-  let h = wA();
+  let h = useDispatch();
   let f = useCallback(() => {
     h(oB());
   }, [h]);
   let E = R2("number" == typeof e?.top ? e.top : void 0);
-  let C = d4(e => e.instanceSwapPickerListLayout);
+  let C = useSelector(e => e.instanceSwapPickerListLayout);
   let T = useCallback(e => {
     h(fG({
       isListLayout: e

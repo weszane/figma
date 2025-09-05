@@ -1,4 +1,4 @@
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { t as _$$t } from "../905/303541";
 import { qR } from "../figma_app/696043";
 import { RH, gU, Kq, lD } from "../figma_app/147952";
@@ -17,7 +17,7 @@ export function $$g0(e) {
     let {
       save
     } = E(e);
-    let r = wA();
+    let r = useDispatch();
     let a = U_();
     let o = TA();
     if (!e.types.has(Ag.USER_SAVED) && !JT(e)) return {
@@ -65,7 +65,7 @@ function E(e) {
   return _i(extension.plugin_id, k0(extension) ? vt.WIDGET : vt.PLUGIN, e.publishedExtension, r);
 }
 function y(e) {
-  let t = wA();
+  let t = useDispatch();
   let r = U_();
   let {
     extension,

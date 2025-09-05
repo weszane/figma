@@ -1,10 +1,10 @@
 import { useMemo } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { nT } from "../figma_app/53721";
 import { $A } from "../905/862883";
 export function $$$$o1() {
-  let e = d4(e => e.selectedView.editorType);
-  d4(e => "orgAdminSettings" === e.selectedView.view) && (e = nT.DevHandoff);
+  let e = useSelector(e => e.selectedView.editorType);
+  useSelector(e => "orgAdminSettings" === e.selectedView.view) && (e = nT.DevHandoff);
   return useMemo(() => $$l0(e), [e]);
 }
 export function $$l0(e) {

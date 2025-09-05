@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback, useEffect, useMemo, useState, forwardRef, useRef, createRef } from "react";
-import { wA, d4, Pj } from "../vendor/514228";
+import { useDispatch, useSelector, useStore } from "../vendor/514228";
 import { Xr, fp, md, eU as _$$eU } from "../figma_app/27355";
 import a from "classnames";
 import { Rs } from "../figma_app/288654";
@@ -151,7 +151,7 @@ import { A as _$$A5 } from "../6828/250823";
 let i;
 var d = a;
 function L(e) {
-  let r = wA();
+  let r = useDispatch();
   return useCallback(() => {
     e && e();
     r(_$$b({
@@ -168,7 +168,7 @@ function v({
   children: a
 }) {
   let d = L(e);
-  let c = wA();
+  let c = useDispatch();
   let u = ZC(r);
   useEffect(() => {
     u && !r && d();
@@ -383,9 +383,9 @@ function es() {
   }, [e, i, r, t]);
 }
 function ey() {
-  let e = wA();
-  let r = d4(e => e.selectedView);
-  let t = d4(e => null !== e.user && cn(e.user));
+  let e = useDispatch();
+  let r = useSelector(e => e.selectedView);
+  let t = useSelector(e => null !== e.user && cn(e.user));
   let i = t => {
     _$$eD ? e(sf({
       view: "teamUpgrade",
@@ -607,7 +607,7 @@ function eX({
   });
 }
 function eJ(e) {
-  let r = wA();
+  let r = useDispatch();
   let t = TA();
   let i = !!_$$f("not_gen_0");
   let a = md(S0);
@@ -634,7 +634,7 @@ function eJ(e) {
     let {
       team
     } = e;
-    let t = wA();
+    let t = useDispatch();
     let i = _$$B();
     let s = useCallback(async e => (await eq(team?.id, e))?.id, [team]);
     return async (e, o) => {
@@ -755,7 +755,7 @@ function eJ(e) {
   let z = function ({
     source: e
   }) {
-    let r = Pj();
+    let r = useStore();
     let t = dq() ?? void 0;
     let i = cD();
     let s = FC();
@@ -1039,7 +1039,7 @@ let rh = {
   ORG_OPTION: "nux-dynamic-preview-org-option"
 };
 function r_() {
-  let e = wA();
+  let e = useDispatch();
   let r = LN();
   let t = Oq.exclude([ud.DEV_MODE]);
   let i = {
@@ -1079,7 +1079,7 @@ function r_() {
   };
 }
 function rp() {
-  let e = wA();
+  let e = useDispatch();
   let r = LN();
   let t = {
     currency: r,
@@ -2745,7 +2745,7 @@ function tc() {
   });
 }
 function tm(e) {
-  let r = wA();
+  let r = useDispatch();
   let {
     joinLink
   } = e;
@@ -4598,16 +4598,16 @@ export function $$ij0(e) {
   let r = Xr(pr);
   let t = L(e.onOverlayClose);
   let i = C8();
-  let a = d4(e => MS(e.userFlags));
-  let m = d4(e => e.currentTeamId);
+  let a = useSelector(e => MS(e.userFlags));
+  let m = useSelector(e => e.currentTeamId);
   let E = Rs(yQw(_X(Pw.GROUP_7) && m ? {
     teamId: m
   } : null));
   let b = useMemo(() => E.transform(({
     team: e
   }) => e), [E]);
-  let j = d4(r => e.isGen1 || _X(Pw.GROUP_7) && "loaded" !== b.status ? null : FQ(r, b.data));
-  let C = d4(e => null !== e.user && cn(e.user));
+  let j = useSelector(r => e.isGen1 || _X(Pw.GROUP_7) && "loaded" !== b.status ? null : FQ(r, b.data));
+  let C = useSelector(e => null !== e.user && cn(e.user));
   let w = useRef();
   let k = Oc();
   j && !w.current && (w.current = j);

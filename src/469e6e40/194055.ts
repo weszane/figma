@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useMemo, useState, useCallback, useEffect, useRef, useLayoutEffect } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { sx } from "../905/449184";
 import { Rs } from "../figma_app/288654";
 import { useSprigWithSampling } from "../905/99656";
@@ -64,7 +64,7 @@ import { Um } from "../905/848862";
 import { UK } from "../figma_app/764679";
 import { Cf, it } from "../905/504727";
 import { qN } from "../905/884637";
-let L = Ju(function({
+let L = Ju(function ({
   extensionName: e,
   onConfirm: t,
   orgName: a,
@@ -140,7 +140,7 @@ function q({
   mode: r,
   requests: l
 }) {
-  let o = wA();
+  let o = useDispatch();
   let d = _$$q(XB, !0);
   let {
     id
@@ -479,7 +479,7 @@ function ea({
   showUpsell: t,
   extensionType: a
 }) {
-  let s = wA();
+  let s = useDispatch();
   let l = e.sort((e, t) => e.org_rank - t.org_rank);
   let o = jsx(CY, {
     onClick: () => {
@@ -707,7 +707,7 @@ function ed({
 }) {
   let r;
   let l;
-  let o = wA();
+  let o = useDispatch();
   let d = useCallback((e, t) => {
     e.preventDefault();
     e.stopPropagation();
@@ -725,7 +725,7 @@ function ed({
       o(_$$F.enqueue({
         message: `Copied ${t}`
       }));
-    }).catch(() => {}) ;
+    }).catch(() => {});
   }, [o]);
   try {
     r = JSON.parse(e.metadata);
@@ -1013,7 +1013,7 @@ function ew({
   plugin: e
 }) {
   let t = useMemo(() => (e.communityPublishers ?? []).map(e => e.profile).filter(e => null != e).map(e => {
-    let t = function(e) {
+    let t = function (e) {
       switch (e.entityType) {
         case "user":
           return e.user;
@@ -1157,8 +1157,8 @@ function eq(e) {
     dropdownIsShown,
     toggleSwitchEditorDropdown,
     ExtensionAllowlistTryEditorDropdown
-  } = function(e, t, a, s, l) {
-    let o = wA();
+  } = function (e, t, a, s, l) {
+    let o = useDispatch();
     let d = Um();
     let c = d?.type === eU;
     let _ = Lq(e) || s;
@@ -1173,7 +1173,7 @@ function eq(e) {
           }
         })) : o(oB()));
       },
-      ExtensionAllowlistTryEditorDropdown: function({
+      ExtensionAllowlistTryEditorDropdown: function ({
         manifestEditorTypes: s
       }) {
         let i = s.slice().sort();
@@ -1253,7 +1253,7 @@ function e$(e) {
     resource,
     source
   } = e;
-  let c = wA();
+  let c = useDispatch();
   let _ = Lq(extension) || resource;
   let m = Df(manifestEditorType);
   let p = () => {
@@ -1334,7 +1334,7 @@ function eG(e) {
     goToEditTab,
     workspaces
   } = e;
-  let d = wA();
+  let d = useDispatch();
   let c = px().unwrapOr(null);
   let _ = c?.key?.parentId;
   let {
@@ -1396,7 +1396,7 @@ function ez(e) {
     goToEditTab,
     workspaces
   } = e;
-  let d = wA();
+  let d = useDispatch();
   let {
     Sprig
   } = useSprigWithSampling();
@@ -1447,7 +1447,7 @@ export function $$eV0({
   resource: y,
   source: w
 }) {
-  let C = wA();
+  let C = useDispatch();
   let S = _$$A2(t, !0);
   let N = Rs(czu, {
     pluginId: t,
@@ -1463,7 +1463,7 @@ export function $$eV0({
   m = m ?? (D ? "manage" : "review");
   x = void 0 === x ? D : x;
   return jsx(OJ, {
-    title: function(e, t, a) {
+    title: function (e, t, a) {
       switch (e) {
         case "review":
           switch (t) {
@@ -1576,4 +1576,4 @@ export function $$eV0({
   });
 }
 export const ExtensionAllowlistModal = $$eV0;
-export const TryItOutButton = $$eF1; 
+export const TryItOutButton = $$eF1;

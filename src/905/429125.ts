@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useMemo, useCallback } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { J0O, glU } from "../figma_app/763686";
 import { l7 } from "../905/189185";
 import { getFeatureFlags } from "../905/601108";
@@ -47,7 +47,7 @@ export function $$I0({
       defReferencedBySelection: E(e, t)
     };
   });
-  let T = wA();
+  let T = useDispatch();
   let k = Um();
   let R = $$v1.concat("-", t);
   let N = k && k.type === R && k.data.nodeField === t;

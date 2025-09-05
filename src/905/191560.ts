@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useRef, useCallback, useEffect, useState } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { md, zl, fp, Xr } from "../figma_app/27355";
 import { eD as _$$eD } from "../figma_app/876459";
 import { Ay } from "../905/612521";
@@ -171,7 +171,7 @@ function k(e) {
   });
 }
 let R = tf(k, !0);
-let N = tf(function({
+let N = tf(function ({
   svg: e,
   onClick: t,
   text: i
@@ -214,7 +214,7 @@ function M() {
   return `${Date.now()}-${Math.random().toString(36).substring(2, 9)}`;
 }
 function j(e) {
-  let t = wA();
+  let t = useDispatch();
   let [i, o] = useState(!1);
   let [l, c] = useState(!1);
   let [_, A] = useState(M());
@@ -291,7 +291,7 @@ function j(e) {
           })
         }), jsx(k, {
           fullWidth: !0,
-          onClick: function() {
+          onClick: function () {
             c(!1);
             A(M());
             S();
@@ -328,11 +328,11 @@ function j(e) {
   });
 }
 function H(e) {
-  let t = wA();
+  let t = useDispatch();
   let [i, o] = useState(!1);
   let [d, c] = useState(null);
   let f = md(nb);
-  let _ = d4(e => e.auth.twoFactorPromptedBy);
+  let _ = useSelector(e => e.auth.twoFactorPromptedBy);
   let A = I8();
   let y = TA();
   return jsxs(v, {
@@ -356,7 +356,7 @@ function H(e) {
         t(Qg({
           message: e.message
         }));
-      }); else if (TA()) _$$k2.twoFactor(d || "").then(e => {
+      });else if (TA()) _$$k2.twoFactor(d || "").then(e => {
         Ay.redirect(e.data.meta.redirect);
       }).catch(e => {
         let i = e.data;
@@ -365,7 +365,7 @@ function H(e) {
           message: n,
           invalidInput: RE.TOTP_KEY
         }));
-      }); else switch (_) {
+      });else switch (_) {
         case qB.SIGN_IN:
           t(Jv({
             formId: i
@@ -449,15 +449,15 @@ function H(e) {
 }
 let X = "join_org--modalText--t6wL6";
 function Q(e) {
-  let t = wA();
+  let t = useDispatch();
   let i = Ay.location.pathname + Ay.location.search;
   let [s, o] = useState(!1);
-  let d = d4(e => e.user);
-  let c = d4(sS);
-  let u = d4(({
+  let d = useSelector(e => e.user);
+  let c = useSelector(sS);
+  let u = useSelector(({
     openFile: e
   }) => e?.parentOrgId);
-  let p = d4(({
+  let p = useSelector(({
     openFile: e
   }) => e?.org?.name);
   if (!c || !d || !u) return null;
@@ -550,7 +550,7 @@ function Q(e) {
 }
 let ee = "password_reset--centeredLink--MYK7h auth_view--footerButtonRow--X82kF auth_brand--innerLink---m7Kv";
 function et(e) {
-  let t = wA();
+  let t = useDispatch();
   return jsxs(v, {
     ...e,
     header: _$$t("auth.password-reset.enter-email-header"),
@@ -589,7 +589,7 @@ function et(e) {
   });
 }
 function ei(e) {
-  let t = wA();
+  let t = useDispatch();
   let i = y()({
     "password_reset--modal--fz1tm": e.modal,
     "password_reset--form--CoL54 password_reset--modal--fz1tm": !e.modal
@@ -618,7 +618,7 @@ function ei(e) {
   });
 }
 function en(e) {
-  let t = wA();
+  let t = useDispatch();
   let i = I8();
   return jsxs(v, {
     auth: e.auth,
@@ -711,7 +711,7 @@ function eA(e) {
 function ey(e) {
   let t = useRef(void 0);
   let [i, s] = useState(!1);
-  let o = wA();
+  let o = useDispatch();
   useEffect(() => () => {
     clearTimeout(t.current);
   }, []);
@@ -803,7 +803,7 @@ function eb(e) {
   let i;
   let s;
   let o;
-  let d = wA();
+  let d = useDispatch();
   let [c, p] = useState(!1);
   let h = e.auth.appAuthAppType === DP.MSFT_TEAMS;
   let g = t => {
@@ -926,7 +926,7 @@ function eb(e) {
     users: e.auth.appAuthUsers,
     onUserSelect: A,
     trackOnChangeAccount: I
-  }); else {
+  });else {
     let e;
     let i;
     e = appAuthAppType === DP.MOBILE || appAuthAppType === DP.FIGJAM_MOBILE ? _$$t("auth.generic-go-back-and-try-again") : appAuthAppType === DP.VSCODE || appAuthAppType === DP.VSCODE_INSIDERS || appAuthAppType === DP.VSCODE_CURSOR ? _$$t("auth.open-figma-for-vs-code") : _$$t("auth.open-specific-app", {
@@ -964,7 +964,7 @@ function eb(e) {
   });
 }
 function ev(e) {
-  let t = wA();
+  let t = useDispatch();
   _$$h(() => {
     r();
     Ay.replace("/login", null);
@@ -1016,9 +1016,9 @@ function ev(e) {
 function ex({
   authOrigin: e
 }) {
-  let t = wA();
-  let i = d4(e => e.loadingState);
-  let s = d4(e => e.auth.accountPicker);
+  let t = useDispatch();
+  let i = useSelector(e => e.loadingState);
+  let s = useSelector(e => e.auth.accountPicker);
   let o = getInitialOptions().team_join_link?.token;
   let l = useRef(!1);
   let d = (e, n) => {
@@ -1080,7 +1080,7 @@ function eP(e) {
   });
 }
 function eD() {
-  let e = d4(e => e.auth);
+  let e = useSelector(e => e.auth);
   return jsx(fu, {
     name: "Enable Cookies",
     children: jsx(v, {
@@ -1102,9 +1102,9 @@ function eD() {
 function eM({
   formId: e
 }) {
-  let t = wA();
-  let i = d4(e => e.auth.googleIdToken);
-  let s = d4(e => e.auth.googleTokenType);
+  let t = useDispatch();
+  let i = useSelector(e => e.auth.googleIdToken);
+  let s = useSelector(e => e.auth.googleTokenType);
   useEffect(() => {
     sT({
       googleUserInfo: {
@@ -1131,7 +1131,7 @@ function eM({
   });
 }
 function ej(e) {
-  let t = wA();
+  let t = useDispatch();
   let i = "gov" === window.INITIAL_OPTIONS.cluster_name;
   let r = i ? _$$t("auth.email-only.header") : _$$t("auth.saml-start.header");
   return jsxs(v, {
@@ -1245,7 +1245,7 @@ function eG({
   });
 }
 function ez(e) {
-  let t = wA();
+  let t = useDispatch();
   let {
     auth
   } = e;
@@ -1361,7 +1361,7 @@ function ez(e) {
   });
 }
 function eH(e) {
-  let t = wA();
+  let t = useDispatch();
   let [i, r] = fp(Kf);
   let o = Xr(nb);
   _$$h(() => () => {
@@ -1455,10 +1455,10 @@ function eX(e) {
   });
 }
 function eQ(e) {
-  let t = wA();
+  let t = useDispatch();
   let i = Xr(nb);
   let [o, l] = fp(Kf);
-  let c = function() {
+  let c = function () {
     let {
       getConfig
     } = I7("exp_signup_optimization_deferred_password");
@@ -1557,7 +1557,7 @@ function eQ(e) {
   });
 }
 function eJ(e) {
-  let t = wA();
+  let t = useDispatch();
   let i = () => {
     t(My());
   };
@@ -1615,7 +1615,7 @@ function eJ(e) {
 }
 let e1 = "validate_code--description--w-PBc";
 function e2(e) {
-  let t = wA();
+  let t = useDispatch();
   let [i, s] = useState("");
   return jsxs(v, {
     onSubmit: () => {
@@ -1824,11 +1824,11 @@ function e9() {
   });
 }
 function te() {
-  let e = wA();
-  let t = d4(e => e.auth.email);
-  let i = d4(e => e.auth.formState);
-  let s = d4(e => e.auth.redirectUrl || "/");
-  let o = d4(e => e.user?.email === t);
+  let e = useDispatch();
+  let t = useSelector(e => e.auth.email);
+  let i = useSelector(e => e.auth.formState);
+  let s = useSelector(e => e.auth.redirectUrl || "/");
+  let o = useSelector(e => e.user?.email === t);
   let d = i === qB.CHECK_EMAIL_MAGIC_LINK_SIGN_IN_AFTER_PASSWORD;
   let c = _$$s.alignCenter.font16.lh24.$;
   let [p, h] = useState("");
@@ -2023,10 +2023,10 @@ function ta({
   });
 }
 function ts() {
-  let e = wA();
-  let t = d4(e => e.auth.email);
-  let i = d4(e => e.auth.redirectUrl);
-  let s = d4(e => e.auth.origin);
+  let e = useDispatch();
+  let t = useSelector(e => e.auth.email);
+  let i = useSelector(e => e.auth.redirectUrl);
+  let s = useSelector(e => e.auth.origin);
   let o = _$$s.alignCenter.font16.lh24.$;
   let d = jsx("strong", {
     className: e6,
@@ -2143,7 +2143,7 @@ function ts() {
   });
 }
 export function $$to0(e) {
-  let t = wA();
+  let t = useDispatch();
   useEffect(() => () => {
     t(ET());
     t(_$$E({
@@ -2208,7 +2208,7 @@ export function $$to0(e) {
   });
 }
 function tl(e) {
-  let t = wA();
+  let t = useDispatch();
   let i = Xr(nb);
   _$$h(() => {
     e.auth.formState !== qB.GOOGLE_SSO_SIGNUP_ACTION_REDIRECT && e.auth.formState !== qB.VERIFY_HUMAN && (t(OZ({
@@ -2293,24 +2293,24 @@ function tl(e) {
   if (e.auth.formState === qB.RESET_PASSWORD) return jsx(en, {
     onFormSubmit: r,
     ...e
-  }); else if (e.auth.formState === qB.VALIDATE_CODE) return jsx(e2, {
+  });else if (e.auth.formState === qB.VALIDATE_CODE) return jsx(e2, {
     onFormSubmit: r,
     ...e
-  }); else if (e.auth.formState === qB.SAML_START) return jsx(ej, {
+  });else if (e.auth.formState === qB.SAML_START) return jsx(ej, {
     onFormSubmit: r,
     ...e
-  }); else if (e.auth.formState === qB.EMAIL_ONLY) return jsx(eP, {
+  });else if (e.auth.formState === qB.EMAIL_ONLY) return jsx(eP, {
     onFormSubmit: r,
     ...e
-  }); else if (e.auth.formState === qB.JOIN_ORG) return jsx(Q, {
+  });else if (e.auth.formState === qB.JOIN_ORG) return jsx(Q, {
     onFormSubmit: r,
     ...e
-  }); else if (e.auth.formState === qB.VERIFY_HUMAN) return jsx(j, {
+  });else if (e.auth.formState === qB.VERIFY_HUMAN) return jsx(j, {
     ...e
-  }); else if (e.auth.formState === qB.TWO_FACTOR) return jsx(H, {
+  });else if (e.auth.formState === qB.TWO_FACTOR) return jsx(H, {
     onFormSubmit: r,
     ...e
   });
   return null;
 }
-export const Ob = $$to0; 
+export const Ob = $$to0;

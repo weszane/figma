@@ -1,7 +1,7 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useRef, useState, useEffect, useLayoutEffect } from "react";
 import { createPortal } from "../vendor/944059";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { parsePxInt } from "../figma_app/783094";
 import { wY, cU } from "../figma_app/708845";
 import { A as _$$A } from "../905/638715";
@@ -37,12 +37,12 @@ export function $$g0({
   });
   let [T, k] = useState("top");
   let [R, N] = useState("center");
-  let P = d4(({
+  let P = useSelector(({
     mirror: {
       appModel: e
     }
   }) => e.showUi);
-  let O = d4((e) => e.downtime.status === _$$A.Ongoing || e.downtime.status === _$$A.Imminent || e.showingDowntimeBanner);
+  let O = useSelector(e => e.downtime.status === _$$A.Ongoing || e.downtime.status === _$$A.Imminent || e.showingDowntimeBanner);
   let [D, L] = useState(!1);
   let F = g ?? ("top" === T ? T1 : DH);
   f && (F = "top" === T ? f.aboveTargetPositionY : f.belowTargetPositionY);
@@ -84,7 +84,7 @@ export function $$g0({
         return;
       }
       e.boundingClientRect.y < e.rootBounds.top ? k("bottom") : e.boundingClientRect.y + e.boundingClientRect.height > e.rootBounds.bottom && k("top");
-      e.boundingClientRect.x < e.rootBounds.left ? N((e) => "right" === e ? "center" : "left") : e.boundingClientRect.x + e.boundingClientRect.width > e.rootBounds.right && N((e) => "left" === e ? "center" : "right");
+      e.boundingClientRect.x < e.rootBounds.left ? N(e => "right" === e ? "center" : "left") : e.boundingClientRect.x + e.boundingClientRect.width > e.rootBounds.right && N(e => "left" === e ? "center" : "right");
       i && requestAnimationFrame(() => {
         L(!0);
       });
@@ -110,7 +110,7 @@ export function $$g0({
     },
     positionX: M,
     positionY: F,
-    childRef: (e) => {
+    childRef: e => {
       E.current = e;
     },
     closeOnEsc: y,

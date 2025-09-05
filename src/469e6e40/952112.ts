@@ -1,5 +1,5 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { Yy } from "../figma_app/59509";
 import { Q } from "../905/363675";
 import { $ } from "../905/692618";
@@ -10,7 +10,7 @@ import { b } from "../905/985254";
 export function $$u0({
   openConnectedProjects: e
 }) {
-  let t = wA();
+  let t = useDispatch();
   let a = () => {
     t(b({
       seen_connected_project_in_admin_dashboard_banner: !0

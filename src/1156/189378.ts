@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { memo, useRef, useCallback } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { b as _$$b, q7, Q$, bL, mc } from "../figma_app/860955";
 import { K } from "../905/443068";
 import { s as _$$s } from "../905/551945";
@@ -34,7 +34,7 @@ export function $$y0({
   createLoadedAttachment: b,
   toggleComponent: j
 }) {
-  let v = wA();
+  let v = useDispatch();
   let k = useRef(null);
   let {
     getTriggerProps,

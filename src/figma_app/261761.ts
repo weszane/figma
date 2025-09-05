@@ -1,6 +1,6 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useRef, useState, useCallback } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { E as _$$E } from "../905/632989";
 import { j0r } from "../figma_app/763686";
 import { dI } from "../905/805904";
@@ -387,7 +387,7 @@ export function $$z4({
   noPadding: t,
   isSubsection: r
 }) {
-  let s = d4(e => e.mirror.selectionProperties.numSelected) || 0;
+  let s = useSelector(e => e.mirror.selectionProperties.numSelected) || 0;
   let o = G();
   let l = o[0];
   let d = T4.useCopyAllShadows(l?.shadowsAndBlurs ?? []);

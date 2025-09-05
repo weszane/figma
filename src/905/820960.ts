@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useMemo, useState, useCallback } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { s as _$$s } from "../cssbuilder/589278";
 import { tx, t as _$$t } from "../905/303541";
 import { nl } from "../905/590952";
@@ -30,15 +30,15 @@ import { Ys } from "../figma_app/697906";
 import { A as _$$A } from "../5724/240681";
 export function $$O2(e) {
   let t;
-  let i = wA();
-  let O = d4(e => e.currentUserOrgId);
+  let i = useDispatch();
+  let O = useSelector(e => e.currentUserOrgId);
   let D = FC();
   let L = _$$x();
-  let F = d4(e => e.orgById);
-  let M = d4(({
+  let F = useSelector(e => e.orgById);
+  let M = useSelector(({
     selectedView: e
   }) => e);
-  let j = d4(e => e.loadingState);
+  let j = useSelector(e => e.loadingState);
   let U = e.team.member_count ?? 0;
   let B = _$$Y(e.team.id, FEntityType.TEAM, O);
   let V = useMemo(() => "loaded" === B.status && void 0 !== B.favorite, [B]);

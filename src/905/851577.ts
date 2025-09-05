@@ -1,5 +1,5 @@
 import { useRef, useContext, useCallback } from "react";
-import { Pj, wA } from "../vendor/514228";
+import { useStore, useDispatch } from "../vendor/514228";
 import { h as _$$h } from "../905/207101";
 import { Ay } from "../figma_app/778880";
 import { BV, Pt } from "../figma_app/806412";
@@ -16,8 +16,8 @@ import { Nq, zR } from "../figma_app/817077";
 import { J } from "../905/633914";
 import { nS } from "../figma_app/274383";
 export function $$b0(e, t) {
-  let i = Pj();
-  let b = wA();
+  let i = useStore();
+  let b = useDispatch();
   let v = new Image();
   let I = useRef(!1);
   let E = useRef(void 0);

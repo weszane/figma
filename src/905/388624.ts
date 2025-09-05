@@ -1,5 +1,5 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { s as _$$s } from "../cssbuilder/589278";
 import { oB, j7 } from "../905/929976";
 import { useEffect } from "react";
@@ -69,20 +69,20 @@ let V = parsePxInt(x) + 2 * parsePxInt("4px");
 let G = V + 1;
 function z() {
   let e;
-  let t = wA();
-  let i = d4(e => e.dropdownShown?.type === F);
-  let s = d4(e => e.selectedView);
-  let d = d4(e => e.dropdownShown?.data?.targetRect);
-  let x = d4(e => e.authedUsers);
-  let z = d4(e => e.authedProfilesById);
+  let t = useDispatch();
+  let i = useSelector(e => e.dropdownShown?.type === F);
+  let s = useSelector(e => e.selectedView);
+  let d = useSelector(e => e.dropdownShown?.data?.targetRect);
+  let x = useSelector(e => e.authedUsers);
+  let z = useSelector(e => e.authedProfilesById);
   let H = FC();
   let W = Pc();
-  let K = d4(e => e.orgById);
-  let Y = d4(e => e.authedTeamsById);
-  let q = d4(e => e.authedActiveCommunityProfile);
+  let K = useSelector(e => e.orgById);
+  let Y = useSelector(e => e.authedTeamsById);
+  let q = useSelector(e => e.authedActiveCommunityProfile);
   let $ = UP();
-  let Z = d4(e => Object.keys(e.authedProfilesById).some(t => !!e.authedProfilesById[t].org_id || !!e.authedProfilesById[t].team_id));
-  let X = d4(e => e.userNotifications.communityProfileBellStates);
+  let Z = useSelector(e => Object.keys(e.authedProfilesById).some(t => !!e.authedProfilesById[t].org_id || !!e.authedProfilesById[t].team_id));
+  let X = useSelector(e => e.userNotifications.communityProfileBellStates);
   useEffect(() => {
     nm()(t).catch(e => {
       let i = e?.data?.message || _$$t2("file_browser.error_try_again");
@@ -151,7 +151,7 @@ function z() {
         }]);
       }), e).concat((() => {
         let e = !!X && Object.values(X).some(e => e);
-        let i = function(e, t, i, r, a, s, o, l, d, u, p) {
+        let i = function (e, t, i, r, a, s, o, l, d, u, p) {
           let g = [];
           let f = new Set();
           let A = [];
@@ -330,8 +330,8 @@ function z() {
   });
 }
 export function $$H0(e) {
-  let t = wA();
-  let i = d4(e => e.dropdownShown?.type === F);
+  let t = useDispatch();
+  let i = useSelector(e => e.dropdownShown?.type === F);
   return jsxs(Fragment, {
     children: [jsx("button", {
       type: "button",
@@ -350,4 +350,4 @@ export function $$H0(e) {
     }), jsx(z, {})]
   });
 }
-export const h = $$H0; 
+export const h = $$H0;

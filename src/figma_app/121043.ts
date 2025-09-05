@@ -1,6 +1,6 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { memo, useState, useEffect, useRef, useMemo } from "react";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { $n } from "../905/521428";
 import { f as _$$f } from "../905/167712";
 import { K as _$$K } from "../905/443068";
@@ -89,9 +89,9 @@ let p = memo(function (e) {
 });
 var y = E;
 function ep(e) {
-  let t = d4(e => e.mirror.appModel.pagesList);
-  let r = d4(e => e.mirror.appModel.currentPage);
-  let i = wA();
+  let t = useSelector(e => e.mirror.appModel.pagesList);
+  let r = useSelector(e => e.mirror.appModel.currentPage);
+  let i = useDispatch();
   if (!t || t.length <= 1) return null;
   let s = async e => {
     await getSingletonSceneGraph().setCurrentPageFromNodeAsync(e.nodeId);
@@ -223,8 +223,8 @@ export function $$eR10() {
   let e = !!q5();
   let [t, r] = useState(!1);
   let n = eG(Ym() !== Dj.CONNECTED);
-  let s = eG(d4(e => e.saveStatus?.hasAutosaveChanges ?? !1));
-  let o = eG(d4(e => e.saveStatus?.hasMultiplayerChanges ?? !1));
+  let s = eG(useSelector(e => e.saveStatus?.hasAutosaveChanges ?? !1));
+  let o = eG(useSelector(e => e.saveStatus?.hasMultiplayerChanges ?? !1));
   useEffect(() => {
     if (null == n && null == s && null == o) {
       r(!1);
@@ -255,10 +255,10 @@ memo(function ({
 }) {
   let t = Um();
   let r = q5();
-  let i = d4(e => Yh(e.mirror.appModel, _$$ec.action) && !!r);
-  let s = d4(e => e.mirror.appModel.currentTool === _$$ec.tool);
+  let i = useSelector(e => Yh(e.mirror.appModel, _$$ec.action) && !!r);
+  let s = useSelector(e => e.mirror.appModel.currentTool === _$$ec.tool);
   let o = n6();
-  let l = d4(e => e.mirror.appModel.topLevelMode);
+  let l = useSelector(e => e.mirror.appModel.topLevelMode);
   return jsx($$ej5, {
     dropdownShown: t,
     isEnabled: i,
@@ -291,8 +291,8 @@ let eL = e => {
   }
 };
 export function $$eP9() {
-  let e = d4(e => e.mirror.appModel.multiplayerSessionState === kul.JOINED);
-  let t = d4(e => e.saveStatus?.tabCloseText);
+  let e = useSelector(e => e.mirror.appModel.multiplayerSessionState === kul.JOINED);
+  let t = useSelector(e => e.saveStatus?.tabCloseText);
   let r = Ym() === Dj.CONNECTED || PN();
   let s = $$eR10();
   let o = t ? eL(t) : "";
@@ -304,7 +304,7 @@ export function $$eP9() {
     "aria-label": o
   });
   !function (e, t, r, n, s) {
-    let o = d4(e => e.saveStatus?.hasUnsavedChanges);
+    let o = useSelector(e => e.saveStatus?.hasUnsavedChanges);
     let [l, d] = useState(!1);
     useEffect(() => {
       if (t && !l) {
@@ -400,7 +400,7 @@ export function $$ej5(e) {
 }
 let $$eU7 = memo(function (e) {
   let t = useRef(null);
-  let r = wA();
+  let r = useDispatch();
   let s = useMemo(() => _$$g(), []);
   let {
     dropdownShown,
@@ -515,7 +515,7 @@ let $$eB8 = memo(function (e) {
     selectedView: e.selectedView
   }));
   let i = $D();
-  let s = wA();
+  let s = useDispatch();
   return jsx("span", {
     className: _$$s.mr8.$,
     "data-preferred-theme": e.useDarkTheme ? "dark" : void 0,

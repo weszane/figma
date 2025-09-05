@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useEffect } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { filterNotNullish } from "../figma_app/656233";
 import { debounce } from "../905/915765";
 import { ServiceCategories as _$$e } from "../905/165054";
@@ -103,7 +103,7 @@ function Y(e) {
     fileName,
     onClick,
     thumbnail
-  } = W(wA(), e.fileState, e.user);
+  } = W(useDispatch(), e.fileState, e.user);
   return jsxs("div", {
     className: ho,
     children: [jsx("div", {
@@ -157,7 +157,7 @@ function V({
   onDone: o
 }) {
   let r;
-  let h = wA();
+  let h = useDispatch();
   let x = o || (() => {
     h(Ce());
   });
@@ -248,8 +248,8 @@ export function $$X1(e) {
     unsyncedFiles,
     localUnsyncedFiles
   } = Gg();
-  let i = d4(e => e.modalShown);
-  let o = d4(e => e.autosave.nextGarbageCollectionTimestamp);
+  let i = useSelector(e => e.modalShown);
+  let o = useSelector(e => e.autosave.nextGarbageCollectionTimestamp);
   let r = iZ();
   let d = r?.id;
   return i && d && r ? jsx(V, {
@@ -264,7 +264,7 @@ export function $$X1(e) {
 }
 function z(e) {
   let a = hS(e);
-  let s = wA();
+  let s = useDispatch();
   let [i, o] = useState(!1);
   let [r, x] = useState(!1);
   let v = async () => {
@@ -372,8 +372,8 @@ export function $$J0(e) {
     multiUserGarbageCollectionTimestamp,
     loaded,
     autosaveFilesToDelete
-  } = function(e) {
-    let a = wA();
+  } = function (e) {
+    let a = useDispatch();
     let [s, l] = useState({
       multiUserGarbageCollectionTimestamp: 0,
       multiUserUnsyncedFiles: {},
@@ -422,7 +422,7 @@ export function $$J0(e) {
       };
       hp.register(_$$a, a);
       a();
-      return function() {
+      return function () {
         hp.unregister(_$$a, a);
       };
     }, [a, e]);
@@ -451,4 +451,4 @@ let Z = e => {
 };
 $$J0.displayName = "AutosaveLogOutModal";
 export const AutosaveLogOutModal = $$J0;
-export const HasAutosaveChangesModal = $$X1; 
+export const HasAutosaveChangesModal = $$X1;

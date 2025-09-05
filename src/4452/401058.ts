@@ -1,5 +1,5 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { N } from "../905/438674";
 import { $n } from "../905/521428";
 import { e as _$$e } from "../905/149844";
@@ -16,7 +16,7 @@ if (443 == require.j) {}
 if (443 == require.j) {}
 if (443 == require.j) {}
 export function $$h0(e) {
-  let t = wA();
+  let t = useDispatch();
   let a = px();
   let h = Um(a).unwrapOr(!1);
   let x = jsxs(N, {

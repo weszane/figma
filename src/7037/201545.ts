@@ -1,6 +1,6 @@
 import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { useState, useEffect, useCallback, useMemo } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { M } from "../figma_app/749682";
 import { H4 } from "../905/992467";
 import { c$ } from "../figma_app/236327";
@@ -18,14 +18,14 @@ import { nn, Us, zY } from "../1250/486464";
 import { o as _$$o } from "../7037/529503";
 let b = e => `COMMENT_SIDEBAR_OVERFLOW_DROPDOWN-${e}`;
 export function $$T0(e) {
-  let t = wA();
+  let t = useDispatch();
   let [n, r] = M();
   let [l, m] = useState([]);
   useEffect(() => {
     m(e.messageMeta);
   }, [e.messageMeta]);
   let [h, g] = useState(!1);
-  let b = d4(e => e.comments.editingComment);
+  let b = useSelector(e => e.comments.editingComment);
   let T = useCallback(n => {
     t(uy({
       id: e.commentId,
@@ -156,7 +156,7 @@ export function $$T0(e) {
   });
 }
 function I(e) {
-  let t = wA();
+  let t = useDispatch();
   let n = useCallback(() => {
     t(to({
       type: E,

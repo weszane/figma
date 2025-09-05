@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useRef, useEffect } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { Ez5 } from "../figma_app/763686";
 import { fp, md } from "../figma_app/27355";
 import l from "classnames";
@@ -68,7 +68,7 @@ export function $$V1() {
   let i = dP();
   let s = _o();
   let l = Ye();
-  let m = wA();
+  let m = useDispatch();
   let f = sZ();
   let g = useRef(null);
   if (Y(() => t(!1), {

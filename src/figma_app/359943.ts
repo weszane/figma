@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useCallback, useId, useMemo, memo, useState } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { YJ, bL, UC } from "../figma_app/57171";
 import { Y9, JU } from "../figma_app/322555";
 import { E as _$$E } from "../905/632989";
@@ -66,7 +66,7 @@ function $(e) {
     productName,
     presetType
   } = c;
-  let _ = wA();
+  let _ = useDispatch();
   return jsx(fu, {
     name: `${productName} ${presetType} presets entrypoint`,
     children: jsx("div", {
@@ -263,7 +263,7 @@ let ep = () => [{
 export function $$e_2({
   recordingKey: e
 }) {
-  let t = wA();
+  let t = useDispatch();
   let r = ut(UK().expandedFramePresetType, EYD.NONE);
   let l = useCallback(e => {
     r === e && (e = EYD.NONE);

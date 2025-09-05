@@ -1,5 +1,5 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { mc, YJ, hE, g8, ZP, Q$, MJ, q7, Ov, rm } from "../figma_app/860955";
 import { V } from "../905/291719";
 import { Pt } from "../figma_app/806412";
@@ -91,7 +91,7 @@ function y({
   action: e,
   recordingKey: t
 }) {
-  let r = d4(nj);
+  let r = useSelector(nj);
   let _ = Yh(r, e.action);
   return jsxs(q7, {
     disabled: !_,

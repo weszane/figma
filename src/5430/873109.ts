@@ -3,7 +3,7 @@ import { s as _$$s } from "../5430/771444";
 import { ai } from "../figma_app/487970";
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useMemo, useCallback, useRef, useState, useEffect } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { fp } from "../figma_app/27355";
 import a from "classnames";
 import { tx, t as _$$t } from "../905/303541";
@@ -98,7 +98,7 @@ function N({
 }
 let ee = "save-button-clicked";
 function et(e, t, r, s) {
-  return function(r, i) {
+  return function (r, i) {
     let n = i();
     if (Cu(eo({
       state: n,
@@ -161,7 +161,7 @@ function et(e, t, r, s) {
   };
 }
 function er(e, t, r, s, i) {
-  return function(n, o) {
+  return function (n, o) {
     let a = o();
     if (Cu(eo({
       state: a,
@@ -279,7 +279,7 @@ function es({
   });
 }
 function ei(e, t, r, s) {
-  return function(r, i) {
+  return function (r, i) {
     let n = i();
     if (!n.user) {
       $D(_$$e.COMMUNITY, Error("[Community Saves] Attempted save without currentUser"));
@@ -310,7 +310,7 @@ function ei(e, t, r, s) {
   };
 }
 function en(e, t, r, s) {
-  return function(i, n) {
+  return function (i, n) {
     let o = n();
     let a = oi();
     if (!o.user || !o.authedActiveCommunityProfile) {
@@ -388,8 +388,8 @@ function eo({
   };
 }
 function ea(e, t) {
-  let r = wA();
-  let s = function(e) {
+  let r = useDispatch();
+  let s = function (e) {
     let t = Rs(PN2, {
       resourceId: e.id,
       orgIds: []
@@ -412,7 +412,7 @@ function ea(e, t) {
   let o = AG();
   let a = Om();
   let l = tv() ?? void 0;
-  let c = d4(e => e.authedActiveCommunityProfile?.profile_handle);
+  let c = useSelector(e => e.authedActiveCommunityProfile?.profile_handle);
   let d = useMemo(() => o && a ? new _$$e2(a, l) : c ? new xn({
     profileHandle: c,
     tabView: g3.SAVES
@@ -436,8 +436,8 @@ function ea(e, t) {
   };
 }
 function el(e, t, r) {
-  let s = wA();
-  let o = d4(e => Tm(e));
+  let s = useDispatch();
+  let o = useSelector(e => Tm(e));
   let a = Rs(H$B, {
     pluginId: t.id,
     orgIds: Object.keys(o)
@@ -541,20 +541,20 @@ function ev({
   resourceContent: t,
   viewContext: r
 }) {
-  let i = wA();
-  let o = d4(e => e.dropdownShown?.type === eg);
-  let a = d4(e => e.dropdownShown?.data?.targetRect);
+  let i = useDispatch();
+  let o = useSelector(e => e.dropdownShown?.type === eg);
+  let a = useSelector(e => e.dropdownShown?.data?.targetRect);
   let l = [];
   let {
     isTeamOrOrgProfileActive,
     isResourceLiked,
     onLikeActionClick
-  } = function(e) {
+  } = function (e) {
     let {
       resource,
       viewContext
     } = e;
-    let s = d4(e => e.authedActiveCommunityProfile);
+    let s = useSelector(e => e.authedActiveCommunityProfile);
     let i = _$$c(s);
     let o = _$$W(resource.id, Vm(resource), !XW(resource));
     let a = _$$B(resource.id, XW(resource));
@@ -593,7 +593,7 @@ function ev({
     onUserSaveActionClick,
     savesByOrgId,
     onOrgSaveAction
-  } = function({
+  } = function ({
     resource: e,
     resourceContent: t,
     viewContext: r,
@@ -620,7 +620,7 @@ function ev({
     viewContext: r,
     allowOrgSaves: !0
   });
-  let b = d4(e => Tm(e));
+  let b = useSelector(e => Tm(e));
   let j = [];
   if (0 !== Object.values(b).length && g0(e)) {
     j.push({
@@ -684,7 +684,7 @@ function eb({
   resourceContent: t,
   viewContext: r
 }) {
-  let o = wA();
+  let o = useDispatch();
   let a = useRef(null);
   let [l, c] = useState(!1);
   return jsxs(Fragment, {
@@ -727,7 +727,7 @@ function eL({
   allowOrgSaves: d,
   enableWideButtonForStickyFooter: u
 }) {
-  let m = wA();
+  let m = useDispatch();
   let {
     onUserSaveActionClick,
     isResourceSavedForUser
@@ -789,9 +789,9 @@ function eT({
   resourceContent: t,
   viewContext: r
 }) {
-  let i = wA();
-  let o = d4(e => e.dropdownShown?.type === eC);
-  let a = d4(e => e.dropdownShown?.data?.targetRect);
+  let i = useDispatch();
+  let o = useSelector(e => e.dropdownShown?.type === eC);
+  let a = useSelector(e => e.dropdownShown?.data?.targetRect);
   let {
     onUserSaveActionClick,
     isResourceSavedForUser
@@ -800,7 +800,7 @@ function eT({
     savesByOrgId,
     onOrgSaveAction
   } = el(e, t, r);
-  let _ = d4(e => Tm(e));
+  let _ = useSelector(e => Tm(e));
   if (!g0(e)) return null;
   let p = [{
     displayText: _$$t("community.saves.save_this_resource_for_yourself"),
@@ -907,7 +907,7 @@ export function $$eF0({
     showLikeButton,
     showSaveButton,
     showAuthorsHeader
-  } = function() {
+  } = function () {
     let e = _$$T();
     return {
       showLikeButton: !0,
@@ -916,7 +916,7 @@ export function $$eF0({
     };
   }();
   let c = K2(e);
-  let d = d4(e => Tm(e));
+  let d = useSelector(e => Tm(e));
   let x = Qo(t) ? e0.COMMUNITY_HUB_FILE : xQ(t) ? e0.COMMUNITY_HUB_WIDGET : e0.COMMUNITY_HUB_PLUGIN;
   let j = null;
   let w = jsx(_$$q, {
@@ -1206,4 +1206,4 @@ function eV({
 }
 export const Gm = $$eF0;
 export const Wt = $$eH1;
-export const Hb = $$eU2; 
+export const Hb = $$eU2;

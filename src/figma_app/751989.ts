@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useRef, useCallback } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { getSingletonSceneGraph } from "../905/700578";
 import { md } from "../figma_app/27355";
 import { b as _$$b } from "../905/985254";
@@ -38,7 +38,7 @@ export function $$C0() {
   let M = md(RIo.Query({
     orgId: null
   }));
-  let F = wA();
+  let F = useDispatch();
   let j = _$$e({
     overlay: r4m,
     priority: N.SECONDARY_MODAL

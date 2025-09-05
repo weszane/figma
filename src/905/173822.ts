@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { Component } from "react";
-import { Ng } from "../vendor/514228";
+import { connect } from "../vendor/514228";
 import { t, tx } from "../905/303541";
 import { Lo } from "../905/156213";
 import { Ju } from "../905/102752";
@@ -37,5 +37,5 @@ class u extends Component {
   }
 }
 u.displayName = "ConfirmTransferOwnershipModal";
-export let $$p0 = Ju(Ng()(u), "ConfirmTransferOwnershipModal");
+export let $$p0 = Ju(connect()(u), "ConfirmTransferOwnershipModal");
 export const b = $$p0;

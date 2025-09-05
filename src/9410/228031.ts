@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { memo, useState, useEffect, useMemo, useRef } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { E as _$$E } from "../905/730894";
 import { M as _$$M } from "../905/763508";
 import { I as _$$I } from "../figma_app/304633";
@@ -281,7 +281,7 @@ export function $$q0({
     recordingKey: Pt(N, "option.anchor_link"),
     icon: jsx(_$$M, {})
   }, "anchor-link-preset")] : [];
-  let V = wA();
+  let V = useDispatch();
   let W = Um();
   let J = useRef(null);
   useEffect(() => {

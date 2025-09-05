@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { DP } from "../905/158740";
 import { Qf } from "../905/266289";
 import { glU } from "../figma_app/763686";
@@ -16,7 +16,7 @@ export function $$_0() {
   let e = "ui3" === DP().version;
   let t = J();
   let i = _$$DP();
-  let _ = d4(e => e.theme?.enhancedContrast);
+  let _ = useSelector(e => e.theme?.enhancedContrast);
   useEffect(() => {
     Qf(_);
   }, [_]);

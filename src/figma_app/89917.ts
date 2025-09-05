@@ -1,5 +1,5 @@
 import { jsx } from "react/jsx-runtime";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { tx } from "../905/303541";
 import { sx } from "../905/941192";
 import { E as _$$E } from "../905/984674";
@@ -22,7 +22,7 @@ let S = sY;
 let v = yl;
 let $$A1 = "open-playground-file-onboarding-event";
 function x() {
-  let e = d4(e => e.selectedView);
+  let e = useSelector(e => e.selectedView);
   let t = jsx(_$$E, {
     fontWeight: "bold",
     children: tx("rcs.playground_file.ready_to_try")

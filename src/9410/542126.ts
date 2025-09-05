@@ -1,7 +1,7 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useRef, useMemo, useEffect } from "react";
 import { createPortal } from "../vendor/944059";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { o as _$$o } from "../905/821217";
 import { d as _$$d } from "../905/976845";
 import { b as _$$b, bL, mc, YJ, Q$, Ov, ME } from "../figma_app/860955";
@@ -65,13 +65,13 @@ function D({
   minWidth: t,
   recordingKey: i
 }) {
-  let d = wA();
+  let d = useDispatch();
   let c = BK("CANVAS_SEARCH_FILTER_DROPDOWN");
   let h = useRef(null);
   let y = p8("isReadOnly");
   let N = md(yo);
-  let A = d4(e => e.canvasSearch.filters);
-  let L = d4(e => e.canvasSearch.mode);
+  let A = useSelector(e => e.canvasSearch.filters);
+  let L = useSelector(e => e.canvasSearch.mode);
   let R = "whiteboard" === lg();
   let D = cJ();
   let F = to();
@@ -209,11 +209,11 @@ function F({
   shouldShowSearchCategories: i,
   recordingKey: a
 }) {
-  let h = wA();
+  let h = useDispatch();
   let f = p8("isReadOnly");
   let x = md(yo);
-  let y = d4(e => e.canvasSearch.filters);
-  let C = d4(e => e.canvasSearch.mode);
+  let y = useSelector(e => e.canvasSearch.filters);
+  let C = useSelector(e => e.canvasSearch.mode);
   let {
     manager,
     getTriggerProps

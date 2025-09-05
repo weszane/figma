@@ -1,5 +1,5 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, Y9, hE, nB, wi, jk } from "../figma_app/272243";
@@ -15,7 +15,7 @@ import { CI } from "../figma_app/528509";
 import { x as _$$x } from "../905/98916";
 export function $$x0(e) {
   var t;
-  let r = wA();
+  let r = useDispatch();
   let x = hS(e);
   let b = gY(Q4);
   let v = _$$x(e.folder.id, !0);
@@ -76,4 +76,4 @@ export function $$x0(e) {
     })
   });
 }
-export const FolderPermanentlyDeleteConfirmModal = $$x0; 
+export const FolderPermanentlyDeleteConfirmModal = $$x0;

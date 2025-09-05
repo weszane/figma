@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useCallback } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { eD } from "../figma_app/876459";
 import { c$ } from "../figma_app/236327";
 import { tx, t as _$$t } from "../905/303541";
@@ -25,7 +25,7 @@ import { j as _$$j } from "../905/834956";
 import { Cf, it } from "../905/504727";
 import { ak } from "../figma_app/212260";
 export function $$w2(e) {
-  let t = wA();
+  let t = useDispatch();
   let r = ZT()[e.widgetId];
   let i = uF(r);
   let d = WK(e.widgetId);
@@ -115,7 +115,7 @@ function R({
   } : null;
 }
 export function $$L1(e) {
-  let t = wA();
+  let t = useDispatch();
   let r = Um();
   let s = m0();
   let o = VR();
@@ -183,7 +183,7 @@ export let $$k7 = "DROPDOWN_TYPE_PLUGIN_USER_OPTIONS_DROPDOWN";
 export function $$M3(e) {
   if (!e.localResource && !e.publishedResource) throw Error("Either localResource or publishedResource is required");
   let t = m0();
-  let r = wA();
+  let r = useDispatch();
   let i = Um();
   let s = Object.values($1()).find(t => t.plugin_id === e.publishedResource?.id);
   let o = VR();
@@ -251,7 +251,7 @@ export function $$M3(e) {
 }
 export let $$F5 = "DROPDOWN_TYPE_DEVELOPMENT_RESOURCE_OPTIONS_DROPDOWN";
 export function $$j6(e) {
-  let t = wA();
+  let t = useDispatch();
   return jsx(_$$j, {
     ...e,
     dispatch: t,

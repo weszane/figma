@@ -1,6 +1,6 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useState, useRef, useCallback, useEffect, forwardRef, useLayoutEffect, Fragment as _$$Fragment, memo, useMemo } from "react";
-import { Pj, d4, wA } from "../vendor/514228";
+import { useStore, useSelector, useDispatch } from "../vendor/514228";
 import { mc, fP } from "../905/691059";
 import { i as _$$i } from "../905/718764";
 import { D as _$$D } from "../905/555681";
@@ -73,14 +73,14 @@ parsePxInt(rJv);
 var et = (e => (e.VOICE = "voice", e))(et || {});
 var ef = (e => (e[e.NO_CALL_STATE = 0] = "NO_CALL_STATE", e[e.JOIN_CALL_STATE = 1] = "JOIN_CALL_STATE", e[e.IN_CALL_WIDGET_OPEN = 2] = "IN_CALL_WIDGET_OPEN", e[e.IN_CALL_WIDGET_CLOSED = 3] = "IN_CALL_WIDGET_CLOSED", e))(ef || {});
 function eg(e) {
-  let t = Pj();
+  let t = useStore();
   let i = q5();
-  let n = d4(e => e.orgById);
-  let s = d4(e => e.teams);
-  let o = d4(e => e.selectedView?.editorType);
-  let l = d4(e => "prototype" === e.selectedView.view);
+  let n = useSelector(e => e.orgById);
+  let s = useSelector(e => e.teams);
+  let o = useSelector(e => e.selectedView?.editorType);
+  let l = useSelector(e => "prototype" === e.selectedView.view);
   let d = o === nT.Design || o === nT.Whiteboard || o === nT.DevHandoff || o === nT.Slides || o === nT.Illustration;
-  let c = wA();
+  let c = useDispatch();
   if (XN || !i || l || !d) return null;
   let u = YL({
     openFile: i,
@@ -261,7 +261,7 @@ function eI({
   let [L, R] = useState(310);
   let M = useRef(null);
   let [P, F] = useState(0);
-  let B = wA();
+  let B = useDispatch();
   let U = Av();
   let G = Math.min(window.innerHeight - U - 22, 465);
   useLayoutEffect(() => {
@@ -434,7 +434,7 @@ function ek({
   let [B, U] = useState(310);
   let G = useRef(null);
   let [K, z] = useState(0);
-  let Y = wA();
+  let Y = useDispatch();
   let J = Av();
   let q = Math.min(window.innerHeight - J - 22, 465);
   useLayoutEffect(() => {
@@ -653,13 +653,13 @@ let $$eO0 = memo(function (e) {
   let k = ZO();
   let N = _$$k2();
   let O = WN();
-  let M = wA();
+  let M = useDispatch();
   let [P, G] = useState(!1);
   let z = Oc();
   let W = dropdownShown?.type;
   let Y = !z && W === eA;
   let q = useMemo(() => multiplayer.allUsers.filter(e => e.sessionID !== currentUser?.sessionID), [multiplayer.allUsers, currentUser]);
-  let $ = d4(e => "prototype" === e.selectedView.view || "presentation" === e.selectedView.view);
+  let $ = useSelector(e => "prototype" === e.selectedView.view || "presentation" === e.selectedView.view);
   let ee = Zr("spotlight-me");
   let et = _$$G();
   let ei = !$ && (e.disableFollowing || k || !ee);

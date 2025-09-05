@@ -1,6 +1,6 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { memo, useState, useEffect, useLayoutEffect } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { lQ } from "../905/934246";
 import { nj } from "../905/125019";
 import { NLJ, cxo, glU, rrT } from "../figma_app/763686";
@@ -64,7 +64,7 @@ let $$K0 = memo(function ({
   let Q = washiTapePaint?.image?.hash && nj(washiTapePaint?.image?.hash);
   let [ee, et] = useState(!1);
   let [er, en] = useState(!1);
-  let ei = d4(e => e.mirror?.appModel.isReadOnly);
+  let ei = useSelector(e => e.mirror?.appModel.isReadOnly);
   let [ea, es] = fp(_$$B);
   useEffect(() => {
     Qc(_$$B2);

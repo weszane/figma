@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useCallback, useEffect, Suspense } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { isNotNullish } from "../figma_app/95419";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { hS } from "../905/437088";
@@ -237,7 +237,7 @@ function ee({
 }) {
   let E = r.key.parentId;
   let S = r.key.type;
-  let v = wA();
+  let v = useDispatch();
   let [A, x] = useState(!1);
   let N = useCallback(() => {
     f();

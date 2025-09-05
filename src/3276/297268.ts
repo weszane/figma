@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { memo, useContext, useRef, useState, useEffect, useCallback, useMemo } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { NLJ, Ez5, m1T, QOV } from "../figma_app/763686";
@@ -110,15 +110,15 @@ let er = memo(function (e) {
   let n = iZ();
   let c = _$$s();
   let m = Z5();
-  let P = wA();
+  let P = useDispatch();
   let T = useContext(viewportNavigatorContext);
   let z = useRef(null);
-  let J = d4(e => e.mirror.appModel.currentTool);
+  let J = useSelector(e => e.mirror.appModel.currentTool);
   let ee = ut(Ez5?.editorState().handToolTemporarilyEnabled, !1);
   let et = BI();
   let eo = e.activeThread?.id === hm;
   let er = eo ? null : e.activeThread?.id || null;
-  let el = d4(e => e.comments.emphasizedPinIds);
+  let el = useSelector(e => e.comments.emphasizedPinIds);
   let {
     zoomScale,
     deltaOffsetX,
@@ -139,8 +139,8 @@ let er = memo(function (e) {
   let ej = md(ux);
   let ek = useRef(null);
   let eP = md(_$$R);
-  let eI = d4(e => ![m1T.DESIGN_LAYOUT, m1T.WHITEBOARD_LAYOUT, m1T.HISTORY, m1T.PREVIEW, m1T.COMMENTS, m1T.DEV_HANDOFF, m1T.SLIDE_LAYOUT, m1T.SITES_LAYOUT].includes(e.mirror.appModel.activeCanvasEditModeType) || e.mirror.appModel.activeUserAction !== QOV.DEFAULT);
-  let eT = d4(e => e.mirror.appModel.activeCanvasEditModeType === m1T.COMMENTS);
+  let eI = useSelector(e => ![m1T.DESIGN_LAYOUT, m1T.WHITEBOARD_LAYOUT, m1T.HISTORY, m1T.PREVIEW, m1T.COMMENTS, m1T.DEV_HANDOFF, m1T.SLIDE_LAYOUT, m1T.SITES_LAYOUT].includes(e.mirror.appModel.activeCanvasEditModeType) || e.mirror.appModel.activeUserAction !== QOV.DEFAULT);
+  let eT = useSelector(e => e.mirror.appModel.activeCanvasEditModeType === m1T.COMMENTS);
   let eM = eI && (!et || et?.shouldOptimizeForIpadApp && et?.shouldFadeCommentsDuringEdit) || J === NLJ.MULTISELECT;
   let [eE, eN] = useState({
     viewport: T.getViewportInfo(),
@@ -151,7 +151,7 @@ let er = memo(function (e) {
     eS.current = e.threads;
   }, [e.threads]);
   let eD = useCallback(e => eS.current?.find(t => t.id === e) || null, [eS]);
-  let eA = d4(e => e.mirror.appModel.activeUserAction);
+  let eA = useSelector(e => e.mirror.appModel.activeUserAction);
   useEffect(() => {
     let e = z.current;
     e && (e.shouldDisablePointerEvents = !ev && c?.disableCommentsWhenHandToolEnabled && J === NLJ.HAND || ee || void 0 !== eA && eA !== QOV.DEFAULT || J === NLJ.MULTISELECT);
@@ -533,7 +533,7 @@ var el = (e => (e[e.Forward = 0] = "Forward", e[e.Backward = 1] = "Backward", e)
 let ed = () => {
   let e = _$$Z();
   let t = useContext(viewportNavigatorContext);
-  let n = d4(e => e.selectedView);
+  let n = useSelector(e => e.selectedView);
   return useCallback(o => e(_$$E(o.threads[0], t, n, !1, !0)), [e, t, n]);
 };
 let $$ec0 = memo(function (e) {

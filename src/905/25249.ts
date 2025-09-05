@@ -1,6 +1,6 @@
 import { jsx, Fragment, jsxs } from "react/jsx-runtime";
 import { useMemo, useState, useLayoutEffect, useEffect, useCallback } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { throwTypeError, debug } from "../figma_app/465776";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { hS } from "../905/437088";
@@ -132,7 +132,7 @@ function eC() {
     overlay: BWk,
     priority: _$$N2.DEFAULT_MODAL
   }, [e]);
-  let o = wA();
+  let o = useDispatch();
   let l = zl(ew);
   _$$h(() => {
     "reset" === l.currentState ? show() : show({
@@ -398,18 +398,18 @@ export let $$eK0 = Ju(function (e) {
     folderId
   } = e;
   let q = Pc();
-  let Q = d4(e => e.autocomplete);
-  let J = d4(e => e.contacts);
-  let ee = d4(e => e.dropdownShown);
-  let et = d4(e => e.orgDomains);
+  let Q = useSelector(e => e.autocomplete);
+  let J = useSelector(e => e.contacts);
+  let ee = useSelector(e => e.dropdownShown);
+  let et = useSelector(e => e.orgDomains);
   let ei = FC();
   let en = M4.Folder.useValue(folderId).data;
-  let er = d4(e => en?.team_id && e.teams[en.team_id] || null);
+  let er = useSelector(e => en?.team_id && e.teams[en.team_id] || null);
   let ea = sZ() || null;
   let [es, eo] = useState(e6.VIEWER);
   let [el, ed] = useState(0);
   let [ec, eu] = useState(!1);
-  let ep = wA();
+  let ep = useDispatch();
   let em = Rs(P8Q, {
     projectId: folderId,
     currentOrgId: ea?.id || null

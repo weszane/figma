@@ -1,5 +1,5 @@
 import { jsx } from "react/jsx-runtime";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { parsePxInt } from "../figma_app/783094";
 import { s as _$$s } from "../905/573154";
 import { t as _$$t } from "../905/303541";
@@ -24,10 +24,10 @@ import { H } from "../905/154301";
 import { p as _$$p } from "../905/195198";
 import { tgj } from "../figma_app/27776";
 export function $$C0() {
-  let e = d4(e => getPermissionsState(e));
-  let t = d4(e => e.selectedView);
-  let r = d4(e => e.teamRoleRequests);
-  let n = wA();
+  let e = useSelector(e => getPermissionsState(e));
+  let t = useSelector(e => e.selectedView);
+  let r = useSelector(e => e.teamRoleRequests);
+  let n = useDispatch();
   let l = _$$s2();
   return ({
     onRenameClick: i,
@@ -139,7 +139,7 @@ export function $$C0() {
       if (v.isInTeam) F && t.push({
         displayText: _$$t("team_view.toolbar.leave_team"),
         onClick: w
-      }); else if (C.org_id) {
+      });else if (C.org_id) {
         let i = YP(C, r[C.id], e, M);
         null != i && i !== gO.CLICK_JOIN && t.push({
           displayText: RI({
@@ -179,8 +179,8 @@ export function $$w1({
   onChangeTeamIconClick: a,
   selectedTeamPermissions: s
 }) {
-  let o = d4(e => e.dropdownShown);
-  let d = wA();
+  let o = useSelector(e => e.dropdownShown);
+  let d = useDispatch();
   let c = $$C0();
   if (!s) return null;
   let u = c({
@@ -203,4 +203,4 @@ export function $$w1({
   });
 }
 export const F = $$C0;
-export const W = $$w1; 
+export const W = $$w1;

@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useEffect } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { tx } from "../905/303541";
 import { te } from "../figma_app/275462";
 import { b as _$$b } from "../905/985254";
@@ -24,7 +24,7 @@ export let $$C1 = {
 export function $$j0() {
   let e = MY();
   let t = q5();
-  let s = wA();
+  let s = useDispatch();
   let j = iZ();
   let {
     show,

@@ -1,6 +1,6 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useMemo, useRef, useCallback } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { R as _$$R } from "../905/57445";
 import { RR } from "../figma_app/338442";
 import { Ez5 } from "../figma_app/763686";
@@ -143,7 +143,7 @@ export function $$J2({
     onRetry: retryPreferredValuesFetch,
     recordingKey: "instancePropAssignment"
   }) : void 0, [preferredValuesFetchError, retryPreferredValuesFetch]);
-  let el = wA();
+  let el = useDispatch();
   let {
     backingSymbolGUID,
     backingStateGroupGUID,
@@ -155,7 +155,7 @@ export function $$J2({
     onlyInstances,
     onlyInstanceSublayers
   } = _$$p(instanceAndSublayerGUIDs);
-  let eg = d4(e => e.library);
+  let eg = useSelector(e => e.library);
   let [ef, eE] = k9(() => {
     let e = backingStateGroupGUID ?? backingSymbolGUID;
     if (!e || gl(e)) return [[], null];

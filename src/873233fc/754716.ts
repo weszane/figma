@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useRef, useCallback, useMemo, useState, useEffect, memo } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { eBU } from "../figma_app/822011";
 import { mKm, Qa7, w3z, Ez5, _gJ, Oin } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
@@ -349,7 +349,7 @@ let eg = {
 function ef(e) {
   var t;
   let [n, a] = useState(!1);
-  let l = d4(e => e.mirror.sceneGraph);
+  let l = useSelector(e => e.mirror.sceneGraph);
   let d = _$$Z();
   t = l;
   let s = gn({
@@ -428,7 +428,7 @@ function ef(e) {
 function e_(e) {
   var t;
   let [n, a] = useState(!1);
-  let d = d4(e => e.mirror.sceneGraph);
+  let d = useSelector(e => e.mirror.sceneGraph);
   let s = _$$Z();
   t = d;
   let u = gn({
@@ -498,7 +498,7 @@ function eC(e) {
   var t;
   let [n, a] = useState(!1);
   let d = md(go);
-  let s = d4(e => e.mirror.sceneGraph);
+  let s = useSelector(e => e.mirror.sceneGraph);
   let u = _$$Z();
   t = s;
   let c = gn({
@@ -606,7 +606,7 @@ function ek(e) {
 function ej(e) {
   var t;
   let [n, a] = useState(!1);
-  let l = d4(e => e.mirror.sceneGraph);
+  let l = useSelector(e => e.mirror.sceneGraph);
   let d = _$$Z();
   t = l;
   let s = gn({
@@ -791,7 +791,7 @@ function eG({
 let eX = memo(({
   shouldShowDragAndDropBorder: e
 }) => {
-  let t = d4(e => e.progressBarState);
+  let t = useSelector(e => e.progressBarState);
   let n = p8("loadingEmbeds");
   let c = !!_I();
   let m = l7();
@@ -800,7 +800,7 @@ let eX = memo(({
   let h = Lk();
   let g = xo();
   let f = useRef(null);
-  let v = d4(e => e.openFile);
+  let v = useSelector(e => e.openFile);
   let _ = v ? v.key : "";
   SI();
   Gb(_);

@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useMemo, useRef, useCallback } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { rXF, mKm } from "../figma_app/763686";
 import o from "classnames";
 import { M as _$$M } from "../figma_app/648761";
@@ -97,7 +97,7 @@ export function $$C0({
     smallNudgeAmount,
     bigNudgeAmount
   } = sT();
-  let e_ = wA();
+  let e_ = useDispatch();
   let eh = useRef(!1);
   let em = _$$M(w);
   let eg = SG([b]).data ?? [];

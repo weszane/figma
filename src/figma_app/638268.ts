@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { memo, useRef, useState, useContext, useEffect, useMemo, useCallback } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { E as _$$E } from "../905/632989";
 import { tbL } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
@@ -75,7 +75,7 @@ export let $$O0 = memo(function ({
   let q = rf(O, "click", useCallback(e => {
     d?.(e);
   }, [d]));
-  let J = d4(e => e.library);
+  let J = useSelector(e => e.library);
   let Z = R ? p5 : _$$A2;
   r && (Z = `${Z} ${lG}`);
   d || (Z = `${Z} ${Tu}`);

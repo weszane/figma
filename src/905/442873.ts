@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { dI, sH } from "../905/537777";
 import { sA, t9, Fw } from "../905/711212";
 import { Eo } from "../figma_app/80990";
@@ -25,7 +25,7 @@ export function $$p0({
   variable: e,
   variableCollection: t
 }) {
-  let i = wA();
+  let i = useDispatch();
   let o = XN(e);
   let p = BQ(o ? e.node_id : void 0);
   let m = Px();

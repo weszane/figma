@@ -1,6 +1,6 @@
 import { jsx, jsxs } from "react/jsx-runtime";
 import { useEffect, useMemo, useState, useCallback, useRef, PureComponent } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { qE } from "../figma_app/492908";
 import { i as _$$i } from "../905/97346";
 import { Egt, NfO, Hcu } from "../figma_app/763686";
@@ -72,8 +72,8 @@ export function $$M1() {
 function F({
   onClose: e
 }) {
-  let t = wA();
-  let l = d4(J);
+  let t = useDispatch();
+  let l = useSelector(J);
   let a = useCallback(e => {
     let l = e.guids[0];
     l && ("canvas" === e.selectionType && Egt && Egt.setSelectedNodeAndCanvas(l, !1) && (hq(l), NfO && NfO.scrollAndZoomIntoView(e.guids)), "local_style" === e.selectionType && (wr(), t(Bn({
@@ -100,7 +100,7 @@ function I({
     trailing: !0
   });
   let b = Xr(lu);
-  let E = d4(e => {
+  let E = useSelector(e => {
     if ("prototype" === c.view) return !0;
     try {
       return null != e.mirror.sceneGraph.getCurrentPage();
@@ -109,7 +109,7 @@ function I({
     }
   });
   let S = "prototype" === c.view;
-  let O = d4(e => e.mirror.appModel.pagesList);
+  let O = useSelector(e => e.mirror.appModel.pagesList);
   let L = md(_$$L);
   useEffect(() => {
     if (E) {

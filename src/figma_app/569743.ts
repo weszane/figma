@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useState } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { md } from "../figma_app/27355";
 import o from "classnames";
 import { _ as _$$_ } from "../figma_app/658134";
@@ -35,7 +35,7 @@ export function $$E0({
   let [h, m] = useState(null);
   l && t && l().then(e => {
     e !== h && m(e);
-  }).catch(() => { });
+  }).catch(() => {});
   let g = "";
   e ? g = "translateY(100vh)" : null === h && (g += `translateY(-${a}px)`);
   null !== h && (n = h);
@@ -53,12 +53,12 @@ function y({
   srOnly: s
 }) {
   let o = uo();
-  let d = d4(e => !!e.modalShown);
+  let d = useSelector(e => !!e.modalShown);
   let [c, _] = useState(null);
   let h = gN();
   o && r && o().then(e => {
     e !== c && _(e);
-  }).catch(() => { });
+  }).catch(() => {});
   let f = $$E0({
     offscreen: t,
     shouldRequestMobileNativeBottomOffset: r,
@@ -76,4 +76,4 @@ function y({
   });
 }
 export const IQ = $$E0;
-export const Pm = $$f1; 
+export const Pm = $$f1;

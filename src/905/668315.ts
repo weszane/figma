@@ -1,6 +1,6 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useState } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { h as _$$h } from "../905/207101";
 import { s_ } from "../905/17223";
 import { kt } from "../figma_app/858013";
@@ -18,7 +18,7 @@ import { IW, ql, fp, fV } from "../figma_app/257005";
 import { M4, UC } from "../905/561298";
 import { Yk, vu, g8, aq, jG, g4, qr, PJ, GC } from "../figma_app/312949";
 function I(e) {
-  let t = wA();
+  let t = useDispatch();
   return jsxs("div", {
     className: Yk,
     children: [jsx(IW, {
@@ -38,7 +38,7 @@ function I(e) {
   });
 }
 export let $$E0 = Ju(function (e) {
-  let t = wA();
+  let t = useDispatch();
   let i = "loaded" === ql().status;
   let o = ud();
   _$$h(() => {

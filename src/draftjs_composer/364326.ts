@@ -1,6 +1,6 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useRef, useCallback, useMemo } from "react";
-import { wA, d4 } from "../vendor/514228";
+import { useDispatch, useSelector } from "../vendor/514228";
 import { lQ } from "../905/934246";
 import { I as _$$I, _Z } from "../figma_app/819288";
 import { t as _$$t } from "../905/303541";
@@ -11,7 +11,7 @@ import { C as _$$C } from "../905/937623";
 import { ri } from "../905/337179";
 export function $$g0(e) {
   let t;
-  let n = wA();
+  let n = useDispatch();
   let g = _B();
   let h = useRef(null);
   let f = useRef(null);
@@ -37,7 +37,7 @@ export function $$g0(e) {
   let v = useCallback(() => {
     _$$I(e.messageContent) || e.maxCommentLength && I > e.maxCommentLength || (onSubmit && onSubmit(), h.current && h.current.hasFocus() && f.current?.focus(), g.onClear());
   }, [onSubmit, e.messageContent, g, I, e.maxCommentLength]);
-  let E = d4(e => e.comments.typeahead);
+  let E = useSelector(e => e.comments.typeahead);
   let M = useCallback(e => e, []);
   f.current && (t = f.current.getBoundingClientRect());
   return jsxs(Fragment, {

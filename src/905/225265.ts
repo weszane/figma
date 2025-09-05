@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useMemo } from "react";
-import { d4 } from "../vendor/514228";
+import { useSelector } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
 import { c2 } from "../905/382883";
 import { l as _$$l } from "../905/716947";
@@ -73,7 +73,7 @@ export function $$X3() {
   } = Z(0);
   let t = md(debouncedValueAtom);
   let [i, a] = useState(!1);
-  let s = d4(e => e.library.assetsPanelSearch.query);
+  let s = useSelector(e => e.library.assetsPanelSearch.query);
   useEffect(() => {
     _$$Z2().then(e => {
       a(!!e);

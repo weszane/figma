@@ -1,4 +1,4 @@
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { J3, kN, JU } from "../figma_app/622574";
 import { q5 } from "../figma_app/516028";
 import { x } from "../905/619833";
@@ -7,7 +7,7 @@ import { YW } from "../figma_app/553488";
 export function $$d0() {
   let e = J3();
   let t = q5();
-  let i = wA();
+  let i = useDispatch();
   return {
     openSlidesPublishFlow: async n => {
       if (t) {

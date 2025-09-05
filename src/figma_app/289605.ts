@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useMemo, useState, useEffect, useCallback, useId } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { K as _$$K } from "../905/443068";
 import { E as _$$E } from "../905/632989";
@@ -56,7 +56,7 @@ function ee({
   let r = _$$u(e);
   let n = G6(r?.variableSetId);
   let i = Kd(r?.node_id);
-  let a = n?.modes.find((e) => e.id === n?.defaultModeID);
+  let a = n?.modes.find(e => e.id === n?.defaultModeID);
   let s = yK(r?.node_id);
   return {
     variable: r ?? void 0,
@@ -117,7 +117,7 @@ function ei({
   inlineCloseButton: s,
   canOpenLibrary: l = !0
 }) {
-  let d = wA();
+  let d = useDispatch();
   let u = ON();
   let p = ee({
     variableId: e,
@@ -136,7 +136,7 @@ function ei({
       message: "Variable details could not be loaded"
     })), t());
   }, [E, d, t]);
-  let T = useCallback((e) => {
+  let T = useCallback(e => {
     e.event.keyCode === Uz.ESCAPE && (u("escape_pressed"), e.event.preventDefault(), e.accept(), t());
   }, [u, t]);
   let I = useCallback(() => {
@@ -317,11 +317,11 @@ function el({
   modeOptions: r,
   jumpsCollection: s
 }) {
-  let o = wA();
+  let o = useDispatch();
   let l = ON();
   let d = Um();
-  let c = useMemo(() => r.find((t) => t.id === e), [e, r]);
-  let u = useCallback((r) => {
+  let c = useMemo(() => r.find(t => t.id === e), [e, r]);
+  let u = useCallback(r => {
     l("change_mode", {
       previous: e,
       current: r.id
@@ -349,7 +349,7 @@ function el({
         property: c,
         onChange: u,
         formatter: eo,
-        children: r.map((e) => jsx(c$, {
+        children: r.map(e => jsx(c$, {
           value: e,
           children: e.name
         }, `${e.id}`))
@@ -414,7 +414,7 @@ let eu = ex("variable_value_from_other_mode", function ({
       })
     })
   });
-}, (e) => ({
+}, e => ({
   modeName: e.getAttribute("data-tooltip-mode"),
   collectionName: e.getAttribute("data-tooltip-collection")
 }));
@@ -518,7 +518,7 @@ function e_({
   let C = useMemo(() => {
     if (y?.variableSetId === r || !S || !I) return null;
     let e = t?.[S] ?? I?.defaultModeID;
-    let n = I?.modes.find((t) => t.id === e);
+    let n = I?.modes.find(t => t.id === e);
     return n ? {
       modeName: n.name,
       collectionName: I.name
@@ -667,7 +667,7 @@ function eg(e, t, r) {
   let n = ec(t, r);
   let a = _$$u(e);
   let s = Xv(e, n);
-  let o = hg((s ?? []).map((e) => e.type === Z_n.ALIAS ? e.value : void 0));
+  let o = hg((s ?? []).map(e => e.type === Z_n.ALIAS ? e.value : void 0));
   let l = a?.variableSetId;
   return useMemo(() => o.some((e, t) => !!e && t > 0 && e?.variableSetId !== l), [o, l]);
 }
@@ -689,7 +689,7 @@ function ef({
     h("toggle_alias_chain", {
       type: c ? "collapse" : "expand"
     });
-    d((e) => !e);
+    d(e => !e);
   }, [c, h]);
   let f = eg(e, t, r);
   if (!p || !_ || 0 === _.length) return null;
@@ -761,7 +761,7 @@ function eE({
       })]
     }), jsx("div", {
       className: Wu,
-      children: t.scopes.map((e) => jsx("div", {
+      children: t.scopes.map(e => jsx("div", {
         className: qg,
         "data-testid": `var-details-scope-${e.toString()}`,
         children: Us(e, {

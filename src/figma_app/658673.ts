@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useCallback } from "react";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { NLJ, glU } from "../figma_app/763686";
 import { KE, En } from "../905/116101";
 import { Cu } from "../figma_app/314264";
@@ -14,10 +14,10 @@ import { fK, yl } from "../figma_app/300024";
 import { Zh, vy, pN } from "../figma_app/731560";
 export let $$f1 = "action_open_universal_insert_modal";
 export function $$E0() {
-  let e = d4(e => e.universalInsertModal.showing);
-  let t = d4(e => e?.mirror?.appModel?.currentTool === NLJ.NONE);
+  let e = useSelector(e => e.universalInsertModal.showing);
+  let t = useSelector(e => e?.mirror?.appModel?.currentTool === NLJ.NONE);
   let r = e && t;
-  let E = wA();
+  let E = useDispatch();
   let y = useCallback(() => {
     r ? (E(KE()), glU?.triggerActionInUserEditScope("set-tool-default", {
       source: fK

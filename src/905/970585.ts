@@ -24,7 +24,7 @@ import { l as _$$l } from "../905/26554";
 import { $5 } from "../figma_app/869006";
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useEffect } from "react";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { $n } from "../905/521428";
 import { fn, sH } from "../905/871411";
 import { eD } from "../figma_app/876459";
@@ -99,7 +99,7 @@ async function j(e, t) {
 let G = "multiplayer-connection-error-modal";
 let z = "multiplayer-too-many-connections";
 function H(e) {
-  let t = d4(e => e.mirror.appModel.multiplayerSessionState === kul.JOINED);
+  let t = useSelector(e => e.mirror.appModel.multiplayerSessionState === kul.JOINED);
   useEffect(() => {
     t && e(Ce());
   }, [e, t]);
@@ -170,7 +170,7 @@ qK(z, e => jsx(K, {
   ...e
 }));
 let Z = Ju(function () {
-  let e = wA();
+  let e = useDispatch();
   let t = jsx("a", {
     className: Be,
     href: "https://help.figma.com/hc/articles/1500006775761",
@@ -203,7 +203,7 @@ let Z = Ju(function () {
   });
 }, "MultiplayerEditorLimitModal");
 let X = Ju(function () {
-  let e = wA();
+  let e = useDispatch();
   let t = jsx("a", {
     className: Be,
     href: "https://help.figma.com/hc/articles/1500006775761",

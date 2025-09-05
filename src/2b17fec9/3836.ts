@@ -1,6 +1,6 @@
 import { jsxs, Fragment, jsx } from "react/jsx-runtime";
 import { useCallback } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { K } from "../905/443068";
 import { e as _$$e } from "../905/149844";
 import { t as _$$t } from "../905/303541";
@@ -10,7 +10,7 @@ import { bD } from "../figma_app/45218";
 import { Ib } from "../905/129884";
 import { kt, Pq } from "../3591/828414";
 export function $$m0(e) {
-  let t = wA();
+  let t = useDispatch();
   let i = Um();
   let m = i?.type === kt;
   let f = e.resourceType === bD.WIDGET ? _$$t("community.plugins.create_new_widget") : _$$t("community.plugins.create_new_plugin");

@@ -1,5 +1,5 @@
 import { useCallback, useRef, useState, useMemo, useEffect, useContext } from "react";
-import { d4, wA } from "../vendor/514228";
+import { useSelector, useDispatch } from "../vendor/514228";
 import { G1 } from "../figma_app/691470";
 import { CortexErrorV2, ClientContentLengthLimitExceededError, ProviderContentLengthLimitExceededError, MeterExceededError, ProviderRateLimitExceededError, ProviderOverloadedError, CortexRateLimitExceededError, ClientNoTextSelectedError, ProviderServiceIssueError, ProviderServiceBusyError, OfflineError, UnsafeOrHarmfulPromptError, ProviderUnsafeOrHarmfulContentError, UnauthorizedError, NotImplementedError } from "../figma_app/316567";
 import { ch, DE } from "../figma_app/571325";
@@ -45,7 +45,7 @@ let K = "tone-dial-visual-bell";
 let $$Y4 = TJ(vu);
 export function $$$12() {
   let e = BE();
-  let t = d4(e => Yh(e.mirror.appModel, JT.SLIDES_REWRITE_TEXT));
+  let t = useSelector(e => Yh(e.mirror.appModel, JT.SLIDES_REWRITE_TEXT));
   let r = sO();
   let n = Em();
   let a = ow();
@@ -274,7 +274,7 @@ export function $$Q9(e) {
   let t = pP(JT.SLIDES_REWRITE_TEXT);
   let r = t.state;
   let o = ZC(r) !== r;
-  let l = wA();
+  let l = useDispatch();
   useEffect(() => () => {
     l(_$$F.dequeue({
       matchType: K
@@ -376,9 +376,9 @@ export function $$Q9(e) {
 }
 export function $$ee11(e, t) {
   let r = $(Tv().join(","));
-  let a = $(d4(e => e.mirror.appModel.activeUserAction === QOV.SELECTING_TEXT));
+  let a = $(useSelector(e => e.mirror.appModel.activeUserAction === QOV.SELECTING_TEXT));
   let s = r || a;
-  let o = $(d4(() => nl()?.characters));
+  let o = $(useSelector(() => nl()?.characters));
   let l = e === qy.RUNNING;
   let c = ZC(l) && !l;
   let u = l || c;

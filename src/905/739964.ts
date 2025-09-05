@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useState, useRef, useEffect, Suspense } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { throwTypeError } from "../figma_app/465776";
 import { isNotNullish } from "../figma_app/95419";
 import { ServiceCategories as _$$e } from "../905/165054";
@@ -507,7 +507,7 @@ function el(e) {
   });
 }
 export function $$ed1(e) {
-  let t = wA();
+  let t = useDispatch();
   return jsx(tH, {
     boundaryKey: "ConsumptionPaywallModal",
     fallback: H4.NONE_I_KNOW_WHAT_IM_DOING,

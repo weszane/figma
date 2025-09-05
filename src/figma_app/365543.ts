@@ -1,5 +1,5 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { Ng } from "../vendor/514228";
+import { connect } from "../vendor/514228";
 import { $n } from "../905/521428";
 import { N } from "../905/438674";
 import { A } from "../905/251970";
@@ -109,7 +109,7 @@ class T extends o6 {
     }) : this.renderContent();
   }
 }
-export let $$I0 = Ng((e, t) => ({
+export let $$I0 = connect((e, t) => ({
   ...t,
   userFlags: e.userFlags,
   isDevHandoff: $A(e.selectedView)

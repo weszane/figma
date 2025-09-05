@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useCallback } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { md } from "../figma_app/27355";
 import { h as _$$h } from "../905/207101";
 import { b as _$$b } from "../905/985254";
@@ -16,7 +16,7 @@ import { pC } from "../905/98947";
 import { j0N } from "../figma_app/6204";
 export function $$y0(e) {
   let t = md(eS);
-  let i = wA();
+  let i = useDispatch();
   let y = !!_$$f("not_gen_0");
   let b = md(NT);
   let C = md(g5);

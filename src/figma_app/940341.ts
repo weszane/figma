@@ -1,5 +1,5 @@
 import { jsx, jsxs } from "react/jsx-runtime";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { bL } from "../905/911410";
 import { vo, Y9, hE, jk, nB } from "../figma_app/272243";
 import { K } from "../905/443068";
@@ -25,7 +25,7 @@ import { Gf, Zv, _f } from "../figma_app/293304";
 let N = Gf;
 let $$C0 = "slides-edit-text-style-modal";
 export function $$w1() {
-  let e = wA();
+  let e = useDispatch();
   let t = p8("isReadOnly");
   let r = tS();
   let w = "slidesEditStyleModal";

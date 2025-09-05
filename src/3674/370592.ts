@@ -1,6 +1,6 @@
 import { jsx, jsxs, Fragment } from "react/jsx-runtime";
 import { useCallback, useId, useMemo, useRef } from "react";
-import { wA } from "../vendor/514228";
+import { useDispatch } from "../vendor/514228";
 import { E } from "../905/53857";
 import { J } from "../905/270045";
 import { b as _$$b, bL, mc, q7 } from "../figma_app/860955";
@@ -192,7 +192,7 @@ export function $$O1({
     data,
     toggle
   } = BK("CODEGEN_PLUGIN_SETTINGS_DROPDOWN");
-  let r = wA();
+  let r = useDispatch();
   let d = useRef(null);
   let u = e.name === data?.name && showing;
   let p = e.children?.find(e => e.isChecked)?.displayText ?? "";

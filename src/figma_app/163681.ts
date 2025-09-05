@@ -1,6 +1,6 @@
 import { jsx } from "react/jsx-runtime";
 import { useEffect, useState, useCallback, useRef } from "react";
-import { wA, Pj, d4 } from "../vendor/514228";
+import { useDispatch, useStore, useSelector } from "../vendor/514228";
 import { md } from "../figma_app/27355";
 import { b as _$$b } from "../905/985254";
 import { E as _$$E } from "../905/453826";
@@ -65,7 +65,7 @@ function R(e) {
   });
 }
 function k(e) {
-  let t = wA();
+  let t = useDispatch();
   let r = tx("tooltips_plus_onboarding.ui_kits_ending_step.title");
   let s = tx("tooltips_plus_onboarding.ui_kits_ending_step.description");
   let o = "UI Kits";
@@ -127,8 +127,8 @@ let F = {
 function j({
   completeOverlay: e
 }) {
-  let t = wA();
-  let r = Pj();
+  let t = useDispatch();
+  let r = useStore();
   let s = _$$f("figma_basics_tooltips_onboarding");
   let l = _$$f(F.FRAME);
   let d = _$$f(F.TEXT);
@@ -138,7 +138,7 @@ function j({
   let h = !!_$$f("started_figma_basics_onboarding");
   let m = aV();
   let [g, O] = useState(_$$en.FORWARD);
-  let L = d4(e => e.mirror.sceneGraph);
+  let L = useSelector(e => e.mirror.sceneGraph);
   let {
     hasAnyUiKit
   } = I7();
@@ -228,7 +228,7 @@ function j({
   });
 }
 function z(e) {
-  let t = wA();
+  let t = useDispatch();
   let r = te()() ? tx("tooltips_plus_onboarding.ui_kits_and_icon_packs_step.title") : tx("tooltips_plus_onboarding.ui_kits_step.title");
   let s = tx("tooltips_plus_onboarding.ui_kits_step.description");
   let o = "UI Kits";
@@ -275,7 +275,7 @@ let W = {
 function K({
   completeOverlay: e
 }) {
-  let t = wA();
+  let t = useDispatch();
   let r = _$$f("no_figma_basics_tooltips_onboarding");
   let s = aV();
   let [l, d] = useState(_$$en.FORWARD);
@@ -507,7 +507,7 @@ let er = {
 function en({
   completeOverlay: e
 }) {
-  let t = wA();
+  let t = useDispatch();
   let r = _$$f("seen_starting_points_tooltips_onboarding");
   let s = _$$f(er.EDIT_TEXT);
   let l = _$$f(er.PROPERTIES);
@@ -517,7 +517,7 @@ function en({
   let p = !!_$$f("started_figma_basics_onboarding");
   let h = aV();
   let [m, g] = useState(_$$en.FORWARD);
-  let E = d4(e => e.mirror.sceneGraph);
+  let E = useSelector(e => e.mirror.sceneGraph);
   let b = (e, r = _$$en.FORWARD) => {
     g(r);
     t(_$$b({
@@ -583,7 +583,7 @@ function en({
 }
 export let $$ei0 = "tooltips_plus_onboarding_reset_onboarding";
 export function $$ea1() {
-  let e = wA();
+  let e = useDispatch();
   let t = iZ();
   let r = q5()?.canEditCanvas;
   let f = md(NT);
