@@ -1,6 +1,6 @@
 import { useState, useLayoutEffect, useCallback } from "react";
 import { shallowEqual } from "../vendor/514228";
-import { TQ } from "../905/657224";
+import { getLocalStorage } from "../905/657224";
 import { tS } from "../figma_app/516028";
 export function $$o0({
   defaultIsOpen: e
@@ -17,7 +17,7 @@ export function $$o0({
       o(i => {
         let r = "function" == typeof e ? e(i) : e;
         t && function (e, t) {
-          let i = TQ();
+          let i = getLocalStorage();
           if (i) {
             let r = JSON.parse(i.getItem("pages-panel") || "{}");
             if (shallowEqual(r[e], t)) return;
@@ -61,7 +61,7 @@ export function $$o0({
   };
 }
 function l(e) {
-  let t = TQ();
+  let t = getLocalStorage();
   if (t) return JSON.parse(t.getItem("pages-panel") || "{}")[e];
 }
 export const d = $$o0;

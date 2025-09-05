@@ -1,7 +1,7 @@
 import { useCallback, useMemo } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
 import { getFeatureFlags } from "../905/601108";
-import { DN } from "../905/657224";
+import { getStorage } from "../905/657224";
 import { sx } from "../905/449184";
 import { k as _$$k } from "../905/651849";
 import { debugState } from "../905/407919";
@@ -203,10 +203,10 @@ export function $$z6(e) {
 let W = "local-resource-payment";
 export var $$K20 = (e => (e.PAID = "PAID", e.UNPAID = "UNPAID", e.NOT_SUPPORTED = "NOT_SUPPORTED", e))($$K20 || {});
 export function $$Y19() {
-  return DN().get(W);
+  return getStorage().get(W);
 }
 export function $$$4(e) {
-  DN().set(W, e);
+  getStorage().set(W, e);
 }
 function X(e, t) {
   if (t && m3(t)) return e?.[t.monetized_resource_metadata.id] || t.community_resource_payment;

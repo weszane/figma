@@ -6,7 +6,7 @@ import { jsx } from "react/jsx-runtime";
 import { Ix as _$$Ix } from "../vendor/130505";
 import { debounce } from "../905/915765";
 import { Z } from "../vendor/39153";
-import { Co } from "../905/657224";
+import { sessionStorageRef } from "../905/657224";
 import { zR } from "../vendor/488412";
 import { lZ } from "../figma_app/257275";
 let n;
@@ -80,12 +80,12 @@ let p = (() => {
       };
       if (function () {
         let e;
-        if (null == Co) return !1;
-        let t = JSON.parse(Co.getItem("reload_times") || JSON.stringify([]));
+        if (null == sessionStorageRef) return !1;
+        let t = JSON.parse(sessionStorageRef.getItem("reload_times") || JSON.stringify([]));
         let i = Date.now() - 3e5;
         for (; t && t[0] < i;) t.shift();
         t.length > 15 ? e = !0 : (t.push(Date.now()), e = !1);
-        Co.setItem("reload_times", JSON.stringify(t));
+        sessionStorageRef.setItem("reload_times", JSON.stringify(t));
         return e;
       }()) {
         e.trackEvent("Location Reload Excessive", n);
@@ -239,7 +239,7 @@ export function $$g1() {
 export function $$f5() {
   return p.location.pathname.startsWith("/make/");
 }
-let _ = (e) => {
+let _ = e => {
   let t = document.createElement("a");
   t.href = e;
   return {

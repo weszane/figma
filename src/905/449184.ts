@@ -11,7 +11,7 @@ import { YQ } from '../905/502364';
 import { getFeatureFlags } from '../905/601108';
 import { J6 } from '../905/602906';
 import { k as _$$k2 } from '../905/651849';
-import { Co, TQ } from '../905/657224';
+import { sessionStorageRef, getLocalStorage } from '../905/657224';
 import { Je, zo } from '../905/747968';
 import { g as _$$g } from '../905/880308';
 import { X as _$$X } from '../905/883621';
@@ -218,7 +218,7 @@ class x {
     this._analytics = e;
     this._PREFIX = 'segment:';
     this._USER_ID_KEY = `${this._PREFIX}userId`;
-    this._storage = Co;
+    this._storage = sessionStorageRef;
     if (!this._analytics) throw new Error('Unable to use Segment, "analytics" is undefined.');
     this.identifyUser(getInitialOptions().user_data);
     this._analytics.user && (window[y] = this._analytics.user().anonymousId());
@@ -229,7 +229,7 @@ class x {
   get anonymousId() {
     if (this._analytics.user) return this._analytics.user().anonymousId();
   }
-  track(e, t = {}, i = {}) { }
+  track(e, t = {}, i = {}) {}
 }
 class S {
   constructor(e) {
@@ -247,8 +247,8 @@ class S {
   get anonymousId() {
     return this._anonymousId;
   }
-  get userId() { }
-  track(e, t = {}, i = {}) { }
+  get userId() {}
+  track(e, t = {}, i = {}) {}
 }
 let w = (() => {
   let e = getInitialOptions().user_data;
@@ -355,7 +355,7 @@ class V {
     this._FLUSH_INTERVAL_MS = _$$h;
     this._disableTracking = null;
     this._desktopVisibilityUnsubscribe = null;
-    this._storage = TQ();
+    this._storage = getLocalStorage();
     this._onVisibilityChange = () => {
       document.visibilityState === 'hidden' && this._flushBufferWithBeacon();
     };
@@ -720,7 +720,7 @@ class G {
   constructor(e) {
     this._PREFIX = 'figment:';
     this._USER_ID_KEY = `${this._PREFIX}userId`;
-    this._storage = TQ();
+    this._storage = getLocalStorage();
     this.identifyUser = e => {
       if (!this._storage) return;
       if (!e || !e.id) {
@@ -1951,42 +1951,20 @@ let $$ea2 = () => b();
  * AnalyticsEventManager - manages defined analytics events, throttling, and options.
  * Original variable: $$es1
  */
-interface ThrottleConfig {
-  type: 'RATE' | 'DOCUMENT' | 'MS';
-  sampleRate?: number;
-  throttlePerDocument?: number;
-  throttleMS?: number;
-}
-
-interface EventDefinition {
-  featureFlag?: string;
-  throttle?: ThrottleConfig;
-  forwardToDatadog?: boolean;
-  sendAsBeacon?: boolean;
-  mlEvent?: boolean;
-  legacyName?: string;
-}
-
-interface SentEventDetail {
-  lastSent: number;
-  timesSentThisDocument: number;
-}
-
-type SentEventDetails = Record<string, SentEventDetail>;
 
 /**
  * Manages sending, throttling, and tracking analytics events.
  */
 class AnalyticsEventManager {
-  private sentEventDetails: SentEventDetails = {};
-  private sentDocumentEvents: Set<string> = new Set();
+  sentEventDetails = {};
+  sentDocumentEvents = new Set();
 
   /**
    * Tracks a defined event if allowed by throttling and feature flags.
    * @param eventName The event name.
    * @param properties Event properties.
    */
-  trackDefinedEvent = (eventName: string, properties: Record<string, any>) => {
+  trackDefinedEvent = (eventName, properties) => {
     const def = X(eventName);
     if (this.shouldSendDefinedEvent(eventName, def)) {
       en(this.getCorrectEventName(eventName, def), properties, this.getEventOptions(def));
@@ -1999,7 +1977,7 @@ class AnalyticsEventManager {
    * @param eventName The event name.
    * @param properties Event properties.
    */
-  trackDefinedMetric = _$$n((eventName: string, properties: Record<string, any>) => {
+  trackDefinedMetric = _$$n((eventName, properties) => {
     const def = X(eventName);
     if (this.shouldSendDefinedEvent(eventName, def)) {
       en(this.getCorrectEventName(eventName, def), properties, this.getEventOptions(def));
@@ -2012,7 +1990,7 @@ class AnalyticsEventManager {
    * @param eventName The event name.
    * @param properties Event properties.
    */
-  trackDefinedFullscreenEvent = (eventName: string, properties: Record<string, any>) => {
+  trackDefinedFullscreenEvent = (eventName, properties) => {
     const def = X(eventName);
     if (this.shouldSendDefinedEvent(eventName, def)) {
       er(this.getCorrectEventName(eventName, def), properties, this.getEventOptions(def));
@@ -2032,7 +2010,7 @@ class AnalyticsEventManager {
    * @param eventName The event name.
    * @param def The event definition.
    */
-  shouldSendDefinedEvent = (eventName: string, def: EventDefinition): boolean => {
+  shouldSendDefinedEvent = (eventName, def) => {
     if (def.featureFlag && !getFeatureFlags()[def.featureFlag]) return false;
     if (!def.throttle) return true;
     const throttle = def.throttle;
@@ -2058,11 +2036,11 @@ class AnalyticsEventManager {
    * @param eventName The event name.
    * @param def The event definition.
    */
-  recordEventSent = (eventName: string, def: EventDefinition) => {
+  recordEventSent = (eventName, def) => {
     const prev = this.sentEventDetails[eventName];
     this.sentEventDetails[eventName] = {
       lastSent: Date.now(),
-      timesSentThisDocument: prev ? prev.timesSentThisDocument + 1 : 1,
+      timesSentThisDocument: prev ? prev.timesSentThisDocument + 1 : 1
     };
     if (def.throttle?.type === 'DOCUMENT') {
       this.sentDocumentEvents.add(eventName);
@@ -2074,7 +2052,7 @@ class AnalyticsEventManager {
    * @param eventName The event name.
    * @param def The event definition.
    */
-  getCorrectEventName = (eventName: string, def: EventDefinition): string => {
+  getCorrectEventName = (eventName, def) => {
     return def.legacyName ? def.legacyName : eventName;
   };
 
@@ -2082,11 +2060,11 @@ class AnalyticsEventManager {
    * Gets event options for tracking.
    * @param def The event definition.
    */
-  getEventOptions(def: EventDefinition) {
+  getEventOptions(def) {
     return {
       forwardToDatadog: !!def.forwardToDatadog,
       sendAsBeacon: !!def.sendAsBeacon,
-      mlEvent: !!def.mlEvent,
+      mlEvent: !!def.mlEvent
     };
   }
 
@@ -2111,4 +2089,4 @@ export const az = analyticsEventManager;
 export const pp = $$ea2;
 export const Rz = $$eo3;
 export const sx = $$ee4;
-export const NP = $$et5; 
+export const NP = $$et5;

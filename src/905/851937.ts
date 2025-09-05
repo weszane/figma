@@ -44,7 +44,7 @@ import { ls, a7 } from "../905/917898";
 import { R as _$$R } from "../figma_app/612938";
 import { y as _$$y } from "../905/916933";
 import { et as _$$et, wY, yp, XY, iu, mv, lM, qR, Kd, XF, Mt, nT } from "../905/753206";
-import { x4 } from "../905/657224";
+import { localStorageRef } from "../905/657224";
 import { pS } from "../905/588985";
 let n;
 let r;
@@ -108,7 +108,7 @@ async function Z(e) {
     enableResponsiveSetHierarchyMutations
   } = e;
   let F = isWidget ? "widget" : "plugin";
-  if (stats.markTime("timeToRunPluginCodeInternalMs"), "0.6.0" === apiVersion || "1.0.0" === apiVersion); else throw Error(`Unknown ${F} api version "${apiVersion}"`);
+  if (stats.markTime("timeToRunPluginCodeInternalMs"), "0.6.0" === apiVersion || "1.0.0" === apiVersion) ;else throw Error(`Unknown ${F} api version "${apiVersion}"`);
   if (showRuntimeErrors) {
     let e;
     e = 0;
@@ -122,13 +122,13 @@ async function Z(e) {
       i(e);
       errorHandler(e);
     } : i;
-  } else t = errorHandler || (() => { });
+  } else t = errorHandler || (() => {});
   let M = code;
   if (!getFeatureFlags().plugins_remove_syntax_checking && !1 !== checkSyntax) {
     let e;
     try {
       e = await _$$z(code);
-    } catch (e) { }
+    } catch (e) {}
     if (e && !1 === e.success) {
       let {
         lineNumber,
@@ -332,7 +332,7 @@ async function ei(e) {
       figma.closePlugin()
     }
   `;
-  x4 && (x4["figma-extension-guard"] = "guard");
+  localStorageRef && (localStorageRef["figma-extension-guard"] = "guard");
   let r = "";
   let {
     runResult
@@ -762,8 +762,8 @@ async function ec({
 export let $$eu3 = _$$n(({
   newTriggeredFrom: e
 } = {
-    newTriggeredFrom: "runlast"
-  }) => {
+  newTriggeredFrom: "runlast"
+}) => {
   let t = SH();
   t && VQ(t) && (e && (t.triggeredFrom = e), _$$R.instance.enqueue({
     mode: "run-forever",
@@ -928,4 +928,4 @@ export const mK = $$es1;
 export const s2 = $$ea2;
 export const A9 = $$eu3;
 export const bT = $$eo4;
-export const E9 = $$ep5; 
+export const E9 = $$ep5;

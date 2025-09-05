@@ -21,7 +21,7 @@ import { xZ } from "../1250/927871";
 import { useEffect, useState, useCallback, useMemo, createElement, useRef, memo } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
 import { lQ } from "../905/934246";
-import { DN } from "../905/657224";
+import { getStorage } from "../905/657224";
 import { ZC } from "../figma_app/39751";
 import { buildStaticUrl, buildUploadUrl, getInitialOptions } from "../figma_app/169182";
 import { zl } from "../905/862321";
@@ -593,7 +593,7 @@ let eL = r1("file_browser_onboarded");
 let eF = ["seen_sidebar_workspace_onboarding", "seen_search_workspace_onboarding", "seen_libraries_workspace_onboarding"];
 let eB = e => ["file_browser_onboarded", "community_hub_onboarded", "variants_onboarded", "account_switcher_onboarded", ...(e ? eF : [])];
 let eU = () => {
-  let e = DN();
+  let e = getStorage();
   try {
     return !!e.get(zl);
   } catch (e) {}

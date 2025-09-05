@@ -2,7 +2,7 @@ import { useContext, useState, useCallback } from "react";
 import { rXF } from "../figma_app/763686";
 import { fp } from "../figma_app/27355";
 import { zN } from "../905/19536";
-import { Vc } from "../905/657224";
+import { useLocalStorageSync } from "../905/657224";
 import { PW } from "../figma_app/633080";
 import { A as _$$A } from "../905/749030";
 import { B } from "../905/946243";
@@ -12,7 +12,7 @@ export function $$u0({
 }) {
   let i = useContext(B);
   let u = _$$A(e?.type === PW.VARIABLE ? [e.resolvedType] : null, e);
-  let [p, m] = Vc(i.preferredLayoutLocalStorageKey, i.preferredLayout);
+  let [p, m] = useLocalStorageSync(i.preferredLayoutLocalStorageKey, i.preferredLayout);
   let [h, g] = fp(i.variablePickerSelectionAtom);
   let [f, _] = useState(function ({
     subscribedLibraries: e,

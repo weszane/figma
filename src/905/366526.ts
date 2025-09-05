@@ -1,5 +1,5 @@
 import rN from 'classnames';
-import { Fragment as _$$Fragment, PureComponent, Suspense, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import { PureComponent, Suspense, useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { H as _$$H } from 'react-dom';
 import { Fragment, jsx, jsxs } from 'react/jsx-runtime';
 import iN, { BEGIN, COMMIT, REVERT } from 'redux-optimist';
@@ -207,7 +207,7 @@ import { F as _$$F7, h as _$$h4 } from '../905/642505';
 import { k as _$$k3 } from '../905/644504';
 import { i as _$$i } from '../905/651613';
 import { k as _$$k4 } from '../905/651849';
-import { DN, TQ, Vc, x4 } from '../905/657224';
+import { getStorage, getLocalStorage, useLocalStorageSync, localStorageRef } from '../905/657224';
 import { $T, KJ as _$$KJ, Vx as _$$Vx, V0 } from '../905/657710';
 import { oA as _$$oA, tT as _$$tT } from '../905/663269';
 import { j2 } from '../905/667970';
@@ -1347,7 +1347,7 @@ let t_ = e => t => async function (i) {
           isWorkEmail: _$$iE(t),
           sha256_email: await qV(t.meta?.email)
         });
-        o && DN().set(_$$zl, !0);
+        o && getStorage().set(_$$zl, !0);
       }, t => (e.dispatch(_$$E({
         formState: qB.SIGN_UP
       })), e.dispatch(Qg({
@@ -1402,7 +1402,7 @@ let t_ = e => t => async function (i) {
             userId: t.meta.id
           }));
         }
-        o && DN().set(_$$zl, !0);
+        o && getStorage().set(_$$zl, !0);
       }).catch(t => e.dispatch(P8({
         resp: t
       })));
@@ -1447,7 +1447,7 @@ let t_ = e => t => async function (i) {
         isWorkEmail: _$$iE(t),
         sha256_email: await qV(t.meta?.email)
       });
-      r && DN().set(_$$zl, !0);
+      r && getStorage().set(_$$zl, !0);
     }, t => (e.dispatch(_$$E({
       formState: qB.SIGN_UP
     })), e.dispatch(Qg({
@@ -3091,7 +3091,7 @@ function r0({
       _ && l(await NW(_.id));
     })();
   }, [_, l, A]);
-  let y = useRef(DN()).current;
+  let y = useRef(getStorage()).current;
   let {
     fileByKey
   } = FC();
@@ -6177,7 +6177,7 @@ function oi(e, t) {
 function on(e = ot, t) {
   if (Qv.matches(t)) {
     return function () {
-      let e = x4 != null ? x4.getItem(s9) : null;
+      let e = localStorageRef != null ? localStorageRef.getItem(s9) : null;
       if (e) {
         return function (e) {
           try {
@@ -6206,7 +6206,7 @@ function on(e = ot, t) {
           }
         }(e);
       }
-      let t = x4 != null ? x4.getItem('persisted-sorting') : null;
+      let t = localStorageRef != null ? localStorageRef.getItem('persisted-sorting') : null;
       return t && function (e) {
         let t;
         function i(e) {
@@ -6321,10 +6321,10 @@ function on(e = ot, t) {
   return e;
 }
 let or = e => {
-  if (x4) {
+  if (localStorageRef) {
     try {
       let t = JSON.stringify(e);
-      x4.setItem(s9, t);
+      localStorageRef.setItem(s9, t);
     } catch (e) {}
   }
 };
@@ -9626,7 +9626,7 @@ function dJ(e = Object.create(null), t) {
   }
 }
 let d1 = 'music-standalone-volume';
-let d2 = () => Ay.isIpad ? 30 : DN().get(d1);
+let d2 = () => Ay.isIpad ? 30 : getStorage().get(d1);
 let d5 = () => ({
   music: {
     musicMessageID: 0,
@@ -9705,7 +9705,7 @@ function d4(e = d5(), t) {
   } else if (CE.matches(t)) {
     let i = e.volume;
     i = t.payload > 100 ? 100 : t.payload < 0 ? 0 : Math.floor(t.payload);
-    DN().set(d1, t.payload);
+    getStorage().set(d1, t.payload);
     return {
       ...e,
       volume: i
@@ -9736,8 +9736,8 @@ function d4(e = d5(), t) {
 }
 let d3 = 'timer-audio-enabled';
 let d6 = 'timer-and-music-volume';
-let d7 = () => Ay.isIpad ? 30 : DN().get(d6);
-let d8 = () => !!Ay.isIpad || !1 !== DN().get(d3);
+let d7 = () => Ay.isIpad ? 30 : getStorage().get(d6);
+let d8 = () => !!Ay.isIpad || !1 !== getStorage().get(d3);
 let d9 = () => ({
   modalState: 'original',
   audioEnabled: d8(),
@@ -9784,7 +9784,7 @@ let ce = ({
     }
   };
 };
-let ct = (e, t) => (DN().set(d3, t), {
+let ct = (e, t) => (getStorage().set(d3, t), {
   ...e,
   audioEnabled: t
 });
@@ -9807,7 +9807,7 @@ let ci = (e, t) => e.time && t.state === 'open' && !e.time.isPaused && performan
 let cn = (e, t) => {
   let i;
   i = t > 100 ? 100 : t < 0 ? 0 : Math.floor(t);
-  DN().set(d6, t);
+  getStorage().set(d6, t);
   return {
     ...e,
     volume: i
@@ -10087,8 +10087,8 @@ function cC(e, t) {
 }
 let ck = 'usedKeyboardShortcuts';
 let cR = {};
-if (x4) {
-  let e = x4.getItem(ck);
+if (localStorageRef) {
+  let e = localStorageRef.getItem(ck);
   try {
     (cR = e && JSON.parse(e) || {})['toggle-bold'] = (cR['text-toggle-bold'] || 0) + (cR['toggle-bold'] || 0);
   } catch (e) {}
@@ -10104,7 +10104,7 @@ function cN(e = cR, t) {
       ...e,
       [n]: 1
     };
-    x4 && x4.setItem(ck, JSON.stringify(i));
+    localStorageRef && localStorageRef.setItem(ck, JSON.stringify(i));
     return i;
   }
   return e;
@@ -10254,7 +10254,7 @@ function cJ(e = !1, t) {
 }
 let c0 = 'emoji-wheel-last-wheel-type';
 function c1() {
-  return TQ()?.getItem(c0) || 'REACTION1';
+  return getLocalStorage()?.getItem(c0) || 'REACTION1';
 }
 function c2(e = {
   type: 'NONE',
@@ -10288,7 +10288,7 @@ function c2(e = {
         i === 'STAMP1' && (i = 'STAMP2');
       }
       n === 'WHEEL' && t.payload.isReadonly ? (i = 'REACTION1', e.type === 'WHEEL' && (n = 'NONE')) : n === 'WHEEL' && t.payload.isJoinedToActiveVotingSession && (i = 'STAMP1');
-      TQ()?.setItem(c0, i);
+      getLocalStorage()?.setItem(c0, i);
       return {
         ...t.payload,
         openedViaHover: t.payload.openedViaHover ?? !1,
@@ -10406,22 +10406,22 @@ function c8(e = {}, t) {
   return _$$oI3.matches(t) ? t.payload : e;
 }
 let c9 = 'style-picker-list-layout';
-let ue = x4?.getItem(c9);
+let ue = localStorageRef?.getItem(c9);
 let ut = ue != null && ue === 'true';
 function ui(e = ut, t) {
-  return Kx.matches(t) ? (x4?.setItem(c9, t.payload.isListLayout.toString()), t.payload.isListLayout) : e;
+  return Kx.matches(t) ? (localStorageRef?.setItem(c9, t.payload.isListLayout.toString()), t.payload.isListLayout) : e;
 }
 let un = 'instance-swap-picker-list-layout';
-let ur = x4?.getItem(un) ?? null;
+let ur = localStorageRef?.getItem(un) ?? null;
 let ua = ur == null || ur === 'true';
 function us(e = ua, t) {
-  return fG.matches(t) ? (x4?.setItem(un, t.payload.isListLayout.toString()), t.payload.isListLayout) : e;
+  return fG.matches(t) ? (localStorageRef?.setItem(un, t.payload.isListLayout.toString()), t.payload.isListLayout) : e;
 }
 let uo = 'preferred-values-picker-list-layout';
-let ul = x4?.getItem(uo) ?? null;
+let ul = localStorageRef?.getItem(uo) ?? null;
 let ud = ul == null || ul === 'true';
 function uc(e = ud, t) {
-  return U8.matches(t) ? (x4?.setItem(uo, t.payload.isListLayout.toString()), t.payload.isListLayout) : e;
+  return U8.matches(t) ? (localStorageRef?.setItem(uo, t.payload.isListLayout.toString()), t.payload.isListLayout) : e;
 }
 function uu(e = null, t) {
   return Bs.matches(t) ? t.payload : e;
@@ -12488,7 +12488,7 @@ let pg = {
     errorType: null
   }, t) {
     if (_$$Qv2.matches(t)) {
-      let t = x4?.getItem(pm);
+      let t = localStorageRef?.getItem(pm);
       let i = getInitialOptions().user_data?.screenreader_enabled;
       let n = {
         ...e,
@@ -12537,7 +12537,7 @@ let pg = {
               enabled
             };
             try {
-              x4 && (x4.setItem(pm, enabled ? '1' : '0'), t.localStoredPreference = enabled);
+              localStorageRef && (localStorageRef.setItem(pm, enabled ? '1' : '0'), t.localStoredPreference = enabled);
             } catch (e) {}
             if (user) {
               let i = e.serverStoredPreference;
@@ -13919,7 +13919,7 @@ let hT = {
 function hk(e) {
   let [t, i] = function () {
     let e = _$$l1();
-    let [t, i] = Vc('developerDraggableIndicator', hT, {
+    let [t, i] = useLocalStorageSync('developerDraggableIndicator', hT, {
       debounceTime: 1e3
     });
     let n = useRef({

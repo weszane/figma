@@ -1,105 +1,227 @@
-import { useState, useMemo, useEffect } from "react";
-import { debounce } from "../905/915765";
-let $$a0 = null;
-let $$s8 = null;
+import { useEffect, useMemo, useState } from 'react'
+import { debounce } from '../905/915765'
+
+/**
+ * Storage references for session and local storage.
+ * Original variable names: $$a0, $$s8
+ */
+let sessionStorageRef: Storage | null = null
+let localStorageRef: Storage | null = null
 try {
-  $$a0 = window.sessionStorage;
-} catch (e) {}
+  sessionStorageRef = window.sessionStorage
+} catch {}
 try {
-  $$s8 = window.localStorage;
-} catch (e) {}
-export function $$o4() {
-  return $$s8;
+  localStorageRef = window.localStorage
+} catch {}
+
+/**
+ * Returns the localStorage reference.
+ * Original function name: $$o4
+ */
+export function getLocalStorage(): Storage | null {
+  return localStorageRef
 }
-export function $$l3() {
-  return $$a0;
+
+/**
+ * Returns the sessionStorage reference.
+ * Original function name: $$l3
+ */
+export function getSessionStorage(): Storage | null {
+  return sessionStorageRef
 }
-export function $$d2(e, t) {
-  for (let i of (t += "=", e.split(";"))) {
-    let e = /^\s*(.*)$/.exec(i);
-    if (e && (i = e[1]).slice(0, t.length) === t) return decodeURIComponent(i.slice(t.length));
+
+/**
+ * Parses a cookie string and returns the value for a given key.
+ * Original function name: $$d2
+ * @param cookieString - The cookie string
+ * @param key - The key to search for
+ */
+export function getCookieValue(cookieString: string, key: string): string | null {
+  const searchKey = `${key  }=`
+  for (const part of cookieString.split(';')) {
+    const trimmed = part.trim()
+    if (trimmed.slice(0, searchKey.length) === searchKey)
+      return decodeURIComponent(trimmed.slice(searchKey.length))
   }
-  return null;
+  return null
 }
-let c = class {
-  get(e) {
-    if (null == $$s8) return null;
-    let t = window.localStorage.getItem(e);
-    return null === t ? null : JSON.parse(t);
+
+/**
+ * LocalStorage wrapper class.
+ * Original class name: c
+ */
+class LocalStorageWrapper {
+  /**
+   * Gets a value from localStorage.
+   * @param key - The key to retrieve
+   */
+  get(key: string): any | null {
+    if (localStorageRef == null)
+      return null
+    const item = window.localStorage.getItem(key)
+    return item === null ? null : JSON.parse(item)
   }
-  set(e, t) {
-    null != $$s8 && window.localStorage.setItem(e, JSON.stringify(t));
+
+  /**
+   * Sets a value in localStorage.
+   * @param key - The key to set
+   * @param value - The value to store
+   */
+  set(key: string, value: any): void {
+    if (localStorageRef != null)
+      window.localStorage.setItem(key, JSON.stringify(value))
   }
-  delete(e) {
-    null != $$s8 && window.localStorage.removeItem(e);
+
+  /**
+   * Deletes a key from localStorage.
+   * @param key - The key to delete
+   */
+  delete(key: string): void {
+    if (localStorageRef != null)
+      window.localStorage.removeItem(key)
   }
-};
-let u = new Map();
-export function $$p1() {
-  return $$s8 ? new c() : u;
 }
-function m(e) {
+
+const fallbackMap = new Map<string, any>()
+
+/**
+ * Returns a LocalStorageWrapper instance if localStorage is available, otherwise a Map.
+ * Original function name: $$p1
+ */
+export function getStorage(): LocalStorageWrapper | Map<string, any> {
+  return localStorageRef ? new LocalStorageWrapper() : fallbackMap
+}
+
+/**
+ * Safe JSON parse helper.
+ * Original function name: m
+ * @param value - The string to parse
+ */
+function safeJsonParse(value: string): any | undefined {
   try {
-    return JSON.parse(e);
+    return JSON.parse(value)
   } catch {
-    return;
+    return undefined
   }
 }
-function h(e, t, i, {
-  debounceTime: a,
-  stringify: s = JSON.stringify,
-  parse: o = m
-} = {}) {
-  let [l, d] = useState(() => {
-    if (t) {
-      let i = t.getItem(e);
-      if (null != i) {
-        let e = o(i);
-        if (void 0 !== e) return e;
+
+/**
+ * React hook for syncing state with storage.
+ * Original function name: h
+ * @param key - Storage key
+ * @param storage - Storage object
+ * @param initialValue - Initial value or function
+ * @param options - Options for debounce, stringify, parse
+ */
+function useStorageSync<T>(
+  key: string,
+  storage: Storage | null,
+  initialValue: T | (() => T),
+  {
+    debounceTime,
+    stringify = JSON.stringify,
+    parse = safeJsonParse,
+  }: {
+    debounceTime?: number
+    stringify?: (value: any) => string
+    parse?: (value: string) => any
+  } = {}
+): [T, React.Dispatch<React.SetStateAction<T>>, () => void] {
+  const [state, setState] = useState<T>(() => {
+    if (storage) {
+      const stored = storage.getItem(key)
+      if (stored != null) {
+        const parsed = parse(stored)
+        if (parsed !== undefined)
+          return parsed
       }
     }
-    return "function" == typeof i ? i() : i;
-  });
-  let c = useMemo(() => {
-    let i = (i) => {
-      t && t.setItem(e, s(i));
-    };
-    return null == a ? i : debounce(i, a);
-  }, [a, t, s, e]);
-  let u = useMemo(() => () => {
-    t && t.removeItem(e);
-  }, [t, e]);
-  useEffect(() => {
-    c(l);
-  }, [c, l]);
-  return [l, d, u];
-}
-export function $$g5(e, t, i = {}) {
-  return h(e, $$s8, t, i);
-}
-export function $$f6(e, t, i = {}) {
-  return h(e, $$a0, t, i);
-}
-export function $$_7({
-  onSync: e,
-  shouldSyncValue: t
-}) {
-  useEffect(() => {
-    function i(i) {
-      t(i) && e(i.newValue);
+    return typeof initialValue === 'function' ? (initialValue as () => T)() : initialValue
+  })
+
+  const setStorageValue = useMemo(() => {
+    const setter = (value: T) => {
+      if (storage)
+        storage.setItem(key, stringify(value))
     }
-    window.addEventListener("storage", i);
-    return () => {
-      window.removeEventListener("storage", i);
-    };
-  }, [e, t]);
+    return debounceTime == null ? setter : debounce(setter, debounceTime)
+  }, [debounceTime, storage, stringify, key])
+
+  const removeStorageValue = useMemo(() => () => {
+    if (storage)
+      storage.removeItem(key)
+  }, [storage, key])
+
+  useEffect(() => {
+    setStorageValue(state)
+  }, [setStorageValue, state])
+
+  return [state, setState, removeStorageValue]
 }
-export const Co = $$a0;
-export const DN = $$p1;
-export const OS = $$d2;
-export const Q_ = $$l3;
-export const TQ = $$o4;
-export const Vc = $$g5;
-export const Wz = $$f6;
-export const tl = $$_7;
-export const x4 = $$s8;
+
+/**
+ * React hook for syncing state with localStorage.
+ * Original function name: $$g5
+ */
+export function useLocalStorageSync<T>(
+  key: string,
+  initialValue: T | (() => T),
+  options: {
+    debounceTime?: number
+    stringify?: (value: any) => string
+    parse?: (value: string) => any
+  } = {}
+): [T, React.Dispatch<React.SetStateAction<T>>, () => void] {
+  return useStorageSync(key, localStorageRef, initialValue, options)
+}
+
+/**
+ * React hook for syncing state with sessionStorage.
+ * Original function name: $$f6
+ */
+export function useSessionStorageSync<T>(
+  key: string,
+  initialValue: T | (() => T),
+  options: {
+    debounceTime?: number
+    stringify?: (value: any) => string
+    parse?: (value: string) => any
+  } = {}
+): [T, React.Dispatch<React.SetStateAction<T>>, () => void] {
+  return useStorageSync(key, sessionStorageRef, initialValue, options)
+}
+
+/**
+ * React hook for syncing value on storage events.
+ * Original function name: $$_7
+ * @param params - Object with onSync and shouldSyncValue
+ */
+export function useStorageEventSync({
+  onSync,
+  shouldSyncValue,
+}: {
+  onSync: (newValue: any) => void
+  shouldSyncValue: (event: StorageEvent) => boolean
+}): void {
+  useEffect(() => {
+    function handleStorageEvent(event: StorageEvent) {
+      if (shouldSyncValue(event))
+        onSync(event.newValue)
+    }
+    window.addEventListener('storage', handleStorageEvent)
+    return () => {
+      window.removeEventListener('storage', handleStorageEvent)
+    }
+  }, [onSync, shouldSyncValue])
+}
+
+// Refactored exports with original names as comments
+export const Co = sessionStorageRef // $$a0
+export const DN = getStorage // $$p1
+export const OS = getCookieValue // $$d2
+export const Q_ = getSessionStorage // $$l3
+export const TQ = getLocalStorage // $$o4
+export const Vc = useLocalStorageSync // $$g5
+export const Wz = useSessionStorageSync // $$f6
+export const tl = useStorageEventSync // $$_7
+export const x4 = localStorageRef // $$s8

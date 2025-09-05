@@ -1,6 +1,6 @@
 import { getFeatureFlags } from "../905/601108";
 import { zl, md, eU } from "../figma_app/27355";
-import { Co, x4 } from "../905/657224";
+import { sessionStorageRef, localStorageRef } from "../905/657224";
 import { Ay } from "../905/612521";
 import { b as _$$b } from "../905/985254";
 import { FFileType } from "../figma_app/191312";
@@ -12,10 +12,10 @@ import { eD } from "../figma_app/876459";
 import { debugState } from "../905/407919";
 import { getInitialOptions } from "../figma_app/169182";
 let g = (() => {
-  if (Co) {
+  if (sessionStorageRef) {
     let e = "initialPathName";
-    if (Co[e]) return Co[e];
-    Co[e] = Ay.location.pathname;
+    if (sessionStorageRef[e]) return sessionStorageRef[e];
+    sessionStorageRef[e] = Ay.location.pathname;
   }
   return Ay.location.pathname;
 })();
@@ -42,10 +42,10 @@ function b(e) {
 let T = "autoOpenInDesktopApp";
 let I = "openInDesktopAppMenuModal";
 export function $$S5() {
-  return getFeatureFlags().desktop_use_db_auto_open_pref ? zl.get(C) : x4 ? x4[T] : void 0;
+  return getFeatureFlags().desktop_use_db_auto_open_pref ? zl.get(C) : localStorageRef ? localStorageRef[T] : void 0;
 }
 export function $$v3(e) {
-  x4 && (x4[T] = e);
+  localStorageRef && (localStorageRef[T] = e);
   getFeatureFlags().desktop_write_auto_open_pref && (_$$e.setPreferenceValue({
     key: "auto_open_in_desktop",
     value: e
@@ -54,10 +54,10 @@ export function $$v3(e) {
   })));
 }
 export function $$A0() {
-  return x4 ? x4[I] : void 0;
+  return localStorageRef ? localStorageRef[I] : void 0;
 }
 export function $$x1(e) {
-  x4 && (x4[I] = e);
+  localStorageRef && (localStorageRef[I] = e);
 }
 export function $$N4() {
   return md(C);

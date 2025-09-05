@@ -1,6 +1,6 @@
 import { getFeatureFlags } from "../905/601108";
 import { zl } from "../figma_app/27355";
-import { OS } from "../905/657224";
+import { getCookieValue } from "../905/657224";
 import { sx } from "../905/449184";
 import { FJ } from "../905/508367";
 import { debugState } from "../905/407919";
@@ -38,7 +38,7 @@ let L = _$$D(() => new Promise((e, t) => {
     return;
   }
   window.setTimeout(function n() {
-    let i = OS(document.cookie, C);
+    let i = getCookieValue(document.cookie, C);
     if (null !== i) {
       let r = JSON.parse(i);
       document.cookie = C + "=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";

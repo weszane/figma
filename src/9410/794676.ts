@@ -4,7 +4,7 @@ import { useDispatch, useSelector, useStore } from "../vendor/514228";
 import { y as _$$y } from "../905/725962";
 import { DP } from "../905/158740";
 import { getFeatureFlags } from "../905/601108";
-import { DN, x4 } from "../905/657224";
+import { getStorage, localStorageRef } from "../905/657224";
 import { fp } from "../figma_app/347146";
 import { Tf } from "../905/280919";
 import { ji } from "../figma_app/814196";
@@ -415,7 +415,7 @@ function tm(e) {
     let h = useMemo(() => {
       if (!t || null == o) return !1;
       if (u) return !0;
-      let e = DN();
+      let e = getStorage();
       try {
         return e.get(v6(o)).includes(t.email);
       } catch (e) {
@@ -642,7 +642,7 @@ let t5 = memo(({
   });
 });
 let t7 = () => {
-  "hidden" === document.visibilityState && (x4?.clear(), _$$L.cleanupSession());
+  "hidden" === document.visibilityState && (localStorageRef?.clear(), _$$L.cleanupSession());
 };
 export function $$t80({
   children: e,

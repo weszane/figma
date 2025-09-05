@@ -1,4 +1,4 @@
-import { x4 } from "../905/657224";
+import { localStorageRef } from "../905/657224";
 import { m } from "../905/717445";
 import { nT } from "../figma_app/53721";
 let s = "last-used-design-editor-type";
@@ -12,7 +12,7 @@ export function $$o2() {
       default:
         return nT.Design;
     }
-  }(x4?.getItem(s));
+  }(localStorageRef?.getItem(s));
 }
 export function $$l0(e) {
   switch (e) {
@@ -37,7 +37,7 @@ export function $$d1(e) {
         return "design";
     }
   }(e);
-  x4?.setItem(s, t);
+  localStorageRef?.setItem(s, t);
 }
 export const Hy = $$l0;
 export const V6 = $$d1;

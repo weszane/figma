@@ -1,5 +1,5 @@
 import { aTn, glU } from "../figma_app/763686";
-import { x4 } from "../905/657224";
+import { localStorageRef } from "../905/657224";
 import { t } from "../905/303541";
 import { FU } from "../905/26824";
 import { uE } from "../figma_app/314264";
@@ -74,9 +74,9 @@ export function $$E1(e) {
 export function $$y6({
   layout: e
 }) {
-  if (!x4) return;
+  if (!localStorageRef) return;
   let t = aTn[e];
-  x4.setItem(p, t);
+  localStorageRef.setItem(p, t);
   new P().sendToOtherTabs($$_4, t);
   $$E1({
     layout: e,
@@ -89,8 +89,8 @@ export function $$y6({
   });
 }
 export function $$b2(e) {
-  if (!x4) return;
-  x4.setItem(p, e);
+  if (!localStorageRef) return;
+  localStorageRef.setItem(p, e);
   let {
     layout
   } = f(e);
@@ -98,8 +98,8 @@ export function $$b2(e) {
 }
 export function $$T7() {
   return function () {
-    if (x4) {
-      let e = x4.getItem(p);
+    if (localStorageRef) {
+      let e = localStorageRef.getItem(p);
       if (null != e) return f(e);
     }
     if (!debugState) return {

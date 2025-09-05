@@ -147,7 +147,7 @@ import { o8 as _$$o3, Fr } from '../905/622391';
 import { x as _$$x2 } from '../905/628884';
 import { E as _$$E } from '../905/632989';
 import { parseQuery } from '../905/634134';
-import { Q_, Vc, x4 } from '../905/657224';
+import { getSessionStorage, useLocalStorageSync, localStorageRef } from '../905/657224';
 import { isLocalFileKey } from '../905/657242';
 import { a6 as _$$a2, il as _$$il, pM as _$$pM, sd as _$$sd, tS as _$$tS, dE, Fo, GZ, Oc, PC, pV, PZ, RU, Uj, un, W9, WE, XF, zN } from '../905/661614';
 import { h as _$$h } from '../905/662353';
@@ -1963,7 +1963,7 @@ let rx = _$$Ju(() => {
       windowInnerWidth: e,
       windowInnerHeight: t
     }] = _$$A5(_$$l4(), 300);
-    let i = Q_();
+    let i = getSessionStorage();
     let n = window.innerWidth - 2 * rv;
     let r = window.innerHeight - parsePxNumber('20px') - rI - parsePxNumber('60px') - 2 * rv;
     let [a] = useState(() => {
@@ -2204,7 +2204,7 @@ let r7 = _$$Ju(({
 }) => {
   let n = useDispatch();
   let r = q5();
-  let [o, l] = Vc('preferred-document-color-profile-change-option', 'convert');
+  let [o, l] = useLocalStorageSync('preferred-document-color-profile-change-option', 'convert');
   let d = Av();
   let c = e === ywP.DISPLAY_P3 ? r4(o, d) : null;
   let u = e === ywP.SRGB ? ywP.DISPLAY_P3 : ywP.SRGB;
@@ -6284,10 +6284,10 @@ let lX = class e extends sP(sN(sR)) {
         if (this.hasUnsavedChanges()) {
           e = _$$t('autosave.visual_bell.unsaved_changes');
         } else {
-          if (x4) {
+          if (localStorageRef) {
             let e = Date.now();
-            let t = x4.getItem(i);
-            if (x4.setItem(i, e.toString()), t && parseInt(t) >= e - 12096e5) return;
+            let t = localStorageRef.getItem(i);
+            if (localStorageRef.setItem(i, e.toString()), t && parseInt(t) >= e - 12096e5) return;
           }
           let n = Math.round(Math.random() * (t.length - 1));
           e = `${t[n]} \xA0 ${_$$t('autosave.you_dont_need_to_save_reminder')}`;

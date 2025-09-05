@@ -1,32 +1,32 @@
 import { debounce } from "../905/915765";
 import { atom } from "jotai";
 import { atomWithDefault } from "../vendor/812047";
-import { TQ } from "../905/657224";
+import { getLocalStorage } from "../905/657224";
 import { y } from "../905/867679";
 export function $$$$l1(e, t, {
   subscribeToChanges: i
 } = {
-    subscribeToChanges: !1
-  }, {
-    debounceTime: d,
-    stringify: c = JSON.stringify,
-    parse: u = JSON.parse
-  } = {}) {
+  subscribeToChanges: !1
+}, {
+  debounceTime: d,
+  stringify: c = JSON.stringify,
+  parse: u = JSON.parse
+} = {}) {
   function p() {
-    let i = TQ();
+    let i = getLocalStorage();
     if (i) {
       let t = i.getItem(e);
       if (null != t) try {
         let e = u(t);
         if (void 0 !== e) return e;
-      } catch (e) { }
+      } catch (e) {}
     }
     return t;
   }
   let m = atomWithDefault(() => p());
   let h = (() => {
     let t = t => {
-      let i = TQ();
+      let i = getLocalStorage();
       i && i.setItem(e, c(t));
     };
     return null == d ? t : debounce(t, d);

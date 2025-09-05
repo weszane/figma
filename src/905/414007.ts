@@ -1,9 +1,9 @@
-import { OS, DN } from "../905/657224";
+import { getCookieValue, getStorage } from "../905/657224";
 import { Ay } from "../figma_app/778880";
 export let $$a2 = "ajs_anonymous_id";
 class s {
   get(e) {
-    let t = OS(document.cookie, e);
+    let t = getCookieValue(document.cookie, e);
     if (null === t) return null;
     try {
       return JSON.parse(t);
@@ -46,7 +46,7 @@ export function $$o0() {
   return null;
 }
 export function $$l1() {
-  return $$o0() || DN();
+  return $$o0() || getStorage();
 }
 export const OZ = $$o0;
 export const UG = $$l1;

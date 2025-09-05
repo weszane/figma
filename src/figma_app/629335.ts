@@ -1,9 +1,9 @@
 import { um, eU, yu, zl } from "../figma_app/27355";
-import { DN } from "../905/657224";
+import { getStorage } from "../905/657224";
 import { bt } from "../905/270322";
 import { YI, P$ } from "../figma_app/152368";
 function o() {
-  let e = DN().get("last-timer-set-time") || 180;
+  let e = getStorage().get("last-timer-set-time") || 180;
   return {
     seconds: YI(e % 60),
     minutes: YI(Math.floor(e / 60)),

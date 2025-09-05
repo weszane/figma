@@ -1,11 +1,11 @@
 import { Ez5 } from "../figma_app/763686";
 import { t } from "../905/303541";
-import { x4 } from "../905/657224";
+import { localStorageRef } from "../905/657224";
 import { Y5 } from "../figma_app/455680";
 import { Mo } from "../905/414069";
 let s = "outlineModeTriggered";
 function o() {
-  return x4 && x4.getItem(s) || null;
+  return localStorageRef && localStorageRef.getItem(s) || null;
 }
 export function $$c0() {
   return Ez5.canvasViewState();
@@ -13,19 +13,19 @@ export function $$c0() {
 let u = [{
   getObservable: () => $$c0().showOutlines,
   getMessage: e => e ? !function () {
-    if (!x4) return !0;
+    if (!localStorageRef) return !0;
     let e = o();
     if (!function () {
-      if (!x4) return;
+      if (!localStorageRef) return;
       let e = o();
-      x4.setItem(s, JSON.stringify({
+      localStorageRef.setItem(s, JSON.stringify({
         count: e ? JSON.parse(e).count + 1 : 1,
         lastTriggeredTimestamp: Date.now()
       }));
     }(), !e) return !0;
     let t = JSON.parse(e);
     let i = new Date(t.lastTriggeredTimestamp);
-    return (new Date().getTime() - i.getTime()) / 864e5 > 30 ? (x4.removeItem(s), !0) : !(t.count >= 5);
+    return (new Date().getTime() - i.getTime()) / 864e5 > 30 ? (localStorageRef.removeItem(s), !0) : !(t.count >= 5);
   }() ? {
     message: t("visual_bell.show_outlines_visible")
   } : {

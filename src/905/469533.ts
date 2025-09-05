@@ -1,6 +1,6 @@
 import { Qf } from "../905/266289";
 import { glU } from "../figma_app/763686";
-import { x4 } from "../905/657224";
+import { localStorageRef } from "../905/657224";
 import { NC } from "../905/17179";
 import { sx } from "../905/449184";
 import { eD } from "../figma_app/876459";
@@ -35,7 +35,7 @@ let $$y2 = nF((e, t) => {
       from: i.themePreference,
       theme: t.theme
     });
-    x4.setItem(ON, t.theme || "");
+    localStorageRef.setItem(ON, t.theme || "");
     new P().sendToOtherTabs(D6, t.theme);
     eD?.setThemePreference(t.theme);
     "fullscreen" === n.view && Y5.isReady() && glU.setEditorTheme(i_(t.theme) || "");
@@ -70,7 +70,7 @@ let $$C4 = nF((e, t) => {
   t.enhancedContrast !== i.enhancedContrast && (t.userInitiated && sx("enhanced_contrast_preference_updated", {
     from: i.enhancedContrast,
     enhancedContrast: t.enhancedContrast
-  }), Qf(t.enhancedContrast), x4.setItem(yt, t.enhancedContrast ? "true" : "false"), new P().sendToOtherTabs(Nx, t.enhancedContrast), eD?.setEnhancedContrast(t.enhancedContrast));
+  }), Qf(t.enhancedContrast), localStorageRef.setItem(yt, t.enhancedContrast ? "true" : "false"), new P().sendToOtherTabs(Nx, t.enhancedContrast), eD?.setEnhancedContrast(t.enhancedContrast));
   e.dispatch($$w1(t));
 });
 export const FY = $$S0;

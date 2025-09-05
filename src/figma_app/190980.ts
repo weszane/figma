@@ -1,5 +1,5 @@
 import { throwTypeError } from "../figma_app/465776";
-import { x4 } from "../905/657224";
+import { localStorageRef } from "../905/657224";
 import { my } from "../figma_app/976749";
 import { FPublisherType } from "../figma_app/191312";
 import { bD } from "../figma_app/45218";
@@ -52,10 +52,10 @@ export function $$y1(e, t) {
   return e === $A.Cooper && t === bD.PLUGIN ? "recent-plugins-cooper" : null;
 }
 export function $$b9(e, t) {
-  if (!x4) return [];
+  if (!localStorageRef) return [];
   let r = [];
   let n = $$y1(e, t);
-  let a = n && x4.getItem(n);
+  let a = n && localStorageRef.getItem(n);
   try {
     r = a && JSON.parse(a) || [];
   } catch (e) {}

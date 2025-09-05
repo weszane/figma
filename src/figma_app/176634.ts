@@ -1,6 +1,6 @@
 import { CeL } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { x4 } from "../905/657224";
+import { localStorageRef } from "../905/657224";
 import { sx } from "../905/449184";
 import { eD } from "../figma_app/876459";
 import { Ay } from "../905/612521";
@@ -16,12 +16,12 @@ export function $$_0() {
 export function $$h1(e, t) {
   if (0 !== e && !getFeatureFlags().suppress_hardware_acceleration_notification) {
     if (2 === e) {
-      x4 && x4.getItem(u) && (sx("Hardware Acceleration Turned On"), delete x4[u]);
+      localStorageRef && localStorageRef.getItem(u) && (sx("Hardware Acceleration Turned On"), delete localStorageRef[u]);
       return;
     }
-    if (!x4 || !x4.getItem(u)) {
+    if (!localStorageRef || !localStorageRef.getItem(u)) {
       let e = () => {
-        x4.setItem(u, "1");
+        localStorageRef.setItem(u, "1");
       };
       sx("Hardware Acceleration Warning Bell");
       t(F.enqueue({

@@ -1,7 +1,7 @@
 import { useMemo, useState, useRef } from "react";
 import { NVY } from "../figma_app/763686";
 import { oB, qN } from "../figma_app/273493";
-import { Vc } from "../905/657224";
+import { useLocalStorageSync } from "../905/657224";
 import { sN } from "../figma_app/191804";
 import { parsePxNumber } from "../figma_app/783094";
 import { f as _$$f } from "../905/24905";
@@ -13,9 +13,9 @@ import { ZT, $7 } from "../905/306220";
 import { LfD, cSS } from "../figma_app/27776";
 let f = parsePxNumber(LfD);
 let _ = parsePxNumber(cSS);
-var $$A4 = ((e) => (e.AA = "AA", e.AAA = "AAA", e))($$A4 || {});
-var $$y5 = ((e) => (e.largeText = "largeText", e.normalText = "normalText", e.graphics = "graphics", e.mixed = "mixed", e))($$y5 || {});
-var $$b3 = ((e) => (e.auto = "auto", e))($$b3 || {});
+var $$A4 = (e => (e.AA = "AA", e.AAA = "AAA", e))($$A4 || {});
+var $$y5 = (e => (e.largeText = "largeText", e.normalText = "normalText", e.graphics = "graphics", e.mixed = "mixed", e))($$y5 || {});
+var $$b3 = (e => (e.auto = "auto", e))($$b3 || {});
 let v = {
   normalText: {
     AA: 4.5,
@@ -51,7 +51,7 @@ function I(e) {
   }, [_r, g, b, a]);
 }
 export function $$E6(e, t, i, o) {
-  let l = Fk((e) => e.getDirectlySelectedNodes().map((e) => e.guid));
+  let l = Fk(e => e.getDirectlySelectedNodes().map(e => e.guid));
   let d = o ?? l;
   let [g, A] = useState(void 0);
   let [y, b] = useState(void 0);
@@ -60,16 +60,16 @@ export function $$E6(e, t, i, o) {
   let k = !!e;
   let R = X7() && k;
   let N = function (e) {
-    let [t, i] = Vc("color_picker_show_color_contrast", !1);
-    let [r, a] = Vc("color_picker_color_contrast_level", "AA");
+    let [t, i] = useLocalStorageSync("color_picker_show_color_contrast", !1);
+    let [r, a] = useLocalStorageSync("color_picker_color_contrast_level", "AA");
     let [o, l] = useState("auto");
     let d = function (e) {
       let {
         nodeTypes,
         styledTextSegments
       } = Fk((e, t) => t ? {
-        nodeTypes: t.map((t) => e.get(t)?.type),
-        styledTextSegments: t.map((t) => {
+        nodeTypes: t.map(t => e.get(t)?.type),
+        styledTextSegments: t.map(t => {
           let i = e.get(t);
           if (i?.type === "TEXT") return i.getStyledTextSegments(["fontSize", "fontWeight"]);
         })
@@ -100,9 +100,9 @@ export function $$E6(e, t, i, o) {
   }(d);
   let P = function (e, t) {
     let i = Fk((e, t) => {
-      if (t) return t.map((t) => e.get(t)?.blendMode).filter((e) => void 0 !== e);
+      if (t) return t.map(t => e.get(t)?.blendMode).filter(e => void 0 !== e);
     }, t);
-    return i?.some((e) => "NORMAL" !== e && "PASS_THROUGH" !== e) || e?.blendMode !== "NORMAL";
+    return i?.some(e => "NORMAL" !== e && "PASS_THROUGH" !== e) || e?.blendMode !== "NORMAL";
   }(e, d);
   let {
     foregroundColor,
@@ -227,7 +227,7 @@ export function $$x2(e, t) {
   return "auto" !== e ? v[e] : 1 === t.size ? v[t.values().next().value] : t.has("normalText") ? void 0 : v.mixed;
 }
 export function $$S1(e, t) {
-  return "TEXT" === e ? t && t.length > 0 && t.every((e) => (e.fontSize ?? 0) >= 24 || (e.fontSize ?? 0) >= 19 && (e.fontWeight ?? 0) >= 700) ? "largeText" : "normalText" : "graphics";
+  return "TEXT" === e ? t && t.length > 0 && t.every(e => (e.fontSize ?? 0) >= 24 || (e.fontSize ?? 0) >= 19 && (e.fontWeight ?? 0) >= 700) ? "largeText" : "normalText" : "graphics";
 }
 export function $$w0(e, t, i, n) {
   if (!e || !t || void 0 === i || void 0 === n) return {};

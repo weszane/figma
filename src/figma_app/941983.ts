@@ -1,5 +1,5 @@
 import { lyf } from "../figma_app/763686";
-import { x4 } from "../905/657224";
+import { localStorageRef } from "../905/657224";
 import { nT } from "../figma_app/53721";
 function s(e) {
   return 1 === parseInt(e);
@@ -63,8 +63,8 @@ export let $$o0 = new class {
   }
   getLocalStorageValue(e, t) {
     let r = `${this.prefix}${e}`;
-    if (x4) {
-      let e = x4.getItem(r);
+    if (localStorageRef) {
+      let e = localStorageRef.getItem(r);
       if (e) return t(e);
     }
     return null;

@@ -1,5 +1,6 @@
 // Refactored from /Users/allen/sigma-main/src/905/261467.ts
 
+import type { IPoint } from '../905/736624'
 import type { Fn } from '../../types/global'
 import { R as _$$R } from '../905/22352'
 import { z4 } from '../905/37051'
@@ -8,7 +9,7 @@ import { F } from '../905/302958'
 import { debugState } from '../905/407919'
 import { pN, WW, Ym } from '../905/571565'
 import { zX } from '../905/576487'
-import { TQ } from '../905/657224'
+import { getLocalStorage } from '../905/657224'
 import { Y } from '../905/696438'
 import { Point } from '../905/736624'
 import { uF } from '../905/748636'
@@ -38,7 +39,6 @@ import { parsePxNumber } from '../figma_app/783094'
 export function clamp(value: number, min: number, max: number): number {
   return Math.max(min, Math.min(max, value))
 }
-
 const PLUGIN_POSITIONS_KEY = 'plugin-positions'
 const MIN_WIDTH = 70
 const WIDTH_PADDING = 50
@@ -53,12 +53,10 @@ const tuiPx = parsePxNumber(tui)
 /**
  * Modal position type.
  */
-export type ModalPosition
-  = | 'default'
-    | 'last'
-    | typeof CODEGEN_DEFAULT_POSITION
-    | { x: number, y: number }
-    | undefined
+export type ModalPosition = 'default' | 'last' | typeof CODEGEN_DEFAULT_POSITION | {
+  x: number
+  y: number
+} | undefined
 
 /**
  * Plugin UI Manager class.
@@ -66,7 +64,6 @@ export type ModalPosition
  */
 export class PluginUIManager {
   static instance: PluginUIManager | null = null
-
   vmType: string
   pluginID: string
   titleIconURL: string
@@ -98,22 +95,7 @@ export class PluginUIManager {
   /**
    * Create a new PluginUIManager.
    */
-  constructor(
-    vmType: string,
-    pluginID: string,
-    titleIconURL: string,
-    title: string,
-    permissions: string[],
-    isWidget: boolean,
-    widgetCommand: any,
-    shouldShowVisualBell: boolean,
-    cancelCallback: Fn,
-    messageHandler: Fn,
-    allowedDomains: string[],
-    isLocal: boolean,
-    triggeredFrom: string,
-    capabilities: string[],
-  ) {
+  constructor(vmType: string, pluginID: string, titleIconURL: string, title: string, permissions: string[], isWidget: boolean, widgetCommand: any, shouldShowVisualBell: boolean, cancelCallback: Fn, messageHandler: Fn, allowedDomains: string[], isLocal: boolean, triggeredFrom: string, capabilities: string[]) {
     this.vmType = vmType
     this.pluginID = pluginID
     this.titleIconURL = titleIconURL
@@ -141,7 +123,6 @@ export class PluginUIManager {
     this.hideVisibleUI = false
     this.iframeId = null
     this.timeout = null
-
     PluginUIManager.instance = this
     this.showProgress()
   }
@@ -158,16 +139,22 @@ export class PluginUIManager {
    * (Original: storeModalPosition)
    */
   storeModalPosition = (pos: Point): void => {
-    const storage = TQ()
+    const storage = getLocalStorage()
     if (storage) {
-      let positions: Record<string, { x: number, y: number }> = {}
+      let positions: Record<string, {
+        x: number
+        y: number
+      }> = {}
       try {
         positions = JSON.parse(storage.getItem(PLUGIN_POSITIONS_KEY) || '')
       }
       catch {}
       if (!positions || typeof positions !== 'object')
         positions = {}
-      positions[this.pluginID] = { x: pos.x, y: pos.y }
+      positions[this.pluginID] = {
+        x: pos.x,
+        y: pos.y,
+      }
       storage.setItem(PLUGIN_POSITIONS_KEY, JSON.stringify(positions))
     }
     this.iframeInitialPosition = pos
@@ -193,13 +180,14 @@ export class PluginUIManager {
    */
   getMostRecentContextMenuClickPosition = ({
     dropdownShown,
-  }: { dropdownShown: any }): Point | null =>
-    dropdownShown
-    && dropdownShown.type === W_
-    && dropdownShown.data?.clientX != null
-    && dropdownShown.data?.clientY != null
-      ? { x: dropdownShown.data.clientX, y: dropdownShown.data.clientY }
-      : null
+  }: {
+    dropdownShown: any
+  }): IPoint | null => dropdownShown && dropdownShown.type === W_ && dropdownShown.data?.clientX != null && dropdownShown.data?.clientY != null
+    ? {
+        x: dropdownShown.data.clientX,
+        y: dropdownShown.data.clientY,
+      }
+    : null
 
   /**
    * Update the UI state.
@@ -211,7 +199,6 @@ export class PluginUIManager {
       titleIconSvgSrc: this.titleIconURL ? undefined : _$$A,
       title: this.iframeTitle || WW(this.title, this.vmType),
     })
-
     if (this.iframeId === Wh.MODAL) {
       zl.set(_$$D, {
         displayed: this.showingInnerIframe,
@@ -222,7 +209,6 @@ export class PluginUIManager {
         onDragEnd: this.storeModalPosition,
       })
     }
-
     this.outerIframe?.updateState({
       visible: this.showingInnerIframe,
       width: this.iframeWidth,
@@ -235,16 +221,11 @@ export class PluginUIManager {
    * (Original: loadModalPosition)
    */
   loadModalPosition(): Point | null {
-    const storage = TQ()
+    const storage = getLocalStorage()
     if (storage) {
       try {
-        const pos = JSON.parse(storage.getItem(PLUGIN_POSITIONS_KEY) || '')[
-          this.pluginID
-        ]
-        return new Point(
-          clamp(pos.x, 0, window.innerWidth - this.iframeWidth),
-          clamp(pos.y, 0, window.innerHeight - this.iframeHeight),
-        )
+        const pos = JSON.parse(storage.getItem(PLUGIN_POSITIONS_KEY) || '')[this.pluginID]
+        return new Point(clamp(pos.x, 0, window.innerWidth - this.iframeWidth), clamp(pos.y, 0, window.innerHeight - this.iframeHeight))
       }
       catch {}
     }
@@ -279,26 +260,26 @@ export class PluginUIManager {
     if (this.iframeId === BUZZ_LEFT_PANEL_ID)
       zl.set(FP, this.iframeId)
     this.outerIframe.removeAllChildren()
-    this.innerIframe = this.outerIframe.createInnerIframe(
-      this.innerIframeHtml,
-      this.messageHandler,
-      {
-        name: this.title,
-        isWidget: this.isWidget,
-        cameraAccess: this.permissions.includes('camera'),
-        microphoneAccess: this.permissions.includes('microphone'),
-        displayCaptureAccess: this.permissions.includes('displaycapture'),
-        clipboardWriteAccess: this.permissions.includes('clipboardwrite'),
-        includeThemeColors,
-        allowedDomains: this.allowedDomains,
-        isLocal: this.isLocal,
-        pluginId: this.pluginID,
-      },
-    )
+    this.innerIframe = this.outerIframe.createInnerIframe(this.innerIframeHtml, this.messageHandler, {
+      name: this.title,
+      isWidget: this.isWidget,
+      cameraAccess: this.permissions.includes('camera'),
+      microphoneAccess: this.permissions.includes('microphone'),
+      displayCaptureAccess: this.permissions.includes('displaycapture'),
+      clipboardWriteAccess: this.permissions.includes('clipboardwrite'),
+      includeThemeColors,
+      allowedDomains: this.allowedDomains,
+      isLocal: this.isLocal,
+      pluginId: this.pluginID,
+    })
     if (title != null)
       this.iframeTitle = title
     this.includeThemeColors = !!includeThemeColors
-    this.setInitialPosition({ width, height, position })
+    this.setInitialPosition({
+      width,
+      height,
+      position,
+    })
     this.updateUI()
   }
 
@@ -308,7 +289,10 @@ export class PluginUIManager {
    */
   buildXYPosition(x: number, y: number): Point {
     const viewport = Y5.getViewportInfo()
-    const pos = $g(viewport, { x, y })
+    const pos = $g(viewport, {
+      x,
+      y,
+    })
     return new Point(Math.round(pos.x), Math.round(pos.y))
   }
 
@@ -324,20 +308,10 @@ export class PluginUIManager {
     if (rect)
       left = Math.max(rect.left - 1 - this.iframeWidth, 0)
     const top = Math.max((window.innerHeight - this.iframeHeight) / 2, 0)
-
     if (rect) {
       if (z4.getIsExtension()) {
-        const paddingTop
-          = panel?.parentElement?.parentElement
-            ? parseFloat(
-                window.getComputedStyle(panel.parentElement.parentElement)
-                  .paddingTop,
-              )
-            : 0
-        return new Point(
-          rect.x + rect.width - this.iframeWidth,
-          rect.y - this.iframeHeight - uF - paddingTop,
-        )
+        const paddingTop = panel?.parentElement?.parentElement ? parseFloat(window.getComputedStyle(panel.parentElement.parentElement).paddingTop) : 0
+        return new Point(rect.x + rect.width - this.iframeWidth, rect.y - this.iframeHeight - uF - paddingTop)
       }
       return new Point(left, rect.y)
     }
@@ -359,11 +333,7 @@ export class PluginUIManager {
   }): void {
     this.iframeWidth = this.getClampedWidth(width)
     this.iframeHeight = this.getClampedHeight(height)
-    const center = new Point(
-      Math.max((window.innerWidth - this.iframeWidth) / 2, 0),
-      Math.max((window.innerHeight - this.iframeHeight) / 2, 0),
-    )
-
+    const center = new Point(Math.max((window.innerWidth - this.iframeWidth) / 2, 0), Math.max((window.innerHeight - this.iframeHeight) / 2, 0))
     if (position === 'default') {
       this.iframeInitialPosition = center
     }
@@ -373,20 +343,12 @@ export class PluginUIManager {
     else if (position === CODEGEN_DEFAULT_POSITION) {
       this.iframeInitialPosition = this.buildCodegenDefaultPosition()
     }
-    else if (
-      typeof position === 'object'
-      && Object.prototype.hasOwnProperty.call(position, 'x')
-      && Object.prototype.hasOwnProperty.call(position, 'y')
-    ) {
+    else if (typeof position === 'object' && Object.prototype.hasOwnProperty.call(position, 'x') && Object.prototype.hasOwnProperty.call(position, 'y')) {
       this.iframeInitialPosition = this.buildXYPosition(position.x, position.y)
     }
     else {
-      const contextPos = this.getMostRecentContextMenuClickPosition(
-        debugState.getState(),
-      )
-      this.iframeInitialPosition = contextPos
-        ? new Point(contextPos.x, contextPos.y)
-        : this.loadModalPosition() || center
+      const contextPos = this.getMostRecentContextMenuClickPosition(debugState.getState())
+      this.iframeInitialPosition = contextPos ? new Point(contextPos.x, contextPos.y) : this.loadModalPosition() || center
     }
     this.storeModalPosition(this.iframeInitialPosition)
   }
@@ -464,9 +426,7 @@ export class PluginUIManager {
    * (Original: isPanelIframe)
    */
   isPanelIframe(): boolean {
-    return (
-      this.iframeId === BUZZ_LEFT_PANEL_ID || this.iframeId === INSPECT_PANEL_ID
-    )
+    return this.iframeId === BUZZ_LEFT_PANEL_ID || this.iframeId === INSPECT_PANEL_ID
   }
 
   /**
@@ -499,15 +459,19 @@ export class PluginUIManager {
    * Get the iframe position.
    * (Original: getIframePosition)
    */
-  getIframePosition(): { canvasSpace: Point, windowSpace: Point } {
+  getIframePosition(): {
+    canvasSpace: Point
+    windowSpace: Point
+  } {
     if (!this.outerIframe || !this.iframeInitialPosition) {
-      throw new Error(
-        'Cannot get the UI position. Did you forget to create a UI by calling showUI?',
-      )
+      throw new Error('Cannot get the UI position. Did you forget to create a UI by calling showUI?')
     }
     const windowSpace = this.iframeInitialPosition
     const viewport = Y5.getViewportInfo()
-    const { x, y } = Nd(viewport, windowSpace)
+    const {
+      x,
+      y,
+    } = Nd(viewport, windowSpace)
     return {
       canvasSpace: new Point(x, y),
       windowSpace,
@@ -531,9 +495,7 @@ export class PluginUIManager {
   getClampedHeight(height?: number): number {
     if (height == null)
       return DEFAULT_IFRAME_HEIGHT
-    return this.isPanelIframe()
-      ? height
-      : clamp(height, 0, window.innerHeight - tuiPx - HEIGHT_PADDING)
+    return this.isPanelIframe() ? height : clamp(height, 0, window.innerHeight - tuiPx - HEIGHT_PADDING)
   }
 
   /**
@@ -541,12 +503,9 @@ export class PluginUIManager {
    * (Original: getIsInsert)
    */
   getIsInsert(): boolean {
-    return (
-      this.isWidget
-      // eslint-disable-next-line no-prototype-builtins
-      && this.widgetCommand?.hasOwnProperty('context')
-      && this.widgetCommand.context === 'insert'
-    )
+    return this.isWidget
+    // eslint-disable-next-line no-prototype-builtins
+      && this.widgetCommand?.hasOwnProperty('context') && this.widgetCommand.context === 'insert'
   }
 
   /**
@@ -598,9 +557,7 @@ export class PluginUIManager {
    */
   postMessageToIframe(message: any, transfer?: any): void {
     if (!this.outerIframe || !this.innerIframe) {
-      throw new Error(
-        'No UI to send a message to. Did you forget to create a UI by calling showUI?',
-      )
+      throw new Error('No UI to send a message to. Did you forget to create a UI by calling showUI?')
     }
     this.innerIframe.postMessage(message, transfer)
   }
@@ -618,16 +575,11 @@ export class PluginUIManager {
    * Show a plugin visual bell notification.
    * (Original: showPluginVisualBell)
    */
-  showPluginVisualBell(
-    message: string,
-    type: string,
-    options: {
-      timeout: number
-      button?: any
-      error?: any
-    },
-    onDequeue?: Fn,
-  ): void {
+  showPluginVisualBell(message: string, type: string, options: {
+    timeout: number
+    button?: any
+    error?: any
+  }, onDequeue?: Fn): void {
     if (this.hideVisibleUI)
       return
     this.hideProgress()
@@ -649,8 +601,7 @@ export class PluginUIManager {
     Y5.dispatch(F.enqueue(notification))
     if (!this.showingInnerIframe)
       this.showProgress()
-    this.lastNotificationTimeout
-      = Math.max(this.lastNotificationTimeout, Date.now()) + options.timeout
+    this.lastNotificationTimeout = Math.max(this.lastNotificationTimeout, Date.now()) + options.timeout
   }
 
   /**
@@ -658,7 +609,9 @@ export class PluginUIManager {
    * (Original: cancelPluginVisualBell)
    */
   cancelPluginVisualBell(type: string): void {
-    Y5.dispatch(F.dequeue({ matchType: type }))
+    Y5.dispatch(F.dequeue({
+      matchType: type,
+    }))
   }
 
   /**
@@ -666,12 +619,9 @@ export class PluginUIManager {
    * (Original: cancelNonErrorPersistentVisualBells)
    */
   cancelNonErrorPersistentVisualBells(): void {
-    Y5.dispatch(
-      F.dequeue({
-        shouldDequeueFunc: (e: any) =>
-          e.type !== 'plugins-runtime-error' && _$$R(e) === Infinity,
-      }),
-    )
+    Y5.dispatch(F.dequeue({
+      shouldDequeueFunc: (e: any) => e.type !== 'plugins-runtime-error' && _$$R(e) === Infinity,
+    }))
   }
 
   /**
@@ -679,16 +629,14 @@ export class PluginUIManager {
    * (Original: cancelAllCustomNotifyVisualBells)
    */
   cancelAllCustomNotifyVisualBells(): void {
-    Y5.dispatch(
-      F.dequeue({
-        shouldDequeueFunc: (e: any) => {
-          const re = /message-from-plugin-*/
-          const isMatch = !!e.type && re.test(e.type)
-          const hasButton = e.button !== undefined
-          return isMatch && hasButton
-        },
-      }),
-    )
+    Y5.dispatch(F.dequeue({
+      shouldDequeueFunc: (e: any) => {
+        const re = /message-from-plugin-*/
+        const isMatch = !!e.type && re.test(e.type)
+        const hasButton = e.button !== undefined
+        return isMatch && hasButton
+      },
+    }))
   }
 
   /**
@@ -696,27 +644,22 @@ export class PluginUIManager {
    * (Original: hideProgress)
    */
   hideProgress(): void {
-    pN({ shouldShowVisualBell: this.shouldShowVisualBell })
+    pN({
+      shouldShowVisualBell: this.shouldShowVisualBell,
+    })
   }
 
   /**
    * Show the progress indicator.
    * (Original: showProgress)
    */
-  showProgress({ isBackground }: { isBackground?: boolean } = {}): void {
-    if (
-      this.triggeredFrom !== 'codegen'
-      && (this.terminateInspectPluginIfNoIframe(),
-      Y5
-      && Y5.isReady()
-      && this.shouldShowVisualBell
-      && !this.hideVisibleUI)
-    ) {
-      const delay = isBackground
-        ? 50
-        : this.isPanelIframe()
-          ? 4000
-          : undefined
+  showProgress({
+    isBackground,
+  }: {
+    isBackground?: boolean
+  } = {}): void {
+    if (this.triggeredFrom !== 'codegen' && (this.terminateInspectPluginIfNoIframe(), Y5 && Y5.isReady() && this.shouldShowVisualBell && !this.hideVisibleUI)) {
+      const delay = isBackground ? 50 : this.isPanelIframe() ? 4000 : undefined
       Ym({
         name: this.title,
         isInsert: this.getIsInsert(),
@@ -733,13 +676,7 @@ export class PluginUIManager {
    * (Original: terminateInspectPluginIfNoIframe)
    */
   terminateInspectPluginIfNoIframe(): void {
-    if (
-      !this.timeout
-      && $u(this.capabilities)
-      && !this.capabilities?.includes('codegen')
-      && $A(debugState.getState().selectedView)
-      && this.triggeredFrom !== 'related-link-preview'
-    ) {
+    if (!this.timeout && $u(this.capabilities) && !this.capabilities?.includes('codegen') && $A(debugState.getState().selectedView) && this.triggeredFrom !== 'related-link-preview') {
       this.timeout = setTimeout(() => {
         if (!this.showingInnerIframe) {
           this.cancelCallback({
@@ -767,7 +704,10 @@ export class DummyUIManager {
   destroyIframe(): void {}
   setIframeSize(_e: any, _t: any): void {}
   setIframePosition(_e: any, _t: any): void {}
-  getIframePosition(): { windowSpace: Point, canvasSpace: Point } {
+  getIframePosition(): {
+    windowSpace: Point
+    canvasSpace: Point
+  } {
     return {
       windowSpace: new Point(0, 0),
       canvasSpace: new Point(0, 0),

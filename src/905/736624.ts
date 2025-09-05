@@ -13,7 +13,7 @@ import { isNotNullish } from '../figma_app/95419'
 /**
  * Interface for a 2D point or vector.
  */
-interface IPoint {
+export interface IPoint {
   x: number
   y: number
 }

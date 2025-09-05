@@ -1,8 +1,8 @@
-import { x4 } from "../905/657224";
+import { localStorageRef } from "../905/657224";
 let r = "ipc:";
 export class $$a0 {
   constructor() {
-    this.storage = x4;
+    this.storage = localStorageRef;
     this._onStorageEvent = e => {
       let t = e.key;
       if (e.storageArea === this.storage && null !== e.newValue && t?.startsWith(r)) {

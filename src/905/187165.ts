@@ -1,6 +1,6 @@
 import { createContext } from "react";
 import { nQ7 } from "../figma_app/763686";
-import { x4 } from "../905/657224";
+import { localStorageRef } from "../905/657224";
 import { UE, ql } from "../figma_app/191804";
 import { Lg } from "../figma_app/257275";
 import { Wl } from "../figma_app/88239";
@@ -11,12 +11,12 @@ import { Vj } from "../905/561485";
 let $$p1 = "undefined" != typeof mpGlobal ? mpGlobal.DEBUG_THEME_PREFERENCE_KEY : "test-theme-preference";
 let $$m5 = "undefined" != typeof mpGlobal ? mpGlobal.DARK_THEME_MEDIA_QUERY : window.matchMedia("(prefers-color-scheme: dark)");
 export function $$h0() {
-  return "undefined" != typeof mpGlobal ? mpGlobal.themePreferenceFromLocalStorage(x4) : null;
+  return "undefined" != typeof mpGlobal ? mpGlobal.themePreferenceFromLocalStorage(localStorageRef) : null;
 }
 export let $$g11 = "global-debug-enhanced-contrast-preference";
 export function $$f2() {
-  if (x4) {
-    let e = x4?.getItem($$g11);
+  if (localStorageRef) {
+    let e = localStorageRef?.getItem($$g11);
     return e?.toLowerCase() === "true";
   }
   return !1;

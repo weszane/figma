@@ -1,5 +1,5 @@
 import { sx } from "../905/449184";
-import { x4 } from "../905/657224";
+import { localStorageRef } from "../905/657224";
 import { M4 } from "../905/609396";
 import { x1 } from "../905/714362";
 import { yp, Ph, ly } from "../905/138461";
@@ -18,7 +18,7 @@ export function $$u1(e, t) {
 export async function $$p3(e) {
   let t = c(e);
   return yp ? !(await Ph(t)) : function (e, t, i) {
-    let n = x4;
+    let n = localStorageRef;
     if (!n) return Promise.reject("Local storage not available");
     let d = o + e;
     let c = l + e;
@@ -63,7 +63,7 @@ export async function $$h0(e) {
   let i = null;
   if (yp) i = await ly(t);else {
     let e = function (e) {
-      let t = x4;
+      let t = localStorageRef;
       if (!t) throw Error("Local storage not available");
       let i = o + e;
       let n = l + e;

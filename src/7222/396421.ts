@@ -7,7 +7,7 @@ import { getSingletonSceneGraph } from "../905/700578";
 import { getFeatureFlags } from "../905/601108";
 import { md, Xr, fp } from "../figma_app/27355";
 import { resourceUtils, LOADING_STATUS } from "../905/989992";
-import { Vc } from "../905/657224";
+import { useLocalStorageSync } from "../905/657224";
 import E from "../vendor/116389";
 import { A as _$$A } from "../vendor/850789";
 import { Wn, ql } from "../figma_app/88484";
@@ -349,7 +349,7 @@ export function $$ea10() {
   return $$ei14() === Ji.OVERLAY_MODAL ? _$$l2 : _$$x;
 }
 export function $$es2() {
-  let [, e] = Vc(j, {});
+  let [, e] = useLocalStorageSync(j, {});
   let t = q5();
   let r = TA();
   let u = (() => {

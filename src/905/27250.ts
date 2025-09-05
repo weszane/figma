@@ -2,7 +2,7 @@ import { jsxs, jsx } from "react/jsx-runtime";
 import { PureComponent, createRef } from "react";
 import { sortByPropertyWithOptions, sortBy, sortByProperty } from "../figma_app/656233";
 import { e as _$$e } from "../905/916195";
-import { DN } from "../905/657224";
+import { getStorage } from "../905/657224";
 import l from "classnames";
 import { w } from "../905/835474";
 import { o as _$$o } from "../905/605383";
@@ -19,7 +19,7 @@ export class $$b0 extends PureComponent {
   constructor(e) {
     super(e);
     this.storageKey = "subscriptionFileViewComponentStats:state";
-    this.storage = DN();
+    this.storage = getStorage();
     this.onSortScrollTargetRef = createRef();
     this.setSortByAndOrder = e => {
       let t = this.state.sortBy;

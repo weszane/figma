@@ -117,7 +117,7 @@ import { E as _$$E2 } from "../905/172252";
 import { O as _$$O2 } from "../905/969533";
 import { k as _$$k3 } from "../905/44647";
 import { generateRecordingKey, useHandleMouseEvent } from "../figma_app/878298";
-import { Wz, Vc } from "../905/657224";
+import { useSessionStorageSync, useLocalStorageSync } from "../905/657224";
 import { D8, lt as _$$lt } from "../905/511649";
 import { P as _$$P2 } from "../905/347284";
 import { R6, zL, bE, i_ as _$$i_, eb as _$$eb, vo } from "../figma_app/617506";
@@ -2618,7 +2618,7 @@ function nY({
   let [c, u] = _$$fp(bE);
   let p = ON();
   let h = _$$tS();
-  let [f, g] = Wz(`dev_mode_variables_sidebar_collapsed_groups__${h}`, {});
+  let [f, g] = useSessionStorageSync(`dev_mode_variables_sidebar_collapsed_groups__${h}`, {});
   let x = f[e.node_id] ?? nG;
   let m = useCallback((t, n) => {
     n.stopPropagation();
@@ -7765,7 +7765,7 @@ function rI({
   }();
   let [p, h] = useState(!0);
   let f = useMemo(() => Math.min(e.length * ry, 400) + 7, [e.length]);
-  let [g, m] = Vc("ready-panel-height-storage-key", f);
+  let [g, m] = useLocalStorageSync("ready-panel-height-storage-key", f);
   let v = s ? `calc(max(${ry}px, min(60%, ${g}px)))` : "fit-content";
   useEffect(() => {
     if (!t) return;
@@ -12674,7 +12674,7 @@ let hU = parsePxNumber(YI7);
 let hK = () => 0.75 * window.innerHeight;
 let hX = parsePxNumber(Qhc);
 function hJ() {
-  let [e, t] = Vc("extension_bottom_panel_expanded", !0);
+  let [e, t] = useLocalStorageSync("extension_bottom_panel_expanded", !0);
   let [n, o] = _$$fp(_$$g4);
   let [d, c] = useState(!1);
   let u = _$$uQ();

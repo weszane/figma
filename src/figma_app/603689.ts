@@ -164,7 +164,7 @@ import { eo as _$$eo, fp as _$$fp, TX } from '../905/634218';
 import { dB as _$$dB, DP, yM } from '../905/640017';
 import { u as _$$u } from '../905/644087';
 import { Bi, vL } from '../905/652992';
-import { Q_ } from '../905/657224';
+import { getSessionStorage } from '../905/657224';
 import { isLocalFileKey } from '../905/657242';
 import { Z as _$$Z4 } from '../905/658753';
 import { oW as _$$oW } from '../905/675859';
@@ -6754,7 +6754,7 @@ function c2() {
   let m = 'prevSelectedView' in (Ay.location.state ?? {});
   let g = useRef(void 0);
   d.view === 'fullscreen' && void 0 !== d.commentThreadId && void 0 === g.current && (g.current = d.commentThreadId);
-  let f = Q_();
+  let f = getSessionStorage();
   let y = `hasSeenOrAttemptedDevMode-${r}`;
   let b = !1;
   if (u && f) {

@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useDispatch } from "../vendor/514228";
 import { xae } from "../figma_app/763686";
 import { md } from "../figma_app/27355";
-import { x4 } from "../905/657224";
+import { localStorageRef } from "../905/657224";
 import { FP } from "../figma_app/91703";
 import { Em } from "../figma_app/976749";
 import { UQ } from "../figma_app/864723";
@@ -25,11 +25,11 @@ export function $$g0(e) {
 let f = "last-used-left-panel-tab";
 let E = "ASSETS_TAB";
 export function $$y1(e) {
-  x4 && x4.setItem(f, e === xae.ASSETS ? E : "LAYERS_TAB");
+  localStorageRef && localStorageRef.setItem(f, e === xae.ASSETS ? E : "LAYERS_TAB");
 }
 let b = D(() => {
-  if (x4) {
-    let e = x4.getItem(f);
+  if (localStorageRef) {
+    let e = localStorageRef.getItem(f);
     if (e) return e === E ? xae.ASSETS : xae.LAYERS;
   }
   return null;

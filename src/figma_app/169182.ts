@@ -23,7 +23,7 @@ interface UserConfig {
 
 
 // Original: $$c17 - Default user configuration
-const defaultUserConfig: UserConfig = {
+export const defaultUserConfig: UserConfig = {
   disable_personal: true,
   teams: [],
   team_users: [],

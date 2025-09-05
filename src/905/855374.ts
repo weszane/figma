@@ -54,7 +54,7 @@ import { P as _$$P3 } from "../905/884252";
 import { uC, z7, gX, ic as _$$ic, oR, Z_, r$, _h, q7 } from "../905/831801";
 import { l7 } from "../905/189185";
 import { fn, sH } from "../905/871411";
-import { Wz, Q_, Vc } from "../905/657224";
+import { useSessionStorageSync, getSessionStorage, useLocalStorageSync } from "../905/657224";
 import { XE } from "../figma_app/91703";
 import { Yf } from "../figma_app/933328";
 import { Lo, to as _$$to } from "../905/156213";
@@ -1992,7 +1992,7 @@ function t1({
   isShowingGuids: I
 }) {
   let E = _$$tS();
-  let [x, S] = Wz(`variables_modal_sidebar_collapsed_groups__${E}`, {});
+  let [x, S] = useSessionStorageSync(`variables_modal_sidebar_collapsed_groups__${E}`, {});
   let w = x[v.node_id] ?? t0;
   let C = useCallback((t, i) => {
     i.stopPropagation();
@@ -3444,7 +3444,7 @@ function i1({
     };
   }();
   useEffect(() => {
-    let e = Q_();
+    let e = getSessionStorage();
     n || (e?.removeItem(iZ), e?.removeItem(iq), e?.removeItem(i$));
   }, [n]);
   return k9(() => t ? s : n || a, [t, s, n, a]);
@@ -3466,7 +3466,7 @@ function i2({
   let A = useRef(null);
   let y = useRef(null);
   let [b, v] = useState(!1);
-  let [I, E] = Vc("variables-modal-maximized", !1);
+  let [I, E] = useLocalStorageSync("variables-modal-maximized", !1);
   !function (e) {
     let t = useSelector(_$$c);
     let [i, n] = useState(!1);
@@ -3483,9 +3483,9 @@ function i2({
     setSessionHeight,
     setSessionPosition
   } = function () {
-    let [e, t] = Wz(iq, 642);
-    let [i, n] = Wz(i$, 380);
-    let [a, s] = Wz(iZ, null);
+    let [e, t] = useSessionStorageSync(iq, 642);
+    let [i, n] = useSessionStorageSync(i$, 380);
+    let [a, s] = useSessionStorageSync(iZ, null);
     return useMemo(() => ({
       sessionDimensions: {
         width: e,
@@ -3726,7 +3726,7 @@ export let $$i50 = Ju(function () {
       localVariableSets: e,
       subscribedVariableSets: t
     }) {
-      let [i, n] = Vc("last-used-variable-set", e[0]?.node_id ?? "");
+      let [i, n] = useLocalStorageSync("last-used-variable-set", e[0]?.node_id ?? "");
       return [useMemo(() => {
         let n = [...e, ...t].find(e => e.node_id === i);
         return !n && e.length > 0 ? e[0] : n;
@@ -3768,7 +3768,7 @@ export let $$i50 = Ju(function () {
     }, [u, w, v]);
     let [N, O] = useState(null);
     let [D, L] = useState(null);
-    let [F, M] = Vc("variables-modal-is-sidebar-open", E.length >= 2);
+    let [F, M] = useLocalStorageSync("variables-modal-is-sidebar-open", E.length >= 2);
     let j = useMemo(() => ({
       variableList: v,
       variableGroupList: E

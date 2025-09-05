@@ -42,7 +42,7 @@ import { K0 } from "../figma_app/778125";
 import { ob, kh, ee as _$$ee } from "../figma_app/571341";
 import { ZI } from "../figma_app/597338";
 import { wt, R4 } from "../figma_app/74043";
-import { x4, tl as _$$tl, Vc } from "../905/657224";
+import { localStorageRef, useStorageEventSync, useLocalStorageSync } from "../905/657224";
 import { A as _$$A2 } from "../vendor/90566";
 import { az, sx as _$$sx } from "../905/449184";
 import { parsePxInt } from "../figma_app/783094";
@@ -1214,8 +1214,8 @@ function t9({
       let d = q5();
       useEffect(() => {
         s || "loading" === e || (i(e5(function () {
-          if (x4) try {
-            let e = x4.getItem(tQ);
+          if (localStorageRef) try {
+            let e = localStorageRef.getItem(tQ);
             if (!e) return;
             return tZ(e);
           } catch (e) {
@@ -1224,7 +1224,7 @@ function t9({
         }(), e, t)), n(!0));
       }, [s, e, t]);
       let c = useCallback(e => {
-        (!l || _$$eu(e)) && (i(e), x4?.setItem(tQ, function (e) {
+        (!l || _$$eu(e)) && (i(e), localStorageRef?.setItem(tQ, function (e) {
           switch (e.type) {
             case _$$I2.ALL:
               return "all";
@@ -1255,7 +1255,7 @@ function t9({
         let n = tZ(s);
         "loading" !== e && i(e5(n, e, t));
       }, [e, t]);
-      _$$tl({
+      useStorageEventSync({
         onSync: p,
         shouldSyncValue: u
       });
@@ -1472,7 +1472,7 @@ function t9({
   let X = useCallback(() => {
     W || wr();
   }, [W]);
-  let [Q, eh] = Vc("has-auto-expanded-component-libraries-for-nux", !1);
+  let [Q, eh] = useLocalStorageSync("has-auto-expanded-component-libraries-for-nux", !1);
   let eT = n1();
   let eS = useRef(null);
   useEffect(() => {

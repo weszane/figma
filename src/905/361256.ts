@@ -15,7 +15,7 @@ import { dI } from "../905/871411";
 import { getFeatureFlags } from "../905/601108";
 import { md } from "../figma_app/27355";
 import { xx } from "../figma_app/815945";
-import { x4 } from "../905/657224";
+import { localStorageRef } from "../905/657224";
 import { az, sx } from "../905/449184";
 import { eD as _$$eD } from "../figma_app/876459";
 import { R as _$$R } from "../905/103090";
@@ -3187,7 +3187,7 @@ class iS extends PureComponent {
         fontAgentUpdatePromptDismissed: !0
       });
       let e = new Date().getTime();
-      x4?.setItem(iE, `${e + 6048e5}`);
+      localStorageRef?.setItem(iE, `${e + 6048e5}`);
     };
     this.hasMixedStyles = () => {
       if (null == this.props.inheritStyleKey) return !1;
@@ -3239,10 +3239,10 @@ class iS extends PureComponent {
   componentDidMount() {
     let e = this.state.fontAgentUpdatePromptDismissed;
     if (this.showFontAgentCTA && 14 > (this.props.localFontAgentVersion || 0)) {
-      let t = x4?.getItem(iE);
+      let t = localStorageRef?.getItem(iE);
       t && (JSON.parse(t) > new Date().getTime() ? (e = !0, this.setState({
         fontAgentUpdatePromptDismissed: !0
-      })) : x4?.removeItem(iE));
+      })) : localStorageRef?.removeItem(iE));
       e || sx("action_font_agent_update_prompt_shown", {
         name: "Font agent update prompt shown",
         platform: Ay.mac ? "mac" : "windows",

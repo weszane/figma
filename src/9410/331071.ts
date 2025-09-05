@@ -233,7 +233,7 @@ import { Rh } from "../905/485103";
 import { Pt as _$$Pt } from "../figma_app/806412";
 import { YJ } from "../figma_app/50224";
 import { Db, AR as _$$AR } from "../figma_app/705029";
-import { Q_ } from "../905/657224";
+import { getSessionStorage } from "../905/657224";
 import { uW } from "../905/426868";
 import { z as _$$z2 } from "../figma_app/153551";
 import { YB, nd as _$$nd, $L as _$$$L, uq, oP as _$$oP, HS } from "../figma_app/857146";
@@ -2881,7 +2881,7 @@ function af(e) {
       let h = A.current || "";
       let _ = function (e) {
         if (!getFeatureFlags().first_draft_prompt_history || !getFeatureFlags().first_draft_make_changes_history) return [];
-        let t = Q_();
+        let t = getSessionStorage();
         if (!t) return [];
         let i = `${rX}${e}`;
         let r = t.getItem(i);
@@ -2921,7 +2921,7 @@ function af(e) {
         prompt: h
       });
       (function (e, t) {
-        let i = Q_();
+        let i = getSessionStorage();
         if (!i) return;
         let r = `${rX}${e}`;
         i.setItem(r, JSON.stringify(t));

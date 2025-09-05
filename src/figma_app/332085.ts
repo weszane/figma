@@ -1,4 +1,4 @@
-import { TQ } from "../905/657224";
+import { getLocalStorage } from "../905/657224";
 import { NC } from "../905/17179";
 import { x1 } from "../905/714362";
 import { QQ } from "../figma_app/808294";
@@ -14,7 +14,7 @@ nF((e, t) => {
   if (!o || !payments) return;
   let l = payments.filter(QQ);
   let d = `${c}_${o}`;
-  let u = TQ()?.getItem(d);
+  let u = getLocalStorage()?.getItem(d);
   if (u) {
     let e = JSON.parse(u);
     if (Array.isArray(e)) {
@@ -32,7 +32,7 @@ nF((e, t) => {
     }
   }
   let p = JSON.stringify(l);
-  TQ()?.setItem(d, p);
+  getLocalStorage()?.setItem(d, p);
 });
 let c = "debug_succeeded_payments";
 let $$u3 = nF((e, t, {
@@ -44,7 +44,7 @@ let $$u3 = nF((e, t, {
     data: t
   }) => {
     e.dispatch($$h0(t.meta));
-  }).catch(() => { });
+  }).catch(() => {});
 });
 let $$p1 = NC("M10N_DEL_ACTIVE_USER_PAYMENT");
 let $$_2 = NC("M10N_REALTIME_ACTIVE_USER_PAYMENT");
@@ -52,4 +52,4 @@ let $$h0 = NC("M10N_SET_ACTIVE_USER_PAYMENTS");
 export const M2 = $$h0;
 export const Sp = $$p1;
 export const k3 = $$_2;
-export const oQ = $$u3; 
+export const oQ = $$u3;

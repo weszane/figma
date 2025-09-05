@@ -13,7 +13,7 @@ import { CWU, G6k, HS4, Z_n, rXF } from "../figma_app/763686";
 import { l7 } from "../905/189185";
 import { WI } from "../905/929949";
 import { getFeatureFlags } from "../905/601108";
-import { Vc } from "../905/657224";
+import { useLocalStorageSync } from "../905/657224";
 import y from "../vendor/239910";
 import { parsePxNumber } from "../figma_app/783094";
 import { h as _$$h } from "../905/207101";
@@ -240,7 +240,7 @@ export function $$Z1({
   let o = yp();
   let l = useId();
   r === rXF.TEXT_DATA && (r = rXF.STRING);
-  let [d, c] = Vc("last-used-variable-set-bottoms-up", o.length > 0 ? o[0].node_id : null);
+  let [d, c] = useLocalStorageSync("last-used-variable-set-bottoms-up", o.length > 0 ? o[0].node_id : null);
   let p = useMemo(() => {
     let e = o.find(e => e.node_id === d);
     return !e && o.length > 0 ? o[0] : e;

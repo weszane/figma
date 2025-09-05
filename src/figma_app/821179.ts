@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { hV } from "../figma_app/387100";
 import { md } from "../figma_app/27355";
-import { Vc } from "../905/657224";
+import { useLocalStorageSync } from "../905/657224";
 import { debugState } from "../905/407919";
 import { subscribeAndAwaitData } from "../905/553831";
 import { IT } from "../figma_app/566371";
@@ -27,7 +27,7 @@ export function $$b0() {
   let y = md(_S);
   let b = v4();
   let T = yT(b.id);
-  let [I] = Vc("code-connect-selected-language-storage-key", T);
+  let [I] = useLocalStorageSync("code-connect-selected-language-storage-key", T);
   let [S] = IT(J_J({
     key: t ?? ""
   }));

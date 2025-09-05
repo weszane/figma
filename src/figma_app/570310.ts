@@ -20,7 +20,7 @@ import { w3z, glU } from "../figma_app/763686";
 import { l as _$$l } from "../905/716947";
 import { getFeatureFlags } from "../905/601108";
 import { eU as _$$eU, md, fp } from "../figma_app/27355";
-import { Vc } from "../905/657224";
+import { useLocalStorageSync } from "../905/657224";
 import { az, sx } from "../905/449184";
 import { A as _$$A2 } from "../905/920142";
 import { isDevEnvironment } from "../figma_app/169182";
@@ -1225,7 +1225,7 @@ export function $$eQ0({
     setSelectedLabel
   } = function (e) {
     let t = _$$yT(e.id);
-    let [r, n] = Vc("code-connect-selected-language-storage-key", t);
+    let [r, n] = useLocalStorageSync("code-connect-selected-language-storage-key", t);
     return {
       selectedLabel: r,
       setSelectedLabel: n

@@ -1,7 +1,7 @@
 import { useCallback, useMemo } from "react";
 import { lQ } from "../905/934246";
 import { E3, fp } from "../figma_app/27355";
-import { tl } from "../905/657224";
+import { useStorageEventSync } from "../905/657224";
 import { cJ } from "../905/561485";
 var $$l0 = (e => (e.LIST = "list", e.GRID = "grid", e))($$l0 || {});
 let d = "assets-panel-view-mode-v2";
@@ -15,7 +15,7 @@ export function $$u1() {
       ("grid" === n || "list" === n) && e !== n && t(n);
     } catch (e) {}
   }, [e, t]);
-  tl({
+  useStorageEventSync({
     onSync: l,
     shouldSyncValue: r
   });
@@ -33,7 +33,7 @@ export function $$h2() {
       "boolean" == typeof n && e !== n && t(n);
     } catch (e) {}
   }, [e, t]);
-  tl({
+  useStorageEventSync({
     onSync: i,
     shouldSyncValue: r
   });

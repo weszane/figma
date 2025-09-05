@@ -2,7 +2,7 @@ import { kiwiParserCodec } from "../905/294864";
 import { jXp, vXe } from "../figma_app/763686";
 import { K, rj, V1, T_, D7, qI, cp } from "../905/946258";
 import { getFeatureFlags } from "../905/601108";
-import { x4 } from "../905/657224";
+import { localStorageRef } from "../905/657224";
 import { sx } from "../905/449184";
 import { k as _$$k2 } from "../905/651849";
 import { xQ } from "../905/535224";
@@ -61,7 +61,7 @@ let C = null;
 let T = e => e && 4 === e.schemaVersion && void 0 !== e.renames && void 0 !== e.emojis;
 let k = "agent-detected";
 export function $$R10() {
-  return x4?.getItem(k) === "true";
+  return localStorageRef?.getItem(k) === "true";
 }
 let N = _$$D(() => {
   let e = performance.now();
@@ -82,7 +82,7 @@ let N = _$$D(() => {
     let n = new Uint8Array(t);
     let l = kiwiParserCodec.decodeFontIndex(n);
     let d = performance.now();
-    return T(l) ? (l.files = function(e) {
+    return T(l) ? (l.files = function (e) {
       if (!e || getFeatureFlags().dse_sf_pro_font || !getFeatureFlags().font_index_250317) return e;
       let t = new Set([rj, V1, T_, D7]);
       return e.filter(e => !e.family || !t.has(e.family));
@@ -150,7 +150,7 @@ async function P() {
   if (getFeatureFlags().desktop_font_reload_on_focus) try {
     e = await eD.getModifiedFonts();
     t = await eD.getFontsModifiedAt();
-  } catch (e) { }
+  } catch (e) {}
   return {
     fontFiles: i,
     source: "desktop",
@@ -173,7 +173,7 @@ export function $$O11(e) {
     case "Black Oblique":
       t.weight = 900;
   }
-  for (let t of e) !t.italic && function(e) {
+  for (let t of e) !t.italic && function (e) {
     let t = e.toLowerCase();
     for (let e of ["italic", "oblique"]) if (t.includes(e)) return !0;
     return !1;
@@ -193,7 +193,7 @@ export async function $$D5(e = [jXp.LOCAL, jXp.GOOGLE]) {
   let i = e.map(e => {
     switch (e) {
       case jXp.LOCAL:
-        return function() {
+        return function () {
           let e;
           let t = e => (C = `${e.origin}/figma`, console.log("[Local fonts] using agent"), {
             source: "daemon",
@@ -220,7 +220,7 @@ export async function $$D5(e = [jXp.LOCAL, jXp.GOOGLE]) {
             let t = [];
             let n = [];
             let r = e.version && !isNaN(parseInt(e.version)) ? parseInt(e.version) : null;
-            null !== r && x4?.setItem(k, "true");
+            null !== r && localStorageRef?.setItem(k, "true");
             let s = e.modified_at && "number" == typeof e.modified_at ? e.modified_at : void 0;
             let c = e?.modified_fonts;
             let u = (r || 0) >= 20;
@@ -290,7 +290,7 @@ export async function $$D5(e = [jXp.LOCAL, jXp.GOOGLE]) {
           });
         }).catch(e => {
           console.error("Error fetching local fonts", e);
-        }).then(() => { });
+        }).then(() => {});
       case jXp.GOOGLE:
         return N().then(e => {
           if (null === e) {
@@ -323,7 +323,7 @@ export async function $$D5(e = [jXp.LOCAL, jXp.GOOGLE]) {
           };
         }).catch(e => {
           console.error("Error fetching index fonts", e);
-        }).then(() => { });
+        }).then(() => {});
       case jXp.SHARED:
         return $$L6().then(e => {
           null !== e && (t.sharedFontsList = $$O11(e), t.sources.push(jXp.SHARED));
@@ -506,11 +506,11 @@ let $$z2 = {
 };
 let H = "desktop_local_fonts_modified_timestamp";
 let $$W8 = _$$D(() => {
-  let e = x4?.getItem(H);
+  let e = localStorageRef?.getItem(H);
   return "string" != typeof e || isNaN(parseInt(e)) ? null : parseInt(e);
 });
 export function $$K14(e) {
-  x4?.setItem(H, String(e));
+  localStorageRef?.setItem(H, String(e));
 }
 export function $$Y1(e, t, i) {
   e().then(e => {
@@ -618,4 +618,4 @@ export const Rt = $$R10;
 export const F8 = $$O11;
 export const LQ = $$q12;
 export const gg = $$V13;
-export const PE = $$K14; 
+export const PE = $$K14;

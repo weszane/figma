@@ -645,7 +645,7 @@ import { x as _$$x5 } from "../905/587214";
 import { _d as _$$_d } from "../figma_app/795674";
 import { P$, y0 as _$$y6, PF, cu as _$$cu2, YI, CM, RE, G8 as _$$G5, IQ, $V, AC, fQ as _$$fQ2, Hm } from "../figma_app/152368";
 import { $ as _$$$5, jo as _$$jo, Ld } from "../figma_app/629335";
-import { DN } from "../905/657224";
+import { getStorage } from "../905/657224";
 import { F as _$$F8 } from "../905/680873";
 import { d1 as _$$d9 } from "../905/766303";
 import { L8 } from "../905/760074";
@@ -19917,7 +19917,7 @@ let jB = (e, t, i, n, r, a) => {
       deltaMs: n
     }));
   }
-  "start-timer" === e.lastAction.type && (DN().set("last-timer-set-time", e.lastUsedTime), t(Qv({
+  "start-timer" === e.lastAction.type && (getStorage().set("last-timer-set-time", e.lastUsedTime), t(Qv({
     totalTimeMs: 1e3 * e.lastUsedTime,
     musicStartTimeMs: i.current.musicStartTimeMs
   })), jM && n.current && !r.current && e.lastUsedTime > 5 && PF(jM, n.current));

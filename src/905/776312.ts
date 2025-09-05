@@ -1,4 +1,4 @@
-import { x4 } from "../905/657224";
+import { localStorageRef } from "../905/657224";
 import { uV, ZR } from "../905/34809";
 import { Qv } from "../905/929976";
 import { P } from "../905/77553";
@@ -7,7 +7,7 @@ let o = {
   [P.SORT_MODE]: "view-bar-sort-options"
 };
 function l(e) {
-  let t = x4 && x4.getItem(e) || "{}";
+  let t = localStorageRef && localStorageRef.getItem(e) || "{}";
   try {
     return JSON.parse(t);
   } catch (e) {
@@ -15,9 +15,9 @@ function l(e) {
   }
 }
 function d(e, t) {
-  if (x4) try {
+  if (localStorageRef) try {
     let i = JSON.stringify(t);
-    x4.setItem(e, i);
+    localStorageRef.setItem(e, i);
   } catch (e) {}
   return t;
 }

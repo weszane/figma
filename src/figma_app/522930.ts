@@ -1,7 +1,7 @@
 import { jsxs, jsx } from "react/jsx-runtime";
 import { useCallback, useEffect } from "react";
 import { useDispatch } from "../vendor/514228";
-import { x4 } from "../905/657224";
+import { localStorageRef } from "../905/657224";
 import { s as _$$s } from "../cssbuilder/589278";
 import { pW } from "../905/160095";
 import { tx } from "../905/303541";
@@ -13,9 +13,9 @@ import { f as _$$f } from "../905/940356";
 import { $z, IX } from "../figma_app/957169";
 let g = "team_template_card_view_count";
 let f = () => {
-  if (!x4) return;
-  let e = parseInt(x4.getItem(g) || "0");
-  x4.setItem(g, "" + ++e);
+  if (!localStorageRef) return;
+  let e = parseInt(localStorageRef.getItem(g) || "0");
+  localStorageRef.setItem(g, "" + ++e);
 };
 export function $$E0({
   fullWidth: e = !1
@@ -56,7 +56,7 @@ export function $$y1({
     }));
     localStorage.removeItem(g);
   }, [o]);
-  let c = parseInt(x4?.getItem(g) || "0");
+  let c = parseInt(localStorageRef?.getItem(g) || "0");
   return (useEffect(() => {
     !r && c >= 10 && d();
   }, [r, c, d]), l && c < 10 && !r) ? jsx(b, {

@@ -1,7 +1,7 @@
 import { useCallback, useEffect } from "react";
 import { useSelector } from "../vendor/514228";
 import { c2, he } from "../905/382883";
-import { TQ } from "../905/657224";
+import { getLocalStorage } from "../905/657224";
 import { ZC } from "../figma_app/39751";
 import { FFileType } from "../figma_app/191312";
 import { D } from "../905/347702";
@@ -70,21 +70,21 @@ export let $$I1 = D((e, r) => {
       createdAt: t,
       updatedAt: t
     };
-    TQ()?.setItem(u(e), y(a));
+    getLocalStorage()?.setItem(u(e), y(a));
   } catch (e) {
     console.error("Failed to save cart state to Local Storage");
   }
 });
 export function $$T0(e) {
   if (e) try {
-    TQ()?.removeItem(u(e));
+    getLocalStorage()?.removeItem(u(e));
   } catch (e) {}
 }
 let y = e => JSON.stringify(e);
 let g = e => {
   if (!e) return null;
   try {
-    let r = TQ()?.getItem(u(e));
+    let r = getLocalStorage()?.getItem(u(e));
     if (r) return JSON.parse(r);
     return null;
   } catch (e) {

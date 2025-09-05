@@ -1,5 +1,5 @@
 import { getFeatureFlags } from "../905/601108";
-import { x4 } from "../905/657224";
+import { localStorageRef } from "../905/657224";
 import { Ay } from "../figma_app/778880";
 import { uE } from "../figma_app/314264";
 import { Y5 } from "../figma_app/455680";
@@ -97,9 +97,9 @@ export function $$S0() {
 }
 function v(e, t = !1) {
   var r;
-  if (!x4) return;
+  if (!localStorageRef) return;
   let n = t;
-  let a = x4.getItem(e);
+  let a = localStorageRef.getItem(e);
   let s = "mouse-scroll-wheel-zoom" === e ? debugState.getState().user?.mouse_scroll_to_zoom : debugState.getState().user?.right_click_drag_to_pan;
   null !== a ? n = E(a) : null != s && (n = s);
   r = n;

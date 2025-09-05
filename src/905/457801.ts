@@ -2,7 +2,7 @@ import { useCallback, useEffect } from "react";
 import { throwTypeError } from "../figma_app/465776";
 import { ServiceCategories as _$$e } from "../905/165054";
 import { fp } from "../figma_app/27355";
-import { TQ, tl } from "../905/657224";
+import { getLocalStorage, useStorageEventSync } from "../905/657224";
 import { $D } from "../905/11";
 import { D } from "../905/417423";
 import { h as _$$h } from "../905/706725";
@@ -16,13 +16,13 @@ let $$g0 = new class {
     this.expiry = t;
   }
   getRecentsLocalStorage() {
-    let e = TQ();
+    let e = getLocalStorage();
     if (!e) return null;
     let t = e.getItem(h);
     return t ? JSON.parse(t) : null;
   }
   setRecentsLocalStorage(e) {
-    let t = TQ();
+    let t = getLocalStorage();
     if (t) {
       if (!e) {
         t.removeItem(h);
@@ -102,7 +102,7 @@ export function $$_1(e = !1) {
     l();
   }, [l]);
   let m = useCallback(e => e.key === h, []);
-  tl({
+  useStorageEventSync({
     onSync: d,
     shouldSyncValue: m
   });

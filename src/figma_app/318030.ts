@@ -5,7 +5,7 @@ import { d as _$$d } from "../vendor/456530";
 import { P as _$$P } from "../vendor/348225";
 import { M as _$$M } from "../figma_app/548779";
 import { useHandlePointerEvent } from "../figma_app/878298";
-import { tl } from "../905/657224";
+import { useStorageEventSync } from "../905/657224";
 import { xk } from "@stylexjs/stylex";
 let p = {
   handle: {
@@ -87,7 +87,7 @@ let $$m0 = forwardRef(function ({
   let k = _$$d(!1);
   let M = _$$d(!1);
   let [F, j] = useState(!1);
-  tl({
+  useStorageEventSync({
     onSync: e => j("true" === e),
     shouldSyncValue: e => e.key === _
   });

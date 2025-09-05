@@ -1,8 +1,8 @@
 import { throwTypeError } from "../figma_app/465776";
-import { DN } from "../905/657224";
+import { getStorage } from "../905/657224";
 let a = "curatorLoggingEnabled";
 export function $$s0(e) {
-  let t = DN();
+  let t = getStorage();
   switch (e) {
     case "debug":
       t.set(a, "debug");
@@ -19,7 +19,7 @@ export function $$s0(e) {
   return `Curator logging set to ${e}`;
 }
 export function $$o1() {
-  switch (DN().get(a)) {
+  switch (getStorage().get(a)) {
     case "debug":
       return "debug";
     case "trace":

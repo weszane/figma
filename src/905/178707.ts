@@ -2,7 +2,7 @@ import { jsxs, jsx, Fragment } from "react/jsx-runtime";
 import { forwardRef, useState } from "react";
 import { useDispatch, useSelector } from "../vendor/514228";
 import { E as _$$E } from "../905/632989";
-import { Q_ } from "../905/657224";
+import { getSessionStorage } from "../905/657224";
 import l from "classnames";
 import { xf, bs } from "../figma_app/416935";
 import { h as _$$h } from "../905/207101";
@@ -102,7 +102,7 @@ export function $$w0(e) {
         email: e
       });
       try {
-        let t = Q_()?.getItem(`SIGN-IN ${e}`);
+        let t = getSessionStorage()?.getItem(`SIGN-IN ${e}`);
         if (t) {
           x("true" === t);
           return;
@@ -112,7 +112,7 @@ export function $$w0(e) {
         } = await E.getOrgSamlConfigRequired({
           email: e
         });
-        Q_()?.setItem(`SIGN-IN ${e}`, data.meta.saml_sso_only);
+        getSessionStorage()?.setItem(`SIGN-IN ${e}`, data.meta.saml_sso_only);
         x(!!data.meta.saml_sso_only);
       } catch (e) {
         d === qB.SAML_START && l(_$$E2({

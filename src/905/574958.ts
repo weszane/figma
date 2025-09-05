@@ -1,5 +1,5 @@
 import { ServiceCategories as _$$e } from "../905/165054";
-import { x4 } from "../905/657224";
+import { localStorageRef } from "../905/657224";
 import { sx } from "../905/449184";
 import { $D } from "../905/11";
 import { MZ } from "../figma_app/925970";
@@ -10,10 +10,10 @@ import { L0, uH, f9, Rr } from "../figma_app/162807";
 var $$n1;
 let $$m0 = "!capture";
 let $$h4 = MZ;
-let g = (e) => !!e.view;
+let g = e => !!e.view;
 let f = "search-session";
 export function $$_3() {
-  let e = x4?.getItem(f);
+  let e = localStorageRef?.getItem(f);
   if (!e) return null;
   try {
     let t = JSON.parse(e);
@@ -30,10 +30,10 @@ function A(e, t) {
     entryPoint: t,
     expires: Date.now() + 6e4
   };
-  x4?.setItem(f, JSON.stringify(i));
+  localStorageRef?.setItem(f, JSON.stringify(i));
 }
 function y() {
-  x4?.removeItem(f);
+  localStorageRef?.removeItem(f);
 }
 function b(e) {
   let t = MZ();
@@ -82,7 +82,7 @@ export function $$v2(e) {
 function I(e, t) {
   return "file_browser" !== t ? L0.OUTSIDE_FILE_BROWSER : "search" === e.view ? L0.FULL_PAGE : L0.PREVIEW;
 }
-((e) => {
+(e => {
   e.Analytics = class {
     constructor(e, t, i) {
       this.state = e;
@@ -183,14 +183,14 @@ function I(e, t) {
       deep_search_start_position: i ? i + 1 : i
     };
   };
-  ((e) => {
-    ((e) => {
+  (e => {
+    (e => {
       e.CLICK = "click";
       e.CONTEXT_CLICK = "context-click";
       e.ENTER = "enter-key";
     })(e.ClickAction || (e.ClickAction = {}));
   })(e.Query || (e.Query = {}));
-  ((e) => {
+  (e => {
     function i(e) {
       let t;
       let i = e.parameters.searchModelType;
@@ -383,7 +383,7 @@ function I(e, t) {
       }) : e;
     };
   })(e.Session || (e.Session = {}));
-  ((e) => {
+  (e => {
     e[e.SEARCH = 0] = "SEARCH";
     e[e.FILE = 1] = "FILE";
   })(e.RecentType || (e.RecentType = {}));

@@ -159,7 +159,7 @@ import { W as _$$W2 } from "../905/592530";
 import { l as _$$l7 } from "../9410/367372";
 import { r as _$$r2 } from "../905/955316";
 import { Y as _$$Y3 } from "../905/912236";
-import { Vc } from "../905/657224";
+import { useLocalStorageSync } from "../905/657224";
 import { dh as _$$dh } from "../figma_app/186343";
 import { p as _$$p2 } from "../figma_app/353099";
 import { NuxOnboardingOverlay } from "../4452/529989";
@@ -4206,7 +4206,7 @@ function rB() {
   let i = !!S7();
   let n = _$$s6();
   TG();
-  let [s, o] = Vc("last-used-variable-set-bottoms-up", null);
+  let [s, o] = useLocalStorageSync("last-used-variable-set-bottoms-up", null);
   useEffect(() => {
     let t = debugState.getState().selectedView;
     let i = (Ez5?.canvasGrid()?.canvasGridArray.getCopy() ?? [])[0]?.[0];

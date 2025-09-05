@@ -129,7 +129,7 @@ import { l7 as _$$l, zk } from "../905/189185";
 import { l as _$$l2 } from "../905/331642";
 import { J as _$$J2 } from "../905/129695";
 import { V as _$$V } from "../905/106549";
-import { Vc } from "../905/657224";
+import { useLocalStorageSync } from "../905/657224";
 import { U as _$$U } from "../905/707331";
 import { eD as _$$eD } from "../figma_app/876459";
 import { Dk } from "../figma_app/623293";
@@ -1932,7 +1932,7 @@ function ib({
     }, []);
     return t ? null : e;
   }();
-  let [C, v] = Vc("has_toggled_eyedropper_creation_mode", !1);
+  let [C, v] = useLocalStorageSync("has_toggled_eyedropper_creation_mode", !1);
   let [E, T] = useState(!1);
   let [w, S] = useState(!1);
   let j = useRef(null);

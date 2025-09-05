@@ -9,7 +9,7 @@ import { Z } from "../905/498136";
 import { e as _$$e } from "../905/295932";
 import { eU, fp } from "../figma_app/27355";
 import { Ay } from "../figma_app/272902";
-import { tl } from "../905/657224";
+import { useStorageEventSync } from "../905/657224";
 import { az } from "../905/449184";
 import { Zl } from "../905/211621";
 import { X3, MM } from "../figma_app/236327";
@@ -176,7 +176,7 @@ export function $$P0() {
       "boolean" == typeof n && e !== n && t(n);
     } catch (e) {}
   }, [e, t]);
-  tl({
+  useStorageEventSync({
     onSync: n,
     shouldSyncValue: i
   });

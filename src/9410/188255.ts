@@ -195,7 +195,7 @@ import { A as _$$A9 } from "../svg/758664";
 import { A as _$$A0 } from "../svg/430011";
 import { A as _$$A1 } from "../svg/519128";
 import { A as _$$A10 } from "../svg/221042";
-import { DN } from "../905/657224";
+import { getStorage } from "../905/657224";
 import { Xk } from "../figma_app/107215";
 import { kF as _$$kF, us } from "../905/11";
 import { XZ } from "../figma_app/176973";
@@ -4936,7 +4936,7 @@ async function nD(e) {
   let i = kd(t);
   let r = mW(i, "figjam_editor_onboarded");
   return !r && !r && !(() => {
-    let e = DN();
+    let e = getStorage();
     try {
       return !!e.get(Xk);
     } catch (e) {}
@@ -5068,7 +5068,7 @@ function nB() {
   });
 }
 let nK = _$$D3(() => {
-  let e = DN();
+  let e = getStorage();
   try {
     return !!e.get(Xk);
   } catch (e) {}

@@ -64,7 +64,7 @@ import { rq } from "../905/425180";
 import { F_ } from "../905/858282";
 import { Nlr } from "../figma_app/6204";
 import { Te } from "../vendor/813803";
-import { Wz } from "../905/657224";
+import { useSessionStorageSync } from "../905/657224";
 import { P as _$$P } from "../905/347284";
 import { Oo } from "../905/709171";
 import { Eo } from "../figma_app/80990";
@@ -629,7 +629,7 @@ function e7({
     subscribedLibraries: s
   });
   let d = i ? [EU] : l;
-  let [c, u] = Wz("library-color-swatch-selected-swatch-set-id", d[0], {
+  let [c, u] = useSessionStorageSync("library-color-swatch-selected-swatch-set-id", d[0], {
     parse: e => d.find(t => t === e) ? e : void 0,
     stringify: e => e
   });

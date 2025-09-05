@@ -5,7 +5,7 @@ import { hS } from "../905/437088";
 import { bL } from "../905/38914";
 import { vo, nB } from "../figma_app/272243";
 import { i as _$$i } from "../905/718764";
-import { DN } from "../905/657224";
+import { getStorage } from "../905/657224";
 import u from "classnames";
 import { debugState } from "../905/407919";
 import { Ay } from "../905/612521";
@@ -318,7 +318,7 @@ export function $$W0(e) {
   });
 }
 export let $$K2 = _$$D2((e, t) => {
-  let r = DN();
+  let r = getStorage();
   try {
     let n = r.get($$Y1(e));
     if (!n) {

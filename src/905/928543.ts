@@ -3,7 +3,7 @@ import { useMemo, memo, useState, useEffect, useRef, PureComponent, Fragment as 
 import { sortByDateProperty, sortByPropertyWithOptions, sortByProperty } from "../figma_app/656233";
 import { N as _$$N } from "../905/438674";
 import { getFeatureFlags } from "../905/601108";
-import { DN } from "../905/657224";
+import { getStorage } from "../905/657224";
 import d from "classnames";
 import { R as _$$R } from "../905/103090";
 import { w as _$$w } from "../905/835474";
@@ -110,7 +110,7 @@ let H = "library_item_view--componentViewFooterText--YLOdY";
 let W = "library_item_view--oneComponentViewFileNameCol--d9Nqk text--fontPos11--2LvXf text--_fontBase--QdLsd";
 let K = "library_item_view--oneComponentViewTeamCol--2iMZ2 text--fontPos11--2LvXf text--_fontBase--QdLsd";
 let Y = jg.THIRTY_DAYS;
-let $$q1 = memo(function(e) {
+let $$q1 = memo(function (e) {
   let {
     fileVersion
   } = _$$R(e => ({
@@ -265,7 +265,7 @@ class Q extends PureComponent {
   constructor(e) {
     super(e);
     this.storageKey = "listFilesByComponentView:state";
-    this.storage = DN();
+    this.storage = getStorage();
     this.setSortByAndOrder = e => {
       let t = this.state.sortBy;
       let i = t !== e || !this.state.isDescending;
@@ -298,7 +298,7 @@ class Q extends PureComponent {
         loaded: !0
       });
       this.props.setFileStats(t);
-    }).catch(() => {}) ;
+    }).catch(() => {});
   }
   render() {
     let e = this.state.fileStats;
@@ -427,7 +427,7 @@ class ee extends PureComponent {
       this.setState({
         statsData: t
       });
-    }).catch(() => {})  : PT.getStateGroup({
+    }).catch(() => {}) : PT.getStateGroup({
       fv: `${this.props.fileVersion || 0}`,
       stateGroupKey: this.props.item.key
     }).then(e => {
@@ -435,7 +435,7 @@ class ee extends PureComponent {
       this.setState({
         statsData: t
       });
-    }).catch(() => {}) ;
+    }).catch(() => {});
   }
   render() {
     let e = [{
@@ -490,4 +490,4 @@ function et({
 }
 ee.displayName = "OneLibraryItemStatsView";
 export const E = $$$0;
-export const v = $$q1; 
+export const v = $$q1;

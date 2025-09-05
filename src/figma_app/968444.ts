@@ -1,6 +1,6 @@
 import { XpX, glU } from "../figma_app/763686";
 import { getFeatureFlags } from "../905/601108";
-import { x4 } from "../905/657224";
+import { localStorageRef } from "../905/657224";
 import { y } from "../905/409121";
 import { dZ, v7 } from "../figma_app/475303";
 let l = "customKeyboardShortcuts";
@@ -36,7 +36,7 @@ export function $$p1(e, t, r) {
     shortcutStr: r,
     shortcuts: d
   });
-  x4?.setItem(l, JSON.stringify(d));
+  localStorageRef?.setItem(l, JSON.stringify(d));
   glU.reloadKeyboardShortcuts();
 }
 export function $$_0(e, t) {
@@ -61,13 +61,13 @@ export function $$_0(e, t) {
       ...m
     }
   };
-  x4?.setItem(l, JSON.stringify(r));
+  localStorageRef?.setItem(l, JSON.stringify(r));
   glU.reloadKeyboardShortcuts();
 }
 function h() {
   let e;
-  if (!x4) return {};
-  let t = x4.getItem(l);
+  if (!localStorageRef) return {};
+  let t = localStorageRef.getItem(l);
   if (!t) return {};
   try {
     e = JSON.parse(t);

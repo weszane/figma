@@ -1,5 +1,5 @@
 import { getFeatureFlags } from "../905/601108";
-import { x4 } from "../905/657224";
+import { localStorageRef } from "../905/657224";
 import a from "../vendor/805353";
 import o from "../vendor/232260";
 import { k as _$$k } from "../905/651849";
@@ -279,7 +279,7 @@ let O = class e {
   optUserIntoDebugFlow() {
     (function () {
       let e = new Date(Date.now() + 2592e5);
-      x4?.setItem("ddr_user_debug_flow", e.toISOString());
+      localStorageRef?.setItem("ddr_user_debug_flow", e.toISOString());
       $$k1({
         service: "figma-web",
         collectErrors: !0

@@ -1,4 +1,4 @@
-import { DN } from "../905/657224";
+import { getStorage } from "../905/657224";
 import { sn } from "../905/542194";
 import { sf } from "../905/929976";
 import { yJ, bE, sF } from "../figma_app/78808";
@@ -54,7 +54,7 @@ export function $$m0(e = $$p1, t) {
     let r = !!t.payload && t.payload.id;
     let a = !!r && localStorage.getItem(K(r));
     r && a && (i[r] = a);
-    let s = !!DN().get(Xk);
+    let s = !!getStorage().get(Xk);
     return {
       ...e,
       workshopModeInfo: r ? {

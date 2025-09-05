@@ -1,5 +1,5 @@
 import { h3O } from "../figma_app/763686";
-import { DN } from "../905/657224";
+import { getStorage } from "../905/657224";
 import { NC } from "../905/17179";
 import { Dk } from "../figma_app/623293";
 import { nF } from "../905/350402";
@@ -17,7 +17,7 @@ let $$_7 = NC("SET_STARTER_KIT_HAS_BEEN_HIDDEN");
 let $$h5 = NC("SET_FIGJAM_EDITOR_ONBOARDING_FINISHED_OR_DISMISSED");
 let $$m1 = NC("SET_FIGJAM_EDITOR_ONBOARDING_STARTED");
 nF(e => {
-  DN().set($$c3, !0);
+  getStorage().set($$c3, !0);
   e.dispatch($$m1());
 });
 let $$g6 = NC("SET_WORKSHOP_MODE_UNTIL");

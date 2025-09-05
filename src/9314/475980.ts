@@ -8,7 +8,7 @@ import { n3, IA } from "../905/859698";
 import { glU, m1T, NLJ } from "../figma_app/763686";
 import { l7 } from "../905/189185";
 import { xx } from "../figma_app/815945";
-import { x4 } from "../905/657224";
+import { localStorageRef } from "../905/657224";
 import { sx } from "../905/449184";
 import { ZC } from "../figma_app/39751";
 import { Pt, rf } from "../figma_app/806412";
@@ -1118,14 +1118,14 @@ function ez({
   let q = useSelector(t => i4(t, e));
   let H = useSelector(t => A7(t, e, l));
   let [X, V] = useState(() => {
-    if (x4 && U) {
-      let t = JSON.parse(x4.getItem(e$) || "{}");
+    if (localStorageRef && U) {
+      let t = JSON.parse(localStorageRef.getItem(e$) || "{}");
       if (U.key in t) {
         let l = t[U.key];
         if (e in l) return new Set(l[e]);
       } else {
         t[U.key] = {};
-        x4.setItem(e$, JSON.stringify(t));
+        localStorageRef.setItem(e$, JSON.stringify(t));
       }
     }
     return new Set(l.filter(e => "STYLE_FOLDER" === e.type).map(e => e.name));
@@ -1143,10 +1143,10 @@ function ez({
   }, [el, l]);
   let es = ZC(X);
   useEffect(() => {
-    if (!es || !x4 || !U || _f(es, X)) return;
-    let t = JSON.parse(x4.getItem(e$) || "{}");
+    if (!es || !localStorageRef || !U || _f(es, X)) return;
+    let t = JSON.parse(localStorageRef.getItem(e$) || "{}");
     let l = t[U.key];
-    l && (l[e] = [...X], x4.setItem(e$, JSON.stringify(t)));
+    l && (l[e] = [...X], localStorageRef.setItem(e$, JSON.stringify(t)));
   }, [X, U, es, e]);
   let eo = useCallback(e => !!e && "STYLE_FOLDER" === e.type, []);
   let er = useCallback((e, t) => {

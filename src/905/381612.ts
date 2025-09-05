@@ -1,5 +1,5 @@
 import { throwTypeError } from "../figma_app/465776";
-import { x4 } from "../905/657224";
+import { localStorageRef } from "../905/657224";
 import a from "../vendor/946678";
 import o from "../vendor/626715";
 import { HY } from "../vendor/156872";
@@ -114,11 +114,11 @@ let R = [];
 let N = [];
 let P = [];
 let O = [];
-if (x4) {
-  let e = x4.getItem(x);
-  let t = x4.getItem(S);
-  let i = x4.getItem(w);
-  let n = x4.getItem(C);
+if (localStorageRef) {
+  let e = localStorageRef.getItem(x);
+  let t = localStorageRef.getItem(S);
+  let i = localStorageRef.getItem(w);
+  let n = localStorageRef.getItem(C);
   try {
     R = e && JSON.parse(e) || [];
     N = t && JSON.parse(t) || [];
@@ -199,7 +199,7 @@ function V(e) {
     type: vt.CommunityResource
   }, ...c].slice(0, resourceKey === bD.PLUGIN ? 21 : 12);
   let p = Jl(editorKey, resourceKey);
-  p && x4?.setItem(p, JSON.stringify(u));
+  p && localStorageRef?.setItem(p, JSON.stringify(u));
   return u;
 }
 function G(e, t, i) {
@@ -207,7 +207,7 @@ function G(e, t, i) {
   if (!i) return n;
   n = n.filter(e => e.id !== i);
   let a = Jl(e, t);
-  a && x4?.setItem(a, JSON.stringify(n));
+  a && localStorageRef?.setItem(a, JSON.stringify(n));
   return n;
 }
 let $$z1 = {
@@ -238,7 +238,7 @@ let $$H0 = HY({
           } : {})
         }
       }, ...d].slice(0, 21);
-      x4?.setItem(function (e) {
+      localStorageRef?.setItem(function (e) {
         switch (e) {
           case $A.Design:
             return x;
@@ -408,7 +408,7 @@ let $$H0 = HY({
           throwTypeError(type);
       }
       let h = [i, ...p].slice(0, 4);
-      x4?.setItem(o, JSON.stringify(h));
+      localStorageRef?.setItem(o, JSON.stringify(h));
       return {
         ...e,
         [t.payload.storeInRecentsKey]: h
@@ -434,7 +434,7 @@ let $$H0 = HY({
           } : {})
         }
       }, ...n].slice(0, 20);
-      x4?.setItem(SO, JSON.stringify(a));
+      localStorageRef?.setItem(SO, JSON.stringify(a));
       return {
         ...e,
         [t.payload.storeInRecentsKey]: a
@@ -459,7 +459,7 @@ let $$H0 = HY({
           } : {})
         }
       }, ...n];
-      x4?.setItem(JG, JSON.stringify(a));
+      localStorageRef?.setItem(JG, JSON.stringify(a));
       return {
         ...e,
         [t.payload.storeInRecentsKey]: a
